@@ -99,9 +99,15 @@ def _check() -> int:
     commands = [
         ["ruff", "check", "."],
         ["ruff", "format", "--check", "."],
-        ["mypy", "src"],
+        ["mypy"],
         ["pytest"],
         ["dotnet", "build", "mod/SpireShift.Protocol/SpireShift.Protocol.csproj", "-v:q"],
+        [
+            "dotnet",
+            "run",
+            "--project",
+            "mod/SpireShift.Protocol.ContractCheck/SpireShift.Protocol.ContractCheck.csproj",
+        ],
     ]
     for command in commands:
         completed = subprocess.run(command, cwd=PROJECT_ROOT, check=False)

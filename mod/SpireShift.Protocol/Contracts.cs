@@ -1,24 +1,26 @@
+using System.Text.Json.Serialization;
+
 namespace SpireShift.Protocol;
 
 public sealed record ObservationV1(
-    string SchemaVersion,
-    string PatchId,
-    string DecisionType,
-    IReadOnlyDictionary<string, object?> PublicState,
-    string StateHash);
+    [property: JsonPropertyName("schema_version")] string SchemaVersion,
+    [property: JsonPropertyName("patch_id")] string PatchId,
+    [property: JsonPropertyName("decision_type")] string DecisionType,
+    [property: JsonPropertyName("public_state")] IReadOnlyDictionary<string, object?> PublicState,
+    [property: JsonPropertyName("state_hash")] string StateHash);
 
 public sealed record LegalActionV1(
-    string ActionId,
-    string Kind,
-    IReadOnlyDictionary<string, object?> Payload);
+    [property: JsonPropertyName("action_id")] string ActionId,
+    [property: JsonPropertyName("kind")] string Kind,
+    [property: JsonPropertyName("payload")] IReadOnlyDictionary<string, object?> Payload);
 
 public sealed record ObjectiveSpecV1(
-    string Id,
-    string Primary,
-    string Constraint,
-    long WholeRunBudget,
-    IReadOnlyList<string> Auxiliary,
-    bool AuxiliaryRewardAllowed)
+    [property: JsonPropertyName("id")] string Id,
+    [property: JsonPropertyName("primary")] string Primary,
+    [property: JsonPropertyName("constraint")] string Constraint,
+    [property: JsonPropertyName("whole_run_budget")] long WholeRunBudget,
+    [property: JsonPropertyName("auxiliary")] IReadOnlyList<string> Auxiliary,
+    [property: JsonPropertyName("auxiliary_reward_allowed")] bool AuxiliaryRewardAllowed)
 {
     public void Validate()
     {

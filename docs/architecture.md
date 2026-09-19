@@ -16,6 +16,9 @@ environment adapter -> public observation -> legal actions
 private engine state internally, but it cannot expose future random values or other hidden game
 information through the public contract.
 
+The versioned JSON Schemas and C# protocol records share checked fixtures. CI rejects incompatible
+serialization changes and observations containing unmarked privileged fields.
+
 ## Environment backends
 
 The seeded mock backend validates the complete pipeline. Candidate live-game and simulator backends
