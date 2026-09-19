@@ -1,0 +1,36 @@
+{
+  "observation": {
+    "schema_version": "observation-v1",
+    "patch_id": "mock-v1",
+    "decision_type": "path",
+    "public_state": {
+      "floor": 0,
+      "strength": 0,
+      "terminal": false,
+      "victory": false
+    },
+    "state_hash": "fixture-state-hash"
+  },
+  "action": {
+    "action_id": "elite_path",
+    "kind": "choose_path",
+    "payload": {
+      "risk": "high"
+    }
+  },
+  "next_observation": {
+    "schema_version": "observation-v1",
+    "patch_id": "mock-v1",
+    "decision_type": "combat",
+    "public_state": {
+      "floor": 1,
+      "strength": 1,
+      "terminal": false,
+      "victory": false
+    },
+    "state_hash": "fixture-next-state-hash"
+  },
+  "reward": 0.0,
+  "terminal": false,
+  "victory": false
+}

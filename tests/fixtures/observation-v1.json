@@ -1,0 +1,12 @@
+{
+  "schema_version": "observation-v1",
+  "patch_id": "mock-v1",
+  "decision_type": "path",
+  "public_state": {
+    "floor": 0,
+    "strength": 0,
+    "terminal": false,
+    "victory": false
+  },
+  "state_hash": "fixture-state-hash"
+}

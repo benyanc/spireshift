@@ -1,0 +1,7 @@
+{
+  "action_id": "elite_path",
+  "kind": "choose_path",
+  "payload": {
+    "risk": "high"
+  }
+}

@@ -24,7 +24,7 @@ jobs:
       - run: uv sync --locked
       - run: uv run ruff check .
       - run: uv run ruff format --check .
-      - run: uv run mypy src
+      - run: uv run mypy
       - run: uv run pytest
 
   dotnet:
@@ -35,3 +35,7 @@ jobs:
         with:
           dotnet-version: 9.0.x
       - run: dotnet build mod/SpireShift.Protocol/SpireShift.Protocol.csproj --configuration Release
+      - run: >-
+          dotnet run
+          --project mod/SpireShift.Protocol.ContractCheck/SpireShift.Protocol.ContractCheck.csproj
+          --configuration Release
