@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/observation-v1.json",
+  "title": "SpireShift Observation v1",
+  "type": "object",
+  "required": ["schema_version", "patch_id", "decision_type", "public_state", "state_hash"],
+  "properties": {
+    "schema_version": {"const": "observation-v1"},
+    "patch_id": {"type": "string", "minLength": 1},
+    "decision_type": {"type": "string", "minLength": 1},
+    "public_state": {"type": "object"},
+    "state_hash": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,19 @@
+[objective]
+id = "terminal-victory-v1"
+primary = "terminal_victory"
+constraint = "cpu_time_per_run"
+whole_run_budget = 128
+auxiliary = [
+  "combat_survival",
+  "act_completion",
+  "floor_reached",
+  "terminal_hp",
+]
+auxiliary_reward_allowed = false
+
+[agent]
+budget_tiers = ["policy_only", "shallow", "medium", "expensive"]
+
+[environment]
+adapter = "mock"
+patch_id = "mock-v1"

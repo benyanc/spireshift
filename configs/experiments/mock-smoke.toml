@@ -1,0 +1,12 @@
+[experiment]
+id = "mock-smoke-v1"
+episodes = 100
+seed_start = 0
+
+[objective]
+id = "terminal-victory-v1"
+primary = "terminal_victory"
+constraint = "cpu_time_per_run"
+whole_run_budget = 128
+auxiliary = ["act_completion", "floor_reached"]
+auxiliary_reward_allowed = false

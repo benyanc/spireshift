@@ -1,0 +1,30 @@
+name: Experiment
+description: A reproducible model, search, allocation, or patch experiment
+title: "[Experiment] "
+labels: [experiment]
+body:
+  - type: input
+    id: hypothesis
+    attributes:
+      label: Falsifiable hypothesis
+    validations:
+      required: true
+  - type: input
+    id: objective
+    attributes:
+      label: Objective ID
+      value: terminal-victory-v1
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Controls, seeds, compute, and stopping rule
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Primary and diagnostic metrics
+    validations:
+      required: true

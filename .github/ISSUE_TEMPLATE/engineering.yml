@@ -1,0 +1,27 @@
+name: Engineering task
+description: Environment, infrastructure, search, model, or integration work
+title: "[Engineering] "
+labels: [engineering]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: Describe the observable result and its connection to the project objective.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
+  - type: checkboxes
+    id: safeguards
+    attributes:
+      label: Contract checks
+      options:
+        - label: This does not replace terminal victory with an auxiliary objective.
+          required: true
+        - label: This does not expose privileged game state to an agent.
+          required: true

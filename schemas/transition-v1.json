@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/transition-v1.json",
+  "title": "SpireShift Transition v1",
+  "type": "object",
+  "required": ["observation", "action", "next_observation", "reward", "terminal", "victory"],
+  "properties": {
+    "observation": {"$ref": "observation-v1.json"},
+    "action": {"$ref": "action-v1.json"},
+    "next_observation": {"$ref": "observation-v1.json"},
+    "reward": {"enum": [0.0, 1.0]},
+    "terminal": {"type": "boolean"},
+    "victory": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}
