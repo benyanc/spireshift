@@ -810,6 +810,15 @@ def _allows_acknowledged_no_public_delta(
     bridge_response: dict[str, object],
 ) -> bool:
     public_state = predecessor.observation.public_state
+    message = bridge_response.get("message")
+    if action.kind == "advance_dialogue":
+        event = public_state.get("event")
+        return (
+            public_state.get("state_type") == "event"
+            and isinstance(event, dict)
+            and event.get("in_dialogue") is True
+            and message == "Advancing dialogue"
+        )
     if (
         action.kind != "menu_select"
         or public_state.get("state_type") != "menu"
@@ -827,7 +836,6 @@ def _allows_acknowledged_no_public_delta(
         for item in characters
         if isinstance(item, dict) and item.get("locked") is not True
     }
-    message = bridge_response.get("message")
     return (
         option in advertised_character_ids
         and isinstance(message, str)
