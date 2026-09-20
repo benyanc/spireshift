@@ -1,4 +1,7 @@
+import json
 from pathlib import Path
+
+import pytest
 
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
@@ -20,6 +23,7 @@ def test_run_records_and_replays(tmp_path: Path) -> None:
     )
     records = load_records(output)
     assert records[0]["record_type"] == "header"
+    assert records[0]["ruleset"] == MockSpireEnvironment.ruleset.as_dict()
     assert records[-1]["record_type"] == "summary"
     assert records[-1]["terminal_reward"] in (0.0, 1.0)
     assert result.compute_used == result.decisions
@@ -41,3 +45,37 @@ def test_policy_takes_terminally_better_risky_path(tmp_path: Path) -> None:
     )
     step = next(record for record in load_records(output) if record["record_type"] == "step")
     assert step["transition"]["action"]["action_id"] == "elite_path"
+
+
+def test_replay_rejects_a_different_ruleset(tmp_path: Path) -> None:
+    output = tmp_path / "run.jsonl"
+    run_episode(
+        environment=MockSpireEnvironment(),
+        policy=TerminalVictoryPolicy(),
+        budget_controller=PolicyOnlyBudgetController(),
+        recorder=JsonlRecorder(output),
+        objective=load_objective(Path("configs/default.toml")),
+        seed=7,
+    )
+    records = load_records(output)
+    records[0]["ruleset"]["manifest_id"] = "sha256:" + "0" * 64
+    output.write_text("".join(json.dumps(record) + "\n" for record in records))
+
+    replay = verify_mock_replay(output)
+    assert not replay.valid
+    assert replay.message == "Ruleset identity mismatch"
+
+
+def test_run_rejects_environment_patch_identity_drift(tmp_path: Path) -> None:
+    environment = MockSpireEnvironment()
+    environment.patch_id = "unexpected-patch"
+
+    with pytest.raises(RuntimeError, match="does not match its ruleset"):
+        run_episode(
+            environment=environment,
+            policy=TerminalVictoryPolicy(),
+            budget_controller=PolicyOnlyBudgetController(),
+            recorder=JsonlRecorder(tmp_path / "run.jsonl"),
+            objective=load_objective(Path("configs/default.toml")),
+            seed=7,
+        )

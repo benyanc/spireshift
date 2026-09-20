@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/patch-manifest-v1.json",
+  "title": "SpireShift Patch Manifest v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "admission_status",
+    "patch",
+    "engine",
+    "adapter",
+    "mechanics",
+    "interface"
+  ],
+  "properties": {
+    "schema_version": {"const": "patch-manifest-v1"},
+    "manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "admission_status": {
+      "enum": ["test_only", "pending_conformance", "admitted"]
+    },
+    "patch": {"$ref": "#/$defs/patch"},
+    "engine": {"$ref": "#/$defs/component"},
+    "adapter": {"$ref": "#/$defs/component"},
+    "mechanics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/mechanics"}
+    },
+    "interface": {"$ref": "#/$defs/interface"}
+  },
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": {"enum": ["sha256", "git-commit-sha1", "git-tree-sha1"]},
+        "value": {"type": "string"}
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "algorithm": {"const": "sha256"},
+            "value": {"pattern": "^[a-f0-9]{64}$"}
+          }
+        },
+        {
+          "properties": {
+            "algorithm": {"enum": ["git-commit-sha1", "git-tree-sha1"]},
+            "value": {"pattern": "^[a-f0-9]{40}$"}
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "component": {
+      "type": "object",
+      "required": ["component_id", "version", "revision", "source", "digest"],
+      "properties": {
+        "component_id": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "digest": {"$ref": "#/$defs/digest"}
+      },
+      "additionalProperties": false
+    },
+    "mechanics": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "kind",
+        "version",
+        "platform",
+        "architecture",
+        "digest",
+        "size_bytes"
+      ],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "kind": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "platform": {"type": ["string", "null"], "minLength": 1},
+        "architecture": {"type": ["string", "null"], "minLength": 1},
+        "digest": {"$ref": "#/$defs/digest"},
+        "size_bytes": {"type": ["integer", "null"], "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "patch": {
+      "type": "object",
+      "required": [
+        "patch_id",
+        "game_version",
+        "game_commit",
+        "branch",
+        "release_date",
+        "steam_build_id"
+      ],
+      "properties": {
+        "patch_id": {"type": "string", "minLength": 1},
+        "game_version": {"type": "string", "minLength": 1},
+        "game_commit": {"type": "string", "minLength": 1},
+        "branch": {"type": ["string", "null"], "minLength": 1},
+        "release_date": {"type": ["string", "null"], "minLength": 1},
+        "steam_build_id": {"type": ["string", "null"], "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "interface": {
+      "type": "object",
+      "required": ["observation_schema", "action_schema", "information_policy_id"],
+      "properties": {
+        "observation_schema": {"type": "string", "minLength": 1},
+        "action_schema": {"type": "string", "minLength": 1},
+        "information_policy_id": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

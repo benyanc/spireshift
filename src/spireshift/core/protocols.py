@@ -4,11 +4,13 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Protocol
 
+from spireshift.core.manifest import RulesetIdentity
 from spireshift.core.types import BudgetTier, LegalAction, Observation, Transition
 
 
 class EnvironmentAdapter(Protocol):
     patch_id: str
+    ruleset: RulesetIdentity
 
     def reset(self, seed: int) -> Observation: ...
 

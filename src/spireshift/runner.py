@@ -25,7 +25,12 @@ def run_episode(
     objective: ObjectiveSpec,
     seed: int,
 ) -> RunResult:
+    ruleset = environment.ruleset
+    if environment.patch_id != ruleset.patch_id:
+        raise RuntimeError("Environment patch does not match its ruleset identity")
     observation = environment.reset(seed)
+    if observation.patch_id != ruleset.patch_id:
+        raise RuntimeError("Initial observation patch does not match the ruleset identity")
     remaining_budget = objective.whole_run_budget
     decisions = 0
 
@@ -34,6 +39,7 @@ def run_episode(
             "schema_version": "run-v1",
             "seed": seed,
             "patch_id": environment.patch_id,
+            "ruleset": ruleset.as_dict(),
             "objective": objective.as_dict(),
             "policy_id": policy.policy_id,
             "controller_id": budget_controller.controller_id,
@@ -50,6 +56,10 @@ def run_episode(
             raise RuntimeError("Selected compute tier exceeds whole-run budget")
         action = policy.choose_action(observation, legal_actions)
         transition = environment.step(action)
+        if environment.ruleset != ruleset:
+            raise RuntimeError("Environment ruleset changed during the run")
+        if transition.next_observation.patch_id != ruleset.patch_id:
+            raise RuntimeError("Observation patch changed during the run")
         remaining_budget -= cost
         decisions += 1
 

@@ -27,6 +27,8 @@ def verify_mock_replay(path: Path) -> ReplayResult:
 
     header = headers[0]
     environment = MockSpireEnvironment()
+    if header.get("ruleset") != environment.ruleset.as_dict():
+        return ReplayResult(False, 0, False, "Ruleset identity mismatch")
     observation = environment.reset(int(header["seed"]))
     if observation.state_hash != header["initial_state_hash"]:
         return ReplayResult(False, 0, False, "Initial state hash mismatch")

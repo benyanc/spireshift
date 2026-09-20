@@ -1,0 +1,52 @@
+{
+  "schema_version": "patch-manifest-v1",
+  "manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "admission_status": "test_only",
+  "patch": {
+    "patch_id": "mock-v1",
+    "game_version": "mock-v1",
+    "game_commit": "mock-rules-v1",
+    "branch": null,
+    "release_date": null,
+    "steam_build_id": null
+  },
+  "engine": {
+    "component_id": "spireshift-mock-engine",
+    "version": "1",
+    "revision": "mock-rules-v1",
+    "source": "spireshift://src/spireshift/adapters/mock.py",
+    "digest": {
+      "algorithm": "sha256",
+      "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+    }
+  },
+  "adapter": {
+    "component_id": "spireshift-mock-adapter",
+    "version": "1",
+    "revision": "observation-v1/action-v1",
+    "source": "spireshift://src/spireshift/adapters/mock.py",
+    "digest": {
+      "algorithm": "sha256",
+      "value": "060477507680dd27b84065fd7f441fe9aa7b671349350cbb030d44c1a5837f20"
+    }
+  },
+  "mechanics": [
+    {
+      "artifact_id": "mock-terminal-victory-rules",
+      "kind": "mechanics-bundle",
+      "version": "1",
+      "platform": null,
+      "architecture": null,
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+      },
+      "size_bytes": 282
+    }
+  ],
+  "interface": {
+    "observation_schema": "observation-v1",
+    "action_schema": "action-v1",
+    "information_policy_id": "public-state-v1"
+  }
+}

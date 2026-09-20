@@ -28,6 +28,9 @@ be implemented as a thin read-only adapter after the environment bakeoff.
 uv sync
 uv run spireshift doctor
 uv run spireshift doctor --manifest artifacts/local/sts2-installation.json
+uv run spireshift manifest verify \
+  --installation artifacts/local/sts2-installation.json \
+  manifests/patches/sts2-v0.107.1-evangambit-37e4264.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift check
@@ -38,6 +41,13 @@ Generated runs are written under `artifacts/`, which is intentionally ignored by
 Game detection searches every configured Steam library. Set `SPIRESHIFT_GAME_DIR` to require a
 specific installation. The optional manifest command writes only paths, release/runtime metadata,
 file sizes, and hashes; it never copies game binaries, assets, saves, or decompiled content.
+
+Patch manifests under `manifests/patches/` bind a game build, rule engine, adapter, mechanics
+artifacts, schema versions, and information policy to an immutable SHA-256 identity. Local mechanics
+files or directories can be fingerprinted with `spireshift manifest freeze SPEC OUTPUT`; their
+contents and local paths are omitted from the resulting manifest. Every run records the complete
+ruleset identity, and replay stops on an identity mismatch. The v0.107.1 EvanGambit manifest remains
+`pending_conformance` until the differential suite admits it.
 
 ## Objective
 
