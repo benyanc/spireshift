@@ -2,6 +2,7 @@
   "state_type": "menu",
   "menu_screen": "character_select",
   "message": "Select a character.",
+  "body": null,
   "characters": [
     {
       "id": "IRONCLAD",

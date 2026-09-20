@@ -52,6 +52,7 @@
       "state_type": "menu",
       "menu_screen": "character_select",
       "message": "Select a character.",
+      "body": null,
       "characters": [
         {
           "id": "IRONCLAD",
@@ -82,7 +83,7 @@
       "terminal": false,
       "victory": false
     },
-    "state_hash": "4cdf1e6f42f04bfd31de589dff96dcee5c3595a20b39a8654644e83f70ba58de"
+    "state_hash": "9727d9985c0144b6ee84344e3aab8553850e53c8e755e8b05e7d913a8d60e2e8"
   },
   "legal_actions": [
     {

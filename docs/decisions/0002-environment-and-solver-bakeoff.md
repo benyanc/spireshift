@@ -172,6 +172,8 @@ such.
 - `STS2MCP@55e0648` builds with no warnings against that installed assembly. SpireShift's GET-only
   local adapter binds the same game fingerprint and bridge version before projecting public state;
   admission still requires the live fixture audit and full-run action-coverage gates.
+- After the game's one-time mod consent, the adapter captured the real main-menu state through the
+  local bridge and the resulting document conformed to `live-snapshot-v1`.
 - At `evangambit/sts2@37e4264`, 4,801 C# tests, 31 native-boundary tests, and 420 non-skipped
   live-fixture checks passed locally. Six legacy per-turn-hand checks were explicitly skipped. The
   fixture inventory and limitations are preserved in

@@ -25,6 +25,7 @@ _BRIDGE_VERSION_PATTERN = re.compile(r"^Hello from STS2 MCP v(?P<version>[^\s]+)
 _PUBLIC_TOP_LEVEL_FIELDS = {
     "battle",
     "blocked_options",
+    "body",
     "bundle_select",
     "card_reward",
     "card_select",
