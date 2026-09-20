@@ -24,6 +24,16 @@ serialization changes and observations containing unmarked privileged fields.
 The seeded mock backend validates the complete pipeline. Candidate live-game and simulator backends
 must pass the same contract suite before use in training or evaluation.
 
+[ADR 0002](decisions/0002-environment-and-solver-bakeoff.md) selects a two-engine stack:
+
+- STS2 Headless/Connector provides the frozen authoritative reference, with `sts2-cli` as the
+  active exact-engine upstream;
+- the EvanGambit NativeAOT emulator provides cheap cloning and full-run training/search;
+- differential traces admit each emulator patch before its data is used for reported results.
+
+Third-party observation formats never flow directly into a policy. Each backend is projected into
+SpireShift's versioned public contract, and every unsupported decision or divergence is recorded.
+
 ## Search and models
 
 Initial tiers are policy-only, shallow, medium, and expensive. The policy/value foundation is
