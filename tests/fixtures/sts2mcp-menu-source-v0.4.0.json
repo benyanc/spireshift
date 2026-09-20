@@ -1,0 +1,25 @@
+{
+  "state_type": "menu",
+  "menu_screen": "character_select",
+  "message": "Select a character.",
+  "body": null,
+  "characters": [
+    {
+      "id": "IRONCLAD",
+      "name": "The Ironclad",
+      "locked": false,
+      "hp": 80,
+      "gold": 99,
+      "energy": 3
+    }
+  ],
+  "options": [
+    {"name": "IRONCLAD", "enabled": true},
+    {"name": "REGENT", "enabled": false},
+    {"name": "back", "enabled": true}
+  ],
+  "lobby": {
+    "type": "singleplayer",
+    "seed": "synthetic-redacted-seed"
+  }
+}

@@ -9,6 +9,13 @@ from dataclasses import asdict
 from pathlib import Path
 
 from spireshift.adapters.mock import MockSpireEnvironment
+from spireshift.adapters.sts2mcp import (
+    DEFAULT_STS2MCP_URL,
+    LiveStateError,
+    Sts2McpHttpTransport,
+    Sts2McpLiveStateAdapter,
+    Sts2McpStateProjector,
+)
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
 from spireshift.conformance import (
     capture_conformance_trace,
@@ -29,6 +36,7 @@ from spireshift.runner import RunResult, run_episode
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
+DEFAULT_LIVE_MANIFEST = PROJECT_ROOT / "manifests/patches/sts2-v0.107.1-sts2mcp-55e0648.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -54,6 +62,24 @@ def build_parser() -> argparse.ArgumentParser:
         help="Also require this local game identity to match the patch manifest",
     )
     verify_manifest.add_argument("paths", type=Path, nargs="+")
+
+    live = subparsers.add_parser("live", help="Read public state from the installed game")
+    live_commands = live.add_subparsers(dest="live_command", required=True)
+    live_snapshot = live_commands.add_parser(
+        "snapshot", help="Capture one read-only STS2_MCP snapshot"
+    )
+    live_snapshot.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    live_snapshot.add_argument("--installation", type=Path)
+    live_snapshot.add_argument("--base-url", default=DEFAULT_STS2MCP_URL)
+    live_snapshot.add_argument("--timeout", type=float, default=3.0)
+    live_snapshot.add_argument("--output", type=Path)
+    live_project = live_commands.add_parser(
+        "project", help="Project a recorded STS2_MCP JSON payload without contacting the game"
+    )
+    live_project.add_argument("source", type=Path)
+    live_project.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    live_project.add_argument("--bridge-version")
+    live_project.add_argument("--output", type=Path)
 
     conformance = subparsers.add_parser(
         "conformance", help="Run environment contract and differential checks"
@@ -149,6 +175,38 @@ def main(argv: Sequence[str] | None = None) -> int:
                     )
         print(json.dumps(results, indent=2))
         return 0 if valid else 1
+    if args.command == "live":
+        try:
+            live_manifest = load_patch_manifest(args.manifest)
+            if args.live_command == "snapshot":
+                if args.installation is not None:
+                    installation_document: object = json.loads(
+                        args.installation.read_text(encoding="utf-8")
+                    )
+                else:
+                    installation = find_game_installation()
+                    if installation is None:
+                        raise LiveStateError("No supported local STS2 installation was found")
+                    installation_document = installation.manifest()
+                adapter = Sts2McpLiveStateAdapter(
+                    live_manifest,
+                    installation_document,
+                    Sts2McpHttpTransport(args.base_url, timeout_seconds=args.timeout),
+                )
+                snapshot = adapter.snapshot()
+            else:
+                source = json.loads(args.source.read_text(encoding="utf-8"))
+                projector = Sts2McpStateProjector(live_manifest)
+                snapshot = projector.project(
+                    source,
+                    bridge_version=args.bridge_version or live_manifest.adapter.version,
+                )
+        except (LiveStateError, OSError, ValueError, json.JSONDecodeError) as error:
+            _emit_json({"status": "error", "error": str(error)}, args.output)
+            return 1
+        payload = snapshot.as_dict()
+        _emit_json(payload, args.output)
+        return 0 if snapshot.action_coverage_status != "unsupported" else 1
     if args.command == "conformance":
         if args.conformance_command == "run-mock":
             report = run_environment_conformance(

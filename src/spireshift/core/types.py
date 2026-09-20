@@ -6,9 +6,20 @@ from typing import Any
 
 
 class DecisionType(StrEnum):
+    MENU = "menu"
     PATH = "path"
     COMBAT = "combat"
+    COMBAT_SELECTION = "combat_selection"
+    REWARD = "reward"
+    EVENT = "event"
+    REST_SITE = "rest_site"
+    SHOP = "shop"
+    TREASURE = "treasure"
+    CARD_SELECTION = "card_selection"
+    RELIC_SELECTION = "relic_selection"
+    MINI_GAME = "mini_game"
     TERMINAL = "terminal"
+    UNKNOWN = "unknown"
 
 
 class BudgetTier(StrEnum):

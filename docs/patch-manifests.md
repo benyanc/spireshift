@@ -34,3 +34,7 @@ content, saves, or decompiled source.
 The checked-in STS2 v0.107.1/EvanGambit manifest is deliberately `pending_conformance`. External
 live-fixture evidence passes on its captured surface, but the future SpireShift adapter must also
 pass the public-state and differential contract before this status can change.
+
+The STS2 v0.107.1/STS2MCP live manifest is also `pending_conformance`. It binds the installed
+authoritative assembly to the pinned read bridge. Its snapshots can support integration work, while
+full admission still requires the screen-by-screen public-state audit and exact differential traces.
