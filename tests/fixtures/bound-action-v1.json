@@ -1,0 +1,8 @@
+{
+  "schema_version": "bound-action-v1",
+  "request_id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee",
+  "manifest_id": "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd",
+  "patch_id": "sts2-v0.107.1-59260271",
+  "state_hash": "9727d9985c0144b6ee84344e3aab8553850e53c8e755e8b05e7d913a8d60e2e8",
+  "action_id": "menu_select:ed10dff7281262e0"
+}

@@ -46,6 +46,11 @@ build. Its SpireShift transport exposes GET only, requires a local origin, verif
 identity, and fails closed on unaudited top-level fields. Live action delivery is a separate
 transactional boundary so state capture cannot accidentally mutate the game.
 
+The action boundary accepts only a request ID, manifest and patch identity, predecessor state hash,
+and an advertised action ID. It writes intent durably before POST delivery, never redelivers a
+request ID, serializes writers, and records uncertain outcomes as recovery-blocking receipts.
+Successful delivery is bound to a stable successor snapshot.
+
 ## Search and models
 
 Initial tiers are policy-only, shallow, medium, and expensive. The policy/value foundation is

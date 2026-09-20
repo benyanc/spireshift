@@ -8,7 +8,7 @@ change for STS2 v0.107.1.
 The SpireShift transport is deliberately GET-only. It accepts only uncredentialed HTTP origins on
 `localhost`, `127.0.0.1`, or `::1`, bounds response size and timeout, checks the running bridge
 version before reading state, and exposes no action-delivery method. Guarded action execution is a
-separate contract tracked in [issue #55](https://github.com/benyanc/spireshift/issues/55).
+separate [durable, state-bound contract](live-action-execution.md).
 
 ## Installation
 
