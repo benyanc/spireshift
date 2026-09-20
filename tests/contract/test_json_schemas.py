@@ -49,6 +49,12 @@ def _registry() -> Registry[Any]:
             "rollout/mock-batch-v1/attempts/seed-0/attempt-1/worker-result.json",
         ),
         ("rollout-batch-replay-v1.json", "rollout-batch-replay-v1.json"),
+        (
+            "split-manifest-v1.json",
+            "../../manifests/splits/mock-v1-seeds-000000-000999-v1.json",
+        ),
+        ("dataset-index-v1.json", "splits/dataset-index-v1.json"),
+        ("dataset-split-audit-v1.json", "splits/dataset-split-audit-v1.json"),
         ("live-fixture-corpus-v1.json", "live/public-state-corpus-v1.json"),
         ("live-action-coverage-spec-v1.json", "../../configs/live-coverage-v0.107.1.json"),
     ],

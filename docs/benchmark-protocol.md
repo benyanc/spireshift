@@ -33,6 +33,11 @@ rate. Completed runs count only after their immutable records pass exact transit
 Training and evaluation are split by complete run and seed. Adjacent decisions from one run may not
 be randomly divided across train and test sets.
 
+Every dataset and checkpoint records the content-addressed split-manifest and dataset-index IDs.
+Encounter instances inherit their complete run's partition. Training fits on train runs, model and
+threshold selection use validation runs, and final estimates use test runs after choices are frozen.
+The [data-split audit](data-splits.md) must pass before records enter a model or reported benchmark.
+
 ## Base-model readiness
 
 Adaptive allocation experiments remain blocked until pilot-derived readiness thresholds are frozen

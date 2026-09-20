@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/dataset-split-audit-v1.json",
+  "title": "SpireShift Dataset Split Audit v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "valid",
+    "dataset_id",
+    "dataset_index_id",
+    "split_manifest_id",
+    "runs",
+    "records",
+    "partition_runs",
+    "partition_records",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": {"const": "dataset-split-audit-v1"},
+    "valid": {"type": "boolean"},
+    "dataset_id": {"type": "string"},
+    "dataset_index_id": {
+      "type": "string",
+      "pattern": "^(sha256:[a-f0-9]{64})?$"
+    },
+    "split_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "runs": {"type": "integer", "minimum": 0},
+    "records": {"type": "integer", "minimum": 0},
+    "partition_runs": {"$ref": "#/$defs/counts"},
+    "partition_records": {"$ref": "#/$defs/counts"},
+    "errors": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "counts": {
+      "type": "object",
+      "required": ["train", "validation", "test"],
+      "properties": {
+        "train": {"type": "integer", "minimum": 0},
+        "validation": {"type": "integer", "minimum": 0},
+        "test": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

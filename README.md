@@ -21,7 +21,8 @@ The repository currently contains the research contracts and a seeded mock verti
 8. a pinned live-state projection for the installed v0.107.1 game;
 9. guarded, state-bound, at-most-once live action delivery;
 10. deterministic and seeded legal-random unattended live play with offline run auditing; and
-11. isolated parallel seeded rollouts with retries, immutable evidence, and batch replay.
+11. isolated parallel seeded rollouts with retries, immutable evidence, and batch replay; and
+12. content-addressed complete-run train, validation, and test splits.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -40,6 +41,7 @@ uv run spireshift live snapshot --output artifacts/live/current-snapshot.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift rollout run-mock --episodes 100 --workers 4
+uv run spireshift split verify manifests/splits/mock-v1-seeds-000000-000999-v1.json
 uv run spireshift check
 ```
 
@@ -91,6 +93,10 @@ The same safety boundary is used by the unattended loop described in that docume
 [Parallel rollout infrastructure](docs/rollout-infrastructure.md) launches each seeded episode in an
 isolated process, retries failures without overwriting evidence, and independently replays completed
 runs. Exhausted worker crashes remain in the benchmark denominator.
+
+[Frozen data splits](docs/data-splits.md) bind every seed, complete run, encounter instance, and
+decision record to content-addressed train, validation, and test evidence. Dataset audits reject
+partial trajectories and any record assignment that disagrees with the frozen run partition.
 
 ## Objective
 
