@@ -56,3 +56,7 @@ objectives.
 
 See [docs/architecture.md](docs/architecture.md) and
 [docs/benchmark-protocol.md](docs/benchmark-protocol.md).
+
+The environment bakeoff and pinned candidate evidence are recorded in
+[ADR 0002](docs/decisions/0002-environment-and-solver-bakeoff.md) and
+[docs/environment-candidates.json](docs/environment-candidates.json).
