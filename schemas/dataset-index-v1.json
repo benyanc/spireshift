@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/dataset-index-v1.json",
+  "title": "SpireShift Complete-Run Dataset Index v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "index_id",
+    "dataset_id",
+    "split_manifest_id",
+    "ruleset_manifest_id",
+    "runs",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {"const": "dataset-index-v1"},
+    "index_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "split_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/run"}
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "nonemptyStrings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "run": {
+      "type": "object",
+      "required": ["run_id", "seed", "split", "terminal", "record_ids", "encounter_ids"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "seed": {"type": "integer", "minimum": 0},
+        "split": {"enum": ["train", "validation", "test"]},
+        "terminal": {"const": true},
+        "record_ids": {"$ref": "#/$defs/nonemptyStrings"},
+        "encounter_ids": {"$ref": "#/$defs/nonemptyStrings"}
+      },
+      "additionalProperties": false
+    },
+    "record": {
+      "type": "object",
+      "required": ["record_id", "run_id", "encounter_id", "decision_index"],
+      "properties": {
+        "record_id": {"type": "string", "minLength": 1},
+        "run_id": {"type": "string", "minLength": 1},
+        "encounter_id": {"type": ["string", "null"], "minLength": 1},
+        "decision_index": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "split-manifest-v1",
+  "split_id": "mock-v1-seeds-000000-000999-v1",
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "objective_id": "terminal-victory-v1",
+  "unit": "complete_run",
+  "seed_universe": {
+    "start": 0,
+    "stop_exclusive": 1000
+  },
+  "assignment": {
+    "algorithm": "sha256-ranked-v1",
+    "salt": "spireshift/mock-v1/terminal-victory-v1/split-v1",
+    "counts": {
+      "train": 800,
+      "validation": 100,
+      "test": 100
+    }
+  },
+  "encounter_policy": {
+    "unit": "encounter_instance",
+    "inherits_split_from": "complete_run",
+    "identifier_fields": [
+      "run_id",
+      "encounter_id"
+    ],
+    "cross_partition_reuse": "forbidden"
+  }
+}

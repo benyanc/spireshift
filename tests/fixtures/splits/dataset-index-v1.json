@@ -1,0 +1,89 @@
+{
+  "dataset_id": "mock-complete-runs-v1",
+  "index_id": "sha256:a12a8526b0b23746b648b3d782f75c65ff56eefa0c82186ac73cfddb88dffd77",
+  "records": [
+    {
+      "decision_index": 0,
+      "encounter_id": "mock-seed-0-path",
+      "record_id": "mock-seed-0-decision-0",
+      "run_id": "mock-seed-0"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "mock-seed-0-boss",
+      "record_id": "mock-seed-0-decision-1",
+      "run_id": "mock-seed-0"
+    },
+    {
+      "decision_index": 0,
+      "encounter_id": "mock-seed-20-path",
+      "record_id": "mock-seed-20-decision-0",
+      "run_id": "mock-seed-20"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "mock-seed-20-boss",
+      "record_id": "mock-seed-20-decision-1",
+      "run_id": "mock-seed-20"
+    },
+    {
+      "decision_index": 0,
+      "encounter_id": "mock-seed-1-path",
+      "record_id": "mock-seed-1-decision-0",
+      "run_id": "mock-seed-1"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "mock-seed-1-boss",
+      "record_id": "mock-seed-1-decision-1",
+      "run_id": "mock-seed-1"
+    }
+  ],
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "runs": [
+    {
+      "encounter_ids": [
+        "mock-seed-0-path",
+        "mock-seed-0-boss"
+      ],
+      "record_ids": [
+        "mock-seed-0-decision-0",
+        "mock-seed-0-decision-1"
+      ],
+      "run_id": "mock-seed-0",
+      "seed": 0,
+      "split": "train",
+      "terminal": true
+    },
+    {
+      "encounter_ids": [
+        "mock-seed-20-path",
+        "mock-seed-20-boss"
+      ],
+      "record_ids": [
+        "mock-seed-20-decision-0",
+        "mock-seed-20-decision-1"
+      ],
+      "run_id": "mock-seed-20",
+      "seed": 20,
+      "split": "validation",
+      "terminal": true
+    },
+    {
+      "encounter_ids": [
+        "mock-seed-1-path",
+        "mock-seed-1-boss"
+      ],
+      "record_ids": [
+        "mock-seed-1-decision-0",
+        "mock-seed-1-decision-1"
+      ],
+      "run_id": "mock-seed-1",
+      "seed": 1,
+      "split": "test",
+      "terminal": true
+    }
+  ],
+  "schema_version": "dataset-index-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1"
+}

@@ -53,6 +53,15 @@ from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
 from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
+from spireshift.splits import (
+    SplitName,
+    audit_dataset_index,
+    freeze_dataset_index,
+    freeze_split_manifest,
+    load_split_manifest,
+    write_frozen_dataset_index,
+    write_frozen_split_manifest,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
@@ -215,6 +224,31 @@ def build_parser() -> argparse.ArgumentParser:
 
     verify = subparsers.add_parser("verify", help="Alias for deterministic replay verification")
     verify.add_argument("path", type=Path)
+
+    split = subparsers.add_parser("split", help="Freeze and audit complete-run data splits")
+    split_commands = split.add_subparsers(dest="split_command", required=True)
+    split_freeze = split_commands.add_parser("freeze", help="Create an immutable split manifest")
+    split_freeze.add_argument("specification", type=Path)
+    split_freeze.add_argument("output", type=Path)
+    split_verify = split_commands.add_parser("verify", help="Verify a split manifest identity")
+    split_verify.add_argument("manifest", type=Path)
+    split_verify.add_argument("--output", type=Path)
+    split_freeze_index = split_commands.add_parser(
+        "freeze-index", help="Freeze run and encounter membership in a dataset index"
+    )
+    split_freeze_index.add_argument("manifest", type=Path)
+    split_freeze_index.add_argument("specification", type=Path)
+    split_freeze_index.add_argument("output", type=Path)
+    split_audit = split_commands.add_parser(
+        "audit", help="Reject dataset indices that leak records across complete-run splits"
+    )
+    split_audit.add_argument("manifest", type=Path)
+    split_audit.add_argument("dataset_index", type=Path)
+    split_audit.add_argument("--output", type=Path)
+    split_seeds = split_commands.add_parser("seeds", help="List frozen seeds for one partition")
+    split_seeds.add_argument("manifest", type=Path)
+    split_seeds.add_argument("partition", choices=[split.value for split in SplitName])
+    split_seeds.add_argument("--output", type=Path)
 
     rollout = subparsers.add_parser("rollout", help="Run and audit isolated full-run workers")
     rollout_commands = rollout.add_subparsers(dest="rollout_command", required=True)
@@ -476,6 +510,65 @@ def main(argv: Sequence[str] | None = None) -> int:
         replay_result = verify_mock_replay(args.path)
         print(json.dumps(asdict(replay_result), indent=2))
         return 0 if replay_result.valid else 1
+    if args.command == "split":
+        try:
+            if args.split_command == "freeze":
+                specification = json.loads(args.specification.read_text(encoding="utf-8"))
+                split_manifest = freeze_split_manifest(specification)
+                write_frozen_split_manifest(split_manifest, args.output)
+                _emit_json(
+                    {
+                        "path": str(args.output),
+                        "manifest_id": split_manifest.manifest_id,
+                        "split_id": split_manifest.split_id,
+                    },
+                    None,
+                )
+                return 0
+            split_manifest = load_split_manifest(args.manifest)
+            if args.split_command == "freeze-index":
+                index_specification = json.loads(args.specification.read_text(encoding="utf-8"))
+                dataset_index = freeze_dataset_index(index_specification, split_manifest)
+                write_frozen_dataset_index(dataset_index, args.output)
+                _emit_json(
+                    {
+                        "path": str(args.output),
+                        "index_id": dataset_index["index_id"],
+                        "split_manifest_id": split_manifest.manifest_id,
+                    },
+                    None,
+                )
+                return 0
+            if args.split_command == "verify":
+                _emit_json(
+                    {
+                        "valid": True,
+                        "manifest_id": split_manifest.manifest_id,
+                        "split_id": split_manifest.split_id,
+                        "counts": {
+                            split.value: len(split_manifest.seeds(split)) for split in SplitName
+                        },
+                    },
+                    args.output,
+                )
+                return 0
+            if args.split_command == "seeds":
+                partition = SplitName(args.partition)
+                _emit_json(
+                    {
+                        "manifest_id": split_manifest.manifest_id,
+                        "partition": partition.value,
+                        "seeds": list(split_manifest.seeds(partition)),
+                    },
+                    args.output,
+                )
+                return 0
+            split_audit_result = audit_dataset_index(args.dataset_index, split_manifest)
+            _emit_json(split_audit_result.as_dict(), args.output)
+            return 0 if split_audit_result.valid else 1
+        except (OSError, ValueError, json.JSONDecodeError) as error:
+            _emit_json({"status": "error", "error": str(error)}, getattr(args, "output", None))
+            return 1
     if args.command == "rollout":
         if args.rollout_command == "replay":
             rollout_replay_result = verify_rollout_batch(args.report)

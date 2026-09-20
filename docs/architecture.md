@@ -66,6 +66,14 @@ Requested seeds define the benchmark denominator before any worker starts. Final
 timeouts remain failed outcomes in that denominator, while recovered attempts are reported
 separately. See [parallel rollout infrastructure](rollout-infrastructure.md).
 
+## Dataset boundary
+
+Seed assignments live in content-addressed split manifests tied to one ruleset and objective.
+Dataset indices freeze complete-run membership plus the encounter instances and decision records in
+each run. Records have no independent split field; an audited loader derives their partition from the
+run. This keeps adjacent observations, stochastic outcomes, and encounter decisions from one
+trajectory on the same side of the training boundary. See [frozen data splits](data-splits.md).
+
 ## Search and models
 
 Initial tiers are policy-only, shallow, medium, and expensive. The policy/value foundation is

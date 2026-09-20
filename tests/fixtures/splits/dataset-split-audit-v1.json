@@ -1,0 +1,20 @@
+{
+  "dataset_id": "mock-complete-runs-v1",
+  "dataset_index_id": "sha256:a12a8526b0b23746b648b3d782f75c65ff56eefa0c82186ac73cfddb88dffd77",
+  "errors": [],
+  "partition_records": {
+    "test": 2,
+    "train": 2,
+    "validation": 2
+  },
+  "partition_runs": {
+    "test": 1,
+    "train": 1,
+    "validation": 1
+  },
+  "records": 6,
+  "runs": 3,
+  "schema_version": "dataset-split-audit-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "valid": true
+}
