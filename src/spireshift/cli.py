@@ -51,6 +51,11 @@ from spireshift.live_run import (
 )
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
+from spireshift.representations import (
+    DEFAULT_VECTOR_DIMENSION,
+    build_model_input,
+    vectorize_model_input,
+)
 from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
 from spireshift.splits import (
@@ -214,6 +219,23 @@ def build_parser() -> argparse.ArgumentParser:
     conformance_compare.add_argument("reference", type=Path)
     conformance_compare.add_argument("candidate", type=Path)
     conformance_compare.add_argument("--output", type=Path)
+
+    represent = subparsers.add_parser("represent", help="Build a compositional policy/search input")
+    represent_commands = represent.add_subparsers(dest="represent_command", required=True)
+    represent_mock = represent_commands.add_parser("mock", help="Encode one seeded mock decision")
+    represent_mock.add_argument("--seed", type=int, default=7)
+    represent_mock.add_argument("--vectorized", action="store_true")
+    represent_mock.add_argument("--dimension", type=int, default=DEFAULT_VECTOR_DIMENSION)
+    represent_mock.add_argument("--output", type=Path)
+    represent_live = represent_commands.add_parser(
+        "live", help="Encode a recorded STS2_MCP public-state payload"
+    )
+    represent_live.add_argument("source", type=Path)
+    represent_live.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    represent_live.add_argument("--bridge-version")
+    represent_live.add_argument("--vectorized", action="store_true")
+    represent_live.add_argument("--dimension", type=int, default=DEFAULT_VECTOR_DIMENSION)
+    represent_live.add_argument("--output", type=Path)
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -499,6 +521,38 @@ def main(argv: Sequence[str] | None = None) -> int:
         differential = compare_conformance_traces(reference, candidate)
         _emit_json(differential, args.output)
         return 0 if differential["verdict"] == "exact_match" else 1
+    if args.command == "represent":
+        try:
+            if args.represent_command == "mock":
+                environment = MockSpireEnvironment()
+                observation = environment.reset(args.seed)
+                representation = build_model_input(
+                    environment.ruleset,
+                    observation,
+                    environment.legal_actions(),
+                )
+            else:
+                live_manifest = load_patch_manifest(args.manifest)
+                source = json.loads(args.source.read_text(encoding="utf-8"))
+                snapshot = Sts2McpStateProjector(live_manifest).project(
+                    source,
+                    bridge_version=args.bridge_version or live_manifest.adapter.version,
+                )
+                representation = build_model_input(
+                    snapshot.ruleset,
+                    snapshot.observation,
+                    snapshot.legal_actions,
+                )
+            document = (
+                vectorize_model_input(representation, dimension=args.dimension).as_dict()
+                if args.vectorized
+                else representation.as_dict()
+            )
+            _emit_json(document, args.output)
+            return 0
+        except (LiveStateError, OSError, ValueError, json.JSONDecodeError) as error:
+            _emit_json({"status": "error", "error": str(error)}, args.output)
+            return 1
     if args.command == "demo":
         output = args.output or PROJECT_ROOT / f"artifacts/mock/run-{args.seed}.jsonl"
         run_result = _run_mock(args.seed, output)

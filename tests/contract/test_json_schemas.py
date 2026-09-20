@@ -57,6 +57,8 @@ def _registry() -> Registry[Any]:
         ("dataset-split-audit-v1.json", "splits/dataset-split-audit-v1.json"),
         ("live-fixture-corpus-v1.json", "live/public-state-corpus-v1.json"),
         ("live-action-coverage-spec-v1.json", "../../configs/live-coverage-v0.107.1.json"),
+        ("model-input-v1.json", "model-input-v1.json"),
+        ("vectorized-model-input-v1.json", "vectorized-model-input-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:

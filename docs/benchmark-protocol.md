@@ -15,7 +15,7 @@ Every run records:
   mechanics, interface schemas, and information policy;
 - objective and patch identifiers;
 - seed and character/difficulty configuration;
-- agent, model, and search versions;
+- agent, model, search, representation-encoder, and vectorizer versions;
 - legal actions and selected action;
 - compute tier and measured cost;
 - state hashes;
