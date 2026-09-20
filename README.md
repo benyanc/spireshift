@@ -17,10 +17,11 @@ The repository currently contains the research contracts and a seeded mock verti
 4. whole-run compute accounting;
 5. append-only run recording;
 6. deterministic replay and verification;
-7. fixed-seed benchmark reporting.
+7. fixed-seed benchmark reporting; and
+8. a pinned, read-only live-state projection for the installed v0.107.1 game.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
-be implemented as a thin read-only adapter after the environment bakeoff.
+remain a thin, versioned layer around a locally installed bridge.
 
 ## Quick start
 
@@ -32,6 +33,7 @@ uv run spireshift manifest verify \
   --installation artifacts/local/sts2-installation.json \
   manifests/patches/sts2-v0.107.1-evangambit-37e4264.json
 uv run spireshift conformance run-mock
+uv run spireshift live snapshot --output artifacts/live/current-snapshot.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift check
@@ -54,6 +56,10 @@ The [environment conformance suite](docs/environment-conformance.md) applies one
 to reset, actions, stepping, cloning, replay, information isolation, and terminal reward. Its trace
 comparator reports exact field-level divergences and refuses incompatible patch or information-policy
 comparisons.
+
+The [read-only live-state adapter](docs/live-state-adapter.md) verifies the local game and bridge
+identity, projects only public state, enumerates provisional legal actions, and records any omitted
+source fields. Its network transport is localhost-only and has no write method.
 
 ## Objective
 

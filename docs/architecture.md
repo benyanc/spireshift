@@ -41,6 +41,11 @@ necessary evidence, not proof of simulator fidelity.
 Third-party observation formats never flow directly into a policy. Each backend is projected into
 SpireShift's versioned public contract, and every unsupported decision or divergence is recorded.
 
+The first live projection uses the pinned STS2MCP v0.4.0 read endpoint for the installed v0.107.1
+build. Its SpireShift transport exposes GET only, requires a local origin, verifies game and bridge
+identity, and fails closed on unaudited top-level fields. Live action delivery is a separate
+transactional boundary so state capture cannot accidentally mutate the game.
+
 ## Search and models
 
 Initial tiers are policy-only, shallow, medium, and expensive. The policy/value foundation is

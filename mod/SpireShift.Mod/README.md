@@ -1,15 +1,14 @@
 # SpireShift.Mod
 
-This directory is reserved for the thin read-only STS2 integration.
+This directory is reserved for SpireShift-owned game integration code.
 
-The mod will:
+The first read-only integration uses the pinned, MIT-licensed STS2MCP bridge as an external local
+dependency. SpireShift does not vendor its DLL or proprietary game assemblies. The Python adapter:
 
-- read player-observable state;
-- enumerate legal decisions;
-- send versioned snapshots to the local SpireShift service;
-- render recommendations;
-- never execute actions in the initial release.
+- reads player-observable state;
+- enumerates legal decisions;
+- emits versioned snapshots to the local SpireShift service; and
+- exposes no action-delivery method.
 
-The game-dependent project will be generated only after the environment bakeoff chooses the bridge
-and confirms its license and supported game version. This avoids introducing proprietary assembly
-references or committing to a fragile integration prematurely.
+Future guarded execution belongs behind a separate exactly-once action contract. Any SpireShift mod
+code added here must remain thin, patch-bound, and independently auditable.

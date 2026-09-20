@@ -1,0 +1,52 @@
+{
+  "schema_version": "patch-manifest-v1",
+  "manifest_id": "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd",
+  "admission_status": "pending_conformance",
+  "patch": {
+    "patch_id": "sts2-v0.107.1-59260271",
+    "game_version": "v0.107.1",
+    "game_commit": "59260271",
+    "branch": "v0.107.1",
+    "release_date": "2026-06-18T15:43:56-07:00",
+    "steam_build_id": "23811903"
+  },
+  "engine": {
+    "component_id": "megacrit-sts2-installed-game",
+    "version": "v0.107.1",
+    "revision": "59260271",
+    "source": "steam://app/2868840",
+    "digest": {
+      "algorithm": "sha256",
+      "value": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18"
+    }
+  },
+  "adapter": {
+    "component_id": "sts2mcp-live-bridge",
+    "version": "0.4.0",
+    "revision": "55e064850a68f3b4cde7e5fd525bf9b2dec4e885",
+    "source": "https://github.com/Gennadiyev/STS2MCP",
+    "digest": {
+      "algorithm": "git-commit-sha1",
+      "value": "55e064850a68f3b4cde7e5fd525bf9b2dec4e885"
+    }
+  },
+  "mechanics": [
+    {
+      "artifact_id": "sts2-v0.107.1-macos-arm64-assembly",
+      "kind": "authoritative-game-assembly",
+      "version": "v0.107.1/59260271",
+      "platform": "macos",
+      "architecture": "arm64",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18"
+      },
+      "size_bytes": 9363456
+    }
+  ],
+  "interface": {
+    "observation_schema": "observation-v1",
+    "action_schema": "action-v1",
+    "information_policy_id": "public-state-v1"
+  }
+}

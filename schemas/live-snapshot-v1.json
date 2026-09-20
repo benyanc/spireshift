@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/live-snapshot-v1.json",
+  "title": "SpireShift Live Snapshot v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ruleset",
+    "observation",
+    "legal_actions",
+    "bridge",
+    "action_coverage",
+    "projection"
+  ],
+  "properties": {
+    "schema_version": {"const": "live-snapshot-v1"},
+    "ruleset": {"$ref": "conformance-report-v1.json#/$defs/ruleset"},
+    "observation": {"$ref": "observation-v1.json"},
+    "legal_actions": {
+      "type": "array",
+      "items": {"$ref": "action-v1.json"}
+    },
+    "bridge": {
+      "type": "object",
+      "required": ["component_id", "version", "protocol", "read_only"],
+      "properties": {
+        "component_id": {"const": "sts2mcp"},
+        "version": {"type": "string", "minLength": 1},
+        "protocol": {"const": "sts2mcp-http-v1"},
+        "read_only": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "action_coverage": {
+      "type": "object",
+      "required": ["status", "issues"],
+      "properties": {
+        "status": {"enum": ["ready", "partial", "settling", "unsupported"]},
+        "issues": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "projection": {
+      "type": "object",
+      "required": ["omitted_source_paths"],
+      "properties": {
+        "omitted_source_paths": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
