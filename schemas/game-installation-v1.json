@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/game-installation-v1.json",
+  "title": "SpireShift Game Installation v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "app_id",
+    "source",
+    "platform",
+    "architecture",
+    "game",
+    "release",
+    "runtime",
+    "assembly"
+  ],
+  "properties": {
+    "schema_version": {"const": "game-installation-v1"},
+    "app_id": {"const": "2868840"},
+    "source": {"type": "string", "minLength": 1},
+    "platform": {"enum": ["macos", "windows", "linux"]},
+    "architecture": {"enum": ["arm64", "x86_64"]},
+    "game": {
+      "type": "object",
+      "required": ["directory", "executable", "mods_directory", "mods_directory_exists"],
+      "properties": {
+        "directory": {"type": "string", "minLength": 1},
+        "executable": {"type": "string", "minLength": 1},
+        "mods_directory": {"type": "string", "minLength": 1},
+        "mods_directory_exists": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "release": {
+      "type": "object",
+      "required": [
+        "manifest_path",
+        "version",
+        "commit",
+        "branch",
+        "date",
+        "steam_build_id"
+      ],
+      "properties": {
+        "manifest_path": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "commit": {"type": "string", "minLength": 1},
+        "branch": {"type": ["string", "null"]},
+        "date": {"type": ["string", "null"]},
+        "steam_build_id": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["data_directory", "config_path", "tfm", "frameworks"],
+      "properties": {
+        "data_directory": {"type": "string", "minLength": 1},
+        "config_path": {"type": "string", "minLength": 1},
+        "tfm": {"type": "string", "minLength": 1},
+        "frameworks": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "assembly": {
+      "type": "object",
+      "required": [
+        "path",
+        "size_bytes",
+        "sha256",
+        "sha1_int32_little_endian",
+        "release_declared_main_assembly_hash"
+      ],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "size_bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "sha1_int32_little_endian": {"type": "integer"},
+        "release_declared_main_assembly_hash": {
+          "type": ["integer", "string", "null"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

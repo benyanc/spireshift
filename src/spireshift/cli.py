@@ -11,7 +11,7 @@ from pathlib import Path
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
 from spireshift.core.objective import load_objective
-from spireshift.doctor import diagnostics_as_dict
+from spireshift.doctor import diagnostics_as_dict, find_game_installation
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
 from spireshift.runner import RunResult, run_episode
@@ -24,7 +24,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="spireshift")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    subparsers.add_parser("doctor", help="Check local development prerequisites")
+    doctor = subparsers.add_parser("doctor", help="Check local development prerequisites")
+    doctor.add_argument(
+        "--manifest",
+        type=Path,
+        help="Write a non-proprietary local game identity manifest",
+    )
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -48,6 +53,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "doctor":
         print(json.dumps(diagnostics_as_dict(), indent=2))
+        if args.manifest is not None:
+            installation = find_game_installation()
+            if installation is None:
+                return 1
+            args.manifest.parent.mkdir(parents=True, exist_ok=True)
+            args.manifest.write_text(json.dumps(installation.manifest(), indent=2) + "\n")
         return 0
     if args.command == "demo":
         output = args.output or PROJECT_ROOT / f"artifacts/mock/run-{args.seed}.jsonl"

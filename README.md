@@ -27,12 +27,17 @@ be implemented as a thin read-only adapter after the environment bakeoff.
 ```bash
 uv sync
 uv run spireshift doctor
+uv run spireshift doctor --manifest artifacts/local/sts2-installation.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift check
 ```
 
 Generated runs are written under `artifacts/`, which is intentionally ignored by Git.
+
+Game detection searches every configured Steam library. Set `SPIRESHIFT_GAME_DIR` to require a
+specific installation. The optional manifest command writes only paths, release/runtime metadata,
+file sizes, and hashes; it never copies game binaries, assets, saves, or decompiled content.
 
 ## Objective
 
