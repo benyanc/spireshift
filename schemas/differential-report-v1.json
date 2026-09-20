@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/differential-report-v1.json",
+  "title": "SpireShift Differential Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "verdict",
+    "reference_fixture_id",
+    "candidate_fixture_id",
+    "comparability_errors",
+    "compared_decisions",
+    "mismatch_count",
+    "divergences_truncated",
+    "divergences"
+  ],
+  "properties": {
+    "schema_version": {"const": "differential-report-v1"},
+    "verdict": {"enum": ["exact_match", "diverged", "incomparable"]},
+    "reference_fixture_id": {"type": "string", "minLength": 1},
+    "candidate_fixture_id": {"type": "string", "minLength": 1},
+    "comparability_errors": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "compared_decisions": {"type": "integer", "minimum": 0},
+    "reference_decisions": {"type": "integer", "minimum": 0},
+    "candidate_decisions": {"type": "integer", "minimum": 0},
+    "mismatch_count": {"type": "integer", "minimum": 0},
+    "divergences_truncated": {"type": "boolean"},
+    "divergences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "expected", "actual"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "expected": {},
+          "actual": {}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

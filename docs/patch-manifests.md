@@ -31,5 +31,6 @@ content, saves, or decompiled source.
 - `admitted` means the stack passed the environment conformance and public-state checks for that
   exact identity.
 
-The checked-in STS2 v0.107.1/EvanGambit manifest is deliberately `pending_conformance`. Issue #13
-must measure it against authoritative fixtures before its status can change.
+The checked-in STS2 v0.107.1/EvanGambit manifest is deliberately `pending_conformance`. External
+live-fixture evidence passes on its captured surface, but the future SpireShift adapter must also
+pass the public-state and differential contract before this status can change.

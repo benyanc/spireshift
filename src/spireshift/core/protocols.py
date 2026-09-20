@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Protocol
+from typing import Protocol, Self
 
 from spireshift.core.manifest import RulesetIdentity
 from spireshift.core.types import BudgetTier, LegalAction, Observation, Transition
@@ -17,6 +17,8 @@ class EnvironmentAdapter(Protocol):
     def legal_actions(self) -> Sequence[LegalAction]: ...
 
     def step(self, action: LegalAction) -> Transition: ...
+
+    def clone(self, *, resample_hidden: bool, seed: int | None = None) -> Self: ...
 
 
 class Policy(Protocol):

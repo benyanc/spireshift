@@ -10,6 +10,11 @@ from pathlib import Path
 
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
+from spireshift.conformance import (
+    capture_conformance_trace,
+    compare_conformance_traces,
+    run_environment_conformance,
+)
 from spireshift.core.manifest import (
     freeze_patch_manifest,
     load_patch_manifest,
@@ -49,6 +54,29 @@ def build_parser() -> argparse.ArgumentParser:
         help="Also require this local game identity to match the patch manifest",
     )
     verify_manifest.add_argument("paths", type=Path, nargs="+")
+
+    conformance = subparsers.add_parser(
+        "conformance", help="Run environment contract and differential checks"
+    )
+    conformance_commands = conformance.add_subparsers(dest="conformance_command", required=True)
+    conformance_run = conformance_commands.add_parser(
+        "run-mock", help="Run the contract suite against the mock adapter"
+    )
+    conformance_run.add_argument("--seeds", type=int, nargs="+", default=[1, 7])
+    conformance_run.add_argument("--max-steps", type=int, default=4096)
+    conformance_run.add_argument("--output", type=Path)
+    conformance_trace = conformance_commands.add_parser(
+        "trace-mock", help="Capture a public mock conformance trace"
+    )
+    conformance_trace.add_argument("--seed", type=int, default=7)
+    conformance_trace.add_argument("--fixture-id", default="mock-v1-seed-7")
+    conformance_trace.add_argument("--output", type=Path)
+    conformance_compare = conformance_commands.add_parser(
+        "compare", help="Compare reference and candidate public traces"
+    )
+    conformance_compare.add_argument("reference", type=Path)
+    conformance_compare.add_argument("candidate", type=Path)
+    conformance_compare.add_argument("--output", type=Path)
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -121,6 +149,28 @@ def main(argv: Sequence[str] | None = None) -> int:
                     )
         print(json.dumps(results, indent=2))
         return 0 if valid else 1
+    if args.command == "conformance":
+        if args.conformance_command == "run-mock":
+            report = run_environment_conformance(
+                MockSpireEnvironment,
+                seeds=args.seeds,
+                max_steps=args.max_steps,
+            ).as_dict()
+            _emit_json(report, args.output)
+            return 0 if report["verdict"] != "fail" else 1
+        if args.conformance_command == "trace-mock":
+            trace = capture_conformance_trace(
+                MockSpireEnvironment(),
+                seed=args.seed,
+                fixture_id=args.fixture_id,
+            )
+            _emit_json(trace, args.output)
+            return 0
+        reference = json.loads(args.reference.read_text(encoding="utf-8"))
+        candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
+        differential = compare_conformance_traces(reference, candidate)
+        _emit_json(differential, args.output)
+        return 0 if differential["verdict"] == "exact_match" else 1
     if args.command == "demo":
         output = args.output or PROJECT_ROOT / f"artifacts/mock/run-{args.seed}.jsonl"
         run_result = _run_mock(args.seed, output)
@@ -165,6 +215,14 @@ def _run_mock(seed: int, output: Path) -> RunResult:
         objective=objective,
         seed=seed,
     )
+
+
+def _emit_json(value: object, output: Path | None) -> None:
+    encoded = json.dumps(value, indent=2) + "\n"
+    if output is not None:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(encoded, encoding="utf-8")
+    print(encoded, end="")
 
 
 def _check() -> int:

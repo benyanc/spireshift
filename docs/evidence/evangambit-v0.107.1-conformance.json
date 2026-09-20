@@ -1,0 +1,135 @@
+{
+  "schema_version": "external-conformance-evidence-v1",
+  "observed_on": "2026-09-19",
+  "subject": {
+    "ruleset_manifest_id": "sha256:e08d0bb6a5c933ddcd57d9d61b8e14563c2aa2cf5d385feecf4cfcf1fe1b83b2",
+    "repository": "https://github.com/evangambit/sts2",
+    "revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+    "git_tree": "0c70a122143e570c6ff5102e977775db51aae07f",
+    "game_version": "v0.107.1",
+    "steam_build_id": "23811903"
+  },
+  "authoritative_fixtures": {
+    "source": "live-game captures committed by the subject repository",
+    "git_tree": "66af8c2a510dcf8978dacfb0a3ab0a606c8a0b3a",
+    "total_files": 786,
+    "total_bytes": 86776597,
+    "release_stamps": [
+      {
+        "game_version": "v0.107.1",
+        "steam_build_id": "23811903"
+      }
+    ],
+    "categories": [
+      {
+        "category": "act_selection",
+        "files": 1,
+        "bytes": 6177,
+        "inventory_sha256": "cd3f41ff0c35cc10dfb1adc8acad98cb2bbc571936bde08b3dbd9c89f43c738a"
+      },
+      {
+        "category": "cards",
+        "files": 541,
+        "bytes": 5230344,
+        "inventory_sha256": "62df19dfc36396de44c6d818340140fca249629473fe65bb3457a91f21315388"
+      },
+      {
+        "category": "combat",
+        "files": 50,
+        "bytes": 631231,
+        "inventory_sha256": "4515771947b7e21517592910816ebf91222b0db5ca91491fd7bdb4e7dc0f8cda"
+      },
+      {
+        "category": "events",
+        "files": 156,
+        "bytes": 1324098,
+        "inventory_sha256": "e186d31f003852afb5230e91f351cc4fed9c181f722c56b6c3d4c35b3730cd8e"
+      },
+      {
+        "category": "run_generation",
+        "files": 5,
+        "bytes": 104757,
+        "inventory_sha256": "d4cd947309c9f7fe8c33e4547cd5f368adf21365cea5dc977d146d8188258efb"
+      },
+      {
+        "category": "run_trace",
+        "files": 32,
+        "bytes": 79465088,
+        "inventory_sha256": "2baf1e193e978b5421835ab12b9f1caf31fdfb810524377e3284bd6ab678095f"
+      },
+      {
+        "category": "shop",
+        "files": 1,
+        "bytes": 14902,
+        "inventory_sha256": "49757fa2b6d681d1e9c16fbb8530372ecbc8ffc84f8541803b2009bca491741d"
+      }
+    ]
+  },
+  "executions": [
+    {
+      "suite": "Sts2Emulator.Tests",
+      "runtime": ".NET 9 / macOS arm64",
+      "command": "dotnet test src/Sts2Emulator.Tests/Sts2Emulator.Tests.csproj -c Release --logger 'console;verbosity=normal'",
+      "passed": 4801,
+      "failed": 0,
+      "skipped": 1,
+      "skip_reasons": [
+        "StepCostProbe is an explicit performance probe"
+      ],
+      "status": "pass"
+    },
+    {
+      "suite": "tests/python/test_sts2_gym.py",
+      "runtime": "CPython 3.12 / macOS arm64",
+      "command": "PYTHONPATH=src:scripts uv run --no-project --python 3.12 --with gymnasium==1.2.3 --with numpy==2.4.6 python -m unittest discover -s tests/python -p 'test_sts2_gym.py' -v",
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "skip_reasons": [],
+      "status": "pass"
+    },
+    {
+      "suite": "tests/python/test_live_fixtures.py",
+      "runtime": "CPython 3.12 / macOS arm64",
+      "command": "PYTHONPATH=src:scripts uv run --no-project --python 3.12 --with gymnasium==1.2.3 --with numpy==2.4.6 python -m unittest discover -s tests/python -p 'test_live_fixtures.py' -v",
+      "passed": 420,
+      "failed": 0,
+      "skipped": 6,
+      "skip_reasons": [
+        "six legacy combat captures predate per-turn hand recording"
+      ],
+      "status": "pass"
+    },
+    {
+      "suite": "tests/python/test_live_fixtures.py",
+      "runtime": "CPython 3.11 / macOS arm64",
+      "command": "PYTHONPATH=src:scripts uv run --no-project --python 3.11 --with gymnasium==1.2.3 --with numpy==2.4.6 python -m unittest discover -s tests/python -p 'test_live_fixtures.py' -v",
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "skip_reasons": [],
+      "status": "toolchain_failure",
+      "failure": "Import-time SyntaxError from PEP 701 f-string syntax despite declared Python >=3.11"
+    }
+  ],
+  "differential_result": {
+    "verdict": "no_observed_divergence",
+    "observed_divergences": 0,
+    "catalogued_open_divergences": 0,
+    "claim_limit": "Only the executed committed fixtures matched; this is not proof of complete fidelity."
+  },
+  "coverage_gaps": [
+    "The emulator has not yet been projected through a SpireShift adapter, so SpireShift public-state isolation is untested.",
+    "Six legacy combat captures omit per-turn hands.",
+    "The upstream report identifies 182 reachable cards with no live play capture.",
+    "The upstream report identifies 46 later ancient relics as unimplemented.",
+    "Exact Neow, shop, reward, and event odds remain incomplete.",
+    "Python 3.11 cannot import the live-fixture suite at this revision."
+  ],
+  "admission": {
+    "status": "pending_conformance",
+    "reason": "External differential evidence passes, but the SpireShift adapter and its public-information projection do not yet exist.",
+    "next_gate": "Run environment-conformance-v1 and SpireShift-formatted differential traces through the implemented adapter."
+  },
+  "evidence_id": "sha256:25c80cd770cacbfa8eae1d0202272320231cdd76becad18218ff3706c276627e"
+}

@@ -31,6 +31,7 @@ uv run spireshift doctor --manifest artifacts/local/sts2-installation.json
 uv run spireshift manifest verify \
   --installation artifacts/local/sts2-installation.json \
   manifests/patches/sts2-v0.107.1-evangambit-37e4264.json
+uv run spireshift conformance run-mock
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift check
@@ -48,6 +49,11 @@ files or directories can be fingerprinted with `spireshift manifest freeze SPEC 
 contents and local paths are omitted from the resulting manifest. Every run records the complete
 ruleset identity, and replay stops on an identity mismatch. The v0.107.1 EvanGambit manifest remains
 `pending_conformance` until the differential suite admits it.
+
+The [environment conformance suite](docs/environment-conformance.md) applies one executable contract
+to reset, actions, stepping, cloning, replay, information isolation, and terminal reward. Its trace
+comparator reports exact field-level divergences and refuses incompatible patch or information-policy
+comparisons.
 
 ## Objective
 

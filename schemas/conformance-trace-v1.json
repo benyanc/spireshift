@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/conformance-trace-v1.json",
+  "title": "SpireShift Conformance Trace v1",
+  "type": "object",
+  "required": ["schema_version", "fixture_id", "ruleset", "seed", "steps", "outcome"],
+  "properties": {
+    "schema_version": {"const": "conformance-trace-v1"},
+    "fixture_id": {"type": "string", "minLength": 1},
+    "ruleset": {"$ref": "conformance-report-v1.json#/$defs/ruleset"},
+    "seed": {"type": "integer"},
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "decision_index",
+          "observation",
+          "legal_actions",
+          "selected_action",
+          "next_observation",
+          "reward",
+          "terminal",
+          "victory"
+        ],
+        "properties": {
+          "decision_index": {"type": "integer", "minimum": 0},
+          "observation": {"$ref": "observation-v1.json"},
+          "legal_actions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "action-v1.json"}
+          },
+          "selected_action": {"$ref": "action-v1.json"},
+          "next_observation": {"$ref": "observation-v1.json"},
+          "reward": {"enum": [0.0, 1.0]},
+          "terminal": {"type": "boolean"},
+          "victory": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["terminal", "victory", "decisions", "final_state_hash"],
+      "properties": {
+        "terminal": {"const": true},
+        "victory": {"type": "boolean"},
+        "decisions": {"type": "integer", "minimum": 0},
+        "final_state_hash": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

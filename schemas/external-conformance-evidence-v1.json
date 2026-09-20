@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/external-conformance-evidence-v1.json",
+  "title": "SpireShift External Conformance Evidence v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "observed_on",
+    "subject",
+    "authoritative_fixtures",
+    "executions",
+    "differential_result",
+    "coverage_gaps",
+    "admission",
+    "evidence_id"
+  ],
+  "properties": {
+    "schema_version": {"const": "external-conformance-evidence-v1"},
+    "observed_on": {"type": "string", "format": "date"},
+    "subject": {
+      "type": "object",
+      "required": [
+        "ruleset_manifest_id",
+        "repository",
+        "revision",
+        "git_tree",
+        "game_version",
+        "steam_build_id"
+      ],
+      "properties": {
+        "ruleset_manifest_id": {"$ref": "#/$defs/sha256_id"},
+        "repository": {"type": "string", "format": "uri"},
+        "revision": {"$ref": "#/$defs/git_object"},
+        "git_tree": {"$ref": "#/$defs/git_object"},
+        "game_version": {"type": "string", "minLength": 1},
+        "steam_build_id": {"type": "string", "pattern": "^[0-9]+$"}
+      },
+      "additionalProperties": false
+    },
+    "authoritative_fixtures": {
+      "type": "object",
+      "required": [
+        "source",
+        "git_tree",
+        "total_files",
+        "total_bytes",
+        "release_stamps",
+        "categories"
+      ],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "git_tree": {"$ref": "#/$defs/git_object"},
+        "total_files": {"type": "integer", "minimum": 1},
+        "total_bytes": {"type": "integer", "minimum": 1},
+        "release_stamps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["game_version", "steam_build_id"],
+            "properties": {
+              "game_version": {"type": "string", "minLength": 1},
+              "steam_build_id": {"type": "string", "pattern": "^[0-9]+$"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "categories": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["category", "files", "bytes", "inventory_sha256"],
+            "properties": {
+              "category": {"type": "string", "minLength": 1},
+              "files": {"type": "integer", "minimum": 1},
+              "bytes": {"type": "integer", "minimum": 1},
+              "inventory_sha256": {"$ref": "#/$defs/sha256"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "executions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "suite",
+          "runtime",
+          "command",
+          "passed",
+          "failed",
+          "skipped",
+          "skip_reasons",
+          "status"
+        ],
+        "properties": {
+          "suite": {"type": "string", "minLength": 1},
+          "runtime": {"type": "string", "minLength": 1},
+          "command": {"type": "string", "minLength": 1},
+          "passed": {"type": "integer", "minimum": 0},
+          "failed": {"type": "integer", "minimum": 0},
+          "skipped": {"type": "integer", "minimum": 0},
+          "skip_reasons": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          },
+          "status": {"enum": ["pass", "fail", "toolchain_failure"]},
+          "failure": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "differential_result": {
+      "type": "object",
+      "required": [
+        "verdict",
+        "observed_divergences",
+        "catalogued_open_divergences",
+        "claim_limit"
+      ],
+      "properties": {
+        "verdict": {"enum": ["no_observed_divergence", "diverged", "incomparable"]},
+        "observed_divergences": {"type": "integer", "minimum": 0},
+        "catalogued_open_divergences": {"type": "integer", "minimum": 0},
+        "claim_limit": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "coverage_gaps": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "admission": {
+      "type": "object",
+      "required": ["status", "reason", "next_gate"],
+      "properties": {
+        "status": {"enum": ["pending_conformance", "admitted", "rejected"]},
+        "reason": {"type": "string", "minLength": 1},
+        "next_gate": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "evidence_id": {"$ref": "#/$defs/sha256_id"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "sha256_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "git_object": {"type": "string", "pattern": "^[a-f0-9]{40}$"}
+  },
+  "additionalProperties": false
+}
