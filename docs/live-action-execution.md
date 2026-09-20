@@ -97,7 +97,23 @@ uv run spireshift live verify-run artifacts/live/runs/my-run.jsonl
 
 Verification recomputes state hashes and checks contiguous decisions, unique request IDs, exact
 snapshot binding, legal-set membership, receipt/request equality, applied-delivery certainty, and
-the summary action count.
+the summary action count. Unsupported summaries must contain exactly one explicit
+`unsupported_decision` record with the same final snapshot.
+
+Gate complete action coverage for the frozen The Defect, Standard, Ascension 0 scope:
+
+```bash
+uv run spireshift live coverage --run artifacts/live/runs/my-run.jsonl
+```
+
+The gate combines the checked all-screen fixture oracles with one or more complete run records. It
+requires the exact ruleset and scope, all 18 actionable states, all 13 decision types, all 28 action
+kinds, verified records, and at least one terminal run. Its checked method and result are documented
+in the [v0.107.1 coverage evidence](evidence/live-action-coverage-v0.107.1.md).
+
+Adapter, policy, and executor coverage gaps each create a durable `unsupported_decision` record.
+The deterministic policy handles only an explicit state allowlist; a newly introduced state cannot
+silently inherit its first-action behavior.
 
 ## Receipts
 
@@ -149,3 +165,7 @@ without human gameplay. It recorded 167 steps across floors 1–12 and exercised
 and elite combat, rewards, maps, rest sites, treasure, events, card selection, bundle selection, and
 one bounded stale-state replan. All 169 JSONL records passed `live verify-run`. The acceptance record
 remains under the ignored `artifacts/` directory because it contains live game state.
+
+The resulting coverage report passed every frozen gate: 19/19 fixture oracles, 18/18 actionable
+state types, 13/13 decision types, 28/28 action kinds, correct Defect Ascension 0 scope, one verified
+terminal run, and zero unsupported decisions.

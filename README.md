@@ -77,6 +77,10 @@ The checked [public-state fixture audit](docs/evidence/live-fixture-audit-v0.107
 actionable single-player state types in the pinned bridge and compares every projected action with an
 independent exact oracle. Run it offline with `uv run spireshift live audit-fixtures`.
 
+The [full-run action coverage gate](docs/evidence/live-action-coverage-v0.107.1.md) freezes The
+Defect at Ascension 0, requires all 18 states, 13 decision types, and 28 action kinds, and admits only
+verified terminal runs or explicitly recorded unsupported decisions.
+
 [Guarded live-action execution](docs/live-action-execution.md) binds every request to that exact
 snapshot and legal-action ID. A durable ledger blocks duplicates and concurrent writers, while
 timeouts and lost acknowledgements latch recovery instead of triggering an automatic retry.

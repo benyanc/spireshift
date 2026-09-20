@@ -78,6 +78,6 @@ ruleset identity, complete screen-family coverage, deterministic projection, inf
 accounting, and exact legal actions. The method and checked result are recorded in the
 [v0.107.1 fixture evidence](evidence/live-fixture-audit-v0.107.1.md).
 
-[Issue #18](https://github.com/benyanc/spireshift/issues/18) remains the gate for complete full-run
-action delivery and unsupported-decision accounting. `partial`, `settling`, and `unsupported` states
-remain visible rather than receiving a heuristic fallback.
+The [full-run action coverage gate](evidence/live-action-coverage-v0.107.1.md) combines these oracles
+with complete live-run evidence and explicit unsupported-decision accounting. `partial`, `settling`,
+and `unsupported` states remain visible rather than receiving a heuristic fallback.

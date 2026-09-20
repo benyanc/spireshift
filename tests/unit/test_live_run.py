@@ -193,6 +193,7 @@ def test_live_loop_stops_without_acting_on_unsupported_state(tmp_path: Path) -> 
     executor = FakeExecutor()
 
     with LiveRunRecorder(tmp_path / "unsupported.jsonl") as recorder:
+        path = recorder.path
         result = run_live_game(
             snapshot_provider=SequenceSnapshotProvider(unsupported),
             executor=executor,
@@ -207,6 +208,65 @@ def test_live_loop_stops_without_acting_on_unsupported_state(tmp_path: Path) -> 
     assert result.status is LiveRunStatus.UNSUPPORTED
     assert result.actions == 0
     assert executor.requests == []
+    records = [json.loads(line) for line in path.read_text().splitlines()]
+    assert [record["record_type"] for record in records] == [
+        "header",
+        "unsupported_decision",
+        "summary",
+    ]
+    assert records[1]["source"] == "adapter"
+    verification = verify_live_run(path)
+    assert verification.valid
+    assert verification.unsupported_decisions == 1
+
+    without_accounting = tmp_path / "unsupported-without-accounting.jsonl"
+    without_accounting.write_text(
+        "\n".join(
+            json.dumps(record)
+            for record in records
+            if record["record_type"] != "unsupported_decision"
+        )
+        + "\n"
+    )
+    broken = verify_live_run(without_accounting)
+    assert not broken.valid
+    assert "unsupported summary requires exactly one unsupported_decision record" in broken.errors
+
+
+def test_policy_gap_is_recorded_as_an_explicit_unsupported_decision(tmp_path: Path) -> None:
+    settings = LegalAction("settings", "menu_select", {"option": "settings"})
+    quit_game = LegalAction("quit", "menu_select", {"option": "quit"})
+    menu = _snapshot("menu", (settings, quit_game), "f")
+    menu_state = {
+        "state_type": "menu",
+        "menu_screen": "main",
+        "options": ["settings", "quit"],
+        "terminal": False,
+        "victory": False,
+    }
+    menu = replace(menu, observation=replace(menu.observation, public_state=menu_state))
+    path = tmp_path / "policy-gap.jsonl"
+
+    with LiveRunRecorder(path) as recorder:
+        result = run_live_game(
+            snapshot_provider=SequenceSnapshotProvider(menu),
+            executor=FakeExecutor(),
+            recorder=recorder,
+            policy=WeakLivePolicy(LiveRunStrategy.DETERMINISTIC, seed=0),
+            max_actions=10,
+            readiness_timeout_seconds=0.01,
+            poll_interval_seconds=0.01,
+            monotonic=iter((0.0, 1.0)).__next__,
+            sleep=lambda _: None,
+            now=lambda: NOW,
+        )
+
+    records = [json.loads(line) for line in path.read_text().splitlines()]
+    assert result.status is LiveRunStatus.UNSUPPORTED
+    assert records[-2]["record_type"] == "unsupported_decision"
+    assert records[-2]["source"] == "policy"
+    assert "No safe automated action" in records[-2]["reason"]
+    assert verify_live_run(path).valid
 
 
 def test_non_applied_receipt_stops_without_retry(tmp_path: Path) -> None:

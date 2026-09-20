@@ -43,5 +43,6 @@ The checked machine-readable result is
 failures, all 18 actionable state types, and all required decision families.
 
 This is a projection and legal-action coverage audit. It does not prove that every advertised action
-succeeds in the game or that all mutually exclusive variants have been exercised live. The full-run
-action-delivery and explicit unsupported-decision gate remains issue #18.
+succeeds in the game or that all mutually exclusive variants have been exercised live. The
+[full-run coverage gate](live-action-coverage-v0.107.1.md) adds complete-run and explicit
+unsupported-decision evidence.

@@ -1,0 +1,246 @@
+{
+  "schema_version": "live-action-coverage-v1",
+  "valid": true,
+  "verdict": "pass",
+  "coverage_id": "sts2-v0.107.1-defect-a0-live-coverage-v1",
+  "scope": {
+    "character": "The Defect",
+    "difficulty": {
+      "mode": "standard",
+      "ascension": 0
+    }
+  },
+  "ruleset_manifest_id": "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd",
+  "fixture_evidence": {
+    "corpus_sha256": "3b71ad42b7f8ec1bd5efa2eb095a81ca50f8f7c1540b66eb9609452bbf208e07",
+    "fixtures": 19,
+    "state_types": [
+      "boss",
+      "bundle_select",
+      "card_reward",
+      "card_select",
+      "crystal_sphere",
+      "elite",
+      "event",
+      "fake_merchant",
+      "game_over",
+      "hand_select",
+      "map",
+      "menu",
+      "monster",
+      "relic_select",
+      "rest_site",
+      "rewards",
+      "shop",
+      "treasure"
+    ],
+    "decision_types": [
+      "card_selection",
+      "combat",
+      "combat_selection",
+      "event",
+      "menu",
+      "mini_game",
+      "path",
+      "relic_selection",
+      "rest_site",
+      "reward",
+      "shop",
+      "terminal",
+      "treasure"
+    ],
+    "action_kinds": [
+      "advance_dialogue",
+      "cancel_bundle_selection",
+      "cancel_selection",
+      "choose_event_option",
+      "choose_map_node",
+      "choose_rest_option",
+      "claim_reward",
+      "claim_treasure_relic",
+      "combat_confirm_selection",
+      "combat_select_card",
+      "confirm_bundle_selection",
+      "confirm_selection",
+      "crystal_sphere_click_cell",
+      "crystal_sphere_proceed",
+      "crystal_sphere_set_tool",
+      "discard_potion",
+      "end_turn",
+      "menu_select",
+      "play_card",
+      "proceed",
+      "select_bundle",
+      "select_card",
+      "select_card_reward",
+      "select_relic",
+      "shop_purchase",
+      "skip_card_reward",
+      "skip_relic_selection",
+      "use_potion"
+    ]
+  },
+  "run_evidence": {
+    "runs": 1,
+    "terminal_runs": 1,
+    "unsupported_runs": 0,
+    "unsupported_decisions": 0,
+    "records": 169,
+    "steps": 167,
+    "details": [
+      {
+        "record_sha256": "4e932b92954cab3bfc7346d5fcae554091e7952b9d4697ac2df80052808d9b9c",
+        "records": 169,
+        "steps": 167,
+        "status": "terminal",
+        "reason": "terminal_state_observed",
+        "terminal": true,
+        "victory": false,
+        "ruleset_manifest_ids": [
+          "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd"
+        ],
+        "characters": [
+          "The Defect"
+        ],
+        "ascensions": [
+          0
+        ],
+        "selected_modes": [
+          "standard"
+        ],
+        "floor_range": {
+          "minimum": 1,
+          "maximum": 12
+        },
+        "state_types": [
+          "bundle_select",
+          "card_reward",
+          "card_select",
+          "elite",
+          "event",
+          "game_over",
+          "map",
+          "menu",
+          "monster",
+          "rest_site",
+          "rewards",
+          "treasure"
+        ],
+        "decision_types": [
+          "card_selection",
+          "combat",
+          "event",
+          "menu",
+          "path",
+          "rest_site",
+          "reward",
+          "terminal",
+          "treasure"
+        ],
+        "advertised_action_kinds": [
+          "cancel_bundle_selection",
+          "cancel_selection",
+          "choose_event_option",
+          "choose_map_node",
+          "choose_rest_option",
+          "claim_reward",
+          "claim_treasure_relic",
+          "confirm_bundle_selection",
+          "confirm_selection",
+          "discard_potion",
+          "end_turn",
+          "menu_select",
+          "play_card",
+          "proceed",
+          "select_bundle",
+          "select_card",
+          "select_card_reward",
+          "skip_card_reward",
+          "use_potion"
+        ],
+        "selected_action_kinds": [
+          "cancel_selection",
+          "choose_event_option",
+          "choose_map_node",
+          "choose_rest_option",
+          "claim_reward",
+          "claim_treasure_relic",
+          "confirm_bundle_selection",
+          "confirm_selection",
+          "end_turn",
+          "menu_select",
+          "play_card",
+          "proceed",
+          "select_bundle",
+          "select_card",
+          "select_card_reward",
+          "use_potion"
+        ],
+        "unsupported_decisions": 0,
+        "verification_errors": []
+      }
+    ]
+  },
+  "checks": [
+    {
+      "check_id": "ruleset_identity",
+      "status": "pass",
+      "detail": "Coverage specification and selected manifest identities match."
+    },
+    {
+      "check_id": "fixture_oracles",
+      "status": "pass",
+      "detail": "19/19 exact fixture oracles pass."
+    },
+    {
+      "check_id": "actionable_state_types",
+      "status": "pass",
+      "detail": "18/18 actionable state types are enumerated."
+    },
+    {
+      "check_id": "decision_types",
+      "status": "pass",
+      "detail": "13/13 required decision types are enumerated."
+    },
+    {
+      "check_id": "legal_action_kinds",
+      "status": "pass",
+      "detail": "28/28 required legal-action kinds are enumerated."
+    },
+    {
+      "check_id": "run_record_integrity",
+      "status": "pass",
+      "detail": "1/1 run records verify."
+    },
+    {
+      "check_id": "run_ruleset_identity",
+      "status": "pass",
+      "detail": "Every run and embedded snapshot uses the selected ruleset manifest."
+    },
+    {
+      "check_id": "character_scope",
+      "status": "pass",
+      "detail": "Observed characters: ['The Defect']; expected 'The Defect'."
+    },
+    {
+      "check_id": "difficulty_scope",
+      "status": "pass",
+      "detail": "Observed modes/ascensions: ['standard']/[0]; expected 'standard'/0."
+    },
+    {
+      "check_id": "accounted_run_outcomes",
+      "status": "pass",
+      "detail": "Every run ends at a terminal state or an explicit unsupported decision."
+    },
+    {
+      "check_id": "explicit_unsupported_decisions",
+      "status": "pass",
+      "detail": "0 unsupported decisions account for 0 unsupported runs."
+    },
+    {
+      "check_id": "terminal_run_evidence",
+      "status": "pass",
+      "detail": "1 terminal runs observed; minimum is 1."
+    }
+  ]
+}

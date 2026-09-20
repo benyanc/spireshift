@@ -169,9 +169,10 @@ such.
   designed.
 - SpireShift now detects the installed macOS arm64 STS2 v0.107.1/build 23811903 and binds its
   assembly fingerprint to the pinned EvanGambit ruleset manifest.
-- `STS2MCP@55e0648` builds with no warnings against that installed assembly. SpireShift's GET-only
-  local adapter binds the same game fingerprint and bridge version before projecting public state;
-  admission still requires the live fixture audit and full-run action-coverage gates.
+- `STS2MCP@55e0648` builds with no warnings against that installed assembly. SpireShift's local
+  adapter binds the same game fingerprint and bridge version before projecting public state. Its
+  fixture audit covers all 18 actionable states and its Defect Ascension 0 full-run action gate
+  passes with a 167-step terminal run and zero unsupported decisions.
 - After the game's one-time mod consent, the adapter captured the real main-menu state through the
   local bridge and the resulting document conformed to `live-snapshot-v1`.
 - The guarded action boundary applied one noncombat menu action and one combat card action in the
