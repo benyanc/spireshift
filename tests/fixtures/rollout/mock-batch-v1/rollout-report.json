@@ -1,0 +1,152 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "compute_used": 2,
+      "decisions": 2,
+      "exit_code": 0,
+      "message": "Replay verified",
+      "record_path": "attempts/seed-0/attempt-1/run.jsonl",
+      "record_sha256": "45f9433abe4189c42a96eb79f859f74030fc9395f1e51fcf5a2392f7054b2c16",
+      "replay_verified": true,
+      "result_path": "attempts/seed-0/attempt-1/worker-result.json",
+      "seed": 0,
+      "status": "completed",
+      "victory": true,
+      "worker_pid": 19000
+    },
+    {
+      "attempt": 1,
+      "compute_used": 1,
+      "decisions": 1,
+      "exit_code": 0,
+      "message": "Replay verified",
+      "record_path": "attempts/seed-1/attempt-1/run.jsonl",
+      "record_sha256": "c3dbf08c14507140b7bdcb69f5ea018a37c25d548c37be1426c35ca04382685c",
+      "replay_verified": true,
+      "result_path": "attempts/seed-1/attempt-1/worker-result.json",
+      "seed": 1,
+      "status": "completed",
+      "victory": false,
+      "worker_pid": 19001
+    }
+  ],
+  "backend": "mock",
+  "batch_id": "00000000-0000-4000-8000-000000000019",
+  "completed_at": "2026-09-20T00:00:00Z",
+  "configuration": {
+    "maximum_attempts": 2,
+    "seeds": [
+      0,
+      1
+    ],
+    "worker_timeout_seconds": 30.0,
+    "workers": 2
+  },
+  "controller_id": "policy-only-controller-v1",
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "outcomes": [
+    {
+      "attempt_count": 1,
+      "compute_used": 2,
+      "decisions": 2,
+      "failure_message": null,
+      "failure_status": null,
+      "final_attempt": 1,
+      "record_path": "attempts/seed-0/attempt-1/run.jsonl",
+      "record_sha256": "45f9433abe4189c42a96eb79f859f74030fc9395f1e51fcf5a2392f7054b2c16",
+      "replay_verified": true,
+      "seed": 0,
+      "status": "completed",
+      "victory": true
+    },
+    {
+      "attempt_count": 1,
+      "compute_used": 1,
+      "decisions": 1,
+      "failure_message": null,
+      "failure_status": null,
+      "final_attempt": 1,
+      "record_path": "attempts/seed-1/attempt-1/run.jsonl",
+      "record_sha256": "c3dbf08c14507140b7bdcb69f5ea018a37c25d548c37be1426c35ca04382685c",
+      "replay_verified": true,
+      "seed": 1,
+      "status": "completed",
+      "victory": false
+    }
+  ],
+  "policy_id": "terminal-victory-baseline-v1",
+  "ruleset": {
+    "adapter": {
+      "component_id": "spireshift-mock-adapter",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "060477507680dd27b84065fd7f441fe9aa7b671349350cbb030d44c1a5837f20"
+      },
+      "revision": "observation-v1/action-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "version": "1"
+    },
+    "admission_status": "test_only",
+    "engine": {
+      "component_id": "spireshift-mock-engine",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+      },
+      "revision": "mock-rules-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "version": "1"
+    },
+    "interface": {
+      "action_schema": "action-v1",
+      "information_policy_id": "public-state-v1",
+      "observation_schema": "observation-v1"
+    },
+    "manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "mechanics": [
+      {
+        "architecture": null,
+        "artifact_id": "mock-terminal-victory-rules",
+        "digest": {
+          "algorithm": "sha256",
+          "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+        },
+        "kind": "mechanics-bundle",
+        "platform": null,
+        "size_bytes": 282,
+        "version": "1"
+      }
+    ],
+    "patch_id": "mock-v1"
+  },
+  "schema_version": "rollout-batch-v1",
+  "started_at": "2026-09-20T00:00:00Z",
+  "summary": {
+    "attempts": 2,
+    "benchmark_denominator": 2,
+    "completed_runs": 2,
+    "completion_rate": 1.0,
+    "defeats": 1,
+    "failed_attempts": 0,
+    "failed_runs": 0,
+    "recovered_runs": 0,
+    "requested_runs": 2,
+    "verified_runs": 2,
+    "victories": 1,
+    "victory_rate": 0.5,
+    "worker_crashes": 0
+  }
+}

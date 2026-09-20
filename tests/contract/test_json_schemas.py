@@ -40,6 +40,15 @@ def _registry() -> Registry[Any]:
         ("live-snapshot-v1.json", "live-snapshot-v1.json"),
         ("bound-action-v1.json", "bound-action-v1.json"),
         ("action-receipt-v1.json", "action-receipt-v1.json"),
+        (
+            "rollout-batch-v1.json",
+            "rollout/mock-batch-v1/rollout-report.json",
+        ),
+        (
+            "rollout-worker-result-v1.json",
+            "rollout/mock-batch-v1/attempts/seed-0/attempt-1/worker-result.json",
+        ),
+        ("rollout-batch-replay-v1.json", "rollout-batch-replay-v1.json"),
         ("live-fixture-corpus-v1.json", "live/public-state-corpus-v1.json"),
         ("live-action-coverage-spec-v1.json", "../../configs/live-coverage-v0.107.1.json"),
     ],

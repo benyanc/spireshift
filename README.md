@@ -18,9 +18,10 @@ The repository currently contains the research contracts and a seeded mock verti
 5. append-only run recording;
 6. deterministic replay and verification;
 7. fixed-seed benchmark reporting;
-8. a pinned live-state projection for the installed v0.107.1 game; and
-9. guarded, state-bound, at-most-once live action delivery; and
-10. deterministic and seeded legal-random unattended live play with offline run auditing.
+8. a pinned live-state projection for the installed v0.107.1 game;
+9. guarded, state-bound, at-most-once live action delivery;
+10. deterministic and seeded legal-random unattended live play with offline run auditing; and
+11. isolated parallel seeded rollouts with retries, immutable evidence, and batch replay.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -38,6 +39,7 @@ uv run spireshift conformance run-mock
 uv run spireshift live snapshot --output artifacts/live/current-snapshot.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
+uv run spireshift rollout run-mock --episodes 100 --workers 4
 uv run spireshift check
 ```
 
@@ -85,6 +87,10 @@ verified terminal runs or explicitly recorded unsupported decisions.
 snapshot and legal-action ID. A durable ledger blocks duplicates and concurrent writers, while
 timeouts and lost acknowledgements latch recovery instead of triggering an automatic retry.
 The same safety boundary is used by the unattended loop described in that document.
+
+[Parallel rollout infrastructure](docs/rollout-infrastructure.md) launches each seeded episode in an
+isolated process, retries failures without overwriting evidence, and independently replays completed
+runs. Exhausted worker crashes remain in the benchmark denominator.
 
 ## Objective
 

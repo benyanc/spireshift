@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/rollout-batch-v1.json",
+  "title": "SpireShift Rollout Batch v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "batch_id",
+    "backend",
+    "started_at",
+    "completed_at",
+    "configuration",
+    "ruleset",
+    "objective",
+    "policy_id",
+    "controller_id",
+    "summary",
+    "outcomes",
+    "attempts"
+  ],
+  "properties": {
+    "schema_version": {"const": "rollout-batch-v1"},
+    "batch_id": {"type": "string", "format": "uuid"},
+    "backend": {"const": "mock"},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "configuration": {
+      "type": "object",
+      "required": ["seeds", "workers", "maximum_attempts", "worker_timeout_seconds"],
+      "properties": {
+        "seeds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "integer"}
+        },
+        "workers": {"type": "integer", "minimum": 1},
+        "maximum_attempts": {"type": "integer", "minimum": 1},
+        "worker_timeout_seconds": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "ruleset": {"$ref": "conformance-report-v1.json#/$defs/ruleset"},
+    "objective": {
+      "type": "object",
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "auxiliary",
+        "auxiliary_reward_allowed"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "primary": {"const": "terminal_victory"},
+        "constraint": {"const": "cpu_time_per_run"},
+        "whole_run_budget": {"type": "integer", "minimum": 1},
+        "auxiliary": {"type": "array", "items": {"type": "string"}},
+        "auxiliary_reward_allowed": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "policy_id": {"type": "string", "minLength": 1},
+    "controller_id": {"type": "string", "minLength": 1},
+    "summary": {"$ref": "#/$defs/summary"},
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/outcome"}
+    },
+    "attempts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/attempt"}
+    }
+  },
+  "$defs": {
+    "nullableNonnegativeInteger": {"type": ["integer", "null"], "minimum": 0},
+    "nullablePath": {"type": ["string", "null"], "minLength": 1},
+    "nullableDigest": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "requested_runs",
+        "benchmark_denominator",
+        "completed_runs",
+        "verified_runs",
+        "victories",
+        "defeats",
+        "failed_runs",
+        "attempts",
+        "failed_attempts",
+        "worker_crashes",
+        "recovered_runs",
+        "victory_rate",
+        "completion_rate"
+      ],
+      "properties": {
+        "requested_runs": {"type": "integer", "minimum": 1},
+        "benchmark_denominator": {"type": "integer", "minimum": 1},
+        "completed_runs": {"type": "integer", "minimum": 0},
+        "verified_runs": {"type": "integer", "minimum": 0},
+        "victories": {"type": "integer", "minimum": 0},
+        "defeats": {"type": "integer", "minimum": 0},
+        "failed_runs": {"type": "integer", "minimum": 0},
+        "attempts": {"type": "integer", "minimum": 1},
+        "failed_attempts": {"type": "integer", "minimum": 0},
+        "worker_crashes": {"type": "integer", "minimum": 0},
+        "recovered_runs": {"type": "integer", "minimum": 0},
+        "victory_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "completion_rate": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "required": [
+        "seed",
+        "status",
+        "attempt_count",
+        "final_attempt",
+        "victory",
+        "decisions",
+        "compute_used",
+        "record_path",
+        "record_sha256",
+        "replay_verified",
+        "failure_status",
+        "failure_message"
+      ],
+      "properties": {
+        "seed": {"type": "integer"},
+        "status": {"enum": ["completed", "failed"]},
+        "attempt_count": {"type": "integer", "minimum": 1},
+        "final_attempt": {"type": "integer", "minimum": 1},
+        "victory": {"type": ["boolean", "null"]},
+        "decisions": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "compute_used": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "record_path": {"$ref": "#/$defs/nullablePath"},
+        "record_sha256": {"$ref": "#/$defs/nullableDigest"},
+        "replay_verified": {"type": "boolean"},
+        "failure_status": {
+          "type": ["string", "null"],
+          "enum": [null, "worker_error", "replay_failed", "crashed", "timeout"]
+        },
+        "failure_message": {"type": ["string", "null"], "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "attempt": {
+      "type": "object",
+      "required": [
+        "seed",
+        "attempt",
+        "status",
+        "exit_code",
+        "worker_pid",
+        "message",
+        "record_path",
+        "result_path",
+        "record_sha256",
+        "victory",
+        "decisions",
+        "compute_used",
+        "replay_verified"
+      ],
+      "properties": {
+        "seed": {"type": "integer"},
+        "attempt": {"type": "integer", "minimum": 1},
+        "status": {
+          "enum": ["completed", "worker_error", "replay_failed", "crashed", "timeout"]
+        },
+        "exit_code": {"type": ["integer", "null"]},
+        "worker_pid": {"type": ["integer", "null"], "minimum": 1},
+        "message": {"type": "string", "minLength": 1},
+        "record_path": {"type": "string", "minLength": 1},
+        "result_path": {"type": "string", "minLength": 1},
+        "record_sha256": {"$ref": "#/$defs/nullableDigest"},
+        "victory": {"type": ["boolean", "null"]},
+        "decisions": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "compute_used": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "replay_verified": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

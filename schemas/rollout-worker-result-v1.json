@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/rollout-worker-result-v1.json",
+  "title": "SpireShift Rollout Worker Result v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "batch_id",
+    "seed",
+    "attempt",
+    "status",
+    "worker_pid",
+    "message",
+    "record_sha256",
+    "victory",
+    "decisions",
+    "compute_used",
+    "replay_verified"
+  ],
+  "properties": {
+    "schema_version": {"const": "rollout-worker-result-v1"},
+    "batch_id": {"type": "string", "format": "uuid"},
+    "seed": {"type": "integer"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "status": {
+      "enum": ["completed", "worker_error", "replay_failed", "crashed", "timeout"]
+    },
+    "worker_pid": {"type": "integer", "minimum": 1},
+    "message": {"type": "string", "minLength": 1},
+    "record_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "victory": {"type": ["boolean", "null"]},
+    "decisions": {"type": ["integer", "null"], "minimum": 0},
+    "compute_used": {"type": ["integer", "null"], "minimum": 0},
+    "replay_verified": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}
