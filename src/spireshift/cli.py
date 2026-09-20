@@ -39,6 +39,7 @@ from spireshift.live_actions import (
     ReceiptStatus,
     default_live_state_directory,
 )
+from spireshift.live_fixture_audit import audit_live_fixture_corpus
 from spireshift.live_run import (
     LiveRunRecorder,
     LiveRunStatus,
@@ -54,6 +55,7 @@ from spireshift.runner import RunResult, run_episode
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
 DEFAULT_LIVE_MANIFEST = PROJECT_ROOT / "manifests/patches/sts2-v0.107.1-sts2mcp-55e0648.json"
+DEFAULT_LIVE_FIXTURE_CORPUS = PROJECT_ROOT / "tests/fixtures/live/public-state-corpus-v1.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -153,6 +155,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     live_verify_run.add_argument("record", type=Path)
     live_verify_run.add_argument("--output", type=Path)
+    live_audit_fixtures = live_commands.add_parser(
+        "audit-fixtures", help="Audit public-state fixtures and their exact legal-action oracles"
+    )
+    live_audit_fixtures.add_argument(
+        "corpus", type=Path, nargs="?", default=DEFAULT_LIVE_FIXTURE_CORPUS
+    )
+    live_audit_fixtures.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    live_audit_fixtures.add_argument("--output", type=Path)
     live_stop = live_commands.add_parser("stop", help="Activate the local emergency stop")
     live_stop.add_argument("--state-dir", type=Path, default=default_live_state_directory())
     live_resume = live_commands.add_parser(
@@ -281,6 +291,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _emit_json(verification.as_dict(), args.output)
                 return 0 if verification.valid else 1
             live_manifest = load_patch_manifest(args.manifest)
+            if args.live_command == "audit-fixtures":
+                fixture_audit = audit_live_fixture_corpus(args.corpus, live_manifest)
+                _emit_json(fixture_audit.as_dict(), args.output)
+                return 0 if fixture_audit.valid else 1
             if args.live_command == "snapshot":
                 if args.installation is not None:
                     installation_document: object = json.loads(

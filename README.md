@@ -73,6 +73,10 @@ The [read-only live-state adapter](docs/live-state-adapter.md) verifies the loca
 identity, projects only public state, enumerates provisional legal actions, and records any omitted
 source fields. Its network transport is localhost-only and has no write method.
 
+The checked [public-state fixture audit](docs/evidence/live-fixture-audit-v0.107.1.md) covers all 18
+actionable single-player state types in the pinned bridge and compares every projected action with an
+independent exact oracle. Run it offline with `uv run spireshift live audit-fixtures`.
+
 [Guarded live-action execution](docs/live-action-execution.md) binds every request to that exact
 snapshot and legal-action ID. A durable ledger blocks duplicates and concurrent writers, while
 timeouts and lost acknowledgements latch recovery instead of triggering an automatic retry.

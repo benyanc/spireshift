@@ -1,0 +1,901 @@
+{
+  "fixtures": [
+    {
+      "decision_family": "menu",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "menu",
+        "legal_actions": [
+          {
+            "kind": "menu_select",
+            "payload": {
+              "option": "CHARACTER_A"
+            }
+          },
+          {
+            "kind": "menu_select",
+            "payload": {
+              "option": "back"
+            }
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "menu-character-select",
+      "source": {
+        "menu_screen": "character_select",
+        "options": [
+          {
+            "enabled": true,
+            "name": "CHARACTER_A"
+          },
+          {
+            "enabled": false,
+            "name": "LOCKED_CHARACTER"
+          },
+          "back"
+        ],
+        "state_type": "menu"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "menu"
+    },
+    {
+      "decision_family": "combat",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "combat",
+        "legal_actions": [
+          {
+            "kind": "play_card",
+            "payload": {
+              "card_index": 0,
+              "target": "ENEMY_0"
+            }
+          },
+          {
+            "kind": "play_card",
+            "payload": {
+              "card_index": 0,
+              "target": "ENEMY_1"
+            }
+          },
+          {
+            "kind": "play_card",
+            "payload": {
+              "card_index": 1
+            }
+          },
+          {
+            "kind": "use_potion",
+            "payload": {
+              "slot": 0,
+              "target": "ENEMY_0"
+            }
+          },
+          {
+            "kind": "use_potion",
+            "payload": {
+              "slot": 0,
+              "target": "ENEMY_1"
+            }
+          },
+          {
+            "kind": "discard_potion",
+            "payload": {
+              "slot": 0
+            }
+          },
+          {
+            "kind": "discard_potion",
+            "payload": {
+              "slot": 1
+            }
+          },
+          {
+            "kind": "end_turn",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "combat-monster-targets-and-potions",
+      "source": {
+        "battle": {
+          "enemies": [
+            {
+              "entity_id": "ENEMY_0"
+            },
+            {
+              "entity_id": "ENEMY_1"
+            }
+          ],
+          "is_play_phase": true
+        },
+        "player": {
+          "hand": [
+            {
+              "can_play": true,
+              "index": 0,
+              "target_type": "AnyEnemy"
+            },
+            {
+              "can_play": true,
+              "index": 1,
+              "target_type": "Self"
+            },
+            {
+              "can_play": false,
+              "index": 2,
+              "target_type": "AnyEnemy"
+            }
+          ],
+          "potions": [
+            {
+              "can_use_in_combat": true,
+              "slot": 0,
+              "target_type": "AnyEnemy"
+            },
+            {
+              "can_use_in_combat": false,
+              "slot": 1,
+              "target_type": "None"
+            }
+          ]
+        },
+        "state_type": "monster"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "monster"
+    },
+    {
+      "decision_family": "combat",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "combat",
+        "legal_actions": [
+          {
+            "kind": "end_turn",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "combat-elite",
+      "source": {
+        "battle": {
+          "enemies": [
+            {
+              "entity_id": "ELITE_0"
+            }
+          ],
+          "is_play_phase": true
+        },
+        "player": {
+          "hand": []
+        },
+        "state_type": "elite"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "elite"
+    },
+    {
+      "decision_family": "combat",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "combat",
+        "legal_actions": [
+          {
+            "kind": "play_card",
+            "payload": {
+              "card_index": 3
+            }
+          },
+          {
+            "kind": "end_turn",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "combat-boss",
+      "source": {
+        "battle": {
+          "enemies": [
+            {
+              "entity_id": "BOSS_0"
+            }
+          ],
+          "is_play_phase": true
+        },
+        "player": {
+          "hand": [
+            {
+              "can_play": true,
+              "index": 3,
+              "target_type": "RandomEnemy"
+            }
+          ]
+        },
+        "state_type": "boss"
+      },
+      "source_id": "sts2mcp-contract-55e0648",
+      "state_type": "boss"
+    },
+    {
+      "decision_family": "combat_selection",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "combat_selection",
+        "legal_actions": [
+          {
+            "kind": "combat_select_card",
+            "payload": {
+              "card_index": 0
+            }
+          },
+          {
+            "kind": "combat_select_card",
+            "payload": {
+              "card_index": 1
+            }
+          },
+          {
+            "kind": "combat_confirm_selection",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "combat-hand-selection",
+      "source": {
+        "hand_select": {
+          "can_confirm": true,
+          "cards": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            }
+          ]
+        },
+        "state_type": "hand_select"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "hand_select"
+    },
+    {
+      "decision_family": "map",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "path",
+        "legal_actions": [
+          {
+            "kind": "choose_map_node",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "choose_map_node",
+            "payload": {
+              "index": 2
+            }
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "map-path-choice",
+      "source": {
+        "map": {
+          "next_options": [
+            {
+              "index": 0
+            },
+            {
+              "index": 2
+            }
+          ]
+        },
+        "state_type": "map"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "map"
+    },
+    {
+      "decision_family": "rewards",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "reward",
+        "legal_actions": [
+          {
+            "kind": "claim_reward",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "claim_reward",
+            "payload": {
+              "index": 1
+            }
+          },
+          {
+            "kind": "proceed",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "combat-rewards",
+      "source": {
+        "rewards": {
+          "can_proceed": true,
+          "items": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            }
+          ]
+        },
+        "state_type": "rewards"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "rewards"
+    },
+    {
+      "decision_family": "rewards",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "reward",
+        "legal_actions": [
+          {
+            "kind": "select_card_reward",
+            "payload": {
+              "card_index": 0
+            }
+          },
+          {
+            "kind": "select_card_reward",
+            "payload": {
+              "card_index": 1
+            }
+          },
+          {
+            "kind": "skip_card_reward",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "card-reward",
+      "source": {
+        "card_reward": {
+          "can_skip": true,
+          "cards": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            }
+          ]
+        },
+        "state_type": "card_reward"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "card_reward"
+    },
+    {
+      "decision_family": "event",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "event",
+        "legal_actions": [
+          {
+            "kind": "choose_event_option",
+            "payload": {
+              "index": 0
+            }
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "event-options",
+      "source": {
+        "event": {
+          "in_dialogue": false,
+          "options": [
+            {
+              "index": 0,
+              "is_locked": false,
+              "was_chosen": false
+            },
+            {
+              "index": 1,
+              "is_locked": true,
+              "was_chosen": false
+            },
+            {
+              "index": 2,
+              "is_locked": false,
+              "was_chosen": true
+            }
+          ]
+        },
+        "state_type": "event"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "event"
+    },
+    {
+      "decision_family": "event",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "event",
+        "legal_actions": [
+          {
+            "kind": "advance_dialogue",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "event-dialogue",
+      "source": {
+        "event": {
+          "in_dialogue": true,
+          "options": []
+        },
+        "state_type": "event"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "event"
+    },
+    {
+      "decision_family": "rest_site",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "rest_site",
+        "legal_actions": [
+          {
+            "kind": "choose_rest_option",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "proceed",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "rest-site-options",
+      "source": {
+        "rest_site": {
+          "can_proceed": true,
+          "options": [
+            {
+              "index": 0,
+              "is_enabled": true
+            },
+            {
+              "index": 1,
+              "is_enabled": false
+            }
+          ]
+        },
+        "state_type": "rest_site"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "rest_site"
+    },
+    {
+      "decision_family": "shop",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "shop",
+        "legal_actions": [
+          {
+            "kind": "shop_purchase",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "proceed",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "merchant-inventory",
+      "source": {
+        "shop": {
+          "can_proceed": false,
+          "items": [
+            {
+              "can_afford": true,
+              "index": 0,
+              "is_stocked": true
+            },
+            {
+              "can_afford": false,
+              "index": 1,
+              "is_stocked": true
+            },
+            {
+              "can_afford": true,
+              "index": 2,
+              "is_stocked": false
+            }
+          ]
+        },
+        "state_type": "shop"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "shop"
+    },
+    {
+      "decision_family": "shop",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "shop",
+        "legal_actions": [
+          {
+            "kind": "shop_purchase",
+            "payload": {
+              "index": 4
+            }
+          },
+          {
+            "kind": "proceed",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "fake-merchant-inventory",
+      "source": {
+        "fake_merchant": {
+          "shop": {
+            "can_proceed": true,
+            "items": [
+              {
+                "can_afford": true,
+                "index": 4,
+                "is_stocked": true
+              }
+            ]
+          }
+        },
+        "state_type": "fake_merchant"
+      },
+      "source_id": "sts2mcp-contract-55e0648",
+      "state_type": "fake_merchant"
+    },
+    {
+      "decision_family": "relic_choice",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "treasure",
+        "legal_actions": [
+          {
+            "kind": "claim_treasure_relic",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "claim_treasure_relic",
+            "payload": {
+              "index": 1
+            }
+          },
+          {
+            "kind": "proceed",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "treasure-relic-choice",
+      "source": {
+        "state_type": "treasure",
+        "treasure": {
+          "can_proceed": true,
+          "relics": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            }
+          ]
+        }
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "treasure"
+    },
+    {
+      "decision_family": "card_selection",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "card_selection",
+        "legal_actions": [
+          {
+            "kind": "select_card",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "select_card",
+            "payload": {
+              "index": 1
+            }
+          },
+          {
+            "kind": "confirm_selection",
+            "payload": {}
+          },
+          {
+            "kind": "cancel_selection",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "card-selection-overlay",
+      "source": {
+        "card_select": {
+          "can_cancel": true,
+          "can_confirm": true,
+          "cards": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            }
+          ]
+        },
+        "state_type": "card_select"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "card_select"
+    },
+    {
+      "decision_family": "card_selection",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "card_selection",
+        "legal_actions": [
+          {
+            "kind": "select_bundle",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "select_bundle",
+            "payload": {
+              "index": 1
+            }
+          },
+          {
+            "kind": "confirm_bundle_selection",
+            "payload": {}
+          },
+          {
+            "kind": "cancel_bundle_selection",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "bundle-selection-overlay",
+      "source": {
+        "bundle_select": {
+          "bundles": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            }
+          ],
+          "can_cancel": true,
+          "can_confirm": true
+        },
+        "state_type": "bundle_select"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "bundle_select"
+    },
+    {
+      "decision_family": "relic_choice",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "relic_selection",
+        "legal_actions": [
+          {
+            "kind": "select_relic",
+            "payload": {
+              "index": 0
+            }
+          },
+          {
+            "kind": "select_relic",
+            "payload": {
+              "index": 1
+            }
+          },
+          {
+            "kind": "select_relic",
+            "payload": {
+              "index": 2
+            }
+          },
+          {
+            "kind": "skip_relic_selection",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "boss-relic-selection-overlay",
+      "source": {
+        "relic_select": {
+          "can_skip": true,
+          "relics": [
+            {
+              "index": 0
+            },
+            {
+              "index": 1
+            },
+            {
+              "index": 2
+            }
+          ]
+        },
+        "state_type": "relic_select"
+      },
+      "source_id": "sts2mcp-contract-55e0648",
+      "state_type": "relic_select"
+    },
+    {
+      "decision_family": "event",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "mini_game",
+        "legal_actions": [
+          {
+            "kind": "crystal_sphere_set_tool",
+            "payload": {
+              "tool": "big"
+            }
+          },
+          {
+            "kind": "crystal_sphere_set_tool",
+            "payload": {
+              "tool": "small"
+            }
+          },
+          {
+            "kind": "crystal_sphere_click_cell",
+            "payload": {
+              "x": 4,
+              "y": 7
+            }
+          },
+          {
+            "kind": "crystal_sphere_click_cell",
+            "payload": {
+              "x": 5,
+              "y": 7
+            }
+          },
+          {
+            "kind": "crystal_sphere_proceed",
+            "payload": {}
+          }
+        ],
+        "omitted_source_paths": [
+          "source.crystal_sphere.cells[0].is_hidden->is_revealed",
+          "source.crystal_sphere.cells[1].is_hidden->is_revealed"
+        ]
+      },
+      "fixture_id": "crystal-sphere",
+      "source": {
+        "crystal_sphere": {
+          "can_proceed": true,
+          "can_use_big_tool": true,
+          "can_use_small_tool": true,
+          "cells": [
+            {
+              "is_hidden": true,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "is_hidden": false,
+              "x": 1,
+              "y": 0
+            }
+          ],
+          "clickable_cells": [
+            {
+              "x": 4,
+              "y": 7
+            },
+            {
+              "x": 5,
+              "y": 7
+            }
+          ]
+        },
+        "state_type": "crystal_sphere"
+      },
+      "source_id": "sts2mcp-contract-55e0648",
+      "state_type": "crystal_sphere"
+    },
+    {
+      "decision_family": "terminal",
+      "expected": {
+        "action_coverage_status": "ready",
+        "decision_type": "terminal",
+        "legal_actions": [
+          {
+            "kind": "menu_select",
+            "payload": {
+              "option": "main_menu"
+            }
+          }
+        ],
+        "omitted_source_paths": []
+      },
+      "fixture_id": "terminal-defeat",
+      "source": {
+        "game_over": {
+          "message": "Run ended.",
+          "options": [
+            "main_menu"
+          ]
+        },
+        "player": {
+          "hp": 0
+        },
+        "state_type": "game_over"
+      },
+      "source_id": "acceptance-run-sanitized",
+      "state_type": "game_over"
+    }
+  ],
+  "ruleset": {
+    "bridge_revision": "55e064850a68f3b4cde7e5fd525bf9b2dec4e885",
+    "bridge_version": "0.4.0",
+    "manifest_id": "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd",
+    "patch_id": "sts2-v0.107.1-59260271"
+  },
+  "schema_version": "live-fixture-corpus-v1",
+  "sources": [
+    {
+      "description": "Minimal public shapes derived from the accepted menu-to-terminal run and captured merchant state; game text, profile data, and irrelevant values were removed.",
+      "kind": "sanitized_live_shape",
+      "reference": "docs/evidence/live-fixture-audit-v0.107.1.md",
+      "source_id": "acceptance-run-sanitized"
+    },
+    {
+      "description": "Rare screen shapes taken from the documentation and state builder at the exact pinned bridge revision.",
+      "kind": "pinned_bridge_contract",
+      "reference": "https://github.com/Gennadiyev/STS2MCP/tree/55e064850a68f3b4cde7e5fd525bf9b2dec4e885",
+      "source_id": "sts2mcp-contract-55e0648"
+    }
+  ]
+}

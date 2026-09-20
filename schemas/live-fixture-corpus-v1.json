@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/live-fixture-corpus-v1.json",
+  "title": "SpireShift Audited Live Fixture Corpus v1",
+  "type": "object",
+  "required": ["schema_version", "ruleset", "sources", "fixtures"],
+  "properties": {
+    "schema_version": {"const": "live-fixture-corpus-v1"},
+    "ruleset": {
+      "type": "object",
+      "required": ["manifest_id", "patch_id", "bridge_version", "bridge_revision"],
+      "properties": {
+        "manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "patch_id": {"type": "string", "minLength": 1},
+        "bridge_version": {"type": "string", "minLength": 1},
+        "bridge_revision": {"type": "string", "pattern": "^[a-f0-9]{40}$"}
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source_id", "kind", "description"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["sanitized_live_shape", "pinned_bridge_contract"]},
+          "description": {"type": "string", "minLength": 1},
+          "reference": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "fixtures": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "fixture_id",
+          "state_type",
+          "decision_family",
+          "source_id",
+          "source",
+          "expected"
+        ],
+        "properties": {
+          "fixture_id": {"type": "string", "minLength": 1},
+          "state_type": {"type": "string", "minLength": 1},
+          "decision_family": {"type": "string", "minLength": 1},
+          "source_id": {"type": "string", "minLength": 1},
+          "source": {"type": "object"},
+          "expected": {
+            "type": "object",
+            "required": [
+              "decision_type",
+              "action_coverage_status",
+              "legal_actions",
+              "omitted_source_paths"
+            ],
+            "properties": {
+              "decision_type": {"type": "string", "minLength": 1},
+              "action_coverage_status": {"const": "ready"},
+              "legal_actions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["kind", "payload"],
+                  "properties": {
+                    "kind": {"type": "string", "minLength": 1},
+                    "payload": {"type": "object"}
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "omitted_source_paths": {
+                "type": "array",
+                "items": {"type": "string", "minLength": 1}
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
