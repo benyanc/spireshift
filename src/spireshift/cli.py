@@ -51,6 +51,7 @@ from spireshift.live_run import (
 )
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
+from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -214,6 +215,26 @@ def build_parser() -> argparse.ArgumentParser:
 
     verify = subparsers.add_parser("verify", help="Alias for deterministic replay verification")
     verify.add_argument("path", type=Path)
+
+    rollout = subparsers.add_parser("rollout", help="Run and audit isolated full-run workers")
+    rollout_commands = rollout.add_subparsers(dest="rollout_command", required=True)
+    rollout_run = rollout_commands.add_parser(
+        "run-mock", help="Launch a parallel seeded mock rollout batch"
+    )
+    seed_selection = rollout_run.add_mutually_exclusive_group()
+    seed_selection.add_argument("--seeds", type=int, nargs="+")
+    seed_selection.add_argument("--episodes", type=int, default=100)
+    rollout_run.add_argument("--seed-start", type=int, default=0)
+    rollout_run.add_argument("--workers", type=int, default=4)
+    rollout_run.add_argument("--maximum-attempts", type=int, default=2)
+    rollout_run.add_argument("--worker-timeout", type=float, default=120.0)
+    rollout_run.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    rollout_run.add_argument("--output-dir", type=Path)
+    rollout_replay = rollout_commands.add_parser(
+        "replay", help="Verify every completed record and aggregate in a rollout batch"
+    )
+    rollout_replay.add_argument("report", type=Path)
+    rollout_replay.add_argument("--output", type=Path)
 
     benchmark = subparsers.add_parser("benchmark", help="Run the mock fixed-seed benchmark")
     benchmark.add_argument("--episodes", type=int, default=100)
@@ -455,6 +476,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         replay_result = verify_mock_replay(args.path)
         print(json.dumps(asdict(replay_result), indent=2))
         return 0 if replay_result.valid else 1
+    if args.command == "rollout":
+        if args.rollout_command == "replay":
+            rollout_replay_result = verify_rollout_batch(args.report)
+            _emit_json(rollout_replay_result.as_dict(), args.output)
+            return 0 if rollout_replay_result.valid else 1
+        seeds = (
+            tuple(args.seeds)
+            if args.seeds is not None
+            else tuple(range(args.seed_start, args.seed_start + args.episodes))
+        )
+        output_directory = args.output_dir or _default_rollout_directory()
+        try:
+            rollout_batch_result = run_mock_rollout_batch(
+                seeds=seeds,
+                workers=args.workers,
+                maximum_attempts=args.maximum_attempts,
+                worker_timeout_seconds=args.worker_timeout,
+                output_directory=output_directory,
+                objective_config=args.objective_config,
+            )
+        except (OSError, ValueError) as error:
+            _emit_json({"status": "error", "error": str(error)}, None)
+            return 1
+        _emit_json(rollout_batch_result.report, None)
+        return 0 if rollout_batch_result.successful else 1
     if args.command == "benchmark":
         if args.episodes <= 0:
             raise SystemExit("--episodes must be positive")
@@ -503,6 +549,13 @@ def _default_live_run_record() -> Path:
 
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
     return PROJECT_ROOT / f"artifacts/live/runs/live-run-{stamp}.jsonl"
+
+
+def _default_rollout_directory() -> Path:
+    from datetime import UTC, datetime
+
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
+    return PROJECT_ROOT / f"artifacts/rollouts/mock-{stamp}"
 
 
 def _check() -> int:

@@ -8,6 +8,9 @@ patch manifest -> environment adapter -> public observation -> legal actions
                                      -> policy/search -> verified action
                                      -> transition -> append-only recorder
                                      -> identity-checked replay and evaluation
+
+seed batch -> bounded coordinator -> isolated run workers -> immutable attempt directories
+                               -> retry/final outcome -> denominator-safe batch report
 ```
 
 Every environment exposes an immutable ruleset identity derived from its patch manifest. The runner
@@ -50,6 +53,18 @@ The action boundary accepts only a request ID, manifest and patch identity, pred
 and an advertised action ID. It writes intent durably before POST delivery, never redelivers a
 request ID, serializes writers, and records uncertain outcomes as recovery-blocking receipts.
 Successful delivery is bound to a stable successor snapshot.
+
+## Rollout execution
+
+The batch coordinator creates one subprocess per seeded attempt and limits active workers. Attempt
+directories and their JSONL records use exclusive creation, so a retry receives a new path and
+cannot erase the failure that caused it. A completed attempt is admitted only after deterministic
+replay in the worker and again in the coordinator. Batch replay ties each record back to the frozen
+ruleset, objective, policy, controller, worker result, digest, and aggregate outcome.
+
+Requested seeds define the benchmark denominator before any worker starts. Final crashes and
+timeouts remain failed outcomes in that denominator, while recovered attempts are reported
+separately. See [parallel rollout infrastructure](rollout-infrastructure.md).
 
 ## Search and models
 

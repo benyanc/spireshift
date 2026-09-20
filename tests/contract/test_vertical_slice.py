@@ -8,6 +8,7 @@ from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVicto
 from spireshift.core.objective import load_objective
 from spireshift.recording.jsonl import JsonlRecorder, load_records
 from spireshift.replay import verify_mock_replay
+from spireshift.rollouts import verify_rollout_batch
 from spireshift.runner import run_episode
 
 
@@ -66,6 +67,28 @@ def test_replay_rejects_a_different_ruleset(tmp_path: Path) -> None:
     assert replay.message == "Ruleset identity mismatch"
 
 
+def test_replay_rejects_a_tampered_transition_even_when_hashes_are_unchanged(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "run.jsonl"
+    run_episode(
+        environment=MockSpireEnvironment(),
+        policy=TerminalVictoryPolicy(),
+        budget_controller=PolicyOnlyBudgetController(),
+        recorder=JsonlRecorder(output),
+        objective=load_objective(Path("configs/default.toml")),
+        seed=7,
+    )
+    records = load_records(output)
+    step = next(record for record in records if record["record_type"] == "step")
+    step["transition"]["action"]["payload"] = {"risk": "forged"}
+    output.write_text("".join(json.dumps(record) + "\n" for record in records))
+
+    replay = verify_mock_replay(output)
+    assert not replay.valid
+    assert replay.message == "Transition mismatch at decision 0"
+
+
 def test_run_rejects_environment_patch_identity_drift(tmp_path: Path) -> None:
     environment = MockSpireEnvironment()
     environment.patch_id = "unexpected-patch"
@@ -79,3 +102,10 @@ def test_run_rejects_environment_patch_identity_drift(tmp_path: Path) -> None:
             objective=load_objective(Path("configs/default.toml")),
             seed=7,
         )
+
+
+def test_checked_parallel_rollout_fixture_replays() -> None:
+    replay = verify_rollout_batch(Path("tests/fixtures/rollout/mock-batch-v1/rollout-report.json"))
+    assert replay.valid, replay.errors
+    assert replay.runs == 2
+    assert replay.verified_runs == 2

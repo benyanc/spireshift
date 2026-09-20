@@ -22,6 +22,12 @@ Every run records:
 - terminal result;
 - crashes and unsupported decisions.
 
+Seed sets and the benchmark denominator are frozen before workers launch. A seed remains in the
+denominator when its retries end in a crash, timeout, malformed artifact, or failed replay. Reports
+must expose completion rate, failed attempts, worker crashes, and recovered runs alongside victory
+rate. Completed runs count only after their immutable records pass exact transition replay. The
+[parallel rollout protocol](rollout-infrastructure.md) implements these rules for the mock backend.
+
 ## Splits
 
 Training and evaluation are split by complete run and seed. Adjacent decisions from one run may not

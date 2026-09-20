@@ -1,0 +1,14 @@
+{
+  "attempt": 1,
+  "batch_id": "00000000-0000-4000-8000-000000000019",
+  "compute_used": 1,
+  "decisions": 1,
+  "message": "Replay verified",
+  "record_sha256": "c3dbf08c14507140b7bdcb69f5ea018a37c25d548c37be1426c35ca04382685c",
+  "replay_verified": true,
+  "schema_version": "rollout-worker-result-v1",
+  "seed": 1,
+  "status": "completed",
+  "victory": false,
+  "worker_pid": 19001
+}
