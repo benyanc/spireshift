@@ -32,6 +32,7 @@ def _registry() -> Registry[Any]:
         ("observation-v1.json", "observation-v1.json"),
         ("action-v1.json", "action-v1.json"),
         ("transition-v1.json", "transition-v1.json"),
+        ("game-installation-v1.json", "game-installation-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:
