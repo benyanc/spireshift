@@ -40,6 +40,7 @@ def _registry() -> Registry[Any]:
         ("live-snapshot-v1.json", "live-snapshot-v1.json"),
         ("bound-action-v1.json", "bound-action-v1.json"),
         ("action-receipt-v1.json", "action-receipt-v1.json"),
+        ("live-fixture-corpus-v1.json", "live/public-state-corpus-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:
@@ -53,6 +54,13 @@ def test_external_conformance_evidence_conforms_to_schema() -> None:
         registry=_registry(),
     )
     validator.validate(_load(Path("docs/evidence/evangambit-v0.107.1-conformance.json")))
+
+
+def test_live_fixture_audit_evidence_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "live-fixture-audit-v1.json"), registry=_registry()
+    )
+    validator.validate(_load(Path("docs/evidence/live-fixture-audit-v0.107.1.json")))
 
 
 def test_observation_rejects_unmarked_privileged_state() -> None:

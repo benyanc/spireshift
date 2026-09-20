@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/live-fixture-audit-v1.json",
+  "title": "SpireShift Live Fixture Audit v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "valid",
+    "corpus_path",
+    "manifest_id",
+    "bridge_version",
+    "summary",
+    "covered_state_types",
+    "covered_decision_families",
+    "results",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": {"const": "live-fixture-audit-v1"},
+    "valid": {"type": "boolean"},
+    "corpus_path": {"type": "string", "minLength": 1},
+    "manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "bridge_version": {"type": "string", "minLength": 1},
+    "summary": {
+      "type": "object",
+      "required": ["fixtures", "passed", "failed"],
+      "properties": {
+        "fixtures": {"type": "integer", "minimum": 0},
+        "passed": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "covered_state_types": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "covered_decision_families": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "fixture_id",
+          "state_type",
+          "decision_family",
+          "valid",
+          "action_count",
+          "errors"
+        ],
+        "properties": {
+          "fixture_id": {"type": "string", "minLength": 1},
+          "state_type": {"type": "string", "minLength": 1},
+          "decision_family": {"type": "string", "minLength": 1},
+          "valid": {"type": "boolean"},
+          "action_count": {"type": "integer", "minimum": 0},
+          "errors": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "additionalProperties": false
+}

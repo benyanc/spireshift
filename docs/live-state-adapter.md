@@ -52,7 +52,7 @@ closed until the field is audited. Seed-valued fields are omitted and recorded. 
 future-state, and draw-order fields fail projection. The bridge's public `is_hidden` cell marker is
 renamed to `is_revealed`, so the public observation cannot be mistaken for privileged hidden state.
 
-## Replaying a source fixture
+## Replaying and auditing source fixtures
 
 Projection can be tested without running the game:
 
@@ -65,8 +65,19 @@ uv run spireshift live project \
 The checked source fixture is synthetic and contains no game asset, save, assembly, or raw captured
 content. Projecting it repeatedly produces the same observation hash and legal-action IDs.
 
-The current action enumeration implements the bridge's documented screen shapes but remains
-provisional. [Issue #15](https://github.com/benyanc/spireshift/issues/15) audits real public fixtures
-for every screen, and [issue #18](https://github.com/benyanc/spireshift/issues/18) is the gate for
-complete full-run legal-action coverage. `partial`, `settling`, and `unsupported` states remain
-visible rather than receiving a heuristic fallback.
+The versioned fixture corpus can be audited offline:
+
+```bash
+uv run spireshift live audit-fixtures
+```
+
+The corpus covers every actionable single-player state type exposed by the pinned bridge. Its
+live-derived fixtures are minimized to public decision shape, and its rare contract-derived fixtures
+are identified separately. Each carries an independent exact legal-action oracle. The audit checks
+ruleset identity, complete screen-family coverage, deterministic projection, information-boundary
+accounting, and exact legal actions. The method and checked result are recorded in the
+[v0.107.1 fixture evidence](evidence/live-fixture-audit-v0.107.1.md).
+
+[Issue #18](https://github.com/benyanc/spireshift/issues/18) remains the gate for complete full-run
+action delivery and unsupported-decision accounting. `partial`, `settling`, and `unsupported` states
+remain visible rather than receiving a heuristic fallback.

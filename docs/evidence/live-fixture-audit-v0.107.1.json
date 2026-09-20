@@ -1,0 +1,200 @@
+{
+  "schema_version": "live-fixture-audit-v1",
+  "valid": true,
+  "corpus_path": "tests/fixtures/live/public-state-corpus-v1.json",
+  "manifest_id": "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd",
+  "bridge_version": "0.4.0",
+  "summary": {
+    "fixtures": 19,
+    "passed": 19,
+    "failed": 0
+  },
+  "covered_state_types": [
+    "boss",
+    "bundle_select",
+    "card_reward",
+    "card_select",
+    "crystal_sphere",
+    "elite",
+    "event",
+    "fake_merchant",
+    "game_over",
+    "hand_select",
+    "map",
+    "menu",
+    "monster",
+    "relic_select",
+    "rest_site",
+    "rewards",
+    "shop",
+    "treasure"
+  ],
+  "covered_decision_families": [
+    "card_selection",
+    "combat",
+    "combat_selection",
+    "event",
+    "map",
+    "menu",
+    "relic_choice",
+    "rest_site",
+    "rewards",
+    "shop",
+    "terminal"
+  ],
+  "results": [
+    {
+      "fixture_id": "menu-character-select",
+      "state_type": "menu",
+      "decision_family": "menu",
+      "valid": true,
+      "action_count": 2,
+      "errors": []
+    },
+    {
+      "fixture_id": "combat-monster-targets-and-potions",
+      "state_type": "monster",
+      "decision_family": "combat",
+      "valid": true,
+      "action_count": 8,
+      "errors": []
+    },
+    {
+      "fixture_id": "combat-elite",
+      "state_type": "elite",
+      "decision_family": "combat",
+      "valid": true,
+      "action_count": 1,
+      "errors": []
+    },
+    {
+      "fixture_id": "combat-boss",
+      "state_type": "boss",
+      "decision_family": "combat",
+      "valid": true,
+      "action_count": 2,
+      "errors": []
+    },
+    {
+      "fixture_id": "combat-hand-selection",
+      "state_type": "hand_select",
+      "decision_family": "combat_selection",
+      "valid": true,
+      "action_count": 3,
+      "errors": []
+    },
+    {
+      "fixture_id": "map-path-choice",
+      "state_type": "map",
+      "decision_family": "map",
+      "valid": true,
+      "action_count": 2,
+      "errors": []
+    },
+    {
+      "fixture_id": "combat-rewards",
+      "state_type": "rewards",
+      "decision_family": "rewards",
+      "valid": true,
+      "action_count": 3,
+      "errors": []
+    },
+    {
+      "fixture_id": "card-reward",
+      "state_type": "card_reward",
+      "decision_family": "rewards",
+      "valid": true,
+      "action_count": 3,
+      "errors": []
+    },
+    {
+      "fixture_id": "event-options",
+      "state_type": "event",
+      "decision_family": "event",
+      "valid": true,
+      "action_count": 1,
+      "errors": []
+    },
+    {
+      "fixture_id": "event-dialogue",
+      "state_type": "event",
+      "decision_family": "event",
+      "valid": true,
+      "action_count": 1,
+      "errors": []
+    },
+    {
+      "fixture_id": "rest-site-options",
+      "state_type": "rest_site",
+      "decision_family": "rest_site",
+      "valid": true,
+      "action_count": 2,
+      "errors": []
+    },
+    {
+      "fixture_id": "merchant-inventory",
+      "state_type": "shop",
+      "decision_family": "shop",
+      "valid": true,
+      "action_count": 2,
+      "errors": []
+    },
+    {
+      "fixture_id": "fake-merchant-inventory",
+      "state_type": "fake_merchant",
+      "decision_family": "shop",
+      "valid": true,
+      "action_count": 2,
+      "errors": []
+    },
+    {
+      "fixture_id": "treasure-relic-choice",
+      "state_type": "treasure",
+      "decision_family": "relic_choice",
+      "valid": true,
+      "action_count": 3,
+      "errors": []
+    },
+    {
+      "fixture_id": "card-selection-overlay",
+      "state_type": "card_select",
+      "decision_family": "card_selection",
+      "valid": true,
+      "action_count": 4,
+      "errors": []
+    },
+    {
+      "fixture_id": "bundle-selection-overlay",
+      "state_type": "bundle_select",
+      "decision_family": "card_selection",
+      "valid": true,
+      "action_count": 4,
+      "errors": []
+    },
+    {
+      "fixture_id": "boss-relic-selection-overlay",
+      "state_type": "relic_select",
+      "decision_family": "relic_choice",
+      "valid": true,
+      "action_count": 4,
+      "errors": []
+    },
+    {
+      "fixture_id": "crystal-sphere",
+      "state_type": "crystal_sphere",
+      "decision_family": "event",
+      "valid": true,
+      "action_count": 5,
+      "errors": []
+    },
+    {
+      "fixture_id": "terminal-defeat",
+      "state_type": "game_over",
+      "decision_family": "terminal",
+      "valid": true,
+      "action_count": 1,
+      "errors": []
+    }
+  ],
+  "errors": []
+}
