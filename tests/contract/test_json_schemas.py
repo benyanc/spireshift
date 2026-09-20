@@ -34,11 +34,22 @@ def _registry() -> Registry[Any]:
         ("transition-v1.json", "transition-v1.json"),
         ("game-installation-v1.json", "game-installation-v1.json"),
         ("patch-manifest-v1.json", "patch-manifest-v1.json"),
+        ("conformance-report-v1.json", "conformance-report-v1.json"),
+        ("conformance-trace-v1.json", "conformance-trace-v1.json"),
+        ("differential-report-v1.json", "differential-report-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:
     validator = Draft202012Validator(_load(SCHEMA_DIR / schema_name), registry=_registry())
     validator.validate(_load(FIXTURE_DIR / fixture_name))
+
+
+def test_external_conformance_evidence_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "external-conformance-evidence-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path("docs/evidence/evangambit-v0.107.1-conformance.json")))
 
 
 def test_observation_rejects_unmarked_privileged_state() -> None:

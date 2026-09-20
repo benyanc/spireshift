@@ -4,8 +4,8 @@ import hashlib
 import json
 import random
 from collections.abc import Sequence
-from dataclasses import dataclass
-from typing import Any
+from dataclasses import dataclass, replace
+from typing import Any, Self
 
 from spireshift.core.manifest import PatchManifest, freeze_patch_manifest, sha256_digest
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
@@ -108,6 +108,15 @@ class MockSpireEnvironment:
                 LegalAction("elite_path", "choose_path", {"risk": "high"}),
             )
         return (LegalAction("face_boss", "combat", {}),)
+
+    def clone(self, *, resample_hidden: bool, seed: int | None = None) -> Self:
+        cloned = type(self)()
+        cloned._state = replace(self._state)
+        if resample_hidden:
+            cloned._rng = random.Random(0 if seed is None else seed)
+        else:
+            cloned._rng.setstate(self._rng.getstate())
+        return cloned
 
     def step(self, action: LegalAction) -> Transition:
         observation = self._observation()

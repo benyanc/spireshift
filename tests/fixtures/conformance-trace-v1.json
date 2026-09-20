@@ -1,0 +1,152 @@
+{
+  "schema_version": "conformance-trace-v1",
+  "fixture_id": "mock-reference",
+  "ruleset": {
+    "manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "patch_id": "mock-v1",
+    "admission_status": "test_only",
+    "engine": {
+      "component_id": "spireshift-mock-engine",
+      "version": "1",
+      "revision": "mock-rules-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+      }
+    },
+    "adapter": {
+      "component_id": "spireshift-mock-adapter",
+      "version": "1",
+      "revision": "observation-v1/action-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "060477507680dd27b84065fd7f441fe9aa7b671349350cbb030d44c1a5837f20"
+      }
+    },
+    "mechanics": [
+      {
+        "artifact_id": "mock-terminal-victory-rules",
+        "kind": "mechanics-bundle",
+        "version": "1",
+        "platform": null,
+        "architecture": null,
+        "digest": {
+          "algorithm": "sha256",
+          "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+        },
+        "size_bytes": 282
+      }
+    ],
+    "interface": {
+      "observation_schema": "observation-v1",
+      "action_schema": "action-v1",
+      "information_policy_id": "public-state-v1"
+    }
+  },
+  "seed": 7,
+  "steps": [
+    {
+      "decision_index": 0,
+      "observation": {
+        "schema_version": "observation-v1",
+        "patch_id": "mock-v1",
+        "decision_type": "path",
+        "public_state": {
+          "floor": 0,
+          "strength": 0,
+          "terminal": false,
+          "victory": false
+        },
+        "state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8"
+      },
+      "legal_actions": [
+        {
+          "action_id": "safe_path",
+          "kind": "choose_path",
+          "payload": {
+            "risk": "low"
+          }
+        },
+        {
+          "action_id": "elite_path",
+          "kind": "choose_path",
+          "payload": {
+            "risk": "high"
+          }
+        }
+      ],
+      "selected_action": {
+        "action_id": "elite_path",
+        "kind": "choose_path",
+        "payload": {
+          "risk": "high"
+        }
+      },
+      "next_observation": {
+        "schema_version": "observation-v1",
+        "patch_id": "mock-v1",
+        "decision_type": "combat",
+        "public_state": {
+          "floor": 1,
+          "strength": 1,
+          "terminal": false,
+          "victory": false
+        },
+        "state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171"
+      },
+      "reward": 0.0,
+      "terminal": false,
+      "victory": false
+    },
+    {
+      "decision_index": 1,
+      "observation": {
+        "schema_version": "observation-v1",
+        "patch_id": "mock-v1",
+        "decision_type": "combat",
+        "public_state": {
+          "floor": 1,
+          "strength": 1,
+          "terminal": false,
+          "victory": false
+        },
+        "state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171"
+      },
+      "legal_actions": [
+        {
+          "action_id": "face_boss",
+          "kind": "combat",
+          "payload": {}
+        }
+      ],
+      "selected_action": {
+        "action_id": "face_boss",
+        "kind": "combat",
+        "payload": {}
+      },
+      "next_observation": {
+        "schema_version": "observation-v1",
+        "patch_id": "mock-v1",
+        "decision_type": "terminal",
+        "public_state": {
+          "floor": 1,
+          "strength": 1,
+          "terminal": true,
+          "victory": true
+        },
+        "state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a"
+      },
+      "reward": 1.0,
+      "terminal": true,
+      "victory": true
+    }
+  ],
+  "outcome": {
+    "terminal": true,
+    "victory": true,
+    "decisions": 2,
+    "final_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a"
+  }
+}

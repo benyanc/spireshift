@@ -1,0 +1,13 @@
+{
+  "schema_version": "differential-report-v1",
+  "verdict": "exact_match",
+  "reference_fixture_id": "mock-reference",
+  "candidate_fixture_id": "mock-candidate",
+  "comparability_errors": [],
+  "compared_decisions": 2,
+  "reference_decisions": 2,
+  "candidate_decisions": 2,
+  "mismatch_count": 0,
+  "divergences_truncated": false,
+  "divergences": []
+}

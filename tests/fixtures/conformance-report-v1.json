@@ -1,0 +1,134 @@
+{
+  "schema_version": "conformance-report-v1",
+  "suite_version": "environment-conformance-v1",
+  "verdict": "pass",
+  "ruleset": {
+    "manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "patch_id": "mock-v1",
+    "admission_status": "test_only",
+    "engine": {
+      "component_id": "spireshift-mock-engine",
+      "version": "1",
+      "revision": "mock-rules-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+      }
+    },
+    "adapter": {
+      "component_id": "spireshift-mock-adapter",
+      "version": "1",
+      "revision": "observation-v1/action-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "060477507680dd27b84065fd7f441fe9aa7b671349350cbb030d44c1a5837f20"
+      }
+    },
+    "mechanics": [
+      {
+        "artifact_id": "mock-terminal-victory-rules",
+        "kind": "mechanics-bundle",
+        "version": "1",
+        "platform": null,
+        "architecture": null,
+        "digest": {
+          "algorithm": "sha256",
+          "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+        },
+        "size_bytes": 282
+      }
+    ],
+    "interface": {
+      "observation_schema": "observation-v1",
+      "action_schema": "action-v1",
+      "information_policy_id": "public-state-v1"
+    }
+  },
+  "seeds": [
+    1,
+    7
+  ],
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "inconclusive": 0
+  },
+  "checks": [
+    {
+      "check_id": "identity",
+      "status": "pass",
+      "detail": "Environment, ruleset, and observation patch identities agree",
+      "metrics": {}
+    },
+    {
+      "check_id": "reset",
+      "status": "pass",
+      "detail": "Same-seed resets produce identical public states and actions",
+      "metrics": {}
+    },
+    {
+      "check_id": "legal_actions",
+      "status": "pass",
+      "detail": "Legal actions are non-empty when required, unique, serializable, and idempotent",
+      "metrics": {
+        "action_count": 2
+      }
+    },
+    {
+      "check_id": "stepping",
+      "status": "pass",
+      "detail": "A legal step preserves transition linkage and state validity",
+      "metrics": {}
+    },
+    {
+      "check_id": "illegal_action",
+      "status": "pass",
+      "detail": "Illegal actions are rejected without state mutation",
+      "metrics": {}
+    },
+    {
+      "check_id": "faithful_clone",
+      "status": "pass",
+      "detail": "Faithful clones are independent and step identically",
+      "metrics": {}
+    },
+    {
+      "check_id": "hidden_resampling",
+      "status": "pass",
+      "detail": "A resampled clone produced a different plausible successor",
+      "metrics": {
+        "divergence_step": 0,
+        "resample_seed": 17
+      }
+    },
+    {
+      "check_id": "replay",
+      "status": "pass",
+      "detail": "Recorded actions reproduce every public transition exactly",
+      "metrics": {
+        "decisions": 1
+      }
+    },
+    {
+      "check_id": "public_state_isolation",
+      "status": "pass",
+      "detail": "Public observations are serializable, self-hashed, and contain no forbidden field names",
+      "metrics": {
+        "observations": 5
+      }
+    },
+    {
+      "check_id": "terminal_reward",
+      "status": "pass",
+      "detail": "Rewards are binary and positive only on terminal victory",
+      "metrics": {
+        "seeds": 2,
+        "decisions": 3,
+        "victories": 1,
+        "losses": 1
+      }
+    }
+  ]
+}

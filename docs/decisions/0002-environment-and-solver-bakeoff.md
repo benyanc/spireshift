@@ -167,11 +167,17 @@ such.
 - `rsgcsg/STS2-headless@v1.0.1` passed 154 Node tests, six Python client tests, documentation-link
   checks, and its repository-boundary check; one proprietary integration test was skipped as
   designed.
-- Its doctor could not locate STS2 on this host. The standard Steam directory exists but is empty;
-  the current SpireShift doctor incorrectly accepts that directory without requiring an executable,
-  release manifest, or game assembly. That defect is now an explicit acceptance case for issue #3.
-  Live runtime, crash, and current-patch measurements therefore remain pending issue #3 and the
-  conformance work in issue #13.
+- SpireShift now detects the installed macOS arm64 STS2 v0.107.1/build 23811903 and binds its
+  assembly fingerprint to the pinned EvanGambit ruleset manifest.
+- At `evangambit/sts2@37e4264`, 4,801 C# tests, 31 native-boundary tests, and 420 non-skipped
+  live-fixture checks passed locally. Six legacy per-turn-hand checks were explicitly skipped. The
+  fixture inventory and limitations are preserved in
+  [the conformance evidence](../evidence/evangambit-v0.107.1-conformance.json).
+- No divergence was observed over the executed v0.107.1 capture surface. The result is conditional:
+  the captures are upstream evidence, incomplete mechanics remain documented, and the SpireShift
+  public-state adapter does not exist yet. The backend therefore remains `pending_conformance`.
+- The frozen Headless/Connector reference targets v0.111.0, so it cannot be run against the installed
+  v0.107.1 assembly as though the builds were interchangeable.
 
 ## Consequences
 

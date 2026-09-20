@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/conformance-report-v1.json",
+  "title": "SpireShift Environment Conformance Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "suite_version",
+    "verdict",
+    "ruleset",
+    "seeds",
+    "summary",
+    "checks"
+  ],
+  "properties": {
+    "schema_version": {"const": "conformance-report-v1"},
+    "suite_version": {"const": "environment-conformance-v1"},
+    "verdict": {"enum": ["pass", "conditional_pass", "fail"]},
+    "ruleset": {"$ref": "#/$defs/ruleset"},
+    "seeds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "integer"}
+    },
+    "summary": {
+      "type": "object",
+      "required": ["pass", "fail", "inconclusive"],
+      "properties": {
+        "pass": {"type": "integer", "minimum": 0},
+        "fail": {"type": "integer", "minimum": 0},
+        "inconclusive": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["check_id", "status", "detail", "metrics"],
+        "properties": {
+          "check_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pass", "fail", "inconclusive"]},
+          "detail": {"type": "string", "minLength": 1},
+          "metrics": {"type": "object"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "ruleset": {
+      "type": "object",
+      "required": [
+        "manifest_id",
+        "patch_id",
+        "admission_status",
+        "engine",
+        "adapter",
+        "mechanics",
+        "interface"
+      ],
+      "properties": {
+        "manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "patch_id": {"type": "string", "minLength": 1},
+        "admission_status": {
+          "enum": ["test_only", "pending_conformance", "admitted"]
+        },
+        "engine": {"$ref": "patch-manifest-v1.json#/$defs/component"},
+        "adapter": {"$ref": "patch-manifest-v1.json#/$defs/component"},
+        "mechanics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "patch-manifest-v1.json#/$defs/mechanics"}
+        },
+        "interface": {"$ref": "patch-manifest-v1.json#/$defs/interface"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
