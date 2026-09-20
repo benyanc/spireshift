@@ -1,0 +1,677 @@
+{
+  "schema_version": "model-input-v1",
+  "encoder_id": "mechanics-compositional-v1",
+  "ruleset_manifest_id": "sha256:cd469f5218ffab6d979f5eb43233e90fbe3d81919f6c21169b57a95cbe69a6bd",
+  "patch_id": "sts2-v0.107.1-59260271",
+  "observation_schema": "observation-v1",
+  "source_state_hash": "0b4a43751313ccfa024a59cf284f9050ba4a9053925d8e4ba04b19a6bec37c61",
+  "decision_type": "combat",
+  "state": {
+    "global_features": [
+      {
+        "path": [
+          "battle",
+          "is_play_phase"
+        ],
+        "indices": [],
+        "semantic": "capability",
+        "value_type": "boolean",
+        "numeric_value": null,
+        "categorical_value": null,
+        "boolean_value": true
+      },
+      {
+        "path": [
+          "terminal"
+        ],
+        "indices": [],
+        "semantic": "status",
+        "value_type": "boolean",
+        "numeric_value": null,
+        "categorical_value": null,
+        "boolean_value": false
+      },
+      {
+        "path": [
+          "victory"
+        ],
+        "indices": [],
+        "semantic": "status",
+        "value_type": "boolean",
+        "numeric_value": null,
+        "categorical_value": null,
+        "boolean_value": false
+      }
+    ],
+    "persistent_resources": [
+      {
+        "path": [
+          "player",
+          "potions",
+          "can_use_in_combat"
+        ],
+        "indices": [
+          0
+        ],
+        "semantic": "persistent_resource",
+        "value_type": "boolean",
+        "numeric_value": null,
+        "categorical_value": null,
+        "boolean_value": true
+      },
+      {
+        "path": [
+          "player",
+          "potions",
+          "slot"
+        ],
+        "indices": [
+          0
+        ],
+        "semantic": "persistent_resource",
+        "value_type": "numeric",
+        "numeric_value": 0.0,
+        "categorical_value": null,
+        "boolean_value": null
+      },
+      {
+        "path": [
+          "player",
+          "potions",
+          "target_type"
+        ],
+        "indices": [
+          0
+        ],
+        "semantic": "persistent_resource",
+        "value_type": "categorical",
+        "numeric_value": null,
+        "categorical_value": "AnyEnemy",
+        "boolean_value": null
+      },
+      {
+        "path": [
+          "player",
+          "potions",
+          "can_use_in_combat"
+        ],
+        "indices": [
+          1
+        ],
+        "semantic": "persistent_resource",
+        "value_type": "boolean",
+        "numeric_value": null,
+        "categorical_value": null,
+        "boolean_value": false
+      },
+      {
+        "path": [
+          "player",
+          "potions",
+          "slot"
+        ],
+        "indices": [
+          1
+        ],
+        "semantic": "persistent_resource",
+        "value_type": "numeric",
+        "numeric_value": 1.0,
+        "categorical_value": null,
+        "boolean_value": null
+      },
+      {
+        "path": [
+          "player",
+          "potions",
+          "target_type"
+        ],
+        "indices": [
+          1
+        ],
+        "semantic": "persistent_resource",
+        "value_type": "categorical",
+        "numeric_value": null,
+        "categorical_value": "None",
+        "boolean_value": null
+      }
+    ],
+    "entities": [
+      {
+        "entity_type": "enemy",
+        "path": [
+          "battle",
+          "enemies"
+        ],
+        "indices": [
+          0
+        ],
+        "features": [
+          {
+            "path": [
+              "battle",
+              "enemies",
+              "entity_id"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "identity",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "ENEMY_0",
+            "boolean_value": null
+          }
+        ]
+      },
+      {
+        "entity_type": "enemy",
+        "path": [
+          "battle",
+          "enemies"
+        ],
+        "indices": [
+          1
+        ],
+        "features": [
+          {
+            "path": [
+              "battle",
+              "enemies",
+              "entity_id"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "identity",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "ENEMY_1",
+            "boolean_value": null
+          }
+        ]
+      },
+      {
+        "entity_type": "player",
+        "path": [
+          "player"
+        ],
+        "indices": [],
+        "features": []
+      },
+      {
+        "entity_type": "card",
+        "path": [
+          "player",
+          "hand"
+        ],
+        "indices": [
+          0
+        ],
+        "features": [
+          {
+            "path": [
+              "player",
+              "hand",
+              "can_play"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "capability",
+            "value_type": "boolean",
+            "numeric_value": null,
+            "categorical_value": null,
+            "boolean_value": true
+          },
+          {
+            "path": [
+              "player",
+              "hand",
+              "index"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "locator",
+            "value_type": "numeric",
+            "numeric_value": 0.0,
+            "categorical_value": null,
+            "boolean_value": null
+          },
+          {
+            "path": [
+              "player",
+              "hand",
+              "target_type"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "status",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "AnyEnemy",
+            "boolean_value": null
+          }
+        ]
+      },
+      {
+        "entity_type": "card",
+        "path": [
+          "player",
+          "hand"
+        ],
+        "indices": [
+          1
+        ],
+        "features": [
+          {
+            "path": [
+              "player",
+              "hand",
+              "can_play"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "capability",
+            "value_type": "boolean",
+            "numeric_value": null,
+            "categorical_value": null,
+            "boolean_value": true
+          },
+          {
+            "path": [
+              "player",
+              "hand",
+              "index"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "locator",
+            "value_type": "numeric",
+            "numeric_value": 1.0,
+            "categorical_value": null,
+            "boolean_value": null
+          },
+          {
+            "path": [
+              "player",
+              "hand",
+              "target_type"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "status",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "Self",
+            "boolean_value": null
+          }
+        ]
+      },
+      {
+        "entity_type": "card",
+        "path": [
+          "player",
+          "hand"
+        ],
+        "indices": [
+          2
+        ],
+        "features": [
+          {
+            "path": [
+              "player",
+              "hand",
+              "can_play"
+            ],
+            "indices": [
+              2
+            ],
+            "semantic": "capability",
+            "value_type": "boolean",
+            "numeric_value": null,
+            "categorical_value": null,
+            "boolean_value": false
+          },
+          {
+            "path": [
+              "player",
+              "hand",
+              "index"
+            ],
+            "indices": [
+              2
+            ],
+            "semantic": "locator",
+            "value_type": "numeric",
+            "numeric_value": 2.0,
+            "categorical_value": null,
+            "boolean_value": null
+          },
+          {
+            "path": [
+              "player",
+              "hand",
+              "target_type"
+            ],
+            "indices": [
+              2
+            ],
+            "semantic": "status",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "AnyEnemy",
+            "boolean_value": null
+          }
+        ]
+      },
+      {
+        "entity_type": "potion",
+        "path": [
+          "player",
+          "potions"
+        ],
+        "indices": [
+          0
+        ],
+        "features": [
+          {
+            "path": [
+              "player",
+              "potions",
+              "can_use_in_combat"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "capability",
+            "value_type": "boolean",
+            "numeric_value": null,
+            "categorical_value": null,
+            "boolean_value": true
+          },
+          {
+            "path": [
+              "player",
+              "potions",
+              "slot"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "locator",
+            "value_type": "numeric",
+            "numeric_value": 0.0,
+            "categorical_value": null,
+            "boolean_value": null
+          },
+          {
+            "path": [
+              "player",
+              "potions",
+              "target_type"
+            ],
+            "indices": [
+              0
+            ],
+            "semantic": "status",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "AnyEnemy",
+            "boolean_value": null
+          }
+        ]
+      },
+      {
+        "entity_type": "potion",
+        "path": [
+          "player",
+          "potions"
+        ],
+        "indices": [
+          1
+        ],
+        "features": [
+          {
+            "path": [
+              "player",
+              "potions",
+              "can_use_in_combat"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "capability",
+            "value_type": "boolean",
+            "numeric_value": null,
+            "categorical_value": null,
+            "boolean_value": false
+          },
+          {
+            "path": [
+              "player",
+              "potions",
+              "slot"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "locator",
+            "value_type": "numeric",
+            "numeric_value": 1.0,
+            "categorical_value": null,
+            "boolean_value": null
+          },
+          {
+            "path": [
+              "player",
+              "potions",
+              "target_type"
+            ],
+            "indices": [
+              1
+            ],
+            "semantic": "status",
+            "value_type": "categorical",
+            "numeric_value": null,
+            "categorical_value": "None",
+            "boolean_value": null
+          }
+        ]
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_index": 0,
+      "action_kind": "play_card",
+      "features": [
+        {
+          "path": [
+            "card_index"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 0.0,
+          "categorical_value": null,
+          "boolean_value": null
+        },
+        {
+          "path": [
+            "target"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "categorical",
+          "numeric_value": null,
+          "categorical_value": "ENEMY_0",
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "play_card:4c39f94d03690264"
+    },
+    {
+      "candidate_index": 1,
+      "action_kind": "play_card",
+      "features": [
+        {
+          "path": [
+            "card_index"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 0.0,
+          "categorical_value": null,
+          "boolean_value": null
+        },
+        {
+          "path": [
+            "target"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "categorical",
+          "numeric_value": null,
+          "categorical_value": "ENEMY_1",
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "play_card:7a3f9f1fd9ef4131"
+    },
+    {
+      "candidate_index": 2,
+      "action_kind": "play_card",
+      "features": [
+        {
+          "path": [
+            "card_index"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 1.0,
+          "categorical_value": null,
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "play_card:440e5c1fdd314f1f"
+    },
+    {
+      "candidate_index": 3,
+      "action_kind": "use_potion",
+      "features": [
+        {
+          "path": [
+            "slot"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 0.0,
+          "categorical_value": null,
+          "boolean_value": null
+        },
+        {
+          "path": [
+            "target"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "categorical",
+          "numeric_value": null,
+          "categorical_value": "ENEMY_0",
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "use_potion:a229e2659f2cde72"
+    },
+    {
+      "candidate_index": 4,
+      "action_kind": "use_potion",
+      "features": [
+        {
+          "path": [
+            "slot"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 0.0,
+          "categorical_value": null,
+          "boolean_value": null
+        },
+        {
+          "path": [
+            "target"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "categorical",
+          "numeric_value": null,
+          "categorical_value": "ENEMY_1",
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "use_potion:d90161ad942114cf"
+    },
+    {
+      "candidate_index": 5,
+      "action_kind": "discard_potion",
+      "features": [
+        {
+          "path": [
+            "slot"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 0.0,
+          "categorical_value": null,
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "discard_potion:6201982120852026"
+    },
+    {
+      "candidate_index": 6,
+      "action_kind": "discard_potion",
+      "features": [
+        {
+          "path": [
+            "slot"
+          ],
+          "indices": [],
+          "semantic": "locator",
+          "value_type": "numeric",
+          "numeric_value": 1.0,
+          "categorical_value": null,
+          "boolean_value": null
+        }
+      ],
+      "source_action_id": "discard_potion:428c55ba86a4e03e"
+    },
+    {
+      "candidate_index": 7,
+      "action_kind": "end_turn",
+      "features": [],
+      "source_action_id": "end_turn:44136fa355b3678a"
+    }
+  ],
+  "action_mask": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "representation_hash": "sha256:46ca0e95d35d5a6f364a6ec73560a5f191375a5b434635df27610ed30a1c38f8"
+}

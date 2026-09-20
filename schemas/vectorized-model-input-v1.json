@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/vectorized-model-input-v1.json",
+  "title": "SpireShift Vectorized Model Input v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "vectorizer_id",
+    "dimension",
+    "state",
+    "candidates",
+    "action_mask",
+    "source_action_ids"
+  ],
+  "properties": {
+    "schema_version": {"const": "vectorized-model-input-v1"},
+    "vectorizer_id": {"const": "signed-sha256-feature-hash-v1"},
+    "dimension": {"type": "integer", "minimum": 64},
+    "state": {"type": "array", "items": {"$ref": "#/$defs/entry"}},
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {"$ref": "#/$defs/entry"}
+      }
+    },
+    "action_mask": {"type": "array", "items": {"const": true}},
+    "source_action_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": ["index", "value"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "value": {"type": "number"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

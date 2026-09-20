@@ -4,7 +4,8 @@ SpireShift separates game integration, decision algorithms, recording, and evalu
 contracts.
 
 ```text
-patch manifest -> environment adapter -> public observation -> legal actions
+patch manifest -> environment adapter -> public observation + legal actions
+                                     -> compositional model input
                                      -> policy/search -> verified action
                                      -> transition -> append-only recorder
                                      -> identity-checked replay and evaluation
@@ -78,3 +79,9 @@ trajectory on the same side of the training boundary. See [frozen data splits](d
 
 Initial tiers are policy-only, shallow, medium, and expensive. The policy/value foundation is
 trained and frozen for readiness evaluation before the adaptive budget controller is introduced.
+
+All learned systems consume the [compositional model-input contract](model-representations.md).
+Decision context, mechanics, resources, variable-length entities, and legal candidates remain
+separate channels. Operational action IDs are retained only for decoding a selected candidate. The
+reference feature hasher provides an out-of-vocabulary-safe baseline; later learned encoders must
+preserve the same public-information and candidate-alignment guarantees.

@@ -20,9 +20,10 @@ The repository currently contains the research contracts and a seeded mock verti
 7. fixed-seed benchmark reporting;
 8. a pinned live-state projection for the installed v0.107.1 game;
 9. guarded, state-bound, at-most-once live action delivery;
-10. deterministic and seeded legal-random unattended live play with offline run auditing; and
-11. isolated parallel seeded rollouts with retries, immutable evidence, and batch replay; and
-12. content-addressed complete-run train, validation, and test splits.
+10. deterministic and seeded legal-random unattended live play with offline run auditing;
+11. isolated parallel seeded rollouts with retries, immutable evidence, and batch replay;
+12. content-addressed complete-run train, validation, and test splits; and
+13. mechanics-aware, candidate-aligned model inputs with a deterministic sparse vectorizer.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -42,6 +43,7 @@ uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift rollout run-mock --episodes 100 --workers 4
 uv run spireshift split verify manifests/splits/mock-v1-seeds-000000-000999-v1.json
+uv run spireshift represent mock --seed 7 --vectorized
 uv run spireshift check
 ```
 
@@ -97,6 +99,10 @@ runs. Exhausted worker crashes remain in the benchmark denominator.
 [Frozen data splits](docs/data-splits.md) bind every seed, complete run, encounter instance, and
 decision record to content-addressed train, validation, and test evidence. Dataset audits reject
 partial trajectories and any record assignment that disagrees with the frozen run partition.
+
+[Compositional model inputs](docs/model-representations.md) encode typed mechanics, persistent
+resources, variable-length entities, decision context, and every legal candidate. Source action IDs
+remain decode handles and are excluded from all model features.
 
 ## Objective
 
