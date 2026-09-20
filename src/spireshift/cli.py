@@ -12,6 +12,7 @@ from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.adapters.sts2mcp import (
     DEFAULT_STS2MCP_URL,
     LiveStateError,
+    Sts2McpHttpActionTransport,
     Sts2McpHttpTransport,
     Sts2McpLiveStateAdapter,
     Sts2McpStateProjector,
@@ -30,6 +31,14 @@ from spireshift.core.manifest import (
 )
 from spireshift.core.objective import load_objective
 from spireshift.doctor import diagnostics_as_dict, find_game_installation
+from spireshift.live_actions import (
+    BoundAction,
+    DurableActionLedger,
+    GuardedActionExecutor,
+    LiveActionError,
+    ReceiptStatus,
+    default_live_state_directory,
+)
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
 from spireshift.runner import RunResult, run_episode
@@ -80,6 +89,39 @@ def build_parser() -> argparse.ArgumentParser:
     live_project.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
     live_project.add_argument("--bridge-version")
     live_project.add_argument("--output", type=Path)
+    live_bind = live_commands.add_parser(
+        "bind", help="Bind an advertised action to an exact live snapshot"
+    )
+    live_bind.add_argument("snapshot", type=Path)
+    live_bind.add_argument("action_id")
+    live_bind.add_argument("--request-id")
+    live_bind.add_argument("--output", type=Path)
+    live_execute = live_commands.add_parser(
+        "execute", help="Validate or apply one guarded bound action"
+    )
+    live_execute.add_argument("request", type=Path)
+    live_execute.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    live_execute.add_argument("--installation", type=Path)
+    live_execute.add_argument("--base-url", default=DEFAULT_STS2MCP_URL)
+    live_execute.add_argument("--timeout", type=float, default=3.0)
+    live_execute.add_argument("--settle-timeout", type=float, default=8.0)
+    live_execute.add_argument("--settle-quiet", type=float, default=0.5)
+    live_execute.add_argument("--poll-interval", type=float, default=0.1)
+    live_execute.add_argument("--state-dir", type=Path, default=default_live_state_directory())
+    live_execute.add_argument(
+        "--apply",
+        action="store_true",
+        help="Deliver the action; omission performs a durable dry run",
+    )
+    live_execute.add_argument("--output", type=Path)
+    live_stop = live_commands.add_parser("stop", help="Activate the local emergency stop")
+    live_stop.add_argument("--state-dir", type=Path, default=default_live_state_directory())
+    live_resume = live_commands.add_parser(
+        "resume", help="Clear the emergency stop and acknowledge uncertain delivery"
+    )
+    live_resume.add_argument("--state-dir", type=Path, default=default_live_state_directory())
+    live_status = live_commands.add_parser("safety-status", help="Inspect live-action safety state")
+    live_status.add_argument("--state-dir", type=Path, default=default_live_state_directory())
 
     conformance = subparsers.add_parser(
         "conformance", help="Run environment contract and differential checks"
@@ -177,6 +219,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0 if valid else 1
     if args.command == "live":
         try:
+            if args.live_command in {"stop", "resume", "safety-status"}:
+                ledger = DurableActionLedger(args.state_dir)
+                if args.live_command == "stop":
+                    ledger.emergency_stop()
+                elif args.live_command == "resume":
+                    with ledger.exclusive("safety-resume"):
+                        ledger.acknowledge_safety()
+                _emit_json(ledger.safety_status(), None)
+                return 0
+            if args.live_command == "bind":
+                snapshot_document = json.loads(args.snapshot.read_text(encoding="utf-8"))
+                request = BoundAction.bind(
+                    snapshot_document,
+                    args.action_id,
+                    request_id=args.request_id,
+                )
+                _emit_json(request.as_dict(), args.output)
+                return 0
             live_manifest = load_patch_manifest(args.manifest)
             if args.live_command == "snapshot":
                 if args.installation is not None:
@@ -194,15 +254,51 @@ def main(argv: Sequence[str] | None = None) -> int:
                     Sts2McpHttpTransport(args.base_url, timeout_seconds=args.timeout),
                 )
                 snapshot = adapter.snapshot()
-            else:
+            elif args.live_command == "project":
                 source = json.loads(args.source.read_text(encoding="utf-8"))
                 projector = Sts2McpStateProjector(live_manifest)
                 snapshot = projector.project(
                     source,
                     bridge_version=args.bridge_version or live_manifest.adapter.version,
                 )
-        except (LiveStateError, OSError, ValueError, json.JSONDecodeError) as error:
-            _emit_json({"status": "error", "error": str(error)}, args.output)
+            else:
+                request_document = json.loads(args.request.read_text(encoding="utf-8"))
+                request = BoundAction.from_mapping(request_document)
+                if args.installation is not None:
+                    installation_document = json.loads(
+                        args.installation.read_text(encoding="utf-8")
+                    )
+                else:
+                    installation = find_game_installation()
+                    if installation is None:
+                        raise LiveStateError("No supported local STS2 installation was found")
+                    installation_document = installation.manifest()
+                snapshot_provider = Sts2McpLiveStateAdapter(
+                    live_manifest,
+                    installation_document,
+                    Sts2McpHttpTransport(args.base_url, timeout_seconds=args.timeout),
+                )
+                executor = GuardedActionExecutor(
+                    snapshot_provider=snapshot_provider,
+                    action_transport=Sts2McpHttpActionTransport(
+                        args.base_url, timeout_seconds=args.timeout
+                    ),
+                    ledger=DurableActionLedger(args.state_dir),
+                    settle_timeout_seconds=args.settle_timeout,
+                    settle_quiet_seconds=args.settle_quiet,
+                    poll_interval_seconds=args.poll_interval,
+                )
+                receipt = executor.execute(request, dry_run=not args.apply)
+                _emit_json(receipt.as_dict(), args.output)
+                return 0 if receipt.status in {ReceiptStatus.APPLIED, ReceiptStatus.DRY_RUN} else 1
+        except (
+            LiveActionError,
+            LiveStateError,
+            OSError,
+            ValueError,
+            json.JSONDecodeError,
+        ) as error:
+            _emit_json({"status": "error", "error": str(error)}, getattr(args, "output", None))
             return 1
         payload = snapshot.as_dict()
         _emit_json(payload, args.output)

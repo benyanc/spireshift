@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import Any, Protocol, cast
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from spireshift.core.manifest import (
     PatchManifest,
@@ -77,6 +77,19 @@ _REJECTED_SOURCE_KEYS = {
 _COMBAT_STATES = {"monster", "elite", "boss"}
 
 
+class _RejectRedirectHandler(HTTPRedirectHandler):
+    def redirect_request(
+        self,
+        request: Request,
+        file_pointer: object,
+        code: int,
+        message: str,
+        headers: object,
+        new_url: str,
+    ) -> None:
+        return None
+
+
 class LiveStateError(RuntimeError):
     """Base error for safe live-state capture failures."""
 
@@ -91,6 +104,14 @@ class InformationBoundaryError(LiveStateError):
 
 class BridgeVersionError(LiveStateError):
     """The running bridge version differs from the ruleset manifest."""
+
+
+class ActionDeliveryTimeout(LiveStateError):
+    """Action delivery timed out with an uncertain outcome."""
+
+
+class ActionDeliveryUnknown(LiveStateError):
+    """Action delivery lost a trustworthy acknowledgement."""
 
 
 class Sts2McpReadTransport(Protocol):
@@ -150,18 +171,7 @@ class Sts2McpHttpTransport:
             raise ValueError("timeout_seconds must be positive")
         if maximum_response_bytes <= 0:
             raise ValueError("maximum_response_bytes must be positive")
-        parsed = urlsplit(base_url)
-        if (
-            parsed.scheme != "http"
-            or parsed.hostname not in {"localhost", "127.0.0.1", "::1"}
-            or parsed.username is not None
-            or parsed.password is not None
-            or parsed.query
-            or parsed.fragment
-            or parsed.path not in {"", "/"}
-        ):
-            raise ValueError("STS2_MCP base URL must be an uncredentialed local HTTP origin")
-        self._base_url = base_url.rstrip("/")
+        self._base_url = _validated_local_base_url(base_url)
         self._timeout_seconds = timeout_seconds
         self._maximum_response_bytes = maximum_response_bytes
 
@@ -187,7 +197,9 @@ class Sts2McpHttpTransport:
             method="GET",
         )
         try:
-            with urlopen(request, timeout=self._timeout_seconds) as response:  # noqa: S310
+            with build_opener(_RejectRedirectHandler()).open(
+                request, timeout=self._timeout_seconds
+            ) as response:
                 encoded = response.read(self._maximum_response_bytes + 1)
         except HTTPError as error:
             raise LiveTransportError(f"STS2_MCP returned HTTP {error.code}") from error
@@ -202,6 +214,81 @@ class Sts2McpHttpTransport:
         if not isinstance(value, dict):
             raise LiveTransportError("STS2_MCP response must be a JSON object")
         return cast(dict[str, object], value)
+
+
+class Sts2McpHttpActionTransport:
+    """POST-only action transport for a local STS2_MCP bridge."""
+
+    def __init__(
+        self,
+        base_url: str = DEFAULT_STS2MCP_URL,
+        *,
+        timeout_seconds: float = 3.0,
+        maximum_response_bytes: int = 1024 * 1024,
+    ) -> None:
+        if timeout_seconds <= 0:
+            raise ValueError("timeout_seconds must be positive")
+        if maximum_response_bytes <= 0:
+            raise ValueError("maximum_response_bytes must be positive")
+        self._base_url = _validated_local_base_url(base_url)
+        self._timeout_seconds = timeout_seconds
+        self._maximum_response_bytes = maximum_response_bytes
+
+    def deliver_action(self, action: LegalAction) -> dict[str, object]:
+        if "action" in action.payload:
+            raise ValueError("Legal action payload cannot override its action kind")
+        encoded_request = json.dumps(
+            {"action": action.kind, **action.payload},
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        ).encode()
+        request = Request(
+            f"{self._base_url}/api/v1/singleplayer",
+            data=encoded_request,
+            headers={"Accept": "application/json", "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with build_opener(_RejectRedirectHandler()).open(
+                request, timeout=self._timeout_seconds
+            ) as response:
+                encoded_response = response.read(self._maximum_response_bytes + 1)
+        except HTTPError as error:
+            if 400 <= error.code < 500:
+                encoded_response = error.read(self._maximum_response_bytes + 1)
+                rejection = _decode_json_object(
+                    encoded_response,
+                    maximum_response_bytes=self._maximum_response_bytes,
+                    label=f"STS2_MCP HTTP {error.code} response",
+                )
+                rejection["status"] = "error"
+                rejection["http_status"] = error.code
+                return rejection
+            raise ActionDeliveryUnknown(
+                f"STS2_MCP returned HTTP {error.code}; delivery outcome is uncertain"
+            ) from error
+        except TimeoutError as error:
+            raise ActionDeliveryTimeout(
+                "STS2_MCP action request timed out; delivery outcome is uncertain"
+            ) from error
+        except URLError as error:
+            if isinstance(error.reason, TimeoutError):
+                raise ActionDeliveryTimeout(
+                    "STS2_MCP action request timed out; delivery outcome is uncertain"
+                ) from error
+            raise ActionDeliveryUnknown(
+                f"STS2_MCP action acknowledgement was lost: {error}"
+            ) from error
+        except OSError as error:
+            raise ActionDeliveryUnknown(
+                f"STS2_MCP action acknowledgement was lost: {error}"
+            ) from error
+        return _decode_json_object(
+            encoded_response,
+            maximum_response_bytes=self._maximum_response_bytes,
+            label="STS2_MCP action response",
+        )
 
 
 class Sts2McpStateProjector:
@@ -600,3 +687,35 @@ def _required_string(value: dict[str, object], key: str, label: str) -> str:
     if not isinstance(result, str) or not result:
         raise LiveStateError(f"{label}.{key} must be a non-empty string")
     return result
+
+
+def _validated_local_base_url(base_url: str) -> str:
+    parsed = urlsplit(base_url)
+    if (
+        parsed.scheme != "http"
+        or parsed.hostname not in {"localhost", "127.0.0.1", "::1"}
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed.query
+        or parsed.fragment
+        or parsed.path not in {"", "/"}
+    ):
+        raise ValueError("STS2_MCP base URL must be an uncredentialed local HTTP origin")
+    return base_url.rstrip("/")
+
+
+def _decode_json_object(
+    encoded: bytes,
+    *,
+    maximum_response_bytes: int,
+    label: str,
+) -> dict[str, object]:
+    if len(encoded) > maximum_response_bytes:
+        raise ActionDeliveryUnknown(f"{label} exceeded the configured size limit")
+    try:
+        value: object = json.loads(encoded)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ActionDeliveryUnknown(f"{label} was not valid JSON") from error
+    if not isinstance(value, dict):
+        raise ActionDeliveryUnknown(f"{label} must be a JSON object")
+    return cast(dict[str, object], value)

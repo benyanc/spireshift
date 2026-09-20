@@ -8,7 +8,9 @@ dependency. SpireShift does not vendor its DLL or proprietary game assemblies. T
 - reads player-observable state;
 - enumerates legal decisions;
 - emits versioned snapshots to the local SpireShift service; and
-- exposes no action-delivery method.
+- keeps state capture on a GET-only transport.
 
-Future guarded execution belongs behind a separate exactly-once action contract. Any SpireShift mod
-code added here must remain thin, patch-bound, and independently auditable.
+A separate POST-only transport is reachable only through SpireShift's durable, state-bound action
+ledger. The ledger provides at-most-once delivery per request ID, stale-state rejection, successor
+verification, emergency stop, and fail-closed recovery. Any SpireShift mod code added here must
+remain thin, patch-bound, and independently auditable.

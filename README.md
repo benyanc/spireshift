@@ -17,8 +17,9 @@ The repository currently contains the research contracts and a seeded mock verti
 4. whole-run compute accounting;
 5. append-only run recording;
 6. deterministic replay and verification;
-7. fixed-seed benchmark reporting; and
-8. a pinned, read-only live-state projection for the installed v0.107.1 game.
+7. fixed-seed benchmark reporting;
+8. a pinned live-state projection for the installed v0.107.1 game; and
+9. guarded, state-bound, at-most-once live action delivery.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -60,6 +61,10 @@ comparisons.
 The [read-only live-state adapter](docs/live-state-adapter.md) verifies the local game and bridge
 identity, projects only public state, enumerates provisional legal actions, and records any omitted
 source fields. Its network transport is localhost-only and has no write method.
+
+[Guarded live-action execution](docs/live-action-execution.md) binds every request to that exact
+snapshot and legal-action ID. A durable ledger blocks duplicates and concurrent writers, while
+timeouts and lost acknowledgements latch recovery instead of triggering an automatic retry.
 
 ## Objective
 

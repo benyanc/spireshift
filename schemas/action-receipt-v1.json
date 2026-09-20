@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/action-receipt-v1.json",
+  "title": "SpireShift Action Receipt v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request",
+    "status",
+    "reason",
+    "message",
+    "delivery_certainty",
+    "automatic_retry_safe",
+    "predecessor_state_hash",
+    "successor_snapshot",
+    "bridge_response",
+    "started_at",
+    "completed_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "action-receipt-v1"},
+    "request": {"$ref": "bound-action-v1.json"},
+    "status": {
+      "enum": [
+        "applied",
+        "rejected",
+        "duplicate",
+        "stale",
+        "unknown_delivery",
+        "timeout",
+        "unsupported",
+        "dry_run"
+      ]
+    },
+    "reason": {"type": "string", "minLength": 1},
+    "message": {"type": "string", "minLength": 1},
+    "delivery_certainty": {"enum": ["applied", "not_applied", "unknown"]},
+    "automatic_retry_safe": {"const": false},
+    "predecessor_state_hash": {
+      "oneOf": [
+        {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        {"type": "null"}
+      ]
+    },
+    "successor_snapshot": {
+      "oneOf": [
+        {"$ref": "live-snapshot-v1.json"},
+        {"type": "null"}
+      ]
+    },
+    "bridge_response": {
+      "oneOf": [
+        {"type": "object"},
+        {"type": "null"}
+      ]
+    },
+    "started_at": {"type": "string", "minLength": 1},
+    "completed_at": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "applied"}}},
+      "then": {
+        "properties": {
+          "delivery_certainty": {"const": "applied"},
+          "successor_snapshot": {"$ref": "live-snapshot-v1.json"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"enum": ["unknown_delivery", "timeout"]}}},
+      "then": {"properties": {"delivery_certainty": {"const": "unknown"}}}
+    }
+  ],
+  "additionalProperties": false
+}

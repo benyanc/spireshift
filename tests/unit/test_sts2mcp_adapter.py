@@ -10,6 +10,7 @@ from spireshift.adapters.sts2mcp import (
     BridgeVersionError,
     InformationBoundaryError,
     LiveStateError,
+    Sts2McpHttpActionTransport,
     Sts2McpHttpTransport,
     Sts2McpLiveStateAdapter,
     Sts2McpStateProjector,
@@ -166,3 +167,5 @@ def test_combat_actions_expand_visible_targets_and_potions() -> None:
 def test_http_transport_rejects_non_local_origins() -> None:
     with pytest.raises(ValueError, match="local HTTP origin"):
         Sts2McpHttpTransport("https://example.com")
+    with pytest.raises(ValueError, match="local HTTP origin"):
+        Sts2McpHttpActionTransport("https://example.com")
