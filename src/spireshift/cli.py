@@ -39,6 +39,7 @@ from spireshift.live_actions import (
     ReceiptStatus,
     default_live_state_directory,
 )
+from spireshift.live_coverage import audit_full_run_action_coverage
 from spireshift.live_fixture_audit import audit_live_fixture_corpus
 from spireshift.live_run import (
     LiveRunRecorder,
@@ -56,6 +57,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
 DEFAULT_LIVE_MANIFEST = PROJECT_ROOT / "manifests/patches/sts2-v0.107.1-sts2mcp-55e0648.json"
 DEFAULT_LIVE_FIXTURE_CORPUS = PROJECT_ROOT / "tests/fixtures/live/public-state-corpus-v1.json"
+DEFAULT_LIVE_COVERAGE_SPEC = PROJECT_ROOT / "configs/live-coverage-v0.107.1.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -163,6 +165,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     live_audit_fixtures.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
     live_audit_fixtures.add_argument("--output", type=Path)
+    live_coverage = live_commands.add_parser(
+        "coverage", help="Gate full-run legal actions and unsupported-decision accounting"
+    )
+    live_coverage.add_argument("--specification", type=Path, default=DEFAULT_LIVE_COVERAGE_SPEC)
+    live_coverage.add_argument("--fixtures", type=Path, default=DEFAULT_LIVE_FIXTURE_CORPUS)
+    live_coverage.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    live_coverage.add_argument("--run", dest="runs", type=Path, action="append", required=True)
+    live_coverage.add_argument("--output", type=Path)
     live_stop = live_commands.add_parser("stop", help="Activate the local emergency stop")
     live_stop.add_argument("--state-dir", type=Path, default=default_live_state_directory())
     live_resume = live_commands.add_parser(
@@ -295,6 +305,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 fixture_audit = audit_live_fixture_corpus(args.corpus, live_manifest)
                 _emit_json(fixture_audit.as_dict(), args.output)
                 return 0 if fixture_audit.valid else 1
+            if args.live_command == "coverage":
+                coverage = audit_full_run_action_coverage(
+                    specification_path=args.specification,
+                    fixture_corpus_path=args.fixtures,
+                    run_paths=tuple(args.runs),
+                    manifest=live_manifest,
+                )
+                _emit_json(coverage.as_dict(), args.output)
+                return 0 if coverage.valid else 1
             if args.live_command == "snapshot":
                 if args.installation is not None:
                     installation_document: object = json.loads(
