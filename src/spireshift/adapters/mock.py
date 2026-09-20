@@ -7,7 +7,68 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Any
 
+from spireshift.core.manifest import PatchManifest, freeze_patch_manifest, sha256_digest
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
+
+MOCK_RULES = {
+    "initial_state": {"floor": 0, "strength": 0, "terminal": False, "victory": False},
+    "elite_path": {"immediate_death_probability": 0.25, "boss_win_probability": 0.8},
+    "safe_path": {"immediate_death_probability": 0.0, "boss_win_probability": 0.2},
+    "reward": "binary_terminal_victory",
+}
+MOCK_INTERFACE = {
+    "observation_schema": "observation-v1",
+    "action_schema": "action-v1",
+    "information_policy_id": "public-state-v1",
+}
+
+
+def mock_patch_manifest() -> PatchManifest:
+    rules_digest = sha256_digest(MOCK_RULES)
+    interface_digest = sha256_digest(MOCK_INTERFACE)
+    return freeze_patch_manifest(
+        {
+            "schema_version": "patch-manifest-v1",
+            "admission_status": "test_only",
+            "patch": {
+                "patch_id": "mock-v1",
+                "game_version": "mock-v1",
+                "game_commit": "mock-rules-v1",
+                "branch": None,
+                "release_date": None,
+                "steam_build_id": None,
+            },
+            "engine": {
+                "component_id": "spireshift-mock-engine",
+                "version": "1",
+                "revision": "mock-rules-v1",
+                "source": "spireshift://src/spireshift/adapters/mock.py",
+                "digest": {"algorithm": "sha256", "value": rules_digest},
+            },
+            "adapter": {
+                "component_id": "spireshift-mock-adapter",
+                "version": "1",
+                "revision": "observation-v1/action-v1",
+                "source": "spireshift://src/spireshift/adapters/mock.py",
+                "digest": {"algorithm": "sha256", "value": interface_digest},
+            },
+            "mechanics": [
+                {
+                    "artifact_id": "mock-terminal-victory-rules",
+                    "kind": "mechanics-bundle",
+                    "version": "1",
+                    "platform": None,
+                    "architecture": None,
+                    "digest": {"algorithm": "sha256", "value": rules_digest},
+                    "size_bytes": len(json.dumps(MOCK_RULES, sort_keys=True).encode()),
+                }
+            ],
+            "interface": MOCK_INTERFACE,
+        }
+    )
+
+
+MOCK_PATCH_MANIFEST = mock_patch_manifest()
 
 
 @dataclass(slots=True)
@@ -27,6 +88,7 @@ class MockSpireEnvironment:
     """
 
     patch_id = "mock-v1"
+    ruleset = MOCK_PATCH_MANIFEST.ruleset_identity()
 
     def __init__(self) -> None:
         self._rng = random.Random()

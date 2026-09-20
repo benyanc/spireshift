@@ -11,6 +11,8 @@ heuristic adaptive PUCT, learned adaptive PUCT, and episode-budget PUCT.
 
 Every run records:
 
+- the content-addressed patch manifest ID and complete ruleset identity, including engine, adapter,
+  mechanics, interface schemas, and information policy;
 - objective and patch identifiers;
 - seed and character/difficulty configuration;
 - agent, model, and search versions;

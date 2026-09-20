@@ -4,11 +4,15 @@ SpireShift separates game integration, decision algorithms, recording, and evalu
 contracts.
 
 ```text
-environment adapter -> public observation -> legal actions
-                    -> policy/search -> verified action
-                    -> transition -> append-only recorder
-                    -> deterministic replay and evaluation
+patch manifest -> environment adapter -> public observation -> legal actions
+                                     -> policy/search -> verified action
+                                     -> transition -> append-only recorder
+                                     -> identity-checked replay and evaluation
 ```
+
+Every environment exposes an immutable ruleset identity derived from its patch manifest. The runner
+rejects patch drift before recording and during transitions. A replay refuses to proceed unless its
+recorded engine, adapter, mechanics, schemas, and information policy match the active environment.
 
 ## Information boundary
 
@@ -30,6 +34,9 @@ must pass the same contract suite before use in training or evaluation.
   active exact-engine upstream;
 - the EvanGambit NativeAOT emulator provides cheap cloning and full-run training/search;
 - differential traces admit each emulator patch before its data is used for reported results.
+
+The v0.107.1 EvanGambit stack is pinned but remains `pending_conformance`; a matching game version is
+necessary evidence, not proof of simulator fidelity.
 
 Third-party observation formats never flow directly into a policy. Each backend is projected into
 SpireShift's versioned public contract, and every unsupported decision or divergence is recorded.

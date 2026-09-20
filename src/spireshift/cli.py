@@ -10,6 +10,12 @@ from pathlib import Path
 
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
+from spireshift.core.manifest import (
+    freeze_patch_manifest,
+    load_patch_manifest,
+    verify_installation_identity,
+    write_frozen_manifest,
+)
 from spireshift.core.objective import load_objective
 from spireshift.doctor import diagnostics_as_dict, find_game_installation
 from spireshift.recording.jsonl import JsonlRecorder
@@ -30,6 +36,19 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Write a non-proprietary local game identity manifest",
     )
+
+    manifest = subparsers.add_parser("manifest", help="Freeze or verify patch manifests")
+    manifest_commands = manifest.add_subparsers(dest="manifest_command", required=True)
+    freeze = manifest_commands.add_parser("freeze", help="Create a content-addressed manifest")
+    freeze.add_argument("specification", type=Path)
+    freeze.add_argument("output", type=Path)
+    verify_manifest = manifest_commands.add_parser("verify", help="Verify immutable manifests")
+    verify_manifest.add_argument(
+        "--installation",
+        type=Path,
+        help="Also require this local game identity to match the patch manifest",
+    )
+    verify_manifest.add_argument("paths", type=Path, nargs="+")
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -60,6 +79,48 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.manifest.parent.mkdir(parents=True, exist_ok=True)
             args.manifest.write_text(json.dumps(installation.manifest(), indent=2) + "\n")
         return 0
+    if args.command == "manifest":
+        if args.manifest_command == "freeze":
+            specification = json.loads(args.specification.read_text(encoding="utf-8"))
+            manifest = freeze_patch_manifest(
+                specification,
+                base_directory=args.specification.parent,
+            )
+            write_frozen_manifest(manifest, args.output)
+            print(json.dumps({"path": str(args.output), "manifest_id": manifest.manifest_id}))
+            return 0
+        installation = None
+        if args.installation is not None:
+            installation = json.loads(args.installation.read_text(encoding="utf-8"))
+        results: list[dict[str, object]] = []
+        valid = True
+        for path in args.paths:
+            try:
+                loaded = load_patch_manifest(path)
+            except ValueError as error:
+                valid = False
+                results.append({"path": str(path), "valid": False, "error": str(error)})
+            else:
+                identity_errors = (
+                    verify_installation_identity(loaded, installation)
+                    if installation is not None
+                    else ()
+                )
+                if identity_errors:
+                    valid = False
+                    results.append(
+                        {
+                            "path": str(path),
+                            "valid": False,
+                            "errors": list(identity_errors),
+                        }
+                    )
+                else:
+                    results.append(
+                        {"path": str(path), "valid": True, "manifest_id": loaded.manifest_id}
+                    )
+        print(json.dumps(results, indent=2))
+        return 0 if valid else 1
     if args.command == "demo":
         output = args.output or PROJECT_ROOT / f"artifacts/mock/run-{args.seed}.jsonl"
         run_result = _run_mock(args.seed, output)
