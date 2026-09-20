@@ -23,7 +23,7 @@ class JsonlRecorder:
         self._append({"record_type": "summary", **payload})
 
     def _append(self, payload: dict[str, object]) -> None:
-        with self.path.open("a", encoding="utf-8") as handle:
+        with self.path.open("a", encoding="utf-8", newline="\n") as handle:
             handle.write(json.dumps(payload, sort_keys=True, separators=(",", ":")))
             handle.write("\n")
 
@@ -34,7 +34,7 @@ class ImmutableJsonlRecorder:
     def __init__(self, path: Path) -> None:
         self.path = path
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self._handle = self.path.open("x", encoding="utf-8")
+        self._handle = self.path.open("x", encoding="utf-8", newline="\n")
 
     def record_header(self, payload: dict[str, object]) -> None:
         self._append({"record_type": "header", **payload})
