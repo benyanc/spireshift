@@ -175,6 +175,31 @@ def test_acknowledged_character_selection_can_have_no_public_delta(tmp_path: Pat
     assert len(transport.calls) == 1
 
 
+def test_acknowledged_dialogue_advance_can_have_no_public_delta(tmp_path: Path) -> None:
+    current = replace(
+        _snapshot(),
+        observation=replace(
+            _snapshot().observation,
+            public_state={
+                "state_type": "event",
+                "event": {"in_dialogue": True},
+                "terminal": False,
+                "victory": False,
+            },
+        ),
+        legal_actions=(LegalAction("advance", "advance_dialogue", {}),),
+    )
+    provider = FakeSnapshotProvider(current)
+    transport = FakeActionTransport({"status": "ok", "message": "Advancing dialogue"})
+    executor = _executor(tmp_path, provider, transport)
+
+    receipt = executor.execute(_request(current), dry_run=False)
+
+    assert receipt.status is ReceiptStatus.APPLIED
+    assert receipt.reason == "connector_acknowledged_no_public_delta"
+    assert len(transport.calls) == 1
+
+
 def test_executor_waits_past_a_transient_partial_successor(tmp_path: Path) -> None:
     before = _snapshot("before")
     transient = replace(

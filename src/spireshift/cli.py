@@ -39,6 +39,14 @@ from spireshift.live_actions import (
     ReceiptStatus,
     default_live_state_directory,
 )
+from spireshift.live_run import (
+    LiveRunRecorder,
+    LiveRunStatus,
+    LiveRunStrategy,
+    WeakLivePolicy,
+    run_live_game,
+    verify_live_run,
+)
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
 from spireshift.runner import RunResult, run_episode
@@ -114,6 +122,37 @@ def build_parser() -> argparse.ArgumentParser:
         help="Deliver the action; omission performs a durable dry run",
     )
     live_execute.add_argument("--output", type=Path)
+    live_autoplay = live_commands.add_parser(
+        "autoplay", help="Continue the visible game with a deliberately weak legal policy"
+    )
+    live_autoplay.add_argument("--manifest", type=Path, default=DEFAULT_LIVE_MANIFEST)
+    live_autoplay.add_argument("--installation", type=Path)
+    live_autoplay.add_argument("--base-url", default=DEFAULT_STS2MCP_URL)
+    live_autoplay.add_argument("--timeout", type=float, default=3.0)
+    live_autoplay.add_argument("--settle-timeout", type=float, default=20.0)
+    live_autoplay.add_argument("--settle-quiet", type=float, default=0.5)
+    live_autoplay.add_argument("--poll-interval", type=float, default=0.1)
+    live_autoplay.add_argument("--readiness-timeout", type=float, default=20.0)
+    live_autoplay.add_argument("--max-actions", type=int, default=2000)
+    live_autoplay.add_argument("--max-stale-replans", type=int, default=3)
+    live_autoplay.add_argument(
+        "--strategy",
+        choices=[strategy.value for strategy in LiveRunStrategy],
+        default=LiveRunStrategy.DETERMINISTIC.value,
+    )
+    live_autoplay.add_argument("--seed", type=int, default=0)
+    live_autoplay.add_argument("--state-dir", type=Path, default=default_live_state_directory())
+    live_autoplay.add_argument("--record", type=Path)
+    live_autoplay.add_argument(
+        "--apply",
+        action="store_true",
+        help="Acknowledge that the command should control the visible game",
+    )
+    live_verify_run = live_commands.add_parser(
+        "verify-run", help="Audit an append-only live-run record without contacting the game"
+    )
+    live_verify_run.add_argument("record", type=Path)
+    live_verify_run.add_argument("--output", type=Path)
     live_stop = live_commands.add_parser("stop", help="Activate the local emergency stop")
     live_stop.add_argument("--state-dir", type=Path, default=default_live_state_directory())
     live_resume = live_commands.add_parser(
@@ -237,6 +276,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(request.as_dict(), args.output)
                 return 0
+            if args.live_command == "verify-run":
+                verification = verify_live_run(args.record)
+                _emit_json(verification.as_dict(), args.output)
+                return 0 if verification.valid else 1
             live_manifest = load_patch_manifest(args.manifest)
             if args.live_command == "snapshot":
                 if args.installation is not None:
@@ -261,7 +304,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     source,
                     bridge_version=args.bridge_version or live_manifest.adapter.version,
                 )
-            else:
+            elif args.live_command == "execute":
                 request_document = json.loads(args.request.read_text(encoding="utf-8"))
                 request = BoundAction.from_mapping(request_document)
                 if args.installation is not None:
@@ -291,6 +334,49 @@ def main(argv: Sequence[str] | None = None) -> int:
                 receipt = executor.execute(request, dry_run=not args.apply)
                 _emit_json(receipt.as_dict(), args.output)
                 return 0 if receipt.status in {ReceiptStatus.APPLIED, ReceiptStatus.DRY_RUN} else 1
+            else:
+                if not args.apply:
+                    raise LiveActionError(
+                        "live autoplay controls the visible game; pass --apply to start it"
+                    )
+                if args.installation is not None:
+                    installation_document = json.loads(
+                        args.installation.read_text(encoding="utf-8")
+                    )
+                else:
+                    installation = find_game_installation()
+                    if installation is None:
+                        raise LiveStateError("No supported local STS2 installation was found")
+                    installation_document = installation.manifest()
+                snapshot_provider = Sts2McpLiveStateAdapter(
+                    live_manifest,
+                    installation_document,
+                    Sts2McpHttpTransport(args.base_url, timeout_seconds=args.timeout),
+                )
+                executor = GuardedActionExecutor(
+                    snapshot_provider=snapshot_provider,
+                    action_transport=Sts2McpHttpActionTransport(
+                        args.base_url, timeout_seconds=args.timeout
+                    ),
+                    ledger=DurableActionLedger(args.state_dir),
+                    settle_timeout_seconds=args.settle_timeout,
+                    settle_quiet_seconds=args.settle_quiet,
+                    poll_interval_seconds=args.poll_interval,
+                )
+                record_path = args.record or _default_live_run_record()
+                with LiveRunRecorder(record_path) as recorder:
+                    result = run_live_game(
+                        snapshot_provider=snapshot_provider,
+                        executor=executor,
+                        recorder=recorder,
+                        policy=WeakLivePolicy(LiveRunStrategy(args.strategy), seed=args.seed),
+                        max_actions=args.max_actions,
+                        readiness_timeout_seconds=args.readiness_timeout,
+                        poll_interval_seconds=args.poll_interval,
+                        max_stale_replans=args.max_stale_replans,
+                    )
+                _emit_json(result.as_dict(), None)
+                return 0 if result.status is LiveRunStatus.TERMINAL else 1
         except (
             LiveActionError,
             LiveStateError,
@@ -377,6 +463,13 @@ def _emit_json(value: object, output: Path | None) -> None:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(encoded, encoding="utf-8")
     print(encoded, end="")
+
+
+def _default_live_run_record() -> Path:
+    from datetime import UTC, datetime
+
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
+    return PROJECT_ROOT / f"artifacts/live/runs/live-run-{stamp}.jsonl"
 
 
 def _check() -> int:

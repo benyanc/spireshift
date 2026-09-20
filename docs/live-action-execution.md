@@ -58,10 +58,46 @@ that request is never retried automatically.
 
 After an accepted action, SpireShift polls the public state until it sees a changed, `ready` snapshot
 that remains stable across multiple reads and a minimum quiet interval. The resulting snapshot is
-embedded in the durable receipt. Character selection is a narrow documented exception: STS2MCP
-acknowledges the selected unlocked character but does not expose the selection in its state. For
-that action alone, a matching connector acknowledgement plus stable public state is accepted and
+embedded in the durable receipt. Character selection and event-dialogue advancement are two narrow
+documented exceptions: STS2MCP can acknowledge either action without changing its public JSON. A
+matching action-specific connector acknowledgement plus stable public state is accepted and
 recorded as having no public delta.
+
+## Unattended play
+
+`live autoplay` continues from the current visible screen using either a deterministic weak policy
+or a seeded legal-random policy. It requires `--apply`, stops at death or victory, and defaults to a
+2,000-action limit:
+
+```bash
+uv run spireshift live autoplay \
+  --apply \
+  --strategy deterministic \
+  --seed 0 \
+  --record artifacts/live/runs/my-run.jsonl
+```
+
+The deterministic policy handles menu setup, combat, combat card selection, rewards, map choices,
+events, rest sites, shops, treasure, card and relic selection, and supported minigames. It is an
+environment-validation baseline, not a strong player. `--strategy legal-random` samples from the
+same guarded legal-action set with a reproducible seed.
+
+Every line is synchronized to disk. The header contains the initial snapshot and ruleset identity;
+each step contains the predecessor snapshot and hash, complete legal-action set, selected action,
+bound request, receipt, and latency; the summary records the final snapshot and terminal outcome.
+Unknown delivery, unsupported state, patch drift, exhausted limits, and ordinary rejections stop the
+run. A stale preflight may be replanned up to `--max-stale-replans` times only when the receipt proves
+the action was not delivered. The old request is never sent again.
+
+Audit a record offline:
+
+```bash
+uv run spireshift live verify-run artifacts/live/runs/my-run.jsonl
+```
+
+Verification recomputes state hashes and checks contiguous decisions, unique request IDs, exact
+snapshot binding, legal-set membership, receipt/request equality, applied-delivery certainty, and
+the summary action count.
 
 ## Receipts
 
@@ -107,3 +143,9 @@ On the manifest-declared STS2 v0.107.1 build, the guarded executor applied and v
 
 Replaying both request IDs returned `duplicate`; the menu did not advance again and enemy HP stayed
 at 40. Generated requests, receipts, ledgers, and live snapshots remain outside Git.
+
+The unattended-loop acceptance run started on the main menu and reached confirmed defeat at zero HP
+without human gameplay. It recorded 167 steps across floors 1–12 and exercised menus, Neow, normal
+and elite combat, rewards, maps, rest sites, treasure, events, card selection, bundle selection, and
+one bounded stale-state replan. All 169 JSONL records passed `live verify-run`. The acceptance record
+remains under the ignored `artifacts/` directory because it contains live game state.

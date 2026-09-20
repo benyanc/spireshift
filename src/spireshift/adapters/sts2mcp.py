@@ -397,6 +397,11 @@ def _project_public_json(value: object, *, path: str, omitted: list[str]) -> obj
             projected["is_revealed"] = not child
             omitted.append(f"{child_path}->is_revealed")
             continue
+        if normalized == "preview_cards":
+            # Transform previews are newly sampled future outcomes in STS2MCP.
+            # They are neither stable public state nor admissible agent input.
+            omitted.append(child_path)
+            continue
         if "seed" in set(normalized.split("_")):
             omitted.append(child_path)
             continue
@@ -416,7 +421,14 @@ def _legal_actions(source: dict[str, object], state_type: str) -> ActionProjecti
     elif state_type in _COMBAT_STATES:
         _append_combat_actions(actions, source, issues)
     elif state_type == "hand_select":
-        _append_index_actions(actions, source, "hand_select", "cards", "combat_select_card")
+        _append_index_actions(
+            actions,
+            source,
+            "hand_select",
+            "cards",
+            "combat_select_card",
+            "card_index",
+        )
         _append_flag_action(
             actions, source, "hand_select", "can_confirm", "combat_confirm_selection"
         )
@@ -452,7 +464,10 @@ def _legal_actions(source: dict[str, object], state_type: str) -> ActionProjecti
         for item in _mapping_items(shop.get("items")):
             if item.get("is_stocked") is True and item.get("can_afford") is True:
                 _append_indexed(actions, "shop_purchase", item)
-        if shop.get("can_proceed") is True:
+        # STS2MCP auto-opens merchant inventory while reading state. That temporarily
+        # disables the room's proceed button, but its documented `proceed` action closes
+        # the inventory before pressing the button. Keep that escape action available.
+        if isinstance(shop.get("items"), list) or shop.get("can_proceed") is True:
             actions.append(_action("proceed"))
     elif state_type == "treasure":
         _append_index_actions(actions, source, "treasure", "relics", "claim_treasure_relic")
@@ -558,7 +573,17 @@ def _targets(target_type: object, enemy_ids: list[str]) -> list[str | None] | No
     if not isinstance(target_type, str):
         return None
     normalized = target_type.casefold().replace("_", "")
-    if normalized in {"none", "self", "allenemies", "all"}:
+    if normalized in {
+        "none",
+        "self",
+        "anyally",
+        "anyplayer",
+        "allenemies",
+        "randomenemy",
+        "randomally",
+        "allallies",
+        "all",
+    }:
         return [None]
     if normalized in {"anyenemy", "enemy", "singleenemy"}:
         return list(enemy_ids)
@@ -633,7 +658,13 @@ def _terminal_victory(source: dict[str, object], state_type: str) -> bool | None
         return False
     game_over = _optional_mapping(source.get("game_over"))
     victory = game_over.get("victory")
-    return victory if isinstance(victory, bool) else None
+    if isinstance(victory, bool):
+        return victory
+    # Pinned STS2MCP v0.4.0 does not expose the game-over cause. Zero HP is
+    # conclusive public evidence of defeat; nonzero HP is left unknown because
+    # abandon and victory screens share this state type.
+    hp = _optional_mapping(source.get("player")).get("hp")
+    return False if isinstance(hp, int | float) and hp <= 0 else None
 
 
 def _decision_type(state_type: str) -> DecisionType:

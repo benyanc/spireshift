@@ -19,7 +19,8 @@ The repository currently contains the research contracts and a seeded mock verti
 6. deterministic replay and verification;
 7. fixed-seed benchmark reporting;
 8. a pinned live-state projection for the installed v0.107.1 game; and
-9. guarded, state-bound, at-most-once live action delivery.
+9. guarded, state-bound, at-most-once live action delivery; and
+10. deterministic and seeded legal-random unattended live play with offline run auditing.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -38,6 +39,16 @@ uv run spireshift live snapshot --output artifacts/live/current-snapshot.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
 uv run spireshift check
+```
+
+To let the weak baseline continue the visible installed game until a terminal state:
+
+```bash
+uv run spireshift live autoplay \
+  --apply \
+  --strategy deterministic \
+  --record artifacts/live/runs/my-run.jsonl
+uv run spireshift live verify-run artifacts/live/runs/my-run.jsonl
 ```
 
 Generated runs are written under `artifacts/`, which is intentionally ignored by Git.
@@ -65,6 +76,7 @@ source fields. Its network transport is localhost-only and has no write method.
 [Guarded live-action execution](docs/live-action-execution.md) binds every request to that exact
 snapshot and legal-action ID. A durable ledger blocks duplicates and concurrent writers, while
 timeouts and lost acknowledgements latch recovery instead of triggering an automatic retry.
+The same safety boundary is used by the unattended loop described in that document.
 
 ## Objective
 

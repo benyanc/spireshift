@@ -128,6 +128,32 @@ def test_privileged_nested_rng_field_fails_closed() -> None:
         _projector().project(source, bridge_version="0.4.0")
 
 
+def test_random_transform_previews_are_omitted_from_state_identity() -> None:
+    source: dict[str, object] = {
+        "state_type": "card_select",
+        "card_select": {
+            "cards": [{"index": 0, "name": "Strike"}],
+            "can_confirm": True,
+            "can_cancel": False,
+            "preview_showing": True,
+            "preview_cards": [{"id": "RANDOM_FUTURE_CARD"}],
+        },
+        "run": {"act": 1, "floor": 15, "ascension": 0},
+        "player": {"hp": 23},
+    }
+    changed = copy.deepcopy(source)
+    card_select = changed["card_select"]
+    assert isinstance(card_select, dict)
+    card_select["preview_cards"] = [{"id": "DIFFERENT_FUTURE_CARD"}]
+
+    first = _projector().project(source, bridge_version="0.4.0")
+    second = _projector().project(changed, bridge_version="0.4.0")
+
+    assert first.observation.state_hash == second.observation.state_hash
+    assert "preview_cards" not in first.observation.public_state["card_select"]
+    assert "source.card_select.preview_cards" in first.omitted_source_paths
+
+
 def test_combat_actions_expand_visible_targets_and_potions() -> None:
     source: dict[str, object] = {
         "state_type": "monster",
@@ -146,8 +172,12 @@ def test_combat_actions_expand_visible_targets_and_potions() -> None:
             "hand": [
                 {"index": 0, "can_play": True, "target_type": "AnyEnemy"},
                 {"index": 1, "can_play": True, "target_type": "Self"},
+                {"index": 2, "can_play": True, "target_type": "RandomEnemy"},
             ],
-            "potions": [{"slot": 0, "can_use_in_combat": True, "target_type": "None"}],
+            "potions": [
+                {"slot": 0, "can_use_in_combat": True, "target_type": "None"},
+                {"slot": 1, "can_use_in_combat": True, "target_type": "AnyPlayer"},
+            ],
         },
     }
 
@@ -158,9 +188,68 @@ def test_combat_actions_expand_visible_targets_and_potions() -> None:
         ("play_card", {"card_index": 0, "target": "JAW_WORM_0"}),
         ("play_card", {"card_index": 0, "target": "LOUSE_0"}),
         ("play_card", {"card_index": 1}),
+        ("play_card", {"card_index": 2}),
         ("use_potion", {"slot": 0}),
         ("discard_potion", {"slot": 0}),
+        ("use_potion", {"slot": 1}),
+        ("discard_potion", {"slot": 1}),
         ("end_turn", {}),
+    ]
+
+
+def test_shop_always_advertises_documented_proceed_escape() -> None:
+    source: dict[str, object] = {
+        "state_type": "shop",
+        "shop": {
+            "items": [
+                {
+                    "index": 0,
+                    "category": "card",
+                    "is_stocked": True,
+                    "can_afford": False,
+                }
+            ],
+            "can_proceed": False,
+        },
+        "run": {"act": 1, "floor": 3, "ascension": 0},
+        "player": {"hp": 70},
+    }
+
+    snapshot = _projector().project(source, bridge_version="0.4.0")
+
+    assert snapshot.action_coverage_status == "ready"
+    assert [(action.kind, action.payload) for action in snapshot.legal_actions] == [("proceed", {})]
+
+
+def test_game_over_with_zero_public_hp_is_a_confirmed_defeat() -> None:
+    source: dict[str, object] = {
+        "state_type": "game_over",
+        "game_over": {"message": "Run ended.", "options": ["main_menu"]},
+        "run": {"act": 1, "floor": 17, "ascension": 0},
+        "player": {"hp": 0, "max_hp": 80},
+    }
+
+    snapshot = _projector().project(source, bridge_version="0.4.0")
+
+    assert snapshot.observation.public_state["terminal"] is True
+    assert snapshot.observation.public_state["victory"] is False
+
+
+def test_combat_hand_selection_uses_connector_card_index_parameter() -> None:
+    source: dict[str, object] = {
+        "state_type": "hand_select",
+        "hand_select": {
+            "cards": [{"index": 2, "name": "Strike"}],
+            "can_confirm": False,
+        },
+        "run": {"act": 1, "floor": 4, "ascension": 0},
+        "player": {"hp": 56},
+    }
+
+    snapshot = _projector().project(source, bridge_version="0.4.0")
+
+    assert [(action.kind, action.payload) for action in snapshot.legal_actions] == [
+        ("combat_select_card", {"card_index": 2})
     ]
 
 
