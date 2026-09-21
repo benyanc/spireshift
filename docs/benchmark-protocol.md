@@ -51,3 +51,9 @@ action agreement, independently evaluated terminal-value regret, and value/risk 
 results validate this machinery only; STS2 readiness requires representative full-run data from an
 admitted simulator and a final test evaluation after model and thresholds are frozen. See
 [initial policy, run-value, and tactical-risk models](initial-models.md).
+
+Probability calibration uses a checkpoint-bound split of complete validation runs. Calibrator
+parameters are fit on one subfold and all calibration scores, sharpness measures, confident
+catastrophic errors, false-safe risk predictions, and uncertainty records are reported on the other.
+Both subfolds remain validation data; neither result may be described as the final readiness test.
+See [calibration and uncertainty](calibration-and-uncertainty.md).

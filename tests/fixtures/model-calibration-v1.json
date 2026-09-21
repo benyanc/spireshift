@@ -1,0 +1,53 @@
+{
+  "calibration_id": "sha256:04e1a78f91f8c72d3ce0125a8981494fd189dec96d340bd3699e5c4f5e5e61ca",
+  "claim_scope": "mock_pipeline_validation",
+  "configuration": {
+    "calibration_bins": 10,
+    "catastrophic_regret_threshold": 0.1,
+    "false_safe_observed_rate": 0.5,
+    "false_safe_risk_threshold": 0.2,
+    "fit_fraction": 0.5,
+    "gradient_clip": 5.0,
+    "iterations": 1000,
+    "l2_regularization": 0.001,
+    "learning_rate": 0.05,
+    "policy_confidence_threshold": 0.8,
+    "split_salt": "calibration-v1"
+  },
+  "heads": {
+    "run_value": {
+      "fit_positive_rate": 0.75,
+      "fit_samples": 112,
+      "intercept": 0.224529296309,
+      "slope": 1.788996499578
+    },
+    "tactical_death_risk": {
+      "fit_positive_rate": 0.085227272727,
+      "fit_samples": 176,
+      "intercept": -0.326703530595,
+      "slope": 1.291829090871
+    }
+  },
+  "method": "platt-logit-affine-v1",
+  "model_id": "sha256:7f620aeb48248ded3842fff44a4a12397360ceb5236e87b70317e32a3bb15191",
+  "objective_id": "terminal-victory-v1",
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "schema_version": "model-calibration-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "subfold": {
+    "audit_run_ids": [
+      "mock-validation-seed-28",
+      "mock-validation-seed-42",
+      "mock-validation-seed-44",
+      "mock-validation-seed-49"
+    ],
+    "fit_run_ids": [
+      "mock-validation-seed-20",
+      "mock-validation-seed-31",
+      "mock-validation-seed-36",
+      "mock-validation-seed-37"
+    ],
+    "method": "sha256-model-salt-run-ranking-v1"
+  },
+  "validation_dataset_id": "sha256:3277617d15148d5b2d19408496dc06b5b90de3e71f89dccbaa7ac100cddba327"
+}

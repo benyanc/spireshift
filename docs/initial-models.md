@@ -54,6 +54,11 @@ relabel target enter optimization. The checkpoint binds their iteration IDs, whi
 the source model, complete-run count, collected decision count, and selected-label count. See
 [on-policy collection and selective teacher relabeling](selective-dagger.md).
 
+Post-training calibration is a separate, checkpoint-bound stage. It divides complete validation
+runs into disjoint fit and audit subfolds, fits run-value and tactical-risk transforms, reports
+proper scoring rules and confident failures only on audit runs, and emits inference-time uncertainty
+signals. See [calibration and uncertainty](calibration-and-uncertainty.md).
+
 ## Reproduce the checked mock result
 
 Generate disjoint train and validation teacher datasets:

@@ -18,6 +18,14 @@ from spireshift.adapters.sts2mcp import (
     Sts2McpStateProjector,
 )
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
+from spireshift.calibration import (
+    CalibrationConfig,
+    calibrate_model,
+    load_calibration_artifact,
+    load_calibration_report,
+    verify_calibration_artifacts,
+    write_calibration_artifact,
+)
 from spireshift.conformance import (
     capture_conformance_trace,
     compare_conformance_traces,
@@ -325,6 +333,39 @@ def build_parser() -> argparse.ArgumentParser:
     model_verify.add_argument("checkpoint", type=Path)
     model_verify.add_argument("--report", type=Path)
     model_verify.add_argument("--output", type=Path)
+
+    calibrate = subparsers.add_parser(
+        "calibrate", help="Fit or verify held-out probability calibration"
+    )
+    calibrate_commands = calibrate.add_subparsers(dest="calibrate_command", required=True)
+    calibrate_fit = calibrate_commands.add_parser(
+        "fit", help="Fit calibrators and audit uncertainty on disjoint validation runs"
+    )
+    calibrate_fit.add_argument("checkpoint", type=Path)
+    calibrate_fit.add_argument("validation_dataset", type=Path)
+    calibrate_fit.add_argument("calibration", type=Path)
+    calibrate_fit.add_argument("--report", type=Path, required=True)
+    calibrate_fit.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    calibrate_fit.add_argument("--fit-fraction", type=float, default=0.5)
+    calibrate_fit.add_argument("--split-salt", default="calibration-v1")
+    calibrate_fit.add_argument("--iterations", type=int, default=1000)
+    calibrate_fit.add_argument("--learning-rate", type=float, default=0.05)
+    calibrate_fit.add_argument("--l2-regularization", type=float, default=0.001)
+    calibrate_fit.add_argument("--gradient-clip", type=float, default=5.0)
+    calibrate_fit.add_argument("--calibration-bins", type=int, default=10)
+    calibrate_fit.add_argument("--policy-confidence-threshold", type=float, default=0.8)
+    calibrate_fit.add_argument("--catastrophic-regret-threshold", type=float, default=0.1)
+    calibrate_fit.add_argument("--false-safe-risk-threshold", type=float, default=0.2)
+    calibrate_fit.add_argument("--false-safe-observed-rate", type=float, default=0.5)
+    calibrate_verify = calibrate_commands.add_parser(
+        "verify", help="Regenerate and verify calibration artifacts"
+    )
+    calibrate_verify.add_argument("calibration", type=Path)
+    calibrate_verify.add_argument("report", type=Path)
+    calibrate_verify.add_argument("checkpoint", type=Path)
+    calibrate_verify.add_argument("validation_dataset", type=Path)
+    calibrate_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    calibrate_verify.add_argument("--output", type=Path)
 
     dagger = subparsers.add_parser(
         "dagger", help="Collect student trajectories and selectively relabel decisions"
@@ -805,6 +846,68 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = args.output if args.model_command == "verify" else None
+            _emit_json({"status": "error", "error": str(error)}, error_output)
+            return 1
+    if args.command == "calibrate":
+        try:
+            split_manifest = load_split_manifest(args.split_manifest)
+            checkpoint = load_model_checkpoint(args.checkpoint)
+            validation_dataset = load_teacher_dataset(args.validation_dataset)
+            if args.calibrate_command == "verify":
+                calibration = load_calibration_artifact(args.calibration, checkpoint=checkpoint)
+                report = load_calibration_report(args.report, calibration=calibration)
+                calibration_verification = verify_calibration_artifacts(
+                    calibration=calibration,
+                    report=report,
+                    checkpoint=checkpoint,
+                    validation_dataset=validation_dataset,
+                    split_manifest=split_manifest,
+                )
+                _emit_json(calibration_verification.as_dict(), args.output)
+                return 0 if calibration_verification.valid else 1
+            if args.calibration.resolve() == args.report.resolve():
+                raise ValueError("Calibration artifact and report outputs must differ")
+            calibration_result = calibrate_model(
+                checkpoint=checkpoint,
+                validation_dataset=validation_dataset,
+                split_manifest=split_manifest,
+                config=CalibrationConfig(
+                    fit_fraction=args.fit_fraction,
+                    split_salt=args.split_salt,
+                    iterations=args.iterations,
+                    learning_rate=args.learning_rate,
+                    l2_regularization=args.l2_regularization,
+                    gradient_clip=args.gradient_clip,
+                    calibration_bins=args.calibration_bins,
+                    policy_confidence_threshold=args.policy_confidence_threshold,
+                    catastrophic_regret_threshold=args.catastrophic_regret_threshold,
+                    false_safe_risk_threshold=args.false_safe_risk_threshold,
+                    false_safe_observed_rate=args.false_safe_observed_rate,
+                ),
+            )
+            write_calibration_artifact(
+                calibration_result.calibration,
+                args.calibration,
+                label="model calibration",
+            )
+            write_calibration_artifact(
+                calibration_result.report,
+                args.report,
+                label="model calibration report",
+            )
+            _emit_json(
+                {
+                    "calibration_path": str(args.calibration),
+                    "calibration_id": calibration_result.calibration["calibration_id"],
+                    "report_path": str(args.report),
+                    "report_id": calibration_result.report["report_id"],
+                    "audit": calibration_result.report["audit"],
+                },
+                None,
+            )
+            return 0
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
+            error_output = args.output if args.calibrate_command == "verify" else None
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "dagger":

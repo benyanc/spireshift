@@ -104,3 +104,10 @@ high-budget relabel. The iteration keeps the student's actual transition separat
 counterfactual label, records every selection trigger and simulation, and can be regenerated against
 the exact source checkpoint. Only verified high-budget labels augment the next model fit. See
 [on-policy collection and selective teacher relabeling](selective-dagger.md).
+
+Calibration wraps a frozen checkpoint rather than mutating its learned weights. A deterministic,
+checkpoint-bound ranking splits complete validation runs into fit and audit subfolds. Separate
+affine-logit transforms calibrate run value and tactical death risk on the fit runs; proper scoring
+rules, catastrophic errors, and per-decision uncertainty signals are computed only on audit runs.
+The final test partition remains unopened. See
+[calibration and uncertainty](calibration-and-uncertainty.md).

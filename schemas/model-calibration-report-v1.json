@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/model-calibration-report-v1.json",
+  "title": "SpireShift Model Calibration Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "calibration_id",
+    "model_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "audit",
+    "metrics",
+    "failure_analysis",
+    "uncertainty_signal_definitions",
+    "records",
+    "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "model-calibration-report-v1"},
+    "report_id": {"$ref": "#/$defs/id"},
+    "calibration_id": {"$ref": "#/$defs/id"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "validation_dataset_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "audit": {"$ref": "#/$defs/audit"},
+    "metrics": {"$ref": "#/$defs/metrics"},
+    "failure_analysis": {"$ref": "#/$defs/failure"},
+    "uncertainty_signal_definitions": {
+      "type": "object",
+      "minProperties": 8,
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "claim_scope": {"const": "mock_pipeline_validation"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "probability": {"type": "number", "minimum": 0, "maximum": 1},
+    "audit": {
+      "type": "object",
+      "required": ["run_ids", "runs", "decisions"],
+      "properties": {
+        "run_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "runs": {"type": "integer", "minimum": 1},
+        "decisions": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["policy", "run_value", "tactical_death_risk"],
+      "properties": {
+        "policy": {"$ref": "#/$defs/policyMetrics"},
+        "run_value": {"$ref": "#/$defs/calibrationComparison"},
+        "tactical_death_risk": {"$ref": "#/$defs/calibrationComparison"}
+      },
+      "additionalProperties": false
+    },
+    "policyMetrics": {
+      "type": "object",
+      "required": [
+        "action_agreement",
+        "mean_independent_value_regret",
+        "p95_independent_value_regret"
+      ],
+      "properties": {
+        "action_agreement": {"$ref": "#/$defs/probability"},
+        "mean_independent_value_regret": {"$ref": "#/$defs/probability"},
+        "p95_independent_value_regret": {"$ref": "#/$defs/probability"}
+      },
+      "additionalProperties": false
+    },
+    "calibrationComparison": {
+      "type": "object",
+      "required": ["raw", "calibrated"],
+      "properties": {
+        "raw": {"$ref": "#/$defs/calibrationMetrics"},
+        "calibrated": {"$ref": "#/$defs/calibrationMetrics"}
+      },
+      "additionalProperties": false
+    },
+    "calibrationMetrics": {
+      "type": "object",
+      "required": [
+        "samples",
+        "base_rate",
+        "mean_prediction",
+        "brier_score",
+        "log_loss",
+        "expected_calibration_error",
+        "maximum_calibration_error",
+        "sharpness_variance",
+        "normalized_confidence_sharpness",
+        "bins"
+      ],
+      "properties": {
+        "samples": {"type": "integer", "minimum": 1},
+        "base_rate": {"$ref": "#/$defs/probability"},
+        "mean_prediction": {"$ref": "#/$defs/probability"},
+        "brier_score": {"$ref": "#/$defs/probability"},
+        "log_loss": {"type": "number", "minimum": 0},
+        "expected_calibration_error": {"$ref": "#/$defs/probability"},
+        "maximum_calibration_error": {"$ref": "#/$defs/probability"},
+        "sharpness_variance": {"type": "number", "minimum": 0, "maximum": 0.25},
+        "normalized_confidence_sharpness": {"$ref": "#/$defs/probability"},
+        "bins": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/bin"}}
+      },
+      "additionalProperties": false
+    },
+    "bin": {
+      "type": "object",
+      "required": [
+        "lower_bound",
+        "upper_bound",
+        "samples",
+        "mean_prediction",
+        "empirical_rate",
+        "absolute_gap"
+      ],
+      "properties": {
+        "lower_bound": {"$ref": "#/$defs/probability"},
+        "upper_bound": {"$ref": "#/$defs/probability"},
+        "samples": {"type": "integer", "minimum": 1},
+        "mean_prediction": {"$ref": "#/$defs/probability"},
+        "empirical_rate": {"$ref": "#/$defs/probability"},
+        "absolute_gap": {"$ref": "#/$defs/probability"}
+      },
+      "additionalProperties": false
+    },
+    "failure": {
+      "type": "object",
+      "required": [
+        "thresholds",
+        "high_confidence_decisions",
+        "high_confidence_catastrophic_errors",
+        "high_confidence_catastrophic_rate",
+        "high_confidence_catastrophic_record_ids",
+        "false_safe_tactical_risk_errors",
+        "false_safe_tactical_risk_rate",
+        "false_safe_tactical_risk_record_ids"
+      ],
+      "properties": {
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/$defs/probability"},
+          "minProperties": 4,
+          "maxProperties": 4
+        },
+        "high_confidence_decisions": {"type": "integer", "minimum": 0},
+        "high_confidence_catastrophic_errors": {"type": "integer", "minimum": 0},
+        "high_confidence_catastrophic_rate": {"$ref": "#/$defs/probability"},
+        "high_confidence_catastrophic_record_ids": {"$ref": "#/$defs/recordIds"},
+        "false_safe_tactical_risk_errors": {"type": "integer", "minimum": 0},
+        "false_safe_tactical_risk_rate": {"$ref": "#/$defs/probability"},
+        "false_safe_tactical_risk_record_ids": {"$ref": "#/$defs/recordIds"}
+      },
+      "additionalProperties": false
+    },
+    "recordIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "record_id",
+        "run_id",
+        "decision_index",
+        "selected_action_id",
+        "teacher_action_id",
+        "policy_confidence",
+        "teacher_disagreement",
+        "independent_value_regret",
+        "selected_empirical_tactical_death_risk",
+        "high_confidence_catastrophic_error",
+        "false_safe_tactical_risk_error",
+        "uncertainty"
+      ],
+      "properties": {
+        "record_id": {"$ref": "#/$defs/id"},
+        "run_id": {"type": "string", "minLength": 1},
+        "decision_index": {"type": "integer", "minimum": 0},
+        "selected_action_id": {"type": "string", "minLength": 1},
+        "teacher_action_id": {"type": "string", "minLength": 1},
+        "policy_confidence": {"$ref": "#/$defs/probability"},
+        "teacher_disagreement": {"type": "boolean"},
+        "independent_value_regret": {"$ref": "#/$defs/probability"},
+        "selected_empirical_tactical_death_risk": {"$ref": "#/$defs/probability"},
+        "high_confidence_catastrophic_error": {"type": "boolean"},
+        "false_safe_tactical_risk_error": {"type": "boolean"},
+        "uncertainty": {
+          "type": "object",
+          "minProperties": 8,
+          "maxProperties": 8,
+          "additionalProperties": {"$ref": "#/$defs/probability"}
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
