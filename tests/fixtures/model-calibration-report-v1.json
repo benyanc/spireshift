@@ -1,0 +1,368 @@
+{
+  "audit": {
+    "decisions": 7,
+    "run_ids": [
+      "mock-validation-seed-28",
+      "mock-validation-seed-42",
+      "mock-validation-seed-44",
+      "mock-validation-seed-49"
+    ],
+    "runs": 4
+  },
+  "calibration_id": "sha256:04e1a78f91f8c72d3ce0125a8981494fd189dec96d340bd3699e5c4f5e5e61ca",
+  "claim_scope": "mock_pipeline_validation",
+  "failure_analysis": {
+    "false_safe_tactical_risk_errors": 1,
+    "false_safe_tactical_risk_rate": 0.142857142857,
+    "false_safe_tactical_risk_record_ids": [
+      "sha256:1a86f08c77671af674bc9422c0cf7ce2456a2e8188107f0a4567bc80ee0cd651"
+    ],
+    "high_confidence_catastrophic_errors": 0,
+    "high_confidence_catastrophic_rate": 0.0,
+    "high_confidence_catastrophic_record_ids": [],
+    "high_confidence_decisions": 3,
+    "thresholds": {
+      "catastrophic_regret": 0.1,
+      "false_safe_observed_risk": 0.5,
+      "false_safe_predicted_risk": 0.2,
+      "policy_confidence": 0.8
+    }
+  },
+  "metrics": {
+    "policy": {
+      "action_agreement": 0.857142857143,
+      "mean_independent_value_regret": 0.0,
+      "p95_independent_value_regret": 0.0
+    },
+    "run_value": {
+      "calibrated": {
+        "base_rate": 0.598214285714,
+        "bins": [
+          {
+            "absolute_gap": 0.050056730359,
+            "empirical_rate": 0.59375,
+            "lower_bound": 0.6,
+            "mean_prediction": 0.643806730359,
+            "samples": 64,
+            "upper_bound": 0.7
+          },
+          {
+            "absolute_gap": 0.53550134677,
+            "empirical_rate": 0.1875,
+            "lower_bound": 0.7,
+            "mean_prediction": 0.72300134677,
+            "samples": 16,
+            "upper_bound": 0.8
+          },
+          {
+            "absolute_gap": 0.085022981319,
+            "empirical_rate": 0.8125,
+            "lower_bound": 0.8,
+            "mean_prediction": 0.897522981319,
+            "samples": 32,
+            "upper_bound": 0.9
+          }
+        ],
+        "brier_score": 0.247588173159,
+        "expected_calibration_error": 0.129396318692,
+        "log_loss": 0.693877671495,
+        "maximum_calibration_error": 0.53550134677,
+        "mean_prediction": 0.727610604406,
+        "normalized_confidence_sharpness": 0.455221208813,
+        "samples": 112,
+        "sharpness_variance": 0.012264862019
+      },
+      "raw": {
+        "base_rate": 0.598214285714,
+        "bins": [
+          {
+            "absolute_gap": 0.04258863702,
+            "empirical_rate": 0.59375,
+            "lower_bound": 0.5,
+            "mean_prediction": 0.55116136298,
+            "samples": 64,
+            "upper_bound": 0.6
+          },
+          {
+            "absolute_gap": 0.413772905061,
+            "empirical_rate": 0.1875,
+            "lower_bound": 0.6,
+            "mean_prediction": 0.601272905061,
+            "samples": 16,
+            "upper_bound": 0.7
+          },
+          {
+            "absolute_gap": 0.064595958498,
+            "empirical_rate": 0.8125,
+            "lower_bound": 0.7,
+            "mean_prediction": 0.747904041502,
+            "samples": 32,
+            "upper_bound": 0.8
+          }
+        ],
+        "brier_score": 0.229811922955,
+        "expected_calibration_error": 0.101902767163,
+        "log_loss": 0.64969233166,
+        "maximum_calibration_error": 0.413772905061,
+        "mean_prediction": 0.614532348569,
+        "normalized_confidence_sharpness": 0.229064697138,
+        "samples": 112,
+        "sharpness_variance": 0.007402193865
+      }
+    },
+    "tactical_death_risk": {
+      "calibrated": {
+        "base_rate": 0.198863636364,
+        "bins": [
+          {
+            "absolute_gap": 0.003123278987,
+            "empirical_rate": 0.0,
+            "lower_bound": 0.0,
+            "mean_prediction": 0.003123278987,
+            "samples": 64,
+            "upper_bound": 0.1
+          },
+          {
+            "absolute_gap": 0.098768530459,
+            "empirical_rate": 0.229166666667,
+            "lower_bound": 0.1,
+            "mean_prediction": 0.130398136208,
+            "samples": 96,
+            "upper_bound": 0.2
+          },
+          {
+            "absolute_gap": 0.59677884293,
+            "empirical_rate": 0.8125,
+            "lower_bound": 0.2,
+            "mean_prediction": 0.21572115707,
+            "samples": 16,
+            "upper_bound": 0.3
+          }
+        ],
+        "brier_score": 0.148790268095,
+        "expected_calibration_error": 0.109262103785,
+        "log_loss": 0.436314854629,
+        "maximum_calibration_error": 0.59677884293,
+        "mean_prediction": 0.091873008206,
+        "normalized_confidence_sharpness": 0.816253983589,
+        "samples": 176,
+        "sharpness_variance": 0.005296199365
+      },
+      "raw": {
+        "base_rate": 0.198863636364,
+        "bins": [
+          {
+            "absolute_gap": 0.014624272468,
+            "empirical_rate": 0.0,
+            "lower_bound": 0.0,
+            "mean_prediction": 0.014624272468,
+            "samples": 64,
+            "upper_bound": 0.1
+          },
+          {
+            "absolute_gap": 0.001188836231,
+            "empirical_rate": 0.229166666667,
+            "lower_bound": 0.2,
+            "mean_prediction": 0.227977830435,
+            "samples": 96,
+            "upper_bound": 0.3
+          },
+          {
+            "absolute_gap": 0.490868982704,
+            "empirical_rate": 0.8125,
+            "lower_bound": 0.3,
+            "mean_prediction": 0.321631017296,
+            "samples": 16,
+            "upper_bound": 0.4
+          }
+        ],
+        "brier_score": 0.133283188923,
+        "expected_calibration_error": 0.05059082636,
+        "log_loss": 0.392403625656,
+        "maximum_calibration_error": 0.490868982704,
+        "mean_prediction": 0.158908644525,
+        "normalized_confidence_sharpness": 0.682182710949,
+        "samples": 176,
+        "sharpness_variance": 0.012898440201
+      }
+    }
+  },
+  "model_id": "sha256:7f620aeb48248ded3842fff44a4a12397360ceb5236e87b70317e32a3bb15191",
+  "records": [
+    {
+      "decision_index": 0,
+      "false_safe_tactical_risk_error": false,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 0.686480916576,
+      "record_id": "sha256:6a3d01379c6c5dc019f21b5aa0a7454d1600075947224b3a260ba3082e3b69fe",
+      "run_id": "mock-validation-seed-28",
+      "selected_action_id": "elite_path",
+      "selected_empirical_tactical_death_risk": 0.0,
+      "teacher_action_id": "elite_path",
+      "teacher_disagreement": false,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.115939406529,
+        "normalized_policy_entropy": 0.897193958669,
+        "run_value_ambiguity": 0.712386539282,
+        "run_value_calibration_adjustment": 0.092645367379,
+        "selected_risk_calibration_adjustment": 0.094938139118,
+        "selected_tactical_risk": 0.115939406529,
+        "selected_tactical_risk_ambiguity": 0.231878813059,
+        "top_two_policy_margin": 0.372961833151
+      }
+    },
+    {
+      "decision_index": 0,
+      "false_safe_tactical_risk_error": false,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 0.686480916576,
+      "record_id": "sha256:26e0f77ea69fa50849464dbe82a3ad8d62bff6bb5f432db4372788b754dcc312",
+      "run_id": "mock-validation-seed-42",
+      "selected_action_id": "elite_path",
+      "selected_empirical_tactical_death_risk": 0.25,
+      "teacher_action_id": "elite_path",
+      "teacher_disagreement": false,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.115939406529,
+        "normalized_policy_entropy": 0.897193958669,
+        "run_value_ambiguity": 0.712386539282,
+        "run_value_calibration_adjustment": 0.092645367379,
+        "selected_risk_calibration_adjustment": 0.094938139118,
+        "selected_tactical_risk": 0.115939406529,
+        "selected_tactical_risk_ambiguity": 0.231878813059,
+        "top_two_policy_margin": 0.372961833151
+      }
+    },
+    {
+      "decision_index": 1,
+      "false_safe_tactical_risk_error": false,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 1.0,
+      "record_id": "sha256:02205f140e6ef8d940a09d9218ceccafb3c4aadf2f07333b4378e82317667ffd",
+      "run_id": "mock-validation-seed-42",
+      "selected_action_id": "face_boss",
+      "selected_empirical_tactical_death_risk": 0.125,
+      "teacher_action_id": "face_boss",
+      "teacher_disagreement": false,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.159315595564,
+        "normalized_policy_entropy": 0.0,
+        "run_value_ambiguity": 0.204954037362,
+        "run_value_calibration_adjustment": 0.149618939817,
+        "selected_risk_calibration_adjustment": 0.102862804447,
+        "selected_tactical_risk": 0.159315595564,
+        "selected_tactical_risk_ambiguity": 0.318631191128,
+        "top_two_policy_margin": 1.0
+      }
+    },
+    {
+      "decision_index": 0,
+      "false_safe_tactical_risk_error": false,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 0.686480916576,
+      "record_id": "sha256:b83ee254697a3e04f3d0c9acbbf3855fca47422b5462978af9b2f54c4d90c476",
+      "run_id": "mock-validation-seed-44",
+      "selected_action_id": "elite_path",
+      "selected_empirical_tactical_death_risk": 0.25,
+      "teacher_action_id": "elite_path",
+      "teacher_disagreement": false,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.115939406529,
+        "normalized_policy_entropy": 0.897193958669,
+        "run_value_ambiguity": 0.712386539282,
+        "run_value_calibration_adjustment": 0.092645367379,
+        "selected_risk_calibration_adjustment": 0.094938139118,
+        "selected_tactical_risk": 0.115939406529,
+        "selected_tactical_risk_ambiguity": 0.231878813059,
+        "top_two_policy_margin": 0.372961833151
+      }
+    },
+    {
+      "decision_index": 1,
+      "false_safe_tactical_risk_error": false,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 1.0,
+      "record_id": "sha256:5b6078de42833a419d8eafc51171d98e6c4ad33d49c409bc6d81620aa8443fa5",
+      "run_id": "mock-validation-seed-44",
+      "selected_action_id": "face_boss",
+      "selected_empirical_tactical_death_risk": 0.25,
+      "teacher_action_id": "face_boss",
+      "teacher_disagreement": false,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.159315595564,
+        "normalized_policy_entropy": 0.0,
+        "run_value_ambiguity": 0.204954037362,
+        "run_value_calibration_adjustment": 0.149618939817,
+        "selected_risk_calibration_adjustment": 0.102862804447,
+        "selected_tactical_risk": 0.159315595564,
+        "selected_tactical_risk_ambiguity": 0.318631191128,
+        "top_two_policy_margin": 1.0
+      }
+    },
+    {
+      "decision_index": 0,
+      "false_safe_tactical_risk_error": true,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 0.686480916576,
+      "record_id": "sha256:1a86f08c77671af674bc9422c0cf7ce2456a2e8188107f0a4567bc80ee0cd651",
+      "run_id": "mock-validation-seed-49",
+      "selected_action_id": "elite_path",
+      "selected_empirical_tactical_death_risk": 0.5,
+      "teacher_action_id": "safe_path",
+      "teacher_disagreement": true,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.115939406529,
+        "normalized_policy_entropy": 0.897193958669,
+        "run_value_ambiguity": 0.712386539282,
+        "run_value_calibration_adjustment": 0.092645367379,
+        "selected_risk_calibration_adjustment": 0.094938139118,
+        "selected_tactical_risk": 0.115939406529,
+        "selected_tactical_risk_ambiguity": 0.231878813059,
+        "top_two_policy_margin": 0.372961833151
+      }
+    },
+    {
+      "decision_index": 1,
+      "false_safe_tactical_risk_error": false,
+      "high_confidence_catastrophic_error": false,
+      "independent_value_regret": 0.0,
+      "policy_confidence": 1.0,
+      "record_id": "sha256:8bf22657929e24209488c4300db8a880586dddfe3012fe59f89f6b192661e4ad",
+      "run_id": "mock-validation-seed-49",
+      "selected_action_id": "face_boss",
+      "selected_empirical_tactical_death_risk": 0.8125,
+      "teacher_action_id": "face_boss",
+      "teacher_disagreement": false,
+      "uncertainty": {
+        "maximum_tactical_risk": 0.21572115707,
+        "normalized_policy_entropy": 0.0,
+        "run_value_ambiguity": 0.553997306459,
+        "run_value_calibration_adjustment": 0.121728441709,
+        "selected_risk_calibration_adjustment": 0.105909860226,
+        "selected_tactical_risk": 0.21572115707,
+        "selected_tactical_risk_ambiguity": 0.43144231414,
+        "top_two_policy_margin": 1.0
+      }
+    }
+  ],
+  "report_id": "sha256:ee800395c256a8a678682fcd7c37036d66874d49453e67e91b565cc4c003d08e",
+  "schema_version": "model-calibration-report-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "uncertainty_signal_definitions": {
+    "maximum_tactical_risk": "largest calibrated candidate risk",
+    "normalized_policy_entropy": "policy entropy divided by log(candidate count)",
+    "run_value_ambiguity": "one minus distance of calibrated run value from 0.5, scaled to [0,1]",
+    "run_value_calibration_adjustment": "absolute calibrated-minus-raw run-value probability",
+    "selected_risk_calibration_adjustment": "absolute calibrated-minus-raw selected-action risk",
+    "selected_tactical_risk": "calibrated risk for the policy-selected action",
+    "selected_tactical_risk_ambiguity": "one minus distance of selected calibrated risk from 0.5, scaled to [0,1]",
+    "top_two_policy_margin": "largest policy probability minus second largest"
+  },
+  "validation_dataset_id": "sha256:3277617d15148d5b2d19408496dc06b5b90de3e71f89dccbaa7ac100cddba327"
+}

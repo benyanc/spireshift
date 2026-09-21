@@ -28,7 +28,9 @@ The repository currently contains the research contracts and a seeded mock verti
 15. a deterministic three-head policy, terminal-value, and tactical-risk training baseline with
     held-out regret and calibration reporting; and
 16. complete on-policy student collection with selective, cost-accounted teacher relabeling and
-    verified DAgger augmentation.
+    verified DAgger augmentation; and
+17. checkpoint-bound calibration fit/audit subfolds, proper scoring rules, catastrophic-error
+    analysis, and decision-level uncertainty signals.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -125,6 +127,11 @@ calibration in a content-addressed training report.
 runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,
 suspected confident errors, and high-entropy decisions. Verified selected labels can augment the next
 model checkpoint with complete provenance.
+
+[Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
+complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
+high-confidence catastrophic errors, false-safe risk predictions, and interpretable inference-time
+signals for later value-of-computation training while leaving the final test split sealed.
 
 ## Objective
 
