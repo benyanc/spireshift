@@ -1,0 +1,1512 @@
+{
+  "backend": "mock",
+  "configuration": {
+    "evaluation_samples_per_candidate": 32,
+    "exploration_constant": 1.4142135623730951,
+    "maximum_rollout_steps": 4096,
+    "sampling_seed": 0,
+    "search_simulations": 32
+  },
+  "dataset_id": "sha256:fa36b2516fc195e1c9ecd1b39f184ee563c7d5874286ed7f490563c381c4649f",
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "partition": "train",
+  "records": [
+    {
+      "decision_index": 0,
+      "encounter_id": "mock-train-seed-0-0-path",
+      "model_input": {
+        "action_mask": [
+          true,
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "low",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "high",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "elite_path"
+          }
+        ],
+        "decision_type": "path",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:2022b53a804243ad1b5385ad4226c0dbd10f54429fa740aea3f81ba085310a29",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "reward": 0.0,
+        "selected_action_id": "elite_path",
+        "terminal": false,
+        "victory": false
+      },
+      "record_id": "sha256:a07c9b70a6953489deef0afe8925aa87ca95d3febcce526dd0bb4478c710e59c",
+      "run_id": "mock-train-seed-0",
+      "run_terminal_victory": true,
+      "schema_version": "teacher-record-v1",
+      "teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1708984375,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 1826614225929153077,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 9941409532425239119,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 9133476913415090865,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 8960255616723103427,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 4,
+                  "simulation_seed": 3381326530298685011,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 5,
+                  "simulation_seed": 7309661646751572229,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 6,
+                  "simulation_seed": 17046487319759225701,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 7,
+                  "simulation_seed": 8064494578812224241,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 8,
+                  "simulation_seed": 14577243044849220853,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 9,
+                  "simulation_seed": 16936643198492491313,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 10,
+                  "simulation_seed": 1095883270316388067,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 11,
+                  "simulation_seed": 14669036380969064919,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 12,
+                  "simulation_seed": 7087772890208815743,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 13,
+                  "simulation_seed": 11315162419299082579,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 14,
+                  "simulation_seed": 16410057107546296507,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 15,
+                  "simulation_seed": 8422971435767048449,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 16,
+                  "simulation_seed": 8734722720816132103,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 17,
+                  "simulation_seed": 14999916182210331225,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 18,
+                  "simulation_seed": 18149577020985621059,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 19,
+                  "simulation_seed": 16736704319028903605,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 20,
+                  "simulation_seed": 13201608841590078849,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 21,
+                  "simulation_seed": 2071091793427159571,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 22,
+                  "simulation_seed": 1751642244342189495,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 23,
+                  "simulation_seed": 15576559098379709289,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 24,
+                  "simulation_seed": 130348341986832137,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 25,
+                  "simulation_seed": 16949454034561753309,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 26,
+                  "simulation_seed": 15174990010578743215,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 27,
+                  "simulation_seed": 8033177212459711959,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 28,
+                  "simulation_seed": 16455368437586804003,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 29,
+                  "simulation_seed": 6870002299428411237,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 30,
+                  "simulation_seed": 521933861543407845,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 31,
+                  "simulation_seed": 15792490598545760109,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 32,
+              "terminal_value": 0.21875
+            },
+            "search": {
+              "outcome_variance": 0.0,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 1826614225929153076,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 4,
+                  "simulation_seed": 3381326530298685010,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 10,
+                  "simulation_seed": 1095883270316388066,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 15,
+                  "simulation_seed": 8422971435767048448,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 23,
+                  "simulation_seed": 15576559098379709288,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 28,
+                  "simulation_seed": 16455368437586804002,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 6,
+              "terminal_value": 0.0,
+              "visit_probability": 0.1875,
+              "visits": 6
+            },
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "independent_evaluation": {
+              "outcome_variance": 0.2255859375,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 17500524440778424253,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 10162897171167392041,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 3647663948112254733,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 5920532540096716953,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 7893072375404314889,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 5,
+                  "simulation_seed": 14979894008437984991,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 4880005937704985815,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 7,
+                  "simulation_seed": 1484054881964807211,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 8,
+                  "simulation_seed": 11760750027233604117,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 9,
+                  "simulation_seed": 14031720019989090461,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 10,
+                  "simulation_seed": 6195362568990841253,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 11,
+                  "simulation_seed": 16839313387732236393,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 12,
+                  "simulation_seed": 17862851101679213163,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 13,
+                  "simulation_seed": 5136235078398229823,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 14,
+                  "simulation_seed": 15498461052695286171,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 15,
+                  "simulation_seed": 17586395541230585293,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 16,
+                  "simulation_seed": 6501089810701283557,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 17,
+                  "simulation_seed": 16312131055584789025,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 18,
+                  "simulation_seed": 1907374128361354519,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 19,
+                  "simulation_seed": 15469257943509377431,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 20,
+                  "simulation_seed": 600677867003517383,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 21,
+                  "simulation_seed": 10079305486173892357,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 22,
+                  "simulation_seed": 15679164798586693081,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 23,
+                  "simulation_seed": 9593865357408491363,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 24,
+                  "simulation_seed": 17423855677358892339,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 25,
+                  "simulation_seed": 9547647227686850841,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 26,
+                  "simulation_seed": 7171749282775963391,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 27,
+                  "simulation_seed": 13000531926451956961,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 28,
+                  "simulation_seed": 1215628664727061449,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 29,
+                  "simulation_seed": 16486961523754825583,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 30,
+                  "simulation_seed": 9070727733888786379,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 31,
+                  "simulation_seed": 3966413133252188521,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 32,
+              "terminal_value": 0.65625
+            },
+            "search": {
+              "outcome_variance": 0.23668639053254445,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 9941409532425239118,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 9133476913415090864,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 8960255616723103426,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 5,
+                  "simulation_seed": 7309661646751572228,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 17046487319759225700,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 7,
+                  "simulation_seed": 8064494578812224240,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 8,
+                  "simulation_seed": 14577243044849220852,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 9,
+                  "simulation_seed": 16936643198492491312,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 11,
+                  "simulation_seed": 14669036380969064918,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 7087772890208815742,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 11315162419299082578,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 16410057107546296506,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 16,
+                  "simulation_seed": 8734722720816132102,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 17,
+                  "simulation_seed": 14999916182210331224,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 18,
+                  "simulation_seed": 18149577020985621058,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 19,
+                  "simulation_seed": 16736704319028903604,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 20,
+                  "simulation_seed": 13201608841590078848,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 21,
+                  "simulation_seed": 2071091793427159570,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 22,
+                  "simulation_seed": 1751642244342189494,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 24,
+                  "simulation_seed": 130348341986832136,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 25,
+                  "simulation_seed": 16949454034561753308,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 26,
+                  "simulation_seed": 15174990010578743214,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 27,
+                  "simulation_seed": 8033177212459711958,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 29,
+                  "simulation_seed": 6870002299428411236,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 30,
+                  "simulation_seed": 521933861543407844,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 31,
+                  "simulation_seed": 15792490598545760108,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 26,
+              "terminal_value": 0.6153846153846154,
+              "visit_probability": 0.8125,
+              "visits": 26
+            },
+            "source_action_id": "elite_path"
+          }
+        ],
+        "evaluation_samples_per_candidate": 32,
+        "evaluation_seed_domain": "128ee9a98d4030f0f3eeb98f6fe70b5cfe2015df81442837103e557014e97f31:evaluation-odd",
+        "search_seed_domain": "128ee9a98d4030f0f3eeb98f6fe70b5cfe2015df81442837103e557014e97f31:search-even",
+        "search_simulations": 32,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      }
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "mock-train-seed-0-1-combat",
+      "model_input": {
+        "action_mask": [
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "features": [],
+            "source_action_id": "face_boss"
+          }
+        ],
+        "decision_type": "combat",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:351a47a71dec4f3986a75677799c399fb5c02f5f1e8ee58416d01713a6f97d3c",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a",
+        "reward": 1.0,
+        "selected_action_id": "face_boss",
+        "terminal": true,
+        "victory": true
+      },
+      "record_id": "sha256:50b5e7761198b79df975af16f67b963d3af595cde0e0e897a0d1589a862e89a2",
+      "run_id": "mock-train-seed-0",
+      "run_terminal_victory": true,
+      "schema_version": "teacher-record-v1",
+      "teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.109375,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 16527532342840137539,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 12173863305232717459,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 14106748916501503479,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 16147306044801024779,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 7853136060927280349,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 14741164352501726639,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 11462090284209963559,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 14441513857928568553,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 13663626141207696467,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 6618861683392641557,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 3608986595820925273,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 6939487938685319175,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 5638063933427859433,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 2038783246922621115,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 4281818420002622111,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 6367698814040643051,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 16,
+                  "simulation_seed": 5648810269111956187,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 17,
+                  "simulation_seed": 17837126190480857525,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 18,
+                  "simulation_seed": 1340314461393720185,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 19,
+                  "simulation_seed": 15731929688087617175,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 20,
+                  "simulation_seed": 935826252467916163,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 21,
+                  "simulation_seed": 10748477823797628355,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 22,
+                  "simulation_seed": 570644105810291697,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 23,
+                  "simulation_seed": 13211338265021607663,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 24,
+                  "simulation_seed": 6658820371757630695,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 25,
+                  "simulation_seed": 13493214297244261683,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 26,
+                  "simulation_seed": 12405025290790046003,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 27,
+                  "simulation_seed": 5638713802217886469,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 28,
+                  "simulation_seed": 6478558850903737701,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 29,
+                  "simulation_seed": 4146903885864572911,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 30,
+                  "simulation_seed": 18395314722850937313,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 31,
+                  "simulation_seed": 8637451019496393109,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 32,
+              "terminal_value": 0.875
+            },
+            "search": {
+              "outcome_variance": 0.1318359375,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 16527532342840137538,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 12173863305232717458,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 14106748916501503478,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 16147306044801024778,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 7853136060927280348,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 14741164352501726638,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 11462090284209963558,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 14441513857928568552,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 13663626141207696466,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 6618861683392641556,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 3608986595820925272,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 6939487938685319174,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 5638063933427859432,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 2038783246922621114,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 4281818420002622110,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 6367698814040643050,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 16,
+                  "simulation_seed": 5648810269111956186,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 17,
+                  "simulation_seed": 17837126190480857524,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 18,
+                  "simulation_seed": 1340314461393720184,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 19,
+                  "simulation_seed": 15731929688087617174,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 20,
+                  "simulation_seed": 935826252467916162,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 21,
+                  "simulation_seed": 10748477823797628354,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 22,
+                  "simulation_seed": 570644105810291696,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 23,
+                  "simulation_seed": 13211338265021607662,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 24,
+                  "simulation_seed": 6658820371757630694,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 25,
+                  "simulation_seed": 13493214297244261682,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 26,
+                  "simulation_seed": 12405025290790046002,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 27,
+                  "simulation_seed": 5638713802217886468,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 28,
+                  "simulation_seed": 6478558850903737700,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 29,
+                  "simulation_seed": 4146903885864572910,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 30,
+                  "simulation_seed": 18395314722850937312,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 31,
+                  "simulation_seed": 8637451019496393108,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 32,
+              "terminal_value": 0.84375,
+              "visit_probability": 1.0,
+              "visits": 32
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 32,
+        "evaluation_seed_domain": "d0f14bf00fb11c1c904f1d53178dce061e0f763bb9fe813b0dd070c9f42c8d88:evaluation-odd",
+        "search_seed_domain": "d0f14bf00fb11c1c904f1d53178dce061e0f763bb9fe813b0dd070c9f42c8d88:search-even",
+        "search_simulations": 32,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      }
+    }
+  ],
+  "representation_encoder_id": "mechanics-compositional-v1",
+  "ruleset": {
+    "adapter": {
+      "component_id": "spireshift-mock-adapter",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "060477507680dd27b84065fd7f441fe9aa7b671349350cbb030d44c1a5837f20"
+      },
+      "revision": "observation-v1/action-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "version": "1"
+    },
+    "admission_status": "test_only",
+    "engine": {
+      "component_id": "spireshift-mock-engine",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+      },
+      "revision": "mock-rules-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "version": "1"
+    },
+    "interface": {
+      "action_schema": "action-v1",
+      "information_policy_id": "public-state-v1",
+      "observation_schema": "observation-v1"
+    },
+    "manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "mechanics": [
+      {
+        "architecture": null,
+        "artifact_id": "mock-terminal-victory-rules",
+        "digest": {
+          "algorithm": "sha256",
+          "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+        },
+        "kind": "mechanics-bundle",
+        "platform": null,
+        "size_bytes": 282,
+        "version": "1"
+      }
+    ],
+    "patch_id": "mock-v1"
+  },
+  "runs": [
+    {
+      "encounter_ids": [
+        "mock-train-seed-0-0-path",
+        "mock-train-seed-0-1-combat"
+      ],
+      "record_ids": [
+        "sha256:a07c9b70a6953489deef0afe8925aa87ca95d3febcce526dd0bb4478c710e59c",
+        "sha256:50b5e7761198b79df975af16f67b963d3af595cde0e0e897a0d1589a862e89a2"
+      ],
+      "run_id": "mock-train-seed-0",
+      "seed": 0,
+      "split": "train",
+      "terminal": true,
+      "victory": true
+    }
+  ],
+  "schema_version": "teacher-dataset-v1",
+  "seed_protocol_id": "sha256-domain-parity-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "summary": {
+    "candidates": 3,
+    "defeats": 0,
+    "evaluation_simulations": 96,
+    "records": 2,
+    "runs": 1,
+    "search_simulations": 64,
+    "victories": 1
+  },
+  "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+}

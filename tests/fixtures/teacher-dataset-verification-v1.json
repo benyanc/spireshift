@@ -1,0 +1,10 @@
+{
+  "dataset_id": "sha256:fa36b2516fc195e1c9ecd1b39f184ee563c7d5874286ed7f490563c381c4649f",
+  "errors": [],
+  "evaluation_simulations": 96,
+  "records": 2,
+  "runs": 1,
+  "schema_version": "teacher-dataset-verification-v1",
+  "search_simulations": 64,
+  "valid": true
+}

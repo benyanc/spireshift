@@ -18,6 +18,8 @@ Every run records:
 - agent, model, search, representation-encoder, and vectorizer versions;
 - legal actions and selected action;
 - compute tier and measured cost;
+- teacher search visits, independent evaluation samples, and their disjoint seed domains when
+  learned targets are involved;
 - state hashes;
 - terminal result;
 - crashes and unsupported decisions.

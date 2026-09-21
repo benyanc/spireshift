@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/teacher-dataset-v1.json",
+  "title": "SpireShift Independent-Evaluation Teacher Dataset v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "backend",
+    "ruleset",
+    "objective",
+    "split_manifest_id",
+    "partition",
+    "representation_encoder_id",
+    "teacher_id",
+    "seed_protocol_id",
+    "configuration",
+    "runs",
+    "records",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {"const": "teacher-dataset-v1"},
+    "dataset_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "backend": {"const": "mock"},
+    "ruleset": {"$ref": "conformance-report-v1.json#/$defs/ruleset"},
+    "objective": {"$ref": "#/$defs/objective"},
+    "split_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "partition": {"enum": ["train", "validation", "test"]},
+    "representation_encoder_id": {"const": "mechanics-compositional-v1"},
+    "teacher_id": {"const": "monte-carlo-ucb-terminal-victory-v1"},
+    "seed_protocol_id": {"const": "sha256-domain-parity-v1"},
+    "configuration": {"$ref": "#/$defs/configuration"},
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/run"}
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "summary": {"$ref": "#/$defs/summary"}
+  },
+  "$defs": {
+    "objective": {
+      "type": "object",
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "auxiliary",
+        "auxiliary_reward_allowed"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "primary": {"const": "terminal_victory"},
+        "constraint": {"const": "cpu_time_per_run"},
+        "whole_run_budget": {"type": "integer", "minimum": 1},
+        "auxiliary": {"type": "array", "items": {"type": "string"}},
+        "auxiliary_reward_allowed": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "search_simulations",
+        "evaluation_samples_per_candidate",
+        "exploration_constant",
+        "sampling_seed",
+        "maximum_rollout_steps"
+      ],
+      "properties": {
+        "search_simulations": {"type": "integer", "minimum": 1},
+        "evaluation_samples_per_candidate": {"type": "integer", "minimum": 1},
+        "exploration_constant": {"type": "number", "minimum": 0},
+        "sampling_seed": {"type": "integer", "minimum": 0},
+        "maximum_rollout_steps": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "run": {
+      "type": "object",
+      "required": [
+        "run_id",
+        "seed",
+        "split",
+        "terminal",
+        "victory",
+        "record_ids",
+        "encounter_ids"
+      ],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "seed": {"type": "integer", "minimum": 0},
+        "split": {"enum": ["train", "validation", "test"]},
+        "terminal": {"const": true},
+        "victory": {"type": "boolean"},
+        "record_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+        },
+        "encounter_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "record_id",
+        "run_id",
+        "encounter_id",
+        "decision_index",
+        "model_input",
+        "teacher_target",
+        "observed_transition",
+        "run_terminal_victory"
+      ],
+      "properties": {
+        "schema_version": {"const": "teacher-record-v1"},
+        "record_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "run_id": {"type": "string", "minLength": 1},
+        "encounter_id": {"type": "string", "minLength": 1},
+        "decision_index": {"type": "integer", "minimum": 0},
+        "model_input": {"$ref": "model-input-v1.json"},
+        "teacher_target": {"$ref": "#/$defs/target"},
+        "observed_transition": {"$ref": "#/$defs/transition"},
+        "run_terminal_victory": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "teacher_id",
+        "seed_protocol_id",
+        "search_seed_domain",
+        "evaluation_seed_domain",
+        "search_simulations",
+        "evaluation_samples_per_candidate",
+        "candidates",
+        "selected_candidate_index",
+        "selected_action_id"
+      ],
+      "properties": {
+        "teacher_id": {"const": "monte-carlo-ucb-terminal-victory-v1"},
+        "seed_protocol_id": {"const": "sha256-domain-parity-v1"},
+        "search_seed_domain": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}:search-even$"
+        },
+        "evaluation_seed_domain": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}:evaluation-odd$"
+        },
+        "search_simulations": {"type": "integer", "minimum": 1},
+        "evaluation_samples_per_candidate": {"type": "integer", "minimum": 1},
+        "candidates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/candidate"}
+        },
+        "selected_candidate_index": {"type": "integer", "minimum": 0},
+        "selected_action_id": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "candidate_index",
+        "source_action_id",
+        "action_kind",
+        "search",
+        "independent_evaluation"
+      ],
+      "properties": {
+        "candidate_index": {"type": "integer", "minimum": 0},
+        "source_action_id": {"type": "string", "minLength": 1},
+        "action_kind": {"type": "string", "minLength": 1},
+        "search": {"$ref": "#/$defs/searchEstimate"},
+        "independent_evaluation": {"$ref": "#/$defs/estimate"}
+      },
+      "additionalProperties": false
+    },
+    "estimate": {
+      "type": "object",
+      "required": ["sample_count", "terminal_value", "outcome_variance", "outcomes"],
+      "properties": {
+        "sample_count": {"type": "integer", "minimum": 1},
+        "terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "outcome_variance": {"type": "number", "minimum": 0, "maximum": 0.25},
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/outcome"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "searchEstimate": {
+      "type": "object",
+      "required": [
+        "sample_count",
+        "terminal_value",
+        "outcome_variance",
+        "outcomes",
+        "visits",
+        "visit_probability"
+      ],
+      "properties": {
+        "sample_count": {"type": "integer", "minimum": 1},
+        "terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "outcome_variance": {"type": "number", "minimum": 0, "maximum": 0.25},
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/outcome"}
+        },
+        "visits": {"type": "integer", "minimum": 1},
+        "visit_probability": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "required": [
+        "sample_index",
+        "simulation_seed",
+        "terminal_victory",
+        "terminal_reward",
+        "decisions"
+      ],
+      "properties": {
+        "sample_index": {"type": "integer", "minimum": 0},
+        "simulation_seed": {"type": "integer", "minimum": 0},
+        "terminal_victory": {"type": "boolean"},
+        "terminal_reward": {"enum": [0.0, 1.0]},
+        "decisions": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "transition": {
+      "type": "object",
+      "required": ["selected_action_id", "next_state_hash", "terminal", "victory", "reward"],
+      "properties": {
+        "selected_action_id": {"type": "string", "minLength": 1},
+        "next_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "terminal": {"type": "boolean"},
+        "victory": {"type": "boolean"},
+        "reward": {"enum": [0.0, 1.0]}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "runs",
+        "records",
+        "candidates",
+        "victories",
+        "defeats",
+        "search_simulations",
+        "evaluation_simulations"
+      ],
+      "properties": {
+        "runs": {"type": "integer", "minimum": 1},
+        "records": {"type": "integer", "minimum": 1},
+        "candidates": {"type": "integer", "minimum": 1},
+        "victories": {"type": "integer", "minimum": 0},
+        "defeats": {"type": "integer", "minimum": 0},
+        "search_simulations": {"type": "integer", "minimum": 1},
+        "evaluation_simulations": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
