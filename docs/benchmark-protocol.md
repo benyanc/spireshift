@@ -57,3 +57,9 @@ parameters are fit on one subfold and all calibration scores, sharpness measures
 catastrophic errors, false-safe risk predictions, and uncertainty records are reported on the other.
 Both subfolds remain validation data; neither result may be described as the final readiness test.
 See [calibration and uncertainty](calibration-and-uncertainty.md).
+
+Combat-search leaves are valued as terminal-victory probabilities. Exact terminal rewards,
+truncated-rollout endpoint values, and direct run-value bootstraps retain separate provenance and
+configurable weights. Every fixed-search report includes a local HP/survival ablation so a proxy
+cannot silently become the optimized objective. See
+[tactical-to-run value handoff](tactical-to-run-value.md).

@@ -111,3 +111,9 @@ affine-logit transforms calibrate run value and tactical death risk on the fit r
 rules, catastrophic errors, and per-decision uncertainty signals are computed only on audit runs.
 The final test partition remains unopened. See
 [calibration and uncertainty](calibration-and-uncertainty.md).
+
+Tactical leaf evaluation connects combat search to that terminal run-value system. Exact terminal
+returns override all estimates; otherwise equal sampled worlds mix terminating rollout outcomes,
+run-value bootstraps at truncated endpoints, and a direct leaf bootstrap. The checkpoint adapter
+binds the ruleset and objective, while the result records representation paths and portable compute
+units. See [tactical-to-run value handoff](tactical-to-run-value.md).

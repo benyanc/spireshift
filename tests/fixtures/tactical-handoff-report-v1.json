@@ -1,0 +1,641 @@
+{
+  "backend": "tactical-handoff-mock-v1",
+  "cases": [
+    {
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "candidate_index": 0,
+          "estimated_terminal_victory_probability": 0.325,
+          "local_hp_score": 0.875,
+          "representation_hashes": [
+            "sha256:4fc7c77cd16f469efee31dd52b3f0c41af8c24c9d7d4836ac7830e0d82b6cfc6"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.potions.charges[0]",
+            "player.potions.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.366666666667,
+            0.283333333333
+          ],
+          "source_action_id": "preserve_hp",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 70,
+            "max_hp": 80,
+            "permanent_power": 0,
+            "potion_charges": 1,
+            "relic_counter": 0,
+            "relic_ids": []
+          },
+          "successor_state_hashes": [
+            "c99c4d4120aa2e66a2b5739bcaf310b6061280a9caefa6430350d97d362cb7ba"
+          ]
+        },
+        {
+          "action_kind": "play_card",
+          "candidate_index": 1,
+          "estimated_terminal_victory_probability": 0.781666666667,
+          "local_hp_score": 0.525,
+          "representation_hashes": [
+            "sha256:b23642b881eb3e965538f602f419b51377de2eba470c26c390b13345ed402f2e"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.potions.charges[0]",
+            "player.potions.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.823333333333,
+            0.74
+          ],
+          "source_action_id": "take_damage_for_power",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 42,
+            "max_hp": 80,
+            "permanent_power": 2,
+            "potion_charges": 1,
+            "relic_counter": 0,
+            "relic_ids": []
+          },
+          "successor_state_hashes": [
+            "a3c90bcd8152b64705e85c07885b7045e6449c9459bd3d6dd2ad830f7ec569d9"
+          ]
+        },
+        {
+          "action_kind": "use_potion",
+          "candidate_index": 2,
+          "estimated_terminal_victory_probability": 0.898333333333,
+          "local_hp_score": 0.75,
+          "representation_hashes": [
+            "sha256:b5f7f32a685d3cda8401565cfe61f44491e8daf610959c7d51c1fb5d5e4d0586"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.relics.counter[0]",
+            "player.relics.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.94,
+            0.856666666667
+          ],
+          "source_action_id": "spend_potion_for_relic",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 60,
+            "max_hp": 80,
+            "permanent_power": 0,
+            "potion_charges": 0,
+            "relic_counter": 1,
+            "relic_ids": [
+              "ember_core"
+            ]
+          },
+          "successor_state_hashes": [
+            "860400ada8970d20b7da14f63354d836832a14dea7c9727fde3aab266ff82130"
+          ]
+        }
+      ],
+      "damage_tradeoff_beats_hp_greedy": true,
+      "local_hp_selected_action_id": "preserve_hp",
+      "potion_tradeoff_beats_hp_greedy": true,
+      "root_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "seed": 7,
+      "selection_disagrees": true,
+      "terminal_value_selected_action_id": "spend_potion_for_relic",
+      "usage": {
+        "compute_units": 60,
+        "run_value_inferences": 6,
+        "sampled_worlds": 54,
+        "simulated_transitions": 54
+      }
+    },
+    {
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "candidate_index": 0,
+          "estimated_terminal_victory_probability": 0.45,
+          "local_hp_score": 0.875,
+          "representation_hashes": [
+            "sha256:4fc7c77cd16f469efee31dd52b3f0c41af8c24c9d7d4836ac7830e0d82b6cfc6"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.potions.charges[0]",
+            "player.potions.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.366666666667,
+            0.533333333333
+          ],
+          "source_action_id": "preserve_hp",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 70,
+            "max_hp": 80,
+            "permanent_power": 0,
+            "potion_charges": 1,
+            "relic_counter": 0,
+            "relic_ids": []
+          },
+          "successor_state_hashes": [
+            "c99c4d4120aa2e66a2b5739bcaf310b6061280a9caefa6430350d97d362cb7ba"
+          ]
+        },
+        {
+          "action_kind": "play_card",
+          "candidate_index": 1,
+          "estimated_terminal_victory_probability": 0.823333333333,
+          "local_hp_score": 0.525,
+          "representation_hashes": [
+            "sha256:b23642b881eb3e965538f602f419b51377de2eba470c26c390b13345ed402f2e"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.potions.charges[0]",
+            "player.potions.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.906666666667,
+            0.74
+          ],
+          "source_action_id": "take_damage_for_power",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 42,
+            "max_hp": 80,
+            "permanent_power": 2,
+            "potion_charges": 1,
+            "relic_counter": 0,
+            "relic_ids": []
+          },
+          "successor_state_hashes": [
+            "a3c90bcd8152b64705e85c07885b7045e6449c9459bd3d6dd2ad830f7ec569d9"
+          ]
+        },
+        {
+          "action_kind": "use_potion",
+          "candidate_index": 2,
+          "estimated_terminal_victory_probability": 0.815,
+          "local_hp_score": 0.75,
+          "representation_hashes": [
+            "sha256:b5f7f32a685d3cda8401565cfe61f44491e8daf610959c7d51c1fb5d5e4d0586"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.relics.counter[0]",
+            "player.relics.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.856666666667,
+            0.773333333333
+          ],
+          "source_action_id": "spend_potion_for_relic",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 60,
+            "max_hp": 80,
+            "permanent_power": 0,
+            "potion_charges": 0,
+            "relic_counter": 1,
+            "relic_ids": [
+              "ember_core"
+            ]
+          },
+          "successor_state_hashes": [
+            "860400ada8970d20b7da14f63354d836832a14dea7c9727fde3aab266ff82130"
+          ]
+        }
+      ],
+      "damage_tradeoff_beats_hp_greedy": true,
+      "local_hp_selected_action_id": "preserve_hp",
+      "potion_tradeoff_beats_hp_greedy": true,
+      "root_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "seed": 19,
+      "selection_disagrees": true,
+      "terminal_value_selected_action_id": "take_damage_for_power",
+      "usage": {
+        "compute_units": 60,
+        "run_value_inferences": 6,
+        "sampled_worlds": 54,
+        "simulated_transitions": 54
+      }
+    },
+    {
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "candidate_index": 0,
+          "estimated_terminal_victory_probability": 0.45,
+          "local_hp_score": 0.875,
+          "representation_hashes": [
+            "sha256:4fc7c77cd16f469efee31dd52b3f0c41af8c24c9d7d4836ac7830e0d82b6cfc6"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.potions.charges[0]",
+            "player.potions.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.45,
+            0.45
+          ],
+          "source_action_id": "preserve_hp",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 70,
+            "max_hp": 80,
+            "permanent_power": 0,
+            "potion_charges": 1,
+            "relic_counter": 0,
+            "relic_ids": []
+          },
+          "successor_state_hashes": [
+            "c99c4d4120aa2e66a2b5739bcaf310b6061280a9caefa6430350d97d362cb7ba"
+          ]
+        },
+        {
+          "action_kind": "play_card",
+          "candidate_index": 1,
+          "estimated_terminal_victory_probability": 0.531666666667,
+          "local_hp_score": 0.525,
+          "representation_hashes": [
+            "sha256:b23642b881eb3e965538f602f419b51377de2eba470c26c390b13345ed402f2e"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.potions.charges[0]",
+            "player.potions.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.49,
+            0.573333333333
+          ],
+          "source_action_id": "take_damage_for_power",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 42,
+            "max_hp": 80,
+            "permanent_power": 2,
+            "potion_charges": 1,
+            "relic_counter": 0,
+            "relic_ids": []
+          },
+          "successor_state_hashes": [
+            "a3c90bcd8152b64705e85c07885b7045e6449c9459bd3d6dd2ad830f7ec569d9"
+          ]
+        },
+        {
+          "action_kind": "use_potion",
+          "candidate_index": 2,
+          "estimated_terminal_victory_probability": 0.898333333333,
+          "local_hp_score": 0.75,
+          "representation_hashes": [
+            "sha256:b5f7f32a685d3cda8401565cfe61f44491e8daf610959c7d51c1fb5d5e4d0586"
+          ],
+          "represented_state_paths": [
+            "combat.enemy_hp",
+            "combat.turn",
+            "player.deck.id[0]",
+            "player.deck.id[1]",
+            "player.deck.id[2]",
+            "player.deck.upgrades[0]",
+            "player.deck.upgrades[1]",
+            "player.deck.upgrades[2]",
+            "player.gold",
+            "player.hp",
+            "player.max_hp",
+            "player.relics.counter[0]",
+            "player.relics.id[0]",
+            "run.act",
+            "run.floor",
+            "run.next_options.id[0]",
+            "run.next_options.id[1]",
+            "run.next_options.revealed[0]",
+            "run.next_options.revealed[1]",
+            "run.permanent_power",
+            "run.relic_counter",
+            "run.room_type",
+            "terminal",
+            "victory"
+          ],
+          "rollout_bootstrap_samples": 0,
+          "rollout_terminal_samples": 16,
+          "sampled_leaf_values": [
+            0.94,
+            0.856666666667
+          ],
+          "source_action_id": "spend_potion_for_relic",
+          "successor_resources": {
+            "deck_size": 3,
+            "future_path_options": 2,
+            "gold": 120,
+            "hp": 60,
+            "max_hp": 80,
+            "permanent_power": 0,
+            "potion_charges": 0,
+            "relic_counter": 1,
+            "relic_ids": [
+              "ember_core"
+            ]
+          },
+          "successor_state_hashes": [
+            "860400ada8970d20b7da14f63354d836832a14dea7c9727fde3aab266ff82130"
+          ]
+        }
+      ],
+      "damage_tradeoff_beats_hp_greedy": true,
+      "local_hp_selected_action_id": "preserve_hp",
+      "potion_tradeoff_beats_hp_greedy": true,
+      "root_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "seed": 41,
+      "selection_disagrees": true,
+      "terminal_value_selected_action_id": "spend_potion_for_relic",
+      "usage": {
+        "compute_units": 60,
+        "run_value_inferences": 6,
+        "sampled_worlds": 54,
+        "simulated_transitions": 54
+      }
+    }
+  ],
+  "claim_scope": "mock_pipeline_validation",
+  "compute_unit_definition": "one simulated transition or one run-value inference",
+  "configuration": {
+    "bootstrap_weight": 0.5,
+    "candidate_worlds": 2,
+    "exact_terminal_weight": 1.0,
+    "maximum_compute_units": 128,
+    "rollout_horizon": 1,
+    "rollout_samples": 8,
+    "truncated_rollout_weight": 0.5
+  },
+  "local_ablation_id": "post-combat-hp-greedy-v1",
+  "method": "terminal-victory-leaf-mixture-v1",
+  "objective": {
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "local_hp_role": "diagnostic_ablation_only",
+    "portable_compute_proxy": "one simulated transition or one run-value inference",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "report_id": "sha256:3dd4eae07297e726530b251d090bd142827b559f4bc5bde2a392b3a531f062fe",
+  "represented_state_paths": [
+    "combat.enemy_hp",
+    "combat.turn",
+    "player.deck.id[0]",
+    "player.deck.id[1]",
+    "player.deck.id[2]",
+    "player.deck.upgrades[0]",
+    "player.deck.upgrades[1]",
+    "player.deck.upgrades[2]",
+    "player.gold",
+    "player.hp",
+    "player.max_hp",
+    "player.potions.charges[0]",
+    "player.potions.id[0]",
+    "player.relics.counter[0]",
+    "player.relics.id[0]",
+    "run.act",
+    "run.floor",
+    "run.next_options.id[0]",
+    "run.next_options.id[1]",
+    "run.next_options.revealed[0]",
+    "run.next_options.revealed[1]",
+    "run.permanent_power",
+    "run.relic_counter",
+    "run.room_type",
+    "terminal",
+    "victory"
+  ],
+  "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+  "run_value_estimator_id": "tactical-handoff-public-state-oracle-v1",
+  "schema_version": "tactical-handoff-report-v1",
+  "seeds": [
+    7,
+    19,
+    41
+  ],
+  "summary": {
+    "cases": 3,
+    "damage_tradeoff_cases": 3,
+    "local_hp_selected_actions": [
+      "preserve_hp",
+      "preserve_hp",
+      "preserve_hp"
+    ],
+    "potion_tradeoff_cases": 3,
+    "selection_disagreements": 3,
+    "terminal_value_selected_actions": [
+      "spend_potion_for_relic",
+      "take_damage_for_power",
+      "spend_potion_for_relic"
+    ],
+    "total_compute_units": 180
+  }
+}

@@ -30,7 +30,9 @@ The repository currently contains the research contracts and a seeded mock verti
 16. complete on-policy student collection with selective, cost-accounted teacher relabeling and
     verified DAgger augmentation; and
 17. checkpoint-bound calibration fit/audit subfolds, proper scoring rules, catastrophic-error
-    analysis, and decision-level uncertainty signals.
+    analysis, and decision-level uncertainty signals; and
+18. a compute-bounded tactical-to-run value handoff with exact returns, truncated rollouts,
+    run-value bootstraps, persistent-state preservation, and an HP-greedy ablation.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -132,6 +134,11 @@ model checkpoint with complete provenance.
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
 high-confidence catastrophic errors, false-safe risk predictions, and interpretable inference-time
 signals for later value-of-computation training while leaving the final test split sealed.
+
+[Tactical-to-run value handoff](docs/tactical-to-run-value.md) ranks combat successors by estimated
+terminal victory using exact terminal outcomes, truncated continuations, and run-value bootstraps.
+It binds learned artifacts to the active ruleset and objective, preserves persistent public state,
+and accounts for every simulated transition and model inference.
 
 ## Objective
 

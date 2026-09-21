@@ -90,6 +90,13 @@ from spireshift.splits import (
     write_frozen_dataset_index,
     write_frozen_split_manifest,
 )
+from spireshift.tactical_handoff import (
+    benchmark_mock_tactical_handoff,
+    load_tactical_handoff_report,
+    verify_mock_tactical_handoff_report,
+    write_tactical_handoff_report,
+)
+from spireshift.tactical_values import TacticalValueConfig
 from spireshift.teacher_data import (
     TeacherConfig,
     generate_mock_teacher_dataset,
@@ -402,6 +409,31 @@ def build_parser() -> argparse.ArgumentParser:
     dagger_verify.add_argument("reference_dataset", type=Path)
     dagger_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
     dagger_verify.add_argument("--output", type=Path)
+
+    tactical_handoff = subparsers.add_parser(
+        "tactical-handoff", help="Evaluate tactical leaves with terminal run value"
+    )
+    tactical_handoff_commands = tactical_handoff.add_subparsers(
+        dest="tactical_handoff_command", required=True
+    )
+    tactical_handoff_benchmark = tactical_handoff_commands.add_parser(
+        "benchmark-mock", help="Run the seeded terminal-value versus HP-greedy ablation"
+    )
+    tactical_handoff_benchmark.add_argument("output", type=Path)
+    tactical_handoff_benchmark.add_argument("--seeds", type=int, nargs="+", default=[7, 19, 41])
+    tactical_handoff_benchmark.add_argument("--candidate-worlds", type=int, default=2)
+    tactical_handoff_benchmark.add_argument("--rollout-samples", type=int, default=8)
+    tactical_handoff_benchmark.add_argument("--rollout-horizon", type=int, default=1)
+    tactical_handoff_benchmark.add_argument("--exact-terminal-weight", type=float, default=1.0)
+    tactical_handoff_benchmark.add_argument("--truncated-rollout-weight", type=float, default=0.5)
+    tactical_handoff_benchmark.add_argument("--bootstrap-weight", type=float, default=0.5)
+    tactical_handoff_benchmark.add_argument("--maximum-compute-units", type=int, default=128)
+    tactical_handoff_benchmark.add_argument("--whole-run-budget", type=int, default=128)
+    tactical_handoff_verify = tactical_handoff_commands.add_parser(
+        "verify", help="Regenerate and verify a tactical-handoff report"
+    )
+    tactical_handoff_verify.add_argument("report", type=Path)
+    tactical_handoff_verify.add_argument("--output", type=Path)
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -991,6 +1023,41 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = args.output if args.dagger_command == "verify" else None
+            _emit_json({"status": "error", "error": str(error)}, error_output)
+            return 1
+    if args.command == "tactical-handoff":
+        try:
+            if args.tactical_handoff_command == "verify":
+                handoff_verification = verify_mock_tactical_handoff_report(
+                    load_tactical_handoff_report(args.report)
+                )
+                _emit_json(handoff_verification.as_dict(), args.output)
+                return 0 if handoff_verification.valid else 1
+            handoff_report = benchmark_mock_tactical_handoff(
+                seeds=tuple(args.seeds),
+                config=TacticalValueConfig(
+                    candidate_worlds=args.candidate_worlds,
+                    rollout_samples=args.rollout_samples,
+                    rollout_horizon=args.rollout_horizon,
+                    exact_terminal_weight=args.exact_terminal_weight,
+                    truncated_rollout_weight=args.truncated_rollout_weight,
+                    bootstrap_weight=args.bootstrap_weight,
+                    maximum_compute_units=args.maximum_compute_units,
+                ),
+                whole_run_budget=args.whole_run_budget,
+            )
+            write_tactical_handoff_report(handoff_report, args.output)
+            _emit_json(
+                {
+                    "path": str(args.output),
+                    "report_id": handoff_report["report_id"],
+                    "summary": handoff_report["summary"],
+                },
+                None,
+            )
+            return 0
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
+            error_output = args.output if args.tactical_handoff_command == "verify" else None
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "demo":
