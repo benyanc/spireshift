@@ -1,0 +1,605 @@
+{
+  "claim_scope": "mock_pipeline_validation",
+  "data_provenance": {
+    "train": {
+      "configuration": {
+        "evaluation_samples_per_candidate": 16,
+        "exploration_constant": 1.4142135623730951,
+        "maximum_rollout_steps": 4096,
+        "sampling_seed": 0,
+        "search_simulations": 16
+      },
+      "dataset_id": "sha256:2f6c4ba9293442283520cd8f718b2a47974c84c730e265a1475211f596fe4144",
+      "partition": "train",
+      "seeds": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+    },
+    "validation": {
+      "configuration": {
+        "evaluation_samples_per_candidate": 16,
+        "exploration_constant": 1.4142135623730951,
+        "maximum_rollout_steps": 4096,
+        "sampling_seed": 0,
+        "search_simulations": 16
+      },
+      "dataset_id": "sha256:3277617d15148d5b2d19408496dc06b5b90de3e71f89dccbaa7ac100cddba327",
+      "partition": "validation",
+      "seeds": [
+        20,
+        28,
+        31,
+        36,
+        37,
+        42,
+        44,
+        49
+      ],
+      "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+    }
+  },
+  "held_out_metrics": {
+    "policy": {
+      "action_agreement": 0.928571428571,
+      "cross_entropy": 0.36190536312,
+      "mean_independent_value_regret": 0.0,
+      "p95_independent_value_regret": 0.0
+    },
+    "run_value": {
+      "brier_score": 0.20590008397,
+      "calibration_bins": [
+        {
+          "bin": 5,
+          "count": 128,
+          "mean_prediction": 0.55116136298,
+          "observed_frequency": 0.609375
+        },
+        {
+          "bin": 6,
+          "count": 16,
+          "mean_prediction": 0.601272905061,
+          "observed_frequency": 0.1875
+        },
+        {
+          "bin": 7,
+          "count": 80,
+          "mean_prediction": 0.747904041502,
+          "observed_frequency": 0.875
+        }
+      ],
+      "expected_calibration_error": 0.108211556694,
+      "mean_absolute_error": 0.176400517545,
+      "samples": 224
+    },
+    "tactical_death_risk": {
+      "brier_score": 0.107614301254,
+      "calibration_bins": [
+        {
+          "bin": 0,
+          "count": 128,
+          "mean_prediction": 0.014624272468,
+          "observed_frequency": 0.0
+        },
+        {
+          "bin": 2,
+          "count": 208,
+          "mean_prediction": 0.23060864348,
+          "observed_frequency": 0.177884615385
+        },
+        {
+          "bin": 3,
+          "count": 16,
+          "mean_prediction": 0.321631017296,
+          "observed_frequency": 0.8125
+        }
+      ],
+      "expected_calibration_error": 0.058785251258,
+      "samples": 352
+    }
+  },
+  "model_id": "sha256:7f620aeb48248ded3842fff44a4a12397360ceb5236e87b70317e32a3bb15191",
+  "model_type": "sparse-factorized-multihead-v1",
+  "report_id": "sha256:bb96fa09069dba65d74dfe1c113d457d1da45a0cb2d0d284ed7c3e5b2ee185e5",
+  "schema_version": "model-training-report-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "train_dataset_id": "sha256:2f6c4ba9293442283520cd8f718b2a47974c84c730e265a1475211f596fe4144",
+  "training_history": [
+    {
+      "epoch": 1,
+      "policy_cross_entropy": 0.38713630524,
+      "run_value_cross_entropy": 0.679303177549,
+      "tactical_risk_cross_entropy": 0.583748209203
+    },
+    {
+      "epoch": 2,
+      "policy_cross_entropy": 0.373241601124,
+      "run_value_cross_entropy": 0.662460616369,
+      "tactical_risk_cross_entropy": 0.469389704202
+    },
+    {
+      "epoch": 3,
+      "policy_cross_entropy": 0.365448590557,
+      "run_value_cross_entropy": 0.655395447758,
+      "tactical_risk_cross_entropy": 0.428921338617
+    },
+    {
+      "epoch": 4,
+      "policy_cross_entropy": 0.361086795302,
+      "run_value_cross_entropy": 0.652082225643,
+      "tactical_risk_cross_entropy": 0.410932322986
+    },
+    {
+      "epoch": 5,
+      "policy_cross_entropy": 0.358587802779,
+      "run_value_cross_entropy": 0.650290182512,
+      "tactical_risk_cross_entropy": 0.401619653796
+    },
+    {
+      "epoch": 6,
+      "policy_cross_entropy": 0.357085226981,
+      "run_value_cross_entropy": 0.648824703437,
+      "tactical_risk_cross_entropy": 0.395916028024
+    },
+    {
+      "epoch": 7,
+      "policy_cross_entropy": 0.356282596279,
+      "run_value_cross_entropy": 0.647720338311,
+      "tactical_risk_cross_entropy": 0.39190866439
+    },
+    {
+      "epoch": 8,
+      "policy_cross_entropy": 0.355750584867,
+      "run_value_cross_entropy": 0.646671474409,
+      "tactical_risk_cross_entropy": 0.388847029172
+    },
+    {
+      "epoch": 9,
+      "policy_cross_entropy": 0.355519182891,
+      "run_value_cross_entropy": 0.645752586597,
+      "tactical_risk_cross_entropy": 0.386205451781
+    },
+    {
+      "epoch": 10,
+      "policy_cross_entropy": 0.35536046928,
+      "run_value_cross_entropy": 0.644996106302,
+      "tactical_risk_cross_entropy": 0.38402847178
+    },
+    {
+      "epoch": 11,
+      "policy_cross_entropy": 0.355278159447,
+      "run_value_cross_entropy": 0.644219690295,
+      "tactical_risk_cross_entropy": 0.382121568464
+    },
+    {
+      "epoch": 12,
+      "policy_cross_entropy": 0.355239607657,
+      "run_value_cross_entropy": 0.643655021469,
+      "tactical_risk_cross_entropy": 0.380397592477
+    },
+    {
+      "epoch": 13,
+      "policy_cross_entropy": 0.355215066594,
+      "run_value_cross_entropy": 0.642599096502,
+      "tactical_risk_cross_entropy": 0.378809603595
+    },
+    {
+      "epoch": 14,
+      "policy_cross_entropy": 0.355179812118,
+      "run_value_cross_entropy": 0.642185580756,
+      "tactical_risk_cross_entropy": 0.377394434089
+    },
+    {
+      "epoch": 15,
+      "policy_cross_entropy": 0.355189115391,
+      "run_value_cross_entropy": 0.641872823107,
+      "tactical_risk_cross_entropy": 0.376145751803
+    },
+    {
+      "epoch": 16,
+      "policy_cross_entropy": 0.355180049754,
+      "run_value_cross_entropy": 0.641001365326,
+      "tactical_risk_cross_entropy": 0.374950183941
+    },
+    {
+      "epoch": 17,
+      "policy_cross_entropy": 0.355173945464,
+      "run_value_cross_entropy": 0.641052149454,
+      "tactical_risk_cross_entropy": 0.373867182975
+    },
+    {
+      "epoch": 18,
+      "policy_cross_entropy": 0.355169965109,
+      "run_value_cross_entropy": 0.640239337521,
+      "tactical_risk_cross_entropy": 0.372829766544
+    },
+    {
+      "epoch": 19,
+      "policy_cross_entropy": 0.355175117421,
+      "run_value_cross_entropy": 0.640249617922,
+      "tactical_risk_cross_entropy": 0.371914604504
+    },
+    {
+      "epoch": 20,
+      "policy_cross_entropy": 0.355175578595,
+      "run_value_cross_entropy": 0.639856861934,
+      "tactical_risk_cross_entropy": 0.371019400126
+    },
+    {
+      "epoch": 21,
+      "policy_cross_entropy": 0.355172443181,
+      "run_value_cross_entropy": 0.639596644637,
+      "tactical_risk_cross_entropy": 0.37022383007
+    },
+    {
+      "epoch": 22,
+      "policy_cross_entropy": 0.355179352881,
+      "run_value_cross_entropy": 0.639265736087,
+      "tactical_risk_cross_entropy": 0.369459931253
+    },
+    {
+      "epoch": 23,
+      "policy_cross_entropy": 0.355178523114,
+      "run_value_cross_entropy": 0.638938584521,
+      "tactical_risk_cross_entropy": 0.368709728958
+    },
+    {
+      "epoch": 24,
+      "policy_cross_entropy": 0.355175239891,
+      "run_value_cross_entropy": 0.638761923785,
+      "tactical_risk_cross_entropy": 0.36807528299
+    },
+    {
+      "epoch": 25,
+      "policy_cross_entropy": 0.355163577659,
+      "run_value_cross_entropy": 0.638435173798,
+      "tactical_risk_cross_entropy": 0.36742015324
+    },
+    {
+      "epoch": 26,
+      "policy_cross_entropy": 0.355178995159,
+      "run_value_cross_entropy": 0.637903812191,
+      "tactical_risk_cross_entropy": 0.366766777578
+    },
+    {
+      "epoch": 27,
+      "policy_cross_entropy": 0.355175135261,
+      "run_value_cross_entropy": 0.637959738414,
+      "tactical_risk_cross_entropy": 0.366251827032
+    },
+    {
+      "epoch": 28,
+      "policy_cross_entropy": 0.355174008237,
+      "run_value_cross_entropy": 0.63783768584,
+      "tactical_risk_cross_entropy": 0.365747517818
+    },
+    {
+      "epoch": 29,
+      "policy_cross_entropy": 0.355183290621,
+      "run_value_cross_entropy": 0.637476401429,
+      "tactical_risk_cross_entropy": 0.365215551331
+    },
+    {
+      "epoch": 30,
+      "policy_cross_entropy": 0.355171362424,
+      "run_value_cross_entropy": 0.637308814708,
+      "tactical_risk_cross_entropy": 0.364755002131
+    },
+    {
+      "epoch": 31,
+      "policy_cross_entropy": 0.35518127057,
+      "run_value_cross_entropy": 0.63716507698,
+      "tactical_risk_cross_entropy": 0.364285947523
+    },
+    {
+      "epoch": 32,
+      "policy_cross_entropy": 0.355179783412,
+      "run_value_cross_entropy": 0.636991978661,
+      "tactical_risk_cross_entropy": 0.363847976981
+    },
+    {
+      "epoch": 33,
+      "policy_cross_entropy": 0.355176077066,
+      "run_value_cross_entropy": 0.63658708854,
+      "tactical_risk_cross_entropy": 0.363415646619
+    },
+    {
+      "epoch": 34,
+      "policy_cross_entropy": 0.355173486818,
+      "run_value_cross_entropy": 0.636434426949,
+      "tactical_risk_cross_entropy": 0.363028967424
+    },
+    {
+      "epoch": 35,
+      "policy_cross_entropy": 0.355177953041,
+      "run_value_cross_entropy": 0.636347039458,
+      "tactical_risk_cross_entropy": 0.36265012315
+    },
+    {
+      "epoch": 36,
+      "policy_cross_entropy": 0.355169760809,
+      "run_value_cross_entropy": 0.636207156803,
+      "tactical_risk_cross_entropy": 0.362285671541
+    },
+    {
+      "epoch": 37,
+      "policy_cross_entropy": 0.355180413254,
+      "run_value_cross_entropy": 0.636065828448,
+      "tactical_risk_cross_entropy": 0.361939549149
+    },
+    {
+      "epoch": 38,
+      "policy_cross_entropy": 0.355179828815,
+      "run_value_cross_entropy": 0.635795226851,
+      "tactical_risk_cross_entropy": 0.361558114228
+    },
+    {
+      "epoch": 39,
+      "policy_cross_entropy": 0.35517800506,
+      "run_value_cross_entropy": 0.635695954794,
+      "tactical_risk_cross_entropy": 0.361240897396
+    },
+    {
+      "epoch": 40,
+      "policy_cross_entropy": 0.355153518569,
+      "run_value_cross_entropy": 0.635371745194,
+      "tactical_risk_cross_entropy": 0.360951756816
+    },
+    {
+      "epoch": 41,
+      "policy_cross_entropy": 0.355183388425,
+      "run_value_cross_entropy": 0.635393757015,
+      "tactical_risk_cross_entropy": 0.360641653557
+    },
+    {
+      "epoch": 42,
+      "policy_cross_entropy": 0.355171910428,
+      "run_value_cross_entropy": 0.63514194521,
+      "tactical_risk_cross_entropy": 0.360330466286
+    },
+    {
+      "epoch": 43,
+      "policy_cross_entropy": 0.355180120893,
+      "run_value_cross_entropy": 0.634932309668,
+      "tactical_risk_cross_entropy": 0.360075926476
+    },
+    {
+      "epoch": 44,
+      "policy_cross_entropy": 0.355173970964,
+      "run_value_cross_entropy": 0.634851364383,
+      "tactical_risk_cross_entropy": 0.359817347142
+    },
+    {
+      "epoch": 45,
+      "policy_cross_entropy": 0.355172390952,
+      "run_value_cross_entropy": 0.634726478994,
+      "tactical_risk_cross_entropy": 0.3595310221
+    },
+    {
+      "epoch": 46,
+      "policy_cross_entropy": 0.355174883443,
+      "run_value_cross_entropy": 0.634672382651,
+      "tactical_risk_cross_entropy": 0.359302729553
+    },
+    {
+      "epoch": 47,
+      "policy_cross_entropy": 0.355174461994,
+      "run_value_cross_entropy": 0.634356217075,
+      "tactical_risk_cross_entropy": 0.359018486418
+    },
+    {
+      "epoch": 48,
+      "policy_cross_entropy": 0.355159356693,
+      "run_value_cross_entropy": 0.633953593115,
+      "tactical_risk_cross_entropy": 0.358779927192
+    },
+    {
+      "epoch": 49,
+      "policy_cross_entropy": 0.355177671134,
+      "run_value_cross_entropy": 0.634132847577,
+      "tactical_risk_cross_entropy": 0.358580964197
+    },
+    {
+      "epoch": 50,
+      "policy_cross_entropy": 0.355152946808,
+      "run_value_cross_entropy": 0.63401015502,
+      "tactical_risk_cross_entropy": 0.358350169087
+    },
+    {
+      "epoch": 51,
+      "policy_cross_entropy": 0.355172419523,
+      "run_value_cross_entropy": 0.633733765493,
+      "tactical_risk_cross_entropy": 0.358137279211
+    },
+    {
+      "epoch": 52,
+      "policy_cross_entropy": 0.355181856333,
+      "run_value_cross_entropy": 0.633804737871,
+      "tactical_risk_cross_entropy": 0.357911881323
+    },
+    {
+      "epoch": 53,
+      "policy_cross_entropy": 0.355154496642,
+      "run_value_cross_entropy": 0.633457127119,
+      "tactical_risk_cross_entropy": 0.357706908302
+    },
+    {
+      "epoch": 54,
+      "policy_cross_entropy": 0.355161350441,
+      "run_value_cross_entropy": 0.633273729754,
+      "tactical_risk_cross_entropy": 0.357500401599
+    },
+    {
+      "epoch": 55,
+      "policy_cross_entropy": 0.355167162697,
+      "run_value_cross_entropy": 0.633279257407,
+      "tactical_risk_cross_entropy": 0.357293689635
+    },
+    {
+      "epoch": 56,
+      "policy_cross_entropy": 0.355167241766,
+      "run_value_cross_entropy": 0.632980531832,
+      "tactical_risk_cross_entropy": 0.357122727539
+    },
+    {
+      "epoch": 57,
+      "policy_cross_entropy": 0.355183477267,
+      "run_value_cross_entropy": 0.632804344349,
+      "tactical_risk_cross_entropy": 0.356890507708
+    },
+    {
+      "epoch": 58,
+      "policy_cross_entropy": 0.355169378361,
+      "run_value_cross_entropy": 0.632839049489,
+      "tactical_risk_cross_entropy": 0.356741276631
+    },
+    {
+      "epoch": 59,
+      "policy_cross_entropy": 0.355173186764,
+      "run_value_cross_entropy": 0.632850723153,
+      "tactical_risk_cross_entropy": 0.356562817603
+    },
+    {
+      "epoch": 60,
+      "policy_cross_entropy": 0.355182468255,
+      "run_value_cross_entropy": 0.63263963006,
+      "tactical_risk_cross_entropy": 0.356376513759
+    },
+    {
+      "epoch": 61,
+      "policy_cross_entropy": 0.355180993329,
+      "run_value_cross_entropy": 0.632539718569,
+      "tactical_risk_cross_entropy": 0.356208321345
+    },
+    {
+      "epoch": 62,
+      "policy_cross_entropy": 0.355163994206,
+      "run_value_cross_entropy": 0.632350537292,
+      "tactical_risk_cross_entropy": 0.356025359079
+    },
+    {
+      "epoch": 63,
+      "policy_cross_entropy": 0.35518373153,
+      "run_value_cross_entropy": 0.632260885616,
+      "tactical_risk_cross_entropy": 0.35587781781
+    },
+    {
+      "epoch": 64,
+      "policy_cross_entropy": 0.355182340385,
+      "run_value_cross_entropy": 0.631886017578,
+      "tactical_risk_cross_entropy": 0.355675957995
+    },
+    {
+      "epoch": 65,
+      "policy_cross_entropy": 0.355171581347,
+      "run_value_cross_entropy": 0.632007099028,
+      "tactical_risk_cross_entropy": 0.355559056525
+    },
+    {
+      "epoch": 66,
+      "policy_cross_entropy": 0.355158995337,
+      "run_value_cross_entropy": 0.631672736742,
+      "tactical_risk_cross_entropy": 0.355378724391
+    },
+    {
+      "epoch": 67,
+      "policy_cross_entropy": 0.35518420155,
+      "run_value_cross_entropy": 0.631709461852,
+      "tactical_risk_cross_entropy": 0.355261494937
+    },
+    {
+      "epoch": 68,
+      "policy_cross_entropy": 0.355165230193,
+      "run_value_cross_entropy": 0.631417320848,
+      "tactical_risk_cross_entropy": 0.355104375649
+    },
+    {
+      "epoch": 69,
+      "policy_cross_entropy": 0.355156531091,
+      "run_value_cross_entropy": 0.631464516878,
+      "tactical_risk_cross_entropy": 0.354909636943
+    },
+    {
+      "epoch": 70,
+      "policy_cross_entropy": 0.355181598818,
+      "run_value_cross_entropy": 0.63129273309,
+      "tactical_risk_cross_entropy": 0.354809524293
+    },
+    {
+      "epoch": 71,
+      "policy_cross_entropy": 0.35517044102,
+      "run_value_cross_entropy": 0.631172538624,
+      "tactical_risk_cross_entropy": 0.354673249546
+    },
+    {
+      "epoch": 72,
+      "policy_cross_entropy": 0.355181378391,
+      "run_value_cross_entropy": 0.631099024697,
+      "tactical_risk_cross_entropy": 0.354532755442
+    },
+    {
+      "epoch": 73,
+      "policy_cross_entropy": 0.355174646771,
+      "run_value_cross_entropy": 0.630517505444,
+      "tactical_risk_cross_entropy": 0.354366882151
+    },
+    {
+      "epoch": 74,
+      "policy_cross_entropy": 0.355171860911,
+      "run_value_cross_entropy": 0.630713367133,
+      "tactical_risk_cross_entropy": 0.354246628189
+    },
+    {
+      "epoch": 75,
+      "policy_cross_entropy": 0.355182151209,
+      "run_value_cross_entropy": 0.630706508942,
+      "tactical_risk_cross_entropy": 0.354113981272
+    },
+    {
+      "epoch": 76,
+      "policy_cross_entropy": 0.355181595037,
+      "run_value_cross_entropy": 0.630602643718,
+      "tactical_risk_cross_entropy": 0.354001099661
+    },
+    {
+      "epoch": 77,
+      "policy_cross_entropy": 0.355176820939,
+      "run_value_cross_entropy": 0.630499084548,
+      "tactical_risk_cross_entropy": 0.353842436763
+    },
+    {
+      "epoch": 78,
+      "policy_cross_entropy": 0.355174757828,
+      "run_value_cross_entropy": 0.630245005635,
+      "tactical_risk_cross_entropy": 0.353722918025
+    },
+    {
+      "epoch": 79,
+      "policy_cross_entropy": 0.355163378405,
+      "run_value_cross_entropy": 0.630213563458,
+      "tactical_risk_cross_entropy": 0.353611171356
+    },
+    {
+      "epoch": 80,
+      "policy_cross_entropy": 0.355167608505,
+      "run_value_cross_entropy": 0.629899633661,
+      "tactical_risk_cross_entropy": 0.353477296831
+    }
+  ],
+  "training_records": 21,
+  "training_runs": 12,
+  "validation_dataset_id": "sha256:3277617d15148d5b2d19408496dc06b5b90de3e71f89dccbaa7ac100cddba327",
+  "validation_records": 14,
+  "validation_runs": 8
+}

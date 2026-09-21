@@ -1,0 +1,245 @@
+{
+  "heads": {
+    "policy": {
+      "target": "teacher_search_visit_distribution",
+      "weights": [
+        {
+          "index": 72,
+          "value": -0.166188021959
+        },
+        {
+          "index": 175,
+          "value": 4.9719e-07
+        },
+        {
+          "index": 240,
+          "value": -0.166188021959
+        },
+        {
+          "index": 358,
+          "value": -3.44626e-07
+        },
+        {
+          "index": 389,
+          "value": 0.114954643567
+        },
+        {
+          "index": 413,
+          "value": 0.115192758864
+        },
+        {
+          "index": 472,
+          "value": 3.44626e-07
+        },
+        {
+          "index": 503,
+          "value": -0.115192758864
+        },
+        {
+          "index": 515,
+          "value": -3.44626e-07
+        },
+        {
+          "index": 527,
+          "value": -0.115192758864
+        },
+        {
+          "index": 546,
+          "value": 0.115192758864
+        },
+        {
+          "index": 570,
+          "value": 0.115192758864
+        },
+        {
+          "index": 595,
+          "value": 3.44626e-07
+        },
+        {
+          "index": 626,
+          "value": -0.115192758864
+        },
+        {
+          "index": 650,
+          "value": -0.115192758864
+        },
+        {
+          "index": 700,
+          "value": 3.44626e-07
+        },
+        {
+          "index": 731,
+          "value": -0.115192758864
+        },
+        {
+          "index": 755,
+          "value": -0.115192758864
+        }
+      ]
+    },
+    "run_value": {
+      "bias": 0.084808163124,
+      "target": "independent_terminal_victory_probability",
+      "weights": [
+        {
+          "index": 26,
+          "value": 0.05839597107
+        },
+        {
+          "index": 29,
+          "value": -0.05839597107
+        },
+        {
+          "index": 47,
+          "value": 0.05839597107
+        },
+        {
+          "index": 82,
+          "value": 0.118341051371
+        },
+        {
+          "index": 83,
+          "value": 0.05839597107
+        },
+        {
+          "index": 147,
+          "value": -0.118341051371
+        },
+        {
+          "index": 202,
+          "value": 0.059658315239
+        },
+        {
+          "index": 237,
+          "value": 0.976261886507
+        }
+      ]
+    },
+    "tactical_death_risk": {
+      "bias": -0.707307460946,
+      "target": "independent_terminal_defeat_within_1_decisions",
+      "weights": [
+        {
+          "index": 72,
+          "value": -0.913585490822
+        },
+        {
+          "index": 133,
+          "value": -0.098393715317
+        },
+        {
+          "index": 175,
+          "value": -0.585929334935
+        },
+        {
+          "index": 240,
+          "value": -0.326274451133
+        },
+        {
+          "index": 310,
+          "value": -0.068201326357
+        },
+        {
+          "index": 358,
+          "value": 0.406135266518
+        },
+        {
+          "index": 374,
+          "value": 0.068201326357
+        },
+        {
+          "index": 389,
+          "value": 0.564088275606
+        },
+        {
+          "index": 413,
+          "value": 0.226156215892
+        },
+        {
+          "index": 432,
+          "value": 0.600247020542
+        },
+        {
+          "index": 472,
+          "value": -0.406135266518
+        },
+        {
+          "index": 480,
+          "value": 0.068201326357
+        },
+        {
+          "index": 503,
+          "value": -0.633249207164
+        },
+        {
+          "index": 515,
+          "value": 0.406135266518
+        },
+        {
+          "index": 527,
+          "value": -0.226156215892
+        },
+        {
+          "index": 546,
+          "value": 0.633249207164
+        },
+        {
+          "index": 570,
+          "value": 0.226156215892
+        },
+        {
+          "index": 594,
+          "value": -0.068201326357
+        },
+        {
+          "index": 595,
+          "value": -0.406135266518
+        },
+        {
+          "index": 626,
+          "value": -0.633249207164
+        },
+        {
+          "index": 650,
+          "value": -0.226156215892
+        },
+        {
+          "index": 700,
+          "value": -0.406135266518
+        },
+        {
+          "index": 717,
+          "value": -0.068201326357
+        },
+        {
+          "index": 731,
+          "value": -0.633249207164
+        },
+        {
+          "index": 755,
+          "value": -0.226156215892
+        }
+      ]
+    }
+  },
+  "model_id": "sha256:7f620aeb48248ded3842fff44a4a12397360ceb5236e87b70317e32a3bb15191",
+  "model_type": "sparse-factorized-multihead-v1",
+  "objective_id": "terminal-victory-v1",
+  "representation_encoder_id": "mechanics-compositional-v1",
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "schema_version": "model-checkpoint-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "train_dataset_id": "sha256:2f6c4ba9293442283520cd8f718b2a47974c84c730e265a1475211f596fe4144",
+  "training_config": {
+    "calibration_bins": 10,
+    "epochs": 80,
+    "gradient_clip": 5.0,
+    "interaction_dimension": 512,
+    "l2_regularization": 0.0001,
+    "learning_rate": 0.03,
+    "shuffle_seed": 0,
+    "tactical_horizon": 1,
+    "vector_dimension": 256
+  },
+  "vectorizer_id": "signed-sha256-feature-hash-v1"
+}

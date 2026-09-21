@@ -90,3 +90,10 @@ Teacher targets use separate search and evaluation seed domains. Search visits d
 target; equally sampled independent rollouts estimate each candidate's terminal value and variance.
 Every outcome seed and full-run label is retained in a content-addressed artifact tied to the frozen
 complete-run split. See [independently evaluated teacher data](teacher-data.md).
+
+The first learned checkpoint is a deterministic sparse factorized baseline with policy, run-value,
+and tactical-death-risk heads. Candidate heads combine candidate features with state-candidate
+interactions and preserve source action IDs only for aligned decoding. Fitting requires frozen train
+data; all reported regret and calibration comes from a disjoint validation dataset and independent
+teacher outcomes. The model, configuration, inputs, and report are bound by content identities. See
+[initial multi-head models](initial-models.md).

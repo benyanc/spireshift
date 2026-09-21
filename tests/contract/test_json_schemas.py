@@ -65,6 +65,8 @@ def _registry() -> Registry[Any]:
             "teacher-dataset-verification-v1.json",
             "teacher-dataset-verification-v1.json",
         ),
+        ("model-checkpoint-v1.json", "model-checkpoint-v1.json"),
+        ("model-training-report-v1.json", "model-training-report-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:

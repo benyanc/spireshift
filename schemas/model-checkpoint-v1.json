@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/model-checkpoint-v1.json",
+  "title": "SpireShift Sparse Multi-Head Model Checkpoint v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "model_id",
+    "model_type",
+    "representation_encoder_id",
+    "vectorizer_id",
+    "ruleset_manifest_id",
+    "objective_id",
+    "split_manifest_id",
+    "train_dataset_id",
+    "training_config",
+    "heads"
+  ],
+  "properties": {
+    "schema_version": {"const": "model-checkpoint-v1"},
+    "model_id": {"$ref": "#/$defs/identifier"},
+    "model_type": {"const": "sparse-factorized-multihead-v1"},
+    "representation_encoder_id": {"const": "mechanics-compositional-v1"},
+    "vectorizer_id": {"const": "signed-sha256-feature-hash-v1"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/identifier"},
+    "objective_id": {"type": "string", "minLength": 1},
+    "split_manifest_id": {"$ref": "#/$defs/identifier"},
+    "train_dataset_id": {"$ref": "#/$defs/identifier"},
+    "training_config": {"$ref": "#/$defs/trainingConfig"},
+    "heads": {
+      "type": "object",
+      "required": ["policy", "run_value", "tactical_death_risk"],
+      "properties": {
+        "policy": {
+          "type": "object",
+          "required": ["target", "weights"],
+          "properties": {
+            "target": {"const": "teacher_search_visit_distribution"},
+            "weights": {"$ref": "#/$defs/weights"}
+          },
+          "additionalProperties": false
+        },
+        "run_value": {
+          "type": "object",
+          "required": ["target", "bias", "weights"],
+          "properties": {
+            "target": {"const": "independent_terminal_victory_probability"},
+            "bias": {"type": "number"},
+            "weights": {"$ref": "#/$defs/weights"}
+          },
+          "additionalProperties": false
+        },
+        "tactical_death_risk": {
+          "type": "object",
+          "required": ["target", "bias", "weights"],
+          "properties": {
+            "target": {
+              "type": "string",
+              "pattern": "^independent_terminal_defeat_within_[1-9][0-9]*_decisions$"
+            },
+            "bias": {"type": "number"},
+            "weights": {"$ref": "#/$defs/weights"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "trainingConfig": {
+      "type": "object",
+      "required": [
+        "epochs",
+        "learning_rate",
+        "l2_regularization",
+        "gradient_clip",
+        "vector_dimension",
+        "interaction_dimension",
+        "tactical_horizon",
+        "calibration_bins",
+        "shuffle_seed"
+      ],
+      "properties": {
+        "epochs": {"type": "integer", "minimum": 1},
+        "learning_rate": {"type": "number", "exclusiveMinimum": 0},
+        "l2_regularization": {"type": "number", "minimum": 0},
+        "gradient_clip": {"type": "number", "exclusiveMinimum": 0},
+        "vector_dimension": {"type": "integer", "minimum": 64},
+        "interaction_dimension": {"type": "integer", "minimum": 64},
+        "tactical_horizon": {"type": "integer", "minimum": 1},
+        "calibration_bins": {"type": "integer", "minimum": 2},
+        "shuffle_seed": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "weights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["index", "value"],
+        "properties": {
+          "index": {"type": "integer", "minimum": 0},
+          "value": {"type": "number"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

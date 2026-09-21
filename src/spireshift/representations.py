@@ -4,7 +4,7 @@ import hashlib
 import json
 import math
 import re
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from enum import StrEnum
 from typing import Any
@@ -355,6 +355,137 @@ def build_model_input(
     )
 
 
+def model_input_from_mapping(value: object) -> CompositionalModelInput:
+    document = _representation_mapping(value, "model input")
+    _require_representation_keys(
+        document,
+        {
+            "schema_version",
+            "encoder_id",
+            "representation_hash",
+            "ruleset_manifest_id",
+            "patch_id",
+            "observation_schema",
+            "source_state_hash",
+            "decision_type",
+            "state",
+            "candidates",
+            "action_mask",
+        },
+        "model input",
+    )
+    if document.get("schema_version") != MODEL_INPUT_SCHEMA_VERSION:
+        raise ValueError("Unsupported model-input schema")
+    if document.get("encoder_id") != ENCODER_ID:
+        raise ValueError("Unsupported model-input encoder")
+    state = _representation_mapping(document.get("state"), "model input state")
+    _require_representation_keys(
+        state,
+        {"global_features", "persistent_resources", "entities"},
+        "model input state",
+    )
+    global_features = tuple(
+        _feature_from_mapping(item, f"global_features[{index}]")
+        for index, item in enumerate(
+            _representation_list(state.get("global_features"), "global_features")
+        )
+    )
+    resources = tuple(
+        _feature_from_mapping(item, f"persistent_resources[{index}]")
+        for index, item in enumerate(
+            _representation_list(state.get("persistent_resources"), "persistent_resources")
+        )
+    )
+    entities: list[EntityRepresentation] = []
+    for index, raw_entity in enumerate(_representation_list(state.get("entities"), "entities")):
+        label = f"entities[{index}]"
+        entity = _representation_mapping(raw_entity, label)
+        _require_representation_keys(entity, {"entity_type", "path", "indices", "features"}, label)
+        entities.append(
+            EntityRepresentation(
+                entity_type=_representation_token(
+                    entity.get("entity_type"), f"{label}.entity_type"
+                ),
+                path=_representation_path(entity.get("path"), f"{label}.path"),
+                indices=_representation_indices(entity.get("indices"), f"{label}.indices"),
+                features=tuple(
+                    _feature_from_mapping(item, f"{label}.features[{feature_index}]")
+                    for feature_index, item in enumerate(
+                        _representation_list(entity.get("features"), f"{label}.features")
+                    )
+                ),
+            )
+        )
+    candidates: list[CandidateRepresentation] = []
+    for index, raw_candidate in enumerate(
+        _representation_list(document.get("candidates"), "candidates")
+    ):
+        label = f"candidates[{index}]"
+        candidate = _representation_mapping(raw_candidate, label)
+        _require_representation_keys(
+            candidate,
+            {"candidate_index", "source_action_id", "action_kind", "features"},
+            label,
+        )
+        candidate_index = _representation_integer(
+            candidate.get("candidate_index"), f"{label}.candidate_index"
+        )
+        if candidate_index != index:
+            raise ValueError("Model-input candidate indexes must be contiguous")
+        candidates.append(
+            CandidateRepresentation(
+                candidate_index=candidate_index,
+                source_action_id=_representation_string(
+                    candidate.get("source_action_id"), f"{label}.source_action_id"
+                ),
+                action_kind=_representation_token(
+                    candidate.get("action_kind"), f"{label}.action_kind"
+                ),
+                features=tuple(
+                    _feature_from_mapping(item, f"{label}.features[{feature_index}]")
+                    for feature_index, item in enumerate(
+                        _representation_list(candidate.get("features"), f"{label}.features")
+                    )
+                ),
+            )
+        )
+    source_action_ids = [candidate.source_action_id for candidate in candidates]
+    if len(source_action_ids) != len(set(source_action_ids)):
+        raise ValueError("Model-input source action IDs must be unique")
+    raw_mask = _representation_list(document.get("action_mask"), "action_mask")
+    if any(item is not True for item in raw_mask) or len(raw_mask) != len(candidates):
+        raise ValueError("Model-input action mask must align with legal candidates")
+    representation_hash = _representation_string(
+        document.get("representation_hash"), "representation_hash"
+    )
+    body = {key: item for key, item in document.items() if key != "representation_hash"}
+    expected_hash = manifest_identifier(body)
+    if representation_hash != expected_hash:
+        raise ValueError(
+            f"Model-input representation hash mismatch: expected {expected_hash}, "
+            f"got {representation_hash}"
+        )
+    return CompositionalModelInput(
+        representation_hash=representation_hash,
+        ruleset_manifest_id=_representation_string(
+            document.get("ruleset_manifest_id"), "ruleset_manifest_id"
+        ),
+        patch_id=_representation_string(document.get("patch_id"), "patch_id"),
+        observation_schema=_representation_string(
+            document.get("observation_schema"), "observation_schema"
+        ),
+        source_state_hash=_representation_string(
+            document.get("source_state_hash"), "source_state_hash"
+        ),
+        decision_type=_representation_token(document.get("decision_type"), "decision_type"),
+        global_features=global_features,
+        persistent_resources=resources,
+        entities=tuple(entities),
+        candidates=tuple(candidates),
+        action_mask=tuple(True for _ in candidates),
+    )
+
+
 def vectorize_model_input(
     representation: CompositionalModelInput,
     *,
@@ -616,3 +747,112 @@ def _sparse_entries(values: dict[int, float]) -> tuple[SparseEntry, ...]:
 
 def _canonical_json(value: object) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+
+
+def _feature_from_mapping(value: object, label: str) -> ScalarFeature:
+    feature = _representation_mapping(value, label)
+    _require_representation_keys(
+        feature,
+        {
+            "path",
+            "indices",
+            "semantic",
+            "value_type",
+            "numeric_value",
+            "categorical_value",
+            "boolean_value",
+        },
+        label,
+    )
+    path = _representation_path(feature.get("path"), f"{label}.path")
+    indices = _representation_indices(feature.get("indices"), f"{label}.indices")
+    try:
+        semantic = FeatureSemantic(
+            _representation_string(feature.get("semantic"), f"{label}.semantic")
+        )
+        value_type = FeatureValueType(
+            _representation_string(feature.get("value_type"), f"{label}.value_type")
+        )
+    except ValueError as error:
+        raise ValueError(f"{label} has an unsupported semantic or value type") from error
+    numeric = feature.get("numeric_value")
+    categorical = feature.get("categorical_value")
+    boolean = feature.get("boolean_value")
+    if value_type is FeatureValueType.NUMERIC:
+        if not isinstance(numeric, int | float) or isinstance(numeric, bool):
+            raise ValueError(f"{label}.numeric_value must be numeric")
+        numeric_value = float(numeric)
+        if not math.isfinite(numeric_value):
+            raise ValueError(f"{label}.numeric_value must be finite")
+        if categorical is not None or boolean is not None:
+            raise ValueError(f"{label} has values outside its declared numeric type")
+        return ScalarFeature(path, indices, semantic, value_type, numeric_value=numeric_value)
+    if value_type is FeatureValueType.CATEGORICAL:
+        if not isinstance(categorical, str) or numeric is not None or boolean is not None:
+            raise ValueError(f"{label} has values outside its declared categorical type")
+        return ScalarFeature(path, indices, semantic, value_type, categorical_value=categorical)
+    if value_type is FeatureValueType.BOOLEAN:
+        if not isinstance(boolean, bool) or numeric is not None or categorical is not None:
+            raise ValueError(f"{label} has values outside its declared boolean type")
+        return ScalarFeature(path, indices, semantic, value_type, boolean_value=boolean)
+    if numeric is not None or categorical is not None or boolean is not None:
+        raise ValueError(f"{label} null feature carries a non-null value")
+    return ScalarFeature(path, indices, semantic, value_type)
+
+
+def _representation_mapping(value: object, label: str) -> dict[str, object]:
+    if not isinstance(value, Mapping):
+        raise ValueError(f"{label} must be an object")
+    if any(not isinstance(key, str) for key in value):
+        raise ValueError(f"{label} keys must be strings")
+    return {str(key): item for key, item in value.items()}
+
+
+def _representation_list(value: object, label: str) -> list[object]:
+    if not isinstance(value, list):
+        raise ValueError(f"{label} must be an array")
+    return value
+
+
+def _representation_string(value: object, label: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"{label} must be a non-empty string")
+    return value
+
+
+def _representation_integer(value: object, label: str) -> int:
+    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        raise ValueError(f"{label} must be a non-negative integer")
+    return value
+
+
+def _representation_token(value: object, label: str) -> str:
+    token = _representation_string(value, label)
+    if _normalize_token(token, label) != token:
+        raise ValueError(f"{label} must be normalized")
+    return token
+
+
+def _representation_path(value: object, label: str) -> tuple[str, ...]:
+    items = _representation_list(value, label)
+    if not items:
+        raise ValueError(f"{label} must not be empty")
+    return tuple(
+        _representation_token(item, f"{label}[{index}]") for index, item in enumerate(items)
+    )
+
+
+def _representation_indices(value: object, label: str) -> tuple[int, ...]:
+    return tuple(
+        _representation_integer(item, f"{label}[{index}]")
+        for index, item in enumerate(_representation_list(value, label))
+    )
+
+
+def _require_representation_keys(value: dict[str, object], expected: set[str], label: str) -> None:
+    actual = set(value)
+    if actual != expected:
+        raise ValueError(
+            f"{label} fields differ: missing={sorted(expected - actual)}, "
+            f"unexpected={sorted(actual - expected)}"
+        )
