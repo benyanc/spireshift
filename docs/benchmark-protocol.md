@@ -44,3 +44,10 @@ The [data-split audit](data-splits.md) must pass before records enter a model or
 
 Adaptive allocation experiments remain blocked until pilot-derived readiness thresholds are frozen
 and the base policy/value system passes them on held-out data.
+
+Before thresholds are frozen, the initial model report must at least establish that the training
+pipeline learns all declared heads, preserves complete-run train/validation isolation, and emits
+action agreement, independently evaluated terminal-value regret, and value/risk calibration. Mock
+results validate this machinery only; STS2 readiness requires representative full-run data from an
+admitted simulator and a final test evaluation after model and thresholds are frozen. See
+[initial policy, run-value, and tactical-risk models](initial-models.md).

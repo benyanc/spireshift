@@ -22,9 +22,11 @@ The repository currently contains the research contracts and a seeded mock verti
 9. guarded, state-bound, at-most-once live action delivery;
 10. deterministic and seeded legal-random unattended live play with offline run auditing;
 11. isolated parallel seeded rollouts with retries, immutable evidence, and batch replay;
-12. content-addressed complete-run train, validation, and test splits; and
-13. mechanics-aware, candidate-aligned model inputs with a deterministic sparse vectorizer; and
-14. content-addressed teacher trajectories with disjoint search and evaluation samples.
+12. content-addressed complete-run train, validation, and test splits;
+13. mechanics-aware, candidate-aligned model inputs with a deterministic sparse vectorizer;
+14. content-addressed teacher trajectories with disjoint search and evaluation samples; and
+15. a deterministic three-head policy, terminal-value, and tactical-risk training baseline with
+    held-out regret and calibration reporting.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -46,6 +48,8 @@ uv run spireshift rollout run-mock --episodes 100 --workers 4
 uv run spireshift split verify manifests/splits/mock-v1-seeds-000000-000999-v1.json
 uv run spireshift represent mock --seed 7 --vectorized
 uv run spireshift teacher generate-mock artifacts/teacher/mock-v1.json --runs 1
+uv run spireshift model verify tests/fixtures/model-checkpoint-v1.json \
+  --report tests/fixtures/model-training-report-v1.json
 uv run spireshift check
 ```
 
@@ -109,6 +113,11 @@ remain decode handles and are excluded from all model features.
 [Teacher-data generation](docs/teacher-data.md) records search visits, candidate values, stochastic
 variance, complete-run outcomes, and equal-budget independent action evaluations. A verifier
 regenerates every sampled outcome and audits complete-run split ownership.
+
+[Initial multi-head model training](docs/initial-models.md) distills those targets into a cheap
+candidate policy, terminal run-value estimate, and candidate-conditioned tactical death risk. It
+requires disjoint frozen train and validation runs and reports independently evaluated regret and
+calibration in a content-addressed training report.
 
 ## Objective
 

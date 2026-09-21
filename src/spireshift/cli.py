@@ -49,6 +49,13 @@ from spireshift.live_run import (
     run_live_game,
     verify_live_run,
 )
+from spireshift.models import (
+    TrainingConfig,
+    load_model_checkpoint,
+    load_training_report,
+    train_initial_models,
+    write_model_artifact,
+)
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
 from spireshift.representations import (
@@ -275,6 +282,32 @@ def build_parser() -> argparse.ArgumentParser:
     teacher_verify.add_argument("dataset", type=Path)
     teacher_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
     teacher_verify.add_argument("--output", type=Path)
+
+    model = subparsers.add_parser("model", help="Train or verify cheap multi-head models")
+    model_commands = model.add_subparsers(dest="model_command", required=True)
+    model_train = model_commands.add_parser(
+        "train", help="Fit policy, run-value, and tactical-risk heads"
+    )
+    model_train.add_argument("train_dataset", type=Path)
+    model_train.add_argument("validation_dataset", type=Path)
+    model_train.add_argument("checkpoint", type=Path)
+    model_train.add_argument("--report", type=Path, required=True)
+    model_train.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    model_train.add_argument("--epochs", type=int, default=80)
+    model_train.add_argument("--learning-rate", type=float, default=0.03)
+    model_train.add_argument("--l2-regularization", type=float, default=0.0001)
+    model_train.add_argument("--gradient-clip", type=float, default=5.0)
+    model_train.add_argument("--vector-dimension", type=int, default=4096)
+    model_train.add_argument("--interaction-dimension", type=int, default=8192)
+    model_train.add_argument("--tactical-horizon", type=int, default=1)
+    model_train.add_argument("--calibration-bins", type=int, default=10)
+    model_train.add_argument("--shuffle-seed", type=int, default=0)
+    model_verify = model_commands.add_parser(
+        "verify", help="Verify checkpoint and optional training-report identities"
+    )
+    model_verify.add_argument("checkpoint", type=Path)
+    model_verify.add_argument("--report", type=Path)
+    model_verify.add_argument("--output", type=Path)
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -646,6 +679,72 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = args.output if args.teacher_command == "verify" else None
+            _emit_json({"status": "error", "error": str(error)}, error_output)
+            return 1
+    if args.command == "model":
+        try:
+            if args.model_command == "verify":
+                checkpoint = load_model_checkpoint(args.checkpoint)
+                loaded_training_report = (
+                    load_training_report(args.report, checkpoint=checkpoint)
+                    if args.report is not None
+                    else None
+                )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "model_id": checkpoint["model_id"],
+                        "report_id": (
+                            None
+                            if loaded_training_report is None
+                            else loaded_training_report["report_id"]
+                        ),
+                    },
+                    args.output,
+                )
+                return 0
+            if args.checkpoint.resolve() == args.report.resolve():
+                raise ValueError("Model checkpoint and training report outputs must differ")
+            split_manifest = load_split_manifest(args.split_manifest)
+            training_result = train_initial_models(
+                train_dataset=load_teacher_dataset(args.train_dataset),
+                validation_dataset=load_teacher_dataset(args.validation_dataset),
+                split_manifest=split_manifest,
+                config=TrainingConfig(
+                    epochs=args.epochs,
+                    learning_rate=args.learning_rate,
+                    l2_regularization=args.l2_regularization,
+                    gradient_clip=args.gradient_clip,
+                    vector_dimension=args.vector_dimension,
+                    interaction_dimension=args.interaction_dimension,
+                    tactical_horizon=args.tactical_horizon,
+                    calibration_bins=args.calibration_bins,
+                    shuffle_seed=args.shuffle_seed,
+                ),
+            )
+            write_model_artifact(
+                training_result.checkpoint,
+                args.checkpoint,
+                label="model checkpoint",
+            )
+            write_model_artifact(
+                training_result.report,
+                args.report,
+                label="model training report",
+            )
+            _emit_json(
+                {
+                    "checkpoint_path": str(args.checkpoint),
+                    "model_id": training_result.checkpoint["model_id"],
+                    "report_path": str(args.report),
+                    "report_id": training_result.report["report_id"],
+                    "held_out_metrics": training_result.report["held_out_metrics"],
+                },
+                None,
+            )
+            return 0
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
+            error_output = args.output if args.model_command == "verify" else None
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "demo":

@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/model-training-report-v1.json",
+  "title": "SpireShift Initial Multi-Head Model Training Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "model_id",
+    "model_type",
+    "train_dataset_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "training_runs",
+    "validation_runs",
+    "training_records",
+    "validation_records",
+    "data_provenance",
+    "training_history",
+    "held_out_metrics",
+    "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "model-training-report-v1"},
+    "report_id": {"$ref": "#/$defs/identifier"},
+    "model_id": {"$ref": "#/$defs/identifier"},
+    "model_type": {"const": "sparse-factorized-multihead-v1"},
+    "train_dataset_id": {"$ref": "#/$defs/identifier"},
+    "validation_dataset_id": {"$ref": "#/$defs/identifier"},
+    "split_manifest_id": {"$ref": "#/$defs/identifier"},
+    "training_runs": {"type": "integer", "minimum": 1},
+    "validation_runs": {"type": "integer", "minimum": 1},
+    "training_records": {"type": "integer", "minimum": 1},
+    "validation_records": {"type": "integer", "minimum": 1},
+    "data_provenance": {
+      "type": "object",
+      "required": ["train", "validation"],
+      "properties": {
+        "train": {"$ref": "#/$defs/dataProvenance"},
+        "validation": {"$ref": "#/$defs/dataProvenance"}
+      },
+      "additionalProperties": false
+    },
+    "training_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "epoch",
+          "policy_cross_entropy",
+          "run_value_cross_entropy",
+          "tactical_risk_cross_entropy"
+        ],
+        "properties": {
+          "epoch": {"type": "integer", "minimum": 1},
+          "policy_cross_entropy": {"type": "number", "minimum": 0},
+          "run_value_cross_entropy": {"type": "number", "minimum": 0},
+          "tactical_risk_cross_entropy": {"type": "number", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "held_out_metrics": {
+      "type": "object",
+      "required": ["policy", "run_value", "tactical_death_risk"],
+      "properties": {
+        "policy": {
+          "type": "object",
+          "required": [
+            "action_agreement",
+            "cross_entropy",
+            "mean_independent_value_regret",
+            "p95_independent_value_regret"
+          ],
+          "properties": {
+            "action_agreement": {"$ref": "#/$defs/probability"},
+            "cross_entropy": {"type": "number", "minimum": 0},
+            "mean_independent_value_regret": {"$ref": "#/$defs/probability"},
+            "p95_independent_value_regret": {"$ref": "#/$defs/probability"}
+          },
+          "additionalProperties": false
+        },
+        "run_value": {"$ref": "#/$defs/calibratedHead"},
+        "tactical_death_risk": {"$ref": "#/$defs/calibration"}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {"const": "mock_pipeline_validation"}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "probability": {"type": "number", "minimum": 0, "maximum": 1},
+    "teacherConfiguration": {
+      "type": "object",
+      "required": [
+        "search_simulations",
+        "evaluation_samples_per_candidate",
+        "exploration_constant",
+        "sampling_seed",
+        "maximum_rollout_steps"
+      ],
+      "properties": {
+        "search_simulations": {"type": "integer", "minimum": 1},
+        "evaluation_samples_per_candidate": {"type": "integer", "minimum": 1},
+        "exploration_constant": {"type": "number", "minimum": 0},
+        "sampling_seed": {"type": "integer", "minimum": 0},
+        "maximum_rollout_steps": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "dataProvenance": {
+      "type": "object",
+      "required": ["dataset_id", "partition", "teacher_id", "configuration", "seeds"],
+      "properties": {
+        "dataset_id": {"$ref": "#/$defs/identifier"},
+        "partition": {"enum": ["train", "validation"]},
+        "teacher_id": {"const": "monte-carlo-ucb-terminal-victory-v1"},
+        "configuration": {"$ref": "#/$defs/teacherConfiguration"},
+        "seeds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 0}
+        }
+      },
+      "additionalProperties": false
+    },
+    "calibrationBin": {
+      "type": "object",
+      "required": ["bin", "count", "mean_prediction", "observed_frequency"],
+      "properties": {
+        "bin": {"type": "integer", "minimum": 0},
+        "count": {"type": "integer", "minimum": 1},
+        "mean_prediction": {"$ref": "#/$defs/probability"},
+        "observed_frequency": {"$ref": "#/$defs/probability"}
+      },
+      "additionalProperties": false
+    },
+    "calibration": {
+      "type": "object",
+      "required": [
+        "samples",
+        "brier_score",
+        "expected_calibration_error",
+        "calibration_bins"
+      ],
+      "properties": {
+        "samples": {"type": "integer", "minimum": 1},
+        "brier_score": {"$ref": "#/$defs/probability"},
+        "expected_calibration_error": {"$ref": "#/$defs/probability"},
+        "calibration_bins": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/calibrationBin"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "calibratedHead": {
+      "type": "object",
+      "required": [
+        "mean_absolute_error",
+        "samples",
+        "brier_score",
+        "expected_calibration_error",
+        "calibration_bins"
+      ],
+      "properties": {
+        "mean_absolute_error": {"$ref": "#/$defs/probability"},
+        "samples": {"type": "integer", "minimum": 1},
+        "brier_score": {"$ref": "#/$defs/probability"},
+        "expected_calibration_error": {"$ref": "#/$defs/probability"},
+        "calibration_bins": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/calibrationBin"}
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
