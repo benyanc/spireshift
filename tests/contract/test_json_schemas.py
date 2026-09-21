@@ -71,6 +71,7 @@ def _registry() -> Registry[Any]:
         ("model-training-report-v1.json", "model-training-report-dagger-v1.json"),
         ("model-calibration-v1.json", "model-calibration-v1.json"),
         ("model-calibration-report-v1.json", "model-calibration-report-v1.json"),
+        ("tactical-handoff-report-v1.json", "tactical-handoff-report-v1.json"),
         ("dagger-iteration-v1.json", "dagger-iteration-v1.json"),
         ("dagger-verification-v1.json", "dagger-verification-v1.json"),
         ("dataset-index-v1.json", "dagger-dataset-index-v1.json"),

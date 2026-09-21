@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/tactical-handoff-report-v1.json",
+  "title": "SpireShift Tactical-to-Run Value Handoff Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "backend",
+    "ruleset_manifest_id",
+    "objective",
+    "run_value_estimator_id",
+    "local_ablation_id",
+    "method",
+    "compute_unit_definition",
+    "configuration",
+    "seeds",
+    "cases",
+    "represented_state_paths",
+    "summary",
+    "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "tactical-handoff-report-v1"},
+    "report_id": {"$ref": "#/$defs/id"},
+    "backend": {"const": "tactical-handoff-mock-v1"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective": {
+      "type": "object",
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "portable_compute_proxy",
+        "local_hp_role"
+      ],
+      "properties": {
+        "id": {"const": "terminal-victory-v1"},
+        "primary": {"const": "terminal_victory"},
+        "constraint": {"const": "cpu_time_per_run"},
+        "whole_run_budget": {"type": "integer", "minimum": 1},
+        "portable_compute_proxy": {
+          "const": "one simulated transition or one run-value inference"
+        },
+        "local_hp_role": {"const": "diagnostic_ablation_only"}
+      },
+      "additionalProperties": false
+    },
+    "run_value_estimator_id": {"const": "tactical-handoff-public-state-oracle-v1"},
+    "local_ablation_id": {"const": "post-combat-hp-greedy-v1"},
+    "method": {"const": "terminal-victory-leaf-mixture-v1"},
+    "compute_unit_definition": {
+      "const": "one simulated transition or one run-value inference"
+    },
+    "configuration": {"$ref": "#/$defs/configuration"},
+    "seeds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/case"}
+    },
+    "represented_state_paths": {"$ref": "#/$defs/nonEmptyStrings"},
+    "summary": {"$ref": "#/$defs/summary"},
+    "claim_scope": {"const": "mock_pipeline_validation"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "probability": {"type": "number", "minimum": 0, "maximum": 1},
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "candidate_worlds",
+        "rollout_samples",
+        "rollout_horizon",
+        "exact_terminal_weight",
+        "truncated_rollout_weight",
+        "bootstrap_weight",
+        "maximum_compute_units"
+      ],
+      "properties": {
+        "candidate_worlds": {"type": "integer", "minimum": 1},
+        "rollout_samples": {"type": "integer", "minimum": 0},
+        "rollout_horizon": {"type": "integer", "minimum": 1},
+        "exact_terminal_weight": {"type": "number", "exclusiveMinimum": 0},
+        "truncated_rollout_weight": {"type": "number", "minimum": 0},
+        "bootstrap_weight": {"type": "number", "minimum": 0},
+        "maximum_compute_units": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "usage": {
+      "type": "object",
+      "required": [
+        "simulated_transitions",
+        "run_value_inferences",
+        "sampled_worlds",
+        "compute_units"
+      ],
+      "properties": {
+        "simulated_transitions": {"type": "integer", "minimum": 0},
+        "run_value_inferences": {"type": "integer", "minimum": 0},
+        "sampled_worlds": {"type": "integer", "minimum": 0},
+        "compute_units": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "seed",
+        "root_state_hash",
+        "terminal_value_selected_action_id",
+        "local_hp_selected_action_id",
+        "selection_disagrees",
+        "damage_tradeoff_beats_hp_greedy",
+        "potion_tradeoff_beats_hp_greedy",
+        "usage",
+        "candidates"
+      ],
+      "properties": {
+        "seed": {"type": "integer", "minimum": 0},
+        "root_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "terminal_value_selected_action_id": {"type": "string", "minLength": 1},
+        "local_hp_selected_action_id": {"type": "string", "minLength": 1},
+        "selection_disagrees": {"type": "boolean"},
+        "damage_tradeoff_beats_hp_greedy": {"type": "boolean"},
+        "potion_tradeoff_beats_hp_greedy": {"type": "boolean"},
+        "usage": {"$ref": "#/$defs/usage"},
+        "candidates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/candidate"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "candidate_index",
+        "source_action_id",
+        "action_kind",
+        "estimated_terminal_victory_probability",
+        "local_hp_score",
+        "successor_resources",
+        "sampled_leaf_values",
+        "rollout_terminal_samples",
+        "rollout_bootstrap_samples",
+        "successor_state_hashes",
+        "representation_hashes",
+        "represented_state_paths"
+      ],
+      "properties": {
+        "candidate_index": {"type": "integer", "minimum": 0},
+        "source_action_id": {"type": "string", "minLength": 1},
+        "action_kind": {"type": "string", "minLength": 1},
+        "estimated_terminal_victory_probability": {"$ref": "#/$defs/probability"},
+        "local_hp_score": {"$ref": "#/$defs/probability"},
+        "successor_resources": {"$ref": "#/$defs/resources"},
+        "sampled_leaf_values": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/probability"}
+        },
+        "rollout_terminal_samples": {"type": "integer", "minimum": 0},
+        "rollout_bootstrap_samples": {"type": "integer", "minimum": 0},
+        "successor_state_hashes": {"$ref": "#/$defs/nonEmptyStrings"},
+        "representation_hashes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/id"},
+          "uniqueItems": true
+        },
+        "represented_state_paths": {"$ref": "#/$defs/nonEmptyStrings"}
+      },
+      "additionalProperties": false
+    },
+    "resources": {
+      "type": "object",
+      "required": [
+        "hp",
+        "max_hp",
+        "gold",
+        "potion_charges",
+        "deck_size",
+        "relic_ids",
+        "relic_counter",
+        "permanent_power",
+        "future_path_options"
+      ],
+      "properties": {
+        "hp": {"type": "integer", "minimum": 0},
+        "max_hp": {"type": "integer", "minimum": 1},
+        "gold": {"type": "integer", "minimum": 0},
+        "potion_charges": {"type": "integer", "minimum": 0},
+        "deck_size": {"type": "integer", "minimum": 0},
+        "relic_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "relic_counter": {"type": "integer", "minimum": 0},
+        "permanent_power": {"type": "integer", "minimum": 0},
+        "future_path_options": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "cases",
+        "selection_disagreements",
+        "damage_tradeoff_cases",
+        "potion_tradeoff_cases",
+        "terminal_value_selected_actions",
+        "local_hp_selected_actions",
+        "total_compute_units"
+      ],
+      "properties": {
+        "cases": {"type": "integer", "minimum": 1},
+        "selection_disagreements": {"type": "integer", "minimum": 0},
+        "damage_tradeoff_cases": {"type": "integer", "minimum": 0},
+        "potion_tradeoff_cases": {"type": "integer", "minimum": 0},
+        "terminal_value_selected_actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "local_hp_selected_actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "total_compute_units": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  }
+}
