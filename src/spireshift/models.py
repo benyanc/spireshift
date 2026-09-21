@@ -22,6 +22,7 @@ from spireshift.teacher_data import verify_teacher_dataset
 MODEL_TYPE = "sparse-factorized-multihead-v1"
 MODEL_CHECKPOINT_SCHEMA_VERSION = "model-checkpoint-v1"
 MODEL_TRAINING_REPORT_SCHEMA_VERSION = "model-training-report-v1"
+ARTIFACT_FLOAT_DECIMALS = 12
 
 
 @dataclass(frozen=True, slots=True)
@@ -232,6 +233,7 @@ def train_initial_models(
         tactical_horizon=config.tactical_horizon,
     )
     history = _fit(model, train_examples, config)
+    _quantize_model(model)
     metrics = evaluate_initial_models(model, validation_examples, config.calibration_bins)
 
     ruleset = _mapping(train_document.get("ruleset"), "ruleset")
@@ -253,12 +255,12 @@ def train_initial_models(
             },
             "run_value": {
                 "target": "independent_terminal_victory_probability",
-                "bias": model.run_value_bias,
+                "bias": _artifact_float(model.run_value_bias),
                 "weights": _weights_as_list(model.run_value_weights),
             },
             "tactical_death_risk": {
                 "target": f"independent_terminal_defeat_within_{config.tactical_horizon}_decisions",
-                "bias": model.tactical_risk_bias,
+                "bias": _artifact_float(model.tactical_risk_bias),
                 "weights": _weights_as_list(model.tactical_risk_weights),
             },
         },
@@ -279,8 +281,8 @@ def train_initial_models(
             "train": _dataset_provenance(train_document),
             "validation": _dataset_provenance(validation_document),
         },
-        "training_history": history,
-        "held_out_metrics": metrics,
+        "training_history": _quantize_artifact(history),
+        "held_out_metrics": _quantize_artifact(metrics),
         "claim_scope": "mock_pipeline_validation",
     }
     report = {**report_body, "report_id": manifest_identifier(report_body)}
@@ -723,9 +725,12 @@ def _percentile(values: list[float], probability: float) -> float:
 
 
 def _weights_as_list(weights: dict[int, float]) -> list[dict[str, float | int]]:
-    return [
-        {"index": index, "value": value} for index, value in sorted(weights.items()) if value != 0.0
-    ]
+    result: list[dict[str, float | int]] = []
+    for index, value in sorted(weights.items()):
+        artifact_value = _artifact_float(value)
+        if artifact_value != 0.0:
+            result.append({"index": index, "value": artifact_value})
+    return result
 
 
 def _weights_from_list(value: object, dimension: int, label: str) -> dict[int, float]:
@@ -744,6 +749,41 @@ def _weights_from_list(value: object, dimension: int, label: str) -> dict[int, f
 
 def _clip(value: float, limit: float) -> float:
     return min(max(value, -limit), limit)
+
+
+def _quantize_model(model: SparseMultiHeadModel) -> None:
+    model.policy_weights = _quantized_weights(model.policy_weights)
+    model.run_value_weights = _quantized_weights(model.run_value_weights)
+    model.tactical_risk_weights = _quantized_weights(model.tactical_risk_weights)
+    model.run_value_bias = _artifact_float(model.run_value_bias)
+    model.tactical_risk_bias = _artifact_float(model.tactical_risk_bias)
+
+
+def _quantized_weights(weights: dict[int, float]) -> dict[int, float]:
+    return {
+        index: artifact_value
+        for index, value in weights.items()
+        if (artifact_value := _artifact_float(value)) != 0.0
+    }
+
+
+def _quantize_artifact(value: Any) -> Any:
+    if isinstance(value, bool) or value is None or isinstance(value, int | str):
+        return value
+    if isinstance(value, float):
+        return _artifact_float(value)
+    if isinstance(value, list):
+        return [_quantize_artifact(item) for item in value]
+    if isinstance(value, tuple):
+        return [_quantize_artifact(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _quantize_artifact(item) for key, item in value.items()}
+    raise TypeError(f"Unsupported artifact value type: {type(value).__name__}")
+
+
+def _artifact_float(value: float) -> float:
+    rounded = round(value, ARTIFACT_FLOAT_DECIMALS)
+    return 0.0 if rounded == 0.0 else rounded
 
 
 def _mapping(value: object, label: str) -> dict[str, Any]:

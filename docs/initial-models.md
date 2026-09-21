@@ -44,8 +44,10 @@ Held-out metrics include:
 - run-value mean absolute error, Brier score, expected calibration error, and calibration bins; and
 - tactical-risk Brier score, expected calibration error, and calibration bins.
 
-The checkpoint and report are content addressed and immutable. Loading recomputes their identities,
-validates model and representation versions, and rejects malformed or duplicate sparse weights.
+The checkpoint and report are content addressed and immutable. Learned floating-point values are
+rounded to 12 decimal places at the artifact boundary so the same training run receives the same
+identity across supported operating systems. Loading recomputes identities, validates model and
+representation versions, and rejects malformed or duplicate sparse weights.
 
 ## Reproduce the checked mock result
 

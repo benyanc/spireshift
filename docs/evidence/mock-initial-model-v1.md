@@ -40,8 +40,8 @@ contains 352 candidate-conditioned outcomes. The full report preserves the popul
 bins rather than only the aggregate scores.
 
 The model checkpoint identity is
-`sha256:bd456c18339fc12a41eb909df5182fdfd48c29e5e779f1b44823e22d85333360`. The training-report
-identity is `sha256:7b86564d66224886706495662cf0b1bcc856a5cbfc69924e5040f8b32a418e44`.
+`sha256:7f620aeb48248ded3842fff44a4a12397360ceb5236e87b70317e32a3bb15191`. The training-report
+identity is `sha256:bb96fa09069dba65d74dfe1c113d457d1da45a0cb2d0d284ed7c3e5b2ee185e5`.
 Contract tests validate both documents against strict JSON Schemas. Unit tests regenerate them
 exactly, verify deterministic training and improving losses, round-trip candidate-aligned
 predictions, reject train/validation misuse, reject identity tampering, and exercise the training and
