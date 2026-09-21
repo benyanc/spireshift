@@ -67,6 +67,11 @@ def _registry() -> Registry[Any]:
         ),
         ("model-checkpoint-v1.json", "model-checkpoint-v1.json"),
         ("model-training-report-v1.json", "model-training-report-v1.json"),
+        ("model-checkpoint-v1.json", "model-checkpoint-dagger-v1.json"),
+        ("model-training-report-v1.json", "model-training-report-dagger-v1.json"),
+        ("dagger-iteration-v1.json", "dagger-iteration-v1.json"),
+        ("dagger-verification-v1.json", "dagger-verification-v1.json"),
+        ("dataset-index-v1.json", "dagger-dataset-index-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:

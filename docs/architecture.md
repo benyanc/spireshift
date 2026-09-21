@@ -97,3 +97,10 @@ interactions and preserve source action IDs only for aligned decoding. Fitting r
 data; all reported regret and calibration comes from a disjoint validation dataset and independent
 teacher outcomes. The model, configuration, inputs, and report are bound by content identities. See
 [initial multi-head models](initial-models.md).
+
+Selective DAgger iterations then run that checkpoint on new complete training runs. A low-budget
+teacher probe, reference-state frequency, and student uncertainty select decisions for an independent
+high-budget relabel. The iteration keeps the student's actual transition separate from the teacher's
+counterfactual label, records every selection trigger and simulation, and can be regenerated against
+the exact source checkpoint. Only verified high-budget labels augment the next model fit. See
+[on-policy collection and selective teacher relabeling](selective-dagger.md).

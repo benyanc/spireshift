@@ -1,0 +1,89 @@
+{
+  "dataset_id": "sha256:c8fcc9a4cb905b895a6b0b83249c8d9032cf81aa658e82dd129c225c53e49fbd",
+  "index_id": "sha256:dbee201fabef5782e2c33dbfd9b2a2552f05b4b5deb16448b8caee0b693d0c60",
+  "records": [
+    {
+      "decision_index": 0,
+      "encounter_id": "dagger-0-train-seed-13-0-path",
+      "record_id": "sha256:92ba4eee57115409332938b0088d699c888c824c0e4b235d3d59adee6b09abfe",
+      "run_id": "dagger-0-train-seed-13"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "dagger-0-train-seed-13-1-combat",
+      "record_id": "sha256:5c133b12a1dca91294fe391bce1730842e40dce3eb225d100c0c1dbecf0d8891",
+      "run_id": "dagger-0-train-seed-13"
+    },
+    {
+      "decision_index": 0,
+      "encounter_id": "dagger-0-train-seed-15-0-path",
+      "record_id": "sha256:87ba2a41c5183792d67b4a43aa75fdc25ecfa7e96ba4ff9ed3c4256021c5d9ed",
+      "run_id": "dagger-0-train-seed-15"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "dagger-0-train-seed-15-1-combat",
+      "record_id": "sha256:f41e2fb5754eaca3c3af168e54e8cc5935d61d1ecf5678299cacf06f161d58ed",
+      "run_id": "dagger-0-train-seed-15"
+    },
+    {
+      "decision_index": 0,
+      "encounter_id": "dagger-0-train-seed-16-0-path",
+      "record_id": "sha256:2a2567c10ac3d24ae17c1508d9281fc5b8adb3c9066008621c952786d91044c4",
+      "run_id": "dagger-0-train-seed-16"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "dagger-0-train-seed-16-1-combat",
+      "record_id": "sha256:7e24ba828c6f591adb6990344f8212c22e694409d73b329b1d7a631c0a5829f9",
+      "run_id": "dagger-0-train-seed-16"
+    }
+  ],
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "runs": [
+    {
+      "encounter_ids": [
+        "dagger-0-train-seed-13-0-path",
+        "dagger-0-train-seed-13-1-combat"
+      ],
+      "record_ids": [
+        "sha256:92ba4eee57115409332938b0088d699c888c824c0e4b235d3d59adee6b09abfe",
+        "sha256:5c133b12a1dca91294fe391bce1730842e40dce3eb225d100c0c1dbecf0d8891"
+      ],
+      "run_id": "dagger-0-train-seed-13",
+      "seed": 13,
+      "split": "train",
+      "terminal": true
+    },
+    {
+      "encounter_ids": [
+        "dagger-0-train-seed-15-0-path",
+        "dagger-0-train-seed-15-1-combat"
+      ],
+      "record_ids": [
+        "sha256:87ba2a41c5183792d67b4a43aa75fdc25ecfa7e96ba4ff9ed3c4256021c5d9ed",
+        "sha256:f41e2fb5754eaca3c3af168e54e8cc5935d61d1ecf5678299cacf06f161d58ed"
+      ],
+      "run_id": "dagger-0-train-seed-15",
+      "seed": 15,
+      "split": "train",
+      "terminal": true
+    },
+    {
+      "encounter_ids": [
+        "dagger-0-train-seed-16-0-path",
+        "dagger-0-train-seed-16-1-combat"
+      ],
+      "record_ids": [
+        "sha256:2a2567c10ac3d24ae17c1508d9281fc5b8adb3c9066008621c952786d91044c4",
+        "sha256:7e24ba828c6f591adb6990344f8212c22e694409d73b329b1d7a631c0a5829f9"
+      ],
+      "run_id": "dagger-0-train-seed-16",
+      "seed": 16,
+      "split": "train",
+      "terminal": true
+    }
+  ],
+  "schema_version": "dataset-index-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1"
+}

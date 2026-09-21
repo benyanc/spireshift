@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import random
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, cast
@@ -190,6 +191,7 @@ def train_initial_models(
     validation_dataset: object,
     split_manifest: SplitManifest,
     config: TrainingConfig,
+    augmentation_iterations: Sequence[tuple[object, object]] = (),
 ) -> TrainingResult:
     train_document = _mapping(train_dataset, "training teacher dataset")
     validation_document = _mapping(validation_dataset, "validation teacher dataset")
@@ -223,10 +225,66 @@ def train_initial_models(
     if train_document.get("objective") != validation_document.get("objective"):
         raise ValueError("Training and validation datasets use different objectives")
 
-    train_examples = _prepare_examples(train_document, config)
+    base_train_examples = _prepare_examples(train_document, config)
     validation_examples = _prepare_examples(validation_document, config)
-    if not train_examples or not validation_examples:
+    if not base_train_examples or not validation_examples:
         raise ValueError("Training and validation datasets must contain decision records")
+    augmentation_examples: list[_Example] = []
+    augmentation_provenance: list[dict[str, object]] = []
+    seen_iteration_ids: set[str] = set()
+    if augmentation_iterations:
+        from spireshift.dagger import (
+            selected_relabel_records,
+            verify_mock_dagger_iteration,
+        )
+
+        ordered_augmentations = sorted(
+            augmentation_iterations,
+            key=lambda pair: _string(
+                _mapping(pair[0], "augmentation iteration").get("iteration_id"),
+                "augmentation iteration ID",
+            ),
+        )
+        for offset, (raw_iteration, raw_source_checkpoint) in enumerate(ordered_augmentations):
+            iteration = _mapping(raw_iteration, f"augmentation iteration[{offset}]")
+            source_checkpoint = _mapping(
+                raw_source_checkpoint, f"augmentation source checkpoint[{offset}]"
+            )
+            verification = verify_mock_dagger_iteration(
+                iteration,
+                split_manifest=split_manifest,
+                source_checkpoint=source_checkpoint,
+                reference_dataset=train_document,
+            )
+            if not verification.valid:
+                raise ValueError(
+                    f"DAgger augmentation[{offset}] failed verification: "
+                    + "; ".join(verification.errors)
+                )
+            iteration_id = _string(iteration.get("iteration_id"), "iteration ID")
+            if iteration_id in seen_iteration_ids:
+                raise ValueError("DAgger augmentation iteration IDs must be unique")
+            seen_iteration_ids.add(iteration_id)
+            selected_records = selected_relabel_records(iteration)
+            if not selected_records:
+                raise ValueError(f"DAgger augmentation[{offset}] contains no selected labels")
+            augmentation_examples.extend(_prepare_dagger_examples(selected_records, config))
+            summary = _mapping(iteration.get("summary"), "DAgger summary")
+            augmentation_provenance.append(
+                {
+                    "iteration_id": iteration_id,
+                    "iteration_index": _integer(
+                        iteration.get("iteration_index"), "DAgger iteration index"
+                    ),
+                    "source_model_id": _string(
+                        iteration.get("source_model_id"), "DAgger source model ID"
+                    ),
+                    "runs": _integer(summary.get("runs"), "DAgger run count"),
+                    "decisions": _integer(summary.get("decisions"), "DAgger decision count"),
+                    "selected_records": len(selected_records),
+                }
+            )
+    train_examples = (*base_train_examples, *augmentation_examples)
     model = SparseMultiHeadModel(
         vector_dimension=config.vector_dimension,
         interaction_dimension=config.interaction_dimension,
@@ -265,7 +323,13 @@ def train_initial_models(
             },
         },
     }
+    if seen_iteration_ids:
+        checkpoint_body["augmentation_iteration_ids"] = sorted(seen_iteration_ids)
     checkpoint = {**checkpoint_body, "model_id": manifest_identifier(checkpoint_body)}
+    data_provenance: dict[str, object] = {
+        "train": _dataset_provenance(train_document),
+        "validation": _dataset_provenance(validation_document),
+    }
     report_body: dict[str, Any] = {
         "schema_version": MODEL_TRAINING_REPORT_SCHEMA_VERSION,
         "model_id": checkpoint["model_id"],
@@ -277,21 +341,22 @@ def train_initial_models(
         "validation_runs": len(validation_run_ids),
         "training_records": len(train_examples),
         "validation_records": len(validation_examples),
-        "data_provenance": {
-            "train": _dataset_provenance(train_document),
-            "validation": _dataset_provenance(validation_document),
-        },
+        "data_provenance": data_provenance,
         "training_history": _quantize_artifact(history),
         "held_out_metrics": _quantize_artifact(metrics),
         "claim_scope": "mock_pipeline_validation",
     }
+    if augmentation_provenance:
+        report_body["base_training_records"] = len(base_train_examples)
+        report_body["augmentation_records"] = len(augmentation_examples)
+        data_provenance["augmentations"] = augmentation_provenance
     report = {**report_body, "report_id": manifest_identifier(report_body)}
     return TrainingResult(checkpoint, report)
 
 
 def model_from_checkpoint(document: object) -> SparseMultiHeadModel:
     checkpoint = _mapping(document, "model checkpoint")
-    expected_keys = {
+    base_keys = {
         "schema_version",
         "model_id",
         "model_type",
@@ -304,7 +369,13 @@ def model_from_checkpoint(document: object) -> SparseMultiHeadModel:
         "training_config",
         "heads",
     }
-    _exact_keys(checkpoint, expected_keys, "model checkpoint")
+    actual_keys = set(checkpoint)
+    if actual_keys not in (base_keys, base_keys | {"augmentation_iteration_ids"}):
+        raise ValueError(
+            "model checkpoint fields differ: "
+            f"missing={sorted(base_keys - actual_keys)}, "
+            f"unexpected={sorted(actual_keys - base_keys - {'augmentation_iteration_ids'})}"
+        )
     if checkpoint.get("schema_version") != MODEL_CHECKPOINT_SCHEMA_VERSION:
         raise ValueError("Unsupported model-checkpoint schema")
     if checkpoint.get("model_type") != MODEL_TYPE:
@@ -317,6 +388,13 @@ def model_from_checkpoint(document: object) -> SparseMultiHeadModel:
     body = {key: value for key, value in checkpoint.items() if key != "model_id"}
     if model_id != manifest_identifier(body):
         raise ValueError("Model checkpoint identity mismatch")
+    augmentation_ids = _list(
+        checkpoint.get("augmentation_iteration_ids", []), "augmentation_iteration_ids"
+    )
+    if any(not isinstance(item, str) or not item for item in augmentation_ids):
+        raise ValueError("augmentation_iteration_ids must contain non-empty strings")
+    if augmentation_ids != sorted(set(augmentation_ids)):
+        raise ValueError("augmentation_iteration_ids must be sorted and unique")
     raw_config = _mapping(checkpoint.get("training_config"), "training_config")
     config = TrainingConfig.from_mapping(raw_config)
     heads = _mapping(checkpoint.get("heads"), "heads")
@@ -521,6 +599,20 @@ def _prepare_examples(document: dict[str, Any], config: TrainingConfig) -> tuple
             )
         )
     return tuple(examples)
+
+
+def _prepare_dagger_examples(
+    records: Sequence[dict[str, Any]], config: TrainingConfig
+) -> tuple[_Example, ...]:
+    synthetic_records = [
+        {
+            "record_id": record["record_id"],
+            "model_input": record["model_input"],
+            "teacher_target": record["relabel_target"],
+        }
+        for record in records
+    ]
+    return _prepare_examples({"records": synthetic_records}, config)
 
 
 def _dataset_provenance(document: dict[str, Any]) -> dict[str, object]:
