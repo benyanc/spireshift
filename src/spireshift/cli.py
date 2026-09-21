@@ -67,12 +67,21 @@ from spireshift.splits import (
     write_frozen_dataset_index,
     write_frozen_split_manifest,
 )
+from spireshift.teacher_data import (
+    TeacherConfig,
+    generate_mock_teacher_dataset,
+    load_teacher_dataset,
+    teacher_dataset_index,
+    verify_teacher_dataset,
+    write_teacher_dataset,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
 DEFAULT_LIVE_MANIFEST = PROJECT_ROOT / "manifests/patches/sts2-v0.107.1-sts2mcp-55e0648.json"
 DEFAULT_LIVE_FIXTURE_CORPUS = PROJECT_ROOT / "tests/fixtures/live/public-state-corpus-v1.json"
 DEFAULT_LIVE_COVERAGE_SPEC = PROJECT_ROOT / "configs/live-coverage-v0.107.1.json"
+DEFAULT_SPLIT_MANIFEST = PROJECT_ROOT / "manifests/splits/mock-v1-seeds-000000-000999-v1.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -236,6 +245,36 @@ def build_parser() -> argparse.ArgumentParser:
     represent_live.add_argument("--vectorized", action="store_true")
     represent_live.add_argument("--dimension", type=int, default=DEFAULT_VECTOR_DIMENSION)
     represent_live.add_argument("--output", type=Path)
+
+    teacher = subparsers.add_parser(
+        "teacher", help="Generate or verify independently evaluated teacher data"
+    )
+    teacher_commands = teacher.add_subparsers(dest="teacher_command", required=True)
+    teacher_generate = teacher_commands.add_parser(
+        "generate-mock", help="Generate deterministic mock teacher trajectories"
+    )
+    teacher_generate.add_argument("output", type=Path)
+    teacher_generate.add_argument("--index-output", type=Path)
+    teacher_generate.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    teacher_generate.add_argument(
+        "--partition",
+        choices=[split.value for split in SplitName],
+        default=SplitName.TRAIN.value,
+    )
+    teacher_seed_selection = teacher_generate.add_mutually_exclusive_group()
+    teacher_seed_selection.add_argument("--seeds", type=int, nargs="+")
+    teacher_seed_selection.add_argument("--runs", type=int, default=1)
+    teacher_generate.add_argument("--search-simulations", type=int, default=256)
+    teacher_generate.add_argument("--evaluation-samples", type=int, default=256)
+    teacher_generate.add_argument("--exploration-constant", type=float, default=2**0.5)
+    teacher_generate.add_argument("--sampling-seed", type=int, default=0)
+    teacher_generate.add_argument("--maximum-rollout-steps", type=int, default=4096)
+    teacher_verify = teacher_commands.add_parser(
+        "verify", help="Verify teacher identities, independent samples, and split ownership"
+    )
+    teacher_verify.add_argument("dataset", type=Path)
+    teacher_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    teacher_verify.add_argument("--output", type=Path)
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -552,6 +591,62 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (LiveStateError, OSError, ValueError, json.JSONDecodeError) as error:
             _emit_json({"status": "error", "error": str(error)}, args.output)
+            return 1
+    if args.command == "teacher":
+        try:
+            split_manifest = load_split_manifest(args.split_manifest)
+            if args.teacher_command == "verify":
+                teacher_verification = verify_teacher_dataset(
+                    load_teacher_dataset(args.dataset),
+                    split_manifest,
+                )
+                _emit_json(teacher_verification.as_dict(), args.output)
+                return 0 if teacher_verification.valid else 1
+            partition = SplitName(args.partition)
+            if args.seeds is None:
+                if args.runs <= 0:
+                    raise ValueError("--runs must be positive")
+                if args.runs > len(split_manifest.seeds(partition)):
+                    raise ValueError("--runs exceeds the selected frozen partition")
+                seeds = split_manifest.seeds(partition)[: args.runs]
+            else:
+                seeds = tuple(args.seeds)
+            config = TeacherConfig(
+                search_simulations=args.search_simulations,
+                evaluation_samples_per_candidate=args.evaluation_samples,
+                exploration_constant=args.exploration_constant,
+                sampling_seed=args.sampling_seed,
+                maximum_rollout_steps=args.maximum_rollout_steps,
+            )
+            dataset = generate_mock_teacher_dataset(
+                seeds=seeds,
+                partition=partition,
+                split_manifest=split_manifest,
+                objective=load_objective(DEFAULT_CONFIG),
+                config=config,
+            )
+            index = teacher_dataset_index(dataset, split_manifest)
+            index_output = args.index_output or args.output.with_name(
+                f"{args.output.stem}-index.json"
+            )
+            if index_output.resolve() == args.output.resolve():
+                raise ValueError("Teacher dataset and index outputs must differ")
+            write_teacher_dataset(dataset, args.output)
+            write_frozen_dataset_index(index, index_output)
+            _emit_json(
+                {
+                    "dataset_path": str(args.output),
+                    "dataset_id": dataset["dataset_id"],
+                    "index_path": str(index_output),
+                    "index_id": index["index_id"],
+                    "summary": dataset["summary"],
+                },
+                None,
+            )
+            return 0
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
+            error_output = args.output if args.teacher_command == "verify" else None
+            _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "demo":
         output = args.output or PROJECT_ROOT / f"artifacts/mock/run-{args.seed}.jsonl"

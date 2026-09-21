@@ -53,6 +53,11 @@ partition, duplicate run or record, incomplete non-terminal run, missing record,
 and non-contiguous decision sequence. `partition_dataset_records` performs this audit before exposing
 records grouped by partition; model and teacher-data loaders should use that boundary.
 
+Teacher generation validates every requested trajectory seed against this manifest before any
+search begins. Its companion dataset index is audited with the same complete-run rules, so search
+samples, independently evaluated candidates, and terminal labels from one run cannot cross
+partitions.
+
 The checked index at `tests/fixtures/splits/dataset-index-v1.json` includes one complete run from
 each partition and two adjacent records per run. Its checked audit demonstrates that all six records
 remain grouped by run.

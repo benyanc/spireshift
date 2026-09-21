@@ -1,0 +1,37 @@
+{
+  "dataset_id": "sha256:fa36b2516fc195e1c9ecd1b39f184ee563c7d5874286ed7f490563c381c4649f",
+  "index_id": "sha256:201f1beaf23a19aed55dd6ba49a9e8c1cb932b9e2641fc5ad9df64391c9eb15b",
+  "records": [
+    {
+      "decision_index": 0,
+      "encounter_id": "mock-train-seed-0-0-path",
+      "record_id": "sha256:a07c9b70a6953489deef0afe8925aa87ca95d3febcce526dd0bb4478c710e59c",
+      "run_id": "mock-train-seed-0"
+    },
+    {
+      "decision_index": 1,
+      "encounter_id": "mock-train-seed-0-1-combat",
+      "record_id": "sha256:50b5e7761198b79df975af16f67b963d3af595cde0e0e897a0d1589a862e89a2",
+      "run_id": "mock-train-seed-0"
+    }
+  ],
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "runs": [
+    {
+      "encounter_ids": [
+        "mock-train-seed-0-0-path",
+        "mock-train-seed-0-1-combat"
+      ],
+      "record_ids": [
+        "sha256:a07c9b70a6953489deef0afe8925aa87ca95d3febcce526dd0bb4478c710e59c",
+        "sha256:50b5e7761198b79df975af16f67b963d3af595cde0e0e897a0d1589a862e89a2"
+      ],
+      "run_id": "mock-train-seed-0",
+      "seed": 0,
+      "split": "train",
+      "terminal": true
+    }
+  ],
+  "schema_version": "dataset-index-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1"
+}

@@ -85,3 +85,8 @@ Decision context, mechanics, resources, variable-length entities, and legal cand
 separate channels. Operational action IDs are retained only for decoding a selected candidate. The
 reference feature hasher provides an out-of-vocabulary-safe baseline; later learned encoders must
 preserve the same public-information and candidate-alignment guarantees.
+
+Teacher targets use separate search and evaluation seed domains. Search visits define the policy
+target; equally sampled independent rollouts estimate each candidate's terminal value and variance.
+Every outcome seed and full-run label is retained in a content-addressed artifact tied to the frozen
+complete-run split. See [independently evaluated teacher data](teacher-data.md).
