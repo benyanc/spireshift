@@ -49,6 +49,11 @@ rounded to 12 decimal places at the artifact boundary so the same training run r
 identity across supported operating systems. Loading recomputes identities, validates model and
 representation versions, and rejects malformed or duplicate sparse weights.
 
+Training can also accept verified selective-DAgger iterations. Only records carrying an expensive
+relabel target enter optimization. The checkpoint binds their iteration IDs, while the report keeps
+the source model, complete-run count, collected decision count, and selected-label count. See
+[on-policy collection and selective teacher relabeling](selective-dagger.md).
+
 ## Reproduce the checked mock result
 
 Generate disjoint train and validation teacher datasets:

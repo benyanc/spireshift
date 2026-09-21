@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/dagger-iteration-v1.json",
+  "title": "SpireShift Selective DAgger Iteration v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "iteration_id",
+    "iteration_index",
+    "backend",
+    "ruleset",
+    "objective",
+    "split_manifest_id",
+    "partition",
+    "representation_encoder_id",
+    "source_model_id",
+    "reference_dataset_id",
+    "configuration",
+    "runs",
+    "records",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {"const": "dagger-iteration-v1"},
+    "iteration_id": {"$ref": "#/$defs/identifier"},
+    "iteration_index": {"type": "integer", "minimum": 0},
+    "backend": {"const": "mock"},
+    "ruleset": {"$ref": "conformance-report-v1.json#/$defs/ruleset"},
+    "objective": {"$ref": "teacher-dataset-v1.json#/$defs/objective"},
+    "split_manifest_id": {"$ref": "#/$defs/identifier"},
+    "partition": {"const": "train"},
+    "representation_encoder_id": {"const": "mechanics-compositional-v1"},
+    "source_model_id": {"$ref": "#/$defs/identifier"},
+    "reference_dataset_id": {"$ref": "#/$defs/identifier"},
+    "configuration": {"$ref": "#/$defs/configuration"},
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "teacher-dataset-v1.json#/$defs/run"}
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "summary": {"$ref": "#/$defs/summary"}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "probability": {"type": "number", "minimum": 0, "maximum": 1},
+    "configuration": {
+      "type": "object",
+      "required": [
+        "selection_policy_id",
+        "probe_teacher",
+        "relabel_teacher",
+        "rare_state_max_fraction",
+        "high_entropy_threshold",
+        "confident_error_threshold",
+        "confident_error_regret",
+        "maximum_run_decisions"
+      ],
+      "properties": {
+        "selection_policy_id": {"const": "selective-dagger-v1"},
+        "probe_teacher": {"$ref": "teacher-dataset-v1.json#/$defs/configuration"},
+        "relabel_teacher": {"$ref": "teacher-dataset-v1.json#/$defs/configuration"},
+        "rare_state_max_fraction": {"$ref": "#/$defs/probability"},
+        "high_entropy_threshold": {"$ref": "#/$defs/probability"},
+        "confident_error_threshold": {"$ref": "#/$defs/probability"},
+        "confident_error_regret": {"$ref": "#/$defs/probability"},
+        "maximum_run_decisions": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "record_id",
+        "run_id",
+        "encounter_id",
+        "decision_index",
+        "model_input",
+        "state_signature",
+        "student_prediction",
+        "reference_frequency",
+        "probe_teacher_target",
+        "selection_reasons",
+        "selected_for_relabel",
+        "relabel_target",
+        "diagnostics",
+        "observed_transition",
+        "run_terminal_victory"
+      ],
+      "properties": {
+        "schema_version": {"const": "dagger-record-v1"},
+        "record_id": {"$ref": "#/$defs/identifier"},
+        "run_id": {"type": "string", "minLength": 1},
+        "encounter_id": {"type": "string", "minLength": 1},
+        "decision_index": {"type": "integer", "minimum": 0},
+        "model_input": {"$ref": "model-input-v1.json"},
+        "state_signature": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "student_prediction": {"$ref": "#/$defs/studentPrediction"},
+        "reference_frequency": {"$ref": "#/$defs/referenceFrequency"},
+        "probe_teacher_target": {"$ref": "teacher-dataset-v1.json#/$defs/target"},
+        "selection_reasons": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "teacher_disagreement",
+              "rare_state",
+              "confident_error",
+              "high_entropy"
+            ]
+          }
+        },
+        "selected_for_relabel": {"type": "boolean"},
+        "relabel_target": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "teacher-dataset-v1.json#/$defs/target"}
+          ]
+        },
+        "diagnostics": {"$ref": "#/$defs/diagnostics"},
+        "observed_transition": {"$ref": "teacher-dataset-v1.json#/$defs/transition"},
+        "run_terminal_victory": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "studentPrediction": {
+      "type": "object",
+      "required": [
+        "policy",
+        "run_value",
+        "tactical_death_risk",
+        "selected_candidate_index",
+        "selected_action_id",
+        "confidence",
+        "normalized_entropy"
+      ],
+      "properties": {
+        "policy": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/probability"}
+        },
+        "run_value": {"$ref": "#/$defs/probability"},
+        "tactical_death_risk": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/probability"}
+        },
+        "selected_candidate_index": {"type": "integer", "minimum": 0},
+        "selected_action_id": {"type": "string", "minLength": 1},
+        "confidence": {"$ref": "#/$defs/probability"},
+        "normalized_entropy": {"$ref": "#/$defs/probability"}
+      },
+      "additionalProperties": false
+    },
+    "referenceFrequency": {
+      "type": "object",
+      "required": ["matching_records", "total_records", "fraction"],
+      "properties": {
+        "matching_records": {"type": "integer", "minimum": 0},
+        "total_records": {"type": "integer", "minimum": 1},
+        "fraction": {"$ref": "#/$defs/probability"}
+      },
+      "additionalProperties": false
+    },
+    "diagnostics": {
+      "type": "object",
+      "required": [
+        "probe_teacher_disagreement",
+        "probe_independent_value_regret",
+        "probe_confident_error",
+        "relabel_teacher_disagreement",
+        "relabel_independent_value_regret",
+        "relabel_confident_error"
+      ],
+      "properties": {
+        "probe_teacher_disagreement": {"type": "boolean"},
+        "probe_independent_value_regret": {"$ref": "#/$defs/probability"},
+        "probe_confident_error": {"type": "boolean"},
+        "relabel_teacher_disagreement": {"type": ["boolean", "null"]},
+        "relabel_independent_value_regret": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/probability"}
+          ]
+        },
+        "relabel_confident_error": {"type": ["boolean", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "runs",
+        "decisions",
+        "candidates",
+        "victories",
+        "defeats",
+        "selected_for_relabel",
+        "relabels_avoided",
+        "selection_reason_counts",
+        "probe_search_simulations",
+        "probe_evaluation_simulations",
+        "relabel_search_simulations",
+        "relabel_evaluation_simulations"
+      ],
+      "properties": {
+        "runs": {"type": "integer", "minimum": 1},
+        "decisions": {"type": "integer", "minimum": 1},
+        "candidates": {"type": "integer", "minimum": 1},
+        "victories": {"type": "integer", "minimum": 0},
+        "defeats": {"type": "integer", "minimum": 0},
+        "selected_for_relabel": {"type": "integer", "minimum": 0},
+        "relabels_avoided": {"type": "integer", "minimum": 0},
+        "selection_reason_counts": {
+          "type": "object",
+          "required": [
+            "teacher_disagreement",
+            "rare_state",
+            "confident_error",
+            "high_entropy"
+          ],
+          "properties": {
+            "teacher_disagreement": {"type": "integer", "minimum": 0},
+            "rare_state": {"type": "integer", "minimum": 0},
+            "confident_error": {"type": "integer", "minimum": 0},
+            "high_entropy": {"type": "integer", "minimum": 0}
+          },
+          "additionalProperties": false
+        },
+        "probe_search_simulations": {"type": "integer", "minimum": 1},
+        "probe_evaluation_simulations": {"type": "integer", "minimum": 1},
+        "relabel_search_simulations": {"type": "integer", "minimum": 0},
+        "relabel_evaluation_simulations": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

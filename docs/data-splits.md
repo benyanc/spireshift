@@ -58,6 +58,11 @@ search begins. Its companion dataset index is audited with the same complete-run
 samples, independently evaluated candidates, and terminal labels from one run cannot cross
 partitions.
 
+Selective DAgger collection is restricted to new training seeds and also emits a companion dataset
+index. Its complete runs follow the student policy while selected counterfactual labels come from the
+teacher; both remain owned by the originating run and cannot enter validation or test data. See
+[on-policy collection and selective teacher relabeling](selective-dagger.md).
+
 The checked index at `tests/fixtures/splits/dataset-index-v1.json` includes one complete run from
 each partition and two adjacent records per run. Its checked audit demonstrates that all six records
 remain grouped by run.

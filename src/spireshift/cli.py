@@ -30,6 +30,14 @@ from spireshift.core.manifest import (
     write_frozen_manifest,
 )
 from spireshift.core.objective import load_objective
+from spireshift.dagger import (
+    DaggerConfig,
+    dagger_dataset_index,
+    generate_mock_dagger_iteration,
+    load_dagger_iteration,
+    verify_mock_dagger_iteration,
+    write_dagger_iteration,
+)
 from spireshift.doctor import diagnostics_as_dict, find_game_installation
 from spireshift.live_actions import (
     BoundAction,
@@ -302,12 +310,57 @@ def build_parser() -> argparse.ArgumentParser:
     model_train.add_argument("--tactical-horizon", type=int, default=1)
     model_train.add_argument("--calibration-bins", type=int, default=10)
     model_train.add_argument("--shuffle-seed", type=int, default=0)
+    model_train.add_argument(
+        "--augmentation",
+        type=Path,
+        nargs=2,
+        action="append",
+        default=[],
+        metavar=("ITERATION", "SOURCE_CHECKPOINT"),
+        help="Add verified selective DAgger labels; may be repeated",
+    )
     model_verify = model_commands.add_parser(
         "verify", help="Verify checkpoint and optional training-report identities"
     )
     model_verify.add_argument("checkpoint", type=Path)
     model_verify.add_argument("--report", type=Path)
     model_verify.add_argument("--output", type=Path)
+
+    dagger = subparsers.add_parser(
+        "dagger", help="Collect student trajectories and selectively relabel decisions"
+    )
+    dagger_commands = dagger.add_subparsers(dest="dagger_command", required=True)
+    dagger_collect = dagger_commands.add_parser(
+        "collect-mock", help="Run a reproducible selective DAgger iteration on the mock backend"
+    )
+    dagger_collect.add_argument("source_checkpoint", type=Path)
+    dagger_collect.add_argument("reference_dataset", type=Path)
+    dagger_collect.add_argument("output", type=Path)
+    dagger_collect.add_argument("--index-output", type=Path)
+    dagger_collect.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    dagger_collect.add_argument("--iteration", type=int, default=0)
+    dagger_seed_selection = dagger_collect.add_mutually_exclusive_group()
+    dagger_seed_selection.add_argument("--seeds", type=int, nargs="+")
+    dagger_seed_selection.add_argument("--runs", type=int, default=8)
+    dagger_collect.add_argument("--probe-search-simulations", type=int, default=8)
+    dagger_collect.add_argument("--probe-evaluation-samples", type=int, default=4)
+    dagger_collect.add_argument("--probe-sampling-seed", type=int, default=1)
+    dagger_collect.add_argument("--relabel-search-simulations", type=int, default=64)
+    dagger_collect.add_argument("--relabel-evaluation-samples", type=int, default=64)
+    dagger_collect.add_argument("--relabel-sampling-seed", type=int, default=2)
+    dagger_collect.add_argument("--rare-state-max-fraction", type=float, default=0.05)
+    dagger_collect.add_argument("--high-entropy-threshold", type=float, default=0.85)
+    dagger_collect.add_argument("--confident-error-threshold", type=float, default=0.8)
+    dagger_collect.add_argument("--confident-error-regret", type=float, default=0.1)
+    dagger_collect.add_argument("--maximum-run-decisions", type=int, default=4096)
+    dagger_verify = dagger_commands.add_parser(
+        "verify", help="Regenerate and verify a selective DAgger iteration"
+    )
+    dagger_verify.add_argument("iteration", type=Path)
+    dagger_verify.add_argument("source_checkpoint", type=Path)
+    dagger_verify.add_argument("reference_dataset", type=Path)
+    dagger_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
+    dagger_verify.add_argument("--output", type=Path)
 
     demo = subparsers.add_parser("demo", help="Run the seeded mock vertical slice")
     demo.add_argument("--seed", type=int, default=7)
@@ -721,6 +774,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                     calibration_bins=args.calibration_bins,
                     shuffle_seed=args.shuffle_seed,
                 ),
+                augmentation_iterations=tuple(
+                    (
+                        load_dagger_iteration(iteration_path),
+                        load_model_checkpoint(source_checkpoint_path),
+                    )
+                    for iteration_path, source_checkpoint_path in args.augmentation
+                ),
             )
             write_model_artifact(
                 training_result.checkpoint,
@@ -745,6 +805,89 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = args.output if args.model_command == "verify" else None
+            _emit_json({"status": "error", "error": str(error)}, error_output)
+            return 1
+    if args.command == "dagger":
+        try:
+            split_manifest = load_split_manifest(args.split_manifest)
+            source_checkpoint = load_model_checkpoint(args.source_checkpoint)
+            reference_dataset = load_teacher_dataset(args.reference_dataset)
+            if args.dagger_command == "verify":
+                dagger_verification = verify_mock_dagger_iteration(
+                    load_dagger_iteration(args.iteration),
+                    split_manifest=split_manifest,
+                    source_checkpoint=source_checkpoint,
+                    reference_dataset=reference_dataset,
+                )
+                _emit_json(dagger_verification.as_dict(), args.output)
+                return 0 if dagger_verification.valid else 1
+            reference_seeds = {
+                int(run["seed"])
+                for run in reference_dataset.get("runs", [])
+                if isinstance(run, dict) and isinstance(run.get("seed"), int)
+            }
+            if args.seeds is None:
+                if args.runs <= 0:
+                    raise ValueError("--runs must be positive")
+                unused_seeds = tuple(
+                    seed
+                    for seed in split_manifest.seeds(SplitName.TRAIN)
+                    if seed not in reference_seeds
+                )
+                if args.runs > len(unused_seeds):
+                    raise ValueError("--runs exceeds unused seeds in the frozen train partition")
+                seeds = unused_seeds[: args.runs]
+            else:
+                seeds = tuple(args.seeds)
+            dagger_config = DaggerConfig(
+                probe_teacher=TeacherConfig(
+                    search_simulations=args.probe_search_simulations,
+                    evaluation_samples_per_candidate=args.probe_evaluation_samples,
+                    sampling_seed=args.probe_sampling_seed,
+                ),
+                relabel_teacher=TeacherConfig(
+                    search_simulations=args.relabel_search_simulations,
+                    evaluation_samples_per_candidate=args.relabel_evaluation_samples,
+                    sampling_seed=args.relabel_sampling_seed,
+                ),
+                rare_state_max_fraction=args.rare_state_max_fraction,
+                high_entropy_threshold=args.high_entropy_threshold,
+                confident_error_threshold=args.confident_error_threshold,
+                confident_error_regret=args.confident_error_regret,
+                maximum_run_decisions=args.maximum_run_decisions,
+            )
+            iteration = generate_mock_dagger_iteration(
+                iteration_index=args.iteration,
+                seeds=seeds,
+                partition=SplitName.TRAIN,
+                split_manifest=split_manifest,
+                objective=load_objective(DEFAULT_CONFIG),
+                source_checkpoint=source_checkpoint,
+                reference_dataset=reference_dataset,
+                config=dagger_config,
+            )
+            index = dagger_dataset_index(iteration, split_manifest)
+            index_output = args.index_output or args.output.with_name(
+                f"{args.output.stem}-index.json"
+            )
+            if index_output.resolve() == args.output.resolve():
+                raise ValueError("DAgger iteration and index outputs must differ")
+            write_dagger_iteration(iteration, args.output)
+            write_frozen_dataset_index(index, index_output)
+            _emit_json(
+                {
+                    "path": str(args.output),
+                    "iteration_id": iteration["iteration_id"],
+                    "index_path": str(index_output),
+                    "index_id": index["index_id"],
+                    "source_model_id": iteration["source_model_id"],
+                    "summary": iteration["summary"],
+                },
+                None,
+            )
+            return 0
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
+            error_output = args.output if args.dagger_command == "verify" else None
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "demo":

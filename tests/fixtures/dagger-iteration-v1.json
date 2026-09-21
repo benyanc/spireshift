@@ -1,0 +1,2800 @@
+{
+  "backend": "mock",
+  "configuration": {
+    "confident_error_regret": 0.25,
+    "confident_error_threshold": 0.65,
+    "high_entropy_threshold": 0.95,
+    "maximum_run_decisions": 4096,
+    "probe_teacher": {
+      "evaluation_samples_per_candidate": 4,
+      "exploration_constant": 1.4142135623730951,
+      "maximum_rollout_steps": 4096,
+      "sampling_seed": 3,
+      "search_simulations": 4
+    },
+    "rare_state_max_fraction": 0.4,
+    "relabel_teacher": {
+      "evaluation_samples_per_candidate": 16,
+      "exploration_constant": 1.4142135623730951,
+      "maximum_rollout_steps": 4096,
+      "sampling_seed": 23,
+      "search_simulations": 16
+    },
+    "selection_policy_id": "selective-dagger-v1"
+  },
+  "iteration_id": "sha256:c8fcc9a4cb905b895a6b0b83249c8d9032cf81aa658e82dd129c225c53e49fbd",
+  "iteration_index": 0,
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "partition": "train",
+  "records": [
+    {
+      "decision_index": 0,
+      "diagnostics": {
+        "probe_confident_error": false,
+        "probe_independent_value_regret": 0.0,
+        "probe_teacher_disagreement": false,
+        "relabel_confident_error": null,
+        "relabel_independent_value_regret": null,
+        "relabel_teacher_disagreement": null
+      },
+      "encounter_id": "dagger-0-train-seed-13-0-path",
+      "model_input": {
+        "action_mask": [
+          true,
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "low",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "high",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "elite_path"
+          }
+        ],
+        "decision_type": "path",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:2022b53a804243ad1b5385ad4226c0dbd10f54429fa740aea3f81ba085310a29",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "reward": 0.0,
+        "selected_action_id": "elite_path",
+        "terminal": false,
+        "victory": false
+      },
+      "probe_teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 12791751411866014103,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 10324319740509199321,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 2939330874190417599,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 8091856856983321403,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.25
+            },
+            "search": {
+              "outcome_variance": 0.0,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 12791751411866014102,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 1,
+              "terminal_value": 0.0,
+              "visit_probability": 0.25,
+              "visits": 1
+            },
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "independent_evaluation": {
+              "outcome_variance": 0.0,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 4704070461002212759,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 230262387980027579,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 4427454248176842999,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 12741693285010277377,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 1.0
+            },
+            "search": {
+              "outcome_variance": 0.22222222222222224,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 10324319740509199320,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 2939330874190417598,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 8091856856983321402,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 3,
+              "terminal_value": 0.3333333333333333,
+              "visit_probability": 0.75,
+              "visits": 3
+            },
+            "source_action_id": "elite_path"
+          }
+        ],
+        "evaluation_samples_per_candidate": 4,
+        "evaluation_seed_domain": "1c0517b887006410fd5a550cb5cfe5ef01bd71495c2941a568aa4cad029ff8b4:evaluation-odd",
+        "search_seed_domain": "1c0517b887006410fd5a550cb5cfe5ef01bd71495c2941a568aa4cad029ff8b4:search-even",
+        "search_simulations": 4,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "record_id": "sha256:92ba4eee57115409332938b0088d699c888c824c0e4b235d3d59adee6b09abfe",
+      "reference_frequency": {
+        "fraction": 0.571428571429,
+        "matching_records": 12,
+        "total_records": 21
+      },
+      "relabel_target": null,
+      "run_id": "dagger-0-train-seed-13",
+      "run_terminal_victory": true,
+      "schema_version": "dagger-record-v1",
+      "selected_for_relabel": false,
+      "selection_reasons": [],
+      "state_signature": "85e639f9c8c17041db9ac79388f283e5ea93a2de678997435f5ad5a0c7fd721e",
+      "student_prediction": {
+        "confidence": 0.686480916576,
+        "normalized_entropy": 0.897193958669,
+        "policy": [
+          0.313519083424,
+          0.686480916576
+        ],
+        "run_value": 0.55116136298,
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "tactical_death_risk": [
+          0.014624272468,
+          0.210877545647
+        ]
+      }
+    },
+    {
+      "decision_index": 1,
+      "diagnostics": {
+        "probe_confident_error": false,
+        "probe_independent_value_regret": 0.0,
+        "probe_teacher_disagreement": false,
+        "relabel_confident_error": false,
+        "relabel_independent_value_regret": 0.0,
+        "relabel_teacher_disagreement": false
+      },
+      "encounter_id": "dagger-0-train-seed-13-1-combat",
+      "model_input": {
+        "action_mask": [
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "features": [],
+            "source_action_id": "face_boss"
+          }
+        ],
+        "decision_type": "combat",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:351a47a71dec4f3986a75677799c399fb5c02f5f1e8ee58416d01713a6f97d3c",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a",
+        "reward": 1.0,
+        "selected_action_id": "face_boss",
+        "terminal": true,
+        "victory": true
+      },
+      "probe_teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.0,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 6309354931023597819,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 3746171510599908231,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 13751254733758837073,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 4824659419779946281,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 1.0
+            },
+            "search": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 6309354931023597818,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 3746171510599908230,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 13751254733758837072,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 4824659419779946280,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.25,
+              "visit_probability": 1.0,
+              "visits": 4
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 4,
+        "evaluation_seed_domain": "9e88ea6e1a9359828565a011079c350d2b8eee21c0ce3910c645f7d3fc95444b:evaluation-odd",
+        "search_seed_domain": "9e88ea6e1a9359828565a011079c350d2b8eee21c0ce3910c645f7d3fc95444b:search-even",
+        "search_simulations": 4,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "record_id": "sha256:5c133b12a1dca91294fe391bce1730842e40dce3eb225d100c0c1dbecf0d8891",
+      "reference_frequency": {
+        "fraction": 0.380952380952,
+        "matching_records": 8,
+        "total_records": 21
+      },
+      "relabel_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.109375,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 17178953878759547783,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 1453771022091545135,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 13247563291926617195,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 6980779666850956989,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 16505102360579127337,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 10559630547992241075,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 17147714271580309519,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 4036434436413779629,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 8163399572167307651,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 779291456761979117,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 1612501169161903337,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 3521059961075086505,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 232784472339044811,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 664677922220292271,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 823172823026920237,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 16811441111286650517,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.875
+            },
+            "search": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 17178953878759547782,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 1453771022091545134,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 13247563291926617194,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 6980779666850956988,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 16505102360579127336,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 10559630547992241074,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 17147714271580309518,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 4036434436413779628,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 8163399572167307650,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 779291456761979116,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 1612501169161903336,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 3521059961075086504,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 232784472339044810,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 664677922220292270,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 823172823026920236,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 16811441111286650516,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.75,
+              "visit_probability": 1.0,
+              "visits": 16
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 16,
+        "evaluation_seed_domain": "7bf59aa3aeac825ec73e234d383c1abdd14decca9f90a467a65bfe0ac0cefb35:evaluation-odd",
+        "search_seed_domain": "7bf59aa3aeac825ec73e234d383c1abdd14decca9f90a467a65bfe0ac0cefb35:search-even",
+        "search_simulations": 16,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "run_id": "dagger-0-train-seed-13",
+      "run_terminal_victory": true,
+      "schema_version": "dagger-record-v1",
+      "selected_for_relabel": true,
+      "selection_reasons": [
+        "rare_state"
+      ],
+      "state_signature": "ab93a1d7a3677df215cf1aaf2b5cf80f0958927a54d90cbb477bd93864733276",
+      "student_prediction": {
+        "confidence": 1.0,
+        "normalized_entropy": 0.0,
+        "policy": [
+          1.0
+        ],
+        "run_value": 0.747904041502,
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "tactical_death_risk": [
+          0.262178400012
+        ]
+      }
+    },
+    {
+      "decision_index": 0,
+      "diagnostics": {
+        "probe_confident_error": false,
+        "probe_independent_value_regret": 0.0,
+        "probe_teacher_disagreement": false,
+        "relabel_confident_error": null,
+        "relabel_independent_value_regret": null,
+        "relabel_teacher_disagreement": null
+      },
+      "encounter_id": "dagger-0-train-seed-15-0-path",
+      "model_input": {
+        "action_mask": [
+          true,
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "low",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "high",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "elite_path"
+          }
+        ],
+        "decision_type": "path",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:2022b53a804243ad1b5385ad4226c0dbd10f54429fa740aea3f81ba085310a29",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "reward": 0.0,
+        "selected_action_id": "elite_path",
+        "terminal": false,
+        "victory": false
+      },
+      "probe_teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 17317394147874933793,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 4848891990990106183,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 16894789849515974565,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 6206445247507287907,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.25
+            },
+            "search": {
+              "outcome_variance": 0.0,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 17317394147874933792,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 1,
+              "terminal_value": 0.0,
+              "visit_probability": 0.25,
+              "visits": 1
+            },
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "independent_evaluation": {
+              "outcome_variance": 0.25,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 12949040846512972943,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 16539317077608479707,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 2431440974759978015,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 8192776509973830103,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.5
+            },
+            "search": {
+              "outcome_variance": 0.22222222222222224,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 4848891990990106182,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 16894789849515974564,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 6206445247507287906,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 3,
+              "terminal_value": 0.3333333333333333,
+              "visit_probability": 0.75,
+              "visits": 3
+            },
+            "source_action_id": "elite_path"
+          }
+        ],
+        "evaluation_samples_per_candidate": 4,
+        "evaluation_seed_domain": "4418b32c35e6f95ac2b4a40a5e879f84001da000f08ecd603137ccdda3444cc6:evaluation-odd",
+        "search_seed_domain": "4418b32c35e6f95ac2b4a40a5e879f84001da000f08ecd603137ccdda3444cc6:search-even",
+        "search_simulations": 4,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "record_id": "sha256:87ba2a41c5183792d67b4a43aa75fdc25ecfa7e96ba4ff9ed3c4256021c5d9ed",
+      "reference_frequency": {
+        "fraction": 0.571428571429,
+        "matching_records": 12,
+        "total_records": 21
+      },
+      "relabel_target": null,
+      "run_id": "dagger-0-train-seed-15",
+      "run_terminal_victory": true,
+      "schema_version": "dagger-record-v1",
+      "selected_for_relabel": false,
+      "selection_reasons": [],
+      "state_signature": "85e639f9c8c17041db9ac79388f283e5ea93a2de678997435f5ad5a0c7fd721e",
+      "student_prediction": {
+        "confidence": 0.686480916576,
+        "normalized_entropy": 0.897193958669,
+        "policy": [
+          0.313519083424,
+          0.686480916576
+        ],
+        "run_value": 0.55116136298,
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "tactical_death_risk": [
+          0.014624272468,
+          0.210877545647
+        ]
+      }
+    },
+    {
+      "decision_index": 1,
+      "diagnostics": {
+        "probe_confident_error": false,
+        "probe_independent_value_regret": 0.0,
+        "probe_teacher_disagreement": false,
+        "relabel_confident_error": false,
+        "relabel_independent_value_regret": 0.0,
+        "relabel_teacher_disagreement": false
+      },
+      "encounter_id": "dagger-0-train-seed-15-1-combat",
+      "model_input": {
+        "action_mask": [
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "features": [],
+            "source_action_id": "face_boss"
+          }
+        ],
+        "decision_type": "combat",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:351a47a71dec4f3986a75677799c399fb5c02f5f1e8ee58416d01713a6f97d3c",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a",
+        "reward": 1.0,
+        "selected_action_id": "face_boss",
+        "terminal": true,
+        "victory": true
+      },
+      "probe_teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.25,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 6356986144484788059,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 1935405150523637527,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 10379406825339493589,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 11503823133729431891,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.5
+            },
+            "search": {
+              "outcome_variance": 0.25,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 6356986144484788058,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 1935405150523637526,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 10379406825339493588,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 11503823133729431890,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.5,
+              "visit_probability": 1.0,
+              "visits": 4
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 4,
+        "evaluation_seed_domain": "a3a02635dfb4e4b2c2ba335a1918bf4418c6e3865281a11d9674f9a2957c099e:evaluation-odd",
+        "search_seed_domain": "a3a02635dfb4e4b2c2ba335a1918bf4418c6e3865281a11d9674f9a2957c099e:search-even",
+        "search_simulations": 4,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "record_id": "sha256:f41e2fb5754eaca3c3af168e54e8cc5935d61d1ecf5678299cacf06f161d58ed",
+      "reference_frequency": {
+        "fraction": 0.380952380952,
+        "matching_records": 8,
+        "total_records": 21
+      },
+      "relabel_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 7276344526089360737,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 17061461604144279669,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 7374999438656886711,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 15749025324760859263,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 14521333423055393731,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 14249995122471867547,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 4770599083355514181,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 1264010054608570091,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 7531440907478645725,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 7184396914118996127,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 16924267667827067105,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 7854645252761849757,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 10797689550521534743,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 10609912897042162399,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 6134710042630552893,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 12980767375807856993,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.75
+            },
+            "search": {
+              "outcome_variance": 0.05859375,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 7276344526089360736,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 17061461604144279668,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 7374999438656886710,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 15749025324760859262,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 14521333423055393730,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 14249995122471867546,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 4770599083355514180,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 1264010054608570090,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 7531440907478645724,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 7184396914118996126,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 16924267667827067104,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 7854645252761849756,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 10797689550521534742,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 10609912897042162398,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 6134710042630552892,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 12980767375807856992,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.9375,
+              "visit_probability": 1.0,
+              "visits": 16
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 16,
+        "evaluation_seed_domain": "acd645e20c8478d58c82a456a575ad9496e1ebc07b3eec8ee70a7db243cecf4d:evaluation-odd",
+        "search_seed_domain": "acd645e20c8478d58c82a456a575ad9496e1ebc07b3eec8ee70a7db243cecf4d:search-even",
+        "search_simulations": 16,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "run_id": "dagger-0-train-seed-15",
+      "run_terminal_victory": true,
+      "schema_version": "dagger-record-v1",
+      "selected_for_relabel": true,
+      "selection_reasons": [
+        "rare_state"
+      ],
+      "state_signature": "ab93a1d7a3677df215cf1aaf2b5cf80f0958927a54d90cbb477bd93864733276",
+      "student_prediction": {
+        "confidence": 1.0,
+        "normalized_entropy": 0.0,
+        "policy": [
+          1.0
+        ],
+        "run_value": 0.747904041502,
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "tactical_death_risk": [
+          0.262178400012
+        ]
+      }
+    },
+    {
+      "decision_index": 0,
+      "diagnostics": {
+        "probe_confident_error": true,
+        "probe_independent_value_regret": 0.25,
+        "probe_teacher_disagreement": true,
+        "relabel_confident_error": false,
+        "relabel_independent_value_regret": 0.0,
+        "relabel_teacher_disagreement": false
+      },
+      "encounter_id": "dagger-0-train-seed-16-0-path",
+      "model_input": {
+        "action_mask": [
+          true,
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "low",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "high",
+                "indices": [],
+                "numeric_value": null,
+                "path": [
+                  "risk"
+                ],
+                "semantic": "mechanic",
+                "value_type": "categorical"
+              }
+            ],
+            "source_action_id": "elite_path"
+          }
+        ],
+        "decision_type": "path",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:2022b53a804243ad1b5385ad4226c0dbd10f54429fa740aea3f81ba085310a29",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "reward": 0.0,
+        "selected_action_id": "elite_path",
+        "terminal": false,
+        "victory": false
+      },
+      "probe_teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 9956211407494028547,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 12267100757382832623,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 1550751958731657405,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 14314868357768081419,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.25
+            },
+            "search": {
+              "outcome_variance": 0.25,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 9956211407494028546,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 1550751958731657404,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 2,
+              "terminal_value": 0.5,
+              "visit_probability": 0.5,
+              "visits": 2
+            },
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "independent_evaluation": {
+              "outcome_variance": 0.0,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 14164948266663481479,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 10324949335696746993,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 1253599786365904823,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 11716294660128652383,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.0
+            },
+            "search": {
+              "outcome_variance": 0.25,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 12267100757382832622,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 14314868357768081418,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 2,
+              "terminal_value": 0.5,
+              "visit_probability": 0.5,
+              "visits": 2
+            },
+            "source_action_id": "elite_path"
+          }
+        ],
+        "evaluation_samples_per_candidate": 4,
+        "evaluation_seed_domain": "9ea887788e5fcfcfbd4d2af2ef8e3474b323765db0776dfc3e71dc77bf02063d:evaluation-odd",
+        "search_seed_domain": "9ea887788e5fcfcfbd4d2af2ef8e3474b323765db0776dfc3e71dc77bf02063d:search-even",
+        "search_simulations": 4,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "safe_path",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "record_id": "sha256:2a2567c10ac3d24ae17c1508d9281fc5b8adb3c9066008621c952786d91044c4",
+      "reference_frequency": {
+        "fraction": 0.571428571429,
+        "matching_records": 12,
+        "total_records": 21
+      },
+      "relabel_target": {
+        "candidates": [
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 7393277272696639185,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 11684073826749103585,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 979974068159335591,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 5721520298089854685,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 4,
+                  "simulation_seed": 5743542558997533573,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 5,
+                  "simulation_seed": 17806502323695890441,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 6,
+                  "simulation_seed": 8739162691884211235,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 7,
+                  "simulation_seed": 8735847429545736551,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 8,
+                  "simulation_seed": 2205019371833382861,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 9,
+                  "simulation_seed": 18328368608290501473,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 10,
+                  "simulation_seed": 5255664762498275095,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 11,
+                  "simulation_seed": 1780556900783345169,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 12,
+                  "simulation_seed": 11607782979580107409,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 13,
+                  "simulation_seed": 10053352430552688285,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 14,
+                  "simulation_seed": 6105652989949976915,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 15,
+                  "simulation_seed": 13210108094301731129,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.25
+            },
+            "search": {
+              "outcome_variance": 0.20408163265306123,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 7393277272696639184,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 979974068159335590,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 4,
+                  "simulation_seed": 5743542558997533572,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 5,
+                  "simulation_seed": 17806502323695890440,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 7,
+                  "simulation_seed": 8735847429545736550,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 10,
+                  "simulation_seed": 5255664762498275094,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 11,
+                  "simulation_seed": 1780556900783345168,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 7,
+              "terminal_value": 0.2857142857142857,
+              "visit_probability": 0.4375,
+              "visits": 7
+            },
+            "source_action_id": "safe_path"
+          },
+          {
+            "action_kind": "choose_path",
+            "candidate_index": 1,
+            "independent_evaluation": {
+              "outcome_variance": 0.234375,
+              "outcomes": [
+                {
+                  "decisions": 2,
+                  "sample_index": 0,
+                  "simulation_seed": 7487253167399138683,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 1,
+                  "simulation_seed": 15071216809258267497,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 2,
+                  "simulation_seed": 898816165533572397,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 3,
+                  "simulation_seed": 1514211313780184639,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 4,
+                  "simulation_seed": 201167030865733173,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 6901443288086006459,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 6,
+                  "simulation_seed": 8276207839484626309,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 7,
+                  "simulation_seed": 1841954677169888609,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 8,
+                  "simulation_seed": 2515561237476283541,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 9,
+                  "simulation_seed": 326317802607478933,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 10,
+                  "simulation_seed": 15826070015277706699,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 11,
+                  "simulation_seed": 5620720746142937319,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 12,
+                  "simulation_seed": 4452189331108608129,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 13,
+                  "simulation_seed": 16498177882475586493,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 14,
+                  "simulation_seed": 1177896437751758071,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 15,
+                  "simulation_seed": 13021420969257462143,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.625
+            },
+            "search": {
+              "outcome_variance": 0.2469135802469136,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 11684073826749103584,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 5721520298089854684,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 6,
+                  "simulation_seed": 8739162691884211234,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 8,
+                  "simulation_seed": 2205019371833382860,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 18328368608290501472,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 12,
+                  "simulation_seed": 11607782979580107408,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 13,
+                  "simulation_seed": 10053352430552688284,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 2,
+                  "sample_index": 14,
+                  "simulation_seed": 6105652989949976914,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 13210108094301731128,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 9,
+              "terminal_value": 0.4444444444444444,
+              "visit_probability": 0.5625,
+              "visits": 9
+            },
+            "source_action_id": "elite_path"
+          }
+        ],
+        "evaluation_samples_per_candidate": 16,
+        "evaluation_seed_domain": "d644b05db307168c1bc5293a07f6d0906d1399bb4c5590d73f9dbe058caae08b:evaluation-odd",
+        "search_seed_domain": "d644b05db307168c1bc5293a07f6d0906d1399bb4c5590d73f9dbe058caae08b:search-even",
+        "search_simulations": 16,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "run_id": "dagger-0-train-seed-16",
+      "run_terminal_victory": true,
+      "schema_version": "dagger-record-v1",
+      "selected_for_relabel": true,
+      "selection_reasons": [
+        "teacher_disagreement",
+        "confident_error"
+      ],
+      "state_signature": "85e639f9c8c17041db9ac79388f283e5ea93a2de678997435f5ad5a0c7fd721e",
+      "student_prediction": {
+        "confidence": 0.686480916576,
+        "normalized_entropy": 0.897193958669,
+        "policy": [
+          0.313519083424,
+          0.686480916576
+        ],
+        "run_value": 0.55116136298,
+        "selected_action_id": "elite_path",
+        "selected_candidate_index": 1,
+        "tactical_death_risk": [
+          0.014624272468,
+          0.210877545647
+        ]
+      }
+    },
+    {
+      "decision_index": 1,
+      "diagnostics": {
+        "probe_confident_error": false,
+        "probe_independent_value_regret": 0.0,
+        "probe_teacher_disagreement": false,
+        "relabel_confident_error": false,
+        "relabel_independent_value_regret": 0.0,
+        "relabel_teacher_disagreement": false
+      },
+      "encounter_id": "dagger-0-train-seed-16-1-combat",
+      "model_input": {
+        "action_mask": [
+          true
+        ],
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "features": [],
+            "source_action_id": "face_boss"
+          }
+        ],
+        "decision_type": "combat",
+        "encoder_id": "mechanics-compositional-v1",
+        "observation_schema": "observation-v1",
+        "patch_id": "mock-v1",
+        "representation_hash": "sha256:351a47a71dec4f3986a75677799c399fb5c02f5f1e8ee58416d01713a6f97d3c",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "schema_version": "model-input-v1",
+        "source_state_hash": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171",
+        "state": {
+          "entities": [],
+          "global_features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "floor"
+              ],
+              "semantic": "progression",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 1.0,
+              "path": [
+                "strength"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "terminal"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            },
+            {
+              "boolean_value": false,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "victory"
+              ],
+              "semantic": "status",
+              "value_type": "boolean"
+            }
+          ],
+          "persistent_resources": []
+        }
+      },
+      "observed_transition": {
+        "next_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a",
+        "reward": 1.0,
+        "selected_action_id": "face_boss",
+        "terminal": true,
+        "victory": true
+      },
+      "probe_teacher_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 12147086828016429339,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 3504840922110476201,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 9093256642928806625,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 2028746919962582233,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.75
+            },
+            "search": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 12147086828016429338,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 3504840922110476200,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 9093256642928806624,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 2028746919962582232,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 4,
+              "terminal_value": 0.75,
+              "visit_probability": 1.0,
+              "visits": 4
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 4,
+        "evaluation_seed_domain": "3372816d91ab065a3624dd68933a46f08ac8254aa82e466d07323284dc5658cd:evaluation-odd",
+        "search_seed_domain": "3372816d91ab065a3624dd68933a46f08ac8254aa82e466d07323284dc5658cd:search-even",
+        "search_simulations": 4,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "record_id": "sha256:7e24ba828c6f591adb6990344f8212c22e694409d73b329b1d7a631c0a5829f9",
+      "reference_frequency": {
+        "fraction": 0.380952380952,
+        "matching_records": 8,
+        "total_records": 21
+      },
+      "relabel_target": {
+        "candidates": [
+          {
+            "action_kind": "combat",
+            "candidate_index": 0,
+            "independent_evaluation": {
+              "outcome_variance": 0.1875,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 17547773370712776823,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 16739850402674343567,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 17825792086791732253,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 6684730973626243075,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 6077676717796798543,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 17915688477782588619,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 16678397899544962335,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 17643729844124267047,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 7224151432294001357,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 18058718017891044913,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 16409019102842470245,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 16759146878161688475,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 3216946295942770749,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 7364307927438589735,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 3958448911318511683,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 8866504171937141919,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.75
+            },
+            "search": {
+              "outcome_variance": 0.234375,
+              "outcomes": [
+                {
+                  "decisions": 1,
+                  "sample_index": 0,
+                  "simulation_seed": 17547773370712776822,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 1,
+                  "simulation_seed": 16739850402674343566,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 2,
+                  "simulation_seed": 17825792086791732252,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 3,
+                  "simulation_seed": 6684730973626243074,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 4,
+                  "simulation_seed": 6077676717796798542,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 5,
+                  "simulation_seed": 17915688477782588618,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 6,
+                  "simulation_seed": 16678397899544962334,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 7,
+                  "simulation_seed": 17643729844124267046,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 8,
+                  "simulation_seed": 7224151432294001356,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 9,
+                  "simulation_seed": 18058718017891044912,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 10,
+                  "simulation_seed": 16409019102842470244,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 11,
+                  "simulation_seed": 16759146878161688474,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 12,
+                  "simulation_seed": 3216946295942770748,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 13,
+                  "simulation_seed": 7364307927438589734,
+                  "terminal_reward": 0.0,
+                  "terminal_victory": false
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 14,
+                  "simulation_seed": 3958448911318511682,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                },
+                {
+                  "decisions": 1,
+                  "sample_index": 15,
+                  "simulation_seed": 8866504171937141918,
+                  "terminal_reward": 1.0,
+                  "terminal_victory": true
+                }
+              ],
+              "sample_count": 16,
+              "terminal_value": 0.625,
+              "visit_probability": 1.0,
+              "visits": 16
+            },
+            "source_action_id": "face_boss"
+          }
+        ],
+        "evaluation_samples_per_candidate": 16,
+        "evaluation_seed_domain": "33e1fd01bee68db51fb5732769d108525679d49ccdf24c8508c1749dce0a2eba:evaluation-odd",
+        "search_seed_domain": "33e1fd01bee68db51fb5732769d108525679d49ccdf24c8508c1749dce0a2eba:search-even",
+        "search_simulations": 16,
+        "seed_protocol_id": "sha256-domain-parity-v1",
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "teacher_id": "monte-carlo-ucb-terminal-victory-v1"
+      },
+      "run_id": "dagger-0-train-seed-16",
+      "run_terminal_victory": true,
+      "schema_version": "dagger-record-v1",
+      "selected_for_relabel": true,
+      "selection_reasons": [
+        "rare_state"
+      ],
+      "state_signature": "ab93a1d7a3677df215cf1aaf2b5cf80f0958927a54d90cbb477bd93864733276",
+      "student_prediction": {
+        "confidence": 1.0,
+        "normalized_entropy": 0.0,
+        "policy": [
+          1.0
+        ],
+        "run_value": 0.747904041502,
+        "selected_action_id": "face_boss",
+        "selected_candidate_index": 0,
+        "tactical_death_risk": [
+          0.262178400012
+        ]
+      }
+    }
+  ],
+  "reference_dataset_id": "sha256:2f6c4ba9293442283520cd8f718b2a47974c84c730e265a1475211f596fe4144",
+  "representation_encoder_id": "mechanics-compositional-v1",
+  "ruleset": {
+    "adapter": {
+      "component_id": "spireshift-mock-adapter",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "060477507680dd27b84065fd7f441fe9aa7b671349350cbb030d44c1a5837f20"
+      },
+      "revision": "observation-v1/action-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "version": "1"
+    },
+    "admission_status": "test_only",
+    "engine": {
+      "component_id": "spireshift-mock-engine",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+      },
+      "revision": "mock-rules-v1",
+      "source": "spireshift://src/spireshift/adapters/mock.py",
+      "version": "1"
+    },
+    "interface": {
+      "action_schema": "action-v1",
+      "information_policy_id": "public-state-v1",
+      "observation_schema": "observation-v1"
+    },
+    "manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "mechanics": [
+      {
+        "architecture": null,
+        "artifact_id": "mock-terminal-victory-rules",
+        "digest": {
+          "algorithm": "sha256",
+          "value": "7e2b309867366ac516db447ee80acc82240ea105a52ed3194ad6069b01123251"
+        },
+        "kind": "mechanics-bundle",
+        "platform": null,
+        "size_bytes": 282,
+        "version": "1"
+      }
+    ],
+    "patch_id": "mock-v1"
+  },
+  "runs": [
+    {
+      "encounter_ids": [
+        "dagger-0-train-seed-13-0-path",
+        "dagger-0-train-seed-13-1-combat"
+      ],
+      "record_ids": [
+        "sha256:92ba4eee57115409332938b0088d699c888c824c0e4b235d3d59adee6b09abfe",
+        "sha256:5c133b12a1dca91294fe391bce1730842e40dce3eb225d100c0c1dbecf0d8891"
+      ],
+      "run_id": "dagger-0-train-seed-13",
+      "seed": 13,
+      "split": "train",
+      "terminal": true,
+      "victory": true
+    },
+    {
+      "encounter_ids": [
+        "dagger-0-train-seed-15-0-path",
+        "dagger-0-train-seed-15-1-combat"
+      ],
+      "record_ids": [
+        "sha256:87ba2a41c5183792d67b4a43aa75fdc25ecfa7e96ba4ff9ed3c4256021c5d9ed",
+        "sha256:f41e2fb5754eaca3c3af168e54e8cc5935d61d1ecf5678299cacf06f161d58ed"
+      ],
+      "run_id": "dagger-0-train-seed-15",
+      "seed": 15,
+      "split": "train",
+      "terminal": true,
+      "victory": true
+    },
+    {
+      "encounter_ids": [
+        "dagger-0-train-seed-16-0-path",
+        "dagger-0-train-seed-16-1-combat"
+      ],
+      "record_ids": [
+        "sha256:2a2567c10ac3d24ae17c1508d9281fc5b8adb3c9066008621c952786d91044c4",
+        "sha256:7e24ba828c6f591adb6990344f8212c22e694409d73b329b1d7a631c0a5829f9"
+      ],
+      "run_id": "dagger-0-train-seed-16",
+      "seed": 16,
+      "split": "train",
+      "terminal": true,
+      "victory": true
+    }
+  ],
+  "schema_version": "dagger-iteration-v1",
+  "source_model_id": "sha256:7f620aeb48248ded3842fff44a4a12397360ceb5236e87b70317e32a3bb15191",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "summary": {
+    "candidates": 9,
+    "decisions": 6,
+    "defeats": 0,
+    "probe_evaluation_simulations": 36,
+    "probe_search_simulations": 24,
+    "relabel_evaluation_simulations": 80,
+    "relabel_search_simulations": 64,
+    "relabels_avoided": 2,
+    "runs": 3,
+    "selected_for_relabel": 4,
+    "selection_reason_counts": {
+      "confident_error": 1,
+      "high_entropy": 0,
+      "rare_state": 3,
+      "teacher_disagreement": 1
+    },
+    "victories": 3
+  }
+}

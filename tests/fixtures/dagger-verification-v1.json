@@ -1,0 +1,9 @@
+{
+  "decisions": 6,
+  "errors": [],
+  "iteration_id": "sha256:c8fcc9a4cb905b895a6b0b83249c8d9032cf81aa658e82dd129c225c53e49fbd",
+  "runs": 3,
+  "schema_version": "dagger-verification-v1",
+  "selected_for_relabel": 4,
+  "valid": true
+}

@@ -26,7 +26,9 @@ The repository currently contains the research contracts and a seeded mock verti
 13. mechanics-aware, candidate-aligned model inputs with a deterministic sparse vectorizer;
 14. content-addressed teacher trajectories with disjoint search and evaluation samples; and
 15. a deterministic three-head policy, terminal-value, and tactical-risk training baseline with
-    held-out regret and calibration reporting.
+    held-out regret and calibration reporting; and
+16. complete on-policy student collection with selective, cost-accounted teacher relabeling and
+    verified DAgger augmentation.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -118,6 +120,11 @@ regenerates every sampled outcome and audits complete-run split ownership.
 candidate policy, terminal run-value estimate, and candidate-conditioned tactical death risk. It
 requires disjoint frozen train and validation runs and reports independently evaluated regret and
 calibration in a content-addressed training report.
+
+[Selective DAgger collection](docs/selective-dagger.md) runs the student on new complete training
+runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,
+suspected confident errors, and high-entropy decisions. Verified selected labels can augment the next
+model checkpoint with complete provenance.
 
 ## Objective
 
