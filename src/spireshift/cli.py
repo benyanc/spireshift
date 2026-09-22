@@ -92,6 +92,11 @@ from spireshift.representations import (
 )
 from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
+from spireshift.search_workers import (
+    load_search_task,
+    run_search_worker_batch,
+    verify_search_worker_batch,
+)
 from spireshift.splits import (
     SplitName,
     audit_dataset_index,
@@ -286,6 +291,22 @@ def build_parser() -> argparse.ArgumentParser:
     )
     mechanics_audit.add_argument("--fixture", type=Path, default=DEFAULT_MECHANICS_FIXTURE)
     mechanics_audit.add_argument("--output", type=Path)
+
+    search = subparsers.add_parser("search", help="Run isolated planning infrastructure")
+    search_commands = search.add_subparsers(dest="search_command", required=True)
+    search_workers = search_commands.add_parser(
+        "workers", help="Execute prepared search-simulation tasks in isolated processes"
+    )
+    search_workers.add_argument("tasks", type=Path, nargs="+")
+    search_workers.add_argument("--workers", type=int, default=4)
+    search_workers.add_argument("--worker-timeout", type=float, default=120.0)
+    search_workers.add_argument("--output-dir", type=Path)
+    search_verify = search_commands.add_parser(
+        "verify-workers",
+        help="Verify task identities, evidence, aggregates, and deterministic replay",
+    )
+    search_verify.add_argument("report", type=Path)
+    search_verify.add_argument("--output", type=Path)
 
     backend = subparsers.add_parser(
         "backend", help="Qualify and admit the optional production training backend"
@@ -783,6 +804,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         mechanics_report = audit_mechanics_fixture(fixture, MockSpireEnvironment)
         _emit_json(mechanics_report, args.output)
         return 0 if mechanics_report["verdict"] == "pass" else 1
+    if args.command == "search":
+        if args.search_command == "verify-workers":
+            search_verification = verify_search_worker_batch(args.report)
+            _emit_json(search_verification.as_dict(), args.output)
+            return 0 if search_verification.valid else 1
+        search_result = run_search_worker_batch(
+            tasks=tuple(load_search_task(path) for path in args.tasks),
+            workers=args.workers,
+            worker_timeout_seconds=args.worker_timeout,
+            output_directory=args.output_dir or _default_search_worker_directory(),
+        )
+        _emit_json(search_result.report, None)
+        return 0 if search_result.successful else 1
     if args.command == "backend":
         try:
             if args.backend_command == "conformance":
@@ -1332,6 +1366,13 @@ def _default_rollout_directory() -> Path:
 
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
     return PROJECT_ROOT / f"artifacts/rollouts/mock-{stamp}"
+
+
+def _default_search_worker_directory() -> Path:
+    from datetime import UTC, datetime
+
+    stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S.%fZ")
+    return PROJECT_ROOT / f"artifacts/search-workers/batch-{stamp}"
 
 
 def _check() -> int:

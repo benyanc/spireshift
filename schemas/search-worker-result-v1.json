@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/search-worker-result-v1.json",
+  "title": "SpireShift Search Worker Result v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "batch_id",
+    "task_id",
+    "status",
+    "worker_pid",
+    "message",
+    "request_sha256",
+    "cpu_seconds",
+    "wall_seconds",
+    "output"
+  ],
+  "properties": {
+    "schema_version": {"const": "search-worker-result-v1"},
+    "batch_id": {"type": "string", "format": "uuid"},
+    "task_id": {"type": "string", "format": "uuid"},
+    "status": {"enum": ["completed", "worker_error", "crashed", "timeout"]},
+    "worker_pid": {"type": "integer", "minimum": 1},
+    "message": {"type": "string", "minLength": 1},
+    "request_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "cpu_seconds": {"type": "number", "minimum": 0},
+    "wall_seconds": {"type": "number", "minimum": 0},
+    "output": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/output"}
+      ]
+    }
+  },
+  "$defs": {
+    "output": {
+      "type": "object",
+      "required": [
+        "method",
+        "patch_id",
+        "ruleset_manifest_id",
+        "source_state_hash",
+        "action_id",
+        "simulation_seed",
+        "checkpoint_verified",
+        "sampled_worlds",
+        "transitions",
+        "terminal",
+        "victory",
+        "terminal_reward",
+        "truncated",
+        "final_state_hash"
+      ],
+      "properties": {
+        "method": {"const": "isolated-public-world-rollout-v1"},
+        "patch_id": {"type": "string", "minLength": 1},
+        "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "source_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "action_id": {"type": "string", "minLength": 1},
+        "simulation_seed": {"type": "integer"},
+        "checkpoint_verified": {"const": true},
+        "sampled_worlds": {"const": 1},
+        "transitions": {"type": "integer", "minimum": 1},
+        "terminal": {"type": "boolean"},
+        "victory": {"type": "boolean"},
+        "terminal_reward": {"type": ["number", "null"], "enum": [null, 0.0, 1.0]},
+        "truncated": {"type": "boolean"},
+        "final_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

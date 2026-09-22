@@ -84,6 +84,18 @@ def _registry() -> Registry[Any]:
         ("dagger-verification-v1.json", "dagger-verification-v1.json"),
         ("dataset-index-v1.json", "dagger-dataset-index-v1.json"),
         ("mechanics-fixture-v1.json", "mechanics/mock-v1.json"),
+        (
+            "search-simulation-task-v1.json",
+            "search-workers/mock-batch-v1/tasks/00000000-0000-4000-8000-000000000000/request.json",
+        ),
+        (
+            "search-worker-result-v1.json",
+            "search-workers/mock-batch-v1/tasks/00000000-0000-4000-8000-000000000000/result.json",
+        ),
+        (
+            "search-worker-batch-v1.json",
+            "search-workers/mock-batch-v1/search-worker-report.json",
+        ),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:
