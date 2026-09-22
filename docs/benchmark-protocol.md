@@ -37,6 +37,11 @@ must expose completion rate, failed attempts, worker crashes, and recovered runs
 rate. Completed runs count only after their immutable records pass exact transition replay. The
 [parallel rollout protocol](rollout-infrastructure.md) implements these rules for the mock backend.
 
+The first production compute-quality protocol freezes 32 validation runs, executes nested fixed
+search budgets, and grades every candidate on the same held-out seeds from a separate seed domain.
+Its report exposes terminal-value regret, death-risk calibration, compute, and tail latency with
+exact evidence replay. See [search compute-versus-quality benchmark](compute-quality-benchmark.md).
+
 ## Splits
 
 Training and evaluation are split by complete run and seed. Adjacent decisions from one run may not

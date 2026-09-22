@@ -21,7 +21,7 @@ from spireshift.search_workers import (
     SearchWorkerStatus,
 )
 
-FIXTURE = Path("tests/fixtures/fixed-search/tactical-mock-v1/fixed-search-report.json")
+FIXTURE = Path("tests/fixtures/fixed-search/tactical-mock-v2/fixed-search-report.json")
 
 
 def _config() -> FixedSearchConfig:

@@ -16,15 +16,15 @@ from uuid import UUID, uuid4
 
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.adapters.tactical_mock import TacticalHandoffMockEnvironment
-from spireshift.agents.baseline import TerminalVictoryPolicy
+from spireshift.agents.baseline import SearchRolloutPolicy
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import LegalAction, Observation
 from spireshift.mechanics import PublicMechanicsService
 from spireshift.rollouts import sha256_file, write_exclusive_json
 
 SEARCH_TASK_SCHEMA_VERSION = "search-simulation-task-v1"
-SEARCH_WORKER_RESULT_SCHEMA_VERSION = "search-worker-result-v1"
-SEARCH_WORKER_BATCH_SCHEMA_VERSION = "search-worker-batch-v1"
+SEARCH_WORKER_RESULT_SCHEMA_VERSION = "search-worker-result-v2"
+SEARCH_WORKER_BATCH_SCHEMA_VERSION = "search-worker-batch-v2"
 SEARCH_WORKER_METHOD = "isolated-public-world-rollout-v1"
 
 
@@ -298,6 +298,11 @@ def capture_checkpoint(
 
 def execute_search_task(task: SearchSimulationTask) -> dict[str, object]:
     environment, observation = restore_search_checkpoint(task.backend, task.checkpoint)
+    source_act = _public_act(observation, ("act",), ("run", "act"))
+    source_floor = _public_integer(observation, ("floor",), ("run", "floor"))
+    source_hp = _public_integer(observation, ("player_hp",), ("player", "hp"))
+    act_completed = None if source_act is None else False
+    maximum_floor = source_floor
     mechanics = PublicMechanicsService()
     source_snapshot = mechanics.snapshot(environment, observation)
     source_action = _action_by_id(source_snapshot.legal_actions, task.action_id)
@@ -306,19 +311,32 @@ def execute_search_task(task: SearchSimulationTask) -> dict[str, object]:
     if sampled_snapshot.legal_actions != source_snapshot.legal_actions:
         raise RuntimeError("Hidden-world clone changed public legal actions")
     action = _action_by_id(sampled_snapshot.legal_actions, source_action.action_id)
-    policy = TerminalVictoryPolicy()
+    policy = SearchRolloutPolicy()
     decisions = 0
     transition = sampled.step(action)
     if transition.observation != observation:
         raise RuntimeError("Hidden-world clone changed the source public observation")
     decisions += 1
     observation = transition.next_observation
+    post_action_hp = _public_integer(observation, ("player_hp",), ("player", "hp"))
+    post_action_floor = _public_integer(observation, ("floor",), ("run", "floor"))
+    current_act = _public_act(observation, ("act",), ("run", "act"))
+    if source_act is not None and current_act is not None and current_act != source_act:
+        act_completed = True
+    maximum_floor = _maximum_optional(maximum_floor, post_action_floor)
     while not transition.terminal and decisions < task.maximum_rollout_steps:
         continuation = mechanics.snapshot(sampled, observation)
         next_action = policy.choose_action(observation, continuation.legal_actions)
         transition = sampled.step(next_action)
         decisions += 1
         observation = transition.next_observation
+        current_act = _public_act(observation, ("act",), ("run", "act"))
+        if source_act is not None and current_act is not None and current_act != source_act:
+            act_completed = True
+        maximum_floor = _maximum_optional(
+            maximum_floor,
+            _public_integer(observation, ("floor",), ("run", "floor")),
+        )
     return {
         "method": SEARCH_WORKER_METHOD,
         "patch_id": environment.patch_id,
@@ -327,6 +345,7 @@ def execute_search_task(task: SearchSimulationTask) -> dict[str, object]:
         "action_id": task.action_id,
         "simulation_seed": task.simulation_seed,
         "checkpoint_verified": True,
+        "continuation_policy_id": policy.policy_id,
         "sampled_worlds": 1,
         "transitions": decisions,
         "terminal": transition.terminal,
@@ -334,6 +353,16 @@ def execute_search_task(task: SearchSimulationTask) -> dict[str, object]:
         "terminal_reward": transition.reward if transition.terminal else None,
         "truncated": not transition.terminal,
         "final_state_hash": observation.state_hash,
+        "diagnostics": {
+            "source_act": source_act,
+            "source_floor": source_floor,
+            "source_hp": source_hp,
+            "post_action_hp": post_action_hp,
+            "post_action_floor": post_action_floor,
+            "maximum_floor": maximum_floor,
+            "act_completed": act_completed,
+            "final_hp": _public_integer(observation, ("player_hp",), ("player", "hp")),
+        },
     }
 
 
@@ -727,6 +756,7 @@ def _validate_completed_output(task: SearchSimulationTask, output: dict[str, obj
         "action_id": task.action_id,
         "simulation_seed": task.simulation_seed,
         "checkpoint_verified": True,
+        "continuation_policy_id": SearchRolloutPolicy.policy_id,
         "sampled_worlds": 1,
     }
     if any(output.get(key) != value for key, value in expected.items()):
@@ -738,6 +768,31 @@ def _validate_completed_output(task: SearchSimulationTask, output: dict[str, obj
     truncated = _boolean(output.get("truncated"), "worker output truncated")
     if terminal == truncated:
         raise ValueError("Worker output terminal and truncated flags are inconsistent")
+    diagnostics = _mapping(output.get("diagnostics"), "worker output diagnostics")
+    expected_diagnostics = {
+        "source_act",
+        "source_floor",
+        "source_hp",
+        "post_action_hp",
+        "post_action_floor",
+        "maximum_floor",
+        "act_completed",
+        "final_hp",
+    }
+    _exact_keys(diagnostics, expected_diagnostics, "worker output diagnostics")
+    integer_diagnostics = expected_diagnostics - {"source_act", "act_completed"}
+    for key in integer_diagnostics:
+        value = diagnostics.get(key)
+        if value is not None and _optional_integer(value) is None:
+            raise ValueError(f"worker output diagnostics.{key} must be an integer or null")
+    source_act = diagnostics.get("source_act")
+    if source_act is not None and (
+        isinstance(source_act, bool) or not isinstance(source_act, (int, str))
+    ):
+        raise ValueError("worker output diagnostics.source_act must be an integer, string, or null")
+    act_completed = diagnostics.get("act_completed")
+    if act_completed is not None:
+        _boolean(act_completed, "worker output diagnostics.act_completed")
 
 
 def _failed_evidence(
@@ -771,6 +826,42 @@ def _action_by_id(actions: Sequence[LegalAction], action_id: str) -> LegalAction
 
 def _relative_path(path: Path, directory: Path) -> str:
     return str(path.resolve().relative_to(directory.resolve()))
+
+
+def _public_integer(observation: Observation, *paths: tuple[str, ...]) -> int | None:
+    for path in paths:
+        value: object = observation.public_state
+        for part in path:
+            if not isinstance(value, dict) or part not in value:
+                value = None
+                break
+            value = value[part]
+        if isinstance(value, int) and not isinstance(value, bool):
+            return value
+    return None
+
+
+def _public_act(observation: Observation, *paths: tuple[str, ...]) -> int | str | None:
+    for path in paths:
+        value: object = observation.public_state
+        for part in path:
+            if not isinstance(value, dict) or part not in value:
+                value = None
+                break
+            value = value[part]
+        if isinstance(value, str) and value:
+            return value
+        if isinstance(value, int) and not isinstance(value, bool):
+            return value
+    return None
+
+
+def _maximum_optional(left: int | None, right: int | None) -> int | None:
+    if left is None:
+        return right
+    if right is None:
+        return left
+    return max(left, right)
 
 
 def _safe_child(directory: Path, relative: str) -> Path:

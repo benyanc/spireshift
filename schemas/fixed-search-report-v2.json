@@ -1,0 +1,283 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/fixed-search-report-v2.json",
+  "title": "SpireShift Fixed-Budget Search Report v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "planner_id",
+    "objective_id",
+    "started_at",
+    "completed_at",
+    "backend",
+    "backend_attribution",
+    "ruleset_manifest_id",
+    "patch_id",
+    "configuration",
+    "capture",
+    "checkpoint",
+    "decision_type",
+    "legal_actions",
+    "tiers",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {"const": "fixed-search-report-v2"},
+    "report_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "planner_id": {"const": "isolated-root-uct-terminal-victory-v1"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "backend": {"$ref": "search-simulation-task-v1.json#/$defs/backend"},
+    "backend_attribution": {"$ref": "#/$defs/attribution"},
+    "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "patch_id": {"type": "string", "minLength": 1},
+    "configuration": {"$ref": "#/$defs/configuration"},
+    "capture": {"$ref": "#/$defs/capture"},
+    "checkpoint": {"$ref": "search-simulation-task-v1.json#/$defs/checkpoint"},
+    "decision_type": {"enum": ["combat", "combat_selection"]},
+    "legal_actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "action-v1.json"}
+    },
+    "tiers": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/tierResult"}
+    },
+    "summary": {"$ref": "#/$defs/reportSummary"}
+  },
+  "$defs": {
+    "attribution": {
+      "type": "object",
+      "required": ["project", "license", "source", "role"],
+      "properties": {
+        "project": {"type": "string", "minLength": 1},
+        "license": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "tierConfig": {
+      "type": "object",
+      "required": ["name", "simulations"],
+      "properties": {
+        "name": {"enum": ["shallow", "medium", "expensive"]},
+        "simulations": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "tiers",
+        "exploration_constant",
+        "sampling_seed",
+        "maximum_rollout_steps",
+        "workers",
+        "worker_timeout_seconds"
+      ],
+      "properties": {
+        "tiers": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"$ref": "#/$defs/tierConfig"}
+        },
+        "exploration_constant": {"type": "number", "minimum": 0},
+        "sampling_seed": {"type": "integer", "minimum": 0},
+        "maximum_rollout_steps": {"type": "integer", "minimum": 1},
+        "workers": {"type": "integer", "minimum": 1},
+        "worker_timeout_seconds": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "capture": {
+      "type": "object",
+      "required": ["method", "combat_state_index", "policy_id"],
+      "properties": {
+        "method": {"enum": ["explicit_action_prefix", "baseline_policy_combat_index"]},
+        "combat_state_index": {"type": ["integer", "null"], "minimum": 0},
+        "policy_id": {"type": ["string", "null"], "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "candidate_index",
+        "source_action_id",
+        "action_kind",
+        "attempted_simulations",
+        "completed_simulations",
+        "terminal_simulations",
+        "truncated_simulations",
+        "failed_simulations",
+        "victories",
+        "terminal_value",
+        "completed_terminal_value",
+        "outcome_variance",
+        "visit_probability",
+        "transitions",
+        "sampled_worlds",
+        "worker_cpu_seconds",
+        "worker_wall_seconds"
+      ],
+      "properties": {
+        "candidate_index": {"type": "integer", "minimum": 0},
+        "source_action_id": {"type": "string", "minLength": 1},
+        "action_kind": {"type": "string", "minLength": 1},
+        "attempted_simulations": {"type": "integer", "minimum": 1},
+        "completed_simulations": {"type": "integer", "minimum": 0},
+        "terminal_simulations": {"type": "integer", "minimum": 0},
+        "truncated_simulations": {"type": "integer", "minimum": 0},
+        "failed_simulations": {"type": "integer", "minimum": 0},
+        "victories": {"type": "integer", "minimum": 0},
+        "terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "completed_terminal_value": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "outcome_variance": {"type": "number", "minimum": 0, "maximum": 0.25},
+        "visit_probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "transitions": {"type": "integer", "minimum": 0},
+        "sampled_worlds": {"type": "integer", "minimum": 0},
+        "worker_cpu_seconds": {"type": "number", "minimum": 0},
+        "worker_wall_seconds": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "simulation": {
+      "type": "object",
+      "required": [
+        "ordinal",
+        "task_id",
+        "candidate_index",
+        "source_action_id",
+        "simulation_seed",
+        "status",
+        "cpu_seconds",
+        "wall_seconds",
+        "output"
+      ],
+      "properties": {
+        "ordinal": {"type": "integer", "minimum": 0},
+        "task_id": {"type": "string", "format": "uuid"},
+        "candidate_index": {"type": "integer", "minimum": 0},
+        "source_action_id": {"type": "string", "minLength": 1},
+        "simulation_seed": {"type": "integer", "minimum": 0},
+        "status": {"enum": ["completed", "worker_error", "crashed", "timeout"]},
+        "cpu_seconds": {"type": ["number", "null"], "minimum": 0},
+        "wall_seconds": {"type": ["number", "null"], "minimum": 0},
+        "output": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "search-worker-result-v2.json#/$defs/output"}
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "waveReport": {
+      "type": "object",
+      "required": ["wave_index", "report_path", "report_sha256"],
+      "properties": {
+        "wave_index": {"type": "integer", "minimum": 0},
+        "report_path": {"type": "string", "minLength": 1},
+        "report_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "tierSummary": {
+      "type": "object",
+      "required": [
+        "attempted_simulations",
+        "completed_simulations",
+        "terminal_simulations",
+        "failed_or_truncated_simulations",
+        "worker_crashes",
+        "transitions",
+        "sampled_worlds",
+        "unique_simulation_seeds",
+        "unique_final_state_hashes",
+        "worker_cpu_seconds",
+        "wall_seconds",
+        "mean_worker_wall_seconds",
+        "p95_worker_wall_seconds"
+      ],
+      "properties": {
+        "attempted_simulations": {"type": "integer", "minimum": 1},
+        "completed_simulations": {"type": "integer", "minimum": 0},
+        "terminal_simulations": {"type": "integer", "minimum": 0},
+        "failed_or_truncated_simulations": {"type": "integer", "minimum": 0},
+        "worker_crashes": {"type": "integer", "minimum": 0},
+        "transitions": {"type": "integer", "minimum": 0},
+        "sampled_worlds": {"type": "integer", "minimum": 0},
+        "unique_simulation_seeds": {"type": "integer", "minimum": 1},
+        "unique_final_state_hashes": {"type": "integer", "minimum": 0},
+        "worker_cpu_seconds": {"type": "number", "minimum": 0},
+        "wall_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "mean_worker_wall_seconds": {"type": ["number", "null"], "minimum": 0},
+        "p95_worker_wall_seconds": {"type": ["number", "null"], "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "tierResult": {
+      "type": "object",
+      "required": [
+        "tier",
+        "simulation_budget",
+        "selected_candidate_index",
+        "selected_action_id",
+        "candidates",
+        "simulations",
+        "wave_reports",
+        "summary"
+      ],
+      "properties": {
+        "tier": {"enum": ["shallow", "medium", "expensive"]},
+        "simulation_budget": {"type": "integer", "minimum": 1},
+        "selected_candidate_index": {"type": "integer", "minimum": 0},
+        "selected_action_id": {"type": "string", "minLength": 1},
+        "candidates": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/candidate"}},
+        "simulations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/simulation"}},
+        "wave_reports": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/waveReport"}},
+        "summary": {"$ref": "#/$defs/tierSummary"}
+      },
+      "additionalProperties": false
+    },
+    "reportSummary": {
+      "type": "object",
+      "required": [
+        "tiers",
+        "candidate_count",
+        "attempted_simulations",
+        "failed_or_truncated_simulations",
+        "transitions",
+        "all_tiers_complete",
+        "selected_action_ids"
+      ],
+      "properties": {
+        "tiers": {"const": 3},
+        "candidate_count": {"type": "integer", "minimum": 1},
+        "attempted_simulations": {"type": "integer", "minimum": 3},
+        "failed_or_truncated_simulations": {"type": "integer", "minimum": 0},
+        "transitions": {"type": "integer", "minimum": 0},
+        "all_tiers_complete": {"type": "boolean"},
+        "selected_action_ids": {
+          "type": "object",
+          "required": ["shallow", "medium", "expensive"],
+          "properties": {
+            "shallow": {"type": "string", "minLength": 1},
+            "medium": {"type": "string", "minLength": 1},
+            "expensive": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

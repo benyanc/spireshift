@@ -53,6 +53,10 @@ def _registry() -> Registry[Any]:
             "split-manifest-v1.json",
             "../../manifests/splits/mock-v1-seeds-000000-000999-v1.json",
         ),
+        (
+            "split-manifest-v1.json",
+            "../../manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json",
+        ),
         ("dataset-index-v1.json", "splits/dataset-index-v1.json"),
         ("dataset-split-audit-v1.json", "splits/dataset-split-audit-v1.json"),
         ("live-fixture-corpus-v1.json", "live/public-state-corpus-v1.json"),
@@ -93,16 +97,48 @@ def _registry() -> Registry[Any]:
             "search-workers/mock-batch-v1/tasks/00000000-0000-4000-8000-000000000000/result.json",
         ),
         (
+            "search-worker-result-v2.json",
+            "search-workers/mock-batch-v2/tasks/00000000-0000-4000-8000-000000000000/result.json",
+        ),
+        (
             "search-worker-batch-v1.json",
             "search-workers/mock-batch-v1/search-worker-report.json",
+        ),
+        (
+            "search-worker-batch-v2.json",
+            "search-workers/mock-batch-v2/search-worker-report.json",
         ),
         (
             "fixed-search-report-v1.json",
             "fixed-search/tactical-mock-v1/fixed-search-report.json",
         ),
         (
+            "fixed-search-report-v2.json",
+            "fixed-search/tactical-mock-v2/fixed-search-report.json",
+        ),
+        (
             "fixed-search-verification-v1.json",
             "fixed-search-verification-v1.json",
+        ),
+        (
+            "fixed-search-verification-v1.json",
+            "fixed-search-verification-v2-target.json",
+        ),
+        (
+            "search-benchmark-state-set-v1.json",
+            "search-benchmark-state-set-v1.json",
+        ),
+        (
+            "search-benchmark-state-set-v1.json",
+            "../../manifests/benchmarks/sts2-v0.107.1-evangambit-validation-v1.json",
+        ),
+        (
+            "search-compute-quality-report-v1.json",
+            "search-compute-quality-report-v1.json",
+        ),
+        (
+            "search-compute-quality-verification-v1.json",
+            "search-compute-quality-verification-v1.json",
         ),
         ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
         ("experiment-resources-v1.json", "experiment-resources-v1.json"),

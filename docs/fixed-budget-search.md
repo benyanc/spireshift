@@ -6,9 +6,11 @@ upstream checkout and compiled library remain external.
 
 This is root UCT, not a full tree MCTS claim. Each simulation restores the same public checkpoint in
 a fresh process, resamples one hidden world, applies one root candidate, and follows the declared
-baseline policy to a terminal run outcome. UCT allocates later simulations using conservative
-terminal-victory means. A crash, timeout, or rollout truncated at the hard transition limit remains
-in the candidate's attempted count and contributes zero to its conservative value.
+`terminal-victory-search-rollout-v1` continuation policy to a terminal run outcome. The same policy
+captures indexed combat states and completes card multi-select states deterministically. UCT
+allocates later simulations using conservative terminal-victory means. A crash, timeout, or rollout
+truncated at the hard transition limit remains in the candidate's attempted count and contributes
+zero to its conservative value.
 
 ## Paired tiers
 
@@ -82,6 +84,7 @@ second long-running job and must be launched deliberately.
 ## Claim boundary
 
 The checked tactical fixture proves the orchestration, accounting, pairing, and replay contracts.
-It says nothing about STS2 search quality. A compute-versus-quality claim requires held-out combat
-states plus a separate seed domain that independently grades every candidate; that experiment is
-tracked by issue #7.
+It says nothing about STS2 search quality. The production
+[compute-versus-quality benchmark](compute-quality-benchmark.md) freezes held-out validation combat
+states and uses a separate paired seed domain to grade every candidate. Its result remains pending
+until the sustained run and exact replay finish.

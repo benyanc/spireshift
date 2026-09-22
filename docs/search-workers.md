@@ -11,13 +11,18 @@ Each worker performs these steps:
 3. Require the restored patch, ruleset, and public state hash to match the checkpoint.
 4. Clone that state with one explicit hidden-world seed.
 5. Require public legal actions and the source observation to remain unchanged.
-6. Apply the candidate action and continue under the declared policy until terminal or the hard
-   transition limit.
+6. Apply the candidate action and continue under `terminal-victory-search-rollout-v1` until terminal
+   or the hard transition limit. The policy explicitly completes card multi-select states instead of
+   repeatedly toggling the first option.
 
 The worker writes its result with exclusive creation. Its evidence includes the process ID, request
 digest, CPU and wall time, sampled-world count, simulated transitions, terminal outcome or
 truncation, and final public state hash. A timeout, abnormal exit, stale checkpoint, identity drift,
 or malformed result stays in the requested-task denominator.
+
+Public diagnostics record source and post-action HP/floor, maximum observed act/floor, act
+completion, and terminal HP when those fields exist. They support analysis but never replace the
+terminal-victory value used by search.
 
 Prepared task documents use `search-simulation-task-v1`. Run them with bounded concurrency:
 

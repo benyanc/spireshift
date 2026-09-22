@@ -17,7 +17,7 @@ from spireshift.search_workers import (
     verify_search_worker_batch,
 )
 
-CHECKED_REPORT = Path("tests/fixtures/search-workers/mock-batch-v1/search-worker-report.json")
+CHECKED_REPORT = Path("tests/fixtures/search-workers/mock-batch-v2/search-worker-report.json")
 
 
 def _root_checkpoint() -> PublicStateCheckpoint:
@@ -74,6 +74,11 @@ def test_isolated_workers_restore_checkpoint_and_sample_independent_worlds(tmp_p
         assert output["checkpoint_verified"] is True
         assert output["sampled_worlds"] == 1
         assert output["source_state_hash"] == _root_checkpoint().state_hash
+        diagnostics = output["diagnostics"]
+        assert diagnostics["source_floor"] == 0
+        assert diagnostics["maximum_floor"] in {0, 1}
+        assert diagnostics["source_act"] is None
+        assert diagnostics["act_completed"] is None
         request_path = result.report_path.parent / item["request_path"]
         result_path = result.report_path.parent / item["result_path"]
         assert request_path.is_file()
@@ -114,6 +119,7 @@ def test_worker_restores_action_prefix_before_sampling(tmp_path: Path) -> None:
     assert output["action_id"] == "face_boss"
     assert output["terminal"] is True
     assert output["truncated"] is False
+    assert output["diagnostics"]["source_floor"] == 1
 
 
 def test_stale_checkpoint_fails_closed_in_its_own_process(tmp_path: Path) -> None:

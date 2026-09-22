@@ -42,7 +42,9 @@ The repository currently contains the research contracts and a seeded mock verti
 22. cross-platform experiment resource tracking with hard caps, hardware and throughput evidence,
     configurable cost rates, and explicit missing-measurement reporting; and
 23. an EvanGambit-backed fixed root-UCT baseline with paired shallow, medium, and expensive budgets,
-    terminal-victory values, failure-preserving evidence, and exact replay.
+    terminal-victory values, failure-preserving evidence, and exact replay; and
+24. a frozen validation compute-quality harness with paired independent candidate evaluation,
+    terminal-value regret, death-risk calibration, compute and tail-latency metrics, and exact replay.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -136,6 +138,10 @@ throughput, and immutable results for fixed-budget planning.
 [Fixed-budget combat search](docs/fixed-budget-search.md) runs nested shallow, medium, and expensive
 root-UCT budgets from one public checkpoint. It records terminal-victory candidate values, stochastic
 world coverage, failures, CPU and wall time, tail latency, and licensed-backend attribution.
+
+[Search compute-versus-quality benchmarking](docs/compute-quality-benchmark.md) binds 32 production
+validation states to a complete-run split, grades each legal candidate on paired held-out seeds, and
+reports regret, calibration, compute, diagnostics, failures, and exact replay evidence.
 
 [Experiment resource and cost accounting](docs/resource-accounting.md) wraps long-running commands,
 captures hardware and process-tree usage, enforces optional wall/CPU/storage/memory caps, preserves
