@@ -1,0 +1,674 @@
+{
+  "backend": {
+    "kind": "tactical_mock",
+    "manifest_path": null,
+    "upstream_root": null
+  },
+  "backend_attribution": {
+    "license": "project fixture",
+    "project": "SpireShift",
+    "role": "test-only simulator backend",
+    "source": "spireshift://src/spireshift/adapters"
+  },
+  "capture": {
+    "combat_state_index": 0,
+    "method": "baseline_policy_combat_index",
+    "policy_id": "terminal-victory-baseline-v1"
+  },
+  "checkpoint": {
+    "action_prefix": [],
+    "patch_id": "tactical-handoff-mock-v1",
+    "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+    "run_seed": 7,
+    "state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff"
+  },
+  "completed_at": "2026-09-22T00:00:00Z",
+  "configuration": {
+    "exploration_constant": 1.4142135623730951,
+    "maximum_rollout_steps": 8,
+    "sampling_seed": 0,
+    "tiers": [
+      {
+        "name": "shallow",
+        "simulations": 3
+      },
+      {
+        "name": "medium",
+        "simulations": 4
+      },
+      {
+        "name": "expensive",
+        "simulations": 5
+      }
+    ],
+    "worker_timeout_seconds": 30.0,
+    "workers": 5
+  },
+  "decision_type": "combat",
+  "legal_actions": [
+    {
+      "action_id": "preserve_hp",
+      "kind": "play_card",
+      "payload": {
+        "plan": "defend"
+      }
+    },
+    {
+      "action_id": "take_damage_for_power",
+      "kind": "play_card",
+      "payload": {
+        "expected_hp_cost": 28,
+        "plan": "scale"
+      }
+    },
+    {
+      "action_id": "spend_potion_for_relic",
+      "kind": "use_potion",
+      "payload": {
+        "plan": "secure_relic",
+        "potion_slot": 0
+      }
+    }
+  ],
+  "objective_id": "terminal-victory-v1",
+  "patch_id": "tactical-handoff-mock-v1",
+  "planner_id": "isolated-root-uct-terminal-victory-v1",
+  "report_id": "sha256:8036e115475b9a8fb2f5aa60a2f1abced6b719f4386d44dc421a0ec6297b01f5",
+  "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+  "schema_version": "fixed-search-report-v1",
+  "started_at": "2026-09-22T00:00:00Z",
+  "summary": {
+    "all_tiers_complete": true,
+    "attempted_simulations": 12,
+    "candidate_count": 3,
+    "failed_or_truncated_simulations": 0,
+    "selected_action_ids": {
+      "expensive": "spend_potion_for_relic",
+      "medium": "spend_potion_for_relic",
+      "shallow": "preserve_hp"
+    },
+    "tiers": 3,
+    "transitions": 24
+  },
+  "tiers": [
+    {
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "attempted_simulations": 1,
+          "candidate_index": 0,
+          "completed_simulations": 1,
+          "completed_terminal_value": 1.0,
+          "failed_simulations": 0,
+          "outcome_variance": 0.0,
+          "sampled_worlds": 1,
+          "source_action_id": "preserve_hp",
+          "terminal_simulations": 1,
+          "terminal_value": 1.0,
+          "transitions": 2,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.3333333333333333,
+          "worker_cpu_seconds": 0.0011890000000000026,
+          "worker_wall_seconds": 0.0012272919993847609
+        },
+        {
+          "action_kind": "play_card",
+          "attempted_simulations": 1,
+          "candidate_index": 1,
+          "completed_simulations": 1,
+          "completed_terminal_value": 0.0,
+          "failed_simulations": 0,
+          "outcome_variance": 0.0,
+          "sampled_worlds": 1,
+          "source_action_id": "take_damage_for_power",
+          "terminal_simulations": 1,
+          "terminal_value": 0.0,
+          "transitions": 2,
+          "truncated_simulations": 0,
+          "victories": 0,
+          "visit_probability": 0.3333333333333333,
+          "worker_cpu_seconds": 0.0011849999999999986,
+          "worker_wall_seconds": 0.0013532500015571713
+        },
+        {
+          "action_kind": "use_potion",
+          "attempted_simulations": 1,
+          "candidate_index": 2,
+          "completed_simulations": 1,
+          "completed_terminal_value": 1.0,
+          "failed_simulations": 0,
+          "outcome_variance": 0.0,
+          "sampled_worlds": 1,
+          "source_action_id": "spend_potion_for_relic",
+          "terminal_simulations": 1,
+          "terminal_value": 1.0,
+          "transitions": 2,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.3333333333333333,
+          "worker_cpu_seconds": 0.001131,
+          "worker_wall_seconds": 0.0012612499995157123
+        }
+      ],
+      "selected_action_id": "preserve_hp",
+      "selected_candidate_index": 0,
+      "simulation_budget": 3,
+      "simulations": [
+        {
+          "candidate_index": 0,
+          "cpu_seconds": 0.0011890000000000026,
+          "ordinal": 0,
+          "output": {
+            "action_id": "preserve_hp",
+            "checkpoint_verified": true,
+            "final_state_hash": "a5062cf6e8d120fc7616ba3bd6d8203288d64ba16365a2f9044cb0099de6dffa",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 625356189031897448,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 625356189031897448,
+          "source_action_id": "preserve_hp",
+          "status": "completed",
+          "task_id": "dd9b8c75-08e2-5fc6-b27e-ca51262673a2",
+          "wall_seconds": 0.0012272919993847609
+        },
+        {
+          "candidate_index": 1,
+          "cpu_seconds": 0.0011849999999999986,
+          "ordinal": 1,
+          "output": {
+            "action_id": "take_damage_for_power",
+            "checkpoint_verified": true,
+            "final_state_hash": "b9ed24315ed0dc905bfe9b0d0423aa706da35a726c2853274f6adf7e227b50d9",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 3151406000881126628,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 0.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": false
+          },
+          "simulation_seed": 3151406000881126628,
+          "source_action_id": "take_damage_for_power",
+          "status": "completed",
+          "task_id": "6d5b5d91-102d-58f7-bc52-ba89e9e1be9c",
+          "wall_seconds": 0.0013532500015571713
+        },
+        {
+          "candidate_index": 2,
+          "cpu_seconds": 0.001131,
+          "ordinal": 2,
+          "output": {
+            "action_id": "spend_potion_for_relic",
+            "checkpoint_verified": true,
+            "final_state_hash": "aa15d3f7204a331cd0e4124f818458335d981ab32b0676a52ceb03e6cdc24c0a",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 7579638266415387038,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 7579638266415387038,
+          "source_action_id": "spend_potion_for_relic",
+          "status": "completed",
+          "task_id": "f0b05acb-2428-520f-8f3c-b2042aeb8643",
+          "wall_seconds": 0.0012612499995157123
+        }
+      ],
+      "summary": {
+        "attempted_simulations": 3,
+        "completed_simulations": 3,
+        "failed_or_truncated_simulations": 0,
+        "mean_worker_wall_seconds": 0.0012805973334858816,
+        "p95_worker_wall_seconds": 0.0013532500015571713,
+        "sampled_worlds": 3,
+        "terminal_simulations": 3,
+        "transitions": 6,
+        "unique_final_state_hashes": 3,
+        "unique_simulation_seeds": 3,
+        "wall_seconds": 0.06797908304724842,
+        "worker_cpu_seconds": 0.003505000000000001,
+        "worker_crashes": 0
+      },
+      "tier": "shallow",
+      "wave_reports": [
+        {
+          "report_path": "tiers/shallow/wave-0000/search-worker-report.json",
+          "report_sha256": "d420448aad466b375609d901bae027e8ac0275e3fa25733ce15b1465b388192c",
+          "wave_index": 0
+        }
+      ]
+    },
+    {
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "attempted_simulations": 2,
+          "candidate_index": 0,
+          "completed_simulations": 2,
+          "completed_terminal_value": 0.5,
+          "failed_simulations": 0,
+          "outcome_variance": 0.25,
+          "sampled_worlds": 2,
+          "source_action_id": "preserve_hp",
+          "terminal_simulations": 2,
+          "terminal_value": 0.5,
+          "transitions": 4,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.5,
+          "worker_cpu_seconds": 0.0017669999999999977,
+          "worker_wall_seconds": 0.0017693330300971866
+        },
+        {
+          "action_kind": "play_card",
+          "attempted_simulations": 1,
+          "candidate_index": 1,
+          "completed_simulations": 1,
+          "completed_terminal_value": 0.0,
+          "failed_simulations": 0,
+          "outcome_variance": 0.0,
+          "sampled_worlds": 1,
+          "source_action_id": "take_damage_for_power",
+          "terminal_simulations": 1,
+          "terminal_value": 0.0,
+          "transitions": 2,
+          "truncated_simulations": 0,
+          "victories": 0,
+          "visit_probability": 0.25,
+          "worker_cpu_seconds": 0.0008660000000000057,
+          "worker_wall_seconds": 0.0008665829664096236
+        },
+        {
+          "action_kind": "use_potion",
+          "attempted_simulations": 1,
+          "candidate_index": 2,
+          "completed_simulations": 1,
+          "completed_terminal_value": 1.0,
+          "failed_simulations": 0,
+          "outcome_variance": 0.0,
+          "sampled_worlds": 1,
+          "source_action_id": "spend_potion_for_relic",
+          "terminal_simulations": 1,
+          "terminal_value": 1.0,
+          "transitions": 2,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.25,
+          "worker_cpu_seconds": 0.000895999999999994,
+          "worker_wall_seconds": 0.0008977500256150961
+        }
+      ],
+      "selected_action_id": "spend_potion_for_relic",
+      "selected_candidate_index": 2,
+      "simulation_budget": 4,
+      "simulations": [
+        {
+          "candidate_index": 0,
+          "cpu_seconds": 0.0008610000000000007,
+          "ordinal": 0,
+          "output": {
+            "action_id": "preserve_hp",
+            "checkpoint_verified": true,
+            "final_state_hash": "a5062cf6e8d120fc7616ba3bd6d8203288d64ba16365a2f9044cb0099de6dffa",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 625356189031897448,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 625356189031897448,
+          "source_action_id": "preserve_hp",
+          "status": "completed",
+          "task_id": "dd9b8c75-08e2-5fc6-b27e-ca51262673a2",
+          "wall_seconds": 0.0008622499881312251
+        },
+        {
+          "candidate_index": 1,
+          "cpu_seconds": 0.0008660000000000057,
+          "ordinal": 1,
+          "output": {
+            "action_id": "take_damage_for_power",
+            "checkpoint_verified": true,
+            "final_state_hash": "b9ed24315ed0dc905bfe9b0d0423aa706da35a726c2853274f6adf7e227b50d9",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 3151406000881126628,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 0.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": false
+          },
+          "simulation_seed": 3151406000881126628,
+          "source_action_id": "take_damage_for_power",
+          "status": "completed",
+          "task_id": "6d5b5d91-102d-58f7-bc52-ba89e9e1be9c",
+          "wall_seconds": 0.0008665829664096236
+        },
+        {
+          "candidate_index": 2,
+          "cpu_seconds": 0.000895999999999994,
+          "ordinal": 2,
+          "output": {
+            "action_id": "spend_potion_for_relic",
+            "checkpoint_verified": true,
+            "final_state_hash": "aa15d3f7204a331cd0e4124f818458335d981ab32b0676a52ceb03e6cdc24c0a",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 7579638266415387038,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 7579638266415387038,
+          "source_action_id": "spend_potion_for_relic",
+          "status": "completed",
+          "task_id": "f0b05acb-2428-520f-8f3c-b2042aeb8643",
+          "wall_seconds": 0.0008977500256150961
+        },
+        {
+          "candidate_index": 0,
+          "cpu_seconds": 0.0009059999999999971,
+          "ordinal": 3,
+          "output": {
+            "action_id": "preserve_hp",
+            "checkpoint_verified": true,
+            "final_state_hash": "0f4cc3440835cbeaf5799278724f941c0ef954a02f244eca8caa245b4e8715f7",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 3739024779013320488,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 0.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": false
+          },
+          "simulation_seed": 3739024779013320488,
+          "source_action_id": "preserve_hp",
+          "status": "completed",
+          "task_id": "b44f8b11-227e-5034-aa1a-43129d838272",
+          "wall_seconds": 0.0009070830419659615
+        }
+      ],
+      "summary": {
+        "attempted_simulations": 4,
+        "completed_simulations": 4,
+        "failed_or_truncated_simulations": 0,
+        "mean_worker_wall_seconds": 0.0008834165055304766,
+        "p95_worker_wall_seconds": 0.0009070830419659615,
+        "sampled_worlds": 4,
+        "terminal_simulations": 4,
+        "transitions": 8,
+        "unique_final_state_hashes": 4,
+        "unique_simulation_seeds": 4,
+        "wall_seconds": 0.06240045803133398,
+        "worker_cpu_seconds": 0.0035289999999999974,
+        "worker_crashes": 0
+      },
+      "tier": "medium",
+      "wave_reports": [
+        {
+          "report_path": "tiers/medium/wave-0000/search-worker-report.json",
+          "report_sha256": "bd52b8614cbf356cb3027e19001abddd56ea6505f534d06595dd970a175b71a5",
+          "wave_index": 0
+        }
+      ]
+    },
+    {
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "attempted_simulations": 2,
+          "candidate_index": 0,
+          "completed_simulations": 2,
+          "completed_terminal_value": 0.5,
+          "failed_simulations": 0,
+          "outcome_variance": 0.25,
+          "sampled_worlds": 2,
+          "source_action_id": "preserve_hp",
+          "terminal_simulations": 2,
+          "terminal_value": 0.5,
+          "transitions": 4,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.4,
+          "worker_cpu_seconds": 0.002487000000000003,
+          "worker_wall_seconds": 0.007337374961934984
+        },
+        {
+          "action_kind": "play_card",
+          "attempted_simulations": 2,
+          "candidate_index": 1,
+          "completed_simulations": 2,
+          "completed_terminal_value": 0.5,
+          "failed_simulations": 0,
+          "outcome_variance": 0.25,
+          "sampled_worlds": 2,
+          "source_action_id": "take_damage_for_power",
+          "terminal_simulations": 2,
+          "terminal_value": 0.5,
+          "transitions": 4,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.4,
+          "worker_cpu_seconds": 0.0033949999999999952,
+          "worker_wall_seconds": 0.02120125002693385
+        },
+        {
+          "action_kind": "use_potion",
+          "attempted_simulations": 1,
+          "candidate_index": 2,
+          "completed_simulations": 1,
+          "completed_terminal_value": 1.0,
+          "failed_simulations": 0,
+          "outcome_variance": 0.0,
+          "sampled_worlds": 1,
+          "source_action_id": "spend_potion_for_relic",
+          "terminal_simulations": 1,
+          "terminal_value": 1.0,
+          "transitions": 2,
+          "truncated_simulations": 0,
+          "victories": 1,
+          "visit_probability": 0.2,
+          "worker_cpu_seconds": 0.0021820000000000034,
+          "worker_wall_seconds": 0.012182416976429522
+        }
+      ],
+      "selected_action_id": "spend_potion_for_relic",
+      "selected_candidate_index": 2,
+      "simulation_budget": 5,
+      "simulations": [
+        {
+          "candidate_index": 0,
+          "cpu_seconds": 0.001004999999999999,
+          "ordinal": 0,
+          "output": {
+            "action_id": "preserve_hp",
+            "checkpoint_verified": true,
+            "final_state_hash": "a5062cf6e8d120fc7616ba3bd6d8203288d64ba16365a2f9044cb0099de6dffa",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 625356189031897448,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 625356189031897448,
+          "source_action_id": "preserve_hp",
+          "status": "completed",
+          "task_id": "dd9b8c75-08e2-5fc6-b27e-ca51262673a2",
+          "wall_seconds": 0.00154654192738235
+        },
+        {
+          "candidate_index": 1,
+          "cpu_seconds": 0.001800999999999997,
+          "ordinal": 1,
+          "output": {
+            "action_id": "take_damage_for_power",
+            "checkpoint_verified": true,
+            "final_state_hash": "b9ed24315ed0dc905bfe9b0d0423aa706da35a726c2853274f6adf7e227b50d9",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 3151406000881126628,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 0.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": false
+          },
+          "simulation_seed": 3151406000881126628,
+          "source_action_id": "take_damage_for_power",
+          "status": "completed",
+          "task_id": "6d5b5d91-102d-58f7-bc52-ba89e9e1be9c",
+          "wall_seconds": 0.011659166077151895
+        },
+        {
+          "candidate_index": 2,
+          "cpu_seconds": 0.0021820000000000034,
+          "ordinal": 2,
+          "output": {
+            "action_id": "spend_potion_for_relic",
+            "checkpoint_verified": true,
+            "final_state_hash": "aa15d3f7204a331cd0e4124f818458335d981ab32b0676a52ceb03e6cdc24c0a",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 7579638266415387038,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 7579638266415387038,
+          "source_action_id": "spend_potion_for_relic",
+          "status": "completed",
+          "task_id": "f0b05acb-2428-520f-8f3c-b2042aeb8643",
+          "wall_seconds": 0.012182416976429522
+        },
+        {
+          "candidate_index": 0,
+          "cpu_seconds": 0.0014820000000000041,
+          "ordinal": 3,
+          "output": {
+            "action_id": "preserve_hp",
+            "checkpoint_verified": true,
+            "final_state_hash": "0f4cc3440835cbeaf5799278724f941c0ef954a02f244eca8caa245b4e8715f7",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 3739024779013320488,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 0.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": false
+          },
+          "simulation_seed": 3739024779013320488,
+          "source_action_id": "preserve_hp",
+          "status": "completed",
+          "task_id": "b44f8b11-227e-5034-aa1a-43129d838272",
+          "wall_seconds": 0.005790833034552634
+        },
+        {
+          "candidate_index": 1,
+          "cpu_seconds": 0.0015939999999999982,
+          "ordinal": 4,
+          "output": {
+            "action_id": "take_damage_for_power",
+            "checkpoint_verified": true,
+            "final_state_hash": "0e39d9fcf49423aeebb0fdf6c4be7563d95c5ad86756fe6c6367a21644946161",
+            "method": "isolated-public-world-rollout-v1",
+            "patch_id": "tactical-handoff-mock-v1",
+            "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+            "sampled_worlds": 1,
+            "simulation_seed": 223638600522567249,
+            "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+            "terminal": true,
+            "terminal_reward": 1.0,
+            "transitions": 2,
+            "truncated": false,
+            "victory": true
+          },
+          "simulation_seed": 223638600522567249,
+          "source_action_id": "take_damage_for_power",
+          "status": "completed",
+          "task_id": "ce6ef1f0-5c0c-52a6-aa99-8d45a4112497",
+          "wall_seconds": 0.009542083949781954
+        }
+      ],
+      "summary": {
+        "attempted_simulations": 5,
+        "completed_simulations": 5,
+        "failed_or_truncated_simulations": 0,
+        "mean_worker_wall_seconds": 0.008144208393059672,
+        "p95_worker_wall_seconds": 0.012182416976429522,
+        "sampled_worlds": 5,
+        "terminal_simulations": 5,
+        "transitions": 10,
+        "unique_final_state_hashes": 5,
+        "unique_simulation_seeds": 5,
+        "wall_seconds": 0.10385391698218882,
+        "worker_cpu_seconds": 0.008064000000000002,
+        "worker_crashes": 0
+      },
+      "tier": "expensive",
+      "wave_reports": [
+        {
+          "report_path": "tiers/expensive/wave-0000/search-worker-report.json",
+          "report_sha256": "2c524dbeef92e918b08f758d12c9dc2ea246eb8e325309e37ec2127644e15396",
+          "wave_index": 0
+        }
+      ]
+    }
+  ]
+}

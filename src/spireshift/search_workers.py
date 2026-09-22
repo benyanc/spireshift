@@ -15,6 +15,7 @@ from typing import Any, Protocol, cast
 from uuid import UUID, uuid4
 
 from spireshift.adapters.mock import MockSpireEnvironment
+from spireshift.adapters.tactical_mock import TacticalHandoffMockEnvironment
 from spireshift.agents.baseline import TerminalVictoryPolicy
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import LegalAction, Observation
@@ -41,18 +42,22 @@ class SearchBackendSpec:
     manifest_path: str | None = None
 
     def __post_init__(self) -> None:
-        if self.kind not in {"mock", "evangambit"}:
+        if self.kind not in {"mock", "tactical_mock", "evangambit"}:
             raise ValueError(f"Unsupported search backend: {self.kind}")
-        if self.kind == "mock" and (
+        if self.kind in {"mock", "tactical_mock"} and (
             self.upstream_root is not None or self.manifest_path is not None
         ):
-            raise ValueError("Mock search backend does not accept external paths")
+            raise ValueError("Test search backends do not accept external paths")
         if self.kind == "evangambit" and (self.upstream_root is None or self.manifest_path is None):
             raise ValueError("EvanGambit search backend requires upstream and manifest paths")
 
     @classmethod
     def mock(cls) -> SearchBackendSpec:
         return cls("mock")
+
+    @classmethod
+    def tactical_mock(cls) -> SearchBackendSpec:
+        return cls("tactical_mock")
 
     @classmethod
     def evangambit(cls, upstream_root: Path, manifest_path: Path) -> SearchBackendSpec:
@@ -292,17 +297,7 @@ def capture_checkpoint(
 
 
 def execute_search_task(task: SearchSimulationTask) -> dict[str, object]:
-    environment = _load_environment(task.backend)
-    observation = environment.reset(task.checkpoint.run_seed)
-    for action_id in task.checkpoint.action_prefix:
-        action = _action_by_id(environment.legal_actions(), action_id)
-        observation = environment.step(action).next_observation
-    if environment.patch_id != task.checkpoint.patch_id:
-        raise RuntimeError("Restored checkpoint patch identity mismatch")
-    if environment.ruleset.manifest_id != task.checkpoint.ruleset_manifest_id:
-        raise RuntimeError("Restored checkpoint ruleset identity mismatch")
-    if observation.state_hash != task.checkpoint.state_hash:
-        raise RuntimeError("Restored checkpoint public state hash mismatch")
+    environment, observation = restore_search_checkpoint(task.backend, task.checkpoint)
     mechanics = PublicMechanicsService()
     source_snapshot = mechanics.snapshot(environment, observation)
     source_action = _action_by_id(source_snapshot.legal_actions, task.action_id)
@@ -669,9 +664,11 @@ def load_search_task(path: Path) -> SearchSimulationTask:
     return SearchSimulationTask.from_mapping(_load_object(path))
 
 
-def _load_environment(specification: SearchBackendSpec) -> EnvironmentAdapter:
+def load_search_environment(specification: SearchBackendSpec) -> EnvironmentAdapter:
     if specification.kind == "mock":
         return MockSpireEnvironment()
+    if specification.kind == "tactical_mock":
+        return TacticalHandoffMockEnvironment()
     from spireshift.adapters.evangambit import load_evangambit_backend
 
     if specification.upstream_root is None or specification.manifest_path is None:
@@ -681,6 +678,24 @@ def _load_environment(specification: SearchBackendSpec) -> EnvironmentAdapter:
         Path(specification.manifest_path),
     )
     return loaded.factory()
+
+
+def restore_search_checkpoint(
+    backend: SearchBackendSpec,
+    checkpoint: PublicStateCheckpoint,
+) -> tuple[EnvironmentAdapter, Observation]:
+    environment = load_search_environment(backend)
+    observation = environment.reset(checkpoint.run_seed)
+    for action_id in checkpoint.action_prefix:
+        action = _action_by_id(environment.legal_actions(), action_id)
+        observation = environment.step(action).next_observation
+    if environment.patch_id != checkpoint.patch_id:
+        raise RuntimeError("Restored checkpoint patch identity mismatch")
+    if environment.ruleset.manifest_id != checkpoint.ruleset_manifest_id:
+        raise RuntimeError("Restored checkpoint ruleset identity mismatch")
+    if observation.state_hash != checkpoint.state_hash:
+        raise RuntimeError("Restored checkpoint public state hash mismatch")
+    return environment, observation
 
 
 def _write_task_request(

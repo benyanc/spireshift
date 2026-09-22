@@ -96,6 +96,14 @@ def _registry() -> Registry[Any]:
             "search-worker-batch-v1.json",
             "search-workers/mock-batch-v1/search-worker-report.json",
         ),
+        (
+            "fixed-search-report-v1.json",
+            "fixed-search/tactical-mock-v1/fixed-search-report.json",
+        ),
+        (
+            "fixed-search-verification-v1.json",
+            "fixed-search-verification-v1.json",
+        ),
         ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
         ("experiment-resources-v1.json", "experiment-resources-v1.json"),
     ],

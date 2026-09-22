@@ -1,0 +1,27 @@
+{
+  "batch_id": "920d4906-1c01-587d-9f4f-483136f111d0",
+  "cpu_seconds": 0.0008660000000000057,
+  "message": "search simulation completed",
+  "output": {
+    "action_id": "take_damage_for_power",
+    "checkpoint_verified": true,
+    "final_state_hash": "b9ed24315ed0dc905bfe9b0d0423aa706da35a726c2853274f6adf7e227b50d9",
+    "method": "isolated-public-world-rollout-v1",
+    "patch_id": "tactical-handoff-mock-v1",
+    "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+    "sampled_worlds": 1,
+    "simulation_seed": 3151406000881126628,
+    "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+    "terminal": true,
+    "terminal_reward": 0.0,
+    "transitions": 2,
+    "truncated": false,
+    "victory": false
+  },
+  "request_sha256": "187bc76ac7e6e97b2232ddc70197c8c48f1883f958dc1845d2d30d0c15f783da",
+  "schema_version": "search-worker-result-v1",
+  "status": "completed",
+  "task_id": "6d5b5d91-102d-58f7-bc52-ba89e9e1be9c",
+  "wall_seconds": 0.0008665829664096236,
+  "worker_pid": 21974
+}

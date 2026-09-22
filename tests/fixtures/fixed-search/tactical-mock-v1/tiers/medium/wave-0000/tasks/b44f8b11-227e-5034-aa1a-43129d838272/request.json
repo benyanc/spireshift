@@ -1,0 +1,19 @@
+{
+  "action_id": "preserve_hp",
+  "backend": {
+    "kind": "tactical_mock",
+    "manifest_path": null,
+    "upstream_root": null
+  },
+  "checkpoint": {
+    "action_prefix": [],
+    "patch_id": "tactical-handoff-mock-v1",
+    "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+    "run_seed": 7,
+    "state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff"
+  },
+  "maximum_rollout_steps": 8,
+  "schema_version": "search-simulation-task-v1",
+  "simulation_seed": 3739024779013320488,
+  "task_id": "b44f8b11-227e-5034-aa1a-43129d838272"
+}

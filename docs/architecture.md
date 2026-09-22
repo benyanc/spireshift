@@ -13,8 +13,8 @@ patch manifest -> environment adapter -> public observation + legal actions
 seed batch -> bounded coordinator -> isolated run workers -> immutable attempt directories
                                -> retry/final outcome -> denominator-safe batch report
 
-public checkpoint -> bounded coordinator -> isolated search process -> hidden-world clone
-                                      -> immutable task evidence -> throughput/crash report
+public checkpoint -> root UCT tier coordinator -> isolated search process -> hidden-world clone
+                                          -> immutable task evidence -> paired fixed-tier report
 ```
 
 Every environment exposes an immutable ruleset identity derived from its patch manifest. The runner
@@ -77,6 +77,11 @@ Search workers never receive an in-memory engine state from the coordinator. Eac
 checkpoint from the run seed and action prefix, verifies patch, ruleset, and state hashes, then makes
 one independently seeded hidden-world clone. Process crashes cannot mutate another simulation, and
 timeouts and stale checkpoints remain failed tasks. See [isolated search workers](search-workers.md).
+
+The fixed combat planner applies root UCT above those workers. Shallow, medium, and expensive tiers
+restart from one checkpoint and reuse a nested simulation prefix, while crashes and truncations stay
+in the conservative terminal-value denominator. See
+[fixed-budget combat search](fixed-budget-search.md).
 
 ## Resource boundary
 
