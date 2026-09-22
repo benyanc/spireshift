@@ -14,6 +14,7 @@ from spireshift.adapters.evangambit import (
     EvanGambitLayout,
     EvanGambitRunBackend,
     EvanGambitRuntimeEvidence,
+    adapter_source_sha256,
 )
 from spireshift.backend_admission import (
     MANDATORY_CONFORMANCE_CHECKS,
@@ -230,6 +231,15 @@ def test_pending_backend_is_fail_closed_outside_admission() -> None:
         _factory(_manifest("pending_conformance"))()
 
 
+def test_adapter_source_identity_is_stable_across_git_line_endings(tmp_path: Path) -> None:
+    source = tmp_path / "adapter.py"
+    source.write_bytes(b"first\nsecond\n")
+    lf_digest = adapter_source_sha256(source)
+    source.write_bytes(b"first\r\nsecond\r\n")
+
+    assert adapter_source_sha256(source) == lf_digest
+
+
 def test_admission_requires_complete_evidence_and_binds_native_library(
     tmp_path: Path,
 ) -> None:
@@ -329,7 +339,7 @@ def test_checked_admission_evidence_binds_current_adapter_and_conformance() -> N
     manifest = load_patch_manifest(
         Path("manifests/patches/sts2-v0.107.1-evangambit-37e4264-macos-arm64-admitted.json")
     )
-    adapter_bytes = Path("src/spireshift/adapters/evangambit.py").read_bytes()
+    adapter_path = Path("src/spireshift/adapters/evangambit.py")
     conformance = json.loads(
         Path("docs/evidence/evangambit-v0.107.1-spireshift-conformance.json").read_text()
     )
@@ -338,5 +348,5 @@ def test_checked_admission_evidence_binds_current_adapter_and_conformance() -> N
     ).hexdigest()
 
     assert verify_backend_admission(report, manifest) == ()
-    assert manifest.adapter.digest.value == hashlib.sha256(adapter_bytes).hexdigest()
+    assert manifest.adapter.digest.value == adapter_source_sha256(adapter_path)
     assert report["conformance_sha256"] == conformance_digest

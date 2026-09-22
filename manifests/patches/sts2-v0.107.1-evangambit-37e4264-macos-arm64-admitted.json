@@ -1,6 +1,6 @@
 {
   "schema_version": "patch-manifest-v1",
-  "manifest_id": "sha256:f48a2ffb6d5d4ed14223a7e3bc37299fe691d2d1899fbdb0a09ee999c932eca2",
+  "manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
   "admission_status": "admitted",
   "patch": {
     "patch_id": "sts2-v0.107.1-59260271",
@@ -23,11 +23,11 @@
   "adapter": {
     "component_id": "spireshift-evangambit-environment-adapter",
     "version": "1",
-    "revision": "8bfcbc7cbfdac7fb623dc003c2de3670c6d25ea6b4689c1e6422e8cdf8f51bdf",
+    "revision": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f",
     "source": "https://github.com/benyanc/spireshift/blob/main/src/spireshift/adapters/evangambit.py",
     "digest": {
       "algorithm": "sha256",
-      "value": "8bfcbc7cbfdac7fb623dc003c2de3670c6d25ea6b4689c1e6422e8cdf8f51bdf"
+      "value": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f"
     }
   },
   "mechanics": [

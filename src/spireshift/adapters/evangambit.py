@@ -58,6 +58,12 @@ class EvanGambitBackendError(RuntimeError):
     """The optional backend is absent, incompatible, or outside its admitted identity."""
 
 
+def adapter_source_sha256(path: Path | None = None) -> str:
+    """Hash source identically after Git checks it out with CRLF or LF endings."""
+    source = (Path(__file__) if path is None else path).read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(source).hexdigest()
+
+
 class EvanGambitRunBackend(Protocol):
     def reset(self, *, seed: int) -> tuple[object, Mapping[str, object]]: ...
 
@@ -349,7 +355,7 @@ def load_evangambit_backend(
     elif manifest.adapter.component_id == "spireshift-evangambit-environment-adapter":
         adapter_path = Path(__file__)
         if manifest.adapter.digest.algorithm != "sha256" or (
-            hashlib.sha256(adapter_path.read_bytes()).hexdigest() != manifest.adapter.digest.value
+            adapter_source_sha256(adapter_path) != manifest.adapter.digest.value
         ):
             raise EvanGambitBackendError("SpireShift adapter source digest differs from manifest")
     else:

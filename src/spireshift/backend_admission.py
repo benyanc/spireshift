@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 
-from spireshift.adapters.evangambit import EvanGambitRuntimeEvidence
+from spireshift.adapters.evangambit import EvanGambitRuntimeEvidence, adapter_source_sha256
 from spireshift.core.manifest import (
     PatchManifest,
     freeze_patch_manifest,
@@ -111,6 +111,7 @@ def assess_backend_admission(
         adapter_error = f"Cannot read adapter source: {error}"
     else:
         adapter_error = ""
+    adapter_digest = adapter_source_sha256(adapter_path) if adapter_bytes else None
     _record(
         checks,
         "adapter_source",
@@ -120,7 +121,11 @@ def assess_backend_admission(
     )
 
     admitted = all(check["status"] == "pass" for check in checks)
-    candidate = _candidate_manifest(source_manifest, runtime, adapter_bytes) if admitted else None
+    candidate = (
+        _candidate_manifest(source_manifest, runtime, cast(str, adapter_digest))
+        if admitted
+        else None
+    )
     limitations_value = evidence.get("coverage_gaps", [])
     limitations = (
         [
@@ -142,7 +147,7 @@ def assess_backend_admission(
         "adapter": {
             "component_id": "spireshift-evangambit-environment-adapter",
             "version": "1",
-            "sha256": hashlib.sha256(adapter_bytes).hexdigest() if adapter_bytes else None,
+            "sha256": adapter_digest,
         },
         "checks": checks,
         "coverage_limitations": limitations,
@@ -213,12 +218,11 @@ def write_backend_admission(
 def _candidate_manifest(
     source: PatchManifest,
     runtime: EvanGambitRuntimeEvidence,
-    adapter_bytes: bytes,
+    adapter_digest: str,
 ) -> PatchManifest:
     specification = source.as_dict()
     specification.pop("manifest_id")
     specification["admission_status"] = "admitted"
-    adapter_digest = hashlib.sha256(adapter_bytes).hexdigest()
     specification["adapter"] = {
         "component_id": "spireshift-evangambit-environment-adapter",
         "version": "1",
