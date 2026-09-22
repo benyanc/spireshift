@@ -330,7 +330,11 @@ def run_tracked_command(
 
 
 def capture_hardware() -> dict[str, object]:
-    frequency = psutil.cpu_freq()
+    cpu_frequency = getattr(psutil, "cpu_freq", None)
+    frequency = None
+    if callable(cpu_frequency):
+        with suppress(NotImplementedError, OSError):
+            frequency = cpu_frequency()
     frequency_mhz: float | None = None if frequency is None else frequency.current
     if sys.platform == "darwin" and frequency_mhz is not None and frequency_mhz < 100.0:
         frequency_mhz = None

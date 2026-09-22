@@ -6,6 +6,9 @@ import sys
 from pathlib import Path
 from typing import Any, cast
 
+import psutil
+from pytest import MonkeyPatch
+
 from spireshift.cli import main
 from spireshift.resource_tracking import (
     CostRates,
@@ -164,6 +167,15 @@ def test_hardware_capture_uses_null_for_unavailable_values() -> None:
     cpu = _mapping(hardware["cpu"])
     assert cpu["model"] is None or isinstance(cpu["model"], str)
     json.dumps(hardware)
+
+
+def test_hardware_capture_allows_missing_cpu_frequency_api(monkeypatch: MonkeyPatch) -> None:
+    monkeypatch.delattr(psutil, "cpu_freq")
+
+    hardware = capture_hardware()
+
+    cpu = _mapping(hardware["cpu"])
+    assert cpu["frequency_mhz"] is None
 
 
 def test_resource_cli_runs_and_verifies_command(tmp_path: Path) -> None:
