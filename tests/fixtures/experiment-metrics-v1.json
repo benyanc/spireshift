@@ -1,0 +1,7 @@
+{
+  "trajectories": 10,
+  "simulations": 100,
+  "transitions": 1000,
+  "gpu_seconds": 0.0,
+  "energy_kwh": 0.01
+}

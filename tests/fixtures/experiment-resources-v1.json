@@ -1,0 +1,92 @@
+{
+  "schema_version": "experiment-resources-v1",
+  "experiment_id": "00000000-0000-4000-8000-000000000048",
+  "experiment_kind": "benchmark",
+  "status": "completed",
+  "started_at": "2026-09-21T12:00:00Z",
+  "completed_at": "2026-09-21T12:00:10Z",
+  "command": [
+    "uv",
+    "run",
+    "spireshift",
+    "benchmark",
+    "--episodes",
+    "10"
+  ],
+  "working_directory": "/workspace/spireshift",
+  "exit_code": 0,
+  "workers": 2,
+  "hardware": {
+    "platform": {
+      "system": "Linux",
+      "release": "fixture",
+      "machine": "x86_64",
+      "python": "3.11.13"
+    },
+    "cpu": {
+      "model": "Fixture CPU",
+      "logical_cores": 8,
+      "physical_cores": 4,
+      "frequency_mhz": 3200.0
+    },
+    "memory": {
+      "total_bytes": 17179869184
+    },
+    "gpus": []
+  },
+  "usage": {
+    "trajectories": 10,
+    "simulations": 100,
+    "transitions": 1000,
+    "gpu_seconds": 0.0,
+    "energy_kwh": 0.01,
+    "cpu_seconds": 20.0,
+    "wall_seconds": 10.0,
+    "average_cpu_utilization": 0.25,
+    "peak_resident_memory_bytes": 104857600,
+    "final_storage_bytes": 1000000,
+    "peak_storage_bytes": 2000000,
+    "peak_process_count": 3,
+    "cpu_hours": 0.005555555555555556,
+    "gpu_hours": 0.0
+  },
+  "throughput": {
+    "trajectories_per_second": 1.0,
+    "simulations_per_second": 10.0,
+    "transitions_per_second": 100.0
+  },
+  "limits": {
+    "wall_seconds": 60.0,
+    "cpu_seconds": 120.0,
+    "storage_bytes": 100000000,
+    "resident_memory_bytes": 1000000000
+  },
+  "cap": null,
+  "cost_rates": {
+    "currency": "USD",
+    "cpu_per_hour": 0.2,
+    "gpu_per_hour": 1.0,
+    "storage_per_gb_month": 0.1,
+    "electricity_per_kwh": 0.15
+  },
+  "estimated_cost": {
+    "currency": "USD",
+    "components": {
+      "cpu": 0.0011111111111111111,
+      "gpu": 0.0,
+      "storage": 7.71604938271605e-10,
+      "energy": 0.0015
+    },
+    "known_subtotal": 0.00261111188271605,
+    "complete": true,
+    "missing": []
+  },
+  "artifacts": {
+    "roots": [
+      "/workspace/spireshift/artifacts/benchmark"
+    ],
+    "partial_artifacts_preserved": false,
+    "metrics_path": "/workspace/spireshift/artifacts/benchmark/metrics.json"
+  },
+  "report_id": "sha256:5a3f2449608c597d782e62790c81bb202b73548bce33b89224aaf66e9945291a"
+}

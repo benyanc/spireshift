@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/experiment-resources-v1.json",
+  "title": "SpireShift Experiment Resources v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "experiment_id",
+    "experiment_kind",
+    "status",
+    "started_at",
+    "completed_at",
+    "command",
+    "working_directory",
+    "exit_code",
+    "workers",
+    "hardware",
+    "usage",
+    "throughput",
+    "limits",
+    "cap",
+    "cost_rates",
+    "estimated_cost",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"const": "experiment-resources-v1"},
+    "report_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "experiment_id": {"type": "string", "format": "uuid"},
+    "experiment_kind": {
+      "enum": [
+        "training",
+        "teacher_generation",
+        "adaptation",
+        "benchmark",
+        "search",
+        "rollout",
+        "other"
+      ]
+    },
+    "status": {"enum": ["completed", "failed", "capped", "interrupted"]},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "command": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "working_directory": {"type": "string", "minLength": 1},
+    "exit_code": {"type": ["integer", "null"]},
+    "workers": {"type": "integer", "minimum": 1},
+    "hardware": {"$ref": "#/$defs/hardware"},
+    "usage": {"$ref": "#/$defs/usage"},
+    "throughput": {"$ref": "#/$defs/throughput"},
+    "limits": {"$ref": "#/$defs/limits"},
+    "cap": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/cap"}
+      ]
+    },
+    "cost_rates": {"$ref": "#/$defs/costRates"},
+    "estimated_cost": {"$ref": "#/$defs/estimatedCost"},
+    "artifacts": {"$ref": "#/$defs/artifacts"}
+  },
+  "$defs": {
+    "nullableNonnegativeNumber": {"type": ["number", "null"], "minimum": 0},
+    "nullableNonnegativeInteger": {"type": ["integer", "null"], "minimum": 0},
+    "hardware": {
+      "type": "object",
+      "required": ["platform", "cpu", "memory", "gpus"],
+      "properties": {
+        "platform": {
+          "type": "object",
+          "required": ["system", "release", "machine", "python"],
+          "properties": {
+            "system": {"type": "string"},
+            "release": {"type": "string"},
+            "machine": {"type": "string"},
+            "python": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "cpu": {
+          "type": "object",
+          "required": ["model", "logical_cores", "physical_cores", "frequency_mhz"],
+          "properties": {
+            "model": {"type": ["string", "null"]},
+            "logical_cores": {"type": ["integer", "null"], "minimum": 1},
+            "physical_cores": {"type": ["integer", "null"], "minimum": 1},
+            "frequency_mhz": {"$ref": "#/$defs/nullableNonnegativeNumber"}
+          },
+          "additionalProperties": false
+        },
+        "memory": {
+          "type": "object",
+          "required": ["total_bytes"],
+          "properties": {"total_bytes": {"type": "integer", "minimum": 0}},
+          "additionalProperties": false
+        },
+        "gpus": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["model", "uuid", "memory_bytes"],
+            "properties": {
+              "model": {"type": "string", "minLength": 1},
+              "uuid": {"type": ["string", "null"], "minLength": 1},
+              "memory_bytes": {"$ref": "#/$defs/nullableNonnegativeInteger"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "usage": {
+      "type": "object",
+      "required": [
+        "trajectories",
+        "simulations",
+        "transitions",
+        "gpu_seconds",
+        "energy_kwh",
+        "cpu_seconds",
+        "cpu_hours",
+        "gpu_hours",
+        "wall_seconds",
+        "average_cpu_utilization",
+        "peak_resident_memory_bytes",
+        "final_storage_bytes",
+        "peak_storage_bytes",
+        "peak_process_count"
+      ],
+      "properties": {
+        "trajectories": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "simulations": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "transitions": {"$ref": "#/$defs/nullableNonnegativeInteger"},
+        "gpu_seconds": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "energy_kwh": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "cpu_seconds": {"type": "number", "minimum": 0},
+        "cpu_hours": {"type": "number", "minimum": 0},
+        "gpu_hours": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "wall_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "average_cpu_utilization": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "peak_resident_memory_bytes": {"type": "integer", "minimum": 0},
+        "final_storage_bytes": {"type": "integer", "minimum": 0},
+        "peak_storage_bytes": {"type": "integer", "minimum": 0},
+        "peak_process_count": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "throughput": {
+      "type": "object",
+      "required": [
+        "trajectories_per_second",
+        "simulations_per_second",
+        "transitions_per_second"
+      ],
+      "properties": {
+        "trajectories_per_second": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "simulations_per_second": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "transitions_per_second": {"$ref": "#/$defs/nullableNonnegativeNumber"}
+      },
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "required": ["wall_seconds", "cpu_seconds", "storage_bytes", "resident_memory_bytes"],
+      "properties": {
+        "wall_seconds": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "cpu_seconds": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "storage_bytes": {"type": ["integer", "null"], "minimum": 1},
+        "resident_memory_bytes": {"type": ["integer", "null"], "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "cap": {
+      "type": "object",
+      "required": ["resource", "limit", "observed"],
+      "properties": {
+        "resource": {
+          "enum": ["wall_seconds", "cpu_seconds", "storage_bytes", "resident_memory_bytes"]
+        },
+        "limit": {"type": "number", "exclusiveMinimum": 0},
+        "observed": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "costRates": {
+      "type": "object",
+      "required": [
+        "currency",
+        "cpu_per_hour",
+        "gpu_per_hour",
+        "storage_per_gb_month",
+        "electricity_per_kwh"
+      ],
+      "properties": {
+        "currency": {"type": "string", "minLength": 1},
+        "cpu_per_hour": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "gpu_per_hour": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "storage_per_gb_month": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+        "electricity_per_kwh": {"$ref": "#/$defs/nullableNonnegativeNumber"}
+      },
+      "additionalProperties": false
+    },
+    "estimatedCost": {
+      "type": "object",
+      "required": ["currency", "components", "known_subtotal", "complete", "missing"],
+      "properties": {
+        "currency": {"type": "string", "minLength": 1},
+        "components": {
+          "type": "object",
+          "required": ["cpu", "gpu", "storage", "energy"],
+          "properties": {
+            "cpu": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+            "gpu": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+            "storage": {"$ref": "#/$defs/nullableNonnegativeNumber"},
+            "energy": {"$ref": "#/$defs/nullableNonnegativeNumber"}
+          },
+          "additionalProperties": false
+        },
+        "known_subtotal": {"type": "number", "minimum": 0},
+        "complete": {"type": "boolean"},
+        "missing": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "cpu_rate",
+              "gpu_usage",
+              "gpu_rate",
+              "storage_rate",
+              "energy_usage",
+              "electricity_rate"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "object",
+      "required": ["roots", "partial_artifacts_preserved", "metrics_path"],
+      "properties": {
+        "roots": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "partial_artifacts_preserved": {"type": "boolean"},
+        "metrics_path": {"type": ["string", "null"], "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -96,6 +96,8 @@ def _registry() -> Registry[Any]:
             "search-worker-batch-v1.json",
             "search-workers/mock-batch-v1/search-worker-report.json",
         ),
+        ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
+        ("experiment-resources-v1.json", "experiment-resources-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:

@@ -90,6 +90,19 @@ from spireshift.representations import (
     build_model_input,
     vectorize_model_input,
 )
+from spireshift.resource_tracking import (
+    CostRates,
+    ExperimentKind,
+    ExperimentMetrics,
+    ExperimentStatus,
+    ResourceLimits,
+    capture_hardware,
+    load_cost_rates,
+    load_resource_report,
+    run_tracked_command,
+    verify_resource_report,
+    write_experiment_metrics,
+)
 from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
 from spireshift.search_workers import (
@@ -307,6 +320,44 @@ def build_parser() -> argparse.ArgumentParser:
     )
     search_verify.add_argument("report", type=Path)
     search_verify.add_argument("--output", type=Path)
+
+    resources = subparsers.add_parser(
+        "resources", help="Measure, cap, cost, and verify experiment resource use"
+    )
+    resource_commands = resources.add_subparsers(dest="resource_command", required=True)
+    resource_run = resource_commands.add_parser(
+        "run", help="Run one command with hardware capture and hard optional resource caps"
+    )
+    resource_run.add_argument(
+        "--kind", choices=[kind.value for kind in ExperimentKind], required=True
+    )
+    resource_run.add_argument("--report", type=Path, required=True)
+    resource_run.add_argument("--artifact-root", type=Path, action="append", default=[])
+    resource_run.add_argument("--metrics", type=Path)
+    resource_run.add_argument("--workers", type=int, default=1)
+    resource_run.add_argument("--max-wall-seconds", type=float)
+    resource_run.add_argument("--max-cpu-seconds", type=float)
+    resource_run.add_argument("--max-storage-bytes", type=int)
+    resource_run.add_argument("--max-memory-bytes", type=int)
+    resource_run.add_argument("--rates-config", type=Path)
+    resource_run.add_argument("--rate-profile", default="local")
+    resource_run.add_argument("--currency")
+    resource_run.add_argument("--cpu-rate", type=float)
+    resource_run.add_argument("--gpu-rate", type=float)
+    resource_run.add_argument("--storage-rate", type=float)
+    resource_run.add_argument("--electricity-rate", type=float)
+    resource_run.add_argument("--cwd", type=Path)
+    resource_run.add_argument("--poll-interval", type=float, default=0.25)
+    resource_run.add_argument("command_args", nargs=argparse.REMAINDER)
+    resource_verify = resource_commands.add_parser(
+        "verify", help="Verify a content-addressed experiment resource report"
+    )
+    resource_verify.add_argument("report", type=Path)
+    resource_verify.add_argument("--output", type=Path)
+    resource_hardware = resource_commands.add_parser(
+        "hardware", help="Show the hardware metadata available to experiment reports"
+    )
+    resource_hardware.add_argument("--output", type=Path)
 
     backend = subparsers.add_parser(
         "backend", help="Qualify and admit the optional production training backend"
@@ -815,8 +866,93 @@ def main(argv: Sequence[str] | None = None) -> int:
             worker_timeout_seconds=args.worker_timeout,
             output_directory=args.output_dir or _default_search_worker_directory(),
         )
+        search_summary = search_result.report["summary"]
+        if isinstance(search_summary, dict):
+            write_experiment_metrics(
+                ExperimentMetrics(
+                    simulations=int(search_summary["requested_tasks"]),
+                    transitions=int(search_summary["transitions"]),
+                )
+            )
         _emit_json(search_result.report, None)
         return 0 if search_result.successful else 1
+    if args.command == "resources":
+        if args.resource_command == "hardware":
+            _emit_json(capture_hardware(), args.output)
+            return 0
+        if args.resource_command == "verify":
+            try:
+                resource_report = load_resource_report(args.report)
+            except (OSError, ValueError, json.JSONDecodeError) as error:
+                _emit_json({"valid": False, "errors": [str(error)]}, args.output)
+                return 1
+            resource_errors = verify_resource_report(resource_report)
+            _emit_json(
+                {
+                    "valid": not resource_errors,
+                    "report_id": resource_report.get("report_id"),
+                    "errors": list(resource_errors),
+                },
+                args.output,
+            )
+            return 0 if not resource_errors else 1
+        command_args = tuple(args.command_args)
+        if command_args and command_args[0] == "--":
+            command_args = command_args[1:]
+        try:
+            configured_rates = (
+                load_cost_rates(args.rates_config, args.rate_profile)
+                if args.rates_config is not None
+                else CostRates()
+            )
+            tracked = run_tracked_command(
+                command=command_args,
+                experiment_kind=ExperimentKind(args.kind),
+                report_path=args.report,
+                artifact_roots=tuple(args.artifact_root),
+                metrics_path=args.metrics,
+                workers=args.workers,
+                limits=ResourceLimits(
+                    wall_seconds=args.max_wall_seconds,
+                    cpu_seconds=args.max_cpu_seconds,
+                    storage_bytes=args.max_storage_bytes,
+                    resident_memory_bytes=args.max_memory_bytes,
+                ),
+                rates=CostRates(
+                    currency=args.currency or configured_rates.currency,
+                    cpu_per_hour=(
+                        args.cpu_rate
+                        if args.cpu_rate is not None
+                        else configured_rates.cpu_per_hour
+                    ),
+                    gpu_per_hour=(
+                        args.gpu_rate
+                        if args.gpu_rate is not None
+                        else configured_rates.gpu_per_hour
+                    ),
+                    storage_per_gb_month=(
+                        args.storage_rate
+                        if args.storage_rate is not None
+                        else configured_rates.storage_per_gb_month
+                    ),
+                    electricity_per_kwh=(
+                        args.electricity_rate
+                        if args.electricity_rate is not None
+                        else configured_rates.electricity_per_kwh
+                    ),
+                ),
+                working_directory=args.cwd,
+                poll_interval_seconds=args.poll_interval,
+            )
+        except (OSError, ValueError, json.JSONDecodeError) as error:
+            _emit_json({"status": "error", "error": str(error)}, None)
+            return 1
+        _emit_json(tracked.report, None)
+        if tracked.status is ExperimentStatus.CAPPED:
+            return 124
+        if tracked.status is ExperimentStatus.INTERRUPTED:
+            return 130
+        return 0 if tracked.exit_code == 0 else tracked.exit_code or 1
     if args.command == "backend":
         try:
             if args.backend_command == "conformance":
@@ -948,6 +1084,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise ValueError("Teacher dataset and index outputs must differ")
             write_teacher_dataset(dataset, args.output)
             write_frozen_dataset_index(index, index_output)
+            teacher_summary = dataset["summary"]
+            write_experiment_metrics(
+                ExperimentMetrics(
+                    trajectories=int(teacher_summary["runs"]),
+                    simulations=int(teacher_summary["search_simulations"])
+                    + int(teacher_summary["evaluation_simulations"]),
+                )
+            )
             _emit_json(
                 {
                     "dataset_path": str(args.output),
@@ -988,9 +1132,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.checkpoint.resolve() == args.report.resolve():
                 raise ValueError("Model checkpoint and training report outputs must differ")
             split_manifest = load_split_manifest(args.split_manifest)
+            train_dataset = load_teacher_dataset(args.train_dataset)
+            validation_dataset = load_teacher_dataset(args.validation_dataset)
             training_result = train_initial_models(
-                train_dataset=load_teacher_dataset(args.train_dataset),
-                validation_dataset=load_teacher_dataset(args.validation_dataset),
+                train_dataset=train_dataset,
+                validation_dataset=validation_dataset,
                 split_manifest=split_manifest,
                 config=TrainingConfig(
                     epochs=args.epochs,
@@ -1020,6 +1166,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 training_result.report,
                 args.report,
                 label="model training report",
+            )
+            write_experiment_metrics(
+                ExperimentMetrics(
+                    trajectories=len(train_dataset["runs"]) + len(validation_dataset["runs"]),
+                )
             )
             _emit_json(
                 {
@@ -1082,6 +1233,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 calibration_result.report,
                 args.report,
                 label="model calibration report",
+            )
+            write_experiment_metrics(
+                ExperimentMetrics(trajectories=len(validation_dataset["runs"]))
             )
             _emit_json(
                 {
@@ -1165,6 +1319,22 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise ValueError("DAgger iteration and index outputs must differ")
             write_dagger_iteration(iteration, args.output)
             write_frozen_dataset_index(index, index_output)
+            dagger_summary = iteration["summary"]
+            write_experiment_metrics(
+                ExperimentMetrics(
+                    trajectories=int(dagger_summary["runs"]),
+                    simulations=sum(
+                        int(dagger_summary[key])
+                        for key in (
+                            "probe_search_simulations",
+                            "probe_evaluation_simulations",
+                            "relabel_search_simulations",
+                            "relabel_evaluation_simulations",
+                        )
+                    ),
+                    transitions=int(dagger_summary["decisions"]),
+                )
+            )
             _emit_json(
                 {
                     "path": str(args.output),
@@ -1203,6 +1373,21 @@ def main(argv: Sequence[str] | None = None) -> int:
                 whole_run_budget=args.whole_run_budget,
             )
             write_tactical_handoff_report(handoff_report, args.output)
+            sampled_worlds = sum(
+                int(case["usage"]["sampled_worlds"])
+                for case in handoff_report["cases"]
+                if isinstance(case, dict) and isinstance(case.get("usage"), dict)
+            )
+            write_experiment_metrics(
+                ExperimentMetrics(
+                    simulations=sampled_worlds,
+                    transitions=sum(
+                        int(case["usage"]["simulated_transitions"])
+                        for case in handoff_report["cases"]
+                        if isinstance(case, dict) and isinstance(case.get("usage"), dict)
+                    ),
+                )
+            )
             _emit_json(
                 {
                     "path": str(args.output),
@@ -1310,6 +1495,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             _emit_json({"status": "error", "error": str(error)}, None)
             return 1
         _emit_json(rollout_batch_result.report, None)
+        rollout_summary = rollout_batch_result.report["summary"]
+        rollout_outcomes = rollout_batch_result.report["outcomes"]
+        if isinstance(rollout_summary, dict) and isinstance(rollout_outcomes, list):
+            write_experiment_metrics(
+                ExperimentMetrics(
+                    trajectories=int(rollout_summary["requested_runs"]),
+                    simulations=int(rollout_summary["attempts"]),
+                    transitions=sum(
+                        int(outcome["decisions"])
+                        for outcome in rollout_outcomes
+                        if isinstance(outcome, dict) and isinstance(outcome.get("decisions"), int)
+                    ),
+                )
+            )
         return 0 if rollout_batch_result.successful else 1
     if args.command == "benchmark":
         if args.episodes <= 0:
@@ -1327,6 +1526,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             "victory_rate": victories / args.episodes,
             "mean_compute_per_run": compute / args.episodes,
         }
+        write_experiment_metrics(
+            ExperimentMetrics(
+                trajectories=args.episodes,
+                simulations=args.episodes,
+                transitions=compute,
+            )
+        )
         print(json.dumps(report, indent=2))
         return 0
     if args.command == "check":

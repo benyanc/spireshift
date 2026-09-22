@@ -1,0 +1,16 @@
+# Example estimates only. Copy this file outside Git and replace every value with the rates that
+# apply to the machine or provider used for an experiment.
+
+[local]
+currency = "USD"
+cpu_per_hour = 0.05
+gpu_per_hour = 0.00
+storage_per_gb_month = 0.02
+electricity_per_kwh = 0.15
+
+[hosted]
+currency = "USD"
+cpu_per_hour = 0.10
+gpu_per_hour = 1.00
+storage_per_gb_month = 0.10
+electricity_per_kwh = 0.00

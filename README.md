@@ -38,7 +38,9 @@ The repository currently contains the research contracts and a seeded mock verti
 20. one public mechanics service for legal actions, model features, exact rule enumeration, and
     explicitly marked hidden-world probability estimates; and
 21. isolated search-simulation workers with public checkpoint restoration, hidden-world sampling,
-    hard timeouts, immutable evidence, and CPU/wall-time throughput accounting.
+    hard timeouts, immutable evidence, and CPU/wall-time throughput accounting; and
+22. cross-platform experiment resource tracking with hard caps, hardware and throughput evidence,
+    configurable cost rates, and explicit missing-measurement reporting.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -128,6 +130,10 @@ runs. Exhausted worker crashes remain in the benchmark denominator.
 [Isolated search workers](docs/search-workers.md) restore a public checkpoint inside each process,
 sample one independently seeded hidden world, and record task-level crashes, CPU time, wall time,
 throughput, and immutable results for fixed-budget planning.
+
+[Experiment resource and cost accounting](docs/resource-accounting.md) wraps long-running commands,
+captures hardware and process-tree usage, enforces optional wall/CPU/storage/memory caps, preserves
+partial artifacts, and produces content-addressed cost sidecars.
 
 [Frozen data splits](docs/data-splits.md) bind every seed, complete run, encounter instance, and
 decision record to content-addressed train, validation, and test evidence. Dataset audits reject
