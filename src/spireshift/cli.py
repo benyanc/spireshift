@@ -57,6 +57,12 @@ from spireshift.dagger import (
     write_dagger_iteration,
 )
 from spireshift.doctor import diagnostics_as_dict, find_game_installation
+from spireshift.fixed_search import (
+    FixedSearchConfig,
+    FixedSearchTier,
+    run_fixed_search_suite,
+    verify_fixed_search_report,
+)
 from spireshift.live_actions import (
     BoundAction,
     DurableActionLedger,
@@ -106,6 +112,7 @@ from spireshift.resource_tracking import (
 from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
 from spireshift.search_workers import (
+    SearchBackendSpec,
     load_search_task,
     run_search_worker_batch,
     verify_search_worker_batch,
@@ -320,6 +327,34 @@ def build_parser() -> argparse.ArgumentParser:
     )
     search_verify.add_argument("report", type=Path)
     search_verify.add_argument("--output", type=Path)
+    fixed_search = search_commands.add_parser(
+        "fixed-suite",
+        help="Run shallow, medium, and expensive root-UCT from one public combat state",
+    )
+    fixed_search.add_argument("output_dir", type=Path)
+    fixed_search.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    fixed_search.add_argument("--upstream-root", type=Path)
+    fixed_search.add_argument("--manifest", type=Path)
+    fixed_search.add_argument("--run-seed", type=int, default=0)
+    fixed_search.add_argument("--combat-state-index", type=int, default=0)
+    fixed_search.add_argument("--maximum-prefix-steps", type=int, default=4096)
+    fixed_search.add_argument("--action-prefix", action="append")
+    fixed_search.add_argument("--shallow-simulations", type=int, default=16)
+    fixed_search.add_argument("--medium-simulations", type=int, default=64)
+    fixed_search.add_argument("--expensive-simulations", type=int, default=256)
+    fixed_search.add_argument("--exploration-constant", type=float, default=2**0.5)
+    fixed_search.add_argument("--sampling-seed", type=int, default=0)
+    fixed_search.add_argument("--maximum-rollout-steps", type=int, default=4096)
+    fixed_search.add_argument("--workers", type=int, default=4)
+    fixed_search.add_argument("--worker-timeout", type=float, default=120.0)
+    fixed_verify = search_commands.add_parser(
+        "verify-fixed",
+        help="Verify fixed-search identities, paired tiers, worker evidence, and exact replay",
+    )
+    fixed_verify.add_argument("report", type=Path)
+    fixed_verify.add_argument("--output", type=Path)
 
     resources = subparsers.add_parser(
         "resources", help="Measure, cap, cost, and verify experiment resource use"
@@ -860,6 +895,54 @@ def main(argv: Sequence[str] | None = None) -> int:
             search_verification = verify_search_worker_batch(args.report)
             _emit_json(search_verification.as_dict(), args.output)
             return 0 if search_verification.valid else 1
+        if args.search_command == "verify-fixed":
+            fixed_verification = verify_fixed_search_report(args.report)
+            _emit_json(fixed_verification.as_dict(), args.output)
+            return 0 if fixed_verification.valid else 1
+        if args.search_command == "fixed-suite":
+            if args.backend == "evangambit":
+                if args.upstream_root is None or args.manifest is None:
+                    raise ValueError(
+                        "EvanGambit fixed search requires --upstream-root and --manifest"
+                    )
+                backend_spec = SearchBackendSpec.evangambit(
+                    args.upstream_root,
+                    args.manifest,
+                )
+            elif args.backend == "tactical_mock":
+                backend_spec = SearchBackendSpec.tactical_mock()
+            else:
+                backend_spec = SearchBackendSpec.mock()
+            fixed_result = run_fixed_search_suite(
+                backend=backend_spec,
+                run_seed=args.run_seed,
+                output_directory=args.output_dir,
+                combat_state_index=args.combat_state_index,
+                maximum_prefix_steps=args.maximum_prefix_steps,
+                action_prefix=args.action_prefix,
+                config=FixedSearchConfig(
+                    tiers=(
+                        FixedSearchTier("shallow", args.shallow_simulations),
+                        FixedSearchTier("medium", args.medium_simulations),
+                        FixedSearchTier("expensive", args.expensive_simulations),
+                    ),
+                    exploration_constant=args.exploration_constant,
+                    sampling_seed=args.sampling_seed,
+                    maximum_rollout_steps=args.maximum_rollout_steps,
+                    workers=args.workers,
+                    worker_timeout_seconds=args.worker_timeout,
+                ),
+            )
+            fixed_summary = fixed_result.report["summary"]
+            if isinstance(fixed_summary, dict):
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        simulations=int(fixed_summary["attempted_simulations"]),
+                        transitions=int(fixed_summary["transitions"]),
+                    )
+                )
+            _emit_json(fixed_result.report, None)
+            return 0 if fixed_result.successful else 1
         search_result = run_search_worker_batch(
             tasks=tuple(load_search_task(path) for path in args.tasks),
             workers=args.workers,

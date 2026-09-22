@@ -1,0 +1,9 @@
+{
+  "errors": [],
+  "report_id": "sha256:8036e115475b9a8fb2f5aa60a2f1abced6b719f4386d44dc421a0ec6297b01f5",
+  "schema_version": "fixed-search-verification-v1",
+  "simulations": 12,
+  "tiers": 3,
+  "valid": true,
+  "verified_worker_batches": 3
+}

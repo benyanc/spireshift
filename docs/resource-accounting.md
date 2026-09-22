@@ -16,9 +16,9 @@ The report automatically captures:
 - configured CPU, GPU, storage, and electricity rates plus component costs, a known subtotal, and
   an explicit list of missing measurements or rates.
 
-SpireShift's teacher, model-training, calibration, DAgger, tactical benchmark, rollout, search-worker,
-and mock benchmark commands write their available counters automatically when the wrapper provides a
-metrics path. They do not invent GPU time or energy measurements.
+SpireShift's teacher, model-training, calibration, DAgger, tactical benchmark, rollout,
+search-worker, fixed-search, and mock benchmark commands write their available counters automatically
+when the wrapper provides a metrics path. They do not invent GPU time or energy measurements.
 
 Copy the example rates and replace them with the rates that apply to the machine or provider:
 
