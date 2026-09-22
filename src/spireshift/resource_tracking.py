@@ -179,6 +179,13 @@ class _ProcessSample:
     process_count: int
 
 
+@dataclass(slots=True)
+class _ProcessTreeAccounting:
+    """Retain CPU time after short-lived descendants leave the process tree."""
+
+    cpu_seconds_by_process: dict[tuple[int, float], float]
+
+
 def run_tracked_command(
     *,
     command: Sequence[str],
@@ -229,12 +236,17 @@ def run_tracked_command(
     peak_rss = 0
     peak_storage = _storage_bytes(roots)
     last_sample = _ProcessSample(0.0, 0, 1)
+    process_accounting = _ProcessTreeAccounting({})
     cap: dict[str, object] | None = None
     interrupted = False
     try:
         while True:
             wall_seconds = time.perf_counter() - started
-            last_sample = _sample_process_tree(tracked_process, last_sample)
+            last_sample = _sample_process_tree(
+                tracked_process,
+                last_sample,
+                process_accounting,
+            )
             peak_rss = max(peak_rss, last_sample.resident_memory_bytes)
             storage_bytes = _storage_bytes(roots)
             peak_storage = max(peak_storage, storage_bytes)
@@ -443,18 +455,23 @@ def load_resource_report(path: Path) -> dict[str, Any]:
 def _sample_process_tree(
     process: psutil.Process,
     fallback: _ProcessSample,
+    accounting: _ProcessTreeAccounting,
 ) -> _ProcessSample:
     try:
         processes = (process, *process.children(recursive=True))
     except (psutil.NoSuchProcess, psutil.AccessDenied):
         return fallback
-    cpu_seconds = 0.0
     resident_memory = 0
     sampled = 0
     for child in processes:
         try:
             times = child.cpu_times()
-            cpu_seconds += times.user + times.system
+            identity = (child.pid, child.create_time())
+            cpu_seconds = times.user + times.system
+            accounting.cpu_seconds_by_process[identity] = max(
+                cpu_seconds,
+                accounting.cpu_seconds_by_process.get(identity, 0.0),
+            )
             resident_memory += child.memory_info().rss
             sampled += 1
         except (psutil.NoSuchProcess, psutil.AccessDenied):
@@ -462,7 +479,7 @@ def _sample_process_tree(
     if sampled == 0:
         return fallback
     return _ProcessSample(
-        max(cpu_seconds, fallback.cpu_seconds),
+        max(sum(accounting.cpu_seconds_by_process.values()), fallback.cpu_seconds),
         resident_memory,
         max(sampled, fallback.process_count),
     )

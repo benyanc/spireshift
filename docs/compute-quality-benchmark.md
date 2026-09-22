@@ -133,6 +133,14 @@ uv run spireshift resources run \
 The benchmark result is ready for interpretation only when `verification.json` reports `valid: true`
 and both resource reports pass `spireshift resources verify`.
 
+Exact replay is warranted only when the generated report contains an action-quality signal. Before
+starting that sustained job, inspect the independent candidate values. If every candidate in every
+state has the same terminal value, regret and best-action rate are tie artifacts: they cannot show
+that one compute budget chose better actions. In particular, zero independent victories across the
+entire denominator blocks a compute-quality conclusion and sends the project back to base-policy
+bootstrapping. Preserve the run as negative evidence, but do not spend hours certifying it as the
+first useful benchmark.
+
 The one-state exact replay took about 12 seconds. The verifier currently replays simulations
 serially, so the full verification may take roughly 3–6 hours. This estimate is why generation and
 verification are separate user-launched jobs.
@@ -145,3 +153,6 @@ selected decisions is especially provisional. The result should be reported with
 completion rate, raw per-state outcomes, and uncertainty intervals added during analysis. Search
 budgets and thresholds may be chosen from this validation result; the 100-run test partition remains
 sealed until those choices are frozen.
+
+The first production attempt triggered the signal-sufficiency gate. Its checked interpretation is
+recorded in [the v0.107.1 pilot evidence](evidence/sts2-compute-quality-v0.107.1-pilot.md).
