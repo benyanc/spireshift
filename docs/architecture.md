@@ -94,6 +94,15 @@ target; equally sampled independent rollouts estimate each candidate's terminal 
 Every outcome seed and full-run label is retained in a content-addressed artifact tied to the frozen
 complete-run split. See [independently evaluated teacher data](teacher-data.md).
 
+## Shared mechanics boundary
+
+Policies, teacher generation, search, and advisors consume one `PublicMechanicsService` snapshot.
+It binds the current public observation to legal actions, the action mask, and the compositional
+model representation. Exact outcome enumeration is used only when an engine implements the public
+rules extension. Other engines must either supply explicit hidden-world resampling seeds and receive
+an approximation-marked empirical distribution, or receive an `unavailable` result. See
+[mechanics services](mechanics-services.md).
+
 The first learned checkpoint is a deterministic sparse factorized baseline with policy, run-value,
 and tactical-death-risk heads. Candidate heads combine candidate features with state-candidate
 interactions and preserve source action IDs only for aligned decoding. Fitting requires frozen train

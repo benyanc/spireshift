@@ -9,6 +9,7 @@ from typing import Any, Self
 
 from spireshift.core.manifest import PatchManifest, freeze_patch_manifest, sha256_digest
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
+from spireshift.mechanics import WeightedTransition
 
 MOCK_RULES = {
     "initial_state": {"floor": 0, "strength": 0, "terminal": False, "victory": False},
@@ -148,18 +149,89 @@ class MockSpireEnvironment:
             victory=self._state.victory,
         )
 
+    def public_outcomes(self, action: LegalAction) -> Sequence[WeightedTransition]:
+        """Enumerate outcomes from rules and public state without consulting the RNG."""
+
+        observation = self._observation()
+        legal = {candidate.action_id: candidate for candidate in self.legal_actions()}
+        selected = legal.get(action.action_id)
+        if selected is None or selected != action:
+            raise ValueError(f"Illegal action: {action.action_id}")
+        if self._state.floor == 0 and action.action_id == "safe_path":
+            return (
+                self._weighted_transition(
+                    observation,
+                    selected,
+                    1.0,
+                    replace(self._state, floor=1),
+                ),
+            )
+        if self._state.floor == 0 and action.action_id == "elite_path":
+            return (
+                self._weighted_transition(
+                    observation,
+                    selected,
+                    0.25,
+                    replace(self._state, terminal=True),
+                ),
+                self._weighted_transition(
+                    observation,
+                    selected,
+                    0.75,
+                    replace(self._state, floor=1, strength=1),
+                ),
+            )
+        if self._state.floor == 1 and action.action_id == "face_boss":
+            win_probability = 0.8 if self._state.strength else 0.2
+            return (
+                self._weighted_transition(
+                    observation,
+                    selected,
+                    1.0 - win_probability,
+                    replace(self._state, terminal=True),
+                ),
+                self._weighted_transition(
+                    observation,
+                    selected,
+                    win_probability,
+                    replace(self._state, terminal=True, victory=True),
+                ),
+            )
+        raise RuntimeError("Mock rules do not define this public outcome query")
+
+    def _weighted_transition(
+        self,
+        observation: Observation,
+        action: LegalAction,
+        probability: float,
+        state: _MockState,
+    ) -> WeightedTransition:
+        next_observation = self._observation_for(state)
+        transition = Transition(
+            observation=observation,
+            action=action,
+            next_observation=next_observation,
+            reward=1.0 if state.victory else 0.0,
+            terminal=state.terminal,
+            victory=state.victory,
+        )
+        return WeightedTransition(probability, transition)
+
     def _observation(self) -> Observation:
+        return self._observation_for(self._state)
+
+    def _observation_for(self, state: _MockState) -> Observation:
         public_state: dict[str, Any] = {
-            "floor": self._state.floor,
-            "strength": self._state.strength,
-            "terminal": self._state.terminal,
-            "victory": self._state.victory,
+            "floor": state.floor,
+            "strength": state.strength,
+            "terminal": state.terminal,
+            "victory": state.victory,
         }
         encoded = json.dumps(public_state, sort_keys=True, separators=(",", ":")).encode()
         state_hash = hashlib.sha256(encoded).hexdigest()
-        if self._state.terminal:
+        if state.terminal:
             decision_type = DecisionType.TERMINAL
-        elif self._state.floor == 0:
+        elif state.floor == 0:
             decision_type = DecisionType.PATH
         else:
             decision_type = DecisionType.COMBAT

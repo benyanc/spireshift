@@ -1,0 +1,64 @@
+{
+  "schema_version": "mechanics-audit-v1",
+  "fixture_id": "mock-v1-authoritative-rules",
+  "patch_id": "mock-v1",
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "mechanics_service_id": "public-mechanics-v1",
+  "verdict": "pass",
+  "probability_tolerance": 0.0,
+  "summary": {
+    "cases": 2,
+    "exact_queries": 3,
+    "approximate_queries": 0,
+    "unavailable_queries": 0,
+    "divergences": 0,
+    "maximum_total_variation": 0.0
+  },
+  "cases": [
+    {
+      "case_id": "initial-path-choice",
+      "seed": 7,
+      "state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+      "legal_action_status": "pass",
+      "outcomes": [
+        {
+          "action_id": "safe_path",
+          "method": "exact_enumeration",
+          "sample_count": 0,
+          "approximation_reason": null,
+          "total_variation": 0.0,
+          "maximum_probability_error": 0.0,
+          "status": "pass"
+        },
+        {
+          "action_id": "elite_path",
+          "method": "exact_enumeration",
+          "sample_count": 0,
+          "approximation_reason": null,
+          "total_variation": 0.0,
+          "maximum_probability_error": 0.0,
+          "status": "pass"
+        }
+      ],
+      "divergences": []
+    },
+    {
+      "case_id": "safe-path-boss",
+      "seed": 7,
+      "state_hash": "e0eee25762217b25ac712aa8fdfa6eddffa0ae811ac987727e7fd5c342b49fae",
+      "legal_action_status": "pass",
+      "outcomes": [
+        {
+          "action_id": "face_boss",
+          "method": "exact_enumeration",
+          "sample_count": 0,
+          "approximation_reason": null,
+          "total_variation": 0.0,
+          "maximum_probability_error": 0.0,
+          "status": "pass"
+        }
+      ],
+      "divergences": []
+    }
+  ]
+}
