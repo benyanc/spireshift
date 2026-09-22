@@ -1,0 +1,146 @@
+{
+  "schema_version": "conformance-report-v1",
+  "suite_version": "environment-conformance-v1",
+  "verdict": "pass",
+  "ruleset": {
+    "manifest_id": "sha256:e08d0bb6a5c933ddcd57d9d61b8e14563c2aa2cf5d385feecf4cfcf1fe1b83b2",
+    "patch_id": "sts2-v0.107.1-59260271",
+    "admission_status": "pending_conformance",
+    "engine": {
+      "component_id": "evangambit-sts2-nativeaot",
+      "version": "sts2-v0.107.1",
+      "revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+      "source": "https://github.com/evangambit/sts2",
+      "digest": {
+        "algorithm": "git-commit-sha1",
+        "value": "37e4264115546b6ac640d54aab3d7e2ac6983d2d"
+      }
+    },
+    "adapter": {
+      "component_id": "evangambit-sts2-python-ffi",
+      "version": "37e4264",
+      "revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+      "source": "https://github.com/evangambit/sts2",
+      "digest": {
+        "algorithm": "git-commit-sha1",
+        "value": "37e4264115546b6ac640d54aab3d7e2ac6983d2d"
+      }
+    },
+    "mechanics": [
+      {
+        "artifact_id": "sts2-v0.107.1-macos-arm64-assembly",
+        "kind": "authoritative-game-assembly",
+        "version": "v0.107.1/59260271",
+        "platform": "macos",
+        "architecture": "arm64",
+        "digest": {
+          "algorithm": "sha256",
+          "value": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18"
+        },
+        "size_bytes": 9363456
+      },
+      {
+        "artifact_id": "evangambit-sts2-v0.107.1-rules",
+        "kind": "simulator-rule-source",
+        "version": "37e4264",
+        "platform": null,
+        "architecture": null,
+        "digest": {
+          "algorithm": "git-commit-sha1",
+          "value": "37e4264115546b6ac640d54aab3d7e2ac6983d2d"
+        },
+        "size_bytes": null
+      }
+    ],
+    "interface": {
+      "observation_schema": "observation-v1",
+      "action_schema": "action-v1",
+      "information_policy_id": "public-state-v1"
+    }
+  },
+  "seeds": [
+    1,
+    7
+  ],
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "inconclusive": 0
+  },
+  "checks": [
+    {
+      "check_id": "identity",
+      "status": "pass",
+      "detail": "Environment, ruleset, and observation patch identities agree",
+      "metrics": {}
+    },
+    {
+      "check_id": "reset",
+      "status": "pass",
+      "detail": "Same-seed resets produce identical public states and actions",
+      "metrics": {}
+    },
+    {
+      "check_id": "legal_actions",
+      "status": "pass",
+      "detail": "Legal actions are non-empty when required, unique, serializable, and idempotent",
+      "metrics": {
+        "action_count": 3
+      }
+    },
+    {
+      "check_id": "stepping",
+      "status": "pass",
+      "detail": "A legal step preserves transition linkage and state validity",
+      "metrics": {}
+    },
+    {
+      "check_id": "illegal_action",
+      "status": "pass",
+      "detail": "Illegal actions are rejected without state mutation",
+      "metrics": {}
+    },
+    {
+      "check_id": "faithful_clone",
+      "status": "pass",
+      "detail": "Faithful clones are independent and step identically",
+      "metrics": {}
+    },
+    {
+      "check_id": "hidden_resampling",
+      "status": "pass",
+      "detail": "A resampled clone produced a different plausible successor",
+      "metrics": {
+        "divergence_step": 0,
+        "resample_seed": 17
+      }
+    },
+    {
+      "check_id": "replay",
+      "status": "pass",
+      "detail": "Recorded actions reproduce every public transition exactly",
+      "metrics": {
+        "decisions": 9
+      }
+    },
+    {
+      "check_id": "public_state_isolation",
+      "status": "pass",
+      "detail": "Public observations are serializable, self-hashed, and contain no forbidden field names",
+      "metrics": {
+        "observations": 20
+      }
+    },
+    {
+      "check_id": "terminal_reward",
+      "status": "pass",
+      "detail": "Rewards are binary and positive only on terminal victory",
+      "metrics": {
+        "seeds": 2,
+        "decisions": 18,
+        "victories": 0,
+        "losses": 2
+      }
+    }
+  ]
+}

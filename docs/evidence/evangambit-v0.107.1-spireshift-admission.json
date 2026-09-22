@@ -1,0 +1,71 @@
+{
+  "schema_version": "backend-admission-report-v1",
+  "verdict": "admitted",
+  "source_manifest_id": "sha256:e08d0bb6a5c933ddcd57d9d61b8e14563c2aa2cf5d385feecf4cfcf1fe1b83b2",
+  "admitted_manifest_id": "sha256:f48a2ffb6d5d4ed14223a7e3bc37299fe691d2d1899fbdb0a09ee999c932eca2",
+  "conformance_sha256": "9bae8c9592a341f401a27d135903d82dbe6cc5ceb5a60092b3ed164c2625502b",
+  "external_evidence_id": "sha256:25c80cd770cacbfa8eae1d0202272320231cdd76becad18218ff3706c276627e",
+  "runtime": {
+    "upstream_revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+    "upstream_tree": "0c70a122143e570c6ff5102e977775db51aae07f",
+    "game_version": "v0.107.1",
+    "steam_build_id": "23811903",
+    "native_library": {
+      "filename": "Sts2Emulator.dylib",
+      "sha256": "7121ced81b7004c848910966706c5d85e42442652da0f29426b697c1e2397e06",
+      "size_bytes": 5203824,
+      "platform": "macos",
+      "architecture": "arm64"
+    }
+  },
+  "adapter": {
+    "component_id": "spireshift-evangambit-environment-adapter",
+    "version": "1",
+    "sha256": "8bfcbc7cbfdac7fb623dc003c2de3670c6d25ea6b4689c1e6422e8cdf8f51bdf"
+  },
+  "checks": [
+    {
+      "check_id": "source_manifest",
+      "status": "pass",
+      "detail": "Source manifest is pending conformance"
+    },
+    {
+      "check_id": "runtime_revision",
+      "status": "pass",
+      "detail": "Runtime checkout matches the pinned engine revision"
+    },
+    {
+      "check_id": "runtime_patch",
+      "status": "pass",
+      "detail": "Runtime game version and Steam build match the source manifest"
+    },
+    {
+      "check_id": "installed_game_identity",
+      "status": "pass",
+      "detail": "Installed authoritative game identity matches the source manifest"
+    },
+    {
+      "check_id": "environment_conformance",
+      "status": "pass",
+      "detail": "Every mandatory environment-conformance check passed"
+    },
+    {
+      "check_id": "authoritative_differential_evidence",
+      "status": "pass",
+      "detail": "Pinned authoritative fixture executions report no observed divergence"
+    },
+    {
+      "check_id": "adapter_source",
+      "status": "pass",
+      "detail": "SpireShift adapter source is present and content-addressed"
+    }
+  ],
+  "coverage_limitations": [
+    "Six legacy combat captures omit per-turn hands.",
+    "The upstream report identifies 182 reachable cards with no live play capture.",
+    "The upstream report identifies 46 later ancient relics as unimplemented.",
+    "Exact Neow, shop, reward, and event odds remain incomplete.",
+    "Python 3.11 cannot import the live-fixture suite at this revision."
+  ],
+  "report_id": "sha256:3257d449cc964ad4d5faa1b7c30d751e8cac5b6a8997a89f649180de08c0a0bb"
+}

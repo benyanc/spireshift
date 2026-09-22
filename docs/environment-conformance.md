@@ -70,5 +70,9 @@ is [evangambit-v0.107.1-conformance.json](evidence/evangambit-v0.107.1-conforman
 
 This is a conditional result over the captured surface. It does not establish complete fidelity.
 The upstream evidence itself identifies uncaptured reachable cards, unimplemented later relics, and
-incomplete exact odds. The ruleset remains `pending_conformance` until a SpireShift adapter passes
-this contract and its public projection is compared with authoritative traces.
+incomplete exact odds. The original candidate manifest remains immutable and
+`pending_conformance`. Issue #70 added the SpireShift projection and ran this suite through the real
+native backend on seeds 1 and 7. All ten checks passed, including exact replay, public-state
+isolation, hidden-state resampling, and binary terminal-victory rewards. The resulting adapter,
+native library, and evidence received a separate macOS arm64 admitted manifest. See
+[production backend](production-backend.md).

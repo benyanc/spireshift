@@ -90,11 +90,15 @@ It is the strongest licensed candidate for this role because it already provides
 - source audits, live captures, differential traces, and an explicit divergence catalog;
 - MaskablePPO, MCTS, learned policy/value experiments, and command-shaped replay tooling.
 
-At the pinned commit it targets STS2 `v0.107.1`, while our exact candidate targets `v0.111.0`.
-It is therefore **selected but not admitted** for training labels or evaluation until its content is
-refreshed and issue #13 passes on the selected patch. Its README also records incomplete exact
-Neow/shop/reward/event odds and 46 unimplemented later ancient relics. Unsupported states and
-divergences must remain in benchmark denominators.
+At the pinned commit it targets the frozen P0 build, STS2 `v0.107.1`. Issue #70 projected that
+environment through SpireShift's public contract and admitted one content-addressed macOS arm64
+adapter/library tuple after all ten mandatory conformance checks passed. This admission does not
+apply to the `v0.111.0` exact candidate or any later patch.
+
+The upstream README records incomplete exact Neow/shop/reward/event odds and 46 unimplemented later
+ancient relics; the checked external evidence also identifies 182 reachable cards without live play
+captures. These remain explicit limitations, and unsupported states and divergences stay in
+benchmark denominators.
 
 On this project's Apple M4 Pro host, a clean NativeAOT build at the pinned commit measured 23,187
 environment steps/second and 133,491 clone-and-destroy operations/second using
@@ -182,9 +186,10 @@ such.
   live-fixture checks passed locally. Six legacy per-turn-hand checks were explicitly skipped. The
   fixture inventory and limitations are preserved in
   [the conformance evidence](../evidence/evangambit-v0.107.1-conformance.json).
-- No divergence was observed over the executed v0.107.1 capture surface. The result is conditional:
-  the captures are upstream evidence, incomplete mechanics remain documented, and the SpireShift
-  public-state adapter does not exist yet. The backend therefore remains `pending_conformance`.
+- No divergence was observed over the executed v0.107.1 capture surface. Issue #70 added the
+  SpireShift public-state adapter, and all ten mandatory environment checks passed on seeds 1 and 7.
+  A separate macOS arm64 adapter/library tuple is admitted; incomplete mechanics remain documented,
+  and the original candidate manifest remains `pending_conformance` as immutable input evidence.
 - The frozen Headless/Connector reference targets v0.111.0, so it cannot be run against the installed
   v0.107.1 assembly as though the builds were interchangeable.
 

@@ -32,7 +32,9 @@ The repository currently contains the research contracts and a seeded mock verti
 17. checkpoint-bound calibration fit/audit subfolds, proper scoring rules, catastrophic-error
     analysis, and decision-level uncertainty signals; and
 18. a compute-bounded tactical-to-run value handoff with exact returns, truncated rollouts,
-    run-value bootstraps, persistent-state preservation, and an HP-greedy ablation.
+    run-value bootstraps, persistent-state preservation, and an HP-greedy ablation; and
+19. a fail-closed EvanGambit production adapter with targeted actions, public-state projection,
+    exact cloning, hidden-state resampling, and content-addressed backend admission evidence.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -79,13 +81,19 @@ Patch manifests under `manifests/patches/` bind a game build, rule engine, adapt
 artifacts, schema versions, and information policy to an immutable SHA-256 identity. Local mechanics
 files or directories can be fingerprinted with `spireshift manifest freeze SPEC OUTPUT`; their
 contents and local paths are omitted from the resulting manifest. Every run records the complete
-ruleset identity, and replay stops on an identity mismatch. The v0.107.1 EvanGambit manifest remains
-`pending_conformance` until the differential suite admits it.
+ruleset identity, and replay stops on an identity mismatch. The original v0.107.1 EvanGambit
+candidate manifest remains immutable and `pending_conformance`. A separate macOS arm64 manifest
+records the exact adapter and native library that passed admission; no status is inherited by
+another build or patch.
 
 The [environment conformance suite](docs/environment-conformance.md) applies one executable contract
 to reset, actions, stepping, cloning, replay, information isolation, and terminal reward. Its trace
 comparator reports exact field-level divergences and refuses incompatible patch or information-policy
 comparisons.
+
+The [production training backend](docs/production-backend.md) projects the pinned EvanGambit
+NativeAOT environment through that contract, strips upstream shaped rewards, rejects unadmitted
+identities, and documents how to reproduce the checked admission.
 
 The [read-only live-state adapter](docs/live-state-adapter.md) verifies the local game and bridge
 identity, projects only public state, enumerates provisional legal actions, and records any omitted
