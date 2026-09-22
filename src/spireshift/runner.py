@@ -5,6 +5,7 @@ from pathlib import Path
 
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.core.protocols import BudgetController, EnvironmentAdapter, Policy, Recorder
+from spireshift.mechanics import PublicMechanicsService
 
 
 @dataclass(frozen=True, slots=True)
@@ -33,6 +34,7 @@ def run_episode(
         raise RuntimeError("Initial observation patch does not match the ruleset identity")
     remaining_budget = objective.whole_run_budget
     decisions = 0
+    mechanics = PublicMechanicsService()
 
     recorder.record_header(
         {
@@ -43,13 +45,15 @@ def run_episode(
             "objective": objective.as_dict(),
             "policy_id": policy.policy_id,
             "controller_id": budget_controller.controller_id,
+            "mechanics_service_id": mechanics.service_id,
             "initial_state_hash": observation.state_hash,
         }
     )
 
     victory = False
     while not bool(observation.public_state["terminal"]):
-        legal_actions = environment.legal_actions()
+        mechanics_snapshot = mechanics.snapshot(environment, observation)
+        legal_actions = mechanics_snapshot.legal_actions
         tier = budget_controller.choose_tier(observation, remaining_budget)
         cost = tier.nominal_cost
         if cost > remaining_budget:
@@ -70,6 +74,11 @@ def run_episode(
                 "compute_cost": cost,
                 "remaining_budget": remaining_budget,
                 "legal_actions": [candidate.as_dict() for candidate in legal_actions],
+                "mechanics": {
+                    "service_id": mechanics.service_id,
+                    "representation_hash": mechanics_snapshot.model_input.representation_hash,
+                    "action_mask": list(mechanics_snapshot.action_mask),
+                },
                 "transition": transition.as_dict(),
             }
         )

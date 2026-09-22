@@ -1,0 +1,70 @@
+{
+  "schema_version": "mechanics-fixture-v1",
+  "fixture_id": "mock-v1-authoritative-rules",
+  "patch_id": "mock-v1",
+  "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+  "probability_tolerance": 0.0,
+  "cases": [
+    {
+      "case_id": "initial-path-choice",
+      "seed": 7,
+      "action_prefix": [],
+      "state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+      "legal_actions": [
+        {
+          "action_id": "safe_path",
+          "kind": "choose_path",
+          "payload": {"risk": "low"}
+        },
+        {
+          "action_id": "elite_path",
+          "kind": "choose_path",
+          "payload": {"risk": "high"}
+        }
+      ],
+      "outcomes": {
+        "safe_path": [
+          {
+            "signature": "e0eee25762217b25ac712aa8fdfa6eddffa0ae811ac987727e7fd5c342b49fae|0.0|false|false",
+            "probability": 1.0
+          }
+        ],
+        "elite_path": [
+          {
+            "signature": "8011ef59a197d49bac319cd2814ed8e25b8861b215a74eccc38bacaa2cc7c171|0.0|false|false",
+            "probability": 0.75
+          },
+          {
+            "signature": "90fa54f4df54d20afcdc3dab36d4b2c5dc8cbfd6c04d84e579f5423e5febe3e3|0.0|true|false",
+            "probability": 0.25
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "safe-path-boss",
+      "seed": 7,
+      "action_prefix": ["safe_path"],
+      "state_hash": "e0eee25762217b25ac712aa8fdfa6eddffa0ae811ac987727e7fd5c342b49fae",
+      "legal_actions": [
+        {
+          "action_id": "face_boss",
+          "kind": "combat",
+          "payload": {}
+        }
+      ],
+      "outcomes": {
+        "face_boss": [
+          {
+            "signature": "9e02b953f59a3e8a88428fadb3a88e3939147b860191763f3159a0d3c0a35028|1.0|true|true",
+            "probability": 0.2
+          },
+          {
+            "signature": "f5ff015e9bb03d96abe1e3bf66b6227b2aec0804bfadaf3348afebafb0c3f889|0.0|true|false",
+            "probability": 0.8
+          }
+        ]
+      }
+    }
+  ]
+}

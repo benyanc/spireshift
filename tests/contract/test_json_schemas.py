@@ -83,6 +83,7 @@ def _registry() -> Registry[Any]:
         ("dagger-iteration-v1.json", "dagger-iteration-v1.json"),
         ("dagger-verification-v1.json", "dagger-verification-v1.json"),
         ("dataset-index-v1.json", "dagger-dataset-index-v1.json"),
+        ("mechanics-fixture-v1.json", "mechanics/mock-v1.json"),
     ],
 )
 def test_fixture_conforms_to_versioned_schema(schema_name: str, fixture_name: str) -> None:
@@ -110,6 +111,13 @@ def test_live_action_coverage_evidence_conforms_to_schema() -> None:
         _load(SCHEMA_DIR / "live-action-coverage-v1.json"), registry=_registry()
     )
     validator.validate(_load(Path("docs/evidence/live-action-coverage-v0.107.1.json")))
+
+
+def test_mock_mechanics_audit_evidence_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "mechanics-audit-v1.json"), registry=_registry()
+    )
+    validator.validate(_load(Path("docs/evidence/mock-mechanics-audit-v1.json")))
 
 
 def test_observation_rejects_unmarked_privileged_state() -> None:

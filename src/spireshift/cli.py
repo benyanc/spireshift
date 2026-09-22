@@ -75,6 +75,7 @@ from spireshift.live_run import (
     run_live_game,
     verify_live_run,
 )
+from spireshift.mechanics_audit import audit_mechanics_fixture
 from spireshift.models import (
     TrainingConfig,
     load_model_checkpoint,
@@ -128,6 +129,7 @@ DEFAULT_EVANGAMBIT_EXTERNAL_EVIDENCE = (
 DEFAULT_LIVE_FIXTURE_CORPUS = PROJECT_ROOT / "tests/fixtures/live/public-state-corpus-v1.json"
 DEFAULT_LIVE_COVERAGE_SPEC = PROJECT_ROOT / "configs/live-coverage-v0.107.1.json"
 DEFAULT_SPLIT_MANIFEST = PROJECT_ROOT / "manifests/splits/mock-v1-seeds-000000-000999-v1.json"
+DEFAULT_MECHANICS_FIXTURE = PROJECT_ROOT / "tests/fixtures/mechanics/mock-v1.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -274,6 +276,16 @@ def build_parser() -> argparse.ArgumentParser:
     conformance_compare.add_argument("reference", type=Path)
     conformance_compare.add_argument("candidate", type=Path)
     conformance_compare.add_argument("--output", type=Path)
+
+    mechanics = subparsers.add_parser(
+        "mechanics", help="Audit shared legality, features, and public outcome calculations"
+    )
+    mechanics_commands = mechanics.add_subparsers(dest="mechanics_command", required=True)
+    mechanics_audit = mechanics_commands.add_parser(
+        "audit-mock", help="Compare the mechanics service with authoritative mock rules"
+    )
+    mechanics_audit.add_argument("--fixture", type=Path, default=DEFAULT_MECHANICS_FIXTURE)
+    mechanics_audit.add_argument("--output", type=Path)
 
     backend = subparsers.add_parser(
         "backend", help="Qualify and admit the optional production training backend"
@@ -766,6 +778,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         differential = compare_conformance_traces(reference, candidate)
         _emit_json(differential, args.output)
         return 0 if differential["verdict"] == "exact_match" else 1
+    if args.command == "mechanics":
+        fixture = json.loads(args.fixture.read_text(encoding="utf-8"))
+        mechanics_report = audit_mechanics_fixture(fixture, MockSpireEnvironment)
+        _emit_json(mechanics_report, args.output)
+        return 0 if mechanics_report["verdict"] == "pass" else 1
     if args.command == "backend":
         try:
             if args.backend_command == "conformance":

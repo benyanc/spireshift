@@ -12,8 +12,9 @@ from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.baseline import TerminalVictoryPolicy
 from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
+from spireshift.mechanics import PublicMechanicsService
 from spireshift.models import model_from_checkpoint
-from spireshift.representations import ENCODER_ID, build_model_input, model_input_from_mapping
+from spireshift.representations import ENCODER_ID, model_input_from_mapping
 from spireshift.splits import (
     SplitManifest,
     SplitName,
@@ -427,6 +428,7 @@ def _generate_mock_dagger_iteration(
     victories = 0
     candidate_count = 0
     selected_candidate_count = 0
+    mechanics = PublicMechanicsService()
     for run_seed in canonical_seeds:
         environment = environment_factory()
         observation = environment.reset(run_seed)
@@ -435,8 +437,9 @@ def _generate_mock_dagger_iteration(
         decision_index = 0
         victory = False
         while not bool(observation.public_state["terminal"]):
-            legal_actions = tuple(environment.legal_actions())
-            representation = build_model_input(environment.ruleset, observation, legal_actions)
+            mechanics_snapshot = mechanics.snapshot(environment, observation)
+            legal_actions = mechanics_snapshot.legal_actions
+            representation = mechanics_snapshot.model_input
             prediction = model.predict(representation)
             student_index = max(range(len(prediction.policy)), key=prediction.policy.__getitem__)
             student_action = legal_actions[student_index]

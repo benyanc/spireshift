@@ -14,7 +14,8 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.core.types import LegalAction, Observation
-from spireshift.representations import ENCODER_ID, build_model_input
+from spireshift.mechanics import PublicMechanicsService
+from spireshift.representations import ENCODER_ID
 from spireshift.splits import (
     SplitManifest,
     SplitName,
@@ -299,6 +300,7 @@ def generate_mock_teacher_dataset(
     records: list[dict[str, Any]] = []
     total_candidates = 0
     victories = 0
+    mechanics = PublicMechanicsService()
     for run_seed in canonical_seeds:
         environment = environment_factory()
         observation = environment.reset(run_seed)
@@ -307,8 +309,9 @@ def generate_mock_teacher_dataset(
         decision_index = 0
         victory = False
         while not bool(observation.public_state["terminal"]):
-            legal_actions = tuple(environment.legal_actions())
-            model_input = build_model_input(environment.ruleset, observation, legal_actions)
+            mechanics_snapshot = mechanics.snapshot(environment, observation)
+            legal_actions = mechanics_snapshot.legal_actions
+            model_input = mechanics_snapshot.model_input
             target = build_teacher_target(
                 environment=environment,
                 observation=observation,

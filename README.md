@@ -34,7 +34,9 @@ The repository currently contains the research contracts and a seeded mock verti
 18. a compute-bounded tactical-to-run value handoff with exact returns, truncated rollouts,
     run-value bootstraps, persistent-state preservation, and an HP-greedy ablation; and
 19. a fail-closed EvanGambit production adapter with targeted actions, public-state projection,
-    exact cloning, hidden-state resampling, and content-addressed backend admission evidence.
+    exact cloning, hidden-state resampling, and content-addressed backend admission evidence; and
+20. one public mechanics service for legal actions, model features, exact rule enumeration, and
+    explicitly marked hidden-world probability estimates.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -49,6 +51,7 @@ uv run spireshift manifest verify \
   --installation artifacts/local/sts2-installation.json \
   manifests/patches/sts2-v0.107.1-evangambit-37e4264.json
 uv run spireshift conformance run-mock
+uv run spireshift mechanics audit-mock
 uv run spireshift live snapshot --output artifacts/live/current-snapshot.json
 uv run spireshift demo --seed 7
 uv run spireshift benchmark --episodes 100
@@ -94,6 +97,10 @@ comparisons.
 The [production training backend](docs/production-backend.md) projects the pinned EvanGambit
 NativeAOT environment through that contract, strips upstream shaped rewards, rejects unadmitted
 identities, and documents how to reproduce the checked admission.
+
+[Deterministic mechanics and public probabilities](docs/mechanics-services.md) give policies,
+learned models, search, and advisors the same legal actions, masks, and rule-derived features. Exact
+enumeration and sampled public-world estimates are distinguished in every query and audit.
 
 The [read-only live-state adapter](docs/live-state-adapter.md) verifies the local game and bridge
 identity, projects only public state, enumerates provisional legal actions, and records any omitted

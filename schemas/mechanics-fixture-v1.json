@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/mechanics-fixture-v1.json",
+  "title": "SpireShift Authoritative Mechanics Fixture v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "fixture_id",
+    "patch_id",
+    "ruleset_manifest_id",
+    "probability_tolerance",
+    "cases"
+  ],
+  "properties": {
+    "schema_version": {"const": "mechanics-fixture-v1"},
+    "fixture_id": {"type": "string", "minLength": 1},
+    "patch_id": {"type": "string", "minLength": 1},
+    "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "probability_tolerance": {"type": "number", "minimum": 0, "maximum": 1},
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/case"}
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "seed",
+        "action_prefix",
+        "state_hash",
+        "legal_actions",
+        "outcomes"
+      ],
+      "properties": {
+        "case_id": {"type": "string", "minLength": 1},
+        "seed": {"type": "integer"},
+        "action_prefix": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "resample_seeds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "integer"}
+        },
+        "state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "legal_actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "action-v1.json"}
+        },
+        "outcomes": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["signature", "probability"],
+              "properties": {
+                "signature": {"type": "string", "minLength": 1},
+                "probability": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
