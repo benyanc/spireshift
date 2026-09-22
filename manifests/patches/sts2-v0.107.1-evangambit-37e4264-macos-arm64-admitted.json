@@ -1,0 +1,76 @@
+{
+  "schema_version": "patch-manifest-v1",
+  "manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "admission_status": "admitted",
+  "patch": {
+    "patch_id": "sts2-v0.107.1-59260271",
+    "game_version": "v0.107.1",
+    "game_commit": "59260271",
+    "branch": "v0.107.1",
+    "release_date": "2026-06-18T15:43:56-07:00",
+    "steam_build_id": "23811903"
+  },
+  "engine": {
+    "component_id": "evangambit-sts2-nativeaot",
+    "version": "sts2-v0.107.1",
+    "revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+    "source": "https://github.com/evangambit/sts2",
+    "digest": {
+      "algorithm": "git-commit-sha1",
+      "value": "37e4264115546b6ac640d54aab3d7e2ac6983d2d"
+    }
+  },
+  "adapter": {
+    "component_id": "spireshift-evangambit-environment-adapter",
+    "version": "1",
+    "revision": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f",
+    "source": "https://github.com/benyanc/spireshift/blob/main/src/spireshift/adapters/evangambit.py",
+    "digest": {
+      "algorithm": "sha256",
+      "value": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f"
+    }
+  },
+  "mechanics": [
+    {
+      "artifact_id": "sts2-v0.107.1-macos-arm64-assembly",
+      "kind": "authoritative-game-assembly",
+      "version": "v0.107.1/59260271",
+      "platform": "macos",
+      "architecture": "arm64",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18"
+      },
+      "size_bytes": 9363456
+    },
+    {
+      "artifact_id": "evangambit-sts2-v0.107.1-rules",
+      "kind": "simulator-rule-source",
+      "version": "37e4264",
+      "platform": null,
+      "architecture": null,
+      "digest": {
+        "algorithm": "git-commit-sha1",
+        "value": "37e4264115546b6ac640d54aab3d7e2ac6983d2d"
+      },
+      "size_bytes": null
+    },
+    {
+      "artifact_id": "evangambit-sts2-nativeaot-macos-arm64-37e4264",
+      "kind": "compiled-simulator-library",
+      "version": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+      "platform": "macos",
+      "architecture": "arm64",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "7121ced81b7004c848910966706c5d85e42442652da0f29426b697c1e2397e06"
+      },
+      "size_bytes": 5203824
+    }
+  ],
+  "interface": {
+    "observation_schema": "observation-v1",
+    "action_schema": "action-v1",
+    "information_policy_id": "public-state-v1"
+  }
+}

@@ -8,6 +8,10 @@ from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
 
+from spireshift.adapters.evangambit import (
+    EvanGambitBackendError,
+    load_evangambit_backend,
+)
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.adapters.sts2mcp import (
     DEFAULT_STS2MCP_URL,
@@ -18,6 +22,12 @@ from spireshift.adapters.sts2mcp import (
     Sts2McpStateProjector,
 )
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
+from spireshift.backend_admission import (
+    assess_backend_admission,
+    load_backend_admission_report,
+    verify_backend_admission,
+    write_backend_admission,
+)
 from spireshift.calibration import (
     CalibrationConfig,
     calibrate_model,
@@ -109,6 +119,12 @@ from spireshift.teacher_data import (
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
 DEFAULT_LIVE_MANIFEST = PROJECT_ROOT / "manifests/patches/sts2-v0.107.1-sts2mcp-55e0648.json"
+DEFAULT_EVANGAMBIT_MANIFEST = (
+    PROJECT_ROOT / "manifests/patches/sts2-v0.107.1-evangambit-37e4264.json"
+)
+DEFAULT_EVANGAMBIT_EXTERNAL_EVIDENCE = (
+    PROJECT_ROOT / "docs/evidence/evangambit-v0.107.1-conformance.json"
+)
 DEFAULT_LIVE_FIXTURE_CORPUS = PROJECT_ROOT / "tests/fixtures/live/public-state-corpus-v1.json"
 DEFAULT_LIVE_COVERAGE_SPEC = PROJECT_ROOT / "configs/live-coverage-v0.107.1.json"
 DEFAULT_SPLIT_MANIFEST = PROJECT_ROOT / "manifests/splits/mock-v1-seeds-000000-000999-v1.json"
@@ -258,6 +274,37 @@ def build_parser() -> argparse.ArgumentParser:
     conformance_compare.add_argument("reference", type=Path)
     conformance_compare.add_argument("candidate", type=Path)
     conformance_compare.add_argument("--output", type=Path)
+
+    backend = subparsers.add_parser(
+        "backend", help="Qualify and admit the optional production training backend"
+    )
+    backend_commands = backend.add_subparsers(dest="backend_command", required=True)
+    backend_conformance = backend_commands.add_parser(
+        "conformance", help="Run the environment contract against EvanGambit"
+    )
+    backend_conformance.add_argument("upstream_root", type=Path)
+    backend_conformance.add_argument("--manifest", type=Path, default=DEFAULT_EVANGAMBIT_MANIFEST)
+    backend_conformance.add_argument("--seeds", type=int, nargs="+", default=[1, 7])
+    backend_conformance.add_argument("--max-steps", type=int, default=4096)
+    backend_conformance.add_argument("--output", type=Path, required=True)
+    backend_admit = backend_commands.add_parser(
+        "admit", help="Create an admitted manifest only after every evidence gate passes"
+    )
+    backend_admit.add_argument("upstream_root", type=Path)
+    backend_admit.add_argument("--manifest", type=Path, default=DEFAULT_EVANGAMBIT_MANIFEST)
+    backend_admit.add_argument("--conformance", type=Path, required=True)
+    backend_admit.add_argument(
+        "--external-evidence", type=Path, default=DEFAULT_EVANGAMBIT_EXTERNAL_EVIDENCE
+    )
+    backend_admit.add_argument("--installation", type=Path, required=True)
+    backend_admit.add_argument("--report", type=Path, required=True)
+    backend_admit.add_argument("--admitted-manifest", type=Path, required=True)
+    backend_verify = backend_commands.add_parser(
+        "verify", help="Verify an immutable backend admission report and manifest"
+    )
+    backend_verify.add_argument("report", type=Path)
+    backend_verify.add_argument("--manifest", type=Path)
+    backend_verify.add_argument("--output", type=Path)
 
     represent = subparsers.add_parser("represent", help="Build a compositional policy/search input")
     represent_commands = represent.add_subparsers(dest="represent_command", required=True)
@@ -719,6 +766,64 @@ def main(argv: Sequence[str] | None = None) -> int:
         differential = compare_conformance_traces(reference, candidate)
         _emit_json(differential, args.output)
         return 0 if differential["verdict"] == "exact_match" else 1
+    if args.command == "backend":
+        try:
+            if args.backend_command == "conformance":
+                loaded_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    allow_pending=True,
+                    max_episode_steps=args.max_steps,
+                )
+                backend_report = run_environment_conformance(
+                    loaded_backend.factory,
+                    seeds=args.seeds,
+                    max_steps=args.max_steps,
+                ).as_dict()
+                _emit_json(backend_report, args.output)
+                return 0 if backend_report["verdict"] == "pass" else 1
+            if args.backend_command == "admit":
+                loaded_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    allow_pending=True,
+                )
+                source_manifest = load_patch_manifest(args.manifest)
+                assessment = assess_backend_admission(
+                    source_manifest,
+                    json.loads(args.conformance.read_text(encoding="utf-8")),
+                    json.loads(args.external_evidence.read_text(encoding="utf-8")),
+                    json.loads(args.installation.read_text(encoding="utf-8")),
+                    loaded_backend.evidence,
+                    adapter_source=Path(__file__).parent / "adapters/evangambit.py",
+                )
+                write_backend_admission(
+                    assessment,
+                    report_path=args.report,
+                    manifest_path=(
+                        args.admitted_manifest if assessment.admitted_manifest is not None else None
+                    ),
+                )
+                _emit_json(assessment.report, None)
+                return 0 if assessment.admitted_manifest is not None else 1
+            backend_report = load_backend_admission_report(args.report)
+            admitted_manifest = load_patch_manifest(args.manifest) if args.manifest else None
+            errors = verify_backend_admission(backend_report, admitted_manifest)
+            backend_verification = {
+                "valid": not errors,
+                "report_id": backend_report.get("report_id"),
+                "errors": list(errors),
+            }
+            _emit_json(backend_verification, args.output)
+            return 0 if not errors else 1
+        except (
+            EvanGambitBackendError,
+            OSError,
+            ValueError,
+            json.JSONDecodeError,
+        ) as error:
+            _emit_json({"status": "error", "error": str(error)}, getattr(args, "output", None))
+            return 1
     if args.command == "represent":
         try:
             if args.represent_command == "mock":

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/backend-admission-report-v1.json",
+  "title": "SpireShift Backend Admission Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "verdict",
+    "source_manifest_id",
+    "admitted_manifest_id",
+    "conformance_sha256",
+    "external_evidence_id",
+    "runtime",
+    "adapter",
+    "checks",
+    "coverage_limitations",
+    "report_id"
+  ],
+  "properties": {
+    "schema_version": {"const": "backend-admission-report-v1"},
+    "verdict": {"enum": ["admitted", "rejected"]},
+    "source_manifest_id": {"$ref": "#/$defs/sha256_id"},
+    "admitted_manifest_id": {
+      "oneOf": [{"$ref": "#/$defs/sha256_id"}, {"type": "null"}]
+    },
+    "conformance_sha256": {"$ref": "#/$defs/sha256"},
+    "external_evidence_id": {"$ref": "#/$defs/sha256_id"},
+    "runtime": {
+      "type": "object",
+      "required": [
+        "upstream_revision",
+        "upstream_tree",
+        "game_version",
+        "steam_build_id",
+        "native_library"
+      ],
+      "properties": {
+        "upstream_revision": {"$ref": "#/$defs/git_object"},
+        "upstream_tree": {"$ref": "#/$defs/git_object"},
+        "game_version": {"type": "string", "minLength": 1},
+        "steam_build_id": {"type": "string", "pattern": "^[0-9]+$"},
+        "native_library": {
+          "type": "object",
+          "required": ["filename", "sha256", "size_bytes", "platform", "architecture"],
+          "properties": {
+            "filename": {"type": "string", "minLength": 1},
+            "sha256": {"$ref": "#/$defs/sha256"},
+            "size_bytes": {"type": "integer", "minimum": 1},
+            "platform": {"type": "string", "minLength": 1},
+            "architecture": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "adapter": {
+      "type": "object",
+      "required": ["component_id", "version", "sha256"],
+      "properties": {
+        "component_id": {"const": "spireshift-evangambit-environment-adapter"},
+        "version": {"const": "1"},
+        "sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]}
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["check_id", "status", "detail"],
+        "properties": {
+          "check_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pass", "fail"]},
+          "detail": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "coverage_limitations": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "report_id": {"$ref": "#/$defs/sha256_id"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "sha256_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "git_object": {"type": "string", "pattern": "^[a-f0-9]{40}$"}
+  },
+  "additionalProperties": false
+}

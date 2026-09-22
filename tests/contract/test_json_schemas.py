@@ -72,6 +72,14 @@ def _registry() -> Registry[Any]:
         ("model-calibration-v1.json", "model-calibration-v1.json"),
         ("model-calibration-report-v1.json", "model-calibration-report-v1.json"),
         ("tactical-handoff-report-v1.json", "tactical-handoff-report-v1.json"),
+        (
+            "conformance-report-v1.json",
+            "../../docs/evidence/evangambit-v0.107.1-spireshift-conformance.json",
+        ),
+        (
+            "backend-admission-report-v1.json",
+            "../../docs/evidence/evangambit-v0.107.1-spireshift-admission.json",
+        ),
         ("dagger-iteration-v1.json", "dagger-iteration-v1.json"),
         ("dagger-verification-v1.json", "dagger-verification-v1.json"),
         ("dataset-index-v1.json", "dagger-dataset-index-v1.json"),

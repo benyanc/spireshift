@@ -39,8 +39,11 @@ must pass the same contract suite before use in training or evaluation.
 - the EvanGambit NativeAOT emulator provides cheap cloning and full-run training/search;
 - differential traces admit each emulator patch before its data is used for reported results.
 
-The v0.107.1 EvanGambit stack is pinned but remains `pending_conformance`; a matching game version is
-necessary evidence, not proof of simulator fidelity.
+The original v0.107.1 EvanGambit candidate remains `pending_conformance` as immutable input evidence.
+The macOS arm64 adapter and compiled library admitted by issue #70 have a separate manifest. Its
+loader verifies upstream revision, clean source, patch, adapter digest, native-library digest, and
+host identity before creating an environment. Admission is scoped to that exact stack and preserves
+all published coverage limitations.
 
 Third-party observation formats never flow directly into a policy. Each backend is projected into
 SpireShift's versioned public contract, and every unsupported decision or divergence is recorded.
