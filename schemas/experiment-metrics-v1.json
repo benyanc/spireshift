@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/experiment-metrics-v1.json",
+  "title": "SpireShift Experiment Metrics v1",
+  "type": "object",
+  "required": ["trajectories", "simulations", "transitions", "gpu_seconds", "energy_kwh"],
+  "properties": {
+    "trajectories": {"type": ["integer", "null"], "minimum": 0},
+    "simulations": {"type": ["integer", "null"], "minimum": 0},
+    "transitions": {"type": ["integer", "null"], "minimum": 0},
+    "gpu_seconds": {"type": ["number", "null"], "minimum": 0},
+    "energy_kwh": {"type": ["number", "null"], "minimum": 0}
+  },
+  "additionalProperties": false
+}

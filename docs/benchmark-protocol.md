@@ -24,6 +24,13 @@ Every run records:
 - terminal result;
 - crashes and unsupported decisions.
 
+Every headline experiment also requires a verified `experiment-resources-v1` sidecar containing the
+hardware identity, worker count, trajectories, simulations, transitions, CPU/GPU hours, wall time,
+throughput, peak memory and storage, configured rates, and estimated cost. Missing GPU, energy, or
+rate measurements must remain null and appear in the report's missing list. A known-cost subtotal
+must not be presented as a complete cost. See
+[experiment resource and cost accounting](resource-accounting.md).
+
 Seed sets and the benchmark denominator are frozen before workers launch. A seed remains in the
 denominator when its retries end in a crash, timeout, malformed artifact, or failed replay. Reports
 must expose completion rate, failed attempts, worker crashes, and recovered runs alongside victory

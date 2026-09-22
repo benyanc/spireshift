@@ -78,6 +78,15 @@ checkpoint from the run seed and action prefix, verifies patch, ruleset, and sta
 one independently seeded hidden-world clone. Process crashes cannot mutate another simulation, and
 timeouts and stale checkpoints remain failed tasks. See [isolated search workers](search-workers.md).
 
+## Resource boundary
+
+Long-running experiments execute under a separate process-tree resource monitor. It captures
+hardware, CPU and wall time, memory, storage, worker count, experiment throughput, configured rates,
+and cost estimates in a content-addressed sidecar. Optional wall, CPU, storage, and memory caps stop
+the process tree while retaining partial artifacts. Unavailable GPU, energy, utilization, or rate
+measurements remain null and are listed as missing. See
+[resource and cost accounting](resource-accounting.md).
+
 ## Dataset boundary
 
 Seed assignments live in content-addressed split manifests tied to one ruleset and objective.
