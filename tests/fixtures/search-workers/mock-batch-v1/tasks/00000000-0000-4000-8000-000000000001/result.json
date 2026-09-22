@@ -1,0 +1,27 @@
+{
+  "batch_id": "b1a4652d-d9ec-4ce9-b028-1a10c0f20eca",
+  "cpu_seconds": 0.000335999999999996,
+  "message": "search simulation completed",
+  "output": {
+    "action_id": "elite_path",
+    "checkpoint_verified": true,
+    "final_state_hash": "90fa54f4df54d20afcdc3dab36d4b2c5dc8cbfd6c04d84e579f5423e5febe3e3",
+    "method": "isolated-public-world-rollout-v1",
+    "patch_id": "mock-v1",
+    "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "sampled_worlds": 1,
+    "simulation_seed": 1,
+    "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+    "terminal": true,
+    "terminal_reward": 0.0,
+    "transitions": 1,
+    "truncated": false,
+    "victory": false
+  },
+  "request_sha256": "2bb04daa246fbc787474b6e5c8c74bdbe745e7d1c890c03c287b29f6c08304de",
+  "schema_version": "search-worker-result-v1",
+  "status": "completed",
+  "task_id": "00000000-0000-4000-8000-000000000001",
+  "wall_seconds": 0.00033762503881007433,
+  "worker_pid": 94673
+}

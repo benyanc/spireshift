@@ -12,6 +12,9 @@ patch manifest -> environment adapter -> public observation + legal actions
 
 seed batch -> bounded coordinator -> isolated run workers -> immutable attempt directories
                                -> retry/final outcome -> denominator-safe batch report
+
+public checkpoint -> bounded coordinator -> isolated search process -> hidden-world clone
+                                      -> immutable task evidence -> throughput/crash report
 ```
 
 Every environment exposes an immutable ruleset identity derived from its patch manifest. The runner
@@ -69,6 +72,11 @@ ruleset, objective, policy, controller, worker result, digest, and aggregate out
 Requested seeds define the benchmark denominator before any worker starts. Final crashes and
 timeouts remain failed outcomes in that denominator, while recovered attempts are reported
 separately. See [parallel rollout infrastructure](rollout-infrastructure.md).
+
+Search workers never receive an in-memory engine state from the coordinator. Each restores a public
+checkpoint from the run seed and action prefix, verifies patch, ruleset, and state hashes, then makes
+one independently seeded hidden-world clone. Process crashes cannot mutate another simulation, and
+timeouts and stale checkpoints remain failed tasks. See [isolated search workers](search-workers.md).
 
 ## Dataset boundary
 

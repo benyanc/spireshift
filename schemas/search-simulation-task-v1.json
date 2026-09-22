@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/search-simulation-task-v1.json",
+  "title": "SpireShift Search Simulation Task v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "task_id",
+    "backend",
+    "checkpoint",
+    "action_id",
+    "simulation_seed",
+    "maximum_rollout_steps"
+  ],
+  "properties": {
+    "schema_version": {"const": "search-simulation-task-v1"},
+    "task_id": {"type": "string", "format": "uuid"},
+    "backend": {
+      "type": "object",
+      "required": ["kind", "upstream_root", "manifest_path"],
+      "properties": {
+        "kind": {"enum": ["mock", "evangambit"]},
+        "upstream_root": {"type": ["string", "null"], "minLength": 1},
+        "manifest_path": {"type": ["string", "null"], "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": [
+        "run_seed",
+        "action_prefix",
+        "patch_id",
+        "ruleset_manifest_id",
+        "state_hash"
+      ],
+      "properties": {
+        "run_seed": {"type": "integer"},
+        "action_prefix": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "patch_id": {"type": "string", "minLength": 1},
+        "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "action_id": {"type": "string", "minLength": 1},
+    "simulation_seed": {"type": "integer"},
+    "maximum_rollout_steps": {"type": "integer", "minimum": 1}
+  },
+  "additionalProperties": false
+}

@@ -36,7 +36,9 @@ The repository currently contains the research contracts and a seeded mock verti
 19. a fail-closed EvanGambit production adapter with targeted actions, public-state projection,
     exact cloning, hidden-state resampling, and content-addressed backend admission evidence; and
 20. one public mechanics service for legal actions, model features, exact rule enumeration, and
-    explicitly marked hidden-world probability estimates.
+    explicitly marked hidden-world probability estimates; and
+21. isolated search-simulation workers with public checkpoint restoration, hidden-world sampling,
+    hard timeouts, immutable evidence, and CPU/wall-time throughput accounting.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -122,6 +124,10 @@ The same safety boundary is used by the unattended loop described in that docume
 [Parallel rollout infrastructure](docs/rollout-infrastructure.md) launches each seeded episode in an
 isolated process, retries failures without overwriting evidence, and independently replays completed
 runs. Exhausted worker crashes remain in the benchmark denominator.
+
+[Isolated search workers](docs/search-workers.md) restore a public checkpoint inside each process,
+sample one independently seeded hidden world, and record task-level crashes, CPU time, wall time,
+throughput, and immutable results for fixed-budget planning.
 
 [Frozen data splits](docs/data-splits.md) bind every seed, complete run, encounter instance, and
 decision record to content-addressed train, validation, and test evidence. Dataset audits reject

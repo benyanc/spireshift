@@ -1,0 +1,86 @@
+{
+  "batch_id": "b1a4652d-d9ec-4ce9-b028-1a10c0f20eca",
+  "completed_at": "2026-09-22T01:41:10.317903Z",
+  "configuration": {
+    "task_ids": [
+      "00000000-0000-4000-8000-000000000000",
+      "00000000-0000-4000-8000-000000000001"
+    ],
+    "worker_timeout_seconds": 30.0,
+    "workers": 2
+  },
+  "schema_version": "search-worker-batch-v1",
+  "started_at": "2026-09-22T01:41:10.259752Z",
+  "summary": {
+    "completed_tasks": 2,
+    "failed_tasks": 0,
+    "requested_tasks": 2,
+    "sampled_worlds": 2,
+    "tasks_per_wall_second": 34.55708614619361,
+    "transitions": 3,
+    "transitions_per_wall_second": 51.835629219290425,
+    "wall_seconds": 0.05787525000050664,
+    "worker_cpu_seconds": 0.0007430000000000006,
+    "worker_crashes": 0
+  },
+  "tasks": [
+    {
+      "cpu_seconds": 0.0004070000000000046,
+      "exit_code": 0,
+      "message": "search simulation completed",
+      "output": {
+        "action_id": "elite_path",
+        "checkpoint_verified": true,
+        "final_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a",
+        "method": "isolated-public-world-rollout-v1",
+        "patch_id": "mock-v1",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "sampled_worlds": 1,
+        "simulation_seed": 0,
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "terminal": true,
+        "terminal_reward": 1.0,
+        "transitions": 2,
+        "truncated": false,
+        "victory": true
+      },
+      "request_path": "tasks/00000000-0000-4000-8000-000000000000/request.json",
+      "request_sha256": "97a9b7ca8a461776a4ddc8ec153cbe2357de4b2ad3112b66dc7785b2be8b7507",
+      "result_path": "tasks/00000000-0000-4000-8000-000000000000/result.json",
+      "result_sha256": "b465d178fb39309565704864f71651169f499dd248a697f364b490f340828c0f",
+      "status": "completed",
+      "task_id": "00000000-0000-4000-8000-000000000000",
+      "wall_seconds": 0.0004087919369339943,
+      "worker_pid": 94672
+    },
+    {
+      "cpu_seconds": 0.000335999999999996,
+      "exit_code": 0,
+      "message": "search simulation completed",
+      "output": {
+        "action_id": "elite_path",
+        "checkpoint_verified": true,
+        "final_state_hash": "90fa54f4df54d20afcdc3dab36d4b2c5dc8cbfd6c04d84e579f5423e5febe3e3",
+        "method": "isolated-public-world-rollout-v1",
+        "patch_id": "mock-v1",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "sampled_worlds": 1,
+        "simulation_seed": 1,
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "terminal": true,
+        "terminal_reward": 0.0,
+        "transitions": 1,
+        "truncated": false,
+        "victory": false
+      },
+      "request_path": "tasks/00000000-0000-4000-8000-000000000001/request.json",
+      "request_sha256": "2bb04daa246fbc787474b6e5c8c74bdbe745e7d1c890c03c287b29f6c08304de",
+      "result_path": "tasks/00000000-0000-4000-8000-000000000001/result.json",
+      "result_sha256": "cde3829d6bfc18207653690936abc349481f508f8da0a20aedd4f2c5f3a688b0",
+      "status": "completed",
+      "task_id": "00000000-0000-4000-8000-000000000001",
+      "wall_seconds": 0.00033762503881007433,
+      "worker_pid": 94673
+    }
+  ]
+}
