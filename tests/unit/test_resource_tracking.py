@@ -170,7 +170,7 @@ def test_hardware_capture_uses_null_for_unavailable_values() -> None:
 
 
 def test_hardware_capture_allows_missing_cpu_frequency_api(monkeypatch: MonkeyPatch) -> None:
-    monkeypatch.delattr(psutil, "cpu_freq")
+    monkeypatch.delattr(psutil, "cpu_freq", raising=False)
 
     hardware = capture_hardware()
 
