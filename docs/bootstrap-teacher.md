@@ -107,3 +107,79 @@ nonzero `states_with_candidate_progress_variation`. Inspect candidate histograms
 confirm that all run seeds remain in the train partition. `--replay-cases N` adds exact simulation
 replay and can itself become a sustained job; use it only after the generated data has enough signal
 to justify that cost.
+
+## Expanded curriculum v2
+
+The pilot completed all 32 cases, but every source was floor 2 at combat decision zero, every one of
+the 4,032 continuations lost, and the two eight-sample halves selected the same action in only 18 of
+32 states. It remains useful for loader and loss-function smoke tests. It is not a production model
+dataset.
+
+Curriculum v2 discovers exact decision-type occurrences. A combat occurrence no longer counts a
+combat-selection observation, and train and validation use disjoint complete-run partitions. Each
+frozen case records its source floor and act. Every requested coordinate that cannot be reached by
+the public continuation policy is retained in `unreachable_coordinates`; discovery never improves
+its apparent coverage by silently dropping misses.
+
+The production discovery specifications are:
+
+- `configs/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json`: 64 ranked train runs;
+- `configs/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json`: 24 ranked validation
+  runs.
+
+They request multiple occurrences of path, combat, combat-selection, reward, event, rest, shop,
+treasure, card-selection, and relic-selection decisions. Their content-addressed outputs must pass
+the prespecified state, source-floor, and decision-type minimums before teacher generation starts.
+Run discovery yourself through the resource wrapper:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-discovery-v2.json \
+  --artifact-root artifacts/bootstrap/discovery-train-v2 \
+  --workers 1 \
+  --max-wall-seconds 3600 \
+  --max-cpu-seconds 3600 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 8000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap discover-states \
+    configs/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json \
+    artifacts/bootstrap/discovery-train-v2/state-set.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json
+```
+
+Use the validation specification and distinct `discovery-validation-v2` paths for the held-out
+artifact. Do not start scaled teacher generation until both discovery reports and state sets have
+been inspected. The generator itself enforces their structural thresholds before scheduling a
+single rollout.
+
+For each candidate, v2 preserves every paired outcome and adds a pairwise preference matrix,
+normalized soft policy target, progress-utility standard error, paired preference margin, selected
+winner confidence, and first-half versus second-half winner agreement. `policy_target_weight`
+downweights unstable states; one-candidate states receive zero policy weight. A one-hot target is
+retained only for audit compatibility, and `hard_target_eligible` is false unless the winner is
+unique, sufficiently confident, and stable across halves. Model training must consume
+`soft_policy_target` and `policy_target_weight` rather than the audit-only one-hot field.
+`load_curriculum_policy_examples` is the verified boundary for model code: it refuses legacy or
+invalid datasets and exposes the soft distribution, weight, pairwise matrix, and hard-label
+eligibility alongside the public compositional model input.
+
+After generation, `signal_assessment` applies the remaining prespecified thresholds for effective
+labeled-state count, half-split agreement, and reached-floor occupancy. It reports terminal-head
+promotion separately. Both victories and non-victories are required, so an all-loss dataset can
+pass an auxiliary-policy gate but can never promote the terminal value head or satisfy readiness.
+
+Once the discovered state sets pass structural review, generate train and validation independently
+with the same resource-capped pattern as the pilot. Use separate artifact and resource-report roots,
+16 samples per candidate, eight workers, and `--resume` after an interruption. These are sustained
+jobs and are intentionally left for the operator to start and observe.
+
+The admitted-backend contract smoke is recorded in
+`docs/evidence/bootstrap-curriculum-v2-admitted-smoke.json`. It captured reward, path, combat zero,
+and combat eight across floors 1 and 2; completed and verified 4/4 cases, 17 candidates, 68 paired
+simulations, and 2,795 transitions; and correctly rejected terminal-head promotion because all 68
+outcomes were losses. Its deliberately permissive smoke thresholds are not the production gates.

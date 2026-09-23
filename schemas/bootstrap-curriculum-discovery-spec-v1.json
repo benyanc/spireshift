@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-curriculum-discovery-spec-v1.json",
+  "title": "SpireShift Bootstrap Curriculum Discovery Specification v1",
+  "type": "object",
+  "required": ["schema_version", "split_manifest_id", "ruleset_manifest_id", "objective_id", "capture_policy_id", "partition", "selection_policy", "run_count", "decision_occurrences", "maximum_steps_per_run", "signal_spec"],
+  "properties": {
+    "schema_version": {"const": "bootstrap-curriculum-discovery-spec-v1"},
+    "split_manifest_id": {"$ref": "#/$defs/contentId"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/contentId"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "capture_policy_id": {"const": "public-progress-bootstrap-v1"},
+    "partition": {"enum": ["train", "validation"]},
+    "selection_policy": {"type": "string", "minLength": 1},
+    "run_count": {"type": "integer", "minimum": 1},
+    "decision_occurrences": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"enum": ["path", "combat", "combat_selection", "reward", "event", "rest_site", "shop", "treasure", "card_selection", "relic_selection", "mini_game"]},
+      "additionalProperties": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer", "minimum": 0}}
+    },
+    "maximum_steps_per_run": {"type": "integer", "minimum": 1},
+    "signal_spec": {"$ref": "#/$defs/signalSpec"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "contentId": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "signalSpec": {
+      "type": "object",
+      "required": ["minimum_states", "minimum_source_floors", "minimum_decision_types", "minimum_effective_labeled_states", "minimum_half_split_agreement", "minimum_occupied_maximum_floor_bins"],
+      "properties": {
+        "minimum_states": {"type": "integer", "minimum": 1},
+        "minimum_source_floors": {"type": "integer", "minimum": 1},
+        "minimum_decision_types": {"type": "integer", "minimum": 1},
+        "minimum_effective_labeled_states": {"type": "number", "exclusiveMinimum": 0},
+        "minimum_half_split_agreement": {"type": "number", "minimum": 0, "maximum": 1},
+        "minimum_occupied_maximum_floor_bins": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    }
+  }
+}
