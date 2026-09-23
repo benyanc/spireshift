@@ -1,0 +1,234 @@
+{
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "objective_id": "terminal-victory-v1",
+  "capture_policy_id": "public-progress-bootstrap-v1",
+  "partition": "train",
+  "selection_policy": "first-32-sha256-ranked-train-runs-combat-0-v1",
+  "cases": [
+    {
+      "state_id": "train-seed-000000-combat-000",
+      "run_seed": 0,
+      "combat_state_index": 0,
+      "expected_state_hash": "a16802431d1675692d73cdf3034c9ecd3726f0eb75582519eead38be22acefdc",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000001-combat-000",
+      "run_seed": 1,
+      "combat_state_index": 0,
+      "expected_state_hash": "3706eb18a9514bb9721de7ebabad6613cddd21369605490bcdb904f98163813a",
+      "expected_legal_actions": 10
+    },
+    {
+      "state_id": "train-seed-000002-combat-000",
+      "run_seed": 2,
+      "combat_state_index": 0,
+      "expected_state_hash": "44d96c2274e025c063beaf7a3e8aaa601148c6969341edb3e4f1cab4e177a242",
+      "expected_legal_actions": 9
+    },
+    {
+      "state_id": "train-seed-000003-combat-000",
+      "run_seed": 3,
+      "combat_state_index": 0,
+      "expected_state_hash": "b9214457a87c19775e0d42331658747ee2584ed1a55be57d7dd638070da937e6",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000004-combat-000",
+      "run_seed": 4,
+      "combat_state_index": 0,
+      "expected_state_hash": "88cb0c14ae1ab25a9c9679797d55df2d7446a4ad0f73d56c4919a87402379c2a",
+      "expected_legal_actions": 10
+    },
+    {
+      "state_id": "train-seed-000006-combat-000",
+      "run_seed": 6,
+      "combat_state_index": 0,
+      "expected_state_hash": "376ff2c3a8adb247bca5467bbf6b2fbc63aeafbbb3bb02b78e873392f513bfa2",
+      "expected_legal_actions": 9
+    },
+    {
+      "state_id": "train-seed-000007-combat-000",
+      "run_seed": 7,
+      "combat_state_index": 0,
+      "expected_state_hash": "9d166399c8d5042ce2a1157606e3bcaf7ea32ab4e577deab03e81b648c055588",
+      "expected_legal_actions": 12
+    },
+    {
+      "state_id": "train-seed-000009-combat-000",
+      "run_seed": 9,
+      "combat_state_index": 0,
+      "expected_state_hash": "cd82485fbe462c3c12d26ca0334dc86912b3a57b03792c6c3ea54ca96b5b39ce",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000010-combat-000",
+      "run_seed": 10,
+      "combat_state_index": 0,
+      "expected_state_hash": "6a79ba6a72d3ea048b7a25a5efd120f3570ba58d34ce9007ec9872bd98f91012",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000012-combat-000",
+      "run_seed": 12,
+      "combat_state_index": 0,
+      "expected_state_hash": "e4a335031281e818d87514b6d12e4172df918984aae3d30ed127ac00c814f8b6",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000013-combat-000",
+      "run_seed": 13,
+      "combat_state_index": 0,
+      "expected_state_hash": "8018b2a44dd579957b46e9019ed7a305b3469f93efdf894a7061958474fe6547",
+      "expected_legal_actions": 5
+    },
+    {
+      "state_id": "train-seed-000015-combat-000",
+      "run_seed": 15,
+      "combat_state_index": 0,
+      "expected_state_hash": "159d20dde4940368cc4576813889d5cbf3f0e9141b7fe058e5937d6efcd7674f",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000016-combat-000",
+      "run_seed": 16,
+      "combat_state_index": 0,
+      "expected_state_hash": "e1014802ef4914c694e96255ffcf90f559dddd78693fbd816dc259d9d5bae9c9",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000017-combat-000",
+      "run_seed": 17,
+      "combat_state_index": 0,
+      "expected_state_hash": "9b4c09c8e93b8b89a654278ba7bcfd88354508d2e609a0a3a8c66d4e8b130b09",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000018-combat-000",
+      "run_seed": 18,
+      "combat_state_index": 0,
+      "expected_state_hash": "5eb93f58ca5741d9d0b27b08f3ba7e09324f56d820ea702b2cd0709216ad790b",
+      "expected_legal_actions": 8
+    },
+    {
+      "state_id": "train-seed-000019-combat-000",
+      "run_seed": 19,
+      "combat_state_index": 0,
+      "expected_state_hash": "9b7664aaadc611df37cace70cca9470fbc01b19af82308c9776a2e8e3e6ea2ab",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000020-combat-000",
+      "run_seed": 20,
+      "combat_state_index": 0,
+      "expected_state_hash": "5b0cb6c3b0ce48ca8b53b5440e9dacdb5e2e3cad36ad82eb127c20540efb648f",
+      "expected_legal_actions": 9
+    },
+    {
+      "state_id": "train-seed-000022-combat-000",
+      "run_seed": 22,
+      "combat_state_index": 0,
+      "expected_state_hash": "a315d6a0a830b9830d5cc87c9483a4964e339fb61c23938a549559ccf9040f39",
+      "expected_legal_actions": 12
+    },
+    {
+      "state_id": "train-seed-000023-combat-000",
+      "run_seed": 23,
+      "combat_state_index": 0,
+      "expected_state_hash": "adf009039b669382e858f4b73b58d439640e5c8b606dee9230f8b0f9825afe23",
+      "expected_legal_actions": 10
+    },
+    {
+      "state_id": "train-seed-000024-combat-000",
+      "run_seed": 24,
+      "combat_state_index": 0,
+      "expected_state_hash": "211f58e24539ef9bb42878fd24c8ba4a733b5cd9d703cc23143c6645d20060a1",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000026-combat-000",
+      "run_seed": 26,
+      "combat_state_index": 0,
+      "expected_state_hash": "bc4ee3bd7ed2b57fa2a13d6ae24d29e82836f21e6c12be5e291ba61570346dd7",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000028-combat-000",
+      "run_seed": 28,
+      "combat_state_index": 0,
+      "expected_state_hash": "91edab75a53d3d6497cb10c4579a91792e966f7b354ad645bc5ded79da99803d",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000030-combat-000",
+      "run_seed": 30,
+      "combat_state_index": 0,
+      "expected_state_hash": "943f0eb77aa22d7788e6670b0869a991c8bc8af8ac891c214fb97c30b9c10261",
+      "expected_legal_actions": 12
+    },
+    {
+      "state_id": "train-seed-000031-combat-000",
+      "run_seed": 31,
+      "combat_state_index": 0,
+      "expected_state_hash": "328f3e3080418cae59f7aeac088660157a46aecc7d4cbe36c3b5b2074594f7fa",
+      "expected_legal_actions": 11
+    },
+    {
+      "state_id": "train-seed-000033-combat-000",
+      "run_seed": 33,
+      "combat_state_index": 0,
+      "expected_state_hash": "fc18e2ee88ac528fe505635f5e3d0c6ef9461bae1c07f10ea186016ff3b94478",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000034-combat-000",
+      "run_seed": 34,
+      "combat_state_index": 0,
+      "expected_state_hash": "2348bb29992c8040634e47f3f1a7bac4a01ace30b92db280cd53822388c7dd85",
+      "expected_legal_actions": 7
+    },
+    {
+      "state_id": "train-seed-000036-combat-000",
+      "run_seed": 36,
+      "combat_state_index": 0,
+      "expected_state_hash": "8593cb47991bfa9001f7c1e663b64cc4f4826159a3dacdc005b466d6253ddfe5",
+      "expected_legal_actions": 9
+    },
+    {
+      "state_id": "train-seed-000038-combat-000",
+      "run_seed": 38,
+      "combat_state_index": 0,
+      "expected_state_hash": "e88dedf78f239573a9ad06f734683e1adda118553ab41c246e5deea34c0e34d2",
+      "expected_legal_actions": 9
+    },
+    {
+      "state_id": "train-seed-000039-combat-000",
+      "run_seed": 39,
+      "combat_state_index": 0,
+      "expected_state_hash": "61032c0985d83bdb3b5ff894d2b5c5906e1f30b96b0c81f1bd209d6788f68b4d",
+      "expected_legal_actions": 6
+    },
+    {
+      "state_id": "train-seed-000040-combat-000",
+      "run_seed": 40,
+      "combat_state_index": 0,
+      "expected_state_hash": "480baaf8ffe2331a30f8c5b0dbd8bfdcee822cdf9b030fa7523f5892546252ed",
+      "expected_legal_actions": 5
+    },
+    {
+      "state_id": "train-seed-000041-combat-000",
+      "run_seed": 41,
+      "combat_state_index": 0,
+      "expected_state_hash": "9d8e36881131b1c70eb541b3c30da1094310b52bfffea595bb2db5842e193e9e",
+      "expected_legal_actions": 9
+    },
+    {
+      "state_id": "train-seed-000042-combat-000",
+      "run_seed": 42,
+      "combat_state_index": 0,
+      "expected_state_hash": "bbefb366f366d6b69449f3639c39bb3e754ec12a0289011ab75db025b95b312b",
+      "expected_legal_actions": 6
+    }
+  ]
+}

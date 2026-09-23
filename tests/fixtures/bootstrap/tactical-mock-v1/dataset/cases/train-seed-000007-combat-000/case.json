@@ -1,0 +1,882 @@
+{
+  "batch": {
+    "batch_report_id": "sha256:fdc704e575ae03f4027f628a331ded8fd2991b190249eb4f9a654fa6b9167a4c",
+    "path": "cases/train-seed-000007-combat-000/attempt-0001/bootstrap-worker-report.json",
+    "sha256": "d48f1fa10dd9719ae3cd5d9b3fb1d513222fd2ee4ee89543cbf68a1b5ce52c5d"
+  },
+  "case_id": "sha256:c0d032cf1bc2eaaa170890c167d36a43b38232018c5b4539534ca566b181a089",
+  "failure": null,
+  "record": {
+    "combat_state_index": 0,
+    "model_input": {
+      "action_mask": [
+        true,
+        true,
+        true
+      ],
+      "candidates": [
+        {
+          "action_kind": "play_card",
+          "candidate_index": 0,
+          "features": [
+            {
+              "boolean_value": null,
+              "categorical_value": "defend",
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "plan"
+              ],
+              "semantic": "mechanic",
+              "value_type": "categorical"
+            }
+          ],
+          "source_action_id": "preserve_hp"
+        },
+        {
+          "action_kind": "play_card",
+          "candidate_index": 1,
+          "features": [
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 28.0,
+              "path": [
+                "expected_hp_cost"
+              ],
+              "semantic": "mechanic",
+              "value_type": "numeric"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": "scale",
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "plan"
+              ],
+              "semantic": "mechanic",
+              "value_type": "categorical"
+            }
+          ],
+          "source_action_id": "take_damage_for_power"
+        },
+        {
+          "action_kind": "use_potion",
+          "candidate_index": 2,
+          "features": [
+            {
+              "boolean_value": null,
+              "categorical_value": "secure_relic",
+              "indices": [],
+              "numeric_value": null,
+              "path": [
+                "plan"
+              ],
+              "semantic": "mechanic",
+              "value_type": "categorical"
+            },
+            {
+              "boolean_value": null,
+              "categorical_value": null,
+              "indices": [],
+              "numeric_value": 0.0,
+              "path": [
+                "potion_slot"
+              ],
+              "semantic": "locator",
+              "value_type": "numeric"
+            }
+          ],
+          "source_action_id": "spend_potion_for_relic"
+        }
+      ],
+      "decision_type": "combat",
+      "encoder_id": "mechanics-compositional-v1",
+      "observation_schema": "observation-v1",
+      "patch_id": "tactical-handoff-mock-v1",
+      "representation_hash": "sha256:51b50fa0a901d5a53df42cd6312074fcdc7ef140e4a04eb36f4fb3f262fb409c",
+      "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+      "schema_version": "model-input-v1",
+      "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "state": {
+        "entities": [
+          {
+            "entity_type": "player",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [],
+                "numeric_value": 120.0,
+                "path": [
+                  "player",
+                  "gold"
+                ],
+                "semantic": "persistent_resource",
+                "value_type": "numeric"
+              },
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [],
+                "numeric_value": 70.0,
+                "path": [
+                  "player",
+                  "hp"
+                ],
+                "semantic": "persistent_resource",
+                "value_type": "numeric"
+              },
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [],
+                "numeric_value": 80.0,
+                "path": [
+                  "player",
+                  "max_hp"
+                ],
+                "semantic": "persistent_resource",
+                "value_type": "numeric"
+              }
+            ],
+            "indices": [],
+            "path": [
+              "player"
+            ]
+          },
+          {
+            "entity_type": "card",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "strike",
+                "indices": [
+                  0
+                ],
+                "numeric_value": null,
+                "path": [
+                  "player",
+                  "deck",
+                  "id"
+                ],
+                "semantic": "identity",
+                "value_type": "categorical"
+              },
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [
+                  0
+                ],
+                "numeric_value": 0.0,
+                "path": [
+                  "player",
+                  "deck",
+                  "upgrades"
+                ],
+                "semantic": "mechanic",
+                "value_type": "numeric"
+              }
+            ],
+            "indices": [
+              0
+            ],
+            "path": [
+              "player",
+              "deck"
+            ]
+          },
+          {
+            "entity_type": "card",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "defend",
+                "indices": [
+                  1
+                ],
+                "numeric_value": null,
+                "path": [
+                  "player",
+                  "deck",
+                  "id"
+                ],
+                "semantic": "identity",
+                "value_type": "categorical"
+              },
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [
+                  1
+                ],
+                "numeric_value": 1.0,
+                "path": [
+                  "player",
+                  "deck",
+                  "upgrades"
+                ],
+                "semantic": "mechanic",
+                "value_type": "numeric"
+              }
+            ],
+            "indices": [
+              1
+            ],
+            "path": [
+              "player",
+              "deck"
+            ]
+          },
+          {
+            "entity_type": "card",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "scaling_engine",
+                "indices": [
+                  2
+                ],
+                "numeric_value": null,
+                "path": [
+                  "player",
+                  "deck",
+                  "id"
+                ],
+                "semantic": "identity",
+                "value_type": "categorical"
+              },
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [
+                  2
+                ],
+                "numeric_value": 0.0,
+                "path": [
+                  "player",
+                  "deck",
+                  "upgrades"
+                ],
+                "semantic": "mechanic",
+                "value_type": "numeric"
+              }
+            ],
+            "indices": [
+              2
+            ],
+            "path": [
+              "player",
+              "deck"
+            ]
+          },
+          {
+            "entity_type": "potion",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": null,
+                "indices": [
+                  0
+                ],
+                "numeric_value": 1.0,
+                "path": [
+                  "player",
+                  "potions",
+                  "charges"
+                ],
+                "semantic": "mechanic",
+                "value_type": "numeric"
+              },
+              {
+                "boolean_value": null,
+                "categorical_value": "fire_potion",
+                "indices": [
+                  0
+                ],
+                "numeric_value": null,
+                "path": [
+                  "player",
+                  "potions",
+                  "id"
+                ],
+                "semantic": "identity",
+                "value_type": "categorical"
+              }
+            ],
+            "indices": [
+              0
+            ],
+            "path": [
+              "player",
+              "potions"
+            ]
+          },
+          {
+            "entity_type": "path_option",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "elite",
+                "indices": [
+                  0
+                ],
+                "numeric_value": null,
+                "path": [
+                  "run",
+                  "next_options",
+                  "id"
+                ],
+                "semantic": "identity",
+                "value_type": "categorical"
+              },
+              {
+                "boolean_value": true,
+                "categorical_value": null,
+                "indices": [
+                  0
+                ],
+                "numeric_value": null,
+                "path": [
+                  "run",
+                  "next_options",
+                  "revealed"
+                ],
+                "semantic": "capability",
+                "value_type": "boolean"
+              }
+            ],
+            "indices": [
+              0
+            ],
+            "path": [
+              "run",
+              "next_options"
+            ]
+          },
+          {
+            "entity_type": "path_option",
+            "features": [
+              {
+                "boolean_value": null,
+                "categorical_value": "rest",
+                "indices": [
+                  1
+                ],
+                "numeric_value": null,
+                "path": [
+                  "run",
+                  "next_options",
+                  "id"
+                ],
+                "semantic": "identity",
+                "value_type": "categorical"
+              },
+              {
+                "boolean_value": true,
+                "categorical_value": null,
+                "indices": [
+                  1
+                ],
+                "numeric_value": null,
+                "path": [
+                  "run",
+                  "next_options",
+                  "revealed"
+                ],
+                "semantic": "capability",
+                "value_type": "boolean"
+              }
+            ],
+            "indices": [
+              1
+            ],
+            "path": [
+              "run",
+              "next_options"
+            ]
+          }
+        ],
+        "global_features": [
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 24.0,
+            "path": [
+              "combat",
+              "enemy_hp"
+            ],
+            "semantic": "mechanic",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 4.0,
+            "path": [
+              "combat",
+              "turn"
+            ],
+            "semantic": "mechanic",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 2.0,
+            "path": [
+              "run",
+              "act"
+            ],
+            "semantic": "progression",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 20.0,
+            "path": [
+              "run",
+              "floor"
+            ],
+            "semantic": "progression",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 0.0,
+            "path": [
+              "run",
+              "permanent_power"
+            ],
+            "semantic": "mechanic",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 0.0,
+            "path": [
+              "run",
+              "relic_counter"
+            ],
+            "semantic": "mechanic",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": "combat",
+            "indices": [],
+            "numeric_value": null,
+            "path": [
+              "run",
+              "room_type"
+            ],
+            "semantic": "progression",
+            "value_type": "categorical"
+          },
+          {
+            "boolean_value": false,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": null,
+            "path": [
+              "terminal"
+            ],
+            "semantic": "status",
+            "value_type": "boolean"
+          },
+          {
+            "boolean_value": false,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": null,
+            "path": [
+              "victory"
+            ],
+            "semantic": "status",
+            "value_type": "boolean"
+          }
+        ],
+        "persistent_resources": [
+          {
+            "boolean_value": null,
+            "categorical_value": "strike",
+            "indices": [
+              0
+            ],
+            "numeric_value": null,
+            "path": [
+              "player",
+              "deck",
+              "id"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "categorical"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [
+              0
+            ],
+            "numeric_value": 0.0,
+            "path": [
+              "player",
+              "deck",
+              "upgrades"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": "defend",
+            "indices": [
+              1
+            ],
+            "numeric_value": null,
+            "path": [
+              "player",
+              "deck",
+              "id"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "categorical"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [
+              1
+            ],
+            "numeric_value": 1.0,
+            "path": [
+              "player",
+              "deck",
+              "upgrades"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": "scaling_engine",
+            "indices": [
+              2
+            ],
+            "numeric_value": null,
+            "path": [
+              "player",
+              "deck",
+              "id"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "categorical"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [
+              2
+            ],
+            "numeric_value": 0.0,
+            "path": [
+              "player",
+              "deck",
+              "upgrades"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 120.0,
+            "path": [
+              "player",
+              "gold"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 70.0,
+            "path": [
+              "player",
+              "hp"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [],
+            "numeric_value": 80.0,
+            "path": [
+              "player",
+              "max_hp"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": null,
+            "indices": [
+              0
+            ],
+            "numeric_value": 1.0,
+            "path": [
+              "player",
+              "potions",
+              "charges"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "numeric"
+          },
+          {
+            "boolean_value": null,
+            "categorical_value": "fire_potion",
+            "indices": [
+              0
+            ],
+            "numeric_value": null,
+            "path": [
+              "player",
+              "potions",
+              "id"
+            ],
+            "semantic": "persistent_resource",
+            "value_type": "categorical"
+          }
+        ]
+      }
+    },
+    "record_id": "sha256:ab650fb89db924204a4ad3bb07f714620361e3aa0e6b6bca4ac48a7f9bc035ac",
+    "run_seed": 7,
+    "schema_version": "bootstrap-teacher-record-v1",
+    "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+    "state_id": "train-seed-000007-combat-000",
+    "target": {
+      "candidate_progress_utility_spread": 0.0,
+      "candidates": [
+        {
+          "act_completion_rate": 1.0,
+          "action_kind": "play_card",
+          "candidate_index": 0,
+          "maximum_floor_histogram": {
+            "20": 1
+          },
+          "mean_final_gold": 120.0,
+          "mean_final_hp": 70.0,
+          "mean_final_potion_count": 1.0,
+          "mean_final_relic_count": 0.0,
+          "mean_maximum_floor": 20.0,
+          "mean_progress_utility": 1.0,
+          "milestone_reach_probability": {
+            "1": 1.0,
+            "16": 1.0,
+            "24": 0.0,
+            "32": 0.0,
+            "40": 0.0,
+            "48": 0.0,
+            "56": 0.0,
+            "64": 0.0,
+            "8": 1.0
+          },
+          "outcomes": [
+            {
+              "act_completed": true,
+              "action_id": "preserve_hp",
+              "bootstrap_utility": 1.0,
+              "continuation_policy_id": "public-progress-bootstrap-v1",
+              "final_act": 2,
+              "final_floor": 20,
+              "final_gold": 120,
+              "final_hp": 70,
+              "final_max_hp": 80,
+              "final_potion_count": 1,
+              "final_relic_count": 0,
+              "final_state_hash": "a5062cf6e8d120fc7616ba3bd6d8203288d64ba16365a2f9044cb0099de6dffa",
+              "maximum_floor": 20,
+              "method": "paired-public-progress-rollout-v1",
+              "patch_id": "tactical-handoff-mock-v1",
+              "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+              "simulation_seed": 8597942239362006943,
+              "source_act": 2,
+              "source_floor": 20,
+              "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+              "terminal": true,
+              "terminal_reward": 1.0,
+              "transitions": 2,
+              "truncated": false,
+              "victory": true
+            }
+          ],
+          "progress_utility_variance": 0.0,
+          "sample_count": 1,
+          "source_action_id": "preserve_hp",
+          "terminal_value": 1.0
+        },
+        {
+          "act_completion_rate": 1.0,
+          "action_kind": "play_card",
+          "candidate_index": 1,
+          "maximum_floor_histogram": {
+            "20": 1
+          },
+          "mean_final_gold": 120.0,
+          "mean_final_hp": 42.0,
+          "mean_final_potion_count": 1.0,
+          "mean_final_relic_count": 0.0,
+          "mean_maximum_floor": 20.0,
+          "mean_progress_utility": 1.0,
+          "milestone_reach_probability": {
+            "1": 1.0,
+            "16": 1.0,
+            "24": 0.0,
+            "32": 0.0,
+            "40": 0.0,
+            "48": 0.0,
+            "56": 0.0,
+            "64": 0.0,
+            "8": 1.0
+          },
+          "outcomes": [
+            {
+              "act_completed": true,
+              "action_id": "take_damage_for_power",
+              "bootstrap_utility": 1.0,
+              "continuation_policy_id": "public-progress-bootstrap-v1",
+              "final_act": 2,
+              "final_floor": 20,
+              "final_gold": 120,
+              "final_hp": 42,
+              "final_max_hp": 80,
+              "final_potion_count": 1,
+              "final_relic_count": 0,
+              "final_state_hash": "0e39d9fcf49423aeebb0fdf6c4be7563d95c5ad86756fe6c6367a21644946161",
+              "maximum_floor": 20,
+              "method": "paired-public-progress-rollout-v1",
+              "patch_id": "tactical-handoff-mock-v1",
+              "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+              "simulation_seed": 8597942239362006943,
+              "source_act": 2,
+              "source_floor": 20,
+              "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+              "terminal": true,
+              "terminal_reward": 1.0,
+              "transitions": 2,
+              "truncated": false,
+              "victory": true
+            }
+          ],
+          "progress_utility_variance": 0.0,
+          "sample_count": 1,
+          "source_action_id": "take_damage_for_power",
+          "terminal_value": 1.0
+        },
+        {
+          "act_completion_rate": 1.0,
+          "action_kind": "use_potion",
+          "candidate_index": 2,
+          "maximum_floor_histogram": {
+            "20": 1
+          },
+          "mean_final_gold": 120.0,
+          "mean_final_hp": 60.0,
+          "mean_final_potion_count": 0.0,
+          "mean_final_relic_count": 1.0,
+          "mean_maximum_floor": 20.0,
+          "mean_progress_utility": 1.0,
+          "milestone_reach_probability": {
+            "1": 1.0,
+            "16": 1.0,
+            "24": 0.0,
+            "32": 0.0,
+            "40": 0.0,
+            "48": 0.0,
+            "56": 0.0,
+            "64": 0.0,
+            "8": 1.0
+          },
+          "outcomes": [
+            {
+              "act_completed": true,
+              "action_id": "spend_potion_for_relic",
+              "bootstrap_utility": 1.0,
+              "continuation_policy_id": "public-progress-bootstrap-v1",
+              "final_act": 2,
+              "final_floor": 20,
+              "final_gold": 120,
+              "final_hp": 60,
+              "final_max_hp": 80,
+              "final_potion_count": 0,
+              "final_relic_count": 1,
+              "final_state_hash": "aa15d3f7204a331cd0e4124f818458335d981ab32b0676a52ceb03e6cdc24c0a",
+              "maximum_floor": 20,
+              "method": "paired-public-progress-rollout-v1",
+              "patch_id": "tactical-handoff-mock-v1",
+              "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+              "simulation_seed": 8597942239362006943,
+              "source_act": 2,
+              "source_floor": 20,
+              "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+              "terminal": true,
+              "terminal_reward": 1.0,
+              "transitions": 2,
+              "truncated": false,
+              "victory": true
+            }
+          ],
+          "progress_utility_variance": 0.0,
+          "sample_count": 1,
+          "source_action_id": "spend_potion_for_relic",
+          "terminal_value": 1.0
+        }
+      ],
+      "milestone_floors": [
+        1,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64
+      ],
+      "one_hot_policy_target": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "progress_utility_is_auxiliary": true,
+      "samples_per_candidate": 1,
+      "seed_protocol_id": "sha256-paired-bootstrap-v1",
+      "selected_action_id": "preserve_hp",
+      "selected_candidate_index": 0,
+      "teacher_id": "paired-terminal-dominant-progress-teacher-v1",
+      "terminal_reward_is_primary": true,
+      "utility_id": "terminal-dominant-floor-act-hp-v1"
+    }
+  },
+  "state_id": "train-seed-000007-combat-000",
+  "status": "completed"
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-simulation-task-v1.json",
+  "title": "SpireShift Bootstrap Simulation Task v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "task_id",
+    "backend",
+    "checkpoint",
+    "action_id",
+    "simulation_seed",
+    "maximum_rollout_steps",
+    "continuation_policy_id"
+  ],
+  "properties": {
+    "schema_version": {"const": "bootstrap-simulation-task-v1"},
+    "task_id": {"type": "string", "format": "uuid"},
+    "backend": {"$ref": "#/$defs/backend"},
+    "checkpoint": {"$ref": "#/$defs/checkpoint"},
+    "action_id": {"type": "string", "minLength": 1},
+    "simulation_seed": {"type": "integer", "minimum": 0},
+    "maximum_rollout_steps": {"type": "integer", "minimum": 1},
+    "continuation_policy_id": {"const": "public-progress-bootstrap-v1"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "backend": {
+      "type": "object",
+      "required": ["kind", "upstream_root", "manifest_path"],
+      "properties": {
+        "kind": {"enum": ["mock", "tactical_mock", "evangambit"]},
+        "upstream_root": {"type": ["string", "null"]},
+        "manifest_path": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": ["run_seed", "action_prefix", "patch_id", "ruleset_manifest_id", "state_hash"],
+      "properties": {
+        "run_seed": {"type": "integer", "minimum": 0},
+        "action_prefix": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "patch_id": {"type": "string", "minLength": 1},
+        "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  }
+}
