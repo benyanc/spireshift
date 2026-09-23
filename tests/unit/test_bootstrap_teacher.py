@@ -8,16 +8,22 @@ import pytest
 from spireshift.agents.baseline import ProgressBootstrapPolicy
 from spireshift.bootstrap_teacher import (
     BootstrapConfig,
+    BootstrapStateSet,
+    CurriculumStateSet,
     bootstrap_utility,
     capture_bootstrap_combat_state,
+    capture_curriculum_state,
+    discover_curriculum_state_set,
     freeze_bootstrap_state_set,
     load_bootstrap_state_set,
     load_bootstrap_state_set_document,
+    load_curriculum_policy_examples,
     run_bootstrap_teacher_dataset,
     verify_bootstrap_teacher_dataset,
 )
 from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import load_objective
+from spireshift.core.types import DecisionType
 from spireshift.rollouts import sha256_file
 from spireshift.search_workers import SearchBackendSpec
 from spireshift.splits import SplitManifest, freeze_split_manifest
@@ -42,6 +48,30 @@ def _tactical_split(ruleset_manifest_id: str) -> SplitManifest:
                 "algorithm": "sha256-ranked-v1",
                 "salt": "spireshift/tactical-bootstrap/train-v1",
                 "counts": {"train": 1, "validation": 0, "test": 0},
+            },
+            "encounter_policy": {
+                "unit": "encounter_instance",
+                "inherits_split_from": "complete_run",
+                "identifier_fields": ["run_id", "encounter_id"],
+                "cross_partition_reuse": "forbidden",
+            },
+        }
+    )
+
+
+def _partitioned_tactical_split(ruleset_manifest_id: str) -> SplitManifest:
+    return freeze_split_manifest(
+        {
+            "schema_version": "split-manifest-v1",
+            "split_id": "tactical-bootstrap-partitions-v1",
+            "ruleset_manifest_id": ruleset_manifest_id,
+            "objective_id": "terminal-victory-v1",
+            "unit": "complete_run",
+            "seed_universe": {"start": 7, "stop_exclusive": 10},
+            "assignment": {
+                "algorithm": "sha256-ranked-v1",
+                "salt": "spireshift/tactical-bootstrap/partitions-v1",
+                "counts": {"train": 1, "validation": 1, "test": 1},
             },
             "encounter_policy": {
                 "unit": "encounter_instance",
@@ -116,6 +146,7 @@ def test_production_bootstrap_states_are_frozen_to_complete_train_runs() -> None
 
     split = load_split_manifest(PRODUCTION_SPLIT)
     state_set = load_bootstrap_state_set(PRODUCTION_STATE_SET)
+    assert isinstance(state_set, BootstrapStateSet)
     specification = json.loads(PRODUCTION_STATE_SPECIFICATION.read_text(encoding="utf-8"))
 
     assert state_set.state_set_id == (
@@ -271,3 +302,167 @@ def test_terminal_victory_dominates_progress_curriculum_utility() -> None:
 
     assert bootstrap_utility(victory) == 1.0
     assert bootstrap_utility(deep_loss) < bootstrap_utility(victory)
+
+
+def _curriculum_spec(split: SplitManifest, partition: str = "train") -> dict[str, object]:
+    return {
+        "schema_version": "bootstrap-curriculum-discovery-spec-v1",
+        "split_manifest_id": split.manifest_id,
+        "ruleset_manifest_id": split.ruleset_manifest_id,
+        "objective_id": split.objective_id,
+        "capture_policy_id": ProgressBootstrapPolicy.policy_id,
+        "partition": partition,
+        "selection_policy": "tactical-exact-decision-smoke-v1",
+        "run_count": 1,
+        "decision_occurrences": {"combat": [0], "reward": [0], "shop": [0]},
+        "maximum_steps_per_run": 4,
+        "signal_spec": {
+            "minimum_states": 1,
+            "minimum_source_floors": 1,
+            "minimum_decision_types": 1,
+            "minimum_effective_labeled_states": 0.1,
+            "minimum_half_split_agreement": 0.0,
+            "minimum_occupied_maximum_floor_bins": 1,
+        },
+    }
+
+
+def test_curriculum_discovery_uses_exact_decision_coordinates_and_accounts_for_gaps() -> None:
+    captured = capture_curriculum_state(
+        backend=SearchBackendSpec.tactical_mock(),
+        run_seed=7,
+        decision_type=DecisionType.REWARD,
+        decision_index=0,
+        maximum_prefix_steps=4,
+    )
+    assert captured.observation.decision_type is DecisionType.REWARD
+
+    split = _tactical_split(captured.checkpoint.ruleset_manifest_id)
+    document = discover_curriculum_state_set(
+        _curriculum_spec(split),
+        backend=SearchBackendSpec.tactical_mock(),
+        split_manifest=split,
+    )
+    state_set = load_bootstrap_state_set_document(document)
+
+    assert isinstance(state_set, CurriculumStateSet)
+    assert {case.decision_type for case in state_set.cases} == {
+        DecisionType.COMBAT,
+        DecisionType.REWARD,
+    }
+    assert state_set.discovery["requested_coordinates"] == 3
+    assert state_set.discovery["captured_coordinates"] == 2
+    assert state_set.discovery["unreachable_coordinates"] == [
+        {
+            "run_seed": 7,
+            "decision_type": "shop",
+            "decision_index": 0,
+            "reason": "terminal_or_step_limit_before_coordinate",
+        }
+    ]
+
+
+def test_curriculum_dataset_emits_confidence_aware_targets_and_signal_gate(
+    tmp_path: Path,
+) -> None:
+    captured = capture_curriculum_state(
+        backend=SearchBackendSpec.tactical_mock(),
+        run_seed=7,
+        decision_type=DecisionType.COMBAT,
+        decision_index=0,
+        maximum_prefix_steps=4,
+    )
+    split = _tactical_split(captured.checkpoint.ruleset_manifest_id)
+    state_set = load_bootstrap_state_set_document(
+        discover_curriculum_state_set(
+            _curriculum_spec(split),
+            backend=SearchBackendSpec.tactical_mock(),
+            split_manifest=split,
+        )
+    )
+    assert isinstance(state_set, CurriculumStateSet)
+
+    result = run_bootstrap_teacher_dataset(
+        backend=SearchBackendSpec.tactical_mock(),
+        state_set=state_set,
+        split_manifest=split,
+        objective=load_objective(Path("configs/default.toml")),
+        config=BootstrapConfig(
+            samples_per_candidate=4,
+            maximum_prefix_steps=4,
+            maximum_rollout_steps=4,
+            workers=2,
+            worker_timeout_seconds=30.0,
+        ),
+        output_directory=tmp_path / "curriculum",
+    )
+
+    assert result.successful
+    assert result.report["schema_version"] == "bootstrap-teacher-dataset-v2"
+    assert result.report["claim_scope"] == "train_curriculum_only"
+    assert result.report["summary"]["decision_type_histogram"] == {
+        "combat": 1,
+        "reward": 1,
+    }
+    assert result.report["summary"]["unreachable_coordinates"] == 1
+    assert result.report["signal_assessment"]["terminal_head_promotion_pass"] in {
+        True,
+        False,
+    }
+    for reference in result.report["cases"]:
+        case = json.loads(
+            (result.report_path.parent / reference["path"]).read_text(encoding="utf-8")
+        )
+        target = case["record"]["target"]
+        assert target["policy_training_interface"] == "paired-preference-soft-target-v1"
+        assert sum(target["soft_policy_target"]) == pytest.approx(1.0)
+        assert len(target["paired_preference_matrix"]) == len(target["candidates"])
+        assert 0.0 <= target["policy_target_weight"] <= 1.0
+
+    verification = verify_bootstrap_teacher_dataset(
+        result.report_path,
+        split_manifest=split,
+    )
+    assert verification.valid
+    assert verification.verified_cases == 2
+    examples = load_curriculum_policy_examples(
+        result.report_path,
+        split_manifest=split,
+    )
+    assert len(examples) == 2
+    assert all(sum(example.policy_target) == pytest.approx(1.0) for example in examples)
+    assert all(0.0 <= example.policy_target_weight <= 1.0 for example in examples)
+    assert all(
+        len(example.paired_preference_matrix) == len(example.model_input.candidates)
+        for example in examples
+    )
+
+
+def test_curriculum_train_and_validation_discovery_are_complete_run_disjoint() -> None:
+    captured = capture_curriculum_state(
+        backend=SearchBackendSpec.tactical_mock(),
+        run_seed=7,
+        decision_type=DecisionType.COMBAT,
+        decision_index=0,
+        maximum_prefix_steps=4,
+    )
+    split = _partitioned_tactical_split(captured.checkpoint.ruleset_manifest_id)
+    train = load_bootstrap_state_set_document(
+        discover_curriculum_state_set(
+            _curriculum_spec(split, "train"),
+            backend=SearchBackendSpec.tactical_mock(),
+            split_manifest=split,
+        )
+    )
+    validation = load_bootstrap_state_set_document(
+        discover_curriculum_state_set(
+            _curriculum_spec(split, "validation"),
+            backend=SearchBackendSpec.tactical_mock(),
+            split_manifest=split,
+        )
+    )
+    assert isinstance(train, CurriculumStateSet)
+    assert isinstance(validation, CurriculumStateSet)
+    assert {case.run_seed for case in train.cases}.isdisjoint(
+        {case.run_seed for case in validation.cases}
+    )

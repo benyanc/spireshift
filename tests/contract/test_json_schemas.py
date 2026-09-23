@@ -168,6 +168,10 @@ def _registry() -> Registry[Any]:
             "bootstrap-teacher-verification-v1.json",
             "bootstrap/tactical-mock-v1/verification.json",
         ),
+        (
+            "bootstrap-curriculum-smoke-evidence-v1.json",
+            "../../docs/evidence/bootstrap-curriculum-v2-admitted-smoke.json",
+        ),
         ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
         ("experiment-resources-v1.json", "experiment-resources-v1.json"),
     ],
@@ -204,6 +208,21 @@ def test_mock_mechanics_audit_evidence_conforms_to_schema() -> None:
         _load(SCHEMA_DIR / "mechanics-audit-v1.json"), registry=_registry()
     )
     validator.validate(_load(Path("docs/evidence/mock-mechanics-audit-v1.json")))
+
+
+@pytest.mark.parametrize(
+    "configuration",
+    [
+        "configs/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json",
+        "configs/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json",
+    ],
+)
+def test_curriculum_discovery_configuration_conforms_to_schema(configuration: str) -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "bootstrap-curriculum-discovery-spec-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path(configuration)))
 
 
 def test_observation_rejects_unmarked_privileged_state() -> None:

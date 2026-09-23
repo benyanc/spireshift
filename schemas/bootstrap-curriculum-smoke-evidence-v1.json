@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-curriculum-smoke-evidence-v1.json",
+  "title": "SpireShift Bootstrap Curriculum Smoke Evidence v1",
+  "type": "object",
+  "required": ["schema_version", "purpose", "backend_kind", "ruleset_manifest_id", "split_manifest_id", "state_set_id", "dataset_id", "started_at", "completed_at", "configuration", "discovery", "summary", "signal_assessment", "verification"],
+  "properties": {
+    "schema_version": {"const": "bootstrap-curriculum-smoke-evidence-v1"},
+    "purpose": {"type": "string", "minLength": 1},
+    "backend_kind": {"const": "evangambit"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/contentId"},
+    "split_manifest_id": {"$ref": "#/$defs/contentId"},
+    "state_set_id": {"$ref": "#/$defs/contentId"},
+    "dataset_id": {"$ref": "#/$defs/contentId"},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "configuration": {"type": "object"},
+    "discovery": {"type": "object"},
+    "summary": {"type": "object"},
+    "signal_assessment": {"type": "object"},
+    "verification": {
+      "type": "object",
+      "required": ["schema_version", "valid", "dataset_id", "cases", "verified_cases", "replayed_cases", "errors"],
+      "properties": {
+        "schema_version": {"const": "bootstrap-teacher-verification-v1"},
+        "valid": {"const": true},
+        "dataset_id": {"$ref": "#/$defs/contentId"},
+        "cases": {"type": "integer", "minimum": 1},
+        "verified_cases": {"type": "integer", "minimum": 1},
+        "replayed_cases": {"type": "integer", "minimum": 0},
+        "errors": {"type": "array", "maxItems": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "contentId": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+  }
+}

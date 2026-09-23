@@ -1,0 +1,110 @@
+{
+  "backend_kind": "evangambit",
+  "completed_at": "2026-09-23T16:12:00.172575Z",
+  "configuration": {
+    "maximum_prefix_steps": 128,
+    "maximum_rollout_steps": 128,
+    "samples_per_candidate": 4,
+    "sampling_seed": 0,
+    "worker_timeout_seconds": 60.0,
+    "workers": 4
+  },
+  "dataset_id": "sha256:eb396aefa66f7e6bc5a4658d2cc06d6af888ee0bba23c3b1a070c68c317ca74d",
+  "discovery": {
+    "captured_coordinates": 4,
+    "decision_occurrences": {
+      "combat": [
+        0,
+        8
+      ],
+      "path": [
+        0
+      ],
+      "reward": [
+        0
+      ]
+    },
+    "maximum_steps_per_run": 128,
+    "requested_coordinates": 4,
+    "requested_runs": 1,
+    "schema_version": "bootstrap-curriculum-discovery-v1",
+    "step_limited_runs": 0,
+    "terminal_runs": 1,
+    "unreachable_coordinates": []
+  },
+  "purpose": "bounded admitted-backend contract smoke; not model-quality evidence",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "schema_version": "bootstrap-curriculum-smoke-evidence-v1",
+  "signal_assessment": {
+    "auxiliary_policy_signal_pass": true,
+    "checks": {
+      "completion": true,
+      "decision_types": true,
+      "effective_labeled_states": true,
+      "half_split_agreement": true,
+      "maximum_floor_bins": true,
+      "source_floors": true,
+      "states": true
+    },
+    "schema_version": "bootstrap-curriculum-signal-assessment-v1",
+    "spec": {
+      "minimum_decision_types": 1,
+      "minimum_effective_labeled_states": 0.1,
+      "minimum_half_split_agreement": 0.0,
+      "minimum_occupied_maximum_floor_bins": 1,
+      "minimum_source_floors": 1,
+      "minimum_states": 1
+    },
+    "terminal_head_checks": {
+      "non_victories_present": true,
+      "victories_present": false
+    },
+    "terminal_head_promotion_pass": false
+  },
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "started_at": "2026-09-23T16:11:55.771495Z",
+  "state_set_id": "sha256:3786beb5fe6400b6cb0002ae999bfeb41ff5b338f6601ec651d8fedcfab5b7e1",
+  "summary": {
+    "benchmark_denominator": 4,
+    "candidates": 17,
+    "completed_cases": 4,
+    "completion_rate": 1.0,
+    "decision_type_histogram": {
+      "combat": 2,
+      "path": 1,
+      "reward": 1
+    },
+    "effective_labeled_states": 0.125,
+    "failed_cases": 0,
+    "half_split_evaluable_states": 4,
+    "half_split_winner_agreement_rate": 0.5,
+    "hard_target_eligible_states": 0,
+    "mean_paired_preference_margin": 0.0625,
+    "occupied_maximum_floor_bins": 5,
+    "reachable_coordinates": 4,
+    "records": 4,
+    "simulations": 68,
+    "source_floor_histogram": {
+      "1": 2,
+      "2": 2
+    },
+    "states_with_candidate_progress_variation": 4,
+    "terminal_outcome_classes": {
+      "non_victory": 68,
+      "victory": 0
+    },
+    "terminal_victories": 0,
+    "transitions": 2795,
+    "unique_states": 4,
+    "unreachable_coordinates": 0
+  },
+  "verification": {
+    "cases": 4,
+    "dataset_id": "sha256:eb396aefa66f7e6bc5a4658d2cc06d6af888ee0bba23c3b1a070c68c317ca74d",
+    "errors": [],
+    "replayed_cases": 0,
+    "schema_version": "bootstrap-teacher-verification-v1",
+    "valid": true,
+    "verified_cases": 4
+  }
+}

@@ -30,6 +30,7 @@ from spireshift.backend_admission import (
 )
 from spireshift.bootstrap_teacher import (
     BootstrapConfig,
+    discover_curriculum_state_set,
     freeze_bootstrap_state_set,
     load_bootstrap_state_set,
     run_bootstrap_teacher_dataset,
@@ -536,6 +537,18 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_freeze.add_argument("specification", type=Path)
     bootstrap_freeze.add_argument("output", type=Path)
     bootstrap_freeze.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_discover = bootstrap_commands.add_parser(
+        "discover-states",
+        help="Discover a frozen train or validation curriculum from exact decision coordinates",
+    )
+    bootstrap_discover.add_argument("specification", type=Path)
+    bootstrap_discover.add_argument("output", type=Path)
+    bootstrap_discover.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_discover.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_discover.add_argument("--upstream-root", type=Path)
+    bootstrap_discover.add_argument("--manifest", type=Path)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
     )
@@ -1353,6 +1366,28 @@ def main(argv: Sequence[str] | None = None) -> int:
                 specification = json.loads(args.specification.read_text(encoding="utf-8"))
                 document = freeze_bootstrap_state_set(
                     specification,
+                    split_manifest=split_manifest,
+                )
+                write_bootstrap_state_set(document, args.output)
+                _emit_json(document, None)
+                return 0
+            if args.bootstrap_command == "discover-states":
+                if args.backend == "evangambit":
+                    if args.upstream_root is None or args.manifest is None:
+                        raise ValueError(
+                            "EvanGambit discovery requires --upstream-root and --manifest"
+                        )
+                    discovery_backend = SearchBackendSpec.evangambit(
+                        args.upstream_root, args.manifest
+                    )
+                elif args.backend == "tactical_mock":
+                    discovery_backend = SearchBackendSpec.tactical_mock()
+                else:
+                    discovery_backend = SearchBackendSpec.mock()
+                specification = json.loads(args.specification.read_text(encoding="utf-8"))
+                document = discover_curriculum_state_set(
+                    specification,
+                    backend=discovery_backend,
                     split_manifest=split_manifest,
                 )
                 write_bootstrap_state_set(document, args.output)

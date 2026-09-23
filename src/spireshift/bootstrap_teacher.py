@@ -20,7 +20,7 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.core.types import DecisionType, LegalAction, Observation
 from spireshift.mechanics import PublicMechanicsService
-from spireshift.representations import model_input_from_mapping
+from spireshift.representations import CompositionalModelInput, model_input_from_mapping
 from spireshift.rollouts import sha256_file, write_exclusive_json
 from spireshift.search_workers import (
     PublicStateCheckpoint,
@@ -32,12 +32,15 @@ from spireshift.search_workers import (
 from spireshift.splits import SplitManifest, SplitName
 
 BOOTSTRAP_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v1"
+CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v2"
 BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v1"
 BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v1"
 BOOTSTRAP_BATCH_SCHEMA_VERSION = "bootstrap-worker-batch-v1"
 BOOTSTRAP_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v1"
+CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v2"
 BOOTSTRAP_VERIFICATION_SCHEMA_VERSION = "bootstrap-teacher-verification-v1"
 BOOTSTRAP_TEACHER_ID = "paired-terminal-dominant-progress-teacher-v1"
+CURRICULUM_TEACHER_ID = "paired-preference-curriculum-teacher-v2"
 BOOTSTRAP_UTILITY_ID = "terminal-dominant-floor-act-hp-v1"
 BOOTSTRAP_SEED_PROTOCOL_ID = "sha256-paired-bootstrap-v1"
 MILESTONE_FLOORS = (1, 8, 16, 24, 32, 40, 48, 56, 64)
@@ -96,6 +99,113 @@ class BootstrapStateSet:
             "selection_policy": self.selection_policy,
             "cases": [case.as_dict() for case in self.cases],
         }
+
+
+@dataclass(frozen=True, slots=True)
+class CurriculumStateCase:
+    state_id: str
+    run_seed: int
+    decision_type: DecisionType
+    decision_index: int
+    expected_state_hash: str
+    expected_legal_actions: int
+    expected_source_floor: int | None
+    expected_source_act: int | str | None
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "state_id": self.state_id,
+            "run_seed": self.run_seed,
+            "decision_type": self.decision_type.value,
+            "decision_index": self.decision_index,
+            "expected_state_hash": self.expected_state_hash,
+            "expected_legal_actions": self.expected_legal_actions,
+            "expected_source_floor": self.expected_source_floor,
+            "expected_source_act": self.expected_source_act,
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class CurriculumSignalSpec:
+    minimum_states: int
+    minimum_source_floors: int
+    minimum_decision_types: int
+    minimum_effective_labeled_states: float
+    minimum_half_split_agreement: float
+    minimum_occupied_maximum_floor_bins: int
+
+    def __post_init__(self) -> None:
+        integer_values = (
+            self.minimum_states,
+            self.minimum_source_floors,
+            self.minimum_decision_types,
+            self.minimum_occupied_maximum_floor_bins,
+        )
+        if any(isinstance(value, bool) or value <= 0 for value in integer_values):
+            raise ValueError("Curriculum signal integer thresholds must be positive")
+        if (
+            not math.isfinite(self.minimum_effective_labeled_states)
+            or self.minimum_effective_labeled_states <= 0.0
+        ):
+            raise ValueError("minimum_effective_labeled_states must be finite and positive")
+        if not 0.0 <= self.minimum_half_split_agreement <= 1.0:
+            raise ValueError("minimum_half_split_agreement must be between zero and one")
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "minimum_states": self.minimum_states,
+            "minimum_source_floors": self.minimum_source_floors,
+            "minimum_decision_types": self.minimum_decision_types,
+            "minimum_effective_labeled_states": self.minimum_effective_labeled_states,
+            "minimum_half_split_agreement": self.minimum_half_split_agreement,
+            "minimum_occupied_maximum_floor_bins": (self.minimum_occupied_maximum_floor_bins),
+        }
+
+
+@dataclass(frozen=True, slots=True)
+class CurriculumStateSet:
+    state_set_id: str
+    split_manifest_id: str
+    ruleset_manifest_id: str
+    objective_id: str
+    capture_policy_id: str
+    partition: str
+    selection_policy: str
+    discovery: dict[str, Any]
+    signal_spec: CurriculumSignalSpec
+    cases: tuple[CurriculumStateCase, ...]
+
+    def __post_init__(self) -> None:
+        if self.partition not in {SplitName.TRAIN.value, SplitName.VALIDATION.value}:
+            raise ValueError("Curriculum state sets must use train or validation")
+        if self.capture_policy_id != ProgressBootstrapPolicy.policy_id:
+            raise ValueError("Curriculum state set uses an unsupported capture policy")
+        if not self.cases:
+            raise ValueError("Curriculum state set must contain at least one reachable case")
+        ids = [case.state_id for case in self.cases]
+        coordinates = [
+            (case.run_seed, case.decision_type, case.decision_index) for case in self.cases
+        ]
+        if len(ids) != len(set(ids)) or len(coordinates) != len(set(coordinates)):
+            raise ValueError("Curriculum cases must have unique IDs and coordinates")
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "schema_version": CURRICULUM_STATE_SET_SCHEMA_VERSION,
+            "state_set_id": self.state_set_id,
+            "split_manifest_id": self.split_manifest_id,
+            "ruleset_manifest_id": self.ruleset_manifest_id,
+            "objective_id": self.objective_id,
+            "capture_policy_id": self.capture_policy_id,
+            "partition": self.partition,
+            "selection_policy": self.selection_policy,
+            "discovery": self.discovery,
+            "signal_spec": self.signal_spec.as_dict(),
+            "cases": [case.as_dict() for case in self.cases],
+        }
+
+
+BootstrapStateSetLike = BootstrapStateSet | CurriculumStateSet
 
 
 @dataclass(frozen=True, slots=True)
@@ -260,6 +370,16 @@ class BootstrapVerification:
 
 
 @dataclass(frozen=True, slots=True)
+class CurriculumPolicyExample:
+    state_id: str
+    model_input: CompositionalModelInput
+    policy_target: tuple[float, ...]
+    policy_target_weight: float
+    paired_preference_matrix: tuple[tuple[float, ...], ...]
+    hard_target_eligible: bool
+
+
+@dataclass(frozen=True, slots=True)
 class _CapturedBootstrapState:
     checkpoint: PublicStateCheckpoint
     observation: Observation
@@ -304,12 +424,14 @@ def freeze_bootstrap_state_set(
     return frozen
 
 
-def load_bootstrap_state_set(path: Path) -> BootstrapStateSet:
+def load_bootstrap_state_set(path: Path) -> BootstrapStateSetLike:
     return load_bootstrap_state_set_document(_load_object(path))
 
 
-def load_bootstrap_state_set_document(value: object) -> BootstrapStateSet:
+def load_bootstrap_state_set_document(value: object) -> BootstrapStateSetLike:
     document = _mapping(value, "bootstrap state set")
+    if document.get("schema_version") == CURRICULUM_STATE_SET_SCHEMA_VERSION:
+        return _load_curriculum_state_set_document(document)
     _exact_keys(
         document,
         {
@@ -347,6 +469,164 @@ def load_bootstrap_state_set_document(value: object) -> BootstrapStateSet:
 
 def write_bootstrap_state_set(document: object, path: Path) -> None:
     write_exclusive_json(path, load_bootstrap_state_set_document(document).as_dict())
+
+
+def discover_curriculum_state_set(
+    specification: object,
+    *,
+    backend: SearchBackendSpec,
+    split_manifest: SplitManifest,
+) -> dict[str, Any]:
+    document = _mapping(specification, "curriculum discovery specification")
+    _exact_keys(
+        document,
+        {
+            "schema_version",
+            "split_manifest_id",
+            "ruleset_manifest_id",
+            "objective_id",
+            "capture_policy_id",
+            "partition",
+            "selection_policy",
+            "run_count",
+            "decision_occurrences",
+            "maximum_steps_per_run",
+            "signal_spec",
+        },
+        "curriculum discovery specification",
+    )
+    if document.get("schema_version") != "bootstrap-curriculum-discovery-spec-v1":
+        raise ValueError("Unsupported curriculum discovery specification")
+    partition = SplitName(_string(document.get("partition"), "partition"))
+    if partition is SplitName.TEST:
+        raise ValueError("Curriculum discovery may not inspect the sealed test partition")
+    if document.get("split_manifest_id") != split_manifest.manifest_id:
+        raise ValueError("Curriculum discovery references a different split manifest")
+    if document.get("ruleset_manifest_id") != split_manifest.ruleset_manifest_id:
+        raise ValueError("Curriculum discovery ruleset differs from split manifest")
+    if document.get("objective_id") != split_manifest.objective_id:
+        raise ValueError("Curriculum discovery objective differs from split manifest")
+    if document.get("capture_policy_id") != ProgressBootstrapPolicy.policy_id:
+        raise ValueError("Curriculum discovery uses an unsupported capture policy")
+    run_count = _integer(document.get("run_count"), "run_count")
+    maximum_steps = _integer(document.get("maximum_steps_per_run"), "maximum_steps_per_run")
+    if run_count <= 0 or maximum_steps <= 0:
+        raise ValueError("Curriculum discovery limits must be positive")
+    partition_seeds = split_manifest.seeds(partition)
+    if run_count > len(partition_seeds):
+        raise ValueError("Curriculum discovery run_count exceeds the partition")
+    raw_occurrences = _mapping(document.get("decision_occurrences"), "decision_occurrences")
+    if not raw_occurrences:
+        raise ValueError("Curriculum discovery requires decision occurrences")
+    decision_occurrences: dict[DecisionType, tuple[int, ...]] = {}
+    for raw_type, raw_indices in raw_occurrences.items():
+        decision_type = DecisionType(raw_type)
+        if decision_type in {DecisionType.MENU, DecisionType.TERMINAL, DecisionType.UNKNOWN}:
+            raise ValueError(f"Unsupported curriculum decision type: {decision_type.value}")
+        indices = tuple(
+            _integer(value, f"decision_occurrences.{raw_type}")
+            for value in _list(raw_indices, f"decision_occurrences.{raw_type}")
+        )
+        if not indices or any(index < 0 for index in indices) or len(indices) != len(set(indices)):
+            raise ValueError("Decision occurrences must be unique non-negative indices")
+        decision_occurrences[decision_type] = indices
+    signal_spec = _curriculum_signal_spec(document.get("signal_spec"))
+    cases: list[dict[str, object]] = []
+    unreachable: list[dict[str, object]] = []
+    terminal_runs = 0
+    truncated_runs = 0
+    for run_seed in partition_seeds[:run_count]:
+        environment = load_search_environment(backend)
+        try:
+            observation = environment.reset(run_seed)
+            policy = ProgressBootstrapPolicy()
+            prefix: list[str] = []
+            seen = {decision_type: 0 for decision_type in decision_occurrences}
+            found: set[tuple[DecisionType, int]] = set()
+            for _ in range(maximum_steps + 1):
+                decision_type = observation.decision_type
+                if decision_type in decision_occurrences:
+                    occurrence = seen[decision_type]
+                    if occurrence in decision_occurrences[decision_type]:
+                        actions = tuple(environment.legal_actions())
+                        if actions:
+                            checkpoint = capture_checkpoint(
+                                run_seed=run_seed,
+                                action_prefix=prefix,
+                                environment=environment,
+                                observation=observation,
+                            )
+                            cases.append(
+                                CurriculumStateCase(
+                                    state_id=(
+                                        f"{partition.value}-seed-{run_seed:06d}-"
+                                        f"{decision_type.value}-{occurrence:03d}"
+                                    ),
+                                    run_seed=run_seed,
+                                    decision_type=decision_type,
+                                    decision_index=occurrence,
+                                    expected_state_hash=checkpoint.state_hash,
+                                    expected_legal_actions=len(actions),
+                                    expected_source_floor=_public_integer(
+                                        observation, ("floor",), ("run", "floor")
+                                    ),
+                                    expected_source_act=_public_act(observation),
+                                ).as_dict()
+                            )
+                            found.add((decision_type, occurrence))
+                    seen[decision_type] += 1
+                if bool(observation.public_state.get("terminal")):
+                    terminal_runs += 1
+                    break
+                action = policy.choose_action(observation, tuple(environment.legal_actions()))
+                prefix.append(action.action_id)
+                observation = environment.step(action).next_observation
+            else:
+                truncated_runs += 1
+            for decision_type, indices in decision_occurrences.items():
+                for occurrence in indices:
+                    if (decision_type, occurrence) not in found:
+                        unreachable.append(
+                            {
+                                "run_seed": run_seed,
+                                "decision_type": decision_type.value,
+                                "decision_index": occurrence,
+                                "reason": "terminal_or_step_limit_before_coordinate",
+                            }
+                        )
+        finally:
+            _close_environment(environment)
+    requested = run_count * sum(len(indices) for indices in decision_occurrences.values())
+    discovery = {
+        "schema_version": "bootstrap-curriculum-discovery-v1",
+        "requested_runs": run_count,
+        "maximum_steps_per_run": maximum_steps,
+        "decision_occurrences": {
+            decision_type.value: list(indices)
+            for decision_type, indices in decision_occurrences.items()
+        },
+        "requested_coordinates": requested,
+        "captured_coordinates": len(cases),
+        "unreachable_coordinates": unreachable,
+        "terminal_runs": terminal_runs,
+        "step_limited_runs": truncated_runs,
+    }
+    body: dict[str, Any] = {
+        "schema_version": CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        "split_manifest_id": split_manifest.manifest_id,
+        "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
+        "objective_id": split_manifest.objective_id,
+        "capture_policy_id": ProgressBootstrapPolicy.policy_id,
+        "partition": partition.value,
+        "selection_policy": _string(document.get("selection_policy"), "selection_policy"),
+        "discovery": discovery,
+        "signal_spec": signal_spec.as_dict(),
+        "cases": cases,
+    }
+    frozen = {**body, "state_set_id": manifest_identifier(body)}
+    state_set = load_bootstrap_state_set_document(frozen)
+    _validate_bootstrap_split(state_set, split_manifest)
+    return frozen
 
 
 def capture_bootstrap_combat_state(
@@ -388,6 +668,54 @@ def capture_bootstrap_combat_state(
         _close_environment(environment)
     raise RuntimeError(
         f"Run seed {run_seed} did not reach combat state {combat_state_index} "
+        f"within {maximum_prefix_steps} decisions"
+    )
+
+
+def capture_curriculum_state(
+    *,
+    backend: SearchBackendSpec,
+    run_seed: int,
+    decision_type: DecisionType,
+    decision_index: int,
+    maximum_prefix_steps: int,
+) -> _CapturedBootstrapState:
+    if decision_type in {DecisionType.MENU, DecisionType.TERMINAL, DecisionType.UNKNOWN}:
+        raise ValueError(f"Unsupported curriculum decision type: {decision_type.value}")
+    if decision_index < 0:
+        raise ValueError("Curriculum decision index must be non-negative")
+    environment = load_search_environment(backend)
+    try:
+        observation = environment.reset(run_seed)
+        policy = ProgressBootstrapPolicy()
+        prefix: list[str] = []
+        seen = 0
+        for _ in range(maximum_prefix_steps + 1):
+            if observation.decision_type is decision_type:
+                if seen == decision_index:
+                    actions = tuple(environment.legal_actions())
+                    if not actions:
+                        raise RuntimeError("Captured curriculum state has no legal actions")
+                    return _CapturedBootstrapState(
+                        capture_checkpoint(
+                            run_seed=run_seed,
+                            action_prefix=prefix,
+                            environment=environment,
+                            observation=observation,
+                        ),
+                        observation,
+                        actions,
+                    )
+                seen += 1
+            if bool(observation.public_state.get("terminal")):
+                break
+            action = policy.choose_action(observation, tuple(environment.legal_actions()))
+            prefix.append(action.action_id)
+            observation = environment.step(action).next_observation
+    finally:
+        _close_environment(environment)
+    raise RuntimeError(
+        f"Run seed {run_seed} did not reach {decision_type.value} decision {decision_index} "
         f"within {maximum_prefix_steps} decisions"
     )
 
@@ -630,7 +958,7 @@ def run_bootstrap_worker_batch(
 def run_bootstrap_teacher_dataset(
     *,
     backend: SearchBackendSpec,
-    state_set: BootstrapStateSet,
+    state_set: BootstrapStateSetLike,
     split_manifest: SplitManifest,
     objective: ObjectiveSpec,
     config: BootstrapConfig,
@@ -639,6 +967,8 @@ def run_bootstrap_teacher_dataset(
     resume: bool = False,
 ) -> BootstrapDatasetResult:
     _validate_bootstrap_split(state_set, split_manifest)
+    if isinstance(state_set, CurriculumStateSet):
+        _validate_curriculum_discovery_readiness(state_set)
     if objective.objective_id != state_set.objective_id:
         raise ValueError("Bootstrap objective differs from frozen state set")
     output_directory = output_directory.expanduser().resolve()
@@ -661,12 +991,21 @@ def run_bootstrap_teacher_dataset(
             _preserve_failed_case(completed_case_path)
         case_root.mkdir(parents=True, exist_ok=True)
         try:
-            captured = capture_bootstrap_combat_state(
-                backend=backend,
-                run_seed=case.run_seed,
-                combat_state_index=case.combat_state_index,
-                maximum_prefix_steps=config.maximum_prefix_steps,
-            )
+            if isinstance(case, CurriculumStateCase):
+                captured = capture_curriculum_state(
+                    backend=backend,
+                    run_seed=case.run_seed,
+                    decision_type=case.decision_type,
+                    decision_index=case.decision_index,
+                    maximum_prefix_steps=config.maximum_prefix_steps,
+                )
+            else:
+                captured = capture_bootstrap_combat_state(
+                    backend=backend,
+                    run_seed=case.run_seed,
+                    combat_state_index=case.combat_state_index,
+                    maximum_prefix_steps=config.maximum_prefix_steps,
+                )
             if captured.checkpoint.state_hash != case.expected_state_hash:
                 raise RuntimeError("Captured state hash differs from frozen bootstrap state")
             if len(captured.legal_actions) != case.expected_legal_actions:
@@ -689,16 +1028,33 @@ def run_bootstrap_teacher_dataset(
                 captured.legal_actions,
                 _list(batch_report.get("tasks"), "bootstrap task evidence"),
                 config.samples_per_candidate,
+                curriculum=isinstance(state_set, CurriculumStateSet),
             )
             record_body: dict[str, Any] = {
-                "schema_version": "bootstrap-teacher-record-v1",
+                "schema_version": (
+                    "bootstrap-teacher-record-v2"
+                    if isinstance(state_set, CurriculumStateSet)
+                    else "bootstrap-teacher-record-v1"
+                ),
                 "state_id": case.state_id,
                 "run_seed": case.run_seed,
-                "combat_state_index": case.combat_state_index,
                 "source_state_hash": captured.checkpoint.state_hash,
                 "model_input": model_input.as_dict(),
                 "target": target,
             }
+            if isinstance(case, CurriculumStateCase):
+                record_body.update(
+                    {
+                        "decision_type": case.decision_type.value,
+                        "decision_index": case.decision_index,
+                        "source_floor": _public_integer(
+                            captured.observation, ("floor",), ("run", "floor")
+                        ),
+                        "source_act": _public_act(captured.observation),
+                    }
+                )
+            else:
+                record_body["combat_state_index"] = case.combat_state_index
             record = {**record_body, "record_id": manifest_identifier(record_body)}
             case_body: dict[str, Any] = {
                 "state_id": case.state_id,
@@ -722,10 +1078,27 @@ def run_bootstrap_teacher_dataset(
         case_document = {**case_body, "case_id": manifest_identifier(case_body)}
         write_exclusive_json(completed_case_path, case_document)
         case_documents.append(case_document)
-    summary = _dataset_summary(case_documents)
+    summary = (
+        _curriculum_dataset_summary(case_documents, state_set)
+        if isinstance(state_set, CurriculumStateSet)
+        else _dataset_summary(case_documents)
+    )
+    signal_assessment = (
+        _assess_curriculum_signal(summary, state_set.signal_spec)
+        if isinstance(state_set, CurriculumStateSet)
+        else None
+    )
     body: dict[str, Any] = {
-        "schema_version": BOOTSTRAP_DATASET_SCHEMA_VERSION,
-        "teacher_id": BOOTSTRAP_TEACHER_ID,
+        "schema_version": (
+            CURRICULUM_DATASET_SCHEMA_VERSION
+            if isinstance(state_set, CurriculumStateSet)
+            else BOOTSTRAP_DATASET_SCHEMA_VERSION
+        ),
+        "teacher_id": (
+            CURRICULUM_TEACHER_ID
+            if isinstance(state_set, CurriculumStateSet)
+            else BOOTSTRAP_TEACHER_ID
+        ),
         "utility_id": BOOTSTRAP_UTILITY_ID,
         "seed_protocol_id": BOOTSTRAP_SEED_PROTOCOL_ID,
         "objective_id": state_set.objective_id,
@@ -750,8 +1123,10 @@ def run_bootstrap_teacher_dataset(
             for case in case_documents
         ],
         "summary": summary,
-        "claim_scope": "train_curriculum_only",
+        "claim_scope": f"{state_set.partition}_curriculum_only",
     }
+    if signal_assessment is not None:
+        body["signal_assessment"] = signal_assessment
     report = {**body, "dataset_id": manifest_identifier(body)}
     write_exclusive_json(report_path, report)
     return BootstrapDatasetResult(summary["failed_cases"] == 0, report_path, report)
@@ -775,9 +1150,18 @@ def verify_bootstrap_teacher_dataset(
         body = {key: value for key, value in report.items() if key != "dataset_id"}
         if dataset_id != manifest_identifier(body):
             errors.append("bootstrap dataset identity mismatch")
-        if report.get("schema_version") != BOOTSTRAP_DATASET_SCHEMA_VERSION:
+        dataset_schema = report.get("schema_version")
+        if dataset_schema not in {
+            BOOTSTRAP_DATASET_SCHEMA_VERSION,
+            CURRICULUM_DATASET_SCHEMA_VERSION,
+        }:
             errors.append("unsupported bootstrap dataset schema")
-        if report.get("teacher_id") != BOOTSTRAP_TEACHER_ID:
+        expected_teacher_id = (
+            CURRICULUM_TEACHER_ID
+            if dataset_schema == CURRICULUM_DATASET_SCHEMA_VERSION
+            else BOOTSTRAP_TEACHER_ID
+        )
+        if report.get("teacher_id") != expected_teacher_id:
             errors.append("bootstrap teacher identity mismatch")
         if report.get("utility_id") != BOOTSTRAP_UTILITY_ID:
             errors.append("bootstrap utility identity mismatch")
@@ -793,16 +1177,21 @@ def verify_bootstrap_teacher_dataset(
             errors.append("bootstrap objective differs from split manifest")
         if report.get("auxiliary_reward_allowed") is not False:
             errors.append("bootstrap dataset permits auxiliary environment reward")
-        if report.get("claim_scope") != "train_curriculum_only":
-            errors.append("bootstrap dataset claim scope is not train-only curriculum")
         state_set = load_bootstrap_state_set_document(report.get("state_set"))
         _validate_bootstrap_split(state_set, split_manifest)
+        if report.get("claim_scope") != f"{state_set.partition}_curriculum_only":
+            errors.append("bootstrap dataset claim scope differs from state-set partition")
+        if isinstance(state_set, CurriculumStateSet) != (
+            dataset_schema == CURRICULUM_DATASET_SCHEMA_VERSION
+        ):
+            errors.append("bootstrap dataset and state-set schema generations differ")
         raw_cases = _list(report.get("cases"), "dataset cases")
-        if len(raw_cases) != len(state_set.cases):
+        expected_cases = cast(Sequence[BootstrapStateCase | CurriculumStateCase], state_set.cases)
+        if len(raw_cases) != len(expected_cases):
             errors.append("bootstrap dataset case count differs from frozen state set")
         root = report_path.parent.resolve()
         regenerated: list[dict[str, Any]] = []
-        for index, expected in enumerate(state_set.cases):
+        for index, expected in enumerate(expected_cases):
             if index >= len(raw_cases):
                 break
             reference = _mapping(raw_cases[index], f"cases[{index}]")
@@ -847,7 +1236,16 @@ def verify_bootstrap_teacher_dataset(
                 errors.append(f"case {expected.state_id}: record state ID mismatch")
             if record.get("run_seed") != expected.run_seed:
                 errors.append(f"case {expected.state_id}: record run seed mismatch")
-            if record.get("combat_state_index") != expected.combat_state_index:
+            if isinstance(expected, CurriculumStateCase):
+                if record.get("decision_type") != expected.decision_type.value:
+                    errors.append(f"case {expected.state_id}: record decision type mismatch")
+                if record.get("decision_index") != expected.decision_index:
+                    errors.append(f"case {expected.state_id}: record decision index mismatch")
+                if record.get("source_floor") != expected.expected_source_floor:
+                    errors.append(f"case {expected.state_id}: record source floor mismatch")
+                if record.get("source_act") != expected.expected_source_act:
+                    errors.append(f"case {expected.state_id}: record source act mismatch")
+            elif record.get("combat_state_index") != expected.combat_state_index:
                 errors.append(f"case {expected.state_id}: record combat index mismatch")
             if record.get("source_state_hash") != expected.expected_state_hash:
                 errors.append(f"case {expected.state_id}: record source hash mismatch")
@@ -869,6 +1267,7 @@ def verify_bootstrap_teacher_dataset(
                 reconstructed_actions,
                 batch_tasks,
                 samples,
+                curriculum=isinstance(state_set, CurriculumStateSet),
             )
             if record.get("target") != reconstructed_target:
                 errors.append(f"case {expected.state_id}: target differs from worker evidence")
@@ -887,8 +1286,19 @@ def verify_bootstrap_teacher_dataset(
             )
             if not batch_errors:
                 verified_cases += 1
-        if _dataset_summary(regenerated) != report.get("summary"):
+        regenerated_summary = (
+            _curriculum_dataset_summary(regenerated, state_set)
+            if isinstance(state_set, CurriculumStateSet)
+            else _dataset_summary(regenerated)
+        )
+        if regenerated_summary != report.get("summary"):
             errors.append("bootstrap dataset summary differs from case evidence")
+        if isinstance(state_set, CurriculumStateSet):
+            expected_assessment = _assess_curriculum_signal(
+                regenerated_summary, state_set.signal_spec
+            )
+            if report.get("signal_assessment") != expected_assessment:
+                errors.append("curriculum signal assessment differs from case evidence")
     except (OSError, TypeError, ValueError, RuntimeError, json.JSONDecodeError) as error:
         errors.append(str(error))
     return BootstrapVerification(
@@ -899,6 +1309,72 @@ def verify_bootstrap_teacher_dataset(
         replayed_cases,
         tuple(errors),
     )
+
+
+def load_curriculum_policy_examples(
+    report_path: Path,
+    *,
+    split_manifest: SplitManifest,
+) -> tuple[CurriculumPolicyExample, ...]:
+    verification = verify_bootstrap_teacher_dataset(
+        report_path,
+        split_manifest=split_manifest,
+    )
+    if not verification.valid:
+        raise ValueError(
+            "Curriculum dataset failed verification: " + "; ".join(verification.errors)
+        )
+    report = _load_object(report_path)
+    if report.get("schema_version") != CURRICULUM_DATASET_SCHEMA_VERSION:
+        raise ValueError("Policy examples require a curriculum-v2 dataset")
+    root = report_path.parent.resolve()
+    examples: list[CurriculumPolicyExample] = []
+    for raw_reference in _list(report.get("cases"), "dataset cases"):
+        reference = _mapping(raw_reference, "dataset case")
+        case_path = _safe_child(root, _string(reference.get("path"), "case path"))
+        case = _load_object(case_path)
+        if case.get("status") != "completed":
+            continue
+        record = _mapping(case.get("record"), "case record")
+        model_input = model_input_from_mapping(record.get("model_input"))
+        target = _mapping(record.get("target"), "curriculum target")
+        policy_target = tuple(
+            _probability(value, "soft policy probability")
+            for value in _list(target.get("soft_policy_target"), "soft policy target")
+        )
+        if len(policy_target) != len(model_input.candidates):
+            raise ValueError("Curriculum policy target differs from candidate count")
+        if not math.isclose(sum(policy_target), 1.0, rel_tol=1e-12, abs_tol=1e-12):
+            raise ValueError("Curriculum soft policy target does not sum to one")
+        raw_matrix = _list(target.get("paired_preference_matrix"), "preference matrix")
+        matrix = tuple(
+            tuple(
+                _probability(value, "paired preference")
+                for value in _list(raw_row, "preference row")
+            )
+            for raw_row in raw_matrix
+        )
+        if len(matrix) != len(policy_target) or any(
+            len(row) != len(policy_target) for row in matrix
+        ):
+            raise ValueError("Curriculum paired preference matrix is not square")
+        examples.append(
+            CurriculumPolicyExample(
+                state_id=_string(record.get("state_id"), "state ID"),
+                model_input=model_input,
+                policy_target=policy_target,
+                policy_target_weight=_probability(
+                    target.get("policy_target_weight"), "policy target weight"
+                ),
+                paired_preference_matrix=matrix,
+                hard_target_eligible=_boolean(
+                    target.get("hard_target_eligible"), "hard target eligibility"
+                ),
+            )
+        )
+    if not examples:
+        raise ValueError("Curriculum dataset contains no completed policy examples")
+    return tuple(examples)
 
 
 def write_bootstrap_worker_result(
@@ -1120,6 +1596,8 @@ def _build_bootstrap_target(
     actions: Sequence[LegalAction],
     raw_evidence: Sequence[Any],
     samples_per_candidate: int,
+    *,
+    curriculum: bool = False,
 ) -> dict[str, Any]:
     by_action: dict[str, list[dict[str, object]]] = {action.action_id: [] for action in actions}
     for raw_item in raw_evidence:
@@ -1164,37 +1642,38 @@ def _build_bootstrap_target(
         final_potions = _known_integers(outcomes, "final_potion_count")
         final_relics = _known_integers(outcomes, "final_relic_count")
         histogram = {str(floor): floors.count(floor) for floor in sorted(set(floors))}
-        candidates.append(
-            {
-                "candidate_index": index,
-                "source_action_id": action.action_id,
-                "action_kind": action.kind,
-                "sample_count": len(outcomes),
-                "terminal_value": victories / len(outcomes),
-                "mean_progress_utility": sum(utilities) / len(utilities),
-                "progress_utility_variance": _variance(utilities),
-                "mean_maximum_floor": sum(floors) / len(floors),
-                "maximum_floor_histogram": histogram,
-                "milestone_reach_probability": {
-                    str(milestone): sum(floor >= milestone for floor in floors) / len(floors)
-                    for milestone in MILESTONE_FLOORS
-                },
-                "act_completion_rate": (
-                    sum(value is True for value in act_known) / len(act_known)
-                    if act_known
-                    else None
-                ),
-                "mean_final_hp": sum(final_hps) / len(final_hps) if final_hps else None,
-                "mean_final_gold": (sum(final_gold) / len(final_gold) if final_gold else None),
-                "mean_final_potion_count": (
-                    sum(final_potions) / len(final_potions) if final_potions else None
-                ),
-                "mean_final_relic_count": (
-                    sum(final_relics) / len(final_relics) if final_relics else None
-                ),
-                "outcomes": outcomes,
-            }
-        )
+        candidate: dict[str, Any] = {
+            "candidate_index": index,
+            "source_action_id": action.action_id,
+            "action_kind": action.kind,
+            "sample_count": len(outcomes),
+            "terminal_value": victories / len(outcomes),
+            "mean_progress_utility": sum(utilities) / len(utilities),
+            "progress_utility_variance": _variance(utilities),
+            "mean_maximum_floor": sum(floors) / len(floors),
+            "maximum_floor_histogram": histogram,
+            "milestone_reach_probability": {
+                str(milestone): sum(floor >= milestone for floor in floors) / len(floors)
+                for milestone in MILESTONE_FLOORS
+            },
+            "act_completion_rate": (
+                sum(value is True for value in act_known) / len(act_known) if act_known else None
+            ),
+            "mean_final_hp": sum(final_hps) / len(final_hps) if final_hps else None,
+            "mean_final_gold": (sum(final_gold) / len(final_gold) if final_gold else None),
+            "mean_final_potion_count": (
+                sum(final_potions) / len(final_potions) if final_potions else None
+            ),
+            "mean_final_relic_count": (
+                sum(final_relics) / len(final_relics) if final_relics else None
+            ),
+            "outcomes": outcomes,
+        }
+        if curriculum:
+            candidate["progress_utility_standard_error"] = math.sqrt(
+                _variance(utilities) / len(utilities)
+            )
+        candidates.append(candidate)
     if any(seeds != seed_sets[0] for seeds in seed_sets[1:]):
         raise RuntimeError("Bootstrap candidates do not use paired simulation seeds")
     selected = max(
@@ -1210,8 +1689,8 @@ def _build_bootstrap_target(
     value_spread = max(
         cast(float, candidate["mean_progress_utility"]) for candidate in candidates
     ) - min(cast(float, candidate["mean_progress_utility"]) for candidate in candidates)
-    return {
-        "teacher_id": BOOTSTRAP_TEACHER_ID,
+    target = {
+        "teacher_id": CURRICULUM_TEACHER_ID if curriculum else BOOTSTRAP_TEACHER_ID,
         "utility_id": BOOTSTRAP_UTILITY_ID,
         "seed_protocol_id": BOOTSTRAP_SEED_PROTOCOL_ID,
         "samples_per_candidate": samples_per_candidate,
@@ -1224,6 +1703,132 @@ def _build_bootstrap_target(
         "terminal_reward_is_primary": True,
         "progress_utility_is_auxiliary": True,
     }
+    if curriculum:
+        target.update(_paired_preference_target(candidates, selected))
+    return target
+
+
+def _paired_preference_target(
+    candidates: Sequence[dict[str, Any]],
+    selected: int,
+) -> dict[str, Any]:
+    outcome_rows = [
+        [_mapping(value, "candidate outcome") for value in candidate["outcomes"]]
+        for candidate in candidates
+    ]
+    sample_count = len(outcome_rows[0])
+    if any(len(row) != sample_count for row in outcome_rows):
+        raise RuntimeError("Paired preference candidates have different sample counts")
+    matrix: list[list[float]] = []
+    for left_index, left in enumerate(outcome_rows):
+        row: list[float] = []
+        for right_index, right in enumerate(outcome_rows):
+            if left_index == right_index:
+                row.append(0.5)
+                continue
+            score = 0.0
+            for left_outcome, right_outcome in zip(left, right, strict=True):
+                left_rank = _outcome_rank(left_outcome)
+                right_rank = _outcome_rank(right_outcome)
+                score += 1.0 if left_rank > right_rank else 0.5 if left_rank == right_rank else 0.0
+            row.append(score / sample_count)
+        matrix.append(row)
+    if len(candidates) == 1:
+        strengths = [1.0]
+    else:
+        strengths = [
+            sum(value for index, value in enumerate(row) if index != candidate_index)
+            / (len(candidates) - 1)
+            for candidate_index, row in enumerate(matrix)
+        ]
+    total_strength = sum(strengths)
+    soft_target = (
+        [value / total_strength for value in strengths]
+        if total_strength > 0.0
+        else [1.0 / len(strengths) for _ in strengths]
+    )
+    ordered = sorted(strengths, reverse=True)
+    paired_margin = ordered[0] - ordered[1] if len(ordered) > 1 else 0.0
+    selected_wins = 0.0
+    for sample_index in range(sample_count):
+        selected_rank = _outcome_rank(outcome_rows[selected][sample_index])
+        best_rank = max(_outcome_rank(row[sample_index]) for row in outcome_rows)
+        tied_best = sum(_outcome_rank(row[sample_index]) == best_rank for row in outcome_rows)
+        if selected_rank == best_rank:
+            selected_wins += 1.0 / tied_best
+    winner_confidence = selected_wins / sample_count
+    half_split_agreement: bool | None = None
+    if sample_count >= 2:
+        midpoint = sample_count // 2
+        first = _select_candidate_from_outcomes(candidates, 0, midpoint)
+        second = _select_candidate_from_outcomes(candidates, midpoint, sample_count)
+        half_split_agreement = first == second
+    stability_multiplier = (
+        1.0 if half_split_agreement is True else 0.5 if half_split_agreement is False else 0.0
+    )
+    target_weight = (
+        max(0.0, min(1.0, 2.0 * winner_confidence - 1.0)) * stability_multiplier
+        if len(candidates) > 1
+        else 0.0
+    )
+    return {
+        "paired_preference_matrix": matrix,
+        "soft_policy_target": soft_target,
+        "winner_confidence": winner_confidence,
+        "paired_preference_margin": paired_margin,
+        "half_split_winner_agreement": half_split_agreement,
+        "policy_target_weight": target_weight,
+        "hard_target_eligible": (
+            len(candidates) > 1
+            and strengths.count(max(strengths)) == 1
+            and strengths[selected] == max(strengths)
+            and half_split_agreement is True
+            and winner_confidence >= 0.75
+            and paired_margin > 0.0
+        ),
+        "policy_training_interface": "paired-preference-soft-target-v1",
+    }
+
+
+def _outcome_rank(output: dict[str, object]) -> tuple[int, int, int, int]:
+    return (
+        int(output.get("terminal") is True and output.get("victory") is True),
+        _optional_integer(output.get("maximum_floor")) or 0,
+        int(output.get("act_completed") is True),
+        _optional_integer(output.get("final_hp")) or 0,
+    )
+
+
+def _select_candidate_from_outcomes(
+    candidates: Sequence[dict[str, Any]],
+    start: int,
+    stop: int,
+) -> int:
+    return max(
+        range(len(candidates)),
+        key=lambda index: _aggregate_outcome_rank(
+            [
+                _mapping(value, "candidate outcome")
+                for value in _list(candidates[index]["outcomes"], "candidate outcomes")[start:stop]
+            ],
+            index,
+        ),
+    )
+
+
+def _aggregate_outcome_rank(
+    outcomes: Sequence[dict[str, object]],
+    candidate_index: int,
+) -> tuple[float, float, float, float, int]:
+    ranks = [_outcome_rank(outcome) for outcome in outcomes]
+    count = len(ranks)
+    return (
+        sum(rank[0] for rank in ranks) / count,
+        sum(rank[1] for rank in ranks) / count,
+        sum(rank[2] for rank in ranks) / count,
+        sum(rank[3] for rank in ranks) / count,
+        -candidate_index,
+    )
 
 
 def _verify_bootstrap_batch(report_path: Path, *, exact_replay: bool) -> tuple[str, ...]:
@@ -1497,6 +2102,140 @@ def _dataset_summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _curriculum_dataset_summary(
+    cases: Sequence[dict[str, Any]],
+    state_set: CurriculumStateSet,
+) -> dict[str, Any]:
+    summary = _dataset_summary(cases)
+    completed = [case for case in cases if case.get("status") == "completed"]
+    records = [
+        _mapping(case.get("record"), "case record")
+        for case in completed
+        if isinstance(case.get("record"), dict)
+    ]
+    targets = [_mapping(record.get("target"), "record target") for record in records]
+    half_known = [
+        target.get("half_split_winner_agreement")
+        for target in targets
+        if isinstance(target.get("half_split_winner_agreement"), bool)
+    ]
+    decision_counts = {
+        decision_type.value: sum(case.decision_type is decision_type for case in state_set.cases)
+        for decision_type in sorted(
+            {case.decision_type for case in state_set.cases}, key=lambda item: item.value
+        )
+    }
+    floor_counts: dict[str, int] = {}
+    for case in state_set.cases:
+        key = "unknown" if case.expected_source_floor is None else str(case.expected_source_floor)
+        floor_counts[key] = floor_counts.get(key, 0) + 1
+    weights = [
+        _number(target.get("policy_target_weight"), "policy target weight") for target in targets
+    ]
+    return {
+        **summary,
+        "unique_states": len({case.expected_state_hash for case in state_set.cases}),
+        "source_floor_histogram": floor_counts,
+        "decision_type_histogram": decision_counts,
+        "reachable_coordinates": len(state_set.cases),
+        "unreachable_coordinates": len(
+            _list(state_set.discovery.get("unreachable_coordinates"), "unreachable coordinates")
+        ),
+        "effective_labeled_states": sum(weights),
+        "hard_target_eligible_states": sum(
+            target.get("hard_target_eligible") is True for target in targets
+        ),
+        "half_split_evaluable_states": len(half_known),
+        "half_split_winner_agreement_rate": (
+            sum(value is True for value in half_known) / len(half_known) if half_known else None
+        ),
+        "mean_paired_preference_margin": (
+            sum(
+                _number(target.get("paired_preference_margin"), "paired preference margin")
+                for target in targets
+            )
+            / len(targets)
+            if targets
+            else 0.0
+        ),
+        "terminal_outcome_classes": {
+            "victory": summary["terminal_victories"],
+            "non_victory": summary["simulations"] - summary["terminal_victories"],
+        },
+    }
+
+
+def _assess_curriculum_signal(
+    summary: dict[str, Any],
+    spec: CurriculumSignalSpec,
+) -> dict[str, Any]:
+    source_floor_histogram = _mapping(
+        summary.get("source_floor_histogram"), "source floor histogram"
+    )
+    known_source_floors = sum(key != "unknown" for key in source_floor_histogram)
+    decision_types = len(_mapping(summary.get("decision_type_histogram"), "decision histogram"))
+    half_rate = summary.get("half_split_winner_agreement_rate")
+    checks = {
+        "completion": summary.get("completion_rate") == 1.0,
+        "states": _integer(summary.get("unique_states"), "unique states") >= spec.minimum_states,
+        "source_floors": known_source_floors >= spec.minimum_source_floors,
+        "decision_types": decision_types >= spec.minimum_decision_types,
+        "effective_labeled_states": _number(
+            summary.get("effective_labeled_states"), "effective labeled states"
+        )
+        >= spec.minimum_effective_labeled_states,
+        "half_split_agreement": (
+            isinstance(half_rate, (int, float))
+            and not isinstance(half_rate, bool)
+            and float(half_rate) >= spec.minimum_half_split_agreement
+        ),
+        "maximum_floor_bins": _integer(
+            summary.get("occupied_maximum_floor_bins"), "occupied maximum floor bins"
+        )
+        >= spec.minimum_occupied_maximum_floor_bins,
+    }
+    terminal_classes = _mapping(summary.get("terminal_outcome_classes"), "terminal classes")
+    terminal_head_checks = {
+        "victories_present": _integer(terminal_classes.get("victory"), "victories") > 0,
+        "non_victories_present": _integer(terminal_classes.get("non_victory"), "non-victories") > 0,
+    }
+    return {
+        "schema_version": "bootstrap-curriculum-signal-assessment-v1",
+        "spec": spec.as_dict(),
+        "auxiliary_policy_signal_pass": all(checks.values()),
+        "terminal_head_promotion_pass": all(terminal_head_checks.values()),
+        "checks": checks,
+        "terminal_head_checks": terminal_head_checks,
+    }
+
+
+def _validate_curriculum_discovery_readiness(state_set: CurriculumStateSet) -> None:
+    unique_states = len({case.expected_state_hash for case in state_set.cases})
+    known_floors = {
+        case.expected_source_floor
+        for case in state_set.cases
+        if case.expected_source_floor is not None
+    }
+    decision_types = {case.decision_type for case in state_set.cases}
+    failures: list[str] = []
+    if unique_states < state_set.signal_spec.minimum_states:
+        failures.append(
+            f"{unique_states} unique states < {state_set.signal_spec.minimum_states} required"
+        )
+    if len(known_floors) < state_set.signal_spec.minimum_source_floors:
+        failures.append(
+            f"{len(known_floors)} source floors < "
+            f"{state_set.signal_spec.minimum_source_floors} required"
+        )
+    if len(decision_types) < state_set.signal_spec.minimum_decision_types:
+        failures.append(
+            f"{len(decision_types)} decision types < "
+            f"{state_set.signal_spec.minimum_decision_types} required"
+        )
+    if failures:
+        raise ValueError("Curriculum discovery signal gate failed: " + "; ".join(failures))
+
+
 def _model_input_at_checkpoint(
     backend: SearchBackendSpec,
     checkpoint: PublicStateCheckpoint,
@@ -1523,7 +2262,7 @@ def _preserve_failed_case(path: Path) -> None:
 
 
 def _validate_bootstrap_split(
-    state_set: BootstrapStateSet,
+    state_set: BootstrapStateSetLike,
     split_manifest: SplitManifest,
 ) -> None:
     if state_set.split_manifest_id != split_manifest.manifest_id:
@@ -1532,9 +2271,149 @@ def _validate_bootstrap_split(
         raise ValueError("Bootstrap state-set ruleset differs from split manifest")
     if state_set.objective_id != split_manifest.objective_id:
         raise ValueError("Bootstrap state-set objective differs from split manifest")
+    expected_partition = SplitName(state_set.partition)
     for case in state_set.cases:
-        if split_manifest.split_for_seed(case.run_seed) is not SplitName.TRAIN:
-            raise ValueError(f"Bootstrap seed {case.run_seed} is outside the train partition")
+        if split_manifest.split_for_seed(case.run_seed) is not expected_partition:
+            raise ValueError(
+                f"Bootstrap seed {case.run_seed} is outside the {state_set.partition} partition"
+            )
+
+
+def _load_curriculum_state_set_document(
+    document: dict[str, Any],
+) -> CurriculumStateSet:
+    _exact_keys(
+        document,
+        {
+            "schema_version",
+            "state_set_id",
+            "split_manifest_id",
+            "ruleset_manifest_id",
+            "objective_id",
+            "capture_policy_id",
+            "partition",
+            "selection_policy",
+            "discovery",
+            "signal_spec",
+            "cases",
+        },
+        "curriculum state set",
+    )
+    state_set_id = _string(document.get("state_set_id"), "state_set_id")
+    body = {key: item for key, item in document.items() if key != "state_set_id"}
+    if state_set_id != manifest_identifier(body):
+        raise ValueError("Curriculum state-set identity mismatch")
+    discovery = dict(_mapping(document.get("discovery"), "discovery"))
+    requested = _integer(discovery.get("requested_coordinates"), "requested coordinates")
+    captured = _integer(discovery.get("captured_coordinates"), "captured coordinates")
+    unreachable = _list(discovery.get("unreachable_coordinates"), "unreachable coordinates")
+    if requested != captured + len(unreachable):
+        raise ValueError("Curriculum discovery does not account for every requested coordinate")
+    state_set = CurriculumStateSet(
+        state_set_id=state_set_id,
+        split_manifest_id=_string(document.get("split_manifest_id"), "split_manifest_id"),
+        ruleset_manifest_id=_string(document.get("ruleset_manifest_id"), "ruleset_manifest_id"),
+        objective_id=_string(document.get("objective_id"), "objective_id"),
+        capture_policy_id=_string(document.get("capture_policy_id"), "capture_policy_id"),
+        partition=_string(document.get("partition"), "partition"),
+        selection_policy=_string(document.get("selection_policy"), "selection_policy"),
+        discovery=discovery,
+        signal_spec=_curriculum_signal_spec(document.get("signal_spec")),
+        cases=tuple(
+            _curriculum_state_case(value)
+            for value in _list(document.get("cases"), "curriculum cases")
+        ),
+    )
+    if len(state_set.cases) != captured:
+        raise ValueError("Curriculum captured-coordinate count differs from cases")
+    return state_set
+
+
+def _curriculum_state_case(value: object) -> CurriculumStateCase:
+    document = _mapping(value, "curriculum state case")
+    _exact_keys(
+        document,
+        {
+            "state_id",
+            "run_seed",
+            "decision_type",
+            "decision_index",
+            "expected_state_hash",
+            "expected_legal_actions",
+            "expected_source_floor",
+            "expected_source_act",
+        },
+        "curriculum state case",
+    )
+    state_hash = _string(document.get("expected_state_hash"), "expected_state_hash")
+    if len(state_hash) != 64 or any(
+        character not in "0123456789abcdef" for character in state_hash
+    ):
+        raise ValueError("Curriculum expected_state_hash must be a lowercase SHA-256 digest")
+    source_floor = document.get("expected_source_floor")
+    if source_floor is not None:
+        source_floor = _integer(source_floor, "expected_source_floor")
+    source_act = document.get("expected_source_act")
+    if source_act is not None and (
+        isinstance(source_act, bool) or not isinstance(source_act, (int, str))
+    ):
+        raise ValueError("expected_source_act must be an integer, string, or null")
+    case = CurriculumStateCase(
+        state_id=_string(document.get("state_id"), "state_id"),
+        run_seed=_integer(document.get("run_seed"), "run_seed"),
+        decision_type=DecisionType(_string(document.get("decision_type"), "decision_type")),
+        decision_index=_integer(document.get("decision_index"), "decision_index"),
+        expected_state_hash=state_hash,
+        expected_legal_actions=_integer(
+            document.get("expected_legal_actions"), "expected_legal_actions"
+        ),
+        expected_source_floor=source_floor,
+        expected_source_act=source_act,
+    )
+    if (
+        case.run_seed < 0
+        or case.decision_index < 0
+        or case.expected_legal_actions <= 0
+        or case.decision_type in {DecisionType.MENU, DecisionType.TERMINAL, DecisionType.UNKNOWN}
+    ):
+        raise ValueError("Curriculum case fields are outside their allowed range")
+    return case
+
+
+def _curriculum_signal_spec(value: object) -> CurriculumSignalSpec:
+    document = _mapping(value, "curriculum signal spec")
+    _exact_keys(
+        document,
+        {
+            "minimum_states",
+            "minimum_source_floors",
+            "minimum_decision_types",
+            "minimum_effective_labeled_states",
+            "minimum_half_split_agreement",
+            "minimum_occupied_maximum_floor_bins",
+        },
+        "curriculum signal spec",
+    )
+    return CurriculumSignalSpec(
+        minimum_states=_integer(document.get("minimum_states"), "minimum_states"),
+        minimum_source_floors=_integer(
+            document.get("minimum_source_floors"), "minimum_source_floors"
+        ),
+        minimum_decision_types=_integer(
+            document.get("minimum_decision_types"), "minimum_decision_types"
+        ),
+        minimum_effective_labeled_states=_number(
+            document.get("minimum_effective_labeled_states"),
+            "minimum_effective_labeled_states",
+        ),
+        minimum_half_split_agreement=_number(
+            document.get("minimum_half_split_agreement"), "minimum_half_split_agreement"
+        ),
+        minimum_occupied_maximum_floor_bins=_integer(
+            document.get("minimum_occupied_maximum_floor_bins"),
+            "minimum_occupied_maximum_floor_bins",
+        ),
+    )
 
 
 def _state_case(value: object) -> BootstrapStateCase:
@@ -1577,6 +2456,13 @@ def _bootstrap_seed(sampling_seed: int, state_hash: str, sample_index: int) -> i
 def _variance(values: Sequence[float]) -> float:
     mean = sum(values) / len(values)
     return sum((value - mean) ** 2 for value in values) / len(values)
+
+
+def _probability(value: object, label: str) -> float:
+    probability = _number(value, label)
+    if not 0.0 <= probability <= 1.0:
+        raise ValueError(f"{label} must be between zero and one")
+    return probability
 
 
 def _known_integers(outputs: Sequence[dict[str, object]], field: str) -> list[int]:
