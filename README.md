@@ -44,7 +44,10 @@ The repository currently contains the research contracts and a seeded mock verti
 23. an EvanGambit-backed fixed root-UCT baseline with paired shallow, medium, and expensive budgets,
     terminal-victory values, failure-preserving evidence, and exact replay; and
 24. a frozen validation compute-quality harness with paired independent candidate evaluation,
-    terminal-value regret, death-risk calibration, compute and tail-latency metrics, and exact replay.
+    terminal-value regret, death-risk calibration, compute and tail-latency metrics, and exact replay; and
+25. a production bootstrap curriculum with a stronger public-state continuation policy, paired
+    terminal-first candidate labels, milestone distributions, isolated workers, and resumable
+    failure-preserving evidence.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -138,6 +141,10 @@ throughput, and immutable results for fixed-budget planning.
 [Fixed-budget combat search](docs/fixed-budget-search.md) runs nested shallow, medium, and expensive
 root-UCT budgets from one public checkpoint. It records terminal-victory candidate values, stochastic
 world coverage, failures, CPU and wall time, tail latency, and licensed-backend attribution.
+
+The [production bootstrap teacher](docs/bootstrap-teacher.md) turns train-only public combat states
+into paired terminal-victory and auxiliary progress targets for the first useful base policy. Its
+long generation command is resource-capped, resumable, and intentionally left for a person to start.
 
 [Search compute-versus-quality benchmarking](docs/compute-quality-benchmark.md) binds 32 production
 validation states to a complete-run split, grades each legal candidate on paired held-out seeds, and

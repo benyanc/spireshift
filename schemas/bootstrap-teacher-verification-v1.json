@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-teacher-verification-v1.json",
+  "title": "SpireShift Bootstrap Teacher Verification v1",
+  "type": "object",
+  "required": ["schema_version", "valid", "dataset_id", "cases", "verified_cases", "replayed_cases", "errors"],
+  "properties": {
+    "schema_version": {"const": "bootstrap-teacher-verification-v1"},
+    "valid": {"type": "boolean"},
+    "dataset_id": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"},
+    "cases": {"type": "integer", "minimum": 0},
+    "verified_cases": {"type": "integer", "minimum": 0},
+    "replayed_cases": {"type": "integer", "minimum": 0},
+    "errors": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,9 @@
+{
+  "cases": 1,
+  "dataset_id": "sha256:19cbfa312818c2a9c54a06942d4415bc9e769b9853bc56903d8fb01677f24a3d",
+  "errors": [],
+  "replayed_cases": 0,
+  "schema_version": "bootstrap-teacher-verification-v1",
+  "valid": true,
+  "verified_cases": 1
+}

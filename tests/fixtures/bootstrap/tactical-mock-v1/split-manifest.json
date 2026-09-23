@@ -1,0 +1,37 @@
+{
+  "assignment": {
+    "algorithm": "sha256-ranked-v1",
+    "counts": {
+      "test": 0,
+      "train": 1,
+      "validation": 0
+    },
+    "salt": "spireshift/tactical-bootstrap/train-v1"
+  },
+  "encounter_policy": {
+    "cross_partition_reuse": "forbidden",
+    "identifier_fields": [
+      "run_id",
+      "encounter_id"
+    ],
+    "inherits_split_from": "complete_run",
+    "unit": "encounter_instance"
+  },
+  "manifest_id": "sha256:48ec64c46c654d424a14431050ea83640f8a708b08a7e2976e9d7d8cfc5fde5a",
+  "objective_id": "terminal-victory-v1",
+  "partitions": {
+    "test": [],
+    "train": [
+      7
+    ],
+    "validation": []
+  },
+  "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+  "schema_version": "split-manifest-v1",
+  "seed_universe": {
+    "start": 7,
+    "stop_exclusive": 8
+  },
+  "split_id": "tactical-bootstrap-train-v1",
+  "unit": "complete_run"
+}

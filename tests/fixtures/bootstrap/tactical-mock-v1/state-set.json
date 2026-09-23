@@ -1,0 +1,19 @@
+{
+  "capture_policy_id": "public-progress-bootstrap-v1",
+  "cases": [
+    {
+      "combat_state_index": 0,
+      "expected_legal_actions": 3,
+      "expected_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "run_seed": 7,
+      "state_id": "train-seed-000007-combat-000"
+    }
+  ],
+  "objective_id": "terminal-victory-v1",
+  "partition": "train",
+  "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+  "schema_version": "bootstrap-state-set-v1",
+  "selection_policy": "single-tactical-train-state-v1",
+  "split_manifest_id": "sha256:48ec64c46c654d424a14431050ea83640f8a708b08a7e2976e9d7d8cfc5fde5a",
+  "state_set_id": "sha256:a3d2016b244b5392a452bebce32b3f6186bb64205dbb44ad633d2a7de56fbf3a"
+}

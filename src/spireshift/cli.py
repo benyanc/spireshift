@@ -28,6 +28,14 @@ from spireshift.backend_admission import (
     verify_backend_admission,
     write_backend_admission,
 )
+from spireshift.bootstrap_teacher import (
+    BootstrapConfig,
+    freeze_bootstrap_state_set,
+    load_bootstrap_state_set,
+    run_bootstrap_teacher_dataset,
+    verify_bootstrap_teacher_dataset,
+    write_bootstrap_state_set,
+)
 from spireshift.calibration import (
     CalibrationConfig,
     calibrate_model,
@@ -517,6 +525,43 @@ def build_parser() -> argparse.ArgumentParser:
     teacher_verify.add_argument("dataset", type=Path)
     teacher_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
     teacher_verify.add_argument("--output", type=Path)
+
+    bootstrap = subparsers.add_parser(
+        "bootstrap", help="Build and verify the production base-policy curriculum"
+    )
+    bootstrap_commands = bootstrap.add_subparsers(dest="bootstrap_command", required=True)
+    bootstrap_freeze = bootstrap_commands.add_parser(
+        "freeze-states", help="Freeze a content-addressed train-state set"
+    )
+    bootstrap_freeze.add_argument("specification", type=Path)
+    bootstrap_freeze.add_argument("output", type=Path)
+    bootstrap_freeze.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_generate = bootstrap_commands.add_parser(
+        "generate", help="Generate paired terminal-first curriculum targets"
+    )
+    bootstrap_generate.add_argument("output_dir", type=Path)
+    bootstrap_generate.add_argument("--states", type=Path, required=True)
+    bootstrap_generate.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_generate.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    bootstrap_generate.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_generate.add_argument("--upstream-root", type=Path)
+    bootstrap_generate.add_argument("--manifest", type=Path)
+    bootstrap_generate.add_argument("--samples-per-candidate", type=int, default=16)
+    bootstrap_generate.add_argument("--sampling-seed", type=int, default=0)
+    bootstrap_generate.add_argument("--maximum-prefix-steps", type=int, default=4096)
+    bootstrap_generate.add_argument("--maximum-rollout-steps", type=int, default=4096)
+    bootstrap_generate.add_argument("--workers", type=int, default=8)
+    bootstrap_generate.add_argument("--worker-timeout", type=float, default=120.0)
+    bootstrap_generate.add_argument("--resume", action="store_true")
+    bootstrap_verify = bootstrap_commands.add_parser(
+        "verify", help="Verify identities, train ownership, evidence, and optional exact replay"
+    )
+    bootstrap_verify.add_argument("report", type=Path)
+    bootstrap_verify.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_verify.add_argument("--replay-cases", type=int, default=0)
+    bootstrap_verify.add_argument("--output", type=Path)
 
     model = subparsers.add_parser("model", help="Train or verify cheap multi-head models")
     model_commands = model.add_subparsers(dest="model_command", required=True)
@@ -1299,6 +1344,68 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = args.output if args.teacher_command == "verify" else None
+            _emit_json({"status": "error", "error": str(error)}, error_output)
+            return 1
+    if args.command == "bootstrap":
+        try:
+            split_manifest = load_split_manifest(args.split_manifest)
+            if args.bootstrap_command == "freeze-states":
+                specification = json.loads(args.specification.read_text(encoding="utf-8"))
+                document = freeze_bootstrap_state_set(
+                    specification,
+                    split_manifest=split_manifest,
+                )
+                write_bootstrap_state_set(document, args.output)
+                _emit_json(document, None)
+                return 0
+            if args.bootstrap_command == "verify":
+                bootstrap_verification = verify_bootstrap_teacher_dataset(
+                    args.report,
+                    split_manifest=split_manifest,
+                    replay_cases=args.replay_cases,
+                )
+                _emit_json(bootstrap_verification.as_dict(), args.output)
+                return 0 if bootstrap_verification.valid else 1
+            if args.backend == "evangambit":
+                if args.upstream_root is None or args.manifest is None:
+                    raise ValueError("EvanGambit bootstrap requires --upstream-root and --manifest")
+                bootstrap_backend = SearchBackendSpec.evangambit(
+                    args.upstream_root,
+                    args.manifest,
+                )
+            elif args.backend == "tactical_mock":
+                bootstrap_backend = SearchBackendSpec.tactical_mock()
+            else:
+                bootstrap_backend = SearchBackendSpec.mock()
+            bootstrap_result = run_bootstrap_teacher_dataset(
+                backend=bootstrap_backend,
+                state_set=load_bootstrap_state_set(args.states),
+                split_manifest=split_manifest,
+                objective=load_objective(args.objective_config),
+                config=BootstrapConfig(
+                    samples_per_candidate=args.samples_per_candidate,
+                    sampling_seed=args.sampling_seed,
+                    maximum_prefix_steps=args.maximum_prefix_steps,
+                    maximum_rollout_steps=args.maximum_rollout_steps,
+                    workers=args.workers,
+                    worker_timeout_seconds=args.worker_timeout,
+                ),
+                output_directory=args.output_dir,
+                resume=args.resume,
+            )
+            summary = bootstrap_result.report["summary"]
+            if isinstance(summary, dict):
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(summary["benchmark_denominator"]),
+                        simulations=int(summary["simulations"]),
+                        transitions=int(summary["transitions"]),
+                    )
+                )
+            _emit_json(bootstrap_result.report, None)
+            return 0 if bootstrap_result.successful else 1
+        except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
+            error_output = args.output if args.bootstrap_command == "verify" else None
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "model":

@@ -1,0 +1,78 @@
+{
+  "auxiliary_reward_allowed": false,
+  "backend": {
+    "kind": "tactical_mock",
+    "manifest_path": null,
+    "upstream_root": null
+  },
+  "cases": [
+    {
+      "case_id": "sha256:c0d032cf1bc2eaaa170890c167d36a43b38232018c5b4539534ca566b181a089",
+      "path": "cases/train-seed-000007-combat-000/case.json",
+      "sha256": "bfea48ff73cd82c9ba2610c3c82122a01eae19ba445cfa7d2fe65e8467c7ed97",
+      "state_id": "train-seed-000007-combat-000"
+    }
+  ],
+  "claim_scope": "train_curriculum_only",
+  "completed_at": "2026-09-23T03:27:05.396497Z",
+  "configuration": {
+    "maximum_prefix_steps": 4,
+    "maximum_rollout_steps": 4,
+    "samples_per_candidate": 1,
+    "sampling_seed": 0,
+    "worker_timeout_seconds": 30.0,
+    "workers": 3
+  },
+  "dataset_id": "sha256:19cbfa312818c2a9c54a06942d4415bc9e769b9853bc56903d8fb01677f24a3d",
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "objective_id": "terminal-victory-v1",
+  "schema_version": "bootstrap-teacher-dataset-v1",
+  "seed_protocol_id": "sha256-paired-bootstrap-v1",
+  "started_at": "2026-09-23T03:27:05.331303Z",
+  "state_set": {
+    "capture_policy_id": "public-progress-bootstrap-v1",
+    "cases": [
+      {
+        "combat_state_index": 0,
+        "expected_legal_actions": 3,
+        "expected_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+        "run_seed": 7,
+        "state_id": "train-seed-000007-combat-000"
+      }
+    ],
+    "objective_id": "terminal-victory-v1",
+    "partition": "train",
+    "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+    "schema_version": "bootstrap-state-set-v1",
+    "selection_policy": "single-tactical-train-state-v1",
+    "split_manifest_id": "sha256:48ec64c46c654d424a14431050ea83640f8a708b08a7e2976e9d7d8cfc5fde5a",
+    "state_set_id": "sha256:a3d2016b244b5392a452bebce32b3f6186bb64205dbb44ad633d2a7de56fbf3a"
+  },
+  "summary": {
+    "benchmark_denominator": 1,
+    "candidates": 3,
+    "completed_cases": 1,
+    "completion_rate": 1.0,
+    "failed_cases": 0,
+    "occupied_maximum_floor_bins": 1,
+    "records": 1,
+    "simulations": 3,
+    "states_with_candidate_progress_variation": 0,
+    "terminal_victories": 3,
+    "transitions": 6
+  },
+  "teacher_id": "paired-terminal-dominant-progress-teacher-v1",
+  "utility_id": "terminal-dominant-floor-act-hp-v1"
+}

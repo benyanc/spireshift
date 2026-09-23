@@ -140,6 +140,34 @@ def _registry() -> Registry[Any]:
             "search-compute-quality-verification-v1.json",
             "search-compute-quality-verification-v1.json",
         ),
+        (
+            "bootstrap-state-set-v1.json",
+            "bootstrap/tactical-mock-v1/state-set.json",
+        ),
+        (
+            "bootstrap-state-set-v1.json",
+            "../../manifests/bootstrap/sts2-v0.107.1-evangambit-train-pilot-v1.json",
+        ),
+        (
+            "bootstrap-simulation-task-v1.json",
+            "bootstrap/tactical-mock-v1/dataset/cases/train-seed-000007-combat-000/attempt-0001/tasks/588634b5-e038-51ce-97f1-591206578543/request.json",
+        ),
+        (
+            "bootstrap-worker-result-v1.json",
+            "bootstrap/tactical-mock-v1/dataset/cases/train-seed-000007-combat-000/attempt-0001/tasks/588634b5-e038-51ce-97f1-591206578543/result.json",
+        ),
+        (
+            "bootstrap-worker-batch-v1.json",
+            "bootstrap/tactical-mock-v1/dataset/cases/train-seed-000007-combat-000/attempt-0001/bootstrap-worker-report.json",
+        ),
+        (
+            "bootstrap-teacher-dataset-v1.json",
+            "bootstrap/tactical-mock-v1/dataset/bootstrap-teacher-dataset.json",
+        ),
+        (
+            "bootstrap-teacher-verification-v1.json",
+            "bootstrap/tactical-mock-v1/verification.json",
+        ),
         ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
         ("experiment-resources-v1.json", "experiment-resources-v1.json"),
     ],
