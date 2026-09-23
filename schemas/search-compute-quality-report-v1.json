@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/search-compute-quality-report-v1.json",
+  "title": "SpireShift Search Compute-Quality Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "objective_id",
+    "independent_evaluation_protocol_id",
+    "started_at",
+    "completed_at",
+    "backend",
+    "state_set",
+    "configuration",
+    "cases",
+    "summary",
+    "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "search-compute-quality-report-v1"},
+    "report_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "independent_evaluation_protocol_id": {
+      "const": "sha256-paired-independent-candidate-evaluation-v1"
+    },
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "backend": {"$ref": "search-simulation-task-v1.json#/$defs/backend"},
+    "state_set": {"$ref": "search-benchmark-state-set-v1.json"},
+    "configuration": {"$ref": "#/$defs/configuration"},
+    "cases": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/case"}},
+    "summary": {"$ref": "#/$defs/summary"},
+    "claim_scope": {"const": "validation_compute_quality"}
+  },
+  "$defs": {
+    "configuration": {
+      "type": "object",
+      "required": [
+        "search",
+        "maximum_prefix_steps",
+        "evaluation_samples_per_candidate",
+        "evaluation_sampling_seed",
+        "evaluation_workers",
+        "evaluation_worker_timeout_seconds",
+        "calibration_bins"
+      ],
+      "properties": {
+        "search": {"$ref": "fixed-search-report-v1.json#/$defs/configuration"},
+        "maximum_prefix_steps": {"type": "integer", "minimum": 1},
+        "evaluation_samples_per_candidate": {"type": "integer", "minimum": 1},
+        "evaluation_sampling_seed": {"type": "integer", "minimum": 0},
+        "evaluation_workers": {"type": "integer", "minimum": 1},
+        "evaluation_worker_timeout_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "calibration_bins": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "failure": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["type", "message"],
+          "properties": {
+            "type": {"type": "string", "minLength": 1},
+            "message": {"type": "string"}
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "reportReference": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "required": ["path", "sha256", "content_id"],
+          "properties": {
+            "path": {"type": "string", "minLength": 1},
+            "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "content_id": {
+              "type": ["string", "null"],
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "independentCandidate": {
+      "type": "object",
+      "required": [
+        "candidate_index",
+        "source_action_id",
+        "action_kind",
+        "attempted_simulations",
+        "completed_simulations",
+        "terminal_simulations",
+        "failed_or_truncated_simulations",
+        "victories",
+        "terminal_value",
+        "death_risk",
+        "outcome_variance",
+        "transitions",
+        "unique_simulation_seeds",
+        "worker_cpu_seconds",
+        "worker_wall_seconds",
+        "act_completion_rate",
+        "act_completion_samples",
+        "mean_post_action_hp",
+        "post_action_hp_samples",
+        "mean_final_hp",
+        "final_hp_samples"
+      ],
+      "properties": {
+        "candidate_index": {"type": "integer", "minimum": 0},
+        "source_action_id": {"type": "string", "minLength": 1},
+        "action_kind": {"type": "string", "minLength": 1},
+        "attempted_simulations": {"type": "integer", "minimum": 1},
+        "completed_simulations": {"type": "integer", "minimum": 0},
+        "terminal_simulations": {"type": "integer", "minimum": 0},
+        "failed_or_truncated_simulations": {"type": "integer", "minimum": 0},
+        "victories": {"type": "integer", "minimum": 0},
+        "terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "death_risk": {"type": "number", "minimum": 0, "maximum": 1},
+        "outcome_variance": {"type": "number", "minimum": 0, "maximum": 0.25},
+        "transitions": {"type": "integer", "minimum": 0},
+        "unique_simulation_seeds": {"type": "integer", "minimum": 1},
+        "worker_cpu_seconds": {"type": "number", "minimum": 0},
+        "worker_wall_seconds": {"type": "number", "minimum": 0},
+        "act_completion_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "act_completion_samples": {"type": "integer", "minimum": 0},
+        "mean_post_action_hp": {"type": ["number", "null"]},
+        "post_action_hp_samples": {"type": "integer", "minimum": 0},
+        "mean_final_hp": {"type": ["number", "null"]},
+        "final_hp_samples": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "compute": {
+      "type": "object",
+      "required": [
+        "attempted_simulations",
+        "transitions",
+        "worker_cpu_seconds",
+        "wall_seconds",
+        "p95_worker_wall_seconds"
+      ],
+      "properties": {
+        "attempted_simulations": {"type": "integer", "minimum": 1},
+        "transitions": {"type": "integer", "minimum": 0},
+        "worker_cpu_seconds": {"type": "number", "minimum": 0},
+        "wall_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "p95_worker_wall_seconds": {"type": ["number", "null"], "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "tierResult": {
+      "type": "object",
+      "required": [
+        "tier",
+        "simulation_budget",
+        "selected_candidate_index",
+        "selected_action_id",
+        "predicted_terminal_value",
+        "independent_terminal_value",
+        "best_independent_terminal_value",
+        "terminal_value_regret",
+        "independent_best_action",
+        "predicted_death_risk",
+        "observed_death_risk",
+        "death_risk_brier",
+        "independent_attempts",
+        "independent_deaths",
+        "act_completion_rate",
+        "mean_post_action_hp",
+        "mean_final_hp",
+        "compute"
+      ],
+      "properties": {
+        "tier": {"enum": ["shallow", "medium", "expensive"]},
+        "simulation_budget": {"type": "integer", "minimum": 1},
+        "selected_candidate_index": {"type": "integer", "minimum": 0},
+        "selected_action_id": {"type": "string", "minLength": 1},
+        "predicted_terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "independent_terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "best_independent_terminal_value": {"type": "number", "minimum": 0, "maximum": 1},
+        "terminal_value_regret": {"type": "number", "minimum": 0, "maximum": 1},
+        "independent_best_action": {"type": "boolean"},
+        "predicted_death_risk": {"type": "number", "minimum": 0, "maximum": 1},
+        "observed_death_risk": {"type": "number", "minimum": 0, "maximum": 1},
+        "death_risk_brier": {"type": "number", "minimum": 0, "maximum": 1},
+        "independent_attempts": {"type": "integer", "minimum": 1},
+        "independent_deaths": {"type": "integer", "minimum": 0},
+        "act_completion_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "mean_post_action_hp": {"type": ["number", "null"]},
+        "mean_final_hp": {"type": ["number", "null"]},
+        "compute": {"$ref": "#/$defs/compute"}
+      },
+      "additionalProperties": false
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "state_id",
+        "run_seed",
+        "combat_state_index",
+        "status",
+        "failure",
+        "source_state_hash",
+        "search_report",
+        "evaluation_report",
+        "independent_candidates",
+        "tiers"
+      ],
+      "properties": {
+        "state_id": {"type": "string", "minLength": 1},
+        "run_seed": {"type": "integer", "minimum": 0},
+        "combat_state_index": {"type": "integer", "minimum": 0},
+        "status": {"enum": ["completed", "failed"]},
+        "failure": {"$ref": "#/$defs/failure"},
+        "source_state_hash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "search_report": {"$ref": "#/$defs/reportReference"},
+        "evaluation_report": {"$ref": "#/$defs/reportReference"},
+        "independent_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/independentCandidate"}
+        },
+        "tiers": {"type": "array", "maxItems": 3, "items": {"$ref": "#/$defs/tierResult"}}
+      },
+      "additionalProperties": false
+    },
+    "tierSummary": {
+      "type": "object",
+      "required": [
+        "evaluated_states",
+        "mean_terminal_value_regret",
+        "maximum_terminal_value_regret",
+        "independent_best_action_rate",
+        "mean_predicted_death_risk",
+        "mean_observed_death_risk",
+        "death_risk_brier",
+        "death_risk_ece",
+        "mean_attempted_simulations",
+        "mean_transitions",
+        "mean_worker_cpu_seconds",
+        "mean_wall_seconds",
+        "p50_wall_seconds",
+        "p95_wall_seconds",
+        "p99_wall_seconds",
+        "mean_act_completion_rate",
+        "mean_post_action_hp"
+      ],
+      "properties": {
+        "evaluated_states": {"type": "integer", "minimum": 0},
+        "mean_terminal_value_regret": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "maximum_terminal_value_regret": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "independent_best_action_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "mean_predicted_death_risk": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "mean_observed_death_risk": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "death_risk_brier": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "death_risk_ece": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "mean_attempted_simulations": {"type": ["number", "null"], "minimum": 0},
+        "mean_transitions": {"type": ["number", "null"], "minimum": 0},
+        "mean_worker_cpu_seconds": {"type": ["number", "null"], "minimum": 0},
+        "mean_wall_seconds": {"type": ["number", "null"], "minimum": 0},
+        "p50_wall_seconds": {"type": ["number", "null"], "minimum": 0},
+        "p95_wall_seconds": {"type": ["number", "null"], "minimum": 0},
+        "p99_wall_seconds": {"type": ["number", "null"], "minimum": 0},
+        "mean_act_completion_rate": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "mean_post_action_hp": {"type": ["number", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "benchmark_denominator",
+        "completed_cases",
+        "failed_cases",
+        "completion_rate",
+        "search_simulations",
+        "independent_evaluation_simulations",
+        "simulations",
+        "search_transitions",
+        "independent_evaluation_transitions",
+        "transitions",
+        "tiers"
+      ],
+      "properties": {
+        "benchmark_denominator": {"type": "integer", "minimum": 1},
+        "completed_cases": {"type": "integer", "minimum": 0},
+        "failed_cases": {"type": "integer", "minimum": 0},
+        "completion_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "search_simulations": {"type": "integer", "minimum": 0},
+        "independent_evaluation_simulations": {"type": "integer", "minimum": 0},
+        "simulations": {"type": "integer", "minimum": 0},
+        "search_transitions": {"type": "integer", "minimum": 0},
+        "independent_evaluation_transitions": {"type": "integer", "minimum": 0},
+        "transitions": {"type": "integer", "minimum": 0},
+        "tiers": {
+          "type": "object",
+          "required": ["shallow", "medium", "expensive"],
+          "properties": {
+            "shallow": {"$ref": "#/$defs/tierSummary"},
+            "medium": {"$ref": "#/$defs/tierSummary"},
+            "expensive": {"$ref": "#/$defs/tierSummary"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

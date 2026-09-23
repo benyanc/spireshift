@@ -1,0 +1,108 @@
+{
+  "batch_id": "b1a4652d-d9ec-4ce9-b028-1a10c0f20eca",
+  "completed_at": "2026-09-22T00:00:00Z",
+  "configuration": {
+    "task_ids": [
+      "00000000-0000-4000-8000-000000000000",
+      "00000000-0000-4000-8000-000000000001"
+    ],
+    "worker_timeout_seconds": 30.0,
+    "workers": 2
+  },
+  "schema_version": "search-worker-batch-v2",
+  "started_at": "2026-09-22T00:00:00Z",
+  "summary": {
+    "completed_tasks": 2,
+    "failed_tasks": 0,
+    "requested_tasks": 2,
+    "sampled_worlds": 2,
+    "tasks_per_wall_second": 38.80848255886415,
+    "transitions": 3,
+    "transitions_per_wall_second": 58.21272383829622,
+    "wall_seconds": 0.05153512500692159,
+    "worker_cpu_seconds": 0.0005850000000000022,
+    "worker_crashes": 0
+  },
+  "tasks": [
+    {
+      "cpu_seconds": 0.0003119999999999998,
+      "exit_code": 0,
+      "message": "search simulation completed",
+      "output": {
+        "action_id": "elite_path",
+        "checkpoint_verified": true,
+        "continuation_policy_id": "terminal-victory-search-rollout-v1",
+        "diagnostics": {
+          "act_completed": null,
+          "final_hp": null,
+          "maximum_floor": 1,
+          "post_action_floor": 1,
+          "post_action_hp": null,
+          "source_act": null,
+          "source_floor": 0,
+          "source_hp": null
+        },
+        "final_state_hash": "a4ab678212bf479c5d14a36db77475e6650684264488ee3f98b4985f5dcaa55a",
+        "method": "isolated-public-world-rollout-v1",
+        "patch_id": "mock-v1",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "sampled_worlds": 1,
+        "simulation_seed": 0,
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "terminal": true,
+        "terminal_reward": 1.0,
+        "transitions": 2,
+        "truncated": false,
+        "victory": true
+      },
+      "request_path": "tasks/00000000-0000-4000-8000-000000000000/request.json",
+      "request_sha256": "97a9b7ca8a461776a4ddc8ec153cbe2357de4b2ad3112b66dc7785b2be8b7507",
+      "result_path": "tasks/00000000-0000-4000-8000-000000000000/result.json",
+      "result_sha256": "b5ccffbc4a135fd9103522d233bb5d3d7eb7ba663c0d420ba195a0372535fa30",
+      "status": "completed",
+      "task_id": "00000000-0000-4000-8000-000000000000",
+      "wall_seconds": 0.00031316594686359167,
+      "worker_pid": 43290
+    },
+    {
+      "cpu_seconds": 0.0002730000000000024,
+      "exit_code": 0,
+      "message": "search simulation completed",
+      "output": {
+        "action_id": "elite_path",
+        "checkpoint_verified": true,
+        "continuation_policy_id": "terminal-victory-search-rollout-v1",
+        "diagnostics": {
+          "act_completed": null,
+          "final_hp": null,
+          "maximum_floor": 0,
+          "post_action_floor": 0,
+          "post_action_hp": null,
+          "source_act": null,
+          "source_floor": 0,
+          "source_hp": null
+        },
+        "final_state_hash": "90fa54f4df54d20afcdc3dab36d4b2c5dc8cbfd6c04d84e579f5423e5febe3e3",
+        "method": "isolated-public-world-rollout-v1",
+        "patch_id": "mock-v1",
+        "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+        "sampled_worlds": 1,
+        "simulation_seed": 1,
+        "source_state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8",
+        "terminal": true,
+        "terminal_reward": 0.0,
+        "transitions": 1,
+        "truncated": false,
+        "victory": false
+      },
+      "request_path": "tasks/00000000-0000-4000-8000-000000000001/request.json",
+      "request_sha256": "2bb04daa246fbc787474b6e5c8c74bdbe745e7d1c890c03c287b29f6c08304de",
+      "result_path": "tasks/00000000-0000-4000-8000-000000000001/result.json",
+      "result_sha256": "5e4edab44b56222edf4081810920c1a3e4a1ac029e711f24ac445dcd69b2e267",
+      "status": "completed",
+      "task_id": "00000000-0000-4000-8000-000000000001",
+      "wall_seconds": 0.0002750830026343465,
+      "worker_pid": 43291
+    }
+  ]
+}

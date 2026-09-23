@@ -1,0 +1,9 @@
+{
+  "schema_version": "fixed-search-verification-v1",
+  "valid": true,
+  "report_id": "sha256:2a53b3fabce013fc7367620a5bde5f7a3b08e36a5dd974ac6e04f90aa894d9c5",
+  "tiers": 3,
+  "simulations": 12,
+  "verified_worker_batches": 3,
+  "errors": []
+}

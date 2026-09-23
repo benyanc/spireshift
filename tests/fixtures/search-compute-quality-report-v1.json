@@ -1,0 +1,304 @@
+{
+  "backend": {
+    "kind": "tactical_mock",
+    "manifest_path": null,
+    "upstream_root": null
+  },
+  "cases": [
+    {
+      "combat_state_index": 0,
+      "evaluation_report": {
+        "content_id": null,
+        "path": "cases/validation-seed-7-combat-0/evaluation/search-worker-report.json",
+        "sha256": "94d9c3310460afcd90b333e535cf06c08b5e8fb380eb893a71983685cf00216a"
+      },
+      "failure": null,
+      "independent_candidates": [
+        {
+          "act_completion_rate": 0.0,
+          "act_completion_samples": 2,
+          "action_kind": "play_card",
+          "attempted_simulations": 2,
+          "candidate_index": 0,
+          "completed_simulations": 2,
+          "death_risk": 0.5,
+          "failed_or_truncated_simulations": 0,
+          "final_hp_samples": 2,
+          "mean_final_hp": 70.0,
+          "mean_post_action_hp": 70.0,
+          "outcome_variance": 0.25,
+          "post_action_hp_samples": 2,
+          "source_action_id": "preserve_hp",
+          "terminal_simulations": 2,
+          "terminal_value": 0.5,
+          "transitions": 4,
+          "unique_simulation_seeds": 2,
+          "victories": 1,
+          "worker_cpu_seconds": 0.001804000000000007,
+          "worker_wall_seconds": 0.0018107499927282333
+        },
+        {
+          "act_completion_rate": 0.0,
+          "act_completion_samples": 2,
+          "action_kind": "play_card",
+          "attempted_simulations": 2,
+          "candidate_index": 1,
+          "completed_simulations": 2,
+          "death_risk": 0.0,
+          "failed_or_truncated_simulations": 0,
+          "final_hp_samples": 2,
+          "mean_final_hp": 42.0,
+          "mean_post_action_hp": 42.0,
+          "outcome_variance": 0.0,
+          "post_action_hp_samples": 2,
+          "source_action_id": "take_damage_for_power",
+          "terminal_simulations": 2,
+          "terminal_value": 1.0,
+          "transitions": 4,
+          "unique_simulation_seeds": 2,
+          "victories": 2,
+          "worker_cpu_seconds": 0.0016059999999999963,
+          "worker_wall_seconds": 0.0016079999040812254
+        },
+        {
+          "act_completion_rate": 0.0,
+          "act_completion_samples": 2,
+          "action_kind": "use_potion",
+          "attempted_simulations": 2,
+          "candidate_index": 2,
+          "completed_simulations": 2,
+          "death_risk": 0.0,
+          "failed_or_truncated_simulations": 0,
+          "final_hp_samples": 2,
+          "mean_final_hp": 60.0,
+          "mean_post_action_hp": 60.0,
+          "outcome_variance": 0.0,
+          "post_action_hp_samples": 2,
+          "source_action_id": "spend_potion_for_relic",
+          "terminal_simulations": 2,
+          "terminal_value": 1.0,
+          "transitions": 4,
+          "unique_simulation_seeds": 2,
+          "victories": 2,
+          "worker_cpu_seconds": 0.0016609999999999958,
+          "worker_wall_seconds": 0.001665791030973196
+        }
+      ],
+      "run_seed": 7,
+      "search_report": {
+        "content_id": "sha256:5e940b114b2cb4a8fed6046b01fb6c0d09d66c7e47f392ee7e411140648f4efa",
+        "path": "cases/validation-seed-7-combat-0/search/fixed-search-report.json",
+        "sha256": "5b9e41ccd4319b59a970361f608b50b218f2d56eea17a132e174c68e083d1f6d"
+      },
+      "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "state_id": "validation-seed-7-combat-0",
+      "status": "completed",
+      "tiers": [
+        {
+          "act_completion_rate": 0.0,
+          "best_independent_terminal_value": 1.0,
+          "compute": {
+            "attempted_simulations": 3,
+            "p95_worker_wall_seconds": 0.0008198749274015427,
+            "transitions": 6,
+            "wall_seconds": 0.0565800410695374,
+            "worker_cpu_seconds": 0.0024339999999999987
+          },
+          "death_risk_brier": 0.5,
+          "independent_attempts": 2,
+          "independent_best_action": false,
+          "independent_deaths": 1,
+          "independent_terminal_value": 0.5,
+          "mean_final_hp": 70.0,
+          "mean_post_action_hp": 70.0,
+          "observed_death_risk": 0.5,
+          "predicted_death_risk": 0.0,
+          "predicted_terminal_value": 1.0,
+          "selected_action_id": "preserve_hp",
+          "selected_candidate_index": 0,
+          "simulation_budget": 3,
+          "terminal_value_regret": 0.5,
+          "tier": "shallow"
+        },
+        {
+          "act_completion_rate": 0.0,
+          "best_independent_terminal_value": 1.0,
+          "compute": {
+            "attempted_simulations": 4,
+            "p95_worker_wall_seconds": 0.0008275000145658851,
+            "transitions": 8,
+            "wall_seconds": 0.05771245900541544,
+            "worker_cpu_seconds": 0.003261
+          },
+          "death_risk_brier": 0.0,
+          "independent_attempts": 2,
+          "independent_best_action": true,
+          "independent_deaths": 0,
+          "independent_terminal_value": 1.0,
+          "mean_final_hp": 60.0,
+          "mean_post_action_hp": 60.0,
+          "observed_death_risk": 0.0,
+          "predicted_death_risk": 0.0,
+          "predicted_terminal_value": 1.0,
+          "selected_action_id": "spend_potion_for_relic",
+          "selected_candidate_index": 2,
+          "simulation_budget": 4,
+          "terminal_value_regret": 0.0,
+          "tier": "medium"
+        },
+        {
+          "act_completion_rate": 0.0,
+          "best_independent_terminal_value": 1.0,
+          "compute": {
+            "attempted_simulations": 5,
+            "p95_worker_wall_seconds": 0.0008794579189270735,
+            "transitions": 10,
+            "wall_seconds": 0.0600789999589324,
+            "worker_cpu_seconds": 0.0042290000000000105
+          },
+          "death_risk_brier": 0.0,
+          "independent_attempts": 2,
+          "independent_best_action": true,
+          "independent_deaths": 0,
+          "independent_terminal_value": 1.0,
+          "mean_final_hp": 60.0,
+          "mean_post_action_hp": 60.0,
+          "observed_death_risk": 0.0,
+          "predicted_death_risk": 0.0,
+          "predicted_terminal_value": 1.0,
+          "selected_action_id": "spend_potion_for_relic",
+          "selected_candidate_index": 2,
+          "simulation_budget": 5,
+          "terminal_value_regret": 0.0,
+          "tier": "expensive"
+        }
+      ]
+    }
+  ],
+  "claim_scope": "validation_compute_quality",
+  "completed_at": "2026-09-22T00:00:00Z",
+  "configuration": {
+    "calibration_bins": 4,
+    "evaluation_samples_per_candidate": 2,
+    "evaluation_sampling_seed": 1,
+    "evaluation_worker_timeout_seconds": 30.0,
+    "evaluation_workers": 6,
+    "maximum_prefix_steps": 4096,
+    "search": {
+      "exploration_constant": 1.4142135623730951,
+      "maximum_rollout_steps": 8,
+      "sampling_seed": 0,
+      "tiers": [
+        {
+          "name": "shallow",
+          "simulations": 3
+        },
+        {
+          "name": "medium",
+          "simulations": 4
+        },
+        {
+          "name": "expensive",
+          "simulations": 5
+        }
+      ],
+      "worker_timeout_seconds": 30.0,
+      "workers": 5
+    }
+  },
+  "independent_evaluation_protocol_id": "sha256-paired-independent-candidate-evaluation-v1",
+  "objective_id": "terminal-victory-v1",
+  "report_id": "sha256:17c468815b484277ad09868d77e101fbe0ccbb12925203ebf57d413fde065bd1",
+  "schema_version": "search-compute-quality-report-v1",
+  "started_at": "2026-09-22T00:00:00Z",
+  "state_set": {
+    "capture_policy_id": "terminal-victory-search-rollout-v1",
+    "cases": [
+      {
+        "combat_state_index": 0,
+        "expected_legal_actions": 3,
+        "expected_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+        "run_seed": 7,
+        "state_id": "validation-seed-7-combat-0"
+      }
+    ],
+    "objective_id": "terminal-victory-v1",
+    "partition": "validation",
+    "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+    "schema_version": "search-benchmark-state-set-v1",
+    "selection_policy": "predeclared-distinct-run-seeds-v1",
+    "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+    "state_set_id": "sha256:337a75221ec00d9bd39e2bb05b1cb2574d9a66c9322feebfe0d7f6f8f3282e3c"
+  },
+  "summary": {
+    "benchmark_denominator": 1,
+    "completed_cases": 1,
+    "completion_rate": 1.0,
+    "failed_cases": 0,
+    "independent_evaluation_simulations": 6,
+    "independent_evaluation_transitions": 12,
+    "search_simulations": 12,
+    "search_transitions": 24,
+    "simulations": 18,
+    "tiers": {
+      "expensive": {
+        "death_risk_brier": 0.0,
+        "death_risk_ece": 0.0,
+        "evaluated_states": 1,
+        "independent_best_action_rate": 1.0,
+        "maximum_terminal_value_regret": 0.0,
+        "mean_act_completion_rate": 0.0,
+        "mean_attempted_simulations": 5.0,
+        "mean_observed_death_risk": 0.0,
+        "mean_post_action_hp": 60.0,
+        "mean_predicted_death_risk": 0.0,
+        "mean_terminal_value_regret": 0.0,
+        "mean_transitions": 10.0,
+        "mean_wall_seconds": 0.0600789999589324,
+        "mean_worker_cpu_seconds": 0.0042290000000000105,
+        "p50_wall_seconds": 0.0600789999589324,
+        "p95_wall_seconds": 0.0600789999589324,
+        "p99_wall_seconds": 0.0600789999589324
+      },
+      "medium": {
+        "death_risk_brier": 0.0,
+        "death_risk_ece": 0.0,
+        "evaluated_states": 1,
+        "independent_best_action_rate": 1.0,
+        "maximum_terminal_value_regret": 0.0,
+        "mean_act_completion_rate": 0.0,
+        "mean_attempted_simulations": 4.0,
+        "mean_observed_death_risk": 0.0,
+        "mean_post_action_hp": 60.0,
+        "mean_predicted_death_risk": 0.0,
+        "mean_terminal_value_regret": 0.0,
+        "mean_transitions": 8.0,
+        "mean_wall_seconds": 0.05771245900541544,
+        "mean_worker_cpu_seconds": 0.003261,
+        "p50_wall_seconds": 0.05771245900541544,
+        "p95_wall_seconds": 0.05771245900541544,
+        "p99_wall_seconds": 0.05771245900541544
+      },
+      "shallow": {
+        "death_risk_brier": 0.5,
+        "death_risk_ece": 0.5,
+        "evaluated_states": 1,
+        "independent_best_action_rate": 0.0,
+        "maximum_terminal_value_regret": 0.5,
+        "mean_act_completion_rate": 0.0,
+        "mean_attempted_simulations": 3.0,
+        "mean_observed_death_risk": 0.5,
+        "mean_post_action_hp": 70.0,
+        "mean_predicted_death_risk": 0.0,
+        "mean_terminal_value_regret": 0.5,
+        "mean_transitions": 6.0,
+        "mean_wall_seconds": 0.0565800410695374,
+        "mean_worker_cpu_seconds": 0.0024339999999999987,
+        "p50_wall_seconds": 0.0565800410695374,
+        "p95_wall_seconds": 0.0565800410695374,
+        "p99_wall_seconds": 0.0565800410695374
+      }
+    },
+    "transitions": 36
+  }
+}

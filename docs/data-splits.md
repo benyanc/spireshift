@@ -13,6 +13,12 @@ The first checked manifest covers mock seeds 0 through 999:
 | Validation | 100 | Model selection, calibration choices, and readiness thresholds |
 | Test | 100 | Frozen final measurement after choices are complete |
 
+The admitted STS2 v0.107.1 backend has a separate checked manifest at
+`manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json`. It uses the same 800/100/100
+counts with a ruleset-specific salt and ruleset identity. The first compute-quality benchmark takes
+only the first 32 SHA-256-ranked validation runs from that manifest; the remaining validation runs
+and all test runs retain their declared roles.
+
 The manifest uses `sha256-ranked-v1`: it hashes every seed with the declared public salt, ranks the
 digests, assigns the exact configured counts, and then stores every resulting seed explicitly. The
 loader recomputes the assignment and content-addressed manifest ID. Changing one seed, count, salt,

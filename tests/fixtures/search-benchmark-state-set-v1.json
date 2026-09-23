@@ -1,0 +1,19 @@
+{
+  "schema_version": "search-benchmark-state-set-v1",
+  "split_manifest_id": "sha256:7010c687c42c5ecc47239da7ccd13ebd40d7af9be012b6774be63bb0a160dfe1",
+  "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+  "objective_id": "terminal-victory-v1",
+  "capture_policy_id": "terminal-victory-search-rollout-v1",
+  "partition": "validation",
+  "selection_policy": "predeclared-distinct-run-seeds-v1",
+  "cases": [
+    {
+      "state_id": "validation-seed-7-combat-0",
+      "run_seed": 7,
+      "combat_state_index": 0,
+      "expected_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+      "expected_legal_actions": 3
+    }
+  ],
+  "state_set_id": "sha256:337a75221ec00d9bd39e2bb05b1cb2574d9a66c9322feebfe0d7f6f8f3282e3c"
+}

@@ -4,6 +4,7 @@ import copy
 import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any, cast
 
 import psutil
@@ -15,12 +16,37 @@ from spireshift.resource_tracking import (
     ExperimentKind,
     ExperimentStatus,
     ResourceLimits,
+    _ProcessSample,
+    _ProcessTreeAccounting,
+    _sample_process_tree,
     capture_hardware,
     load_cost_rates,
     load_resource_report,
     run_tracked_command,
     verify_resource_report,
 )
+
+
+class _FakeProcess:
+    def __init__(self, pid: int, created: float, cpu: float, rss: int = 1) -> None:
+        self.pid = pid
+        self._created = created
+        self._cpu = cpu
+        self._rss = rss
+        self.descendants: list[_FakeProcess] = []
+
+    def children(self, *, recursive: bool) -> list[_FakeProcess]:
+        assert recursive is True
+        return self.descendants
+
+    def create_time(self) -> float:
+        return self._created
+
+    def cpu_times(self) -> SimpleNamespace:
+        return SimpleNamespace(user=self._cpu, system=0.0)
+
+    def memory_info(self) -> SimpleNamespace:
+        return SimpleNamespace(rss=self._rss)
 
 
 def test_tracked_command_captures_hardware_throughput_storage_and_cost(tmp_path: Path) -> None:
@@ -111,6 +137,23 @@ def test_missing_measurements_and_rates_remain_null_and_explicit(tmp_path: Path)
         "storage_rate",
         "energy_usage",
     }
+
+
+def test_process_tree_cpu_accounting_retains_completed_descendants() -> None:
+    root = _FakeProcess(1, 10.0, 0.1)
+    first_child = _FakeProcess(2, 20.0, 1.25)
+    second_child = _FakeProcess(3, 30.0, 2.5)
+    accounting = _ProcessTreeAccounting({})
+    fallback = _ProcessSample(0.0, 0, 1)
+
+    root.descendants = [first_child]
+    first = _sample_process_tree(root, fallback, accounting)  # type: ignore[arg-type]
+    root._cpu = 0.2
+    root.descendants = [second_child]
+    second = _sample_process_tree(root, first, accounting)  # type: ignore[arg-type]
+
+    assert first.cpu_seconds == 1.35
+    assert second.cpu_seconds == 3.95
 
 
 def test_wall_cap_stops_process_and_preserves_partial_artifact(tmp_path: Path) -> None:

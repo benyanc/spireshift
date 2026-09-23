@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any, Protocol, cast
 from uuid import NAMESPACE_URL, uuid5
 
-from spireshift.agents.baseline import TerminalVictoryPolicy
+from spireshift.agents.baseline import SearchRolloutPolicy
 from spireshift.core.manifest import manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import DecisionType, LegalAction, Observation
@@ -28,7 +28,7 @@ from spireshift.search_workers import (
     verify_search_worker_batch,
 )
 
-FIXED_SEARCH_REPORT_SCHEMA_VERSION = "fixed-search-report-v1"
+FIXED_SEARCH_REPORT_SCHEMA_VERSION = "fixed-search-report-v2"
 FIXED_SEARCH_VERIFICATION_SCHEMA_VERSION = "fixed-search-verification-v1"
 FIXED_SEARCH_PLANNER_ID = "isolated-root-uct-terminal-victory-v1"
 FIXED_SEARCH_OBJECTIVE_ID = "terminal-victory-v1"
@@ -406,7 +406,7 @@ def capture_combat_state(
                 None,
             )
         seen_combat_states = 0
-        policy = TerminalVictoryPolicy()
+        policy = SearchRolloutPolicy()
         for _ in range(maximum_prefix_steps + 1):
             if observation.decision_type in {DecisionType.COMBAT, DecisionType.COMBAT_SELECTION}:
                 if seen_combat_states == combat_state_index:
@@ -512,7 +512,7 @@ def run_fixed_search_suite(
             "method": captured.capture_method,
             "combat_state_index": captured.combat_state_index,
             "policy_id": (
-                TerminalVictoryPolicy().policy_id
+                SearchRolloutPolicy().policy_id
                 if captured.capture_method == "baseline_policy_combat_index"
                 else None
             ),

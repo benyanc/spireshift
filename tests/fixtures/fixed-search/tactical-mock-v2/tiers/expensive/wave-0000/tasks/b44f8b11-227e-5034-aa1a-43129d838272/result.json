@@ -1,0 +1,38 @@
+{
+  "batch_id": "6ed35d63-f2ca-5aa1-a899-053c06bebb11",
+  "cpu_seconds": 0.0009709999999999996,
+  "message": "search simulation completed",
+  "output": {
+    "action_id": "preserve_hp",
+    "checkpoint_verified": true,
+    "continuation_policy_id": "terminal-victory-search-rollout-v1",
+    "diagnostics": {
+      "act_completed": false,
+      "final_hp": 70,
+      "maximum_floor": 20,
+      "post_action_floor": 20,
+      "post_action_hp": 70,
+      "source_act": 2,
+      "source_floor": 20,
+      "source_hp": 70
+    },
+    "final_state_hash": "0f4cc3440835cbeaf5799278724f941c0ef954a02f244eca8caa245b4e8715f7",
+    "method": "isolated-public-world-rollout-v1",
+    "patch_id": "tactical-handoff-mock-v1",
+    "ruleset_manifest_id": "sha256:509d276edaa76b4ee19e777063bf41871f8848b0e69f5b37a428d5c967d08719",
+    "sampled_worlds": 1,
+    "simulation_seed": 3739024779013320488,
+    "source_state_hash": "b23627f1d615608bdbc7e386223fa54dee22d14358a6732de01d77f56b3304ff",
+    "terminal": true,
+    "terminal_reward": 0.0,
+    "transitions": 2,
+    "truncated": false,
+    "victory": false
+  },
+  "request_sha256": "82019d68027efc37aa7a80d893385e35774ba87cb3b9b130183cc376bb897d7b",
+  "schema_version": "search-worker-result-v2",
+  "status": "completed",
+  "task_id": "b44f8b11-227e-5034-aa1a-43129d838272",
+  "wall_seconds": 0.0009740829700604081,
+  "worker_pid": 43303
+}

@@ -111,6 +111,14 @@ from spireshift.resource_tracking import (
 )
 from spireshift.rollouts import run_mock_rollout_batch, verify_rollout_batch
 from spireshift.runner import RunResult, run_episode
+from spireshift.search_benchmark import (
+    SearchBenchmarkConfig,
+    freeze_search_benchmark_state_set,
+    load_search_benchmark_state_set,
+    run_search_compute_quality_benchmark,
+    verify_search_compute_quality_report,
+    write_search_benchmark_state_set,
+)
 from spireshift.search_workers import (
     SearchBackendSpec,
     load_search_task,
@@ -355,6 +363,44 @@ def build_parser() -> argparse.ArgumentParser:
     )
     fixed_verify.add_argument("report", type=Path)
     fixed_verify.add_argument("--output", type=Path)
+    benchmark_freeze = search_commands.add_parser(
+        "freeze-benchmark-states",
+        help="Freeze a content-addressed validation state set before benchmark execution",
+    )
+    benchmark_freeze.add_argument("specification", type=Path)
+    benchmark_freeze.add_argument("output", type=Path)
+    benchmark_freeze.add_argument("--split-manifest", type=Path)
+    search_benchmark = search_commands.add_parser(
+        "benchmark-fixed",
+        help="Benchmark fixed search budgets on a frozen validation state set",
+    )
+    search_benchmark.add_argument("output_dir", type=Path)
+    search_benchmark.add_argument("--states", type=Path, required=True)
+    search_benchmark.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    search_benchmark.add_argument("--upstream-root", type=Path)
+    search_benchmark.add_argument("--manifest", type=Path)
+    search_benchmark.add_argument("--maximum-prefix-steps", type=int, default=4096)
+    search_benchmark.add_argument("--shallow-simulations", type=int, default=32)
+    search_benchmark.add_argument("--medium-simulations", type=int, default=64)
+    search_benchmark.add_argument("--expensive-simulations", type=int, default=256)
+    search_benchmark.add_argument("--exploration-constant", type=float, default=2**0.5)
+    search_benchmark.add_argument("--sampling-seed", type=int, default=0)
+    search_benchmark.add_argument("--maximum-rollout-steps", type=int, default=4096)
+    search_benchmark.add_argument("--workers", type=int, default=4)
+    search_benchmark.add_argument("--worker-timeout", type=float, default=120.0)
+    search_benchmark.add_argument("--evaluation-samples", type=int, default=64)
+    search_benchmark.add_argument("--evaluation-sampling-seed", type=int, default=1)
+    search_benchmark.add_argument("--evaluation-workers", type=int, default=8)
+    search_benchmark.add_argument("--evaluation-worker-timeout", type=float, default=120.0)
+    search_benchmark.add_argument("--calibration-bins", type=int, default=10)
+    benchmark_verify = search_commands.add_parser(
+        "verify-benchmark",
+        help="Verify benchmark identities, linked evidence, metrics, and exact replays",
+    )
+    benchmark_verify.add_argument("report", type=Path)
+    benchmark_verify.add_argument("--output", type=Path)
 
     resources = subparsers.add_parser(
         "resources", help="Measure, cap, cost, and verify experiment resource use"
@@ -899,6 +945,71 @@ def main(argv: Sequence[str] | None = None) -> int:
             fixed_verification = verify_fixed_search_report(args.report)
             _emit_json(fixed_verification.as_dict(), args.output)
             return 0 if fixed_verification.valid else 1
+        if args.search_command == "verify-benchmark":
+            benchmark_verification = verify_search_compute_quality_report(args.report)
+            _emit_json(benchmark_verification.as_dict(), args.output)
+            return 0 if benchmark_verification.valid else 1
+        if args.search_command == "freeze-benchmark-states":
+            specification = json.loads(args.specification.read_text(encoding="utf-8"))
+            state_set_document = freeze_search_benchmark_state_set(
+                specification,
+                split_manifest=(
+                    load_split_manifest(args.split_manifest)
+                    if args.split_manifest is not None
+                    else None
+                ),
+            )
+            write_search_benchmark_state_set(state_set_document, args.output)
+            _emit_json(state_set_document, None)
+            return 0
+        if args.search_command == "benchmark-fixed":
+            if args.backend == "evangambit":
+                if args.upstream_root is None or args.manifest is None:
+                    raise ValueError("EvanGambit benchmark requires --upstream-root and --manifest")
+                benchmark_backend = SearchBackendSpec.evangambit(
+                    args.upstream_root,
+                    args.manifest,
+                )
+            elif args.backend == "tactical_mock":
+                benchmark_backend = SearchBackendSpec.tactical_mock()
+            else:
+                benchmark_backend = SearchBackendSpec.mock()
+            benchmark_result = run_search_compute_quality_benchmark(
+                backend=benchmark_backend,
+                state_set=load_search_benchmark_state_set(args.states),
+                config=SearchBenchmarkConfig(
+                    search=FixedSearchConfig(
+                        tiers=(
+                            FixedSearchTier("shallow", args.shallow_simulations),
+                            FixedSearchTier("medium", args.medium_simulations),
+                            FixedSearchTier("expensive", args.expensive_simulations),
+                        ),
+                        exploration_constant=args.exploration_constant,
+                        sampling_seed=args.sampling_seed,
+                        maximum_rollout_steps=args.maximum_rollout_steps,
+                        workers=args.workers,
+                        worker_timeout_seconds=args.worker_timeout,
+                    ),
+                    maximum_prefix_steps=args.maximum_prefix_steps,
+                    evaluation_samples_per_candidate=args.evaluation_samples,
+                    evaluation_sampling_seed=args.evaluation_sampling_seed,
+                    evaluation_workers=args.evaluation_workers,
+                    evaluation_worker_timeout_seconds=args.evaluation_worker_timeout,
+                    calibration_bins=args.calibration_bins,
+                ),
+                output_directory=args.output_dir,
+            )
+            benchmark_summary = benchmark_result.report["summary"]
+            if isinstance(benchmark_summary, dict):
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(benchmark_summary["benchmark_denominator"]),
+                        simulations=int(benchmark_summary["simulations"]),
+                        transitions=int(benchmark_summary["transitions"]),
+                    )
+                )
+            _emit_json(benchmark_result.report, None)
+            return 0 if benchmark_result.successful else 1
         if args.search_command == "fixed-suite":
             if args.backend == "evangambit":
                 if args.upstream_root is None or args.manifest is None:

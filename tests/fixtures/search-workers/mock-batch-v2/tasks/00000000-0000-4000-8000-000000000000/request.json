@@ -1,0 +1,19 @@
+{
+  "action_id": "elite_path",
+  "backend": {
+    "kind": "mock",
+    "manifest_path": null,
+    "upstream_root": null
+  },
+  "checkpoint": {
+    "action_prefix": [],
+    "patch_id": "mock-v1",
+    "ruleset_manifest_id": "sha256:fbcb54a992a3b5cda36fafc62e1efffec5e684e97e2a12c9278cc7a7409bc2c1",
+    "run_seed": 7,
+    "state_hash": "39e196229f065ba438a8a02444f4ec325c7de0313109d4cdc182a8eede837cc8"
+  },
+  "maximum_rollout_steps": 4,
+  "schema_version": "search-simulation-task-v1",
+  "simulation_seed": 0,
+  "task_id": "00000000-0000-4000-8000-000000000000"
+}

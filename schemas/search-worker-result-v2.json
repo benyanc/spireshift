@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/search-worker-result-v2.json",
+  "title": "SpireShift Search Worker Result v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "batch_id",
+    "task_id",
+    "status",
+    "worker_pid",
+    "message",
+    "request_sha256",
+    "cpu_seconds",
+    "wall_seconds",
+    "output"
+  ],
+  "properties": {
+    "schema_version": {"const": "search-worker-result-v2"},
+    "batch_id": {"type": "string", "format": "uuid"},
+    "task_id": {"type": "string", "format": "uuid"},
+    "status": {"enum": ["completed", "worker_error", "crashed", "timeout"]},
+    "worker_pid": {"type": "integer", "minimum": 1},
+    "message": {"type": "string", "minLength": 1},
+    "request_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "cpu_seconds": {"type": "number", "minimum": 0},
+    "wall_seconds": {"type": "number", "minimum": 0},
+    "output": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/output"}
+      ]
+    }
+  },
+  "$defs": {
+    "output": {
+      "type": "object",
+      "required": [
+        "method",
+        "patch_id",
+        "ruleset_manifest_id",
+        "source_state_hash",
+        "action_id",
+        "simulation_seed",
+        "checkpoint_verified",
+        "continuation_policy_id",
+        "sampled_worlds",
+        "transitions",
+        "terminal",
+        "victory",
+        "terminal_reward",
+        "truncated",
+        "final_state_hash",
+        "diagnostics"
+      ],
+      "properties": {
+        "method": {"const": "isolated-public-world-rollout-v1"},
+        "patch_id": {"type": "string", "minLength": 1},
+        "ruleset_manifest_id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "source_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "action_id": {"type": "string", "minLength": 1},
+        "simulation_seed": {"type": "integer"},
+        "checkpoint_verified": {"const": true},
+        "continuation_policy_id": {"const": "terminal-victory-search-rollout-v1"},
+        "sampled_worlds": {"const": 1},
+        "transitions": {"type": "integer", "minimum": 1},
+        "terminal": {"type": "boolean"},
+        "victory": {"type": "boolean"},
+        "terminal_reward": {"type": ["number", "null"], "enum": [null, 0.0, 1.0]},
+        "truncated": {"type": "boolean"},
+        "final_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "diagnostics": {
+          "type": "object",
+          "required": [
+            "source_act",
+            "source_floor",
+            "source_hp",
+            "post_action_hp",
+            "post_action_floor",
+            "maximum_floor",
+            "act_completed",
+            "final_hp"
+          ],
+          "properties": {
+            "source_act": {"type": ["integer", "string", "null"]},
+            "source_floor": {"type": ["integer", "null"]},
+            "source_hp": {"type": ["integer", "null"]},
+            "post_action_hp": {"type": ["integer", "null"]},
+            "post_action_floor": {"type": ["integer", "null"]},
+            "maximum_floor": {"type": ["integer", "null"]},
+            "act_completed": {"type": ["boolean", "null"]},
+            "final_hp": {"type": ["integer", "null"]}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

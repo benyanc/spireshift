@@ -21,6 +21,10 @@ from spireshift.splits import (
 
 MANIFEST_PATH = Path("manifests/splits/mock-v1-seeds-000000-000999-v1.json")
 SPECIFICATION_PATH = Path("configs/splits/mock-v1.json")
+PRODUCTION_MANIFEST_PATH = Path(
+    "manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json"
+)
+PRODUCTION_SPECIFICATION_PATH = Path("configs/splits/sts2-v0.107.1-evangambit-v1.json")
 DATASET_INDEX_PATH = Path("tests/fixtures/splits/dataset-index-v1.json")
 
 
@@ -51,6 +55,18 @@ def test_specification_reproduces_checked_manifest_and_cannot_replace_it(tmp_pat
     output.write_text("{}\n", encoding="utf-8")
     with pytest.raises(FileExistsError, match="Refusing to replace"):
         write_frozen_split_manifest(generated, output)
+
+
+def test_production_split_specification_reproduces_checked_manifest() -> None:
+    specification = json.loads(PRODUCTION_SPECIFICATION_PATH.read_text(encoding="utf-8"))
+    generated = freeze_split_manifest(specification)
+    checked = load_split_manifest(PRODUCTION_MANIFEST_PATH)
+
+    assert generated == checked
+    assert generated.manifest_id == (
+        "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4"
+    )
+    assert tuple(len(generated.seeds(split)) for split in SplitName) == (800, 100, 100)
 
 
 def test_manifest_rejects_a_reassigned_seed_even_with_complete_coverage() -> None:

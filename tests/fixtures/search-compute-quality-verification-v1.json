@@ -1,0 +1,8 @@
+{
+  "schema_version": "search-compute-quality-verification-v1",
+  "valid": true,
+  "report_id": "sha256:17c468815b484277ad09868d77e101fbe0ccbb12925203ebf57d413fde065bd1",
+  "cases": 1,
+  "verified_cases": 1,
+  "errors": []
+}
