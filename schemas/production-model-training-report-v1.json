@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-model-training-report-v1.json",
+  "title": "SpireShift Production Curriculum Model Training Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "model_id",
+    "model_type",
+    "train_dataset_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "training_runs",
+    "validation_runs",
+    "training_records",
+    "validation_records",
+    "floor_thresholds",
+    "pairwise_evidence",
+    "training_history",
+    "held_out_metrics",
+    "terminal_value_status",
+    "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "production-model-training-report-v1"},
+    "report_id": {"$ref": "#/$defs/identifier"},
+    "model_id": {"$ref": "#/$defs/identifier"},
+    "model_type": {"const": "sparse-pairwise-curriculum-multihead-v1"},
+    "train_dataset_id": {"$ref": "#/$defs/identifier"},
+    "validation_dataset_id": {"$ref": "#/$defs/identifier"},
+    "split_manifest_id": {"$ref": "#/$defs/identifier"},
+    "training_runs": {"type": "integer", "minimum": 1},
+    "validation_runs": {"type": "integer", "minimum": 1},
+    "training_records": {"type": "integer", "minimum": 1},
+    "validation_records": {"type": "integer", "minimum": 1},
+    "floor_thresholds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "integer", "minimum": 1}
+    },
+    "pairwise_evidence": {
+      "type": "object",
+      "required": ["train", "validation"],
+      "properties": {
+        "train": {"$ref": "#/$defs/pairwiseEvidence"},
+        "validation": {"$ref": "#/$defs/pairwiseEvidence"}
+      },
+      "additionalProperties": false
+    },
+    "training_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "epoch",
+          "pairwise_policy_cross_entropy",
+          "effective_pair_weight",
+          "soft_target_baseline_cross_entropy",
+          "effective_soft_target_weight",
+          "tactical_risk_cross_entropy",
+          "floor_distribution_cross_entropy"
+        ],
+        "properties": {
+          "epoch": {"type": "integer", "minimum": 1},
+          "pairwise_policy_cross_entropy": {"type": "number", "minimum": 0},
+          "effective_pair_weight": {"type": "number", "exclusiveMinimum": 0},
+          "soft_target_baseline_cross_entropy": {"type": "number", "minimum": 0},
+          "effective_soft_target_weight": {"type": "number", "exclusiveMinimum": 0},
+          "tactical_risk_cross_entropy": {"type": "number", "minimum": 0},
+          "floor_distribution_cross_entropy": {"type": "number", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "held_out_metrics": {
+      "type": "object",
+      "required": [
+        "policy",
+        "terminal_value",
+        "tactical_death_risk",
+        "maximum_floor_distribution"
+      ],
+      "properties": {
+        "policy": {"$ref": "#/$defs/policyMetrics"},
+        "terminal_value": {"$ref": "#/$defs/blockedTerminal"},
+        "tactical_death_risk": {"$ref": "#/$defs/calibration"},
+        "maximum_floor_distribution": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"$ref": "#/$defs/calibration"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "terminal_value_status": {"$ref": "#/$defs/terminalStatus"},
+    "claim_scope": {"const": "production_bootstrap_auxiliary_only"}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "probability": {"type": "number", "minimum": 0, "maximum": 1},
+    "pairwiseEvidence": {
+      "type": "object",
+      "required": ["states", "pairs", "decisive_pairs", "effective_pair_weight", "by_decision_type"],
+      "properties": {
+        "states": {"type": "integer", "minimum": 1},
+        "pairs": {"type": "integer", "minimum": 1},
+        "decisive_pairs": {"type": "integer", "minimum": 1},
+        "effective_pair_weight": {"type": "number", "exclusiveMinimum": 0},
+        "by_decision_type": {"type": "object", "minProperties": 1}
+      },
+      "additionalProperties": false
+    },
+    "calibrationBin": {
+      "type": "object",
+      "required": ["bin", "count", "mean_prediction", "observed_frequency"],
+      "properties": {
+        "bin": {"type": "integer", "minimum": 0},
+        "count": {"type": "integer", "minimum": 1},
+        "mean_prediction": {"$ref": "#/$defs/probability"},
+        "observed_frequency": {"$ref": "#/$defs/probability"}
+      },
+      "additionalProperties": false
+    },
+    "calibration": {
+      "type": "object",
+      "required": [
+        "samples",
+        "brier_score",
+        "expected_calibration_error",
+        "calibration_bins",
+        "outcome_prevalence",
+        "constant_rate_brier_score",
+        "brier_skill_score"
+      ],
+      "properties": {
+        "samples": {"type": "integer", "minimum": 1},
+        "brier_score": {"$ref": "#/$defs/probability"},
+        "expected_calibration_error": {"$ref": "#/$defs/probability"},
+        "outcome_prevalence": {"$ref": "#/$defs/probability"},
+        "constant_rate_brier_score": {"$ref": "#/$defs/probability"},
+        "brier_skill_score": {"type": ["number", "null"]},
+        "calibration_bins": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/calibrationBin"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "softBaseline": {
+      "type": "object",
+      "required": [
+        "hard_teacher_action_agreement",
+        "weighted_pairwise_cross_entropy",
+        "decisive_pair_accuracy",
+        "mean_progress_utility_regret"
+      ],
+      "properties": {
+        "hard_teacher_action_agreement": {"$ref": "#/$defs/probability"},
+        "weighted_pairwise_cross_entropy": {"type": "number", "minimum": 0},
+        "decisive_pair_accuracy": {"$ref": "#/$defs/probability"},
+        "mean_progress_utility_regret": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "policyMetrics": {
+      "type": "object",
+      "required": [
+        "hard_teacher_action_agreement",
+        "weighted_pairwise_cross_entropy",
+        "effective_pair_weight",
+        "decisive_pairs",
+        "decisive_pair_accuracy",
+        "mean_progress_utility_regret",
+        "source_order_mean_progress_utility_regret",
+        "soft_target_baseline",
+        "auxiliary_policy_gate",
+        "by_decision_type"
+      ],
+      "properties": {
+        "hard_teacher_action_agreement": {"$ref": "#/$defs/probability"},
+        "weighted_pairwise_cross_entropy": {"type": "number", "minimum": 0},
+        "effective_pair_weight": {"type": "number", "exclusiveMinimum": 0},
+        "decisive_pairs": {"type": "integer", "minimum": 1},
+        "decisive_pair_accuracy": {"$ref": "#/$defs/probability"},
+        "mean_progress_utility_regret": {"type": "number", "minimum": 0},
+        "source_order_mean_progress_utility_regret": {"type": "number", "minimum": 0},
+        "soft_target_baseline": {"$ref": "#/$defs/softBaseline"},
+        "auxiliary_policy_gate": {
+          "type": "object",
+          "required": ["passed", "checks"],
+          "properties": {
+            "passed": {"type": "boolean"},
+            "checks": {
+              "type": "object",
+              "required": [
+                "pairwise_cross_entropy_below_uniform",
+                "decisive_pair_accuracy_above_chance",
+                "regret_below_source_order",
+                "pairwise_cross_entropy_below_soft_target"
+              ],
+              "properties": {
+                "pairwise_cross_entropy_below_uniform": {"type": "boolean"},
+                "decisive_pair_accuracy_above_chance": {"type": "boolean"},
+                "regret_below_source_order": {"type": "boolean"},
+                "pairwise_cross_entropy_below_soft_target": {"type": "boolean"}
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "by_decision_type": {"type": "object", "minProperties": 1}
+      },
+      "additionalProperties": false
+    },
+    "blockedTerminal": {
+      "type": "object",
+      "required": ["status", "reason"],
+      "properties": {
+        "status": {"const": "blocked"},
+        "reason": {"const": "all_zero_terminal_victory_evidence"}
+      },
+      "additionalProperties": false
+    },
+    "terminalStatus": {
+      "type": "object",
+      "required": ["promoted", "reason", "train_victories", "validation_victories"],
+      "properties": {
+        "promoted": {"const": false},
+        "reason": {"const": "all_zero_terminal_victory_evidence"},
+        "train_victories": {"const": 0},
+        "validation_victories": {"const": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

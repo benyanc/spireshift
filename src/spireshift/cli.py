@@ -98,6 +98,13 @@ from spireshift.models import (
     train_initial_models,
     write_model_artifact,
 )
+from spireshift.production_models import (
+    ProductionTrainingConfig,
+    load_production_model_checkpoint,
+    load_production_training_report,
+    train_production_base_model,
+    write_production_model_artifact,
+)
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
 from spireshift.representations import (
@@ -610,6 +617,32 @@ def build_parser() -> argparse.ArgumentParser:
     model_verify.add_argument("checkpoint", type=Path)
     model_verify.add_argument("--report", type=Path)
     model_verify.add_argument("--output", type=Path)
+    production_train = model_commands.add_parser(
+        "train-curriculum",
+        help="Fit the confidence-weighted production base model from curriculum-v2 data",
+    )
+    production_train.add_argument("train_report", type=Path)
+    production_train.add_argument("validation_report", type=Path)
+    production_train.add_argument("checkpoint", type=Path)
+    production_train.add_argument("--report", type=Path, required=True)
+    production_train.add_argument("--split-manifest", type=Path, required=True)
+    production_train.add_argument("--epochs", type=int, default=60)
+    production_train.add_argument("--learning-rate", type=float, default=0.02)
+    production_train.add_argument("--l2-regularization", type=float, default=0.0001)
+    production_train.add_argument("--gradient-clip", type=float, default=5.0)
+    production_train.add_argument("--vector-dimension", type=int, default=4096)
+    production_train.add_argument("--interaction-dimension", type=int, default=8192)
+    production_train.add_argument("--tactical-horizon", type=int, default=32)
+    production_train.add_argument("--pairwise-noise-floor", type=float, default=0.25)
+    production_train.add_argument("--calibration-bins", type=int, default=10)
+    production_train.add_argument("--shuffle-seed", type=int, default=0)
+    production_verify = model_commands.add_parser(
+        "verify-curriculum",
+        help="Verify a production curriculum checkpoint and optional training report",
+    )
+    production_verify.add_argument("checkpoint", type=Path)
+    production_verify.add_argument("--report", type=Path)
+    production_verify.add_argument("--output", type=Path)
 
     calibrate = subparsers.add_parser(
         "calibrate", help="Fit or verify held-out probability calibration"
@@ -1445,6 +1478,78 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
     if args.command == "model":
         try:
+            if args.model_command == "verify-curriculum":
+                checkpoint = load_production_model_checkpoint(args.checkpoint)
+                loaded_training_report = (
+                    load_production_training_report(args.report, checkpoint=checkpoint)
+                    if args.report is not None
+                    else None
+                )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "model_id": checkpoint["model_id"],
+                        "report_id": (
+                            None
+                            if loaded_training_report is None
+                            else loaded_training_report["report_id"]
+                        ),
+                    },
+                    args.output,
+                )
+                return 0
+            if args.model_command == "train-curriculum":
+                if args.checkpoint.resolve() == args.report.resolve():
+                    raise ValueError(
+                        "Production checkpoint and training report outputs must differ"
+                    )
+                split_manifest = load_split_manifest(args.split_manifest)
+                production_result = train_production_base_model(
+                    train_report_path=args.train_report,
+                    validation_report_path=args.validation_report,
+                    split_manifest=split_manifest,
+                    config=ProductionTrainingConfig(
+                        epochs=args.epochs,
+                        learning_rate=args.learning_rate,
+                        l2_regularization=args.l2_regularization,
+                        gradient_clip=args.gradient_clip,
+                        vector_dimension=args.vector_dimension,
+                        interaction_dimension=args.interaction_dimension,
+                        tactical_horizon=args.tactical_horizon,
+                        pairwise_noise_floor=args.pairwise_noise_floor,
+                        calibration_bins=args.calibration_bins,
+                        shuffle_seed=args.shuffle_seed,
+                    ),
+                )
+                write_production_model_artifact(
+                    production_result.checkpoint,
+                    args.checkpoint,
+                    label="production model checkpoint",
+                )
+                write_production_model_artifact(
+                    production_result.report,
+                    args.report,
+                    label="production model training report",
+                )
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=(
+                            int(production_result.report["training_runs"])
+                            + int(production_result.report["validation_runs"])
+                        ),
+                    )
+                )
+                _emit_json(
+                    {
+                        "checkpoint_path": str(args.checkpoint),
+                        "model_id": production_result.checkpoint["model_id"],
+                        "report_path": str(args.report),
+                        "report_id": production_result.report["report_id"],
+                        "held_out_metrics": production_result.report["held_out_metrics"],
+                    },
+                    None,
+                )
+                return 0
             if args.model_command == "verify":
                 checkpoint = load_model_checkpoint(args.checkpoint)
                 loaded_training_report = (
@@ -1520,7 +1625,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
-            error_output = args.output if args.model_command == "verify" else None
+            error_output = (
+                args.output if args.model_command in {"verify", "verify-curriculum"} else None
+            )
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "calibrate":

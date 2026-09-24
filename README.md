@@ -47,7 +47,10 @@ The repository currently contains the research contracts and a seeded mock verti
     terminal-value regret, death-risk calibration, compute and tail-latency metrics, and exact replay; and
 25. a production bootstrap curriculum with a stronger public-state continuation policy, paired
     terminal-first candidate labels, milestone distributions, isolated workers, and resumable
-    failure-preserving evidence.
+    failure-preserving evidence; and
+26. a confidence-weighted production curriculum trainer with pairwise/soft-target comparisons,
+    tactical-risk and ordinal floor heads, held-out auxiliary gates, and an explicit block on
+    terminal-value promotion from all-loss data.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -170,6 +173,10 @@ regenerates every sampled outcome and audits complete-run split ownership.
 candidate policy, terminal run-value estimate, and candidate-conditioned tactical death risk. It
 requires disjoint frozen train and validation runs and reports independently evaluated regret and
 calibration in a content-addressed training report.
+
+[Production curriculum model training](docs/production-base-model.md) fits candidate-pair evidence
+from the frozen STS2 curricula, compares it with the weighted soft-target formulation, and keeps the
+terminal-value head blocked while the available outcomes remain all losses.
 
 [Selective DAgger collection](docs/selective-dagger.md) runs the student on new complete training
 runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,
