@@ -157,6 +157,20 @@ artifact. Do not start scaled teacher generation until both discovery reports an
 been inspected. The generator itself enforces their structural thresholds before scheduling a
 single rollout.
 
+The completed discovery artifacts are frozen at:
+
+- `manifests/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json`, state-set ID
+  `sha256:df1f686764bf14ea0022d5d8425b039917b775e93acadfd12caf02033be45ab6`;
+- `manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json`, state-set ID
+  `sha256:7cdf551662333a1f9320811a739ca904d992beec9b297271517d16366a9a7c40`.
+
+Train contains 545 cases, 529 unique public states, 64 complete-run seeds, seven source floors, and
+eight decision types. Validation contains 204 cases, 202 unique states, 24 complete-run seeds, six
+source floors, and seven decision types. All structural gates pass, all 88 runs terminate within
+the discovery limit, and the partitions share no run seeds. They share five public state hashes:
+four forced one-action event states and one three-action opening relic state. This is reported as a
+small validation limitation; it does not violate complete-run split ownership.
+
 For each candidate, v2 preserves every paired outcome and adds a pairwise preference matrix,
 normalized soft policy target, progress-utility standard error, paired preference margin, selected
 winner confidence, and first-half versus second-half winner agreement. `policy_target_weight`
@@ -173,10 +187,62 @@ labeled-state count, half-split agreement, and reached-floor occupancy. It repor
 promotion separately. Both victories and non-victories are required, so an all-loss dataset can
 pass an auxiliary-policy gate but can never promote the terminal value head or satisfy readiness.
 
-Once the discovered state sets pass structural review, generate train and validation independently
-with the same resource-capped pattern as the pilot. Use separate artifact and resource-report roots,
-16 samples per candidate, eight workers, and `--resume` after an interruption. These are sustained
-jobs and are intentionally left for the operator to start and observe.
+The train set has 2,255 candidates and schedules 36,080 simulations at 16 paired samples per
+candidate. Run it through the resource wrapper:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-teacher-v2.json \
+  --metrics artifacts/resources/bootstrap-train-teacher-v2-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-train-v2 \
+  --workers 8 \
+  --max-wall-seconds 7200 \
+  --max-cpu-seconds 40000 \
+  --max-storage-bytes 5000000000 \
+  --max-memory-bytes 32000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-train-v2 \
+    --states manifests/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --samples-per-candidate 16 \
+    --workers 8 \
+    --worker-timeout 120
+```
+
+Validation has 865 candidates and schedules 13,840 simulations. Run it after train completes:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-validation-teacher-v2.json \
+  --metrics artifacts/resources/bootstrap-validation-teacher-v2-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-validation-v2 \
+  --workers 8 \
+  --max-wall-seconds 7200 \
+  --max-cpu-seconds 40000 \
+  --max-storage-bytes 5000000000 \
+  --max-memory-bytes 32000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-validation-v2 \
+    --states manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --samples-per-candidate 16 \
+    --workers 8 \
+    --worker-timeout 120
+```
+
+These are sustained jobs and are intentionally left for the operator to start and observe. If a
+job is interrupted before its dataset report is written, use a new resource-report path and rerun
+the inner command against the same artifact root with `--resume`.
 
 The admitted-backend contract smoke is recorded in
 `docs/evidence/bootstrap-curriculum-v2-admitted-smoke.json`. It captured reward, path, combat zero,

@@ -149,6 +149,14 @@ def _registry() -> Registry[Any]:
             "../../manifests/bootstrap/sts2-v0.107.1-evangambit-train-pilot-v1.json",
         ),
         (
+            "bootstrap-state-set-v2.json",
+            "../../manifests/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json",
+        ),
+        (
+            "bootstrap-state-set-v2.json",
+            "../../manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json",
+        ),
+        (
             "bootstrap-simulation-task-v1.json",
             "bootstrap/tactical-mock-v1/dataset/cases/train-seed-000007-combat-000/attempt-0001/tasks/588634b5-e038-51ce-97f1-591206578543/request.json",
         ),

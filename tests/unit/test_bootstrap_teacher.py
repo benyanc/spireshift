@@ -26,12 +26,18 @@ from spireshift.core.objective import load_objective
 from spireshift.core.types import DecisionType
 from spireshift.rollouts import sha256_file
 from spireshift.search_workers import SearchBackendSpec
-from spireshift.splits import SplitManifest, freeze_split_manifest
+from spireshift.splits import SplitManifest, SplitName, freeze_split_manifest, load_split_manifest
 
 PRODUCTION_SPLIT = Path("manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json")
 PRODUCTION_STATE_SET = Path("manifests/bootstrap/sts2-v0.107.1-evangambit-train-pilot-v1.json")
 PRODUCTION_STATE_SPECIFICATION = Path(
     "configs/bootstrap/sts2-v0.107.1-evangambit-train-pilot-v1.json"
+)
+PRODUCTION_TRAIN_CURRICULUM = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json"
+)
+PRODUCTION_VALIDATION_CURRICULUM = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json"
 )
 
 
@@ -142,8 +148,6 @@ def test_bootstrap_state_set_is_content_addressed_and_train_only(tmp_path: Path)
 
 
 def test_production_bootstrap_states_are_frozen_to_complete_train_runs() -> None:
-    from spireshift.splits import SplitName, load_split_manifest
-
     split = load_split_manifest(PRODUCTION_SPLIT)
     state_set = load_bootstrap_state_set(PRODUCTION_STATE_SET)
     assert isinstance(state_set, BootstrapStateSet)
@@ -158,6 +162,40 @@ def test_production_bootstrap_states_are_frozen_to_complete_train_runs() -> None
     assert all(case.combat_state_index == 0 for case in state_set.cases)
     assert all(case.expected_legal_actions > 0 for case in state_set.cases)
     assert freeze_bootstrap_state_set(specification, split_manifest=split) == state_set.as_dict()
+
+
+def test_production_curricula_are_frozen_to_disjoint_complete_runs() -> None:
+    split = load_split_manifest(PRODUCTION_SPLIT)
+    train = load_bootstrap_state_set(PRODUCTION_TRAIN_CURRICULUM)
+    validation = load_bootstrap_state_set(PRODUCTION_VALIDATION_CURRICULUM)
+
+    assert isinstance(train, CurriculumStateSet)
+    assert isinstance(validation, CurriculumStateSet)
+    assert train.state_set_id == (
+        "sha256:df1f686764bf14ea0022d5d8425b039917b775e93acadfd12caf02033be45ab6"
+    )
+    assert validation.state_set_id == (
+        "sha256:7cdf551662333a1f9320811a739ca904d992beec9b297271517d16366a9a7c40"
+    )
+    assert len(train.cases) == 545
+    assert len(validation.cases) == 204
+    train_seeds = {case.run_seed for case in train.cases}
+    validation_seeds = {case.run_seed for case in validation.cases}
+    assert len(train_seeds) == 64
+    assert len(validation_seeds) == 24
+    assert train_seeds.isdisjoint(validation_seeds)
+    assert all(split.split_for_seed(seed) is SplitName.TRAIN for seed in train_seeds)
+    assert all(split.split_for_seed(seed) is SplitName.VALIDATION for seed in validation_seeds)
+    shared_hashes = {case.expected_state_hash for case in train.cases} & {
+        case.expected_state_hash for case in validation.cases
+    }
+    assert len(shared_hashes) == 5
+    actionable_shared_hashes = {
+        case.expected_state_hash
+        for case in (*train.cases, *validation.cases)
+        if case.expected_state_hash in shared_hashes and case.expected_legal_actions > 1
+    }
+    assert len(actionable_shared_hashes) == 1
 
 
 def test_bootstrap_dataset_uses_paired_terminal_first_targets_and_verifies(
