@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-policy-evaluation-v1.json",
+  "title": "SpireShift Paired Production Policy Evaluation v1",
+  "type": "object",
+  "required": [
+    "schema_version", "report_id", "started_at", "completed_at", "model_id",
+    "training_report_id", "split_manifest_id", "partition", "ruleset_manifest_id",
+    "patch_id", "objective_id", "configuration", "cases", "summary", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "production-policy-evaluation-v1"},
+    "report_id": {"$ref": "#/$defs/identifier"},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "model_id": {"$ref": "#/$defs/identifier"},
+    "training_report_id": {"$ref": "#/$defs/identifier"},
+    "split_manifest_id": {"$ref": "#/$defs/identifier"},
+    "partition": {"const": "test"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/identifier"},
+    "patch_id": {"type": "string", "minLength": 1},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "configuration": {
+      "type": "object",
+      "required": ["seeds", "workers", "maximum_decisions_per_run", "paired_policies"],
+      "properties": {
+        "seeds": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "workers": {"type": "integer", "minimum": 1},
+        "maximum_decisions_per_run": {"type": "integer", "minimum": 1},
+        "paired_policies": {
+          "type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "cases": {
+      "type": "array", "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["seed", "policy_kind", "path", "case_id"],
+        "properties": {
+          "seed": {"type": "integer", "minimum": 0},
+          "policy_kind": {
+            "enum": ["production_checkpoint", "progress_bootstrap_baseline"]
+          },
+          "path": {"type": "string", "minLength": 1},
+          "case_id": {"$ref": "#/$defs/identifier"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["learned", "baseline", "paired"],
+      "properties": {
+        "learned": {"$ref": "#/$defs/policySummary"},
+        "baseline": {"$ref": "#/$defs/policySummary"},
+        "paired": {"$ref": "#/$defs/pairedSummary"}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {"const": "paired_frozen_test_policy_only_evaluation"}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "policySummary": {
+      "type": "object",
+      "required": [
+        "benchmark_denominator", "completed_runs", "failed_runs", "terminal_runs",
+        "truncated_runs", "victories", "victory_rate", "completion_rate", "terminal_rate",
+        "mean_maximum_floor", "decisions", "total_decision_seconds",
+        "mean_seconds_per_decision", "nondegenerate_terminal_outcomes"
+      ],
+      "properties": {
+        "benchmark_denominator": {"type": "integer", "minimum": 1},
+        "completed_runs": {"type": "integer", "minimum": 0},
+        "failed_runs": {"type": "integer", "minimum": 0},
+        "terminal_runs": {"type": "integer", "minimum": 0},
+        "truncated_runs": {"type": "integer", "minimum": 0},
+        "victories": {"type": "integer", "minimum": 0},
+        "victory_rate": {"$ref": "#/$defs/rate"},
+        "completion_rate": {"$ref": "#/$defs/rate"},
+        "terminal_rate": {"$ref": "#/$defs/rate"},
+        "mean_maximum_floor": {"type": "number", "minimum": 0},
+        "decisions": {"type": "integer", "minimum": 0},
+        "total_decision_seconds": {"type": "number", "minimum": 0},
+        "mean_seconds_per_decision": {"type": "number", "minimum": 0},
+        "nondegenerate_terminal_outcomes": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "pairedSummary": {
+      "type": "object",
+      "required": [
+        "completed_pairs", "learned_only_victories", "baseline_only_victories",
+        "mean_maximum_floor_difference"
+      ],
+      "properties": {
+        "completed_pairs": {"type": "integer", "minimum": 0},
+        "learned_only_victories": {"type": "integer", "minimum": 0},
+        "baseline_only_victories": {"type": "integer", "minimum": 0},
+        "mean_maximum_floor_difference": {"type": "number"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

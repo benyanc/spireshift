@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-policy-evaluation-case-v1.json",
+  "title": "SpireShift Production Policy Evaluation Case v1",
+  "type": "object",
+  "required": [
+    "schema_version", "case_id", "seed", "partition", "policy_kind", "policy_id",
+    "model_id", "ruleset_manifest_id", "status", "error", "decisions", "terminal",
+    "victory", "truncated", "maximum_floor", "maximum_act", "final_state_hash",
+    "action_trace_sha256", "total_decision_seconds", "median_decision_seconds",
+    "maximum_decision_seconds"
+  ],
+  "properties": {
+    "schema_version": {"const": "production-policy-evaluation-case-v1"},
+    "case_id": {"$ref": "#/$defs/identifier"},
+    "seed": {"type": "integer", "minimum": 0},
+    "partition": {"const": "test"},
+    "policy_kind": {
+      "enum": ["production_checkpoint", "progress_bootstrap_baseline"]
+    },
+    "policy_id": {"type": "string", "minLength": 1},
+    "model_id": {"oneOf": [{"$ref": "#/$defs/identifier"}, {"type": "null"}]},
+    "ruleset_manifest_id": {"$ref": "#/$defs/identifier"},
+    "status": {"enum": ["completed", "failed"]},
+    "error": {"type": ["string", "null"]},
+    "decisions": {"type": ["integer", "null"], "minimum": 0},
+    "terminal": {"type": ["boolean", "null"]},
+    "victory": {"type": ["boolean", "null"]},
+    "truncated": {"type": ["boolean", "null"]},
+    "maximum_floor": {"type": ["integer", "null"], "minimum": 0},
+    "maximum_act": {"type": ["integer", "null"], "minimum": 0},
+    "final_state_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "action_trace_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "total_decision_seconds": {"type": ["number", "null"], "minimum": 0},
+    "median_decision_seconds": {"type": ["number", "null"], "minimum": 0},
+    "maximum_decision_seconds": {"type": ["number", "null"], "minimum": 0}
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

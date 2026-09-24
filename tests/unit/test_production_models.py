@@ -13,6 +13,10 @@ from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.cli import main
 from spireshift.core.manifest import manifest_identifier
+from spireshift.production_evaluation import (
+    load_production_policy_evaluation,
+    run_production_policy_evaluation,
+)
 from spireshift.production_inference import (
     load_production_inference_smoke,
     run_production_inference_smoke,
@@ -27,13 +31,14 @@ from spireshift.production_models import (
     write_production_model_artifact,
 )
 from spireshift.representations import model_input_from_mapping
-from spireshift.splits import load_split_manifest
+from spireshift.splits import SplitName, load_split_manifest
 
 SPLIT_PATH = Path("manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json")
 TRAIN_STATE_SET_PATH = Path("manifests/bootstrap/sts2-v0.107.1-evangambit-train-curriculum-v2.json")
 VALIDATION_STATE_SET_PATH = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json"
 )
+MOCK_SPLIT_PATH = Path("manifests/splits/mock-v1-seeds-000000-000999-v1.json")
 
 
 def _write_synthetic_curriculum(
@@ -424,4 +429,130 @@ def test_production_policy_rejects_unadmitted_auxiliary_gate(
             checkpoint=checkpoint,
             training_report=report,
             ruleset=environment.ruleset,
+        )
+
+
+def test_production_policy_evaluation_is_paired_resumable_evidence(
+    synthetic_curricula: tuple[Path, Path], tmp_path: Path
+) -> None:
+    train, validation = synthetic_curricula
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+    environment = MockSpireEnvironment()
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    checkpoint = copy.deepcopy(result.checkpoint)
+    checkpoint["ruleset_manifest_id"] = environment.ruleset.manifest_id
+    checkpoint["split_manifest_id"] = split.manifest_id
+    checkpoint_body = {key: value for key, value in checkpoint.items() if key != "model_id"}
+    checkpoint["model_id"] = manifest_identifier(checkpoint_body)
+    report = copy.deepcopy(result.report)
+    report["model_id"] = checkpoint["model_id"]
+    report["held_out_metrics"]["policy"]["auxiliary_policy_gate"]["passed"] = True
+    report_body = {key: value for key, value in report.items() if key != "report_id"}
+    report["report_id"] = manifest_identifier(report_body)
+    policy = ProductionCheckpointPolicy(
+        checkpoint=checkpoint,
+        training_report=report,
+        ruleset=environment.ruleset,
+    )
+    seeds = split.seeds(SplitName.TEST)[:2]
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    output = tmp_path / "evaluation"
+
+    evaluation = run_production_policy_evaluation(
+        environment_factory=MockSpireEnvironment,
+        ruleset=environment.ruleset,
+        learned_policy=policy,
+        split_manifest=split,
+        training_report_id=cast(str, report["report_id"]),
+        seeds=seeds,
+        workers=2,
+        maximum_decisions_per_run=8,
+        output_directory=output,
+        now=lambda: next(timestamps),
+    )
+
+    assert evaluation.successful is True
+    assert evaluation.report["summary"]["learned"]["benchmark_denominator"] == 2
+    assert evaluation.report["summary"]["baseline"]["benchmark_denominator"] == 2
+    assert evaluation.report["summary"]["paired"]["completed_pairs"] == 2
+    assert len(evaluation.report["cases"]) == 4
+    preserved_path = output / evaluation.report["cases"][0]["path"]
+    preserved_case = preserved_path.read_text()
+    missing_path = output / evaluation.report["cases"][-1]["path"]
+    evaluation.report_path.unlink()
+    missing_path.unlink()
+    resumed_timestamps = iter(("2026-01-01T00:00:02Z", "2026-01-01T00:00:03Z"))
+    evaluation = run_production_policy_evaluation(
+        environment_factory=MockSpireEnvironment,
+        ruleset=environment.ruleset,
+        learned_policy=policy,
+        split_manifest=split,
+        training_report_id=cast(str, report["report_id"]),
+        seeds=seeds,
+        workers=2,
+        maximum_decisions_per_run=8,
+        output_directory=output,
+        resume=True,
+        now=lambda: next(resumed_timestamps),
+    )
+    assert evaluation.successful is True
+    assert preserved_path.read_text() == preserved_case
+    assert missing_path.is_file()
+    report_schema = json.loads(Path("schemas/production-policy-evaluation-v1.json").read_text())
+    case_schema = json.loads(Path("schemas/production-policy-evaluation-case-v1.json").read_text())
+    Draft202012Validator(report_schema).validate(evaluation.report)
+    for reference in evaluation.report["cases"]:
+        case = json.loads((output / reference["path"]).read_text())
+        Draft202012Validator(case_schema).validate(case)
+    assert (
+        load_production_policy_evaluation(
+            evaluation.report_path,
+            model_id=cast(str, checkpoint["model_id"]),
+            training_report_id=cast(str, report["report_id"]),
+            split_manifest=split,
+        )
+        == evaluation.report
+    )
+
+    checkpoint_path = tmp_path / "evaluation-checkpoint.json"
+    training_report_path = tmp_path / "evaluation-training-report.json"
+    verification_path = tmp_path / "evaluation-verification.json"
+    write_production_model_artifact(checkpoint, checkpoint_path, label="production checkpoint")
+    write_production_model_artifact(report, training_report_path, label="production report")
+    assert (
+        main(
+            [
+                "model",
+                "verify-evaluation-curriculum",
+                str(evaluation.report_path),
+                str(checkpoint_path),
+                "--report",
+                str(training_report_path),
+                "--split-manifest",
+                str(MOCK_SPLIT_PATH),
+                "--output",
+                str(verification_path),
+            ]
+        )
+        == 0
+    )
+    assert json.loads(verification_path.read_text())["valid"] is True
+
+    validation_seed = split.seeds(SplitName.VALIDATION)[0]
+    with pytest.raises(ValueError, match="only frozen test seeds"):
+        run_production_policy_evaluation(
+            environment_factory=MockSpireEnvironment,
+            ruleset=environment.ruleset,
+            learned_policy=policy,
+            split_manifest=split,
+            training_report_id=cast(str, report["report_id"]),
+            seeds=(validation_seed,),
+            workers=1,
+            maximum_decisions_per_run=8,
+            output_directory=tmp_path / "invalid-evaluation",
         )
