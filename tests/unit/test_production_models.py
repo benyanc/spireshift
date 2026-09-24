@@ -62,34 +62,47 @@ def _write_synthetic_curriculum(
                 ],
             }
         )
-    run_seed = int(state_set["cases"][0]["run_seed"])
-    case = {
-        "status": "completed",
-        "record": {
-            "state_id": f"{dataset_label}-state",
-            "run_seed": run_seed,
-            "decision_type": "combat",
-            "model_input": representation,
-            "target": {
-                "candidates": target_candidates,
-                "paired_preference_matrix": preference_matrix,
-                "soft_policy_target": [weight / weight_total for weight in raw_weights],
-                "policy_target_weight": 0.75,
-                "half_split_winner_agreement": True,
-                "selected_candidate_index": 0,
+    references = []
+    case_count = 4 if dataset_label == "train" else 2
+    unique_seed_cases = []
+    seen_seeds: set[int] = set()
+    for state_case in state_set["cases"]:
+        seed = int(state_case["run_seed"])
+        if seed not in seen_seeds:
+            unique_seed_cases.append(state_case)
+            seen_seeds.add(seed)
+        if len(unique_seed_cases) == case_count:
+            break
+    for offset, state_case in enumerate(unique_seed_cases):
+        case = {
+            "status": "completed",
+            "record": {
+                "state_id": f"{dataset_label}-state-{offset}",
+                "run_seed": int(state_case["run_seed"]),
+                "decision_type": "combat",
+                "model_input": representation,
+                "target": {
+                    "candidates": target_candidates,
+                    "paired_preference_matrix": preference_matrix,
+                    "soft_policy_target": [weight / weight_total for weight in raw_weights],
+                    "policy_target_weight": 0.75,
+                    "half_split_winner_agreement": True,
+                    "selected_candidate_index": 0,
+                },
             },
-        },
-    }
-    case_path = root / "cases" / "case.json"
-    case_path.parent.mkdir(parents=True)
-    case_path.write_text(json.dumps(case), encoding="utf-8")
+        }
+        relative_path = f"cases/case-{offset}.json"
+        case_path = root / relative_path
+        case_path.parent.mkdir(parents=True, exist_ok=True)
+        case_path.write_text(json.dumps(case), encoding="utf-8")
+        references.append({"path": relative_path})
     dataset_id = manifest_identifier({"synthetic_curriculum": dataset_label})
     report = {
         "dataset_id": dataset_id,
         "state_set": state_set,
         "signal_assessment": {"auxiliary_policy_signal_pass": True},
         "summary": {"terminal_victories": 0},
-        "cases": [{"path": "cases/case.json"}],
+        "cases": references,
     }
     report_path = root / "bootstrap-teacher-dataset.json"
     report_path.write_text(json.dumps(report), encoding="utf-8")
@@ -118,7 +131,7 @@ def synthetic_curricula(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tupl
 def _config() -> ProductionTrainingConfig:
     return ProductionTrainingConfig(
         epochs=12,
-        learning_rate=0.03,
+        learning_rate=0.005,
         vector_dimension=128,
         interaction_dimension=256,
         tactical_horizon=4,
@@ -145,14 +158,32 @@ def test_pairwise_curriculum_training_is_deterministic_and_reports_baseline(
     )
 
     assert result == repeated
-    history = cast(list[dict[str, float]], result.report["training_history"])
+    history = cast(list[dict[str, Any]], result.report["training_history"])
     assert (
-        history[-1]["pairwise_policy_cross_entropy"] < history[0]["pairwise_policy_cross_entropy"]
+        history[-1]["selection"]["policy_pairwise_cross_entropy"]
+        < history[0]["selection"]["policy_pairwise_cross_entropy"]
+    )
+    selected_epochs = result.report["model_selection"]["selected_epochs"]
+    assert 1 <= selected_epochs["policy"] <= _config().epochs
+    assert (
+        selected_epochs["policy"]
+        == min(
+            history,
+            key=lambda item: item["selection"]["policy_pairwise_cross_entropy"],
+        )["epoch"]
     )
     assert (
-        history[-1]["soft_target_baseline_cross_entropy"]
-        < history[0]["soft_target_baseline_cross_entropy"]
+        selected_epochs["soft_target_baseline"]
+        == min(
+            history,
+            key=lambda item: item["selection"]["soft_target_pairwise_cross_entropy"],
+        )["epoch"]
     )
+    selection = result.report["model_selection"]
+    assert set(selection["fit_runs"]).isdisjoint(selection["selection_runs"])
+    assert len(selection["fit_runs"]) + len(selection["selection_runs"]) == 4
+    policy_weights = result.checkpoint["heads"]["policy"]["weights"]
+    assert max(abs(weight["value"]) for weight in policy_weights) < 1.0
     policy_metrics = cast(
         dict[str, Any], cast(dict[str, Any], result.report["held_out_metrics"])["policy"]
     )
@@ -200,8 +231,8 @@ def test_production_checkpoint_round_trip_and_schemas(
     assert prediction.terminal_value is None
     assert prediction.maximum_floor_reach
 
-    checkpoint_schema = json.loads(Path("schemas/production-model-checkpoint-v1.json").read_text())
-    report_schema = json.loads(Path("schemas/production-model-training-report-v1.json").read_text())
+    checkpoint_schema = json.loads(Path("schemas/production-model-checkpoint-v2.json").read_text())
+    report_schema = json.loads(Path("schemas/production-model-training-report-v2.json").read_text())
     Draft202012Validator(checkpoint_schema).validate(result.checkpoint)
     Draft202012Validator(report_schema).validate(result.report)
 
@@ -209,6 +240,20 @@ def test_production_checkpoint_round_trip_and_schemas(
     tampered["heads"]["tactical_death_risk"]["bias"] += 0.1
     with pytest.raises(ValueError, match="identity mismatch"):
         production_model_from_checkpoint(tampered)
+
+    legacy = copy.deepcopy(result.checkpoint)
+    legacy["schema_version"] = "production-model-checkpoint-v1"
+    legacy["model_type"] = "sparse-pairwise-curriculum-multihead-v1"
+    for field in (
+        "optimizer_id",
+        "adagrad_epsilon",
+        "selection_fraction",
+        "selection_salt",
+    ):
+        del legacy["training_config"][field]
+    legacy_body = {key: value for key, value in legacy.items() if key != "model_id"}
+    legacy["model_id"] = manifest_identifier(legacy_body)
+    assert production_model_from_checkpoint(legacy).predict(representation).source_action_ids
 
 
 def test_production_cli_trains_and_verifies(
