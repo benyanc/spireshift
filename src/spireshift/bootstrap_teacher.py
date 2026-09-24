@@ -977,7 +977,15 @@ def run_bootstrap_teacher_dataset(
     output_directory.mkdir(parents=True, exist_ok=resume)
     report_path = output_directory / "bootstrap-teacher-dataset.json"
     if report_path.exists():
-        raise FileExistsError(report_path)
+        if not resume:
+            raise FileExistsError(report_path)
+        _prepare_failed_dataset_resume(
+            report_path,
+            backend=backend,
+            state_set=state_set,
+            objective=objective,
+            config=config,
+        )
     started_at = _utc_now()
     case_documents: list[dict[str, Any]] = []
     for case in state_set.cases:
@@ -2259,6 +2267,43 @@ def _preserve_failed_case(path: Path) -> None:
     while (candidate := path.with_name(f"failed-case-{index:04d}.json")).exists():
         index += 1
     path.replace(candidate)
+
+
+def _prepare_failed_dataset_resume(
+    report_path: Path,
+    *,
+    backend: SearchBackendSpec,
+    state_set: BootstrapStateSetLike,
+    objective: ObjectiveSpec,
+    config: BootstrapConfig,
+) -> None:
+    report = _load_object(report_path)
+    report_body = {key: value for key, value in report.items() if key != "dataset_id"}
+    if report.get("dataset_id") != manifest_identifier(report_body):
+        raise ValueError("Cannot resume a bootstrap dataset with an invalid identity")
+    expected_schema = (
+        CURRICULUM_DATASET_SCHEMA_VERSION
+        if isinstance(state_set, CurriculumStateSet)
+        else BOOTSTRAP_DATASET_SCHEMA_VERSION
+    )
+    if report.get("schema_version") != expected_schema:
+        raise ValueError("Cannot resume a bootstrap dataset with a different schema")
+    previous_state_set = load_bootstrap_state_set_document(report.get("state_set"))
+    if previous_state_set.as_dict() != state_set.as_dict():
+        raise ValueError("Cannot resume a bootstrap dataset with a different state set")
+    if report.get("backend") != backend.as_dict():
+        raise ValueError("Cannot resume a bootstrap dataset with a different backend")
+    if report.get("objective") != objective.as_dict():
+        raise ValueError("Cannot resume a bootstrap dataset with a different objective")
+    if report.get("configuration") != config.as_dict():
+        raise ValueError("Cannot resume a bootstrap dataset with different configuration")
+    summary = _mapping(report.get("summary"), "dataset summary")
+    if _integer(summary.get("failed_cases"), "failed cases") <= 0:
+        raise ValueError("Cannot resume a completed bootstrap dataset")
+    index = 1
+    while (candidate := report_path.with_name(f"failed-dataset-{index:04d}.json")).exists():
+        index += 1
+    report_path.replace(candidate)
 
 
 def _validate_bootstrap_split(
