@@ -241,8 +241,10 @@ uv run spireshift resources run \
 ```
 
 These are sustained jobs and are intentionally left for the operator to start and observe. If a
-job is interrupted before its dataset report is written, use a new resource-report path and rerun
-the inner command against the same artifact root with `--resume`.
+job is interrupted or finishes with failed cases, use a new resource-report path and rerun the
+inner command against the same artifact root with `--resume`. Resume validates that the backend,
+state set, objective, and generation configuration are unchanged; archives the failed dataset and
+case reports; reuses completed cases; and reruns only failed cases.
 
 The admitted-backend contract smoke is recorded in
 `docs/evidence/bootstrap-curriculum-v2-admitted-smoke.json`. It captured reward, path, combat zero,

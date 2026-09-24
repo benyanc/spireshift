@@ -307,7 +307,23 @@ def test_failed_case_remains_in_denominator_and_resume_preserves_evidence(
     assert not failed.successful
     assert failed.report["summary"]["benchmark_denominator"] == 1
     assert failed.report["summary"]["failed_cases"] == 1
-    failed.report_path.unlink()
+    with pytest.raises(ValueError, match="different configuration"):
+        run_bootstrap_teacher_dataset(
+            backend=SearchBackendSpec.tactical_mock(),
+            state_set=state_set,
+            split_manifest=split,
+            objective=load_objective(Path("configs/default.toml")),
+            config=BootstrapConfig(
+                samples_per_candidate=2,
+                maximum_prefix_steps=4,
+                maximum_rollout_steps=4,
+                workers=1,
+                worker_timeout_seconds=30.0,
+            ),
+            output_directory=output,
+            resume=True,
+        )
+    assert failed.report_path.is_file()
 
     resumed = run_bootstrap_teacher_dataset(
         backend=SearchBackendSpec.tactical_mock(),
@@ -320,6 +336,7 @@ def test_failed_case_remains_in_denominator_and_resume_preserves_evidence(
     )
 
     assert resumed.successful
+    assert (output / "failed-dataset-0001.json").is_file()
     case_root = output / "cases" / state_set.cases[0].state_id
     assert (case_root / "failed-case-0001.json").is_file()
     assert (case_root / "case.json").is_file()
