@@ -31,6 +31,7 @@ from spireshift.backend_admission import (
 )
 from spireshift.bootstrap_teacher import (
     BootstrapConfig,
+    BootstrapPolicyArtifacts,
     discover_curriculum_state_set,
     freeze_bootstrap_state_set,
     load_bootstrap_state_set,
@@ -566,6 +567,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     bootstrap_discover.add_argument("--upstream-root", type=Path)
     bootstrap_discover.add_argument("--manifest", type=Path)
+    bootstrap_discover.add_argument("--policy-checkpoint", type=Path)
+    bootstrap_discover.add_argument("--policy-report", type=Path)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
     )
@@ -578,6 +581,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     bootstrap_generate.add_argument("--upstream-root", type=Path)
     bootstrap_generate.add_argument("--manifest", type=Path)
+    bootstrap_generate.add_argument("--policy-checkpoint", type=Path)
+    bootstrap_generate.add_argument("--policy-report", type=Path)
     bootstrap_generate.add_argument("--samples-per-candidate", type=int, default=16)
     bootstrap_generate.add_argument("--sampling-seed", type=int, default=0)
     bootstrap_generate.add_argument("--maximum-prefix-steps", type=int, default=4096)
@@ -1462,6 +1467,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _emit_json(document, None)
                 return 0
             if args.bootstrap_command == "discover-states":
+                discovery_policy = _bootstrap_policy_artifacts(
+                    args.policy_checkpoint,
+                    args.policy_report,
+                )
                 if args.backend == "evangambit":
                     if args.upstream_root is None or args.manifest is None:
                         raise ValueError(
@@ -1479,6 +1488,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     specification,
                     backend=discovery_backend,
                     split_manifest=split_manifest,
+                    policy_artifacts=discovery_policy,
                 )
                 write_bootstrap_state_set(document, args.output)
                 _emit_json(document, None)
@@ -1502,6 +1512,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 bootstrap_backend = SearchBackendSpec.tactical_mock()
             else:
                 bootstrap_backend = SearchBackendSpec.mock()
+            generation_policy = _bootstrap_policy_artifacts(
+                args.policy_checkpoint,
+                args.policy_report,
+            )
             bootstrap_result = run_bootstrap_teacher_dataset(
                 backend=bootstrap_backend,
                 state_set=load_bootstrap_state_set(args.states),
@@ -1517,6 +1531,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 ),
                 output_directory=args.output_dir,
                 resume=args.resume,
+                policy_artifacts=generation_policy,
             )
             summary = bootstrap_result.report["summary"]
             if isinstance(summary, dict):
@@ -2195,6 +2210,17 @@ def _emit_json(value: object, output: Path | None) -> None:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(encoded, encoding="utf-8")
     print(encoded, end="")
+
+
+def _bootstrap_policy_artifacts(
+    checkpoint: Path | None,
+    report: Path | None,
+) -> BootstrapPolicyArtifacts | None:
+    if (checkpoint is None) != (report is None):
+        raise ValueError("--policy-checkpoint and --policy-report must be supplied together")
+    if checkpoint is None or report is None:
+        return None
+    return BootstrapPolicyArtifacts.from_paths(checkpoint, report)
 
 
 def _default_live_run_record() -> Path:

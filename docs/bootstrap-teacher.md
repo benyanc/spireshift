@@ -252,3 +252,84 @@ The admitted-backend contract smoke is recorded in
 and combat eight across floors 1 and 2; completed and verified 4/4 cases, 17 candidates, 68 paired
 simulations, and 2,795 transitions; and correctly rejected terminal-head promotion because all 68
 outcomes were losses. Its deliberately permissive smoke thresholds are not the production gates.
+
+## Learned-policy late-run curriculum v3
+
+The frozen-test base-v2 pilot reached a higher maximum floor than the progress baseline on 29 of
+32 paired runs, tied three, and regressed on none, but both policies won zero runs. Curriculum v3
+uses that admitted checkpoint to reach later train and validation states and as the continuation
+policy for every paired candidate rollout. The remaining test seeds stay sealed.
+
+Learned state sets record the model, training report, split, ruleset, and derived policy identities.
+Worker requests additionally bind the local artifact paths and revalidate their content before
+execution. Resume and dataset verification reject a different checkpoint, report, capture policy,
+or continuation policy. Baseline v1/v2 artifacts retain their original schemas and task IDs.
+
+The production discovery specifications are:
+
+- `configs/bootstrap/sts2-v0.107.1-evangambit-train-learned-curriculum-v3.json`;
+- `configs/bootstrap/sts2-v0.107.1-evangambit-validation-learned-curriculum-v3.json`.
+
+They omit the earliest path, combat, reward, and selection occurrences where practical and request
+later occurrences that the learned policy can now reach. Run the two discovery jobs independently;
+they may run in parallel because each uses one process:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-discovery-v3.json \
+  --artifact-root artifacts/bootstrap/discovery-train-v3 \
+  --workers 1 \
+  --max-wall-seconds 3600 \
+  --max-cpu-seconds 3600 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 8000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap discover-states \
+    configs/bootstrap/sts2-v0.107.1-evangambit-train-learned-curriculum-v3.json \
+    artifacts/bootstrap/discovery-train-v3/state-set.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json
+```
+
+For validation, replace `train` with `validation` in the report, artifact root, specification, and
+output paths. Inspect both state sets before teacher generation. In particular, compare reached
+floor histograms and unreachable-coordinate rates with v2 and confirm that every structural gate
+passes.
+
+After admission, generate train and validation separately. These jobs are CPU-heavy and should run
+sequentially with eight workers on the reference M4 Pro:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-teacher-v3.json \
+  --metrics artifacts/resources/bootstrap-train-teacher-v3-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-train-v3 \
+  --workers 8 \
+  --max-wall-seconds 14400 \
+  --max-cpu-seconds 80000 \
+  --max-storage-bytes 10000000000 \
+  --max-memory-bytes 32000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-train-v3 \
+    --states artifacts/bootstrap/discovery-train-v3/state-set.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+    --samples-per-candidate 16 \
+    --workers 8 \
+    --worker-timeout 120
+```
+
+For validation generation, replace `train` with `validation` in the report, metrics, artifact root,
+state-set, and output paths. Do not start either generation command until the discovered state sets
+have been reviewed and frozen.
