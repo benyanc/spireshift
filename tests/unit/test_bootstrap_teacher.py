@@ -8,6 +8,8 @@ import pytest
 from spireshift.agents.baseline import ProgressBootstrapPolicy
 from spireshift.bootstrap_teacher import (
     BootstrapConfig,
+    BootstrapPolicyArtifacts,
+    BootstrapSimulationTask,
     BootstrapStateSet,
     CurriculumStateSet,
     bootstrap_utility,
@@ -521,3 +523,100 @@ def test_curriculum_train_and_validation_discovery_are_complete_run_disjoint() -
     assert {case.run_seed for case in train.cases}.isdisjoint(
         {case.run_seed for case in validation.cases}
     )
+
+
+def test_learned_policy_discovery_and_tasks_bind_exact_artifact_identity(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured = capture_curriculum_state(
+        backend=SearchBackendSpec.tactical_mock(),
+        run_seed=7,
+        decision_type=DecisionType.COMBAT,
+        decision_index=0,
+        maximum_prefix_steps=4,
+    )
+    split = _tactical_split(captured.checkpoint.ruleset_manifest_id)
+    model_id = "sha256:" + "a" * 64
+    report_id = "sha256:" + "b" * 64
+    checkpoint_path = tmp_path / "checkpoint.json"
+    report_path = tmp_path / "training-report.json"
+    checkpoint_path.write_text("{}", encoding="utf-8")
+    report_path.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_model_checkpoint",
+        lambda _path: {
+            "model_id": model_id,
+            "split_manifest_id": split.manifest_id,
+            "ruleset_manifest_id": split.ruleset_manifest_id,
+        },
+    )
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_training_report",
+        lambda _path, *, checkpoint: {
+            "model_id": checkpoint["model_id"],
+            "report_id": report_id,
+        },
+    )
+    artifacts = BootstrapPolicyArtifacts.from_paths(checkpoint_path, report_path)
+    monkeypatch.setattr(
+        BootstrapPolicyArtifacts,
+        "load_policy",
+        lambda _self, _ruleset: ProgressBootstrapPolicy(),
+    )
+    specification = _curriculum_spec(split)
+    specification.update(
+        {
+            "schema_version": "bootstrap-curriculum-discovery-spec-v2",
+            "capture_policy_id": artifacts.policy_id,
+        }
+    )
+
+    document = discover_curriculum_state_set(
+        specification,
+        backend=SearchBackendSpec.tactical_mock(),
+        split_manifest=split,
+        policy_artifacts=artifacts,
+    )
+    state_set = load_bootstrap_state_set_document(document)
+
+    assert isinstance(state_set, CurriculumStateSet)
+    assert state_set.as_dict()["schema_version"] == "bootstrap-state-set-v3"
+    assert state_set.capture_policy == artifacts.provenance()
+    task = BootstrapSimulationTask(
+        "00000000-0000-4000-8000-000000000001",
+        SearchBackendSpec.tactical_mock(),
+        captured.checkpoint,
+        captured.legal_actions[0].action_id,
+        123,
+        4,
+        artifacts,
+    )
+    restored = BootstrapSimulationTask.from_mapping(task.as_dict())
+    assert restored.as_dict() == task.as_dict()
+    assert restored.continuation_policy_id == artifacts.policy_id
+
+    mismatched = BootstrapPolicyArtifacts(
+        checkpoint_path=artifacts.checkpoint_path,
+        training_report_path=artifacts.training_report_path,
+        policy_id=artifacts.policy_id,
+        model_id=artifacts.model_id,
+        training_report_id="sha256:" + "c" * 64,
+        split_manifest_id=artifacts.split_manifest_id,
+        ruleset_manifest_id=artifacts.ruleset_manifest_id,
+    )
+    with pytest.raises(ValueError, match="differ from frozen"):
+        run_bootstrap_teacher_dataset(
+            backend=SearchBackendSpec.tactical_mock(),
+            state_set=state_set,
+            split_manifest=split,
+            objective=load_objective(Path("configs/default.toml")),
+            config=BootstrapConfig(
+                samples_per_candidate=1,
+                maximum_prefix_steps=4,
+                maximum_rollout_steps=4,
+                workers=1,
+            ),
+            output_directory=tmp_path / "mismatch",
+            policy_artifacts=mismatched,
+        )

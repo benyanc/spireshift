@@ -12,7 +12,7 @@ from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 from uuid import NAMESPACE_URL, UUID, uuid5
 
 from spireshift.agents.baseline import ProgressBootstrapPolicy
@@ -31,19 +31,127 @@ from spireshift.search_workers import (
 )
 from spireshift.splits import SplitManifest, SplitName
 
+if TYPE_CHECKING:
+    from spireshift.agents.learned import ProductionCheckpointPolicy
+
 BOOTSTRAP_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v1"
 CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v2"
+LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v3"
 BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v1"
+LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v2"
 BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v1"
+LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v2"
 BOOTSTRAP_BATCH_SCHEMA_VERSION = "bootstrap-worker-batch-v1"
 BOOTSTRAP_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v1"
 CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v2"
+LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v3"
 BOOTSTRAP_VERIFICATION_SCHEMA_VERSION = "bootstrap-teacher-verification-v1"
 BOOTSTRAP_TEACHER_ID = "paired-terminal-dominant-progress-teacher-v1"
 CURRICULUM_TEACHER_ID = "paired-preference-curriculum-teacher-v2"
 BOOTSTRAP_UTILITY_ID = "terminal-dominant-floor-act-hp-v1"
 BOOTSTRAP_SEED_PROTOCOL_ID = "sha256-paired-bootstrap-v1"
 MILESTONE_FLOORS = (1, 8, 16, 24, 32, 40, 48, 56, 64)
+
+
+@dataclass(frozen=True, slots=True)
+class BootstrapPolicyArtifacts:
+    """Verified local artifacts for an admitted learned continuation policy."""
+
+    checkpoint_path: Path
+    training_report_path: Path
+    policy_id: str
+    model_id: str
+    training_report_id: str
+    split_manifest_id: str
+    ruleset_manifest_id: str
+
+    @classmethod
+    def from_paths(
+        cls,
+        checkpoint_path: Path,
+        training_report_path: Path,
+    ) -> BootstrapPolicyArtifacts:
+        from spireshift.production_models import (  # Avoid a bootstrap/model import cycle.
+            load_production_model_checkpoint,
+            load_production_training_report,
+        )
+
+        resolved_checkpoint = checkpoint_path.expanduser().resolve()
+        resolved_report = training_report_path.expanduser().resolve()
+        checkpoint = load_production_model_checkpoint(resolved_checkpoint)
+        report = load_production_training_report(resolved_report, checkpoint=checkpoint)
+        model_id = _string(checkpoint.get("model_id"), "model_id")
+        return cls(
+            checkpoint_path=resolved_checkpoint,
+            training_report_path=resolved_report,
+            policy_id=f"production-checkpoint-policy-v1:{model_id}",
+            model_id=model_id,
+            training_report_id=_string(report.get("report_id"), "report_id"),
+            split_manifest_id=_string(checkpoint.get("split_manifest_id"), "split_manifest_id"),
+            ruleset_manifest_id=_string(
+                checkpoint.get("ruleset_manifest_id"), "ruleset_manifest_id"
+            ),
+        )
+
+    def provenance(self) -> dict[str, str]:
+        return {
+            "kind": "production_checkpoint",
+            "policy_id": self.policy_id,
+            "model_id": self.model_id,
+            "training_report_id": self.training_report_id,
+            "split_manifest_id": self.split_manifest_id,
+            "ruleset_manifest_id": self.ruleset_manifest_id,
+        }
+
+    def task_dict(self) -> dict[str, str]:
+        return {
+            **self.provenance(),
+            "checkpoint_path": str(self.checkpoint_path),
+            "training_report_path": str(self.training_report_path),
+        }
+
+    def load_policy(self, ruleset: object) -> ProductionCheckpointPolicy:
+        # ProductionCheckpointPolicy owns the gate and ruleset checks.
+        from spireshift.agents.learned import ProductionCheckpointPolicy
+
+        return ProductionCheckpointPolicy.from_paths(
+            self.checkpoint_path,
+            self.training_report_path,
+            ruleset=cast(Any, ruleset),
+        )
+
+    def validate_for(self, *, split_manifest_id: str, ruleset_manifest_id: str) -> None:
+        if self.split_manifest_id != split_manifest_id:
+            raise ValueError("Learned bootstrap policy references a different split manifest")
+        if self.ruleset_manifest_id != ruleset_manifest_id:
+            raise ValueError("Learned bootstrap policy references a different ruleset")
+
+    @classmethod
+    def from_task_mapping(cls, value: object) -> BootstrapPolicyArtifacts:
+        document = _mapping(value, "bootstrap continuation policy")
+        _exact_keys(
+            document,
+            {
+                "kind",
+                "policy_id",
+                "model_id",
+                "training_report_id",
+                "split_manifest_id",
+                "ruleset_manifest_id",
+                "checkpoint_path",
+                "training_report_path",
+            },
+            "bootstrap continuation policy",
+        )
+        if document.get("kind") != "production_checkpoint":
+            raise ValueError("Unsupported bootstrap continuation policy kind")
+        artifacts = cls.from_paths(
+            Path(_string(document.get("checkpoint_path"), "checkpoint_path")),
+            Path(_string(document.get("training_report_path"), "training_report_path")),
+        )
+        if artifacts.task_dict() != document:
+            raise ValueError("Bootstrap continuation policy artifact identity mismatch")
+        return artifacts
 
 
 @dataclass(frozen=True, slots=True)
@@ -174,12 +282,21 @@ class CurriculumStateSet:
     discovery: dict[str, Any]
     signal_spec: CurriculumSignalSpec
     cases: tuple[CurriculumStateCase, ...]
+    capture_policy: dict[str, str] | None = None
 
     def __post_init__(self) -> None:
         if self.partition not in {SplitName.TRAIN.value, SplitName.VALIDATION.value}:
             raise ValueError("Curriculum state sets must use train or validation")
-        if self.capture_policy_id != ProgressBootstrapPolicy.policy_id:
-            raise ValueError("Curriculum state set uses an unsupported capture policy")
+        if self.capture_policy is None:
+            if self.capture_policy_id != ProgressBootstrapPolicy.policy_id:
+                raise ValueError("Curriculum state set omits learned capture-policy provenance")
+        else:
+            _validate_policy_provenance(
+                self.capture_policy,
+                policy_id=self.capture_policy_id,
+                split_manifest_id=self.split_manifest_id,
+                ruleset_manifest_id=self.ruleset_manifest_id,
+            )
         if not self.cases:
             raise ValueError("Curriculum state set must contain at least one reachable case")
         ids = [case.state_id for case in self.cases]
@@ -190,8 +307,12 @@ class CurriculumStateSet:
             raise ValueError("Curriculum cases must have unique IDs and coordinates")
 
     def as_dict(self) -> dict[str, object]:
-        return {
-            "schema_version": CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        document: dict[str, object] = {
+            "schema_version": (
+                LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+                if self.capture_policy is not None
+                else CURRICULUM_STATE_SET_SCHEMA_VERSION
+            ),
             "state_set_id": self.state_set_id,
             "split_manifest_id": self.split_manifest_id,
             "ruleset_manifest_id": self.ruleset_manifest_id,
@@ -203,6 +324,9 @@ class CurriculumStateSet:
             "signal_spec": self.signal_spec.as_dict(),
             "cases": [case.as_dict() for case in self.cases],
         }
+        if self.capture_policy is not None:
+            document["capture_policy"] = self.capture_policy
+        return document
 
 
 BootstrapStateSetLike = BootstrapStateSet | CurriculumStateSet
@@ -250,6 +374,7 @@ class BootstrapSimulationTask:
     action_id: str
     simulation_seed: int
     maximum_rollout_steps: int
+    continuation_policy: BootstrapPolicyArtifacts | None = None
 
     def __post_init__(self) -> None:
         UUID(self.task_id)
@@ -261,37 +386,68 @@ class BootstrapSimulationTask:
             raise ValueError("Bootstrap rollout limit must be positive")
 
     def as_dict(self) -> dict[str, object]:
-        return {
-            "schema_version": BOOTSTRAP_TASK_SCHEMA_VERSION,
+        document: dict[str, object] = {
+            "schema_version": (
+                LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION
+                if self.continuation_policy is not None
+                else BOOTSTRAP_TASK_SCHEMA_VERSION
+            ),
             "task_id": self.task_id,
             "backend": self.backend.as_dict(),
             "checkpoint": self.checkpoint.as_dict(),
             "action_id": self.action_id,
             "simulation_seed": self.simulation_seed,
             "maximum_rollout_steps": self.maximum_rollout_steps,
-            "continuation_policy_id": ProgressBootstrapPolicy.policy_id,
+            "continuation_policy_id": self.continuation_policy_id,
         }
+        if self.continuation_policy is not None:
+            document["continuation_policy"] = self.continuation_policy.task_dict()
+        return document
+
+    @property
+    def continuation_policy_id(self) -> str:
+        return (
+            self.continuation_policy.policy_id
+            if self.continuation_policy is not None
+            else ProgressBootstrapPolicy.policy_id
+        )
 
     @classmethod
     def from_mapping(cls, value: object) -> BootstrapSimulationTask:
         document = _mapping(value, "bootstrap task")
+        schema_version = document.get("schema_version")
+        learned = schema_version == LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION
+        expected_keys = {
+            "schema_version",
+            "task_id",
+            "backend",
+            "checkpoint",
+            "action_id",
+            "simulation_seed",
+            "maximum_rollout_steps",
+            "continuation_policy_id",
+        }
+        if learned:
+            expected_keys.add("continuation_policy")
         _exact_keys(
             document,
-            {
-                "schema_version",
-                "task_id",
-                "backend",
-                "checkpoint",
-                "action_id",
-                "simulation_seed",
-                "maximum_rollout_steps",
-                "continuation_policy_id",
-            },
+            expected_keys,
             "bootstrap task",
         )
-        if document.get("schema_version") != BOOTSTRAP_TASK_SCHEMA_VERSION:
+        if schema_version not in {
+            BOOTSTRAP_TASK_SCHEMA_VERSION,
+            LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
+        }:
             raise ValueError("Unsupported bootstrap task schema")
-        if document.get("continuation_policy_id") != ProgressBootstrapPolicy.policy_id:
+        policy = (
+            BootstrapPolicyArtifacts.from_task_mapping(document.get("continuation_policy"))
+            if learned
+            else None
+        )
+        expected_policy_id = (
+            policy.policy_id if policy is not None else ProgressBootstrapPolicy.policy_id
+        )
+        if document.get("continuation_policy_id") != expected_policy_id:
             raise ValueError("Unsupported bootstrap continuation policy")
         return cls(
             task_id=_string(document.get("task_id"), "task_id"),
@@ -302,6 +458,7 @@ class BootstrapSimulationTask:
             maximum_rollout_steps=_integer(
                 document.get("maximum_rollout_steps"), "maximum_rollout_steps"
             ),
+            continuation_policy=policy,
         )
 
 
@@ -430,7 +587,10 @@ def load_bootstrap_state_set(path: Path) -> BootstrapStateSetLike:
 
 def load_bootstrap_state_set_document(value: object) -> BootstrapStateSetLike:
     document = _mapping(value, "bootstrap state set")
-    if document.get("schema_version") == CURRICULUM_STATE_SET_SCHEMA_VERSION:
+    if document.get("schema_version") in {
+        CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
+    }:
         return _load_curriculum_state_set_document(document)
     _exact_keys(
         document,
@@ -476,6 +636,7 @@ def discover_curriculum_state_set(
     *,
     backend: SearchBackendSpec,
     split_manifest: SplitManifest,
+    policy_artifacts: BootstrapPolicyArtifacts | None = None,
 ) -> dict[str, Any]:
     document = _mapping(specification, "curriculum discovery specification")
     _exact_keys(
@@ -495,7 +656,11 @@ def discover_curriculum_state_set(
         },
         "curriculum discovery specification",
     )
-    if document.get("schema_version") != "bootstrap-curriculum-discovery-spec-v1":
+    schema_version = document.get("schema_version")
+    if schema_version not in {
+        "bootstrap-curriculum-discovery-spec-v1",
+        "bootstrap-curriculum-discovery-spec-v2",
+    }:
         raise ValueError("Unsupported curriculum discovery specification")
     partition = SplitName(_string(document.get("partition"), "partition"))
     if partition is SplitName.TEST:
@@ -506,8 +671,22 @@ def discover_curriculum_state_set(
         raise ValueError("Curriculum discovery ruleset differs from split manifest")
     if document.get("objective_id") != split_manifest.objective_id:
         raise ValueError("Curriculum discovery objective differs from split manifest")
-    if document.get("capture_policy_id") != ProgressBootstrapPolicy.policy_id:
-        raise ValueError("Curriculum discovery uses an unsupported capture policy")
+    expected_policy_id = (
+        policy_artifacts.policy_id
+        if policy_artifacts is not None
+        else ProgressBootstrapPolicy.policy_id
+    )
+    if document.get("capture_policy_id") != expected_policy_id:
+        raise ValueError("Curriculum discovery capture policy differs from supplied artifacts")
+    if policy_artifacts is None and schema_version != "bootstrap-curriculum-discovery-spec-v1":
+        raise ValueError("Learned curriculum discovery requires checkpoint artifacts")
+    if policy_artifacts is not None:
+        if schema_version != "bootstrap-curriculum-discovery-spec-v2":
+            raise ValueError("Learned curriculum discovery requires a v2 specification")
+        policy_artifacts.validate_for(
+            split_manifest_id=split_manifest.manifest_id,
+            ruleset_manifest_id=split_manifest.ruleset_manifest_id,
+        )
     run_count = _integer(document.get("run_count"), "run_count")
     maximum_steps = _integer(document.get("maximum_steps_per_run"), "maximum_steps_per_run")
     if run_count <= 0 or maximum_steps <= 0:
@@ -539,7 +718,7 @@ def discover_curriculum_state_set(
         environment = load_search_environment(backend)
         try:
             observation = environment.reset(run_seed)
-            policy = ProgressBootstrapPolicy()
+            policy = _load_bootstrap_policy(policy_artifacts, environment)
             prefix: list[str] = []
             seen = {decision_type: 0 for decision_type in decision_occurrences}
             found: set[tuple[DecisionType, int]] = set()
@@ -598,7 +777,11 @@ def discover_curriculum_state_set(
             _close_environment(environment)
     requested = run_count * sum(len(indices) for indices in decision_occurrences.values())
     discovery = {
-        "schema_version": "bootstrap-curriculum-discovery-v1",
+        "schema_version": (
+            "bootstrap-curriculum-discovery-v2"
+            if policy_artifacts is not None
+            else "bootstrap-curriculum-discovery-v1"
+        ),
         "requested_runs": run_count,
         "maximum_steps_per_run": maximum_steps,
         "decision_occurrences": {
@@ -612,17 +795,23 @@ def discover_curriculum_state_set(
         "step_limited_runs": truncated_runs,
     }
     body: dict[str, Any] = {
-        "schema_version": CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        "schema_version": (
+            LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+            if policy_artifacts is not None
+            else CURRICULUM_STATE_SET_SCHEMA_VERSION
+        ),
         "split_manifest_id": split_manifest.manifest_id,
         "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
         "objective_id": split_manifest.objective_id,
-        "capture_policy_id": ProgressBootstrapPolicy.policy_id,
+        "capture_policy_id": expected_policy_id,
         "partition": partition.value,
         "selection_policy": _string(document.get("selection_policy"), "selection_policy"),
         "discovery": discovery,
         "signal_spec": signal_spec.as_dict(),
         "cases": cases,
     }
+    if policy_artifacts is not None:
+        body["capture_policy"] = policy_artifacts.provenance()
     frozen = {**body, "state_set_id": manifest_identifier(body)}
     state_set = load_bootstrap_state_set_document(frozen)
     _validate_bootstrap_split(state_set, split_manifest)
@@ -679,6 +868,7 @@ def capture_curriculum_state(
     decision_type: DecisionType,
     decision_index: int,
     maximum_prefix_steps: int,
+    policy_artifacts: BootstrapPolicyArtifacts | None = None,
 ) -> _CapturedBootstrapState:
     if decision_type in {DecisionType.MENU, DecisionType.TERMINAL, DecisionType.UNKNOWN}:
         raise ValueError(f"Unsupported curriculum decision type: {decision_type.value}")
@@ -687,7 +877,7 @@ def capture_curriculum_state(
     environment = load_search_environment(backend)
     try:
         observation = environment.reset(run_seed)
-        policy = ProgressBootstrapPolicy()
+        policy = _load_bootstrap_policy(policy_artifacts, environment)
         prefix: list[str] = []
         seen = 0
         for _ in range(maximum_prefix_steps + 1):
@@ -728,7 +918,7 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
         source_snapshot = mechanics.snapshot(environment, source)
         source_action = _action_by_id(source_snapshot.legal_actions, task.action_id)
         sampled = environment.clone(resample_hidden=True, seed=task.simulation_seed)
-        policy = ProgressBootstrapPolicy()
+        policy = _load_bootstrap_policy(task.continuation_policy, sampled)
         source_floor = _public_integer(source, ("floor",), ("run", "floor"))
         source_act = _public_act(source)
         maximum_floor = source_floor
@@ -769,13 +959,17 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             else final_act != source_act or bool(transition.victory)
         )
         output: dict[str, object] = {
-            "method": "paired-public-progress-rollout-v1",
+            "method": (
+                "paired-public-progress-rollout-v2"
+                if task.continuation_policy is not None
+                else "paired-public-progress-rollout-v1"
+            ),
             "patch_id": environment.patch_id,
             "ruleset_manifest_id": environment.ruleset.manifest_id,
             "source_state_hash": task.checkpoint.state_hash,
             "action_id": task.action_id,
             "simulation_seed": task.simulation_seed,
-            "continuation_policy_id": policy.policy_id,
+            "continuation_policy_id": task.continuation_policy_id,
             "transitions": decisions,
             "terminal": transition.terminal,
             "truncated": not transition.terminal,
@@ -965,10 +1159,14 @@ def run_bootstrap_teacher_dataset(
     output_directory: Path,
     task_runner: Callable[[BootstrapSimulationTask], dict[str, object]] | None = None,
     resume: bool = False,
+    policy_artifacts: BootstrapPolicyArtifacts | None = None,
 ) -> BootstrapDatasetResult:
     _validate_bootstrap_split(state_set, split_manifest)
     if isinstance(state_set, CurriculumStateSet):
         _validate_curriculum_discovery_readiness(state_set)
+        _validate_execution_policy(state_set, policy_artifacts)
+    elif policy_artifacts is not None:
+        raise ValueError("Learned policy artifacts require a curriculum state set")
     if objective.objective_id != state_set.objective_id:
         raise ValueError("Bootstrap objective differs from frozen state set")
     output_directory = output_directory.expanduser().resolve()
@@ -985,6 +1183,7 @@ def run_bootstrap_teacher_dataset(
             state_set=state_set,
             objective=objective,
             config=config,
+            policy_artifacts=policy_artifacts,
         )
     started_at = _utc_now()
     case_documents: list[dict[str, Any]] = []
@@ -1006,6 +1205,7 @@ def run_bootstrap_teacher_dataset(
                     decision_type=case.decision_type,
                     decision_index=case.decision_index,
                     maximum_prefix_steps=config.maximum_prefix_steps,
+                    policy_artifacts=policy_artifacts,
                 )
             else:
                 captured = capture_bootstrap_combat_state(
@@ -1022,7 +1222,12 @@ def run_bootstrap_teacher_dataset(
                 )
             model_input = _model_input_at_checkpoint(backend, captured.checkpoint)
             attempt_directory = _next_attempt_directory(case_root)
-            tasks = _bootstrap_tasks(backend, captured, config)
+            tasks = _bootstrap_tasks(
+                backend,
+                captured,
+                config,
+                continuation_policy=policy_artifacts,
+            )
             batch_path, batch_report = run_bootstrap_worker_batch(
                 tasks=tasks,
                 workers=config.workers,
@@ -1098,7 +1303,11 @@ def run_bootstrap_teacher_dataset(
     )
     body: dict[str, Any] = {
         "schema_version": (
-            CURRICULUM_DATASET_SCHEMA_VERSION
+            (
+                LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
+                if state_set.capture_policy is not None
+                else CURRICULUM_DATASET_SCHEMA_VERSION
+            )
             if isinstance(state_set, CurriculumStateSet)
             else BOOTSTRAP_DATASET_SCHEMA_VERSION
         ),
@@ -1114,7 +1323,7 @@ def run_bootstrap_teacher_dataset(
         "auxiliary_reward_allowed": False,
         "backend": backend.as_dict(),
         "state_set": state_set.as_dict(),
-        "configuration": config.as_dict(),
+        "configuration": _dataset_configuration(config, policy_artifacts),
         "started_at": started_at,
         "completed_at": _utc_now(),
         "cases": [
@@ -1162,11 +1371,13 @@ def verify_bootstrap_teacher_dataset(
         if dataset_schema not in {
             BOOTSTRAP_DATASET_SCHEMA_VERSION,
             CURRICULUM_DATASET_SCHEMA_VERSION,
+            LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
         }:
             errors.append("unsupported bootstrap dataset schema")
         expected_teacher_id = (
             CURRICULUM_TEACHER_ID
-            if dataset_schema == CURRICULUM_DATASET_SCHEMA_VERSION
+            if dataset_schema
+            in {CURRICULUM_DATASET_SCHEMA_VERSION, LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION}
             else BOOTSTRAP_TEACHER_ID
         )
         if report.get("teacher_id") != expected_teacher_id:
@@ -1187,12 +1398,31 @@ def verify_bootstrap_teacher_dataset(
             errors.append("bootstrap dataset permits auxiliary environment reward")
         state_set = load_bootstrap_state_set_document(report.get("state_set"))
         _validate_bootstrap_split(state_set, split_manifest)
+        configuration = _mapping(report.get("configuration"), "dataset configuration")
+        continuation = configuration.get("continuation_policy")
+        if isinstance(state_set, CurriculumStateSet) and state_set.capture_policy is not None:
+            if continuation != state_set.capture_policy:
+                errors.append("dataset continuation policy differs from capture policy")
+        elif continuation is not None:
+            errors.append("baseline dataset unexpectedly declares a learned continuation policy")
         if report.get("claim_scope") != f"{state_set.partition}_curriculum_only":
             errors.append("bootstrap dataset claim scope differs from state-set partition")
         if isinstance(state_set, CurriculumStateSet) != (
-            dataset_schema == CURRICULUM_DATASET_SCHEMA_VERSION
+            dataset_schema
+            in {
+                CURRICULUM_DATASET_SCHEMA_VERSION,
+                LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+            }
         ):
             errors.append("bootstrap dataset and state-set schema generations differ")
+        if isinstance(state_set, CurriculumStateSet):
+            expected_schema = (
+                LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
+                if state_set.capture_policy is not None
+                else CURRICULUM_DATASET_SCHEMA_VERSION
+            )
+            if dataset_schema != expected_schema:
+                errors.append("bootstrap dataset policy generation differs from state set")
         raw_cases = _list(report.get("cases"), "dataset cases")
         expected_cases = cast(Sequence[BootstrapStateCase | CurriculumStateCase], state_set.cases)
         if len(raw_cases) != len(expected_cases):
@@ -1268,7 +1498,6 @@ def verify_bootstrap_teacher_dataset(
                 LegalAction(candidate.source_action_id, candidate.action_kind, {})
                 for candidate in model_input.candidates
             )
-            configuration = _mapping(report.get("configuration"), "dataset configuration")
             samples = _integer(configuration.get("samples_per_candidate"), "samples_per_candidate")
             batch_tasks = _list(batch_report.get("tasks"), "batch tasks")
             reconstructed_target = _build_bootstrap_target(
@@ -1291,6 +1520,7 @@ def verify_bootstrap_teacher_dataset(
                 maximum_rollout_steps=_integer(
                     configuration.get("maximum_rollout_steps"), "maximum_rollout_steps"
                 ),
+                continuation_policy_id=state_set.capture_policy_id,
             )
             if not batch_errors:
                 verified_cases += 1
@@ -1333,8 +1563,11 @@ def load_curriculum_policy_examples(
             "Curriculum dataset failed verification: " + "; ".join(verification.errors)
         )
     report = _load_object(report_path)
-    if report.get("schema_version") != CURRICULUM_DATASET_SCHEMA_VERSION:
-        raise ValueError("Policy examples require a curriculum-v2 dataset")
+    if report.get("schema_version") not in {
+        CURRICULUM_DATASET_SCHEMA_VERSION,
+        LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+    }:
+        raise ValueError("Policy examples require a curriculum dataset")
     root = report_path.parent.resolve()
     examples: list[CurriculumPolicyExample] = []
     for raw_reference in _list(report.get("cases"), "dataset cases"):
@@ -1405,7 +1638,7 @@ def write_bootstrap_worker_result(
         message = f"{type(error).__name__}: {error}"
         exit_code = 1
     body: dict[str, object] = {
-        "schema_version": BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION,
+        "schema_version": _worker_result_schema(task),
         "batch_id": batch_id,
         "task_id": task.task_id,
         "status": status,
@@ -1492,7 +1725,7 @@ def _run_bootstrap_subprocess(
         )
     request_digest = sha256_file(request_path)
     if (
-        result.get("schema_version") != BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
+        result.get("schema_version") != _worker_result_schema(task)
         or result.get("batch_id") != batch_id
         or result.get("task_id") != task.task_id
         or result.get("request_sha256") != request_digest
@@ -1569,22 +1802,21 @@ def _bootstrap_tasks(
     backend: SearchBackendSpec,
     captured: _CapturedBootstrapState,
     config: BootstrapConfig,
+    *,
+    continuation_policy: BootstrapPolicyArtifacts | None = None,
 ) -> tuple[BootstrapSimulationTask, ...]:
     tasks: list[BootstrapSimulationTask] = []
     for sample_index in range(config.samples_per_candidate):
         seed = _bootstrap_seed(config.sampling_seed, captured.checkpoint.state_hash, sample_index)
         for action in captured.legal_actions:
+            identity_parts = [BOOTSTRAP_TEACHER_ID]
+            if continuation_policy is not None:
+                identity_parts.append(continuation_policy.policy_id)
+            identity_parts.extend((captured.checkpoint.state_hash, action.action_id, str(seed)))
             task_id = str(
                 uuid5(
                     NAMESPACE_URL,
-                    "|".join(
-                        (
-                            BOOTSTRAP_TEACHER_ID,
-                            captured.checkpoint.state_hash,
-                            action.action_id,
-                            str(seed),
-                        )
-                    ),
+                    "|".join(identity_parts),
                 )
             )
             tasks.append(
@@ -1595,6 +1827,7 @@ def _bootstrap_tasks(
                     action.action_id,
                     seed,
                     config.maximum_rollout_steps,
+                    continuation_policy,
                 )
             )
     return tuple(tasks)
@@ -1888,7 +2121,7 @@ def _verify_bootstrap_batch(report_path: Path, *, exact_replay: bool) -> tuple[s
             else:
                 result = _load_object(result_path)
                 expected_result = {
-                    "schema_version": BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION,
+                    "schema_version": _worker_result_schema(task),
                     "batch_id": report.get("batch_id"),
                     "task_id": task_id,
                     "status": item.get("status"),
@@ -1933,6 +2166,7 @@ def _verify_case_task_domain(
     action_ids: set[str],
     samples_per_candidate: int,
     maximum_rollout_steps: int,
+    continuation_policy_id: str,
 ) -> None:
     root = batch_path.parent.resolve()
     by_action: dict[str, set[int]] = {action_id: set() for action_id in action_ids}
@@ -1950,6 +2184,8 @@ def _verify_case_task_domain(
             raise ValueError("bootstrap task ruleset differs from state set")
         if task.maximum_rollout_steps != maximum_rollout_steps:
             raise ValueError("bootstrap task rollout limit differs from dataset configuration")
+        if task.continuation_policy_id != continuation_policy_id:
+            raise ValueError("bootstrap task continuation policy differs from state set")
         seeds = by_action.get(task.action_id)
         if seeds is None:
             raise ValueError("bootstrap task action is absent from model input")
@@ -1996,13 +2232,17 @@ def _validate_bootstrap_output(
     }
     _exact_keys(output, expected_keys, "bootstrap output")
     expected = {
-        "method": "paired-public-progress-rollout-v1",
+        "method": (
+            "paired-public-progress-rollout-v2"
+            if task.continuation_policy is not None
+            else "paired-public-progress-rollout-v1"
+        ),
         "patch_id": task.checkpoint.patch_id,
         "ruleset_manifest_id": task.checkpoint.ruleset_manifest_id,
         "source_state_hash": task.checkpoint.state_hash,
         "action_id": task.action_id,
         "simulation_seed": task.simulation_seed,
-        "continuation_policy_id": ProgressBootstrapPolicy.policy_id,
+        "continuation_policy_id": task.continuation_policy_id,
     }
     if any(output.get(key) != value for key, value in expected.items()):
         raise ValueError("bootstrap output identity mismatch")
@@ -2269,6 +2509,38 @@ def _preserve_failed_case(path: Path) -> None:
     path.replace(candidate)
 
 
+def _validate_execution_policy(
+    state_set: CurriculumStateSet,
+    artifacts: BootstrapPolicyArtifacts | None,
+) -> None:
+    if state_set.capture_policy is None:
+        if artifacts is not None:
+            raise ValueError("Baseline curriculum state set cannot use learned policy artifacts")
+        return
+    if artifacts is None:
+        raise ValueError("Learned curriculum state set requires checkpoint artifacts")
+    if artifacts.provenance() != state_set.capture_policy:
+        raise ValueError("Learned policy artifacts differ from frozen state-set provenance")
+
+
+def _dataset_configuration(
+    config: BootstrapConfig,
+    artifacts: BootstrapPolicyArtifacts | None,
+) -> dict[str, object]:
+    configuration = config.as_dict()
+    if artifacts is not None:
+        configuration["continuation_policy"] = artifacts.provenance()
+    return configuration
+
+
+def _worker_result_schema(task: BootstrapSimulationTask) -> str:
+    return (
+        LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
+        if task.continuation_policy is not None
+        else BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
+    )
+
+
 def _prepare_failed_dataset_resume(
     report_path: Path,
     *,
@@ -2276,13 +2548,18 @@ def _prepare_failed_dataset_resume(
     state_set: BootstrapStateSetLike,
     objective: ObjectiveSpec,
     config: BootstrapConfig,
+    policy_artifacts: BootstrapPolicyArtifacts | None,
 ) -> None:
     report = _load_object(report_path)
     report_body = {key: value for key, value in report.items() if key != "dataset_id"}
     if report.get("dataset_id") != manifest_identifier(report_body):
         raise ValueError("Cannot resume a bootstrap dataset with an invalid identity")
     expected_schema = (
-        CURRICULUM_DATASET_SCHEMA_VERSION
+        (
+            LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
+            if state_set.capture_policy is not None
+            else CURRICULUM_DATASET_SCHEMA_VERSION
+        )
         if isinstance(state_set, CurriculumStateSet)
         else BOOTSTRAP_DATASET_SCHEMA_VERSION
     )
@@ -2295,7 +2572,7 @@ def _prepare_failed_dataset_resume(
         raise ValueError("Cannot resume a bootstrap dataset with a different backend")
     if report.get("objective") != objective.as_dict():
         raise ValueError("Cannot resume a bootstrap dataset with a different objective")
-    if report.get("configuration") != config.as_dict():
+    if report.get("configuration") != _dataset_configuration(config, policy_artifacts):
         raise ValueError("Cannot resume a bootstrap dataset with different configuration")
     summary = _mapping(report.get("summary"), "dataset summary")
     if _integer(summary.get("failed_cases"), "failed cases") <= 0:
@@ -2327,21 +2604,25 @@ def _validate_bootstrap_split(
 def _load_curriculum_state_set_document(
     document: dict[str, Any],
 ) -> CurriculumStateSet:
+    learned = document.get("schema_version") == LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+    expected_keys = {
+        "schema_version",
+        "state_set_id",
+        "split_manifest_id",
+        "ruleset_manifest_id",
+        "objective_id",
+        "capture_policy_id",
+        "partition",
+        "selection_policy",
+        "discovery",
+        "signal_spec",
+        "cases",
+    }
+    if learned:
+        expected_keys.add("capture_policy")
     _exact_keys(
         document,
-        {
-            "schema_version",
-            "state_set_id",
-            "split_manifest_id",
-            "ruleset_manifest_id",
-            "objective_id",
-            "capture_policy_id",
-            "partition",
-            "selection_policy",
-            "discovery",
-            "signal_spec",
-            "cases",
-        },
+        expected_keys,
         "curriculum state set",
     )
     state_set_id = _string(document.get("state_set_id"), "state_set_id")
@@ -2368,10 +2649,63 @@ def _load_curriculum_state_set_document(
             _curriculum_state_case(value)
             for value in _list(document.get("cases"), "curriculum cases")
         ),
+        capture_policy=(
+            {
+                key: _string(item, f"capture_policy.{key}")
+                for key, item in _mapping(document.get("capture_policy"), "capture_policy").items()
+            }
+            if learned
+            else None
+        ),
     )
     if len(state_set.cases) != captured:
         raise ValueError("Curriculum captured-coordinate count differs from cases")
     return state_set
+
+
+def _validate_policy_provenance(
+    provenance: dict[str, str],
+    *,
+    policy_id: str,
+    split_manifest_id: str,
+    ruleset_manifest_id: str,
+) -> None:
+    _exact_keys(
+        provenance,
+        {
+            "kind",
+            "policy_id",
+            "model_id",
+            "training_report_id",
+            "split_manifest_id",
+            "ruleset_manifest_id",
+        },
+        "bootstrap policy provenance",
+    )
+    expected = {
+        "kind": "production_checkpoint",
+        "policy_id": policy_id,
+        "split_manifest_id": split_manifest_id,
+        "ruleset_manifest_id": ruleset_manifest_id,
+    }
+    if any(provenance.get(key) != value for key, value in expected.items()):
+        raise ValueError("Bootstrap policy provenance does not match the state set")
+    model_id = provenance.get("model_id")
+    if policy_id != f"production-checkpoint-policy-v1:{model_id}":
+        raise ValueError("Bootstrap policy ID does not match its model ID")
+    _string(provenance.get("training_report_id"), "training_report_id")
+
+
+def _load_bootstrap_policy(
+    artifacts: BootstrapPolicyArtifacts | None,
+    environment: object,
+) -> ProgressBootstrapPolicy | ProductionCheckpointPolicy:
+    if artifacts is None:
+        return ProgressBootstrapPolicy()
+    ruleset = getattr(environment, "ruleset", None)
+    if ruleset is None:
+        raise ValueError("Bootstrap environment exposes no ruleset identity")
+    return artifacts.load_policy(ruleset)
 
 
 def _curriculum_state_case(value: object) -> CurriculumStateCase:
