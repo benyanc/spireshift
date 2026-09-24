@@ -180,6 +180,10 @@ def _registry() -> Registry[Any]:
             "bootstrap-curriculum-smoke-evidence-v1.json",
             "../../docs/evidence/bootstrap-curriculum-v2-admitted-smoke.json",
         ),
+        (
+            "production-model-inference-smoke-v1.json",
+            "../../docs/evidence/production-model-inference-smoke-v0.107.1.json",
+        ),
         ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
         ("experiment-resources-v1.json", "experiment-resources-v1.json"),
     ],

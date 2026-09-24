@@ -22,6 +22,7 @@ from spireshift.adapters.sts2mcp import (
     Sts2McpStateProjector,
 )
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
+from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.backend_admission import (
     assess_backend_admission,
     load_backend_admission_report,
@@ -97,6 +98,11 @@ from spireshift.models import (
     load_training_report,
     train_initial_models,
     write_model_artifact,
+)
+from spireshift.production_inference import (
+    load_production_inference_smoke,
+    run_production_inference_smoke,
+    write_production_inference_smoke,
 )
 from spireshift.production_models import (
     ProductionTrainingConfig,
@@ -646,6 +652,25 @@ def build_parser() -> argparse.ArgumentParser:
     production_verify.add_argument("checkpoint", type=Path)
     production_verify.add_argument("--report", type=Path)
     production_verify.add_argument("--output", type=Path)
+    production_smoke = model_commands.add_parser(
+        "smoke-curriculum",
+        help="Run a short candidate-alignment and latency smoke on the admitted backend",
+    )
+    production_smoke.add_argument("checkpoint", type=Path)
+    production_smoke.add_argument("--report", type=Path, required=True)
+    production_smoke.add_argument("--upstream-root", type=Path, required=True)
+    production_smoke.add_argument("--manifest", type=Path, required=True)
+    production_smoke.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
+    production_smoke.add_argument("--max-decisions-per-seed", type=int, default=8)
+    production_smoke.add_argument("--output", type=Path, required=True)
+    production_smoke_verify = model_commands.add_parser(
+        "verify-curriculum-smoke",
+        help="Verify a production inference smoke and its model/report identities",
+    )
+    production_smoke_verify.add_argument("smoke", type=Path)
+    production_smoke_verify.add_argument("checkpoint", type=Path)
+    production_smoke_verify.add_argument("--report", type=Path, required=True)
+    production_smoke_verify.add_argument("--output", type=Path)
 
     calibrate = subparsers.add_parser(
         "calibrate", help="Fit or verify held-out probability calibration"
@@ -1481,9 +1506,56 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
     if args.command == "model":
         try:
+            if args.model_command == "verify-curriculum-smoke":
+                smoke_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                smoke_training_report = load_production_training_report(
+                    args.report, checkpoint=smoke_checkpoint
+                )
+                smoke_document = load_production_inference_smoke(
+                    args.smoke,
+                    model_id=str(smoke_checkpoint["model_id"]),
+                    training_report_id=str(smoke_training_report["report_id"]),
+                )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "model_id": smoke_checkpoint["model_id"],
+                        "training_report_id": smoke_training_report["report_id"],
+                        "smoke_report_id": smoke_document["report_id"],
+                    },
+                    args.output,
+                )
+                return 0
+            if args.model_command == "smoke-curriculum":
+                smoke_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                smoke_training_report = load_production_training_report(
+                    args.report, checkpoint=smoke_checkpoint
+                )
+                loaded_backend = load_evangambit_backend(args.upstream_root, args.manifest)
+                inference_environment = loaded_backend.factory()
+                try:
+                    inference_policy = ProductionCheckpointPolicy(
+                        checkpoint=smoke_checkpoint,
+                        training_report=smoke_training_report,
+                        ruleset=inference_environment.ruleset,
+                    )
+                    smoke_document = run_production_inference_smoke(
+                        environment=inference_environment,
+                        policy=inference_policy,
+                        training_report_id=str(smoke_training_report["report_id"]),
+                        seeds=tuple(args.seeds),
+                        maximum_decisions_per_seed=args.max_decisions_per_seed,
+                    )
+                    write_production_inference_smoke(smoke_document, args.output)
+                finally:
+                    close = getattr(inference_environment, "close", None)
+                    if callable(close):
+                        close()
+                _emit_json(smoke_document, None)
+                return 0
             if args.model_command == "verify-curriculum":
                 checkpoint = load_production_model_checkpoint(args.checkpoint)
-                loaded_training_report = (
+                curriculum_training_report = (
                     load_production_training_report(args.report, checkpoint=checkpoint)
                     if args.report is not None
                     else None
@@ -1494,8 +1566,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                         "model_id": checkpoint["model_id"],
                         "report_id": (
                             None
-                            if loaded_training_report is None
-                            else loaded_training_report["report_id"]
+                            if curriculum_training_report is None
+                            else curriculum_training_report["report_id"]
                         ),
                     },
                     args.output,
@@ -1558,7 +1630,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 return 0
             if args.model_command == "verify":
                 checkpoint = load_model_checkpoint(args.checkpoint)
-                loaded_training_report = (
+                model_training_report = (
                     load_training_report(args.report, checkpoint=checkpoint)
                     if args.report is not None
                     else None
@@ -1569,8 +1641,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                         "model_id": checkpoint["model_id"],
                         "report_id": (
                             None
-                            if loaded_training_report is None
-                            else loaded_training_report["report_id"]
+                            if model_training_report is None
+                            else model_training_report["report_id"]
                         ),
                     },
                     args.output,
@@ -1632,7 +1704,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = (
-                args.output if args.model_command in {"verify", "verify-curriculum"} else None
+                args.output
+                if args.model_command in {"verify", "verify-curriculum", "verify-curriculum-smoke"}
+                else None
             )
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1

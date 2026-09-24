@@ -73,10 +73,21 @@ The run used 131.05 wall seconds, 123.96 CPU seconds, 525 MB peak memory, and 3.
 storage. Its resource report is
 `sha256:05479556dbb5d6e4d73291504c617526259146360a964fc2737d8de3e58f2a3c`.
 
-## Operator-started version-2 training run
+## Accepted version-2 auxiliary model
 
-This is a sustained experiment. A person starts and observes it; an automated coding agent should
-only prepare and verify the command and assess the finished artifacts.
+The operator-started v2 run passed all four prespecified policy checks. Its checkpoint is
+`sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571`, and its training
+report is `sha256:246f9a1ae30ee77f52ea22d3eb70a98828ba2f31d06191cf4a80ea64b2b9a434`.
+Held-out pairwise cross-entropy is 0.6497, below uniform 0.6931 and the matched soft-target model's
+0.7228. Decisive-pair accuracy is 78.41%, mean progress regret is 0.002580, and tactical-risk
+Brier skill is +0.2684. Floor prediction remains diagnostic: floor 4 has positive Brier skill, but
+most other nonconstant thresholds are slightly negative.
+
+The run used 200.35 wall seconds, 192.97 CPU seconds, 526 MB peak memory, and 3.05 MB of artifact
+storage. Its resource report is
+`sha256:6d0298e824f133a81e3ade5daf6201af18a33e7b2db3177fb5821ac405bc1f37`.
+
+The following sustained reproduction command remains person-started and person-observed:
 
 ```bash
 uv run spireshift resources run \
@@ -122,7 +133,45 @@ uv run spireshift resources verify \
   artifacts/resources/production-base-v2.json
 ```
 
+## Bounded admitted-backend inference smoke
+
+`ProductionCheckpointPolicy` loads only an identity-verified checkpoint/report pair whose held-out
+auxiliary policy gate passed. It checks the frozen ruleset and terminal-victory objective, constructs
+the public candidate-aligned representation, preserves legal-action order, and returns a legal
+argmax action. The same policy satisfies the shared policy interface used by policy-only episodes
+and tactical continuation rollouts. The blocked terminal-value head is never exposed as a run-value
+estimate.
+
+The bounded smoke below is an integration check rather than a full-run evaluation. It executes at
+most eight decisions over two seeds and records exact candidate alignment, legal selection, model
+and ruleset identities, and end-to-end representation-plus-inference latency.
+
+```bash
+uv run --extra evangambit spireshift model smoke-curriculum \
+  artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+  --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+  --upstream-root artifacts/backend/evangambit-v0.107.1 \
+  --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+  --seeds 0 1 \
+  --max-decisions-per-seed 4 \
+  --output artifacts/models/sts2-v0.107.1-base-v2/inference-smoke.json
+
+uv run spireshift model verify-curriculum-smoke \
+  artifacts/models/sts2-v0.107.1-base-v2/inference-smoke.json \
+  artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+  --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json
+```
+
+The [frozen completed smoke](evidence/production-model-inference-smoke-v0.107.1.json) is
+`sha256:80b9742fc4aaf2e5058904230d399eb3bc234c9970a6c1d99e299df611b9d058`.
+It aligned every candidate and selected a legal action across all eight decisions, including two
+combat states. Median end-to-end inference latency was 5.06 ms and maximum latency was 6.67 ms on
+the recorded Apple M4 Pro host. This establishes backend compatibility and latency only; it does
+not measure gameplay quality or full-run readiness.
+
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
 [`production-model-training-report-v2.json`](../schemas/production-model-training-report-v2.json).
+The inference evidence schema is
+[`production-model-inference-smoke-v1.json`](../schemas/production-model-inference-smoke-v1.json).
 The loader retains read-only verification compatibility with the rejected version-1 artifacts.
