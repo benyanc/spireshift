@@ -9,8 +9,15 @@ from typing import Any, cast
 import pytest
 from jsonschema import Draft202012Validator
 
+from spireshift.adapters.mock import MockSpireEnvironment
+from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.cli import main
 from spireshift.core.manifest import manifest_identifier
+from spireshift.production_inference import (
+    load_production_inference_smoke,
+    run_production_inference_smoke,
+    write_production_inference_smoke,
+)
 from spireshift.production_models import (
     ProductionTrainingConfig,
     load_production_model_checkpoint,
@@ -298,3 +305,123 @@ def test_production_cli_trains_and_verifies(
     assert trained == 0
     assert verified == 0
     assert json.loads(verification.read_text())["valid"] is True
+
+
+def test_production_policy_aligns_candidates_and_writes_bounded_smoke(
+    synthetic_curricula: tuple[Path, Path], tmp_path: Path
+) -> None:
+    train, validation = synthetic_curricula
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+    environment = MockSpireEnvironment()
+    checkpoint = copy.deepcopy(result.checkpoint)
+    checkpoint["ruleset_manifest_id"] = environment.ruleset.manifest_id
+    checkpoint_body = {key: value for key, value in checkpoint.items() if key != "model_id"}
+    checkpoint["model_id"] = manifest_identifier(checkpoint_body)
+    report = copy.deepcopy(result.report)
+    report["model_id"] = checkpoint["model_id"]
+    report["held_out_metrics"]["policy"]["auxiliary_policy_gate"]["passed"] = True
+    report_body = {key: value for key, value in report.items() if key != "report_id"}
+    report["report_id"] = manifest_identifier(report_body)
+    checkpoint_path = tmp_path / "checkpoint.json"
+    report_path = tmp_path / "training-report.json"
+    write_production_model_artifact(checkpoint, checkpoint_path, label="production checkpoint")
+    write_production_model_artifact(report, report_path, label="production report")
+
+    policy = ProductionCheckpointPolicy.from_paths(
+        checkpoint_path,
+        report_path,
+        ruleset=environment.ruleset,
+    )
+    observation = environment.reset(3)
+    actions = tuple(environment.legal_actions())
+    decision = policy.predict(observation, actions)
+    assert decision.source_action_ids == tuple(action.action_id for action in actions)
+    assert decision.selected_action in actions
+    assert sum(decision.policy) == pytest.approx(1.0)
+    assert decision.inference_seconds >= 0.0
+
+    smoke = run_production_inference_smoke(
+        environment=environment,
+        policy=policy,
+        training_report_id=cast(str, report["report_id"]),
+        seeds=(3, 4),
+        maximum_decisions_per_seed=2,
+    )
+    assert smoke["summary"]["candidate_alignment_pass"] is True
+    assert smoke["summary"]["legal_selection_pass"] is True
+    assert 2 <= smoke["summary"]["decisions"] <= 4
+    assert all(
+        record["selected_action_id"] in record["candidate_action_ids"]
+        for record in smoke["records"]
+    )
+    schema = json.loads(Path("schemas/production-model-inference-smoke-v1.json").read_text())
+    Draft202012Validator(schema).validate(smoke)
+
+    smoke_path = tmp_path / "smoke.json"
+    write_production_inference_smoke(smoke, smoke_path)
+    assert (
+        load_production_inference_smoke(
+            smoke_path,
+            model_id=cast(str, checkpoint["model_id"]),
+            training_report_id=cast(str, report["report_id"]),
+        )
+        == smoke
+    )
+    verification_path = tmp_path / "smoke-verification.json"
+    assert (
+        main(
+            [
+                "model",
+                "verify-curriculum-smoke",
+                str(smoke_path),
+                str(checkpoint_path),
+                "--report",
+                str(report_path),
+                "--output",
+                str(verification_path),
+            ]
+        )
+        == 0
+    )
+    assert json.loads(verification_path.read_text())["valid"] is True
+    tampered = copy.deepcopy(smoke)
+    tampered["records"][0]["selected_action_id"] = "illegal"
+    smoke_path.write_text(json.dumps(tampered), encoding="utf-8")
+    with pytest.raises(ValueError, match="identity mismatch"):
+        load_production_inference_smoke(smoke_path)
+    tampered_body = {key: value for key, value in tampered.items() if key != "report_id"}
+    tampered["report_id"] = manifest_identifier(tampered_body)
+    smoke_path.write_text(json.dumps(tampered), encoding="utf-8")
+    with pytest.raises(ValueError, match="not candidate-aligned"):
+        load_production_inference_smoke(smoke_path)
+
+
+def test_production_policy_rejects_unadmitted_auxiliary_gate(
+    synthetic_curricula: tuple[Path, Path],
+) -> None:
+    train, validation = synthetic_curricula
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+    environment = MockSpireEnvironment()
+    checkpoint = copy.deepcopy(result.checkpoint)
+    checkpoint["ruleset_manifest_id"] = environment.ruleset.manifest_id
+    checkpoint_body = {key: value for key, value in checkpoint.items() if key != "model_id"}
+    checkpoint["model_id"] = manifest_identifier(checkpoint_body)
+    report = copy.deepcopy(result.report)
+    report["model_id"] = checkpoint["model_id"]
+
+    with pytest.raises(ValueError, match="did not pass"):
+        ProductionCheckpointPolicy(
+            checkpoint=checkpoint,
+            training_report=report,
+            ruleset=environment.ruleset,
+        )
