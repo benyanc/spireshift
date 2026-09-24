@@ -176,8 +176,9 @@ normalized soft policy target, progress-utility standard error, paired preferenc
 winner confidence, and first-half versus second-half winner agreement. `policy_target_weight`
 downweights unstable states; one-candidate states receive zero policy weight. A one-hot target is
 retained only for audit compatibility, and `hard_target_eligible` is false unless the winner is
-unique, sufficiently confident, and stable across halves. Model training must consume
-`soft_policy_target` and `policy_target_weight` rather than the audit-only one-hot field.
+unique, sufficiently confident, and stable across halves. Model training must consume either the
+confidence-aware pairwise matrix or `soft_policy_target` with `policy_target_weight`, rather than
+the audit-only one-hot field.
 `load_curriculum_policy_examples` is the verified boundary for model code: it refuses legacy or
 invalid datasets and exposes the soft distribution, weight, pairwise matrix, and hard-label
 eligibility alongside the public compositional model input.
