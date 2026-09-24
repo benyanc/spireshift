@@ -169,9 +169,64 @@ combat states. Median end-to-end inference latency was 5.06 ms and maximum laten
 the recorded Apple M4 Pro host. This establishes backend compatibility and latency only; it does
 not measure gameplay quality or full-run readiness.
 
+## Operator-started paired full-run pilot
+
+The next sustained job compares the learned policy with `ProgressBootstrapPolicy` on the same 32
+frozen test seeds. Every seed-policy case is written independently, so `--resume` can reuse verified
+completed cases after an interrupted command. Failed cases stay in the denominator. The report
+separates victories, terminal completion, maximum floor, decision latency, and paired differences;
+auxiliary floor progress cannot replace terminal victories.
+
+An automated coding agent prepares and verifies this command but does not start or monitor it:
+
+```bash
+uv run spireshift resources run \
+  --kind rollout \
+  --report artifacts/resources/production-policy-evaluation-v1.json \
+  --metrics artifacts/resources/production-policy-evaluation-v1-metrics.json \
+  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v2-policy-pilot \
+  --workers 4 \
+  --max-wall-seconds 14400 \
+  --max-cpu-seconds 50000 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
+  -- \
+  uv run --extra evangambit spireshift model evaluate-curriculum \
+    artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+    --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v2-policy-pilot \
+    --runs 32 \
+    --workers 4 \
+    --max-decisions-per-run 4096
+```
+
+After the command finishes, verify the aggregate against every immutable case and its frozen
+checkpoint, training report, split, objective, and ruleset:
+
+```bash
+uv run spireshift model verify-evaluation-curriculum \
+  artifacts/evaluations/sts2-v0.107.1-base-v2-policy-pilot/production-policy-evaluation.json \
+  artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+  --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+  --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json
+
+uv run spireshift resources verify \
+  artifacts/resources/production-policy-evaluation-v1.json
+```
+
+If execution stops before the aggregate report is created, rerun the inner
+`evaluate-curriculum` command with `--resume`; it verifies and reuses existing cases and executes
+only missing seed-policy pairs. Use a new resource-report path for that resumed invocation.
+
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
 [`production-model-training-report-v2.json`](../schemas/production-model-training-report-v2.json).
 The inference evidence schema is
 [`production-model-inference-smoke-v1.json`](../schemas/production-model-inference-smoke-v1.json).
+The paired evaluation schemas are
+[`production-policy-evaluation-v1.json`](../schemas/production-policy-evaluation-v1.json) and
+[`production-policy-evaluation-case-v1.json`](../schemas/production-policy-evaluation-case-v1.json).
 The loader retains read-only verification compatibility with the rejected version-1 artifacts.

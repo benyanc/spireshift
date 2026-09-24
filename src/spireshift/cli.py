@@ -99,6 +99,10 @@ from spireshift.models import (
     train_initial_models,
     write_model_artifact,
 )
+from spireshift.production_evaluation import (
+    load_production_policy_evaluation,
+    run_production_policy_evaluation,
+)
 from spireshift.production_inference import (
     load_production_inference_smoke,
     run_production_inference_smoke,
@@ -671,6 +675,31 @@ def build_parser() -> argparse.ArgumentParser:
     production_smoke_verify.add_argument("checkpoint", type=Path)
     production_smoke_verify.add_argument("--report", type=Path, required=True)
     production_smoke_verify.add_argument("--output", type=Path)
+    production_evaluate = model_commands.add_parser(
+        "evaluate-curriculum",
+        help="Run a resumable paired full-run evaluation on frozen test seeds",
+    )
+    production_evaluate.add_argument("checkpoint", type=Path)
+    production_evaluate.add_argument("--report", type=Path, required=True)
+    production_evaluate.add_argument("--split-manifest", type=Path, required=True)
+    production_evaluate.add_argument("--upstream-root", type=Path, required=True)
+    production_evaluate.add_argument("--manifest", type=Path, required=True)
+    production_evaluate.add_argument("--output-dir", type=Path, required=True)
+    production_evaluation_seeds = production_evaluate.add_mutually_exclusive_group()
+    production_evaluation_seeds.add_argument("--seeds", type=int, nargs="+")
+    production_evaluation_seeds.add_argument("--runs", type=int, default=32)
+    production_evaluate.add_argument("--workers", type=int, default=4)
+    production_evaluate.add_argument("--max-decisions-per-run", type=int, default=4096)
+    production_evaluate.add_argument("--resume", action="store_true")
+    production_evaluate_verify = model_commands.add_parser(
+        "verify-evaluation-curriculum",
+        help="Verify paired full-run cases, aggregates, and frozen identities",
+    )
+    production_evaluate_verify.add_argument("evaluation", type=Path)
+    production_evaluate_verify.add_argument("checkpoint", type=Path)
+    production_evaluate_verify.add_argument("--report", type=Path, required=True)
+    production_evaluate_verify.add_argument("--split-manifest", type=Path, required=True)
+    production_evaluate_verify.add_argument("--output", type=Path)
 
     calibrate = subparsers.add_parser(
         "calibrate", help="Fit or verify held-out probability calibration"
@@ -1506,6 +1535,85 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
     if args.command == "model":
         try:
+            if args.model_command == "verify-evaluation-curriculum":
+                evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                evaluation_training_report = load_production_training_report(
+                    args.report, checkpoint=evaluation_checkpoint
+                )
+                evaluation_split = load_split_manifest(args.split_manifest)
+                if evaluation_checkpoint["split_manifest_id"] != evaluation_split.manifest_id:
+                    raise ValueError("Production evaluation checkpoint and split identities differ")
+                evaluation = load_production_policy_evaluation(
+                    args.evaluation,
+                    model_id=str(evaluation_checkpoint["model_id"]),
+                    training_report_id=str(evaluation_training_report["report_id"]),
+                    split_manifest=evaluation_split,
+                )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "model_id": evaluation_checkpoint["model_id"],
+                        "training_report_id": evaluation_training_report["report_id"],
+                        "evaluation_report_id": evaluation["report_id"],
+                    },
+                    args.output,
+                )
+                return 0
+            if args.model_command == "evaluate-curriculum":
+                evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                evaluation_training_report = load_production_training_report(
+                    args.report, checkpoint=evaluation_checkpoint
+                )
+                evaluation_split = load_split_manifest(args.split_manifest)
+                if args.seeds is None:
+                    if args.runs <= 0:
+                        raise ValueError("Production evaluation --runs must be positive")
+                    evaluation_seeds = evaluation_split.seeds(SplitName.TEST)[: args.runs]
+                else:
+                    evaluation_seeds = tuple(args.seeds)
+                evaluation_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=args.max_decisions_per_run + 1,
+                )
+                probe_environment = evaluation_backend.factory()
+                try:
+                    evaluation_ruleset = probe_environment.ruleset
+                    evaluation_policy = ProductionCheckpointPolicy(
+                        checkpoint=evaluation_checkpoint,
+                        training_report=evaluation_training_report,
+                        ruleset=evaluation_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                evaluation_result = run_production_policy_evaluation(
+                    environment_factory=evaluation_backend.factory,
+                    ruleset=evaluation_ruleset,
+                    learned_policy=evaluation_policy,
+                    split_manifest=evaluation_split,
+                    training_report_id=str(evaluation_training_report["report_id"]),
+                    seeds=evaluation_seeds,
+                    workers=args.workers,
+                    maximum_decisions_per_run=args.max_decisions_per_run,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                evaluation_summary = evaluation_result.report["summary"]
+                if isinstance(evaluation_summary, dict):
+                    learned_summary = evaluation_summary.get("learned")
+                    baseline_summary = evaluation_summary.get("baseline")
+                    if isinstance(learned_summary, dict) and isinstance(baseline_summary, dict):
+                        write_experiment_metrics(
+                            ExperimentMetrics(
+                                trajectories=len(evaluation_seeds) * 2,
+                                transitions=int(learned_summary["decisions"])
+                                + int(baseline_summary["decisions"]),
+                            )
+                        )
+                _emit_json(evaluation_result.report, None)
+                return 0 if evaluation_result.successful else 1
             if args.model_command == "verify-curriculum-smoke":
                 smoke_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 smoke_training_report = load_production_training_report(
@@ -1705,7 +1813,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
             error_output = (
                 args.output
-                if args.model_command in {"verify", "verify-curriculum", "verify-curriculum-smoke"}
+                if args.model_command
+                in {
+                    "verify",
+                    "verify-curriculum",
+                    "verify-curriculum-smoke",
+                    "verify-evaluation-curriculum",
+                }
                 else None
             )
             _emit_json({"status": "error", "error": str(error)}, error_output)

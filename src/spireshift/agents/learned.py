@@ -42,6 +42,9 @@ class ProductionCheckpointPolicy:
         model_id = checkpoint.get("model_id")
         if not isinstance(model_id, str):
             raise ValueError("Production checkpoint has no model identity")
+        split_manifest_id = checkpoint.get("split_manifest_id")
+        if not isinstance(split_manifest_id, str):
+            raise ValueError("Production checkpoint has no split identity")
         if checkpoint.get("ruleset_manifest_id") != ruleset.manifest_id:
             raise ValueError("Production checkpoint ruleset differs from inference ruleset")
         if checkpoint.get("objective_id") != "terminal-victory-v1":
@@ -59,6 +62,7 @@ class ProductionCheckpointPolicy:
             raise ValueError("Production checkpoint did not pass its auxiliary policy gate")
         self.policy_id = f"production-checkpoint-policy-v1:{model_id}"
         self.model_id = model_id
+        self.split_manifest_id = split_manifest_id
         self.ruleset = ruleset
         self._model: ProductionBaseModel = model
 
