@@ -41,6 +41,12 @@ PRODUCTION_TRAIN_CURRICULUM = Path(
 PRODUCTION_VALIDATION_CURRICULUM = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json"
 )
+PRODUCTION_TRAIN_LEARNED_CURRICULUM = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-curriculum-v3.json"
+)
+PRODUCTION_VALIDATION_LEARNED_CURRICULUM = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-learned-curriculum-v3.json"
+)
 
 
 def _tactical_split(ruleset_manifest_id: str) -> SplitManifest:
@@ -192,6 +198,49 @@ def test_production_curricula_are_frozen_to_disjoint_complete_runs() -> None:
         case.expected_state_hash for case in validation.cases
     }
     assert len(shared_hashes) == 5
+    actionable_shared_hashes = {
+        case.expected_state_hash
+        for case in (*train.cases, *validation.cases)
+        if case.expected_state_hash in shared_hashes and case.expected_legal_actions > 1
+    }
+    assert len(actionable_shared_hashes) == 1
+
+
+def test_learned_policy_curricula_are_frozen_to_later_disjoint_runs() -> None:
+    split = load_split_manifest(PRODUCTION_SPLIT)
+    train = load_bootstrap_state_set(PRODUCTION_TRAIN_LEARNED_CURRICULUM)
+    validation = load_bootstrap_state_set(PRODUCTION_VALIDATION_LEARNED_CURRICULUM)
+
+    assert isinstance(train, CurriculumStateSet)
+    assert isinstance(validation, CurriculumStateSet)
+    assert train.state_set_id == (
+        "sha256:07c21103e14a3e21a56bedfba936578071fc5fc1e084f764a0e583e04a7c4542"
+    )
+    assert validation.state_set_id == (
+        "sha256:75f35e8bc1e843853dd933e0fae8db406acddcc5a85e325522705a486b4ec7a6"
+    )
+    assert train.capture_policy == validation.capture_policy
+    assert train.capture_policy is not None
+    assert train.capture_policy["model_id"] == (
+        "sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571"
+    )
+    assert len(train.cases) == 711
+    assert len(validation.cases) == 256
+    train_seeds = {case.run_seed for case in train.cases}
+    validation_seeds = {case.run_seed for case in validation.cases}
+    assert len(train_seeds) == 64
+    assert len(validation_seeds) == 24
+    assert train_seeds.isdisjoint(validation_seeds)
+    assert all(split.split_for_seed(seed) is SplitName.TRAIN for seed in train_seeds)
+    assert all(split.split_for_seed(seed) is SplitName.VALIDATION for seed in validation_seeds)
+    assert max(case.expected_source_floor or 0 for case in train.cases) == 11
+    assert max(case.expected_source_floor or 0 for case in validation.cases) == 10
+    assert sum((case.expected_source_floor or 0) >= 4 for case in train.cases) == 354
+    assert sum((case.expected_source_floor or 0) >= 4 for case in validation.cases) == 117
+    shared_hashes = {case.expected_state_hash for case in train.cases} & {
+        case.expected_state_hash for case in validation.cases
+    }
+    assert len(shared_hashes) == 8
     actionable_shared_hashes = {
         case.expected_state_hash
         for case in (*train.cases, *validation.cases)
