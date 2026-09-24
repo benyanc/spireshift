@@ -297,9 +297,30 @@ uv run spireshift resources run \
 ```
 
 For validation, replace `train` with `validation` in the report, artifact root, specification, and
-output paths. Inspect both state sets before teacher generation. In particular, compare reached
-floor histograms and unreachable-coordinate rates with v2 and confirm that every structural gate
-passes.
+output paths.
+
+Both discovery jobs completed within their resource caps and passed verification. The admitted
+train state set is frozen at
+`manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-curriculum-v3.json`, ID
+`sha256:07c21103e14a3e21a56bedfba936578071fc5fc1e084f764a0e583e04a7c4542`. It contains 711
+cases, 686 unique public states, all 64 requested train seeds, 11 source floors through floor 11,
+and nine decision types. Mean source floor is 3.487 and 354 cases (49.8%) are floor 4 or later.
+Its resource report is
+`sha256:383891a4fabfa2a46198d0fafa27f3ea4ccb0c22596ce2821889321cd99d821f`.
+
+Validation is frozen at
+`manifests/bootstrap/sts2-v0.107.1-evangambit-validation-learned-curriculum-v3.json`, ID
+`sha256:75f35e8bc1e843853dd933e0fae8db406acddcc5a85e325522705a486b4ec7a6`. It contains 256
+cases, 253 unique public states, all 24 requested validation seeds, 10 source floors through floor
+10, and nine decision types. Mean source floor is 3.328 and 117 cases (45.7%) are floor 4 or later.
+Its resource report is
+`sha256:4f9c2eef0b52241e135a11f751485c2641ce44576a7e1b00a52b1a0e5b581a63`.
+
+Train and validation share no run seeds. They share eight public-state hashes: seven forced
+one-action floor-1 event states and one nine-action floor-1 card-selection state. This repeated
+early observation is disclosed when interpreting held-out policy metrics; it does not violate
+complete-run split ownership. Compared with v2, mean source floor increased from about 1.8 to at
+least 3.3 and the floor-4-or-later share increased from 3.9-6.4% to 45.7-49.8%.
 
 After admission, generate train and validation separately. These jobs are CPU-heavy and should run
 sequentially with eight workers on the reference M4 Pro:
@@ -318,7 +339,7 @@ uv run spireshift resources run \
   -- \
   uv run --extra evangambit spireshift bootstrap generate \
     artifacts/bootstrap/teacher-train-v3 \
-    --states artifacts/bootstrap/discovery-train-v3/state-set.json \
+    --states manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-curriculum-v3.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --backend evangambit \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
@@ -331,5 +352,5 @@ uv run spireshift resources run \
 ```
 
 For validation generation, replace `train` with `validation` in the report, metrics, artifact root,
-state-set, and output paths. Do not start either generation command until the discovered state sets
-have been reviewed and frozen.
+state-set, and output paths. Do not retrain the model until both generated datasets verify and pass
+their auxiliary-policy signal gates.
