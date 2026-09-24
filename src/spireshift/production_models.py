@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import random
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from spireshift.bootstrap_teacher import (
     CurriculumStateSet,
@@ -45,9 +46,12 @@ from spireshift.representations import (
 )
 from spireshift.splits import SplitManifest, SplitName
 
-PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v1"
-PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v1"
-PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v1"
+LEGACY_PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v1"
+LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v1"
+LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v1"
+PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v2"
+PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v2"
+PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v2"
 POLICY_TARGET_ID = "paired-preference-confidence-v1"
 FLOOR_TARGET_ID = "candidate-maximum-floor-survival-v1"
 
@@ -55,7 +59,7 @@ FLOOR_TARGET_ID = "candidate-maximum-floor-survival-v1"
 @dataclass(frozen=True, slots=True)
 class ProductionTrainingConfig:
     epochs: int = 60
-    learning_rate: float = 0.02
+    learning_rate: float = 0.005
     l2_regularization: float = 0.0001
     gradient_clip: float = 5.0
     vector_dimension: int = 4096
@@ -64,6 +68,10 @@ class ProductionTrainingConfig:
     pairwise_noise_floor: float = 0.25
     calibration_bins: int = 10
     shuffle_seed: int = 0
+    optimizer_id: str = "sparse-adagrad-v1"
+    adagrad_epsilon: float = 1e-8
+    selection_fraction: float = 0.25
+    selection_salt: str = "production-base-model-selection-v1"
 
     def __post_init__(self) -> None:
         if self.epochs <= 0:
@@ -86,6 +94,14 @@ class ProductionTrainingConfig:
             raise ValueError("calibration_bins must be at least 2")
         if self.shuffle_seed < 0:
             raise ValueError("shuffle_seed must be non-negative")
+        if self.optimizer_id not in {"sparse-adagrad-v1", "legacy-sgd-v1"}:
+            raise ValueError("optimizer_id is unsupported")
+        if not math.isfinite(self.adagrad_epsilon) or self.adagrad_epsilon <= 0.0:
+            raise ValueError("adagrad_epsilon must be finite and positive")
+        if not 0.0 < self.selection_fraction < 1.0:
+            raise ValueError("selection_fraction must be in (0, 1)")
+        if not self.selection_salt:
+            raise ValueError("selection_salt must be non-empty")
 
     def as_dict(self) -> dict[str, object]:
         return {
@@ -99,12 +115,16 @@ class ProductionTrainingConfig:
             "pairwise_noise_floor": self.pairwise_noise_floor,
             "calibration_bins": self.calibration_bins,
             "shuffle_seed": self.shuffle_seed,
+            "optimizer_id": self.optimizer_id,
+            "adagrad_epsilon": self.adagrad_epsilon,
+            "selection_fraction": self.selection_fraction,
+            "selection_salt": self.selection_salt,
         }
 
     @classmethod
     def from_mapping(cls, value: object) -> ProductionTrainingConfig:
         document = _mapping(value, "production training config")
-        expected = {
+        legacy_expected = {
             "epochs",
             "learning_rate",
             "l2_regularization",
@@ -116,8 +136,16 @@ class ProductionTrainingConfig:
             "calibration_bins",
             "shuffle_seed",
         }
-        if set(document) != expected:
+        expected = legacy_expected | {
+            "optimizer_id",
+            "adagrad_epsilon",
+            "selection_fraction",
+            "selection_salt",
+        }
+        fields = set(document)
+        if fields != legacy_expected and fields != expected:
             raise ValueError("Production training configuration fields differ")
+        legacy = fields == legacy_expected
         return cls(
             epochs=_integer(document.get("epochs"), "epochs"),
             learning_rate=_finite_number(document.get("learning_rate"), "learning_rate"),
@@ -135,6 +163,24 @@ class ProductionTrainingConfig:
             ),
             calibration_bins=_integer(document.get("calibration_bins"), "calibration_bins"),
             shuffle_seed=_integer(document.get("shuffle_seed"), "shuffle_seed"),
+            optimizer_id=(
+                "legacy-sgd-v1" if legacy else _string(document.get("optimizer_id"), "optimizer_id")
+            ),
+            adagrad_epsilon=(
+                1e-8
+                if legacy
+                else _finite_number(document.get("adagrad_epsilon"), "adagrad_epsilon")
+            ),
+            selection_fraction=(
+                0.25
+                if legacy
+                else _finite_number(document.get("selection_fraction"), "selection_fraction")
+            ),
+            selection_salt=(
+                "legacy-unrecorded"
+                if legacy
+                else _string(document.get("selection_salt"), "selection_salt")
+            ),
         )
 
 
@@ -217,6 +263,43 @@ class _ProductionExample:
     outcomes: tuple[tuple[_Outcome, ...], ...]
 
 
+@dataclass(slots=True)
+class _OptimizerState:
+    policy_accumulators: dict[int, float] = field(default_factory=dict)
+    soft_accumulators: dict[int, float] = field(default_factory=dict)
+    risk_accumulators: dict[int, float] = field(default_factory=dict)
+    risk_bias_accumulator: float = 0.0
+    floor_accumulators: dict[int, dict[int, float]] = field(default_factory=dict)
+    floor_bias_accumulators: dict[int, float] = field(default_factory=dict)
+
+
+@dataclass(frozen=True, slots=True)
+class _SelectedEpochs:
+    policy: int
+    soft_baseline: int
+    tactical_risk: int
+    floors: dict[int, int]
+
+    @property
+    def maximum(self) -> int:
+        return max(
+            self.policy,
+            self.soft_baseline,
+            self.tactical_risk,
+            *self.floors.values(),
+        )
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "policy": self.policy,
+            "soft_target_baseline": self.soft_baseline,
+            "tactical_death_risk": self.tactical_risk,
+            "maximum_floor_distribution": {
+                str(threshold): epoch for threshold, epoch in sorted(self.floors.items())
+            },
+        }
+
+
 def train_production_base_model(
     *,
     train_report_path: Path,
@@ -255,15 +338,23 @@ def train_production_base_model(
     floor_thresholds = _nondegenerate_floor_thresholds(train_examples)
     if not floor_thresholds:
         raise ValueError("Training curriculum has no nondegenerate maximum-floor thresholds")
-    model = ProductionBaseModel(
-        vector_dimension=config.vector_dimension,
-        interaction_dimension=config.interaction_dimension,
-        tactical_horizon=config.tactical_horizon,
-        floor_thresholds=floor_thresholds,
-        floor_weights={threshold: {} for threshold in floor_thresholds},
-        floor_biases={threshold: 0.0 for threshold in floor_thresholds},
+    fit_examples, selection_examples, selection_runs = _split_training_examples(
+        train_examples, config
     )
-    history, soft_baseline_weights = _fit_production_model(model, train_examples, config)
+    selection_model = _new_production_model(floor_thresholds, config)
+    history, selected_epochs = _select_training_epochs(
+        selection_model,
+        fit_examples,
+        selection_examples,
+        config,
+    )
+    model = _new_production_model(floor_thresholds, config)
+    soft_baseline_weights, refit_metrics = _refit_selected_epochs(
+        model,
+        train_examples,
+        selected_epochs,
+        config,
+    )
     _quantize_production_model(model)
     soft_baseline_weights = _quantized_weights(soft_baseline_weights)
     held_out = _evaluate_production_model(
@@ -330,7 +421,19 @@ def train_production_base_model(
             "train": _quantize_artifact(train_evidence),
             "validation": _quantize_artifact(validation_evidence),
         },
+        "model_selection": {
+            "unit": "complete_run",
+            "partition": "train",
+            "selection_fraction": config.selection_fraction,
+            "selection_salt": config.selection_salt,
+            "fit_runs": selection_runs["fit"],
+            "selection_runs": selection_runs["selection"],
+            "fit_records": len(fit_examples),
+            "selection_records": len(selection_examples),
+            "selected_epochs": selected_epochs.as_dict(),
+        },
         "training_history": _quantize_artifact(history),
+        "refit_metrics": _quantize_artifact(refit_metrics),
         "held_out_metrics": _quantize_artifact(held_out),
         "terminal_value_status": {
             "promoted": False,
@@ -367,9 +470,18 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     body = {key: item for key, item in checkpoint.items() if key != "model_id"}
     if model_id != manifest_identifier(body):
         raise ValueError("Production model checkpoint identity mismatch")
-    if checkpoint.get("schema_version") != PRODUCTION_CHECKPOINT_SCHEMA_VERSION:
+    schema_version = checkpoint.get("schema_version")
+    if schema_version not in {
+        LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+        PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+    }:
         raise ValueError("Unsupported production model checkpoint schema")
-    if checkpoint.get("model_type") != PRODUCTION_MODEL_TYPE:
+    expected_model_type = (
+        LEGACY_PRODUCTION_MODEL_TYPE
+        if schema_version == LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION
+        else PRODUCTION_MODEL_TYPE
+    )
+    if checkpoint.get("model_type") != expected_model_type:
         raise ValueError("Unsupported production model type")
     if checkpoint.get("representation_encoder_id") != ENCODER_ID:
         raise ValueError("Unsupported production representation encoder")
@@ -455,36 +567,49 @@ def load_production_training_report(
     checkpoint: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     report = _load_object(path)
+    schema_version = report.get("schema_version")
+    legacy_fields = {
+        "schema_version",
+        "report_id",
+        "model_id",
+        "model_type",
+        "train_dataset_id",
+        "validation_dataset_id",
+        "split_manifest_id",
+        "training_runs",
+        "validation_runs",
+        "training_records",
+        "validation_records",
+        "floor_thresholds",
+        "pairwise_evidence",
+        "training_history",
+        "held_out_metrics",
+        "terminal_value_status",
+        "claim_scope",
+    }
+    current_fields = legacy_fields | {"model_selection", "refit_metrics"}
     _exact_keys(
         report,
-        {
-            "schema_version",
-            "report_id",
-            "model_id",
-            "model_type",
-            "train_dataset_id",
-            "validation_dataset_id",
-            "split_manifest_id",
-            "training_runs",
-            "validation_runs",
-            "training_records",
-            "validation_records",
-            "floor_thresholds",
-            "pairwise_evidence",
-            "training_history",
-            "held_out_metrics",
-            "terminal_value_status",
-            "claim_scope",
-        },
+        legacy_fields
+        if schema_version == LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION
+        else current_fields,
         "production training report",
     )
     report_id = _string(report.get("report_id"), "report ID")
     body = {key: item for key, item in report.items() if key != "report_id"}
     if report_id != manifest_identifier(body):
         raise ValueError("Production training report identity mismatch")
-    if report.get("schema_version") != PRODUCTION_REPORT_SCHEMA_VERSION:
+    if schema_version not in {
+        LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION,
+        PRODUCTION_REPORT_SCHEMA_VERSION,
+    }:
         raise ValueError("Unsupported production training report schema")
-    if report.get("model_type") != PRODUCTION_MODEL_TYPE:
+    expected_model_type = (
+        LEGACY_PRODUCTION_MODEL_TYPE
+        if schema_version == LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION
+        else PRODUCTION_MODEL_TYPE
+    )
+    if report.get("model_type") != expected_model_type:
         raise ValueError("Unsupported production training report model type")
     if checkpoint is not None and report.get("model_id") != checkpoint.get("model_id"):
         raise ValueError("Production report references a different checkpoint")
@@ -621,34 +746,169 @@ def _nondegenerate_floor_thresholds(
     return tuple(thresholds)
 
 
-def _fit_production_model(
+def _new_production_model(
+    floor_thresholds: tuple[int, ...], config: ProductionTrainingConfig
+) -> ProductionBaseModel:
+    return ProductionBaseModel(
+        vector_dimension=config.vector_dimension,
+        interaction_dimension=config.interaction_dimension,
+        tactical_horizon=config.tactical_horizon,
+        floor_thresholds=floor_thresholds,
+        floor_weights={threshold: {} for threshold in floor_thresholds},
+        floor_biases={threshold: 0.0 for threshold in floor_thresholds},
+    )
+
+
+def _split_training_examples(
+    examples: tuple[_ProductionExample, ...], config: ProductionTrainingConfig
+) -> tuple[
+    tuple[_ProductionExample, ...],
+    tuple[_ProductionExample, ...],
+    dict[str, list[int]],
+]:
+    seeds = sorted({example.run_seed for example in examples})
+    if len(seeds) < 4:
+        raise ValueError("Train-owned model selection requires at least four complete runs")
+    ranked = sorted(
+        seeds,
+        key=lambda seed: hashlib.sha256(f"{config.selection_salt}|{seed}".encode()).hexdigest(),
+    )
+    selection_count = min(
+        len(ranked) - 1,
+        max(1, round(len(ranked) * config.selection_fraction)),
+    )
+    selection_seeds = set(ranked[:selection_count])
+    fit = tuple(example for example in examples if example.run_seed not in selection_seeds)
+    selection = tuple(example for example in examples if example.run_seed in selection_seeds)
+    if not fit or not selection:
+        raise ValueError("Train-owned model selection subfold is empty")
+    for values, label in ((fit, "fit"), (selection, "selection")):
+        evidence = _pairwise_evidence(values, config)
+        if float(evidence["effective_pair_weight"]) <= 0.0:
+            raise ValueError(f"Train-owned {label} subfold has no pairwise evidence")
+    return (
+        fit,
+        selection,
+        {
+            "fit": sorted(set(seeds) - selection_seeds),
+            "selection": sorted(selection_seeds),
+        },
+    )
+
+
+def _select_training_epochs(
+    model: ProductionBaseModel,
+    fit_examples: tuple[_ProductionExample, ...],
+    selection_examples: tuple[_ProductionExample, ...],
+    config: ProductionTrainingConfig,
+) -> tuple[list[dict[str, Any]], _SelectedEpochs]:
+    soft_weights: dict[int, float] = {}
+    optimizer = _new_optimizer_state(model.floor_thresholds)
+    rng = random.Random(config.shuffle_seed)
+    best_policy = (math.inf, 1)
+    best_soft = (math.inf, 1)
+    best_risk = (math.inf, 1)
+    best_floors = {threshold: (math.inf, 1) for threshold in model.floor_thresholds}
+    history: list[dict[str, Any]] = []
+    for epoch in range(1, config.epochs + 1):
+        _train_production_epoch(
+            model,
+            soft_weights,
+            fit_examples,
+            optimizer,
+            config,
+            rng,
+        )
+        fit_scores = _production_objective_scores(model, soft_weights, fit_examples, config)
+        selection_scores = _production_objective_scores(
+            model, soft_weights, selection_examples, config
+        )
+        policy_score = float(selection_scores["policy_pairwise_cross_entropy"])
+        soft_score = float(selection_scores["soft_target_pairwise_cross_entropy"])
+        risk_score = float(selection_scores["tactical_death_risk_brier_score"])
+        if policy_score < best_policy[0]:
+            best_policy = (policy_score, epoch)
+        if soft_score < best_soft[0]:
+            best_soft = (soft_score, epoch)
+        if risk_score < best_risk[0]:
+            best_risk = (risk_score, epoch)
+        floor_scores = cast(dict[str, float], selection_scores["maximum_floor_brier_score"])
+        for threshold in model.floor_thresholds:
+            score = floor_scores[str(threshold)]
+            if score < best_floors[threshold][0]:
+                best_floors[threshold] = (score, epoch)
+        history.append(
+            {
+                "epoch": epoch,
+                "fit": fit_scores,
+                "selection": selection_scores,
+            }
+        )
+    return history, _SelectedEpochs(
+        policy=best_policy[1],
+        soft_baseline=best_soft[1],
+        tactical_risk=best_risk[1],
+        floors={threshold: value[1] for threshold, value in best_floors.items()},
+    )
+
+
+def _refit_selected_epochs(
     model: ProductionBaseModel,
     examples: tuple[_ProductionExample, ...],
+    selected: _SelectedEpochs,
     config: ProductionTrainingConfig,
-) -> tuple[list[dict[str, float | int]], dict[int, float]]:
+) -> tuple[dict[int, float], dict[str, Any]]:
+    soft_weights: dict[int, float] = {}
+    optimizer = _new_optimizer_state(model.floor_thresholds)
     rng = random.Random(config.shuffle_seed)
+    for epoch in range(1, selected.maximum + 1):
+        _train_production_epoch(
+            model,
+            soft_weights,
+            examples,
+            optimizer,
+            config,
+            rng,
+            active_policy=epoch <= selected.policy,
+            active_soft=epoch <= selected.soft_baseline,
+            active_risk=epoch <= selected.tactical_risk,
+            active_floors={
+                threshold for threshold, limit in selected.floors.items() if epoch <= limit
+            },
+        )
+    return soft_weights, _production_objective_scores(model, soft_weights, examples, config)
+
+
+def _new_optimizer_state(floor_thresholds: tuple[int, ...]) -> _OptimizerState:
+    return _OptimizerState(
+        floor_accumulators={threshold: {} for threshold in floor_thresholds},
+        floor_bias_accumulators={threshold: 0.0 for threshold in floor_thresholds},
+    )
+
+
+def _train_production_epoch(
+    model: ProductionBaseModel,
+    soft_weights: dict[int, float],
+    examples: tuple[_ProductionExample, ...],
+    optimizer: _OptimizerState,
+    config: ProductionTrainingConfig,
+    rng: random.Random,
+    *,
+    active_policy: bool = True,
+    active_soft: bool = True,
+    active_risk: bool = True,
+    active_floors: set[int] | None = None,
+) -> None:
+    selected_floors = set(model.floor_thresholds) if active_floors is None else active_floors
     order = list(range(len(examples)))
-    history: list[dict[str, float | int]] = []
-    soft_baseline_weights: dict[int, float] = {}
-    for epoch in range(config.epochs):
-        rng.shuffle(order)
-        pair_loss = 0.0
-        pair_weight = 0.0
-        soft_loss = 0.0
-        soft_weight = 0.0
-        risk_loss = 0.0
-        risk_count = 0
-        floor_loss = 0.0
-        floor_count = 0
-        for example_index in order:
-            example = examples[example_index]
+    rng.shuffle(order)
+    for example_index in order:
+        example = examples[example_index]
+        if active_policy:
             for left in range(len(example.candidate_features)):
                 for right in range(left + 1, len(example.candidate_features)):
                     target = example.preference_matrix[left][right]
-                    confidence = (
-                        max(0.0, abs(2.0 * target - 1.0) - config.pairwise_noise_floor)
-                        * example.stability_multiplier
-                    )
+                    confidence = _pair_confidence(target, example, config)
                     if confidence == 0.0:
                         continue
                     left_features = example.candidate_features[left]
@@ -657,40 +917,40 @@ def _fit_production_model(
                         _dot(model.policy_weights, left_features)
                         - _dot(model.policy_weights, right_features)
                     )
-                    pair_loss += confidence * _binary_cross_entropy(probability, target)
-                    pair_weight += confidence
                     error = confidence * (probability - target)
-                    _update_production_weights(model.policy_weights, left_features, error, config)
-                    _update_production_weights(model.policy_weights, right_features, -error, config)
-            if example.policy_target_weight > 0.0:
-                probabilities = _softmax(
-                    tuple(
-                        _dot(soft_baseline_weights, features)
-                        for features in example.candidate_features
-                    )
-                )
-                soft_loss += example.policy_target_weight * sum(
-                    -target * math.log(max(probability, 1e-12))
-                    for probability, target in zip(
-                        probabilities, example.soft_policy_target, strict=True
-                    )
-                )
-                soft_weight += example.policy_target_weight
-                for probability, target, features in zip(
-                    probabilities,
-                    example.soft_policy_target,
-                    example.candidate_features,
-                    strict=True,
-                ):
                     _update_production_weights(
-                        soft_baseline_weights,
-                        features,
-                        example.policy_target_weight * (probability - target),
+                        model.policy_weights,
+                        optimizer.policy_accumulators,
+                        left_features,
+                        error,
                         config,
                     )
-            for features, outcomes in zip(
-                example.candidate_features, example.outcomes, strict=True
+                    _update_production_weights(
+                        model.policy_weights,
+                        optimizer.policy_accumulators,
+                        right_features,
+                        -error,
+                        config,
+                    )
+        if active_soft and example.policy_target_weight > 0.0:
+            probabilities = _softmax(
+                tuple(_dot(soft_weights, features) for features in example.candidate_features)
+            )
+            for probability, target, features in zip(
+                probabilities,
+                example.soft_policy_target,
+                example.candidate_features,
+                strict=True,
             ):
+                _update_production_weights(
+                    soft_weights,
+                    optimizer.soft_accumulators,
+                    features,
+                    example.policy_target_weight * (probability - target),
+                    config,
+                )
+        for features, outcomes in zip(example.candidate_features, example.outcomes, strict=True):
+            if active_risk:
                 risk_target = sum(
                     outcome.terminal_defeat and outcome.transitions <= config.tactical_horizon
                     for outcome in outcomes
@@ -698,48 +958,117 @@ def _fit_production_model(
                 risk_probability = _sigmoid(
                     model.tactical_risk_bias + _dot(model.tactical_risk_weights, features)
                 )
-                risk_loss += _binary_cross_entropy(risk_probability, risk_target)
                 risk_error = risk_probability - risk_target
                 _update_production_weights(
-                    model.tactical_risk_weights, features, risk_error, config
+                    model.tactical_risk_weights,
+                    optimizer.risk_accumulators,
+                    features,
+                    risk_error,
+                    config,
                 )
-                model.tactical_risk_bias -= config.learning_rate * _clip(
-                    risk_error, config.gradient_clip
+                model.tactical_risk_bias, optimizer.risk_bias_accumulator = _update_production_bias(
+                    model.tactical_risk_bias,
+                    optimizer.risk_bias_accumulator,
+                    risk_error,
+                    config,
                 )
-                risk_count += 1
-                for threshold in model.floor_thresholds:
-                    floor_target = sum(
-                        outcome.maximum_floor >= threshold for outcome in outcomes
-                    ) / len(outcomes)
-                    probability = _sigmoid(
-                        model.floor_biases[threshold]
-                        + _dot(model.floor_weights[threshold], features)
-                    )
-                    floor_loss += _binary_cross_entropy(probability, floor_target)
-                    floor_error = probability - floor_target
-                    _update_production_weights(
-                        model.floor_weights[threshold], features, floor_error, config
-                    )
-                    model.floor_biases[threshold] -= config.learning_rate * _clip(
-                        floor_error, config.gradient_clip
-                    )
-                    floor_count += 1
-        if pair_weight == 0.0:
-            raise ValueError("Training curriculum has no confidence-weighted candidate pairs")
-        if soft_weight == 0.0:
-            raise ValueError("Training curriculum has no weighted soft policy targets")
-        history.append(
-            {
-                "epoch": epoch + 1,
-                "pairwise_policy_cross_entropy": pair_loss / pair_weight,
-                "effective_pair_weight": pair_weight,
-                "soft_target_baseline_cross_entropy": soft_loss / soft_weight,
-                "effective_soft_target_weight": soft_weight,
-                "tactical_risk_cross_entropy": risk_loss / risk_count,
-                "floor_distribution_cross_entropy": floor_loss / floor_count,
-            }
+            for threshold in sorted(selected_floors):
+                floor_target = sum(
+                    outcome.maximum_floor >= threshold for outcome in outcomes
+                ) / len(outcomes)
+                probability = _sigmoid(
+                    model.floor_biases[threshold] + _dot(model.floor_weights[threshold], features)
+                )
+                floor_error = probability - floor_target
+                _update_production_weights(
+                    model.floor_weights[threshold],
+                    optimizer.floor_accumulators[threshold],
+                    features,
+                    floor_error,
+                    config,
+                )
+                (
+                    model.floor_biases[threshold],
+                    optimizer.floor_bias_accumulators[threshold],
+                ) = _update_production_bias(
+                    model.floor_biases[threshold],
+                    optimizer.floor_bias_accumulators[threshold],
+                    floor_error,
+                    config,
+                )
+
+
+def _production_objective_scores(
+    model: ProductionBaseModel,
+    soft_weights: dict[int, float],
+    examples: tuple[_ProductionExample, ...],
+    config: ProductionTrainingConfig,
+) -> dict[str, Any]:
+    pair_loss = 0.0
+    soft_pair_loss = 0.0
+    pair_weight = 0.0
+    risk_squared_error = 0.0
+    risk_samples = 0
+    floor_squared_error = {threshold: 0.0 for threshold in model.floor_thresholds}
+    floor_samples = {threshold: 0 for threshold in model.floor_thresholds}
+    for example in examples:
+        policy_scores = tuple(
+            _dot(model.policy_weights, features) for features in example.candidate_features
         )
-    return history, soft_baseline_weights
+        soft_scores = tuple(_dot(soft_weights, features) for features in example.candidate_features)
+        for left in range(len(policy_scores)):
+            for right in range(left + 1, len(policy_scores)):
+                target = example.preference_matrix[left][right]
+                confidence = _pair_confidence(target, example, config)
+                if confidence == 0.0:
+                    continue
+                pair_loss += confidence * _binary_cross_entropy(
+                    _sigmoid(policy_scores[left] - policy_scores[right]), target
+                )
+                soft_pair_loss += confidence * _binary_cross_entropy(
+                    _sigmoid(soft_scores[left] - soft_scores[right]), target
+                )
+                pair_weight += confidence
+        for features, outcomes in zip(example.candidate_features, example.outcomes, strict=True):
+            risk_probability = _sigmoid(
+                model.tactical_risk_bias + _dot(model.tactical_risk_weights, features)
+            )
+            for outcome in outcomes:
+                risk_target = float(
+                    outcome.terminal_defeat and outcome.transitions <= config.tactical_horizon
+                )
+                risk_squared_error += (risk_probability - risk_target) ** 2
+                risk_samples += 1
+            for threshold in model.floor_thresholds:
+                floor_probability = _sigmoid(
+                    model.floor_biases[threshold] + _dot(model.floor_weights[threshold], features)
+                )
+                for outcome in outcomes:
+                    target = float(outcome.maximum_floor >= threshold)
+                    floor_squared_error[threshold] += (floor_probability - target) ** 2
+                    floor_samples[threshold] += 1
+    if pair_weight == 0.0 or risk_samples == 0:
+        raise ValueError("Model-selection subfold lacks required outcomes")
+    return {
+        "policy_pairwise_cross_entropy": pair_loss / pair_weight,
+        "soft_target_pairwise_cross_entropy": soft_pair_loss / pair_weight,
+        "tactical_death_risk_brier_score": risk_squared_error / risk_samples,
+        "maximum_floor_brier_score": {
+            str(threshold): floor_squared_error[threshold] / floor_samples[threshold]
+            for threshold in model.floor_thresholds
+        },
+    }
+
+
+def _pair_confidence(
+    target: float,
+    example: _ProductionExample,
+    config: ProductionTrainingConfig,
+) -> float:
+    return (
+        max(0.0, abs(2.0 * target - 1.0) - config.pairwise_noise_floor)
+        * example.stability_multiplier
+    )
 
 
 def _evaluate_production_model(
@@ -944,18 +1273,42 @@ def _quantize_production_model(model: ProductionBaseModel) -> None:
 
 def _update_production_weights(
     weights: dict[int, float],
+    accumulators: dict[int, float],
     features: dict[int, float],
     error: float,
     config: ProductionTrainingConfig,
 ) -> None:
     for index, value in features.items():
         current = weights.get(index, 0.0)
-        gradient = error * value + config.l2_regularization * current
-        updated = current - config.learning_rate * _clip(gradient, config.gradient_clip)
+        gradient = _clip(
+            error * value + config.l2_regularization * current,
+            config.gradient_clip,
+        )
+        if config.optimizer_id == "legacy-sgd-v1":
+            step = config.learning_rate * gradient
+        else:
+            accumulated = accumulators.get(index, 0.0) + gradient * gradient
+            accumulators[index] = accumulated
+            step = config.learning_rate * gradient / math.sqrt(accumulated + config.adagrad_epsilon)
+        updated = current - step
         if abs(updated) < 1e-15:
             weights.pop(index, None)
         else:
             weights[index] = updated
+
+
+def _update_production_bias(
+    bias: float,
+    accumulator: float,
+    error: float,
+    config: ProductionTrainingConfig,
+) -> tuple[float, float]:
+    gradient = _clip(error, config.gradient_clip)
+    if config.optimizer_id == "legacy-sgd-v1":
+        return bias - config.learning_rate * gradient, accumulator
+    accumulated = accumulator + gradient * gradient
+    step = config.learning_rate * gradient / math.sqrt(accumulated + config.adagrad_epsilon)
+    return bias - step, accumulated
 
 
 def _calibration_with_baseline(pairs: list[tuple[float, float]], bins: int) -> dict[str, Any]:

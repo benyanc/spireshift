@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-model-checkpoint-v2.json",
+  "title": "SpireShift Stable Production Curriculum Model Checkpoint v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "model_id",
+    "model_type",
+    "representation_encoder_id",
+    "vectorizer_id",
+    "ruleset_manifest_id",
+    "objective_id",
+    "split_manifest_id",
+    "train_dataset_id",
+    "training_config",
+    "heads"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "production-model-checkpoint-v2"
+    },
+    "model_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "model_type": {
+      "const": "sparse-pairwise-curriculum-multihead-v2"
+    },
+    "representation_encoder_id": {
+      "const": "mechanics-compositional-v1"
+    },
+    "vectorizer_id": {
+      "const": "signed-sha256-feature-hash-v1"
+    },
+    "ruleset_manifest_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "objective_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split_manifest_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "train_dataset_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "training_config": {
+      "$ref": "#/$defs/trainingConfig"
+    },
+    "heads": {
+      "type": "object",
+      "required": [
+        "policy",
+        "terminal_value",
+        "tactical_death_risk",
+        "maximum_floor_distribution"
+      ],
+      "properties": {
+        "policy": {
+          "type": "object",
+          "required": [
+            "target",
+            "weights"
+          ],
+          "properties": {
+            "target": {
+              "const": "paired-preference-confidence-v1"
+            },
+            "weights": {
+              "$ref": "#/$defs/weights"
+            }
+          },
+          "additionalProperties": false
+        },
+        "terminal_value": {
+          "type": "object",
+          "required": [
+            "status",
+            "reason",
+            "weights"
+          ],
+          "properties": {
+            "status": {
+              "const": "blocked"
+            },
+            "reason": {
+              "const": "all_zero_terminal_victory_evidence"
+            },
+            "weights": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "tactical_death_risk": {
+          "type": "object",
+          "required": [
+            "target",
+            "bias",
+            "weights"
+          ],
+          "properties": {
+            "target": {
+              "type": "string",
+              "pattern": "^terminal_defeat_within_[1-9][0-9]*_decisions$"
+            },
+            "bias": {
+              "type": "number"
+            },
+            "weights": {
+              "$ref": "#/$defs/weights"
+            }
+          },
+          "additionalProperties": false
+        },
+        "maximum_floor_distribution": {
+          "type": "object",
+          "required": [
+            "target",
+            "thresholds"
+          ],
+          "properties": {
+            "target": {
+              "const": "candidate-maximum-floor-survival-v1"
+            },
+            "thresholds": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "floor",
+                  "bias",
+                  "weights"
+                ],
+                "properties": {
+                  "floor": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "bias": {
+                    "type": "number"
+                  },
+                  "weights": {
+                    "$ref": "#/$defs/weights"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "trainingConfig": {
+      "type": "object",
+      "required": [
+        "epochs",
+        "learning_rate",
+        "l2_regularization",
+        "gradient_clip",
+        "vector_dimension",
+        "interaction_dimension",
+        "tactical_horizon",
+        "pairwise_noise_floor",
+        "calibration_bins",
+        "shuffle_seed",
+        "optimizer_id",
+        "adagrad_epsilon",
+        "selection_fraction",
+        "selection_salt"
+      ],
+      "properties": {
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "l2_regularization": {
+          "type": "number",
+          "minimum": 0
+        },
+        "gradient_clip": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vector_dimension": {
+          "type": "integer",
+          "minimum": 64
+        },
+        "interaction_dimension": {
+          "type": "integer",
+          "minimum": 64
+        },
+        "tactical_horizon": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pairwise_noise_floor": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "calibration_bins": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "shuffle_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "optimizer_id": {
+          "const": "sparse-adagrad-v1"
+        },
+        "adagrad_epsilon": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "selection_fraction": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "selection_salt": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "weights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "index",
+          "value"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -627,7 +627,7 @@ def build_parser() -> argparse.ArgumentParser:
     production_train.add_argument("--report", type=Path, required=True)
     production_train.add_argument("--split-manifest", type=Path, required=True)
     production_train.add_argument("--epochs", type=int, default=60)
-    production_train.add_argument("--learning-rate", type=float, default=0.02)
+    production_train.add_argument("--learning-rate", type=float, default=0.005)
     production_train.add_argument("--l2-regularization", type=float, default=0.0001)
     production_train.add_argument("--gradient-clip", type=float, default=5.0)
     production_train.add_argument("--vector-dimension", type=int, default=4096)
@@ -636,6 +636,9 @@ def build_parser() -> argparse.ArgumentParser:
     production_train.add_argument("--pairwise-noise-floor", type=float, default=0.25)
     production_train.add_argument("--calibration-bins", type=int, default=10)
     production_train.add_argument("--shuffle-seed", type=int, default=0)
+    production_train.add_argument("--adagrad-epsilon", type=float, default=1e-8)
+    production_train.add_argument("--selection-fraction", type=float, default=0.25)
+    production_train.add_argument("--selection-salt", default="production-base-model-selection-v1")
     production_verify = model_commands.add_parser(
         "verify-curriculum",
         help="Verify a production curriculum checkpoint and optional training report",
@@ -1519,6 +1522,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                         pairwise_noise_floor=args.pairwise_noise_floor,
                         calibration_bins=args.calibration_bins,
                         shuffle_seed=args.shuffle_seed,
+                        adagrad_epsilon=args.adagrad_epsilon,
+                        selection_fraction=args.selection_fraction,
+                        selection_salt=args.selection_salt,
                     ),
                 )
                 write_production_model_artifact(
