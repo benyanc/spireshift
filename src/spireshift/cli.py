@@ -7,6 +7,7 @@ import sys
 from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
+from typing import Any
 
 from spireshift.adapters.evangambit import (
     EvanGambitBackendError,
@@ -116,6 +117,13 @@ from spireshift.production_models import (
     load_production_training_report,
     train_production_base_model,
     write_production_model_artifact,
+)
+from spireshift.readiness import (
+    assess_base_model_readiness,
+    load_readiness_audit,
+    load_readiness_report,
+    load_readiness_spec,
+    write_readiness_artifact,
 )
 from spireshift.recording.jsonl import JsonlRecorder
 from spireshift.replay import verify_mock_replay
@@ -722,6 +730,31 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluate_verify.add_argument("--report", type=Path, required=True)
     production_evaluate_verify.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate_verify.add_argument("--output", type=Path)
+    readiness_assess = model_commands.add_parser(
+        "assess-readiness",
+        help="Apply a frozen fail-closed readiness scorecard to a production checkpoint",
+    )
+    readiness_assess.add_argument("spec", type=Path)
+    readiness_assess.add_argument("checkpoint", type=Path)
+    readiness_assess.add_argument("--report", type=Path, required=True)
+    readiness_assess.add_argument("--split-manifest", type=Path, required=True)
+    readiness_assess.add_argument("--smoke", type=Path)
+    readiness_assess.add_argument("--evaluation", type=Path)
+    readiness_assess.add_argument("--audit", type=Path)
+    readiness_assess.add_argument("--output", type=Path, required=True)
+    readiness_verify = model_commands.add_parser(
+        "verify-readiness",
+        help="Recompute and verify a base-model readiness assessment",
+    )
+    readiness_verify.add_argument("assessment", type=Path)
+    readiness_verify.add_argument("spec", type=Path)
+    readiness_verify.add_argument("checkpoint", type=Path)
+    readiness_verify.add_argument("--report", type=Path, required=True)
+    readiness_verify.add_argument("--split-manifest", type=Path, required=True)
+    readiness_verify.add_argument("--smoke", type=Path)
+    readiness_verify.add_argument("--evaluation", type=Path)
+    readiness_verify.add_argument("--audit", type=Path)
+    readiness_verify.add_argument("--output", type=Path)
 
     calibrate = subparsers.add_parser(
         "calibrate", help="Fit or verify held-out probability calibration"
@@ -1576,6 +1609,37 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
     if args.command == "model":
         try:
+            if args.model_command in {"assess-readiness", "verify-readiness"}:
+                readiness_assessment = _build_readiness_assessment(args)
+                if args.model_command == "verify-readiness":
+                    verified_readiness = load_readiness_report(
+                        args.assessment,
+                        scorecard_id=str(readiness_assessment["scorecard_id"]),
+                        model_id=str(readiness_assessment["model_id"]),
+                    )
+                    if verified_readiness != readiness_assessment:
+                        raise ValueError(
+                            "Base-model readiness report differs from recomputed assessment"
+                        )
+                    _emit_json(
+                        {
+                            "valid": True,
+                            "ready": readiness_assessment["ready"],
+                            "scorecard_id": readiness_assessment["scorecard_id"],
+                            "model_id": readiness_assessment["model_id"],
+                            "report_id": readiness_assessment["report_id"],
+                            "blocking_check_ids": readiness_assessment["blocking_check_ids"],
+                        },
+                        args.output,
+                    )
+                    return 0
+                write_readiness_artifact(
+                    readiness_assessment,
+                    args.output,
+                    label="base-model readiness report",
+                )
+                _emit_json(readiness_assessment, None)
+                return 0 if readiness_assessment["ready"] is True else 1
             if args.model_command == "verify-evaluation-curriculum":
                 evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 evaluation_training_report = load_production_training_report(
@@ -2232,6 +2296,54 @@ def _run_mock(seed: int, output: Path) -> RunResult:
         recorder=JsonlRecorder(output),
         objective=objective,
         seed=seed,
+    )
+
+
+def _build_readiness_assessment(args: argparse.Namespace) -> dict[str, Any]:
+    split_manifest = load_split_manifest(args.split_manifest)
+    spec = load_readiness_spec(args.spec, split_manifest=split_manifest)
+    checkpoint = load_production_model_checkpoint(args.checkpoint)
+    training_report = load_production_training_report(args.report, checkpoint=checkpoint)
+    model_id = str(checkpoint["model_id"])
+    training_report_id = str(training_report["report_id"])
+    inference_smoke = (
+        None
+        if args.smoke is None
+        else load_production_inference_smoke(
+            args.smoke,
+            model_id=model_id,
+            training_report_id=training_report_id,
+        )
+    )
+    policy_evaluation = (
+        None
+        if args.evaluation is None
+        else load_production_policy_evaluation(
+            args.evaluation,
+            model_id=model_id,
+            training_report_id=training_report_id,
+            split_manifest=split_manifest,
+        )
+    )
+    readiness_audit = (
+        None
+        if args.audit is None
+        else load_readiness_audit(
+            args.audit,
+            model_id=model_id,
+            training_report_id=training_report_id,
+            split_manifest=split_manifest,
+            validation_dataset_id=str(training_report["validation_dataset_id"]),
+        )
+    )
+    return assess_base_model_readiness(
+        spec=spec,
+        checkpoint=checkpoint,
+        training_report=training_report,
+        split_manifest=split_manifest,
+        inference_smoke=inference_smoke,
+        policy_evaluation=policy_evaluation,
+        readiness_audit=readiness_audit,
     )
 
 

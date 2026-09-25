@@ -64,6 +64,10 @@ results validate this machinery only; STS2 readiness requires representative ful
 admitted simulator and a final test evaluation after model and thresholds are frozen. See
 [initial policy, run-value, and tactical-risk models](initial-models.md).
 
+The executable contract, thresholds, independent-audit format, and current fail-closed base-v2
+decision are recorded in [base-model readiness](base-model-readiness.md). Auxiliary policy and floor
+metrics are reported separately and cannot satisfy any terminal gate.
+
 Probability calibration uses a checkpoint-bound split of complete validation runs. Calibrator
 parameters are fit on one subfold and all calibration scores, sharpness measures, confident
 catastrophic errors, false-safe risk predictions, and uncertainty records are reported on the other.

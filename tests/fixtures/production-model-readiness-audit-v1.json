@@ -1,0 +1,122 @@
+{
+  "audit_id": "sha256:c5f3a9002309fab376ccb06ba476524cc8f5097a50e28f31416e673a284f0dd6",
+  "calibration": {
+    "audit_run_seeds": [
+      2
+    ],
+    "calibration_id": "sha256:6e399bf13dd2160c7a6fef4ae74db99def64fea817e9c3f508bf3551348fea43",
+    "fit_fraction": 0.5,
+    "fit_run_seeds": [
+      1
+    ],
+    "method": "platt-logit-affine-v1",
+    "split_salt": "fixture"
+  },
+  "claim_scope": "independent_validation_calibration_and_failure_audit",
+  "configuration": {
+    "calibration_bins": 10,
+    "catastrophic_regret_threshold": 0.1,
+    "false_safe_observed_risk_threshold": 0.5,
+    "false_safe_predicted_risk_threshold": 0.2,
+    "policy_confidence_threshold": 0.8
+  },
+  "model_id": "sha256:4ea5b733f1cd24cb593ea684c9ef0b53e77f528a5ec4956c16a955bb7962d310",
+  "objective_id": "terminal-victory-v1",
+  "partition": "validation",
+  "records": [
+    {
+      "candidates": [
+        {
+          "tactical_death_outcomes": [
+            0,
+            1
+          ],
+          "tactical_risk_prediction": 0.5,
+          "terminal_outcomes": [
+            0,
+            1
+          ],
+          "terminal_value_prediction": 0.5
+        },
+        {
+          "tactical_death_outcomes": [
+            0,
+            0
+          ],
+          "tactical_risk_prediction": 0.0,
+          "terminal_outcomes": [
+            0,
+            0
+          ],
+          "terminal_value_prediction": 0.0
+        }
+      ],
+      "decision_index": 0,
+      "policy_confidence": 0.9,
+      "record_id": "sha256:3c498ed56aba77e990cca1e1f77ce408e2067619fcb4febd995bc7bf9472423b",
+      "run_seed": 2,
+      "selected_candidate_index": 0
+    }
+  ],
+  "ruleset_manifest_id": "sha256:7b6730eb2bb52d392fcf0d5e45abf057ddff84c831159ba0628adf4aaad5e4ee",
+  "schema_version": "production-model-readiness-audit-v1",
+  "split_manifest_id": "sha256:d2a5969c4b1eca09d4e741b71d38d4d43e56376c9849c08f5554c192a5797e56",
+  "summary": {
+    "action_value_variation_decisions": 1,
+    "decisions": 1,
+    "failure_analysis": {
+      "false_safe_tactical_risk_errors": 0,
+      "false_safe_tactical_risk_rate": 0.0,
+      "high_confidence_catastrophic_errors": 0,
+      "high_confidence_catastrophic_rate": 0.0,
+      "high_confidence_decisions": 1
+    },
+    "independent_value_regret": {
+      "mean": 0.0,
+      "p95": 0.0
+    },
+    "tactical_death_risk": {
+      "brier_score": 0.125,
+      "brier_skill_score": 0.333333333333,
+      "calibration_bins": [
+        {
+          "bin": 0,
+          "count": 2,
+          "mean_prediction": 0.0,
+          "observed_frequency": 0.0
+        },
+        {
+          "bin": 5,
+          "count": 2,
+          "mean_prediction": 0.5,
+          "observed_frequency": 0.5
+        }
+      ],
+      "constant_rate_brier_score": 0.1875,
+      "expected_calibration_error": 0.0,
+      "outcome_prevalence": 0.25,
+      "samples": 4
+    },
+    "terminal_defeats": 1,
+    "terminal_samples": 2,
+    "terminal_value": {
+      "brier_score": 0.25,
+      "brier_skill_score": 0.0,
+      "calibration_bins": [
+        {
+          "bin": 5,
+          "count": 2,
+          "mean_prediction": 0.5,
+          "observed_frequency": 0.5
+        }
+      ],
+      "constant_rate_brier_score": 0.25,
+      "expected_calibration_error": 0.0,
+      "outcome_prevalence": 0.5,
+      "samples": 2
+    },
+    "terminal_victories": 1
+  },
+  "training_report_id": "sha256:e7148c63f3ac63e17ae6a14052061467f74bc204d21cf54a913d75a9b5bb8b5a",
+  "validation_dataset_id": "sha256:5c0ae837c31d2b43bb68e3e8670a92eb731fce0a3835978e83402943a05d0554"
+}

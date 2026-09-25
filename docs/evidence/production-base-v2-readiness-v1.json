@@ -1,0 +1,336 @@
+{
+  "blocking_check_ids": [
+    "terminal.value_head_available",
+    "terminal.independent_signal_sufficiency",
+    "terminal.value_calibration",
+    "terminal.independent_action_regret",
+    "terminal.confident_catastrophic_errors",
+    "terminal.false_safe_tactical_risk",
+    "full_run.validation_coverage_and_liveness",
+    "full_run.terminal_outcome_variation",
+    "full_run.victory_advantage"
+  ],
+  "checks": [
+    {
+      "check_id": "identity.frozen_binding",
+      "detail": "checkpoint, datasets, objective, ruleset, split, encoder, and report are frozen",
+      "observed": {
+        "calibration_id": null,
+        "model_id": "sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571",
+        "objective_id": "terminal-victory-v1",
+        "representation_encoder_id": "mechanics-compositional-v1",
+        "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+        "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+        "train_dataset_id": "sha256:8773cadbd7f9ab0a8aa80b7bf63577b2a1a38c8798e64a1a7f718796ebf2263c",
+        "training_report_id": "sha256:246f9a1ae30ee77f52ea22d3eb70a98828ba2f31d06191cf4a80ea64b2b9a434",
+        "validation_dataset_id": "sha256:0b0557d938f9a44ffea9f9ea7c4331e785336698202a3e9bc14fca9eb8352867"
+      },
+      "status": "passed",
+      "threshold": {
+        "calibration_id": null,
+        "model_id": "sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571",
+        "objective_id": "terminal-victory-v1",
+        "representation_encoder_id": "mechanics-compositional-v1",
+        "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+        "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+        "train_dataset_id": "sha256:8773cadbd7f9ab0a8aa80b7bf63577b2a1a38c8798e64a1a7f718796ebf2263c",
+        "training_report_id": "sha256:246f9a1ae30ee77f52ea22d3eb70a98828ba2f31d06191cf4a80ea64b2b9a434",
+        "validation_dataset_id": "sha256:0b0557d938f9a44ffea9f9ea7c4331e785336698202a3e9bc14fca9eb8352867"
+      }
+    },
+    {
+      "check_id": "auxiliary.policy_quality",
+      "detail": "held-out pairwise policy evidence clears every frozen auxiliary threshold",
+      "observed": {
+        "auxiliary_gate_passed": true,
+        "decisive_pair_accuracy": 0.784090909091,
+        "mean_progress_utility_regret": 0.002580458145,
+        "weighted_pairwise_cross_entropy": 0.649716865192
+      },
+      "status": "passed",
+      "threshold": {
+        "maximum_mean_progress_regret": 0.003,
+        "maximum_pairwise_cross_entropy": 0.69314718056,
+        "maximum_tactical_risk_ece": 0.1,
+        "minimum_decisive_pair_accuracy": 0.55,
+        "minimum_tactical_risk_brier_skill": 0.05
+      }
+    },
+    {
+      "check_id": "auxiliary.tactical_risk_calibration",
+      "detail": "tactical-risk prediction improves on a constant-rate predictor",
+      "observed": {
+        "brier_skill_score": 0.268396631284,
+        "expected_calibration_error": 0.058843345848
+      },
+      "status": "passed",
+      "threshold": {
+        "maximum_ece": 0.1,
+        "minimum_brier_skill": 0.05
+      }
+    },
+    {
+      "check_id": "terminal.value_head_available",
+      "detail": "a terminal-victory value head is trained from nondegenerate outcomes",
+      "observed": {
+        "promoted": false,
+        "reason": "all_zero_terminal_victory_evidence",
+        "train_victories": 0,
+        "validation_victories": 0
+      },
+      "status": "failed",
+      "threshold": {
+        "promoted": true
+      }
+    },
+    {
+      "check_id": "inference.candidate_alignment_and_latency",
+      "detail": "public-state inference preserves legal candidate order within the latency budget",
+      "observed": {
+        "candidate_alignment_pass": true,
+        "decisions": 8,
+        "legal_selection_pass": true,
+        "p95_inference_seconds": 0.00667345908,
+        "public_state_only": true
+      },
+      "status": "passed",
+      "threshold": {
+        "maximum_p95_inference_seconds": 0.05,
+        "minimum_decisions": 8
+      }
+    },
+    {
+      "check_id": "terminal.independent_signal_sufficiency",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "calibration_bins": 10,
+        "calibration_method": "platt-logit-affine-v1",
+        "fit_fraction": 0.5,
+        "minimum_action_value_variation_decisions": 25,
+        "minimum_decisions": 100,
+        "minimum_negative_outcomes": 80,
+        "minimum_positive_outcomes": 80,
+        "minimum_terminal_samples": 1600,
+        "split_salt": "production-base-readiness-calibration-v1"
+      }
+    },
+    {
+      "check_id": "terminal.value_calibration",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "maximum_mean_independent_regret": 0.05,
+        "maximum_p95_independent_regret": 0.2,
+        "maximum_terminal_ece": 0.1,
+        "minimum_terminal_brier_skill": 0.05
+      }
+    },
+    {
+      "check_id": "terminal.independent_action_regret",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "maximum_mean_independent_regret": 0.05,
+        "maximum_p95_independent_regret": 0.2,
+        "maximum_terminal_ece": 0.1,
+        "minimum_terminal_brier_skill": 0.05
+      }
+    },
+    {
+      "check_id": "terminal.confident_catastrophic_errors",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "catastrophic_regret_threshold": 0.1,
+        "false_safe_observed_risk_threshold": 0.5,
+        "false_safe_predicted_risk_threshold": 0.2,
+        "maximum_false_safe_tactical_risk_rate": 0.1,
+        "maximum_high_confidence_catastrophic_errors": 2,
+        "maximum_high_confidence_catastrophic_rate": 0.05,
+        "minimum_high_confidence_decisions": 25,
+        "policy_confidence_threshold": 0.8
+      }
+    },
+    {
+      "check_id": "terminal.false_safe_tactical_risk",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "catastrophic_regret_threshold": 0.1,
+        "false_safe_observed_risk_threshold": 0.5,
+        "false_safe_predicted_risk_threshold": 0.2,
+        "maximum_false_safe_tactical_risk_rate": 0.1,
+        "maximum_high_confidence_catastrophic_errors": 2,
+        "maximum_high_confidence_catastrophic_rate": 0.05,
+        "minimum_high_confidence_decisions": 25,
+        "policy_confidence_threshold": 0.8
+      }
+    },
+    {
+      "check_id": "full_run.validation_coverage_and_liveness",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "completion_rate": 1.0,
+        "failed_runs": 0,
+        "fallback_exhausted_states": 0,
+        "liveness_pass": true,
+        "minimum_runs": 100,
+        "partition": "validation",
+        "seeds": [
+          5,
+          14,
+          21,
+          25,
+          27,
+          44,
+          49,
+          53,
+          86,
+          114,
+          117,
+          140,
+          151,
+          166,
+          170,
+          171,
+          183,
+          186,
+          193,
+          203,
+          225,
+          229,
+          230,
+          231,
+          253,
+          255,
+          257,
+          261,
+          288,
+          301,
+          316,
+          329,
+          335,
+          354,
+          359,
+          373,
+          398,
+          406,
+          422,
+          428,
+          432,
+          437,
+          457,
+          467,
+          475,
+          478,
+          498,
+          525,
+          526,
+          530,
+          535,
+          544,
+          549,
+          572,
+          597,
+          603,
+          613,
+          614,
+          625,
+          627,
+          630,
+          640,
+          646,
+          651,
+          662,
+          670,
+          674,
+          679,
+          697,
+          707,
+          708,
+          712,
+          722,
+          726,
+          731,
+          759,
+          770,
+          774,
+          779,
+          810,
+          821,
+          830,
+          847,
+          852,
+          861,
+          866,
+          889,
+          892,
+          902,
+          908,
+          921,
+          927,
+          928,
+          956,
+          961,
+          963,
+          964,
+          967,
+          975,
+          990
+        ],
+        "terminal_rate": 1.0,
+        "truncated_runs": 0
+      }
+    },
+    {
+      "check_id": "full_run.terminal_outcome_variation",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "minimum_conservative_advantage_lower_bound": 0.0,
+        "minimum_defeats": 8,
+        "minimum_learned_victory_rate_lower_bound": 0.02,
+        "minimum_victories": 8
+      }
+    },
+    {
+      "check_id": "full_run.victory_advantage",
+      "detail": "required validation evidence was not provided",
+      "observed": null,
+      "status": "missing",
+      "threshold": {
+        "minimum_conservative_advantage_lower_bound": 0.0,
+        "minimum_defeats": 8,
+        "minimum_learned_victory_rate_lower_bound": 0.02,
+        "minimum_victories": 8
+      }
+    }
+  ],
+  "claim_scope": "frozen_validation_base_model_readiness_assessment",
+  "evidence": {
+    "calibration_id": null,
+    "inference_smoke_report_id": "sha256:80b9742fc4aaf2e5058904230d399eb3bc234c9970a6c1d99e299df611b9d058",
+    "policy_evaluation_report_id": null,
+    "readiness_audit_id": null,
+    "training_report_id": "sha256:246f9a1ae30ee77f52ea22d3eb70a98828ba2f31d06191cf4a80ea64b2b9a434"
+  },
+  "model_id": "sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571",
+  "progress_diagnostics": {
+    "held_out_decisive_pair_accuracy": 0.784090909091,
+    "held_out_mean_progress_utility_regret": 0.002580458145,
+    "note": "auxiliary progress diagnostics cannot satisfy terminal-victory readiness"
+  },
+  "ready": false,
+  "report_id": "sha256:4da2031c4a2f8af0c10819ef716e30b13267eb3a984130c6899588d868272a6e",
+  "schema_version": "base-model-readiness-report-v1",
+  "scorecard_id": "sha256:85ab25083fb040c9d4a90297973f29fa1bb141d5fc6b83395837ce1024277d50"
+}
