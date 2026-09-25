@@ -1,0 +1,3848 @@
+{
+  "capture_policy": {
+    "kind": "production_checkpoint",
+    "model_id": "sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571",
+    "policy_id": "production-checkpoint-policy-v1:sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571",
+    "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+    "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+    "training_report_id": "sha256:246f9a1ae30ee77f52ea22d3eb70a98828ba2f31d06191cf4a80ea64b2b9a434"
+  },
+  "capture_policy_id": "production-checkpoint-policy-v1:sha256:b0b727319ecd5544df519d703c190a01d08b0aa37f8098a3bc8bcbcfd33a0571",
+  "cases": [
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "e4df4a71aa0059c3afe33859df73d2c058aa6392ec9aa6be207051a6815a6604",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "44e6e1c27825109ed84868aa1510fc75b721d01f5ab6573aab5e490d3f22b490",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "db9b2f321573bd0362b93f34cc40a53a9a11ed361906cd750f406a93bfe59aea",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "77ce49c212fd031e391c9a1582ac9ca66a419aa4af37b3443b45d36b546ae00d",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "da5eccce4405f4c20ad05b329ef1b6803ca9be39938e774a3e258646c93e02df",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-combat-012"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "8438b17681e224868dec2abdd096763e013517f1a30ec66ebc7eba5caf7be6d3",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "d4a3c3aac613e2e5026a5b38ec578a2832b373c6d07518296754867f3ce677f4",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "40b2472856b0896fbca89531e6ab36665c83aebb4a4031672177137726f5e2f3",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-path-001"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "44a117446440d88322e4b4a5a3244890497612a4a6e4f16038836df57c769e44",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "a6c30e0a1b3bb4d75bde17d7d50b61e205524658530bbef796d0cba434dfd02e",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "35ddd570834b654129d6dbbd5440cbed46c91e041df72488901d390cbc38a15b",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "7aac8482271a12296fde961012545c66229804aad22ecc90901710f519e8e03f",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "add4f186c4dfa84620498c04fa6b81f261b76709cb7706508b05425629e193af",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "4d4ae0826a42a956893dd86c683c396ae061c5c437c1c7e6caf2650b0be564bd",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "d101203940321cc36c7efc93b8d7e00c94bad0d6b2114d730e71fc09343cab4f",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-reward-002"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "5637a24647bdb7cd7f42656f36512a67e899f242fa43a807a189a9ae4562478b",
+      "run_seed": 83,
+      "state_id": "train-seed-000083-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "d18903a247ee850eb196ddd2d84f0226e2cfa25b42539233b221777746eefdb7",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "ef4766d745e762788110bb625336ab40e7803ffd3c2171592acb1352c5226587",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "7a1a828ab35905ccba519a3f753c1810492538dcd235b229a323849fa3a426ae",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "51ee4c6f85a26d0b0560837e793935ed4647d3e75fde3a9919af73b54d2337a8",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "8f91da1315e95fe794eb8dd476d4b8f9a9171bdb381bf61f7fffded5d8c3031c",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "ca12ebe8f6bcecb60783635e136982681ec020429280950dd56864b1e61bdffc",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-combat-008"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "e46475ddc66f586c27ed6b7e7e7d169f7384aee7ed0da040dc9588d13f576105",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "4595776eaf14d393c4281533c8d5171f5168092e24cc77a34c9419850529ecce",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "caadf3c51cb54323886072d07234f355c0c5c3530e363f5504bce6c992945f0b",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "8c595ffe47cee71fe5737edf8c627c5d6e0fe44b82bc4939079ff5332530a6fc",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "8357857c02819ddf88d5b3ad1c885a1e251fb3298977869621b61da9dad31697",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "7fd1d6610a9729079ed5b096422e712c78a01cb310176f1569497d18266be6c6",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "d6a62ed75781302364bcdecb6655968c14772c0ec3ead0f4c8ebce19ee6e5d75",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "0aa43d20b9cb11f12e6772ad50fa4cd1b7e1b72783903b60a4fd2b7a6b3a8bab",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "41784fde94778600f4b44eb6d5c431e45f647738aae67601158fe2b430d54d34",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-event-002"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "83969585827046eab52135f9371c082f1d4099819c9233bf3b06a0ac0a43a1ca",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "rest_site",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "013be5dd1fcf13f7f387c4c14d3e963bd250ef4db7b55ec0cab07be573205493",
+      "run_seed": 87,
+      "state_id": "train-seed-000087-rest_site-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "29e811f614766c43594681531f7e69484f30b5dc3942669a270562297dca8ddf",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "532d721a04c671f8def2b8a8f8525e131940fab7cb7201c7454c1990f162e61c",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "e9a816d0d90d4be33f502a01277e8e5861104a17e5a5a6577fad23cf1341b63a",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "8fd9291a962b45e2c4f41f4ef5c6f6b9a2a43cecffc24c793135b04c93576727",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "f7bfbe8c4bab4a2a6b0d4bcf151bd9a7a2d3704af0c3f04956cce2b315591eba",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "4c7622684a42a66bf34f85e335d06bbc66a43dda8ce7da6339fae39cb89b3a2f",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "2ccc00f157f01691ca545db6808cf84643fafcb3827c3fdcfda863d4b6073f8d",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "c374f87082a1d140adabbc02fc21b46d65738916d9d8132a8ba5d32fc6a873fa",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "c064490e10f163b2615dfca813c30fab4f89e834f505b2039c355ab0d3b8e714",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "8fa2fa03b1bd4340d8414ef2cdeda0979def463bb2e3fc391b049d8873f93271",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "c01f4504bb48d784672da728bfe866526eef66b5dd16079435353cb62e8bccdf",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "d7dad6b3ab07ebcc00ea99fdd0eef80180529bc38d74b97883f81916c481b2f1",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "2c029617e866b4711c0e3798a611223a44dc0e87d7988548acbed54892903d9c",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "3b5048359f2a1ce05dc4ada70b112b665e402df9b356e7f9e6156c6dfb5edf0f",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-path-003"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "fd05d74757e86d45796ef83915560f806b1927ae6064092eb8601a90c773c24c",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-reward-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "aa1320b2683246556490617cb3fe44428d40d43f9b8ab920475a28c9ba6dbc4d",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-event-002"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "9a0f786685e69c36bca520240a911c2020b46009db8287aed80ba2845ecd2ca4",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "rest_site",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "131ab67280932929db4f4eabc42798143b426fbde7531ab42004af8edeb42dd8",
+      "run_seed": 88,
+      "state_id": "train-seed-000088-rest_site-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "beb812fc0d638eb70d0d989adf43cf48a18f3f16c23266738dcdba2d92452ee1",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "91c277a6c8be809949b70ee50c106010fc07a633a68c15a1842770034441e920",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "b614f1f343c8e0c87e2643a40f5081957fa69eb5444f42c3f2a7bac8641cc1e9",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "ee9b3600db8194bbb875d988ef97e0ed1bf28eb6f3c86680c49946ce59198f1b",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "c1f26f94795b0b04d3369c747afeba2ffd2cef195d2628fee79b40a2b1c6bdc0",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "709878de0605c9d178b32c55e9b21194f719e8a58b0606bbf8f1e7fc41cbd017",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "62b57c7649799520b76b87deef1c118712a84cfd0cb212973af90ca09106b151",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "6069d7a9280fe99e3ab20a17b0edfc3dbb8f6854e27e6188120b2b76037e8da9",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "3fca69fc7b5219f796e0562eaad7a0f8cd89a292c7f797a0f3c70ec6a910c56f",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-combat-016"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "43e57d188e3df666716dfa3373541fbbd53269f5648681ff7136d66e7b6db20e",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "0dfe9e4ab8b700b4f90d8b443df0084a8d884c9e4f523e6fda22661a4cacc48b",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "78eafdfcf2c62c1c9dc12f4cff37208871142db561d5b8f2879ccfcfb10d4852",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-path-003"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "a58ebdcb0deafa066d15e5e8a93dcff365214e33d71f9f8620cf65d16cf6cde7",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "30de6afc021f77ad67b490c26a3ba3b113a34c28f2a1303164d230fe31b9da62",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-combat-024"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "899f3bfe4155184d24186549b49b8475e72f38a67d08381a9945a93e83352969",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-reward-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "882bce3ab2d0667a3a8b16bdb3fb8f56159542dfb515ef10236433ba17971eab",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-card_selection-000"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "587a317121f2192f44b775d5d8e23cad15516ebaf50a9a960702922e5c0b0c47",
+      "run_seed": 89,
+      "state_id": "train-seed-000089-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "9cb1730bef626830966f6d331c9ea7064d90e7d09b4b01ae10869439e36482ea",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "fe278b973c4ed44a1f9650211ce917d0e285dd85cb6194b5b04015191888b296",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-card_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "d90254195dfd749f96064469ec5c9fcde23f5431513271b530255d6f64cd8315",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "8abbd6c898d3af0ddeeb8208e3797942a550513d11b38acefa2501220d1f34cc",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "73f731695d2a1d9bf675d38fd7f6fd3b04466dd56d189449ff67f44d0371aa03",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "348693c2e53b362b9da9d1b9b17f780aeaf481793a5cf3ac69ca43b668b3ec35",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "efeecb344f6fc80c720e91e3c9ce1efad011b5add12936f3cf043179c24708a8",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-combat-016"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "57432a3fcf0b236d63d5ec6bb3b52db73a7d61f9d8aba418134db6949a482555",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "f1e23f8cc609a16e797491f7b7ae417d6f34ae8a5e097f6048b7750751a18929",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "ce53f3aa5a16898797f8f6c9c0e54bb3414a8edd1ea528e0cfbf5381f8edecd9",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-path-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "37ef2e93fe51811ec6a57eee2378dd24ed92a6c32891a513fe13abeb7a63576c",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-event-002"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "5ea4f7e00afb0279b6334df49494ccb6fd14858c85d1aed7ef2eb8f2d4bb7003",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-card_selection-001"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "04614199cdba7d3177e6b860ec987b826b9031fa73843374b9b79c27f4430ada",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-path-003"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "e436c090b0483873c5932d4b3069b01221c595c79a14a0343dd3cf8c720e2577",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "a188f82fcbfa8f0e3e61d5b1810678a88ea3fe9f3b0212187d6749a4478d0e95",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "41e2009e5e67be68dbeeb97b11cb1afa4691ae3de2f3dedad5df3c8b704e51a4",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-reward-001"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "f515623d623c0d6c127150dbc32cd5ee2d5b162a89097c9a7d040ea04088b389",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-path-005"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "954596ccf3fea80768ec6da341f501c802898ed17293ba83a25b23ee00bdcfb5",
+      "run_seed": 90,
+      "state_id": "train-seed-000090-reward-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "91be14753544cfda951dcd4d932f4bfc1f6b46ae7d55fc02a34f6384c871ed58",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "c4d1174f9f6db50d74e962a4998f6056e909a2d132e9433d1faeead57c166b06",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-card_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "e6ec670fb08c0cdbc0840241fab290f74d5d698d7e557b4ffe4221dbaf08558c",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "95e7c5292c5c80cc80399b5cf4524292200dcf6f5a1b45fa02fb95dedb7d0dea",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "2f91c604ecec8bfbe6558d43af414aca85b9afefaf836bd8abb185324d9c8faa",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "1aaf98719e9dae1a82eee12f4a3a0d0068361b80e1b0bba190d428ba9059edb1",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "eb9eca744d39601bfddc8b80442d2e9e1ab8d4dd323456219f3cf56a3e55744d",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "f288ab6adccc5c69ecc2b59ad225cbdec20034b5da883c3be44421f027993a19",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "7c9ec047872aad72b089b760750bed071d8869e15124e326b359bf3994f1564f",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "5a4ac147d2333a7840c086905bf5e83590d3f75859bb3255d0c36860d571b269",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "7d9da9e5ccff3227abeab70f0a7b62fd4d26321899187981cf0a171238d08951",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "706815067c0b64a4fc83b2c4b3290e072517f122b239ef7f9fcd22b5d220252f",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "8819ea7be0ead1c2494bc748ff063a61d84a7ccf96811871a80ce41f9b97fdfc",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "15d0f7b51db1a569b91a7bc27796fb96e0a566a4967c02cf04b4214c8a5b4891",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "d5018ba3ebd86c580be2542dfa20ff1fd4bd035d2eb044f568e875551d85326d",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "1403df1dbbf2936ba2312ea19931b4b79b03fc409dcfd004ba7492dff9c31043",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "71f4b139dc6a193a1a86686b353524a9e9534fee3718e132336b7d6e62b4064b",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-reward-003"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "27e5edf345bffe9a8c59983ebec7200633b52c4e3d05afa3c22adb63732296b7",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "rest_site",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "994d51e6ade09a61e69d322543d7149a3ffc9580518ff9f21e780c9529380162",
+      "run_seed": 91,
+      "state_id": "train-seed-000091-rest_site-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "a7e17a0531deb8f1dc8584cf9ab9a93c89caa8baa5c53aeaad039a95afdcf283",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "852f9109fc97404cc69e0aff7d77f6b671b042a913277dc66b96ec5815c9c83b",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "898b30cb786ad7705045f89fb83f87430265b66db529abfe779433d78c114f6b",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "a7f6f85cff258df0019b8d8c847e706f030f2d22ca6dc079b3107ede256baac5",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "49ccbfa02d2c3a6b46ca53c2623f7b10e7c55a7f5a6d4a1e26f91a48dfa52217",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-combat-012"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "4d363a912ec44d5e50d2b0c444e2c32007fc18ff956fdbb933878264976f0d66",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "6e72e76ec91889f9abddf6bf15fb0bcd5da7135397256374a258b3a8d3ba691a",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "cacc7e3e6de5c595595de827f4d8c65a4680ce5c6f3114b72b728df0d08ff9a7",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-path-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "55aa087e219cc02679dab78fc12b57c737485f6989b77e2165f2bd1f7e30ce80",
+      "run_seed": 92,
+      "state_id": "train-seed-000092-event-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "27fbd305049bb41f0bb4155b8b03a29434a93120880cb41e672ec35150450f4a",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "eba61779e1d0acb472fc1536efb8bc0a23dbb1dec9ff38ee33dc1d064da0f1a5",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "014856cdb95ea2a0e596f5bcc69a7cd52f958761cc92fb5ec870ef9712e262c5",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "077f3e0ab436c33e7b817b7c2c693c9c7f234ed9539b8ced57f02abc1d696a97",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "d677188e93ae9fd8a7c05866428d3061dfdd47ef8448e355502bd89867b4c756",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-combat-012"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "93e2fd7fb212797e4efd4ce18ac04aef154879f037724ff99ce1b197453c8879",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "8af0d8d1f7881070622f5b18ec4e3ae4f963eaa1016504ab872af7b9af02022a",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "9014bcc1ef4e640cfac7e9c35efa2ecfde9125fac49720b379de5eb272721fa8",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-path-001"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "c3e407b8f98a4df33963bf9c520dd6173e6319fea263e49ed981ef23828ce554",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "7b1c1d11791c56e1e771ca1ce6879ddb1f6c7a157a8b3bdff22487de4b87377c",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "0b7213793e8857e77f8a3fe8f06e3fbab908739910be23073fecb4c77334eab2",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "2099380aeab3a09034c56deee37d58349ca2456eb0cb80708bfd9b830dd4b9c6",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "754e5d40c0b85f04153fd66891f6f1cbc4bb99321d60a41f5ed1f7c3c3b1313a",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "0e40cc7c490b58478b43dd8fe2ed4116a666467ca435c2b761a83a1bcb39aef4",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "fa05f3aee74f4d73d1aa70399dce8f23981c8ece54db18d5937589d16fb55be4",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "66815833ae921403ec20f88af13d95c2643255453b2ed1404e341c57db29bd4b",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-reward-003"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "199d1560ecd552fe53714f81800064bd08699448187d7838691a8b5364e683b1",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "rest_site",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3cc5f131290fda5b901eca6b5c6f25f16b88d699ec0caef2eef62cbbac1d7809",
+      "run_seed": 93,
+      "state_id": "train-seed-000093-rest_site-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "f9405b4da0044db10abb740774b76431f1b208485f696318e623cb525a27787d",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "8b4827f9b646542b4772e4c26861aad7a6805ab2e5e04e5657e6a90aed2f2c3c",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "1ecef42c5203801aea9b388d22af54928a1472dfeecf61daeff858d7dd786c2a",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "9e47d98a925d677350d4bbe5b47018cfb8c9025d744bf1285c39ff40a7b0856c",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "c90f1bb81457bd36658712eaaf3949fa099a045f2fcf55e986a0f901c94d1fc3",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "b41f57afef70d522670c1e7c808ff581bae66ff58c2f27e7406dc9f98d4095b3",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-combat-008"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "ff217608bbfa68ecf0dfbc6788a02cfe036da8b6b78d131918bd35418587ce83",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "cbb3af829a750a25064b476d87a86b50a9d261afd14b9bf87b423ca8a7988ee7",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "8fdc6b5a2a128ea3bc5ef18b55b0f1dd79b341a3ee4f3c937f70df015bb5adbe",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-combat-016"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "c0f5c2f209acd0331044ee32a17311b15e57130c1001eda4620c6a4a2bd59c24",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "93ad1f3f823143023e8fa8bdcaf1e5d1c19d344d75e58dd686a949a3ad3c1e20",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "2aa6bd5b807af5c173a1f55b213d28d46a443a87f8e944e56f734ed8e96c2d64",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-path-003"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 5,
+      "expected_state_hash": "2fd4a3ad3444ebbeedc9df8646f8fe5739eb945af699b6b023dc478d84957d69",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 5,
+      "expected_state_hash": "954617be57d0988bb6c55f4ee5acff52dab77411efea5f72b34f0ec2b1b43104",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-combat-024"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 5,
+      "expected_state_hash": "2665674736d60119534c9cb6f5efd35b3f2ffdd3e0c3d52f5cf677311fe876f1",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "f6eb18d029a285f89864eff8dee661c3c2dfa11d44b3d5bb39814730e842e529",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-reward-003"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "f5db318e34b21325598b4036fc42f397cbc9982555e2a3636c7d875ce580fef8",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "treasure",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9cb1f74480b77a41afcd42fea62e3be09f18e5a8eef061e4d65d5e630ee6564d",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-treasure-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "rest_site",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "8ffc51da57fb2850a8210f764212d6aab469e16f3c89843b039574a98c1e6b5a",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-rest_site-000"
+    },
+    {
+      "decision_index": 7,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "24c18c21b04773152de1f24e7c35b7d499ead3cfa06cbf53b843d60a014deb40",
+      "run_seed": 94,
+      "state_id": "train-seed-000094-path-007"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "c4805ab20b1eaaacae277b47a3c8a97ec9fc422cd99533635e9c52e3d63d7d57",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "5965be53ca3c668c3c666251ab5f80a8911a1ac4e8e6542d09e434912283a84e",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-card_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "6930ee298290d857e3067c191339fb806f5513e39ca19c4b49017a5ecbd603a3",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "1b97ee7a04ada2446ece786323354837df917922103f5236e5eed5b3f90b9220",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "d0803e11931618131a3d4b713ff37e0d8de8a566483c1e34d840af296d79b350",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "6aaedc301ff03e94f81bbf813cb6dbc05ddcb8226acddadd66836e425e133958",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "d6e2d20fb9a35287165d2b7ae85ad4636eb65048b17635f8152954ab52f1242a",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "b9980622f689eb77bf2b7d475fd6421f83990d7e5dd260eb560d28a54cdc3710",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-path-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "b714a657d15e4743e60c642fcdfe4694cf95737887b6e136d3b7f46296f3e6c3",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-event-002"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "0296c000c0cf492f48aafe00a9cab28340af88c0d39738df11fe0493fc903463",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-card_selection-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "f0c3d00554ffa0ced90e294f1ead6a748b215fcd46a6b004ee154b1e93b05771",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "1e2cd68c2bd5e0e84213d94d9ccefeb35b71e45bd58177422a83550e65d727ae",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "3ef77fe9ecf49e278642f76ba8bbeefecd1eec3712fa3c7f700b020a7e39fa94",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "0b465d01d5aa64c35f38e0d3743f5266e8216dc9f3e4800bb8b5341965e9ab52",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "863981a8337c0daa71b405ec79d6104f3b7e2d0d96082b3e7cfeb664d162e304",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-reward-001"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "8f93b9d9d02bca1861da78958c9b6c193c030620bb0ac73d9b55a9e54d8f217f",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "b9abeba769d6e04cdf27ba920a563b143e151c22999a935e7b3e1f0b15b60a7b",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-reward-002"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "eee8218653319bf3b121cd362afe54e16a11b222b9f3c410a51758cc762dcf9a",
+      "run_seed": 95,
+      "state_id": "train-seed-000095-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "513b66da0d42125dad30f617bff0f05eaf03ba7db84d1f25d5aa7833e57ba128",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "3ab298c7a51cf306d4020db070b9a6d75a4c9d1e051642a09ae579ddded237e6",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "10a7e42fb0ff0f28d014d59570f79787e71cba08c276370b732c0031abf3bab6",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "9b45c5d5d673ac67938837e87ed36b5f9a2b9dafe9d80e109190dba39613274b",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "0aededdbedb2b0390efe8783ee9be0bb61a5793bf776ba0422c32f700fcfd839",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-combat-012"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "93d3efd5948aba08064617b49e19e6b908e51a4cbc81c6b199707ca048262ae1",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "ed9f892d20331c9f0516ce68c984072407d3967e4b57f36cead0fd289c17714d",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "c084b9620eadc7bbc73cb9839a0a0793583f7e11cb64bbd1bbc6f0d84a4763f2",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-path-001"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "2387e308229fbef4bd9aff2bfd093f7fd486d0d82d8fe58a50387ad2025ff811",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "87c0c3199970f67789ae8975ca564c914f3d23098f4cd2bcdebb23bf18030de5",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-combat-020"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "d48e8a5f53c0d67e2d18a247313f4c9956453a46c0793bae0eddc410ab26c3a4",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "9e6a1f54f26a7912eb79a52104ca2f00c3e78437820c748f4c1e7ad5b0ec65b1",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "872a0d643d68b99bbc0fc1b6b4b68cb0f66ed6cc26b6140b301da4beda1ebb39",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-path-003"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "969c717b3f2913f8a773dcd06d82d0b8d8210060801a2498929b812a81725193",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-combat-024"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "c082ed8993f416d650dc7c5c583e0a075ce745d130ace9f7328503ac5068ed9d",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-reward-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "f9fd8c48171b00d8663e179c7940a05dcc5eb30cf385ba68fe4135fb595eccdf",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-card_selection-000"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 6,
+      "expected_state_hash": "0a6decf4b04b43c8c642186fa541438d27d606406ce38566a6ca5a3ee4715d65",
+      "run_seed": 96,
+      "state_id": "train-seed-000096-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "eac6c34ece174a4be1b127559ea3f36f85779edcc2ab7f597c2d66d852671909",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "f99a5639382b0cf75f9d10cc274b3b36317915d5502d912565ed9d19f997cd1b",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "6575a5e104189b9d18895c3917990d46704702bfca3c661b3988b8f37f3322b7",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "52620703dd413fb790f2cdf8f62734e545801d6e6228dd43d0c8b521644d2350",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "0ed249afa590398fa2d4cfa26bcf3a62a6316a09592f2cef6617790bf14be6ab",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "9782bce13c4fbf019c963a9dd5c94e9571b12a32ef05096073a42e0946a9d5d4",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "818ce955d490779c89a83b325acba5f21d2e8abf742ac6d8ea9dcb82719d18d5",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "bb453af8b58770001c4215d54c643881ba46a9c4ae368a8e07bf344d6a3b89a5",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "ebea5fcdc69c18c41a0b03de534e3e5fe558d54ad5c851c13eb56be26e3f67f6",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-combat-016"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "33884d3e81822727c7924ff0800a03d4f9f09b70bb239305367b0533ba0a75dd",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-reward-001"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "9b5c0614d3d6c314ac388d2e7deee3b521d686731fb73d36acf12f10d3b0d715",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "da68d48da4d24a6077690c94c9b85905069973a38427cd9cf47c7e9603662adc",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-combat-024"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "72878aad2d1d5373595ed0a064d4f8b8dc85cfca6751222df08929099537cef6",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "f90a22e2d85db12bbd9d7c614af4b3973252bc97857b04a4511f0d109a58d81b",
+      "run_seed": 97,
+      "state_id": "train-seed-000097-path-003"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "b28b2d9c0f452ddc97f2f7da0a060ab4aa45059b45f7c366a2b111f5f4f2ce66",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 10,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "05ba595920eeb22b5c8b12f182661096e8aa266c9e7bb95b0d4cde53d72b9d05",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-card_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "3adf138d6760726b3856bb9396e97b59bec81b5997adee0b0880315a1d1fce7a",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-card_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "a633be8be8189265e777c58d3ed7bb43f3b63d81fde99b86ba999340b47b4f38",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "b475f1c7127c075e807cbbc12467943190d33c912df6be27a7a7e81d7ff1184f",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "944fdffb43c429ac7802db6d192f1eef1e9d17abdab28696a3fec50f5375a3aa",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "305265f34fdcef00ece476a44a36d0a53ec5e9c32397c6e4805ea21ea51b126c",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-combat-012"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "c86ac41e4753ab705df81f01c24eafcd78203040234cdd71e176fab80da38c54",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "4e1671e0939cce3ae21e84e37b32da2eb0c92b2541daab7f113280abf3c256cb",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "7fe69cb4f8c4c2de2e4ab77faaa04c3f82f031949bef6989acebeacf9ce657c3",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-path-001"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "cefbe0d997e3b53225c4d11b8020afa9ff2704a0d8b40d8e6a28291e78ec6d93",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "1ddfa2edd1f0b94d2985a05ded1b1d1c4162b9aedcf73910f52bfe9b4a371ed3",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "ec946c6be0cfa44d2c07f2fcabcb2221ed48f597aeea23d2b977f94890b4ee0c",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "df0f5a70f8dd89a75a6c5d1eeba3d4b8851c6e2ab46796961260afabb6be7bc4",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "0258f6e94a2b1c2d40e7e95d82016453266ccd19a1812cf8075cf6bd668fcd9d",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-event-002"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "be7b93abc12e3998d0eded7e7213046e03a72f3f75fc3ca58ed66b23a66bb8cc",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-card_selection-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "2a4c0bc9a267e3987c66827aa6ded7fec3a65df9b1f9a2b3099a5b8cdd24b41f",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 5,
+      "expected_state_hash": "f2bb9df1f0e2be974adcd2a7a7832ac3f98de4e53356faa4f96e990df0a0f30d",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-reward-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "shop",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "176c17a0af5005615c749c70d2daf62f21605bb91d6fc2e04c106e700c386955",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-shop-000"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 6,
+      "expected_state_hash": "9b18914cb59470d2bf524b59f77cebd4bb59f5539231f2d20c3d760810360dc5",
+      "run_seed": 98,
+      "state_id": "train-seed-000098-path-005"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "453f42d33fb8bce21fd5ed6b3c239a3688ebe1658aa5a007d80244ddb07e930e",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 1,
+      "expected_state_hash": "754712181bf95023c54fde88f2a063ddf18b9cc5d7889c417c2298b6cb37d226",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "df99d047bf02b74a4afc0d43101d5264270c6781e182de56f6e6c820eedfaf0e",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "799aa7bbe99cd04cbd154e7044212df163a7f527cd76de3e4432c6eb0a061f17",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-combat-008"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "0837f1a7333e1fdde969ae9048e2a13eb910947b45f725975c9b36d17c5bbc23",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-combat-012"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "74d14c556d9b980e8167849559f62eb56a3290038b36e7118b994b8ee7fde2d1",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "151480a21d96cf6c04b6213054b3b6b6bdc63dcf68c8307ad71744050ea141ac",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 2,
+      "expected_state_hash": "6b9c22f822be5f8a3ca73f6c854c8e1ea2c077baa2dc351ba99822e3215efdf7",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-path-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 3,
+      "expected_state_hash": "81dcfe5f1c62aedcfb2ef24c639eb90dfcd423270e55f3b2b23ad3ad4c5353a2",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-event-002"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "fdc422b87f558a795977454f3c61b1f5ad4db261afd1bcf8a929a1712f81ed06",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "51ceaa0ea51299da38f42c3397a55ba0121ad9aa2e48e3ef9628e05195a46f4f",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "a3440a3a89475f7b629ecc9c71a620155f25c6679eb98d9d61d4be2f58211b79",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "25a98d9b6651ba8ed27505264404816bd4c6214d75bffd88c4df7b872178e183",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-reward-001"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 4,
+      "expected_state_hash": "ea919c5b2841f84904f28b809aec16b62100d10143d6869d245cb263de10d985",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 5,
+      "expected_state_hash": "1f90ce12c747077f338ddf624835f9d95342da9904713d929da09da4b3c39b6e",
+      "run_seed": 99,
+      "state_id": "train-seed-000099-reward-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "60520f910d99ff5d94447e5598610a1c069e778b409ac6653d755c010ba624c0",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-event-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "a738e89990395f597244a553b2d45fd0ef2dd30afa71b20b2721553dd046950e",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "5f2db275ebf035721685f742579b285b91eb23914bdae94e2785c8e8a88e66d9",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "94a03540cecc79bb1f86a4dd468e3eb1e9756c57f68159571274e93f3c7a9e97",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "8111e7c0369f7e71facef45c1ea1cfd2d674af665a9700837f49d31179eece6f",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "86a3096340a4a9f8fcac15e3e9cef387e1c794946ad287ed751081f3ce55da7a",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "81b084d01a238d6832266e3c90f66908b046e65ef57e2d209e910b520c551328",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 12,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "e62c493c2900e2d890e08a49d693d5cf7f32d5f7e3cabf5549f76939c4f3ff0a",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "324a4cb0022347fe985bc0ec0438ccacdddad8b347804bcf56bc0ea10e0b7b4f",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "231a1b9deab7186e069cad85bdf92c19e4b4d365c7f8c73a858c8a9a93ef4f5a",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "b336c0620677699f52563c11d296206593d7797692e40157c82dd135b2560ed9",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "89e605985b611d7988f4659292285886ea76c74af0ffb23d5c8a0e1d6f9a4b01",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "f0ba406aa663de8bde85c3292fdb621abf53ec9d4d6f53d46ceb1e6bedd3c751",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-event-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "dfb04a0368b42aa5d5c4e19cf784a803bd49c1200ad9bbaf4a45ccf1eeefc0bb",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-card_selection-000"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "7070961803b0afda1c98c6566d550bfdbe23e93f29c25ef8b9524cfe91b906d1",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-path-003"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 5,
+      "expected_state_hash": "98f81a76788d28d51d44ddffd78b338eb898094f2c13f561b629577892ae3f1c",
+      "run_seed": 100,
+      "state_id": "train-seed-000100-reward-002"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "5333795b11a826bad8354387a7f0d1badd3ee309f02cf81cbf93bef5970982b3",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-event-000"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "81318affaefee2ed072a674a7716cd0c3ffb3ce0e63d8066e1274158791ea115",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-card_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "68e0c47542397108e86c3f5b29c1cb6c740a947cf88796b92e681cc9394855c4",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-card_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "event",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 1,
+      "expected_state_hash": "f56703c3acc8c2882dda2a86103339ea9fe5d9919907416ce4b607d36c56619c",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-event-001"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "029946be69dfd2394e82779dd55ee69f5b7b99cd5a86741ecc22ab3e56b02194",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-combat-004"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "7330ffc7eaca7440cadc655add09bdc3993d389e8285c6abf9344ab25a4a9331",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-combat-008"
+    },
+    {
+      "decision_index": 0,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "5e980fc229c9065068721c066cbb5e224f04b92cff6c884d6c69ab4bbaac2fee",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-relic_selection-000"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "af27665f0f9a3175e16a7f696c17773dd9c905dcb968da8e364bb51dc17512c0",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-relic_selection-001"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 2,
+      "expected_state_hash": "41c69c1273995e893d4cf098f3891a723c489b5929cc0c7a626e74b1781f76e3",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-path-001"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "5c3ed512ec520e90e654021f16c24d04df619a553e3d28e0afab9132b5348af2",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-combat-012"
+    },
+    {
+      "decision_index": 16,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "c54b5e952f89653fccf16f8f9e6838a5935b95ea0739aa3fed65e8fe6e1e701a",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-combat-016"
+    },
+    {
+      "decision_index": 20,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "3f9e659fb515dad4eacd6537de1e1b37fb6e08d8fb26bfb9e6603f62e67f8b5c",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-combat-020"
+    },
+    {
+      "decision_index": 24,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "0e6991387c543e100a5e484bbe87b2ff0be6a2861c8cfb1f63e71d9705b2fed0",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-combat-024"
+    },
+    {
+      "decision_index": 1,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 3,
+      "expected_state_hash": "173d96a07789c83f8d4d4c4b80a7675ab5d619645a3ec0084a6868dd73e103e0",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-reward-001"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "reward",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "0c80a27963ca6d37be3210ce5a36ab6a9e8655f7facb56355f03f2b2e9c76d7c",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-reward-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "path",
+      "expected_legal_actions": 1,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 4,
+      "expected_state_hash": "a76638cc8ae357d1cc4e134253b696f232c1c04f6e04c6187983347faf24dea2",
+      "run_seed": 101,
+      "state_id": "train-seed-000101-path-003"
+    }
+  ],
+  "discovery": {
+    "captured_coordinates": 268,
+    "decision_occurrences": {
+      "card_selection": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "combat": [
+        4,
+        8,
+        12,
+        16,
+        20,
+        24
+      ],
+      "event": [
+        0,
+        1,
+        2
+      ],
+      "path": [
+        1,
+        3,
+        5,
+        7
+      ],
+      "relic_selection": [
+        0,
+        1
+      ],
+      "rest_site": [
+        0,
+        1
+      ],
+      "reward": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "shop": [
+        0,
+        1
+      ],
+      "treasure": [
+        0
+      ]
+    },
+    "maximum_steps_per_run": 4096,
+    "requested_coordinates": 448,
+    "requested_runs": 16,
+    "run_offset": 64,
+    "schema_version": "bootstrap-curriculum-discovery-v2",
+    "step_limited_runs": 0,
+    "terminal_runs": 16,
+    "unreachable_coordinates": [
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 83
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 87
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 88
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 89
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 90
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 91
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 5,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 16,
+        "decision_type": "combat",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 20,
+        "decision_type": "combat",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 24,
+        "decision_type": "combat",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 92
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 93
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 94
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 95
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 96
+      },
+      {
+        "decision_index": 5,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "event",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 97
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 98
+      },
+      {
+        "decision_index": 5,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 99
+      },
+      {
+        "decision_index": 5,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 100
+      },
+      {
+        "decision_index": 5,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 7,
+        "decision_type": "path",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 3,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "reward",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "event",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "rest_site",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 1,
+        "decision_type": "shop",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 0,
+        "decision_type": "treasure",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 2,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      },
+      {
+        "decision_index": 4,
+        "decision_type": "card_selection",
+        "reason": "terminal_or_step_limit_before_coordinate",
+        "run_seed": 101
+      }
+    ]
+  },
+  "objective_id": "terminal-victory-v1",
+  "partition": "train",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "schema_version": "bootstrap-state-set-v3",
+  "selection_policy": "ranked-train-runs-64-through-79-learned-policy-signal-supplement-v3",
+  "signal_spec": {
+    "minimum_decision_types": 5,
+    "minimum_effective_labeled_states": 2.0,
+    "minimum_half_split_agreement": 0.6,
+    "minimum_occupied_maximum_floor_bins": 4,
+    "minimum_source_floors": 5,
+    "minimum_states": 64
+  },
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "state_set_id": "sha256:ebdbb798da5a82cba5a27936207e6e8972a4039ac1cd1194b11cb3d5c806a49c"
+}

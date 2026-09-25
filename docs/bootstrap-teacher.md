@@ -374,6 +374,12 @@ uv run --extra evangambit spireshift bootstrap discover-states \
   --run-offset 64
 ```
 
+The frozen supplement state set is
+`manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-supplement-v3.json`, ID
+`sha256:ebdbb798da5a82cba5a27936207e6e8972a4039ac1cd1194b11cb3d5c806a49c`. It contains 268
+unique states from all 16 requested runs, spans eight source floors through floor 8 and nine
+decision types, overlaps none of the original train run seeds, and has no step-limited runs.
+
 Generate the supplement with the same teacher settings as the original train dataset:
 
 ```bash
@@ -390,7 +396,7 @@ uv run spireshift resources run \
   -- \
   uv run --extra evangambit spireshift bootstrap generate \
     artifacts/bootstrap/teacher-train-v3-supplement \
-    --states artifacts/bootstrap/discovery-train-v3-supplement/state-set.json \
+    --states manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-supplement-v3.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --backend evangambit \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
