@@ -49,6 +49,9 @@ PRODUCTION_TRAIN_LEARNED_CURRICULUM = Path(
 PRODUCTION_VALIDATION_LEARNED_CURRICULUM = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-learned-curriculum-v3.json"
 )
+PRODUCTION_TRAIN_LEARNED_SUPPLEMENT = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-supplement-v3.json"
+)
 
 
 def _tactical_split(ruleset_manifest_id: str) -> SplitManifest:
@@ -249,6 +252,40 @@ def test_learned_policy_curricula_are_frozen_to_later_disjoint_runs() -> None:
         if case.expected_state_hash in shared_hashes and case.expected_legal_actions > 1
     }
     assert len(actionable_shared_hashes) == 1
+
+
+def test_learned_policy_supplement_is_frozen_to_unused_train_runs() -> None:
+    split = load_split_manifest(PRODUCTION_SPLIT)
+    original = load_bootstrap_state_set(PRODUCTION_TRAIN_LEARNED_CURRICULUM)
+    supplement = load_bootstrap_state_set(PRODUCTION_TRAIN_LEARNED_SUPPLEMENT)
+
+    assert isinstance(original, CurriculumStateSet)
+    assert isinstance(supplement, CurriculumStateSet)
+    assert supplement.state_set_id == (
+        "sha256:ebdbb798da5a82cba5a27936207e6e8972a4039ac1cd1194b11cb3d5c806a49c"
+    )
+    assert supplement.capture_policy == original.capture_policy
+    assert supplement.discovery["run_offset"] == 64
+    assert len(supplement.cases) == 268
+    assert len({case.expected_state_hash for case in supplement.cases}) == 268
+    supplement_seeds = {case.run_seed for case in supplement.cases}
+    original_seeds = {case.run_seed for case in original.cases}
+    assert len(supplement_seeds) == 16
+    assert supplement_seeds.isdisjoint(original_seeds)
+    assert supplement_seeds == set(split.seeds(SplitName.TRAIN)[64:80])
+    assert len({case.decision_type for case in supplement.cases}) == 9
+    assert (
+        len(
+            {
+                case.expected_source_floor
+                for case in supplement.cases
+                if case.expected_source_floor is not None
+            }
+        )
+        == 8
+    )
+    assert max(case.expected_source_floor or 0 for case in supplement.cases) == 8
+    assert supplement.discovery["step_limited_runs"] == 0
 
 
 def test_bootstrap_dataset_uses_paired_terminal_first_targets_and_verifies(
