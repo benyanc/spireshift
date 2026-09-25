@@ -23,6 +23,7 @@ class ProductionPolicyDecision:
     selected_candidate_index: int
     selected_action: LegalAction
     policy: tuple[float, ...]
+    terminal_value: tuple[float, ...] | None
     tactical_death_risk: tuple[float, ...]
     maximum_floor_reach: dict[int, tuple[float, ...]]
     inference_seconds: float
@@ -103,6 +104,7 @@ class ProductionCheckpointPolicy:
             selected_candidate_index=selected_index,
             selected_action=actions[selected_index],
             policy=prediction.policy,
+            terminal_value=prediction.terminal_value,
             tactical_death_risk=prediction.tactical_death_risk,
             maximum_floor_reach=prediction.maximum_floor_reach,
             inference_seconds=inference_seconds,

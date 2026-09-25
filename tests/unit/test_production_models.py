@@ -106,6 +106,7 @@ def _write_synthetic_curriculum(
     *,
     state_set_path: Path,
     dataset_label: str,
+    terminal_signal: bool = False,
 ) -> Path:
     state_set = json.loads(state_set_path.read_text(encoding="utf-8"))
     representation = json.loads(Path("tests/fixtures/model-input-v1.json").read_text())
@@ -127,7 +128,7 @@ def _write_synthetic_curriculum(
                     {
                         "maximum_floor": candidate_count - index,
                         "terminal": True,
-                        "victory": False,
+                        "victory": terminal_signal and index == 0,
                         "transitions": index + 1,
                     }
                     for _ in range(4)
@@ -169,11 +170,12 @@ def _write_synthetic_curriculum(
         case_path.write_text(json.dumps(case), encoding="utf-8")
         references.append({"path": relative_path})
     dataset_id = manifest_identifier({"synthetic_curriculum": dataset_label})
+    terminal_victories = case_count * 4 if terminal_signal else 0
     report = {
         "dataset_id": dataset_id,
         "state_set": state_set,
         "signal_assessment": {"auxiliary_policy_signal_pass": True},
-        "summary": {"terminal_victories": 0},
+        "summary": {"terminal_victories": terminal_victories},
         "cases": references,
     }
     report_path = root / "bootstrap-teacher-dataset.json"
@@ -196,6 +198,29 @@ def synthetic_curricula(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tupl
         tmp_path / "validation",
         state_set_path=VALIDATION_STATE_SET_PATH,
         dataset_label="validation",
+    )
+    return train, validation
+
+
+@pytest.fixture
+def synthetic_terminal_curricula(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[Path, Path]:
+    monkeypatch.setattr(
+        "spireshift.production_models.verify_bootstrap_teacher_dataset",
+        lambda *_args, **_kwargs: SimpleNamespace(valid=True, errors=()),
+    )
+    train = _write_synthetic_curriculum(
+        tmp_path / "terminal-train",
+        state_set_path=TRAIN_STATE_SET_PATH,
+        dataset_label="train",
+        terminal_signal=True,
+    )
+    validation = _write_synthetic_curriculum(
+        tmp_path / "terminal-validation",
+        state_set_path=VALIDATION_STATE_SET_PATH,
+        dataset_label="validation",
+        terminal_signal=True,
     )
     return train, validation
 
@@ -267,12 +292,11 @@ def test_pairwise_curriculum_training_is_deterministic_and_reports_baseline(
         "regret_below_source_order",
         "pairwise_cross_entropy_below_soft_target",
     }
-    assert result.report["terminal_value_status"] == {
-        "promoted": False,
-        "reason": "all_zero_terminal_victory_evidence",
-        "train_victories": 0,
-        "validation_victories": 0,
-    }
+    terminal_status = result.report["terminal_value_status"]
+    assert terminal_status["promoted"] is False
+    assert terminal_status["reason"] == "all_zero_terminal_victory_evidence"
+    assert terminal_status["evidence"]["train"]["victories"] == 0
+    assert terminal_status["evidence"]["validation"]["victories"] == 0
 
 
 def test_production_checkpoint_round_trip_and_schemas(
@@ -303,8 +327,8 @@ def test_production_checkpoint_round_trip_and_schemas(
     assert prediction.terminal_value is None
     assert prediction.maximum_floor_reach
 
-    checkpoint_schema = json.loads(Path("schemas/production-model-checkpoint-v2.json").read_text())
-    report_schema = json.loads(Path("schemas/production-model-training-report-v2.json").read_text())
+    checkpoint_schema = json.loads(Path("schemas/production-model-checkpoint-v3.json").read_text())
+    report_schema = json.loads(Path("schemas/production-model-training-report-v3.json").read_text())
     Draft202012Validator(checkpoint_schema).validate(result.checkpoint)
     Draft202012Validator(report_schema).validate(result.report)
 
@@ -326,6 +350,125 @@ def test_production_checkpoint_round_trip_and_schemas(
     legacy_body = {key: value for key, value in legacy.items() if key != "model_id"}
     legacy["model_id"] = manifest_identifier(legacy_body)
     assert production_model_from_checkpoint(legacy).predict(representation).source_action_ids
+
+    stable = copy.deepcopy(result.checkpoint)
+    stable["schema_version"] = "production-model-checkpoint-v2"
+    stable["model_type"] = "sparse-pairwise-curriculum-multihead-v2"
+    stable_body = {key: value for key, value in stable.items() if key != "model_id"}
+    stable["model_id"] = manifest_identifier(stable_body)
+    assert production_model_from_checkpoint(stable).predict(representation).terminal_value is None
+
+
+def test_terminal_value_head_is_selected_refit_calibrated_and_served(
+    synthetic_terminal_curricula: tuple[Path, Path], tmp_path: Path
+) -> None:
+    train, validation = synthetic_terminal_curricula
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+
+    terminal_head = result.checkpoint["heads"]["terminal_value"]
+    assert terminal_head["status"] == "promoted"
+    assert terminal_head["target"] == "candidate-terminal-victory-v1"
+    assert terminal_head["weights"]
+    status = result.report["terminal_value_status"]
+    assert status["promoted"] is True
+    assert status["reason"] == "terminal_value_head_trained"
+    for partition in ("train", "fit", "selection", "validation"):
+        assert status["evidence"][partition]["victories"] > 0
+        assert status["evidence"][partition]["non_victories"] > 0
+    selected_epoch = result.report["model_selection"]["selected_epochs"]["terminal_value"]
+    history = result.report["training_history"]
+    assert (
+        selected_epoch
+        == min(
+            history,
+            key=lambda item: item["selection"]["terminal_value_brier_score"],
+        )["epoch"]
+    )
+    terminal_metrics = result.report["held_out_metrics"]["terminal_value"]
+    assert terminal_metrics["status"] == "promoted"
+    assert 0.0 < terminal_metrics["outcome_prevalence"] < 1.0
+    assert terminal_metrics["samples"] > 0
+
+    checkpoint_path = tmp_path / "terminal-checkpoint.json"
+    report_path = tmp_path / "terminal-report.json"
+    write_production_model_artifact(
+        result.checkpoint, checkpoint_path, label="production checkpoint"
+    )
+    write_production_model_artifact(result.report, report_path, label="production report")
+    checkpoint = load_production_model_checkpoint(checkpoint_path)
+    assert load_production_training_report(report_path, checkpoint=checkpoint) == result.report
+    representation = model_input_from_mapping(
+        json.loads(Path("tests/fixtures/model-input-v1.json").read_text())
+    )
+    prediction = production_model_from_checkpoint(checkpoint).predict(representation)
+    assert prediction.terminal_value is not None
+    assert len(prediction.terminal_value) == len(prediction.policy)
+    assert all(0.0 <= value <= 1.0 for value in prediction.terminal_value)
+
+    checkpoint_schema = json.loads(Path("schemas/production-model-checkpoint-v3.json").read_text())
+    report_schema = json.loads(Path("schemas/production-model-training-report-v3.json").read_text())
+    Draft202012Validator(checkpoint_schema).validate(result.checkpoint)
+    Draft202012Validator(report_schema).validate(result.report)
+
+    environment = MockSpireEnvironment()
+    policy_checkpoint = copy.deepcopy(result.checkpoint)
+    policy_checkpoint["ruleset_manifest_id"] = environment.ruleset.manifest_id
+    checkpoint_body = {key: value for key, value in policy_checkpoint.items() if key != "model_id"}
+    policy_checkpoint["model_id"] = manifest_identifier(checkpoint_body)
+    policy_report = copy.deepcopy(result.report)
+    policy_report["model_id"] = policy_checkpoint["model_id"]
+    policy_report["held_out_metrics"]["policy"]["auxiliary_policy_gate"]["passed"] = True
+    report_body = {key: value for key, value in policy_report.items() if key != "report_id"}
+    policy_report["report_id"] = manifest_identifier(report_body)
+    policy = ProductionCheckpointPolicy(
+        checkpoint=policy_checkpoint,
+        training_report=policy_report,
+        ruleset=environment.ruleset,
+    )
+    observation = environment.reset(11)
+    decision = policy.predict(observation, tuple(environment.legal_actions()))
+    assert decision.terminal_value is not None
+    assert len(decision.terminal_value) == len(decision.policy)
+
+
+def test_terminal_value_head_stays_blocked_without_validation_variation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        "spireshift.production_models.verify_bootstrap_teacher_dataset",
+        lambda *_args, **_kwargs: SimpleNamespace(valid=True, errors=()),
+    )
+    train = _write_synthetic_curriculum(
+        tmp_path / "mixed-train",
+        state_set_path=TRAIN_STATE_SET_PATH,
+        dataset_label="train",
+        terminal_signal=True,
+    )
+    validation = _write_synthetic_curriculum(
+        tmp_path / "all-loss-validation",
+        state_set_path=VALIDATION_STATE_SET_PATH,
+        dataset_label="validation",
+    )
+
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+
+    assert result.checkpoint["heads"]["terminal_value"] == {
+        "status": "blocked",
+        "reason": "insufficient_nondegenerate_terminal_evidence",
+        "weights": [],
+    }
+    assert result.report["terminal_value_status"]["promoted"] is False
+    assert result.report["model_selection"]["selected_epochs"]["terminal_value"] is None
 
 
 def test_production_cli_trains_and_verifies(

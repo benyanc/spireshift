@@ -49,10 +49,14 @@ from spireshift.splits import SplitManifest, SplitName
 LEGACY_PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v1"
 LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v1"
 LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v1"
-PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v2"
-PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v2"
-PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v2"
+STABLE_PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v2"
+STABLE_PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v2"
+STABLE_PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v2"
+PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v3"
+PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v3"
+PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v3"
 POLICY_TARGET_ID = "paired-preference-confidence-v1"
+TERMINAL_VALUE_TARGET_ID = "candidate-terminal-victory-v1"
 FLOOR_TARGET_ID = "candidate-maximum-floor-survival-v1"
 
 
@@ -190,7 +194,7 @@ class ProductionPrediction:
     tactical_death_risk: tuple[float, ...]
     maximum_floor_reach: dict[int, tuple[float, ...]]
     source_action_ids: tuple[str, ...]
-    terminal_value: None = None
+    terminal_value: tuple[float, ...] | None = None
 
 
 @dataclass(slots=True)
@@ -200,6 +204,8 @@ class ProductionBaseModel:
     tactical_horizon: int
     floor_thresholds: tuple[int, ...]
     policy_weights: dict[int, float] = field(default_factory=dict)
+    terminal_value_weights: dict[int, float] | None = None
+    terminal_value_bias: float = 0.0
     tactical_risk_weights: dict[int, float] = field(default_factory=dict)
     tactical_risk_bias: float = 0.0
     floor_weights: dict[int, dict[int, float]] = field(default_factory=dict)
@@ -231,7 +237,21 @@ class ProductionBaseModel:
             )
             for threshold in self.floor_thresholds
         }
-        return ProductionPrediction(policy, risks, floor_reach, vector.source_action_ids)
+        terminal_value = (
+            None
+            if self.terminal_value_weights is None
+            else tuple(
+                _sigmoid(self.terminal_value_bias + _dot(self.terminal_value_weights, item))
+                for item in features
+            )
+        )
+        return ProductionPrediction(
+            policy,
+            risks,
+            floor_reach,
+            vector.source_action_ids,
+            terminal_value,
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -243,6 +263,8 @@ class ProductionTrainingResult:
 @dataclass(frozen=True, slots=True)
 class _Outcome:
     maximum_floor: int
+    terminal: bool
+    terminal_victory: bool
     terminal_defeat: bool
     transitions: int
 
@@ -267,6 +289,8 @@ class _ProductionExample:
 class _OptimizerState:
     policy_accumulators: dict[int, float] = field(default_factory=dict)
     soft_accumulators: dict[int, float] = field(default_factory=dict)
+    terminal_accumulators: dict[int, float] = field(default_factory=dict)
+    terminal_bias_accumulator: float = 0.0
     risk_accumulators: dict[int, float] = field(default_factory=dict)
     risk_bias_accumulator: float = 0.0
     floor_accumulators: dict[int, dict[int, float]] = field(default_factory=dict)
@@ -277,22 +301,27 @@ class _OptimizerState:
 class _SelectedEpochs:
     policy: int
     soft_baseline: int
+    terminal_value: int | None
     tactical_risk: int
     floors: dict[int, int]
 
     @property
     def maximum(self) -> int:
-        return max(
+        values = [
             self.policy,
             self.soft_baseline,
             self.tactical_risk,
             *self.floors.values(),
-        )
+        ]
+        if self.terminal_value is not None:
+            values.append(self.terminal_value)
+        return max(values)
 
     def as_dict(self) -> dict[str, object]:
         return {
             "policy": self.policy,
             "soft_target_baseline": self.soft_baseline,
+            "terminal_value": self.terminal_value,
             "tactical_death_risk": self.tactical_risk,
             "maximum_floor_distribution": {
                 str(threshold): epoch for threshold, epoch in sorted(self.floors.items())
@@ -329,11 +358,6 @@ def train_production_base_model(
         assessment = _mapping(report.get("signal_assessment"), f"{label} signal assessment")
         if assessment.get("auxiliary_policy_signal_pass") is not True:
             raise ValueError(f"{label} curriculum did not pass its auxiliary signal gate")
-        summary = _mapping(report.get("summary"), f"{label} summary")
-        if _integer(summary.get("terminal_victories"), "terminal victories") != 0:
-            raise ValueError(
-                "This curriculum trainer only admits the predeclared all-zero terminal-value regime"
-            )
 
     floor_thresholds = _nondegenerate_floor_thresholds(train_examples)
     if not floor_thresholds:
@@ -341,14 +365,43 @@ def train_production_base_model(
     fit_examples, selection_examples, selection_runs = _split_training_examples(
         train_examples, config
     )
-    selection_model = _new_production_model(floor_thresholds, config)
+    terminal_evidence = {
+        "train": _terminal_evidence(train_examples),
+        "fit": _terminal_evidence(fit_examples),
+        "selection": _terminal_evidence(selection_examples),
+        "validation": _terminal_evidence(validation_examples),
+    }
+    for report, label in ((train_report, "train"), (validation_report, "validation")):
+        summary = _mapping(report.get("summary"), f"{label} summary")
+        reported_victories = _integer(summary.get("terminal_victories"), "terminal victories")
+        if reported_victories != terminal_evidence[label]["victories"]:
+            raise ValueError(f"{label} curriculum terminal-victory summary differs from its cases")
+    terminal_value_promoted = all(
+        evidence["victories"] > 0 and evidence["non_victories"] > 0
+        for evidence in terminal_evidence.values()
+    )
+    terminal_value_reason = (
+        "terminal_value_head_trained"
+        if terminal_value_promoted
+        else (
+            "all_zero_terminal_victory_evidence"
+            if terminal_evidence["train"]["victories"] == 0
+            and terminal_evidence["validation"]["victories"] == 0
+            else "insufficient_nondegenerate_terminal_evidence"
+        )
+    )
+    selection_model = _new_production_model(
+        floor_thresholds, config, terminal_value_promoted=terminal_value_promoted
+    )
     history, selected_epochs = _select_training_epochs(
         selection_model,
         fit_examples,
         selection_examples,
         config,
     )
-    model = _new_production_model(floor_thresholds, config)
+    model = _new_production_model(
+        floor_thresholds, config, terminal_value_promoted=terminal_value_promoted
+    )
     soft_baseline_weights, refit_metrics = _refit_selected_epochs(
         model,
         train_examples,
@@ -381,11 +434,20 @@ def train_production_base_model(
                 "target": POLICY_TARGET_ID,
                 "weights": _weights_as_list(model.policy_weights),
             },
-            "terminal_value": {
-                "status": "blocked",
-                "reason": "all_zero_terminal_victory_evidence",
-                "weights": [],
-            },
+            "terminal_value": (
+                {
+                    "status": "promoted",
+                    "target": TERMINAL_VALUE_TARGET_ID,
+                    "bias": _artifact_float(model.terminal_value_bias),
+                    "weights": _weights_as_list(model.terminal_value_weights or {}),
+                }
+                if terminal_value_promoted
+                else {
+                    "status": "blocked",
+                    "reason": terminal_value_reason,
+                    "weights": [],
+                }
+            ),
             "tactical_death_risk": {
                 "target": f"terminal_defeat_within_{config.tactical_horizon}_decisions",
                 "bias": _artifact_float(model.tactical_risk_bias),
@@ -436,12 +498,15 @@ def train_production_base_model(
         "refit_metrics": _quantize_artifact(refit_metrics),
         "held_out_metrics": _quantize_artifact(held_out),
         "terminal_value_status": {
-            "promoted": False,
-            "reason": "all_zero_terminal_victory_evidence",
-            "train_victories": train_report["summary"]["terminal_victories"],
-            "validation_victories": validation_report["summary"]["terminal_victories"],
+            "promoted": terminal_value_promoted,
+            "reason": terminal_value_reason,
+            "evidence": terminal_evidence,
         },
-        "claim_scope": "production_bootstrap_auxiliary_only",
+        "claim_scope": (
+            "production_terminal_value_validation"
+            if terminal_value_promoted
+            else "production_bootstrap_auxiliary_only"
+        ),
     }
     report = {**report_body, "report_id": manifest_identifier(report_body)}
     return ProductionTrainingResult(checkpoint, report)
@@ -473,14 +538,15 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     schema_version = checkpoint.get("schema_version")
     if schema_version not in {
         LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+        STABLE_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
         PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
     }:
         raise ValueError("Unsupported production model checkpoint schema")
-    expected_model_type = (
-        LEGACY_PRODUCTION_MODEL_TYPE
-        if schema_version == LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION
-        else PRODUCTION_MODEL_TYPE
-    )
+    expected_model_type = {
+        LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION: LEGACY_PRODUCTION_MODEL_TYPE,
+        STABLE_PRODUCTION_CHECKPOINT_SCHEMA_VERSION: STABLE_PRODUCTION_MODEL_TYPE,
+        PRODUCTION_CHECKPOINT_SCHEMA_VERSION: PRODUCTION_MODEL_TYPE,
+    }[cast(str, schema_version)]
     if checkpoint.get("model_type") != expected_model_type:
         raise ValueError("Unsupported production model type")
     if checkpoint.get("representation_encoder_id") != ENCODER_ID:
@@ -501,12 +567,45 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     if policy.get("target") != POLICY_TARGET_ID:
         raise ValueError("Unsupported production policy target")
     terminal = _mapping(heads.get("terminal_value"), "terminal-value head")
-    if terminal != {
-        "status": "blocked",
-        "reason": "all_zero_terminal_victory_evidence",
-        "weights": [],
+    terminal_weights: dict[int, float] | None = None
+    terminal_bias = 0.0
+    if schema_version in {
+        LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+        STABLE_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
     }:
-        raise ValueError("Production terminal-value head is not correctly blocked")
+        if terminal != {
+            "status": "blocked",
+            "reason": "all_zero_terminal_victory_evidence",
+            "weights": [],
+        }:
+            raise ValueError("Production terminal-value head is not correctly blocked")
+    elif terminal.get("status") == "blocked":
+        _exact_keys(terminal, {"status", "reason", "weights"}, "terminal-value head")
+        if (
+            terminal.get("reason")
+            not in {
+                "all_zero_terminal_victory_evidence",
+                "insufficient_nondegenerate_terminal_evidence",
+            }
+            or terminal.get("weights") != []
+        ):
+            raise ValueError("Production terminal-value head is not correctly blocked")
+    elif terminal.get("status") == "promoted":
+        _exact_keys(
+            terminal,
+            {"status", "target", "bias", "weights"},
+            "terminal-value head",
+        )
+        if terminal.get("target") != TERMINAL_VALUE_TARGET_ID:
+            raise ValueError("Unsupported production terminal-value target")
+        terminal_weights = _weights_from_list(
+            terminal.get("weights"),
+            config.vector_dimension + config.interaction_dimension,
+            "production terminal-value weights",
+        )
+        terminal_bias = _finite_number(terminal.get("bias"), "terminal-value bias")
+    else:
+        raise ValueError("Unsupported production terminal-value head status")
     risk = _mapping(heads.get("tactical_death_risk"), "risk head")
     _exact_keys(risk, {"target", "bias", "weights"}, "risk head")
     if risk.get("target") != f"terminal_defeat_within_{config.tactical_horizon}_decisions":
@@ -544,6 +643,8 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
             config.vector_dimension + config.interaction_dimension,
             "production policy weights",
         ),
+        terminal_value_weights=terminal_weights,
+        terminal_value_bias=terminal_bias,
         tactical_risk_weights=_weights_from_list(
             risk.get("weights"),
             config.vector_dimension + config.interaction_dimension,
@@ -601,18 +702,93 @@ def load_production_training_report(
         raise ValueError("Production training report identity mismatch")
     if schema_version not in {
         LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION,
+        STABLE_PRODUCTION_REPORT_SCHEMA_VERSION,
         PRODUCTION_REPORT_SCHEMA_VERSION,
     }:
         raise ValueError("Unsupported production training report schema")
-    expected_model_type = (
-        LEGACY_PRODUCTION_MODEL_TYPE
-        if schema_version == LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION
-        else PRODUCTION_MODEL_TYPE
-    )
+    expected_model_type = {
+        LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION: LEGACY_PRODUCTION_MODEL_TYPE,
+        STABLE_PRODUCTION_REPORT_SCHEMA_VERSION: STABLE_PRODUCTION_MODEL_TYPE,
+        PRODUCTION_REPORT_SCHEMA_VERSION: PRODUCTION_MODEL_TYPE,
+    }[cast(str, schema_version)]
     if report.get("model_type") != expected_model_type:
         raise ValueError("Unsupported production training report model type")
     if checkpoint is not None and report.get("model_id") != checkpoint.get("model_id"):
         raise ValueError("Production report references a different checkpoint")
+    if schema_version == PRODUCTION_REPORT_SCHEMA_VERSION:
+        terminal_status = _mapping(report.get("terminal_value_status"), "terminal-value status")
+        _exact_keys(
+            terminal_status,
+            {"promoted", "reason", "evidence"},
+            "terminal-value status",
+        )
+        promoted = terminal_status.get("promoted")
+        if not isinstance(promoted, bool):
+            raise ValueError("Production terminal-value promotion flag must be boolean")
+        evidence = _mapping(terminal_status.get("evidence"), "terminal-value evidence")
+        if set(evidence) != {"train", "fit", "selection", "validation"}:
+            raise ValueError("Production terminal-value evidence partitions differ")
+        for label, raw_counts in evidence.items():
+            counts = _mapping(raw_counts, f"terminal-value evidence {label}")
+            _exact_keys(
+                counts,
+                {"outcomes", "terminal_outcomes", "victories", "non_victories", "censored"},
+                f"terminal-value evidence {label}",
+            )
+            values = {name: _integer(value, name) for name, value in counts.items()}
+            if any(value < 0 for value in values.values()):
+                raise ValueError("Production terminal-value evidence cannot be negative")
+            if values["terminal_outcomes"] != values["victories"] + values["non_victories"]:
+                raise ValueError("Production terminal-value evidence terminal count differs")
+            if values["outcomes"] != values["terminal_outcomes"] + values["censored"]:
+                raise ValueError("Production terminal-value evidence outcome count differs")
+        evidence_counts = cast(dict[str, dict[str, int]], evidence)
+        evidence_supports_promotion = all(
+            counts["victories"] > 0 and counts["non_victories"] > 0
+            for counts in evidence_counts.values()
+        )
+        if promoted != evidence_supports_promotion:
+            raise ValueError("Production terminal-value promotion differs from its evidence")
+        expected_reason = (
+            "terminal_value_head_trained"
+            if promoted
+            else (
+                "all_zero_terminal_victory_evidence"
+                if evidence_counts["train"]["victories"] == 0
+                and evidence_counts["validation"]["victories"] == 0
+                else "insufficient_nondegenerate_terminal_evidence"
+            )
+        )
+        if terminal_status.get("reason") != expected_reason:
+            raise ValueError("Production terminal-value status reason differs")
+        expected_claim_scope = (
+            "production_terminal_value_validation"
+            if promoted
+            else "production_bootstrap_auxiliary_only"
+        )
+        if report.get("claim_scope") != expected_claim_scope:
+            raise ValueError("Production terminal-value claim scope differs")
+        model_selection = _mapping(report.get("model_selection"), "model selection")
+        selected_epochs = _mapping(model_selection.get("selected_epochs"), "selected epochs")
+        terminal_epoch = selected_epochs.get("terminal_value")
+        if promoted:
+            if _integer(terminal_epoch, "terminal-value selected epoch") <= 0:
+                raise ValueError("Terminal-value selected epoch must be positive")
+        elif terminal_epoch is not None:
+            raise ValueError("Blocked terminal-value head has a selected epoch")
+        held_out = _mapping(report.get("held_out_metrics"), "held-out metrics")
+        held_out_terminal = _mapping(
+            held_out.get("terminal_value"), "held-out terminal-value metrics"
+        )
+        if (held_out_terminal.get("status") == "promoted") != promoted:
+            raise ValueError("Held-out terminal-value status differs from report")
+        if checkpoint is not None:
+            checkpoint_terminal = _mapping(
+                _mapping(checkpoint.get("heads"), "production heads").get("terminal_value"),
+                "checkpoint terminal-value head",
+            )
+            if (checkpoint_terminal.get("status") == "promoted") != promoted:
+                raise ValueError("Production report terminal status differs from checkpoint")
     return report
 
 
@@ -717,11 +893,35 @@ def _outcome_from_mapping(value: object) -> _Outcome:
     output = _mapping(value, "curriculum outcome")
     maximum_floor = output.get("maximum_floor")
     floor = 0 if maximum_floor is None else _integer(maximum_floor, "maximum floor")
+    terminal = output.get("terminal") is True
+    victory = output.get("victory") is True
+    if victory and not terminal:
+        raise ValueError("Curriculum outcome cannot be victorious without being terminal")
     return _Outcome(
         maximum_floor=floor,
-        terminal_defeat=output.get("terminal") is True and output.get("victory") is False,
+        terminal=terminal,
+        terminal_victory=terminal and victory,
+        terminal_defeat=terminal and not victory,
         transitions=_integer(output.get("transitions"), "outcome transitions"),
     )
+
+
+def _terminal_evidence(examples: tuple[_ProductionExample, ...]) -> dict[str, int]:
+    outcomes = [
+        outcome
+        for example in examples
+        for candidate_outcomes in example.outcomes
+        for outcome in candidate_outcomes
+    ]
+    terminal = [outcome for outcome in outcomes if outcome.terminal]
+    victories = sum(outcome.terminal_victory for outcome in terminal)
+    return {
+        "outcomes": len(outcomes),
+        "terminal_outcomes": len(terminal),
+        "victories": victories,
+        "non_victories": len(terminal) - victories,
+        "censored": len(outcomes) - len(terminal),
+    }
 
 
 def _nondegenerate_floor_thresholds(
@@ -747,13 +947,17 @@ def _nondegenerate_floor_thresholds(
 
 
 def _new_production_model(
-    floor_thresholds: tuple[int, ...], config: ProductionTrainingConfig
+    floor_thresholds: tuple[int, ...],
+    config: ProductionTrainingConfig,
+    *,
+    terminal_value_promoted: bool,
 ) -> ProductionBaseModel:
     return ProductionBaseModel(
         vector_dimension=config.vector_dimension,
         interaction_dimension=config.interaction_dimension,
         tactical_horizon=config.tactical_horizon,
         floor_thresholds=floor_thresholds,
+        terminal_value_weights={} if terminal_value_promoted else None,
         floor_weights={threshold: {} for threshold in floor_thresholds},
         floor_biases={threshold: 0.0 for threshold in floor_thresholds},
     )
@@ -807,6 +1011,7 @@ def _select_training_epochs(
     rng = random.Random(config.shuffle_seed)
     best_policy = (math.inf, 1)
     best_soft = (math.inf, 1)
+    best_terminal = (math.inf, 1) if model.terminal_value_weights is not None else None
     best_risk = (math.inf, 1)
     best_floors = {threshold: (math.inf, 1) for threshold in model.floor_thresholds}
     history: list[dict[str, Any]] = []
@@ -825,11 +1030,17 @@ def _select_training_epochs(
         )
         policy_score = float(selection_scores["policy_pairwise_cross_entropy"])
         soft_score = float(selection_scores["soft_target_pairwise_cross_entropy"])
+        terminal_score = selection_scores["terminal_value_brier_score"]
         risk_score = float(selection_scores["tactical_death_risk_brier_score"])
         if policy_score < best_policy[0]:
             best_policy = (policy_score, epoch)
         if soft_score < best_soft[0]:
             best_soft = (soft_score, epoch)
+        if best_terminal is not None:
+            if not isinstance(terminal_score, (int, float)):
+                raise ValueError("Promoted terminal-value head has no selection score")
+            if float(terminal_score) < best_terminal[0]:
+                best_terminal = (float(terminal_score), epoch)
         if risk_score < best_risk[0]:
             best_risk = (risk_score, epoch)
         floor_scores = cast(dict[str, float], selection_scores["maximum_floor_brier_score"])
@@ -847,6 +1058,7 @@ def _select_training_epochs(
     return history, _SelectedEpochs(
         policy=best_policy[1],
         soft_baseline=best_soft[1],
+        terminal_value=None if best_terminal is None else best_terminal[1],
         tactical_risk=best_risk[1],
         floors={threshold: value[1] for threshold, value in best_floors.items()},
     )
@@ -871,6 +1083,9 @@ def _refit_selected_epochs(
             rng,
             active_policy=epoch <= selected.policy,
             active_soft=epoch <= selected.soft_baseline,
+            active_terminal=(
+                selected.terminal_value is not None and epoch <= selected.terminal_value
+            ),
             active_risk=epoch <= selected.tactical_risk,
             active_floors={
                 threshold for threshold, limit in selected.floors.items() if epoch <= limit
@@ -896,6 +1111,7 @@ def _train_production_epoch(
     *,
     active_policy: bool = True,
     active_soft: bool = True,
+    active_terminal: bool = True,
     active_risk: bool = True,
     active_floors: set[int] | None = None,
 ) -> None:
@@ -950,6 +1166,31 @@ def _train_production_epoch(
                     config,
                 )
         for features, outcomes in zip(example.candidate_features, example.outcomes, strict=True):
+            completed_outcomes = tuple(outcome for outcome in outcomes if outcome.terminal)
+            if active_terminal and model.terminal_value_weights is not None and completed_outcomes:
+                terminal_target = sum(
+                    outcome.terminal_victory for outcome in completed_outcomes
+                ) / len(completed_outcomes)
+                terminal_probability = _sigmoid(
+                    model.terminal_value_bias + _dot(model.terminal_value_weights, features)
+                )
+                terminal_error = terminal_probability - terminal_target
+                _update_production_weights(
+                    model.terminal_value_weights,
+                    optimizer.terminal_accumulators,
+                    features,
+                    terminal_error,
+                    config,
+                )
+                (
+                    model.terminal_value_bias,
+                    optimizer.terminal_bias_accumulator,
+                ) = _update_production_bias(
+                    model.terminal_value_bias,
+                    optimizer.terminal_bias_accumulator,
+                    terminal_error,
+                    config,
+                )
             if active_risk:
                 risk_target = sum(
                     outcome.terminal_defeat and outcome.transitions <= config.tactical_horizon
@@ -1009,6 +1250,8 @@ def _production_objective_scores(
     pair_weight = 0.0
     risk_squared_error = 0.0
     risk_samples = 0
+    terminal_squared_error = 0.0
+    terminal_samples = 0
     floor_squared_error = {threshold: 0.0 for threshold in model.floor_thresholds}
     floor_samples = {threshold: 0 for threshold in model.floor_thresholds}
     for example in examples:
@@ -1030,6 +1273,17 @@ def _production_objective_scores(
                 )
                 pair_weight += confidence
         for features, outcomes in zip(example.candidate_features, example.outcomes, strict=True):
+            if model.terminal_value_weights is not None:
+                terminal_probability = _sigmoid(
+                    model.terminal_value_bias + _dot(model.terminal_value_weights, features)
+                )
+                for outcome in outcomes:
+                    if not outcome.terminal:
+                        continue
+                    terminal_squared_error += (
+                        terminal_probability - float(outcome.terminal_victory)
+                    ) ** 2
+                    terminal_samples += 1
             risk_probability = _sigmoid(
                 model.tactical_risk_bias + _dot(model.tactical_risk_weights, features)
             )
@@ -1049,9 +1303,16 @@ def _production_objective_scores(
                     floor_samples[threshold] += 1
     if pair_weight == 0.0 or risk_samples == 0:
         raise ValueError("Model-selection subfold lacks required outcomes")
+    if model.terminal_value_weights is not None and terminal_samples == 0:
+        raise ValueError("Promoted terminal-value head has no completed outcomes")
     return {
         "policy_pairwise_cross_entropy": pair_loss / pair_weight,
         "soft_target_pairwise_cross_entropy": soft_pair_loss / pair_weight,
+        "terminal_value_brier_score": (
+            None
+            if model.terminal_value_weights is None
+            else terminal_squared_error / terminal_samples
+        ),
         "tactical_death_risk_brier_score": risk_squared_error / risk_samples,
         "maximum_floor_brier_score": {
             str(threshold): floor_squared_error[threshold] / floor_samples[threshold]
@@ -1089,6 +1350,7 @@ def _evaluate_production_model(
     baseline_regrets: list[float] = []
     soft_baseline_pair_correct = 0
     soft_baseline_pair_loss = 0.0
+    terminal_pairs: list[tuple[float, float]] = []
     risk_pairs: list[tuple[float, float]] = []
     floor_pairs: dict[int, list[tuple[float, float]]] = {
         threshold: [] for threshold in model.floor_thresholds
@@ -1152,6 +1414,13 @@ def _evaluate_production_model(
                         type_metrics["correct_decisive_pairs"]
                     ) + int(teacher_left == model_left)
         for candidate_index, outcomes in enumerate(example.outcomes):
+            if prediction.terminal_value is not None:
+                terminal_probability = prediction.terminal_value[candidate_index]
+                terminal_pairs.extend(
+                    (terminal_probability, float(outcome.terminal_victory))
+                    for outcome in outcomes
+                    if outcome.terminal
+                )
             risk_probability = prediction.tactical_death_risk[candidate_index]
             risk_pairs.extend(
                 (
@@ -1214,10 +1483,17 @@ def _evaluate_production_model(
             },
             "by_decision_type": typed_metrics,
         },
-        "terminal_value": {
-            "status": "blocked",
-            "reason": "all_zero_terminal_victory_evidence",
-        },
+        "terminal_value": (
+            {
+                "status": "promoted",
+                **_calibration_with_baseline(terminal_pairs, config.calibration_bins),
+            }
+            if model.terminal_value_weights is not None
+            else {
+                "status": "blocked",
+                "reason": "terminal_value_head_not_promoted",
+            }
+        ),
         "tactical_death_risk": _calibration_with_baseline(risk_pairs, config.calibration_bins),
         "maximum_floor_distribution": {
             str(threshold): _calibration_with_baseline(pairs, config.calibration_bins)
@@ -1261,6 +1537,9 @@ def _pairwise_evidence(
 
 def _quantize_production_model(model: ProductionBaseModel) -> None:
     model.policy_weights = _quantized_weights(model.policy_weights)
+    if model.terminal_value_weights is not None:
+        model.terminal_value_weights = _quantized_weights(model.terminal_value_weights)
+        model.terminal_value_bias = _artifact_float(model.terminal_value_bias)
     model.tactical_risk_weights = _quantized_weights(model.tactical_risk_weights)
     model.tactical_risk_bias = _artifact_float(model.tactical_risk_bias)
     model.floor_weights = {
