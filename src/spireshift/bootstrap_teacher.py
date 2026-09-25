@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -11,6 +12,7 @@ from collections.abc import Callable, Sequence
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from functools import lru_cache
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 from uuid import NAMESPACE_URL, UUID, uuid5
@@ -71,26 +73,31 @@ class BootstrapPolicyArtifacts:
         checkpoint_path: Path,
         training_report_path: Path,
     ) -> BootstrapPolicyArtifacts:
-        from spireshift.production_models import (  # Avoid a bootstrap/model import cycle.
-            load_production_model_checkpoint,
-            load_production_training_report,
-        )
-
         resolved_checkpoint = checkpoint_path.expanduser().resolve()
         resolved_report = training_report_path.expanduser().resolve()
-        checkpoint = load_production_model_checkpoint(resolved_checkpoint)
-        report = load_production_training_report(resolved_report, checkpoint=checkpoint)
-        model_id = _string(checkpoint.get("model_id"), "model_id")
+        checkpoint_stat = resolved_checkpoint.stat()
+        report_stat = resolved_report.stat()
+        (
+            model_id,
+            training_report_id,
+            split_manifest_id,
+            ruleset_manifest_id,
+        ) = _cached_bootstrap_policy_metadata(
+            str(resolved_checkpoint),
+            checkpoint_stat.st_mtime_ns,
+            checkpoint_stat.st_size,
+            str(resolved_report),
+            report_stat.st_mtime_ns,
+            report_stat.st_size,
+        )
         return cls(
             checkpoint_path=resolved_checkpoint,
             training_report_path=resolved_report,
             policy_id=f"production-checkpoint-policy-v1:{model_id}",
             model_id=model_id,
-            training_report_id=_string(report.get("report_id"), "report_id"),
-            split_manifest_id=_string(checkpoint.get("split_manifest_id"), "split_manifest_id"),
-            ruleset_manifest_id=_string(
-                checkpoint.get("ruleset_manifest_id"), "ruleset_manifest_id"
-            ),
+            training_report_id=training_report_id,
+            split_manifest_id=split_manifest_id,
+            ruleset_manifest_id=ruleset_manifest_id,
         )
 
     def provenance(self) -> dict[str, str]:
@@ -152,6 +159,32 @@ class BootstrapPolicyArtifacts:
         if artifacts.task_dict() != document:
             raise ValueError("Bootstrap continuation policy artifact identity mismatch")
         return artifacts
+
+
+@lru_cache(maxsize=16)
+def _cached_bootstrap_policy_metadata(
+    checkpoint_path: str,
+    checkpoint_mtime_ns: int,
+    checkpoint_size: int,
+    training_report_path: str,
+    training_report_mtime_ns: int,
+    training_report_size: int,
+) -> tuple[str, str, str, str]:
+    """Validate immutable policy artifacts once for each observed file version."""
+    del checkpoint_mtime_ns, checkpoint_size, training_report_mtime_ns, training_report_size
+    from spireshift.production_models import (  # Avoid a bootstrap/model import cycle.
+        load_production_model_checkpoint,
+        load_production_training_report,
+    )
+
+    checkpoint = load_production_model_checkpoint(Path(checkpoint_path))
+    report = load_production_training_report(Path(training_report_path), checkpoint=checkpoint)
+    return (
+        _string(checkpoint.get("model_id"), "model_id"),
+        _string(report.get("report_id"), "report_id"),
+        _string(checkpoint.get("split_manifest_id"), "split_manifest_id"),
+        _string(checkpoint.get("ruleset_manifest_id"), "ruleset_manifest_id"),
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -637,6 +670,7 @@ def discover_curriculum_state_set(
     backend: SearchBackendSpec,
     split_manifest: SplitManifest,
     policy_artifacts: BootstrapPolicyArtifacts | None = None,
+    run_offset: int = 0,
 ) -> dict[str, Any]:
     document = _mapping(specification, "curriculum discovery specification")
     _exact_keys(
@@ -691,9 +725,11 @@ def discover_curriculum_state_set(
     maximum_steps = _integer(document.get("maximum_steps_per_run"), "maximum_steps_per_run")
     if run_count <= 0 or maximum_steps <= 0:
         raise ValueError("Curriculum discovery limits must be positive")
+    if isinstance(run_offset, bool) or run_offset < 0:
+        raise ValueError("Curriculum discovery run_offset must be non-negative")
     partition_seeds = split_manifest.seeds(partition)
-    if run_count > len(partition_seeds):
-        raise ValueError("Curriculum discovery run_count exceeds the partition")
+    if run_offset + run_count > len(partition_seeds):
+        raise ValueError("Curriculum discovery run range exceeds the partition")
     raw_occurrences = _mapping(document.get("decision_occurrences"), "decision_occurrences")
     if not raw_occurrences:
         raise ValueError("Curriculum discovery requires decision occurrences")
@@ -714,7 +750,7 @@ def discover_curriculum_state_set(
     unreachable: list[dict[str, object]] = []
     terminal_runs = 0
     truncated_runs = 0
-    for run_seed in partition_seeds[:run_count]:
+    for run_seed in partition_seeds[run_offset : run_offset + run_count]:
         environment = load_search_environment(backend)
         try:
             observation = environment.reset(run_seed)
@@ -776,7 +812,7 @@ def discover_curriculum_state_set(
         finally:
             _close_environment(environment)
     requested = run_count * sum(len(indices) for indices in decision_occurrences.values())
-    discovery = {
+    discovery: dict[str, Any] = {
         "schema_version": (
             "bootstrap-curriculum-discovery-v2"
             if policy_artifacts is not None
@@ -794,6 +830,8 @@ def discover_curriculum_state_set(
         "terminal_runs": terminal_runs,
         "step_limited_runs": truncated_runs,
     }
+    if run_offset:
+        discovery["run_offset"] = run_offset
     body: dict[str, Any] = {
         "schema_version": (
             LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
@@ -1347,6 +1385,229 @@ def run_bootstrap_teacher_dataset(
     report = {**body, "dataset_id": manifest_identifier(body)}
     write_exclusive_json(report_path, report)
     return BootstrapDatasetResult(summary["failed_cases"] == 0, report_path, report)
+
+
+def combine_curriculum_datasets(
+    component_report_paths: Sequence[Path],
+    *,
+    output_directory: Path,
+    split_manifest: SplitManifest,
+) -> BootstrapDatasetResult:
+    """Materialize a verified, seed-disjoint learned curriculum as one dataset."""
+    if len(component_report_paths) < 2:
+        raise ValueError("Curriculum composition requires at least two component datasets")
+    output_directory = output_directory.expanduser().resolve()
+    if output_directory.exists():
+        raise FileExistsError(output_directory)
+
+    components: list[tuple[Path, dict[str, Any], CurriculumStateSet]] = []
+    for raw_path in component_report_paths:
+        report_path = raw_path.expanduser().resolve()
+        verification = verify_bootstrap_teacher_dataset(
+            report_path,
+            split_manifest=split_manifest,
+        )
+        if not verification.valid:
+            raise ValueError(
+                f"Component curriculum failed verification ({report_path}): "
+                + "; ".join(verification.errors)
+            )
+        report = _load_object(report_path)
+        if report.get("schema_version") != LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION:
+            raise ValueError("Curriculum composition requires learned-policy v3 datasets")
+        state_set = load_bootstrap_state_set_document(report.get("state_set"))
+        if not isinstance(state_set, CurriculumStateSet) or state_set.capture_policy is None:
+            raise ValueError("Curriculum composition requires learned-policy state sets")
+        if state_set.partition != SplitName.TRAIN.value:
+            raise ValueError("Curriculum composition is restricted to the train partition")
+        components.append((report_path, report, state_set))
+
+    _, first_report, first_state_set = components[0]
+    invariant_report_fields = (
+        "teacher_id",
+        "utility_id",
+        "seed_protocol_id",
+        "objective_id",
+        "objective",
+        "auxiliary_reward_allowed",
+        "backend",
+        "configuration",
+        "claim_scope",
+    )
+    for _, report, state_set in components[1:]:
+        if any(report.get(field) != first_report.get(field) for field in invariant_report_fields):
+            raise ValueError("Component curricula use incompatible dataset configuration")
+        if (
+            state_set.split_manifest_id != first_state_set.split_manifest_id
+            or state_set.ruleset_manifest_id != first_state_set.ruleset_manifest_id
+            or state_set.objective_id != first_state_set.objective_id
+            or state_set.capture_policy_id != first_state_set.capture_policy_id
+            or state_set.capture_policy != first_state_set.capture_policy
+        ):
+            raise ValueError("Component curricula use incompatible state-set provenance")
+
+    seen_state_ids: set[str] = set()
+    seen_run_seeds: set[int] = set()
+    combined_cases: list[CurriculumStateCase] = []
+    for _, _, state_set in components:
+        state_ids = {case.state_id for case in state_set.cases}
+        run_seeds = {case.run_seed for case in state_set.cases}
+        if seen_state_ids & state_ids:
+            raise ValueError("Component curricula contain overlapping state IDs")
+        if seen_run_seeds & run_seeds:
+            raise ValueError("Component curricula contain overlapping complete-run seeds")
+        seen_state_ids.update(state_ids)
+        seen_run_seeds.update(run_seeds)
+        combined_cases.extend(state_set.cases)
+
+    signal_specs = [state_set.signal_spec for _, _, state_set in components]
+    combined_signal_spec = CurriculumSignalSpec(
+        minimum_states=max(spec.minimum_states for spec in signal_specs),
+        minimum_source_floors=max(spec.minimum_source_floors for spec in signal_specs),
+        minimum_decision_types=max(spec.minimum_decision_types for spec in signal_specs),
+        minimum_effective_labeled_states=max(
+            spec.minimum_effective_labeled_states for spec in signal_specs
+        ),
+        minimum_half_split_agreement=max(
+            spec.minimum_half_split_agreement for spec in signal_specs
+        ),
+        minimum_occupied_maximum_floor_bins=max(
+            spec.minimum_occupied_maximum_floor_bins for spec in signal_specs
+        ),
+    )
+    combined_occurrences: dict[str, set[int]] = {}
+    unreachable: list[Any] = []
+    requested_coordinates = 0
+    terminal_runs = 0
+    step_limited_runs = 0
+    maximum_steps: set[int] = set()
+    for _, _, state_set in components:
+        discovery = state_set.discovery
+        for decision_type, indices in _mapping(
+            discovery.get("decision_occurrences"), "decision occurrences"
+        ).items():
+            combined_occurrences.setdefault(decision_type, set()).update(
+                _integer(index, "decision occurrence")
+                for index in _list(indices, "decision occurrences")
+            )
+        unreachable.extend(
+            _list(discovery.get("unreachable_coordinates"), "unreachable coordinates")
+        )
+        requested_coordinates += _integer(
+            discovery.get("requested_coordinates"), "requested coordinates"
+        )
+        terminal_runs += _integer(discovery.get("terminal_runs"), "terminal runs")
+        step_limited_runs += _integer(discovery.get("step_limited_runs"), "step-limited runs")
+        maximum_steps.add(_integer(discovery.get("maximum_steps_per_run"), "maximum steps per run"))
+    if len(maximum_steps) != 1:
+        raise ValueError("Component curricula use different discovery step limits")
+    discovery = {
+        "schema_version": "bootstrap-curriculum-discovery-v2",
+        "requested_runs": len(seen_run_seeds),
+        "maximum_steps_per_run": maximum_steps.pop(),
+        "decision_occurrences": {
+            key: sorted(values) for key, values in sorted(combined_occurrences.items())
+        },
+        "requested_coordinates": requested_coordinates,
+        "captured_coordinates": len(combined_cases),
+        "unreachable_coordinates": unreachable,
+        "terminal_runs": terminal_runs,
+        "step_limited_runs": step_limited_runs,
+        "component_state_set_ids": [state_set.state_set_id for _, _, state_set in components],
+    }
+    state_body: dict[str, Any] = {
+        "schema_version": LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        "split_manifest_id": first_state_set.split_manifest_id,
+        "ruleset_manifest_id": first_state_set.ruleset_manifest_id,
+        "objective_id": first_state_set.objective_id,
+        "capture_policy_id": first_state_set.capture_policy_id,
+        "partition": first_state_set.partition,
+        "selection_policy": "verified-seed-disjoint-curriculum-composition-v1",
+        "discovery": discovery,
+        "signal_spec": combined_signal_spec.as_dict(),
+        "cases": [case.as_dict() for case in combined_cases],
+        "capture_policy": first_state_set.capture_policy,
+    }
+    state_document = {**state_body, "state_set_id": manifest_identifier(state_body)}
+    combined_state_set = load_bootstrap_state_set_document(state_document)
+    if not isinstance(combined_state_set, CurriculumStateSet):
+        raise AssertionError("Composed curriculum did not produce a curriculum state set")
+    _validate_bootstrap_split(combined_state_set, split_manifest)
+
+    output_directory.parent.mkdir(parents=True, exist_ok=True)
+    staging = output_directory.with_name(
+        f".{output_directory.name}.compose-{uuid5(NAMESPACE_URL, str(time.time_ns()))}"
+    )
+    staging.mkdir(parents=False, exist_ok=False)
+    case_documents: list[dict[str, Any]] = []
+    try:
+        for report_path, report, state_set in components:
+            references = _list(report.get("cases"), "dataset cases")
+            if len(references) != len(state_set.cases):
+                raise ValueError("Component case references differ from state set")
+            for case, raw_reference in zip(state_set.cases, references, strict=True):
+                reference = _mapping(raw_reference, "dataset case")
+                expected_relative = Path("cases") / case.state_id / "case.json"
+                if Path(_string(reference.get("path"), "case path")) != expected_relative:
+                    raise ValueError("Component case path is not in its canonical location")
+                source_case_root = report_path.parent / expected_relative.parent
+                destination_case_root = staging / expected_relative.parent
+                shutil.copytree(
+                    source_case_root,
+                    destination_case_root,
+                    copy_function=_hardlink_or_copy,
+                )
+                case_documents.append(_load_object(destination_case_root / "case.json"))
+
+        summary = _curriculum_dataset_summary(case_documents, combined_state_set)
+        signal_assessment = _assess_curriculum_signal(summary, combined_signal_spec)
+        body: dict[str, Any] = {
+            "schema_version": LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+            "teacher_id": first_report["teacher_id"],
+            "utility_id": first_report["utility_id"],
+            "seed_protocol_id": first_report["seed_protocol_id"],
+            "objective_id": first_report["objective_id"],
+            "objective": first_report["objective"],
+            "auxiliary_reward_allowed": False,
+            "backend": first_report["backend"],
+            "state_set": combined_state_set.as_dict(),
+            "configuration": first_report["configuration"],
+            "started_at": min(
+                _string(report.get("started_at"), "started_at") for _, report, _ in components
+            ),
+            "completed_at": max(
+                _string(report.get("completed_at"), "completed_at") for _, report, _ in components
+            ),
+            "cases": [
+                {
+                    "state_id": case["state_id"],
+                    "path": str(Path("cases") / case["state_id"] / "case.json"),
+                    "sha256": sha256_file(staging / "cases" / case["state_id"] / "case.json"),
+                    "case_id": case["case_id"],
+                }
+                for case in case_documents
+            ],
+            "summary": summary,
+            "claim_scope": "train_curriculum_only",
+            "signal_assessment": signal_assessment,
+        }
+        report = {**body, "dataset_id": manifest_identifier(body)}
+        report_path = staging / "bootstrap-teacher-dataset.json"
+        write_exclusive_json(report_path, report)
+        staging.replace(output_directory)
+    except BaseException:
+        shutil.rmtree(staging, ignore_errors=True)
+        raise
+    final_report_path = output_directory / "bootstrap-teacher-dataset.json"
+    return BootstrapDatasetResult(summary["failed_cases"] == 0, final_report_path, report)
+
+
+def _hardlink_or_copy(source: str, destination: str) -> str:
+    try:
+        os.link(source, destination)
+        return destination
+    except OSError:
+        return shutil.copy2(source, destination)
 
 
 def verify_bootstrap_teacher_dataset(

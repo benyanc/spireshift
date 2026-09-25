@@ -32,6 +32,7 @@ from spireshift.backend_admission import (
 from spireshift.bootstrap_teacher import (
     BootstrapConfig,
     BootstrapPolicyArtifacts,
+    combine_curriculum_datasets,
     discover_curriculum_state_set,
     freeze_bootstrap_state_set,
     load_bootstrap_state_set,
@@ -569,6 +570,7 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_discover.add_argument("--manifest", type=Path)
     bootstrap_discover.add_argument("--policy-checkpoint", type=Path)
     bootstrap_discover.add_argument("--policy-report", type=Path)
+    bootstrap_discover.add_argument("--run-offset", type=int, default=0)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
     )
@@ -597,6 +599,13 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_verify.add_argument("--split-manifest", type=Path, required=True)
     bootstrap_verify.add_argument("--replay-cases", type=int, default=0)
     bootstrap_verify.add_argument("--output", type=Path)
+    bootstrap_combine = bootstrap_commands.add_parser(
+        "combine-curricula",
+        help="Combine verified, seed-disjoint learned train curricula",
+    )
+    bootstrap_combine.add_argument("output_dir", type=Path)
+    bootstrap_combine.add_argument("components", type=Path, nargs="+")
+    bootstrap_combine.add_argument("--split-manifest", type=Path, required=True)
 
     model = subparsers.add_parser("model", help="Train or verify cheap multi-head models")
     model_commands = model.add_subparsers(dest="model_command", required=True)
@@ -1489,6 +1498,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     backend=discovery_backend,
                     split_manifest=split_manifest,
                     policy_artifacts=discovery_policy,
+                    run_offset=args.run_offset,
                 )
                 write_bootstrap_state_set(document, args.output)
                 _emit_json(document, None)
@@ -1501,6 +1511,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(bootstrap_verification.as_dict(), args.output)
                 return 0 if bootstrap_verification.valid else 1
+            if args.bootstrap_command == "combine-curricula":
+                combined = combine_curriculum_datasets(
+                    args.components,
+                    output_directory=args.output_dir,
+                    split_manifest=split_manifest,
+                )
+                _emit_json(combined.report, None)
+                return 0 if combined.successful else 1
             if args.backend == "evangambit":
                 if args.upstream_root is None or args.manifest is None:
                     raise ValueError("EvanGambit bootstrap requires --upstream-root and --manifest")
