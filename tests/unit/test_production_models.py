@@ -13,6 +13,7 @@ from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.cli import main
 from spireshift.core.manifest import manifest_identifier
+from spireshift.core.types import LegalAction, Transition
 from spireshift.production_evaluation import (
     load_production_policy_evaluation,
     run_production_policy_evaluation,
@@ -39,6 +40,25 @@ VALIDATION_STATE_SET_PATH = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-curriculum-v2.json"
 )
 MOCK_SPLIT_PATH = Path("manifests/splits/mock-v1-seeds-000000-000999-v1.json")
+
+
+class _LoopingMockEnvironment(MockSpireEnvironment):
+    def legal_actions(self) -> tuple[LegalAction, ...]:
+        return (LegalAction("wait", "wait", {}),)
+
+    def step(self, action: LegalAction) -> Transition:
+        observation = self._observation()
+        legal_action = self.legal_actions()[0]
+        if action != legal_action:
+            raise ValueError(f"Illegal action: {action.action_id}")
+        return Transition(
+            observation=observation,
+            action=legal_action,
+            next_observation=observation,
+            reward=0.0,
+            terminal=False,
+            victory=False,
+        )
 
 
 def _write_synthetic_curriculum(
@@ -479,6 +499,8 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
     assert evaluation.successful is True
     assert evaluation.report["summary"]["learned"]["benchmark_denominator"] == 2
     assert evaluation.report["summary"]["baseline"]["benchmark_denominator"] == 2
+    assert evaluation.report["summary"]["learned"]["liveness_pass"] is True
+    assert evaluation.report["summary"]["baseline"]["liveness_pass"] is True
     assert evaluation.report["summary"]["paired"]["completed_pairs"] == 2
     assert len(evaluation.report["cases"]) == 4
     preserved_path = output / evaluation.report["cases"][0]["path"]
@@ -503,8 +525,8 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
     assert evaluation.successful is True
     assert preserved_path.read_text() == preserved_case
     assert missing_path.is_file()
-    report_schema = json.loads(Path("schemas/production-policy-evaluation-v1.json").read_text())
-    case_schema = json.loads(Path("schemas/production-policy-evaluation-case-v1.json").read_text())
+    report_schema = json.loads(Path("schemas/production-policy-evaluation-v2.json").read_text())
+    case_schema = json.loads(Path("schemas/production-policy-evaluation-case-v2.json").read_text())
     Draft202012Validator(report_schema).validate(evaluation.report)
     for reference in evaluation.report["cases"]:
         case = json.loads((output / reference["path"]).read_text())
@@ -517,6 +539,41 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
             split_manifest=split,
         )
         == evaluation.report
+    )
+
+    legacy_root = tmp_path / "legacy-evaluation"
+    (legacy_root / "cases").mkdir(parents=True)
+    legacy_references = []
+    for reference in evaluation.report["cases"]:
+        case = json.loads((output / reference["path"]).read_text())
+        case.pop("case_id")
+        case.pop("termination_reason")
+        case.pop("liveness")
+        case["schema_version"] = "production-policy-evaluation-case-v1"
+        case["case_id"] = manifest_identifier(case)
+        (legacy_root / reference["path"]).write_text(json.dumps(case), encoding="utf-8")
+        legacy_references.append({**reference, "case_id": case["case_id"]})
+    legacy_report = copy.deepcopy(evaluation.report)
+    legacy_report.pop("report_id")
+    legacy_report["schema_version"] = "production-policy-evaluation-v1"
+    legacy_report["configuration"].pop("cycle_repetition_threshold")
+    legacy_report["configuration"].pop("liveness_tail_length")
+    for policy_kind in ("learned", "baseline"):
+        legacy_report["summary"][policy_kind].pop("policy_cycle_runs")
+        legacy_report["summary"][policy_kind].pop("decision_limit_runs")
+        legacy_report["summary"][policy_kind].pop("liveness_pass")
+    legacy_report["cases"] = legacy_references
+    legacy_report["report_id"] = manifest_identifier(legacy_report)
+    legacy_report_path = legacy_root / "production-policy-evaluation.json"
+    legacy_report_path.write_text(json.dumps(legacy_report), encoding="utf-8")
+    assert (
+        load_production_policy_evaluation(
+            legacy_report_path,
+            model_id=cast(str, checkpoint["model_id"]),
+            training_report_id=cast(str, report["report_id"]),
+            split_manifest=split,
+        )
+        == legacy_report
     )
 
     checkpoint_path = tmp_path / "evaluation-checkpoint.json"
@@ -544,7 +601,7 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
     assert json.loads(verification_path.read_text())["valid"] is True
 
     validation_seed = split.seeds(SplitName.VALIDATION)[0]
-    with pytest.raises(ValueError, match="only frozen test seeds"):
+    with pytest.raises(ValueError, match="only test seeds"):
         run_production_policy_evaluation(
             environment_factory=MockSpireEnvironment,
             ruleset=environment.ruleset,
@@ -556,3 +613,81 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
             maximum_decisions_per_run=8,
             output_directory=tmp_path / "invalid-evaluation",
         )
+
+
+def test_production_policy_evaluation_detects_public_state_action_cycles(
+    synthetic_curricula: tuple[Path, Path], tmp_path: Path
+) -> None:
+    train, validation = synthetic_curricula
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+    environment = _LoopingMockEnvironment()
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    checkpoint = copy.deepcopy(result.checkpoint)
+    checkpoint["ruleset_manifest_id"] = environment.ruleset.manifest_id
+    checkpoint["split_manifest_id"] = split.manifest_id
+    checkpoint_body = {key: value for key, value in checkpoint.items() if key != "model_id"}
+    checkpoint["model_id"] = manifest_identifier(checkpoint_body)
+    report = copy.deepcopy(result.report)
+    report["model_id"] = checkpoint["model_id"]
+    report["held_out_metrics"]["policy"]["auxiliary_policy_gate"]["passed"] = True
+    report_body = {key: value for key, value in report.items() if key != "report_id"}
+    report["report_id"] = manifest_identifier(report_body)
+    policy = ProductionCheckpointPolicy(
+        checkpoint=checkpoint,
+        training_report=report,
+        ruleset=environment.ruleset,
+    )
+    seed = split.seeds(SplitName.VALIDATION)[0]
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    evaluation = run_production_policy_evaluation(
+        environment_factory=_LoopingMockEnvironment,
+        ruleset=environment.ruleset,
+        learned_policy=policy,
+        split_manifest=split,
+        training_report_id=cast(str, report["report_id"]),
+        seeds=(seed,),
+        workers=2,
+        maximum_decisions_per_run=100,
+        output_directory=tmp_path / "cycle-evaluation",
+        partition=SplitName.VALIDATION,
+        cycle_repetition_threshold=3,
+        liveness_tail_length=2,
+        now=lambda: next(timestamps),
+    )
+
+    assert evaluation.successful is True
+    assert evaluation.report["partition"] == "validation"
+    assert evaluation.report["claim_scope"] == "paired_validation_policy_liveness_evaluation"
+    for policy_kind in ("learned", "baseline"):
+        summary = evaluation.report["summary"][policy_kind]
+        assert summary["policy_cycle_runs"] == 1
+        assert summary["decision_limit_runs"] == 0
+        assert summary["liveness_pass"] is False
+    for reference in evaluation.report["cases"]:
+        case = json.loads((evaluation.report_path.parent / reference["path"]).read_text())
+        assert case["decisions"] == 3
+        assert case["truncated"] is True
+        assert case["termination_reason"] == "policy_cycle"
+        liveness = case["liveness"]
+        assert liveness["cycle_detected"] is True
+        assert liveness["classification"] == "unchanged_public_state_action"
+        assert liveness["first_occurrence_decision"] == 0
+        assert liveness["first_repeat_decision"] == 1
+        assert liveness["detection_decision"] == 2
+        assert liveness["repeated_transition_occurrences"] == 3
+        assert liveness["unchanged_transition_occurrences"] == 3
+        assert [entry["decision_index"] for entry in liveness["tail"]] == [1, 2]
+    assert (
+        load_production_policy_evaluation(
+            evaluation.report_path,
+            model_id=cast(str, checkpoint["model_id"]),
+            training_report_id=cast(str, report["report_id"]),
+            split_manifest=split,
+        )
+        == evaluation.report
+    )

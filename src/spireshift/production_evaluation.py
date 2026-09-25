@@ -18,8 +18,13 @@ from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.models import write_model_artifact
 from spireshift.splits import SplitManifest, SplitName
 
-PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v1"
-PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v1"
+LEGACY_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v1"
+LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v1"
+PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v2"
+PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v2"
+POLICY_LIVENESS_SCHEMA_VERSION = "policy-liveness-diagnostic-v1"
+DEFAULT_CYCLE_REPETITION_THRESHOLD = 8
+DEFAULT_LIVENESS_TAIL_LENGTH = 16
 LEARNED_POLICY_KIND = "production_checkpoint"
 BASELINE_POLICY_KIND = "progress_bootstrap_baseline"
 
@@ -42,14 +47,19 @@ def run_production_policy_evaluation(
     workers: int,
     maximum_decisions_per_run: int,
     output_directory: Path,
+    partition: SplitName = SplitName.TEST,
+    cycle_repetition_threshold: int = DEFAULT_CYCLE_REPETITION_THRESHOLD,
+    liveness_tail_length: int = DEFAULT_LIVENESS_TAIL_LENGTH,
     resume: bool = False,
     now: Callable[[], str] | None = None,
 ) -> ProductionPolicyEvaluationResult:
     canonical_seeds = tuple(seeds)
     if not canonical_seeds or len(canonical_seeds) != len(set(canonical_seeds)):
         raise ValueError("Production evaluation seeds must be non-empty and unique")
-    if any(split_manifest.split_for_seed(seed) is not SplitName.TEST for seed in canonical_seeds):
-        raise ValueError("Production evaluation may use only frozen test seeds")
+    if partition not in (SplitName.VALIDATION, SplitName.TEST):
+        raise ValueError("Production evaluation partition must be validation or test")
+    if any(split_manifest.split_for_seed(seed) is not partition for seed in canonical_seeds):
+        raise ValueError(f"Production evaluation may use only {partition.value} seeds")
     if split_manifest.ruleset_manifest_id != ruleset.manifest_id:
         raise ValueError("Production evaluation split and environment rulesets differ")
     if split_manifest.objective_id != "terminal-victory-v1":
@@ -62,6 +72,10 @@ def run_production_policy_evaluation(
         raise ValueError("Production evaluation workers must be positive")
     if maximum_decisions_per_run <= 0:
         raise ValueError("maximum_decisions_per_run must be positive")
+    if cycle_repetition_threshold < 2:
+        raise ValueError("cycle_repetition_threshold must be at least two")
+    if liveness_tail_length <= 0:
+        raise ValueError("liveness_tail_length must be positive")
     if output_directory.exists() and not resume:
         raise FileExistsError(f"Production evaluation output already exists: {output_directory}")
     output_directory.mkdir(parents=True, exist_ok=True)
@@ -81,16 +95,22 @@ def run_production_policy_evaluation(
         for policy_kind, policy, model_id in policies:
             case_path = _case_path(output_directory, seed, policy_kind)
             if case_path.exists():
-                cases.append(
-                    _load_case(
-                        case_path,
-                        seed=seed,
-                        policy_kind=policy_kind,
-                        policy_id=policy.policy_id,
-                        model_id=model_id,
-                        ruleset_manifest_id=ruleset.manifest_id,
-                    )
+                resumed_case = _load_case(
+                    case_path,
+                    seed=seed,
+                    policy_kind=policy_kind,
+                    policy_id=policy.policy_id,
+                    model_id=model_id,
+                    ruleset_manifest_id=ruleset.manifest_id,
+                    partition=partition,
+                    schema_version=PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
                 )
+                if resumed_case["status"] == "completed" and (
+                    resumed_case["liveness"]["repetition_threshold"] != cycle_repetition_threshold
+                    or resumed_case["liveness"]["tail_limit"] != liveness_tail_length
+                ):
+                    raise ValueError("Production evaluation resumed liveness config differs")
+                cases.append(resumed_case)
             else:
                 pending.append((seed, policy_kind, policy, model_id, case_path))
 
@@ -107,6 +127,9 @@ def run_production_policy_evaluation(
                 policy=policy,
                 model_id=model_id,
                 maximum_decisions=maximum_decisions_per_run,
+                partition=partition,
+                cycle_repetition_threshold=cycle_repetition_threshold,
+                liveness_tail_length=liveness_tail_length,
             )
             future_to_task[future] = task
         for future in as_completed(future_to_task):
@@ -131,7 +154,7 @@ def run_production_policy_evaluation(
         "model_id": learned_policy.model_id,
         "training_report_id": training_report_id,
         "split_manifest_id": split_manifest.manifest_id,
-        "partition": SplitName.TEST.value,
+        "partition": partition.value,
         "ruleset_manifest_id": ruleset.manifest_id,
         "patch_id": ruleset.patch_id,
         "objective_id": "terminal-victory-v1",
@@ -139,6 +162,8 @@ def run_production_policy_evaluation(
             "seeds": list(canonical_seeds),
             "workers": workers,
             "maximum_decisions_per_run": maximum_decisions_per_run,
+            "cycle_repetition_threshold": cycle_repetition_threshold,
+            "liveness_tail_length": liveness_tail_length,
             "paired_policies": [policy.policy_id for _, policy, _ in policies],
         },
         "cases": [
@@ -155,11 +180,11 @@ def run_production_policy_evaluation(
             for case in ordered_cases
         ],
         "summary": {
-            "learned": _policy_summary(learned_cases),
-            "baseline": _policy_summary(baseline_cases),
+            "learned": _policy_summary(learned_cases, include_liveness=True),
+            "baseline": _policy_summary(baseline_cases, include_liveness=True),
             "paired": _paired_summary(learned_cases, baseline_cases),
         },
-        "claim_scope": "paired_frozen_test_policy_only_evaluation",
+        "claim_scope": _claim_scope(partition),
     }
     report = {**body, "report_id": manifest_identifier(body)}
     write_model_artifact(report, report_path, label="production policy evaluation")
@@ -179,15 +204,37 @@ def load_production_policy_evaluation(
     body = {key: item for key, item in report.items() if key != "report_id"}
     if report_id != manifest_identifier(body):
         raise ValueError("Production policy evaluation identity mismatch")
+    schema_version = report.get("schema_version")
+    if schema_version == LEGACY_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION:
+        partition = SplitName.TEST
+        case_schema_version = LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+        include_liveness = False
+    elif schema_version == PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION:
+        raw_partition = report.get("partition")
+        if not isinstance(raw_partition, str):
+            raise ValueError("Production policy evaluation partition differs")
+        try:
+            partition = SplitName(raw_partition)
+        except (TypeError, ValueError) as error:
+            raise ValueError("Production policy evaluation partition differs") from error
+        if partition not in (SplitName.VALIDATION, SplitName.TEST):
+            raise ValueError("Production policy evaluation partition differs")
+        case_schema_version = PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+        include_liveness = True
+    else:
+        raise ValueError("Production policy evaluation schema differs")
     expected_fields = {
-        "schema_version": PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
         "model_id": model_id,
         "training_report_id": training_report_id,
         "split_manifest_id": split_manifest.manifest_id,
-        "partition": SplitName.TEST.value,
+        "partition": partition.value,
         "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
         "objective_id": split_manifest.objective_id,
-        "claim_scope": "paired_frozen_test_policy_only_evaluation",
+        "claim_scope": (
+            "paired_frozen_test_policy_only_evaluation"
+            if not include_liveness
+            else _claim_scope(partition)
+        ),
     }
     if any(report.get(key) != value for key, value in expected_fields.items()):
         raise ValueError("Production policy evaluation provenance differs")
@@ -200,12 +247,31 @@ def load_production_policy_evaluation(
     seeds = tuple(_integer(seed, "configuration.seeds[]") for seed in raw_seeds)
     if not seeds or len(seeds) != len(set(seeds)):
         raise ValueError("Production policy evaluation seeds are invalid")
-    if any(split_manifest.split_for_seed(seed) is not SplitName.TEST for seed in seeds):
-        raise ValueError("Production policy evaluation contains a non-test seed")
+    if any(split_manifest.split_for_seed(seed) is not partition for seed in seeds):
+        raise ValueError(f"Production policy evaluation contains a non-{partition.value} seed")
     learned_policy_id = f"production-checkpoint-policy-v1:{model_id}"
     baseline_policy_id = ProgressBootstrapPolicy.policy_id
     if configuration.get("paired_policies") != [learned_policy_id, baseline_policy_id]:
         raise ValueError("Production policy evaluation policies differ")
+    maximum_decisions = _integer(
+        configuration.get("maximum_decisions_per_run"),
+        "configuration.maximum_decisions_per_run",
+    )
+    if maximum_decisions <= 0:
+        raise ValueError("Production policy evaluation decision limit must be positive")
+    cycle_repetition_threshold: int | None = None
+    liveness_tail_length: int | None = None
+    if include_liveness:
+        cycle_repetition_threshold = _integer(
+            configuration.get("cycle_repetition_threshold"),
+            "configuration.cycle_repetition_threshold",
+        )
+        liveness_tail_length = _integer(
+            configuration.get("liveness_tail_length"),
+            "configuration.liveness_tail_length",
+        )
+        if cycle_repetition_threshold < 2 or liveness_tail_length <= 0:
+            raise ValueError("Production policy evaluation liveness configuration differs")
     raw_references = report.get("cases")
     if not isinstance(raw_references, list):
         raise ValueError("Production policy evaluation cases are missing")
@@ -238,15 +304,20 @@ def load_production_policy_evaluation(
             policy_id=policy_id,
             model_id=case_model_id,
             ruleset_manifest_id=split_manifest.ruleset_manifest_id,
+            partition=partition,
+            schema_version=case_schema_version,
         )
         if raw_reference.get("case_id") != case["case_id"]:
             raise ValueError("Production policy evaluation case reference identity mismatch")
-        maximum_decisions = _integer(
-            configuration.get("maximum_decisions_per_run"),
-            "configuration.maximum_decisions_per_run",
-        )
         if case["status"] == "completed" and int(case["decisions"]) > maximum_decisions:
             raise ValueError("Production policy evaluation case exceeded its decision limit")
+        if include_liveness and case["status"] == "completed":
+            liveness = case["liveness"]
+            if (
+                liveness["repetition_threshold"] != cycle_repetition_threshold
+                or liveness["tail_limit"] != liveness_tail_length
+            ):
+                raise ValueError("Production policy evaluation case liveness config differs")
         cases.append(case)
     expected_coordinates = {
         (seed, policy_kind)
@@ -258,8 +329,8 @@ def load_production_policy_evaluation(
     learned_cases = [case for case in cases if case["policy_kind"] == LEARNED_POLICY_KIND]
     baseline_cases = [case for case in cases if case["policy_kind"] == BASELINE_POLICY_KIND]
     expected_summary = {
-        "learned": _policy_summary(learned_cases),
-        "baseline": _policy_summary(baseline_cases),
+        "learned": _policy_summary(learned_cases, include_liveness=include_liveness),
+        "baseline": _policy_summary(baseline_cases, include_liveness=include_liveness),
         "paired": _paired_summary(learned_cases, baseline_cases),
     }
     if report.get("summary") != expected_summary:
@@ -276,6 +347,9 @@ def _evaluate_case(
     policy: Policy,
     model_id: str | None,
     maximum_decisions: int,
+    partition: SplitName,
+    cycle_repetition_threshold: int,
+    liveness_tail_length: int,
 ) -> dict[str, Any]:
     environment: EnvironmentAdapter | None = None
     try:
@@ -288,6 +362,15 @@ def _evaluate_case(
         decisions = 0
         decision_seconds: list[float] = []
         action_ids: list[str] = []
+        trace_tail: list[dict[str, Any]] = []
+        state_action_counts: dict[tuple[str, str], int] = {}
+        transition_occurrences: dict[tuple[str, str, str], list[int]] = {}
+        unchanged_transition_counts: dict[tuple[str, str, str], int] = {}
+        maximum_state_action_repetitions = 0
+        maximum_public_transition_repetitions = 0
+        detected_transition: tuple[str, str, str] | None = None
+        detected_occurrences: list[int] = []
+        detected_decision_type: str | None = None
         terminal = bool(observation.public_state.get("terminal"))
         victory = bool(observation.public_state.get("victory")) if terminal else False
         while not terminal and decisions < maximum_decisions:
@@ -306,8 +389,38 @@ def _evaluate_case(
                 raise RuntimeError("Evaluation policy selected an illegal action")
             decision_seconds.append(elapsed)
             action_ids.append(action.action_id)
+            source_state_hash = observation.state_hash
+            decision_type = observation.decision_type.value
             transition = environment.step(action)
             observation = transition.next_observation
+            next_state_hash = observation.state_hash
+            trace_tail.append(
+                {
+                    "decision_index": decisions,
+                    "state_hash": source_state_hash,
+                    "decision_type": decision_type,
+                    "action_id": action.action_id,
+                    "next_state_hash": next_state_hash,
+                    "public_state_changed": source_state_hash != next_state_hash,
+                }
+            )
+            if len(trace_tail) > liveness_tail_length:
+                del trace_tail[0]
+            state_action = (source_state_hash, action.action_id)
+            state_action_counts[state_action] = state_action_counts.get(state_action, 0) + 1
+            maximum_state_action_repetitions = max(
+                maximum_state_action_repetitions, state_action_counts[state_action]
+            )
+            public_transition = (source_state_hash, action.action_id, next_state_hash)
+            occurrences = transition_occurrences.setdefault(public_transition, [])
+            occurrences.append(decisions)
+            if source_state_hash == next_state_hash:
+                unchanged_transition_counts[public_transition] = (
+                    unchanged_transition_counts.get(public_transition, 0) + 1
+                )
+            maximum_public_transition_repetitions = max(
+                maximum_public_transition_repetitions, len(occurrences)
+            )
             decisions += 1
             maximum_floor = max(
                 maximum_floor,
@@ -319,10 +432,21 @@ def _evaluate_case(
             )
             terminal = transition.terminal
             victory = transition.victory
+            if not terminal and len(occurrences) >= cycle_repetition_threshold:
+                detected_transition = public_transition
+                detected_occurrences = list(occurrences)
+                detected_decision_type = decision_type
+                break
+        if terminal:
+            termination_reason = "terminal"
+        elif detected_transition is not None:
+            termination_reason = "policy_cycle"
+        else:
+            termination_reason = "decision_limit"
         body: dict[str, Any] = {
             "schema_version": PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
             "seed": seed,
-            "partition": SplitName.TEST.value,
+            "partition": partition.value,
             "policy_kind": policy_kind,
             "policy_id": policy.policy_id,
             "model_id": model_id,
@@ -333,6 +457,18 @@ def _evaluate_case(
             "terminal": terminal,
             "victory": victory if terminal else False,
             "truncated": not terminal,
+            "termination_reason": termination_reason,
+            "liveness": _liveness_diagnostic(
+                detected_transition=detected_transition,
+                detected_occurrences=detected_occurrences,
+                detected_decision_type=detected_decision_type,
+                unchanged_transition_counts=unchanged_transition_counts,
+                maximum_state_action_repetitions=maximum_state_action_repetitions,
+                maximum_public_transition_repetitions=maximum_public_transition_repetitions,
+                cycle_repetition_threshold=cycle_repetition_threshold,
+                liveness_tail_length=liveness_tail_length,
+                trace_tail=trace_tail,
+            ),
             "maximum_floor": maximum_floor,
             "maximum_act": maximum_act,
             "final_state_hash": observation.state_hash,
@@ -346,7 +482,7 @@ def _evaluate_case(
         body = {
             "schema_version": PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
             "seed": seed,
-            "partition": SplitName.TEST.value,
+            "partition": partition.value,
             "policy_kind": policy_kind,
             "policy_id": policy.policy_id,
             "model_id": model_id,
@@ -357,6 +493,8 @@ def _evaluate_case(
             "terminal": None,
             "victory": None,
             "truncated": None,
+            "termination_reason": None,
+            "liveness": None,
             "maximum_floor": None,
             "maximum_act": None,
             "final_state_hash": None,
@@ -373,14 +511,63 @@ def _evaluate_case(
     return {**body, "case_id": manifest_identifier(body)}
 
 
-def _policy_summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
+def _liveness_diagnostic(
+    *,
+    detected_transition: tuple[str, str, str] | None,
+    detected_occurrences: Sequence[int],
+    detected_decision_type: str | None,
+    unchanged_transition_counts: dict[tuple[str, str, str], int],
+    maximum_state_action_repetitions: int,
+    maximum_public_transition_repetitions: int,
+    cycle_repetition_threshold: int,
+    liveness_tail_length: int,
+    trace_tail: Sequence[dict[str, Any]],
+) -> dict[str, Any]:
+    cycle_detected = detected_transition is not None
+    source_hash, action_id, next_hash = (
+        detected_transition if detected_transition is not None else (None, None, None)
+    )
+    return {
+        "schema_version": POLICY_LIVENESS_SCHEMA_VERSION,
+        "cycle_detected": cycle_detected,
+        "classification": (
+            "unchanged_public_state_action"
+            if cycle_detected and source_hash == next_hash
+            else "repeated_public_transition"
+            if cycle_detected
+            else None
+        ),
+        "repetition_threshold": cycle_repetition_threshold,
+        "tail_limit": liveness_tail_length,
+        "maximum_state_action_repetitions": maximum_state_action_repetitions,
+        "maximum_public_transition_repetitions": maximum_public_transition_repetitions,
+        "repeated_state_hash": source_hash,
+        "repeated_action_id": action_id,
+        "repeated_next_state_hash": next_hash,
+        "decision_type": detected_decision_type,
+        "first_occurrence_decision": detected_occurrences[0] if cycle_detected else None,
+        "first_repeat_decision": detected_occurrences[1] if cycle_detected else None,
+        "detection_decision": detected_occurrences[-1] if cycle_detected else None,
+        "repeated_transition_occurrences": len(detected_occurrences) if cycle_detected else None,
+        "unchanged_transition_occurrences": (
+            unchanged_transition_counts.get(detected_transition, 0)
+            if detected_transition is not None
+            else None
+        ),
+        "tail": list(trace_tail),
+    }
+
+
+def _policy_summary(
+    cases: Sequence[dict[str, Any]], *, include_liveness: bool = False
+) -> dict[str, Any]:
     completed = [case for case in cases if case["status"] == "completed"]
     terminal = [case for case in completed if case["terminal"] is True]
     victories = sum(case["victory"] is True for case in terminal)
     denominator = len(cases)
     decision_latencies = [float(case["total_decision_seconds"]) for case in completed]
     decisions = sum(int(case["decisions"]) for case in completed)
-    return {
+    summary: dict[str, Any] = {
         "benchmark_denominator": denominator,
         "completed_runs": len(completed),
         "failed_runs": denominator - len(completed),
@@ -398,6 +585,19 @@ def _policy_summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
         "mean_seconds_per_decision": _artifact_float(sum(decision_latencies) / max(1, decisions)),
         "nondegenerate_terminal_outcomes": 0 < victories < len(terminal),
     }
+    if include_liveness:
+        policy_cycles = sum(case.get("termination_reason") == "policy_cycle" for case in completed)
+        decision_limits = sum(
+            case.get("termination_reason") == "decision_limit" for case in completed
+        )
+        summary.update(
+            {
+                "policy_cycle_runs": policy_cycles,
+                "decision_limit_runs": decision_limits,
+                "liveness_pass": policy_cycles == 0 and decision_limits == 0,
+            }
+        )
+    return summary
 
 
 def _paired_summary(
@@ -443,6 +643,8 @@ def _load_case(
     policy_id: str,
     model_id: str | None,
     ruleset_manifest_id: str,
+    partition: SplitName,
+    schema_version: str,
 ) -> dict[str, Any]:
     try:
         value: object = json.loads(path.read_text(encoding="utf-8"))
@@ -456,9 +658,9 @@ def _load_case(
     if case_id != manifest_identifier(body):
         raise ValueError("Production evaluation case identity mismatch")
     expected = {
-        "schema_version": PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        "schema_version": schema_version,
         "seed": seed,
-        "partition": SplitName.TEST.value,
+        "partition": partition.value,
         "policy_kind": policy_kind,
         "policy_id": policy_id,
         "model_id": model_id,
@@ -471,8 +673,15 @@ def _load_case(
 
 
 def _validate_case(case: dict[str, Any]) -> None:
+    schema_version = case.get("schema_version")
+    if schema_version not in (
+        LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+    ):
+        raise ValueError("Production evaluation case schema differs")
+    include_liveness = schema_version == PRODUCTION_POLICY_CASE_SCHEMA_VERSION
     status = case.get("status")
-    result_fields = (
+    result_fields: tuple[str, ...] = (
         "decisions",
         "terminal",
         "victory",
@@ -485,6 +694,8 @@ def _validate_case(case: dict[str, Any]) -> None:
         "median_decision_seconds",
         "maximum_decision_seconds",
     )
+    if include_liveness:
+        result_fields += ("termination_reason", "liveness")
     if status == "failed":
         if not isinstance(case.get("error"), str) or not case["error"]:
             raise ValueError("Failed production evaluation case has no error")
@@ -505,6 +716,18 @@ def _validate_case(case: dict[str, Any]) -> None:
         raise ValueError("Production evaluation case outcomes must be boolean")
     if truncated is terminal or (victory is True and terminal is not True):
         raise ValueError("Production evaluation case terminal outcomes are inconsistent")
+    if include_liveness:
+        termination_reason = case.get("termination_reason")
+        if termination_reason not in ("terminal", "policy_cycle", "decision_limit"):
+            raise ValueError("Production evaluation case termination reason differs")
+        if terminal and termination_reason != "terminal":
+            raise ValueError("Production evaluation case termination reason is inconsistent")
+        if not terminal and termination_reason == "terminal":
+            raise ValueError("Production evaluation case termination reason is inconsistent")
+        liveness = case.get("liveness")
+        if not isinstance(liveness, dict):
+            raise ValueError("Production evaluation case liveness diagnostic is missing")
+        _validate_liveness(liveness, termination_reason=termination_reason, decisions=decisions)
     for field in ("final_state_hash", "action_trace_sha256"):
         _string(case.get(field), f"case.{field}")
     for field in (
@@ -522,6 +745,97 @@ def _validate_case(case: dict[str, Any]) -> None:
             raise ValueError(f"Production evaluation case {field} must be finite and non-negative")
 
 
+def _validate_liveness(
+    liveness: dict[str, Any], *, termination_reason: str, decisions: int
+) -> None:
+    if liveness.get("schema_version") != POLICY_LIVENESS_SCHEMA_VERSION:
+        raise ValueError("Production evaluation liveness schema differs")
+    cycle_detected = liveness.get("cycle_detected")
+    if not isinstance(cycle_detected, bool):
+        raise ValueError("Production evaluation cycle flag must be boolean")
+    if cycle_detected is not (termination_reason == "policy_cycle"):
+        raise ValueError("Production evaluation cycle outcome is inconsistent")
+    repetition_threshold = _integer(
+        liveness.get("repetition_threshold"), "case.liveness.repetition_threshold"
+    )
+    tail_limit = _integer(liveness.get("tail_limit"), "case.liveness.tail_limit")
+    maximum_pair = _integer(
+        liveness.get("maximum_state_action_repetitions"),
+        "case.liveness.maximum_state_action_repetitions",
+    )
+    maximum_transition = _integer(
+        liveness.get("maximum_public_transition_repetitions"),
+        "case.liveness.maximum_public_transition_repetitions",
+    )
+    if repetition_threshold < 2 or tail_limit <= 0 or min(maximum_pair, maximum_transition) < 0:
+        raise ValueError("Production evaluation liveness counts are invalid")
+    tail = liveness.get("tail")
+    if not isinstance(tail, list) or len(tail) > tail_limit:
+        raise ValueError("Production evaluation liveness tail is invalid")
+    previous_index = -1
+    for entry in tail:
+        if not isinstance(entry, dict):
+            raise ValueError("Production evaluation liveness tail entry must be an object")
+        index = _integer(entry.get("decision_index"), "case.liveness.tail[].decision_index")
+        if index <= previous_index or index >= decisions:
+            raise ValueError("Production evaluation liveness tail indices are invalid")
+        previous_index = index
+        for field in ("state_hash", "decision_type", "action_id", "next_state_hash"):
+            _string(entry.get(field), f"case.liveness.tail[].{field}")
+        if not isinstance(entry.get("public_state_changed"), bool):
+            raise ValueError("Production evaluation liveness state-change flag must be boolean")
+    repeated_fields = (
+        "classification",
+        "repeated_state_hash",
+        "repeated_action_id",
+        "repeated_next_state_hash",
+        "decision_type",
+        "first_occurrence_decision",
+        "first_repeat_decision",
+        "detection_decision",
+        "repeated_transition_occurrences",
+        "unchanged_transition_occurrences",
+    )
+    if not cycle_detected:
+        if any(liveness.get(field) is not None for field in repeated_fields):
+            raise ValueError("Production evaluation non-cycle contains cycle diagnostics")
+        return
+    if liveness.get("classification") not in (
+        "unchanged_public_state_action",
+        "repeated_public_transition",
+    ):
+        raise ValueError("Production evaluation cycle classification differs")
+    for field in (
+        "repeated_state_hash",
+        "repeated_action_id",
+        "repeated_next_state_hash",
+        "decision_type",
+    ):
+        _string(liveness.get(field), f"case.liveness.{field}")
+    first = _integer(
+        liveness.get("first_occurrence_decision"),
+        "case.liveness.first_occurrence_decision",
+    )
+    first_repeat = _integer(
+        liveness.get("first_repeat_decision"), "case.liveness.first_repeat_decision"
+    )
+    detection = _integer(liveness.get("detection_decision"), "case.liveness.detection_decision")
+    repeated = _integer(
+        liveness.get("repeated_transition_occurrences"),
+        "case.liveness.repeated_transition_occurrences",
+    )
+    unchanged = _integer(
+        liveness.get("unchanged_transition_occurrences"),
+        "case.liveness.unchanged_transition_occurrences",
+    )
+    if not (0 <= first < first_repeat <= detection < decisions):
+        raise ValueError("Production evaluation cycle locations are invalid")
+    if repeated < repetition_threshold or maximum_transition < repeated:
+        raise ValueError("Production evaluation cycle repetition count is invalid")
+    if unchanged < 0 or unchanged > repeated:
+        raise ValueError("Production evaluation unchanged transition count is invalid")
+
+
 def _load_object(path: Path, label: str) -> dict[str, Any]:
     try:
         value: object = json.loads(path.read_text(encoding="utf-8"))
@@ -530,6 +844,14 @@ def _load_object(path: Path, label: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError(f"{label.capitalize()} must be an object")
     return dict(value)
+
+
+def _claim_scope(partition: SplitName) -> str:
+    if partition is SplitName.TEST:
+        return "paired_frozen_test_policy_only_evaluation"
+    if partition is SplitName.VALIDATION:
+        return "paired_validation_policy_liveness_evaluation"
+    raise ValueError("Production evaluation partition has no claim scope")
 
 
 def _public_integer(value: object) -> int | None:

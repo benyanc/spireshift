@@ -285,12 +285,71 @@ to tune and reselect another checkpoint. The remaining 68 test seeds stay sealed
 benchmark. The v3 pilot used 80.40 wall seconds and its verified resource report is
 `sha256:025a494efdf8622cc565433077bdc61e2e6e65a5b75e9313a3c53b7315b7466b`.
 
+## Production-policy liveness diagnostics
+
+Evaluation format v2 records only public evidence and stops a deterministic cycle before the
+global decision cap. A cycle requires the same public state, selected action, and resulting public
+state eight times. Each case records the repeated transition count, its first occurrence and first
+repeat, the decision type, whether the public state was unchanged, and at most the final 16 public
+transition hashes. The aggregate separates `policy_cycle_runs` from unexplained
+`decision_limit_runs`. These diagnostics do not expose engine-private state.
+
+Before changing policy behavior, run the prespecified liveness suite over all 100 validation seeds.
+This suite may diagnose and test a generic fallback, but it must not use the 32 opened test outcomes
+or the 68 sealed test seeds for model selection. An automated coding agent prepares and verifies the
+command but does not start or monitor it:
+
+```bash
+uv run spireshift resources run \
+  --kind rollout \
+  --report artifacts/resources/production-base-v3-validation-liveness-v1.json \
+  --metrics artifacts/resources/production-base-v3-validation-liveness-v1-metrics.json \
+  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v1 \
+  --workers 4 \
+  --max-wall-seconds 14400 \
+  --max-cpu-seconds 50000 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
+  -- \
+  uv run --extra evangambit spireshift model evaluate-curriculum \
+    artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+    --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v1 \
+    --partition validation \
+    --runs 100 \
+    --workers 4 \
+    --max-decisions-per-run 4096 \
+    --cycle-repetition-threshold 8 \
+    --liveness-tail-length 16
+```
+
+After it finishes, verify both content-addressed reports:
+
+```bash
+uv run spireshift model verify-evaluation-curriculum \
+  artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v1/production-policy-evaluation.json \
+  artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+  --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+  --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json
+
+uv run spireshift resources verify \
+  artifacts/resources/production-base-v3-validation-liveness-v1.json
+```
+
+The first result gate is zero `decision_limit_runs` for both policies. Any detected policy cycle is
+then reproduced from its validation case and addressed with a decision-type-independent safeguard
+before another frozen-test evaluation. Base-v3 remains rejected throughout this diagnostic work.
+
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
 [`production-model-training-report-v2.json`](../schemas/production-model-training-report-v2.json).
 The inference evidence schema is
 [`production-model-inference-smoke-v1.json`](../schemas/production-model-inference-smoke-v1.json).
 The paired evaluation schemas are
-[`production-policy-evaluation-v1.json`](../schemas/production-policy-evaluation-v1.json) and
-[`production-policy-evaluation-case-v1.json`](../schemas/production-policy-evaluation-case-v1.json).
-The loader retains read-only verification compatibility with the rejected version-1 artifacts.
+[`production-policy-evaluation-v2.json`](../schemas/production-policy-evaluation-v2.json) and
+[`production-policy-evaluation-case-v2.json`](../schemas/production-policy-evaluation-case-v2.json).
+The loader retains read-only verification compatibility with the version-1 base-v2 and rejected
+base-v3 pilot artifacts.
