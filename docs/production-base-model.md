@@ -312,9 +312,8 @@ another legal action remains. It records every suppression, invocation, and exha
 bounded smoke over the three failures terminated all three learned runs, reached floors 6, 7, and 8,
 and used the fallback six times without exhausting a legal-action set.
 
-Rerun the same prespecified 100 validation seeds with the generic fallback. Do not use the 32 opened
-test outcomes or the 68 sealed test seeds for this work. An automated coding agent prepares and
-verifies the command but does not start or monitor it:
+The exact reproduction command for the same prespecified 100 validation seeds with the generic
+fallback is below. It does not use the 32 opened test outcomes or the 68 sealed test seeds:
 
 ```bash
 uv run spireshift resources run \
@@ -357,9 +356,19 @@ uv run spireshift resources verify \
   artifacts/resources/production-base-v3-validation-liveness-v2.json
 ```
 
-The result gate is zero `decision_limit_runs`, zero `policy_cycle_runs`, and zero
-`fallback_exhausted_states` for both policies. Base-v3 remains rejected throughout this diagnostic
-work; passing this gate establishes liveness only and does not reverse its frozen-test quality result.
+The completed fallback evaluation is
+`sha256:62ae329defdb5c19a920a8c1a1a0c70429017cf24a637fc758e25cc6090caa8f`.
+All 100 learned-policy and 100 baseline runs terminated, with zero decision-limit runs, policy
+cycles, and exhausted fallback states. The guard intervened six times across only the three known
+learned-policy seeds; the other 197 policy/seed cases retained identical outcomes, maximum floors,
+and action-trace hashes. The formerly cycling runs terminated at floors 6, 7, and 8, raising learned
+mean maximum floor from 7.05 to 7.14. The verified resource report is
+`sha256:8260bdf72ac74cdf1749206dbe459fff504c24a8f0151c971ee596d3faefa181`;
+the rerun used 53.20 wall seconds, 63.15 CPU seconds, 142 MB peak memory, and 1.56 MB storage.
+
+This satisfies the production-policy liveness gate. It establishes termination behavior only:
+base-v3 remains rejected because it did not improve frozen-test gameplay quality, and the remaining
+68 test seeds remain sealed for the final benchmark.
 
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
