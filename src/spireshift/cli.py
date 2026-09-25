@@ -711,6 +711,7 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluate.add_argument("--max-decisions-per-run", type=int, default=4096)
     production_evaluate.add_argument("--cycle-repetition-threshold", type=int, default=8)
     production_evaluate.add_argument("--liveness-tail-length", type=int, default=16)
+    production_evaluate.add_argument("--no-op-fallback-threshold", type=int, default=2)
     production_evaluate.add_argument("--resume", action="store_true")
     production_evaluate_verify = model_commands.add_parser(
         "verify-evaluation-curriculum",
@@ -1642,6 +1643,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     partition=evaluation_partition,
                     cycle_repetition_threshold=args.cycle_repetition_threshold,
                     liveness_tail_length=args.liveness_tail_length,
+                    no_op_fallback_threshold=args.no_op_fallback_threshold,
                     resume=args.resume,
                 )
                 evaluation_summary = evaluation_result.report["summary"]
