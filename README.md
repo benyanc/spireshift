@@ -214,7 +214,9 @@ objectives.
 7. Evaluate zero-shot and limited-data recovery across official patches.
 
 See [docs/architecture.md](docs/architecture.md) and
-[docs/benchmark-protocol.md](docs/benchmark-protocol.md).
+[docs/benchmark-protocol.md](docs/benchmark-protocol.md). The executable validation-owned gate and
+current base-v2 rejection are documented in
+[docs/base-model-readiness.md](docs/base-model-readiness.md).
 
 The environment bakeoff and pinned candidate evidence are recorded in
 [ADR 0002](docs/decisions/0002-environment-and-solver-bakeoff.md) and

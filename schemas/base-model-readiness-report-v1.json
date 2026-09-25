@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/base-model-readiness-report-v1.json",
+  "title": "SpireShift Base-Model Readiness Report v1",
+  "type": "object",
+  "required": [
+    "schema_version", "report_id", "scorecard_id", "model_id", "evidence", "checks",
+    "ready", "blocking_check_ids", "progress_diagnostics", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "base-model-readiness-report-v1"},
+    "report_id": {"$ref": "#/$defs/id"},
+    "scorecard_id": {"$ref": "#/$defs/id"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "evidence": {
+      "type": "object",
+      "required": [
+        "training_report_id", "inference_smoke_report_id", "policy_evaluation_report_id",
+        "readiness_audit_id", "calibration_id"
+      ],
+      "properties": {
+        "training_report_id": {"$ref": "#/$defs/id"},
+        "inference_smoke_report_id": {"$ref": "#/$defs/nullableId"},
+        "policy_evaluation_report_id": {"$ref": "#/$defs/nullableId"},
+        "readiness_audit_id": {"$ref": "#/$defs/nullableId"},
+        "calibration_id": {"$ref": "#/$defs/nullableId"}
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["check_id", "status", "observed", "threshold", "detail"],
+        "properties": {
+          "check_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["passed", "failed", "missing"]},
+          "observed": {},
+          "threshold": {},
+          "detail": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "ready": {"type": "boolean"},
+    "blocking_check_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "progress_diagnostics": {
+      "type": "object",
+      "required": [
+        "held_out_mean_progress_utility_regret", "held_out_decisive_pair_accuracy", "note"
+      ],
+      "properties": {
+        "held_out_mean_progress_utility_regret": {"type": "number", "minimum": 0},
+        "held_out_decisive_pair_accuracy": {"$ref": "#/$defs/rate"},
+        "mean_maximum_floor_difference": {"type": "number"},
+        "note": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {"const": "frozen_validation_base_model_readiness_assessment"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "nullableId": {
+      "oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]
+    },
+    "rate": {"type": "number", "minimum": 0, "maximum": 1}
+  },
+  "additionalProperties": false
+}
