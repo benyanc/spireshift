@@ -566,7 +566,7 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_freeze.add_argument("--split-manifest", type=Path, required=True)
     bootstrap_discover = bootstrap_commands.add_parser(
         "discover-states",
-        help="Discover a frozen train or validation curriculum from exact decision coordinates",
+        help="Discover a frozen train or validation curriculum from exact or frontier states",
     )
     bootstrap_discover.add_argument("specification", type=Path)
     bootstrap_discover.add_argument("output", type=Path)

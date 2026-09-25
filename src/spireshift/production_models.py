@@ -354,10 +354,20 @@ def train_production_base_model(
         raise ValueError("Production curricula use different rulesets")
     if train_state_set.objective_id != validation_state_set.objective_id:
         raise ValueError("Production curricula use different objectives")
+    if (
+        train_state_set.signal_spec.requires_terminal_signal
+        != validation_state_set.signal_spec.requires_terminal_signal
+    ):
+        raise ValueError("Production curricula use different signal-contract generations")
     for report, label in ((train_report, "train"), (validation_report, "validation")):
         assessment = _mapping(report.get("signal_assessment"), f"{label} signal assessment")
         if assessment.get("auxiliary_policy_signal_pass") is not True:
             raise ValueError(f"{label} curriculum did not pass its auxiliary signal gate")
+        if (
+            assessment.get("schema_version") == "bootstrap-curriculum-signal-assessment-v2"
+            and assessment.get("terminal_head_promotion_pass") is not True
+        ):
+            raise ValueError(f"{label} curriculum did not pass its terminal signal gate")
 
     floor_thresholds = _nondegenerate_floor_thresholds(train_examples)
     if not floor_thresholds:
@@ -380,6 +390,15 @@ def train_production_base_model(
         evidence["victories"] > 0 and evidence["non_victories"] > 0
         for evidence in terminal_evidence.values()
     )
+    terminal_signal_required = any(
+        state_set.signal_spec.requires_terminal_signal
+        for state_set in (train_state_set, validation_state_set)
+    )
+    if terminal_signal_required and not terminal_value_promoted:
+        raise ValueError(
+            "Terminal-frontier curricula did not preserve victories and defeats in train, fit, "
+            "selection, and validation evidence"
+        )
     terminal_value_reason = (
         "terminal_value_head_trained"
         if terminal_value_promoted

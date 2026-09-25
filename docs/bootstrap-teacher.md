@@ -425,3 +425,80 @@ Use `artifacts/bootstrap/teacher-train-v3-combined/bootstrap-teacher-dataset.jso
 dataset only if its emitted `auxiliary_policy_signal_pass` is true. Dataset verification caches
 checkpoint validation by resolved path, modification time, and size, so every worker request still
 binds the exact learned-policy identity without reparsing the model for every task.
+
+## Terminal-frontier curriculum v4
+
+The v3 learned-policy curricula improved maximum floor but produced no victories in 74,224 paired
+simulations. Treating every non-victory as a loss would also mislabel rollout caps as defeats. The
+v4 protocol targets the missing terminal signal directly while preserving complete-run split
+ownership.
+
+Discovery follows the frozen base-v3 policy through unused train and validation seeds. For each run,
+it keeps at most eight of the deepest states at floor 7 or later that have at least two legal
+actions. The selection is made only from public state and retains the exact decision coordinate for
+replay. This concentrates teacher work near each run's terminal frontier without selecting on
+teacher outcomes or inspecting the sealed test partition.
+
+The versioned signal contract distinguishes three outcome classes: victory, defeat, and censored.
+A capped rollout is censored and cannot satisfy the defeat threshold. Terminal-head promotion also
+requires states where every action has at least one completed outcome and the sampled terminal win
+rates differ across actions. Production training refuses a v4 train or validation dataset that
+fails these prespecified gates, and it still requires both classes in the train fit split, train
+selection split, full train set, and held-out validation set.
+
+The discovery specifications use ranked train positions 80 through 239 and validation positions 24
+through 99, avoiding every complete-run seed used by the v3 curricula. These two read-only model
+scans write to separate locations and may be launched in parallel. They are sustained jobs and must
+be started and observed by the operator:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-frontier-discovery-v4.json \
+  --artifact-root artifacts/bootstrap/discovery-train-frontier-v4 \
+  --workers 1 \
+  --max-wall-seconds 7200 \
+  --max-cpu-seconds 7200 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 8000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap discover-states \
+    configs/bootstrap/sts2-v0.107.1-evangambit-train-terminal-frontier-v4.json \
+    artifacts/bootstrap/discovery-train-frontier-v4/state-set.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+    --run-offset 80
+```
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-validation-frontier-discovery-v4.json \
+  --artifact-root artifacts/bootstrap/discovery-validation-frontier-v4 \
+  --workers 1 \
+  --max-wall-seconds 7200 \
+  --max-cpu-seconds 7200 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 8000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap discover-states \
+    configs/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json \
+    artifacts/bootstrap/discovery-validation-frontier-v4/state-set.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+    --run-offset 24
+```
+
+Inspect both emitted state sets before scheduling teacher rollouts. In particular, compare
+`captured_coordinates`, `runs_with_eligible_coordinates`, decision types, source floors, and the
+source maximum-floor histogram against the frozen signal thresholds. Teacher commands and resource
+limits should be chosen from those realized state and candidate counts rather than estimated in
+advance.

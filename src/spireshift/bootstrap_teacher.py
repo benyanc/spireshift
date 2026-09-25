@@ -39,6 +39,7 @@ if TYPE_CHECKING:
 BOOTSTRAP_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v1"
 CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v2"
 LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v3"
+TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v4"
 BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v1"
 LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v2"
 BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v1"
@@ -47,6 +48,7 @@ BOOTSTRAP_BATCH_SCHEMA_VERSION = "bootstrap-worker-batch-v1"
 BOOTSTRAP_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v1"
 CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v2"
 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v3"
+TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v4"
 BOOTSTRAP_VERIFICATION_SCHEMA_VERSION = "bootstrap-teacher-verification-v1"
 BOOTSTRAP_TEACHER_ID = "paired-terminal-dominant-progress-teacher-v1"
 CURRICULUM_TEACHER_ID = "paired-preference-curriculum-teacher-v2"
@@ -274,6 +276,9 @@ class CurriculumSignalSpec:
     minimum_effective_labeled_states: float
     minimum_half_split_agreement: float
     minimum_occupied_maximum_floor_bins: int
+    minimum_terminal_victories: int | None = None
+    minimum_terminal_defeats: int | None = None
+    minimum_states_with_candidate_terminal_variation: int | None = None
 
     def __post_init__(self) -> None:
         integer_values = (
@@ -291,9 +296,28 @@ class CurriculumSignalSpec:
             raise ValueError("minimum_effective_labeled_states must be finite and positive")
         if not 0.0 <= self.minimum_half_split_agreement <= 1.0:
             raise ValueError("minimum_half_split_agreement must be between zero and one")
+        terminal_thresholds = (
+            self.minimum_terminal_victories,
+            self.minimum_terminal_defeats,
+            self.minimum_states_with_candidate_terminal_variation,
+        )
+        if any(value is None for value in terminal_thresholds) and not all(
+            value is None for value in terminal_thresholds
+        ):
+            raise ValueError("Terminal signal thresholds must be supplied together")
+        if any(
+            isinstance(value, bool) or value <= 0
+            for value in terminal_thresholds
+            if value is not None
+        ):
+            raise ValueError("Terminal signal thresholds must be positive integers")
+
+    @property
+    def requires_terminal_signal(self) -> bool:
+        return self.minimum_terminal_victories is not None
 
     def as_dict(self) -> dict[str, object]:
-        return {
+        document: dict[str, object] = {
             "minimum_states": self.minimum_states,
             "minimum_source_floors": self.minimum_source_floors,
             "minimum_decision_types": self.minimum_decision_types,
@@ -301,6 +325,17 @@ class CurriculumSignalSpec:
             "minimum_half_split_agreement": self.minimum_half_split_agreement,
             "minimum_occupied_maximum_floor_bins": (self.minimum_occupied_maximum_floor_bins),
         }
+        if self.requires_terminal_signal:
+            document.update(
+                {
+                    "minimum_terminal_victories": self.minimum_terminal_victories,
+                    "minimum_terminal_defeats": self.minimum_terminal_defeats,
+                    "minimum_states_with_candidate_terminal_variation": (
+                        self.minimum_states_with_candidate_terminal_variation
+                    ),
+                }
+            )
+        return document
 
 
 @dataclass(frozen=True, slots=True)
@@ -340,11 +375,16 @@ class CurriculumStateSet:
             raise ValueError("Curriculum cases must have unique IDs and coordinates")
 
     def as_dict(self) -> dict[str, object]:
+        frontier = self.discovery.get("schema_version") == "bootstrap-curriculum-discovery-v3"
         document: dict[str, object] = {
             "schema_version": (
-                LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
-                if self.capture_policy is not None
-                else CURRICULUM_STATE_SET_SCHEMA_VERSION
+                TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
+                if frontier
+                else (
+                    LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+                    if self.capture_policy is not None
+                    else CURRICULUM_STATE_SET_SCHEMA_VERSION
+                )
             ),
             "state_set_id": self.state_set_id,
             "split_manifest_id": self.split_manifest_id,
@@ -623,6 +663,7 @@ def load_bootstrap_state_set_document(value: object) -> BootstrapStateSetLike:
     if document.get("schema_version") in {
         CURRICULUM_STATE_SET_SCHEMA_VERSION,
         LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
     }:
         return _load_curriculum_state_set_document(document)
     _exact_keys(
@@ -673,6 +714,8 @@ def discover_curriculum_state_set(
     run_offset: int = 0,
 ) -> dict[str, Any]:
     document = _mapping(specification, "curriculum discovery specification")
+    schema_version = document.get("schema_version")
+    frontier = schema_version == "bootstrap-curriculum-discovery-spec-v3"
     _exact_keys(
         document,
         {
@@ -684,16 +727,16 @@ def discover_curriculum_state_set(
             "partition",
             "selection_policy",
             "run_count",
-            "decision_occurrences",
+            "frontier_selection" if frontier else "decision_occurrences",
             "maximum_steps_per_run",
             "signal_spec",
         },
         "curriculum discovery specification",
     )
-    schema_version = document.get("schema_version")
     if schema_version not in {
         "bootstrap-curriculum-discovery-spec-v1",
         "bootstrap-curriculum-discovery-spec-v2",
+        "bootstrap-curriculum-discovery-spec-v3",
     }:
         raise ValueError("Unsupported curriculum discovery specification")
     partition = SplitName(_string(document.get("partition"), "partition"))
@@ -715,8 +758,11 @@ def discover_curriculum_state_set(
     if policy_artifacts is None and schema_version != "bootstrap-curriculum-discovery-spec-v1":
         raise ValueError("Learned curriculum discovery requires checkpoint artifacts")
     if policy_artifacts is not None:
-        if schema_version != "bootstrap-curriculum-discovery-spec-v2":
-            raise ValueError("Learned curriculum discovery requires a v2 specification")
+        if schema_version not in {
+            "bootstrap-curriculum-discovery-spec-v2",
+            "bootstrap-curriculum-discovery-spec-v3",
+        }:
+            raise ValueError("Learned curriculum discovery requires a v2 or v3 specification")
         policy_artifacts.validate_for(
             split_manifest_id=split_manifest.manifest_id,
             ruleset_manifest_id=split_manifest.ruleset_manifest_id,
@@ -730,6 +776,22 @@ def discover_curriculum_state_set(
     partition_seeds = split_manifest.seeds(partition)
     if run_offset + run_count > len(partition_seeds):
         raise ValueError("Curriculum discovery run range exceeds the partition")
+    signal_spec = _curriculum_signal_spec(document.get("signal_spec"))
+    if frontier:
+        if not signal_spec.requires_terminal_signal:
+            raise ValueError("Terminal-frontier discovery requires terminal signal thresholds")
+        return _discover_terminal_frontier_state_set(
+            document,
+            backend=backend,
+            split_manifest=split_manifest,
+            policy_artifacts=cast(BootstrapPolicyArtifacts, policy_artifacts),
+            partition=partition,
+            partition_seeds=partition_seeds,
+            run_offset=run_offset,
+            run_count=run_count,
+            maximum_steps=maximum_steps,
+            signal_spec=signal_spec,
+        )
     raw_occurrences = _mapping(document.get("decision_occurrences"), "decision_occurrences")
     if not raw_occurrences:
         raise ValueError("Curriculum discovery requires decision occurrences")
@@ -745,7 +807,6 @@ def discover_curriculum_state_set(
         if not indices or any(index < 0 for index in indices) or len(indices) != len(set(indices)):
             raise ValueError("Decision occurrences must be unique non-negative indices")
         decision_occurrences[decision_type] = indices
-    signal_spec = _curriculum_signal_spec(document.get("signal_spec"))
     cases: list[dict[str, object]] = []
     unreachable: list[dict[str, object]] = []
     terminal_runs = 0
@@ -850,6 +911,167 @@ def discover_curriculum_state_set(
     }
     if policy_artifacts is not None:
         body["capture_policy"] = policy_artifacts.provenance()
+    frozen = {**body, "state_set_id": manifest_identifier(body)}
+    state_set = load_bootstrap_state_set_document(frozen)
+    _validate_bootstrap_split(state_set, split_manifest)
+    return frozen
+
+
+def _discover_terminal_frontier_state_set(
+    document: dict[str, Any],
+    *,
+    backend: SearchBackendSpec,
+    split_manifest: SplitManifest,
+    policy_artifacts: BootstrapPolicyArtifacts,
+    partition: SplitName,
+    partition_seeds: tuple[int, ...],
+    run_offset: int,
+    run_count: int,
+    maximum_steps: int,
+    signal_spec: CurriculumSignalSpec,
+) -> dict[str, Any]:
+    """Retain each run's deepest actionable states without inspecting sealed test runs."""
+    raw_selection = _mapping(document.get("frontier_selection"), "frontier_selection")
+    _exact_keys(
+        raw_selection,
+        {
+            "decision_types",
+            "minimum_source_floor",
+            "minimum_legal_actions",
+            "maximum_states_per_run",
+        },
+        "frontier_selection",
+    )
+    raw_types = _list(raw_selection.get("decision_types"), "frontier decision types")
+    decision_types = tuple(
+        DecisionType(_string(value, "frontier decision type")) for value in raw_types
+    )
+    if not decision_types or len(decision_types) != len(set(decision_types)):
+        raise ValueError("Frontier decision types must be non-empty and unique")
+    if any(
+        decision_type in {DecisionType.MENU, DecisionType.TERMINAL, DecisionType.UNKNOWN}
+        for decision_type in decision_types
+    ):
+        raise ValueError("Frontier selection contains an unsupported decision type")
+    minimum_floor = _integer(raw_selection.get("minimum_source_floor"), "minimum_source_floor")
+    minimum_actions = _integer(raw_selection.get("minimum_legal_actions"), "minimum_legal_actions")
+    maximum_states = _integer(raw_selection.get("maximum_states_per_run"), "maximum_states_per_run")
+    if minimum_floor < 0 or minimum_actions <= 0 or maximum_states <= 0:
+        raise ValueError("Frontier selection bounds are outside their allowed range")
+
+    cases: list[dict[str, object]] = []
+    eligible_coordinates = 0
+    runs_with_eligible_coordinates = 0
+    terminal_runs = 0
+    victorious_runs = 0
+    defeated_runs = 0
+    step_limited_runs = 0
+    maximum_floor_histogram: dict[str, int] = {}
+    for run_seed in partition_seeds[run_offset : run_offset + run_count]:
+        environment = load_search_environment(backend)
+        try:
+            observation = environment.reset(run_seed)
+            policy = _load_bootstrap_policy(policy_artifacts, environment)
+            prefix: list[str] = []
+            seen = {decision_type: 0 for decision_type in decision_types}
+            eligible: list[tuple[int, int, dict[str, object]]] = []
+            maximum_floor: int | None = None
+            for global_index in range(maximum_steps + 1):
+                source_floor = _public_integer(observation, ("floor",), ("run", "floor"))
+                if source_floor is not None:
+                    maximum_floor = (
+                        source_floor if maximum_floor is None else max(maximum_floor, source_floor)
+                    )
+                decision_type = observation.decision_type
+                if decision_type in seen:
+                    occurrence = seen[decision_type]
+                    seen[decision_type] += 1
+                    actions = tuple(environment.legal_actions())
+                    if (
+                        source_floor is not None
+                        and source_floor >= minimum_floor
+                        and len(actions) >= minimum_actions
+                    ):
+                        checkpoint = capture_checkpoint(
+                            run_seed=run_seed,
+                            action_prefix=prefix,
+                            environment=environment,
+                            observation=observation,
+                        )
+                        case = CurriculumStateCase(
+                            state_id=(
+                                f"{partition.value}-seed-{run_seed:06d}-"
+                                f"{decision_type.value}-{occurrence:03d}"
+                            ),
+                            run_seed=run_seed,
+                            decision_type=decision_type,
+                            decision_index=occurrence,
+                            expected_state_hash=checkpoint.state_hash,
+                            expected_legal_actions=len(actions),
+                            expected_source_floor=source_floor,
+                            expected_source_act=_public_act(observation),
+                        ).as_dict()
+                        eligible.append((source_floor, global_index, case))
+                if bool(observation.public_state.get("terminal")):
+                    terminal_runs += 1
+                    if bool(observation.public_state.get("victory")):
+                        victorious_runs += 1
+                    else:
+                        defeated_runs += 1
+                    break
+                action = policy.choose_action(observation, tuple(environment.legal_actions()))
+                prefix.append(action.action_id)
+                observation = environment.step(action).next_observation
+            else:
+                step_limited_runs += 1
+            if eligible:
+                runs_with_eligible_coordinates += 1
+            eligible_coordinates += len(eligible)
+            selected = sorted(eligible, key=lambda item: (item[0], item[1]), reverse=True)[
+                :maximum_states
+            ]
+            cases.extend(case for _, _, case in sorted(selected, key=lambda item: item[1]))
+            maximum_floor_key = "unknown" if maximum_floor is None else str(maximum_floor)
+            maximum_floor_histogram[maximum_floor_key] = (
+                maximum_floor_histogram.get(maximum_floor_key, 0) + 1
+            )
+        finally:
+            _close_environment(environment)
+
+    discovery: dict[str, Any] = {
+        "schema_version": "bootstrap-curriculum-discovery-v3",
+        "requested_runs": run_count,
+        "maximum_steps_per_run": maximum_steps,
+        "frontier_selection": {
+            "decision_types": [decision_type.value for decision_type in decision_types],
+            "minimum_source_floor": minimum_floor,
+            "minimum_legal_actions": minimum_actions,
+            "maximum_states_per_run": maximum_states,
+        },
+        "eligible_coordinates": eligible_coordinates,
+        "captured_coordinates": len(cases),
+        "runs_with_eligible_coordinates": runs_with_eligible_coordinates,
+        "terminal_runs": terminal_runs,
+        "victorious_runs": victorious_runs,
+        "defeated_runs": defeated_runs,
+        "step_limited_runs": step_limited_runs,
+        "source_maximum_floor_histogram": maximum_floor_histogram,
+    }
+    if run_offset:
+        discovery["run_offset"] = run_offset
+    body: dict[str, Any] = {
+        "schema_version": TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
+        "split_manifest_id": split_manifest.manifest_id,
+        "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
+        "objective_id": split_manifest.objective_id,
+        "capture_policy_id": policy_artifacts.policy_id,
+        "partition": partition.value,
+        "selection_policy": _string(document.get("selection_policy"), "selection_policy"),
+        "discovery": discovery,
+        "signal_spec": signal_spec.as_dict(),
+        "cases": cases,
+        "capture_policy": policy_artifacts.provenance(),
+    }
     frozen = {**body, "state_set_id": manifest_identifier(body)}
     state_set = load_bootstrap_state_set_document(frozen)
     _validate_bootstrap_split(state_set, split_manifest)
@@ -1340,15 +1562,7 @@ def run_bootstrap_teacher_dataset(
         else None
     )
     body: dict[str, Any] = {
-        "schema_version": (
-            (
-                LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
-                if state_set.capture_policy is not None
-                else CURRICULUM_DATASET_SCHEMA_VERSION
-            )
-            if isinstance(state_set, CurriculumStateSet)
-            else BOOTSTRAP_DATASET_SCHEMA_VERSION
-        ),
+        "schema_version": _dataset_schema_for(state_set),
         "teacher_id": (
             CURRICULUM_TEACHER_ID
             if isinstance(state_set, CurriculumStateSet)
@@ -1633,12 +1847,17 @@ def verify_bootstrap_teacher_dataset(
             BOOTSTRAP_DATASET_SCHEMA_VERSION,
             CURRICULUM_DATASET_SCHEMA_VERSION,
             LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+            TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
         }:
             errors.append("unsupported bootstrap dataset schema")
         expected_teacher_id = (
             CURRICULUM_TEACHER_ID
             if dataset_schema
-            in {CURRICULUM_DATASET_SCHEMA_VERSION, LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION}
+            in {
+                CURRICULUM_DATASET_SCHEMA_VERSION,
+                LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+                TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
+            }
             else BOOTSTRAP_TEACHER_ID
         )
         if report.get("teacher_id") != expected_teacher_id:
@@ -1673,15 +1892,12 @@ def verify_bootstrap_teacher_dataset(
             in {
                 CURRICULUM_DATASET_SCHEMA_VERSION,
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+                TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
             }
         ):
             errors.append("bootstrap dataset and state-set schema generations differ")
         if isinstance(state_set, CurriculumStateSet):
-            expected_schema = (
-                LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
-                if state_set.capture_policy is not None
-                else CURRICULUM_DATASET_SCHEMA_VERSION
-            )
+            expected_schema = _dataset_schema_for(state_set)
             if dataset_schema != expected_schema:
                 errors.append("bootstrap dataset policy generation differs from state set")
         raw_cases = _list(report.get("cases"), "dataset cases")
@@ -1827,6 +2043,7 @@ def load_curriculum_policy_examples(
     if report.get("schema_version") not in {
         CURRICULUM_DATASET_SCHEMA_VERSION,
         LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+        TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
     }:
         raise ValueError("Policy examples require a curriculum dataset")
     root = report_path.parent.resolve()
@@ -2641,14 +2858,21 @@ def _curriculum_dataset_summary(
     weights = [
         _number(target.get("policy_target_weight"), "policy target weight") for target in targets
     ]
-    return {
+    summary_document = {
         **summary,
         "unique_states": len({case.expected_state_hash for case in state_set.cases}),
         "source_floor_histogram": floor_counts,
         "decision_type_histogram": decision_counts,
         "reachable_coordinates": len(state_set.cases),
-        "unreachable_coordinates": len(
-            _list(state_set.discovery.get("unreachable_coordinates"), "unreachable coordinates")
+        "unreachable_coordinates": (
+            0
+            if state_set.signal_spec.requires_terminal_signal
+            else len(
+                _list(
+                    state_set.discovery.get("unreachable_coordinates"),
+                    "unreachable coordinates",
+                )
+            )
         ),
         "effective_labeled_states": sum(weights),
         "hard_target_eligible_states": sum(
@@ -2672,6 +2896,55 @@ def _curriculum_dataset_summary(
             "non_victory": summary["simulations"] - summary["terminal_victories"],
         },
     }
+    if state_set.signal_spec.requires_terminal_signal:
+        outcomes = [
+            _as_mapping(outcome)
+            for target in targets
+            for candidate in map(_as_mapping, _list(target.get("candidates"), "target candidates"))
+            for outcome in _list(candidate.get("outcomes"), "candidate outcomes")
+        ]
+        terminal_defeats = sum(
+            outcome.get("terminal") is True and outcome.get("victory") is False
+            for outcome in outcomes
+        )
+        censored = sum(outcome.get("terminal") is not True for outcome in outcomes)
+        terminal_variation = 0
+        fully_observed = 0
+        for target in targets:
+            rates: list[float] = []
+            all_candidates_observed = True
+            for candidate in map(_as_mapping, _list(target.get("candidates"), "target candidates")):
+                candidate_outcomes = [
+                    _as_mapping(outcome)
+                    for outcome in _list(candidate.get("outcomes"), "candidate outcomes")
+                ]
+                completed_outcomes = [
+                    outcome for outcome in candidate_outcomes if outcome.get("terminal") is True
+                ]
+                if not completed_outcomes:
+                    all_candidates_observed = False
+                    break
+                rates.append(
+                    sum(outcome.get("victory") is True for outcome in completed_outcomes)
+                    / len(completed_outcomes)
+                )
+            if all_candidates_observed and rates:
+                fully_observed += 1
+                terminal_variation += max(rates) > min(rates)
+        summary_document.update(
+            {
+                "terminal_defeats": terminal_defeats,
+                "censored_simulations": censored,
+                "states_with_complete_candidate_terminal_observation": fully_observed,
+                "states_with_candidate_terminal_variation": terminal_variation,
+                "terminal_outcome_classes": {
+                    "victory": summary["terminal_victories"],
+                    "defeat": terminal_defeats,
+                    "censored": censored,
+                },
+            }
+        )
+    return summary_document
 
 
 def _assess_curriculum_signal(
@@ -2704,12 +2977,35 @@ def _assess_curriculum_signal(
         >= spec.minimum_occupied_maximum_floor_bins,
     }
     terminal_classes = _mapping(summary.get("terminal_outcome_classes"), "terminal classes")
-    terminal_head_checks = {
-        "victories_present": _integer(terminal_classes.get("victory"), "victories") > 0,
-        "non_victories_present": _integer(terminal_classes.get("non_victory"), "non-victories") > 0,
-    }
+    if spec.requires_terminal_signal:
+        terminal_head_checks = {
+            "minimum_terminal_victories": (
+                _integer(terminal_classes.get("victory"), "victories")
+                >= cast(int, spec.minimum_terminal_victories)
+            ),
+            "minimum_terminal_defeats": (
+                _integer(terminal_classes.get("defeat"), "defeats")
+                >= cast(int, spec.minimum_terminal_defeats)
+            ),
+            "minimum_states_with_candidate_terminal_variation": (
+                _integer(
+                    summary.get("states_with_candidate_terminal_variation"),
+                    "states with candidate terminal variation",
+                )
+                >= cast(int, spec.minimum_states_with_candidate_terminal_variation)
+            ),
+        }
+        assessment_schema = "bootstrap-curriculum-signal-assessment-v2"
+    else:
+        terminal_head_checks = {
+            "victories_present": _integer(terminal_classes.get("victory"), "victories") > 0,
+            "non_victories_present": (
+                _integer(terminal_classes.get("non_victory"), "non-victories") > 0
+            ),
+        }
+        assessment_schema = "bootstrap-curriculum-signal-assessment-v1"
     return {
-        "schema_version": "bootstrap-curriculum-signal-assessment-v1",
+        "schema_version": assessment_schema,
         "spec": spec.as_dict(),
         "auxiliary_policy_signal_pass": all(checks.values()),
         "terminal_head_promotion_pass": all(terminal_head_checks.values()),
@@ -2794,6 +3090,16 @@ def _dataset_configuration(
     return configuration
 
 
+def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
+    if not isinstance(state_set, CurriculumStateSet):
+        return BOOTSTRAP_DATASET_SCHEMA_VERSION
+    if state_set.discovery.get("schema_version") == "bootstrap-curriculum-discovery-v3":
+        return TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION
+    if state_set.capture_policy is not None:
+        return LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
+    return CURRICULUM_DATASET_SCHEMA_VERSION
+
+
 def _worker_result_schema(task: BootstrapSimulationTask) -> str:
     return (
         LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
@@ -2815,15 +3121,7 @@ def _prepare_failed_dataset_resume(
     report_body = {key: value for key, value in report.items() if key != "dataset_id"}
     if report.get("dataset_id") != manifest_identifier(report_body):
         raise ValueError("Cannot resume a bootstrap dataset with an invalid identity")
-    expected_schema = (
-        (
-            LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION
-            if state_set.capture_policy is not None
-            else CURRICULUM_DATASET_SCHEMA_VERSION
-        )
-        if isinstance(state_set, CurriculumStateSet)
-        else BOOTSTRAP_DATASET_SCHEMA_VERSION
-    )
+    expected_schema = _dataset_schema_for(state_set)
     if report.get("schema_version") != expected_schema:
         raise ValueError("Cannot resume a bootstrap dataset with a different schema")
     previous_state_set = load_bootstrap_state_set_document(report.get("state_set"))
@@ -2865,7 +3163,12 @@ def _validate_bootstrap_split(
 def _load_curriculum_state_set_document(
     document: dict[str, Any],
 ) -> CurriculumStateSet:
-    learned = document.get("schema_version") == LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+    schema_version = document.get("schema_version")
+    learned = schema_version in {
+        LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
+        TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
+    }
+    frontier = schema_version == TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
     expected_keys = {
         "schema_version",
         "state_set_id",
@@ -2891,11 +3194,27 @@ def _load_curriculum_state_set_document(
     if state_set_id != manifest_identifier(body):
         raise ValueError("Curriculum state-set identity mismatch")
     discovery = dict(_mapping(document.get("discovery"), "discovery"))
-    requested = _integer(discovery.get("requested_coordinates"), "requested coordinates")
     captured = _integer(discovery.get("captured_coordinates"), "captured coordinates")
-    unreachable = _list(discovery.get("unreachable_coordinates"), "unreachable coordinates")
-    if requested != captured + len(unreachable):
-        raise ValueError("Curriculum discovery does not account for every requested coordinate")
+    if frontier:
+        if discovery.get("schema_version") != "bootstrap-curriculum-discovery-v3":
+            raise ValueError("Terminal-frontier state set requires v3 discovery evidence")
+        eligible = _integer(discovery.get("eligible_coordinates"), "eligible coordinates")
+        if captured > eligible:
+            raise ValueError("Frontier discovery captured more states than were eligible")
+        requested_runs = _integer(discovery.get("requested_runs"), "requested runs")
+        terminal_runs = _integer(discovery.get("terminal_runs"), "terminal runs")
+        step_limited_runs = _integer(discovery.get("step_limited_runs"), "step-limited runs")
+        if requested_runs != terminal_runs + step_limited_runs:
+            raise ValueError("Frontier discovery does not account for every requested run")
+        victorious_runs = _integer(discovery.get("victorious_runs"), "victorious runs")
+        defeated_runs = _integer(discovery.get("defeated_runs"), "defeated runs")
+        if terminal_runs != victorious_runs + defeated_runs:
+            raise ValueError("Frontier discovery does not account for every terminal run")
+    else:
+        requested = _integer(discovery.get("requested_coordinates"), "requested coordinates")
+        unreachable = _list(discovery.get("unreachable_coordinates"), "unreachable coordinates")
+        if requested != captured + len(unreachable):
+            raise ValueError("Curriculum discovery does not account for every requested coordinate")
     state_set = CurriculumStateSet(
         state_set_id=state_set_id,
         split_manifest_id=_string(document.get("split_manifest_id"), "split_manifest_id"),
@@ -2921,6 +3240,24 @@ def _load_curriculum_state_set_document(
     )
     if len(state_set.cases) != captured:
         raise ValueError("Curriculum captured-coordinate count differs from cases")
+    if frontier:
+        selection = _mapping(discovery.get("frontier_selection"), "frontier selection")
+        minimum_floor = _integer(selection.get("minimum_source_floor"), "minimum source floor")
+        minimum_actions = _integer(selection.get("minimum_legal_actions"), "minimum legal actions")
+        allowed_types = {
+            DecisionType(_string(value, "frontier decision type"))
+            for value in _list(selection.get("decision_types"), "frontier decision types")
+        }
+        if not state_set.signal_spec.requires_terminal_signal:
+            raise ValueError("Terminal-frontier state set omits terminal signal thresholds")
+        if any(
+            case.expected_source_floor is None
+            or case.expected_source_floor < minimum_floor
+            or case.expected_legal_actions < minimum_actions
+            or case.decision_type not in allowed_types
+            for case in state_set.cases
+        ):
+            raise ValueError("Terminal-frontier case violates its frozen selection policy")
     return state_set
 
 
@@ -3022,18 +3359,25 @@ def _curriculum_state_case(value: object) -> CurriculumStateCase:
 
 def _curriculum_signal_spec(value: object) -> CurriculumSignalSpec:
     document = _mapping(value, "curriculum signal spec")
-    _exact_keys(
-        document,
-        {
-            "minimum_states",
-            "minimum_source_floors",
-            "minimum_decision_types",
-            "minimum_effective_labeled_states",
-            "minimum_half_split_agreement",
-            "minimum_occupied_maximum_floor_bins",
-        },
-        "curriculum signal spec",
-    )
+    base_keys = {
+        "minimum_states",
+        "minimum_source_floors",
+        "minimum_decision_types",
+        "minimum_effective_labeled_states",
+        "minimum_half_split_agreement",
+        "minimum_occupied_maximum_floor_bins",
+    }
+    terminal_keys = {
+        "minimum_terminal_victories",
+        "minimum_terminal_defeats",
+        "minimum_states_with_candidate_terminal_variation",
+    }
+    keys = frozenset(document)
+    if keys not in {frozenset(base_keys), frozenset(base_keys | terminal_keys)}:
+        raise ValueError(
+            "Curriculum signal spec must contain either the legacy thresholds or all "
+            "terminal-signal thresholds"
+        )
     return CurriculumSignalSpec(
         minimum_states=_integer(document.get("minimum_states"), "minimum_states"),
         minimum_source_floors=_integer(
@@ -3052,6 +3396,24 @@ def _curriculum_signal_spec(value: object) -> CurriculumSignalSpec:
         minimum_occupied_maximum_floor_bins=_integer(
             document.get("minimum_occupied_maximum_floor_bins"),
             "minimum_occupied_maximum_floor_bins",
+        ),
+        minimum_terminal_victories=(
+            _integer(document.get("minimum_terminal_victories"), "minimum_terminal_victories")
+            if "minimum_terminal_victories" in document
+            else None
+        ),
+        minimum_terminal_defeats=(
+            _integer(document.get("minimum_terminal_defeats"), "minimum_terminal_defeats")
+            if "minimum_terminal_defeats" in document
+            else None
+        ),
+        minimum_states_with_candidate_terminal_variation=(
+            _integer(
+                document.get("minimum_states_with_candidate_terminal_variation"),
+                "minimum_states_with_candidate_terminal_variation",
+            )
+            if "minimum_states_with_candidate_terminal_variation" in document
+            else None
         ),
     )
 

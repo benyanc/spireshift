@@ -1,0 +1,311 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-state-set-v4.json",
+  "title": "SpireShift Terminal-Frontier Curriculum State Set v4",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "state_set_id",
+    "split_manifest_id",
+    "ruleset_manifest_id",
+    "objective_id",
+    "capture_policy_id",
+    "partition",
+    "selection_policy",
+    "discovery",
+    "signal_spec",
+    "cases",
+    "capture_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "bootstrap-state-set-v4"
+    },
+    "state_set_id": {
+      "$ref": "#/$defs/contentId"
+    },
+    "split_manifest_id": {
+      "$ref": "#/$defs/contentId"
+    },
+    "ruleset_manifest_id": {
+      "$ref": "#/$defs/contentId"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "capture_policy_id": {
+      "type": "string",
+      "pattern": "^production-checkpoint-policy-v1:sha256:[a-f0-9]{64}$"
+    },
+    "partition": {
+      "enum": [
+        "train",
+        "validation"
+      ]
+    },
+    "selection_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "discovery": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "requested_runs",
+        "maximum_steps_per_run",
+        "frontier_selection",
+        "eligible_coordinates",
+        "captured_coordinates",
+        "runs_with_eligible_coordinates",
+        "terminal_runs",
+        "victorious_runs",
+        "defeated_runs",
+        "step_limited_runs",
+        "source_maximum_floor_histogram"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "bootstrap-curriculum-discovery-v3"
+        },
+        "requested_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "run_offset": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_steps_per_run": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "frontier_selection": {
+          "type": "object",
+          "required": [
+            "decision_types",
+            "minimum_source_floor",
+            "minimum_legal_actions",
+            "maximum_states_per_run"
+          ],
+          "properties": {
+            "decision_types": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "path",
+                  "combat",
+                  "combat_selection",
+                  "reward",
+                  "event",
+                  "rest_site",
+                  "shop",
+                  "treasure",
+                  "card_selection",
+                  "relic_selection",
+                  "mini_game"
+                ]
+              }
+            },
+            "minimum_source_floor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minimum_legal_actions": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "maximum_states_per_run": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "eligible_coordinates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "captured_coordinates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "runs_with_eligible_coordinates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "terminal_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "victorious_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "defeated_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "step_limited_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_maximum_floor_histogram": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "signal_spec": {
+      "$ref": "bootstrap-curriculum-discovery-spec-v3.json#/$defs/signalSpec"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    },
+    "capture_policy": {
+      "$ref": "#/$defs/policyProvenance"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "contentId": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "state_id",
+        "run_seed",
+        "decision_type",
+        "decision_index",
+        "expected_state_hash",
+        "expected_legal_actions",
+        "expected_source_floor",
+        "expected_source_act"
+      ],
+      "properties": {
+        "state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_type": {
+          "enum": [
+            "path",
+            "combat",
+            "combat_selection",
+            "reward",
+            "event",
+            "rest_site",
+            "shop",
+            "treasure",
+            "card_selection",
+            "relic_selection",
+            "mini_game"
+          ]
+        },
+        "decision_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expected_state_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "expected_legal_actions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expected_source_floor": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "expected_source_act": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "unreachable": {
+      "type": "object",
+      "required": [
+        "run_seed",
+        "decision_type",
+        "decision_index",
+        "reason"
+      ],
+      "properties": {
+        "run_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "policyProvenance": {
+      "type": "object",
+      "required": [
+        "kind",
+        "policy_id",
+        "model_id",
+        "training_report_id",
+        "split_manifest_id",
+        "ruleset_manifest_id"
+      ],
+      "properties": {
+        "kind": {
+          "const": "production_checkpoint"
+        },
+        "policy_id": {
+          "type": "string",
+          "pattern": "^production-checkpoint-policy-v1:sha256:[a-f0-9]{64}$"
+        },
+        "model_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "training_report_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "split_manifest_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "ruleset_manifest_id": {
+          "$ref": "#/$defs/contentId"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
