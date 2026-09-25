@@ -270,6 +270,21 @@ uv run spireshift resources run \
     --max-decisions-per-run 4096
 ```
 
+The completed base-v3 pilot is
+`sha256:d45465af532cf3a2f0ea796aa1ac02f97d513aa45b4050940a00630718ea9489`. It won
+zero runs and reached mean maximum floor 7.25, compared with 7.28125 for base-v2 on the same seeds.
+At the seed level, v3 reached a higher floor 12 times, a lower floor nine times, and tied 11 times;
+the mean paired difference was -0.03125 floors, with a deterministic paired-bootstrap 95% interval
+of [-0.594, 0.531]. This does not establish an improvement.
+
+Base-v3 also hit the 4,096-decision cap on seeds 174, 241, and 244, while base-v2 terminated all 32
+runs. Those three cases added 12,312 decisions and reduced v3's terminal rate to 90.625%. Base-v2
+remains the production checkpoint; base-v3 is retained as a negative-result artifact and as input
+to the liveness work in issue #96. The first 32 test seeds are pilot evidence and must not be reused
+to tune and reselect another checkpoint. The remaining 68 test seeds stay sealed for the later final
+benchmark. The v3 pilot used 80.40 wall seconds and its verified resource report is
+`sha256:025a494efdf8622cc565433077bdc61e2e6e65a5b75e9313a3c53b7315b7466b`.
+
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
 [`production-model-training-report-v2.json`](../schemas/production-model-training-report-v2.json).
