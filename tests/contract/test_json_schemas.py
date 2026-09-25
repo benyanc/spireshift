@@ -196,6 +196,10 @@ def _registry() -> Registry[Any]:
             "production-model-inference-smoke-v1.json",
             "../../docs/evidence/production-model-inference-smoke-v0.107.1.json",
         ),
+        (
+            "production-model-inference-smoke-v1.json",
+            "../../docs/evidence/production-model-inference-smoke-v3-v0.107.1.json",
+        ),
         ("experiment-metrics-v1.json", "experiment-metrics-v1.json"),
         ("experiment-resources-v1.json", "experiment-resources-v1.json"),
     ],

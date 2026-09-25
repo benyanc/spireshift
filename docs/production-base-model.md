@@ -221,6 +221,55 @@ If execution stops before the aggregate report is created, rerun the inner
 `evaluate-curriculum` command with `--resume`; it verifies and reuses existing cases and executes
 only missing seed-policy pairs. Use a new resource-report path for that resumed invocation.
 
+## Learned-policy curriculum v3 candidate
+
+The learned-policy curriculum produced a valid base-v3 candidate from 979 train records across 80
+complete runs and 256 validation records across 24 disjoint runs. Its checkpoint is
+`sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c`; its training
+report is `sha256:6cc0f8d7728636c87ab5ecf0e64f5ae420d2b3a87394c7bc0d921a13fa5c7543`.
+All four prespecified auxiliary-policy checks passed. Compared with base-v2, mean progress regret
+improved from 0.002580 to 0.002004 and hard-teacher action agreement increased from 49.0% to 54.7%.
+Weighted pairwise cross-entropy worsened from 0.6497 to 0.6812, decisive-pair accuracy fell from
+78.4% to 57.0%, and tactical-risk Brier skill fell from 0.268 to 0.105. Base-v3 therefore remains a
+candidate pending the same frozen-test full-run evaluation; training metrics alone do not promote
+it over base-v2. Terminal-value training remains blocked because train and validation contain no
+victories.
+
+Training used 349.69 wall seconds, 336.27 CPU seconds, 849 MB peak memory, and 4.57 MB of artifact
+storage. Its resource report is
+`sha256:41207dce9fc851a759a1592c3537a789965a625fd4d864fc33c5b65c03654d9a`. The
+[base-v3 inference smoke](evidence/production-model-inference-smoke-v3-v0.107.1.json) is
+`sha256:eb02b268cc0f24cc750755098d0e13eb95efc3b452e9621b3f7244ba7fff4ec3`. It aligned
+all eight decisions, selected legal actions using public state only, and measured 5.27 ms median
+and 7.24 ms maximum end-to-end latency.
+
+The following sustained command evaluates base-v3 against the progress baseline on the same 32
+frozen test seeds used for base-v2:
+
+```bash
+uv run spireshift resources run \
+  --kind rollout \
+  --report artifacts/resources/production-base-v3-policy-evaluation-pilot.json \
+  --metrics artifacts/resources/production-base-v3-policy-evaluation-pilot-metrics.json \
+  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v3-policy-pilot \
+  --workers 4 \
+  --max-wall-seconds 14400 \
+  --max-cpu-seconds 50000 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
+  -- \
+  uv run --extra evangambit spireshift model evaluate-curriculum \
+    artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+    --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v3-policy-pilot \
+    --runs 32 \
+    --workers 4 \
+    --max-decisions-per-run 4096
+```
+
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
 [`production-model-training-report-v2.json`](../schemas/production-model-training-report-v2.json).
