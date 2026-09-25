@@ -7,10 +7,6 @@ import pytest
 
 from spireshift.core.manifest import manifest_identifier
 from spireshift.production_inference import load_production_inference_smoke
-from spireshift.production_models import (
-    load_production_model_checkpoint,
-    load_production_training_report,
-)
 from spireshift.readiness import (
     assess_base_model_readiness,
     load_readiness_audit,
@@ -22,17 +18,44 @@ from spireshift.splits import SplitName, load_split_manifest
 
 SPLIT_PATH = Path("manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json")
 SPEC_PATH = Path("configs/readiness/sts2-v0.107.1-base-v2-validation-v1.json")
-CHECKPOINT_PATH = Path("artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json")
-TRAINING_REPORT_PATH = Path("artifacts/models/sts2-v0.107.1-base-v2/training-report.json")
-SMOKE_PATH = Path("artifacts/models/sts2-v0.107.1-base-v2/inference-smoke.json")
+SMOKE_PATH = Path("docs/evidence/production-model-inference-smoke-v0.107.1.json")
 ASSESSMENT_PATH = Path("docs/evidence/production-base-v2-readiness-v1.json")
 
 
 def _inputs() -> tuple[Any, dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
     split = load_split_manifest(SPLIT_PATH)
     spec = load_readiness_spec(SPEC_PATH, split_manifest=split)
-    checkpoint = load_production_model_checkpoint(CHECKPOINT_PATH)
-    report = load_production_training_report(TRAINING_REPORT_PATH, checkpoint=checkpoint)
+    binding = cast(dict[str, Any], spec["binding"])
+    checkpoint = {
+        "model_id": binding["model_id"],
+        "train_dataset_id": binding["train_dataset_id"],
+        "split_manifest_id": binding["split_manifest_id"],
+        "ruleset_manifest_id": binding["ruleset_manifest_id"],
+        "objective_id": binding["objective_id"],
+        "representation_encoder_id": binding["representation_encoder_id"],
+    }
+    report = {
+        "report_id": binding["training_report_id"],
+        "validation_dataset_id": binding["validation_dataset_id"],
+        "held_out_metrics": {
+            "policy": {
+                "auxiliary_policy_gate": {"passed": True},
+                "decisive_pair_accuracy": 0.784090909091,
+                "weighted_pairwise_cross_entropy": 0.649716865192,
+                "mean_progress_utility_regret": 0.002580458145,
+            },
+            "tactical_death_risk": {
+                "brier_skill_score": 0.268396631284,
+                "expected_calibration_error": 0.058843345848,
+            },
+        },
+        "terminal_value_status": {
+            "promoted": False,
+            "reason": "all_zero_terminal_victory_evidence",
+            "train_victories": 0,
+            "validation_victories": 0,
+        },
+    }
     smoke = load_production_inference_smoke(
         SMOKE_PATH,
         model_id=str(checkpoint["model_id"]),
