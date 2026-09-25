@@ -61,6 +61,46 @@ class _LoopingMockEnvironment(MockSpireEnvironment):
         )
 
 
+class _RecoverableLoopEnvironment(MockSpireEnvironment):
+    def legal_actions(self) -> tuple[LegalAction, ...]:
+        if self._state.terminal:
+            return ()
+        return (
+            LegalAction("finish", "choose", {}),
+            LegalAction("stuck", "choose", {}),
+        )
+
+    def step(self, action: LegalAction) -> Transition:
+        observation = self._observation()
+        legal = {candidate.action_id: candidate for candidate in self.legal_actions()}
+        if action.action_id not in legal:
+            raise ValueError(f"Illegal action: {action.action_id}")
+        if action.action_id == "finish":
+            self._state.terminal = True
+        return Transition(
+            observation=observation,
+            action=legal[action.action_id],
+            next_observation=self._observation(),
+            reward=0.0,
+            terminal=self._state.terminal,
+            victory=False,
+        )
+
+
+class _AlwaysLastPolicy:
+    def __init__(self, *, model_id: str, split_manifest_id: str) -> None:
+        self.model_id = model_id
+        self.policy_id = f"production-checkpoint-policy-v1:{model_id}"
+        self.split_manifest_id = split_manifest_id
+        self.ruleset = MockSpireEnvironment.ruleset
+
+    def choose_action(
+        self, observation: object, legal_actions: tuple[LegalAction, ...]
+    ) -> LegalAction:
+        del observation
+        return legal_actions[-1]
+
+
 def _write_synthetic_curriculum(
     root: Path,
     *,
@@ -525,8 +565,8 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
     assert evaluation.successful is True
     assert preserved_path.read_text() == preserved_case
     assert missing_path.is_file()
-    report_schema = json.loads(Path("schemas/production-policy-evaluation-v2.json").read_text())
-    case_schema = json.loads(Path("schemas/production-policy-evaluation-case-v2.json").read_text())
+    report_schema = json.loads(Path("schemas/production-policy-evaluation-v3.json").read_text())
+    case_schema = json.loads(Path("schemas/production-policy-evaluation-case-v3.json").read_text())
     Draft202012Validator(report_schema).validate(evaluation.report)
     for reference in evaluation.report["cases"]:
         case = json.loads((output / reference["path"]).read_text())
@@ -541,6 +581,41 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
         == evaluation.report
     )
 
+    v2_root = tmp_path / "v2-evaluation"
+    (v2_root / "cases").mkdir(parents=True)
+    v2_references = []
+    for reference in evaluation.report["cases"]:
+        case = json.loads((output / reference["path"]).read_text())
+        case.pop("case_id")
+        case.pop("fallback")
+        case["schema_version"] = "production-policy-evaluation-case-v2"
+        case["case_id"] = manifest_identifier(case)
+        (v2_root / reference["path"]).write_text(json.dumps(case), encoding="utf-8")
+        v2_references.append({**reference, "case_id": case["case_id"]})
+    v2_report = copy.deepcopy(evaluation.report)
+    v2_report.pop("report_id")
+    v2_report["schema_version"] = "production-policy-evaluation-v2"
+    v2_report["configuration"].pop("no_op_fallback_controller_id")
+    v2_report["configuration"].pop("no_op_fallback_threshold")
+    for policy_kind in ("learned", "baseline"):
+        v2_report["summary"][policy_kind].pop("fallback_runs")
+        v2_report["summary"][policy_kind].pop("fallback_invocations")
+        v2_report["summary"][policy_kind].pop("suppressed_no_op_actions")
+        v2_report["summary"][policy_kind].pop("fallback_exhausted_states")
+    v2_report["cases"] = v2_references
+    v2_report["report_id"] = manifest_identifier(v2_report)
+    v2_report_path = v2_root / "production-policy-evaluation.json"
+    v2_report_path.write_text(json.dumps(v2_report), encoding="utf-8")
+    assert (
+        load_production_policy_evaluation(
+            v2_report_path,
+            model_id=cast(str, checkpoint["model_id"]),
+            training_report_id=cast(str, report["report_id"]),
+            split_manifest=split,
+        )
+        == v2_report
+    )
+
     legacy_root = tmp_path / "legacy-evaluation"
     (legacy_root / "cases").mkdir(parents=True)
     legacy_references = []
@@ -549,6 +624,7 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
         case.pop("case_id")
         case.pop("termination_reason")
         case.pop("liveness")
+        case.pop("fallback")
         case["schema_version"] = "production-policy-evaluation-case-v1"
         case["case_id"] = manifest_identifier(case)
         (legacy_root / reference["path"]).write_text(json.dumps(case), encoding="utf-8")
@@ -558,10 +634,16 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
     legacy_report["schema_version"] = "production-policy-evaluation-v1"
     legacy_report["configuration"].pop("cycle_repetition_threshold")
     legacy_report["configuration"].pop("liveness_tail_length")
+    legacy_report["configuration"].pop("no_op_fallback_controller_id")
+    legacy_report["configuration"].pop("no_op_fallback_threshold")
     for policy_kind in ("learned", "baseline"):
         legacy_report["summary"][policy_kind].pop("policy_cycle_runs")
         legacy_report["summary"][policy_kind].pop("decision_limit_runs")
         legacy_report["summary"][policy_kind].pop("liveness_pass")
+        legacy_report["summary"][policy_kind].pop("fallback_runs")
+        legacy_report["summary"][policy_kind].pop("fallback_invocations")
+        legacy_report["summary"][policy_kind].pop("suppressed_no_op_actions")
+        legacy_report["summary"][policy_kind].pop("fallback_exhausted_states")
     legacy_report["cases"] = legacy_references
     legacy_report["report_id"] = manifest_identifier(legacy_report)
     legacy_report_path = legacy_root / "production-policy-evaluation.json"
@@ -691,3 +773,64 @@ def test_production_policy_evaluation_detects_public_state_action_cycles(
         )
         == evaluation.report
     )
+
+
+def test_production_policy_evaluation_recovers_from_public_no_op_with_alternative(
+    tmp_path: Path,
+) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    model_id = manifest_identifier({"model": "fallback-test"})
+    training_report_id = manifest_identifier({"report": "fallback-test"})
+    policy = _AlwaysLastPolicy(model_id=model_id, split_manifest_id=split.manifest_id)
+    seed = split.seeds(SplitName.VALIDATION)[0]
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    evaluation = run_production_policy_evaluation(
+        environment_factory=_RecoverableLoopEnvironment,
+        ruleset=MockSpireEnvironment.ruleset,
+        learned_policy=cast(ProductionCheckpointPolicy, policy),
+        split_manifest=split,
+        training_report_id=training_report_id,
+        seeds=(seed,),
+        workers=2,
+        maximum_decisions_per_run=20,
+        output_directory=tmp_path / "fallback-evaluation",
+        partition=SplitName.VALIDATION,
+        no_op_fallback_threshold=2,
+        now=lambda: next(timestamps),
+    )
+
+    learned = next(
+        json.loads((evaluation.report_path.parent / reference["path"]).read_text())
+        for reference in evaluation.report["cases"]
+        if reference["policy_kind"] == "production_checkpoint"
+    )
+    assert learned["terminal"] is True
+    assert learned["truncated"] is False
+    assert learned["termination_reason"] == "terminal"
+    assert learned["decisions"] == 3
+    assert learned["fallback"] == {
+        "schema_version": "public-no-op-fallback-v1",
+        "controller_id": "public-no-op-action-guard-v1",
+        "repetition_threshold": 2,
+        "event_limit": 16,
+        "invocations": 1,
+        "suppressed_actions": 1,
+        "exhausted_states": 0,
+        "events": [
+            {
+                "decision_index": 1,
+                "state_hash": learned["fallback"]["events"][0]["state_hash"],
+                "decision_type": "path",
+                "action_id": "stuck",
+                "unchanged_occurrences": 2,
+            }
+        ],
+    }
+    summary = evaluation.report["summary"]["learned"]
+    assert summary["liveness_pass"] is True
+    assert summary["fallback_runs"] == 1
+    assert summary["fallback_invocations"] == 1
+    assert summary["suppressed_no_op_actions"] == 1
+    assert summary["fallback_exhausted_states"] == 0
+    schema = json.loads(Path("schemas/production-policy-evaluation-v3.json").read_text())
+    Draft202012Validator(schema).validate(evaluation.report)

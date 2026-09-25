@@ -15,16 +15,20 @@ from spireshift.agents.baseline import ProgressBootstrapPolicy
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter, Policy
+from spireshift.liveness import PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION, PublicNoOpActionGuard
 from spireshift.models import write_model_artifact
 from spireshift.splits import SplitManifest, SplitName
 
 LEGACY_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v1"
 LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v1"
-PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v2"
-PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v2"
+LIVENESS_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v2"
+LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v2"
+PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v3"
+PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v3"
 POLICY_LIVENESS_SCHEMA_VERSION = "policy-liveness-diagnostic-v1"
 DEFAULT_CYCLE_REPETITION_THRESHOLD = 8
 DEFAULT_LIVENESS_TAIL_LENGTH = 16
+DEFAULT_NO_OP_FALLBACK_THRESHOLD = 2
 LEARNED_POLICY_KIND = "production_checkpoint"
 BASELINE_POLICY_KIND = "progress_bootstrap_baseline"
 
@@ -50,6 +54,7 @@ def run_production_policy_evaluation(
     partition: SplitName = SplitName.TEST,
     cycle_repetition_threshold: int = DEFAULT_CYCLE_REPETITION_THRESHOLD,
     liveness_tail_length: int = DEFAULT_LIVENESS_TAIL_LENGTH,
+    no_op_fallback_threshold: int = DEFAULT_NO_OP_FALLBACK_THRESHOLD,
     resume: bool = False,
     now: Callable[[], str] | None = None,
 ) -> ProductionPolicyEvaluationResult:
@@ -76,6 +81,8 @@ def run_production_policy_evaluation(
         raise ValueError("cycle_repetition_threshold must be at least two")
     if liveness_tail_length <= 0:
         raise ValueError("liveness_tail_length must be positive")
+    if no_op_fallback_threshold <= 0:
+        raise ValueError("no_op_fallback_threshold must be positive")
     if output_directory.exists() and not resume:
         raise FileExistsError(f"Production evaluation output already exists: {output_directory}")
     output_directory.mkdir(parents=True, exist_ok=True)
@@ -110,6 +117,11 @@ def run_production_policy_evaluation(
                     or resumed_case["liveness"]["tail_limit"] != liveness_tail_length
                 ):
                     raise ValueError("Production evaluation resumed liveness config differs")
+                if resumed_case["status"] == "completed" and (
+                    resumed_case["fallback"]["repetition_threshold"] != no_op_fallback_threshold
+                    or resumed_case["fallback"]["event_limit"] != liveness_tail_length
+                ):
+                    raise ValueError("Production evaluation resumed fallback config differs")
                 cases.append(resumed_case)
             else:
                 pending.append((seed, policy_kind, policy, model_id, case_path))
@@ -130,6 +142,7 @@ def run_production_policy_evaluation(
                 partition=partition,
                 cycle_repetition_threshold=cycle_repetition_threshold,
                 liveness_tail_length=liveness_tail_length,
+                no_op_fallback_threshold=no_op_fallback_threshold,
             )
             future_to_task[future] = task
         for future in as_completed(future_to_task):
@@ -164,6 +177,8 @@ def run_production_policy_evaluation(
             "maximum_decisions_per_run": maximum_decisions_per_run,
             "cycle_repetition_threshold": cycle_repetition_threshold,
             "liveness_tail_length": liveness_tail_length,
+            "no_op_fallback_controller_id": PublicNoOpActionGuard.controller_id,
+            "no_op_fallback_threshold": no_op_fallback_threshold,
             "paired_policies": [policy.policy_id for _, policy, _ in policies],
         },
         "cases": [
@@ -180,8 +195,10 @@ def run_production_policy_evaluation(
             for case in ordered_cases
         ],
         "summary": {
-            "learned": _policy_summary(learned_cases, include_liveness=True),
-            "baseline": _policy_summary(baseline_cases, include_liveness=True),
+            "learned": _policy_summary(learned_cases, include_liveness=True, include_fallback=True),
+            "baseline": _policy_summary(
+                baseline_cases, include_liveness=True, include_fallback=True
+            ),
             "paired": _paired_summary(learned_cases, baseline_cases),
         },
         "claim_scope": _claim_scope(partition),
@@ -209,7 +226,11 @@ def load_production_policy_evaluation(
         partition = SplitName.TEST
         case_schema_version = LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
         include_liveness = False
-    elif schema_version == PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION:
+        include_fallback = False
+    elif schema_version in (
+        LIVENESS_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
+        PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
+    ):
         raw_partition = report.get("partition")
         if not isinstance(raw_partition, str):
             raise ValueError("Production policy evaluation partition differs")
@@ -219,8 +240,13 @@ def load_production_policy_evaluation(
             raise ValueError("Production policy evaluation partition differs") from error
         if partition not in (SplitName.VALIDATION, SplitName.TEST):
             raise ValueError("Production policy evaluation partition differs")
-        case_schema_version = PRODUCTION_POLICY_CASE_SCHEMA_VERSION
         include_liveness = True
+        include_fallback = schema_version == PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
+        case_schema_version = (
+            PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+            if include_fallback
+            else LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+        )
     else:
         raise ValueError("Production policy evaluation schema differs")
     expected_fields = {
@@ -261,6 +287,7 @@ def load_production_policy_evaluation(
         raise ValueError("Production policy evaluation decision limit must be positive")
     cycle_repetition_threshold: int | None = None
     liveness_tail_length: int | None = None
+    no_op_fallback_threshold: int | None = None
     if include_liveness:
         cycle_repetition_threshold = _integer(
             configuration.get("cycle_repetition_threshold"),
@@ -272,6 +299,15 @@ def load_production_policy_evaluation(
         )
         if cycle_repetition_threshold < 2 or liveness_tail_length <= 0:
             raise ValueError("Production policy evaluation liveness configuration differs")
+    if include_fallback:
+        if configuration.get("no_op_fallback_controller_id") != PublicNoOpActionGuard.controller_id:
+            raise ValueError("Production policy evaluation fallback controller differs")
+        no_op_fallback_threshold = _integer(
+            configuration.get("no_op_fallback_threshold"),
+            "configuration.no_op_fallback_threshold",
+        )
+        if no_op_fallback_threshold <= 0:
+            raise ValueError("Production policy evaluation fallback threshold differs")
     raw_references = report.get("cases")
     if not isinstance(raw_references, list):
         raise ValueError("Production policy evaluation cases are missing")
@@ -318,6 +354,14 @@ def load_production_policy_evaluation(
                 or liveness["tail_limit"] != liveness_tail_length
             ):
                 raise ValueError("Production policy evaluation case liveness config differs")
+        if include_fallback and case["status"] == "completed":
+            fallback = case["fallback"]
+            if (
+                fallback["controller_id"] != PublicNoOpActionGuard.controller_id
+                or fallback["repetition_threshold"] != no_op_fallback_threshold
+                or fallback["event_limit"] != liveness_tail_length
+            ):
+                raise ValueError("Production policy evaluation case fallback config differs")
         cases.append(case)
     expected_coordinates = {
         (seed, policy_kind)
@@ -329,8 +373,16 @@ def load_production_policy_evaluation(
     learned_cases = [case for case in cases if case["policy_kind"] == LEARNED_POLICY_KIND]
     baseline_cases = [case for case in cases if case["policy_kind"] == BASELINE_POLICY_KIND]
     expected_summary = {
-        "learned": _policy_summary(learned_cases, include_liveness=include_liveness),
-        "baseline": _policy_summary(baseline_cases, include_liveness=include_liveness),
+        "learned": _policy_summary(
+            learned_cases,
+            include_liveness=include_liveness,
+            include_fallback=include_fallback,
+        ),
+        "baseline": _policy_summary(
+            baseline_cases,
+            include_liveness=include_liveness,
+            include_fallback=include_fallback,
+        ),
         "paired": _paired_summary(learned_cases, baseline_cases),
     }
     if report.get("summary") != expected_summary:
@@ -350,6 +402,7 @@ def _evaluate_case(
     partition: SplitName,
     cycle_repetition_threshold: int,
     liveness_tail_length: int,
+    no_op_fallback_threshold: int,
 ) -> dict[str, Any]:
     environment: EnvironmentAdapter | None = None
     try:
@@ -362,6 +415,10 @@ def _evaluate_case(
         decisions = 0
         decision_seconds: list[float] = []
         action_ids: list[str] = []
+        no_op_guard = PublicNoOpActionGuard(
+            repetition_threshold=no_op_fallback_threshold,
+            event_limit=liveness_tail_length,
+        )
         trace_tail: list[dict[str, Any]] = []
         state_action_counts: dict[tuple[str, str], int] = {}
         transition_occurrences: dict[tuple[str, str, str], list[int]] = {}
@@ -374,9 +431,10 @@ def _evaluate_case(
         terminal = bool(observation.public_state.get("terminal"))
         victory = bool(observation.public_state.get("victory")) if terminal else False
         while not terminal and decisions < maximum_decisions:
-            actions = tuple(environment.legal_actions())
-            if not actions:
+            legal_actions = tuple(environment.legal_actions())
+            if not legal_actions:
                 raise RuntimeError("Nonterminal evaluation state has no legal actions")
+            actions = no_op_guard.eligible_actions(observation, legal_actions)
             started = time.perf_counter()
             if isinstance(policy, ProductionCheckpointPolicy):
                 decision = policy.predict(observation, actions)
@@ -385,14 +443,21 @@ def _evaluate_case(
             else:
                 action = policy.choose_action(observation, actions)
                 elapsed = time.perf_counter() - started
-            if action not in actions:
+            if action not in actions or action not in legal_actions:
                 raise RuntimeError("Evaluation policy selected an illegal action")
             decision_seconds.append(elapsed)
             action_ids.append(action.action_id)
             source_state_hash = observation.state_hash
             decision_type = observation.decision_type.value
+            source_observation = observation
             transition = environment.step(action)
             observation = transition.next_observation
+            no_op_guard.observe_transition(
+                observation=source_observation,
+                action=action,
+                next_observation=observation,
+                decision_index=decisions,
+            )
             next_state_hash = observation.state_hash
             trace_tail.append(
                 {
@@ -469,6 +534,7 @@ def _evaluate_case(
                 liveness_tail_length=liveness_tail_length,
                 trace_tail=trace_tail,
             ),
+            "fallback": no_op_guard.as_dict(),
             "maximum_floor": maximum_floor,
             "maximum_act": maximum_act,
             "final_state_hash": observation.state_hash,
@@ -495,6 +561,7 @@ def _evaluate_case(
             "truncated": None,
             "termination_reason": None,
             "liveness": None,
+            "fallback": None,
             "maximum_floor": None,
             "maximum_act": None,
             "final_state_hash": None,
@@ -559,7 +626,10 @@ def _liveness_diagnostic(
 
 
 def _policy_summary(
-    cases: Sequence[dict[str, Any]], *, include_liveness: bool = False
+    cases: Sequence[dict[str, Any]],
+    *,
+    include_liveness: bool = False,
+    include_fallback: bool = False,
 ) -> dict[str, Any]:
     completed = [case for case in cases if case["status"] == "completed"]
     terminal = [case for case in completed if case["terminal"] is True]
@@ -595,6 +665,23 @@ def _policy_summary(
                 "policy_cycle_runs": policy_cycles,
                 "decision_limit_runs": decision_limits,
                 "liveness_pass": policy_cycles == 0 and decision_limits == 0,
+            }
+        )
+    if include_fallback:
+        fallback_cases = [case["fallback"] for case in completed]
+        fallback_invocations = sum(int(fallback["invocations"]) for fallback in fallback_cases)
+        summary.update(
+            {
+                "fallback_runs": sum(
+                    int(fallback["invocations"]) > 0 for fallback in fallback_cases
+                ),
+                "fallback_invocations": fallback_invocations,
+                "suppressed_no_op_actions": sum(
+                    int(fallback["suppressed_actions"]) for fallback in fallback_cases
+                ),
+                "fallback_exhausted_states": sum(
+                    int(fallback["exhausted_states"]) for fallback in fallback_cases
+                ),
             }
         )
     return summary
@@ -676,10 +763,15 @@ def _validate_case(case: dict[str, Any]) -> None:
     schema_version = case.get("schema_version")
     if schema_version not in (
         LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
         PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
     ):
         raise ValueError("Production evaluation case schema differs")
-    include_liveness = schema_version == PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+    include_liveness = schema_version in (
+        LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+    )
+    include_fallback = schema_version == PRODUCTION_POLICY_CASE_SCHEMA_VERSION
     status = case.get("status")
     result_fields: tuple[str, ...] = (
         "decisions",
@@ -696,6 +788,8 @@ def _validate_case(case: dict[str, Any]) -> None:
     )
     if include_liveness:
         result_fields += ("termination_reason", "liveness")
+    if include_fallback:
+        result_fields += ("fallback",)
     if status == "failed":
         if not isinstance(case.get("error"), str) or not case["error"]:
             raise ValueError("Failed production evaluation case has no error")
@@ -728,6 +822,11 @@ def _validate_case(case: dict[str, Any]) -> None:
         if not isinstance(liveness, dict):
             raise ValueError("Production evaluation case liveness diagnostic is missing")
         _validate_liveness(liveness, termination_reason=termination_reason, decisions=decisions)
+    if include_fallback:
+        fallback = case.get("fallback")
+        if not isinstance(fallback, dict):
+            raise ValueError("Production evaluation fallback diagnostic is missing")
+        _validate_fallback(fallback, decisions=decisions)
     for field in ("final_state_hash", "action_trace_sha256"):
         _string(case.get(field), f"case.{field}")
     for field in (
@@ -834,6 +933,47 @@ def _validate_liveness(
         raise ValueError("Production evaluation cycle repetition count is invalid")
     if unchanged < 0 or unchanged > repeated:
         raise ValueError("Production evaluation unchanged transition count is invalid")
+
+
+def _validate_fallback(fallback: dict[str, Any], *, decisions: int) -> None:
+    if fallback.get("schema_version") != PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION:
+        raise ValueError("Production evaluation fallback schema differs")
+    if fallback.get("controller_id") != PublicNoOpActionGuard.controller_id:
+        raise ValueError("Production evaluation fallback controller differs")
+    repetition_threshold = _integer(
+        fallback.get("repetition_threshold"), "case.fallback.repetition_threshold"
+    )
+    event_limit = _integer(fallback.get("event_limit"), "case.fallback.event_limit")
+    invocations = _integer(fallback.get("invocations"), "case.fallback.invocations")
+    suppressed_actions = _integer(
+        fallback.get("suppressed_actions"), "case.fallback.suppressed_actions"
+    )
+    exhausted_states = _integer(fallback.get("exhausted_states"), "case.fallback.exhausted_states")
+    if repetition_threshold <= 0 or event_limit <= 0:
+        raise ValueError("Production evaluation fallback config is invalid")
+    if min(invocations, suppressed_actions, exhausted_states) < 0:
+        raise ValueError("Production evaluation fallback counts are invalid")
+    events = fallback.get("events")
+    if not isinstance(events, list) or len(events) > event_limit:
+        raise ValueError("Production evaluation fallback events are invalid")
+    previous_index = -1
+    for event in events:
+        if not isinstance(event, dict):
+            raise ValueError("Production evaluation fallback event must be an object")
+        index = _integer(event.get("decision_index"), "case.fallback.events[].decision_index")
+        if index <= previous_index or index >= decisions:
+            raise ValueError("Production evaluation fallback event indices are invalid")
+        previous_index = index
+        for field in ("state_hash", "decision_type", "action_id"):
+            _string(event.get(field), f"case.fallback.events[].{field}")
+        unchanged = _integer(
+            event.get("unchanged_occurrences"),
+            "case.fallback.events[].unchanged_occurrences",
+        )
+        if unchanged != repetition_threshold:
+            raise ValueError("Production evaluation fallback event threshold differs")
+    if suppressed_actions < len(events):
+        raise ValueError("Production evaluation fallback event coverage is invalid")
 
 
 def _load_object(path: Path, label: str) -> dict[str, Any]:

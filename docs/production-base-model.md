@@ -294,17 +294,34 @@ repeat, the decision type, whether the public state was unchanged, and at most t
 transition hashes. The aggregate separates `policy_cycle_runs` from unexplained
 `decision_limit_runs`. These diagnostics do not expose engine-private state.
 
-Before changing policy behavior, run the prespecified liveness suite over all 100 validation seeds.
-This suite may diagnose and test a generic fallback, but it must not use the 32 opened test outcomes
-or the 68 sealed test seeds for model selection. An automated coding agent prepares and verifies the
-command but does not start or monitor it:
+The first prespecified 100-seed validation suite is
+`sha256:b8240f031c0e3d82031651528cdc412f9fe25bb05125a3fd64e09a63a08bc459`. It
+found zero unexplained decision-limit truncations and three learned-policy cycles, on validation
+seeds 225, 335, and 627. All three selected `evangambit:relic_reward:4` on a relic-selection state
+and received the identical public state eight times. The baseline terminated all 100 runs. The
+resource report is
+`sha256:6b820720a2ecdd74dfae47b33f66e6a25da3202982b355a2c8d685498f6aec75`;
+the suite used 50.37 wall seconds, 60.14 CPU seconds, 134 MB peak memory, and 1.50 MB storage.
+
+The public evidence exposed an admitted-backend action collision: a five-item reward screen can
+advertise index 4 as a compacted reward action while `StepRelicReward` interprets index 4 as
+discarding potion slot 0 whenever a potion reward is pending. If that slot is empty, the backend
+rejects the advertised action and returns an unchanged state. Evaluation format v3 therefore adds a
+generic controller that suppresses an action after it produces the same public state twice, provided
+another legal action remains. It records every suppression, invocation, and exhausted state. A
+bounded smoke over the three failures terminated all three learned runs, reached floors 6, 7, and 8,
+and used the fallback six times without exhausting a legal-action set.
+
+Rerun the same prespecified 100 validation seeds with the generic fallback. Do not use the 32 opened
+test outcomes or the 68 sealed test seeds for this work. An automated coding agent prepares and
+verifies the command but does not start or monitor it:
 
 ```bash
 uv run spireshift resources run \
   --kind rollout \
-  --report artifacts/resources/production-base-v3-validation-liveness-v1.json \
-  --metrics artifacts/resources/production-base-v3-validation-liveness-v1-metrics.json \
-  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v1 \
+  --report artifacts/resources/production-base-v3-validation-liveness-v2.json \
+  --metrics artifacts/resources/production-base-v3-validation-liveness-v2-metrics.json \
+  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v2 \
   --workers 4 \
   --max-wall-seconds 14400 \
   --max-cpu-seconds 50000 \
@@ -317,31 +334,32 @@ uv run spireshift resources run \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
     --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v1 \
+    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v2 \
     --partition validation \
     --runs 100 \
     --workers 4 \
     --max-decisions-per-run 4096 \
     --cycle-repetition-threshold 8 \
-    --liveness-tail-length 16
+    --liveness-tail-length 16 \
+    --no-op-fallback-threshold 2
 ```
 
 After it finishes, verify both content-addressed reports:
 
 ```bash
 uv run spireshift model verify-evaluation-curriculum \
-  artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v1/production-policy-evaluation.json \
+  artifacts/evaluations/sts2-v0.107.1-base-v3-validation-liveness-v2/production-policy-evaluation.json \
   artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
   --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
   --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json
 
 uv run spireshift resources verify \
-  artifacts/resources/production-base-v3-validation-liveness-v1.json
+  artifacts/resources/production-base-v3-validation-liveness-v2.json
 ```
 
-The first result gate is zero `decision_limit_runs` for both policies. Any detected policy cycle is
-then reproduced from its validation case and addressed with a decision-type-independent safeguard
-before another frozen-test evaluation. Base-v3 remains rejected throughout this diagnostic work.
+The result gate is zero `decision_limit_runs`, zero `policy_cycle_runs`, and zero
+`fallback_exhausted_states` for both policies. Base-v3 remains rejected throughout this diagnostic
+work; passing this gate establishes liveness only and does not reverse its frozen-test quality result.
 
 The checkpoint and report schemas are
 [`production-model-checkpoint-v2.json`](../schemas/production-model-checkpoint-v2.json) and
@@ -349,7 +367,7 @@ The checkpoint and report schemas are
 The inference evidence schema is
 [`production-model-inference-smoke-v1.json`](../schemas/production-model-inference-smoke-v1.json).
 The paired evaluation schemas are
-[`production-policy-evaluation-v2.json`](../schemas/production-policy-evaluation-v2.json) and
-[`production-policy-evaluation-case-v2.json`](../schemas/production-policy-evaluation-case-v2.json).
+[`production-policy-evaluation-v3.json`](../schemas/production-policy-evaluation-v3.json) and
+[`production-policy-evaluation-case-v3.json`](../schemas/production-policy-evaluation-case-v3.json).
 The loader retains read-only verification compatibility with the version-1 base-v2 and rejected
-base-v3 pilot artifacts.
+base-v3 pilot artifacts and the version-2 validation diagnostic.
