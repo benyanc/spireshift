@@ -691,7 +691,7 @@ def build_parser() -> argparse.ArgumentParser:
     production_smoke_verify.add_argument("--output", type=Path)
     production_evaluate = model_commands.add_parser(
         "evaluate-curriculum",
-        help="Run a resumable paired full-run evaluation on frozen test seeds",
+        help="Run a resumable paired full-run evaluation with public liveness diagnostics",
     )
     production_evaluate.add_argument("checkpoint", type=Path)
     production_evaluate.add_argument("--report", type=Path, required=True)
@@ -702,8 +702,15 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluation_seeds = production_evaluate.add_mutually_exclusive_group()
     production_evaluation_seeds.add_argument("--seeds", type=int, nargs="+")
     production_evaluation_seeds.add_argument("--runs", type=int, default=32)
+    production_evaluate.add_argument(
+        "--partition",
+        choices=(SplitName.VALIDATION.value, SplitName.TEST.value),
+        default=SplitName.TEST.value,
+    )
     production_evaluate.add_argument("--workers", type=int, default=4)
     production_evaluate.add_argument("--max-decisions-per-run", type=int, default=4096)
+    production_evaluate.add_argument("--cycle-repetition-threshold", type=int, default=8)
+    production_evaluate.add_argument("--liveness-tail-length", type=int, default=16)
     production_evaluate.add_argument("--resume", action="store_true")
     production_evaluate_verify = model_commands.add_parser(
         "verify-evaluation-curriculum",
@@ -1598,10 +1605,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.report, checkpoint=evaluation_checkpoint
                 )
                 evaluation_split = load_split_manifest(args.split_manifest)
+                evaluation_partition = SplitName(args.partition)
                 if args.seeds is None:
                     if args.runs <= 0:
                         raise ValueError("Production evaluation --runs must be positive")
-                    evaluation_seeds = evaluation_split.seeds(SplitName.TEST)[: args.runs]
+                    evaluation_seeds = evaluation_split.seeds(evaluation_partition)[: args.runs]
                 else:
                     evaluation_seeds = tuple(args.seeds)
                 evaluation_backend = load_evangambit_backend(
@@ -1631,6 +1639,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                     workers=args.workers,
                     maximum_decisions_per_run=args.max_decisions_per_run,
                     output_directory=args.output_dir,
+                    partition=evaluation_partition,
+                    cycle_repetition_threshold=args.cycle_repetition_threshold,
+                    liveness_tail_length=args.liveness_tail_length,
                     resume=args.resume,
                 )
                 evaluation_summary = evaluation_result.report["summary"]
