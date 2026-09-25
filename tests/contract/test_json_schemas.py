@@ -283,6 +283,23 @@ def test_learned_curriculum_discovery_configuration_conforms_to_schema(
     validator.validate(_load(Path(configuration)))
 
 
+@pytest.mark.parametrize(
+    "configuration",
+    [
+        "configs/bootstrap/sts2-v0.107.1-evangambit-train-terminal-frontier-v4.json",
+        "configs/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json",
+    ],
+)
+def test_terminal_frontier_discovery_configuration_conforms_to_schema(
+    configuration: str,
+) -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "bootstrap-curriculum-discovery-spec-v3.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path(configuration)))
+
+
 def test_observation_rejects_unmarked_privileged_state() -> None:
     fixture = _load(FIXTURE_DIR / "observation-v1.json")
     fixture["privileged_state"] = {"future_rng": 0.01}
