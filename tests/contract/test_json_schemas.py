@@ -250,6 +250,7 @@ def test_curriculum_discovery_configuration_conforms_to_schema(configuration: st
     [
         "configs/bootstrap/sts2-v0.107.1-evangambit-train-learned-curriculum-v3.json",
         "configs/bootstrap/sts2-v0.107.1-evangambit-validation-learned-curriculum-v3.json",
+        "configs/bootstrap/sts2-v0.107.1-evangambit-train-learned-supplement-v3.json",
     ],
 )
 def test_learned_curriculum_discovery_configuration_conforms_to_schema(

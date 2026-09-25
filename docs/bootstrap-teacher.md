@@ -354,3 +354,68 @@ uv run spireshift resources run \
 For validation generation, replace `train` with `validation` in the report, metrics, artifact root,
 state-set, and output paths. Do not retrain the model until both generated datasets verify and pass
 their auxiliary-policy signal gates.
+
+The completed production generation found 22.718 effective labeled train states against the
+prespecified threshold of 24.0. Every other train gate passed, and validation passed all gates with
+10.5 effective states against its threshold of 8.0. Keep the train threshold unchanged and add the
+prespecified 16-run supplement from ranked train positions 64 through 79. `--run-offset 64` makes
+those complete-run seeds disjoint from the original 64-run train curriculum:
+
+```bash
+uv run --extra evangambit spireshift bootstrap discover-states \
+  configs/bootstrap/sts2-v0.107.1-evangambit-train-learned-supplement-v3.json \
+  artifacts/bootstrap/discovery-train-v3-supplement/state-set.json \
+  --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+  --backend evangambit \
+  --upstream-root artifacts/backend/evangambit-v0.107.1 \
+  --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+  --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+  --policy-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+  --run-offset 64
+```
+
+Generate the supplement with the same teacher settings as the original train dataset:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-teacher-v3-supplement.json \
+  --metrics artifacts/resources/bootstrap-train-teacher-v3-supplement-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-train-v3-supplement \
+  --workers 8 \
+  --max-wall-seconds 7200 \
+  --max-cpu-seconds 40000 \
+  --max-storage-bytes 5000000000 \
+  --max-memory-bytes 32000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-train-v3-supplement \
+    --states artifacts/bootstrap/discovery-train-v3-supplement/state-set.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+    --samples-per-candidate 16 \
+    --workers 8 \
+    --worker-timeout 120
+```
+
+After generation completes, combine it with the original train dataset. Composition fully verifies
+both inputs, rejects overlapping run seeds, keeps the stricter threshold from either component,
+recomputes all summaries and content identities, and hard-links immutable case evidence where the
+filesystem supports it:
+
+```bash
+uv run spireshift bootstrap combine-curricula \
+  artifacts/bootstrap/teacher-train-v3-combined \
+  artifacts/bootstrap/teacher-train-v3/bootstrap-teacher-dataset.json \
+  artifacts/bootstrap/teacher-train-v3-supplement/bootstrap-teacher-dataset.json \
+  --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json
+```
+
+Use `artifacts/bootstrap/teacher-train-v3-combined/bootstrap-teacher-dataset.json` as the training
+dataset only if its emitted `auxiliary_policy_signal_pass` is true. Dataset verification caches
+checkpoint validation by resolved path, modification time, and size, so every worker request still
+binds the exact learned-policy identity without reparsing the model for every task.

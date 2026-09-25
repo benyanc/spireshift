@@ -15,7 +15,9 @@ from spireshift.bootstrap_teacher import (
     bootstrap_utility,
     capture_bootstrap_combat_state,
     capture_curriculum_state,
+    combine_curriculum_datasets,
     discover_curriculum_state_set,
+    execute_bootstrap_task,
     freeze_bootstrap_state_set,
     load_bootstrap_state_set,
     load_bootstrap_state_set_document,
@@ -669,3 +671,164 @@ def test_learned_policy_discovery_and_tasks_bind_exact_artifact_identity(
             output_directory=tmp_path / "mismatch",
             policy_artifacts=mismatched,
         )
+
+
+def test_policy_artifact_validation_is_cached_until_file_metadata_changes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    checkpoint_path = tmp_path / "checkpoint.json"
+    report_path = tmp_path / "training-report.json"
+    checkpoint_path.write_text("{}", encoding="utf-8")
+    report_path.write_text("{}", encoding="utf-8")
+    calls = {"checkpoint": 0, "report": 0}
+
+    def load_checkpoint(_path: Path) -> dict[str, str]:
+        calls["checkpoint"] += 1
+        return {
+            "model_id": "sha256:" + "a" * 64,
+            "split_manifest_id": "sha256:" + "b" * 64,
+            "ruleset_manifest_id": "sha256:" + "c" * 64,
+        }
+
+    def load_report(_path: Path, *, checkpoint: object) -> dict[str, str]:
+        assert checkpoint
+        calls["report"] += 1
+        return {"report_id": "sha256:" + "d" * 64}
+
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_model_checkpoint", load_checkpoint
+    )
+    monkeypatch.setattr("spireshift.production_models.load_production_training_report", load_report)
+
+    first = BootstrapPolicyArtifacts.from_paths(checkpoint_path, report_path)
+    second = BootstrapPolicyArtifacts.from_paths(checkpoint_path, report_path)
+    assert first == second
+    assert calls == {"checkpoint": 1, "report": 1}
+
+    checkpoint_path.write_text('{"changed": true}', encoding="utf-8")
+    BootstrapPolicyArtifacts.from_paths(checkpoint_path, report_path)
+    assert calls == {"checkpoint": 2, "report": 2}
+
+
+def test_learned_curriculum_offset_and_seed_disjoint_composition(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured = capture_curriculum_state(
+        backend=SearchBackendSpec.tactical_mock(),
+        run_seed=7,
+        decision_type=DecisionType.COMBAT,
+        decision_index=0,
+        maximum_prefix_steps=4,
+    )
+    split = freeze_split_manifest(
+        {
+            "schema_version": "split-manifest-v1",
+            "split_id": "tactical-bootstrap-composition-v1",
+            "ruleset_manifest_id": captured.checkpoint.ruleset_manifest_id,
+            "objective_id": "terminal-victory-v1",
+            "unit": "complete_run",
+            "seed_universe": {"start": 7, "stop_exclusive": 9},
+            "assignment": {
+                "algorithm": "sha256-ranked-v1",
+                "salt": "spireshift/tactical-bootstrap/composition-v1",
+                "counts": {"train": 2, "validation": 0, "test": 0},
+            },
+            "encounter_policy": {
+                "unit": "encounter_instance",
+                "inherits_split_from": "complete_run",
+                "identifier_fields": ["run_id", "encounter_id"],
+                "cross_partition_reuse": "forbidden",
+            },
+        }
+    )
+    checkpoint_path = tmp_path / "checkpoint.json"
+    training_report_path = tmp_path / "training-report.json"
+    checkpoint_path.write_text("{}", encoding="utf-8")
+    training_report_path.write_text("{}", encoding="utf-8")
+    model_id = "sha256:" + "e" * 64
+    report_id = "sha256:" + "f" * 64
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_model_checkpoint",
+        lambda _path: {
+            "model_id": model_id,
+            "split_manifest_id": split.manifest_id,
+            "ruleset_manifest_id": split.ruleset_manifest_id,
+        },
+    )
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_training_report",
+        lambda _path, *, checkpoint: {
+            "model_id": checkpoint["model_id"],
+            "report_id": report_id,
+        },
+    )
+    artifacts = BootstrapPolicyArtifacts.from_paths(checkpoint_path, training_report_path)
+    monkeypatch.setattr(
+        BootstrapPolicyArtifacts,
+        "load_policy",
+        lambda _self, _ruleset: ProgressBootstrapPolicy(),
+    )
+    specification = _curriculum_spec(split)
+    specification.update(
+        {
+            "schema_version": "bootstrap-curriculum-discovery-spec-v2",
+            "capture_policy_id": artifacts.policy_id,
+        }
+    )
+    config = BootstrapConfig(
+        samples_per_candidate=2,
+        maximum_prefix_steps=4,
+        maximum_rollout_steps=4,
+        workers=2,
+    )
+    component_paths: list[Path] = []
+    component_seeds: list[set[int]] = []
+    for offset in (0, 1):
+        state_set = load_bootstrap_state_set_document(
+            discover_curriculum_state_set(
+                specification,
+                backend=SearchBackendSpec.tactical_mock(),
+                split_manifest=split,
+                policy_artifacts=artifacts,
+                run_offset=offset,
+            )
+        )
+        assert isinstance(state_set, CurriculumStateSet)
+        assert state_set.discovery.get("run_offset") == (offset or None)
+        component_seeds.append({case.run_seed for case in state_set.cases})
+        result = run_bootstrap_teacher_dataset(
+            backend=SearchBackendSpec.tactical_mock(),
+            state_set=state_set,
+            split_manifest=split,
+            objective=load_objective(Path("configs/default.toml")),
+            config=config,
+            output_directory=tmp_path / f"component-{offset}",
+            task_runner=execute_bootstrap_task,
+            policy_artifacts=artifacts,
+        )
+        assert result.successful
+        component_paths.append(result.report_path)
+
+    assert component_seeds[0].isdisjoint(component_seeds[1])
+    combined = combine_curriculum_datasets(
+        component_paths,
+        output_directory=tmp_path / "combined",
+        split_manifest=split,
+    )
+    assert combined.successful
+    assert combined.report["summary"]["completed_cases"] == sum(
+        len(seeds) * 2 for seeds in component_seeds
+    )
+    combined_state_set = load_bootstrap_state_set_document(combined.report["state_set"])
+    assert isinstance(combined_state_set, CurriculumStateSet)
+    assert combined_state_set.discovery["component_state_set_ids"] == [
+        json.loads(path.read_text(encoding="utf-8"))["state_set"]["state_set_id"]
+        for path in component_paths
+    ]
+    verification = verify_bootstrap_teacher_dataset(
+        combined.report_path,
+        split_manifest=split,
+    )
+    assert verification.valid
