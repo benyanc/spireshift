@@ -5,7 +5,7 @@ a deterministic sparse model intended to answer a narrow question before larger 
 adaptive search are introduced: does the paired teacher evidence produce a useful low-cost policy
 under a frozen complete-run split?
 
-The model fits three active candidate-conditioned heads:
+The model fits three always-active candidate-conditioned heads:
 
 - a policy score trained on every candidate pair whose paired outcomes carry evidence beyond the
   configured noise floor;
@@ -24,10 +24,18 @@ soft-baseline, risk, and each floor head select their own epoch, after which tho
 refit from scratch on all train runs. The frozen validation partition is evaluated once after
 refitting.
 
-The terminal-victory head remains explicitly blocked. Both production datasets contain zero
-victories, so fitting a constant losing value would create no useful value signal. The checkpoint
-records that status and cannot be loaded as though it contained a terminal-value head. Floor and
-risk predictions remain auxiliary evidence and cannot satisfy the terminal-victory readiness gate.
+Version 3 can also fit a candidate-conditioned terminal-victory head. It promotes that head only
+when the train fitting subfold, train model-selection subfold, and frozen validation partition each
+contain at least one completed victory and one completed non-victory. Capped outcomes are censored,
+not mislabeled as losses. The terminal head selects its epoch on the train-owned selection subfold,
+is refit from scratch on all train runs, and reports calibration and Brier skill on validation.
+The checkpoint/report pair records the exact completed, victorious, losing, and censored counts for
+every partition.
+
+The existing base-v2 and base-v3 datasets contain zero victories, so their terminal-victory heads
+remain explicitly blocked. Their checkpoints cannot be loaded as though they contained a terminal
+value estimate. Floor and risk predictions remain auxiliary evidence and cannot satisfy the
+terminal-victory readiness gate. Version-1 and version-2 artifacts remain read compatible.
 
 ## Frozen inputs
 
