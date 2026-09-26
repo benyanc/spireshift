@@ -1,0 +1,408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-teacher-dataset-v5.json",
+  "title": "SpireShift Combat-Advancement Terminal-Frontier Dataset v5",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "teacher_id",
+    "utility_id",
+    "seed_protocol_id",
+    "objective_id",
+    "objective",
+    "auxiliary_reward_allowed",
+    "backend",
+    "state_set",
+    "configuration",
+    "started_at",
+    "completed_at",
+    "cases",
+    "summary",
+    "claim_scope",
+    "signal_assessment"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "bootstrap-teacher-dataset-v5"
+    },
+    "dataset_id": {
+      "$ref": "#/$defs/contentId"
+    },
+    "teacher_id": {
+      "const": "paired-preference-curriculum-teacher-v2"
+    },
+    "utility_id": {
+      "const": "terminal-dominant-floor-act-hp-v1"
+    },
+    "seed_protocol_id": {
+      "const": "sha256-paired-bootstrap-v1"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "objective": {
+      "type": "object"
+    },
+    "auxiliary_reward_allowed": {
+      "const": false
+    },
+    "backend": {
+      "type": "object"
+    },
+    "state_set": {
+      "$ref": "bootstrap-state-set-v5.json"
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "samples_per_candidate",
+        "sampling_seed",
+        "maximum_prefix_steps",
+        "maximum_rollout_steps",
+        "workers",
+        "worker_timeout_seconds",
+        "continuation_policy",
+        "combat_advancement_config"
+      ],
+      "properties": {
+        "samples_per_candidate": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sampling_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maximum_prefix_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximum_rollout_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "worker_timeout_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "continuation_policy": {
+          "$ref": "#/$defs/policyProvenance"
+        },
+        "combat_advancement_config": {
+          "$ref": "combat-advancement-config-v1.json"
+        }
+      },
+      "additionalProperties": false
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/caseReference"
+      }
+    },
+    "summary": {
+      "$ref": "#/$defs/summary"
+    },
+    "claim_scope": {
+      "enum": [
+        "train_curriculum_only",
+        "validation_curriculum_only"
+      ]
+    },
+    "signal_assessment": {
+      "$ref": "#/$defs/signalAssessment"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "contentId": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "caseReference": {
+      "type": "object",
+      "required": [
+        "state_id",
+        "path",
+        "sha256",
+        "case_id"
+      ],
+      "properties": {
+        "state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "case_id": {
+          "$ref": "#/$defs/contentId"
+        }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "benchmark_denominator",
+        "completed_cases",
+        "failed_cases",
+        "records",
+        "candidates",
+        "simulations",
+        "transitions",
+        "terminal_victories",
+        "states_with_candidate_progress_variation",
+        "occupied_maximum_floor_bins",
+        "completion_rate",
+        "unique_states",
+        "source_floor_histogram",
+        "decision_type_histogram",
+        "reachable_coordinates",
+        "unreachable_coordinates",
+        "effective_labeled_states",
+        "hard_target_eligible_states",
+        "half_split_evaluable_states",
+        "half_split_winner_agreement_rate",
+        "mean_paired_preference_margin",
+        "terminal_outcome_classes",
+        "terminal_defeats",
+        "censored_simulations",
+        "states_with_complete_candidate_terminal_observation",
+        "states_with_candidate_terminal_variation"
+      ],
+      "properties": {
+        "benchmark_denominator": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "completed_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidates": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "simulations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "transitions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "terminal_victories": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "states_with_candidate_progress_variation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "occupied_maximum_floor_bins": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "unique_states": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_floor_histogram": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "decision_type_histogram": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "reachable_coordinates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unreachable_coordinates": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effective_labeled_states": {
+          "type": "number",
+          "minimum": 0
+        },
+        "hard_target_eligible_states": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "half_split_evaluable_states": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "half_split_winner_agreement_rate": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mean_paired_preference_margin": {
+          "type": "number",
+          "minimum": 0
+        },
+        "terminal_outcome_classes": {
+          "type": "object",
+          "required": [
+            "victory",
+            "defeat",
+            "censored"
+          ],
+          "properties": {
+            "victory": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "defeat": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "censored": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "terminal_defeats": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "censored_simulations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "states_with_complete_candidate_terminal_observation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "states_with_candidate_terminal_variation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "signalAssessment": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "spec",
+        "auxiliary_policy_signal_pass",
+        "terminal_head_promotion_pass",
+        "checks",
+        "terminal_head_checks"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "bootstrap-curriculum-signal-assessment-v2"
+        },
+        "spec": {
+          "$ref": "bootstrap-curriculum-discovery-spec-v3.json#/$defs/signalSpec"
+        },
+        "auxiliary_policy_signal_pass": {
+          "type": "boolean"
+        },
+        "terminal_head_promotion_pass": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "terminal_head_checks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "policyProvenance": {
+      "type": "object",
+      "required": [
+        "kind",
+        "policy_id",
+        "model_id",
+        "training_report_id",
+        "split_manifest_id",
+        "ruleset_manifest_id",
+        "combat_advancement_config_id"
+      ],
+      "properties": {
+        "kind": {
+          "const": "combat_advancement_checkpoint"
+        },
+        "policy_id": {
+          "type": "string",
+          "pattern": "^combat-advancement-policy-v1:sha256:[a-f0-9]{64}:sha256:[a-f0-9]{64}$"
+        },
+        "model_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "training_report_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "split_manifest_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "ruleset_manifest_id": {
+          "$ref": "#/$defs/contentId"
+        },
+        "combat_advancement_config_id": {
+          "$ref": "#/$defs/contentId"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

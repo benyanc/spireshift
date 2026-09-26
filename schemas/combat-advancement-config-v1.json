@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-advancement-config-v1.json",
+  "title": "SpireShift Combat-Advancement Configuration v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "config_id",
+    "objective_id",
+    "candidate_worlds",
+    "maximum_rollout_steps",
+    "maximum_simulated_transitions_per_decision",
+    "maximum_public_resample_attempts",
+    "progress_weight",
+    "tactical_survival_weight",
+    "sampling_salt"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "combat-advancement-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "candidate_worlds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maximum_rollout_steps": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maximum_simulated_transitions_per_decision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maximum_public_resample_attempts": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "progress_weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "tactical_survival_weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sampling_salt": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,257 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-worker-result-v3.json",
+  "title": "SpireShift Combat-Advancement Bootstrap Worker Result v3",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "batch_id",
+    "task_id",
+    "status",
+    "worker_pid",
+    "message",
+    "request_sha256",
+    "cpu_seconds",
+    "wall_seconds",
+    "output"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "bootstrap-worker-result-v3"
+    },
+    "batch_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "task_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "worker_error"
+      ]
+    },
+    "worker_pid": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "cpu_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "output": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/output"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "optionalInteger": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "method",
+        "patch_id",
+        "ruleset_manifest_id",
+        "source_state_hash",
+        "action_id",
+        "simulation_seed",
+        "continuation_policy_id",
+        "transitions",
+        "terminal",
+        "truncated",
+        "victory",
+        "terminal_reward",
+        "final_state_hash",
+        "source_floor",
+        "maximum_floor",
+        "final_floor",
+        "source_act",
+        "final_act",
+        "act_completed",
+        "final_hp",
+        "final_max_hp",
+        "final_gold",
+        "final_potion_count",
+        "final_relic_count",
+        "bootstrap_utility",
+        "hidden_resample_seed",
+        "hidden_resample_attempts",
+        "combat_advancement_usage"
+      ],
+      "properties": {
+        "method": {
+          "const": "paired-public-combat-advancement-rollout-v3"
+        },
+        "patch_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ruleset_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "source_state_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "simulation_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "continuation_policy_id": {
+          "type": "string",
+          "pattern": "^combat-advancement-policy-v1:sha256:[a-f0-9]{64}:sha256:[a-f0-9]{64}$"
+        },
+        "transitions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "terminal": {
+          "type": "boolean"
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "victory": {
+          "type": "boolean"
+        },
+        "terminal_reward": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "enum": [
+            null,
+            0.0,
+            1.0
+          ]
+        },
+        "final_state_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_floor": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "maximum_floor": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "final_floor": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "source_act": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "final_act": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "act_completed": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "final_hp": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "final_max_hp": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "final_gold": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "final_potion_count": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "final_relic_count": {
+          "$ref": "#/$defs/optionalInteger"
+        },
+        "bootstrap_utility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "hidden_resample_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hidden_resample_attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "combat_advancement_usage": {
+          "type": "object",
+          "required": [
+            "policy_only_decisions",
+            "search_decisions",
+            "simulated_transitions",
+            "hidden_worlds",
+            "public_resample_attempts"
+          ],
+          "properties": {
+            "policy_only_decisions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "search_decisions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "simulated_transitions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "hidden_worlds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "public_resample_attempts": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
