@@ -8,6 +8,7 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from spireshift.agents.baseline import ProgressBootstrapPolicy
+from spireshift.agents.combat_advancement import CombatAdvancementConfig
 from spireshift.bootstrap_teacher import (
     BootstrapConfig,
     BootstrapPolicyArtifacts,
@@ -897,6 +898,171 @@ def test_terminal_frontier_curriculum_requires_completed_action_dependent_outcom
         split_manifest=split,
     )
     assert verification.valid
+
+
+def test_combat_advancement_policy_artifacts_bind_config_and_v5_state_set(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured = capture_curriculum_state(
+        backend=SearchBackendSpec.mock(),
+        run_seed=7,
+        decision_type=DecisionType.PATH,
+        decision_index=0,
+        maximum_prefix_steps=4,
+    )
+    split = _tactical_split(captured.checkpoint.ruleset_manifest_id)
+    checkpoint_path = tmp_path / "checkpoint.json"
+    report_path = tmp_path / "training-report.json"
+    checkpoint_path.write_text("{}", encoding="utf-8")
+    report_path.write_text("{}", encoding="utf-8")
+    model_id = "sha256:" + "3" * 64
+    report_id = "sha256:" + "4" * 64
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_model_checkpoint",
+        lambda _path: {
+            "model_id": model_id,
+            "split_manifest_id": split.manifest_id,
+            "ruleset_manifest_id": split.ruleset_manifest_id,
+        },
+    )
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_training_report",
+        lambda _path, *, checkpoint: {
+            "model_id": checkpoint["model_id"],
+            "report_id": report_id,
+        },
+    )
+    config = CombatAdvancementConfig(
+        candidate_worlds=2,
+        maximum_rollout_steps=4,
+        maximum_simulated_transitions_per_decision=32,
+        maximum_public_resample_attempts=4,
+        progress_weight=0.8,
+        tactical_survival_weight=0.2,
+        sampling_salt="bootstrap-unit-test",
+    )
+    artifacts = BootstrapPolicyArtifacts.from_paths(
+        checkpoint_path,
+        report_path,
+        combat_advancement_config=config,
+    )
+
+    class FakeUsage:
+        def as_dict(self) -> dict[str, int]:
+            return {
+                "policy_only_decisions": 0,
+                "search_decisions": 0,
+                "simulated_transitions": 0,
+                "hidden_worlds": 0,
+                "public_resample_attempts": 0,
+            }
+
+    class FakeCombatAdvancementPolicy(ProgressBootstrapPolicy):
+        def usage(self) -> FakeUsage:
+            return FakeUsage()
+
+    monkeypatch.setattr(
+        BootstrapPolicyArtifacts,
+        "load_policy",
+        lambda _self, _ruleset, *, environment=None: FakeCombatAdvancementPolicy(),
+    )
+    specification = {
+        "schema_version": "bootstrap-curriculum-discovery-spec-v4",
+        "split_manifest_id": split.manifest_id,
+        "ruleset_manifest_id": split.ruleset_manifest_id,
+        "objective_id": split.objective_id,
+        "capture_policy_id": artifacts.policy_id,
+        "partition": "train",
+        "selection_policy": "combat-advancement-frontier-unit-test-v1",
+        "run_count": 1,
+        "frontier_selection": {
+            "decision_types": ["path", "combat"],
+            "minimum_source_floor": 0,
+            "minimum_legal_actions": 2,
+            "maximum_states_per_run": 1,
+        },
+        "maximum_steps_per_run": 4,
+        "signal_spec": {
+            "minimum_states": 1,
+            "minimum_source_floors": 1,
+            "minimum_decision_types": 1,
+            "minimum_effective_labeled_states": 0.1,
+            "minimum_half_split_agreement": 0.0,
+            "minimum_occupied_maximum_floor_bins": 1,
+            "minimum_terminal_victories": 1,
+            "minimum_terminal_defeats": 1,
+            "minimum_states_with_candidate_terminal_variation": 1,
+        },
+    }
+
+    document = discover_curriculum_state_set(
+        specification,
+        backend=SearchBackendSpec.mock(),
+        split_manifest=split,
+        policy_artifacts=artifacts,
+    )
+    state_set = load_bootstrap_state_set_document(document)
+    task = BootstrapSimulationTask(
+        "00000000-0000-4000-8000-000000000002",
+        SearchBackendSpec.mock(),
+        captured.checkpoint,
+        captured.legal_actions[0].action_id,
+        123,
+        4,
+        artifacts,
+    )
+    restored = BootstrapSimulationTask.from_mapping(task.as_dict())
+
+    assert isinstance(state_set, CurriculumStateSet)
+    assert state_set.as_dict()["schema_version"] == "bootstrap-state-set-v5"
+    assert state_set.discovery["schema_version"] == "bootstrap-curriculum-discovery-v4"
+    assert state_set.capture_policy == artifacts.provenance()
+    assert state_set.capture_policy["combat_advancement_config_id"] == config.config_id
+    assert task.as_dict()["schema_version"] == "bootstrap-simulation-task-v3"
+    assert restored.as_dict() == task.as_dict()
+    assert restored.continuation_policy is not None
+    assert restored.continuation_policy.combat_advancement_config == config
+
+    schemas = [
+        json.loads(path.read_text(encoding="utf-8")) for path in Path("schemas").glob("*.json")
+    ]
+    registry = Registry().with_resources(
+        (schema["$id"], Resource.from_contents(schema)) for schema in schemas
+    )
+    for schema_name, value in (
+        ("bootstrap-state-set-v5.json", state_set.as_dict()),
+        ("bootstrap-simulation-task-v3.json", task.as_dict()),
+    ):
+        schema = next(item for item in schemas if item["$id"].endswith(f"/{schema_name}"))
+        Draft202012Validator(schema, registry=registry).validate(value)
+
+    result = run_bootstrap_teacher_dataset(
+        backend=SearchBackendSpec.mock(),
+        state_set=state_set,
+        split_manifest=split,
+        objective=load_objective(Path("configs/default.toml")),
+        config=BootstrapConfig(
+            samples_per_candidate=2,
+            maximum_prefix_steps=4,
+            maximum_rollout_steps=4,
+            workers=2,
+        ),
+        output_directory=tmp_path / "combat-advancement-dataset",
+        task_runner=execute_bootstrap_task,
+        policy_artifacts=artifacts,
+    )
+    assert result.successful
+    assert result.report["schema_version"] == "bootstrap-teacher-dataset-v5"
+    assert result.report["configuration"]["combat_advancement_config"] == config.as_dict()
+    dataset_schema = next(
+        item for item in schemas if item["$id"].endswith("/bootstrap-teacher-dataset-v5.json")
+    )
+    Draft202012Validator(dataset_schema, registry=registry).validate(result.report)
+    assert verify_bootstrap_teacher_dataset(
+        result.report_path,
+        split_manifest=split,
+    ).valid
 
 
 def test_policy_artifact_validation_is_cached_until_file_metadata_changes(

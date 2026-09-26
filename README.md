@@ -50,7 +50,9 @@ The repository currently contains the research contracts and a seeded mock verti
     failure-preserving evidence; and
 26. a confidence-weighted production curriculum trainer with pairwise/soft-target comparisons,
     tactical-risk and ordinal floor heads, held-out auxiliary gates, and an explicit block on
-    terminal-value promotion from all-loss data.
+    terminal-value promotion from all-loss data; and
+27. a compute-capped combat-advancement continuation that pairs hidden worlds across legal actions,
+    rejects public-action mismatches, and bootstraps short horizons from learned progress and risk.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -177,6 +179,10 @@ calibration in a content-addressed training report.
 [Production curriculum model training](docs/production-base-model.md) fits candidate-pair evidence
 from the frozen STS2 curricula, compares it with the weighted soft-target formulation, and keeps the
 terminal-value head blocked while the available outcomes remain all losses.
+
+[Combat-advancement continuation](docs/combat-advancement.md) adds equal-budget short-horizon combat
+lookahead to the learned checkpoint while preserving terminal victory as the final objective. Its
+single next operator command runs a matched-seed train discovery before any new teacher generation.
 
 [Selective DAgger collection](docs/selective-dagger.md) runs the student on new complete training
 runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,

@@ -579,3 +579,7 @@ Do not train from these pilot datasets. First inspect `terminal_outcome_classes`
 resource use. If either partition still has no victories, adding samples to the same continuation
 policy is unlikely to solve the blocker; improve the rollout policy or move the frontier closer to
 terminal decisions instead.
+
+The completed pilot produced zero victories in 10,926 completed continuations and stopped this
+sampling path. The next versioned continuation and its single operator-started discovery command are
+documented in [Combat-advancement continuation](combat-advancement.md).

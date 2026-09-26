@@ -1,0 +1,39 @@
+{
+  "schema_version": "bootstrap-curriculum-discovery-spec-v4",
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "objective_id": "terminal-victory-v1",
+  "capture_policy_id": "combat-advancement-policy-v1:sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c:sha256:2c0460f9967612a345c9897c6c5843f711e9fbe516d0252a319136259439487a",
+  "partition": "train",
+  "selection_policy": "ranked-train-runs-base-v3-combat-advancement-v1-deepest-actionable-terminal-frontier-v5",
+  "run_count": 160,
+  "frontier_selection": {
+    "decision_types": [
+      "path",
+      "combat",
+      "combat_selection",
+      "reward",
+      "event",
+      "rest_site",
+      "shop",
+      "treasure",
+      "card_selection",
+      "relic_selection"
+    ],
+    "minimum_source_floor": 7,
+    "minimum_legal_actions": 2,
+    "maximum_states_per_run": 8
+  },
+  "maximum_steps_per_run": 4096,
+  "signal_spec": {
+    "minimum_states": 256,
+    "minimum_source_floors": 5,
+    "minimum_decision_types": 4,
+    "minimum_effective_labeled_states": 24.0,
+    "minimum_half_split_agreement": 0.6,
+    "minimum_occupied_maximum_floor_bins": 6,
+    "minimum_terminal_victories": 8,
+    "minimum_terminal_defeats": 256,
+    "minimum_states_with_candidate_terminal_variation": 4
+  }
+}

@@ -20,6 +20,7 @@ from uuid import NAMESPACE_URL, UUID, uuid5
 from spireshift.agents.baseline import ProgressBootstrapPolicy
 from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
+from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.core.types import DecisionType, LegalAction, Observation
 from spireshift.mechanics import PublicMechanicsService
 from spireshift.representations import CompositionalModelInput, model_input_from_mapping
@@ -34,21 +35,25 @@ from spireshift.search_workers import (
 from spireshift.splits import SplitManifest, SplitName
 
 if TYPE_CHECKING:
-    from spireshift.agents.learned import ProductionCheckpointPolicy
+    from spireshift.agents.combat_advancement import CombatAdvancementConfig
 
 BOOTSTRAP_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v1"
 CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v2"
 LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v3"
 TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v4"
+COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v5"
 BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v1"
 LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v2"
+COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v3"
 BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v1"
 LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v2"
+COMBAT_ADVANCEMENT_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v3"
 BOOTSTRAP_BATCH_SCHEMA_VERSION = "bootstrap-worker-batch-v1"
 BOOTSTRAP_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v1"
 CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v2"
 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v3"
 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v4"
+COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v5"
 BOOTSTRAP_VERIFICATION_SCHEMA_VERSION = "bootstrap-teacher-verification-v1"
 BOOTSTRAP_TEACHER_ID = "paired-terminal-dominant-progress-teacher-v1"
 CURRICULUM_TEACHER_ID = "paired-preference-curriculum-teacher-v2"
@@ -68,12 +73,15 @@ class BootstrapPolicyArtifacts:
     training_report_id: str
     split_manifest_id: str
     ruleset_manifest_id: str
+    combat_advancement_config: CombatAdvancementConfig | None = None
 
     @classmethod
     def from_paths(
         cls,
         checkpoint_path: Path,
         training_report_path: Path,
+        *,
+        combat_advancement_config: CombatAdvancementConfig | None = None,
     ) -> BootstrapPolicyArtifacts:
         resolved_checkpoint = checkpoint_path.expanduser().resolve()
         resolved_report = training_report_path.expanduser().resolve()
@@ -92,41 +100,73 @@ class BootstrapPolicyArtifacts:
             report_stat.st_mtime_ns,
             report_stat.st_size,
         )
+        policy_id = f"production-checkpoint-policy-v1:{model_id}"
+        if combat_advancement_config is not None:
+            policy_id = (
+                f"combat-advancement-policy-v1:{model_id}:{combat_advancement_config.config_id}"
+            )
         return cls(
             checkpoint_path=resolved_checkpoint,
             training_report_path=resolved_report,
-            policy_id=f"production-checkpoint-policy-v1:{model_id}",
+            policy_id=policy_id,
             model_id=model_id,
             training_report_id=training_report_id,
             split_manifest_id=split_manifest_id,
             ruleset_manifest_id=ruleset_manifest_id,
+            combat_advancement_config=combat_advancement_config,
         )
 
     def provenance(self) -> dict[str, str]:
-        return {
-            "kind": "production_checkpoint",
+        provenance = {
+            "kind": (
+                "combat_advancement_checkpoint"
+                if self.combat_advancement_config is not None
+                else "production_checkpoint"
+            ),
             "policy_id": self.policy_id,
             "model_id": self.model_id,
             "training_report_id": self.training_report_id,
             "split_manifest_id": self.split_manifest_id,
             "ruleset_manifest_id": self.ruleset_manifest_id,
         }
+        if self.combat_advancement_config is not None:
+            provenance["combat_advancement_config_id"] = self.combat_advancement_config.config_id
+        return provenance
 
-    def task_dict(self) -> dict[str, str]:
-        return {
+    def task_dict(self) -> dict[str, object]:
+        document: dict[str, object] = {
             **self.provenance(),
             "checkpoint_path": str(self.checkpoint_path),
             "training_report_path": str(self.training_report_path),
         }
+        if self.combat_advancement_config is not None:
+            document["combat_advancement_config"] = self.combat_advancement_config.as_dict()
+        return document
 
-    def load_policy(self, ruleset: object) -> ProductionCheckpointPolicy:
+    def load_policy(
+        self,
+        ruleset: object,
+        *,
+        environment: EnvironmentAdapter | None = None,
+    ) -> Policy:
         # ProductionCheckpointPolicy owns the gate and ruleset checks.
         from spireshift.agents.learned import ProductionCheckpointPolicy
 
-        return ProductionCheckpointPolicy.from_paths(
+        base_policy = ProductionCheckpointPolicy.from_paths(
             self.checkpoint_path,
             self.training_report_path,
             ruleset=cast(Any, ruleset),
+        )
+        if self.combat_advancement_config is None:
+            return base_policy
+        if environment is None:
+            raise ValueError("Combat-advancement policy requires its current environment")
+        from spireshift.agents.combat_advancement import CombatAdvancementPolicy
+
+        return CombatAdvancementPolicy(
+            environment=environment,
+            base_policy=base_policy,
+            config=self.combat_advancement_config,
         )
 
     def validate_for(self, *, split_manifest_id: str, ruleset_manifest_id: str) -> None:
@@ -138,25 +178,38 @@ class BootstrapPolicyArtifacts:
     @classmethod
     def from_task_mapping(cls, value: object) -> BootstrapPolicyArtifacts:
         document = _mapping(value, "bootstrap continuation policy")
+        kind = document.get("kind")
+        combat_advancement = kind == "combat_advancement_checkpoint"
+        expected_keys = {
+            "kind",
+            "policy_id",
+            "model_id",
+            "training_report_id",
+            "split_manifest_id",
+            "ruleset_manifest_id",
+            "checkpoint_path",
+            "training_report_path",
+        }
+        if combat_advancement:
+            expected_keys.update({"combat_advancement_config_id", "combat_advancement_config"})
         _exact_keys(
             document,
-            {
-                "kind",
-                "policy_id",
-                "model_id",
-                "training_report_id",
-                "split_manifest_id",
-                "ruleset_manifest_id",
-                "checkpoint_path",
-                "training_report_path",
-            },
+            expected_keys,
             "bootstrap continuation policy",
         )
-        if document.get("kind") != "production_checkpoint":
+        if kind not in {"production_checkpoint", "combat_advancement_checkpoint"}:
             raise ValueError("Unsupported bootstrap continuation policy kind")
+        config = None
+        if combat_advancement:
+            from spireshift.agents.combat_advancement import CombatAdvancementConfig
+
+            config = CombatAdvancementConfig.from_mapping(document.get("combat_advancement_config"))
+            if document.get("combat_advancement_config_id") != config.config_id:
+                raise ValueError("Bootstrap combat-advancement config identity mismatch")
         artifacts = cls.from_paths(
             Path(_string(document.get("checkpoint_path"), "checkpoint_path")),
             Path(_string(document.get("training_report_path"), "training_report_path")),
+            combat_advancement_config=config,
         )
         if artifacts.task_dict() != document:
             raise ValueError("Bootstrap continuation policy artifact identity mismatch")
@@ -375,15 +428,26 @@ class CurriculumStateSet:
             raise ValueError("Curriculum cases must have unique IDs and coordinates")
 
     def as_dict(self) -> dict[str, object]:
-        frontier = self.discovery.get("schema_version") == "bootstrap-curriculum-discovery-v3"
+        frontier = self.discovery.get("schema_version") in {
+            "bootstrap-curriculum-discovery-v3",
+            "bootstrap-curriculum-discovery-v4",
+        }
+        combat_advancement = (
+            self.capture_policy is not None
+            and self.capture_policy.get("kind") == "combat_advancement_checkpoint"
+        )
         document: dict[str, object] = {
             "schema_version": (
-                TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
-                if frontier
+                COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
+                if combat_advancement
                 else (
-                    LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
-                    if self.capture_policy is not None
-                    else CURRICULUM_STATE_SET_SCHEMA_VERSION
+                    TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
+                    if frontier
+                    else (
+                        LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+                        if self.capture_policy is not None
+                        else CURRICULUM_STATE_SET_SCHEMA_VERSION
+                    )
                 )
             ),
             "state_set_id": self.state_set_id,
@@ -459,12 +523,17 @@ class BootstrapSimulationTask:
             raise ValueError("Bootstrap rollout limit must be positive")
 
     def as_dict(self) -> dict[str, object]:
+        if (
+            self.continuation_policy is not None
+            and self.continuation_policy.combat_advancement_config is not None
+        ):
+            schema_version = COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION
+        elif self.continuation_policy is not None:
+            schema_version = LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION
+        else:
+            schema_version = BOOTSTRAP_TASK_SCHEMA_VERSION
         document: dict[str, object] = {
-            "schema_version": (
-                LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION
-                if self.continuation_policy is not None
-                else BOOTSTRAP_TASK_SCHEMA_VERSION
-            ),
+            "schema_version": schema_version,
             "task_id": self.task_id,
             "backend": self.backend.as_dict(),
             "checkpoint": self.checkpoint.as_dict(),
@@ -489,7 +558,10 @@ class BootstrapSimulationTask:
     def from_mapping(cls, value: object) -> BootstrapSimulationTask:
         document = _mapping(value, "bootstrap task")
         schema_version = document.get("schema_version")
-        learned = schema_version == LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION
+        learned = schema_version in {
+            LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
+            COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION,
+        }
         expected_keys = {
             "schema_version",
             "task_id",
@@ -510,6 +582,7 @@ class BootstrapSimulationTask:
         if schema_version not in {
             BOOTSTRAP_TASK_SCHEMA_VERSION,
             LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
+            COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION,
         }:
             raise ValueError("Unsupported bootstrap task schema")
         policy = (
@@ -517,6 +590,10 @@ class BootstrapSimulationTask:
             if learned
             else None
         )
+        if (schema_version == COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION) != (
+            policy is not None and policy.combat_advancement_config is not None
+        ):
+            raise ValueError("Bootstrap task policy generation differs from its schema")
         expected_policy_id = (
             policy.policy_id if policy is not None else ProgressBootstrapPolicy.policy_id
         )
@@ -664,6 +741,7 @@ def load_bootstrap_state_set_document(value: object) -> BootstrapStateSetLike:
         CURRICULUM_STATE_SET_SCHEMA_VERSION,
         LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
+        COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION,
     }:
         return _load_curriculum_state_set_document(document)
     _exact_keys(
@@ -715,7 +793,10 @@ def discover_curriculum_state_set(
 ) -> dict[str, Any]:
     document = _mapping(specification, "curriculum discovery specification")
     schema_version = document.get("schema_version")
-    frontier = schema_version == "bootstrap-curriculum-discovery-spec-v3"
+    frontier = schema_version in {
+        "bootstrap-curriculum-discovery-spec-v3",
+        "bootstrap-curriculum-discovery-spec-v4",
+    }
     _exact_keys(
         document,
         {
@@ -737,6 +818,7 @@ def discover_curriculum_state_set(
         "bootstrap-curriculum-discovery-spec-v1",
         "bootstrap-curriculum-discovery-spec-v2",
         "bootstrap-curriculum-discovery-spec-v3",
+        "bootstrap-curriculum-discovery-spec-v4",
     }:
         raise ValueError("Unsupported curriculum discovery specification")
     partition = SplitName(_string(document.get("partition"), "partition"))
@@ -761,12 +843,19 @@ def discover_curriculum_state_set(
         if schema_version not in {
             "bootstrap-curriculum-discovery-spec-v2",
             "bootstrap-curriculum-discovery-spec-v3",
+            "bootstrap-curriculum-discovery-spec-v4",
         }:
-            raise ValueError("Learned curriculum discovery requires a v2 or v3 specification")
+            raise ValueError("Learned curriculum discovery requires a v2, v3, or v4 specification")
         policy_artifacts.validate_for(
             split_manifest_id=split_manifest.manifest_id,
             ruleset_manifest_id=split_manifest.ruleset_manifest_id,
         )
+        if (policy_artifacts.combat_advancement_config is not None) != (
+            schema_version == "bootstrap-curriculum-discovery-spec-v4"
+        ):
+            raise ValueError(
+                "Combat-advancement discovery requires a v4 specification and vice versa"
+            )
     run_count = _integer(document.get("run_count"), "run_count")
     maximum_steps = _integer(document.get("maximum_steps_per_run"), "maximum_steps_per_run")
     if run_count <= 0 or maximum_steps <= 0:
@@ -895,9 +984,14 @@ def discover_curriculum_state_set(
         discovery["run_offset"] = run_offset
     body: dict[str, Any] = {
         "schema_version": (
-            LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
-            if policy_artifacts is not None
+            COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
+            if (
+                policy_artifacts is not None
+                and policy_artifacts.combat_advancement_config is not None
+            )
             else CURRICULUM_STATE_SET_SCHEMA_VERSION
+            if policy_artifacts is None
+            else LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
         ),
         "split_manifest_id": split_manifest.manifest_id,
         "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
@@ -1039,7 +1133,11 @@ def _discover_terminal_frontier_state_set(
             _close_environment(environment)
 
     discovery: dict[str, Any] = {
-        "schema_version": "bootstrap-curriculum-discovery-v3",
+        "schema_version": (
+            "bootstrap-curriculum-discovery-v4"
+            if policy_artifacts.combat_advancement_config is not None
+            else "bootstrap-curriculum-discovery-v3"
+        ),
         "requested_runs": run_count,
         "maximum_steps_per_run": maximum_steps,
         "frontier_selection": {
@@ -1060,7 +1158,11 @@ def _discover_terminal_frontier_state_set(
     if run_offset:
         discovery["run_offset"] = run_offset
     body: dict[str, Any] = {
-        "schema_version": TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
+        "schema_version": (
+            COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
+            if policy_artifacts.combat_advancement_config is not None
+            else TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
+        ),
         "split_manifest_id": split_manifest.manifest_id,
         "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
         "objective_id": split_manifest.objective_id,
@@ -1177,7 +1279,13 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
         mechanics = PublicMechanicsService()
         source_snapshot = mechanics.snapshot(environment, source)
         source_action = _action_by_id(source_snapshot.legal_actions, task.action_id)
-        sampled = environment.clone(resample_hidden=True, seed=task.simulation_seed)
+        sampled, accepted_hidden_seed, hidden_resample_attempts = _sample_bootstrap_hidden_world(
+            environment,
+            source,
+            source_snapshot.legal_actions,
+            mechanics=mechanics,
+            task=task,
+        )
         policy = _load_bootstrap_policy(task.continuation_policy, sampled)
         source_floor = _public_integer(source, ("floor",), ("run", "floor"))
         source_act = _public_act(source)
@@ -1219,11 +1327,7 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             else final_act != source_act or bool(transition.victory)
         )
         output: dict[str, object] = {
-            "method": (
-                "paired-public-progress-rollout-v2"
-                if task.continuation_policy is not None
-                else "paired-public-progress-rollout-v1"
-            ),
+            "method": _bootstrap_output_method(task),
             "patch_id": environment.patch_id,
             "ruleset_manifest_id": environment.ruleset.manifest_id,
             "source_state_hash": task.checkpoint.state_hash,
@@ -1250,12 +1354,70 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             "final_potion_count": final_potion_count,
             "final_relic_count": final_relic_count,
         }
+        if (
+            task.continuation_policy is not None
+            and task.continuation_policy.combat_advancement_config is not None
+        ):
+            usage = getattr(policy, "usage", None)
+            if not callable(usage):
+                raise RuntimeError("Combat-advancement policy exposes no usage accounting")
+            output.update(
+                {
+                    "hidden_resample_seed": accepted_hidden_seed,
+                    "hidden_resample_attempts": hidden_resample_attempts,
+                    "combat_advancement_usage": usage().as_dict(),
+                }
+            )
         output["bootstrap_utility"] = bootstrap_utility(output)
         return output
     finally:
         if sampled is not None:
             _close_environment(sampled)
         _close_environment(environment)
+
+
+def _sample_bootstrap_hidden_world(
+    environment: EnvironmentAdapter,
+    source: Observation,
+    legal_actions: Sequence[LegalAction],
+    *,
+    mechanics: PublicMechanicsService,
+    task: BootstrapSimulationTask,
+) -> tuple[EnvironmentAdapter, int, int]:
+    config = (
+        None
+        if task.continuation_policy is None
+        else task.continuation_policy.combat_advancement_config
+    )
+    maximum_attempts = 1 if config is None else config.maximum_public_resample_attempts
+    for attempt_index in range(maximum_attempts):
+        seed = (
+            task.simulation_seed
+            if attempt_index == 0
+            else _bootstrap_retry_seed(task.simulation_seed, attempt_index)
+        )
+        sampled = environment.clone(resample_hidden=True, seed=seed)
+        sampled_snapshot = mechanics.snapshot(sampled, source)
+        if sampled_snapshot.legal_actions == tuple(legal_actions):
+            return sampled, seed, attempt_index + 1
+        _close_environment(sampled)
+    raise RuntimeError("Hidden-world clone changed public legal actions")
+
+
+def _bootstrap_retry_seed(base_seed: int, attempt_index: int) -> int:
+    payload = f"bootstrap-public-condition-v1|{base_seed}|{attempt_index}".encode()
+    return int.from_bytes(hashlib.sha256(payload).digest()[:8], "big") & ((1 << 63) - 1)
+
+
+def _bootstrap_output_method(task: BootstrapSimulationTask) -> str:
+    if (
+        task.continuation_policy is not None
+        and task.continuation_policy.combat_advancement_config is not None
+    ):
+        return "paired-public-combat-advancement-rollout-v3"
+    if task.continuation_policy is not None:
+        return "paired-public-progress-rollout-v2"
+    return "paired-public-progress-rollout-v1"
 
 
 def bootstrap_utility(output: dict[str, object]) -> float:
@@ -1848,6 +2010,7 @@ def verify_bootstrap_teacher_dataset(
             CURRICULUM_DATASET_SCHEMA_VERSION,
             LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
             TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
+            COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
         }:
             errors.append("unsupported bootstrap dataset schema")
         expected_teacher_id = (
@@ -1857,6 +2020,7 @@ def verify_bootstrap_teacher_dataset(
                 CURRICULUM_DATASET_SCHEMA_VERSION,
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
                 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
+                COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
             }
             else BOOTSTRAP_TEACHER_ID
         )
@@ -1885,6 +2049,19 @@ def verify_bootstrap_teacher_dataset(
                 errors.append("dataset continuation policy differs from capture policy")
         elif continuation is not None:
             errors.append("baseline dataset unexpectedly declares a learned continuation policy")
+        if dataset_schema == COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION:
+            from spireshift.agents.combat_advancement import CombatAdvancementConfig
+
+            search_config = CombatAdvancementConfig.from_mapping(
+                configuration.get("combat_advancement_config")
+            )
+            if (
+                not isinstance(state_set, CurriculumStateSet)
+                or state_set.capture_policy is None
+                or state_set.capture_policy.get("combat_advancement_config_id")
+                != search_config.config_id
+            ):
+                errors.append("dataset combat-advancement config differs from state set")
         if report.get("claim_scope") != f"{state_set.partition}_curriculum_only":
             errors.append("bootstrap dataset claim scope differs from state-set partition")
         if isinstance(state_set, CurriculumStateSet) != (
@@ -1893,6 +2070,7 @@ def verify_bootstrap_teacher_dataset(
                 CURRICULUM_DATASET_SCHEMA_VERSION,
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
                 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
+                COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
             }
         ):
             errors.append("bootstrap dataset and state-set schema generations differ")
@@ -2044,6 +2222,7 @@ def load_curriculum_policy_examples(
         CURRICULUM_DATASET_SCHEMA_VERSION,
         LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
+        COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
     }:
         raise ValueError("Policy examples require a curriculum dataset")
     root = report_path.parent.resolve()
@@ -2708,13 +2887,21 @@ def _validate_bootstrap_output(
         "final_relic_count",
         "bootstrap_utility",
     }
+    combat_advancement = (
+        task.continuation_policy is not None
+        and task.continuation_policy.combat_advancement_config is not None
+    )
+    if combat_advancement:
+        expected_keys.update(
+            {
+                "hidden_resample_seed",
+                "hidden_resample_attempts",
+                "combat_advancement_usage",
+            }
+        )
     _exact_keys(output, expected_keys, "bootstrap output")
     expected = {
-        "method": (
-            "paired-public-progress-rollout-v2"
-            if task.continuation_policy is not None
-            else "paired-public-progress-rollout-v1"
-        ),
+        "method": _bootstrap_output_method(task),
         "patch_id": task.checkpoint.patch_id,
         "ruleset_manifest_id": task.checkpoint.ruleset_manifest_id,
         "source_state_hash": task.checkpoint.state_hash,
@@ -2724,6 +2911,26 @@ def _validate_bootstrap_output(
     }
     if any(output.get(key) != value for key, value in expected.items()):
         raise ValueError("bootstrap output identity mismatch")
+    if combat_advancement:
+        _integer(output.get("hidden_resample_seed"), "hidden resample seed")
+        attempts = _integer(output.get("hidden_resample_attempts"), "hidden resample attempts")
+        config = cast(BootstrapPolicyArtifacts, task.continuation_policy).combat_advancement_config
+        if config is None or not 1 <= attempts <= config.maximum_public_resample_attempts:
+            raise ValueError("bootstrap hidden resample attempts exceed the declared limit")
+        usage = _mapping(output.get("combat_advancement_usage"), "combat advancement usage")
+        _exact_keys(
+            usage,
+            {
+                "policy_only_decisions",
+                "search_decisions",
+                "simulated_transitions",
+                "hidden_worlds",
+                "public_resample_attempts",
+            },
+            "combat advancement usage",
+        )
+        if any(_integer(value, f"combat advancement {key}") < 0 for key, value in usage.items()):
+            raise ValueError("combat advancement usage must be non-negative")
     transitions = _integer(output.get("transitions"), "transitions")
     if not 1 <= transitions <= task.maximum_rollout_steps:
         raise ValueError("bootstrap transitions exceed the declared limit")
@@ -3087,12 +3294,21 @@ def _dataset_configuration(
     configuration = config.as_dict()
     if artifacts is not None:
         configuration["continuation_policy"] = artifacts.provenance()
+        if artifacts.combat_advancement_config is not None:
+            configuration["combat_advancement_config"] = (
+                artifacts.combat_advancement_config.as_dict()
+            )
     return configuration
 
 
 def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
     if not isinstance(state_set, CurriculumStateSet):
         return BOOTSTRAP_DATASET_SCHEMA_VERSION
+    if (
+        state_set.capture_policy is not None
+        and state_set.capture_policy.get("kind") == "combat_advancement_checkpoint"
+    ):
+        return COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION
     if state_set.discovery.get("schema_version") == "bootstrap-curriculum-discovery-v3":
         return TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION
     if state_set.capture_policy is not None:
@@ -3101,6 +3317,11 @@ def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
 
 
 def _worker_result_schema(task: BootstrapSimulationTask) -> str:
+    if (
+        task.continuation_policy is not None
+        and task.continuation_policy.combat_advancement_config is not None
+    ):
+        return COMBAT_ADVANCEMENT_WORKER_RESULT_SCHEMA_VERSION
     return (
         LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
         if task.continuation_policy is not None
@@ -3167,8 +3388,12 @@ def _load_curriculum_state_set_document(
     learned = schema_version in {
         LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
+        COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION,
     }
-    frontier = schema_version == TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
+    frontier = schema_version in {
+        TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
+        COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION,
+    }
     expected_keys = {
         "schema_version",
         "state_set_id",
@@ -3196,8 +3421,15 @@ def _load_curriculum_state_set_document(
     discovery = dict(_mapping(document.get("discovery"), "discovery"))
     captured = _integer(discovery.get("captured_coordinates"), "captured coordinates")
     if frontier:
-        if discovery.get("schema_version") != "bootstrap-curriculum-discovery-v3":
-            raise ValueError("Terminal-frontier state set requires v3 discovery evidence")
+        expected_discovery_schema = (
+            "bootstrap-curriculum-discovery-v4"
+            if schema_version == COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
+            else "bootstrap-curriculum-discovery-v3"
+        )
+        if discovery.get("schema_version") != expected_discovery_schema:
+            raise ValueError(
+                "Terminal-frontier state set has the wrong discovery evidence generation"
+            )
         eligible = _integer(discovery.get("eligible_coordinates"), "eligible coordinates")
         if captured > eligible:
             raise ValueError("Frontier discovery captured more states than were eligible")
@@ -3268,20 +3500,26 @@ def _validate_policy_provenance(
     split_manifest_id: str,
     ruleset_manifest_id: str,
 ) -> None:
+    combat_advancement = provenance.get("kind") == "combat_advancement_checkpoint"
+    expected_keys = {
+        "kind",
+        "policy_id",
+        "model_id",
+        "training_report_id",
+        "split_manifest_id",
+        "ruleset_manifest_id",
+    }
+    if combat_advancement:
+        expected_keys.add("combat_advancement_config_id")
     _exact_keys(
         provenance,
-        {
-            "kind",
-            "policy_id",
-            "model_id",
-            "training_report_id",
-            "split_manifest_id",
-            "ruleset_manifest_id",
-        },
+        expected_keys,
         "bootstrap policy provenance",
     )
     expected = {
-        "kind": "production_checkpoint",
+        "kind": (
+            "combat_advancement_checkpoint" if combat_advancement else "production_checkpoint"
+        ),
         "policy_id": policy_id,
         "split_manifest_id": split_manifest_id,
         "ruleset_manifest_id": ruleset_manifest_id,
@@ -3289,7 +3527,14 @@ def _validate_policy_provenance(
     if any(provenance.get(key) != value for key, value in expected.items()):
         raise ValueError("Bootstrap policy provenance does not match the state set")
     model_id = provenance.get("model_id")
-    if policy_id != f"production-checkpoint-policy-v1:{model_id}":
+    expected_policy_id = f"production-checkpoint-policy-v1:{model_id}"
+    if combat_advancement:
+        config_id = _string(
+            provenance.get("combat_advancement_config_id"),
+            "combat_advancement_config_id",
+        )
+        expected_policy_id = f"combat-advancement-policy-v1:{model_id}:{config_id}"
+    if policy_id != expected_policy_id:
         raise ValueError("Bootstrap policy ID does not match its model ID")
     _string(provenance.get("training_report_id"), "training_report_id")
 
@@ -3297,13 +3542,15 @@ def _validate_policy_provenance(
 def _load_bootstrap_policy(
     artifacts: BootstrapPolicyArtifacts | None,
     environment: object,
-) -> ProgressBootstrapPolicy | ProductionCheckpointPolicy:
+) -> Policy:
     if artifacts is None:
         return ProgressBootstrapPolicy()
     ruleset = getattr(environment, "ruleset", None)
     if ruleset is None:
         raise ValueError("Bootstrap environment exposes no ruleset identity")
-    return artifacts.load_policy(ruleset)
+    if artifacts.combat_advancement_config is None:
+        return artifacts.load_policy(ruleset)
+    return artifacts.load_policy(ruleset, environment=cast(EnvironmentAdapter, environment))
 
 
 def _curriculum_state_case(value: object) -> CurriculumStateCase:

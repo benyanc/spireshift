@@ -23,6 +23,7 @@ from spireshift.adapters.sts2mcp import (
     Sts2McpStateProjector,
 )
 from spireshift.agents.baseline import PolicyOnlyBudgetController, TerminalVictoryPolicy
+from spireshift.agents.combat_advancement import load_combat_advancement_config
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.backend_admission import (
     assess_backend_admission,
@@ -578,6 +579,7 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_discover.add_argument("--manifest", type=Path)
     bootstrap_discover.add_argument("--policy-checkpoint", type=Path)
     bootstrap_discover.add_argument("--policy-report", type=Path)
+    bootstrap_discover.add_argument("--combat-advancement-config", type=Path)
     bootstrap_discover.add_argument("--run-offset", type=int, default=0)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
@@ -593,6 +595,7 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_generate.add_argument("--manifest", type=Path)
     bootstrap_generate.add_argument("--policy-checkpoint", type=Path)
     bootstrap_generate.add_argument("--policy-report", type=Path)
+    bootstrap_generate.add_argument("--combat-advancement-config", type=Path)
     bootstrap_generate.add_argument("--samples-per-candidate", type=int, default=16)
     bootstrap_generate.add_argument("--sampling-seed", type=int, default=0)
     bootstrap_generate.add_argument("--maximum-prefix-steps", type=int, default=4096)
@@ -1520,6 +1523,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 discovery_policy = _bootstrap_policy_artifacts(
                     args.policy_checkpoint,
                     args.policy_report,
+                    args.combat_advancement_config,
                 )
                 if args.backend == "evangambit":
                     if args.upstream_root is None or args.manifest is None:
@@ -1574,6 +1578,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             generation_policy = _bootstrap_policy_artifacts(
                 args.policy_checkpoint,
                 args.policy_report,
+                args.combat_advancement_config,
             )
             bootstrap_result = run_bootstrap_teacher_dataset(
                 backend=bootstrap_backend,
@@ -2358,12 +2363,26 @@ def _emit_json(value: object, output: Path | None) -> None:
 def _bootstrap_policy_artifacts(
     checkpoint: Path | None,
     report: Path | None,
+    combat_advancement_config: Path | None,
 ) -> BootstrapPolicyArtifacts | None:
     if (checkpoint is None) != (report is None):
         raise ValueError("--policy-checkpoint and --policy-report must be supplied together")
     if checkpoint is None or report is None:
+        if combat_advancement_config is not None:
+            raise ValueError(
+                "--combat-advancement-config requires --policy-checkpoint and --policy-report"
+            )
         return None
-    return BootstrapPolicyArtifacts.from_paths(checkpoint, report)
+    config = (
+        None
+        if combat_advancement_config is None
+        else load_combat_advancement_config(combat_advancement_config)
+    )
+    return BootstrapPolicyArtifacts.from_paths(
+        checkpoint,
+        report,
+        combat_advancement_config=config,
+    )
 
 
 def _default_live_run_record() -> Path:

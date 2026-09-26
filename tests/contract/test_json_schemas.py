@@ -308,6 +308,31 @@ def test_terminal_frontier_discovery_configuration_conforms_to_schema(
     validator.validate(_load(Path(configuration)))
 
 
+def test_combat_advancement_configuration_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "combat-advancement-config-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path("configs/combat-advancement/sts2-v0.107.1-base-v3-v1.json")))
+
+
+@pytest.mark.parametrize(
+    "configuration",
+    [
+        "configs/bootstrap/sts2-v0.107.1-evangambit-train-combat-advancement-frontier-v5.json",
+        "configs/bootstrap/sts2-v0.107.1-evangambit-validation-combat-advancement-frontier-v5.json",
+    ],
+)
+def test_combat_advancement_frontier_configuration_conforms_to_schema(
+    configuration: str,
+) -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "bootstrap-curriculum-discovery-spec-v4.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path(configuration)))
+
+
 def test_observation_rejects_unmarked_privileged_state() -> None:
     fixture = _load(FIXTURE_DIR / "observation-v1.json")
     fixture["privileged_state"] = {"future_rng": 0.01}
