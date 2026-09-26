@@ -13,10 +13,13 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import DecisionType, LegalAction, Observation
 
-COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v1"
-COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v1"
+LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v1"
+COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v2"
+LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v1"
+COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v2"
 TERMINAL_VICTORY_OBJECTIVE_ID = "terminal-victory-v1"
 PUBLIC_RESAMPLE_EXHAUSTION_POLICY_ONLY_FALLBACK = "policy_only_fallback"
+SEARCH_SELECTION_MODES = frozenset({"apply", "shadow"})
 
 
 class CandidatePredictor(Protocol):
@@ -47,10 +50,15 @@ class CombatAdvancementConfig:
     tactical_survival_weight: float
     sampling_salt: str
     objective_id: str = TERMINAL_VICTORY_OBJECTIVE_ID
-    schema_version: str = COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+    schema_version: str = LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+    selection_mode: str = "apply"
+    minimum_search_advantage: float = 0.0
 
     def __post_init__(self) -> None:
-        if self.schema_version != COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+        if self.schema_version not in {
+            LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+            COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+        }:
             raise ValueError("Combat-advancement configuration schema differs")
         if self.objective_id != TERMINAL_VICTORY_OBJECTIVE_ID:
             raise ValueError("Combat advancement must preserve the terminal-victory objective")
@@ -85,9 +93,20 @@ class CombatAdvancementConfig:
             raise ValueError("Combat-advancement leaf weights must sum to one")
         if not self.sampling_salt:
             raise ValueError("sampling_salt must be non-empty")
+        if self.selection_mode not in SEARCH_SELECTION_MODES:
+            raise ValueError("Combat-advancement selection mode differs")
+        if (
+            not math.isfinite(float(self.minimum_search_advantage))
+            or not 0.0 <= self.minimum_search_advantage <= 1.0
+        ):
+            raise ValueError("minimum_search_advantage must be finite and between zero and one")
+        if self.schema_version == LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION and (
+            self.selection_mode != "apply" or self.minimum_search_advantage != 0.0
+        ):
+            raise ValueError("Legacy combat-advancement configuration cannot change selection")
 
     def body(self) -> dict[str, object]:
-        return {
+        body: dict[str, object] = {
             "schema_version": self.schema_version,
             "objective_id": self.objective_id,
             "candidate_worlds": self.candidate_worlds,
@@ -101,6 +120,14 @@ class CombatAdvancementConfig:
             "tactical_survival_weight": self.tactical_survival_weight,
             "sampling_salt": self.sampling_salt,
         }
+        if self.schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+            body.update(
+                {
+                    "selection_mode": self.selection_mode,
+                    "minimum_search_advantage": self.minimum_search_advantage,
+                }
+            )
+        return body
 
     @property
     def config_id(self) -> str:
@@ -113,6 +140,7 @@ class CombatAdvancementConfig:
     def from_mapping(cls, value: object) -> CombatAdvancementConfig:
         if not isinstance(value, dict):
             raise ValueError("Combat-advancement configuration must be an object")
+        schema_version = _string(value.get("schema_version"), "schema_version")
         expected = {
             "schema_version",
             "config_id",
@@ -126,10 +154,14 @@ class CombatAdvancementConfig:
             "tactical_survival_weight",
             "sampling_salt",
         }
+        if schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+            expected.update({"selection_mode", "minimum_search_advantage"})
+        elif schema_version != LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+            raise ValueError("Combat-advancement configuration schema differs")
         if set(value) != expected:
             raise ValueError("Combat-advancement configuration fields differ")
         config = cls(
-            schema_version=_string(value.get("schema_version"), "schema_version"),
+            schema_version=schema_version,
             objective_id=_string(value.get("objective_id"), "objective_id"),
             candidate_worlds=_integer(value.get("candidate_worlds"), "candidate_worlds"),
             maximum_rollout_steps=_integer(
@@ -151,6 +183,16 @@ class CombatAdvancementConfig:
                 value.get("tactical_survival_weight"), "tactical_survival_weight"
             ),
             sampling_salt=_string(value.get("sampling_salt"), "sampling_salt"),
+            selection_mode=(
+                _string(value.get("selection_mode"), "selection_mode")
+                if schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+                else "apply"
+            ),
+            minimum_search_advantage=(
+                _number(value.get("minimum_search_advantage"), "minimum_search_advantage")
+                if schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+                else 0.0
+            ),
         )
         if value.get("config_id") != config.config_id:
             raise ValueError("Combat-advancement configuration identity mismatch")
@@ -160,6 +202,15 @@ class CombatAdvancementConfig:
 def load_combat_advancement_config(path: Path) -> CombatAdvancementConfig:
     document = json.loads(path.expanduser().resolve().read_text(encoding="utf-8"))
     return CombatAdvancementConfig.from_mapping(document)
+
+
+def combat_advancement_policy_id(model_id: str, config: CombatAdvancementConfig) -> str:
+    policy_version = (
+        LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION
+        if config.schema_version == LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+        else COMBAT_ADVANCEMENT_POLICY_VERSION
+    )
+    return f"{policy_version}:{model_id}:{config.config_id}"
 
 
 @dataclass(frozen=True, slots=True)
@@ -176,8 +227,16 @@ class CombatCandidateEstimate:
 @dataclass(frozen=True, slots=True)
 class CombatAdvancementDecision:
     source_state_hash: str
+    base_candidate_index: int
+    base_action: LegalAction
+    search_candidate_index: int
+    search_action: LegalAction
     selected_candidate_index: int
     selected_action: LegalAction
+    search_advantage: float
+    search_override_recommended: bool
+    search_override_executed: bool
+    selection_reason: str
     effective_rollout_steps: int
     simulated_transitions: int
     hidden_worlds: int
@@ -238,9 +297,7 @@ class CombatAdvancementPolicy:
         self.base_policy = base_policy
         self.config = config
         self.model_id = base_policy.model_id
-        self.policy_id = (
-            f"{COMBAT_ADVANCEMENT_POLICY_VERSION}:{self.model_id}:{self.config.config_id}"
-        )
+        self.policy_id = combat_advancement_policy_id(self.model_id, self.config)
         self.last_decision: CombatAdvancementDecision | None = None
         self._policy_only_decisions = 0
         self._search_decisions = 0
@@ -369,7 +426,7 @@ class CombatAdvancementPolicy:
             )
             for index, action in enumerate(actions)
         )
-        selected_index = max(
+        search_index = max(
             range(len(actions)),
             key=lambda index: (
                 estimates[index].mean_search_value,
@@ -377,10 +434,37 @@ class CombatAdvancementPolicy:
                 -index,
             ),
         )
+        base_index = base.selected_candidate_index
+        search_advantage = (
+            estimates[search_index].mean_search_value - estimates[base_index].mean_search_value
+        )
+        override_recommended = search_index != base_index
+        override_executed = (
+            override_recommended
+            and self.config.selection_mode == "apply"
+            and search_advantage >= self.config.minimum_search_advantage
+        )
+        selected_index = search_index if override_executed else base_index
+        if not override_recommended:
+            selection_reason = "search_agrees_with_base"
+        elif self.config.selection_mode == "shadow":
+            selection_reason = "shadow_mode"
+        elif search_advantage < self.config.minimum_search_advantage:
+            selection_reason = "below_minimum_advantage"
+        else:
+            selection_reason = "search_override"
         return CombatAdvancementDecision(
             source_state_hash=observation.state_hash,
+            base_candidate_index=base_index,
+            base_action=actions[base_index],
+            search_candidate_index=search_index,
+            search_action=actions[search_index],
             selected_candidate_index=selected_index,
             selected_action=actions[selected_index],
+            search_advantage=search_advantage,
+            search_override_recommended=override_recommended,
+            search_override_executed=override_executed,
+            selection_reason=selection_reason,
             effective_rollout_steps=effective_steps,
             simulated_transitions=simulated_transitions,
             hidden_worlds=self.config.candidate_worlds,

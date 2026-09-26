@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-search-diagnostic-report-v1.json",
+  "title": "SpireShift Combat Search Diagnostic Report v1",
+  "type": "object",
+  "required": [
+    "schema_version", "report_id", "started_at", "completed_at", "diagnostic_spec_id",
+    "model_id", "training_report_id", "split_manifest_id", "partition",
+    "ruleset_manifest_id", "patch_id", "objective_id", "configuration", "cases",
+    "summary", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "combat-search-diagnostic-report-v1"},
+    "report_id": {"$ref": "#/$defs/id"},
+    "started_at": {"type": "string"},
+    "completed_at": {"type": "string"},
+    "diagnostic_spec_id": {"$ref": "#/$defs/id"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "patch_id": {"type": "string", "minLength": 1},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "configuration": {"type": "object"},
+    "cases": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["seed", "variant_name", "path", "case_id"],
+        "properties": {
+          "seed": {"type": "integer", "minimum": 0},
+          "variant_name": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "case_id": {"$ref": "#/$defs/id"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {"type": "object"},
+    "claim_scope": {"const": "paired_train_only_combat_search_diagnostic"}
+  },
+  "$defs": {"id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+  "additionalProperties": false
+}

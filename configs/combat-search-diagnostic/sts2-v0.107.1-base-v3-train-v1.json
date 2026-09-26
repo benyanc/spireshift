@@ -1,0 +1,107 @@
+{
+  "cycle_repetition_threshold": 8,
+  "maximum_decisions_per_run": 4096,
+  "model_id": "sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+  "objective_id": "terminal-victory-v1",
+  "partition": "train",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "run_count": 8,
+  "run_offset": 80,
+  "schema_version": "combat-search-diagnostic-spec-v1",
+  "spec_id": "sha256:102f5033e3f7b39d3889698dfbfbdc977d5b5047d12f91e0d8ccef0c17b106d3",
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "training_report_id": "sha256:6cc0f8d7728636c87ab5ecf0e64f5ae420d2b3a87394c7bc0d921a13fa5c7543",
+  "variants": [
+    {
+      "combat_advancement_config": {
+        "candidate_worlds": 2,
+        "config_id": "sha256:84c750c6ce90549cb5240274b0a7c3dd95c4c6cff09d11d737a3a4254853e71a",
+        "maximum_public_resample_attempts": 32,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "minimum_search_advantage": 0.0,
+        "objective_id": "terminal-victory-v1",
+        "progress_weight": 0.25,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "sampling_salt": "sts2-v0.107.1-base-v3-combat-search-diagnostic-v1",
+        "schema_version": "combat-advancement-config-v2",
+        "selection_mode": "shadow",
+        "tactical_survival_weight": 0.75
+      },
+      "name": "shadow"
+    },
+    {
+      "combat_advancement_config": {
+        "candidate_worlds": 2,
+        "config_id": "sha256:19e6f62841812333d6f692c979ed9a3c9d123efcb7a49450db9203524a44a0e1",
+        "maximum_public_resample_attempts": 32,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "minimum_search_advantage": 0.0,
+        "objective_id": "terminal-victory-v1",
+        "progress_weight": 0.25,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "sampling_salt": "sts2-v0.107.1-base-v3-combat-search-diagnostic-v1",
+        "schema_version": "combat-advancement-config-v2",
+        "selection_mode": "apply",
+        "tactical_survival_weight": 0.75
+      },
+      "name": "greedy"
+    },
+    {
+      "combat_advancement_config": {
+        "candidate_worlds": 2,
+        "config_id": "sha256:e295865c22ff8ba15d7801ab8c070b333f7323432f94d34f509f08298c35a32f",
+        "maximum_public_resample_attempts": 32,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "minimum_search_advantage": 0.05,
+        "objective_id": "terminal-victory-v1",
+        "progress_weight": 0.25,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "sampling_salt": "sts2-v0.107.1-base-v3-combat-search-diagnostic-v1",
+        "schema_version": "combat-advancement-config-v2",
+        "selection_mode": "apply",
+        "tactical_survival_weight": 0.75
+      },
+      "name": "margin-005"
+    },
+    {
+      "combat_advancement_config": {
+        "candidate_worlds": 2,
+        "config_id": "sha256:6e6a771fb58f1267f2ae63ffd4ec7e46350184d77bf872c11206e1336c1205ae",
+        "maximum_public_resample_attempts": 32,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "minimum_search_advantage": 0.1,
+        "objective_id": "terminal-victory-v1",
+        "progress_weight": 0.25,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "sampling_salt": "sts2-v0.107.1-base-v3-combat-search-diagnostic-v1",
+        "schema_version": "combat-advancement-config-v2",
+        "selection_mode": "apply",
+        "tactical_survival_weight": 0.75
+      },
+      "name": "margin-010"
+    },
+    {
+      "combat_advancement_config": {
+        "candidate_worlds": 2,
+        "config_id": "sha256:3303d744a4a5a59a32644c4c50bccef55ba59bd0edfff29222761e65a51234ac",
+        "maximum_public_resample_attempts": 32,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "minimum_search_advantage": 0.2,
+        "objective_id": "terminal-victory-v1",
+        "progress_weight": 0.25,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "sampling_salt": "sts2-v0.107.1-base-v3-combat-search-diagnostic-v1",
+        "schema_version": "combat-advancement-config-v2",
+        "selection_mode": "apply",
+        "tactical_survival_weight": 0.75
+      },
+      "name": "margin-020"
+    }
+  ],
+  "workers": 1
+}
