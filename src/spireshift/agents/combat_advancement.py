@@ -16,6 +16,7 @@ from spireshift.core.types import DecisionType, LegalAction, Observation
 COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v1"
 COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v1"
 TERMINAL_VICTORY_OBJECTIVE_ID = "terminal-victory-v1"
+PUBLIC_RESAMPLE_EXHAUSTION_POLICY_ONLY_FALLBACK = "policy_only_fallback"
 
 
 class CandidatePredictor(Protocol):
@@ -41,6 +42,7 @@ class CombatAdvancementConfig:
     maximum_rollout_steps: int
     maximum_simulated_transitions_per_decision: int
     maximum_public_resample_attempts: int
+    public_resample_exhaustion: str
     progress_weight: float
     tactical_survival_weight: float
     sampling_salt: str
@@ -52,6 +54,11 @@ class CombatAdvancementConfig:
             raise ValueError("Combat-advancement configuration schema differs")
         if self.objective_id != TERMINAL_VICTORY_OBJECTIVE_ID:
             raise ValueError("Combat advancement must preserve the terminal-victory objective")
+        if self.public_resample_exhaustion != PUBLIC_RESAMPLE_EXHAUSTION_POLICY_ONLY_FALLBACK:
+            raise ValueError(
+                "Combat advancement must fall back to the public-state policy when hidden-world "
+                "resampling is exhausted"
+            )
         for name, value in (
             ("candidate_worlds", self.candidate_worlds),
             ("maximum_rollout_steps", self.maximum_rollout_steps),
@@ -89,6 +96,7 @@ class CombatAdvancementConfig:
                 self.maximum_simulated_transitions_per_decision
             ),
             "maximum_public_resample_attempts": self.maximum_public_resample_attempts,
+            "public_resample_exhaustion": self.public_resample_exhaustion,
             "progress_weight": self.progress_weight,
             "tactical_survival_weight": self.tactical_survival_weight,
             "sampling_salt": self.sampling_salt,
@@ -113,6 +121,7 @@ class CombatAdvancementConfig:
             "maximum_rollout_steps",
             "maximum_simulated_transitions_per_decision",
             "maximum_public_resample_attempts",
+            "public_resample_exhaustion",
             "progress_weight",
             "tactical_survival_weight",
             "sampling_salt",
@@ -133,6 +142,9 @@ class CombatAdvancementConfig:
             maximum_public_resample_attempts=_integer(
                 value.get("maximum_public_resample_attempts"),
                 "maximum_public_resample_attempts",
+            ),
+            public_resample_exhaustion=_string(
+                value.get("public_resample_exhaustion"), "public_resample_exhaustion"
             ),
             progress_weight=_number(value.get("progress_weight"), "progress_weight"),
             tactical_survival_weight=_number(
@@ -178,18 +190,28 @@ class CombatAdvancementDecision:
 class CombatAdvancementUsage:
     policy_only_decisions: int
     search_decisions: int
+    search_fallback_decisions: int
     simulated_transitions: int
     hidden_worlds: int
     public_resample_attempts: int
+    public_resample_failures: int
 
     def as_dict(self) -> dict[str, int]:
         return {
             "policy_only_decisions": self.policy_only_decisions,
             "search_decisions": self.search_decisions,
+            "search_fallback_decisions": self.search_fallback_decisions,
             "simulated_transitions": self.simulated_transitions,
             "hidden_worlds": self.hidden_worlds,
             "public_resample_attempts": self.public_resample_attempts,
+            "public_resample_failures": self.public_resample_failures,
         }
+
+
+class _PublicWorldSamplingExhausted(RuntimeError):
+    def __init__(self, attempts: int) -> None:
+        super().__init__("Could not sample a hidden world consistent with the public legal actions")
+        self.attempts = attempts
 
 
 class CombatAdvancementPolicy:
@@ -222,9 +244,11 @@ class CombatAdvancementPolicy:
         self.last_decision: CombatAdvancementDecision | None = None
         self._policy_only_decisions = 0
         self._search_decisions = 0
+        self._search_fallback_decisions = 0
         self._simulated_transitions = 0
         self._hidden_worlds = 0
         self._public_resample_attempts = 0
+        self._public_resample_failures = 0
 
     def choose_action(
         self,
@@ -240,7 +264,15 @@ class CombatAdvancementPolicy:
             self._policy_only_decisions += 1
             self.last_decision = None
             return self.base_policy.choose_action(observation, actions)
-        decision = self._search(observation, actions)
+        try:
+            decision = self._search(observation, actions)
+        except _PublicWorldSamplingExhausted as error:
+            self._policy_only_decisions += 1
+            self._search_fallback_decisions += 1
+            self._public_resample_attempts += error.attempts
+            self._public_resample_failures += 1
+            self.last_decision = None
+            return self.base_policy.choose_action(observation, actions)
         self.last_decision = decision
         self._search_decisions += 1
         self._simulated_transitions += decision.simulated_transitions
@@ -252,9 +284,11 @@ class CombatAdvancementPolicy:
         return CombatAdvancementUsage(
             policy_only_decisions=self._policy_only_decisions,
             search_decisions=self._search_decisions,
+            search_fallback_decisions=self._search_fallback_decisions,
             simulated_transitions=self._simulated_transitions,
             hidden_worlds=self._hidden_worlds,
             public_resample_attempts=self._public_resample_attempts,
+            public_resample_failures=self._public_resample_failures,
         )
 
     def _search(
@@ -262,7 +296,6 @@ class CombatAdvancementPolicy:
         observation: Observation,
         actions: tuple[LegalAction, ...],
     ) -> CombatAdvancementDecision:
-        base = self.base_policy.predict(observation, actions)
         denominator = len(actions) * self.config.candidate_worlds
         effective_steps = min(
             self.config.maximum_rollout_steps,
@@ -279,16 +312,26 @@ class CombatAdvancementPolicy:
         simulated_transitions = 0
         public_resample_attempts = 0
         accepted_world_seeds: list[int] = []
-        source_floor = _public_integer(observation, ("floor",), ("run", "floor"))
-        for world_index in range(self.config.candidate_worlds):
-            world, accepted_seed, attempts = self._compatible_world(
-                observation,
-                actions,
-                world_index,
-            )
-            public_resample_attempts += attempts
-            accepted_world_seeds.append(accepted_seed)
-            try:
+        worlds: list[EnvironmentAdapter] = []
+        try:
+            for world_index in range(self.config.candidate_worlds):
+                try:
+                    world, accepted_seed, attempts = self._compatible_world(
+                        observation,
+                        actions,
+                        world_index,
+                    )
+                except _PublicWorldSamplingExhausted as error:
+                    raise _PublicWorldSamplingExhausted(
+                        public_resample_attempts + error.attempts
+                    ) from error
+                worlds.append(world)
+                public_resample_attempts += attempts
+                accepted_world_seeds.append(accepted_seed)
+
+            base = self.base_policy.predict(observation, actions)
+            source_floor = _public_integer(observation, ("floor",), ("run", "floor"))
+            for world in worlds:
                 for candidate_index, action in enumerate(actions):
                     branch = world.clone(resample_hidden=False)
                     try:
@@ -309,7 +352,8 @@ class CombatAdvancementPolicy:
                         defeats[candidate_index] += 1
                     else:
                         bootstraps[candidate_index] += 1
-            finally:
+        finally:
+            for world in worlds:
                 _close_environment(world)
         if simulated_transitions > self.config.maximum_simulated_transitions_per_decision:
             raise AssertionError("Combat-advancement search exceeded its transition budget")
@@ -362,9 +406,7 @@ class CombatAdvancementPolicy:
             if tuple(world.legal_actions()) == actions:
                 return world, seed, attempt_index + 1
             _close_environment(world)
-        raise RuntimeError(
-            "Could not sample a hidden world consistent with the public legal actions"
-        )
+        raise _PublicWorldSamplingExhausted(self.config.maximum_public_resample_attempts)
 
     def _evaluate_branch(
         self,
