@@ -1,0 +1,3184 @@
+{
+  "capture_policy": {
+    "kind": "production_checkpoint",
+    "model_id": "sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+    "policy_id": "production-checkpoint-policy-v1:sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+    "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+    "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+    "training_report_id": "sha256:6cc0f8d7728636c87ab5ecf0e64f5ae420d2b3a87394c7bc0d921a13fa5c7543"
+  },
+  "capture_policy_id": "production-checkpoint-policy-v1:sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+  "cases": [
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "321485a81ac7599a9f11c1ee9246e96939219b87a0db28fc8933b82b8bf7c41f",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-083"
+    },
+    {
+      "decision_index": 84,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "280be98f80eb46a0babd57a01c77db1a88215b320b974008f2b5e5c5c20a5635",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-084"
+    },
+    {
+      "decision_index": 85,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "82199f59a47d42a151d333ebe9eb44b4df2eb8ed8ea3559cf76c7d0d151d8543",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-085"
+    },
+    {
+      "decision_index": 86,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "77224df61aaad4a40cabf528654bfaa3694f01c3ec07fccefe3729dbca467786",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-086"
+    },
+    {
+      "decision_index": 87,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "0ea8e575b979ab1cb6cdf8873adeaaed6ecbafa899a05759f96f88892f48ade4",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-087"
+    },
+    {
+      "decision_index": 89,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "0ac1583a4f4dd96ec0eba71a23776ae93deedae0f168020011f72e2ac9ed514e",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-089"
+    },
+    {
+      "decision_index": 90,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "1c5c5ea227d57026ba86e2bfa4ca80e5052a2aa1eb7295a1b9e3003dcfa83ca4",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-090"
+    },
+    {
+      "decision_index": 91,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 13,
+      "expected_state_hash": "4722b60d5c46c345d2962ec87c5193b270aa02a5cd9e4a4f1ce644628eb07b6e",
+      "run_seed": 253,
+      "state_id": "validation-seed-000253-combat-091"
+    },
+    {
+      "decision_index": 75,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "041fc4846ad62a190a82bf2373783ea46dfcce1cabd4bf0c8576e324e070fa6e",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-075"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "8b27dd32ae99567fb837d2c84188fef530d0e89574b7a60f943fca21facf5837",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-076"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "4ff412a3c80c1c1fdac4b0235ed12f78cd38e07350ec3cbeb73c27fe72be83b4",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-077"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "7c1a0e89c6343a988d153a995d82c639e2b79592e81898573f0536b5ea1fb8a3",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-079"
+    },
+    {
+      "decision_index": 80,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "3174e0b494665ff61995c4f20915035d634f82dc87866ed0fa46c253c5be6bff",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-080"
+    },
+    {
+      "decision_index": 81,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "fea2d3f18b73cb91766ebee2cd112270306230fbbc3afa10624601ba3a3f7f7a",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-081"
+    },
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "751b15ab50a8de008ebb8f2bd838d53436b10d597616740e141954215ac702d0",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-083"
+    },
+    {
+      "decision_index": 84,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "dd72444cef13590d7df5320dc5529d4f38239f784070c3c09ed42d245528ddcb",
+      "run_seed": 255,
+      "state_id": "validation-seed-000255-combat-084"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "c079f83a2b39548088862befe9eddebdfaab32c43b2acd998494be3c7ca9998f",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-072"
+    },
+    {
+      "decision_index": 74,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "ff58074ebf813acbda7cb3fd5f0df12042a4b221d8adc7afef1446b23e1a629f",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-074"
+    },
+    {
+      "decision_index": 75,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "8e2010cb857b2f592d141666a9b64fe74b4e28cc54cfa68f6d685e972a65dce7",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-075"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "d15c367ff7a6d1659940fe583c839d0fff8190301b3ccbdc339b38975dbd7904",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-076"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "2879fa028e77b4a45f6d2704c4a6154733df75c991a16c56b388bb197bff08dd",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-077"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "32a308227ebcd1da0eb98389b839a2128292c352879e9c2e4287b9cd29855fa0",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-079"
+    },
+    {
+      "decision_index": 80,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "52cc226218e2d26d61ee9e63c049cf0c9bff7b03cfb2d05593a9164ebb90bd60",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-080"
+    },
+    {
+      "decision_index": 81,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "385ba5618b3e2a9b52e188ee1a7cd0448aa0eeaa036896bb907bf7e6f2db693f",
+      "run_seed": 257,
+      "state_id": "validation-seed-000257-combat-081"
+    },
+    {
+      "decision_index": 71,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "7055df0661b13da636839d13fba3b1a372e0af5b709bec330b19aba47e39c80c",
+      "run_seed": 301,
+      "state_id": "validation-seed-000301-combat-071"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "c7754968b3a64acd1597b3bf72e108824b11c6badfed87c346127df06862e90c",
+      "run_seed": 301,
+      "state_id": "validation-seed-000301-combat-072"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "a86aca92cbc43c077a0be83bb84fc43687bf572ffd398c476200d9863af9a7d1",
+      "run_seed": 301,
+      "state_id": "validation-seed-000301-combat-073"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "8544ef7146c24b7ae03a4cf4270612a8c1acec23811b287d903359134ec17ad1",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-072"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "c5a08536b0f64ae4f5956d016f5dd93b87d693c5fbf6d3d39a68c68fea07176f",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-073"
+    },
+    {
+      "decision_index": 74,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "4516da815e49d40aeb68134192a67b88ff3e36e48074404166a957cbe5c88ac3",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-074"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 13,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "7e3844c7cad80d8a2f547e5b5c1eda235657c59b6aad524478d3aaf6a524f631",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-076"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "c67b59fa0553183768e7c7ff8205fdc50092e9c21841ffd278f55859593b1941",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-077"
+    },
+    {
+      "decision_index": 78,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "fb042d2e6753f8cc2100d69d6caed3dc24d8f4bb50f69de96bebb5b6c4088d0a",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-078"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "44c1b2774f6a4b3f0371ae04be992701ff1063302a28d17bf7161531c9efcfd6",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-079"
+    },
+    {
+      "decision_index": 80,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "d53caa5807bd946fd7bae4c5a24b7dac5ed741f509e48109ca8734b62ccdab51",
+      "run_seed": 316,
+      "state_id": "validation-seed-000316-combat-080"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0bbdbd90fc8c350104130606ef2c4ad0d41cf971196242eb6695ff1046aa23bb",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "5d9488609ad9fc0323cfc02ab102531dd50191a37d82067fb4f1c18c690585bf",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-052"
+    },
+    {
+      "decision_index": 54,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "bb6a4f4c80402556a0324ac720c972540bc961248e7129bcd6151e36f4d387de",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-054"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "6ccd52aa8515089d1f6cdfdfb8b3691e49ad66c5f86a1bf14291a7f910cf647c",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-055"
+    },
+    {
+      "decision_index": 56,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "3c0c51efedee9f78f4f8077383b7c2995d419dd5130d8dd2b4ae7c1af92f7a36",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-056"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "79bc2a88210ab95502f5954f65a5fb781252238562f4cba55d2cbc884bb30686",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-058"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "d1376cf85439d2f1ce92e64bbb6050c4ccb97d17b1988d9dd14c186d0d622b40",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-059"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "12fc6cc256c1b06aa256e1a07a40cf240ac8425c89b693a6dcce19f8cbf36639",
+      "run_seed": 354,
+      "state_id": "validation-seed-000354-combat-060"
+    },
+    {
+      "decision_index": 53,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "a146e7c0ed7abd4ce0d25484e0a520aeff0ac5fe4f397ea99eca5db5b157e441",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-053"
+    },
+    {
+      "decision_index": 54,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3d9a5ab61207c7566a1e4a01c8c1d21ecff5d670b49dbf3bcc60c72b6b182233",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-054"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "44b700f0748fe56e2a5887b70a28596eb4ec80399164769a8126177aeaf945ec",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-055"
+    },
+    {
+      "decision_index": 57,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "0a4305db29b59c445bcd994e1e2298c0d6cd8afec9d772e249ec7f29b25364c1",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-057"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "b84bb15ec2ef53550fdd940759bc74a6240dc0cc47272a485b70c5cf868bb217",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-058"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "b0d2c2eff828dc8b67841162b231acd4598e032a38951ba62f5cc5bd7732c427",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-059"
+    },
+    {
+      "decision_index": 61,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "75ffc99c00f1ef6fb1bd15f8a7da1218ef898a518c337797c670dd900b1bf569",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-061"
+    },
+    {
+      "decision_index": 62,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "5c0fc7de32e7763b97886f83d1e60428cb6925fb9dfa257424ba1f7d83b0cdfa",
+      "run_seed": 422,
+      "state_id": "validation-seed-000422-combat-062"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "0da14e1079e42b14558835b25fea5c6fc77779cb46674f2ad677de5579f6ac00",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-077"
+    },
+    {
+      "decision_index": 78,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "a8fdc19d306e835ae83bf6af1526d08e9bde17ed8a5b46c040b3386e73f2f3ea",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-078"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "a20d529812a89b6df20e1defde08f644da5ec445d4ece03d92affd35426478cf",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-079"
+    },
+    {
+      "decision_index": 81,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "6fa11e53642d3715ba56a0de5d9b9ba0b3cd0a29f5dc79b7224ed0ddc362c74c",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-081"
+    },
+    {
+      "decision_index": 82,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "ba301d7c5869c9aa1e8e6b1bbeb96dc3761763770db5bd1cd5034622aae1b422",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-082"
+    },
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "e3d68e6b978d6f9c4a57134acbf85228fca6b9cf150319533c2e88bba2ce701b",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-083"
+    },
+    {
+      "decision_index": 85,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "eabd8716a834847f42361106674a3046ef757ec6fd63450ebb88479ec33195ad",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-085"
+    },
+    {
+      "decision_index": 86,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "36c6398c559ebdaeac699b300f76b394e11984d49e45a0b9f5337dea288f9020",
+      "run_seed": 437,
+      "state_id": "validation-seed-000437-combat-086"
+    },
+    {
+      "decision_index": 110,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "b87168b6f3fc4950f62fb1d029bd573027aac164724b4b2a03645199d816f4a5",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-110"
+    },
+    {
+      "decision_index": 111,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "4b40cac4515c2fc66c3a35f770b8f954bce3dd4904040a3cd58c9104c961dd32",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-111"
+    },
+    {
+      "decision_index": 113,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "516fa7600d5e69f5ed35ab1598c09ab8f625eef954a097844ecccd7b6cae4062",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-113"
+    },
+    {
+      "decision_index": 114,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "927f54af9cb58c0eeba3e079c5f0edd361000e2bdf4016a302870d219c19c6cf",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-114"
+    },
+    {
+      "decision_index": 115,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "4bc08bae3cf2642369be5afa22d5c5ae16b5abb9d372b281ce310eb6f5255b1b",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-115"
+    },
+    {
+      "decision_index": 117,
+      "decision_type": "combat",
+      "expected_legal_actions": 15,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "b3386bf13ba23912221cc71ba03d8d92908b2ace93d13620faca233943518b5f",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-117"
+    },
+    {
+      "decision_index": 118,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "7ffd7a96072f6b36d4e653615e15b4d20e427748d4bf16f572951af8e9d9cfc6",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-118"
+    },
+    {
+      "decision_index": 119,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "b69137afadfaa049f5e6a9dafe90f4aa390c160910ff6d8851058e965af881ca",
+      "run_seed": 457,
+      "state_id": "validation-seed-000457-combat-119"
+    },
+    {
+      "decision_index": 90,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "77d4266a8bd190aa200da25573fe9b9565de1660f9095e85e9fa5bcc85f1a2e9",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-090"
+    },
+    {
+      "decision_index": 91,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "f10fa7ed574b3210f89577c4a5f90dab32f5479f62e7402cf519825e1d4acc36",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-091"
+    },
+    {
+      "decision_index": 93,
+      "decision_type": "combat",
+      "expected_legal_actions": 12,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "e355100d3cf2f4a097010444b6436bc66796f9e5a43122159490380a48ad9420",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-093"
+    },
+    {
+      "decision_index": 94,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "906a1052c60cfb5da773a703fa58c088654f880580f636268aa7a4abc3add957",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-094"
+    },
+    {
+      "decision_index": 95,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "93aaa541f2346e6cc3d23de3ad3a890604b74f7d94b2ca06db2fddb602e000f0",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-095"
+    },
+    {
+      "decision_index": 97,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "896f9d9ad6ea2eb5325734253edd5677cd730d68e16ac7601b86dd62655e4069",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-097"
+    },
+    {
+      "decision_index": 98,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "22a8d1cad401c2aa1215e6f7aef7992f4544c808425538f8d31bc1083586ad76",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-098"
+    },
+    {
+      "decision_index": 99,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 14,
+      "expected_state_hash": "bf5e6cdd7c10b12674b81599dae0cffde34de537c112fc4d655e65138fba4e9d",
+      "run_seed": 467,
+      "state_id": "validation-seed-000467-combat-099"
+    },
+    {
+      "decision_index": 40,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f352095f9fa97a032d9d289ad5483dc40f382303c5d33659465d1c7872853ce9",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-040"
+    },
+    {
+      "decision_index": 41,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "c95969bae024a549c162798650a2c40e491c6e0f764162e535c150669443907e",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-041"
+    },
+    {
+      "decision_index": 42,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "219689fd660d490bd9f2008f6ae531311ebf36a907193a18dcb8deafcdad610e",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-042"
+    },
+    {
+      "decision_index": 44,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "6ea0d81a664a2e21fad0146224e94cca84e0e9ff8f079efe365e047e749fe6a6",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-044"
+    },
+    {
+      "decision_index": 45,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "a8fd02a3d66336eaed8adfbc6d9439eb785420eec70e725515e3c0714b441fd6",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-045"
+    },
+    {
+      "decision_index": 46,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3ef7b75bdd36cb2268a0798f24740bd521d3a5e9e7c3f3e9cfeaf5f02bb0a859",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-046"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "515f92adf0da08dbc0c0ed3fce5527024623fd78b20a96ddeb60043735ef9e82",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-048"
+    },
+    {
+      "decision_index": 49,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "0b7dcf2a7368080c8182b739011d74052174f10b17bca3978e1cf053dd17856a",
+      "run_seed": 498,
+      "state_id": "validation-seed-000498-combat-049"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "13d6afa8a2350461aa97313f0a779cf872259c21f01fa45437d49852b75d65b6",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-076"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "108e6b34f0db858befb41fa7042b04190be7bb09c9d660edb766469017dd4890",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-077"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "00fba8d2fea35cd2b5c531a944adacd96819950e661d9b0d3b697b69c17a84ba",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-079"
+    },
+    {
+      "decision_index": 80,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0a9ce82b555b8700d3db06cee879931551fc758dea1245a0978e762798bdfab8",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-080"
+    },
+    {
+      "decision_index": 81,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "d1f38feda59bc32b1e91c967b0bece45b00af4c6eeb6244671455698d7b35ac8",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-081"
+    },
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "493bb1f4c1e50f6b99cbc2d6ec7009d7ab15a97e940bb90050c54ee1573872a3",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-083"
+    },
+    {
+      "decision_index": 84,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "68f4721e0a10edea6b4cbd45a0dbdde122a118656b816ca3dcd6975db2ed1ae2",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-084"
+    },
+    {
+      "decision_index": 85,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0dda10d642ae7d214e043851af8ec778263c7badeccaa10fcd9c96119008b8ed",
+      "run_seed": 525,
+      "state_id": "validation-seed-000525-combat-085"
+    },
+    {
+      "decision_index": 67,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "afed73dc76b2af204d886b7e4e86e45879f3ef56aa40c4c8d1bea8163734390d",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-067"
+    },
+    {
+      "decision_index": 68,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "96fa3038ba4356bc875f9fe6fddffa500d193d052da066f7616513389a5f987a",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-068"
+    },
+    {
+      "decision_index": 70,
+      "decision_type": "combat",
+      "expected_legal_actions": 18,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "242b233f884416c54f7f5a3bafed110abf79013ed81f082f8e676dd8b9e2a01e",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-070"
+    },
+    {
+      "decision_index": 71,
+      "decision_type": "combat",
+      "expected_legal_actions": 14,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "4e7a3544853ef0f91cb1dc7d9de69b0ced05184ae4f3a518f9e34d1729e64aaa",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-071"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "9a64f552ed45b02d75a642da2d294c114ca4f6e30a1a8fe5c83a1c2451af1860",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-072"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "338a36fe2de35d4e7b992bbb4f83f86864537fdf9a8b0ade61af593c76758653",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-073"
+    },
+    {
+      "decision_index": 75,
+      "decision_type": "combat",
+      "expected_legal_actions": 15,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "b129f89126e33c56b3477740564d60b5d1fb2f2ea22c4d07e761d2da33177ae7",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-075"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "f1d01353c4f2cbb85ae6f632280315b5fef2640e55b4c9c2e20ce6e717510982",
+      "run_seed": 526,
+      "state_id": "validation-seed-000526-combat-076"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "457a31fa0ebba4fc9e7893d2efda049d1c561a07cdb1078ca8865831f2fdb32d",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-055"
+    },
+    {
+      "decision_index": 57,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "2f0dd8449acf4aa4044649e2daabebb36d1ed264aac2f2ae9386a73777fd0952",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-057"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "d77a321c93577f8fba643e873006c673875b10a1178f3e2b877a368b5ff08d24",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-058"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "5d9af7c730c64976b21c10cf1a171a505f431ad351f841fabf5a5d567e5b3fe2",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-060"
+    },
+    {
+      "decision_index": 61,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "debb414ec687f75d86a0b148c599bc9978e954d60b55aeb8e886a51d2cbf8ed0",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-061"
+    },
+    {
+      "decision_index": 62,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "5b0d545b4587fc344709447afd0be84b58802cca1e413c836f0f07a43e279966",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-062"
+    },
+    {
+      "decision_index": 64,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "cda3fe42afb6c6313a5a7f154e7b86d1dc56dad3a0fff00b1da89f231585e3ef",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-064"
+    },
+    {
+      "decision_index": 65,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "56bb1e798c947721ec0a915ce14429f5933a3bb48a450baa9a87b146639f6076",
+      "run_seed": 572,
+      "state_id": "validation-seed-000572-combat-065"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "015272abe71f31d3d7ddea483ecda253df6873e6917403a14b60ffc4b8e4eda5",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-055"
+    },
+    {
+      "decision_index": 56,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "8596237f2ad937a24e471bf51bb0721ec31b86a86fb50ad84a9864f62e4aff10",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-056"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "1d7e4e75c789102074733f5148e34d7490853a4ce36e3e6420893460b9ccba74",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-058"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "980351fffbf5bbd0c1179f7793ebd892d81a59eb101ed1e1fd89c2334049156b",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-059"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "d60d6281f66c8d9fdec67b8d516841c0d27543e1b7c93096ce4708a4602dba10",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-060"
+    },
+    {
+      "decision_index": 62,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "6bc109b0125db605180963640bb5b4c873afff37240dda0eaa7c44effa894972",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-062"
+    },
+    {
+      "decision_index": 63,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "7e3312b09f35d40842fc53c3cd1f7d82382a5bb0ae98fdd724e15abf3bad7e2c",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-063"
+    },
+    {
+      "decision_index": 64,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "488647e46b98e4738fe1fbc6acc34154cc0f96fb5eb345890a4bb27aa36fece1",
+      "run_seed": 597,
+      "state_id": "validation-seed-000597-combat-064"
+    },
+    {
+      "decision_index": 44,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "2f1f61938ba1a98c4c0882fd88bbde38631db1fc019baf8fec4500c1af81f81d",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-044"
+    },
+    {
+      "decision_index": 46,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "062ade845d82cb0a7ab8a53021bd14d9ee378a1bcba348bd13d9af439173ea5e",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-046"
+    },
+    {
+      "decision_index": 47,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "016304bbd6927500a8660c5d0d681856b5964485bdbe77bc6fd28677d2fe935d",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-047"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "465834c4c8247212b0fac51014ae879501f0d2ca63351915c11e425de514f391",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-048"
+    },
+    {
+      "decision_index": 49,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "16b793c5de2628b47ce9086a3a8ec6f35acf8ea5fbe752b78620de6e730d7a0e",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-049"
+    },
+    {
+      "decision_index": 50,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9f83a6338204b91e31c03919980b91fc5cde92b29e550f37910434d502163e62",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-050"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "85011ce2b1e0ff3bf411850d01927012f86b0acbac9366e707da79657a22e3e8",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-052"
+    },
+    {
+      "decision_index": 53,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3c4b354aebb9fd0f1edfeafa4b18ab6b5c8c10076336cb7a92f1665ce0fa6e73",
+      "run_seed": 614,
+      "state_id": "validation-seed-000614-combat-053"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 12,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "0575e1d013f2e4cefe5ba384e83921c4e300fa3142ec97d395da020e74f1cf06",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "10368ee50f86d36b1c101e069e0a436e0ccc008fa6a104c2161d28f2b1006068",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-052"
+    },
+    {
+      "decision_index": 53,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3b1ad8f7a076e26ab0a78b5d99673e8650876b1a9bead55d6e30bb1020e78e7c",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-053"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 12,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "4a5196ced94b41a5a624650db7bdadb878d766d848158e0671db33463c0c0788",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-055"
+    },
+    {
+      "decision_index": 56,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "b0dd6f34b0eb23d9aaa5fdbf1a77ced5a726faf114b685268b49152623b327fb",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-056"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "d6b3145e5d5f7b957e2a840935a15ea3139463a0cbb98f14bf6488a3349a9b69",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-058"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f2b31d76c42d2968524d633759f6feff7d8fc7e82a057c1d05375b78ab0d8a74",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-059"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "91fae0056809b93d842accd0db35c3cd689f9c2e3ddbdb3c2dfe59e89d69eb00",
+      "run_seed": 625,
+      "state_id": "validation-seed-000625-combat-060"
+    },
+    {
+      "decision_index": 47,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "68730c18315ced12088426605b1c9b540d79dd7c876e33c5eb4bdca8ccf9d3d8",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-047"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9461a1d25e73ff82c35600fa279c393751083ece6a0fa36ae657ecbdb601280d",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-048"
+    },
+    {
+      "decision_index": 50,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "540fda1ed94a6ef056128ea923db5823b1413bd345fff74ff70af5a671adae13",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-050"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "8363ee6ff2b34fecce7a297f466bce28428b6b62d5292f36cebe59b9beb22699",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "ebb0a81eb1e923e83e292e5d89dadf5fe880ac60b4519de9090994944e4d8adc",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-052"
+    },
+    {
+      "decision_index": 54,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9f6ff36bbd69e6c1b1d4fedf2ea5baf2990ac52cae47eba5d771618cf3e0de58",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-054"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "fad662c92b7214d66410e6f077b87b3d2bd1d20514194e445f396adf82c50906",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-055"
+    },
+    {
+      "decision_index": 56,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "26d16dfc8686a9026b39c98aaedbaf49526d596d3e07dbe7a2a94fd8b3f27f6e",
+      "run_seed": 630,
+      "state_id": "validation-seed-000630-combat-056"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f1e0759ebfa7dc646ab7833ee22f20c88a8b0c662030f55ff773a1030bcfe4f3",
+      "run_seed": 646,
+      "state_id": "validation-seed-000646-event-002"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "event",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "67c66a83afd3986032eab33c7389b56b6792cf08e5d23b642c08fbcf3edb746c",
+      "run_seed": 646,
+      "state_id": "validation-seed-000646-event-003"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 12,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "66f97b368e2f0dea7f7356d10577f88c4c80642707b9e908ccd13c72d8882989",
+      "run_seed": 646,
+      "state_id": "validation-seed-000646-combat-058"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "419b6a78b27422c4e4d7869903b7fc85b56e1f57219df323ce40f18f1d63b317",
+      "run_seed": 646,
+      "state_id": "validation-seed-000646-combat-059"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "11eeea2e9c03b9f7e74820e427e8a0c1f50cbde30e5d3d198968d38eb83ead0b",
+      "run_seed": 646,
+      "state_id": "validation-seed-000646-combat-060"
+    },
+    {
+      "decision_index": 62,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "c6f41fbc4d332c035c6754786db3ba5ed485fb6c7ce86963517edc591b0cff49",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-062"
+    },
+    {
+      "decision_index": 63,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "64c9a312d4a046da49cbde1db7e91baff682b63be2cdb0abbf4377b06da00852",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-063"
+    },
+    {
+      "decision_index": 65,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "d165d2219bd87067af69ebda977f13f1fe223a62aab9e8979e22519709209ff9",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-065"
+    },
+    {
+      "decision_index": 66,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "180aa40d6c9675c968bf8c1295d539296171bb3f29eba26df3171d8b895a77d3",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-066"
+    },
+    {
+      "decision_index": 67,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "2712a1f616fe797cf935f233430afc6b006c42e771ab3449defeee4cf6be97f8",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-067"
+    },
+    {
+      "decision_index": 69,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "6a52a8adc81d592ba45f8c8dedc802d57756ec0a1d18477ed20c72f1b78702ab",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-069"
+    },
+    {
+      "decision_index": 70,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "f2096f5f5bd05775b4f8340fc2f04ed0566142cd8d38585bc6c76578f76f62f4",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-070"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "06cb899022a71ece0769db4e6ae7c4a238d17f0c15d7b55d07c368feeeb24b0d",
+      "run_seed": 651,
+      "state_id": "validation-seed-000651-combat-072"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "51ea34af8ea836063ae49a566cf82ff6caff8dc215685543235d1d471e45d582",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-048"
+    },
+    {
+      "decision_index": 50,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "87fc94b59ce21e12b6304cae1aa5262c2838e352d58f25fba77f910a85d4a0be",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-050"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "cc772f4a9cf058dd03509bdd196c0643b61e5e570d6a3683165780de06804d8e",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "71d5bf800733324beb250083b420123ae1941239a608f28c57812cc81bce905a",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-052"
+    },
+    {
+      "decision_index": 54,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "85383b3adff675d87249c5e7f1d8d22fe5d5f3a1f13b51fec4773ec1258e2a47",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-054"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "392449144f84a94abbd440b12335bd93a78473be776724e92209d6e378f9b93f",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-055"
+    },
+    {
+      "decision_index": 57,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "725976c54d1b8891e5e6fbaf406218a666346679450c35a566ee6c47a564856e",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-057"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "12a554def2c45939057212f3b46c50a0ad5bca4b4206054de20942a5f175cad4",
+      "run_seed": 662,
+      "state_id": "validation-seed-000662-combat-058"
+    },
+    {
+      "decision_index": 82,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "75f5562f5d7533ceac525e86d39f6357317f494788d7d8033682de8c06104384",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-082"
+    },
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "51c40403861dd18d5952bc45df9904f18fa716795e10ee8c64b72eb32ef34f3b",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-083"
+    },
+    {
+      "decision_index": 85,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "90536a1a97d9678cbf3093034abab2a347621f24c20b799debeec79ae35b9a3d",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-085"
+    },
+    {
+      "decision_index": 86,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "d4eea97666b897071149a9a0a8130f5328af8a796a78bcaf4bc9ba3bb2351b74",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-086"
+    },
+    {
+      "decision_index": 88,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0aa0762fc6138acd7b6a67bef4a5ecb7c81f0139f5f3fd81193d939ee90f70dd",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-088"
+    },
+    {
+      "decision_index": 89,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "ea2962ba3905745fb61518d89f546f143b5dcbd2644b5b7a53419fb0a7fe7116",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-089"
+    },
+    {
+      "decision_index": 90,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "1ad4df09d83f6e72b8334e7b55d9f3e0b2714aca1291d1dfd9b466b77e11c879",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-090"
+    },
+    {
+      "decision_index": 92,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "a71d22eec3c315f0a3975a4f253d2e4e926d257e7c22a579e0a4d675c3a3eedd",
+      "run_seed": 697,
+      "state_id": "validation-seed-000697-combat-092"
+    },
+    {
+      "decision_index": 74,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0cbdb98050e7dbd7be34bc7b93921d905bb01b1bcc279d625624796fe32061eb",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-074"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "25e6d906e7eab62ece784f8d96cf4a0939627490c9586989785c19c775aa4893",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-076"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "35824437df2c91efc11432f5ea184ac6544759c616bd1602b0e0d5cee9f1c645",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-077"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0f2998e47502e88a14c3aeb8d37de246e6fa71ebee47980a05dd5f99c59652eb",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-079"
+    },
+    {
+      "decision_index": 80,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "b219c42799df70127244be876e130c383aa7d4a222cc5931b8d5c0039168b64b",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-080"
+    },
+    {
+      "decision_index": 82,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "c1635a8f07509c9155546a25d739b081146b9e2184a5af17ee857af67dbcfc2d",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-082"
+    },
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "97570da07d977667627a8287c817317c73c289facdbc4090dc658ec0778f59f7",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-083"
+    },
+    {
+      "decision_index": 84,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "b696f21e41f346b04c6dc22ab3c02e4b6aafda8a64c60cdb0030b11c7b8d7c1d",
+      "run_seed": 707,
+      "state_id": "validation-seed-000707-combat-084"
+    },
+    {
+      "decision_index": 63,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "082141ac8455618494e522fe8c4e87d2496549b2a4c690d57ec49f3e571299b9",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-063"
+    },
+    {
+      "decision_index": 64,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "822d2a44dbcd03cd212e1f226167bbff95ae5bcaf7daae7edd79cd80b17578e4",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-064"
+    },
+    {
+      "decision_index": 66,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "60c829e6f16388f9bb7a59bd2641d400972cbe9361be0b0ffaa4cbc852bbebac",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-066"
+    },
+    {
+      "decision_index": 67,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "8e5ded3c1789df2802b67ffb07093acfe452a347b984e93715e7b91a975befc7",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-067"
+    },
+    {
+      "decision_index": 68,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0ee0eacd55524c101d26815fa6400a7e674cf0230ecbea8341ad0f20c755cfdc",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-068"
+    },
+    {
+      "decision_index": 70,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "31148fa9090a566362e40e8af93f473e9fac2071491ed1ceaaa15aed39f79e44",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-070"
+    },
+    {
+      "decision_index": 71,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "3c60668aa3a46f7821489cf9bd57f46bc012213082bc6192c0b7e6faec5416ca",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-071"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "1faf42985bc30c5467b98bca3488628628e8c3db20926ba3e3406607655ba2f0",
+      "run_seed": 712,
+      "state_id": "validation-seed-000712-combat-072"
+    },
+    {
+      "decision_index": 7,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "8f3420e320fa62b0cc5a4fac655792174b293f6c97f962ea978ee15df152300f",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-007"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "be01ea148c7c9c24c6c98580eaaa6dcd004a991580f340365559f28fad19cf36",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-008"
+    },
+    {
+      "decision_index": 9,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "8cf37706cf5df5e3a1c1bc7ecd3e9eff9ab50774c9623297b03898b5cb10d6c6",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-009"
+    },
+    {
+      "decision_index": 10,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "f3719252d791ba542804ee0d3e383d43ec6137889d4b1ce089b75225ada90f07",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-010"
+    },
+    {
+      "decision_index": 11,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "4ea8dc94d62f0ef56eceb2a02b05db8f3dfbcb5492fcb1e85867749605646e83",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-011"
+    },
+    {
+      "decision_index": 12,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "7dc7d8118f8ce6c3d193531f309cf7bc3bd912df3f074b68970f5ea2eedafd96",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-012"
+    },
+    {
+      "decision_index": 13,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "52c3bc7a25fcee92eb6acb82b4800d4bd448d50743bd10e4f6601f1f4284539a",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-013"
+    },
+    {
+      "decision_index": 14,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "6d7df3f8fc72af54256c3fd993729057ee74202be6fb4461682ca91bcc291813",
+      "run_seed": 726,
+      "state_id": "validation-seed-000726-event-014"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "dfb0fd40413504211225a1c4f0f00fda41f8815a6d5480f1c86ff82047016f22",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-combat-072"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "b4ca7712aa65b6e6bedf27f4bbf1de21544dbb84a7936bd0aae0d9734be6161f",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-combat-073"
+    },
+    {
+      "decision_index": 75,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "5d63e51ecaf2287fed65b57ab0be48b7d4c6b3948a11d7b3882104ded18d9443",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-combat-075"
+    },
+    {
+      "decision_index": 76,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "c85be5c55e5c3ee50843c6137cfa270af125da11b382e21a6b7517bf9140b7b6",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-combat-076"
+    },
+    {
+      "decision_index": 6,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "a04b7d3209fecbd33593fda42a29a4dd55dc18410600dfe8503133d4c3cb4baf",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-relic_selection-006"
+    },
+    {
+      "decision_index": 7,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "e1a9026d2db0b4e251d0ec75ed19445e186d6cc45f0442239b3fb035859a016f",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-path-007"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "3986d84d4e9bc7d1bf2a60d0307cce45d60045b5de29c8935c200635b81c3141",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-combat-077"
+    },
+    {
+      "decision_index": 78,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "0930be0259d9eab554225dfedcc81f9621eca06cf98734b1953640225776a199",
+      "run_seed": 770,
+      "state_id": "validation-seed-000770-combat-078"
+    },
+    {
+      "decision_index": 102,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "ec785fff7d3423f68d2c6ea73bd492d731cef7f0b72d0c5c07c08b17b9292c1c",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-102"
+    },
+    {
+      "decision_index": 103,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "d0629e482421389e3bb703883d6420b244775fc8f72b070ddc8d6993498e708f",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-103"
+    },
+    {
+      "decision_index": 105,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "7d1f31dab11cd2dfa8f301a90ec4d254bf3cfe3279c45b6e780d0ba73648a001",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-105"
+    },
+    {
+      "decision_index": 106,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "5200d5ae7442ef06179803d17604084769a998e5d44003f85a3ad452c47547de",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-106"
+    },
+    {
+      "decision_index": 107,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "7dfb5cfcd5cc1903168594dbb9fa2b2e73c97ed9738e0e6cf954b4f94f34b6aa",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-107"
+    },
+    {
+      "decision_index": 109,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "c9befdfec5b57f613c42597c1dec440ef88f01846a7402cbb168619ec7b23977",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-109"
+    },
+    {
+      "decision_index": 110,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "e8163f31d66ef46bf39b927486d2bcc147c62a961a3f2c7b6c32f345c35177de",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-110"
+    },
+    {
+      "decision_index": 111,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "718960f225ae4a093e8867e5f10c1b93cff89cded40851e1145b496fe194a60c",
+      "run_seed": 774,
+      "state_id": "validation-seed-000774-combat-111"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "127178b8e99387136278a6703848b9f53c82884c2debf248b733b5fbca8605be",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-event-005"
+    },
+    {
+      "decision_index": 6,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "8b03c7b55ed49f134a9ffdcc8a202e241a343da71285015c4f3edd459d4fa436",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-event-006"
+    },
+    {
+      "decision_index": 7,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "fd3e33beaf712f794be53922872b727d1b1f3956ac1c875f7a3bb0d6b994ded3",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-event-007"
+    },
+    {
+      "decision_index": 8,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "d922b0dc3b2124ae05e5cfa996b90bd53fc1f4e46eea628ef16616542f4618cf",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-event-008"
+    },
+    {
+      "decision_index": 9,
+      "decision_type": "event",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 9,
+      "expected_state_hash": "e0f6cb57006260ecb3dc0a1582c9a213484749b40eb47ac6f96fbfdb847be99b",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-event-009"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "6d10266b6bd6608d9d27f3dab522ba6148dca5c7e547335d4c8d7ae55a01d40a",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-combat-073"
+    },
+    {
+      "decision_index": 74,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "52ef252470ccf997f71a91ae36e9c76f831b47321def5807bcd60040bc4e8f9c",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-combat-074"
+    },
+    {
+      "decision_index": 75,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 11,
+      "expected_state_hash": "a4b5da2d76433ca9c495e868d72491a49cc3ca7b0697bc53415fb0b427a3c473",
+      "run_seed": 810,
+      "state_id": "validation-seed-000810-combat-075"
+    },
+    {
+      "decision_index": 53,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "fc00f163e32cc0833bf8bc9628e20ea6ca75cb5198009ab793313ec3258d650d",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-053"
+    },
+    {
+      "decision_index": 54,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3a95b162abaef3ccb925605a9df758cac6390014303eee8e0072857ff6040522",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-054"
+    },
+    {
+      "decision_index": 56,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "5ce34e2a2074fa056e6f96b1572b8eff6b3c48026bb6065a77ab6d5f6567f34b",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-056"
+    },
+    {
+      "decision_index": 57,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "483f6dcd433dff0c9380a71a74f1ea012985cb4274d4874da8b826a4a4873d14",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-057"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "6214e4b39f535c41f1c1745cbabb59c188506c21ee370e19866844fc731ca14e",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-058"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9bad74ee1d549c6a18afecc6622cfb3c34057c7dde50a645b8bff34a7b1f48f7",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-060"
+    },
+    {
+      "decision_index": 61,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "eba0c1ed10626276ac29b160c65df66c3a57ac15fd32aa2810b453237a643993",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-061"
+    },
+    {
+      "decision_index": 62,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "b2876d7b04e7f96e16a0754e7b3f23dedd50ff994ea989f36a0f72260385785a",
+      "run_seed": 830,
+      "state_id": "validation-seed-000830-combat-062"
+    },
+    {
+      "decision_index": 43,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "eb0454ef6361e04a4e87f23ee3e081042a0cedcad1c5b9ef7db5898a6be2415e",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-043"
+    },
+    {
+      "decision_index": 44,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "a2da0f7a3fe45f7d04b5096b07ca34a35a2358d0bd744046c389f4f075fa4c0a",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-044"
+    },
+    {
+      "decision_index": 46,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f3ddd3fa8a481bf9013cffb8252681105591eed6c4ffe4bb3c64b0db33b77ab2",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-046"
+    },
+    {
+      "decision_index": 47,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "648847ee35fef078d6ef964304047d9b616380b31c66b3d79443d4f5a4f3bea4",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-047"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9f76375f2b5e4f246bfd2409a1c0634594ae53231c82f30ccf884bd96eea80a7",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-048"
+    },
+    {
+      "decision_index": 50,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f6d6ef6993936fe0374c97b0331598693aa358c997b255ab56216d70f63251a9",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-050"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "a0c81169e8d5446d8b6d2b2dd174bb6f7488023d5e599429ae11c1ef27134c68",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "c05016e33434c2170775f87c9b110924c93e0cb1fa69ba58fa87687ca9ac8e1b",
+      "run_seed": 847,
+      "state_id": "validation-seed-000847-combat-052"
+    },
+    {
+      "decision_index": 44,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "40eeb71fc1cfd41ce6be2e65626309428caccd67bf700ad5e280af520a368a4e",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-044"
+    },
+    {
+      "decision_index": 45,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "652a385090bd9bdfbcbbeeeafab0a1a56e6f164f6aae27ca535b18beb5515bb2",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-045"
+    },
+    {
+      "decision_index": 47,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "14b11acbe230307a45921d0f8c6369e75d72ebf15cd0d8cdd97dcb3017ed50d0",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-047"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "d99fa3597f75a379d1e880fbaf9564efc3dea79aad665a33f7b672c0f6c51d72",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-048"
+    },
+    {
+      "decision_index": 49,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "2af616248f814f2c5c84a1d3bb26914e5a9f7753aab0861c6e1a721798f64c89",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-049"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "a1a5cf444eb9126492eb99cc44eae04e1d41e91cdc11005185ebae349fcc8668",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "3cad48d2fb6c676abf1a4157d672f3104fad3703531b6531f579380f088df427",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-052"
+    },
+    {
+      "decision_index": 53,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "307de03571ae10b8aee0325bb55f137cac03ea7ae248900c2ace22f3bbd68620",
+      "run_seed": 866,
+      "state_id": "validation-seed-000866-combat-053"
+    },
+    {
+      "decision_index": 40,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "e7f18a20ebaa333ebd09dfaca826aa0aa6662709d6f23cae630a4253e79213c0",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-040"
+    },
+    {
+      "decision_index": 41,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "a56289dda73e50407375619ceaba95640f377019f8953544499cfb9fdf594d4c",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-041"
+    },
+    {
+      "decision_index": 43,
+      "decision_type": "combat",
+      "expected_legal_actions": 15,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "ba2a93d309818299731e56026e6a5631117f1f7a973d89a3d409f07f78c8e95b",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-043"
+    },
+    {
+      "decision_index": 44,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "a5fa5f46c95d23d5e47bd23876f34d8794fb055cb990075c59089c01c9d8c063",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-044"
+    },
+    {
+      "decision_index": 45,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "b24bd9823a2bc94e2a8700fd7b0c25a67251d3aded8aec3d3fc34a528683fd69",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-045"
+    },
+    {
+      "decision_index": 47,
+      "decision_type": "combat",
+      "expected_legal_actions": 18,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "8fc93c9553e0a9f20d7243f4de1d6dea289aaa598f09e774c952c245f2078dc1",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-047"
+    },
+    {
+      "decision_index": 48,
+      "decision_type": "combat",
+      "expected_legal_actions": 14,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "00349e3163fdc011e15e417671990268a1d3581d6557ecbcc1cd9aa35e19a580",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-048"
+    },
+    {
+      "decision_index": 49,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "96034e3200a17f7d03d56622873c5e33032a9846bd9fcbc423a41278753df25c",
+      "run_seed": 892,
+      "state_id": "validation-seed-000892-combat-049"
+    },
+    {
+      "decision_index": 78,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "f97fdcd6dd07482f987edb5544c5f8087bcdf15f538cb328ab546e8fff099cfc",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-078"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "7a3976a64d8e08c5c6ec7c1adc8a13d6099fe61ac418e91b3b63bfbb63e817e7",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-079"
+    },
+    {
+      "decision_index": 80,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "0a06a3f4230ca2a07c8e0aaa7f6f73db4dfbdc65c0e5847dd3efc4e1d6750b5b",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-080"
+    },
+    {
+      "decision_index": 82,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "83a59ea3bfb1c199ebbd7243203f4b798abacb25f597d39c446b591ff7d52bca",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-082"
+    },
+    {
+      "decision_index": 83,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "d71ce0308f377e624708a181d66a0400d5a590d1dc5beb9bb6011dedacd86973",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-083"
+    },
+    {
+      "decision_index": 85,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "3b298a476834aa633553ad1f5928d288cca2da3272d9aa088bb30c116345567b",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-085"
+    },
+    {
+      "decision_index": 86,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "f71882df791d1ee05d049d3e16a866e6faec887ebe8e384dbb92c2e3d559c502",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-086"
+    },
+    {
+      "decision_index": 87,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "083605fc51c3bec579d8348b6eee8b96a4947167cf8a355138543e57513cb5c3",
+      "run_seed": 902,
+      "state_id": "validation-seed-000902-combat-087"
+    },
+    {
+      "decision_index": 38,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "6fc7b33e76160d095a5c0ee29a370ed9872df629959be88f0cf2e1573c6cfd8d",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-038"
+    },
+    {
+      "decision_index": 39,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "ac1cbdba8dc0c6c1cc88fd2761f774c86beee6e6c73adebfc14f131e5c629d15",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-039"
+    },
+    {
+      "decision_index": 40,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "c07907612795053101259ed3f9f4223715dc20d86cc0d9e599b4144a06f1876e",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-040"
+    },
+    {
+      "decision_index": 42,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "8a3dab971fc0d2315b9a52aa740e28e972922b746b21b018d7f4ab9672514c92",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-042"
+    },
+    {
+      "decision_index": 43,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "d334f22ebb895a64312e65b004f30db8db94af25958a3fc257ebe4f85fa2ad7c",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-043"
+    },
+    {
+      "decision_index": 44,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "065ffb629512a091cae4f9fc929df4d1f9b5a81fad558d72c1b6357147434bc3",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-044"
+    },
+    {
+      "decision_index": 46,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "c0012f2001e694ec7e0778ea101840fcbd6f25216025568ce0daeedfef0421d9",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-046"
+    },
+    {
+      "decision_index": 47,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "7612d3d2414d5ad298231b34de2543eb6cb1595504015e0cda6fcf3505d4ae98",
+      "run_seed": 908,
+      "state_id": "validation-seed-000908-combat-047"
+    },
+    {
+      "decision_index": 64,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "d689ce07e8ae3fe985037a3ba83aa8fdfe563b642927d235a6f9bc2d75998e88",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-064"
+    },
+    {
+      "decision_index": 65,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "b3b77d4820702b666abf363e95a3c2a8f7376bbe6caff0828db6dbc4973eae32",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-065"
+    },
+    {
+      "decision_index": 67,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "b597f5c8ba577dfb68afceb534274dc11e830a35395ad047b6535fdc1dc70e3a",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-067"
+    },
+    {
+      "decision_index": 68,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "4a2c7d06130ff3ebffce063a4fa245306d1a19bb74e62452448b76bd84938e02",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-068"
+    },
+    {
+      "decision_index": 69,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "c7b96769fe11cd6e1fa5b2e1655cf3c67e7017ff65529d822793bf55d55074ca",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-069"
+    },
+    {
+      "decision_index": 71,
+      "decision_type": "combat",
+      "expected_legal_actions": 9,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "c7317928722261d947c8c3b24a33edbe26e18e3eed8f5a83840526f117972068",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-071"
+    },
+    {
+      "decision_index": 72,
+      "decision_type": "combat",
+      "expected_legal_actions": 7,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "c00f72ef192610197924a0458cac53154f269fe2f49472669cfc6d0283164a19",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-072"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 12,
+      "expected_state_hash": "4ca8e8c9aae1bacdcef7f5911bda95aeef83d8e72655f46e01709c8e0069f0c3",
+      "run_seed": 927,
+      "state_id": "validation-seed-000927-combat-073"
+    },
+    {
+      "decision_index": 70,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f6a348c0c215b1f1ca5a47a02aa676a0d80a8bbbe748a096ae8fa2798b6af633",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-070"
+    },
+    {
+      "decision_index": 71,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "5d2fd86b593f5d04d48585bb7e8be5b5d3712a17016bbe28a46f14bd6a3e8190",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-071"
+    },
+    {
+      "decision_index": 73,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "6c2297cd256fe79b187b88d16a5f0f61ce9816598156dc8e21e1a97a0838c9db",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-073"
+    },
+    {
+      "decision_index": 74,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "e00fb40e9d0d52ff21e3a7256e09f20123c3df17d4884f5237aa38ad0bc1aed3",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-074"
+    },
+    {
+      "decision_index": 75,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "eb09a83358c5e0f9bebf62b3463e84b0e837c75de4e95ab0f5f65c0608e5af07",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-075"
+    },
+    {
+      "decision_index": 77,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "fd3090e26201deb2fad240be8dfbb74406e927161e5b6ab9846fc9a37e962404",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-077"
+    },
+    {
+      "decision_index": 78,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9e04c171cf39e47d84c0da59e1545bc27f3fc382ea1c6391f6029772fb107e98",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-078"
+    },
+    {
+      "decision_index": 79,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 7,
+      "expected_state_hash": "d964ee95c6da96826e1d9374216166c5ba1361e64c28c7b0e296456c7ba732f0",
+      "run_seed": 928,
+      "state_id": "validation-seed-000928-combat-079"
+    },
+    {
+      "decision_index": 57,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "d0bba6d51a344fa2b4216835473538573b23617a4f623075a0d8f4547a1f502c",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-057"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "e23e3a1a1910a5c25f1c09eee7058c4900dcecd5615d99105208816f050fb450",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-059"
+    },
+    {
+      "decision_index": 61,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "d381d75f0e620750dbad169052c783d46bdcdfeee479a6bd0243d07d67cc5dc9",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-061"
+    },
+    {
+      "decision_index": 62,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "9ae93a303ab07f2b139484425668191ff5d6064a3d2de44d0591f7d2df14da7c",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-062"
+    },
+    {
+      "decision_index": 63,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "479b5b2bc3e750902be81c715effe8afc1a2a033458476939741aa1eddfc4420",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-063"
+    },
+    {
+      "decision_index": 65,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "fdda56631dada1417f5d359eafca9610fddba6a7b13f52910b731c93ff5d3833",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-065"
+    },
+    {
+      "decision_index": 66,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "dcfc658a42a6e225db4046aadf5389a46ddaed6e5e9624143457a06f30a826c2",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-066"
+    },
+    {
+      "decision_index": 67,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "overgrowth",
+      "expected_source_floor": 8,
+      "expected_state_hash": "25d67da1e1d6adfa4c9927331d112539d5391275006e1ff3b72479faf6bcaa5f",
+      "run_seed": 956,
+      "state_id": "validation-seed-000956-combat-067"
+    },
+    {
+      "decision_index": 69,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "aad0142bd10a711af8d99fd6b647a824263cba158271c53696df14b01a0de945",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-combat-069"
+    },
+    {
+      "decision_index": 3,
+      "decision_type": "relic_selection",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "21c37d08592acbe0ac75c26265c25ee92fbc1c1d2e3ac0318b8422dff84e4f61",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-relic_selection-003"
+    },
+    {
+      "decision_index": 6,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "4c69913df23e8e1d59295b051566d46e8c7c9dad01710a1de7cdc8e9b727ba35",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-event-006"
+    },
+    {
+      "decision_index": 2,
+      "decision_type": "card_selection",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "07339740e1ab981972662ffa2157d0155517b69178b200d81ca323b5264f8021",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-card_selection-002"
+    },
+    {
+      "decision_index": 7,
+      "decision_type": "event",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 9,
+      "expected_state_hash": "65411e7f0a6cbd35536b3822634c89b346b17eebfca03101632b4ca8c4517c8a",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-event-007"
+    },
+    {
+      "decision_index": 9,
+      "decision_type": "path",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 10,
+      "expected_state_hash": "94e1836e0d4a5a2ac95b1c13a32313808d95446aaf1dcdac6ca1e366b0a3f4ee",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-path-009"
+    },
+    {
+      "decision_index": 70,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 11,
+      "expected_state_hash": "76ba3a5f2859b307c2dd635e0bf05147635b96d75b374d676903894514fdfae1",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-combat-070"
+    },
+    {
+      "decision_index": 71,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 11,
+      "expected_state_hash": "d09aaefbf7384bede4bd7f9a6de1927fff3ee5ecfa4b0290354429b29e50218a",
+      "run_seed": 961,
+      "state_id": "validation-seed-000961-combat-071"
+    },
+    {
+      "decision_index": 4,
+      "decision_type": "event",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "9c6b8ecac086d15f01e8ff1fbae1f4797eae843c77519d47ed42496cc73a0d05",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-event-004"
+    },
+    {
+      "decision_index": 5,
+      "decision_type": "event",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "b663ef658d014ec5a4b865698f8c9b7f416fd69048f17e9bc9fbecf623bec894",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-event-005"
+    },
+    {
+      "decision_index": 63,
+      "decision_type": "combat",
+      "expected_legal_actions": 6,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "2f03ee67201f19ac0c5afcc1b486fa2fae108299b6dcca547fbbb7a739908be9",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-combat-063"
+    },
+    {
+      "decision_index": 64,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "0e507a785f3c47c40909857bdee59274ed198220b9a698895ff529dfc6c2d339",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-combat-064"
+    },
+    {
+      "decision_index": 65,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "f61d55191ea61f821b5db1e694302a7ffde43e79722cf55717ff9c27e58f9334",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-combat-065"
+    },
+    {
+      "decision_index": 67,
+      "decision_type": "combat",
+      "expected_legal_actions": 5,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "e7f5074a61b4a79cde77cb6accd139814c329bb1d49c45e3f9f38fe497dc60fb",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-combat-067"
+    },
+    {
+      "decision_index": 68,
+      "decision_type": "combat",
+      "expected_legal_actions": 4,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 8,
+      "expected_state_hash": "72081a31dfce2016d12d777cfa5256623778417865b57b614c464d3615851bd2",
+      "run_seed": 975,
+      "state_id": "validation-seed-000975-combat-068"
+    },
+    {
+      "decision_index": 51,
+      "decision_type": "combat",
+      "expected_legal_actions": 12,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "4badfeca111e2ca13230940af10191d52cac69860e48c8a8e099ca6bf32afbf4",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-051"
+    },
+    {
+      "decision_index": 52,
+      "decision_type": "combat",
+      "expected_legal_actions": 11,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f139f032a9cd9ebc7bb2c6646071695a38b7f7468dda21b0dac05a063d2aaee9",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-052"
+    },
+    {
+      "decision_index": 54,
+      "decision_type": "combat",
+      "expected_legal_actions": 18,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "f3bfd881bf45144925c3cc1c9cd2603cfb93c88fa58ccbdaeb0c8f1e0852b03c",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-054"
+    },
+    {
+      "decision_index": 55,
+      "decision_type": "combat",
+      "expected_legal_actions": 14,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "fdc8ffa3aa431cf040b32d91c75e67c373b7d0a0fc81536b9321cf6db647c66d",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-055"
+    },
+    {
+      "decision_index": 56,
+      "decision_type": "combat",
+      "expected_legal_actions": 10,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "ad6530782104695a79e2cbf8095e665ff36f4eb9dd24df7ee1e328c1a5fc80c8",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-056"
+    },
+    {
+      "decision_index": 58,
+      "decision_type": "combat",
+      "expected_legal_actions": 8,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "b87060f8301da38f7061d21c65d29a7285fa596caabcf0364c8ea1bce1ab7791",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-058"
+    },
+    {
+      "decision_index": 59,
+      "decision_type": "combat",
+      "expected_legal_actions": 3,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "10398b8ee884a72758b067216be8f306021a4d8906a12cbd214c317a508fc681",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-059"
+    },
+    {
+      "decision_index": 60,
+      "decision_type": "combat",
+      "expected_legal_actions": 2,
+      "expected_source_act": "underdocks",
+      "expected_source_floor": 7,
+      "expected_state_hash": "af245e53e42ad89a90590d17c485d6fcaa52449fa7e2bafb17ded333c16ca95a",
+      "run_seed": 990,
+      "state_id": "validation-seed-000990-combat-060"
+    }
+  ],
+  "discovery": {
+    "captured_coordinates": 311,
+    "defeated_runs": 74,
+    "eligible_coordinates": 908,
+    "frontier_selection": {
+      "decision_types": [
+        "path",
+        "combat",
+        "combat_selection",
+        "reward",
+        "event",
+        "rest_site",
+        "shop",
+        "treasure",
+        "card_selection",
+        "relic_selection"
+      ],
+      "maximum_states_per_run": 8,
+      "minimum_legal_actions": 2,
+      "minimum_source_floor": 7
+    },
+    "maximum_steps_per_run": 4096,
+    "requested_runs": 76,
+    "run_offset": 24,
+    "runs_with_eligible_coordinates": 40,
+    "schema_version": "bootstrap-curriculum-discovery-v3",
+    "source_maximum_floor_histogram": {
+      "11": 3,
+      "12": 2,
+      "13": 1,
+      "14": 1,
+      "3": 1,
+      "4": 1,
+      "5": 11,
+      "6": 23,
+      "7": 13,
+      "8": 11,
+      "9": 9
+    },
+    "step_limited_runs": 2,
+    "terminal_runs": 74,
+    "victorious_runs": 0
+  },
+  "objective_id": "terminal-victory-v1",
+  "partition": "validation",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "schema_version": "bootstrap-state-set-v4",
+  "selection_policy": "ranked-validation-runs-base-v3-deepest-actionable-terminal-frontier-v4",
+  "signal_spec": {
+    "minimum_decision_types": 3,
+    "minimum_effective_labeled_states": 8.0,
+    "minimum_half_split_agreement": 0.55,
+    "minimum_occupied_maximum_floor_bins": 4,
+    "minimum_source_floors": 4,
+    "minimum_states": 96,
+    "minimum_states_with_candidate_terminal_variation": 2,
+    "minimum_terminal_defeats": 128,
+    "minimum_terminal_victories": 4
+  },
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "state_set_id": "sha256:55b4181550ad5c573f8caab52272a2aa8df2b4bf40de330832243a20029b593a"
+}
