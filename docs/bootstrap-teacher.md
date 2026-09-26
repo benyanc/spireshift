@@ -502,3 +502,80 @@ Inspect both emitted state sets before scheduling teacher rollouts. In particula
 source maximum-floor histogram against the frozen signal thresholds. Teacher commands and resource
 limits should be chosen from those realized state and candidate counts rather than estimated in
 advance.
+
+The completed discovery artifacts are frozen at:
+
+- `manifests/bootstrap/sts2-v0.107.1-evangambit-train-terminal-frontier-v4.json`, state-set ID
+  `sha256:9e09a8a180e15eb503a229ee8bd109ebf32ab7f9ba9e4f0aee747c8898d8463f`;
+- `manifests/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json`, state-set ID
+  `sha256:55b4181550ad5c573f8caab52272a2aa8df2b4bf40de330832243a20029b593a`.
+
+Train contains 674 unique states from 89 of 160 requested runs, ten source floors from 7 through
+17, four decision types, and 3,725 legal candidates. Validation contains 311 unique states from 40
+of 76 runs, eight source floors from 7 through 14, five decision types, and 1,771 legal candidates.
+There is no complete-run seed or public-state hash overlap. Both state sets pass their prespecified
+structural gates. The capture policy won none of its runs, so discovery alone does not satisfy the
+terminal-signal gate.
+
+Before production-scale labels, run a two-sample diagnostic teacher pilot. This schedules 7,450
+train simulations and 3,542 validation simulations. Its purpose is to detect completed victories
+and within-state terminal variation; its two samples per action are insufficient for final model
+training. Run the jobs sequentially so their resource measurements and failures remain attributable:
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-train-frontier-teacher-v4-pilot.json \
+  --metrics artifacts/resources/bootstrap-train-frontier-teacher-v4-pilot-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-train-frontier-v4-pilot \
+  --workers 8 \
+  --max-wall-seconds 3600 \
+  --max-cpu-seconds 10000 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-train-frontier-v4-pilot \
+    --states manifests/bootstrap/sts2-v0.107.1-evangambit-train-terminal-frontier-v4.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+    --samples-per-candidate 2 \
+    --workers 8 \
+    --worker-timeout 120
+```
+
+```bash
+uv run spireshift resources run \
+  --kind teacher_generation \
+  --report artifacts/resources/bootstrap-validation-frontier-teacher-v4-pilot.json \
+  --metrics artifacts/resources/bootstrap-validation-frontier-teacher-v4-pilot-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-validation-frontier-v4-pilot \
+  --workers 8 \
+  --max-wall-seconds 1800 \
+  --max-cpu-seconds 6000 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
+  -- \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-validation-frontier-v4-pilot \
+    --states manifests/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
+    --samples-per-candidate 2 \
+    --workers 8 \
+    --worker-timeout 120
+```
+
+Do not train from these pilot datasets. First inspect `terminal_outcome_classes`,
+`states_with_candidate_terminal_variation`, censored simulations, completed cases, and realized
+resource use. If either partition still has no victories, adding samples to the same continuation
+policy is unlikely to solve the blocker; improve the rollout policy or move the frontier closer to
+terminal decisions instead.

@@ -54,6 +54,12 @@ PRODUCTION_VALIDATION_LEARNED_CURRICULUM = Path(
 PRODUCTION_TRAIN_LEARNED_SUPPLEMENT = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-train-learned-supplement-v3.json"
 )
+PRODUCTION_TRAIN_TERMINAL_FRONTIER = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-train-terminal-frontier-v4.json"
+)
+PRODUCTION_VALIDATION_TERMINAL_FRONTIER = Path(
+    "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json"
+)
 
 
 def _tactical_split(ruleset_manifest_id: str) -> SplitManifest:
@@ -288,6 +294,50 @@ def test_learned_policy_supplement_is_frozen_to_unused_train_runs() -> None:
     )
     assert max(case.expected_source_floor or 0 for case in supplement.cases) == 8
     assert supplement.discovery["step_limited_runs"] == 0
+
+
+def test_terminal_frontier_curricula_freeze_deep_unused_complete_runs() -> None:
+    split = load_split_manifest(PRODUCTION_SPLIT)
+    train = load_bootstrap_state_set(PRODUCTION_TRAIN_TERMINAL_FRONTIER)
+    validation = load_bootstrap_state_set(PRODUCTION_VALIDATION_TERMINAL_FRONTIER)
+
+    assert isinstance(train, CurriculumStateSet)
+    assert isinstance(validation, CurriculumStateSet)
+    assert train.state_set_id == (
+        "sha256:9e09a8a180e15eb503a229ee8bd109ebf32ab7f9ba9e4f0aee747c8898d8463f"
+    )
+    assert validation.state_set_id == (
+        "sha256:55b4181550ad5c573f8caab52272a2aa8df2b4bf40de330832243a20029b593a"
+    )
+    assert train.capture_policy == validation.capture_policy
+    assert train.capture_policy is not None
+    assert train.capture_policy["model_id"] == (
+        "sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c"
+    )
+    assert len(train.cases) == 674
+    assert len(validation.cases) == 311
+    assert len({case.expected_state_hash for case in train.cases}) == 674
+    assert len({case.expected_state_hash for case in validation.cases}) == 311
+    train_seeds = {case.run_seed for case in train.cases}
+    validation_seeds = {case.run_seed for case in validation.cases}
+    assert train_seeds <= set(split.seeds(SplitName.TRAIN)[80:240])
+    assert validation_seeds <= set(split.seeds(SplitName.VALIDATION)[24:100])
+    assert train_seeds.isdisjoint(split.seeds(SplitName.TRAIN)[:80])
+    assert validation_seeds.isdisjoint(split.seeds(SplitName.VALIDATION)[:24])
+    assert len(train_seeds) == 89
+    assert len(validation_seeds) == 40
+    assert train_seeds.isdisjoint(validation_seeds)
+    assert {case.expected_state_hash for case in train.cases}.isdisjoint(
+        {case.expected_state_hash for case in validation.cases}
+    )
+    assert all((case.expected_source_floor or 0) >= 7 for case in (*train.cases, *validation.cases))
+    assert all(case.expected_legal_actions >= 2 for case in (*train.cases, *validation.cases))
+    assert train.discovery["run_offset"] == 80
+    assert validation.discovery["run_offset"] == 24
+    assert train.discovery["victorious_runs"] == 0
+    assert validation.discovery["victorious_runs"] == 0
+    assert train.signal_spec.requires_terminal_signal
+    assert validation.signal_spec.requires_terminal_signal
 
 
 def test_bootstrap_dataset_uses_paired_terminal_first_targets_and_verifies(
