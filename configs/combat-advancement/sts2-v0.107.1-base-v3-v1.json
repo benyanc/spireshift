@@ -5,8 +5,9 @@
   "maximum_rollout_steps": 8,
   "maximum_simulated_transitions_per_decision": 256,
   "maximum_public_resample_attempts": 32,
+  "public_resample_exhaustion": "policy_only_fallback",
   "progress_weight": 0.25,
   "tactical_survival_weight": 0.75,
   "sampling_salt": "sts2-v0.107.1-base-v3-combat-advancement-v1",
-  "config_id": "sha256:2c0460f9967612a345c9897c6c5843f711e9fbe516d0252a319136259439487a"
+  "config_id": "sha256:a8992807c1a1e3a6a9ac81bcc96effcf5bdd9a934cacf6c591df541a77cf68a5"
 }

@@ -150,6 +150,7 @@ def _config(**overrides: object) -> CombatAdvancementConfig:
         "maximum_rollout_steps": 4,
         "maximum_simulated_transitions_per_decision": 16,
         "maximum_public_resample_attempts": 4,
+        "public_resample_exhaustion": "policy_only_fallback",
         "progress_weight": 0.8,
         "tactical_survival_weight": 0.2,
         "sampling_salt": "unit-test",
@@ -179,9 +180,11 @@ def test_combat_search_overrides_base_policy_with_progress_leaf_value() -> None:
     assert policy.usage().as_dict() == {
         "policy_only_decisions": 0,
         "search_decisions": 1,
+        "search_fallback_decisions": 0,
         "simulated_transitions": 4,
         "hidden_worlds": 2,
         "public_resample_attempts": 2,
+        "public_resample_failures": 0,
     }
 
 
@@ -199,6 +202,30 @@ def test_search_rejects_hidden_worlds_that_change_public_legal_actions() -> None
     assert policy.last_decision is not None
     assert policy.last_decision.public_resample_attempts == 3
     assert shared.resamples == 3
+
+
+def test_search_falls_back_to_public_policy_when_compatible_worlds_are_exhausted() -> None:
+    shared = _SharedCloneState(reject_resamples=100)
+    environment = _AdvancementEnvironment(shared=shared)
+    observation = environment.reset(0)
+    policy = CombatAdvancementPolicy(
+        environment=environment,
+        base_policy=_Predictor(),
+        config=_config(maximum_public_resample_attempts=2),
+    )
+
+    assert policy.choose_action(observation, environment.legal_actions()).action_id == "bad"
+    assert policy.last_decision is None
+    assert shared.resamples == 2
+    assert policy.usage().as_dict() == {
+        "policy_only_decisions": 1,
+        "search_decisions": 0,
+        "search_fallback_decisions": 1,
+        "simulated_transitions": 0,
+        "hidden_worlds": 0,
+        "public_resample_attempts": 2,
+        "public_resample_failures": 1,
+    }
 
 
 def test_search_reduces_depth_equally_to_respect_transition_cap() -> None:

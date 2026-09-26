@@ -11,6 +11,7 @@
     "maximum_rollout_steps",
     "maximum_simulated_transitions_per_decision",
     "maximum_public_resample_attempts",
+    "public_resample_exhaustion",
     "progress_weight",
     "tactical_survival_weight",
     "sampling_salt"
@@ -41,6 +42,9 @@
     "maximum_public_resample_attempts": {
       "type": "integer",
       "minimum": 1
+    },
+    "public_resample_exhaustion": {
+      "const": "policy_only_fallback"
     },
     "progress_weight": {
       "type": "number",

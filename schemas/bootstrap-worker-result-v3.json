@@ -222,9 +222,11 @@
           "required": [
             "policy_only_decisions",
             "search_decisions",
+            "search_fallback_decisions",
             "simulated_transitions",
             "hidden_worlds",
-            "public_resample_attempts"
+            "public_resample_attempts",
+            "public_resample_failures"
           ],
           "properties": {
             "policy_only_decisions": {
@@ -232,6 +234,10 @@
               "minimum": 0
             },
             "search_decisions": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "search_fallback_decisions": {
               "type": "integer",
               "minimum": 0
             },
@@ -244,6 +250,10 @@
               "minimum": 0
             },
             "public_resample_attempts": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "public_resample_failures": {
               "type": "integer",
               "minimum": 0
             }

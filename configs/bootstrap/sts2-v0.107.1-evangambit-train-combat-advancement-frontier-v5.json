@@ -3,7 +3,7 @@
   "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
   "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
   "objective_id": "terminal-victory-v1",
-  "capture_policy_id": "combat-advancement-policy-v1:sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c:sha256:2c0460f9967612a345c9897c6c5843f711e9fbe516d0252a319136259439487a",
+  "capture_policy_id": "combat-advancement-policy-v1:sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c:sha256:a8992807c1a1e3a6a9ac81bcc96effcf5bdd9a934cacf6c591df541a77cf68a5",
   "partition": "train",
   "selection_policy": "ranked-train-runs-base-v3-combat-advancement-v1-deepest-actionable-terminal-frontier-v5",
   "run_count": 160,

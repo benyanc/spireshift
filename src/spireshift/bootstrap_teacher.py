@@ -2923,9 +2923,11 @@ def _validate_bootstrap_output(
             {
                 "policy_only_decisions",
                 "search_decisions",
+                "search_fallback_decisions",
                 "simulated_transitions",
                 "hidden_worlds",
                 "public_resample_attempts",
+                "public_resample_failures",
             },
             "combat advancement usage",
         )

@@ -938,6 +938,7 @@ def test_combat_advancement_policy_artifacts_bind_config_and_v5_state_set(
         maximum_rollout_steps=4,
         maximum_simulated_transitions_per_decision=32,
         maximum_public_resample_attempts=4,
+        public_resample_exhaustion="policy_only_fallback",
         progress_weight=0.8,
         tactical_survival_weight=0.2,
         sampling_salt="bootstrap-unit-test",
@@ -953,9 +954,11 @@ def test_combat_advancement_policy_artifacts_bind_config_and_v5_state_set(
             return {
                 "policy_only_decisions": 0,
                 "search_decisions": 0,
+                "search_fallback_decisions": 0,
                 "simulated_transitions": 0,
                 "hidden_worlds": 0,
                 "public_resample_attempts": 0,
+                "public_resample_failures": 0,
             }
 
     class FakeCombatAdvancementPolicy(ProgressBootstrapPolicy):
