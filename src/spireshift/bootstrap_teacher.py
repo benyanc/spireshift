@@ -102,9 +102,9 @@ class BootstrapPolicyArtifacts:
         )
         policy_id = f"production-checkpoint-policy-v1:{model_id}"
         if combat_advancement_config is not None:
-            policy_id = (
-                f"combat-advancement-policy-v1:{model_id}:{combat_advancement_config.config_id}"
-            )
+            from spireshift.agents.combat_advancement import combat_advancement_policy_id
+
+            policy_id = combat_advancement_policy_id(model_id, combat_advancement_config)
         return cls(
             checkpoint_path=resolved_checkpoint,
             training_report_path=resolved_report,

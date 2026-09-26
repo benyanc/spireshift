@@ -172,6 +172,11 @@ def test_combat_search_overrides_base_policy_with_progress_leaf_value() -> None:
 
     assert selected.action_id == "good"
     assert policy.last_decision is not None
+    assert policy.last_decision.base_action.action_id == "bad"
+    assert policy.last_decision.search_action.action_id == "good"
+    assert policy.last_decision.search_override_recommended is True
+    assert policy.last_decision.search_override_executed is True
+    assert policy.last_decision.selection_reason == "search_override"
     assert policy.last_decision.simulated_transitions == 4
     assert policy.last_decision.hidden_worlds == 2
     assert [item.mean_search_value for item in policy.last_decision.candidates] == pytest.approx(
@@ -248,6 +253,36 @@ def test_search_reduces_depth_equally_to_respect_transition_cap() -> None:
     assert policy.last_decision.simulated_transitions == 4
 
 
+@pytest.mark.parametrize(
+    ("selection_mode", "minimum_advantage", "reason"),
+    (("shadow", 0.0, "shadow_mode"), ("apply", 0.9, "below_minimum_advantage")),
+)
+def test_v2_selection_controls_keep_base_action(
+    selection_mode: str,
+    minimum_advantage: float,
+    reason: str,
+) -> None:
+    environment = _AdvancementEnvironment()
+    observation = environment.reset(0)
+    policy = CombatAdvancementPolicy(
+        environment=environment,
+        base_policy=_Predictor(),
+        config=_config(
+            schema_version="combat-advancement-config-v2",
+            selection_mode=selection_mode,
+            minimum_search_advantage=minimum_advantage,
+        ),
+    )
+
+    assert policy.choose_action(observation, environment.legal_actions()).action_id == "bad"
+    assert policy.last_decision is not None
+    assert policy.last_decision.search_action.action_id == "good"
+    assert policy.last_decision.search_override_recommended is True
+    assert policy.last_decision.search_override_executed is False
+    assert policy.last_decision.selection_reason == reason
+    assert policy.policy_id.startswith("combat-advancement-policy-v2:")
+
+
 def test_noncombat_decisions_delegate_without_sampling() -> None:
     environment = _AdvancementEnvironment(decision_type=DecisionType.PATH)
     observation = environment.reset(0)
@@ -272,3 +307,17 @@ def test_config_identity_is_verified() -> None:
     tampered["maximum_rollout_steps"] = 99
     with pytest.raises(ValueError, match="identity mismatch"):
         CombatAdvancementConfig.from_mapping(tampered)
+
+
+def test_legacy_config_identity_and_policy_version_are_preserved() -> None:
+    config = _config()
+    assert "selection_mode" not in config.as_dict()
+    assert "minimum_search_advantage" not in config.as_dict()
+    assert CombatAdvancementConfig.from_mapping(config.as_dict()) == config
+    environment = _AdvancementEnvironment()
+    policy = CombatAdvancementPolicy(
+        environment=environment,
+        base_policy=_Predictor(),
+        config=config,
+    )
+    assert policy.policy_id.startswith("combat-advancement-policy-v1:")

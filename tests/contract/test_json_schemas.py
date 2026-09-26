@@ -316,6 +316,16 @@ def test_combat_advancement_configuration_conforms_to_schema() -> None:
     validator.validate(_load(Path("configs/combat-advancement/sts2-v0.107.1-base-v3-v1.json")))
 
 
+def test_combat_search_diagnostic_specification_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "combat-search-diagnostic-spec-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(
+        _load(Path("configs/combat-search-diagnostic/sts2-v0.107.1-base-v3-train-v1.json"))
+    )
+
+
 @pytest.mark.parametrize(
     "configuration",
     [

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-search-diagnostic-case-v1.json",
+  "title": "SpireShift Combat Search Diagnostic Case v1",
+  "type": "object",
+  "required": [
+    "schema_version", "case_id", "seed", "partition", "variant_name", "policy_kind",
+    "policy_id", "model_id", "combat_advancement_config_id", "ruleset_manifest_id",
+    "status", "error", "decisions", "terminal", "victory", "truncated",
+    "termination_reason", "maximum_floor", "final_state_hash", "action_trace_sha256",
+    "total_decision_seconds", "total_decision_cpu_seconds", "search_diagnostics"
+  ],
+  "properties": {
+    "schema_version": {"const": "combat-search-diagnostic-case-v1"},
+    "case_id": {"$ref": "#/$defs/id"},
+    "seed": {"type": "integer", "minimum": 0},
+    "partition": {"const": "train"},
+    "variant_name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "policy_kind": {"enum": ["production_checkpoint", "combat_advancement"]},
+    "policy_id": {"type": "string", "minLength": 1},
+    "model_id": {"$ref": "#/$defs/id"},
+    "combat_advancement_config_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "status": {"enum": ["completed", "failed"]},
+    "error": {"type": ["string", "null"]},
+    "decisions": {"type": ["integer", "null"], "minimum": 0},
+    "terminal": {"type": ["boolean", "null"]},
+    "victory": {"type": ["boolean", "null"]},
+    "truncated": {"type": ["boolean", "null"]},
+    "termination_reason": {"enum": ["terminal", "policy_cycle", "decision_limit", null]},
+    "maximum_floor": {"type": ["integer", "null"], "minimum": 0},
+    "final_state_hash": {"type": ["string", "null"]},
+    "action_trace_sha256": {"type": ["string", "null"]},
+    "total_decision_seconds": {"type": ["number", "null"], "minimum": 0},
+    "total_decision_cpu_seconds": {"type": ["number", "null"], "minimum": 0},
+    "search_diagnostics": {"type": ["object", "null"]}
+  },
+  "$defs": {"id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+  "additionalProperties": false
+}

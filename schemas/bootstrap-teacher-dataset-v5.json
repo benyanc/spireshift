@@ -94,7 +94,10 @@
           "$ref": "#/$defs/policyProvenance"
         },
         "combat_advancement_config": {
-          "$ref": "combat-advancement-config-v1.json"
+          "oneOf": [
+            {"$ref": "combat-advancement-config-v1.json"},
+            {"$ref": "combat-advancement-config-v2.json"}
+          ]
         }
       },
       "additionalProperties": false

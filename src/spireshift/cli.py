@@ -50,6 +50,11 @@ from spireshift.calibration import (
     verify_calibration_artifacts,
     write_calibration_artifact,
 )
+from spireshift.combat_search_diagnostic import (
+    load_combat_search_diagnostic,
+    load_combat_search_diagnostic_spec,
+    run_combat_search_diagnostic,
+)
 from spireshift.conformance import (
     capture_conformance_trace,
     compare_conformance_traces,
@@ -733,6 +738,28 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluate_verify.add_argument("--report", type=Path, required=True)
     production_evaluate_verify.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate_verify.add_argument("--output", type=Path)
+    combat_search_diagnostic = model_commands.add_parser(
+        "evaluate-combat-search",
+        help="Run the paired train-only combat-search diagnostic sweep",
+    )
+    combat_search_diagnostic.add_argument("spec", type=Path)
+    combat_search_diagnostic.add_argument("checkpoint", type=Path)
+    combat_search_diagnostic.add_argument("--report", type=Path, required=True)
+    combat_search_diagnostic.add_argument("--split-manifest", type=Path, required=True)
+    combat_search_diagnostic.add_argument("--upstream-root", type=Path, required=True)
+    combat_search_diagnostic.add_argument("--manifest", type=Path, required=True)
+    combat_search_diagnostic.add_argument("--output-dir", type=Path, required=True)
+    combat_search_diagnostic.add_argument("--resume", action="store_true")
+    combat_search_diagnostic_verify = model_commands.add_parser(
+        "verify-combat-search",
+        help="Verify combat-search diagnostic cases, aggregates, and identities",
+    )
+    combat_search_diagnostic_verify.add_argument("evaluation", type=Path)
+    combat_search_diagnostic_verify.add_argument("spec", type=Path)
+    combat_search_diagnostic_verify.add_argument("checkpoint", type=Path)
+    combat_search_diagnostic_verify.add_argument("--report", type=Path, required=True)
+    combat_search_diagnostic_verify.add_argument("--split-manifest", type=Path, required=True)
+    combat_search_diagnostic_verify.add_argument("--output", type=Path)
     readiness_assess = model_commands.add_parser(
         "assess-readiness",
         help="Apply a frozen fail-closed readiness scorecard to a production checkpoint",
@@ -1614,6 +1641,92 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
     if args.command == "model":
         try:
+            if args.model_command in {"evaluate-combat-search", "verify-combat-search"}:
+                diagnostic_spec = load_combat_search_diagnostic_spec(args.spec)
+                diagnostic_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                diagnostic_training_report = load_production_training_report(
+                    args.report, checkpoint=diagnostic_checkpoint
+                )
+                diagnostic_split = load_split_manifest(args.split_manifest)
+                if (
+                    diagnostic_spec.model_id != diagnostic_checkpoint["model_id"]
+                    or diagnostic_spec.training_report_id != diagnostic_training_report["report_id"]
+                ):
+                    raise ValueError("Combat-search diagnostic model identities differ")
+                if args.model_command == "verify-combat-search":
+                    diagnostic = load_combat_search_diagnostic(
+                        args.evaluation,
+                        spec=diagnostic_spec,
+                        split_manifest=diagnostic_split,
+                    )
+                    _emit_json(
+                        {
+                            "valid": True,
+                            "diagnostic_spec_id": diagnostic_spec.spec_id,
+                            "report_id": diagnostic["report_id"],
+                            "validation_allowed": diagnostic["summary"]["recommendation"][
+                                "validation_allowed"
+                            ],
+                        },
+                        args.output,
+                    )
+                    return 0
+                diagnostic_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=diagnostic_spec.maximum_decisions_per_run + 1,
+                )
+                diagnostic_probe = diagnostic_backend.factory()
+                try:
+                    diagnostic_ruleset = diagnostic_probe.ruleset
+                    diagnostic_policy = ProductionCheckpointPolicy(
+                        checkpoint=diagnostic_checkpoint,
+                        training_report=diagnostic_training_report,
+                        ruleset=diagnostic_ruleset,
+                    )
+                finally:
+                    close = getattr(diagnostic_probe, "close", None)
+                    if callable(close):
+                        close()
+                diagnostic_result = run_combat_search_diagnostic(
+                    environment_factory=diagnostic_backend.factory,
+                    ruleset=diagnostic_ruleset,
+                    base_policy=diagnostic_policy,
+                    split_manifest=diagnostic_split,
+                    spec=diagnostic_spec,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                diagnostic_summary = diagnostic_result.report["summary"]
+                if isinstance(diagnostic_summary, dict):
+                    base_summary = diagnostic_summary.get("base")
+                    variants = diagnostic_summary.get("variants")
+                    if isinstance(base_summary, dict) and isinstance(variants, list):
+                        actual_transitions = int(base_summary["decisions"]) + sum(
+                            int(variant["runs"]["decisions"])
+                            for variant in variants
+                            if isinstance(variant, dict) and isinstance(variant.get("runs"), dict)
+                        )
+                        simulated_transitions = sum(
+                            int(variant["search"]["simulated_transitions"])
+                            for variant in variants
+                            if isinstance(variant, dict) and isinstance(variant.get("search"), dict)
+                        )
+                        write_experiment_metrics(
+                            ExperimentMetrics(
+                                trajectories=diagnostic_spec.run_count
+                                * (len(diagnostic_spec.variants) + 1),
+                                simulations=sum(
+                                    int(variant["search"]["simulations"])
+                                    for variant in variants
+                                    if isinstance(variant, dict)
+                                    and isinstance(variant.get("search"), dict)
+                                ),
+                                transitions=actual_transitions + simulated_transitions,
+                            )
+                        )
+                _emit_json(diagnostic_result.report, None)
+                return 0 if diagnostic_result.successful else 1
             if args.model_command in {"assess-readiness", "verify-readiness"}:
                 readiness_assessment = _build_readiness_assessment(args)
                 if args.model_command == "verify-readiness":

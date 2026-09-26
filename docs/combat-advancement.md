@@ -78,3 +78,12 @@ Before starting validation discovery or teacher generation, compare the emitted
 `source_maximum_floor_histogram`, terminal and step-limited run counts, captured frontier coverage,
 wall time, CPU time, and failures with the frozen v4 train discovery. Continue only if the policy
 reaches materially later floors without a prohibitive compute or failure increase.
+
+## Train result
+
+The retry completed all 160 matched train runs without failures, confirming the bounded fallback,
+but the search policy is rejected. It won 0 runs, reduced mean maximum floor from 7.4563 to 6.2688,
+reduced floor-10-or-later runs from 27 to 9, and required 3,144.58 wall seconds instead of 212.96.
+Validation and teacher generation are blocked. The next experiment is the
+[paired combat-search diagnostic](combat-search-diagnostic.md), which measures search overrides and
+tests conservative selection thresholds without changing the completed v1 artifact.
