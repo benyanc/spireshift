@@ -1,0 +1,57 @@
+{
+  "schema_version": "combat-search-intervention-spec-v1",
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "objective_id": "terminal-victory-v1",
+  "model_id": "sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+  "training_report_id": "sha256:6cc0f8d7728636c87ab5ecf0e64f5ae420d2b3a87394c7bc0d921a13fa5c7543",
+  "partition": "train",
+  "run_offset": 80,
+  "run_count": 16,
+  "workers": 1,
+  "maximum_decisions_per_run": 4096,
+  "cycle_repetition_threshold": 8,
+  "shadow_combat_advancement_config": {
+    "schema_version": "combat-advancement-config-v2",
+    "objective_id": "terminal-victory-v1",
+    "candidate_worlds": 2,
+    "maximum_rollout_steps": 8,
+    "maximum_simulated_transitions_per_decision": 256,
+    "maximum_public_resample_attempts": 32,
+    "public_resample_exhaustion": "policy_only_fallback",
+    "progress_weight": 0.25,
+    "tactical_survival_weight": 0.75,
+    "sampling_salt": "sts2-v0.107.1-base-v3-combat-search-diagnostic-v1",
+    "selection_mode": "shadow",
+    "minimum_search_advantage": 0.0,
+    "config_id": "sha256:84c750c6ce90549cb5240274b0a7c3dd95c4c6cff09d11d737a3a4254853e71a"
+  },
+  "margin_strata": [
+    {
+      "name": "negligible",
+      "minimum": 0.0,
+      "maximum": 0.01,
+      "maximum_interventions_per_seed": 2
+    },
+    {
+      "name": "small",
+      "minimum": 0.01,
+      "maximum": 0.05,
+      "maximum_interventions_per_seed": 2
+    },
+    {
+      "name": "medium",
+      "minimum": 0.05,
+      "maximum": 0.2,
+      "maximum_interventions_per_seed": 2
+    },
+    {
+      "name": "large",
+      "minimum": 0.2,
+      "maximum": null,
+      "maximum_interventions_per_seed": 2
+    }
+  ],
+  "selection_salt": "sts2-v0.107.1-base-v3-single-intervention-v1",
+  "spec_id": "sha256:0af0712dbda7e31da61612f2c6fa5807d899671c42b1e354925f5a1a178dae55"
+}

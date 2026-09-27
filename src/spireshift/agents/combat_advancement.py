@@ -242,6 +242,7 @@ class CombatAdvancementDecision:
     hidden_worlds: int
     public_resample_attempts: int
     accepted_world_seeds: tuple[int, ...]
+    base_policy_probabilities: tuple[float, ...]
     candidates: tuple[CombatCandidateEstimate, ...]
 
 
@@ -470,6 +471,7 @@ class CombatAdvancementPolicy:
             hidden_worlds=self.config.candidate_worlds,
             public_resample_attempts=public_resample_attempts,
             accepted_world_seeds=tuple(accepted_world_seeds),
+            base_policy_probabilities=base.policy,
             candidates=estimates,
         )
 

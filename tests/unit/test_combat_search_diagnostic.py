@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 from collections.abc import Sequence
 from pathlib import Path
@@ -147,7 +148,14 @@ def _spec(split_id: str, ruleset_id: str) -> CombatSearchDiagnosticSpec:
     )
 
 
-def test_paired_combat_search_diagnostic_records_and_verifies_evidence(tmp_path: Path) -> None:
+def test_paired_combat_search_diagnostic_records_and_verifies_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    cpu_ticks = itertools.count()
+    monkeypatch.setattr(
+        "spireshift.combat_search_diagnostic.time.thread_time",
+        lambda: next(cpu_ticks) * 0.001,
+    )
     split = load_split_manifest(MOCK_SPLIT_PATH)
     spec = _spec(split.manifest_id, split.ruleset_manifest_id)
     assert CombatSearchDiagnosticSpec.from_mapping(spec.as_dict()) == spec
