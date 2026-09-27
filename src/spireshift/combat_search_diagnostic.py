@@ -13,9 +13,11 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.agents.combat_advancement import (
+    COMBAT_CLEAR_DECISION_TYPES,
     CombatAdvancementConfig,
     CombatAdvancementPolicy,
     CombatAdvancementUsage,
+    CombatBranchOutcome,
     combat_advancement_policy_id,
 )
 from spireshift.agents.learned import ProductionCheckpointPolicy
@@ -46,6 +48,7 @@ class CombatSearchDiagnosticVariant:
         if self.config.schema_version not in {
             "combat-advancement-config-v2",
             "combat-advancement-config-v3",
+            "combat-advancement-config-v4",
         }:
             raise ValueError("Combat-search diagnostics require versioned selection configuration")
 
@@ -481,43 +484,67 @@ def _evaluate_case(
                     fallback_indices.append(decisions)
                 search_decision = policy.last_decision
                 if search_decision is not None:
-                    search_trace.append(
-                        {
-                            "decision_index": decisions,
-                            "source_state_hash": search_decision.source_state_hash,
-                            "base_action_id": search_decision.base_action.action_id,
-                            "search_action_id": search_decision.search_action.action_id,
-                            "selected_action_id": search_decision.selected_action.action_id,
-                            "search_advantage": _artifact_float(search_decision.search_advantage),
-                            "override_recommended": (search_decision.search_override_recommended),
-                            "override_rule": policy.config.override_rule,
-                            "override_rule_eligible": (search_decision.override_rule_eligible),
-                            "override_executed": search_decision.search_override_executed,
-                            "selection_reason": search_decision.selection_reason,
-                            "candidate_count": len(search_decision.candidates),
-                            "simulated_transitions": search_decision.simulated_transitions,
-                            "hidden_worlds": search_decision.hidden_worlds,
-                            "public_resample_attempts": (search_decision.public_resample_attempts),
-                            "base_terminal_victories": search_decision.candidates[
-                                search_decision.base_candidate_index
-                            ].terminal_victories,
-                            "base_terminal_defeats": search_decision.candidates[
-                                search_decision.base_candidate_index
-                            ].terminal_defeats,
-                            "base_bootstrapped_leaves": search_decision.candidates[
-                                search_decision.base_candidate_index
-                            ].bootstrapped_leaves,
-                            "search_terminal_victories": search_decision.candidates[
-                                search_decision.search_candidate_index
-                            ].terminal_victories,
-                            "search_terminal_defeats": search_decision.candidates[
-                                search_decision.search_candidate_index
-                            ].terminal_defeats,
-                            "search_bootstrapped_leaves": search_decision.candidates[
-                                search_decision.search_candidate_index
-                            ].bootstrapped_leaves,
-                        }
-                    )
+                    trace_entry: dict[str, Any] = {
+                        "decision_index": decisions,
+                        "source_state_hash": search_decision.source_state_hash,
+                        "base_action_id": search_decision.base_action.action_id,
+                        "search_action_id": search_decision.search_action.action_id,
+                        "selected_action_id": search_decision.selected_action.action_id,
+                        "search_advantage": _artifact_float(search_decision.search_advantage),
+                        "override_recommended": (search_decision.search_override_recommended),
+                        "override_rule": policy.config.override_rule,
+                        "override_rule_eligible": (search_decision.override_rule_eligible),
+                        "override_executed": search_decision.search_override_executed,
+                        "selection_reason": search_decision.selection_reason,
+                        "candidate_count": len(search_decision.candidates),
+                        "simulated_transitions": search_decision.simulated_transitions,
+                        "hidden_worlds": search_decision.hidden_worlds,
+                        "public_resample_attempts": (search_decision.public_resample_attempts),
+                        "base_terminal_victories": search_decision.candidates[
+                            search_decision.base_candidate_index
+                        ].terminal_victories,
+                        "base_terminal_defeats": search_decision.candidates[
+                            search_decision.base_candidate_index
+                        ].terminal_defeats,
+                        "base_bootstrapped_leaves": search_decision.candidates[
+                            search_decision.base_candidate_index
+                        ].bootstrapped_leaves,
+                        "search_terminal_victories": search_decision.candidates[
+                            search_decision.search_candidate_index
+                        ].terminal_victories,
+                        "search_terminal_defeats": search_decision.candidates[
+                            search_decision.search_candidate_index
+                        ].terminal_defeats,
+                        "search_bootstrapped_leaves": search_decision.candidates[
+                            search_decision.search_candidate_index
+                        ].bootstrapped_leaves,
+                    }
+                    if policy.config.schema_version == "combat-advancement-config-v4":
+                        base_candidate = search_decision.candidates[
+                            search_decision.base_candidate_index
+                        ]
+                        search_candidate = search_decision.candidates[
+                            search_decision.search_candidate_index
+                        ]
+                        trace_entry.update(
+                            {
+                                "base_combat_clears": base_candidate.combat_clears,
+                                "search_combat_clears": search_candidate.combat_clears,
+                                "source_observation": search_decision.source_observation,
+                                "effective_rollout_steps": (
+                                    search_decision.effective_rollout_steps
+                                ),
+                                "base_branch_outcomes": [
+                                    _branch_outcome_dict(item)
+                                    for item in base_candidate.branch_outcomes
+                                ],
+                                "search_branch_outcomes": [
+                                    _branch_outcome_dict(item)
+                                    for item in search_candidate.branch_outcomes
+                                ],
+                            }
+                        )
+                    search_trace.append(trace_entry)
             source_hash = observation.state_hash
             action_ids.append(action.action_id)
             transition = environment.step(action)
@@ -767,36 +794,86 @@ def _validate_case(case: dict[str, Any], *, variant: CombatSearchDiagnosticVaria
         for field in ("simulated_transitions", "hidden_worlds", "public_resample_attempts"):
             if _integer(entry.get(field), field) < 0:
                 raise ValueError("Combat-search diagnostic search count is negative")
-        if variant.config.schema_version == "combat-advancement-config-v3":
+        if variant.config.schema_version in {
+            "combat-advancement-config-v3",
+            "combat-advancement-config-v4",
+        }:
             if entry.get("override_rule") != variant.config.override_rule:
                 raise ValueError("Combat-search diagnostic override rule differs")
             rule_eligible = entry.get("override_rule_eligible")
             if not isinstance(rule_eligible, bool):
                 raise ValueError("Combat-search diagnostic rule eligibility differs")
             hidden_worlds = _integer(entry.get("hidden_worlds"), "hidden worlds")
-            base_counts = tuple(
-                _integer(entry.get(field), field)
-                for field in (
-                    "base_terminal_victories",
-                    "base_terminal_defeats",
-                    "base_bootstrapped_leaves",
-                )
-            )
+            base_count_fields = [
+                "base_terminal_victories",
+                "base_terminal_defeats",
+            ]
+            search_count_fields = [
+                "search_terminal_victories",
+                "search_terminal_defeats",
+            ]
+            if variant.config.schema_version == "combat-advancement-config-v4":
+                base_count_fields.append("base_combat_clears")
+                search_count_fields.append("search_combat_clears")
+            base_count_fields.append("base_bootstrapped_leaves")
+            search_count_fields.append("search_bootstrapped_leaves")
+            base_counts = tuple(_integer(entry.get(field), field) for field in base_count_fields)
             search_counts = tuple(
-                _integer(entry.get(field), field)
-                for field in (
-                    "search_terminal_victories",
-                    "search_terminal_defeats",
-                    "search_bootstrapped_leaves",
-                )
+                _integer(entry.get(field), field) for field in search_count_fields
             )
             if min(*base_counts, *search_counts) < 0 or sum(base_counts) != hidden_worlds:
                 raise ValueError("Combat-search diagnostic base outcome counts differ")
             if sum(search_counts) != hidden_worlds:
                 raise ValueError("Combat-search diagnostic search outcome counts differ")
-            expected_eligibility = variant.config.override_rule == "margin" or (
-                base_counts[1] == hidden_worlds and search_counts[1] == 0
-            )
+            if variant.config.override_rule == "margin":
+                expected_eligibility = True
+            elif variant.config.override_rule == "terminal_rescue":
+                expected_eligibility = base_counts[1] == hidden_worlds and search_counts[1] == 0
+            else:
+                effective_steps = _integer(
+                    entry.get("effective_rollout_steps"), "effective rollout steps"
+                )
+                candidate_count = _integer(entry.get("candidate_count"), "candidate count")
+                simulated_transitions = _integer(
+                    entry.get("simulated_transitions"), "simulated transitions"
+                )
+                if (
+                    effective_steps <= 0
+                    or effective_steps > variant.config.maximum_rollout_steps
+                    or candidate_count < 2
+                    or hidden_worlds != variant.config.candidate_worlds
+                    or simulated_transitions
+                    > min(
+                        variant.config.maximum_simulated_transitions_per_decision,
+                        candidate_count * hidden_worlds * effective_steps,
+                    )
+                ):
+                    raise ValueError("Combat-search diagnostic transition budget differs")
+                source_public_state = _validate_observation_evidence(
+                    entry.get("source_observation"),
+                    expected_state_hash=_string(
+                        entry.get("source_state_hash"), "source state hash"
+                    ),
+                    expected_decision_types={"combat", "combat_selection"},
+                )
+                expected_eligibility = (
+                    base_counts[1] == hidden_worlds
+                    and search_counts[0] + search_counts[2] == hidden_worlds
+                )
+                _validate_branch_outcomes(
+                    entry.get("base_branch_outcomes"),
+                    counts=base_counts,
+                    hidden_worlds=hidden_worlds,
+                    maximum_steps=effective_steps,
+                    source_public_state=source_public_state,
+                )
+                _validate_branch_outcomes(
+                    entry.get("search_branch_outcomes"),
+                    counts=search_counts,
+                    hidden_worlds=hidden_worlds,
+                    maximum_steps=effective_steps,
+                    source_public_state=source_public_state,
+                )
             if rule_eligible is not expected_eligibility:
                 raise ValueError("Combat-search diagnostic rule eligibility is inconsistent")
             if execution and not rule_eligible:
@@ -1083,6 +1160,146 @@ def _usage_from_mapping(value: object) -> CombatAdvancementUsage:
     if min(values.values()) < 0:
         raise ValueError("Combat-search diagnostic usage must be non-negative")
     return CombatAdvancementUsage(**values)
+
+
+def _branch_outcome_dict(outcome: CombatBranchOutcome) -> dict[str, object]:
+    return {
+        "outcome": outcome.outcome,
+        "transitions": outcome.transitions,
+        "resolved_state_hash": outcome.resolved_state_hash,
+        "resolved_decision_type": outcome.resolved_decision_type,
+        "resolved_observation": outcome.resolved_observation,
+        "source_floor": outcome.source_floor,
+        "resolved_floor": outcome.resolved_floor,
+        "source_hp": outcome.source_hp,
+        "resolved_hp": outcome.resolved_hp,
+    }
+
+
+def _validate_branch_outcomes(
+    value: object,
+    *,
+    counts: tuple[int, ...],
+    hidden_worlds: int,
+    maximum_steps: int,
+    source_public_state: dict[str, Any],
+) -> None:
+    outcomes = _list(value, "branch outcomes")
+    if len(outcomes) != hidden_worlds or len(counts) != 4:
+        raise ValueError("Combat-search diagnostic branch outcome count differs")
+    observed = {name: 0 for name in ("run_victory", "run_defeat", "combat_clear", "censored")}
+    for outcome_value in outcomes:
+        outcome = _mapping(outcome_value, "branch outcome")
+        _exact_keys(
+            outcome,
+            {
+                "outcome",
+                "transitions",
+                "resolved_state_hash",
+                "resolved_decision_type",
+                "resolved_observation",
+                "source_floor",
+                "resolved_floor",
+                "source_hp",
+                "resolved_hp",
+            },
+            "branch outcome",
+        )
+        outcome_name = _string(outcome.get("outcome"), "branch outcome")
+        if outcome_name not in observed:
+            raise ValueError("Combat-search diagnostic branch outcome differs")
+        observed[outcome_name] += 1
+        transitions = _integer(outcome.get("transitions"), "branch transitions")
+        if transitions <= 0 or transitions > maximum_steps:
+            raise ValueError("Combat-search diagnostic branch transitions differ")
+        resolved_state_hash = _string(outcome.get("resolved_state_hash"), "resolved state hash")
+        decision_type = _string(outcome.get("resolved_decision_type"), "resolved decision type")
+        resolved_public_state = _validate_observation_evidence(
+            outcome.get("resolved_observation"),
+            expected_state_hash=resolved_state_hash,
+            expected_decision_types={decision_type},
+        )
+        if outcome_name == "combat_clear" and decision_type not in {
+            item.value for item in COMBAT_CLEAR_DECISION_TYPES
+        }:
+            raise ValueError("Combat-search diagnostic combat clear boundary differs")
+        if outcome_name == "censored" and decision_type not in {"combat", "combat_selection"}:
+            raise ValueError("Combat-search diagnostic censored boundary differs")
+        if outcome_name in {"run_victory", "run_defeat"} and decision_type != "terminal":
+            raise ValueError("Combat-search diagnostic terminal boundary differs")
+        for field in ("source_floor", "resolved_floor", "source_hp", "resolved_hp"):
+            field_value = outcome.get(field)
+            if field_value is not None and _integer(field_value, field) < 0:
+                raise ValueError("Combat-search diagnostic public resource differs")
+        if outcome.get("source_floor") != _public_state_integer(
+            source_public_state, ("floor",), ("run", "floor")
+        ) or outcome.get("resolved_floor") != _public_state_integer(
+            resolved_public_state, ("floor",), ("run", "floor")
+        ):
+            raise ValueError("Combat-search diagnostic public floor evidence differs")
+        if outcome.get("source_hp") != _public_state_integer(
+            source_public_state,
+            ("player_hp",),
+            ("player", "hp"),
+            ("player", "current_hp"),
+            ("hp",),
+        ) or outcome.get("resolved_hp") != _public_state_integer(
+            resolved_public_state,
+            ("player_hp",),
+            ("player", "hp"),
+            ("player", "current_hp"),
+            ("hp",),
+        ):
+            raise ValueError("Combat-search diagnostic public HP evidence differs")
+    expected = dict(
+        zip(
+            ("run_victory", "run_defeat", "combat_clear", "censored"),
+            counts,
+            strict=True,
+        )
+    )
+    if observed != expected:
+        raise ValueError("Combat-search diagnostic branch outcome aggregate differs")
+
+
+def _validate_observation_evidence(
+    value: object,
+    *,
+    expected_state_hash: str,
+    expected_decision_types: set[str],
+) -> dict[str, Any]:
+    observation = _mapping(value, "public observation evidence")
+    _exact_keys(
+        observation,
+        {"schema_version", "patch_id", "decision_type", "public_state", "state_hash"},
+        "public observation evidence",
+    )
+    _string(observation.get("schema_version"), "observation schema version")
+    _string(observation.get("patch_id"), "observation patch id")
+    decision_type = _string(observation.get("decision_type"), "observation decision type")
+    if decision_type not in expected_decision_types:
+        raise ValueError("Combat-search diagnostic observation boundary differs")
+    public_state = _mapping(observation.get("public_state"), "public state evidence")
+    state_hash = _string(observation.get("state_hash"), "observation state hash")
+    expected_hash = hashlib.sha256(
+        json.dumps(public_state, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    if state_hash != expected_state_hash or state_hash != expected_hash:
+        raise ValueError("Combat-search diagnostic public state hash differs")
+    return public_state
+
+
+def _public_state_integer(public_state: dict[str, Any], *paths: tuple[str, ...]) -> int | None:
+    for path in paths:
+        current: Any = public_state
+        for key in path:
+            if not isinstance(current, dict) or key not in current:
+                break
+            current = current[key]
+        else:
+            if isinstance(current, int) and not isinstance(current, bool):
+                return current
+    return None
 
 
 def _variant_name(variant: CombatSearchDiagnosticVariant | None) -> str:

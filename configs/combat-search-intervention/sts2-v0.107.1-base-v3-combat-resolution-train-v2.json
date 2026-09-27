@@ -1,0 +1,47 @@
+{
+  "schema_version": "combat-search-intervention-spec-v2",
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "objective_id": "terminal-victory-v1",
+  "model_id": "sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+  "training_report_id": "sha256:6cc0f8d7728636c87ab5ecf0e64f5ae420d2b3a87394c7bc0d921a13fa5c7543",
+  "partition": "train",
+  "run_offset": 112,
+  "run_count": 24,
+  "workers": 1,
+  "maximum_decisions_per_run": 4096,
+  "cycle_repetition_threshold": 8,
+  "shadow_combat_advancement_config": {
+    "schema_version": "combat-advancement-config-v4",
+    "objective_id": "terminal-victory-v1",
+    "candidate_worlds": 2,
+    "maximum_rollout_steps": 32,
+    "maximum_simulated_transitions_per_decision": 2048,
+    "maximum_public_resample_attempts": 32,
+    "public_resample_exhaustion": "policy_only_fallback",
+    "progress_weight": 0.25,
+    "tactical_survival_weight": 0.75,
+    "sampling_salt": "sts2-v0.107.1-base-v3-combat-resolution-intervention-v1",
+    "selection_mode": "shadow",
+    "minimum_search_advantage": 0.2,
+    "override_rule": "combat_clear_rescue",
+    "config_id": "sha256:4d568d5ac6d2e6b90ca29cfa1e537824b5f394e43e965ecfa97445a15ee6f816"
+  },
+  "margin_strata": [
+    {
+      "name": "combat-clear",
+      "minimum": 0.0,
+      "maximum": null,
+      "maximum_interventions_per_seed": 2
+    }
+  ],
+  "selection_salt": "sts2-v0.107.1-base-v3-combat-resolution-selection-v1",
+  "selection_rule": "configured_override_eligible",
+  "promotion_gate": {
+    "minimum_qualifying_interventions": 8,
+    "minimum_unique_seeds": 4,
+    "minimum_beneficial_interventions": 1,
+    "maximum_harmful_interventions": 0
+  },
+  "spec_id": "sha256:b59252c63ced6f83f5e4e182da99f5c85f1a7d5fb34d7631fc08fa62b4410452"
+}

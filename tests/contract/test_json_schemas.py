@@ -333,14 +333,31 @@ def test_combat_search_diagnostic_specification_conforms_to_schema(
     validator.validate(_load(Path(configuration)))
 
 
-def test_combat_search_intervention_specification_conforms_to_schema() -> None:
+@pytest.mark.parametrize(
+    ("schema", "configuration"),
+    [
+        (
+            "combat-search-intervention-spec-v1.json",
+            "configs/combat-search-intervention/sts2-v0.107.1-base-v3-train-v1.json",
+        ),
+        (
+            "combat-search-intervention-spec-v2.json",
+            (
+                "configs/combat-search-intervention/"
+                "sts2-v0.107.1-base-v3-combat-resolution-train-v2.json"
+            ),
+        ),
+    ],
+)
+def test_combat_search_intervention_specification_conforms_to_schema(
+    schema: str,
+    configuration: str,
+) -> None:
     validator = Draft202012Validator(
-        _load(SCHEMA_DIR / "combat-search-intervention-spec-v1.json"),
+        _load(SCHEMA_DIR / schema),
         registry=_registry(),
     )
-    validator.validate(
-        _load(Path("configs/combat-search-intervention/sts2-v0.107.1-base-v3-train-v1.json"))
-    )
+    validator.validate(_load(Path(configuration)))
 
 
 @pytest.mark.parametrize(

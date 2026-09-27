@@ -48,4 +48,5 @@ Zero sampled defeats therefore meant short-horizon survival rather than demonstr
 `validation_allowed=false`. Do not run this configuration on validation, increase its sample count,
 or interpret it as evidence that terminal rescue improves play. Any later tactical rescue rule must
 distinguish combat clearance from a censored horizon and require resolution-level evidence before
-it can alter the base policy.
+it can alter the base policy. The bounded follow-up is the
+[combat-resolution rescue diagnostic](combat-resolution-rescue.md).

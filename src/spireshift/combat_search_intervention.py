@@ -12,9 +12,11 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.agents.combat_advancement import (
+    COMBAT_CLEAR_DECISION_TYPES,
     CombatAdvancementConfig,
     CombatAdvancementDecision,
     CombatAdvancementPolicy,
+    CombatBranchOutcome,
     combat_advancement_policy_id,
 )
 from spireshift.agents.learned import ProductionCheckpointPolicy
@@ -25,8 +27,11 @@ from spireshift.models import write_model_artifact
 from spireshift.splits import SplitManifest, SplitName
 
 INTERVENTION_SPEC_SCHEMA_VERSION = "combat-search-intervention-spec-v1"
+COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION = "combat-search-intervention-spec-v2"
 INTERVENTION_CASE_SCHEMA_VERSION = "combat-search-intervention-case-v1"
+COMBAT_RESOLUTION_INTERVENTION_CASE_SCHEMA_VERSION = "combat-search-intervention-case-v2"
 INTERVENTION_REPORT_SCHEMA_VERSION = "combat-search-intervention-report-v1"
+COMBAT_RESOLUTION_INTERVENTION_REPORT_SCHEMA_VERSION = "combat-search-intervention-report-v2"
 CLAIM_SCOPE = "paired_train_only_single_search_intervention_diagnostic"
 _IDENTIFIER_PATTERN = r"^sha256:[a-f0-9]{64}$"
 
@@ -85,6 +90,60 @@ class MarginStratum:
 
 
 @dataclass(frozen=True, slots=True)
+class CombatResolutionPromotionGate:
+    minimum_qualifying_interventions: int
+    minimum_unique_seeds: int
+    minimum_beneficial_interventions: int
+    maximum_harmful_interventions: int
+
+    def __post_init__(self) -> None:
+        for name, value, minimum in (
+            ("minimum_qualifying_interventions", self.minimum_qualifying_interventions, 1),
+            ("minimum_unique_seeds", self.minimum_unique_seeds, 1),
+            ("minimum_beneficial_interventions", self.minimum_beneficial_interventions, 1),
+            ("maximum_harmful_interventions", self.maximum_harmful_interventions, 0),
+        ):
+            if isinstance(value, bool) or value < minimum:
+                raise ValueError(f"{name} must be at least {minimum}")
+
+    def as_dict(self) -> dict[str, int]:
+        return {
+            "minimum_qualifying_interventions": self.minimum_qualifying_interventions,
+            "minimum_unique_seeds": self.minimum_unique_seeds,
+            "minimum_beneficial_interventions": self.minimum_beneficial_interventions,
+            "maximum_harmful_interventions": self.maximum_harmful_interventions,
+        }
+
+    @classmethod
+    def from_mapping(cls, value: object) -> CombatResolutionPromotionGate:
+        document = _mapping(value, "combat-resolution promotion gate")
+        expected = {
+            "minimum_qualifying_interventions",
+            "minimum_unique_seeds",
+            "minimum_beneficial_interventions",
+            "maximum_harmful_interventions",
+        }
+        _exact_keys(document, expected, "combat-resolution promotion gate")
+        return cls(
+            minimum_qualifying_interventions=_integer(
+                document.get("minimum_qualifying_interventions"),
+                "minimum qualifying interventions",
+            ),
+            minimum_unique_seeds=_integer(
+                document.get("minimum_unique_seeds"), "minimum unique seeds"
+            ),
+            minimum_beneficial_interventions=_integer(
+                document.get("minimum_beneficial_interventions"),
+                "minimum beneficial interventions",
+            ),
+            maximum_harmful_interventions=_integer(
+                document.get("maximum_harmful_interventions"),
+                "maximum harmful interventions",
+            ),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class CombatSearchInterventionSpec:
     split_manifest_id: str
     ruleset_manifest_id: str
@@ -98,12 +157,17 @@ class CombatSearchInterventionSpec:
     shadow_config: CombatAdvancementConfig
     margin_strata: tuple[MarginStratum, ...]
     selection_salt: str
+    selection_rule: str = "all_recommendations"
+    promotion_gate: CombatResolutionPromotionGate | None = None
     objective_id: str = "terminal-victory-v1"
     partition: str = SplitName.TRAIN.value
     schema_version: str = INTERVENTION_SPEC_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
-        if self.schema_version != INTERVENTION_SPEC_SCHEMA_VERSION:
+        if self.schema_version not in {
+            INTERVENTION_SPEC_SCHEMA_VERSION,
+            COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION,
+        }:
             raise ValueError("Combat-search intervention specification schema differs")
         if self.partition != SplitName.TRAIN.value:
             raise ValueError("Combat-search interventions may use only train seeds")
@@ -128,12 +192,23 @@ class CombatSearchInterventionSpec:
                 raise ValueError(f"{count_name} must be at least {minimum}")
         if not self.selection_salt:
             raise ValueError("Intervention selection salt must be non-empty")
-        if (
-            self.shadow_config.schema_version != "combat-advancement-config-v2"
-            or self.shadow_config.selection_mode != "shadow"
-            or self.shadow_config.minimum_search_advantage != 0.0
+        if self.shadow_config.selection_mode != "shadow":
+            raise ValueError("Intervention search configuration must use shadow mode")
+        if self.schema_version == INTERVENTION_SPEC_SCHEMA_VERSION:
+            if (
+                self.shadow_config.schema_version != "combat-advancement-config-v2"
+                or self.shadow_config.minimum_search_advantage != 0.0
+                or self.selection_rule != "all_recommendations"
+                or self.promotion_gate is not None
+            ):
+                raise ValueError("Version-1 interventions require zero-margin selection")
+        elif (
+            self.shadow_config.schema_version != "combat-advancement-config-v4"
+            or self.shadow_config.override_rule != "combat_clear_rescue"
+            or self.selection_rule != "configured_override_eligible"
+            or self.promotion_gate is None
         ):
-            raise ValueError("Intervention search configuration must be zero-margin shadow mode")
+            raise ValueError("Version-2 interventions require combat-clear eligible selection")
         if not self.margin_strata:
             raise ValueError("Combat-search intervention specification has no margin strata")
         names = [stratum.name for stratum in self.margin_strata]
@@ -148,7 +223,7 @@ class CombatSearchInterventionSpec:
             raise ValueError("Final intervention stratum must be unbounded")
 
     def body(self) -> dict[str, object]:
-        return {
+        body: dict[str, object] = {
             "schema_version": self.schema_version,
             "split_manifest_id": self.split_manifest_id,
             "ruleset_manifest_id": self.ruleset_manifest_id,
@@ -165,6 +240,15 @@ class CombatSearchInterventionSpec:
             "margin_strata": [stratum.as_dict() for stratum in self.margin_strata],
             "selection_salt": self.selection_salt,
         }
+        if self.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+            assert self.promotion_gate is not None
+            body.update(
+                {
+                    "selection_rule": self.selection_rule,
+                    "promotion_gate": self.promotion_gate.as_dict(),
+                }
+            )
+        return body
 
     @property
     def spec_id(self) -> str:
@@ -194,9 +278,12 @@ class CombatSearchInterventionSpec:
             "margin_strata",
             "selection_salt",
         }
+        schema_version = _string(document.get("schema_version"), "schema_version")
+        if schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+            expected.update({"selection_rule", "promotion_gate"})
         _exact_keys(document, expected, "combat-search intervention specification")
         spec = cls(
-            schema_version=_string(document.get("schema_version"), "schema_version"),
+            schema_version=schema_version,
             split_manifest_id=_string(document.get("split_manifest_id"), "split_manifest_id"),
             ruleset_manifest_id=_string(document.get("ruleset_manifest_id"), "ruleset_manifest_id"),
             objective_id=_string(document.get("objective_id"), "objective_id"),
@@ -220,6 +307,16 @@ class CombatSearchInterventionSpec:
                 for item in _list(document.get("margin_strata"), "margin strata")
             ),
             selection_salt=_string(document.get("selection_salt"), "selection_salt"),
+            selection_rule=(
+                _string(document.get("selection_rule"), "selection_rule")
+                if schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION
+                else "all_recommendations"
+            ),
+            promotion_gate=(
+                CombatResolutionPromotionGate.from_mapping(document.get("promotion_gate"))
+                if schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION
+                else None
+            ),
         )
         if document.get("spec_id") != spec.spec_id:
             raise ValueError("Combat-search intervention specification identity mismatch")
@@ -308,7 +405,7 @@ def run_combat_search_interventions(
         raise RuntimeError("Combat-search intervention did not produce every seed case")
     summary = _summary(ordered, spec)
     body: dict[str, Any] = {
-        "schema_version": INTERVENTION_REPORT_SCHEMA_VERSION,
+        "schema_version": _report_schema_version(spec),
         "started_at": started_at,
         "completed_at": (now or _utc_now)(),
         "intervention_spec_id": spec.spec_id,
@@ -319,18 +416,7 @@ def run_combat_search_interventions(
         "ruleset_manifest_id": ruleset.manifest_id,
         "patch_id": ruleset.patch_id,
         "objective_id": "terminal-victory-v1",
-        "configuration": {
-            "seeds": list(seeds),
-            "workers": spec.workers,
-            "maximum_decisions_per_run": spec.maximum_decisions_per_run,
-            "cycle_repetition_threshold": spec.cycle_repetition_threshold,
-            "shadow_combat_advancement_config_id": spec.shadow_config.config_id,
-            "shadow_policy_id": combat_advancement_policy_id(
-                base_policy.model_id, spec.shadow_config
-            ),
-            "margin_strata": [stratum.as_dict() for stratum in spec.margin_strata],
-            "selection_salt": spec.selection_salt,
-        },
+        "configuration": _report_configuration(spec, seeds, base_policy.model_id),
         "cases": [
             {
                 "seed": case["seed"],
@@ -365,7 +451,7 @@ def load_combat_search_interventions(
     if report_id != manifest_identifier(body):
         raise ValueError("Combat-search intervention report identity mismatch")
     expected = {
-        "schema_version": INTERVENTION_REPORT_SCHEMA_VERSION,
+        "schema_version": _report_schema_version(spec),
         "intervention_spec_id": spec.spec_id,
         "model_id": spec.model_id,
         "training_report_id": spec.training_report_id,
@@ -380,16 +466,7 @@ def load_combat_search_interventions(
     seeds = split_manifest.seeds(SplitName.TRAIN)[
         spec.run_offset : spec.run_offset + spec.run_count
     ]
-    expected_configuration = {
-        "seeds": list(seeds),
-        "workers": spec.workers,
-        "maximum_decisions_per_run": spec.maximum_decisions_per_run,
-        "cycle_repetition_threshold": spec.cycle_repetition_threshold,
-        "shadow_combat_advancement_config_id": spec.shadow_config.config_id,
-        "shadow_policy_id": combat_advancement_policy_id(spec.model_id, spec.shadow_config),
-        "margin_strata": [stratum.as_dict() for stratum in spec.margin_strata],
-        "selection_salt": spec.selection_salt,
-    }
+    expected_configuration = _report_configuration(spec, seeds, spec.model_id)
     if report.get("configuration") != expected_configuration:
         raise ValueError("Combat-search intervention configuration differs")
     references = _list(report.get("cases"), "intervention case references")
@@ -452,6 +529,7 @@ def _evaluate_seed(
         available = {stratum.name: 0 for stratum in spec.margin_strata}
         search_simulations = 0
         recommended_overrides = 0
+        eligible_recommendations = 0
         while not terminal and decisions < spec.maximum_decisions_per_run:
             legal_actions = tuple(environment.legal_actions())
             if not legal_actions:
@@ -466,19 +544,25 @@ def _evaluate_seed(
                 search_simulations += search.hidden_worlds * len(search.candidates)
             if search is not None and search.search_override_recommended:
                 recommended_overrides += 1
-                stratum = _stratum_for_margin(search.search_advantage, spec.margin_strata)
-                available[stratum.name] += 1
-                _consider_intervention(
-                    retained=retained[stratum.name],
-                    stratum=stratum,
-                    selection_salt=spec.selection_salt,
-                    seed=seed,
-                    decision_index=decisions,
-                    source_observation=observation,
-                    source_maximum_floor=maximum_floor,
-                    decision=search,
-                    environment=environment,
+                selection_eligible = spec.selection_rule == "all_recommendations" or (
+                    search.override_rule_eligible
+                    and search.search_advantage >= spec.shadow_config.minimum_search_advantage
                 )
+                if selection_eligible:
+                    eligible_recommendations += 1
+                    stratum = _stratum_for_margin(search.search_advantage, spec.margin_strata)
+                    available[stratum.name] += 1
+                    _consider_intervention(
+                        retained=retained[stratum.name],
+                        stratum=stratum,
+                        selection_salt=spec.selection_salt,
+                        seed=seed,
+                        decision_index=decisions,
+                        source_observation=observation,
+                        source_maximum_floor=maximum_floor,
+                        decision=search,
+                        environment=environment,
+                    )
             source_hash = observation.state_hash
             actions.append(action.action_id)
             transition = environment.step(action)
@@ -524,7 +608,7 @@ def _evaluate_seed(
             )
         usage = shadow.usage()
         body: dict[str, Any] = {
-            "schema_version": INTERVENTION_CASE_SCHEMA_VERSION,
+            "schema_version": _case_schema_version(spec),
             "seed": seed,
             "partition": SplitName.TRAIN.value,
             "model_id": base_policy.model_id,
@@ -543,12 +627,17 @@ def _evaluate_seed(
                 "selected_interventions_by_stratum": {
                     stratum.name: len(retained[stratum.name]) for stratum in spec.margin_strata
                 },
+                **(
+                    {"eligible_recommendations": eligible_recommendations}
+                    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION
+                    else {}
+                ),
             },
             "interventions": interventions,
         }
     except Exception as error:
         body = {
-            "schema_version": INTERVENTION_CASE_SCHEMA_VERSION,
+            "schema_version": _case_schema_version(spec),
             "seed": seed,
             "partition": SplitName.TRAIN.value,
             "model_id": base_policy.model_id,
@@ -698,8 +787,9 @@ def _evaluate_intervention(
         victory_difference = None
         status = "failed"
         error = f"{type(caught).__name__}: {caught}"
-    candidates = [
-        {
+    candidates: list[dict[str, Any]] = []
+    for candidate in decision.candidates:
+        candidate_record: dict[str, Any] = {
             "candidate_index": candidate.candidate_index,
             "action_id": candidate.action_id,
             "base_policy_probability": _artifact_float(
@@ -713,9 +803,17 @@ def _evaluate_intervention(
             "terminal_defeats": candidate.terminal_defeats,
             "bootstrapped_leaves": candidate.bootstrapped_leaves,
         }
-        for candidate in decision.candidates
-    ]
-    return {
+        if decision.override_rule == "combat_clear_rescue":
+            candidate_record.update(
+                {
+                    "combat_clears": candidate.combat_clears,
+                    "branch_outcomes": [
+                        _branch_outcome_dict(outcome) for outcome in candidate.branch_outcomes
+                    ],
+                }
+            )
+        candidates.append(candidate_record)
+    result = {
         "status": status,
         "error": error,
         "stratum": pending.stratum.name,
@@ -738,6 +836,16 @@ def _evaluate_intervention(
         "victory_difference": victory_difference,
         "maximum_floor_difference": floor_difference,
     }
+    if decision.override_rule == "combat_clear_rescue":
+        result.update(
+            {
+                "source_observation": decision.source_observation,
+                "override_rule": decision.override_rule,
+                "override_rule_eligible": decision.override_rule_eligible,
+                "selection_reason": decision.selection_reason,
+            }
+        )
+    return result
 
 
 def _load_case(path: Path, *, seed: int, spec: CombatSearchInterventionSpec) -> dict[str, Any]:
@@ -747,7 +855,7 @@ def _load_case(path: Path, *, seed: int, spec: CombatSearchInterventionSpec) -> 
     if case_id != manifest_identifier(body):
         raise ValueError("Combat-search intervention case identity mismatch")
     expected = {
-        "schema_version": INTERVENTION_CASE_SCHEMA_VERSION,
+        "schema_version": _case_schema_version(spec),
         "seed": seed,
         "partition": SplitName.TRAIN.value,
         "model_id": spec.model_id,
@@ -792,17 +900,16 @@ def _load_case(path: Path, *, seed: int, spec: CombatSearchInterventionSpec) -> 
     base_run = _mapping(case.get("base_run"), "base run")
     _validate_run_outcome(base_run, base=True)
     source_search = _mapping(case.get("source_search"), "source search")
-    _exact_keys(
-        source_search,
-        {
-            "usage",
-            "simulations",
-            "recommended_overrides",
-            "available_recommendations_by_stratum",
-            "selected_interventions_by_stratum",
-        },
-        "source search",
-    )
+    source_search_fields = {
+        "usage",
+        "simulations",
+        "recommended_overrides",
+        "available_recommendations_by_stratum",
+        "selected_interventions_by_stratum",
+    }
+    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+        source_search_fields.add("eligible_recommendations")
+    _exact_keys(source_search, source_search_fields, "source search")
     usage = _mapping(source_search.get("usage"), "combat-search usage")
     _validate_usage(usage)
     simulations = _integer(source_search.get("simulations"), "search simulations")
@@ -815,7 +922,13 @@ def _load_case(path: Path, *, seed: int, spec: CombatSearchInterventionSpec) -> 
     selected = _count_mapping(
         source_search.get("selected_interventions_by_stratum"), spec.margin_strata
     )
-    if sum(available.values()) != recommendations:
+    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+        eligible = _integer(
+            source_search.get("eligible_recommendations"), "eligible recommendations"
+        )
+        if eligible < 0 or eligible > recommendations or sum(available.values()) != eligible:
+            raise ValueError("Combat-search intervention eligibility total differs")
+    elif sum(available.values()) != recommendations:
         raise ValueError("Combat-search intervention recommendation total differs")
     for stratum in spec.margin_strata:
         if selected[stratum.name] > min(
@@ -873,11 +986,29 @@ def _validate_intervention(
         "victory_difference",
         "maximum_floor_difference",
     }
+    resolution_diagnostic = (
+        spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION
+    )
+    if resolution_diagnostic:
+        expected.update(
+            {
+                "source_observation",
+                "override_rule",
+                "override_rule_eligible",
+                "selection_reason",
+            }
+        )
     _exact_keys(intervention, expected, "intervention")
     decision_index = _integer(intervention.get("decision_index"), "decision index")
     if decision_index < 0 or decision_index >= int(base_run["decisions"]):
         raise ValueError("Combat-search intervention decision index differs")
     state_hash = _string(intervention.get("source_state_hash"), "source state hash")
+    if resolution_diagnostic:
+        source_public_state = _validate_observation_evidence(
+            intervention.get("source_observation"),
+            expected_state_hash=state_hash,
+            expected_decision_types={"combat", "combat_selection"},
+        )
     search_action_id = _string(intervention.get("search_action_id"), "search action id")
     _string(intervention.get("base_action_id"), "base action id")
     margin = _number(intervention.get("search_advantage"), "search advantage")
@@ -896,26 +1027,48 @@ def _validate_intervention(
     )
     if intervention.get("selection_priority") != expected_priority:
         raise ValueError("Combat-search intervention selection priority differs")
+    effective_steps = _integer(
+        intervention.get("effective_rollout_steps"), "effective rollout steps"
+    )
+    simulated_transitions = _integer(
+        intervention.get("simulated_transitions"), "simulated transitions"
+    )
+    hidden_worlds = _integer(intervention.get("hidden_worlds"), "hidden worlds")
+    public_attempts = _integer(
+        intervention.get("public_resample_attempts"), "public resample attempts"
+    )
+    accepted_seeds = _list(intervention.get("accepted_world_seeds"), "accepted world seeds")
+    if (
+        effective_steps <= 0
+        or effective_steps > spec.shadow_config.maximum_rollout_steps
+        or simulated_transitions < 0
+        or simulated_transitions > spec.shadow_config.maximum_simulated_transitions_per_decision
+        or hidden_worlds != spec.shadow_config.candidate_worlds
+        or public_attempts < hidden_worlds
+        or len(accepted_seeds) != hidden_worlds
+        or any(_integer(seed, "accepted world seed") < 0 for seed in accepted_seeds)
+    ):
+        raise ValueError("Combat-search intervention search budget evidence differs")
     candidates = _list(intervention.get("candidates"), "intervention candidates")
     if len(candidates) < 2:
         raise ValueError("Combat-search intervention candidate evidence is incomplete")
     action_ids: list[str] = []
+    audited_transitions = 0
     for index, candidate_value in enumerate(candidates):
         candidate = _mapping(candidate_value, "intervention candidate")
-        _exact_keys(
-            candidate,
-            {
-                "candidate_index",
-                "action_id",
-                "base_policy_probability",
-                "mean_search_value",
-                "sampled_search_values",
-                "terminal_victories",
-                "terminal_defeats",
-                "bootstrapped_leaves",
-            },
-            "intervention candidate",
-        )
+        candidate_fields = {
+            "candidate_index",
+            "action_id",
+            "base_policy_probability",
+            "mean_search_value",
+            "sampled_search_values",
+            "terminal_victories",
+            "terminal_defeats",
+            "bootstrapped_leaves",
+        }
+        if resolution_diagnostic:
+            candidate_fields.update({"combat_clears", "branch_outcomes"})
+        _exact_keys(candidate, candidate_fields, "intervention candidate")
         if _integer(candidate.get("candidate_index"), "candidate index") != index:
             raise ValueError("Combat-search intervention candidate order differs")
         action_ids.append(_string(candidate.get("action_id"), "candidate action id"))
@@ -929,14 +1082,45 @@ def _validate_intervention(
         mean = _number(candidate.get("mean_search_value"), "mean search value")
         if not math.isclose(mean, sum(sample_values) / len(sample_values), abs_tol=1e-9):
             raise ValueError("Combat-search intervention candidate mean differs")
-        outcomes = sum(
-            _integer(candidate.get(field), field)
-            for field in ("terminal_victories", "terminal_defeats", "bootstrapped_leaves")
-        )
+        outcome_fields = ["terminal_victories", "terminal_defeats"]
+        if resolution_diagnostic:
+            outcome_fields.append("combat_clears")
+        outcome_fields.append("bootstrapped_leaves")
+        outcome_counts = tuple(_integer(candidate.get(field), field) for field in outcome_fields)
+        outcomes = sum(outcome_counts)
         if outcomes != spec.shadow_config.candidate_worlds:
             raise ValueError("Combat-search intervention candidate outcome counts differ")
+        if resolution_diagnostic:
+            audited_transitions += _validate_branch_outcomes(
+                candidate.get("branch_outcomes"),
+                counts=outcome_counts,
+                hidden_worlds=spec.shadow_config.candidate_worlds,
+                maximum_steps=effective_steps,
+                source_public_state=source_public_state,
+            )
     if search_action_id not in action_ids or intervention.get("base_action_id") not in action_ids:
         raise ValueError("Combat-search intervention action evidence differs")
+    if resolution_diagnostic:
+        if intervention.get("override_rule") != "combat_clear_rescue":
+            raise ValueError("Combat-search intervention override rule differs")
+        if intervention.get("override_rule_eligible") is not True:
+            raise ValueError("Combat-search intervention retained an ineligible rescue")
+        _string(intervention.get("selection_reason"), "selection reason")
+        if margin < spec.shadow_config.minimum_search_advantage:
+            raise ValueError("Combat-search intervention retained a below-margin rescue")
+        base_candidate = candidates[action_ids.index(str(intervention["base_action_id"]))]
+        search_candidate = candidates[action_ids.index(search_action_id)]
+        base_defeats = _integer(base_candidate.get("terminal_defeats"), "base defeats")
+        search_resolutions = _integer(
+            search_candidate.get("terminal_victories"), "search victories"
+        ) + _integer(search_candidate.get("combat_clears"), "search combat clears")
+        if (
+            base_defeats != spec.shadow_config.candidate_worlds
+            or search_resolutions != spec.shadow_config.candidate_worlds
+        ):
+            raise ValueError("Combat-search intervention rescue eligibility differs")
+        if audited_transitions != simulated_transitions:
+            raise ValueError("Combat-search intervention branch transitions differ")
     status = intervention.get("status")
     if status not in {"completed", "failed"}:
         raise ValueError("Combat-search intervention status differs")
@@ -999,6 +1183,59 @@ def _summary(cases: Sequence[dict[str, Any]], spec: CombatSearchInterventionSpec
     harmful = int(overall["harmful_interventions"])
     represented_beneficial = sum(int(item["beneficial_interventions"]) > 0 for item in by_stratum)
     represented_harmful = sum(int(item["harmful_interventions"]) > 0 for item in by_stratum)
+    search_summary = {
+        "search_decisions": sum(
+            int(case["source_search"]["usage"]["search_decisions"]) for case in completed_cases
+        ),
+        "simulations": sum(int(case["source_search"]["simulations"]) for case in completed_cases),
+        "recommended_overrides": sum(
+            int(case["source_search"]["recommended_overrides"]) for case in completed_cases
+        ),
+        "simulated_transitions": sum(
+            int(case["source_search"]["usage"]["simulated_transitions"]) for case in completed_cases
+        ),
+        "public_resample_failures": sum(
+            int(case["source_search"]["usage"]["public_resample_failures"])
+            for case in completed_cases
+        ),
+    }
+    labeling_complete = (
+        len(completed_cases) == spec.run_count
+        and all(run["terminal"] is True for run in base_runs)
+        and len(completed_interventions) == len(interventions)
+    )
+    recommendation: dict[str, Any] = {
+        "labeling_complete": labeling_complete,
+        "class_diversity_sufficient_for_gate_fitting": (
+            beneficial >= 8
+            and harmful >= 8
+            and represented_beneficial >= 2
+            and represented_harmful >= 2
+        ),
+        "validation_allowed": False,
+    }
+    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+        assert spec.promotion_gate is not None
+        eligible_recommendations = sum(
+            int(case["source_search"]["eligible_recommendations"]) for case in completed_cases
+        )
+        search_summary["eligible_recommendations"] = eligible_recommendations
+        unique_seeds = sum(bool(case["interventions"]) for case in completed_cases)
+        conclusive = int(overall["conclusive_interventions"])
+        recommendation.update(
+            {
+                "qualifying_interventions": len(interventions),
+                "unique_qualifying_seeds": unique_seeds,
+                "combat_resolution_signal_sufficient_for_full_run_preflight": (
+                    labeling_complete
+                    and conclusive == len(interventions)
+                    and len(interventions) >= spec.promotion_gate.minimum_qualifying_interventions
+                    and unique_seeds >= spec.promotion_gate.minimum_unique_seeds
+                    and beneficial >= spec.promotion_gate.minimum_beneficial_interventions
+                    and harmful <= spec.promotion_gate.maximum_harmful_interventions
+                ),
+            }
+        )
     return {
         "base_runs": {
             "benchmark_denominator": len(cases),
@@ -1015,25 +1252,7 @@ def _summary(cases: Sequence[dict[str, Any]], spec: CombatSearchInterventionSpec
                 sum(float(run["total_decision_cpu_seconds"]) for run in base_runs)
             ),
         },
-        "search": {
-            "search_decisions": sum(
-                int(case["source_search"]["usage"]["search_decisions"]) for case in completed_cases
-            ),
-            "simulations": sum(
-                int(case["source_search"]["simulations"]) for case in completed_cases
-            ),
-            "recommended_overrides": sum(
-                int(case["source_search"]["recommended_overrides"]) for case in completed_cases
-            ),
-            "simulated_transitions": sum(
-                int(case["source_search"]["usage"]["simulated_transitions"])
-                for case in completed_cases
-            ),
-            "public_resample_failures": sum(
-                int(case["source_search"]["usage"]["public_resample_failures"])
-                for case in completed_cases
-            ),
-        },
+        "search": search_summary,
         "interventions": {
             "selected_interventions": len(interventions),
             "completed_interventions": len(completed_interventions),
@@ -1041,20 +1260,7 @@ def _summary(cases: Sequence[dict[str, Any]], spec: CombatSearchInterventionSpec
             "overall": overall,
             "by_stratum": by_stratum,
         },
-        "recommendation": {
-            "labeling_complete": (
-                len(completed_cases) == spec.run_count
-                and all(run["terminal"] is True for run in base_runs)
-                and len(completed_interventions) == len(interventions)
-            ),
-            "class_diversity_sufficient_for_gate_fitting": (
-                beneficial >= 8
-                and harmful >= 8
-                and represented_beneficial >= 2
-                and represented_harmful >= 2
-            ),
-            "validation_allowed": False,
-        },
+        "recommendation": recommendation,
     }
 
 
@@ -1185,6 +1391,187 @@ def _validate_inputs(
         raise ValueError("Combat-search intervention policy split differs")
     if getattr(base_policy, "ruleset", None) != ruleset:
         raise ValueError("Combat-search intervention policy ruleset differs")
+
+
+def _case_schema_version(spec: CombatSearchInterventionSpec) -> str:
+    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+        return COMBAT_RESOLUTION_INTERVENTION_CASE_SCHEMA_VERSION
+    return INTERVENTION_CASE_SCHEMA_VERSION
+
+
+def _report_schema_version(spec: CombatSearchInterventionSpec) -> str:
+    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+        return COMBAT_RESOLUTION_INTERVENTION_REPORT_SCHEMA_VERSION
+    return INTERVENTION_REPORT_SCHEMA_VERSION
+
+
+def _report_configuration(
+    spec: CombatSearchInterventionSpec,
+    seeds: Sequence[int],
+    model_id: str,
+) -> dict[str, object]:
+    configuration: dict[str, object] = {
+        "seeds": list(seeds),
+        "workers": spec.workers,
+        "maximum_decisions_per_run": spec.maximum_decisions_per_run,
+        "cycle_repetition_threshold": spec.cycle_repetition_threshold,
+        "shadow_combat_advancement_config_id": spec.shadow_config.config_id,
+        "shadow_policy_id": combat_advancement_policy_id(model_id, spec.shadow_config),
+        "margin_strata": [stratum.as_dict() for stratum in spec.margin_strata],
+        "selection_salt": spec.selection_salt,
+    }
+    if spec.schema_version == COMBAT_RESOLUTION_INTERVENTION_SPEC_SCHEMA_VERSION:
+        assert spec.promotion_gate is not None
+        configuration.update(
+            {
+                "selection_rule": spec.selection_rule,
+                "promotion_gate": spec.promotion_gate.as_dict(),
+            }
+        )
+    return configuration
+
+
+def _branch_outcome_dict(outcome: CombatBranchOutcome) -> dict[str, object]:
+    return {
+        "outcome": outcome.outcome,
+        "transitions": outcome.transitions,
+        "resolved_state_hash": outcome.resolved_state_hash,
+        "resolved_decision_type": outcome.resolved_decision_type,
+        "resolved_observation": outcome.resolved_observation,
+        "source_floor": outcome.source_floor,
+        "resolved_floor": outcome.resolved_floor,
+        "source_hp": outcome.source_hp,
+        "resolved_hp": outcome.resolved_hp,
+    }
+
+
+def _validate_branch_outcomes(
+    value: object,
+    *,
+    counts: tuple[int, ...],
+    hidden_worlds: int,
+    maximum_steps: int,
+    source_public_state: dict[str, Any],
+) -> int:
+    outcomes = _list(value, "branch outcomes")
+    if len(outcomes) != hidden_worlds or len(counts) != 4:
+        raise ValueError("Combat-search intervention branch outcome count differs")
+    observed = {name: 0 for name in ("run_victory", "run_defeat", "combat_clear", "censored")}
+    total_transitions = 0
+    for outcome_value in outcomes:
+        outcome = _mapping(outcome_value, "branch outcome")
+        _exact_keys(
+            outcome,
+            {
+                "outcome",
+                "transitions",
+                "resolved_state_hash",
+                "resolved_decision_type",
+                "resolved_observation",
+                "source_floor",
+                "resolved_floor",
+                "source_hp",
+                "resolved_hp",
+            },
+            "branch outcome",
+        )
+        outcome_name = _string(outcome.get("outcome"), "branch outcome")
+        if outcome_name not in observed:
+            raise ValueError("Combat-search intervention branch outcome differs")
+        observed[outcome_name] += 1
+        transitions = _integer(outcome.get("transitions"), "branch transitions")
+        if transitions <= 0 or transitions > maximum_steps:
+            raise ValueError("Combat-search intervention branch transitions differ")
+        total_transitions += transitions
+        resolved_state_hash = _string(outcome.get("resolved_state_hash"), "resolved state hash")
+        decision_type = _string(outcome.get("resolved_decision_type"), "resolved decision type")
+        resolved_public_state = _validate_observation_evidence(
+            outcome.get("resolved_observation"),
+            expected_state_hash=resolved_state_hash,
+            expected_decision_types={decision_type},
+        )
+        if outcome_name == "combat_clear" and decision_type not in {
+            item.value for item in COMBAT_CLEAR_DECISION_TYPES
+        }:
+            raise ValueError("Combat-search intervention combat-clear boundary differs")
+        if outcome_name == "censored" and decision_type not in {"combat", "combat_selection"}:
+            raise ValueError("Combat-search intervention censored boundary differs")
+        if outcome_name in {"run_victory", "run_defeat"} and decision_type != "terminal":
+            raise ValueError("Combat-search intervention terminal boundary differs")
+        for field in ("source_floor", "resolved_floor", "source_hp", "resolved_hp"):
+            field_value = outcome.get(field)
+            if field_value is not None and _integer(field_value, field) < 0:
+                raise ValueError("Combat-search intervention public resource differs")
+        if outcome.get("source_floor") != _public_state_integer(
+            source_public_state, ("floor",), ("run", "floor")
+        ) or outcome.get("resolved_floor") != _public_state_integer(
+            resolved_public_state, ("floor",), ("run", "floor")
+        ):
+            raise ValueError("Combat-search intervention public floor evidence differs")
+        if outcome.get("source_hp") != _public_state_integer(
+            source_public_state,
+            ("player_hp",),
+            ("player", "hp"),
+            ("player", "current_hp"),
+            ("hp",),
+        ) or outcome.get("resolved_hp") != _public_state_integer(
+            resolved_public_state,
+            ("player_hp",),
+            ("player", "hp"),
+            ("player", "current_hp"),
+            ("hp",),
+        ):
+            raise ValueError("Combat-search intervention public HP evidence differs")
+    expected = dict(
+        zip(
+            ("run_victory", "run_defeat", "combat_clear", "censored"),
+            counts,
+            strict=True,
+        )
+    )
+    if observed != expected:
+        raise ValueError("Combat-search intervention branch outcome aggregate differs")
+    return total_transitions
+
+
+def _validate_observation_evidence(
+    value: object,
+    *,
+    expected_state_hash: str,
+    expected_decision_types: set[str],
+) -> dict[str, Any]:
+    observation = _mapping(value, "public observation evidence")
+    _exact_keys(
+        observation,
+        {"schema_version", "patch_id", "decision_type", "public_state", "state_hash"},
+        "public observation evidence",
+    )
+    _string(observation.get("schema_version"), "observation schema version")
+    _string(observation.get("patch_id"), "observation patch id")
+    decision_type = _string(observation.get("decision_type"), "observation decision type")
+    if decision_type not in expected_decision_types:
+        raise ValueError("Combat-search intervention observation boundary differs")
+    public_state = _mapping(observation.get("public_state"), "public state evidence")
+    state_hash = _string(observation.get("state_hash"), "observation state hash")
+    expected_hash = hashlib.sha256(
+        json.dumps(public_state, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    if state_hash != expected_state_hash or state_hash != expected_hash:
+        raise ValueError("Combat-search intervention public state hash differs")
+    return public_state
+
+
+def _public_state_integer(public_state: dict[str, Any], *paths: tuple[str, ...]) -> int | None:
+    for path in paths:
+        current: Any = public_state
+        for key in path:
+            if not isinstance(current, dict) or key not in current:
+                break
+            current = current[key]
+        else:
+            if isinstance(current, int) and not isinstance(current, bool):
+                return current
+    return None
 
 
 def _count_mapping(value: object, strata: Sequence[MarginStratum]) -> dict[str, int]:

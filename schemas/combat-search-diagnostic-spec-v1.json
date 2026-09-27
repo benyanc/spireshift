@@ -34,7 +34,8 @@
           "combat_advancement_config": {
             "oneOf": [
               {"$ref": "https://spireshift.dev/schemas/combat-advancement-config-v2.json"},
-              {"$ref": "https://spireshift.dev/schemas/combat-advancement-config-v3.json"}
+              {"$ref": "https://spireshift.dev/schemas/combat-advancement-config-v3.json"},
+              {"$ref": "https://spireshift.dev/schemas/combat-advancement-config-v4.json"}
             ]
           }
         },

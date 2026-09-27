@@ -185,7 +185,9 @@ combat lookahead while preserving terminal victory as the final objective. Greed
 selection regressed or tied the base policy, and the later
 [terminal-rescue preflight](docs/terminal-rescue-search.md) changed seven train trajectories without
 improving a single maximum-floor or terminal outcome. These negative results remain part of the
-search evidence; short-horizon survival is not treated as demonstrated combat recovery.
+search evidence; short-horizon survival is not treated as demonstrated combat recovery. The
+[combat-resolution rescue diagnostic](docs/combat-resolution-rescue.md) is the final bounded test
+of this tactical-search signal and requires actual paired combat clearance.
 
 [Selective DAgger collection](docs/selective-dagger.md) runs the student on new complete training
 runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,

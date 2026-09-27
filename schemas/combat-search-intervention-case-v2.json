@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-search-intervention-case-v2.json",
+  "title": "SpireShift Combat-Resolution Intervention Case v2",
+  "type": "object",
+  "required": [
+    "schema_version", "case_id", "seed", "partition", "model_id", "base_policy_id",
+    "shadow_policy_id", "shadow_combat_advancement_config_id", "ruleset_manifest_id",
+    "status", "error", "base_run", "source_search", "interventions"
+  ],
+  "properties": {
+    "schema_version": {"const": "combat-search-intervention-case-v2"},
+    "case_id": {"$ref": "#/$defs/id"},
+    "seed": {"type": "integer", "minimum": 0},
+    "partition": {"const": "train"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "base_policy_id": {"type": "string", "minLength": 1},
+    "shadow_policy_id": {"type": "string", "minLength": 1},
+    "shadow_combat_advancement_config_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "status": {"enum": ["completed", "failed"]},
+    "error": {"type": ["string", "null"]},
+    "base_run": {"type": ["object", "null"]},
+    "source_search": {"type": ["object", "null"]},
+    "interventions": {"type": "array", "items": {"type": "object"}}
+  },
+  "$defs": {"id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+  "additionalProperties": false
+}
