@@ -180,9 +180,12 @@ calibration in a content-addressed training report.
 from the frozen STS2 curricula, compares it with the weighted soft-target formulation, and keeps the
 terminal-value head blocked while the available outcomes remain all losses.
 
-[Combat-advancement continuation](docs/combat-advancement.md) adds equal-budget short-horizon combat
-lookahead to the learned checkpoint while preserving terminal victory as the final objective. Its
-single next operator command runs a matched-seed train discovery before any new teacher generation.
+[Combat-advancement continuation](docs/combat-advancement.md) tested equal-budget short-horizon
+combat lookahead while preserving terminal victory as the final objective. Greedy and thresholded
+selection regressed or tied the base policy, and the later
+[terminal-rescue preflight](docs/terminal-rescue-search.md) changed seven train trajectories without
+improving a single maximum-floor or terminal outcome. These negative results remain part of the
+search evidence; short-horizon survival is not treated as demonstrated combat recovery.
 
 [Selective DAgger collection](docs/selective-dagger.md) runs the student on new complete training
 runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,

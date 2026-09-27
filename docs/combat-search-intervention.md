@@ -32,8 +32,10 @@ interventions improved maximum floor, 68 tied, and six were harmful; no run won.
 not monotonic: the medium band was the most harmful, while the large band had three improvements
 and no regressions. The learned-gate diversity criterion failed.
 
-One categorical signal survived: in seven interventions, both paired simulations defeated the base
-action while neither defeated the search action. Those interventions were three beneficial, four
-tied, and zero harmful across five seeds. The next experiment is the
-[terminal-rescue preflight](terminal-rescue-search.md). Do not rerun this intervention job or fit a
-learned gate from its labels.
+One categorical signal survived the intervention sample: in seven interventions, both paired
+simulations defeated the base action while neither defeated the search action. Those interventions
+were three beneficial, four tied, and zero harmful across five seeds. The subsequent
+[terminal-rescue preflight](terminal-rescue-search.md) rejected that signal on disjoint train runs:
+all selected search branches were censored at the short horizon and no full-run floor improved. Do
+not rerun this intervention job, fit a scalar-margin gate from it, or promote short-horizon survival
+to validation.
