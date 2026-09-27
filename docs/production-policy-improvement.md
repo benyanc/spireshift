@@ -21,9 +21,20 @@ types and 13 source-floor bins, including 96 terminal-frontier states. The froze
 
 The collection still contained zero victories, so it does not unblock terminal-value training. It
 does clear the coverage and liveness gate for paired teacher labeling. The selected states contain
-1,114 legal candidates; at 16 paired samples per candidate, the next command schedules 17,824
+1,114 legal candidates; at 16 paired samples per candidate, teacher labeling scheduled 17,824
 bounded counterfactual simulations. Each continuation now uses the same public no-op fallback as
 the collector and records its fallback evidence in a production DAgger teacher schema.
+
+Teacher labeling completed all 320 states and 17,824 simulations in 25 minutes 28 seconds. Every
+continuation terminated; none required the fallback. The labels contain progress variation in 111
+states, 20 hard-target-eligible states, 19.82 effective labeled states, and 91.56% paired-winner
+agreement between sample halves. The dataset passed complete verification as
+`sha256:59fcdfab13431b78171c4609d7807dccddae99ce81caa3c52c8602ac5e1ce507`.
+
+The new dataset and accepted base-v2 curriculum have identical policy, ruleset, objective, teacher,
+and sampling configurations. Their 112 complete-run seeds are disjoint. They are therefore eligible
+for one verified composition containing 1,299 labeled states. Composition verifies about 1.3 GB of
+existing evidence and may take more than a minute even though it performs no simulation or training.
 
 The completed collection also converted the tactical diagnostic into 15 causal preferences: 11
 favor the counterfactual action, one favors the original action, and three remain low-weight ties.
@@ -38,29 +49,20 @@ current work package and must be started and observed by the operator.
 ```bash
 uv run spireshift resources run \
   --kind teacher_generation \
-  --report artifacts/resources/production-dagger-teacher-base-v2-train-v1.json \
-  --metrics artifacts/resources/production-dagger-teacher-base-v2-train-v1-metrics.json \
-  --artifact-root artifacts/bootstrap/teacher-production-dagger-base-v2-train-v1 \
-  --workers 8 \
-  --max-wall-seconds 14400 \
-  --max-cpu-seconds 50000 \
+  --report artifacts/resources/production-dagger-composition-base-v2-train-v1.json \
+  --artifact-root artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined \
+  --workers 1 \
+  --max-wall-seconds 1800 \
+  --max-cpu-seconds 1800 \
   --max-storage-bytes 2000000000 \
-  --max-memory-bytes 16000000000 \
+  --max-memory-bytes 4000000000 \
   -- \
-  uv run --extra evangambit spireshift bootstrap generate \
-    artifacts/bootstrap/teacher-production-dagger-base-v2-train-v1 \
-    --states artifacts/dagger/sts2-v0.107.1-base-v2-train-v1/state-set.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --backend evangambit \
-    --upstream-root artifacts/backend/evangambit-v0.107.1 \
-    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
-    --policy-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
-    --samples-per-candidate 16 \
-    --workers 8 \
-    --worker-timeout 120 \
-    --resume
+  uv run spireshift bootstrap combine-curricula \
+    artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined \
+    artifacts/bootstrap/teacher-train-v3-combined/bootstrap-teacher-dataset.json \
+    artifacts/bootstrap/teacher-production-dagger-base-v2-train-v1/bootstrap-teacher-dataset.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json
 ```
 
-Do not start curriculum composition, training, or test evaluation yet. The teacher result must be
-verified before it is combined with the accepted base-v2 curriculum.
+Do not start training or test evaluation yet. The composed dataset must be verified before the
+candidate training protocol is frozen.
