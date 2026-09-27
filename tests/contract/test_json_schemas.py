@@ -326,6 +326,16 @@ def test_combat_search_diagnostic_specification_conforms_to_schema() -> None:
     )
 
 
+def test_combat_search_intervention_specification_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "combat-search-intervention-spec-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(
+        _load(Path("configs/combat-search-intervention/sts2-v0.107.1-base-v3-train-v1.json"))
+    )
+
+
 @pytest.mark.parametrize(
     "configuration",
     [

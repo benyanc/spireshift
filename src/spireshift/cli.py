@@ -55,6 +55,11 @@ from spireshift.combat_search_diagnostic import (
     load_combat_search_diagnostic_spec,
     run_combat_search_diagnostic,
 )
+from spireshift.combat_search_intervention import (
+    load_combat_search_intervention_spec,
+    load_combat_search_interventions,
+    run_combat_search_interventions,
+)
 from spireshift.conformance import (
     capture_conformance_trace,
     compare_conformance_traces,
@@ -760,6 +765,28 @@ def build_parser() -> argparse.ArgumentParser:
     combat_search_diagnostic_verify.add_argument("--report", type=Path, required=True)
     combat_search_diagnostic_verify.add_argument("--split-manifest", type=Path, required=True)
     combat_search_diagnostic_verify.add_argument("--output", type=Path)
+    combat_search_intervention = model_commands.add_parser(
+        "evaluate-combat-search-interventions",
+        help="Run train-only exact-state single search interventions",
+    )
+    combat_search_intervention.add_argument("spec", type=Path)
+    combat_search_intervention.add_argument("checkpoint", type=Path)
+    combat_search_intervention.add_argument("--report", type=Path, required=True)
+    combat_search_intervention.add_argument("--split-manifest", type=Path, required=True)
+    combat_search_intervention.add_argument("--upstream-root", type=Path, required=True)
+    combat_search_intervention.add_argument("--manifest", type=Path, required=True)
+    combat_search_intervention.add_argument("--output-dir", type=Path, required=True)
+    combat_search_intervention.add_argument("--resume", action="store_true")
+    combat_search_intervention_verify = model_commands.add_parser(
+        "verify-combat-search-interventions",
+        help="Verify single-intervention cases, aggregates, and identities",
+    )
+    combat_search_intervention_verify.add_argument("evaluation", type=Path)
+    combat_search_intervention_verify.add_argument("spec", type=Path)
+    combat_search_intervention_verify.add_argument("checkpoint", type=Path)
+    combat_search_intervention_verify.add_argument("--report", type=Path, required=True)
+    combat_search_intervention_verify.add_argument("--split-manifest", type=Path, required=True)
+    combat_search_intervention_verify.add_argument("--output", type=Path)
     readiness_assess = model_commands.add_parser(
         "assess-readiness",
         help="Apply a frozen fail-closed readiness scorecard to a production checkpoint",
@@ -1641,6 +1668,96 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 1
     if args.command == "model":
         try:
+            if args.model_command in {
+                "evaluate-combat-search-interventions",
+                "verify-combat-search-interventions",
+            }:
+                intervention_spec = load_combat_search_intervention_spec(args.spec)
+                intervention_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                intervention_training_report = load_production_training_report(
+                    args.report, checkpoint=intervention_checkpoint
+                )
+                intervention_split = load_split_manifest(args.split_manifest)
+                if (
+                    intervention_spec.model_id != intervention_checkpoint["model_id"]
+                    or intervention_spec.training_report_id
+                    != intervention_training_report["report_id"]
+                ):
+                    raise ValueError("Combat-search intervention model identities differ")
+                if args.model_command == "verify-combat-search-interventions":
+                    intervention = load_combat_search_interventions(
+                        args.evaluation,
+                        spec=intervention_spec,
+                        split_manifest=intervention_split,
+                    )
+                    _emit_json(
+                        {
+                            "valid": True,
+                            "intervention_spec_id": intervention_spec.spec_id,
+                            "report_id": intervention["report_id"],
+                            "validation_allowed": False,
+                        },
+                        args.output,
+                    )
+                    return 0
+                intervention_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=(
+                        intervention_spec.maximum_decisions_per_run
+                        + intervention_spec.shadow_config.maximum_rollout_steps
+                        + 1
+                    ),
+                )
+                intervention_probe = intervention_backend.factory()
+                try:
+                    intervention_ruleset = intervention_probe.ruleset
+                    intervention_policy = ProductionCheckpointPolicy(
+                        checkpoint=intervention_checkpoint,
+                        training_report=intervention_training_report,
+                        ruleset=intervention_ruleset,
+                    )
+                finally:
+                    close = getattr(intervention_probe, "close", None)
+                    if callable(close):
+                        close()
+                intervention_result = run_combat_search_interventions(
+                    environment_factory=intervention_backend.factory,
+                    ruleset=intervention_ruleset,
+                    base_policy=intervention_policy,
+                    split_manifest=intervention_split,
+                    spec=intervention_spec,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                intervention_summary = intervention_result.report["summary"]
+                if isinstance(intervention_summary, dict):
+                    base_runs = intervention_summary.get("base_runs")
+                    search = intervention_summary.get("search")
+                    intervention_runs = intervention_summary.get("interventions")
+                    if (
+                        isinstance(base_runs, dict)
+                        and isinstance(search, dict)
+                        and isinstance(intervention_runs, dict)
+                    ):
+                        overall = intervention_runs.get("overall")
+                        if isinstance(overall, dict):
+                            write_experiment_metrics(
+                                ExperimentMetrics(
+                                    trajectories=(
+                                        intervention_spec.run_count
+                                        + int(intervention_runs["completed_interventions"])
+                                    ),
+                                    simulations=int(search["simulations"]),
+                                    transitions=(
+                                        int(base_runs["decisions"])
+                                        + int(search["simulated_transitions"])
+                                        + int(overall["counterfactual_decisions"])
+                                    ),
+                                )
+                            )
+                _emit_json(intervention_result.report, None)
+                return 0 if intervention_result.successful else 1
             if args.model_command in {"evaluate-combat-search", "verify-combat-search"}:
                 diagnostic_spec = load_combat_search_diagnostic_spec(args.spec)
                 diagnostic_checkpoint = load_production_model_checkpoint(args.checkpoint)

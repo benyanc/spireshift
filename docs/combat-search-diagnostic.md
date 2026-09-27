@@ -30,30 +30,14 @@ The frozen specification is
 `sha256:102f5033e3f7b39d3889698dfbfbdc977d5b5047d12f91e0d8ccef0c17b106d3`.
 This is a train-only diagnostic and cannot support a validation, test-set, or adaptive-search claim.
 
-## Next operator command
+## Completed result
 
-Run this one resource-capped command and return its final output. The evaluator preserves completed
-case artifacts for a separately named resumed resource run if interrupted. It is sustained work and
-must be started and observed by the operator.
+The operator run completed all 48 cases. Shadow mode exactly reproduced every base trajectory, but
+no applied variant qualified for validation. Greedy search reduced mean maximum floor by 1.0; the
+0.05 gate reduced it by 0.625; and the 0.10/0.20 gates spent about 178 decision CPU seconds versus
+3.96 for base without improving any paired floor or victory. Diagnostic report:
+`sha256:8c8b282aaf3e29af43e74407734415950550e1727ce5f88d9d7ad4a5e946dae9`.
 
-```bash
-uv run spireshift resources run \
-  --kind rollout \
-  --report artifacts/resources/combat-search-diagnostic-v1.json \
-  --metrics artifacts/resources/combat-search-diagnostic-v1-metrics.json \
-  --artifact-root artifacts/evaluations/combat-search-diagnostic-v1 \
-  --workers 1 \
-  --max-wall-seconds 7200 \
-  --max-cpu-seconds 7200 \
-  --max-storage-bytes 1000000000 \
-  --max-memory-bytes 16000000000 \
-  -- \
-  uv run --extra evangambit spireshift model evaluate-combat-search \
-    configs/combat-search-diagnostic/sts2-v0.107.1-base-v3-train-v1.json \
-    artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
-    --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --upstream-root artifacts/backend/evangambit-v0.107.1 \
-    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/evaluations/combat-search-diagnostic-v1
-```
+Do not rerun this threshold sweep. The next experiment is the
+[single-intervention diagnostic](combat-search-intervention.md), which labels the causal effect of
+one recommended action while returning the rest of the run to the base policy.
