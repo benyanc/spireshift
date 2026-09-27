@@ -16,13 +16,29 @@ from spireshift.core.types import DecisionType, LegalAction, Observation
 LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v1"
 COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v2"
 TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v3"
+COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v4"
 LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v1"
 COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v2"
 TERMINAL_RESCUE_POLICY_VERSION = "combat-advancement-policy-v3"
+COMBAT_RESOLUTION_POLICY_VERSION = "combat-advancement-policy-v4"
 TERMINAL_VICTORY_OBJECTIVE_ID = "terminal-victory-v1"
 PUBLIC_RESAMPLE_EXHAUSTION_POLICY_ONLY_FALLBACK = "policy_only_fallback"
 SEARCH_SELECTION_MODES = frozenset({"apply", "shadow"})
-SEARCH_OVERRIDE_RULES = frozenset({"margin", "terminal_rescue"})
+SEARCH_OVERRIDE_RULES = frozenset({"margin", "terminal_rescue", "combat_clear_rescue"})
+COMBAT_DECISION_TYPES = frozenset({DecisionType.COMBAT, DecisionType.COMBAT_SELECTION})
+COMBAT_CLEAR_DECISION_TYPES = frozenset(
+    {
+        DecisionType.PATH,
+        DecisionType.REWARD,
+        DecisionType.EVENT,
+        DecisionType.REST_SITE,
+        DecisionType.SHOP,
+        DecisionType.TREASURE,
+        DecisionType.CARD_SELECTION,
+        DecisionType.RELIC_SELECTION,
+        DecisionType.MINI_GAME,
+    }
+)
 
 
 class CandidatePredictor(Protocol):
@@ -63,6 +79,7 @@ class CombatAdvancementConfig:
             LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
             TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+            COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
         }:
             raise ValueError("Combat-advancement configuration schema differs")
         if self.objective_id != TERMINAL_VICTORY_OBJECTIVE_ID:
@@ -118,6 +135,16 @@ class CombatAdvancementConfig:
             and self.override_rule != "margin"
         ):
             raise ValueError("Combat-advancement v2 configuration requires the margin rule")
+        if (
+            self.schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION
+            and self.override_rule == "combat_clear_rescue"
+        ):
+            raise ValueError("Combat-advancement v3 cannot use the combat-clear rule")
+        if (
+            self.schema_version == COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION
+            and self.override_rule != "combat_clear_rescue"
+        ):
+            raise ValueError("Combat-advancement v4 requires the combat-clear rescue rule")
 
     def body(self) -> dict[str, object]:
         body: dict[str, object] = {
@@ -137,6 +164,7 @@ class CombatAdvancementConfig:
         if self.schema_version in {
             COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
             TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+            COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
         }:
             body.update(
                 {
@@ -144,7 +172,10 @@ class CombatAdvancementConfig:
                     "minimum_search_advantage": self.minimum_search_advantage,
                 }
             )
-        if self.schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION:
+        if self.schema_version in {
+            TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+            COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
+        }:
             body["override_rule"] = self.override_rule
         return body
 
@@ -176,9 +207,13 @@ class CombatAdvancementConfig:
         if schema_version in {
             COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
             TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+            COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
         }:
             expected.update({"selection_mode", "minimum_search_advantage"})
-        if schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION:
+        if schema_version in {
+            TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+            COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
+        }:
             expected.add("override_rule")
         elif schema_version not in {
             LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
@@ -216,6 +251,7 @@ class CombatAdvancementConfig:
                 in (
                     COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
                     TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+                    COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
                 )
                 else "apply"
             ),
@@ -225,12 +261,17 @@ class CombatAdvancementConfig:
                 in (
                     COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
                     TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+                    COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
                 )
                 else 0.0
             ),
             override_rule=(
                 _string(value.get("override_rule"), "override_rule")
-                if schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION
+                if schema_version
+                in (
+                    TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+                    COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION,
+                )
                 else "margin"
             ),
         )
@@ -249,8 +290,22 @@ def combat_advancement_policy_id(model_id: str, config: CombatAdvancementConfig)
         LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION: (LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION),
         COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION: COMBAT_ADVANCEMENT_POLICY_VERSION,
         TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION: TERMINAL_RESCUE_POLICY_VERSION,
+        COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION: COMBAT_RESOLUTION_POLICY_VERSION,
     }[config.schema_version]
     return f"{policy_version}:{model_id}:{config.config_id}"
+
+
+@dataclass(frozen=True, slots=True)
+class CombatBranchOutcome:
+    outcome: str
+    transitions: int
+    resolved_state_hash: str
+    resolved_decision_type: str
+    resolved_observation: dict[str, Any]
+    source_floor: int | None
+    resolved_floor: int | None
+    source_hp: int | None
+    resolved_hp: int | None
 
 
 @dataclass(frozen=True, slots=True)
@@ -261,12 +316,15 @@ class CombatCandidateEstimate:
     sampled_search_values: tuple[float, ...]
     terminal_victories: int
     terminal_defeats: int
+    combat_clears: int
     bootstrapped_leaves: int
+    branch_outcomes: tuple[CombatBranchOutcome, ...]
 
 
 @dataclass(frozen=True, slots=True)
 class CombatAdvancementDecision:
     source_state_hash: str
+    source_observation: dict[str, Any]
     base_candidate_index: int
     base_action: LegalAction
     search_candidate_index: int
@@ -275,6 +333,7 @@ class CombatAdvancementDecision:
     selected_action: LegalAction
     search_advantage: float
     search_override_recommended: bool
+    override_rule: str
     override_rule_eligible: bool
     search_override_executed: bool
     selection_reason: str
@@ -407,7 +466,9 @@ class CombatAdvancementPolicy:
         values: list[list[float]] = [[] for _ in actions]
         victories = [0 for _ in actions]
         defeats = [0 for _ in actions]
+        combat_clears = [0 for _ in actions]
         bootstraps = [0 for _ in actions]
+        branch_outcomes: list[list[CombatBranchOutcome]] = [[] for _ in actions]
         simulated_transitions = 0
         public_resample_attempts = 0
         accepted_world_seeds: list[int] = []
@@ -434,7 +495,7 @@ class CombatAdvancementPolicy:
                 for candidate_index, action in enumerate(actions):
                     branch = world.clone(resample_hidden=False)
                     try:
-                        value, transitions, outcome = self._evaluate_branch(
+                        value, transitions, outcome, resolved = self._evaluate_branch(
                             branch,
                             observation,
                             action,
@@ -445,12 +506,42 @@ class CombatAdvancementPolicy:
                         _close_environment(branch)
                     values[candidate_index].append(value)
                     simulated_transitions += transitions
-                    if outcome == "victory":
+                    if outcome == "run_victory":
                         victories[candidate_index] += 1
-                    elif outcome == "defeat":
+                    elif outcome == "run_defeat":
                         defeats[candidate_index] += 1
+                    elif (
+                        outcome == "combat_clear"
+                        and self.config.schema_version == COMBAT_RESOLUTION_CONFIG_SCHEMA_VERSION
+                    ):
+                        combat_clears[candidate_index] += 1
                     else:
                         bootstraps[candidate_index] += 1
+                    branch_outcomes[candidate_index].append(
+                        CombatBranchOutcome(
+                            outcome=outcome,
+                            transitions=transitions,
+                            resolved_state_hash=resolved.state_hash,
+                            resolved_decision_type=resolved.decision_type.value,
+                            resolved_observation=resolved.as_dict(),
+                            source_floor=source_floor,
+                            resolved_floor=_public_integer(resolved, ("floor",), ("run", "floor")),
+                            source_hp=_public_integer(
+                                observation,
+                                ("player_hp",),
+                                ("player", "hp"),
+                                ("player", "current_hp"),
+                                ("hp",),
+                            ),
+                            resolved_hp=_public_integer(
+                                resolved,
+                                ("player_hp",),
+                                ("player", "hp"),
+                                ("player", "current_hp"),
+                                ("hp",),
+                            ),
+                        )
+                    )
         finally:
             for world in worlds:
                 _close_environment(world)
@@ -464,7 +555,9 @@ class CombatAdvancementPolicy:
                 sampled_search_values=tuple(values[index]),
                 terminal_victories=victories[index],
                 terminal_defeats=defeats[index],
+                combat_clears=combat_clears[index],
                 bootstrapped_leaves=bootstraps[index],
+                branch_outcomes=tuple(branch_outcomes[index]),
             )
             for index, action in enumerate(actions)
         )
@@ -481,10 +574,20 @@ class CombatAdvancementPolicy:
             estimates[search_index].mean_search_value - estimates[base_index].mean_search_value
         )
         override_recommended = search_index != base_index
-        override_rule_eligible = self.config.override_rule == "margin" or (
-            estimates[base_index].terminal_defeats == self.config.candidate_worlds
-            and estimates[search_index].terminal_defeats == 0
-        )
+        if self.config.override_rule == "margin":
+            override_rule_eligible = True
+        elif self.config.override_rule == "terminal_rescue":
+            override_rule_eligible = (
+                estimates[base_index].terminal_defeats == self.config.candidate_worlds
+                and estimates[search_index].terminal_defeats == 0
+            )
+        else:
+            override_rule_eligible = (
+                estimates[base_index].terminal_defeats == self.config.candidate_worlds
+                and estimates[search_index].combat_clears
+                + estimates[search_index].terminal_victories
+                == self.config.candidate_worlds
+            )
         override_executed = (
             override_recommended
             and self.config.selection_mode == "apply"
@@ -502,10 +605,13 @@ class CombatAdvancementPolicy:
             selection_reason = "override_rule_not_met"
         elif self.config.override_rule == "terminal_rescue":
             selection_reason = "terminal_rescue_override"
+        elif self.config.override_rule == "combat_clear_rescue":
+            selection_reason = "combat_clear_rescue_override"
         else:
             selection_reason = "search_override"
         return CombatAdvancementDecision(
             source_state_hash=observation.state_hash,
+            source_observation=observation.as_dict(),
             base_candidate_index=base_index,
             base_action=actions[base_index],
             search_candidate_index=search_index,
@@ -514,6 +620,7 @@ class CombatAdvancementPolicy:
             selected_action=actions[selected_index],
             search_advantage=search_advantage,
             search_override_recommended=override_recommended,
+            override_rule=self.config.override_rule,
             override_rule_eligible=override_rule_eligible,
             search_override_executed=override_executed,
             selection_reason=selection_reason,
@@ -553,7 +660,7 @@ class CombatAdvancementPolicy:
         *,
         source_floor: int | None,
         maximum_steps: int,
-    ) -> tuple[float, int, str]:
+    ) -> tuple[float, int, str, Observation]:
         transition = environment.step(action)
         if transition.observation != source:
             raise RuntimeError("Hidden-world clone changed the source public observation")
@@ -573,13 +680,27 @@ class CombatAdvancementPolicy:
             return (
                 (1.0 if transition.victory else 0.0),
                 transitions,
-                ("victory" if transition.victory else "defeat"),
+                ("run_victory" if transition.victory else "run_defeat"),
+                observation,
             )
         legal_actions = tuple(environment.legal_actions())
         if not legal_actions:
             raise RuntimeError("Nonterminal combat-advancement leaf has no legal actions")
         prediction = self.base_policy.predict(observation, legal_actions)
-        return self._auxiliary_leaf_value(prediction, source_floor), transitions, "bootstrap"
+        if observation.decision_type in COMBAT_DECISION_TYPES:
+            outcome = "censored"
+        elif observation.decision_type in COMBAT_CLEAR_DECISION_TYPES:
+            outcome = "combat_clear"
+        else:
+            raise RuntimeError(
+                "Combat-advancement branch reached an unsupported resolution boundary"
+            )
+        return (
+            self._auxiliary_leaf_value(prediction, source_floor),
+            transitions,
+            outcome,
+            observation,
+        )
 
     def _auxiliary_leaf_value(
         self,

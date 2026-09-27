@@ -13,6 +13,7 @@ from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.combat_advancement import CombatAdvancementConfig
 from spireshift.agents.learned import ProductionCheckpointPolicy, ProductionPolicyDecision
 from spireshift.combat_search_intervention import (
+    CombatResolutionPromotionGate,
     CombatSearchInterventionSpec,
     MarginStratum,
     load_combat_search_interventions,
@@ -146,6 +147,43 @@ class _BasePolicy:
         return self.predict(observation, legal_actions).selected_action
 
 
+class _CombatResolutionInterventionEnvironment(_InterventionEnvironment):
+    def step(self, action: LegalAction) -> Transition:
+        source = self._observation()
+        if action not in self.legal_actions():
+            raise ValueError("illegal action")
+        if self.stage == "root" and action.action_id == "base":
+            self.stage = "terminal"
+            self.victory = False
+            return Transition(source, action, self._observation(), 0.0, True, False)
+        if self.stage == "root":
+            self.stage = "search_mid"
+            return Transition(source, action, self._observation(), 0.0, False, False)
+        self.victory = self.seed == 0
+        self.floor = 3 if self.victory else 1
+        self.stage = "terminal"
+        return Transition(
+            source,
+            action,
+            self._observation(),
+            float(self.victory),
+            True,
+            self.victory,
+        )
+
+    def _observation(self) -> Observation:
+        observation = super()._observation()
+        if self.stage != "search_mid":
+            return observation
+        return Observation(
+            observation.schema_version,
+            observation.patch_id,
+            DecisionType.REWARD,
+            observation.public_state,
+            observation.state_hash,
+        )
+
+
 def _spec(split_id: str, ruleset_id: str) -> CombatSearchInterventionSpec:
     config = CombatAdvancementConfig(
         schema_version="combat-advancement-config-v2",
@@ -173,6 +211,45 @@ def _spec(split_id: str, ruleset_id: str) -> CombatSearchInterventionSpec:
         shadow_config=config,
         margin_strata=(MarginStratum("all", 0.0, None, 1),),
         selection_salt="intervention-selection-unit-test",
+    )
+
+
+def _resolution_spec(split_id: str, ruleset_id: str) -> CombatSearchInterventionSpec:
+    config = CombatAdvancementConfig(
+        schema_version="combat-advancement-config-v4",
+        candidate_worlds=2,
+        maximum_rollout_steps=4,
+        maximum_simulated_transitions_per_decision=16,
+        maximum_public_resample_attempts=2,
+        public_resample_exhaustion="policy_only_fallback",
+        progress_weight=0.25,
+        tactical_survival_weight=0.75,
+        sampling_salt="combat-resolution-intervention-unit-test",
+        selection_mode="shadow",
+        minimum_search_advantage=0.2,
+        override_rule="combat_clear_rescue",
+    )
+    return CombatSearchInterventionSpec(
+        schema_version="combat-search-intervention-spec-v2",
+        split_manifest_id=split_id,
+        ruleset_manifest_id=ruleset_id,
+        model_id=_BasePolicy.model_id,
+        training_report_id="sha256:" + "4" * 64,
+        run_offset=0,
+        run_count=2,
+        workers=2,
+        maximum_decisions_per_run=8,
+        cycle_repetition_threshold=4,
+        shadow_config=config,
+        margin_strata=(MarginStratum("combat-clear", 0.0, None, 1),),
+        selection_salt="combat-resolution-selection-unit-test",
+        selection_rule="configured_override_eligible",
+        promotion_gate=CombatResolutionPromotionGate(
+            minimum_qualifying_interventions=2,
+            minimum_unique_seeds=2,
+            minimum_beneficial_interventions=1,
+            maximum_harmful_interventions=0,
+        ),
     )
 
 
@@ -270,6 +347,125 @@ def test_single_intervention_resume_and_semantic_tamper_rejection(tmp_path: Path
     with pytest.raises(ValueError, match="paired label differs"):
         load_combat_search_interventions(
             resumed.report_path,
+            spec=spec,
+            split_manifest=split,
+        )
+
+
+def test_combat_resolution_interventions_require_clear_and_verify_branch_evidence(
+    tmp_path: Path,
+) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    spec = _resolution_spec(split.manifest_id, split.ruleset_manifest_id)
+    assert CombatSearchInterventionSpec.from_mapping(spec.as_dict()) == spec
+    policy = cast(ProductionCheckpointPolicy, _BasePolicy(split.manifest_id))
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    result = run_combat_search_interventions(
+        environment_factory=_CombatResolutionInterventionEnvironment,
+        ruleset=MockSpireEnvironment.ruleset,
+        base_policy=policy,
+        split_manifest=split,
+        spec=spec,
+        output_directory=tmp_path / "combat-resolution-interventions",
+        now=lambda: next(timestamps),
+    )
+
+    assert result.successful is True
+    summary = result.report["summary"]
+    assert summary["search"]["eligible_recommendations"] == 2
+    assert summary["interventions"]["selected_interventions"] == 2
+    assert summary["interventions"]["overall"]["beneficial_interventions"] == 1
+    assert summary["interventions"]["overall"]["harmful_interventions"] == 0
+    assert (
+        summary["recommendation"]["combat_resolution_signal_sufficient_for_full_run_preflight"]
+        is True
+    )
+    cases = [
+        json.loads((result.report_path.parent / reference["path"]).read_text())
+        for reference in result.report["cases"]
+    ]
+    intervention = cases[0]["interventions"][0]
+    assert intervention["override_rule_eligible"] is True
+    base_candidate = next(
+        item for item in intervention["candidates"] if item["action_id"] == "base"
+    )
+    search_candidate = next(
+        item for item in intervention["candidates"] if item["action_id"] == "search"
+    )
+    assert base_candidate["terminal_defeats"] == 2
+    assert search_candidate["combat_clears"] == 2
+    assert search_candidate["bootstrapped_leaves"] == 0
+    assert {item["outcome"] for item in search_candidate["branch_outcomes"]} == {"combat_clear"}
+    assert intervention["source_observation"]["state_hash"] == intervention["source_state_hash"]
+    assert all(
+        item["resolved_observation"]["state_hash"] == item["resolved_state_hash"]
+        for item in search_candidate["branch_outcomes"]
+    )
+    assert (
+        load_combat_search_interventions(
+            result.report_path,
+            spec=spec,
+            split_manifest=split,
+        )
+        == result.report
+    )
+    Draft202012Validator(
+        json.loads(Path("schemas/combat-search-intervention-report-v2.json").read_text())
+    ).validate(result.report)
+    Draft202012Validator(
+        json.loads(Path("schemas/combat-search-intervention-case-v2.json").read_text())
+    ).validate(cases[0])
+
+    first_reference = result.report["cases"][0]
+    first_path = result.report_path.parent / first_reference["path"]
+    tampered_case = json.loads(first_path.read_text())
+    tampered_case["interventions"][0]["source_observation"]["public_state"]["floor"] = 99
+    body = {key: value for key, value in tampered_case.items() if key != "case_id"}
+    tampered_case["case_id"] = manifest_identifier(body)
+    first_path.write_text(json.dumps(tampered_case))
+    report = json.loads(result.report_path.read_text())
+    report["cases"][0]["case_id"] = tampered_case["case_id"]
+    report_body = {key: value for key, value in report.items() if key != "report_id"}
+    report["report_id"] = manifest_identifier(report_body)
+    result.report_path.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="public state hash differs"):
+        load_combat_search_interventions(
+            result.report_path,
+            spec=spec,
+            split_manifest=split,
+        )
+
+
+def test_combat_resolution_intervention_rejects_censored_tampering(tmp_path: Path) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    spec = _resolution_spec(split.manifest_id, split.ruleset_manifest_id)
+    policy = cast(ProductionCheckpointPolicy, _BasePolicy(split.manifest_id))
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    result = run_combat_search_interventions(
+        environment_factory=_CombatResolutionInterventionEnvironment,
+        ruleset=MockSpireEnvironment.ruleset,
+        base_policy=policy,
+        split_manifest=split,
+        spec=spec,
+        output_directory=tmp_path / "combat-resolution-interventions",
+        now=lambda: next(timestamps),
+    )
+    case_path = result.report_path.parent / result.report["cases"][0]["path"]
+    case = json.loads(case_path.read_text())
+    search_candidate = next(
+        item for item in case["interventions"][0]["candidates"] if item["action_id"] == "search"
+    )
+    search_candidate["combat_clears"] = 0
+    search_candidate["bootstrapped_leaves"] = 2
+    for outcome in search_candidate["branch_outcomes"]:
+        outcome["outcome"] = "censored"
+    body = {key: value for key, value in case.items() if key != "case_id"}
+    case["case_id"] = manifest_identifier(body)
+    case_path.write_text(json.dumps(case))
+
+    with pytest.raises(ValueError, match="censored boundary differs"):
+        load_combat_search_interventions(
+            result.report_path,
             spec=spec,
             split_manifest=split,
         )

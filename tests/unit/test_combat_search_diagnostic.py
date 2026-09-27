@@ -183,6 +183,40 @@ def _terminal_rescue_spec(split_id: str, ruleset_id: str) -> CombatSearchDiagnos
     )
 
 
+def _combat_resolution_spec(split_id: str, ruleset_id: str) -> CombatSearchDiagnosticSpec:
+    def config(mode: str) -> CombatAdvancementConfig:
+        return CombatAdvancementConfig(
+            schema_version="combat-advancement-config-v4",
+            candidate_worlds=2,
+            maximum_rollout_steps=2,
+            maximum_simulated_transitions_per_decision=16,
+            maximum_public_resample_attempts=2,
+            public_resample_exhaustion="policy_only_fallback",
+            progress_weight=0.25,
+            tactical_survival_weight=0.75,
+            sampling_salt="combat-resolution-diagnostic-unit-test",
+            selection_mode=mode,
+            minimum_search_advantage=0.2,
+            override_rule="combat_clear_rescue",
+        )
+
+    return CombatSearchDiagnosticSpec(
+        split_manifest_id=split_id,
+        ruleset_manifest_id=ruleset_id,
+        model_id=_BasePolicy.model_id,
+        training_report_id="sha256:" + "4" * 64,
+        run_offset=0,
+        run_count=2,
+        workers=2,
+        maximum_decisions_per_run=8,
+        cycle_repetition_threshold=4,
+        variants=(
+            CombatSearchDiagnosticVariant(name="shadow", config=config("shadow")),
+            CombatSearchDiagnosticVariant(name="combat-clear", config=config("apply")),
+        ),
+    )
+
+
 def test_paired_combat_search_diagnostic_records_and_verifies_evidence(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -344,6 +378,68 @@ def test_terminal_rescue_diagnostic_audits_and_verifies_paired_outcomes(
     report["report_id"] = manifest_identifier(report_body)
     result.report_path.write_text(json.dumps(report))
     with pytest.raises(ValueError, match="eligibility is inconsistent"):
+        load_combat_search_diagnostic(
+            result.report_path,
+            spec=spec,
+            split_manifest=split,
+        )
+
+
+def test_combat_resolution_diagnostic_verifies_resolution_boundaries(tmp_path: Path) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    spec = _combat_resolution_spec(split.manifest_id, split.ruleset_manifest_id)
+    policy = cast(ProductionCheckpointPolicy, _BasePolicy(split.manifest_id))
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    result = run_combat_search_diagnostic(
+        environment_factory=_DiagnosticEnvironment,
+        ruleset=MockSpireEnvironment.ruleset,
+        base_policy=policy,
+        split_manifest=split,
+        spec=spec,
+        output_directory=tmp_path / "combat-resolution",
+        now=lambda: next(timestamps),
+    )
+
+    resolution_reference = next(
+        reference
+        for reference in result.report["cases"]
+        if reference["variant_name"] == "combat-clear"
+    )
+    resolution_path = result.report_path.parent / resolution_reference["path"]
+    resolution_case = json.loads(resolution_path.read_text())
+    trace = resolution_case["search_diagnostics"]["decisions"][0]
+    assert trace["override_rule"] == "combat_clear_rescue"
+    assert trace["override_rule_eligible"] is True
+    assert trace["base_terminal_defeats"] == 2
+    assert trace["search_terminal_victories"] == 2
+    assert trace["search_combat_clears"] == 0
+    assert {item["outcome"] for item in trace["search_branch_outcomes"]} == {"run_victory"}
+    assert trace["source_observation"]["state_hash"] == trace["source_state_hash"]
+    assert all(
+        item["resolved_observation"]["state_hash"] == item["resolved_state_hash"]
+        for item in trace["search_branch_outcomes"]
+    )
+    assert (
+        load_combat_search_diagnostic(
+            result.report_path,
+            spec=spec,
+            split_manifest=split,
+        )
+        == result.report
+    )
+
+    trace["search_branch_outcomes"][0]["outcome"] = "censored"
+    body = {key: value for key, value in resolution_case.items() if key != "case_id"}
+    resolution_case["case_id"] = manifest_identifier(body)
+    resolution_path.write_text(json.dumps(resolution_case))
+    report = json.loads(result.report_path.read_text())
+    for reference in report["cases"]:
+        if reference["path"] == resolution_reference["path"]:
+            reference["case_id"] = resolution_case["case_id"]
+    report_body = {key: value for key, value in report.items() if key != "report_id"}
+    report["report_id"] = manifest_identifier(report_body)
+    result.report_path.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="censored boundary differs"):
         load_combat_search_diagnostic(
             result.report_path,
             spec=spec,

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-search-intervention-spec-v2.json",
+  "title": "SpireShift Combat-Resolution Intervention Specification v2",
+  "type": "object",
+  "required": [
+    "schema_version", "spec_id", "split_manifest_id", "ruleset_manifest_id",
+    "objective_id", "model_id", "training_report_id", "partition", "run_offset",
+    "run_count", "workers", "maximum_decisions_per_run", "cycle_repetition_threshold",
+    "shadow_combat_advancement_config", "margin_strata", "selection_salt",
+    "selection_rule", "promotion_gate"
+  ],
+  "properties": {
+    "schema_version": {"const": "combat-search-intervention-spec-v2"},
+    "spec_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "run_offset": {"type": "integer", "minimum": 0},
+    "run_count": {"type": "integer", "minimum": 1},
+    "workers": {"type": "integer", "minimum": 1},
+    "maximum_decisions_per_run": {"type": "integer", "minimum": 1},
+    "cycle_repetition_threshold": {"type": "integer", "minimum": 2},
+    "shadow_combat_advancement_config": {
+      "$ref": "https://spireshift.dev/schemas/combat-advancement-config-v4.json"
+    },
+    "margin_strata": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "minimum", "maximum", "maximum_interventions_per_seed"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "minimum": {"type": "number", "minimum": 0},
+          "maximum": {"type": ["number", "null"], "exclusiveMinimum": 0},
+          "maximum_interventions_per_seed": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "selection_salt": {"type": "string", "minLength": 1},
+    "selection_rule": {"const": "configured_override_eligible"},
+    "promotion_gate": {
+      "type": "object",
+      "required": [
+        "minimum_qualifying_interventions", "minimum_unique_seeds",
+        "minimum_beneficial_interventions", "maximum_harmful_interventions"
+      ],
+      "properties": {
+        "minimum_qualifying_interventions": {"type": "integer", "minimum": 1},
+        "minimum_unique_seeds": {"type": "integer", "minimum": 1},
+        "minimum_beneficial_interventions": {"type": "integer", "minimum": 1},
+        "maximum_harmful_interventions": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {"id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+  "additionalProperties": false
+}
