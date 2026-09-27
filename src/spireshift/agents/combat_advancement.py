@@ -15,11 +15,14 @@ from spireshift.core.types import DecisionType, LegalAction, Observation
 
 LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v1"
 COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v2"
+TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION = "combat-advancement-config-v3"
 LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v1"
 COMBAT_ADVANCEMENT_POLICY_VERSION = "combat-advancement-policy-v2"
+TERMINAL_RESCUE_POLICY_VERSION = "combat-advancement-policy-v3"
 TERMINAL_VICTORY_OBJECTIVE_ID = "terminal-victory-v1"
 PUBLIC_RESAMPLE_EXHAUSTION_POLICY_ONLY_FALLBACK = "policy_only_fallback"
 SEARCH_SELECTION_MODES = frozenset({"apply", "shadow"})
+SEARCH_OVERRIDE_RULES = frozenset({"margin", "terminal_rescue"})
 
 
 class CandidatePredictor(Protocol):
@@ -53,11 +56,13 @@ class CombatAdvancementConfig:
     schema_version: str = LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
     selection_mode: str = "apply"
     minimum_search_advantage: float = 0.0
+    override_rule: str = "margin"
 
     def __post_init__(self) -> None:
         if self.schema_version not in {
             LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+            TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
         }:
             raise ValueError("Combat-advancement configuration schema differs")
         if self.objective_id != TERMINAL_VICTORY_OBJECTIVE_ID:
@@ -95,15 +100,24 @@ class CombatAdvancementConfig:
             raise ValueError("sampling_salt must be non-empty")
         if self.selection_mode not in SEARCH_SELECTION_MODES:
             raise ValueError("Combat-advancement selection mode differs")
+        if self.override_rule not in SEARCH_OVERRIDE_RULES:
+            raise ValueError("Combat-advancement override rule differs")
         if (
             not math.isfinite(float(self.minimum_search_advantage))
             or not 0.0 <= self.minimum_search_advantage <= 1.0
         ):
             raise ValueError("minimum_search_advantage must be finite and between zero and one")
         if self.schema_version == LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION and (
-            self.selection_mode != "apply" or self.minimum_search_advantage != 0.0
+            self.selection_mode != "apply"
+            or self.minimum_search_advantage != 0.0
+            or self.override_rule != "margin"
         ):
             raise ValueError("Legacy combat-advancement configuration cannot change selection")
+        if (
+            self.schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+            and self.override_rule != "margin"
+        ):
+            raise ValueError("Combat-advancement v2 configuration requires the margin rule")
 
     def body(self) -> dict[str, object]:
         body: dict[str, object] = {
@@ -120,13 +134,18 @@ class CombatAdvancementConfig:
             "tactical_survival_weight": self.tactical_survival_weight,
             "sampling_salt": self.sampling_salt,
         }
-        if self.schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+        if self.schema_version in {
+            COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+            TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+        }:
             body.update(
                 {
                     "selection_mode": self.selection_mode,
                     "minimum_search_advantage": self.minimum_search_advantage,
                 }
             )
+        if self.schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION:
+            body["override_rule"] = self.override_rule
         return body
 
     @property
@@ -154,9 +173,17 @@ class CombatAdvancementConfig:
             "tactical_survival_weight",
             "sampling_salt",
         }
-        if schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+        if schema_version in {
+            COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+            TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+        }:
             expected.update({"selection_mode", "minimum_search_advantage"})
-        elif schema_version != LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION:
+        if schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION:
+            expected.add("override_rule")
+        elif schema_version not in {
+            LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+            COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+        }:
             raise ValueError("Combat-advancement configuration schema differs")
         if set(value) != expected:
             raise ValueError("Combat-advancement configuration fields differ")
@@ -185,13 +212,26 @@ class CombatAdvancementConfig:
             sampling_salt=_string(value.get("sampling_salt"), "sampling_salt"),
             selection_mode=(
                 _string(value.get("selection_mode"), "selection_mode")
-                if schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+                if schema_version
+                in (
+                    COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+                    TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+                )
                 else "apply"
             ),
             minimum_search_advantage=(
                 _number(value.get("minimum_search_advantage"), "minimum_search_advantage")
-                if schema_version == COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
+                if schema_version
+                in (
+                    COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION,
+                    TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION,
+                )
                 else 0.0
+            ),
+            override_rule=(
+                _string(value.get("override_rule"), "override_rule")
+                if schema_version == TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION
+                else "margin"
             ),
         )
         if value.get("config_id") != config.config_id:
@@ -205,11 +245,11 @@ def load_combat_advancement_config(path: Path) -> CombatAdvancementConfig:
 
 
 def combat_advancement_policy_id(model_id: str, config: CombatAdvancementConfig) -> str:
-    policy_version = (
-        LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION
-        if config.schema_version == LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION
-        else COMBAT_ADVANCEMENT_POLICY_VERSION
-    )
+    policy_version = {
+        LEGACY_COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION: (LEGACY_COMBAT_ADVANCEMENT_POLICY_VERSION),
+        COMBAT_ADVANCEMENT_CONFIG_SCHEMA_VERSION: COMBAT_ADVANCEMENT_POLICY_VERSION,
+        TERMINAL_RESCUE_CONFIG_SCHEMA_VERSION: TERMINAL_RESCUE_POLICY_VERSION,
+    }[config.schema_version]
     return f"{policy_version}:{model_id}:{config.config_id}"
 
 
@@ -235,6 +275,7 @@ class CombatAdvancementDecision:
     selected_action: LegalAction
     search_advantage: float
     search_override_recommended: bool
+    override_rule_eligible: bool
     search_override_executed: bool
     selection_reason: str
     effective_rollout_steps: int
@@ -440,10 +481,15 @@ class CombatAdvancementPolicy:
             estimates[search_index].mean_search_value - estimates[base_index].mean_search_value
         )
         override_recommended = search_index != base_index
+        override_rule_eligible = self.config.override_rule == "margin" or (
+            estimates[base_index].terminal_defeats == self.config.candidate_worlds
+            and estimates[search_index].terminal_defeats == 0
+        )
         override_executed = (
             override_recommended
             and self.config.selection_mode == "apply"
             and search_advantage >= self.config.minimum_search_advantage
+            and override_rule_eligible
         )
         selected_index = search_index if override_executed else base_index
         if not override_recommended:
@@ -452,6 +498,10 @@ class CombatAdvancementPolicy:
             selection_reason = "shadow_mode"
         elif search_advantage < self.config.minimum_search_advantage:
             selection_reason = "below_minimum_advantage"
+        elif not override_rule_eligible:
+            selection_reason = "override_rule_not_met"
+        elif self.config.override_rule == "terminal_rescue":
+            selection_reason = "terminal_rescue_override"
         else:
             selection_reason = "search_override"
         return CombatAdvancementDecision(
@@ -464,6 +514,7 @@ class CombatAdvancementPolicy:
             selected_action=actions[selected_index],
             search_advantage=search_advantage,
             search_override_recommended=override_recommended,
+            override_rule_eligible=override_rule_eligible,
             search_override_executed=override_executed,
             selection_reason=selection_reason,
             effective_rollout_steps=effective_steps,

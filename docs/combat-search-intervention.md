@@ -25,31 +25,15 @@ there are enough beneficial and harmful examples to fit an override gate. It alw
 search claim by itself. The frozen specification is
 `sha256:0af0712dbda7e31da61612f2c6fa5807d899671c42b1e354925f5a1a178dae55`.
 
-## Next operator command
+## Completed result
 
-Run this one resource-capped command and return its final output. This is sustained exact-engine
-work and must be started and observed by the operator. If interrupted, use a separately named
-resource report and add `--resume` to the inner command; completed seed cases are verified and
-reused.
+The operator run completed 16/16 base runs and 79/79 exact-state interventions. Overall, five
+interventions improved maximum floor, 68 tied, and six were harmful; no run won. Scalar margin was
+not monotonic: the medium band was the most harmful, while the large band had three improvements
+and no regressions. The learned-gate diversity criterion failed.
 
-```bash
-uv run spireshift resources run \
-  --kind rollout \
-  --report artifacts/resources/combat-search-intervention-v1.json \
-  --metrics artifacts/resources/combat-search-intervention-v1-metrics.json \
-  --artifact-root artifacts/evaluations/combat-search-intervention-v1 \
-  --workers 1 \
-  --max-wall-seconds 7200 \
-  --max-cpu-seconds 7200 \
-  --max-storage-bytes 1000000000 \
-  --max-memory-bytes 16000000000 \
-  -- \
-  uv run --extra evangambit spireshift model evaluate-combat-search-interventions \
-    configs/combat-search-intervention/sts2-v0.107.1-base-v3-train-v1.json \
-    artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
-    --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --upstream-root artifacts/backend/evangambit-v0.107.1 \
-    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/evaluations/combat-search-intervention-v1
-```
+One categorical signal survived: in seven interventions, both paired simulations defeated the base
+action while neither defeated the search action. Those interventions were three beneficial, four
+tied, and zero harmful across five seeds. The next experiment is the
+[terminal-rescue preflight](terminal-rescue-search.md). Do not rerun this intervention job or fit a
+learned gate from its labels.
