@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-dagger-config-v1.json",
+  "title": "SpireShift Production DAgger Configuration v1",
+  "type": "object",
+  "required": [
+    "schema_version", "config_id", "split_manifest_id", "ruleset_manifest_id",
+    "objective_id", "model_id", "training_report_id", "reference_dataset_id",
+    "intervention_spec_id", "intervention_report_id", "partition", "run_offset",
+    "run_count", "workers", "maximum_decisions_per_run", "cycle_repetition_threshold",
+    "liveness_tail_length", "no_op_fallback_threshold", "rare_state_max_fraction",
+    "high_entropy_threshold", "terminal_frontier_states_per_run",
+    "maximum_selected_states_per_run", "minimum_selected_states",
+    "minimum_source_floors", "minimum_decision_types", "selection_salt"
+  ],
+  "properties": {
+    "schema_version": {"const": "production-dagger-config-v1"},
+    "config_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "reference_dataset_id": {"$ref": "#/$defs/id"},
+    "intervention_spec_id": {"$ref": "#/$defs/id"},
+    "intervention_report_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "run_offset": {"type": "integer", "minimum": 0},
+    "run_count": {"type": "integer", "minimum": 1},
+    "workers": {"type": "integer", "minimum": 1},
+    "maximum_decisions_per_run": {"type": "integer", "minimum": 1},
+    "cycle_repetition_threshold": {"type": "integer", "minimum": 2},
+    "liveness_tail_length": {"type": "integer", "minimum": 1},
+    "no_op_fallback_threshold": {"type": "integer", "minimum": 1},
+    "rare_state_max_fraction": {"$ref": "#/$defs/rate"},
+    "high_entropy_threshold": {"$ref": "#/$defs/rate"},
+    "terminal_frontier_states_per_run": {"type": "integer", "minimum": 1},
+    "maximum_selected_states_per_run": {"type": "integer", "minimum": 1},
+    "minimum_selected_states": {"type": "integer", "minimum": 1},
+    "minimum_source_floors": {"type": "integer", "minimum": 1},
+    "minimum_decision_types": {"type": "integer", "minimum": 1},
+    "selection_salt": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "rate": {"type": "number", "minimum": 0, "maximum": 1}
+  },
+  "additionalProperties": false
+}

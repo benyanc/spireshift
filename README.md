@@ -52,7 +52,9 @@ The repository currently contains the research contracts and a seeded mock verti
     tactical-risk and ordinal floor heads, held-out auxiliary gates, and an explicit block on
     terminal-value promotion from all-loss data; and
 27. a compute-capped combat-advancement continuation that pairs hidden worlds across legal actions,
-    rejects public-action mismatches, and bootstraps short horizons from learned progress and risk.
+    rejects public-action mismatches, and bootstraps short horizons from learned progress and risk; and
+28. a cycle-safe production DAgger collector with complete-run ownership, resumable cases,
+    uncertainty, rarity, and terminal-frontier selection, plus versioned causal intervention labels.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -193,6 +195,11 @@ of this tactical-search signal and requires actual paired combat clearance.
 runs, probes every decision cheaply, and reserves expensive labels for disagreements, rare states,
 suspected confident errors, and high-entropy decisions. Verified selected labels can augment the next
 model checkpoint with complete provenance.
+
+The [production policy-improvement iteration](docs/production-policy-improvement.md) binds that
+workflow to the admitted STS2 engine and accepted base-v2 checkpoint. It uses the shared public
+no-op guard, keeps the completed tactical interventions as causal preferences, and emits a
+teacher-ready state set only after its train-only coverage and liveness gates pass.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

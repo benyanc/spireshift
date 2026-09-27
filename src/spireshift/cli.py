@@ -113,6 +113,13 @@ from spireshift.models import (
     train_initial_models,
     write_model_artifact,
 )
+from spireshift.production_dagger import (
+    ProductionDaggerReference,
+    freeze_causal_preferences,
+    load_production_dagger_config,
+    run_production_dagger_collection,
+    verify_production_dagger_collection,
+)
 from spireshift.production_evaluation import (
     load_production_policy_evaluation,
     run_production_policy_evaluation,
@@ -881,6 +888,33 @@ def build_parser() -> argparse.ArgumentParser:
     dagger_verify.add_argument("reference_dataset", type=Path)
     dagger_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
     dagger_verify.add_argument("--output", type=Path)
+    dagger_collect_production = dagger_commands.add_parser(
+        "collect-production",
+        help="Collect cycle-safe train trajectories and freeze a teacher-ready state set",
+    )
+    dagger_collect_production.add_argument("config", type=Path)
+    dagger_collect_production.add_argument("output_dir", type=Path)
+    dagger_collect_production.add_argument("--checkpoint", type=Path, required=True)
+    dagger_collect_production.add_argument("--report", type=Path, required=True)
+    dagger_collect_production.add_argument("--reference-dataset", type=Path, required=True)
+    dagger_collect_production.add_argument("--intervention-spec", type=Path, required=True)
+    dagger_collect_production.add_argument("--intervention-report", type=Path, required=True)
+    dagger_collect_production.add_argument(
+        "--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST
+    )
+    dagger_collect_production.add_argument("--upstream-root", type=Path, required=True)
+    dagger_collect_production.add_argument("--manifest", type=Path, required=True)
+    dagger_collect_production.add_argument("--resume", action="store_true")
+    dagger_verify_production = dagger_commands.add_parser(
+        "verify-production",
+        help="Verify a production DAgger collection and its linked evidence",
+    )
+    dagger_verify_production.add_argument("collection", type=Path)
+    dagger_verify_production.add_argument("config", type=Path)
+    dagger_verify_production.add_argument(
+        "--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST
+    )
+    dagger_verify_production.add_argument("--output", type=Path)
 
     tactical_handoff = subparsers.add_parser(
         "tactical-handoff", help="Evaluate tactical leaves with terminal run value"
@@ -2244,6 +2278,73 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "dagger":
         try:
             split_manifest = load_split_manifest(args.split_manifest)
+            if args.dagger_command == "verify-production":
+                production_verification = verify_production_dagger_collection(
+                    args.collection,
+                    config=load_production_dagger_config(args.config),
+                    split_manifest=split_manifest,
+                )
+                _emit_json(production_verification, args.output)
+                return 0 if production_verification["valid"] is True else 1
+            if args.dagger_command == "collect-production":
+                production_config = load_production_dagger_config(args.config)
+                production_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                production_report = load_production_training_report(
+                    args.report,
+                    checkpoint=production_checkpoint,
+                )
+                reference = ProductionDaggerReference.from_dataset(
+                    args.reference_dataset,
+                    split_manifest=split_manifest,
+                )
+                intervention_spec = load_combat_search_intervention_spec(args.intervention_spec)
+                causal_preferences = freeze_causal_preferences(
+                    intervention_report_path=args.intervention_report,
+                    intervention_spec=intervention_spec,
+                    split_manifest=split_manifest,
+                )
+                production_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=production_config.maximum_decisions_per_run + 1,
+                )
+                probe_environment = production_backend.factory()
+                try:
+                    production_ruleset = probe_environment.ruleset
+                    production_policy = ProductionCheckpointPolicy(
+                        checkpoint=production_checkpoint,
+                        training_report=production_report,
+                        ruleset=production_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                policy_artifacts = BootstrapPolicyArtifacts.from_paths(
+                    args.checkpoint,
+                    args.report,
+                )
+                dagger_result = run_production_dagger_collection(
+                    environment_factory=production_backend.factory,
+                    ruleset=production_ruleset,
+                    policy=production_policy,
+                    policy_artifacts=policy_artifacts,
+                    split_manifest=split_manifest,
+                    reference=reference,
+                    causal_preferences=causal_preferences,
+                    config=production_config,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                summary = dagger_result.report["summary"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(summary["benchmark_denominator"]),
+                        transitions=int(summary["decisions"]),
+                    )
+                )
+                _emit_json(dagger_result.report, None)
+                return 0 if dagger_result.successful else 1
             source_checkpoint = load_model_checkpoint(args.source_checkpoint)
             reference_dataset = load_teacher_dataset(args.reference_dataset)
             if args.dagger_command == "verify":
@@ -2337,7 +2438,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
-            error_output = args.output if args.dagger_command == "verify" else None
+            error_output = (
+                args.output if args.dagger_command in {"verify", "verify-production"} else None
+            )
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "tactical-handoff":

@@ -22,6 +22,7 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.core.types import DecisionType, LegalAction, Observation
+from spireshift.liveness import PublicNoOpActionGuard
 from spireshift.mechanics import PublicMechanicsService
 from spireshift.representations import CompositionalModelInput, model_input_from_mapping
 from spireshift.rollouts import sha256_file, write_exclusive_json
@@ -905,10 +906,11 @@ def discover_curriculum_state_set(
         try:
             observation = environment.reset(run_seed)
             policy = _load_bootstrap_policy(policy_artifacts, environment)
+            no_op_guard = PublicNoOpActionGuard()
             prefix: list[str] = []
             seen = {decision_type: 0 for decision_type in decision_occurrences}
             found: set[tuple[DecisionType, int]] = set()
-            for _ in range(maximum_steps + 1):
+            for global_index in range(maximum_steps + 1):
                 decision_type = observation.decision_type
                 if decision_type in decision_occurrences:
                     occurrence = seen[decision_type]
@@ -943,9 +945,20 @@ def discover_curriculum_state_set(
                 if bool(observation.public_state.get("terminal")):
                     terminal_runs += 1
                     break
-                action = policy.choose_action(observation, tuple(environment.legal_actions()))
+                source_observation = observation
+                legal_actions = tuple(environment.legal_actions())
+                action = policy.choose_action(
+                    observation,
+                    no_op_guard.eligible_actions(observation, legal_actions),
+                )
                 prefix.append(action.action_id)
                 observation = environment.step(action).next_observation
+                no_op_guard.observe_transition(
+                    observation=source_observation,
+                    action=action,
+                    next_observation=observation,
+                    decision_index=global_index,
+                )
             else:
                 truncated_runs += 1
             for decision_type, indices in decision_occurrences.items():
@@ -1066,6 +1079,7 @@ def _discover_terminal_frontier_state_set(
         try:
             observation = environment.reset(run_seed)
             policy = _load_bootstrap_policy(policy_artifacts, environment)
+            no_op_guard = PublicNoOpActionGuard()
             prefix: list[str] = []
             seen = {decision_type: 0 for decision_type in decision_types}
             eligible: list[tuple[int, int, dict[str, object]]] = []
@@ -1113,9 +1127,20 @@ def _discover_terminal_frontier_state_set(
                     else:
                         defeated_runs += 1
                     break
-                action = policy.choose_action(observation, tuple(environment.legal_actions()))
+                source_observation = observation
+                legal_actions = tuple(environment.legal_actions())
+                action = policy.choose_action(
+                    observation,
+                    no_op_guard.eligible_actions(observation, legal_actions),
+                )
                 prefix.append(action.action_id)
                 observation = environment.step(action).next_observation
+                no_op_guard.observe_transition(
+                    observation=source_observation,
+                    action=action,
+                    next_observation=observation,
+                    decision_index=global_index,
+                )
             else:
                 step_limited_runs += 1
             if eligible:
@@ -1191,9 +1216,10 @@ def capture_bootstrap_combat_state(
     try:
         observation = environment.reset(run_seed)
         policy = ProgressBootstrapPolicy()
+        no_op_guard = PublicNoOpActionGuard()
         prefix: list[str] = []
         seen = 0
-        for _ in range(maximum_prefix_steps + 1):
+        for global_index in range(maximum_prefix_steps + 1):
             if observation.decision_type in {DecisionType.COMBAT, DecisionType.COMBAT_SELECTION}:
                 if seen == combat_state_index:
                     actions = tuple(environment.legal_actions())
@@ -1212,9 +1238,20 @@ def capture_bootstrap_combat_state(
                 seen += 1
             if bool(observation.public_state.get("terminal")):
                 break
-            action = policy.choose_action(observation, tuple(environment.legal_actions()))
+            source_observation = observation
+            legal_actions = tuple(environment.legal_actions())
+            action = policy.choose_action(
+                observation,
+                no_op_guard.eligible_actions(observation, legal_actions),
+            )
             prefix.append(action.action_id)
             observation = environment.step(action).next_observation
+            no_op_guard.observe_transition(
+                observation=source_observation,
+                action=action,
+                next_observation=observation,
+                decision_index=global_index,
+            )
     finally:
         _close_environment(environment)
     raise RuntimeError(
@@ -1240,9 +1277,10 @@ def capture_curriculum_state(
     try:
         observation = environment.reset(run_seed)
         policy = _load_bootstrap_policy(policy_artifacts, environment)
+        no_op_guard = PublicNoOpActionGuard()
         prefix: list[str] = []
         seen = 0
-        for _ in range(maximum_prefix_steps + 1):
+        for global_index in range(maximum_prefix_steps + 1):
             if observation.decision_type is decision_type:
                 if seen == decision_index:
                     actions = tuple(environment.legal_actions())
@@ -1261,9 +1299,20 @@ def capture_curriculum_state(
                 seen += 1
             if bool(observation.public_state.get("terminal")):
                 break
-            action = policy.choose_action(observation, tuple(environment.legal_actions()))
+            source_observation = observation
+            legal_actions = tuple(environment.legal_actions())
+            action = policy.choose_action(
+                observation,
+                no_op_guard.eligible_actions(observation, legal_actions),
+            )
             prefix.append(action.action_id)
             observation = environment.step(action).next_observation
+            no_op_guard.observe_transition(
+                observation=source_observation,
+                action=action,
+                next_observation=observation,
+                decision_index=global_index,
+            )
     finally:
         _close_environment(environment)
     raise RuntimeError(

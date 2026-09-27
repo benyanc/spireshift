@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-dagger-collection-v1.json",
+  "title": "SpireShift Production DAgger Collection v1",
+  "type": "object",
+  "required": [
+    "schema_version", "report_id", "started_at", "completed_at", "config_id",
+    "model_id", "training_report_id", "reference_dataset_id",
+    "causal_preference_set_id", "split_manifest_id", "partition",
+    "ruleset_manifest_id", "patch_id", "objective_id", "configuration", "cases",
+    "causal_preferences", "state_set", "summary", "readiness", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "production-dagger-collection-v1"},
+    "report_id": {"$ref": "#/$defs/id"},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "config_id": {"$ref": "#/$defs/id"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "reference_dataset_id": {"$ref": "#/$defs/id"},
+    "causal_preference_set_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "patch_id": {"type": "string", "minLength": 1},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "configuration": {"$ref": "production-dagger-config-v1.json"},
+    "cases": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["seed", "path", "case_id"],
+        "properties": {
+          "seed": {"type": "integer", "minimum": 0},
+          "path": {"type": "string", "minLength": 1},
+          "case_id": {"$ref": "#/$defs/id"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "causal_preferences": {"$ref": "#/$defs/reference"},
+    "state_set": {"oneOf": [{"$ref": "#/$defs/reference"}, {"type": "null"}]},
+    "summary": {"type": "object"},
+    "readiness": {
+      "type": "object",
+      "required": [
+        "passed", "minimum_selected_states", "minimum_source_floors",
+        "minimum_decision_types", "terminal_value_head_unblocked",
+        "blocking_data_limitation"
+      ],
+      "properties": {
+        "passed": {"type": "boolean"},
+        "minimum_selected_states": {"type": "integer", "minimum": 1},
+        "minimum_source_floors": {"type": "integer", "minimum": 1},
+        "minimum_decision_types": {"type": "integer", "minimum": 1},
+        "terminal_value_head_unblocked": {"type": "boolean"},
+        "blocking_data_limitation": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {"const": "train_only_policy_improvement_collection"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "reference": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "preference_set_id": {"$ref": "#/$defs/id"},
+        "state_set_id": {"$ref": "#/$defs/id"}
+      },
+      "oneOf": [
+        {"required": ["preference_set_id"]},
+        {"required": ["state_set_id"]}
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
