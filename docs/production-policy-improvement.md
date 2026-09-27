@@ -49,7 +49,8 @@ uv run spireshift resources run \
     --intervention-report artifacts/evaluations/combat-resolution-intervention-v2/combat-search-intervention-report.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
-    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --resume
 ```
 
 Do not start teacher labeling, training, or test evaluation yet. The collection result determines
