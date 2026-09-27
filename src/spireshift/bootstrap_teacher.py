@@ -22,7 +22,7 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.core.types import DecisionType, LegalAction, Observation
-from spireshift.liveness import PublicNoOpActionGuard
+from spireshift.liveness import PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION, PublicNoOpActionGuard
 from spireshift.mechanics import PublicMechanicsService
 from spireshift.representations import CompositionalModelInput, model_input_from_mapping
 from spireshift.rollouts import sha256_file, write_exclusive_json
@@ -46,21 +46,27 @@ COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v5"
 BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v1"
 LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v2"
 COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v3"
+PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v4"
 BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v1"
 LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v2"
 COMBAT_ADVANCEMENT_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v3"
+PRODUCTION_DAGGER_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v4"
 BOOTSTRAP_BATCH_SCHEMA_VERSION = "bootstrap-worker-batch-v1"
 BOOTSTRAP_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v1"
 CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v2"
 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v3"
 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v4"
 COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v5"
+PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v6"
 BOOTSTRAP_VERIFICATION_SCHEMA_VERSION = "bootstrap-teacher-verification-v1"
 BOOTSTRAP_TEACHER_ID = "paired-terminal-dominant-progress-teacher-v1"
 CURRICULUM_TEACHER_ID = "paired-preference-curriculum-teacher-v2"
 BOOTSTRAP_UTILITY_ID = "terminal-dominant-floor-act-hp-v1"
 BOOTSTRAP_SEED_PROTOCOL_ID = "sha256-paired-bootstrap-v1"
 MILESTONE_FLOORS = (1, 8, 16, 24, 32, 40, 48, 56, 64)
+PRODUCTION_DAGGER_SELECTION_POLICY_PREFIX = "production-selective-dagger-v1:"
+PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD = 2
+PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT = 16
 
 
 @dataclass(frozen=True, slots=True)
@@ -513,6 +519,8 @@ class BootstrapSimulationTask:
     simulation_seed: int
     maximum_rollout_steps: int
     continuation_policy: BootstrapPolicyArtifacts | None = None
+    no_op_fallback_threshold: int | None = None
+    no_op_fallback_event_limit: int = PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT
 
     def __post_init__(self) -> None:
         UUID(self.task_id)
@@ -522,9 +530,20 @@ class BootstrapSimulationTask:
             raise ValueError("Bootstrap simulation seed must be non-negative")
         if self.maximum_rollout_steps <= 0:
             raise ValueError("Bootstrap rollout limit must be positive")
+        if self.no_op_fallback_threshold is not None:
+            if self.no_op_fallback_threshold < 1:
+                raise ValueError("Bootstrap no-op fallback threshold must be positive")
+            if self.continuation_policy is None:
+                raise ValueError("Bootstrap no-op fallback requires a learned continuation policy")
+            if self.continuation_policy.combat_advancement_config is not None:
+                raise ValueError("Combat-advancement tasks cannot use the production DAgger guard")
+        if self.no_op_fallback_event_limit < 1:
+            raise ValueError("Bootstrap no-op fallback event limit must be positive")
 
     def as_dict(self) -> dict[str, object]:
-        if (
+        if self.no_op_fallback_threshold is not None:
+            schema_version = PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION
+        elif (
             self.continuation_policy is not None
             and self.continuation_policy.combat_advancement_config is not None
         ):
@@ -545,7 +564,19 @@ class BootstrapSimulationTask:
         }
         if self.continuation_policy is not None:
             document["continuation_policy"] = self.continuation_policy.task_dict()
+        if self.no_op_fallback_threshold is not None:
+            document["no_op_fallback"] = self.no_op_fallback_configuration
         return document
+
+    @property
+    def no_op_fallback_configuration(self) -> dict[str, object] | None:
+        if self.no_op_fallback_threshold is None:
+            return None
+        return {
+            "controller_id": PublicNoOpActionGuard.controller_id,
+            "repetition_threshold": self.no_op_fallback_threshold,
+            "event_limit": self.no_op_fallback_event_limit,
+        }
 
     @property
     def continuation_policy_id(self) -> str:
@@ -562,6 +593,7 @@ class BootstrapSimulationTask:
         learned = schema_version in {
             LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION,
         }
         expected_keys = {
             "schema_version",
@@ -575,6 +607,9 @@ class BootstrapSimulationTask:
         }
         if learned:
             expected_keys.add("continuation_policy")
+        cycle_safe = schema_version == PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION
+        if cycle_safe:
+            expected_keys.add("no_op_fallback")
         _exact_keys(
             document,
             expected_keys,
@@ -584,6 +619,7 @@ class BootstrapSimulationTask:
             BOOTSTRAP_TASK_SCHEMA_VERSION,
             LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION,
         }:
             raise ValueError("Unsupported bootstrap task schema")
         policy = (
@@ -595,6 +631,17 @@ class BootstrapSimulationTask:
             policy is not None and policy.combat_advancement_config is not None
         ):
             raise ValueError("Bootstrap task policy generation differs from its schema")
+        fallback = (
+            _mapping(document.get("no_op_fallback"), "no-op fallback") if cycle_safe else None
+        )
+        if fallback is not None:
+            _exact_keys(
+                fallback,
+                {"controller_id", "repetition_threshold", "event_limit"},
+                "no-op fallback",
+            )
+            if fallback.get("controller_id") != PublicNoOpActionGuard.controller_id:
+                raise ValueError("Bootstrap task uses an unsupported no-op fallback")
         expected_policy_id = (
             policy.policy_id if policy is not None else ProgressBootstrapPolicy.policy_id
         )
@@ -610,6 +657,16 @@ class BootstrapSimulationTask:
                 document.get("maximum_rollout_steps"), "maximum_rollout_steps"
             ),
             continuation_policy=policy,
+            no_op_fallback_threshold=(
+                _integer(fallback.get("repetition_threshold"), "fallback threshold")
+                if fallback is not None
+                else None
+            ),
+            no_op_fallback_event_limit=(
+                _integer(fallback.get("event_limit"), "fallback event limit")
+                if fallback is not None
+                else PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT
+            ),
         )
 
 
@@ -1336,6 +1393,14 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             task=task,
         )
         policy = _load_bootstrap_policy(task.continuation_policy, sampled)
+        no_op_guard = (
+            PublicNoOpActionGuard(
+                repetition_threshold=task.no_op_fallback_threshold,
+                event_limit=task.no_op_fallback_event_limit,
+            )
+            if task.no_op_fallback_threshold is not None
+            else None
+        )
         source_floor = _public_integer(source, ("floor",), ("run", "floor"))
         source_act = _public_act(source)
         maximum_floor = source_floor
@@ -1349,12 +1414,33 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             raise RuntimeError("Hidden-world clone changed the source public observation")
         decisions = 1
         observation = transition.next_observation
+        if no_op_guard is not None:
+            no_op_guard.observe_transition(
+                observation=source,
+                action=action,
+                next_observation=observation,
+                decision_index=0,
+            )
         maximum_floor = _maximum_optional(
             maximum_floor, _public_integer(observation, ("floor",), ("run", "floor"))
         )
         while not transition.terminal and decisions < task.maximum_rollout_steps:
-            continuation = policy.choose_action(observation, tuple(sampled.legal_actions()))
+            legal_actions = tuple(sampled.legal_actions())
+            eligible_actions = (
+                no_op_guard.eligible_actions(observation, legal_actions)
+                if no_op_guard is not None
+                else legal_actions
+            )
+            source_observation = observation
+            continuation = policy.choose_action(observation, eligible_actions)
             transition = sampled.step(continuation)
+            if no_op_guard is not None:
+                no_op_guard.observe_transition(
+                    observation=source_observation,
+                    action=continuation,
+                    next_observation=transition.next_observation,
+                    decision_index=decisions,
+                )
             decisions += 1
             observation = transition.next_observation
             maximum_floor = _maximum_optional(
@@ -1417,6 +1503,8 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
                     "combat_advancement_usage": usage().as_dict(),
                 }
             )
+        if no_op_guard is not None:
+            output["no_op_fallback"] = no_op_guard.as_dict()
         output["bootstrap_utility"] = bootstrap_utility(output)
         return output
     finally:
@@ -1459,6 +1547,8 @@ def _bootstrap_retry_seed(base_seed: int, attempt_index: int) -> int:
 
 
 def _bootstrap_output_method(task: BootstrapSimulationTask) -> str:
+    if task.no_op_fallback_threshold is not None:
+        return "paired-public-cycle-safe-progress-rollout-v4"
     if (
         task.continuation_policy is not None
         and task.continuation_policy.combat_advancement_config is not None
@@ -1698,6 +1788,7 @@ def run_bootstrap_teacher_dataset(
                 captured,
                 config,
                 continuation_policy=policy_artifacts,
+                cycle_safe=_uses_production_dagger_guard(state_set),
             )
             batch_path, batch_report = run_bootstrap_worker_batch(
                 tasks=tasks,
@@ -1838,8 +1929,13 @@ def combine_curriculum_datasets(
                 + "; ".join(verification.errors)
             )
         report = _load_object(report_path)
-        if report.get("schema_version") != LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION:
-            raise ValueError("Curriculum composition requires learned-policy v3 datasets")
+        if report.get("schema_version") not in {
+            LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
+        }:
+            raise ValueError(
+                "Curriculum composition requires learned-policy v3 or production DAgger v6 datasets"
+            )
         state_set = load_bootstrap_state_set_document(report.get("state_set"))
         if not isinstance(state_set, CurriculumStateSet) or state_set.capture_policy is None:
             raise ValueError("Curriculum composition requires learned-policy state sets")
@@ -2060,6 +2156,7 @@ def verify_bootstrap_teacher_dataset(
             LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
             TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
         }:
             errors.append("unsupported bootstrap dataset schema")
         expected_teacher_id = (
@@ -2070,6 +2167,7 @@ def verify_bootstrap_teacher_dataset(
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
                 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
                 COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+                PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
             }
             else BOOTSTRAP_TEACHER_ID
         )
@@ -2120,6 +2218,7 @@ def verify_bootstrap_teacher_dataset(
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
                 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
                 COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+                PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
             }
         ):
             errors.append("bootstrap dataset and state-set schema generations differ")
@@ -2225,6 +2324,12 @@ def verify_bootstrap_teacher_dataset(
                     configuration.get("maximum_rollout_steps"), "maximum_rollout_steps"
                 ),
                 continuation_policy_id=state_set.capture_policy_id,
+                cycle_safe=(
+                    None
+                    if isinstance(state_set, CurriculumStateSet)
+                    and "component_state_set_ids" in state_set.discovery
+                    else _uses_production_dagger_guard(state_set)
+                ),
             )
             if not batch_errors:
                 verified_cases += 1
@@ -2272,6 +2377,7 @@ def load_curriculum_policy_examples(
         LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
         COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+        PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
     }:
         raise ValueError("Policy examples require a curriculum dataset")
     root = report_path.parent.resolve()
@@ -2510,7 +2616,10 @@ def _bootstrap_tasks(
     config: BootstrapConfig,
     *,
     continuation_policy: BootstrapPolicyArtifacts | None = None,
+    cycle_safe: bool = False,
 ) -> tuple[BootstrapSimulationTask, ...]:
+    if cycle_safe and continuation_policy is None:
+        raise ValueError("Cycle-safe bootstrap tasks require a learned continuation policy")
     tasks: list[BootstrapSimulationTask] = []
     for sample_index in range(config.samples_per_candidate):
         seed = _bootstrap_seed(config.sampling_seed, captured.checkpoint.state_hash, sample_index)
@@ -2518,6 +2627,14 @@ def _bootstrap_tasks(
             identity_parts = [BOOTSTRAP_TEACHER_ID]
             if continuation_policy is not None:
                 identity_parts.append(continuation_policy.policy_id)
+            if cycle_safe:
+                identity_parts.extend(
+                    (
+                        PublicNoOpActionGuard.controller_id,
+                        str(PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD),
+                        str(PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT),
+                    )
+                )
             identity_parts.extend((captured.checkpoint.state_hash, action.action_id, str(seed)))
             task_id = str(
                 uuid5(
@@ -2534,6 +2651,8 @@ def _bootstrap_tasks(
                     seed,
                     config.maximum_rollout_steps,
                     continuation_policy,
+                    (PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD if cycle_safe else None),
+                    PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT,
                 )
             )
     return tuple(tasks)
@@ -2873,6 +2992,7 @@ def _verify_case_task_domain(
     samples_per_candidate: int,
     maximum_rollout_steps: int,
     continuation_policy_id: str,
+    cycle_safe: bool | None,
 ) -> None:
     root = batch_path.parent.resolve()
     by_action: dict[str, set[int]] = {action_id: set() for action_id in action_ids}
@@ -2892,6 +3012,13 @@ def _verify_case_task_domain(
             raise ValueError("bootstrap task rollout limit differs from dataset configuration")
         if task.continuation_policy_id != continuation_policy_id:
             raise ValueError("bootstrap task continuation policy differs from state set")
+        if cycle_safe is not None and (task.no_op_fallback_threshold is not None) != cycle_safe:
+            raise ValueError("bootstrap task no-op fallback differs from state set")
+        if task.no_op_fallback_threshold is not None and (
+            task.no_op_fallback_threshold != PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD
+            or task.no_op_fallback_event_limit != PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT
+        ):
+            raise ValueError("bootstrap task no-op fallback configuration differs")
         seeds = by_action.get(task.action_id)
         if seeds is None:
             raise ValueError("bootstrap task action is absent from model input")
@@ -2940,6 +3067,7 @@ def _validate_bootstrap_output(
         task.continuation_policy is not None
         and task.continuation_policy.combat_advancement_config is not None
     )
+    cycle_safe = task.no_op_fallback_threshold is not None
     if combat_advancement:
         expected_keys.update(
             {
@@ -2948,6 +3076,8 @@ def _validate_bootstrap_output(
                 "combat_advancement_usage",
             }
         )
+    if cycle_safe:
+        expected_keys.add("no_op_fallback")
     _exact_keys(output, expected_keys, "bootstrap output")
     expected = {
         "method": _bootstrap_output_method(task),
@@ -2982,6 +3112,36 @@ def _validate_bootstrap_output(
         )
         if any(_integer(value, f"combat advancement {key}") < 0 for key, value in usage.items()):
             raise ValueError("combat advancement usage must be non-negative")
+    if cycle_safe:
+        fallback = _mapping(output.get("no_op_fallback"), "no-op fallback evidence")
+        _exact_keys(
+            fallback,
+            {
+                "schema_version",
+                "controller_id",
+                "repetition_threshold",
+                "event_limit",
+                "invocations",
+                "suppressed_actions",
+                "exhausted_states",
+                "events",
+            },
+            "no-op fallback evidence",
+        )
+        if fallback.get("schema_version") != PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION:
+            raise ValueError("bootstrap no-op fallback evidence schema differs")
+        if fallback.get("controller_id") != PublicNoOpActionGuard.controller_id:
+            raise ValueError("bootstrap no-op fallback controller differs")
+        if fallback.get("repetition_threshold") != task.no_op_fallback_threshold:
+            raise ValueError("bootstrap no-op fallback threshold differs")
+        if fallback.get("event_limit") != task.no_op_fallback_event_limit:
+            raise ValueError("bootstrap no-op fallback event limit differs")
+        for key in ("invocations", "suppressed_actions", "exhausted_states"):
+            if _integer(fallback.get(key), f"fallback {key}") < 0:
+                raise ValueError("bootstrap no-op fallback counts must be non-negative")
+        events = _list(fallback.get("events"), "fallback events")
+        if len(events) > task.no_op_fallback_event_limit:
+            raise ValueError("bootstrap no-op fallback event evidence exceeds its limit")
     transitions = _integer(output.get("transitions"), "transitions")
     if not 1 <= transitions <= task.maximum_rollout_steps:
         raise ValueError("bootstrap transitions exceed the declared limit")
@@ -3360,6 +3520,8 @@ def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
         and state_set.capture_policy.get("kind") == "combat_advancement_checkpoint"
     ):
         return COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION
+    if _uses_production_dagger_guard(state_set):
+        return PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION
     if state_set.discovery.get("schema_version") == "bootstrap-curriculum-discovery-v3":
         return TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION
     if state_set.capture_policy is not None:
@@ -3368,6 +3530,8 @@ def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
 
 
 def _worker_result_schema(task: BootstrapSimulationTask) -> str:
+    if task.no_op_fallback_threshold is not None:
+        return PRODUCTION_DAGGER_WORKER_RESULT_SCHEMA_VERSION
     if (
         task.continuation_policy is not None
         and task.continuation_policy.combat_advancement_config is not None
@@ -3377,6 +3541,14 @@ def _worker_result_schema(task: BootstrapSimulationTask) -> str:
         LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
         if task.continuation_policy is not None
         else BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
+    )
+
+
+def _uses_production_dagger_guard(state_set: BootstrapStateSetLike) -> bool:
+    return (
+        isinstance(state_set, CurriculumStateSet)
+        and state_set.capture_policy is not None
+        and state_set.selection_policy.startswith(PRODUCTION_DAGGER_SELECTION_POLICY_PREFIX)
     )
 
 

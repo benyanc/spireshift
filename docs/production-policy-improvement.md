@@ -13,14 +13,22 @@ selects at most ten actionable states per run for later teacher labeling:
 - high-entropy decisions where base-v2 is uncertain;
 - three of each run's deepest actionable states, so early easy decisions do not dominate.
 
-Selection uses 32 fresh train runs at offsets 136-167. These complete runs do not overlap the
-base-v2 reference curriculum or the earlier intervention window. The output is a versioned,
-teacher-ready state set only if all runs stay live and the collection reaches its minimum coverage.
+Selection used 32 fresh train runs at offsets 136-167. These complete runs do not overlap the
+base-v2 reference curriculum or the earlier intervention window. All 32 runs terminated without a
+failure, cycle, or decision limit. The collector selected 320 unique states across five decision
+types and 13 source-floor bins, including 96 terminal-frontier states. The frozen state set is
+`sha256:23771cca8a8154abb6d8cb696ee4d63d21bac1409aa4a9e2dfa62162752b82a1`.
 
-The same command converts the completed tactical diagnostic into 15 causal preferences: 11 favor
-the counterfactual action, one favors the original action, and three remain low-weight ties. These
-preferences remain separate from the larger DAgger state set, with their original report identities
-preserved. They do not by themselves justify training or promotion.
+The collection still contained zero victories, so it does not unblock terminal-value training. It
+does clear the coverage and liveness gate for paired teacher labeling. The selected states contain
+1,114 legal candidates; at 16 paired samples per candidate, the next command schedules 17,824
+bounded counterfactual simulations. Each continuation now uses the same public no-op fallback as
+the collector and records its fallback evidence in a production DAgger teacher schema.
+
+The completed collection also converted the tactical diagnostic into 15 causal preferences: 11
+favor the counterfactual action, one favors the original action, and three remain low-weight ties.
+These preferences remain separate from the larger DAgger state set, with their original report
+identities preserved. They do not by themselves justify training or promotion.
 
 ## Current operator command
 
@@ -29,29 +37,30 @@ current work package and must be started and observed by the operator.
 
 ```bash
 uv run spireshift resources run \
-  --kind rollout \
-  --report artifacts/resources/production-dagger-base-v2-train-v1.json \
-  --metrics artifacts/resources/production-dagger-base-v2-train-v1-metrics.json \
-  --artifact-root artifacts/dagger/sts2-v0.107.1-base-v2-train-v1 \
-  --workers 4 \
-  --max-wall-seconds 7200 \
-  --max-cpu-seconds 20000 \
+  --kind teacher_generation \
+  --report artifacts/resources/production-dagger-teacher-base-v2-train-v1.json \
+  --metrics artifacts/resources/production-dagger-teacher-base-v2-train-v1-metrics.json \
+  --artifact-root artifacts/bootstrap/teacher-production-dagger-base-v2-train-v1 \
+  --workers 8 \
+  --max-wall-seconds 14400 \
+  --max-cpu-seconds 50000 \
   --max-storage-bytes 2000000000 \
   --max-memory-bytes 16000000000 \
   -- \
-  uv run --extra evangambit spireshift dagger collect-production \
-    configs/dagger/sts2-v0.107.1-base-v2-train-v1.json \
-    artifacts/dagger/sts2-v0.107.1-base-v2-train-v1 \
-    --checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
-    --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
-    --reference-dataset artifacts/bootstrap/teacher-train-v3-combined/bootstrap-teacher-dataset.json \
-    --intervention-spec configs/combat-search-intervention/sts2-v0.107.1-base-v3-combat-resolution-train-v2.json \
-    --intervention-report artifacts/evaluations/combat-resolution-intervention-v2/combat-search-intervention-report.json \
+  uv run --extra evangambit spireshift bootstrap generate \
+    artifacts/bootstrap/teacher-production-dagger-base-v2-train-v1 \
+    --states artifacts/dagger/sts2-v0.107.1-base-v2-train-v1/state-set.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --backend evangambit \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
     --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --policy-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+    --policy-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+    --samples-per-candidate 16 \
+    --workers 8 \
+    --worker-timeout 120 \
     --resume
 ```
 
-Do not start teacher labeling, training, or test evaluation yet. The collection result determines
-the exact state-set identity and whether the next stage is allowed to proceed.
+Do not start curriculum composition, training, or test evaluation yet. The teacher result must be
+verified before it is combined with the accepted base-v2 curriculum.
