@@ -20,10 +20,6 @@ from spireshift.bootstrap_teacher import (
     load_bootstrap_state_set_document,
     load_curriculum_policy_examples,
 )
-from spireshift.combat_search_intervention import (
-    CombatSearchInterventionSpec,
-    load_combat_search_interventions,
-)
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import DecisionType, LegalAction, Observation
@@ -35,7 +31,6 @@ from spireshift.splits import SplitManifest, SplitName
 PRODUCTION_DAGGER_CONFIG_SCHEMA_VERSION = "production-dagger-config-v1"
 PRODUCTION_DAGGER_CASE_SCHEMA_VERSION = "production-dagger-case-v1"
 PRODUCTION_DAGGER_REPORT_SCHEMA_VERSION = "production-dagger-collection-v1"
-CAUSAL_PREFERENCE_SET_SCHEMA_VERSION = "production-causal-preference-set-v1"
 PRODUCTION_DAGGER_SELECTION_POLICY = "production-selective-dagger-v1"
 CLAIM_SCOPE = "train_only_policy_improvement_collection"
 
@@ -285,115 +280,6 @@ class ProductionDaggerResult:
 
 def load_production_dagger_config(path: Path) -> ProductionDaggerConfig:
     return ProductionDaggerConfig.from_mapping(_load_object(path, "production DAgger config"))
-
-
-def freeze_causal_preferences(
-    *,
-    intervention_report_path: Path,
-    intervention_spec: CombatSearchInterventionSpec,
-    split_manifest: SplitManifest,
-) -> dict[str, Any]:
-    report = load_combat_search_interventions(
-        intervention_report_path,
-        spec=intervention_spec,
-        split_manifest=split_manifest,
-    )
-    root = intervention_report_path.expanduser().resolve().parent
-    preferences: list[dict[str, Any]] = []
-    for raw_reference in _list(report.get("cases"), "intervention case references"):
-        reference = _mapping(raw_reference, "intervention case reference")
-        case_path = (root / _string(reference.get("path"), "intervention case path")).resolve()
-        if root not in case_path.parents:
-            raise ValueError("Intervention case escapes its report root")
-        case = _load_object(case_path, "intervention case")
-        seed = _integer(case.get("seed"), "intervention seed")
-        for ordinal, raw_intervention in enumerate(
-            _list(case.get("interventions"), "interventions")
-        ):
-            intervention = _mapping(raw_intervention, "intervention")
-            if intervention.get("status") != "completed":
-                continue
-            label = _string(intervention.get("paired_label"), "paired label")
-            if label not in {"beneficial", "harmful", "tied"}:
-                continue
-            base_action = _string(intervention.get("base_action_id"), "base action")
-            search_action = _string(intervention.get("search_action_id"), "search action")
-            if label == "beneficial":
-                preferred, disfavored, probability, weight = (
-                    search_action,
-                    base_action,
-                    1.0,
-                    1.0,
-                )
-            elif label == "harmful":
-                preferred, disfavored, probability, weight = (
-                    base_action,
-                    search_action,
-                    0.0,
-                    1.0,
-                )
-            else:
-                preferred, disfavored, probability, weight = None, None, 0.5, 0.1
-            preference_body = {
-                "seed": seed,
-                "intervention_ordinal": ordinal,
-                "source_case_id": _string(case.get("case_id"), "intervention case ID"),
-                "decision_index": _integer(intervention.get("decision_index"), "decision index"),
-                "source_state_hash": _string(
-                    intervention.get("source_state_hash"), "source state hash"
-                ),
-                "source_floor": intervention.get("source_floor"),
-                "paired_label": label,
-                "base_action_id": base_action,
-                "search_action_id": search_action,
-                "preferred_action_id": preferred,
-                "disfavored_action_id": disfavored,
-                "search_over_base_probability": probability,
-                "training_weight": weight,
-                "search_advantage": _artifact_float(
-                    _number(intervention.get("search_advantage"), "search advantage")
-                ),
-                "maximum_floor_difference": intervention.get("maximum_floor_difference"),
-                "victory_difference": intervention.get("victory_difference"),
-            }
-            preferences.append(
-                {
-                    **preference_body,
-                    "preference_id": manifest_identifier(preference_body),
-                }
-            )
-    preferences.sort(
-        key=lambda item: (
-            int(item["seed"]),
-            int(item["decision_index"]),
-            int(item["intervention_ordinal"]),
-        )
-    )
-    labels = Counter(str(item["paired_label"]) for item in preferences)
-    body: dict[str, Any] = {
-        "schema_version": CAUSAL_PREFERENCE_SET_SCHEMA_VERSION,
-        "intervention_spec_id": intervention_spec.spec_id,
-        "intervention_report_id": report["report_id"],
-        "source_model_id": report["model_id"],
-        "source_training_report_id": report["training_report_id"],
-        "split_manifest_id": split_manifest.manifest_id,
-        "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
-        "objective_id": split_manifest.objective_id,
-        "partition": SplitName.TRAIN.value,
-        "preferences": preferences,
-        "summary": {
-            "preferences": len(preferences),
-            "unique_runs": len({int(item["seed"]) for item in preferences}),
-            "beneficial": labels["beneficial"],
-            "harmful": labels["harmful"],
-            "tied": labels["tied"],
-            "effective_training_weight": _artifact_float(
-                sum(float(item["training_weight"]) for item in preferences)
-            ),
-        },
-        "claim_scope": "verified_train_only_single_intervention_preferences",
-    }
-    return {**body, "preference_set_id": manifest_identifier(body)}
 
 
 def run_production_dagger_collection(

@@ -50,6 +50,7 @@ from spireshift.calibration import (
     verify_calibration_artifacts,
     write_calibration_artifact,
 )
+from spireshift.causal_preferences import freeze_causal_preferences
 from spireshift.combat_search_diagnostic import (
     load_combat_search_diagnostic,
     load_combat_search_diagnostic_spec,
@@ -115,7 +116,6 @@ from spireshift.models import (
 )
 from spireshift.production_dagger import (
     ProductionDaggerReference,
-    freeze_causal_preferences,
     load_production_dagger_config,
     run_production_dagger_collection,
     verify_production_dagger_collection,
@@ -691,6 +691,18 @@ def build_parser() -> argparse.ArgumentParser:
     production_train.add_argument("--adagrad-epsilon", type=float, default=1e-8)
     production_train.add_argument("--selection-fraction", type=float, default=0.25)
     production_train.add_argument("--selection-salt", default="production-base-model-selection-v1")
+    production_train.add_argument(
+        "--causal-preferences",
+        type=Path,
+        help="Add verified train-only intervention preferences to the policy head",
+    )
+    production_train.add_argument("--intervention-spec", type=Path)
+    production_train.add_argument("--intervention-report", type=Path)
+    production_train.add_argument(
+        "--ruleset-manifest",
+        type=Path,
+        help="Frozen ruleset used to reconstruct causal public-state representations",
+    )
     production_verify = model_commands.add_parser(
         "verify-curriculum",
         help="Verify a production curriculum checkpoint and optional training report",
@@ -2072,7 +2084,24 @@ def main(argv: Sequence[str] | None = None) -> int:
                     raise ValueError(
                         "Production checkpoint and training report outputs must differ"
                     )
+                causal_inputs = (
+                    args.causal_preferences,
+                    args.intervention_spec,
+                    args.intervention_report,
+                    args.ruleset_manifest,
+                )
+                if any(value is not None for value in causal_inputs) and not all(
+                    value is not None for value in causal_inputs
+                ):
+                    raise ValueError(
+                        "Causal policy fitting requires all four causal evidence options"
+                    )
                 split_manifest = load_split_manifest(args.split_manifest)
+                causal_ruleset = (
+                    None
+                    if args.ruleset_manifest is None
+                    else load_patch_manifest(args.ruleset_manifest).ruleset_identity()
+                )
                 production_result = train_production_base_model(
                     train_report_path=args.train_report,
                     validation_report_path=args.validation_report,
@@ -2092,6 +2121,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                         selection_fraction=args.selection_fraction,
                         selection_salt=args.selection_salt,
                     ),
+                    causal_preference_path=args.causal_preferences,
+                    intervention_spec_path=args.intervention_spec,
+                    intervention_report_path=args.intervention_report,
+                    ruleset=causal_ruleset,
                 )
                 write_production_model_artifact(
                     production_result.checkpoint,

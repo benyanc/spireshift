@@ -9,6 +9,7 @@ from typing import Any, cast
 import pytest
 from jsonschema import Draft202012Validator
 
+import spireshift.production_models as production_models
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.cli import main
@@ -357,6 +358,89 @@ def test_production_checkpoint_round_trip_and_schemas(
     stable_body = {key: value for key, value in stable.items() if key != "model_id"}
     stable["model_id"] = manifest_identifier(stable_body)
     assert production_model_from_checkpoint(stable).predict(representation).terminal_value is None
+
+
+def test_causal_preferences_train_only_the_policy_head_with_versioned_provenance(
+    synthetic_curricula: tuple[Path, Path],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    train, validation = synthetic_curricula
+    split = load_split_manifest(SPLIT_PATH)
+    representation = model_input_from_mapping(
+        json.loads(Path("tests/fixtures/model-input-v1.json").read_text())
+    )
+    causal_examples = tuple(
+        production_models._CausalPolicyExample(
+            preference_id=manifest_identifier({"preference": index}),
+            run_seed=140 + index,
+            decision_type="combat",
+            representation=representation,
+            search_features={1: 1.0, 3: float(index % 2)},
+            base_features={2: 1.0, 3: float((index + 1) % 2)},
+            search_over_base_probability=1.0 if index < 8 else 0.0,
+            training_weight=1.0,
+        )
+        for index in range(10)
+    )
+    causal_document = {
+        "preference_set_id": manifest_identifier({"causal": "preferences"}),
+        "intervention_spec_id": manifest_identifier({"causal": "spec"}),
+        "intervention_report_id": manifest_identifier({"causal": "report"}),
+        "source_model_id": manifest_identifier({"causal": "model"}),
+        "source_training_report_id": manifest_identifier({"causal": "training"}),
+        "summary": {
+            "preferences": 10,
+            "unique_runs": 10,
+            "beneficial": 8,
+            "harmful": 2,
+            "tied": 0,
+            "effective_training_weight": 10.0,
+        },
+    }
+    monkeypatch.setattr(
+        "spireshift.combat_search_intervention.load_combat_search_intervention_spec",
+        lambda _path: object(),
+    )
+    monkeypatch.setattr(
+        production_models,
+        "_load_causal_policy_examples",
+        lambda *_args, **_kwargs: (causal_document, causal_examples),
+    )
+    ruleset = SimpleNamespace(manifest_id=split.ruleset_manifest_id)
+
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=split,
+        config=_config(),
+        causal_preference_path=tmp_path / "causal-preferences.json",
+        intervention_spec_path=tmp_path / "intervention-spec.json",
+        intervention_report_path=tmp_path / "intervention-report.json",
+        ruleset=cast(Any, ruleset),
+    )
+
+    assert result.checkpoint["schema_version"] == "production-model-checkpoint-v4"
+    assert result.checkpoint["causal_preference_set_id"] == causal_document["preference_set_id"]
+    evidence = result.report["causal_preference_evidence"]
+    assert result.report["schema_version"] == "production-model-training-report-v4"
+    assert evidence["policy_only"] is True
+    assert evidence["records"] == 10
+    assert evidence["fit_records"] + evidence["selection_records"] == 10
+    assert set(evidence["fit_runs"]).isdisjoint(evidence["selection_runs"])
+
+    checkpoint_schema = json.loads(Path("schemas/production-model-checkpoint-v4.json").read_text())
+    report_schema = json.loads(Path("schemas/production-model-training-report-v4.json").read_text())
+    Draft202012Validator(checkpoint_schema).validate(result.checkpoint)
+    Draft202012Validator(report_schema).validate(result.report)
+    checkpoint_path = tmp_path / "causal-checkpoint.json"
+    report_path = tmp_path / "causal-report.json"
+    write_production_model_artifact(
+        result.checkpoint, checkpoint_path, label="causal production checkpoint"
+    )
+    write_production_model_artifact(result.report, report_path, label="causal production report")
+    checkpoint = load_production_model_checkpoint(checkpoint_path)
+    assert load_production_training_report(report_path, checkpoint=checkpoint) == result.report
 
 
 def test_terminal_value_head_is_selected_refit_calibrated_and_served(

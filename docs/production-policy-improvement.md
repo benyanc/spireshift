@@ -39,37 +39,62 @@ existing evidence and may take more than a minute even though it performs no sim
 Composition completed in 111 seconds. The resulting 1,299 cases contain 4,799 candidates, 76,784
 paired simulations, 569 progress-varying states, 45 hard-target-eligible states, 51.62 effective
 labeled states, and 86.07% half-split winner agreement. All 320 new DAgger states are unique relative
-to the earlier curriculum; the composed corpus has 1,268 unique public states. Its provisional
-dataset identity is `sha256:bf26c88358111fd70a1a30c8e9bd59be29080a3d69d93d3714223955545c22ac`.
-The resource report is
-`sha256:d143b606b347f2b66abf88ffff3eef58ac9c36de8befb33fec0dbf8d3bff6269`.
+to the earlier curriculum; the composed corpus has 1,268 unique public states. Its dataset identity
+is `sha256:bf26c88358111fd70a1a30c8e9bd59be29080a3d69d93d3714223955545c22ac`. The composition resource
+report is `sha256:d143b606b347f2b66abf88ffff3eef58ac9c36de8befb33fec0dbf8d3bff6269`.
+Full integrity verification then checked all 1,299 cases with no errors and confirmed the same
+dataset identity. The verification resource report is
+`sha256:a28896bfa0ba558cc2b9705342893fdb1372b0801d0bf0508857a9bf8da28235`.
 
 The completed collection also converted the tactical diagnostic into 15 causal preferences: 11
 favor the counterfactual action, one favors the original action, and three remain low-weight ties.
 These preferences remain separate from the larger DAgger state set, with their original report
-identities preserved. They do not by themselves justify training or promotion.
+identities preserved. The v4 training adapter verifies them against the original intervention
+cases, reconstructs their public-state inputs, and applies them only to the policy head. They cannot
+alter the terminal-value, tactical-risk, or maximum-floor heads. Complete-run model-selection
+subfolds also remain separate for this causal evidence.
 
 ## Current operator command
 
 Run exactly this one command and return its final JSON output. It is the only sustained task in the
-current work package and must be started and observed by the operator.
+current work package and must be started and observed by the operator. It trains the base-v4
+candidate from the verified 1,299-state curriculum plus the 15 policy-only causal preferences.
 
 ```bash
 uv run spireshift resources run \
-  --kind teacher_generation \
-  --report artifacts/resources/production-dagger-combined-verification-base-v2-train-v1.json \
-  --artifact-root artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined \
+  --kind training \
+  --report artifacts/resources/production-base-v4-metrics.json \
+  --artifact-root artifacts/models/sts2-v0.107.1-base-v4 \
   --workers 1 \
-  --max-wall-seconds 1800 \
-  --max-cpu-seconds 1800 \
-  --max-storage-bytes 2000000000 \
-  --max-memory-bytes 4000000000 \
+  --max-wall-seconds 7200 \
+  --max-cpu-seconds 14400 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
   -- \
-  uv run spireshift bootstrap verify \
+  uv run spireshift model train-curriculum \
     artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined/bootstrap-teacher-dataset.json \
+    artifacts/bootstrap/teacher-validation-v3/bootstrap-teacher-dataset.json \
+    artifacts/models/sts2-v0.107.1-base-v4/checkpoint.json \
+    --report artifacts/models/sts2-v0.107.1-base-v4/training-report.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --output artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined/verification.json
+    --causal-preferences artifacts/dagger/sts2-v0.107.1-base-v2-train-v1/causal-preferences.json \
+    --intervention-spec configs/combat-search-intervention/sts2-v0.107.1-base-v3-combat-resolution-train-v2.json \
+    --intervention-report artifacts/evaluations/combat-resolution-intervention-v2/combat-search-intervention-report.json \
+    --ruleset-manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --epochs 60 \
+    --learning-rate 0.005 \
+    --l2-regularization 0.0001 \
+    --gradient-clip 5 \
+    --vector-dimension 4096 \
+    --interaction-dimension 8192 \
+    --tactical-horizon 32 \
+    --pairwise-noise-floor 0.25 \
+    --calibration-bins 10 \
+    --shuffle-seed 0 \
+    --adagrad-epsilon 0.00000001 \
+    --selection-fraction 0.25 \
+    --selection-salt production-base-model-selection-v1
 ```
 
-Do not start training or test evaluation yet. The composed dataset must be verified before the
-candidate training protocol is frozen.
+Do not start evaluation yet. The base-v4 checkpoint and report must pass identity, held-out policy,
+and liveness review before a frozen test comparison is allowed.
