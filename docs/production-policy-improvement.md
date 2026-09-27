@@ -36,6 +36,14 @@ and sampling configurations. Their 112 complete-run seeds are disjoint. They are
 for one verified composition containing 1,299 labeled states. Composition verifies about 1.3 GB of
 existing evidence and may take more than a minute even though it performs no simulation or training.
 
+Composition completed in 111 seconds. The resulting 1,299 cases contain 4,799 candidates, 76,784
+paired simulations, 569 progress-varying states, 45 hard-target-eligible states, 51.62 effective
+labeled states, and 86.07% half-split winner agreement. All 320 new DAgger states are unique relative
+to the earlier curriculum; the composed corpus has 1,268 unique public states. Its provisional
+dataset identity is `sha256:bf26c88358111fd70a1a30c8e9bd59be29080a3d69d93d3714223955545c22ac`.
+The resource report is
+`sha256:d143b606b347f2b66abf88ffff3eef58ac9c36de8befb33fec0dbf8d3bff6269`.
+
 The completed collection also converted the tactical diagnostic into 15 causal preferences: 11
 favor the counterfactual action, one favors the original action, and three remain low-weight ties.
 These preferences remain separate from the larger DAgger state set, with their original report
@@ -49,7 +57,7 @@ current work package and must be started and observed by the operator.
 ```bash
 uv run spireshift resources run \
   --kind teacher_generation \
-  --report artifacts/resources/production-dagger-composition-base-v2-train-v1.json \
+  --report artifacts/resources/production-dagger-combined-verification-base-v2-train-v1.json \
   --artifact-root artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined \
   --workers 1 \
   --max-wall-seconds 1800 \
@@ -57,11 +65,10 @@ uv run spireshift resources run \
   --max-storage-bytes 2000000000 \
   --max-memory-bytes 4000000000 \
   -- \
-  uv run spireshift bootstrap combine-curricula \
-    artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined \
-    artifacts/bootstrap/teacher-train-v3-combined/bootstrap-teacher-dataset.json \
-    artifacts/bootstrap/teacher-production-dagger-base-v2-train-v1/bootstrap-teacher-dataset.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json
+  uv run spireshift bootstrap verify \
+    artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined/bootstrap-teacher-dataset.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --output artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined/verification.json
 ```
 
 Do not start training or test evaluation yet. The composed dataset must be verified before the
