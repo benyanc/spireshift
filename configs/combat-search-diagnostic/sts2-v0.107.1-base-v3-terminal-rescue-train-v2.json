@@ -1,0 +1,55 @@
+{
+  "schema_version": "combat-search-diagnostic-spec-v1",
+  "split_manifest_id": "sha256:389533a4a7b4eaf6aa7895cf0a96210834f2ada70610e42595e0b2d050e6f8a4",
+  "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "objective_id": "terminal-victory-v1",
+  "model_id": "sha256:327ba33da07880634c8d884312220ac61b8923f2ad0354b25c11d2ad4c56db2c",
+  "training_report_id": "sha256:6cc0f8d7728636c87ab5ecf0e64f5ae420d2b3a87394c7bc0d921a13fa5c7543",
+  "partition": "train",
+  "run_offset": 96,
+  "run_count": 16,
+  "workers": 1,
+  "maximum_decisions_per_run": 4096,
+  "cycle_repetition_threshold": 8,
+  "variants": [
+    {
+      "name": "shadow",
+      "combat_advancement_config": {
+        "schema_version": "combat-advancement-config-v3",
+        "objective_id": "terminal-victory-v1",
+        "candidate_worlds": 2,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "maximum_public_resample_attempts": 32,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "progress_weight": 0.25,
+        "tactical_survival_weight": 0.75,
+        "sampling_salt": "sts2-v0.107.1-base-v3-terminal-rescue-preflight-v2",
+        "selection_mode": "shadow",
+        "minimum_search_advantage": 0.2,
+        "override_rule": "terminal_rescue",
+        "config_id": "sha256:b85389b633ba39eb41160cfc5514caaccc031dbbecd5dcb5c7db550192b35357"
+      }
+    },
+    {
+      "name": "terminal-rescue",
+      "combat_advancement_config": {
+        "schema_version": "combat-advancement-config-v3",
+        "objective_id": "terminal-victory-v1",
+        "candidate_worlds": 2,
+        "maximum_rollout_steps": 8,
+        "maximum_simulated_transitions_per_decision": 256,
+        "maximum_public_resample_attempts": 32,
+        "public_resample_exhaustion": "policy_only_fallback",
+        "progress_weight": 0.25,
+        "tactical_survival_weight": 0.75,
+        "sampling_salt": "sts2-v0.107.1-base-v3-terminal-rescue-preflight-v2",
+        "selection_mode": "apply",
+        "minimum_search_advantage": 0.2,
+        "override_rule": "terminal_rescue",
+        "config_id": "sha256:ebf30af90fef9f5969cea08d0ecb4c3b13faf910b3cfb25804d2c5b1ed37ed4e"
+      }
+    }
+  ],
+  "spec_id": "sha256:f5fde31b9555527a49978aeded257b416c13b55e289b450536ee9abde73f3edb"
+}

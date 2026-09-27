@@ -1791,7 +1791,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                 diagnostic_backend = load_evangambit_backend(
                     args.upstream_root,
                     args.manifest,
-                    max_episode_steps=diagnostic_spec.maximum_decisions_per_run + 1,
+                    max_episode_steps=(
+                        diagnostic_spec.maximum_decisions_per_run
+                        + max(
+                            variant.config.maximum_rollout_steps
+                            for variant in diagnostic_spec.variants
+                        )
+                        + 1
+                    ),
                 )
                 diagnostic_probe = diagnostic_backend.factory()
                 try:

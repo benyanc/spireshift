@@ -144,6 +144,63 @@ class _Predictor:
         return self.predict(observation, legal_actions).selected_action
 
 
+@dataclass
+class _TerminalWorldState:
+    next_world: int = 0
+
+
+class _TerminalRescueEnvironment(_AdvancementEnvironment):
+    def __init__(
+        self,
+        *,
+        stage: str = "root",
+        decision_type: DecisionType = DecisionType.COMBAT,
+        terminal_worlds: _TerminalWorldState | None = None,
+        world_index: int = -1,
+        base_defeat_worlds: int = 2,
+        search_defeat_worlds: int = 0,
+    ) -> None:
+        super().__init__(stage=stage, decision_type=decision_type)
+        self.terminal_worlds = terminal_worlds or _TerminalWorldState()
+        self.world_index = world_index
+        self.base_defeat_worlds = base_defeat_worlds
+        self.search_defeat_worlds = search_defeat_worlds
+
+    def step(self, action: LegalAction) -> Transition:
+        source = self._observation()
+        if action not in self.legal_actions():
+            raise ValueError("illegal action")
+        defeats = (
+            self.base_defeat_worlds if action.action_id == "bad" else self.search_defeat_worlds
+        )
+        if self.stage == "root" and 0 <= self.world_index < defeats:
+            self.stage = "terminal"
+            self.decision_type = DecisionType.TERMINAL
+            return Transition(source, action, self._observation(), 0.0, True, False)
+        if self.stage == "root":
+            self.stage = "bad-leaf" if action.action_id == "bad" else "good-leaf"
+            self.decision_type = DecisionType.PATH
+        else:
+            self.stage = "terminal"
+            self.decision_type = DecisionType.TERMINAL
+        return Transition(source, action, self._observation(), 0.0, False, False)
+
+    def clone(self, *, resample_hidden: bool, seed: int | None = None) -> Self:
+        del seed
+        world_index = self.world_index
+        if resample_hidden:
+            world_index = self.terminal_worlds.next_world
+            self.terminal_worlds.next_world += 1
+        return type(self)(
+            stage=self.stage,
+            decision_type=self.decision_type,
+            terminal_worlds=self.terminal_worlds,
+            world_index=world_index,
+            base_defeat_worlds=self.base_defeat_worlds,
+            search_defeat_worlds=self.search_defeat_worlds,
+        )
+
+
 def _config(**overrides: object) -> CombatAdvancementConfig:
     values: dict[str, object] = {
         "candidate_worlds": 2,
@@ -283,6 +340,82 @@ def test_v2_selection_controls_keep_base_action(
     assert policy.policy_id.startswith("combat-advancement-policy-v2:")
 
 
+def test_terminal_rescue_overrides_only_when_every_base_world_dies() -> None:
+    environment = _TerminalRescueEnvironment()
+    observation = environment.reset(0)
+    policy = CombatAdvancementPolicy(
+        environment=environment,
+        base_policy=_Predictor(),
+        config=_config(
+            schema_version="combat-advancement-config-v3",
+            selection_mode="apply",
+            minimum_search_advantage=0.2,
+            override_rule="terminal_rescue",
+        ),
+    )
+
+    assert policy.choose_action(observation, environment.legal_actions()).action_id == "good"
+    assert policy.last_decision is not None
+    assert policy.last_decision.override_rule_eligible is True
+    assert policy.last_decision.search_override_executed is True
+    assert policy.last_decision.selection_reason == "terminal_rescue_override"
+    assert policy.last_decision.candidates[0].terminal_defeats == 2
+    assert policy.last_decision.candidates[1].terminal_defeats == 0
+    assert policy.policy_id.startswith("combat-advancement-policy-v3:")
+
+
+@pytest.mark.parametrize(
+    ("base_defeat_worlds", "search_defeat_worlds"),
+    ((1, 0), (2, 1)),
+)
+def test_terminal_rescue_rejects_incomplete_paired_survival_evidence(
+    base_defeat_worlds: int, search_defeat_worlds: int
+) -> None:
+    environment = _TerminalRescueEnvironment(
+        base_defeat_worlds=base_defeat_worlds,
+        search_defeat_worlds=search_defeat_worlds,
+    )
+    observation = environment.reset(0)
+    policy = CombatAdvancementPolicy(
+        environment=environment,
+        base_policy=_Predictor(),
+        config=_config(
+            schema_version="combat-advancement-config-v3",
+            selection_mode="apply",
+            minimum_search_advantage=0.0,
+            override_rule="terminal_rescue",
+        ),
+    )
+
+    assert policy.choose_action(observation, environment.legal_actions()).action_id == "bad"
+    assert policy.last_decision is not None
+    assert policy.last_decision.search_override_recommended is True
+    assert policy.last_decision.override_rule_eligible is False
+    assert policy.last_decision.search_override_executed is False
+    assert policy.last_decision.selection_reason == "override_rule_not_met"
+
+
+def test_terminal_rescue_shadow_records_eligibility_without_execution() -> None:
+    environment = _TerminalRescueEnvironment()
+    observation = environment.reset(0)
+    policy = CombatAdvancementPolicy(
+        environment=environment,
+        base_policy=_Predictor(),
+        config=_config(
+            schema_version="combat-advancement-config-v3",
+            selection_mode="shadow",
+            minimum_search_advantage=0.2,
+            override_rule="terminal_rescue",
+        ),
+    )
+
+    assert policy.choose_action(observation, environment.legal_actions()).action_id == "bad"
+    assert policy.last_decision is not None
+    assert policy.last_decision.override_rule_eligible is True
+    assert policy.last_decision.search_override_executed is False
+    assert policy.last_decision.selection_reason == "shadow_mode"
+
+
 def test_noncombat_decisions_delegate_without_sampling() -> None:
     environment = _AdvancementEnvironment(decision_type=DecisionType.PATH)
     observation = environment.reset(0)
@@ -307,6 +440,17 @@ def test_config_identity_is_verified() -> None:
     tampered["maximum_rollout_steps"] = 99
     with pytest.raises(ValueError, match="identity mismatch"):
         CombatAdvancementConfig.from_mapping(tampered)
+
+
+def test_terminal_rescue_config_identity_is_verified() -> None:
+    config = _config(
+        schema_version="combat-advancement-config-v3",
+        selection_mode="apply",
+        minimum_search_advantage=0.2,
+        override_rule="terminal_rescue",
+    )
+    assert CombatAdvancementConfig.from_mapping(config.as_dict()) == config
+    assert config.as_dict()["override_rule"] == "terminal_rescue"
 
 
 def test_legacy_config_identity_and_policy_version_are_preserved() -> None:

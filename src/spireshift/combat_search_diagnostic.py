@@ -43,8 +43,11 @@ class CombatSearchDiagnosticVariant:
     def __post_init__(self) -> None:
         if self.name == BASE_VARIANT_NAME or _VARIANT_PATTERN.fullmatch(self.name) is None:
             raise ValueError("Combat-search diagnostic variant name differs")
-        if self.config.schema_version != "combat-advancement-config-v2":
-            raise ValueError("Combat-search diagnostics require v2 selection configuration")
+        if self.config.schema_version not in {
+            "combat-advancement-config-v2",
+            "combat-advancement-config-v3",
+        }:
+            raise ValueError("Combat-search diagnostics require versioned selection configuration")
 
     def as_dict(self) -> dict[str, object]:
         return {"name": self.name, "combat_advancement_config": self.config.as_dict()}
@@ -487,12 +490,32 @@ def _evaluate_case(
                             "selected_action_id": search_decision.selected_action.action_id,
                             "search_advantage": _artifact_float(search_decision.search_advantage),
                             "override_recommended": (search_decision.search_override_recommended),
+                            "override_rule": policy.config.override_rule,
+                            "override_rule_eligible": (search_decision.override_rule_eligible),
                             "override_executed": search_decision.search_override_executed,
                             "selection_reason": search_decision.selection_reason,
                             "candidate_count": len(search_decision.candidates),
                             "simulated_transitions": search_decision.simulated_transitions,
                             "hidden_worlds": search_decision.hidden_worlds,
                             "public_resample_attempts": (search_decision.public_resample_attempts),
+                            "base_terminal_victories": search_decision.candidates[
+                                search_decision.base_candidate_index
+                            ].terminal_victories,
+                            "base_terminal_defeats": search_decision.candidates[
+                                search_decision.base_candidate_index
+                            ].terminal_defeats,
+                            "base_bootstrapped_leaves": search_decision.candidates[
+                                search_decision.base_candidate_index
+                            ].bootstrapped_leaves,
+                            "search_terminal_victories": search_decision.candidates[
+                                search_decision.search_candidate_index
+                            ].terminal_victories,
+                            "search_terminal_defeats": search_decision.candidates[
+                                search_decision.search_candidate_index
+                            ].terminal_defeats,
+                            "search_bootstrapped_leaves": search_decision.candidates[
+                                search_decision.search_candidate_index
+                            ].bootstrapped_leaves,
                         }
                     )
             source_hash = observation.state_hash
@@ -744,6 +767,40 @@ def _validate_case(case: dict[str, Any], *, variant: CombatSearchDiagnosticVaria
         for field in ("simulated_transitions", "hidden_worlds", "public_resample_attempts"):
             if _integer(entry.get(field), field) < 0:
                 raise ValueError("Combat-search diagnostic search count is negative")
+        if variant.config.schema_version == "combat-advancement-config-v3":
+            if entry.get("override_rule") != variant.config.override_rule:
+                raise ValueError("Combat-search diagnostic override rule differs")
+            rule_eligible = entry.get("override_rule_eligible")
+            if not isinstance(rule_eligible, bool):
+                raise ValueError("Combat-search diagnostic rule eligibility differs")
+            hidden_worlds = _integer(entry.get("hidden_worlds"), "hidden worlds")
+            base_counts = tuple(
+                _integer(entry.get(field), field)
+                for field in (
+                    "base_terminal_victories",
+                    "base_terminal_defeats",
+                    "base_bootstrapped_leaves",
+                )
+            )
+            search_counts = tuple(
+                _integer(entry.get(field), field)
+                for field in (
+                    "search_terminal_victories",
+                    "search_terminal_defeats",
+                    "search_bootstrapped_leaves",
+                )
+            )
+            if min(*base_counts, *search_counts) < 0 or sum(base_counts) != hidden_worlds:
+                raise ValueError("Combat-search diagnostic base outcome counts differ")
+            if sum(search_counts) != hidden_worlds:
+                raise ValueError("Combat-search diagnostic search outcome counts differ")
+            expected_eligibility = variant.config.override_rule == "margin" or (
+                base_counts[1] == hidden_worlds and search_counts[1] == 0
+            )
+            if rule_eligible is not expected_eligibility:
+                raise ValueError("Combat-search diagnostic rule eligibility is inconsistent")
+            if execution and not rule_eligible:
+                raise ValueError("Combat-search diagnostic executed an ineligible rule")
     if recommended != _integer(diagnostic.get("recommended_overrides"), "recommended overrides"):
         raise ValueError("Combat-search diagnostic recommendation count differs")
     if executed != _integer(diagnostic.get("executed_overrides"), "executed overrides"):
@@ -782,10 +839,13 @@ def _diagnostic_summary(
             and paired["floor_improved_runs"] > paired["floor_worse_runs"]
             and paired["mean_floor_difference_per_search_cpu_hour"] is not None
             and paired["mean_floor_difference_per_search_cpu_hour"] > 0.0
+            and search.get("rule_violating_executions", 0) == 0
         )
         if variant.config.selection_mode == "shadow":
             shadow_consistency = (
-                shadow_consistency and paired["identical_outcome_runs"] == spec.run_count
+                shadow_consistency
+                and paired["identical_action_trace_runs"] == spec.run_count
+                and paired["identical_outcome_runs"] == spec.run_count
             )
         variant_summaries.append(
             {
@@ -813,7 +873,7 @@ def _diagnostic_summary(
         if shadow_consistency and eligible_variants
         else None
     )
-    return {
+    summary = {
         "base": base_summary,
         "variants": variant_summaries,
         "recommendation": {
@@ -824,6 +884,7 @@ def _diagnostic_summary(
             "validation_allowed": selected is not None,
         },
     }
+    return summary
 
 
 def _run_summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
@@ -877,7 +938,7 @@ def _search_summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
         for entry in traces
         if _mapping(entry, "search decision").get("override_recommended") is True
     ]
-    return {
+    summary: dict[str, Any] = {
         "policy_only_decisions": sum(int(item["policy_only_decisions"]) for item in usage),
         "search_decisions": sum(int(item["search_decisions"]) for item in usage),
         "search_fallback_decisions": sum(int(item["search_fallback_decisions"]) for item in usage),
@@ -908,6 +969,22 @@ def _search_summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
             None if not margins else _artifact_float(_percentile(margins, 0.95))
         ),
     }
+    if any("override_rule" in _mapping(entry, "search decision") for entry in traces):
+        summary.update(
+            {
+                "rule_eligible_recommendations": sum(
+                    _mapping(entry, "search decision").get("override_recommended") is True
+                    and _mapping(entry, "search decision").get("override_rule_eligible") is True
+                    for entry in traces
+                ),
+                "rule_violating_executions": sum(
+                    _mapping(entry, "search decision").get("override_executed") is True
+                    and _mapping(entry, "search decision").get("override_rule_eligible") is not True
+                    for entry in traces
+                ),
+            }
+        )
+    return summary
 
 
 def _paired_summary(

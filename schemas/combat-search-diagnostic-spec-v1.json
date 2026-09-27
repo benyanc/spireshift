@@ -32,7 +32,10 @@
         "properties": {
           "name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
           "combat_advancement_config": {
-            "$ref": "https://spireshift.dev/schemas/combat-advancement-config-v2.json"
+            "oneOf": [
+              {"$ref": "https://spireshift.dev/schemas/combat-advancement-config-v2.json"},
+              {"$ref": "https://spireshift.dev/schemas/combat-advancement-config-v3.json"}
+            ]
           }
         },
         "additionalProperties": false
