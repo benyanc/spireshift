@@ -319,6 +319,7 @@ def test_production_checkpoint_round_trip_and_schemas(
 
     checkpoint = load_production_model_checkpoint(checkpoint_path)
     assert load_production_training_report(report_path, checkpoint=checkpoint) == result.report
+
     model = production_model_from_checkpoint(checkpoint)
     representation = model_input_from_mapping(
         json.loads(Path("tests/fixtures/model-input-v1.json").read_text())
@@ -441,6 +442,80 @@ def test_causal_preferences_train_only_the_policy_head_with_versioned_provenance
     write_production_model_artifact(result.report, report_path, label="causal production report")
     checkpoint = load_production_model_checkpoint(checkpoint_path)
     assert load_production_training_report(report_path, checkpoint=checkpoint) == result.report
+
+    anchor = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=split,
+        config=_config(),
+    )
+    anchor_checkpoint_path = tmp_path / "anchor-checkpoint.json"
+    anchor_report_path = tmp_path / "anchor-report.json"
+    write_production_model_artifact(
+        anchor.checkpoint, anchor_checkpoint_path, label="anchor checkpoint"
+    )
+    write_production_model_artifact(anchor.report, anchor_report_path, label="anchor report")
+    gate_results = iter((True, True, False))
+
+    def policy_metrics(*_args: object, **_kwargs: object) -> dict[str, Any]:
+        passed = next(gate_results)
+        metrics = copy.deepcopy(result.report["held_out_metrics"]["policy"])
+        metrics["weighted_pairwise_cross_entropy"] = 0.65 if passed else 0.8
+        metrics["decisive_pair_accuracy"] = 0.6 if passed else 0.4
+        metrics["mean_progress_utility_regret"] = 0.001 if passed else 0.01
+        metrics["auxiliary_policy_gate"] = {
+            "passed": passed,
+            "checks": {
+                "pairwise_cross_entropy_below_uniform": passed,
+                "decisive_pair_accuracy_above_chance": passed,
+                "regret_below_source_order": passed,
+                "pairwise_cross_entropy_below_soft_target": passed,
+            },
+        }
+        return cast(dict[str, Any], metrics)
+
+    monkeypatch.setattr(production_models, "_evaluate_policy_weights", policy_metrics)
+    blended = production_models.blend_production_policy(
+        anchor_checkpoint_path=anchor_checkpoint_path,
+        anchor_report_path=anchor_report_path,
+        candidate_checkpoint_path=checkpoint_path,
+        candidate_report_path=report_path,
+        validation_report_path=validation,
+        causal_preference_path=tmp_path / "causal-preferences.json",
+        intervention_spec_path=tmp_path / "intervention-spec.json",
+        intervention_report_path=tmp_path / "intervention-report.json",
+        split_manifest=split,
+        ruleset=cast(Any, ruleset),
+        candidate_weights=(0.0, 0.5, 1.0),
+    )
+    assert blended.checkpoint["schema_version"] == "production-model-checkpoint-v5"
+    assert blended.report["schema_version"] == "production-model-training-report-v5"
+    assert blended.report["policy_blend"]["candidate_weight"] == 0.5
+    assert blended.report["held_out_metrics"]["policy"]["auxiliary_policy_gate"]["passed"] is True
+    checkpoint_v5_schema = json.loads(
+        Path("schemas/production-model-checkpoint-v5.json").read_text()
+    )
+    report_v5_schema = json.loads(
+        Path("schemas/production-model-training-report-v5.json").read_text()
+    )
+    Draft202012Validator(checkpoint_v5_schema).validate(blended.checkpoint)
+    Draft202012Validator(report_v5_schema).validate(blended.report)
+    blended_checkpoint_path = tmp_path / "blended-checkpoint.json"
+    blended_report_path = tmp_path / "blended-report.json"
+    write_production_model_artifact(
+        blended.checkpoint, blended_checkpoint_path, label="blended checkpoint"
+    )
+    write_production_model_artifact(blended.report, blended_report_path, label="blended report")
+    loaded_blended = load_production_model_checkpoint(blended_checkpoint_path)
+    assert (
+        load_production_training_report(blended_report_path, checkpoint=loaded_blended)
+        == blended.report
+    )
+    blended_prediction = production_model_from_checkpoint(loaded_blended).predict(representation)
+    assert sum(blended_prediction.policy) == pytest.approx(1.0)
+    assert blended_prediction.source_action_ids == tuple(
+        candidate.source_action_id for candidate in representation.candidates
+    )
 
 
 def test_terminal_value_head_is_selected_refit_calibrated_and_served(

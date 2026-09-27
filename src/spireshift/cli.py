@@ -131,6 +131,7 @@ from spireshift.production_inference import (
 )
 from spireshift.production_models import (
     ProductionTrainingConfig,
+    blend_production_policy,
     load_production_model_checkpoint,
     load_production_training_report,
     train_production_base_model,
@@ -702,6 +703,29 @@ def build_parser() -> argparse.ArgumentParser:
         "--ruleset-manifest",
         type=Path,
         help="Frozen ruleset used to reconstruct causal public-state representations",
+    )
+    production_blend = model_commands.add_parser(
+        "blend-curriculum",
+        help="Select the largest safe causal-policy blend on frozen validation data",
+    )
+    production_blend.add_argument("anchor_checkpoint", type=Path)
+    production_blend.add_argument("candidate_checkpoint", type=Path)
+    production_blend.add_argument("validation_report", type=Path)
+    production_blend.add_argument("checkpoint", type=Path)
+    production_blend.add_argument("--anchor-report", type=Path, required=True)
+    production_blend.add_argument("--candidate-report", type=Path, required=True)
+    production_blend.add_argument("--report", type=Path, required=True)
+    production_blend.add_argument("--split-manifest", type=Path, required=True)
+    production_blend.add_argument("--causal-preferences", type=Path, required=True)
+    production_blend.add_argument("--intervention-spec", type=Path, required=True)
+    production_blend.add_argument("--intervention-report", type=Path, required=True)
+    production_blend.add_argument("--ruleset-manifest", type=Path, required=True)
+    production_blend.add_argument(
+        "--candidate-weights",
+        type=float,
+        nargs="+",
+        default=[offset / 20 for offset in range(21)],
+        help="Candidate-policy shares evaluated on validation (default: 0.00 through 1.00 by 0.05)",
     )
     production_verify = model_commands.add_parser(
         "verify-curriculum",
@@ -2058,6 +2082,46 @@ def main(argv: Sequence[str] | None = None) -> int:
                     if callable(close):
                         close()
                 _emit_json(smoke_document, None)
+                return 0
+            if args.model_command == "blend-curriculum":
+                if args.checkpoint.resolve() == args.report.resolve():
+                    raise ValueError(
+                        "Production checkpoint and training report outputs must differ"
+                    )
+                blend_result = blend_production_policy(
+                    anchor_checkpoint_path=args.anchor_checkpoint,
+                    anchor_report_path=args.anchor_report,
+                    candidate_checkpoint_path=args.candidate_checkpoint,
+                    candidate_report_path=args.candidate_report,
+                    validation_report_path=args.validation_report,
+                    causal_preference_path=args.causal_preferences,
+                    intervention_spec_path=args.intervention_spec,
+                    intervention_report_path=args.intervention_report,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    candidate_weights=tuple(args.candidate_weights),
+                )
+                write_production_model_artifact(
+                    blend_result.checkpoint,
+                    args.checkpoint,
+                    label="blended production model checkpoint",
+                )
+                write_production_model_artifact(
+                    blend_result.report,
+                    args.report,
+                    label="blended production model report",
+                )
+                blend = blend_result.report["policy_blend"]
+                _emit_json(
+                    {
+                        "model_id": blend_result.checkpoint["model_id"],
+                        "report_id": blend_result.report["report_id"],
+                        "candidate_weight": blend["candidate_weight"],
+                        "validation_policy": blend_result.report["held_out_metrics"]["policy"],
+                        "causal_policy": blend["selected_causal_policy"],
+                    },
+                    None,
+                )
                 return 0
             if args.model_command == "verify-curriculum":
                 checkpoint = load_production_model_checkpoint(args.checkpoint)

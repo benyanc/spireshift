@@ -54,47 +54,45 @@ cases, reconstructs their public-state inputs, and applies them only to the poli
 alter the terminal-value, tactical-risk, or maximum-floor heads. Complete-run model-selection
 subfolds also remain separate for this causal evidence.
 
+Base-v4 training completed in 481 seconds. Its checkpoint is
+`sha256:bec02c5f8808d1b9780eece83da16848017105366c1382f655860fb39227a215`, its training report is
+`sha256:37f08f7457a7f82f40cff407931cd64aeb7c9ffaaccdd2bcaf5144dca7fbecdb`, and the resource report is
+`sha256:e1e96dfc0ea86305fa55202e6869f0cdffcbb628ed041d93bf33104d11b73eff`.
+
+The raw base-v4 policy is rejected. On the frozen validation curriculum its pairwise cross-entropy
+was 0.7720, decisive-pair accuracy was 46.24%, and only the regret check passed. However, its
+decisive accuracy on the 12 non-tied causal preferences rose to 66.67%, compared with 16.67% for
+base-v2. The new evidence taught the intended distinction but overwhelmed broader policy quality.
+
+`model blend-curriculum` now performs a deterministic recovery step. It evaluates a fixed grid of
+policy-weight interpolations from base-v2 to base-v4 on the same validation curriculum, then chooses
+the largest base-v4 share that passes every predeclared auxiliary policy check. It blends only the
+policy head; the base-v4 auxiliary heads and complete causal provenance remain unchanged. The full
+grid and its validation and causal metrics are stored in the versioned checkpoint and report, while
+the frozen test split remains untouched.
+
+The selected base-v5 policy uses 55% base-v4 and 45% base-v2. It passes all four policy checks with
+0.6637 pairwise cross-entropy, 69.89% decisive-pair accuracy, and 0.002499 mean progress regret. On
+the causal evidence it reaches 58.33% decisive accuracy, assigns 50.68% mean probability to the
+search action when beneficial, and only 29.30% when harmful. The verified base-v5 checkpoint is
+`sha256:3cd6aa0351b3b206e4d692e620a5bdee568f10dee152bd2d697bde226a8b06d8`; its report is
+`sha256:7f992ad6eee798736f58a2d356febcebca310e35e79d852696257f6b7b465a1c`.
+
 ## Current operator command
 
-Run exactly this one command and return its final JSON output. It is the only sustained task in the
-current work package and must be started and observed by the operator. It trains the base-v4
-candidate from the verified 1,299-state curriculum plus the 15 policy-only causal preferences.
+Run exactly this one bounded backend smoke and return its final JSON output. It performs at most
+eight game decisions and does not train or launch a full-run evaluation.
 
 ```bash
-uv run spireshift resources run \
-  --kind training \
-  --report artifacts/resources/production-base-v4-metrics.json \
-  --artifact-root artifacts/models/sts2-v0.107.1-base-v4 \
-  --workers 1 \
-  --max-wall-seconds 7200 \
-  --max-cpu-seconds 14400 \
-  --max-storage-bytes 1000000000 \
-  --max-memory-bytes 16000000000 \
-  -- \
-  uv run spireshift model train-curriculum \
-    artifacts/bootstrap/teacher-train-v3-production-dagger-v1-combined/bootstrap-teacher-dataset.json \
-    artifacts/bootstrap/teacher-validation-v3/bootstrap-teacher-dataset.json \
-    artifacts/models/sts2-v0.107.1-base-v4/checkpoint.json \
-    --report artifacts/models/sts2-v0.107.1-base-v4/training-report.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --causal-preferences artifacts/dagger/sts2-v0.107.1-base-v2-train-v1/causal-preferences.json \
-    --intervention-spec configs/combat-search-intervention/sts2-v0.107.1-base-v3-combat-resolution-train-v2.json \
-    --intervention-report artifacts/evaluations/combat-resolution-intervention-v2/combat-search-intervention-report.json \
-    --ruleset-manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --epochs 60 \
-    --learning-rate 0.005 \
-    --l2-regularization 0.0001 \
-    --gradient-clip 5 \
-    --vector-dimension 4096 \
-    --interaction-dimension 8192 \
-    --tactical-horizon 32 \
-    --pairwise-noise-floor 0.25 \
-    --calibration-bins 10 \
-    --shuffle-seed 0 \
-    --adagrad-epsilon 0.00000001 \
-    --selection-fraction 0.25 \
-    --selection-salt production-base-model-selection-v1
+uv run --extra evangambit spireshift model smoke-curriculum \
+  artifacts/models/sts2-v0.107.1-base-v5/checkpoint.json \
+  --report artifacts/models/sts2-v0.107.1-base-v5/training-report.json \
+  --upstream-root artifacts/backend/evangambit-v0.107.1 \
+  --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+  --seeds 0 1 \
+  --max-decisions-per-seed 4 \
+  --output artifacts/models/sts2-v0.107.1-base-v5/inference-smoke.json
 ```
 
-Do not start evaluation yet. The base-v4 checkpoint and report must pass identity, held-out policy,
-and liveness review before a frozen test comparison is allowed.
+Do not start the frozen test evaluation yet. The base-v5 smoke must pass candidate alignment,
+legal-action selection, identity, and liveness verification first.

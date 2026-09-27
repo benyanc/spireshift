@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import math
@@ -63,6 +64,10 @@ PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v3"
 CAUSAL_PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v4"
 CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v4"
 CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v4"
+BLENDED_PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v5"
+BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v5"
+BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION = "production-model-training-report-v5"
+POLICY_BLEND_SCHEMA_VERSION = "production-policy-blend-v1"
 POLICY_TARGET_ID = "paired-preference-confidence-v1"
 TERMINAL_VALUE_TARGET_ID = "candidate-terminal-victory-v1"
 FLOOR_TARGET_ID = "candidate-maximum-floor-survival-v1"
@@ -627,6 +632,170 @@ def train_production_base_model(
     return ProductionTrainingResult(checkpoint, report)
 
 
+def blend_production_policy(
+    *,
+    anchor_checkpoint_path: Path,
+    anchor_report_path: Path,
+    candidate_checkpoint_path: Path,
+    candidate_report_path: Path,
+    validation_report_path: Path,
+    causal_preference_path: Path,
+    intervention_spec_path: Path,
+    intervention_report_path: Path,
+    split_manifest: SplitManifest,
+    ruleset: RulesetIdentity,
+    candidate_weights: tuple[float, ...],
+) -> ProductionTrainingResult:
+    from spireshift.combat_search_intervention import load_combat_search_intervention_spec
+
+    anchor_checkpoint = load_production_model_checkpoint(anchor_checkpoint_path)
+    anchor_report = load_production_training_report(
+        anchor_report_path, checkpoint=anchor_checkpoint
+    )
+    candidate_checkpoint = load_production_model_checkpoint(candidate_checkpoint_path)
+    candidate_report = load_production_training_report(
+        candidate_report_path, checkpoint=candidate_checkpoint
+    )
+    if candidate_checkpoint.get("schema_version") != CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION:
+        raise ValueError("Policy blending requires a causal v4 candidate checkpoint")
+    identity_fields = (
+        "representation_encoder_id",
+        "vectorizer_id",
+        "ruleset_manifest_id",
+        "objective_id",
+        "split_manifest_id",
+    )
+    if any(
+        anchor_checkpoint.get(field) != candidate_checkpoint.get(field) for field in identity_fields
+    ):
+        raise ValueError("Policy blend checkpoints use different representation provenance")
+    if ruleset.manifest_id != candidate_checkpoint.get("ruleset_manifest_id"):
+        raise ValueError("Policy blend ruleset differs from the candidate checkpoint")
+    anchor_config = ProductionTrainingConfig.from_mapping(anchor_checkpoint.get("training_config"))
+    candidate_config = ProductionTrainingConfig.from_mapping(
+        candidate_checkpoint.get("training_config")
+    )
+    if (
+        anchor_config.vector_dimension != candidate_config.vector_dimension
+        or anchor_config.interaction_dimension != candidate_config.interaction_dimension
+    ):
+        raise ValueError("Policy blend checkpoints use different feature dimensions")
+    weights = tuple(sorted(set(candidate_weights)))
+    if not weights or any(not math.isfinite(value) or not 0.0 <= value <= 1.0 for value in weights):
+        raise ValueError("Policy blend candidate weights must be finite and within [0, 1]")
+    if weights[0] != 0.0 or weights[-1] != 1.0:
+        raise ValueError("Policy blend grid must include both source policies")
+
+    validation_document, validation_state_set, validation_examples = _load_curriculum_examples(
+        validation_report_path,
+        split_manifest=split_manifest,
+        config=candidate_config,
+    )
+    if validation_state_set.partition != SplitName.VALIDATION.value:
+        raise ValueError("Policy blend selection requires a validation curriculum")
+    if validation_document.get("dataset_id") != candidate_report.get("validation_dataset_id"):
+        raise ValueError("Policy blend validation dataset differs from candidate training")
+    candidate_held_out = _mapping(
+        candidate_report.get("held_out_metrics"), "candidate held-out metrics"
+    )
+    candidate_policy = _mapping(
+        candidate_held_out.get("policy"), "candidate held-out policy metrics"
+    )
+    soft_baseline = dict(
+        _mapping(candidate_policy.get("soft_target_baseline"), "soft-target baseline")
+    )
+
+    intervention_spec = load_combat_search_intervention_spec(intervention_spec_path)
+    causal_document, causal_examples = _load_causal_policy_examples(
+        causal_preference_path,
+        intervention_report_path=intervention_report_path,
+        intervention_spec=intervention_spec,
+        split_manifest=split_manifest,
+        ruleset=ruleset,
+        config=candidate_config,
+    )
+    if causal_document.get("preference_set_id") != candidate_checkpoint.get(
+        "causal_preference_set_id"
+    ):
+        raise ValueError("Policy blend causal preferences differ from candidate training")
+
+    anchor_model = production_model_from_checkpoint(anchor_checkpoint)
+    candidate_model = production_model_from_checkpoint(candidate_checkpoint)
+    selection_grid: list[dict[str, Any]] = []
+    blended_weights: dict[float, dict[int, float]] = {}
+    for candidate_weight in weights:
+        policy_weights = _blend_policy_weights(
+            anchor_model.policy_weights,
+            candidate_model.policy_weights,
+            candidate_weight,
+        )
+        blended_weights[candidate_weight] = policy_weights
+        validation_metrics = _evaluate_policy_weights(
+            policy_weights,
+            validation_examples,
+            candidate_config,
+            soft_baseline=soft_baseline,
+        )
+        selection_grid.append(
+            {
+                "candidate_weight": _artifact_float(candidate_weight),
+                "validation_policy": _quantize_artifact(validation_metrics),
+                "causal_policy": _quantize_artifact(
+                    _evaluate_causal_policy_weights(policy_weights, causal_examples)
+                ),
+            }
+        )
+    passing = [
+        item
+        for item in selection_grid
+        if _mapping(
+            _mapping(item["validation_policy"], "validation policy").get("auxiliary_policy_gate"),
+            "validation policy gate",
+        ).get("passed")
+        is True
+    ]
+    if not passing:
+        raise ValueError("No policy blend candidate passed the auxiliary policy gate")
+    selected = max(passing, key=lambda item: float(item["candidate_weight"]))
+    selected_weight = float(selected["candidate_weight"])
+    policy_blend = {
+        "schema_version": POLICY_BLEND_SCHEMA_VERSION,
+        "anchor_model_id": anchor_checkpoint["model_id"],
+        "anchor_training_report_id": anchor_report["report_id"],
+        "candidate_model_id": candidate_checkpoint["model_id"],
+        "candidate_training_report_id": candidate_report["report_id"],
+        "validation_dataset_id": validation_document["dataset_id"],
+        "causal_preference_set_id": causal_document["preference_set_id"],
+        "selection_partition": SplitName.VALIDATION.value,
+        "selection_rule": "maximum_candidate_weight_passing_auxiliary_policy_gate",
+        "candidate_weight": _artifact_float(selected_weight),
+    }
+
+    checkpoint_body = copy.deepcopy(candidate_checkpoint)
+    checkpoint_body.pop("model_id")
+    checkpoint_body["schema_version"] = BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION
+    checkpoint_body["model_type"] = BLENDED_PRODUCTION_MODEL_TYPE
+    checkpoint_body["policy_blend"] = policy_blend
+    checkpoint_body["heads"]["policy"]["weights"] = _weights_as_list(
+        blended_weights[selected_weight]
+    )
+    checkpoint = {**checkpoint_body, "model_id": manifest_identifier(checkpoint_body)}
+
+    report_body = copy.deepcopy(candidate_report)
+    report_body.pop("report_id")
+    report_body["schema_version"] = BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION
+    report_body["model_id"] = checkpoint["model_id"]
+    report_body["model_type"] = BLENDED_PRODUCTION_MODEL_TYPE
+    report_body["held_out_metrics"]["policy"] = selected["validation_policy"]
+    report_body["policy_blend"] = {
+        **policy_blend,
+        "selection_grid": selection_grid,
+        "selected_causal_policy": selected["causal_policy"],
+    }
+    report = {**report_body, "report_id": manifest_identifier(report_body)}
+    return ProductionTrainingResult(checkpoint=checkpoint, report=report)
+
+
 def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     checkpoint = _mapping(value, "production model checkpoint")
     schema_version = checkpoint.get("schema_version")
@@ -643,8 +812,13 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
         "training_config",
         "heads",
     }
-    if schema_version == CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION:
+    if schema_version in {
+        CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+        BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+    }:
         checkpoint_fields.add("causal_preference_set_id")
+    if schema_version == BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION:
+        checkpoint_fields.add("policy_blend")
     _exact_keys(
         checkpoint,
         checkpoint_fields,
@@ -659,6 +833,7 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
         STABLE_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
         PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
         CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+        BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
     }:
         raise ValueError("Unsupported production model checkpoint schema")
     expected_model_type = {
@@ -666,6 +841,7 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
         STABLE_PRODUCTION_CHECKPOINT_SCHEMA_VERSION: STABLE_PRODUCTION_MODEL_TYPE,
         PRODUCTION_CHECKPOINT_SCHEMA_VERSION: PRODUCTION_MODEL_TYPE,
         CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION: CAUSAL_PRODUCTION_MODEL_TYPE,
+        BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION: BLENDED_PRODUCTION_MODEL_TYPE,
     }[cast(str, schema_version)]
     if checkpoint.get("model_type") != expected_model_type:
         raise ValueError("Unsupported production model type")
@@ -673,8 +849,16 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
         raise ValueError("Unsupported production representation encoder")
     if checkpoint.get("vectorizer_id") != VECTORIZER_ID:
         raise ValueError("Unsupported production vectorizer")
-    if schema_version == CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION:
+    if schema_version in {
+        CAUSAL_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+        BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION,
+    }:
         _string(checkpoint.get("causal_preference_set_id"), "causal preference set ID")
+    if schema_version == BLENDED_PRODUCTION_CHECKPOINT_SCHEMA_VERSION:
+        _validate_policy_blend(
+            checkpoint.get("policy_blend"),
+            causal_preference_set_id=cast(str, checkpoint.get("causal_preference_set_id")),
+        )
     config = ProductionTrainingConfig.from_mapping(checkpoint.get("training_config"))
     heads = _mapping(checkpoint.get("heads"), "production heads")
     if set(heads) != {
@@ -812,11 +996,14 @@ def load_production_training_report(
     }
     current_fields = legacy_fields | {"model_selection", "refit_metrics"}
     causal_fields = current_fields | {"causal_preference_evidence"}
+    blended_fields = causal_fields | {"policy_blend"}
     _exact_keys(
         report,
         (
             legacy_fields
             if schema_version == LEGACY_PRODUCTION_REPORT_SCHEMA_VERSION
+            else blended_fields
+            if schema_version == BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION
             else causal_fields
             if schema_version == CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION
             else current_fields
@@ -832,6 +1019,7 @@ def load_production_training_report(
         STABLE_PRODUCTION_REPORT_SCHEMA_VERSION,
         PRODUCTION_REPORT_SCHEMA_VERSION,
         CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION,
+        BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION,
     }:
         raise ValueError("Unsupported production training report schema")
     expected_model_type = {
@@ -839,6 +1027,7 @@ def load_production_training_report(
         STABLE_PRODUCTION_REPORT_SCHEMA_VERSION: STABLE_PRODUCTION_MODEL_TYPE,
         PRODUCTION_REPORT_SCHEMA_VERSION: PRODUCTION_MODEL_TYPE,
         CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION: CAUSAL_PRODUCTION_MODEL_TYPE,
+        BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION: BLENDED_PRODUCTION_MODEL_TYPE,
     }[cast(str, schema_version)]
     if report.get("model_type") != expected_model_type:
         raise ValueError("Unsupported production training report model type")
@@ -847,6 +1036,7 @@ def load_production_training_report(
     if schema_version in {
         PRODUCTION_REPORT_SCHEMA_VERSION,
         CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION,
+        BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION,
     }:
         terminal_status = _mapping(report.get("terminal_value_status"), "terminal-value status")
         _exact_keys(
@@ -921,7 +1111,10 @@ def load_production_training_report(
             )
             if (checkpoint_terminal.get("status") == "promoted") != promoted:
                 raise ValueError("Production report terminal status differs from checkpoint")
-    if schema_version == CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION:
+    if schema_version in {
+        CAUSAL_PRODUCTION_REPORT_SCHEMA_VERSION,
+        BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION,
+    }:
         causal = _mapping(report.get("causal_preference_evidence"), "causal evidence")
         _exact_keys(
             causal,
@@ -968,7 +1161,96 @@ def load_production_training_report(
             checkpoint.get("causal_preference_set_id") != causal.get("preference_set_id")
         ):
             raise ValueError("Production causal evidence differs from checkpoint")
+    if schema_version == BLENDED_PRODUCTION_REPORT_SCHEMA_VERSION:
+        causal = _mapping(report.get("causal_preference_evidence"), "causal evidence")
+        report_blend = _validate_policy_blend(
+            report.get("policy_blend"),
+            causal_preference_set_id=_string(
+                causal.get("preference_set_id"), "causal preference set ID"
+            ),
+            report=True,
+        )
+        if checkpoint is not None:
+            checkpoint_blend = _mapping(checkpoint.get("policy_blend"), "checkpoint blend")
+            if {key: report_blend[key] for key in checkpoint_blend} != checkpoint_blend:
+                raise ValueError("Production policy blend differs from checkpoint")
     return report
+
+
+def _validate_policy_blend(
+    value: object,
+    *,
+    causal_preference_set_id: str,
+    report: bool = False,
+) -> dict[str, Any]:
+    blend = _mapping(value, "production policy blend")
+    fields = {
+        "schema_version",
+        "anchor_model_id",
+        "anchor_training_report_id",
+        "candidate_model_id",
+        "candidate_training_report_id",
+        "validation_dataset_id",
+        "causal_preference_set_id",
+        "selection_partition",
+        "selection_rule",
+        "candidate_weight",
+    }
+    if report:
+        fields.update({"selection_grid", "selected_causal_policy"})
+    _exact_keys(blend, fields, "production policy blend")
+    if blend.get("schema_version") != POLICY_BLEND_SCHEMA_VERSION:
+        raise ValueError("Unsupported production policy blend schema")
+    for field_name in (
+        "anchor_model_id",
+        "anchor_training_report_id",
+        "candidate_model_id",
+        "candidate_training_report_id",
+        "validation_dataset_id",
+        "causal_preference_set_id",
+    ):
+        _string(blend.get(field_name), field_name)
+    if blend.get("causal_preference_set_id") != causal_preference_set_id:
+        raise ValueError("Production policy blend causal preference identity differs")
+    if blend.get("selection_partition") != SplitName.VALIDATION.value:
+        raise ValueError("Production policy blend must be selected on validation")
+    if blend.get("selection_rule") != "maximum_candidate_weight_passing_auxiliary_policy_gate":
+        raise ValueError("Unsupported production policy blend selection rule")
+    candidate_weight = _probability(blend.get("candidate_weight"), "candidate weight")
+    if report:
+        grid = [
+            _mapping(item, "policy blend grid entry")
+            for item in _list(blend.get("selection_grid"), "policy blend selection grid")
+        ]
+        if not grid:
+            raise ValueError("Production policy blend selection grid is empty")
+        grid_weights: list[float] = []
+        passing_weights: list[float] = []
+        for item in grid:
+            _exact_keys(
+                item,
+                {"candidate_weight", "validation_policy", "causal_policy"},
+                "policy blend grid entry",
+            )
+            weight = _probability(item.get("candidate_weight"), "grid candidate weight")
+            grid_weights.append(weight)
+            validation = _mapping(item.get("validation_policy"), "grid validation policy")
+            gate = _mapping(validation.get("auxiliary_policy_gate"), "grid auxiliary policy gate")
+            if gate.get("passed") is True:
+                passing_weights.append(weight)
+            _mapping(item.get("causal_policy"), "grid causal policy")
+        if grid_weights != sorted(set(grid_weights)) or grid_weights[0] != 0.0:
+            raise ValueError("Production policy blend grid weights differ")
+        if grid_weights[-1] != 1.0 or not passing_weights:
+            raise ValueError("Production policy blend grid endpoints or passing set differ")
+        if candidate_weight != max(passing_weights):
+            raise ValueError("Production policy blend selection differs from its rule")
+        selected = next(
+            item for item in grid if float(item["candidate_weight"]) == candidate_weight
+        )
+        if blend.get("selected_causal_policy") != selected.get("causal_policy"):
+            raise ValueError("Selected causal policy metrics differ from blend grid")
+    return blend
 
 
 def write_production_model_artifact(document: dict[str, Any], path: Path, *, label: str) -> None:
@@ -1734,6 +2016,153 @@ def _pair_confidence(
         max(0.0, abs(2.0 * target - 1.0) - config.pairwise_noise_floor)
         * example.stability_multiplier
     )
+
+
+def _blend_policy_weights(
+    anchor: dict[int, float],
+    candidate: dict[int, float],
+    candidate_weight: float,
+) -> dict[int, float]:
+    return _quantized_weights(
+        {
+            index: (1.0 - candidate_weight) * anchor.get(index, 0.0)
+            + candidate_weight * candidate.get(index, 0.0)
+            for index in set(anchor) | set(candidate)
+        }
+    )
+
+
+def _evaluate_policy_weights(
+    policy_weights: dict[int, float],
+    examples: tuple[_ProductionExample, ...],
+    config: ProductionTrainingConfig,
+    *,
+    soft_baseline: dict[str, Any],
+) -> dict[str, Any]:
+    pair_loss = 0.0
+    pair_weight = 0.0
+    pair_correct = 0
+    pair_count = 0
+    agreements = 0
+    regrets: list[float] = []
+    baseline_regrets: list[float] = []
+    by_type: dict[str, dict[str, float | int]] = defaultdict(
+        lambda: {
+            "effective_pair_weight": 0.0,
+            "decisive_pairs": 0,
+            "correct_decisive_pairs": 0,
+        }
+    )
+    for example in examples:
+        scores = tuple(_dot(policy_weights, features) for features in example.candidate_features)
+        predicted = max(range(len(scores)), key=scores.__getitem__)
+        agreements += int(predicted == example.selected_candidate_index)
+        best_utility = max(example.mean_progress_utilities)
+        regrets.append(best_utility - example.mean_progress_utilities[predicted])
+        baseline_regrets.append(best_utility - example.mean_progress_utilities[0])
+        for left in range(len(scores)):
+            for right in range(left + 1, len(scores)):
+                target = example.preference_matrix[left][right]
+                confidence = _pair_confidence(target, example, config)
+                if confidence > 0.0:
+                    probability = _sigmoid(scores[left] - scores[right])
+                    pair_loss += confidence * _binary_cross_entropy(probability, target)
+                    pair_weight += confidence
+                    type_metrics = by_type[example.decision_type]
+                    type_metrics["effective_pair_weight"] = (
+                        float(type_metrics["effective_pair_weight"]) + confidence
+                    )
+                if target <= 0.25 or target >= 0.75:
+                    teacher_left = target > 0.5
+                    model_left = scores[left] > scores[right]
+                    pair_correct += int(teacher_left == model_left)
+                    pair_count += 1
+                    type_metrics = by_type[example.decision_type]
+                    type_metrics["decisive_pairs"] = int(type_metrics["decisive_pairs"]) + 1
+                    type_metrics["correct_decisive_pairs"] = int(
+                        type_metrics["correct_decisive_pairs"]
+                    ) + int(teacher_left == model_left)
+    if pair_weight == 0.0 or pair_count == 0:
+        raise ValueError("Policy blend validation has no usable pairwise evidence")
+    typed_metrics = {}
+    for decision_type, values in sorted(by_type.items()):
+        decisive = int(values["decisive_pairs"])
+        typed_metrics[decision_type] = {
+            **values,
+            "decisive_pair_accuracy": (
+                int(values["correct_decisive_pairs"]) / decisive if decisive else None
+            ),
+        }
+    pairwise_cross_entropy = pair_loss / pair_weight
+    pairwise_accuracy = pair_correct / pair_count
+    mean_regret = sum(regrets) / len(regrets)
+    source_order_regret = sum(baseline_regrets) / len(baseline_regrets)
+    soft_cross_entropy = _finite_number(
+        soft_baseline.get("weighted_pairwise_cross_entropy"),
+        "soft-target pairwise cross entropy",
+    )
+    auxiliary_checks = {
+        "pairwise_cross_entropy_below_uniform": pairwise_cross_entropy < math.log(2.0),
+        "decisive_pair_accuracy_above_chance": pairwise_accuracy > 0.5,
+        "regret_below_source_order": mean_regret < source_order_regret,
+        "pairwise_cross_entropy_below_soft_target": pairwise_cross_entropy < soft_cross_entropy,
+    }
+    return {
+        "hard_teacher_action_agreement": agreements / len(examples),
+        "weighted_pairwise_cross_entropy": pairwise_cross_entropy,
+        "effective_pair_weight": pair_weight,
+        "decisive_pairs": pair_count,
+        "decisive_pair_accuracy": pairwise_accuracy,
+        "mean_progress_utility_regret": mean_regret,
+        "source_order_mean_progress_utility_regret": source_order_regret,
+        "soft_target_baseline": soft_baseline,
+        "auxiliary_policy_gate": {
+            "passed": all(auxiliary_checks.values()),
+            "checks": auxiliary_checks,
+        },
+        "by_decision_type": typed_metrics,
+    }
+
+
+def _evaluate_causal_policy_weights(
+    policy_weights: dict[int, float],
+    examples: tuple[_CausalPolicyExample, ...],
+) -> dict[str, Any]:
+    if not examples:
+        raise ValueError("Causal policy evaluation requires preference records")
+    weighted_loss = 0.0
+    total_weight = 0.0
+    decisive_correct = 0
+    decisive_records = 0
+    probabilities: dict[str, list[float]] = {
+        "beneficial": [],
+        "harmful": [],
+        "tied": [],
+    }
+    for example in examples:
+        probability = _sigmoid(
+            _dot(policy_weights, example.search_features)
+            - _dot(policy_weights, example.base_features)
+        )
+        target = example.search_over_base_probability
+        weighted_loss += example.training_weight * _binary_cross_entropy(probability, target)
+        total_weight += example.training_weight
+        label = "beneficial" if target == 1.0 else "harmful" if target == 0.0 else "tied"
+        probabilities[label].append(probability)
+        if target != 0.5:
+            decisive_correct += int((probability > 0.5) == (target == 1.0))
+            decisive_records += 1
+    return {
+        "records": len(examples),
+        "effective_training_weight": total_weight,
+        "weighted_cross_entropy": weighted_loss / total_weight,
+        "decisive_records": decisive_records,
+        "decisive_accuracy": decisive_correct / decisive_records,
+        "mean_search_probability": {
+            label: (sum(values) / len(values) if values else None)
+            for label, values in probabilities.items()
+        },
+    }
 
 
 def _evaluate_production_model(
