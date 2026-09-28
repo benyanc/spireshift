@@ -112,21 +112,42 @@ actionable player health, and distinct public states on the floor. The diverse a
 trajectory per distinct non-combat strategic action trace within each primary-rank group, then fills
 remaining beam slots by auxiliary rank. Diversity can therefore change only same-floor ties.
 
-The existing v2 report is the hash-ranked arm. Two v3 configurations use the identical 16 train
-seeds, base-v2 checkpoint, eight generations, beam width four, four mutations per parent, decision
-limit, and mutation salt:
+### Retired v3 diagnostic
 
-- public frontier score config `sha256:d85daa391dd41d81f6a4c183b7ac4f08768d7b89fb7511f640000adecbddc1ef`;
-- public frontier plus diversity config `sha256:922617859a45e832329683bc19bb316d706d517037f88ae344abb69d27277db3`.
+The owner-run v3 score arm completed all 16 cases and its independent verification remains valid. It
+raised mean best floor from 9.0625 to 9.125, reached floor 15, and found no boss reach, Act 1 clear,
+or victory. The gain of 0.0625 is below the prespecified 0.5 advancement gate.
 
-The project owner starts and monitors the sustained runs. Run the score arm first:
+Post-run inspection found that every selected best trajectory reported 100% enemy-HP progress. The
+v3 ranking read enemy HP from the final observation first. On a terminal defeat, EvanGambit clears
+the enemy slots while retaining encounter identity, so terminal cleanup was incorrectly interpreted
+as defeating the encounter. The frozen v3 report remains reproducible under its original contract,
+but it is a retired diagnostic and must not be compared as the intended score arm. Its identities
+are:
+
+- search report: `sha256:a321adf0514e2ca4fe49e6db4e348d9a4ddbe4cb2931093bd70881343e408233`;
+- independent verification: `sha256:f017db697ab8422eb29f06588b9e7fbbc591f02288a1d9c85f50566ba30a42f1`;
+- resource report: `sha256:126b6ae1f4c5c803e3f408e493244425afd59b47b29168349e8806fe11d2f520`.
+
+### Corrected v4 experiment
+
+The v4 contract always takes enemy progress from the last actionable public state on the deepest
+floor when one exists. This prevents a death transition from turning cleared vector slots into a
+false encounter clear. The v3 schemas and configs remain available solely to verify the completed
+artifact. The corrected score and diversity configurations keep exactly the same seeds, model,
+mutation salt, and search budget as the v2 hash arm:
+
+- corrected score config `sha256:f4686a81461f368731cdd64da4652242ffb2c4d8ac848c471d1fcf10e4ec527d`;
+- corrected diversity config `sha256:1c2033da21d6abb694523f6d61f229e66b2d2ea32877b28e72afe101adb935c0`.
+
+The project owner starts and monitors sustained runs. Run the corrected score arm first:
 
 ```bash
 uv run spireshift resources run \
   --kind rollout \
-  --report artifacts/resources/trajectory-search-base-v2-act1-frontier-score-train-v3.json \
-  --metrics artifacts/resources/trajectory-search-base-v2-act1-frontier-score-train-v3-metrics.json \
-  --artifact-root artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3 \
+  --report artifacts/resources/trajectory-search-base-v2-act1-frontier-score-train-v4.json \
+  --metrics artifacts/resources/trajectory-search-base-v2-act1-frontier-score-train-v4-metrics.json \
+  --artifact-root artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4 \
   --workers 8 \
   --max-wall-seconds 14400 \
   --max-cpu-seconds 50000 \
@@ -134,24 +155,24 @@ uv run spireshift resources run \
   --max-memory-bytes 16000000000 \
   -- \
   uv run --extra evangambit spireshift model search-run-trajectories \
-    configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json \
+    configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4.json \
     artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
     --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
     --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3 \
+    --output-dir artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4 \
     --resume
 ```
 
-After it completes, run the diverse arm:
+After the corrected score result is accepted, run the diversity arm:
 
 ```bash
 uv run spireshift resources run \
   --kind rollout \
-  --report artifacts/resources/trajectory-search-base-v2-act1-frontier-diverse-train-v3.json \
-  --metrics artifacts/resources/trajectory-search-base-v2-act1-frontier-diverse-train-v3-metrics.json \
-  --artifact-root artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3 \
+  --report artifacts/resources/trajectory-search-base-v2-act1-frontier-diverse-train-v4.json \
+  --metrics artifacts/resources/trajectory-search-base-v2-act1-frontier-diverse-train-v4-metrics.json \
+  --artifact-root artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4 \
   --workers 8 \
   --max-wall-seconds 14400 \
   --max-cpu-seconds 50000 \
@@ -159,31 +180,31 @@ uv run spireshift resources run \
   --max-memory-bytes 16000000000 \
   -- \
   uv run --extra evangambit spireshift model search-run-trajectories \
-    configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json \
+    configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4.json \
     artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
     --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
     --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3 \
+    --output-dir artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4 \
     --resume
 ```
 
-Once both runs exist, the deterministic comparison verifies all three reports and their cases before
-comparing them:
+Once both corrected runs exist, the deterministic comparison verifies all three reports and their
+cases before comparing them:
 
 ```bash
 uv run spireshift model compare-run-trajectory-search \
   artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v2/run-level-trajectory-search.json \
-  artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3/run-level-trajectory-search.json \
-  artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3/run-level-trajectory-search.json \
+  artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4/run-level-trajectory-search.json \
+  artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4/run-level-trajectory-search.json \
   --legacy-config configs/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v2.json \
-  --frontier-config configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json \
-  --diverse-config configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json \
+  --frontier-config configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4.json \
+  --diverse-config configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4.json \
   --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-  --output artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-ablation-v3.json
+  --output artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-ablation-v4.json
 ```
 
-The comparison advances the best frontier strategy if either new arm reaches the boss or clears Act
-1, or improves mean maximum floor by at least 0.5 over the v2 hash arm. Otherwise it records a stop
-decision and sends the project back to policy representation or environment work.
+The comparison advances the best frontier strategy if either corrected arm reaches the boss or
+clears Act 1, or improves mean maximum floor by at least 0.5 over the v2 hash arm. Otherwise it
+records a stop decision and sends the project back to policy representation or environment work.

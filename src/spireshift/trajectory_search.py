@@ -20,20 +20,31 @@ from spireshift.splits import SplitManifest, SplitName
 
 LEGACY_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v2"
 FRONTIER_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v3"
+CORRECTED_FRONTIER_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v4"
 LEGACY_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v1"
 FRONTIER_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v2"
+CORRECTED_FRONTIER_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v3"
 LEGACY_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v1"
 FRONTIER_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v2"
+CORRECTED_FRONTIER_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v3"
 LEGACY_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v1"
 FRONTIER_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v2"
+CORRECTED_FRONTIER_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v3"
 MILESTONE_SCHEMA_VERSION = "act1-milestone-semantics-v2"
 FRONTIER_RANKING_SCHEMA_VERSION = "public-frontier-ranking-v1"
+CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION = "public-frontier-ranking-v2"
 FRONTIER_SUMMARY_SCHEMA_VERSION = "public-trajectory-frontier-v1"
-TRAJECTORY_SEARCH_ABLATION_SCHEMA_VERSION = "run-level-trajectory-search-ablation-v1"
+CORRECTED_FRONTIER_SUMMARY_SCHEMA_VERSION = "public-trajectory-frontier-v2"
+TRAJECTORY_SEARCH_ABLATION_SCHEMA_VERSION = "run-level-trajectory-search-ablation-v2"
 LEGACY_SEARCH_CONTROLLER_ID = "policy-guided-trajectory-beam-v1"
 FRONTIER_SEARCH_CONTROLLER_ID = "public-frontier-trajectory-beam-v2"
+CORRECTED_FRONTIER_SEARCH_CONTROLLER_ID = "public-frontier-trajectory-beam-v3"
 LEGACY_CLAIM_SCOPE = "train_only_act1_milestone_trajectory_search"
 FRONTIER_CLAIM_SCOPE = "train_only_act1_public_frontier_ablation"
+CORRECTED_FRONTIER_CLAIM_SCOPE = "train_only_act1_public_frontier_ablation_v2"
+
+LEGACY_ENEMY_SNAPSHOT_RULE = "terminal_then_last_actionable_v1"
+LAST_ACTIONABLE_ENEMY_SNAPSHOT_RULE = "last_actionable_on_deepest_floor_v2"
 
 HASH_TIEBREAK_STRATEGY = "hash_tiebreak_v1"
 PUBLIC_FRONTIER_STRATEGY = "public_frontier_v1"
@@ -68,10 +79,16 @@ class PublicFrontierRanking:
     enemy_hp_offset: int
     enemy_slot_size: int
     maximum_enemy_slots: int
+    enemy_snapshot_rule: str = LAST_ACTIONABLE_ENEMY_SNAPSHOT_RULE
 
     def __post_init__(self) -> None:
         if self.strategy not in _FRONTIER_STRATEGIES:
             raise ValueError("Unknown public-frontier ranking strategy")
+        if self.enemy_snapshot_rule not in {
+            LEGACY_ENEMY_SNAPSHOT_RULE,
+            LAST_ACTIONABLE_ENEMY_SNAPSHOT_RULE,
+        }:
+            raise ValueError("Unknown public-frontier enemy snapshot rule")
         for name, value, minimum in (
             ("enemy_hp_offset", self.enemy_hp_offset, 0),
             ("enemy_slot_size", self.enemy_slot_size, 1),
@@ -89,8 +106,8 @@ class PublicFrontierRanking:
         )
 
     def body(self) -> dict[str, object]:
-        return {
-            "schema_version": FRONTIER_RANKING_SCHEMA_VERSION,
+        body: dict[str, object] = {
+            "schema_version": self.schema_version,
             "strategy": self.strategy,
             "information_policy_id": "public-state-v1",
             "enemy_hp_layout": {
@@ -104,6 +121,25 @@ class PublicFrontierRanking:
             "diversity_rule": self.diversity_rule,
             "primary_rank_rule": "victory_act1_clear_boss_reach_maximum_floor",
         }
+        if self.schema_version == CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION:
+            body["enemy_snapshot_rule"] = self.enemy_snapshot_rule
+        return body
+
+    @property
+    def schema_version(self) -> str:
+        return (
+            FRONTIER_RANKING_SCHEMA_VERSION
+            if self.enemy_snapshot_rule == LEGACY_ENEMY_SNAPSHOT_RULE
+            else CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION
+        )
+
+    @property
+    def frontier_summary_schema_version(self) -> str:
+        return (
+            FRONTIER_SUMMARY_SCHEMA_VERSION
+            if self.enemy_snapshot_rule == LEGACY_ENEMY_SNAPSHOT_RULE
+            else CORRECTED_FRONTIER_SUMMARY_SCHEMA_VERSION
+        )
 
     @property
     def ranking_id(self) -> str:
@@ -115,6 +151,12 @@ class PublicFrontierRanking:
     @classmethod
     def from_mapping(cls, value: object) -> PublicFrontierRanking:
         document = _mapping(value, "public-frontier ranking")
+        schema_version = document.get("schema_version")
+        if schema_version not in {
+            FRONTIER_RANKING_SCHEMA_VERSION,
+            CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION,
+        }:
+            raise ValueError("Public-frontier ranking schema differs")
         expected = {
             "schema_version",
             "ranking_id",
@@ -126,6 +168,8 @@ class PublicFrontierRanking:
             "diversity_rule",
             "primary_rank_rule",
         }
+        if schema_version == CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION:
+            expected.add("enemy_snapshot_rule")
         if set(document) != expected:
             raise ValueError("Public-frontier ranking fields differ")
         layout = _mapping(document.get("enemy_hp_layout"), "enemy HP layout")
@@ -136,6 +180,11 @@ class PublicFrontierRanking:
             enemy_hp_offset=_integer(layout.get("offset"), "enemy HP offset"),
             enemy_slot_size=_integer(layout.get("slot_size"), "enemy slot size"),
             maximum_enemy_slots=_integer(layout.get("maximum_slots"), "maximum enemy slots"),
+            enemy_snapshot_rule=(
+                _string(document.get("enemy_snapshot_rule"), "enemy snapshot rule")
+                if schema_version == CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION
+                else LEGACY_ENEMY_SNAPSHOT_RULE
+            ),
         )
         if document != ranking.as_dict():
             raise ValueError("Public-frontier ranking contract or identity differs")
@@ -287,47 +336,51 @@ class TrajectorySearchConfig:
 
     @property
     def schema_version(self) -> str:
-        return (
-            FRONTIER_CONFIG_SCHEMA_VERSION
-            if self.frontier_ranking is not None
-            else LEGACY_CONFIG_SCHEMA_VERSION
-        )
+        if self.frontier_ranking is None:
+            return LEGACY_CONFIG_SCHEMA_VERSION
+        if self.frontier_ranking.schema_version == FRONTIER_RANKING_SCHEMA_VERSION:
+            return FRONTIER_CONFIG_SCHEMA_VERSION
+        return CORRECTED_FRONTIER_CONFIG_SCHEMA_VERSION
 
     @property
     def search_controller_id(self) -> str:
-        return (
-            FRONTIER_SEARCH_CONTROLLER_ID
-            if self.frontier_ranking is not None
-            else LEGACY_SEARCH_CONTROLLER_ID
-        )
+        if self.frontier_ranking is None:
+            return LEGACY_SEARCH_CONTROLLER_ID
+        if self.frontier_ranking.schema_version == FRONTIER_RANKING_SCHEMA_VERSION:
+            return FRONTIER_SEARCH_CONTROLLER_ID
+        return CORRECTED_FRONTIER_SEARCH_CONTROLLER_ID
 
     @property
     def case_schema_version(self) -> str:
-        return (
-            FRONTIER_CASE_SCHEMA_VERSION
-            if self.frontier_ranking is not None
-            else LEGACY_CASE_SCHEMA_VERSION
-        )
+        if self.frontier_ranking is None:
+            return LEGACY_CASE_SCHEMA_VERSION
+        if self.frontier_ranking.schema_version == FRONTIER_RANKING_SCHEMA_VERSION:
+            return FRONTIER_CASE_SCHEMA_VERSION
+        return CORRECTED_FRONTIER_CASE_SCHEMA_VERSION
 
     @property
     def report_schema_version(self) -> str:
-        return (
-            FRONTIER_REPORT_SCHEMA_VERSION
-            if self.frontier_ranking is not None
-            else LEGACY_REPORT_SCHEMA_VERSION
-        )
+        if self.frontier_ranking is None:
+            return LEGACY_REPORT_SCHEMA_VERSION
+        if self.frontier_ranking.schema_version == FRONTIER_RANKING_SCHEMA_VERSION:
+            return FRONTIER_REPORT_SCHEMA_VERSION
+        return CORRECTED_FRONTIER_REPORT_SCHEMA_VERSION
 
     @property
     def verification_schema_version(self) -> str:
-        return (
-            FRONTIER_VERIFICATION_SCHEMA_VERSION
-            if self.frontier_ranking is not None
-            else LEGACY_VERIFICATION_SCHEMA_VERSION
-        )
+        if self.frontier_ranking is None:
+            return LEGACY_VERIFICATION_SCHEMA_VERSION
+        if self.frontier_ranking.schema_version == FRONTIER_RANKING_SCHEMA_VERSION:
+            return FRONTIER_VERIFICATION_SCHEMA_VERSION
+        return CORRECTED_FRONTIER_VERIFICATION_SCHEMA_VERSION
 
     @property
     def claim_scope(self) -> str:
-        return FRONTIER_CLAIM_SCOPE if self.frontier_ranking is not None else LEGACY_CLAIM_SCOPE
+        if self.frontier_ranking is None:
+            return LEGACY_CLAIM_SCOPE
+        if self.frontier_ranking.schema_version == FRONTIER_RANKING_SCHEMA_VERSION:
+            return FRONTIER_CLAIM_SCOPE
+        return CORRECTED_FRONTIER_CLAIM_SCOPE
 
     @property
     def config_id(self) -> str:
@@ -340,7 +393,11 @@ class TrajectorySearchConfig:
     def from_mapping(cls, value: object) -> TrajectorySearchConfig:
         document = _mapping(value, "trajectory search config")
         schema_version = document.get("schema_version")
-        if schema_version not in {LEGACY_CONFIG_SCHEMA_VERSION, FRONTIER_CONFIG_SCHEMA_VERSION}:
+        if schema_version not in {
+            LEGACY_CONFIG_SCHEMA_VERSION,
+            FRONTIER_CONFIG_SCHEMA_VERSION,
+            CORRECTED_FRONTIER_CONFIG_SCHEMA_VERSION,
+        }:
             raise ValueError("Trajectory search config schema differs")
         expected = {
             "schema_version",
@@ -366,15 +423,18 @@ class TrajectorySearchConfig:
             "exact_replay_only",
             "milestones",
         }
-        if schema_version == FRONTIER_CONFIG_SCHEMA_VERSION:
+        if schema_version in {
+            FRONTIER_CONFIG_SCHEMA_VERSION,
+            CORRECTED_FRONTIER_CONFIG_SCHEMA_VERSION,
+        }:
             expected.add("frontier_ranking")
         if set(document) != expected:
             raise ValueError("Trajectory search config fields differ")
-        expected_controller = (
-            FRONTIER_SEARCH_CONTROLLER_ID
-            if schema_version == FRONTIER_CONFIG_SCHEMA_VERSION
-            else LEGACY_SEARCH_CONTROLLER_ID
-        )
+        expected_controller = {
+            LEGACY_CONFIG_SCHEMA_VERSION: LEGACY_SEARCH_CONTROLLER_ID,
+            FRONTIER_CONFIG_SCHEMA_VERSION: FRONTIER_SEARCH_CONTROLLER_ID,
+            CORRECTED_FRONTIER_CONFIG_SCHEMA_VERSION: CORRECTED_FRONTIER_SEARCH_CONTROLLER_ID,
+        }[schema_version]
         if document.get("search_controller_id") != expected_controller:
             raise ValueError("Trajectory search controller differs")
         config = cls(
@@ -409,10 +469,13 @@ class TrajectorySearchConfig:
             milestones=Act1Milestones.from_mapping(document.get("milestones")),
             frontier_ranking=(
                 PublicFrontierRanking.from_mapping(document.get("frontier_ranking"))
-                if schema_version == FRONTIER_CONFIG_SCHEMA_VERSION
+                if schema_version
+                in {FRONTIER_CONFIG_SCHEMA_VERSION, CORRECTED_FRONTIER_CONFIG_SCHEMA_VERSION}
                 else None
             ),
         )
+        if config.schema_version != schema_version:
+            raise ValueError("Trajectory search config and frontier-ranking schemas differ")
         if document.get("config_id") != config.config_id:
             raise ValueError("Trajectory search config identity mismatch")
         return config
@@ -661,6 +724,10 @@ def compare_trajectory_search_ablation(
         or diverse_config.frontier_ranking.strategy != PUBLIC_FRONTIER_DIVERSE_STRATEGY
     ):
         raise ValueError("Trajectory-search diverse arm has the wrong strategy")
+    for config in (frontier_config, diverse_config):
+        assert config.frontier_ranking is not None
+        if config.frontier_ranking.schema_version != CORRECTED_FRONTIER_RANKING_SCHEMA_VERSION:
+            raise ValueError("Trajectory-search frontier arm uses retired enemy-progress semantics")
 
     arm_reports: list[dict[str, Any]] = []
     expected_seeds: set[int] | None = None
@@ -736,7 +803,7 @@ def compare_trajectory_search_ablation(
                 else "reassess_policy_representation_or_environment"
             ),
         },
-        "claim_scope": FRONTIER_CLAIM_SCOPE,
+        "claim_scope": CORRECTED_FRONTIER_CLAIM_SCOPE,
     }
     return {**body, "ablation_id": manifest_identifier(body)}
 
@@ -1105,11 +1172,18 @@ def _public_frontier_summary(
         ),
         None,
     )
-    enemy_source = deepest
-    enemy_snapshot = _enemy_hp_snapshot(enemy_source, ranking=ranking)
-    if enemy_snapshot is None and actionable is not None:
+    if (
+        ranking.enemy_snapshot_rule == LAST_ACTIONABLE_ENEMY_SNAPSHOT_RULE
+        and actionable is not None
+    ):
         enemy_source = actionable
         enemy_snapshot = _enemy_hp_snapshot(enemy_source, ranking=ranking)
+    else:
+        enemy_source = deepest
+        enemy_snapshot = _enemy_hp_snapshot(enemy_source, ranking=ranking)
+        if enemy_snapshot is None and actionable is not None:
+            enemy_source = actionable
+            enemy_snapshot = _enemy_hp_snapshot(enemy_source, ranking=ranking)
     encounter_identity = _encounter_identity(enemy_source)
     enemy_references = [
         snapshot[0]
@@ -1144,7 +1218,7 @@ def _public_frontier_summary(
     state = deepest.public_state
     enemy_state_hash = None if enemy_snapshot is None else enemy_source.state_hash
     body: dict[str, Any] = {
-        "schema_version": FRONTIER_SUMMARY_SCHEMA_VERSION,
+        "schema_version": ranking.frontier_summary_schema_version,
         "ranking_id": ranking.ranking_id,
         "information_policy_id": "public-state-v1",
         "state_hash": deepest.state_hash,
@@ -1566,7 +1640,7 @@ def _validate_public_frontier(
     if frontier_id != manifest_identifier(body):
         raise ValueError("Public-frontier identity mismatch")
     expected = {
-        "schema_version": FRONTIER_SUMMARY_SCHEMA_VERSION,
+        "schema_version": ranking.frontier_summary_schema_version,
         "ranking_id": ranking.ranking_id,
         "information_policy_id": "public-state-v1",
         "floor": trajectory.get("maximum_floor"),
@@ -1576,6 +1650,12 @@ def _validate_public_frontier(
         raise ValueError("Public-frontier provenance or maximum-floor state differs")
     if frontier.get("terminal") is not trajectory.get("terminal"):
         raise ValueError("Public-frontier terminal evidence differs")
+    if (
+        ranking.enemy_snapshot_rule == LAST_ACTIONABLE_ENEMY_SNAPSHOT_RULE
+        and frontier.get("enemy_hp_available") is True
+        and frontier.get("enemy_snapshot_state_hash") != frontier.get("last_actionable_state_hash")
+    ):
+        raise ValueError("Corrected public enemy HP evidence is not from the last actionable state")
     for key in ("decisions_on_floor", "distinct_public_states_on_floor"):
         if _integer(frontier.get(key), key) < 0:
             raise ValueError(f"{key} must be nonnegative")

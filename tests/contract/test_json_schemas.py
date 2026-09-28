@@ -392,17 +392,32 @@ def test_terminal_trajectory_discovery_configuration_conforms_to_schema() -> Non
 
 
 @pytest.mark.parametrize(
-    "configuration",
+    ("schema", "configuration"),
     [
-        "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json",
-        "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json",
+        (
+            "run-level-trajectory-search-config-v3.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json",
+        ),
+        (
+            "run-level-trajectory-search-config-v3.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json",
+        ),
+        (
+            "run-level-trajectory-search-config-v4.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4.json",
+        ),
+        (
+            "run-level-trajectory-search-config-v4.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4.json",
+        ),
     ],
 )
 def test_public_frontier_trajectory_search_configuration_conforms_to_schema(
+    schema: str,
     configuration: str,
 ) -> None:
     validator = Draft202012Validator(
-        _load(SCHEMA_DIR / "run-level-trajectory-search-config-v3.json"),
+        _load(SCHEMA_DIR / schema),
         registry=_registry(),
     )
     validator.validate(_load(Path(configuration)))

@@ -17,6 +17,7 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
 from spireshift.splits import SplitName, load_split_manifest
 from spireshift.trajectory_search import (
+    LEGACY_ENEMY_SNAPSHOT_RULE,
     PUBLIC_FRONTIER_DIVERSE_STRATEGY,
     PUBLIC_FRONTIER_STRATEGY,
     Act1Milestones,
@@ -299,21 +300,36 @@ def test_trajectory_search_config_and_cli_are_frozen(tmp_path: Path) -> None:
     )
     assert parsed_comparison.model_command == "compare-run-trajectory-search"
 
-    production_frontier = load_trajectory_search_config(
+    retired_frontier = load_trajectory_search_config(
         Path("configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json")
     )
-    production_diverse = load_trajectory_search_config(
+    retired_diverse = load_trajectory_search_config(
         Path("configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json")
+    )
+    production_frontier = load_trajectory_search_config(
+        Path("configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4.json")
+    )
+    production_diverse = load_trajectory_search_config(
+        Path("configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4.json")
+    )
+    assert retired_frontier.frontier_ranking is not None
+    assert retired_frontier.frontier_ranking.enemy_snapshot_rule == LEGACY_ENEMY_SNAPSHOT_RULE
+    assert retired_diverse.frontier_ranking is not None
+    assert retired_frontier.config_id == (
+        "sha256:d85daa391dd41d81f6a4c183b7ac4f08768d7b89fb7511f640000adecbddc1ef"
+    )
+    assert retired_diverse.config_id == (
+        "sha256:922617859a45e832329683bc19bb316d706d517037f88ae344abb69d27277db3"
     )
     assert production_frontier.frontier_ranking is not None
     assert production_frontier.frontier_ranking.strategy == PUBLIC_FRONTIER_STRATEGY
     assert production_diverse.frontier_ranking is not None
     assert production_diverse.frontier_ranking.strategy == PUBLIC_FRONTIER_DIVERSE_STRATEGY
     assert production_frontier.config_id == (
-        "sha256:d85daa391dd41d81f6a4c183b7ac4f08768d7b89fb7511f640000adecbddc1ef"
+        "sha256:f4686a81461f368731cdd64da4652242ffb2c4d8ac848c471d1fcf10e4ec527d"
     )
     assert production_diverse.config_id == (
-        "sha256:922617859a45e832329683bc19bb316d706d517037f88ae344abb69d27277db3"
+        "sha256:1c2033da21d6abb694523f6d61f229e66b2d2ea32877b28e72afe101adb935c0"
     )
 
 
@@ -354,7 +370,8 @@ def test_public_frontier_records_health_enemy_progress_and_strategic_trace() -> 
         )
 
     initial = observation(hp=60, enemy_hp=100, terminal=False, suffix="initial")
-    final = observation(hp=0, enemy_hp=20, terminal=True, suffix="final")
+    progressed = observation(hp=50, enemy_hp=20, terminal=False, suffix="progressed")
+    final = observation(hp=0, enemy_hp=0, terminal=True, suffix="terminal-cleanup")
     records = [
         {
             "decision_index": 0,
@@ -365,7 +382,7 @@ def test_public_frontier_records_health_enemy_progress_and_strategic_trace() -> 
     ]
 
     frontier = _public_frontier_summary(
-        observations=[initial, final],
+        observations=[initial, progressed, final],
         records=records,
         maximum_floor=5,
         ranking=ranking,
@@ -373,12 +390,24 @@ def test_public_frontier_records_health_enemy_progress_and_strategic_trace() -> 
 
     assert frontier["information_policy_id"] == "public-state-v1"
     assert frontier["player_hp_fraction"] == 0.0
-    assert frontier["last_actionable_player_hp_fraction"] == 0.75
+    assert frontier["last_actionable_player_hp_fraction"] == 0.625
     assert frontier["enemy_hp_current"] == 20
     assert frontier["enemy_hp_reference"] == 100
     assert frontier["enemy_hp_defeated_fraction"] == 0.8
     assert frontier["living_enemy_count"] == 1
+    assert frontier["enemy_snapshot_state_hash"] == progressed.state_hash
+    assert frontier["enemy_snapshot_state_hash"] == frontier["last_actionable_state_hash"]
     assert frontier["strategic_trace_sha256"].startswith("sha256:")
+
+    retired = _public_frontier_summary(
+        observations=[initial, progressed, final],
+        records=records,
+        maximum_floor=5,
+        ranking=replace(ranking, enemy_snapshot_rule=LEGACY_ENEMY_SNAPSHOT_RULE),
+    )
+    assert retired["enemy_hp_current"] == 0
+    assert retired["enemy_hp_defeated_fraction"] == 1.0
+    assert retired["enemy_snapshot_state_hash"] == final.state_hash
 
 
 def test_public_frontier_ranking_prefers_progress_and_diversifies_strategic_traces() -> None:
@@ -443,12 +472,12 @@ def test_frontier_search_artifacts_validate_and_tampering_is_rejected(tmp_path: 
     )
 
     Draft202012Validator(
-        json.loads(Path("schemas/run-level-trajectory-search-v2.json").read_text())
+        json.loads(Path("schemas/run-level-trajectory-search-v3.json").read_text())
     ).validate(result.report)
     case_path = output / result.report["cases"][0]["path"]
     case = json.loads(case_path.read_text())
     Draft202012Validator(
-        json.loads(Path("schemas/run-level-trajectory-search-case-v2.json").read_text())
+        json.loads(Path("schemas/run-level-trajectory-search-case-v3.json").read_text())
     ).validate(case)
     verification = verify_trajectory_search(
         result.report_path,
@@ -457,7 +486,7 @@ def test_frontier_search_artifacts_validate_and_tampering_is_rejected(tmp_path: 
     )
     assert verification["valid"] is True
     Draft202012Validator(
-        json.loads(Path("schemas/run-level-trajectory-search-verification-v2.json").read_text())
+        json.loads(Path("schemas/run-level-trajectory-search-verification-v3.json").read_text())
     ).validate(verification)
 
     original_case_ids = [reference["case_id"] for reference in result.report["cases"]]
@@ -535,8 +564,26 @@ def test_same_budget_ablation_compares_three_verified_arms(tmp_path: Path) -> No
     ]
     assert comparison["comparison"]["boss_reach_or_act1_clear_found"] is True
     Draft202012Validator(
-        json.loads(Path("schemas/run-level-trajectory-search-ablation-v1.json").read_text())
+        json.loads(Path("schemas/run-level-trajectory-search-ablation-v2.json").read_text())
     ).validate(comparison)
+
+    assert frontier_config.frontier_ranking is not None
+    with pytest.raises(ValueError, match="retired enemy-progress semantics"):
+        compare_trajectory_search_ablation(
+            legacy_report_path=reports[0].report_path,
+            frontier_report_path=reports[1].report_path,
+            diverse_report_path=reports[2].report_path,
+            legacy_config=legacy_config,
+            frontier_config=replace(
+                frontier_config,
+                frontier_ranking=replace(
+                    frontier_config.frontier_ranking,
+                    enemy_snapshot_rule=LEGACY_ENEMY_SNAPSHOT_RULE,
+                ),
+            ),
+            diverse_config=diverse_config,
+            split_manifest=split,
+        )
 
     with pytest.raises(ValueError, match="equal frozen budgets"):
         compare_trajectory_search_ablation(
