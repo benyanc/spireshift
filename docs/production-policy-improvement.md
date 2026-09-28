@@ -111,3 +111,10 @@ The next bounded experiment is the
 base-v2 checkpoint and sparse, reproducible legal alternatives to determine whether the existing
 policy is one or two decisions away from a winning run. It does not promote base-v5, consume held-out
 seeds, or unblock terminal-value training without both winning and losing complete trajectories.
+
+That experiment completed 384 train-only attempts with 1,426 actual non-argmax actions and 372 unique
+action traces. All 384 runs ended in defeat, and no run passed floor 13. Increasing exploration from
+2% to 10% reduced mean maximum floor from 7.047 to 6.867. Sparse independent sampling is therefore
+rejected, terminal-value training remains blocked, and no held-out evaluation is authorized. The
+next foundation package must search over coherent run trajectories and first establish Act 1 boss
+reach and clear as an auxiliary milestone without replacing terminal victory as the project goal.

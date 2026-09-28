@@ -46,3 +46,29 @@ The aggregate recommends one of two next steps. Any winning cases are frozen for
 later labeling; terminal-value training remains blocked until both victories and defeats are
 present. If the experiment finds no wins despite realizing the configured interventions, simple
 sampling is rejected as the next improvement mechanism and the project moves to run-level search.
+
+## Result
+
+The owner-run experiment completed all 384 trajectories in 191.61 wall seconds. Every run reached a
+terminal defeat without a failure, cycle, decision-limit stop, or no-op fallback. The aggregate is
+`sha256:0222c0d8b3fde25b37f1d0efb42ca26696829a2532c0ae42a2b0b7074c66c370`; independent
+verification checked all 384 immutable cases and produced
+`sha256:4f2a0b190cc6e2d5b3ddb86d7cbd6ba92a6a4254930aecd029a11fc94a9cb924`. The resource report is
+`sha256:a3043da36ff376794631dc4ff428396f624e84772c65c7ee85cfe07a2b778694`.
+
+Exploration was real rather than nominal: 1,426 of 25,723 eligible decisions selected a non-argmax
+action, producing 372 unique action traces. The realized rates closely matched their frozen 2%, 5%,
+and 10% targets. None of those trajectories won. Mean maximum floor also declined as exploration
+increased: 7.047 at 2%, 6.930 at 5%, and 6.867 at 10%. The deepest trajectory reached floor 13;
+none reached the Act 1 boss at floor 17.
+
+This rejects sparse independent action sampling as the next improvement mechanism. The evidence does
+not support increasing the rate, adding more attempts with the same sampler, fitting a terminal-value
+head, or consuming held-out seeds. The next bounded objective is a train-only run-level search that
+keeps and mutates promising coherent trajectories, using Act 1 boss reach and clear as auxiliary
+milestones while preserving terminal victory as the final objective.
+
+The resource wrapper was invoked without a metrics sidecar, so its trajectory and transition count
+fields are null. The verified discovery aggregate supplies the exact 384-trajectory and
+31,390-decision counts; the missing sidecar does not require a rerun. Future operator commands must
+pass an explicit `--metrics` path.
