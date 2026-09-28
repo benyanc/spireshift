@@ -28,9 +28,16 @@ parent. The resulting upper bound is 1,872 trajectories before early stopping an
 removal. Work is parallel only across seeds, so parent selection remains deterministic.
 
 The command performs an admitted-backend preflight before searching. It requires public `act` and
-`floor` fields, `underdocks` as the initial act, floor 17 as the Act 1 boss threshold, and
-`overgrowth` as Act 2 entry. It never clones or resamples hidden state. Exact reset-and-replay keeps
-the first pilot independent of the hidden-world clone defect tracked in issue #105.
+`floor` fields, accepts either `overgrowth` or `underdocks` as the seed-selected Act 1 region, uses
+floor 17 as the Act 1 boss threshold, and recognizes `hive` as Act 2 entry. It never clones or
+resamples hidden state. Exact reset-and-replay keeps the first pilot independent of the hidden-world
+clone defect tracked in issue #105.
+
+The retired v1 configuration incorrectly treated `underdocks` as the only Act 1 region and
+`overgrowth` as Act 2. Its preflight failed in 0.61 seconds before any trajectory ran; the preserved
+resource report is `sha256:37c9301994947d691f4c746ca7f33b6a3af69df072aecb08175ae3a10c24ea0e`.
+The corrected v2 semantics follow the backend's explicit region order: Act 1 is Overgrowth or
+Underdocks, then Hive, then Glory.
 
 Cases are immutable and resumable at the seed boundary. They preserve every policy distribution,
 selected action, parent, mutation, replay divergence, liveness event, no-op fallback, milestone,
@@ -43,9 +50,9 @@ The project owner starts the sustained run. Run this single command from the rep
 ```bash
 uv run spireshift resources run \
   --kind rollout \
-  --report artifacts/resources/trajectory-search-base-v2-act1-train-v1.json \
-  --metrics artifacts/resources/trajectory-search-base-v2-act1-train-v1-metrics.json \
-  --artifact-root artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v1 \
+  --report artifacts/resources/trajectory-search-base-v2-act1-train-v2.json \
+  --metrics artifacts/resources/trajectory-search-base-v2-act1-train-v2-metrics.json \
+  --artifact-root artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v2 \
   --workers 8 \
   --max-wall-seconds 14400 \
   --max-cpu-seconds 50000 \
@@ -53,13 +60,13 @@ uv run spireshift resources run \
   --max-memory-bytes 16000000000 \
   -- \
   uv run --extra evangambit spireshift model search-run-trajectories \
-    configs/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v1.json \
+    configs/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v2.json \
     artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
     --report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
     --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
     --upstream-root artifacts/backend/evangambit-v0.107.1 \
     --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v1 \
+    --output-dir artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-train-v2 \
     --resume
 ```
 

@@ -18,33 +18,35 @@ from spireshift.liveness import PublicNoOpActionGuard
 from spireshift.models import write_model_artifact
 from spireshift.splits import SplitManifest, SplitName
 
-TRAJECTORY_SEARCH_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v1"
+TRAJECTORY_SEARCH_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v2"
 TRAJECTORY_SEARCH_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v1"
 TRAJECTORY_SEARCH_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v1"
 TRAJECTORY_SEARCH_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v1"
-MILESTONE_SCHEMA_VERSION = "act1-milestone-semantics-v1"
+MILESTONE_SCHEMA_VERSION = "act1-milestone-semantics-v2"
 SEARCH_CONTROLLER_ID = "policy-guided-trajectory-beam-v1"
 CLAIM_SCOPE = "train_only_act1_milestone_trajectory_search"
 
 
 @dataclass(frozen=True, slots=True)
 class Act1Milestones:
-    first_act_id: str
+    first_act_ids: tuple[str, ...]
     next_act_id: str
     boss_floor: int
 
     def __post_init__(self) -> None:
-        if not self.first_act_id or not self.next_act_id:
+        if not self.first_act_ids or any(not act_id for act_id in self.first_act_ids):
             raise ValueError("Milestone act IDs must be non-empty")
-        if self.first_act_id == self.next_act_id:
-            raise ValueError("Milestone act IDs must differ")
+        if len(self.first_act_ids) != len(set(self.first_act_ids)):
+            raise ValueError("Milestone first-act IDs must be unique")
+        if not self.next_act_id or self.next_act_id in self.first_act_ids:
+            raise ValueError("Milestone next-act ID must differ from every first-act ID")
         if isinstance(self.boss_floor, bool) or self.boss_floor < 1:
             raise ValueError("Milestone boss floor must be positive")
 
     def body(self) -> dict[str, object]:
         return {
             "schema_version": MILESTONE_SCHEMA_VERSION,
-            "first_act_id": self.first_act_id,
+            "first_act_ids": list(self.first_act_ids),
             "next_act_id": self.next_act_id,
             "boss_floor": self.boss_floor,
             "boss_reach_rule": "observed_first_act_floor_at_least_boss_floor",
@@ -65,7 +67,7 @@ class Act1Milestones:
         expected = {
             "schema_version",
             "milestone_id",
-            "first_act_id",
+            "first_act_ids",
             "next_act_id",
             "boss_floor",
             "boss_reach_rule",
@@ -84,7 +86,7 @@ class Act1Milestones:
         if any(document.get(key) != rule for key, rule in rules.items()):
             raise ValueError("Milestone semantics rules differ")
         milestones = cls(
-            first_act_id=_string(document.get("first_act_id"), "first act ID"),
+            first_act_ids=_string_tuple(document.get("first_act_ids"), "first act IDs"),
             next_act_id=_string(document.get("next_act_id"), "next act ID"),
             boss_floor=_integer(document.get("boss_floor"), "boss floor"),
         )
@@ -1153,10 +1155,10 @@ def _milestone_preflight(
         observation = environment.reset(seed)
         act = observation.public_state.get("act")
         floor = observation.public_state.get("floor")
-        if act != milestones.first_act_id:
+        if act not in milestones.first_act_ids:
             raise ValueError(
-                "Trajectory search milestone preflight expected "
-                f"act {milestones.first_act_id!r}, got {act!r}"
+                "Trajectory search milestone preflight expected one of "
+                f"{milestones.first_act_ids!r}, got {act!r}"
             )
         if _public_integer(floor) is None:
             raise ValueError("Trajectory search milestone preflight has no public integer floor")
@@ -1179,7 +1181,6 @@ def _validate_milestone_preflight(value: object, *, config: TrajectorySearchConf
     preflight = _mapping(value, "milestone preflight")
     expected = {
         "milestone_id": config.milestones.milestone_id,
-        "initial_act": config.milestones.first_act_id,
         "public_state_fields": ["act", "floor", "terminal", "victory"],
         "valid": True,
     }
@@ -1187,6 +1188,9 @@ def _validate_milestone_preflight(value: object, *, config: TrajectorySearchConf
         raise ValueError("Trajectory search milestone preflight differs")
     _integer(preflight.get("seed"), "milestone preflight seed")
     _integer(preflight.get("initial_floor"), "milestone preflight floor")
+    initial_act = _string(preflight.get("initial_act"), "milestone preflight act")
+    if initial_act not in config.milestones.first_act_ids:
+        raise ValueError("Trajectory search milestone preflight act is not an Act 1 region")
 
 
 def _boss_reached(
@@ -1196,7 +1200,7 @@ def _boss_reached(
     milestones: Act1Milestones,
 ) -> bool:
     return maximum_floor >= milestones.boss_floor and any(
-        record.get("source_act") == milestones.first_act_id
+        record.get("source_act") in milestones.first_act_ids
         and (_public_integer(record.get("source_floor")) or 0) >= milestones.boss_floor
         for record in records
     )
@@ -1281,6 +1285,12 @@ def _string(value: object, label: str) -> str:
     if not isinstance(value, str) or not value:
         raise ValueError(f"{label} must be a non-empty string")
     return value
+
+
+def _string_tuple(value: object, label: str) -> tuple[str, ...]:
+    if not isinstance(value, list) or not value:
+        raise ValueError(f"{label} must be a non-empty array")
+    return tuple(_string(item, label) for item in value)
 
 
 def _integer(value: object, label: str) -> int:

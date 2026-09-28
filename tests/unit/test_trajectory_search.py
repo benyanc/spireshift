@@ -82,7 +82,7 @@ class _MilestoneEnvironment:
     def _observation(self) -> Observation:
         public_state = {
             "floor": 0 if self._stage == 0 else 17,
-            "act": "overgrowth" if self._stage == 2 else "underdocks",
+            "act": "hive" if self._stage == 2 else "overgrowth",
             "terminal": self._terminal,
             "victory": False,
         }
@@ -144,8 +144,8 @@ def _config(policy: _EarlyDefeatPolicy, training_report_id: str) -> TrajectorySe
         no_op_fallback_threshold=2,
         mutation_salt="trajectory-search-test",
         milestones=Act1Milestones(
-            first_act_id="underdocks",
-            next_act_id="overgrowth",
+            first_act_ids=("overgrowth", "underdocks"),
+            next_act_id="hive",
             boss_floor=17,
         ),
     )
@@ -231,7 +231,7 @@ def test_trajectory_search_config_and_cli_are_frozen(tmp_path: Path) -> None:
 
     assert load_trajectory_search_config(config_path) == config
     config_schema = json.loads(
-        Path("schemas/run-level-trajectory-search-config-v1.json").read_text()
+        Path("schemas/run-level-trajectory-search-config-v2.json").read_text()
     )
     Draft202012Validator(config_schema).validate(config.as_dict())
     parsed = build_parser().parse_args(
