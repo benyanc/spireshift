@@ -78,49 +78,30 @@ search action when beneficial, and only 29.30% when harmful. The verified base-v
 `sha256:3cd6aa0351b3b206e4d692e620a5bdee568f10dee152bd2d697bde226a8b06d8`; its report is
 `sha256:7f992ad6eee798736f58a2d356febcebca310e35e79d852696257f6b7b465a1c`.
 
-## Current operator command
-
-The base-v5 admitted-backend smoke is frozen as
+The admitted-backend smoke is frozen as
 [`production-model-inference-smoke-v5-v0.107.1.json`](evidence/production-model-inference-smoke-v5-v0.107.1.json),
 with identity `sha256:8106e3ef385162c9f29f1ce76f6c0c6a86273bc12bbafe99befa426674c23bb6`.
-All eight decisions were candidate-aligned, legal, and public-state only. The sample included two
-combat decisions; median inference latency was 4.83 ms and maximum latency was 6.98 ms. The artifact
-verified against the exact base-v5 checkpoint and report, so the frozen test comparison is now
-allowed.
+All eight decisions were candidate-aligned, legal, and public-state only. Median inference latency
+was 4.83 ms and maximum latency was 6.98 ms.
 
-The previous evaluator paired a checkpoint only with the simple progress heuristic. The v4
-evaluation contract instead binds both checkpoint/report pairs and executes base-v5 and accepted
-base-v2 on the same untouched test seeds. It stores candidate and reference cases independently for
-safe resume and reports terminal outcomes, liveness, fallback use, latency, and paired floor deltas.
+## Frozen candidate comparison
 
-Run exactly this one resource-capped command and return its final JSON output. It is the only
-sustained task in the current work package and must be started and observed by the operator.
+The operator-run base-v5 versus accepted base-v2 comparison completed all 64 trajectories on the
+same 32 frozen test seeds. The aggregate is
+`sha256:dba706efaf6ae0ef4e4c3cef63286e438365af09d2ff27abaa7ce9b8d4d40106`; its verified resource
+report is `sha256:8547248f863761353cb41560a60e677e0547b55b0e0b8f6e7653630b717b1e09`. The run took 41.37
+seconds, used 45.11 CPU seconds, and produced 6,470 transitions.
 
-```bash
-uv run spireshift resources run \
-  --kind rollout \
-  --report artifacts/resources/production-base-v5-vs-v2-test-v1.json \
-  --metrics artifacts/resources/production-base-v5-vs-v2-test-v1-metrics.json \
-  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v5-vs-v2-test-v1 \
-  --workers 4 \
-  --max-wall-seconds 14400 \
-  --max-cpu-seconds 50000 \
-  --max-storage-bytes 1000000000 \
-  --max-memory-bytes 16000000000 \
-  -- \
-  uv run --extra evangambit spireshift model evaluate-curriculum \
-    artifacts/models/sts2-v0.107.1-base-v5/checkpoint.json \
-    --report artifacts/models/sts2-v0.107.1-base-v5/training-report.json \
-    --reference-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
-    --reference-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --upstream-root artifacts/backend/evangambit-v0.107.1 \
-    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v5-vs-v2-test-v1 \
-    --runs 32 \
-    --workers 4 \
-    --max-decisions-per-run 4096
-```
+Both policies completed and terminated every run without a cycle, decision-limit stop, fallback, or
+failure. Neither policy won any run. Base-v5 reached mean maximum floor 7.594 versus 7.281 for
+base-v2, a paired difference of +0.3125 floors. Base-v5 reached farther on 13 seeds, tied on 13, and
+reached a lower floor on 6. An exact two-sided sign test over the 19 non-tied pairs gives p=0.167. A
+fixed-seed percentile bootstrap over the paired mean gives a descriptive 95% interval from -0.219 to
++0.875 floors. The result is compatible with a small improvement but does not establish one.
 
-This evaluation can show whether the causal-policy recovery improves base-v2 under the frozen
-protocol. Zero victories would still keep terminal-value and learned-search readiness blocked.
+Base-v5 is therefore retained as a reproducible experimental candidate and is not promoted over
+base-v2. The causal preferences changed policy behavior in the intended direction, and the recovery
+blend prevented the broad validation regression, but the frozen run evidence remains statistically
+inconclusive and terminal-victory evidence remains entirely absent. The terminal-value head,
+learned-PUCT readiness, and adaptive-compute claims remain blocked. No further run belongs to this
+work item.
