@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -61,6 +62,31 @@ PRODUCTION_TRAIN_TERMINAL_FRONTIER = Path(
 PRODUCTION_VALIDATION_TERMINAL_FRONTIER = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json"
 )
+PRODUCTION_MILESTONE_TRAJECTORY = Path(
+    "manifests/bootstrap/sts2-v0.107.1-base-v2-milestone-trajectory-train-v1.json"
+)
+
+
+def test_milestone_trajectory_state_set_binds_exact_trace_coordinates() -> None:
+    document = json.loads(PRODUCTION_MILESTONE_TRAJECTORY.read_text(encoding="utf-8"))
+    state_set = load_bootstrap_state_set_document(document)
+
+    assert isinstance(state_set, CurriculumStateSet)
+    assert state_set.capture_trajectory is not None
+    assert len(state_set.cases) == 28
+    assert state_set.discovery["replayed_decisions"] == 147
+    assert state_set.discovery["mutation_lineage_count"] == 7
+    assert state_set.discovery["boss_reached"] is True
+    assert state_set.discovery["victory"] is False
+    assert {case.run_seed for case in state_set.cases} == {300}
+    assert max(case.expected_source_floor or 0 for case in state_set.cases) == 17
+
+    tampered = deepcopy(document)
+    tampered["cases"][0]["expected_state_hash"] = "0" * 64
+    body = {key: value for key, value in tampered.items() if key != "state_set_id"}
+    tampered["state_set_id"] = manifest_identifier(body)
+    with pytest.raises(ValueError, match="differs from its capture trajectory"):
+        load_bootstrap_state_set_document(tampered)
 
 
 def _tactical_split(ruleset_manifest_id: str) -> SplitManifest:

@@ -251,3 +251,26 @@ This completes the ranking ablation and authorizes using the score arm's boss-re
 as train-only milestone evidence. It does not establish an Act 1 clear, terminal victory, or
 terminal-value readiness. The next foundation package must replay, verify, and label the accepted
 trajectory before another base-policy improvement cycle.
+
+### Accepted milestone curriculum
+
+The accepted seed-300 trajectory has now been replayed transition by transition against the exact
+engine. The replay reproduced all 147 decisions, the seven applied mutations in its parent lineage,
+the floor-17 boss encounter, and the final defeat without hidden-state resampling or divergence.
+The frozen state set is
+`manifests/bootstrap/sts2-v0.107.1-base-v2-milestone-trajectory-train-v1.json`, identified by
+`sha256:97cae28b8f2e77ba4de5826a7c4bc16295e9a0b9d4e5c5ba32de27fcf556f9a6`.
+
+The selection contains 28 unique train states: every mutation decision, one predecessor for each
+mutation, and every floor-17 boss-combat state with at least two legal actions. None duplicates a
+state in the verified 1,299-case production curriculum. The state set embeds the complete public
+action trace so teacher generation reconstructs searched states directly rather than asking the
+base policy to rediscover a path it did not originally choose. Every captured state is bound to its
+global trajectory index, source hash, legal-action count, selected action, and next-state hash.
+
+Teacher output from this state set uses dataset schema v7 and remains train-only. Boss reach is
+recorded only as discovery provenance; the target utility and terminal-value labels continue to use
+environment terminal victory. After generation and independent verification, the v7 dataset can be
+combined with the seed-disjoint production curriculum. Composition strips replay-only coordinates
+from the materialized cases while preserving component state-set IDs, terminal-victory labels, and
+the existing validation/test seal. No model should be promoted from this trajectory alone.

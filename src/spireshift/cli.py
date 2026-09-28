@@ -107,6 +107,7 @@ from spireshift.live_run import (
     verify_live_run,
 )
 from spireshift.mechanics_audit import audit_mechanics_fixture
+from spireshift.milestone_curriculum import freeze_milestone_trajectory_state_set
 from spireshift.models import (
     TrainingConfig,
     load_model_checkpoint,
@@ -610,6 +611,28 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_discover.add_argument("--policy-report", type=Path)
     bootstrap_discover.add_argument("--combat-advancement-config", type=Path)
     bootstrap_discover.add_argument("--run-offset", type=int, default=0)
+    bootstrap_milestone = bootstrap_commands.add_parser(
+        "freeze-milestone-trajectory",
+        help="Exactly replay an accepted searched trajectory and freeze selected train states",
+    )
+    bootstrap_milestone.add_argument("search_report", type=Path)
+    bootstrap_milestone.add_argument("search_config", type=Path)
+    bootstrap_milestone.add_argument("output", type=Path)
+    bootstrap_milestone.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_milestone.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_milestone.add_argument("--upstream-root", type=Path)
+    bootstrap_milestone.add_argument("--manifest", type=Path)
+    bootstrap_milestone.add_argument("--policy-checkpoint", type=Path, required=True)
+    bootstrap_milestone.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_milestone.add_argument("--seed", type=int, required=True)
+    bootstrap_milestone.add_argument("--trajectory-id", required=True)
+    bootstrap_milestone.add_argument("--exclude-dataset", type=Path, action="append", default=[])
+    bootstrap_milestone.add_argument("--predecessor-count", type=int, default=1)
+    bootstrap_milestone.add_argument("--frontier-minimum-floor", type=int, default=17)
+    bootstrap_milestone.add_argument("--frontier-minimum-actions", type=int, default=2)
+    bootstrap_milestone.add_argument("--expected-mutations", type=int, default=7)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
     )
@@ -1708,6 +1731,43 @@ def main(argv: Sequence[str] | None = None) -> int:
                     split_manifest=split_manifest,
                 )
                 write_bootstrap_state_set(document, args.output)
+                _emit_json(document, None)
+                return 0
+            if args.bootstrap_command == "freeze-milestone-trajectory":
+                if args.backend == "evangambit":
+                    if args.upstream_root is None or args.manifest is None:
+                        raise ValueError(
+                            "EvanGambit milestone replay requires --upstream-root and --manifest"
+                        )
+                    milestone_backend = SearchBackendSpec.evangambit(
+                        args.upstream_root, args.manifest
+                    )
+                elif args.backend == "tactical_mock":
+                    milestone_backend = SearchBackendSpec.tactical_mock()
+                else:
+                    milestone_backend = SearchBackendSpec.mock()
+                milestone_policy = _bootstrap_policy_artifacts(
+                    args.policy_checkpoint,
+                    args.policy_report,
+                    None,
+                )
+                if milestone_policy is None:
+                    raise ValueError("Milestone replay requires a production policy checkpoint")
+                document = freeze_milestone_trajectory_state_set(
+                    search_report_path=args.search_report,
+                    search_config=load_trajectory_search_config(args.search_config),
+                    output_path=args.output,
+                    split_manifest=split_manifest,
+                    backend=milestone_backend,
+                    policy_artifacts=milestone_policy,
+                    run_seed=args.seed,
+                    trajectory_id=args.trajectory_id,
+                    excluded_dataset_paths=tuple(args.exclude_dataset),
+                    predecessor_count=args.predecessor_count,
+                    frontier_minimum_floor=args.frontier_minimum_floor,
+                    frontier_minimum_actions=args.frontier_minimum_actions,
+                    expected_mutations=args.expected_mutations,
+                )
                 _emit_json(document, None)
                 return 0
             if args.bootstrap_command == "discover-states":
