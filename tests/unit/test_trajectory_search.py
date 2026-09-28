@@ -3,9 +3,11 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Sequence
+from dataclasses import replace
 from pathlib import Path
-from typing import Self, cast
+from typing import Any, Self, cast
 
+import pytest
 from jsonschema import Draft202012Validator
 
 from spireshift.adapters.mock import MockSpireEnvironment
@@ -15,8 +17,14 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
 from spireshift.splits import SplitName, load_split_manifest
 from spireshift.trajectory_search import (
+    PUBLIC_FRONTIER_DIVERSE_STRATEGY,
+    PUBLIC_FRONTIER_STRATEGY,
     Act1Milestones,
+    PublicFrontierRanking,
     TrajectorySearchConfig,
+    _public_frontier_summary,
+    _select_beam,
+    compare_trajectory_search_ablation,
     load_trajectory_search_config,
     run_trajectory_search,
     verify_trajectory_search,
@@ -151,6 +159,23 @@ def _config(policy: _EarlyDefeatPolicy, training_report_id: str) -> TrajectorySe
     )
 
 
+def _frontier_config(
+    policy: _EarlyDefeatPolicy,
+    training_report_id: str,
+    *,
+    strategy: str = PUBLIC_FRONTIER_STRATEGY,
+) -> TrajectorySearchConfig:
+    return replace(
+        _config(policy, training_report_id),
+        frontier_ranking=PublicFrontierRanking(
+            strategy=strategy,
+            enemy_hp_offset=80,
+            enemy_slot_size=15,
+            maximum_enemy_slots=6,
+        ),
+    )
+
+
 def test_trajectory_search_retains_act1_clear_and_verifies(tmp_path: Path) -> None:
     split = load_split_manifest(MOCK_SPLIT_PATH)
     policy = _EarlyDefeatPolicy(split_manifest_id=split.manifest_id)
@@ -254,3 +279,272 @@ def test_trajectory_search_config_and_cli_are_frozen(tmp_path: Path) -> None:
     )
     assert parsed.model_command == "search-run-trajectories"
     assert split.split_for_seed(split.seeds(SplitName.TRAIN)[0]) is SplitName.TRAIN
+
+    parsed_comparison = build_parser().parse_args(
+        [
+            "model",
+            "compare-run-trajectory-search",
+            "legacy.json",
+            "frontier.json",
+            "diverse.json",
+            "--legacy-config",
+            "legacy-config.json",
+            "--frontier-config",
+            "frontier-config.json",
+            "--diverse-config",
+            "diverse-config.json",
+            "--split-manifest",
+            str(MOCK_SPLIT_PATH),
+        ]
+    )
+    assert parsed_comparison.model_command == "compare-run-trajectory-search"
+
+    production_frontier = load_trajectory_search_config(
+        Path("configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json")
+    )
+    production_diverse = load_trajectory_search_config(
+        Path("configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json")
+    )
+    assert production_frontier.frontier_ranking is not None
+    assert production_frontier.frontier_ranking.strategy == PUBLIC_FRONTIER_STRATEGY
+    assert production_diverse.frontier_ranking is not None
+    assert production_diverse.frontier_ranking.strategy == PUBLIC_FRONTIER_DIVERSE_STRATEGY
+    assert production_frontier.config_id == (
+        "sha256:d85daa391dd41d81f6a4c183b7ac4f08768d7b89fb7511f640000adecbddc1ef"
+    )
+    assert production_diverse.config_id == (
+        "sha256:922617859a45e832329683bc19bb316d706d517037f88ae344abb69d27277db3"
+    )
+
+
+def test_public_frontier_records_health_enemy_progress_and_strategic_trace() -> None:
+    ranking = PublicFrontierRanking(
+        strategy=PUBLIC_FRONTIER_STRATEGY,
+        enemy_hp_offset=80,
+        enemy_slot_size=15,
+        maximum_enemy_slots=6,
+    )
+
+    def observation(*, hp: int, enemy_hp: int, terminal: bool, suffix: str) -> Observation:
+        vector = [0] * 96
+        vector[80] = enemy_hp
+        public_state = {
+            "floor": 5,
+            "act": "overgrowth",
+            "phase": "combat" if not terminal else "complete",
+            "terminal": terminal,
+            "victory": False,
+            "player_hp": hp,
+            "player_max_hp": 80,
+            "enemy_def_ids": [101],
+            "encounter_id": 7,
+            "encounter": "synthetic",
+            "observation_vector": vector,
+            "suffix": suffix,
+        }
+        state_hash = hashlib.sha256(
+            json.dumps(public_state, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        return Observation(
+            schema_version="observation-v1",
+            patch_id=MockSpireEnvironment.patch_id,
+            decision_type=DecisionType.TERMINAL if terminal else DecisionType.COMBAT,
+            public_state=public_state,
+            state_hash=state_hash,
+        )
+
+    initial = observation(hp=60, enemy_hp=100, terminal=False, suffix="initial")
+    final = observation(hp=0, enemy_hp=20, terminal=True, suffix="final")
+    records = [
+        {
+            "decision_index": 0,
+            "decision_type": DecisionType.PATH.value,
+            "selected_action_id": "choose-risky-route",
+            "source_floor": 5,
+        }
+    ]
+
+    frontier = _public_frontier_summary(
+        observations=[initial, final],
+        records=records,
+        maximum_floor=5,
+        ranking=ranking,
+    )
+
+    assert frontier["information_policy_id"] == "public-state-v1"
+    assert frontier["player_hp_fraction"] == 0.0
+    assert frontier["last_actionable_player_hp_fraction"] == 0.75
+    assert frontier["enemy_hp_current"] == 20
+    assert frontier["enemy_hp_reference"] == 100
+    assert frontier["enemy_hp_defeated_fraction"] == 0.8
+    assert frontier["living_enemy_count"] == 1
+    assert frontier["strategic_trace_sha256"].startswith("sha256:")
+
+
+def test_public_frontier_ranking_prefers_progress_and_diversifies_strategic_traces() -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    policy = _EarlyDefeatPolicy(split_manifest_id=split.manifest_id)
+    report_id = manifest_identifier({"report": "frontier-ranking"})
+    score_config = _frontier_config(policy, report_id)
+    diverse_config = _frontier_config(
+        policy,
+        report_id,
+        strategy=PUBLIC_FRONTIER_DIVERSE_STRATEGY,
+    )
+
+    def trajectory(
+        name: str, *, enemy_progress: float, hp: float, strategic_trace: str
+    ) -> dict[str, Any]:
+        digest = manifest_identifier({"trace": name})
+        return {
+            "trajectory_id": manifest_identifier({"trajectory": name}),
+            "victory": False,
+            "act1_cleared": False,
+            "boss_reached": False,
+            "maximum_floor": 10,
+            "action_trace_sha256": digest,
+            "public_frontier": {
+                "encounter_cleared": False,
+                "enemy_hp_defeated_fraction": enemy_progress,
+                "player_hp_fraction": hp,
+                "last_actionable_player_hp_fraction": hp,
+                "distinct_public_states_on_floor": 5,
+                "strategic_trace_sha256": strategic_trace,
+            },
+        }
+
+    shared = manifest_identifier({"strategic": "shared"})
+    distinct = manifest_identifier({"strategic": "distinct"})
+    best = trajectory("best", enemy_progress=0.9, hp=0.4, strategic_trace=shared)
+    healthier = trajectory("healthier", enemy_progress=0.8, hp=0.8, strategic_trace=shared)
+    diverse = trajectory("diverse", enemy_progress=0.7, hp=0.5, strategic_trace=distinct)
+
+    assert _select_beam([best, healthier, diverse], config=score_config) == [best, healthier]
+    assert _select_beam([best, healthier, diverse], config=diverse_config) == [best, diverse]
+
+
+def test_frontier_search_artifacts_validate_and_tampering_is_rejected(tmp_path: Path) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    policy = _EarlyDefeatPolicy(split_manifest_id=split.manifest_id)
+    training_report_id = manifest_identifier({"report": "frontier-artifact"})
+    config = _frontier_config(policy, training_report_id)
+    output = tmp_path / "frontier-search"
+    timestamps = iter(("2026-01-03T00:00:00Z", "2026-01-03T00:00:01Z"))
+
+    result = run_trajectory_search(
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        split_manifest=split,
+        training_report_id=training_report_id,
+        config=config,
+        output_directory=output,
+        now=lambda: next(timestamps),
+    )
+
+    Draft202012Validator(
+        json.loads(Path("schemas/run-level-trajectory-search-v2.json").read_text())
+    ).validate(result.report)
+    case_path = output / result.report["cases"][0]["path"]
+    case = json.loads(case_path.read_text())
+    Draft202012Validator(
+        json.loads(Path("schemas/run-level-trajectory-search-case-v2.json").read_text())
+    ).validate(case)
+    verification = verify_trajectory_search(
+        result.report_path,
+        config=config,
+        split_manifest=split,
+    )
+    assert verification["valid"] is True
+    Draft202012Validator(
+        json.loads(Path("schemas/run-level-trajectory-search-verification-v2.json").read_text())
+    ).validate(verification)
+
+    original_case_ids = [reference["case_id"] for reference in result.report["cases"]]
+    result.report_path.unlink()
+    resumed_timestamps = iter(("2026-01-03T00:01:00Z", "2026-01-03T00:01:01Z"))
+    resumed = run_trajectory_search(
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        split_manifest=split,
+        training_report_id=training_report_id,
+        config=config,
+        output_directory=output,
+        resume=True,
+        now=resumed_timestamps.__next__,
+    )
+    assert [reference["case_id"] for reference in resumed.report["cases"]] == original_case_ids
+
+    case["trajectories"][0]["public_frontier"]["hidden_rng"] = 0.5
+    case_path.write_text(json.dumps(case), encoding="utf-8")
+    rejected = verify_trajectory_search(
+        result.report_path,
+        config=config,
+        split_manifest=split,
+    )
+    assert rejected["valid"] is False
+
+
+def test_same_budget_ablation_compares_three_verified_arms(tmp_path: Path) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    policy = _EarlyDefeatPolicy(split_manifest_id=split.manifest_id)
+    training_report_id = manifest_identifier({"report": "frontier-ablation"})
+    legacy_config = _config(policy, training_report_id)
+    frontier_config = _frontier_config(policy, training_report_id)
+    diverse_config = _frontier_config(
+        policy,
+        training_report_id,
+        strategy=PUBLIC_FRONTIER_DIVERSE_STRATEGY,
+    )
+
+    reports = []
+    for name, config in (
+        ("legacy", legacy_config),
+        ("frontier", frontier_config),
+        ("diverse", diverse_config),
+    ):
+        timestamps = iter(("2026-01-04T00:00:00Z", "2026-01-04T00:00:01Z"))
+        reports.append(
+            run_trajectory_search(
+                environment_factory=_MilestoneEnvironment,
+                ruleset=policy.ruleset,
+                policy=cast(ProductionCheckpointPolicy, policy),
+                split_manifest=split,
+                training_report_id=training_report_id,
+                config=config,
+                output_directory=tmp_path / name,
+                now=timestamps.__next__,
+            )
+        )
+
+    comparison = compare_trajectory_search_ablation(
+        legacy_report_path=reports[0].report_path,
+        frontier_report_path=reports[1].report_path,
+        diverse_report_path=reports[2].report_path,
+        legacy_config=legacy_config,
+        frontier_config=frontier_config,
+        diverse_config=diverse_config,
+        split_manifest=split,
+    )
+
+    assert [arm["strategy"] for arm in comparison["arms"]] == [
+        "hash_tiebreak_v1",
+        "public_frontier_v1",
+        "public_frontier_diverse_v1",
+    ]
+    assert comparison["comparison"]["boss_reach_or_act1_clear_found"] is True
+    Draft202012Validator(
+        json.loads(Path("schemas/run-level-trajectory-search-ablation-v1.json").read_text())
+    ).validate(comparison)
+
+    with pytest.raises(ValueError, match="equal frozen budgets"):
+        compare_trajectory_search_ablation(
+            legacy_report_path=reports[0].report_path,
+            frontier_report_path=reports[1].report_path,
+            diverse_report_path=reports[2].report_path,
+            legacy_config=legacy_config,
+            frontier_config=replace(frontier_config, generations=3),
+            diverse_config=diverse_config,
+            split_manifest=split,
+        )

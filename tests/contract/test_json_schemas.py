@@ -391,6 +391,23 @@ def test_terminal_trajectory_discovery_configuration_conforms_to_schema() -> Non
     )
 
 
+@pytest.mark.parametrize(
+    "configuration",
+    [
+        "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json",
+        "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json",
+    ],
+)
+def test_public_frontier_trajectory_search_configuration_conforms_to_schema(
+    configuration: str,
+) -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "run-level-trajectory-search-config-v3.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path(configuration)))
+
+
 def test_observation_rejects_unmarked_privileged_state() -> None:
     fixture = _load(FIXTURE_DIR / "observation-v1.json")
     fixture["privileged_state"] = {"future_rng": 0.01}

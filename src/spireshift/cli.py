@@ -210,6 +210,7 @@ from spireshift.terminal_discovery import (
     verify_terminal_trajectory_discovery,
 )
 from spireshift.trajectory_search import (
+    compare_trajectory_search_ablation,
     load_trajectory_search_config,
     run_trajectory_search,
     verify_trajectory_search,
@@ -840,6 +841,18 @@ def build_parser() -> argparse.ArgumentParser:
     trajectory_search_verify.add_argument("config", type=Path)
     trajectory_search_verify.add_argument("--split-manifest", type=Path, required=True)
     trajectory_search_verify.add_argument("--output", type=Path)
+    trajectory_search_compare = model_commands.add_parser(
+        "compare-run-trajectory-search",
+        help="Verify and compare the three frozen same-budget trajectory-search arms",
+    )
+    trajectory_search_compare.add_argument("legacy_report", type=Path)
+    trajectory_search_compare.add_argument("frontier_report", type=Path)
+    trajectory_search_compare.add_argument("diverse_report", type=Path)
+    trajectory_search_compare.add_argument("--legacy-config", type=Path, required=True)
+    trajectory_search_compare.add_argument("--frontier-config", type=Path, required=True)
+    trajectory_search_compare.add_argument("--diverse-config", type=Path, required=True)
+    trajectory_search_compare.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_search_compare.add_argument("--output", type=Path)
     combat_search_diagnostic = model_commands.add_parser(
         "evaluate-combat-search",
         help="Run the paired train-only combat-search diagnostic sweep",
@@ -2065,6 +2078,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(trajectory_verification, args.output)
                 return 0 if trajectory_verification["valid"] is True else 1
+            if args.model_command == "compare-run-trajectory-search":
+                trajectory_comparison = compare_trajectory_search_ablation(
+                    legacy_report_path=args.legacy_report,
+                    frontier_report_path=args.frontier_report,
+                    diverse_report_path=args.diverse_report,
+                    legacy_config=load_trajectory_search_config(args.legacy_config),
+                    frontier_config=load_trajectory_search_config(args.frontier_config),
+                    diverse_config=load_trajectory_search_config(args.diverse_config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                )
+                _emit_json(trajectory_comparison, args.output)
+                return 0
             if args.model_command == "search-run-trajectories":
                 search_config = load_trajectory_search_config(args.config)
                 search_checkpoint = load_production_model_checkpoint(args.checkpoint)

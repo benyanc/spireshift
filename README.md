@@ -206,7 +206,9 @@ teacher-ready state set only after its train-only coverage and liveness gates pa
 The [milestone-conditioned run-level trajectory search](docs/run-level-trajectory-search.md) starts
 from exact base-v2 runs, retains useful action prefixes, and adds bounded mutations across
 generations. It uses Act 1 boss reach and clear only as auxiliary foundation signals while preserving
-terminal full-run victory as the objective.
+terminal full-run victory as the objective. Its public-frontier ablation ranks otherwise tied
+trajectories by health and encounter progress, then tests strategic-trace diversity at the same
+trajectory budget as the frozen hash-ranked pilot.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

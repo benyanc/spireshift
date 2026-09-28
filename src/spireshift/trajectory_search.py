@@ -13,18 +13,133 @@ from typing import Any
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
-from spireshift.core.types import Observation
+from spireshift.core.types import DecisionType, Observation
 from spireshift.liveness import PublicNoOpActionGuard
 from spireshift.models import write_model_artifact
 from spireshift.splits import SplitManifest, SplitName
 
-TRAJECTORY_SEARCH_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v2"
-TRAJECTORY_SEARCH_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v1"
-TRAJECTORY_SEARCH_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v1"
-TRAJECTORY_SEARCH_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v1"
+LEGACY_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v2"
+FRONTIER_CONFIG_SCHEMA_VERSION = "run-level-trajectory-search-config-v3"
+LEGACY_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v1"
+FRONTIER_CASE_SCHEMA_VERSION = "run-level-trajectory-search-case-v2"
+LEGACY_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v1"
+FRONTIER_REPORT_SCHEMA_VERSION = "run-level-trajectory-search-v2"
+LEGACY_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v1"
+FRONTIER_VERIFICATION_SCHEMA_VERSION = "run-level-trajectory-search-verification-v2"
 MILESTONE_SCHEMA_VERSION = "act1-milestone-semantics-v2"
-SEARCH_CONTROLLER_ID = "policy-guided-trajectory-beam-v1"
-CLAIM_SCOPE = "train_only_act1_milestone_trajectory_search"
+FRONTIER_RANKING_SCHEMA_VERSION = "public-frontier-ranking-v1"
+FRONTIER_SUMMARY_SCHEMA_VERSION = "public-trajectory-frontier-v1"
+TRAJECTORY_SEARCH_ABLATION_SCHEMA_VERSION = "run-level-trajectory-search-ablation-v1"
+LEGACY_SEARCH_CONTROLLER_ID = "policy-guided-trajectory-beam-v1"
+FRONTIER_SEARCH_CONTROLLER_ID = "public-frontier-trajectory-beam-v2"
+LEGACY_CLAIM_SCOPE = "train_only_act1_milestone_trajectory_search"
+FRONTIER_CLAIM_SCOPE = "train_only_act1_public_frontier_ablation"
+
+HASH_TIEBREAK_STRATEGY = "hash_tiebreak_v1"
+PUBLIC_FRONTIER_STRATEGY = "public_frontier_v1"
+PUBLIC_FRONTIER_DIVERSE_STRATEGY = "public_frontier_diverse_v1"
+_FRONTIER_STRATEGIES = {
+    HASH_TIEBREAK_STRATEGY,
+    PUBLIC_FRONTIER_STRATEGY,
+    PUBLIC_FRONTIER_DIVERSE_STRATEGY,
+}
+_STRATEGIC_DECISION_TYPES = (
+    DecisionType.PATH.value,
+    DecisionType.REWARD.value,
+    DecisionType.EVENT.value,
+    DecisionType.REST_SITE.value,
+    DecisionType.SHOP.value,
+    DecisionType.TREASURE.value,
+    DecisionType.CARD_SELECTION.value,
+    DecisionType.RELIC_SELECTION.value,
+)
+_AUXILIARY_RANK_ORDER = (
+    "encounter_cleared",
+    "enemy_hp_defeated_fraction_ppm",
+    "player_hp_fraction_ppm",
+    "last_actionable_player_hp_fraction_ppm",
+    "distinct_public_states_on_floor",
+)
+
+
+@dataclass(frozen=True, slots=True)
+class PublicFrontierRanking:
+    strategy: str
+    enemy_hp_offset: int
+    enemy_slot_size: int
+    maximum_enemy_slots: int
+
+    def __post_init__(self) -> None:
+        if self.strategy not in _FRONTIER_STRATEGIES:
+            raise ValueError("Unknown public-frontier ranking strategy")
+        for name, value, minimum in (
+            ("enemy_hp_offset", self.enemy_hp_offset, 0),
+            ("enemy_slot_size", self.enemy_slot_size, 1),
+            ("maximum_enemy_slots", self.maximum_enemy_slots, 1),
+        ):
+            if isinstance(value, bool) or value < minimum:
+                raise ValueError(f"{name} must be at least {minimum}")
+
+    @property
+    def diversity_rule(self) -> str:
+        return (
+            "one_per_strategic_trace_then_fill_within_primary_rank"
+            if self.strategy == PUBLIC_FRONTIER_DIVERSE_STRATEGY
+            else "none"
+        )
+
+    def body(self) -> dict[str, object]:
+        return {
+            "schema_version": FRONTIER_RANKING_SCHEMA_VERSION,
+            "strategy": self.strategy,
+            "information_policy_id": "public-state-v1",
+            "enemy_hp_layout": {
+                "source": "observation_vector",
+                "offset": self.enemy_hp_offset,
+                "slot_size": self.enemy_slot_size,
+                "maximum_slots": self.maximum_enemy_slots,
+            },
+            "auxiliary_rank_order": list(_AUXILIARY_RANK_ORDER),
+            "strategic_decision_types": list(_STRATEGIC_DECISION_TYPES),
+            "diversity_rule": self.diversity_rule,
+            "primary_rank_rule": "victory_act1_clear_boss_reach_maximum_floor",
+        }
+
+    @property
+    def ranking_id(self) -> str:
+        return manifest_identifier(self.body())
+
+    def as_dict(self) -> dict[str, object]:
+        return {**self.body(), "ranking_id": self.ranking_id}
+
+    @classmethod
+    def from_mapping(cls, value: object) -> PublicFrontierRanking:
+        document = _mapping(value, "public-frontier ranking")
+        expected = {
+            "schema_version",
+            "ranking_id",
+            "strategy",
+            "information_policy_id",
+            "enemy_hp_layout",
+            "auxiliary_rank_order",
+            "strategic_decision_types",
+            "diversity_rule",
+            "primary_rank_rule",
+        }
+        if set(document) != expected:
+            raise ValueError("Public-frontier ranking fields differ")
+        layout = _mapping(document.get("enemy_hp_layout"), "enemy HP layout")
+        if set(layout) != {"source", "offset", "slot_size", "maximum_slots"}:
+            raise ValueError("Public-frontier enemy HP layout fields differ")
+        ranking = cls(
+            strategy=_string(document.get("strategy"), "frontier strategy"),
+            enemy_hp_offset=_integer(layout.get("offset"), "enemy HP offset"),
+            enemy_slot_size=_integer(layout.get("slot_size"), "enemy slot size"),
+            maximum_enemy_slots=_integer(layout.get("maximum_slots"), "maximum enemy slots"),
+        )
+        if document != ranking.as_dict():
+            raise ValueError("Public-frontier ranking contract or identity differs")
+        return ranking
 
 
 @dataclass(frozen=True, slots=True)
@@ -113,6 +228,7 @@ class TrajectorySearchConfig:
     no_op_fallback_threshold: int
     mutation_salt: str
     milestones: Act1Milestones
+    frontier_ranking: PublicFrontierRanking | None = None
     objective_id: str = "terminal-victory-v1"
     partition: str = SplitName.TRAIN.value
     exact_replay_only: bool = True
@@ -142,8 +258,8 @@ class TrajectorySearchConfig:
             raise ValueError("Trajectory search mutation salt must be non-empty")
 
     def body(self) -> dict[str, object]:
-        return {
-            "schema_version": TRAJECTORY_SEARCH_CONFIG_SCHEMA_VERSION,
+        body: dict[str, object] = {
+            "schema_version": self.schema_version,
             "split_manifest_id": self.split_manifest_id,
             "ruleset_manifest_id": self.ruleset_manifest_id,
             "objective_id": self.objective_id,
@@ -160,11 +276,58 @@ class TrajectorySearchConfig:
             "cycle_repetition_threshold": self.cycle_repetition_threshold,
             "liveness_tail_length": self.liveness_tail_length,
             "no_op_fallback_threshold": self.no_op_fallback_threshold,
-            "search_controller_id": SEARCH_CONTROLLER_ID,
+            "search_controller_id": self.search_controller_id,
             "mutation_salt": self.mutation_salt,
             "exact_replay_only": self.exact_replay_only,
             "milestones": self.milestones.as_dict(),
         }
+        if self.frontier_ranking is not None:
+            body["frontier_ranking"] = self.frontier_ranking.as_dict()
+        return body
+
+    @property
+    def schema_version(self) -> str:
+        return (
+            FRONTIER_CONFIG_SCHEMA_VERSION
+            if self.frontier_ranking is not None
+            else LEGACY_CONFIG_SCHEMA_VERSION
+        )
+
+    @property
+    def search_controller_id(self) -> str:
+        return (
+            FRONTIER_SEARCH_CONTROLLER_ID
+            if self.frontier_ranking is not None
+            else LEGACY_SEARCH_CONTROLLER_ID
+        )
+
+    @property
+    def case_schema_version(self) -> str:
+        return (
+            FRONTIER_CASE_SCHEMA_VERSION
+            if self.frontier_ranking is not None
+            else LEGACY_CASE_SCHEMA_VERSION
+        )
+
+    @property
+    def report_schema_version(self) -> str:
+        return (
+            FRONTIER_REPORT_SCHEMA_VERSION
+            if self.frontier_ranking is not None
+            else LEGACY_REPORT_SCHEMA_VERSION
+        )
+
+    @property
+    def verification_schema_version(self) -> str:
+        return (
+            FRONTIER_VERIFICATION_SCHEMA_VERSION
+            if self.frontier_ranking is not None
+            else LEGACY_VERIFICATION_SCHEMA_VERSION
+        )
+
+    @property
+    def claim_scope(self) -> str:
+        return FRONTIER_CLAIM_SCOPE if self.frontier_ranking is not None else LEGACY_CLAIM_SCOPE
 
     @property
     def config_id(self) -> str:
@@ -176,6 +339,9 @@ class TrajectorySearchConfig:
     @classmethod
     def from_mapping(cls, value: object) -> TrajectorySearchConfig:
         document = _mapping(value, "trajectory search config")
+        schema_version = document.get("schema_version")
+        if schema_version not in {LEGACY_CONFIG_SCHEMA_VERSION, FRONTIER_CONFIG_SCHEMA_VERSION}:
+            raise ValueError("Trajectory search config schema differs")
         expected = {
             "schema_version",
             "config_id",
@@ -200,11 +366,16 @@ class TrajectorySearchConfig:
             "exact_replay_only",
             "milestones",
         }
+        if schema_version == FRONTIER_CONFIG_SCHEMA_VERSION:
+            expected.add("frontier_ranking")
         if set(document) != expected:
             raise ValueError("Trajectory search config fields differ")
-        if document.get("schema_version") != TRAJECTORY_SEARCH_CONFIG_SCHEMA_VERSION:
-            raise ValueError("Trajectory search config schema differs")
-        if document.get("search_controller_id") != SEARCH_CONTROLLER_ID:
+        expected_controller = (
+            FRONTIER_SEARCH_CONTROLLER_ID
+            if schema_version == FRONTIER_CONFIG_SCHEMA_VERSION
+            else LEGACY_SEARCH_CONTROLLER_ID
+        )
+        if document.get("search_controller_id") != expected_controller:
             raise ValueError("Trajectory search controller differs")
         config = cls(
             split_manifest_id=_string(document.get("split_manifest_id"), "split manifest ID"),
@@ -236,6 +407,11 @@ class TrajectorySearchConfig:
             mutation_salt=_string(document.get("mutation_salt"), "mutation salt"),
             exact_replay_only=_boolean(document.get("exact_replay_only"), "exact replay flag"),
             milestones=Act1Milestones.from_mapping(document.get("milestones")),
+            frontier_ranking=(
+                PublicFrontierRanking.from_mapping(document.get("frontier_ranking"))
+                if schema_version == FRONTIER_CONFIG_SCHEMA_VERSION
+                else None
+            ),
         )
         if document.get("config_id") != config.config_id:
             raise ValueError("Trajectory search config identity mismatch")
@@ -340,7 +516,7 @@ def run_trajectory_search(
         and (case["best_trajectory"]["boss_reached"] or case["best_trajectory"]["act1_cleared"])
     ]
     body: dict[str, Any] = {
-        "schema_version": TRAJECTORY_SEARCH_REPORT_SCHEMA_VERSION,
+        "schema_version": config.report_schema_version,
         "started_at": started_at,
         "completed_at": (now or _utc_now)(),
         "config_id": config.config_id,
@@ -351,7 +527,7 @@ def run_trajectory_search(
         "ruleset_manifest_id": ruleset.manifest_id,
         "patch_id": ruleset.patch_id,
         "objective_id": "terminal-victory-v1",
-        "search_controller_id": SEARCH_CONTROLLER_ID,
+        "search_controller_id": config.search_controller_id,
         "hidden_state_resampling": False,
         "configuration": config.as_dict(),
         "milestone_preflight": milestone_preflight,
@@ -359,7 +535,7 @@ def run_trajectory_search(
         "milestone_cases": milestone_references,
         "summary": summary,
         "readiness": _readiness(summary),
-        "claim_scope": CLAIM_SCOPE,
+        "claim_scope": config.claim_scope,
     }
     report = {**body, "report_id": manifest_identifier(body)}
     write_model_artifact(report, report_path, label="trajectory search report")
@@ -386,7 +562,7 @@ def verify_trajectory_search(
         if report_id != manifest_identifier(body):
             raise ValueError("Trajectory search report identity mismatch")
         expected = {
-            "schema_version": TRAJECTORY_SEARCH_REPORT_SCHEMA_VERSION,
+            "schema_version": config.report_schema_version,
             "config_id": config.config_id,
             "model_id": config.model_id,
             "training_report_id": config.training_report_id,
@@ -394,10 +570,10 @@ def verify_trajectory_search(
             "partition": SplitName.TRAIN.value,
             "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
             "objective_id": split_manifest.objective_id,
-            "search_controller_id": SEARCH_CONTROLLER_ID,
+            "search_controller_id": config.search_controller_id,
             "hidden_state_resampling": False,
             "configuration": config.as_dict(),
-            "claim_scope": CLAIM_SCOPE,
+            "claim_scope": config.claim_scope,
         }
         if any(report.get(key) != value for key, value in expected.items()):
             raise ValueError("Trajectory search report provenance differs")
@@ -442,10 +618,10 @@ def verify_trajectory_search(
             raise ValueError("Trajectory search milestone references differ")
         if report.get("readiness") != _readiness(expected_summary):
             raise ValueError("Trajectory search readiness differs from its cases")
-    except (OSError, ValueError, json.JSONDecodeError) as error:
+    except (KeyError, OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         errors.append(str(error))
     body = {
-        "schema_version": TRAJECTORY_SEARCH_VERIFICATION_SCHEMA_VERSION,
+        "schema_version": config.verification_schema_version,
         "valid": not errors,
         "report_id": report_id,
         "config_id": config.config_id,
@@ -453,6 +629,140 @@ def verify_trajectory_search(
         "errors": errors,
     }
     return {**body, "verification_id": manifest_identifier(body)}
+
+
+def compare_trajectory_search_ablation(
+    *,
+    legacy_report_path: Path,
+    frontier_report_path: Path,
+    diverse_report_path: Path,
+    legacy_config: TrajectorySearchConfig,
+    frontier_config: TrajectorySearchConfig,
+    diverse_config: TrajectorySearchConfig,
+    split_manifest: SplitManifest,
+) -> dict[str, Any]:
+    arms = (
+        (HASH_TIEBREAK_STRATEGY, legacy_report_path, legacy_config),
+        (PUBLIC_FRONTIER_STRATEGY, frontier_report_path, frontier_config),
+        (PUBLIC_FRONTIER_DIVERSE_STRATEGY, diverse_report_path, diverse_config),
+    )
+    signatures = [_ablation_config_signature(config) for _, _, config in arms]
+    if any(signature != signatures[0] for signature in signatures[1:]):
+        raise ValueError("Trajectory-search ablation arms do not have equal frozen budgets")
+    if legacy_config.frontier_ranking is not None:
+        raise ValueError("Trajectory-search hash baseline must use the frozen v2 config")
+    if (
+        frontier_config.frontier_ranking is None
+        or frontier_config.frontier_ranking.strategy != PUBLIC_FRONTIER_STRATEGY
+    ):
+        raise ValueError("Trajectory-search frontier arm has the wrong strategy")
+    if (
+        diverse_config.frontier_ranking is None
+        or diverse_config.frontier_ranking.strategy != PUBLIC_FRONTIER_DIVERSE_STRATEGY
+    ):
+        raise ValueError("Trajectory-search diverse arm has the wrong strategy")
+
+    arm_reports: list[dict[str, Any]] = []
+    expected_seeds: set[int] | None = None
+    for strategy, path, config in arms:
+        verification = verify_trajectory_search(
+            path,
+            config=config,
+            split_manifest=split_manifest,
+        )
+        if verification["valid"] is not True:
+            raise ValueError(
+                f"Trajectory-search ablation arm {strategy} is invalid: {verification['errors']}"
+            )
+        report = _load_object(path, f"trajectory-search {strategy} report")
+        references = report.get("cases")
+        if not isinstance(references, list):
+            raise ValueError("Trajectory-search ablation arm has no cases")
+        seeds = {
+            _integer(_mapping(reference, "ablation case reference").get("seed"), "case seed")
+            for reference in references
+        }
+        if expected_seeds is None:
+            expected_seeds = seeds
+        elif seeds != expected_seeds:
+            raise ValueError("Trajectory-search ablation seed coverage differs")
+        summary = _mapping(report.get("summary"), "trajectory-search summary")
+        best = _mapping(summary.get("best"), "trajectory-search best summary")
+        arm_reports.append(
+            {
+                "strategy": strategy,
+                "config_id": config.config_id,
+                "report_id": report["report_id"],
+                "verification_id": verification["verification_id"],
+                "evaluated_trajectories": summary["evaluated_trajectories"],
+                "failed_seed_cases": summary["failed_seed_cases"],
+                "best": best,
+                "paired": summary["paired"],
+            }
+        )
+
+    hash_floor = float(arm_reports[0]["best"]["mean_maximum_floor"])
+    frontier_gain = _artifact_float(
+        float(arm_reports[1]["best"]["mean_maximum_floor"]) - hash_floor
+    )
+    diverse_gain = _artifact_float(float(arm_reports[2]["best"]["mean_maximum_floor"]) - hash_floor)
+    milestone_found = any(
+        int(arm["best"]["boss_reaches"]) > 0 or int(arm["best"]["act1_clears"]) > 0
+        for arm in arm_reports[1:]
+    )
+    material_threshold = 0.5
+    material_improvement = max(frontier_gain, diverse_gain) >= material_threshold
+    body: dict[str, Any] = {
+        "schema_version": TRAJECTORY_SEARCH_ABLATION_SCHEMA_VERSION,
+        "split_manifest_id": split_manifest.manifest_id,
+        "partition": SplitName.TRAIN.value,
+        "objective_id": split_manifest.objective_id,
+        "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
+        "seed_count": len(expected_seeds or ()),
+        "equal_budget": signatures[0],
+        "arms": arm_reports,
+        "comparison": {
+            "frontier_mean_maximum_floor_gain_over_hash": frontier_gain,
+            "diverse_mean_maximum_floor_gain_over_hash": diverse_gain,
+            "material_mean_maximum_floor_gain_threshold": material_threshold,
+            "boss_reach_or_act1_clear_found": milestone_found,
+            "material_fixed_budget_improvement_found": material_improvement,
+        },
+        "readiness": {
+            "advance_search_foundation": milestone_found or material_improvement,
+            "recommended_next_step": (
+                "advance_best_frontier_strategy"
+                if milestone_found or material_improvement
+                else "reassess_policy_representation_or_environment"
+            ),
+        },
+        "claim_scope": FRONTIER_CLAIM_SCOPE,
+    }
+    return {**body, "ablation_id": manifest_identifier(body)}
+
+
+def _ablation_config_signature(config: TrajectorySearchConfig) -> dict[str, Any]:
+    return {
+        "split_manifest_id": config.split_manifest_id,
+        "ruleset_manifest_id": config.ruleset_manifest_id,
+        "objective_id": config.objective_id,
+        "model_id": config.model_id,
+        "training_report_id": config.training_report_id,
+        "partition": config.partition,
+        "run_offset": config.run_offset,
+        "run_count": config.run_count,
+        "generations": config.generations,
+        "beam_width": config.beam_width,
+        "mutations_per_parent": config.mutations_per_parent,
+        "workers": config.workers,
+        "maximum_decisions_per_run": config.maximum_decisions_per_run,
+        "cycle_repetition_threshold": config.cycle_repetition_threshold,
+        "liveness_tail_length": config.liveness_tail_length,
+        "no_op_fallback_threshold": config.no_op_fallback_threshold,
+        "mutation_salt": config.mutation_salt,
+        "exact_replay_only": config.exact_replay_only,
+        "milestone_id": config.milestones.milestone_id,
+    }
 
 
 def _run_seed_search(
@@ -476,7 +786,7 @@ def _run_seed_search(
         )
         trajectories = [baseline]
         beam = [baseline]
-        generations = [_generation_record(0, [baseline], baseline)]
+        generations = [_generation_record(0, [baseline], [baseline], baseline, config=config)]
         incumbent = baseline
         seen_plans: set[tuple[str, int, str]] = set()
         for generation in range(1, config.generations + 1):
@@ -508,14 +818,18 @@ def _run_seed_search(
             if not children:
                 break
             trajectories.extend(children)
-            beam = _select_beam([*beam, *children], width=config.beam_width)
+            beam = _select_beam([*beam, *children], config=config)
             next_incumbent = beam[0]
-            if _trajectory_rank(next_incumbent) < _trajectory_rank(incumbent):
+            if _selection_rank(next_incumbent, config=config) < _selection_rank(
+                incumbent, config=config
+            ):
                 raise RuntimeError("Trajectory search incumbent regressed")
             incumbent = next_incumbent
-            generations.append(_generation_record(generation, children, incumbent))
+            generations.append(
+                _generation_record(generation, children, beam, incumbent, config=config)
+            )
         body: dict[str, Any] = {
-            "schema_version": TRAJECTORY_SEARCH_CASE_SCHEMA_VERSION,
+            "schema_version": config.case_schema_version,
             "config_id": config.config_id,
             "seed": seed,
             "partition": SplitName.TRAIN.value,
@@ -523,19 +837,19 @@ def _run_seed_search(
             "policy_id": policy.policy_id,
             "ruleset_manifest_id": ruleset.manifest_id,
             "milestone_id": config.milestones.milestone_id,
-            "search_controller_id": SEARCH_CONTROLLER_ID,
+            "search_controller_id": config.search_controller_id,
             "hidden_state_resampling": False,
             "status": "completed",
             "error": None,
             "baseline_trajectory_id": baseline["trajectory_id"],
             "best_trajectory_id": incumbent["trajectory_id"],
-            "best_trajectory": _trajectory_outcome(incumbent),
+            "best_trajectory": _trajectory_outcome(incumbent, config=config),
             "generations": generations,
             "trajectories": trajectories,
         }
     except Exception as error:
         body = {
-            "schema_version": TRAJECTORY_SEARCH_CASE_SCHEMA_VERSION,
+            "schema_version": config.case_schema_version,
             "config_id": config.config_id,
             "seed": seed,
             "partition": SplitName.TRAIN.value,
@@ -543,7 +857,7 @@ def _run_seed_search(
             "policy_id": policy.policy_id,
             "ruleset_manifest_id": ruleset.manifest_id,
             "milestone_id": config.milestones.milestone_id,
-            "search_controller_id": SEARCH_CONTROLLER_ID,
+            "search_controller_id": config.search_controller_id,
             "hidden_state_resampling": False,
             "status": "failed",
             "error": f"{type(error).__name__}: {error}",
@@ -573,6 +887,7 @@ def _run_trajectory(
         if environment.ruleset != ruleset:
             raise ValueError("Trajectory search environment ruleset changed")
         observation = environment.reset(seed)
+        public_observations = [observation]
         guard = PublicNoOpActionGuard(
             repetition_threshold=config.no_op_fallback_threshold,
             event_limit=config.liveness_tail_length,
@@ -658,6 +973,7 @@ def _run_trajectory(
             source = observation
             transition = environment.step(selected)
             observation = transition.next_observation
+            public_observations.append(observation)
             guard.observe_transition(
                 observation=source,
                 action=selected,
@@ -750,12 +1066,166 @@ def _run_trajectory(
             },
             "fallback": guard.as_dict(),
         }
+        if config.frontier_ranking is not None:
+            body["public_frontier"] = _public_frontier_summary(
+                observations=public_observations,
+                records=records,
+                maximum_floor=maximum_floor,
+                ranking=config.frontier_ranking,
+            )
         return {**body, "trajectory_id": manifest_identifier(body)}
     finally:
         if environment is not None:
             close = getattr(environment, "close", None)
             if callable(close):
                 close()
+
+
+def _public_frontier_summary(
+    *,
+    observations: Sequence[Observation],
+    records: Sequence[dict[str, Any]],
+    maximum_floor: int,
+    ranking: PublicFrontierRanking,
+) -> dict[str, Any]:
+    deepest_observations = [
+        observation
+        for observation in observations
+        if (_public_integer(observation.public_state.get("floor")) or 0) == maximum_floor
+    ]
+    if not deepest_observations:
+        raise ValueError("Trajectory has no public observation at its maximum floor")
+    deepest = deepest_observations[-1]
+    actionable = next(
+        (
+            observation
+            for observation in reversed(deepest_observations)
+            if observation.decision_type is not DecisionType.TERMINAL
+            and observation.public_state.get("terminal") is not True
+        ),
+        None,
+    )
+    enemy_source = deepest
+    enemy_snapshot = _enemy_hp_snapshot(enemy_source, ranking=ranking)
+    if enemy_snapshot is None and actionable is not None:
+        enemy_source = actionable
+        enemy_snapshot = _enemy_hp_snapshot(enemy_source, ranking=ranking)
+    encounter_identity = _encounter_identity(enemy_source)
+    enemy_references = [
+        snapshot[0]
+        for observation in deepest_observations
+        if _encounter_identity(observation) == encounter_identity
+        and (snapshot := _enemy_hp_snapshot(observation, ranking=ranking)) is not None
+    ]
+    enemy_current = None if enemy_snapshot is None else enemy_snapshot[0]
+    living_enemies = None if enemy_snapshot is None else enemy_snapshot[1]
+    enemy_reference = max(enemy_references) if enemy_references else None
+    enemy_defeated_fraction = (
+        _artifact_float(1.0 - (enemy_current / enemy_reference))
+        if enemy_current is not None and enemy_reference is not None and enemy_reference > 0
+        else None
+    )
+    deepest_hp = _hp_values(deepest)
+    actionable_hp = None if actionable is None else _hp_values(actionable)
+    strategic_trace = manifest_identifier(
+        {
+            "schema_version": "strategic-action-trace-v1",
+            "decisions": [
+                {
+                    "decision_index": record["decision_index"],
+                    "decision_type": record["decision_type"],
+                    "selected_action_id": record["selected_action_id"],
+                }
+                for record in records
+                if record.get("decision_type") in _STRATEGIC_DECISION_TYPES
+            ],
+        }
+    )
+    state = deepest.public_state
+    enemy_state_hash = None if enemy_snapshot is None else enemy_source.state_hash
+    body: dict[str, Any] = {
+        "schema_version": FRONTIER_SUMMARY_SCHEMA_VERSION,
+        "ranking_id": ranking.ranking_id,
+        "information_policy_id": "public-state-v1",
+        "state_hash": deepest.state_hash,
+        "last_actionable_state_hash": None if actionable is None else actionable.state_hash,
+        "enemy_snapshot_state_hash": enemy_state_hash,
+        "floor": maximum_floor,
+        "act": _public_scalar(state.get("act")),
+        "decision_type": deepest.decision_type.value,
+        "last_actionable_decision_type": (
+            None if actionable is None else actionable.decision_type.value
+        ),
+        "phase": _public_scalar(state.get("phase")),
+        "terminal": state.get("terminal") is True,
+        "player_hp": None if deepest_hp is None else deepest_hp[0],
+        "player_max_hp": None if deepest_hp is None else deepest_hp[1],
+        "player_hp_fraction": None if deepest_hp is None else deepest_hp[2],
+        "last_actionable_player_hp_fraction": (None if actionable_hp is None else actionable_hp[2]),
+        "encounter_id": _public_scalar(enemy_source.public_state.get("encounter_id")),
+        "encounter": (
+            enemy_source.public_state.get("encounter")
+            if isinstance(enemy_source.public_state.get("encounter"), str)
+            else None
+        ),
+        "decisions_on_floor": sum(
+            (_public_integer(record.get("source_floor")) or 0) == maximum_floor
+            for record in records
+        ),
+        "distinct_public_states_on_floor": len(
+            {observation.state_hash for observation in deepest_observations}
+        ),
+        "enemy_hp_available": enemy_snapshot is not None,
+        "enemy_hp_current": enemy_current,
+        "enemy_hp_reference": enemy_reference,
+        "enemy_hp_defeated_fraction": enemy_defeated_fraction,
+        "living_enemy_count": living_enemies,
+        "encounter_cleared": (
+            enemy_current == 0 and enemy_reference is not None and enemy_reference > 0
+        ),
+        "strategic_trace_sha256": strategic_trace,
+    }
+    return {**body, "frontier_id": manifest_identifier(body)}
+
+
+def _enemy_hp_snapshot(
+    observation: Observation, *, ranking: PublicFrontierRanking
+) -> tuple[int, int] | None:
+    state = observation.public_state
+    vector = state.get("observation_vector")
+    enemy_ids = state.get("enemy_def_ids")
+    if not isinstance(vector, list) or not isinstance(enemy_ids, list) or not enemy_ids:
+        return None
+    slots = min(len(enemy_ids), ranking.maximum_enemy_slots)
+    hit_points: list[int] = []
+    for slot in range(slots):
+        index = ranking.enemy_hp_offset + slot * ranking.enemy_slot_size
+        if index >= len(vector):
+            return None
+        value = vector[index]
+        if not isinstance(value, int) or isinstance(value, bool):
+            return None
+        hit_points.append(max(0, value))
+    return sum(hit_points), sum(value > 0 for value in hit_points)
+
+
+def _encounter_identity(observation: Observation) -> tuple[object, object]:
+    state = observation.public_state
+    return (_public_scalar(state.get("encounter_id")), _public_scalar(state.get("encounter")))
+
+
+def _hp_values(observation: Observation) -> tuple[int, int, float] | None:
+    hp = _public_integer(observation.public_state.get("player_hp"))
+    maximum = _public_integer(observation.public_state.get("player_max_hp"))
+    if hp is None or maximum is None or maximum <= 0:
+        return None
+    return hp, maximum, _artifact_float(min(1.0, max(0.0, hp / maximum)))
+
+
+def _public_scalar(value: object) -> int | str | None:
+    if isinstance(value, bool):
+        return None
+    return value if isinstance(value, (int, str)) else None
 
 
 def _mutation_plans(
@@ -807,14 +1277,49 @@ def _mutation_plans(
     return plans
 
 
-def _select_beam(trajectories: Sequence[dict[str, Any]], *, width: int) -> list[dict[str, Any]]:
+def _select_beam(
+    trajectories: Sequence[dict[str, Any]], *, config: TrajectorySearchConfig
+) -> list[dict[str, Any]]:
     unique: dict[str, dict[str, Any]] = {}
     for trajectory in trajectories:
         trace = str(trajectory["action_trace_sha256"])
         current = unique.get(trace)
-        if current is None or _trajectory_rank(trajectory) > _trajectory_rank(current):
+        if current is None or _trajectory_sort_key(
+            trajectory, config=config
+        ) < _trajectory_sort_key(current, config=config):
             unique[trace] = trajectory
-    return sorted(unique.values(), key=_trajectory_sort_key)[:width]
+    ordered = sorted(
+        unique.values(), key=lambda trajectory: _trajectory_sort_key(trajectory, config=config)
+    )
+    if (
+        config.frontier_ranking is None
+        or config.frontier_ranking.strategy != PUBLIC_FRONTIER_DIVERSE_STRATEGY
+    ):
+        return ordered[: config.beam_width]
+
+    selected: list[dict[str, Any]] = []
+    primary_ranks: list[tuple[int, int, int, int]] = []
+    for trajectory in ordered:
+        rank = _trajectory_rank(trajectory)
+        if rank not in primary_ranks:
+            primary_ranks.append(rank)
+    for rank in primary_ranks:
+        remaining = config.beam_width - len(selected)
+        if remaining <= 0:
+            break
+        group = [trajectory for trajectory in ordered if _trajectory_rank(trajectory) == rank]
+        diverse: list[dict[str, Any]] = []
+        duplicates: list[dict[str, Any]] = []
+        seen_strategic_traces: set[str] = set()
+        for trajectory in group:
+            strategic_trace = _frontier_strategic_trace(trajectory)
+            if strategic_trace in seen_strategic_traces:
+                duplicates.append(trajectory)
+            else:
+                seen_strategic_traces.add(strategic_trace)
+                diverse.append(trajectory)
+        selected.extend([*diverse, *duplicates][:remaining])
+    return sorted(selected, key=lambda trajectory: _trajectory_sort_key(trajectory, config=config))
 
 
 def _trajectory_rank(trajectory: dict[str, Any]) -> tuple[int, int, int, int]:
@@ -826,26 +1331,81 @@ def _trajectory_rank(trajectory: dict[str, Any]) -> tuple[int, int, int, int]:
     )
 
 
-def _trajectory_sort_key(trajectory: dict[str, Any]) -> tuple[int, int, int, int, str]:
-    rank = _trajectory_rank(trajectory)
-    return (-rank[0], -rank[1], -rank[2], -rank[3], str(trajectory["action_trace_sha256"]))
+def _auxiliary_rank(trajectory: dict[str, Any]) -> tuple[int, int, int, int, int]:
+    frontier = _mapping(trajectory.get("public_frontier"), "trajectory public frontier")
+    defeated_fraction = frontier.get("enemy_hp_defeated_fraction")
+    player_fraction = frontier.get("player_hp_fraction")
+    actionable_fraction = frontier.get("last_actionable_player_hp_fraction")
+    return (
+        int(frontier.get("encounter_cleared") is True),
+        _fraction_parts_per_million(defeated_fraction),
+        _fraction_parts_per_million(player_fraction),
+        _fraction_parts_per_million(actionable_fraction),
+        min(
+            1_000_000,
+            _integer(
+                frontier.get("distinct_public_states_on_floor"),
+                "frontier distinct public states",
+            ),
+        ),
+    )
+
+
+def _selection_rank(
+    trajectory: dict[str, Any], *, config: TrajectorySearchConfig
+) -> tuple[int, ...]:
+    primary = _trajectory_rank(trajectory)
+    if (
+        config.frontier_ranking is None
+        or config.frontier_ranking.strategy == HASH_TIEBREAK_STRATEGY
+    ):
+        return primary
+    return (*primary, *_auxiliary_rank(trajectory))
+
+
+def _trajectory_sort_key(
+    trajectory: dict[str, Any], *, config: TrajectorySearchConfig
+) -> tuple[object, ...]:
+    rank = _selection_rank(trajectory, config=config)
+    return (*(-value for value in rank), str(trajectory["action_trace_sha256"]))
+
+
+def _frontier_strategic_trace(trajectory: dict[str, Any]) -> str:
+    frontier = _mapping(trajectory.get("public_frontier"), "trajectory public frontier")
+    return _string(frontier.get("strategic_trace_sha256"), "strategic trace SHA-256")
 
 
 def _generation_record(
     generation: int,
     evaluated: Sequence[dict[str, Any]],
+    beam: Sequence[dict[str, Any]],
     incumbent: dict[str, Any],
+    *,
+    config: TrajectorySearchConfig,
 ) -> dict[str, Any]:
-    return {
+    record: dict[str, Any] = {
         "generation": generation,
         "evaluated_trajectory_ids": [item["trajectory_id"] for item in evaluated],
         "incumbent_trajectory_id": incumbent["trajectory_id"],
         "incumbent_rank": list(_trajectory_rank(incumbent)),
     }
+    if config.frontier_ranking is not None:
+        record.update(
+            {
+                "incumbent_auxiliary_rank": list(_auxiliary_rank(incumbent)),
+                "beam_trajectory_ids": [item["trajectory_id"] for item in beam],
+                "beam_distinct_strategic_traces": len(
+                    {_frontier_strategic_trace(item) for item in beam}
+                ),
+            }
+        )
+    return record
 
 
-def _trajectory_outcome(trajectory: dict[str, Any]) -> dict[str, Any]:
-    return {
+def _trajectory_outcome(
+    trajectory: dict[str, Any], *, config: TrajectorySearchConfig
+) -> dict[str, Any]:
+    outcome: dict[str, Any] = {
         "trajectory_id": trajectory["trajectory_id"],
         "terminal": trajectory["terminal"],
         "victory": trajectory["victory"],
@@ -854,6 +1414,14 @@ def _trajectory_outcome(trajectory: dict[str, Any]) -> dict[str, Any]:
         "maximum_floor": trajectory["maximum_floor"],
         "action_trace_sha256": trajectory["action_trace_sha256"],
     }
+    if config.frontier_ranking is not None:
+        outcome.update(
+            {
+                "auxiliary_rank": list(_auxiliary_rank(trajectory)),
+                "public_frontier_id": trajectory["public_frontier"]["frontier_id"],
+            }
+        )
+    return outcome
 
 
 def _summary(cases: Sequence[dict[str, Any]]) -> dict[str, Any]:
@@ -954,6 +1522,111 @@ def _readiness(summary: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _validate_public_frontier(
+    value: object,
+    *,
+    trajectory: dict[str, Any],
+    ranking: PublicFrontierRanking,
+) -> None:
+    frontier = _mapping(value, "trajectory public frontier")
+    expected_fields = {
+        "schema_version",
+        "frontier_id",
+        "ranking_id",
+        "information_policy_id",
+        "state_hash",
+        "last_actionable_state_hash",
+        "enemy_snapshot_state_hash",
+        "floor",
+        "act",
+        "decision_type",
+        "last_actionable_decision_type",
+        "phase",
+        "terminal",
+        "player_hp",
+        "player_max_hp",
+        "player_hp_fraction",
+        "last_actionable_player_hp_fraction",
+        "encounter_id",
+        "encounter",
+        "decisions_on_floor",
+        "distinct_public_states_on_floor",
+        "enemy_hp_available",
+        "enemy_hp_current",
+        "enemy_hp_reference",
+        "enemy_hp_defeated_fraction",
+        "living_enemy_count",
+        "encounter_cleared",
+        "strategic_trace_sha256",
+    }
+    if set(frontier) != expected_fields:
+        raise ValueError("Public-frontier fields differ")
+    frontier_id = _string(frontier.get("frontier_id"), "public-frontier ID")
+    body = {key: item for key, item in frontier.items() if key != "frontier_id"}
+    if frontier_id != manifest_identifier(body):
+        raise ValueError("Public-frontier identity mismatch")
+    expected = {
+        "schema_version": FRONTIER_SUMMARY_SCHEMA_VERSION,
+        "ranking_id": ranking.ranking_id,
+        "information_policy_id": "public-state-v1",
+        "floor": trajectory.get("maximum_floor"),
+        "state_hash": trajectory.get("final_state_hash"),
+    }
+    if any(frontier.get(key) != item for key, item in expected.items()):
+        raise ValueError("Public-frontier provenance or maximum-floor state differs")
+    if frontier.get("terminal") is not trajectory.get("terminal"):
+        raise ValueError("Public-frontier terminal evidence differs")
+    for key in ("decisions_on_floor", "distinct_public_states_on_floor"):
+        if _integer(frontier.get(key), key) < 0:
+            raise ValueError(f"{key} must be nonnegative")
+    if _integer(frontier.get("distinct_public_states_on_floor"), "frontier states") < 1:
+        raise ValueError("Public frontier must contain at least one state")
+    for key in ("player_hp_fraction", "last_actionable_player_hp_fraction"):
+        _fraction_parts_per_million(frontier.get(key))
+    enemy_available = _boolean(frontier.get("enemy_hp_available"), "enemy HP availability")
+    enemy_fields = (
+        frontier.get("enemy_hp_current"),
+        frontier.get("enemy_hp_reference"),
+        frontier.get("living_enemy_count"),
+    )
+    if enemy_available:
+        if any(value is None for value in enemy_fields):
+            raise ValueError("Available public enemy HP evidence is incomplete")
+        current = _integer(enemy_fields[0], "enemy HP current")
+        reference = _integer(enemy_fields[1], "enemy HP reference")
+        living = _integer(enemy_fields[2], "living enemy count")
+        if min(current, reference, living) < 0 or current > reference:
+            raise ValueError("Public enemy HP evidence is invalid")
+        expected_fraction = _artifact_float(1.0 - current / reference) if reference > 0 else None
+        if frontier.get("enemy_hp_defeated_fraction") != expected_fraction:
+            raise ValueError("Public enemy HP progress differs")
+        if frontier.get("encounter_cleared") is not (current == 0 and reference > 0):
+            raise ValueError("Public encounter-clear evidence differs")
+    elif (
+        any(value is not None for value in enemy_fields)
+        or frontier.get("enemy_hp_defeated_fraction") is not None
+    ):
+        raise ValueError("Unavailable public enemy HP evidence is populated")
+    elif frontier.get("encounter_cleared") is not False:
+        raise ValueError("Unavailable enemy evidence cannot mark an encounter clear")
+    strategic_trace = manifest_identifier(
+        {
+            "schema_version": "strategic-action-trace-v1",
+            "decisions": [
+                {
+                    "decision_index": record["decision_index"],
+                    "decision_type": record["decision_type"],
+                    "selected_action_id": record["selected_action_id"],
+                }
+                for record in trajectory["decisions"]
+                if record.get("decision_type") in _STRATEGIC_DECISION_TYPES
+            ],
+        }
+    )
+    if frontier.get("strategic_trace_sha256") != strategic_trace:
+        raise ValueError("Public-frontier strategic trace differs")
+
+
 def _validate_case(case: dict[str, Any], *, config: TrajectorySearchConfig) -> None:
     if case.get("status") not in ("completed", "failed"):
         raise ValueError("Trajectory search case status differs")
@@ -1005,6 +1678,14 @@ def _validate_case(case: dict[str, Any], *, config: TrajectorySearchConfig) -> N
             raise ValueError("Trajectory Act 1 clear evidence differs")
         if item.get("boss_reached") is not expected_reach:
             raise ValueError("Trajectory boss-reach evidence differs")
+        if config.frontier_ranking is not None:
+            _validate_public_frontier(
+                item.get("public_frontier"),
+                trajectory=item,
+                ranking=config.frontier_ranking,
+            )
+        elif "public_frontier" in item:
+            raise ValueError("Legacy trajectory unexpectedly contains a public frontier")
         liveness = _mapping(item.get("liveness"), "trajectory liveness")
         if liveness.get("schema_version") != "trajectory-search-liveness-v1":
             raise ValueError("Trajectory liveness schema differs")
@@ -1049,7 +1730,8 @@ def _validate_case(case: dict[str, Any], *, config: TrajectorySearchConfig) -> N
         raise ValueError("Trajectory search baseline is not generation zero")
     if any(record.get("selection_source") != "base_policy" for record in baseline["decisions"]):
         raise ValueError("Trajectory search baseline does not exactly use the base policy")
-    incumbent_rank: tuple[int, int, int, int] | None = None
+    incumbent_rank: tuple[int, ...] | None = None
+    previous_beam: list[dict[str, Any]] = []
     for expected_generation, raw_generation in enumerate(generations):
         generation = _mapping(raw_generation, "generation record")
         if generation.get("generation") != expected_generation:
@@ -1067,21 +1749,35 @@ def _validate_case(case: dict[str, Any], *, config: TrajectorySearchConfig) -> N
         ):
             raise ValueError("Trajectory search generation membership differs")
         incumbent = by_id[str(incumbent_id)]
-        rank = _trajectory_rank(incumbent)
-        if generation.get("incumbent_rank") != list(rank):
+        primary_rank = _trajectory_rank(incumbent)
+        rank = _selection_rank(incumbent, config=config)
+        if generation.get("incumbent_rank") != list(primary_rank):
             raise ValueError("Trajectory search incumbent rank differs")
+        evaluated = [by_id[str(trajectory_id)] for trajectory_id in evaluated_ids]
+        if config.frontier_ranking is not None:
+            if generation.get("incumbent_auxiliary_rank") != list(_auxiliary_rank(incumbent)):
+                raise ValueError("Trajectory search incumbent auxiliary rank differs")
+            expected_beam = _select_beam(
+                [*previous_beam, *evaluated] if expected_generation else evaluated,
+                config=config,
+            )
+            expected_beam_ids = [item["trajectory_id"] for item in expected_beam]
+            if generation.get("beam_trajectory_ids") != expected_beam_ids:
+                raise ValueError("Trajectory search beam selection differs")
+            expected_diversity = len({_frontier_strategic_trace(item) for item in expected_beam})
+            if generation.get("beam_distinct_strategic_traces") != expected_diversity:
+                raise ValueError("Trajectory search beam diversity evidence differs")
+            previous_beam = expected_beam
         if incumbent_rank is not None and rank < incumbent_rank:
             raise ValueError("Trajectory search incumbent regressed")
         incumbent_rank = rank
-    expected_best = max(
-        by_id.values(), key=lambda item: (_trajectory_rank(item), _trace_tiebreak(item))
-    )
+    expected_best = min(by_id.values(), key=lambda item: _trajectory_sort_key(item, config=config))
     actual_best = by_id[str(best_id)]
     if actual_best["trajectory_id"] != expected_best["trajectory_id"]:
         raise ValueError("Trajectory search best outcome is not maximal")
     if generations[-1]["incumbent_trajectory_id"] != best_id:
         raise ValueError("Trajectory search final incumbent differs from the best trajectory")
-    if case.get("best_trajectory") != _trajectory_outcome(actual_best):
+    if case.get("best_trajectory") != _trajectory_outcome(actual_best, config=config):
         raise ValueError("Trajectory search best outcome differs")
 
 
@@ -1110,7 +1806,7 @@ def _load_case_document(
     if case_id != manifest_identifier(body):
         raise ValueError("Trajectory search case identity mismatch")
     expected = {
-        "schema_version": TRAJECTORY_SEARCH_CASE_SCHEMA_VERSION,
+        "schema_version": config.case_schema_version,
         "config_id": config.config_id,
         "seed": seed,
         "partition": SplitName.TRAIN.value,
@@ -1118,7 +1814,7 @@ def _load_case_document(
         "policy_id": f"production-checkpoint-policy-v1:{config.model_id}",
         "ruleset_manifest_id": config.ruleset_manifest_id,
         "milestone_id": config.milestones.milestone_id,
-        "search_controller_id": SEARCH_CONTROLLER_ID,
+        "search_controller_id": config.search_controller_id,
         "hidden_state_resampling": False,
     }
     if any(case.get(key) != value for key, value in expected.items()):
@@ -1227,10 +1923,6 @@ def _divergence(
     }
 
 
-def _trace_tiebreak(trajectory: dict[str, Any]) -> int:
-    return -int(str(trajectory["action_trace_sha256"]).split(":", 1)[-1], 16)
-
-
 def _digest_integer(*parts: object) -> int:
     return int.from_bytes(hashlib.sha256("\n".join(map(str, parts)).encode()).digest(), "big")
 
@@ -1265,6 +1957,17 @@ def _artifact_float(value: float) -> float:
     if not math.isfinite(value):
         raise ValueError("Artifact float must be finite")
     return float(f"{value:.12g}")
+
+
+def _fraction_parts_per_million(value: object) -> int:
+    if value is None:
+        return 0
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        raise ValueError("Public-frontier fraction must be numeric or null")
+    numeric = float(value)
+    if not math.isfinite(numeric) or not 0.0 <= numeric <= 1.0:
+        raise ValueError("Public-frontier fraction must be between zero and one")
+    return round(numeric * 1_000_000)
 
 
 def _load_object(path: Path, label: str) -> dict[str, Any]:
