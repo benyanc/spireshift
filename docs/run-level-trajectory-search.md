@@ -74,3 +74,26 @@ Any best trajectory that reaches the boss or enters Act 2 is enough to justify a
 labeling package. A terminal victory additionally unblocks mixed terminal-value evidence once the
 existing defeats are included. If no seed reaches the boss, the pilot stops; scaling the same search
 is not authorized until the policy representation or environment milestone surface is audited.
+
+## Frozen pilot result
+
+The owner-run v2 pilot completed all 16 train seed cases and the independent verifier accepted all
+16. It evaluated 1,872 terminal trajectories, applied all 1,856 requested mutations, and recorded no
+replay divergences. The search improved mean maximum floor from 6.625 to 9.0625; 14 seeds improved,
+none regressed, and the best trajectory reached floor 15. It produced no boss reaches, Act 1 clears,
+or victories, so it did not pass the prespecified advancement gate.
+
+The run used 1,323.42 wall seconds, 0.397 CPU-hours, 452 MB peak resident memory, and 155.8 MB of
+artifact storage. The frozen identities are:
+
+- search report: `sha256:8a21b3cece76507bce73a6c7b4790f6e734bbd7a773c349266b08905914881c5`;
+- independent verification: `sha256:57da185ce5c164df21e6f1b308f3173b6652562120396699e5f6d37d75f18d79`;
+- resource report: `sha256:24e4cbe5cf4599fb17c483a08eec2e969d91b4a34c46c6be40b58fedd21781da`.
+
+Post-run analysis found 24 trajectories at floor 15 and no trajectory at floor 16 or 17. Only 37
+of 1,856 child mutations improved maximum floor or a milestone over their parent. More importantly,
+each generation contained many candidates tied at its deepest floor, while the v2 beam used an
+action-trace hash to resolve those ties. No seed made a real rank improvement in generation eight.
+The next experiment therefore needs a public-state measure of within-floor progress and diverse beam
+retention before any larger trajectory-search run. More seeds or generations with the v2 ranking are
+not justified by this result.
