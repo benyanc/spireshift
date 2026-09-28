@@ -209,6 +209,11 @@ from spireshift.terminal_discovery import (
     run_terminal_trajectory_discovery,
     verify_terminal_trajectory_discovery,
 )
+from spireshift.trajectory_search import (
+    load_trajectory_search_config,
+    run_trajectory_search,
+    verify_trajectory_search,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
@@ -815,6 +820,26 @@ def build_parser() -> argparse.ArgumentParser:
     terminal_discovery_verify.add_argument("config", type=Path)
     terminal_discovery_verify.add_argument("--split-manifest", type=Path, required=True)
     terminal_discovery_verify.add_argument("--output", type=Path)
+    trajectory_search = model_commands.add_parser(
+        "search-run-trajectories",
+        help="Run exact-replay train-only beam search over coherent run trajectories",
+    )
+    trajectory_search.add_argument("config", type=Path)
+    trajectory_search.add_argument("checkpoint", type=Path)
+    trajectory_search.add_argument("--report", type=Path, required=True)
+    trajectory_search.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_search.add_argument("--upstream-root", type=Path, required=True)
+    trajectory_search.add_argument("--manifest", type=Path, required=True)
+    trajectory_search.add_argument("--output-dir", type=Path, required=True)
+    trajectory_search.add_argument("--resume", action="store_true")
+    trajectory_search_verify = model_commands.add_parser(
+        "verify-run-trajectory-search",
+        help="Verify trajectory-search identities, parentage, monotonicity, and summaries",
+    )
+    trajectory_search_verify.add_argument("search", type=Path)
+    trajectory_search_verify.add_argument("config", type=Path)
+    trajectory_search_verify.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_search_verify.add_argument("--output", type=Path)
     combat_search_diagnostic = model_commands.add_parser(
         "evaluate-combat-search",
         help="Run the paired train-only combat-search diagnostic sweep",
@@ -2032,6 +2057,57 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(terminal_result.report, None)
                 return 0 if terminal_result.successful else 1
+            if args.model_command == "verify-run-trajectory-search":
+                trajectory_verification = verify_trajectory_search(
+                    args.search,
+                    config=load_trajectory_search_config(args.config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                )
+                _emit_json(trajectory_verification, args.output)
+                return 0 if trajectory_verification["valid"] is True else 1
+            if args.model_command == "search-run-trajectories":
+                search_config = load_trajectory_search_config(args.config)
+                search_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                search_training_report = load_production_training_report(
+                    args.report, checkpoint=search_checkpoint
+                )
+                search_split = load_split_manifest(args.split_manifest)
+                search_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=search_config.maximum_decisions_per_run + 1,
+                )
+                probe_environment = search_backend.factory()
+                try:
+                    search_ruleset = probe_environment.ruleset
+                    search_policy = ProductionCheckpointPolicy(
+                        checkpoint=search_checkpoint,
+                        training_report=search_training_report,
+                        ruleset=search_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                trajectory_result = run_trajectory_search(
+                    environment_factory=search_backend.factory,
+                    ruleset=search_ruleset,
+                    policy=search_policy,
+                    split_manifest=search_split,
+                    training_report_id=str(search_training_report["report_id"]),
+                    config=search_config,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                trajectory_summary = trajectory_result.report["summary"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(trajectory_summary["evaluated_trajectories"]),
+                        transitions=int(trajectory_summary["decisions"]),
+                    )
+                )
+                _emit_json(trajectory_result.report, None)
+                return 0 if trajectory_result.successful else 1
             if args.model_command == "verify-evaluation-curriculum":
                 evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 evaluation_training_report = load_production_training_report(

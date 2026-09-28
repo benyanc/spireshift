@@ -54,7 +54,9 @@ The repository currently contains the research contracts and a seeded mock verti
 27. a compute-capped combat-advancement continuation that pairs hidden worlds across legal actions,
     rejects public-action mismatches, and bootstraps short horizons from learned progress and risk; and
 28. a cycle-safe production DAgger collector with complete-run ownership, resumable cases,
-    uncertainty, rarity, and terminal-frontier selection, plus versioned causal intervention labels.
+    uncertainty, rarity, and terminal-frontier selection, plus versioned causal intervention labels; and
+29. an exact-replay, train-only run-level trajectory beam that retains coherent improvements across
+    generations and reports Act 1 boss reach, Act 1 clear, and terminal victory separately.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -200,6 +202,11 @@ The [production policy-improvement iteration](docs/production-policy-improvement
 workflow to the admitted STS2 engine and accepted base-v2 checkpoint. It uses the shared public
 no-op guard, keeps the completed tactical interventions as causal preferences, and emits a
 teacher-ready state set only after its train-only coverage and liveness gates pass.
+
+The [milestone-conditioned run-level trajectory search](docs/run-level-trajectory-search.md) starts
+from exact base-v2 runs, retains useful action prefixes, and adds bounded mutations across
+generations. It uses Act 1 boss reach and clear only as auxiliary foundation signals while preserving
+terminal full-run victory as the objective.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
