@@ -140,7 +140,28 @@ mutation salt, and search budget as the v2 hash arm:
 - corrected score config `sha256:f4686a81461f368731cdd64da4652242ffb2c4d8ac848c471d1fcf10e4ec527d`;
 - corrected diversity config `sha256:1c2033da21d6abb694523f6d61f229e66b2d2ea32877b28e72afe101adb935c0`.
 
-The project owner starts and monitors sustained runs. Run the corrected score arm first:
+### Corrected score result
+
+The owner-run corrected score arm completed all 16 cases and the independent verifier accepted all
+16. It evaluated 1,872 terminal trajectories, applied all 1,856 mutations, and recorded no replay
+divergences. Mean best floor was 9.75, which is 0.6875 above the equal-budget v2 hash arm and exceeds
+the prespecified 0.5 material-improvement threshold. Fifteen seeds improved over their base-policy
+trajectory and none regressed.
+
+Seed 300 reached the Act 1 boss on floor 17, then died to Lagavulin Matriarch. Its last actionable
+state had 11 of 80 player HP and 156 of 233 enemy HP. The enemy snapshot hash equals the last
+actionable state hash for every selected best trajectory, and their defeated fractions vary rather
+than collapsing to the false 100% value from v3. The result therefore passes the advancement gate
+through both boss reach and material fixed-budget floor improvement.
+
+The run used 1,293.65 wall seconds, 0.389 CPU-hours, 440 MB peak resident memory, and 164.9 MB of
+artifact storage. Its frozen identities are:
+
+- search report: `sha256:57ce9022cebbd968b41c7b5a378de45fb8c9f408e430c7f2a0555ba08c2288b0`;
+- independent verification: `sha256:9507a58245e444a551a5f70bd880352345e3467b5645c9c2fcd7a920058a2bbe`;
+- resource report: `sha256:f0e52d967a23db9dcd52d11b1244cfffe2112857de33b37302ad6b36116d3302`.
+
+The completed score arm can be reproduced with:
 
 ```bash
 uv run spireshift resources run \
@@ -165,7 +186,7 @@ uv run spireshift resources run \
     --resume
 ```
 
-After the corrected score result is accepted, run the diversity arm:
+The project owner starts and monitors sustained runs. The next run is the diversity arm:
 
 ```bash
 uv run spireshift resources run \
