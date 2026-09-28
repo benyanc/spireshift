@@ -186,7 +186,7 @@ uv run spireshift resources run \
     --resume
 ```
 
-The project owner starts and monitors sustained runs. The next run is the diversity arm:
+The completed diversity arm can be reproduced with:
 
 ```bash
 uv run spireshift resources run \
@@ -211,8 +211,22 @@ uv run spireshift resources run \
     --resume
 ```
 
-Once both corrected runs exist, the deterministic comparison verifies all three reports and their
-cases before comparing them:
+### Corrected diversity result
+
+The owner-run diversity arm completed and independently verified all 16 cases, evaluated 1,872
+terminal trajectories, applied all 1,856 mutations, and recorded no replay divergences. Mean best
+floor was 9.1875, only 0.125 above the hash arm and 0.5625 below the score arm. It reached floor 15
+and produced no boss reach, Act 1 clear, or victory. Strategic-trace diversity therefore did not
+pass either advancement criterion at this budget.
+
+The run used 1,308.17 wall seconds, 0.393 CPU-hours, 484 MB peak resident memory, and 166.6 MB of
+artifact storage. Its frozen identities are:
+
+- search report: `sha256:f01bc9677f1dbf70562be3f58b2e98fd250e8fd041a6bf5caeedb6dd99dd39ff`;
+- independent verification: `sha256:d67ca15e7bc47f75eff4a376da2a3f9a2dfea719736962461d9393c64f8910f4`;
+- resource report: `sha256:b3f5376c18e789ac83151d732894d03b305354ba3a74f45d32fc82d9a2ebd19b`.
+
+The completed deterministic comparison can be reproduced with:
 
 ```bash
 uv run spireshift model compare-run-trajectory-search \
@@ -226,6 +240,14 @@ uv run spireshift model compare-run-trajectory-search \
   --output artifacts/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-ablation-v4.json
 ```
 
-The comparison advances the best frontier strategy if either corrected arm reaches the boss or
-clears Act 1, or improves mean maximum floor by at least 0.5 over the v2 hash arm. Otherwise it
-records a stop decision and sends the project back to policy representation or environment work.
+### Final ablation result
+
+The verified comparison is `sha256:e836d246e9115b3b6960701b42ef2f8765ec0a2e60773971db8f759e386095bb`.
+Public frontier scoring is the accepted strategy: it is the only arm to reach the boss and its
+0.6875 mean-floor gain over hash ranking exceeds the 0.5 threshold. Diversity is rejected for this
+stage because it lost the milestone and most of the score arm's aggregate gain at equal compute.
+
+This completes the ranking ablation and authorizes using the score arm's boss-reaching trajectory
+as train-only milestone evidence. It does not establish an Act 1 clear, terminal victory, or
+terminal-value readiness. The next foundation package must replay, verify, and label the accepted
+trajectory before another base-policy improvement cycle.
