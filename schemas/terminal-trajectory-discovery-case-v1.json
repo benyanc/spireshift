@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/terminal-trajectory-discovery-case-v1.json",
+  "title": "SpireShift Terminal Trajectory Discovery Case v1",
+  "type": "object",
+  "required": [
+    "schema_version", "case_id", "config_id", "seed", "partition", "profile_name",
+    "profile_id", "attempt", "model_id", "policy_id", "ruleset_manifest_id",
+    "status", "error", "decisions", "terminal", "victory", "truncated",
+    "termination_reason", "maximum_floor", "maximum_act", "final_state_hash",
+    "action_trace_sha256", "exploration", "liveness", "fallback"
+  ],
+  "properties": {
+    "schema_version": {"const": "terminal-trajectory-discovery-case-v1"},
+    "case_id": {"$ref": "#/$defs/id"},
+    "config_id": {"$ref": "#/$defs/id"},
+    "seed": {"type": "integer", "minimum": 0},
+    "partition": {"const": "train"},
+    "profile_name": {"type": "string", "minLength": 1},
+    "profile_id": {"$ref": "#/$defs/id"},
+    "attempt": {"type": "integer", "minimum": 0},
+    "model_id": {"$ref": "#/$defs/id"},
+    "policy_id": {"type": "string", "pattern": "^production-checkpoint-policy-v1:sha256:[a-f0-9]{64}$"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "status": {"enum": ["completed", "failed"]},
+    "error": {"type": ["string", "null"]},
+    "decisions": {"type": "array", "items": {"$ref": "#/$defs/decision"}},
+    "terminal": {"type": ["boolean", "null"]},
+    "victory": {"type": ["boolean", "null"]},
+    "truncated": {"type": ["boolean", "null"]},
+    "termination_reason": {"enum": ["terminal", "policy_cycle", "decision_limit", null]},
+    "maximum_floor": {"type": ["integer", "null"], "minimum": 0},
+    "maximum_act": {"type": ["integer", "string", "null"]},
+    "final_state_hash": {"type": ["string", "null"]},
+    "action_trace_sha256": {"type": ["string", "null"]},
+    "exploration": {"oneOf": [{"$ref": "#/$defs/exploration"}, {"type": "null"}]},
+    "liveness": {"type": ["object", "null"]},
+    "fallback": {"type": ["object", "null"]}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "decision": {
+      "type": "object",
+      "required": [
+        "decision_index", "decision_type", "source_state_hash", "source_floor", "source_act",
+        "legal_action_count", "eligible_action_count", "candidate_action_ids", "policy",
+        "argmax_candidate_index", "argmax_action_id", "selected_candidate_index",
+        "selected_action_id", "exploration_invoked", "non_argmax_action",
+        "next_state_hash", "terminal_after_action", "victory_after_action"
+      ],
+      "properties": {
+        "decision_index": {"type": "integer", "minimum": 0},
+        "decision_type": {"type": "string", "minLength": 1},
+        "source_state_hash": {"type": "string", "minLength": 1},
+        "source_floor": {"type": ["integer", "null"]},
+        "source_act": {"type": ["integer", "string", "null"]},
+        "legal_action_count": {"type": "integer", "minimum": 1},
+        "eligible_action_count": {"type": "integer", "minimum": 1},
+        "candidate_action_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "policy": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/rate"}},
+        "argmax_candidate_index": {"type": "integer", "minimum": 0},
+        "argmax_action_id": {"type": "string", "minLength": 1},
+        "selected_candidate_index": {"type": "integer", "minimum": 0},
+        "selected_action_id": {"type": "string", "minLength": 1},
+        "exploration_invoked": {"type": "boolean"},
+        "non_argmax_action": {"type": "boolean"},
+        "next_state_hash": {"type": "string", "minLength": 1},
+        "terminal_after_action": {"type": "boolean"},
+        "victory_after_action": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "exploration": {
+      "type": "object",
+      "required": ["controller_id", "opportunities", "invocations", "non_argmax_actions"],
+      "properties": {
+        "controller_id": {"const": "sparse-policy-exploration-v1"},
+        "opportunities": {"type": "integer", "minimum": 0},
+        "invocations": {"type": "integer", "minimum": 0},
+        "non_argmax_actions": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

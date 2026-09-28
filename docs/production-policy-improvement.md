@@ -105,3 +105,9 @@ blend prevented the broad validation regression, but the frozen run evidence rem
 inconclusive and terminal-victory evidence remains entirely absent. The terminal-value head,
 learned-PUCT readiness, and adaptive-compute claims remain blocked. No further run belongs to this
 work item.
+
+The next bounded experiment is the
+[train-only terminal-trajectory discovery](terminal-trajectory-discovery.md). It uses the accepted
+base-v2 checkpoint and sparse, reproducible legal alternatives to determine whether the existing
+policy is one or two decisions away from a winning run. It does not promote base-v5, consume held-out
+seeds, or unblock terminal-value training without both winning and losing complete trajectories.

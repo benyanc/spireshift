@@ -381,6 +381,16 @@ def test_combat_advancement_frontier_configuration_conforms_to_schema(
     validator.validate(_load(Path(configuration)))
 
 
+def test_terminal_trajectory_discovery_configuration_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "terminal-trajectory-discovery-config-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(
+        _load(Path("configs/terminal-discovery/sts2-v0.107.1-base-v2-train-v1.json"))
+    )
+
+
 def test_observation_rejects_unmarked_privileged_state() -> None:
     fixture = _load(FIXTURE_DIR / "observation-v1.json")
     fixture["privileged_state"] = {"future_rng": 0.01}

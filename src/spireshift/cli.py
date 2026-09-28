@@ -204,6 +204,11 @@ from spireshift.teacher_data import (
     verify_teacher_dataset,
     write_teacher_dataset,
 )
+from spireshift.terminal_discovery import (
+    load_terminal_discovery_config,
+    run_terminal_trajectory_discovery,
+    verify_terminal_trajectory_discovery,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = PROJECT_ROOT / "configs/default.toml"
@@ -790,6 +795,26 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluate_verify.add_argument("--reference-report", type=Path)
     production_evaluate_verify.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate_verify.add_argument("--output", type=Path)
+    terminal_discovery = model_commands.add_parser(
+        "discover-terminal-trajectories",
+        help="Run reproducible sparse policy exploration on train-only complete runs",
+    )
+    terminal_discovery.add_argument("config", type=Path)
+    terminal_discovery.add_argument("checkpoint", type=Path)
+    terminal_discovery.add_argument("--report", type=Path, required=True)
+    terminal_discovery.add_argument("--split-manifest", type=Path, required=True)
+    terminal_discovery.add_argument("--upstream-root", type=Path, required=True)
+    terminal_discovery.add_argument("--manifest", type=Path, required=True)
+    terminal_discovery.add_argument("--output-dir", type=Path, required=True)
+    terminal_discovery.add_argument("--resume", action="store_true")
+    terminal_discovery_verify = model_commands.add_parser(
+        "verify-terminal-trajectories",
+        help="Verify terminal-discovery identities, coverage, cases, and summaries",
+    )
+    terminal_discovery_verify.add_argument("discovery", type=Path)
+    terminal_discovery_verify.add_argument("config", type=Path)
+    terminal_discovery_verify.add_argument("--split-manifest", type=Path, required=True)
+    terminal_discovery_verify.add_argument("--output", type=Path)
     combat_search_diagnostic = model_commands.add_parser(
         "evaluate-combat-search",
         help="Run the paired train-only combat-search diagnostic sweep",
@@ -1956,6 +1981,57 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(readiness_assessment, None)
                 return 0 if readiness_assessment["ready"] is True else 1
+            if args.model_command == "verify-terminal-trajectories":
+                terminal_verification = verify_terminal_trajectory_discovery(
+                    args.discovery,
+                    config=load_terminal_discovery_config(args.config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                )
+                _emit_json(terminal_verification, args.output)
+                return 0 if terminal_verification["valid"] is True else 1
+            if args.model_command == "discover-terminal-trajectories":
+                terminal_config = load_terminal_discovery_config(args.config)
+                terminal_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                terminal_training_report = load_production_training_report(
+                    args.report, checkpoint=terminal_checkpoint
+                )
+                terminal_split = load_split_manifest(args.split_manifest)
+                terminal_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=terminal_config.maximum_decisions_per_run + 1,
+                )
+                probe_environment = terminal_backend.factory()
+                try:
+                    terminal_ruleset = probe_environment.ruleset
+                    terminal_policy = ProductionCheckpointPolicy(
+                        checkpoint=terminal_checkpoint,
+                        training_report=terminal_training_report,
+                        ruleset=terminal_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                terminal_result = run_terminal_trajectory_discovery(
+                    environment_factory=terminal_backend.factory,
+                    ruleset=terminal_ruleset,
+                    policy=terminal_policy,
+                    split_manifest=terminal_split,
+                    training_report_id=str(terminal_training_report["report_id"]),
+                    config=terminal_config,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                terminal_summary = terminal_result.report["summary"]["overall"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(terminal_summary["benchmark_denominator"]),
+                        transitions=int(terminal_summary["decisions"]),
+                    )
+                )
+                _emit_json(terminal_result.report, None)
+                return 0 if terminal_result.successful else 1
             if args.model_command == "verify-evaluation-curriculum":
                 evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 evaluation_training_report = load_production_training_report(
