@@ -25,12 +25,15 @@ LIVENESS_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evalua
 LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v2"
 PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v3"
 PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v3"
+REFERENCE_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION = "production-policy-evaluation-v4"
+REFERENCE_PRODUCTION_POLICY_CASE_SCHEMA_VERSION = "production-policy-evaluation-case-v4"
 POLICY_LIVENESS_SCHEMA_VERSION = "policy-liveness-diagnostic-v1"
 DEFAULT_CYCLE_REPETITION_THRESHOLD = 8
 DEFAULT_LIVENESS_TAIL_LENGTH = 16
 DEFAULT_NO_OP_FALLBACK_THRESHOLD = 2
 LEARNED_POLICY_KIND = "production_checkpoint"
 BASELINE_POLICY_KIND = "progress_bootstrap_baseline"
+REFERENCE_POLICY_KIND = "reference_production_checkpoint"
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,6 +54,8 @@ def run_production_policy_evaluation(
     workers: int,
     maximum_decisions_per_run: int,
     output_directory: Path,
+    reference_policy: ProductionCheckpointPolicy | None = None,
+    reference_training_report_id: str | None = None,
     partition: SplitName = SplitName.TEST,
     cycle_repetition_threshold: int = DEFAULT_CYCLE_REPETITION_THRESHOLD,
     liveness_tail_length: int = DEFAULT_LIVENESS_TAIL_LENGTH,
@@ -73,6 +78,15 @@ def run_production_policy_evaluation(
         raise ValueError("Production evaluation policy and environment rulesets differ")
     if learned_policy.split_manifest_id != split_manifest.manifest_id:
         raise ValueError("Production evaluation checkpoint and split identities differ")
+    if (reference_policy is None) != (reference_training_report_id is None):
+        raise ValueError("Reference policy and training report identity must be provided together")
+    if reference_policy is not None:
+        if reference_policy.ruleset != ruleset:
+            raise ValueError("Production reference policy and environment rulesets differ")
+        if reference_policy.split_manifest_id != split_manifest.manifest_id:
+            raise ValueError("Production reference checkpoint and split identities differ")
+        if reference_policy.model_id == learned_policy.model_id:
+            raise ValueError("Production candidate and reference model identities must differ")
     if workers <= 0:
         raise ValueError("Production evaluation workers must be positive")
     if maximum_decisions_per_run <= 0:
@@ -90,11 +104,28 @@ def run_production_policy_evaluation(
     if report_path.exists():
         raise FileExistsError(f"Production evaluation report already exists: {report_path}")
 
-    baseline_policy = ProgressBootstrapPolicy()
-    policies: tuple[tuple[str, Policy, str | None], ...] = (
-        (LEARNED_POLICY_KIND, learned_policy, learned_policy.model_id),
-        (BASELINE_POLICY_KIND, baseline_policy, None),
+    reference_comparison = reference_policy is not None
+    evaluation_schema_version = (
+        REFERENCE_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
+        if reference_comparison
+        else PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
     )
+    case_schema_version = (
+        REFERENCE_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+        if reference_comparison
+        else PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+    )
+    if reference_policy is None:
+        baseline_policy = ProgressBootstrapPolicy()
+        policies: tuple[tuple[str, Policy, str | None], ...] = (
+            (LEARNED_POLICY_KIND, learned_policy, learned_policy.model_id),
+            (BASELINE_POLICY_KIND, baseline_policy, None),
+        )
+    else:
+        policies = (
+            (LEARNED_POLICY_KIND, learned_policy, learned_policy.model_id),
+            (REFERENCE_POLICY_KIND, reference_policy, reference_policy.model_id),
+        )
     started_at = (now or _utc_now)()
     cases: list[dict[str, Any]] = []
     pending: list[tuple[int, str, Policy, str | None, Path]] = []
@@ -110,7 +141,7 @@ def run_production_policy_evaluation(
                     model_id=model_id,
                     ruleset_manifest_id=ruleset.manifest_id,
                     partition=partition,
-                    schema_version=PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+                    schema_version=case_schema_version,
                 )
                 if resumed_case["status"] == "completed" and (
                     resumed_case["liveness"]["repetition_threshold"] != cycle_repetition_threshold
@@ -143,6 +174,7 @@ def run_production_policy_evaluation(
                 cycle_repetition_threshold=cycle_repetition_threshold,
                 liveness_tail_length=liveness_tail_length,
                 no_op_fallback_threshold=no_op_fallback_threshold,
+                schema_version=case_schema_version,
             )
             future_to_task[future] = task
         for future in as_completed(future_to_task):
@@ -159,9 +191,10 @@ def run_production_policy_evaluation(
     if len(ordered_cases) != expected_cases:
         raise RuntimeError("Production evaluation did not produce every paired case")
     learned_cases = [case for case in ordered_cases if case["policy_kind"] == LEARNED_POLICY_KIND]
-    baseline_cases = [case for case in ordered_cases if case["policy_kind"] == BASELINE_POLICY_KIND]
+    comparison_kind = REFERENCE_POLICY_KIND if reference_comparison else BASELINE_POLICY_KIND
+    comparison_cases = [case for case in ordered_cases if case["policy_kind"] == comparison_kind]
     body: dict[str, Any] = {
-        "schema_version": PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
+        "schema_version": evaluation_schema_version,
         "started_at": started_at,
         "completed_at": (now or _utc_now)(),
         "model_id": learned_policy.model_id,
@@ -194,15 +227,28 @@ def run_production_policy_evaluation(
             }
             for case in ordered_cases
         ],
-        "summary": {
-            "learned": _policy_summary(learned_cases, include_liveness=True, include_fallback=True),
-            "baseline": _policy_summary(
-                baseline_cases, include_liveness=True, include_fallback=True
-            ),
-            "paired": _paired_summary(learned_cases, baseline_cases),
-        },
         "claim_scope": _claim_scope(partition),
     }
+    if reference_policy is None:
+        body["summary"] = {
+            "learned": _policy_summary(learned_cases, include_liveness=True, include_fallback=True),
+            "baseline": _policy_summary(
+                comparison_cases, include_liveness=True, include_fallback=True
+            ),
+            "paired": _paired_summary(learned_cases, comparison_cases),
+        }
+    else:
+        body["reference_model_id"] = reference_policy.model_id
+        body["reference_training_report_id"] = reference_training_report_id
+        body["summary"] = {
+            "candidate": _policy_summary(
+                learned_cases, include_liveness=True, include_fallback=True
+            ),
+            "reference": _policy_summary(
+                comparison_cases, include_liveness=True, include_fallback=True
+            ),
+            "paired": _reference_paired_summary(learned_cases, comparison_cases),
+        }
     report = {**body, "report_id": manifest_identifier(body)}
     write_model_artifact(report, report_path, label="production policy evaluation")
     successful = all(case["status"] == "completed" for case in ordered_cases)
@@ -215,6 +261,8 @@ def load_production_policy_evaluation(
     model_id: str,
     training_report_id: str,
     split_manifest: SplitManifest,
+    reference_model_id: str | None = None,
+    reference_training_report_id: str | None = None,
 ) -> dict[str, Any]:
     report = _load_object(path, "production policy evaluation")
     report_id = report.get("report_id")
@@ -227,9 +275,11 @@ def load_production_policy_evaluation(
         case_schema_version = LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
         include_liveness = False
         include_fallback = False
+        include_reference = False
     elif schema_version in (
         LIVENESS_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
         PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
+        REFERENCE_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
     ):
         raw_partition = report.get("partition")
         if not isinstance(raw_partition, str):
@@ -241,9 +291,15 @@ def load_production_policy_evaluation(
         if partition not in (SplitName.VALIDATION, SplitName.TEST):
             raise ValueError("Production policy evaluation partition differs")
         include_liveness = True
-        include_fallback = schema_version == PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
+        include_fallback = schema_version in (
+            PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
+            REFERENCE_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION,
+        )
+        include_reference = schema_version == REFERENCE_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
         case_schema_version = (
-            PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+            REFERENCE_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+            if include_reference
+            else PRODUCTION_POLICY_CASE_SCHEMA_VERSION
             if include_fallback
             else LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
         )
@@ -264,6 +320,16 @@ def load_production_policy_evaluation(
     }
     if any(report.get(key) != value for key, value in expected_fields.items()):
         raise ValueError("Production policy evaluation provenance differs")
+    if include_reference:
+        if reference_model_id is None or reference_training_report_id is None:
+            raise ValueError("Production reference evaluation identities are required")
+        if (
+            report.get("reference_model_id") != reference_model_id
+            or report.get("reference_training_report_id") != reference_training_report_id
+        ):
+            raise ValueError("Production reference evaluation provenance differs")
+    elif reference_model_id is not None or reference_training_report_id is not None:
+        raise ValueError("Production evaluation does not contain a reference checkpoint")
     configuration = report.get("configuration")
     if not isinstance(configuration, dict):
         raise ValueError("Production policy evaluation configuration is missing")
@@ -277,7 +343,12 @@ def load_production_policy_evaluation(
         raise ValueError(f"Production policy evaluation contains a non-{partition.value} seed")
     learned_policy_id = f"production-checkpoint-policy-v1:{model_id}"
     baseline_policy_id = ProgressBootstrapPolicy.policy_id
-    if configuration.get("paired_policies") != [learned_policy_id, baseline_policy_id]:
+    comparison_policy_id = (
+        f"production-checkpoint-policy-v1:{reference_model_id}"
+        if include_reference
+        else baseline_policy_id
+    )
+    if configuration.get("paired_policies") != [learned_policy_id, comparison_policy_id]:
         raise ValueError("Production policy evaluation policies differ")
     maximum_decisions = _integer(
         configuration.get("maximum_decisions_per_run"),
@@ -329,6 +400,9 @@ def load_production_policy_evaluation(
             raise ValueError("Production policy evaluation case escapes its root")
         if policy_kind == LEARNED_POLICY_KIND:
             policy_id, case_model_id = learned_policy_id, model_id
+        elif policy_kind == REFERENCE_POLICY_KIND and include_reference:
+            policy_id = comparison_policy_id
+            case_model_id = _string(reference_model_id, "reference model ID")
         elif policy_kind == BASELINE_POLICY_KIND:
             policy_id, case_model_id = baseline_policy_id, None
         else:
@@ -366,25 +440,44 @@ def load_production_policy_evaluation(
     expected_coordinates = {
         (seed, policy_kind)
         for seed in seeds
-        for policy_kind in (LEARNED_POLICY_KIND, BASELINE_POLICY_KIND)
+        for policy_kind in (
+            LEARNED_POLICY_KIND,
+            REFERENCE_POLICY_KIND if include_reference else BASELINE_POLICY_KIND,
+        )
     }
     if coordinates != expected_coordinates:
         raise ValueError("Production policy evaluation paired case coverage differs")
     learned_cases = [case for case in cases if case["policy_kind"] == LEARNED_POLICY_KIND]
-    baseline_cases = [case for case in cases if case["policy_kind"] == BASELINE_POLICY_KIND]
-    expected_summary = {
-        "learned": _policy_summary(
-            learned_cases,
-            include_liveness=include_liveness,
-            include_fallback=include_fallback,
-        ),
-        "baseline": _policy_summary(
-            baseline_cases,
-            include_liveness=include_liveness,
-            include_fallback=include_fallback,
-        ),
-        "paired": _paired_summary(learned_cases, baseline_cases),
-    }
+    comparison_kind = REFERENCE_POLICY_KIND if include_reference else BASELINE_POLICY_KIND
+    comparison_cases = [case for case in cases if case["policy_kind"] == comparison_kind]
+    if include_reference:
+        expected_summary = {
+            "candidate": _policy_summary(
+                learned_cases,
+                include_liveness=include_liveness,
+                include_fallback=include_fallback,
+            ),
+            "reference": _policy_summary(
+                comparison_cases,
+                include_liveness=include_liveness,
+                include_fallback=include_fallback,
+            ),
+            "paired": _reference_paired_summary(learned_cases, comparison_cases),
+        }
+    else:
+        expected_summary = {
+            "learned": _policy_summary(
+                learned_cases,
+                include_liveness=include_liveness,
+                include_fallback=include_fallback,
+            ),
+            "baseline": _policy_summary(
+                comparison_cases,
+                include_liveness=include_liveness,
+                include_fallback=include_fallback,
+            ),
+            "paired": _paired_summary(learned_cases, comparison_cases),
+        }
     if report.get("summary") != expected_summary:
         raise ValueError("Production policy evaluation summary differs from its cases")
     return report
@@ -403,6 +496,7 @@ def _evaluate_case(
     cycle_repetition_threshold: int,
     liveness_tail_length: int,
     no_op_fallback_threshold: int,
+    schema_version: str = PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
 ) -> dict[str, Any]:
     environment: EnvironmentAdapter | None = None
     try:
@@ -509,7 +603,7 @@ def _evaluate_case(
         else:
             termination_reason = "decision_limit"
         body: dict[str, Any] = {
-            "schema_version": PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+            "schema_version": schema_version,
             "seed": seed,
             "partition": partition.value,
             "policy_kind": policy_kind,
@@ -546,7 +640,7 @@ def _evaluate_case(
         }
     except Exception as error:
         body = {
-            "schema_version": PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+            "schema_version": schema_version,
             "seed": seed,
             "partition": partition.value,
             "policy_kind": policy_kind,
@@ -718,6 +812,18 @@ def _paired_summary(
     }
 
 
+def _reference_paired_summary(
+    candidate_cases: Sequence[dict[str, Any]], reference_cases: Sequence[dict[str, Any]]
+) -> dict[str, Any]:
+    legacy = _paired_summary(candidate_cases, reference_cases)
+    return {
+        "completed_pairs": legacy["completed_pairs"],
+        "candidate_only_victories": legacy["learned_only_victories"],
+        "reference_only_victories": legacy["baseline_only_victories"],
+        "mean_maximum_floor_difference": legacy["mean_maximum_floor_difference"],
+    }
+
+
 def _case_path(output_directory: Path, seed: int, policy_kind: str) -> Path:
     return output_directory / "cases" / f"seed-{seed:06d}-{policy_kind}.json"
 
@@ -765,13 +871,18 @@ def _validate_case(case: dict[str, Any]) -> None:
         LEGACY_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
         LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
         PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        REFERENCE_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
     ):
         raise ValueError("Production evaluation case schema differs")
     include_liveness = schema_version in (
         LIVENESS_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
         PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        REFERENCE_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
     )
-    include_fallback = schema_version == PRODUCTION_POLICY_CASE_SCHEMA_VERSION
+    include_fallback = schema_version in (
+        PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+        REFERENCE_PRODUCTION_POLICY_CASE_SCHEMA_VERSION,
+    )
     status = case.get("status")
     result_fields: tuple[str, ...] = (
         "decisions",

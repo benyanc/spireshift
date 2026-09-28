@@ -999,6 +999,139 @@ def test_production_policy_evaluation_is_paired_resumable_evidence(
         )
 
 
+def test_production_policy_evaluation_pairs_candidate_with_reference_checkpoint(
+    synthetic_curricula: tuple[Path, Path], tmp_path: Path
+) -> None:
+    train, validation = synthetic_curricula
+    result = train_production_base_model(
+        train_report_path=train,
+        validation_report_path=validation,
+        split_manifest=load_split_manifest(SPLIT_PATH),
+        config=_config(),
+    )
+    environment = MockSpireEnvironment()
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    candidate_checkpoint = copy.deepcopy(result.checkpoint)
+    candidate_checkpoint["ruleset_manifest_id"] = environment.ruleset.manifest_id
+    candidate_checkpoint["split_manifest_id"] = split.manifest_id
+    candidate_body = {
+        key: value for key, value in candidate_checkpoint.items() if key != "model_id"
+    }
+    candidate_checkpoint["model_id"] = manifest_identifier(candidate_body)
+    candidate_report = copy.deepcopy(result.report)
+    candidate_report["model_id"] = candidate_checkpoint["model_id"]
+    candidate_report["held_out_metrics"]["policy"]["auxiliary_policy_gate"]["passed"] = True
+    candidate_report_body = {
+        key: value for key, value in candidate_report.items() if key != "report_id"
+    }
+    candidate_report["report_id"] = manifest_identifier(candidate_report_body)
+
+    reference_checkpoint = copy.deepcopy(candidate_checkpoint)
+    reference_checkpoint["heads"]["policy"]["weights"][0]["value"] += 0.01
+    reference_body = {
+        key: value for key, value in reference_checkpoint.items() if key != "model_id"
+    }
+    reference_checkpoint["model_id"] = manifest_identifier(reference_body)
+    reference_report = copy.deepcopy(candidate_report)
+    reference_report["model_id"] = reference_checkpoint["model_id"]
+    reference_report_body = {
+        key: value for key, value in reference_report.items() if key != "report_id"
+    }
+    reference_report["report_id"] = manifest_identifier(reference_report_body)
+
+    candidate_policy = ProductionCheckpointPolicy(
+        checkpoint=candidate_checkpoint,
+        training_report=candidate_report,
+        ruleset=environment.ruleset,
+    )
+    reference_policy = ProductionCheckpointPolicy(
+        checkpoint=reference_checkpoint,
+        training_report=reference_report,
+        ruleset=environment.ruleset,
+    )
+    timestamps = iter(("2026-01-01T00:00:00Z", "2026-01-01T00:00:01Z"))
+    output = tmp_path / "reference-evaluation"
+    evaluation = run_production_policy_evaluation(
+        environment_factory=MockSpireEnvironment,
+        ruleset=environment.ruleset,
+        learned_policy=candidate_policy,
+        split_manifest=split,
+        training_report_id=cast(str, candidate_report["report_id"]),
+        seeds=split.seeds(SplitName.TEST)[:2],
+        workers=2,
+        maximum_decisions_per_run=8,
+        output_directory=output,
+        reference_policy=reference_policy,
+        reference_training_report_id=cast(str, reference_report["report_id"]),
+        now=lambda: next(timestamps),
+    )
+
+    assert evaluation.successful is True
+    assert evaluation.report["schema_version"] == "production-policy-evaluation-v4"
+    assert evaluation.report["reference_model_id"] == reference_checkpoint["model_id"]
+    assert evaluation.report["summary"]["candidate"]["benchmark_denominator"] == 2
+    assert evaluation.report["summary"]["reference"]["benchmark_denominator"] == 2
+    assert evaluation.report["summary"]["paired"]["completed_pairs"] == 2
+    assert {reference["policy_kind"] for reference in evaluation.report["cases"]} == {
+        "production_checkpoint",
+        "reference_production_checkpoint",
+    }
+    report_schema = json.loads(Path("schemas/production-policy-evaluation-v4.json").read_text())
+    case_schema = json.loads(Path("schemas/production-policy-evaluation-case-v4.json").read_text())
+    Draft202012Validator(report_schema).validate(evaluation.report)
+    for reference in evaluation.report["cases"]:
+        case = json.loads((output / reference["path"]).read_text())
+        Draft202012Validator(case_schema).validate(case)
+    assert (
+        load_production_policy_evaluation(
+            evaluation.report_path,
+            model_id=cast(str, candidate_checkpoint["model_id"]),
+            training_report_id=cast(str, candidate_report["report_id"]),
+            split_manifest=split,
+            reference_model_id=cast(str, reference_checkpoint["model_id"]),
+            reference_training_report_id=cast(str, reference_report["report_id"]),
+        )
+        == evaluation.report
+    )
+
+    candidate_checkpoint_path = tmp_path / "candidate-checkpoint.json"
+    candidate_report_path = tmp_path / "candidate-report.json"
+    reference_checkpoint_path = tmp_path / "reference-checkpoint.json"
+    reference_report_path = tmp_path / "reference-report.json"
+    verification_path = tmp_path / "reference-evaluation-verification.json"
+    for document, path, label in (
+        (candidate_checkpoint, candidate_checkpoint_path, "candidate checkpoint"),
+        (candidate_report, candidate_report_path, "candidate report"),
+        (reference_checkpoint, reference_checkpoint_path, "reference checkpoint"),
+        (reference_report, reference_report_path, "reference report"),
+    ):
+        write_production_model_artifact(document, path, label=label)
+    assert (
+        main(
+            [
+                "model",
+                "verify-evaluation-curriculum",
+                str(evaluation.report_path),
+                str(candidate_checkpoint_path),
+                "--report",
+                str(candidate_report_path),
+                "--reference-checkpoint",
+                str(reference_checkpoint_path),
+                "--reference-report",
+                str(reference_report_path),
+                "--split-manifest",
+                str(MOCK_SPLIT_PATH),
+                "--output",
+                str(verification_path),
+            ]
+        )
+        == 0
+    )
+    verification = json.loads(verification_path.read_text())
+    assert verification["valid"] is True
+    assert verification["reference_model_id"] == reference_checkpoint["model_id"]
+
+
 def test_production_policy_evaluation_detects_public_state_action_cycles(
     synthetic_curricula: tuple[Path, Path], tmp_path: Path
 ) -> None:

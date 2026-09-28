@@ -80,19 +80,47 @@ search action when beneficial, and only 29.30% when harmful. The verified base-v
 
 ## Current operator command
 
-Run exactly this one bounded backend smoke and return its final JSON output. It performs at most
-eight game decisions and does not train or launch a full-run evaluation.
+The base-v5 admitted-backend smoke is frozen as
+[`production-model-inference-smoke-v5-v0.107.1.json`](evidence/production-model-inference-smoke-v5-v0.107.1.json),
+with identity `sha256:8106e3ef385162c9f29f1ce76f6c0c6a86273bc12bbafe99befa426674c23bb6`.
+All eight decisions were candidate-aligned, legal, and public-state only. The sample included two
+combat decisions; median inference latency was 4.83 ms and maximum latency was 6.98 ms. The artifact
+verified against the exact base-v5 checkpoint and report, so the frozen test comparison is now
+allowed.
+
+The previous evaluator paired a checkpoint only with the simple progress heuristic. The v4
+evaluation contract instead binds both checkpoint/report pairs and executes base-v5 and accepted
+base-v2 on the same untouched test seeds. It stores candidate and reference cases independently for
+safe resume and reports terminal outcomes, liveness, fallback use, latency, and paired floor deltas.
+
+Run exactly this one resource-capped command and return its final JSON output. It is the only
+sustained task in the current work package and must be started and observed by the operator.
 
 ```bash
-uv run --extra evangambit spireshift model smoke-curriculum \
-  artifacts/models/sts2-v0.107.1-base-v5/checkpoint.json \
-  --report artifacts/models/sts2-v0.107.1-base-v5/training-report.json \
-  --upstream-root artifacts/backend/evangambit-v0.107.1 \
-  --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-  --seeds 0 1 \
-  --max-decisions-per-seed 4 \
-  --output artifacts/models/sts2-v0.107.1-base-v5/inference-smoke.json
+uv run spireshift resources run \
+  --kind rollout \
+  --report artifacts/resources/production-base-v5-vs-v2-test-v1.json \
+  --metrics artifacts/resources/production-base-v5-vs-v2-test-v1-metrics.json \
+  --artifact-root artifacts/evaluations/sts2-v0.107.1-base-v5-vs-v2-test-v1 \
+  --workers 4 \
+  --max-wall-seconds 14400 \
+  --max-cpu-seconds 50000 \
+  --max-storage-bytes 1000000000 \
+  --max-memory-bytes 16000000000 \
+  -- \
+  uv run --extra evangambit spireshift model evaluate-curriculum \
+    artifacts/models/sts2-v0.107.1-base-v5/checkpoint.json \
+    --report artifacts/models/sts2-v0.107.1-base-v5/training-report.json \
+    --reference-checkpoint artifacts/models/sts2-v0.107.1-base-v2/checkpoint.json \
+    --reference-report artifacts/models/sts2-v0.107.1-base-v2/training-report.json \
+    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
+    --upstream-root artifacts/backend/evangambit-v0.107.1 \
+    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
+    --output-dir artifacts/evaluations/sts2-v0.107.1-base-v5-vs-v2-test-v1 \
+    --runs 32 \
+    --workers 4 \
+    --max-decisions-per-run 4096
 ```
 
-Do not start the frozen test evaluation yet. The base-v5 smoke must pass candidate alignment,
-legal-action selection, identity, and liveness verification first.
+This evaluation can show whether the causal-policy recovery improves base-v2 under the frozen
+protocol. Zero victories would still keep terminal-value and learned-search readiness blocked.

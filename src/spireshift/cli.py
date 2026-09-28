@@ -759,6 +759,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     production_evaluate.add_argument("checkpoint", type=Path)
     production_evaluate.add_argument("--report", type=Path, required=True)
+    production_evaluate.add_argument("--reference-checkpoint", type=Path)
+    production_evaluate.add_argument("--reference-report", type=Path)
     production_evaluate.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate.add_argument("--upstream-root", type=Path, required=True)
     production_evaluate.add_argument("--manifest", type=Path, required=True)
@@ -784,6 +786,8 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluate_verify.add_argument("evaluation", type=Path)
     production_evaluate_verify.add_argument("checkpoint", type=Path)
     production_evaluate_verify.add_argument("--report", type=Path, required=True)
+    production_evaluate_verify.add_argument("--reference-checkpoint", type=Path)
+    production_evaluate_verify.add_argument("--reference-report", type=Path)
     production_evaluate_verify.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate_verify.add_argument("--output", type=Path)
     combat_search_diagnostic = model_commands.add_parser(
@@ -1957,29 +1961,80 @@ def main(argv: Sequence[str] | None = None) -> int:
                 evaluation_training_report = load_production_training_report(
                     args.report, checkpoint=evaluation_checkpoint
                 )
+                if (args.reference_checkpoint is None) != (args.reference_report is None):
+                    raise ValueError(
+                        "Evaluation reference checkpoint and report must be provided together"
+                    )
+                reference_checkpoint = (
+                    load_production_model_checkpoint(args.reference_checkpoint)
+                    if args.reference_checkpoint is not None
+                    else None
+                )
+                reference_training_report = (
+                    load_production_training_report(
+                        args.reference_report, checkpoint=reference_checkpoint
+                    )
+                    if args.reference_report is not None
+                    else None
+                )
                 evaluation_split = load_split_manifest(args.split_manifest)
                 if evaluation_checkpoint["split_manifest_id"] != evaluation_split.manifest_id:
                     raise ValueError("Production evaluation checkpoint and split identities differ")
+                if reference_checkpoint is not None and (
+                    reference_checkpoint["split_manifest_id"] != evaluation_split.manifest_id
+                ):
+                    raise ValueError("Production reference checkpoint and split identities differ")
                 evaluation = load_production_policy_evaluation(
                     args.evaluation,
                     model_id=str(evaluation_checkpoint["model_id"]),
                     training_report_id=str(evaluation_training_report["report_id"]),
                     split_manifest=evaluation_split,
+                    reference_model_id=(
+                        str(reference_checkpoint["model_id"])
+                        if reference_checkpoint is not None
+                        else None
+                    ),
+                    reference_training_report_id=(
+                        str(reference_training_report["report_id"])
+                        if reference_training_report is not None
+                        else None
+                    ),
                 )
-                _emit_json(
-                    {
-                        "valid": True,
-                        "model_id": evaluation_checkpoint["model_id"],
-                        "training_report_id": evaluation_training_report["report_id"],
-                        "evaluation_report_id": evaluation["report_id"],
-                    },
-                    args.output,
-                )
+                evaluation_verification = {
+                    "valid": True,
+                    "model_id": evaluation_checkpoint["model_id"],
+                    "training_report_id": evaluation_training_report["report_id"],
+                    "evaluation_report_id": evaluation["report_id"],
+                }
+                if reference_checkpoint is not None and reference_training_report is not None:
+                    evaluation_verification.update(
+                        {
+                            "reference_model_id": reference_checkpoint["model_id"],
+                            "reference_training_report_id": reference_training_report["report_id"],
+                        }
+                    )
+                _emit_json(evaluation_verification, args.output)
                 return 0
             if args.model_command == "evaluate-curriculum":
                 evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 evaluation_training_report = load_production_training_report(
                     args.report, checkpoint=evaluation_checkpoint
+                )
+                if (args.reference_checkpoint is None) != (args.reference_report is None):
+                    raise ValueError(
+                        "Evaluation reference checkpoint and report must be provided together"
+                    )
+                reference_checkpoint = (
+                    load_production_model_checkpoint(args.reference_checkpoint)
+                    if args.reference_checkpoint is not None
+                    else None
+                )
+                reference_training_report = (
+                    load_production_training_report(
+                        args.reference_report, checkpoint=reference_checkpoint
+                    )
+                    if args.reference_report is not None
+                    else None
                 )
                 evaluation_split = load_split_manifest(args.split_manifest)
                 evaluation_partition = SplitName(args.partition)
@@ -2002,6 +2057,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                         training_report=evaluation_training_report,
                         ruleset=evaluation_ruleset,
                     )
+                    reference_policy = (
+                        ProductionCheckpointPolicy(
+                            checkpoint=reference_checkpoint,
+                            training_report=reference_training_report,
+                            ruleset=evaluation_ruleset,
+                        )
+                        if reference_checkpoint is not None
+                        and reference_training_report is not None
+                        else None
+                    )
                 finally:
                     close = getattr(probe_environment, "close", None)
                     if callable(close):
@@ -2016,6 +2081,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                     workers=args.workers,
                     maximum_decisions_per_run=args.max_decisions_per_run,
                     output_directory=args.output_dir,
+                    reference_policy=reference_policy,
+                    reference_training_report_id=(
+                        str(reference_training_report["report_id"])
+                        if reference_training_report is not None
+                        else None
+                    ),
                     partition=evaluation_partition,
                     cycle_repetition_threshold=args.cycle_repetition_threshold,
                     liveness_tail_length=args.liveness_tail_length,
@@ -2024,8 +2095,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 evaluation_summary = evaluation_result.report["summary"]
                 if isinstance(evaluation_summary, dict):
-                    learned_summary = evaluation_summary.get("learned")
-                    baseline_summary = evaluation_summary.get("baseline")
+                    learned_summary = evaluation_summary.get(
+                        "candidate", evaluation_summary.get("learned")
+                    )
+                    baseline_summary = evaluation_summary.get(
+                        "reference", evaluation_summary.get("baseline")
+                    )
                     if isinstance(learned_summary, dict) and isinstance(baseline_summary, dict):
                         write_experiment_metrics(
                             ExperimentMetrics(
