@@ -270,7 +270,35 @@ global trajectory index, source hash, legal-action count, selected action, and n
 
 Teacher output from this state set uses dataset schema v7 and remains train-only. Boss reach is
 recorded only as discovery provenance; the target utility and terminal-value labels continue to use
-environment terminal victory. After generation and independent verification, the v7 dataset can be
-combined with the seed-disjoint production curriculum. Composition strips replay-only coordinates
-from the materialized cases while preserving component state-set IDs, terminal-victory labels, and
-the existing validation/test seal. No model should be promoted from this trajectory alone.
+environment terminal victory.
+
+The owner-run teacher job completed and independently verified all 28 cases. It evaluated 2,224
+candidate continuations across 74,154 transitions with no failures. Nine states had candidate
+progress variation across five maximum-floor bins, and half-split winner agreement was 96.43%.
+All 2,224 continuations were terminal defeats, however, and the dataset produced only 0.7708
+effective labeled states against the frozen minimum of 1.0. Dataset
+`sha256:8a48a422038365921ac4e46211645780d7cfa008a711d1a2c46567d7e9ca6033`
+therefore fails the auxiliary-policy signal gate. It must not be combined with the production
+curriculum, and the threshold must not be lowered after observing the result.
+
+### Strict mutation preferences
+
+The accepted trajectory's seven mutations are exact one-action interventions against their direct
+parents. SpireShift now replays all eight lineage trajectories, captures the public observation and
+ordered legal actions needed to reconstruct each model input, and compares parent and child under
+the same frozen lexicographic rank used by the accepted search. It emits a preference only when the
+child strictly improves that rank. Ties and regressions remain in the artifact as explicit
+exclusions.
+
+The seed-300 artifact contains five strict improvements, one tie, and one regression. The deciding
+components are maximum floor, boss reach, last-actionable player health, and distinct public states
+on the deepest floor. Exact verification reproduced 1,031 lineage decisions, all ordered legal
+actions, and all seven mutation points. The content identities are:
+
+- preference set: `sha256:24a7356ac133d897cb974470c265449327e5d4c38939f0d19b2f9576b838d2a1`;
+- verification: `sha256:e82541260660c10a2dcb28a181dcb65cf4bf6df85837e04738da741c9214826c`.
+
+These are auxiliary policy preferences only. They contain zero positive terminal-victory labels.
+All five come from one complete run, so the artifact records `training_ready: false` and cannot be
+used for fitting or model selection until equivalent strict evidence exists from multiple train
+runs. No model should be promoted from this trajectory alone.

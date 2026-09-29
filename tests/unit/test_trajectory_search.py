@@ -9,6 +9,7 @@ from typing import Any, Self, cast
 
 import pytest
 from jsonschema import Draft202012Validator
+from referencing import Registry, Resource
 
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.agents.learned import ProductionCheckpointPolicy, ProductionPolicyDecision
@@ -16,6 +17,10 @@ from spireshift.cli import build_parser
 from spireshift.core.manifest import manifest_identifier
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
 from spireshift.splits import SplitName, load_split_manifest
+from spireshift.trajectory_preferences import (
+    freeze_trajectory_mutation_preferences,
+    verify_trajectory_mutation_preferences,
+)
 from spireshift.trajectory_search import (
     LEGACY_ENEMY_SNAPSHOT_RULE,
     PUBLIC_FRONTIER_DIVERSE_STRATEGY,
@@ -511,6 +516,90 @@ def test_frontier_search_artifacts_validate_and_tampering_is_rejected(tmp_path: 
         result.report_path,
         config=config,
         split_manifest=split,
+    )
+    assert rejected["valid"] is False
+
+
+def test_strict_trajectory_preferences_replay_lineage_and_reject_tampering(
+    tmp_path: Path,
+) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    policy = _EarlyDefeatPolicy(split_manifest_id=split.manifest_id)
+    training_report_id = manifest_identifier({"report": "trajectory-preferences"})
+    config = _frontier_config(policy, training_report_id)
+    search_output = tmp_path / "preference-search"
+    timestamps = iter(("2026-01-04T00:00:00Z", "2026-01-04T00:00:01Z"))
+    result = run_trajectory_search(
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        split_manifest=split,
+        training_report_id=training_report_id,
+        config=config,
+        output_directory=search_output,
+        now=lambda: next(timestamps),
+    )
+    reference = result.report["cases"][0]
+    case = json.loads((search_output / reference["path"]).read_text(encoding="utf-8"))
+    preference_path = tmp_path / "trajectory-preferences.json"
+    document = freeze_trajectory_mutation_preferences(
+        search_report_path=result.report_path,
+        search_config=config,
+        output_path=preference_path,
+        split_manifest=split,
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        run_seed=reference["seed"],
+        trajectory_id=case["best_trajectory_id"],
+    )
+
+    assert document["summary"] == {
+        "mutations": 1,
+        "strict_improvements": 1,
+        "tied": 0,
+        "regressed": 0,
+        "unique_runs": 1,
+        "minimum_training_runs": 2,
+        "training_ready": False,
+        "terminal_victory_positive_labels": 0,
+    }
+    assert document["preferences"][0]["preferred_action_id"] == "coherent-route"
+    assert document["preferences"][0]["terminal_victory_label"] is False
+    preference_schema = json.loads(
+        Path("schemas/trajectory-mutation-preference-set-v1.json").read_text(encoding="utf-8")
+    )
+    observation_schema = json.loads(Path("schemas/observation-v1.json").read_text(encoding="utf-8"))
+    schema_registry: Registry[Any] = Registry().with_resource(
+        str(observation_schema["$id"]), Resource.from_contents(observation_schema)
+    )
+    Draft202012Validator(preference_schema, registry=schema_registry).validate(document)
+    verification = verify_trajectory_mutation_preferences(
+        preference_path,
+        search_report_path=result.report_path,
+        search_config=config,
+        split_manifest=split,
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        run_seed=reference["seed"],
+        trajectory_id=case["best_trajectory_id"],
+    )
+    assert verification["valid"] is True
+    assert verification["verified_mutations"] == 1
+
+    document["preferences"][0]["child_rank"][-1] += 1
+    preference_path.write_text(json.dumps(document), encoding="utf-8")
+    rejected = verify_trajectory_mutation_preferences(
+        preference_path,
+        search_report_path=result.report_path,
+        search_config=config,
+        split_manifest=split,
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        run_seed=reference["seed"],
+        trajectory_id=case["best_trajectory_id"],
     )
     assert rejected["valid"] is False
 

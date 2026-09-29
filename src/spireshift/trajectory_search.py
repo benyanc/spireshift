@@ -13,7 +13,7 @@ from typing import Any
 from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
-from spireshift.core.types import DecisionType, Observation
+from spireshift.core.types import DecisionType, LegalAction, Observation
 from spireshift.liveness import PublicNoOpActionGuard
 from spireshift.models import write_model_artifact
 from spireshift.splits import SplitManifest, SplitName
@@ -70,6 +70,13 @@ _AUXILIARY_RANK_ORDER = (
     "player_hp_fraction_ppm",
     "last_actionable_player_hp_fraction_ppm",
     "distinct_public_states_on_floor",
+)
+TRAJECTORY_SELECTION_RANK_ORDER = (
+    "victory",
+    "act1_cleared",
+    "boss_reached",
+    "maximum_floor",
+    *_AUXILIARY_RANK_ORDER,
 )
 
 
@@ -947,6 +954,7 @@ def _run_trajectory(
     generation: int,
     parent: dict[str, Any] | None,
     mutation: _MutationPlan | None,
+    source_observer: Callable[[int, Observation, tuple[LegalAction, ...]], None] | None = None,
 ) -> dict[str, Any]:
     environment: EnvironmentAdapter | None = None
     try:
@@ -982,6 +990,8 @@ def _run_trajectory(
             if not legal_actions:
                 raise RuntimeError("Nonterminal trajectory-search state has no legal actions")
             eligible_actions = guard.eligible_actions(observation, legal_actions)
+            if source_observer is not None:
+                source_observer(decision_index, observation, eligible_actions)
             decision = policy.predict(observation, eligible_actions)
             selected = decision.selected_action
             selection_source = "base_policy"
@@ -1435,6 +1445,13 @@ def _selection_rank(
     ):
         return primary
     return (*primary, *_auxiliary_rank(trajectory))
+
+
+def trajectory_selection_rank(
+    trajectory: dict[str, Any], *, config: TrajectorySearchConfig
+) -> tuple[int, ...]:
+    """Return the frozen lexicographic rank used to select searched trajectories."""
+    return _selection_rank(trajectory, config=config)
 
 
 def _trajectory_sort_key(
