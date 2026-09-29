@@ -212,7 +212,9 @@ from spireshift.terminal_discovery import (
     verify_terminal_trajectory_discovery,
 )
 from spireshift.trajectory_preferences import (
+    freeze_trajectory_mutation_preference_collection,
     freeze_trajectory_mutation_preferences,
+    verify_trajectory_mutation_preference_collection,
     verify_trajectory_mutation_preferences,
 )
 from spireshift.trajectory_search import (
@@ -675,6 +677,45 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_verify_preferences.add_argument("--trajectory-id", required=True)
     bootstrap_verify_preferences.add_argument("--minimum-training-runs", type=int, default=2)
     bootstrap_verify_preferences.add_argument("--output", type=Path)
+    bootstrap_preference_collection = bootstrap_commands.add_parser(
+        "freeze-trajectory-preference-collection",
+        help="Replay every accepted search lineage and freeze a multi-run preference collection",
+    )
+    bootstrap_preference_collection.add_argument("search_report", type=Path)
+    bootstrap_preference_collection.add_argument("search_config", type=Path)
+    bootstrap_preference_collection.add_argument("output_dir", type=Path)
+    bootstrap_preference_collection.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_preference_collection.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_preference_collection.add_argument("--upstream-root", type=Path)
+    bootstrap_preference_collection.add_argument("--manifest", type=Path)
+    bootstrap_preference_collection.add_argument("--policy-checkpoint", type=Path, required=True)
+    bootstrap_preference_collection.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_preference_collection.add_argument("--minimum-training-runs", type=int, default=2)
+    bootstrap_verify_preference_collection = bootstrap_commands.add_parser(
+        "verify-trajectory-preference-collection",
+        help="Verify a multi-run preference collection by replaying every accepted lineage",
+    )
+    bootstrap_verify_preference_collection.add_argument("collection", type=Path)
+    bootstrap_verify_preference_collection.add_argument("search_report", type=Path)
+    bootstrap_verify_preference_collection.add_argument("search_config", type=Path)
+    bootstrap_verify_preference_collection.add_argument(
+        "--split-manifest", type=Path, required=True
+    )
+    bootstrap_verify_preference_collection.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_verify_preference_collection.add_argument("--upstream-root", type=Path)
+    bootstrap_verify_preference_collection.add_argument("--manifest", type=Path)
+    bootstrap_verify_preference_collection.add_argument(
+        "--policy-checkpoint", type=Path, required=True
+    )
+    bootstrap_verify_preference_collection.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_verify_preference_collection.add_argument(
+        "--minimum-training-runs", type=int, default=2
+    )
+    bootstrap_verify_preference_collection.add_argument("--output", type=Path)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
     )
@@ -1815,6 +1856,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.bootstrap_command in {
                 "freeze-trajectory-preferences",
                 "verify-trajectory-preferences",
+                "freeze-trajectory-preference-collection",
+                "verify-trajectory-preference-collection",
             }:
                 if args.backend == "evangambit":
                     if args.upstream_root is None or args.manifest is None:
@@ -1848,19 +1891,35 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "environment_factory": lambda: load_search_environment(preference_backend),
                     "ruleset": preference_ruleset,
                     "policy": preference_policy,
-                    "run_seed": args.seed,
-                    "trajectory_id": args.trajectory_id,
                     "minimum_training_runs": args.minimum_training_runs,
                 }
                 if args.bootstrap_command == "freeze-trajectory-preferences":
                     preference_document = freeze_trajectory_mutation_preferences(
                         output_path=args.output,
+                        run_seed=args.seed,
+                        trajectory_id=args.trajectory_id,
                         **preference_arguments,
                     )
                     _emit_json(preference_document, None)
                     return 0
-                preference_verification = verify_trajectory_mutation_preferences(
-                    args.preferences,
+                if args.bootstrap_command == "verify-trajectory-preferences":
+                    preference_verification = verify_trajectory_mutation_preferences(
+                        args.preferences,
+                        run_seed=args.seed,
+                        trajectory_id=args.trajectory_id,
+                        **preference_arguments,
+                    )
+                    _emit_json(preference_verification, args.output)
+                    return 0 if preference_verification["valid"] is True else 1
+                if args.bootstrap_command == "freeze-trajectory-preference-collection":
+                    preference_collection = freeze_trajectory_mutation_preference_collection(
+                        output_directory=args.output_dir,
+                        **preference_arguments,
+                    )
+                    _emit_json(preference_collection, None)
+                    return 0
+                preference_verification = verify_trajectory_mutation_preference_collection(
+                    args.collection,
                     **preference_arguments,
                 )
                 _emit_json(preference_verification, args.output)

@@ -9,7 +9,7 @@ from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import LegalAction, Observation
-from spireshift.rollouts import write_exclusive_json
+from spireshift.rollouts import sha256_file, write_exclusive_json
 from spireshift.splits import SplitManifest, SplitName
 from spireshift.trajectory_search import (
     TRAJECTORY_SELECTION_RANK_ORDER,
@@ -23,6 +23,14 @@ from spireshift.trajectory_search import (
 TRAJECTORY_PREFERENCE_SCHEMA_VERSION = "trajectory-mutation-preference-set-v1"
 TRAJECTORY_PREFERENCE_VERIFICATION_SCHEMA_VERSION = "trajectory-mutation-preference-verification-v1"
 TRAJECTORY_PREFERENCE_CLAIM_SCOPE = "verified_train_only_single_run_auxiliary_policy_preferences"
+TRAJECTORY_PREFERENCE_COLLECTION_SCHEMA_VERSION = "trajectory-mutation-preference-collection-v1"
+TRAJECTORY_PREFERENCE_COLLECTION_VERIFICATION_SCHEMA_VERSION = (
+    "trajectory-mutation-preference-collection-verification-v1"
+)
+TRAJECTORY_PREFERENCE_COLLECTION_CLAIM_SCOPE = (
+    "verified_train_only_multi_run_auxiliary_policy_preferences"
+)
+TRAJECTORY_PREFERENCE_COLLECTION_FILENAME = "trajectory-mutation-preference-collection.json"
 
 
 def freeze_trajectory_mutation_preferences(
@@ -375,6 +383,232 @@ def verify_trajectory_mutation_preferences(
         "errors": errors,
     }
     return {**body, "verification_id": manifest_identifier(body)}
+
+
+def freeze_trajectory_mutation_preference_collection(
+    *,
+    search_report_path: Path,
+    search_config: TrajectorySearchConfig,
+    output_directory: Path,
+    split_manifest: SplitManifest,
+    environment_factory: Callable[[], EnvironmentAdapter],
+    ruleset: RulesetIdentity,
+    policy: ProductionCheckpointPolicy,
+    minimum_training_runs: int = 2,
+) -> dict[str, Any]:
+    root = output_directory.expanduser().resolve()
+    root.mkdir(parents=True, exist_ok=False)
+    components = _build_collection_components(
+        search_report_path=search_report_path,
+        search_config=search_config,
+        split_manifest=split_manifest,
+        environment_factory=environment_factory,
+        ruleset=ruleset,
+        policy=policy,
+        minimum_training_runs=minimum_training_runs,
+    )
+    references: list[dict[str, Any]] = []
+    for run_seed, document in components:
+        relative = Path("cases") / f"seed-{run_seed:06d}.json"
+        path = root / relative
+        write_exclusive_json(path, document)
+        references.append(
+            {
+                "run_seed": run_seed,
+                "path": str(relative),
+                "sha256": sha256_file(path),
+                "preference_set_id": document["preference_set_id"],
+            }
+        )
+    collection = _collection_document(
+        search_report_path=search_report_path,
+        search_config=search_config,
+        split_manifest=split_manifest,
+        references=references,
+        components=components,
+        minimum_training_runs=minimum_training_runs,
+    )
+    write_exclusive_json(root / TRAJECTORY_PREFERENCE_COLLECTION_FILENAME, collection)
+    return collection
+
+
+def verify_trajectory_mutation_preference_collection(
+    collection_path: Path,
+    *,
+    search_report_path: Path,
+    search_config: TrajectorySearchConfig,
+    split_manifest: SplitManifest,
+    environment_factory: Callable[[], EnvironmentAdapter],
+    ruleset: RulesetIdentity,
+    policy: ProductionCheckpointPolicy,
+    minimum_training_runs: int = 2,
+) -> dict[str, Any]:
+    errors: list[str] = []
+    document: dict[str, Any] = {}
+    verified_cases = 0
+    verified_mutations = 0
+    try:
+        resolved = collection_path.expanduser().resolve()
+        document = _load_object(resolved, "trajectory preference collection")
+        components = _build_collection_components(
+            search_report_path=search_report_path,
+            search_config=search_config,
+            split_manifest=split_manifest,
+            environment_factory=environment_factory,
+            ruleset=ruleset,
+            policy=policy,
+            minimum_training_runs=minimum_training_runs,
+        )
+        root = resolved.parent
+        references: list[dict[str, Any]] = []
+        for run_seed, expected_component in components:
+            relative = Path("cases") / f"seed-{run_seed:06d}.json"
+            path = (root / relative).resolve()
+            if root not in path.parents:
+                raise ValueError("Trajectory preference component escapes its collection root")
+            actual_component = _load_object(path, "trajectory preference component")
+            if actual_component != expected_component:
+                raise ValueError(
+                    f"Trajectory preference component differs from exact replay for seed {run_seed}"
+                )
+            references.append(
+                {
+                    "run_seed": run_seed,
+                    "path": str(relative),
+                    "sha256": sha256_file(path),
+                    "preference_set_id": expected_component["preference_set_id"],
+                }
+            )
+            verified_cases += 1
+            verified_mutations += _integer(
+                _mapping(expected_component.get("summary"), "component summary").get("mutations"),
+                "component mutations",
+            )
+        expected = _collection_document(
+            search_report_path=search_report_path,
+            search_config=search_config,
+            split_manifest=split_manifest,
+            references=references,
+            components=components,
+            minimum_training_runs=minimum_training_runs,
+        )
+        if document != expected:
+            raise ValueError("Trajectory preference collection differs from exact replay")
+    except (OSError, ValueError, TypeError, json.JSONDecodeError) as error:
+        errors.append(str(error))
+        verified_cases = 0
+        verified_mutations = 0
+    body: dict[str, Any] = {
+        "schema_version": TRAJECTORY_PREFERENCE_COLLECTION_VERIFICATION_SCHEMA_VERSION,
+        "collection_id": document.get("collection_id"),
+        "valid": not errors,
+        "verified_cases": verified_cases,
+        "verified_mutations": verified_mutations,
+        "errors": errors,
+    }
+    return {**body, "verification_id": manifest_identifier(body)}
+
+
+def _build_collection_components(
+    *,
+    search_report_path: Path,
+    search_config: TrajectorySearchConfig,
+    split_manifest: SplitManifest,
+    environment_factory: Callable[[], EnvironmentAdapter],
+    ruleset: RulesetIdentity,
+    policy: ProductionCheckpointPolicy,
+    minimum_training_runs: int,
+) -> list[tuple[int, dict[str, Any]]]:
+    verification = verify_trajectory_search(
+        search_report_path,
+        config=search_config,
+        split_manifest=split_manifest,
+    )
+    if verification.get("valid") is not True:
+        raise ValueError(
+            "Trajectory search failed verification: "
+            + "; ".join(str(value) for value in verification.get("errors", []))
+        )
+    report = _load_object(search_report_path, "trajectory search report")
+    references = sorted(
+        (_mapping(value, "search case reference") for value in _list(report.get("cases"), "cases")),
+        key=lambda item: _integer(item.get("seed"), "search case seed"),
+    )
+    if not references:
+        raise ValueError("Trajectory preference collection has no search cases")
+    components: list[tuple[int, dict[str, Any]]] = []
+    for reference in references:
+        run_seed = _integer(reference.get("seed"), "search case seed")
+        case_path, expected_reference = _search_case_path(search_report_path, report, run_seed)
+        if reference != expected_reference:
+            raise ValueError("Trajectory preference search references are ambiguous")
+        case = _load_object(case_path, "trajectory search case")
+        trajectory_id = _string(case.get("best_trajectory_id"), "accepted trajectory ID")
+        document = build_trajectory_mutation_preferences(
+            search_report_path=search_report_path,
+            search_config=search_config,
+            split_manifest=split_manifest,
+            environment_factory=environment_factory,
+            ruleset=ruleset,
+            policy=policy,
+            run_seed=run_seed,
+            trajectory_id=trajectory_id,
+            minimum_training_runs=minimum_training_runs,
+        )
+        components.append((run_seed, document))
+    return components
+
+
+def _collection_document(
+    *,
+    search_report_path: Path,
+    search_config: TrajectorySearchConfig,
+    split_manifest: SplitManifest,
+    references: list[dict[str, Any]],
+    components: list[tuple[int, dict[str, Any]]],
+    minimum_training_runs: int,
+) -> dict[str, Any]:
+    report = _load_object(search_report_path, "trajectory search report")
+    summaries = [
+        _mapping(component.get("summary"), "trajectory preference summary")
+        for _, component in components
+    ]
+    unique_runs = len(components)
+    strict_improvements = sum(
+        _integer(summary.get("strict_improvements"), "strict improvements") for summary in summaries
+    )
+    body: dict[str, Any] = {
+        "schema_version": TRAJECTORY_PREFERENCE_COLLECTION_SCHEMA_VERSION,
+        "search_report_id": report["report_id"],
+        "search_config_id": search_config.config_id,
+        "source_model_id": search_config.model_id,
+        "source_training_report_id": search_config.training_report_id,
+        "split_manifest_id": split_manifest.manifest_id,
+        "ruleset_manifest_id": split_manifest.ruleset_manifest_id,
+        "objective_id": split_manifest.objective_id,
+        "partition": SplitName.TRAIN.value,
+        "information_policy_id": "public-state-v1",
+        "hidden_state_resampling": False,
+        "component_schema_version": TRAJECTORY_PREFERENCE_SCHEMA_VERSION,
+        "cases": references,
+        "summary": {
+            "cases": len(components),
+            "mutations": sum(
+                _integer(summary.get("mutations"), "mutations") for summary in summaries
+            ),
+            "strict_improvements": strict_improvements,
+            "tied": sum(_integer(summary.get("tied"), "tied") for summary in summaries),
+            "regressed": sum(
+                _integer(summary.get("regressed"), "regressed") for summary in summaries
+            ),
+            "unique_runs": unique_runs,
+            "minimum_training_runs": minimum_training_runs,
+            "training_ready": unique_runs >= minimum_training_runs and strict_improvements > 0,
+            "terminal_victory_positive_labels": 0,
+        },
+        "claim_scope": TRAJECTORY_PREFERENCE_COLLECTION_CLAIM_SCOPE,
+    }
+    return {**body, "collection_id": manifest_identifier(body)}
 
 
 def _trajectory_lineage(

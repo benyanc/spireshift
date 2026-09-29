@@ -18,7 +18,10 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.types import DecisionType, LegalAction, Observation, Transition
 from spireshift.splits import SplitName, load_split_manifest
 from spireshift.trajectory_preferences import (
+    TRAJECTORY_PREFERENCE_COLLECTION_FILENAME,
+    freeze_trajectory_mutation_preference_collection,
     freeze_trajectory_mutation_preferences,
+    verify_trajectory_mutation_preference_collection,
     verify_trajectory_mutation_preferences,
 )
 from spireshift.trajectory_search import (
@@ -602,6 +605,85 @@ def test_strict_trajectory_preferences_replay_lineage_and_reject_tampering(
         trajectory_id=case["best_trajectory_id"],
     )
     assert rejected["valid"] is False
+
+
+def test_trajectory_preference_collection_preserves_complete_run_ownership(
+    tmp_path: Path,
+) -> None:
+    split = load_split_manifest(MOCK_SPLIT_PATH)
+    policy = _EarlyDefeatPolicy(split_manifest_id=split.manifest_id)
+    training_report_id = manifest_identifier({"report": "trajectory-preference-collection"})
+    config = _frontier_config(policy, training_report_id)
+    search_output = tmp_path / "collection-search"
+    timestamps = iter(("2026-01-05T00:00:00Z", "2026-01-05T00:00:01Z"))
+    result = run_trajectory_search(
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+        split_manifest=split,
+        training_report_id=training_report_id,
+        config=config,
+        output_directory=search_output,
+        now=lambda: next(timestamps),
+    )
+    collection_root = tmp_path / "preference-collection"
+    collection = freeze_trajectory_mutation_preference_collection(
+        search_report_path=result.report_path,
+        search_config=config,
+        output_directory=collection_root,
+        split_manifest=split,
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+    )
+
+    assert collection["summary"] == {
+        "cases": 2,
+        "mutations": 2,
+        "strict_improvements": 2,
+        "tied": 0,
+        "regressed": 0,
+        "unique_runs": 2,
+        "minimum_training_runs": 2,
+        "training_ready": True,
+        "terminal_victory_positive_labels": 0,
+    }
+    assert len({case["run_seed"] for case in collection["cases"]}) == 2
+    collection_schema = json.loads(
+        Path("schemas/trajectory-mutation-preference-collection-v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    Draft202012Validator(collection_schema).validate(collection)
+    collection_path = collection_root / TRAJECTORY_PREFERENCE_COLLECTION_FILENAME
+    verification = verify_trajectory_mutation_preference_collection(
+        collection_path,
+        search_report_path=result.report_path,
+        search_config=config,
+        split_manifest=split,
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+    )
+    assert verification["valid"] is True
+    assert verification["verified_cases"] == 2
+    assert verification["verified_mutations"] == 2
+
+    first_component_path = collection_root / collection["cases"][0]["path"]
+    first_component = json.loads(first_component_path.read_text(encoding="utf-8"))
+    first_component["preferences"][0]["preferred_action_id"] = "tampered-action"
+    first_component_path.write_text(json.dumps(first_component), encoding="utf-8")
+    rejected = verify_trajectory_mutation_preference_collection(
+        collection_path,
+        search_report_path=result.report_path,
+        search_config=config,
+        split_manifest=split,
+        environment_factory=_MilestoneEnvironment,
+        ruleset=policy.ruleset,
+        policy=cast(ProductionCheckpointPolicy, policy),
+    )
+    assert rejected["valid"] is False
+    assert rejected["verified_cases"] == 0
 
 
 def test_same_budget_ablation_compares_three_verified_arms(tmp_path: Path) -> None:
