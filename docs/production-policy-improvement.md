@@ -118,3 +118,16 @@ action traces. All 384 runs ended in defeat, and no run passed floor 13. Increas
 rejected, terminal-value training remains blocked, and no held-out evaluation is authorized. The
 next foundation package must search over coherent run trajectories and first establish Act 1 boss
 reach and clear as an auxiliary milestone without replacing terminal victory as the project goal.
+
+Coherent trajectory search subsequently reached the Act 1 boss on one train seed. Teacher
+continuations from that trajectory failed the frozen useful-signal gate, so that dataset remains
+excluded. The alternative [strict mutation preference collection](run-level-trajectory-search.md)
+now contains 79 verified action comparisons across 16 complete train runs, including 25 floor/boss
+improvements. This completes the multi-run evidence prerequisite for a conservative, anchored
+policy-only update. The training adapter and frozen experiment recipe are the next work item;
+the collection is not yet accepted by the existing production training command.
+
+Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
+terminal-value readiness and adaptive-search training remain blocked. The next update must
+preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
+tie-breakers, and protect broad policy quality with complete-run separation and held-out checks.

@@ -302,3 +302,55 @@ These are auxiliary policy preferences only. They contain zero positive terminal
 All five come from one complete run, so the artifact records `training_ready: false` and cannot be
 used for fitting or model selection until equivalent strict evidence exists from multiple train
 runs. No model should be promoted from this trajectory alone.
+
+### Completed multi-run preference collection
+
+The owner-run collection completed on October 3, 2026. It exactly replayed the accepted lineages
+from all 16 existing score-arm train runs: 111 trajectories and 10,308 decisions. The collection
+contains 95 mutations, with 79 strict improvements, 15 ties, and one regression. Each run is stored
+separately and content addressed. All 16 runs contribute at least four accepted preferences, so
+the multi-run auxiliary evidence gate now reports `training_ready: true`.
+
+The frozen identities are:
+
+- collection: `sha256:351503bd4fccc47a25465f34cb49b2ed9915b6067cee6d575927b653df5987ff`;
+- source search: `sha256:57ce9022cebbd968b41c7b5a378de45fb8c9f408e430c7f2a0555ba08c2288b0`;
+- resource report: `sha256:3187cefc24b528db1677be49475c2061948a08bc0bcf0fcea7c32fa8fbd10989`.
+
+The job used 110.36 wall seconds, 103.46 CPU seconds, 597 MB peak resident memory, and 1.94 MB of
+artifact storage. It reached no resource limit. Subsequent artifact inspection checked both
+schemas, every content identifier and file hash, train-seed ownership, source-search verification,
+lineage references, public decision/action alignment, and every parent/child rank comparison.
+That inspection performed no new engine replay. It found no duplicate or opposite state/action
+preference pairs, and the resource report independently passed integrity verification.
+
+The first differing rank components show why the 79 preferences must not all be treated as
+equally strong training evidence:
+
+| Deciding rank component | Strict preferences |
+| --- | ---: |
+| Boss reached | 1 |
+| Maximum floor | 24 |
+| Enemy health defeated fraction | 29 |
+| Last actionable player health | 14 |
+| Distinct public states on the deepest floor | 11 |
+
+These preferences cover combat (42), reward (16), event (8), path (7), card selection (3), rest
+site (2), and shop (1) decisions. They are selected improvements on fixed, seeded continuations;
+they are not calibrated action win probabilities or independent samples of a stochastic outcome.
+In particular, spending more decisions on the same floor is insufficient evidence of better play.
+
+The collection completes [issue #123](https://github.com/benyanc/spireshift/issues/123). The next
+foundation item is [issue #124](https://github.com/benyanc/spireshift/issues/124), conservative
+policy-only integration into accepted base-v2. Before training, freeze the component filters and
+weights, preserve complete-run fitting/selection
+ownership, and anchor the update to the existing policy to guard against the broad regression
+seen in base-v4. Keep the terminal-value, tactical-risk, and floor heads unchanged. Use a frozen
+held-out validation protocol before any new test evaluation. The 11 state-count-only preferences
+should remain audit evidence rather than direct policy targets; damage and health comparisons
+must be reported separately from the 25 floor/boss improvements.
+
+The collection contains zero positive terminal-victory labels. It supports a small auxiliary
+policy-improvement experiment, not terminal-value readiness, checkpoint promotion, learned-PUCT
+readiness, or adaptive-budget training. No new search, training, or full-run evaluation was
+started during this assessment.
