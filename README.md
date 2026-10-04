@@ -213,6 +213,10 @@ terminal full-run victory as the objective. Its public-frontier ablation ranks o
 trajectories by health and encounter progress, then tests strategic-trace diversity at the same
 trajectory budget as the frozen hash-ranked pilot.
 
+[Saved trajectory-policy diagnosis](docs/trajectory-policy-diagnosis.md) explains the rejected
+base-v6 update by reconciling every changed validation choice and checking overlap with the new
+training comparisons. Its owner-run command reads saved artifacts without training or game replay.
+
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
 high-confidence catastrophic errors, false-safe risk predictions, and interpretable inference-time

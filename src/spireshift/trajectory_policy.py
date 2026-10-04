@@ -324,7 +324,23 @@ def _folds(seeds: set[int], recipe: dict[str, Any]) -> dict[str, list[int]]:
     return {"fit": sorted(ranked[count:]), "selection": sorted(ranked[:count])}
 
 
-def train_trajectory_policy(
+@dataclass(frozen=True, slots=True)
+class TrajectoryPolicyInputs:
+    parent_checkpoint: dict[str, Any]
+    parent_report: dict[str, Any]
+    training_config: ProductionTrainingConfig
+    collection: dict[str, Any]
+    train_document: dict[str, Any]
+    validation_document: dict[str, Any]
+    anchors: tuple[_ProductionExample, ...]
+    validation: tuple[_ProductionExample, ...]
+    preferences: tuple[_Preference, ...]
+    preference_records: tuple[dict[str, Any], ...]
+    exclusions: dict[str, int]
+    runs: dict[str, list[int]]
+
+
+def load_trajectory_policy_inputs(
     *,
     parent_checkpoint_path: Path,
     parent_report_path: Path,
@@ -337,7 +353,8 @@ def train_trajectory_policy(
     ruleset: RulesetIdentity,
     config: TrajectoryPolicyConfig,
     objective: ObjectiveSpec,
-) -> ProductionTrainingResult:
+) -> TrajectoryPolicyInputs:
+    """Verify and reconstruct saved training inputs without replay or optimization."""
     recipe = TrajectoryPolicyConfig.from_mapping(config.document).document
     if objective.objective_id != recipe["objective_id"]:
         raise ValueError("Trajectory policy objective differs from the frozen recipe")
@@ -345,7 +362,6 @@ def train_trajectory_policy(
     parent_report = load_production_training_report(
         parent_report_path, checkpoint=parent_checkpoint
     )
-    parent_model = production_model_from_checkpoint(parent_checkpoint)
     training_config = ProductionTrainingConfig.from_mapping(parent_checkpoint["training_config"])
     if parent_checkpoint["heads"]["terminal_value"]["status"] != "blocked":
         raise ValueError("This auxiliary-only recipe requires a blocked terminal-value parent")
@@ -408,6 +424,7 @@ def train_trajectory_policy(
         if any(item.representation.ruleset_manifest_id != ruleset.manifest_id for item in items):
             raise ValueError("Trajectory anchor representation ruleset differs")
     preferences: list[_Preference] = []
+    preference_records: list[dict[str, Any]] = []
     exclusions: Counter[str] = Counter()
     for component in evidence.components:
         for record in component["preferences"] + component["excluded_mutations"]:
@@ -420,6 +437,7 @@ def train_trajectory_policy(
             if weight == 0:
                 exclusions[rank_component] += 1
             ids = record["candidate_action_ids"]
+            preference_records.append(record)
             preferences.append(
                 _Preference(
                     run_seed=int(record["run_seed"]),
@@ -457,6 +475,67 @@ def train_trajectory_policy(
     )
     if not strong_selection:
         raise ValueError("Trajectory selection subfold has no advancement comparisons")
+    return TrajectoryPolicyInputs(
+        parent_checkpoint,
+        parent_report,
+        training_config,
+        collection,
+        train_doc,
+        validation_doc,
+        anchors,
+        validation,
+        examples,
+        tuple(preference_records),
+        dict(sorted(exclusions.items())),
+        runs,
+    )
+
+
+def train_trajectory_policy(
+    *,
+    parent_checkpoint_path: Path,
+    parent_report_path: Path,
+    collection_path: Path,
+    search_report_path: Path,
+    search_config: TrajectorySearchConfig,
+    train_report_path: Path,
+    validation_report_path: Path,
+    split_manifest: SplitManifest,
+    ruleset: RulesetIdentity,
+    config: TrajectoryPolicyConfig,
+    objective: ObjectiveSpec,
+) -> ProductionTrainingResult:
+    inputs = load_trajectory_policy_inputs(
+        parent_checkpoint_path=parent_checkpoint_path,
+        parent_report_path=parent_report_path,
+        collection_path=collection_path,
+        search_report_path=search_report_path,
+        search_config=search_config,
+        train_report_path=train_report_path,
+        validation_report_path=validation_report_path,
+        split_manifest=split_manifest,
+        ruleset=ruleset,
+        config=config,
+        objective=objective,
+    )
+    recipe = config.document
+    parent_checkpoint, parent_report = inputs.parent_checkpoint, inputs.parent_report
+    parent_model = production_model_from_checkpoint(parent_checkpoint)
+    training_config = inputs.training_config
+    collection = inputs.collection
+    train_doc, validation_doc = inputs.train_document, inputs.validation_document
+    anchors, validation = inputs.anchors, inputs.validation
+    examples, exclusions, runs = inputs.preferences, inputs.exclusions, inputs.runs
+    eligible = tuple(item for item in examples if item.weight > 0)
+    fit = tuple(item for item in eligible if item.run_seed in runs["fit"])
+    selection = tuple(item for item in eligible if item.run_seed in runs["selection"])
+    fit_anchors = tuple(item for item in anchors if item.run_seed in runs["fit"])
+    selection_anchors = tuple(item for item in anchors if item.run_seed in runs["selection"])
+    strong_selection = tuple(
+        item
+        for item in selection
+        if item.component in {"maximum_floor", "boss_reached", "act1_cleared"}
+    )
     baseline = dict(parent_model.policy_weights)
     soft_baseline = parent_report["held_out_metrics"]["policy"]["soft_target_baseline"]
 

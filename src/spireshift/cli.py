@@ -211,6 +211,7 @@ from spireshift.terminal_discovery import (
     run_terminal_trajectory_discovery,
     verify_terminal_trajectory_discovery,
 )
+from spireshift.trajectory_diagnostic import diagnose_trajectory_policy
 from spireshift.trajectory_policy import load_trajectory_policy_config, train_trajectory_policy
 from spireshift.trajectory_preferences import (
     freeze_trajectory_mutation_preference_collection,
@@ -839,6 +840,24 @@ def build_parser() -> argparse.ArgumentParser:
     trajectory_train.add_argument("--split-manifest", type=Path, required=True)
     trajectory_train.add_argument("--ruleset-manifest", type=Path, required=True)
     trajectory_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    trajectory_diagnostic = model_commands.add_parser(
+        "diagnose-trajectory-policy",
+        help="Explain a saved trajectory policy update without training or replay",
+    )
+    trajectory_diagnostic.add_argument("config", type=Path)
+    trajectory_diagnostic.add_argument("parent_checkpoint", type=Path)
+    trajectory_diagnostic.add_argument("candidate_checkpoint", type=Path)
+    trajectory_diagnostic.add_argument("--parent-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--candidate-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--collection", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--search-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--search-config", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--train-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--validation-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--ruleset-manifest", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    trajectory_diagnostic.add_argument("--output", type=Path, required=True)
     production_blend = model_commands.add_parser(
         "blend-curriculum",
         help="Select the largest safe causal-policy blend on frozen validation data",
@@ -2625,6 +2644,60 @@ def main(argv: Sequence[str] | None = None) -> int:
                         ),
                     },
                     args.output,
+                )
+                return 0
+            if args.model_command == "diagnose-trajectory-policy":
+                if args.output.resolve() in {
+                    path.resolve()
+                    for path in (
+                        args.config,
+                        args.parent_checkpoint,
+                        args.candidate_checkpoint,
+                        args.parent_report,
+                        args.candidate_report,
+                        args.collection,
+                        args.search_report,
+                        args.search_config,
+                        args.train_report,
+                        args.validation_report,
+                        args.split_manifest,
+                        args.ruleset_manifest,
+                        args.objective_config,
+                    )
+                }:
+                    raise ValueError("Diagnostic output must differ from every source artifact")
+                trajectory_diagnosis = diagnose_trajectory_policy(
+                    parent_checkpoint_path=args.parent_checkpoint,
+                    parent_report_path=args.parent_report,
+                    candidate_checkpoint_path=args.candidate_checkpoint,
+                    candidate_report_path=args.candidate_report,
+                    collection_path=args.collection,
+                    search_report_path=args.search_report,
+                    search_config=load_trajectory_search_config(args.search_config),
+                    train_report_path=args.train_report,
+                    validation_report_path=args.validation_report,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    config=load_trajectory_policy_config(args.config),
+                    objective=load_objective(args.objective_config),
+                )
+                write_production_model_artifact(
+                    trajectory_diagnosis, args.output, label="trajectory policy diagnosis"
+                )
+                _emit_json(
+                    {
+                        "report_id": trajectory_diagnosis["report_id"],
+                        "report_path": str(args.output),
+                        "reconciliation_pass": trajectory_diagnosis["reconciliation_pass"],
+                        "validation_summary": trajectory_diagnosis["validation_summary"],
+                        "validation_by_decision_type": trajectory_diagnosis[
+                            "validation_by_decision_type"
+                        ],
+                        "preference_coverage": trajectory_diagnosis["preference_coverage"],
+                        "validation_checks": trajectory_diagnosis["validation_checks"],
+                        "checkpoint_promoted": False,
+                    },
+                    None,
                 )
                 return 0
             if args.model_command == "finetune-trajectory-policy":

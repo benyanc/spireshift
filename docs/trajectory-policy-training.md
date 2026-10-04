@@ -5,6 +5,11 @@ from accepted base-v2 and keeps its terminal-value, tactical-risk, and floor hea
 unchanged. Accepted base-v2 stays in production until a later frozen full-run comparison supports
 promotion. This implementation does not train an adaptive thinking controller.
 
+The owner-run base-v6 experiment has completed with a rejected candidate. Epoch 2 exceeded the
+frozen development-validation regret limit. Keep base-v2 accepted; the next owner-run command is
+the [saved policy diagnosis](trajectory-policy-diagnosis.md), rather than repeating this training
+recipe or evaluating the rejected candidate through new game runs.
+
 ## Frozen experiment
 
 The recipe is `configs/trajectory-policy/sts2-v0.107.1-base-v2-frontier-preferences-v1.json`, identified

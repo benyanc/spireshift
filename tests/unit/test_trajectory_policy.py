@@ -28,12 +28,20 @@ from spireshift.production_models import (
 )
 from spireshift.representations import build_model_input, vectorize_model_input
 from spireshift.splits import SplitName, load_split_manifest
+from spireshift.trajectory_diagnostic import (
+    _anchor_conflicts,
+    _choice_rows,
+    _contrast_key,
+    _summary,
+    diagnose_trajectory_policy,
+)
 from spireshift.trajectory_policy import (
     FROZEN_HEADS,
     TrajectoryPolicyConfig,
     _features,
     _gradient,
     _Preference,
+    load_trajectory_policy_inputs,
     train_trajectory_policy,
     validate_trajectory_report,
 )
@@ -559,3 +567,182 @@ def test_cli_rejects_existing_output_before_starting_training(
         ]
     )
     assert rc == 1 and "must not already exist" in capsys.readouterr().out
+
+
+def _diagnostic_kwargs(package: dict[str, Any]) -> dict[str, Any]:
+    result = train_trajectory_policy(**package["kwargs"])
+    candidate_path = package["root"] / "candidate.json"
+    report_path = package["root"] / "candidate-report.json"
+    _write(candidate_path, result.checkpoint)
+    _write(report_path, result.report)
+    return {
+        **package["kwargs"],
+        "candidate_checkpoint_path": candidate_path,
+        "candidate_report_path": report_path,
+    }
+
+
+def test_diagnosis_reconciles_saved_choices_without_training_or_replay(
+    package: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    kwargs = _diagnostic_kwargs(package)
+    saved = json.loads(kwargs["candidate_report_path"].read_text())
+    source_bytes = kwargs["candidate_checkpoint_path"].read_bytes()
+
+    def forbidden(**kwargs: Any) -> Any:
+        raise AssertionError("Diagnosis must not train or replay")
+
+    monkeypatch.setattr("spireshift.trajectory_policy.train_trajectory_policy", forbidden)
+    monkeypatch.setattr("spireshift.trajectory_preferences._run_trajectory", forbidden)
+    report = diagnose_trajectory_policy(**kwargs)
+    assert report == diagnose_trajectory_policy(**kwargs)
+    assert kwargs["candidate_checkpoint_path"].read_bytes() == source_bytes
+    assert report["report_id"] == manifest_identifier(
+        {key: value for key, value in report.items() if key != "report_id"}
+    )
+    assert report["reconciliation_pass"] is True
+    assert report["checkpoint_promoted"] is False
+    assert report["terminal_victory_positive_labels"] == 0
+    assert report["validation_summary"]["decisions"] == saved["validation_records"]
+    assert (
+        report["validation_summary"]["changed_actions"]
+        == saved["validation_drift"]["changed_actions"]
+    )
+    assert (
+        report["validation_summary"]["candidate_mean_regret"]
+        == saved["held_out_metrics"]["policy"]["mean_progress_utility_regret"]
+    )
+    assert (
+        len(report["preference_choices"]) == package["collection"]["summary"]["strict_improvements"]
+    )
+    assert (
+        sum(values["decisions"] for values in report["validation_by_run"].values())
+        == saved["validation_records"]
+    )
+    registry: Registry[Any] = Registry().with_resources(
+        [
+            (schema["$id"], Resource.from_contents(schema))
+            for path in Path("schemas").glob("*.json")
+            for schema in [json.loads(path.read_text())]
+        ]
+    )
+    schema = json.loads(Path("schemas/trajectory-policy-diagnostic-v1.json").read_text())
+    Draft202012Validator(schema, registry=registry).validate(report)
+
+
+def test_choice_attribution_accounts_for_harm_benefit_and_utility_ties(
+    package: dict[str, Any],
+) -> None:
+    source = load_trajectory_policy_inputs(**package["kwargs"]).validation[0]
+    features = ({0: 1.0}, {1: 1.0})
+    examples = tuple(
+        replace(
+            source,
+            state_id=str(index),
+            candidate_features=features,
+            mean_progress_utilities=utilities,
+        )
+        for index, utilities in enumerate(((1.0, 0.0), (0.0, 0.5), (0.25, 0.25)))
+    )
+    parent, candidate = {0: 1.0}, {1: 1.0}
+    rows = _choice_rows(examples, parent, candidate, 128, (), {})
+    summary = _summary(rows)
+    assert summary["changed_actions"] == 3
+    assert summary["harmful_changes"] == 1
+    assert summary["beneficial_changes"] == 1
+    assert summary["tied_changes"] == 1
+    assert summary["total_regret_change"] == 0.5
+    assert summary["gross_harm"] == 1.0 and summary["gross_benefit"] == 0.5
+    assert summary["mean_regret_change"] == pytest.approx(1 / 6)
+    attribution = rows[0]["weight_attribution"]
+    assert attribution["parent_new_over_old_margin"] == -1
+    assert attribution["candidate_new_over_old_margin"] == 1
+    assert attribution["weight_update_margin"] == 2
+    assert attribution["action_coordinate_margin"] == 2
+    assert attribution["state_action_coordinate_margin"] == 0
+
+
+def test_exact_contrast_alias_preserves_direction_and_exposes_opposing_targets(
+    package: dict[str, Any],
+) -> None:
+    inputs = load_trajectory_policy_inputs(**package["kwargs"])
+    source = inputs.validation[0]
+    features = ({0: 1.0}, {1: 1.0})
+    anchor = replace(source, candidate_features=features, mean_progress_utilities=(1.0, 0.0))
+    preference = _Preference(1, "maximum_floor", "combat", 1.0, features[1], features[0], features)
+    record = {
+        "preference_id": manifest_identifier({"preference": "opposing"}),
+        "source_state_hash": "different-public-state",
+    }
+    diagnosis = _anchor_conflicts(
+        replace(inputs, anchors=(anchor,)), ((preference, record),), {}, {}
+    )
+    assert diagnosis["exact_state_action_overlap"] == []
+    assert diagnosis["opposing_aliases"] == 1
+    assert diagnosis["exact_hashed_contrast_aliases"][0]["teacher_utility_gap"] == -1
+    forward, sign = _contrast_key({0: 1.0, 1: -1.0})
+    reverse, reversed_sign = _contrast_key({0: -1.0, 1: 1.0})
+    assert forward == reverse and sign == -reversed_sign
+
+
+def test_diagnosis_rejects_saved_report_counts_that_do_not_match_sources(
+    package: dict[str, Any],
+) -> None:
+    kwargs = _diagnostic_kwargs(package)
+    report = json.loads(kwargs["candidate_report_path"].read_text())
+    report["validation_runs"] += 1
+    _write(kwargs["candidate_report_path"], report, "report_id")
+    with pytest.raises(ValueError, match="reconcile"):
+        diagnose_trajectory_policy(**kwargs)
+
+
+def test_diagnosis_rejects_candidate_parameter_tampering(package: dict[str, Any]) -> None:
+    kwargs = _diagnostic_kwargs(package)
+    checkpoint = json.loads(kwargs["candidate_checkpoint_path"].read_text())
+    checkpoint["heads"]["policy"]["weights"][0]["value"] += 1
+    _write(kwargs["candidate_checkpoint_path"], checkpoint, "model_id")
+    with pytest.raises(ValueError):
+        diagnose_trajectory_policy(**kwargs)
+
+
+@pytest.mark.parametrize("corruption", ["action_order", "hidden_field"])
+def test_diagnosis_rejects_changed_public_comparison_evidence(
+    package: dict[str, Any], corruption: str
+) -> None:
+    kwargs = _diagnostic_kwargs(package)
+    path = kwargs["collection_path"].parent / package["collection"]["cases"][0]["path"]
+    component = json.loads(path.read_text())
+    record = component["preferences"][0]
+    if corruption == "action_order":
+        record["candidate_action_ids"].reverse()
+    else:
+        record["source_observation"]["public_state"]["hidden_rng"] = 123
+    _write(path, component, "preference_set_id")
+    with pytest.raises(ValueError):
+        diagnose_trajectory_policy(**kwargs)
+
+
+def test_diagnostic_cli_preserves_source_files(
+    package: dict[str, Any], monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def forbidden(**kwargs: Any) -> Any:
+        raise AssertionError("Diagnosis must not begin if its output would replace an input")
+
+    monkeypatch.setattr("spireshift.cli.diagnose_trajectory_policy", forbidden)
+    path = package["kwargs"]["parent_checkpoint_path"]
+    arguments = ["model", "diagnose-trajectory-policy", str(path), str(path), str(path)]
+    for flag in (
+        "--parent-report",
+        "--candidate-report",
+        "--collection",
+        "--search-report",
+        "--search-config",
+        "--train-report",
+        "--validation-report",
+        "--split-manifest",
+        "--ruleset-manifest",
+        "--output",
+    ):
+        arguments.extend((flag, str(path)))
+    assert main(arguments) == 1
+    assert "must differ from every source artifact" in capsys.readouterr().out

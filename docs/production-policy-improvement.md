@@ -129,8 +129,13 @@ policy-only update. These comparisons require a separate integration beyond the 
 
 The [anchored trajectory-policy trainer](trajectory-policy-training.md) now provides that separate
 integration. Its frozen first recipe uses 68 eligible preferences and the original base-v2 anchor
-corpus. The implementation has passed short mock checks and a saved-input audit; the owner-run
-training command remains outstanding. No new checkpoint is available or promoted yet.
+corpus. The owner-run base-v6 experiment completed but failed its frozen development-validation
+regret limit: regret increased by 0.000303308823, above the allowed 0.0002. Choices changed on
+26/204 states. The selected update ranked the preferred new action ahead in only 1/18 selection
+comparisons. Base-v6 is rejected and has not been promoted. Issue #42's
+[saved policy diagnosis](trajectory-policy-diagnosis.md) now attributes the changed choices and
+checks learning overlap before another training recipe is chosen. Its complete owner-run audit is
+pending; no further model training is authorized by the diagnostic command.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next update must
