@@ -217,6 +217,11 @@ trajectory budget as the frozen hash-ranked pilot.
 base-v6 update by reconciling every changed validation choice and checking overlap with the new
 training comparisons. Its owner-run command reads saved artifacts without training or game replay.
 
+The [starting-option policy trainer](docs/starting-option-policy-training.md) addresses that diagnosis
+with public categorical option identities and a zero-initialized correction over immutable base-v2.
+Its frozen owner-run experiment preserves the same data, complete-run subfolds and all 204
+development-validation checks. The real-data result is pending; base-v2 remains accepted.
+
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
 high-confidence catastrophic errors, false-safe risk predictions, and interpretable inference-time

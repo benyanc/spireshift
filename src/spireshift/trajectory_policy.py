@@ -8,7 +8,7 @@ import time
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
@@ -42,10 +42,17 @@ from spireshift.production_models import (
     load_production_training_report,
     production_model_from_checkpoint,
 )
-from spireshift.representations import build_model_input, vectorize_model_input
+from spireshift.representations import (
+    CompositionalModelInput,
+    build_model_input,
+    vectorize_model_input,
+)
 from spireshift.splits import SplitManifest, SplitName
 from spireshift.trajectory_preferences import load_trajectory_preference_collection
 from spireshift.trajectory_search import TRAJECTORY_SELECTION_RANK_ORDER, TrajectorySearchConfig
+
+if TYPE_CHECKING:
+    from spireshift.starting_options import StartingOptionConfig
 
 CONFIG_SCHEMA = "trajectory-policy-training-config-v1"
 CHECKPOINT_SCHEMA = "production-model-checkpoint-v6"
@@ -173,9 +180,9 @@ class _Preference:
     candidates: tuple[dict[int, float], ...]
 
 
-def _features(
-    record: dict[str, Any], ruleset: RulesetIdentity, config: ProductionTrainingConfig
-) -> tuple[dict[int, float], ...]:
+def _preference_representation(
+    record: dict[str, Any], ruleset: RulesetIdentity
+) -> CompositionalModelInput:
     raw = _mapping(record["source_observation"], "source observation")
     observation = Observation(
         schema_version=str(raw["schema_version"]),
@@ -188,7 +195,13 @@ def _features(
         raise ValueError("Trajectory preference decision type is misaligned")
     actions = tuple(_action(str(item)) for item in record["candidate_action_ids"])
     # The existing representation verifies the public-state hash and rejects privileged fields.
-    representation = build_model_input(ruleset, observation, actions)
+    return build_model_input(ruleset, observation, actions)
+
+
+def _features(
+    record: dict[str, Any], ruleset: RulesetIdentity, config: ProductionTrainingConfig
+) -> tuple[dict[int, float], ...]:
+    representation = _preference_representation(record, ruleset)
     vector = vectorize_model_input(representation, dimension=config.vector_dimension)
     if vector.source_action_ids != tuple(record["candidate_action_ids"]):
         raise ValueError("Trajectory preference candidate order is misaligned")
@@ -504,6 +517,7 @@ def train_trajectory_policy(
     ruleset: RulesetIdentity,
     config: TrajectoryPolicyConfig,
     objective: ObjectiveSpec,
+    residual_config: StartingOptionConfig | None = None,
 ) -> ProductionTrainingResult:
     inputs = load_trajectory_policy_inputs(
         parent_checkpoint_path=parent_checkpoint_path,
@@ -518,6 +532,17 @@ def train_trajectory_policy(
         config=config,
         objective=objective,
     )
+    from spireshift.starting_options import CHECKPOINT_SCHEMA as RESIDUAL_CHECKPOINT_SCHEMA
+    from spireshift.starting_options import MODEL_TYPE as RESIDUAL_MODEL_TYPE
+    from spireshift.starting_options import REPORT_SCHEMA as RESIDUAL_REPORT_SCHEMA
+
+    space = None
+    if residual_config is not None:
+        from spireshift.starting_option_training import prepare_starting_option_space
+
+        if residual_config.recipe.document != config.document:
+            raise ValueError("Starting option wrapper differs from the trajectory recipe")
+        inputs, space = prepare_starting_option_space(inputs, ruleset, residual_config)
     recipe = config.document
     parent_checkpoint, parent_report = inputs.parent_checkpoint, inputs.parent_report
     parent_model = production_model_from_checkpoint(parent_checkpoint)
@@ -558,6 +583,9 @@ def train_trajectory_policy(
     history = []
     for epoch in range(1, int(recipe["epochs"]) + 1):
         gradient = _gradient(weights, baseline, fit, fit_anchors, recipe)
+        if space is not None:
+            # Neither the original policy nor any other parent head receives an update.
+            gradient = {index: value for index, value in gradient.items() if index >= space.offset}
         norm = math.sqrt(sum(value * value for value in gradient.values()))
         scale = min(1.0, float(recipe["gradient_clip"]) / max(norm, 1e-12))
         for index in sorted(gradient):
@@ -567,7 +595,16 @@ def train_trajectory_policy(
                 math.sqrt(accumulators[index]) + recipe["adagrad_epsilon"]
             )
         # Score exactly the quantized weights that can be saved and evaluated.
-        weights = _quantized_weights(weights)
+        weights = (
+            _quantized_weights(weights)
+            if space is None
+            else {
+                **baseline,
+                **_quantized_weights(
+                    {index: value for index, value in weights.items() if index >= space.offset}
+                ),
+            }
+        )
         metrics = _quantize_artifact(policy_metrics(weights, selection_anchors))
         drift = _quantize_artifact(_drift(weights, baseline, selection_anchors))
         preferences_metrics = _quantize_artifact(_preference_metrics(weights, selection))
@@ -621,15 +658,20 @@ def train_trajectory_policy(
         not in {"model_id", "causal_preference_set_id", "policy_blend", "trajectory_finetuning"}
     }
     body.update(
-        schema_version=CHECKPOINT_SCHEMA, model_type=MODEL_TYPE, trajectory_finetuning=binding
+        schema_version=CHECKPOINT_SCHEMA if space is None else RESIDUAL_CHECKPOINT_SCHEMA,
+        model_type=MODEL_TYPE if space is None else RESIDUAL_MODEL_TYPE,
+        trajectory_finetuning=binding,
     )
-    body["heads"]["policy"]["weights"] = _weights_as_list(best_weights)
+    if space is None:
+        body["heads"]["policy"]["weights"] = _weights_as_list(best_weights)
+    else:
+        body["starting_option_residual"] = space.checkpoint_binding(best_weights)
     checkpoint = {**body, "model_id": manifest_identifier(body)}
     held_out = copy.deepcopy(parent_report["held_out_metrics"])
     held_out["policy"] = validation_metrics
     report_body = {
-        "schema_version": REPORT_SCHEMA,
-        "model_type": MODEL_TYPE,
+        "schema_version": REPORT_SCHEMA if space is None else RESIDUAL_REPORT_SCHEMA,
+        "model_type": MODEL_TYPE if space is None else RESIDUAL_MODEL_TYPE,
         "model_id": checkpoint["model_id"],
         "train_dataset_id": train_doc["dataset_id"],
         "validation_dataset_id": validation_doc["dataset_id"],
@@ -668,6 +710,8 @@ def train_trajectory_policy(
             "Validation is reused development evidence, not a new final test."
         ),
     }
+    if space is not None:
+        report_body["starting_option_training"] = space.report_binding(best_weights)
     report_body = _quantize_artifact(report_body)
     report = {**report_body, "report_id": manifest_identifier(report_body)}
     validate_trajectory_report(report, checkpoint=checkpoint)
@@ -702,14 +746,17 @@ def _inference_diagnostics(
 
 
 def validate_trajectory_checkpoint(checkpoint: dict[str, Any]) -> None:
+    from spireshift.starting_options import CHECKPOINT_SCHEMA as RESIDUAL_CHECKPOINT_SCHEMA
+    from spireshift.starting_options import MODEL_TYPE as RESIDUAL_MODEL_TYPE
+
+    residual = checkpoint.get("schema_version") == RESIDUAL_CHECKPOINT_SCHEMA
     binding = _validate_binding(checkpoint.get("trajectory_finetuning"))
     recipe = binding["recipe"]
     for key in ("train_dataset_id", "split_manifest_id", "ruleset_manifest_id"):
         if checkpoint.get(key) != recipe["inputs"][key]:
             raise ValueError("Trajectory checkpoint recipe provenance differs")
-    if (
-        checkpoint.get("objective_id") != recipe["objective_id"]
-        or checkpoint.get("model_type") != MODEL_TYPE
+    if checkpoint.get("objective_id") != recipe["objective_id"] or checkpoint.get("model_type") != (
+        RESIDUAL_MODEL_TYPE if residual else MODEL_TYPE
     ):
         raise ValueError("Trajectory checkpoint model type or objective differs")
     heads = _mapping(checkpoint.get("heads"), "heads")
@@ -718,6 +765,10 @@ def validate_trajectory_checkpoint(checkpoint: dict[str, Any]) -> None:
             raise ValueError(f"Frozen {key} head changed")
     if heads["terminal_value"].get("status") != "blocked":
         raise ValueError("Auxiliary trajectory evidence cannot promote terminal value")
+    if residual:
+        from spireshift.starting_option_training import starting_option_parent
+
+        starting_option_parent(checkpoint)
 
 
 def _validate_binding(value: object) -> dict[str, Any]:
@@ -768,6 +819,10 @@ def _validate_binding(value: object) -> dict[str, Any]:
 def validate_trajectory_report(
     report: dict[str, Any], *, checkpoint: dict[str, Any] | None = None
 ) -> None:
+    from spireshift.starting_options import MODEL_TYPE as RESIDUAL_MODEL_TYPE
+    from spireshift.starting_options import REPORT_SCHEMA as RESIDUAL_REPORT_SCHEMA
+
+    residual = report.get("schema_version") == RESIDUAL_REPORT_SCHEMA
     fields = {
         "schema_version",
         "report_id",
@@ -807,12 +862,20 @@ def validate_trajectory_report(
         "claim_scope",
         "selection_note",
     }
+    if residual:
+        fields.add("starting_option_training")
     _exact_keys(report, fields, "trajectory training report")
     _identified(report, "report_id")
     binding = _validate_binding(report["trajectory_finetuning"])
     recipe = binding["recipe"]
-    if report["schema_version"] != REPORT_SCHEMA or report["model_type"] != MODEL_TYPE:
+    if report["schema_version"] != (
+        RESIDUAL_REPORT_SCHEMA if residual else REPORT_SCHEMA
+    ) or report["model_type"] != (RESIDUAL_MODEL_TYPE if residual else MODEL_TYPE):
         raise ValueError("Unsupported trajectory training report")
+    if residual:
+        from spireshift.starting_option_training import validate_starting_option_report
+
+        validate_starting_option_report(report, checkpoint)
     for key in ("train_dataset_id", "validation_dataset_id", "split_manifest_id"):
         if report[key] != recipe["inputs"][key]:
             raise ValueError("Trajectory report input provenance differs")
@@ -894,17 +957,29 @@ def validate_trajectory_report(
     )
     if binding["selected_epoch"] != (0 if selected is None else selected["epoch"]):
         raise ValueError("Trajectory epoch selection differs from the frozen rule")
+    saved_policy_weights: list[dict[str, float | int]] | None
+    if residual and checkpoint is not None:
+        from spireshift.starting_option_training import starting_option_combined_weights
+
+        saved_policy_weights = starting_option_combined_weights(checkpoint)
+    else:
+        saved_policy_weights = (
+            None if checkpoint is None else checkpoint["heads"]["policy"]["weights"]
+        )
     if (
         checkpoint is not None
         and selected is not None
-        and selected["policy_weights_id"]
-        != manifest_identifier(checkpoint["heads"]["policy"]["weights"])
+        and selected["policy_weights_id"] != manifest_identifier(saved_policy_weights)
     ):
         raise ValueError("Selected trajectory policy weights differ from the recorded epoch")
 
 
 def trajectory_checkpoint_as_base(checkpoint: dict[str, Any]) -> dict[str, Any]:
     validate_trajectory_checkpoint(checkpoint)
+    if checkpoint.get("schema_version") == "production-model-checkpoint-v7":
+        from spireshift.starting_option_training import starting_option_parent
+
+        return starting_option_parent(checkpoint)
     body = {
         k: copy.deepcopy(v)
         for k, v in checkpoint.items()

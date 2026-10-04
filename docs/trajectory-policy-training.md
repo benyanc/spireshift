@@ -9,7 +9,8 @@ The owner-run base-v6 experiment has completed with a rejected candidate. Epoch 
 frozen development-validation regret limit. The [saved policy diagnosis](trajectory-policy-diagnosis.md)
 has also completed: all 15 harmful changes occur at starting Ancient choices. Keep base-v2 accepted.
 [Issue #125](https://github.com/benyanc/spireshift/issues/125) tests public option identity in a new
-policy representation before another training experiment. No owner-run command is pending.
+policy representation. Its [separate starting-option runner](starting-option-policy-training.md)
+is implemented and awaiting the owner-run experiment; the old base-v6 recipe remains completed.
 
 ## Frozen experiment
 

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-model-checkpoint-v7.json",
+  "title": "SpireShift Immutable Base with Starting Option Policy Residual v7",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "model_id",
+    "model_type",
+    "representation_encoder_id",
+    "vectorizer_id",
+    "ruleset_manifest_id",
+    "objective_id",
+    "split_manifest_id",
+    "train_dataset_id",
+    "training_config",
+    "heads",
+    "trajectory_finetuning",
+    "starting_option_residual"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "production-model-checkpoint-v7"
+    },
+    "model_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/model_id"
+    },
+    "model_type": {
+      "const": "sparse-anchored-starting-option-residual-v1"
+    },
+    "representation_encoder_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/representation_encoder_id"
+    },
+    "vectorizer_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/vectorizer_id"
+    },
+    "ruleset_manifest_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/ruleset_manifest_id"
+    },
+    "objective_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/objective_id"
+    },
+    "split_manifest_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/split_manifest_id"
+    },
+    "train_dataset_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/train_dataset_id"
+    },
+    "training_config": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/training_config"
+    },
+    "heads": {
+      "$ref": "https://spireshift.dev/schemas/production-model-checkpoint-v3.json#/properties/heads"
+    },
+    "trajectory_finetuning": {
+      "$ref": "https://spireshift.dev/schemas/trajectory-policy-training-config-v1.json#/$defs/binding"
+    },
+    "starting_option_residual": {
+      "type": "object",
+      "required": [
+        "config",
+        "parent_schema_version",
+        "parent_model_type",
+        "head"
+      ],
+      "properties": {
+        "config": {
+          "$ref": "https://spireshift.dev/schemas/starting-option-policy-training-config-v1.json"
+        },
+        "parent_schema_version": {
+          "enum": [
+            "production-model-checkpoint-v1",
+            "production-model-checkpoint-v2",
+            "production-model-checkpoint-v3"
+          ]
+        },
+        "parent_model_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "head": {
+          "$ref": "https://spireshift.dev/schemas/starting-option-policy-residual-v1.json"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

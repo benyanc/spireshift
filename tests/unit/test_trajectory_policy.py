@@ -146,8 +146,7 @@ def _write(path: Path, value: dict[str, Any], id_field: str | None = None) -> No
     path.write_text(json.dumps(value, indent=2) + "\n")
 
 
-@pytest.fixture
-def package(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
+def _build_package(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
     split = load_split_manifest(Path("manifests/splits/mock-v1-seeds-000000-000999-v1.json"))
     config = ProductionTrainingConfig(epochs=2, vector_dimension=128, interaction_dimension=256)
     environment = _Environment()
@@ -363,6 +362,68 @@ def package(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
     }
 
 
+@pytest.fixture
+def package(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
+    return _build_package(tmp_path, monkeypatch)
+
+
+@pytest.fixture
+def starting_package(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
+    from spireshift.starting_options import StartingOptionConfig
+
+    original_observe = _Environment.observe
+
+    def observe(environment: _Environment) -> Observation:
+        result = original_observe(environment)
+        if environment.stage:
+            return result
+        public = {
+            **result.public_state,
+            "floor": 1,
+            "player_hp": 64,
+            "player_max_hp": 80,
+            "neow_options": [5, 9, 12],
+            "deck": [],
+            "relic_slots": [],
+        }
+        return Observation(
+            result.schema_version,
+            result.patch_id,
+            DecisionType.TERMINAL if environment.terminal else DecisionType.EVENT,
+            public,
+            hashlib.sha256(
+                json.dumps(public, sort_keys=True, separators=(",", ":")).encode()
+            ).hexdigest(),
+        )
+
+    original_actions = _Environment.legal_actions
+
+    def actions(environment: _Environment) -> tuple[LegalAction, ...]:
+        if environment.stage or environment.terminal:
+            return original_actions(environment)
+        return tuple(
+            LegalAction(
+                f"evangambit:ancient:{i}",
+                "evangambit_ancient",
+                {"phase": "ancient", "action_index": i},
+            )
+            for i in range(2)
+        )
+
+    monkeypatch.setattr(_Environment, "observe", observe)
+    monkeypatch.setattr(_Environment, "legal_actions", actions)
+    result = _build_package(tmp_path, monkeypatch)
+    doc = {
+        "schema_version": "starting-option-policy-training-config-v1",
+        "encoder_id": "starting-ancient-public-option-v1",
+        "dimension": 4096,
+        "trajectory_recipe": result["recipe"],
+    }
+    doc["config_id"] = manifest_identifier(doc)
+    result["kwargs"]["residual_config"] = StartingOptionConfig.from_mapping(doc)
+    return result
+
+
 def test_saved_collection_loads_without_engine_and_rejects_corruption(
     package: dict[str, Any], monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -531,8 +592,14 @@ def test_longer_lineage_does_not_increase_total_gradient() -> None:
     )
 
 
+@pytest.mark.parametrize(
+    "command", ["finetune-trajectory-policy", "finetune-starting-option-policy"]
+)
 def test_cli_rejects_existing_output_before_starting_training(
-    package: dict[str, Any], monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+    package: dict[str, Any],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    command: str,
 ) -> None:
     def forbidden(**kwargs: Any) -> Any:
         raise AssertionError("Training must not start")
@@ -542,7 +609,7 @@ def test_cli_rejects_existing_output_before_starting_training(
     rc = main(
         [
             "model",
-            "finetune-trajectory-policy",
+            command,
             str(path),
             str(path),
             str(path),
@@ -580,6 +647,157 @@ def _diagnostic_kwargs(package: dict[str, Any]) -> dict[str, Any]:
         "candidate_checkpoint_path": candidate_path,
         "candidate_report_path": report_path,
     }
+
+
+def test_starting_option_update_freezes_the_entire_parent_and_round_trips(
+    starting_package: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def no_replay(**kwargs: Any) -> Any:
+        raise AssertionError("Owner training reads saved inputs; it cannot replay a game")
+
+    monkeypatch.setattr("spireshift.trajectory_preferences._run_trajectory", no_replay)
+    result = train_trajectory_policy(**starting_package["kwargs"])
+    parent = starting_package["parent"]
+    assert result.checkpoint["heads"] == parent["heads"]
+    assert result.checkpoint["training_config"] == parent["training_config"]
+    assert result.report["candidate_eligible"] is True
+    head = result.checkpoint["starting_option_residual"]["head"]
+    assert head["weights"] and head["known_option_ids"] == [5, 9]
+    coverage = result.report["starting_option_training"]["coverage"]
+    assert coverage["fit_preferences"]["records"] == 4
+    assert coverage["selection_preferences"]["scoped_complete_runs"] == 4
+    assert coverage["validation"]["records"] == result.report["validation_records"]
+    assert coverage["validation"]["scoped_records"] == 0
+    assert result.report["validation_drift"]["changed_actions"] == 0
+    assert result.report["checkpoint_promoted"] is False
+    checkpoint_path = starting_package["root"] / "starting-result.json"
+    report_path = starting_package["root"] / "starting-report.json"
+    _write(checkpoint_path, result.checkpoint)
+    _write(report_path, result.report)
+    assert load_production_model_checkpoint(checkpoint_path) == result.checkpoint
+    assert (
+        load_production_training_report(report_path, checkpoint=result.checkpoint) == result.report
+    )
+    ProductionCheckpointPolicy(
+        checkpoint=result.checkpoint,
+        training_report=result.report,
+        ruleset=starting_package["kwargs"]["ruleset"],
+    )
+    registry = Registry().with_resources(
+        [
+            (schema["$id"], Resource.from_contents(schema))
+            for p in Path("schemas").glob("*.json")
+            for schema in [json.loads(p.read_text())]
+        ]
+    )
+    for name, document in (
+        ("production-model-checkpoint-v7", result.checkpoint),
+        ("production-model-training-report-v7", result.report),
+    ):
+        Draft202012Validator(
+            json.loads(Path("schemas", name + ".json").read_text()), registry=registry
+        ).validate(document)
+    tampered = copy.deepcopy(result.checkpoint)
+    tampered["heads"]["policy"]["weights"][0]["value"] += 0.1
+    _write(checkpoint_path, tampered, "model_id")
+    with pytest.raises(ValueError, match="parent checkpoint changed"):
+        load_production_model_checkpoint(checkpoint_path)
+    bad_report = copy.deepcopy(result.report)
+    bad_report["starting_option_training"]["coverage"]["validation"]["records"] += 1
+    _write(report_path, bad_report, "report_id")
+    with pytest.raises(ValueError, match="coverage counts"):
+        load_production_training_report(report_path, checkpoint=result.checkpoint)
+
+
+def test_nonadvancing_starting_option_update_keeps_a_zero_residual_and_is_rejected(
+    starting_package: dict[str, Any],
+) -> None:
+    from spireshift.starting_options import StartingOptionConfig
+
+    kwargs = dict(starting_package["kwargs"])
+    recipe = copy.deepcopy(starting_package["recipe"])
+    recipe["limits"]["minimum_preference_loss_improvement"] = 10.0
+    recipe["config_id"] = manifest_identifier(
+        {key: value for key, value in recipe.items() if key != "config_id"}
+    )
+    residual_doc = copy.deepcopy(kwargs["residual_config"].document)
+    residual_doc["trajectory_recipe"] = recipe
+    residual_doc["config_id"] = manifest_identifier(
+        {key: value for key, value in residual_doc.items() if key != "config_id"}
+    )
+    kwargs.update(
+        config=TrajectoryPolicyConfig.from_mapping(recipe),
+        residual_config=StartingOptionConfig.from_mapping(residual_doc),
+    )
+    result = train_trajectory_policy(**kwargs)
+    assert result.report["candidate_eligible"] is False
+    assert result.report["trajectory_finetuning"]["selected_epoch"] == 0
+    assert result.checkpoint["starting_option_residual"]["head"]["weights"] == []
+    assert result.checkpoint["heads"] == starting_package["parent"]["heads"]
+    with pytest.raises(ValueError, match="advancement"):
+        ProductionCheckpointPolicy(
+            checkpoint=result.checkpoint, training_report=result.report, ruleset=kwargs["ruleset"]
+        )
+    forged = copy.deepcopy(result.report)
+    forged["candidate_eligible"] = True
+    forged["report_id"] = manifest_identifier({k: v for k, v in forged.items() if k != "report_id"})
+    with pytest.raises(ValueError, match="validation checks"):
+        ProductionCheckpointPolicy(
+            checkpoint=result.checkpoint, training_report=forged, ruleset=kwargs["ruleset"]
+        )
+
+
+def test_starting_option_wrapper_and_residual_cannot_change_the_frozen_recipe(
+    starting_package: dict[str, Any],
+) -> None:
+    from spireshift.starting_options import StartingOptionConfig
+
+    kwargs = dict(starting_package["kwargs"])
+    doc = copy.deepcopy(kwargs["residual_config"].document)
+    doc["trajectory_recipe"]["limits"]["maximum_regret_increase"] += 1.0
+    recipe = doc["trajectory_recipe"]
+    recipe["config_id"] = manifest_identifier({k: v for k, v in recipe.items() if k != "config_id"})
+    doc["config_id"] = manifest_identifier({k: v for k, v in doc.items() if k != "config_id"})
+    kwargs["residual_config"] = StartingOptionConfig.from_mapping(doc)
+    with pytest.raises(ValueError, match="wrapper differs"):
+        train_trajectory_policy(**kwargs)
+
+
+def test_option_vocabulary_excludes_selection_and_validation_only_ids(
+    starting_package: dict[str, Any],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from spireshift.starting_option_training import prepare_starting_option_space
+    from spireshift.trajectory_policy import _preference_representation
+
+    kwargs = starting_package["kwargs"]
+    inputs = load_trajectory_policy_inputs(
+        **{key: value for key, value in kwargs.items() if key != "residual_config"}
+    )
+    records = copy.deepcopy(inputs.preference_records)
+    for record in records:
+        if record["run_seed"] in inputs.runs["selection"]:
+            public = record["source_observation"]["public_state"]
+            public["neow_options"][1] = 999
+            record["source_observation"]["state_hash"] = hashlib.sha256(
+                json.dumps(public, sort_keys=True, separators=(",", ":")).encode()
+            ).hexdigest()
+    validation_record = copy.deepcopy(records[0])
+    public = validation_record["source_observation"]["public_state"]
+    public["neow_options"][1] = 1000
+    validation_record["source_observation"]["state_hash"] = hashlib.sha256(
+        json.dumps(public, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    validation_representation = _preference_representation(validation_record, kwargs["ruleset"])
+    validation = tuple(
+        replace(item, representation=validation_representation) for item in inputs.validation
+    )
+    injected = replace(inputs, preference_records=tuple(records), validation=validation)
+    _, space = prepare_starting_option_space(injected, kwargs["ruleset"], kwargs["residual_config"])
+    assert space.head.known_option_ids == (5, 9)
+    assert space.coverage["selection_preferences"]["unknown_option_ids"] == [999]
+    assert space.coverage["selection_preferences"]["unknown_candidate_options"] == 4
+    assert space.coverage["validation"]["unknown_option_ids"] == [1000]
 
 
 def test_diagnosis_reconciles_saved_choices_without_training_or_replay(

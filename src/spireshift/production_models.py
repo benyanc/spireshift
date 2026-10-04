@@ -51,6 +51,7 @@ from spireshift.splits import SplitManifest, SplitName
 
 if TYPE_CHECKING:
     from spireshift.combat_search_intervention import CombatSearchInterventionSpec
+    from spireshift.starting_options import StartingOptionHead
 
 LEGACY_PRODUCTION_MODEL_TYPE = "sparse-pairwise-curriculum-multihead-v1"
 LEGACY_PRODUCTION_CHECKPOINT_SCHEMA_VERSION = "production-model-checkpoint-v1"
@@ -223,6 +224,7 @@ class ProductionBaseModel:
     tactical_risk_bias: float = 0.0
     floor_weights: dict[int, dict[int, float]] = field(default_factory=dict)
     floor_biases: dict[int, float] = field(default_factory=dict)
+    starting_option_residual: StartingOptionHead | None = None
 
     def predict(self, representation: CompositionalModelInput) -> ProductionPrediction:
         vector = vectorize_model_input(representation, dimension=self.vector_dimension)
@@ -235,7 +237,15 @@ class ProductionBaseModel:
             )
             for candidate in vector.candidates
         )
-        policy = _softmax(tuple(_dot(self.policy_weights, item) for item in features))
+        scores = tuple(_dot(self.policy_weights, item) for item in features)
+        if self.starting_option_residual is not None:
+            scores = tuple(
+                score + residual
+                for score, residual in zip(
+                    scores, self.starting_option_residual.scores(representation), strict=True
+                )
+            )
+        policy = _softmax(scores)
         risks = tuple(
             _sigmoid(self.tactical_risk_bias + _dot(self.tactical_risk_weights, item))
             for item in features
@@ -799,31 +809,41 @@ def blend_production_policy(
 def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     checkpoint = _mapping(value, "production model checkpoint")
     schema_version = checkpoint.get("schema_version")
-    if schema_version == "production-model-checkpoint-v6":
+    if schema_version in {"production-model-checkpoint-v6", "production-model-checkpoint-v7"}:
         from spireshift.trajectory_policy import trajectory_checkpoint_as_base
 
+        trajectory_fields = {
+            "schema_version",
+            "model_id",
+            "model_type",
+            "representation_encoder_id",
+            "vectorizer_id",
+            "ruleset_manifest_id",
+            "objective_id",
+            "split_manifest_id",
+            "train_dataset_id",
+            "training_config",
+            "heads",
+            "trajectory_finetuning",
+        }
+        if schema_version == "production-model-checkpoint-v7":
+            trajectory_fields.add("starting_option_residual")
         _exact_keys(
             checkpoint,
-            {
-                "schema_version",
-                "model_id",
-                "model_type",
-                "representation_encoder_id",
-                "vectorizer_id",
-                "ruleset_manifest_id",
-                "objective_id",
-                "split_manifest_id",
-                "train_dataset_id",
-                "training_config",
-                "heads",
-                "trajectory_finetuning",
-            },
+            trajectory_fields,
             "trajectory production checkpoint",
         )
         body = {key: item for key, item in checkpoint.items() if key != "model_id"}
         if checkpoint.get("model_id") != manifest_identifier(body):
             raise ValueError("Trajectory production checkpoint identity mismatch")
-        return production_model_from_checkpoint(trajectory_checkpoint_as_base(checkpoint))
+        model = production_model_from_checkpoint(trajectory_checkpoint_as_base(checkpoint))
+        if schema_version == "production-model-checkpoint-v7":
+            from spireshift.starting_options import StartingOptionHead
+
+            model.starting_option_residual = StartingOptionHead.from_mapping(
+                checkpoint["starting_option_residual"]["head"]
+            )
+        return model
     checkpoint_fields = {
         "schema_version",
         "model_id",
@@ -1000,7 +1020,10 @@ def load_production_training_report(
 ) -> dict[str, Any]:
     report = _load_object(path)
     schema_version = report.get("schema_version")
-    if schema_version == "production-model-training-report-v6":
+    if schema_version in {
+        "production-model-training-report-v6",
+        "production-model-training-report-v7",
+    }:
         from spireshift.trajectory_policy import validate_trajectory_report
 
         validate_trajectory_report(report, checkpoint=checkpoint)

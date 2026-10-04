@@ -191,6 +191,7 @@ from spireshift.splits import (
     write_frozen_dataset_index,
     write_frozen_split_manifest,
 )
+from spireshift.starting_options import load_starting_option_config
 from spireshift.tactical_handoff import (
     benchmark_mock_tactical_handoff,
     load_tactical_handoff_report,
@@ -823,23 +824,30 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Frozen ruleset used to reconstruct causal public-state representations",
     )
-    trajectory_train = model_commands.add_parser(
-        "finetune-trajectory-policy",
-        help="Fit policy-only trajectory preferences with parent-policy anchoring",
-    )
-    trajectory_train.add_argument("config", type=Path)
-    trajectory_train.add_argument("parent_checkpoint", type=Path)
-    trajectory_train.add_argument("checkpoint", type=Path)
-    trajectory_train.add_argument("--parent-report", type=Path, required=True)
-    trajectory_train.add_argument("--report", type=Path, required=True)
-    trajectory_train.add_argument("--collection", type=Path, required=True)
-    trajectory_train.add_argument("--search-report", type=Path, required=True)
-    trajectory_train.add_argument("--search-config", type=Path, required=True)
-    trajectory_train.add_argument("--train-report", type=Path, required=True)
-    trajectory_train.add_argument("--validation-report", type=Path, required=True)
-    trajectory_train.add_argument("--split-manifest", type=Path, required=True)
-    trajectory_train.add_argument("--ruleset-manifest", type=Path, required=True)
-    trajectory_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    for command, description in (
+        (
+            "finetune-trajectory-policy",
+            "Fit policy-only trajectory preferences with parent-policy anchoring",
+        ),
+        (
+            "finetune-starting-option-policy",
+            "Fit a public option-identity residual over an immutable base policy",
+        ),
+    ):
+        trajectory_train = model_commands.add_parser(command, help=description)
+        trajectory_train.add_argument("config", type=Path)
+        trajectory_train.add_argument("parent_checkpoint", type=Path)
+        trajectory_train.add_argument("checkpoint", type=Path)
+        trajectory_train.add_argument("--parent-report", type=Path, required=True)
+        trajectory_train.add_argument("--report", type=Path, required=True)
+        trajectory_train.add_argument("--collection", type=Path, required=True)
+        trajectory_train.add_argument("--search-report", type=Path, required=True)
+        trajectory_train.add_argument("--search-config", type=Path, required=True)
+        trajectory_train.add_argument("--train-report", type=Path, required=True)
+        trajectory_train.add_argument("--validation-report", type=Path, required=True)
+        trajectory_train.add_argument("--split-manifest", type=Path, required=True)
+        trajectory_train.add_argument("--ruleset-manifest", type=Path, required=True)
+        trajectory_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
     trajectory_diagnostic = model_commands.add_parser(
         "diagnose-trajectory-policy",
         help="Explain a saved trajectory policy update without training or replay",
@@ -2700,12 +2708,20 @@ def main(argv: Sequence[str] | None = None) -> int:
                     None,
                 )
                 return 0
-            if args.model_command == "finetune-trajectory-policy":
+            if args.model_command in {
+                "finetune-trajectory-policy",
+                "finetune-starting-option-policy",
+            }:
                 outputs = (args.checkpoint.resolve(), args.report.resolve())
                 if outputs[0] == outputs[1] or any(path.exists() for path in outputs):
                     raise ValueError(
                         "Trajectory outputs must be distinct and must not already exist"
                     )
+                residual_config = (
+                    load_starting_option_config(args.config)
+                    if args.model_command == "finetune-starting-option-policy"
+                    else None
+                )
                 trajectory_training_result = train_trajectory_policy(
                     parent_checkpoint_path=args.parent_checkpoint,
                     parent_report_path=args.parent_report,
@@ -2716,8 +2732,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                     validation_report_path=args.validation_report,
                     split_manifest=load_split_manifest(args.split_manifest),
                     ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
-                    config=load_trajectory_policy_config(args.config),
+                    config=(
+                        load_trajectory_policy_config(args.config)
+                        if residual_config is None
+                        else residual_config.recipe
+                    ),
                     objective=load_objective(args.objective_config),
+                    residual_config=residual_config,
                 )
                 write_production_model_artifact(
                     trajectory_training_result.checkpoint,
@@ -2751,6 +2772,32 @@ def main(argv: Sequence[str] | None = None) -> int:
                         ],
                         "terminal_victory_positive_labels": 0,
                         "checkpoint_promoted": False,
+                        **(
+                            {
+                                "starting_option_config_id": residual_config.document["config_id"],
+                                "starting_option_coverage": {
+                                    key: {
+                                        **{
+                                            label: value[label]
+                                            for label in (
+                                                "records",
+                                                "scoped_records",
+                                                "scoped_complete_runs",
+                                                "candidate_options",
+                                                "unknown_candidate_options",
+                                            )
+                                        },
+                                        "unique_option_ids": len(value["unique_option_ids"]),
+                                        "unknown_option_ids": len(value["unknown_option_ids"]),
+                                    }
+                                    for key, value in trajectory_training_result.report[
+                                        "starting_option_training"
+                                    ]["coverage"].items()
+                                },
+                            }
+                            if residual_config is not None
+                            else {}
+                        ),
                     },
                     None,
                 )

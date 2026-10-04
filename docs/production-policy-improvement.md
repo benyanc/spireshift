@@ -139,9 +139,11 @@ choices switch from option 2 to option 0, while all 69 combat choices stay uncha
 changes improve auxiliary regret. There is no measured win-rate improvement from this audit.
 Public option IDs are present but are encoded numerically, and actions are represented primarily
 by phase and position. [Issue #125](https://github.com/benyanc/spireshift/issues/125) tests a separately
-versioned identity-aware starting-event policy residual over immutable base-v2. Its owner-run recipe
-must preserve the existing all-204 development-validation checks and be frozen before training.
-No further model training or game evaluation has been launched.
+versioned identity-aware starting-event policy residual over immutable base-v2. The
+[starting-option trainer](starting-option-policy-training.md) is implemented with a frozen recipe,
+the existing all-204 development-validation checks, fitting-only option vocabulary and an owner-run
+script capped at ten wall minutes. Its real-data quality and complete coverage audit are pending.
+The coding agent has launched no real-data training or game evaluation.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next update must
