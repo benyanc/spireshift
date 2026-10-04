@@ -133,9 +133,15 @@ corpus. The owner-run base-v6 experiment completed but failed its frozen develop
 regret limit: regret increased by 0.000303308823, above the allowed 0.0002. Choices changed on
 26/204 states. The selected update ranked the preferred new action ahead in only 1/18 selection
 comparisons. Base-v6 is rejected and has not been promoted. Issue #42's
-[saved policy diagnosis](trajectory-policy-diagnosis.md) now attributes the changed choices and
-checks learning overlap before another training recipe is chosen. Its complete owner-run audit is
-pending; no further model training is authorized by the diagnostic command.
+[saved policy diagnosis](trajectory-policy-diagnosis.md) completed in 38.852 wall seconds and
+reconciled the rejection. All 15 harmful changes occur at starting Ancient choices; 24 starting
+choices switch from option 2 to option 0, while all 69 combat choices stay unchanged. The two path
+changes improve auxiliary regret. There is no measured win-rate improvement from this audit.
+Public option IDs are present but are encoded numerically, and actions are represented primarily
+by phase and position. [Issue #125](https://github.com/benyanc/spireshift/issues/125) tests a separately
+versioned identity-aware starting-event policy residual over immutable base-v2. Its owner-run recipe
+must preserve the existing all-204 development-validation checks and be frozen before training.
+No further model training or game evaluation has been launched.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next update must

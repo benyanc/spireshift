@@ -6,9 +6,10 @@ unchanged. Accepted base-v2 stays in production until a later frozen full-run co
 promotion. This implementation does not train an adaptive thinking controller.
 
 The owner-run base-v6 experiment has completed with a rejected candidate. Epoch 2 exceeded the
-frozen development-validation regret limit. Keep base-v2 accepted; the next owner-run command is
-the [saved policy diagnosis](trajectory-policy-diagnosis.md), rather than repeating this training
-recipe or evaluating the rejected candidate through new game runs.
+frozen development-validation regret limit. The [saved policy diagnosis](trajectory-policy-diagnosis.md)
+has also completed: all 15 harmful changes occur at starting Ancient choices. Keep base-v2 accepted.
+[Issue #125](https://github.com/benyanc/spireshift/issues/125) tests public option identity in a new
+policy representation before another training experiment. No owner-run command is pending.
 
 ## Frozen experiment
 
@@ -73,20 +74,15 @@ All source continuations lose. The new report contains zero positive terminal-vi
 the terminal-value head stays blocked. This experiment cannot authorize terminal-value readiness,
 learned-PUCT readiness, or adaptive-controller training.
 
-## One owner-run command
+## Completed owner-run experiment
 
-From the repository directory, run only:
-
-```bash
-bash scripts/train-trajectory-policy-v1.sh
-```
-
-The script performs input verification, policy training, and the saved-data validation audit under
+`scripts/train-trajectory-policy-v1.sh` is the preserved runner for this completed experiment;
+do not rerun it as the next step. It performs input verification, policy training, and the
+saved-data validation audit under
 one resource cap: one worker, at most one wall hour, two CPU hours, 4 GB memory, and 1 GB output.
 There is no automatic follow-up job. Existing outputs are refused rather than overwritten. The
 coding agent must not launch or monitor this job.
 
-The terminal prints selected epoch, candidate eligibility, validation checks, policy metrics, and
-artifact identities. The checkpoint/report are written under `artifacts/models/sts2-v0.107.1-base-v6`;
-the resource report is `artifacts/resources/trajectory-policy-base-v6-train-v1.json`. Share that
-terminal summary after it finishes. The result determines whether a full-run comparison is justified.
+The checkpoint/report are preserved under `artifacts/models/sts2-v0.107.1-base-v6`;
+the resource report is `artifacts/resources/trajectory-policy-base-v6-train-v1.json`. The observed
+rejection does not justify new full-run evaluation of this candidate.

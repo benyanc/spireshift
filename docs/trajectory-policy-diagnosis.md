@@ -40,29 +40,47 @@ validation regret limit: an increase of 0.000303308823 versus the maximum allowe
 changed on 26/204 states. The selected update ranked the preferred action ahead in 1/18 selection
 comparisons, including 1/5 strong floor comparisons. Accepted base-v2 remains in production.
 
-A bounded 30-second saved-data smoke reached its cap before writing a diagnostic report. Repeated
-preference-vector construction and both orientations of anchor-pair indexing have subsequently
-been removed. The coding agent did not restart the audit with a larger budget. Mock diagnosis,
-integrity, alignment, deterministic output, and exact regret-attribution checks cover the new path.
+The complete owner-run audit succeeded in 38.852 wall seconds and 31.115 CPU seconds, using
+approximately 520 MB peak resident memory. Its counts and metrics reconcile with the rejected
+training report. The saved report's content identity and JSON schema also pass verification.
 
-The complete owner-run audit is pending. Its evidence will determine one next intervention in
-representation, learning constraints, or training evidence. Freeze that intervention's recipe,
-resource cap, and unchanged non-regression/advancement criteria before owner-run training.
-Do not loosen the failed threshold or choose another epoch or blend against this validation result.
-This is reused development evidence and cannot become an untouched final-test claim.
+| Decision type | Changed actions | Harmful | Beneficial | Utility ties |
+| --- | ---: | ---: | ---: | ---: |
+| Starting Ancient event | 24 | 15 | 8 | 1 |
+| Path | 2 | 0 | 2 | 0 |
+| Combat and all other types | 0 | 0 | 0 | 0 |
 
-## One owner-run command
+All 24 event changes switch from `evangambit:ancient:2` to `evangambit:ancient:0`. The event changes
+add 0.085673076923 total auxiliary regret; the two path improvements remove 0.023798076923,
+reconciling to the overall increase of 0.061875 across 204 states. None of the 69 combat choices
+changes. These are teacher-utility comparisons on saved inputs, not measured changes in game wins.
 
-From the repository directory, run only:
+No exact public-state/action overlap conflicts or identical hashed-contrast aliases were found
+between the fitting preferences and original anchor corpus. Similar preference contrasts and
+shared interaction-weight movement suggest overgeneralization across starting menus, but do not
+establish individual label causation or an accidental hash collision.
 
-```bash
-bash scripts/diagnose-trajectory-policy-v1.sh
-```
+Saved examples contain public `neow_options` IDs, while the current generic encoder treats integer
+identifiers as numeric values. Legal-action payloads carry phase and action/target indices without
+binding each candidate to its corresponding option's categorical identity. The next bounded
+intervention is [issue #125](https://github.com/benyanc/spireshift/issues/125): add identity-aware
+public option features through a separately versioned, zero-initialized starting-event residual
+policy head over accepted base-v2. The parent and its non-policy heads stay immutable. This tests
+a concrete representation hypothesis; success is not assumed, and combat competence remains
+unfinished even if starting choices improve.
 
-The cap is ten wall minutes, ten CPU minutes, 2 GB memory, and 50 MB output, with one worker.
-The ten-minute value is a maximum, not a predicted duration. The script launches no follow-up job.
-The terminal prints the reconciled summary, decision-type attribution, coverage, and original
-rejection checks. Full details are saved in
-`artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`; resource measurements are in
-`artifacts/resources/trajectory-policy-base-v6-diagnostic-v2.json`. Share the terminal summary after
-it completes so the next intervention can be based on the observed failures.
+The follow-up preserves the original data ownership and all-204 non-regression checks. Its recipe
+and identities must be frozen before an owner-run experiment, capped at one worker, 600 wall
+seconds, 1,200 CPU seconds, 4 GB memory, and 1 GB output. Do not loosen the failed threshold or
+choose another epoch, action mask, or blend against this validation result. This is reused
+development evidence and cannot become an untouched final-test claim.
+
+## Completed owner-run audit
+
+`scripts/diagnose-trajectory-policy-v1.sh` has completed; there is no further owner-run command
+pending for this package. It launches no follow-up job. Full details are saved in
+`artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
+`sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.
+Resource measurements are in `artifacts/resources/trajectory-policy-base-v6-diagnostic-v2.json`,
+identified by `sha256:82992e8f9bedcdbe262f5d79cba7fd8d881ec19d0194b36c4d77214f8e32b8b3`.
+Raw examples remain outside Git. Base-v6 remains rejected and base-v2 remains accepted.
