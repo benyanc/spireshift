@@ -799,6 +799,31 @@ def blend_production_policy(
 def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     checkpoint = _mapping(value, "production model checkpoint")
     schema_version = checkpoint.get("schema_version")
+    if schema_version == "production-model-checkpoint-v6":
+        from spireshift.trajectory_policy import trajectory_checkpoint_as_base
+
+        _exact_keys(
+            checkpoint,
+            {
+                "schema_version",
+                "model_id",
+                "model_type",
+                "representation_encoder_id",
+                "vectorizer_id",
+                "ruleset_manifest_id",
+                "objective_id",
+                "split_manifest_id",
+                "train_dataset_id",
+                "training_config",
+                "heads",
+                "trajectory_finetuning",
+            },
+            "trajectory production checkpoint",
+        )
+        body = {key: item for key, item in checkpoint.items() if key != "model_id"}
+        if checkpoint.get("model_id") != manifest_identifier(body):
+            raise ValueError("Trajectory production checkpoint identity mismatch")
+        return production_model_from_checkpoint(trajectory_checkpoint_as_base(checkpoint))
     checkpoint_fields = {
         "schema_version",
         "model_id",
@@ -975,6 +1000,11 @@ def load_production_training_report(
 ) -> dict[str, Any]:
     report = _load_object(path)
     schema_version = report.get("schema_version")
+    if schema_version == "production-model-training-report-v6":
+        from spireshift.trajectory_policy import validate_trajectory_report
+
+        validate_trajectory_report(report, checkpoint=checkpoint)
+        return report
     legacy_fields = {
         "schema_version",
         "report_id",

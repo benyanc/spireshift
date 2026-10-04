@@ -700,6 +700,7 @@ def _reject_privileged(segment: str, parent_path: tuple[str, ...]) -> None:
         segment in _PRIVILEGED_SEGMENTS
         or segment.endswith("_seed")
         or segment.startswith("future_")
+        or segment.startswith("hidden_")
         or segment.startswith("rng_")
     ):
         location = ".".join((*parent_path, segment))

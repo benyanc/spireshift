@@ -29,6 +29,10 @@ def _registry() -> Registry[Any]:
 @pytest.mark.parametrize(
     ("schema_name", "fixture_name"),
     [
+        (
+            "trajectory-policy-training-config-v1.json",
+            "../../configs/trajectory-policy/sts2-v0.107.1-base-v2-frontier-preferences-v1.json",
+        ),
         ("observation-v1.json", "observation-v1.json"),
         ("action-v1.json", "action-v1.json"),
         ("transition-v1.json", "transition-v1.json"),

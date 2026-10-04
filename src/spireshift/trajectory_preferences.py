@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
 
@@ -9,6 +10,7 @@ from spireshift.agents.learned import ProductionCheckpointPolicy
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.core.types import LegalAction, Observation
+from spireshift.models import _exact_keys
 from spireshift.rollouts import sha256_file, write_exclusive_json
 from spireshift.splits import SplitManifest, SplitName
 from spireshift.trajectory_search import (
@@ -31,6 +33,141 @@ TRAJECTORY_PREFERENCE_COLLECTION_CLAIM_SCOPE = (
     "verified_train_only_multi_run_auxiliary_policy_preferences"
 )
 TRAJECTORY_PREFERENCE_COLLECTION_FILENAME = "trajectory-mutation-preference-collection.json"
+
+
+@dataclass(frozen=True, slots=True)
+class TrajectoryPreferenceEvidence:
+    document: dict[str, Any]
+    components: tuple[dict[str, Any], ...]
+
+
+def load_trajectory_preference_collection(
+    collection_path: Path,
+    *,
+    search_report_path: Path,
+    search_config: TrajectorySearchConfig,
+    split_manifest: SplitManifest,
+) -> TrajectoryPreferenceEvidence:
+    """Validate saved replay evidence and ranks without creating an engine or replaying games."""
+    document = _load_object(collection_path, "trajectory preference collection")
+    minimum = _integer(
+        _mapping(document.get("summary"), "collection summary").get("minimum_training_runs"),
+        "minimum training runs",
+    )
+    if minimum < 2 or search_config.frontier_ranking is None:
+        raise ValueError("Trajectory collection lacks a multi-run public-frontier contract")
+    verification = verify_trajectory_search(
+        search_report_path, config=search_config, split_manifest=split_manifest
+    )
+    if verification.get("valid") is not True:
+        raise ValueError("Trajectory collection source search failed verification")
+    report = _load_object(search_report_path, "trajectory search report")
+    references = _list(document.get("cases"), "collection cases")
+    search_references = sorted(
+        (_mapping(item, "search case reference") for item in report["cases"]),
+        key=lambda item: _integer(item.get("seed"), "search seed"),
+    )
+    if len(references) != len(search_references):
+        raise ValueError("Trajectory collection is missing source cases")
+    root = collection_path.expanduser().resolve().parent
+    components: list[tuple[int, dict[str, Any]]] = []
+    expected_references: list[dict[str, Any]] = []
+    seen_pairs: set[tuple[str, str, str]] = set()
+    for raw_reference, search_reference in zip(references, search_references, strict=True):
+        reference = _mapping(raw_reference, "collection reference")
+        seed = _integer(reference.get("run_seed"), "collection seed")
+        if (
+            seed != search_reference["seed"]
+            or split_manifest.split_for_seed(seed) is not SplitName.TRAIN
+        ):
+            raise ValueError("Trajectory collection has changed or non-train seed ownership")
+        relative = Path("cases") / f"seed-{seed:06d}.json"
+        path = (root / relative).resolve()
+        if root not in path.parents:
+            raise ValueError("Trajectory collection component escapes its root")
+        component = _load_object(path, "trajectory preference component")
+        case_path, _ = _search_case_path(search_report_path, report, seed)
+        case = _load_object(case_path, "trajectory search case")
+        trajectories = {item["trajectory_id"]: item for item in case["trajectories"]}
+        accepted_id = _string(case.get("best_trajectory_id"), "accepted trajectory ID")
+        lineage = _trajectory_lineage(trajectories[accepted_id], trajectories)
+        if len(lineage) < 2:
+            raise ValueError("Trajectory collection has no mutation lineage")
+        records = [
+            _mapping(item, "mutation evidence")
+            for item in _list(component.get("preferences"), "preferences")
+            + _list(component.get("excluded_mutations"), "excluded mutations")
+        ]
+        observations: dict[str, dict[str, Any]] = {}
+        for record in records:
+            child_id = _string(record.get("child_trajectory_id"), "child trajectory ID")
+            if child_id in observations:
+                raise ValueError("Trajectory collection has duplicate mutation evidence")
+            raw_observation = _mapping(record.get("source_observation"), "source observation")
+            _exact_keys(
+                raw_observation,
+                {"schema_version", "patch_id", "decision_type", "public_state", "state_hash"},
+                "source observation",
+            )
+            if raw_observation.get("schema_version") != "observation-v1":
+                raise ValueError("Unsupported trajectory source observation schema")
+            observations[child_id] = raw_observation
+            if record.get("label") == "improved":
+                pair = (
+                    _string(record.get("source_state_hash"), "source state hash"),
+                    _string(record.get("preferred_action_id"), "preferred action"),
+                    _string(record.get("disfavored_action_id"), "disfavored action"),
+                )
+                if pair in seen_pairs or (pair[0], pair[2], pair[1]) in seen_pairs:
+                    raise ValueError(
+                        "Trajectory collection has duplicate or conflicting comparisons"
+                    )
+                seen_pairs.add(pair)
+        expected = _preference_document(
+            lineage=lineage,
+            replayed=trajectories,
+            lineage_replay=[
+                {
+                    "trajectory_id": item["trajectory_id"],
+                    "action_trace_sha256": item["action_trace_sha256"],
+                    "decisions": len(item["decisions"]),
+                    "exact": True,
+                }
+                for item in lineage
+            ],
+            mutation_observations=observations,
+            report=report,
+            verification=verification,
+            case=case,
+            search_config=search_config,
+            split_manifest=split_manifest,
+            run_seed=seed,
+            trajectory_id=accepted_id,
+            minimum_training_runs=minimum,
+        )
+        if component != expected:
+            raise ValueError("Trajectory component differs from saved exact-lineage evidence")
+        expected_reference = {
+            "run_seed": seed,
+            "path": str(relative),
+            "sha256": sha256_file(path),
+            "preference_set_id": expected["preference_set_id"],
+        }
+        if reference != expected_reference:
+            raise ValueError("Trajectory component reference or file hash differs")
+        expected_references.append(expected_reference)
+        components.append((seed, component))
+    expected_collection = _collection_document(
+        search_report_path=search_report_path,
+        search_config=search_config,
+        split_manifest=split_manifest,
+        references=expected_references,
+        components=components,
+        minimum_training_runs=minimum,
+    )
+    if document != expected_collection or document["summary"]["training_ready"] is not True:
+        raise ValueError("Trajectory collection identity, schema, summary, or readiness differs")
+    return TrajectoryPreferenceEvidence(document, tuple(item for _, item in components))
 
 
 def freeze_trajectory_mutation_preferences(
@@ -198,6 +335,37 @@ def build_trajectory_mutation_preferences(
             }
         )
 
+    return _preference_document(
+        lineage=lineage,
+        replayed=replayed,
+        lineage_replay=lineage_replay,
+        mutation_observations=mutation_observations,
+        report=report,
+        verification=verification,
+        case=case,
+        search_config=search_config,
+        split_manifest=split_manifest,
+        run_seed=run_seed,
+        trajectory_id=trajectory_id,
+        minimum_training_runs=minimum_training_runs,
+    )
+
+
+def _preference_document(
+    *,
+    lineage: list[dict[str, Any]],
+    replayed: dict[str, dict[str, Any]],
+    lineage_replay: list[dict[str, Any]],
+    mutation_observations: dict[str, dict[str, Any]],
+    report: dict[str, Any],
+    verification: dict[str, Any],
+    case: dict[str, Any],
+    search_config: TrajectorySearchConfig,
+    split_manifest: SplitManifest,
+    run_seed: int,
+    trajectory_id: str,
+    minimum_training_runs: int,
+) -> dict[str, Any]:
     preferences: list[dict[str, Any]] = []
     excluded: list[dict[str, Any]] = []
     for child in lineage[1:]:

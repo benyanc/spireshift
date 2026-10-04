@@ -124,8 +124,13 @@ continuations from that trajectory failed the frozen useful-signal gate, so that
 excluded. The alternative [strict mutation preference collection](run-level-trajectory-search.md)
 now contains 79 verified action comparisons across 16 complete train runs, including 25 floor/boss
 improvements. This completes the multi-run evidence prerequisite for a conservative, anchored
-policy-only update. The training adapter and frozen experiment recipe are the next work item;
-the collection is not yet accepted by the existing production training command.
+policy-only update. These comparisons require a separate integration beyond the existing
+`train-curriculum` command.
+
+The [anchored trajectory-policy trainer](trajectory-policy-training.md) now provides that separate
+integration. Its frozen first recipe uses 68 eligible preferences and the original base-v2 anchor
+corpus. The implementation has passed short mock checks and a saved-input audit; the owner-run
+training command remains outstanding. No new checkpoint is available or promoted yet.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next update must

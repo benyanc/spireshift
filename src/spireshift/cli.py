@@ -211,6 +211,7 @@ from spireshift.terminal_discovery import (
     run_terminal_trajectory_discovery,
     verify_terminal_trajectory_discovery,
 )
+from spireshift.trajectory_policy import load_trajectory_policy_config, train_trajectory_policy
 from spireshift.trajectory_preferences import (
     freeze_trajectory_mutation_preference_collection,
     freeze_trajectory_mutation_preferences,
@@ -821,6 +822,23 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Frozen ruleset used to reconstruct causal public-state representations",
     )
+    trajectory_train = model_commands.add_parser(
+        "finetune-trajectory-policy",
+        help="Fit policy-only trajectory preferences with parent-policy anchoring",
+    )
+    trajectory_train.add_argument("config", type=Path)
+    trajectory_train.add_argument("parent_checkpoint", type=Path)
+    trajectory_train.add_argument("checkpoint", type=Path)
+    trajectory_train.add_argument("--parent-report", type=Path, required=True)
+    trajectory_train.add_argument("--report", type=Path, required=True)
+    trajectory_train.add_argument("--collection", type=Path, required=True)
+    trajectory_train.add_argument("--search-report", type=Path, required=True)
+    trajectory_train.add_argument("--search-config", type=Path, required=True)
+    trajectory_train.add_argument("--train-report", type=Path, required=True)
+    trajectory_train.add_argument("--validation-report", type=Path, required=True)
+    trajectory_train.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_train.add_argument("--ruleset-manifest", type=Path, required=True)
+    trajectory_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
     production_blend = model_commands.add_parser(
         "blend-curriculum",
         help="Select the largest safe causal-policy blend on frozen validation data",
@@ -2607,6 +2625,61 @@ def main(argv: Sequence[str] | None = None) -> int:
                         ),
                     },
                     args.output,
+                )
+                return 0
+            if args.model_command == "finetune-trajectory-policy":
+                outputs = (args.checkpoint.resolve(), args.report.resolve())
+                if outputs[0] == outputs[1] or any(path.exists() for path in outputs):
+                    raise ValueError(
+                        "Trajectory outputs must be distinct and must not already exist"
+                    )
+                trajectory_training_result = train_trajectory_policy(
+                    parent_checkpoint_path=args.parent_checkpoint,
+                    parent_report_path=args.parent_report,
+                    collection_path=args.collection,
+                    search_report_path=args.search_report,
+                    search_config=load_trajectory_search_config(args.search_config),
+                    train_report_path=args.train_report,
+                    validation_report_path=args.validation_report,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    config=load_trajectory_policy_config(args.config),
+                    objective=load_objective(args.objective_config),
+                )
+                write_production_model_artifact(
+                    trajectory_training_result.checkpoint,
+                    args.checkpoint,
+                    label="trajectory policy checkpoint",
+                )
+                write_production_model_artifact(
+                    trajectory_training_result.report,
+                    args.report,
+                    label="trajectory policy training report",
+                )
+                _emit_json(
+                    {
+                        "model_id": trajectory_training_result.checkpoint["model_id"],
+                        "report_id": trajectory_training_result.report["report_id"],
+                        "checkpoint_path": str(args.checkpoint),
+                        "report_path": str(args.report),
+                        "selected_epoch": trajectory_training_result.report[
+                            "trajectory_finetuning"
+                        ]["selected_epoch"],
+                        "candidate_eligible": trajectory_training_result.report[
+                            "candidate_eligible"
+                        ],
+                        "status": trajectory_training_result.report["status"],
+                        "eligible_preferences": trajectory_training_result.report[
+                            "eligible_preferences"
+                        ],
+                        "validation_checks": trajectory_training_result.report["validation_checks"],
+                        "held_out_policy": trajectory_training_result.report["held_out_metrics"][
+                            "policy"
+                        ],
+                        "terminal_victory_positive_labels": 0,
+                        "checkpoint_promoted": False,
+                    },
+                    None,
                 )
                 return 0
             if args.model_command == "train-curriculum":

@@ -56,7 +56,10 @@ The repository currently contains the research contracts and a seeded mock verti
 28. a cycle-safe production DAgger collector with complete-run ownership, resumable cases,
     uncertainty, rarity, and terminal-frontier selection, plus versioned causal intervention labels; and
 29. an exact-replay, train-only run-level trajectory beam that retains coherent improvements across
-    generations and reports Act 1 boss reach, Act 1 clear, and terminal victory separately.
+    generations and reports Act 1 boss reach, Act 1 clear, and terminal victory separately; and
+30. an [anchored trajectory-policy trainer](docs/trajectory-policy-training.md) that consumes verified
+    multi-run action comparisons, freezes non-policy heads, and rejects regressions under a frozen
+    recipe. The owner-run first training job is pending.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.

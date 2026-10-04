@@ -61,6 +61,11 @@ class ProductionCheckpointPolicy:
         gate = policy_metrics.get("auxiliary_policy_gate")
         if not isinstance(gate, dict) or gate.get("passed") is not True:
             raise ValueError("Production checkpoint did not pass its auxiliary policy gate")
+        if (
+            training_report.get("schema_version") == "production-model-training-report-v6"
+            and training_report.get("candidate_eligible") is not True
+        ):
+            raise ValueError("Trajectory candidate did not pass its frozen advancement checks")
         self.policy_id = f"production-checkpoint-policy-v1:{model_id}"
         self.model_id = model_id
         self.split_manifest_id = split_manifest_id
