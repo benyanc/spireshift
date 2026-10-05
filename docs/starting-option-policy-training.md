@@ -120,4 +120,6 @@ this learning experiment despite adequate ID coverage; it is not proof of the so
 The training report is `sha256:d51bb52585663d4e6ea97b3d4a1a8155ecc60e78785dc05a6843dd815cd6fe73`;
 the resource report is `sha256:3e002ace5edb727d86a84e27b69b2edbb63f06b51f46610c23a883bd1baac798`.
 Do not repeat the frozen training script as the next step. The
-[starting-option evidence collector](starting-option-evidence.md) supplies the next bounded package.
+[starting-option evidence collector](starting-option-evidence.md) has since completed and passed
+its sufficiency gate with 172 eligible comparisons. The next owner command is in the
+[exhaustive-evidence training guide](starting-evidence-policy-training.md).

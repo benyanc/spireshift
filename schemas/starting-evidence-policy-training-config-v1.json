@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-evidence-policy-training-config-v1.json",
+  "type": "object",
+  "required": [
+    "learning_rate",
+    "anchor_strength",
+    "preference_strength",
+    "proximal_strength",
+    "gradient_clip",
+    "adagrad_epsilon",
+    "schema_version",
+    "config_id",
+    "objective_id",
+    "inputs",
+    "epochs",
+    "selection_fraction",
+    "selection_salt",
+    "rank_weights",
+    "limits",
+    "anchor_complete_run_subfolds",
+    "evidence_complete_run_subfolds"
+  ],
+  "properties": {
+    "learning_rate": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "anchor_strength": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "preference_strength": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "proximal_strength": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "gradient_clip": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "adagrad_epsilon": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "schema_version": {
+      "const": "starting-evidence-policy-training-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "inputs": {
+      "type": "object",
+      "required": [
+        "anchor_assignment_config_id",
+        "anchor_assignment_report_id",
+        "evidence_config_id",
+        "evidence_report_id",
+        "parent_model_id",
+        "parent_training_report_id",
+        "ruleset_manifest_id",
+        "split_manifest_id",
+        "train_dataset_id",
+        "validation_dataset_id"
+      ],
+      "properties": {
+        "anchor_assignment_config_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "anchor_assignment_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "evidence_config_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "evidence_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "parent_model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "parent_training_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "ruleset_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "split_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "train_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "validation_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "epochs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    },
+    "selection_fraction": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "exclusiveMaximum": 1
+    },
+    "selection_salt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rank_weights": {
+      "type": "object",
+      "required": [
+        "victory",
+        "act1_cleared",
+        "boss_reached",
+        "maximum_floor",
+        "encounter_cleared",
+        "enemy_hp_defeated_fraction_ppm",
+        "player_hp_fraction_ppm",
+        "last_actionable_player_hp_fraction_ppm",
+        "distinct_public_states_on_floor"
+      ],
+      "properties": {
+        "victory": {
+          "const": 0.0
+        },
+        "act1_cleared": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "boss_reached": {
+          "const": 1.0
+        },
+        "maximum_floor": {
+          "const": 1.0
+        },
+        "encounter_cleared": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "enemy_hp_defeated_fraction_ppm": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "player_hp_fraction_ppm": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "last_actionable_player_hp_fraction_ppm": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "distinct_public_states_on_floor": {
+          "const": 0.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "required": [
+        "maximum_accuracy_drop",
+        "maximum_mean_total_variation",
+        "maximum_pair_loss_increase",
+        "maximum_regret_increase",
+        "minimum_preference_loss_improvement"
+      ],
+      "properties": {
+        "maximum_accuracy_drop": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum_mean_total_variation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum_pair_loss_increase": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum_regret_increase": {
+          "type": "number",
+          "minimum": 0
+        },
+        "minimum_preference_loss_improvement": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "anchor_complete_run_subfolds": {
+      "type": "object",
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "properties": {
+        "fit": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "selection": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence_complete_run_subfolds": {
+      "type": "object",
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "properties": {
+        "fit": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "selection": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "required": [
+        "recipe",
+        "selected_epoch",
+        "policy_only",
+        "frozen_head_ids",
+        "complete_run_subfolds",
+        "selection_rule",
+        "selection_refit"
+      ],
+      "properties": {
+        "recipe": {
+          "$ref": "https://spireshift.dev/schemas/starting-evidence-policy-training-config-v1.json"
+        },
+        "selected_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "policy_only": {
+          "const": true
+        },
+        "frozen_head_ids": {
+          "type": "object",
+          "required": [
+            "terminal_value",
+            "tactical_death_risk",
+            "maximum_floor_distribution"
+          ],
+          "properties": {
+            "terminal_value": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "tactical_death_risk": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "maximum_floor_distribution": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "complete_run_subfolds": {
+          "type": "object",
+          "required": [
+            "fit",
+            "selection"
+          ],
+          "properties": {
+            "fit": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "selection": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "selection_rule": {
+          "const": "minimum_preference_loss_passing_train_anchor_and_advancement_checks"
+        },
+        "selection_refit": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

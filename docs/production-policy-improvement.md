@@ -145,10 +145,13 @@ the existing all-204 development-validation checks, fitting-only option vocabula
 script capped at ten wall minutes. The owner-run base-v7 experiment completed in 47.33 seconds,
 but none of its 40 epochs passed the unchanged advancement checks. It selected epoch zero and an
 empty residual. Starting preference coverage was only three fitting runs and one selection run;
-all 27 fitting option IDs were covered with no unseen IDs. The next bounded package is the
+all 27 fitting option IDs were covered with no unseen IDs. The subsequent
 [exhaustive starting-option evidence collector](starting-option-evidence.md), which evaluates all
-options across 64 fresh train seeds and stops at a frozen data-sufficiency gate. The coding agent
-has launched no real-data collection, training or game evaluation.
+options across 64 fresh train seeds. Its owner run completed all 192 terminal branches and passed
+the frozen data-sufficiency gate with 172 eligible comparisons, but still no victories. The next
+[starting-choice experiment](starting-evidence-policy-training.md) binds this evidence and the
+unchanged source groups, parent and all-204 checks. The coding agent has launched no real-data
+collection, training or game evaluation.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next update must

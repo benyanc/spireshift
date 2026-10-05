@@ -80,8 +80,10 @@ development evidence and cannot become an untouched final-test claim.
 ## Completed owner-run audit
 
 `scripts/diagnose-trajectory-policy-v1.sh` has completed; do not repeat it as the next step.
-The subsequent starting-option experiment also completed with no accepted update. The next owner-run
-command is in the [starting-option evidence guide](starting-option-evidence.md).
+The subsequent starting-option experiment also completed with no accepted update. Exhaustive
+starting-option collection then passed its coverage gate with 172 eligible comparisons and no
+victories. The next owner-run command is in the
+[exhaustive-evidence training guide](starting-evidence-policy-training.md).
 The diagnosis script launches no follow-up job. Full details are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
 `sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.

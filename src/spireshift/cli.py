@@ -199,6 +199,10 @@ from spireshift.starting_evidence import (
     load_starting_evidence_config,
     verify_starting_option_evidence,
 )
+from spireshift.starting_evidence_training import (
+    train_starting_evidence_policy,
+    verify_starting_evidence_policy,
+)
 from spireshift.starting_options import load_starting_option_config
 from spireshift.tactical_handoff import (
     benchmark_mock_tactical_handoff,
@@ -856,6 +860,33 @@ def build_parser() -> argparse.ArgumentParser:
         trajectory_train.add_argument("--split-manifest", type=Path, required=True)
         trajectory_train.add_argument("--ruleset-manifest", type=Path, required=True)
         trajectory_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    for command, description in (
+        (
+            "finetune-starting-evidence-policy",
+            "Fit a frozen starting-option residual from exhaustive branch evidence",
+        ),
+        (
+            "verify-starting-evidence-policy",
+            "Verify saved starting-option training against its inputs without retraining",
+        ),
+    ):
+        evidence_train = model_commands.add_parser(command, help=description)
+        evidence_train.add_argument("config", type=Path)
+        evidence_train.add_argument("parent_checkpoint", type=Path)
+        evidence_train.add_argument("checkpoint", type=Path)
+        for argument in (
+            "parent-report",
+            "report",
+            "evidence",
+            "evidence-config",
+            "anchor-assignment-report",
+            "train-report",
+            "validation-report",
+            "split-manifest",
+            "ruleset-manifest",
+        ):
+            evidence_train.add_argument(f"--{argument}", type=Path, required=True)
+        evidence_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
     trajectory_diagnostic = model_commands.add_parser(
         "diagnose-trajectory-policy",
         help="Explain a saved trajectory policy update without training or replay",
@@ -2800,6 +2831,73 @@ def main(argv: Sequence[str] | None = None) -> int:
                     },
                     None,
                 )
+                return 0
+            if args.model_command in {
+                "finetune-starting-evidence-policy",
+                "verify-starting-evidence-policy",
+            }:
+                verify_only = args.model_command == "verify-starting-evidence-policy"
+                if not verify_only:
+                    outputs = (args.checkpoint.resolve(), args.report.resolve())
+                    if outputs[0] == outputs[1] or any(path.exists() for path in outputs):
+                        raise ValueError(
+                            "Starting evidence outputs must be distinct and new; "
+                            "use verify-starting-evidence-policy for a completed result"
+                        )
+                starting_training_inputs = {
+                    "config": load_starting_option_config(args.config),
+                    "evidence_config": load_starting_evidence_config(args.evidence_config),
+                    "evidence_path": args.evidence,
+                    "anchor_assignment_report_path": args.anchor_assignment_report,
+                    "parent_checkpoint_path": args.parent_checkpoint,
+                    "parent_report_path": args.parent_report,
+                    "train_report_path": args.train_report,
+                    "validation_report_path": args.validation_report,
+                    "split_manifest": load_split_manifest(args.split_manifest),
+                    "ruleset": load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    "objective": load_objective(args.objective_config),
+                }
+                if verify_only:
+                    result_summary = verify_starting_evidence_policy(
+                        checkpoint_path=args.checkpoint,
+                        report_path=args.report,
+                        **starting_training_inputs,
+                    )
+                else:
+                    starting_trained = train_starting_evidence_policy(**starting_training_inputs)
+                    write_production_model_artifact(
+                        starting_trained.checkpoint,
+                        args.checkpoint,
+                        label="starting evidence policy checkpoint",
+                    )
+                    write_production_model_artifact(
+                        starting_trained.report,
+                        args.report,
+                        label="starting evidence policy training report",
+                    )
+                    result_summary = {
+                        "model_id": starting_trained.checkpoint["model_id"],
+                        "report_id": starting_trained.report["report_id"],
+                        "checkpoint_path": str(args.checkpoint),
+                        "report_path": str(args.report),
+                        "selected_epoch": starting_trained.report["trajectory_finetuning"][
+                            "selected_epoch"
+                        ],
+                        "candidate_eligible": starting_trained.report["candidate_eligible"],
+                        "status": starting_trained.report["status"],
+                        "eligible_preferences": starting_trained.report["eligible_preferences"],
+                        "fit_preferences": starting_trained.report["fit_preferences"],
+                        "selection_preferences": starting_trained.report["selection_preferences"],
+                        "validation_records": starting_trained.report["validation_records"],
+                        "validation_checks": starting_trained.report["validation_checks"],
+                        "starting_evidence_training": starting_trained.report[
+                            "starting_evidence_training"
+                        ],
+                        "coverage": starting_trained.report["starting_option_training"]["coverage"],
+                        "terminal_victory_positive_labels": 0,
+                        "checkpoint_promoted": False,
+                    }
+                _emit_json(result_summary, None)
                 return 0
             if args.model_command in {
                 "finetune-trajectory-policy",

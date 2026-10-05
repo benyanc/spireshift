@@ -356,6 +356,8 @@ def _build_package(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str,
     return {
         "kwargs": kwargs,
         "parent": parent,
+        "parent_report": parent_report,
+        "curriculum_loader": curriculum,
         "collection": collection,
         "root": tmp_path,
         "recipe": base_recipe,

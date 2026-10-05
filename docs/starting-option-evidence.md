@@ -98,7 +98,22 @@ gate. It checks saved evidence without engine replay; it does not independently 
 execution. Short mock tests also cover victory-first ranking, reversed preferences, ties,
 unsupported public inputs, failures, interrupted resume and completed reruns.
 
-The coding agent has not launched real collection, training, replay or game evaluation. Owner-run
-coverage and outcome evidence remain pending. A later training recipe will bind these new artifact
-identities, retain the immutable parent and original all-204 development-validation limits, and
-require a separate frozen full-run comparison before promotion.
+## Completed owner-run result and next training step
+
+The owner run completed in 109.695 wall seconds. All 64 cases and 192 branches finished with
+terminal outcomes, no failures or truncations and zero victories. It supplied 130 eligible pairs
+across 47 informative fitting runs and 42 pairs across 15 informative selection runs, including
+11 strong selection runs. All prespecified sufficiency checks pass. Nineteen pairs tie and one
+differs only in activity. Read-only verification checked all 64 saved cases without replay.
+
+The collection identity is
+`sha256:6b1a04ddb0190531d153a9f13a79d00d744270cd1a91f866f7cc8f2c7bb899d8`;
+the owner resource report is
+`sha256:952a2ad447f9e5ea53df079caa69b361b16320d5d7411fe20bce797e3f3cf1be`.
+Peak resident memory was 225,640,448 bytes; output storage was 35,265,001 bytes. No resource
+cap was reached. This passes evidence coverage only, not policy improvement or foundation readiness.
+
+The next owner command is in the [exhaustive-evidence training guide](starting-evidence-policy-training.md).
+Its frozen recipe retains the immutable parent, explicit source groups and all-204 validation
+limits. A separate frozen full-run comparison is still required before promotion. The coding
+agent has launched no real collection, training, replay or game evaluation.

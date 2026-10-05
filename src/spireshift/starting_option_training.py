@@ -170,6 +170,10 @@ def starting_option_parent(checkpoint: dict[str, Any]) -> dict[str, Any]:
         "starting option binding",
     )
     config = StartingOptionConfig.from_mapping(binding["config"])
+    if (checkpoint["schema_version"] == "production-model-checkpoint-v8") != (
+        config.document["schema_version"] == "starting-option-policy-training-config-v2"
+    ):
+        raise ValueError("Starting option checkpoint version differs from its config")
     if config.recipe.document != checkpoint["trajectory_finetuning"]["recipe"]:
         raise ValueError("Starting option training recipe differs from the frozen binding")
     head = StartingOptionHead.from_mapping(binding["head"])

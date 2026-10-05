@@ -30,6 +30,7 @@ if TYPE_CHECKING:
 
 ENCODER_ID = "starting-ancient-public-option-v1"
 CONFIG_SCHEMA = "starting-option-policy-training-config-v1"
+EVIDENCE_CONFIG_SCHEMA = "starting-option-policy-training-config-v2"
 HEAD_SCHEMA = "starting-option-policy-residual-v1"
 CHECKPOINT_SCHEMA = "production-model-checkpoint-v7"
 REPORT_SCHEMA = "production-model-training-report-v7"
@@ -45,26 +46,43 @@ class StartingOptionConfig:
         from spireshift.trajectory_policy import TrajectoryPolicyConfig
 
         doc = copy.deepcopy(_mapping(value, "starting option training config"))
+        recipe_field = (
+            "evidence_recipe"
+            if doc.get("schema_version") == EVIDENCE_CONFIG_SCHEMA
+            else "trajectory_recipe"
+        )
         _exact_keys(
             doc,
-            {"schema_version", "config_id", "encoder_id", "dimension", "trajectory_recipe"},
+            {"schema_version", "config_id", "encoder_id", "dimension", recipe_field},
             "starting option training config",
         )
         if doc["config_id"] != manifest_identifier(
             {k: v for k, v in doc.items() if k != "config_id"}
         ):
             raise ValueError("Starting option config identity mismatch")
-        if doc["schema_version"] != CONFIG_SCHEMA or doc["encoder_id"] != ENCODER_ID:
+        if (
+            doc["schema_version"] not in {CONFIG_SCHEMA, EVIDENCE_CONFIG_SCHEMA}
+            or doc["encoder_id"] != ENCODER_ID
+        ):
             raise ValueError("Unsupported starting option schema or encoder")
         if not 128 <= _integer(doc["dimension"], "residual dimension") <= 65536:
             raise ValueError("Starting option residual dimension must be in [128, 65536]")
-        TrajectoryPolicyConfig.from_mapping(doc["trajectory_recipe"])
+        if recipe_field == "evidence_recipe":
+            from spireshift.starting_evidence_training import StartingEvidencePolicyConfig
+
+            StartingEvidencePolicyConfig.from_mapping(doc[recipe_field])
+        else:
+            TrajectoryPolicyConfig.from_mapping(doc[recipe_field])
         return cls(doc)
 
     @property
     def recipe(self) -> TrajectoryPolicyConfig:
         from spireshift.trajectory_policy import TrajectoryPolicyConfig
 
+        if self.document["schema_version"] == EVIDENCE_CONFIG_SCHEMA:
+            from spireshift.starting_evidence_training import StartingEvidencePolicyConfig
+
+            return StartingEvidencePolicyConfig.from_mapping(self.document["evidence_recipe"])
         return TrajectoryPolicyConfig.from_mapping(self.document["trajectory_recipe"])
 
 

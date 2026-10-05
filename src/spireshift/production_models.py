@@ -809,7 +809,11 @@ def blend_production_policy(
 def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     checkpoint = _mapping(value, "production model checkpoint")
     schema_version = checkpoint.get("schema_version")
-    if schema_version in {"production-model-checkpoint-v6", "production-model-checkpoint-v7"}:
+    if schema_version in {
+        "production-model-checkpoint-v6",
+        "production-model-checkpoint-v7",
+        "production-model-checkpoint-v8",
+    }:
         from spireshift.trajectory_policy import trajectory_checkpoint_as_base
 
         trajectory_fields = {
@@ -826,7 +830,7 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
             "heads",
             "trajectory_finetuning",
         }
-        if schema_version == "production-model-checkpoint-v7":
+        if schema_version in {"production-model-checkpoint-v7", "production-model-checkpoint-v8"}:
             trajectory_fields.add("starting_option_residual")
         _exact_keys(
             checkpoint,
@@ -837,7 +841,7 @@ def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
         if checkpoint.get("model_id") != manifest_identifier(body):
             raise ValueError("Trajectory production checkpoint identity mismatch")
         model = production_model_from_checkpoint(trajectory_checkpoint_as_base(checkpoint))
-        if schema_version == "production-model-checkpoint-v7":
+        if schema_version in {"production-model-checkpoint-v7", "production-model-checkpoint-v8"}:
             from spireshift.starting_options import StartingOptionHead
 
             model.starting_option_residual = StartingOptionHead.from_mapping(
@@ -1023,6 +1027,7 @@ def load_production_training_report(
     if schema_version in {
         "production-model-training-report-v6",
         "production-model-training-report-v7",
+        "production-model-training-report-v8",
     }:
         from spireshift.trajectory_policy import validate_trajectory_report
 

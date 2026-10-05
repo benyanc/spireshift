@@ -112,6 +112,43 @@ def _id(value: object, label: str) -> str:
     return result
 
 
+OPTIMIZATION_FIELDS = CONFIG_FIELDS - {"schema_version", "config_id", "objective_id", "inputs"}
+
+
+def _validate_optimization(doc: dict[str, Any]) -> None:
+    if not 1 <= _integer(doc["epochs"], "epochs") <= 200:
+        raise ValueError("Trajectory policy epochs must be in [1, 200]")
+    for key in (
+        "learning_rate",
+        "anchor_strength",
+        "preference_strength",
+        "proximal_strength",
+        "gradient_clip",
+        "adagrad_epsilon",
+    ):
+        if _finite_number(doc[key], key) <= 0:
+            raise ValueError(f"{key} must be positive")
+    if not 0 < _finite_number(doc["selection_fraction"], "selection fraction") < 1:
+        raise ValueError("Selection fraction must be in (0, 1)")
+    _string(doc["selection_salt"], "selection salt")
+    weights = _mapping(doc["rank_weights"], "rank weights")
+    _exact_keys(weights, set(TRAJECTORY_SELECTION_RANK_ORDER), "rank weights")
+    for key, item in weights.items():
+        if not 0 <= _finite_number(item, key) <= 1:
+            raise ValueError("Rank weights must be in [0, 1]")
+    if weights["victory"] != 0 or weights["distinct_public_states_on_floor"] != 0:
+        raise ValueError("Victory and state-count tie-breakers cannot become auxiliary targets")
+    if weights["maximum_floor"] != 1 or weights["boss_reached"] != 1:
+        raise ValueError("Floor and boss advancement must keep unit weight")
+    limits = _mapping(doc["limits"], "non-regression limits")
+    _exact_keys(limits, LIMIT_FIELDS, "non-regression limits")
+    for key, item in limits.items():
+        if _finite_number(item, key) < 0:
+            raise ValueError("Non-regression limits must be non-negative")
+    if limits["minimum_preference_loss_improvement"] <= 0:
+        raise ValueError("Preference advancement must exceed a positive frozen minimum")
+
+
 @dataclass(frozen=True, slots=True)
 class TrajectoryPolicyConfig:
     document: dict[str, Any]
@@ -127,37 +164,7 @@ class TrajectoryPolicyConfig:
         _exact_keys(inputs, INPUT_FIELDS, "trajectory policy inputs")
         for key, item in inputs.items():
             _id(item, key)
-        if not 1 <= _integer(doc["epochs"], "epochs") <= 200:
-            raise ValueError("Trajectory policy epochs must be in [1, 200]")
-        for key in (
-            "learning_rate",
-            "anchor_strength",
-            "preference_strength",
-            "proximal_strength",
-            "gradient_clip",
-            "adagrad_epsilon",
-        ):
-            if _finite_number(doc[key], key) <= 0:
-                raise ValueError(f"{key} must be positive")
-        if not 0 < _finite_number(doc["selection_fraction"], "selection fraction") < 1:
-            raise ValueError("Selection fraction must be in (0, 1)")
-        _string(doc["selection_salt"], "selection salt")
-        weights = _mapping(doc["rank_weights"], "rank weights")
-        _exact_keys(weights, set(TRAJECTORY_SELECTION_RANK_ORDER), "rank weights")
-        for key, item in weights.items():
-            if not 0 <= _finite_number(item, key) <= 1:
-                raise ValueError("Rank weights must be in [0, 1]")
-        if weights["victory"] != 0 or weights["distinct_public_states_on_floor"] != 0:
-            raise ValueError("Victory and state-count tie-breakers cannot become auxiliary targets")
-        if weights["maximum_floor"] != 1 or weights["boss_reached"] != 1:
-            raise ValueError("Floor and boss advancement must keep unit weight")
-        limits = _mapping(doc["limits"], "non-regression limits")
-        _exact_keys(limits, LIMIT_FIELDS, "non-regression limits")
-        for key, item in limits.items():
-            if _finite_number(item, key) < 0:
-                raise ValueError("Non-regression limits must be non-negative")
-        if limits["minimum_preference_loss_improvement"] <= 0:
-            raise ValueError("Preference advancement must exceed a positive frozen minimum")
+        _validate_optimization(doc)
         return cls(doc)
 
     @property
@@ -532,6 +539,19 @@ def train_trajectory_policy(
         config=config,
         objective=objective,
     )
+    return train_policy_inputs(
+        inputs=inputs, ruleset=ruleset, config=config, residual_config=residual_config
+    )
+
+
+def train_policy_inputs(
+    *,
+    inputs: TrajectoryPolicyInputs,
+    ruleset: RulesetIdentity,
+    config: TrajectoryPolicyConfig,
+    residual_config: StartingOptionConfig | None = None,
+) -> ProductionTrainingResult:
+    """Optimize verified inputs using the shared frozen anchoring and selection rules."""
     from spireshift.starting_options import CHECKPOINT_SCHEMA as RESIDUAL_CHECKPOINT_SCHEMA
     from spireshift.starting_options import MODEL_TYPE as RESIDUAL_MODEL_TYPE
     from spireshift.starting_options import REPORT_SCHEMA as RESIDUAL_REPORT_SCHEMA
@@ -658,7 +678,13 @@ def train_trajectory_policy(
         not in {"model_id", "causal_preference_set_id", "policy_blend", "trajectory_finetuning"}
     }
     body.update(
-        schema_version=CHECKPOINT_SCHEMA if space is None else RESIDUAL_CHECKPOINT_SCHEMA,
+        schema_version=(
+            "production-model-checkpoint-v8"
+            if recipe["schema_version"] == "starting-evidence-policy-training-config-v1"
+            else CHECKPOINT_SCHEMA
+            if space is None
+            else RESIDUAL_CHECKPOINT_SCHEMA
+        ),
         model_type=MODEL_TYPE if space is None else RESIDUAL_MODEL_TYPE,
         trajectory_finetuning=binding,
     )
@@ -670,12 +696,18 @@ def train_trajectory_policy(
     held_out = copy.deepcopy(parent_report["held_out_metrics"])
     held_out["policy"] = validation_metrics
     report_body = {
-        "schema_version": REPORT_SCHEMA if space is None else RESIDUAL_REPORT_SCHEMA,
+        "schema_version": (
+            "production-model-training-report-v8"
+            if recipe["schema_version"] == "starting-evidence-policy-training-config-v1"
+            else REPORT_SCHEMA
+            if space is None
+            else RESIDUAL_REPORT_SCHEMA
+        ),
         "model_type": MODEL_TYPE if space is None else RESIDUAL_MODEL_TYPE,
         "model_id": checkpoint["model_id"],
         "train_dataset_id": train_doc["dataset_id"],
         "validation_dataset_id": validation_doc["dataset_id"],
-        "split_manifest_id": split_manifest.manifest_id,
+        "split_manifest_id": parent_checkpoint["split_manifest_id"],
         "training_runs": len(runs["fit"]) + len(runs["selection"]),
         "validation_runs": len({item.run_seed for item in validation}),
         "training_records": len(anchors),
@@ -714,6 +746,10 @@ def train_trajectory_policy(
         report_body["starting_option_training"] = space.report_binding(best_weights)
     report_body = _quantize_artifact(report_body)
     report = {**report_body, "report_id": manifest_identifier(report_body)}
+    if recipe["schema_version"] == "starting-evidence-policy-training-config-v1":
+        from spireshift.starting_evidence_training import bind_starting_evidence_result
+
+        return bind_starting_evidence_result(checkpoint, report, inputs)
     validate_trajectory_report(report, checkpoint=checkpoint)
     return ProductionTrainingResult(checkpoint, report)
 
@@ -749,9 +785,16 @@ def validate_trajectory_checkpoint(checkpoint: dict[str, Any]) -> None:
     from spireshift.starting_options import CHECKPOINT_SCHEMA as RESIDUAL_CHECKPOINT_SCHEMA
     from spireshift.starting_options import MODEL_TYPE as RESIDUAL_MODEL_TYPE
 
-    residual = checkpoint.get("schema_version") == RESIDUAL_CHECKPOINT_SCHEMA
+    residual = checkpoint.get("schema_version") in {
+        RESIDUAL_CHECKPOINT_SCHEMA,
+        "production-model-checkpoint-v8",
+    }
     binding = _validate_binding(checkpoint.get("trajectory_finetuning"))
     recipe = binding["recipe"]
+    if (checkpoint.get("schema_version") == "production-model-checkpoint-v8") != (
+        recipe["schema_version"] == "starting-evidence-policy-training-config-v1"
+    ):
+        raise ValueError("Checkpoint version differs from its starting-evidence recipe")
     for key in ("train_dataset_id", "split_manifest_id", "ruleset_manifest_id"):
         if checkpoint.get(key) != recipe["inputs"][key]:
             raise ValueError("Trajectory checkpoint recipe provenance differs")
@@ -786,7 +829,15 @@ def _validate_binding(value: object) -> dict[str, Any]:
         },
         "trajectory fine-tuning",
     )
-    recipe = TrajectoryPolicyConfig.from_mapping(binding["recipe"]).document
+    if (
+        _mapping(binding["recipe"], "policy recipe").get("schema_version")
+        == "starting-evidence-policy-training-config-v1"
+    ):
+        from spireshift.starting_evidence_training import StartingEvidencePolicyConfig
+
+        recipe = StartingEvidencePolicyConfig.from_mapping(binding["recipe"]).document
+    else:
+        recipe = TrajectoryPolicyConfig.from_mapping(binding["recipe"]).document
     epoch = _integer(binding["selected_epoch"], "selected epoch")
     if (
         not 0 <= epoch <= recipe["epochs"]
@@ -811,7 +862,18 @@ def _validate_binding(value: object) -> dict[str, Any]:
             raise ValueError("Trajectory subfold seeds are empty, duplicate, or unsorted")
     if set(runs["fit"]) & set(runs["selection"]):
         raise ValueError("Trajectory fitting/selection run subfolds overlap")
-    if runs != _folds(set(runs["fit"]) | set(runs["selection"]), recipe):
+    expected_runs = (
+        {
+            label: sorted(
+                recipe["anchor_complete_run_subfolds"][label]
+                + recipe["evidence_complete_run_subfolds"][label]
+            )
+            for label in ("fit", "selection")
+        }
+        if recipe["schema_version"] == "starting-evidence-policy-training-config-v1"
+        else _folds(set(runs["fit"]) | set(runs["selection"]), recipe)
+    )
+    if runs != expected_runs:
         raise ValueError("Trajectory subfold assignment differs from the frozen recipe")
     return binding
 
@@ -822,7 +884,11 @@ def validate_trajectory_report(
     from spireshift.starting_options import MODEL_TYPE as RESIDUAL_MODEL_TYPE
     from spireshift.starting_options import REPORT_SCHEMA as RESIDUAL_REPORT_SCHEMA
 
-    residual = report.get("schema_version") == RESIDUAL_REPORT_SCHEMA
+    evidence = report.get("schema_version") == "production-model-training-report-v8"
+    residual = report.get("schema_version") in {
+        RESIDUAL_REPORT_SCHEMA,
+        "production-model-training-report-v8",
+    }
     fields = {
         "schema_version",
         "report_id",
@@ -864,18 +930,30 @@ def validate_trajectory_report(
     }
     if residual:
         fields.add("starting_option_training")
+    if evidence:
+        fields.add("starting_evidence_training")
     _exact_keys(report, fields, "trajectory training report")
     _identified(report, "report_id")
     binding = _validate_binding(report["trajectory_finetuning"])
     recipe = binding["recipe"]
     if report["schema_version"] != (
-        RESIDUAL_REPORT_SCHEMA if residual else REPORT_SCHEMA
+        "production-model-training-report-v8"
+        if evidence
+        else RESIDUAL_REPORT_SCHEMA
+        if residual
+        else REPORT_SCHEMA
     ) or report["model_type"] != (RESIDUAL_MODEL_TYPE if residual else MODEL_TYPE):
         raise ValueError("Unsupported trajectory training report")
     if residual:
         from spireshift.starting_option_training import validate_starting_option_report
 
         validate_starting_option_report(report, checkpoint)
+    if evidence:
+        from spireshift.starting_evidence_training import validate_starting_evidence_report
+
+        validate_starting_evidence_report(report)
+    elif recipe["schema_version"] != CONFIG_SCHEMA:
+        raise ValueError("Legacy training report cannot carry a starting-evidence recipe")
     for key in ("train_dataset_id", "validation_dataset_id", "split_manifest_id"):
         if report[key] != recipe["inputs"][key]:
             raise ValueError("Trajectory report input provenance differs")
@@ -887,7 +965,12 @@ def validate_trajectory_report(
             raise ValueError("Trajectory report and checkpoint differ")
         validate_trajectory_checkpoint(checkpoint)
     if (
-        report["claim_scope"] != "anchored_train_trajectory_auxiliary_policy_candidate"
+        report["claim_scope"]
+        != (
+            "anchored_train_starting_evidence_auxiliary_policy_candidate"
+            if evidence
+            else "anchored_train_trajectory_auxiliary_policy_candidate"
+        )
         or report["terminal_victory_positive_labels"] != 0
         or report["checkpoint_promoted"] is not False
     ):
@@ -976,7 +1059,10 @@ def validate_trajectory_report(
 
 def trajectory_checkpoint_as_base(checkpoint: dict[str, Any]) -> dict[str, Any]:
     validate_trajectory_checkpoint(checkpoint)
-    if checkpoint.get("schema_version") == "production-model-checkpoint-v7":
+    if checkpoint.get("schema_version") in {
+        "production-model-checkpoint-v7",
+        "production-model-checkpoint-v8",
+    }:
         from spireshift.starting_option_training import starting_option_parent
 
         return starting_option_parent(checkpoint)

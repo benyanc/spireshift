@@ -224,6 +224,10 @@ development-validation checks. The completed base-v7 experiment selected no upda
 remains accepted. The [starting-option evidence collector](docs/starting-option-evidence.md)
 compares every starting option on 64 fresh train runs, with frozen fitting/selection ownership,
 complete-run traces, all pair comparisons and explicit coverage checks before further training.
+Its completed owner run passed those checks with 172 eligible comparisons and zero victories.
+The next [starting-choice training experiment](docs/starting-evidence-policy-training.md) consumes
+this evidence while preserving the original anchor groups, frozen base-v2 and all 204 validation
+checks. Its guide has one current owner-run command; it launches no game attempts.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
