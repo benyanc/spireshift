@@ -142,8 +142,13 @@ by phase and position. [Issue #125](https://github.com/benyanc/spireshift/issues
 versioned identity-aware starting-event policy residual over immutable base-v2. The
 [starting-option trainer](starting-option-policy-training.md) is implemented with a frozen recipe,
 the existing all-204 development-validation checks, fitting-only option vocabulary and an owner-run
-script capped at ten wall minutes. Its real-data quality and complete coverage audit are pending.
-The coding agent has launched no real-data training or game evaluation.
+script capped at ten wall minutes. The owner-run base-v7 experiment completed in 47.33 seconds,
+but none of its 40 epochs passed the unchanged advancement checks. It selected epoch zero and an
+empty residual. Starting preference coverage was only three fitting runs and one selection run;
+all 27 fitting option IDs were covered with no unseen IDs. The next bounded package is the
+[exhaustive starting-option evidence collector](starting-option-evidence.md), which evaluates all
+options across 64 fresh train seeds and stops at a frozen data-sufficiency gate. The coding agent
+has launched no real-data collection, training or game evaluation.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next update must

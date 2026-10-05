@@ -220,7 +220,10 @@ training comparisons. Its owner-run command reads saved artifacts without traini
 The [starting-option policy trainer](docs/starting-option-policy-training.md) addresses that diagnosis
 with public categorical option identities and a zero-initialized correction over immutable base-v2.
 Its frozen owner-run experiment preserves the same data, complete-run subfolds and all 204
-development-validation checks. The real-data result is pending; base-v2 remains accepted.
+development-validation checks. The completed base-v7 experiment selected no update; base-v2
+remains accepted. The [starting-option evidence collector](docs/starting-option-evidence.md)
+compares every starting option on 64 fresh train runs, with frozen fitting/selection ownership,
+complete-run traces, all pair comparisons and explicit coverage checks before further training.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

@@ -2,8 +2,8 @@
 
 Issue #125 tests the representation gap found in the rejected base-v6 update: every changed
 starting Ancient choice switched from option 2 to option 0, with 15 harmful changes on development
-validation. Accepted base-v2 remains the production model. This implementation is ready for the
-owner-run experiment; no real-data training or game evaluation has been launched by the coding agent.
+validation. Accepted base-v2 remains the production model. The owner-run experiment completed with
+no accepted update; no real-data training or game evaluation has been launched by the coding agent.
 
 ## Public candidate identity
 
@@ -103,4 +103,21 @@ dispatch, public-state boundaries, zero-initialization parity, unchanged parent 
 ownership, artifact tampering, v7 schema/loader compatibility and rejection. A bounded inspection
 of one saved real starting screen also verified zero-residual parity with the actual base-v2
 checkpoint and v7 schema/loader compatibility, without optimization or replay. The complete
-owner-run coverage and quality result is pending.
+owner-run coverage and quality result is complete, as described below.
+
+## Completed owner-run result
+
+The experiment completed in 47.33 wall seconds. All 40 epochs failed the unchanged preference and
+strong-advancement checks; the best respective selection improvements were 0.000011615429 and
+0.000016116408, both below the required 0.001. Epoch zero was selected, so the residual weights are
+empty and the model exactly preserves base-v2. Its unchanged predictions pass the safety checks;
+this does not demonstrate an improved updated policy. Base-v7 remains ineligible and unpromoted.
+
+The fitting vocabulary contains 27 IDs with no unseen candidates in selection or development
+validation. Starting preference coverage is three fitting runs and one selection run. That limits
+this learning experiment despite adequate ID coverage; it is not proof of the sole cause of failure.
+
+The training report is `sha256:d51bb52585663d4e6ea97b3d4a1a8155ecc60e78785dc05a6843dd815cd6fe73`;
+the resource report is `sha256:3e002ace5edb727d86a84e27b69b2edbb63f06b51f46610c23a883bd1baac798`.
+Do not repeat the frozen training script as the next step. The
+[starting-option evidence collector](starting-option-evidence.md) supplies the next bounded package.

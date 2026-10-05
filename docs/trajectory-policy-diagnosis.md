@@ -68,7 +68,8 @@ public option features through a separately versioned, zero-initialized starting
 policy head over accepted base-v2. The parent and its non-policy heads stay immutable. This tests
 a concrete representation hypothesis; success is not assumed, and combat competence remains
 unfinished even if starting choices improve. The [starting-option trainer](starting-option-policy-training.md)
-is implemented with its frozen recipe and one owner-run command; its real-data result is pending.
+completed its frozen owner-run experiment with no accepted update. Starting-choice preference
+coverage was only three fitting runs and one selection run; the evidence collector now expands it.
 
 The follow-up preserves the original data ownership and all-204 non-regression checks. Its recipe
 and identities must be frozen before an owner-run experiment, capped at one worker, 600 wall
@@ -79,7 +80,8 @@ development evidence and cannot become an untouched final-test claim.
 ## Completed owner-run audit
 
 `scripts/diagnose-trajectory-policy-v1.sh` has completed; do not repeat it as the next step.
-The next owner-run command is in the [starting-option training guide](starting-option-policy-training.md).
+The subsequent starting-option experiment also completed with no accepted update. The next owner-run
+command is in the [starting-option evidence guide](starting-option-evidence.md).
 The diagnosis script launches no follow-up job. Full details are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
 `sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.

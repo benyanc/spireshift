@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-option-evidence-case-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "config_id",
+    "case_id",
+    "run_seed",
+    "source_observation",
+    "source_legal_actions",
+    "source_model_input",
+    "option_ids",
+    "baseline_action_id",
+    "branches",
+    "comparisons",
+    "status",
+    "error"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "starting-option-evidence-case-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "run_seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_observation": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "schema_version",
+            "patch_id",
+            "decision_type",
+            "public_state",
+            "state_hash"
+          ],
+          "properties": {
+            "schema_version": {
+              "const": "observation-v1"
+            },
+            "patch_id": {
+              "type": "string"
+            },
+            "decision_type": {
+              "const": "event"
+            },
+            "public_state": {
+              "type": "object"
+            },
+            "state_hash": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "source_legal_actions": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "action_id",
+              "kind",
+              "payload"
+            ],
+            "properties": {
+              "action_id": {
+                "type": "string"
+              },
+              "kind": {
+                "const": "evangambit_ancient"
+              },
+              "payload": {
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
+    },
+    "source_model_input": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://spireshift.dev/schemas/model-input-v1.json"
+        }
+      ]
+    },
+    "option_ids": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
+    },
+    "baseline_action_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "branches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action_id",
+          "status",
+          "error",
+          "trajectory"
+        ],
+        "properties": {
+          "action_id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "completed",
+              "failed",
+              "blocked"
+            ]
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "trajectory": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "https://spireshift.dev/schemas/run-level-trajectory-search-case-v3.json#/$defs/trajectory"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 3
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "comparison_id",
+          "left_action_id",
+          "right_action_id",
+          "left_rank",
+          "right_rank",
+          "deciding_rank_component",
+          "label",
+          "preferred_action_id",
+          "disfavored_action_id",
+          "eligible_policy_preference",
+          "terminal_victory_difference"
+        ],
+        "properties": {
+          "comparison_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "left_action_id": {
+            "type": "string"
+          },
+          "right_action_id": {
+            "type": "string"
+          },
+          "left_rank": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minItems": 9,
+            "maxItems": 9
+          },
+          "right_rank": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minItems": 9,
+            "maxItems": 9
+          },
+          "deciding_rank_component": {
+            "enum": [
+              null,
+              "victory",
+              "act1_cleared",
+              "boss_reached",
+              "maximum_floor",
+              "encounter_cleared",
+              "enemy_hp_defeated_fraction_ppm",
+              "player_hp_fraction_ppm",
+              "last_actionable_player_hp_fraction_ppm",
+              "distinct_public_states_on_floor"
+            ]
+          },
+          "label": {
+            "enum": [
+              "strict",
+              "tied"
+            ]
+          },
+          "preferred_action_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "disfavored_action_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "eligible_policy_preference": {
+            "type": "boolean"
+          },
+          "terminal_victory_difference": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 3
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed"
+      ]
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

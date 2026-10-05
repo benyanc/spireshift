@@ -191,6 +191,14 @@ from spireshift.splits import (
     write_frozen_dataset_index,
     write_frozen_split_manifest,
 )
+from spireshift.starting_evidence import (
+    FILENAME as STARTING_EVIDENCE_FILENAME,
+)
+from spireshift.starting_evidence import (
+    collect_starting_option_evidence,
+    load_starting_evidence_config,
+    verify_starting_option_evidence,
+)
 from spireshift.starting_options import load_starting_option_config
 from spireshift.tactical_handoff import (
     benchmark_mock_tactical_handoff,
@@ -972,6 +980,27 @@ def build_parser() -> argparse.ArgumentParser:
     terminal_discovery_verify.add_argument("config", type=Path)
     terminal_discovery_verify.add_argument("--split-manifest", type=Path, required=True)
     terminal_discovery_verify.add_argument("--output", type=Path)
+    starting_collect = model_commands.add_parser(
+        "collect-starting-option-evidence",
+        help="Compare all starting options on frozen train runs with a fixed continuation policy",
+    )
+    starting_collect.add_argument("config", type=Path)
+    starting_collect.add_argument("checkpoint", type=Path)
+    starting_collect.add_argument("--report", type=Path, required=True)
+    starting_collect.add_argument("--split-manifest", type=Path, required=True)
+    starting_collect.add_argument("--upstream-root", type=Path, required=True)
+    starting_collect.add_argument("--manifest", type=Path, required=True)
+    starting_collect.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    starting_collect.add_argument("--output-dir", type=Path, required=True)
+    starting_collect.add_argument("--resume", action="store_true")
+    starting_verify = model_commands.add_parser(
+        "verify-starting-option-evidence",
+        help="Verify saved starting-option comparisons and coverage without replay or training",
+    )
+    starting_verify.add_argument("evidence", type=Path)
+    starting_verify.add_argument("config", type=Path)
+    starting_verify.add_argument("--split-manifest", type=Path, required=True)
+    starting_verify.add_argument("--manifest", type=Path, required=True)
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2349,6 +2378,70 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(trajectory_comparison, args.output)
                 return 0
+            if args.model_command == "verify-starting-option-evidence":
+                starting_verification = verify_starting_option_evidence(
+                    args.evidence,
+                    config=load_starting_evidence_config(args.config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                )
+                _emit_json(starting_verification, None)
+                return 0
+            if args.model_command == "collect-starting-option-evidence":
+                if (args.output_dir / STARTING_EVIDENCE_FILENAME).exists():
+                    raise FileExistsError("Completed starting evidence already exists; verify it")
+                starting_config = load_starting_evidence_config(args.config)
+                starting_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                starting_report = load_production_training_report(
+                    args.report, checkpoint=starting_checkpoint
+                )
+                starting_ruleset = load_patch_manifest(args.manifest).ruleset_identity()
+                starting_policy = ProductionCheckpointPolicy(
+                    checkpoint=starting_checkpoint,
+                    training_report=starting_report,
+                    ruleset=starting_ruleset,
+                )
+                starting_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=starting_config.runner.maximum_decisions_per_run + 1,
+                )
+
+                def starting_progress(done: int, total: int) -> None:
+                    if done == 1 or done % 8 == 0 or done == total:
+                        print(f"Starting-option runs completed: {done}/{total}", flush=True)
+
+                starting_result = collect_starting_option_evidence(
+                    environment_factory=starting_backend.factory,
+                    ruleset=starting_ruleset,
+                    policy=starting_policy,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    training_report_id=str(starting_report["report_id"]),
+                    config=starting_config,
+                    objective=load_objective(args.objective_config),
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                    progress=starting_progress,
+                )
+                starting_summary = starting_result["summary"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(starting_summary["recorded_trajectories"]),
+                        transitions=int(starting_summary["recorded_transitions"]),
+                    )
+                )
+                _emit_json(
+                    {
+                        "report_id": starting_result["report_id"],
+                        "report_path": str(args.output_dir / STARTING_EVIDENCE_FILENAME),
+                        "integrity_verified": True,
+                        "summary": starting_summary,
+                        "training_started": False,
+                        "checkpoint_promoted": False,
+                    },
+                    None,
+                )
+                return 0 if starting_summary["failed_runs"] == 0 else 1
             if args.model_command == "search-run-trajectories":
                 search_config = load_trajectory_search_config(args.config)
                 search_checkpoint = load_production_model_checkpoint(args.checkpoint)
