@@ -87,7 +87,8 @@ victories. The [exhaustive-evidence training experiment](starting-evidence-polic
 also completed with no accepted update. Its best overall selection-loss improvement was
 0.000926394179, below the unchanged 0.001 minimum, while higher-floor comparisons improved by
 0.002771563751. Base-v8 retained epoch zero; passing final validation checks describe the unchanged
-fallback. There is no new owner command.
+fallback. The next owner command is in the
+[starting-evidence diagnosis guide](starting-evidence-diagnosis.md).
 The diagnosis script launches no follow-up job. Full details are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
 `sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.
@@ -97,9 +98,10 @@ Raw examples remain outside Git. Base-v6 remains rejected and base-v2 remains ac
 
 ## Next saved-data diagnosis after base-v8
 
-Issue #42 remains open for the next foundation package. Use the completed exhaustive-evidence
-training report, original fitting anchors and verified evidence to distinguish plausible causes
-before another training recipe or new collection:
+Issue #42 remains open for the next foundation package. The
+[starting-evidence diagnostic](starting-evidence-diagnosis.md) is implemented and awaits the
+owner-run source audit. It uses the completed training report, original fitting anchors and
+verified evidence to distinguish plausible causes before another recipe or new collection:
 
 - Reconcile all 40 learning-curve rows and failed gates, retaining the fixed complete-run groups,
   parent identities, run normalization and original threshold. Separate fitting improvement from

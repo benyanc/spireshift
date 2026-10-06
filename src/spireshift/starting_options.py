@@ -230,6 +230,33 @@ def _context(representation: CompositionalModelInput) -> dict[str, float]:
     return result
 
 
+def starting_option_feature_tokens(
+    representation: CompositionalModelInput, known_option_ids: tuple[int, ...]
+) -> tuple[dict[str, float], ...]:
+    """Public semantic tokens before hashing, shared by inference and saved-data audits."""
+    options = starting_option_ids(representation)
+    if options is None:
+        return tuple({} for _ in representation.candidates)
+    context = _context(representation)
+    known = set(known_option_ids)
+    return tuple(
+        {
+            json.dumps(
+                [
+                    ENCODER_ID,
+                    "ancient_option_id",
+                    str(identity) if identity in known else "unknown",
+                    key,
+                ],
+                separators=(",", ":"),
+            ): value
+            for key, value in context.items()
+            if value
+        }
+        for identity in options
+    )
+
+
 @dataclass(slots=True)
 class StartingOptionHead:
     dimension: int
@@ -237,20 +264,10 @@ class StartingOptionHead:
     weights: dict[int, float] = field(default_factory=dict)
 
     def features(self, representation: CompositionalModelInput) -> tuple[dict[int, float], ...]:
-        options = starting_option_ids(representation)
-        if options is None:
-            return tuple({} for _ in representation.candidates)
-        context = _context(representation)
-        known = set(self.known_option_ids)
         result = []
-        for identity in options:
-            # Unseen IDs share an explicit category, never a magnitude or menu-position feature.
-            category = str(identity) if identity in known else "unknown"
+        for tokens in starting_option_feature_tokens(representation, self.known_option_ids):
             features: dict[int, float] = {}
-            for key, value in context.items():
-                token = json.dumps(
-                    [ENCODER_ID, "ancient_option_id", category, key], separators=(",", ":")
-                )
+            for token, value in tokens.items():
                 digest = hashlib.sha256(token.encode()).digest()
                 index = int.from_bytes(digest[:8], "big") % self.dimension
                 sign = 1.0 if digest[8] & 1 else -1.0

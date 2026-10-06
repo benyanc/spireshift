@@ -45,9 +45,10 @@ resident memory and 4 MB output. No resource cap was hit. Saved identities:
 - Training report: `sha256:da8125f404051f2251273e7ac91ff75eeacb5250f5c5fc1105fbe3f7cffebd6f`.
 - Resource report: `sha256:4e94edaefb367f7e121809bc691a71c4f2eef341c1aad8a3aa6be68feef353a7`.
 
-There is **no new owner command**. The next package belongs to
-[issue #42](https://github.com/benyanc/spireshift/issues/42): diagnose the starting-choice learner
-using these saved inputs and learning curves. Separate weak-label conflict, preference/anchor
+The next [saved-data diagnosis](starting-evidence-diagnosis.md) is implemented under
+[issue #42](https://github.com/benyanc/spireshift/issues/42), with one owner command in its guide.
+It diagnoses the starting-choice learner using these saved inputs and learning curves.
+Separate weak-label conflict, preference/anchor
 conflict, representation limits and limited optimization as hypotheses; do not assume the cause
 from this near miss. Any later training change needs a new frozen recipe and a fresh confirmation
 plan, since the current selection and development-validation results have been inspected.

@@ -161,7 +161,9 @@ launched no real-data collection, training or game evaluation.
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
 terminal-value readiness and adaptive-search training remain blocked. The next issue #42 package
 uses saved data to distinguish label/anchor conflict, representation limits and limited
-optimization before choosing another intervention. No new owner task is ready. Any later update
+optimization before choosing another intervention. The
+[starting-evidence diagnostic](starting-evidence-diagnosis.md) now supplies that owner-run audit;
+its guide has one current command. Any later update
 must preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
 tie-breakers, and use a frozen recipe with a fresh confirmation plan instead of tuning against
 the inspected selection or development-validation result.

@@ -199,6 +199,12 @@ from spireshift.starting_evidence import (
     load_starting_evidence_config,
     verify_starting_option_evidence,
 )
+from spireshift.starting_evidence_diagnostic import (
+    diagnose_starting_evidence_policy,
+    load_starting_evidence_diagnostic_config,
+    load_starting_evidence_diagnostic_report,
+    summarize_starting_evidence_diagnosis,
+)
 from spireshift.starting_evidence_training import (
     train_starting_evidence_policy,
     verify_starting_evidence_policy,
@@ -869,6 +875,10 @@ def build_parser() -> argparse.ArgumentParser:
             "verify-starting-evidence-policy",
             "Verify saved starting-option training against its inputs without retraining",
         ),
+        (
+            "diagnose-starting-evidence-policy",
+            "Diagnose saved starting-choice learning without optimization or game replay",
+        ),
     ):
         evidence_train = model_commands.add_parser(command, help=description)
         evidence_train.add_argument("config", type=Path)
@@ -887,6 +897,16 @@ def build_parser() -> argparse.ArgumentParser:
         ):
             evidence_train.add_argument(f"--{argument}", type=Path, required=True)
         evidence_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+        if command == "diagnose-starting-evidence-policy":
+            evidence_train.add_argument("--diagnostic-config", type=Path, required=True)
+            evidence_train.add_argument("--resource-report", type=Path, required=True)
+            evidence_train.add_argument("--output", type=Path, required=True)
+    evidence_show = model_commands.add_parser(
+        "show-starting-evidence-diagnosis",
+        help="Show a cached diagnostic after checking its identity",
+    )
+    evidence_show.add_argument("report", type=Path)
+    evidence_show.add_argument("--diagnostic-config", type=Path, required=True)
     trajectory_diagnostic = model_commands.add_parser(
         "diagnose-trajectory-policy",
         help="Explain a saved trajectory policy update without training or replay",
@@ -2832,12 +2852,51 @@ def main(argv: Sequence[str] | None = None) -> int:
                     None,
                 )
                 return 0
+            if args.model_command == "show-starting-evidence-diagnosis":
+                cached_starting_diagnosis = load_starting_evidence_diagnostic_report(
+                    args.report, load_starting_evidence_diagnostic_config(args.diagnostic_config)
+                )
+                _emit_json(
+                    {
+                        **summarize_starting_evidence_diagnosis(cached_starting_diagnosis),
+                        "verification_scope": "cached_report_identity_and_frozen_bindings_only",
+                        "source_inputs_reaudited": False,
+                    },
+                    None,
+                )
+                return 0
             if args.model_command in {
                 "finetune-starting-evidence-policy",
                 "verify-starting-evidence-policy",
+                "diagnose-starting-evidence-policy",
             }:
                 verify_only = args.model_command == "verify-starting-evidence-policy"
-                if not verify_only:
+                diagnose_only = args.model_command == "diagnose-starting-evidence-policy"
+                if diagnose_only:
+                    if args.output.exists() or args.output.resolve() in {
+                        path.resolve()
+                        for path in (
+                            args.config,
+                            args.parent_checkpoint,
+                            args.checkpoint,
+                            args.parent_report,
+                            args.report,
+                            args.evidence,
+                            args.evidence_config,
+                            args.anchor_assignment_report,
+                            args.train_report,
+                            args.validation_report,
+                            args.split_manifest,
+                            args.ruleset_manifest,
+                            args.objective_config,
+                            args.diagnostic_config,
+                            args.resource_report,
+                        )
+                    }:
+                        raise ValueError(
+                            "Diagnostic output must be new and differ from every source"
+                        )
+                elif not verify_only:
                     outputs = (args.checkpoint.resolve(), args.report.resolve())
                     if outputs[0] == outputs[1] or any(path.exists() for path in outputs):
                         raise ValueError(
@@ -2857,7 +2916,53 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "ruleset": load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
                     "objective": load_objective(args.objective_config),
                 }
-                if verify_only:
+                if diagnose_only:
+                    print(
+                        (
+                            "Checking saved sources and learning history; no training or game "
+                            "attempts."
+                        ),
+                        file=sys.stderr,
+                    )
+                    starting_diagnosis = diagnose_starting_evidence_policy(
+                        diagnostic_config=load_starting_evidence_diagnostic_config(
+                            args.diagnostic_config
+                        ),
+                        checkpoint_path=args.checkpoint,
+                        report_path=args.report,
+                        resource_report_path=args.resource_report,
+                        source_paths={
+                            "config": args.config,
+                            "parent_checkpoint": args.parent_checkpoint,
+                            "checkpoint": args.checkpoint,
+                            **{
+                                f"--{key.replace('_', '-')}": getattr(args, key)
+                                for key in (
+                                    "parent_report",
+                                    "report",
+                                    "evidence",
+                                    "evidence_config",
+                                    "anchor_assignment_report",
+                                    "train_report",
+                                    "validation_report",
+                                    "split_manifest",
+                                    "ruleset_manifest",
+                                )
+                            },
+                        },
+                        **starting_training_inputs,
+                    )
+                    write_production_model_artifact(
+                        starting_diagnosis, args.output, label="starting evidence diagnosis"
+                    )
+                    result_summary = {
+                        **summarize_starting_evidence_diagnosis(starting_diagnosis),
+                        "report_path": str(args.output),
+                        "verification_scope": (
+                            "verified_sources_and_recorded_history_no_optimizer_steps"
+                        ),
+                    }
+                elif verify_only:
                     result_summary = verify_starting_evidence_policy(
                         checkpoint_path=args.checkpoint,
                         report_path=args.report,

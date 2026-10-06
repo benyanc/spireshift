@@ -26,7 +26,7 @@ from spireshift.starting_evidence import (
     StartingEvidenceConfig,
     verify_starting_option_evidence,
 )
-from spireshift.starting_option_training import prepare_starting_option_space
+from spireshift.starting_option_training import StartingOptionSpace, prepare_starting_option_space
 from spireshift.starting_options import EVIDENCE_CONFIG_SCHEMA, StartingOptionConfig
 
 RECIPE_SCHEMA = "starting-evidence-policy-training-config-v1"
@@ -369,6 +369,20 @@ def verify_starting_evidence_policy(
     inputs, space = prepare_starting_option_space(inputs, kwargs["ruleset"], config)
     checkpoint = load_production_model_checkpoint(checkpoint_path)
     report = load_production_training_report(report_path, checkpoint=checkpoint)
+    return verify_prepared_starting_evidence_policy(
+        inputs=inputs, space=space, checkpoint=checkpoint, report=report
+    )
+
+
+def verify_prepared_starting_evidence_policy(
+    *,
+    inputs: policy.TrajectoryPolicyInputs,
+    space: StartingOptionSpace,
+    checkpoint: dict[str, Any],
+    report: dict[str, Any],
+) -> dict[str, Any]:
+    """Reconcile a saved result using already verified and augmented source inputs."""
+    config = space.config
     if (
         checkpoint["schema_version"] != CHECKPOINT_SCHEMA
         or report["schema_version"] != REPORT_SCHEMA
