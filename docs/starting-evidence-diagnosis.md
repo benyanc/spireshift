@@ -10,9 +10,55 @@ whether weaker targets pull against stronger targets, and how the original polic
 acts locally. It also reconciles the saved learning curves and frozen rejection checks. It does
 not assume that any one of these mechanisms caused the rejection.
 
-## One current owner command
+## Completed owner-run result
 
-From the repository directory, run only:
+The owner completed the full source audit on 2026-10-05 (Toronto time). Reconciliation passed:
+the sources, saved checkpoint, recorded history and frozen rejection checks agree. The report's
+content identity, frozen bindings and JSON schema also pass bounded saved-file verification.
+No update was accepted; base-v8 retains epoch zero and accepted base-v2 remains unchanged.
+
+| Fitting diagnostic | Result |
+| --- | --- |
+| Opposing semantic-contrast groups | 9 of 115 groups |
+| Independent runs within each opposing group | 2 |
+| Incompatible strict margins after parent offsets | 1 group |
+| Different semantic contrasts sharing an identical hashed contrast | 0 |
+| Zero residual contrasts | 0 |
+| Initial strong/weak gradient cosine | +0.280803741259 |
+| Opposing original teacher-target matches | 14 across 11 preference runs and 12 anchor runs |
+
+All nine opposing groups share the encoded resource/act context but have different full public
+states and starting menus. Eight involve weaker frontier comparisons; one opposes two higher-floor
+comparisons. They are examples of differing realized lessons, not nine proven contradictions in
+expected value. Only one group's strict margins cannot all be satisfied by its shared residual
+contrast after parent offsets. Different menus and other omitted public context remain possible
+explanations alongside variation in seeded futures.
+
+The positive initial gradient cosine does not support an initial aggregate tug-of-war between
+strong and weak fitting targets. It says nothing about discarded later weights. The absence of
+complete hashed-contrast aliases does not prove that the representation is sufficient or that
+individual coordinates never collide. The 14 opposing teacher-target matches have no exact public
+state matches; the optimizer's actual anchor remains the parent distribution, not those targets.
+Local anchor curvature is a constraint, not proof that anchoring caused rejection.
+
+The audit took **41.903 wall seconds**, 33.825 CPU seconds, 551,993,344 bytes peak resident memory
+and 1,339,231 bytes output. No resource cap was hit. It took zero optimizer steps, replayed zero
+games and promoted no checkpoint. Report identity:
+`sha256:e2b7bbc906863488289f33cc05bb00bced9366130fee47261a5a8aa6d9759280`.
+Resource identity:
+`sha256:82a34d11a711eac1ae3ed6b72d7949801948db05905374007db49507c864c155`.
+
+The next package is [issue #128](https://github.com/benyanc/spireshift/issues/128): measure whether
+starting-choice lessons repeat across fresh independent train seeds, preserving visible context
+and separating higher-floor evidence from weaker tie-breakers. Replaying the same deterministic
+seed is not a new independent future. Use one finite, prespecified collection and confirmation
+plan; if coverage or consistency remains inadequate, stop this starting-choice experiment and
+return foundation work to combat/run-level competence. This package is planned, not implemented.
+**There is no new owner command to run yet.**
+
+## Archived owner command
+
+The completed audit used this command; it is not the next task:
 
 ```bash
 bash scripts/diagnose-starting-evidence-policy-v1.sh
@@ -23,10 +69,6 @@ The owner launches and monitors the full saved-data audit. It uses one worker wi
 original curricula can take more than 30 seconds before the diagnostic calculations start.
 The script prints when the audit starts. There is no optimization, new collection, engine
 replay, game attempt, follow-up training, candidate selection or promotion.
-
-Share the final terminal summary. In particular, it reports opposing fitting-target groups,
-possible representation aliases, the strong/weak fitting-gradient comparison, disagreements
-with original fitting-anchor targets and a conditional next-step recommendation.
 
 The full report is saved outside Git at
 `artifacts/diagnostics/sts2-v0.107.1-base-v8-starting-evidence-v1/diagnostic.json`.
@@ -90,13 +132,12 @@ anchor and proximal gradients are zero at the parent. The audit computes the loc
 along a unit preference-descent direction without taking a step. Curvature shows a local
 constraint; it does not establish that anchoring prevented acceptance.
 
-## Decision after the owner returns the result
+## Limits on the next decision
 
-The report may recommend checking representation aliases, measuring fitting-label repeatability,
-or a prespecified strong-label ablation when its corresponding fitting evidence supports it.
-If it does not identify a specific mechanism, it leaves the intervention unresolved and names
-the missing optimizer/weight-trace evidence. A best loss at the final epoch alone cannot justify
-training longer against the inspected selection set.
+The completed report recommends measuring fitting-label repeatability. It does not identify a
+causal mechanism or authorize a training update. A best loss at the final epoch alone cannot
+justify training longer against the inspected selection set. Do not lower the 0.001 minimum,
+accept epoch 40 or repeat the identical recipe.
 
 Any later experiment needs a new frozen recipe, resource cap and fresh confirmation plan.
 The existing selection and development-validation data have been inspected and cannot become an

@@ -87,37 +87,31 @@ victories. The [exhaustive-evidence training experiment](starting-evidence-polic
 also completed with no accepted update. Its best overall selection-loss improvement was
 0.000926394179, below the unchanged 0.001 minimum, while higher-floor comparisons improved by
 0.002771563751. Base-v8 retained epoch zero; passing final validation checks describe the unchanged
-fallback. The next owner command is in the
-[starting-evidence diagnosis guide](starting-evidence-diagnosis.md).
-The diagnosis script launches no follow-up job. Full details are saved in
+fallback. The subsequent [starting-evidence diagnosis](starting-evidence-diagnosis.md) has also
+completed; there is no new owner command yet. Neither diagnosis launches a follow-up job.
+Full details of the base-v6 audit are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
 `sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.
 Resource measurements are in `artifacts/resources/trajectory-policy-base-v6-diagnostic-v2.json`,
 identified by `sha256:82992e8f9bedcdbe262f5d79cba7fd8d881ec19d0194b36c4d77214f8e32b8b3`.
 Raw examples remain outside Git. Base-v6 remains rejected and base-v2 remains accepted.
 
-## Next saved-data diagnosis after base-v8
+## Completed saved-data diagnosis after base-v8
 
-Issue #42 remains open for the next foundation package. The
-[starting-evidence diagnostic](starting-evidence-diagnosis.md) is implemented and awaits the
-owner-run source audit. It uses the completed training report, original fitting anchors and
-verified evidence to distinguish plausible causes before another recipe or new collection:
+The owner completed the [starting-evidence diagnostic](starting-evidence-diagnosis.md) in 41.903
+wall seconds. Source/history reconciliation passed. Nine of 115 fitting contrasts have opposing
+realized lessons across two independent seeds each, with the same encoded context but different
+full public states and menus. Eight groups involve weaker frontier labels; one opposes two
+higher-floor labels. Only one group's strict margins remain incompatible after parent offsets.
+There are no complete hashed-contrast aliases or zero contrasts. Strong and weak gradients align
+partially at the parent (+0.280803741259 cosine), which does not support initial aggregate
+opposition. Fourteen teacher-target disagreements are auxiliary associations; the actual optimizer
+anchors to the parent distribution. Noise, omitted context and later optimization remain unresolved.
 
-- Reconcile all 40 learning-curve rows and failed gates, retaining the fixed complete-run groups,
-  parent identities, run normalization and original threshold. Separate fitting improvement from
-  selection improvement and report floor versus weaker frontier comparisons by run and option.
-- Inspect opposing fitting preferences for the same public option/context features and conflicts
-  with original fitting-anchor targets. Evaluate feature contrasts and analytic gradients at the
-  frozen parent; perform no optimizer step, replay or alternative epoch selection. Separate exact
-  conflicts from uncertain or correlated labels and representation aliases.
-- Test whether the evidence supports weak-label conflict, anchor constraints, representation
-  limits or insufficient optimization. A curve still improving at epoch 40 suggests a hypothesis,
-  not permission to train longer against the observed selection set. Intermediate epoch weights
-  were not retained, so their exact decision changes cannot be reconstructed without retraining.
-- Recommend one concrete intervention only if these diagnostics support it. Freeze its method,
-  resource cap and fresh confirmation plan before any owner-run experiment. The inspected
-  selection/development-validation sets are diagnostic evidence, not a new untouched test.
-
-This package does not promote base-v8, relax the threshold, rerun the identical recipe, launch
-game attempts or establish terminal-value/adaptive readiness. Sustained saved-data verification,
-if needed by a new diagnostic command, is also owner launched and monitored.
+This #42 package is complete; the broader diagnosis issue stays open. The next bounded work item
+is [#128](https://github.com/benyanc/spireshift/issues/128), a fresh-seed starting-label repeatability
+study with a frozen confirmation plan and explicit stop rule. It is planned, not implemented.
+No new owner command is ready. Do not repeat these audits or extend the rejected recipe as the
+next step. Base-v2 remains accepted, and zero terminal-positive labels still block foundation
+readiness and adaptive-controller training. All sustained collection or verification remains
+owner launched and monitored.

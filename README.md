@@ -230,10 +230,12 @@ The completed [starting-choice training experiment](docs/starting-evidence-polic
 consumed this evidence while preserving the original anchor groups, frozen base-v2 and all 204
 validation checks. Its best overall selection-loss gain was 0.000926394179, below the unchanged
 0.001 minimum, despite stronger improvement on higher-floor comparisons. Base-v8 selected epoch
-zero and remains ineligible. The [issue #42 diagnostic](docs/starting-evidence-diagnosis.md)
-now audits the recorded learning curves, conflicting fitting targets and local gradient/anchor
-constraints. Its guide has one owner-run command; it starts no training or game attempts.
-There is no demonstrated full-run win-rate improvement.
+zero and remains ineligible. The owner completed the
+[issue #42 diagnostic](docs/starting-evidence-diagnosis.md): source/history reconciliation passed,
+and nine groups have opposing realized lessons under similar encoded contexts and different menus.
+The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift/issues/128) plans
+one bounded fresh-seed repeatability study before another starting-choice update. It is not
+implemented; there is no new owner command yet. There is no demonstrated full-run win-rate improvement.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

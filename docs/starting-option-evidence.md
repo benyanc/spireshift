@@ -113,7 +113,10 @@ the owner resource report is
 Peak resident memory was 225,640,448 bytes; output storage was 35,265,001 bytes. No resource
 cap was reached. This passes evidence coverage only, not policy improvement or foundation readiness.
 
-The next owner command is in the [exhaustive-evidence training guide](starting-evidence-policy-training.md).
-Its frozen recipe retains the immutable parent, explicit source groups and all-204 validation
-limits. A separate frozen full-run comparison is still required before promotion. The coding
+The subsequent [exhaustive-evidence training](starting-evidence-policy-training.md) and
+[saved-data diagnosis](starting-evidence-diagnosis.md) both completed. Training accepted no update;
+the diagnostic found opposing realized lessons under similar encoded contexts and different menus.
+[Issue #128](https://github.com/benyanc/spireshift/issues/128) plans one bounded fresh-seed
+repeatability study. It is not implemented; there is no new owner command yet. Base-v2 remains
+accepted, and a separate frozen full-run comparison is still required before promotion. The coding
 agent has launched no real collection, training, replay or game evaluation.

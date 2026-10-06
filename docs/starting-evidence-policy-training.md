@@ -45,13 +45,15 @@ resident memory and 4 MB output. No resource cap was hit. Saved identities:
 - Training report: `sha256:da8125f404051f2251273e7ac91ff75eeacb5250f5c5fc1105fbe3f7cffebd6f`.
 - Resource report: `sha256:4e94edaefb367f7e121809bc691a71c4f2eef341c1aad8a3aa6be68feef353a7`.
 
-The next [saved-data diagnosis](starting-evidence-diagnosis.md) is implemented under
-[issue #42](https://github.com/benyanc/spireshift/issues/42), with one owner command in its guide.
-It diagnoses the starting-choice learner using these saved inputs and learning curves.
-Separate weak-label conflict, preference/anchor
-conflict, representation limits and limited optimization as hypotheses; do not assume the cause
-from this near miss. Any later training change needs a new frozen recipe and a fresh confirmation
-plan, since the current selection and development-validation results have been inspected.
+The owner completed the [saved-data diagnosis](starting-evidence-diagnosis.md) under
+[issue #42](https://github.com/benyanc/spireshift/issues/42). It reconciles the experiment and finds
+nine groups of opposing fitting lessons, with different public menus; only one group has
+incompatible strict margins after parent offsets. There are no complete hashed-contrast aliases,
+and the initial strong/weak gradients have a positive cosine. These observations do not establish
+the cause of rejection. [Issue #128](https://github.com/benyanc/spireshift/issues/128) plans one
+bounded fresh-seed repeatability study before another training intervention. It is not implemented;
+there is no new owner command yet. Any later training change needs a new frozen recipe and fresh
+confirmation, since the current selection and development-validation results have been inspected.
 
 ## Archived owner command and output handling
 
