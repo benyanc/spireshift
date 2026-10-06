@@ -50,9 +50,10 @@ The owner completed the [saved-data diagnosis](starting-evidence-diagnosis.md) u
 nine groups of opposing fitting lessons, with different public menus; only one group has
 incompatible strict margins after parent offsets. There are no complete hashed-contrast aliases,
 and the initial strong/weak gradients have a positive cosine. These observations do not establish
-the cause of rejection. [Issue #128](https://github.com/benyanc/spireshift/issues/128) plans one
-bounded fresh-seed repeatability study before another training intervention. It is not implemented;
-there is no new owner command yet. Any later training change needs a new frozen recipe and fresh
+the cause of rejection. [Issue #128](https://github.com/benyanc/spireshift/issues/128) implements one
+[bounded fresh-seed repeatability study](starting-choice-repeatability.md) before another training
+intervention. Its guide has the one current owner command; collection/analysis is pending.
+Any later training change needs a new frozen recipe and fresh
 confirmation, since the current selection and development-validation results have been inspected.
 
 ## Archived owner command and output handling

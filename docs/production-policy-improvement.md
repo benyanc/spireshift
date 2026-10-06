@@ -165,9 +165,10 @@ Source/history reconciliation passed. Nine groups have opposing fitting lessons 
 encoded contexts but different complete public states and menus; only one group's strict margins
 remain incompatible after parent offsets. No complete hashed-contrast aliases were found, and
 the initial strong/weak gradient cosine is positive. These are diagnostics, not a proven cause.
-[Issue #128](https://github.com/benyanc/spireshift/issues/128) plans one bounded fresh-seed
-repeatability study with frozen confirmation and an explicit stop rule before another
-starting-choice update. It is not implemented; there is no new owner command yet. Any later update
+[Issue #128](https://github.com/benyanc/spireshift/issues/128) implements one
+[bounded fresh-seed repeatability study](starting-choice-repeatability.md) with frozen confirmation
+and an explicit stop rule before another starting-choice update. Its guide has the one current
+owner command; collection/analysis is pending. Any later update
 must preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
 tie-breakers, and use a frozen recipe with a fresh confirmation plan instead of tuning against
 the inspected selection or development-validation result.

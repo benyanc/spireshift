@@ -88,7 +88,8 @@ also completed with no accepted update. Its best overall selection-loss improvem
 0.000926394179, below the unchanged 0.001 minimum, while higher-floor comparisons improved by
 0.002771563751. Base-v8 retained epoch zero; passing final validation checks describe the unchanged
 fallback. The subsequent [starting-evidence diagnosis](starting-evidence-diagnosis.md) has also
-completed; there is no new owner command yet. Neither diagnosis launches a follow-up job.
+completed. The next owner command is in the [repeatability guide](starting-choice-repeatability.md).
+Neither diagnosis launches a follow-up job.
 Full details of the base-v6 audit are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
 `sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.
@@ -110,8 +111,9 @@ anchors to the parent distribution. Noise, omitted context and later optimizatio
 
 This #42 package is complete; the broader diagnosis issue stays open. The next bounded work item
 is [#128](https://github.com/benyanc/spireshift/issues/128), a fresh-seed starting-label repeatability
-study with a frozen confirmation plan and explicit stop rule. It is planned, not implemented.
-No new owner command is ready. Do not repeat these audits or extend the rejected recipe as the
-next step. Base-v2 remains accepted, and zero terminal-positive labels still block foundation
+study with a frozen confirmation plan and explicit stop rule. It is now implemented and awaits
+the owner collection/analysis; its [guide](starting-choice-repeatability.md) has one current command.
+Do not repeat these audits or extend the rejected recipe as the next step. Base-v2 remains
+accepted, and zero terminal-positive labels still block foundation
 readiness and adaptive-controller training. All sustained collection or verification remains
 owner launched and monitored.

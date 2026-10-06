@@ -210,6 +210,16 @@ from spireshift.starting_evidence_training import (
     verify_starting_evidence_policy,
 )
 from spireshift.starting_options import load_starting_option_config
+from spireshift.starting_repeatability import (
+    FILENAME as STARTING_REPEATABILITY_FILENAME,
+)
+from spireshift.starting_repeatability import (
+    analyze_starting_repeatability,
+    load_starting_repeatability_config,
+    load_starting_repeatability_report,
+    prepare_starting_repeatability,
+    summarize_starting_repeatability,
+)
 from spireshift.tactical_handoff import (
     benchmark_mock_tactical_handoff,
     load_tactical_handoff_report,
@@ -1052,6 +1062,26 @@ def build_parser() -> argparse.ArgumentParser:
     starting_verify.add_argument("config", type=Path)
     starting_verify.add_argument("--split-manifest", type=Path, required=True)
     starting_verify.add_argument("--manifest", type=Path, required=True)
+    repeatability = model_commands.add_parser(
+        "study-starting-repeatability",
+        help="Collect one frozen fresh-seed cohort and audit starting-choice repeatability",
+    )
+    repeatability.add_argument("config", type=Path)
+    repeatability.add_argument("checkpoint", type=Path)
+    repeatability.add_argument("--report", type=Path, required=True)
+    repeatability.add_argument("--split-manifest", type=Path, required=True)
+    repeatability.add_argument("--upstream-root", type=Path, required=True)
+    repeatability.add_argument("--manifest", type=Path, required=True)
+    repeatability.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    repeatability.add_argument("--project-root", type=Path, default=Path("."))
+    repeatability.add_argument("--output-dir", type=Path, required=True)
+    repeatability.add_argument("--resume", action="store_true")
+    repeatability_show = model_commands.add_parser(
+        "show-starting-repeatability",
+        help="Check and display a cached repeatability report without collection or source audit",
+    )
+    repeatability_show.add_argument("study", type=Path)
+    repeatability_show.add_argument("--config", type=Path, required=True)
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2437,6 +2467,126 @@ def main(argv: Sequence[str] | None = None) -> int:
                     ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
                 )
                 _emit_json(starting_verification, None)
+                return 0
+            if args.model_command == "show-starting-repeatability":
+                cached_study = load_starting_repeatability_report(
+                    args.study, load_starting_repeatability_config(args.config)
+                )
+                _emit_json(
+                    {
+                        **summarize_starting_repeatability(cached_study),
+                        "source_inputs_reaudited": False,
+                    },
+                    None,
+                )
+                return 0
+            if args.model_command == "study-starting-repeatability":
+                from spireshift.starting_evidence import (
+                    _publish_json,
+                    load_verified_starting_option_evidence,
+                )
+
+                study_output = args.output_dir / STARTING_REPEATABILITY_FILENAME
+                if study_output.exists() or study_output.is_symlink():
+                    raise FileExistsError(
+                        "Completed repeatability output exists; display it instead"
+                    )
+                study_config = load_starting_repeatability_config(args.config)
+                study_ruleset = load_patch_manifest(args.manifest).ruleset_identity()
+                study_split = load_split_manifest(args.split_manifest)
+                print(
+                    "Verifying prior evidence and frozen fresh-seed ownership before collection.",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                study_inputs = prepare_starting_repeatability(
+                    config=study_config,
+                    project_root=args.project_root,
+                    split_manifest=study_split,
+                    ruleset=study_ruleset,
+                    objective=load_objective(args.objective_config),
+                )
+                study_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                study_parent_report = load_production_training_report(
+                    args.report, checkpoint=study_checkpoint
+                )
+                if (study_checkpoint["model_id"], study_parent_report["report_id"]) != (
+                    study_config.collection.runner.model_id,
+                    study_config.collection.runner.training_report_id,
+                ):
+                    raise ValueError("Repeatability fixed continuation model/report differ")
+                fresh_directory = args.output_dir / "evidence"
+                fresh_path = fresh_directory / STARTING_EVIDENCE_FILENAME
+                existing_seeds = {
+                    seed
+                    for seed in study_config.collection.seeds
+                    if (fresh_directory / "cases" / f"seed-{seed:06d}.json").exists()
+                }
+                if not fresh_path.exists():
+                    study_policy = ProductionCheckpointPolicy(
+                        checkpoint=study_checkpoint,
+                        training_report=study_parent_report,
+                        ruleset=study_ruleset,
+                    )
+                    study_backend = load_evangambit_backend(
+                        args.upstream_root,
+                        args.manifest,
+                        max_episode_steps=study_config.collection.runner.maximum_decisions_per_run
+                        + 1,
+                    )
+
+                    def repeatability_progress(done: int, total: int) -> None:
+                        if done == 1 or done % 8 == 0 or done == total:
+                            print(f"Repeatability seeds completed: {done}/{total}", flush=True)
+
+                    collect_starting_option_evidence(
+                        environment_factory=study_backend.factory,
+                        ruleset=study_ruleset,
+                        policy=study_policy,
+                        split_manifest=study_split,
+                        training_report_id=str(study_parent_report["report_id"]),
+                        config=study_config.collection,
+                        objective=study_inputs.objective,
+                        output_directory=fresh_directory,
+                        resume=args.resume,
+                        progress=repeatability_progress,
+                    )
+                print(
+                    "Collection saved. Checking cases and comparing lessons; no training follows.",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                fresh_report, fresh_cases = load_verified_starting_option_evidence(
+                    fresh_path,
+                    config=study_config.collection,
+                    split_manifest=study_split,
+                    ruleset=study_ruleset,
+                )
+                new_trajectories = [
+                    branch["trajectory"]
+                    for case in fresh_cases
+                    if case["run_seed"] not in existing_seeds
+                    for branch in case["branches"]
+                    if branch["trajectory"] is not None
+                ]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=len(new_trajectories),
+                        transitions=sum(len(t["decisions"]) for t in new_trajectories),
+                    )
+                )
+                study_result = analyze_starting_repeatability(
+                    study_inputs, fresh_report, fresh_cases
+                )
+                _publish_json(study_output, study_result)
+                _emit_json(
+                    {
+                        **summarize_starting_repeatability(study_result),
+                        "report_path": str(study_output),
+                        "source_integrity_verified": True,
+                    },
+                    None,
+                )
                 return 0
             if args.model_command == "collect-starting-option-evidence":
                 if (args.output_dir / STARTING_EVIDENCE_FILENAME).exists():

@@ -116,7 +116,8 @@ cap was reached. This passes evidence coverage only, not policy improvement or f
 The subsequent [exhaustive-evidence training](starting-evidence-policy-training.md) and
 [saved-data diagnosis](starting-evidence-diagnosis.md) both completed. Training accepted no update;
 the diagnostic found opposing realized lessons under similar encoded contexts and different menus.
-[Issue #128](https://github.com/benyanc/spireshift/issues/128) plans one bounded fresh-seed
-repeatability study. It is not implemented; there is no new owner command yet. Base-v2 remains
+[Issue #128](https://github.com/benyanc/spireshift/issues/128) implements one
+[bounded fresh-seed repeatability study](starting-choice-repeatability.md). Its guide contains
+the one current owner command; collection/analysis is pending. Base-v2 remains
 accepted, and a separate frozen full-run comparison is still required before promotion. The coding
 agent has launched no real collection, training, replay or game evaluation.

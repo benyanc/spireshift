@@ -233,9 +233,11 @@ validation checks. Its best overall selection-loss gain was 0.000926394179, belo
 zero and remains ineligible. The owner completed the
 [issue #42 diagnostic](docs/starting-evidence-diagnosis.md): source/history reconciliation passed,
 and nine groups have opposing realized lessons under similar encoded contexts and different menus.
-The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift/issues/128) plans
-one bounded fresh-seed repeatability study before another starting-choice update. It is not
-implemented; there is no new owner command yet. There is no demonstrated full-run win-rate improvement.
+The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift/issues/128) now
+implements one [bounded repeatability study](docs/starting-choice-repeatability.md): 192 fresh
+train seeds with 48 reserved for confirmation, one owner command, an explicit stop rule and no
+automatic training. The owner collection/analysis is pending. There is no demonstrated full-run
+win-rate improvement.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

@@ -53,8 +53,9 @@ starting-choice lessons repeat across fresh independent train seeds, preserving 
 and separating higher-floor evidence from weaker tie-breakers. Replaying the same deterministic
 seed is not a new independent future. Use one finite, prespecified collection and confirmation
 plan; if coverage or consistency remains inadequate, stop this starting-choice experiment and
-return foundation work to combat/run-level competence. This package is planned, not implemented.
-**There is no new owner command to run yet.**
+return foundation work to combat/run-level competence. This package is now implemented; its
+[repeatability guide](starting-choice-repeatability.md) contains the one current owner command.
+The owner collection/analysis is pending. Do not rerun the completed diagnosis as the next task.
 
 ## Archived owner command
 

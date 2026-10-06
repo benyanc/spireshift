@@ -661,6 +661,26 @@ def verify_starting_option_evidence(
     split_manifest: SplitManifest,
     ruleset: RulesetIdentity,
 ) -> dict[str, Any]:
+    report, cases = load_verified_starting_option_evidence(
+        path, config=config, split_manifest=split_manifest, ruleset=ruleset
+    )
+    return {
+        "valid": True,
+        "report_id": report["report_id"],
+        "verified_cases": len(cases),
+        "summary": report["summary"],
+        "games_replayed": 0,
+    }
+
+
+def load_verified_starting_option_evidence(
+    path: Path,
+    *,
+    config: StartingEvidenceConfig,
+    split_manifest: SplitManifest,
+    ruleset: RulesetIdentity,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Load verified cases once for consumers; never reset or replay an environment."""
     _validate_seed_window(config, split_manifest)
     report = json.loads(path.read_text(encoding="utf-8"))
     _exact_keys(
@@ -724,10 +744,4 @@ def verify_starting_option_evidence(
         cases.append(case)
     if report["summary"] != _summary(cases, config):
         raise ValueError("Starting evidence summary or sufficiency gate differs")
-    return {
-        "valid": True,
-        "report_id": report["report_id"],
-        "verified_cases": len(cases),
-        "summary": report["summary"],
-        "games_replayed": 0,
-    }
+    return report, cases
