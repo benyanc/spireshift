@@ -48,14 +48,13 @@ games and promoted no checkpoint. Report identity:
 Resource identity:
 `sha256:82a34d11a711eac1ae3ed6b72d7949801948db05905374007db49507c864c155`.
 
-The next package is [issue #128](https://github.com/benyanc/spireshift/issues/128): measure whether
-starting-choice lessons repeat across fresh independent train seeds, preserving visible context
-and separating higher-floor evidence from weaker tie-breakers. Replaying the same deterministic
-seed is not a new independent future. Use one finite, prespecified collection and confirmation
-plan; if coverage or consistency remains inadequate, stop this starting-choice experiment and
-return foundation work to combat/run-level competence. This package is now implemented; its
-[repeatability guide](starting-choice-repeatability.md) contains the one current owner command.
-The owner collection/analysis is pending. Do not rerun the completed diagnosis as the next task.
+The subsequent [issue #128](https://github.com/benyanc/spireshift/issues/128) study completed
+all 192 fresh seeds and 576 terminal branches. Its frozen primary matching covered only two
+confirmation seeds and no non-tied strong comparisons; the result was inconclusive. The stop
+rule ends the starting-choice experiment. The cause of the rejected update remains unresolved.
+The next owner command is the saved-data check in the [combat foundation guide](combat-foundation.md),
+which prepares explicit public card/target features before another combat policy experiment.
+Do not repeat this diagnosis or the starting study as the next task.
 
 ## Archived owner command
 

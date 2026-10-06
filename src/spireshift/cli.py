@@ -1082,6 +1082,23 @@ def build_parser() -> argparse.ArgumentParser:
     )
     repeatability_show.add_argument("study", type=Path)
     repeatability_show.add_argument("--config", type=Path, required=True)
+    combat_audit = model_commands.add_parser(
+        "audit-combat-foundation",
+        help="Audit saved combat lessons and public action bindings without games or fitting",
+    )
+    combat_audit.add_argument("config", type=Path)
+    combat_audit.add_argument("--split-manifest", type=Path, required=True)
+    combat_audit.add_argument("--manifest", type=Path, required=True)
+    combat_audit.add_argument("--upstream-root", type=Path, required=True)
+    combat_audit.add_argument("--project-root", type=Path, default=Path("."))
+    combat_audit.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    combat_audit.add_argument("--output", type=Path, required=True)
+    combat_audit_show = model_commands.add_parser(
+        "show-combat-foundation",
+        help="Check/display the cached combat data audit without re-reading source cases",
+    )
+    combat_audit_show.add_argument("audit", type=Path)
+    combat_audit_show.add_argument("--config", type=Path, required=True)
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2467,6 +2484,55 @@ def main(argv: Sequence[str] | None = None) -> int:
                     ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
                 )
                 _emit_json(starting_verification, None)
+                return 0
+            if args.model_command in {"audit-combat-foundation", "show-combat-foundation"}:
+                from spireshift.combat_foundation import (
+                    load_combat_foundation_config,
+                    load_combat_foundation_report,
+                    run_combat_foundation_audit,
+                    summarize_combat_foundation,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                combat_foundation_config = load_combat_foundation_config(args.config)
+                if args.model_command == "show-combat-foundation":
+                    cached_combat = load_combat_foundation_report(
+                        args.audit, combat_foundation_config
+                    )
+                    _emit_json(
+                        {
+                            **summarize_combat_foundation(cached_combat),
+                            "source_inputs_reaudited": False,
+                        },
+                        None,
+                    )
+                    return 0
+                if args.output.exists() or args.output.is_symlink():
+                    raise FileExistsError("Completed combat data audit exists; display it instead")
+                print(
+                    "Checking saved combat lessons and public bindings; no games or training.",
+                    flush=True,
+                )
+                combat_foundation_audit = run_combat_foundation_audit(
+                    config=combat_foundation_config,
+                    project_root=args.project_root,
+                    upstream_root=args.upstream_root,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                _publish_json(args.output, combat_foundation_audit)
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                _emit_json(
+                    {
+                        **summarize_combat_foundation(combat_foundation_audit),
+                        "report_path": str(args.output),
+                        "source_integrity_verified": True,
+                    },
+                    None,
+                )
                 return 0
             if args.model_command == "show-starting-repeatability":
                 cached_study = load_starting_repeatability_report(

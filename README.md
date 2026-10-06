@@ -233,11 +233,15 @@ validation checks. Its best overall selection-loss gain was 0.000926394179, belo
 zero and remains ineligible. The owner completed the
 [issue #42 diagnostic](docs/starting-evidence-diagnosis.md): source/history reconciliation passed,
 and nine groups have opposing realized lessons under similar encoded contexts and different menus.
-The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift/issues/128) now
-implements one [bounded repeatability study](docs/starting-choice-repeatability.md): 192 fresh
-train seeds with 48 reserved for confirmation, one owner command, an explicit stop rule and no
-automatic training. The owner collection/analysis is pending. There is no demonstrated full-run
-win-rate improvement.
+The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift/issues/128)
+completed its [bounded repeatability study](docs/starting-choice-repeatability.md): all 192 fresh
+train seeds and 576 branches completed, but the frozen primary matching covered only two
+confirmation seeds with no non-tied strong comparisons. The inconclusive result triggers the
+stop rule and ends the starting-choice experiment. The next foundation package adds explicit
+[public card/target combat features and a saved-data audit](docs/combat-foundation.md). Its guide
+contains the one current owner command. The audit reads existing evidence without games or
+training; the new feature space has not yet trained or improved a playing agent. Base-v2 remains
+accepted. There is no demonstrated full-run win-rate improvement.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

@@ -88,7 +88,8 @@ also completed with no accepted update. Its best overall selection-loss improvem
 0.000926394179, below the unchanged 0.001 minimum, while higher-floor comparisons improved by
 0.002771563751. Base-v8 retained epoch zero; passing final validation checks describe the unchanged
 fallback. The subsequent [starting-evidence diagnosis](starting-evidence-diagnosis.md) has also
-completed. The next owner command is in the [repeatability guide](starting-choice-repeatability.md).
+completed. The repeatability study has now completed and triggered its stop rule. The next owner command
+is in the [combat foundation guide](combat-foundation.md).
 Neither diagnosis launches a follow-up job.
 Full details of the base-v6 audit are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
@@ -109,10 +110,11 @@ partially at the parent (+0.280803741259 cosine), which does not support initial
 opposition. Fourteen teacher-target disagreements are auxiliary associations; the actual optimizer
 anchors to the parent distribution. Noise, omitted context and later optimization remain unresolved.
 
-This #42 package is complete; the broader diagnosis issue stays open. The next bounded work item
-is [#128](https://github.com/benyanc/spireshift/issues/128), a fresh-seed starting-label repeatability
-study with a frozen confirmation plan and explicit stop rule. It is now implemented and awaits
-the owner collection/analysis; its [guide](starting-choice-repeatability.md) has one current command.
+This #42 package is complete; the broader diagnosis issue stays open. The subsequent bounded study
+was [#128](https://github.com/benyanc/spireshift/issues/128), a fresh-seed starting-label repeatability
+study with a frozen confirmation plan and explicit stop rule. It completed all 192 seeds and 576 terminal branches, but its frozen primary matching covered
+only two confirmation seeds and no non-tied strong comparisons. Its inconclusive result ends the
+starting-choice experiment. The next owner command is in the [combat foundation guide](combat-foundation.md).
 Do not repeat these audits or extend the rejected recipe as the next step. Base-v2 remains
 accepted, and zero terminal-positive labels still block foundation
 readiness and adaptive-controller training. All sustained collection or verification remains

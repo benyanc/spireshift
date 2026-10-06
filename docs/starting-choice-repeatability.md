@@ -6,9 +6,24 @@ whether option/context lessons repeat on fresh independent game seeds before ano
 starting-choice training attempt. The audit found opposing realized lessons, but did not establish
 whether missing public context or variation in futures caused them. Accepted base-v2 remains fixed.
 
-## One owner command
+## Completed result and next task
 
-From the repository directory, run only:
+The owner completed 192/192 seeds and all 576/576 terminal branches in 402.16 wall seconds,
+with zero failures, truncations or victories. Source verification succeeded. The frozen primary
+analysis found three qualified matched groups but only two covered confirmation seeds, with
+zero non-tied strong confirmation runs. Agreement was 0.5 and its interval [0, 1]. All three
+coverage requirements failed; the result is **inconclusive**, not proof of noisy universal values.
+The study's stop rule ends this starting-choice experiment and returns work to combat competence.
+
+Report: `sha256:f3f7533872e10f8e45164fa129e563ae11896f5291f21405f9e36f3cce6f3c16`.
+Resource report: `sha256:11a431adcc9742002aaa30b35f7de8fffc713865165ea3d5636162809969b08a`.
+No training or promotion followed. The next owner command is in the
+[combat foundation guide](combat-foundation.md). Do not extend this cohort or repeat the
+starting study as the next task. Base-v2 remains accepted and adaptive readiness is blocked.
+
+## Archived owner command
+
+This completed study used:
 
 ```bash
 bash scripts/study-starting-repeatability-v1.sh

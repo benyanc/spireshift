@@ -167,8 +167,10 @@ remain incompatible after parent offsets. No complete hashed-contrast aliases we
 the initial strong/weak gradient cosine is positive. These are diagnostics, not a proven cause.
 [Issue #128](https://github.com/benyanc/spireshift/issues/128) implements one
 [bounded fresh-seed repeatability study](starting-choice-repeatability.md) with frozen confirmation
-and an explicit stop rule before another starting-choice update. Its guide has the one current
-owner command; collection/analysis is pending. Any later update
+and an explicit stop rule before another starting-choice update. It completed all 192 seeds and 576 terminal branches but covered only two confirmation
+seeds and no non-tied strong comparisons under the frozen primary matching. The result is
+inconclusive; the stop rule ends the starting-choice experiment. The next owner command
+is in the [combat foundation guide](combat-foundation.md). Any later update
 must preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
 tie-breakers, and use a frozen recipe with a fresh confirmation plan instead of tuning against
 the inspected selection or development-validation result.

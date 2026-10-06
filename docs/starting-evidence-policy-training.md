@@ -52,7 +52,9 @@ incompatible strict margins after parent offsets. There are no complete hashed-c
 and the initial strong/weak gradients have a positive cosine. These observations do not establish
 the cause of rejection. [Issue #128](https://github.com/benyanc/spireshift/issues/128) implements one
 [bounded fresh-seed repeatability study](starting-choice-repeatability.md) before another training
-intervention. Its guide has the one current owner command; collection/analysis is pending.
+intervention. That study completed with an inconclusive primary result and triggered its stop rule.
+The next owner command is in the [combat foundation guide](combat-foundation.md);
+no further starting-choice training or cohort extension follows.
 Any later training change needs a new frozen recipe and fresh
 confirmation, since the current selection and development-validation results have been inspected.
 
