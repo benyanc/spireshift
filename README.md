@@ -59,7 +59,8 @@ The repository currently contains the research contracts and a seeded mock verti
     generations and reports Act 1 boss reach, Act 1 clear, and terminal victory separately; and
 30. an [anchored trajectory-policy trainer](docs/trajectory-policy-training.md) that consumes verified
     multi-run action comparisons, freezes non-policy heads, and rejects regressions under a frozen
-    recipe. The owner-run first training job is pending.
+    recipe. The completed base-v6 update was rejected; later starting-choice experiments also
+    selected no accepted update, so base-v2 remains the production checkpoint.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -225,9 +226,12 @@ remains accepted. The [starting-option evidence collector](docs/starting-option-
 compares every starting option on 64 fresh train runs, with frozen fitting/selection ownership,
 complete-run traces, all pair comparisons and explicit coverage checks before further training.
 Its completed owner run passed those checks with 172 eligible comparisons and zero victories.
-The next [starting-choice training experiment](docs/starting-evidence-policy-training.md) consumes
-this evidence while preserving the original anchor groups, frozen base-v2 and all 204 validation
-checks. Its guide has one current owner-run command; it launches no game attempts.
+The completed [starting-choice training experiment](docs/starting-evidence-policy-training.md)
+consumed this evidence while preserving the original anchor groups, frozen base-v2 and all 204
+validation checks. Its best overall selection-loss gain was 0.000926394179, below the unchanged
+0.001 minimum, despite stronger improvement on higher-floor comparisons. Base-v8 selected epoch
+zero and remains ineligible. The next issue #42 package diagnoses this result from saved data;
+there is no new owner-run command and no demonstrated full-run win-rate improvement.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

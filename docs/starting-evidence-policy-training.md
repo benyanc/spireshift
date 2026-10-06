@@ -9,9 +9,52 @@ truncations, 130 eligible fitting comparisons and 42 selection comparisons. Ther
 zero full-run wins. Better coverage is permission for this bounded experiment, not proof that
 the policy has improved or that terminal-value learning is ready.
 
-## One current owner command
+## Completed owner-run result
 
-From the repository directory, run only:
+The owner completed training and saved-input verification on 2026-10-05. Verification returned
+`valid: true`, but **no epoch qualified**. Base-v8 selected epoch zero with an empty residual,
+`candidate_eligible: false`, `status: rejected_or_no_update` and `checkpoint_promoted: false`.
+Accepted base-v2 therefore remains unchanged. Issue #127 is complete as a negative experiment.
+
+All 40 epochs passed the original selection-anchor safety checks. All 40 failed the frozen
+overall preference-advancement requirement; 33 passed the separate strong-advancement requirement.
+Epoch 40 had the best overall and strong selection losses:
+
+| Selection diagnostic | Parent loss | Epoch-40 loss | Improvement | Required improvement |
+| --- | ---: | ---: | ---: | ---: |
+| Overall, 42 comparisons across 15 runs | 0.707422507714 | 0.706496113535 | 0.000926394179 | 0.001 |
+| Higher-floor comparisons, 22 across 11 runs | 0.708525690942 | 0.705754127191 | 0.002771563751 | 0.001 |
+| Weaker enemy-damage comparisons, 20 across 13 runs | 0.706401769408 | 0.706585494012 | -0.000183724604 | No separate gate |
+
+Lower loss is better. Component rows overlap in complete-run ownership and do not sum directly
+to the overall run-normalized loss. The learner improved some auxiliary comparisons, but the
+overall gain fell short of the unchanged minimum. Selection directional accuracy rose from
+12/42 to 13/42; higher-floor accuracy rose from 7/22 to 8/22. This is not evidence of improved
+full-run win rate. The best epoch remains rejected; do not extend the run or lower the threshold
+to accept it after seeing the result.
+
+The final all-204 development-validation checks pass because they audit the unchanged epoch-zero
+fallback, not epoch 40. All 180 later decisions remain unchanged. Fitting, selection and validation
+coverage report no unknown option IDs; selection ID 132 is covered by original fitting anchors.
+There are still zero positive terminal-victory labels and no promoted candidate.
+
+The training job took 50.719 wall seconds and 38.798 CPU seconds, with approximately 517 MB peak
+resident memory and 4 MB output. No resource cap was hit. Saved identities:
+
+- Model: `sha256:ab1942b2ea4eea6aaee39724f66c41f23db7d1523573434379210b018112e0c9`.
+- Training report: `sha256:da8125f404051f2251273e7ac91ff75eeacb5250f5c5fc1105fbe3f7cffebd6f`.
+- Resource report: `sha256:4e94edaefb367f7e121809bc691a71c4f2eef341c1aad8a3aa6be68feef353a7`.
+
+There is **no new owner command**. The next package belongs to
+[issue #42](https://github.com/benyanc/spireshift/issues/42): diagnose the starting-choice learner
+using these saved inputs and learning curves. Separate weak-label conflict, preference/anchor
+conflict, representation limits and limited optimization as hypotheses; do not assume the cause
+from this near miss. Any later training change needs a new frozen recipe and a fresh confirmation
+plan, since the current selection and development-validation results have been inspected.
+
+## Archived owner command and output handling
+
+The completed experiment used:
 
 ```bash
 bash scripts/train-starting-evidence-policy-v1.sh
@@ -27,9 +70,8 @@ original curricula can take more than 30 seconds before optimization begins. The
 when input preparation starts and when saved-result verification begins. The final verification
 reads files and recomputes diagnostics; it does not retrain or replay the game.
 
-Share the final terminal summary, especially `selected_epoch`, `candidate_eligible`,
-`validation_checks` and the verification result. A rejected run is a valid completed experiment.
-No quality claim or production promotion is made before the owner returns the result.
+A rejected run is a valid completed experiment. The command is retained for reproducibility;
+there is no need to run it again. With both saved outputs present, it verifies files only.
 
 Outputs remain outside Git:
 
@@ -109,7 +151,7 @@ has already been reused. A passing candidate still requires a separately frozen 
 before promotion. Terminal full-game victory under the whole-run compute budget remains primary;
 terminal-value and adaptive-controller training remain blocked.
 
-The coding agent runs short toy tests and bounded saved-file checks only. The full saved-data
-preparation hit a 30-second inspection cap without starting optimization; it is left to the owner
-command above. The real model has not been trained by the coding agent. GitHub Actions is not
-triggered.
+The coding agent runs short toy tests and bounded saved-file checks only. Its earlier full-data
+inspection reached a 30-second cap without starting optimization; the owner subsequently completed
+training and full saved-input verification. The coding agent launched no real-data training or game
+attempts. GitHub Actions was not triggered.

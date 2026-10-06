@@ -148,12 +148,20 @@ empty residual. Starting preference coverage was only three fitting runs and one
 all 27 fitting option IDs were covered with no unseen IDs. The subsequent
 [exhaustive starting-option evidence collector](starting-option-evidence.md), which evaluates all
 options across 64 fresh train seeds. Its owner run completed all 192 terminal branches and passed
-the frozen data-sufficiency gate with 172 eligible comparisons, but still no victories. The next
+the frozen data-sufficiency gate with 172 eligible comparisons, but still no victories. The completed
 [starting-choice experiment](starting-evidence-policy-training.md) binds this evidence and the
-unchanged source groups, parent and all-204 checks. The coding agent has launched no real-data
-collection, training or game evaluation.
+unchanged source groups, parent and all-204 checks. The owner-run base-v8 training and saved-input
+verification completed successfully, but no epoch passed the overall advancement requirement.
+Its best overall selection-loss improvement was 0.000926394179 against the unchanged 0.001 minimum;
+higher-floor comparisons improved by 0.002771563751, while weaker enemy-damage loss slightly
+worsened. Epoch zero and an empty residual were retained. Passing final validation checks describe
+that unchanged fallback; they do not certify the rejected training epochs. The coding agent has
+launched no real-data collection, training or game evaluation.
 
 Accepted base-v2 remains the production checkpoint. Every source continuation still loses, so
-terminal-value readiness and adaptive-search training remain blocked. The next update must
-preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
-tie-breakers, and protect broad policy quality with complete-run separation and held-out checks.
+terminal-value readiness and adaptive-search training remain blocked. The next issue #42 package
+uses saved data to distinguish label/anchor conflict, representation limits and limited
+optimization before choosing another intervention. No new owner task is ready. Any later update
+must preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
+tie-breakers, and use a frozen recipe with a fresh confirmation plan instead of tuning against
+the inspected selection or development-validation result.

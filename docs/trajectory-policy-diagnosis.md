@@ -62,14 +62,15 @@ establish individual label causation or an accidental hash collision.
 
 Saved examples contain public `neow_options` IDs, while the current generic encoder treats integer
 identifiers as numeric values. Legal-action payloads carry phase and action/target indices without
-binding each candidate to its corresponding option's categorical identity. The next bounded
-intervention is [issue #125](https://github.com/benyanc/spireshift/issues/125): add identity-aware
+binding each candidate to its corresponding option's categorical identity. This diagnosis prompted
+[issue #125](https://github.com/benyanc/spireshift/issues/125): add identity-aware
 public option features through a separately versioned, zero-initialized starting-event residual
 policy head over accepted base-v2. The parent and its non-policy heads stay immutable. This tests
 a concrete representation hypothesis; success is not assumed, and combat competence remains
 unfinished even if starting choices improve. The [starting-option trainer](starting-option-policy-training.md)
 completed its frozen owner-run experiment with no accepted update. Starting-choice preference
-coverage was only three fitting runs and one selection run; the evidence collector now expands it.
+coverage was only three fitting runs and one selection run; the evidence collector subsequently
+expanded it to 47 informative fitting runs and 15 informative selection runs.
 
 The follow-up preserves the original data ownership and all-204 non-regression checks. Its recipe
 and identities must be frozen before an owner-run experiment, capped at one worker, 600 wall
@@ -82,11 +83,39 @@ development evidence and cannot become an untouched final-test claim.
 `scripts/diagnose-trajectory-policy-v1.sh` has completed; do not repeat it as the next step.
 The subsequent starting-option experiment also completed with no accepted update. Exhaustive
 starting-option collection then passed its coverage gate with 172 eligible comparisons and no
-victories. The next owner-run command is in the
-[exhaustive-evidence training guide](starting-evidence-policy-training.md).
+victories. The [exhaustive-evidence training experiment](starting-evidence-policy-training.md)
+also completed with no accepted update. Its best overall selection-loss improvement was
+0.000926394179, below the unchanged 0.001 minimum, while higher-floor comparisons improved by
+0.002771563751. Base-v8 retained epoch zero; passing final validation checks describe the unchanged
+fallback. There is no new owner command.
 The diagnosis script launches no follow-up job. Full details are saved in
 `artifacts/diagnostics/sts2-v0.107.1-base-v6-policy-v1/diagnostic.json`, identified by
 `sha256:250a6afcbbce06527ec65012da8ad1ec69e8f91c2ee99cd2244045866030c4b4`.
 Resource measurements are in `artifacts/resources/trajectory-policy-base-v6-diagnostic-v2.json`,
 identified by `sha256:82992e8f9bedcdbe262f5d79cba7fd8d881ec19d0194b36c4d77214f8e32b8b3`.
 Raw examples remain outside Git. Base-v6 remains rejected and base-v2 remains accepted.
+
+## Next saved-data diagnosis after base-v8
+
+Issue #42 remains open for the next foundation package. Use the completed exhaustive-evidence
+training report, original fitting anchors and verified evidence to distinguish plausible causes
+before another training recipe or new collection:
+
+- Reconcile all 40 learning-curve rows and failed gates, retaining the fixed complete-run groups,
+  parent identities, run normalization and original threshold. Separate fitting improvement from
+  selection improvement and report floor versus weaker frontier comparisons by run and option.
+- Inspect opposing fitting preferences for the same public option/context features and conflicts
+  with original fitting-anchor targets. Evaluate feature contrasts and analytic gradients at the
+  frozen parent; perform no optimizer step, replay or alternative epoch selection. Separate exact
+  conflicts from uncertain or correlated labels and representation aliases.
+- Test whether the evidence supports weak-label conflict, anchor constraints, representation
+  limits or insufficient optimization. A curve still improving at epoch 40 suggests a hypothesis,
+  not permission to train longer against the observed selection set. Intermediate epoch weights
+  were not retained, so their exact decision changes cannot be reconstructed without retraining.
+- Recommend one concrete intervention only if these diagnostics support it. Freeze its method,
+  resource cap and fresh confirmation plan before any owner-run experiment. The inspected
+  selection/development-validation sets are diagnostic evidence, not a new untouched test.
+
+This package does not promote base-v8, relax the threshold, rerun the identical recipe, launch
+game attempts or establish terminal-value/adaptive readiness. Sustained saved-data verification,
+if needed by a new diagnostic command, is also owner launched and monitored.
