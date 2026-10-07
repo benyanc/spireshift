@@ -14,33 +14,30 @@ It bound 528 of 529 combat states. Useful advancement evidence covers 35 fitting
 runs (327 and 130 learnable comparisons), passing the frozen signal/coverage checks. The remaining
 state, `train-seed-000211-combat-078`, is a public "choose a card to upgrade" screen that the
 ordinary-combat decoder correctly refused. All saved outcomes still have zero terminal victories.
-The data gate remains blocked until every combat state binds; no threshold was lowered.
+The initial data gate failed; no threshold was lowered.
 
 Audit v2 adds explicit binding for this upgrade screen and preserves the original report
 `sha256:bbc8f06283407ec80648e98d358d55d3710e05ce9c9d4428a805e738fbffe994`.
 The first audit's resource report is
 `sha256:68b8ada770dd9d71a23f2015c8ba7cdd43bc2596514ba1d9534fd8f481f194b0`;
-its game/simulation/transition counters are all zero. The owner must verify the corrected full
-corpus before a separate training recipe is designed. A bounded check of the one failed saved
-case passed; it does not replace that full source audit.
+its game/simulation/transition counters are all zero. The owner subsequently completed the
+corrected v2 audit: **529/529 combat states bind, zero failures, all frozen coverage checks pass**.
+The same 35 fitting and 13 selection signal runs remain, with 327/130 learnable comparisons.
 
-## Run this one next command
+## Completed owner audit and next step
 
-The owner launches and monitors this saved-data task. It starts no game, simulation, training,
-controller fitting or follow-up job:
+Audit report `sha256:57666476aa7c42ce76cb46a44e9eb422ab7bfb21abf4b752e8cb0110ab3948fd`
+verified all 1,299 records and 112 complete train runs in **71.490 wall / 56.792 CPU seconds**,
+with 1,133,805,568 bytes peak resident memory and 5,310,629 bytes output; exit zero, no cap hit.
+Resource report: `sha256:cae8892187eabbd0ce0905d2214008684826e658eadf1573358e03552b797f6d`.
+All game/simulation/transition counters are zero. The result is saved at
+`artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-v2/combat-foundation-audit.json`.
+Both audit scripts now only display their completed cached results. No audit rerun is needed.
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/audit-combat-foundation-v2.sh
-```
-
-It verifies the existing 1,299-record train corpus, including 529 combat records from 112 complete
-train runs. This may take several minutes because the linked teacher evidence is approximately
-1 GB. Caps are one worker, 600 wall seconds, 1,200 CPU seconds, 4 GB memory and 1 GB output.
-Interrupted attempts retain their resource reports. Rerunning repeats the saved-data audit with
-a fresh resource-report name; completed reruns only check/display the cached result.
-The final result is `artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-v2/combat-foundation-audit.json`.
-The v1 script and result are archived evidence; the old script will keep displaying that result.
-Share its final summary before training or collecting anything else.
+The next owner command is in the [combat policy training guide](combat-policy-training.md).
+It fits a separately frozen combat-only residual using these lessons and reserves a fresh
+complete-run comparison. Data coverage is sufficient for this pilot; full-run competence,
+terminal-value readiness and adaptive effort are still unproven. Base-v2 remains accepted.
 
 ## What changed
 
@@ -69,8 +66,8 @@ must be present. Malformed, out-of-range, missing or invisible choices and skip/
 indices fail closed. Other selection kinds remain unsupported; no unseen source-card identity,
 selection amount or hidden future is inferred. The old v1 namespace and cached report stay valid.
 
-Neither the original encoder nor any checkpoint is modified. The new feature space is preparation
-for a separate combat policy residual, not a trained residual or a stronger playing agent.
+This audit modifies neither the original encoder nor any checkpoint. The new feature space is
+preparation for the separate combat policy residual; the real training job remains owner-run.
 Hand permutation tests establish equivalence of these new features alone, not invariance of the
 original parent policy. The codec is not an exact mechanics solver or evidence of patch robustness.
 
@@ -97,8 +94,8 @@ reported separately from independent complete-run coverage.
 
 The pilot data gate needs every combat state to bind, signal on eight fitting and four selection
 seeds, four distinct fitting card IDs in qualifying comparisons, and two fitting source-floor bins.
-Passing permits designing a frozen residual-training recipe with fresh complete-run confirmation;
-it does not start training, promote a model or establish good gameplay. Insufficient labels call
+The completed passing result permits a frozen residual-training recipe with fresh complete-run
+confirmation; it does not start training, promote a model or establish good gameplay. Insufficient labels call
 for a bounded combat teacher plan; binding failures require repair before training. No automatic
 collection, gate relaxation or experiment extension follows.
 

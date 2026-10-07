@@ -50,6 +50,7 @@ from spireshift.representations import (
 from spireshift.splits import SplitManifest, SplitName
 
 if TYPE_CHECKING:
+    from spireshift.combat_policy import CombatPolicyHead
     from spireshift.combat_search_intervention import CombatSearchInterventionSpec
     from spireshift.starting_options import StartingOptionHead
 
@@ -225,6 +226,7 @@ class ProductionBaseModel:
     floor_weights: dict[int, dict[int, float]] = field(default_factory=dict)
     floor_biases: dict[int, float] = field(default_factory=dict)
     starting_option_residual: StartingOptionHead | None = None
+    combat_policy_residual: CombatPolicyHead | None = None
 
     def predict(self, representation: CompositionalModelInput) -> ProductionPrediction:
         vector = vectorize_model_input(representation, dimension=self.vector_dimension)
@@ -243,6 +245,13 @@ class ProductionBaseModel:
                 score + residual
                 for score, residual in zip(
                     scores, self.starting_option_residual.scores(representation), strict=True
+                )
+            )
+        if self.combat_policy_residual is not None:
+            scores = tuple(
+                score + residual
+                for score, residual in zip(
+                    scores, self.combat_policy_residual.scores(representation), strict=True
                 )
             )
         policy = _softmax(scores)
@@ -809,6 +818,13 @@ def blend_production_policy(
 def production_model_from_checkpoint(value: object) -> ProductionBaseModel:
     checkpoint = _mapping(value, "production model checkpoint")
     schema_version = checkpoint.get("schema_version")
+    if schema_version == "production-model-checkpoint-v9":
+        from spireshift.combat_policy import combat_checkpoint_parent
+
+        parent, combat_head = combat_checkpoint_parent(checkpoint)
+        model = production_model_from_checkpoint(parent)
+        model.combat_policy_residual = combat_head
+        return model
     if schema_version in {
         "production-model-checkpoint-v6",
         "production-model-checkpoint-v7",
@@ -1024,6 +1040,10 @@ def load_production_training_report(
 ) -> dict[str, Any]:
     report = _load_object(path)
     schema_version = report.get("schema_version")
+    if schema_version == "production-model-training-report-v9":
+        from spireshift.combat_policy import validate_combat_policy_report
+
+        return validate_combat_policy_report(report, checkpoint=checkpoint)
     if schema_version in {
         "production-model-training-report-v6",
         "production-model-training-report-v7",

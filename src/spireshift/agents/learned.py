@@ -61,6 +61,10 @@ class ProductionCheckpointPolicy:
         gate = policy_metrics.get("auxiliary_policy_gate")
         if not isinstance(gate, dict) or gate.get("passed") is not True:
             raise ValueError("Production checkpoint did not pass its auxiliary policy gate")
+        if training_report.get("schema_version") == "production-model-training-report-v9":
+            from spireshift.combat_policy import validate_combat_policy_report
+
+            validate_combat_policy_report(training_report, checkpoint=checkpoint)
         if training_report.get("schema_version") in {
             "production-model-training-report-v7",
             "production-model-training-report-v8",
@@ -75,6 +79,7 @@ class ProductionCheckpointPolicy:
                 "production-model-training-report-v6",
                 "production-model-training-report-v7",
                 "production-model-training-report-v8",
+                "production-model-training-report-v9",
             }
             and training_report.get("candidate_eligible") is not True
         ):

@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-model-training-report-v9.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "production-model-training-report-v9"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "model_type": {
+      "const": "sparse-anchored-public-combat-residual-v1"
+    },
+    "config": {
+      "$ref": "combat-policy-training-config-v1.json"
+    },
+    "selected_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "selected_head_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "train_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "validation_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "training_runs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "validation_runs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "training_records": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "validation_records": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "parent_selection_combat": {
+      "type": "object"
+    },
+    "parent_selection_policy": {
+      "type": "object"
+    },
+    "parent_validation_policy": {
+      "type": "object"
+    },
+    "parent_validation_combat": {
+      "type": "object"
+    },
+    "training_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "selection_rule": {
+      "const": "minimum_selection_soft_pair_loss_passing_frozen_safety_and_advancement"
+    },
+    "selection_refit": {
+      "const": false
+    },
+    "held_out_metrics": {
+      "type": "object"
+    },
+    "validation_drift": {
+      "type": "object"
+    },
+    "validation_combat": {
+      "type": "object"
+    },
+    "validation_checks": {
+      "type": "object"
+    },
+    "candidate_eligible": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "requires_fresh_confirmation",
+        "rejected_or_no_update"
+      ]
+    },
+    "serialization_checks": {
+      "type": "object"
+    },
+    "seed_verification": {
+      "type": "object"
+    },
+    "optimizer_steps": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "terminal_value_status": {
+      "type": "object"
+    },
+    "terminal_victory_positive_labels": {
+      "const": 0
+    },
+    "games_replayed": {
+      "const": 0
+    },
+    "simulations": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "foundation_ready": {
+      "const": false
+    },
+    "adaptive_controller_allowed": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "frozen_train_only_combat_auxiliary_residual_candidate"
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "model_id",
+    "model_type",
+    "config",
+    "selected_epoch",
+    "selected_head_id",
+    "train_dataset_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "training_runs",
+    "validation_runs",
+    "training_records",
+    "validation_records",
+    "parent_selection_combat",
+    "parent_selection_policy",
+    "parent_validation_policy",
+    "parent_validation_combat",
+    "training_history",
+    "selection_rule",
+    "selection_refit",
+    "held_out_metrics",
+    "validation_drift",
+    "validation_combat",
+    "validation_checks",
+    "candidate_eligible",
+    "status",
+    "serialization_checks",
+    "seed_verification",
+    "optimizer_steps",
+    "terminal_value_status",
+    "terminal_victory_positive_labels",
+    "games_replayed",
+    "simulations",
+    "checkpoint_promoted",
+    "foundation_ready",
+    "adaptive_controller_allowed",
+    "claim_scope"
+  ],
+  "additionalProperties": false
+}

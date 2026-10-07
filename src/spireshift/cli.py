@@ -1099,6 +1099,23 @@ def build_parser() -> argparse.ArgumentParser:
     )
     combat_audit_show.add_argument("audit", type=Path)
     combat_audit_show.add_argument("--config", type=Path, required=True)
+    combat_train = model_commands.add_parser(
+        "train-combat-policy",
+        help="Fit one frozen public combat residual from saved lessons, without game attempts",
+    )
+    combat_train.add_argument("config", type=Path)
+    combat_train.add_argument("--split-manifest", type=Path, required=True)
+    combat_train.add_argument("--manifest", type=Path, required=True)
+    combat_train.add_argument("--upstream-root", type=Path, required=True)
+    combat_train.add_argument("--project-root", type=Path, default=Path("."))
+    combat_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    combat_train.add_argument("--output-dir", type=Path, required=True)
+    combat_train_show = model_commands.add_parser(
+        "show-combat-policy-training",
+        help="Check/display a saved combat training result without source audit or retraining",
+    )
+    combat_train_show.add_argument("output_dir", type=Path)
+    combat_train_show.add_argument("--config", type=Path, required=True)
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2484,6 +2501,68 @@ def main(argv: Sequence[str] | None = None) -> int:
                     ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
                 )
                 _emit_json(starting_verification, None)
+                return 0
+            if args.model_command in {"train-combat-policy", "show-combat-policy-training"}:
+                from spireshift.combat_policy import (
+                    load_combat_policy_config,
+                    load_combat_policy_inputs,
+                    summarize_combat_policy_training,
+                    train_combat_policy_inputs,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                combat_policy_config = load_combat_policy_config(args.config)
+                combat_checkpoint_path = args.output_dir / "checkpoint.json"
+                combat_report_path = args.output_dir / "training-report.json"
+                if args.model_command == "show-combat-policy-training":
+                    cached_combat_checkpoint = load_production_model_checkpoint(
+                        combat_checkpoint_path
+                    )
+                    cached_combat_training = load_production_training_report(
+                        combat_report_path, checkpoint=cached_combat_checkpoint
+                    )
+                    if cached_combat_training["config"] != combat_policy_config.document:
+                        raise ValueError("Cached combat training uses a different frozen recipe")
+                    _emit_json(
+                        {
+                            **summarize_combat_policy_training(cached_combat_training),
+                            "source_inputs_reaudited": False,
+                            "optimizer_steps_this_command": 0,
+                        },
+                        None,
+                    )
+                    return 0
+                if any(
+                    p.exists() or p.is_symlink()
+                    for p in (combat_checkpoint_path, combat_report_path)
+                ):
+                    raise FileExistsError("Saved combat training output exists; display it instead")
+                print(
+                    "Verifying saved combat lessons and reserved seeds; no games will run.",
+                    flush=True,
+                )
+                combat_policy_inputs = load_combat_policy_inputs(
+                    config=combat_policy_config,
+                    project_root=args.project_root,
+                    upstream_root=args.upstream_root,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                print("Fitting one combat adjustment for the frozen number of epochs.", flush=True)
+                combat_training_result = train_combat_policy_inputs(
+                    inputs=combat_policy_inputs,
+                    config=combat_policy_config,
+                    progress=lambda epoch, total: print(
+                        f"Combat training: {epoch}/{total} epochs complete.", flush=True
+                    ),
+                )
+                _publish_json(combat_checkpoint_path, combat_training_result.checkpoint)
+                _publish_json(combat_report_path, combat_training_result.report)
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                _emit_json(summarize_combat_policy_training(combat_training_result.report), None)
                 return 0
             if args.model_command in {"audit-combat-foundation", "show-combat-foundation"}:
                 from spireshift.combat_foundation import (

@@ -171,9 +171,11 @@ and an explicit stop rule before another starting-choice update. It completed al
 seeds and no non-tied strong comparisons under the frozen primary matching. The result is
 inconclusive; the stop rule ends the starting-choice experiment. The first combat audit found
 useful lessons across 35 fitting and 13 selection runs but failed to bind one upgrade-choice
-screen. A separately versioned public decoder handles that screen; the next owner task verifies
-it against the same corpus and unchanged thresholds. Its single command is in the
-[combat foundation guide](combat-foundation.md). Any later update
-must preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
-tie-breakers, and use a frozen recipe with a fresh confirmation plan instead of tuning against
-the inspected selection or development-validation result.
+screen. The owner completed the corrected public decoder audit against the same corpus and
+unchanged thresholds: all 529 combat states bind and all coverage checks pass. See the completed
+[combat foundation evidence](combat-foundation.md). The next package implements one
+[frozen combat-only policy training job](combat-policy-training.md), with soft paired labels,
+complete-run weighting, immutable original heads and unchanged non-regression tolerances.
+Its single owner command trains from saved data and reserves 32 fresh development seeds for a
+separate confirmation. It starts no game attempts or automatic follow-up. No actual residual has
+been trained or promoted; terminal wins and adaptive-controller readiness remain absent.

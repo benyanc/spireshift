@@ -453,7 +453,15 @@ def analyze_combat_foundation(
     )
 
 
-def run_combat_foundation_audit(
+@dataclass(frozen=True, slots=True)
+class CombatFoundationInputs:
+    audit: dict[str, Any]
+    parent_checkpoint: dict[str, Any]
+    parent_report: dict[str, Any]
+    examples: tuple[_ProductionExample, ...]
+
+
+def load_combat_foundation_inputs(
     *,
     config: CombatFoundationConfig,
     project_root: Path,
@@ -461,7 +469,7 @@ def run_combat_foundation_audit(
     split_manifest: SplitManifest,
     ruleset: RulesetIdentity,
     objective: ObjectiveSpec,
-) -> dict[str, Any]:
+) -> CombatFoundationInputs:
     config = CombatFoundationConfig.from_mapping(config.document)
     d = config.document
     if (
@@ -535,7 +543,28 @@ def run_combat_foundation_audit(
     body = analyze_combat_foundation(
         examples=examples, config=config, parent_weights=model.policy_weights
     )
-    return {**body, "report_id": manifest_identifier(body)}
+    return CombatFoundationInputs(
+        {**body, "report_id": manifest_identifier(body)}, checkpoint, parent_report, examples
+    )
+
+
+def run_combat_foundation_audit(
+    *,
+    config: CombatFoundationConfig,
+    project_root: Path,
+    upstream_root: Path,
+    split_manifest: SplitManifest,
+    ruleset: RulesetIdentity,
+    objective: ObjectiveSpec,
+) -> dict[str, Any]:
+    return load_combat_foundation_inputs(
+        config=config,
+        project_root=project_root,
+        upstream_root=upstream_root,
+        split_manifest=split_manifest,
+        ruleset=ruleset,
+        objective=objective,
+    ).audit
 
 
 def load_combat_foundation_report(path: Path, config: CombatFoundationConfig) -> dict[str, Any]:

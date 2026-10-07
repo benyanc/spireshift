@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/public-combat-policy-residual-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "public-combat-policy-residual-v1"
+    },
+    "head_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "encoder_id": {
+      "enum": [
+        "evangambit-public-card-target-v1",
+        "evangambit-public-card-target-v2"
+      ]
+    },
+    "layout": {
+      "$ref": "combat-foundation-audit-config-v1.json#/properties/layout"
+    },
+    "vector_dimension": {
+      "type": "integer",
+      "minimum": 64,
+      "maximum": 65536
+    },
+    "scope": {
+      "const": "public_combat_only"
+    },
+    "weights": {
+      "$ref": "production-model-checkpoint-v2.json#/$defs/weights"
+    }
+  },
+  "required": [
+    "schema_version",
+    "head_id",
+    "encoder_id",
+    "layout",
+    "vector_dimension",
+    "scope",
+    "weights"
+  ],
+  "additionalProperties": false
+}
