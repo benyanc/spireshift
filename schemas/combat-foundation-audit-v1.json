@@ -113,7 +113,10 @@
       "additionalProperties": false
     },
     "encoder_id": {
-      "const": "evangambit-public-card-target-v1"
+      "enum": [
+        "evangambit-public-card-target-v1",
+        "evangambit-public-card-target-v2"
+      ]
     },
     "summary": {
       "type": "object",
@@ -218,6 +221,10 @@
                       "minimum": 0
                     },
                     "use_potion": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "select_upgrade_card": {
                       "type": "integer",
                       "minimum": 0
                     }
@@ -372,6 +379,10 @@
                       "minimum": 0
                     },
                     "use_potion": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "select_upgrade_card": {
                       "type": "integer",
                       "minimum": 0
                     }
@@ -540,7 +551,8 @@
                   "enum": [
                     "play_card",
                     "end_turn",
-                    "use_potion"
+                    "use_potion",
+                    "select_upgrade_card"
                   ]
                 },
                 "card": {
@@ -905,5 +917,39 @@
     "checkpoint_promoted",
     "limitations"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "encoder_id": {
+            "const": "evangambit-public-card-target-v1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rows": {
+            "items": {
+              "properties": {
+                "bindings": {
+                  "items": {
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "play_card",
+                          "end_turn",
+                          "use_potion"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

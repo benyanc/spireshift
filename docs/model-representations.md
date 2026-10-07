@@ -77,12 +77,17 @@ evidence is summarized in [model-representation-v1.md](evidence/model-representa
 
 ## Separate public combat feature space
 
-The [combat foundation package](combat-foundation.md) adds `evangambit-public-card-target-v1`
+The [combat foundation package](combat-foundation.md) adds `evangambit-public-card-target-v2`
 without changing `mechanics-compositional-v1`, its serialized inputs or existing checkpoints. It
 binds hand action indices to visible categorical card IDs and properties, potion choices and end
 turn, and target indices to visible enemy properties and categorical public positions. Public
 context is broadcast under action/card identity for candidate-conditioned learning. It provides
 deterministic signed feature hashing while preserving operational handles solely for output.
+Version 2 explicitly binds public "choose a card to upgrade" screens using their visible choice
+cards and selection kind. It preserves historical source handles but omits decorative enemy
+targets that the pinned selection resolver ignores. Missing/inconsistent choices and unsupported
+selection kinds still fail closed. Version 1's namespace and archived audit remain supported;
+each audit configuration binds the matching layout and encoder version.
 
 This feature space is not yet trained or used by the accepted playing agent. Its one next owner
 command audits existing train-only combat lessons and public bindings. A later residual-training

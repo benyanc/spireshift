@@ -169,8 +169,11 @@ the initial strong/weak gradient cosine is positive. These are diagnostics, not 
 [bounded fresh-seed repeatability study](starting-choice-repeatability.md) with frozen confirmation
 and an explicit stop rule before another starting-choice update. It completed all 192 seeds and 576 terminal branches but covered only two confirmation
 seeds and no non-tied strong comparisons under the frozen primary matching. The result is
-inconclusive; the stop rule ends the starting-choice experiment. The next owner command
-is in the [combat foundation guide](combat-foundation.md). Any later update
+inconclusive; the stop rule ends the starting-choice experiment. The first combat audit found
+useful lessons across 35 fitting and 13 selection runs but failed to bind one upgrade-choice
+screen. A separately versioned public decoder handles that screen; the next owner task verifies
+it against the same corpus and unchanged thresholds. Its single command is in the
+[combat foundation guide](combat-foundation.md). Any later update
 must preserve the existing non-policy heads, distinguish meaningful advancement from weaker rank
 tie-breakers, and use a frozen recipe with a fresh confirmation plan instead of tuning against
 the inspected selection or development-validation result.

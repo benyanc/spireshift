@@ -14,7 +14,13 @@ from jsonschema import Draft202012Validator
 
 from spireshift.adapters.mock import MockSpireEnvironment
 from spireshift.cli import main
-from spireshift.combat_features import ENCODER_ID, CombatLayout, bind_public_combat
+from spireshift.combat_features import (
+    ENCODER_ID,
+    SELECTION_ENCODER_ID,
+    SELECTION_LAYOUT_SCHEMA,
+    CombatLayout,
+    bind_public_combat,
+)
 from spireshift.combat_foundation import (
     CONFIG_SCHEMA,
     CombatFoundationConfig,
@@ -34,8 +40,12 @@ from spireshift.resource_tracking import EXPERIMENT_METRICS_ENV
 from spireshift.splits import SplitName, load_split_manifest
 
 CONFIG_PATH = Path("configs/combat-foundation/sts2-v0.107.1-base-v2-audit-v1.json")
+SELECTION_CONFIG_PATH = Path("configs/combat-foundation/sts2-v0.107.1-base-v2-audit-v2.json")
 MOCK_RULESET = MockSpireEnvironment.ruleset
 LAYOUT = CombatLayout(MOCK_RULESET.patch_id, MOCK_RULESET.manifest_id)
+SELECTION_LAYOUT = CombatLayout(
+    MOCK_RULESET.patch_id, MOCK_RULESET.manifest_id, SELECTION_LAYOUT_SCHEMA
+)
 
 
 def _public() -> dict[str, Any]:
@@ -81,6 +91,21 @@ def _rep(
     return build_model_input(
         MOCK_RULESET, obs, actions or (_action(0, 0), _action(1), _action(2), _action(3, 1))
     )
+
+
+def _upgrade_screen() -> dict[str, Any]:
+    public = _public()
+    vector = public["observation_vector"]
+    vector[13] = 0
+    vector[183:193] = [15, 2, *vector[8:16]]
+    return public
+
+
+def _selection_config() -> CombatFoundationConfig:
+    doc = copy.deepcopy(_config().document)
+    doc["layout"] = SELECTION_LAYOUT.as_dict()
+    doc["analysis"]["encoder_id"] = SELECTION_ENCODER_ID
+    return CombatFoundationConfig.from_mapping(_identified(doc))
 
 
 def _identified(d: dict[str, Any], key: str = "config_id") -> dict[str, Any]:
@@ -234,6 +259,143 @@ def test_noncombat_parent_path_and_hidden_input_guard() -> None:
     state["rng_state"] = 8
     with pytest.raises(ValueError):
         _rep(state)
+
+
+def test_upgrade_screen_selects_public_choices_without_playing_or_enemy_targets() -> None:
+    rep = _rep(_upgrade_screen(), (_action(0), _action(1, 0)))
+    value = bind_public_combat(rep, SELECTION_LAYOUT)
+    assert value is not None
+    assert [b["kind"] for b in value.bindings] == ["select_upgrade_card"] * 2
+    assert [b["card"]["card_id"] for b in value.bindings] == [17, 45]
+    assert all(b["target"] is None and b["potion_id"] is None for b in value.bindings)
+    assert value.source_action_ids == tuple(c.source_action_id for c in rep.candidates)
+    assert value.context["selection"]["kind_id"] == 15
+    assert value.encoder_id == SELECTION_ENCODER_ID
+    with pytest.raises(ValueError, match="selection"):
+        bind_public_combat(rep, LAYOUT)
+
+
+def test_selection_indices_and_historical_target_decorations_do_not_become_features() -> None:
+    public = _upgrade_screen()
+    a = bind_public_combat(_rep(public, (_action(0), _action(1, 0))), SELECTION_LAYOUT)
+    moved = copy.deepcopy(public)
+    v = moved["observation_vector"]
+    v[8:16] = v[12:16] + v[8:12]
+    v[185:193] = v[189:193] + v[185:189]
+    b = bind_public_combat(
+        _rep(moved, (_action(1, 1, "first renamed"), _action(0, name="second renamed"))),
+        SELECTION_LAYOUT,
+    )
+    assert a is not None and b is not None
+    assert a.tokens == b.tokens and a.vectors(8192) == b.vectors(8192)
+    assert a.source_action_ids != b.source_action_ids
+    alias = bind_public_combat(
+        _rep(public, (_action(0, 0), _action(0, 1), _action(1))), SELECTION_LAYOUT
+    )
+    assert alias is not None and len(alias.bindings) == 3
+    assert alias.tokens[0] == alias.tokens[1]
+    assert alias.feature_digests()[0] == alias.feature_digests()[1]
+    assert alias.source_action_ids[0] != alias.source_action_ids[1]
+    assert not any(
+        "action_index" in t or "target_index" in t for tokens in a.tokens for t in tokens
+    )
+
+
+@pytest.mark.parametrize(
+    "broken",
+    [
+        "count",
+        "overflow",
+        "empty",
+        "hole",
+        "foreign",
+        "upgraded",
+        "duplicate_card",
+        "unsupported_kind",
+        "closed_count",
+        "closed_cards",
+        "omitted_choice",
+        "skip",
+        "dead_target",
+    ],
+)
+def test_unobservable_or_inconsistent_upgrade_choices_fail_closed(broken: str) -> None:
+    state = _upgrade_screen()
+    v = state["observation_vector"]
+    actions: tuple[LegalAction, ...] = (_action(0), _action(1, 0))
+    if broken == "count":
+        v[184] = 3
+    elif broken == "overflow":
+        v[184] = 11
+    elif broken == "empty":
+        v[184] = 0
+    elif broken == "hole":
+        v[185:189] = [0] * 4
+    elif broken == "foreign":
+        v[185] = 99
+    elif broken == "upgraded":
+        v[186] = 1
+    elif broken == "duplicate_card":
+        v[189:193] = v[185:189]
+    elif broken == "unsupported_kind":
+        v[183] = 2
+    elif broken == "closed_count":
+        v[183] = 0
+        v[185:225] = [0] * 40
+    elif broken == "closed_cards":
+        v[183:185] = [0, 0]
+    elif broken == "omitted_choice":
+        actions = (_action(0),)
+    elif broken == "skip":
+        actions = (*actions, _action(2))
+    elif broken == "dead_target":
+        actions = (_action(0), _action(1, 2))
+    with pytest.raises(ValueError):
+        bind_public_combat(_rep(state, actions), SELECTION_LAYOUT)
+
+
+def test_ordinary_combat_semantics_and_old_feature_namespace_are_preserved() -> None:
+    old = bind_public_combat(_rep(), LAYOUT)
+    new = bind_public_combat(_rep(), SELECTION_LAYOUT)
+    assert old is not None and new is not None
+    assert old.bindings == new.bindings and old.tokens == new.tokens and old.context == new.context
+    assert old.encoder_id == ENCODER_ID and old.vectors(8192) != new.vectors(8192)
+    assert CombatLayout.from_mapping(LAYOUT.as_dict()) == LAYOUT
+    assert CombatLayout.from_mapping(SELECTION_LAYOUT.as_dict()) == SELECTION_LAYOUT
+    wrong = LAYOUT.as_dict() | {"selection_offset": 185}
+    with pytest.raises(ValueError):
+        CombatLayout.from_mapping(wrong)
+
+
+def test_upgrade_state_remains_in_the_audit_and_legacy_reports_keep_their_encoder(
+    tmp_path: Path,
+) -> None:
+    examples = [_example(seed) for seed in range(1, 5)]
+    examples[0] = replace(
+        examples[0],
+        representation=_rep(_upgrade_screen(), (_action(0), _action(1, 0))),
+        candidate_features=examples[0].candidate_features[:2],
+        outcomes=examples[0].outcomes[:2],
+        mean_progress_utilities=examples[0].mean_progress_utilities[:2],
+    )
+    cfg = _selection_config()
+    body = analyze_combat_foundation(examples=tuple(examples), config=cfg, parent_weights={})
+    doc = _identified(body, "report_id")
+    assert doc["summary"]["combat_states"] == doc["summary"]["bound_combat_states"] == 4
+    assert doc["summary"]["binding_failures"] == 0
+    assert doc["rows"][0]["source_floor"] == 2
+    assert doc["rows"][0]["bindings"][0]["kind"] == "select_upgrade_card"
+    assert len(doc["rows"][0]["pairs"]) == 1
+    assert doc["decision"]["pilot_data_sufficient"] is True
+    path = tmp_path / "report.json"
+    path.write_text(json.dumps(doc))
+    assert load_combat_foundation_report(path, cfg) == doc
+    with pytest.raises(ValueError, match="binding differs"):
+        load_combat_foundation_report(path, _config())
+    schema = json.loads(Path("schemas/combat-foundation-audit-v1.json").read_text())
+    Draft202012Validator(schema).validate(doc)
+    path.write_text(json.dumps(_report()))
+    assert load_combat_foundation_report(path, _config())["encoder_id"] == ENCODER_ID
 
 
 def test_terminal_victory_dominates_floor_and_censored_outcomes_cannot_qualify() -> None:
@@ -494,27 +656,48 @@ def test_cli_publishes_atomically_and_records_zero_new_game_work(
     assert json.loads(metrics.read_text())["trajectories"] == 0
 
 
-def test_frozen_production_cohort_and_json_schemas() -> None:
-    cfg = load_combat_foundation_config(CONFIG_PATH)
+@pytest.mark.parametrize("path", [CONFIG_PATH, SELECTION_CONFIG_PATH])
+def test_frozen_production_cohort_and_json_schemas(path: Path) -> None:
+    cfg = load_combat_foundation_config(path)
     split = load_split_manifest(
         Path("manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json")
     )
     runs = cfg.document["complete_run_subfolds"]
     assert len(runs["fit"]) == 84 and len(runs["selection"]) == 28
     assert set(runs["fit"] + runs["selection"]) <= set(split.seeds(SplitName.TRAIN))
-    assert len(cfg.document["layout_sources"]) == 4
-    for path, doc in (
+    assert len(cfg.document["layout_sources"]) == (4 if path == CONFIG_PATH else 5)
+    for schema_path, doc in (
         ("schemas/combat-foundation-audit-config-v1.json", cfg.document),
         ("schemas/combat-foundation-audit-v1.json", _report()),
     ):
-        schema = json.loads(Path(path).read_text())
+        schema = json.loads(Path(schema_path).read_text())
         Draft202012Validator.check_schema(schema)
         Draft202012Validator(schema).validate(doc)
     assert cfg.document["schema_version"] == CONFIG_SCHEMA
 
 
-def test_owner_script_attempt_rotation_and_completed_cached_display(tmp_path: Path) -> None:
-    script = Path("scripts/audit-combat-foundation-v1.sh").read_text()
+def test_binding_repair_keeps_the_frozen_source_cohort_and_signal_thresholds() -> None:
+    old = load_combat_foundation_config(CONFIG_PATH).document
+    new = load_combat_foundation_config(SELECTION_CONFIG_PATH).document
+    changed = {key for key in old if old[key] != new[key]}
+    assert changed == {"config_id", "layout", "layout_sources", "analysis"}
+    assert {k: v for k, v in old["analysis"].items() if k != "encoder_id"} == {
+        k: v for k, v in new["analysis"].items() if k != "encoder_id"
+    }
+    assert old["layout_sources"] == new["layout_sources"][:-1]
+    mixed = copy.deepcopy(new)
+    mixed["analysis"]["encoder_id"] = ENCODER_ID
+    with pytest.raises(ValueError, match="analysis plan"):
+        CombatFoundationConfig.from_mapping(_identified(mixed))
+    schema = json.loads(Path("schemas/combat-foundation-audit-config-v1.json").read_text())
+    assert not Draft202012Validator(schema).is_valid(_identified(mixed))
+
+
+@pytest.mark.parametrize("version", ["v1", "v2"])
+def test_owner_script_attempt_rotation_and_completed_cached_display(
+    tmp_path: Path, version: str
+) -> None:
+    script = Path(f"scripts/audit-combat-foundation-{version}.sh").read_text()
     (tmp_path / "scripts").mkdir()
     (tmp_path / "bin").mkdir()
     (tmp_path / "scripts/audit.sh").write_text(script)
@@ -529,14 +712,14 @@ def test_owner_script_attempt_rotation_and_completed_cached_display(tmp_path: Pa
     }
     resources = tmp_path / "artifacts/resources"
     resources.mkdir(parents=True)
-    (resources / "combat-foundation-base-v2-audit-v1-attempt-1.json").write_text("{}")
+    (resources / f"combat-foundation-base-v2-audit-{version}-attempt-1.json").write_text("{}")
     subprocess.run(
         ["bash", str(tmp_path / "scripts/audit.sh")], env=env, check=True, capture_output=True
     )
     calls = log.read_text()
     assert "attempt-2.json" in calls and "--max-wall-seconds 600" in calls
     assert "--kind other" in calls and "train-curriculum" not in calls
-    out = tmp_path / "artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-v1"
+    out = tmp_path / f"artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-{version}"
     out.mkdir(parents=True)
     (out / "combat-foundation-audit.json").write_text("{}")
     log.write_text("")

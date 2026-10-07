@@ -12,6 +12,8 @@ from spireshift.representations import CompositionalModelInput, FeatureValueType
 
 ENCODER_ID = "evangambit-public-card-target-v1"
 LAYOUT_SCHEMA = "evangambit-public-combat-layout-v1"
+SELECTION_ENCODER_ID = "evangambit-public-card-target-v2"
+SELECTION_LAYOUT_SCHEMA = "evangambit-public-combat-layout-v2"
 
 # These numbers describe the admitted, frozen observation, not a future engine version.
 # Source hashes and patch/ruleset bindings are checked by the owner data audit.
@@ -37,36 +39,54 @@ PINNED_LAYOUT = {
     "incoming_offset": 256,
     "incoming_slots": 5,
 }
+SELECTION_LAYOUT = {
+    **PINNED_LAYOUT,
+    "selection_count_offset": 184,
+    "selection_offset": 185,
+    "selection_slots": 10,
+    "upgrade_selection_kind": 15,
+}
 
 
 @dataclass(frozen=True, slots=True)
 class CombatLayout:
     patch_id: str
     ruleset_manifest_id: str
+    schema_version: str = LAYOUT_SCHEMA
+
+    @property
+    def encoder_id(self) -> str:
+        if self.schema_version == LAYOUT_SCHEMA:
+            return ENCODER_ID
+        if self.schema_version == SELECTION_LAYOUT_SCHEMA:
+            return SELECTION_ENCODER_ID
+        raise ValueError("Unsupported public combat layout")
 
     @classmethod
     def from_mapping(cls, value: object) -> CombatLayout:
         doc = _mapping(value, "public combat layout")
-        _exact_keys(
-            doc, {"schema_version", "patch_id", "ruleset_manifest_id", *PINNED_LAYOUT}, "layout"
-        )
-        if doc["schema_version"] != LAYOUT_SCHEMA:
+        if doc.get("schema_version") == LAYOUT_SCHEMA:
+            pinned = PINNED_LAYOUT
+        elif doc.get("schema_version") == SELECTION_LAYOUT_SCHEMA:
+            pinned = SELECTION_LAYOUT
+        else:
             raise ValueError("Unsupported public combat layout")
-        for key, expected in PINNED_LAYOUT.items():
+        _exact_keys(doc, {"schema_version", "patch_id", "ruleset_manifest_id", *pinned}, "layout")
+        for key, expected in pinned.items():
             if _integer(doc[key], key) != expected:
                 raise ValueError(f"Frozen public combat layout differs: {key}")
         if not isinstance(doc["patch_id"], str) or not doc["patch_id"]:
             raise ValueError("Combat layout patch is missing")
         if not isinstance(doc["ruleset_manifest_id"], str) or not doc["ruleset_manifest_id"]:
             raise ValueError("Combat layout ruleset is missing")
-        return cls(doc["patch_id"], doc["ruleset_manifest_id"])
+        return cls(doc["patch_id"], doc["ruleset_manifest_id"], doc["schema_version"])
 
     def as_dict(self) -> dict[str, Any]:
         return {
-            "schema_version": LAYOUT_SCHEMA,
+            "schema_version": self.schema_version,
             "patch_id": self.patch_id,
             "ruleset_manifest_id": self.ruleset_manifest_id,
-            **PINNED_LAYOUT,
+            **(SELECTION_LAYOUT if self.encoder_id == SELECTION_ENCODER_ID else PINNED_LAYOUT),
         }
 
 
@@ -134,6 +154,7 @@ class CombatInput:
     bindings: tuple[dict[str, Any], ...]
     tokens: tuple[dict[str, float], ...]
     context: dict[str, Any]
+    encoder_id: str = ENCODER_ID
 
     def vectors(self, dimension: int) -> tuple[dict[int, float], ...]:
         if isinstance(dimension, bool) or not 64 <= dimension <= 65536:
@@ -142,7 +163,7 @@ class CombatInput:
         for tokens in self.tokens:
             values: dict[int, float] = {}
             for token, amount in sorted(tokens.items()):
-                digest = hashlib.sha256(f"{ENCODER_ID}|{token}".encode()).digest()
+                digest = hashlib.sha256(f"{self.encoder_id}|{token}".encode()).digest()
                 index = int.from_bytes(digest[:8], "big") % dimension
                 sign = 1 if digest[8] & 1 else -1
                 values[index] = values.get(index, 0.0) + sign * amount
@@ -183,12 +204,30 @@ def bind_public_combat(
         v < 0 for v in (block, energy, max_energy, draw, discard, exhaust)
     ):
         raise ValueError("Invalid actionable public player resources")
-    if vector[183] != 0:
-        raise ValueError("Open card selection is not an ordinary combat action space")
+    selection_kind = vector[183]
+    if selection_kind and (
+        layout.encoder_id != SELECTION_ENCODER_ID
+        or selection_kind != SELECTION_LAYOUT["upgrade_selection_kind"]
+    ):
+        raise ValueError("Open card selection is not a supported combat action space")
     for name, expected in (("player_hp", hp), ("player_max_hp", maximum)):
         if _number(fields.get(((name,), ())), name) != expected:
             raise ValueError("Public player fields differ from the combat vector")
     hand = _cards(vector, 8, 10)
+    choices: tuple[dict[str, int], ...] = ()
+    if layout.encoder_id == SELECTION_ENCODER_ID:
+        selection_count = vector[184]
+        choices = _cards(vector, 185, 10)
+        if selection_kind:
+            if not 1 <= selection_count <= 10 or len(choices) != selection_count:
+                raise ValueError("Public upgrade selection count/cards differ or exceed visibility")
+            if any(card["upgraded"] for card in choices) or (
+                Counter(manifest_identifier(card) for card in choices)
+                - Counter(manifest_identifier(card) for card in hand)
+            ):
+                raise ValueError("Public upgrade choices are not unupgraded cards in hand")
+        elif selection_count or choices:
+            raise ValueError("Closed public selection carries choice count/cards")
     incoming = _cards(vector, 256, 5)
     statuses = _buffs(vector, 60, 10)
     potions = []
@@ -255,6 +294,11 @@ def bind_public_combat(
         "orb_capacity": vector[225],
         "orbs": orbs,
     }
+    if selection_kind:
+        context["selection"] = {
+            "kind_id": selection_kind,
+            "cards": sorted(choices, key=manifest_identifier),
+        }
     bindings = []
     seen = set()
     for candidate in representation.candidates:
@@ -276,8 +320,23 @@ def bind_public_combat(
         if (index, target) in seen or index < 0 or target < -1:
             raise ValueError("Duplicate or invalid public combat action binding")
         seen.add((index, target))
-        if index < len(hand):
-            binding: dict[str, Any] = {"kind": "play_card", "card": hand[index], "potion_id": None}
+        if target != -1 and target not in enemies:
+            raise ValueError("Public combat action targets an absent/dead enemy")
+        binding: dict[str, Any]
+        if selection_kind:
+            if index >= len(choices):
+                raise ValueError("Public upgrade selection has an outside/skip action")
+            binding = {
+                "kind": "select_upgrade_card",
+                "card": choices[index],
+                "potion_id": None,
+            }
+            # Historical adapter menus can attach an enemy target to a selection index.
+            # The pinned ResolveCardSelection uses only that index. Preserve the source
+            # handle/alignment, but do not turn this decoration into an enemy choice.
+            binding["target"] = None
+        elif index < len(hand):
+            binding = {"kind": "play_card", "card": hand[index], "potion_id": None}
         elif index == len(hand):
             binding = {"kind": "end_turn", "card": None, "potion_id": None}
             if target != -1:
@@ -287,11 +346,12 @@ def bind_public_combat(
             if not 0 <= slot < 6 or potions[slot] == 0:
                 raise ValueError("Public combat potion action points to an empty/outside slot")
             binding = {"kind": "use_potion", "card": None, "potion_id": potions[slot]}
-        if target != -1 and target not in enemies:
-            raise ValueError("Public combat action targets an absent/dead enemy")
-        binding["target"] = enemies.get(target)
+        if not selection_kind:
+            binding["target"] = enemies.get(target)
         bindings.append(binding)
-    if (len(hand), -1) not in seen:
+    if selection_kind and {index for index, _ in seen} != set(range(len(choices))):
+        raise ValueError("Public upgrade action set omits a visible choice")
+    if not selection_kind and (len(hand), -1) not in seen:
         raise ValueError("Public combat action set is missing end turn")
     tokens = tuple(_tokens(binding, context) for binding in bindings)
     return CombatInput(
@@ -299,6 +359,7 @@ def bind_public_combat(
         tuple(bindings),
         tokens,
         context,
+        layout.encoder_id,
     )
 
 

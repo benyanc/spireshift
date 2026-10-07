@@ -9,7 +9,7 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any, cast
 
-from spireshift.combat_features import ENCODER_ID, CombatLayout, bind_public_combat
+from spireshift.combat_features import CombatLayout, bind_public_combat
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.models import _dot, _exact_keys, _integer, _mapping, _quantize_artifact
@@ -72,7 +72,7 @@ class CombatFoundationConfig:
         if d["schema_version"] != CONFIG_SCHEMA:
             raise ValueError("Unsupported combat foundation audit config")
         ObjectiveSpec.from_mapping(_mapping(d["objective"], "objective"))
-        CombatLayout.from_mapping(d["layout"])
+        layout = CombatLayout.from_mapping(d["layout"])
         for key in ("model_id", "training_report_id", "dataset_id", "split_manifest_id"):
             v = d[key]
             if not isinstance(v, str) or len(v) != 71 or not v.startswith("sha256:"):
@@ -137,7 +137,7 @@ class CombatFoundationConfig:
             "combat analysis",
         )
         if (
-            a["encoder_id"] != ENCODER_ID
+            a["encoder_id"] != layout.encoder_id
             or a["half_split_rule"] != "both_strict_same_direction"
             or a["outcome_rank"] != ["terminal_victory", "maximum_floor"]
             or a["stop_rule"] != "report_only_no_automatic_training_or_collection"
@@ -429,7 +429,7 @@ def analyze_combat_foundation(
                     "starting_study_report_id": d["starting_study"]["report_id"],
                 },
                 "complete_run_subfolds": d["complete_run_subfolds"],
-                "encoder_id": ENCODER_ID,
+                "encoder_id": layout.encoder_id,
                 "summary": summary,
                 "rows": rows,
                 "decision": _decision(summary, d["analysis"]),
@@ -581,7 +581,10 @@ def load_combat_foundation_report(path: Path, config: CombatFoundationConfig) ->
         "ruleset_manifest_id": d["layout"]["ruleset_manifest_id"],
         "starting_study_report_id": d["starting_study"]["report_id"],
     }
-    if doc.get("sources") != expected_sources or doc.get("encoder_id") != ENCODER_ID:
+    if (
+        doc.get("sources") != expected_sources
+        or doc.get("encoder_id") != CombatLayout.from_mapping(d["layout"]).encoder_id
+    ):
         raise ValueError("Cached combat audit source binding differs")
     for field in ("optimizer_steps", "games_replayed", "simulations"):
         if type(doc.get(field)) is not int or doc[field] != 0:

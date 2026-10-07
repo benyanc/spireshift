@@ -237,9 +237,12 @@ The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift
 completed its [bounded repeatability study](docs/starting-choice-repeatability.md): all 192 fresh
 train seeds and 576 branches completed, but the frozen primary matching covered only two
 confirmation seeds with no non-tied strong comparisons. The inconclusive result triggers the
-stop rule and ends the starting-choice experiment. The next foundation package adds explicit
-[public card/target combat features and a saved-data audit](docs/combat-foundation.md). Its guide
-contains the one current owner command. The audit reads existing evidence without games or
+stop rule and ends the starting-choice experiment. The
+[public card/target combat features and saved-data audit](docs/combat-foundation.md) verified the
+existing corpus and found useful combat lessons across 35 fitting and 13 selection runs. One
+card-upgrade selection screen blocked complete action binding. Audit v2 explicitly binds that
+screen, preserving the original report, folds and thresholds. The guide contains the one current
+owner command to verify the correction. The audit reads existing evidence without games or
 training; the new feature space has not yet trained or improved a playing agent. Base-v2 remains
 accepted. There is no demonstrated full-run win-rate improvement.
 

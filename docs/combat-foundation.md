@@ -9,13 +9,28 @@ Agreement was 0.5 with interval [0, 1]. The stop rule ends that starting-choice 
 it does not prove that option values are universally noisy or that missing context caused failure.
 Base-v2 remains accepted. We now return foundation work to combat and full-run competence.
 
+The first owner audit completed in 90.350 wall seconds, verifying all 1,299 source records.
+It bound 528 of 529 combat states. Useful advancement evidence covers 35 fitting and 13 selection
+runs (327 and 130 learnable comparisons), passing the frozen signal/coverage checks. The remaining
+state, `train-seed-000211-combat-078`, is a public "choose a card to upgrade" screen that the
+ordinary-combat decoder correctly refused. All saved outcomes still have zero terminal victories.
+The data gate remains blocked until every combat state binds; no threshold was lowered.
+
+Audit v2 adds explicit binding for this upgrade screen and preserves the original report
+`sha256:bbc8f06283407ec80648e98d358d55d3710e05ce9c9d4428a805e738fbffe994`.
+The first audit's resource report is
+`sha256:68b8ada770dd9d71a23f2015c8ba7cdd43bc2596514ba1d9534fd8f481f194b0`;
+its game/simulation/transition counters are all zero. The owner must verify the corrected full
+corpus before a separate training recipe is designed. A bounded check of the one failed saved
+case passed; it does not replace that full source audit.
+
 ## Run this one next command
 
 The owner launches and monitors this saved-data task. It starts no game, simulation, training,
 controller fitting or follow-up job:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/audit-combat-foundation-v1.sh
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/audit-combat-foundation-v2.sh
 ```
 
 It verifies the existing 1,299-record train corpus, including 529 combat records from 112 complete
@@ -23,13 +38,14 @@ train runs. This may take several minutes because the linked teacher evidence is
 1 GB. Caps are one worker, 600 wall seconds, 1,200 CPU seconds, 4 GB memory and 1 GB output.
 Interrupted attempts retain their resource reports. Rerunning repeats the saved-data audit with
 a fresh resource-report name; completed reruns only check/display the cached result.
-The final result is `artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-v1/combat-foundation-audit.json`.
+The final result is `artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-v2/combat-foundation-audit.json`.
+The v1 script and result are archived evidence; the old script will keep displaying that result.
 Share its final summary before training or collecting anything else.
 
 ## What changed
 
 The existing generic encoder includes combat as numbered vector slots and action/target indices.
-The separate `evangambit-public-card-target-v1` feature space directly binds each legal action to
+The separate public card/target feature space directly binds each legal action to
 the visible card, upgrade and enchantment, a potion, or ending the turn, and its visible enemy
 target. It encodes identifiers categorically, public numeric properties separately, player/enemy
 statuses, intents, hand composition, promised cards and orbs. Enemy position remains a categorical
@@ -38,10 +54,20 @@ hidden future from a card ID. Action handles and hand execution indices are abse
 
 Binding follows the pinned engine's public action convention: hand slots play cards, hand count
 ends the turn, and subsequent indices bind potion slots. The 682-field layout, patch, ruleset and
-four observation/action/constant/status source-file hashes are frozen. In this layout Strength's
+five observation/action/constant/status/selection source-file hashes are frozen. In this layout Strength's
 status ID is zero; a nonzero amount distinguishes it from empty padding. Missing fields, invalid
-targets, open card-selection screens and inconsistent public fields fail closed and remain in
+targets, unsupported selection screens and inconsistent public fields fail closed and remain in
 the audit denominator. Non-combat decisions retain the parent path.
+
+The versioned `evangambit-public-card-target-v2` layout reads the visible upgrade selection's
+kind, count and candidate cards, and binds each action to the selected unupgraded card in hand.
+Selection indices are execution locators, not feature magnitudes. The pinned engine ignores enemy
+targets on this screen; historical target decorations keep their original source handles and
+candidate alignment but do not become enemy-choice features. Duplicate encodings of one choice
+remain semantically identical, not independent learning signal. The complete public choice set
+must be present. Malformed, out-of-range, missing or invisible choices and skip/end-turn/potion
+indices fail closed. Other selection kinds remain unsupported; no unseen source-card identity,
+selection amount or hidden future is inferred. The old v1 namespace and cached report stay valid.
 
 Neither the original encoder nor any checkpoint is modified. The new feature space is preparation
 for a separate combat policy residual, not a trained residual or a stronger playing agent.
@@ -50,12 +76,14 @@ original parent policy. The codec is not an exact mechanics solver or evidence o
 
 ## Frozen audit and decision
 
-The configuration is `configs/combat-foundation/sts2-v0.107.1-base-v2-audit-v1.json`, identified by
-`sha256:f589db7864141cfe5de236a9eb15b7ab77c61fe97b7bcd40b88df7c4f09265f7`.
+The current configuration is `configs/combat-foundation/sts2-v0.107.1-base-v2-audit-v2.json`, identified by
+`sha256:7a2f0faedda78573834935a6d304e556fd4011b067a393b9b82d7ad329f527c5`.
 It binds accepted base-v2, composed dataset
 `sha256:bf26c88358111fd70a1a30c8e9bd59be29080a3d69d93d3714223955545c22ac`,
 the completed starting study, complete-run train ownership and the whole-run `ObjectiveSpec`.
 An outcome-independent salted split assigns 84 fitting and 28 selection seeds before this audit.
+The v2 repair retains exactly the v1 source corpus, parent, folds, objective, resource caps and
+signal thresholds. Only the public encoder/layout binding and selection source hash change.
 These are reused development seeds, including some already seen by the parent. No validation or
 test data are read and no untouched evaluation claim follows.
 
