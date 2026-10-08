@@ -266,7 +266,10 @@ the [paired neural comparison](docs/neural-combat-confirmation.md): zero wins or
 reaches for either model across 32 attempted development runs each. Two neural attempts stopped
 at unsupported card-choice menus. The 30 completed pairs have one floor improvement, one
 regression and 28 ties, without established playing benefit. Base-v2 stays accepted; base-v11
-is not promoted. Next work captures and repairs those menus before another bounded learning round.
+is not promoted. The [discard-choice repair](docs/neural-selection-repair.md) now supports
+both failing menus using the unchanged neural weights. Two short smoke attempts finish as
+ordinary losses, with all 168 earlier predictions preserved. The next owner command in that
+guide runs a separate corrective comparison on the inspected seeds before another learning round.
 All non-combat choices and original value/risk heads remain frozen.
 The [genetic/hybrid experiment](https://github.com/benyanc/spireshift/issues/135) is deferred.
 The owner alone launches and monitors sustained tasks.

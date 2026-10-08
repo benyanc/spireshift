@@ -434,13 +434,28 @@ def test_real_neural_inference_runs_in_paired_loop_and_saved_cases_resume_withou
     )
 
 
+@pytest.mark.parametrize("repair", [False, True])
 def test_neural_owner_script_has_caps_single_threads_immutable_attempts_and_cached_display(
     tmp_path: Path,
+    repair: bool,
 ) -> None:
     (tmp_path / "scripts").mkdir()
     (tmp_path / "bin").mkdir()
     script = tmp_path / "scripts/test.sh"
-    script.write_text(Path("scripts/confirm-neural-combat-policy-v1.sh").read_text())
+    script_name = (
+        "confirm-neural-selection-repair-v2.sh" if repair else "confirm-neural-combat-policy-v1.sh"
+    )
+    script.write_text(Path("scripts", script_name).read_text())
+    resource_prefix = (
+        "neural-combat-base-v11-selection-repair-v2"
+        if repair
+        else "neural-combat-base-v11-confirmation-v1"
+    )
+    output_name = (
+        "sts2-v0.107.1-base-v11-neural-selection-repair-v2"
+        if repair
+        else "sts2-v0.107.1-base-v11-neural-fresh-train-v1"
+    )
     log = tmp_path / "calls"
     uv = tmp_path / "bin/uv"
     uv.write_text(
@@ -461,8 +476,8 @@ def test_neural_owner_script_has_caps_single_threads_immutable_attempts_and_cach
     }
     resources = tmp_path / "artifacts/resources"
     resources.mkdir(parents=True)
-    (resources / "neural-combat-base-v11-confirmation-v1-attempt-1.json").write_text("{}")
-    (resources / "neural-combat-base-v11-confirmation-v1-attempt-2-metrics.json").write_text("{}")
+    (resources / f"{resource_prefix}-attempt-1.json").write_text("{}")
+    (resources / f"{resource_prefix}-attempt-2-metrics.json").write_text("{}")
     subprocess.run(["bash", str(script)], env=env, capture_output=True, check=True)
     command = log.read_text()
     assert len(command.splitlines()) == 1
@@ -475,12 +490,12 @@ def test_neural_owner_script_has_caps_single_threads_immutable_attempts_and_cach
         "--max-storage-bytes 1000000000",
         "--resume",
         "confirm-combat-policy",
-        "base-v11-neural-fresh-train-v1",
+        output_name,
     ):
         assert argument in command
     assert "train-neural-combat-policy" not in command and "discover-states" not in command
     assert (tmp_path / "threads").read_text() == "threads=1,1,1,1\n"
-    output = tmp_path / "artifacts/evaluations/sts2-v0.107.1-base-v11-neural-fresh-train-v1"
+    output = tmp_path / "artifacts/evaluations" / output_name
     output.mkdir(parents=True)
     final = output / "production-policy-evaluation.json"
     final.write_text("{}")

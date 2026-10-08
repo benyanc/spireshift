@@ -8,10 +8,11 @@ training, simulations and evaluations. Planning updates do not start experiments
 and its [paired gameplay comparison](neural-combat-confirmation.md). Base-v11 shows no clear
 playing benefit: zero wins or first-boss reaches, with two unsupported card-choice failures.
 The 30 completed pairs have one floor improvement, one regression and 28 ties. Base-v2 stays
-accepted. Next, capture the two failing public menus in a bounded owner-run diagnosis, repair
-their handling and failure classification, then review a separately versioned comparison before
-another learning round. No next sustained command is ready yet; do not rerun the completed
-comparison to retry its failures. #134 remains open for this repair and the later learning cycle.
+accepted. The [discard-choice repair](neural-selection-repair.md) is implemented: the two
+short smoke runs finish as normal losses, and all 168 earlier predictions match. The owner now
+runs the separately versioned corrective comparison using the one command in that guide.
+It uses inspected seeds and preserves the original failures; it does not retrain or promote
+the model. #134 remains open for comparison review and the later learning cycle.
 
 ## Goal and current position
 
@@ -37,7 +38,7 @@ intervention rather than repeated fitting of the same lessons.
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Next | Capture and repair the two unsupported neural card-choice menus; classify future failures accurately. Preserve the original result and version any corrective comparison as inspected development evidence. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Next | Owner runs the corrected neural/base-v2 comparison on the same inspected seeds, then review failures and playing strength. The public discard-choice decoder and future failure classification are repaired; the original result remains preserved. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Then | Freeze a bounded neural improvement round with better or broader action lessons and separate gameplay evaluation. Review the completed pilot before spending more training or teacher compute. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
 | When needed by that recipe | Fix the remaining hidden-world resampling compatibility issue before relying on the affected search path for labels. | [#105](https://github.com/benyanc/spireshift/issues/105) |
 | Foundation milestone | Establish repeatable useful gameplay progress; then obtain wins and credible run-value/risk estimates. Preserve the frozen readiness gate and keep improving strategic choices as well as combat. | [#78](https://github.com/benyanc/spireshift/issues/78), readiness contract [#5](https://github.com/benyanc/spireshift/issues/5), [#46](https://github.com/benyanc/spireshift/issues/46) |
@@ -70,6 +71,8 @@ teacher components are reused by #134; a new framework is not required.
 - The next sustained stage should have one clear owner command with caps and preserved results.
   Resume supported work; explicitly restart interrupted fitting when no optimizer checkpoint
   exists. No coding agent starts or monitors it, and no indefinite loop or fallback runs.
+- The owner explicitly authorized bounded short diagnostic/smoke jobs on 2026-10-08. This
+  exception does not authorize the coding agent to start or monitor sustained experiments.
 
 ## Genetic algorithm: deferred option
 

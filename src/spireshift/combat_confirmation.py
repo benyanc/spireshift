@@ -26,6 +26,7 @@ from spireshift.trajectory_policy import _id, _identified
 from spireshift.trajectory_search import Act1Milestones
 
 SCHEMA = "combat-policy-confirmation-config-v1"
+REPAIRED_SCHEMA = "combat-policy-confirmation-config-v2"
 CLAIM = "paired_fresh_train_development_policy_only_confirmation"
 COMPUTE_BOUNDARY = {
     "clock": "process_time",
@@ -45,6 +46,7 @@ class CombatConfirmationConfig:
     @classmethod
     def from_mapping(cls, value: object) -> CombatConfirmationConfig:
         d = copy.deepcopy(_mapping(value, "combat confirmation"))
+        repaired = d.get("schema_version") == REPAIRED_SCHEMA
         _exact_keys(
             d,
             {
@@ -70,7 +72,8 @@ class CombatConfirmationConfig:
                 "compute_boundary",
                 "claim_scope",
                 "promotion_rule",
-            },
+            }
+            | ({"selection_repair"} if repaired else set()),
             "combat confirmation",
         )
         _identified(d, "config_id")
@@ -86,12 +89,24 @@ class CombatConfirmationConfig:
             for key, item in part.items():
                 _relative_path(item) if key.endswith("_path") else _id(item, key)
         objective = ObjectiveSpec.from_mapping(_mapping(d["objective"], "objective"))
+        if repaired:
+            from spireshift.neural_selection import REPAIRED_CLAIM, validate_selection_repair
+
+            repair = validate_selection_repair(d["selection_repair"])
+            if (
+                repair["layout"]["patch_id"] != d["patch_id"]
+                or repair["layout"]["ruleset_manifest_id"] != d["ruleset_manifest_id"]
+            ):
+                raise ValueError("Selection repair layout differs from confirmation ruleset")
+            claim = REPAIRED_CLAIM
+        else:
+            claim = CLAIM
         Act1Milestones.from_mapping(d["milestones"])
         seeds = d["seeds"]
         if (
-            d["schema_version"] != SCHEMA
+            d["schema_version"] not in {SCHEMA, REPAIRED_SCHEMA}
             or d["partition"] != "train"
-            or d["claim_scope"] != CLAIM
+            or d["claim_scope"] != claim
             or d["promotion_rule"] != "no_automatic_promotion_auxiliary_floor_insufficient"
             or d["compute_boundary"] != COMPUTE_BOUNDARY
             or objective.objective_id != "terminal-victory-v1"
@@ -117,6 +132,17 @@ class CombatConfirmationConfig:
         if d["run_offset"] < d["prior_train_prefix_stop"]:
             raise ValueError("Combat confirmation overlaps the inspected train prefix")
         return cls(d)
+
+    def candidate_policy_id(self) -> str:
+        model_id = self.document["candidate"]["model_id"]
+        if self.document["schema_version"] == REPAIRED_SCHEMA:
+            from spireshift.combat_features import CombatLayout
+            from spireshift.neural_selection import selection_policy_id
+
+            return selection_policy_id(
+                model_id, CombatLayout.from_mapping(self.document["selection_repair"]["layout"])
+            )
+        return f"production-checkpoint-policy-v1:{model_id}"
 
     def validate_evaluation(
         self,
@@ -261,6 +287,17 @@ def load_confirmation_policies(
     reference_policy = ProductionCheckpointPolicy(
         checkpoint=parent, training_report=parent_report, ruleset=ruleset
     )
+    if d["schema_version"] == REPAIRED_SCHEMA:
+        from spireshift.neural_selection import prepare_selection_repair
+
+        candidate_policy = prepare_selection_repair(
+            repair=d["selection_repair"],
+            confirmation_document=d,
+            candidate=candidate_policy,
+            reference=reference_policy,
+            project_root=root,
+            split=split,
+        )
     config.validate_evaluation(
         model_id=candidate_policy.model_id,
         report_id=report["report_id"],

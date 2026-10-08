@@ -13,7 +13,7 @@ from typing import Any
 
 from spireshift.agents.baseline import ProgressBootstrapPolicy
 from spireshift.agents.learned import ProductionCheckpointPolicy
-from spireshift.combat_confirmation import CLAIM, CombatConfirmationConfig
+from spireshift.combat_confirmation import CombatConfirmationConfig
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.liveness import PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION, PublicNoOpActionGuard
@@ -105,6 +105,8 @@ def run_production_policy_evaluation(
         raise ValueError("Production evaluation policy and environment rulesets differ")
     if learned_policy.split_manifest_id != split_manifest.manifest_id:
         raise ValueError("Production evaluation checkpoint and split identities differ")
+    if confirmation is not None and learned_policy.policy_id != confirmation.candidate_policy_id():
+        raise ValueError("Combat comparison candidate runtime policy differs from its frozen plan")
     if (reference_policy is None) != (reference_training_report_id is None):
         raise ValueError("Reference policy and training report identity must be provided together")
     if reference_policy is not None:
@@ -297,7 +299,9 @@ def run_production_policy_evaluation(
             }
             for case in ordered_cases
         ],
-        "claim_scope": CLAIM if confirmation is not None else _claim_scope(partition),
+        "claim_scope": confirmation.document["claim_scope"]
+        if confirmation is not None
+        else _claim_scope(partition),
     }
     if reference_policy is None:
         body["summary"] = {
@@ -322,7 +326,7 @@ def run_production_policy_evaluation(
     if confirmation is not None:
         body["confirmation_config"] = confirmation.document
         body["objective"] = confirmation.document["objective"]
-        body["claim_scope"] = CLAIM
+        body["claim_scope"] = confirmation.document["claim_scope"]
         body["summary"] = _fresh_summary(learned_cases, comparison_cases)
         body["decision"] = {
             "checkpoint_promoted": False,
@@ -401,6 +405,11 @@ def load_production_policy_evaluation(
             case_schema_version = FRESH_PRODUCTION_POLICY_CASE_SCHEMA_VERSION
     else:
         raise ValueError("Production policy evaluation schema differs")
+    confirmation = (
+        CombatConfirmationConfig.from_mapping(report.get("confirmation_config"))
+        if schema_version == FRESH_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
+        else None
+    )
     expected_fields = {
         "model_id": model_id,
         "training_report_id": training_report_id,
@@ -411,8 +420,8 @@ def load_production_policy_evaluation(
         "claim_scope": (
             "paired_frozen_test_policy_only_evaluation"
             if not include_liveness
-            else CLAIM
-            if schema_version == FRESH_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION
+            else confirmation.document["claim_scope"]
+            if confirmation is not None
             else _claim_scope(partition)
         ),
     }
@@ -439,7 +448,11 @@ def load_production_policy_evaluation(
         raise ValueError("Production policy evaluation seeds are invalid")
     if any(split_manifest.split_for_seed(seed) is not partition for seed in seeds):
         raise ValueError(f"Production policy evaluation contains a non-{partition.value} seed")
-    learned_policy_id = f"production-checkpoint-policy-v1:{model_id}"
+    learned_policy_id = (
+        confirmation.candidate_policy_id()
+        if confirmation is not None
+        else f"production-checkpoint-policy-v1:{model_id}"
+    )
     baseline_policy_id = ProgressBootstrapPolicy.policy_id
     comparison_policy_id = (
         f"production-checkpoint-policy-v1:{reference_model_id}"
@@ -477,9 +490,7 @@ def load_production_policy_evaluation(
         )
         if no_op_fallback_threshold <= 0:
             raise ValueError("Production policy evaluation fallback threshold differs")
-    confirmation = None
-    if schema_version == FRESH_PRODUCTION_POLICY_EVALUATION_SCHEMA_VERSION:
-        confirmation = CombatConfirmationConfig.from_mapping(report.get("confirmation_config"))
+    if confirmation is not None:
         confirmation.validate_evaluation(
             model_id=model_id,
             report_id=training_report_id,
@@ -945,7 +956,10 @@ def _evaluate_case(
                 "unsupported_public_combat"
                 if body["status"] == "failed"
                 and "combat" in str(body["error"]).lower()
-                and any(s in str(body["error"]).lower() for s in ("unsupported", "not supported"))
+                and any(
+                    s in str(body["error"]).lower()
+                    for s in ("unsupported", "not supported", "not a supported")
+                )
                 else "runtime_error"
                 if body["status"] == "failed"
                 else None

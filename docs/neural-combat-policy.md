@@ -29,8 +29,10 @@ terminal-victory labels, no promotion and no foundation/adaptive readiness pass.
 **Completed gameplay stage:** the [paired neural comparison](neural-combat-confirmation.md)
 saved all 64 attempts at offsets 536–567. Both models have zero wins or first-boss reaches.
 Base-v11 has two unsupported card-choice failures; the 30 completed pairs have one floor
-improvement, one regression and 28 ties. Next work captures and repairs those public menus,
-preserving this result and its inspected seed ownership. No further owner command is ready yet.
+improvement, one regression and 28 ties. The [discard-choice repair](neural-selection-repair.md)
+now supports both failing public menus with unchanged weights. Its two short smoke runs finish
+normally as losses. That guide contains the sole next owner command for the corrective
+comparison; the original result and inspected seed ownership remain preserved.
 
 ## Original owner training command (completed)
 

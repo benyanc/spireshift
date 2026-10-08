@@ -179,10 +179,20 @@
       "additionalProperties": false
     },
     "claim_scope": {
-      "const": "paired_fresh_train_development_policy_only_confirmation"
+      "enum": [
+        "paired_fresh_train_development_policy_only_confirmation",
+        "paired_inspected_train_neural_selection_compatibility"
+      ]
     },
     "confirmation_config": {
-      "$ref": "https://spireshift.dev/schemas/combat-policy-confirmation-config-v1.json"
+      "oneOf": [
+        {
+          "$ref": "https://spireshift.dev/schemas/combat-policy-confirmation-config-v1.json"
+        },
+        {
+          "$ref": "https://spireshift.dev/schemas/combat-policy-confirmation-config-v2.json"
+        }
+      ]
     },
     "objective": {
       "$ref": "https://spireshift.dev/schemas/combat-foundation-audit-config-v1.json#/properties/objective"
@@ -468,5 +478,30 @@
       "additionalProperties": false
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "claim_scope": {
+            "const": "paired_inspected_train_neural_selection_compatibility"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "confirmation_config": {
+            "$ref": "https://spireshift.dev/schemas/combat-policy-confirmation-config-v2.json"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "confirmation_config": {
+            "$ref": "https://spireshift.dev/schemas/combat-policy-confirmation-config-v1.json"
+          }
+        }
+      }
+    }
+  ]
 }

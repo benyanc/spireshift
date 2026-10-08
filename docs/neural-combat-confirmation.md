@@ -4,6 +4,11 @@
 neural gameplay comparison on 2026-10-08. Saved verification passes, but no playing benefit is
 established and two neural attempts fail. Base-v11 remains unpromoted; base-v2 stays accepted.
 
+**Current handoff:** the [discard-choice repair](neural-selection-repair.md) is implemented and
+passes two short simulator smoke attempts. It preserves this original result and uses unchanged
+neural weights with a separately identified runtime decoder. That guide contains the sole next
+owner command, for a corrective comparison on these now-inspected development seeds.
+
 ## Completed owner result
 
 All 64 planned attempts were saved. Each model keeps its original 32-seed denominator:
@@ -23,14 +28,14 @@ tie. Their mean floor difference is zero. The separate completed-run means (6.76
 The candidate stops at seeds **686 and 689** with
 `ValueError: Open card selection is not a supported combat action space`, after 74 and 94
 completed transitions respectively. Their public progress records show floors 6 and 8, without
-terminal outcomes. Both remain failures and non-victories. The public combat layout currently
+terminal outcomes. Both remain failures and non-victories. The original v3 public combat layout
 supports upgrade-in-hand and hand-transform selections only; these errors identify a selection
 coverage limitation, but the exact menu subtype is not saved in the failed cases.
 
 The report labels these failures `runtime_error`, so its `unsupported_public_combat_runs: 0`
 does **not** mean every encountered menu is supported. The classification matches the phrases
-`unsupported` or `not supported`, missing this error's `not a supported` wording. Future handling
-needs explicit classification; the original cases/report must remain immutable.
+`unsupported` or `not supported`, missing this error's `not a supported` wording. The correction
+now classifies that phrase in future attempts; these original cases/report remain immutable.
 
 The owner job used **34.938 wall / 34.315 CPU seconds**, 163,184,640 bytes peak resident memory,
 64 attempted trajectories, 5,464 completed transitions and zero search simulations. It hit no
@@ -45,12 +50,11 @@ Cached comparison/source/case validation and resource verification passed withou
 predictions, fitting or teacher-source audit. Foundation and adaptive-controller readiness remain
 false. These seeds are now inspected development evidence.
 
-**Next work:** implement a bounded public-menu diagnosis for the two failures, repair the
-identified action spaces and failure accounting, then version any corrective comparison
-separately. No automatic parent fallback, retraining, new cohort or promotion follows. A repair
-does not erase this result or make these seeds fresh again. The later learning cycle still needs
-better or broader action lessons; this pilot has not demonstrated that more epochs on unchanged
-lessons would improve play. There is no next owner command ready yet.
+The bounded diagnosis and explicit repair are now complete. The [corrective comparison](neural-selection-repair.md)
+is ready for the owner, using separate results and an inspected-seed claim. A repair does not
+erase this result or make these seeds fresh again. The later learning cycle still needs better
+or broader action lessons; this pilot has not demonstrated that more epochs on unchanged
+lessons would improve play.
 
 ## Original owner comparison command (completed)
 
