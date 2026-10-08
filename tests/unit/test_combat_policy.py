@@ -29,6 +29,13 @@ from spireshift.combat_features import (
     CombatLayout,
 )
 from spireshift.combat_foundation import analyze_combat_foundation
+from spireshift.combat_gate import (
+    GATE_SCOPE,
+    audit_saved_combat_selection_gate,
+    build_combat_gate_audit,
+    regret_feasibility,
+    validate_combat_gate_audit,
+)
 from spireshift.combat_policy import (
     CombatPolicyConfig,
     CombatPolicyHead,
@@ -51,6 +58,7 @@ from spireshift.core.types import DecisionType, LegalAction, Observation
 from spireshift.models import _candidate_features, _dot, _weights_as_list
 from spireshift.production_models import (
     ProductionTrainingConfig,
+    _evaluate_policy_weights,
     _Outcome,
     _ProductionExample,
     load_production_model_checkpoint,
@@ -63,6 +71,7 @@ from spireshift.splits import load_split_manifest
 
 CONFIG_PATH = Path("configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v1.json")
 EXTENDED_CONFIG_PATH = Path("configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v2.json")
+SCOPED_CONFIG_PATH = Path("configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v3.json")
 RULESET = MockSpireEnvironment.ruleset
 LAYOUT = CombatLayout(RULESET.patch_id, RULESET.manifest_id, SELECTION_LAYOUT_SCHEMA)
 
@@ -419,6 +428,293 @@ def _inputs(
     )
 
 
+def _scope_case() -> tuple[CombatPolicyConfig, CombatPolicyInputs, dict[str, Any]]:
+    config, inputs = _extended_inputs()
+    coordinate, weight = next(
+        iter(production_model_from_checkpoint(inputs.parent_checkpoint).policy_weights.items())
+    )
+    bad = tuple(
+        replace(
+            _example(seed, combat=False, index=1),
+            candidate_features=({}, {coordinate: math.copysign(1.0, weight)}, {}, {}),
+            mean_progress_utilities=(1.0, 0.0, 0.0, 0.0),
+            selected_candidate_index=0,
+            preference_matrix=(
+                (0.5, 0.9, 0.9, 0.9),
+                (0.1, 0.5, 0.5, 0.5),
+                (0.1, 0.5, 0.5, 0.5),
+                (0.1, 0.5, 0.5, 0.5),
+            ),
+        )
+        for seed in (3, 4)
+    )
+    anchors = inputs.anchors + bad
+    audit = _identified(
+        analyze_combat_foundation(
+            examples=anchors,
+            config=config.foundation,
+            parent_weights=production_model_from_checkpoint(
+                inputs.parent_checkpoint
+            ).policy_weights,
+        ),
+        "report_id",
+    )
+    recipe = copy.deepcopy(config.document)
+    recipe["foundation_report_id"] = audit["report_id"]
+    old = CombatPolicyConfig.from_mapping(_identified(recipe, "config_id"))
+    _, original_inputs = _inputs()
+    inputs = replace(inputs, anchors=anchors, audit=audit, validation=original_inputs.validation)
+    rejected = train_combat_policy_inputs(inputs=inputs, config=old)
+    assert rejected.report["selected_epoch"] == 0
+    diagnostic = build_combat_gate_audit(
+        saved=rejected.report,
+        foundation=audit,
+        parent_report=inputs.parent_report,
+        resource_report_id="sha256:" + "2" * 64,
+    )
+    recipe.update(
+        schema_version="combat-policy-training-config-v3",
+        selection_gate_scope=GATE_SCOPE,
+        selection_gate_audit=diagnostic,
+    )
+    return (
+        CombatPolicyConfig.from_mapping(_identified(recipe, "config_id")),
+        inputs,
+        rejected.report,
+    )
+
+
+def test_perfect_combat_cannot_repair_a_frozen_noncombat_regret_floor() -> None:
+    proof = regret_feasibility(
+        decisions=4,
+        combat_decisions=2,
+        parent_mean_regret=0.55,
+        combat_parent_regret_sum=0.2,
+        source_order_mean_regret=0.2,
+    )
+    assert proof["optimistic_global_regret_lower_bound"] == 0.5
+    assert proof["impossible_even_with_perfect_combat"] is True
+    assert proof["frozen_noncombat_decisions"] == 2
+    possible = regret_feasibility(
+        decisions=4,
+        combat_decisions=2,
+        parent_mean_regret=0.1,
+        combat_parent_regret_sum=0.2,
+        source_order_mean_regret=0.2,
+    )
+    assert possible["impossible_even_with_perfect_combat"] is False
+
+
+def test_corrected_scope_selects_improvement_but_keeps_original_validation_quality_gate() -> None:
+    config, inputs, old = _scope_case()
+    assert all(row["checks"]["original_auxiliary_gate"] is False for row in old["training_history"])
+    assert old["candidate_eligible"] is False
+    result = train_combat_policy_inputs(inputs=inputs, config=config)
+    assert result.report["selected_epoch"] > 0
+    assert result.report["candidate_eligible"] is True
+    assert result.report["validation_checks"]["original_auxiliary_gate"] is True
+    assert result.checkpoint["heads"] == inputs.parent_checkpoint["heads"]
+    assert result.report["seed_verification"]["selection_gate_sources_reconciled"] is True
+    for row in result.report["training_history"]:
+        assert "original_auxiliary_gate" not in row["checks"]
+        assert {"pair_loss", "accuracy", "regret", "drift", "combat_drift", "advancement"} <= set(
+            row["checks"]
+        )
+        assert row["selection_original_policy"]["auxiliary_policy_gate"]["passed"] is False
+    validate_combat_policy_report(old)  # Original rejection rules remain intact.
+    validate_combat_policy_report(result.report, checkpoint=result.checkpoint)
+    assert result.report["checkpoint_promoted"] is False
+
+
+def test_scope_repair_does_not_allow_an_absolute_validation_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    config, inputs, _ = _scope_case()
+    original = _evaluate_policy_weights
+
+    def damaged(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        metric = original(*args, **kwargs)
+        if len(args[1]) == len(inputs.validation):
+            metric["auxiliary_policy_gate"] = {
+                "passed": False,
+                "checks": {key: False for key in metric["auxiliary_policy_gate"]["checks"]},
+            }
+        return metric
+
+    monkeypatch.setattr("spireshift.combat_policy._evaluate_policy_weights", damaged)
+    result = train_combat_policy_inputs(inputs=inputs, config=config)
+    assert result.report["selected_epoch"] > 0 and result.report["candidate_eligible"] is False
+    assert result.report["validation_checks"]["original_auxiliary_gate"] is False
+    with pytest.raises(ValueError, match="did not pass"):
+        ProductionCheckpointPolicy(
+            checkpoint=result.checkpoint, training_report=result.report, ruleset=RULESET
+        )
+
+
+def test_owner_source_reconciliation_stops_before_optimizer_if_bound_changes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    config, inputs, _ = _scope_case()
+    anchors = tuple(
+        replace(x, mean_progress_utilities=(0.8, 0.0, 0.0, 0.0)) if x.decision_type == "path" else x
+        for x in inputs.anchors
+    )
+
+    def forbidden(*args: Any, **kwargs: Any) -> None:
+        pytest.fail("No gradient may follow a changed source feasibility bound")
+
+    monkeypatch.setattr("spireshift.combat_policy._gradient", forbidden)
+    with pytest.raises(ValueError, match="source reconciliation failed"):
+        train_combat_policy_inputs(inputs=replace(inputs, anchors=anchors), config=config)
+
+
+@pytest.mark.parametrize("field", ["optimizer", "tolerance", "cohort"])
+def test_scope_repair_cannot_change_frozen_settings_without_a_new_bound_experiment(
+    field: str,
+) -> None:
+    recipe = copy.deepcopy(load_combat_policy_config(SCOPED_CONFIG_PATH).document)
+    if field == "optimizer":
+        recipe["optimization"]["learning_rate"] *= 2
+    elif field == "tolerance":
+        recipe["limits"]["maximum_mean_total_variation"] *= 2
+    else:
+        recipe["fresh_confirmation"]["max_decisions_per_run"] *= 2
+    with pytest.raises(ValueError, match="changed frozen settings"):
+        CombatPolicyConfig.from_mapping(_identified(recipe, "config_id"))
+
+
+def test_reidentified_gate_audit_cannot_hide_a_changed_mathematical_bound() -> None:
+    recipe = load_combat_policy_config(SCOPED_CONFIG_PATH)
+    audit = copy.deepcopy(recipe.document["selection_gate_audit"])
+    audit["selection_regret_bound"]["optimistic_global_regret_lower_bound"] = 0.0
+    with pytest.raises(ValueError, match="does not reconcile"):
+        validate_combat_gate_audit(_identified(audit, "audit_id"))
+
+
+@pytest.mark.parametrize("wrong", [None, "failed", "games", "other_output", "duplicate_flag"])
+def test_cached_gate_audit_requires_completed_zero_game_resource_for_its_outputs(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, wrong: str | None
+) -> None:
+    config, inputs, rejected = _scope_case()
+    old = CombatPolicyConfig.from_mapping(rejected["config"])
+    path = tmp_path / "config.json"
+    path.write_text(json.dumps(old.document))
+    model_root = tmp_path / "model"
+    result = train_combat_policy_inputs(inputs=inputs, config=old)
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_model_checkpoint",
+        lambda p: (
+            result.checkpoint if p == model_root / "checkpoint.json" else inputs.parent_checkpoint
+        ),
+    )
+    monkeypatch.setattr(
+        "spireshift.production_models.load_production_training_report",
+        lambda p, **kw: (
+            result.report if p == model_root / "training-report.json" else inputs.parent_report
+        ),
+    )
+    monkeypatch.setattr(
+        "spireshift.combat_foundation.load_combat_foundation_report", lambda *a: inputs.audit
+    )
+    command = [
+        "uv",
+        "run",
+        "spireshift",
+        "model",
+        "train-combat-policy",
+        str(path),
+        "--split-manifest",
+        "split.json",
+        "--manifest",
+        "ruleset.json",
+        "--upstream-root",
+        "upstream",
+        "--output-dir",
+        str(model_root),
+        "--objective-config",
+        str(Path("configs/default.toml").resolve()),
+    ]
+    resource = {
+        "report_id": config.document["selection_gate_audit"]["sources"]["resource_report_id"],
+        "experiment_kind": "training",
+        "status": "completed",
+        "exit_code": 0,
+        "cap": None,
+        "working_directory": str(tmp_path),
+        "command": command,
+        "usage": {"trajectories": 0, "simulations": 0, "transitions": 0},
+        "artifacts": {"roots": [str(model_root)]},
+    }
+    if wrong == "failed":
+        resource["status"] = "failed"
+    elif wrong == "games":
+        resource["usage"]["transitions"] = 1
+    elif wrong == "other_output":
+        command[command.index("--output-dir") + 1] = str(tmp_path / "other")
+    elif wrong == "duplicate_flag":
+        command += ["--output-dir", str(model_root)]
+    monkeypatch.setattr("spireshift.combat_gate.load_resource_report", lambda p: resource)
+
+    def forbidden(**kwargs: Any) -> None:
+        pytest.fail("Gate diagnosis must not open source cases or perform optimizer steps")
+
+    monkeypatch.setattr("spireshift.combat_policy.load_combat_foundation_inputs", forbidden)
+    monkeypatch.setattr("spireshift.combat_policy._gradient", forbidden)
+    arguments: dict[str, Any] = {
+        "config_path": path,
+        "model_root": model_root,
+        "resource_path": tmp_path / "resources.json",
+        "project_root": tmp_path,
+        "objective": load_objective(Path("configs/default.toml")),
+    }
+    if wrong is None:
+        assert (
+            audit_saved_combat_selection_gate(**arguments)
+            == config.document["selection_gate_audit"]
+        )
+    else:
+        with pytest.raises(ValueError, match="Combat gate"):
+            audit_saved_combat_selection_gate(**arguments)
+
+
+def test_diagnostic_cli_preserves_output_and_rejects_changed_cached_provenance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    diagnostic = copy.deepcopy(
+        load_combat_policy_config(SCOPED_CONFIG_PATH).document["selection_gate_audit"]
+    )
+    monkeypatch.setattr(
+        "spireshift.combat_gate.audit_saved_combat_selection_gate", lambda **kw: diagnostic
+    )
+    output = tmp_path / "diagnostic.json"
+    metrics = tmp_path / "metrics.json"
+    monkeypatch.setenv(EXPERIMENT_METRICS_ENV, str(metrics))
+    args = [
+        "model",
+        "audit-combat-selection-gate",
+        str(EXTENDED_CONFIG_PATH),
+        str(tmp_path / "model"),
+        "--resource-report",
+        str(tmp_path / "resources.json"),
+        "--output",
+        str(output),
+    ]
+    assert main(args) == 0
+    original = output.read_bytes()
+    assert json.loads(capsys.readouterr().out) == diagnostic
+    assert all(
+        json.loads(metrics.read_text())[k] == 0
+        for k in ("trajectories", "simulations", "transitions")
+    )
+    monkeypatch.delenv(EXPERIMENT_METRICS_ENV)
+    assert main(args) == 0 and output.read_bytes() == original
+    capsys.readouterr()
+    diagnostic["sources"]["resource_report_id"] = "sha256:" + "f" * 64
+    diagnostic = _identified(diagnostic, "audit_id")
+    assert main(args) == 1 and output.read_bytes() == original
+    assert "different experiment" in capsys.readouterr().out
+
+
 def test_soft_paired_gradient_matches_finite_difference() -> None:
     example = _example(1)
     pair = {"left": 0, "right": 1, "left_preference_probability": 0.75}
@@ -757,11 +1053,17 @@ def test_bad_training_scope_config_is_rejected(wrong: str) -> None:
         CombatPolicyConfig.from_mapping(_identified(d, "config_id"))
 
 
-def test_owner_script_rotates_attempts_caches_and_preserves_partial(tmp_path: Path) -> None:
+@pytest.mark.parametrize(
+    ("script_version", "model_version", "recipe_path"),
+    [("v1", "v9", EXTENDED_CONFIG_PATH), ("v2", "v10", SCOPED_CONFIG_PATH)],
+)
+def test_owner_script_rotates_attempts_caches_and_preserves_partial(
+    tmp_path: Path, script_version: str, model_version: str, recipe_path: Path
+) -> None:
     (tmp_path / "scripts").mkdir()
     (tmp_path / "bin").mkdir()
     script = tmp_path / "scripts/train.sh"
-    script.write_text(Path("scripts/train-combat-policy-v1.sh").read_text())
+    script.write_text(Path(f"scripts/train-combat-policy-{script_version}.sh").read_text())
     log = tmp_path / "calls"
     uv = tmp_path / "bin/uv"
     uv.write_text('#!/usr/bin/env bash\nprintf "%s\\n" "$*" >> "$SPIRESHIFT_TEST_CALLS"\n')
@@ -773,13 +1075,15 @@ def test_owner_script_rotates_attempts_caches_and_preserves_partial(tmp_path: Pa
     }
     resources = tmp_path / "artifacts/resources"
     resources.mkdir(parents=True)
-    (resources / "combat-policy-base-v9-train-v1-attempt-1.json").write_text("{}")
+    (
+        resources / f"combat-policy-base-{model_version}-train-{script_version}-attempt-1.json"
+    ).write_text("{}")
     subprocess.run(["bash", str(script)], env=env, check=True, capture_output=True)
     assert "attempt-2.json" in log.read_text() and "--max-wall-seconds 1800" in log.read_text()
-    assert EXTENDED_CONFIG_PATH.name in log.read_text()
+    assert recipe_path.name in log.read_text()
     assert log.read_text().count("resources run") == 1
     assert "evaluate" not in log.read_text() and "--extra evangambit" not in log.read_text()
-    output = tmp_path / "artifacts/models/sts2-v0.107.1-base-v9"
+    output = tmp_path / f"artifacts/models/sts2-v0.107.1-base-{model_version}"
     output.mkdir(parents=True)
     (output / "checkpoint.json").write_text("{}")
     log.write_text("")
@@ -792,8 +1096,10 @@ def test_owner_script_rotates_attempts_caches_and_preserves_partial(tmp_path: Pa
     )
 
 
-@pytest.mark.parametrize("extended", [False, True])
-def test_schema_contracts_accept_frozen_recipe_and_toy_training_artifacts(extended: bool) -> None:
+@pytest.mark.parametrize("config_version", ["v1", "v2", "v3"])
+def test_schema_contracts_accept_frozen_recipe_and_toy_training_artifacts(
+    config_version: str,
+) -> None:
     resources = [
         (
             f"https://spireshift.dev/schemas/{path.name}",
@@ -802,7 +1108,14 @@ def test_schema_contracts_accept_frozen_recipe_and_toy_training_artifacts(extend
         for path in Path("schemas").glob("*.json")
     ]
     registry: Registry[Any] = Registry().with_resources(resources)
-    config, inputs = _extended_inputs() if extended else _inputs()
+    if config_version == "v3":
+        config, inputs, _ = _scope_case()
+        Draft202012Validator(
+            json.loads(Path("schemas/combat-selection-gate-audit-v1.json").read_text()),
+            registry=registry,
+        ).validate(config.document["selection_gate_audit"])
+    else:
+        config, inputs = _extended_inputs() if config_version == "v2" else _inputs()
     result = train_combat_policy_inputs(inputs=inputs, config=config)
     prediction = production_model_from_checkpoint(result.checkpoint).predict(
         inputs.validation[0].representation
@@ -810,7 +1123,6 @@ def test_schema_contracts_accept_frozen_recipe_and_toy_training_artifacts(extend
     assert prediction.source_action_ids == tuple(
         c.source_action_id for c in inputs.validation[0].representation.candidates
     )
-    config_version = "v2" if extended else "v1"
     for name, document in (
         (f"combat-policy-training-config-{config_version}", config.document),
         ("production-model-checkpoint-v9", result.checkpoint),

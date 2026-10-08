@@ -34,10 +34,14 @@ All game/simulation/transition counters are zero. The result is saved at
 `artifacts/combat-foundation/sts2-v0.107.1-base-v2-audit-v2/combat-foundation-audit.json`.
 Both audit scripts now only display their completed cached results. No audit rerun is needed.
 
-The next owner command is in the [combat policy training guide](combat-policy-training.md).
-It fits a separately frozen combat-only residual using these lessons and reserves a fresh
-complete-run comparison. Data coverage is sufficient for this pilot; full-run competence,
-terminal-value readiness and adaptive effort are still unproven. Base-v2 remains accepted.
+The owner subsequently completed combat training, but its 40 epochs all failed an impossible
+absolute selection gate: frozen non-combat choices alone exceed the required error limit.
+Base-v9 retained an empty correction. The [combat policy training guide](combat-policy-training.md)
+records that result and gives one new owner command for recipe v3, which corrects the scope and
+retains the numerical limits and original validation quality gate. It rechecks the diagnostic
+against source data before fitting into base-v10. The reserved fresh comparison remains blocked
+on an eligible result. Data coverage permits this pilot; full-run competence, terminal-value
+readiness and adaptive effort are still unproven. Base-v2 remains accepted.
 
 ## What changed
 

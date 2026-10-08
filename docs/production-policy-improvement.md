@@ -173,9 +173,15 @@ inconclusive; the stop rule ends the starting-choice experiment. The first comba
 useful lessons across 35 fitting and 13 selection runs but failed to bind one upgrade-choice
 screen. The owner completed the corrected public decoder audit against the same corpus and
 unchanged thresholds: all 529 combat states bind and all coverage checks pass. See the completed
-[combat foundation evidence](combat-foundation.md). The next package implements one
+[combat foundation evidence](combat-foundation.md). The package implements one
 [frozen combat-only policy training job](combat-policy-training.md), with soft paired labels,
 complete-run weighting, immutable original heads and unchanged non-regression tolerances.
 Its single owner command trains from saved data and reserves 32 fresh development seeds for a
-separate confirmation. It starts no game attempts or automatic follow-up. No actual residual has
-been trained or promoted; terminal wins and adaptive-controller readiness remain absent.
+separate confirmation. It starts no game attempts or automatic follow-up. The owner completed
+40 training epochs into base-v9, but every epoch failed an impossible absolute selection check
+on frozen non-combat choices; the saved head is empty and rejected/no-update. Passing validation
+describes the unchanged parent only. [Issue #132](https://github.com/benyanc/spireshift/issues/132)
+corrects the gate scope under recipe v3 and preserves all numerical safeguards and the absolute
+quality requirement on original validation. Its single new owner command trains into base-v10;
+the rejected artifacts and unused fresh seeds remain preserved. No candidate has been promoted;
+terminal wins and adaptive-controller readiness remain absent.

@@ -24,6 +24,9 @@
         },
         {
           "$ref": "combat-policy-training-config-v2.json"
+        },
+        {
+          "$ref": "combat-policy-training-config-v3.json"
         }
       ]
     },

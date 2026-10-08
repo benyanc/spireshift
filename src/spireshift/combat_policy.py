@@ -21,6 +21,12 @@ from spireshift.combat_foundation import (
     load_combat_foundation_inputs,
     load_combat_foundation_report,
 )
+from spireshift.combat_gate import (
+    GATE_SCOPE,
+    TOLERANCE,
+    regret_feasibility,
+    validate_combat_gate_audit,
+)
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.models import (
@@ -53,6 +59,7 @@ from spireshift.trajectory_policy import _drift, _id, _identified, _safe
 
 CONFIG_SCHEMA = "combat-policy-training-config-v1"
 TRANSFORM_CONFIG_SCHEMA = "combat-policy-training-config-v2"
+SCOPED_CONFIG_SCHEMA = "combat-policy-training-config-v3"
 HEAD_SCHEMA = "public-combat-policy-residual-v1"
 CHECKPOINT_SCHEMA = "production-model-checkpoint-v9"
 REPORT_SCHEMA = "production-model-training-report-v9"
@@ -90,17 +97,21 @@ class CombatPolicyConfig:
     @classmethod
     def from_mapping(cls, value: object) -> CombatPolicyConfig:
         d = copy.deepcopy(_mapping(value, "combat policy recipe"))
-        fields = (
-            CONFIG_FIELDS | {"residual_layout"}
-            if d.get("schema_version") == TRANSFORM_CONFIG_SCHEMA
-            else CONFIG_FIELDS
-        )
+        fields = set(CONFIG_FIELDS)
+        if d.get("schema_version") in {TRANSFORM_CONFIG_SCHEMA, SCOPED_CONFIG_SCHEMA}:
+            fields.add("residual_layout")
+        if d.get("schema_version") == SCOPED_CONFIG_SCHEMA:
+            fields.update({"selection_gate_scope", "selection_gate_audit"})
         _exact_keys(d, fields, "combat policy recipe")
         _identified(d, "config_id")
-        if d["schema_version"] not in {CONFIG_SCHEMA, TRANSFORM_CONFIG_SCHEMA}:
+        if d["schema_version"] not in {
+            CONFIG_SCHEMA,
+            TRANSFORM_CONFIG_SCHEMA,
+            SCOPED_CONFIG_SCHEMA,
+        }:
             raise ValueError("Unsupported combat policy recipe")
         foundation = CombatFoundationConfig.from_mapping(d["foundation_config"])
-        if d["schema_version"] == TRANSFORM_CONFIG_SCHEMA:
+        if d["schema_version"] in {TRANSFORM_CONFIG_SCHEMA, SCOPED_CONFIG_SCHEMA}:
             residual = CombatLayout.from_mapping(d["residual_layout"])
             source = CombatLayout.from_mapping(foundation.document["layout"])
             if (
@@ -110,6 +121,27 @@ class CombatPolicyConfig:
                 or source.encoder_id != "evangambit-public-card-target-v2"
             ):
                 raise ValueError("Combat residual layout extension differs from audited provenance")
+        if d["schema_version"] == SCOPED_CONFIG_SCHEMA:
+            audit = validate_combat_gate_audit(d["selection_gate_audit"])
+            prior = {
+                k: v
+                for k, v in d.items()
+                if k not in {"selection_gate_scope", "selection_gate_audit", "config_id"}
+            }
+            prior["schema_version"] = TRANSFORM_CONFIG_SCHEMA
+            sources = audit["sources"]
+            if (
+                d["selection_gate_scope"] != GATE_SCOPE
+                or manifest_identifier(prior) != sources["training_config_id"]
+                or sources["foundation_report_id"] != d["foundation_report_id"]
+                or sources["parent_model_id"] != foundation.document["model_id"]
+                or sources["parent_report_id"] != foundation.document["training_report_id"]
+                or sources["train_dataset_id"] != foundation.document["dataset_id"]
+                or sources["validation_dataset_id"] != d["validation_dataset_id"]
+                or sources["split_manifest_id"] != foundation.document["split_manifest_id"]
+                or audit["objective"] != foundation.document["objective"]
+            ):
+                raise ValueError("Scoped combat recipe changed frozen settings or audit provenance")
         for key in ("foundation_report_path", "validation_path"):
             _relative_path(d[key])
         for key in ("foundation_report_id", "validation_dataset_id"):
@@ -658,6 +690,56 @@ def _combat_safe(
     return checks
 
 
+def _selection_checks(
+    current: dict[str, Any],
+    baseline: dict[str, Any],
+    drift: dict[str, Any],
+    config: CombatPolicyConfig,
+) -> dict[str, bool]:
+    checks = _safe(current, baseline, drift, config.document["limits"])
+    if config.document["schema_version"] == SCOPED_CONFIG_SCHEMA:
+        # Keep every numerical parent-relative safeguard. The absolute quality gate
+        # remains mandatory on the original validation population with its own reference.
+        del checks["original_auxiliary_gate"]
+    return checks
+
+
+def _reconcile_selection_gate_sources(
+    *,
+    selection: tuple[CombatRecord, ...],
+    selection_anchors: tuple[_ProductionExample, ...],
+    baseline: dict[str, Any],
+    config: CombatPolicyConfig,
+) -> None:
+    if config.document["schema_version"] != SCOPED_CONFIG_SCHEMA:
+        return
+    recorded = config.document["selection_gate_audit"]["selection_regret_bound"]
+    actual = regret_feasibility(
+        decisions=len(selection_anchors),
+        combat_decisions=len(selection),
+        parent_mean_regret=baseline["mean_progress_utility_regret"],
+        combat_parent_regret_sum=sum(
+            max(r.example.mean_progress_utilities)
+            - r.example.mean_progress_utilities[
+                max(range(len(r.parent_scores)), key=r.parent_scores.__getitem__)
+            ]
+            for r in selection
+        ),
+        source_order_mean_regret=baseline["source_order_mean_progress_utility_regret"],
+    )
+    for key, value in actual.items():
+        saved = recorded[key]
+        same = (
+            math.isclose(value, saved, abs_tol=TOLERANCE, rel_tol=0)
+            if type(value) is float
+            else value == saved
+        )
+        if not same:
+            raise ValueError(f"Combat selection gate source reconciliation failed: {key}")
+    if actual["impossible_even_with_perfect_combat"] is not True:
+        raise ValueError("Combat selection gate diagnosis is not supported by source records")
+
+
 def _combined(
     examples: tuple[_ProductionExample, ...],
     records: tuple[CombatRecord, ...],
@@ -748,6 +830,12 @@ def train_combat_policy_inputs(
 
     selection_baseline = _combat_metrics(selection, {})
     selection_original_baseline = original_metrics({}, selection_anchors)
+    _reconcile_selection_gate_sources(
+        selection=selection,
+        selection_anchors=selection_anchors,
+        baseline=selection_original_baseline,
+        config=config,
+    )
     recipe, limits = d["optimization"], d["limits"]
     weights: dict[int, float] = {}
     accumulators: dict[int, float] = defaultdict(float)
@@ -776,7 +864,7 @@ def train_combat_policy_inputs(
             ),
         )
         checks = {
-            **_safe(original, selection_original_baseline, drift, limits),
+            **_selection_checks(original, selection_original_baseline, drift, config),
             **_combat_safe(metrics, selection_baseline, limits, advancement=True),
         }
         if all(checks.values()) and metrics["weighted_soft_pair_loss"] < best_loss:
@@ -888,7 +976,14 @@ def train_combat_policy_inputs(
                     "training_inference_aligned": True,
                     "noncombat_predictions_unchanged": noncombat,
                 },
-                "seed_verification": inputs.seed_verification,
+                "seed_verification": {
+                    **inputs.seed_verification,
+                    **(
+                        {"selection_gate_sources_reconciled": True}
+                        if d["schema_version"] == SCOPED_CONFIG_SCHEMA
+                        else {}
+                    ),
+                },
                 "optimizer_steps": recipe["epochs"],
                 "terminal_value_status": parent_report["terminal_value_status"],
                 "terminal_victory_positive_labels": 0,
@@ -1022,6 +1117,11 @@ def validate_combat_policy_report(
         != len(f["complete_run_subfolds"]["fit"] + f["complete_run_subfolds"]["selection"])
     ):
         raise ValueError("Combat report source binding or selection scope differs")
+    if (
+        config.document["schema_version"] == SCOPED_CONFIG_SCHEMA
+        and d["seed_verification"].get("selection_gate_sources_reconciled") is not True
+    ):
+        raise ValueError("Corrected combat training requires source gate reconciliation")
     for field in ("games_replayed", "simulations", "terminal_victory_positive_labels"):
         if type(d[field]) is not int or d[field] != 0:
             raise ValueError("Combat training may not claim game replay or terminal positives")
@@ -1038,11 +1138,11 @@ def validate_combat_policy_report(
     limits = config.document["limits"]
     for epoch, row in enumerate(history, 1):
         checks = {
-            **_safe(
+            **_selection_checks(
                 row["selection_original_policy"],
                 d["parent_selection_policy"],
                 row["selection_original_drift"],
-                limits,
+                config,
             ),
             **_combat_safe(
                 row["selection_combat"], d["parent_selection_combat"], limits, advancement=True
@@ -1119,6 +1219,9 @@ def summarize_combat_policy_training(report: dict[str, Any]) -> dict[str, Any]:
         "model_id": report["model_id"],
         "report_id": report["report_id"],
         "selected_epoch": report["selected_epoch"],
+        "selection_gate_scope": report["config"].get(
+            "selection_gate_scope", "absolute_selection_and_validation"
+        ),
         "candidate_eligible": report["candidate_eligible"],
         "status": report["status"],
         "validation_checks": report["validation_checks"],

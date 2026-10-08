@@ -1,0 +1,285 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-selection-gate-audit-v1"
+    },
+    "audit_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective": {
+      "$ref": "combat-foundation-audit-config-v1.json#/properties/objective"
+    },
+    "sources": {
+      "type": "object",
+      "properties": {
+        "candidate_model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "candidate_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "foundation_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "parent_model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "parent_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "resource_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "split_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "train_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "training_config_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "validation_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "candidate_model_id",
+        "candidate_report_id",
+        "foundation_report_id",
+        "parent_model_id",
+        "parent_report_id",
+        "resource_report_id",
+        "split_manifest_id",
+        "train_dataset_id",
+        "training_config_id",
+        "validation_dataset_id"
+      ],
+      "additionalProperties": false
+    },
+    "selection_regret_bound": {
+      "type": "object",
+      "properties": {
+        "decisions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "combat_decisions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "frozen_noncombat_decisions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parent_mean_regret": {
+          "type": "number"
+        },
+        "combat_parent_regret_sum": {
+          "type": "number"
+        },
+        "optimistic_global_regret_lower_bound": {
+          "type": "number"
+        },
+        "source_order_mean_regret": {
+          "type": "number"
+        },
+        "infeasibility_margin": {
+          "type": "number"
+        },
+        "rounding_tolerance": {
+          "const": 1e-09
+        },
+        "impossible_even_with_perfect_combat": {
+          "const": true
+        }
+      },
+      "required": [
+        "decisions",
+        "combat_decisions",
+        "frozen_noncombat_decisions",
+        "parent_mean_regret",
+        "combat_parent_regret_sum",
+        "optimistic_global_regret_lower_bound",
+        "source_order_mean_regret",
+        "infeasibility_margin",
+        "rounding_tolerance",
+        "impossible_even_with_perfect_combat"
+      ],
+      "additionalProperties": false
+    },
+    "selection_parent_gate": {
+      "type": "object",
+      "properties": {
+        "passed": {
+          "const": false
+        },
+        "checks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      },
+      "required": [
+        "passed",
+        "checks"
+      ],
+      "additionalProperties": false
+    },
+    "quality_reference": {
+      "type": "object",
+      "properties": {
+        "selection_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "soft_baseline_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "populations_differ": {
+          "const": true
+        },
+        "selection_soft_reference_copied_from_validation": {
+          "const": true
+        },
+        "matched_selection_soft_reference_available": {
+          "const": false
+        }
+      },
+      "required": [
+        "selection_dataset_id",
+        "soft_baseline_dataset_id",
+        "populations_differ",
+        "selection_soft_reference_copied_from_validation",
+        "matched_selection_soft_reference_available"
+      ],
+      "additionalProperties": false
+    },
+    "recorded_history": {
+      "type": "object",
+      "properties": {
+        "epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "selected_epoch": {
+          "const": 0
+        },
+        "candidate_eligible": {
+          "const": false
+        },
+        "failed_check_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "epochs_blocked_only_by_absolute_selection_gate": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        },
+        "intermediate_weights_available": {
+          "const": false
+        },
+        "final_validation_describes_parent": {
+          "const": true
+        }
+      },
+      "required": [
+        "epochs",
+        "selected_epoch",
+        "candidate_eligible",
+        "failed_check_counts",
+        "epochs_blocked_only_by_absolute_selection_gate",
+        "intermediate_weights_available",
+        "final_validation_describes_parent"
+      ],
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "corrected_selection_gate_scope": {
+          "const": "relative_train_selection_safety_absolute_original_validation"
+        },
+        "original_result_remains_rejected": {
+          "const": true
+        },
+        "automatic_training_allowed": {
+          "const": false
+        },
+        "automatic_gameplay_allowed": {
+          "const": false
+        },
+        "adaptive_controller_allowed": {
+          "const": false
+        },
+        "next_step": {
+          "const": "new_versioned_recipe_source_reconciliation_before_owner_training"
+        }
+      },
+      "required": [
+        "corrected_selection_gate_scope",
+        "original_result_remains_rejected",
+        "automatic_training_allowed",
+        "automatic_gameplay_allowed",
+        "adaptive_controller_allowed",
+        "next_step"
+      ],
+      "additionalProperties": false
+    },
+    "scope": {
+      "const": "cached_training_and_foundation_artifacts_no_source_reaudit"
+    },
+    "source_cases_opened": {
+      "const": 0
+    },
+    "optimizer_steps": {
+      "const": 0
+    },
+    "games_replayed": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "audit_id",
+    "objective",
+    "sources",
+    "selection_regret_bound",
+    "selection_parent_gate",
+    "quality_reference",
+    "recorded_history",
+    "decision",
+    "scope",
+    "source_cases_opened",
+    "optimizer_steps",
+    "games_replayed",
+    "checkpoint_promoted"
+  ],
+  "additionalProperties": false,
+  "$id": "https://spireshift.dev/schemas/combat-selection-gate-audit-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

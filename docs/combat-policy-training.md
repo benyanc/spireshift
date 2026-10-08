@@ -1,8 +1,10 @@
 # Frozen public combat policy training
 
-[Issue #130](https://github.com/benyanc/spireshift/issues/130) tracks this owner-run training
-experiment. [Issue #131](https://github.com/benyanc/spireshift/issues/131) tracks the separate
-fresh gameplay confirmation and is blocked on an eligible, reviewed training result.
+[Issue #130](https://github.com/benyanc/spireshift/issues/130) records the completed, rejected
+base-v9 experiment. [Issue #132](https://github.com/benyanc/spireshift/issues/132) corrects an
+impossible selection check in a new experiment version. The next owner task is one training
+run into base-v10. [Issue #131](https://github.com/benyanc/spireshift/issues/131) remains blocked
+on an eligible, reviewed result before any fresh gameplay comparison.
 
 The owner completed combat audit v2: all 529 combat states bind, with zero failures. Its frozen
 coverage checks pass. Reliable learnable comparisons span 35 fitting and 13 selection seeds
@@ -22,40 +24,78 @@ in 0.562 seconds, with zero teacher batches opened, labels analyzed, optimizer s
 The owner trainer now performs this check before the large source audit. No screen is removed,
 no threshold or training setting is changed, and the completed foundation audit v2 stays intact.
 
+The owner retry completed all 40 epochs in **87.820 wall / 69.952 CPU seconds**, with zero new
+games, simulations or transitions. Every epoch failed the absolute selection quality gate;
+epochs 21–40 also exceeded the unchanged 0.05 combat drift limit. Base-v9 saved epoch zero and
+an empty correction. Its passing final validation describes the unchanged base-v2 fallback,
+not any discarded training epoch. Base-v9 is rejected/no-update and has not been promoted.
+
+Saved checkpoint: `sha256:78c2b31aa3ca4e61c02b4214ee6572b4c9a5eb794377872d4f300eb603d83a85`;
+training report: `sha256:c15666034fe6a08e481b68fe949bd8fddaf6d94a7f77f97dce25f5259a6c0dec`;
+attempt-2 resource: `sha256:8d280b1c8238e2dff45520b2b1be1a8cce56d797ac17bd3e653b68aed65d4b0a`.
+All remain preserved under the original base-v9 and numbered resource paths.
+
+## Why the selection check needs correction
+
+We mistakenly required a combat-only update to pass an absolute quality check on all choices
+in the train-selection data. That data includes **126 combat and 195 frozen non-combat choices**.
+Even perfect combat would leave at least **0.002502875629** mean auxiliary regret from the frozen
+choices alone. The check requires less than its **0.001992810927** source-order reference.
+It was therefore impossible to pass. Another part of that gate reused a soft-target reference
+from the original validation population on this different train-selection population.
+
+The bounded diagnostic reads only already-verified saved training, resource, parent and foundation
+artifacts. It opens no source cases and does no fitting or games. Its result is
+`artifacts/diagnostics/sts2-v0.107.1-base-v9-combat-gate-v1/diagnostic.json`,
+`sha256:9cee3b31d58b406ef456403aa130284e16e92f061429ab19a2d4aef6e5cce71b`.
+The next owner trainer checks this arithmetic against the actual source examples before its first
+optimizer step. A discrepancy stops training.
+
+Recipe v3 applies all numerical parent-relative safety checks to train-selection. It keeps the
+absolute overall quality check on the original validation data, where the reference belongs.
+This is an explicit protocol correction after inspecting development results. The numerical
+tolerances, optimizer, source data, folds and unused fresh-run reservation do not change. It
+does not reinterpret the rejected v9 result as successful or reconstruct discarded epoch weights.
+The improved recorded combat scores are auxiliary evidence, not demonstrated playing strength.
+
 ## Run this one next command
 
 The owner launches and monitors this job:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-combat-policy-v1.sh
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-combat-policy-v2.sh
 ```
 
-It first checks public validation screen compatibility, verifies the saved evidence, trains one
-combat adjustment for 40 epochs, checks the original
-validation data and saves a separate base-v9 candidate. No game attempts, hidden-world resampling,
+It first checks public validation screen compatibility, verifies the saved evidence and reconciles
+the diagnostic against the source examples. It then trains one combat adjustment for 40 epochs,
+checks the original validation data and saves a separate base-v10 candidate. No game attempts, hidden-world resampling,
 fresh collection or evaluation follow. The trainer prints progress every ten epochs. Share the
 final summary and resource report before the separate fresh-run comparison is implemented/launched.
 
 One worker; caps of **30 minutes wall time, 3,600 CPU seconds, 8 GB memory and 1 GB output**.
-Expected duration is several minutes, including re-reading the approximately 1 GB source corpus;
-the new training step has not been timed on that corpus. These caps are safeguards, not an ETA.
+Allow several minutes, including re-reading the approximately 1 GB source corpus. The previous
+40-epoch job took about 88 seconds on the owner's Mac; the corrected version has not been timed.
+These caps are safeguards, not an ETA.
 Interrupted attempts keep separate resource reports. Completed reruns check/display only the
 saved checkpoint and report; they do not re-audit the corpus or retrain. Partial model outputs
 are preserved and cause a clear stop instead of overwriting them.
 
-Results are saved under `artifacts/models/sts2-v0.107.1-base-v9/` as `checkpoint.json` and
-`training-report.json`. Resources use numbered `artifacts/resources/combat-policy-base-v9-train-v1-attempt-*.json`
+Results are saved under `artifacts/models/sts2-v0.107.1-base-v10/` as `checkpoint.json` and
+`training-report.json`. Resources use numbered `artifacts/resources/combat-policy-base-v10-train-v2-attempt-*.json`
 paths. Accepted base-v2 stays unchanged. No automatic promotion or adaptive-controller fitting occurs.
-The same command now uses the corrected recipe and chooses attempt 2 when attempt 1 is present;
-the failed report is never overwritten. Failed preflights also record explicit zero game counters.
+The old v1 script only displays the completed v9 result. Use the new v2 script above for the
+scope correction. Failed preflights also record explicit zero game counters.
 
 ## Frozen experiment
 
-Configuration: `configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v2.json`,
-`sha256:ff6d4537526d831c555e3f3a9d8da7ebad8aaaf3f3ff4fcab7b94df2fa40d122`.
-The v1 recipe remains archived with the failed attempt. Recipe v2 changes only the versioned
-residual layout: source datasets, original audit, optimizer, complete-run folds, selection rule,
-safety limits and reserved fresh-run cohort are identical.
+Configuration: `configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v3.json`,
+`sha256:5dca8903d483a6d510f7266c8a41bb3390b8f32807b08783265e437c7c836cce`.
+The v1 recipe remains archived with the failed binding attempt; v2
+(`sha256:ff6d4537526d831c555e3f3a9d8da7ebad8aaaf3f3ff4fcab7b94df2fa40d122`) binds the
+completed rejected v9 result. Recipe v3 changes the selection gate's scope and embeds the saved
+diagnostic. Reconstructing v2 from it must reproduce the original configuration hash exactly:
+source datasets, original audit, optimizer, complete-run folds, numerical safety limits and
+reserved fresh-run cohort are identical. Legacy v1/v2 gate semantics remain unchanged.
 It binds the completed owner audit
 `sha256:57666476aa7c42ce76cb46a44e9eb422ab7bfb21abf4b752e8cb0110ab3948fd`,
 the full original audit configuration, accepted base-v2 checkpoint/report, composed train corpus,
@@ -96,13 +136,15 @@ residual shrinkage 0.1, gradient clip 5 and epsilon 1e-8. The small step size ac
 feature space's scale in synthetic checks; no production result was used to tune it.
 Metrics use exactly the quantized weights that can be serialized. No grid search or selection refit.
 
-An epoch needs at least 0.001 lower selection soft pair loss and all frozen safeguards: no more
+An epoch needs at least 0.001 lower selection soft pair loss and all numerical safeguards: no more
 than 0.01 worse original pair loss, 0.02 lower accuracy, 0.0002 higher auxiliary regret or 0.05
-mean probability drift, plus the original auxiliary policy gate. Additional combat-only safeguards
+mean probability drift relative to the parent. Additional combat-only safeguards
 apply these same tolerances to complete-run-balanced combat metrics, so unchanged non-combat
-decisions cannot hide combat damage.
+decisions cannot hide combat damage. The history continues to report the failing absolute
+train-selection gate for transparency, but recipe v3 does not use it to select an epoch.
 
-The original development validation is checked after the train-selected epoch is frozen; it
+The original development validation, including its absolute auxiliary quality gate, is checked
+after the train-selected epoch is frozen; it
 does not choose a different epoch or update weights. If no selection epoch qualifies, the saved
 head is empty and reproduces base-v2 exactly. If a selected epoch fails final validation, its
 candidate is preserved for diagnosis and blocked from policy execution. A passing result is only

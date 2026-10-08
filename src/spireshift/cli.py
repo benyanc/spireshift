@@ -1116,6 +1116,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     combat_train_show.add_argument("output_dir", type=Path)
     combat_train_show.add_argument("--config", type=Path, required=True)
+    combat_gate_audit = model_commands.add_parser(
+        "audit-combat-selection-gate",
+        help="Check gate feasibility from saved artifacts without source replay or fitting",
+    )
+    combat_gate_audit.add_argument("config", type=Path)
+    combat_gate_audit.add_argument("model_root", type=Path)
+    combat_gate_audit.add_argument("--resource-report", type=Path, required=True)
+    combat_gate_audit.add_argument("--project-root", type=Path, default=Path("."))
+    combat_gate_audit.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    combat_gate_audit.add_argument("--output", type=Path, required=True)
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2501,6 +2511,36 @@ def main(argv: Sequence[str] | None = None) -> int:
                     ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
                 )
                 _emit_json(starting_verification, None)
+                return 0
+            if args.model_command == "audit-combat-selection-gate":
+                from spireshift.combat_gate import (
+                    audit_saved_combat_selection_gate,
+                    load_combat_gate_audit,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                cached_gate_audit = None
+                if args.output.exists() or args.output.is_symlink():
+                    if not args.output.is_file() or args.output.is_symlink():
+                        raise FileExistsError("Combat gate diagnostic output exists")
+                    cached_gate_audit = load_combat_gate_audit(args.output)
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                combat_gate_report = audit_saved_combat_selection_gate(
+                    config_path=args.config,
+                    model_root=args.model_root,
+                    resource_path=args.resource_report,
+                    project_root=args.project_root,
+                    objective=load_objective(args.objective_config),
+                )
+                if cached_gate_audit is not None:
+                    if cached_gate_audit != combat_gate_report:
+                        raise ValueError("Cached gate audit belongs to a different experiment")
+                    _emit_json(cached_gate_audit, None)
+                    return 0
+                _publish_json(args.output, combat_gate_report)
+                _emit_json(combat_gate_report, None)
                 return 0
             if args.model_command in {"train-combat-policy", "show-combat-policy-training"}:
                 from spireshift.combat_policy import (
