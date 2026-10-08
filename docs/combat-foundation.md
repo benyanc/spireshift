@@ -39,10 +39,13 @@ absolute selection gate: frozen non-combat choices alone exceed the required err
 Base-v9 retained an empty correction. The [combat policy training guide](combat-policy-training.md)
 records that rejection and the completed recipe-v3 scope correction. The corrected owner run
 reconciled the proof against source data, selected eligible epoch 20 into base-v10 and passed
-every safeguard, with no games run. The [reserved fresh comparison](combat-policy-confirmation.md)
-is implemented and awaits the owner launch. Data coverage and improved saved-lesson scores
-permit this pilot; full-run competence, terminal-value readiness and adaptive effort are still
-unproven. Base-v2 remains accepted.
+every safeguard, with no games run during training. The owner completed the
+[reserved fresh comparison](combat-policy-confirmation.md): both models lose all 32 runs,
+neither reaches the first boss and their auxiliary mean floors are nearly identical. This
+eligible adjustment did not establish better play. The next task is the
+[public combat replay diagnosis](combat-confirmation-diagnosis.md) before another training
+change. Full-run competence, terminal-value readiness and adaptive effort are still unproven.
+Base-v2 remains accepted.
 
 ## What changed
 

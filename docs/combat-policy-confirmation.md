@@ -1,29 +1,54 @@
 # Fresh paired combat-policy comparison
 
-[Issue #132](https://github.com/benyanc/spireshift/issues/132) completed eligible combat training;
-[issue #131](https://github.com/benyanc/spireshift/issues/131) tests whether it improves actual play.
-The owner has not launched these games. Accepted base-v2 stays in place.
+[Issue #131](https://github.com/benyanc/spireshift/issues/131) is complete: the owner played all
+64 attempts on October 8, 2026 (Toronto time). The eligible combat update from
+[issue #132](https://github.com/benyanc/spireshift/issues/132) showed **no playing benefit** in
+this development comparison. Accepted base-v2 stays in place; base-v10 is not promoted.
 
-## Run this one next command
+## Completed owner result
 
-The owner launches and monitors:
+| Result | Candidate base-v10 | Reference base-v2 |
+| --- | ---: | ---: |
+| Complete terminal runs / original seeds | 32 / 32 | 32 / 32 |
+| Terminal full-run victories | 0 | 0 |
+| First-act boss reaches / clears | 0 / 0 | 0 / 0 |
+| Mean maximum floor (auxiliary) | 6.625 | 6.65625 |
+| Failed / truncated / CPU-exhausted runs | 0 / 0 / 0 | 0 / 0 / 0 |
+| Run CPU seconds, all 32 runs | 17.029370 | 15.648463 |
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/confirm-combat-policy-v1.sh
-```
+One paired seed improves its maximum floor, two regress and 29 tie; the paired mean difference
+is **-0.03125**. Action trace digests change on 29/32 seeds, but those traces include decisions
+on different paths and do not locate the first aligned choice difference. Neither arm uses the
+no-op fallback or hits a cycle/decision limit. No unsupported combat failure occurs.
 
-This plays **64 game attempts: the same 32 reserved seeds with each of two frozen models**.
-It uses **one worker**, prints progress after every saved attempt and stops after the comparison.
-There is no training, collection, controller fitting or automatic model promotion.
-The job caps are **30 minutes wall time, 10,000 CPU seconds, 8 GB memory and 1 GB output**.
-The wall cap is a safeguard, not an estimate. This comparison has not been timed.
+Comparison report:
+`sha256:3ae9c8644e653321f81d7ee3c28cc1bc9724a5225c238932d3daa31db1e7c850`.
+Completed resources:
+`sha256:9e50a55d6116b2160b66039137fe79e075af5971ee76070850bb2ff68656141f`,
+**38.193 wall / 35.495 CPU seconds**, 162,955,264 bytes peak resident memory and 566,590 bytes
+output, exit zero and no cap hit. Counters reconcile to **64 attempts, zero simulations and
+5,457 transitions**. Strict saved-report, case and resource validation passed without replaying
+games. These all-zero wins do not prove equivalence or either model's competence; the uncertainty
+intervals remain broad. No terminal-positive labels, model promotion or readiness follows.
+
+The sole next owner task is the [bounded combat replay diagnosis](combat-confirmation-diagnosis.md)
+in [issue #133](https://github.com/benyanc/spireshift/issues/133). It inspects the same cohort,
+which is now development evidence and must never be called fresh again. No extra training,
+seed search or comparison rerun is needed before that diagnosis.
+
+## Saved comparison and original execution protocol
+
+The completed comparison used **64 game attempts: the same 32 reserved seeds with each of two
+frozen models**, one worker and progress after every saved attempt. It stopped after the
+comparison. The job caps were **30 minutes wall time, 10,000 CPU seconds, 8 GB memory and
+1 GB output**; these were safeguards, not an estimate.
 
 Results go to
 `artifacts/evaluations/sts2-v0.107.1-base-v10-fresh-train-v1/production-policy-evaluation.json`,
 with an immutable `confirmation-plan.json` and one JSON case per seed/model.
 Resource reports use numbered
 `artifacts/resources/combat-policy-base-v10-confirmation-v1-attempt-*.json` paths.
-Share the final summary and resource report for review.
+The completed owner summary and resources have been reviewed.
 
 An interrupted job preserves completed cases. Running the same script again validates those
 cases and executes only missing ones. Saved failed cases remain failed; they are never replayed

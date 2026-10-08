@@ -186,7 +186,10 @@ quality requirement on original validation. The corrected owner run completed 40
 86.824 wall seconds, selected eligible epoch 20 into base-v10 and passed all safeguards.
 The original validation combat loss improved, while directional accuracy dipped within tolerance;
 three combat choices changed and all 135 non-combat predictions remain identical.
-The next owner task is the [paired fresh comparison](combat-policy-confirmation.md), with frozen
-candidate/reference identities, 32 reserved seeds and equal 128-CPU-second budgets. The rejected
-artifacts remain preserved. No candidate has been promoted; terminal wins and adaptive-controller
-readiness remain absent.
+The owner completed the [paired fresh comparison](combat-policy-confirmation.md), with frozen
+candidate/reference identities, 32 reserved seeds and equal 128-CPU-second budgets. Both lose
+every game and neither reaches the first boss; mean floors are 6.625 and 6.65625. Changed traces
+on 29 seeds do not establish playing benefit. The next owner task is the
+[public combat replay diagnosis](combat-confirmation-diagnosis.md) of the same inspected cases.
+The rejected artifacts remain preserved. No candidate has been promoted; terminal wins and
+adaptive-controller readiness remain absent.

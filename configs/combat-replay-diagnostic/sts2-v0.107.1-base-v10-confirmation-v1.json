@@ -1,0 +1,34 @@
+{
+  "schema_version": "combat-policy-replay-diagnostic-config-v1",
+  "confirmation_config_path": "configs/combat-confirmation/sts2-v0.107.1-base-v10-fresh-train-v1.json",
+  "confirmation_config_id": "sha256:faa09afa7ee9f08b0ea329e53b3a5a6d4c27d2167edd88353920b32769425752",
+  "comparison_path": "artifacts/evaluations/sts2-v0.107.1-base-v10-fresh-train-v1/production-policy-evaluation.json",
+  "comparison_report_id": "sha256:3ae9c8644e653321f81d7ee3c28cc1bc9724a5225c238932d3daa31db1e7c850",
+  "comparison_resource_path": "artifacts/resources/combat-policy-base-v10-confirmation-v1-attempt-1.json",
+  "comparison_resource_report_id": "sha256:9e50a55d6116b2160b66039137fe79e075af5971ee76070850bb2ff68656141f",
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "protocol": {
+    "population": "all_saved_train_seed_policy_pairs_no_replacement",
+    "replay_rule": "saved_outcomes_action_digest_final_hash_and_guard_diagnostics_must_match",
+    "shadow_rule": "same_public_state_ordered_menu_no_shadow_actions_executed",
+    "unsupported_shadow": "record_error_keep_original_driver_choice",
+    "information_policy": "public_observation_only_no_clone_no_hidden_resampling",
+    "compute": "serial_original_cpu_cap_includes_diagnostic_overhead_not_new_benchmark",
+    "interpretation": "descriptive_choices_and_realized_damage_not_causal_action_values",
+    "stop_rule": "owner_review_before_any_new_collection_or_training"
+  },
+  "claim_scope": "inspected_train_confirmation_public_replay_diagnosis_no_new_strength_claim",
+  "config_id": "sha256:f4db4d06f44d4c20d3112775754c7bc0cb1c8c1937916a085fb3431eebf440c9"
+}

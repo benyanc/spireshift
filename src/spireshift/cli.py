@@ -1140,6 +1140,20 @@ def build_parser() -> argparse.ArgumentParser:
         if confirmation_name == "confirm-combat-policy":
             confirmation_parser.add_argument("--upstream-root", type=Path, required=True)
             confirmation_parser.add_argument("--resume", action="store_true")
+    for diagnostic_name in ("diagnose-combat-confirmation", "show-combat-confirmation-diagnosis"):
+        diagnostic_parser = model_commands.add_parser(
+            diagnostic_name,
+            help="Replay or verify public choices from an inspected combat comparison",
+        )
+        diagnostic_parser.add_argument("config", type=Path)
+        diagnostic_parser.add_argument("--project-root", type=Path, default=Path("."))
+        diagnostic_parser.add_argument("--split-manifest", type=Path, required=True)
+        diagnostic_parser.add_argument("--manifest", type=Path, required=True)
+        diagnostic_parser.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+        diagnostic_parser.add_argument("--output-dir", type=Path, required=True)
+        if diagnostic_name == "diagnose-combat-confirmation":
+            diagnostic_parser.add_argument("--upstream-root", type=Path, required=True)
+            diagnostic_parser.add_argument("--resume", action="store_true")
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2556,6 +2570,96 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _publish_json(args.output, combat_gate_report)
                 _emit_json(combat_gate_report, None)
                 return 0
+            if args.model_command in (
+                "diagnose-combat-confirmation",
+                "show-combat-confirmation-diagnosis",
+            ):
+                from spireshift.combat_replay_diagnostic import (
+                    load_combat_replay_config,
+                    load_combat_replay_report,
+                    prepare_combat_replay,
+                    run_combat_replay,
+                )
+
+                diagnostic_cached = args.model_command == "show-combat-confirmation-diagnosis"
+                diagnostic_activity = [0, 0]
+                if not diagnostic_cached:
+                    write_experiment_metrics(
+                        ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                    )
+                print(
+                    "Checking saved comparison, models and public fitting coverage; "
+                    "no training or source-case audit.",
+                    flush=True,
+                )
+                diagnostic_inputs = prepare_combat_replay(
+                    config=load_combat_replay_config(args.config),
+                    project_root=args.project_root,
+                    split=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                diagnostic_report_path = args.output_dir / "diagnostic.json"
+                if diagnostic_cached:
+                    diagnostic_report = load_combat_replay_report(
+                        diagnostic_report_path, diagnostic_inputs
+                    )
+                else:
+                    if diagnostic_report_path.exists():
+                        raise FileExistsError(
+                            "Combat diagnosis is complete; display its saved result"
+                        )
+                    diagnostic_backend = load_evangambit_backend(
+                        args.upstream_root,
+                        args.manifest,
+                        max_episode_steps=diagnostic_inputs.confirmation.document[
+                            "maximum_decisions_per_run"
+                        ]
+                        + 1,
+                    )
+
+                    def record_diagnostic_activity(runs: int, transitions: int) -> None:
+                        diagnostic_activity[:] = [runs, transitions]
+                        update_experiment_metrics(
+                            ExperimentMetrics(
+                                trajectories=runs, simulations=0, transitions=transitions
+                            )
+                        )
+
+                    print(
+                        "Replaying only the inspected comparison and recording public choices. "
+                        "No training or automatic follow-up.",
+                        flush=True,
+                    )
+                    diagnostic_report = run_combat_replay(
+                        inputs=diagnostic_inputs,
+                        environment_factory=diagnostic_backend.factory,
+                        output_directory=args.output_dir,
+                        resume=args.resume,
+                        progress=lambda completed, total: print(
+                            f"Combat diagnosis: {completed}/{total} replays saved.", flush=True
+                        ),
+                        activity=record_diagnostic_activity,
+                    )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "report_id": diagnostic_report["report_id"],
+                        "config_id": diagnostic_inputs.config.document["config_id"],
+                        "comparison_report_id": diagnostic_report["comparison_report_id"],
+                        "summary": diagnostic_report["summary"],
+                        "decision": diagnostic_report["decision"],
+                        "claim_scope": diagnostic_report["claim_scope"],
+                        "games_this_command": diagnostic_activity[0],
+                        "transitions_this_command": diagnostic_activity[1],
+                    },
+                    None,
+                )
+                return (
+                    0
+                    if diagnostic_cached or diagnostic_report["summary"]["analysis_integrity_pass"]
+                    else 1
+                )
             if args.model_command in ("confirm-combat-policy", "show-combat-confirmation"):
                 from spireshift.combat_confirmation import (
                     load_combat_confirmation_config,

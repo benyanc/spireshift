@@ -4,8 +4,11 @@
 base-v9 experiment. [Issue #132](https://github.com/benyanc/spireshift/issues/132) completed the
 corrected owner training into base-v10. It selected an eligible epoch-20 combat adjustment and
 passed every validation safeguard. This is saved-lesson evidence, not demonstrated playing
-strength. The next owner task is the separate [fresh paired comparison](combat-policy-confirmation.md)
-tracked by [issue #131](https://github.com/benyanc/spireshift/issues/131). No retraining is needed.
+strength. The owner completed the separate [fresh paired comparison](combat-policy-confirmation.md)
+in [issue #131](https://github.com/benyanc/spireshift/issues/131): both models lose all 32 games
+without reaching the first boss, with no demonstrated playing benefit. The next owner task is
+the [public replay diagnosis](combat-confirmation-diagnosis.md) in
+[issue #133](https://github.com/benyanc/spireshift/issues/133). No retraining is needed yet.
 
 The owner completed combat audit v2: all 529 combat states bind, with zero failures. Its frozen
 coverage checks pass. Reliable learnable comparisons span 35 fitting and 13 selection seeds
@@ -88,7 +91,8 @@ Saved under `artifacts/models/sts2-v0.107.1-base-v10/`:
 Peak resident memory was 1,155,366,912 bytes and output 3,549,066 bytes; exit zero, no cap hit.
 Both training scripts now only check/display their respective completed results. No source audit
 or retraining is needed. The rejected base-v9 remains preserved; accepted base-v2 remains unchanged.
-The sole next owner command is in [the fresh comparison guide](combat-policy-confirmation.md).
+The completed fresh comparison is archived in [its guide](combat-policy-confirmation.md).
+The sole next owner command is in [the replay diagnosis guide](combat-confirmation-diagnosis.md).
 
 ## Frozen experiment
 
@@ -158,12 +162,14 @@ eligible for fresh confirmation. None of these outcomes promotes a checkpoint.
 
 Before training, reserve 32 complete train seeds at split offsets **504–535**, beyond the prior
 starting-study cohort. Seed metadata from all seven prior inventories is checked for overlap.
-These are fresh development confirmation runs, not a new final-test claim. The comparison will
-pair frozen base-v2 with the eligible frozen candidate, policy-only, with the same ObjectiveSpec
+These were fresh development confirmation runs, not a new final-test claim. The comparison
+paired frozen base-v2 with the eligible frozen candidate, policy-only, with the same ObjectiveSpec
 whole-run budget of 128 CPU seconds and a 4,096-decision safety cap. Model identities must be
 fixed before any confirmation game is played. The separate implementation now binds these
-identities to a frozen comparison plan; the owner has not launched its games. See
-[combat-policy-confirmation.md](combat-policy-confirmation.md) for the sole next command.
+identities to a frozen comparison plan. The owner completed all 64 attempts with zero victories
+or boss reaches. See [combat-policy-confirmation.md](combat-policy-confirmation.md) for the
+completed evidence and [combat-confirmation-diagnosis.md](combat-confirmation-diagnosis.md)
+for the sole next command. This cohort has now been inspected.
 
 Report terminal full-run victories first, with failures, unsupported decisions and truncations
 in the original denominator; then paired floors, act milestones, latency and resource use.

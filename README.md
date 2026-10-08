@@ -248,10 +248,13 @@ absolute error limit. Base-v9 retained the original policy. [Issue #132](https:/
 completed the corrected owner experiment, retaining all numerical safeguards and the absolute
 check on original validation. Base-v10 selects epoch 20 and passes every safeguard, with three
 changed combat choices and all 135 non-combat predictions unchanged on saved validation data.
-The [training guide](docs/combat-policy-training.md) archives its eligible result. The next task is
-one [fresh paired game comparison](docs/combat-policy-confirmation.md) against base-v2 on the
-32 reserved development seeds, under the same CPU budget. The owner alone starts that job.
-Base-v2 remains accepted; no full-run win-rate improvement has been demonstrated.
+The [training guide](docs/combat-policy-training.md) archives its eligible result. The owner
+completed the [fresh paired comparison](docs/combat-policy-confirmation.md) on all 32 reserved
+development seeds per model: both lose every run without reaching the first boss. Mean floors
+are 6.625 for base-v10 and 6.65625 for base-v2; no playing benefit is established. Base-v2 remains
+accepted and base-v10 is not promoted. The next owner task is the
+[public combat replay diagnosis](docs/combat-confirmation-diagnosis.md) of these inspected games,
+before another training change. The owner alone launches and monitors sustained tasks.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
