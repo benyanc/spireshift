@@ -6,27 +6,36 @@ first boss. Their mean maximum floors are 6.625 and 6.65625. There are no failur
 unsupported combat screens, cycles, CPU exhaustion or no-op fallback uses. This is a valid
 negative development result, not evidence of improved play. Base-v2 remains accepted.
 
-## Run this one next command
+## Completed result, 2026-10-08
 
-The owner alone launches and monitors:
+The owner completed all **64 original seed/model replays**. Source reconciliation and analysis
+integrity pass, with zero failed or mismatched replays, binding failures, shadow failures or
+non-combat score drift. Cached source/case/report verification passed with zero new games,
+transitions or predictions. [Issue #133](https://github.com/benyanc/spireshift/issues/133) is complete.
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/diagnose-combat-confirmation-v1.sh
-```
+The diagnostic report is
+`sha256:cedac599325a05d92dd5deda8ec6a8cb3573a4b9cd75cf905451b330a5912398`, saved at
+`artifacts/diagnostics/sts2-v0.107.1-base-v10-combat-confirmation-v1/diagnostic.json`.
+The owner-run resource report is
+`sha256:c3b764193d7a14b89fba20d460528f13b73cc576204901b4b5ce8990d328de22`: 144.493 wall /
+143.426 CPU seconds, 64 replays, zero search simulations and 5,457 transitions, without a cap.
 
-This replays **the same 64 inspected seed/model attempts**, with one worker and no search,
-training or automatic follow-up. It records both models' scores on each visible situation,
-executes only the original driver model's action and checks the replay against the saved
-comparison. Progress prints after each saved case. There are no new seeds or replacement runs.
-The job caps are **10 minutes wall time, 1,200 CPU seconds, 4 GB memory and 250 MB output**.
-These are safeguards, not an ETA; detailed tracing has not been timed on real games.
+On the reference paths, shadow scoring changes 200 end-turn choices to potion choices and 35
+card choices. On the candidate paths, those counts are 44 and 61. Public card coverage gaps
+remain. These different path populations are descriptive evidence, not matched counterfactuals
+or proof that an available action would prevent death. The original comparison still shows no
+playing benefit, and base-v10 remains unpromoted.
 
-Results go to
-`artifacts/diagnostics/sts2-v0.107.1-base-v10-combat-confirmation-v1/diagnostic.json`,
-with an immutable `diagnostic-plan.json` and compact JSON cases under `cases/`. Resource reports
-use numbered `artifacts/resources/combat-confirmation-base-v10-diagnostic-v1-attempt-*.json`
-paths. Share the final summary and resource report. **Stop for review before training or
-collecting any further data.** The coding agent has run no real diagnostic replays.
+No further replay is needed. [Issue #134](https://github.com/benyanc/spireshift/issues/134) now
+provides a [frozen neural combat pilot](neural-combat-policy.md) using shared public card
+properties and nonlinear state/action interactions. The owner runs its first saved-data stage
+before further experiments. See the [current backlog](backlog.md). The coding agent has run no
+real diagnostic replays.
+
+The completed protocol used one worker and caps of 600 wall seconds, 1,200 CPU seconds,
+4 GB memory and 250 MB output. The existing `scripts/diagnose-combat-confirmation-v1.sh` supports
+cached display/resume; it is an archived procedure, not the next task. The remaining sections
+describe that protocol and its limitations.
 
 ## What the diagnosis measures
 

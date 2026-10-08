@@ -252,9 +252,22 @@ The [training guide](docs/combat-policy-training.md) archives its eligible resul
 completed the [fresh paired comparison](docs/combat-policy-confirmation.md) on all 32 reserved
 development seeds per model: both lose every run without reaching the first boss. Mean floors
 are 6.625 for base-v10 and 6.65625 for base-v2; no playing benefit is established. Base-v2 remains
-accepted and base-v10 is not promoted. The next owner task is the
-[public combat replay diagnosis](docs/combat-confirmation-diagnosis.md) of these inspected games,
-before another training change. The owner alone launches and monitors sustained tasks.
+accepted and base-v10 is not promoted. The owner completed the
+[public combat replay diagnosis](docs/combat-confirmation-diagnosis.md): all 64 cases verify,
+with zero failed/mismatched replays, binding/shadow failures or non-combat drift. The
+[current backlog](docs/backlog.md) prioritizes a compact neural candidate and bounded gameplay
+improvement rounds under [#134](https://github.com/benyanc/spireshift/issues/134). The accepted
+base-v2 is a sparse feature-based learned scorer. A
+[16,448-parameter neural combat candidate](docs/neural-combat-policy.md) now implements shared
+public card properties and nonlinear state/action interactions, with the same frozen quality
+gates. Its first saved-data training stage is ready for the owner; production fitting and gameplay
+confirmation have not run. All non-combat choices and original value/risk heads remain frozen.
+The [genetic/hybrid experiment](https://github.com/benyanc/spireshift/issues/135) is deferred.
+The owner alone launches and monitors sustained tasks.
+
+The privately [preserved v0.107.1 game](docs/frozen-live-game.md) launches successfully outside
+Steam's managed library, with matching executable identity and read-only bridge/menu checks.
+A retest after Steam updates its managed copy and learned-policy live playback remain unfinished.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
@@ -286,7 +299,7 @@ objectives.
 6. Learn per-decision and whole-run computation allocation.
 7. Evaluate zero-shot and limited-data recovery across official patches.
 
-See [docs/architecture.md](docs/architecture.md) and
+See the [current backlog and priorities](docs/backlog.md), [docs/architecture.md](docs/architecture.md) and
 [docs/benchmark-protocol.md](docs/benchmark-protocol.md). The executable validation-owned gate and
 current base-v2 rejection are documented in
 [docs/base-model-readiness.md](docs/base-model-readiness.md).

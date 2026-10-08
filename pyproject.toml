@@ -14,6 +14,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+neural = [
+  "numpy>=2,<3",
+]
 evangambit = [
   "gymnasium>=1.2,<2",
   "numpy>=2,<3",
@@ -24,6 +27,7 @@ spireshift = "spireshift.cli:main"
 
 [dependency-groups]
 dev = [
+  "numpy>=2,<3",
   "jsonschema>=4.23",
   "mypy>=1.14",
   "pre-commit>=4.0",

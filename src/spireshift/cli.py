@@ -1117,6 +1117,23 @@ def build_parser() -> argparse.ArgumentParser:
     )
     combat_train_show.add_argument("output_dir", type=Path)
     combat_train_show.add_argument("--config", type=Path, required=True)
+    neural_train = model_commands.add_parser(
+        "train-neural-combat-policy",
+        help="Fit one compact neural combat pilot from saved lessons, without games",
+    )
+    neural_train.add_argument("config", type=Path)
+    neural_train.add_argument("--split-manifest", type=Path, required=True)
+    neural_train.add_argument("--manifest", type=Path, required=True)
+    neural_train.add_argument("--upstream-root", type=Path, required=True)
+    neural_train.add_argument("--project-root", type=Path, default=Path("."))
+    neural_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    neural_train.add_argument("--output-dir", type=Path, required=True)
+    neural_show = model_commands.add_parser(
+        "show-neural-combat-training",
+        help="Verify a saved neural pilot without source audit, fitting or games",
+    )
+    neural_show.add_argument("output_dir", type=Path)
+    neural_show.add_argument("--config", type=Path, required=True)
     combat_gate_audit = model_commands.add_parser(
         "audit-combat-selection-gate",
         help="Check gate feasibility from saved artifacts without source replay or fitting",
@@ -2780,6 +2797,74 @@ def main(argv: Sequence[str] | None = None) -> int:
                     None,
                 )
                 return 0 if confirmation_successful else 1
+            if args.model_command in {"train-neural-combat-policy", "show-neural-combat-training"}:
+                from spireshift.neural_combat import (
+                    load_neural_combat_config,
+                    load_neural_combat_inputs,
+                    summarize_neural_combat_training,
+                    train_neural_combat_inputs,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                neural_config = load_neural_combat_config(args.config)
+                neural_checkpoint_path = args.output_dir / "checkpoint.json"
+                neural_report_path = args.output_dir / "training-report.json"
+                if args.model_command == "show-neural-combat-training":
+                    saved_checkpoint = load_production_model_checkpoint(neural_checkpoint_path)
+                    saved_report = load_production_training_report(
+                        neural_report_path, checkpoint=saved_checkpoint
+                    )
+                    if saved_report["neural_config"] != neural_config.document:
+                        raise ValueError("Saved neural pilot uses a different frozen recipe")
+                    _emit_json(
+                        {
+                            **summarize_neural_combat_training(saved_report),
+                            "source_inputs_reaudited": False,
+                            "optimizer_steps_this_command": 0,
+                        },
+                        None,
+                    )
+                    return 0
+                if any(
+                    p.exists() or p.is_symlink()
+                    for p in (neural_checkpoint_path, neural_report_path)
+                ):
+                    raise FileExistsError(
+                        "Neural result exists; display it rather than overwrite it"
+                    )
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                print(
+                    "Verifying saved lessons, printed card properties and separate seeds; "
+                    "no games will run.",
+                    flush=True,
+                )
+                neural_inputs, neural_catalog = load_neural_combat_inputs(
+                    config=neural_config,
+                    project_root=args.project_root,
+                    upstream_root=args.upstream_root,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                print(
+                    "Training the frozen neural pilot. "
+                    "No gameplay or automatic next round follows.",
+                    flush=True,
+                )
+                neural_result = train_neural_combat_inputs(
+                    inputs=neural_inputs,
+                    config=neural_config,
+                    catalog=neural_catalog,
+                    progress=lambda epoch, total: print(
+                        f"Neural combat training: {epoch}/{total} epochs complete.", flush=True
+                    ),
+                )
+                _publish_json(neural_checkpoint_path, neural_result.checkpoint)
+                _publish_json(neural_report_path, neural_result.report)
+                _emit_json(summarize_neural_combat_training(neural_result.report), None)
+                return 0
             if args.model_command in {"train-combat-policy", "show-combat-policy-training"}:
                 from spireshift.combat_policy import (
                     load_combat_policy_config,

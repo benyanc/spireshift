@@ -1056,6 +1056,13 @@ def combat_checkpoint_parent(value: object) -> tuple[dict[str, Any], CombatPolic
 def validate_combat_policy_report(
     report: object, *, checkpoint: dict[str, Any] | None = None
 ) -> dict[str, Any]:
+    return _validate_combat_training_report(report, checkpoint=checkpoint)
+
+
+def _validate_combat_training_report(
+    report: object, *, checkpoint: dict[str, Any] | None = None, neural: bool = False
+) -> dict[str, Any]:
+    """Shared, unchanged selection/safety arithmetic for linear and neural combat pilots."""
     d = _mapping(report, "combat training report")
     _exact_keys(
         d,
@@ -1098,16 +1105,42 @@ def validate_combat_policy_report(
             "foundation_ready",
             "adaptive_controller_allowed",
             "claim_scope",
-        },
+        }
+        | ({"neural_config"} if neural else set()),
         "combat training report",
     )
     _identified(d, "report_id")
     config = CombatPolicyConfig.from_mapping(d["config"])
+    fresh_seeds = config.document["fresh_confirmation"]["seeds"]
+    expected_schema, expected_type, expected_claim = REPORT_SCHEMA, MODEL_TYPE, CLAIM
+    if neural:
+        from spireshift.neural_combat import (
+            CLAIM as NEURAL_CLAIM,
+        )
+        from spireshift.neural_combat import (
+            MODEL_TYPE as NEURAL_MODEL_TYPE,
+        )
+        from spireshift.neural_combat import (
+            REPORT_SCHEMA as NEURAL_REPORT_SCHEMA,
+        )
+        from spireshift.neural_combat import (
+            NeuralCombatConfig,
+        )
+
+        neural_config = NeuralCombatConfig.from_mapping(d["neural_config"])
+        if neural_config.data.document != config.document:
+            raise ValueError("Neural report changed the reused data/gate recipe")
+        fresh_seeds = neural_config.document["fresh_confirmation"]["seeds"]
+        expected_schema, expected_type, expected_claim = (
+            NEURAL_REPORT_SCHEMA,
+            NEURAL_MODEL_TYPE,
+            NEURAL_CLAIM,
+        )
     f = config.foundation.document
     if (
-        d["schema_version"] != REPORT_SCHEMA
-        or d["model_type"] != MODEL_TYPE
-        or d["claim_scope"] != CLAIM
+        d["schema_version"] != expected_schema
+        or d["model_type"] != expected_type
+        or d["claim_scope"] != expected_claim
         or d["selection_rule"] != SELECTION_RULE
         or d["selection_refit"] is not False
         or d["train_dataset_id"] != f["dataset_id"]
@@ -1195,18 +1228,28 @@ def validate_combat_policy_report(
         )
         or checks["noncombat_predictions_unchanged"]
         != d["validation_records"] - d["validation_combat"]["combat_states"]
-        or d["seed_verification"]["fresh_seeds"] != config.document["fresh_confirmation"]["seeds"]
+        or d["seed_verification"]["fresh_seeds"] != fresh_seeds
         or d["seed_verification"]["disjoint"] is not True
     ):
         raise ValueError("Combat saved inference or fresh seed checks differ")
     if checkpoint is not None:
-        _, head = combat_checkpoint_parent(checkpoint)
-        binding = checkpoint["combat_policy_residual"]
+        if neural:
+            from spireshift.neural_combat import neural_checkpoint_parent
+
+            _, neural_head = neural_checkpoint_parent(checkpoint)
+            selected_head_id = neural_head.as_dict()["head_id"]
+            binding = checkpoint["neural_combat_policy"]
+            binding_config = d["neural_config"]
+        else:
+            _, head = combat_checkpoint_parent(checkpoint)
+            selected_head_id = head.as_dict()["head_id"]
+            binding = checkpoint["combat_policy_residual"]
+            binding_config = d["config"]
         if (
             d["model_id"] != checkpoint["model_id"]
-            or d["config"] != binding["config"]
+            or binding_config != binding["config"]
             or best != binding["selected_epoch"]
-            or d["selected_head_id"] != head.as_dict()["head_id"]
+            or d["selected_head_id"] != selected_head_id
             or (best > 0 and history[best - 1]["head_id"] != d["selected_head_id"])
         ):
             raise ValueError("Combat report selected head/checkpoint differs")

@@ -896,11 +896,17 @@ evangambit = [
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
+neural = [
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+]
 
 [package.dev-dependencies]
 dev = [
     { name = "jsonschema" },
     { name = "mypy" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.5.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "ruff" },
@@ -912,14 +918,16 @@ dev = [
 requires-dist = [
     { name = "gymnasium", marker = "extra == 'evangambit'", specifier = ">=1.2,<2" },
     { name = "numpy", marker = "extra == 'evangambit'", specifier = ">=2,<3" },
+    { name = "numpy", marker = "extra == 'neural'", specifier = ">=2,<3" },
     { name = "psutil", specifier = ">=6,<8" },
 ]
-provides-extras = ["evangambit"]
+provides-extras = ["neural", "evangambit"]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "jsonschema", specifier = ">=4.23" },
     { name = "mypy", specifier = ">=1.14" },
+    { name = "numpy", specifier = ">=2,<3" },
     { name = "pre-commit", specifier = ">=4.0" },
     { name = "pytest", specifier = ">=8.3" },
     { name = "ruff", specifier = ">=0.13" },
