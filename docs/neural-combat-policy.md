@@ -2,8 +2,8 @@
 
 [Issue #134](https://github.com/benyanc/spireshift/issues/134) starts with this bounded
 representation experiment. The owner completed source verification and all 40 training epochs
-on 2026-10-08. The saved candidate passes every unchanged validation check; gameplay confirmation
-has not run and accepted base-v2 remains unchanged.
+on 2026-10-08. The saved candidate passes every unchanged validation check. Its subsequent
+gameplay comparison has not established improvement; accepted base-v2 remains unchanged.
 
 ## Completed owner result
 
@@ -26,10 +26,11 @@ Cached model/report/recipe and resource verification passed without source re-au
 fitting or games. Both neural layers differ from initialization. There are still zero positive
 terminal-victory labels, no promotion and no foundation/adaptive readiness pass.
 
-**Next owner stage:** the [fresh neural gameplay comparison](neural-combat-confirmation.md)
-is implemented and its saved-artifact checks pass. Its guide gives one command for the reserved
-offsets 536–567: 32 simulated full-run attempts per model. Gameplay has not run and no new fitting
-is needed before this comparison.
+**Completed gameplay stage:** the [paired neural comparison](neural-combat-confirmation.md)
+saved all 64 attempts at offsets 536–567. Both models have zero wins or first-boss reaches.
+Base-v11 has two unsupported card-choice failures; the 30 completed pairs have one floor
+improvement, one regression and 28 ties. Next work captures and repairs those public menus,
+preserving this result and its inspected seed ownership. No further owner command is ready yet.
 
 ## Original owner training command (completed)
 
@@ -128,11 +129,12 @@ gradient; every audit denominator and original complete-run fold is retained.
 
 ## Later stages in #134
 
-After the owner result is reviewed, an eligible candidate can receive the separate frozen
-gameplay comparison at the original 128-CPU-second-per-run budget. Only actual separate-run
-benefit supports the next collection/teacher-label/train round. Existing on-policy collection,
-action guards and full-run rollouts accept the new checkpoint through the shared policy loader.
-No new collection framework is needed.
+The first gameplay comparison is complete at the original 128-CPU-second-per-run budget and
+has not established benefit. Repair the encountered public-menu coverage before relying on
+neural full-run collection. Then freeze a testable lesson-quality or coverage intervention and
+evaluate it separately; repeating the same fit is not an evidence-based next experiment.
+Existing collection, action guards and full-run rollouts use the shared checkpoint loader, so
+no new collection framework is needed.
 
 The first round is the saved-data representation pilot. Later recipes must bind their own
 sources and resource budgets before launch. Review the direction after at most three frozen

@@ -4,11 +4,14 @@ Updated 2026-10-08. This is the current order of work; GitHub holds the detailed
 criteria and historical evidence. The owner launches and monitors all sustained collection,
 training, simulations and evaluations. Planning updates do not start experiments.
 
-**Current handoff:** the owner completed the [compact neural combat pilot](neural-combat-policy.md).
-Base-v11 selects eligible epoch 7 and passes all saved-data checks; it has not played new games
-or been promoted. Its [separate gameplay comparison](neural-combat-confirmation.md) is now
-implemented and checked. The owner runs the guide's one command for 32 reserved development
-seeds per model. #134 remains open for gameplay evidence and the later learning cycle.
+**Current handoff:** the owner completed the [compact neural combat pilot](neural-combat-policy.md)
+and its [paired gameplay comparison](neural-combat-confirmation.md). Base-v11 shows no clear
+playing benefit: zero wins or first-boss reaches, with two unsupported card-choice failures.
+The 30 completed pairs have one floor improvement, one regression and 28 ties. Base-v2 stays
+accepted. Next, capture the two failing public menus in a bounded owner-run diagnosis, repair
+their handling and failure classification, then review a separately versioned comparison before
+another learning round. No next sustained command is ready yet; do not rerun the completed
+comparison to retry its failures. #134 remains open for this repair and the later learning cycle.
 
 ## Goal and current position
 
@@ -17,21 +20,25 @@ thinking effort. The primary objective remains **terminal full-run victory proba
 fixed whole-run computation budget**. A strong inexpensive base player comes first.
 
 The framework for collecting lessons, training, replaying and comparing players exists. Playing
-strength remains weak: the latest comparison produced zero wins and zero first-boss reaches for
-both models across 32 runs each. Base-v10 did not improve over accepted base-v2 and is not promoted.
-The subsequent public diagnosis verified all 64 replays without failures or mismatches.
+strength remains weak: the latest neural comparison produced zero wins and zero first-boss
+reaches for both models across 32 attempted runs each. The candidate completed 30; its other two
+attempts stopped at unsupported card-choice menus and remain in the original denominator.
+Earlier base-v10 also failed to establish improvement; its public diagnosis verified all 64
+replays without failures or mismatches.
 
 Base-v2 is a sparse feature-based learned scorer. The recent combat adjustments are small
 feature-based corrections. The compact neural combat candidate is now trained, with shared
-public card properties and a trainable hidden layer; separate gameplay testing is pending.
-Saved-label improvement has not yet established better gameplay. The next
-work must measure actual separate-run progress, using the existing infrastructure.
+public card properties and a trainable hidden layer. Its first gameplay comparison is complete
+and has not established improvement. Saved-label improvement does not establish better play.
+After the menu repair, further neural work needs a frozen, testable lesson-quality or coverage
+intervention rather than repeated fitting of the same lessons.
 
 ## Current priorities
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Next | Owner runs the implemented fresh paired neural gameplay comparison. Review actual gameplay before subsequent bounded learning rounds. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Next | Capture and repair the two unsupported neural card-choice menus; classify future failures accurately. Preserve the original result and version any corrective comparison as inspected development evidence. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Then | Freeze a bounded neural improvement round with better or broader action lessons and separate gameplay evaluation. Review the completed pilot before spending more training or teacher compute. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
 | When needed by that recipe | Fix the remaining hidden-world resampling compatibility issue before relying on the affected search path for labels. | [#105](https://github.com/benyanc/spireshift/issues/105) |
 | Foundation milestone | Establish repeatable useful gameplay progress; then obtain wins and credible run-value/risk estimates. Preserve the frozen readiness gate and keep improving strategic choices as well as combat. | [#78](https://github.com/benyanc/spireshift/issues/78), readiness contract [#5](https://github.com/benyanc/spireshift/issues/5), [#46](https://github.com/benyanc/spireshift/issues/46) |
 | After the foundation | Integrate full-run learned search and compare it against ordinary search at equal compute. | [#27](https://github.com/benyanc/spireshift/issues/27), [#28](https://github.com/benyanc/spireshift/issues/28), [#7](https://github.com/benyanc/spireshift/issues/7) |

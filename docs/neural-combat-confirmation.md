@@ -1,10 +1,58 @@
 # Fresh neural combat gameplay comparison
 
-[Issue #134](https://github.com/benyanc/spireshift/issues/134) now has a trained, eligible
-base-v11 neural combat candidate. This comparison is implemented and its saved-artifact checks
-pass. Gameplay has not run. The owner launches and monitors the next stage.
+[Issue #134](https://github.com/benyanc/spireshift/issues/134) completed its first owner-run
+neural gameplay comparison on 2026-10-08. Saved verification passes, but no playing benefit is
+established and two neural attempts fail. Base-v11 remains unpromoted; base-v2 stays accepted.
 
-## Run this one next command
+## Completed owner result
+
+All 64 planned attempts were saved. Each model keeps its original 32-seed denominator:
+
+| Result | Neural base-v11 | Accepted base-v2 |
+| --- | --- | --- |
+| Full-run wins | 0/32 | 0/32 |
+| First-boss reaches / Act 1 clears | 0 / 0 | 0 / 0 |
+| Completed terminal losses | 30 | 32 |
+| Failed attempts | 2 | 0 |
+
+On the **30 completed pairs**, one candidate reaches a higher floor, one a lower floor and 28
+tie. Their mean floor difference is zero. The separate completed-run means (6.766667 candidate,
+6.84375 reference) use different seed populations and are not a matched comparison. There are
+25 paired action-trace changes, which do not establish a beneficial or causal change.
+
+The candidate stops at seeds **686 and 689** with
+`ValueError: Open card selection is not a supported combat action space`, after 74 and 94
+completed transitions respectively. Their public progress records show floors 6 and 8, without
+terminal outcomes. Both remain failures and non-victories. The public combat layout currently
+supports upgrade-in-hand and hand-transform selections only; these errors identify a selection
+coverage limitation, but the exact menu subtype is not saved in the failed cases.
+
+The report labels these failures `runtime_error`, so its `unsupported_public_combat_runs: 0`
+does **not** mean every encountered menu is supported. The classification matches the phrases
+`unsupported` or `not supported`, missing this error's `not a supported` wording. Future handling
+needs explicit classification; the original cases/report must remain immutable.
+
+The owner job used **34.938 wall / 34.315 CPU seconds**, 163,184,640 bytes peak resident memory,
+64 attempted trajectories, 5,464 completed transitions and zero search simulations. It hit no
+cap. Resource status is `failed`, exit code 1, because two attempts failed; all planned results
+were still preserved. Both arms have zero CPU-budget/cycle/decision-limit/fallback uses. These
+small development results do not prove policy equivalence or establish victory-value readiness.
+
+- Comparison: `sha256:15532ba993803cfc737ca2bac0e9e0f4665d3297b5a0d7dd26412ae543e850df`.
+- Resources: `sha256:ac8749154a818d3643f0d1e2ba94ea5681fd1a8b678632b6b8d80f23e0b3669b`.
+
+Cached comparison/source/case validation and resource verification passed without games,
+predictions, fitting or teacher-source audit. Foundation and adaptive-controller readiness remain
+false. These seeds are now inspected development evidence.
+
+**Next work:** implement a bounded public-menu diagnosis for the two failures, repair the
+identified action spaces and failure accounting, then version any corrective comparison
+separately. No automatic parent fallback, retraining, new cohort or promotion follows. A repair
+does not erase this result or make these seeds fresh again. The later learning cycle still needs
+better or broader action lessons; this pilot has not demonstrated that more epochs on unchanged
+lessons would improve play. There is no next owner command ready yet.
+
+## Original owner comparison command (completed)
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/confirm-neural-combat-policy-v1.sh
@@ -18,7 +66,7 @@ there is no fitting, search, collection, automatic extra cohort or follow-up exp
 The outer caps are **30 minutes wall time, 10,000 CPU seconds, 8 GB memory and 1 GB output**.
 These are limits, not a measured runtime estimate. Both models receive the original **128 CPU
 seconds per run** and 4,096-decision safety limit. Numerical-library thread pools are limited
-to one. Share the final summary and resource report before the next experiment.
+to one. The original comparison is complete; rerunning only verifies/displays its saved result.
 
 ## Frozen models and seed ownership
 
