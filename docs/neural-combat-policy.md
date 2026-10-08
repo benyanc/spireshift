@@ -1,10 +1,37 @@
 # Compact neural combat pilot
 
 [Issue #134](https://github.com/benyanc/spireshift/issues/134) starts with this bounded
-representation experiment. Implementation is ready; actual source verification and training
-are for the owner. No production fitting, new games or automatic follow-up have run.
+representation experiment. The owner completed source verification and all 40 training epochs
+on 2026-10-08. The saved candidate passes every unchanged validation check; gameplay confirmation
+has not run and accepted base-v2 remains unchanged.
 
-## Run this one next command
+## Completed owner result
+
+Base-v11 selects epoch 7. Epochs 8–40 exceed the frozen combat-drift limit; the selection rule
+keeps the best eligible earlier epoch rather than changing that limit. The owner job used
+94.448 wall / 79.184 CPU seconds, 1,131,315,200 bytes peak resident memory and 3,889,394 bytes
+output, without a cap. It ran zero games, simulations and transitions.
+
+Original development validation contains 69 combat states from 24 complete runs (244 reliable
+comparisons across 21 signal runs). Weighted comparison accuracy changes from 0.760828 to
+0.762043, soft pair loss from 0.686691 to 0.671336, and auxiliary regret from 0.003378 to
+0.003365. Only two of those 69 chosen actions change; all 135 non-combat predictions remain
+identical. These are saved-lesson metrics, not win rates or fresh-game evidence.
+
+- Model: `sha256:8f7d86ab9b5bb066e6e010e8977a71da3925f197e907f7a9bf2c4495e4c09b5d`.
+- Training report: `sha256:38eda1dbb76055d133f46e938c97401b48f348b411789aaf19eed4e25e710959`.
+- Resource report: `sha256:ae52e58c01ffa86e81f01b5d3e51a58f42cc55b1c321d58e187f6a6fb8701767`.
+
+Cached model/report/recipe and resource verification passed without source re-audit, predictions,
+fitting or games. Both neural layers differ from initialization. There are still zero positive
+terminal-victory labels, no promotion and no foundation/adaptive readiness pass.
+
+**Next owner stage:** the [fresh neural gameplay comparison](neural-combat-confirmation.md)
+is implemented and its saved-artifact checks pass. Its guide gives one command for the reserved
+offsets 536–567: 32 simulated full-run attempts per model. Gameplay has not run and no new fitting
+is needed before this comparison.
+
+## Original owner training command (completed)
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-neural-combat-policy-v1.sh

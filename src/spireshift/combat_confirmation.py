@@ -1,4 +1,4 @@
-"""Frozen fresh-development pairing for an eligible public combat residual."""
+"""Frozen fresh-development pairing for an eligible linear or neural combat policy."""
 
 from __future__ import annotations
 
@@ -173,7 +173,6 @@ def load_confirmation_policies(
     config = CombatConfirmationConfig.from_mapping(config.document)
     d = config.document
     root = project_root.resolve()
-    recipe = load_combat_policy_config(_safe_child(root, d["training_config_path"]))
     candidate = d["candidate"]
     reference = d["reference"]
     cp = load_production_model_checkpoint(_safe_child(root, candidate["checkpoint_path"]))
@@ -185,12 +184,44 @@ def load_confirmation_policies(
         _safe_child(root, reference["report_path"]), checkpoint=parent
     )
     resource = load_resource_report(_safe_child(root, candidate["resource_path"]))
-    f = recipe.foundation.document
-    fresh = recipe.document["fresh_confirmation"]
+    training_path = _safe_child(root, d["training_config_path"])
+    if report.get("schema_version") == "production-model-training-report-v10":
+        from spireshift.neural_combat import load_neural_combat_config
+
+        neural = load_neural_combat_config(training_path)
+        training_document = neural.document
+        f = neural.data.foundation.document
+        fresh = neural.document["fresh_confirmation"]
+        maximum_decisions = neural.data.document["fresh_confirmation"]["max_decisions_per_run"]
+        report_recipe_matches = (
+            report["neural_config"] == training_document
+            and report["config"] == neural.data.document
+        )
+        # The neural pilot inspected the preceding linear comparison. Check its compact
+        # identity/seed inventory too; never replay diagnostic or teacher cases here.
+        source = neural.document["diagnosis"]
+        diagnosis = json.loads(_safe_child(root, source["path"]).read_text())
+        _identified(diagnosis, "report_id")
+        inspected = source["inspected_seeds"]
+        if (
+            diagnosis["report_id"] != source["report_id"]
+            or diagnosis["summary"]["analysis_integrity_pass"] is not True
+            or sorted({case["seed"] for case in diagnosis["cases"]}) != inspected
+            or not set(inspected) <= set(split.seeds(SplitName.TRAIN)[: fresh["run_offset"]])
+            or set(inspected) & set(d["seeds"])
+        ):
+            raise ValueError("Neural confirmation diagnosis differs or overlaps fresh seeds")
+    else:
+        recipe = load_combat_policy_config(training_path)
+        training_document = recipe.document
+        f = recipe.foundation.document
+        fresh = recipe.document["fresh_confirmation"]
+        maximum_decisions = fresh["max_decisions_per_run"]
+        report_recipe_matches = report["config"] == training_document
     verification = report["seed_verification"]
     if (
-        recipe.document["config_id"] != d["training_config_id"]
-        or report["config"] != recipe.document
+        training_document["config_id"] != d["training_config_id"]
+        or not report_recipe_matches
         or cp["model_id"] != candidate["model_id"]
         or report["report_id"] != candidate["report_id"]
         or parent["model_id"] != reference["model_id"]
@@ -206,7 +237,7 @@ def load_confirmation_policies(
         or d["seeds"] != fresh["seeds"]
         or d["run_offset"] != fresh["run_offset"]
         or d["prior_train_prefix_stop"] != fresh["prior_train_prefix_stop"]
-        or d["maximum_decisions_per_run"] != fresh["max_decisions_per_run"]
+        or d["maximum_decisions_per_run"] != maximum_decisions
         or d["objective"] != objective.as_dict()
         or d["objective"] != f["objective"]
         or resource["report_id"] != candidate["resource_report_id"]

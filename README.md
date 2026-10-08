@@ -260,8 +260,12 @@ improvement rounds under [#134](https://github.com/benyanc/spireshift/issues/134
 base-v2 is a sparse feature-based learned scorer. A
 [16,448-parameter neural combat candidate](docs/neural-combat-policy.md) now implements shared
 public card properties and nonlinear state/action interactions, with the same frozen quality
-gates. Its first saved-data training stage is ready for the owner; production fitting and gameplay
-confirmation have not run. All non-combat choices and original value/risk heads remain frozen.
+gates. The owner completed its first saved-data training stage: base-v11 selects eligible epoch 7
+and passes all validation checks, changing two of 69 saved combat choices. Separate gameplay
+confirmation has not run and no candidate is promoted. The
+[fresh paired neural comparison](docs/neural-combat-confirmation.md) is implemented and ready
+for the owner: 32 reserved development seeds per model under the original whole-run CPU budget.
+All non-combat choices and original value/risk heads remain frozen.
 The [genetic/hybrid experiment](https://github.com/benyanc/spireshift/issues/135) is deferred.
 The owner alone launches and monitors sustained tasks.
 

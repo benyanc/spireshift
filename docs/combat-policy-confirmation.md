@@ -31,10 +31,12 @@ output, exit zero and no cap hit. Counters reconcile to **64 attempts, zero simu
 games. These all-zero wins do not prove equivalence or either model's competence; the uncertainty
 intervals remain broad. No terminal-positive labels, model promotion or readiness follows.
 
-The sole next owner task is the [bounded combat replay diagnosis](combat-confirmation-diagnosis.md)
-in [issue #133](https://github.com/benyanc/spireshift/issues/133). It inspects the same cohort,
-which is now development evidence and must never be called fresh again. No extra training,
-seed search or comparison rerun is needed before that diagnosis.
+The [bounded combat replay diagnosis](combat-confirmation-diagnosis.md) in
+[issue #133](https://github.com/benyanc/spireshift/issues/133) subsequently verified this entire
+cohort, which is now inspected development evidence. The owner then trained an eligible neural
+candidate under #134. The current owner task is its
+[separate neural comparison](neural-combat-confirmation.md) on the newly reserved cohort.
+This base-v10 comparison remains archived; its seeds cannot be called fresh again.
 
 ## Saved comparison and original execution protocol
 
