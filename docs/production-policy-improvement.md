@@ -182,6 +182,11 @@ separate confirmation. It starts no game attempts or automatic follow-up. The ow
 on frozen non-combat choices; the saved head is empty and rejected/no-update. Passing validation
 describes the unchanged parent only. [Issue #132](https://github.com/benyanc/spireshift/issues/132)
 corrects the gate scope under recipe v3 and preserves all numerical safeguards and the absolute
-quality requirement on original validation. Its single new owner command trains into base-v10;
-the rejected artifacts and unused fresh seeds remain preserved. No candidate has been promoted;
-terminal wins and adaptive-controller readiness remain absent.
+quality requirement on original validation. The corrected owner run completed 40 epochs in
+86.824 wall seconds, selected eligible epoch 20 into base-v10 and passed all safeguards.
+The original validation combat loss improved, while directional accuracy dipped within tolerance;
+three combat choices changed and all 135 non-combat predictions remain identical.
+The next owner task is the [paired fresh comparison](combat-policy-confirmation.md), with frozen
+candidate/reference identities, 32 reserved seeds and equal 128-CPU-second budgets. The rejected
+artifacts remain preserved. No candidate has been promoted; terminal wins and adaptive-controller
+readiness remain absent.

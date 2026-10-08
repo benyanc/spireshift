@@ -404,6 +404,30 @@ def write_experiment_metrics(metrics: ExperimentMetrics) -> Path | None:
     return path
 
 
+def update_experiment_metrics(metrics: ExperimentMetrics) -> Path | None:
+    """Atomically advance known counters in a metrics file created by this job."""
+    configured = os.environ.get(EXPERIMENT_METRICS_ENV)
+    if configured is None:
+        return None
+    path = Path(configured).expanduser().resolve()
+    if not path.is_file():
+        raise ValueError("Progress metrics must first be initialized exclusively")
+    previous = ExperimentMetrics.from_path(path)
+    for field in ("trajectories", "simulations", "transitions"):
+        old, new = getattr(previous, field), getattr(metrics, field)
+        if old is None or new is None or new < old:
+            raise ValueError("Progress metrics cannot erase or decrease measured counters")
+    if (previous.gpu_seconds, previous.energy_kwh) != (metrics.gpu_seconds, metrics.energy_kwh):
+        raise ValueError("Counter progress must preserve other resource measurements")
+    temporary = path.with_name(f".{path.name}.{uuid4().hex}.tmp")
+    try:
+        write_exclusive_json(temporary, metrics.as_dict())
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return path
+
+
 def verify_resource_report(value: object) -> tuple[str, ...]:
     errors: list[str] = []
     document = _mapping(value, "resource report")

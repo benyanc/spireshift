@@ -37,11 +37,12 @@ Both audit scripts now only display their completed cached results. No audit rer
 The owner subsequently completed combat training, but its 40 epochs all failed an impossible
 absolute selection gate: frozen non-combat choices alone exceed the required error limit.
 Base-v9 retained an empty correction. The [combat policy training guide](combat-policy-training.md)
-records that result and gives one new owner command for recipe v3, which corrects the scope and
-retains the numerical limits and original validation quality gate. It rechecks the diagnostic
-against source data before fitting into base-v10. The reserved fresh comparison remains blocked
-on an eligible result. Data coverage permits this pilot; full-run competence, terminal-value
-readiness and adaptive effort are still unproven. Base-v2 remains accepted.
+records that rejection and the completed recipe-v3 scope correction. The corrected owner run
+reconciled the proof against source data, selected eligible epoch 20 into base-v10 and passed
+every safeguard, with no games run. The [reserved fresh comparison](combat-policy-confirmation.md)
+is implemented and awaits the owner launch. Data coverage and improved saved-lesson scores
+permit this pilot; full-run competence, terminal-value readiness and adaptive effort are still
+unproven. Base-v2 remains accepted.
 
 ## What changed
 

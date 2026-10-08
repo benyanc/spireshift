@@ -245,11 +245,13 @@ audit v2: all 529 combat states bind, with zero failures and all frozen coverage
 The owner completed 40 epochs of combat training, but every update failed an overall selection
 check that was impossible for a combat-only change: frozen non-combat errors alone exceeded its
 absolute error limit. Base-v9 retained the original policy. [Issue #132](https://github.com/benyanc/spireshift/issues/132)
-corrects this scope in a new version, retaining all numerical safeguards and the absolute check
-on original validation. The [frozen combat policy training guide](docs/combat-policy-training.md)
-gives one owner command into base-v10; no game attempts follow. The rejected result is preserved
-and the 32 fresh comparison seeds remain unused. Base-v2 remains accepted. There is no demonstrated
-full-run win-rate improvement.
+completed the corrected owner experiment, retaining all numerical safeguards and the absolute
+check on original validation. Base-v10 selects epoch 20 and passes every safeguard, with three
+changed combat choices and all 135 non-combat predictions unchanged on saved validation data.
+The [training guide](docs/combat-policy-training.md) archives its eligible result. The next task is
+one [fresh paired game comparison](docs/combat-policy-confirmation.md) against base-v2 on the
+32 reserved development seeds, under the same CPU budget. The owner alone starts that job.
+Base-v2 remains accepted; no full-run win-rate improvement has been demonstrated.
 
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,

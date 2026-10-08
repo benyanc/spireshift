@@ -162,6 +162,7 @@ from spireshift.resource_tracking import (
     load_cost_rates,
     load_resource_report,
     run_tracked_command,
+    update_experiment_metrics,
     verify_resource_report,
     write_experiment_metrics,
 )
@@ -1126,6 +1127,19 @@ def build_parser() -> argparse.ArgumentParser:
     combat_gate_audit.add_argument("--project-root", type=Path, default=Path("."))
     combat_gate_audit.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
     combat_gate_audit.add_argument("--output", type=Path, required=True)
+    for confirmation_name in ("confirm-combat-policy", "show-combat-confirmation"):
+        confirmation_parser = model_commands.add_parser(
+            confirmation_name, help="Run or verify the frozen fresh combat-policy comparison"
+        )
+        confirmation_parser.add_argument("config", type=Path)
+        confirmation_parser.add_argument("--project-root", type=Path, default=Path("."))
+        confirmation_parser.add_argument("--split-manifest", type=Path, required=True)
+        confirmation_parser.add_argument("--manifest", type=Path, required=True)
+        confirmation_parser.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+        confirmation_parser.add_argument("--output-dir", type=Path, required=True)
+        if confirmation_name == "confirm-combat-policy":
+            confirmation_parser.add_argument("--upstream-root", type=Path, required=True)
+            confirmation_parser.add_argument("--resume", action="store_true")
     trajectory_search = model_commands.add_parser(
         "search-run-trajectories",
         help="Run exact-replay train-only beam search over coherent run trajectories",
@@ -2542,6 +2556,126 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _publish_json(args.output, combat_gate_report)
                 _emit_json(combat_gate_report, None)
                 return 0
+            if args.model_command in ("confirm-combat-policy", "show-combat-confirmation"):
+                from spireshift.combat_confirmation import (
+                    load_combat_confirmation_config,
+                    load_confirmation_policies,
+                )
+
+                confirmation_config = load_combat_confirmation_config(args.config)
+                confirmation_document = confirmation_config.document
+                confirmation_split = load_split_manifest(args.split_manifest)
+                confirmation_ruleset = load_patch_manifest(args.manifest).ruleset_identity()
+                confirmation_is_cached = args.model_command == "show-combat-confirmation"
+                if not confirmation_is_cached:
+                    write_experiment_metrics(
+                        ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                    )
+                print(
+                    "Checking frozen models and reserved seed metadata; no source-case audit.",
+                    flush=True,
+                )
+                candidate_policy, frozen_policy = load_confirmation_policies(
+                    config=confirmation_config,
+                    project_root=args.project_root,
+                    split=confirmation_split,
+                    ruleset=confirmation_ruleset,
+                    objective=load_objective(args.objective_config),
+                )
+                confirmation_report_path = args.output_dir / "production-policy-evaluation.json"
+                if confirmation_is_cached:
+                    confirmation_report = load_production_policy_evaluation(
+                        confirmation_report_path,
+                        model_id=candidate_policy.model_id,
+                        training_report_id=confirmation_document["candidate"]["report_id"],
+                        split_manifest=confirmation_split,
+                        reference_model_id=frozen_policy.model_id,
+                        reference_training_report_id=confirmation_document["reference"][
+                            "report_id"
+                        ],
+                    )
+                    if confirmation_report["confirmation_config"] != confirmation_document:
+                        raise ValueError("Saved confirmation belongs to a different experiment")
+                    confirmation_successful = True
+                else:
+                    if confirmation_report_path.exists():
+                        raise FileExistsError(
+                            "Combat confirmation is complete; display its saved result instead"
+                        )
+                    confirmation_backend = load_evangambit_backend(
+                        args.upstream_root,
+                        args.manifest,
+                        max_episode_steps=confirmation_document["maximum_decisions_per_run"] + 1,
+                    )
+                    print(
+                        "Playing the fixed paired comparison with one worker. "
+                        "No automatic follow-up.",
+                        flush=True,
+                    )
+
+                    def record_confirmation_activity(runs: int, transitions: int) -> None:
+                        update_experiment_metrics(
+                            ExperimentMetrics(
+                                trajectories=runs, simulations=0, transitions=transitions
+                            )
+                        )
+
+                    confirmation_result = run_production_policy_evaluation(
+                        environment_factory=confirmation_backend.factory,
+                        ruleset=confirmation_ruleset,
+                        learned_policy=candidate_policy,
+                        split_manifest=confirmation_split,
+                        training_report_id=confirmation_document["candidate"]["report_id"],
+                        reference_policy=frozen_policy,
+                        reference_training_report_id=confirmation_document["reference"][
+                            "report_id"
+                        ],
+                        seeds=confirmation_document["seeds"],
+                        workers=1,
+                        maximum_decisions_per_run=confirmation_document[
+                            "maximum_decisions_per_run"
+                        ],
+                        cycle_repetition_threshold=confirmation_document[
+                            "cycle_repetition_threshold"
+                        ],
+                        liveness_tail_length=confirmation_document["liveness_tail_length"],
+                        no_op_fallback_threshold=confirmation_document["no_op_fallback_threshold"],
+                        output_directory=args.output_dir,
+                        partition=SplitName.TRAIN,
+                        resume=args.resume,
+                        confirmation=confirmation_config,
+                        progress=lambda completed, total: print(
+                            f"Combat comparison: {completed}/{total} game attempts saved.",
+                            flush=True,
+                        ),
+                        record_activity=record_confirmation_activity,
+                    )
+                    confirmation_report = confirmation_result.report
+                    confirmation_successful = confirmation_result.successful
+                    update_experiment_metrics(
+                        ExperimentMetrics(
+                            trajectories=confirmation_result.new_runs,
+                            simulations=0,
+                            transitions=confirmation_result.new_transitions,
+                        )
+                    )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "report_id": confirmation_report["report_id"],
+                        "config_id": confirmation_document["config_id"],
+                        "model_id": candidate_policy.model_id,
+                        "reference_model_id": frozen_policy.model_id,
+                        "summary": confirmation_report["summary"],
+                        "decision": confirmation_report["decision"],
+                        "claim_scope": confirmation_report["claim_scope"],
+                        "games_this_command": 0
+                        if confirmation_is_cached
+                        else confirmation_result.new_runs,
+                    },
+                    None,
+                )
+                return 0 if confirmation_successful else 1
             if args.model_command in {"train-combat-policy", "show-combat-policy-training"}:
                 from spireshift.combat_policy import (
                     load_combat_policy_config,

@@ -1,10 +1,11 @@
 # Frozen public combat policy training
 
 [Issue #130](https://github.com/benyanc/spireshift/issues/130) records the completed, rejected
-base-v9 experiment. [Issue #132](https://github.com/benyanc/spireshift/issues/132) corrects an
-impossible selection check in a new experiment version. The next owner task is one training
-run into base-v10. [Issue #131](https://github.com/benyanc/spireshift/issues/131) remains blocked
-on an eligible, reviewed result before any fresh gameplay comparison.
+base-v9 experiment. [Issue #132](https://github.com/benyanc/spireshift/issues/132) completed the
+corrected owner training into base-v10. It selected an eligible epoch-20 combat adjustment and
+passed every validation safeguard. This is saved-lesson evidence, not demonstrated playing
+strength. The next owner task is the separate [fresh paired comparison](combat-policy-confirmation.md)
+tracked by [issue #131](https://github.com/benyanc/spireshift/issues/131). No retraining is needed.
 
 The owner completed combat audit v2: all 529 combat states bind, with zero failures. Its frozen
 coverage checks pass. Reliable learnable comparisons span 35 fitting and 13 selection seeds
@@ -58,33 +59,36 @@ tolerances, optimizer, source data, folds and unused fresh-run reservation do no
 does not reinterpret the rejected v9 result as successful or reconstruct discarded epoch weights.
 The improved recorded combat scores are auxiliary evidence, not demonstrated playing strength.
 
-## Run this one next command
+## Completed owner training
 
-The owner launches and monitors this job:
+The owner ran `scripts/train-combat-policy-v2.sh` on October 7, 2026 (Toronto time). It verified
+the saved corpus and reconciled the gate proof before fitting. All **40 epochs** completed in
+**86.824 wall / 70.110 CPU seconds**, with zero game attempts, simulations or transitions.
+Epoch **20** was selected; status is `requires_fresh_confirmation`, and every original and
+combat validation check passes. No checkpoint was promoted.
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-combat-policy-v2.sh
-```
+On train-selection combat lessons, soft pair loss improved from **0.691820304228 to
+0.663125910126**, directional accuracy from **0.732289549621 to 0.805421339858**, and mean
+run auxiliary regret from **0.001518543956 to 0.001400767759**. Choices changed on 26/126 states.
+These are development scores under auxiliary labels.
 
-It first checks public validation screen compatibility, verifies the saved evidence and reconciles
-the diagnostic against the source examples. It then trains one combat adjustment for 40 epochs,
-checks the original validation data and saves a separate base-v10 candidate. No game attempts, hidden-world resampling,
-fresh collection or evaluation follow. The trainer prints progress every ten epochs. Share the
-final summary and resource report before the separate fresh-run comparison is implemented/launched.
+On the original validation combat lessons, pair loss improved from **0.686691295139 to
+0.669815816415**. Directional accuracy dipped from **0.760828195585 to 0.753058136507** within
+the unchanged tolerance; auxiliary regret stayed **0.003378004808**. Only **3/69 combat choices**
+changed, and all **135 non-combat predictions** and original model heads remain identical.
+Thus the result is an eligible bounded update; it does not establish a stronger game-playing agent.
 
-One worker; caps of **30 minutes wall time, 3,600 CPU seconds, 8 GB memory and 1 GB output**.
-Allow several minutes, including re-reading the approximately 1 GB source corpus. The previous
-40-epoch job took about 88 seconds on the owner's Mac; the corrected version has not been timed.
-These caps are safeguards, not an ETA.
-Interrupted attempts keep separate resource reports. Completed reruns check/display only the
-saved checkpoint and report; they do not re-audit the corpus or retrain. Partial model outputs
-are preserved and cause a clear stop instead of overwriting them.
+Saved under `artifacts/models/sts2-v0.107.1-base-v10/`:
 
-Results are saved under `artifacts/models/sts2-v0.107.1-base-v10/` as `checkpoint.json` and
-`training-report.json`. Resources use numbered `artifacts/resources/combat-policy-base-v10-train-v2-attempt-*.json`
-paths. Accepted base-v2 stays unchanged. No automatic promotion or adaptive-controller fitting occurs.
-The old v1 script only displays the completed v9 result. Use the new v2 script above for the
-scope correction. Failed preflights also record explicit zero game counters.
+- Checkpoint: `sha256:79aa82b8e1109fd968875ff2e025e2320461e3eb5027d5fa414d64afaf382705`.
+- Training report: `sha256:5a70198d8bb9dd1100d7d78cfe55eb8e7f4e2c839efa430b882958ff03f2e56b`.
+- Completed resource report: `artifacts/resources/combat-policy-base-v10-train-v2-attempt-1.json`,
+  `sha256:2fdc83ae868ddf691b032c4f03dd074ae18c95bcd81325e88b53b2efae29727d`.
+
+Peak resident memory was 1,155,366,912 bytes and output 3,549,066 bytes; exit zero, no cap hit.
+Both training scripts now only check/display their respective completed results. No source audit
+or retraining is needed. The rejected base-v9 remains preserved; accepted base-v2 remains unchanged.
+The sole next owner command is in [the fresh comparison guide](combat-policy-confirmation.md).
 
 ## Frozen experiment
 
@@ -157,7 +161,9 @@ starting-study cohort. Seed metadata from all seven prior inventories is checked
 These are fresh development confirmation runs, not a new final-test claim. The comparison will
 pair frozen base-v2 with the eligible frozen candidate, policy-only, with the same ObjectiveSpec
 whole-run budget of 128 CPU seconds and a 4,096-decision safety cap. Model identities must be
-fixed before any confirmation game is played. It needs a separate owner command and implementation.
+fixed before any confirmation game is played. The separate implementation now binds these
+identities to a frozen comparison plan; the owner has not launched its games. See
+[combat-policy-confirmation.md](combat-policy-confirmation.md) for the sole next command.
 
 Report terminal full-run victories first, with failures, unsupported decisions and truncations
 in the original denominator; then paired floors, act milestones, latency and resource use.
