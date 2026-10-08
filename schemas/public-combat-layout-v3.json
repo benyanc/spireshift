@@ -1,0 +1,123 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "evangambit-public-combat-layout-v3"
+    },
+    "patch_id": {
+      "type": "string"
+    },
+    "ruleset_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "observation_size": {
+      "const": 682
+    },
+    "hand_offset": {
+      "const": 8
+    },
+    "hand_slots": {
+      "const": 10
+    },
+    "card_slot_size": {
+      "const": 4
+    },
+    "potion_offset": {
+      "const": 48
+    },
+    "potion_slots": {
+      "const": 6
+    },
+    "potion_slot_size": {
+      "const": 2
+    },
+    "player_buff_offset": {
+      "const": 60
+    },
+    "player_buff_slots": {
+      "const": 10
+    },
+    "enemy_offset": {
+      "const": 80
+    },
+    "enemy_slots": {
+      "const": 6
+    },
+    "enemy_slot_size": {
+      "const": 15
+    },
+    "enemy_buff_slots": {
+      "const": 5
+    },
+    "secondary_intent_offset": {
+      "const": 170
+    },
+    "selection_kind_offset": {
+      "const": 183
+    },
+    "orb_capacity_offset": {
+      "const": 225
+    },
+    "orb_offset": {
+      "const": 226
+    },
+    "orb_slots": {
+      "const": 10
+    },
+    "incoming_offset": {
+      "const": 256
+    },
+    "incoming_slots": {
+      "const": 5
+    },
+    "selection_count_offset": {
+      "const": 184
+    },
+    "selection_offset": {
+      "const": 185
+    },
+    "selection_slots": {
+      "const": 10
+    },
+    "upgrade_selection_kind": {
+      "const": 15
+    },
+    "transform_hand_selection_kind": {
+      "const": 20
+    }
+  },
+  "required": [
+    "schema_version",
+    "patch_id",
+    "ruleset_manifest_id",
+    "observation_size",
+    "hand_offset",
+    "hand_slots",
+    "card_slot_size",
+    "potion_offset",
+    "potion_slots",
+    "potion_slot_size",
+    "player_buff_offset",
+    "player_buff_slots",
+    "enemy_offset",
+    "enemy_slots",
+    "enemy_slot_size",
+    "enemy_buff_slots",
+    "secondary_intent_offset",
+    "selection_kind_offset",
+    "orb_capacity_offset",
+    "orb_offset",
+    "orb_slots",
+    "incoming_offset",
+    "incoming_slots",
+    "selection_count_offset",
+    "selection_offset",
+    "selection_slots",
+    "upgrade_selection_kind",
+    "transform_hand_selection_kind"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/public-combat-layout-v3.json"
+}

@@ -2537,6 +2537,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                     for p in (combat_checkpoint_path, combat_report_path)
                 ):
                     raise FileExistsError("Saved combat training output exists; display it instead")
+                # This command never initializes a game, including failed data preflights.
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
                 print(
                     "Verifying saved combat lessons and reserved seeds; no games will run.",
                     flush=True,
@@ -2559,9 +2563,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _publish_json(combat_checkpoint_path, combat_training_result.checkpoint)
                 _publish_json(combat_report_path, combat_training_result.report)
-                write_experiment_metrics(
-                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
-                )
                 _emit_json(summarize_combat_policy_training(combat_training_result.report), None)
                 return 0
             if args.model_command in {"audit-combat-foundation", "show-combat-foundation"}:

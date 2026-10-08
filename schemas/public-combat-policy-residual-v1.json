@@ -13,11 +13,19 @@
     "encoder_id": {
       "enum": [
         "evangambit-public-card-target-v1",
-        "evangambit-public-card-target-v2"
+        "evangambit-public-card-target-v2",
+        "evangambit-public-card-target-v3"
       ]
     },
     "layout": {
-      "$ref": "combat-foundation-audit-config-v1.json#/properties/layout"
+      "oneOf": [
+        {
+          "$ref": "combat-foundation-audit-config-v1.json#/properties/layout"
+        },
+        {
+          "$ref": "public-combat-layout-v3.json"
+        }
+      ]
     },
     "vector_dimension": {
       "type": "integer",

@@ -18,6 +18,8 @@ from spireshift.combat_features import (
     ENCODER_ID,
     SELECTION_ENCODER_ID,
     SELECTION_LAYOUT_SCHEMA,
+    TRANSFORM_ENCODER_ID,
+    TRANSFORM_LAYOUT_SCHEMA,
     CombatLayout,
     bind_public_combat,
 )
@@ -45,6 +47,9 @@ MOCK_RULESET = MockSpireEnvironment.ruleset
 LAYOUT = CombatLayout(MOCK_RULESET.patch_id, MOCK_RULESET.manifest_id)
 SELECTION_LAYOUT = CombatLayout(
     MOCK_RULESET.patch_id, MOCK_RULESET.manifest_id, SELECTION_LAYOUT_SCHEMA
+)
+TRANSFORM_LAYOUT = CombatLayout(
+    MOCK_RULESET.patch_id, MOCK_RULESET.manifest_id, TRANSFORM_LAYOUT_SCHEMA
 )
 
 
@@ -98,6 +103,13 @@ def _upgrade_screen() -> dict[str, Any]:
     vector = public["observation_vector"]
     vector[13] = 0
     vector[183:193] = [15, 2, *vector[8:16]]
+    return public
+
+
+def _transform_screen() -> dict[str, Any]:
+    public = _public()
+    vector = public["observation_vector"]
+    vector[183:193] = [20, 2, *vector[8:16]]
     return public
 
 
@@ -365,6 +377,76 @@ def test_ordinary_combat_semantics_and_old_feature_namespace_are_preserved() -> 
     wrong = LAYOUT.as_dict() | {"selection_offset": 185}
     with pytest.raises(ValueError):
         CombatLayout.from_mapping(wrong)
+
+
+def test_transform_selection_binds_visible_upgraded_cards_and_ignores_target_decoration() -> None:
+    state = _transform_screen()
+    original = bind_public_combat(_rep(state, (_action(0), _action(1, 0))), TRANSFORM_LAYOUT)
+    assert original is not None
+    assert original.encoder_id == TRANSFORM_ENCODER_ID
+    assert [b["kind"] for b in original.bindings] == ["select_transform_hand_to_minion_strike"] * 2
+    assert original.bindings[1]["card"]["upgraded"] == 1
+    assert all(b["target"] is None for b in original.bindings)
+    assert original.context["selection"]["kind_id"] == 20
+    moved = copy.deepcopy(state)
+    v = moved["observation_vector"]
+    v[8:16] = v[12:16] + v[8:12]
+    v[185:193] = v[189:193] + v[185:189]
+    reordered = bind_public_combat(
+        _rep(moved, (_action(1, 1, "renamed-A"), _action(0, name="renamed-B"))),
+        TRANSFORM_LAYOUT,
+    )
+    assert reordered is not None
+    assert original.tokens == reordered.tokens
+    assert original.vectors(8192) == reordered.vectors(8192)
+    aliases = bind_public_combat(
+        _rep(state, (_action(0, 0), _action(0, 1), _action(1))), TRANSFORM_LAYOUT
+    )
+    assert aliases is not None and aliases.vectors(8192)[0] == aliases.vectors(8192)[1]
+    # Neither the source card nor its generated upgrade flag is in this observation.
+    assert not any("generated" in t for tokens in original.tokens for t in tokens)
+    for old in (LAYOUT, SELECTION_LAYOUT):
+        with pytest.raises(ValueError, match="selection"):
+            bind_public_combat(_rep(state, (_action(0), _action(1))), old)
+
+
+@pytest.mark.parametrize("broken", ["count", "foreign", "omitted_choice", "skip", "kind"])
+def test_transform_selection_cannot_hide_malformed_or_unsupported_choices(broken: str) -> None:
+    state = _transform_screen()
+    actions: tuple[LegalAction, ...] = (_action(0), _action(1))
+    if broken == "count":
+        state["observation_vector"][184] = 3
+    elif broken == "foreign":
+        state["observation_vector"][185] = 99
+    elif broken == "omitted_choice":
+        actions = (_action(0),)
+    elif broken == "skip":
+        actions = (*actions, _action(2))
+    else:
+        state["observation_vector"][183] = 16  # Its draw-pile candidates are not observable.
+    with pytest.raises(ValueError):
+        bind_public_combat(_rep(state, actions), TRANSFORM_LAYOUT)
+
+
+@pytest.mark.parametrize("selection", [False, True])
+def test_transform_extension_preserves_every_existing_token_and_vector(selection: bool) -> None:
+    rep = _rep(_upgrade_screen(), (_action(0), _action(1, 0))) if selection else _rep()
+    previous = bind_public_combat(rep, SELECTION_LAYOUT)
+    extended = bind_public_combat(rep, TRANSFORM_LAYOUT)
+    assert previous is not None and extended is not None
+    assert previous.bindings == extended.bindings
+    assert previous.tokens == extended.tokens
+    assert previous.feature_digests() == extended.feature_digests()
+    assert previous.vectors(8192) == extended.vectors(8192)
+    assert CombatLayout.from_mapping(TRANSFORM_LAYOUT.as_dict()) == TRANSFORM_LAYOUT
+
+
+def test_residual_extension_does_not_change_the_archived_foundation_audit_contract() -> None:
+    audit = copy.deepcopy(_selection_config().document)
+    audit["layout"] = TRANSFORM_LAYOUT.as_dict()
+    audit["analysis"]["encoder_id"] = TRANSFORM_ENCODER_ID
+    with pytest.raises(ValueError, match="original v1/v2 layouts"):
+        CombatFoundationConfig.from_mapping(_identified(audit))
 
 
 def test_upgrade_state_remains_in_the_audit_and_legacy_reports_keep_their_encoder(

@@ -18,7 +18,14 @@
       "const": "sparse-anchored-public-combat-residual-v1"
     },
     "config": {
-      "$ref": "combat-policy-training-config-v1.json"
+      "oneOf": [
+        {
+          "$ref": "combat-policy-training-config-v1.json"
+        },
+        {
+          "$ref": "combat-policy-training-config-v2.json"
+        }
+      ]
     },
     "selected_epoch": {
       "type": "integer",

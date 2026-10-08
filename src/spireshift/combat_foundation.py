@@ -9,7 +9,12 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any, cast
 
-from spireshift.combat_features import CombatLayout, bind_public_combat
+from spireshift.combat_features import (
+    LAYOUT_SCHEMA,
+    SELECTION_LAYOUT_SCHEMA,
+    CombatLayout,
+    bind_public_combat,
+)
 from spireshift.core.manifest import RulesetIdentity, manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.models import _dot, _exact_keys, _integer, _mapping, _quantize_artifact
@@ -73,6 +78,8 @@ class CombatFoundationConfig:
             raise ValueError("Unsupported combat foundation audit config")
         ObjectiveSpec.from_mapping(_mapping(d["objective"], "objective"))
         layout = CombatLayout.from_mapping(d["layout"])
+        if layout.schema_version not in {LAYOUT_SCHEMA, SELECTION_LAYOUT_SCHEMA}:
+            raise ValueError("Archived combat audit supports only its original v1/v2 layouts")
         for key in ("model_id", "training_report_id", "dataset_id", "split_manifest_id"):
             v = d[key]
             if not isinstance(v, str) or len(v) != 71 or not v.startswith("sha256:"):

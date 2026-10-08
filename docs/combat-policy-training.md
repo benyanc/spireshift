@@ -9,6 +9,19 @@ coverage checks pass. Reliable learnable comparisons span 35 fitting and 13 sele
 (327 and 130 pairs). This permits a small training experiment. All saved continuations still
 lose; the audit establishes usable lessons, not good gameplay.
 
+The first owner training attempt stopped after 79.224 seconds, before any optimizer step or
+model output. Original validation state `validation-seed-000225-combat-024` asks which hand card
+to transform into Minion Strike (public selection kind 20). The prior decoder supported ordinary
+combat and in-hand upgrades only. The failed resource report is preserved as attempt 1,
+`sha256:d31f46c9e76d2717ea09d49e19ef6bcd1e4554f5fd370176a388c179c523b32c`.
+This is a screen-support bug, not a measured training rejection or gameplay result.
+
+The corrected residual layout v3 supports that public choice explicitly. A bounded compatibility
+check of the saved validation inputs passed **69/69 combat screens** (68 ordinary, one transform)
+in 0.562 seconds, with zero teacher batches opened, labels analyzed, optimizer steps or games.
+The owner trainer now performs this check before the large source audit. No screen is removed,
+no threshold or training setting is changed, and the completed foundation audit v2 stays intact.
+
 ## Run this one next command
 
 The owner launches and monitors this job:
@@ -17,7 +30,8 @@ The owner launches and monitors this job:
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-combat-policy-v1.sh
 ```
 
-It verifies the saved evidence, trains one combat adjustment for 40 epochs, checks the original
+It first checks public validation screen compatibility, verifies the saved evidence, trains one
+combat adjustment for 40 epochs, checks the original
 validation data and saves a separate base-v9 candidate. No game attempts, hidden-world resampling,
 fresh collection or evaluation follow. The trainer prints progress every ten epochs. Share the
 final summary and resource report before the separate fresh-run comparison is implemented/launched.
@@ -32,11 +46,16 @@ are preserved and cause a clear stop instead of overwriting them.
 Results are saved under `artifacts/models/sts2-v0.107.1-base-v9/` as `checkpoint.json` and
 `training-report.json`. Resources use numbered `artifacts/resources/combat-policy-base-v9-train-v1-attempt-*.json`
 paths. Accepted base-v2 stays unchanged. No automatic promotion or adaptive-controller fitting occurs.
+The same command now uses the corrected recipe and chooses attempt 2 when attempt 1 is present;
+the failed report is never overwritten. Failed preflights also record explicit zero game counters.
 
 ## Frozen experiment
 
-Configuration: `configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v1.json`,
-`sha256:0a2b3411f1c41bb9cb59ecc0a23cf6f20b0b583e1d88bf51a277e1c31b962b3f`.
+Configuration: `configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v2.json`,
+`sha256:ff6d4537526d831c555e3f3a9d8da7ebad8aaaf3f3ff4fcab7b94df2fa40d122`.
+The v1 recipe remains archived with the failed attempt. Recipe v2 changes only the versioned
+residual layout: source datasets, original audit, optimizer, complete-run folds, selection rule,
+safety limits and reserved fresh-run cohort are identical.
 It binds the completed owner audit
 `sha256:57666476aa7c42ce76cb46a44e9eb422ab7bfb21abf4b752e8cb0110ab3948fd`,
 the full original audit configuration, accepted base-v2 checkpoint/report, composed train corpus,
@@ -46,11 +65,17 @@ No game engine is initialized.
 
 The model adds a sparse combat-only correction using the versioned public card/target features.
 Its 8,192 features encode visible card identities, upgrades, enchantments, potions, end turn,
-enemy targets and public combat context. It supports the admitted ordinary combat and public
-UpgradeInHand selection layouts. Other selection kinds fail explicitly and must remain failed
+enemy targets and public combat context. It supports the admitted ordinary combat, public
+UpgradeInHand and TransformHandToMinionStrike selection layouts. A transform action chooses
+the visible card rather than playing it. Historical enemy-target decorations are ignored by
+the pinned selection resolver and do not become features. The generated upgrade flag and source
+card are not observable and are not inferred. Other selection kinds fail explicitly and must remain failed
 runs in subsequent evaluation; no unsupported choice silently becomes a parent-policy choice.
 Card cost/damage and exact rules are not inferred from an identifier. This is a bounded linear
 residual, not a completed mechanics model or a proven strong agent.
+Layout v3 preserves every existing v2 token and its hashed vector coordinates; only the newly
+supported selection receives new semantic tokens. Its independent encoder/layout identity
+records the compatibility extension without changing the archived audit's feature space.
 
 The original policy weights and all value/risk/floor heads remain byte-for-byte unchanged.
 Non-combat predictions remain identical. The parent policy may still depend on execution indices;

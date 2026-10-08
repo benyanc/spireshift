@@ -160,7 +160,14 @@
       "type": "object",
       "properties": {
         "config": {
-          "$ref": "combat-policy-training-config-v1.json"
+          "oneOf": [
+            {
+              "$ref": "combat-policy-training-config-v1.json"
+            },
+            {
+              "$ref": "combat-policy-training-config-v2.json"
+            }
+          ]
         },
         "head": {
           "$ref": "public-combat-policy-residual-v1.json"

@@ -4,7 +4,7 @@ cd "$(dirname "$0")/.."
 
 # Owner-run only. One saved-data verification/training job; no gameplay or follow-up.
 spireshift_combat_root=artifacts/models/sts2-v0.107.1-base-v9
-spireshift_combat_config=configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v1.json
+spireshift_combat_config=configs/combat-policy/sts2-v0.107.1-base-v2-combat-residual-v2.json
 spireshift_combat_checkpoint="$spireshift_combat_root/checkpoint.json"
 spireshift_combat_report="$spireshift_combat_root/training-report.json"
 for spireshift_result in "$spireshift_combat_checkpoint" "$spireshift_combat_report"; do

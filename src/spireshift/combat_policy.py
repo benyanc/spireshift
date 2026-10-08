@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import math
 from collections import Counter, defaultdict
@@ -11,7 +12,8 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, cast
 
-from spireshift.combat_features import CombatLayout, bind_public_combat
+from spireshift.bootstrap_teacher import CurriculumStateSet, load_bootstrap_state_set_document
+from spireshift.combat_features import TRANSFORM_LAYOUT_SCHEMA, CombatLayout, bind_public_combat
 from spireshift.combat_foundation import (
     CombatFoundationConfig,
     _pair_evidence,
@@ -44,12 +46,13 @@ from spireshift.production_models import (
     _safe_child,
     production_model_from_checkpoint,
 )
-from spireshift.representations import CompositionalModelInput
+from spireshift.representations import CompositionalModelInput, model_input_from_mapping
 from spireshift.splits import SplitManifest, SplitName
 from spireshift.starting_repeatability import _prior_inventory, load_starting_repeatability_config
 from spireshift.trajectory_policy import _drift, _id, _identified, _safe
 
 CONFIG_SCHEMA = "combat-policy-training-config-v1"
+TRANSFORM_CONFIG_SCHEMA = "combat-policy-training-config-v2"
 HEAD_SCHEMA = "public-combat-policy-residual-v1"
 CHECKPOINT_SCHEMA = "production-model-checkpoint-v9"
 REPORT_SCHEMA = "production-model-training-report-v9"
@@ -87,11 +90,26 @@ class CombatPolicyConfig:
     @classmethod
     def from_mapping(cls, value: object) -> CombatPolicyConfig:
         d = copy.deepcopy(_mapping(value, "combat policy recipe"))
-        _exact_keys(d, CONFIG_FIELDS, "combat policy recipe")
+        fields = (
+            CONFIG_FIELDS | {"residual_layout"}
+            if d.get("schema_version") == TRANSFORM_CONFIG_SCHEMA
+            else CONFIG_FIELDS
+        )
+        _exact_keys(d, fields, "combat policy recipe")
         _identified(d, "config_id")
-        if d["schema_version"] != CONFIG_SCHEMA:
+        if d["schema_version"] not in {CONFIG_SCHEMA, TRANSFORM_CONFIG_SCHEMA}:
             raise ValueError("Unsupported combat policy recipe")
         foundation = CombatFoundationConfig.from_mapping(d["foundation_config"])
+        if d["schema_version"] == TRANSFORM_CONFIG_SCHEMA:
+            residual = CombatLayout.from_mapping(d["residual_layout"])
+            source = CombatLayout.from_mapping(foundation.document["layout"])
+            if (
+                residual.schema_version != TRANSFORM_LAYOUT_SCHEMA
+                or residual.patch_id != source.patch_id
+                or residual.ruleset_manifest_id != source.ruleset_manifest_id
+                or source.encoder_id != "evangambit-public-card-target-v2"
+            ):
+                raise ValueError("Combat residual layout extension differs from audited provenance")
         for key in ("foundation_report_path", "validation_path"):
             _relative_path(d[key])
         for key in ("foundation_report_id", "validation_dataset_id"):
@@ -201,6 +219,12 @@ class CombatPolicyConfig:
     def foundation(self) -> CombatFoundationConfig:
         return CombatFoundationConfig.from_mapping(self.document["foundation_config"])
 
+    @property
+    def residual_layout(self) -> CombatLayout:
+        return CombatLayout.from_mapping(
+            self.document.get("residual_layout", self.foundation.document["layout"])
+        )
+
 
 def load_combat_policy_config(path: Path) -> CombatPolicyConfig:
     return CombatPolicyConfig.from_mapping(json.loads(path.read_text()))
@@ -294,6 +318,99 @@ class CombatPolicyInputs:
     seed_verification: dict[str, Any]
 
 
+def preflight_combat_validation_bindings(
+    *, config: CombatPolicyConfig, project_root: Path
+) -> dict[str, Any]:
+    """Check public screen compatibility before reading linked rollout evidence.
+
+    Case hashes cover the entire saved record, but no target is interpreted and no
+    teacher batch is opened here. This check does not replace the full owner audit.
+    """
+    config = CombatPolicyConfig.from_mapping(config.document)
+    path = _safe_child(project_root.resolve(), config.document["validation_path"])
+    document = _mapping(json.loads(path.read_text()), "combat validation dataset")
+    _identified(document, "dataset_id")
+    state_set = load_bootstrap_state_set_document(document.get("state_set"))
+    if (
+        document["dataset_id"] != config.document["validation_dataset_id"]
+        or not isinstance(state_set, CurriculumStateSet)
+        or state_set.partition != "validation"
+        or state_set.ruleset_manifest_id != config.residual_layout.ruleset_manifest_id
+        or state_set.split_manifest_id != config.foundation.document["split_manifest_id"]
+        or document.get("objective") != config.foundation.document["objective"]
+    ):
+        raise ValueError("Combat binding preflight differs from frozen validation provenance")
+    references = document.get("cases")
+    if not isinstance(references, list) or len(references) != len(state_set.cases):
+        raise ValueError("Combat binding preflight case denominator differs")
+    failures = []
+    kinds: Counter[int] = Counter()
+    combat_states = 0
+    bound_states = 0
+    for expected, raw in zip(state_set.cases, references, strict=True):
+        reference = _mapping(raw, "validation case reference")
+        if reference.get("state_id") != expected.state_id:
+            raise ValueError("Combat binding preflight case order differs")
+        if expected.decision_type.value != "combat":
+            continue
+        combat_states += 1
+        try:
+            relative = _relative_path(reference.get("path"))
+            payload = _safe_child(path.parent, relative).read_bytes()
+            if hashlib.sha256(payload).hexdigest() != reference.get("sha256"):
+                raise ValueError("Saved case digest differs")
+            case = _mapping(json.loads(payload), "combat validation case")
+            _identified(case, "case_id")
+            if (
+                case.get("case_id") != reference.get("case_id")
+                or case.get("state_id") != expected.state_id
+                or case.get("status") != "completed"
+            ):
+                raise ValueError("Saved case identity or completion differs")
+            record = _mapping(case.get("record"), "combat validation record")
+            _identified(record, "record_id")
+            representation = model_input_from_mapping(record.get("model_input"))
+            if (
+                record.get("state_id") != expected.state_id
+                or record.get("run_seed") != expected.run_seed
+                or record.get("decision_index") != expected.decision_index
+                or record.get("decision_type") != "combat"
+                or representation.decision_type != "combat"
+                or record.get("source_state_hash") != expected.expected_state_hash
+                or representation.source_state_hash != expected.expected_state_hash
+                or len(representation.candidates) != expected.expected_legal_actions
+            ):
+                raise ValueError("Saved public combat coordinates differ")
+            bound = bind_public_combat(representation, config.residual_layout)
+            if bound is None or bound.source_action_ids != tuple(
+                c.source_action_id for c in representation.candidates
+            ):
+                raise ValueError("Public combat candidate alignment differs")
+            kinds[bound.context.get("selection", {}).get("kind_id", 0)] += 1
+            bound_states += 1
+        except (OSError, ValueError) as error:
+            failures.append(f"{expected.state_id}: {error}")
+    if failures:
+        raise ValueError(
+            f"Combat validation binding preflight failed ({len(failures)}/{combat_states}): "
+            + "; ".join(failures[:8])
+        )
+    return {
+        "scope": "public_validation_screen_compatibility_only",
+        "dataset_id": document["dataset_id"],
+        "encoder_id": config.residual_layout.encoder_id,
+        "source_records": len(references),
+        "combat_states": combat_states,
+        "bound_combat_states": bound_states,
+        "binding_failures": 0,
+        "selection_kind_counts": {str(k): v for k, v in sorted(kinds.items())},
+        "teacher_batches_opened": 0,
+        "labels_analyzed": 0,
+        "optimizer_steps": 0,
+        "games_replayed": 0,
+    }
+
+
 def load_combat_policy_inputs(
     *,
     config: CombatPolicyConfig,
@@ -333,6 +450,7 @@ def load_combat_policy_inputs(
     excluded.update(s for inv in inventories for s in inv["complete_run_seeds"])
     if excluded & set(fresh["seeds"]):
         raise ValueError("Combat confirmation overlaps previously fitted or inspected runs")
+    preflight = preflight_combat_validation_bindings(config=config, project_root=root)
     foundation = load_combat_foundation_inputs(
         config=config.foundation,
         project_root=root,
@@ -377,6 +495,7 @@ def load_combat_policy_inputs(
             "excluded_seed_count": len(excluded),
             "fresh_seeds": fresh["seeds"],
             "disjoint": True,
+            "validation_binding_preflight": preflight,
         },
     )
 
@@ -388,7 +507,7 @@ def _records(
 ) -> tuple[CombatRecord, ...]:
     result = []
     foundation = config.foundation.document
-    layout = CombatLayout.from_mapping(foundation["layout"])
+    layout = config.residual_layout
     for item in examples:
         if item.decision_type != "combat":
             continue
@@ -636,7 +755,7 @@ def train_combat_policy_inputs(
     selected_epoch = 0
     best_loss = float(selection_baseline["weighted_soft_pair_loss"])
     history = []
-    layout = CombatLayout.from_mapping(foundation["layout"])
+    layout = config.residual_layout
     for epoch in range(1, recipe["epochs"] + 1):
         gradient = _gradient(fit, weights, recipe)
         norm = math.sqrt(sum(v * v for v in gradient.values()))
@@ -819,7 +938,7 @@ def combat_checkpoint_parent(value: object) -> tuple[dict[str, Any], CombatPolic
     config = CombatPolicyConfig.from_mapping(binding["config"])
     head = CombatPolicyHead.from_mapping(binding["head"])
     if (
-        head.layout.as_dict() != config.foundation.document["layout"]
+        head.layout.as_dict() != config.residual_layout.as_dict()
         or head.dimension != config.document["optimization"]["vector_dimension"]
         or not 0
         <= _integer(binding["selected_epoch"], "selected epoch")

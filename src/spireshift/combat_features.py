@@ -14,6 +14,8 @@ ENCODER_ID = "evangambit-public-card-target-v1"
 LAYOUT_SCHEMA = "evangambit-public-combat-layout-v1"
 SELECTION_ENCODER_ID = "evangambit-public-card-target-v2"
 SELECTION_LAYOUT_SCHEMA = "evangambit-public-combat-layout-v2"
+TRANSFORM_ENCODER_ID = "evangambit-public-card-target-v3"
+TRANSFORM_LAYOUT_SCHEMA = "evangambit-public-combat-layout-v3"
 
 # These numbers describe the admitted, frozen observation, not a future engine version.
 # Source hashes and patch/ruleset bindings are checked by the owner data audit.
@@ -46,6 +48,7 @@ SELECTION_LAYOUT = {
     "selection_slots": 10,
     "upgrade_selection_kind": 15,
 }
+TRANSFORM_LAYOUT = {**SELECTION_LAYOUT, "transform_hand_selection_kind": 20}
 
 
 @dataclass(frozen=True, slots=True)
@@ -60,6 +63,8 @@ class CombatLayout:
             return ENCODER_ID
         if self.schema_version == SELECTION_LAYOUT_SCHEMA:
             return SELECTION_ENCODER_ID
+        if self.schema_version == TRANSFORM_LAYOUT_SCHEMA:
+            return TRANSFORM_ENCODER_ID
         raise ValueError("Unsupported public combat layout")
 
     @classmethod
@@ -69,6 +74,8 @@ class CombatLayout:
             pinned = PINNED_LAYOUT
         elif doc.get("schema_version") == SELECTION_LAYOUT_SCHEMA:
             pinned = SELECTION_LAYOUT
+        elif doc.get("schema_version") == TRANSFORM_LAYOUT_SCHEMA:
+            pinned = TRANSFORM_LAYOUT
         else:
             raise ValueError("Unsupported public combat layout")
         _exact_keys(doc, {"schema_version", "patch_id", "ruleset_manifest_id", *pinned}, "layout")
@@ -86,7 +93,13 @@ class CombatLayout:
             "schema_version": self.schema_version,
             "patch_id": self.patch_id,
             "ruleset_manifest_id": self.ruleset_manifest_id,
-            **(SELECTION_LAYOUT if self.encoder_id == SELECTION_ENCODER_ID else PINNED_LAYOUT),
+            **(
+                TRANSFORM_LAYOUT
+                if self.encoder_id == TRANSFORM_ENCODER_ID
+                else SELECTION_LAYOUT
+                if self.encoder_id == SELECTION_ENCODER_ID
+                else PINNED_LAYOUT
+            ),
         }
 
 
@@ -163,7 +176,13 @@ class CombatInput:
         for tokens in self.tokens:
             values: dict[int, float] = {}
             for token, amount in sorted(tokens.items()):
-                digest = hashlib.sha256(f"{self.encoder_id}|{token}".encode()).digest()
+                # v3 adds a new choice without changing any v2 token or vector coordinate.
+                namespace = (
+                    SELECTION_ENCODER_ID
+                    if self.encoder_id == TRANSFORM_ENCODER_ID
+                    else self.encoder_id
+                )
+                digest = hashlib.sha256(f"{namespace}|{token}".encode()).digest()
                 index = int.from_bytes(digest[:8], "big") % dimension
                 sign = 1 if digest[8] & 1 else -1
                 values[index] = values.get(index, 0.0) + sign * amount
@@ -206,8 +225,8 @@ def bind_public_combat(
         raise ValueError("Invalid actionable public player resources")
     selection_kind = vector[183]
     if selection_kind and (
-        layout.encoder_id != SELECTION_ENCODER_ID
-        or selection_kind != SELECTION_LAYOUT["upgrade_selection_kind"]
+        layout.encoder_id not in {SELECTION_ENCODER_ID, TRANSFORM_ENCODER_ID}
+        or selection_kind not in ({15, 20} if layout.encoder_id == TRANSFORM_ENCODER_ID else {15})
     ):
         raise ValueError("Open card selection is not a supported combat action space")
     for name, expected in (("player_hp", hp), ("player_max_hp", maximum)):
@@ -215,16 +234,17 @@ def bind_public_combat(
             raise ValueError("Public player fields differ from the combat vector")
     hand = _cards(vector, 8, 10)
     choices: tuple[dict[str, int], ...] = ()
-    if layout.encoder_id == SELECTION_ENCODER_ID:
+    if layout.encoder_id in {SELECTION_ENCODER_ID, TRANSFORM_ENCODER_ID}:
         selection_count = vector[184]
         choices = _cards(vector, 185, 10)
         if selection_kind:
             if not 1 <= selection_count <= 10 or len(choices) != selection_count:
-                raise ValueError("Public upgrade selection count/cards differ or exceed visibility")
-            if any(card["upgraded"] for card in choices) or (
-                Counter(manifest_identifier(card) for card in choices)
-                - Counter(manifest_identifier(card) for card in hand)
+                raise ValueError("Public card selection count/cards differ or exceed visibility")
+            if Counter(manifest_identifier(card) for card in choices) - Counter(
+                manifest_identifier(card) for card in hand
             ):
+                raise ValueError("Public selection choices are not visible cards in hand")
+            if selection_kind == 15 and any(card["upgraded"] for card in choices):
                 raise ValueError("Public upgrade choices are not unupgraded cards in hand")
         elif selection_count or choices:
             raise ValueError("Closed public selection carries choice count/cards")
@@ -325,9 +345,11 @@ def bind_public_combat(
         binding: dict[str, Any]
         if selection_kind:
             if index >= len(choices):
-                raise ValueError("Public upgrade selection has an outside/skip action")
+                raise ValueError("Public card selection has an outside/skip action")
             binding = {
-                "kind": "select_upgrade_card",
+                "kind": "select_upgrade_card"
+                if selection_kind == 15
+                else "select_transform_hand_to_minion_strike",
                 "card": choices[index],
                 "potion_id": None,
             }
@@ -350,7 +372,7 @@ def bind_public_combat(
             binding["target"] = enemies.get(target)
         bindings.append(binding)
     if selection_kind and {index for index, _ in seen} != set(range(len(choices))):
-        raise ValueError("Public upgrade action set omits a visible choice")
+        raise ValueError("Public card selection action set omits a visible choice")
     if not selection_kind and (len(hand), -1) not in seen:
         raise ValueError("Public combat action set is missing end turn")
     tokens = tuple(_tokens(binding, context) for binding in bindings)
