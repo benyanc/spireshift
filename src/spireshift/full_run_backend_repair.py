@@ -1,0 +1,416 @@
+"""Isolated, owner-built repair candidate; never automatically admit or train it."""
+
+from __future__ import annotations
+
+import fcntl
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import xml.etree.ElementTree as ET
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+from spireshift.core.manifest import PatchManifest, load_patch_manifest, manifest_identifier
+from spireshift.full_run_experience import atomic_json
+from spireshift.resource_tracking import EXPERIMENT_METRICS_ENV
+
+TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftFullRunCompletionTests.cs"
+TEST_CLASS = "SpireShiftFullRunCompletionTests"
+REMAINING_CHECKS = (
+    "expose_and_bind_all_public_combat_selection_candidates",
+    "bind_confirmation_and_selected_bundle_state",
+    "declare_actual_fixed_ascension_rules",
+    "validate_changed_act_boundaries_against_the_frozen_game",
+    "readmit_new_ruleset_before_a_new_training_recipe",
+)
+
+
+def _sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _git(root: Path, *arguments: str, environment: dict[str, str] | None = None) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(root), *arguments],
+        capture_output=True,
+        text=True,
+        check=False,
+        env=environment,
+    )
+    if result.returncode:
+        raise ValueError(f"Repair Git operation failed: {result.stderr.strip()}")
+    return result.stdout.strip()
+
+
+@dataclass(frozen=True)
+class RepairRecipe:
+    document: dict[str, Any]
+    root: Path
+    manifest: PatchManifest
+
+    def path(self, value: str) -> Path:
+        return (self.root / value).resolve()
+
+    @property
+    def candidate(self) -> Path:
+        return self.path(self.document["candidate_upstream"])
+
+    @property
+    def output(self) -> Path:
+        return self.path(self.document["output_dir"])
+
+
+def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
+    root = (root or Path.cwd()).resolve()
+    d = json.loads(path.read_text())
+    keys = {
+        "schema_version",
+        "base_upstream",
+        "base_revision",
+        "base_manifest",
+        "base_manifest_id",
+        "patch",
+        "regression_tests",
+        "engine_source",
+        "candidate_upstream",
+        "output_dir",
+        "runtime",
+        "resource_limits",
+        "automatic_training",
+        "automatic_admission",
+        "minimum_regression_tests",
+        "config_id",
+    }
+    if not isinstance(d, dict) or set(d) != keys:
+        raise ValueError("Unexpected backend repair configuration fields")
+    if d["schema_version"] != "full-run-backend-repair-config-v1" or d[
+        "config_id"
+    ] != manifest_identifier({k: v for k, v in d.items() if k != "config_id"}):
+        raise ValueError("Backend repair configuration identity differs")
+    if d["automatic_training"] is not False or d["automatic_admission"] is not False:
+        raise ValueError("A build candidate cannot authorize training or admission")
+    if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] != 9:
+        raise ValueError("Unsupported frozen backend repair scope")
+    for key in ("base_upstream", "candidate_upstream", "output_dir"):
+        p = (root / d[key]).resolve()
+        if not p.is_relative_to(root / "artifacts"):
+            raise ValueError("Backend repair checkouts and outputs must remain private artifacts")
+    private_paths = [
+        (root / d[k]).resolve() for k in ("base_upstream", "candidate_upstream", "output_dir")
+    ]
+    if any(
+        a.is_relative_to(b)
+        for i, a in enumerate(private_paths)
+        for j, b in enumerate(private_paths)
+        if i != j
+    ):
+        raise ValueError("Backend repair paths must be separate and cannot contain each other")
+    for key in ("patch", "regression_tests"):
+        entry = d[key]
+        if set(entry) != {"path", "sha256"} or _sha(root / entry["path"]) != entry["sha256"]:
+            raise ValueError(f"Backend repair {key} identity differs")
+    if set(d["engine_source"]) != {"path", "base_sha256", "repaired_sha256"}:
+        raise ValueError("Backend repair engine source fields differ")
+    limits = d["resource_limits"]
+    if set(limits) != {"wall_seconds", "cpu_seconds", "memory_bytes", "storage_bytes"} or any(
+        type(v) is not int or v <= 0 for v in limits.values()
+    ):
+        raise ValueError("Backend repair resource limits must be positive integers")
+    manifest = load_patch_manifest(root / d["base_manifest"])
+    if (
+        manifest.manifest_id != d["base_manifest_id"]
+        or manifest.engine.revision != d["base_revision"]
+    ):
+        raise ValueError("Backend repair base ruleset differs")
+    return RepairRecipe(d, root, manifest)
+
+
+def _identified(path: Path, body: dict[str, Any]) -> dict[str, Any]:
+    value = {**body, "report_id": manifest_identifier(body)}
+    if path.exists():
+        if json.loads(path.read_text()) != value:
+            raise ValueError(f"Existing repair result belongs to another source: {path}")
+    else:
+        atomic_json(path, value)
+    return value
+
+
+def _prepare(recipe: RepairRecipe) -> dict[str, Any]:
+    d, candidate = recipe.document, recipe.candidate
+    base = recipe.path(d["base_upstream"])
+    source = d["engine_source"]
+    if _git(base, "rev-parse", "HEAD") != d["base_revision"] or _git(base, "status", "--porcelain"):
+        raise ValueError("Pinned original checkout changed; it will not be modified")
+    if _sha(base / source["path"]) != source["base_sha256"]:
+        raise ValueError("Pinned original engine source changed")
+    if not candidate.exists():
+        candidate.parent.mkdir(parents=True, exist_ok=True)
+        _git(base, "worktree", "add", "--detach", str(candidate), d["base_revision"])
+    head = _git(candidate, "rev-parse", "HEAD")
+    changed_paths = {source["path"], TEST_DESTINATION}
+    if head == d["base_revision"]:
+        # An interrupted preparation may already have these exact two changes.
+        source_path = candidate / source["path"]
+        if _sha(source_path) == source["base_sha256"]:
+            _git(candidate, "apply", "--check", str(recipe.path(d["patch"]["path"])))
+            _git(candidate, "apply", str(recipe.path(d["patch"]["path"])))
+        target = candidate / TEST_DESTINATION
+        if target.exists() and _sha(target) != d["regression_tests"]["sha256"]:
+            raise ValueError("Candidate regression tests differ; refusing to replace them")
+        if not target.exists():
+            shutil.copyfile(recipe.path(d["regression_tests"]["path"]), target)
+        if _sha(source_path) != source["repaired_sha256"]:
+            raise ValueError("Candidate engine does not match the exact repair")
+        expected_names = _git(candidate, "diff", "--name-only", "HEAD").splitlines()
+        untracked = _git(candidate, "ls-files", "--others", "--exclude-standard").splitlines()
+        if (set(expected_names) | set(untracked)) - changed_paths:
+            raise ValueError("Candidate has unrelated changes")
+        _git(candidate, "add", "--", *sorted(changed_paths))
+        environment = {
+            **os.environ,
+            "GIT_AUTHOR_DATE": "2026-10-08T00:00:00+00:00",
+            "GIT_COMMITTER_DATE": "2026-10-08T00:00:00+00:00",
+        }
+        _git(
+            candidate,
+            "-c",
+            "user.name=SpireShift",
+            "-c",
+            "user.email=spireshift@localhost",
+            "-c",
+            "commit.gpgsign=false",
+            "commit",
+            "-m",
+            f"SpireShift full-run completion repair {d['config_id']}",
+            environment=environment,
+        )
+    if _git(candidate, "status", "--porcelain"):
+        raise ValueError("Candidate checkout contains unrelated modifications")
+    revision = _git(candidate, "rev-parse", "HEAD")
+    if (
+        _git(candidate, "rev-parse", "HEAD^") != d["base_revision"]
+        or set(_git(candidate, "diff", "--name-only", "HEAD^", "HEAD").splitlines())
+        != changed_paths
+    ):
+        raise ValueError("Candidate revision is not the isolated two-file repair")
+    if (
+        _sha(candidate / source["path"]) != source["repaired_sha256"]
+        or _sha(candidate / TEST_DESTINATION) != d["regression_tests"]["sha256"]
+    ):
+        raise ValueError("Candidate source differs from the frozen repair")
+    return _identified(
+        recipe.output / "preparation.json",
+        {
+            "schema_version": "full-run-backend-repair-preparation-v1",
+            "config_id": d["config_id"],
+            "base_revision": d["base_revision"],
+            "candidate_revision": revision,
+            "candidate_tree": _git(candidate, "rev-parse", "HEAD^{tree}"),
+            "patch_sha256": d["patch"]["sha256"],
+            "regression_tests_sha256": d["regression_tests"]["sha256"],
+            "native_build_started": False,
+            "training_allowed": False,
+            "admitted": False,
+        },
+    )
+
+
+def prepare_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
+    recipe.output.mkdir(parents=True, exist_ok=True)
+    with (recipe.output / "owner.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return _prepare(recipe)
+
+
+def read_regression_result(path: Path, minimum: int) -> dict[str, int]:
+    try:
+        document = ET.parse(path).getroot()
+    except (OSError, ET.ParseError) as exc:
+        raise ValueError(f"Cannot read native regression results: {path}") from exc
+    counters = next((e for e in document.iter() if e.tag.rsplit("}", 1)[-1] == "Counters"), None)
+    if counters is None:
+        raise ValueError("Native regression report has no test counters")
+    summary = {
+        k: int(counters.attrib.get(k, "0")) for k in ("total", "executed", "passed", "failed")
+    }
+    if (
+        summary["passed"] < minimum
+        or summary["passed"] != summary["total"]
+        or summary["executed"] != summary["total"]
+        or summary["failed"]
+    ):
+        raise ValueError("Required native completion regressions did not all pass")
+    results = [e for e in document.iter() if e.tag.rsplit("}", 1)[-1] == "UnitTestResult"]
+    if len(results) != summary["total"] or any(
+        TEST_CLASS not in e.attrib.get("testName", "") or e.attrib.get("outcome") != "Passed"
+        for e in results
+    ):
+        raise ValueError("Native regression results do not belong to the completion repair")
+    return summary
+
+
+def _run_logged(command: list[str], directory: Path, log: Path) -> None:
+    with log.open("x") as handle:
+        result = subprocess.run(
+            command, cwd=directory, stdout=handle, stderr=subprocess.STDOUT, check=False
+        )
+    if result.returncode:
+        tail = "\n".join(log.read_text(errors="replace").splitlines()[-20:])
+        raise ValueError(f"Native repair stage failed; saved log: {log}\n{tail}")
+
+
+def _pending_manifest(
+    recipe: RepairRecipe, prepared: dict[str, Any], library: Path
+) -> dict[str, Any]:
+    body = recipe.manifest.body_dict()
+    revision = prepared["candidate_revision"]
+    engine = dict(recipe.manifest.engine.as_dict())
+    engine.update(revision=revision, digest={"algorithm": "git-commit-sha1", "value": revision})
+    body["engine"] = engine
+    body["admission_status"] = "pending_conformance"
+    mechanics = []
+    for artifact in recipe.manifest.mechanics:
+        item = artifact.as_dict()
+        if artifact.kind == "simulator-rule-source":
+            item.update(
+                version=revision, digest={"algorithm": "git-commit-sha1", "value": revision}
+            )
+        if artifact.kind == "compiled-simulator-library":
+            item.update(
+                version=revision,
+                digest={"algorithm": "sha256", "value": _sha(library)},
+                size_bytes=library.stat().st_size,
+            )
+        mechanics.append(item)
+    body["mechanics"] = mechanics
+    return PatchManifest.from_mapping({**body, "manifest_id": manifest_identifier(body)}).as_dict()
+
+
+def show_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
+    value: dict[str, Any] = json.loads((recipe.output / "build-report.json").read_text())
+    if (
+        value["report_id"]
+        != manifest_identifier({k: v for k, v in value.items() if k != "report_id"})
+        or value["config_id"] != recipe.document["config_id"]
+    ):
+        raise ValueError("Saved backend repair report identity differs")
+    manifest_path = recipe.output / "candidate-manifest.json"
+    manifest = load_patch_manifest(manifest_path)
+    if (
+        manifest.manifest_id != value["candidate_manifest_id"]
+        or manifest.admission_status != "pending_conformance"
+    ):
+        raise ValueError("Saved repair candidate cannot be treated as admitted")
+    if _sha(recipe.candidate / "out/Sts2Emulator.dylib") != value["native_sha256"]:
+        raise ValueError("Saved repair binary differs from its report")
+    if _sha(recipe.output / value["test_report"]) != value["test_report_sha256"]:
+        raise ValueError("Saved native regression results changed")
+    if _git(recipe.candidate, "rev-parse", "HEAD") != value["candidate_revision"] or _git(
+        recipe.candidate, "status", "--porcelain"
+    ):
+        raise ValueError("Saved native candidate source changed")
+    return value
+
+
+def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
+    if not os.environ.get(EXPERIMENT_METRICS_ENV):
+        raise ValueError(
+            "Only the owner-run repair script launches native builds with resource caps"
+        )
+    recipe.output.mkdir(parents=True, exist_ok=True)
+    with (recipe.output / "owner.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        prepared = _prepare(recipe)
+        if (recipe.output / "build-report.json").exists():
+            return show_backend_repair(recipe)
+        attempts = recipe.output / "build-attempts"
+        attempts.mkdir(exist_ok=True)
+        n = 1
+        while (attempts / f"attempt-{n:04d}").exists():
+            n += 1
+        attempt = attempts / f"attempt-{n:04d}"
+        attempt.mkdir()
+        print(
+            "Checking nine synthetic act-ending and reward regressions; no player training.",
+            flush=True,
+        )
+        _run_logged(
+            [
+                "dotnet",
+                "test",
+                "src/Sts2Emulator.Tests/Sts2Emulator.Tests.csproj",
+                "-c",
+                "Release",
+                "--filter",
+                f"FullyQualifiedName~{TEST_CLASS}",
+                "--logger",
+                "trx;LogFileName=completion.trx",
+                "--results-directory",
+                str(attempt),
+                "-m:2",
+            ],
+            recipe.candidate,
+            attempt / "regression.log",
+        )
+        regression_path = attempt / "completion.trx"
+        counts = read_regression_result(
+            regression_path, recipe.document["minimum_regression_tests"]
+        )
+        print(
+            "Building the separate native candidate. Existing simulator remains intact.", flush=True
+        )
+        _run_logged(
+            [
+                "dotnet",
+                "publish",
+                "src/Sts2Emulator/Sts2Emulator.csproj",
+                "-c",
+                "Release",
+                "-r",
+                recipe.document["runtime"],
+                "--self-contained",
+                "-o",
+                "out",
+                "-m:2",
+            ],
+            recipe.candidate,
+            attempt / "publish.log",
+        )
+        library = recipe.candidate / "out/Sts2Emulator.dylib"
+        if not library.is_file() or not library.stat().st_size:
+            raise ValueError("Native repair publish did not produce its library")
+        # Build tools must not rewrite checked-in rules or generated game data.
+        if _git(recipe.candidate, "status", "--porcelain"):
+            raise ValueError("Native build modified tracked candidate source")
+        manifest = _pending_manifest(recipe, prepared, library)
+        manifest_path = recipe.output / "candidate-manifest.json"
+        if manifest_path.exists():
+            if json.loads(manifest_path.read_text()) != manifest:
+                raise ValueError("Existing candidate manifest belongs to a different native build")
+        else:
+            atomic_json(manifest_path, manifest)
+        return _identified(
+            recipe.output / "build-report.json",
+            {
+                "schema_version": "full-run-backend-repair-build-v1",
+                "config_id": recipe.document["config_id"],
+                "preparation_id": prepared["report_id"],
+                "candidate_revision": prepared["candidate_revision"],
+                "candidate_manifest_id": manifest["manifest_id"],
+                "native_sha256": _sha(library),
+                "native_size_bytes": library.stat().st_size,
+                "regression_tests": counts,
+                "test_report": str(regression_path.relative_to(recipe.output)),
+                "test_report_sha256": _sha(regression_path),
+                "admitted": False,
+                "training_allowed": False,
+                "checkpoint_promoted": False,
+                "automatic_followup": False,
+                "games_played": 0,
+                "claim_scope": "synthetic_regressions_and_native_build_not_live_game_conformance",
+                "remaining_checks": list(REMAINING_CHECKS),
+            },
+        )

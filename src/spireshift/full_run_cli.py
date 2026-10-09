@@ -8,6 +8,12 @@ import os
 from pathlib import Path
 from typing import Any
 
+from spireshift.full_run_backend_repair import (
+    build_backend_repair,
+    load_repair_recipe,
+    prepare_backend_repair,
+    show_backend_repair,
+)
 from spireshift.full_run_evolution import (
     inspect_evolution,
     load_evolution_config,
@@ -61,11 +67,30 @@ def add_full_run_parser(commands: Any) -> None:
     show.add_argument("output_dir", type=Path)
     model = sub.add_parser("inspect-model", help="Inspect a unified model without playing")
     model.add_argument("checkpoint", type=Path)
+    for name, help_text in (
+        ("prepare-backend-repair", "Prepare an isolated source repair without building or playing"),
+        ("build-backend-repair", "Owner-run native repair build; requires the resource wrapper"),
+        ("show-backend-repair", "Read a saved native repair result; never admit or train"),
+    ):
+        command = sub.add_parser(name, help=help_text)
+        command.add_argument("config", type=Path)
 
 
 def run_full_run_command(args: argparse.Namespace) -> int:
     try:
-        if args.full_run_command == "inspect-model":
+        if args.full_run_command in {
+            "prepare-backend-repair",
+            "build-backend-repair",
+            "show-backend-repair",
+        }:
+            recipe = load_repair_recipe(args.config)
+            operation = {
+                "prepare-backend-repair": prepare_backend_repair,
+                "build-backend-repair": build_backend_repair,
+                "show-backend-repair": show_backend_repair,
+            }[args.full_run_command]
+            result = operation(recipe)
+        elif args.full_run_command == "inspect-model":
             model = load_full_run_model(args.checkpoint)
             result = {
                 "model_id": model.model_id,

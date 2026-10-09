@@ -1,5 +1,14 @@
 # Unified full-run player and first evolution pilot
 
+## Current status: pilot complete, repair required
+
+The owner completed this historical pilot. The evolved player did not beat its initializer on
+development, and the run exposed premature Act 2 endings, incomplete public choices, a fourth
+reward encoding bug and an invalid Ascension-0 label. Keep all original artifacts; do not scale
+this recipe. The current next command is in [the diagnosis](full-run-pilot-v1-diagnosis.md): build
+the separately versioned simulator repair. Repeating the original completed script only reads
+its saved result. The original protocol below is retained as historical documentation.
+
 ## Owner handoff
 
 Run **one command**, from the repository:

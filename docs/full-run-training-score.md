@@ -1,5 +1,12 @@
 # Full-run training score
 
+**Historical difficulty-label correction:** the first unified pilot revealed that the pinned
+engine has fixed higher-Ascension rules while this profile declares Ascension 0. The original
+profile and IDs remain preserved, but it is not valid A0 evidence. Resolve
+[#141](https://github.com/benyanc/spireshift/issues/141) and declare the actual verified backend
+difficulty in a new profile before further learning. The score formula itself is unchanged;
+see [the pilot diagnosis](full-run-pilot-v1-diagnosis.md).
+
 Implemented under [#136](https://github.com/benyanc/spireshift/issues/136). This gives future
 full-run evolution and neural training a useful way to distinguish losing players. It does not
 train a player or run games. Next: [#137](https://github.com/benyanc/spireshift/issues/137), the
