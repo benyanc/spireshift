@@ -90,28 +90,43 @@ correct draw/discard/generated candidate mapping and upgrades, bundle highlight/
 state, and a source declaration of fixed Ascension 8. This does not add selectable A0 or prove
 that all implemented rules match live-game A8.
 
-The new Python decoder binds every offered action and rejects incomplete menus. The historical
-adapter, encoder and policies remain unchanged; connecting the new readout to a versioned player
-is still required. All 23 targeted C# regressions passed in a 5.005-second check capped at 45
-seconds, including the earlier nine and fourteen new menu/profile cases. This short check compiled
-managed tests but published no native library and ran no agent games or training.
+The owner published this native candidate in 9.588 elapsed / 16.661 CPU seconds. All 23 targeted C#
+regressions passed, including the earlier nine and fourteen new menu/profile cases. The actual
+public-list exports were checked on an empty handle with zero reset/step calls. Native SHA:
+`f88014084daeb50e17399e67b2a4807120cd07c9fcb2de74dbd2161f23e22c1f`.
+
+A new versioned adapter and unified player now consume the complete readouts. Every offered card
+and skip is bound, normal combat targeting is preserved, and selected bundle contents plus the
+confirmation capability are inputs. All 4,384 parameters remain mutable. Historical adapter,
+encoder, policies, checkpoints and recipe identities remain unchanged; old genomes are not
+silently migrated to the new inputs.
+
+A short native check replayed the two previously inspected training failure prefixes: both the
+fourth-reward identity and the 15-card menu now bind successfully. It made 410 transitions and
+scored 412 observations in 3.387 seconds under a 45-second cap. No training, model promotion or
+admission followed. Its initial path-root preflight failure made zero game attempts and is retained
+alongside the successful retry in [integration evidence](evidence/public-choice-integration-v2-evidence.json).
 
 Run **only this next command**:
 
 ```bash
-bash scripts/build-public-choices-backend-v1.sh
+bash scripts/audit-full-run-public-integration-v1.sh
 ```
 
-It checks all 23 targeted C# regressions and builds the second separate native library, with caps of
-30 elapsed minutes, 7,200 CPU seconds, 12 GB memory and 4 GB artifacts. Build logs and numbered
-resource reports are preserved. It also reads the actual public-list exports on an empty handle,
-without resetting or stepping a game. Repeating a completed command checks/displays its saved result
-without rebuilding. Return the final report for assessment; no command needs to be chained.
+It checks all 89 previously failed training attempts across 42 training seeds against the owner-built
+candidate. It replays saved action locators, scores every current legal choice, and checks the
+overflow/reward/premature-ending/bundle-confirmation endpoints. Errors outside this repair's scope
+remain failed cases. This does not measure win rate or rewrite old experience.
+
+Caps are one worker, 30 elapsed minutes, 3,600 CPU seconds, 8 GB memory and 2 GB artifacts. Exact
+partial cases resume; numbered resource reports preserve launches. Repeating a completed command
+checks/displays its saved result without replaying games. Return the final report for assessment;
+no command needs to be chained. The full audit has not been launched by Codex.
 
 The result remains **pending conformance**, with training/admission/promotion disabled. Synthetic
-fixtures use direct test state and cannot count as real agent wins. Player integration,
+fixtures use direct test state and cannot count as real agent wins. Compatibility replay coverage,
 real-game difficulty and act-boundary checks, and re-admission are still required before a
-new training recipe. The repair script launches no policy training or automatic follow-up.
+new training recipe. The audit script launches no policy training or automatic follow-up.
 
 ## Evidence and scope
 
@@ -127,7 +142,6 @@ reverify every decision trace. Two bounded exact-action reproductions used train
 - Repair configuration: `sha256:214b5fdb1bc667b034d1417b0c3be2963f234a25533853707fcdee677c172cb1`.
 
 Only the owner runs sustained builds, training and evaluation; short synthetic checks are
-allowed. The next implementation after the second native build assesses its evidence and continues
-#141 with versioned player integration; scaling #135 or fitting the #35 comparator
-does not precede those repairs. The competent whole-game player and adaptive thinking objective
-remain unchanged.
+allowed. Continue #141 after assessing the owner compatibility audit; scaling #135 or fitting the
+#35 comparator does not precede the remaining conformance/admission checks. The competent whole-game
+player and adaptive thinking objective remain unchanged.

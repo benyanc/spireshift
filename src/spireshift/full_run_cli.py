@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 from typing import Any
 
+from spireshift.adapters.evangambit import EvanGambitBackendError
 from spireshift.full_run_backend_repair import (
     build_backend_repair,
     load_repair_recipe,
@@ -20,6 +21,11 @@ from spireshift.full_run_evolution import (
     run_full_run_evolution,
 )
 from spireshift.full_run_policy import load_full_run_model
+from spireshift.full_run_public_audit import (
+    load_integration_recipe,
+    run_integration_audit,
+    show_integration_audit,
+)
 from spireshift.resource_tracking import EXPERIMENT_METRICS_ENV
 
 
@@ -71,6 +77,8 @@ def add_full_run_parser(commands: Any) -> None:
         ("prepare-backend-repair", "Prepare an isolated source repair without building or playing"),
         ("build-backend-repair", "Owner-run native repair build; requires the resource wrapper"),
         ("show-backend-repair", "Read a saved native repair result; never admit or train"),
+        ("audit-public-integration", "Owner-run replay of failed training prefixes; no training"),
+        ("show-public-integration", "Check a saved public integration audit; no game replays"),
     ):
         command = sub.add_parser(name, help=help_text)
         command.add_argument("config", type=Path)
@@ -90,6 +98,14 @@ def run_full_run_command(args: argparse.Namespace) -> int:
                 "show-backend-repair": show_backend_repair,
             }[args.full_run_command]
             result = operation(recipe)
+        elif args.full_run_command in {"audit-public-integration", "show-public-integration"}:
+            integration = load_integration_recipe(args.config)
+            audit = (
+                run_integration_audit(integration)
+                if args.full_run_command == "audit-public-integration"
+                else show_integration_audit(integration)
+            )
+            result = {k: v for k, v in audit.items() if k != "cases"}
         elif args.full_run_command == "inspect-model":
             model = load_full_run_model(args.checkpoint)
             result = {
@@ -145,6 +161,6 @@ def run_full_run_command(args: argparse.Namespace) -> int:
             )
         print(json.dumps(result, indent=2, sort_keys=True))
         return 0
-    except (OSError, ValueError, KeyError, TypeError) as error:
+    except (OSError, ValueError, KeyError, TypeError, EvanGambitBackendError) as error:
         print(json.dumps({"status": "error", "error": str(error)}, indent=2))
         return 1

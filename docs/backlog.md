@@ -1,7 +1,7 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after verifying the owner's successful completion/reward repair build and
-preparing the public-choice repair. GitHub holds acceptance criteria and historical evidence.
+Updated 2026-10-09 after verifying both owner repair builds, connecting the public-choice player
+and checking two real native failure prefixes. GitHub holds acceptance criteria and historical evidence.
 The owner launches and monitors all sustained collection, training, simulations and evaluations.
 Short local checks are allowed. Planning/implementation does not launch production experiments.
 
@@ -18,14 +18,18 @@ more sustained learning and prevent a valid A0/full-game claim; larger training 
 [#141](https://github.com/benyanc/spireshift/issues/141) owns the repairs. The owner successfully
 published the separate ending/reward candidate in 10.284 seconds; all nine targeted regressions
 passed. The earlier missing-runtime failure and cached check remain preserved in
-[runtime evidence](evidence/full-run-repair-runtime-check-v1.json). A second private candidate
-exposes every offered combat card, correct pile/generated-card identities, selected bundle and
-confirmation state, plus a source declaration of fixed Ascension 8. Its Python decoder/binder is
-implemented, and all 23 native synthetic regressions passed in a five-second short check.
-[Saved repair evidence](evidence/public-choice-repair-v1-evidence.json) records the separate source
-and test identities. The second native library still needs the owner build. Integration into a
-new versioned player, real-game difficulty/boundary validation and re-admission remain before
-learning; the repaired choices are not yet consumed by the existing player.
+[runtime evidence](evidence/full-run-repair-runtime-check-v1.json). The owner then published the
+public-choice candidate in 9.588 seconds with all 23 native synthetic regressions passing and its
+actual public-list exports checked. It exposes every offered combat card, correct pile/generated
+card identities, selected bundle and confirmation state, plus a source declaration of fixed A8.
+The new versioned adapter and unified player consume these readouts, retaining every legal choice
+and normal enemy targeting. Its fresh 4,384-parameter model can change every decision family.
+Two short real native replays passed the previously reproduced fourth-reward and overflow-menu
+errors: 410 transitions and 412 scored observations in 3.387 seconds, with no optimizer steps.
+[Integration evidence](evidence/public-choice-integration-v2-evidence.json) preserves build, model,
+adapter, configuration and replay identities. This is compatibility evidence, not playing strength
+or real-game parity. The owner audit of all 89 failed training attempts is prepared but not started.
+Real-game difficulty/boundary validation and re-admission remain before learning.
 All original engine binaries, results, recipes and failed cases are preserved; final test is sealed.
 
 [#136](https://github.com/benyanc/spireshift/issues/136) supplies the versioned training score.
@@ -37,9 +41,12 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Next owner task:** run `bash scripts/build-public-choices-backend-v1.sh` once and return the final
-report. It tests/publishes the second pending candidate, checks its public-list exports without
-game attempts, and stops before admission or training, capped at 30 minutes.
+**Next owner task:** run `bash scripts/audit-full-run-public-integration-v1.sh` once and return the
+final report. It replays the saved action prefixes from all 89 failed training attempts and checks
+their failure endpoints with the repaired player. All unresolved failures stay in the report.
+It uses one worker, resumes exact saved cases, and stops before admission or training, capped at
+30 minutes, 3,600 CPU seconds, 8 GB memory and 2 GB artifacts. A completed audit is checked/displayed
+without replaying games; numbered resource reports preserve each launch.
 The [diagnosis and handoff](full-run-pilot-v1-diagnosis.md) give its scope.
 No additional command needs to be chained after it. Finish #141 before a new learning recipe.
 
@@ -65,7 +72,7 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; first native build complete, 23 regressions pass, second owner publish next | Complete public-choice repair, connect it to the versioned player, verify fixed difficulty and real-game endings, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Blocking; both builds complete, player connected, 89-case owner audit next | Check all prior failed training attempts, verify fixed difficulty and real-game endings, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
