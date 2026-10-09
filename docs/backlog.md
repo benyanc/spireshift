@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after complete captured event-choice checks and the frozen-game rule audit.
+Updated 2026-10-09 after the owner chose fixed A8 learning and deferred other difficulties.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
@@ -78,9 +78,10 @@ Each settled dialogue page has one continuation, so this adds UI steps without a
 The assembly confirms A8 activates harder rules and that Double Boss begins at A10, not A8.
 [Frozen-rule evidence](evidence/frozen-run-rule-audit-v1-evidence.json) records the private extracted
 type hashes and source findings. It does not establish full A8 fidelity or add empirical Act 2/3
-captures. The difficulty choice for the next learning recipe is pending: genuine A0 support is
-recommended for the first strong model, versus keeping the current fixed A8. Relabelling A8 is
-not an implementation of A0.
+captures. The owner chose **fixed A8** for the next learning workflow. Selectable A0 and other
+difficulties are deferred under [#142](https://github.com/benyanc/spireshift/issues/142); they do
+not block A8 learning. Relabelling A8 would not implement A0. The original evidence snapshot's A0
+recommendation is historical and is superseded by [ADR 0003](decisions/0003-fixed-a8-learning-priority.md).
 
 All original engine binaries, results, recipes and failed cases are preserved; final test is sealed.
 
@@ -93,13 +94,19 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Next decision:** choose genuine normal-difficulty A0 support or retain fixed A8 for the next
-learning recipe. A0 is recommended; it requires real difficulty-dependent mechanics and a new
-source/profile identity. Captured event choices are repaired and the original later-act bug is
-corroborated by the frozen game rules. Empirical later-act/closing-scene coverage and conditional
-re-admission still need completion before a fresh learning recipe. No completed check needs rerunning.
-Codex handles further short checks. Any stage expected to take five minutes or more gets one
-specific owner command when it is ready. Finish #141 before a new learning recipe.
+**Current priority:** prove a useful learning loop on **Ironclad / A8**, using the repaired public
+player and truthfully declared rules. Difficulty is decided; there is no A0 implementation prerequisite.
+Finish the remaining #141 environment validation/admission work, then freeze a fresh A8 recipe
+and collect complete runs, update all policy components, and compare the frozen player with its
+initializer on independent development seeds. Implement actual-return gradient training under
+#35 alongside the bounded evolution route; neither old teacher imitation nor a larger population
+alone establishes a useful learning method. Stop or revise a method if independent progress stalls.
+Wins remain primary; intermediate act/floor gains support development without claiming competence.
+The historical A0-labelled score/runner and its population remain preserved; the new path must bind
+its actual A8 scope, public-model version, corrected native identity and new experience lineage.
+No completed check needs rerunning. Codex handles short jobs; any stage expected to take five
+minutes or more gets one specific owner command when it is ready. Additional ascension support
+is later work after a useful A8 player, unless the owner explicitly changes priority.
 
 Earlier foundation evidence remains: the separately versioned [neural discard-choice comparison](neural-selection-repair.md)
 had 32 normal terminal losses per player, zero wins/first-boss reaches/Act 1 clears, mean floor
@@ -123,7 +130,7 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; 109 captured choice lists and 4,942 native tests pass | Choose a truthful initial difficulty, finish remaining later-act/UI ending coverage, then re-admit before fresh learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Blocking; A8 chosen, 109 captured choice lists and 4,942 native tests pass | Finish remaining environment validation and re-admission; freeze a truthful A8 learning profile with explicit coverage limits. No selectable-difficulty prerequisite. | [#141](https://github.com/benyanc/spireshift/issues/141) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
@@ -132,6 +139,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | If evidence supports it | Preserve evolved originals; test neural fine-tuning from new experience, then bounded alternating rounds. | [#139](https://github.com/benyanc/spireshift/issues/139) |
 | When affected search is needed | Repair legal-action preservation during hidden-world resampling. Whole-run policy evolution does not require action-branch cloning. | [#105](https://github.com/benyanc/spireshift/issues/105) |
 | Foundation milestone | Establish repeatable held-out progress, then wins and credible run-value/risk evidence. Apply the foundation scorecard before adaptive thinking. | [#78](https://github.com/benyanc/spireshift/issues/78), contract [#5](https://github.com/benyanc/spireshift/issues/5) |
+| Deferred; after a useful A8 learning workflow | Implement genuine selectable ascension levels and separate per-difficulty validation. This does not block the current learning work. | [#142](https://github.com/benyanc/spireshift/issues/142) |
 | After the foundation | Integrate strategic/full-run learned search and demonstrate gains at equal compute. | [#46](https://github.com/benyanc/spireshift/issues/46), [#27](https://github.com/benyanc/spireshift/issues/27), [#28](https://github.com/benyanc/spireshift/issues/28), [#7](https://github.com/benyanc/spireshift/issues/7) |
 | After useful search | Measure value of additional thinking, enforce whole-run spending and learn low/medium/high allocation. | [#29](https://github.com/benyanc/spireshift/issues/29)–[#34](https://github.com/benyanc/spireshift/issues/34), [#36](https://github.com/benyanc/spireshift/issues/36) |
 | Later research | Freeze the final pre-patch bundle; measure zero-shot behavior and fixed-budget recovery after rule changes. | [#37](https://github.com/benyanc/spireshift/issues/37)–[#40](https://github.com/benyanc/spireshift/issues/40) |
@@ -146,6 +154,8 @@ historical issues/recipes are not retroactively reclassified as successes.
 
 - Keep one character, frozen game version and fixed difficulty for initial experiments. Ascension
   chooses difficulty, not an additive reward; report different difficulties separately later.
+  The owner selected Ironclad / A8; do not reprioritize A0 or other difficulty support before a
+  useful A8 learning workflow. The neural player continues learning every decision family.
   The profile must match actual implemented engine rules, not just a configuration label. The
   first unified pilot's Ascension-0 claim is invalid and remains disclosed as historical evidence.
 - Full-run wins remain primary in population ranking/evaluation. The versioned bootstrap learner

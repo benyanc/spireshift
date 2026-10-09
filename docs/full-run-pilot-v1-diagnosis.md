@@ -3,8 +3,8 @@
 The latest completed step is the [captured event-choice repair](../backend-patches/event-choices-v1/README.md):
 109 real-game choice lists match, 4,942 native tests pass, and eight fresh untrained-player
 compatibility attempts finish without crashes or stalls. All eight lose; no learning or playing
-strength improvement is claimed. The current decision is whether to add genuine normal-difficulty
-A0 support before restarting learning or retain the existing fixed A8.
+strength improvement is claimed. The owner selected **fixed A8** for continued learning; selectable
+A0 and other difficulties are deferred under [#142](https://github.com/benyanc/spireshift/issues/142).
 
 The owner completed all 832 planned game attempts in 80.858 elapsed seconds and 592.289 total
 CPU seconds. Four generations ran. There is no demonstrated playing improvement or promoted
@@ -227,6 +227,8 @@ to drive those UI steps. [Frozen-rule evidence](evidence/frozen-run-rule-audit-v
 records the pinned assembly, private extracted-type hashes and findings. It is not empirical
 later-act coverage or proof of complete A8 fidelity.
 
-The next learning difficulty needs a decision: implement genuine normal difficulty (A0), recommended
-for the first strong player, or retain the current fixed A8. A0 requires actual rule support rather
-than changing a label. Later-act conformance and re-admission still precede a fresh training recipe.
+The owner resolved the difficulty choice on 2026-10-09: retain fixed A8 and establish a workflow
+that improves full-run play before adding other difficulties. [ADR 0003](decisions/0003-fixed-a8-learning-priority.md)
+records this direction. The historical A0 label remains invalid; the new A8 recipe and experience
+must have fresh identities. Remaining environment checks and re-admission still precede that
+recipe, but selectable difficulty is not a prerequisite. No training result is implied by this choice.

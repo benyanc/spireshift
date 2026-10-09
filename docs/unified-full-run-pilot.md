@@ -5,9 +5,12 @@
 The owner completed this historical pilot. The evolved player did not beat its initializer on
 development, and the run exposed premature Act 2 endings, incomplete public choices, a fourth
 reward encoding bug and an invalid Ascension-0 label. Keep all original artifacts; do not scale
-this recipe. The current next command is in [the diagnosis](full-run-pilot-v1-diagnosis.md): build
-the separately versioned simulator repair. Repeating the original completed script only reads
-its saved result. The original protocol below is retained as historical documentation.
+this recipe. Four isolated repairs now have native build/test evidence. The current priority is a
+fresh, truthfully declared **A8** learning workflow after the remaining #141 validation/admission
+work, as recorded in [the backlog](backlog.md) and [ADR 0003](decisions/0003-fixed-a8-learning-priority.md).
+Selectable difficulty is deferred. Repeating the original completed script only reads its saved
+result; it cannot train the repaired public player. The original protocol below, including its
+invalid A0 declaration and old owner instructions, is historical documentation.
 
 ## Owner handoff
 

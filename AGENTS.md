@@ -24,6 +24,20 @@ the frozen readiness evaluation. The readiness evaluation must cover policy-only
 value regret, calibration, confident catastrophic errors, held-out generalization, and whether
 model-guided search improves at equal compute.
 
+## Current learning priority
+
+The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
+full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
+they are not prerequisites for A8 training and must not displace learning work. New recipes must
+declare the actual A8 rules and repaired source/native/adapter identity. Preserve the historical
+pilot's invalid A0 label and results; never silently relabel or resume them under changed rules.
+
+Use complete-run outcomes to improve the unified policy across every decision family, then test
+the frozen player on independent seeds at equal compute. Repeatable auxiliary progress is a
+development milestone; genuine full wins remain the goal. More games alone do not establish a
+useful workflow. Revise a stalled method using evidence, and keep the readiness gate before
+adaptive thinking. See ADR 0003 and the ordered backlog.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
