@@ -9,7 +9,14 @@ search is reserved for decisions where it is expected to improve full-run victor
 
 ## Current status
 
-The repository currently contains the research contracts and a seeded mock vertical slice:
+The current learning stage is [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md): a unified neural
+player samples legal actions, learns from complete-run outcomes and compares its frozen result
+with its initializer on independent seeds. The repaired simulator is admitted for scoped policy
+learning with [explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
+The small native pipeline test works; a useful player, full win and adaptive thinking are still
+to be established. The next sustained experiment is owner-run through the guide's one command.
+
+The repository also contains the research contracts and a seeded mock vertical slice:
 
 1. environment reset and public observation;
 2. legal-action enumeration;

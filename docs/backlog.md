@@ -1,11 +1,39 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after the owner chose fixed A8 learning and deferred other difficulties.
+Updated 2026-10-09 after scoped A8 admission and the first sampled-outcome PPO pipeline check.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
+
+**Next owner stage:** [A8 full-run neural learning](full-run-ppo-a8.md). The repaired public
+simulator is admitted for policy-only A8 learning. It additionally passed 31 original Python
+interface checks and 420 original real-game fixture checks, with six explicitly recorded legacy
+skips, in 5.518 seconds. Its source/native/adapter identities and coverage limits are frozen in
+[admission evidence](evidence/public-a8-policy-admission-v1.json) and [ADR 0004](decisions/0004-scoped-a8-simulator-learning.md).
+Empirical later-act UI parity and complete A8 mechanic fidelity remain open; passing interface
+tests is not a complete live-game claim. #141 retains those gaps, but they do not block this
+explicitly scoped simulator learning pilot.
+
+The outcome-trained PPO loop is implemented under #35. It samples actual legal actions across
+all decision families, verifies their behavior probabilities, learns the complete mutable actor
+and a bootstrap critic, retains failures/caps, resumes immutable game/optimizer checkpoints and
+freezes the selected player before independent development. A fresh A8 score and complete-run
+split use seeds 200000–203999; the final test remains sealed. No old A0-labelled genome/greedy
+trace is migrated. The finite owner recipe has 64 sampled games per round, at most 24 rounds,
+eight workers and at most 2,112 planned attempts including confirmation/development.
+
+The final short native pipeline check completed 12 attempts / 1,335 decisions / 24 optimizer
+steps in 11.040 wall / 15.834 CPU seconds, with zero failures/stalls. Both players lost on two
+development seeds: mean floor 10.5 initially and 10.0 after the update. This verifies the loop,
+not improvement or foundation readiness. The first 10.226-second check remains preserved.
+[Pipeline evidence](evidence/public-a8-ppo-pipeline-v1.json) records both; the larger owner
+experiment has not started. Assess its independent results before scaling, adding difficulty
+levels, alternating with evolution or training adaptive thinking.
+
+The history below remains bound to its original engines, schemas and experiments. The current
+handoff above supersedes earlier repair-before-training instructions.
 
 The owner completed 832 unified evolution attempts in 80.858 elapsed / 592.289 total CPU seconds.
 Both players have zero full wins on 64 paired development seeds. The evolved player reaches mean
@@ -96,11 +124,11 @@ competent player, matched cross-method result or foundation readiness.
 
 **Current priority:** prove a useful learning loop on **Ironclad / A8**, using the repaired public
 player and truthfully declared rules. Difficulty is decided; there is no A0 implementation prerequisite.
-Finish the remaining #141 environment validation/admission work, then freeze a fresh A8 recipe
-and collect complete runs, update all policy components, and compare the frozen player with its
-initializer on independent development seeds. Implement actual-return gradient training under
-#35 alongside the bounded evolution route; neither old teacher imitation nor a larger population
-alone establishes a useful learning method. Stop or revise a method if independent progress stalls.
+The new scoped admission and A8 PPO recipe are ready. The next owner stage collects complete
+runs, updates all policy components, and compares the frozen player with its initializer on
+independent development seeds. Broader live-game parity remains separate work under #141/#37;
+neither old teacher imitation nor a larger population alone establishes a useful learning method.
+Stop or revise a method if independent progress stalls.
 Wins remain primary; intermediate act/floor gains support development without claiming competence.
 The historical A0-labelled score/runner and its population remain preserved; the new path must bind
 its actual A8 scope, public-model version, corrected native identity and new experience lineage.
@@ -130,11 +158,11 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; A8 chosen, 109 captured choice lists and 4,942 native tests pass | Finish remaining environment validation and re-admission; freeze a truthful A8 learning profile with explicit coverage limits. No selectable-difficulty prerequisite. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
-| After repair | Direct neural-weight evolution pilot is negative/compromised by compatibility defects; no scaling yet. Outcome-trained PPO on the same verified model/score remains to implement. | [#135](https://github.com/benyanc/spireshift/issues/135), [#35](https://github.com/benyanc/spireshift/issues/35) |
+| Next owner run; implemented and briefly checked | Run the fresh fixed-A8 sampled-outcome PPO pilot, then assess independent play. The old neural-weight evolution pilot remains negative/compatibility-compromised; no scaling or cross-method superiority claim yet. | [#35](https://github.com/benyanc/spireshift/issues/35), [#135](https://github.com/benyanc/spireshift/issues/135) |
 | After repair and comparator | Freeze matched training budgets, seed panels, elite confirmation, scaling/plateau stops and equal decision-budget cross-method comparison. | [#140](https://github.com/benyanc/spireshift/issues/140) |
 | If evidence supports it | Preserve evolved originals; test neural fine-tuning from new experience, then bounded alternating rounds. | [#139](https://github.com/benyanc/spireshift/issues/139) |
 | When affected search is needed | Repair legal-action preservation during hidden-world resampling. Whole-run policy evolution does not require action-branch cloning. | [#105](https://github.com/benyanc/spireshift/issues/105) |

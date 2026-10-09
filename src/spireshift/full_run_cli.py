@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.adapters.evangambit import EvanGambitBackendError
+from spireshift.full_run_a8_admission import admit_a8_candidate
 from spireshift.full_run_backend_repair import (
     build_backend_repair,
     load_repair_recipe,
@@ -26,6 +27,7 @@ from spireshift.full_run_evolution import (
     run_full_run_evolution,
 )
 from spireshift.full_run_policy import load_full_run_model
+from spireshift.full_run_ppo import inspect_ppo, load_ppo_config, run_ppo, summarize_ppo
 from spireshift.full_run_public_audit import (
     load_integration_recipe,
     run_integration_audit,
@@ -62,7 +64,7 @@ def summarize_evolution(result: dict[str, Any], root: Path) -> dict[str, Any]:
 
 def add_full_run_parser(commands: Any) -> None:
     parser = commands.add_parser(
-        "full-run", help="Unified full-run policy and bounded owner-run evolution"
+        "full-run", help="Unified full-run learning and bounded owner-run experiments"
     )
     sub = parser.add_subparsers(dest="full_run_command", required=True)
     preview = sub.add_parser(
@@ -78,6 +80,20 @@ def add_full_run_parser(commands: Any) -> None:
     show.add_argument("output_dir", type=Path)
     model = sub.add_parser("inspect-model", help="Inspect a unified model without playing")
     model.add_argument("checkpoint", type=Path)
+    admission = sub.add_parser("admit-a8", help="Verify executed evidence for scoped A8 learning")
+    admission.add_argument("config", type=Path)
+    admission.add_argument("--game-assembly", type=Path, required=True)
+    ppo_preview = sub.add_parser("inspect-ppo-config", help="Read the A8 training recipe; no games")
+    ppo_preview.add_argument("config", type=Path)
+    for name in ("train-ppo", "show-ppo"):
+        command = sub.add_parser(
+            name,
+            help="A8 sampled outcome learning" if name == "train-ppo" else "Read saved A8 results",
+        )
+        command.add_argument("config", type=Path)
+        command.add_argument("output_dir", type=Path)
+        if name == "train-ppo":
+            command.add_argument("--resume", action="store_true")
     for name, help_text in (
         ("prepare-backend-repair", "Prepare an isolated source repair without building or playing"),
         ("build-backend-repair", "Capped native repair build; requires the resource wrapper"),
@@ -96,7 +112,50 @@ def add_full_run_parser(commands: Any) -> None:
 
 def run_full_run_command(args: argparse.Namespace) -> int:
     try:
-        if args.full_run_command in {
+        if args.full_run_command == "admit-a8":
+            result = admit_a8_candidate(args.config, args.game_assembly)
+        elif args.full_run_command == "inspect-ppo-config":
+            ppo = load_ppo_config(args.config)
+            learning, n = ppo.document["learning"], ppo.document["network"]
+            confirmations = sum(
+                (i + 1) % learning["confirmation_every"] == 0 or i + 1 == learning["maximum_rounds"]
+                for i in range(learning["maximum_rounds"])
+            )
+            result = {
+                "config_id": ppo.config_id,
+                "scope": ppo.score.scope.as_dict(),
+                "maximum_rounds": learning["maximum_rounds"],
+                "sampled_games_per_round": [len(p) for p in learning["rollout_seed_panels"]],
+                "maximum_planned_game_attempts": sum(
+                    len(p) for p in learning["rollout_seed_panels"]
+                )
+                + (1 + confirmations) * len(learning["confirmation_train_seeds"])
+                + 2 * len(learning["development_seeds"]),
+                "actor_parameters": n["dimension"] * n["hidden_units"]
+                + 2 * n["hidden_units"]
+                + n["dimension"],
+                "critic_parameters": n["dimension"] + 1,
+                "all_decision_types_trainable": True,
+                "permanent_baseline_anchor": False,
+                "workers": ppo.document["workers"],
+                "per_launch_limits": ppo.document["resource_limits"],
+                "games_played": 0,
+                "optimizer_steps": 0,
+                "final_test_opened": False,
+                "automatic_followup": False,
+            }
+        elif args.full_run_command in {"train-ppo", "show-ppo"}:
+            if args.full_run_command == "train-ppo":
+                if not os.environ.get(EXPERIMENT_METRICS_ENV):
+                    raise ValueError(
+                        "A8 training requires job-wide resource caps; "
+                        "use scripts/train-full-run-ppo-a8-v1.sh"
+                    )
+                report = run_ppo(args.config, args.output_dir, resume=args.resume)
+            else:
+                report = inspect_ppo(args.config, args.output_dir)
+            result = summarize_ppo(report, args.output_dir)
+        elif args.full_run_command in {
             "prepare-backend-repair",
             "build-backend-repair",
             "show-backend-repair",
