@@ -1,6 +1,29 @@
 # A8 full-run neural learning
 
-The next stage trains one player for **Ironclad / Ascension 8** from its own game outcomes.
+## Completed v2 result and current next stage
+
+The owner completed all 32 rounds: **5,504 attempts, 659,118 public decisions and 14,696 optimizer
+steps**, with zero full wins. The selected player is round 24. On the complete independent
+128-seed comparison, mean floor changes from **11.6641 to 11.9922**, while first-act clears change
+from **three to two**. Paired floor outcomes are 48 improvements, 42 regressions and 38 ties;
+the approximate paired 95% floor interval is **−0.65 to +1.31**. This auxiliary diagnostic does
+not establish useful generalization, victory readiness or a calibrated victory value.
+
+The two explicit owner launches used 5,938.579 wall / 11,625.372 CPU seconds in total. All
+development games finish normally. Across the whole experiment, 16 liveness failures and one
+unsupported action are retained; there are no worker-crash attempts. Source outcome metadata
+and resource identities are reconciled in the
+[v2 assessment](evidence/public-a8-ppo-pilot-v2-assessment.json); compressed traces are not
+reaudited by that assessment.
+
+The next owner command is in [the A8 neural evolution guide](full-run-a8-evolution.md).
+It preserves this completed PPO result and tests broader actor-weight changes on new train
+panels, with fresh development comparisons against both PPO and its initializer. There is no
+automatic larger PPO launch. The earlier instructions below describe the completed experiment.
+
+## Preserved PPO recipe
+
+This stage trains one player for **Ironclad / Ascension 8** from its own game outcomes.
 The first sustained PPO pilot finished without establishing improvement. It stopped after 12
 rounds, retained the initializer, and its independent development panel was interrupted by a
 native crash. Fifty of 64 development attempts failed when that crash destroyed the shared
@@ -13,7 +36,7 @@ with itself is explicitly identified. A debug journal records the last public ac
 native call, separately from model inputs. A failed game remains in the denominator and is not
 automatically retried. The actor, critic, PPO update equations and score formula remain the same.
 
-## Run this one command
+## Historical launcher for the completed PPO experiment
 
 Run from any directory:
 
@@ -27,7 +50,8 @@ has hard caps of 60 elapsed minutes, 20,000 CPU seconds, 12 GB memory and 4 GB a
 The owner launches and monitors this stage. Paste its final summary, or an error/cap result,
 back into the chat. No other discovery, collection or training command is required first.
 
-This is the sole next command. The simulator build, admission and short check are already done.
+This is the completed PPO recipe's launcher, not the current next experiment. The simulator
+build, admission and short check are already done.
 The script checks existing results, gives each launch a separate resource report and explicitly
 resumes the identical recipe. Completed games and optimizer checkpoints are reused. A prior
 interrupted attempt with no complete result is retained as a failure with unknown cost, rather

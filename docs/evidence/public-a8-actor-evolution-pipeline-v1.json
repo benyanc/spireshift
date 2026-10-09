@@ -1,0 +1,32 @@
+{
+  "actor_parameters_mutable": 4384,
+  "attempts": 16,
+  "cached_read_scope": "identified_metadata_only_not_full_compressed_trace_reaudit",
+  "champion_remained_PPO": true,
+  "checkpoint_promoted": false,
+  "claim_scope": "bounded_native_pipeline_compatibility_not_playing_strength_or_cross_method_superiority",
+  "config_id": "sha256:6a838c84613fb75d19a2e76261841f71f50f841496335dfe3588a404af994433",
+  "cpu_seconds": 21.756659731,
+  "evidence_id": "sha256:e972115fe558ce3d9826ae98b0d8baec77626106cf10c35f0dc11f7e864ce11c",
+  "evolution_vs_PPO_comparison_valid": false,
+  "failed_runs": 0,
+  "final_test_opened": false,
+  "foundation_readiness_established": false,
+  "full_run_victories": 0,
+  "generations_completed": 1,
+  "inspected_development_seeds": [
+    302296,
+    302311
+  ],
+  "optimizer_steps": 0,
+  "owner_config_id": "sha256:915322ffb2a603dabac9abfbcecbe5e51b9aedecc40eb998fad627d7753becd3",
+  "owner_development_disjoint_from_check": true,
+  "owner_long_run_started": false,
+  "public_decisions": 2122,
+  "report_id": "sha256:56c519215a32ea7acb01720eb87d02f37fd81c420bd6e4beec4ce00a0658c191",
+  "resource_report_id": "sha256:973727e858fcd05eccd4c2a8931ee722a88ee794239166c86b4c2e210069bbec",
+  "ruleset_manifest_id": "sha256:b626c146fbb41dc5370a7e4b6fd773279288df2065c3def3989c238c9a67042f",
+  "runner_source_sha256": "99e4ab2887427d92d8ec5f361534911cd66977a77ce2a6f2113bbd35114b82d2",
+  "schema_version": "public-a8-actor-evolution-pipeline-evidence-v1",
+  "wall_seconds": 16.472876082989387
+}

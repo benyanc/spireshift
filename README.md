@@ -9,14 +9,16 @@ search is reserved for decisions where it is expected to improve full-run victor
 
 ## Current status
 
-The current learning stage is [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md): a unified neural
-player samples legal actions, learns from complete-run outcomes and compares its frozen result
-with its initializer on independent seeds. The repaired simulator is admitted for scoped policy
-learning with [explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
-The first PPO pilot established no improvement and exposed a native crash and empty reward
-choices. Those defects are repaired, game processes are isolated, and the short pipeline check
-passes. A useful player, full win and adaptive thinking remain to be established. The next v2
-experiment is owner-run through the guide's one command.
+The completed [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md) pilot played 5,504 attempts and
+changed the unified neural player. Its independent 128-seed comparison remains inconclusive:
+mean floor 11.66 initially / 11.99 trained, zero full wins, and three / two first-act clears.
+The next stage is [PPO-seeded evolution of the same neural player](docs/full-run-a8-evolution.md),
+with every actor layer mutable, common rotating train games and a fresh frozen three-player
+comparison. It is an additional hybrid experiment, not an equal-total-cost advantage claim.
+The repaired simulator is admitted for scoped policy learning with
+[explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
+A useful player, full win and adaptive thinking remain to be established. The owner launches
+the next long experiment through the guide's one command.
 
 The repository also contains the research contracts and a seeded mock vertical slice:
 
