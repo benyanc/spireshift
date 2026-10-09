@@ -1,98 +1,90 @@
 # SpireShift backlog
 
-Updated 2026-10-08. This is the current order of work; GitHub holds the detailed acceptance
-criteria and historical evidence. The owner launches and monitors all sustained collection,
-training, simulations and evaluations. Planning updates do not start experiments.
+Updated 2026-10-08 after the owner authorized full-run evolutionary/neural learning and the first
+training-score implementation. GitHub holds detailed acceptance criteria and historical evidence.
+The owner launches and monitors all sustained collection, training, simulations and evaluations.
+Short local checks are allowed. Planning/implementation does not launch production experiments.
 
-**Current handoff:** the owner completed the [compact neural combat pilot](neural-combat-policy.md)
-and its [paired gameplay comparison](neural-combat-confirmation.md). Base-v11 shows no clear
-playing benefit: zero wins or first-boss reaches, with two unsupported card-choice failures.
-The 30 completed pairs have one floor improvement, one regression and 28 ties. Base-v2 stays
-accepted. The [discard-choice repair](neural-selection-repair.md) is implemented: the two
-short smoke runs finish as normal losses, and all 168 earlier predictions match. The owner now
-runs the separately versioned corrective comparison using the one command in that guide.
-It uses inspected seeds and preserves the original failures; it does not retrain or promote
-the model. #134 remains open for comparison review and the later learning cycle.
+## Current handoff and direction
 
-## Goal and current position
+The owner completed the separately versioned [neural discard-choice corrective comparison](neural-selection-repair.md).
+Both players finish all 32 attempts as terminal losses, with zero failures/truncations, zero wins
+or first-boss reaches/Act 1 clears, and mean maximum floor 6.84375. There are 27 changed action
+traces without demonstrated playing gain. This is inspected-seed compatibility evidence, not a
+fresh/final benchmark. The original failures and old results remain preserved. Base-v2 is the
+accepted historical baseline; base-v11 is unpromoted.
+
+Comparison ID: `sha256:2bc12a35ee21e5ac285424cab8e19bcb236bb650c88d51aaa9d91e7ea8843ce6`.
+Resource ID: `sha256:c8e246e7455f5df0913bc55d6585b694643aba26eabcf5186004c76f9947786d`.
+
+**Implemented first item:** [#136](https://github.com/benyanc/spireshift/issues/136) supplies the
+versioned [full-run bootstrap training score](full-run-training-score.md), pure saved-outcome
+scorer, staging/evaluation rules and meaningful contract tests. No game attempts or fitting are
+needed. **Next implementation: [#137](https://github.com/benyanc/spireshift/issues/137), one compact
+neural player that can learn every decision family. There is no sustained owner command yet.**
 
 Build a player that wins complete runs, then teach it when to spend little, medium or substantial
-thinking effort. The primary objective remains **terminal full-run victory probability under a
-fixed whole-run computation budget**. A strong inexpensive base player comes first.
+thinking effort. The primary evaluation objective remains **terminal full-run victory probability
+under a fixed whole-run computation budget**. [ADR 0002](decisions/0002-full-run-bootstrap-training.md)
+explicitly declares auxiliary learner returns for new bootstrap experiments, separate from the
+real win/loss result. A strong inexpensive base player remains the foundation.
 
-The framework for collecting lessons, training, replaying and comparing players exists. Playing
-strength remains weak: the latest neural comparison produced zero wins and zero first-boss
-reaches for both models across 32 attempted runs each. The candidate completed 30; its other two
-attempts stopped at unsupported card-choice menus and remain in the original denominator.
-Earlier base-v10 also failed to establish improvement; its public diagnosis verified all 64
-replays without failures or mismatches.
+New experimental recipes may learn all policy components and depart substantially from weak
+base-v2. Strategic learning no longer waits for combat-only improvement. Old saved lessons are
+optional warm starts rather than permanent behavior targets. Legal/public-input checks,
+independent evaluation, numerical stability and historical evidence preservation remain.
 
-Base-v2 is a sparse feature-based learned scorer. The recent combat adjustments are small
-feature-based corrections. The compact neural combat candidate is now trained, with shared
-public card properties and a trainable hidden layer. Its first gameplay comparison is complete
-and has not established improvement. Saved-label improvement does not establish better play.
-After the menu repair, further neural work needs a frozen, testable lesson-quality or coverage
-intervention rather than repeated fitting of the same lessons.
-
-## Current priorities
+## Ordered implementation work
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Next | Owner runs the corrected neural/base-v2 comparison on the same inspected seeds, then review failures and playing strength. The public discard-choice decoder and future failure classification are repaired; the original result remains preserved. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
-| Then | Freeze a bounded neural improvement round with better or broader action lessons and separate gameplay evaluation. Review the completed pilot before spending more training or teacher compute. | [#134](https://github.com/benyanc/spireshift/issues/134), parent [#78](https://github.com/benyanc/spireshift/issues/78) |
-| When needed by that recipe | Fix the remaining hidden-world resampling compatibility issue before relying on the affected search path for labels. | [#105](https://github.com/benyanc/spireshift/issues/105) |
-| Foundation milestone | Establish repeatable useful gameplay progress; then obtain wins and credible run-value/risk estimates. Preserve the frozen readiness gate and keep improving strategic choices as well as combat. | [#78](https://github.com/benyanc/spireshift/issues/78), readiness contract [#5](https://github.com/benyanc/spireshift/issues/5), [#46](https://github.com/benyanc/spireshift/issues/46) |
-| After the foundation | Integrate full-run learned search and compare it against ordinary search at equal compute. | [#27](https://github.com/benyanc/spireshift/issues/27), [#28](https://github.com/benyanc/spireshift/issues/28), [#7](https://github.com/benyanc/spireshift/issues/7) |
-| After useful search is demonstrated | Measure which decisions benefit from extra thinking, enforce the whole-run budget, and learn how much thinking to spend. | [#29](https://github.com/benyanc/spireshift/issues/29)–[#34](https://github.com/benyanc/spireshift/issues/34), [#36](https://github.com/benyanc/spireshift/issues/36) |
-| Later research | Freeze the full pre-patch bundle, measure behavior after rule changes, and test recovery with limited new data/compute. | [#37](https://github.com/benyanc/spireshift/issues/37)–[#40](https://github.com/benyanc/spireshift/issues/40) |
-| Final evidence | Compare compatible public/PPO baselines, refresh competition, run the final benchmark and publish a reproducible report/demo. | [#35](https://github.com/benyanc/spireshift/issues/35), [#49](https://github.com/benyanc/spireshift/issues/49), [#50](https://github.com/benyanc/spireshift/issues/50), [#41](https://github.com/benyanc/spireshift/issues/41), [#44](https://github.com/benyanc/spireshift/issues/44) |
-| Optional product | Build the recommendation overlay and package the Advisor. This does not take priority over player quality. | [#16](https://github.com/benyanc/spireshift/issues/16), [#43](https://github.com/benyanc/spireshift/issues/43) |
+| Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
+| Next | Unified compact full-run neural policy, public features, legal candidate scoring and genome pack/unpack. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
+| Then | Reuse complete-run workers to collect actual returns, public milestones and diverse lessons from improving policies. | [#138](https://github.com/benyanc/spireshift/issues/138) |
+| Individual methods | Bounded direct neural-weight evolution and outcome-trained PPO on the same full-run representation/score. | [#135](https://github.com/benyanc/spireshift/issues/135), [#35](https://github.com/benyanc/spireshift/issues/35) |
+| First owner pilot | Freeze matched training budgets, seed panels, elite confirmation, scaling/plateau stops and equal decision-budget comparison. | [#140](https://github.com/benyanc/spireshift/issues/140) |
+| If evidence supports it | Preserve evolved originals; test neural fine-tuning from new experience, then bounded alternating rounds. | [#139](https://github.com/benyanc/spireshift/issues/139) |
+| When affected search is needed | Repair legal-action preservation during hidden-world resampling. Whole-run policy evolution does not require action-branch cloning. | [#105](https://github.com/benyanc/spireshift/issues/105) |
+| Foundation milestone | Establish repeatable held-out progress, then wins and credible run-value/risk evidence. Apply the foundation scorecard before adaptive thinking. | [#78](https://github.com/benyanc/spireshift/issues/78), contract [#5](https://github.com/benyanc/spireshift/issues/5) |
+| After the foundation | Integrate strategic/full-run learned search and demonstrate gains at equal compute. | [#46](https://github.com/benyanc/spireshift/issues/46), [#27](https://github.com/benyanc/spireshift/issues/27), [#28](https://github.com/benyanc/spireshift/issues/28), [#7](https://github.com/benyanc/spireshift/issues/7) |
+| After useful search | Measure value of additional thinking, enforce whole-run spending and learn low/medium/high allocation. | [#29](https://github.com/benyanc/spireshift/issues/29)–[#34](https://github.com/benyanc/spireshift/issues/34), [#36](https://github.com/benyanc/spireshift/issues/36) |
+| Later research | Freeze the final pre-patch bundle; measure zero-shot behavior and fixed-budget recovery after rule changes. | [#37](https://github.com/benyanc/spireshift/issues/37)–[#40](https://github.com/benyanc/spireshift/issues/40) |
+| Final evidence | Reproduce public baselines, refresh competition and publish the final paired benchmark/report/demo. | [#49](https://github.com/benyanc/spireshift/issues/49), [#50](https://github.com/benyanc/spireshift/issues/50), [#41](https://github.com/benyanc/spireshift/issues/41), [#44](https://github.com/benyanc/spireshift/issues/44) |
+| Optional product | Recommendation overlay and packaged Advisor, after player quality. | [#16](https://github.com/benyanc/spireshift/issues/16), [#43](https://github.com/benyanc/spireshift/issues/43) |
 
-[Issue #42](https://github.com/benyanc/spireshift/issues/42) continues to hold negative-result
-analysis. The completed [#117](https://github.com/benyanc/spireshift/issues/117) and collection/
-teacher components are reused by #134; a new framework is not required.
+[#42](https://github.com/benyanc/spireshift/issues/42) retains negative-result analysis. Existing
+adapters, public binding, rollouts, splits, accounting and owner scripts are reused. Closed
+historical issues/recipes are not retroactively reclassified as successes.
 
 ## Learning and evaluation rules
 
-- Keep one character, a frozen game version and a fixed difficulty for the initial experiments.
-  Ascension selects difficulty; Acts are chapters. Report higher difficulties separately after
-  stable wins, rather than adding difficulty and floors to form a replacement reward.
-- Combat survival, Act 1 completion, floors and HP provide auxiliary lessons and intermediate
-  milestones. They can help distinguish all-loss attempts, but are not full-run victories.
-  Zero positive victory labels still block a credible learned victory-value model.
-- Freeze each recipe's rounds, seeds, exploration, teacher budgets and resource/plateau stops
-  before launching it. Use many diverse train runs when affordable, compare alternatives with
-  an explicit continuation policy, and measure the resulting player on separate development runs.
-  More attempts under the same weak teacher do not guarantee better lessons.
-- Keep final test seeds sealed, retain failures in denominators, and count all teacher and
-  discarded-candidate costs. Reused development results are inspected evidence.
-- Saved-data gates and gameplay tests serve different purposes. Do not promote a model merely
-  because its training loss improves or relax a failed frozen gate to obtain an update.
-- The next sustained stage should have one clear owner command with caps and preserved results.
-  Resume supported work; explicitly restart interrupted fitting when no optimizer checkpoint
-  exists. No coding agent starts or monitors it, and no indefinite loop or fallback runs.
-- The owner explicitly authorized bounded short diagnostic/smoke jobs on 2026-10-08. This
-  exception does not authorize the coding agent to start or monitor sustained experiments.
-
-## Genetic algorithm: deferred option
-
-[Issue #135](https://github.com/benyanc/spireshift/issues/135) preserves a bounded evolutionary
-policy or neural–evolutionary hybrid experiment. Activate it only by an owner decision after
-prespecified neural rounds plateau, or when it has a clear complementary exploration role.
-
-Evolve compact policies/corrections/settings across multiple train seeds and compare against
-neural training at matched total cost. Useful evolutionary decisions may be distilled back into
-the neural policy. Existing trajectory mutation search improves a particular seed's run; this
-future experiment must improve a policy that transfers to other seeds. It is not the main
-research contribution and does not bypass the foundation gate.
+- Keep one character, frozen game version and fixed difficulty for initial experiments. Ascension
+  chooses difficulty, not an additive reward; report different difficulties separately later.
+- Full-run wins remain primary in population ranking/evaluation. The versioned bootstrap learner
+  score distinguishes losing runs. Floors/acts are intermediate progress, not a victory-value
+  target, foundation pass or permission for adaptive thinking.
+- Experimental policies may change every phase. Do not impose permanent proximity to base-v2,
+  frozen strategic choices or improvement on every old teacher metric. Use new recipes and
+  whole-run gameplay evidence rather than relax a failed historical gate.
+- Compare gradient training and direct evolution of the same compact NN at matched total cost.
+  Use common seed panels within generations, rotate train panels and confirm apparent elites.
+  Preserve diversity and reevaluate fine-tuning before replacing an evolved player.
+- Freeze panels, exploration, updates/generations, tuning, caps and plateau stops before launch.
+  Training/development/final-test ownership is at the complete-run boundary. Inspected development
+  results are disclosed; final-test seeds stay sealed.
+- Keep failures/caps/truncations/missing outcomes in denominators and count all actual work,
+  including discarded candidates and teacher/fine-tuning costs. Repeated actions earn no reward.
+- Each sustained stage has one clear owner command, progress, immutable outputs, explicit resume
+  and a definite stop. Only the owner launches and monitors it. Short synthetic/local checks do
+  not authorize long collection, training or evaluation.
 
 ## Preserved real-game milestone
 
-The owner successfully launched the privately archived v0.107.1 app outside Steam's managed
-library. The executable, installation identity, pinned bridge and read-only public menu were
-verified. [The frozen-game guide](frozen-live-game.md) records the location and launcher.
+The owner launched the privately archived v0.107.1 app outside Steam's managed library. Its
+executable, pinned bridge and read-only menu identity were verified. [The frozen-game guide](frozen-live-game.md)
+records its launcher and location.
 
-Retesting after a normal future Steam update, checking save/profile isolation and watching a
-useful trained policy through the guarded live adapter remain under
-[#37](https://github.com/benyanc/spireshift/issues/37). Menu launch does not establish simulator
-parity or model strength. The final pre-patch model/data/protocol bundle is still unfinished.
+Retesting after a normal future Steam update, save/profile isolation and watching a useful trained
+policy through the live adapter remain under [#37](https://github.com/benyanc/spireshift/issues/37).
+A menu launch establishes neither model strength nor full simulator parity. The final pre-patch
+model/data/protocol bundle remains unfinished.

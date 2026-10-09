@@ -241,6 +241,12 @@ from spireshift.terminal_discovery import (
     run_terminal_trajectory_discovery,
     verify_terminal_trajectory_discovery,
 )
+from spireshift.training_objective import (
+    assess_training_graduation,
+    load_training_panel,
+    load_training_score_spec,
+    score_training_panel,
+)
 from spireshift.trajectory_diagnostic import diagnose_trajectory_policy
 from spireshift.trajectory_policy import load_trajectory_policy_config, train_trajectory_policy
 from spireshift.trajectory_preferences import (
@@ -274,6 +280,24 @@ DEFAULT_MECHANICS_FIXTURE = PROJECT_ROOT / "tests/fixtures/mechanics/mock-v1.jso
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="spireshift")
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    objective = subparsers.add_parser(
+        "objective", help="Inspect or score saved full-run training outcomes; never runs games"
+    )
+    objective_commands = objective.add_subparsers(dest="objective_command", required=True)
+    objective_inspect = objective_commands.add_parser("inspect", help="Inspect a training score")
+    objective_inspect.add_argument("specification", type=Path)
+    objective_score = objective_commands.add_parser("score", help="Score a saved outcome panel")
+    objective_score.add_argument("specification", type=Path)
+    objective_score.add_argument("panel", type=Path)
+    objective_score.add_argument("--output", type=Path)
+    objective_graduation = objective_commands.add_parser(
+        "graduation", help="Assess saved train/development evidence for terminal-only training"
+    )
+    objective_graduation.add_argument("specification", type=Path)
+    objective_graduation.add_argument("train", type=Path)
+    objective_graduation.add_argument("development", type=Path)
+    objective_graduation.add_argument("--output", type=Path)
 
     doctor = subparsers.add_parser("doctor", help="Check local development prerequisites")
     doctor.add_argument(
@@ -1459,6 +1483,34 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "objective":
+        try:
+            training_score_spec = load_training_score_spec(args.specification)
+            if args.objective_command == "inspect":
+                objective_result = {
+                    "training_spec_id": training_score_spec.spec_id,
+                    **training_score_spec.as_dict(),
+                }
+            elif args.objective_command == "score":
+                training_panel = load_training_panel(args.panel, training_score_spec)
+                objective_result = score_training_panel(training_score_spec, training_panel)
+            else:
+                objective_result = assess_training_graduation(
+                    training_score_spec,
+                    load_training_panel(args.train, training_score_spec),
+                    load_training_panel(args.development, training_score_spec),
+                )
+            objective_output = getattr(args, "output", None)
+            if objective_output is not None:
+                objective_output.parent.mkdir(parents=True, exist_ok=True)
+                with objective_output.open("x", encoding="utf-8") as handle:
+                    handle.write(json.dumps(objective_result, indent=2) + "\n")
+            _emit_json(objective_result, None)
+            return 0
+        except (OSError, ValueError) as error:
+            # A failed check must not overwrite a previously saved scoring report.
+            _emit_json({"status": "error", "error": str(error)}, None)
+            return 1
     if args.command == "doctor":
         print(json.dumps(diagnostics_as_dict(), indent=2))
         if args.manifest is not None:

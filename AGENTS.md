@@ -11,6 +11,12 @@ Every experiment must load a versioned `ObjectiveSpec`. Changes to the primary o
 terminal condition, or compute constraint require an architecture decision record and explicit
 test updates.
 
+New full-run learning may also declare a versioned `TrainingScoreSpec` for an explicit bootstrap
+learner return (ADR 0002). Keep it separate from binary environment rewards and terminal-victory
+evaluation, and never interpret it as a victory probability or readiness pass. New experimental
+policies may learn every decision family and depart substantially from the weak baseline;
+historical combat-only/proximity guards are not permanent requirements for these new recipes.
+
 ## Foundation before adaptive search
 
 Do not train or promote an adaptive budget controller until the base policy/value system passes

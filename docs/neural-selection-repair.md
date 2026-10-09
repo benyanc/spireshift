@@ -1,5 +1,22 @@
 # Neural discard-choice repair
 
+## Completed owner comparison, 2026-10-08
+
+The corrected comparison is complete. Both players finish 32/32 attempts as terminal losses,
+with zero failures/truncations, zero wins or first-boss reaches/Act 1 clears, and mean maximum
+floor 6.84375. There are 27 changed traces without demonstrated playing gain. This confirms the
+menu compatibility correction on inspected seeds; it is not a fresh/final strength benchmark.
+The original failed comparison remains preserved.
+
+Comparison ID: `sha256:2bc12a35ee21e5ac285424cab8e19bcb236bb650c88d51aaa9d91e7ea8843ce6`.
+Resources: `sha256:c8e246e7455f5df0913bc55d6585b694643aba26eabcf5186004c76f9947786d`.
+
+The next work is the unified full-run policy under #137, after the implemented score under #136.
+There is no new owner-run task here. See [the backlog](backlog.md). The command and pending-stage
+notes below describe the preserved historical protocol; they are not a request to rerun it.
+
+## Original implementation and owner-run protocol
+
 [Issue #134](https://github.com/benyanc/spireshift/issues/134) now repairs the two card-choice
 failures in the [original neural comparison](neural-combat-confirmation.md). This is a public
 input compatibility correction, with no fitting or model promotion. The next sustained job is
