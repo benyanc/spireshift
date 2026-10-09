@@ -1,0 +1,22 @@
+--- a/src/Sts2Emulator/Core/Run/RunEngine.cs
++++ b/src/Sts2Emulator/Core/Run/RunEngine.cs
+@@ -5381,6 +5381,19 @@
+ 
+     private void WriteEventActionMask(Span<int> mask)
+     {
++        // These committed second pages accept only Fight. The unconditional
++        // fallback skip advertised action 3 even though StepEvent rejects it.
++        if (
++            State.EventPage == 1
++            && State.EventId is RunConstants.EventDenseVegetation
++                or RunConstants.EventPunchOff
++                or RunConstants.EventTheLanternKey
++        )
++        {
++            SetMask(mask, 0);
++            return;
++        }
++
+         SetMask(mask, RunConstants.EventSkipAction);
+         switch (State.EventId)
+         {

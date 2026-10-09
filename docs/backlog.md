@@ -1,7 +1,7 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after verifying both owner repair builds, connecting the public-choice player
-and checking two real native failure prefixes. GitHub holds acceptance criteria and historical evidence.
+Updated 2026-10-09 after assessing the owner's 89-case compatibility audit and preparing the event
+continuation correction. GitHub holds acceptance criteria and historical evidence.
 The owner launches and monitors all sustained collection, training, simulations and evaluations.
 Short local checks are allowed. Planning/implementation does not launch production experiments.
 
@@ -28,8 +28,19 @@ Two short real native replays passed the previously reproduced fourth-reward and
 errors: 410 transitions and 412 scored observations in 3.387 seconds, with no optimizer steps.
 [Integration evidence](evidence/public-choice-integration-v2-evidence.json) preserves build, model,
 adapter, configuration and replay identities. This is compatibility evidence, not playing strength
-or real-game parity. The owner audit of all 89 failed training attempts is prepared but not started.
-Real-game difficulty/boundary validation and re-admission remain before learning.
+or real-game parity. The owner subsequently checked all 89 failed training attempts in 92.495 wall
+/ 91.416 CPU seconds, replaying 11,947 transitions. **85 passed; four remain failed.** The successful
+endpoints cover 65 overflow menus, seven premature endings, 12 bundle confirmations and one reward.
+
+All four remaining cases stalled at Dense Vegetation or Punch Off: an unconditional fallback
+offered action 3 on a committed fight page, while its handler accepts only action 0. Existing event
+tests inspected slots 0–2 and missed this extra action. A third isolated source correction offers
+only the accepted continuation on those pages and the matching Lantern Key page. All 32 targeted
+managed regressions passed in 6.753 seconds, including nine new full-mask/progress/resource checks.
+[Event repair evidence](evidence/event-continuation-repair-v1-evidence.json) retains the owner's
+85/89 failed audit and the initial short-check compile failure as separate records. The corrected
+native library is not published yet. Real-game difficulty, endings and broader event-action
+conformance, plus re-admission, remain before learning.
 All original engine binaries, results, recipes and failed cases are preserved; final test is sealed.
 
 [#136](https://github.com/benyanc/spireshift/issues/136) supplies the versioned training score.
@@ -41,12 +52,11 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Next owner task:** run `bash scripts/audit-full-run-public-integration-v1.sh` once and return the
-final report. It replays the saved action prefixes from all 89 failed training attempts and checks
-their failure endpoints with the repaired player. All unresolved failures stay in the report.
-It uses one worker, resumes exact saved cases, and stops before admission or training, capped at
-30 minutes, 3,600 CPU seconds, 8 GB memory and 2 GB artifacts. A completed audit is checked/displayed
-without replaying games; numbered resource reports preserve each launch.
+**Next owner task:** run `bash scripts/build-event-continuation-backend-v1.sh` once and return the
+final report. It requires all 32 regressions, publishes the separate corrected native candidate
+and checks its public exports with zero game attempts. Caps: two build workers, 30 minutes,
+7,200 CPU seconds, 12 GB memory and 4 GB artifacts. A completed build is checked/displayed without
+rebuilding; numbered resource reports preserve launches. No training or automatic follow-up.
 The [diagnosis and handoff](full-run-pilot-v1-diagnosis.md) give its scope.
 No additional command needs to be chained after it. Finish #141 before a new learning recipe.
 
@@ -72,7 +82,7 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; both builds complete, player connected, 89-case owner audit next | Check all prior failed training attempts, verify fixed difficulty and real-game endings, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Blocking; 85/89 audit passes, event correction passes 32 managed tests, owner publish next | Publish event correction, replay original failures under its new native identity, verify difficulty/endings/event actions, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |

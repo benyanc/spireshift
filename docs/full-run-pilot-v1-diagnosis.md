@@ -80,7 +80,7 @@ all nine regressions passing. Its library SHA is
 the checked test digest are preserved in [repair evidence](evidence/public-choice-repair-v1-evidence.json).
 It remains pending conformance, with no player games, training or admission.
 
-## Public-choice repair and next owner task
+## Public-choice repair and completed owner audit
 
 A second isolated candidate builds on the first repair at
 `artifacts/backend/evangambit-v0.107.1-full-run-repair-v2`, revision
@@ -107,26 +107,57 @@ scored 412 observations in 3.387 seconds under a 45-second cap. No training, mod
 admission followed. Its initial path-root preflight failure made zero game attempts and is retained
 alongside the successful retry in [integration evidence](evidence/public-choice-integration-v2-evidence.json).
 
-Run **only this next command**:
-
-```bash
-bash scripts/audit-full-run-public-integration-v1.sh
-```
-
-It checks all 89 previously failed training attempts across 42 training seeds against the owner-built
-candidate. It replays saved action locators, scores every current legal choice, and checks the
-overflow/reward/premature-ending/bundle-confirmation endpoints. Errors outside this repair's scope
-remain failed cases. This does not measure win rate or rewrite old experience.
-
-Caps are one worker, 30 elapsed minutes, 3,600 CPU seconds, 8 GB memory and 2 GB artifacts. Exact
-partial cases resume; numbered resource reports preserve launches. Repeating a completed command
-checks/displays its saved result without replaying games. Return the final report for assessment;
-no command needs to be chained. The full audit has not been launched by Codex.
+The owner completed the full audit: 85 of 89 previously failed training attempts passed, across
+42 training seeds. It replayed 11,947 transitions in 92.495 wall / 91.416 CPU seconds. Successful
+endpoints were 65 overflow menus, seven premature endings, 12 bundle confirmations and one reward.
+Four event stalls remain failed, so `compatibility_passed` is false. Report:
+`sha256:eaaa0e1a239b0fe14ac6b0a8aca3dd3cefcc47df5fc303e292366992e0ffec3a`;
+resources: `sha256:c4b83eb5d6085a85478ebaadbbd76ff06bc85eb202b79be9b82ab4ec8c8b1611`.
+The report and original cases remain unchanged. This audit measures failure-prefix compatibility;
+it does not measure player win rate or rewrite experience.
 
 The result remains **pending conformance**, with training/admission/promotion disabled. Synthetic
 fixtures use direct test state and cannot count as real agent wins. Compatibility replay coverage,
 real-game difficulty and act-boundary checks, and re-admission are still required before a
-new training recipe. The audit script launches no policy training or automatic follow-up.
+new training recipe. The audit launched no policy training or automatic follow-up.
+
+## Event continuation correction and next owner task
+
+The remaining four cases used training seeds 100058, 100083, 100088 and 100056. Dense Vegetation and
+Punch Off had already committed to a fight. Their handlers accept only action 0 on the next page,
+but `WriteEventActionMask` unconditionally advertised fallback skip action 3. Repeating that
+rejected action left the observation unchanged. The same source defect exists on the Lantern Key
+fight page. Existing `EventCombatTests.Offered` enumerated `Range(0, EventSkipAction)`, missing slot 3.
+
+The third candidate changes only that mask on the three committed pages. It preserves all accepted
+continuations and the existing initial event surface. It adds no policy filter and changes no model
+weights or public input schema. Initial-page action parity remains a separate real-game check;
+preserving a historical action surface does not prove that surface matches the UI.
+
+The candidate revision is `d49c550a400ee6e6e96aaca2fbf88ef090f79ebd`. All 32 targeted managed C#
+regressions passed in a 6.753-second check capped at 45 seconds: the prior 23 plus nine new tests.
+The new tests enumerate every action slot, verify rejected skip leaves state unchanged, and verify
+the sole continuation starts the expected playable encounter with the run's HP, deck and gold.
+An initial test compile failure was corrected by using `RunEngine.ActiveEncounterId`; that failed
+candidate, logs, configuration and resource record remain preserved. No native library, game
+attempts, training or admission were produced by either short check.
+
+Run **only this next command**:
+
+```bash
+bash scripts/build-event-continuation-backend-v1.sh
+```
+
+It requires all 32 regressions and publishes the separate candidate, then checks its public exports
+on an empty handle with zero game attempts. Caps: two workers, 30 elapsed minutes, 7,200 CPU seconds,
+12 GB memory and 4 GB artifacts. Numbered reports preserve launches; a completed build is checked
+without rebuilding. No additional command needs to be chained. The build remains pending
+conformance and launches no training or automatic follow-up.
+
+[Event correction evidence](evidence/event-continuation-repair-v1-evidence.json) records the owner
+audit, all four verified source traces, isolated source/test identities and both short-check attempts.
+After assessing the owner build, derive its new adapter manifest and replay the original failures
+with event-specific endpoint checks. The old 85/89 report is never rewritten as a pass.
 
 ## Evidence and scope
 

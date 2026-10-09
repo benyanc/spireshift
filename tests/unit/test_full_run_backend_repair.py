@@ -395,6 +395,57 @@ def test_native_parser_requires_every_requested_class(tmp_path: Path) -> None:
         repair.read_regression_result(path, 9, (repair.TEST_CLASS, repair.PUBLIC_TEST_CLASS))
 
 
+def test_event_recipe_preserves_owner_public_build_and_requires_all_three_test_classes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def metadata_only_parent(path: Path) -> Any:
+        if str(path).endswith("artifacts/backend-repair/public-choices-v1/candidate-manifest.json"):
+            return load_patch_manifest(
+                Path("manifests/patches/sts2-v0.107.1-evangambit-full-run-repair-v2-pending.json")
+            )
+        return load_patch_manifest(path)
+
+    monkeypatch.setattr(repair, "load_patch_manifest", metadata_only_parent)
+    third = repair.load_repair_recipe(
+        Path("configs/backend-repair/sts2-v0.107.1-event-continuation-v1.json")
+    )
+    assert third.public_choices and third.event_continuation
+    assert third.test_destination == repair.EVENT_TEST_DESTINATION
+    assert third.test_classes == (
+        repair.TEST_CLASS,
+        repair.PUBLIC_TEST_CLASS,
+        repair.EVENT_TEST_CLASS,
+    )
+    assert third.document["minimum_regression_tests"] == 32
+    assert {s["path"] for s in third.sources} == {"src/Sts2Emulator/Core/Run/RunEngine.cs"}
+    assert third.candidate != third.path(third.document["base_upstream"])
+    script = Path("scripts/build-event-continuation-backend-v1.sh").read_text()
+    for flag, key in (
+        ("--max-wall-seconds", "wall_seconds"),
+        ("--max-cpu-seconds", "cpu_seconds"),
+        ("--max-memory-bytes", "memory_bytes"),
+        ("--max-storage-bytes", "storage_bytes"),
+    ):
+        assert f"{flag} {third.document['resource_limits'][key]}" in script
+    assert "full-run evolve" not in script and "backend admit" not in script
+
+
+def test_event_repair_cannot_publish_without_the_new_regression_class(tmp_path: Path) -> None:
+    path = tmp_path / "completion.trx"
+    classes = (repair.TEST_CLASS, repair.PUBLIC_TEST_CLASS)
+    path.write_text(
+        '<TestRun><ResultSummary><Counters total="32" executed="32" passed="32" failed="0" />'
+        "</ResultSummary><Results>"
+        + "".join(
+            f'<UnitTestResult testName="{classes[i % 2]}.Case{i}" outcome="Passed" />'
+            for i in range(32)
+        )
+        + "</Results></TestRun>"
+    )
+    with pytest.raises(ValueError, match="required native regression class is missing"):
+        repair.read_regression_result(path, 32, (*classes, repair.EVENT_TEST_CLASS))
+
+
 @pytest.mark.parametrize("valid_profile", [True, False])
 def test_native_capability_check_only_reads_public_lists_and_always_releases_handle(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, valid_profile: bool

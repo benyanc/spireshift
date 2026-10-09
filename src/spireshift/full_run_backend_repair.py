@@ -23,6 +23,8 @@ TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftFullRunCompletionTests.cs"
 TEST_CLASS = "SpireShiftFullRunCompletionTests"
 PUBLIC_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftPublicChoicesTests.cs"
 PUBLIC_TEST_CLASS = "SpireShiftPublicChoicesTests"
+EVENT_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftEventContinuationTests.cs"
+EVENT_TEST_CLASS = "SpireShiftEventContinuationTests"
 TEST_RUNTIME_POLICY = "net9-preferred-net10-test-host-v1"
 REMAINING_CHECKS = (
     "expose_and_bind_all_public_combat_selection_candidates",
@@ -69,7 +71,14 @@ class RepairRecipe:
 
     @property
     def public_choices(self) -> bool:
-        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v2")
+        return self.document["schema_version"] in {
+            "full-run-backend-repair-config-v2",
+            "full-run-backend-repair-config-v3",
+        }
+
+    @property
+    def event_continuation(self) -> bool:
+        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v3")
 
     @property
     def sources(self) -> tuple[dict[str, Any], ...]:
@@ -79,10 +88,14 @@ class RepairRecipe:
 
     @property
     def test_destination(self) -> str:
+        if self.event_continuation:
+            return EVENT_TEST_DESTINATION
         return PUBLIC_TEST_DESTINATION if self.public_choices else TEST_DESTINATION
 
     @property
     def test_classes(self) -> tuple[str, ...]:
+        if self.event_continuation:
+            return (TEST_CLASS, PUBLIC_TEST_CLASS, EVENT_TEST_CLASS)
         return (TEST_CLASS, PUBLIC_TEST_CLASS) if self.public_choices else (TEST_CLASS,)
 
 
@@ -92,9 +105,11 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
     if not isinstance(d, dict) or d.get("schema_version") not in {
         "full-run-backend-repair-config-v1",
         "full-run-backend-repair-config-v2",
+        "full-run-backend-repair-config-v3",
     }:
         raise ValueError("Unsupported backend repair configuration version")
-    public_choices = d["schema_version"] == "full-run-backend-repair-config-v2"
+    event_continuation = d["schema_version"] == "full-run-backend-repair-config-v3"
+    public_choices = d["schema_version"] != "full-run-backend-repair-config-v1"
     keys = {
         "schema_version",
         "base_upstream",
@@ -120,7 +135,7 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
     if d["automatic_training"] is not False or d["automatic_admission"] is not False:
         raise ValueError("A build candidate cannot authorize training or admission")
     if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] != (
-        23 if public_choices else 9
+        32 if event_continuation else 23 if public_choices else 9
     ):
         raise ValueError("Unsupported frozen backend repair scope")
     for key in ("base_upstream", "candidate_upstream", "output_dir"):
@@ -153,12 +168,18 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         raise ValueError("Backend repair engine source fields differ")
     if len({s["path"] for s in sources}) != len(sources):
         raise ValueError("Backend repair source paths are duplicated")
-    if public_choices and {s["path"] for s in sources} != {
-        "src/Sts2Emulator/Core/CombatObservation.cs",
-        "src/Sts2Emulator/Core/Run/RunPublicChoices.cs",
-        "src/Sts2Emulator/Interop/RunNativeExports.cs",
-    }:
-        raise ValueError("Public-choice repair source scope differs")
+    if public_choices:
+        expected_sources = (
+            {"src/Sts2Emulator/Core/Run/RunEngine.cs"}
+            if event_continuation
+            else {
+                "src/Sts2Emulator/Core/CombatObservation.cs",
+                "src/Sts2Emulator/Core/Run/RunPublicChoices.cs",
+                "src/Sts2Emulator/Interop/RunNativeExports.cs",
+            }
+        )
+        if {s["path"] for s in sources} != expected_sources:
+            raise ValueError("Public-choice repair source scope differs")
     limits = d["resource_limits"]
     if set(limits) != {"wall_seconds", "cpu_seconds", "memory_bytes", "storage_bytes"} or any(
         type(v) is not int or v <= 0 for v in limits.values()
@@ -607,6 +628,13 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
                 "claim_scope": "synthetic_regressions_and_native_build_not_live_game_conformance",
                 "remaining_checks": (
                     [
+                        "derive_new_adapter_manifest_for_event_repair_native_identity",
+                        "replay_all_89_original_failures_with_event_endpoint_checks",
+                        "verify_source_fixed_ascension_8_against_the_frozen_game",
+                        *REMAINING_CHECKS[3:],
+                    ]
+                    if recipe.event_continuation
+                    else [
                         "integrate_sidecar_into_new_adapter_and_full_run_encoder",
                         "verify_source_fixed_ascension_8_against_the_frozen_game",
                         *REMAINING_CHECKS[3:],
