@@ -27,6 +27,8 @@ EVENT_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftEventContinuationTest
 EVENT_TEST_CLASS = "SpireShiftEventContinuationTests"
 EVENT_CHOICE_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftEventChoiceParityTests.cs"
 EVENT_CHOICE_TEST_CLASS = "SpireShiftEventChoiceParityTests"
+LIFECYCLE_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftTurnEndAndRewardTests.cs"
+LIFECYCLE_TEST_CLASS = "SpireShiftTurnEndAndRewardTests"
 EVENT_CHOICE_TEST_UPDATES = {
     EVENT_TEST_DESTINATION,
     "src/Sts2Emulator.Tests/Events/EventOptionGatingTests.cs",
@@ -83,6 +85,7 @@ class RepairRecipe:
             "full-run-backend-repair-config-v2",
             "full-run-backend-repair-config-v3",
             "full-run-backend-repair-config-v4",
+            "full-run-backend-repair-config-v5",
         }
 
     @property
@@ -90,11 +93,19 @@ class RepairRecipe:
         return self.document["schema_version"] in {
             "full-run-backend-repair-config-v3",
             "full-run-backend-repair-config-v4",
+            "full-run-backend-repair-config-v5",
         }
 
     @property
     def event_choices(self) -> bool:
-        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v4")
+        return self.document["schema_version"] in {
+            "full-run-backend-repair-config-v4",
+            "full-run-backend-repair-config-v5",
+        }
+
+    @property
+    def lifecycle(self) -> bool:
+        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v5")
 
     @property
     def sources(self) -> tuple[dict[str, Any], ...]:
@@ -104,6 +115,8 @@ class RepairRecipe:
 
     @property
     def test_destination(self) -> str:
+        if self.lifecycle:
+            return LIFECYCLE_TEST_DESTINATION
         if self.event_choices:
             return EVENT_CHOICE_TEST_DESTINATION
         if self.event_continuation:
@@ -119,7 +132,7 @@ class RepairRecipe:
                 EVENT_TEST_CLASS,
                 EVENT_CHOICE_TEST_CLASS,
                 "EventCaptures",
-            )
+            ) + ((LIFECYCLE_TEST_CLASS,) if self.lifecycle else ())
         if self.event_continuation:
             return (TEST_CLASS, PUBLIC_TEST_CLASS, EVENT_TEST_CLASS)
         return (TEST_CLASS, PUBLIC_TEST_CLASS) if self.public_choices else (TEST_CLASS,)
@@ -133,12 +146,18 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         "full-run-backend-repair-config-v2",
         "full-run-backend-repair-config-v3",
         "full-run-backend-repair-config-v4",
+        "full-run-backend-repair-config-v5",
     }:
         raise ValueError("Unsupported backend repair configuration version")
-    event_choices = d["schema_version"] == "full-run-backend-repair-config-v4"
+    lifecycle = d["schema_version"] == "full-run-backend-repair-config-v5"
+    event_choices = d["schema_version"] in {
+        "full-run-backend-repair-config-v4",
+        "full-run-backend-repair-config-v5",
+    }
     event_continuation = d["schema_version"] in {
         "full-run-backend-repair-config-v3",
         "full-run-backend-repair-config-v4",
+        "full-run-backend-repair-config-v5",
     }
     public_choices = d["schema_version"] != "full-run-backend-repair-config-v1"
     keys = {
@@ -167,9 +186,18 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         raise ValueError("Backend repair configuration identity differs")
     if d["automatic_training"] is not False or d["automatic_admission"] is not False:
         raise ValueError("A build candidate cannot authorize training or admission")
-    if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] != (
-        240 if event_choices else 32 if event_continuation else 23 if public_choices else 9
-    ):
+    expected_tests = (
+        (246, 247)
+        if lifecycle
+        else (240,)
+        if event_choices
+        else (32,)
+        if event_continuation
+        else (23,)
+        if public_choices
+        else (9,)
+    )
+    if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] not in expected_tests:
         raise ValueError("Unsupported frozen backend repair scope")
     for key in ("base_upstream", "candidate_upstream", "output_dir"):
         p = (root / d[key]).resolve()
@@ -207,7 +235,9 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         raise ValueError("Backend repair source paths are duplicated")
     if public_choices:
         expected_sources = (
-            {"src/Sts2Emulator/Core/Run/RunEngine.cs"}
+            {"src/Sts2Emulator/Core/Run/RunEngine.cs", "src/Sts2Emulator/Core/CombatEngine.cs"}
+            if lifecycle
+            else {"src/Sts2Emulator/Core/Run/RunEngine.cs"}
             if event_continuation
             else {
                 "src/Sts2Emulator/Core/CombatObservation.cs",
@@ -226,10 +256,15 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
                 for s in updates
             )
             or len({s["path"] for s in updates}) != len(updates)
-            or {s["path"] for s in updates}
-            not in (
-                EVENT_CHOICE_TEST_UPDATES,
-                EVENT_CHOICE_TEST_UPDATES | {"src/Sts2Emulator.Tests/RunEngineTests.cs"},
+            or (
+                {s["path"] for s in updates}
+                not in (set(), {"src/Sts2Emulator.Tests/RunEngineTests.cs"})
+                if lifecycle
+                else {s["path"] for s in updates}
+                not in (
+                    EVENT_CHOICE_TEST_UPDATES,
+                    EVENT_CHOICE_TEST_UPDATES | {"src/Sts2Emulator.Tests/RunEngineTests.cs"},
+                )
             )
         ):
             raise ValueError("Event-choice test correction scope differs")
@@ -625,9 +660,7 @@ def show_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
 
 def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
     if not os.environ.get(EXPERIMENT_METRICS_ENV):
-        raise ValueError(
-            "Only the owner-run repair script launches native builds with resource caps"
-        )
+        raise ValueError("Native repair builds require explicit resource caps")
     recipe.output.mkdir(parents=True, exist_ok=True)
     with (recipe.output / "owner.lock").open("a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)

@@ -58,6 +58,8 @@ def check_a8_evidence(
     assembly_digest: str,
     assembly_size: int,
     profile: dict[str, Any],
+    *,
+    lifecycle_repair: bool = False,
 ) -> tuple[str, ...]:
     """Assess identities and executed evidence, without native import or admission."""
     errors = []
@@ -79,7 +81,7 @@ def check_a8_evidence(
     if (
         build.get("candidate_revision") != manifest.engine.revision
         or build.get("native_sha256") != native_sha
-        or build.get("regression_tests", {}).get("passed") != 240
+        or build.get("regression_tests", {}).get("passed") != (247 if lifecycle_repair else 240)
         or build.get("regression_tests", {}).get("failed") != 0
     ):
         errors.append("Native repair/build identity or targeted checks differ")
@@ -87,7 +89,7 @@ def check_a8_evidence(
         native_suite.get("build_report_id") != build.get("report_id")
         or native_suite.get("candidate_revision") != manifest.engine.revision
         or native_suite.get("native_sha256") != native_sha
-        or native_suite.get("counts", {}).get("passed", 0) < 4942
+        or native_suite.get("counts", {}).get("passed", 0) < (4949 if lifecycle_repair else 4942)
         or native_suite.get("counts", {}).get("failed") != 0
         or len(native_suite.get("skips", [])) != 1
         or "StepCostProbe" not in native_suite["skips"][0]
@@ -142,13 +144,19 @@ def check_a8_evidence(
 
 def admit_a8_candidate(config_path: Path, game_assembly: Path) -> dict[str, Any]:
     config = identified_document(config_path, "config_id")
-    if config.get("schema_version") != "public-a8-admission-config-v1":
+    if config.get("schema_version") not in {
+        "public-a8-admission-config-v1",
+        "public-a8-admission-config-v2",
+    }:
         raise ValueError("Unsupported A8 admission configuration")
+    lifecycle = config["schema_version"] == "public-a8-admission-config-v2"
     refs = config["inputs"]
     for ref in refs.values():
         if hashlib.sha256(Path(ref["path"]).read_bytes()).hexdigest() != ref["sha256"]:
             raise ValueError(f"Pinned admission input bytes differ: {ref['path']}")
     recipe = load_repair_recipe(Path(refs["repair_config"]["path"]))
+    if recipe.lifecycle != lifecycle:
+        raise ValueError("A8 admission and repair scope differ")
     build = show_backend_repair(recipe)
     manifest = load_patch_manifest(Path(refs["public_manifest"]["path"]))
     native_suite = identified_document(Path(refs["native_suite"]["path"]))
@@ -166,6 +174,27 @@ def admit_a8_candidate(config_path: Path, game_assembly: Path) -> dict[str, Any]
     ]
     if len(boundaries) != 9 or any(e.get("outcome") != "Passed" for e in boundaries):
         raise ValueError("Executed three-act/terminal regressions are incomplete")
+    lifecycle_tests = [
+        e for e in results if "SpireShiftTurnEndAndRewardTests." in e.get("testName", "")
+    ]
+    probe = None
+    if lifecycle:
+        if len(lifecycle_tests) != 7 or any(e.get("outcome") != "Passed" for e in lifecycle_tests):
+            raise ValueError("Executed turn-end/reward regressions are incomplete")
+        probe = identified_document(Path(refs["lifecycle_probe"]["path"]))
+        if (
+            probe.get("candidate_manifest_id") != manifest.manifest_id
+            or probe.get("candidate_revision") != manifest.engine.revision
+            or probe.get("crash_reproduction_seed") != 200192
+            or probe.get("crash_seed_finished_without_error") is not True
+            or probe.get("empty_reward_cases_verified") != 3
+            or probe.get("optimizer_steps") != 0
+            or probe.get("training_inputs_created") is not False
+        ):
+            raise ValueError("Turn-end/reward debug reproduction evidence differs")
+        for ref in probe["evidence_files"]:
+            if hashlib.sha256(Path(ref["path"]).read_bytes()).hexdigest() != ref["sha256"]:
+                raise ValueError("Turn-end/reward debug execution bytes differ")
     for execution in python_suite["executions"]:
         log = Path(refs["python_suite"]["path"]).parent / (execution["suite"] + ".log")
         if hashlib.sha256(log.read_bytes()).hexdigest() != execution["log_sha256"]:
@@ -198,6 +227,7 @@ def admit_a8_candidate(config_path: Path, game_assembly: Path) -> dict[str, Any]
         digest,
         game_assembly.stat().st_size,
         profile,
+        lifecycle_repair=lifecycle,
     )
     if errors:
         raise ValueError("A8 admission rejected: " + "; ".join(errors))
@@ -219,6 +249,7 @@ def admit_a8_candidate(config_path: Path, game_assembly: Path) -> dict[str, Any]
         "rule_audit_id": audit["evidence_id"],
         "authoritative_fixture_tree": tree,
         "three_act_and_terminal_regressions": len(boundaries),
+        **({"lifecycle_regressions": 7, "lifecycle_probe_id": probe["report_id"]} if probe else {}),
         "empirical_later_act_ui_parity": False,
         "coverage_limitations": list(LIMITATIONS),
         "agent_games_played": 0,

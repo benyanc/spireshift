@@ -13,8 +13,10 @@ The current learning stage is [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md): 
 player samples legal actions, learns from complete-run outcomes and compares its frozen result
 with its initializer on independent seeds. The repaired simulator is admitted for scoped policy
 learning with [explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
-The small native pipeline test works; a useful player, full win and adaptive thinking are still
-to be established. The next sustained experiment is owner-run through the guide's one command.
+The first PPO pilot established no improvement and exposed a native crash and empty reward
+choices. Those defects are repaired, game processes are isolated, and the short pipeline check
+passes. A useful player, full win and adaptive thinking remain to be established. The next v2
+experiment is owner-run through the guide's one command.
 
 The repository also contains the research contracts and a seeded mock vertical slice:
 

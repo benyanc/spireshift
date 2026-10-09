@@ -110,3 +110,13 @@ def test_bad_or_mislabelled_admission_evidence_is_rejected(kind: str) -> None:
     else:
         data[5]["source_findings"].pop()
     assert check_a8_evidence(*data)
+
+
+def test_lifecycle_scope_requires_its_seven_extra_checks() -> None:
+    data = list(copy.deepcopy(evidence()))
+    assert check_a8_evidence(*data, lifecycle_repair=True)
+    data[1]["regression_tests"]["passed"] = 247
+    data[2]["counts"]["passed"] = 4949
+    assert check_a8_evidence(*data, lifecycle_repair=True) == ()
+    data[2]["counts"]["passed"] = 4948
+    assert check_a8_evidence(*data, lifecycle_repair=True)

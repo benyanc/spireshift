@@ -177,7 +177,7 @@ def test_unwrapped_native_build_is_refused_before_preparation(
     recipe: repair.RepairRecipe, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.delenv(EXPERIMENT_METRICS_ENV, raising=False)
-    with pytest.raises(ValueError, match="owner-run repair script"):
+    with pytest.raises(ValueError, match="resource caps"):
         repair.build_backend_repair(recipe)
     assert not recipe.candidate.exists()
 

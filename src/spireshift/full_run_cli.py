@@ -149,7 +149,7 @@ def run_full_run_command(args: argparse.Namespace) -> int:
                 if not os.environ.get(EXPERIMENT_METRICS_ENV):
                     raise ValueError(
                         "A8 training requires job-wide resource caps; "
-                        "use scripts/train-full-run-ppo-a8-v1.sh"
+                        "use the matching owner launcher under scripts/"
                     )
                 report = run_ppo(args.config, args.output_dir, resume=args.resume)
             else:
@@ -237,6 +237,8 @@ def run_full_run_command(args: argparse.Namespace) -> int:
                 args.output_dir,
             )
         print(json.dumps(result, indent=2, sort_keys=True))
+        if args.full_run_command == "train-ppo" and result.get("development_status") != "completed":
+            return 1  # Saved failures remain available; the resource report must flag this job.
         return 0
     except (OSError, ValueError, KeyError, TypeError, EvanGambitBackendError) as error:
         print(json.dumps({"status": "error", "error": str(error)}, indent=2))

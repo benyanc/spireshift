@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-import multiprocessing
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from collections.abc import Callable
+from concurrent.futures import Executor, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -17,6 +17,7 @@ from spireshift.adapters.evangambit_public_choices import (
     public_adapter_digest,
 )
 from spireshift.core.manifest import RulesetIdentity, load_patch_manifest, manifest_identifier
+from spireshift.core.protocols import EnvironmentAdapter
 from spireshift.full_run_a8_admission import PROFILE_ID, identified_document
 from spireshift.full_run_a8_experience import (
     collect_a8_episode,
@@ -27,6 +28,13 @@ from spireshift.full_run_a8_experience import (
 )
 from spireshift.full_run_experience import atomic_json, save_episode
 from spireshift.full_run_ppo_math import ActorCritic, Adam, fit_round, initialize_critic
+from spireshift.full_run_ppo_worker import (
+    ISOLATION_ID,
+    JournalEnvironment,
+    execution_evidence,
+    run_isolated_episode,
+    verify_execution_evidence,
+)
 from spireshift.full_run_public_policy import initial_public_full_run_model
 from spireshift.models import _exact_keys, _mapping
 from spireshift.neural_combat_features import load_printed_card_catalog
@@ -47,7 +55,9 @@ from spireshift.training_objective import (
 )
 
 CONFIG_SCHEMA = "public-a8-ppo-config-v1"
-REPORT_SCHEMA = "public-a8-ppo-report-v1"
+REPORT_SCHEMA = "public-a8-ppo-report-v2"
+LEGACY_RUNNER_SHA256 = "b03e51910a70a077efcfa92023cdc3ef7de3ca4733a73f5c6f8869964601ab19"
+LEGACY_EXPERIENCE_ID = "sha256:8b9e30538341e5afcefe326c882100a4bd4400324d6d3c90aef64a58b313d8b7"
 
 
 def bounded_integer(value: object, label: str, low: int, high: int) -> int:
@@ -236,6 +246,18 @@ def ppo_protocol(config: PPOConfig) -> dict[str, Any]:
         "config_id": config.config_id,
         "experience_implementation_id": implementation_id(),
         "runner_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "episode_execution": {
+            "isolation_id": ISOLATION_ID,
+            "source_sha256": hashlib.sha256(
+                Path(__file__).with_name("full_run_ppo_worker.py").read_bytes()
+            ).hexdigest(),
+            "episode_wall_seconds": min(
+                2 * config.score.evaluation_objective.whole_run_budget + 10,
+                config.document["resource_limits"]["wall_seconds"],
+            ),
+            "automatic_retries": 0,
+            "debug_journal_is_model_input": False,
+        },
         "training_spec_id": config.score.spec_id,
         "split_manifest_id": config.splits.manifest_id,
         "ruleset_manifest_id": config.ruleset.manifest_id,
@@ -284,8 +306,17 @@ def episode_worker(request: dict[str, Any]) -> dict[str, Any]:
             Path(inputs["ruleset_manifest"]["path"]),
             max_episode_steps=config.document["maximum_decisions"] + 1,
         )
+    factory: Callable[[], EnvironmentAdapter] = _BACKEND.factory
+    if "episode_wall_seconds" in request:
+        journal = Path(request["case_path"]).with_name("last-public-step.json")
+        native_factory = factory
+
+        def journal_factory() -> EnvironmentAdapter:
+            return JournalEnvironment(native_factory(), journal)
+
+        factory = journal_factory
     case, trace = collect_a8_episode(
-        _BACKEND.factory,
+        factory,
         config.ruleset,
         model,
         config.score,
@@ -303,7 +334,7 @@ def episode_worker(request: dict[str, Any]) -> dict[str, Any]:
 
 class ExperienceStore:
     def __init__(
-        self, config: PPOConfig, config_path: Path, output: Path, executor: ProcessPoolExecutor
+        self, config: PPOConfig, config_path: Path, output: Path, executor: Executor
     ) -> None:
         self.config, self.config_path, self.output, self.executor = (
             config,
@@ -325,6 +356,14 @@ class ExperienceStore:
         return path
 
     def failure(self, binding: dict[str, Any], path: Path, error: str) -> dict[str, Any]:
+        completed = path.with_name("case.json")
+        if completed.exists():
+            # A native teardown can fail after writing its result. Preserve those
+            # bytes as debug evidence, count a failed attempt, and never fit them.
+            partial = path.with_name("post-crash-case.json")
+            if partial.exists():
+                raise ValueError("Post-crash debug result already exists")
+            completed.rename(partial)
         return frozen_json(
             path,
             {
@@ -332,6 +371,7 @@ class ExperienceStore:
                 "binding": binding,
                 "error": error,
                 "cpu_seconds_known": False,
+                "execution_evidence": execution_evidence(path.parent),
                 "outcome": {
                     "seed": binding["seed"],
                     "status": "runtime_error",
@@ -396,6 +436,7 @@ class ExperienceStore:
                 saved = identified_document(failure_path, "case_id")
                 if saved["binding"] != binding or saved.get("cpu_seconds_known") is not False:
                     raise ValueError("Saved PPO failure differs")
+                verify_execution_evidence(directory, saved.get("execution_evidence", {}))
                 self.cases[key], self.paths[key] = saved, failure_path
                 continue
             started = directory / "started.json"
@@ -419,9 +460,12 @@ class ExperienceStore:
                 "behavior": binding["behavior"],
                 "temperature": binding["temperature"],
                 "sampling_seed": sampling_seed,
+                "episode_wall_seconds": ppo_protocol(self.config)["episode_execution"][
+                    "episode_wall_seconds"
+                ],
             }
             try:
-                future = self.executor.submit(episode_worker, request)
+                future = self.executor.submit(run_isolated_episode, request)
             except Exception as exc:
                 self.cases[key] = self.failure(binding, failure_path, f"Submission failed: {exc}")
                 self.paths[key] = failure_path
@@ -514,9 +558,7 @@ def run_locked(
     updates: list[dict[str, Any]] = []
     plateau, stop = 0, "round_limit"
     write_experiment_metrics(ExperimentMetrics(trajectories=0, simulations=0, transitions=0))
-    with ProcessPoolExecutor(
-        max_workers=config.document["workers"], mp_context=multiprocessing.get_context("spawn")
-    ) as executor:
+    with ThreadPoolExecutor(max_workers=config.document["workers"]) as executor:
         store = ExperienceStore(config, config_path, output, executor)
         store.save_model(initial)
         confirmation, _ = store.panel(
@@ -705,6 +747,11 @@ def run_locked(
                 "updates": updates,
                 "development": development,
                 "paired_development": paired,
+                "development_status": (
+                    "incomplete_with_failed_attempts"
+                    if any(d["summary"]["failed_runs"] for d in development.values())
+                    else "completed"
+                ),
                 "champion_checkpoint": str(store.save_model(champion).relative_to(output)),
                 "experience_cases": len(cases),
                 "public_decisions": sum(c["outcome"]["decisions"] for c in cases),
@@ -762,6 +809,12 @@ def paired_summary(
             for a, b in pairs
         ),
         "mean_maximum_floor_difference": sum(differences) / len(pairs),
+        "distinct_players": initial["model_id"] != champion["model_id"],
+        "comparison_valid": initial["model_id"] != champion["model_id"]
+        and all(
+            a.get("score", {}).get("completed") and b.get("score", {}).get("completed")
+            for a, b in pairs
+        ),
         "claim_scope": "paired_independent_development_not_final_test_or_foundation_readiness",
     }
 
@@ -769,7 +822,19 @@ def paired_summary(
 def inspect_ppo(config_path: Path, output: Path) -> dict[str, Any]:
     config = load_ppo_config(config_path)
     report = identified_document(output / "ppo-report.json")
-    if report["schema_version"] != REPORT_SCHEMA or report["protocol"] != ppo_protocol(config):
+    historical = report["schema_version"] == "public-a8-ppo-report-v1"
+    expected_protocol = ppo_protocol(config)
+    if historical:
+        # Read the preserved v1 result against its exact recorded implementation.
+        # Training/resume still requires the current protocol; archival reading
+        # neither upgrades old experience nor reruns its crashed attempts.
+        expected_protocol.pop("episode_execution")
+        expected_protocol["runner_source_sha256"] = LEGACY_RUNNER_SHA256
+        expected_protocol["experience_implementation_id"] = LEGACY_EXPERIENCE_ID
+    if (
+        report["schema_version"] not in {REPORT_SCHEMA, "public-a8-ppo-report-v1"}
+        or report["protocol"] != expected_protocol
+    ):
         raise ValueError("Saved PPO result belongs to another implementation or configuration")
     saved_protocol = identified_document(output / "protocol.json", "protocol_id")
     if {k: v for k, v in saved_protocol.items() if k != "protocol_id"} != report["protocol"]:
@@ -803,6 +868,8 @@ def inspect_ppo(config_path: Path, output: Path) -> dict[str, Any]:
         )
         if path.name != "failure.json":
             case, _ = load_a8_episode(path, case["binding"])
+        else:
+            verify_execution_evidence(path.parent, case.get("execution_evidence", {}))
         if case["case_id"] != ref["case_id"]:
             raise ValueError("Saved PPO experience identity differs")
         binding = case["binding"]
@@ -819,19 +886,40 @@ def inspect_ppo(config_path: Path, output: Path) -> dict[str, Any]:
             binding["temperature"],
             binding["sampling_seed"],
         )
+        if historical:
+            expected["implementation_id"] = LEGACY_EXPERIENCE_ID
         if binding != expected:
             raise ValueError("Saved episode experiment binding differs")
     return report
 
 
 def summarize_ppo(report: dict[str, Any], output: Path) -> dict[str, Any]:
+    distinct = report["champion_model_id"] != report["initial_model_id"]
+    paired = {
+        **report["paired_development"],
+        "distinct_players": distinct,
+        "comparison_valid": distinct
+        and report["paired_development"]["both_completed"]
+        == report["paired_development"]["planned_pairs"],
+    }
     return {
         "report_id": report["report_id"],
         "rounds_completed": report["rounds_completed"],
         "stop_reason": report["stop_reason"],
         "initial": report["development"][report["initial_model_id"]]["summary"],
         "trained": report["development"][report["champion_model_id"]]["summary"],
-        "paired_development": report["paired_development"],
+        "paired_development": paired,
+        "development_status": report.get(
+            "development_status",
+            "incomplete_with_failed_attempts"
+            if any(d["summary"]["failed_runs"] for d in report["development"].values())
+            else "completed",
+        ),
+        "paired_victory_gain_observed": bool(
+            paired["comparison_valid"]
+            and paired["champion_only_victories"] > paired["initial_only_victories"]
+        ),
+        "historical_implementation": report["schema_version"] != REPORT_SCHEMA,
         "champion_checkpoint": str((output / report["champion_checkpoint"]).resolve()),
         "experience_cases": report["experience_cases"],
         "public_decisions": report["public_decisions"],

@@ -22,6 +22,7 @@ from spireshift.full_run_ppo import (
     load_ppo_config,
     ppo_protocol,
     run_locked,
+    summarize_ppo,
 )
 from spireshift.full_run_ppo_math import initialize_critic
 from spireshift.full_run_public_policy import initial_public_full_run_model
@@ -127,7 +128,7 @@ def test_finite_training_freezes_before_development_and_resumes_without_games(
     atomic_json(path, config.document)
     import spireshift.full_run_ppo as module
 
-    monkeypatch.setattr(module, "ProcessPoolExecutor", ImmediateExecutor)
+    monkeypatch.setattr(module, "ThreadPoolExecutor", ImmediateExecutor)
     monkeypatch.setattr(module, "load_printed_card_catalog", lambda *args: CATALOG)
     ImmediateExecutor.requests = []
     output = tmp_path / "pilot"
@@ -214,7 +215,7 @@ def test_terminal_only_reference_uses_zero_loss_return_and_no_bootstrap_graduati
     atomic_json(path, d)
     import spireshift.full_run_ppo as module
 
-    monkeypatch.setattr(module, "ProcessPoolExecutor", ImmediateExecutor)
+    monkeypatch.setattr(module, "ThreadPoolExecutor", ImmediateExecutor)
     monkeypatch.setattr(module, "load_printed_card_catalog", lambda *args: CATALOG)
     output = tmp_path / "terminal"
     output.mkdir()
@@ -255,3 +256,84 @@ def test_interrupted_trace_is_retained_with_unknown_cost_and_never_replayed(tmp_
     failure = resumed.cases[keys[0]]
     assert failure["cpu_seconds_known"] is False
     assert failure["outcome"]["status"] == "runtime_error"
+
+
+def test_same_checkpoint_is_not_reported_as_an_independent_model_gain() -> None:
+    from spireshift.full_run_ppo import REPORT_SCHEMA
+
+    report = {
+        "schema_version": REPORT_SCHEMA,
+        "report_id": "synthetic",
+        "rounds_completed": 0,
+        "stop_reason": "synthetic",
+        "initial_model_id": "same",
+        "champion_model_id": "same",
+        "development": {"same": {"summary": {"failed_runs": 1}}},
+        "paired_development": {
+            "planned_pairs": 2,
+            "both_completed": 1,
+            "champion_only_victories": 0,
+            "initial_only_victories": 0,
+        },
+        "updates": [],
+        "experience_cases": 2,
+        "public_decisions": 0,
+        "champion_checkpoint": "model.json",
+        "interrupted_or_worker_failed_attempts": 1,
+        "all_episode_costs_known": False,
+        "graduation": {},
+    }
+    # Explicit fake summaries validate reporting, never learning evidence.
+    summary = summarize_ppo(report, Path("unused"))
+    assert summary["development_status"] == "incomplete_with_failed_attempts"
+    assert summary["paired_development"]["comparison_valid"] is False
+    assert summary["paired_development"]["distinct_players"] is False
+
+
+def test_native_teardown_failure_retains_a_completed_file_only_as_debug(tmp_path: Path) -> None:
+    config = small_config()
+    directory = tmp_path / "case"
+    directory.mkdir()
+    completed = directory / "case.json"
+    completed.write_text('{"debug": "result written before native teardown"}')
+    store = ExperienceStore(config, tmp_path / "config.json", tmp_path, ImmediateExecutor())  # type: ignore[arg-type]
+    case = store.failure({"seed": 1}, directory / "failure.json", "Native teardown failed")
+    assert not completed.exists()
+    assert (directory / "post-crash-case.json").exists()
+    assert "post-crash-case.json" in case["execution_evidence"]
+    assert case["outcome"]["status"] == "runtime_error"
+    assert case["cpu_seconds_known"] is False
+
+
+def test_incomplete_development_marks_the_training_command_failed(
+    monkeypatch: pytest.MonkeyPatch, capsys: Any
+) -> None:
+    import spireshift.full_run_cli as module
+    from spireshift.resource_tracking import EXPERIMENT_METRICS_ENV
+
+    monkeypatch.setenv(EXPERIMENT_METRICS_ENV, "synthetic-not-used")
+    monkeypatch.setattr(module, "run_ppo", lambda *args, **kwargs: {})
+    monkeypatch.setattr(
+        module,
+        "summarize_ppo",
+        lambda *args: {"development_status": "incomplete_with_failed_attempts"},
+    )
+    assert main(["full-run", "train-ppo", str(CONFIG), "unused"]) == 1
+    assert json.loads(capsys.readouterr().out)["development_status"].startswith("incomplete")
+
+
+def test_repaired_owner_recipe_has_a_separate_scope_and_later_plateau_stop() -> None:
+    newer = load_ppo_config(Path("configs/full-run-ppo/sts2-v0.107.1-public-a8-pilot-v2.json"))
+    older = load_ppo_config(CONFIG)
+    assert newer.ruleset.manifest_id != older.ruleset.manifest_id
+    assert newer.splits.manifest_id != older.splits.manifest_id
+    assert newer.document["learning"]["minimum_rounds"] == 24
+    assert newer.document["learning"]["plateau_confirmations"] == 6
+    script = Path("scripts/train-full-run-ppo-a8-v2.sh").read_text()
+    for flag, key in (
+        ("max-wall-seconds", "wall_seconds"),
+        ("max-cpu-seconds", "cpu_seconds"),
+        ("max-storage-bytes", "storage_bytes"),
+        ("max-memory-bytes", "memory_bytes"),
+    ):
+        assert f"--{flag} {newer.document['resource_limits'][key]}" in script

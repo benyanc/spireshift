@@ -1,36 +1,52 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after scoped A8 admission and the first sampled-outcome PPO pipeline check.
+Updated 2026-10-09 after the negative first PPO pilot, isolated crash handling and native repairs.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
 
-**Next owner stage:** [A8 full-run neural learning](full-run-ppo-a8.md). The repaired public
-simulator is admitted for policy-only A8 learning. It additionally passed 31 original Python
-interface checks and 420 original real-game fixture checks, with six explicitly recorded legacy
-skips, in 5.518 seconds. Its source/native/adapter identities and coverage limits are frozen in
-[admission evidence](evidence/public-a8-policy-admission-v1.json) and [ADR 0004](decisions/0004-scoped-a8-simulator-learning.md).
+**Next owner stage:** the v2 [A8 full-run neural learning](full-run-ppo-a8.md) pilot. The first
+owner PPO run completed 12 rounds and 1,088 attempts, with zero full wins, but kept the initializer.
+Fifty of 64 development attempts failed when one native abort destroyed the shared process pool;
+three sampled training cases hit empty reward slots. The incomplete self-comparison establishes
+no learning gain. [Assessment and repair evidence](evidence/public-a8-ppo-pilot-v1-assessment.json)
+preserves the original result.
+
+The simulator now snapshots turn-end hooks before executing them and flushes the current hand,
+preserving cards drawn by Regret/Centennial Puzzle and retention. Empty card rewards offer only
+genuine cards plus Skip. All four reported failure replays pass. The separate native identity
+passes 247 targeted / 4,949 native tests (one diagnostic skip), 31 original Python interface checks,
+420 original game-fixture checks (six legacy skips), and ten public contract checks. It is
+re-admitted for policy-only A8 learning. Source/native/adapter identities and coverage limits are
+frozen in [admission evidence](evidence/public-a8-policy-admission-v2.json) and
+[ADR 0004](decisions/0004-scoped-a8-simulator-learning.md).
 Empirical later-act UI parity and complete A8 mechanic fidelity remain open; passing interface
 tests is not a complete live-game claim. #141 retains those gaps, but they do not block this
 explicitly scoped simulator learning pilot.
 
-The outcome-trained PPO loop is implemented under #35. It samples actual legal actions across
+The outcome-trained PPO loop is implemented under #35. Disposable processes now isolate each
+game; failures/caps are retained without free retries, with separate hashed public-step debug
+journals. An incomplete development result marks the job failed, and a self-comparison is
+explicitly invalid as evidence of a changed player's gain. It samples actual legal actions across
 all decision families, verifies their behavior probabilities, learns the complete mutable actor
 and a bootstrap critic, retains failures/caps, resumes immutable game/optimizer checkpoints and
-freezes the selected player before independent development. A fresh A8 score and complete-run
-split use seeds 200000–203999; the final test remains sealed. No old A0-labelled genome/greedy
-trace is migrated. The finite owner recipe has 64 sampled games per round, at most 24 rounds,
-eight workers and at most 2,112 planned attempts including confirmation/development.
+freezes the selected player before independent development. Fresh complete-run seeds
+300000–307999 replace the inspected first pilot. The v2 recipe has 128 sampled games per round,
+24 minimum / 32 maximum rounds, six unsuccessful confirmation checks before plateau stopping,
+eight disposable workers, and at most 5,504 planned attempts. It keeps the same actor/critic,
+PPO update settings and score formula. There is no promise that a larger batch will solve learning.
 
-The final short native pipeline check completed 12 attempts / 1,335 decisions / 24 optimizer
-steps in 11.040 wall / 15.834 CPU seconds, with zero failures/stalls. Both players lost on two
-development seeds: mean floor 10.5 initially and 10.0 after the update. This verifies the loop,
-not improvement or foundation readiness. The first 10.226-second check remains preserved.
-[Pipeline evidence](evidence/public-a8-ppo-pipeline-v1.json) records both; the larger owner
-experiment has not started. Assess its independent results before scaling, adding difficulty
-levels, alternating with evolution or training adaptive thinking.
+The isolated pipeline check completed 14 attempts / 1,974 decisions / 16 optimizer steps in
+16.909 wall / 23.214 CPU seconds, with zero failures. Both players lost on its two development
+seeds, with mean floor 11.5 initially / 17.0 updated. These two inspected seeds are excluded from
+the sustained experiment's 128 development seeds. This verifies implementation, not improvement
+or foundation readiness. The owner alone launches the v2 experiment, estimated 30–60 minutes
+with a 60-minute per-launch cap; it has not started. Assess the complete independent result before
+scaling or adaptive thinking. A second valid stall should trigger a score/credit-assignment or
+matched evolution comparison, not an automatic larger PPO launch. Different ascensions remain
+deferred under #142; terminal-only/matched method comparisons remain in #35/#140.
 
 The history below remains bound to its original engines, schemas and experiments. The current
 handoff above supersedes earlier repair-before-training instructions.
