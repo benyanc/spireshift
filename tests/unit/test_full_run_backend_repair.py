@@ -6,7 +6,9 @@ import json
 import os
 import subprocess
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
+from unittest.mock import Mock
 
 import pytest
 
@@ -345,3 +347,156 @@ def test_owner_script_caps_match_the_recipe_and_has_no_training_followup() -> No
         assert f"{flag} {recipe.document['resource_limits'][key]}" in script
     assert "full-run evolve" not in script
     assert "backend admit" not in script
+
+
+def test_public_recipe_keeps_first_candidate_and_requires_both_test_classes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first = repair.load_repair_recipe(
+        Path("configs/backend-repair/sts2-v0.107.1-full-run-completion-v1.json")
+    )
+
+    # CI has frozen metadata, never the owner's private build artifacts or binaries.
+    def metadata_only_parent(path: Path) -> Any:
+        if path == first.output / "candidate-manifest.json":
+            return load_patch_manifest(
+                Path("manifests/patches/sts2-v0.107.1-evangambit-full-run-repair-v1-pending.json")
+            )
+        return load_patch_manifest(path)
+
+    monkeypatch.setattr(repair, "load_patch_manifest", metadata_only_parent)
+    second = repair.load_repair_recipe(
+        Path("configs/backend-repair/sts2-v0.107.1-public-choices-v1.json")
+    )
+    assert not first.public_choices and second.public_choices
+    assert first.test_classes == (repair.TEST_CLASS,)
+    assert second.test_classes == (repair.TEST_CLASS, repair.PUBLIC_TEST_CLASS)
+    assert first.test_destination == repair.TEST_DESTINATION
+    assert second.test_destination == repair.PUBLIC_TEST_DESTINATION
+    assert second.candidate != first.candidate
+    assert len(second.sources) == 3
+    assert sum(s["base_sha256"] is None for s in second.sources) == 1
+    assert second.document["minimum_regression_tests"] == 23
+    script = Path("scripts/build-public-choices-backend-v1.sh").read_text()
+    for flag, key in (
+        ("--max-wall-seconds", "wall_seconds"),
+        ("--max-cpu-seconds", "cpu_seconds"),
+        ("--max-memory-bytes", "memory_bytes"),
+        ("--max-storage-bytes", "storage_bytes"),
+    ):
+        assert f"{flag} {second.document['resource_limits'][key]}" in script
+    assert "full-run evolve" not in script and "backend admit" not in script
+
+
+def test_native_parser_requires_every_requested_class(tmp_path: Path) -> None:
+    path = tmp_path / "completion.trx"
+    write_trx(path)
+    with pytest.raises(ValueError, match="required native regression class is missing"):
+        repair.read_regression_result(path, 9, (repair.TEST_CLASS, repair.PUBLIC_TEST_CLASS))
+
+
+@pytest.mark.parametrize("valid_profile", [True, False])
+def test_native_capability_check_only_reads_public_lists_and_always_releases_handle(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, valid_profile: bool
+) -> None:
+    reads: list[tuple[int, int]] = []
+
+    def read(handle: int, list_id: int, buffer: Any, length: int) -> int:
+        assert handle == 0 and list_id in (22, 23, 24)
+        reads.append((list_id, length))
+        values = [1, 8 if valid_profile else 0, 0] if list_id == 24 else []
+        if buffer is not None:
+            for index, value in enumerate(values):
+                buffer[index] = value
+        return len(values)
+
+    native = SimpleNamespace(
+        Sts2Run_Create=Mock(return_value=0),
+        Sts2Run_Destroy=Mock(),
+        Sts2Run_GetStateList=Mock(side_effect=read),
+    )
+    # No reset/step methods exist: the capability check cannot launch a game.
+    monkeypatch.setattr("spireshift.full_run_backend_repair.ctypes.CDLL", lambda path: native)
+    if valid_profile:
+        result = repair.inspect_public_choice_exports(tmp_path / "synthetic-library")
+        assert result["games_played"] == 0
+        assert result["view"]["combat_selection"] is None
+        assert result["view"]["fixed_profile"]["source_declared_ascension_level"] == 8
+    else:
+        with pytest.raises(ValueError, match="fixed difficulty profile"):
+            repair.inspect_public_choice_exports(tmp_path / "synthetic-library")
+    assert reads == [(22, 0), (22, 0), (23, 0), (23, 0), (24, 0), (24, 3)]
+    native.Sts2Run_Create.assert_called_once_with()
+    native.Sts2Run_Destroy.assert_called_once_with(0)
+
+
+def test_multi_source_preparation_freezes_added_source_and_refuses_drift(
+    recipe: repair.RepairRecipe,
+) -> None:
+    base = recipe.path(recipe.document["base_upstream"])
+    old_contents = {
+        "src/Sts2Emulator/Core/CombatObservation.cs": "// old combat observation\n",
+        "src/Sts2Emulator/Interop/RunNativeExports.cs": "// old exports\n",
+    }
+    for name, contents in old_contents.items():
+        path = base / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(contents)
+    git(base, "add", ".")
+    git(base, "-c", "user.name=Test", "-c", "user.email=test@localhost", "commit", "-m", "parent")
+    revision = git(base, "rev-parse", "HEAD")
+    document = json.loads((recipe.root / "config.json").read_text())
+    manifest = json.loads((recipe.root / "manifest.json").read_text())
+    manifest["engine"].update(
+        revision=revision, digest={"algorithm": "git-commit-sha1", "value": revision}
+    )
+    manifest["manifest_id"] = manifest_identifier(
+        {k: v for k, v in manifest.items() if k != "manifest_id"}
+    )
+    (recipe.root / "manifest.json").write_text(json.dumps(manifest))
+    document.pop("engine_source")
+    document.update(
+        schema_version="full-run-backend-repair-config-v2",
+        base_revision=revision,
+        base_manifest_id=manifest["manifest_id"],
+        minimum_regression_tests=23,
+    )
+    new_contents = {name: text.replace("old", "repaired") for name, text in old_contents.items()}
+    added = "src/Sts2Emulator/Core/Run/RunPublicChoices.cs"
+    new_contents[added] = "// synthetic public-menu source\n"
+    patch = "".join(
+        "".join(
+            difflib.unified_diff(
+                old_contents.get(name, "").splitlines(keepends=True),
+                text.splitlines(keepends=True),
+                fromfile=f"a/{name}" if name in old_contents else "/dev/null",
+                tofile=f"b/{name}",
+            )
+        )
+        for name, text in sorted(new_contents.items())
+    )
+    patch_path = recipe.path(document["patch"]["path"])
+    patch_path.write_text(patch)
+    document["patch"]["sha256"] = digest(patch_path)
+    document["engine_sources"] = [
+        {
+            "path": name,
+            "base_sha256": digest(base / name) if name in old_contents else None,
+            "repaired_sha256": hashlib.sha256(text.encode()).hexdigest(),
+        }
+        for name, text in sorted(new_contents.items())
+    ]
+    document["config_id"] = manifest_identifier(
+        {k: v for k, v in document.items() if k != "config_id"}
+    )
+    (recipe.root / "config.json").write_text(json.dumps(document))
+    second = repair.load_repair_recipe(recipe.root / "config.json", root=recipe.root)
+    prepared = repair.prepare_backend_repair(second)
+    assert git(base, "rev-parse", "HEAD") == revision
+    assert git(second.candidate, "rev-parse", "HEAD^") == revision
+    assert (second.candidate / added).read_text() == new_contents[added]
+    assert repair.prepare_backend_repair(second) == prepared
+    (second.candidate / added).write_text("preserve unexpected edits\n")
+    with pytest.raises(ValueError, match="unrelated modifications"):
+        repair.prepare_backend_repair(second)
+    assert (second.candidate / added).read_text() == "preserve unexpected edits\n"

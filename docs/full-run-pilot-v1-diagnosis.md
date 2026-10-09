@@ -45,7 +45,7 @@ More games cannot repair an environment that stops correctly progressing runs ea
 These diagnoses preserve the original reports, failed cases, models and declared score. No
 historical error is relabeled as a victory or successful loss. The final test remains sealed.
 
-## Implementation and next owner task
+## First repair: native build complete
 
 A minimal source repair uses the current map row for the defensive ending, clears a stale win
 flag on that ending, and writes the fourth reward after both observation blocks. Nine synthetic
@@ -61,7 +61,7 @@ The owner's first repair attempt compiled successfully, then aborted before exec
 the project targets .NET 9, while the machine has only .NET 10.0.12 (SDK 10.0.401). This was a
 test-host setup failure, not a failed regression. A subsequent short check of the owner's already
 compiled files, with `--no-build --no-restore` and a 30-second timeout, passed all nine targeted
-regressions using .NET 10. The native library has not been published. The
+regressions using .NET 10. At that stage the native library had not been published. The
 [runtime evidence](evidence/full-run-repair-runtime-check-v1.json) records both attempts and the
 saved test-result digest; neither check played a game or trained a player.
 
@@ -73,20 +73,44 @@ and pinned repair source remain unchanged. The setting follows
 [Microsoft's runtime selection policy](https://learn.microsoft.com/en-us/dotnet/core/versions/selection).
 No runtime installation or machine-wide setting is required on this machine.
 
+The owner subsequently completed the native build in 10.284 elapsed / 16.481 CPU seconds, with
+all nine regressions passing. Its library SHA is
+`cc08d7e9c75e2f86cfd84a52e5fd106b16986448f72f860848fb84f9be8b1eb0` and its pending manifest is
+`sha256:4f49cbbbcbbc58cafa91680efc0980745086ce0ac8ad432e9bd2d485daf62bcd`. Build/resource IDs and
+the checked test digest are preserved in [repair evidence](evidence/public-choice-repair-v1-evidence.json).
+It remains pending conformance, with no player games, training or admission.
+
+## Public-choice repair and next owner task
+
+A second isolated candidate builds on the first repair at
+`artifacts/backend/evangambit-v0.107.1-full-run-repair-v2`, revision
+`9d531713416ae8f29380ffa80c3ef99bb1ca39e5`. Its
+[patch and tests](../backend-patches/public-choices-v1/README.md) add complete combat-menu readouts,
+correct draw/discard/generated candidate mapping and upgrades, bundle highlight/confirmation
+state, and a source declaration of fixed Ascension 8. This does not add selectable A0 or prove
+that all implemented rules match live-game A8.
+
+The new Python decoder binds every offered action and rejects incomplete menus. The historical
+adapter, encoder and policies remain unchanged; connecting the new readout to a versioned player
+is still required. All 23 targeted C# regressions passed in a 5.005-second check capped at 45
+seconds, including the earlier nine and fourteen new menu/profile cases. This short check compiled
+managed tests but published no native library and ran no agent games or training.
+
 Run **only this next command**:
 
 ```bash
-bash scripts/build-full-run-backend-repair-v1.sh
+bash scripts/build-public-choices-backend-v1.sh
 ```
 
-It checks the nine targeted C# regressions and builds a separate native library, with caps of
+It checks all 23 targeted C# regressions and builds the second separate native library, with caps of
 30 elapsed minutes, 7,200 CPU seconds, 12 GB memory and 4 GB artifacts. Build logs and numbered
-resource reports are preserved. Repeating a completed command checks/displays its saved result
+resource reports are preserved. It also reads the actual public-list exports on an empty handle,
+without resetting or stepping a game. Repeating a completed command checks/displays its saved result
 without rebuilding. Return the final report for assessment; no command needs to be chained.
 
 The result remains **pending conformance**, with training/admission/promotion disabled. Synthetic
-fixtures use direct test state and cannot count as real agent wins. Public choice completion,
-actual difficulty, frozen-game act-boundary checks and re-admission are still required before a
+fixtures use direct test state and cannot count as real agent wins. Player integration,
+real-game difficulty and act-boundary checks, and re-admission are still required before a
 new training recipe. The repair script launches no policy training or automatic follow-up.
 
 ## Evidence and scope
@@ -102,8 +126,8 @@ reverify every decision trace. Two bounded exact-action reproductions used train
 - Diagnosis: `sha256:b7336e621962076e8af9cd14a427bf1723725c86d910dce144b20efdcead279a`.
 - Repair configuration: `sha256:214b5fdb1bc667b034d1417b0c3be2963f234a25533853707fcdee677c172cb1`.
 
-Only the owner runs sustained builds, training and evaluation; short cached synthetic checks are
-allowed. The next implementation after
-the build assesses its evidence and finishes #141; scaling #135 or fitting the #35 comparator
+Only the owner runs sustained builds, training and evaluation; short synthetic checks are
+allowed. The next implementation after the second native build assesses its evidence and continues
+#141 with versioned player integration; scaling #135 or fitting the #35 comparator
 does not precede those repairs. The competent whole-game player and adaptive thinking objective
 remain unchanged.

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ctypes
 import fcntl
 import hashlib
 import json
@@ -20,6 +21,8 @@ from spireshift.resource_tracking import EXPERIMENT_METRICS_ENV
 
 TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftFullRunCompletionTests.cs"
 TEST_CLASS = "SpireShiftFullRunCompletionTests"
+PUBLIC_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftPublicChoicesTests.cs"
+PUBLIC_TEST_CLASS = "SpireShiftPublicChoicesTests"
 TEST_RUNTIME_POLICY = "net9-preferred-net10-test-host-v1"
 REMAINING_CHECKS = (
     "expose_and_bind_all_public_combat_selection_candidates",
@@ -64,10 +67,34 @@ class RepairRecipe:
     def output(self) -> Path:
         return self.path(self.document["output_dir"])
 
+    @property
+    def public_choices(self) -> bool:
+        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v2")
+
+    @property
+    def sources(self) -> tuple[dict[str, Any], ...]:
+        if self.public_choices:
+            return tuple(self.document["engine_sources"])
+        return (self.document["engine_source"],)
+
+    @property
+    def test_destination(self) -> str:
+        return PUBLIC_TEST_DESTINATION if self.public_choices else TEST_DESTINATION
+
+    @property
+    def test_classes(self) -> tuple[str, ...]:
+        return (TEST_CLASS, PUBLIC_TEST_CLASS) if self.public_choices else (TEST_CLASS,)
+
 
 def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
     root = (root or Path.cwd()).resolve()
     d = json.loads(path.read_text())
+    if not isinstance(d, dict) or d.get("schema_version") not in {
+        "full-run-backend-repair-config-v1",
+        "full-run-backend-repair-config-v2",
+    }:
+        raise ValueError("Unsupported backend repair configuration version")
+    public_choices = d["schema_version"] == "full-run-backend-repair-config-v2"
     keys = {
         "schema_version",
         "base_upstream",
@@ -76,7 +103,7 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         "base_manifest_id",
         "patch",
         "regression_tests",
-        "engine_source",
+        "engine_sources" if public_choices else "engine_source",
         "candidate_upstream",
         "output_dir",
         "runtime",
@@ -86,15 +113,15 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         "minimum_regression_tests",
         "config_id",
     }
-    if not isinstance(d, dict) or set(d) != keys:
+    if set(d) != keys:
         raise ValueError("Unexpected backend repair configuration fields")
-    if d["schema_version"] != "full-run-backend-repair-config-v1" or d[
-        "config_id"
-    ] != manifest_identifier({k: v for k, v in d.items() if k != "config_id"}):
+    if d["config_id"] != manifest_identifier({k: v for k, v in d.items() if k != "config_id"}):
         raise ValueError("Backend repair configuration identity differs")
     if d["automatic_training"] is not False or d["automatic_admission"] is not False:
         raise ValueError("A build candidate cannot authorize training or admission")
-    if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] != 9:
+    if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] != (
+        23 if public_choices else 9
+    ):
         raise ValueError("Unsupported frozen backend repair scope")
     for key in ("base_upstream", "candidate_upstream", "output_dir"):
         p = (root / d[key]).resolve()
@@ -114,8 +141,24 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         entry = d[key]
         if set(entry) != {"path", "sha256"} or _sha(root / entry["path"]) != entry["sha256"]:
             raise ValueError(f"Backend repair {key} identity differs")
-    if set(d["engine_source"]) != {"path", "base_sha256", "repaired_sha256"}:
+    sources = d["engine_sources"] if public_choices else [d["engine_source"]]
+    if (
+        not isinstance(sources, list)
+        or not sources
+        or any(
+            not isinstance(s, dict) or set(s) != {"path", "base_sha256", "repaired_sha256"}
+            for s in sources
+        )
+    ):
         raise ValueError("Backend repair engine source fields differ")
+    if len({s["path"] for s in sources}) != len(sources):
+        raise ValueError("Backend repair source paths are duplicated")
+    if public_choices and {s["path"] for s in sources} != {
+        "src/Sts2Emulator/Core/CombatObservation.cs",
+        "src/Sts2Emulator/Core/Run/RunPublicChoices.cs",
+        "src/Sts2Emulator/Interop/RunNativeExports.cs",
+    }:
+        raise ValueError("Public-choice repair source scope differs")
     limits = d["resource_limits"]
     if set(limits) != {"wall_seconds", "cpu_seconds", "memory_bytes", "storage_bytes"} or any(
         type(v) is not int or v <= 0 for v in limits.values()
@@ -143,28 +186,37 @@ def _identified(path: Path, body: dict[str, Any]) -> dict[str, Any]:
 def _prepare(recipe: RepairRecipe) -> dict[str, Any]:
     d, candidate = recipe.document, recipe.candidate
     base = recipe.path(d["base_upstream"])
-    source = d["engine_source"]
     if _git(base, "rev-parse", "HEAD") != d["base_revision"] or _git(base, "status", "--porcelain"):
         raise ValueError("Pinned original checkout changed; it will not be modified")
-    if _sha(base / source["path"]) != source["base_sha256"]:
+
+    def matches(root: Path, source: dict[str, Any], key: str) -> bool:
+        path = root / source["path"]
+        return (
+            not path.exists()
+            if source[key] is None
+            else path.is_file() and _sha(path) == source[key]
+        )
+
+    if not all(matches(base, source, "base_sha256") for source in recipe.sources):
         raise ValueError("Pinned original engine source changed")
     if not candidate.exists():
         candidate.parent.mkdir(parents=True, exist_ok=True)
         _git(base, "worktree", "add", "--detach", str(candidate), d["base_revision"])
     head = _git(candidate, "rev-parse", "HEAD")
-    changed_paths = {source["path"], TEST_DESTINATION}
+    changed_paths = {s["path"] for s in recipe.sources} | {recipe.test_destination}
     if head == d["base_revision"]:
-        # An interrupted preparation may already have these exact two changes.
-        source_path = candidate / source["path"]
-        if _sha(source_path) == source["base_sha256"]:
+        # An interrupted preparation may already contain the exact source/test repair.
+        if not all(matches(candidate, source, "repaired_sha256") for source in recipe.sources):
+            if not all(matches(candidate, source, "base_sha256") for source in recipe.sources):
+                raise ValueError("Candidate engine does not match the base or exact repair")
             _git(candidate, "apply", "--check", str(recipe.path(d["patch"]["path"])))
             _git(candidate, "apply", str(recipe.path(d["patch"]["path"])))
-        target = candidate / TEST_DESTINATION
+        target = candidate / recipe.test_destination
         if target.exists() and _sha(target) != d["regression_tests"]["sha256"]:
             raise ValueError("Candidate regression tests differ; refusing to replace them")
         if not target.exists():
             shutil.copyfile(recipe.path(d["regression_tests"]["path"]), target)
-        if _sha(source_path) != source["repaired_sha256"]:
+        if not all(matches(candidate, source, "repaired_sha256") for source in recipe.sources):
             raise ValueError("Candidate engine does not match the exact repair")
         expected_names = _git(candidate, "diff", "--name-only", "HEAD").splitlines()
         untracked = _git(candidate, "ls-files", "--others", "--exclude-standard").splitlines()
@@ -197,10 +249,10 @@ def _prepare(recipe: RepairRecipe) -> dict[str, Any]:
         or set(_git(candidate, "diff", "--name-only", "HEAD^", "HEAD").splitlines())
         != changed_paths
     ):
-        raise ValueError("Candidate revision is not the isolated two-file repair")
+        raise ValueError("Candidate revision is not the isolated source/test repair")
     if (
-        _sha(candidate / source["path"]) != source["repaired_sha256"]
-        or _sha(candidate / TEST_DESTINATION) != d["regression_tests"]["sha256"]
+        not all(matches(candidate, source, "repaired_sha256") for source in recipe.sources)
+        or _sha(candidate / recipe.test_destination) != d["regression_tests"]["sha256"]
     ):
         raise ValueError("Candidate source differs from the frozen repair")
     return _identified(
@@ -227,7 +279,9 @@ def prepare_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
         return _prepare(recipe)
 
 
-def read_regression_result(path: Path, minimum: int) -> dict[str, int]:
+def read_regression_result(
+    path: Path, minimum: int, classes: tuple[str, ...] = (TEST_CLASS,)
+) -> dict[str, int]:
     try:
         document = ET.parse(path).getroot()
     except (OSError, ET.ParseError) as exc:
@@ -247,11 +301,50 @@ def read_regression_result(path: Path, minimum: int) -> dict[str, int]:
         raise ValueError("Required native completion regressions did not all pass")
     results = [e for e in document.iter() if e.tag.rsplit("}", 1)[-1] == "UnitTestResult"]
     if len(results) != summary["total"] or any(
-        TEST_CLASS not in e.attrib.get("testName", "") or e.attrib.get("outcome") != "Passed"
+        not any(name in e.attrib.get("testName", "") for name in classes)
+        or e.attrib.get("outcome") != "Passed"
         for e in results
     ):
         raise ValueError("Native regression results do not belong to the completion repair")
+    if any(not any(name in e.attrib.get("testName", "") for e in results) for name in classes):
+        raise ValueError("A required native regression class is missing")
     return summary
+
+
+def inspect_public_choice_exports(library: Path) -> dict[str, Any]:
+    """Read capabilities on an empty handle, with zero reset/step calls or game attempts."""
+    from spireshift.public_run_choices import decode_public_choices, read_complete_state_list
+
+    native = ctypes.CDLL(str(library))
+    native.Sts2Run_Create.restype = ctypes.c_int
+    native.Sts2Run_Create.argtypes = []
+    native.Sts2Run_Destroy.restype = None
+    native.Sts2Run_Destroy.argtypes = [ctypes.c_int]
+    native.Sts2Run_GetStateList.restype = ctypes.c_int
+    native.Sts2Run_GetStateList.argtypes = [
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.POINTER(ctypes.c_int),
+        ctypes.c_int,
+    ]
+    handle = native.Sts2Run_Create()
+    if handle < 0:
+        raise ValueError("Could not allocate a public-choice capability handle")
+    try:
+        lists = {
+            i: read_complete_state_list(native.Sts2Run_GetStateList, handle, i)
+            for i in (22, 23, 24)
+        }
+        view = decode_public_choices("combat", lists[22], lists[23], lists[24])
+        if view.combat_selection is not None or view.bundle_selection is not None:
+            raise ValueError("Empty capability handle exposes stale menu choices")
+        return {
+            "schema_version": "public-choice-export-check-v1",
+            "view": view.as_dict(),
+            "games_played": 0,
+        }
+    finally:
+        native.Sts2Run_Destroy(handle)
 
 
 def select_test_runtime(installed_runtimes: str) -> dict[str, Any]:
@@ -417,7 +510,8 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
             flush=True,
         )
         print(
-            "Checking nine synthetic act-ending and reward regressions; no player training.",
+            f"Checking {recipe.document['minimum_regression_tests']} synthetic repair regressions; "
+            "no player training.",
             flush=True,
         )
         _run_logged(
@@ -428,7 +522,7 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
                 "-c",
                 "Release",
                 "--filter",
-                f"FullyQualifiedName~{TEST_CLASS}",
+                "|".join(f"FullyQualifiedName~{name}" for name in recipe.test_classes),
                 "--logger",
                 "trx;LogFileName=completion.trx",
                 "--results-directory",
@@ -445,7 +539,7 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
         )
         regression_path = attempt / "completion.trx"
         counts = read_regression_result(
-            regression_path, recipe.document["minimum_regression_tests"]
+            regression_path, recipe.document["minimum_regression_tests"], recipe.test_classes
         )
         print(
             "Building the separate native candidate. Existing simulator remains intact.", flush=True
@@ -473,6 +567,7 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
         # Build tools must not rewrite checked-in rules or generated game data.
         if _git(recipe.candidate, "status", "--porcelain"):
             raise ValueError("Native build modified tracked candidate source")
+        public_check = inspect_public_choice_exports(library) if recipe.public_choices else None
         manifest = _pending_manifest(recipe, prepared, library)
         manifest_path = recipe.output / "candidate-manifest.json"
         if manifest_path.exists():
@@ -501,7 +596,23 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
                 "checkpoint_promoted": False,
                 "automatic_followup": False,
                 "games_played": 0,
+                **(
+                    {
+                        "public_choice_export_check": public_check,
+                        "agent_integration_complete": False,
+                    }
+                    if recipe.public_choices
+                    else {}
+                ),
                 "claim_scope": "synthetic_regressions_and_native_build_not_live_game_conformance",
-                "remaining_checks": list(REMAINING_CHECKS),
+                "remaining_checks": (
+                    [
+                        "integrate_sidecar_into_new_adapter_and_full_run_encoder",
+                        "verify_source_fixed_ascension_8_against_the_frozen_game",
+                        *REMAINING_CHECKS[3:],
+                    ]
+                    if recipe.public_choices
+                    else list(REMAINING_CHECKS)
+                ),
             },
         )
