@@ -1,7 +1,8 @@
 # SpireShift backlog
 
-Updated 2026-10-08 after reviewing the owner's first unified evolution pilot (2026-10-09 UTC)
-and preparing a separate simulator repair. GitHub holds acceptance criteria and historical evidence.
+Updated 2026-10-08 after reviewing the owner's first unified evolution pilot and repair build
+(2026-10-09 UTC), and checking the cached native regressions. GitHub holds acceptance criteria
+and historical evidence.
 The owner launches and monitors all sustained collection, training, simulations and evaluations.
 Short local checks are allowed. Planning/implementation does not launch production experiments.
 
@@ -16,7 +17,11 @@ Ascension-0 label. The full-run guard correctly refused the premature wins. Thes
 more sustained learning and prevent a valid A0/full-game claim; larger training is not the next step.
 
 [#141](https://github.com/benyanc/spireshift/issues/141) owns the repairs. A separate private source
-candidate fixes the ending/reward writer, with nine synthetic C# regressions awaiting owner build.
+candidate fixes the ending/reward writer. The owner compiled it, but the first test run aborted
+because .NET 9 was absent. A short no-build/no-restore check passed all nine synthetic C# regressions
+using the installed .NET 10 test host. The launcher now selects/records a supported test runtime;
+the owner still needs to publish the native library. [Saved runtime evidence](evidence/full-run-repair-runtime-check-v1.json)
+preserves the failed attempt and successful cached check. This does not admit the new ruleset.
 Public-choice completion, actual difficulty, frozen-game boundary validation and re-admission remain.
 All original engine binaries, results, recipes and failed cases are preserved; final test is sealed.
 
@@ -29,7 +34,7 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Next owner task:** run `bash scripts/build-full-run-backend-repair-v1.sh` once and return the final
+**Next owner task:** rerun `bash scripts/build-full-run-backend-repair-v1.sh` once and return the final
 report. It checks/builds a separate pending candidate, capped at 30 minutes, and stops before
 admission or training. The [diagnosis and handoff](full-run-pilot-v1-diagnosis.md) give its scope.
 No additional command needs to be chained after it. Finish #141 before a new learning recipe.
@@ -56,7 +61,7 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; owner build next | Repair premature simulator ending/reward writer, complete public choices, verify difficulty and re-admit the new identity before more learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Blocking; nine native regressions pass, owner publish next | Repair premature simulator ending/reward writer, complete public choices, verify difficulty and re-admit the new identity before more learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |

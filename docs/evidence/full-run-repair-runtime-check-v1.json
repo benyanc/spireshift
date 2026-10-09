@@ -1,0 +1,46 @@
+{
+  "schema_version": "backend-repair-runtime-diagnosis-v1",
+  "repair_config_id": "sha256:214b5fdb1bc667b034d1417b0c3be2963f234a25533853707fcdee677c172cb1",
+  "candidate_revision": "99fad6a73912e26af6872c2f0742ebeb5ffb3581",
+  "failed_owner_resource_report_id": "sha256:975b1dba6b72e27e0752c07a62474f8e1d6cb6eca6a3f772979b753a48dc8d3d",
+  "owner_failure": "net9_test_host_missing_installed_net10_only",
+  "test_runtime": {
+    "policy_id": "net9-preferred-net10-test-host-v1",
+    "target_framework": "net9.0",
+    "expected_test_runtime": {
+      "version": "10.0.12",
+      "directory": "/opt/homebrew/Cellar/dotnet/10.0.401/libexec/shared/Microsoft.NETCore.App"
+    },
+    "installed_core_runtimes": [
+      {
+        "version": "10.0.12",
+        "directory": "/opt/homebrew/Cellar/dotnet/10.0.401/libexec/shared/Microsoft.NETCore.App"
+      }
+    ],
+    "roll_forward": "Major",
+    "scope": "regression_test_host_only_native_target_unchanged",
+    "dotnet_executable": "/opt/homebrew/Cellar/dotnet/10.0.401/bin/dotnet",
+    "sdk_version": "10.0.401"
+  },
+  "cached_regression_check": {
+    "command_scope": "filtered_already_compiled_tests_no_build_no_restore",
+    "timeout_seconds": 30,
+    "regression_tests": {
+      "total": 9,
+      "executed": 9,
+      "passed": 9,
+      "failed": 0
+    },
+    "test_report_path": "artifacts/backend-repair/full-run-completion-v1/cached-runtime-check-v1/completion.trx",
+    "test_report_sha256": "358a2cc2a66f02434fb865987d9202c472386681a0e543e74131083082ae9bc9",
+    "test_log_sha256": "993fa801a6388e48d47c48c0692660f6f5ed4292f2fb46937e205db453fe9ca4",
+    "native_build_started": false,
+    "native_library_published": false,
+    "games_played": 0,
+    "optimizer_steps": 0
+  },
+  "admitted": false,
+  "training_allowed": false,
+  "claim_scope": "cached_synthetic_native_regressions_not_live_conformance_or_agent_wins",
+  "report_id": "sha256:4ef738465830cea15ff7957d63ed9771edbb2ce3e814a253262ceb02b1df5084"
+}

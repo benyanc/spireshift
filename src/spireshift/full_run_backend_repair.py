@@ -6,6 +6,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
@@ -19,6 +20,7 @@ from spireshift.resource_tracking import EXPERIMENT_METRICS_ENV
 
 TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftFullRunCompletionTests.cs"
 TEST_CLASS = "SpireShiftFullRunCompletionTests"
+TEST_RUNTIME_POLICY = "net9-preferred-net10-test-host-v1"
 REMAINING_CHECKS = (
     "expose_and_bind_all_public_combat_selection_candidates",
     "bind_confirmation_and_selected_bundle_state",
@@ -252,10 +254,77 @@ def read_regression_result(path: Path, minimum: int) -> dict[str, int]:
     return summary
 
 
-def _run_logged(command: list[str], directory: Path, log: Path) -> None:
+def select_test_runtime(installed_runtimes: str) -> dict[str, Any]:
+    """Prefer the target runtime; permit only the inspected .NET 10 test-host fallback."""
+    runtimes = []
+    for line in installed_runtimes.splitlines():
+        match = re.fullmatch(r"Microsoft\.NETCore\.App (\d+\.\d+\.\d+) \[(.+)\]", line)
+        if match:
+            version, directory = match.groups()
+            runtimes.append({"version": version, "directory": directory})
+    selected = None
+    for major in (9, 10):
+        candidates = [r for r in runtimes if r["version"].startswith(f"{major}.0.")]
+        if candidates:
+            selected = max(candidates, key=lambda r: int(r["version"].rsplit(".", 1)[1]))
+            break
+    if selected is None:
+        raise ValueError(
+            "Native regression tests target .NET 9 and require an installed stable .NET 9.0 "
+            "or 10.0 runtime. No compatible test host was found; no build was launched."
+        )
+    return {
+        "policy_id": TEST_RUNTIME_POLICY,
+        "target_framework": "net9.0",
+        "expected_test_runtime": selected,
+        "installed_core_runtimes": runtimes,
+        "roll_forward": "LatestPatch" if selected["version"].startswith("9.") else "Major",
+        "scope": "regression_test_host_only_native_target_unchanged",
+    }
+
+
+def inspect_test_runtime(directory: Path) -> dict[str, Any]:
+    executable = shutil.which("dotnet")
+    if executable is None:
+        raise ValueError("The owner build needs dotnet on PATH; no native build was launched")
+    output = {}
+    for flag in ("--list-runtimes", "--version"):
+        try:
+            result = subprocess.run(
+                [executable, flag],
+                cwd=directory,
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=10,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise ValueError(".NET test-host preflight timed out; no build was launched") from exc
+        if result.returncode:
+            raise ValueError(f".NET test-host preflight failed: {result.stderr.strip()}")
+        output[flag] = result.stdout.strip()
+    return {
+        **select_test_runtime(output["--list-runtimes"]),
+        "dotnet_executable": str(Path(executable).resolve()),
+        "sdk_version": output["--version"],
+    }
+
+
+def _run_logged(
+    command: list[str],
+    directory: Path,
+    log: Path,
+    *,
+    environment: dict[str, str] | None = None,
+) -> None:
     with log.open("x") as handle:
         result = subprocess.run(
-            command, cwd=directory, stdout=handle, stderr=subprocess.STDOUT, check=False
+            command,
+            cwd=directory,
+            stdout=handle,
+            stderr=subprocess.STDOUT,
+            check=False,
+            env=environment,
         )
     if result.returncode:
         tail = "\n".join(log.read_text(errors="replace").splitlines()[-20:])
@@ -308,6 +377,12 @@ def show_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
         raise ValueError("Saved repair binary differs from its report")
     if _sha(recipe.output / value["test_report"]) != value["test_report_sha256"]:
         raise ValueError("Saved native regression results changed")
+    if (
+        "test_runtime_report" in value
+        and _sha(recipe.output / value["test_runtime_report"])
+        != value["test_runtime_report_sha256"]
+    ):
+        raise ValueError("Saved regression runtime evidence changed")
     if _git(recipe.candidate, "rev-parse", "HEAD") != value["candidate_revision"] or _git(
         recipe.candidate, "status", "--porcelain"
     ):
@@ -326,6 +401,7 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
         prepared = _prepare(recipe)
         if (recipe.output / "build-report.json").exists():
             return show_backend_repair(recipe)
+        runtime = inspect_test_runtime(recipe.candidate)
         attempts = recipe.output / "build-attempts"
         attempts.mkdir(exist_ok=True)
         n = 1
@@ -333,6 +409,13 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
             n += 1
         attempt = attempts / f"attempt-{n:04d}"
         attempt.mkdir()
+        runtime_path = attempt / "test-runtime.json"
+        _identified(runtime_path, {"schema_version": "backend-repair-test-runtime-v1", **runtime})
+        print(
+            f"Regression test host: .NET {runtime['expected_test_runtime']['version']} "
+            f"({runtime['roll_forward']}); native target remains net9.0.",
+            flush=True,
+        )
         print(
             "Checking nine synthetic act-ending and reward regressions; no player training.",
             flush=True,
@@ -354,6 +437,11 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
             ],
             recipe.candidate,
             attempt / "regression.log",
+            environment={
+                **os.environ,
+                "DOTNET_ROLL_FORWARD": runtime["roll_forward"],
+                "DOTNET_ROLL_FORWARD_TO_PRERELEASE": "0",
+            },
         )
         regression_path = attempt / "completion.trx"
         counts = read_regression_result(
@@ -405,6 +493,9 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
                 "regression_tests": counts,
                 "test_report": str(regression_path.relative_to(recipe.output)),
                 "test_report_sha256": _sha(regression_path),
+                "test_runtime": runtime,
+                "test_runtime_report": str(runtime_path.relative_to(recipe.output)),
+                "test_runtime_report_sha256": _sha(runtime_path),
                 "admitted": False,
                 "training_allowed": False,
                 "checkpoint_promoted": False,

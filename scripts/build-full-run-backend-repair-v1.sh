@@ -16,6 +16,7 @@ while [[ -e "artifacts/resources/full-run-backend-repair-v1-attempt-$spireshift_
   spireshift_repair_attempt=$((spireshift_repair_attempt + 1))
 done
 printf 'Testing and building a separate simulator repair. No player training, game batch, or automatic admission.\n'
+printf 'The launcher checks the installed test runtime; it needs no machine-wide setting.\n'
 printf 'Caps: 30 minutes elapsed, 7,200 CPU seconds, 12 GB memory, 4 GB artifacts. Return the final report for assessment.\n'
 uv run spireshift resources run \
   --kind teacher_generation \

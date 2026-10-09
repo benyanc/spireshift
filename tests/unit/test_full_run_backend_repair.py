@@ -3,6 +3,7 @@ from __future__ import annotations
 import difflib
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -193,9 +194,17 @@ def test_successful_build_stays_pending_and_never_launches_a_player(
     recipe: repair.RepairRecipe, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     calls: list[list[str]] = []
+    environments: list[dict[str, str] | None] = []
 
-    def fake_stage(command: list[str], directory: Path, log: Path) -> None:
+    def fake_stage(
+        command: list[str],
+        directory: Path,
+        log: Path,
+        *,
+        environment: dict[str, str] | None = None,
+    ) -> None:
         calls.append(command)
+        environments.append(environment)
         log.write_text("synthetic stage output\n")
         if command[1] == "test":
             write_trx(log.parent / "completion.trx")
@@ -204,19 +213,122 @@ def test_successful_build_stays_pending_and_never_launches_a_player(
             (directory / "out/Sts2Emulator.dylib").write_bytes(b"synthetic compiler artifact")
 
     monkeypatch.setenv(EXPERIMENT_METRICS_ENV, str(recipe.root / "metrics.json"))
+    monkeypatch.setenv("DOTNET_ROLL_FORWARD", "Disable")
+    monkeypatch.setattr(
+        repair,
+        "inspect_test_runtime",
+        lambda directory: repair.select_test_runtime("Microsoft.NETCore.App 10.0.12 [/runtime]"),
+    )
     monkeypatch.setattr(repair, "_run_logged", fake_stage)
     result = repair.build_backend_repair(recipe)
     assert [c[1] for c in calls] == ["test", "publish"]
     assert result["admitted"] is False and result["training_allowed"] is False
     assert result["games_played"] == 0 and result["automatic_followup"] is False
+    assert result["test_runtime"]["expected_test_runtime"]["version"] == "10.0.12"
+    assert environments[0] is not None
+    assert environments[0]["DOTNET_ROLL_FORWARD"] == "Major"
+    assert environments[0]["DOTNET_ROLL_FORWARD_TO_PRERELEASE"] == "0"
+    assert environments[1] is None
+    assert os.environ["DOTNET_ROLL_FORWARD"] == "Disable"
     manifest = load_patch_manifest(recipe.output / "candidate-manifest.json")
     assert manifest.admission_status == "pending_conformance"
     assert manifest.patch == recipe.manifest.patch
     assert manifest.engine.revision == result["candidate_revision"]
     assert repair.build_backend_repair(recipe) == result and len(calls) == 2
+    runtime_path = recipe.output / result["test_runtime_report"]
+    original = runtime_path.read_text()
+    runtime_path.write_text(original + "changed evidence")
+    with pytest.raises(ValueError, match="runtime evidence changed"):
+        repair.show_backend_repair(recipe)
+    runtime_path.write_text(original)
     (recipe.candidate / "out/Sts2Emulator.dylib").write_bytes(b"changed binary")
     with pytest.raises(ValueError, match="binary differs"):
         repair.show_backend_repair(recipe)
+
+
+@pytest.mark.parametrize(
+    ("installed", "expected", "roll_forward"),
+    [
+        ("Microsoft.NETCore.App 9.0.4 [/runtime]", "9.0.4", "LatestPatch"),
+        ("Microsoft.NETCore.App 10.0.12 [/runtime]", "10.0.12", "Major"),
+        (
+            "Microsoft.NETCore.App 10.0.12 [/runtime]\n"
+            "Microsoft.NETCore.App 9.0.2 [/runtime]\n"
+            "Microsoft.NETCore.App 9.0.10 [/runtime]",
+            "9.0.10",
+            "LatestPatch",
+        ),
+    ],
+)
+def test_test_host_prefers_net9_and_can_use_installed_net10(
+    installed: str, expected: str, roll_forward: str
+) -> None:
+    runtime = repair.select_test_runtime(installed)
+    assert runtime["expected_test_runtime"]["version"] == expected
+    assert runtime["roll_forward"] == roll_forward
+    assert runtime["target_framework"] == "net9.0"
+    assert runtime["policy_id"] == repair.TEST_RUNTIME_POLICY
+
+
+@pytest.mark.parametrize(
+    "installed",
+    [
+        "Microsoft.NETCore.App 8.0.12 [/runtime]",
+        "Microsoft.AspNetCore.App 10.0.12 [/runtime]",
+        "Microsoft.NETCore.App 10.0.0-preview.1 [/runtime]",
+        "Microsoft.NETCore.App 11.0.0 [/runtime]",
+        "",
+    ],
+)
+def test_test_host_does_not_silently_accept_other_major_versions_or_previews(
+    installed: str,
+) -> None:
+    with pytest.raises(ValueError, match="No compatible test host"):
+        repair.select_test_runtime(installed)
+
+
+def test_runtime_preflight_failure_prevents_test_and_publish_stages(
+    recipe: repair.RepairRecipe, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def missing_runtime(directory: Path) -> dict[str, Any]:
+        raise ValueError("No compatible test host")
+
+    def unexpected_stage(*args: Any, **kwargs: Any) -> None:
+        pytest.fail("Runtime preflight must happen before native test/build stages")
+
+    monkeypatch.setenv(EXPERIMENT_METRICS_ENV, str(recipe.root / "metrics.json"))
+    monkeypatch.setattr(repair, "inspect_test_runtime", missing_runtime)
+    monkeypatch.setattr(repair, "_run_logged", unexpected_stage)
+    with pytest.raises(ValueError, match="No compatible test host"):
+        repair.build_backend_repair(recipe)
+    assert not (recipe.output / "build-attempts").exists()
+    assert not (recipe.output / "build-report.json").exists()
+
+
+def test_runtime_preflight_records_the_sdk_and_runtime_inventory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls: list[list[str]] = []
+
+    def fake_process(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        calls.append(command)
+        assert kwargs["cwd"] == tmp_path and kwargs["timeout"] == 10
+        output = (
+            "Microsoft.NETCore.App 10.0.12 [/runtime]\n"
+            if command[1] == "--list-runtimes"
+            else "10.0.401\n"
+        )
+        return subprocess.CompletedProcess(command, 0, stdout=output, stderr="")
+
+    monkeypatch.setattr(
+        "spireshift.full_run_backend_repair.shutil.which", lambda name: str(tmp_path / "dotnet")
+    )
+    monkeypatch.setattr(subprocess, "run", fake_process)
+    runtime = repair.inspect_test_runtime(tmp_path)
+    assert [c[1] for c in calls] == ["--list-runtimes", "--version"]
+    assert runtime["sdk_version"] == "10.0.401"
+    assert runtime["dotnet_executable"] == str(tmp_path / "dotnet")
+    assert runtime["expected_test_runtime"]["version"] == "10.0.12"
 
 
 def test_owner_script_caps_match_the_recipe_and_has_no_training_followup() -> None:

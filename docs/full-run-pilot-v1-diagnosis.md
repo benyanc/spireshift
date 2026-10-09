@@ -57,6 +57,22 @@ The original admitted simulator remains intact. The candidate is prepared privat
 `99fad6a73912e26af6872c2f0742ebeb5ffb3581`. The [patch and tests](../backend-patches/full-run-completion-v1/README.md)
 are reviewable; no native build or sustained game batch was launched during implementation.
 
+The owner's first repair attempt compiled successfully, then aborted before executing any tests:
+the project targets .NET 9, while the machine has only .NET 10.0.12 (SDK 10.0.401). This was a
+test-host setup failure, not a failed regression. A subsequent short check of the owner's already
+compiled files, with `--no-build --no-restore` and a 30-second timeout, passed all nine targeted
+regressions using .NET 10. The native library has not been published. The
+[runtime evidence](evidence/full-run-repair-runtime-check-v1.json) records both attempts and the
+saved test-result digest; neither check played a game or trained a player.
+
+The launcher now checks installed runtimes before invoking test/build stages. It prefers stable
+.NET 9.0; on the inspected .NET 10.0 fallback it sets `DOTNET_ROLL_FORWARD=Major` only for the test
+process and records the runtime inventory, selected policy and SDK in the build evidence. Other
+major versions and preview-only installations fail before compilation. The native publish target
+and pinned repair source remain unchanged. The setting follows
+[Microsoft's runtime selection policy](https://learn.microsoft.com/en-us/dotnet/core/versions/selection).
+No runtime installation or machine-wide setting is required on this machine.
+
 Run **only this next command**:
 
 ```bash
@@ -86,7 +102,8 @@ reverify every decision trace. Two bounded exact-action reproductions used train
 - Diagnosis: `sha256:b7336e621962076e8af9cd14a427bf1723725c86d910dce144b20efdcead279a`.
 - Repair configuration: `sha256:214b5fdb1bc667b034d1417b0c3be2963f234a25533853707fcdee677c172cb1`.
 
-Only the owner runs sustained builds, training and evaluation. The next implementation after
+Only the owner runs sustained builds, training and evaluation; short cached synthetic checks are
+allowed. The next implementation after
 the build assesses its evidence and finishes #141; scaling #135 or fitting the #35 comparator
 does not precede those repairs. The competent whole-game player and adaptive thinking objective
 remain unchanged.

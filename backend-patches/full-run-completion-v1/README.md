@@ -7,7 +7,11 @@ combat-block observation offset. It preserves the original final-boss completion
 
 `SpireShiftFullRunCompletionTests.cs` supplies nine synthetic engine regressions. These are direct
 engine fixtures, not demonstration games, training data or authoritative real-game conformance.
-The owner runs the native test/build; a successful result is still a pending candidate.
+The owner runs the native build; short cached synthetic checks are allowed. All nine tests passed
+on the owner's compiled files after correcting the test-host runtime mismatch. The launcher prefers
+.NET 9.0 and permits the installed .NET 10.0 test host with a process-scoped runtime setting;
+runtime/SDK evidence is saved. The native publish target remains net9.0. A successful build is
+still a pending candidate, and public-choice/difficulty/live-conformance repairs remain outstanding.
 
 Preparation applies the exact patch and copies the test into an isolated private checkout.
 Tracked source hashes, the deterministic derived revision, patch/test hashes and a pending
