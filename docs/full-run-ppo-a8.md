@@ -50,8 +50,24 @@ cannot silently resume this one. A completed experiment displays its saved resul
 There are at most **5,504 planned game attempts**, including confirmations and development,
 using eight disposable game processes. The fresh split covers seeds 300000–307999. The two
 development seeds used by the implementation check are excluded from this comparison.
-Final-test seeds remain sealed. Progress prints after
-each eight-game batch and at checkpoint comparisons. A cap preserves partial artifacts.
+Final-test seeds remain sealed. Progress prints after each eight-game batch. At the end of
+each sampled round, the launcher adds its best finished game, average floor across all attempts,
+wins and failures/caps, and the best sampled game so far. Full wins rank first, then completed
+acts and floor reached. Failed or capped games remain in the counts and cannot become the best
+game. On an explicit resume, saved rounds rebuild the same progress display without replaying.
+
+For example (illustrative numbers, not measured results):
+
+```text
+Round 4/32 summary: wins 0/128 | best game: floor 22, 1 act (loss) | average floor 12.40 | failures/caps 0.
+Best sampled game so far: floor 25, 1 act (loss), round 3, seed 300472.
+```
+
+Sampled games include exploration; one lucky result is not evidence of consistent improvement.
+The existing confirmed-player checks show wins and average floor on the same fixed seeds every
+four rounds. The display reads saved outcome metadata and changes no learning settings,
+experiment identities or artifacts. An already running process keeps its original display;
+this feature applies to future launches. A cap preserves partial artifacts.
 
 ## How the model learns
 
