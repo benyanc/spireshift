@@ -1,4 +1,4 @@
-"""Isolated, owner-built repair candidate; never automatically admit or train it."""
+"""Isolated, resource-capped repair candidate; never automatically admit or train it."""
 
 from __future__ import annotations
 
@@ -25,6 +25,14 @@ PUBLIC_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftPublicChoicesTests.c
 PUBLIC_TEST_CLASS = "SpireShiftPublicChoicesTests"
 EVENT_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftEventContinuationTests.cs"
 EVENT_TEST_CLASS = "SpireShiftEventContinuationTests"
+EVENT_CHOICE_TEST_DESTINATION = "src/Sts2Emulator.Tests/SpireShiftEventChoiceParityTests.cs"
+EVENT_CHOICE_TEST_CLASS = "SpireShiftEventChoiceParityTests"
+EVENT_CHOICE_TEST_UPDATES = {
+    EVENT_TEST_DESTINATION,
+    "src/Sts2Emulator.Tests/Events/EventOptionGatingTests.cs",
+    "src/Sts2Emulator.Tests/Events/EventScreenTests.cs",
+    "src/Sts2Emulator.Tests/Events/EventMaskAgreesWithStepTests.cs",
+}
 TEST_RUNTIME_POLICY = "net9-preferred-net10-test-host-v1"
 REMAINING_CHECKS = (
     "expose_and_bind_all_public_combat_selection_candidates",
@@ -74,26 +82,44 @@ class RepairRecipe:
         return self.document["schema_version"] in {
             "full-run-backend-repair-config-v2",
             "full-run-backend-repair-config-v3",
+            "full-run-backend-repair-config-v4",
         }
 
     @property
     def event_continuation(self) -> bool:
-        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v3")
+        return self.document["schema_version"] in {
+            "full-run-backend-repair-config-v3",
+            "full-run-backend-repair-config-v4",
+        }
+
+    @property
+    def event_choices(self) -> bool:
+        return bool(self.document["schema_version"] == "full-run-backend-repair-config-v4")
 
     @property
     def sources(self) -> tuple[dict[str, Any], ...]:
         if self.public_choices:
-            return tuple(self.document["engine_sources"])
+            return tuple(self.document["engine_sources"] + self.document.get("test_updates", []))
         return (self.document["engine_source"],)
 
     @property
     def test_destination(self) -> str:
+        if self.event_choices:
+            return EVENT_CHOICE_TEST_DESTINATION
         if self.event_continuation:
             return EVENT_TEST_DESTINATION
         return PUBLIC_TEST_DESTINATION if self.public_choices else TEST_DESTINATION
 
     @property
     def test_classes(self) -> tuple[str, ...]:
+        if self.event_choices:
+            return (
+                TEST_CLASS,
+                PUBLIC_TEST_CLASS,
+                EVENT_TEST_CLASS,
+                EVENT_CHOICE_TEST_CLASS,
+                "EventCaptures",
+            )
         if self.event_continuation:
             return (TEST_CLASS, PUBLIC_TEST_CLASS, EVENT_TEST_CLASS)
         return (TEST_CLASS, PUBLIC_TEST_CLASS) if self.public_choices else (TEST_CLASS,)
@@ -106,9 +132,14 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         "full-run-backend-repair-config-v1",
         "full-run-backend-repair-config-v2",
         "full-run-backend-repair-config-v3",
+        "full-run-backend-repair-config-v4",
     }:
         raise ValueError("Unsupported backend repair configuration version")
-    event_continuation = d["schema_version"] == "full-run-backend-repair-config-v3"
+    event_choices = d["schema_version"] == "full-run-backend-repair-config-v4"
+    event_continuation = d["schema_version"] in {
+        "full-run-backend-repair-config-v3",
+        "full-run-backend-repair-config-v4",
+    }
     public_choices = d["schema_version"] != "full-run-backend-repair-config-v1"
     keys = {
         "schema_version",
@@ -128,6 +159,8 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         "minimum_regression_tests",
         "config_id",
     }
+    if event_choices:
+        keys |= {"fixture_inventory", "test_updates"}
     if set(d) != keys:
         raise ValueError("Unexpected backend repair configuration fields")
     if d["config_id"] != manifest_identifier({k: v for k, v in d.items() if k != "config_id"}):
@@ -135,7 +168,7 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
     if d["automatic_training"] is not False or d["automatic_admission"] is not False:
         raise ValueError("A build candidate cannot authorize training or admission")
     if d["runtime"] != "osx-arm64" or d["minimum_regression_tests"] != (
-        32 if event_continuation else 23 if public_choices else 9
+        240 if event_choices else 32 if event_continuation else 23 if public_choices else 9
     ):
         raise ValueError("Unsupported frozen backend repair scope")
     for key in ("base_upstream", "candidate_upstream", "output_dir"):
@@ -152,7 +185,11 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         if i != j
     ):
         raise ValueError("Backend repair paths must be separate and cannot contain each other")
-    for key in ("patch", "regression_tests"):
+    for key in (
+        ("patch", "regression_tests", "fixture_inventory")
+        if event_choices
+        else ("patch", "regression_tests")
+    ):
         entry = d[key]
         if set(entry) != {"path", "sha256"} or _sha(root / entry["path"]) != entry["sha256"]:
             raise ValueError(f"Backend repair {key} identity differs")
@@ -180,6 +217,25 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         )
         if {s["path"] for s in sources} != expected_sources:
             raise ValueError("Public-choice repair source scope differs")
+    if event_choices:
+        updates = d["test_updates"]
+        if (
+            not isinstance(updates, list)
+            or any(
+                not isinstance(s, dict) or set(s) != {"path", "base_sha256", "repaired_sha256"}
+                for s in updates
+            )
+            or len({s["path"] for s in updates}) != len(updates)
+            or {s["path"] for s in updates}
+            not in (
+                EVENT_CHOICE_TEST_UPDATES,
+                EVENT_CHOICE_TEST_UPDATES | {"src/Sts2Emulator.Tests/RunEngineTests.cs"},
+            )
+        ):
+            raise ValueError("Event-choice test correction scope differs")
+        verify_event_choice_inventory(
+            root / d["fixture_inventory"]["path"], root / d["base_upstream"]
+        )
     limits = d["resource_limits"]
     if set(limits) != {"wall_seconds", "cpu_seconds", "memory_bytes", "storage_bytes"} or any(
         type(v) is not int or v <= 0 for v in limits.values()
@@ -191,7 +247,64 @@ def load_repair_recipe(path: Path, *, root: Path | None = None) -> RepairRecipe:
         or manifest.engine.revision != d["base_revision"]
     ):
         raise ValueError("Backend repair base ruleset differs")
-    return RepairRecipe(d, root, manifest)
+    recipe = RepairRecipe(d, root, manifest)
+    if event_choices and (limits["wall_seconds"] > 240 or limits["cpu_seconds"] > 960):
+        raise ValueError("This short event-choice build cannot authorize a long job")
+    return recipe
+
+
+def verify_event_choice_inventory(path: Path, upstream: Path) -> dict[str, Any]:
+    """Pin the complete capture inventory; never copy game data into the repository."""
+    d: dict[str, Any] = json.loads(path.read_text())
+    if (
+        d.get("schema_version") != "event-choice-fixture-inventory-v1"
+        or d.get("inventory_id")
+        != manifest_identifier({k: v for k, v in d.items() if k != "inventory_id"})
+        or d.get("game_version") != "v0.107.1"
+        or d.get("steam_build_id") != "23811903"
+        or d.get("ascension") != 8
+        or d.get("seed") != "ABCDEF"
+    ):
+        raise ValueError("Pinned event capture inventory differs")
+    directory = upstream / "tests/fixtures/events"
+    files = d.get("files")
+    if not isinstance(files, list) or len(files) != 156:
+        raise ValueError("The complete 156-file event capture inventory is required")
+    names = [f["path"] for f in files]
+    if len(set(names)) != len(names) or set(names) != {p.name for p in directory.glob("*.json")}:
+        raise ValueError("Event capture inventory has missing or additional files")
+    counts: dict[str, int] = {}
+    for entry in files:
+        name, comparison = entry["path"], entry["comparison"]
+        if set(entry) != {"path", "sha256", "comparison"} or Path(name).name != name:
+            raise ValueError("Event capture inventory path or fields differ")
+        capture_path = directory / name
+        if _sha(capture_path) != entry["sha256"]:
+            raise ValueError(f"Pinned event capture bytes changed: {name}")
+        capture = json.loads(capture_path.read_text())
+        if capture.get("game") != {"steam_buildid": "23811903", "release": "v0.107.1"}:
+            raise ValueError(f"Captured game version differs: {name}")
+        if name.endswith("-options.json"):
+            expected = "initial"
+        elif capture.get("after", {}).get("state_type") == "event":
+            expected = (
+                "unsettled_event_after"
+                if name == "DenseVegetation-opt1.json"
+                else "settled_event_after"
+            )
+        else:
+            expected = "other_screen_after"
+        if comparison != expected:
+            raise ValueError(f"Event capture comparison was silently excluded: {name}")
+        counts[comparison] = counts.get(comparison, 0) + 1
+    if counts != {
+        "initial": 52,
+        "settled_event_after": 57,
+        "unsettled_event_after": 1,
+        "other_screen_after": 46,
+    }:
+        raise ValueError("Event capture comparison coverage differs")
+    return {"inventory_id": d["inventory_id"], "coverage": counts}
 
 
 def _identified(path: Path, body: dict[str, Any]) -> dict[str, Any]:
@@ -501,6 +614,12 @@ def show_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
         recipe.candidate, "status", "--porcelain"
     ):
         raise ValueError("Saved native candidate source changed")
+    if recipe.event_choices:
+        observed = verify_event_choice_inventory(
+            recipe.path(recipe.document["fixture_inventory"]["path"]), recipe.candidate
+        )
+        if value.get("captured_event_choice_checks") != observed:
+            raise ValueError("Saved event choice fixture provenance differs")
     return value
 
 
@@ -531,7 +650,7 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
             flush=True,
         )
         print(
-            f"Checking {recipe.document['minimum_regression_tests']} synthetic repair regressions; "
+            f"Checking {recipe.document['minimum_regression_tests']} required repair regressions; "
             "no player training.",
             flush=True,
         )
@@ -556,6 +675,18 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
                 **os.environ,
                 "DOTNET_ROLL_FORWARD": runtime["roll_forward"],
                 "DOTNET_ROLL_FORWARD_TO_PRERELEASE": "0",
+                **(
+                    {
+                        "SPIRESHIFT_EVENT_FIXTURE_INVENTORY": str(
+                            recipe.path(recipe.document["fixture_inventory"]["path"])
+                        ),
+                        "SPIRESHIFT_EVENT_FIXTURE_ROOT": str(
+                            recipe.candidate / "tests/fixtures/events"
+                        ),
+                    }
+                    if recipe.event_choices
+                    else {}
+                ),
             },
         )
         regression_path = attempt / "completion.trx"
@@ -625,9 +756,30 @@ def build_backend_repair(recipe: RepairRecipe) -> dict[str, Any]:
                     if recipe.public_choices
                     else {}
                 ),
-                "claim_scope": "synthetic_regressions_and_native_build_not_live_game_conformance",
+                **(
+                    {
+                        "captured_event_choice_checks": verify_event_choice_inventory(
+                            recipe.path(recipe.document["fixture_inventory"]["path"]),
+                            recipe.candidate,
+                        )
+                    }
+                    if recipe.event_choices
+                    else {}
+                ),
+                "claim_scope": (
+                    "native_build_and_pinned_event_choice_captures_not_complete_game_fidelity"
+                    if recipe.event_choices
+                    else "synthetic_regressions_and_native_build_not_live_game_conformance"
+                ),
                 "remaining_checks": (
                     [
+                        "derive_new_adapter_manifest_for_event_choice_native_identity",
+                        "verify_corrected_choices_in_public_agent_interface",
+                        "validate_changed_act_boundaries_against_the_frozen_game",
+                        "readmit_new_ruleset_before_a_new_training_recipe",
+                    ]
+                    if recipe.event_choices
+                    else [
                         "derive_new_adapter_manifest_for_event_repair_native_identity",
                         "replay_all_89_original_failures_with_event_endpoint_checks",
                         "verify_source_fixed_ascension_8_against_the_frozen_game",

@@ -1,5 +1,11 @@
 # First unified evolution pilot: result and simulator repair
 
+The latest completed step is the [captured event-choice repair](../backend-patches/event-choices-v1/README.md):
+109 real-game choice lists match, 4,942 native tests pass, and eight fresh untrained-player
+compatibility attempts finish without crashes or stalls. All eight lose; no learning or playing
+strength improvement is claimed. The current decision is whether to add genuine normal-difficulty
+A0 support before restarting learning or retain the existing fixed A8.
+
 The owner completed all 832 planned game attempts in 80.858 elapsed seconds and 592.289 total
 CPU seconds. Four generations ran. There is no demonstrated playing improvement or promoted
 model. Full-game evaluation is blocked by simulator and public-choice defects under
@@ -196,3 +202,31 @@ Codex may run short builds, audits, tests and jobs autonomously. Jobs expected t
 or more are launched and monitored by the owner. Continue #141 with real-game conformance;
 scaling #135 or fitting the #35 comparator does not precede the remaining admission checks.
 The competent whole-game player and adaptive thinking objective remain unchanged.
+
+## Captured event choices and frozen game rules: latest status
+
+The fourth isolated candidate removes the invented skip on event screens and rejects locked or
+nonexistent choices before changing state. All 109 captured choice lists match: 52 initial screens
+and 57 settled later event screens, checking every action slot. Genuine Leave choices remain.
+The Dense Vegetation mid-transition capture stays explicitly excluded from settled-page comparison;
+other screen types and uncaptured events remain outside this new mask coverage.
+
+All 240 targeted native checks passed, and the full native suite passed 4,942 tests with one optional
+timing probe skipped. Ten public environment interface checks also passed. Eight short attempts by
+a fresh untrained public player ended cleanly in losses, with no crashes or stalls. These checks
+do not establish playing strength. No optimizer steps, admission, promotion or final-test use
+followed. [Event choice evidence](evidence/event-choice-repair-v1-evidence.json) preserves the
+active candidate, failed earlier attempts and resource reports. The old 89/89 prefix audit remains
+bound to its original candidate, whose initial action surface differs from this repair.
+
+A bounded source audit of the frozen game confirms that earlier bosses advance acts, total floor
+and current-act floor are distinct, and A8 enables harder rules; Double Boss begins at A10. The real
+game ends through forced Architect dialogue after the final boss. Each settled dialogue page has
+one continuation, so collapsing it is an explicit simulator abstraction; live playback still needs
+to drive those UI steps. [Frozen-rule evidence](evidence/frozen-run-rule-audit-v1-evidence.json)
+records the pinned assembly, private extracted-type hashes and findings. It is not empirical
+later-act coverage or proof of complete A8 fidelity.
+
+The next learning difficulty needs a decision: implement genuine normal difficulty (A0), recommended
+for the first strong player, or retain the current fixed A8. A0 requires actual rule support rather
+than changing a label. Later-act conformance and re-admission still precede a fresh training recipe.

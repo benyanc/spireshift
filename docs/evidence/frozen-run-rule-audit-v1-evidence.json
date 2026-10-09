@@ -1,0 +1,173 @@
+{
+  "admitted": false,
+  "all_ascension8_effects_verified": false,
+  "assembly_sha256": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18",
+  "claim_scope": "manual_pinned_assembly_rule_audit_not_empirical_later_act_UI_conformance_or_agent_wins",
+  "empirical_act2_or_act3_fixture_added": false,
+  "evidence_id": "sha256:273a153462b76dbf27bd235e28da40236012964a9ab8989cd223371ce648b5a6",
+  "extractions": [
+    {
+      "admitted": false,
+      "assembly_sha256": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18",
+      "claim_scope": "five_privately_extracted_pinned_game_rule_types_for_manual_boundary_and_difficulty_audit",
+      "files": [
+        {
+          "path": "RunManager.cs",
+          "sha256": "4b6000126b5be149c49e53ecc3354643bc0074aa7aa63d796c306d15ed381941",
+          "type": "MegaCrit.Sts2.Core.Runs.RunManager"
+        },
+        {
+          "path": "RunState.cs",
+          "sha256": "08a8232e98b1f128c6b7e937f0c783510dbb47b9dd3a8f0adfd0eec66bc99867",
+          "type": "MegaCrit.Sts2.Core.Runs.RunState"
+        },
+        {
+          "path": "CombatRoom.cs",
+          "sha256": "7d9a37d01976b922e5286bcca96f3b6816ceff1d6a6a8d175798d748ff4b6d02",
+          "type": "MegaCrit.Sts2.Core.Rooms.CombatRoom"
+        },
+        {
+          "path": "ActModel.cs",
+          "sha256": "5deef52bf5bfbe5c5d61843b48de92bbdef2c221b30de721f715e76dafbb411b",
+          "type": "MegaCrit.Sts2.Core.Models.ActModel"
+        },
+        {
+          "path": "AscensionManager.cs",
+          "sha256": "a6143e6c723a255c3cf87e11574aeab1ba2300aab4e084f238a500c9b9a11424",
+          "type": "MegaCrit.Sts2.Core.Entities.Ascension.AscensionManager"
+        }
+      ],
+      "games_played": 0,
+      "report_id": "sha256:a683b29abd98acefcba50a8cb31b498e2a88e07ee4a36efd43c4c054e06d6bcc",
+      "schema_version": "frozen-rule-extraction-v1",
+      "tool_version": "9.1.0.7988",
+      "training_allowed": false
+    },
+    {
+      "admitted": false,
+      "assembly_sha256": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18",
+      "claim_scope": "five_privately_extracted_pinned_game_ending_and_ascension_types_for_manual_audit",
+      "files": [
+        {
+          "path": "TheArchitect.cs",
+          "sha256": "50d5a1ee1092b5894e83f6886f347fa3c7bde9ce727a868c007c63d7ec8488ac",
+          "type": "MegaCrit.Sts2.Core.Models.Events.TheArchitect"
+        },
+        {
+          "path": "EventRoom.cs",
+          "sha256": "1038126138bdc9799ec3f1286bfddef80618dad80083c375d07cf2ae36e0e0f3",
+          "type": "MegaCrit.Sts2.Core.Rooms.EventRoom"
+        },
+        {
+          "path": "AbstractRoom.cs",
+          "sha256": "4b4cd57087afed1e09db00ddaac8bae717f538b4fbc5409b434cd9523f88ae23",
+          "type": "MegaCrit.Sts2.Core.Rooms.AbstractRoom"
+        },
+        {
+          "path": "CombatManager.cs",
+          "sha256": "38d7193b2ec448cec170d7c96645059b2f7ef46ae2f12a6a3863299b30125840",
+          "type": "MegaCrit.Sts2.Core.Combat.CombatManager"
+        },
+        {
+          "path": "AscensionLevel.cs",
+          "sha256": "87f3bbd02817771a341774880186b4d77f37b17f91b13ffff3e5b6e83d883e91",
+          "type": "MegaCrit.Sts2.Core.Entities.Ascension.AscensionLevel"
+        }
+      ],
+      "games_played": 0,
+      "report_id": "sha256:1800aba8b8ccda53dc91207f829b667148e394c80a9b323c70336516364650b1",
+      "schema_version": "frozen-rule-extraction-v1",
+      "tool_version": "9.1.0.7988",
+      "training_allowed": false
+    }
+  ],
+  "game_version": "v0.107.1",
+  "games_played": 0,
+  "observed_on": "2026-10-09",
+  "optimizer_steps": 0,
+  "resources": [
+    {
+      "cpu_seconds": 0.274117292,
+      "limits": {
+        "cpu_seconds": 180.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 200000000,
+        "wall_seconds": 180.0
+      },
+      "path": "artifacts/resources/frozen-rule-audit-tool-install-v1.json",
+      "report_id": "sha256:0d2b31ec5a8d825e223bdd4db06b1f943fad123351b29bc868f5ed7eb0b225a4",
+      "status": "completed",
+      "wall_seconds": 1.0528559170197695
+    },
+    {
+      "cpu_seconds": 0.18102737,
+      "limits": {
+        "cpu_seconds": 60.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 20000000,
+        "wall_seconds": 60.0
+      },
+      "path": "artifacts/resources/frozen-rule-types-v1.json",
+      "report_id": "sha256:8b5e08aee5ce83bad93323874782890bc802e341733f709a43643f34643a5b6d",
+      "status": "completed",
+      "wall_seconds": 1.0633744169899728
+    },
+    {
+      "cpu_seconds": 2.455318557,
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 20000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/frozen-rule-extraction-v1.json",
+      "report_id": "sha256:cd2972698ab50aa5d32f62a44bd8b3b61f73e683932ce109af99ecbef112d0b1",
+      "status": "completed",
+      "wall_seconds": 3.3267907080007717
+    },
+    {
+      "cpu_seconds": 2.252341482,
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 20000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/frozen-rule-ending-extraction-v1.json",
+      "report_id": "sha256:0672e2c3815489083acf6857e898b0714f3aa7f4de73851895b835f027cae94c",
+      "status": "completed",
+      "wall_seconds": 3.1598877079959493
+    }
+  ],
+  "schema_version": "frozen-run-rule-audit-evidence-v1",
+  "source_findings": [
+    {
+      "finding": "Before the final act, the game enters the next act. It does not compare total floor with a map-local boss row.",
+      "method": "EnterNextAct",
+      "rule": "earlier_boss_reward_advances_to_next_act",
+      "source_type": "MegaCrit.Sts2.Core.Runs.RunManager"
+    },
+    {
+      "finding": "Changing act resets ActFloor; TotalFloor counts the accumulated map-point history across acts.",
+      "method": "CurrentActIndex, ActFloor, TotalFloor",
+      "rule": "total_floor_is_distinct_from_act_progress",
+      "source_type": "MegaCrit.Sts2.Core.Runs.RunState"
+    },
+    {
+      "finding": "After the final boss, the real UI enters the Architect scene. Every settled dialogue screen offers one continuation; its final Proceed requests victory. The simulator collapses this forced closing sequence, so it does not match the UI step for step.",
+      "method": "EnterNextAct, GenerateInitialOptions, AdvanceDialogue, WinRun",
+      "rule": "ending_includes_forced_architect_dialogue",
+      "source_type": "MegaCrit.Sts2.Core.Runs.RunManager and MegaCrit.Sts2.Core.Models.Events.TheArchitect"
+    },
+    {
+      "finding": "A8 includes earlier difficulty effects and ToughEnemies. DoubleBoss is level 10, so it is inactive at A8.",
+      "method": "GenerateRooms and HasLevel",
+      "rule": "a8_is_not_a0_or_double_boss",
+      "source_type": "MegaCrit.Sts2.Core.Entities.Ascension.AscensionLevel and MegaCrit.Sts2.Core.Runs.RunManager"
+    }
+  ],
+  "steam_build_id": "23811903",
+  "tool_installed_privately": true,
+  "tool_source": "https://www.nuget.org/packages/ilspycmd/9.1.0.7988",
+  "training_allowed": false
+}

@@ -80,7 +80,7 @@ def add_full_run_parser(commands: Any) -> None:
     model.add_argument("checkpoint", type=Path)
     for name, help_text in (
         ("prepare-backend-repair", "Prepare an isolated source repair without building or playing"),
-        ("build-backend-repair", "Owner-run native repair build; requires the resource wrapper"),
+        ("build-backend-repair", "Capped native repair build; requires the resource wrapper"),
         ("show-backend-repair", "Read a saved native repair result; never admit or train"),
         ("audit-public-integration", "Owner-run replay of failed training prefixes; no training"),
         ("show-public-integration", "Check a saved public integration audit; no game replays"),

@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after the event native build and the new 89-case compatibility audit.
+Updated 2026-10-09 after complete captured event-choice checks and the frozen-game rule audit.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
@@ -55,6 +55,33 @@ result and its initial reporting failure. Existing real-game captures show initi
 at the three repaired events, while the current source still offers an extra skip there. All 32
 saved full-run reference traces observe Act 1 only. These are concrete remaining action-parity
 and later-act evidence gaps; passing the 89 inspected prefixes does not settle them.
+Those remaining captured event-choice differences are now repaired in a fourth isolated candidate.
+It removes the invented fallback skip and rejects locked or nonexistent event choices before
+changing state. **All 109 captured choice lists match**: 52 initial screens and 57 settled later
+event screens. The full mask is compared; genuine Leave choices remain. The one unsettled Dense
+Vegetation page is explicitly excluded from settled-mask comparison, and other screen types and
+uncaptured events are not presented as new coverage.
+
+The final candidate published in 17.641 seconds with all 240 targeted checks passing, including
+99 captured outcomes and the prior 32 regressions. The complete native suite passed **4,942 tests**
+with one optional timing probe skipped in 54.545 seconds. Ten public interface checks also passed.
+A fresh untrained player completed eight training-seed attempts without crashes or stalls in
+7.687 seconds; all eight lost. Zero optimizer steps, no admission or promoted model followed.
+[Event choice evidence](evidence/event-choice-repair-v1-evidence.json) preserves these results and
+all failed build, stale-assertion and preflight attempts. The old 89/89 replay result remains bound
+to its earlier candidate; it is not reassigned to the changed initial choices.
+
+A short audit of the preserved game assembly confirms that earlier bosses advance to the next
+act and that total floor is distinct from current-act progress. It also identifies the real UI's
+forced Architect dialogue after the last boss; the simulator collapses this closing sequence.
+Each settled dialogue page has one continuation, so this adds UI steps without a strategic choice.
+The assembly confirms A8 activates harder rules and that Double Boss begins at A10, not A8.
+[Frozen-rule evidence](evidence/frozen-run-rule-audit-v1-evidence.json) records the private extracted
+type hashes and source findings. It does not establish full A8 fidelity or add empirical Act 2/3
+captures. The difficulty choice for the next learning recipe is pending: genuine A0 support is
+recommended for the first strong model, versus keeping the current fixed A8. Relabelling A8 is
+not an implementation of A0.
+
 All original engine binaries, results, recipes and failed cases are preserved; final test is sealed.
 
 [#136](https://github.com/benyanc/spireshift/issues/136) supplies the versioned training score.
@@ -66,9 +93,11 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Next implementation:** audit and repair the complete event action sets, verify fixed difficulty
-and later-act endings against the frozen game, then re-admit the corrected identity before a fresh learning
-recipe. The build and compatibility replay are complete; there is no command to run again.
+**Next decision:** choose genuine normal-difficulty A0 support or retain fixed A8 for the next
+learning recipe. A0 is recommended; it requires real difficulty-dependent mechanics and a new
+source/profile identity. Captured event choices are repaired and the original later-act bug is
+corroborated by the frozen game rules. Empirical later-act/closing-scene coverage and conditional
+re-admission still need completion before a fresh learning recipe. No completed check needs rerunning.
 Codex handles further short checks. Any stage expected to take five minutes or more gets one
 specific owner command when it is ready. Finish #141 before a new learning recipe.
 
@@ -94,7 +123,7 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; native published, 89/89 compatibility checks pass | Verify difficulty/endings/complete event action sets against the frozen game, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Blocking; 109 captured choice lists and 4,942 native tests pass | Choose a truthful initial difficulty, finish remaining later-act/UI ending coverage, then re-admit before fresh learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
