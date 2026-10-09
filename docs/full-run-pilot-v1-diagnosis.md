@@ -121,7 +121,7 @@ fixtures use direct test state and cannot count as real agent wins. Compatibilit
 real-game difficulty and act-boundary checks, and re-admission are still required before a
 new training recipe. The audit launched no policy training or automatic follow-up.
 
-## Event continuation correction and next owner task
+## Event continuation correction and native integration
 
 The remaining four cases used training seeds 100058, 100083, 100088 and 100056. Dense Vegetation and
 Punch Off had already committed to a fight. Their handlers accept only action 0 on the next page,
@@ -142,22 +142,42 @@ An initial test compile failure was corrected by using `RunEngine.ActiveEncounte
 candidate, logs, configuration and resource record remain preserved. No native library, game
 attempts, training or admission were produced by either short check.
 
-Run **only this next command**:
-
-```bash
-bash scripts/build-event-continuation-backend-v1.sh
-```
-
-It requires all 32 regressions and publishes the separate candidate, then checks its public exports
-on an empty handle with zero game attempts. Caps: two workers, 30 elapsed minutes, 7,200 CPU seconds,
-12 GB memory and 4 GB artifacts. Numbered reports preserve launches; a completed build is checked
-without rebuilding. No additional command needs to be chained. The build remains pending
-conformance and launches no training or automatic follow-up.
+The owner subsequently published the candidate in 7.393 wall / 8.581 CPU seconds. All 32 tests
+passed and its actual public exports were checked with an empty handle and zero game attempts.
+Native SHA-256: `3cfcd92924135fdb5fa0d27c7667ef94aec5458a1d66a623ac32becdcaabcc92`.
+Build report: `sha256:13fda11c656807cb53b0191c99dd0290472c03b844f39b419c4102cde4254a49`.
 
 [Event correction evidence](evidence/event-continuation-repair-v1-evidence.json) records the owner
 audit, all four verified source traces, isolated source/test identities and both short-check attempts.
-After assessing the owner build, derive its new adapter manifest and replay the original failures
-with event-specific endpoint checks. The old 85/89 report is never rewritten as a pass.
+Codex derived the new pending public-adapter manifest
+`sha256:46dfcf7480d7eebda430f067a8257a5f400f62eab64443ab6ef6d9952c9db255` and ran the separate
+event integration audit under a four-minute cap. **All 89 cases passed**, in 89.677 wall / 88.861
+CPU seconds, with 11,939 transitions. The four event cases first verify the original three rejected
+noops and unchanged public states, replay the exact preceding prefix, and require the corrected
+engine to advertise solely action 0. The fresh player scores every offered action and uses that
+continuation to enter the expected playable fight while preserving run resources. The 12 historical
+noops are explicitly replaced; no other action drift is accepted. All original cases stay counted.
+The old 85/89 report remains unchanged, and there were no optimizer steps or model promotions.
+
+Audit: `sha256:565998a3e6fe5ace1ac138033f152de69d8c3a1ffcdf8df742f2e77eae6b67bf`.
+Resources: `sha256:17cd55d853d81a8db99d875c15c0493b949ae8caf7d8b22c32878b69ffb7b110`.
+[New evidence](evidence/event-native-integration-v1-evidence.json) freezes identities, endpoint
+checks, denominators, compute and the original failed report. This audit is compatibility evidence
+over inspected training prefixes, not model playing strength or complete real-game fidelity.
+Difficulty, complete event action sets and later-act ending parity still precede re-admission.
+
+All ten environment interface checks also passed through this native/adapter identity in a
+0.825-second job capped at 45 seconds, on inspected training seeds 100058 and 100083. These cover
+identity, reset, complete legal enumeration at tested states, steps, illegal actions, faithful and
+resampled clones, replay, public-state isolation and terminal-only rewards. A reporting error after
+the initial probes is preserved separately; a corrected report reads the checked manifest directly.
+[Interface/reference evidence](evidence/event-native-contract-v1-evidence.json) records both jobs.
+
+The saved live references identify remaining gaps precisely. The three repaired events' initial
+pages contain enabled options 0 and 1; the source still advertises historical skip action 3 there.
+Dense Vegetation's option-1 after-state was captured mid-transition and cannot serve as a settled
+continuation-page oracle. All 32 existing full-run traces observe only Act 1, so none verifies a
+later-act ending or terminal full victory. These gaps remain open before a new learning recipe.
 
 ## Evidence and scope
 
@@ -172,7 +192,7 @@ reverify every decision trace. Two bounded exact-action reproductions used train
 - Diagnosis: `sha256:b7336e621962076e8af9cd14a427bf1723725c86d910dce144b20efdcead279a`.
 - Repair configuration: `sha256:214b5fdb1bc667b034d1417b0c3be2963f234a25533853707fcdee677c172cb1`.
 
-Only the owner runs sustained builds, training and evaluation; short synthetic checks are
-allowed. Continue #141 after assessing the owner compatibility audit; scaling #135 or fitting the
-#35 comparator does not precede the remaining conformance/admission checks. The competent whole-game
-player and adaptive thinking objective remain unchanged.
+Codex may run short builds, audits, tests and jobs autonomously. Jobs expected to take five minutes
+or more are launched and monitored by the owner. Continue #141 with real-game conformance;
+scaling #135 or fitting the #35 comparator does not precede the remaining admission checks.
+The competent whole-game player and adaptive thinking objective remain unchanged.

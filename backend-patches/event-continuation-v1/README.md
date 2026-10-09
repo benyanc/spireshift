@@ -19,10 +19,15 @@ expected playable fight with the run's HP, gold and deck. All 32 targeted manage
 passed in a short check: these nine, fourteen public-menu tests and nine completion/reward tests.
 This compiled managed tests but published no native library and made no agent game attempts.
 
-The owner publishes the candidate with `scripts/build-event-continuation-backend-v1.sh`. It stops
-before admission or training. The next compatibility replay must use the new native/adapter
-identity and keep all original failed cases. [Evidence](../../docs/evidence/event-continuation-repair-v1-evidence.json)
-records the audit, four verified failure traces, candidate and bounded test results.
+The owner subsequently published the candidate in 7.393 seconds with all 32 regressions passing.
+Codex connected its new public-adapter identity and completed the separate 89-case replay in
+89.677 seconds under a four-minute cap; all 89 passed. The four event cases verify the rejected
+suffix, retain its original prefix, and confirm that the corrected continuation starts the expected
+playable fight. Twelve historical noops are explicitly replaced. The old 85/89 result stays intact.
+[Source evidence](../../docs/evidence/event-continuation-repair-v1-evidence.json) records the four
+verified failure traces and source checks; [native integration evidence](../../docs/evidence/event-native-integration-v1-evidence.json)
+records publication and the new audit. This does not admit the backend or establish playing
+strength. Difficulty, complete event-action parity and later-act endings remain real-game checks.
 
 Upstream context is [EvanGambit/sts2](https://github.com/evangambit/sts2), MIT licensed,
 Copyright (c) 2024 The Complete Contributors. Its license is retained beside the patch.

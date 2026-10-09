@@ -42,3 +42,10 @@ unless the experiment is explicitly labeled privileged.
 
 Run `uv run spireshift check` before committing. Tests that enforce the objective contract and
 public-state boundary are release blocking.
+
+## Execution boundary
+
+The user authorizes Codex to run short builds, audits, tests and jobs autonomously. Leave tasks
+expected to take five minutes or more for the user to launch and monitor. Estimate from saved
+timings and use explicit resource caps; do not start or monitor long experiments. Preserve the
+current run's evidence, and provide one specific next command when a long stage is needed.

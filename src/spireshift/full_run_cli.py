@@ -15,6 +15,11 @@ from spireshift.full_run_backend_repair import (
     prepare_backend_repair,
     show_backend_repair,
 )
+from spireshift.full_run_event_audit import (
+    load_event_integration_recipe,
+    run_event_integration,
+    show_event_integration,
+)
 from spireshift.full_run_evolution import (
     inspect_evolution,
     load_evolution_config,
@@ -79,6 +84,11 @@ def add_full_run_parser(commands: Any) -> None:
         ("show-backend-repair", "Read a saved native repair result; never admit or train"),
         ("audit-public-integration", "Owner-run replay of failed training prefixes; no training"),
         ("show-public-integration", "Check a saved public integration audit; no game replays"),
+        (
+            "audit-event-integration",
+            "Bounded replay of all failed prefixes with event endpoint checks",
+        ),
+        ("show-event-integration", "Verify the saved event audit without replaying games"),
     ):
         command = sub.add_parser(name, help=help_text)
         command.add_argument("config", type=Path)
@@ -98,6 +108,14 @@ def run_full_run_command(args: argparse.Namespace) -> int:
                 "show-backend-repair": show_backend_repair,
             }[args.full_run_command]
             result = operation(recipe)
+        elif args.full_run_command in {"audit-event-integration", "show-event-integration"}:
+            event_recipe = load_event_integration_recipe(args.config)
+            event_audit = (
+                run_event_integration(event_recipe)
+                if args.full_run_command == "audit-event-integration"
+                else show_event_integration(event_recipe)
+            )
+            result = {k: v for k, v in event_audit.items() if k != "cases"}
         elif args.full_run_command in {"audit-public-integration", "show-public-integration"}:
             integration = load_integration_recipe(args.config)
             audit = (

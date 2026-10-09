@@ -1,9 +1,9 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after assessing the owner's 89-case compatibility audit and preparing the event
-continuation correction. GitHub holds acceptance criteria and historical evidence.
-The owner launches and monitors all sustained collection, training, simulations and evaluations.
-Short local checks are allowed. Planning/implementation does not launch production experiments.
+Updated 2026-10-09 after the event native build and the new 89-case compatibility audit.
+GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
+tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
+or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
 
@@ -39,8 +39,22 @@ only the accepted continuation on those pages and the matching Lantern Key page.
 managed regressions passed in 6.753 seconds, including nine new full-mask/progress/resource checks.
 [Event repair evidence](evidence/event-continuation-repair-v1-evidence.json) retains the owner's
 85/89 failed audit and the initial short-check compile failure as separate records. The corrected
-native library is not published yet. Real-game difficulty, endings and broader event-action
-conformance, plus re-admission, remain before learning.
+native library subsequently published in 7.393 wall / 8.581 CPU seconds with all 32 tests passing.
+Codex derived its separate public-adapter manifest and completed a new audit under a four-minute
+cap: **89/89 passed**, 11,939 transitions, 89.677 wall / 88.861 CPU seconds. The four event cases
+replay the exact saved prefix to the first rejected action, verify the removed button, then score
+and execute the engine's sole continuation into the correct playable fight. Their 12 historical
+noops are explicitly recorded as replaced; other action drift fails. All 89 original attempts
+remain in the denominator, and the old 85/89 result is unchanged.
+[Native integration evidence](evidence/event-native-integration-v1-evidence.json) preserves the
+new native, public adapter, fresh model, original cases, audit and resource identities. Real-game
+difficulty, endings and broader event-action conformance, plus re-admission, remain before learning.
+The new native/adapter also passes all ten environment interface checks in a 0.825-second job.
+[Interface/reference evidence](evidence/event-native-contract-v1-evidence.json) preserves that
+result and its initial reporting failure. Existing real-game captures show initial options 0 and 1
+at the three repaired events, while the current source still offers an extra skip there. All 32
+saved full-run reference traces observe Act 1 only. These are concrete remaining action-parity
+and later-act evidence gaps; passing the 89 inspected prefixes does not settle them.
 All original engine binaries, results, recipes and failed cases are preserved; final test is sealed.
 
 [#136](https://github.com/benyanc/spireshift/issues/136) supplies the versioned training score.
@@ -52,13 +66,11 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Next owner task:** run `bash scripts/build-event-continuation-backend-v1.sh` once and return the
-final report. It requires all 32 regressions, publishes the separate corrected native candidate
-and checks its public exports with zero game attempts. Caps: two build workers, 30 minutes,
-7,200 CPU seconds, 12 GB memory and 4 GB artifacts. A completed build is checked/displayed without
-rebuilding; numbered resource reports preserve launches. No training or automatic follow-up.
-The [diagnosis and handoff](full-run-pilot-v1-diagnosis.md) give its scope.
-No additional command needs to be chained after it. Finish #141 before a new learning recipe.
+**Next implementation:** audit and repair the complete event action sets, verify fixed difficulty
+and later-act endings against the frozen game, then re-admit the corrected identity before a fresh learning
+recipe. The build and compatibility replay are complete; there is no command to run again.
+Codex handles further short checks. Any stage expected to take five minutes or more gets one
+specific owner command when it is ready. Finish #141 before a new learning recipe.
 
 Earlier foundation evidence remains: the separately versioned [neural discard-choice comparison](neural-selection-repair.md)
 had 32 normal terminal losses per player, zero wins/first-boss reaches/Act 1 clears, mean floor
@@ -82,7 +94,7 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Blocking; 85/89 audit passes, event correction passes 32 managed tests, owner publish next | Publish event correction, replay original failures under its new native identity, verify difficulty/endings/event actions, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
+| Blocking; native published, 89/89 compatibility checks pass | Verify difficulty/endings/complete event action sets against the frozen game, then re-admit before learning. | [#141](https://github.com/benyanc/spireshift/issues/141) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
@@ -121,9 +133,10 @@ historical issues/recipes are not retroactively reclassified as successes.
   results are disclosed; final-test seeds stay sealed.
 - Keep failures/caps/truncations/missing outcomes in denominators and count all actual work,
   including discarded candidates and teacher/fine-tuning costs. Repeated actions earn no reward.
-- Each sustained stage has one clear owner command, progress, immutable outputs, explicit resume
-  and a definite stop. Only the owner launches and monitors it. Short synthetic/local checks do
-  not authorize long collection, training or evaluation.
+- Stages expected to take five minutes or more have one clear owner command, progress, immutable
+  outputs, explicit resume and a definite stop. Only the owner launches and monitors those jobs.
+  Codex may run shorter stages with explicit caps; the short audit does not authorize admission,
+  promotion or a longer collection/training/evaluation job.
 
 ## Preserved real-game milestone
 
