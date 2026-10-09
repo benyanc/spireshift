@@ -281,6 +281,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="spireshift")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    from spireshift.full_run_cli import add_full_run_parser
+
+    add_full_run_parser(subparsers)
+
     objective = subparsers.add_parser(
         "objective", help="Inspect or score saved full-run training outcomes; never runs games"
     )
@@ -1483,6 +1487,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "full-run":
+        from spireshift.full_run_cli import run_full_run_command
+
+        return run_full_run_command(args)
     if args.command == "objective":
         try:
             training_score_spec = load_training_score_spec(args.specification)

@@ -1,7 +1,7 @@
 # SpireShift backlog
 
-Updated 2026-10-08 after the owner authorized full-run evolutionary/neural learning and the first
-training-score implementation. GitHub holds detailed acceptance criteria and historical evidence.
+Updated 2026-10-08 after implementing the unified player, complete-run experience and first
+bounded neural-weight evolution pilot. GitHub holds acceptance criteria and historical evidence.
 The owner launches and monitors all sustained collection, training, simulations and evaluations.
 Short local checks are allowed. Planning/implementation does not launch production experiments.
 
@@ -17,11 +17,18 @@ accepted historical baseline; base-v11 is unpromoted.
 Comparison ID: `sha256:2bc12a35ee21e5ac285424cab8e19bcb236bb650c88d51aaa9d91e7ea8843ce6`.
 Resource ID: `sha256:c8e246e7455f5df0913bc55d6585b694643aba26eabcf5186004c76f9947786d`.
 
-**Implemented first item:** [#136](https://github.com/benyanc/spireshift/issues/136) supplies the
-versioned [full-run bootstrap training score](full-run-training-score.md), pure saved-outcome
-scorer, staging/evaluation rules and meaningful contract tests. No game attempts or fitting are
-needed. **Next implementation: [#137](https://github.com/benyanc/spireshift/issues/137), one compact
-neural player that can learn every decision family. There is no sustained owner command yet.**
+[#136](https://github.com/benyanc/spireshift/issues/136) supplies the versioned training score.
+[#137](https://github.com/benyanc/spireshift/issues/137) now supplies a standalone whole-run neural
+player with 4,384 mutable parameters and public candidate binding. [#138](https://github.com/benyanc/spireshift/issues/138)
+has complete-run experience recording, separate train/development indices and saved-input checks.
+The first direct neural-weight evolution pilot under [#135](https://github.com/benyanc/spireshift/issues/135)
+is implemented with rotating common training panels, independent elite confirmation and a final
+64-seed development comparison. No sustained pilot or automatic checkpoint promotion has run.
+
+**Next owner task:** run `bash scripts/evolve-full-run-policy-v1.sh` once and return its final
+summary/resource report. The [handoff guide](unified-full-run-pilot.md) gives the exact scope,
+caps, resume behavior and limitations. No additional command needs to be chained after it.
+Assess that evidence before scaling, changing the recipe, or starting another sustained job.
 
 Build a player that wins complete runs, then teach it when to spend little, medium or substantial
 thinking effort. The primary evaluation objective remains **terminal full-run victory probability
@@ -39,9 +46,9 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
-| Next | Unified compact full-run neural policy, public features, legal candidate scoring and genome pack/unpack. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
-| Then | Reuse complete-run workers to collect actual returns, public milestones and diverse lessons from improving policies. | [#138](https://github.com/benyanc/spireshift/issues/138) |
-| Individual methods | Bounded direct neural-weight evolution and outcome-trained PPO on the same full-run representation/score. | [#135](https://github.com/benyanc/spireshift/issues/135), [#35](https://github.com/benyanc/spireshift/issues/35) |
+| Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
+| Implemented; first owner data pending | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification. | [#138](https://github.com/benyanc/spireshift/issues/138) |
+| Owner pilot ready | Bounded direct neural-weight evolution; assess the first result before scaling. Outcome-trained PPO on the same model/score remains to implement. | [#135](https://github.com/benyanc/spireshift/issues/135), [#35](https://github.com/benyanc/spireshift/issues/35) |
 | First owner pilot | Freeze matched training budgets, seed panels, elite confirmation, scaling/plateau stops and equal decision-budget comparison. | [#140](https://github.com/benyanc/spireshift/issues/140) |
 | If evidence supports it | Preserve evolved originals; test neural fine-tuning from new experience, then bounded alternating rounds. | [#139](https://github.com/benyanc/spireshift/issues/139) |
 | When affected search is needed | Repair legal-action preservation during hidden-world resampling. Whole-run policy evolution does not require action-branch cloning. | [#105](https://github.com/benyanc/spireshift/issues/105) |
