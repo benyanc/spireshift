@@ -1,5 +1,11 @@
 # Test learning with repaired A8 inputs
 
+**Deferred as the next owner run, 2026-10-10.** The owner chose
+[actual-engine v0.111.0 qualification](actual-engine-v0.111.0.md) before more large learning
+(ADR 0005; #144–#146). The implemented relational repair and short checks below remain preserved.
+The training command in this historical guide is not the current handoff; start only the
+acquisition helper in the linked current guide.
+
 The old player receives **2 Strength and 7 Dexterity** exactly as it receives **7 Strength
 and 2 Dexterity**. It pools the two status IDs and two amounts separately, so their association
 is gone before the neural network starts. Relic-counter and card-variant relationships have

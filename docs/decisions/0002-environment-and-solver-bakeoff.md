@@ -1,5 +1,10 @@
 # ADR 0002: Environment and solver bakeoff
 
+The next bulk-learning backend priority is superseded by
+[ADR 0005](0005-actual-engine-v0.111.0-qualification.md), accepted 2026-10-10. Preserve this
+selection and its measurements as historical evidence. The new actual-engine route still needs
+exact-build acquisition, public/mechanics qualification and local complete-run throughput evidence.
+
 - Status: Accepted
 - Date: 2026-09-19
 - Issue: [#2](https://github.com/benyanc/spireshift/issues/2)

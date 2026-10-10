@@ -15,13 +15,17 @@ mean floor 11.66 initially / 11.99 trained, zero full wins, and three / two firs
 The subsequent [PPO-seeded evolution](docs/full-run-a8-evolution.md) completed 5,248 attempts
 without a full win or reliable gain; it selected the exact initializer. A bounded audit found
 that the encoder loses which status amount or relic counter belongs to which visible object.
-The [next bounded A8 pilot](docs/full-run-relational-a8-v3.md) repairs those relationships in
+The [implemented relational repair](docs/full-run-relational-a8-v3.md) repairs those relationships in
 separately versioned actor/critic inputs while keeping the same compact network and PPO math.
 Short sensitivity and synthetic learning controls pass; real playing strength remains unproven.
 The repaired simulator is admitted for scoped policy learning with
 [explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
-A useful player, full win and adaptive thinking remain to be established. The owner launches
-the next long experiment through the guide's one command.
+A useful player, full win and adaptive thinking remain to be established. The owner accepted
+[a separately frozen v0.111.0 actual-engine qualification track](docs/actual-engine-v0.111.0.md)
+before another large learning run. Exact-build preflight and private archive tooling are
+implemented; game acquisition, public mechanics qualification and complete-run speed evidence
+remain pending. Keep all v0.107.1 artifacts and the relational repair unchanged. The current
+guide gives one owner acquisition helper; the older large emulator pilot is deferred.
 
 The repository also contains the research contracts and a seeded mock vertical slice:
 

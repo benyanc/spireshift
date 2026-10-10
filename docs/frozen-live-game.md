@@ -1,5 +1,11 @@
 # Preserved real game for later model playback
 
+The owner accepted a separate v0.111.0 actual-engine qualification track on 2026-10-10.
+Keep the verified v0.107.1 archive below unchanged. The new target is not acquired or launch-tested
+yet; see [the current single-stage handoff](actual-engine-v0.111.0.md) and
+[ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md). It does not inherit this archive's
+successful menu/bridge check, saves or model compatibility.
+
 [Issue #37](https://github.com/benyanc/spireshift/issues/37) tracks this component and the eventual
 pre-patch experiment bundle. The private macOS archive was verified on 2026-10-08; game payloads
 and local evidence remain outside Git.

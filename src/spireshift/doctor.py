@@ -180,6 +180,12 @@ def discover_game_candidates(
 def parse_steam_library_folders(content: str) -> list[str]:
     modern = re.findall(r'"path"\s+"([^"]+)"', content)
     legacy = re.findall(r'^\s*"\d+"\s+"([^"]+)"\s*$', content, flags=re.MULTILINE)
+    # Modern library records also contain numeric app-size entries. Those are not paths.
+    legacy = [
+        item
+        for item in legacy
+        if item.startswith(("/", "\\\\")) or re.match(r"^[A-Za-z]:[\\/]", item)
+    ]
     return [item.replace(r"\\", "\\") for item in [*modern, *legacy]]
 
 

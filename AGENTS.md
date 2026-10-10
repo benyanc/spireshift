@@ -32,6 +32,13 @@ they are not prerequisites for A8 training and must not displace learning work. 
 declare the actual A8 rules and repaired source/native/adapter identity. Preserve the historical
 pilot's invalid A0 label and results; never silently relabel or resume them under changed rules.
 
+The owner accepted a separately frozen v0.111.0 actual-engine qualification track on 2026-10-10
+(ADR 0005; #144–#146). This supersedes v0.107.1 as the next bulk-learning path, not the fixed A8
+priority. Preserve the old archive, scoped admission, encoders, models and results; do not silently
+migrate or resume them on new rules. Obtain the exact new game, qualify public inputs/mechanics and
+measure complete-run speed before a new neural pilot. The prepared large v3 emulator pilot is
+deferred. Emulator porting, other difficulties and larger GA batches are not prerequisites.
+
 Use complete-run outcomes to improve the unified policy across every decision family, then test
 the frozen player on independent seeds at equal compute. Repeatable auxiliary progress is a
 development milestone; genuine full wins remain the goal. More games alone do not establish a

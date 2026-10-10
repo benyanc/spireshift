@@ -1,13 +1,34 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after the negative A8 hybrid result and entity-bound input repair.
+Updated 2026-10-10 after the owner accepted a separately frozen actual-engine qualification track.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
 
-**Next owner stage:** [test learning with repaired public inputs](full-run-relational-a8-v3.md).
+**Next owner stage:** [request the exact v0.111.0 macOS depot](actual-engine-v0.111.0.md).
+The owner accepted [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md): preserve the
+launchable v0.107.1 archive and every old result, acquire a separate exact v0.111.0 game, qualify
+actual-engine public state/mechanics, then measure full-run speed before new A8 neural learning.
+Updating Steam alone does not align the v0.107.1 emulator with v0.111.0. Its port is deferred.
+
+The first implementation adds strict file/source preflight, an immutable full-game archive and
+verification, and one owner download helper. Steam's local cache identifies the macOS manifest for
+beta build `24724944`; server availability and the downloaded game fingerprints are still pending.
+Only the owner starts and monitors that roughly 1.3 GB download. No game or training job follows.
+The subsequent mechanics panel covers complete current costs/counters/statuses/intents, all visible
+menus and repeated rest/shop/reward/submenu actions. Inventory coverage is not an exhaustive
+enumeration of all game states. Qualification and performance gates precede a large learning run.
+
+Ironclad/A8, full-run terminal wins and the strong cheap foundation before adaptive effort remain
+binding. Preserve the relational repair and PPO math for the separately versioned actual-engine
+inputs. Do not silently migrate emulator IDs, weights, experience or seed ownership across patches.
+The prepared large v3 emulator pilot below is **deferred**, not the current next owner command.
+
+## Preserved v0.107.1 direction and evidence
+
+**Historical prepared stage, now deferred:** [test learning with repaired public inputs](full-run-relational-a8-v3.md).
 The v2 encoder pooled each list item's identity and numeric properties independently. It cannot
 separate **2 Strength / 7 Dexterity** from **7 Strength / 2 Dexterity**, nor a swap of counters
 between two relics. This is an exact information-loss counterexample, not a measured explanation
@@ -157,7 +178,7 @@ has completed its owner pilot with rotating common training panels, independent 
 and a final 64-seed development comparison. That is infrastructure/negative evidence, not a
 competent player, matched cross-method result or foundation readiness.
 
-**Current priority:** prove a useful learning loop on **Ironclad / A8**, using the repaired public
+**Historical v0.107.1 priority, superseded by ADR 0005:** prove a useful learning loop on **Ironclad / A8**, using the repaired public
 player and truthfully declared rules. Difficulty is decided; there is no A0 implementation prerequisite.
 The new scoped admission and A8 PPO recipe are ready. The next owner stage collects complete
 runs, updates all policy components, and compares the frozen player with its initializer on
@@ -193,12 +214,15 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
+| Current; identity/archive tooling implemented, game download pending | Preserve and preflight the exact v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
+| Next; before new bulk learning | Generate the official content inventory privately; qualify profile isolation, complete public inputs/legal actions and 25–30 targeted same-build mechanics scenarios through the shipped headless and patched CLI routes. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
 | Completed owner PPO; inconclusive improvement | Preserve 32-round PPO v2 and its complete independent comparison; no larger PPO launch is automatic. The earlier evolution pilot remains negative/compatibility-compromised. | [#35](https://github.com/benyanc/spireshift/issues/35), [#135](https://github.com/benyanc/spireshift/issues/135) |
-| Next owner run; input repair implemented | Test the entity-bound v3 encoder with the same compact network and PPO math, synthetic learnability controls, a bounded eight-round pilot and fresh independent development. If it stalls, review credit assignment/capacity before increasing volume. | [#143](https://github.com/benyanc/spireshift/issues/143), [#78](https://github.com/benyanc/spireshift/issues/78), [#35](https://github.com/benyanc/spireshift/issues/35) |
+| Input repair implemented; large emulator pilot deferred | Retain the entity-bound v3 encoder and synthetic/short pipeline checks. Carry the relational design into qualified actual-engine inputs before another large run; review credit assignment/capacity if learning stalls. | [#143](https://github.com/benyanc/spireshift/issues/143), [#78](https://github.com/benyanc/spireshift/issues/78), [#35](https://github.com/benyanc/spireshift/issues/35) |
 | Completed owner hybrid; negative result | Preserve the 16-generation result, all costs/failures and initializer self-comparison. No larger unchanged GA or automatic fine-tuning follows. | [#139](https://github.com/benyanc/spireshift/issues/139), [#140](https://github.com/benyanc/spireshift/issues/140) |
 | Later; after a useful repaired-input learner | Freeze genuinely matched total costs and terminal-only reference before cross-method superiority claims. Existing incremental hybrid evidence is not that comparison. | [#140](https://github.com/benyanc/spireshift/issues/140) |
 | Deferred; current hybrid did not help | Preserve originals; revisit neural fine-tuning/alternation only when evolution produces a useful independent gain. | [#139](https://github.com/benyanc/spireshift/issues/139) |
