@@ -1,5 +1,12 @@
 # Evolve the complete A8 neural player
 
+**Completed; negative result.** The owner finished 16 generations / 5,248 attempts, with zero
+full wins. The selected player is the unchanged initializer: mean development floor 11.296875
+versus PPO 12.125, and four versus two Act 1 clears on 128 fresh paired seeds. No model is
+promoted. [Outcome evidence](evidence/public-a8-actor-evolution-owner-v1-assessment.json) preserves
+all costs and failures. The current next command is in the [repaired-input pilot guide](full-run-relational-a8-v3.md).
+The following recipe is historical; its launcher now displays the saved result.
+
 The completed PPO experiment changed the player, but its unseen-game improvement is too small
 to establish useful progress: **11.66 to 11.99 mean floor, three to two first-act clears, zero
 full wins**, on 128 paired games. The

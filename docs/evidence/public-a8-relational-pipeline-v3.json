@@ -1,0 +1,137 @@
+{
+  "schema_version": "public-a8-relational-pipeline-evidence-v3",
+  "short_report_id": "sha256:9410b165b4d38aaf689c8ad520e073771c314c6578a257ae97bd886175c8810c",
+  "protocol": {
+    "adaptive_controller_allowed": false,
+    "automatic_followup": false,
+    "checkpoint_promoted": false,
+    "claim_scope": "entity_bound_a8_ppo_bootstrap_with_frozen_independent_greedy_development",
+    "config_id": "sha256:dc8363da4fe945fba93657b5e57e24e46d441f434943d6b6a26af1ec5f7edbc6",
+    "episode_execution": {
+      "automatic_retries": 0,
+      "debug_journal_is_model_input": false,
+      "episode_wall_seconds": 180,
+      "isolation_id": "public-a8-relational-disposable-episode-process-v3",
+      "source_sha256": "f990c1b44cb0ca2490edb1c41327ba2736eca759052476b7876fa4a837155b29"
+    },
+    "experience_implementation_id": "sha256:2ab2206ad5cef45afed9ad3e429a04038db1c4f56977cf174eb598201666e226",
+    "final_test_opened": false,
+    "prior_seed_inventory_id": "sha256:74d5bd984c32383117eca552bfaf1d84ec897b8aa5d35386c0e4e2f5d7464bde",
+    "ruleset_manifest_id": "sha256:b626c146fbb41dc5370a7e4b6fd773279288df2065c3def3989c238c9a67042f",
+    "runner_source_sha256": "8e96ff3ad1233e7901629d30dd80b73c22119d9c19f7309446f55eebea0a1630",
+    "split_manifest_id": "sha256:4385df70a77e71623e90a24e8abeaf309f770e2db0886ef1fb5da9d29119b2d6",
+    "training_spec_id": "sha256:871689210e35d3068f944e3c073aa59bfae26eff6ed36f3836b3106dfa751b1d"
+  },
+  "initial_model_id": "sha256:33a5f052b3d970f3e44a408b49028b088a6b01297fd3316310ef3f54ee5c9b66",
+  "selected_model_id": "sha256:943593b8fbda5016f964bba93a5b0a0a1a952c37a2380096048bf45bf4d89601",
+  "actor_parameters": 4384,
+  "rounds_completed": 2,
+  "optimizer_steps": 10,
+  "actual_attempts": 14,
+  "public_decisions": 2125,
+  "all_attempts_terminal_losses": true,
+  "worker_failed_attempts": 0,
+  "independent_development": {
+    "initial": {
+      "benchmark_denominator": 2,
+      "completed_runs": 2,
+      "completion_rate": 1.0,
+      "failed_runs": 0,
+      "fitness_rank": [
+        0.0,
+        0.019021739130434784,
+        1.0
+      ],
+      "mean_auxiliary_progress_return": 0.019021739130434784,
+      "mean_completed_acts": 0.0,
+      "mean_maximum_floor": 7.0,
+      "mean_training_return": 0.019021739130434784,
+      "missing_runs": 0,
+      "recorded_cpu_seconds": 2.190359,
+      "recorded_decisions": 225,
+      "recorded_runs": 2,
+      "victories": 0,
+      "victory_rate": 0.0
+    },
+    "trained": {
+      "benchmark_denominator": 2,
+      "completed_runs": 2,
+      "completion_rate": 1.0,
+      "failed_runs": 0,
+      "fitness_rank": [
+        0.0,
+        0.029491341991341992,
+        1.0
+      ],
+      "mean_auxiliary_progress_return": 0.029491341991341992,
+      "mean_completed_acts": 0.0,
+      "mean_maximum_floor": 14.5,
+      "mean_training_return": 0.029491341991341992,
+      "missing_runs": 0,
+      "recorded_cpu_seconds": 4.781264999999999,
+      "recorded_decisions": 420,
+      "recorded_runs": 2,
+      "victories": 0,
+      "victory_rate": 0.0
+    },
+    "paired": {
+      "both_completed": 2,
+      "champion_only_victories": 0,
+      "claim_scope": "paired_independent_development_not_final_test_or_foundation_readiness",
+      "comparison_valid": true,
+      "distinct_players": true,
+      "initial_only_victories": 0,
+      "mean_maximum_floor_difference": 7.5,
+      "planned_pairs": 2
+    }
+  },
+  "resource_report_id": "sha256:fc5e9b225266f12f678275c03fb5319ae03911b7a1d79791f18b3f8094568229",
+  "wall_seconds": 26.67648662501597,
+  "cpu_seconds": 31.289009942999996,
+  "initial_summary_printing_failure": {
+    "resource_report_id": "sha256:e66c66ce498c2e3dfb71908ba641ddea194e62ced52fd167052ebb407c424057",
+    "status": "failed",
+    "wall_seconds": 65.9146782910102,
+    "cpu_seconds": 32.48865222,
+    "cause": "command_entry_point_called_summary_before_definition",
+    "fix": "move_entry_point_after_all_definitions",
+    "prior_attempt_preserved": true
+  },
+  "saved_input_check": {
+    "schema_version": "public-a8-relational-saved-input-check-v3",
+    "source_report_id": "sha256:9410b165b4d38aaf689c8ad520e073771c314c6578a257ae97bd886175c8810c",
+    "fully_checked_episode_traces": 14,
+    "verified_sampled_cases": 4,
+    "verified_sampled_decisions": 305,
+    "frozen_sources_unchanged": {
+      "full_run_a8_experience.py": "9869c973224df68d6b0682684bea8f22496d738dc5826809e5a66fdab3146ef3",
+      "full_run_ppo.py": "208c550e9710ce61ae504745aaeeb7cf2c8e933b582f9477e23736ac66cb7731",
+      "full_run_ppo_math.py": "fa06ff5bcb7ac254b28615c978c208d7785beeccfba8dfba58c99b10bfc2d62e",
+      "full_run_ppo_worker.py": "fbcf56259d41f03fc615afd56ef4fd0fcfb4ec70a2de36c4b28bfebfb33ab6c4",
+      "full_run_features.py": "10d56648d0dd7e6b3e6e7127bdc2156efd1a09b1a42cfa6edf7632065893a17e",
+      "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+      "full_run_public_policy.py": "973b7c126d9045c016195e0b4f113a614b307055d5a9fb4c54656f7bb71eb3de",
+      "full_run_a8_evolution.py": "99e4ab2887427d92d8ec5f361534911cd66977a77ce2a6f2113bbd35114b82d2",
+      "full_run_evolution.py": "96ba1fb304d78c73a3f89088923dea2950a8fbc07f8b55441a1e682aef48f6cb",
+      "adapters/evangambit.py": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f",
+      "adapters/evangambit_public_choices.py": "222ffcd51b568eca558cd4f1e32758684b57447bd9982c84b7fee2eaee1c1f95"
+    },
+    "games_replayed": 0,
+    "optimizer_steps": 0,
+    "final_test_opened": false,
+    "check_id": "sha256:ddc35f509dd33c1e5ee0a55110912ce099e37b753c6ec4a7ce5edd5aea4073bb"
+  },
+  "excluded_short_development_seeds": [
+    305189,
+    305201
+  ],
+  "owner_config_id": "sha256:b641213ef6669f85d14730b816f21d8d0cc8c80a727ee048e1441f7ae056aaf1",
+  "owner_stage_started": false,
+  "real_game_performance_improvement_established": false,
+  "checkpoint_promoted": false,
+  "foundation_readiness_established": false,
+  "final_test_opened": false,
+  "automatic_followup": false,
+  "claim_scope": "tiny_actual_simulator_integration_not_player_quality",
+  "evidence_id": "sha256:f427adf72b65ebd8d4a9ceec1a1aec69f1c1e87a68a8946ed236bfbf86a21999"
+}

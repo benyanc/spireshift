@@ -1,50 +1,64 @@
 # SpireShift backlog
 
-Updated 2026-10-09 after the completed A8 PPO v2 assessment and bounded neural evolution implementation.
+Updated 2026-10-09 after the negative A8 hybrid result and entity-bound input repair.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
 
-**Next owner stage:** [PPO-seeded evolution of the complete A8 neural player](full-run-a8-evolution.md),
-under #139/#140. The saved PPO player and its initializer are preserved. All 4,384 actor parameters
-can change, including every legal decision family; the critic stays unchanged because this stage
-uses direct whole-player outcomes. Sixteen candidates share each 16-seed rotating train panel.
-Every two generations, the leading candidate faces a separate 128-seed train confirmation panel.
-Freeze the confirmed player before comparing initializer, PPO and evolved player on **128 fresh
-paired development seeds**. No final-test opening or automatic fine-tuning follows.
+**Next owner stage:** [test learning with repaired public inputs](full-run-relational-a8-v3.md).
+The v2 encoder pooled each list item's identity and numeric properties independently. It cannot
+separate **2 Strength / 7 Dexterity** from **7 Strength / 2 Dexterity**, nor a swap of counters
+between two relics. This is an exact information-loss counterexample, not a measured explanation
+of every previous defeat. A separately versioned v3 encoder binds properties to their public
+owners, including card upgrade/enchantment descriptors. Both actor and bootstrap critic use it.
+It retains the same **256 inputs, 16 tanh units and 4,384 actor parameters**, public legal choices,
+PPO algebra and terminal-victory/auxiliary score contracts. Historical sources and results remain
+unchanged; new models and experience cannot silently load the old format.
 
-The owner completed PPO v2's **32 rounds, 5,504 attempts, 659,118 decisions and 14,696 optimizer
-steps**, selecting round 24. Its complete independent comparison is still inconclusive: mean
-floor **11.6641 initially / 11.9922 trained**, first-act clears **three / two**, and **zero full
-wins**. Paired floors improve on 48 seeds, regress on 42 and tie on 38; the auxiliary approximate
-95% interval is **−0.65 to +1.31 floors**. The two owner launches cost 5,938.579 wall / 11,625.372
-CPU seconds. All 128 development pairs complete normally. The full experiment retains 16
-liveness failures and one unsupported action, with no worker crashes. The
-[outcome-metadata assessment](evidence/public-a8-ppo-pilot-v2-assessment.json) reconciles saved
-identities and costs without replay or compressed-trace reaudit. A training trend did not
-establish useful held-out progress; simply increasing PPO volume is not the next step.
+The [bounded input audit](evidence/public-a8-entity-bound-input-repair-v3.json) checks 189 states
+from four saved **training** runs, verifies all candidate bindings, and distinguishes both swaps.
+The repaired actual network learns two opposite synthetic preferences to **98.37% / 98.42%**
+correct-action probability after 250 short synthetic updates. Identical old inputs impose a 50%
+mean expected success ceiling on that particular balanced task. These are artificial learning
+controls, not optimal-gameplay labels, wins or model promotion. The sample also observes hard
+feature clipping and hidden-unit saturation; their effect on game strength is not established.
 
-The new hybrid stage keeps the same admitted A8 engine, public encoder, terminal-victory goal,
-bootstrap score and 128-CPU-second whole-run decision budget. New train and development panels
-exclude prior PPO attempts and the disclosed short checks. It is an **additional PPO-seeded
-experiment**, not a from-scratch GA or matched-total-cost superiority comparison. Reports retain
-all prior PPO cost. #140 still owns a full matched methods comparison and terminal-only reference;
-#139's automatic alternating/fine-tuning cycle remains conditional on actual benefit.
+The [tiny actual-simulator check](evidence/public-a8-relational-pipeline-v3.json) completes
+**14 attempts / 2,125 public decisions / 10 optimizer steps in 26.676 wall / 31.289 CPU seconds**,
+with no failed attempts and no full wins. All 14 saved traces and 305 sampled decisions verify.
+Its two development pairs are integration evidence only, and their seeds are excluded from the
+owner stage. The initial summary-printing failure is preserved separately. All **897 repository
+tests**, formatting/type checks and the C# protocol build pass;
+[verification evidence](evidence/public-a8-entity-bound-verification-v3.json) records the short check.
 
-The [native pipeline check](evidence/public-a8-actor-evolution-pipeline-v1.json) completed **16
-attempts / 2,122 public decisions in 16.473 wall / 21.757 CPU seconds**, with zero failures and
-zero wins. Its candidate did not improve confirmation, so it kept PPO; that self-comparison is
-explicitly invalid evidence of evolution gain. This verifies compatibility, not player quality.
-The owner recipe is at most **16 generations / 5,632 attempts**, stops on a confirmed training
-plateau after 12 generations, and has one **total stage budget** of 3,600 elapsed / 12,000 CPU
-seconds, 12 GB memory and 4 GB artifacts. Explicit resumptions subtract previous launch costs.
-Allow roughly 20–40 minutes, with a one-hour hard elapsed cap. The owner alone launches the
-long stage; it has not started. The guide supplies one specific command and generation summaries.
-All 884 repository tests, formatting/type checks and the C# protocol build pass;
-[verification evidence](evidence/public-a8-actor-evolution-verification-v1.json) preserves initial
-new-test reference/isolation failures and the successful short check.
+The next owner recipe has at most **eight rounds of 128 sampled games / 1,920 attempts**,
+including separate 128-seed train confirmations every two rounds and a frozen paired 128-seed
+independent development comparison. It excludes earlier declared/inspected seeds and the tiny
+pipeline check. Each round shows wins, average floor, best game and failures. The whole stage
+has one **60-minute elapsed / 12,000-CPU-second budget**, 12 GB memory and 4 GB artifacts;
+explicit resumption subtracts previous launch costs. There is no automatic next job, deployment
+promotion, adaptive controller or final-test opening. A real independent gain is still required.
+The guide contains **one specific owner command**.
+
+The owner completed the earlier PPO-seeded GA: **16 generations, 5,248 actual attempts and
+757,944 public decisions in 1,987.806 wall / 8,628.793 CPU seconds**. There were zero full wins.
+The selected player is **exactly the original initializer**, not a new successful mutation.
+On 128 fresh development seeds, PPO reaches mean floor **12.125** and clears Act 1 twice;
+the selected initializer reaches **11.296875** and clears Act 1 four times. No repeated useful
+improvement is demonstrated. Across the stage, 22 liveness failures and four unsupported runs
+remain counted. The [owner outcome assessment](evidence/public-a8-actor-evolution-owner-v1-assessment.json)
+preserves the negative result; selected-versus-initializer is a self-comparison. #139's follow-up
+fine-tuning/alternation is deferred, and #140's matched-total-cost methods experiment remains open.
+
+The preceding PPO v2's **32 rounds, 5,504 attempts, 659,118 decisions and 14,696 optimizer steps**
+selected round 24. Its original 128-seed development result remains inconclusive: **11.6641 /
+11.9922 mean floor, three / two first-act clears, zero wins**, approximate paired auxiliary 95%
+interval **−0.65 to +1.31 floors**. The two launches cost 5,938.579 wall / 11,625.372 CPU seconds.
+All development pairs completed normally; 16 liveness failures and one unsupported training
+attempt remain counted. The [original assessment](evidence/public-a8-ppo-pilot-v2-assessment.json)
+is preserved. More unchanged PPO or GA batches are not the next step.
 
 The repaired simulator remains admitted for scoped policy learning, with coverage limitations
 in [ADR 0004](decisions/0004-scoped-a8-simulator-learning.md) and
@@ -184,9 +198,10 @@ independent evaluation, numerical stability and historical evidence preservation
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
 | Implemented; owner pilot saved | Complete-run public experience, actual returns, milestones, lineage, immutable split-specific indices and verification; original failures remain represented. | [#138](https://github.com/benyanc/spireshift/issues/138) |
 | Completed owner PPO; inconclusive improvement | Preserve 32-round PPO v2 and its complete independent comparison; no larger PPO launch is automatic. The earlier evolution pilot remains negative/compatibility-compromised. | [#35](https://github.com/benyanc/spireshift/issues/35), [#135](https://github.com/benyanc/spireshift/issues/135) |
-| Next owner run; implemented and checked | Evolve the complete PPO actor on fresh common train panels, confirm candidates and compare the frozen result with PPO and initializer on fresh development games. Preserve originals and charge prior PPO plus additional evolution cost. | [#139](https://github.com/benyanc/spireshift/issues/139), [#140](https://github.com/benyanc/spireshift/issues/140) |
-| After the bounded hybrid assessment | Freeze genuinely matched total costs and terminal-only reference before cross-method superiority claims. Existing incremental hybrid evidence is not that comparison. | [#140](https://github.com/benyanc/spireshift/issues/140) |
-| Only if the hybrid stage helps | Preserve originals; test new neural fine-tuning after evolution, then bounded alternating rounds. | [#139](https://github.com/benyanc/spireshift/issues/139) |
+| Next owner run; input repair implemented | Test the entity-bound v3 encoder with the same compact network and PPO math, synthetic learnability controls, a bounded eight-round pilot and fresh independent development. If it stalls, review credit assignment/capacity before increasing volume. | [#143](https://github.com/benyanc/spireshift/issues/143), [#78](https://github.com/benyanc/spireshift/issues/78), [#35](https://github.com/benyanc/spireshift/issues/35) |
+| Completed owner hybrid; negative result | Preserve the 16-generation result, all costs/failures and initializer self-comparison. No larger unchanged GA or automatic fine-tuning follows. | [#139](https://github.com/benyanc/spireshift/issues/139), [#140](https://github.com/benyanc/spireshift/issues/140) |
+| Later; after a useful repaired-input learner | Freeze genuinely matched total costs and terminal-only reference before cross-method superiority claims. Existing incremental hybrid evidence is not that comparison. | [#140](https://github.com/benyanc/spireshift/issues/140) |
+| Deferred; current hybrid did not help | Preserve originals; revisit neural fine-tuning/alternation only when evolution produces a useful independent gain. | [#139](https://github.com/benyanc/spireshift/issues/139) |
 | When affected search is needed | Repair legal-action preservation during hidden-world resampling. Whole-run policy evolution does not require action-branch cloning. | [#105](https://github.com/benyanc/spireshift/issues/105) |
 | Foundation milestone | Establish repeatable held-out progress, then wins and credible run-value/risk evidence. Apply the foundation scorecard before adaptive thinking. | [#78](https://github.com/benyanc/spireshift/issues/78), contract [#5](https://github.com/benyanc/spireshift/issues/5) |
 | Deferred; after a useful A8 learning workflow | Implement genuine selectable ascension levels and separate per-difficulty validation. This does not block the current learning work. | [#142](https://github.com/benyanc/spireshift/issues/142) |

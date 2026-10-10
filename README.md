@@ -12,9 +12,12 @@ search is reserved for decisions where it is expected to improve full-run victor
 The completed [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md) pilot played 5,504 attempts and
 changed the unified neural player. Its independent 128-seed comparison remains inconclusive:
 mean floor 11.66 initially / 11.99 trained, zero full wins, and three / two first-act clears.
-The next stage is [PPO-seeded evolution of the same neural player](docs/full-run-a8-evolution.md),
-with every actor layer mutable, common rotating train games and a fresh frozen three-player
-comparison. It is an additional hybrid experiment, not an equal-total-cost advantage claim.
+The subsequent [PPO-seeded evolution](docs/full-run-a8-evolution.md) completed 5,248 attempts
+without a full win or reliable gain; it selected the exact initializer. A bounded audit found
+that the encoder loses which status amount or relic counter belongs to which visible object.
+The [next bounded A8 pilot](docs/full-run-relational-a8-v3.md) repairs those relationships in
+separately versioned actor/critic inputs while keeping the same compact network and PPO math.
+Short sensitivity and synthetic learning controls pass; real playing strength remains unproven.
 The repaired simulator is admitted for scoped policy learning with
 [explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
 A useful player, full win and adaptive thinking remain to be established. The owner launches
