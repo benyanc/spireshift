@@ -1,4 +1,4 @@
-"""Short, private native rest regressions; no policy rollouts or training admission."""
+"""Short native rest and public projection regressions; never training admission."""
 
 from __future__ import annotations
 
@@ -68,10 +68,17 @@ def probe_cli_rest(
     qualification: EngineQualificationConfig, path: Path, node: Path
 ) -> dict[str, Any]:
     document = json.loads(path.read_text())
+    projected = document.get("schema_version") == "engine-cli-rest-projection-config-v1"
+    stage = (
+        "privileged_named_rest_public_projection_only"
+        if projected
+        else "privileged_named_rest_scenarios_only"
+    )
     if (
-        document.get("schema_version") != "engine-cli-rest-probe-config-v1"
+        document.get("schema_version")
+        not in {"engine-cli-rest-probe-config-v1", "engine-cli-rest-projection-config-v1"}
         or document.get("qualification_config_id") != qualification.config_id
-        or document.get("stage") != "privileged_named_rest_scenarios_only"
+        or document.get("stage") != stage
         or document.get("character") != "Ironclad"
         or document.get("ascension") != 8
         or document.get("training_allowed") is not False
@@ -92,7 +99,11 @@ def probe_cli_rest(
     build = verify_local_build_report(report, build_config, qualification)
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Rest probe must bind the exact completed local build report")
-    helper = qualification.root / "scripts/probe-engine-cli-rest.mjs"
+    helper = qualification.root / (
+        "scripts/probe-engine-cli-rest-projection.mjs"
+        if projected
+        else "scripts/probe-engine-cli-rest.mjs"
+    )
     library = qualification.root / "scripts/engine-cli-local-build.mjs"
     if (
         _sha_file(helper) != document["helper_sha256"]
@@ -101,6 +112,9 @@ def probe_cli_rest(
         != build_config["local_patch_sha256"]
     ):
         raise ValueError("The pinned rest probe, build helper, or source patch changed")
+    projection, sdk_before = None, None
+    if projected:
+        projection, sdk_before = verify_projection_inputs(qualification, document)
     native = load_native_qualification_config(
         qualification.root / build_config["native_config"], qualification
     )
@@ -161,6 +175,11 @@ def probe_cli_rest(
             "expected": build_config["expected_repaired"],
             "managed_runtime_version": document["managed_runtime_version"],
         }
+        if projected:
+            spec["projection"] = projection
+            spec["environment_fingerprint"] = manifest_identifier(
+                {"build_report_id": report["report_id"], "projection_config": document}
+            )
         environment = dict(os.environ)
         environment["DOTNET_ROLL_FORWARD"] = "Major"
         environment.pop("STS2_HEADLESS_QUIET", None)
@@ -188,17 +207,37 @@ def probe_cli_rest(
         )
         shared_after = _shared_snapshot(shared)
         archive_after = verify_game_archive(qualification, archive)
+        passed_status = (
+            "rest_public_projection_regression_pass" if projected else "rest_native_regression_pass"
+        )
         checks = {
-            "native_rest_regressions_pass": probe.get("status") == "rest_native_regression_pass",
+            "native_rest_regressions_pass": probe.get("status") == passed_status,
             "same_private_candidate_unchanged": _inventory(candidate) == candidate_before,
             "shared_profile_unchanged": shared_before == shared_after,
             "frozen_archive_unchanged": archive_after["valid"],
             "uncapped_successful_process": not timed_out and child.returncode == 0,
         }
+        if projected:
+            assert projection is not None
+            checks["projection_identity_bound"] = probe.get("projection_identity") == {
+                key: projection[key]
+                for key in (
+                    "source_revision",
+                    "source_sha256",
+                    "patch_sha256",
+                    "patched_source_sha256",
+                    "sdk_inventory_id",
+                )
+            }
+            checks["pinned_sdk_tree_unchanged"] = (
+                _inventory(Path(projection["node_modules"])) == sdk_before
+            )
         return _finish(
             attempt,
             {
-                "schema_version": "engine-cli-rest-probe-v1",
+                "schema_version": "engine-cli-rest-projection-probe-v1"
+                if projected
+                else "engine-cli-rest-probe-v1",
                 "config_id": manifest_identifier(document),
                 "qualification_config_id": qualification.config_id,
                 "build_report_id": report["report_id"],
@@ -208,9 +247,7 @@ def probe_cli_rest(
                 "candidate_lineage": build_config["candidate_lineage"],
                 "character": "Ironclad",
                 "ascension": 8,
-                "status": "rest_native_regression_pass"
-                if all(checks.values())
-                else "rest_probe_incomplete",
+                "status": passed_status if all(checks.values()) else "rest_probe_incomplete",
                 "checks": checks,
                 "probe": probe,
                 "process": {
@@ -225,10 +262,55 @@ def probe_cli_rest(
                 "shipped_cross_host_parity": False,
                 "training_allowed": False,
                 "claim_scope": (
-                    "named_privileged_managed_native_rest_regressions_not_shipped_parity"
+                    "named_privileged_managed_native_rest_public_projection_not_shipped_parity"
+                    if projected
+                    else "named_privileged_managed_native_rest_regressions_not_shipped_parity"
                 ),
             },
         )
     except BaseException as error:
         _failure(attempt, error)
         raise
+
+
+def verify_projection_inputs(
+    qualification: EngineQualificationConfig, document: dict[str, Any]
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Bind the exact MIT hook, public surface helper and installed SDK without downloads."""
+    pins = document["projection"]
+    headless = next(
+        item for item in qualification.document["sources"] if item["name"] == "headless"
+    )
+    if pins.get("source_revision") != headless["commit"]:
+        raise ValueError("Rest projection must use the qualification's pinned Headless revision")
+    source = (
+        _private_path(qualification.root, headless["path"]) / "src/managed-player-environment.mjs"
+    )
+    patch = qualification.root / "patches/engine/sts2-headless-player-projection-v1.patch"
+    if _sha_file(source) != pins["source_sha256"] or _sha_file(patch) != pins["patch_sha256"]:
+        raise ValueError("Rest projection source or hook patch changed")
+    for name in (
+        "engine-player-projection.mjs",
+        "engine-rest-surface.mjs",
+        "probe-engine-cli-rest.mjs",
+    ):
+        if _sha_file(qualification.root / "scripts" / name) != pins["helpers_sha256"].get(name):
+            raise ValueError("A pinned rest projection dependency changed")
+    sdk = _private_path(qualification.root, pins["node_modules"])
+    inventory = _inventory(sdk)
+    if manifest_identifier({"files": inventory}) != pins["sdk_inventory_id"]:
+        raise ValueError("Pinned SDK/dependency inventory changed; do not install substitutes")
+    return {
+        **{
+            key: pins[key]
+            for key in (
+                "source_revision",
+                "source_sha256",
+                "patch_sha256",
+                "patched_source_sha256",
+                "sdk_inventory_id",
+            )
+        },
+        "patch": str(patch),
+        "node_modules": str(sdk),
+    }, inventory

@@ -18,9 +18,9 @@ matching the inspected native UI path. Failed or canceled choices cannot create 
 
 Rest `choose_option` now requires `room_ref`, `option_ref`, and the current
 `option_index`. Rest `leave_room` requires `room_ref` and available Proceed.
-The existing upstream canonical projection must be updated before using this new
-contract in an agent. Other card selectors' cancellation/confirmation preferences
-remain unqualified; unknown fields are omitted, not invented.
+The local canonical projection below consumes this repaired contract. The unmodified
+upstream projection does not. Other card selectors' cancellation/confirmation preferences
+remain unqualified; unknown fields produce unavailable actions, not invented defaults.
 
 Drift risk remains high: TestMode and Godot stubs run outside the rendered SceneTree,
 and the Proceed flag replaces UI presentation state. Continue-save rest resumption
@@ -58,4 +58,32 @@ Portable checks need no game files:
 ```bash
 node --test scripts/engine-cli-local-build.test.mjs
 uv run pytest tests/unit/test_engine_cli_probe.py
+```
+
+## Canonical rest projection hook
+
+`sts2-headless-player-projection-v1.patch` targets MIT STS2 Headless revision
+`4961b52a587777277816bc4407108f6f4274f801` and its exact
+`src/managed-player-environment.mjs`. It adds an optional public-surface projector,
+explicit ascension forwarding and a trusted host observation entry point for named fixture setup.
+The latter is not a policy command and does not clear the request ledger or revive a tainted
+session. The existing launcher still enforces upstream artifact pins; this package constructs a
+session only after separately verifying the repaired local CLI. It does not bypass that launcher.
+
+The [projection configuration](../../configs/engine-qualification/sts2-v0.111.0-cli-rest-projection-v1.json)
+binds the source/hook, resulting source bytes, local surface/probe helpers and all 620 installed
+SDK/dependency files. `engine-player-projection.mjs` stages the patch in a fresh private checkout;
+`engine-rest-surface.mjs` projects native choices into canonical actions with private operands.
+It distinguishes cancellation from empty confirmation and never clamps an impossible minimum
+to the number of available cards. Unknown selection preferences fail closed. Existing projections
+of other decision families are retained but receive no new mechanic qualification from this package.
+
+The bounded native panel validates canonical SDK snapshots/receipts, explicit A8, refreshed
+remaining choices, single-card confirmation/cancel, stale-snapshot rejection and exactly-once
+delivery. Its full transcripts stay private. Shipped-host differential comparisons remain pending.
+Rollback selects the earlier raw rest probe and unmodified Headless projection; preserve each
+report's distinct source and adapter identities and never mix them in a resumed experiment.
+
+```bash
+node --test scripts/engine-rest-surface.test.mjs
 ```

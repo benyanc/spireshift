@@ -108,7 +108,12 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
         elif args.engine_command == "probe-cli-rest":
             result = probe_cli_rest(config, args.probe_config, args.node)
-            code = 0 if result["status"] == "rest_native_regression_pass" else 1
+            code = (
+                0
+                if result["status"]
+                in {"rest_native_regression_pass", "rest_public_projection_regression_pass"}
+                else 1
+            )
         elif args.engine_command == "inspect-game-source":
             result = inspect_game_source(config, args.source_config)
             code = 0 if result["status"] == "private_source_extraction_complete" else 1
@@ -186,7 +191,18 @@ def run_engine_command(args: argparse.Namespace) -> int:
                 for key, value in result.items()
                 if key not in {"probe", "shared_profile_sentinel"}
             }
-            displayed["native_checks"] = result["probe"].get("gates", {})
+            gates = result["probe"].get("gates", {})
+            displayed["native_checks"] = (
+                {
+                    "passed": sum(value is True for value in gates.values()),
+                    "total": len(gates),
+                    "failed": [key for key, value in gates.items() if value is not True],
+                }
+                if result["schema_version"] == "engine-cli-rest-projection-probe-v1"
+                else gates
+            )
+            if "canonical_delivery" in result["probe"]:
+                displayed["canonical_delivery"] = result["probe"]["canonical_delivery"]
             displayed["error"] = result["probe"].get("error")
         elif args.engine_command == "inspect-game-source":
             displayed = {key: value for key, value in result.items() if key != "inventory"}

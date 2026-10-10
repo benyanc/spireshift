@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after reproducible local CLI builds and native rest-site regression checks.
+Updated 2026-10-10 after native rest choices and their canonical agent interface pass.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
@@ -69,9 +69,18 @@ options remaining. Original/runtime game DLLs, shared saves and the candidate st
 These are privileged managed native regressions, not rendered-game parity or training examples.
 See [rest repair evidence](evidence/actual-engine-v0.111.0-cli-rest-repair-v1.json).
 
-**Next implementation within #145:** adapt the canonical public observation/action contract to
-the repaired rest bindings and explicit leave, then check every decision family. The old upstream
-projection does not yet consume that new contract. Complete the same-game 25–30-scenario panel,
+**Canonical rest projection is implemented and checked.** A pinned MIT hook in a disposable
+Headless copy exposes refreshed choices, Proceed, cancellation and explicit upgrade confirmation,
+with native operands kept in private bindings. All **226 checks and seven integrity/isolation gates**
+pass in **3.130 seconds** through the strict SDK: 27 rest/selection snapshots, 21 delivered actions
+and 21 invalid inputs across the same nine fixtures. Duplicate requests do not execute twice;
+stale snapshots and conflicting request identities are rejected before delivery. Start/reset
+explicitly forwards native A8. Missing selection preferences fail closed. No training or complete-run
+attempt follows. See [projection evidence](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json).
+
+**Next implementation within #145:** check public inputs and legal actions for the remaining
+decision families, beginning with shop purchase/restock and card removal. Complete the same-game
+25–30-scenario panel,
 including per-copy card costs/modifier expiry/X-cost effects, status/counter ownership, shops with
 price/restocking refresh, other selection preferences, A8 bootstrap/reset and real ending semantics.
 Compare the named managed results with the shipped host; keep every unsupported case visible.
@@ -282,7 +291,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; native save bootstrap and generated type registry checked | Connect public control; qualify live offered content, modset/reset/seed/terminal behavior, complete public inputs/legal actions and 25–30 targeted same-build mechanics scenarios through shipped headless and patched CLI routes. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; native bootstrap, menu control and rest agent interface checked | Qualify remaining public inputs/legal actions, shops/selections/cards, live offered content, modset/reset/seed/terminal behavior and 25–30 same-build scenarios; compare shipped headless and patched CLI results. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

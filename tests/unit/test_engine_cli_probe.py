@@ -10,8 +10,13 @@ from typing import Any
 import pytest
 
 from spireshift.core.manifest import manifest_identifier
-from spireshift.engine_cli_probe import verify_local_build_report
-from spireshift.engine_qualification import load_engine_qualification_config
+from spireshift.engine_cli_probe import verify_local_build_report, verify_projection_inputs
+from spireshift.engine_qualification import (
+    EngineQualificationConfig,
+    _inventory,
+    _sha_file,
+    load_engine_qualification_config,
+)
 
 
 def build_result() -> tuple[dict[str, Any], dict[str, Any]]:
@@ -89,3 +94,77 @@ def test_single_build_cannot_claim_reproducibility() -> None:
     reseal(report)
     with pytest.raises(ValueError, match="two matching fresh builds"):
         verify_local_build_report(report, config, qualification_config())
+
+
+def projection_inputs(tmp_path: Path) -> tuple[EngineQualificationConfig, dict[str, Any]]:
+    """Synthetic MIT files only; never fabricate game qualification evidence."""
+    qualification = EngineQualificationConfig(
+        document={
+            "sources": [{"name": "headless", "commit": "test-source", "path": "artifacts/source"}]
+        },
+        root=tmp_path,
+    )
+    files = {
+        "artifacts/source/src/managed-player-environment.mjs": "synthetic projection",
+        "patches/engine/sts2-headless-player-projection-v1.patch": "synthetic patch",
+        "scripts/engine-player-projection.mjs": "synthetic loader",
+        "scripts/engine-rest-surface.mjs": "synthetic public surface",
+        "scripts/probe-engine-cli-rest.mjs": "synthetic native panel",
+        "artifacts/sdk/SDK.js": "synthetic SDK",
+    }
+    for name, content in files.items():
+        target = tmp_path / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(content)
+    pins = {
+        "source_revision": "test-source",
+        "source_sha256": _sha_file(tmp_path / next(iter(files))),
+        "patch_sha256": _sha_file(
+            tmp_path / "patches/engine/sts2-headless-player-projection-v1.patch"
+        ),
+        "patched_source_sha256": "synthetic-patched-module",
+        "node_modules": "artifacts/sdk",
+        "sdk_inventory_id": manifest_identifier({"files": _inventory(tmp_path / "artifacts/sdk")}),
+        "helpers_sha256": {
+            name: _sha_file(tmp_path / "scripts" / name)
+            for name in (
+                "engine-player-projection.mjs",
+                "engine-rest-surface.mjs",
+                "probe-engine-cli-rest.mjs",
+            )
+        },
+    }
+    return qualification, {"projection": pins}
+
+
+def test_projection_dependencies_bind_without_proprietary_files(tmp_path: Path) -> None:
+    qualification, document = projection_inputs(tmp_path)
+    resolved, inventory = verify_projection_inputs(qualification, document)
+    assert resolved["source_revision"] == "test-source"
+    assert resolved["node_modules"] == str(tmp_path / "artifacts/sdk")
+    assert len(inventory) == 1
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "artifacts/source/src/managed-player-environment.mjs",
+        "patches/engine/sts2-headless-player-projection-v1.patch",
+        "scripts/engine-player-projection.mjs",
+        "scripts/engine-rest-surface.mjs",
+        "scripts/probe-engine-cli-rest.mjs",
+        "artifacts/sdk/SDK.js",
+    ],
+)
+def test_any_changed_projection_dependency_is_refused(tmp_path: Path, name: str) -> None:
+    qualification, document = projection_inputs(tmp_path)
+    (tmp_path / name).write_text("different bytes")
+    with pytest.raises(ValueError, match="changed"):
+        verify_projection_inputs(qualification, document)
+
+
+def test_projection_cannot_substitute_another_headless_revision(tmp_path: Path) -> None:
+    qualification, document = projection_inputs(tmp_path)
+    document["projection"]["source_revision"] = "another-source"
+    with pytest.raises(ValueError, match="pinned Headless revision"):
+        verify_projection_inputs(qualification, document)

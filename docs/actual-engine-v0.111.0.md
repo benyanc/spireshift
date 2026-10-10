@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — rest-site bridge repaired; public projection and wider mechanics are next
+## Current status — rest bridge and agent interface checked; wider mechanics are next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -191,13 +191,34 @@ claim. There are **zero full-run attempts and optimizer steps**, and training st
 
 [Rest repair evidence](evidence/actual-engine-v0.111.0-cli-rest-repair-v1.json) binds the reports,
 source and artifact identities. These are **managed native regressions**, not shipped cross-host
-parity, complete mechanic coverage or evidence of model strength. The existing upstream canonical
-projection still needs adaptation to the new rest object bindings and explicit leave action.
-Other selectors' cancellation/confirmation contracts remain unqualified, and legacy privileged
-relic list insertion is not adopted as a valid fixture. No owner command remains pending.
+parity, complete mechanic coverage or evidence of model strength. That first report remains
+immutable and predates the public projection package below. Legacy privileged relic list insertion
+is not adopted as a valid fixture.
 
-Next implement the same public-state/action contract across every decision family, beginning
-with the repaired rest projection, and compare the native cases against the shipped reference.
+The canonical rest interface is now adapted with a separate, fingerprinted MIT projection hook.
+Pinned upstream sources remain untouched; the hook applies only in a disposable copy. It binds
+both current rest objects privately, exposes native remaining options/enablement and Proceed,
+and includes native selection bounds, cancellation and manual confirmation. Single-card Smith
+still offers explicit confirmation and cancellation. Empty confirmation is distinct from cancel.
+Missing authority or unknown selection preferences produce an unavailable action menu.
+
+The same nine fixtures pass through the actual canonical SDK and request ledger in **3.130 seconds**:
+**226/226 checks plus seven integrity/isolation gates**, 20 rest and seven selection snapshots,
+21 delivered actions and 21 deliberately invalid native inputs. Replaying a request returns its
+saved receipt without executing again; a conflicting request id or stale snapshot is rejected
+before native delivery. Native A8 is explicitly forwarded on every start/reset. All snapshots and
+receipts validate; private native operands stay out of agent snapshots. These counts are checks
+inside nine named scenarios, not 226 independent mechanics experiments.
+
+[Projection evidence](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json) binds the unchanged
+game/CLI build, hook, helpers and complete installed SDK/dependency inventory. The 130 diagnostic
+entries remain private. There are no full-run attempts, training steps or training admission.
+Other selectors' cancellation/confirmation preferences remain unqualified and fail closed when
+unknown. This package does not establish shipped-host parity. No owner command is pending.
+
+Next check the same public-state/action contract across the remaining decision families,
+beginning with repeated shop purchases and card removal, and compare native cases against the
+shipped reference.
 
 Then qualify reset/seed behavior, actual A8 rules and terminal victory, complete public observations
 and refreshed legal choices, and the targeted 25–30-scenario mechanics panel. Costs/modifiers,
