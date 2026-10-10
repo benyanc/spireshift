@@ -55,6 +55,7 @@ def add_engine_parser(commands: Any) -> None:
         "probe-connector-menu",
         "build-cli-candidate",
         "probe-cli-rest",
+        "probe-cli-shop",
         "inspect-game-source",
     ):
         command = sub.add_parser(name)
@@ -70,7 +71,7 @@ def add_engine_parser(commands: Any) -> None:
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
-        if name == "probe-cli-rest":
+        if name in {"probe-cli-rest", "probe-cli-shop"}:
             command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
         if name == "inspect-game-source":
@@ -106,12 +107,22 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "build-cli-candidate":
             result = build_cli_candidate(config, args.candidate_config, args.node)
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
-        elif args.engine_command == "probe-cli-rest":
-            result = probe_cli_rest(config, args.probe_config, args.node)
+        elif args.engine_command in {"probe-cli-rest", "probe-cli-shop"}:
+            result = probe_cli_rest(
+                config,
+                args.probe_config,
+                args.node,
+                panel="shop" if args.engine_command == "probe-cli-shop" else "rest",
+            )
             code = (
                 0
                 if result["status"]
-                in {"rest_native_regression_pass", "rest_public_projection_regression_pass"}
+                in {
+                    "rest_native_regression_pass",
+                    "rest_public_projection_regression_pass",
+                    "shop_native_regression_pass",
+                    "shop_public_projection_regression_pass",
+                }
                 else 1
             )
         elif args.engine_command == "inspect-game-source":
@@ -185,7 +196,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             displayed["build_detail"] = {
                 key: value for key, value in result["build"].items() if key != "report"
             }
-        elif args.engine_command == "probe-cli-rest":
+        elif args.engine_command in {"probe-cli-rest", "probe-cli-shop"}:
             displayed = {
                 key: value
                 for key, value in result.items()
@@ -198,7 +209,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
                     "total": len(gates),
                     "failed": [key for key, value in gates.items() if value is not True],
                 }
-                if result["schema_version"] == "engine-cli-rest-projection-probe-v1"
+                if "projection" in result["schema_version"]
                 else gates
             )
             if "canonical_delivery" in result["probe"]:

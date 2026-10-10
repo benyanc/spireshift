@@ -87,7 +87,11 @@ def build_cli_candidate(
     helper = qualification.root / "scripts/build-engine-cli-candidate.mjs"
     if local:
         helper = qualification.root / "scripts/engine-cli-local-build.mjs"
-        if document.get("candidate_lineage") != "spireshift_cli_rest_v1_local_toolchain":
+        if document.get("candidate_lineage") not in {
+            "spireshift_cli_rest_v1_local_toolchain",
+            "spireshift_cli_selection_shop_v2_local_toolchain",
+            "spireshift_cli_selection_shop_v3_local_toolchain",
+        }:
             raise ValueError("Repaired CLI requires its distinct local build lineage")
         patch_relative = Path(document.get("local_patch", ""))
         if (

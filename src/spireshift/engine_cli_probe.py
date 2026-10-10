@@ -1,4 +1,4 @@
-"""Short native rest and public projection regressions; never training admission."""
+"""Short native interaction and public projection checks; never training admission."""
 
 from __future__ import annotations
 
@@ -65,18 +65,25 @@ def verify_local_build_report(
 
 
 def probe_cli_rest(
-    qualification: EngineQualificationConfig, path: Path, node: Path
+    qualification: EngineQualificationConfig, path: Path, node: Path, *, panel: str = "rest"
 ) -> dict[str, Any]:
+    if panel not in {"rest", "shop"}:
+        raise ValueError("Only explicitly scoped rest and shop panels are supported")
     document = json.loads(path.read_text())
-    projected = document.get("schema_version") == "engine-cli-rest-projection-config-v1"
+    projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
+    revision = document.get("public_projection_revision", "rest_v1")
+    if revision not in {"rest_v1", "selection_shop_v2", "selection_shop_v3"} or (
+        projected and panel == "shop" and revision == "rest_v1"
+    ):
+        raise ValueError("Unknown public interaction projection revision")
     stage = (
-        "privileged_named_rest_public_projection_only"
+        f"privileged_named_{panel}_public_projection_only"
         if projected
-        else "privileged_named_rest_scenarios_only"
+        else f"privileged_named_{panel}_scenarios_only"
     )
     if (
         document.get("schema_version")
-        not in {"engine-cli-rest-probe-config-v1", "engine-cli-rest-projection-config-v1"}
+        not in {f"engine-cli-{panel}-probe-config-v1", f"engine-cli-{panel}-projection-config-v1"}
         or document.get("qualification_config_id") != qualification.config_id
         or document.get("stage") != stage
         or document.get("character") != "Ironclad"
@@ -85,10 +92,10 @@ def probe_cli_rest(
         or type(document.get("max_wall_seconds")) is not int
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
-        raise ValueError("Expected a short Ironclad/A8 rest-only native qualification config")
+        raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
     _require_native_launch_support()
     if _running_games():
-        raise ValueError("Close the existing game before the isolated native rest check")
+        raise ValueError("Close the existing game before the isolated native interaction check")
     if not node.is_file():
         raise ValueError("Pass the current local Node runtime")
     build_path = qualification.root / document["build_config"]
@@ -98,12 +105,17 @@ def probe_cli_rest(
     report = json.loads(_private_path(qualification.root, document["build_report"]).read_text())
     build = verify_local_build_report(report, build_config, qualification)
     if report["report_id"] != document["build_report_id"]:
-        raise ValueError("Rest probe must bind the exact completed local build report")
-    helper = qualification.root / (
-        "scripts/probe-engine-cli-rest-projection.mjs"
+        raise ValueError("Interaction probe must bind the exact completed local build report")
+    helper_name = (
+        "probe-engine-cli-mechanics-projection-v3.mjs"
+        if projected and revision == "selection_shop_v3"
+        else "probe-engine-cli-mechanics-projection.mjs"
+        if projected and revision == "selection_shop_v2"
+        else f"probe-engine-cli-{panel}-projection.mjs"
         if projected
-        else "scripts/probe-engine-cli-rest.mjs"
+        else f"probe-engine-cli-{panel}.mjs"
     )
+    helper = qualification.root / "scripts" / helper_name
     library = qualification.root / "scripts/engine-cli-local-build.mjs"
     if (
         _sha_file(helper) != document["helper_sha256"]
@@ -111,10 +123,13 @@ def probe_cli_rest(
         or _sha_file(qualification.root / build_config["local_patch"])
         != build_config["local_patch_sha256"]
     ):
-        raise ValueError("The pinned rest probe, build helper, or source patch changed")
+        raise ValueError("The pinned interaction probe, build helper, or source patch changed")
     projection, sdk_before = None, None
     if projected:
         projection, sdk_before = verify_projection_inputs(qualification, document)
+    runtime, runtime_before = verify_probe_runtime(qualification, document)
+    if revision in {"selection_shop_v2", "selection_shop_v3"} and runtime is None:
+        raise ValueError("Native selection hooks require the pinned game-matching runtime")
     native = load_native_qualification_config(
         qualification.root / build_config["native_config"], qualification
     )
@@ -138,7 +153,7 @@ def probe_cli_rest(
             raise ValueError("Candidate runtime dependency changed")
     workspace = _private_path(qualification.root, document["workspace"])
     workspace.mkdir(parents=True, exist_ok=True)
-    attempt = Path(tempfile.mkdtemp(prefix="rest-", dir=workspace))
+    attempt = Path(tempfile.mkdtemp(prefix=f"{panel}-", dir=workspace))
     atomic_json(attempt / "in-progress.json", {"training_allowed": False})
     user_data = Path.home() / "Library/Application Support"
     shared = user_data / "SlayTheSpire2"
@@ -171,9 +186,12 @@ def probe_cli_rest(
             "artifact": str(artifact),
             "game_data": str(archive / GAME_RELATIVE / DATA_RELATIVE),
             "profile": str(profile),
-            "dotnet": report["build"]["toolchain"]["dotnet_command"],
+            "dotnet": str(runtime / "dotnet")
+            if runtime is not None
+            else report["build"]["toolchain"]["dotnet_command"],
             "expected": build_config["expected_repaired"],
             "managed_runtime_version": document["managed_runtime_version"],
+            "panel": panel,
         }
         if projected:
             spec["projection"] = projection
@@ -181,7 +199,7 @@ def probe_cli_rest(
                 {"build_report_id": report["report_id"], "projection_config": document}
             )
         environment = dict(os.environ)
-        environment["DOTNET_ROLL_FORWARD"] = "Major"
+        environment["DOTNET_ROLL_FORWARD"] = "LatestPatch" if runtime is not None else "Major"
         environment.pop("STS2_HEADLESS_QUIET", None)
         started = time.monotonic()
         timed_out = False
@@ -201,22 +219,26 @@ def probe_cli_rest(
                 timed_out = True
             finally:
                 _stop_child(child)
-        result_path = attempt / "rest-probe.json"
+        result_path = attempt / f"{panel}-probe.json"
         probe = (
             json.loads(result_path.read_text()) if result_path.is_file() else {"status": "capped"}
         )
         shared_after = _shared_snapshot(shared)
         archive_after = verify_game_archive(qualification, archive)
         passed_status = (
-            "rest_public_projection_regression_pass" if projected else "rest_native_regression_pass"
+            f"{panel}_public_projection_regression_pass"
+            if projected
+            else f"{panel}_native_regression_pass"
         )
         checks = {
-            "native_rest_regressions_pass": probe.get("status") == passed_status,
+            f"native_{panel}_regressions_pass": probe.get("status") == passed_status,
             "same_private_candidate_unchanged": _inventory(candidate) == candidate_before,
             "shared_profile_unchanged": shared_before == shared_after,
             "frozen_archive_unchanged": archive_after["valid"],
             "uncapped_successful_process": not timed_out and child.returncode == 0,
         }
+        if runtime is not None:
+            checks["pinned_managed_runtime_unchanged"] = _inventory(runtime) == runtime_before
         if projected:
             assert projection is not None
             checks["projection_identity_bound"] = probe.get("projection_identity") == {
@@ -235,9 +257,9 @@ def probe_cli_rest(
         return _finish(
             attempt,
             {
-                "schema_version": "engine-cli-rest-projection-probe-v1"
+                "schema_version": f"engine-cli-{panel}-projection-probe-v1"
                 if projected
-                else "engine-cli-rest-probe-v1",
+                else f"engine-cli-{panel}-probe-v1",
                 "config_id": manifest_identifier(document),
                 "qualification_config_id": qualification.config_id,
                 "build_report_id": report["report_id"],
@@ -247,7 +269,7 @@ def probe_cli_rest(
                 "candidate_lineage": build_config["candidate_lineage"],
                 "character": "Ironclad",
                 "ascension": 8,
-                "status": passed_status if all(checks.values()) else "rest_probe_incomplete",
+                "status": passed_status if all(checks.values()) else f"{panel}_probe_incomplete",
                 "checks": checks,
                 "probe": probe,
                 "process": {
@@ -257,20 +279,49 @@ def probe_cli_rest(
                 },
                 "profile": str(profile),
                 "managed_runtime_version": document["managed_runtime_version"],
+                **(
+                    {"managed_runtime_inventory_id": document["managed_runtime"]["inventory_id"]}
+                    if runtime is not None
+                    else {}
+                ),
                 "full_run_attempts": 0,
                 "optimizer_steps": 0,
                 "shipped_cross_host_parity": False,
                 "training_allowed": False,
                 "claim_scope": (
-                    "named_privileged_managed_native_rest_public_projection_not_shipped_parity"
+                    f"named_privileged_managed_native_{panel}_public_projection_not_shipped_parity"
                     if projected
-                    else "named_privileged_managed_native_rest_regressions_not_shipped_parity"
+                    else f"named_privileged_managed_native_{panel}_regressions_not_shipped_parity"
                 ),
             },
         )
     except BaseException as error:
         _failure(attempt, error)
         raise
+
+
+def verify_probe_runtime(
+    qualification: EngineQualificationConfig, document: dict[str, Any]
+) -> tuple[Path | None, list[dict[str, Any]] | None]:
+    """Separate the build SDK from the exact managed runtime used by native game hooks."""
+    pins = document.get("managed_runtime")
+    if pins is None:
+        return None, None
+    if (
+        not isinstance(pins, dict)
+        or pins.get("version") != "9.0.7"
+        or document.get("managed_runtime_version") != pins["version"]
+        or pins.get("roll_forward") != "LatestPatch"
+    ):
+        raise ValueError("Expected the explicitly pinned game-matching managed runtime")
+    runtime = _private_path(qualification.root, pins["directory"])
+    inventory = _inventory(runtime)
+    if (
+        manifest_identifier({"files": inventory}) != pins["inventory_id"]
+        or _sha_file(runtime / "dotnet") != pins["dotnet_sha256"]
+    ):
+        raise ValueError("Pinned managed runtime files changed")
+    return runtime, inventory
 
 
 def verify_projection_inputs(
@@ -289,11 +340,17 @@ def verify_projection_inputs(
     patch = qualification.root / "patches/engine/sts2-headless-player-projection-v1.patch"
     if _sha_file(source) != pins["source_sha256"] or _sha_file(patch) != pins["patch_sha256"]:
         raise ValueError("Rest projection source or hook patch changed")
-    for name in (
+    helpers = [
         "engine-player-projection.mjs",
         "engine-rest-surface.mjs",
         "probe-engine-cli-rest.mjs",
-    ):
+    ]
+    revision = document.get("public_projection_revision", "rest_v1")
+    if revision in {"selection_shop_v2", "selection_shop_v3"}:
+        helpers.extend(["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"])
+    elif revision != "rest_v1":
+        raise ValueError("Unknown public interaction projection revision")
+    for name in helpers:
         if _sha_file(qualification.root / "scripts" / name) != pins["helpers_sha256"].get(name):
             raise ValueError("A pinned rest projection dependency changed")
     sdk = _private_path(qualification.root, pins["node_modules"])

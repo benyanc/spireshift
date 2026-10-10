@@ -213,12 +213,48 @@ inside nine named scenarios, not 226 independent mechanics experiments.
 [Projection evidence](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json) binds the unchanged
 game/CLI build, hook, helpers and complete installed SDK/dependency inventory. The 130 diagnostic
 entries remain private. There are no full-run attempts, training steps or training admission.
-Other selectors' cancellation/confirmation preferences remain unqualified and fail closed when
-unknown. This package does not establish shipped-host parity. No owner command is pending.
+That historical package qualified Smith's cancellation/confirmation only. It does not establish
+shipped-host parity. Its report and source pins remain unchanged.
 
-Next check the same public-state/action contract across the remaining decision families,
-beginning with repeated shop purchases and card removal, and compare native cases against the
-shipped reference.
+The subsequent shop/selection package found **17 failed baseline shop checks**. The repaired host
+uses the current native item and price as purchase operands, rejects purchases during a pending
+selection, and restores the merchant's native one-use removal callback after successful completion.
+Cancellation leaves the service, deck and gold intact. Potion purchase availability uses native
+capacity and procurement hooks, including Sozu. Restocking receives a fresh item binding even when
+the merchant entry object remains the same. Public inventory prices and card energy costs remain
+distinct; native references and quoted purchase operands stay in private bindings.
+
+Selection instances now have private bindings. Eight fixed native command boundaries observe
+the actual `CardSelectorPrefs` without replacing their card effects or selection tasks. Prompt,
+minimum/maximum, cancellation, manual confirmation and preview settings are exposed as public
+facts. Smith and merchant removal both use the captured preferences, including single-card choices.
+Commands without captured preferences remain unavailable. Eight installed observation hooks do
+not mean eight independently tested selection mechanics; hand upgrades, choose-a-card/bundle,
+mandatory/optional choices and large combinatorial selections still need qualification.
+
+The game's Harmony version refused the installed **.NET 10.0.12** runtime. An official .NET 9.0.7
+runtime was downloaded separately, verified against Microsoft's SHA-512 and bound by its complete
+file inventory. The runtime version now matches the shipped game's declared runtime; Godot stubs,
+TestMode and presentation differences still require shipped comparisons. The compiler remains
+SDK 10.0.401 with the same 9.0.20 reference pack. The game DLLs, system runtime, frozen archive,
+Steam installation and shared saves were not replaced.
+
+The final host has two matching fresh baseline and two matching repaired builds in **29.405 seconds**.
+The canonical rest panel passes **235 checks in 6.817 seconds**, and the shop panel passes
+**179 checks in 4.533 seconds**; each also passes eight integrity/isolation gates. Across **16 named
+fixtures**, 49 SDK snapshots have complete public metadata and action menus, 37 actions deliver,
+and 30 deliberately invalid native inputs are rejected. Duplicate/stale/conflicting requests
+execute no additional action. There are zero full-run attempts and optimizer steps. Training
+remains disallowed. The initial runtime rejection, missing upgrade observation boundary and
+incorrect raw-versus-visible prompt assertion remain recorded as failures.
+
+[Shop/selection evidence](evidence/actual-engine-v0.111.0-selection-shop-v1.json) binds the final
+build, runtime, hook, SDK and separate panel results. These are scoped managed native checks,
+not shipped parity or exhaustive mechanics coverage. No owner command is pending.
+
+Next qualify current card costs/modifiers and effect ordering, status/counter/intent ownership,
+other selectors, native shop discounts/relic purchase effects and out-of-combat potion controls.
+Compare the named native cases against the shipped reference before admitting a new learning run.
 
 Then qualify reset/seed behavior, actual A8 rules and terminal victory, complete public observations
 and refreshed legal choices, and the targeted 25–30-scenario mechanics panel. Costs/modifiers,

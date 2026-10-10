@@ -78,8 +78,32 @@ stale snapshots and conflicting request identities are rejected before delivery.
 explicitly forwards native A8. Missing selection preferences fail closed. No training or complete-run
 attempt follows. See [projection evidence](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json).
 
-**Next implementation within #145:** check public inputs and legal actions for the remaining
-decision families, beginning with shop purchase/restock and card removal. Complete the same-game
+**Shop and native selection preference repair is implemented and checked.** The baseline shop
+panel exposed 17 failed checks: removal could be repeated, restocked entries accepted old item
+requests, full/forbidden potions stayed purchasable, and pending selection did not exclude another
+purchase. The repaired host binds both the current item and its price, restores the native
+removal-used callback after a successful commit, retains cancellation without charging, and
+exports native potion capacity/procurement availability. Native selection preferences and
+instance bindings replace the earlier Smith-only assumption. Unknown preferences still fail closed.
+
+The installed .NET 10 runtime cannot load this game's Harmony instrumentation. A separately
+downloaded, checksum-verified official **.NET 9.0.7** runtime matches the shipped game's declared
+version; its whole file inventory is pinned independently of the build SDK. The missing native
+upgrade selection boundary was caught and added. Earlier failures and configuration identities
+remain preserved. No system runtime, Steam installation or shared save was replaced.
+
+On the final repaired build, **235 rest checks and 179 shop checks** pass through the canonical
+SDK in **6.817 and 4.533 seconds** respectively, each with eight integrity/isolation gates. These
+are nine rest and seven shop fixtures, **49 complete snapshots**, 37 delivered actions and
+30 deliberately invalid native inputs. Replay, conflicting identities and stale snapshots do
+not execute another native action. Two fresh baseline and two repaired builds match in
+29.405 seconds. All eight preference observation boundaries are installed; this does **not**
+qualify every selector/card mechanic. See [shop/selection evidence](evidence/actual-engine-v0.111.0-selection-shop-v1.json).
+
+**Next implementation within #145:** qualify current card costs/modifiers, combat effect order,
+public ownership of statuses/counters/intents, and the remaining selectors. Include out-of-combat
+potion use/discard, native shop discounts and relic purchase effects, optional/mandatory choices,
+bundle/hand upgrades and large selections that currently exceed finite enumeration. Complete the same-game
 25–30-scenario panel,
 including per-copy card costs/modifier expiry/X-cost effects, status/counter ownership, shops with
 price/restocking refresh, other selection preferences, A8 bootstrap/reset and real ending semantics.
@@ -291,7 +315,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; native bootstrap, menu control and rest agent interface checked | Qualify remaining public inputs/legal actions, shops/selections/cards, live offered content, modset/reset/seed/terminal behavior and 25–30 same-build scenarios; compare shipped headless and patched CLI results. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; native bootstrap, menu and scoped rest/shop/selection interfaces checked | Qualify card costs/effects, remaining selectors/potion controls, live offered content, modset/reset/seed/terminal behavior and the same-build mechanics panel; compare shipped headless and patched CLI results. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

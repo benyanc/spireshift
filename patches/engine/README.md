@@ -6,8 +6,9 @@ Keep its [MIT notice](LICENSE). It applies on top of STS2 Headless's pinned
 `d11aa883b582dd68bd39b331f3370746b30d447e`.
 
 The exact target is **v0.111.0 / 41cef1ea, macOS arm64**. The original and runtime
-`sts2.dll` remain byte-identical. The locally compiled Godot stub and .NET 10 runtime
-are distinct from the rendered game's Godot and bundled .NET 9 runtime.
+`sts2.dll` remain byte-identical. The locally compiled Godot stub is distinct from the
+rendered game's Godot. Historical rest-v1 probes ran on .NET 10; the selection/shop
+package below requires the separately pinned, game-matching .NET 9.0.7 runtime.
 
 The repair awaits the native rest choice and re-exports the synchronizer's remaining
 options. It retains Smith cancellation and manual confirmation, including a single
@@ -86,4 +87,41 @@ report's distinct source and adapter identities and never mix them in a resumed 
 
 ```bash
 node --test scripts/engine-rest-surface.test.mjs
+```
+
+## Current shop and selection adapter
+
+`sts2-cli-v0.111.0-selection-shop-v3.patch` replaces the earlier rest delta on the same
+base patch. Do not apply both local deltas. The preserved v2 patch lacks the upgrade
+selection observation boundary and is not the current complete rest interface.
+
+The v3 host observes eight explicit native command boundaries using Harmony prefixes,
+postfixes and finalizers with scoped `CardSelectorPrefs`. The original native commands,
+effects and selection tasks still run. Unknown preferences are not replaced with defaults.
+Current `selection_ref` is required for confirmation/cancellation; cancellation also requires
+native permission. Per-instance references stay private. This interception failed on .NET 10
+and must not be silently skipped: current probe configs bind official .NET 9.0.7, its whole
+runtime file inventory and actual process-reported runtime version separately from the compiler.
+
+Purchases require the current entry, item and quoted gold price. Restocking cannot reuse a stale
+item request. Successful removal calls the same native `SetUsed` method as the rendered merchant's
+completion handler; a canceled purchase does not. Native potion capacity/procurement rules own
+enablement. While a card selection is open, purchases/leave are refused. The canonical surface
+keeps prices, definitions and preferences public while retaining native operands privately.
+
+The [current build](../../configs/engine-qualification/sts2-v0.111.0-cli-build-selection-shop-v3.json),
+[rest panel](../../configs/engine-qualification/sts2-v0.111.0-cli-rest-projection-v3-retry1.json) and
+[shop panel](../../configs/engine-qualification/sts2-v0.111.0-cli-shop-projection-v3-retry1.json)
+have separate frozen identities. The panels run nine rest and seven shop fixtures through the
+strict SDK and exactly-once ledger. Earlier failed/scope-limited configurations and reports remain
+preserved; their pins must not be reused for this host. Use
+`engine-selection-shop-surface.mjs` and the current v3 projection probe with this build.
+
+Remaining work includes native discounts and relic purchases, other selection mechanics,
+large selections beyond finite enumeration, out-of-combat potion controls, card costs/effect
+ordering and shipped differential comparisons. No full-run or training admission follows these
+panels. Eight installed observation boundaries are not an exhaustive mechanics pass.
+
+```bash
+node --test scripts/engine-selection-shop-surface.test.mjs
 ```

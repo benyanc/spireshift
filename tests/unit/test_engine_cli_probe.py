@@ -10,7 +10,11 @@ from typing import Any
 import pytest
 
 from spireshift.core.manifest import manifest_identifier
-from spireshift.engine_cli_probe import verify_local_build_report, verify_projection_inputs
+from spireshift.engine_cli_probe import (
+    verify_local_build_report,
+    verify_probe_runtime,
+    verify_projection_inputs,
+)
 from spireshift.engine_qualification import (
     EngineQualificationConfig,
     _inventory,
@@ -168,3 +172,63 @@ def test_projection_cannot_substitute_another_headless_revision(tmp_path: Path) 
     document["projection"]["source_revision"] = "another-source"
     with pytest.raises(ValueError, match="pinned Headless revision"):
         verify_projection_inputs(qualification, document)
+
+
+@pytest.mark.parametrize(
+    "dependency", ["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"]
+)
+def test_new_interaction_revision_cannot_omit_its_extra_dependencies(
+    tmp_path: Path, dependency: str
+) -> None:
+    qualification, document = projection_inputs(tmp_path)
+    document["public_projection_revision"] = "selection_shop_v2"
+    for name in ["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"]:
+        file = tmp_path / "scripts" / name
+        file.write_text("synthetic new dependency")
+        document["projection"]["helpers_sha256"][name] = _sha_file(file)
+    document["projection"]["helpers_sha256"].pop(dependency)
+    with pytest.raises(ValueError, match="dependency changed"):
+        verify_projection_inputs(qualification, document)
+
+
+def test_unknown_interaction_revision_is_not_treated_as_the_old_projection(tmp_path: Path) -> None:
+    qualification, document = projection_inputs(tmp_path)
+    document["public_projection_revision"] = "future-unverified"
+    with pytest.raises(ValueError, match="Unknown public interaction"):
+        verify_projection_inputs(qualification, document)
+
+
+def test_managed_runtime_is_bound_separately_from_the_build_sdk(tmp_path: Path) -> None:
+    qualification, _ = projection_inputs(tmp_path)
+    runtime = tmp_path / "artifacts/runtime"
+    runtime.mkdir()
+    (runtime / "dotnet").write_text("synthetic executable")
+    (runtime / "CoreLib.dll").write_text("synthetic dependency")
+    document: dict[str, Any] = {
+        "managed_runtime_version": "9.0.7",
+        "managed_runtime": {
+            "directory": "artifacts/runtime",
+            "version": "9.0.7",
+            "roll_forward": "LatestPatch",
+            "inventory_id": manifest_identifier({"files": _inventory(runtime)}),
+            "dotnet_sha256": _sha_file(runtime / "dotnet"),
+        },
+    }
+    path, inventory = verify_probe_runtime(qualification, document)
+    assert path == runtime
+    assert inventory is not None and len(inventory) == 2
+    (runtime / "CoreLib.dll").write_text("another runtime")
+    with pytest.raises(ValueError, match="runtime files changed"):
+        verify_probe_runtime(qualification, document)
+
+
+@pytest.mark.parametrize("field", ["version", "roll_forward"])
+def test_runtime_substitution_or_roll_forward_drift_is_refused(tmp_path: Path, field: str) -> None:
+    qualification, _ = projection_inputs(tmp_path)
+    document: dict[str, Any] = {
+        "managed_runtime_version": "9.0.7",
+        "managed_runtime": {"version": "9.0.7", "roll_forward": "LatestPatch"},
+    }
+    document["managed_runtime"][field] = "unqualified"
+    with pytest.raises(ValueError, match="game-matching managed runtime"):
+        verify_probe_runtime(qualification, document)
