@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after shipped-game menu control and an unqualified CLI build attempt.
+Updated 2026-10-10 after private source extraction and the first actual-game mechanics review.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
@@ -50,11 +50,24 @@ preserved. Investigate compiler/reference identities and record any newly qualif
 explicitly, then test actual runtime behavior; do not silently waive the binary or mechanics gates.
 [Menu/build evidence](evidence/actual-engine-v0.111.0-menu-control-v1.json) records these results.
 
-**Next owner stage:** one private whole-assembly source extraction, prepared but not launched.
-[The guide](actual-engine-v0.111.0.md#run-this-one-next-command) contains its single command.
-Its first duration is unmeasured; reserve 5–15 minutes, with a 20-minute tool cap and no games,
-training, publication or automatic follow-up. This supports the inventory-driven mechanics audit;
-source extraction is not a runtime correctness pass. #145 remains open for complete public
+**Private source extraction is complete; no owner command is pending.** The owner explicitly
+authorized Codex to run it. It finished in **18.621 wall / 141.328 CPU seconds**, with 3,537 source
+files, one generated project, empty diagnostic logs, and preserved game/tool integrity. All
+1,660 registered model types bind uniquely to source declarations. Raw source and bindings stay
+private, outside policy inputs. The initial 5–15-minute estimate is superseded by this measured
+result; future long jobs still follow the owner-run boundary.
+
+**Next implementation within #145:** resolve the CLI binary identity and repair its forced
+rest-site exits, then qualify public inputs/actions and native mechanics. The actual game may
+leave rest choices available after an action; the candidate instead forces map presentation after
+both nonselection rest actions and rest-site card selection. This concrete static control-flow
+discrepancy needs native runtime regressions, including remaining choices and cancelled/failed
+selection, before training. Card-cost expiration/global hooks/X-cost spending, shop price and
+restocking refresh, and selection bounds/confirmation are also traced for the mechanics panel;
+the candidate already reads the native spending-cost getter, so printed-only cost is not a
+proven defect. See [source assessment](evidence/actual-engine-v0.111.0-source-assessment-v1.json).
+
+Source extraction is not a runtime correctness pass. #145 remains open for complete public
 projections, A8/reset/ending semantics and the 25–30-scenario panel. #146 speed/integration follows.
 
 Refresh menus after repeated rest/shop/reward/submenu actions. The generated type registry is not

@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — menu control passed; private source extraction is next
+## Current status — private source extraction complete; mechanics qualification is next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -117,21 +117,49 @@ Source/stub/lifecycle and public-observation behavior still need comparison with
 The [menu/build evidence](evidence/actual-engine-v0.111.0-menu-control-v1.json) records fingerprints,
 scoped results and failed attempts; all raw game files and source remain private.
 
-## Run this one next command
+## Completed private source extraction and first assessment
 
-This extracts the exact frozen assembly for a private mechanics audit. It enables us to trace
-cost changes, effect ordering, rest/shop choices and model registration to the actual game. It
-runs no games or training and never commits or publishes the extracted material. Extraction
-alone does not prove that all mechanics or states are covered.
+The owner explicitly authorized Codex to run this extraction. It completed successfully in
+**18.621 wall / 141.328 CPU seconds**, with a **16.950-second tool process**, about **1.42 GB peak
+resident memory**, and **18.74 MB of extracted source**. The single launched tool uses multiple
+CPU threads. There were **3,537 C# files and one generated project**, empty stdout/stderr logs,
+and zero matches for the known decompiler failure markers scanned. That scan is not proof that
+every reconstructed method is perfect. The five extraction/integrity checks passed, and a fresh
+source inventory matches the report. All **1,660 registered model types** bind uniquely to
+extracted top-level source declarations, with zero missing or ambiguous bindings.
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/inspect-actual-engine-source-v1.sh
-```
+The first targeted static review found a concrete candidate transition discrepancy: the actual
+rest-site synchronizer can preserve unchosen options after a successful action when a relic allows
+it. The CLI candidate forces map presentation after nonselection rest actions and after a
+rest-site card selection. That loses the opportunity to choose again. Repair and verify those
+paths against native state, including cancelled/unsuccessful choices, before CLI learning.
+This is a source-level finding; no runtime reproduction or repaired-gameplay result is claimed.
 
-This first full extraction is unmeasured: reserve roughly **5–15 minutes**, with a **20-minute
-tool cap / 22-minute outer cap**, one worker, 8 GB memory and 3 GB private artifacts. Codex has not
-started it. Share the printed summary after it finishes. Explicit reruns preserve old reports and
-create a new attempt; no training, gameplay campaign or next job starts automatically.
+The review also traces these requirements to actual-game implementations:
+
+- Card costs combine per-copy local changes and global combat hooks, with separate expiration
+  and X-cost rules. The candidate already calls the native spending-cost getter; it is not shown
+  to use only printed costs. Complete public modifiers and timing behavior still need verification.
+- Shop prices are dynamic; purchases may restock and update the inventory. Refresh visible prices,
+  stock, capacity and legal actions after purchases and any selection they open.
+- Card choices have minimum/maximum counts, cancellation and manual confirmation. Preserve those
+  states rather than assuming every selection finishes after one card.
+
+[Source assessment evidence](evidence/actual-engine-v0.111.0-source-assessment-v1.json) records
+hashes, counts and scoped findings. Raw source and the full type-to-file bindings remain private
+under ignored artifacts. The extraction covers the game rules assembly, not PCK localization/
+assets, external assemblies or native engine code. The generated project was not compiled, and
+no normal-play eligibility or exhaustive interaction/state-space proof is claimed.
+
+There is **no pending extraction command**. The helper
+`scripts/inspect-actual-engine-source-v1.sh` remains available for an explicit fresh extraction,
+with the existing 20-minute tool / 22-minute outer cap. Its initial 5–15-minute estimate was
+conservative; the observed first duration is now recorded. No game attempts, training, publication
+or automatic next job ran. The owner exemption applies to this completed extraction; the usual
+boundary for future long tasks remains unchanged.
+
+Next resolve the CLI artifact identity and the native rest-transition discrepancy, then verify
+the same public-state/action contract across every decision family.
 
 Then qualify reset/seed behavior, actual A8 rules and terminal victory, complete public observations
 and refreshed legal choices, and the targeted 25–30-scenario mechanics panel. Costs/modifiers,

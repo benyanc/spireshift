@@ -12,7 +12,7 @@ done
 
 printf '%s\n' \
   'Extracting the exact frozen game for a private source audit: one worker, 20-minute tool cap.' \
-  'This first full extraction is unmeasured; allow roughly 5–15 minutes.' \
+  'The first extraction on this machine completed in 19 seconds; the cap remains unchanged.' \
   'No game attempts, training, file publication or automatic follow-up.' \
   'Each explicit rerun preserves earlier results and starts a fresh source attempt.'
 
