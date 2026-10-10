@@ -1,14 +1,20 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import shutil
 import struct
+import subprocess
+import sys
+import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
 
+import spireshift.engine_download as download
 import spireshift.engine_qualification as engine
 from spireshift.cli import main
 from spireshift.doctor import GameCandidate
@@ -336,3 +342,180 @@ def test_checked_in_target_configuration_is_valid_and_pinned() -> None:
     assert config.target["commit"] == "41cef1ea"
     assert config.target["platform"] == "macos"
     assert config.document["acquisition"]["availability"] == "not_yet_verified_with_Steam_servers"
+
+
+def _download_fixture(path: Path) -> download.EngineDownloadConfig:
+    config = engine.load_engine_qualification_config(path)
+    document = json.loads(
+        Path("configs/engine-qualification/sts2-v0.111.0-depotdownloader-v1.json").read_text()
+    )
+    document["qualification_config_id"] = config.config_id
+    download_path = path.with_name("download.json")
+    download_path.write_text(json.dumps(document))
+    return download.load_engine_download_config(download_path, config)
+
+
+@pytest.mark.parametrize(
+    ("key", "value", "message"),
+    [
+        ("branch", "public", "public-beta"),
+        ("qualification_config_id", "sha256:" + "0" * 64, "exact qualification"),
+        ("max_wall_seconds", 0, "max_wall_seconds"),
+    ],
+)
+def test_download_cannot_change_patch_branch_or_remove_cap(
+    build: tuple[Path, Path], key: str, value: Any, message: str
+) -> None:
+    path, _ = build
+    config = _download_fixture(path)
+    config.document[key] = value
+    download_path = path.with_name("download.json")
+    download_path.write_text(json.dumps(config.document))
+    with pytest.raises(ValueError, match=message):
+        download.load_engine_download_config(download_path, config.qualification)
+
+
+def test_download_plan_has_no_side_effects_or_credentials(
+    build: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    path, _ = build
+    config = _download_fixture(path)
+    monkeypatch.setattr(download, "prepare_downloader", lambda _: pytest.fail("Unexpected setup"))
+    assert main(["engine", "download-plan", str(path), str(path.with_name("download.json"))]) == 0
+    plan = json.loads(capsys.readouterr().out)
+    arguments = plan["arguments_without_account_credentials"]
+    assert arguments[arguments.index("-manifest") + 1] == "5045320271505434676"
+    assert arguments[arguments.index("-branch") + 1] == "public-beta"
+    assert "-password" not in arguments and "-remember-password" not in arguments
+    assert not config.work_directory.exists() and not config.tool_directory.exists()
+    assert plan["downloads_started"] == 0 and not plan["training_allowed"]
+
+
+def test_noninteractive_download_cannot_start_or_prepare_tools(
+    build: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    config = _download_fixture(build[0])
+    monkeypatch.setattr(sys, "stdin", SimpleNamespace(isatty=lambda: False))
+    monkeypatch.setattr(download, "prepare_downloader", lambda _: pytest.fail("Unexpected setup"))
+    with pytest.raises(ValueError, match="Start the download yourself"):
+        download.download_exact_game(config)
+    assert not config.work_directory.exists()
+
+
+def test_download_directory_symlink_cannot_modify_installed_game(
+    build: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path, game = build
+    config = _download_fixture(path)
+    monkeypatch.setattr(sys, "stdin", SimpleNamespace(isatty=lambda: True))
+    config.work_directory.parent.mkdir(parents=True)
+    config.work_directory.symlink_to(game, target_is_directory=True)
+    with pytest.raises(ValueError, match="symlink"):
+        download.download_exact_game(config)
+    assert not (game / "game").exists()
+
+
+def test_wrong_downloader_fingerprint_is_preserved_and_never_executed(
+    build: tuple[Path, Path],
+) -> None:
+    config = _download_fixture(build[0])
+    config.tool_directory.mkdir(parents=True)
+    binary = config.tool_directory / "DepotDownloader"
+    binary.write_bytes(b"unexpected executable")
+    with pytest.raises(ValueError, match="fingerprint mismatch"):
+        download.prepare_downloader(config)
+    assert binary.read_bytes() == b"unexpected executable"
+
+
+@pytest.mark.parametrize("valid", [True, False])
+def test_short_tool_preparation_checks_downloaded_bytes_and_extracts_only_named_members(
+    build: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch, valid: bool
+) -> None:
+    config = _download_fixture(build[0])
+    archive = io.BytesIO()
+    with zipfile.ZipFile(archive, "w") as package:
+        package.writestr("DepotDownloader", b"fixture tool")
+        package.writestr("LICENSE", b"fixture license")
+        package.writestr("../outside-tool-directory", b"never extract")
+    data = archive.getvalue()
+    config.document["downloader"].update(
+        archive_bytes=len(data),
+        archive_sha256=hashlib.sha256(data).hexdigest() if valid else "0" * 64,
+        executable_sha256=hashlib.sha256(b"fixture tool").hexdigest(),
+    )
+    requests: list[str] = []
+
+    def request(url: str, **kwargs: Any) -> io.BytesIO:
+        requests.append(url)
+        assert kwargs["timeout"] == 20
+        return io.BytesIO(data)
+
+    monkeypatch.setattr("spireshift.engine_download.urllib.request.urlopen", request)
+    if valid:
+        binary = download.prepare_downloader(config)
+        assert binary.read_bytes() == b"fixture tool" and binary.stat().st_mode & 0o111
+        assert (config.tool_directory / "LICENSE").read_bytes() == b"fixture license"
+    else:
+        with pytest.raises(ValueError, match="archive fingerprint mismatch"):
+            download.prepare_downloader(config)
+        assert not (config.tool_directory / "DepotDownloader").exists()
+    assert len(requests) == 1
+    assert not (config.tool_directory.parent / "outside-tool-directory").exists()
+    assert not config.game_directory.exists()
+
+
+@pytest.mark.parametrize("outcome", ["success", "nonzero", "missing_game", "cap"])
+def test_owner_download_checks_identity_and_stops_without_followup(
+    build: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch, outcome: str
+) -> None:
+    path, game = build
+    config = _download_fixture(path)
+    config.tool_directory.mkdir(parents=True)
+    binary = config.tool_directory / "DepotDownloader"
+    binary.write_bytes(b"fixture downloader")
+    binary.chmod(0o755)
+    config.document["downloader"]["executable_sha256"] = hashlib.sha256(
+        binary.read_bytes()
+    ).hexdigest()
+    monkeypatch.setattr(sys, "stdin", SimpleNamespace(isatty=lambda: True))
+    monkeypatch.setattr("builtins.input", lambda _: "owner")
+    invocations: list[list[str]] = []
+
+    def process(arguments: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        invocations.append(arguments)
+        assert kwargs["timeout"] == 3600
+        assert kwargs["cwd"] == config.work_directory
+        assert arguments[arguments.index("-dir") + 1] == str(config.game_directory)
+        assert arguments[arguments.index("-branch") + 1] == "public-beta"
+        assert arguments[arguments.index("-manifest") + 1] == "5045320271505434676"
+        assert "-password" not in arguments and "-remember-password" not in arguments
+        if outcome == "cap":
+            raise subprocess.TimeoutExpired(arguments, 3600)
+        if outcome == "success":
+            shutil.copytree(game, config.game_directory)
+        return subprocess.CompletedProcess(arguments, 1 if outcome == "nonzero" else 0)
+
+    monkeypatch.setattr("spireshift.engine_download.subprocess.run", process)
+    if outcome == "nonzero":
+        with pytest.raises(ValueError, match="exited with code 1"):
+            download.download_exact_game(config)
+    elif outcome == "cap":
+        with pytest.raises(subprocess.TimeoutExpired):
+            download.download_exact_game(config)
+    else:
+        result = download.download_exact_game(config)
+        assert result["status"] == (
+            "downloaded_identity_matches" if outcome == "success" else "identity_mismatch"
+        )
+        assert not result["training_allowed"] and not result["archive_created"]
+    assert len(invocations) == 1  # No fallback manifests or automatic game/training processes.
+    assert game.is_dir()
+
+
+def test_acquired_game_is_a_candidate_without_false_installed_manifest(
+    build: tuple[Path, Path],
+) -> None:
+    config = _download_fixture(build[0])
+    candidates = engine.downloaded_game_candidates(config.qualification)
+    candidate = next(item for item in candidates if item.path == config.game_directory)
+    assert candidate.source == "licensed_depotdownloader" and candidate.app_manifest_path is None

@@ -30,6 +30,10 @@ def _registry() -> Registry[Any]:
     ("schema_name", "fixture_name"),
     [
         (
+            "engine-download-config-v1.json",
+            "../../configs/engine-qualification/sts2-v0.111.0-depotdownloader-v1.json",
+        ),
+        (
             "engine-qualification-config-v1.json",
             "../../configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json",
         ),

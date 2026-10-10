@@ -126,7 +126,15 @@ def downloaded_game_candidates(config: EngineQualificationConfig) -> list[GameCa
         candidate.path.parent.parent.parent for candidate in discover_game_candidates(environ={})
     }
     paths = {root / suffix for root in roots} | {root / "steamapps" / suffix for root in roots}
-    return [GameCandidate(path, "steam_console_depot", None) for path in sorted(paths)]
+    candidates = [GameCandidate(path, "steam_console_depot", None) for path in sorted(paths)]
+    candidates.append(
+        GameCandidate(
+            config.root / "artifacts/engine-downloads" / config.document["archive_name"] / "game",
+            "licensed_depotdownloader",
+            None,
+        )
+    )
+    return candidates
 
 
 def _sha_file(path: Path) -> str:
@@ -241,6 +249,8 @@ def engine_preflight(
         "sources": sources,
         "matching_game_paths": [item["path"] for item in matching],
         "steam_console_command": steam_download_command(config),
+        "owner_acquisition_helper": "scripts/acquire-headless-game-v0.111.0-v2.sh",
+        "steam_console_request_status": "owner_reported_access_denied_without_beta_branch",
         "archive_destination": str(default_archive_path(config)),
         "next_step": (
             "freeze_or_verify_matching_game"

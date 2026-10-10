@@ -7,7 +7,13 @@ or more. Use saved timings to estimate duration and explicit caps to bound short
 
 ## Current handoff and direction
 
-**Next owner stage:** [request the exact v0.111.0 macOS depot](actual-engine-v0.111.0.md).
+**Next owner stage:** [retry exact v0.111.0 acquisition with explicit beta context](actual-engine-v0.111.0.md),
+using only `scripts/acquire-headless-game-v0.111.0-v2.sh`. The first console attempt failed; Steam's
+content log reports **Access Denied** with an empty branch. Its less specific console output says
+**No connection**. The replacement pins DepotDownloader 3.4.0, the same manifest and `public-beta`,
+with owner-interactive login, a separate ignored download directory, validation/resumption and a
+one-hour cap. The missing branch is an evidence-supported hypothesis; access is still unverified.
+There is no alternate-manifest fallback or automatic follow-up. Failure evidence remains preserved.
 The owner accepted [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md): preserve the
 launchable v0.107.1 archive and every old result, acquire a separate exact v0.111.0 game, qualify
 actual-engine public state/mechanics, then measure full-run speed before new A8 neural learning.
@@ -16,7 +22,8 @@ Updating Steam alone does not align the v0.107.1 emulator with v0.111.0. Its por
 The first implementation adds strict file/source preflight, an immutable full-game archive and
 verification, and one owner download helper. Steam's local cache identifies the macOS manifest for
 beta build `24724944`; server availability and the downloaded game fingerprints are still pending.
-Only the owner starts and monitors that roughly 1.3 GB download. No game or training job follows.
+Only the owner starts and monitors that roughly 1.3 GB download. The replacement checks file identity
+after download and stops; no game, freezing or training job follows.
 The subsequent mechanics panel covers complete current costs/counters/statuses/intents, all visible
 menus and repeated rest/shop/reward/submenu actions. Inventory coverage is not an exhaustive
 enumeration of all game states. Qualification and performance gates precede a large learning run.

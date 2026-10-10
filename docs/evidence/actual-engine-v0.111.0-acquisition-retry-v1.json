@@ -1,0 +1,43 @@
+{
+  "schema_version": "actual-engine-acquisition-retry-evidence-v1",
+  "date": "2026-10-10",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "download_config_id": "sha256:b6b8b702c8767176a18c867d707b3b27dc7451831c74396e754c2805fb787317",
+  "preserved_owner_failure_report_id": "sha256:773885ed03c870386a6bad76e46a341f5fe7a7c3ebdcd248bf9dd424b7f7e7ff",
+  "owner_console_error": "Depot download failed : Failed downloading 1 manifests (No connection)",
+  "steam_manifest_request_result": "Access Denied",
+  "requested_branch_in_failed_client_request": "",
+  "failed_manifest_id": "5045320271505434676",
+  "replacement_branch": "public-beta",
+  "replacement_manifest_id": "5045320271505434676",
+  "diagnosis": "missing_beta_branch_context_is_supported_hypothesis_not_proven_server_access",
+  "downloader": {
+    "release": "DepotDownloader_3.4.0",
+    "source_commit": "c553ef4d60c00a4f5fd16c9fe017f569001589ff",
+    "url": "https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_3.4.0/DepotDownloader-macos-arm64.zip",
+    "archive_bytes": 32245964,
+    "archive_sha256": "60e80c7c496f3f9a079cd3c62036b35d088c27bc0149baf38f009eb57a52f6a5",
+    "executable_sha256": "e5588dff802b7395b22b308ee796dd57bacbbbb2decddb12fd94101cb4f40fa5",
+    "fingerprint_authority": "locally_observed_official_release_asset_not_publisher_signed_checksum"
+  },
+  "verified_tool_version": "3.4.0+c553ef4d60c00a4f5fd16c9fe017f569001589ff",
+  "tool_version_checked_without_steam_authentication": true,
+  "qualification_config_changed": false,
+  "owner_download_helper": "scripts/acquire-headless-game-v0.111.0-v2.sh",
+  "max_wall_seconds": 3600,
+  "checks": {
+    "repository_tests_passed": 933,
+    "pytest_wall_seconds": 45.57,
+    "format_lint_type_checks": "passed",
+    "csharp_protocol_build_and_contract": "passed",
+    "bash_syntax": "passed"
+  },
+  "game_downloads_started_by_codex": 0,
+  "games_launched": 0,
+  "optimizer_steps": 0,
+  "manifest_access_verified": false,
+  "archive_created": false,
+  "training_allowed": false,
+  "claim_scope": "acquisition_failure_diagnosis_and_owner_handoff_only",
+  "evidence_id": "sha256:4754e4ea194d51e3b9b1f05e47a433221b8abbb66f2e99a50db5e81f528cdca7"
+}
