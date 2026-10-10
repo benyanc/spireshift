@@ -1,4 +1,4 @@
-"""Small CLI for actual-engine prerequisites; never starts game or training processes."""
+"""Separate identity, acquisition and bounded native checks; never starts training."""
 
 from __future__ import annotations
 
@@ -13,6 +13,11 @@ from spireshift.engine_download import (
     download_plan,
     load_engine_download_config,
 )
+from spireshift.engine_native import (
+    bootstrap_native_profile,
+    inspect_model_registry,
+    load_native_qualification_config,
+)
 from spireshift.engine_qualification import (
     default_archive_path,
     engine_preflight,
@@ -26,7 +31,7 @@ from spireshift.full_run_experience import atomic_json
 
 def add_engine_parser(commands: Any) -> None:
     engine = commands.add_parser(
-        "engine", help="Identify and preserve actual-game inputs; no games"
+        "engine", help="Identify, preserve and separately qualify actual-game inputs"
     )
     sub = engine.add_subparsers(dest="engine_command", required=True)
     for name in (
@@ -36,11 +41,15 @@ def add_engine_parser(commands: Any) -> None:
         "download-command",
         "download-plan",
         "download-game",
+        "bootstrap-profile",
+        "model-inventory",
     ):
         command = sub.add_parser(name)
         command.add_argument("config", type=Path)
         if name in ("download-plan", "download-game"):
             command.add_argument("downloader_config", type=Path)
+        if name in ("bootstrap-profile", "model-inventory"):
+            command.add_argument("native_config", type=Path)
         if name == "download-game":
             command.add_argument("--qr", action="store_true")
         if name in ("preflight", "freeze"):
@@ -69,6 +78,14 @@ def run_engine_command(args: argparse.Namespace) -> int:
         if args.engine_command == "download-plan":
             result = download_plan(load_engine_download_config(args.downloader_config, config))
             code = 0
+        elif args.engine_command in ("bootstrap-profile", "model-inventory"):
+            native = load_native_qualification_config(args.native_config, config)
+            if args.engine_command == "bootstrap-profile":
+                result = bootstrap_native_profile(native)
+                code = 0 if result["verdict"]["status"] == "native_profile_bootstrap_pass" else 1
+            else:
+                result = inspect_model_registry(native)
+                code = 0
         elif args.engine_command == "preflight":
             result = engine_preflight(config, game_dir=args.game_dir)
             code = 0 if result["status"] == "identity_ready" else 2
@@ -113,8 +130,8 @@ def run_engine_command(args: argparse.Namespace) -> int:
             json.dumps(
                 {
                     "status": "stopped",
-                    "error": "Download reached its wall-time cap; "
-                    "partial content remains. Re-run the same owner helper to validate/resume.",
+                    "error": "The current engine stage reached its wall-time cap; "
+                    "partial private evidence remains. No next stage follows.",
                 }
             )
         )
@@ -124,12 +141,12 @@ def run_engine_command(args: argparse.Namespace) -> int:
             json.dumps(
                 {
                     "status": "stopped",
-                    "error": "Owner stopped the download; partial "
-                    "content remains. Re-run the same helper to validate/resume.",
+                    "error": "The current engine stage was interrupted; partial "
+                    "private evidence remains. No next stage follows.",
                 }
             )
         )
         return 130
-    except (OSError, ValueError) as error:
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
         print(json.dumps({"status": "error", "error": str(error)}, indent=2))
         return 1

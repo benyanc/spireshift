@@ -15,6 +15,7 @@ from typing import Any
 import pytest
 
 import spireshift.engine_download as download
+import spireshift.engine_native as native
 import spireshift.engine_qualification as engine
 from spireshift.cli import main
 from spireshift.doctor import GameCandidate
@@ -519,3 +520,260 @@ def test_acquired_game_is_a_candidate_without_false_installed_manifest(
     candidates = engine.downloaded_game_candidates(config.qualification)
     candidate = next(item for item in candidates if item.path == config.game_directory)
     assert candidate.source == "licensed_depotdownloader" and candidate.app_manifest_path is None
+
+
+def _native_fixture(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> native.NativeQualificationConfig:
+    config_path, game = build
+    qualification = engine.load_engine_qualification_config(config_path)
+    user_root = tmp_path / "user"
+    user_root.mkdir()
+    monkeypatch.setattr(Path, "home", lambda: user_root)
+    archive = engine.default_archive_path(qualification)
+    (game / native.EXE_RELATIVE).chmod(0o644)  # Steam's depot download drops the launch permission.
+    engine.freeze_game_archive(qualification, game, archive)
+    document = json.loads(
+        Path("configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json").read_text()
+    )
+    document["qualification_config_id"] = qualification.config_id
+    for item in document["decompiler"]["files"]:
+        target = qualification.root / item["path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(b"fixture tool")
+        item["sha256"] = hashlib.sha256(target.read_bytes()).hexdigest()
+    path = config_path.with_name("native.json")
+    path.write_text(json.dumps(document))
+    monkeypatch.setattr(native, "_require_native_launch_support", lambda: None)
+    monkeypatch.setattr(native, "_running_games", lambda: [])
+    return native.load_native_qualification_config(path, qualification)
+
+
+def _fake_native_boot(command: list[str], cwd: Path, attempt: Path, cap: int) -> dict[str, Any]:
+    assert cap <= 60
+    assert "--headless" in command and "--force-steam=off" in command
+    assert "--quit-after" in command
+    override = (cwd / "override.cfg").read_text()
+    name = json.loads(override.split("config/custom_user_dir_name=", 1)[1].splitlines()[0])
+    profile = Path.home() / "Library/Application Support" / name
+    settings = profile / "default/1/settings.save"
+    settings.parent.mkdir(parents=True)
+    settings.write_text('{"schema_version":8}')
+    (attempt / "stdout.log").write_text(
+        f"Steam initialization skipped\nUser Data Directory: {profile}\n"
+    )
+    (attempt / "stderr.log").write_text("ERROR: fixture renderer diagnostic\n")
+    return {"returncode": 0, "timed_out": False, "wall_seconds": 0.1}
+
+
+def test_native_profile_bootstrap_preserves_archive_and_never_admits_gameplay(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    config = _native_fixture(build, tmp_path, monkeypatch)
+    monkeypatch.setattr(native, "_run_boot", _fake_native_boot)
+    result = native.bootstrap_native_profile(config)
+    assert result["verdict"]["status"] == "native_profile_bootstrap_pass"
+    assert all(result["checks"].values())
+    assert result["working_copy_changes"]["executable_mode_before"] == 0o644
+    assert result["working_copy_changes"]["executable_mode_after"] == 0o755
+    assert result["working_copy_changes"]["rules_or_asset_patches"] == 0
+    assert result["diagnostics"]["error_lines"] == 1  # A boot pass is not a clean runtime claim.
+    assert result["games_launched"] == 1 and result["full_run_attempts"] == 0
+    assert result["optimizer_steps"] == 0
+    assert not result["training_allowed"] and not result["mechanics_qualified"]
+    archive_exe = (
+        engine.default_archive_path(config.qualification)
+        / engine.GAME_RELATIVE
+        / native.EXE_RELATIVE
+    )
+    assert archive_exe.stat().st_mode & 0o777 == 0o644
+    second = native.bootstrap_native_profile(config)
+    assert second["profile"] != result["profile"]  # Always a fresh process and native profile.
+
+
+@pytest.mark.parametrize(
+    "gap", ["wrong_path", "wrong_schema", "shared_changed", "game_changed", "capped"]
+)
+def test_native_boot_refuses_missing_isolation_or_integrity_evidence(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch, gap: str
+) -> None:
+    config = _native_fixture(build, tmp_path, monkeypatch)
+
+    def boot(command: list[str], cwd: Path, attempt: Path, cap: int) -> dict[str, Any]:
+        result = _fake_native_boot(command, cwd, attempt, cap)
+        if gap == "wrong_path":
+            (attempt / "stdout.log").write_text(
+                "Steam initialization skipped\nUser Data Directory: unrelated\n"
+            )
+        elif gap == "wrong_schema":
+            for settings in (
+                Path.home() / "Library/Application Support/SpireShift/engine-profiles"
+            ).rglob("settings.save"):
+                settings.write_text('{"schema_version":9}')
+        elif gap == "shared_changed":
+            shared = Path.home() / "Library/Application Support/SlayTheSpire2"
+            shared.mkdir(parents=True)
+            (shared / "unexpected.save").write_text("changed")
+        elif gap == "game_changed":
+            (cwd / "unexpected-mod.dll").write_bytes(b"changed")
+        else:
+            result["timed_out"] = True
+        return result
+
+    monkeypatch.setattr(native, "_run_boot", boot)
+    result = native.bootstrap_native_profile(config)
+    assert result["verdict"]["status"] == "native_profile_bootstrap_incomplete"
+    assert result["verdict"]["errors"]
+    assert not result["training_allowed"]
+    assert Path(result["report_path"]).is_file()
+
+
+def test_native_short_cap_terminates_child_without_changing_parent_directories(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("SteamAppId", "must-not-propagate")
+    monkeypatch.setenv("SteamGameId", "must-not-propagate")
+    import os
+
+    parent_directory = os.environ.get("HOME")
+    result = native._run_boot(
+        [
+            sys.executable,
+            "-c",
+            "import os,time;"
+            "print(os.environ.get('HOME'),os.environ.get('SteamAppId'),flush=True);"
+            "time.sleep(10)",
+        ],
+        tmp_path,
+        tmp_path,
+        1,
+    )
+    assert result["timed_out"] and result["returncode"] != 0
+    assert result["wall_seconds"] < 4
+    assert (tmp_path / "stdout.log").read_text().strip() == f"{parent_directory} None"
+    assert os.environ.get("HOME") == parent_directory
+    assert os.environ["SteamAppId"] == "must-not-propagate"  # noqa: SIM112 (Steam's native name)
+
+
+def test_native_check_rejects_archive_drift_and_active_game_before_launch(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    config = _native_fixture(build, tmp_path, monkeypatch)
+    monkeypatch.setattr(native, "_running_games", lambda: [123])
+    with pytest.raises(ValueError, match="Close the existing"):
+        native.bootstrap_native_profile(config)
+    assert not config.workspace.exists()
+    monkeypatch.setattr(native, "_running_games", lambda: [])
+    dll = (
+        engine.default_archive_path(config.qualification)
+        / engine.GAME_RELATIVE
+        / native.DATA_RELATIVE
+        / "sts2.dll"
+    )
+    dll.write_bytes(b"changed")
+    with pytest.raises(ValueError, match="archive verification failed"):
+        native.bootstrap_native_profile(config)
+    assert not config.workspace.exists()
+
+
+REGISTRY_FIXTURE = """using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Relics;
+public static class AbstractModelSubtypes {
+private static readonly Type _t0 = typeof(Strike);
+private static readonly Type _t1 = typeof(DeprecatedRelic);
+private static readonly Type[] _subtypes = new Type[2] { _t0, _t1 };
+public static int Count => 2;
+public static IReadOnlyList<Type> All => _subtypes;
+}
+"""
+CLASSES_FIXTURE = """Class MegaCrit.Sts2.Core.Models.Cards.Strike
+Class MegaCrit.Sts2.Core.Models.Relics.DeprecatedRelic
+"""
+
+
+def test_registry_inspection_distinguishes_type_coverage_from_offered_content() -> None:
+    rows = native.parse_model_registry(REGISTRY_FIXTURE, CLASSES_FIXTURE)
+    assert [row["family"] for row in rows] == ["Cards", "Relics"]
+    assert [row["nonplayable_name_hint"] for row in rows] == [False, True]
+    assert all(row["offered_in_normal_play"] is None for row in rows)
+
+
+@pytest.mark.parametrize(
+    "gap", ["missing_member", "duplicate", "unknown", "ambiguous", "missing_all"]
+)
+def test_registry_cannot_silently_skip_unknown_or_ambiguous_types(gap: str) -> None:
+    source, classes = REGISTRY_FIXTURE, CLASSES_FIXTURE
+    if gap == "missing_member":
+        source = source.replace("Count => 2", "Count => 3")
+    elif gap == "duplicate":
+        source = source.replace("{ _t0, _t1 }", "{ _t0, _t0 }")
+    elif gap == "unknown":
+        classes = classes.replace(".Cards.Strike", ".Cards.Another")
+    elif gap == "ambiguous":
+        classes += "Class MegaCrit.Sts2.Core.Models.Relics.Strike\n"
+    else:
+        source = source.replace("All => _subtypes;", "All => other;")
+    with pytest.raises(ValueError):
+        native.parse_model_registry(source, classes)
+
+
+def test_registry_command_pins_tool_and_keeps_source_private_without_running_game(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    config = _native_fixture(build, tmp_path, monkeypatch)
+    arguments_seen: list[list[str]] = []
+
+    def tool(arguments: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        arguments_seen.append(arguments)
+        assert kwargs["timeout"] == 45 and "--disable-updatecheck" in arguments
+        result = "ilspycmd: 9.1.0.7988\nICSharpCode.Decompiler: 9.1.0.7988"
+        if "-l" in arguments:
+            result = CLASSES_FIXTURE
+        elif "-t" in arguments:
+            result = (
+                REGISTRY_FIXTURE
+                if "AbstractModelSubtypes" in arguments[-2]
+                else "fixture ModelDb source"
+            )
+        return subprocess.CompletedProcess(arguments, 0, result, "")
+
+    monkeypatch.setattr("spireshift.engine_native.subprocess.run", tool)
+    result = native.inspect_model_registry(config)
+    assert result["models"] == 2
+    assert result["unresolved_bindings"] == 0
+    assert result["offered_in_normal_play"] == "unverified"
+    assert result["games_launched"] == 0 and not result["training_allowed"]
+    assert len(arguments_seen) == 4
+    assert Path(result["raw_inventory_path"]).is_relative_to(
+        config.qualification.root / "artifacts"
+    )
+    raw = json.loads(Path(result["raw_inventory_path"]).read_text())
+    assert not raw["runtime_instantiation_verified"] and not raw["training_input"]
+    binary = config.qualification.root / config.document["decompiler"]["files"][0]["path"]
+    binary.write_bytes(b"changed tool")
+    with pytest.raises(ValueError, match="decompiler changed"):
+        native.inspect_model_registry(config)
+    assert len(arguments_seen) == 4
+
+
+def test_native_config_and_output_paths_do_not_escape_private_workspaces(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    config = _native_fixture(build, tmp_path, monkeypatch)
+    document = dict(config.document)
+    path = tmp_path / "native-invalid.json"
+    for changes in (
+        {"qualification_config_id": "sha256:" + "0" * 64},
+        {"workspace": "artifacts/../sources/not-private"},
+        {"max_wall_seconds": 300},
+        {"settings_schema": True},
+    ):
+        path.write_text(json.dumps({**document, **changes}))
+        with pytest.raises(ValueError):
+            native.load_native_qualification_config(path, config.qualification)
+    outside = tmp_path / "elsewhere"
+    outside.mkdir()
+    (config.qualification.root / "artifacts/link").symlink_to(outside, target_is_directory=True)
+    path.write_text(json.dumps({**document, "workspace": "artifacts/link/native"}))
+    with pytest.raises(ValueError, match="symlinks"):
+        native.load_native_qualification_config(path, config.qualification)

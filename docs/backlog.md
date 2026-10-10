@@ -1,32 +1,48 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after the owner accepted a separately frozen actual-engine qualification track.
+Updated 2026-10-10 after exact acquisition/preservation and bounded native prerequisite checks.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
 
-**Next owner stage:** [retry exact v0.111.0 acquisition with explicit beta context](actual-engine-v0.111.0.md),
-using only `scripts/acquire-headless-game-v0.111.0-v2.sh`. The first console attempt failed; Steam's
-content log reports **Access Denied** with an empty branch. Its less specific console output says
-**No connection**. The replacement pins DepotDownloader 3.4.0, the same manifest and `public-beta`,
-with owner-interactive login, a separate ignored download directory, validation/resumption and a
-one-hour cap. The missing branch is an evidence-supported hypothesis; access is still unverified.
-There is no alternate-manifest fallback or automatic follow-up. Failure evidence remains preserved.
+**Current work: #145, actual-engine public control and mechanics qualification.** Exact acquisition
+and preservation under #144 are complete. The owner downloaded the unchanged v0.111.0 / `41cef1ea`
+macOS arm64 manifest using the licensed DepotDownloader route. Current executable, rules assembly
+and GodotSharp fingerprints match. The private archive contains **435 files / 2,406,594,686 bytes**;
+freezing took **6.046 seconds**, followed by a fresh integrity pass in **1.411 seconds**.
+The earlier console access failure and two owner-reported password failures remain historical
+evidence. The successful request does not prove why the earlier request failed.
+There is no pending acquisition command for the owner; [the guide](actual-engine-v0.111.0.md)
+records the completed stage and next development work.
 The owner accepted [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md): preserve the
 launchable v0.107.1 archive and every old result, acquire a separate exact v0.111.0 game, qualify
 actual-engine public state/mechanics, then measure full-run speed before new A8 neural learning.
 Updating Steam alone does not align the v0.107.1 emulator with v0.111.0. Its port is deferred.
 
-The first implementation adds strict file/source preflight, an immutable full-game archive and
-verification, and one owner download helper. Steam's local cache identifies the macOS manifest for
-beta build `24724944`; server availability and the downloaded game fingerprints are still pending.
-Only the owner starts and monitors that roughly 1.3 GB download. The replacement checks file identity
-after download and stops; no game, freezing or training job follows.
-The subsequent mechanics panel covers complete current costs/counters/statuses/intents, all visible
-menus and repeated rest/shop/reward/submenu actions. Inventory coverage is not an exhaustive
-enumeration of all game states. Qualification and performance gates precede a large learning run.
+The first #145 package implements a repeatable, capped shipped-game bootstrap in a disposable copy,
+using Godot's save-directory override, Steam disabled before initialization, fresh native settings
+and shared-save write protection. The downloader's launcher permission is repaired only in that
+working copy; game DLLs/assets are unpatched. A canonical **45.279-second** job passes native save
+schema/path, normal exit, shared-save sentinel and complete working/archive integrity checks.
+It preserves **1,090 error lines and two warnings**, including rendering/shutdown diagnostics;
+profile bootstrap is not a clean-runtime or interactive-control verdict.
+
+A separate **3.821-second** no-game registry inspection resolves **all 1,660 generated base model
+types**, including 603 card, 299 relic and eight character type entries. These counts include test
+and retired types; eight declared character types are not eight selectable heroes. All offered-content
+flags remain unknown; 65 name/namespace hints are diagnostics, not an exhaustive exclusion list.
+Raw registry/decompiled material remains private. See the
+[acquisition evidence](evidence/actual-engine-v0.111.0-acquired-and-frozen-v1.json) and
+[native prerequisite evidence](evidence/actual-engine-v0.111.0-native-prerequisites-v1.json).
+
+Next connect the pinned released Connector in a separate working copy, verify a fresh public menu
+and action completion, build the same-game CLI candidate, and qualify complete public projections
+and 25–30 mechanics scenarios. Refresh menus after repeated rest/shop/reward/submenu actions.
+The generated type registry is not live database instantiation, offered content, complete effects
+or exhaustive reachable-state coverage. Qualification and speed evidence precede large learning;
+no new game campaign, neural/GA pilot or adaptive controller is started by these prerequisites.
 
 Ironclad/A8, full-run terminal wins and the strong cheap foundation before adaptive effort remain
 binding. Preserve the relational repair and PPO math for the separately versioned actual-engine
@@ -221,8 +237,8 @@ independent evaluation, numerical stability and historical evidence preservation
 
 | Order | Work | GitHub items |
 | --- | --- | --- |
-| Current; identity/archive tooling implemented, game download pending | Preserve and preflight the exact v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Next; before new bulk learning | Generate the official content inventory privately; qualify profile isolation, complete public inputs/legal actions and 25–30 targeted same-build mechanics scenarios through the shipped headless and patched CLI routes. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
+| Current; native save bootstrap and generated type registry checked | Connect public control; qualify live offered content, modset/reset/seed/terminal behavior, complete public inputs/legal actions and 25–30 targeted same-build mechanics scenarios through shipped headless and patched CLI routes. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

@@ -23,9 +23,11 @@ The repaired simulator is admitted for scoped policy learning with
 A useful player, full win and adaptive thinking remain to be established. The owner accepted
 [a separately frozen v0.111.0 actual-engine qualification track](docs/actual-engine-v0.111.0.md)
 before another large learning run. Exact-build preflight and private archive tooling are
-implemented; game acquisition, public mechanics qualification and complete-run speed evidence
-remain pending. Keep all v0.107.1 artifacts and the relational repair unchanged. The current
-guide gives one owner acquisition helper; the older large emulator pilot is deferred.
+implemented, and the exact game is now acquired and privately frozen. A bounded shipped-runtime
+boot verifies separate native saves; the complete generated model-type registry is extracted
+privately. Public mechanics qualification and complete-run speed evidence remain pending.
+Keep all v0.107.1 artifacts and the relational repair unchanged; the older large emulator pilot
+is deferred. The current guide records completed checks and the next qualification work.
 
 The repository also contains the research contracts and a seeded mock vertical slice:
 

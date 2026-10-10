@@ -1,10 +1,12 @@
 # Preserved real game for later model playback
 
 The owner accepted a separate v0.111.0 actual-engine qualification track on 2026-10-10.
-Keep the verified v0.107.1 archive below unchanged. The new target is not acquired or launch-tested
-yet; see [the current single-stage handoff](actual-engine-v0.111.0.md) and
+Keep the verified v0.107.1 archive below unchanged. The separate v0.111.0 game is now acquired,
+frozen and checked by a bounded unmodded headless boot with separate native saves;
+see [the current qualification status](actual-engine-v0.111.0.md) and
 [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md). It does not inherit this archive's
-successful menu/bridge check, saves or model compatibility.
+successful interactive menu/bridge check, saves or model compatibility. Its native boot check
+does not establish GUI playback, gameplay control, complete mechanics or training admission.
 
 [Issue #37](https://github.com/benyanc/spireshift/issues/37) tracks this component and the eventual
 pre-patch experiment bundle. The private macOS archive was verified on 2026-10-08; game payloads
