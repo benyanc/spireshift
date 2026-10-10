@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import tempfile
 import time
@@ -34,8 +35,10 @@ def build_cli_candidate(
     qualification: EngineQualificationConfig, path: Path, node: Path
 ) -> dict[str, Any]:
     document = json.loads(path.read_text())
+    local = document.get("schema_version") == "engine-cli-build-config-v2"
     if (
-        document.get("schema_version") != "engine-cli-build-config-v1"
+        document.get("schema_version")
+        not in {"engine-cli-build-config-v1", "engine-cli-build-config-v2"}
         or document.get("stage") != "build_only_no_games"
         or document.get("qualification_config_id") != qualification.config_id
         or document.get("training_allowed") is not False
@@ -80,6 +83,68 @@ def build_cli_candidate(
     manifest = json.loads(manifest_file.read_text())
     if manifest.get("upstream", {}).get("revision") != document["upstream_revision"]:
         raise ValueError("Managed candidate must use the exact CLI revision in its patch ledger")
+    local_fields: dict[str, Any] = {}
+    helper = qualification.root / "scripts/build-engine-cli-candidate.mjs"
+    if local:
+        helper = qualification.root / "scripts/engine-cli-local-build.mjs"
+        if document.get("candidate_lineage") != "spireshift_cli_rest_v1_local_toolchain":
+            raise ValueError("Repaired CLI requires its distinct local build lineage")
+        patch_relative = Path(document.get("local_patch", ""))
+        if (
+            patch_relative.is_absolute()
+            or ".." in patch_relative.parts
+            or patch_relative.parts[:2] != ("patches", "engine")
+        ):
+            raise ValueError("Local CLI patch must be a repository-owned engine patch")
+        patch_file = qualification.root / patch_relative
+        if (
+            patch_file.is_symlink()
+            or _sha_file(patch_file) != document.get("local_patch_sha256")
+            or _sha_file(helper) != document.get("helper_sha256")
+        ):
+            raise ValueError("Pinned local CLI patch or build helper changed")
+        toolchain = document.get("expected_toolchain", {})
+        if (
+            not isinstance(toolchain, dict)
+            or not re.fullmatch(r"\d+\.\d+\.\d+", str(toolchain.get("sdk_version", "")))
+            or not re.fullmatch(r"\d+\.\d+\.\d+", str(toolchain.get("reference_version", "")))
+            or not all(
+                re.fullmatch(r"[0-9a-f]{64}", str(toolchain.get(key, "")))
+                for key in ("csc_sha256", "reference_pack_id")
+            )
+        ):
+            raise ValueError("Local CLI compiler and target reference pack must be pinned")
+        for field in ("expected_baseline", "expected_repaired"):
+            pins = document.get(field)
+            if (
+                not isinstance(pins, dict)
+                or not re.fullmatch(r"[0-9a-f-]{36}", str(pins.get("artifact_mvid", "")))
+                or not all(
+                    re.fullmatch(r"[0-9a-f]{64}", str(pins.get(key, "")))
+                    for key in (
+                        "artifact_sha256",
+                        "godot_stub_sha256",
+                        "runtime_sts2_sha256",
+                        "reference_pack_id",
+                        "source_diff_id",
+                        "runtime_dependencies_id",
+                    )
+                )
+            ):
+                raise ValueError("Both local CLI builds require complete frozen artifact pins")
+        if document["expected_repaired"]["source_diff_id"] != document.get(
+            "expected_source_diff_id"
+        ):
+            raise ValueError("Local combined source identity must match its repaired build pin")
+        local_fields = {
+            "clone_cache": str(_private_path(qualification.root, document["clone_cache"])),
+            "local_patch": str(patch_file),
+            "local_patch_sha256": document["local_patch_sha256"],
+            "expected_source_diff_id": document["expected_source_diff_id"],
+            "expected_toolchain": toolchain,
+            "expected_baseline": document["expected_baseline"],
+            "expected_repaired": document["expected_repaired"],
+        }
     workspace = _private_path(qualification.root, document["workspace"])
     workspace.mkdir(parents=True, exist_ok=True)
     attempt = Path(tempfile.mkdtemp(prefix="build-", dir=workspace))
@@ -93,12 +158,13 @@ def build_cli_candidate(
             "headless_root": str(root),
             "attempt": str(attempt),
             "game": str(archive / GAME_RELATIVE),
+            **local_fields,
         }
         started = time.monotonic()
         timed_out = False
         with (attempt / "stdout.log").open("wb") as out, (attempt / "stderr.log").open("wb") as err:
             child = subprocess.Popen(
-                [str(node), str(qualification.root / "scripts/build-engine-cli-candidate.mjs")],
+                [str(node), str(helper)],
                 stdin=subprocess.PIPE,
                 stdout=out,
                 stderr=err,
@@ -119,8 +185,11 @@ def build_cli_candidate(
             else {"status": "build_capped"}
         )
         archive_after = verify_game_archive(qualification, archive)
+        expected_status = (
+            "local_candidate_built_unqualified" if local else "candidate_built_unqualified"
+        )
         passed = (
-            built.get("status") == "candidate_built_unqualified"
+            built.get("status") == expected_status
             and child.returncode == 0
             and not timed_out
             and archive_after["valid"]
@@ -128,13 +197,16 @@ def build_cli_candidate(
         return _finish(
             attempt,
             {
-                "schema_version": "engine-cli-build-v1",
+                "schema_version": "engine-cli-build-v2" if local else "engine-cli-build-v1",
                 "config_id": config_id,
                 "qualification_config_id": qualification.config_id,
                 "menu_report_id": menu["report_id"],
                 "managed_manifest_sha256": document["managed_manifest_sha256"],
                 "source_patch_sha256": document["source_patch_sha256"],
                 "upstream_revision": document["upstream_revision"],
+                "candidate_lineage": document.get("candidate_lineage", "upstream_binary_exact_pin"),
+                "local_patch_sha256": document.get("local_patch_sha256"),
+                "helper_sha256": _sha_file(helper),
                 "archive_verification_before": verified["report_id"],
                 "archive_verification_after": archive_after["report_id"],
                 "status": "candidate_built_unqualified" if passed else "candidate_build_incomplete",

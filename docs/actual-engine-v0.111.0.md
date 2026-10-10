@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — private source extraction complete; mechanics qualification is next
+## Current status — rest-site bridge repaired; public projection and wider mechanics are next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -100,15 +100,15 @@ The second completed the action but correctly failed integrity when the Host cre
 configuration. The third starts a fresh copy with that exact file declared before inventorying;
 it does not weaken the integrity check or rewrite earlier evidence.
 
-## CLI candidate build remains unqualified
+## Historical upstream CLI binary mismatch
 
 The faster managed candidate uses the headless project's exact **d11aa88** CLI baseline and pinned
 v0.111.0 source patch. This is distinct from the preserved **084d1aa** comparison checkout. The
 local build passes the exact source ledger and keeps both original and runtime game DLLs unchanged.
-It compiles in a **9.165-wall / 4.945-CPU-second** capped stage, but its compiled artifact differs
-from the upstream frozen binary. The strict upstream audit rejects it, and no candidate gameplay
-or speed benchmark follows. The cause of the binary difference is not established; compiler and
-reference-library differences need investigation. Artifact pins are not silently relaxed.
+It compiled in a **9.165-wall / 4.945-CPU-second** capped stage, but its artifact differs from the
+upstream frozen binary. The strict upstream audit rejected it, without launching gameplay.
+The cause of that upstream difference remains unestablished. The separate local repair below
+does not waive this old artifact pin or transfer the upstream binary's qualification.
 
 Two initial source-ledger failures also remain preserved. Local Git's `apply --intent-to-add`
 left an incomplete index. Initializing the index, applying the same patch, and marking its one
@@ -133,7 +133,7 @@ rest-site synchronizer can preserve unchosen options after a successful action w
 it. The CLI candidate forces map presentation after nonselection rest actions and after a
 rest-site card selection. That loses the opportunity to choose again. Repair and verify those
 paths against native state, including cancelled/unsuccessful choices, before CLI learning.
-This is a source-level finding; no runtime reproduction or repaired-gameplay result is claimed.
+That report records a source-level finding. The subsequent scoped native repair is recorded below.
 
 The review also traces these requirements to actual-game implementations:
 
@@ -158,8 +158,46 @@ conservative; the observed first duration is now recorded. No game attempts, tra
 or automatic next job ran. The owner exemption applies to this completed extraction; the usual
 boundary for future long tasks remains unchanged.
 
-Next resolve the CLI artifact identity and the native rest-transition discrepancy, then verify
-the same public-state/action contract across every decision family.
+## Reproducible local build and completed native rest repair
+
+The new local build keeps both game DLL copies unchanged and pins its own source delta, compiler,
+reference pack, stub, dependencies and binary SHA/MVID. Two fresh baseline builds reproduce the
+earlier local `f15144…` artifact, and two fresh repaired builds agree on `4f660b…` /
+MVID `7331d8d9-19aa-4e88-a116-b66a7f800f0d`. The capped build completes in **15.132 seconds**.
+The compiler is SDK **10.0.401**, target reference pack **9.0.20**; native regressions run on
+**.NET 10.0.12** with an explicitly fingerprinted Godot stub. This is a separate local candidate,
+not the shipped Godot/.NET 9 execution environment or the upstream frozen binary.
+
+A local clone initially omitted the upstream SourceLink metadata and produced another binary.
+Restoring the real upstream origin URL reproduced the prior local binary in two fresh locations.
+This explains that cache-clone difference, not the still-unknown upstream binary mismatch.
+Failed attempts and all raw build/source evidence remain private and unchanged.
+
+The MIT host [patch](../patches/engine/README.md) awaits the native rest choice, re-exports the
+synchronizer's current remaining options, and exposes explicit Proceed after a successful choice
+or when no options remain. Native map voting owns the subsequent room exit. Cancellation and
+errors no longer fabricate map progress. Smith retains cancellation/manual confirmation even
+with one eligible card, and invalid selection counts/indices are refused. Native relic obtain is
+used only for marked privileged fixtures, so ownership and hooks actually participate.
+
+The short `engine probe-cli-rest` check passes **all 75 native checks and five isolation/integrity
+gates in 2.583 seconds**. Nine named Ironclad/A8 fixture bootstraps cover normal healing, Miniature
+Tent in both orders, cancellation/retry, Girya's extra option, disabled Smith, single-card manual
+confirmation, reset during a pending choice, stale references, and leaving with options remaining.
+The loaded process/host/game/stub identities bind. Native travel exits the rest without hanging;
+the process exits normally. All 404 shared-save entries, candidate files and the frozen archive
+remain intact. The 130 retained diagnostic entries remain private; this is not a clean-runtime
+claim. There are **zero full-run attempts and optimizer steps**, and training stays disallowed.
+
+[Rest repair evidence](evidence/actual-engine-v0.111.0-cli-rest-repair-v1.json) binds the reports,
+source and artifact identities. These are **managed native regressions**, not shipped cross-host
+parity, complete mechanic coverage or evidence of model strength. The existing upstream canonical
+projection still needs adaptation to the new rest object bindings and explicit leave action.
+Other selectors' cancellation/confirmation contracts remain unqualified, and legacy privileged
+relic list insertion is not adopted as a valid fixture. No owner command remains pending.
+
+Next implement the same public-state/action contract across every decision family, beginning
+with the repaired rest projection, and compare the native cases against the shipped reference.
 
 Then qualify reset/seed behavior, actual A8 rules and terminal victory, complete public observations
 and refreshed legal choices, and the targeted 25–30-scenario mechanics panel. Costs/modifiers,
@@ -205,6 +243,7 @@ credential-independent playback. The older verified live-menu procedure remains 
 
 `engine prepare-connector` verifies the pinned toolchain; `engine probe-connector-menu` performs
 one capped native menu check. `engine build-cli-candidate` builds only, preserving rejected output;
-`engine inspect-game-source` performs the separate owner source extraction. They use their own
+`engine probe-cli-rest` performs the separate, short privileged rest regressions;
+`engine inspect-game-source` performs the separate source extraction. They use their own
 versioned configurations, write-once summaries and private attempt records. SDK/client gates also
 have standalone Node tests; fixtures do not establish gameplay mechanics.

@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after private source extraction and the first actual-game mechanics review.
+Updated 2026-10-10 after reproducible local CLI builds and native rest-site regression checks.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
@@ -43,11 +43,13 @@ process ownership, idempotency and stale-snapshot rejection. Fresh settings-only
 the canonical template, shared saves and frozen files unchanged. Rendering/shutdown diagnostics
 remain preserved; this is not full-run or mechanics qualification.
 
-The faster CLI candidate passes the exact pinned source ledger and builds without rewriting the
-game DLL, but its compiled binary differs from upstream's frozen artifact. The strict audit
-rejects it; there are zero candidate game attempts. Two preceding Git-index failures remain
-preserved. Investigate compiler/reference identities and record any newly qualified artifact
-explicitly, then test actual runtime behavior; do not silently waive the binary or mechanics gates.
+The historical CLI candidate's source ledger and unchanged game DLL pass, but its binary differs
+from the upstream artifact. That rejection and two Git-index failures remain preserved. A new
+local lineage pins the compiler/reference pack, MIT host repair, complete source diff, binary
+SHA/MVID and dependencies. Two fresh baseline builds and two fresh repaired builds agree in a
+**15.132-second** job. The baseline reproduces the earlier local binary, not upstream's binary;
+the upstream mismatch's cause remains unestablished. Local cache clones must restore the real
+origin URL because SourceLink metadata changes binary identity. Artifact gates remain explicit.
 [Menu/build evidence](evidence/actual-engine-v0.111.0-menu-control-v1.json) records these results.
 
 **Private source extraction is complete; no owner command is pending.** The owner explicitly
@@ -57,15 +59,26 @@ files, one generated project, empty diagnostic logs, and preserved game/tool int
 private, outside policy inputs. The initial 5–15-minute estimate is superseded by this measured
 result; future long jobs still follow the owner-run boundary.
 
-**Next implementation within #145:** resolve the CLI binary identity and repair its forced
-rest-site exits, then qualify public inputs/actions and native mechanics. The actual game may
-leave rest choices available after an action; the candidate instead forces map presentation after
-both nonselection rest actions and rest-site card selection. This concrete static control-flow
-discrepancy needs native runtime regressions, including remaining choices and cancelled/failed
-selection, before training. Card-cost expiration/global hooks/X-cost spending, shop price and
-restocking refresh, and selection bounds/confirmation are also traced for the mechanics panel;
-the candidate already reads the native spending-cost getter, so printed-only cost is not a
-proven defect. See [source assessment](evidence/actual-engine-v0.111.0-source-assessment-v1.json).
+**Rest-site host repair is implemented and tested.** It awaits native choice completion and
+refreshes remaining options; only explicit legal Proceed opens the map. All **75 native checks
+plus five isolation/integrity gates** pass in **2.583 seconds** across nine named Ironclad/A8
+fixture bootstraps. Miniature Tent works in both orders, canceled Smith preserves choices,
+Girya's extra action commits, disabled/stale actions are refused, single-card Smith still asks
+for confirmation, pending-choice reset drains correctly, and native travel exits a rest with
+options remaining. Original/runtime game DLLs, shared saves and the candidate stay unchanged.
+These are privileged managed native regressions, not rendered-game parity or training examples.
+See [rest repair evidence](evidence/actual-engine-v0.111.0-cli-rest-repair-v1.json).
+
+**Next implementation within #145:** adapt the canonical public observation/action contract to
+the repaired rest bindings and explicit leave, then check every decision family. The old upstream
+projection does not yet consume that new contract. Complete the same-game 25–30-scenario panel,
+including per-copy card costs/modifier expiry/X-cost effects, status/counter ownership, shops with
+price/restocking refresh, other selection preferences, A8 bootstrap/reset and real ending semantics.
+Compare the named managed results with the shipped host; keep every unsupported case visible.
+The candidate already reads native spending costs, so printed-only cost is not a proven defect.
+Legacy privileged relic list injection remains unqualified; the new fixture obtain path uses
+the game's ownership/hooks. [Source assessment](evidence/actual-engine-v0.111.0-source-assessment-v1.json)
+retains the initial findings. **No owner command is pending.**
 
 Source extraction is not a runtime correctness pass. #145 remains open for complete public
 projections, A8/reset/ending semantics and the 25–30-scenario panel. #146 speed/integration follows.

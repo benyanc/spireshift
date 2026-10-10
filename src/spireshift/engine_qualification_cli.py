@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.engine_candidate import build_cli_candidate
+from spireshift.engine_cli_probe import probe_cli_rest
 from spireshift.engine_connector import (
     load_connector_qualification_config,
     prepare_connector_toolchain,
@@ -53,6 +54,7 @@ def add_engine_parser(commands: Any) -> None:
         "prepare-connector",
         "probe-connector-menu",
         "build-cli-candidate",
+        "probe-cli-rest",
         "inspect-game-source",
     ):
         command = sub.add_parser(name)
@@ -67,6 +69,9 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("--node", required=True, type=Path)
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name == "probe-cli-rest":
+            command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
         if name == "inspect-game-source":
             command.add_argument("source_config", type=Path)
@@ -101,6 +106,9 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "build-cli-candidate":
             result = build_cli_candidate(config, args.candidate_config, args.node)
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
+        elif args.engine_command == "probe-cli-rest":
+            result = probe_cli_rest(config, args.probe_config, args.node)
+            code = 0 if result["status"] == "rest_native_regression_pass" else 1
         elif args.engine_command == "inspect-game-source":
             result = inspect_game_source(config, args.source_config)
             code = 0 if result["status"] == "private_source_extraction_complete" else 1
@@ -172,6 +180,14 @@ def run_engine_command(args: argparse.Namespace) -> int:
             displayed["build_detail"] = {
                 key: value for key, value in result["build"].items() if key != "report"
             }
+        elif args.engine_command == "probe-cli-rest":
+            displayed = {
+                key: value
+                for key, value in result.items()
+                if key not in {"probe", "shared_profile_sentinel"}
+            }
+            displayed["native_checks"] = result["probe"].get("gates", {})
+            displayed["error"] = result["probe"].get("error")
         elif args.engine_command == "inspect-game-source":
             displayed = {key: value for key, value in result.items() if key != "inventory"}
         print(json.dumps(displayed, indent=2))
