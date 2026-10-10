@@ -8,6 +8,12 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from spireshift.engine_candidate import build_cli_candidate
+from spireshift.engine_connector import (
+    load_connector_qualification_config,
+    prepare_connector_toolchain,
+    probe_connector_menu,
+)
 from spireshift.engine_download import (
     download_exact_game,
     download_plan,
@@ -26,6 +32,7 @@ from spireshift.engine_qualification import (
     steam_download_command,
     verify_game_archive,
 )
+from spireshift.engine_source import inspect_game_source
 from spireshift.full_run_experience import atomic_json
 
 
@@ -43,6 +50,10 @@ def add_engine_parser(commands: Any) -> None:
         "download-game",
         "bootstrap-profile",
         "model-inventory",
+        "prepare-connector",
+        "probe-connector-menu",
+        "build-cli-candidate",
+        "inspect-game-source",
     ):
         command = sub.add_parser(name)
         command.add_argument("config", type=Path)
@@ -50,6 +61,15 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("downloader_config", type=Path)
         if name in ("bootstrap-profile", "model-inventory"):
             command.add_argument("native_config", type=Path)
+        if name in ("prepare-connector", "probe-connector-menu"):
+            command.add_argument("connector_config", type=Path)
+        if name == "probe-connector-menu":
+            command.add_argument("--node", required=True, type=Path)
+        if name == "build-cli-candidate":
+            command.add_argument("candidate_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name == "inspect-game-source":
+            command.add_argument("source_config", type=Path)
         if name == "download-game":
             command.add_argument("--qr", action="store_true")
         if name in ("preflight", "freeze"):
@@ -78,6 +98,20 @@ def run_engine_command(args: argparse.Namespace) -> int:
         if args.engine_command == "download-plan":
             result = download_plan(load_engine_download_config(args.downloader_config, config))
             code = 0
+        elif args.engine_command == "build-cli-candidate":
+            result = build_cli_candidate(config, args.candidate_config, args.node)
+            code = 0 if result["status"] == "candidate_built_unqualified" else 1
+        elif args.engine_command == "inspect-game-source":
+            result = inspect_game_source(config, args.source_config)
+            code = 0 if result["status"] == "private_source_extraction_complete" else 1
+        elif args.engine_command in ("prepare-connector", "probe-connector-menu"):
+            connector = load_connector_qualification_config(args.connector_config, config)
+            if args.engine_command == "prepare-connector":
+                result = prepare_connector_toolchain(connector)
+                code = 0
+            else:
+                result = probe_connector_menu(connector, node=args.node)
+                code = 0 if result["verdict"]["status"] == "shipped_connector_menu_pass" else 1
         elif args.engine_command in ("bootstrap-profile", "model-inventory"):
             native = load_native_qualification_config(args.native_config, config)
             if args.engine_command == "bootstrap-profile":
@@ -123,7 +157,24 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0 if result["valid"] else 1
         if args.output is not None:
             atomic_json(args.output, result)
-        print(json.dumps(result, indent=2))
+        displayed = result
+        if args.engine_command == "prepare-connector":
+            displayed = {key: value for key, value in result.items() if key != "inventory"}
+            displayed["verified_toolchain_files"] = len(result["inventory"])
+        elif args.engine_command == "probe-connector-menu":
+            displayed = {key: value for key, value in result.items() if key != "probe"}
+        elif args.engine_command == "build-cli-candidate":
+            displayed = {
+                key: value
+                for key, value in result.items()
+                if key not in {"private_candidate_inventory", "build"}
+            }
+            displayed["build_detail"] = {
+                key: value for key, value in result["build"].items() if key != "report"
+            }
+        elif args.engine_command == "inspect-game-source":
+            displayed = {key: value for key, value in result.items() if key != "inventory"}
+        print(json.dumps(displayed, indent=2))
         return code
     except subprocess.TimeoutExpired:
         print(

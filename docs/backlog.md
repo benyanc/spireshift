@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after exact acquisition/preservation and bounded native prerequisite checks.
+Updated 2026-10-10 after shipped-game menu control and an unqualified CLI build attempt.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
@@ -37,12 +37,30 @@ Raw registry/decompiled material remains private. See the
 [acquisition evidence](evidence/actual-engine-v0.111.0-acquired-and-frozen-v1.json) and
 [native prerequisite evidence](evidence/actual-engine-v0.111.0-native-prerequisites-v1.json).
 
-Next connect the pinned released Connector in a separate working copy, verify a fresh public menu
-and action completion, build the same-game CLI candidate, and qualify complete public projections
-and 25–30 mechanics scenarios. Refresh menus after repeated rest/shop/reward/submenu actions.
-The generated type registry is not live database instantiation, offered content, complete effects
-or exhaustive reachable-state coverage. Qualification and speed evidence precede large learning;
-no new game campaign, neural/GA pilot or adaptive controller is started by these prerequisites.
+The shipped-game Connector now passes **13 menu/control/isolation gates in 30.355 seconds**,
+including a completed native transition to character selection, loaded mod identity, loopback
+process ownership, idempotency and stale-snapshot rejection. Fresh settings-only profiles leave
+the canonical template, shared saves and frozen files unchanged. Rendering/shutdown diagnostics
+remain preserved; this is not full-run or mechanics qualification.
+
+The faster CLI candidate passes the exact pinned source ledger and builds without rewriting the
+game DLL, but its compiled binary differs from upstream's frozen artifact. The strict audit
+rejects it; there are zero candidate game attempts. Two preceding Git-index failures remain
+preserved. Investigate compiler/reference identities and record any newly qualified artifact
+explicitly, then test actual runtime behavior; do not silently waive the binary or mechanics gates.
+[Menu/build evidence](evidence/actual-engine-v0.111.0-menu-control-v1.json) records these results.
+
+**Next owner stage:** one private whole-assembly source extraction, prepared but not launched.
+[The guide](actual-engine-v0.111.0.md#run-this-one-next-command) contains its single command.
+Its first duration is unmeasured; reserve 5–15 minutes, with a 20-minute tool cap and no games,
+training, publication or automatic follow-up. This supports the inventory-driven mechanics audit;
+source extraction is not a runtime correctness pass. #145 remains open for complete public
+projections, A8/reset/ending semantics and the 25–30-scenario panel. #146 speed/integration follows.
+
+Refresh menus after repeated rest/shop/reward/submenu actions. The generated type registry is not
+live database instantiation, offered content, complete effects or exhaustive reachable-state
+coverage. Qualification and speed evidence precede large learning; no new game campaign,
+neural/GA pilot or adaptive controller is started by these prerequisites.
 
 Ironclad/A8, full-run terminal wins and the strong cheap foundation before adaptive effort remain
 binding. Preserve the relational repair and PPO math for the separately versioned actual-engine

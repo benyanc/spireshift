@@ -1,0 +1,151 @@
+{
+  "archive_id": "sha256:02623eea2e82c86d64806cfd74f249e03c03f96a6b8fe7bf8094584a1054e02b",
+  "archive_verification_id": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+  "asset_sha256": {
+    "host": "b2f7321dab36689c26133eb198955321722d5ca928f2b6a0b5a125c6df861de2",
+    "sdk": "4a12777aaaa6b469cb939456a0f59a4b7385dbfe87f721870ce89dd1b14eb062",
+    "seal": "d3691730345e8b461a83e206e0c6ac70fe60371c2e8bb61be083fb987f33c3bc",
+    "zod": "9e1f1a05f0dd0c1dab64ee91ceb9bf55cd44d35368c70edda80a2fdc70a88377"
+  },
+  "authority": "exact_process_local_source_canary",
+  "bootstrap_report_id": "sha256:fb0c446d837855c5ea1257eca18a71fa3aa01cc72e716516fc1a9a566918daec",
+  "canonical_menu_cpu_seconds": 9.542787702000002,
+  "canonical_menu_report_id": "sha256:4b875e812739953dde45418ffc28f6b4fab2949fe0bb2e084ba672f41a11849e",
+  "canonical_menu_resource_report_id": "sha256:158bdd744751b542c88828ae18ff3c58ff4a51a8cee3e170ffbea5f0d172410a",
+  "canonical_menu_wall_seconds": 30.354832542012446,
+  "checks": {
+    "candidate_node_syntax": "passed",
+    "csharp_protocol_build_and_contract": "passed",
+    "fixtures_not_gameplay_mechanics_evidence": true,
+    "format_lint_type_checks": "passed",
+    "node_menu_gate_tests_passed": 3,
+    "owner_helper_shell_syntax": "passed",
+    "pytest_wall_seconds": 114.48,
+    "repository_tests_passed": 967,
+    "targeted_engine_tests_passed": 67
+  },
+  "claim_scope": "shipped_public_menu_action_control_and_static_build_attempt_only",
+  "cli_build": {
+    "artifact_difference_cause_established": false,
+    "binary_reproducibility_verified": false,
+    "config_id": "sha256:3b710a0d2509195ca6df5af9880786171147896212888284d550b21785657126",
+    "cpu_seconds": 4.945432839,
+    "dotnet_sdk": "10.0.401",
+    "games_launched": 0,
+    "git_index_workaround": "read_tree_HEAD_plain_apply_explicit_new_file_intent",
+    "helper_runtime_roll_forward": "Major",
+    "local_artifact_sha256": "f1514466352ca96f73deaa2d82a1a632b5b4a706c47e0ec5d8f5e978d4753afd",
+    "managed_manifest_sha256": "671bf25e040c445683a1aacbdb68ce19d8b2bf331088937ebf8786caee99bb23",
+    "node_version": "v24.19.0",
+    "original_game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "other_comparison_cli_revision": "084d1aa3d8e118ca7ce8d8774ad16d6be9c92367",
+    "pinned_cli_revision": "d11aa883b582dd68bd39b331f3370746b30d447e",
+    "preserved_failed_build_report_ids": [
+      "sha256:fd2a856ceccf54c6a44ca782701d36fa5822d17a969966fd964e6738fb19b282",
+      "sha256:bbaa87c8f4d2c288fd2e95a35b80cec0abe5200e7be525db5d0aa164d52d29d5"
+    ],
+    "report_id": "sha256:41a4adebf91bcf313c97556c742233309b05ce75fea50d317cd29352aff22a6e",
+    "resource_report_id": "sha256:c93e2f2f4a6ad7d44cceaa1b5c3124d08d6096d9ae86743f7969bcf130408350",
+    "runtime_game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "runtime_mechanics_or_speed_qualified": false,
+    "source_ledger_relaxed": false,
+    "source_patch_audit_passed_before_artifact_rejection": true,
+    "source_patch_sha256": "8ced088bffbfeaa378d4580ca2c254c41cd89ae58b5b1e9b6ee1a764f8eef87e",
+    "status": "candidate_build_incomplete",
+    "training_allowed": false,
+    "upstream_expected_artifact_sha256": "8dc622b0c003dc632a753e0bb524a82690290930dfe9573a4c71cb8234a6d8a6",
+    "wall_seconds": 9.164502208994236
+  },
+  "connector": {
+    "artifact_mvid": "64765ea1-29fe-4475-9b7d-3b0d65955825",
+    "artifact_sha256": "c1877f1af1b311904b0d536fdfc08cd5c425281f4cc93eed2ff11729380c7586",
+    "protocol": "1.0.0",
+    "source_revision": "e0651024117d22bdeb95142766917103d87c0185",
+    "version": "1.1.0-rc.1"
+  },
+  "connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "consent_settings_changes": [
+    "mods_enabled",
+    "seen_ea_disclaimer"
+  ],
+  "copied_progress_or_unlocks": false,
+  "date": "2026-10-10",
+  "diagnostics": {
+    "error_lines": 1090,
+    "logs_preserved": true,
+    "warning_lines": 2
+  },
+  "evidence_id": "sha256:a9f0521b3062cc2ba8419f43dfe38b0933862c6f868c15a0140f9fea17904d0e",
+  "fresh_profile_contains_settings_only_at_launch": true,
+  "full_run_attempts": 0,
+  "games_entered_in_this_connector_package": 2,
+  "host_default_settings_declared_before_working_inventory": true,
+  "issue_145_complete": false,
+  "local_verification_first_failures_repaired": [
+    "long_claim_scope_line",
+    "subprocess_cleanup_style",
+    "test_only_explicit_import_and_fixture_type_errors"
+  ],
+  "mechanics_qualified": false,
+  "menu_checks": {
+    "archive_still_valid": true,
+    "complete_public_menu": true,
+    "completed_menu_transition": true,
+    "duplicate_idempotent": true,
+    "endpoint_owned_by_child": true,
+    "loaded_identity": true,
+    "natural_shutdown": true,
+    "profile_path_logged": true,
+    "shared_profile_unchanged": true,
+    "stale_rejected": true,
+    "steam_disabled_observed": true,
+    "template_unchanged": true,
+    "working_game_unchanged": true
+  },
+  "menu_native_exit_code": 0,
+  "native_process_wall_seconds": 21.621920124976896,
+  "network_policy": "deny_network_except_localhost_control",
+  "operating_system_directory_environment_reassigned": false,
+  "optimizer_steps": 0,
+  "owner_source_stage": {
+    "automatic_follow_up": false,
+    "config_id": "sha256:101ddc8825bd702a003b358497e11781998fcd11f5d345362f964b3c1f6055f6",
+    "duration_measured": false,
+    "expected_duration_minutes": [
+      5,
+      15
+    ],
+    "games_launched": 0,
+    "launched": false,
+    "raw_source_and_inventory_private": true,
+    "tool_cap_seconds": 1200,
+    "training_allowed": false
+  },
+  "preserved_menu_attempts": [
+    {
+      "actual_game_entries": 0,
+      "old_games_launched_field_counted_wrapper_only": true,
+      "report_id": "sha256:3ef447a6633d3fbc4ed90547bf0dbae7da7627ab2f5018917f5769cf8b2187d4",
+      "result": "sandbox_compile_rejected_literal_ipv4_before_game_entry"
+    },
+    {
+      "actual_game_entries": 1,
+      "overall_pass": false,
+      "report_id": "sha256:db6b650387ffe6a706ed2dc3d4c0a89bf38fbe81e0af6c32478bad8758bf1ae2",
+      "result": "menu_control_completed_but_working_inventory_changed_by_Host_default_config"
+    }
+  ],
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "runtime_cleanliness_qualified": false,
+  "schema_version": "actual-engine-menu-control-and-build-evidence-v1",
+  "settings_template_preserved": true,
+  "settings_template_sha256": "e188477a47f0bf353b8317c6162d935889645ac626ade9f4ff55710c4c1b9870",
+  "shared_save_entries_checked": 404,
+  "shared_save_tree_after": "sha256:4c7b8d6db331415190e415331c92819d91a2e1f81582d0ec22d76368d827fc9d",
+  "shared_save_tree_before": "sha256:4c7b8d6db331415190e415331c92819d91a2e1f81582d0ec22d76368d827fc9d",
+  "successor_kind": "character_select",
+  "toolchain_report_id": "sha256:152220a1a0783e01c0690357d40c10410b92c1cd158c419f0eb1621be0627aba",
+  "training_allowed": false,
+  "unique_menu_actions_requested": 1,
+  "working_inventory_id": "sha256:a18b30dcdc24f204ef69c0ea7ed96f5ea9ef807206e368baec853d2798c0021f"
+}

@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import secrets
 import shutil
 import struct
 import subprocess
@@ -18,6 +19,7 @@ import spireshift.engine_download as download
 import spireshift.engine_native as native
 import spireshift.engine_qualification as engine
 from spireshift.cli import main
+from spireshift.core.manifest import manifest_identifier
 from spireshift.doctor import GameCandidate
 
 
@@ -777,3 +779,302 @@ def test_native_config_and_output_paths_do_not_escape_private_workspaces(
     path.write_text(json.dumps({**document, "workspace": "artifacts/link/native"}))
     with pytest.raises(ValueError, match="symlinks"):
         native.load_native_qualification_config(path, config.qualification)
+
+
+# Connector transport/control qualification. The following fixtures never play games.
+def _connector_fixture(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> Any:
+    from spireshift import engine_connector as connector
+
+    native_config = _native_fixture(build, tmp_path, monkeypatch)
+    monkeypatch.setattr(connector, "_require_native_launch_support", lambda: None)
+    monkeypatch.setattr(connector, "_running_games", lambda: [])
+    monkeypatch.setattr(native, "_run_boot", _fake_native_boot)
+    report = native.bootstrap_native_profile(native_config)
+    report_path = native_config.qualification.root / "artifacts/fixture-bootstrap.json"
+    report_path.write_text(json.dumps(report))
+    document = json.loads(
+        Path("configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json").read_text()
+    )
+    document["qualification_config_id"] = native_config.qualification.config_id
+    document["native_config"] = "configs/engine-qualification/native.json"
+    document["bootstrap_report"] = str(report_path.relative_to(native_config.qualification.root))
+    document["bootstrap_report_id"] = report["report_id"]
+    template = Path(report["profile"]) / "default/1/settings.save"
+    document["bootstrap_settings_sha256"] = engine._sha_file(template)
+    config_path = build[0].with_name("connector.json")
+    config_path.write_text(json.dumps(document))
+    config = connector.load_connector_qualification_config(config_path, native_config.qualification)
+    tools = config.private("toolchain")
+    tools.mkdir(parents=True)
+    (tools / "fixture-tool").write_text("verified tool")
+    body = {"config_id": config.config_id, "inventory": engine._inventory(tools)}
+    (tools / "toolchain.json").write_text(
+        json.dumps({**body, "report_id": manifest_identifier(body)})
+    )
+    return config
+
+
+def test_connector_tools_and_template_drift_stop_before_game_launch(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from spireshift import engine_connector as connector
+
+    config = _connector_fixture(build, tmp_path, monkeypatch)
+    assert connector._verify_toolchain(config)["config_id"] == config.config_id
+    settings, _ = connector._settings_template(config)
+    original = settings.read_bytes()
+    settings.write_text('{"schema_version":9}')
+    with pytest.raises(ValueError, match="template changed"):
+        connector._settings_template(config)
+    settings.write_bytes(original)
+    (config.private("toolchain") / "fixture-tool").write_text("modified")
+    with pytest.raises(ValueError, match="tools changed"):
+        connector.probe_connector_menu(config, node=Path(sys.executable))
+    assert not config.private("workspace").exists()
+
+
+@pytest.mark.parametrize("entry", ["../escape", "/absolute", "package/../escape", "link"])
+def test_connector_extraction_blocks_traversal_and_links(tmp_path: Path, entry: str) -> None:
+    import tarfile
+
+    from spireshift import engine_connector as connector
+
+    archive = tmp_path / "tools.tgz"
+    with tarfile.open(archive, "w:gz") as tar:
+        member = tarfile.TarInfo(entry)
+        if entry == "link":
+            member.type = tarfile.SYMTYPE
+            member.linkname = "../escape"
+            tar.addfile(member)
+        else:
+            member.size = 4
+            tar.addfile(member, io.BytesIO(b"test"))
+    destination = tmp_path / "extracted"
+    with pytest.raises(ValueError, match="Unsafe"):
+        connector._extract(archive, destination)
+    assert not destination.exists() and not (tmp_path / "escape").exists()
+
+
+def test_connector_mod_consent_only_changes_two_settings_and_keeps_backup(tmp_path: Path) -> None:
+    from spireshift import engine_connector as connector
+
+    settings = tmp_path / "settings.save"
+    original = {
+        "schema_version": 8,
+        "mod_settings": None,
+        "seen_ea_disclaimer": False,
+        "native_setting": {"keep": 42},
+    }
+    settings.write_text(json.dumps(original))
+    connector._enable_mod_settings(settings, 8)
+    assert (
+        json.loads(settings.with_name("settings.save.before-connector-consent").read_text())
+        == original
+    )
+    updated = json.loads(settings.read_text())
+    assert {
+        key: value
+        for key, value in updated.items()
+        if key not in {"mod_settings", "seen_ea_disclaimer"}
+    } == {
+        key: value
+        for key, value in original.items()
+        if key not in {"mod_settings", "seen_ea_disclaimer"}
+    }
+    assert updated["mod_settings"]["mods_enabled"] and updated["seen_ea_disclaimer"]
+
+
+@pytest.mark.parametrize("gap", [None, "identity", "transition", "timeout", "payload"])
+def test_disposable_connector_stage_counts_failed_gates_and_preserves_native_source(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch, gap: str | None
+) -> None:
+    from spireshift import engine_connector as connector
+
+    config = _connector_fixture(build, tmp_path, monkeypatch)
+    monkeypatch.setattr(connector, "_require_native_launch_support", lambda: None)
+    monkeypatch.setattr(connector, "_running_games", lambda: [])
+
+    def install(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        if args[0][-1] == "/usr/bin/true":
+            return subprocess.CompletedProcess(args[0], 0, "", "")
+        assert args[0][-1] == "--install"
+        spec = json.loads(kwargs["input"])
+        mods = Path(spec["game"]) / native.EXE_RELATIVE
+        mods = mods.parent / "mods"
+        mods.mkdir()
+        (mods / "STS2_MCP.dll").write_bytes(b"fixture host")
+        return subprocess.CompletedProcess(args[0], 0, "{}", "")
+
+    def probe(
+        config: Any, node: Path, attempt: Path, executable: Path, port: int
+    ) -> dict[str, Any]:
+        override = executable.with_name("override.cfg").read_text()
+        profile_name = json.loads(
+            override.split("config/custom_user_dir_name=", 1)[1].splitlines()[0]
+        )
+        profile = Path.home() / "Library/Application Support" / profile_name
+        assert sorted(p.name for p in (profile / "default/1").iterdir()) == [
+            "settings.save",
+            "settings.save.before-connector-consent",
+        ]
+        (attempt / "stdout.log").write_text(
+            f"Steam initialization skipped\nUser Data Directory: {profile}\n"
+        )
+        (attempt / "stderr.log").write_text("ERROR: preserved native diagnostic\n")
+        if gap == "payload":
+            (executable.parent / "unexpected.dll").write_text("drift")
+        return {
+            "returncode": 0,
+            "forced_cleanup": False,
+            "timed_out": gap == "timeout",
+            "wall_seconds": 0.1,
+            "probe": {
+                "checks": {
+                    "loaded_identity": gap != "identity",
+                    "endpoint_owned_by_child": True,
+                    "complete_public_menu": True,
+                    "completed_menu_transition": gap != "transition",
+                    "duplicate_idempotent": True,
+                    "stale_rejected": True,
+                },
+                "shutdown_requested": True,
+                "menu_actions_requested": 1,
+            },
+        }
+
+    monkeypatch.setattr(subprocess, "run", install)
+    monkeypatch.setattr(connector, "_run_menu_probe", probe)
+    result = connector.probe_connector_menu(config, node=Path(sys.executable))
+    assert (result["verdict"]["status"] == "shipped_connector_menu_pass") == (gap is None)
+    assert result["full_run_attempts"] == 0 and not result["training_allowed"]
+    assert result["diagnostics"]["error_lines"] == 1
+    assert result["checks"]["template_unchanged"] and result["checks"]["archive_still_valid"]
+    assert Path(result["report_path"]).is_file()
+    assert not Path(result["report_path"]).with_name("in-progress.json").exists()
+
+
+def test_connector_short_timeout_cleans_owned_game_and_keeps_secrets_out_of_files(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import os
+
+    from spireshift import engine_connector as connector
+
+    secret = "a" * 64
+    monkeypatch.setattr(secrets, "token_hex", lambda _: secret)
+    actual_popen = subprocess.Popen
+    parent_home = os.environ.get("HOME")
+    child_pid = None
+
+    def launch(*args: Any, **kwargs: Any) -> Any:
+        nonlocal child_pid
+        assert kwargs["env"]["HOME"] == parent_home
+        assert kwargs["env"]["STS2_CONNECTOR_HOST_CONTROL_TOKEN"] == secret
+        child = actual_popen([sys.executable, "-c", "import time;time.sleep(20)"], **kwargs)
+        child_pid = child.pid
+        return child
+
+    def timeout(*args: Any, **kwargs: Any) -> Any:
+        assert json.loads(kwargs["input"])["host_control_token"] == secret
+        raise subprocess.TimeoutExpired(args[0], 1)
+
+    config: Any = SimpleNamespace(
+        document={"connector": {"source_revision": "b" * 40}, "max_wall_seconds": 30},
+        qualification=SimpleNamespace(root=tmp_path, target={}),
+        private=lambda _: tmp_path,
+    )
+    monkeypatch.setattr(subprocess, "Popen", launch)
+    monkeypatch.setattr(subprocess, "run", timeout)
+    result = connector._run_menu_probe(
+        config, Path(sys.executable), tmp_path, tmp_path / "game", 12345
+    )
+    assert result["timed_out"] and result["forced_cleanup"] and result["returncode"] != 0
+    assert result["wall_seconds"] < 4 and result["pid"] == child_pid
+    assert secret not in json.dumps(result)
+    assert all(secret not in item.read_text() for item in tmp_path.iterdir() if item.is_file())
+
+
+@pytest.mark.parametrize("gap", [None, "empty", "no_project", "tool_failed"])
+def test_private_source_extraction_is_separate_from_mechanics_and_training(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch, gap: str | None
+) -> None:
+    from spireshift import engine_source as source
+
+    native_config = _native_fixture(build, tmp_path, monkeypatch)
+    document = json.loads(
+        Path("configs/engine-qualification/sts2-v0.111.0-source-inspection-v1.json").read_text()
+    )
+    document["qualification_config_id"] = native_config.qualification.config_id
+    document["native_config"] = "configs/engine-qualification/native.json"
+    path = build[0].with_name("source.json")
+    path.write_text(json.dumps(document))
+    monkeypatch.setattr(source, "_require_native_launch_support", lambda: None)
+
+    def launch(command: list[str], **kwargs: Any) -> Any:
+        assert "--project" in command and "--disable-updatecheck" in command
+        assert "--headless" not in command
+        target = Path(command[command.index("--outputdir") + 1])
+        target.mkdir(parents=True)
+        if gap != "empty":
+            (target / "Fixture.cs").write_text("public class Fixture {}")
+        if gap != "no_project":
+            (target / "Fixture.csproj").write_text("<Project/>")
+        return SimpleNamespace(
+            returncode=1 if gap == "tool_failed" else 0, wait=lambda **_: None, poll=lambda: 0
+        )
+
+    monkeypatch.setattr(subprocess, "Popen", launch)
+    monkeypatch.setattr(source, "_stop_child", lambda _: None)
+    result = source.inspect_game_source(native_config.qualification, path)
+    assert (result["status"] == "private_source_extraction_complete") == (gap is None)
+    assert result["games_launched"] == 0 and result["optimizer_steps"] == 0
+    assert not result["training_allowed"] and not result["mechanics_qualified"]
+    assert result["checks"]["archive_still_valid"] and result["checks"]["tools_unchanged"]
+    assert Path(result["report_path"]).is_file()
+
+
+def test_source_inspection_refuses_decompiler_drift_before_long_stage(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from spireshift import engine_source as source
+
+    native_config = _native_fixture(build, tmp_path, monkeypatch)
+    document = json.loads(
+        Path("configs/engine-qualification/sts2-v0.111.0-source-inspection-v1.json").read_text()
+    )
+    document["qualification_config_id"] = native_config.qualification.config_id
+    document["native_config"] = "configs/engine-qualification/native.json"
+    path = build[0].with_name("source.json")
+    path.write_text(json.dumps(document))
+    monkeypatch.setattr(source, "_require_native_launch_support", lambda: None)
+    tool = native_config.qualification.root / native_config.document["decompiler"]["executable"]
+    tool.write_text("changed")
+    with pytest.raises(ValueError, match="decompiler changed"):
+        source.inspect_game_source(native_config.qualification, path)
+    assert not (native_config.qualification.root / document["workspace"]).exists()
+
+
+def test_cli_build_refuses_invalid_menu_evidence_before_cloning_or_compiling(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from spireshift import engine_candidate as candidate
+
+    config = _connector_fixture(build, tmp_path, monkeypatch)
+    qualification = config.qualification
+    document = json.loads(
+        Path("configs/engine-qualification/sts2-v0.111.0-cli-build-v1.json").read_text()
+    )
+    document["qualification_config_id"] = qualification.config_id
+    document["native_config"] = "configs/engine-qualification/native.json"
+    document["menu_report"] = "artifacts/fixture-menu.json"
+    (qualification.root / document["menu_report"]).write_text(
+        json.dumps({"verdict": {"status": "incomplete"}})
+    )
+    path = build[0].with_name("candidate.json")
+    path.write_text(json.dumps(document))
+    monkeypatch.setattr(candidate, "_running_games", lambda: [])
+    with pytest.raises(ValueError, match="verified same-game Connector"):
+        candidate.build_cli_candidate(qualification, path, Path(sys.executable))
+    assert not (qualification.root / document["workspace"]).exists()

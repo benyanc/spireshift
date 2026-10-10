@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — no acquisition command pending
+## Current status — menu control passed; private source extraction is next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -71,21 +71,79 @@ The [native prerequisite evidence](evidence/actual-engine-v0.111.0-native-prereq
 binds the configuration, archive, inspection, boot and resource reports. It includes the earlier
 exploration and keeps zero full-run attempts, optimizer steps and training admission explicit.
 
-## Next development work
+## Completed shipped-game menu control
 
-Connect the pinned released Connector in a separate working copy and verify a fresh public menu,
-loaded modset and completed native action. Then build the CLI candidate from the same verified
-rules/assets, recording all patches/stubs. Qualify resets/seeds, actual A8 rules and final victory,
-complete public observations and refreshed legal choices, and the targeted 25–30-scenario mechanics
-panel. Costs/modifiers, status amounts, counters, secondary intents and repeated rest/shop/reward
-choices must stay attached to their public owners. Add discovered gaps to the content-driven matrix.
+The pinned Connector Host **1.1.0-rc.1** and official SDK are installed only in a fresh disposable
+copy of the frozen game. Release archives, SDK and validator dependency, embedded Host identity,
+and exact-game runtime seal are fingerprinted. Downloads execute no npm lifecycle scripts.
+The seal and this local result have **source-canary authority**, not broad mechanics certification.
 
-Measure complete-run speed and failure rates only after those gates. New learning has new
-engine/input/data identities; v0.107.1 weights, encoders and experience are not silently migrated.
-Ironclad/A8 and terminal full-run victory remain fixed. Adaptive thinking waits for a useful base
-player. Codex can do short checks with caps; jobs expected to take five minutes or more receive
-one specific owner command and stop at that stage. These prerequisites launch no training or
-automatic game campaign, and there is no new long owner task prepared by this package.
+The canonical check passes **all 13 gates in 30.355 wall / 9.543 CPU seconds**. The native process
+uses **21.622 seconds** and exits normally. It verifies the loaded game/Host/modset, proves that the
+launched process owns the loopback endpoint, reads a complete public menu, submits its advertised
+start action, and observes a completed transition to character selection. Repeating the same
+request is idempotent; submitting an old snapshot with a new request is rejected as stale.
+Delivery alone never counts as a completed action. The transient shutdown secret stays in memory,
+child environment and client stdin, outside command lines and saved files.
+
+The private profile starts with only a copy of native settings, no progress, unlocks or saves.
+Only mod consent and Early Access acknowledgement change, with a backup; the canonical native
+settings template remains intact. A predeclared Host default configuration and the installation
+form the working-copy baseline. Shared saves, Steam directories and frozen archives stay protected;
+networking is restricted to local control. All 404 shared-save entries and the complete working
+payload/archive remain unchanged. The check retains **1,090 error lines and two warnings**, so it
+is a menu-control result, not a clean-runtime or gameplay verdict.
+
+Two earlier attempts remain failed. The first used an unsupported sandbox IPv4 filter and did not
+enter the game; its historical `games_launched` field counted the wrapper, not a native launch.
+The second completed the action but correctly failed integrity when the Host created its default
+configuration. The third starts a fresh copy with that exact file declared before inventorying;
+it does not weaken the integrity check or rewrite earlier evidence.
+
+## CLI candidate build remains unqualified
+
+The faster managed candidate uses the headless project's exact **d11aa88** CLI baseline and pinned
+v0.111.0 source patch. This is distinct from the preserved **084d1aa** comparison checkout. The
+local build passes the exact source ledger and keeps both original and runtime game DLLs unchanged.
+It compiles in a **9.165-wall / 4.945-CPU-second** capped stage, but its compiled artifact differs
+from the upstream frozen binary. The strict upstream audit rejects it, and no candidate gameplay
+or speed benchmark follows. The cause of the binary difference is not established; compiler and
+reference-library differences need investigation. Artifact pins are not silently relaxed.
+
+Two initial source-ledger failures also remain preserved. Local Git's `apply --intent-to-add`
+left an incomplete index. Initializing the index, applying the same patch, and marking its one
+new file explicitly restores the exact ledger comparison; it adds no gameplay source changes.
+Source/stub/lifecycle and public-observation behavior still need comparison with the shipped game.
+The [menu/build evidence](evidence/actual-engine-v0.111.0-menu-control-v1.json) records fingerprints,
+scoped results and failed attempts; all raw game files and source remain private.
+
+## Run this one next command
+
+This extracts the exact frozen assembly for a private mechanics audit. It enables us to trace
+cost changes, effect ordering, rest/shop choices and model registration to the actual game. It
+runs no games or training and never commits or publishes the extracted material. Extraction
+alone does not prove that all mechanics or states are covered.
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/inspect-actual-engine-source-v1.sh
+```
+
+This first full extraction is unmeasured: reserve roughly **5–15 minutes**, with a **20-minute
+tool cap / 22-minute outer cap**, one worker, 8 GB memory and 3 GB private artifacts. Codex has not
+started it. Share the printed summary after it finishes. Explicit reruns preserve old reports and
+create a new attempt; no training, gameplay campaign or next job starts automatically.
+
+Then qualify reset/seed behavior, actual A8 rules and terminal victory, complete public observations
+and refreshed legal choices, and the targeted 25–30-scenario mechanics panel. Costs/modifiers,
+status amounts, counters, secondary intents and repeated rest/shop/reward choices must stay attached
+to their public owners. Add discovered omissions to the content-driven coverage matrix. This is
+systematic coverage, not an exhaustive proof over every possible interaction.
+
+Measure complete-run speed and failure rates after those gates. New learning has new engine/input/
+data identities; v0.107.1 weights, encoders and experience are not silently migrated. Ironclad/A8
+and terminal full-run victory remain fixed. Adaptive thinking waits for a useful base player.
+Codex runs short capped checks; the owner launches and monitors stages expected to take five
+minutes or more. This package has zero full-run attempts, optimizer steps or training admission.
 
 ## Historical acquisition helpers and developer reference
 
@@ -105,7 +163,7 @@ The v1 console helper and `scripts/freeze-headless-game-v0.111.0-v1.sh` also rem
 
 Identity commands are `engine preflight`, `engine freeze` and `engine verify-archive`; acquisition
 commands are `engine download-command`, `engine download-plan` and terminal-only `engine download-game`.
-The new `engine bootstrap-profile` and `engine model-inventory` each take the unchanged identity
+The `engine bootstrap-profile` and `engine model-inventory` each take the unchanged identity
 configuration and the separate `sts2-v0.111.0-native-bootstrap-v1.json` configuration. Output paths
 are write-once. Native attempts are fresh, have private failure markers and do not reuse a cached
 boot success. The game process has a 60-second cap plus bounded child-group cleanup, and registry
@@ -116,3 +174,9 @@ The source/decompiler checks and file archive never admit a training backend. Pr
 is distinct from a supported GUI/offline launcher, and this check does not establish long-term
 credential-independent playback. The older verified live-menu procedure remains in
 [frozen-live-game.md](frozen-live-game.md).
+
+`engine prepare-connector` verifies the pinned toolchain; `engine probe-connector-menu` performs
+one capped native menu check. `engine build-cli-candidate` builds only, preserving rejected output;
+`engine inspect-game-source` performs the separate owner source extraction. They use their own
+versioned configurations, write-once summaries and private attempt records. SDK/client gates also
+have standalone Node tests; fixtures do not establish gameplay mechanics.
