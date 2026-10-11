@@ -1,130 +1,66 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after native rest choices and their canonical agent interface pass.
+Updated 2026-10-10 after scoped native combat checks and a shipped-game starting-save pass.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
 
 ## Current handoff and direction
 
-**Current work: #145, actual-engine public control and mechanics qualification.** Exact acquisition
-and preservation under #144 are complete. The owner downloaded the unchanged v0.111.0 / `41cef1ea`
-macOS arm64 manifest using the licensed DepotDownloader route. Current executable, rules assembly
-and GodotSharp fingerprints match. The private archive contains **435 files / 2,406,594,686 bytes**;
-freezing took **6.046 seconds**, followed by a fresh integrity pass in **1.411 seconds**.
-The earlier console access failure and two owner-reported password failures remain historical
-evidence. The successful request does not prove why the earlier request failed.
-There is no pending acquisition command for the owner; [the guide](actual-engine-v0.111.0.md)
-records the completed stage and next development work.
-The owner accepted [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md): preserve the
-launchable v0.107.1 archive and every old result, acquire a separate exact v0.111.0 game, qualify
-actual-engine public state/mechanics, then measure full-run speed before new A8 neural learning.
-Updating Steam alone does not align the v0.107.1 emulator with v0.111.0. Its port is deferred.
+**Current work: #145, actual-engine public inputs and mechanics qualification.** The separately
+frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
+full-run victory stays primary. Preserve every v0.107.1 archive, model, encoder and result.
+[ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md) orders public/mechanics
+qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
+other difficulties and larger unchanged PPO/GA batches remain deferred.
 
-The first #145 package implements a repeatable, capped shipped-game bootstrap in a disposable copy,
-using Godot's save-directory override, Steam disabled before initialization, fresh native settings
-and shared-save write protection. The downloader's launcher permission is repaired only in that
-working copy; game DLLs/assets are unpatched. A canonical **45.279-second** job passes native save
-schema/path, normal exit, shared-save sentinel and complete working/archive integrity checks.
-It preserves **1,090 error lines and two warnings**, including rendering/shutdown diagnostics;
-profile bootstrap is not a clean-runtime or interactive-control verdict.
+**Combat, rest and shop fixture package passes.** The current reproducible v6 local CLI leaves
+the official rules DLL unchanged and uses separately pinned .NET 9.0.7. Its canonical interface
+passes **841 subchecks across 28 named native fixtures**, with **85 complete SDK snapshots**,
+60 delivered actions and 34 deliberately invalid native inputs. Combat keeps current cost/X cost,
+per-copy card identity, status owners and multi-hit intent facts. Player-targeted potions and
+hand-upgrade copy selection are repaired. The public pile view now sorts independently of native
+hidden draw enumeration; labeling an ordered list “unordered” had been insufficient.
 
-A separate **3.821-second** no-game registry inspection resolves **all 1,660 generated base model
-types**, including 603 card, 299 relic and eight character type entries. These counts include test
-and retired types; eight declared character types are not eight selectable heroes. All offered-content
-flags remain unknown; 65 name/namespace hints are diagnostics, not an exhaustive exclusion list.
-Raw registry/decompiled material remains private. See the
-[acquisition evidence](evidence/actual-engine-v0.111.0-acquired-and-frozen-v1.json) and
-[native prerequisite evidence](evidence/actual-engine-v0.111.0-native-prerequisites-v1.json).
+**Normal startup inputs and the save bridge are repaired.** The fresh profile's tutorial path
+skipped Neow, and older wrapper localization failed on current content. A new explicit
+`native_all_unlocked` policy uses the game's own unlock state, and 92 private text tables are
+extracted and verified against the frozen pack. Historical progress behavior remains available.
+A native current-room A8 save imports through the shipped game's normal Continue action:
+**14/14 startup/control/isolation gates pass in 30.460 seconds**. Seed, A8 and offered starting
+option titles/availability agree. Shared saves, game/archive files and source inputs stay intact;
+diagnostics remain private. This is one starting save, not combat parity or useful gameplay.
 
-The shipped-game Connector now passes **13 menu/control/isolation gates in 30.355 seconds**,
-including a completed native transition to character selection, loaded mod identity, loopback
-process ownership, idempotency and stale-snapshot rejection. Fresh settings-only profiles leave
-the canonical template, shared saves and frozen files unchanged. Rendering/shutdown diagnostics
-remain preserved; this is not full-run or mechanics qualification.
+[Current reconstruction evidence](evidence/actual-engine-v0.111.0-combat-and-starting-inputs-v1.json)
+records separate build, runtime, text, public projection and report identities. Historical
+[menu](evidence/actual-engine-v0.111.0-menu-control-v1.json),
+[rest](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json),
+[shop/selection](evidence/actual-engine-v0.111.0-selection-shop-v1.json) and failed checks remain
+preserved. The 1,660-type registry is a declared inventory, not exhaustive offered-content or
+reachable-state coverage. The 28 fixtures are privileged regressions, not training examples.
 
-The historical CLI candidate's source ledger and unchanged game DLL pass, but its binary differs
-from the upstream artifact. That rejection and two Git-index failures remain preserved. A new
-local lineage pins the compiler/reference pack, MIT host repair, complete source diff, binary
-SHA/MVID and dependencies. Two fresh baseline builds and two fresh repaired builds agree in a
-**15.132-second** job. The baseline reproduces the earlier local binary, not upstream's binary;
-the upstream mismatch's cause remains unestablished. Local cache clones must restore the real
-origin URL because SourceLink metadata changes binary identity. Artifact gates remain explicit.
-[Menu/build evidence](evidence/actual-engine-v0.111.0-menu-control-v1.json) records these results.
+**Next owner stage: six starting seeds, each compared twice, without playing a full run.**
+Run only `bash scripts/compare-native-starts-v1.sh` (also linked in the actual-engine guide).
+Estimate **6–8 minutes** from measured startup/import times, with a **15-minute cap**, one game
+at a time, 8 GB memory and 4 GB generated-file limits. Each case prints its result. Remove only a
+successful attempt's disposable payload after verified natural shutdown; keep reports, logs,
+profiles and native saves. Preserve the first failed payload and stop. Repeated seeds are six
+independent cases with two repeats, not twelve independent seeds. Completed results are shown
+on rerun; partial work is preserved without a silent restart. Codex has not launched this batch.
 
-**Private source extraction is complete; no owner command is pending.** The owner explicitly
-authorized Codex to run it. It finished in **18.621 wall / 141.328 CPU seconds**, with 3,537 source
-files, one generated project, empty diagnostic logs, and preserved game/tool integrity. All
-1,660 registered model types bind uniquely to source declarations. Raw source and bindings stay
-private, outside policy inputs. The initial 5–15-minute estimate is superseded by this measured
-result; future long jobs still follow the owner-run boundary.
+**Remaining under #145:** compare shipped combat/rest/shop actions; qualify complete modifier,
+expiry and relic-counter facts, the other selectors/rewards and large choice spaces, out-of-combat
+potions, native shop discounts/relic effects, other public decision families, later acts and true
+terminal conditions. Hand-upgrade preferences include a version-bound UI contract shim rather
+than a captured native parameter; that seam needs shipped comparison. Missing authority stays
+explicitly unsupported and counted. Native effects/RNG remain in the game; adapters do not
+substitute game rules. No exhaustive fidelity or full-run training admission is claimed.
 
-**Rest-site host repair is implemented and tested.** It awaits native choice completion and
-refreshes remaining options; only explicit legal Proceed opens the map. All **75 native checks
-plus five isolation/integrity gates** pass in **2.583 seconds** across nine named Ironclad/A8
-fixture bootstraps. Miniature Tent works in both orders, canceled Smith preserves choices,
-Girya's extra action commits, disabled/stale actions are refused, single-card Smith still asks
-for confirmation, pending-choice reset drains correctly, and native travel exits a rest with
-options remaining. Original/runtime game DLLs, shared saves and the candidate stay unchanged.
-These are privileged managed native regressions, not rendered-game parity or training examples.
-See [rest repair evidence](evidence/actual-engine-v0.111.0-cli-rest-repair-v1.json).
-
-**Canonical rest projection is implemented and checked.** A pinned MIT hook in a disposable
-Headless copy exposes refreshed choices, Proceed, cancellation and explicit upgrade confirmation,
-with native operands kept in private bindings. All **226 checks and seven integrity/isolation gates**
-pass in **3.130 seconds** through the strict SDK: 27 rest/selection snapshots, 21 delivered actions
-and 21 invalid inputs across the same nine fixtures. Duplicate requests do not execute twice;
-stale snapshots and conflicting request identities are rejected before delivery. Start/reset
-explicitly forwards native A8. Missing selection preferences fail closed. No training or complete-run
-attempt follows. See [projection evidence](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json).
-
-**Shop and native selection preference repair is implemented and checked.** The baseline shop
-panel exposed 17 failed checks: removal could be repeated, restocked entries accepted old item
-requests, full/forbidden potions stayed purchasable, and pending selection did not exclude another
-purchase. The repaired host binds both the current item and its price, restores the native
-removal-used callback after a successful commit, retains cancellation without charging, and
-exports native potion capacity/procurement availability. Native selection preferences and
-instance bindings replace the earlier Smith-only assumption. Unknown preferences still fail closed.
-
-The installed .NET 10 runtime cannot load this game's Harmony instrumentation. A separately
-downloaded, checksum-verified official **.NET 9.0.7** runtime matches the shipped game's declared
-version; its whole file inventory is pinned independently of the build SDK. The missing native
-upgrade selection boundary was caught and added. Earlier failures and configuration identities
-remain preserved. No system runtime, Steam installation or shared save was replaced.
-
-On the final repaired build, **235 rest checks and 179 shop checks** pass through the canonical
-SDK in **6.817 and 4.533 seconds** respectively, each with eight integrity/isolation gates. These
-are nine rest and seven shop fixtures, **49 complete snapshots**, 37 delivered actions and
-30 deliberately invalid native inputs. Replay, conflicting identities and stale snapshots do
-not execute another native action. Two fresh baseline and two repaired builds match in
-29.405 seconds. All eight preference observation boundaries are installed; this does **not**
-qualify every selector/card mechanic. See [shop/selection evidence](evidence/actual-engine-v0.111.0-selection-shop-v1.json).
-
-**Next implementation within #145:** qualify current card costs/modifiers, combat effect order,
-public ownership of statuses/counters/intents, and the remaining selectors. Include out-of-combat
-potion use/discard, native shop discounts and relic purchase effects, optional/mandatory choices,
-bundle/hand upgrades and large selections that currently exceed finite enumeration. Complete the same-game
-25–30-scenario panel,
-including per-copy card costs/modifier expiry/X-cost effects, status/counter ownership, shops with
-price/restocking refresh, other selection preferences, A8 bootstrap/reset and real ending semantics.
-Compare the named managed results with the shipped host; keep every unsupported case visible.
-The candidate already reads native spending costs, so printed-only cost is not a proven defect.
-Legacy privileged relic list injection remains unqualified; the new fixture obtain path uses
-the game's ownership/hooks. [Source assessment](evidence/actual-engine-v0.111.0-source-assessment-v1.json)
-retains the initial findings. **No owner command is pending.**
-
-Source extraction is not a runtime correctness pass. #145 remains open for complete public
-projections, A8/reset/ending semantics and the 25–30-scenario panel. #146 speed/integration follows.
-
-Refresh menus after repeated rest/shop/reward/submenu actions. The generated type registry is not
-live database instantiation, offered content, complete effects or exhaustive reachable-state
-coverage. Qualification and speed evidence precede large learning; no new game campaign,
-neural/GA pilot or adaptive controller is started by these prerequisites.
-
-Ironclad/A8, full-run terminal wins and the strong cheap foundation before adaptive effort remain
-binding. Preserve the relational repair and PPO math for the separately versioned actual-engine
-inputs. Do not silently migrate emulator IDs, weights, experience or seed ownership across patches.
-The prepared large v3 emulator pilot below is **deferred**, not the current next owner command.
+#146 then measures complete-run speed and failures at one worker before bounded parallel workers,
+introduces the new public encoder/experience lineage, and prepares a finite owner A8 neural pilot.
+**Zero full-run attempts, optimizer steps and training admission in this qualification package.**
+Adaptive thinking waits for a useful base player. The prepared large v3 emulator pilot below is
+historical and deferred.
 
 ## Preserved v0.107.1 direction and evidence
 
@@ -315,7 +251,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; native bootstrap, menu and scoped rest/shop/selection interfaces checked | Qualify card costs/effects, remaining selectors/potion controls, live offered content, modset/reset/seed/terminal behavior and the same-build mechanics panel; compare shipped headless and patched CLI results. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; 28 native fixtures and one shipped starting-save comparison pass | Owner checks six starting seeds twice; then qualify remaining public mechanics, shipped combat/rest/shop actions and ending semantics. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

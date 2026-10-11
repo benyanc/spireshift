@@ -1078,3 +1078,83 @@ def test_cli_build_refuses_invalid_menu_evidence_before_cloning_or_compiling(
     with pytest.raises(ValueError, match="verified same-game Connector"):
         candidate.build_cli_candidate(qualification, path, Path(sys.executable))
     assert not (qualification.root / document["workspace"]).exists()
+
+
+@pytest.mark.parametrize("mode", ["success", "failed_identity", "retain_success"])
+def test_checkpoint_payload_removal_requires_verified_success_and_preserves_evidence(
+    build: tuple[Path, Path], tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mode: str
+) -> None:
+    from spireshift import engine_connector as connector
+
+    config = _connector_fixture(build, tmp_path, monkeypatch)
+    save = tmp_path / "synthetic-native.save"
+    save.write_text("synthetic native save")
+    fixture = {
+        "checkpoint_path": str(save),
+        "checkpoint_sha256": engine._sha_file(save),
+        "workspace": "artifacts/synthetic-checkpoint",
+    }
+    copies = []
+
+    def install(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        if args[0][-1] != "/usr/bin/true":
+            spec = json.loads(kwargs["input"])
+            mods = Path(spec["game"]) / native.EXE_RELATIVE
+            mods = mods.parent / "mods"
+            mods.mkdir()
+            (mods / "STS2_MCP.dll").write_bytes(b"fixture host")
+        return subprocess.CompletedProcess(args[0], 0, "{}", "")
+
+    def probe(
+        config: Any, node: Path, attempt: Path, executable: Path, port: int, *, fixture: Any
+    ) -> dict[str, Any]:
+        copies.append(attempt / "game")
+        override = executable.with_name("override.cfg").read_text()
+        profile_name = json.loads(
+            override.split("config/custom_user_dir_name=", 1)[1].splitlines()[0]
+        )
+        profile = Path.home() / "Library/Application Support" / profile_name
+        assert (
+            profile / "default/1/modded/profile1/saves/current_run.save"
+        ).read_text() == save.read_text()
+        (attempt / "stdout.log").write_text(
+            f"Steam initialization skipped\nUser Data Directory: {profile}\n"
+        )
+        (attempt / "stderr.log").write_text("ERROR: retained diagnostic\n")
+        checks = {
+            key: True
+            for key in (
+                "loaded_identity",
+                "endpoint_owned_by_child",
+                "native_continue_offered",
+                "native_checkpoint_loaded",
+                "complete_public_starting_event",
+                "native_A8_seed_preserved",
+                "same_starting_public_option_titles_and_availability",
+            )
+        }
+        checks["loaded_identity"] = mode != "failed_identity"
+        return {
+            "returncode": 0,
+            "forced_cleanup": False,
+            "timed_out": False,
+            "wall_seconds": 0.1,
+            "probe": {"checks": checks, "shutdown_requested": True},
+        }
+
+    monkeypatch.setattr(subprocess, "run", install)
+    monkeypatch.setattr(connector, "_run_menu_probe", probe)
+    result = connector._probe_connector_private(
+        config,
+        node=Path(sys.executable),
+        fixture=fixture,
+        retain_working_game=mode == "retain_success",
+    )
+    removed = mode == "success"
+    assert result["disposable_payload_removed_after_verified_success"] is removed
+    assert result["working_payload_retained"] is not removed
+    assert copies[0].exists() is not removed
+    assert Path(result["report_path"]).with_name("stderr.log").is_file()
+    assert Path(result["report_path"]).is_file() and save.read_text() == "synthetic native save"
+    assert result["checks"]["archive_still_valid"] and result["checks"]["shared_profile_unchanged"]
+    assert result["training_allowed"] is False

@@ -198,6 +198,43 @@ def test_unknown_interaction_revision_is_not_treated_as_the_old_projection(tmp_p
         verify_projection_inputs(qualification, document)
 
 
+def combat_projection_inputs(tmp_path: Path) -> tuple[EngineQualificationConfig, dict[str, Any]]:
+    qualification, document = projection_inputs(tmp_path)
+    document["public_projection_revision"] = "combat_v4"
+    patch = tmp_path / "patches/engine/sts2-headless-player-projection-v2.patch"
+    patch.write_text("synthetic unordered read hook")
+    document["projection"]["patch_sha256"] = _sha_file(patch)
+    for name in [
+        "engine-selection-shop-surface.mjs",
+        "probe-engine-cli-shop.mjs",
+        "engine-combat-surface.mjs",
+        "probe-engine-cli-combat.mjs",
+    ]:
+        file = tmp_path / "scripts" / name
+        file.write_text("synthetic " + name)
+        document["projection"]["helpers_sha256"][name] = _sha_file(file)
+    return qualification, document
+
+
+def test_combat_inputs_require_the_bound_unordered_read_hook(tmp_path: Path) -> None:
+    qualification, document = combat_projection_inputs(tmp_path)
+    resolved, _ = verify_projection_inputs(qualification, document)
+    assert resolved["patch"].endswith("player-projection-v2.patch")
+    document["projection"]["patch_sha256"] = _sha_file(
+        tmp_path / "patches/engine/sts2-headless-player-projection-v1.patch"
+    )
+    with pytest.raises(ValueError, match="hook patch changed"):
+        verify_projection_inputs(qualification, document)
+
+
+@pytest.mark.parametrize("dependency", ["engine-combat-surface.mjs", "probe-engine-cli-combat.mjs"])
+def test_combat_helper_changes_or_missing_pins_are_refused(tmp_path: Path, dependency: str) -> None:
+    qualification, document = combat_projection_inputs(tmp_path)
+    document["projection"]["helpers_sha256"].pop(dependency)
+    with pytest.raises(ValueError, match="dependency changed"):
+        verify_projection_inputs(qualification, document)
+
+
 def test_managed_runtime_is_bound_separately_from_the_build_sdk(tmp_path: Path) -> None:
     qualification, _ = projection_inputs(tmp_path)
     runtime = tmp_path / "artifacts/runtime"

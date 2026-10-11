@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — rest bridge and agent interface checked; wider mechanics are next
+## Current status — native combat and starting-save bridge checked; owner repeat panel is next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -21,6 +21,74 @@ matched the source, including depot metadata. Freezing took **6.046 seconds**; a
 integrity check passed in **1.411 seconds**. No old Steam app manifest was borrowed or fabricated.
 The download, frozen archive and existing v0.107.1 game remain distinct copies. Details:
 [acquisition/preservation evidence](evidence/actual-engine-v0.111.0-acquired-and-frozen-v1.json).
+
+## Current combat and startup package
+
+The current v6 host reproduces two fresh baseline and two fresh repaired binaries in
+**16.667 seconds**, leaves the official game DLL unchanged, and runs on the separately pinned
+**.NET 9.0.7** runtime. Twelve combat, nine rest and seven shop fixtures pass **841 subchecks**
+plus the separate integrity/isolation gates. All **85 canonical SDK snapshots** have complete
+metadata/action menus; 60 actions deliver and 34 deliberately invalid native inputs are refused.
+These are subchecks inside **28 privileged fixtures**, not 841 independent experiments.
+
+Combat preserves per-copy current costs, X-cost display, generated/drawn/exhausted copies,
+player/enemy status ownership and per-hit/count/total intent amounts. Native target validation
+and effects still own potion use. Hand upgrade selects the intended copy. The public pile
+projection discards native enumeration and indices before sorting public facts and opaque copy
+identities; merely labeling the original list unordered did not hide its draw order.
+
+A settings-only native profile entered the tutorial path and skipped the normal starting reward.
+The new explicit `native_all_unlocked` policy takes the game's `UnlockState.all`; it does not
+invent a local content list or silently change the historical `local_progress` default. When
+that path exposed missing current localization in the old wrapper, 92 exact tables were privately
+extracted from the frozen Godot 4.5.1 PCK V3: 46 English and 46 Simplified Chinese tables, with
+7,028 and 6,937 keys respectively. Pack, table inventory and extraction evidence are verified
+before and after each v6 probe. The pack parser follows the
+[official Godot 4.5 directory format](https://github.com/godotengine/godot/blob/4.5/core/io/file_access_pack.cpp).
+No game text/assets are committed or treated as independently qualified mechanics.
+
+The native host now optionally saves the **current room** instead of rolling back to the
+historical pre-room state. One native Ironclad/A8 Neow save imports into the shipped Host through
+its normal Continue action. **14/14 gates pass in 30.460 seconds**: native seed and A8 survive;
+offered starting option titles/availability agree; the fresh canonical snapshot is complete;
+process identity, natural exit, shared-save and game/archive integrity pass. The check compares
+those visible option facts only, not the full text/semantic payload or combat/rest/shop effects.
+The 1,090 errors and two warnings remain preserved headless diagnostics, not a clean-runtime
+claim. The successful disposable game copy was removed after verification; saves, logs, profiles
+and reports remain. Failed copies are preserved.
+
+[Combat and starting-input evidence](evidence/actual-engine-v0.111.0-combat-and-starting-inputs-v1.json)
+records the distinct source/patch/build, native text, runtime, SDK and report identities. The
+baseline AnyPlayer potion, X-cost/upgrade-copy, fresh-profile tutorial, stale localization and
+entry-path failures remain private evidence. Unknown enchantment/affliction details, companions,
+orbs and unsupported targets fail closed. Nine installed preference boundaries include a
+version-bound hand-upgrade UI seam; they do not qualify every possible selector.
+
+## One next owner command
+
+Close any running STS2 app, then run this single helper from any directory:
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-starts-v1.sh
+```
+
+It imports **six explicitly seeded native A8 starting saves twice each** into fresh shipped
+hosts. Estimate **6–8 minutes**, using the measured startup/import time; the elapsed cap is
+15 minutes. It runs one game at a time, prints each comparison, checks identical repeated-seed
+choices, retains failed cases and stops at the first failure. One disposable copy needs at least
+3.5 GB free disk. Successful payloads are removed after natural exit and integrity verification;
+reports, logs, profiles and native saves stay. The resource wrapper caps memory at 8 GB and
+batch-generated files at 4 GB. It never starts a full run or training. Rerunning a completed batch
+shows its saved summary; an interrupted batch is preserved and requires assessment before a new
+versioned launch. Codex has not run the 12-case stage.
+
+#145 stays open for shipped combat/rest/shop differential actions, modifier/expiry/relic counter
+coverage, remaining selectors and large choices, out-of-combat potions, native discounts/relic
+purchases, other public decision families, later acts and terminal conditions. After qualification,
+#146 measures complete-run speed and integrates a new A8 neural lineage. No current check admits
+training, proves exhaustive mechanics or promotes the old emulator model.
+
+The remaining sections preserve earlier prerequisite packages and their scoped results.
 
 ## Completed first native prerequisite package
 
@@ -250,11 +318,11 @@ incorrect raw-versus-visible prompt assertion remain recorded as failures.
 
 [Shop/selection evidence](evidence/actual-engine-v0.111.0-selection-shop-v1.json) binds the final
 build, runtime, hook, SDK and separate panel results. These are scoped managed native checks,
-not shipped parity or exhaustive mechanics coverage. No owner command is pending.
+not shipped parity or exhaustive mechanics coverage. No owner command was pending at that stage.
 
-Next qualify current card costs/modifiers and effect ordering, status/counter/intent ownership,
+The historical v3 package left current card costs/modifiers and effect ordering, status/counter/intent ownership,
 other selectors, native shop discounts/relic purchase effects and out-of-combat potion controls.
-Compare the named native cases against the shipped reference before admitting a new learning run.
+The current package above addresses scoped combat/startup; shipped mechanics comparisons still precede learning.
 
 Then qualify reset/seed behavior, actual A8 rules and terminal victory, complete public observations
 and refreshed legal choices, and the targeted 25–30-scenario mechanics panel. Costs/modifiers,

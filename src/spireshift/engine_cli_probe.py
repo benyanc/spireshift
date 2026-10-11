@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import tempfile
 import time
@@ -12,6 +13,7 @@ from typing import Any
 
 from spireshift.core.manifest import manifest_identifier
 from spireshift.engine_connector import _stop_child
+from spireshift.engine_localization import verify_native_localization
 from spireshift.engine_native import (
     DATA_RELATIVE,
     _failure,
@@ -67,12 +69,24 @@ def verify_local_build_report(
 def probe_cli_rest(
     qualification: EngineQualificationConfig, path: Path, node: Path, *, panel: str = "rest"
 ) -> dict[str, Any]:
-    if panel not in {"rest", "shop"}:
-        raise ValueError("Only explicitly scoped rest and shop panels are supported")
-    document = json.loads(path.read_text())
+    return _probe_cli_document(qualification, path, node, json.loads(path.read_text()), panel=panel)
+
+
+def _probe_cli_document(
+    qualification: EngineQualificationConfig,
+    path: Path,
+    node: Path,
+    document: dict[str, Any],
+    *,
+    panel: str,
+) -> dict[str, Any]:
+    if panel not in {"rest", "shop", "combat", "checkpoint"}:
+        raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
     revision = document.get("public_projection_revision", "rest_v1")
-    if revision not in {"rest_v1", "selection_shop_v2", "selection_shop_v3"} or (
+    if projected and panel in {"combat", "checkpoint"} and revision != "combat_v4":
+        raise ValueError("Combat public projection requires its explicit frozen revision")
+    if revision not in {"rest_v1", "selection_shop_v2", "selection_shop_v3", "combat_v4"} or (
         projected and panel == "shop" and revision == "rest_v1"
     ):
         raise ValueError("Unknown public interaction projection revision")
@@ -93,6 +107,12 @@ def probe_cli_rest(
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
         raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
+    if panel == "checkpoint" and (
+        not projected
+        or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
+        or document.get("content_policy") != "native_all_unlocked"
+    ):
+        raise ValueError("Checkpoint bridge requires an explicit seed and native unlock policy")
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing game before the isolated native interaction check")
@@ -107,7 +127,11 @@ def probe_cli_rest(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        "probe-engine-cli-mechanics-projection-v3.mjs"
+        "probe-engine-cli-checkpoint-projection.mjs"
+        if projected and panel == "checkpoint"
+        else "probe-engine-cli-mechanics-projection-v4.mjs"
+        if projected and revision == "combat_v4"
+        else "probe-engine-cli-mechanics-projection-v3.mjs"
         if projected and revision == "selection_shop_v3"
         else "probe-engine-cli-mechanics-projection.mjs"
         if projected and revision == "selection_shop_v2"
@@ -128,8 +152,18 @@ def probe_cli_rest(
     if projected:
         projection, sdk_before = verify_projection_inputs(qualification, document)
     runtime, runtime_before = verify_probe_runtime(qualification, document)
-    if revision in {"selection_shop_v2", "selection_shop_v3"} and runtime is None:
+    if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4"} and runtime is None:
         raise ValueError("Native selection hooks require the pinned game-matching runtime")
+    localization = (
+        verify_native_localization(qualification, document["native_localization"])
+        if "native_localization" in document
+        else None
+    )
+    if (
+        build_config.get("candidate_lineage") == "spireshift_cli_localization_v6_local_toolchain"
+        and localization is None
+    ):
+        raise ValueError("The native text host requires exact extracted game localization")
     native = load_native_qualification_config(
         qualification.root / build_config["native_config"], qualification
     )
@@ -173,6 +207,7 @@ def probe_cli_rest(
                     user_data / "Steam/steamapps",
                     user_data / "Steam/userdata",
                     candidate,
+                    *([localization] if localization is not None else []),
                 ]
             )
         )
@@ -192,6 +227,11 @@ def probe_cli_rest(
             "expected": build_config["expected_repaired"],
             "managed_runtime_version": document["managed_runtime_version"],
             "panel": panel,
+            **(
+                {"seed": document["seed"], "content_policy": document["content_policy"]}
+                if panel == "checkpoint"
+                else {}
+            ),
         }
         if projected:
             spec["projection"] = projection
@@ -201,6 +241,9 @@ def probe_cli_rest(
         environment = dict(os.environ)
         environment["DOTNET_ROLL_FORWARD"] = "LatestPatch" if runtime is not None else "Major"
         environment.pop("STS2_HEADLESS_QUIET", None)
+        environment.pop("STS2_NATIVE_LOCALIZATION", None)
+        if localization is not None:
+            environment["STS2_NATIVE_LOCALIZATION"] = str(localization)
         started = time.monotonic()
         timed_out = False
         with (attempt / "stdout.log").open("wb") as out, (attempt / "stderr.log").open("wb") as err:
@@ -223,6 +266,8 @@ def probe_cli_rest(
         probe = (
             json.loads(result_path.read_text()) if result_path.is_file() else {"status": "capped"}
         )
+        if localization is not None:
+            verify_native_localization(qualification, document["native_localization"])
         shared_after = _shared_snapshot(shared)
         archive_after = verify_game_archive(qualification, archive)
         passed_status = (
@@ -279,6 +324,11 @@ def probe_cli_rest(
                 },
                 "profile": str(profile),
                 "managed_runtime_version": document["managed_runtime_version"],
+                **(
+                    {"native_localization": document["native_localization"]}
+                    if localization is not None
+                    else {}
+                ),
                 **(
                     {"managed_runtime_inventory_id": document["managed_runtime"]["inventory_id"]}
                     if runtime is not None
@@ -337,7 +387,12 @@ def verify_projection_inputs(
     source = (
         _private_path(qualification.root, headless["path"]) / "src/managed-player-environment.mjs"
     )
-    patch = qualification.root / "patches/engine/sts2-headless-player-projection-v1.patch"
+    revision = document.get("public_projection_revision", "rest_v1")
+    patch = qualification.root / (
+        "patches/engine/sts2-headless-player-projection-v2.patch"
+        if revision == "combat_v4"
+        else "patches/engine/sts2-headless-player-projection-v1.patch"
+    )
     if _sha_file(source) != pins["source_sha256"] or _sha_file(patch) != pins["patch_sha256"]:
         raise ValueError("Rest projection source or hook patch changed")
     helpers = [
@@ -345,9 +400,10 @@ def verify_projection_inputs(
         "engine-rest-surface.mjs",
         "probe-engine-cli-rest.mjs",
     ]
-    revision = document.get("public_projection_revision", "rest_v1")
-    if revision in {"selection_shop_v2", "selection_shop_v3"}:
+    if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4"}:
         helpers.extend(["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"])
+        if revision == "combat_v4":
+            helpers.extend(["engine-combat-surface.mjs", "probe-engine-cli-combat.mjs"])
     elif revision != "rest_v1":
         raise ValueError("Unknown public interaction projection revision")
     for name in helpers:

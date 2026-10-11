@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.engine_candidate import build_cli_candidate
+from spireshift.engine_checkpoint import probe_shipped_checkpoint
 from spireshift.engine_cli_probe import probe_cli_rest
 from spireshift.engine_connector import (
     load_connector_qualification_config,
@@ -20,7 +21,9 @@ from spireshift.engine_download import (
     download_plan,
     load_engine_download_config,
 )
+from spireshift.engine_localization import extract_native_localization
 from spireshift.engine_native import (
+    _verified_archive,
     bootstrap_native_profile,
     inspect_model_registry,
     load_native_qualification_config,
@@ -34,6 +37,7 @@ from spireshift.engine_qualification import (
     verify_game_archive,
 )
 from spireshift.engine_source import inspect_game_source
+from spireshift.engine_starting_bridges import run_starting_bridges
 from spireshift.full_run_experience import atomic_json
 
 
@@ -53,10 +57,15 @@ def add_engine_parser(commands: Any) -> None:
         "model-inventory",
         "prepare-connector",
         "probe-connector-menu",
+        "probe-shipped-checkpoint",
+        "compare-starting-bridges",
         "build-cli-candidate",
         "probe-cli-rest",
         "probe-cli-shop",
+        "probe-cli-combat",
+        "probe-cli-checkpoint",
         "inspect-game-source",
+        "extract-game-text",
     ):
         command = sub.add_parser(name)
         command.add_argument("config", type=Path)
@@ -66,14 +75,22 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("native_config", type=Path)
         if name in ("prepare-connector", "probe-connector-menu"):
             command.add_argument("connector_config", type=Path)
+        if name == "compare-starting-bridges":
+            command.add_argument("bridge_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name == "probe-shipped-checkpoint":
+            command.add_argument("checkpoint_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
         if name == "probe-connector-menu":
             command.add_argument("--node", required=True, type=Path)
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
-        if name in {"probe-cli-rest", "probe-cli-shop"}:
+        if name in {"probe-cli-rest", "probe-cli-shop", "probe-cli-combat", "probe-cli-checkpoint"}:
             command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
+        if name == "extract-game-text":
+            command.add_argument("text_config", type=Path)
         if name == "inspect-game-source":
             command.add_argument("source_config", type=Path)
         if name == "download-game":
@@ -104,15 +121,26 @@ def run_engine_command(args: argparse.Namespace) -> int:
         if args.engine_command == "download-plan":
             result = download_plan(load_engine_download_config(args.downloader_config, config))
             code = 0
+        elif args.engine_command == "compare-starting-bridges":
+            result = run_starting_bridges(config, args.bridge_config, node=args.node)
+            code = 0 if result["status"] == "starting_input_comparisons_pass" else 1
+        elif args.engine_command == "probe-shipped-checkpoint":
+            result = probe_shipped_checkpoint(config, args.checkpoint_config, node=args.node)
+            code = 0 if result["verdict"]["status"] == "shipped_checkpoint_input_pass" else 1
         elif args.engine_command == "build-cli-candidate":
             result = build_cli_candidate(config, args.candidate_config, args.node)
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
-        elif args.engine_command in {"probe-cli-rest", "probe-cli-shop"}:
+        elif args.engine_command in {
+            "probe-cli-rest",
+            "probe-cli-shop",
+            "probe-cli-combat",
+            "probe-cli-checkpoint",
+        }:
             result = probe_cli_rest(
                 config,
                 args.probe_config,
                 args.node,
-                panel="shop" if args.engine_command == "probe-cli-shop" else "rest",
+                panel=args.engine_command.removeprefix("probe-cli-"),
             )
             code = (
                 0
@@ -122,9 +150,28 @@ def run_engine_command(args: argparse.Namespace) -> int:
                     "rest_public_projection_regression_pass",
                     "shop_native_regression_pass",
                     "shop_public_projection_regression_pass",
+                    "combat_native_regression_pass",
+                    "combat_public_projection_regression_pass",
+                    "checkpoint_public_projection_regression_pass",
                 }
                 else 1
             )
+        elif args.engine_command == "extract-game-text":
+            text_config = json.loads(args.text_config.read_text())
+            if (
+                text_config.get("schema_version") != "engine-native-text-config-v1"
+                or text_config.get("qualification_config_id") != config.config_id
+                or text_config.get("training_allowed") is not False
+            ):
+                raise ValueError("Expected an exact frozen native text extraction configuration")
+            native = load_native_qualification_config(
+                config.root / text_config["native_config"], config
+            )
+            archive, _ = _verified_archive(native)
+            result = extract_native_localization(
+                config, archive, Path(text_config["directory"]), text_config["pack_sha256"]
+            )
+            code = 0
         elif args.engine_command == "inspect-game-source":
             result = inspect_game_source(config, args.source_config)
             code = 0 if result["status"] == "private_source_extraction_complete" else 1
@@ -182,10 +229,10 @@ def run_engine_command(args: argparse.Namespace) -> int:
         if args.output is not None:
             atomic_json(args.output, result)
         displayed = result
-        if args.engine_command == "prepare-connector":
+        if args.engine_command in {"prepare-connector", "extract-game-text"}:
             displayed = {key: value for key, value in result.items() if key != "inventory"}
             displayed["verified_toolchain_files"] = len(result["inventory"])
-        elif args.engine_command == "probe-connector-menu":
+        elif args.engine_command in {"probe-connector-menu", "probe-shipped-checkpoint"}:
             displayed = {key: value for key, value in result.items() if key != "probe"}
         elif args.engine_command == "build-cli-candidate":
             displayed = {
@@ -196,7 +243,12 @@ def run_engine_command(args: argparse.Namespace) -> int:
             displayed["build_detail"] = {
                 key: value for key, value in result["build"].items() if key != "report"
             }
-        elif args.engine_command in {"probe-cli-rest", "probe-cli-shop"}:
+        elif args.engine_command in {
+            "probe-cli-rest",
+            "probe-cli-shop",
+            "probe-cli-combat",
+            "probe-cli-checkpoint",
+        }:
             displayed = {
                 key: value
                 for key, value in result.items()

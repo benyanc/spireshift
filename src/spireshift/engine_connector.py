@@ -296,7 +296,13 @@ def _stop_child(child: subprocess.Popen[bytes]) -> None:
 
 
 def _run_menu_probe(
-    config: ConnectorQualificationConfig, node: Path, attempt: Path, executable: Path, port: int
+    config: ConnectorQualificationConfig,
+    node: Path,
+    attempt: Path,
+    executable: Path,
+    port: int,
+    *,
+    fixture: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Native lifecycle in Python; strict official SDK in the short Node client.
 
@@ -359,8 +365,15 @@ def _run_menu_probe(
                 "connector": config.document["connector"],
                 "max_wall_seconds": cap - 15,
             }
+            if fixture is not None:
+                spec["fixture"] = fixture
+            helper = (
+                "engine-checkpoint-shipped-probe.mjs"
+                if fixture is not None
+                else "engine-menu-probe.mjs"
+            )
             client = subprocess.run(
-                [str(node), str(config.qualification.root / "scripts/engine-menu-probe.mjs")],
+                [str(node), str(config.qualification.root / "scripts" / helper)],
                 input=json.dumps(spec),
                 text=True,
                 capture_output=True,
@@ -375,7 +388,9 @@ def _run_menu_probe(
         finally:
             forced = child.poll() is None
             _stop_child(child)
-    result_path = attempt / "menu-control.json"
+    result_path = attempt / (
+        "checkpoint-control.json" if fixture is not None else "menu-control.json"
+    )
     probe = (
         json.loads(result_path.read_text())
         if result_path.is_file()
@@ -418,6 +433,19 @@ def evaluate_connector_menu(checks: dict[str, Any]) -> dict[str, Any]:
 
 
 def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) -> dict[str, Any]:
+    return _probe_connector_private(config, node=node)
+
+
+def _probe_connector_private(
+    config: ConnectorQualificationConfig,
+    *,
+    node: Path,
+    fixture: dict[str, Any] | None = None,
+    retain_working_game: bool = True,
+) -> dict[str, Any]:
+    """One copied shipped host; optional fixture is already bound by the checkpoint verifier."""
+    if type(retain_working_game) is not bool or (not retain_working_game and fixture is None):
+        raise ValueError("Disposable payload removal requires an explicit checkpoint fixture")
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing STS2 game before the short Connector check")
@@ -429,9 +457,15 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
     user_data = Path.home() / "Library/Application Support"
     shared = user_data / "SlayTheSpire2"
     before = _shared_snapshot(shared)
-    workspace = config.private("workspace")
+    workspace = (
+        _private_path(config.qualification.root, fixture["workspace"])
+        if fixture is not None and "workspace" in fixture
+        else config.private("workspace")
+    )
     workspace.mkdir(parents=True, exist_ok=True)
-    attempt = Path(tempfile.mkdtemp(prefix="menu-", dir=workspace))
+    attempt = Path(
+        tempfile.mkdtemp(prefix="checkpoint-" if fixture is not None else "menu-", dir=workspace)
+    )
     atomic_json(
         attempt / "in-progress.json", {"config_id": config.config_id, "training_allowed": False}
     )
@@ -453,6 +487,14 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
         settings = profile / "default/1/settings.save"
         settings.parent.mkdir(parents=True)
         shutil.copy2(template, settings)
+        if fixture is not None:
+            checkpoint = Path(fixture["checkpoint_path"])
+            if _sha_file(checkpoint) != fixture["checkpoint_sha256"]:
+                raise ValueError("Native checkpoint changed before the disposable host copy")
+            # The exact game's RunSaveManager/UserDataPathProvider use this modded namespace.
+            destination = profile / "default/1/modded/profile1/saves/current_run.save"
+            destination.parent.mkdir(parents=True)
+            shutil.copy2(checkpoint, destination)
         consent = _enable_mod_settings(settings, config.native.document["settings_schema"])
         override = executable.parent / "override.cfg"
         override.write_text(_profile_override(profile_name), encoding="utf-8")
@@ -508,7 +550,11 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
             capture_output=True,
             check=True,
         )
-        process = _run_menu_probe(config, node, attempt, executable, port)
+        process = (
+            _run_menu_probe(config, node, attempt, executable, port, fixture=fixture)
+            if fixture is not None
+            else _run_menu_probe(config, node, attempt, executable, port)
+        )
         stdout = (attempt / "stdout.log").read_text(errors="replace")
         stderr = (attempt / "stderr.log").read_text(errors="replace")
         after = _shared_snapshot(shared)
@@ -528,10 +574,23 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
             and not process["timed_out"]
             and probe.get("shutdown_requested") is True,
         }
+        verdict = (
+            _evaluate_connector_checkpoint(checks)
+            if fixture is not None
+            else evaluate_connector_menu(checks)
+        )
+        removed_payload = False
+        if not retain_working_game and verdict["status"] == "shipped_checkpoint_input_pass":
+            # Only this attempt's generated payload; reports, logs, profile and source stay.
+            # All integrity checks and natural child shutdown already passed above.
+            shutil.rmtree(game)
+            removed_payload = True
         return _finish(
             attempt,
             {
-                "schema_version": "engine-connector-menu-v1",
+                "schema_version": "engine-connector-checkpoint-v1"
+                if fixture is not None
+                else "engine-connector-menu-v1",
                 "config_id": config.config_id,
                 "qualification_config_id": config.qualification.config_id,
                 "archive_id": record["archive_id"],
@@ -539,7 +598,7 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
                 "archive_verification_after": archive_after["report_id"],
                 "toolchain_report_id": toolchain["report_id"],
                 "bootstrap_report_id": template_report["report_id"],
-                "verdict": evaluate_connector_menu(checks),
+                "verdict": verdict,
                 "checks": checks,
                 "process": process,
                 "probe": probe,
@@ -547,6 +606,8 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
                 "profile_settings_consent": consent,
                 "shared_profile_sentinel": {"before": before, "after": after},
                 "working_inventory_id": manifest_identifier(expected_working),
+                "working_payload_retained": not removed_payload,
+                "disposable_payload_removed_after_verified_success": removed_payload,
                 "diagnostics": {
                     "error_lines": len(re.findall(r"^ERROR:", stderr, re.MULTILINE)),
                     "warning_lines": len(re.findall(r"^WARNING:", stderr, re.MULTILINE)),
@@ -560,9 +621,37 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
                 "optimizer_steps": 0,
                 "mechanics_qualified": False,
                 "training_allowed": False,
-                "claim_scope": "shipped_public_menu_transition_and_control_only",
+                "claim_scope": "single_native_checkpoint_shipped_public_input_only"
+                if fixture is not None
+                else "shipped_public_menu_transition_and_control_only",
             },
         )
     except BaseException as error:
         _failure(attempt, error)
         raise
+
+
+def _evaluate_connector_checkpoint(checks: dict[str, Any]) -> dict[str, Any]:
+    required = (
+        "loaded_identity",
+        "endpoint_owned_by_child",
+        "native_continue_offered",
+        "native_checkpoint_loaded",
+        "complete_public_starting_event",
+        "native_A8_seed_preserved",
+        "same_starting_public_option_titles_and_availability",
+        "profile_path_logged",
+        "steam_disabled_observed",
+        "shared_profile_unchanged",
+        "working_game_unchanged",
+        "archive_still_valid",
+        "template_unchanged",
+        "natural_shutdown",
+    )
+    errors = [key for key in required if checks.get(key) is not True]
+    return {
+        "status": "shipped_checkpoint_input_pass"
+        if not errors
+        else "shipped_checkpoint_input_incomplete",
+        "errors": errors,
+    }

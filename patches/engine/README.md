@@ -125,3 +125,47 @@ panels. Eight installed observation boundaries are not an exhaustive mechanics p
 ```bash
 node --test scripts/engine-selection-shop-surface.test.mjs
 ```
+
+## Current combat, content and exact-text host
+
+`sts2-cli-v0.111.0-localization-v6.patch` is the current combined local delta over the
+unchanged pinned base patch. It includes the earlier rest/shop/selection fixes, combat
+bindings, explicit native content policy and exact-text override. Apply **one** local delta;
+do not stack v2/v3/v4/v5/v6. The v4 combat and v5 content deltas remain reconstruction
+history, with their own candidate and failed/scoped reports.
+
+The v6 host preserves native per-copy costs, X-cost identity, targeted potion validation,
+hand upgrade operands and selection copy references. It installs nine observed selection
+boundaries. `FromHandForUpgrade` has no `CardSelectorPrefs` argument: that boundary uses the
+version-bound native UI contract with an explicit one-card upgrade preference. This is a
+documented UI seam, not a claim of observing a parameter that does not exist. Native card
+effects, target legality and tasks still run; a shipped comparison remains required.
+
+`sts2-headless-player-projection-v2.patch` replaces the v1 hook on the same upstream source.
+It adds an optional read projector without changing historical defaults. Current combat
+reads use `engine-combat-surface.mjs` to remove hidden pile enumeration/indices and sort
+public facts and opaque copy identities. Current cost, status amount and intent hit/count/
+total facts retain their public owner. Missing modifier definitions or unqualified companion,
+orb or target semantics produce unavailable actions rather than a guessed menu.
+
+The fresh-profile tutorial route and old bundled text were separate startup defects.
+`native_all_unlocked` explicitly uses the game-owned `UnlockState.all`; historical
+`local_progress` stays the default. `STS2_NATIVE_LOCALIZATION` points only at privately
+extracted, hash-verified text from the exact pack, checked before/after v6 probes. The
+host can optionally call the game's current-room save path for a Continue fixture; the
+historical pre-room save behavior remains available.
+
+[Current build](../../configs/engine-qualification/sts2-v0.111.0-cli-build-localization-v6.json)
+and [public evidence](../../docs/evidence/actual-engine-v0.111.0-combat-and-starting-inputs-v1.json)
+bind all source/runtime/text/SDK identities. The 28 named combat/rest/shop fixtures pass
+841 subchecks with 85 SDK snapshots; one native A8 starting save passes 14 shipped startup
+gates. Neither result establishes full-run parity, exhaustive mechanic coverage or training
+admission. The owner repeat-seed panel is separate and has not been launched.
+
+Historical configs intentionally refuse changed helper bytes. Their exact prior versions
+are retained beside private attempts; reconstruction must restore those hashes rather than
+reuse a current helper under an old result identity. No proprietary extraction is committed.
+
+```bash
+node --test scripts/engine-combat-surface.test.mjs scripts/engine-checkpoint-shipped-probe.test.mjs
+```
