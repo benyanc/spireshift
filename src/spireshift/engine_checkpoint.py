@@ -24,7 +24,7 @@ def _saved_private_path(qualification: EngineQualificationConfig, value: str) ->
 def verify_checkpoint_input(
     qualification: EngineQualificationConfig, document: dict[str, Any], *, panel: str = "checkpoint"
 ) -> dict[str, Any]:
-    if panel not in {"checkpoint", "journey"}:
+    if panel not in {"checkpoint", "journey", "rest_bridge"}:
         raise ValueError("Unknown native checkpoint qualification scope")
     report = json.loads(
         _private_path(qualification.root, document["checkpoint_report"]).read_text()
@@ -53,7 +53,12 @@ def verify_checkpoint_input(
         or not all(value is True for value in checks.values())
         or report.get("training_allowed") is not False
         or checkpoint.get("ascension") != 8
-        or checkpoint.get("content_policy") != "native_all_unlocked"
+        or checkpoint.get("content_policy")
+        != (
+            "serialized_native_privileged_rest_fixture"
+            if panel == "rest_bridge"
+            else "native_all_unlocked"
+        )
         or checkpoint.get("seed") != document.get("seed")
     ):
         raise ValueError("An exact completed native A8 checkpoint qualification is required")

@@ -368,7 +368,9 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-journey-shipped-probe-v4.mjs"
+                "engine-rest-shipped-probe.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v1"
+                else "engine-journey-shipped-probe-v4.mjs"
                 if fixture is not None and fixture.get("shipped_ui_revision") == "tutorial_v4"
                 else "engine-journey-shipped-probe-v3.mjs"
                 if fixture is not None and fixture.get("shipped_ui_revision") == "tutorial_v3"
@@ -490,7 +492,7 @@ def _probe_connector_private(
         profile_name = f"SpireShift/engine-profiles/{archive_name}-{attempt.name}"
         profile = user_data / profile_name
         _no_symlinks(profile)
-        # Fresh settings-only profile, no copied progress/unlocks/saves.
+        # Fresh settings-only profile; explicitly scoped fixture inputs are copied below.
         profile.mkdir(parents=True)
         settings = profile / "default/1/settings.save"
         settings.parent.mkdir(parents=True)
@@ -503,7 +505,26 @@ def _probe_connector_private(
             destination = profile / "default/1/modded/profile1/saves/current_run.save"
             destination.parent.mkdir(parents=True)
             shutil.copy2(checkpoint, destination)
+            if "rest_tutorial_baseline" in fixture:
+                if fixture.get("comparison_mode") != "rest_bridge_v1":
+                    raise ValueError(
+                        "The rest tutorial baseline is scoped to the privileged rest fixture"
+                    )
+                baseline = fixture["rest_tutorial_baseline"]
+                progress = _private_path(config.qualification.root, baseline["path"])
+                progress_body = json.loads(progress.read_text())
+                if (
+                    _sha_file(progress) != baseline["sha256"]
+                    or progress_body.get("ftue_completed") != ["rest_site_ftue"]
+                    or progress_body.get("enable_ftues") is not True
+                ):
+                    raise ValueError(
+                        "Expected the unchanged native-generated rest-tutorial-seen profile"
+                    )
+                shutil.copy2(progress, destination.with_name("progress.save"))
         consent = _enable_mod_settings(settings, config.native.document["settings_schema"])
+        if fixture is not None and "rest_tutorial_baseline" in fixture:
+            consent["rest_tutorial_baseline"] = fixture["rest_tutorial_baseline"]
         override = executable.parent / "override.cfg"
         override.write_text(_profile_override(profile_name), encoding="utf-8")
         installation = subprocess.run(
@@ -584,7 +605,9 @@ def _probe_connector_private(
         }
         verdict = (
             _evaluate_connector_checkpoint(
-                checks, journey=fixture.get("comparison_mode") in {"journey_v1", "journey_v2"}
+                checks,
+                journey=fixture.get("comparison_mode") in {"journey_v1", "journey_v2"},
+                rest_bridge=fixture.get("comparison_mode") == "rest_bridge_v1",
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -642,8 +665,10 @@ def _probe_connector_private(
 
 
 def _evaluate_connector_checkpoint(
-    checks: dict[str, Any], *, journey: bool = False
+    checks: dict[str, Any], *, journey: bool = False, rest_bridge: bool = False
 ) -> dict[str, Any]:
+    if journey and rest_bridge:
+        raise ValueError("Do not merge separately scoped combat and rest comparisons")
     required: tuple[str, ...] = (
         "loaded_identity",
         "endpoint_owned_by_child",
@@ -660,6 +685,22 @@ def _evaluate_connector_checkpoint(
         "template_unchanged",
         "natural_shutdown",
     )
+    if rest_bridge:
+        required = tuple(
+            name
+            for name in required
+            if name
+            not in {
+                "complete_public_starting_event",
+                "same_starting_public_option_titles_and_availability",
+            }
+        ) + (
+            "complete_public_rest_fixture",
+            "rest_all_snapshots_match",
+            "rest_all_actions_delivered",
+            "rest_final_map_observed",
+            "rest_heal_and_upgrade_observed",
+        )
     if journey:
         required += (
             "journey_all_snapshots_match",

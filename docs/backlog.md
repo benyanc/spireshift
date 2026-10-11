@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after the owner's 12-case startup panel and short first-combat comparisons.
+Updated 2026-10-11 after the owner's eight-case first-combat panel and short rest comparisons.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -27,7 +27,14 @@ build and runtime identities. All **841 subchecks across 28 combat/rest/shop nat
 were rerun on v7 and pass, with **85 SDK snapshots**, 60 delivered actions and 34 invalid inputs
 refused. These privileged regressions are not training examples or shipped parity evidence.
 
-**Two first-combat smoke comparisons pass on one seed.** Winged Boots and Dowsing Rod prefixes
+**The owner first-combat panel passes: 8/8 cases, zero failures.** Two seeds, Winged Boots and
+Dowsing Rod, each repeated twice: **two independent seeds and four seed/choice pairs**. The
+60 compared observations, 52 gameplay actions and 24 tutorial steps were independently checked
+against raw saved observations and delivery records without launching games. The batch took
+406.247 seconds. Starting reward, Proceed, first combat, card plays, End Turn and the next hand/
+enemy state agree within the frozen scope. Historical one-seed smoke results remain preserved.
+
+Winged Boots and Dowsing Rod prefixes
 match through Proceed, first combat, card plays, End Turn and the next hand/enemy state. Current
 legal actions, costs, HP, energy, owned statuses, intents and pile counts match; incomplete/unknown
 public fields fail. The three native tutorial buttons are separately counted and must leave the
@@ -37,16 +44,35 @@ this scope. Successful copies were removed after verification; all failures and 
 remain. [Current evidence](evidence/actual-engine-v0.111.0-starting-and-first-combat-v1.json) preserves
 historical identities and results.
 
-**Next owner stage: eight repeated first-combat checks.** Run only
-`bash scripts/compare-first-combat-v1.sh`, linked with an absolute command in the actual-engine
-guide. Two seeds, two choices each, twice: **two independent seeds and four choice pairs**.
-Estimate **6–8 minutes**, with a **15-minute cap**, one game at a time, 8 GB memory and 4 GB
+**Rest save loading repaired; two shipped rest comparisons pass.** The old wrapper used
+`EnterAct` when loading a save, losing the saved room/history. The separately pinned combined
+v8 patch uses the official saved-run entry sequence; the game DLL stays unchanged. Two fresh
+baseline/two repaired builds reproduce in 16.160 seconds. All 841 combat/rest/shop subchecks
+were rerun on v8 and pass. This does not qualify every saved-run resume state.
+
+An explicit single-card/25-HP/Miniature Tent fixture heals, cancels/reopens Smith, upgrades and
+uses Proceed. Healing reaches 49 HP; both action orders preserve the correct remaining choices
+and upgraded-card flag. Seven observations and six effect decisions agree per smoke; the shipped
+UI takes seven actions because selecting a card opens a separate confirmation preview. That
+extra step is recorded and checked for unchanged game facts before committing. The two shipped
+processes took 55.886 and 51.425 seconds. This is injected mechanics evidence, not natural room
+reach or player quality. The fresh rest tutorial is unsupported by the released Host; the test
+uses isolated native-generated progress that has seen only that tutorial. Other tutorials remain
+enabled, and its source profile/report/copy are bound and verified. Unknown controls and stale
+actions remain failures. [New evidence](evidence/actual-engine-v0.111.0-first-combat-and-rest-v1.json)
+records these scopes, repairs and preserved failures.
+
+**Next owner stage: eight repeated rest checks.** Run only
+`bash scripts/compare-rest-v1.sh`, linked with an absolute command in the actual-engine guide.
+Two seeds, two rest action orders, twice: **two independent seeds and four seed/sequence pairs**.
+Estimate **8–10 minutes**, with a **15-minute cap**, one game at a time, 8 GB memory and 4 GB
 artifact limits. The first divergence stops the batch and is counted; successful payloads are
 removed only after natural exit/integrity verification. Reports/logs/profiles/saves remain.
 A completed rerun displays saved results; partial work never restarts silently. Codex has not
 launched the batch. It performs no full runs or training.
 
-**Remaining under #145:** assess the repeated combat panel, compare shipped rest/shop actions,
+**Remaining under #145:** assess the repeated rest panel, control the fresh rest tutorial,
+compare broader shipped rest/shop actions,
 qualify full modifier/expiry/relic-counter facts, remaining selection/reward families and large
 choice spaces, out-of-combat potions, native discounts/relic purchases, other public decisions,
 later-act advancement and actual endings. The model registry is not exhaustive reachable-state
@@ -247,7 +273,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; 12 starting comparisons, two combat smokes and 28 v7 native fixtures pass | Owner repeats eight first-combat prefixes; then qualify remaining public mechanics, shipped rest/shop actions and ending semantics. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; 12 starting and eight first-combat comparisons, two rest smokes and 28 v8 native fixtures pass | Owner repeats eight scoped rest fixtures; then qualify fresh rest tutorials, broader rest/shop/public mechanics and ending semantics. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

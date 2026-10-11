@@ -23,6 +23,7 @@ from spireshift.engine_download import (
 )
 from spireshift.engine_journey import probe_shipped_journey
 from spireshift.engine_journey_bridges import run_journey_bridges
+from spireshift.engine_journey_verification import verify_journey_bridges
 from spireshift.engine_localization import extract_native_localization
 from spireshift.engine_native import (
     _verified_archive,
@@ -38,6 +39,7 @@ from spireshift.engine_qualification import (
     steam_download_command,
     verify_game_archive,
 )
+from spireshift.engine_rest_bridge import compare_rest_bridge, compare_rest_bridges
 from spireshift.engine_source import inspect_game_source
 from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
 from spireshift.full_run_experience import atomic_json
@@ -64,12 +66,16 @@ def add_engine_parser(commands: Any) -> None:
         "compare-starting-bridges",
         "verify-starting-bridges",
         "compare-journey-bridges",
+        "verify-journey-bridges",
+        "compare-rest-bridge",
+        "compare-rest-bridges",
         "build-cli-candidate",
         "probe-cli-rest",
         "probe-cli-shop",
         "probe-cli-combat",
         "probe-cli-checkpoint",
         "probe-cli-journey",
+        "probe-cli-rest-bridge",
         "inspect-game-source",
         "extract-game-text",
     ):
@@ -85,9 +91,18 @@ def add_engine_parser(commands: Any) -> None:
             "compare-starting-bridges",
             "verify-starting-bridges",
             "compare-journey-bridges",
+            "verify-journey-bridges",
+            "compare-rest-bridge",
+            "compare-rest-bridges",
         }:
             command.add_argument("bridge_config", type=Path)
-        if name in {"compare-starting-bridges", "compare-journey-bridges"}:
+        if name in {
+            "compare-starting-bridges",
+            "compare-journey-bridges",
+            "verify-journey-bridges",
+            "compare-rest-bridge",
+            "compare-rest-bridges",
+        }:
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-shipped-checkpoint":
             command.add_argument("checkpoint_config", type=Path)
@@ -106,6 +121,7 @@ def add_engine_parser(commands: Any) -> None:
             "probe-cli-combat",
             "probe-cli-checkpoint",
             "probe-cli-journey",
+            "probe-cli-rest-bridge",
         }:
             command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
@@ -150,6 +166,20 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "compare-journey-bridges":
             result = run_journey_bridges(config, args.bridge_config, node=args.node)
             code = 0 if result["status"] == "first_combat_comparisons_pass" else 1
+        elif args.engine_command == "verify-journey-bridges":
+            result = verify_journey_bridges(config, args.bridge_config, node=args.node)
+            code = 0
+        elif args.engine_command in {"compare-rest-bridge", "compare-rest-bridges"}:
+            result = (
+                compare_rest_bridge
+                if args.engine_command == "compare-rest-bridge"
+                else compare_rest_bridges
+            )(config, args.bridge_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"rest_action_comparison_pass", "rest_comparisons_pass"}
+                else 1
+            )
         elif args.engine_command == "probe-shipped-checkpoint":
             result = probe_shipped_checkpoint(config, args.checkpoint_config, node=args.node)
             code = 0 if result["verdict"]["status"] == "shipped_checkpoint_input_pass" else 1
@@ -165,12 +195,13 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-combat",
             "probe-cli-checkpoint",
             "probe-cli-journey",
+            "probe-cli-rest-bridge",
         }:
             result = probe_cli_rest(
                 config,
                 args.probe_config,
                 args.node,
-                panel=args.engine_command.removeprefix("probe-cli-"),
+                panel=args.engine_command.removeprefix("probe-cli-").replace("-", "_"),
             )
             code = (
                 0
@@ -178,6 +209,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
                 in {
                     "rest_native_regression_pass",
                     "rest_public_projection_regression_pass",
+                    "rest_bridge_public_projection_regression_pass",
                     "journey_public_projection_regression_pass",
                     "shop_native_regression_pass",
                     "shop_public_projection_regression_pass",
@@ -284,6 +316,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-combat",
             "probe-cli-checkpoint",
             "probe-cli-journey",
+            "probe-cli-rest-bridge",
         }:
             displayed = {
                 key: value

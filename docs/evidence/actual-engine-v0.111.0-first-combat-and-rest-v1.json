@@ -1,0 +1,204 @@
+{
+  "schema_version": "engine-scoped-qualification-evidence-v1",
+  "recorded_at": "2026-10-11",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "game_version": "v0.111.0",
+  "game_commit": "41cef1ea",
+  "character": "Ironclad",
+  "ascension": 8,
+  "training_allowed": false,
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "shipped_cross_host_parity": false,
+  "completed_first_combat_panel": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/first-combat-bridges-v1/batch.json",
+    "report_id": "sha256:7fc6aaa51ae8cb3812cc57fa998a284b861afd871b6278712606ebab6b14f66a",
+    "config_id": "sha256:a3fde76028f2b1d2b12e9bd7ae10d4c9836a73ba3b24c215e0c7f2cbd7eb9769",
+    "completed_cases": 8,
+    "failed_cases": 0,
+    "not_attempted_cases": 0,
+    "independent_seeds": 2,
+    "seed_option_pairs": 4,
+    "compared_snapshots": 60,
+    "public_actions_delivered": 52,
+    "tutorial_steps": 24,
+    "wall_seconds": 406.2474857500056,
+    "saved_verification": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/first-combat-bridges-v1/saved-verification-v2.json",
+      "report_id": "sha256:9eedce35771db56f22f35b3ebc0672a85104dee5372f0e9f66d3c4bac48ef8f9",
+      "config_id": null
+    },
+    "resource_report": {
+      "path": "artifacts/resources/first-combat-comparisons-v1.json",
+      "report_id": "sha256:442f228061fd6f25f2f522cc10571a4dd4efd1b7edf6b365e2933a35836b1df0",
+      "config_id": null
+    },
+    "scope": "scoped_first_turn_only_not_effect_text_preview_stats_relic_counters_or_full_map_piles_later_turns_or_terminal"
+  },
+  "v8_save_restore_repair": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-save-restore-v8.json",
+    "report_id": "sha256:726e903f1c777c20070ee7ef341184f93299fa6d8380453312651d117c805285",
+    "config_id": "sha256:d319588558c9786d5d73eeefc5d113917010bd82f52b09e49f5f20080c6b6c12",
+    "build_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-save-restore-v8.json",
+    "patch": "patches/engine/sts2-cli-v0.111.0-save-restore-v8.patch",
+    "reason": "LoadSave formerly used EnterAct and lost saved room/history; use the official Launch/GenerateMap/LoadIntoLatestMapCoord lifecycle",
+    "native_rest_resume_checked": true,
+    "general_saved_run_parity": false,
+    "official_game_assembly_unchanged": true
+  },
+  "v8_privileged_regressions": {
+    "independent_fixtures": 28,
+    "subchecks": 841,
+    "sdk_snapshots": 85,
+    "delivered_actions": 60,
+    "invalid_native_inputs": 34,
+    "reports": [
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-combat-projection-save-restore-v8.json",
+        "report_id": "sha256:260b0314c88c794ab2915904de505f54cb92f9563adfe20462a984c01053747e",
+        "config_id": "sha256:704db03777c747269a46b87e3adb5108428e9529a38d4761842b9943d3351d5f"
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-rest-projection-save-restore-v8.json",
+        "report_id": "sha256:2a3fffbfc50ec811b53ac8a707a93471515252dbeb363e310a124d90cc26306f",
+        "config_id": "sha256:b02c81761e60604317e4ad29d3ca5db31c54a5627e6743097d9193cb55fdbbe2"
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-shop-projection-save-restore-v8.json",
+        "report_id": "sha256:7ea2deb23e5b1875efe767e3c17e92b16abc7fbfd0c9004a06f393df4f15d7dd",
+        "config_id": "sha256:5c96516afc0c40efb059c7c5b954bd9ade07a80cbacfcf07bdf8050801dbae97"
+      }
+    ],
+    "scope": "privileged_native_regressions_not_shipped_mechanics_parity"
+  },
+  "rest_smokes": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v7/comparison.json",
+      "report_id": "sha256:249c0b0aa15df35242913fb7fb7b3a77ff4812fbe61b6999a9e893be6246eaf2",
+      "config_id": "sha256:728d00e2318a0f185bf6f377db1cd6df09adc5e0eb0d59130d879abd5d33bb56",
+      "seed": "SPIRESHIFTRESTBRIDGE003",
+      "scenario": "tent-heal-cancel-smith",
+      "status": "rest_action_comparison_pass",
+      "compared_snapshots": 7,
+      "semantic_actions_delivered": 6,
+      "shipped_public_actions_delivered": 7,
+      "extra_upgrade_ui_steps": 1,
+      "shipped_process_seconds": 55.88551333401119,
+      "native_process_seconds": 4.889878083020449,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v7/native-report.json",
+        "report_id": "sha256:cfac35007583c8235e0f876de410e268686f284c57643520afa7d5edec0d6d2a",
+        "config_id": "sha256:d49fe345cf03a2ce772e53e9cea0f27639441513825088fec5e625708f054b7c"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v7/shipped-report.json",
+        "report_id": "sha256:55fa8a7497a5b36ec965756473f7a09a055adc9b14254f103b1779b17afb51cf",
+        "config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd"
+      },
+      "verified_successful_payload_removed": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v8/comparison.json",
+      "report_id": "sha256:23ef2b742156e8f0127b648ed2138c5236fd6d9f2362395330bb6aae038b941c",
+      "config_id": "sha256:b3632fff110bf434775be05d7076b64cad35fbe93a4b5620b4fe1252879d31a4",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-smith-cancel-heal",
+      "status": "rest_action_comparison_pass",
+      "compared_snapshots": 7,
+      "semantic_actions_delivered": 6,
+      "shipped_public_actions_delivered": 7,
+      "extra_upgrade_ui_steps": 1,
+      "shipped_process_seconds": 51.42518137500156,
+      "native_process_seconds": 3.5595316250110045,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v8/native-report.json",
+        "report_id": "sha256:8585cacd58d4815fefdb6a3ed98b8f2efd5e30e02926f922ed8962372fb9fe67",
+        "config_id": "sha256:c9b7189c497d498fe852fd963df30d562083755d40b5b6e6dfceb9fe67382e4f"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v8/shipped-report.json",
+        "report_id": "sha256:7a336ecaebbfe09b8e922860b5b7e1bb98e7cd94636d1287e64f21fc8f9763c1",
+        "config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd"
+      },
+      "verified_successful_payload_removed": true
+    }
+  ],
+  "rest_scope": {
+    "fixture": "serialized_privileged_native_A8_single_card_STRIKE_IRONCLAD_HP25_MAX80_MINIATURE_TENT_initial_map_point_changed_to_rest",
+    "required_public_facts": [
+      "run act/floor/ascension",
+      "player HP/max HP/gold/relic definitions",
+      "public deck definition/current cost/upgraded flag",
+      "remaining rest options/index/enablement/Proceed",
+      "single upgrade candidate/min/max/cancelability",
+      "effect-relevant upgrade choice/cancel menu",
+      "preview cost/upgrade flag/selected card and uncommitted public game facts",
+      "next map options after explicit Proceed"
+    ],
+    "presentation_difference": "native atomic upgrade vs shipped select/preview/confirm; the extra select step and full raw menus are retained",
+    "not_qualified": [
+      "naturally reached rest sites",
+      "fresh rest tutorial controls",
+      "other rest relics/options",
+      "multiple-card duplicate identity/upgrade pickers",
+      "effect text/card preview stats",
+      "preview-toggle execution or preview-back execution",
+      "full runs or useful model strength"
+    ]
+  },
+  "preserved_gaps": {
+    "fresh_rest_tutorial": {
+      "source_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v2/shipped-report.json",
+        "report_id": "sha256:f05e17b87f8846a299ede50e7aafbbba89dd5cd5df797c2184c9875cd0bcde4b",
+        "config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd"
+      },
+      "reason": "released Host marks the visible rest tutorial unsupported and offers no bound controls",
+      "isolated_baseline": "native-generated rest_site_ftue already-seen progress; all other tutorials remain enabled; source report/profile and copied bytes verified"
+    },
+    "rest_schema_aliases": [
+      "can_leave/can_proceed",
+      "is_enabled/enabled",
+      "operand-free native close vs exact shipped Proceed to map activate"
+    ],
+    "upgrade_ui": "shipped deck_upgrade_selection exposes select/preview/confirm instead of native atomic card_selection confirmation",
+    "stale_after_cancel": "rest-bridge-smoke-v6 safely refused a stale observation; the next helper requires unchanged complete snapshots for 600 ms before selection",
+    "failed_attempt_configs": "configs/engine-qualification/sts2-v0.111.0-rest-bridge-smoke-v1..v6.json; all raw failures and copied payloads stay private"
+  },
+  "owner_next": {
+    "script": "scripts/compare-rest-v1.sh",
+    "config": "configs/engine-qualification/sts2-v0.111.0-rest-bridges-v1.json",
+    "config_id": "sha256:8f1842effadc1be6ad5b3858c5cbe5ecbff57ea4bf4fd2770a6eb1d63c8285d1",
+    "planned_cases": 8,
+    "independent_seeds": 2,
+    "seed_scenario_pairs": 4,
+    "repeats_per_pair": 2,
+    "expected_minutes": "8-10",
+    "max_wall_seconds": 900,
+    "max_cpu_seconds": 1800,
+    "max_memory_bytes": 8000000000,
+    "max_storage_bytes": 4000000000,
+    "minimum_free_disk_bytes": 3500000000,
+    "launched_by_codex": false,
+    "no_automatic_followup": true
+  },
+  "native_remaining_pairs_preflight": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-native-preflight-v1/seed-03-smith/report.json",
+      "report_id": "sha256:7fcd342bc109b2c65c5aefa5578a821fb6d41ba09c6e2064f5ab2f88aee63cd1",
+      "config_id": "sha256:e3037e8aa9ae367cb199c62ccdd9ec3d026ca385ee1fdfd400d3a396753c6fe6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-native-preflight-v1/seed-06-heal/report.json",
+      "report_id": "sha256:49522ce49fd7ef060222a11579c9fbff039fe711ba5e24d39c8c107ec8147380",
+      "config_id": "sha256:24ace16d246681f4c0da9106458561f05c0e4a9033c011b0047f59c51622000b"
+    }
+  ],
+  "verification": {
+    "repository_tests": 1058,
+    "standalone_node_tests": 61,
+    "format_types_and_csharp_protocol": "passed",
+    "games_in_portable_tests": 0
+  },
+  "evidence_id": "sha256:973b184f4718f3e07a971f1008c74a6b79d99828645a8c3a86ad3034be55aec1"
+}

@@ -202,10 +202,48 @@ control, ignores Previous Page and checks underlying public combat facts before/
 click. It never fabricates legal gameplay actions while the modal is open. Unknown tutorials fail.
 The skipped-Proceed and earlier tutorial-helper failures remain preserved with separate identities.
 
-Two single-seed/choice comparisons pass through card plays and the fresh second turn. The next
-owner recipe repeats two seeds and two choices twice (eight cases, two independent seeds).
-It does not start full runs or learning; #145 remains open for broader shipped mechanics.
+Two single-seed/choice comparisons passed through card plays and the fresh second turn. The owner
+subsequently completed eight repeated cases with zero failures, two independent seeds and four
+seed/choice pairs. A pure saved-data audit rechecked 60 observations, 52 actions and 24 tutorial
+steps against the raw public snapshots without launching games.
 
 ```bash
 node --test scripts/engine-journey-contract*.test.mjs scripts/engine-journey-tutorial*.test.mjs
+```
+
+## Current saved-run restoration and rest action comparison
+
+`sts2-cli-v0.111.0-save-restore-v8.patch` replaces v7 on the same pinned base. Apply one combined
+local delta, not stacked v7/v8 patches. The rules DLL remains unchanged. `LoadSave` formerly used
+`EnterAct`, resetting saved map/room/history state; v8 follows the actual game's saved-run lifecycle
+with `Launch`, `GenerateMap` and `LoadIntoLatestMapCoord` plus the serialized previous room.
+This is verified on the named rest resume; it does not establish all saved-run parity.
+
+[V8 build pins](../../configs/engine-qualification/sts2-v0.111.0-cli-build-save-restore-v8.json)
+bind the combined patch/source diff, compiler, two reproducible baseline/two repaired outputs,
+MVID, runtime, Godot stub and game DLL. Builds took 16.160 seconds. V8's 28 native combat/rest/shop
+fixtures were independently rerun: 841 subchecks, 85 SDK snapshots, 60 delivered actions and
+34 refused invalid inputs pass. They remain privileged regressions, not bulk learning inputs.
+
+The rest bridge intentionally injects a single-card Miniature Tent fixture into a native save,
+resumes it in a fresh managed process and imports the same save into the shipped Host via Continue.
+Two short comparisons pass heal-before-Smith and Smith-before-heal on different seeds, including
+cancel/reopen, actual upgrade confirmation, remaining choices and explicit Proceed. Healing is
+25→49 HP. The native wrapper confirms a selected card atomically; the shipped UI selects, previews
+and confirms. The extra UI step is recorded and must not mutate public game facts before commit.
+Only the observed operand-free Proceed control and boolean rest schema spellings are normalized.
+The single-card effect-menu normalization refuses unknown controls or multiple-card fixtures.
+Raw complete menus are retained; preview-toggle/back execution and effect text/stats remain outside
+this scope. The shipped helper waits for 600 ms of unchanged complete state to avoid the preserved
+stale-after-cancel failure; delivered actions are never silently retried.
+
+The fresh rest tutorial is unsupported by the released Host. The scoped test imports native-generated
+progress with only that tutorial already seen; it verifies the original report/profile and copied
+bytes while leaving other tutorials enabled. Fresh-profile unattended control stays unqualified.
+[Scoped evidence](../../docs/evidence/actual-engine-v0.111.0-first-combat-and-rest-v1.json) binds
+successful comparisons, private failures, lineage and the unlaunched eight-case owner rest recipe.
+No naturally reached rest/full-run claim, training admission or old-model promotion follows.
+
+```bash
+node --test scripts/engine-rest-bridge-contract.test.mjs
 ```

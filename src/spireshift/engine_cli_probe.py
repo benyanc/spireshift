@@ -80,11 +80,15 @@ def _probe_cli_document(
     *,
     panel: str,
 ) -> dict[str, Any]:
-    if panel not in {"rest", "shop", "combat", "checkpoint", "journey"}:
+    if panel not in {"rest", "shop", "combat", "checkpoint", "journey", "rest_bridge"}:
         raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
     revision = document.get("public_projection_revision", "rest_v1")
-    if projected and panel in {"combat", "checkpoint", "journey"} and revision != "combat_v4":
+    if (
+        projected
+        and panel in {"combat", "checkpoint", "journey", "rest_bridge"}
+        and revision != "combat_v4"
+    ):
         raise ValueError("Combat public projection requires its explicit frozen revision")
     if revision not in {"rest_v1", "selection_shop_v2", "selection_shop_v3", "combat_v4"} or (
         projected and panel == "shop" and revision == "rest_v1"
@@ -107,12 +111,27 @@ def _probe_cli_document(
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
         raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
-    if panel in {"checkpoint", "journey"} and (
+    if panel in {"checkpoint", "journey", "rest_bridge"} and (
         not projected
         or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
         or document.get("content_policy") != "native_all_unlocked"
     ):
         raise ValueError("Checkpoint bridge requires an explicit seed and native unlock policy")
+    if panel == "rest_bridge":
+        if document.get("rest_bridge", {}).get("scenario") not in {
+            "tent-heal-cancel-smith",
+            "tent-smith-cancel-heal",
+        }:
+            raise ValueError("Expected an explicitly named finite Miniature Tent rest fixture")
+        for name in (
+            "engine-rest-bridge-contract.mjs",
+            "engine-journey-contract-v2.mjs",
+            "engine-menu-probe.mjs",
+        ):
+            if _sha_file(qualification.root / "scripts" / name) != document.get(
+                "bridge_helpers_sha256", {}
+            ).get(name):
+                raise ValueError("Pinned rest fixture helper changed")
     if panel == "journey":
         plan = document.get("journey", {})
         journey_revision = document.get("journey_revision", "v1")
@@ -144,7 +163,9 @@ def _probe_cli_document(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        (
+        "probe-engine-cli-rest-bridge.mjs"
+        if projected and panel == "rest_bridge"
+        else (
             "probe-engine-cli-journey-v2.mjs"
             if document.get("journey_revision") == "v2"
             else "probe-engine-cli-journey.mjs"
@@ -187,6 +208,7 @@ def _probe_cli_document(
         in {
             "spireshift_cli_localization_v6_local_toolchain",
             "spireshift_cli_event_proceed_v7_local_toolchain",
+            "spireshift_cli_save_restore_v8_local_toolchain",
         }
         and localization is None
     ):
@@ -256,10 +278,11 @@ def _probe_cli_document(
             "panel": panel,
             **(
                 {"seed": document["seed"], "content_policy": document["content_policy"]}
-                if panel in {"checkpoint", "journey"}
+                if panel in {"checkpoint", "journey", "rest_bridge"}
                 else {}
             ),
             **({"journey": document["journey"]} if panel == "journey" else {}),
+            **({"rest_bridge": document["rest_bridge"]} if panel == "rest_bridge" else {}),
         }
         if projected:
             spec["projection"] = projection
