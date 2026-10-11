@@ -241,6 +241,7 @@ def _probe_cli_document(
             "spireshift_cli_save_restore_v8_local_toolchain",
             "spireshift_cli_potion_pricing_v9_local_toolchain",
             "spireshift_cli_shop_energy_v10_local_toolchain",
+            "spireshift_cli_reward_rng_v11_local_toolchain",
         }
         and localization is None
     ):

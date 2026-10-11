@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-11 after the compiled test-mode inventory and initial semantic review.
+Updated 2026-10-11 after the native reward repair and corrected second mode review.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -159,7 +159,7 @@ games or neural training follow automatically.
 **The repeatable compiled mode inventory is implemented.** It reads metadata/IL without loading
 or executing game code, covering all **50,816 game method bodies / 1,457,929 instructions**, with
 zero undecoded bodies. There are **434 direct references** to `TestMode` and its
-`NonInteractiveMode` alias in **383 source-method groups**. The current v10 wrapper has two
+`NonInteractiveMode` alias in **383 source-method groups**. The audited v10 wrapper has two
 direct references. The separate private source extraction, game/wrapper SHA/MVID, inspector
 binary/source and local inspection runtime host are bound. The audit took **1.468 seconds**,
 launched no games and preserves all raw source/reference rows under ignored artifacts.
@@ -170,19 +170,38 @@ Reviews bind the actual method IL hashes and need an explicit rationale. Unknown
 stay visible; neither a complete inventory nor a fully reviewed static list can admit training.
 Reflection, other aliases, Godot stub behavior and runtime differences remain outside this scan.
 
-The review finds concrete game-rule changes: **Calling Bell returns preset relics and Cauldron
-preset potions in test mode**, replacing their normal generated rewards/RNG paths. It also finds
-**bundle selection automatically taking the first bundle**, conditional native selector cleanup,
-and an act-selection preference that changes when alternative acts remain undiscovered. Fully
+The original native test branch returns **preset Calling Bell relics and Cauldron potions**,
+replacing normal generated rewards/RNG paths. The bundle branch also defaults to bundle one,
+but the wrapper already has a prefix that presents a choice. **Correction to the first review:**
+unconditional first-bundle play was not established. Warning-only hook installation and
+missing-simulator/invalid-index fallbacks still need explicit checks. Conditional selector cleanup
+and an act-selection preference change when alternative acts remain undiscovered. Fully
 unlocked content does not define act discovery. Reward selection is an existing wrapper control
 seam; multiple rewards/capacity/cancel still need coverage. Rolling Boulder changes damage
 dispatch from visual-hit callbacks to a batch; damage/death hook ordering needs a comparison.
 The known potion-price branch is already restored by v9/v10 and retains its separate shop evidence;
 it is not counted as another unfixed price bug.
 
-**Next under #145:** restore Calling Bell/Cauldron native reward generation and RNG consumption
-with narrow version-bound repairs and targeted differentials; preserve actual bundle choices and
-verify native selector reset; then freeze the content-plus-act-discovery profile contract. Continue
+**V11 restores the two normal reward-generation branches.** It checks exact method IL hashes
+before replacing only their local test-mode predicates; game-owned constructors, population,
+RNG and pools remain unchanged. Two fresh baseline/two repaired outputs reproduce in
+**13.832 seconds**. A new bounded comparison passes **8/8 cases across two seeds/four pairs
+repeated twice**, using **24 disposable native fixture starts**. It compares the original-normal,
+legacy-test and repaired-test paths: starting RNG/pools match; generated rewards and complete
+final RNG/pool state match the original-normal reference; old presets differ; repeats agree.
+This takes **19.046 seconds** and does not test pickup, curse delivery, capacity, choices or UI.
+The new v11 combat/rest/shop regressions also pass **841 subchecks across 28 native fixtures**.
+
+The separately versioned **mode review v2** binds v11 and corrects the bundle-hook interpretation.
+The game inventory and **409 unreviewed references** stay unchanged; v11 has three direct mode
+references. **1,102 repository tests**, formatting/types, the standalone reward checker build
+and C# protocol contract pass. No shipped v11 parity, full-run win, training admission or model
+promotion follows. Previous shipped panels retain their own v10/Host scope. Details:
+[reward repair and corrected review evidence](evidence/actual-engine-v0.111.0-reward-rng-v11-and-mode-review-v2.json).
+
+**Next under #145:** qualify full Calling Bell/Cauldron pickup and reward choices against the
+shipped game; make existing bundle interception fail explicitly, reject invalid/stale choices,
+and verify nonfirst selection and reset; freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
 full modifier/expiry/relic-counter facts, combat beyond the first turn,
@@ -391,7 +410,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; mode inventory complete; 24 method groups reviewed, 409 references pending | Restore Calling Bell/Cauldron reward RNG; preserve bundle choice/reset; freeze act discovery, then continue mode/mechanics coverage. Fresh rest/shop repeat evidence stays valid within its scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; reward generation repaired and checked; 409 mode references pending | Qualify full reward pickup/choices; verify the existing bundle hook and reject silent fallbacks; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

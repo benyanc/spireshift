@@ -411,8 +411,37 @@ for Codex to run. Its results and scope belong to
 [the v10 evidence](../../docs/evidence/actual-engine-v0.111.0-shop-energy-v10-and-panel-v2.json).
 The [compiled mode inventory](../../mod/SpireShift.ModeInventory/README.md) now enumerates all
 direct references to the two named mode controls without executing game code. Its
-[initial review](../../docs/evidence/actual-engine-v0.111.0-mode-audit-v1.json) confirms preset
-Calling Bell/Cauldron rewards and automatic first-bundle selection; these remain unfixed in
-v10. The review covers 25 of 434 game references, leaving 409 unreviewed. The broader semantic
+[initial review](../../docs/evidence/actual-engine-v0.111.0-mode-audit-v1.json) identifies preset
+Calling Bell/Cauldron rewards, unfixed in v10. Review v2 below corrects the bundle interpretation:
+the wrapper already has a pending-choice prefix, with unqualified silent-fallback paths.
+The review covers 25 of 434 game references, leaving 409 unreviewed. The broader semantic
 audit, preview/effect metadata, other mechanics, later acts and endings remain unqualified.
 No full-run or neural-training admission follows the shop fixtures or static mode inventory.
+
+## V11: normal Calling Bell and Cauldron reward generation
+
+`sts2-cli-v0.111.0-reward-rng-v11.patch` replaces the combined v10 delta against the same pinned
+upstream/base patch. Apply one cumulative local delta, not stacked v10/v11 patches. The new
+`NativeRewardGeneration` hook checks exact original IL hashes for both private `GenerateRewards`
+methods before patching either. Each method must contain exactly one call to `TestMode.IsOn`;
+that call becomes false without changing instructions elsewhere, labels, reward constructors,
+population, RNG or pools. Global TestMode remains on. The initialization flag is set after
+successful hook installation, so a failed install cannot be mistaken for completed startup.
+Runtime identity reports the installed hook and two intercepted methods.
+
+The [v11 build recipe](../../configs/engine-qualification/sts2-v0.111.0-cli-build-reward-rng-v11.json)
+reproduces two fresh baseline/two repaired outputs in **13.832 seconds**. The repaired SHA is
+`0c6ede84e6769c5d277a6f922ac84fa95b2e16e301bc376800de62596ba36712`, MVID
+`4b632d1a-8860-4aff-a476-af1188be9875`. Stored original game DLL bytes stay unchanged.
+The standalone [native reward checker](../../mod/SpireShift.RewardGenerationCheck/README.md)
+passes **8/8 repeated cases / 24 disposable native starts** in **19.046 seconds**. Complete
+generated rewards and final RNG/pool state match the original method's normal branch under
+shared native initialization/stubs/population. Original test presets differ. V11's own
+combat/rest/shop fixtures pass **841 subchecks**.
+
+This does not establish shipped pickup/curse/capacity/selection or full-game parity. The existing
+bundle prefix and reward selector remain unchanged. Review v2 corrects the initial implication
+that bundles always choose the first option: pending player choices already exist, while
+warning-only installation, missing-simulator and invalid-index fallbacks remain unqualified.
+The remaining mode inventory still contains **409 unreviewed game references**. Exact evidence:
+[v11 repair and corrected mode review](../../docs/evidence/actual-engine-v0.111.0-reward-rng-v11-and-mode-review-v2.json).

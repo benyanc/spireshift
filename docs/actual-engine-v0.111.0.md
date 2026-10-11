@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — compiled mode inventory complete; reward/choice repairs next
+## Current status — native reward generation repaired; full pickup and choice checks next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -330,7 +330,7 @@ measures complete-run speed before connecting a separately versioned A8 neural l
 `engine audit-mode-references` uses the repository's standalone metadata reader. It never loads
 or executes the inspected game assembly. All **50,816 game method bodies / 1,457,929 IL
 instructions** decode, with zero skipped bodies. The exact game contains **434 direct references**
-to `TestMode` and `NonInteractiveMode`, across **383 normalized source-method groups**. The current
+to `TestMode` and `NonInteractiveMode`, across **383 normalized source-method groups**. The audited
 v10 wrapper has **two direct references**, including mode enablement and its known price repair's
 reflective type operand. Async state machines map to their owning source method; strings/comments
 and token-shaped integer/switch operands do not become fabricated references.
@@ -345,8 +345,12 @@ other aliases, Godot stubs and runtime equivalence are not exhaustively establis
 
 Reviewed native source confirms two previously uncorrected reward changes: Calling Bell uses
 preset relic rewards and Cauldron preset potion rewards in test mode. Their normal generated
-rewards and RNG consumption must be restored and compared. Bundle selection takes the first bundle
-automatically, bypassing a policy choice. Native selector cleanup is conditional on test mode;
+rewards and RNG consumption needed restoration and comparison, completed in the v11 scope below.
+**The bundle interpretation is corrected in review v2:** the original native test branch chooses
+bundle one, but the wrapper already has a prefix for a pending player choice. Unconditional
+first-bundle play was not established. Hook installation can fail as a warning, and missing
+simulator or invalid-index paths fall back to bundle one; those require checks. Native selector
+cleanup is conditional on test mode;
 interrupt/reset behavior needs verification. Act selection bypasses the preference for undiscovered
 alternative acts, so the initial-run content/discovery contract needs to be declared separately
 from merely unlocking content. The existing reward-selector override and direct-versus-animation
@@ -359,8 +363,40 @@ and lists limits. **1,083 repository tests**, the managed inspector's synthetic 
 literal/switch/truncation checks, formatting/types and the C# protocol contract pass. The new
 inventory is a qualification/debugging artifact, never a policy/model input. Even fully reviewed
 static coverage cannot admit training; no game, full-run attempt or optimizer step follows.
-Next, implement narrow Calling Bell/Cauldron reward repairs and their differential tests, then
-bundle choice/reset and the explicit act-discovery profile contract.
+The original v1 evidence stays immutable; v2 records the corrected wrapper interpretation.
+
+## Native reward repair and corrected mode review v2
+
+The cumulative v11 MIT wrapper patch checks both exact original reward-method IL hashes before
+interception. It replaces only each method-local `TestMode.IsOn` call with false. Original reward
+constructors, population, relic/potion pools and RNG remain game-owned; global TestMode stays on.
+Initialization is marked complete after the reward hooks install. Stored official game bytes,
+existing selectors, shipped Host and SDK remain unchanged.
+
+Two fresh baseline/two repaired builds reproduce in **13.832 seconds**, with a distinct
+source/SHA/MVID. The separately pinned .NET 9.0.7 native checker passes **8/8 cases**, two seeds
+× two relics × two repeats, using **24 disposable native fixture starts** in **19.046 seconds**.
+Every case compares original-normal, legacy-test and repaired-test generation/population.
+Initial complete RNG/pool state agrees; repaired rewards and final RNG/pool state match the
+original-normal reference; original presets differ; repeats agree. The shared profile, archive,
+candidate inventories, runtime, localization and checker remain unchanged.
+
+This reference shares the wrapper's native initialization, stubs and population paths. It does
+not test AfterObtained, curse delivery, reward claims, capacity, skip/cancel, nested pickup hooks
+or shipped UI. No whole-run or shipped parity claim follows. New v11 combat/rest/shop regressions
+pass **841 subchecks across 28 native fixtures**; previous shipped panels retain their own
+v10/Host scope.
+
+Mode audit v2 binds v11 and the corrected bundle-hook rationale, with **three wrapper mode
+references**. The game inventory remains unchanged: 24 method groups/25 references reviewed,
+**409 references unreviewed**. Static coverage still cannot qualify runtime fidelity or training.
+**1,102 repository tests**, formatting/types, the standalone reward checker build and C# protocol
+contract pass. Reconstruction metadata and limits:
+[v11 repair and review v2 evidence](evidence/actual-engine-v0.111.0-reward-rng-v11-and-mode-review-v2.json).
+
+Next qualify complete reward pickup/choices against the shipped game, verify existing bundle
+hook installation/nonfirst choices/invalid rejection/reset and freeze the act-discovery profile
+contract. No new long task or training follows automatically.
 
 The remaining sections preserve earlier prerequisite packages and their scoped results.
 
