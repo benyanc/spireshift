@@ -329,7 +329,13 @@ One ordinary case and one Courier case pass on different seeds, together with ra
 19 common observations, 17 effect decisions and 25 game/UI actions, including two fresh potion
 tutorial clicks. Their shipped processes take 39.387 and 37.200 seconds. These are privileged
 finite fixture comparisons, not naturally reached rooms, repeatability evidence or player
-strength. The [eight-case owner recipe](../../scripts/compare-shop-actions-v1.sh) remains unlaunched.
+strength. The [eight-case recipe](../../scripts/compare-shop-actions-v1.sh) was then explicitly
+authorized for Codex to run: one case passed, one native case failed and six were unattempted.
+The restocked Whirlwind is present and charged correctly, but the native shop exports energy
+cost 0 while the deck exports X. The shop exporter still uses numeric resolved cost instead
+of the X-cost display helper used by deck/hand. Repair that gap on a new source/build lineage
+before repeating. The failed batch is preserved; its recipe does not restart it silently.
+[Assessment](../../docs/evidence/actual-engine-v0.111.0-shop-panel-v1.json) records the exact scope.
 
 ## Current local rest-and-potion Connector candidate
 

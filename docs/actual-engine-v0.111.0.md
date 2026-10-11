@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — fresh rest repeats pass; shop repeatability is next
+## Current status — fresh rest repeats pass; repair shop X-cost export
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -251,24 +251,35 @@ training admission or model promotion follow these fixture results. **1,071 repo
 88 standalone Node tests, four focused Host tutorial tests, formatting/types and the C# protocol
 contract pass.**
 
-## One next owner command
+## First shop batch assessment and next implementation
 
-Close any running STS2 app, then run this single helper from any directory:
+The owner explicitly authorized Codex to run and assess `scripts/compare-shop-actions-v1.sh`.
+The configured two seeds × ordinary/Courier × two repeats remain **eight planned cases**, two
+independent seeds and four seed/scenario pairs. The batch stopped on its first failed case:
+**one passed, one failed, six unattempted**. Repeatability is not established. Batch/resource wall
+time was **52.596/52.754 seconds**, CPU **21.256 seconds**. No resource cap was hit. The ordinary
+first case passes an independent saved audit: nine observations, eight effect decisions, twelve
+game/UI actions and one fresh potion tutorial. That audit launches no games.
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-shop-actions-v1.sh
-```
+The second case fails before a shipped-game launch. Courier replaces the first offer with
+Whirlwind. The native offer calls its energy cost **0**; after purchase the deck correctly calls
+it **X**. The card is present and deck size rises from two to three. Gold falls **961→904**,
+exactly the 57-gold purchase quote. The checker expects the offer's definition/cost/upgraded tuple
+to appear in the deck and rejects the inconsistent cost, reporting a missing card. The native
+shop exporter uses numeric resolved energy cost, bypassing the `CostsX` display handling already
+used elsewhere. This is a public-information export gap. It is distinct from the earlier gold
+price/RNG repair.
 
-It compares **two seeds × ordinary/Courier × two repeats = eight cases**. That is two independent
-seeds and four seed/scenario pairs. Each imports the explicit shop save into a fresh tutorial-enabled
-profile, buys cards/potions, fills the two A8 potion slots, cancels/reopens card removal, confirms
-and exits. Courier cases buy replacement stock. The first-potion tutorial must be dismissed without
-changing the purchase. Estimate **8–12 minutes**, capped at **15 minutes**, one game at a time,
-8 GB memory and 4 GB generated files. Allow 3.5 GB free. Each case prints its result; the first
-failure stops and preserves its payload. Verified successful payloads are removed after natural
-shutdown and integrity checks; reports/logs/profiles/saves remain. Completed reruns display saved
-results and partial work never silently restarts. **Codex has not launched this eight-case batch.**
-No full runs, training or automatic next stage follow.
+Next, repair shop energy-cost export using the same game-owned X-cost display handling as deck
+and hand, keep free zero-cost cards distinct, bind fresh source/build/config identities, then
+validate the observed case before a separately versioned repeated panel. Do not weaken the
+checker or hardcode X-cost card IDs. The failed batch/raw inputs/profiles are preserved; the
+old helper displays its saved failure and never restarts it silently. No new long job or neural
+training follows this assessment.
+
+[Shop panel assessment](evidence/actual-engine-v0.111.0-shop-panel-v1.json) records the successful
+audit, failed denominator, resource report and exact source gap. The earlier smoke/build evidence
+remains immutable and keeps its original scope.
 
 #145 remains open for repeated shop evidence, other rule/RNG-changing TestMode branches, broader
 rest/relic and shop interactions, full modifier/expiry/relic-counter facts, remaining selectors,

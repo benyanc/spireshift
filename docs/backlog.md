@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-11 after fresh-profile rest repeatability, shop price/popup repairs and scoped shop comparisons.
+Updated 2026-10-11 after the first repeated shop attempt found a native X-cost export gap.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -110,15 +110,28 @@ also passes its own fresh rest and first-combat regressions and saved audits. Th
 checks, not transferred repeat-panel results. **1,071 repository tests, 88 standalone Node tests,
 four focused Host tutorial tests, formatting/types and the C# protocol contract pass.**
 
-**Next owner stage: eight repeated shop checks.** Run only `bash scripts/compare-shop-actions-v1.sh`.
-Two seeds × ordinary/Courier × two repeats = **two independent seeds and four seed/scenario pairs**.
-Estimate **8–12 minutes**, with a **15-minute cap**, one copied game at a time, 8 GB memory and
-4 GB artifact limits. Allow 3.5 GB free; insufficient space now stops before a game copy starts.
-Each case prints its result. The first divergence stops and remains counted/preserved; successful
-payloads are removed only after natural exit and integrity checks. Completed reruns display saved
-results; incomplete work never restarts silently. Codex has not launched this eight-case batch.
-[Current evidence](evidence/actual-engine-v0.111.0-fresh-rest-and-shop-v1.json) binds repairs, failures,
-regressions and the next recipe. It performs no full runs or training.
+**The first repeated shop batch stopped: one pass, one failure, six unattempted cases.** The owner
+explicitly authorized Codex to run and assess this otherwise owner-launched stage. It took
+**52.596 batch / 52.754 resource wall seconds**, with **21.256 CPU seconds**. The first ordinary
+case passes its independent saved audit: nine observations, eight effect decisions, twelve
+game/UI actions and one fresh potion tutorial. The next Courier case fails in native effect
+checking before the shipped game is launched; repeatability is not established.
+
+The bought Whirlwind is present, deck size rises from two to three and its 57-gold quote is charged
+correctly (961→904). The native shop exports its energy cost as **0**, while the deck correctly
+exports **X**. The effect checker therefore reports a missing purchased card despite its presence.
+The native shop exporter uses numeric resolved energy cost without the `CostsX` handling already
+used for deck/hand observations. This is a public-information export defect, not a failed purchase.
+All results/inputs remain preserved. The old script now displays its failed result; do not rerun
+it expecting new comparisons.
+
+**Next implementation under #145:** use the same native X-cost display handling in shop offers,
+retaining X as distinct from a free zero-cost card. Pin a new source/build/config lineage,
+validate the observed restocking case and then prepare a separately versioned repeated panel.
+Do not weaken the comparison or infer X from hardcoded card IDs.
+[Shop panel assessment](evidence/actual-engine-v0.111.0-shop-panel-v1.json) records the denominator,
+saved audit and exact cause; [earlier evidence](evidence/actual-engine-v0.111.0-fresh-rest-and-shop-v1.json)
+retains the successful prior smokes and reconstruction metadata. No full runs or training follow.
 
 **Remaining under #145:** repeated shipped shop effects; broader rest/relic options, rule/RNG
 TestMode shortcuts, full modifier/expiry/relic-counter facts, combat beyond the first turn,
@@ -322,7 +335,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; fresh rest 8/8, two shop smokes and 28 v9 native fixtures pass | Owner repeats eight shop cases; then audit rule/RNG TestMode branches, remaining public mechanics and endings. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; fresh rest 8/8; shop batch one pass, one failure, six unattempted | Repair native shop X-cost export, validate on a new lineage and repeat; then audit rule/RNG TestMode branches, remaining mechanics and endings. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
