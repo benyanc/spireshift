@@ -44,6 +44,21 @@ test("current native enablement controls exhausted services and forbidden or ful
   assert.deepEqual(actual.actions.map((item) => item.raw.action), ["buy_card", "buy_relic", "leave_shop"]);
   assert.equal(actual.result.surface.potions[0].can_purchase, false);
 });
+test("X energy and free zero energy remain distinct in restocked shop offers and purchase quotes", () => {
+  const state = shop();
+  state.cards[0].card_cost = "X";
+  state.cards.push({ ...entry("FREE"), card_cost: 0 });
+  const actual = project(state);
+  assert.equal(actual.result.complete, true);
+  assert.deepEqual(actual.result.surface.cards.map((row) => [row.cost, row.price]), [["X", 75], ["0", 75]]);
+  assert.deepEqual(actual.actions.slice(0, 2).map((row) => row.raw.args.quoted_cost), [75, 75]);
+  state.cards[0].item_ref = "PRIVATE_RESTOCK_X";
+  state.cards[0].cost = 57;
+  const restocked = project(state);
+  assert.equal(restocked.result.surface.cards[0].cost, "X");
+  assert.equal(restocked.actions[0].raw.args.item_ref, "PRIVATE_RESTOCK_X");
+  assert.equal(restocked.actions[0].raw.args.quoted_cost, 57);
+});
 test("restocked entries get the replacement item and price instead of stale purchase operands", () => {
   const before = shop(), after = shop(); after.cards[0].item_ref = "PRIVATE_RESTOCK"; after.cards[0].cost = 99;
   assert.notDeepEqual(project(before).actions[0].raw, project(after).actions[0].raw);

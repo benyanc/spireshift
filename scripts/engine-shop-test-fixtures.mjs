@@ -84,7 +84,7 @@ export function potionPopup(after) {
   return value;
 }
 
-export function savedShopFixture(scenario) {
+export function savedShopFixture(scenario, { restockedCardCost = "2" } = {}) {
   const ordinary = scenario === "ordinary-purchases-removal", operations = shopPlans[scenario];
   const initial = observation(), inventory = structuredClone(initial.snapshot.interaction.content.surface);
   const player = structuredClone(initial.snapshot.persistent.content.player);
@@ -104,7 +104,7 @@ export function savedShopFixture(scenario) {
       const item = inventory.cards[0]; player.gold -= item.price;
       deck.push({ entity_id: `bought-${cardNumber++}`, definition_id: item.definition_id, cost: item.cost, is_upgraded: item.is_upgraded });
       if (ordinary) item.is_stocked = item.can_purchase = false;
-      else { item.definition_id = `SYNTHETIC_RESTOCK_${cardNumber}`; item.cost = "2"; }
+      else { item.definition_id = `SYNTHETIC_RESTOCK_${cardNumber}`; item.cost = restockedCardCost; }
     } else if (op?.startsWith("potion")) {
       const item = inventory.potions[op === "potion-second" ? 1 : 0]; player.gold -= item.price;
       player.potions.push({ definition_id: item.definition_id, slot: player.potions.length });

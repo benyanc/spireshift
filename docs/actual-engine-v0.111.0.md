@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — fresh rest repeats pass; repair shop X-cost export
+## Current status — fresh rest and repaired shop repeat panels pass
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -270,10 +270,9 @@ shop exporter uses numeric resolved energy cost, bypassing the `CostsX` display 
 used elsewhere. This is a public-information export gap. It is distinct from the earlier gold
 price/RNG repair.
 
-Next, repair shop energy-cost export using the same game-owned X-cost display handling as deck
-and hand, keep free zero-cost cards distinct, bind fresh source/build/config identities, then
-validate the observed case before a separately versioned repeated panel. Do not weaken the
-checker or hardcode X-cost card IDs. The failed batch/raw inputs/profiles are preserved; the
+The required repair uses the same game-owned X-cost display handling as deck and hand, keeps
+free zero-cost cards distinct, and binds fresh source/build/config identities before repeating.
+The completed repair and panel are recorded below. The failed batch/raw inputs/profiles are preserved; the
 old helper displays its saved failure and never restarts it silently. No new long job or neural
 training follows this assessment.
 
@@ -281,7 +280,47 @@ training follows this assessment.
 audit, failed denominator, resource report and exact source gap. The earlier smoke/build evidence
 remains immutable and keeps its original scope.
 
-#145 remains open for repeated shop evidence, other rule/RNG-changing TestMode branches, broader
+## Completed X-cost repair and repeated shop panel
+
+The cumulative v10 MIT wrapper patch uses the existing `VisibleEnergyCost` helper for the current
+shop card, preserving native `CostsX` and otherwise `GetAmountToSpend`, exactly as deck/hand exports
+already do. Energy cost stays separate from the gold quote. It removes the numeric-only fallback
+from the stats-preview exception handler; a failed cost read cannot invent zero. No card-ID table,
+game rule, price/RNG change or comparison relaxation is introduced. The official stored game DLL,
+shipped Host, SDK and semantic/saved verifiers remain unchanged.
+
+Two fresh baseline and two repaired builds reproduce the new pinned identity in **15.147 seconds**.
+New v10 native panels rerun **841 subchecks across 28 combat/rest/shop fixtures**, with 85 SDK
+snapshots, 60 delivered actions and 34 refused invalid inputs. The exact failed Courier scenario
+now passes ten observations, nine effect decisions and thirteen game/UI actions, including a fresh
+potion tutorial; both the live Whirlwind offer and obtained deck retain X. Its shipped process takes
+**36.032 seconds** and its independent raw saved audit passes.
+
+Codex continued the same owner-authorized shop stage using a separately versioned recipe/result
+folder. **8/8 cases pass, zero failures or unattempted cases**, across two independent seeds and
+four seed/scenario pairs, each repeated twice. Repeated public prefixes are identical. The independent
+saved audit reconstructs **76 observations, 68 effect decisions, 100 game/UI actions, 24 other UI
+steps and eight fresh potion tutorial clicks**. It verifies exact frozen configuration/report/save
+bindings, unique current operands, raw public facts, delivery receipts and preview/popup invariants
+without launching games. Native atomic removal and shipped multi-step confirmation stay explicit.
+
+Batch/resource wall time is **387.725/387.921 seconds**, CPU **140.186 seconds**; peak memory
+**1.172 GB**, peak generated storage **2.462 GB**, final storage **57.533 MB**, four peak processes.
+No resource cap is hit. Unknown rates/energy/GPU usage remain unknown costs. Verified successful
+game payloads are removed after natural exit/integrity checks; profiles/logs/saves/reports and the
+failed first batch remain preserved. Its one-pass/one-failure/six-unattempted denominator is never
+combined with this new lineage's eight passing cases.
+
+[V10 repair and panel evidence](evidence/actual-engine-v0.111.0-shop-energy-v10-and-panel-v2.json)
+binds new patch/source/build/runtime/config identities and unchanged Host/SDK/verifiers.
+**1,071 repository tests, 90 standalone Node tests, formatting/types and the C# protocol contract
+pass.** The fixtures inject one Strike, 1,000 gold and two potion slots with/without Courier.
+They do not qualify naturally reached shops, other relic/discount effects, preview stats, all
+selectors, full-game endings or a learned player's strength. No full games, optimizer steps,
+training admission or model promotion follow. The completed `compare-shop-actions-v2.sh` helper
+only displays its saved result on rerun; no owner command is needed for this completed stage.
+
+#145 remains open for the systematic rule/RNG-changing TestMode audit, broader
 rest/relic and shop interactions, full modifier/expiry/relic-counter facts, remaining selectors,
 combat beyond the first turn, other public decisions, later acts and actual endings. #146 then
 measures complete-run speed before connecting a separately versioned A8 neural lineage.

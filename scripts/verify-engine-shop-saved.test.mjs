@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { savedShopFixture } from "./engine-shop-test-fixtures.mjs";
 import { verifySavedShop } from "./verify-engine-shop-saved.mjs";
+import { verifyShopEffects } from "./engine-shop-bridge-contract.mjs";
 
 const verify = (value) => verifySavedShop(value.scenario, value.plan, value.nativeSnapshots, value.shipped);
 for (const scenario of ["ordinary-purchases-removal", "courier-restock-removal"]) {
@@ -16,6 +17,18 @@ test("saving reordered JSON object keys preserves the purchased-card multiset", 
   const sortedKeys = (value) => Array.isArray(value) ? value.map(sortedKeys)
     : value && typeof value === "object" ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortedKeys(value[key])])) : value;
   assert.equal(verify(sortedKeys(savedShopFixture("courier-restock-removal"))).semantic_actions_delivered, 9);
+});
+test("restocked X-cost purchases survive saved auditing and cannot be relabeled free", () => {
+  const value = savedShopFixture("courier-restock-removal", { restockedCardCost: "X" });
+  assert.equal(value.plan[1].action.subject.item.cost, "X");
+  assert.equal(verify(value).semantic_actions_delivered, 9);
+  const inconsistent = structuredClone(value);
+  inconsistent.plan[1].action.subject.item.cost = "0";
+  assert.throws(() => verifyShopEffects(inconsistent.scenario, inconsistent.plan), /Purchased card absent/);
+  assert.throws(() => verify(inconsistent));
+  const free = savedShopFixture("courier-restock-removal", { restockedCardCost: "0" });
+  assert.equal(free.plan[1].action.subject.item.cost, "0");
+  assert.equal(verify(free).semantic_actions_delivered, 9);
 });
 
 test("fresh reads of the same public deck can have different observation times", () => {

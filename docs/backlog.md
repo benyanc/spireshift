@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-11 after the first repeated shop attempt found a native X-cost export gap.
+Updated 2026-10-11 after the X-cost repair and eight successful repeated shop comparisons.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -125,15 +125,39 @@ used for deck/hand observations. This is a public-information export defect, not
 All results/inputs remain preserved. The old script now displays its failed result; do not rerun
 it expecting new comparisons.
 
-**Next implementation under #145:** use the same native X-cost display handling in shop offers,
-retaining X as distinct from a free zero-cost card. Pin a new source/build/config lineage,
-validate the observed restocking case and then prepare a separately versioned repeated panel.
-Do not weaken the comparison or infer X from hardcoded card IDs.
+The first batch identified the need for native X-cost display handling in shop offers,
+retaining X as distinct from a free zero-cost card. Its source/build/config lineage and failed
+results remain immutable; the repair and repeat panel below are separate.
 [Shop panel assessment](evidence/actual-engine-v0.111.0-shop-panel-v1.json) records the denominator,
 saved audit and exact cause; [earlier evidence](evidence/actual-engine-v0.111.0-fresh-rest-and-shop-v1.json)
 retains the successful prior smokes and reconstruction metadata. No full runs or training follow.
 
-**Remaining under #145:** repeated shipped shop effects; broader rest/relic options, rule/RNG
+**The X-cost repair and new repeated shop panel now pass.** The cumulative v10 MIT wrapper uses
+the existing game-owned cost display helper used by deck/hand. It neither infers X from card IDs
+nor changes game rules, prices/RNG or comparison tolerances. The energy-cost read is outside the
+unrelated stats-preview exception fallback, so an error cannot invent a free zero-cost card.
+Two baseline/two repaired builds reproduce in **15.147 seconds**. Its own 28 privileged native
+fixtures pass **841 subchecks**. The previously failing Courier case passes ten native/shipped
+observations and its raw saved audit; the shipped process takes **36.032 seconds**.
+
+The owner-authorized same shop stage was repeated in a new v2 folder: **8/8 completed, zero failed
+or unattempted, identical repeated prefixes**, two independent seeds/four scenario pairs repeated
+twice. Independent saved auditing verifies **76 observations, 68 effect decisions, 100 game/UI
+actions, 24 other UI steps and eight fresh potion tutorial clicks**, with no games launched by
+the audit. Batch/resource wall time is **387.725/387.921 seconds**, CPU **140.186 seconds**;
+peak memory/storage are **1.172/2.462 GB**. No cap was hit; cost rates remain unknown.
+The failed v1 denominator stays separate. The unchanged Host/SDK and semantic verifiers retain
+their original identities; new native source/build/config pins bind this panel.
+
+[V10 repair and panel evidence](evidence/actual-engine-v0.111.0-shop-energy-v10-and-panel-v2.json)
+records all reconstruction metadata and scopes. **1,071 repository tests, 90 standalone Node
+tests, formatting/types and the C# protocol contract pass.** These are privileged finite shop
+fixtures, not naturally reached shops, full-game qualification or model-strength results.
+The completed v2 helper only displays saved results when run again. No new long stage, full
+games or neural training follow automatically.
+
+**Next under #145:** systematically audit rule/RNG-changing TestMode branches. Broader rest/relic
+options, full public effects and remaining decision coverage follow. Remaining work includes
 TestMode shortcuts, full modifier/expiry/relic-counter facts, combat beyond the first turn,
 remaining reward/selection families and large choice spaces, out-of-combat potions, native relic
 purchases/discount interactions, skipping a merchant before opening its inventory, other public
@@ -335,7 +359,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; fresh rest 8/8; shop batch one pass, one failure, six unattempted | Repair native shop X-cost export, validate on a new lineage and repeat; then audit rule/RNG TestMode branches, remaining mechanics and endings. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; fresh rest 8/8 and repaired shop panel 8/8 pass | Audit rule/RNG-changing TestMode branches, then remaining public mechanics, interactions and endings. Failed first shop batch remains separate. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

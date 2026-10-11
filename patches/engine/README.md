@@ -370,3 +370,44 @@ full-run, general mechanics, learning admission or model promotion follows.
 node --test scripts/engine-shop-bridge-contract.test.mjs scripts/verify-engine-shop-saved.test.mjs
 uv run pytest tests/unit/test_engine_shop_bridge.py
 ```
+
+## Current X-cost shop export repair
+
+`sts2-cli-v0.111.0-shop-energy-v10.patch` replaces the combined v9 delta on the same pinned
+upstream/base patch. Apply one combined local delta; do not stack v9/v10 patches. The native
+shop exporter previously called numeric `GetResolved()` for card energy cost, while deck/hand
+exports handled `CostsX`. Courier restocking exposed this with Whirlwind: the offer said 0,
+the obtained deck card said X, and the strict ownership/cost check failed despite the correctly
+completed 57-gold purchase. The failed first batch remains preserved with one pass, one failure
+and six unattempted cases.
+
+V10 uses the existing `VisibleEnergyCost` function for a shop card's current model. That function
+checks the native `CostsX` property and otherwise calls `GetAmountToSpend`, as existing deck/hand
+exports do. Energy cost stays separate from the merchant's gold quote. It neither guesses from
+card definitions nor changes rules, prices, RNG, purchase effects or comparison tolerances.
+The cost read occurs outside the unrelated stats-preview try/catch so an exception cannot be
+reported as a made-up zero. Sold entries with no model retain null energy cost; live stock still
+requires an actual current model. The official stored game assembly is unchanged.
+
+The [v10 build recipe](../../configs/engine-qualification/sts2-v0.111.0-cli-build-shop-energy-v10.json)
+reproduces two fresh baseline and two repaired outputs in **15.147 seconds**. Repaired SHA is
+`4b2c132520da2159823aabd599a3eb86c3c1504cb8874b2f2da5aaa92784e726`, MVID
+`3b42f25b-62b8-45dc-805b-7e67f5d341be`. Source diff, patch, compiler/reference pack, .NET 9.0.7
+runtime, original DLL and Godot stub have separate exact pins. This is local build reproduction,
+not the upstream binary. V10's new combat/rest/shop configs rerun **841 subchecks across 28
+privileged fixtures**, with 85 snapshots, 60 delivered actions and 34 invalid inputs refused.
+
+The observed Courier seed now passes the native/shipped sequence and an independent raw saved
+audit: ten observations, nine effect decisions and thirteen game/UI actions, including a fresh
+potion tutorial. Whirlwind is X in both the live offer and purchased deck. The shipped process
+took **36.032 seconds**. New synthetic checks retain X versus free zero through shop projection,
+restocking, gold-quote binding and saved purchase auditing; relabeling X as zero still fails.
+Existing semantic/purchase verifiers and the shipped Host remain unchanged.
+
+The [separately versioned eight-case recipe](../../scripts/compare-shop-actions-v2.sh) writes new
+results and never resumes or overwrites v1. Its two seeds/four seed-scenario pairs each repeat
+twice under the original finite resource caps. This same shop comparison stage was authorized
+for Codex to run. Its results and scope belong to
+[the v10 evidence](../../docs/evidence/actual-engine-v0.111.0-shop-energy-v10-and-panel-v2.json).
+The broader TestMode rule/RNG audit, preview/effect metadata, other mechanics, later acts and
+endings remain unqualified. No full-run or neural-training admission follows the shop fixtures.
