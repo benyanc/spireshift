@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — native combat and starting-save bridge checked; owner repeat panel is next
+## Current status — repeated starts and two first-combat comparisons pass
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -22,9 +22,9 @@ integrity check passed in **1.411 seconds**. No old Steam app manifest was borro
 The download, frozen archive and existing v0.107.1 game remain distinct copies. Details:
 [acquisition/preservation evidence](evidence/actual-engine-v0.111.0-acquired-and-frozen-v1.json).
 
-## Current combat and startup package
+## Earlier combat and startup package
 
-The current v6 host reproduces two fresh baseline and two fresh repaired binaries in
+The earlier v6 host reproduces two fresh baseline and two fresh repaired binaries in
 **16.667 seconds**, leaves the official game DLL unchanged, and runs on the separately pinned
 **.NET 9.0.7** runtime. Twelve combat, nine rest and seven shop fixtures pass **841 subchecks**
 plus the separate integrity/isolation gates. All **85 canonical SDK snapshots** have complete
@@ -64,29 +64,69 @@ entry-path failures remain private evidence. Unknown enchantment/affliction deta
 orbs and unsupported targets fail closed. Nine installed preference boundaries include a
 version-bound hand-upgrade UI seam; they do not qualify every possible selector.
 
+## Completed starting panel and first combat actions
+
+The owner completed **12/12 startup comparisons with zero failures**: six independent A8 seeds,
+each imported twice. Starting reward titles/lock availability match, and repeated seeds offer
+identical choices. The batch took **454.073 seconds**; its resource wrapper recorded 454.287 wall
+and 175.134 CPU seconds. A separate saved-file verifier rechecked all twelve case/config/report,
+snapshot and native-save bindings without launching games. Unknown cost rates remain unknown.
+
+The first actual-action comparison found a genuine wrapper omission: after a starting reward,
+the shipped game offers **Proceed**, while v6 skipped straight to the map. The new combined
+**v7 event-Proceed patch** exposes that native UI step. Its callback opens map presentation;
+actual native map voting still owns travel, and the official rules DLL is unchanged. Two fresh
+baseline and two repaired builds reproduce the newly pinned binary in **43.857 seconds**.
+The v7 combat/rest/shop panels were rerun rather than inheriting v6 results: **841/841 subchecks**
+across 28 fixtures pass, with 85 SDK snapshots, 60 delivered actions and 34 invalid native inputs
+refused. Those remain privileged regressions, not shipped-game comparisons or training data.
+
+Two short comparisons on **one seed**, choosing Winged Boots or Dowsing Rod, now pass through
+starting reward, Proceed, first map node, card plays, End Turn and the next hand/enemy state.
+There are **eight and seven compared observations**, with seven and six delivered game actions.
+The shipped processes took **41.531 and 36.915 seconds** and exited naturally. A fresh shipped
+profile displays the three-page Combat Basics tutorial; the adapter resolves each current public
+forward control, records it separately from gameplay actions, and checks unchanged underlying
+public combat facts after every click. Successful disposable payloads were removed after all
+18 control/comparison/integrity gates; failed attempts, reports, logs, profiles and saves remain.
+
+This first-turn comparison covers current legal actions, public hand costs/playability, owned
+status amounts, enemy health/block and numeric attack intents, energy, pile counts, immediate
+map choices and persistent player facts. It explicitly excludes effect text, card preview stats,
+relic counters, full map topology, pile contents, other decision families and later turns/acts/
+endings. It is not broad engine parity. Exact public numeric attack labels are normalized;
+unknown labels or missing fields fail rather than becoming zeros.
+
+[Starting and first-combat evidence](evidence/actual-engine-v0.111.0-starting-and-first-combat-v1.json)
+binds the owner batch, saved verification, v7 build/patch, rerun panels, successful comparisons,
+preserved failures and the next recipe. Historical evidence and configurations remain immutable. The second seed's two native prefixes
+were also preflighted successfully in 2.757 and 2.253 seconds; its shipped comparison remains
+in the owner batch. All 1,054 repository tests, 49 standalone adapter tests, formatting/types
+and the C# protocol contract pass. Portable checks do not establish gameplay strength.
+
 ## One next owner command
 
 Close any running STS2 app, then run this single helper from any directory:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-starts-v1.sh
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-first-combat-v1.sh
 ```
 
-It imports **six explicitly seeded native A8 starting saves twice each** into fresh shipped
-hosts. Estimate **6–8 minutes**, using the measured startup/import time; the elapsed cap is
-15 minutes. It runs one game at a time, prints each comparison, checks identical repeated-seed
-choices, retains failed cases and stops at the first failure. One disposable copy needs at least
-3.5 GB free disk. Successful payloads are removed after natural exit and integrity verification;
-reports, logs, profiles and native saves stay. The resource wrapper caps memory at 8 GB and
-batch-generated files at 4 GB. It never starts a full run or training. Rerunning a completed batch
-shows its saved summary; an interrupted batch is preserved and requires assessment before a new
-versioned launch. Codex has not run the 12-case stage.
+It compares **two seeds × two starting choices × two repeats = eight cases**. That is two
+independent seeds and four seed/option pairs, not eight independent seeds. Each pair starts
+from the same native current-room save in both versions, then compares the scoped first-turn
+public fields/actions. Estimate **6–8 minutes**, with a 15-minute cap, one disposable game at a
+time, 8 GB memory and 4 GB generated-file limits. Allow at least 3.5 GB free for one copy.
+Each case prints its progress. The first failure stops the batch and preserves its payload;
+verified successful payloads are removed. Reports, logs, profiles and saves remain. A completed
+rerun displays its saved summary; incomplete work is preserved without restarting. **Codex has
+not launched this eight-case batch.** No full-run attempts or learning follow.
 
-#145 stays open for shipped combat/rest/shop differential actions, modifier/expiry/relic counter
-coverage, remaining selectors and large choices, out-of-combat potions, native discounts/relic
-purchases, other public decision families, later acts and terminal conditions. After qualification,
-#146 measures complete-run speed and integrates a new A8 neural lineage. No current check admits
-training, proves exhaustive mechanics or promotes the old emulator model.
+#145 remains open for shipped rest/shop effects, full modifier/expiry/relic-counter information,
+remaining reward/bundle/mandatory/optional/large selectors, out-of-combat potions, native discounts/
+relic purchases, other decision families, later acts and terminal conditions. The repeat panel
+also does not qualify all combat mechanics. #146 then measures complete-run speed and connects
+a new A8 public neural lineage. No current result admits training or promotes the old emulator.
 
 The remaining sections preserve earlier prerequisite packages and their scoped results.
 

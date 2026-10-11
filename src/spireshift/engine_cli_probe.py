@@ -80,11 +80,11 @@ def _probe_cli_document(
     *,
     panel: str,
 ) -> dict[str, Any]:
-    if panel not in {"rest", "shop", "combat", "checkpoint"}:
+    if panel not in {"rest", "shop", "combat", "checkpoint", "journey"}:
         raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
     revision = document.get("public_projection_revision", "rest_v1")
-    if projected and panel in {"combat", "checkpoint"} and revision != "combat_v4":
+    if projected and panel in {"combat", "checkpoint", "journey"} and revision != "combat_v4":
         raise ValueError("Combat public projection requires its explicit frozen revision")
     if revision not in {"rest_v1", "selection_shop_v2", "selection_shop_v3", "combat_v4"} or (
         projected and panel == "shop" and revision == "rest_v1"
@@ -107,12 +107,29 @@ def _probe_cli_document(
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
         raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
-    if panel == "checkpoint" and (
+    if panel in {"checkpoint", "journey"} and (
         not projected
         or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
         or document.get("content_policy") != "native_all_unlocked"
     ):
         raise ValueError("Checkpoint bridge requires an explicit seed and native unlock policy")
+    if panel == "journey":
+        plan = document.get("journey", {})
+        journey_revision = document.get("journey_revision", "v1")
+        if journey_revision not in {"v1", "v2"}:
+            raise ValueError("Unknown first-combat journey revision")
+        if plan.get("max_actions") != 12 or not isinstance(plan.get("starting_option"), str):
+            raise ValueError("A frozen twelve-action first-combat journey is required")
+        for name in (
+            "engine-journey-contract-v2.mjs"
+            if journey_revision == "v2"
+            else "engine-journey-contract.mjs",
+            "engine-menu-probe.mjs",
+        ):
+            if _sha_file(qualification.root / "scripts" / name) != document.get(
+                "journey_helpers_sha256", {}
+            ).get(name):
+                raise ValueError("A pinned journey comparison helper changed")
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing game before the isolated native interaction check")
@@ -127,7 +144,13 @@ def _probe_cli_document(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        "probe-engine-cli-checkpoint-projection.mjs"
+        (
+            "probe-engine-cli-journey-v2.mjs"
+            if document.get("journey_revision") == "v2"
+            else "probe-engine-cli-journey.mjs"
+        )
+        if projected and panel == "journey"
+        else "probe-engine-cli-checkpoint-projection.mjs"
         if projected and panel == "checkpoint"
         else "probe-engine-cli-mechanics-projection-v4.mjs"
         if projected and revision == "combat_v4"
@@ -160,7 +183,11 @@ def _probe_cli_document(
         else None
     )
     if (
-        build_config.get("candidate_lineage") == "spireshift_cli_localization_v6_local_toolchain"
+        build_config.get("candidate_lineage")
+        in {
+            "spireshift_cli_localization_v6_local_toolchain",
+            "spireshift_cli_event_proceed_v7_local_toolchain",
+        }
         and localization is None
     ):
         raise ValueError("The native text host requires exact extracted game localization")
@@ -229,9 +256,10 @@ def _probe_cli_document(
             "panel": panel,
             **(
                 {"seed": document["seed"], "content_policy": document["content_policy"]}
-                if panel == "checkpoint"
+                if panel in {"checkpoint", "journey"}
                 else {}
             ),
+            **({"journey": document["journey"]} if panel == "journey" else {}),
         }
         if projected:
             spec["projection"] = projection

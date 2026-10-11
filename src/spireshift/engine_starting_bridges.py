@@ -16,7 +16,11 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.core.manifest import manifest_identifier
-from spireshift.engine_checkpoint import _probe_shipped_checkpoint_document
+from spireshift.engine_checkpoint import (
+    _probe_shipped_checkpoint_document,
+    _saved_private_path,
+    verify_checkpoint_input,
+)
 from spireshift.engine_cli_probe import _probe_cli_document
 from spireshift.engine_native import _private_path
 from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
@@ -200,4 +204,138 @@ def run_starting_bridges(
     result["report_id"] = manifest_identifier(result)
     atomic_json(progress, result)
     marker.unlink()
+    return result
+
+
+def verify_starting_bridges(qualification: EngineQualificationConfig, path: Path) -> dict[str, Any]:
+    """Recheck all saved case identities and outcomes; never launch a game or delete a file."""
+    document, planned, templates = load_starting_bridge_config(qualification, path)
+    workspace = _private_path(qualification.root, document["workspace"])
+    batch = json.loads((workspace / "batch.json").read_text())
+    if (
+        manifest_identifier({k: v for k, v in batch.items() if k != "report_id"})
+        != batch.get("report_id")
+        or batch.get("config_id") != manifest_identifier(document)
+        or batch.get("qualification_config_id") != qualification.config_id
+        or batch.get("schema_version") != "engine-starting-bridges-v1"
+        or batch.get("status") != "starting_input_comparisons_pass"
+        or batch.get("planned_cases") != 12
+        or batch.get("completed_cases") != 12
+        or batch.get("failed_cases") != 0
+        or batch.get("not_attempted_cases") != 0
+        or batch.get("independent_seeds") != 6
+        or batch.get("training_allowed") is not False
+        or batch.get("shipped_cross_host_parity") is not False
+        or batch.get("full_run_attempts") != 0
+        or batch.get("optimizer_steps") != 0
+        or batch.get("repeated_seed_choices_identical") is not True
+        or not isinstance(batch.get("cases"), list)
+        or [{k: c.get(k) for k in ("case_id", "seed")} for c in batch["cases"]] != planned
+    ):
+        raise ValueError("A complete, unchanged six-seed/twelve-case startup batch is required")
+    pairs: dict[str, list[Any]] = {}
+    for case in batch["cases"]:
+        directory = workspace / case["case_id"]
+        native_path = _private_path(qualification.root, case["native_report"])
+        shipped_path = _private_path(qualification.root, case["shipped_report"])
+        if (
+            native_path != directory / "native-report.json"
+            or shipped_path != directory / "shipped-report.json"
+        ):
+            raise ValueError("Saved cases must remain in their own named comparison directory")
+        native = json.loads(native_path.read_text())
+        shipped = json.loads(shipped_path.read_text())
+        native_config = copy.deepcopy(templates["native"][1])
+        native_config.update(
+            seed=case["seed"], workspace=str((directory / "native").relative_to(qualification.root))
+        )
+        snapshot = (
+            _saved_private_path(qualification, native["report_path"]).parent
+            / "private-starting-snapshot.json"
+        )
+        shipped_config = copy.deepcopy(templates["shipped"][1])
+        shipped_config.update(
+            seed=case["seed"],
+            checkpoint_report=case["native_report"],
+            checkpoint_report_id=case["native_report_id"],
+            snapshot_sha256=_sha_file(snapshot),
+            workspace=str((directory / "shipped").relative_to(qualification.root)),
+            successful_payload_policy=document["successful_payload_policy"],
+        )
+        fixture = verify_checkpoint_input(qualification, shipped_config)
+        options = shipped.get("probe", {}).get("starting_options_comparison", {})
+        expected_options = [
+            {"title": row.get("title"), "is_locked": row.get("is_locked")}
+            for row in json.loads(snapshot.read_text())["interaction"]["content"]["surface"][
+                "options"
+            ]
+        ]
+        checks = shipped.get("checks", {})
+        required = (
+            "loaded_identity",
+            "endpoint_owned_by_child",
+            "native_continue_offered",
+            "native_checkpoint_loaded",
+            "complete_public_starting_event",
+            "native_A8_seed_preserved",
+            "same_starting_public_option_titles_and_availability",
+            "profile_path_logged",
+            "steam_disabled_observed",
+            "shared_profile_unchanged",
+            "working_game_unchanged",
+            "archive_still_valid",
+            "template_unchanged",
+            "natural_shutdown",
+        )
+        original_shipped = json.loads(
+            _saved_private_path(qualification, shipped["private_shipped_report_path"]).read_text()
+        )
+        if (
+            native.get("config_id") != manifest_identifier(native_config)
+            or manifest_identifier({k: v for k, v in shipped.items() if k != "report_id"})
+            != case["shipped_report_id"]
+            or shipped.get("report_id") != case["shipped_report_id"]
+            or shipped.get("checkpoint_config_id") != manifest_identifier(shipped_config)
+            or shipped.get("checkpoint_report_id") != case["native_report_id"]
+            or shipped.get("checkpoint_sha256") != fixture["checkpoint_sha256"]
+            or shipped.get("qualification_config_id") != qualification.config_id
+            or shipped.get("training_allowed") is not False
+            or shipped.get("verdict") != {"status": "shipped_checkpoint_input_pass", "errors": []}
+            or any(checks.get(name) is not True for name in required)
+            or any(value is not True for value in checks.values())
+            or options != {"managed": expected_options, "shipped": expected_options}
+            or case.get("starting_options") != options
+            or case.get("status") != "shipped_checkpoint_input_pass"
+            or original_shipped.get("probe") != shipped.get("probe")
+            or manifest_identifier(
+                {k: v for k, v in original_shipped.items() if k not in {"report_id", "report_path"}}
+            )
+            != original_shipped.get("report_id")
+            or shipped.get("disposable_payload_removed_after_verified_success") is not True
+            or case.get("disposable_payload_removed_after_verified_success") is not True
+            or (
+                _saved_private_path(qualification, shipped["private_shipped_report_path"]).parent
+                / "game"
+            ).exists()
+        ):
+            raise ValueError(
+                f"Saved startup comparison changed or is incomplete: {case['case_id']}"
+            )
+        pairs.setdefault(case["seed"], []).append(options)
+    if any(len(values) != 2 or values[0] != values[1] for values in pairs.values()):
+        raise ValueError("Repeated seeds no longer agree")
+    result = {
+        "schema_version": "engine-starting-bridges-verification-v1",
+        "valid": True,
+        "config_id": manifest_identifier(document),
+        "batch_report_id": batch["report_id"],
+        "verified_cases": 12,
+        "independent_seeds": 6,
+        "games_launched": 0,
+        "optimizer_steps": 0,
+        "training_allowed": False,
+        "shipped_cross_host_parity": False,
+        "claim_scope": "saved_starting_option_titles_and_lock_availability_only",
+    }
+    result["report_id"] = manifest_identifier(result)
     return result

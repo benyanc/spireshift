@@ -1,0 +1,54 @@
+{
+  "schema_version": "engine-journey-bridges-config-v1",
+  "stage": "owner_first_combat_prefix_differentials_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_template": "configs/engine-qualification/sts2-v0.111.0-cli-journey-public-contract-v3.json",
+  "shipped_template": "configs/engine-qualification/sts2-v0.111.0-shipped-journey-tutorial-v5.json",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/first-combat-bridges-v1",
+  "max_wall_seconds": 900,
+  "training_allowed": false,
+  "cases": [
+    {
+      "case_id": "seed-03-boots-repeat-01",
+      "seed": "SPIRESHIFTSTART003",
+      "starting_option": "Winged Boots"
+    },
+    {
+      "case_id": "seed-03-rod-repeat-01",
+      "seed": "SPIRESHIFTSTART003",
+      "starting_option": "Dowsing Rod"
+    },
+    {
+      "case_id": "seed-06-boots-repeat-01",
+      "seed": "SPIRESHIFTSTART006",
+      "starting_option": "Winged Boots"
+    },
+    {
+      "case_id": "seed-06-rod-repeat-01",
+      "seed": "SPIRESHIFTSTART006",
+      "starting_option": "Dowsing Rod"
+    },
+    {
+      "case_id": "seed-03-boots-repeat-02",
+      "seed": "SPIRESHIFTSTART003",
+      "starting_option": "Winged Boots"
+    },
+    {
+      "case_id": "seed-03-rod-repeat-02",
+      "seed": "SPIRESHIFTSTART003",
+      "starting_option": "Dowsing Rod"
+    },
+    {
+      "case_id": "seed-06-boots-repeat-02",
+      "seed": "SPIRESHIFTSTART006",
+      "starting_option": "Winged Boots"
+    },
+    {
+      "case_id": "seed-06-rod-repeat-02",
+      "seed": "SPIRESHIFTSTART006",
+      "starting_option": "Dowsing Rod"
+    }
+  ],
+  "native_template_id": "sha256:1d15bd791379690125d5f8015296d14e443835693f6af40d84322eb71f295ebe",
+  "shipped_template_id": "sha256:48962e9a3a357ff706fbc64471e4f0ee54e0f5563c8464fc5edd5546e6e91145"
+}

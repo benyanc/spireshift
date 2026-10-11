@@ -21,6 +21,8 @@ from spireshift.engine_download import (
     download_plan,
     load_engine_download_config,
 )
+from spireshift.engine_journey import probe_shipped_journey
+from spireshift.engine_journey_bridges import run_journey_bridges
 from spireshift.engine_localization import extract_native_localization
 from spireshift.engine_native import (
     _verified_archive,
@@ -37,7 +39,7 @@ from spireshift.engine_qualification import (
     verify_game_archive,
 )
 from spireshift.engine_source import inspect_game_source
-from spireshift.engine_starting_bridges import run_starting_bridges
+from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
 from spireshift.full_run_experience import atomic_json
 
 
@@ -58,12 +60,16 @@ def add_engine_parser(commands: Any) -> None:
         "prepare-connector",
         "probe-connector-menu",
         "probe-shipped-checkpoint",
+        "probe-shipped-journey",
         "compare-starting-bridges",
+        "verify-starting-bridges",
+        "compare-journey-bridges",
         "build-cli-candidate",
         "probe-cli-rest",
         "probe-cli-shop",
         "probe-cli-combat",
         "probe-cli-checkpoint",
+        "probe-cli-journey",
         "inspect-game-source",
         "extract-game-text",
     ):
@@ -75,18 +81,32 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("native_config", type=Path)
         if name in ("prepare-connector", "probe-connector-menu"):
             command.add_argument("connector_config", type=Path)
-        if name == "compare-starting-bridges":
+        if name in {
+            "compare-starting-bridges",
+            "verify-starting-bridges",
+            "compare-journey-bridges",
+        }:
             command.add_argument("bridge_config", type=Path)
+        if name in {"compare-starting-bridges", "compare-journey-bridges"}:
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-shipped-checkpoint":
             command.add_argument("checkpoint_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name == "probe-shipped-journey":
+            command.add_argument("journey_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-connector-menu":
             command.add_argument("--node", required=True, type=Path)
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
-        if name in {"probe-cli-rest", "probe-cli-shop", "probe-cli-combat", "probe-cli-checkpoint"}:
+        if name in {
+            "probe-cli-rest",
+            "probe-cli-shop",
+            "probe-cli-combat",
+            "probe-cli-checkpoint",
+            "probe-cli-journey",
+        }:
             command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
         if name == "extract-game-text":
@@ -124,9 +144,18 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "compare-starting-bridges":
             result = run_starting_bridges(config, args.bridge_config, node=args.node)
             code = 0 if result["status"] == "starting_input_comparisons_pass" else 1
+        elif args.engine_command == "verify-starting-bridges":
+            result = verify_starting_bridges(config, args.bridge_config)
+            code = 0
+        elif args.engine_command == "compare-journey-bridges":
+            result = run_journey_bridges(config, args.bridge_config, node=args.node)
+            code = 0 if result["status"] == "first_combat_comparisons_pass" else 1
         elif args.engine_command == "probe-shipped-checkpoint":
             result = probe_shipped_checkpoint(config, args.checkpoint_config, node=args.node)
             code = 0 if result["verdict"]["status"] == "shipped_checkpoint_input_pass" else 1
+        elif args.engine_command == "probe-shipped-journey":
+            result = probe_shipped_journey(config, args.journey_config, node=args.node)
+            code = 0 if result["status"] == "first_combat_prefix_pass" else 1
         elif args.engine_command == "build-cli-candidate":
             result = build_cli_candidate(config, args.candidate_config, args.node)
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
@@ -135,6 +164,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-shop",
             "probe-cli-combat",
             "probe-cli-checkpoint",
+            "probe-cli-journey",
         }:
             result = probe_cli_rest(
                 config,
@@ -148,6 +178,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
                 in {
                     "rest_native_regression_pass",
                     "rest_public_projection_regression_pass",
+                    "journey_public_projection_regression_pass",
                     "shop_native_regression_pass",
                     "shop_public_projection_regression_pass",
                     "combat_native_regression_pass",
@@ -232,7 +263,11 @@ def run_engine_command(args: argparse.Namespace) -> int:
         if args.engine_command in {"prepare-connector", "extract-game-text"}:
             displayed = {key: value for key, value in result.items() if key != "inventory"}
             displayed["verified_toolchain_files"] = len(result["inventory"])
-        elif args.engine_command in {"probe-connector-menu", "probe-shipped-checkpoint"}:
+        elif args.engine_command in {
+            "probe-connector-menu",
+            "probe-shipped-checkpoint",
+            "probe-shipped-journey",
+        }:
             displayed = {key: value for key, value in result.items() if key != "probe"}
         elif args.engine_command == "build-cli-candidate":
             displayed = {
@@ -248,6 +283,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-shop",
             "probe-cli-combat",
             "probe-cli-checkpoint",
+            "probe-cli-journey",
         }:
             displayed = {
                 key: value

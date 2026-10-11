@@ -13,6 +13,7 @@ import pytest
 from spireshift import engine_starting_bridges as bridges
 from spireshift.core.manifest import manifest_identifier
 from spireshift.engine_checkpoint import verify_checkpoint_input
+from spireshift.engine_connector import _evaluate_connector_checkpoint
 from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
 
 
@@ -179,6 +180,187 @@ def test_template_drift_is_refused_before_any_native_job(tmp_path: Path) -> None
     with pytest.raises(ValueError, match="templates changed"):
         bridges.load_starting_bridge_config(qualification, path)
     assert not (tmp_path / "artifacts/startup-batch").exists()
+
+
+def complete_saved_batch(tmp_path: Path) -> tuple[EngineQualificationConfig, Path, Path]:
+    qualification, path = batch_fixture(tmp_path)
+    document, planned, templates = bridges.load_starting_bridge_config(qualification, path)
+    batch: dict[str, Any] = {
+        "schema_version": "engine-starting-bridges-v1",
+        "config_id": manifest_identifier(document),
+        "qualification_config_id": qualification.config_id,
+        "status": "starting_input_comparisons_pass",
+        "cases": [],
+        "planned_cases": 12,
+        "completed_cases": 12,
+        "failed_cases": 0,
+        "not_attempted_cases": 0,
+        "independent_seeds": 6,
+        "training_allowed": False,
+        "shipped_cross_host_parity": False,
+        "full_run_attempts": 0,
+        "optimizer_steps": 0,
+        "repeated_seed_choices_identical": True,
+    }
+    workspace = tmp_path / document["workspace"]
+    for case in planned:
+        directory = workspace / case["case_id"]
+        _, _, native, _ = checkpoint_fixture(directory)
+        attempt = directory / "artifacts/native/attempt"
+        snapshot = attempt / "private-starting-snapshot.json"
+        options = [{"title": "Synthetic reward", "is_locked": False}]
+        snapshot.write_text(
+            json.dumps({"interaction": {"content": {"surface": {"options": options}}}})
+        )
+        config = copy.deepcopy(templates["native"][1])
+        config.update(
+            seed=case["seed"], workspace=str((directory / "native").relative_to(tmp_path))
+        )
+        native.update(
+            config_id=manifest_identifier(config), qualification_config_id=qualification.config_id
+        )
+        native["probe"]["checkpoint"]["seed"] = case["seed"]
+        native["report_id"] = manifest_identifier(
+            {k: v for k, v in native.items() if k not in {"report_id", "report_path"}}
+        )
+        native_path = directory / "native-report.json"
+        native_path.write_text(json.dumps(native))
+        shipped_config = copy.deepcopy(templates["shipped"][1])
+        shipped_config.update(
+            seed=case["seed"],
+            checkpoint_report=str(native_path.relative_to(tmp_path)),
+            checkpoint_report_id=native["report_id"],
+            snapshot_sha256=_sha_file(snapshot),
+            workspace=str((directory / "shipped").relative_to(tmp_path)),
+            successful_payload_policy="remove_after_verified_success",
+        )
+        check_names = (
+            "loaded_identity",
+            "endpoint_owned_by_child",
+            "native_continue_offered",
+            "native_checkpoint_loaded",
+            "complete_public_starting_event",
+            "native_A8_seed_preserved",
+            "same_starting_public_option_titles_and_availability",
+            "profile_path_logged",
+            "steam_disabled_observed",
+            "shared_profile_unchanged",
+            "working_game_unchanged",
+            "archive_still_valid",
+            "template_unchanged",
+            "natural_shutdown",
+        )
+        shipped: dict[str, Any] = {
+            "probe": {"starting_options_comparison": {"managed": options, "shipped": options}},
+            "checks": dict.fromkeys(check_names, True),
+            "verdict": {"status": "shipped_checkpoint_input_pass", "errors": []},
+            "qualification_config_id": qualification.config_id,
+            "training_allowed": False,
+            "disposable_payload_removed_after_verified_success": True,
+        }
+        original = directory / "shipped/attempt/report.json"
+        original.parent.mkdir(parents=True)
+        original.write_text(
+            json.dumps(
+                {**shipped, "report_id": manifest_identifier(shipped), "report_path": str(original)}
+            )
+        )
+        shipped.update(
+            checkpoint_config_id=manifest_identifier(shipped_config),
+            checkpoint_report_id=native["report_id"],
+            checkpoint_sha256=native["probe"]["checkpoint"]["sha256"],
+            private_shipped_report_path=str(original),
+        )
+        shipped["report_id"] = manifest_identifier(shipped)
+        shipped_path = directory / "shipped-report.json"
+        shipped_path.write_text(json.dumps(shipped))
+        batch["cases"].append(
+            {
+                **case,
+                "native_report": str(native_path.relative_to(tmp_path)),
+                "native_report_id": native["report_id"],
+                "shipped_report": str(shipped_path.relative_to(tmp_path)),
+                "shipped_report_id": shipped["report_id"],
+                "starting_options": shipped["probe"]["starting_options_comparison"],
+                "status": "shipped_checkpoint_input_pass",
+                "disposable_payload_removed_after_verified_success": True,
+            }
+        )
+    batch["report_id"] = manifest_identifier(batch)
+    batch_path = workspace / "batch.json"
+    batch_path.write_text(json.dumps(batch))
+    return qualification, path, batch_path
+
+
+def test_saved_complete_batch_verification_launches_nothing(tmp_path: Path) -> None:
+    qualification, path, _ = complete_saved_batch(tmp_path)
+    result = bridges.verify_starting_bridges(qualification, path)
+    assert result["verified_cases"] == 12
+    assert result["independent_seeds"] == 6
+    assert result["games_launched"] == 0
+    assert result["training_allowed"] is False
+
+
+@pytest.mark.parametrize(
+    "gap",
+    [
+        "missing_case",
+        "reordered_case",
+        "changed_report",
+        "changed_snapshot",
+        "claimed_cleanup",
+        "wrong_options",
+        "promotion",
+    ],
+)
+def test_saved_success_cannot_hide_a_changed_case_or_scope(tmp_path: Path, gap: str) -> None:
+    qualification, path, batch_path = complete_saved_batch(tmp_path)
+    batch = json.loads(batch_path.read_text())
+    case = batch["cases"][0]
+    if gap == "missing_case":
+        batch["cases"].pop()
+    elif gap == "reordered_case":
+        batch["cases"].reverse()
+    elif gap == "changed_report":
+        (tmp_path / case["shipped_report"]).write_text("{}")
+    elif gap == "changed_snapshot":
+        native = json.loads((tmp_path / case["native_report"]).read_text())
+        (Path(native["report_path"]).parent / "private-starting-snapshot.json").write_text("{}")
+    elif gap == "claimed_cleanup":
+        shipped = json.loads((tmp_path / case["shipped_report"]).read_text())
+        (Path(shipped["private_shipped_report_path"]).parent / "game").mkdir()
+    elif gap == "wrong_options":
+        case["starting_options"]["shipped"][0]["title"] = "Different choice"
+    else:
+        batch["training_allowed"] = True
+    batch["report_id"] = manifest_identifier({k: v for k, v in batch.items() if k != "report_id"})
+    batch_path.write_text(json.dumps(batch))
+    with pytest.raises((ValueError, KeyError)):
+        bridges.verify_starting_bridges(qualification, path)
+
+
+def test_startup_pass_cannot_admit_an_uncompared_combat_prefix() -> None:
+    checks = dict.fromkeys(
+        (
+            "loaded_identity",
+            "endpoint_owned_by_child",
+            "native_continue_offered",
+            "native_checkpoint_loaded",
+            "complete_public_starting_event",
+            "native_A8_seed_preserved",
+            "same_starting_public_option_titles_and_availability",
+            "profile_path_logged",
+            "steam_disabled_observed",
+            "shared_profile_unchanged",
+            "working_game_unchanged",
+            "archive_still_valid",
+            "template_unchanged",
+            "natural_shutdown",
+        ),
+        True,
+    )
+    assert _evaluate_connector_checkpoint(checks)["errors"] == []
+    assert len(_evaluate_connector_checkpoint(checks, journey=True)["errors"]) == 3
 
 
 def test_failed_native_startup_remains_in_denominator_and_stops_batch(

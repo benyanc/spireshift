@@ -368,7 +368,15 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-checkpoint-shipped-probe.mjs"
+                "engine-journey-shipped-probe-v4.mjs"
+                if fixture is not None and fixture.get("shipped_ui_revision") == "tutorial_v4"
+                else "engine-journey-shipped-probe-v3.mjs"
+                if fixture is not None and fixture.get("shipped_ui_revision") == "tutorial_v3"
+                else "engine-journey-shipped-probe-v2.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "journey_v2"
+                else "engine-journey-shipped-probe.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "journey_v1"
+                else "engine-checkpoint-shipped-probe.mjs"
                 if fixture is not None
                 else "engine-menu-probe.mjs"
             )
@@ -575,7 +583,9 @@ def _probe_connector_private(
             and probe.get("shutdown_requested") is True,
         }
         verdict = (
-            _evaluate_connector_checkpoint(checks)
+            _evaluate_connector_checkpoint(
+                checks, journey=fixture.get("comparison_mode") in {"journey_v1", "journey_v2"}
+            )
             if fixture is not None
             else evaluate_connector_menu(checks)
         )
@@ -631,8 +641,10 @@ def _probe_connector_private(
         raise
 
 
-def _evaluate_connector_checkpoint(checks: dict[str, Any]) -> dict[str, Any]:
-    required = (
+def _evaluate_connector_checkpoint(
+    checks: dict[str, Any], *, journey: bool = False
+) -> dict[str, Any]:
+    required: tuple[str, ...] = (
         "loaded_identity",
         "endpoint_owned_by_child",
         "native_continue_offered",
@@ -648,6 +660,12 @@ def _evaluate_connector_checkpoint(checks: dict[str, Any]) -> dict[str, Any]:
         "template_unchanged",
         "natural_shutdown",
     )
+    if journey:
+        required += (
+            "journey_all_snapshots_match",
+            "journey_all_actions_delivered",
+            "journey_second_turn_observed",
+        )
     errors = [key for key in required if checks.get(key) is not True]
     return {
         "status": "shipped_checkpoint_input_pass"

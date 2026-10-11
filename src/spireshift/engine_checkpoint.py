@@ -22,8 +22,10 @@ def _saved_private_path(qualification: EngineQualificationConfig, value: str) ->
 
 
 def verify_checkpoint_input(
-    qualification: EngineQualificationConfig, document: dict[str, Any]
+    qualification: EngineQualificationConfig, document: dict[str, Any], *, panel: str = "checkpoint"
 ) -> dict[str, Any]:
+    if panel not in {"checkpoint", "journey"}:
+        raise ValueError("Unknown native checkpoint qualification scope")
     report = json.loads(
         _private_path(qualification.root, document["checkpoint_report"]).read_text()
     )
@@ -33,7 +35,7 @@ def verify_checkpoint_input(
     checks = report.get("checks", {})
     required_checks = (
         "frozen_archive_unchanged",
-        "native_checkpoint_regressions_pass",
+        f"native_{panel}_regressions_pass",
         "pinned_managed_runtime_unchanged",
         "pinned_sdk_tree_unchanged",
         "projection_identity_bound",
@@ -43,10 +45,10 @@ def verify_checkpoint_input(
     )
     if (
         manifest_identifier(body) != report.get("report_id")
-        or report.get("schema_version") != "engine-cli-checkpoint-projection-probe-v1"
+        or report.get("schema_version") != f"engine-cli-{panel}-projection-probe-v1"
         or report.get("report_id") != document.get("checkpoint_report_id")
         or report.get("qualification_config_id") != qualification.config_id
-        or report.get("status") != "checkpoint_public_projection_regression_pass"
+        or report.get("status") != f"{panel}_public_projection_regression_pass"
         or any(checks.get(key) is not True for key in required_checks)
         or not all(value is True for value in checks.values())
         or report.get("training_allowed") is not False

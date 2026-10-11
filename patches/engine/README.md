@@ -126,9 +126,9 @@ panels. Eight installed observation boundaries are not an exhaustive mechanics p
 node --test scripts/engine-selection-shop-surface.test.mjs
 ```
 
-## Current combat, content and exact-text host
+## Preserved combat, content and exact-text host
 
-`sts2-cli-v0.111.0-localization-v6.patch` is the current combined local delta over the
+`sts2-cli-v0.111.0-localization-v6.patch` is the earlier combined local delta over the
 unchanged pinned base patch. It includes the earlier rest/shop/selection fixes, combat
 bindings, explicit native content policy and exact-text override. Apply **one** local delta;
 do not stack v2/v3/v4/v5/v6. The v4 combat and v5 content deltas remain reconstruction
@@ -160,7 +160,7 @@ and [public evidence](../../docs/evidence/actual-engine-v0.111.0-combat-and-star
 bind all source/runtime/text/SDK identities. The 28 named combat/rest/shop fixtures pass
 841 subchecks with 85 SDK snapshots; one native A8 starting save passes 14 shipped startup
 gates. Neither result establishes full-run parity, exhaustive mechanic coverage or training
-admission. The owner repeat-seed panel is separate and has not been launched.
+admission. The subsequent owner repeat-seed panel passed; its new evidence is recorded below.
 
 Historical configs intentionally refuse changed helper bytes. Their exact prior versions
 are retained beside private attempts; reconstruction must restore those hashes rather than
@@ -168,4 +168,44 @@ reuse a current helper under an old result identity. No proprietary extraction i
 
 ```bash
 node --test scripts/engine-combat-surface.test.mjs scripts/engine-checkpoint-shipped-probe.test.mjs
+```
+
+## Current finished-event Proceed host and first-combat comparison
+
+`sts2-cli-v0.111.0-event-proceed-v7.patch` replaces v6 on the same pinned base patch.
+Apply **one combined local delta**, not stacked v6/v7 patches. The game DLL stays unchanged.
+The shipped comparison caught v6 skipping a finished event's Proceed button. V7 implements the
+exact `NEventRoom.UpdateOptions` finished-option / `NEventRoom.Proceed` UI boundary with a native
+`EventOption`; choosing it sets the existing map-presentation flag. Observation does not claim
+rewards or move rooms. Native map voting still owns travel. Pending selection/reward/bundle/task
+states cannot dispatch an event choice. This is a declared version-bound UI seam, not a change
+to native game rules or a broadly qualified event adapter.
+
+The [v7 build](../../configs/engine-qualification/sts2-v0.111.0-cli-build-event-proceed-v7.json)
+pins the combined source diff, patch, deterministic binary/MVID, compiler, runtime and unchanged
+game DLL. The 28 combat/rest/shop fixtures were rerun with new v7 configs: 841 subchecks, 85 SDK
+snapshots, 60 delivered actions and 34 invalid native inputs pass. Old reports/configs remain
+bound to their original bytes; their results are not automatically transferred.
+
+The common first-turn contract uses public semantic action operands across opaque host identities.
+It preserves current card costs/playability, public HP/energy/block, typed status ownership,
+next map options and numeric attack damage/hits. Unknown labels and missing data fail. It excludes
+effect text, preview stats, relic counters, full map topology, pile contents and later mechanics;
+see [scoped evidence](../../docs/evidence/actual-engine-v0.111.0-starting-and-first-combat-v1.json).
+The native host creates a normal seeded A8 starting save; the shipped Host imports that save via
+Continue and replays only the complete current legal menus. No named combat-state injection is
+used in these prefix comparisons. The initial read-only setup calls are recorded separately.
+
+A fresh shipped profile's three-page Combat Basics modal exposes `advance_tutorial` even on its
+final Finish page. The versioned tutorial helper selects that exact current advertised forward
+control, ignores Previous Page and checks underlying public combat facts before/after every
+click. It never fabricates legal gameplay actions while the modal is open. Unknown tutorials fail.
+The skipped-Proceed and earlier tutorial-helper failures remain preserved with separate identities.
+
+Two single-seed/choice comparisons pass through card plays and the fresh second turn. The next
+owner recipe repeats two seeds and two choices twice (eight cases, two independent seeds).
+It does not start full runs or learning; #145 remains open for broader shipped mechanics.
+
+```bash
+node --test scripts/engine-journey-contract*.test.mjs scripts/engine-journey-tutorial*.test.mjs
 ```

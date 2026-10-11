@@ -1,66 +1,62 @@
 # SpireShift backlog
 
-Updated 2026-10-10 after scoped native combat checks and a shipped-game starting-save pass.
+Updated 2026-10-10 after the owner's 12-case startup panel and short first-combat comparisons.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
-or more. Use saved timings to estimate duration and explicit caps to bound short jobs.
+or more. Use saved timings and explicit caps.
 
 ## Current handoff and direction
 
 **Current work: #145, actual-engine public inputs and mechanics qualification.** The separately
 frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
-full-run victory stays primary. Preserve every v0.107.1 archive, model, encoder and result.
+full-run victory stays primary. Preserve all v0.107.1 archives, models, encoders and results.
 [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md) orders public/mechanics
 qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
 other difficulties and larger unchanged PPO/GA batches remain deferred.
 
-**Combat, rest and shop fixture package passes.** The current reproducible v6 local CLI leaves
-the official rules DLL unchanged and uses separately pinned .NET 9.0.7. Its canonical interface
-passes **841 subchecks across 28 named native fixtures**, with **85 complete SDK snapshots**,
-60 delivered actions and 34 deliberately invalid native inputs. Combat keeps current cost/X cost,
-per-copy card identity, status owners and multi-hit intent facts. Player-targeted potions and
-hand-upgrade copy selection are repaired. The public pile view now sorts independently of native
-hidden draw enumeration; labeling an ordered list “unordered” had been insufficient.
+**The owner startup panel passes: 12/12 cases, zero failures.** Six independent native A8 seeds
+were imported through normal Continue twice each. Starting titles/availability match and repeated
+choices are identical. The batch took 454.073 seconds; all case/config/report, save and snapshot
+bindings were subsequently reverified from saved files without game attempts. Cost rates remain
+unknown. This is a startup check, not player quality or full mechanics parity.
 
-**Normal startup inputs and the save bridge are repaired.** The fresh profile's tutorial path
-skipped Neow, and older wrapper localization failed on current content. A new explicit
-`native_all_unlocked` policy uses the game's own unlock state, and 92 private text tables are
-extracted and verified against the frozen pack. Historical progress behavior remains available.
-A native current-room A8 save imports through the shipped game's normal Continue action:
-**14/14 startup/control/isolation gates pass in 30.460 seconds**. Seed, A8 and offered starting
-option titles/availability agree. Shared saves, game/archive files and source inputs stay intact;
-diagnostics remain private. This is one starting save, not combat parity or useful gameplay.
+**First actual actions found and repaired a skipped Proceed step.** The reproducible v7 wrapper
+now exposes the native finished-event Proceed button before opening the map. Native effects/map
+voting and the official rules DLL remain unchanged. Its new binary has separate source, patch,
+build and runtime identities. All **841 subchecks across 28 combat/rest/shop native fixtures**
+were rerun on v7 and pass, with **85 SDK snapshots**, 60 delivered actions and 34 invalid inputs
+refused. These privileged regressions are not training examples or shipped parity evidence.
 
-[Current reconstruction evidence](evidence/actual-engine-v0.111.0-combat-and-starting-inputs-v1.json)
-records separate build, runtime, text, public projection and report identities. Historical
-[menu](evidence/actual-engine-v0.111.0-menu-control-v1.json),
-[rest](evidence/actual-engine-v0.111.0-cli-rest-projection-v1.json),
-[shop/selection](evidence/actual-engine-v0.111.0-selection-shop-v1.json) and failed checks remain
-preserved. The 1,660-type registry is a declared inventory, not exhaustive offered-content or
-reachable-state coverage. The 28 fixtures are privileged regressions, not training examples.
+**Two first-combat smoke comparisons pass on one seed.** Winged Boots and Dowsing Rod prefixes
+match through Proceed, first combat, card plays, End Turn and the next hand/enemy state. Current
+legal actions, costs, HP, energy, owned statuses, intents and pile counts match; incomplete/unknown
+public fields fail. The three native tutorial buttons are separately counted and must leave the
+underlying game facts unchanged. Shipped processes took 41.531 and 36.915 seconds. Effect text,
+preview stats, relic counters, full map/pile information and later families/turns remain outside
+this scope. Successful copies were removed after verification; all failures and private evidence
+remain. [Current evidence](evidence/actual-engine-v0.111.0-starting-and-first-combat-v1.json) preserves
+historical identities and results.
 
-**Next owner stage: six starting seeds, each compared twice, without playing a full run.**
-Run only `bash scripts/compare-native-starts-v1.sh` (also linked in the actual-engine guide).
-Estimate **6–8 minutes** from measured startup/import times, with a **15-minute cap**, one game
-at a time, 8 GB memory and 4 GB generated-file limits. Each case prints its result. Remove only a
-successful attempt's disposable payload after verified natural shutdown; keep reports, logs,
-profiles and native saves. Preserve the first failed payload and stop. Repeated seeds are six
-independent cases with two repeats, not twelve independent seeds. Completed results are shown
-on rerun; partial work is preserved without a silent restart. Codex has not launched this batch.
+**Next owner stage: eight repeated first-combat checks.** Run only
+`bash scripts/compare-first-combat-v1.sh`, linked with an absolute command in the actual-engine
+guide. Two seeds, two choices each, twice: **two independent seeds and four choice pairs**.
+Estimate **6–8 minutes**, with a **15-minute cap**, one game at a time, 8 GB memory and 4 GB
+artifact limits. The first divergence stops the batch and is counted; successful payloads are
+removed only after natural exit/integrity verification. Reports/logs/profiles/saves remain.
+A completed rerun displays saved results; partial work never restarts silently. Codex has not
+launched the batch. It performs no full runs or training.
 
-**Remaining under #145:** compare shipped combat/rest/shop actions; qualify complete modifier,
-expiry and relic-counter facts, the other selectors/rewards and large choice spaces, out-of-combat
-potions, native shop discounts/relic effects, other public decision families, later acts and true
-terminal conditions. Hand-upgrade preferences include a version-bound UI contract shim rather
-than a captured native parameter; that seam needs shipped comparison. Missing authority stays
-explicitly unsupported and counted. Native effects/RNG remain in the game; adapters do not
-substitute game rules. No exhaustive fidelity or full-run training admission is claimed.
+**Remaining under #145:** assess the repeated combat panel, compare shipped rest/shop actions,
+qualify full modifier/expiry/relic-counter facts, remaining selection/reward families and large
+choice spaces, out-of-combat potions, native discounts/relic purchases, other public decisions,
+later-act advancement and actual endings. The model registry is not exhaustive reachable-state
+coverage, and first-turn parity is not all-combat qualification.
 
-#146 then measures complete-run speed and failures at one worker before bounded parallel workers,
-introduces the new public encoder/experience lineage, and prepares a finite owner A8 neural pilot.
-**Zero full-run attempts, optimizer steps and training admission in this qualification package.**
-Adaptive thinking waits for a useful base player. The prepared large v3 emulator pilot below is
-historical and deferred.
+#146 then measures complete-run speed/failures at one worker before bounded parallel workers,
+versions a new actual-engine public encoder/model/experience lineage and connects existing
+neural/PPO machinery. Useful independent A8 full-run gains remain the aim. Adaptive budgets
+stay behind foundation readiness. No larger PPO/GA, difficulty change or controller follows
+automatically. Changes stay local; no push/PR/Actions run is required.
 
 ## Preserved v0.107.1 direction and evidence
 
@@ -251,7 +247,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; 28 native fixtures and one shipped starting-save comparison pass | Owner checks six starting seeds twice; then qualify remaining public mechanics, shipped combat/rest/shop actions and ending semantics. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; 12 starting comparisons, two combat smokes and 28 v7 native fixtures pass | Owner repeats eight first-combat prefixes; then qualify remaining public mechanics, shipped rest/shop actions and ending semantics. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
