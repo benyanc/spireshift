@@ -424,7 +424,9 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-rest-shipped-probe-v2.mjs"
+                "engine-shop-shipped-probe-v1.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "shop_bridge_v1"
+                else "engine-rest-shipped-probe-v2.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v2"
                 else "engine-rest-shipped-probe.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v1"
@@ -519,6 +521,8 @@ def _probe_connector_private(
         raise ValueError("Close the existing STS2 game before the short Connector check")
     if not node.is_file():
         raise ValueError("Pass the local Node runtime explicitly with --node")
+    if shutil.disk_usage(config.qualification.root).free < 3_500_000_000:
+        raise ValueError("Allow 3.5 GB free before copying one disposable shipped game")
     archive, verified = _verified_archive(config.native)
     toolchain = _verify_toolchain(config)
     template, template_report = _settings_template(config)
@@ -556,6 +560,7 @@ def _probe_connector_private(
         settings.parent.mkdir(parents=True)
         shutil.copy2(template, settings)
         consent_fresh_rest = False
+        consent_fresh_shop = False
         if fixture is not None:
             checkpoint = Path(fixture["checkpoint_path"])
             if _sha_file(checkpoint) != fixture["checkpoint_sha256"]:
@@ -564,6 +569,13 @@ def _probe_connector_private(
             destination = profile / "default/1/modded/profile1/saves/current_run.save"
             destination.parent.mkdir(parents=True)
             shutil.copy2(checkpoint, destination)
+            if fixture.get("comparison_mode") == "shop_bridge_v1":
+                if (
+                    "rest_tutorial_baseline" in fixture
+                    or (destination.parent / "progress.save").exists()
+                ):
+                    raise ValueError("Shop qualification requires a fresh tutorial-enabled profile")
+                consent_fresh_shop = True
             if fixture.get("comparison_mode") == "rest_bridge_v2":
                 if "rest_tutorial_baseline" in fixture:
                     raise ValueError(
@@ -598,6 +610,8 @@ def _probe_connector_private(
             consent["rest_tutorial_baseline"] = fixture["rest_tutorial_baseline"]
         if fixture is not None and consent_fresh_rest:
             consent["fresh_rest_progress_absent_before_launch"] = True
+        if consent_fresh_shop:
+            consent["fresh_shop_progress_absent_before_launch"] = True
         override = executable.parent / "override.cfg"
         override.write_text(_profile_override(profile_name), encoding="utf-8")
         installation = subprocess.run(
@@ -683,12 +697,18 @@ def _probe_connector_private(
             checks["fresh_rest_progress_absent_before_launch"] = (
                 consent.get("fresh_rest_progress_absent_before_launch") is True
             )
+        shop_bridge = fixture is not None and fixture.get("comparison_mode") == "shop_bridge_v1"
+        if shop_bridge:
+            checks["fresh_shop_progress_absent_before_launch"] = (
+                consent.get("fresh_shop_progress_absent_before_launch") is True
+            )
         verdict = (
             _evaluate_connector_checkpoint(
                 checks,
                 journey=fixture.get("comparison_mode") in {"journey_v1", "journey_v2"},
                 rest_bridge=fixture.get("comparison_mode") in {"rest_bridge_v1", "rest_bridge_v2"},
                 fresh_rest_tutorial=fresh_rest_tutorial,
+                shop_bridge=shop_bridge,
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -751,9 +771,10 @@ def _evaluate_connector_checkpoint(
     journey: bool = False,
     rest_bridge: bool = False,
     fresh_rest_tutorial: bool = False,
+    shop_bridge: bool = False,
 ) -> dict[str, Any]:
-    if journey and rest_bridge:
-        raise ValueError("Do not merge separately scoped combat and rest comparisons")
+    if sum((journey, rest_bridge, shop_bridge)) > 1:
+        raise ValueError("Do not merge separately scoped combat, rest and shop comparisons")
     if fresh_rest_tutorial and not rest_bridge:
         raise ValueError("Fresh rest tutorial evidence requires the scoped rest fixture")
     required: tuple[str, ...] = (
@@ -793,6 +814,24 @@ def _evaluate_connector_checkpoint(
             "journey_all_snapshots_match",
             "journey_all_actions_delivered",
             "journey_second_turn_observed",
+        )
+    if shop_bridge:
+        required = tuple(
+            name
+            for name in required
+            if name
+            not in {
+                "complete_public_starting_event",
+                "same_starting_public_option_titles_and_availability",
+            }
+        ) + (
+            "fresh_shop_progress_absent_before_launch",
+            "complete_public_shop_fixture",
+            "shop_all_snapshots_match",
+            "shop_all_actions_delivered",
+            "shop_final_map_observed",
+            "shop_purchase_removal_and_exit_effects",
+            "shop_fresh_potion_tutorial_delivered",
         )
     if fresh_rest_tutorial:
         required += ("fresh_rest_tutorial_dismissed", "fresh_rest_progress_absent_before_launch")

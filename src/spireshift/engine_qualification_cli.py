@@ -42,6 +42,8 @@ from spireshift.engine_qualification import (
 )
 from spireshift.engine_rest_bridge import compare_rest_bridge, compare_rest_bridges
 from spireshift.engine_rest_verification import verify_rest_bridges
+from spireshift.engine_shop_bridge import compare_shop_bridge, compare_shop_bridges
+from spireshift.engine_shop_verification import verify_shop_bridge, verify_shop_bridges
 from spireshift.engine_source import inspect_game_source
 from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
 from spireshift.full_run_experience import atomic_json
@@ -70,8 +72,12 @@ def add_engine_parser(commands: Any) -> None:
         "compare-journey-bridges",
         "verify-journey-bridges",
         "compare-rest-bridge",
+        "compare-shop-bridge",
+        "compare-shop-bridges",
         "compare-rest-bridges",
         "verify-rest-bridges",
+        "verify-shop-bridge",
+        "verify-shop-bridges",
         "build-cli-candidate",
         "build-connector-candidate",
         "probe-cli-rest",
@@ -80,6 +86,7 @@ def add_engine_parser(commands: Any) -> None:
         "probe-cli-checkpoint",
         "probe-cli-journey",
         "probe-cli-rest-bridge",
+        "probe-cli-shop-bridge",
         "inspect-game-source",
         "extract-game-text",
     ):
@@ -97,8 +104,12 @@ def add_engine_parser(commands: Any) -> None:
             "compare-journey-bridges",
             "verify-journey-bridges",
             "compare-rest-bridge",
+            "compare-shop-bridge",
+            "compare-shop-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
+            "verify-shop-bridge",
+            "verify-shop-bridges",
         }:
             command.add_argument("bridge_config", type=Path)
         if name in {
@@ -106,8 +117,12 @@ def add_engine_parser(commands: Any) -> None:
             "compare-journey-bridges",
             "verify-journey-bridges",
             "compare-rest-bridge",
+            "compare-shop-bridge",
+            "compare-shop-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
+            "verify-shop-bridge",
+            "verify-shop-bridges",
         }:
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-shipped-checkpoint":
@@ -130,6 +145,7 @@ def add_engine_parser(commands: Any) -> None:
             "probe-cli-checkpoint",
             "probe-cli-journey",
             "probe-cli-rest-bridge",
+            "probe-cli-shop-bridge",
         }:
             command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
@@ -177,6 +193,13 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "verify-journey-bridges":
             result = verify_journey_bridges(config, args.bridge_config, node=args.node)
             code = 0
+        elif args.engine_command in {"verify-shop-bridge", "verify-shop-bridges"}:
+            result = (
+                verify_shop_bridge
+                if args.engine_command == "verify-shop-bridge"
+                else verify_shop_bridges
+            )(config, args.bridge_config, node=args.node)
+            code = 0
         elif args.engine_command == "verify-rest-bridges":
             result = verify_rest_bridges(config, args.bridge_config, node=args.node)
             code = 0
@@ -189,6 +212,17 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = (
                 0
                 if result["status"] in {"rest_action_comparison_pass", "rest_comparisons_pass"}
+                else 1
+            )
+        elif args.engine_command in {"compare-shop-bridge", "compare-shop-bridges"}:
+            result = (
+                compare_shop_bridge
+                if args.engine_command == "compare-shop-bridge"
+                else compare_shop_bridges
+            )(config, args.bridge_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"shop_action_comparison_pass", "shop_comparisons_pass"}
                 else 1
             )
         elif args.engine_command == "probe-shipped-checkpoint":
@@ -210,6 +244,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-checkpoint",
             "probe-cli-journey",
             "probe-cli-rest-bridge",
+            "probe-cli-shop-bridge",
         }:
             result = probe_cli_rest(
                 config,
@@ -224,6 +259,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
                     "rest_native_regression_pass",
                     "rest_public_projection_regression_pass",
                     "rest_bridge_public_projection_regression_pass",
+                    "shop_bridge_public_projection_regression_pass",
                     "journey_public_projection_regression_pass",
                     "shop_native_regression_pass",
                     "shop_public_projection_regression_pass",
@@ -331,6 +367,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-checkpoint",
             "probe-cli-journey",
             "probe-cli-rest-bridge",
+            "probe-cli-shop-bridge",
         }:
             displayed = {
                 key: value

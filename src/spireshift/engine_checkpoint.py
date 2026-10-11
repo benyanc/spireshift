@@ -24,7 +24,7 @@ def _saved_private_path(qualification: EngineQualificationConfig, value: str) ->
 def verify_checkpoint_input(
     qualification: EngineQualificationConfig, document: dict[str, Any], *, panel: str = "checkpoint"
 ) -> dict[str, Any]:
-    if panel not in {"checkpoint", "journey", "rest_bridge"}:
+    if panel not in {"checkpoint", "journey", "rest_bridge", "shop_bridge"}:
         raise ValueError("Unknown native checkpoint qualification scope")
     report = json.loads(
         _private_path(qualification.root, document["checkpoint_report"]).read_text()
@@ -55,8 +55,8 @@ def verify_checkpoint_input(
         or checkpoint.get("ascension") != 8
         or checkpoint.get("content_policy")
         != (
-            "serialized_native_privileged_rest_fixture"
-            if panel == "rest_bridge"
+            f"serialized_native_privileged_{panel.removesuffix('_bridge')}_fixture"
+            if panel in {"rest_bridge", "shop_bridge"}
             else "native_all_unlocked"
         )
         or checkpoint.get("seed") != document.get("seed")

@@ -292,3 +292,75 @@ Portable synthetic checks require no proprietary observations or game files:
 ```bash
 node --test scripts/verify-engine-rest-saved.test.mjs
 ```
+
+## Current native potion pricing and shop comparison
+
+`sts2-cli-v0.111.0-potion-pricing-v9.patch` replaces the combined v8 delta on the same pinned
+upstream/base patch. Apply **one combined local delta**, not stacked v8/v9 patches. The original
+game DLL on disk remains byte-identical. The shop comparison found that TestMode skips the
+native potion price random adjustment and its shop-RNG consumption: one native quote was 75
+gold while the shipped game quoted 79.
+
+V9 installs a Harmony transpiler only on `MerchantPotionEntry.CalcCost`. It requires exactly
+one `TestMode.IsOff` call and changes that branch predicate to true so the original native
+formula and RNG call execute. Missing or ambiguous bindings fail rather than silently skipping
+the repair. Global TestMode remains unchanged. This runtime interception is a candidate wrapper
+repair, not automatic game authority. Other TestMode branches that affect rules/RNG remain a
+required audit before broad qualification.
+
+The [v9 build recipe](../../configs/engine-qualification/sts2-v0.111.0-cli-build-potion-pricing-v9.json)
+reproduces two baseline/two repaired outputs in 21.596 seconds. The repaired SHA is
+`c47fafb1dab14f73227f8709f542cf2fc8c49232a8559dfda16aade0384d4ab8`, MVID
+`a813471b-2515-4267-95b6-3553a9ae4f49`, on separately pinned .NET 9.0.7. This reproduces
+the local toolchain candidate, not the upstream binary. New v9 combat/rest/shop regression
+configs rerun all 28 fixtures: 841 subchecks, 85 SDK snapshots, 60 delivered actions and 34
+refused invalid inputs pass. Old results retain their own identities.
+
+The shop bridge injects a single Strike, 1,000 gold and two empty A8 potion slots, with or
+without The Courier. It imports that same native shop save through shipped Continue. The
+current contract compares stock/prices/legal menus, deck/potion ownership, gold, capacity,
+card removal cancel/reopen/confirm and explicit exit. The native atomic removal and shipped
+select/automatic-preview/confirm flows are represented separately. Fresh current operands,
+preview invariants and complete delivery receipts are required. Sold-out display model identity,
+relic purchases, other discounts, out-of-combat potion use and skipping the merchant before
+opening inventory remain unqualified.
+
+One ordinary case and one Courier case pass on different seeds, together with raw saved audits:
+19 common observations, 17 effect decisions and 25 game/UI actions, including two fresh potion
+tutorial clicks. Their shipped processes take 39.387 and 37.200 seconds. These are privileged
+finite fixture comparisons, not naturally reached rooms, repeatability evidence or player
+strength. The [eight-case owner recipe](../../scripts/compare-shop-actions-v1.sh) remains unlaunched.
+
+## Current local rest-and-potion Connector candidate
+
+`sts2-connector-v0.111.0-rest-potion-tutorial-v2.patch` replaces the rest-only patch on the
+same pinned MIT Connector revision. Do not apply both local patches. Preserve the separate
+[MIT notice](sts2-connector-MIT-LICENSE.txt). It retains exact `NRestSiteFtue` confirmation and
+adds only the exact current `NObtainPotionFtue` visible enabled confirmation. Unknown/incomplete
+popups still fail; no progress is copied/edited and no generic modal close is exposed.
+
+The [v3 build recipe](../../configs/engine-qualification/sts2-v0.111.0-connector-rest-potion-build-v3.json)
+reproduces two fresh builds in 16.621 seconds. Local source revision is
+`3769f2a20b3d122959047b25bc9af876a1fcd887`, Host SHA
+`0c6833f8dc426c3ca1951aaaa1cd9f6735a1639eb15289e34eb80cc3ca3b4d92`, MVID
+`3bacb44d-f16f-4240-9e30-7aa62ce62e50`. The
+[v3 Connector config](../../configs/engine-qualification/sts2-v0.111.0-connector-rest-potion-tutorial-v3.json)
+binds the separately inventoried local toolchain. It cannot inherit upstream release/seal
+authority; original Host/seal, SDK, game DLL and prior evidence are preserved.
+
+The owner's rest-only Host panel passes eight fresh-profile repeated cases. Prior-family
+regressions on that Host pass two first-combat prefixes. The current cumulative Host/v9 native
+pair has its own passing fresh rest, first-combat and two shop checks; none inherits a previous
+binary's test result. Four focused Host tutorial tests pass. First-potion popup dismissal must
+leave the already completed purchase's public facts unchanged. All failed comparisons/builds/
+copy attempts and partial payloads remain private; successful copies are removed only after
+verified natural shutdown/integrity. A 3.5-GB free-space guard runs before another game copy.
+
+[Fresh rest and shop evidence](../../docs/evidence/actual-engine-v0.111.0-fresh-rest-and-shop-v1.json)
+records frozen configs/build/runtime/adapter identities, saved audits and exact scopes. No
+full-run, general mechanics, learning admission or model promotion follows.
+
+```bash
+node --test scripts/engine-shop-bridge-contract.test.mjs scripts/verify-engine-shop-saved.test.mjs
+uv run pytest tests/unit/test_engine_shop_bridge.py
+```

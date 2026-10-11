@@ -80,13 +80,21 @@ def _probe_cli_document(
     *,
     panel: str,
 ) -> dict[str, Any]:
-    if panel not in {"rest", "shop", "combat", "checkpoint", "journey", "rest_bridge"}:
+    if panel not in {
+        "rest",
+        "shop",
+        "combat",
+        "checkpoint",
+        "journey",
+        "rest_bridge",
+        "shop_bridge",
+    }:
         raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
     revision = document.get("public_projection_revision", "rest_v1")
     if (
         projected
-        and panel in {"combat", "checkpoint", "journey", "rest_bridge"}
+        and panel in {"combat", "checkpoint", "journey", "rest_bridge", "shop_bridge"}
         and revision != "combat_v4"
     ):
         raise ValueError("Combat public projection requires its explicit frozen revision")
@@ -111,7 +119,7 @@ def _probe_cli_document(
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
         raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
-    if panel in {"checkpoint", "journey", "rest_bridge"} and (
+    if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge"} and (
         not projected
         or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
         or document.get("content_policy") != "native_all_unlocked"
@@ -132,6 +140,26 @@ def _probe_cli_document(
                 "bridge_helpers_sha256", {}
             ).get(name):
                 raise ValueError("Pinned rest fixture helper changed")
+    if panel == "shop_bridge":
+        if document.get("shop_bridge", {}).get("scenario") not in {
+            "ordinary-purchases-removal",
+            "courier-restock-removal",
+        }:
+            raise ValueError("Expected one explicitly named finite shop fixture")
+        names = {
+            "engine-shop-bridge-contract.mjs",
+            "engine-rest-bridge-contract.mjs",
+            "engine-journey-contract-v2.mjs",
+            "engine-menu-probe.mjs",
+        }
+        if set(document.get("bridge_helpers_sha256", {})) != names:
+            raise ValueError("Complete frozen shop fixture helper inventory is required")
+        for name in names:
+            if (
+                _sha_file(qualification.root / "scripts" / name)
+                != document["bridge_helpers_sha256"][name]
+            ):
+                raise ValueError("Pinned shop fixture helper changed")
     if panel == "journey":
         plan = document.get("journey", {})
         journey_revision = document.get("journey_revision", "v1")
@@ -163,7 +191,9 @@ def _probe_cli_document(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        "probe-engine-cli-rest-bridge.mjs"
+        "probe-engine-cli-shop-bridge.mjs"
+        if projected and panel == "shop_bridge"
+        else "probe-engine-cli-rest-bridge.mjs"
         if projected and panel == "rest_bridge"
         else (
             "probe-engine-cli-journey-v2.mjs"
@@ -209,6 +239,7 @@ def _probe_cli_document(
             "spireshift_cli_localization_v6_local_toolchain",
             "spireshift_cli_event_proceed_v7_local_toolchain",
             "spireshift_cli_save_restore_v8_local_toolchain",
+            "spireshift_cli_potion_pricing_v9_local_toolchain",
         }
         and localization is None
     ):
@@ -278,11 +309,12 @@ def _probe_cli_document(
             "panel": panel,
             **(
                 {"seed": document["seed"], "content_policy": document["content_policy"]}
-                if panel in {"checkpoint", "journey", "rest_bridge"}
+                if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge"}
                 else {}
             ),
             **({"journey": document["journey"]} if panel == "journey" else {}),
             **({"rest_bridge": document["rest_bridge"]} if panel == "rest_bridge" else {}),
+            **({"shop_bridge": document["shop_bridge"]} if panel == "shop_bridge" else {}),
         }
         if projected:
             spec["projection"] = projection

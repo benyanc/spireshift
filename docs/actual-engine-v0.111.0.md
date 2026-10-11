@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — repeated rest passes; fresh tutorial repair has two passing checks
+## Current status — fresh rest repeats pass; shop repeatability is next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -192,33 +192,88 @@ mechanics checks, not naturally reached rooms, broad selector coverage, full-gam
 or player strength. Because the Host binary changed, earlier shipped startup/combat results must
 be rechecked on it before relying on those families.
 
+## Completed fresh-profile rest panel and shop package
+
+The owner completed **8/8 fresh rest comparisons** with zero failures or unattempted cases. Two
+seeds × two orders × two repeats provide four seed/order pairs. Each settings-only profile has
+no copied tutorial progress and actually clicks the fresh popup. The independent saved audit
+verifies **56 observations, 48 rest decisions, 56 game/UI actions, eight upgrade previews and
+eight tutorial clicks**. Batch/resource wall time is **428.762/428.978 seconds**, CPU **149.838
+seconds**. All repeated prefixes agree. No games or optimizers ran for that audit.
+
+The rest-patched Host also passes two targeted startup/first-combat checks on different existing
+seeds, taking **41.097 and 39.618 shipped-process seconds**. One earlier installation timeout is
+preserved; the explicit new-directory retry passes. This is two finite regressions, not a new
+repeated panel or proof about all combat.
+
+Shipped shop testing found that the native wrapper's TestMode skipped the game's random potion
+price adjustment: one initial quote was **75 versus 79 gold**. The original native method also
+advances the shop RNG. The separately pinned **v9 cumulative MIT wrapper patch** enables that
+method's original branch without replacing its formula or changing global TestMode. Stored game
+DLL bytes stay unchanged. Two baseline/two repaired builds reproduce in **21.596 seconds**; all
+**841 native subchecks across 28 combat/rest/shop fixtures** pass again. Other rule/RNG-changing
+TestMode branches still need auditing; this fix does not qualify all native behavior.
+
+Obtaining the first potion exposed another fresh tutorial that the earlier Host could not control.
+The cumulative **rest-and-potion Host patch** recognizes only the exact current obtain-potion
+popup and clicks its visible enabled confirmation. It retains rest support, leaves tutorials enabled,
+and never copies already-seen progress. Two fresh builds reproduce in **16.621 seconds**; the new
+source/SHA/MVID/toolchain remain distinct from earlier Hosts and upstream release authority.
+Four focused Host tutorial tests pass. A fresh rest sequence on this Host/native-v9 pair passes
+seven observations and six effect decisions in **42.700 shipped-process seconds**. The matching
+first-combat regression passes eight observations, seven gameplay actions and three tutorial
+steps in **41.168 seconds**. Both saved audits pass. These are targeted regressions, not new
+repeat-seed panels.
+
+**Two shipped shop comparisons and both saved audits pass.** Ordinary purchases on one seed and
+Courier restocking on another compare every current offer, price, availability and legal menu,
+then card/potion ownership, gold, both potion slots, removal cancellation/reopening/confirmation
+and exit to the map. Totals: **19 common observations, 17 effect decisions and 25 shipped game/UI
+actions**, including two potion tutorial clicks and six other shop/preview UI steps. Shipped-process
+times are **39.387 and 37.200 seconds**. A first-removal
+selection enters preview immediately; the native wrapper's atomic selection and shipped select/confirm
+flows are explicitly accounted for. Card purchases and removal charge the current quote once.
+Courier replacement items and new prices bind to fresh controls; full potion slots disable purchases.
+
+This is a privileged **single-Strike, 1,000-gold shop fixture**, with/without Courier, imported
+through Continue. It is not a naturally reached shop, general effect-text/stat comparison,
+relic-purchase or out-of-combat potion-use qualification. Sold-out display model identity is outside
+scope; current stock, prices and availability still compare. Opening the inventory avoids the native
+merchant-exit tutorial; skipping the merchant before opening inventory remains unqualified.
+Saved audits rebuild facts from raw observations, validate current operands/delivery and preview
+invariants, and accept reordered JSON object keys and independent read timestamps without losing
+card ownership or snapshot binding. All failed harness, unsupported-popup, comparison and storage
+attempts remain private. A 3.5-GB pre-copy guard prevents another partial-copy disk failure.
+
+[Fresh rest and shop evidence](evidence/actual-engine-v0.111.0-fresh-rest-and-shop-v1.json) records
+all exact identities, measured scopes, failed attempts and saved audits. No full-run attempts,
+training admission or model promotion follow these fixture results. **1,071 repository tests,
+88 standalone Node tests, four focused Host tutorial tests, formatting/types and the C# protocol
+contract pass.**
+
 ## One next owner command
 
 Close any running STS2 app, then run this single helper from any directory:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-rest-tutorial-v1.sh
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-shop-actions-v1.sh
 ```
 
-It compares **two seeds × two rest action orders × two repeats = eight cases**. That is two
-independent seeds and four seed/sequence pairs, not eight independent seeds. Each pair imports
-the same explicit single-card Miniature Tent rest save, then compares healing, cancellation,
-reopened upgrade selection, confirmation, remaining options and Proceed. The isolated profile
-starts without tutorial progress and must dismiss the actual fresh rest popup using its visible
-confirmation. Other tutorials remain enabled. Estimate **6–8 minutes**, with a 15-minute cap,
-one game at a time, 8 GB memory and 4 GB generated-file limits. Allow at least 3.5 GB free for one copy.
-Each case prints its progress. The first failure stops the batch and preserves its payload;
-verified successful payloads are removed. Reports, logs, profiles and saves remain. A completed
-rerun displays its saved summary; incomplete work is preserved without restarting. **Codex has
-not launched this new eight-case fresh-profile rest batch.** No full-run attempts or learning follow.
+It compares **two seeds × ordinary/Courier × two repeats = eight cases**. That is two independent
+seeds and four seed/scenario pairs. Each imports the explicit shop save into a fresh tutorial-enabled
+profile, buys cards/potions, fills the two A8 potion slots, cancels/reopens card removal, confirms
+and exits. Courier cases buy replacement stock. The first-potion tutorial must be dismissed without
+changing the purchase. Estimate **8–12 minutes**, capped at **15 minutes**, one game at a time,
+8 GB memory and 4 GB generated files. Allow 3.5 GB free. Each case prints its result; the first
+failure stops and preserves its payload. Verified successful payloads are removed after natural
+shutdown and integrity checks; reports/logs/profiles/saves remain. Completed reruns display saved
+results and partial work never silently restarts. **Codex has not launched this eight-case batch.**
+No full runs, training or automatic next stage follow.
 
-#145 remains open for the fresh-profile repeat panel, regressions of earlier shipped families on
-the changed Host, broader shipped
-rest/shop effects, full modifier/expiry/relic-counter information,
-remaining reward/bundle/mandatory/optional/large selectors, out-of-combat potions, native discounts/
-relic purchases, other decision families, later acts and terminal conditions. The repeat panel
-also does not qualify all combat mechanics. #146 then measures complete-run speed and connects
-a new A8 public neural lineage. No current result admits training or promotes the old emulator.
+#145 remains open for repeated shop evidence, other rule/RNG-changing TestMode branches, broader
+rest/relic and shop interactions, full modifier/expiry/relic-counter facts, remaining selectors,
+combat beyond the first turn, other public decisions, later acts and actual endings. #146 then
+measures complete-run speed before connecting a separately versioned A8 neural lineage.
 
 The remaining sections preserve earlier prerequisite packages and their scoped results.
 
