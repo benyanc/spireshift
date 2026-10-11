@@ -24,8 +24,9 @@ upstream projection does not. Other card selectors' cancellation/confirmation pr
 remain unqualified; unknown fields produce unavailable actions, not invented defaults.
 
 Drift risk remains high: TestMode and Godot stubs run outside the rendered SceneTree,
-and the Proceed flag replaces UI presentation state. Continue-save rest resumption
-has not been qualified. The pending shipped-host differential case must start with
+and the Proceed flag replaces UI presentation state. The original package did not qualify
+Continue-save rest resumption; the later v8 restoration and rest results are recorded below.
+The shipped-host differential case must start with
 matching visible HP/deck/relics, run Miniature Tent in both orders and cancel Smith,
 then compare remaining options, enablement, HP/upgrades, Proceed and native map travel
 after every action. Record the first divergence; the managed fixtures do not substitute
@@ -246,4 +247,48 @@ No naturally reached rest/full-run claim, training admission or old-model promot
 
 ```bash
 node --test scripts/engine-rest-bridge-contract.test.mjs
+```
+
+## Local Connector rest tutorial candidate
+
+`sts2-connector-v0.111.0-rest-tutorial-v1.patch` changes the MIT-licensed
+`rsgcsg/STS2-Connector` Host at tag `v1.1.0-rc.1`, revision
+`e0651024117d22bdeb95142766917103d87c0185`. Keep its separate
+[MIT notice](sts2-connector-MIT-LICENSE.txt). It does not alter proprietary game code, the SDK,
+game DLL or GodotSharp. The released Host previously classified the rest-site tutorial as
+unsupported and offered no controls.
+
+The patch recognizes only the current exact `NRestSiteFtue` modal. It reads the visible native
+title/body/confirmation label and exposes one enabled `dismiss_tutorial` action through the
+existing protocol. Delivery resolves the current visible enabled confirmation button and invokes
+its native click handler. Unknown modals, incomplete facts, disabled buttons and unrelated
+operations remain refused. No generic modal close, tutorial-progress editing or gameplay action
+is invented while the popup is open. A focused Host test enforces the exact modal/action scope.
+
+[Build recipe v2](../../configs/engine-qualification/sts2-v0.111.0-connector-rest-build-v2.json)
+creates two fresh source trees, applies the patch and compiles against the frozen game. A fixed
+local commit/date, SDK 10.0.401, deterministic output and source-path mapping reproduce both
+SHA/MVID pairs. The local source commit is `01139c3207378ffff14daaa2d07930b56a928a2a`;
+Host SHA is `cb287fc1798b75ac7de05b991217c357092f4dabf604981915231392c64812a8`
+and MVID `16c8b163-b3c2-450c-b68c-6f10600871f1`.
+[Connector config v2](../../configs/engine-qualification/sts2-v0.111.0-connector-rest-tutorial-v2.json)
+pins the new identity and separately inventoried local toolchain. It removes the copied original
+runtime seal/release manifest; it cannot claim upstream release authority or silently fall back
+to the original binary. Failed initial build attempts remain private and preserved. The v1
+build/config pair refers to those attempts; use the v2 pair for the completed candidate.
+
+The owner's original eight-case rest panel passes, with 56 independently audited observations
+and 48 rest decisions, on the original Host and already-seen tutorial baseline. Two new short
+checks pass both action orders on the patched Host using settings-only profiles with no copied
+tutorial progress. Each actually dismisses the popup, then heals/cancels/reopens/upgrades/leaves.
+The popup click is separate from seven game/UI actions and must preserve public game facts.
+Both raw audits and all three focused Host tutorial tests pass. The patch requires its own
+subsequent repeat panel and prior-family regressions; old Host results do not qualify it.
+[Current evidence](../../docs/evidence/actual-engine-v0.111.0-rest-panel-and-tutorial-v1.json)
+records identities and limits. No full-run, general mechanics or training admission follows.
+
+Portable synthetic checks require no proprietary observations or game files:
+
+```bash
+node --test scripts/verify-engine-rest-saved.test.mjs
 ```

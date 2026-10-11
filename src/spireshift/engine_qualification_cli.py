@@ -16,6 +16,7 @@ from spireshift.engine_connector import (
     prepare_connector_toolchain,
     probe_connector_menu,
 )
+from spireshift.engine_connector_build import build_connector_candidate
 from spireshift.engine_download import (
     download_exact_game,
     download_plan,
@@ -40,6 +41,7 @@ from spireshift.engine_qualification import (
     verify_game_archive,
 )
 from spireshift.engine_rest_bridge import compare_rest_bridge, compare_rest_bridges
+from spireshift.engine_rest_verification import verify_rest_bridges
 from spireshift.engine_source import inspect_game_source
 from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
 from spireshift.full_run_experience import atomic_json
@@ -69,7 +71,9 @@ def add_engine_parser(commands: Any) -> None:
         "verify-journey-bridges",
         "compare-rest-bridge",
         "compare-rest-bridges",
+        "verify-rest-bridges",
         "build-cli-candidate",
+        "build-connector-candidate",
         "probe-cli-rest",
         "probe-cli-shop",
         "probe-cli-combat",
@@ -94,6 +98,7 @@ def add_engine_parser(commands: Any) -> None:
             "verify-journey-bridges",
             "compare-rest-bridge",
             "compare-rest-bridges",
+            "verify-rest-bridges",
         }:
             command.add_argument("bridge_config", type=Path)
         if name in {
@@ -102,6 +107,7 @@ def add_engine_parser(commands: Any) -> None:
             "verify-journey-bridges",
             "compare-rest-bridge",
             "compare-rest-bridges",
+            "verify-rest-bridges",
         }:
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-shipped-checkpoint":
@@ -115,6 +121,8 @@ def add_engine_parser(commands: Any) -> None:
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
+        if name == "build-connector-candidate":
+            command.add_argument("candidate_config", type=Path)
         if name in {
             "probe-cli-rest",
             "probe-cli-shop",
@@ -169,6 +177,9 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "verify-journey-bridges":
             result = verify_journey_bridges(config, args.bridge_config, node=args.node)
             code = 0
+        elif args.engine_command == "verify-rest-bridges":
+            result = verify_rest_bridges(config, args.bridge_config, node=args.node)
+            code = 0
         elif args.engine_command in {"compare-rest-bridge", "compare-rest-bridges"}:
             result = (
                 compare_rest_bridge
@@ -189,6 +200,9 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "build-cli-candidate":
             result = build_cli_candidate(config, args.candidate_config, args.node)
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
+        elif args.engine_command == "build-connector-candidate":
+            result = build_connector_candidate(config, args.candidate_config)
+            code = 0
         elif args.engine_command in {
             "probe-cli-rest",
             "probe-cli-shop",

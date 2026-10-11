@@ -74,8 +74,10 @@ def compare_rest_bridge(
     override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     document = override if override is not None else json.loads(path.read_text())
+    fresh_tutorial = document.get("schema_version") == "engine-rest-bridge-config-v2"
     if (
-        document.get("schema_version") != "engine-rest-bridge-config-v1"
+        document.get("schema_version")
+        not in {"engine-rest-bridge-config-v1", "engine-rest-bridge-config-v2"}
         or document.get("qualification_config_id") != qualification.config_id
         or document.get("stage") != "privileged_rest_save_public_action_differential_only"
         or document.get("training_allowed") is not False
@@ -88,12 +90,16 @@ def compare_rest_bridge(
     )
     if prerequisite["batch_report_id"] != document["journey_bridge_report_id"]:
         raise ValueError("Completed first-combat prerequisite changed")
-    helpers = (
-        "engine-rest-shipped-probe.mjs",
+    helpers: tuple[str, ...] = (
+        "engine-rest-shipped-probe-v2.mjs" if fresh_tutorial else "engine-rest-shipped-probe.mjs",
         "engine-rest-bridge-contract.mjs",
         "engine-journey-contract-v2.mjs",
         "engine-menu-probe.mjs",
     )
+    if fresh_tutorial:
+        helpers += ("engine-rest-tutorial-v1.mjs",)
+        if "rest_tutorial_baseline" in document:
+            raise ValueError("Fresh rest tutorial comparisons cannot copy already-seen progress")
     if set(document.get("helpers_sha256", {})) != set(helpers):
         raise ValueError("The complete frozen rest helper inventory is required")
     for name, expected in document["helpers_sha256"].items():
@@ -139,6 +145,7 @@ def compare_rest_bridge(
         "optimizer_steps": 0,
         "training_allowed": False,
         "shipped_cross_host_parity": False,
+        **({"fresh_rest_tutorial_required": True} if fresh_tutorial else {}),
         "claim_scope": (
             "privileged_A8_single_card_Miniature_Tent_heal_smith_cancel_confirm_"
             "and_proceed_public_effects_only"
@@ -156,7 +163,7 @@ def compare_rest_bridge(
         }
         fixture = verify_checkpoint_input(qualification, bound, panel="rest_bridge")
         fixture.update(
-            comparison_mode="rest_bridge_v1",
+            comparison_mode="rest_bridge_v2" if fresh_tutorial else "rest_bridge_v1",
             rest_report_path=str(native_report),
             workspace=str((workspace / "shipped").relative_to(qualification.root)),
         )
@@ -177,6 +184,18 @@ def compare_rest_bridge(
         shipped_path = workspace / "shipped-report.json"
         atomic_json(shipped_path, shipped)
         passed = shipped["verdict"]["status"] == "shipped_checkpoint_input_pass"
+        if fresh_tutorial:
+            passed = passed and (
+                shipped.get("checks", {}).get("fresh_rest_tutorial_dismissed") is True
+                and shipped.get("profile_settings_consent", {}).get(
+                    "fresh_rest_progress_absent_before_launch"
+                )
+                is True
+                and len(shipped.get("probe", {}).get("rest_tutorial_steps", [])) == 1
+            )
+            result["rest_tutorial_steps"] = len(
+                shipped.get("probe", {}).get("rest_tutorial_steps", [])
+            )
         result.update(
             status="rest_action_comparison_pass" if passed else "rest_comparison_incomplete",
             shipped_report=str(shipped_path.relative_to(qualification.root)),
@@ -240,6 +259,7 @@ def compare_rest_bridges(
     cases = validate_rest_cases(document)
     template_path = qualification.root / document["template"]
     template = json.loads(template_path.read_text())
+    fresh_tutorial = template.get("schema_version") == "engine-rest-bridge-config-v2"
     if (
         template_path.resolve().parent != path.resolve().parent
         or manifest_identifier(template) != document["template_id"]
@@ -262,11 +282,20 @@ def compare_rest_bridges(
         "independent_seeds": 2,
         "seed_scenario_pairs": 4,
         "privileged_fixture": True,
+        **(
+            {"fresh_rest_tutorial_required": True}
+            if template.get("schema_version") == "engine-rest-bridge-config-v2"
+            else {}
+        ),
         "full_run_attempts": 0,
         "optimizer_steps": 0,
         "training_allowed": False,
         "shipped_cross_host_parity": False,
-        "claim_scope": "repeated_privileged_single_card_rest_fixture_public_action_effects_only",
+        "claim_scope": (
+            "repeated_privileged_single_card_rest_fixture_and_fresh_tutorial_public_effects_only"
+            if fresh_tutorial
+            else "repeated_privileged_single_card_rest_fixture_public_action_effects_only"
+        ),
     }
     atomic_json(marker, result)
     started = time.monotonic()
@@ -283,7 +312,9 @@ def compare_rest_bridges(
             active = case
             result["not_attempted_cases"] -= 1
             print(
-                f"Rest comparison {i + 1}/8 ({case['case_id']}); six public actions, one host.",
+                f"Rest comparison {i + 1}/8 ({case['case_id']}); six rest decisions"
+                + (" and the fresh rest popup" if fresh_tutorial else "")
+                + ", one host.",
                 flush=True,
             )
             effective = copy.deepcopy(template)
@@ -324,6 +355,10 @@ def compare_rest_bridges(
         if not result["repeated_public_prefixes_identical"]:
             raise ValueError("Repeated rest fixture prefix changed")
         result["status"] = "rest_comparisons_pass"
+        if fresh_tutorial:
+            result["rest_tutorial_steps"] = sum(
+                row["rest_tutorial_steps"] for row in result["cases"]
+            )
     except (OSError, ValueError, subprocess.SubprocessError, KeyboardInterrupt) as error:
         result.update(status="rest_comparisons_incomplete", error=str(error) or "interrupted")
         if active is not None:

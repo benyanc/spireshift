@@ -1,0 +1,43 @@
+{
+  "schema_version": "engine-connector-config-v2",
+  "stage": "local_shipped_menu_control_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-rest-tutorial-v1",
+  "toolchain": "artifacts/engine-tooling/connector-rest-tutorial-v1",
+  "bootstrap_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-bootstrap-v1.json",
+  "bootstrap_report_id": "sha256:fb0c446d837855c5ea1257eca18a71fa3aa01cc72e716516fc1a9a566918daec",
+  "bootstrap_settings_sha256": "e188477a47f0bf353b8317c6162d935889645ac626ade9f4ff55710c4c1b9870",
+  "max_wall_seconds": 90,
+  "connector": {
+    "version": "1.1.0-rc.1",
+    "protocol": "1.0.0",
+    "source_revision": "01139c3207378ffff14daaa2d07930b56a928a2a",
+    "artifact_sha256": "cb287fc1798b75ac7de05b991217c357092f4dabf604981915231392c64812a8",
+    "artifact_mvid": "16c8b163-b3c2-450c-b68c-6f10600871f1"
+  },
+  "assets": {
+    "host": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/STS2-Connector-1.1.0-rc.1-host.tar.gz",
+      "sha256": "b2f7321dab36689c26133eb198955321722d5ca928f2b6a0b5a125c6df861de2"
+    },
+    "sdk": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/rsgcsg-sts2-connector-client-1.0.0.tgz",
+      "sha256": "4a12777aaaa6b469cb939456a0f59a4b7385dbfe87f721870ce89dd1b14eb062"
+    },
+    "seal": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/STS2-Connector-1.1.0-rc.1-runtime-seal.json",
+      "sha256": "d3691730345e8b461a83e206e0c6ac70fe60371c2e8bb61be083fb987f33c3bc"
+    },
+    "zod": {
+      "url": "https://registry.npmjs.org/zod/-/zod-3.25.76.tgz",
+      "sha256": "9e1f1a05f0dd0c1dab64ee91ceb9bf55cd44d35368c70edda80a2fdc70a88377"
+    }
+  },
+  "training_allowed": false,
+  "local_build": {
+    "build_config": "configs/engine-qualification/sts2-v0.111.0-connector-rest-build-v1.json",
+    "build_config_id": "sha256:a8b5d818f70df2892e09c12b3e1ebe68eba230c05f827ce3a534363411d15038",
+    "build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-rest-build-v1.json"
+  }
+}

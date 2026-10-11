@@ -72,12 +72,20 @@ def load_connector_qualification_config(
     path: Path, qualification: EngineQualificationConfig
 ) -> ConnectorQualificationConfig:
     value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict) or value.get("schema_version") != "engine-connector-config-v1":
-        raise ValueError("Expected engine-connector-config-v1")
+    if not isinstance(value, dict) or value.get("schema_version") not in {
+        "engine-connector-config-v1",
+        "engine-connector-config-v2",
+    }:
+        raise ValueError("Expected a versioned pinned Connector configuration")
     if value.get("qualification_config_id") != qualification.config_id:
         raise ValueError("Connector check belongs to another frozen game")
     if (
-        value.get("stage") != "shipped_menu_control_only"
+        value.get("stage")
+        != (
+            "local_shipped_menu_control_only"
+            if value["schema_version"] == "engine-connector-config-v2"
+            else "shipped_menu_control_only"
+        )
         or value.get("training_allowed") is not False
     ):
         raise ValueError("Connector menu checks do not admit gameplay or training")
@@ -86,6 +94,20 @@ def load_connector_qualification_config(
         raise ValueError("Native prerequisite configuration must be beside this configuration")
     native = load_native_qualification_config(native_path, qualification)
     config = ConnectorQualificationConfig(value, native)
+    if value["schema_version"] == "engine-connector-config-v2":
+        local = value.get("local_build", {})
+        if (
+            not isinstance(local, dict)
+            or set(local) != {"build_config", "build_config_id", "build_report"}
+            or not re.fullmatch(r"sha256:[0-9a-f]{64}", str(local.get("build_config_id", "")))
+        ):
+            raise ValueError("Local Connector requires its separate pinned build recipe")
+        recipe_path = qualification.root / local["build_config"]
+        if recipe_path.resolve().parent != path.resolve().parent:
+            raise ValueError("The local Host recipe must stay beside its Connector configuration")
+        _private_path(qualification.root, local["build_report"])
+    elif "local_build" in value:
+        raise ValueError("A local Host cannot inherit an upstream release identity")
     for field in ("workspace", "toolchain", "bootstrap_report"):
         config.private(field)
     for field in ("bootstrap_report_id", "bootstrap_settings_sha256"):
@@ -156,6 +178,10 @@ def prepare_connector_toolchain(config: ConnectorQualificationConfig) -> dict[st
     root = config.private("toolchain")
     if (root / "toolchain.json").is_file():
         return _verify_toolchain(config)
+    if "local_build" in config.document:
+        raise ValueError(
+            "Run the pinned local Host build recipe; do not install the original release"
+        )
     if root.exists():
         raise FileExistsError("Partial toolchain preserved; use a new private toolchain directory")
     root.mkdir(parents=True)
@@ -222,6 +248,36 @@ def _verify_toolchain(config: ConnectorQualificationConfig) -> dict[str, Any]:
         or current != report.get("inventory")
     ):
         raise ValueError("Connector tools changed; preserve drift before any game launch")
+    if "local_build" in config.document:
+        local = config.document["local_build"]
+        recipe = json.loads((config.qualification.root / local["build_config"]).read_text())
+        built = json.loads(
+            _private_path(config.qualification.root, local["build_report"]).read_text()
+        )
+        identity = config.document["connector"]
+        if (
+            manifest_identifier(recipe) != local["build_config_id"]
+            or manifest_identifier(
+                {k: v for k, v in built.items() if k not in {"report_id", "report_path"}}
+            )
+            != built.get("report_id")
+            or report.get("local_build_report_id") != built.get("report_id")
+            or report.get("local_build_report") != local["build_report"]
+            or built.get("config_id") != local["build_config_id"]
+            or built.get("qualification_config_id") != config.qualification.config_id
+            or built.get("status") != "local_connector_built_unqualified"
+            or built.get("source_revision") != identity["source_revision"]
+            or built.get("patch_sha256") != _sha_file(config.qualification.root / recipe["patch"])
+            or len(built.get("fresh_builds", [])) != 2
+            or any(
+                row.get("sha256") != identity["artifact_sha256"]
+                or row.get("module_version_id") != identity["artifact_mvid"]
+                for row in built["fresh_builds"]
+            )
+            or _sha_file(root / "release/payload/STS2_MCP.dll") != identity["artifact_sha256"]
+            or (root / "seal.download").exists()
+        ):
+            raise ValueError("Local Host is not bound to its reproducible, unsealed build identity")
     return report
 
 
@@ -368,7 +424,9 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-rest-shipped-probe.mjs"
+                "engine-rest-shipped-probe-v2.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v2"
+                else "engine-rest-shipped-probe.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v1"
                 else "engine-journey-shipped-probe-v4.mjs"
                 if fixture is not None and fixture.get("shipped_ui_revision") == "tutorial_v4"
@@ -497,6 +555,7 @@ def _probe_connector_private(
         settings = profile / "default/1/settings.save"
         settings.parent.mkdir(parents=True)
         shutil.copy2(template, settings)
+        consent_fresh_rest = False
         if fixture is not None:
             checkpoint = Path(fixture["checkpoint_path"])
             if _sha_file(checkpoint) != fixture["checkpoint_sha256"]:
@@ -505,6 +564,18 @@ def _probe_connector_private(
             destination = profile / "default/1/modded/profile1/saves/current_run.save"
             destination.parent.mkdir(parents=True)
             shutil.copy2(checkpoint, destination)
+            if fixture.get("comparison_mode") == "rest_bridge_v2":
+                if "rest_tutorial_baseline" in fixture:
+                    raise ValueError(
+                        "Fresh rest tutorial qualification cannot copy already-seen progress"
+                    )
+                if (destination.parent / "progress.save").exists():
+                    raise ValueError(
+                        "Fresh rest fixture unexpectedly has existing tutorial progress"
+                    )
+                consent_fresh_rest = True
+            else:
+                consent_fresh_rest = False
             if "rest_tutorial_baseline" in fixture:
                 if fixture.get("comparison_mode") != "rest_bridge_v1":
                     raise ValueError(
@@ -525,6 +596,8 @@ def _probe_connector_private(
         consent = _enable_mod_settings(settings, config.native.document["settings_schema"])
         if fixture is not None and "rest_tutorial_baseline" in fixture:
             consent["rest_tutorial_baseline"] = fixture["rest_tutorial_baseline"]
+        if fixture is not None and consent_fresh_rest:
+            consent["fresh_rest_progress_absent_before_launch"] = True
         override = executable.parent / "override.cfg"
         override.write_text(_profile_override(profile_name), encoding="utf-8")
         installation = subprocess.run(
@@ -603,11 +676,19 @@ def _probe_connector_private(
             and not process["timed_out"]
             and probe.get("shutdown_requested") is True,
         }
+        fresh_rest_tutorial = (
+            fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v2"
+        )
+        if fresh_rest_tutorial:
+            checks["fresh_rest_progress_absent_before_launch"] = (
+                consent.get("fresh_rest_progress_absent_before_launch") is True
+            )
         verdict = (
             _evaluate_connector_checkpoint(
                 checks,
                 journey=fixture.get("comparison_mode") in {"journey_v1", "journey_v2"},
-                rest_bridge=fixture.get("comparison_mode") == "rest_bridge_v1",
+                rest_bridge=fixture.get("comparison_mode") in {"rest_bridge_v1", "rest_bridge_v2"},
+                fresh_rest_tutorial=fresh_rest_tutorial,
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -665,10 +746,16 @@ def _probe_connector_private(
 
 
 def _evaluate_connector_checkpoint(
-    checks: dict[str, Any], *, journey: bool = False, rest_bridge: bool = False
+    checks: dict[str, Any],
+    *,
+    journey: bool = False,
+    rest_bridge: bool = False,
+    fresh_rest_tutorial: bool = False,
 ) -> dict[str, Any]:
     if journey and rest_bridge:
         raise ValueError("Do not merge separately scoped combat and rest comparisons")
+    if fresh_rest_tutorial and not rest_bridge:
+        raise ValueError("Fresh rest tutorial evidence requires the scoped rest fixture")
     required: tuple[str, ...] = (
         "loaded_identity",
         "endpoint_owned_by_child",
@@ -707,6 +794,8 @@ def _evaluate_connector_checkpoint(
             "journey_all_actions_delivered",
             "journey_second_turn_observed",
         )
+    if fresh_rest_tutorial:
+        required += ("fresh_rest_tutorial_dismissed", "fresh_rest_progress_absent_before_launch")
     errors = [key for key in required if checks.get(key) is not True]
     return {
         "status": "shipped_checkpoint_input_pass"

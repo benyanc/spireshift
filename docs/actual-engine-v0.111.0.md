@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — repeated first combat and two rest comparisons pass
+## Current status — repeated rest passes; fresh tutorial repair has two passing checks
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -155,26 +155,65 @@ preserved gaps and next recipe. **1,058 repository tests, 61 standalone Node tes
 formatting/types and the C# protocol contract pass.** Portable checks do not establish gameplay
 strength. No training admission, full-run attempts or checkpoint promotion follow.
 
+## Completed rest panel and fresh tutorial repair
+
+The owner completed **8/8 rest comparisons with zero failures or unattempted cases**. Two seeds,
+two action orders and two repeats give **two independent seeds and four seed/sequence pairs**.
+The batch took **383.715 seconds**; resource wall/CPU time was **383.922/133.795 seconds**.
+A separate read-only audit reconstructs **56 observations, 48 rest decisions, 56 game/UI actions
+and eight upgrade preview steps** from the raw saved evidence. It verifies current action
+bindings, unique delivery receipts, unchanged selection/preview facts, healing/upgrades,
+configuration/report/save bindings and identical repeated prefixes. No game or learning follows
+that audit. The completed panel uses the historical isolated already-seen rest tutorial baseline.
+
+The fresh tutorial blocker has a separately versioned **MIT Connector Host patch**. It reads
+only the exact current `NRestSiteFtue` popup and exposes its live visible confirmation through
+the existing legal-action contract. It clicks the native button; it does not edit progress or
+close arbitrary modals. Unknown/incomplete controls still fail. The original Host and runtime seal
+are preserved; this local canary has its own source commit, SHA/MVID, build report and inventory,
+and cannot inherit the original release seal. The SDK and official rules DLL remain unchanged.
+Two fresh deterministic builds reproduce in **7.711 seconds**.
+
+Two new short checks use settings-only profiles with **no copied tutorial progress**. The first
+heals before Smith; the second upgrades before healing. Both dismiss the actual rest popup,
+verify unchanged underlying deck/player facts, then heal, cancel/reopen Smith, select and confirm
+the upgrade, retain remaining choices and use Proceed. Each compares seven common observations,
+six rest decisions and seven shipped game/UI actions; one popup click is counted separately.
+The shipped processes take **36.164 and 35.118 seconds**. Both saved raw audits pass, and successful
+payloads were removed after verification. The first smoke predates the explicit outer
+progress-absence gate; its consent record includes that check. The second smoke and owner recipe
+require both progress absence and verified popup dismissal before success cleanup.
+
+[Rest panel and tutorial evidence](evidence/actual-engine-v0.111.0-rest-panel-and-tutorial-v1.json)
+records the owner result, independent audit, source patch/build identities, both new checks and
+the next recipe. **1,064 repository tests, 75 standalone Node tests, three focused Host tutorial
+tests, formatting/types and the C# protocol contract pass.** These are privileged single-card
+mechanics checks, not naturally reached rooms, broad selector coverage, full-game compatibility
+or player strength. Because the Host binary changed, earlier shipped startup/combat results must
+be rechecked on it before relying on those families.
+
 ## One next owner command
 
 Close any running STS2 app, then run this single helper from any directory:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-rest-v1.sh
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-rest-tutorial-v1.sh
 ```
 
 It compares **two seeds × two rest action orders × two repeats = eight cases**. That is two
 independent seeds and four seed/sequence pairs, not eight independent seeds. Each pair imports
 the same explicit single-card Miniature Tent rest save, then compares healing, cancellation,
 reopened upgrade selection, confirmation, remaining options and Proceed. The isolated profile
-has seen only the rest tutorial. Estimate **8–10 minutes**, with a 15-minute cap, one game at a
-time, 8 GB memory and 4 GB generated-file limits. Allow at least 3.5 GB free for one copy.
+starts without tutorial progress and must dismiss the actual fresh rest popup using its visible
+confirmation. Other tutorials remain enabled. Estimate **6–8 minutes**, with a 15-minute cap,
+one game at a time, 8 GB memory and 4 GB generated-file limits. Allow at least 3.5 GB free for one copy.
 Each case prints its progress. The first failure stops the batch and preserves its payload;
 verified successful payloads are removed. Reports, logs, profiles and saves remain. A completed
 rerun displays its saved summary; incomplete work is preserved without restarting. **Codex has
-not launched this eight-case rest batch.** No full-run attempts or learning follow.
+not launched this new eight-case fresh-profile rest batch.** No full-run attempts or learning follow.
 
-#145 remains open for the repeated rest panel, fresh rest-tutorial controls, broader shipped
+#145 remains open for the fresh-profile repeat panel, regressions of earlier shipped families on
+the changed Host, broader shipped
 rest/shop effects, full modifier/expiry/relic-counter information,
 remaining reward/bundle/mandatory/optional/large selectors, out-of-combat potions, native discounts/
 relic purchases, other decision families, later acts and terminal conditions. The repeat panel

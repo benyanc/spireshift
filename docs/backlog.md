@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-11 after the owner's eight-case first-combat panel and short rest comparisons.
+Updated 2026-10-11 after the owner's eight-case rest panel, saved audit and fresh tutorial repair.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -62,17 +62,38 @@ enabled, and its source profile/report/copy are bound and verified. Unknown cont
 actions remain failures. [New evidence](evidence/actual-engine-v0.111.0-first-combat-and-rest-v1.json)
 records these scopes, repairs and preserved failures.
 
-**Next owner stage: eight repeated rest checks.** Run only
-`bash scripts/compare-rest-v1.sh`, linked with an absolute command in the actual-engine guide.
-Two seeds, two rest action orders, twice: **two independent seeds and four seed/sequence pairs**.
-Estimate **8–10 minutes**, with a **15-minute cap**, one game at a time, 8 GB memory and 4 GB
-artifact limits. The first divergence stops the batch and is counted; successful payloads are
-removed only after natural exit/integrity verification. Reports/logs/profiles/saves remain.
-A completed rerun displays saved results; partial work never restarts silently. Codex has not
-launched the batch. It performs no full runs or training.
+**The owner rest panel passes: 8/8 cases, zero failures or unattempted cases.** Two independent
+seeds, both action orders, each repeated twice. Its 383.715-second batch and 383.922 wall /
+133.795 CPU-second resource record remain separate. A pure saved-data audit verifies
+**56 observations, 48 rest decisions, 56 game/UI actions and eight upgrade preview steps**.
+It checks current action operands, delivery, cancellation, preview invariants, healing/upgrades,
+save/report/config bindings and repeated prefixes without launching games. This historical panel
+used the isolated already-seen rest tutorial baseline; it does not qualify fresh-profile control.
 
-**Remaining under #145:** assess the repeated rest panel, control the fresh rest tutorial,
-compare broader shipped rest/shop actions,
+**The fresh rest tutorial now works in two short shipped checks.** A separate MIT Connector Host
+patch exposes only the exact current rest popup's visible confirmation button. Unknown popups
+stay unsupported. Two fresh builds reproduce the separately pinned binary in 7.711 seconds;
+the game DLL, original Host and original seal stay untouched. Each settings-only profile has
+no copied tutorial progress. Both rest orders pass popup dismissal, unchanged underlying facts,
+heal/cancel/reopen/upgrade/Proceed; the shipped processes take **36.164 and 35.118 seconds**.
+Independent raw audits pass both cases. These are privileged single-card fixtures, not naturally
+reached rooms, a full-game test or training admission. The changed Host needs its own subsequent
+startup/combat regression evidence; old Host results do not qualify the new binary automatically.
+[Current evidence](evidence/actual-engine-v0.111.0-rest-panel-and-tutorial-v1.json) preserves all
+historical identities, failed attempts and new scopes.
+
+**Next owner stage: eight fresh-profile rest checks.** Run only
+`bash scripts/compare-rest-tutorial-v1.sh`, linked with an absolute command in the actual-engine
+guide. Two seeds, two rest action orders, twice: **two independent seeds and four seed/sequence
+pairs**. Every case must dismiss the fresh popup with tutorials enabled and no already-seen
+progress. Estimate **6–8 minutes**, with a **15-minute cap**, one game at a time, 8 GB memory and
+4 GB artifact limits. Allow 3.5 GB free. The first divergence stops and is counted; successful
+payloads are removed only after natural exit/integrity verification. Reports/logs/profiles/saves
+remain. A completed rerun displays saved results; partial work never restarts silently. Codex has
+not launched this new batch. It performs no full runs or training.
+
+**Remaining under #145:** assess fresh-profile repeatability, recheck previously covered shipped
+families on the changed Host, compare broader shipped rest/shop actions,
 qualify full modifier/expiry/relic-counter facts, remaining selection/reward families and large
 choice spaces, out-of-combat potions, native discounts/relic purchases, other public decisions,
 later-act advancement and actual endings. The model registry is not exhaustive reachable-state
