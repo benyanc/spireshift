@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — fresh rest and repaired shop repeat panels pass
+## Current status — compiled mode inventory complete; reward/choice repairs next
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -320,10 +320,47 @@ selectors, full-game endings or a learned player's strength. No full games, opti
 training admission or model promotion follow. The completed `compare-shop-actions-v2.sh` helper
 only displays its saved result on rerun; no owner command is needed for this completed stage.
 
-#145 remains open for the systematic rule/RNG-changing TestMode audit, broader
+#145 remains open for the remaining rule/RNG-changing TestMode reviews and repairs, broader
 rest/relic and shop interactions, full modifier/expiry/relic-counter facts, remaining selectors,
 combat beyond the first turn, other public decisions, later acts and actual endings. #146 then
 measures complete-run speed before connecting a separately versioned A8 neural lineage.
+
+## Compiled mode inventory and first semantic review
+
+`engine audit-mode-references` uses the repository's standalone metadata reader. It never loads
+or executes the inspected game assembly. All **50,816 game method bodies / 1,457,929 IL
+instructions** decode, with zero skipped bodies. The exact game contains **434 direct references**
+to `TestMode` and `NonInteractiveMode`, across **383 normalized source-method groups**. The current
+v10 wrapper has **two direct references**, including mode enablement and its known price repair's
+reflective type operand. Async state machines map to their owning source method; strings/comments
+and token-shaped integer/switch operands do not become fabricated references.
+
+The audit binds game/wrapper SHA/MVID, the completed private source extraction and full source
+inventory, the inspector's compiled/source hashes and inspection runtime host. It rechecks archive,
+source and candidate inputs. Complete reference rows and source stay private. The canonical audit
+took **1.468 seconds** and launched no games. Its **24 initial method-group reviews cover 25
+references**, leaving **409 references unreviewed**. Missing/stale/duplicate or unexplained reviews
+are refused. This is complete enumeration of two exact mode types' direct IL references; reflection,
+other aliases, Godot stubs and runtime equivalence are not exhaustively established.
+
+Reviewed native source confirms two previously uncorrected reward changes: Calling Bell uses
+preset relic rewards and Cauldron preset potion rewards in test mode. Their normal generated
+rewards and RNG consumption must be restored and compared. Bundle selection takes the first bundle
+automatically, bypassing a policy choice. Native selector cleanup is conditional on test mode;
+interrupt/reset behavior needs verification. Act selection bypasses the preference for undiscovered
+alternative acts, so the initial-run content/discovery contract needs to be declared separately
+from merely unlocking content. The existing reward-selector override and direct-versus-animation
+Rolling Boulder damage dispatch are control/ordering seams needing targeted coverage. These latter
+items are source findings, not measured live failures. The already repaired merchant potion-price
+branch retains its v9/v10 scoped shop comparisons and is not another unresolved price defect.
+
+[Mode audit evidence](evidence/actual-engine-v0.111.0-mode-audit-v1.json) binds the inventory/reviews
+and lists limits. **1,083 repository tests**, the managed inspector's synthetic decoder/async/
+literal/switch/truncation checks, formatting/types and the C# protocol contract pass. The new
+inventory is a qualification/debugging artifact, never a policy/model input. Even fully reviewed
+static coverage cannot admit training; no game, full-run attempt or optimizer step follows.
+Next, implement narrow Calling Bell/Cauldron reward repairs and their differential tests, then
+bundle choice/reset and the explicit act-discovery profile contract.
 
 The remaining sections preserve earlier prerequisite packages and their scoped results.
 

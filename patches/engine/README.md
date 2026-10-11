@@ -409,5 +409,10 @@ results and never resumes or overwrites v1. Its two seeds/four seed-scenario pai
 twice under the original finite resource caps. This same shop comparison stage was authorized
 for Codex to run. Its results and scope belong to
 [the v10 evidence](../../docs/evidence/actual-engine-v0.111.0-shop-energy-v10-and-panel-v2.json).
-The broader TestMode rule/RNG audit, preview/effect metadata, other mechanics, later acts and
-endings remain unqualified. No full-run or neural-training admission follows the shop fixtures.
+The [compiled mode inventory](../../mod/SpireShift.ModeInventory/README.md) now enumerates all
+direct references to the two named mode controls without executing game code. Its
+[initial review](../../docs/evidence/actual-engine-v0.111.0-mode-audit-v1.json) confirms preset
+Calling Bell/Cauldron rewards and automatic first-bundle selection; these remain unfixed in
+v10. The review covers 25 of 434 game references, leaving 409 unreviewed. The broader semantic
+audit, preview/effect metadata, other mechanics, later acts and endings remain unqualified.
+No full-run or neural-training admission follows the shop fixtures or static mode inventory.

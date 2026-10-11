@@ -26,6 +26,7 @@ from spireshift.engine_journey import probe_shipped_journey
 from spireshift.engine_journey_bridges import run_journey_bridges
 from spireshift.engine_journey_verification import verify_journey_bridges
 from spireshift.engine_localization import extract_native_localization
+from spireshift.engine_mode_audit import audit_mode_references
 from spireshift.engine_native import (
     _verified_archive,
     bootstrap_native_profile,
@@ -88,6 +89,7 @@ def add_engine_parser(commands: Any) -> None:
         "probe-cli-rest-bridge",
         "probe-cli-shop-bridge",
         "inspect-game-source",
+        "audit-mode-references",
         "extract-game-text",
     ):
         command = sub.add_parser(name)
@@ -153,6 +155,8 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("text_config", type=Path)
         if name == "inspect-game-source":
             command.add_argument("source_config", type=Path)
+        if name == "audit-mode-references":
+            command.add_argument("audit_config", type=Path)
         if name == "download-game":
             command.add_argument("--qr", action="store_true")
         if name in ("preflight", "freeze"):
@@ -234,6 +238,9 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "build-cli-candidate":
             result = build_cli_candidate(config, args.candidate_config, args.node)
             code = 0 if result["status"] == "candidate_built_unqualified" else 1
+        elif args.engine_command == "audit-mode-references":
+            result = audit_mode_references(config, args.audit_config)
+            code = 0
         elif args.engine_command == "build-connector-candidate":
             result = build_connector_candidate(config, args.candidate_config)
             code = 0

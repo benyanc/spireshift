@@ -1,0 +1,215 @@
+{
+  "schema_version": "engine-mode-audit-config-v1",
+  "stage": "private_static_mode_inventory_and_scoped_review_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/mode-audit-v1",
+  "source_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/report.json",
+  "source_report_id": "sha256:26fb682a4e3623a0d09ae8e23c14fb13fbb3271cf1ac3ebb5cc5d2b0a2a9c2b8",
+  "candidate_build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-shop-energy-v10.json",
+  "candidate_build_report_id": "sha256:a2516e7ba9d3d1da5080b837e22a57fac8a32edbce0bd07519996f66665b9fb1",
+  "inspector": "artifacts/engine-tooling/mode-reference-inventory-v1/bin/SpireShift.ModeInventory.dll",
+  "inspector_sha256": "04dc01636335c21dbbfa73288c3811eceaa4a914a8ff2a9dce55c3e9a9a29643",
+  "inspector_sources": {
+    "Program.cs": "1749792d94ec8ceae8a62ace291115c9b1a99775664b71f6ce647f265880d0fd",
+    "SpireShift.ModeInventory.csproj": "5fa0c30fc5f12b28059ef0d7ff5e3a69fc9b95f8890464b56ce5049b3320e475"
+  },
+  "dotnet": "/opt/homebrew/Cellar/dotnet/10.0.401/bin/dotnet",
+  "dotnet_sha256": "6daf6f6324c8a28597eb5446f17647c02a798026ade155ef0c32b66d7d54cd45",
+  "max_wall_seconds": 120,
+  "training_allowed": false,
+  "reviews": [
+    {
+      "method": "MegaCrit.Sts2.Core.Models.Relics.CallingBell.GenerateRewards",
+      "method_il_sha256": [
+        "0d5b8425a6c2c4c23ba79d895539c2c1b09cff7e43336905e0167de0b9cc85b8"
+      ],
+      "classification": "rules_rng_divergence",
+      "rationale": "Test mode returns three predetermined relic rewards rather than the native rarity-pool draws. The v10 wrapper has no restoration for this method; seeded reward and RNG-counter differentials are required."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Models.Relics.Cauldron.GenerateRewards",
+      "method_il_sha256": [
+        "83954045994c75187b8342adedc55a8fc5ee3e46961c3c6ec20ee9be7c6023e2"
+      ],
+      "classification": "rules_rng_divergence",
+      "rationale": "Test mode uses preset potion models instead of the normal generated potion rewards. The v10 wrapper has no restoration for this method; generated offers, capacity choices and RNG consumption need comparison."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Models.ActModel.GetRandomList",
+      "method_il_sha256": [
+        "9f40bbce374e92b1193979a402c1541302f8688049103ae7ef877096452e9aa5"
+      ],
+      "classification": "profile_dependent_rules",
+      "rationale": "The normal undiscovered alternative-act preference is skipped in test mode. A fully unlocked content policy does not specify discovered acts. Freeze the progress/discovery contract and compare initial act choices and RNG advancement."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Commands.CardSelectCmd.FromChooseABundleScreen",
+      "method_il_sha256": [
+        "384d15b1e2853a290a4d5c288bc6361ff860297fde63f803edc8f2bb59f56276"
+      ],
+      "classification": "choice_or_lifecycle_seam",
+      "rationale": "Test mode takes the first bundle without a player choice. The current nine native selection observation boundaries do not include this bundle method. Preserve advertised bundle choice and selection synchronization before qualifying it."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Commands.CardSelectCmd.Reset",
+      "method_il_sha256": [
+        "3bcbe4fb105abc7282979f92bbe561d7c934b91e5a5a76defb53b08d858a3f11"
+      ],
+      "classification": "choice_or_lifecycle_seam",
+      "rationale": "Native selector-stack cleanup is conditional on test mode being off. Interrupted selections and repeated resets need a bound clean-state test; wrapper scope disposal alone is not proof that all native stacks reset."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Rewards.RewardsSet.Offer",
+      "method_il_sha256": [
+        "c10872f641d7eb326aabe884f66db5295ea01c04cb6c75473a6e260602255aee"
+      ],
+      "classification": "choice_or_lifecycle_seam",
+      "rationale": "Test mode uses a test selector or selects rewards automatically. The v10 wrapper installs its reward selector in both start and load paths. This is a declared control seam that needs multi-reward, capacity and cancellation coverage rather than assuming the branch harmless."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Models.Powers.RollingBoulderPower.AfterPlayerTurnStart",
+      "method_il_sha256": [
+        "c510e920ec33a1a9847247002f35e1b0e35a6df625b1e15fba2a8e171231f3b4"
+      ],
+      "classification": "choice_or_lifecycle_seam",
+      "rationale": "Test mode applies damage to the enemy list directly; the normal path schedules damage per visual-hit callback. Death and on-damage ordering need a differential with multiple enemies; batching cannot be declared presentation-only."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Entities.RestSite.RestSiteOption.Generate",
+      "method_il_sha256": [
+        "8a2594cb4d8403f77412993da5503a41205bfbf2adba247b1d377170f63bf668"
+      ],
+      "classification": "choice_or_lifecycle_seam",
+      "rationale": "A non-null test generator replaces native rest-option generation. Assert it remains unset in production collection and across resets. Existing finite rest fixtures do not establish all hook/option coverage."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Rooms.MerchantRoom.Exit",
+      "method_il_sha256": [
+        "598fa865c0c23c6ea3a3fa6bf8f0285170462c805e599b41210a9cc2c4fd19a3"
+      ],
+      "classification": "presentation_or_diagnostics",
+      "rationale": "The test branch skips recording unpurchased offers in map-point history; inspected remainder records choice history. This review does not certify full history/save parity or all shop effects."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Runs.RunRngSet.GetMockInstance",
+      "method_il_sha256": [
+        "968fe40a99683305d73d50b9a609941b89e1490fadd375ea27bf3c2e319701e2"
+      ],
+      "classification": "profile_dependent_rules",
+      "rationale": "Test mode allows a fallback mock RNG when no run is attached. Ensure gameplay models use the active run and player RNGs; model-preview use is separate from seeded gameplay. No fallback reachability claim follows static reading."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Entities.Merchant.MerchantPotionEntry.CalcCost",
+      "method_il_sha256": [
+        "8995e9d185c29bdf32d1888facb9f59a47467bbcf839a3b2bb5b1ceb62e9f555"
+      ],
+      "classification": "rules_rng_divergence",
+      "rationale": "Original test-mode branch skips price RNG. The current v9/v10 wrapper restores this exact branch and the eight-case v2 shop panel verifies scoped price/effect agreement. This is a known scoped mitigation, not a new unfixed price regression."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Rewards.Reward.CreateIcon",
+      "method_il_sha256": [
+        "7268340c04d000d79a4d024d6f8ddc1054165f0dd7ef5e968cf7c457cb5d1a82"
+      ],
+      "classification": "presentation_or_diagnostics",
+      "rationale": "The reviewed method returns no reward icon in test mode; reward selection and effects belong to separate methods."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Rewards.PotionReward.CreateIcon",
+      "method_il_sha256": [
+        "7d990fe8f5cf0aa5a034ac11f45a8d5b49e7af7f4d1eec57b471ec292a3d87bc"
+      ],
+      "classification": "presentation_or_diagnostics",
+      "rationale": "The reviewed method skips the potion icon node in test mode; procurement and reward choice are not qualified by that observation."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Models.EventModel.GetAssetPaths",
+      "method_il_sha256": [
+        "6524c06cd26640c222ad1b18ab5b64c3abb8888b7e962f9af8fdcb2b81d6f68c"
+      ],
+      "classification": "presentation_or_diagnostics",
+      "rationale": "The reviewed test-mode path returns no event asset paths. Actual event choice effects remain outside this method review."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.TestSupport.TestMode.get_IsOn",
+      "method_il_sha256": [
+        "dcbf13a3e8a5dd6ccc79baf8153d143eaa93210d67d2f03db60e9449be0de9b9"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.TestSupport.TestMode.set_IsOn",
+      "method_il_sha256": [
+        "f16aa2606b49fd5c1d4a3f7ccb5547edcf3e909edcb5227d871f972554194bdf"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.TestSupport.TestMode.get_IsOff",
+      "method_il_sha256": [
+        "947f91d877d085092ffbbc2da8382e851bdda7ef535f12aa7de473e81d64e3d7"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.TestSupport.TestMode.AssertOn",
+      "method_il_sha256": [
+        "4bb2323b8ab4a213e7950a4b5d0f933c7dce7db5b9d7fd65795dda02695f3359"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.TestSupport.TestMode.AssertOff",
+      "method_il_sha256": [
+        "a8a3eb23c53854225ace1ab3e15d0cf112fa8bb5e6cee33cc0f648549b43b8f8"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.TestSupport.TestMode.TurnOnInternal",
+      "method_il_sha256": [
+        "1478aa9e7143cad1f478c31bccfca9206563e8891833836efb60ed9fe371f8c8"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Helpers.NonInteractiveMode.get_IsActive",
+      "method_il_sha256": [
+        "a24e7fd14d64a8d8273f12da6e0bfaa5260178e1b6f45de8cfb283414978357a"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Helpers.NonInteractiveMode.get_AutoSlayerCheck",
+      "method_il_sha256": [
+        "3d5c87d06a8669d98a0c231865ac1b29e94ffac4b6d8a0508f1c473cff55f80c"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Helpers.NonInteractiveMode.set_AutoSlayerCheck",
+      "method_il_sha256": [
+        "52cf03c310650a94f96a031bdf5d1d4ee4d83af5fb4b1841c3ed57482ddd8a41"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    },
+    {
+      "method": "MegaCrit.Sts2.Core.Helpers.NonInteractiveMode..cctor",
+      "method_il_sha256": [
+        "d2905d5f230d2e70435444e31fe8435743d434ef8c8510c30d05df754478b55b"
+      ],
+      "classification": "mode_definition",
+      "rationale": "Defines or asserts the mode state and its noninteractive alias. This is control infrastructure; callers remain separately reviewed and no runtime behavior is qualified."
+    }
+  ]
+}

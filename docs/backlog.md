@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-11 after the X-cost repair and eight successful repeated shop comparisons.
+Updated 2026-10-11 after the compiled test-mode inventory and initial semantic review.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -156,13 +156,45 @@ fixtures, not naturally reached shops, full-game qualification or model-strength
 The completed v2 helper only displays saved results when run again. No new long stage, full
 games or neural training follow automatically.
 
-**Next under #145:** systematically audit rule/RNG-changing TestMode branches. Broader rest/relic
-options, full public effects and remaining decision coverage follow. Remaining work includes
-TestMode shortcuts, full modifier/expiry/relic-counter facts, combat beyond the first turn,
+**The repeatable compiled mode inventory is implemented.** It reads metadata/IL without loading
+or executing game code, covering all **50,816 game method bodies / 1,457,929 instructions**, with
+zero undecoded bodies. There are **434 direct references** to `TestMode` and its
+`NonInteractiveMode` alias in **383 source-method groups**. The current v10 wrapper has two
+direct references. The separate private source extraction, game/wrapper SHA/MVID, inspector
+binary/source and local inspection runtime host are bound. The audit took **1.468 seconds**,
+launched no games and preserves all raw source/reference rows under ignored artifacts.
+
+This is complete direct-reference enumeration, **not a completed semantic or fidelity audit**.
+The first **24 method-group reviews cover 25 references; 409 references remain unreviewed**.
+Reviews bind the actual method IL hashes and need an explicit rationale. Unknown/changed rows
+stay visible; neither a complete inventory nor a fully reviewed static list can admit training.
+Reflection, other aliases, Godot stub behavior and runtime differences remain outside this scan.
+
+The review finds concrete game-rule changes: **Calling Bell returns preset relics and Cauldron
+preset potions in test mode**, replacing their normal generated rewards/RNG paths. It also finds
+**bundle selection automatically taking the first bundle**, conditional native selector cleanup,
+and an act-selection preference that changes when alternative acts remain undiscovered. Fully
+unlocked content does not define act discovery. Reward selection is an existing wrapper control
+seam; multiple rewards/capacity/cancel still need coverage. Rolling Boulder changes damage
+dispatch from visual-hit callbacks to a batch; damage/death hook ordering needs a comparison.
+The known potion-price branch is already restored by v9/v10 and retains its separate shop evidence;
+it is not counted as another unfixed price bug.
+
+**Next under #145:** restore Calling Bell/Cauldron native reward generation and RNG consumption
+with narrow version-bound repairs and targeted differentials; preserve actual bundle choices and
+verify native selector reset; then freeze the content-plus-act-discovery profile contract. Continue
+the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
+full public effects and remaining decision coverage follow. Remaining work includes
+full modifier/expiry/relic-counter facts, combat beyond the first turn,
 remaining reward/selection families and large choice spaces, out-of-combat potions, native relic
 purchases/discount interactions, skipping a merchant before opening its inventory, other public
 decisions, later acts and actual endings. Inventory coverage is not exhaustive reachable-state
 coverage. The new Host's finite prior-family checks remain separate from historical repeat panels.
+
+[Mode audit evidence](evidence/actual-engine-v0.111.0-mode-audit-v1.json) records the exact scope,
+findings and incomplete review denominator. **1,083 repository tests**, the inspector's synthetic
+IL/async/string/switch/truncation checks, formatting/types and C# protocol contract pass. No long
+stage, training or game launch follows this static audit. Both #145 and #146 remain open.
 
 #146 then measures complete-run speed/failures at one worker before bounded parallel workers,
 versions a new actual-engine public encoder/model/experience lineage and connects existing
@@ -359,7 +391,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; fresh rest 8/8 and repaired shop panel 8/8 pass | Audit rule/RNG-changing TestMode branches, then remaining public mechanics, interactions and endings. Failed first shop batch remains separate. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; mode inventory complete; 24 method groups reviewed, 409 references pending | Restore Calling Bell/Cauldron reward RNG; preserve bundle choice/reset; freeze act discovery, then continue mode/mechanics coverage. Fresh rest/shop repeat evidence stays valid within its scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
