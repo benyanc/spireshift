@@ -88,6 +88,8 @@ def _probe_cli_document(
         "journey",
         "rest_bridge",
         "shop_bridge",
+        "bundle",
+        "bundle_bridge",
     }:
         raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
@@ -98,9 +100,15 @@ def _probe_cli_document(
         and revision != "combat_v4"
     ):
         raise ValueError("Combat public projection requires its explicit frozen revision")
-    if revision not in {"rest_v1", "selection_shop_v2", "selection_shop_v3", "combat_v4"} or (
-        projected and panel == "shop" and revision == "rest_v1"
-    ):
+    if panel in {"bundle", "bundle_bridge"} and (not projected or revision != "bundle_v5"):
+        raise ValueError("Bundle checks require the separately pinned bundle projection")
+    if revision not in {
+        "rest_v1",
+        "selection_shop_v2",
+        "selection_shop_v3",
+        "combat_v4",
+        "bundle_v5",
+    } or (projected and panel == "shop" and revision == "rest_v1"):
         raise ValueError("Unknown public interaction projection revision")
     stage = (
         f"privileged_named_{panel}_public_projection_only"
@@ -119,7 +127,7 @@ def _probe_cli_document(
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
         raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
-    if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge"} and (
+    if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge", "bundle_bridge"} and (
         not projected
         or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
         or document.get("content_policy") != "native_all_unlocked"
@@ -177,6 +185,37 @@ def _probe_cli_document(
                 "journey_helpers_sha256", {}
             ).get(name):
                 raise ValueError("A pinned journey comparison helper changed")
+    if panel == "bundle":
+        seeds = document.get("bundle_seeds")
+        if (
+            document.get("content_policy") != "native_all_unlocked"
+            or not isinstance(seeds, list)
+            or len(seeds) != 2
+            or any(
+                not isinstance(seed, str) or not re.fullmatch(r"[A-Z0-9]{1,64}", seed)
+                for seed in seeds
+            )
+            or len(set(seeds)) != 2
+            or document.get("bundle_probe_revision", "v1") not in {"v1", "v2"}
+        ):
+            raise ValueError("Bundle checks require two explicit native A8 seeds")
+    if panel == "bundle_bridge":
+        if document.get("bundle_bridge_revision", "v1") not in {"v1", "v2", "v3"}:
+            raise ValueError("Unknown bundle bridge helper revision")
+        if type(document.get("bundle_bridge", {}).get("index")) is not int or document[
+            "bundle_bridge"
+        ]["index"] not in {0, 1}:
+            raise ValueError("Bundle bridge requires an explicit current pack index")
+        for name in (
+            f"engine-bundle-bridge-contract-{document.get('bundle_bridge_revision', 'v1')}.mjs",
+            "engine-rest-bridge-contract.mjs",
+            "engine-journey-contract-v2.mjs",
+            "engine-menu-probe.mjs",
+        ):
+            if _sha_file(qualification.root / "scripts" / name) != document.get(
+                "bridge_helpers_sha256", {}
+            ).get(name):
+                raise ValueError("Pinned bundle bridge helper changed")
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing game before the isolated native interaction check")
@@ -191,7 +230,11 @@ def _probe_cli_document(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        "probe-engine-cli-shop-bridge.mjs"
+        f"probe-engine-cli-bundle-bridge-{document.get('bundle_bridge_revision', 'v1')}.mjs"
+        if projected and panel == "bundle_bridge"
+        else f"probe-engine-cli-bundle-{document.get('bundle_probe_revision', 'v1')}.mjs"
+        if projected and panel == "bundle"
+        else "probe-engine-cli-shop-bridge.mjs"
         if projected and panel == "shop_bridge"
         else "probe-engine-cli-rest-bridge.mjs"
         if projected and panel == "rest_bridge"
@@ -226,7 +269,10 @@ def _probe_cli_document(
     if projected:
         projection, sdk_before = verify_projection_inputs(qualification, document)
     runtime, runtime_before = verify_probe_runtime(qualification, document)
-    if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4"} and runtime is None:
+    if (
+        revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4", "bundle_v5"}
+        and runtime is None
+    ):
         raise ValueError("Native selection hooks require the pinned game-matching runtime")
     localization = (
         verify_native_localization(qualification, document["native_localization"])
@@ -242,6 +288,7 @@ def _probe_cli_document(
             "spireshift_cli_potion_pricing_v9_local_toolchain",
             "spireshift_cli_shop_energy_v10_local_toolchain",
             "spireshift_cli_reward_rng_v11_local_toolchain",
+            "spireshift_cli_bundle_choice_v12_local_toolchain",
         }
         and localization is None
     ):
@@ -311,12 +358,14 @@ def _probe_cli_document(
             "panel": panel,
             **(
                 {"seed": document["seed"], "content_policy": document["content_policy"]}
-                if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge"}
+                if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge", "bundle_bridge"}
                 else {}
             ),
             **({"journey": document["journey"]} if panel == "journey" else {}),
             **({"rest_bridge": document["rest_bridge"]} if panel == "rest_bridge" else {}),
             **({"shop_bridge": document["shop_bridge"]} if panel == "shop_bridge" else {}),
+            **({"bundle_seeds": document["bundle_seeds"]} if panel == "bundle" else {}),
+            **({"bundle_bridge": document["bundle_bridge"]} if panel == "bundle_bridge" else {}),
         }
         if projected:
             spec["projection"] = projection
@@ -475,7 +524,7 @@ def verify_projection_inputs(
     revision = document.get("public_projection_revision", "rest_v1")
     patch = qualification.root / (
         "patches/engine/sts2-headless-player-projection-v2.patch"
-        if revision == "combat_v4"
+        if revision in {"combat_v4", "bundle_v5"}
         else "patches/engine/sts2-headless-player-projection-v1.patch"
     )
     if _sha_file(source) != pins["source_sha256"] or _sha_file(patch) != pins["patch_sha256"]:
@@ -485,10 +534,17 @@ def verify_projection_inputs(
         "engine-rest-surface.mjs",
         "probe-engine-cli-rest.mjs",
     ]
-    if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4"}:
+    if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4", "bundle_v5"}:
         helpers.extend(["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"])
-        if revision == "combat_v4":
+        if revision in {"combat_v4", "bundle_v5"}:
             helpers.extend(["engine-combat-surface.mjs", "probe-engine-cli-combat.mjs"])
+        if revision == "bundle_v5":
+            helpers.extend(
+                [
+                    "engine-bundle-surface-v1.mjs",
+                    f"probe-engine-cli-bundle-{document.get('bundle_probe_revision', 'v1')}.mjs",
+                ]
+            )
     elif revision != "rest_v1":
         raise ValueError("Unknown public interaction projection revision")
     for name in helpers:

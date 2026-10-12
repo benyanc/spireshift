@@ -8,6 +8,11 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from spireshift.engine_bundle_bridge import (
+    compare_bundle_bridge,
+    compare_bundle_bridges,
+    verify_bundle_bridges,
+)
 from spireshift.engine_candidate import build_cli_candidate
 from spireshift.engine_checkpoint import probe_shipped_checkpoint
 from spireshift.engine_cli_probe import probe_cli_rest
@@ -76,6 +81,9 @@ def add_engine_parser(commands: Any) -> None:
         "compare-rest-bridge",
         "compare-shop-bridge",
         "compare-shop-bridges",
+        "compare-bundle-bridge",
+        "compare-bundle-bridges",
+        "verify-bundle-bridges",
         "compare-rest-bridges",
         "verify-rest-bridges",
         "verify-shop-bridge",
@@ -85,6 +93,8 @@ def add_engine_parser(commands: Any) -> None:
         "probe-cli-rest",
         "probe-cli-shop",
         "probe-cli-combat",
+        "probe-cli-bundle",
+        "probe-cli-bundle-bridge",
         "probe-cli-checkpoint",
         "probe-cli-journey",
         "probe-cli-rest-bridge",
@@ -110,6 +120,9 @@ def add_engine_parser(commands: Any) -> None:
             "compare-rest-bridge",
             "compare-shop-bridge",
             "compare-shop-bridges",
+            "compare-bundle-bridge",
+            "compare-bundle-bridges",
+            "verify-bundle-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
             "verify-shop-bridge",
@@ -123,6 +136,9 @@ def add_engine_parser(commands: Any) -> None:
             "compare-rest-bridge",
             "compare-shop-bridge",
             "compare-shop-bridges",
+            "compare-bundle-bridge",
+            "compare-bundle-bridges",
+            "verify-bundle-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
             "verify-shop-bridge",
@@ -146,6 +162,8 @@ def add_engine_parser(commands: Any) -> None:
             "probe-cli-rest",
             "probe-cli-shop",
             "probe-cli-combat",
+            "probe-cli-bundle",
+            "probe-cli-bundle-bridge",
             "probe-cli-checkpoint",
             "probe-cli-journey",
             "probe-cli-rest-bridge",
@@ -211,6 +229,9 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "verify-rest-bridges":
             result = verify_rest_bridges(config, args.bridge_config, node=args.node)
             code = 0
+        elif args.engine_command == "verify-bundle-bridges":
+            result = verify_bundle_bridges(config, args.bridge_config, node=args.node)
+            code = 0
         elif args.engine_command in {"compare-rest-bridge", "compare-rest-bridges"}:
             result = (
                 compare_rest_bridge
@@ -220,6 +241,18 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = (
                 0
                 if result["status"] in {"rest_action_comparison_pass", "rest_comparisons_pass"}
+                else 1
+            )
+        elif args.engine_command in {"compare-bundle-bridge", "compare-bundle-bridges"}:
+            comparison = (
+                compare_bundle_bridge
+                if args.engine_command == "compare-bundle-bridge"
+                else compare_bundle_bridges
+            )
+            result = comparison(config, args.bridge_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"bundle_action_comparison_pass", "bundle_comparisons_pass"}
                 else 1
             )
         elif args.engine_command in {"compare-shop-bridge", "compare-shop-bridges"}:
@@ -255,6 +288,8 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-rest",
             "probe-cli-shop",
             "probe-cli-combat",
+            "probe-cli-bundle",
+            "probe-cli-bundle-bridge",
             "probe-cli-checkpoint",
             "probe-cli-journey",
             "probe-cli-rest-bridge",
@@ -279,6 +314,8 @@ def run_engine_command(args: argparse.Namespace) -> int:
                     "shop_public_projection_regression_pass",
                     "combat_native_regression_pass",
                     "combat_public_projection_regression_pass",
+                    "bundle_public_projection_regression_pass",
+                    "bundle_bridge_public_projection_regression_pass",
                     "checkpoint_public_projection_regression_pass",
                 }
                 else 1
@@ -378,6 +415,8 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-rest",
             "probe-cli-shop",
             "probe-cli-combat",
+            "probe-cli-bundle",
+            "probe-cli-bundle-bridge",
             "probe-cli-checkpoint",
             "probe-cli-journey",
             "probe-cli-rest-bridge",

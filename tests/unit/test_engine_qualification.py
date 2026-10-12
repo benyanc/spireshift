@@ -790,6 +790,13 @@ def _connector_fixture(
     native_config = _native_fixture(build, tmp_path, monkeypatch)
     monkeypatch.setattr(connector, "_require_native_launch_support", lambda: None)
     monkeypatch.setattr(connector, "_running_games", lambda: [])
+    # These tiny fixtures test control/provenance, independently of host disk space.
+    from types import SimpleNamespace
+
+    monkeypatch.setattr(
+        "spireshift.engine_connector.shutil.disk_usage",
+        lambda _: SimpleNamespace(free=10_000_000_000),
+    )
     monkeypatch.setattr(native, "_run_boot", _fake_native_boot)
     report = native.bootstrap_native_profile(native_config)
     report_path = native_config.qualification.root / "artifacts/fixture-bootstrap.json"

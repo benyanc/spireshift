@@ -6,6 +6,7 @@ The released Host owns all public projection, legality and action execution.
 
 from __future__ import annotations
 
+import ctypes
 import hashlib
 import json
 import os
@@ -16,6 +17,7 @@ import signal
 import socket
 import stat
 import subprocess
+import sys
 import tarfile
 import tempfile
 import time
@@ -424,7 +426,13 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-shop-shipped-probe-v1.mjs"
+                "engine-bundle-shipped-probe-v3.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "bundle_bridge_v3"
+                else "engine-bundle-shipped-probe-v2.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "bundle_bridge_v2"
+                else "engine-bundle-shipped-probe-v1.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "bundle_bridge_v1"
+                else "engine-shop-shipped-probe-v1.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "shop_bridge_v1"
                 else "engine-rest-shipped-probe-v2.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v2"
@@ -506,6 +514,22 @@ def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) ->
     return _probe_connector_private(config, node=node)
 
 
+def _copy_disposable_game_file(source: str | Path, destination: str | Path) -> str:
+    """Independent APFS clones for large assets; copies otherwise, never hard links."""
+    src, dst = Path(source), Path(destination)
+    if sys.platform == "darwin" and src.stat().st_size >= 100_000_000:
+        library = ctypes.CDLL("/usr/lib/libSystem.B.dylib", use_errno=True)
+        clone = library.clonefile
+        clone.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
+        clone.restype = ctypes.c_int
+        if clone(os.fsencode(src), os.fsencode(dst), 0) == 0:
+            shutil.copystat(src, dst)
+            if src.stat().st_ino == dst.stat().st_ino:
+                raise ValueError("Disposable game asset must have an independent inode")
+            return str(dst)
+    return str(shutil.copy2(src, dst))
+
+
 def _probe_connector_private(
     config: ConnectorQualificationConfig,
     *,
@@ -544,7 +568,9 @@ def _probe_connector_private(
     try:
         record = json.loads((archive / ARCHIVE_RECORD).read_text())
         game = attempt / "game"
-        shutil.copytree(archive / GAME_RELATIVE, game, copy_function=shutil.copy2, symlinks=True)
+        shutil.copytree(
+            archive / GAME_RELATIVE, game, copy_function=_copy_disposable_game_file, symlinks=True
+        )
         if _inventory(game) != record["inventory"]:
             raise ValueError("Connector working copy differs from the frozen game")
         executable = game / EXE_RELATIVE
@@ -709,6 +735,8 @@ def _probe_connector_private(
                 rest_bridge=fixture.get("comparison_mode") in {"rest_bridge_v1", "rest_bridge_v2"},
                 fresh_rest_tutorial=fresh_rest_tutorial,
                 shop_bridge=shop_bridge,
+                bundle_bridge=fixture.get("comparison_mode")
+                in {"bundle_bridge_v1", "bundle_bridge_v2", "bundle_bridge_v3"},
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -772,8 +800,9 @@ def _evaluate_connector_checkpoint(
     rest_bridge: bool = False,
     fresh_rest_tutorial: bool = False,
     shop_bridge: bool = False,
+    bundle_bridge: bool = False,
 ) -> dict[str, Any]:
-    if sum((journey, rest_bridge, shop_bridge)) > 1:
+    if sum((journey, rest_bridge, shop_bridge, bundle_bridge)) > 1:
         raise ValueError("Do not merge separately scoped combat, rest and shop comparisons")
     if fresh_rest_tutorial and not rest_bridge:
         raise ValueError("Fresh rest tutorial evidence requires the scoped rest fixture")
@@ -814,6 +843,13 @@ def _evaluate_connector_checkpoint(
             "journey_all_snapshots_match",
             "journey_all_actions_delivered",
             "journey_second_turn_observed",
+        )
+    if bundle_bridge:
+        required += (
+            "bundle_all_snapshots_match",
+            "bundle_all_actions_delivered",
+            "bundle_preview_cancel_confirm_verified",
+            "bundle_selected_cards_obtained",
         )
     if shop_bridge:
         required = tuple(

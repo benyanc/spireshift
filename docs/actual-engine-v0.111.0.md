@@ -5,7 +5,26 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — native reward generation repaired; full pickup and choice checks next
+## Current status — bundle selection repaired; repeated UI comparison prepared
+
+V12 makes bundle-hook installation mandatory, rejects invalid/stale choices, preserves native
+choice synchronization and clears pending bindings on reset. The public menu includes exact
+card identities and current X/free costs. Eight native seed/pack/repeat cases and a separate
+two-seed synchronization fixture pass. One natural Scroll Boxes comparison also passes in the
+shipped game: choose the second pack, cancel its preview, reopen and confirm, then receive
+exactly those cards. It compares visible identities/costs/upgrades and persistent ownership;
+it does not qualify general card text/effect semantics or all bundle mechanics.
+
+The next owner stage is [compare-bundle-actions-v1.sh](../scripts/compare-bundle-actions-v1.sh):
+eight shipped comparisons across two independent seeds, both packs, each twice. Expect 6–8
+minutes; the stage has a 15-minute cap and stops at its first difference. The script also audits
+saved raw evidence without another game launch. It has been prepared, not executed.
+[V12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json) records native checks, the
+single successful prototype, preserved failures, source/build identities and limits. No complete
+run or learning follows this package. Full reward pickup, discovery/profile state, remaining
+mode references, broader mechanics and actual endings still precede #146.
+
+## Acquisition and preservation
 
 The owner successfully downloaded the exact macOS depot using the pinned licensed
 DepotDownloader route. The downloaded executable, rules DLL and GodotSharp match **v0.111.0 /
@@ -394,7 +413,7 @@ references**. The game inventory remains unchanged: 24 method groups/25 referenc
 contract pass. Reconstruction metadata and limits:
 [v11 repair and review v2 evidence](evidence/actual-engine-v0.111.0-reward-rng-v11-and-mode-review-v2.json).
 
-Next qualify complete reward pickup/choices against the shipped game, verify existing bundle
+At that stage, the next work was to qualify complete reward pickup/choices against the shipped game, verify existing bundle
 hook installation/nonfirst choices/invalid rejection/reset and freeze the act-discovery profile
 contract. No new long task or training follows automatically.
 

@@ -199,9 +199,30 @@ and C# protocol contract pass. No shipped v11 parity, full-run win, training adm
 promotion follows. Previous shipped panels retain their own v10/Host scope. Details:
 [reward repair and corrected review evidence](evidence/actual-engine-v0.111.0-reward-rng-v11-and-mode-review-v2.json).
 
-**Next under #145:** qualify full Calling Bell/Cauldron pickup and reward choices against the
-shipped game; make existing bundle interception fail explicitly, reject invalid/stale choices,
-and verify nonfirst selection and reset; freeze the content-plus-act-discovery contract. Continue
+**V12 bundle choice repair and short checks pass.** Hook installation now checks the exact native
+method and fails explicitly. Current player/selection/pack bindings reject malformed, stale and
+duplicate commands; no invalid input becomes pack one. Native reservation, synchronization and
+logging precede task completion. Cleanup cancels the pending task and clears bindings.
+
+Eight seed/pack/repeat cases pass with **12 native starts, 34 public SDK snapshots, 22 delivered
+actions and 64 refused invalid inputs**. A separate synchronization fixture passes **58 subchecks
+across four starts/two seeds**, including callback ownership, overlap, cancellation and missing
+simulator behavior. V12's combat/rest/shop and reward-generation regressions also pass under new
+identities. One natural Scroll Boxes shipped comparison passes second-pack selection,
+preview/cancel/reopen/confirm and exact deck award: **three observations, two semantic decisions,
+five game/UI actions**, in **31.915 shipped-process seconds**. Saved raw reconstruction passes
+and rejects five intentionally corrupted action/source/runtime/award records without games.
+
+Earlier helper-binding, public-role, serialization-order and low-space failures remain preserved.
+Canonical multiset comparison keeps all card values/duplicates; JSON key order cannot invent a
+game mismatch. Large private disposable assets now use independent APFS clones when available,
+with ordinary-copy fallback and unchanged full inventory validation. No hard links are used.
+Details: [v12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json).
+
+**Next under #145:** the owner runs `scripts/compare-bundle-actions-v1.sh`, a prepared eight-case
+natural Scroll Boxes panel (two seeds × both packs × two repeats, approximately 6–8 minutes).
+This repeated panel has not run. Then qualify full Calling Bell/Cauldron pickup and reward
+choices against the shipped game and freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
 full modifier/expiry/relic-counter facts, combat beyond the first turn,
@@ -410,7 +431,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; reward generation repaired and checked; 409 mode references pending | Qualify full reward pickup/choices; verify the existing bundle hook and reject silent fallbacks; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; reward generation and bundle choice repaired; 409 mode references pending | Run the prepared repeated bundle UI panel; qualify full reward pickup/choices; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

@@ -99,6 +99,7 @@ def build_cli_candidate(
             "spireshift_cli_potion_pricing_v9_local_toolchain",
             "spireshift_cli_shop_energy_v10_local_toolchain",
             "spireshift_cli_reward_rng_v11_local_toolchain",
+            "spireshift_cli_bundle_choice_v12_local_toolchain",
         }:
             raise ValueError("Repaired CLI requires its distinct local build lineage")
         patch_relative = Path(document.get("local_patch", ""))

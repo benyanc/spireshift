@@ -445,3 +445,36 @@ that bundles always choose the first option: pending player choices already exis
 warning-only installation, missing-simulator and invalid-index fallbacks remain unqualified.
 The remaining mode inventory still contains **409 unreviewed game references**. Exact evidence:
 [v11 repair and corrected mode review](../../docs/evidence/actual-engine-v0.111.0-reward-rng-v11-and-mode-review-v2.json).
+
+## V12: bound bundle selection and native choice synchronization
+
+`sts2-cli-v0.111.0-bundle-choice-v12.patch` replaces the cumulative v11 delta against the same
+pinned upstream/base patch. Apply one cumulative delta. Installation checks the exact
+`FromChooseABundleScreen` signature and original async-body IL hash before installing the
+prefix; failure propagates before initialization can be declared complete. The original ending
+combat branch is retained. Missing simulator/player/run authority throws instead of selecting
+pack one.
+
+An active choice reserves one native choice ID. Selection requires its current opaque task
+and pack bindings and an actual in-range integer index. Before resolving that task, it calls
+the original `PlayerChoiceSynchronizer.SyncLocalChoice` and native `LogChoice`. Reset and
+abandonment cancel the task and clear all bindings. The bundle exporter includes definition
+IDs, current visible energy costs and upgrade facts, using existing native helpers. Private
+selection and object operands remain in the SDK binding layer, outside public model inputs.
+
+Two baseline/two repaired builds reproduce in **15.902 seconds**. Eight seed/pack/repeat native
+cases pass: **12 starts, 34 public SDK snapshots, 22 delivered actions and 64 refused malformed
+or stale native inputs**. The standalone synchronization checker passes **58 subchecks across
+four starts/two seeds**. New v12 combat/rest/shop panels rerun 841 subchecks in 28 fixtures;
+the original-method reward-generation regression reruns eight cases/24 starts. These are
+finite native tests, not inherited v11 admission.
+
+One natural second-pack Scroll Boxes prefix imports into the shipped Host and passes selection,
+preview/cancel/reopen/confirmation and exact deck award. Saved verification reconstructs raw
+facts, unique operands, current receipts and preview ownership without games. The strict
+comparison canonicalizes JSON keys and multiset ordering while preserving values and copies.
+Earlier failed comparisons remain separate. The owner eight-case repeated UI recipe is prepared
+but has not run. Scope is visible pack identity/cost/upgrade and persistent ownership, not
+full card-effect text, every selector or full-run fidelity. The official game DLL, shipped Host,
+SDK, historical patches and results remain preserved. Exact pins and limits:
+[v12 evidence](../../docs/evidence/actual-engine-v0.111.0-bundle-choice-v12.json).
