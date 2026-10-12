@@ -5,7 +5,46 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — repeated reward panel passes 8/8
+## Current status — benchmark profile and description fixes pass short checks
+
+V13 introduces an explicit isolated Ironclad/A8 benchmark profile: the native full-content
+unlock set, every native act discovered, seeded random act selection and fresh enabled tutorials.
+The game's registry supplies **57 epochs, 85 seen encounters and four act models**. Its builtin
+all-unlocked prior-run count is synthetic benchmark metadata; it is not real account history.
+The exact native schema-24 export is hash-bound before each shipped launch. Real user progress
+is untouched and every comparison receives a distinct private profile.
+
+The old wrapper always chose the default three acts. The new policy uses the shipped lobby's
+separate `act_selection` RNG and original `ActModel.GetRandomList` call. Its act sequence and
+final selection RNG agree with the original normal method on the checked seeds. Other historical
+policies keep their old identities; unseen-act progress is not admitted by this all-seen contract.
+
+Public descriptions now call the original native card/potion/relic/event formatters. This repairs
+the persistent potion noun substitution and raw event/shop/hand/selection templates. Words,
+numbers and order are preserved; image glyphs retain filenames and multiplicity. Native registry
+inspection verifies **1,517 descriptions per case**: 65 potions, 299 relics, 596 base cards and
+557 upgraded cards. One unlocalized mock potion remains explicitly counted as excluded by its
+native pool's `IsMock` flag. This is initial-state formatting coverage, not every interaction,
+modifier or reachable state. Failed prototypes remain preserved and unknown rendering fails.
+
+**Three short shipped checks and their saved audits pass**, including Overgrowth and Underdocks
+as the current first act. Each matches the current A8 state, three starting options, eleven deck
+descriptions, the starting relic and two explicitly assigned inspection potions. They reuse one
+app/inode with three distinct profiles, **zero new app copies** and verified resets. They import
+native checkpoints; they do not exercise the shipped new-run lobby. Two baseline/two repaired
+builds reproduce in **15.613 seconds**; 1,181 repository tests, formatting/lint/types and the C#
+contract pass. A saved-only negative audit rejects seven deliberately corrupted records.
+[Profile/description evidence](evidence/actual-engine-v0.111.0-profile-descriptions-v13.json)
+records source/build/runtime identities, scoped checks and remaining work.
+
+**Next owner command:** `bash scripts/compare-profile-descriptions-v1.sh`. Four fixed seeds, each
+twice, with the same shared app and fresh benchmark progress. Expected **5–8 minutes** from the
+short cases; 15-minute cap. First difference stops; saved raw verification follows success.
+The eight-case panel has not started. Afterward, continue current-Host/mechanics regressions,
+remaining mode/public-state/selection coverage, later acts and actual endings before #146's
+full-run speed and separate neural integration. No full run or training follows this package.
+
+## Completed repeated reward panel
 
 The owner completed **8/8 reward comparisons**, with zero failures or unattempted cases and
 identical repeated public prefixes. Four independent A8 seeds/scenario pairs were each tested
@@ -27,9 +66,9 @@ The full repository check passes **1,166 tests**, formatting/lint, strict types 
 [Completed reward panel evidence](evidence/actual-engine-v0.111.0-reward-panel-v8.json)
 records the measured storage, lineage, scope and remaining work.
 
-Next, freeze the content/act-discovery profile contract and repair/check public effect-text export
-before remaining mode/mechanics/later-act/ending coverage. Full-run speed and a separate A8
-neural lineage stay under #146. No full run, optimizer step or training follows this panel.
+The profile and description work above supersedes this panel's pending startup/text steps.
+Remaining mode/mechanics/later-act/ending coverage still precedes #146. No full run, optimizer
+step or training followed the reward panel.
 
 ## Reward pickup implementation and short checks
 

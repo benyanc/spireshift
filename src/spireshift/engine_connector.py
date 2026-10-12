@@ -427,7 +427,9 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-reward-shipped-probe-v3.mjs"
+                "engine-profile-shipped-probe-v1.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "profile_text_v1"
+                else "engine-reward-shipped-probe-v3.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "reward_bridge_v3"
                 else "engine-reward-shipped-probe-v2.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "reward_bridge_v2"
@@ -624,6 +626,7 @@ def _probe_connector_private(
         shutil.copy2(template, settings)
         consent_fresh_rest = False
         consent_fresh_shop = False
+        benchmark_consent = None
         if fixture is not None:
             checkpoint = Path(fixture["checkpoint_path"])
             if _sha_file(checkpoint) != fixture["checkpoint_sha256"]:
@@ -632,6 +635,28 @@ def _probe_connector_private(
             destination = profile / "default/1/modded/profile1/saves/current_run.save"
             destination.parent.mkdir(parents=True)
             shutil.copy2(checkpoint, destination)
+            if fixture.get("comparison_mode") == "profile_text_v1":
+                from spireshift.engine_profile import load_profile_policy, verify_benchmark_progress
+
+                policy = load_profile_policy(
+                    config.qualification.root / fixture["profile_policy"], config.qualification
+                )
+                if manifest_identifier(policy) != fixture["profile_policy_id"]:
+                    raise ValueError("Benchmark profile policy changed before launch")
+                source = _private_path(config.qualification.root, fixture["benchmark_progress"])
+                verify_benchmark_progress(source, policy)
+                if "rest_tutorial_baseline" in fixture:
+                    raise ValueError("Benchmark profile cannot import a seen-tutorial baseline")
+                shutil.copy2(source, destination.with_name("progress.save"))
+                benchmark_consent = {
+                    "profile_policy_id": manifest_identifier(policy),
+                    "progress_sha256": _sha_file(destination.with_name("progress.save")),
+                    "fresh_tutorials": True,
+                }
+            elif "benchmark_progress" in fixture or "profile_policy" in fixture:
+                raise ValueError(
+                    "Benchmark progress is restricted to its explicit comparison scope"
+                )
             if _fresh_reward_profile_required(fixture.get("comparison_mode")):
                 if (
                     "rest_tutorial_baseline" in fixture
@@ -671,6 +696,8 @@ def _probe_connector_private(
                     )
                 shutil.copy2(progress, destination.with_name("progress.save"))
         consent = _enable_mod_settings(settings, config.native.document["settings_schema"])
+        if benchmark_consent is not None:
+            consent["benchmark_profile"] = benchmark_consent
         if fixture is not None and "rest_tutorial_baseline" in fixture:
             consent["rest_tutorial_baseline"] = fixture["rest_tutorial_baseline"]
         if fixture is not None and consent_fresh_rest:
@@ -755,6 +782,8 @@ def _probe_connector_private(
             and not process["timed_out"]
             and probe.get("shutdown_requested") is True,
         }
+        if fixture is not None and fixture.get("comparison_mode") == "profile_text_v1":
+            checks["benchmark_profile_bound_before_launch"] = benchmark_consent is not None
         reuse_result = None
         if lease is not None:
             if not all(
@@ -793,6 +822,7 @@ def _probe_connector_private(
                 in {"bundle_bridge_v1", "bundle_bridge_v2", "bundle_bridge_v3"},
                 reward_bridge=fixture.get("comparison_mode")
                 in {"reward_bridge_v1", "reward_bridge_v2", "reward_bridge_v3"},
+                profile_text=fixture.get("comparison_mode") == "profile_text_v1",
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -865,8 +895,9 @@ def _evaluate_connector_checkpoint(
     shop_bridge: bool = False,
     bundle_bridge: bool = False,
     reward_bridge: bool = False,
+    profile_text: bool = False,
 ) -> dict[str, Any]:
-    if sum((journey, rest_bridge, shop_bridge, bundle_bridge, reward_bridge)) > 1:
+    if sum((journey, rest_bridge, shop_bridge, bundle_bridge, reward_bridge, profile_text)) > 1:
         raise ValueError("Do not merge separately scoped combat, rest and shop comparisons")
     if fresh_rest_tutorial and not rest_bridge:
         raise ValueError("Fresh rest tutorial evidence requires the scoped rest fixture")
@@ -949,6 +980,12 @@ def _evaluate_connector_checkpoint(
             "reward_all_actions_delivered",
             "reward_pickup_capacity_and_skip_effects",
             "reward_fresh_tutorials_preserve_facts",
+        )
+    if profile_text:
+        required += (
+            "benchmark_profile_bound_before_launch",
+            "same_public_profile_descriptions",
+            "native_current_act_preserved",
         )
     if fresh_rest_tutorial:
         required += ("fresh_rest_tutorial_dismissed", "fresh_rest_progress_absent_before_launch")

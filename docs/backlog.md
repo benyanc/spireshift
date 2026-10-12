@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-12 after the owner completed the eight-case actual-engine reward panel.
+Updated 2026-10-12 after the v13 benchmark profile and native description fixes.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -13,6 +13,23 @@ full-run victory stays primary. Preserve all v0.107.1 archives, models, encoders
 [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md) orders public/mechanics
 qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
 other difficulties and larger unchanged PPO/GA batches remain deferred.
+
+**Current handoff:** the explicit full-content/all-acts-seen Ironclad/A8 benchmark profile and
+native formatted-description fixes pass three short shipped checks. Both Overgrowth and
+Underdocks appear as the first act. Normal act selection/RNG agrees with the original native
+method for this profile. Tutorials remain enabled/unseen, real account history is untouched,
+and every launch binds the native progress export. Registry inspection verifies 1,517 descriptions
+per case; one native mock potion is explicitly excluded, not silently discarded. The three
+shipped prefixes match current starting options, deck/relic/potion descriptions and reset one
+reused app with zero new copies. They import native checkpoints rather than starting a new
+game through the shipped lobby. **1,181 tests**, formatting/lint/types and the C# contract pass.
+
+**Next owner stage:** `scripts/compare-profile-descriptions-v1.sh`, eight cases across four
+fixed seeds repeated twice, expected 5–8 minutes and capped at 15 minutes. First difference stops;
+only a saved audit follows. No new long job, full run or training has started. After this panel,
+continue broader current-Host/mode/mechanics/public-information/later-act/ending checks under
+#145 before #146 benchmarks full-run speed and connects a separate A8 neural lineage.
+[Current profile/description evidence](evidence/actual-engine-v0.111.0-profile-descriptions-v13.json).
 
 **The owner startup panel passes: 12/12 cases, zero failures.** Six independent native A8 seeds
 were imported through normal Continue twice each. Starting titles/availability match and repeated
@@ -270,7 +287,8 @@ derives all cache/output/tracking paths from the recipe; completed invocation on
 saved data. Two runner regressions cover this mismatch without game launches. No rerun is needed.
 [Completed panel evidence](evidence/actual-engine-v0.111.0-reward-panel-v8.json) records the scope.
 
-**Next under #145:** freeze the content-plus-act-discovery contract. Continue
+The v13 profile/text package above implements the pending contract and exporter repair.
+After its owner repeat panel, continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
 full modifier/expiry/relic-counter facts, combat beyond the first turn,
@@ -278,9 +296,9 @@ remaining reward/selection families and large choice spaces, out-of-combat potio
 purchases/discount interactions, skipping a merchant before opening its inventory, other public
 decisions, later acts and actual endings. Inventory coverage is not exhaustive reachable-state
 coverage. The new Host's finite prior-family checks remain separate from historical repeat panels.
-The legacy persistent-potion text fallback was observed to substitute a card-count noun incorrectly;
-repair complete public effect-text export and qualify the current Host's broader decision families
-before any learning admission. Four reward fixtures do not establish every nested selector/hook.
+The legacy persistent-potion fallback remains historical; v13 uses native formatted text.
+Qualify the current Host's broader decision families and transient modifier/expiry states
+before learning admission. Registry text and finite reward fixtures do not exhaust nested hooks.
 
 [Mode audit evidence](evidence/actual-engine-v0.111.0-mode-audit-v1.json) records the exact scope,
 findings and incomplete review denominator. **1,083 repository tests**, the inspector's synthetic
@@ -483,7 +501,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; bundle and reward panels each 8/8; 409 mode references pending | Freeze content/act discovery, repair/check remaining public effect text, and continue mode/mechanics/later-act/ending coverage. Completed helpers audit saved results; no panel rerun is needed. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; v13 profile/text short checks pass; owner repeat panel prepared | Owner runs the eight-case profile/text panel. Then continue current-Host/mode/mechanics/public-state/later-act/ending coverage. Completed bundle/reward panels need no rerun. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

@@ -1,0 +1,20 @@
+{
+  "schema_version": "engine-profile-policy-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "factory": "native_benchmark_full_v1",
+  "character": "Ironclad",
+  "ascension": 8,
+  "content": "native_UnlockState_all",
+  "act_discovery": "all_native_acts_seen",
+  "act_selection": "native_lobby_seeded_random",
+  "tutorials": "enabled_no_completed_entries",
+  "progress_sha256": "50d0cae6bab731db8807aa0406590867e915e21edc5e309a4c99e1f432565137",
+  "progress_schema": 24,
+  "native_prior_run_count": 999999999,
+  "native_epoch_count": 57,
+  "native_revealed_epoch_state": "revealed",
+  "native_act_count": 4,
+  "native_encounter_count": 85,
+  "training_allowed": false,
+  "claim_scope": "isolated_benchmark_progress_not_real_account_history"
+}

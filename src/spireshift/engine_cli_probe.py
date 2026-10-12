@@ -331,6 +331,7 @@ def _probe_cli_document(
             "spireshift_cli_shop_energy_v10_local_toolchain",
             "spireshift_cli_reward_rng_v11_local_toolchain",
             "spireshift_cli_bundle_choice_v12_local_toolchain",
+            "spireshift_cli_profile_descriptions_v13_local_toolchain",
         }
         and localization is None
     ):

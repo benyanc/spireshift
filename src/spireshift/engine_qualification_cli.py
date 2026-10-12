@@ -39,6 +39,12 @@ from spireshift.engine_native import (
     inspect_model_registry,
     load_native_qualification_config,
 )
+from spireshift.engine_profile_bridge import (
+    compare_profile_bridge,
+    compare_profile_bridges,
+    preflight_profile_bridges,
+    verify_profile_bridges,
+)
 from spireshift.engine_qualification import (
     default_archive_path,
     engine_preflight,
@@ -98,6 +104,10 @@ def add_engine_parser(commands: Any) -> None:
         "compare-reward-bridges",
         "preflight-reward-bridges",
         "verify-reward-bridges",
+        "compare-profile-bridge",
+        "compare-profile-bridges",
+        "preflight-profile-bridges",
+        "verify-profile-bridges",
         "compare-rest-bridges",
         "verify-rest-bridges",
         "verify-shop-bridge",
@@ -145,6 +155,10 @@ def add_engine_parser(commands: Any) -> None:
             "compare-reward-bridges",
             "preflight-reward-bridges",
             "verify-reward-bridges",
+            "compare-profile-bridge",
+            "compare-profile-bridges",
+            "preflight-profile-bridges",
+            "verify-profile-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
             "verify-shop-bridge",
@@ -166,6 +180,10 @@ def add_engine_parser(commands: Any) -> None:
             "compare-reward-bridges",
             "preflight-reward-bridges",
             "verify-reward-bridges",
+            "compare-profile-bridge",
+            "compare-profile-bridges",
+            "preflight-profile-bridges",
+            "verify-profile-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
             "verify-shop-bridge",
@@ -270,6 +288,23 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0
         elif args.engine_command == "preflight-reward-bridges":
             result = preflight_reward_bridges(config, args.bridge_config, node=args.node)
+            code = 0
+        elif args.engine_command in {"compare-profile-bridge", "compare-profile-bridges"}:
+            result = (
+                compare_profile_bridge
+                if args.engine_command == "compare-profile-bridge"
+                else compare_profile_bridges
+            )(config, args.bridge_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"profile_comparison_pass", "profile_comparisons_pass"}
+                else 1
+            )
+        elif args.engine_command == "preflight-profile-bridges":
+            result = preflight_profile_bridges(config, args.bridge_config, node=args.node)
+            code = 0
+        elif args.engine_command == "verify-profile-bridges":
+            result = verify_profile_bridges(config, args.bridge_config, node=args.node)
             code = 0
         elif args.engine_command in {"compare-reward-bridge", "compare-reward-bridges"}:
             result = (

@@ -39,6 +39,14 @@ migrate or resume them on new rules. Obtain the exact new game, qualify public i
 measure complete-run speed before a new neural pilot. The prepared large v3 emulator pilot is
 deferred. Emulator porting, other difficulties and larger GA batches are not prerequisites.
 
+The next v0.111.0 startup contract is explicitly `native_benchmark_full_v1`: native full content,
+all native acts discovered, Ironclad/A8, the shipped lobby's seeded random act selection and
+enabled tutorials with no completed entries. It uses synthetic isolated benchmark progress,
+never real account history. Do not substitute content unlocks for act discovery, silently use
+the legacy default-act list, or admit other progress profiles from these scoped checks. Public
+descriptions must use native formatted model/option text, preserving named amounts, order and
+image-glyph multiplicity; do not guess smart-format substitutions from base variables.
+
 Use complete-run outcomes to improve the unified policy across every decision family, then test
 the frozen player on independent seeds at equal compute. Repeatable auxiliary progress is a
 development milestone; genuine full wins remain the goal. More games alone do not establish a
