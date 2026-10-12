@@ -17,10 +17,10 @@ import subprocess
 import tempfile
 import time
 from collections import Counter
-from contextlib import suppress
+from contextlib import ExitStack, suppress
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import psutil
 
@@ -36,6 +36,9 @@ from spireshift.engine_qualification import (
     verify_game_archive,
 )
 from spireshift.full_run_experience import atomic_json
+
+if TYPE_CHECKING:
+    from spireshift.engine_working_app import WorkingAppPolicy
 
 MODEL_ROOT = "MegaCrit.Sts2.Core.Models."
 EXE_RELATIVE = "SlayTheSpire2.app/Contents/MacOS/Slay the Spire 2"
@@ -282,7 +285,12 @@ def _require_native_launch_support() -> None:
         raise ValueError("macOS shared-save write protection is unavailable")
 
 
-def bootstrap_native_profile(config: NativeQualificationConfig) -> dict[str, Any]:
+def bootstrap_native_profile(
+    config: NativeQualificationConfig, *, working_app: WorkingAppPolicy | None = None
+) -> dict[str, Any]:
+    from spireshift.engine_connector import _copy_disposable_game_file
+    from spireshift.engine_working_app import lease_working_app
+
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing STS2 game before starting the short bootstrap")
@@ -293,15 +301,28 @@ def bootstrap_native_profile(config: NativeQualificationConfig) -> dict[str, Any
     _no_symlinks(profile_parent)
     before = _shared_snapshot(shared)
     attempt = _attempt(config, "native-boot-")
+    app_stack = ExitStack()
     try:
         archive_name = config.qualification.document["archive_name"]
         profile_name = f"SpireShift/engine-profiles/{archive_name}-{attempt.name}"
         profile = user_data / profile_name
         if profile.exists() or profile.is_symlink():
             raise FileExistsError("A native boot requires a fresh private profile")
-        game = attempt / "game"
         record = json.loads((archive / ARCHIVE_RECORD).read_text(encoding="utf-8"))
-        shutil.copytree(archive / GAME_RELATIVE, game, copy_function=shutil.copy2, symlinks=True)
+        lease = (
+            app_stack.enter_context(
+                lease_working_app(
+                    working_app, archive, attempt, copy_file=_copy_disposable_game_file
+                )
+            )
+            if working_app is not None
+            else None
+        )
+        game = lease.game if lease is not None else attempt / "game"
+        if lease is None:
+            shutil.copytree(
+                archive / GAME_RELATIVE, game, copy_function=shutil.copy2, symlinks=True
+            )
         if _inventory(game) != record["inventory"]:
             raise ValueError("Working copy differs from the frozen game")
         executable = game / EXE_RELATIVE
@@ -364,6 +385,16 @@ def bootstrap_native_profile(config: NativeQualificationConfig) -> dict[str, Any
             "archive_still_valid": archive_after["valid"],
             "natural_exit": process["returncode"] == 0 and not process["timed_out"],
         }
+        override_sha256 = _sha_file(override)
+        reuse_result = None
+        if lease is not None:
+            if not all(
+                checks[key]
+                for key in ("working_game_unchanged", "archive_still_valid", "natural_exit")
+            ):
+                raise ValueError("Reusable bootstrap app did not exit intact; worker is blocked")
+            reuse_result = lease.restore(expected_working)
+            checks["reusable_working_app_restored"] = True
         return _finish(
             attempt,
             {
@@ -379,12 +410,13 @@ def bootstrap_native_profile(config: NativeQualificationConfig) -> dict[str, Any
                 "command": command,
                 "profile": str(profile),
                 "settings_schema": schema,
+                **({"working_app": reuse_result} if lease is not None else {}),
                 "shared_profile_sentinel": {"before": before, "after": after},
                 "working_copy_changes": {
                     "executable_mode_before": mode_before,
                     "executable_mode_after": mode_before | 0o111,
                     "executable_content_sha256": _sha_file(executable),
-                    "override_sha256": _sha_file(override),
+                    "override_sha256": override_sha256,
                     "rules_or_asset_patches": 0,
                 },
                 "diagnostics": {
@@ -407,6 +439,8 @@ def bootstrap_native_profile(config: NativeQualificationConfig) -> dict[str, Any
     except BaseException as error:
         _failure(attempt, error)
         raise
+    finally:
+        app_stack.close()
 
 
 def parse_model_registry(source: str, classes: str) -> list[dict[str, Any]]:

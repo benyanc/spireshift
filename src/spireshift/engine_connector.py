@@ -22,7 +22,7 @@ import tarfile
 import tempfile
 import time
 import urllib.request
-from contextlib import suppress
+from contextlib import ExitStack, suppress
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -50,6 +50,7 @@ from spireshift.engine_qualification import (
     _sha_file,
     verify_game_archive,
 )
+from spireshift.engine_working_app import WorkingAppPolicy, lease_working_app
 from spireshift.full_run_experience import atomic_json
 
 
@@ -510,8 +511,10 @@ def evaluate_connector_menu(checks: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def probe_connector_menu(config: ConnectorQualificationConfig, *, node: Path) -> dict[str, Any]:
-    return _probe_connector_private(config, node=node)
+def probe_connector_menu(
+    config: ConnectorQualificationConfig, *, node: Path, working_app: WorkingAppPolicy | None = None
+) -> dict[str, Any]:
+    return _probe_connector_private(config, node=node, working_app=working_app)
 
 
 def _copy_disposable_game_file(source: str | Path, destination: str | Path) -> str:
@@ -536,16 +539,19 @@ def _probe_connector_private(
     node: Path,
     fixture: dict[str, Any] | None = None,
     retain_working_game: bool = True,
+    working_app: WorkingAppPolicy | None = None,
 ) -> dict[str, Any]:
     """One copied shipped host; optional fixture is already bound by the checkpoint verifier."""
-    if type(retain_working_game) is not bool or (not retain_working_game and fixture is None):
+    if type(retain_working_game) is not bool or (
+        not retain_working_game and fixture is None and working_app is None
+    ):
         raise ValueError("Disposable payload removal requires an explicit checkpoint fixture")
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing STS2 game before the short Connector check")
     if not node.is_file():
         raise ValueError("Pass the local Node runtime explicitly with --node")
-    if shutil.disk_usage(config.qualification.root).free < 3_500_000_000:
+    if working_app is None and shutil.disk_usage(config.qualification.root).free < 3_500_000_000:
         raise ValueError("Allow 3.5 GB free before copying one disposable shipped game")
     archive, verified = _verified_archive(config.native)
     toolchain = _verify_toolchain(config)
@@ -565,12 +571,26 @@ def _probe_connector_private(
     atomic_json(
         attempt / "in-progress.json", {"config_id": config.config_id, "training_allowed": False}
     )
+    app_stack = ExitStack()
     try:
         record = json.loads((archive / ARCHIVE_RECORD).read_text())
-        game = attempt / "game"
-        shutil.copytree(
-            archive / GAME_RELATIVE, game, copy_function=_copy_disposable_game_file, symlinks=True
+        lease = (
+            app_stack.enter_context(
+                lease_working_app(
+                    working_app, archive, attempt, copy_file=_copy_disposable_game_file
+                )
+            )
+            if working_app is not None
+            else None
         )
+        game = lease.game if lease is not None else attempt / "game"
+        if lease is None:
+            shutil.copytree(
+                archive / GAME_RELATIVE,
+                game,
+                copy_function=_copy_disposable_game_file,
+                symlinks=True,
+            )
         if _inventory(game) != record["inventory"]:
             raise ValueError("Connector working copy differs from the frozen game")
         executable = game / EXE_RELATIVE
@@ -716,6 +736,17 @@ def _probe_connector_private(
             and not process["timed_out"]
             and probe.get("shutdown_requested") is True,
         }
+        reuse_result = None
+        if lease is not None:
+            if not all(
+                checks[key]
+                for key in ("working_game_unchanged", "archive_still_valid", "natural_shutdown")
+            ):
+                raise ValueError(
+                    "Reusable app did not exit intact; worker blocked and evidence preserved"
+                )
+            reuse_result = lease.restore(expected_working)
+            checks["reusable_working_app_restored"] = True
         fresh_rest_tutorial = (
             fixture is not None and fixture.get("comparison_mode") == "rest_bridge_v2"
         )
@@ -742,7 +773,11 @@ def _probe_connector_private(
             else evaluate_connector_menu(checks)
         )
         removed_payload = False
-        if not retain_working_game and verdict["status"] == "shipped_checkpoint_input_pass":
+        if (
+            lease is None
+            and not retain_working_game
+            and verdict["status"] == "shipped_checkpoint_input_pass"
+        ):
             # Only this attempt's generated payload; reports, logs, profile and source stay.
             # All integrity checks and natural child shutdown already passed above.
             shutil.rmtree(game)
@@ -768,6 +803,7 @@ def _probe_connector_private(
                 "profile_settings_consent": consent,
                 "shared_profile_sentinel": {"before": before, "after": after},
                 "working_inventory_id": manifest_identifier(expected_working),
+                **({"working_app": reuse_result} if lease is not None else {}),
                 "working_payload_retained": not removed_payload,
                 "disposable_payload_removed_after_verified_success": removed_payload,
                 "diagnostics": {
@@ -791,6 +827,8 @@ def _probe_connector_private(
     except BaseException as error:
         _failure(attempt, error)
         raise
+    finally:
+        app_stack.close()
 
 
 def _evaluate_connector_checkpoint(

@@ -19,17 +19,24 @@ The original v1 batch stopped at its free-space guard before attempting any of i
 cases. Its failed result and resource report remain immutable; rerunning v1 only displays that
 failure. It did not find a game-mechanics mismatch.
 
-The next owner stage is [compare-bundle-actions-v2.sh](../scripts/compare-bundle-actions-v2.sh):
-a fresh workspace for the same eight shipped comparisons across two independent seeds, both
-packs, each twice. Expect 6–8 minutes; the stage has a 15-minute cap and stops at its first
-difference. A read-only preflight now checks free space, no active game, exact native/shipped
-builds, frozen game, runtime, SDK, localization, helpers and settings before allocating a batch
-or resource result. The runner repeats this guard and checks space between cases. Predictable
-preflight failures can be corrected and retried without consuming that fresh workspace.
+The next owner stage is [compare-bundle-actions-v3.sh](../scripts/compare-bundle-actions-v3.sh):
+the same eight shipped comparisons across two independent seeds, both packs, each twice, using
+one fixed working app. Each attempt has a fresh profile; connector/settings additions are removed
+after verified shutdown and the app returns to the frozen file baseline. Two short real cases pass
+with the same app path/inode, distinct profiles and one total app copy. Their raw saved audits pass. A separate short native startup also reuses and restores the same app.
 
-The local preflight passed in about two seconds, with no game launch or batch workspace created.
-The eight-case v2 panel has not started. The script audits saved raw evidence after successful
-comparisons without another game launch. Details: [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json).
+The reuse policy under [#147](https://github.com/benyanc/spireshift/issues/147) locks the app, binds
+its exact game inventory and limits the managed pool to two apps / 5 GB. Interrupted or changed
+apps block later reuse and stay preserved for inspection. A read-only inventory reports managed
+apps plus other existing `game` payload directories. Menu/bootstrap APIs also accept the explicit
+reuse policy. Historical recipes retain their original behavior; parallel workers remain under #146.
+Details: [working app reuse](working-app-reuse.md).
+
+Expect 6–9 minutes for the v3 panel; its cap is 15 minutes and the first difference stops it. The
+resource wrapper counts the app pool, and a saved raw audit follows success without another game
+launch. This complete repeat panel has not started. The v1 failure and unused v2 recipe remain
+separate; [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json) records the earlier
+preflight repair.
 [V12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json) records native checks, the
 single successful prototype, preserved failures, source/build identities and limits. No complete
 run or learning follows this package. Full reward pickup, discovery/profile state, remaining

@@ -36,6 +36,12 @@ from spireshift.engine_native import (
     load_native_qualification_config,
 )
 from spireshift.engine_qualification import EngineQualificationConfig, _inventory, _sha_file
+from spireshift.engine_working_app import (
+    WorkingAppPolicy,
+    load_working_app_policy,
+    preflight_working_app,
+    verify_working_app_receipt,
+)
 from spireshift.full_run_experience import atomic_json
 
 HELPERS = {
@@ -48,6 +54,24 @@ HELPERS = {
     "verify-engine-bundle-saved-v1.mjs",
 }
 MINIMUM_FREE_BYTES = 3_500_000_000
+
+
+def _working_app_policy(
+    qualification: EngineQualificationConfig, path: Path, document: dict[str, Any]
+) -> WorkingAppPolicy | None:
+    if "working_app_config" not in document and "working_app_config_id" not in document:
+        return None
+    if not isinstance(document.get("working_app_config"), str) or not isinstance(
+        document.get("working_app_config_id"), str
+    ):
+        raise ValueError("Working app recipe and exact identity must both be present")
+    policy_path = qualification.root / document["working_app_config"]
+    if policy_path.resolve().parent != path.resolve().parent:
+        raise ValueError("Working app policy must stay beside the bundle template")
+    policy = load_working_app_policy(policy_path, qualification)
+    if policy.config_id != document["working_app_config_id"]:
+        raise ValueError("Pinned working app policy changed")
+    return policy
 
 
 def compare_bundle_bridge(
@@ -86,6 +110,9 @@ def compare_bundle_bridge(
     connector = load_connector_qualification_config(connector_path, qualification)
     if connector.config_id != document["connector_config_id"]:
         raise ValueError("Bundle shipped Host prerequisite changed")
+    working_app = _working_app_policy(qualification, path, document)
+    if working_app is not None:
+        preflight_working_app(working_app)
     workspace = _private_path(qualification.root, document["workspace"])
     if workspace.exists():
         raise FileExistsError("Preserve this comparison; use a new versioned workspace")
@@ -137,7 +164,11 @@ def compare_bundle_bridge(
             comparison_mode="bundle_bridge_v3",
         )
         shipped = _probe_connector_private(
-            connector, node=node, fixture=fixture, retain_working_game=False
+            connector,
+            node=node,
+            fixture=fixture,
+            retain_working_game=False,
+            **({"working_app": working_app} if working_app is not None else {}),
         )
         atomic_json(workspace / "shipped-report.json", shipped)
         result.update(
@@ -147,6 +178,8 @@ def compare_bundle_bridge(
                 "disposable_payload_removed_after_verified_success"
             ],
         )
+        if working_app is not None:
+            result["working_app"] = shipped["working_app"]
         if shipped["verdict"]["status"] != "shipped_checkpoint_input_pass":
             raise ValueError("Shipped bundle comparison failed; evidence preserved")
         result["status"] = "bundle_action_comparison_pass"
@@ -304,6 +337,8 @@ def preflight_bundle_bridges(
     if free < MINIMUM_FREE_BYTES:
         raise ValueError("Allow 3.5 GB free before the bundle batch; no result was created")
     prerequisites = _verify_bundle_prerequisites(qualification, template_path, template)
+    working_app = _working_app_policy(qualification, template_path, template)
+    pool = preflight_working_app(working_app) if working_app is not None else None
     result = {
         "schema_version": "engine-bundle-preflight-v1",
         "status": "bundle_preflight_pass",
@@ -315,6 +350,7 @@ def preflight_bundle_bridges(
         "free_disk_bytes": free,
         "minimum_free_disk_bytes": MINIMUM_FREE_BYTES,
         "prerequisites": prerequisites,
+        **({"working_app_pool": pool} if working_app is not None else {}),
         "workspace_created": False,
         "games_launched": 0,
         "optimizer_steps": 0,
@@ -466,9 +502,31 @@ def verify_bundle_bridges(
             != str((directory / "native-report.json").relative_to(qualification.root))
             or comparison.get("shipped_report")
             != str((directory / "shipped-report.json").relative_to(qualification.root))
-            or comparison.get("disposable_payload_removed_after_verified_success") is not True
         ):
             raise ValueError("Saved bundle case/config binding changed")
+        working_app = _working_app_policy(qualification, template_path, template)
+        if working_app is None:
+            if comparison.get("disposable_payload_removed_after_verified_success") is not True:
+                raise ValueError("Legacy bundle case did not remove its disposable app")
+        else:
+            shipped = _hashed(qualification.root / comparison["shipped_report"])
+            reuse = comparison.get("working_app")
+            if (
+                not isinstance(reuse, dict)
+                or reuse != shipped.get("working_app")
+                or reuse.get("config_id") != working_app.config_id
+                or reuse.get("worker") != str(working_app.slot)
+                or reuse.get("status") != "restored_to_frozen_baseline"
+                or reuse.get("restored") is not True
+            ):
+                raise ValueError("Saved reusable app identity or restoration receipt changed")
+            attempt = Path(reuse["attempt"])
+            relative = attempt.relative_to(directory / "shipped")
+            if len(relative.parts) != 1 or not relative.name.startswith("checkpoint-"):
+                raise ValueError("Working app receipt must belong to this shipped case")
+            verify_working_app_receipt(
+                working_app, reuse, attempt=attempt, archive_id=shipped["archive_id"]
+            )
         verification = verify_bundle_saved(qualification, comparison, node=node)
         if verification != comparison.get("saved_verification"):
             raise ValueError("Saved bundle reconstruction differs from its recorded audit")

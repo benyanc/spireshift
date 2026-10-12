@@ -54,6 +54,7 @@ from spireshift.engine_shop_bridge import compare_shop_bridge, compare_shop_brid
 from spireshift.engine_shop_verification import verify_shop_bridge, verify_shop_bridges
 from spireshift.engine_source import inspect_game_source
 from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
+from spireshift.engine_working_app import load_working_app_policy, working_app_inventory
 from spireshift.full_run_experience import atomic_json
 
 
@@ -66,6 +67,7 @@ def add_engine_parser(commands: Any) -> None:
         "preflight",
         "freeze",
         "verify-archive",
+        "inventory-working-apps",
         "download-command",
         "download-plan",
         "download-game",
@@ -112,6 +114,8 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("downloader_config", type=Path)
         if name in ("bootstrap-profile", "model-inventory"):
             command.add_argument("native_config", type=Path)
+        if name in {"bootstrap-profile", "probe-connector-menu"}:
+            command.add_argument("--working-app-config", type=Path)
         if name in ("prepare-connector", "probe-connector-menu"):
             command.add_argument("connector_config", type=Path)
         if name in {
@@ -198,6 +202,11 @@ def add_engine_parser(commands: Any) -> None:
 def run_engine_command(args: argparse.Namespace) -> int:
     try:
         config = load_engine_qualification_config(args.config)
+        working_app = (
+            load_working_app_policy(args.working_app_config, config)
+            if getattr(args, "working_app_config", None) is not None
+            else None
+        )
         if args.engine_command == "download-command":
             print(steam_download_command(config))
             return 0
@@ -208,7 +217,10 @@ def run_engine_command(args: argparse.Namespace) -> int:
             return 0 if result["status"] == "downloaded_identity_matches" else 1
         if args.output is not None and (args.output.exists() or args.output.is_symlink()):
             raise FileExistsError(f"Refusing to overwrite an existing result: {args.output}")
-        if args.engine_command == "download-plan":
+        if args.engine_command == "inventory-working-apps":
+            result = working_app_inventory(config)
+            code = 0
+        elif args.engine_command == "download-plan":
             result = download_plan(load_engine_download_config(args.downloader_config, config))
             code = 0
         elif args.engine_command == "compare-starting-bridges":
@@ -352,12 +364,18 @@ def run_engine_command(args: argparse.Namespace) -> int:
                 result = prepare_connector_toolchain(connector)
                 code = 0
             else:
-                result = probe_connector_menu(connector, node=args.node)
+                result = probe_connector_menu(
+                    connector,
+                    node=args.node,
+                    **({"working_app": working_app} if working_app is not None else {}),
+                )
                 code = 0 if result["verdict"]["status"] == "shipped_connector_menu_pass" else 1
         elif args.engine_command in ("bootstrap-profile", "model-inventory"):
             native = load_native_qualification_config(args.native_config, config)
             if args.engine_command == "bootstrap-profile":
-                result = bootstrap_native_profile(native)
+                result = bootstrap_native_profile(
+                    native, **({"working_app": working_app} if working_app is not None else {})
+                )
                 code = 0 if result["verdict"]["status"] == "native_profile_bootstrap_pass" else 1
             else:
                 result = inspect_model_registry(native)

@@ -223,13 +223,25 @@ Details: [v12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json).
 cases and eight unattempted cases because its free-space guard stopped it. Its saved failure and
 resource report remain immutable. Rerunning v1 displays that failure rather than restarting.
 
-**Next under #145:** the owner runs `scripts/compare-bundle-actions-v2.sh`, the same eight-case
-natural Scroll Boxes panel in a fresh workspace (two seeds × both packs × two repeats,
-approximately 6–8 minutes; 15-minute cap). A new read-only preflight passed: pinned game/builds,
-runtime, SDK, localization, helpers and settings remain intact, enough space is available, and
-no game or batch workspace was created. Both the owner helper and direct runner refuse launch
-blockers before creating a batch; space remains checked between cases. No v2 comparison has run.
-Details: [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json).
+**Storage/reuse work under [#147](https://github.com/benyanc/spireshift/issues/147):** future serial
+qualification uses one locked working app, bound to the unchanged frozen master. Every attempt
+gets a fresh small profile and immutable evidence; app-local connector/settings additions are
+removed after verified child exit, then the complete original file inventory is checked. Interrupted
+setup or unknown mutation leaves that one worker blocked; another full app is not silently made
+on retry. The managed pool is capped at two apps / 5 GB, with a read-only inventory covering both
+managed workers and other existing `game` directories. It never deletes historical copies.
+
+**Short real reuse checks pass:** two different A8 seeds/pack choices use the same app path and
+inode, distinct profiles, and one total app copy. Both return to the frozen baseline and pass raw
+saved-evidence checks. A separate short native startup passes using that same app. Parallel isolation/throughput and deliberate blocked-worker repair/retirement
+remain later work; old recipes keep their original identities and retention policy.
+
+**Next under #145:** the owner runs `scripts/compare-bundle-actions-v3.sh`. The same eight-case
+natural Scroll Boxes panel now explicitly binds the reuse policy and uses a new workspace
+(two seeds × both packs × two repeats, approximately 6–9 minutes; 15-minute cap). Resource tracking
+includes the persistent app pool. The complete v3 panel has not started; v1's zero-case space failure
+and the prepared v2 copy-per-case recipe remain preserved. The script verifies saved evidence after
+success without game replay. Details: [working app reuse](working-app-reuse.md).
 Then qualify full Calling Bell/Cauldron pickup and reward
 choices against the shipped game and freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
@@ -440,7 +452,8 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; reward generation and bundle choice repaired; 409 mode references pending | Run the fresh v2 bundle UI panel after the zero-case v1 space failure; qualify full reward pickup/choices; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; fixed app reuse and short checks implemented | Reuse one protected working app, fresh profiles, ownership/reset checks and a global storage cap; qualify the repeated v3 panel. Parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
+| Current; reward generation and bundle choice repaired; 409 mode references pending | Run the v3 bundle UI panel using the fixed working app; qualify full reward pickup/choices; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

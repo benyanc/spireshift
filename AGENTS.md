@@ -59,6 +59,20 @@ unless the experiment is explicitly labeled privileged.
   in every run record.
 - Count crashes and unsupported decisions; never silently discard them from evaluation.
 
+## Working apps and storage
+
+New recipes that launch the shipped app must explicitly bind the versioned working-app reuse
+policy. Reuse one fixed app for the serial worker, with a fresh profile and immutable evidence
+per attempt. Managed-engine simulations already share frozen inputs and do not need an app copy
+per game. Preserve old recipes for historical reproduction; do not use their retention defaults
+for new work.
+
+Keep the frozen master unchanged, hold the worker lock through child shutdown and verified reset,
+and enforce the managed-pool storage cap. Interrupted or changed workers must stop for inspection;
+do not silently clear their marker or create replacement copies on retry. Preserve logs, saves,
+receipts and unexpected files. Parallel reuse and explicit worker repair/retirement remain
+separately qualified follow-ups. See `docs/working-app-reuse.md` and #147/#146.
+
 ## Verification
 
 Run `uv run spireshift check` before committing. Tests that enforce the objective contract and
