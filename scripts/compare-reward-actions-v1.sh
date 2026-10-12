@@ -3,10 +3,21 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
-batch_root="artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/reward-bridges-v8"
 resource_report="artifacts/resources/reward-comparisons-v1.json"
 qualification="configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json"
 batch_config="configs/engine-qualification/sts2-v0.111.0-reward-bridges-v8.json"
+# The pinned recipe owns the case workspace. Use it for cached results, tracking and outputs.
+# Preserve earlier outputs in their original directory; do not rewrite or move completed runs.
+batch_root="$(uv run python - "$batch_config" <<'PY'
+import json
+import sys
+from pathlib import Path
+from spireshift.engine_native import _private_path
+root = Path.cwd()
+document = json.loads(Path(sys.argv[1]).read_text())
+print(_private_path(root, document["workspace"]).relative_to(root))
+PY
+)"
 
 node_runtime="${SPIRESHIFT_NODE:-${HOME}/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node}"
 if [[ ! -x "$node_runtime" ]]; then

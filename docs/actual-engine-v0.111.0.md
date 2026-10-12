@@ -5,7 +5,33 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — reward pickup checks pass; repeated owner panel prepared
+## Current status — repeated reward panel passes 8/8
+
+The owner completed **8/8 reward comparisons**, with zero failures or unattempted cases and
+identical repeated public prefixes. Four independent A8 seeds/scenario pairs were each tested
+twice. Independent saved reconstruction verifies **42 observations, 34 effect decisions,
+46 game/UI actions and eight actual fresh tutorial clicks**, with zero games launched by the audit.
+Resource wall time is **351.598 seconds (5 minutes 52 seconds)**, CPU **208.263 seconds** and
+peak memory **1,131,216,896 bytes**. All eight reuse one app/inode and eight distinct profiles,
+with **zero new app copies** and passing reset receipts. The current idle worker and frozen
+master still match their original inventories.
+
+The run exposed a bookkeeping mismatch: the wrapper tracked/wrote summaries under one folder,
+while the pinned recipe stored its cases under another. The gameplay comparisons and saved audit
+pass; the historical storage report excludes the case folder and external profiles. Its true
+storage peak cannot be recovered and the original report stays unchanged. The wrapper now reads
+the workspace from the recipe for cached results, resource tracking and outputs. Two inert
+runner regression tests cover completed-result reuse and a fresh launch's output/tracking paths.
+Rerunning the completed helper now only displays and audits saved records; **no rerun is needed**.
+The full repository check passes **1,166 tests**, formatting/lint, strict types and the C# contract.
+[Completed reward panel evidence](evidence/actual-engine-v0.111.0-reward-panel-v8.json)
+records the measured storage, lineage, scope and remaining work.
+
+Next, freeze the content/act-discovery profile contract and repair/check public effect-text export
+before remaining mode/mechanics/later-act/ending coverage. Full-run speed and a separate A8
+neural lineage stay under #146. No full run, optimizer step or training follows this panel.
+
+## Reward pickup implementation and short checks
 
 Four short native/shipped comparisons now pass: Calling Bell claim-all and claim-one/skip,
 plus Cauldron fill/discard/replace/skip and fill/skip. Their saved raw audits verify **21 observations,
@@ -28,14 +54,7 @@ nested reward/interaction, full-game fidelity or model strength. Failed comparis
 proposals remain preserved; build schema/lineage and every supported fresh-profile recipe are
 checked before a new launch. Details: [reward pickup evidence](evidence/actual-engine-v0.111.0-reward-pickup-v1.json).
 
-**Next owner command:** `bash scripts/compare-reward-actions-v1.sh`. It runs the four fixed
-seed/scenario pairs twice, one shared app and fresh profile at a time. Expected **6–9 minutes**;
-caps are 15 minutes, 1,800 CPU seconds, 8 GB memory and 6 GB tracked storage including the app pool.
-The first difference stops the batch. Its saved raw audit follows without replay; rerunning a
-completed helper displays/audits saved results. **The eight-case panel has not started.**
-
-After the repeat panel, freeze the content/act-discovery profile contract and continue remaining
-mode/mechanics/public-information/later-act/ending checks. A newly observed legacy persistent
+The prepared repeat panel is now completed above. A newly observed legacy persistent
 potion-description fallback substitutes a card-count noun incorrectly; repair/check complete
 public effect-text export before learning admission. Full-run speed and a separate A8 neural
 lineage remain under #146. No full run, optimizer step or training follows this package.

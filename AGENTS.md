@@ -67,6 +67,11 @@ per attempt. Managed-engine simulations already share frozen inputs and do not n
 per game. Preserve old recipes for historical reproduction; do not use their retention defaults
 for new work.
 
+Runner wrappers must read the case workspace from the pinned recipe and use that same path for
+cached results, resource tracking and outputs. Do not duplicate a versioned workspace literal
+in the wrapper. Keep historical output locations and measurements unchanged when repairing a
+path mismatch, and record any excluded storage explicitly.
+
 Keep the frozen master unchanged, hold the worker lock through child shutdown and verified reset,
 and enforce the managed-pool storage cap. Interrupted or changed workers must stop for inspection;
 do not silently clear their marker or create replacement copies on retry. Preserve logs, saves,

@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-12 after the four short actual-engine reward pickup comparisons.
+Updated 2026-10-12 after the owner completed the eight-case actual-engine reward panel.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -259,10 +259,18 @@ values or weakening current item/price/potion/slot bindings. Sixteen corrupted s
 are refused. Original game/SDK/Host, failures and earlier proposals remain preserved.
 Details: [reward pickup evidence](evidence/actual-engine-v0.111.0-reward-pickup-v1.json).
 
-**Next under #145:** the owner runs `scripts/compare-reward-actions-v1.sh` for the eight-case repeat
-panel (four seed/scenario pairs, each twice; 6–9 minutes, 15-minute cap). The shared app pool is
-included in tracked storage; first difference stops, and only a saved audit follows success.
-The full panel has not started. Then freeze the content-plus-act-discovery contract. Continue
+**The owner reward panel now passes 8/8**, with zero failures/unattempted cases and identical
+repeat prefixes across four independent A8 seeds/scenario pairs, each twice. Saved re-auditing
+checks **42 observations, 34 effect decisions, 46 game/UI actions and eight real tutorials**,
+launching no games. Resource wall/CPU is **351.598/208.263 seconds**. Eight fresh profiles reuse
+one app/inode with zero new copies and verified resets; the master and current idle worker are intact.
+The historical wrapper tracked its output folder instead of the recipe-owned case folder, so its
+storage figure is incomplete. Preserve the result and missing-peak limitation. The repaired helper
+derives all cache/output/tracking paths from the recipe; completed invocation only displays/audits
+saved data. Two runner regressions cover this mismatch without game launches. No rerun is needed.
+[Completed panel evidence](evidence/actual-engine-v0.111.0-reward-panel-v8.json) records the scope.
+
+**Next under #145:** freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
 full modifier/expiry/relic-counter facts, combat beyond the first turn,
@@ -475,7 +483,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; bundle panel 8/8; four reward prefixes pass; 409 mode references pending | Owner runs the eight-case reward repeat panel. Then freeze act discovery, repair/check remaining public effect text, and continue mode/mechanics/later-act/ending coverage. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; bundle and reward panels each 8/8; 409 mode references pending | Freeze content/act discovery, repair/check remaining public effect text, and continue mode/mechanics/later-act/ending coverage. Completed helpers audit saved results; no panel rerun is needed. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
