@@ -29,6 +29,18 @@ from spireshift.engine_qualification import (
 from spireshift.full_run_experience import atomic_json
 
 
+def validate_connector_build_proposal(
+    proposed: dict[str, Any], document: dict[str, Any], recipe_relative: str
+) -> None:
+    """Refuse copied historical lineage before creating a new build/toolchain."""
+    if proposed.get("local_build") != {
+        "build_config": recipe_relative,
+        "build_config_id": manifest_identifier(document),
+        "build_report": document["output_report"],
+    }:
+        raise ValueError("Local Host proposal must bind this exact recipe, report and patch")
+
+
 def build_connector_candidate(
     qualification: EngineQualificationConfig, path: Path
 ) -> dict[str, Any]:
@@ -56,6 +68,10 @@ def build_connector_candidate(
         raise ValueError("The original Connector or scoped source patch changed")
     output_config = qualification.root / document["output_connector_config"]
     proposed = json.loads(output_config.read_text())
+    load_connector_qualification_config(output_config, qualification)
+    validate_connector_build_proposal(
+        proposed, document, str(path.resolve().relative_to(qualification.root))
+    )
     destination = _private_path(qualification.root, proposed["toolchain"])
     if destination.exists():
         raise FileExistsError("Preserve the existing local Host tools; do not rebuild in place")

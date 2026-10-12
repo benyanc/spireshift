@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-11 after the native reward repair and corrected second mode review.
+Updated 2026-10-12 after the four short actual-engine reward pickup comparisons.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -248,8 +248,21 @@ and profiles about 0.9 MB. V1's zero-case space failure and unused v2 recipe rem
 Details: [completed panel evidence](evidence/actual-engine-v0.111.0-bundle-panel-v3.json) and
 [working app reuse](working-app-reuse.md). No rerun, full game or learning follows this result.
 
-**Next under #145:** qualify full Calling Bell/Cauldron pickup and reward
-choices against the shipped game and freeze the content-plus-act-discovery contract. Continue
+**Reward pickup implementation and four short shipped checks now pass:** Calling Bell claim-all
+and claim-one/skip, Cauldron fill/discard/replace/skip and fill/skip. Raw reconstruction verifies
+21 observations, 17 effect decisions, 23 game/UI actions and four real tutorial clicks. The cases
+reuse one app/inode with four fresh profiles, zero new app copies and verified reset. They are
+explicit serialized one-Strike/1,000-gold fixtures, not naturally reached rooms or full runs.
+The missing first-relic tutorial is repaired in a separately pinned Host; two fresh builds and
+three focused tests pass. Observed rendering/operand differences are normalized without changing
+values or weakening current item/price/potion/slot bindings. Sixteen corrupted saved records
+are refused. Original game/SDK/Host, failures and earlier proposals remain preserved.
+Details: [reward pickup evidence](evidence/actual-engine-v0.111.0-reward-pickup-v1.json).
+
+**Next under #145:** the owner runs `scripts/compare-reward-actions-v1.sh` for the eight-case repeat
+panel (four seed/scenario pairs, each twice; 6–9 minutes, 15-minute cap). The shared app pool is
+included in tracked storage; first difference stops, and only a saved audit follows success.
+The full panel has not started. Then freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
 full modifier/expiry/relic-counter facts, combat beyond the first turn,
@@ -257,6 +270,9 @@ remaining reward/selection families and large choice spaces, out-of-combat potio
 purchases/discount interactions, skipping a merchant before opening its inventory, other public
 decisions, later acts and actual endings. Inventory coverage is not exhaustive reachable-state
 coverage. The new Host's finite prior-family checks remain separate from historical repeat panels.
+The legacy persistent-potion text fallback was observed to substitute a card-count noun incorrectly;
+repair complete public effect-text export and qualify the current Host's broader decision families
+before any learning admission. Four reward fixtures do not establish every nested selector/hook.
 
 [Mode audit evidence](evidence/actual-engine-v0.111.0-mode-audit-v1.json) records the exact scope,
 findings and incomplete review denominator. **1,083 repository tests**, the inspector's synthetic
@@ -459,7 +475,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; bundle panel 8/8; reward generation repaired; 409 mode references pending | Qualify full Calling Bell/Cauldron pickup and reward choices; freeze act discovery, then continue mode/mechanics coverage. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; bundle panel 8/8; four reward prefixes pass; 409 mode references pending | Owner runs the eight-case reward repeat panel. Then freeze act discovery, repair/check remaining public effect text, and continue mode/mechanics/later-act/ending coverage. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

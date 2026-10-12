@@ -90,6 +90,7 @@ def _probe_cli_document(
         "shop_bridge",
         "bundle",
         "bundle_bridge",
+        "reward_bridge",
     }:
         raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
@@ -100,7 +101,9 @@ def _probe_cli_document(
         and revision != "combat_v4"
     ):
         raise ValueError("Combat public projection requires its explicit frozen revision")
-    if panel in {"bundle", "bundle_bridge"} and (not projected or revision != "bundle_v5"):
+    if panel in {"bundle", "bundle_bridge", "reward_bridge"} and (
+        not projected or revision != "bundle_v5"
+    ):
         raise ValueError("Bundle checks require the separately pinned bundle projection")
     if revision not in {
         "rest_v1",
@@ -127,7 +130,14 @@ def _probe_cli_document(
         or not 30 <= document["max_wall_seconds"] <= 180
     ):
         raise ValueError(f"Expected a short Ironclad/A8 {panel}-only qualification config")
-    if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge", "bundle_bridge"} and (
+    if panel in {
+        "checkpoint",
+        "journey",
+        "rest_bridge",
+        "shop_bridge",
+        "bundle_bridge",
+        "reward_bridge",
+    } and (
         not projected
         or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
         or document.get("content_policy") != "native_all_unlocked"
@@ -216,6 +226,36 @@ def _probe_cli_document(
                 "bridge_helpers_sha256", {}
             ).get(name):
                 raise ValueError("Pinned bundle bridge helper changed")
+    if panel == "reward_bridge":
+        if document.get("reward_bridge_revision", "v1") not in {"v1", "v2", "v3"}:
+            raise ValueError("Unknown native reward projection revision")
+        if document.get("reward_bridge", {}).get("scenario") not in {
+            "calling-bell-claim-all",
+            "calling-bell-claim-skip",
+            "cauldron-fill-replace-skip",
+            "cauldron-fill-skip",
+        }:
+            raise ValueError("Expected one explicitly named finite reward pickup fixture")
+        names = {
+            "engine-reward-bridge-contract-v1.mjs",
+            "engine-shop-bridge-contract.mjs",
+            "engine-rest-bridge-contract.mjs",
+            "engine-journey-contract-v2.mjs",
+            "engine-menu-probe.mjs",
+            "engine-checkpoint-shipped-probe.mjs",
+        }
+        if document.get("reward_bridge_revision", "v1") in {"v2", "v3"}:
+            names.add(
+                "engine-reward-rendered-text-"
+                + ("v1" if document["reward_bridge_revision"] == "v2" else "v2")
+                + ".mjs"
+            )
+        if set(document.get("bridge_helpers_sha256", {})) != names or any(
+            _sha_file(qualification.root / "scripts" / name)
+            != document["bridge_helpers_sha256"][name]
+            for name in names
+        ):
+            raise ValueError("Pinned reward fixture helper inventory changed")
     _require_native_launch_support()
     if _running_games():
         raise ValueError("Close the existing game before the isolated native interaction check")
@@ -230,7 +270,9 @@ def _probe_cli_document(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        f"probe-engine-cli-bundle-bridge-{document.get('bundle_bridge_revision', 'v1')}.mjs"
+        f"probe-engine-cli-reward-bridge-{document.get('reward_bridge_revision', 'v1')}.mjs"
+        if projected and panel == "reward_bridge"
+        else f"probe-engine-cli-bundle-bridge-{document.get('bundle_bridge_revision', 'v1')}.mjs"
         if projected and panel == "bundle_bridge"
         else f"probe-engine-cli-bundle-{document.get('bundle_probe_revision', 'v1')}.mjs"
         if projected and panel == "bundle"
@@ -358,7 +400,15 @@ def _probe_cli_document(
             "panel": panel,
             **(
                 {"seed": document["seed"], "content_policy": document["content_policy"]}
-                if panel in {"checkpoint", "journey", "rest_bridge", "shop_bridge", "bundle_bridge"}
+                if panel
+                in {
+                    "checkpoint",
+                    "journey",
+                    "rest_bridge",
+                    "shop_bridge",
+                    "bundle_bridge",
+                    "reward_bridge",
+                }
                 else {}
             ),
             **({"journey": document["journey"]} if panel == "journey" else {}),
@@ -366,6 +416,7 @@ def _probe_cli_document(
             **({"shop_bridge": document["shop_bridge"]} if panel == "shop_bridge" else {}),
             **({"bundle_seeds": document["bundle_seeds"]} if panel == "bundle" else {}),
             **({"bundle_bridge": document["bundle_bridge"]} if panel == "bundle_bridge" else {}),
+            **({"reward_bridge": document["reward_bridge"]} if panel == "reward_bridge" else {}),
         }
         if projected:
             spec["projection"] = projection

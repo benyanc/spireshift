@@ -255,9 +255,15 @@ def _bundle_batch_inputs(
 
 
 def _verify_bundle_prerequisites(
-    qualification: EngineQualificationConfig, path: Path, template: dict[str, Any]
+    qualification: EngineQualificationConfig,
+    path: Path,
+    template: dict[str, Any],
+    *,
+    panel: str = "bundle_bridge",
 ) -> dict[str, Any]:
     """Read existing pinned inputs only; never copy, build, download or launch a game."""
+    if panel not in {"bundle_bridge", "reward_bridge"}:
+        raise ValueError("Unknown scoped bridge prerequisite panel")
     native_path = qualification.root / template["native_config"]
     document = json.loads(native_path.read_text())
     if (
@@ -273,10 +279,19 @@ def _verify_bundle_prerequisites(
     build = verify_local_build_report(report, build_config, qualification)
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Bundle native template requires its exact completed build")
+    reward_revision = document.get("reward_bridge_revision", "v1")
     if (
         document.get("public_projection_revision") != "bundle_v5"
-        or document.get("bundle_bridge_revision") != "v3"
-        or _sha_file(qualification.root / "scripts/probe-engine-cli-bundle-bridge-v3.mjs")
+        or (panel == "bundle_bridge" and document.get("bundle_bridge_revision") != "v3")
+        or _sha_file(
+            qualification.root
+            / "scripts"
+            / (
+                "probe-engine-cli-bundle-bridge-v3.mjs"
+                if panel == "bundle_bridge"
+                else f"probe-engine-cli-reward-bridge-{reward_revision}.mjs"
+            )
+        )
         != document["helper_sha256"]
         or _sha_file(qualification.root / "scripts/engine-cli-local-build.mjs")
         != build_config["helper_sha256"]

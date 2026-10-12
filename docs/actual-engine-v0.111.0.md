@@ -5,7 +5,42 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — repeated bundle comparisons and serial app reuse pass
+## Current status — reward pickup checks pass; repeated owner panel prepared
+
+Four short native/shipped comparisons now pass: Calling Bell claim-all and claim-one/skip,
+plus Cauldron fill/discard/replace/skip and fill/skip. Their saved raw audits verify **21 observations,
+17 effect decisions, 23 game/UI actions and four actual fresh tutorial clicks**. All four use
+the same working app/inode, distinct profiles and **zero new app copies**, with verified reset.
+Resource wall times were **44.015, 56.747, 47.755 and 48.243 seconds**. A saved-only negative audit
+rejects **16 intentionally corrupted records** across two cases.
+
+The first live check exposed the unsupported first-relic tutorial. The separately pinned local
+Host now recognizes its exact modal/button; it leaves unknown modals unsupported and retains
+rest/potion support. Two fresh builds reproduce in 8.204 seconds, and three focused Host tests
+pass. Original game/SDK/Host files remain preserved. Reward rendering removes only observed
+colour tags and represents each observed Ironclad energy glyph as the shipped Host does,
+preserving words, numbers, order and glyph multiplicity. Current shop/reward controls normalize
+the observed operand shapes while preserving exact current item, price, potion and slot bindings.
+
+These are **explicit privileged serialized fixtures**: one Strike, 1,000 gold, an initial shop or
+Darv installed at the initial ancient. They do not establish naturally reached rooms, every
+nested reward/interaction, full-game fidelity or model strength. Failed comparisons and build
+proposals remain preserved; build schema/lineage and every supported fresh-profile recipe are
+checked before a new launch. Details: [reward pickup evidence](evidence/actual-engine-v0.111.0-reward-pickup-v1.json).
+
+**Next owner command:** `bash scripts/compare-reward-actions-v1.sh`. It runs the four fixed
+seed/scenario pairs twice, one shared app and fresh profile at a time. Expected **6–9 minutes**;
+caps are 15 minutes, 1,800 CPU seconds, 8 GB memory and 6 GB tracked storage including the app pool.
+The first difference stops the batch. Its saved raw audit follows without replay; rerunning a
+completed helper displays/audits saved results. **The eight-case panel has not started.**
+
+After the repeat panel, freeze the content/act-discovery profile contract and continue remaining
+mode/mechanics/public-information/later-act/ending checks. A newly observed legacy persistent
+potion-description fallback substitutes a card-count noun incorrectly; repair/check complete
+public effect-text export before learning admission. Full-run speed and a separate A8 neural
+lineage remain under #146. No full run, optimizer step or training follows this package.
+
+## Completed repeated bundle panel
 
 V12 makes bundle-hook installation mandatory, rejects invalid/stale choices, preserves native
 choice synchronization and clears pending bindings on reset. The public menu includes exact
@@ -46,9 +81,8 @@ records the results and reuse audit. The v1 failure and unused v2 recipe remain 
 [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json) records the earlier preflight repair.
 [V12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json) records native checks, the
 single successful prototype, preserved failures, source/build identities and limits. No complete
-run or learning follows this package. **Next under #145:** qualify full Calling Bell/Cauldron
-pickup and reward choices, then freeze content and act-discovery profile state. Remaining mode
-references, broader mechanics and actual endings still precede #146. The completed bundle helper
+run or learning follows that package. The reward work above supersedes its pending pickup stage.
+Remaining mode references, broader mechanics and actual endings still precede #146. The completed bundle helper
 needs no rerun; it displays and audits saved evidence when invoked again.
 
 ## Acquisition and preservation
