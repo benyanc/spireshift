@@ -219,9 +219,18 @@ game mismatch. Large private disposable assets now use independent APFS clones w
 with ordinary-copy fallback and unchanged full inventory validation. No hard links are used.
 Details: [v12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json).
 
-**Next under #145:** the owner runs `scripts/compare-bundle-actions-v1.sh`, a prepared eight-case
-natural Scroll Boxes panel (two seeds × both packs × two repeats, approximately 6–8 minutes).
-This repeated panel has not run. Then qualify full Calling Bell/Cauldron pickup and reward
+**The original bundle UI batch was blocked before any case:** v1 has zero completed/failed
+cases and eight unattempted cases because its free-space guard stopped it. Its saved failure and
+resource report remain immutable. Rerunning v1 displays that failure rather than restarting.
+
+**Next under #145:** the owner runs `scripts/compare-bundle-actions-v2.sh`, the same eight-case
+natural Scroll Boxes panel in a fresh workspace (two seeds × both packs × two repeats,
+approximately 6–8 minutes; 15-minute cap). A new read-only preflight passed: pinned game/builds,
+runtime, SDK, localization, helpers and settings remain intact, enough space is available, and
+no game or batch workspace was created. Both the owner helper and direct runner refuse launch
+blockers before creating a batch; space remains checked between cases. No v2 comparison has run.
+Details: [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json).
+Then qualify full Calling Bell/Cauldron pickup and reward
 choices against the shipped game and freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
@@ -431,7 +440,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; reward generation and bundle choice repaired; 409 mode references pending | Run the prepared repeated bundle UI panel; qualify full reward pickup/choices; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; reward generation and bundle choice repaired; 409 mode references pending | Run the fresh v2 bundle UI panel after the zero-case v1 space failure; qualify full reward pickup/choices; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

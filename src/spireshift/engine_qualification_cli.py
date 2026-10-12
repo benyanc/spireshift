@@ -11,6 +11,7 @@ from typing import Any
 from spireshift.engine_bundle_bridge import (
     compare_bundle_bridge,
     compare_bundle_bridges,
+    preflight_bundle_bridges,
     verify_bundle_bridges,
 )
 from spireshift.engine_candidate import build_cli_candidate
@@ -83,6 +84,7 @@ def add_engine_parser(commands: Any) -> None:
         "compare-shop-bridges",
         "compare-bundle-bridge",
         "compare-bundle-bridges",
+        "preflight-bundle-bridges",
         "verify-bundle-bridges",
         "compare-rest-bridges",
         "verify-rest-bridges",
@@ -122,6 +124,7 @@ def add_engine_parser(commands: Any) -> None:
             "compare-shop-bridges",
             "compare-bundle-bridge",
             "compare-bundle-bridges",
+            "preflight-bundle-bridges",
             "verify-bundle-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
@@ -138,6 +141,7 @@ def add_engine_parser(commands: Any) -> None:
             "compare-shop-bridges",
             "compare-bundle-bridge",
             "compare-bundle-bridges",
+            "preflight-bundle-bridges",
             "verify-bundle-bridges",
             "compare-rest-bridges",
             "verify-rest-bridges",
@@ -231,6 +235,9 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0
         elif args.engine_command == "verify-bundle-bridges":
             result = verify_bundle_bridges(config, args.bridge_config, node=args.node)
+            code = 0
+        elif args.engine_command == "preflight-bundle-bridges":
+            result = preflight_bundle_bridges(config, args.bridge_config, node=args.node)
             code = 0
         elif args.engine_command in {"compare-rest-bridge", "compare-rest-bridges"}:
             result = (

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import re
 import shutil
 import time
@@ -13,14 +14,28 @@ from typing import Any
 from spireshift.core.manifest import manifest_identifier
 from spireshift.engine_bundle_verification import verify_bundle_saved
 from spireshift.engine_checkpoint import verify_checkpoint_input
-from spireshift.engine_cli_probe import _probe_cli_document
+from spireshift.engine_cli_probe import (
+    _probe_cli_document,
+    verify_local_build_report,
+    verify_probe_runtime,
+    verify_projection_inputs,
+)
 from spireshift.engine_connector import (
     _probe_connector_private,
+    _settings_template,
+    _verify_toolchain,
     load_connector_qualification_config,
 )
 from spireshift.engine_journey_verification import _hashed
-from spireshift.engine_native import _private_path
-from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
+from spireshift.engine_localization import verify_native_localization
+from spireshift.engine_native import (
+    _private_path,
+    _require_native_launch_support,
+    _running_games,
+    _verified_archive,
+    load_native_qualification_config,
+)
+from spireshift.engine_qualification import EngineQualificationConfig, _inventory, _sha_file
 from spireshift.full_run_experience import atomic_json
 
 HELPERS = {
@@ -32,6 +47,7 @@ HELPERS = {
     "engine-checkpoint-shipped-probe.mjs",
     "verify-engine-bundle-saved-v1.mjs",
 }
+MINIMUM_FREE_BYTES = 3_500_000_000
 
 
 def compare_bundle_bridge(
@@ -171,9 +187,9 @@ def validate_bundle_cases(document: dict[str, Any]) -> list[dict[str, Any]]:
     return [{key: case[key] for key in ("case_id", "seed", "index")} for case in cases]
 
 
-def compare_bundle_bridges(
-    qualification: EngineQualificationConfig, path: Path, *, node: Path
-) -> dict[str, Any]:
+def _bundle_batch_inputs(
+    qualification: EngineQualificationConfig, path: Path
+) -> tuple[dict[str, Any], list[dict[str, Any]], Path, dict[str, Any], Path]:
     document = json.loads(path.read_text())
     if (
         document.get("schema_version") != "engine-bundle-bridges-config-v1"
@@ -189,16 +205,140 @@ def compare_bundle_bridges(
     if (
         template_path.resolve().parent != path.resolve().parent
         or manifest_identifier(template) != document["template_id"]
+        or template.get("schema_version") != "engine-bundle-bridge-config-v1"
+        or template.get("stage") != "natural_Neow_bundle_choice_differential_only"
+        or template.get("qualification_config_id") != qualification.config_id
+        or template.get("bridge_revision") != "v3"
+        or template.get("training_allowed") is not False
+        or set(template.get("helpers_sha256", {})) != HELPERS
+        or any(
+            _sha_file(qualification.root / "scripts" / name) != template["helpers_sha256"][name]
+            for name in HELPERS
+        )
     ):
-        raise ValueError("Bundle comparison template changed")
+        raise ValueError("Bundle comparison template or helper changed")
     workspace = _private_path(qualification.root, document["workspace"])
+    return document, cases, template_path, template, workspace
+
+
+def _verify_bundle_prerequisites(
+    qualification: EngineQualificationConfig, path: Path, template: dict[str, Any]
+) -> dict[str, Any]:
+    """Read existing pinned inputs only; never copy, build, download or launch a game."""
+    native_path = qualification.root / template["native_config"]
+    document = json.loads(native_path.read_text())
+    if (
+        native_path.resolve().parent != path.resolve().parent
+        or manifest_identifier(document) != template["native_config_id"]
+    ):
+        raise ValueError("Bundle native template changed")
+    build_path = qualification.root / document["build_config"]
+    if build_path.resolve().parent != native_path.resolve().parent:
+        raise ValueError("Local build configuration must be beside the native template")
+    build_config = json.loads(build_path.read_text())
+    report = json.loads(_private_path(qualification.root, document["build_report"]).read_text())
+    build = verify_local_build_report(report, build_config, qualification)
+    if report["report_id"] != document["build_report_id"]:
+        raise ValueError("Bundle native template requires its exact completed build")
+    if (
+        document.get("public_projection_revision") != "bundle_v5"
+        or document.get("bundle_bridge_revision") != "v3"
+        or _sha_file(qualification.root / "scripts/probe-engine-cli-bundle-bridge-v3.mjs")
+        != document["helper_sha256"]
+        or _sha_file(qualification.root / "scripts/engine-cli-local-build.mjs")
+        != build_config["helper_sha256"]
+        or _sha_file(qualification.root / build_config["local_patch"])
+        != build_config["local_patch_sha256"]
+    ):
+        raise ValueError("Pinned native bundle helper, build helper or patch changed")
+    candidate = Path(build["candidate_directory"])
+    candidate = _private_path(qualification.root, str(candidate.relative_to(qualification.root)))
+    if _inventory(candidate) != report["private_candidate_inventory"]:
+        raise ValueError("Candidate files changed since the verified local build")
+    projection, _ = verify_projection_inputs(qualification, document)
+    runtime, _ = verify_probe_runtime(qualification, document)
+    if runtime is None:
+        raise ValueError("Bundle preflight requires the pinned game-matching managed runtime")
+    verify_native_localization(qualification, document["native_localization"])
+    native = load_native_qualification_config(
+        qualification.root / build_config["native_config"], qualification
+    )
+    _, archive = _verified_archive(native)
+    connector_path = qualification.root / template["connector_config"]
+    if connector_path.resolve().parent != path.resolve().parent:
+        raise ValueError("Bundle Connector prerequisite must be beside its template")
+    connector = load_connector_qualification_config(connector_path, qualification)
+    if connector.config_id != template["connector_config_id"]:
+        raise ValueError("Bundle shipped Host prerequisite changed")
+    tools = _verify_toolchain(connector)
+    _, settings = _settings_template(connector)
+    return {
+        "native_config_id": template["native_config_id"],
+        "native_build_report_id": report["report_id"],
+        "candidate_inventory_verified": True,
+        "sdk_inventory_id": projection["sdk_inventory_id"],
+        "managed_runtime_inventory_id": document["managed_runtime"]["inventory_id"],
+        "localization_verified": True,
+        "archive_verification_id": archive["report_id"],
+        "connector_config_id": connector.config_id,
+        "connector_toolchain_report_id": tools["report_id"],
+        "bootstrap_report_id": settings["report_id"],
+    }
+
+
+def preflight_bundle_bridges(
+    qualification: EngineQualificationConfig, path: Path, *, node: Path
+) -> dict[str, Any]:
+    """Refuse predictable blockers before allocating an immutable batch workspace."""
+    started = time.monotonic()
+    document, _, template_path, template, workspace = _bundle_batch_inputs(qualification, path)
     if workspace.exists():
         raise FileExistsError("Preserve this batch; no automatic resume")
+    _require_native_launch_support()
+    if not node.is_file() or not os.access(node, os.X_OK):
+        raise ValueError("Pass an executable local Node runtime")
+    if _running_games():
+        raise ValueError("Close the existing game before the isolated bundle comparison")
+    parent = next(folder for folder in (workspace, *workspace.parents) if folder.exists())
+    free = shutil.disk_usage(parent).free
+    if free < MINIMUM_FREE_BYTES:
+        raise ValueError("Allow 3.5 GB free before the bundle batch; no result was created")
+    prerequisites = _verify_bundle_prerequisites(qualification, template_path, template)
+    result = {
+        "schema_version": "engine-bundle-preflight-v1",
+        "status": "bundle_preflight_pass",
+        "config_id": manifest_identifier(document),
+        "qualification_config_id": qualification.config_id,
+        "planned_cases": 8,
+        "independent_seeds": 2,
+        "workspace": document["workspace"],
+        "free_disk_bytes": free,
+        "minimum_free_disk_bytes": MINIMUM_FREE_BYTES,
+        "prerequisites": prerequisites,
+        "workspace_created": False,
+        "games_launched": 0,
+        "optimizer_steps": 0,
+        "training_allowed": False,
+        "wall_seconds": time.monotonic() - started,
+        "claim_scope": "read_only_bundle_batch_launch_prerequisites_only",
+    }
+    result["report_id"] = manifest_identifier(result)
+    return result
+
+
+def compare_bundle_bridges(
+    qualification: EngineQualificationConfig, path: Path, *, node: Path
+) -> dict[str, Any]:
+    preflight = preflight_bundle_bridges(qualification, path, node=node)
+    document, cases, template_path, template, workspace = _bundle_batch_inputs(qualification, path)
+    if preflight["config_id"] != manifest_identifier(document):
+        raise ValueError("Bundle batch configuration changed during preflight")
     workspace.mkdir(parents=True)
     result: dict[str, Any] = {
         "schema_version": "engine-bundle-bridges-v1",
         "config_id": manifest_identifier(document),
         "qualification_config_id": qualification.config_id,
+        "preflight": preflight,
         "status": "in_progress",
         "cases": [],
         "planned_cases": 8,
@@ -220,7 +360,7 @@ def compare_bundle_bridges(
         for number, case in enumerate(cases, 1):
             if time.monotonic() - started > document["max_wall_seconds"] - 250:
                 raise TimeoutError("Bundle batch reached its finite launch allowance")
-            if shutil.disk_usage(workspace).free < 3_500_000_000:
+            if shutil.disk_usage(workspace).free < MINIMUM_FREE_BYTES:
                 raise ValueError("Allow 3.5 GB free before the next disposable game copy")
             active = case
             result["not_attempted_cases"] -= 1

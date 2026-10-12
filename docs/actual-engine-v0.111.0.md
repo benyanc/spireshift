@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — bundle selection repaired; repeated UI comparison prepared
+## Current status — bundle selection repaired; fresh repeated UI retry prepared
 
 V12 makes bundle-hook installation mandatory, rejects invalid/stale choices, preserves native
 choice synchronization and clears pending bindings on reset. The public menu includes exact
@@ -15,10 +15,21 @@ shipped game: choose the second pack, cancel its preview, reopen and confirm, th
 exactly those cards. It compares visible identities/costs/upgrades and persistent ownership;
 it does not qualify general card text/effect semantics or all bundle mechanics.
 
-The next owner stage is [compare-bundle-actions-v1.sh](../scripts/compare-bundle-actions-v1.sh):
-eight shipped comparisons across two independent seeds, both packs, each twice. Expect 6–8
-minutes; the stage has a 15-minute cap and stops at its first difference. The script also audits
-saved raw evidence without another game launch. It has been prepared, not executed.
+The original v1 batch stopped at its free-space guard before attempting any of its eight
+cases. Its failed result and resource report remain immutable; rerunning v1 only displays that
+failure. It did not find a game-mechanics mismatch.
+
+The next owner stage is [compare-bundle-actions-v2.sh](../scripts/compare-bundle-actions-v2.sh):
+a fresh workspace for the same eight shipped comparisons across two independent seeds, both
+packs, each twice. Expect 6–8 minutes; the stage has a 15-minute cap and stops at its first
+difference. A read-only preflight now checks free space, no active game, exact native/shipped
+builds, frozen game, runtime, SDK, localization, helpers and settings before allocating a batch
+or resource result. The runner repeats this guard and checks space between cases. Predictable
+preflight failures can be corrected and retried without consuming that fresh workspace.
+
+The local preflight passed in about two seconds, with no game launch or batch workspace created.
+The eight-case v2 panel has not started. The script audits saved raw evidence after successful
+comparisons without another game launch. Details: [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json).
 [V12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json) records native checks, the
 single successful prototype, preserved failures, source/build identities and limits. No complete
 run or learning follows this package. Full reward pickup, discovery/profile state, remaining
