@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — bundle selection repaired; fresh repeated UI retry prepared
+## Current status — repeated bundle comparisons and serial app reuse pass
 
 V12 makes bundle-hook installation mandatory, rejects invalid/stale choices, preserves native
 choice synchronization and clears pending bindings on reset. The public menu includes exact
@@ -19,11 +19,16 @@ The original v1 batch stopped at its free-space guard before attempting any of i
 cases. Its failed result and resource report remain immutable; rerunning v1 only displays that
 failure. It did not find a game-mechanics mismatch.
 
-The next owner stage is [compare-bundle-actions-v3.sh](../scripts/compare-bundle-actions-v3.sh):
-the same eight shipped comparisons across two independent seeds, both packs, each twice, using
-one fixed working app. Each attempt has a fresh profile; connector/settings additions are removed
-after verified shutdown and the app returns to the frozen file baseline. Two short real cases pass
-with the same app path/inode, distinct profiles and one total app copy. Their raw saved audits pass. A separate short native startup also reuses and restores the same app.
+The owner completed [compare-bundle-actions-v3.sh](../scripts/compare-bundle-actions-v3.sh):
+**8/8 shipped comparisons pass**, with zero failures or unattempted cases. Two independent A8
+seeds × both packs × two repeats have identical repeated public prefixes. The saved raw audit
+verifies **24 observations, 16 effect decisions, 40 game/UI actions and 16 previews**. An independent
+saved-only recheck reproduces the audit without launching a game.
+
+All eight attempts reuse the same app path/inode, with eight distinct profiles and **zero new
+app copies during this batch**. Every reset receipt passes; the master and current idle worker
+match the original frozen inventory. No per-case `game` payload remains. The earlier short checks
+created the one persistent working app; a separate startup also reused and restored it.
 
 The reuse policy under [#147](https://github.com/benyanc/spireshift/issues/147) locks the app, binds
 its exact game inventory and limits the managed pool to two apps / 5 GB. Interrupted or changed
@@ -32,15 +37,19 @@ apps plus other existing `game` payload directories. Menu/bootstrap APIs also ac
 reuse policy. Historical recipes retain their original behavior; parallel workers remain under #146.
 Details: [working app reuse](working-app-reuse.md).
 
-Expect 6–9 minutes for the v3 panel; its cap is 15 minutes and the first difference stops it. The
-resource wrapper counts the app pool, and a saved raw audit follows success without another game
-launch. This complete repeat panel has not started. The v1 failure and unused v2 recipe remain
-separate; [retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json) records the earlier
-preflight repair.
+The panel took **319.079 resource wall seconds (5 minutes 19 seconds)** and **193.116 CPU seconds**,
+with 850,165,760 bytes peak memory and no cap hit. Tracked final storage is 2,433,654,242 logical
+bytes including the existing 2,406,594,686-byte app. The saved results occupy **27,060,503 bytes**
+after audit, plus **888,368 bytes** in fresh profiles. Logical APFS sizes do not measure unique
+physical disk allocation. [Completed panel evidence](evidence/actual-engine-v0.111.0-bundle-panel-v3.json)
+records the results and reuse audit. The v1 failure and unused v2 recipe remain separate;
+[retry evidence](evidence/actual-engine-v0.111.0-bundle-retry-v2.json) records the earlier preflight repair.
 [V12 evidence](evidence/actual-engine-v0.111.0-bundle-choice-v12.json) records native checks, the
 single successful prototype, preserved failures, source/build identities and limits. No complete
-run or learning follows this package. Full reward pickup, discovery/profile state, remaining
-mode references, broader mechanics and actual endings still precede #146.
+run or learning follows this package. **Next under #145:** qualify full Calling Bell/Cauldron
+pickup and reward choices, then freeze content and act-discovery profile state. Remaining mode
+references, broader mechanics and actual endings still precede #146. The completed bundle helper
+needs no rerun; it displays and audits saved evidence when invoked again.
 
 ## Acquisition and preservation
 

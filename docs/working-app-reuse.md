@@ -35,12 +35,25 @@ One startup attempt exposed a bookkeeping error after successful reset: the laun
 hash an already removed override file. That failure remains immutable. The hash is now captured
 before reset, a focused regression test passes and a separately recorded retry passes.
 
-## Next owner stage
+## Completed owner repeat panel
 
-Run only `bash scripts/compare-bundle-actions-v3.sh` for the eight-case repeated Scroll Boxes panel.
-Expected 6–9 minutes, capped at 15. It stops at the first mismatch and performs a saved-only audit
-after success. No training or automatic next experiment follows. Earlier v1/v2 scripts are
-historical; they do not opt into working app reuse.
+The owner completed `scripts/compare-bundle-actions-v3.sh`: all **eight Scroll Boxes comparisons
+pass**, across two independent A8 seeds, both packs, each twice. The raw saved audit passes and an
+independent recheck reproduces it without launching games. All cases use the same app path/inode
+and eight distinct profiles, create **zero additional app copies**, and have verified reset
+receipts. The master and current idle worker still match the original frozen file inventory.
+
+Resource wall time was **319.079 seconds (5 minutes 19 seconds)**, CPU 193.116 seconds and peak
+memory 850,165,760 bytes. The batch retains about **27 MB of results and 0.9 MB of profiles**,
+with no per-case `game` directories. The 2.43 GB final tracked storage includes the one pre-existing
+2.41 GB working app. These are logical sizes; APFS clones can share physical blocks.
+
+No rerun is needed. Invoking the completed helper again displays and audits saved results without
+game replay. Earlier v1/v2 scripts retain their historical behavior. No full run or training
+followed. [Completed panel evidence](evidence/actual-engine-v0.111.0-bundle-panel-v3.json) records
+the results. Serial reuse is confirmed for this scope; deliberate blocked-worker repair/retirement
+remains under #147 and parallel reuse/throughput under #146. The next mechanics work under #145
+is full Calling Bell/Cauldron pickup and reward choices.
 
 ## Launcher integration
 

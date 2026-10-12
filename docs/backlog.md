@@ -236,13 +236,19 @@ inode, distinct profiles, and one total app copy. Both return to the frozen base
 saved-evidence checks. A separate short native startup passes using that same app. Parallel isolation/throughput and deliberate blocked-worker repair/retirement
 remain later work; old recipes keep their original identities and retention policy.
 
-**Next under #145:** the owner runs `scripts/compare-bundle-actions-v3.sh`. The same eight-case
-natural Scroll Boxes panel now explicitly binds the reuse policy and uses a new workspace
-(two seeds × both packs × two repeats, approximately 6–9 minutes; 15-minute cap). Resource tracking
-includes the persistent app pool. The complete v3 panel has not started; v1's zero-case space failure
-and the prepared v2 copy-per-case recipe remain preserved. The script verifies saved evidence after
-success without game replay. Details: [working app reuse](working-app-reuse.md).
-Then qualify full Calling Bell/Cauldron pickup and reward
+**The owner completed the v3 bundle panel: 8/8 pass**, zero failures or unattempted cases, with
+identical repeated public prefixes across two independent A8 seeds/four seed-pack pairs. The raw
+saved audit verifies 24 observations, 16 effect decisions, 40 game/UI actions and 16 previews; an
+independent saved-only recheck reproduces it without games. All eight attempts reuse the same app
+path/inode with distinct profiles, zero new app copies and verified reset receipts. Both the frozen
+master and current idle worker match the original inventory. No per-case `game` directories remain.
+Resource wall/CPU is **319.079/193.116 seconds**, peak memory 850,165,760 bytes, with no cap hit.
+Tracked final storage includes the existing working app; newly retained results are about 27 MB
+and profiles about 0.9 MB. V1's zero-case space failure and unused v2 recipe remain immutable.
+Details: [completed panel evidence](evidence/actual-engine-v0.111.0-bundle-panel-v3.json) and
+[working app reuse](working-app-reuse.md). No rerun, full game or learning follows this result.
+
+**Next under #145:** qualify full Calling Bell/Cauldron pickup and reward
 choices against the shipped game and freeze the content-plus-act-discovery contract. Continue
 the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
@@ -452,8 +458,8 @@ independent evaluation, numerical stability and historical evidence preservation
 | Order | Work | GitHub items |
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
-| Current; fixed app reuse and short checks implemented | Reuse one protected working app, fresh profiles, ownership/reset checks and a global storage cap; qualify the repeated v3 panel. Parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; reward generation and bundle choice repaired; 409 mode references pending | Run the v3 bundle UI panel using the fixed working app; qualify full reward pickup/choices; freeze act discovery, then continue mode/mechanics coverage. Earlier shipped panels retain their original scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
+| Current; bundle panel 8/8; reward generation repaired; 409 mode references pending | Qualify full Calling Bell/Cauldron pickup and reward choices; freeze act discovery, then continue mode/mechanics coverage. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
