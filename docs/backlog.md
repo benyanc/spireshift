@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-12 after the v13 benchmark profile and native description fixes.
+Updated 2026-10-12 after the owner completed the v13 profile/description repeat panel.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -14,22 +14,29 @@ full-run victory stays primary. Preserve all v0.107.1 archives, models, encoders
 qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
 other difficulties and larger unchanged PPO/GA batches remain deferred.
 
-**Current handoff:** the explicit full-content/all-acts-seen Ironclad/A8 benchmark profile and
-native formatted-description fixes pass three short shipped checks. Both Overgrowth and
-Underdocks appear as the first act. Normal act selection/RNG agrees with the original native
-method for this profile. Tutorials remain enabled/unseen, real account history is untouched,
-and every launch binds the native progress export. Registry inspection verifies 1,517 descriptions
-per case; one native mock potion is explicitly excluded, not silently discarded. The three
-shipped prefixes match current starting options, deck/relic/potion descriptions and reset one
-reused app with zero new copies. They import native checkpoints rather than starting a new
-game through the shipped lobby. **1,181 tests**, formatting/lint/types and the C# contract pass.
+**Current handoff:** the owner profile/description panel passes **8/8 cases**, zero failures or
+unattempted cases. Four independent fixed-A8 seeds were each repeated twice with identical public
+prefixes. Independent saved reconstruction verifies eight initial observations/Continue actions,
+88 deck descriptions, 16 potion descriptions, eight relic descriptions and 24 starting options.
+The native initial-context catalogue passes 1,517 descriptions per case, with one native mock
+potion explicitly excluded. Overgrowth and Underdocks appear as the first act; normal act
+selection/RNG agrees with the original method for the declared all-acts-seen profile. Tutorials
+remain enabled/unseen and real account history is untouched.
 
-**Next owner stage:** `scripts/compare-profile-descriptions-v1.sh`, eight cases across four
-fixed seeds repeated twice, expected 5–8 minutes and capped at 15 minutes. First difference stops;
-only a saved audit follows. No new long job, full run or training has started. After this panel,
-continue broader current-Host/mode/mechanics/public-information/later-act/ending checks under
-#145 before #146 benchmarks full-run speed and connects a separate A8 neural lineage.
-[Current profile/description evidence](evidence/actual-engine-v0.111.0-profile-descriptions-v13.json).
+Resource wall time is **258.689 seconds** (about 4 minutes 19 seconds), CPU **152.970 seconds**,
+peak memory **975,060,992 bytes**; no cap was hit. All eight cases use one app/inode, eight private
+profiles, **zero new app copies** and verified resets. The idle worker and frozen master remain
+intact. **The stage is complete; no rerun is needed.** Its helper displays and audits saved results
+only. [Completed panel evidence](evidence/actual-engine-v0.111.0-profile-panel-v1.json) preserves
+counts, identities, storage scope and remaining gaps; the
+[implementation evidence](evidence/actual-engine-v0.111.0-profile-descriptions-v13.json) stays unchanged.
+
+**Next implementation under #145:** broader current-wrapper/Host mechanics and complete public
+facts: transient costs/effects/relic counters, mandatory/optional/nested selectors, consequential
+mode references, shipped new-run initialization, later-act advancement and actual terminal
+endings. Initial checkpoint inspection does not test the shipped lobby or act progression.
+After required qualification, #146 measures full-run speed and connects a separate A8 neural
+lineage. No new long task, full run or training has started.
 
 **The owner startup panel passes: 12/12 cases, zero failures.** Six independent native A8 seeds
 were imported through normal Continue twice each. Starting titles/availability match and repeated

@@ -5,7 +5,32 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — benchmark profile and description fixes pass short checks
+## Current status — repeated benchmark profile and description panel passes
+
+The owner completed **8/8 profile/description comparisons**, with zero failures or unattempted
+cases. Four independent Ironclad/A8 seeds were each tested twice; repeated public prefixes agree.
+An independent saved-only audit verifies all eight cases without launching games: **eight initial
+observations, eight Continue actions, 88 deck-card descriptions, 16 potion descriptions, eight
+relic descriptions and 24 starting-option descriptions**. Native registry formatting checks
+pass 1,517 items per case, repeated across the eight cases; they are not distinct interaction tests.
+
+The batch/resource wall times are **256.112/258.689 seconds** (about 4 minutes 19 seconds),
+CPU time **152.970 seconds** and peak memory **975,060,992 bytes**. No resource cap was hit.
+All eight cases reuse one app/inode with eight distinct private profiles, **zero new app copies**
+and verified resets. A current read-only check confirms the idle working app and frozen master
+remain intact. The resource report includes the recipe-owned case workspace and shared app pool;
+fresh external profiles are counted separately in the
+[completed panel evidence](evidence/actual-engine-v0.111.0-profile-panel-v1.json).
+
+**This stage is complete; no rerun is needed.** The helper now displays and audits its saved result
+only. These checks import native checkpoints through Continue and inspect the initial public
+state. Native act selection/RNG agrees with the original normal method, but the shipped new-run
+lobby, later-act advancement and actual endings remain outside the tested scope. No full run or
+training followed. Next under #145: broader current-wrapper/Host public mechanics and selectors,
+transient costs/effects/counters, startup through the shipped lobby, later acts and terminal
+conditions. These precede #146's full-run speed and separate A8 neural integration.
+
+## Profile and description implementation and short checks
 
 V13 introduces an explicit isolated Ironclad/A8 benchmark profile: the native full-content
 unlock set, every native act discovered, seeded random act selection and fresh enabled tutorials.
@@ -37,12 +62,9 @@ contract pass. A saved-only negative audit rejects seven deliberately corrupted 
 [Profile/description evidence](evidence/actual-engine-v0.111.0-profile-descriptions-v13.json)
 records source/build/runtime identities, scoped checks and remaining work.
 
-**Next owner command:** `bash scripts/compare-profile-descriptions-v1.sh`. Four fixed seeds, each
-twice, with the same shared app and fresh benchmark progress. Expected **5–8 minutes** from the
-short cases; 15-minute cap. First difference stops; saved raw verification follows success.
-The eight-case panel has not started. Afterward, continue current-Host/mechanics regressions,
-remaining mode/public-state/selection coverage, later acts and actual endings before #146's
-full-run speed and separate neural integration. No full run or training follows this package.
+The prepared four-seed repeat panel is now completed above. The original short-check evidence
+retains its then-pending owner stage and historical identities. No full run or training followed
+this package.
 
 ## Completed repeated reward panel
 
