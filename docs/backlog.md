@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-13 with the owner's natural-run blocker and four authorized repairs.
+Updated 2026-10-13 with the four authorized repairs, shipped tutorial confirmation and shop-loop fix.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -13,15 +13,16 @@ Logs identify an unhandled map-selection tutorial as the leading cause. The old 
 is its last supported screen, not the last reached floor. Saved verification validates evidence,
 not completion. Preserve that failed attempt and every old recipe.
 
-**Implemented repair package; final shipped validation remains pending.** The owner authorized
+**Implemented repair package; short shipped checks now verified.** The owner authorized
 all four fixes before the next long attempt:
 
 1. Bind the exact native map-selection tutorial and its current confirmation control. Host v12
    reproduces; a short new probe encounters the distinct combat-reward tutorial at floor 2.
    Host v13 additionally implements the remaining standard single-player tutorial controls,
    preserving separate merchant/end-turn highlight choices. Two fresh builds reproduce and
-   16 targeted Host controls pass; unknown/disabled controls remain unsupported. Final shipped
-   confirmation of v13 is pending because the owner's Steam game is open.
+   16 targeted Host controls pass; unknown/disabled controls remain unsupported. Host v13 now
+   handles the native combat-reward and map tutorials during a normal shipped run; complete
+   shipped endings and the other remaining controls still need the bounded panel.
 2. Record progress from every public observation, including unsupported screens, and distinguish
    reached progress from last supported progress and genuine terminal outcomes.
 3. Add bounded diagnostic issue collection: enumerate all missing facts in each snapshot,
@@ -32,13 +33,26 @@ all four fixes before the next long attempt:
    public tie-breaking. Keep every game-permitted decline selectable; never create a skip for a
    mandatory choice. The initializer is a diagnostic player, not learned deck-building quality.
 
-Repository validation passes **1,251 tests**, formatting/types/protocol checks; 37 new/current
+Repository validation passes **1,251 tests**, formatting/types/protocol checks; 44 new/current
 Node policy/discovery/tutorial controls pass. Two short native runs with the shared policy reach
 genuine candidate deaths (86/75 decisions; floors 6/5) and pass saved audits. The short shipped
 collector preserves 35 actions, both missing fields, alive floor-2 progress and a verified app
 reset; it creates zero app copies. Earlier owner and short-probe results still audit unchanged.
 Recovery continuation is tested with synthetic current-control cases, not yet claimed as a
 natural recovered game. All these results remain diagnostic, with no model training/admission.
+
+**Short shipped confirmation and navigation repair:** the first final-Host check handles both
+blocking tutorials and reaches floor 5, then the simple player repeatedly opens/closes the shop.
+Its 99 actions and failure remain preserved. The repaired initializer records only delivered
+inventory inspections from public act/floor history and prefers the existing shop exit on return;
+an external learned scorer still has every legal choice, including reopening or buying.
+The fresh short check records **101 gameplay actions**, correctly opens/closes/leaves the shop
+and reaches **floor 6**, with **zero unsupported issues**, before the 165-second client cap
+(177.328 resource seconds). Saved auditing reconstructs navigation, progress and actions and
+verifies the shared-app reset with **zero new app copies**. This capped living prefix is not a
+completed game or admission. Both prepared owner cases pass read-only preflight; no long batch
+has run. [New short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json)
+preserves both attempts and their limits.
 
 **One next owner command:** `bash scripts/discover-natural-a8-runs-v1.sh`, after closing any running
 game. It runs two independent seeds serially, approximately 10–20 minutes total, with a 32-minute
@@ -620,7 +634,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; four repairs implemented, final shipped validation pending | Preserve the alive floor-5 owner interruption. Typed tutorial controls, reached-progress accounting, bounded issue/recovery collection and consistent take/skip/leave choices pass short/offline checks. The next owner stage collects two independent shipped seeds with verified serial reset and complete failure denominators; then close remaining encountered/later-act/ending gaps. Extra repeat matrices and exhaustive coverage remain deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; four repairs and encountered shop loop implemented, short shipped prefix verified | Preserve the earlier alive interruptions. The final Host handles map/reward tutorials; a fresh 101-action prefix inspects/closes/leaves the shop, reaches floor 6 with zero unsupported issues, and stops at the short cap. The next owner stage collects two independent shipped seeds with verified serial reset and complete failure denominators; then close remaining encountered/later-act/ending gaps. Extra repeat matrices and exhaustive coverage remain deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After the bounded environment gate | Measure one-worker complete-run timing/failures and bounded two-worker isolation; connect the separately versioned A8 public encoder/experience to existing neural/PPO machinery, pass a short learning check and prepare one finite owner pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

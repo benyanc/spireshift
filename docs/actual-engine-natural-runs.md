@@ -72,9 +72,24 @@ remain distinct; mandatory menus receive no invented Skip. This initializer is n
 quality, and the two interfaces' full policy trajectories are not claimed identical.
 
 Two short native runs using the shared policy reach genuine candidate deaths (86 and 75 decisions,
-floors 6 and 5) and pass saved audits with zero app copies. Full shipped testing of the final Host,
-later acts/endings, worker isolation and neural integration remain pending. An open Steam game
-blocks further isolated launches and must be closed before the command above.
+floors 6 and 5) and pass saved audits with zero app copies.
+
+After the owner closed Steam's game, Host v13 handled both the combat-reward and map tutorials
+in a fresh shipped run. That check reached floor 5 but exposed a separate initializer loop:
+opening and closing the same shop repeatedly. Its 99 actions and incomplete result stay preserved.
+The initializer now remembers a delivered inventory inspection using only public act/floor history,
+then prefers the existing shop exit when inventory closes. This is a navigation preference for the
+simple player; an external learned scorer can still select buying, leaving or reopening.
+
+The new short check performs **101 gameplay actions**, including opening, closing and leaving the
+shop, and reaches **floor 6** with **zero unsupported issues**. It stops alive at the short
+165-second client cap; resource wall time is **177.328 seconds**. Saved auditing reproduces the
+navigation memory, choices and reached progress, and verifies reset with **zero new app copies**.
+Repository checks and 44 current Node controls pass. Both longer owner cases pass read-only
+preflight; the long batch has not run.
+[Short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) preserves the two
+new attempts. Full shipped endings, later acts, other remaining controls, worker isolation and
+neural integration remain pending. Close any running Steam game before the command above.
 
 ## What already passes
 

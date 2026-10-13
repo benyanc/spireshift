@@ -76,6 +76,16 @@ semantics. A subsequent short probe finds and records the combat-reward tutorial
 separately built Host also implements its control and the remaining standard single-player
 tutorial controls. These are implementation/short-check results, not complete shipped admission.
 
+The final Host now handles the map and combat-reward tutorials in a normal shipped prefix.
+That check exposes an open/close shop loop in the diagnostic initializer. A repaired public
+navigation preference inspects a shop once, then chooses its advertised exit when returning;
+all legal choices remain available to an external learned scorer. A fresh **101-action** prefix
+reaches **floor 6** with no unsupported issues and stops at its short cap. Its saved actions,
+navigation/progress counters and shared-app reset verify; **zero new app copies** are created.
+Both prepared owner cases now pass preflight. This is not a completed game or training admission.
+[Short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) preserves the
+new capped prefix and the earlier navigation failure separately.
+
 The next owner stage is **two independent natural shipped discovery runs**, with serial app reuse,
 complete failure denominators and verified reset between seeds. Unknown screens without current
 controls still stop the affected game; a verified legal exit can continue diagnostic discovery.

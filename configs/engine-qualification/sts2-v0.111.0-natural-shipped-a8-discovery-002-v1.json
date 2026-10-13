@@ -20,7 +20,7 @@
     "engine-journey-tutorial-v4.mjs": "ba8a537a5c7446ed69b4f482614d434eaf60295f00bbb9205c2b9888f9e35f76",
     "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
     "engine-natural-shipped-contract-v1.mjs": "9c1b3573a4362b78efa1a1e758affbb53045bcfdf94c4e03f496ed59006635b5",
-    "engine-natural-shipped-run-v4.mjs": "74238bf256186867243593b24ff948adcd9d84e37bdabc1f3b1e54d7528011f5",
+    "engine-natural-shipped-run-v4.mjs": "d12cf58d1dd4a3ec71b5ea45616a8fc4552fb7a58f38fa7a347a10d2782fab31",
     "engine-natural-tutorial-v1.mjs": "2ba6a18e93a491d6e9fe452ac97fca9235e53a4ccf5687f0feb6226652d18a8c",
     "engine-natural-tutorial-v2.mjs": "1eb8ba174b567cdfcd639c1d01319bf4e337ef06ea4d5b8c7c8a2251fa1dc1f9",
     "engine-natural-tutorial-v3.mjs": "30f7a344788e7b1b39b0181395c277c2eda2f42c2cf1d400562ddda137a8790b",
@@ -30,6 +30,7 @@
     "engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
     "engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
     "engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
     "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
   },
   "checkpoint_imported": false,

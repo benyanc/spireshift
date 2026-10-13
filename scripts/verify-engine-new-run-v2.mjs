@@ -9,8 +9,11 @@ const { completePublicMenu } = await import(pathToFileURL(`${spec.sources}/engin
 const { startingFacts } = await import(pathToFileURL(`${spec.sources}/engine-new-run-contract-v1.mjs`).href);
 const { currentBoundMenu, recordRunProgress, newIssueCollection, recordUnsupported, recoveryAction,
   assertObservationIdentity } = await import(pathToFileURL(`${spec.sources}/engine-run-diagnostics-v1.mjs`).href);
-const { publicActionKey, chooseRunAction } = await import(pathToFileURL(`${spec.sources}/engine-run-policy-v2.mjs`).href);
 const recipe = JSON.parse(readFileSync(`${spec.sources}/recipe.json`, "utf8"));
+const hasNavigation = "engine-run-policy-v3.mjs" in recipe.helpers_sha256;
+const policy = await import(pathToFileURL(`${spec.sources}/engine-run-policy-${hasNavigation ? "v3" : "v2"}.mjs`).href);
+const { publicActionKey, chooseRunAction } = policy;
+const navigation = hasNavigation ? policy.newDiagnosticNavigation() : null;
 const tutorial = "engine-natural-tutorial-v3.mjs" in recipe.helpers_sha256
   ? "engine-natural-tutorial-v3.mjs" : "engine-natural-tutorial-v2.mjs";
 const { naturalTutorialAction } = await import(pathToFileURL(`${spec.sources}/${tutorial}`).href);
@@ -60,15 +63,18 @@ for (const [index, row] of probe.receipts.entries()) {
   } else {
     assert.equal(completePublicMenu(row.before, runtimeId), true);
     if (gameplay) assert.deepEqual(row.action, row.before.interaction.kind === "tutorial"
-      ? naturalTutorialAction(row.before) : chooseRunAction(row.before));
+      ? naturalTutorialAction(row.before) : chooseRunAction(row.before, undefined, navigation));
   }
   if (gameplay) assert.equal(row.action_key, publicActionKey(row.before, row.action));
   if (row.receipt.delivery !== "delivered" || row.receipt.attribution?.runtime_instance_id !== runtimeId) {
     assert.equal(index, probe.receipts.length - 1, "Uncertain delivery cannot be replayed or followed by another action");
     assert.ok(probe.error); assert.equal(probe.gameplay.terminal, false);
   }
+  if (hasNavigation && gameplay && row.receipt.attribution?.runtime_instance_id === runtimeId)
+    policy.recordDiagnosticNavigation(navigation, row.before, row.action, row.receipt);
   progressSnapshots.push(row.before);
 }
+if (hasNavigation) assert.deepEqual(probe.diagnostic_navigation, navigation);
 assert.equal(recoveries, probe.diagnostics.recoveries.length);
 const startup = probe.receipts.slice(0, probe.menu_actions_requested);
 assert.ok(startup.every(row => !/continue|resume/iu.test(row.action.label)));

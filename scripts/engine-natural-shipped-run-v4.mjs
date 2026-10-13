@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 import { completePublicMenu, validateLoadedIdentity } from "./engine-menu-probe.mjs";
 import { chooseStartupAction, startingFacts, firstDifference } from "./engine-new-run-contract-v1.mjs";
 import { publicProgressKey, assertPublicBoundary } from "./engine-run-contract-v1.mjs";
-import { chooseRunAction, publicActionKey } from "./engine-run-policy-v2.mjs";
+import { chooseRunAction, publicActionKey, newDiagnosticNavigation, recordDiagnosticNavigation } from "./engine-run-policy-v3.mjs";
 import { freshRunObservation, newIssueCollection } from "./engine-run-diagnostics-v1.mjs";
 import { shippedEnding } from "./engine-natural-shipped-contract-v1.mjs";
 import { naturalTutorialAction } from "./engine-natural-tutorial-v3.mjs";
@@ -19,7 +19,7 @@ export async function main(spec) {
   const client = new PlayerEnvironmentRestClient(spec.endpoint, 2500);
   const result = { checks: {}, snapshots: [], receipts: [], menu_actions_requested: 0, shutdown_requested: false,
     training_allowed: false, checkpoint_imported: false, optimizer_steps: 0,
-    diagnostics: newIssueCollection(), progress_observations: [],
+    diagnostics: newIssueCollection(), progress_observations: [], diagnostic_navigation: newDiagnosticNavigation(),
     gameplay: { decisions: 0, tutorials: 0, maximum_floor: 0, maximum_act: 0,
       last_supported_floor: 0, last_supported_act: 0, terminal: false, victory: false, families: {} } };
   const deadline = Date.now() + spec.max_wall_seconds * 1000;
@@ -119,7 +119,7 @@ export async function main(spec) {
       else if (kind === "tutorial") {
         action = naturalTutorialAction(snapshot);
         result.gameplay.tutorials++;
-      } else action = chooseRunAction(snapshot);
+      } else action = chooseRunAction(snapshot, undefined, result.diagnostic_navigation);
       const receipt = (await client.submit({ requestId: `natural-shipped-${randomUUID()}`, expectedSnapshotId: snapshot.snapshot_id,
         boundActionId: action.bound_action_id, ...await session.credentials() })).data;
       result.receipts.push({ before: snapshot, action, receipt, recovery: pendingRecovery != null,
@@ -133,6 +133,7 @@ export async function main(spec) {
         try { result.after_uncertain_delivery = (await client.observe()).data; } catch {}
         throw Error("Unknown natural-run delivery; no retry");
       }
+      recordDiagnosticNavigation(result.diagnostic_navigation, snapshot, action, receipt);
       snapshot = await stable(snapshot.snapshot_id);
       if (result.gameplay.decisions % 25 === 0) process.stdout.write(
         `Natural A8 run: ${result.gameplay.decisions} actions, floor ${result.gameplay.maximum_floor}, act ${result.gameplay.maximum_act}.\n`);

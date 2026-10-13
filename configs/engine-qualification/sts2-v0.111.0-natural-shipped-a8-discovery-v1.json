@@ -6,11 +6,11 @@
   "cases": [
     {
       "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-discovery-001-v1.json",
-      "config_id": "sha256:0c5ca4361ac08fd4dab3040bd5172a946ac194e99ff493b2289e36e240079d10"
+      "config_id": "sha256:d4107ce2782816d45c76cb3f830c4bc510ae590c0ec176b94b89810cbfc283ef"
     },
     {
       "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-discovery-002-v1.json",
-      "config_id": "sha256:776707c2c71d9f7c860763c27f211968e9b187c55f3acfb9616e596bdac5ca8a"
+      "config_id": "sha256:77c3187908c1e31aef6134c08deaf9830692d2da14f21dff9878a4145fb52211"
     }
   ],
   "workers": 1,
