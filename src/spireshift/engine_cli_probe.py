@@ -91,13 +91,15 @@ def _probe_cli_document(
         "bundle",
         "bundle_bridge",
         "reward_bridge",
+        "combat_bridge",
     }:
         raise ValueError("Only explicitly scoped native interaction panels are supported")
     projected = document.get("schema_version") == f"engine-cli-{panel}-projection-config-v1"
     revision = document.get("public_projection_revision", "rest_v1")
     if (
         projected
-        and panel in {"combat", "checkpoint", "journey", "rest_bridge", "shop_bridge"}
+        and panel
+        in {"combat", "checkpoint", "journey", "rest_bridge", "shop_bridge", "combat_bridge"}
         and revision != "combat_v4"
     ):
         raise ValueError("Combat public projection requires its explicit frozen revision")
@@ -178,6 +180,36 @@ def _probe_cli_document(
                 != document["bridge_helpers_sha256"][name]
             ):
                 raise ValueError("Pinned shop fixture helper changed")
+    if panel == "combat_bridge":
+        from spireshift.engine_profile import load_profile_policy
+
+        plan = document.get("combat_bridge", {})
+        combat_revision = document.get("combat_bridge_revision", "v1")
+        names = {
+            f"engine-combat-bridge-contract-{combat_revision}.mjs",
+            "engine-rest-bridge-contract.mjs",
+            "engine-journey-contract-v2.mjs",
+            "engine-menu-probe.mjs",
+        }
+        if (
+            not projected
+            or combat_revision != "v6"
+            or document.get("content_policy") != "native_benchmark_full_v1"
+            or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
+            or plan.get("scenario") not in {"corruption", "temporary-stats"}
+            or plan.get("max_actions") != 20
+            or plan.get("starting_option") not in {"Stone Humidifier", "Winged Boots"}
+            or set(document.get("bridge_helpers_sha256", {})) != names
+            or any(
+                _sha_file(qualification.root / "scripts" / name)
+                != document["bridge_helpers_sha256"][name]
+                for name in names
+            )
+        ):
+            raise ValueError("Expected a frozen public combat-effects fixture")
+        policy = load_profile_policy(qualification.root / document["profile_policy"], qualification)
+        if manifest_identifier(policy) != document.get("profile_policy_id"):
+            raise ValueError("Combat fixture benchmark profile changed")
     if panel == "journey":
         plan = document.get("journey", {})
         journey_revision = document.get("journey_revision", "v1")
@@ -270,7 +302,9 @@ def _probe_cli_document(
     if report["report_id"] != document["build_report_id"]:
         raise ValueError("Interaction probe must bind the exact completed local build report")
     helper_name = (
-        f"probe-engine-cli-reward-bridge-{document.get('reward_bridge_revision', 'v1')}.mjs"
+        f"probe-engine-cli-combat-bridge-{document.get('combat_bridge_revision', 'v1')}.mjs"
+        if projected and panel == "combat_bridge"
+        else f"probe-engine-cli-reward-bridge-{document.get('reward_bridge_revision', 'v1')}.mjs"
         if projected and panel == "reward_bridge"
         else f"probe-engine-cli-bundle-bridge-{document.get('bundle_bridge_revision', 'v1')}.mjs"
         if projected and panel == "bundle_bridge"
@@ -332,6 +366,8 @@ def _probe_cli_document(
             "spireshift_cli_reward_rng_v11_local_toolchain",
             "spireshift_cli_bundle_choice_v12_local_toolchain",
             "spireshift_cli_profile_descriptions_v13_local_toolchain",
+            "spireshift_cli_combat_observation_v14_local_toolchain",
+            "spireshift_cli_combat_preview_v15_local_toolchain",
         }
         and localization is None
     ):
@@ -409,6 +445,7 @@ def _probe_cli_document(
                     "shop_bridge",
                     "bundle_bridge",
                     "reward_bridge",
+                    "combat_bridge",
                 }
                 else {}
             ),
@@ -418,6 +455,14 @@ def _probe_cli_document(
             **({"bundle_seeds": document["bundle_seeds"]} if panel == "bundle" else {}),
             **({"bundle_bridge": document["bundle_bridge"]} if panel == "bundle_bridge" else {}),
             **({"reward_bridge": document["reward_bridge"]} if panel == "reward_bridge" else {}),
+            **(
+                {
+                    "combat_bridge": document["combat_bridge"],
+                    "profile_progress_sha256": policy["progress_sha256"],
+                }
+                if panel == "combat_bridge"
+                else {}
+            ),
         }
         if projected:
             spec["projection"] = projection

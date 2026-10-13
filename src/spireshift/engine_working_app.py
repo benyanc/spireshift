@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from spireshift.core.manifest import manifest_identifier
-from spireshift.engine_native import EXE_RELATIVE, _no_symlinks, _private_path
+from spireshift.engine_native import EXE_RELATIVE, _no_symlinks, _private_path, _running_games
 from spireshift.engine_qualification import (
     ARCHIVE_RECORD,
     GAME_RELATIVE,
@@ -189,6 +189,84 @@ def preflight_working_app(policy: WorkingAppPolicy) -> dict[str, Any]:
     ):
         raise ValueError("Working app pool exceeds its global storage cap")
     return inventory
+
+
+def recover_prelaunch_working_app(
+    policy: WorkingAppPolicy, archive: Path, attempt: Path
+) -> dict[str, Any]:
+    """Explicit inspected recovery for a mode-only failure before any launch/mod installation.
+
+    Not a retry path. Any child evidence, unknown addition or changed game byte stays blocked.
+    """
+    _private_path(policy.qualification.root, str(attempt.relative_to(policy.qualification.root)))
+    with _lock(policy.slot / ".lock"), _lock(policy.pool / ".pool.lock"):
+        if _running_games():
+            raise ValueError("Close STS2 before explicit pre-launch recovery")
+        record = json.loads((archive / ARCHIVE_RECORD).read_text())
+        baseline = record["inventory"]
+        active = json.loads((policy.slot / "active.json").read_text())
+        allowed = {
+            "in-progress.json",
+            "working-app-blocked.json",
+            "failure.json",
+            "working-app-lease.json",
+        }
+        if (
+            {path.name for path in attempt.iterdir()} != allowed
+            or active != json.loads((attempt / "working-app-lease.json").read_text())
+            or active.get("attempt") != str(attempt)
+            or active.get("worker") != str(policy.slot)
+            or active.get("config_id") != policy.config_id
+            or active.get("archive_id") != record["archive_id"]
+            or active.get("baseline_inventory_id") != manifest_identifier(baseline)
+            or _inventory(archive / GAME_RELATIVE) != baseline
+            or json.loads((policy.slot / "app.json").read_text())
+            != {
+                "archive_id": record["archive_id"],
+                "baseline_inventory_id": manifest_identifier(baseline),
+                "config_id": policy.config_id,
+            }
+        ):
+            raise ValueError("Unbound or launched attempt; preserve this worker for inspection")
+        game = policy.slot / "game"
+        current = _inventory(game)
+        executable = Path(EXE_RELATIVE).as_posix()
+        expected = [
+            {**row, "mode": row["mode"] | 0o111} if row["path"] == executable else row
+            for row in baseline
+        ]
+        if current != expected:
+            raise ValueError("Recovery is restricted to an executable-mode-only pre-launch change")
+        inspection = {
+            "schema_version": "engine-working-app-prelaunch-inspection-v1",
+            "attempt": str(attempt),
+            "baseline_inventory_id": manifest_identifier(baseline),
+            "current_inventory_id": manifest_identifier(current),
+            "active_lease": active,
+            "official_file_bytes_unchanged": True,
+            "game_launch_evidence": False,
+            "unknown_additions": 0,
+            "games_launched": 0,
+            "training_allowed": False,
+        }
+        inspection["report_id"] = manifest_identifier(inspection)
+        atomic_json(attempt / "working-app-recovery-inspection.json", inspection)
+        lease = WorkingAppLease(policy, game, baseline, attempt, active)
+        restored = lease.restore(current)
+        result = {
+            "schema_version": "engine-working-app-prelaunch-recovery-v1",
+            "status": "inspected_prelaunch_mode_restored",
+            "inspection_report_id": inspection["report_id"],
+            "restored_receipt_id": restored["report_id"],
+            "app_copies_created": 0,
+            "files_deleted": 0,
+            "failure_evidence_preserved": True,
+            "games_launched": 0,
+            "training_allowed": False,
+        }
+        result["report_id"] = manifest_identifier(result)
+        atomic_json(attempt / "working-app-recovery.json", result)
+        return result
 
 
 @contextmanager

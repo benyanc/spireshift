@@ -17,6 +17,12 @@ from spireshift.engine_bundle_bridge import (
 from spireshift.engine_candidate import build_cli_candidate
 from spireshift.engine_checkpoint import probe_shipped_checkpoint
 from spireshift.engine_cli_probe import probe_cli_rest
+from spireshift.engine_combat_bridge import (
+    compare_combat_bridge,
+    compare_combat_bridges,
+    preflight_combat_bridges,
+    verify_combat_bridges,
+)
 from spireshift.engine_connector import (
     load_connector_qualification_config,
     prepare_connector_toolchain,
@@ -105,6 +111,10 @@ def add_engine_parser(commands: Any) -> None:
         "preflight-reward-bridges",
         "verify-reward-bridges",
         "compare-profile-bridge",
+        "compare-combat-bridge",
+        "compare-combat-bridges",
+        "preflight-combat-bridges",
+        "verify-combat-bridges",
         "compare-profile-bridges",
         "preflight-profile-bridges",
         "verify-profile-bridges",
@@ -117,6 +127,7 @@ def add_engine_parser(commands: Any) -> None:
         "probe-cli-rest",
         "probe-cli-shop",
         "probe-cli-combat",
+        "probe-cli-combat-bridge",
         "probe-cli-bundle",
         "probe-cli-bundle-bridge",
         "probe-cli-reward-bridge",
@@ -156,6 +167,10 @@ def add_engine_parser(commands: Any) -> None:
             "preflight-reward-bridges",
             "verify-reward-bridges",
             "compare-profile-bridge",
+            "compare-combat-bridge",
+            "compare-combat-bridges",
+            "preflight-combat-bridges",
+            "verify-combat-bridges",
             "compare-profile-bridges",
             "preflight-profile-bridges",
             "verify-profile-bridges",
@@ -181,6 +196,10 @@ def add_engine_parser(commands: Any) -> None:
             "preflight-reward-bridges",
             "verify-reward-bridges",
             "compare-profile-bridge",
+            "compare-combat-bridge",
+            "compare-combat-bridges",
+            "preflight-combat-bridges",
+            "verify-combat-bridges",
             "compare-profile-bridges",
             "preflight-profile-bridges",
             "verify-profile-bridges",
@@ -207,6 +226,7 @@ def add_engine_parser(commands: Any) -> None:
             "probe-cli-rest",
             "probe-cli-shop",
             "probe-cli-combat",
+            "probe-cli-combat-bridge",
             "probe-cli-bundle",
             "probe-cli-bundle-bridge",
             "probe-cli-reward-bridge",
@@ -288,6 +308,23 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0
         elif args.engine_command == "preflight-reward-bridges":
             result = preflight_reward_bridges(config, args.bridge_config, node=args.node)
+            code = 0
+        elif args.engine_command in {"compare-combat-bridge", "compare-combat-bridges"}:
+            result = (
+                compare_combat_bridge
+                if args.engine_command == "compare-combat-bridge"
+                else compare_combat_bridges
+            )(config, args.bridge_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"combat_comparison_pass", "combat_comparisons_pass"}
+                else 1
+            )
+        elif args.engine_command == "preflight-combat-bridges":
+            result = preflight_combat_bridges(config, args.bridge_config, node=args.node)
+            code = 0
+        elif args.engine_command == "verify-combat-bridges":
+            result = verify_combat_bridges(config, args.bridge_config, node=args.node)
             code = 0
         elif args.engine_command in {"compare-profile-bridge", "compare-profile-bridges"}:
             result = (
@@ -379,6 +416,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-rest",
             "probe-cli-shop",
             "probe-cli-combat",
+            "probe-cli-combat-bridge",
             "probe-cli-bundle",
             "probe-cli-bundle-bridge",
             "probe-cli-reward-bridge",
@@ -406,6 +444,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
                     "shop_public_projection_regression_pass",
                     "combat_native_regression_pass",
                     "combat_public_projection_regression_pass",
+                    "combat_bridge_public_projection_regression_pass",
                     "bundle_public_projection_regression_pass",
                     "bundle_bridge_public_projection_regression_pass",
                     "reward_bridge_public_projection_regression_pass",
@@ -514,6 +553,7 @@ def run_engine_command(args: argparse.Namespace) -> int:
             "probe-cli-rest",
             "probe-cli-shop",
             "probe-cli-combat",
+            "probe-cli-combat-bridge",
             "probe-cli-bundle",
             "probe-cli-bundle-bridge",
             "probe-cli-reward-bridge",

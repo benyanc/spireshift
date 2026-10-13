@@ -5,7 +5,25 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — repeated benchmark profile and description panel passes
+## Current status — combat effects pass short comparisons; repeats prepared
+
+Two current-wrapper/Host comparisons agree through turn two: Corruption's skill-cost/exhaust
+changes and a separate Strength/Dexterity/potion/Pen Nib fixture. Both saved-only audits pass.
+The comparisons exposed and fixed stale Weak damage descriptions and the unhandled fresh
+reshuffle tutorial. The original game supplies the effects. Native v15 passes 841 checks across
+28 combat/rest/shop fixtures, and all 1,209 repository tests pass. The shared app is reused with
+fresh profiles, zero new app copies and verified resets.
+
+The next owner stage is **one eight-case combat-effects repeat panel**, expected 6–9 minutes:
+`bash scripts/compare-combat-effects-v1.sh`. Read-only preflight passes; the batch has not been
+launched. [Guide](actual-engine-combat-effects.md) and
+[evidence](evidence/actual-engine-v0.111.0-combat-effects-v1.json) describe the scoped comparisons.
+Native combat potion discard is missing from the shipped Host and is explicitly excluded from
+this effect comparison. Fix it before general training admission. Broader decision/mode coverage,
+shipped lobby initialization, later acts and actual endings remain before #146 throughput and a
+new A8 learning lineage. No training or full-run attempt follows these fixtures.
+
+## Completed benchmark profile and description panel
 
 The owner completed **8/8 profile/description comparisons**, with zero failures or unattempted
 cases. Four independent Ironclad/A8 seeds were each tested twice; repeated public prefixes agree.

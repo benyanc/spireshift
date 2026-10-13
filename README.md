@@ -28,6 +28,11 @@ boot verifies separate native saves; the complete generated model-type registry 
 privately. Public mechanics qualification and complete-run speed evidence remain pending.
 Keep all v0.107.1 artifacts and the relational repair unchanged; the older large emulator pilot
 is deferred. The current guide records completed checks and the next qualification work.
+The [current combat-effect checks](docs/actual-engine-combat-effects.md) now agree with the game
+through turn two on two assigned A8 fixtures, after repairing Weak damage descriptions and the
+fresh reshuffle confirmation. One owner-run eight-case repeat panel is prepared. Broader
+mechanics qualification, including the missing shipped combat potion-discard action, still
+precedes full-run throughput and new learning.
 
 The repository also contains the research contracts and a seeded mock vertical slice:
 

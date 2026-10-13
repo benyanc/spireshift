@@ -427,7 +427,9 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-profile-shipped-probe-v1.mjs"
+                "engine-combat-shipped-probe-v4.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "combat_bridge_v4"
+                else "engine-profile-shipped-probe-v1.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "profile_text_v1"
                 else "engine-reward-shipped-probe-v3.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "reward_bridge_v3"
@@ -552,6 +554,24 @@ def _fresh_reward_profile_required(mode: object) -> bool:
     }
 
 
+BENCHMARK_PROFILE_MODES = {
+    "profile_text_v1",
+    "combat_bridge_v4",
+}
+
+
+def _validate_benchmark_fixture_scope(fixture: dict[str, Any] | None) -> None:
+    if (
+        fixture is not None
+        and ("benchmark_progress" in fixture or "profile_policy" in fixture)
+        and (
+            not isinstance(fixture.get("comparison_mode"), str)
+            or fixture["comparison_mode"] not in BENCHMARK_PROFILE_MODES
+        )
+    ):
+        raise ValueError("Benchmark progress is restricted to its explicit comparison scope")
+
+
 def _probe_connector_private(
     config: ConnectorQualificationConfig,
     *,
@@ -561,6 +581,8 @@ def _probe_connector_private(
     working_app: WorkingAppPolicy | None = None,
 ) -> dict[str, Any]:
     """One copied shipped host; optional fixture is already bound by the checkpoint verifier."""
+    # Reject an invalid scope before acquiring a worker or altering its executable/profile.
+    _validate_benchmark_fixture_scope(fixture)
     if type(retain_working_game) is not bool or (
         not retain_working_game and fixture is None and working_app is None
     ):
@@ -635,7 +657,7 @@ def _probe_connector_private(
             destination = profile / "default/1/modded/profile1/saves/current_run.save"
             destination.parent.mkdir(parents=True)
             shutil.copy2(checkpoint, destination)
-            if fixture.get("comparison_mode") == "profile_text_v1":
+            if fixture.get("comparison_mode") in BENCHMARK_PROFILE_MODES:
                 from spireshift.engine_profile import load_profile_policy, verify_benchmark_progress
 
                 policy = load_profile_policy(
@@ -782,7 +804,7 @@ def _probe_connector_private(
             and not process["timed_out"]
             and probe.get("shutdown_requested") is True,
         }
-        if fixture is not None and fixture.get("comparison_mode") == "profile_text_v1":
+        if fixture is not None and fixture.get("comparison_mode") in BENCHMARK_PROFILE_MODES:
             checks["benchmark_profile_bound_before_launch"] = benchmark_consent is not None
         reuse_result = None
         if lease is not None:
@@ -823,6 +845,7 @@ def _probe_connector_private(
                 reward_bridge=fixture.get("comparison_mode")
                 in {"reward_bridge_v1", "reward_bridge_v2", "reward_bridge_v3"},
                 profile_text=fixture.get("comparison_mode") == "profile_text_v1",
+                combat_bridge=fixture.get("comparison_mode") == "combat_bridge_v4",
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -896,8 +919,22 @@ def _evaluate_connector_checkpoint(
     bundle_bridge: bool = False,
     reward_bridge: bool = False,
     profile_text: bool = False,
+    combat_bridge: bool = False,
 ) -> dict[str, Any]:
-    if sum((journey, rest_bridge, shop_bridge, bundle_bridge, reward_bridge, profile_text)) > 1:
+    if (
+        sum(
+            (
+                journey,
+                rest_bridge,
+                shop_bridge,
+                bundle_bridge,
+                reward_bridge,
+                profile_text,
+                combat_bridge,
+            )
+        )
+        > 1
+    ):
         raise ValueError("Do not merge separately scoped combat, rest and shop comparisons")
     if fresh_rest_tutorial and not rest_bridge:
         raise ValueError("Fresh rest tutorial evidence requires the scoped rest fixture")
@@ -986,6 +1023,15 @@ def _evaluate_connector_checkpoint(
             "benchmark_profile_bound_before_launch",
             "same_public_profile_descriptions",
             "native_current_act_preserved",
+        )
+    if combat_bridge:
+        required += (
+            "benchmark_profile_bound_before_launch",
+            "native_current_act_preserved",
+            "combat_all_snapshots_match",
+            "combat_all_actions_delivered",
+            "combat_effect_signals_verified",
+            "combat_fresh_tutorials_preserve_facts",
         )
     if fresh_rest_tutorial:
         required += ("fresh_rest_tutorial_dismissed", "fresh_rest_progress_absent_before_launch")

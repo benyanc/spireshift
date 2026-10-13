@@ -21,6 +21,7 @@ from spireshift.engine_working_app import (
     lease_working_app,
     load_working_app_policy,
     preflight_working_app,
+    recover_prelaunch_working_app,
     working_app_inventory,
 )
 
@@ -69,6 +70,39 @@ def prepare(game: Path, profile: str) -> list[dict[str, Any]]:
     mods.mkdir()
     (mods / "connector.dll").write_text("pinned host")
     return _inventory(game)
+
+
+@pytest.mark.parametrize("damage", [None, "asset", "extra", "child"])
+def test_explicit_prelaunch_recovery_preserves_evidence_and_refuses_any_other_change(
+    inputs: tuple[WorkingAppPolicy, Path, Path], monkeypatch: pytest.MonkeyPatch, damage: str | None
+) -> None:
+    policy, archive, attempts = inputs
+    monkeypatch.setattr("spireshift.engine_working_app._running_games", lambda: [])
+    attempt = attempts / "failed-before-launch"
+    attempt.mkdir()
+    with lease_working_app(policy, archive, attempt, copy_file=copy_data) as lease:
+        executable = lease.game / EXE_RELATIVE
+        executable.chmod(executable.stat().st_mode | 0o111)
+        (attempt / "in-progress.json").write_text("{}")
+        (attempt / "failure.json").write_text('{"error":"setup validation"}')
+    if damage == "asset":
+        (policy.slot / "game/asset.pck").write_text("changed")
+    elif damage == "extra":
+        (policy.slot / "game/unknown.txt").write_text("preserve")
+    elif damage == "child":
+        (attempt / "stdout.log").write_text("child may have started")
+    if damage:
+        with pytest.raises(ValueError):
+            recover_prelaunch_working_app(policy, archive, attempt)
+        assert (policy.slot / "active.json").exists()
+    else:
+        result = recover_prelaunch_working_app(policy, archive, attempt)
+        assert (
+            result["files_deleted"] == result["games_launched"] == result["app_copies_created"] == 0
+        )
+        assert (attempt / "failure.json").read_text() == '{"error":"setup validation"}'
+        assert not (policy.slot / "active.json").exists()
+        assert _inventory(policy.slot / "game") == _inventory(archive / GAME_RELATIVE)
 
 
 def test_many_attempts_reuse_one_app_and_restore_owned_settings(

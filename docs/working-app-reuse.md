@@ -67,3 +67,20 @@ qualification config. Preserve the master, current worker app, build/toolchain d
 all evidence. Nothing outside the active lease's own added mods/override files is deleted by reuse.
 
 Public metadata and limits: [reuse evidence](evidence/actual-engine-v0.111.0-working-app-reuse-v1.json).
+
+
+## Explicit pre-launch permission recovery
+
+A development combat attempt was rejected before mod installation or game launch, after only
+setting executable permissions. Its exact four bookkeeping files and the frozen/app inventories
+were inspected before a separately recorded `recover_prelaunch_working_app` call restored only
+that permission difference under both locks. No game bytes, unexpected files or failed evidence
+were deleted; no replacement copy or game was started. Inspection, recovery and reset receipts
+remain beside the immutable failure. Tests reject changed assets, unknown additions and any
+child-log evidence. Benchmark scope is now checked before worker preparation.
+
+This narrow recovery is not an automatic retry path or general repair of a launched/interrupted
+worker. Those workers still stop for inspection; deliberate repair/retirement remains #147 work.
+The new combat-effects owner panel retains one shared app, immutable per-case evidence and fresh
+profiles. Its passed short checks and pending repeat stage are recorded in the
+[combat-effects guide](actual-engine-combat-effects.md).
