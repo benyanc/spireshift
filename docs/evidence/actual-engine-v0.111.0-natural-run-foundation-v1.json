@@ -1,0 +1,200 @@
+{
+  "schema_version": "actual-engine-natural-foundation-evidence-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "game": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4"
+  },
+  "native_build_report_id": "sha256:c4d448afef7e6c39d1a270267565b8e055f8e441647b50cf8519ada8ce3f0d28",
+  "shipped_Host_build_report_id": "sha256:6f57cacd600de4a80aa01740bb9c867f88ef46481b70e5a873c8e57f2b015c00",
+  "profile": "native_benchmark_full_v1",
+  "character": "Ironclad",
+  "ascension": 8,
+  "seed_policy": "explicit_native_canonical_v1_no_relabel_of_historical_literal_seed_runs",
+  "policy": "weak_diagnostic_public_menu_initializer_not_a_learned_model",
+  "natural_native_runs": [
+    {
+      "seed": "SP1RESH1FTA8D1AG001",
+      "report_id": "sha256:66c01a3eb69d704465057928893f986f6e6c26ea7e9af3d7519110395b7689db",
+      "decisions": 182,
+      "maximum_floor": 15,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 6.857866249978542,
+      "agent_cpu_seconds": 0.344812,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG002",
+      "report_id": "sha256:39e464a37f55a6c5122e22bd67f5d1114d5d7a6918295e71c4ef1a861f1dcb24",
+      "decisions": 189,
+      "maximum_floor": 17,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 5.201905041001737,
+      "agent_cpu_seconds": 0.372113,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG003",
+      "report_id": "sha256:35fd679eb9ab86cc2d2bc33bee6575a9e4b9eb6be9e01a37ec85bcd1b027fae7",
+      "decisions": 158,
+      "maximum_floor": 7,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 3.3119767080061138,
+      "agent_cpu_seconds": 0.266272,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG004",
+      "report_id": "sha256:5f964f82533e978fd2760d040f88ea9a3505cba205960df4f12e1325f529898e",
+      "decisions": 112,
+      "maximum_floor": 6,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 2.5102959579671733,
+      "agent_cpu_seconds": 0.215306,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG005",
+      "report_id": "sha256:1ae3dddd69f7c5973915a77461a30f5567360e7fa24f04bd7a05c85eadc616ef",
+      "decisions": 71,
+      "maximum_floor": 6,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 2.488678459019866,
+      "agent_cpu_seconds": 0.160013,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG006",
+      "report_id": "sha256:eedc8d877b7c14b257feb5969b3d240cce2d44bb443a9a99dd08f610aee87e2d",
+      "decisions": 208,
+      "maximum_floor": 15,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 3.153806166956201,
+      "agent_cpu_seconds": 0.37254,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG007",
+      "report_id": "sha256:ed12b60a261d45077a304ffcd6270b438d0a2169069dbc69ce5064e0e93ab848",
+      "decisions": 98,
+      "maximum_floor": 7,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 2.6486614170135,
+      "agent_cpu_seconds": 0.200367,
+      "saved_audit_valid": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG008",
+      "report_id": "sha256:2796b4994c072a70842ccdf0e5d7391219eac2fc24b723b09dc9554e22547de2",
+      "decisions": 97,
+      "maximum_floor": 7,
+      "maximum_act": 1,
+      "victory": false,
+      "wall_seconds": 2.640133291017264,
+      "agent_cpu_seconds": 0.182859,
+      "saved_audit_valid": true
+    }
+  ],
+  "summary": {
+    "planned_native_runs": 8,
+    "completed_candidate_endings": 8,
+    "failed_native_runs": 0,
+    "victories": 0,
+    "decisions": 1115,
+    "maximum_floor": 17,
+    "maximum_act": 1,
+    "total_measured_case_wall_seconds": 28.813323290960398,
+    "case_timing_scope": "includes_case_launch_and_integrity_checks_not_a_parallel_throughput_benchmark",
+    "decision_families": {
+      "card_reward_selection": 42,
+      "card_selection": 19,
+      "combat_turn": 752,
+      "event_option": 42,
+      "game_over": 8,
+      "map_navigation": 72,
+      "rest_site": 12,
+      "reward_claim": 106,
+      "reward_completion": 40,
+      "shop_inventory": 17,
+      "treasure_chest": 3,
+      "treasure_completion": 3,
+      "treasure_relic_selection": 3,
+      "native_generated_card_choice": 3,
+      "card_bundle_selection": 1
+    },
+    "game_app_copies_created": 0
+  },
+  "normal_shipped_starts": [
+    {
+      "seed": "SP1RESH1FTA8D1AG001",
+      "report_id": "sha256:908604a94ce89d1af93171a7daa4b1ae5d8fbbe0f9b2d67086db634b82bba731",
+      "status": "normal_start_comparison_pass",
+      "wall_seconds": 19.43995787500171,
+      "app_inode": 347602255,
+      "app_copies_created": 0,
+      "reset_verified": true
+    },
+    {
+      "seed": "SP1RESH1FTA8D1AG002",
+      "report_id": "sha256:e632412a9edc1f0075e56314bd0b4a096101aabcea81805beb620d3c7faa784f",
+      "status": "normal_start_comparison_pass",
+      "wall_seconds": 18.837701125012245,
+      "app_inode": 347602255,
+      "app_copies_created": 0,
+      "reset_verified": true
+    }
+  ],
+  "new_Host_natural_shipped_prefix": {
+    "report_id": "sha256:b5d6105b5b3e398b66ef1bec0c3fa30e42ca9f82da588fa7690df2643e1a8cc7",
+    "status": "natural_shipped_run_incomplete",
+    "gameplay": {
+      "decisions": 54,
+      "families": {
+        "card_reward_selection": 2,
+        "combat_turn": 36,
+        "event_option": 2,
+        "map_navigation": 2,
+        "reward_claim": 7,
+        "tutorial": 5
+      },
+      "maximum_floor": 3,
+      "terminal": false,
+      "tutorials": 5,
+      "victory": false
+    },
+    "wall_seconds": 105.50892466597725,
+    "error": "No fresh complete normal-start menu before cap",
+    "app_inode": 347602255,
+    "app_copies_created": 0,
+    "reset_verified": true,
+    "saved_audit": {
+      "valid": true,
+      "startup_actions": 5,
+      "gameplay_actions": 54,
+      "candidate_terminal": false,
+      "games_replayed": 0,
+      "optimizer_steps": 0,
+      "training_allowed": false,
+      "report_id": "sha256:b5d6105b5b3e398b66ef1bec0c3fa30e42ca9f82da588fa7690df2643e1a8cc7",
+      "status": "natural_shipped_run_incomplete",
+      "source_inputs_reaudited": false,
+      "fixed_app_reset_verified": true
+    }
+  },
+  "next_owner_recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-run-v1.json",
+  "next_owner_command": "bash scripts/check-natural-a8-run-v1.sh",
+  "next_preflight_games_launched": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "shipped_full_run_ending_qualified": false,
+  "later_acts_and_victory_qualified": false,
+  "claim_scope": "natural_native_public_loop_and_limited_shipped_start_prefix_only"
+}

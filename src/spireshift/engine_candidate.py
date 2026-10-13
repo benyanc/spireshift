@@ -103,6 +103,12 @@ def build_cli_candidate(
             "spireshift_cli_profile_descriptions_v13_local_toolchain",
             "spireshift_cli_combat_observation_v14_local_toolchain",
             "spireshift_cli_combat_preview_v15_local_toolchain",
+            "spireshift_cli_event_text_v16_local_toolchain",
+            "spireshift_cli_event_text_v17_local_toolchain",
+            "spireshift_cli_card_modifiers_v18_local_toolchain",
+            "spireshift_cli_generated_choice_v19_local_toolchain",
+            "spireshift_cli_native_run_v20_local_toolchain",
+            "spireshift_cli_native_run_v21_local_toolchain",
         }:
             raise ValueError("Repaired CLI requires its distinct local build lineage")
         patch_relative = Path(document.get("local_patch", ""))

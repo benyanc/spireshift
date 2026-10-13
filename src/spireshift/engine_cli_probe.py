@@ -375,6 +375,12 @@ def _probe_cli_document(
             "spireshift_cli_profile_descriptions_v13_local_toolchain",
             "spireshift_cli_combat_observation_v14_local_toolchain",
             "spireshift_cli_combat_preview_v15_local_toolchain",
+            "spireshift_cli_event_text_v16_local_toolchain",
+            "spireshift_cli_event_text_v17_local_toolchain",
+            "spireshift_cli_card_modifiers_v18_local_toolchain",
+            "spireshift_cli_generated_choice_v19_local_toolchain",
+            "spireshift_cli_native_run_v20_local_toolchain",
+            "spireshift_cli_native_run_v21_local_toolchain",
         }
         and localization is None
     ):
@@ -619,7 +625,11 @@ def verify_projection_inputs(
     if "combat_surface_revision" in document and (
         document.get("combat_surface_revision") != "v2"
         or document.get("combat_bridge_revision") != "v7"
-        or document.get("schema_version") != "engine-cli-combat_bridge-projection-config-v1"
+        or document.get("schema_version")
+        not in {
+            "engine-cli-combat_bridge-projection-config-v1",
+            "engine-native-run-inputs-config-v1",
+        }
     ):
         raise ValueError("Explicit potion-slot projection is restricted to its new bridge revision")
     pins = document["projection"]
@@ -633,7 +643,9 @@ def verify_projection_inputs(
     )
     revision = document.get("public_projection_revision", "rest_v1")
     patch = qualification.root / (
-        "patches/engine/sts2-headless-player-projection-v2.patch"
+        "patches/engine/sts2-headless-player-projection-v3.patch"
+        if revision == "native_run_v1"
+        else "patches/engine/sts2-headless-player-projection-v2.patch"
         if revision in {"combat_v4", "bundle_v5"}
         else "patches/engine/sts2-headless-player-projection-v1.patch"
     )
@@ -644,9 +656,15 @@ def verify_projection_inputs(
         "engine-rest-surface.mjs",
         "probe-engine-cli-rest.mjs",
     ]
-    if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4", "bundle_v5"}:
+    if revision in {
+        "selection_shop_v2",
+        "selection_shop_v3",
+        "combat_v4",
+        "bundle_v5",
+        "native_run_v1",
+    }:
         helpers.extend(["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"])
-        if revision in {"combat_v4", "bundle_v5"}:
+        if revision in {"combat_v4", "bundle_v5", "native_run_v1"}:
             helpers.extend(
                 [
                     "engine-combat-surface-v2.mjs"

@@ -1,11 +1,21 @@
 # SpireShift backlog
 
-Updated 2026-10-12 after the owner combat-effect repeat panel passed.
+Updated 2026-10-13 with the bounded Ironclad/A8 loop and the next owner-run ending check.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
 
 ## Current handoff and direction
+
+**Current finish line:** [the bounded Ironclad/A8 contract](actual-engine-a8-finish-line.md)
+supersedes the open-ended mechanics queue below. Build the complete unattended public-action
+loop, qualify normal startup/later acts/endings and representative consequential interactions,
+then complete an eight-seed natural-run panel. Normal deaths count as completed environment
+tests; wins are not required for training admission. Unsupported states, unknown delivery,
+missing public information and caps remain blockers. Next measure speed/worker isolation and
+connect the existing neural/PPO learner with a short learning check. Exhaustive combinations,
+every static mode reference, other heroes/difficulties and repeated fixture matrices are later
+coverage work. Historical evidence below keeps its original scope.
 
 **Current work: #145, actual-engine public inputs and mechanics qualification.** The separately
 frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
@@ -13,6 +23,38 @@ full-run victory stays primary. Preserve all v0.107.1 archives, models, encoders
 [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md) orders public/mechanics
 qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
 other difficulties and larger unchanged PPO/GA batches remain deferred.
+
+**The natural headless loop now completes 8/8 candidate endings**, with zero unsupported states,
+unknown actions, liveness failures or runtime errors in this frozen panel. It records **1,115
+decisions across 15 decision families** and takes **28.813 seconds** in total case wall time,
+including launches/integrity checks. All eight ordinary losses retain their original native death
+evidence; no wins, later-act coverage, playing-strength claim or training admission follow.
+Saved-only reconstruction verifies advertised actions, reads, delivery chains, counts and native
+ending flags. Managed simulations share frozen inputs and create **zero app copies**.
+
+The short diagnostics repaired native event text, per-card modifiers, generated-card selection
+permissions, upgrade-preview text and missing Godot math APIs. Two fresh native builds reproduce.
+The original game DLL remains unchanged; earlier failed and literal-seed runs stay preserved.
+New seeds explicitly use the game's canonical `1`/`0` alphabet; old `I`/`O` runs are not relabeled.
+
+**Two normal shipped starts pass** through Single Player/Standard/Embark, without imported runs.
+Their initial deck, HP/resources, act, starting offers, A8 and seed match the native references.
+The new Host also gets through **54 gameplay actions and two combats** before the short cap;
+the exact Power-card tutorial and a partial-hand reshuffle are supported. A saved-only audit
+reconstructs all five startup actions and 54 gameplay actions. This partial run has not reached
+a shipped ending. One fixed app/inode is reused, with zero copies and verified reset.
+
+**One next owner command:** `bash scripts/check-natural-a8-run-v1.sh`. Expect approximately
+5–10 minutes; one game has a 15-minute cap and the resource wrapper a 16-minute cap. It starts
+naturally with a weak diagnostic player, records progress every 25 actions, stops at the first
+unsupported/uncertain state and preserves evidence. It does not train, retry or launch another
+stage. Preflight passes with zero game launches. [Guide](actual-engine-natural-runs.md) and
+[scoped evidence](evidence/actual-engine-v0.111.0-natural-run-foundation-v1.json) record the results.
+
+**Remaining before the new neural pilot:** qualify the shipped natural ending and targeted
+later-act/victory semantics; close encountered public-input/selection omissions; measure bounded
+worker isolation and whole-run costs; connect the new public experience/encoder to the existing
+learner and pass a short learning control. Broader combinations and repeat matrices stay deferred.
 
 **Completed profile stage:** the owner profile/description panel passes **8/8 cases**, zero failures or
 unattempted cases. Four independent fixed-A8 seeds were each repeated twice with identical public
@@ -53,18 +95,19 @@ exactly one Strength bonus. The new menu compares all offered play/use/discard/e
 Seven Host checks, five identity/menu tests and 1,213 repository tests pass. The original game DLL,
 older recipes and completed eight-case audit remain unchanged.
 
-**Next owner task:** run only `bash scripts/compare-combat-potion-discard-v1.sh` (6–9 minutes,
-15-minute cap). The eight cases cover two seeds and both fixtures, each twice, using one shared
-app with fresh profiles. First mismatch stops; only a saved audit follows success. Preflight
-passes, but this new repeat panel has not been launched. [Guide](actual-engine-combat-potion-discard.md)
-and [evidence](evidence/actual-engine-v0.111.0-combat-discard-v1.json) preserve its scope and identities.
+**Prepared optional follow-up:** `scripts/compare-combat-potion-discard-v1.sh` retains its
+original eight-case recipe, preflight and 6–9-minute estimate. It has not been launched. The
+owner's tighter finish line prioritizes a complete-run diagnostic over another repeat matrix;
+the two passing exact-slot comparisons and negative checks remain evidence. New discard gaps
+still block admission. [Guide](actual-engine-combat-potion-discard.md) and
+[evidence](evidence/actual-engine-v0.111.0-combat-discard-v1.json) preserve its original scope.
 
-**Further work under #145:** broader current-wrapper/Host mechanics and complete public
+**Historical queue before the bounded diagnostic:** broader current-wrapper/Host mechanics and complete public
 facts: transient costs/effects/relic counters, mandatory/optional/nested selectors, consequential
 mode references, shipped new-run initialization, later-act advancement and actual terminal
 endings. Initial checkpoint inspection does not test the shipped lobby or act progression.
 After required qualification, #146 measures full-run speed and connects a separate A8 neural
-lineage. No new long task, full run or training has started.
+lineage. The current diagnostic results and owner handoff above supersede this queue's ordering.
 
 **The owner startup panel passes: 12/12 cases, zero failures.** Six independent native A8 seeds
 were imported through normal Continue twice each. Starting titles/availability match and repeated
@@ -536,8 +579,8 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; repeated combat effects pass; discard short checks pass; owner repeats prepared | Owner runs the eight-case potion-discard panel, then continue current-Host/mode/mechanics/public-state/later-act/ending coverage. Completed profile/bundle/reward panels need no rerun. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Current; headless panel complete, shipped ending next | Eight natural headless candidate endings and two fresh shipped starts pass; the new Host completes a 54-action prefix. The owner runs one complete shipped attempt, then targeted later-act/victory and known input gaps complete the bounded gate. Extra repeat matrices and exhaustive coverage are deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| After the bounded environment gate | Measure one-worker complete-run timing/failures and bounded two-worker isolation; connect the separately versioned A8 public encoder/experience to existing neural/PPO machinery, pass a short learning check and prepare one finite owner pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

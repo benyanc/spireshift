@@ -51,6 +51,18 @@ engine fidelity. Choose a port or qualified older adapter only if later evidence
 
 ## Acquisition and execution
 
+### Owner clarification, 2026-10-12
+
+Qualification ends at a bounded, complete Ironclad/A8 interface and representative consequential
+mechanics coverage, followed by full-run timing/isolation and a short learning control. It does
+not require exhaustive content interactions, every static mode reference or a repeated matrix
+for each passing fixture. The exact checks, eight-seed natural-run panel, targeted later-act/
+ending checks and explicit admission boundary are in
+[the A8 finish line](../actual-engine-a8-finish-line.md). Fix known and encountered gaps; preserve
+all failure denominators and public-input boundaries. Genuine full wins remain the learning
+objective, not an environment-readiness prerequisite. This clarifies the ordered packages above
+without changing the primary objective, terminal condition or computation constraint.
+
 The owner's local Steam cache associates macOS depot `2868842`, manifest
 `5045320271505434676`, with beta build `24724944`. The cache is identification evidence, not
 confirmation of present download access or of the downloaded bytes. The owner uses their licensed

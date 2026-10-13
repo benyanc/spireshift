@@ -68,10 +68,12 @@ from spireshift.engine_reward_bridge import (
     verify_reward_bridges,
 )
 from spireshift.engine_reward_generation import check_native_reward_generation
+from spireshift.engine_run import preflight_native_run, probe_native_run, verify_native_run
 from spireshift.engine_shop_bridge import compare_shop_bridge, compare_shop_bridges
 from spireshift.engine_shop_verification import verify_shop_bridge, verify_shop_bridges
 from spireshift.engine_source import inspect_game_source
 from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
+from spireshift.engine_startup import compare_new_run, verify_new_run
 from spireshift.engine_working_app import load_working_app_policy, working_app_inventory
 from spireshift.full_run_experience import atomic_json
 
@@ -133,6 +135,12 @@ def add_engine_parser(commands: Any) -> None:
         "probe-cli-reward-bridge",
         "probe-cli-checkpoint",
         "probe-cli-journey",
+        "preflight-native-run",
+        "probe-native-run",
+        "verify-native-run",
+        "compare-new-run",
+        "preflight-new-run",
+        "verify-new-run",
         "probe-cli-rest-bridge",
         "probe-cli-shop-bridge",
         "inspect-game-source",
@@ -245,6 +253,14 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("audit_config", type=Path)
         if name == "check-native-reward-generation":
             command.add_argument("reward_config", type=Path)
+        if name in {"preflight-native-run", "probe-native-run"}:
+            command.add_argument("run_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name == "verify-native-run":
+            command.add_argument("report", type=Path)
+        if name in {"compare-new-run", "preflight-new-run", "verify-new-run"}:
+            command.add_argument("run_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
         if name == "download-game":
             command.add_argument("--qr", action="store_true")
         if name in ("preflight", "freeze"):
@@ -277,6 +293,28 @@ def run_engine_command(args: argparse.Namespace) -> int:
             raise FileExistsError(f"Refusing to overwrite an existing result: {args.output}")
         if args.engine_command == "inventory-working-apps":
             result = working_app_inventory(config)
+            code = 0
+        elif args.engine_command == "preflight-native-run":
+            result = preflight_native_run(config, args.run_config, node=args.node)
+            code = 0 if result["ready_for_diagnostic"] else 1
+        elif args.engine_command == "probe-native-run":
+            result = probe_native_run(config, args.run_config, node=args.node)
+            code = 0 if result["status"] == "candidate_terminal" else 1
+        elif args.engine_command == "verify-native-run":
+            result = verify_native_run(config, args.report)
+            code = 0
+        elif args.engine_command == "compare-new-run":
+            result = compare_new_run(config, args.run_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"normal_start_comparison_pass", "natural_shipped_run_pass"}
+                else 1
+            )
+        elif args.engine_command == "preflight-new-run":
+            result = compare_new_run(config, args.run_config, node=args.node, preflight=True)
+            code = 0 if result["ready_for_diagnostic"] else 1
+        elif args.engine_command == "verify-new-run":
+            result = verify_new_run(config, args.run_config, node=args.node)
             code = 0
         elif args.engine_command == "download-plan":
             result = download_plan(load_engine_download_config(args.downloader_config, config))
@@ -582,6 +620,15 @@ def run_engine_command(args: argparse.Namespace) -> int:
             displayed["error"] = result["probe"].get("error")
         elif args.engine_command == "inspect-game-source":
             displayed = {key: value for key, value in result.items() if key != "inventory"}
+        elif args.engine_command == "compare-new-run":
+            displayed = {key: value for key, value in result.items() if key != "shipped_report"}
+            shipped = result["shipped_report"]
+            displayed.update(
+                error=shipped["probe"].get("error"),
+                wall_seconds=shipped["process"]["wall_seconds"],
+                app_copies_created=shipped["working_app"]["app_copies_created"],
+                fixed_app_reset_verified=shipped["working_app"]["restored"],
+            )
         print(json.dumps(displayed, indent=2))
         return code
     except subprocess.TimeoutExpired:

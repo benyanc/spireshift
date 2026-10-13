@@ -20,6 +20,7 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import threading
 import time
 import urllib.request
 from contextlib import ExitStack, suppress
@@ -354,6 +355,45 @@ def _stop_child(child: subprocess.Popen[bytes]) -> None:
     child.wait(timeout=5)
 
 
+def _run_natural_client(
+    command: list[str], spec: dict[str, Any], attempt: Path, timeout: int
+) -> None:
+    """Show bounded numeric progress; keep all other client output private."""
+    with (
+        (attempt / "client-stdout.log").open("wb") as log,
+        (attempt / "client-stderr.log").open("wb") as errors,
+    ):
+        client = subprocess.Popen(
+            command,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=errors,
+            start_new_session=True,
+        )
+        assert client.stdin is not None and client.stdout is not None
+        output = client.stdout
+
+        def relay() -> None:
+            for line in output:
+                log.write(line)
+                log.flush()
+                if re.fullmatch(
+                    rb"Natural A8 run: [0-9]{1,4} actions, floor [0-9]{1,3}, act [1-3]\.\n", line
+                ):
+                    print(line.decode(), end="", flush=True)
+
+        reader = threading.Thread(target=relay, daemon=True)
+        reader.start()
+        try:
+            client.stdin.write(json.dumps(spec).encode())
+            client.stdin.close()
+            client.wait(timeout=timeout)
+        finally:
+            _stop_child(client)
+            reader.join(timeout=5)
+            output.close()
+
+
 def _run_menu_probe(
     config: ConnectorQualificationConfig,
     node: Path,
@@ -384,6 +424,8 @@ def _run_menu_probe(
             ],
         }
     )
+    if fixture is not None and fixture.get("comparison_mode") == "new_run_v1":
+        environment["STS2_CONNECTOR_RUN_SEED"] = fixture["seed"]
     command = [
         "/usr/bin/sandbox-exec",
         "-f",
@@ -398,7 +440,11 @@ def _run_menu_probe(
         "--log-file",
         str(attempt / "godot.log"),
     ]
-    cap = config.document["max_wall_seconds"]
+    cap = (
+        fixture["natural_run_limits"]["max_wall_seconds"]
+        if fixture is not None and "natural_run_limits" in fixture
+        else config.document["max_wall_seconds"]
+    )
     started = time.monotonic()
     timed_out = False
     with (
@@ -427,7 +473,19 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-combat-shipped-probe-v5.mjs"
+                "engine-natural-shipped-run-v3.mjs"
+                if fixture is not None
+                and fixture.get("natural_run") is True
+                and fixture.get("shipped_ui_revision") == "natural_v3"
+                else "engine-natural-shipped-run-v2.mjs"
+                if fixture is not None
+                and fixture.get("natural_run") is True
+                and fixture.get("shipped_ui_revision") == "natural_v2"
+                else "engine-natural-shipped-run-v1.mjs"
+                if fixture is not None and fixture.get("natural_run") is True
+                else "engine-new-run-shipped-probe-v1.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "new_run_v1"
+                else "engine-combat-shipped-probe-v5.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "combat_bridge_v5"
                 else "engine-combat-shipped-probe-v4.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "combat_bridge_v4"
@@ -465,16 +523,20 @@ def _run_menu_probe(
                 if fixture is not None
                 else "engine-menu-probe.mjs"
             )
-            client = subprocess.run(
-                [str(node), str(config.qualification.root / "scripts" / helper)],
-                input=json.dumps(spec),
-                text=True,
-                capture_output=True,
-                timeout=cap - 10,
-                check=False,
-            )
-            (attempt / "client-stdout.log").write_text(client.stdout)
-            (attempt / "client-stderr.log").write_text(client.stderr)
+            client_command = [str(node), str(config.qualification.root / "scripts" / helper)]
+            if fixture is not None and fixture.get("shipped_ui_revision") == "natural_v3":
+                _run_natural_client(client_command, spec, attempt, cap - 10)
+            else:
+                client_result = subprocess.run(
+                    client_command,
+                    input=json.dumps(spec),
+                    text=True,
+                    capture_output=True,
+                    timeout=cap - 10,
+                    check=False,
+                )
+                (attempt / "client-stdout.log").write_text(client_result.stdout)
+                (attempt / "client-stderr.log").write_text(client_result.stderr)
             child.wait(timeout=max(0.1, cap - (time.monotonic() - started)))
         except subprocess.TimeoutExpired:
             timed_out = True
@@ -560,10 +622,40 @@ BENCHMARK_PROFILE_MODES = {
     "profile_text_v1",
     "combat_bridge_v4",
     "combat_bridge_v5",
+    "new_run_v1",
 }
 
 
 def _validate_benchmark_fixture_scope(fixture: dict[str, Any] | None) -> None:
+    if fixture is not None and "natural_run_limits" in fixture:
+        limits = fixture["natural_run_limits"]
+        if (
+            fixture.get("comparison_mode") != "new_run_v1"
+            or fixture.get("natural_run") is not True
+            or fixture.get("shipped_ui_revision") != "natural_v3"
+            or not isinstance(limits, dict)
+            or set(limits) != {"schema_version", "max_wall_seconds", "max_decisions"}
+            or limits.get("schema_version") != "engine-natural-run-limits-v1"
+            or type(limits.get("max_wall_seconds")) is not int
+            or not 120 <= limits["max_wall_seconds"] <= 900
+            or type(limits.get("max_decisions")) is not int
+            or not 1 <= limits["max_decisions"] <= 4096
+        ):
+            raise ValueError("Longer caps require the explicit bounded natural new-run scope")
+    if (
+        fixture is not None
+        and fixture.get("comparison_mode") == "new_run_v1"
+        and (
+            "checkpoint_path" in fixture
+            or "checkpoint_sha256" in fixture
+            or not re.fullmatch(r"SP1RESH1FTA8D1AG[0-9]{3}", str(fixture.get("seed", "")))
+            or "benchmark_progress" not in fixture
+            or "profile_policy" not in fixture
+        )
+    ):
+        raise ValueError(
+            "A new-run comparison requires a fresh benchmark profile and no imported run"
+        )
     if (
         fixture is not None
         and ("benchmark_progress" in fixture or "profile_policy" in fixture)
@@ -586,6 +678,12 @@ def _probe_connector_private(
     """One copied shipped host; optional fixture is already bound by the checkpoint verifier."""
     # Reject an invalid scope before acquiring a worker or altering its executable/profile.
     _validate_benchmark_fixture_scope(fixture)
+    if (
+        fixture is not None
+        and fixture.get("comparison_mode") == "new_run_v1"
+        and working_app is None
+    ):
+        raise ValueError("New-run comparisons require the explicit fixed-app reuse policy")
     if type(retain_working_game) is not bool or (
         not retain_working_game and fixture is None and working_app is None
     ):
@@ -653,13 +751,17 @@ def _probe_connector_private(
         consent_fresh_shop = False
         benchmark_consent = None
         if fixture is not None:
-            checkpoint = Path(fixture["checkpoint_path"])
-            if _sha_file(checkpoint) != fixture["checkpoint_sha256"]:
-                raise ValueError("Native checkpoint changed before the disposable host copy")
             # The exact game's RunSaveManager/UserDataPathProvider use this modded namespace.
             destination = profile / "default/1/modded/profile1/saves/current_run.save"
             destination.parent.mkdir(parents=True)
-            shutil.copy2(checkpoint, destination)
+            if fixture.get("comparison_mode") == "new_run_v1":
+                if destination.exists():
+                    raise ValueError("Fresh new-run profile unexpectedly has a current save")
+            else:
+                checkpoint = Path(fixture["checkpoint_path"])
+                if _sha_file(checkpoint) != fixture["checkpoint_sha256"]:
+                    raise ValueError("Native checkpoint changed before the disposable host copy")
+                shutil.copy2(checkpoint, destination)
             if fixture.get("comparison_mode") in BENCHMARK_PROFILE_MODES:
                 from spireshift.engine_profile import load_profile_policy, verify_benchmark_progress
 
@@ -850,6 +952,8 @@ def _probe_connector_private(
                 profile_text=fixture.get("comparison_mode") == "profile_text_v1",
                 combat_bridge=fixture.get("comparison_mode") == "combat_bridge_v4",
                 combat_discard=fixture.get("comparison_mode") == "combat_bridge_v5",
+                new_run=fixture.get("comparison_mode") == "new_run_v1",
+                natural_run=fixture.get("natural_run") is True,
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -897,11 +1001,17 @@ def _probe_connector_private(
                 "launcher_invocations": 1,
                 "games_launched": int("MegaDot" in stdout),
                 "menu_actions_requested": probe.get("menu_actions_requested", 0),
-                "full_run_attempts": 0,
+                "full_run_attempts": int(
+                    fixture is not None
+                    and fixture.get("natural_run") is True
+                    and probe.get("checks", {}).get("normal_new_run_embarked") is True
+                ),
                 "optimizer_steps": 0,
                 "mechanics_qualified": False,
                 "training_allowed": False,
-                "claim_scope": "single_native_checkpoint_shipped_public_input_only"
+                "claim_scope": "natural_shipped_Ironclad_A8_diagnostic_only"
+                if fixture is not None and fixture.get("natural_run") is True
+                else "single_native_checkpoint_shipped_public_input_only"
                 if fixture is not None
                 else "shipped_public_menu_transition_and_control_only",
             },
@@ -925,6 +1035,8 @@ def _evaluate_connector_checkpoint(
     profile_text: bool = False,
     combat_bridge: bool = False,
     combat_discard: bool = False,
+    new_run: bool = False,
+    natural_run: bool = False,
 ) -> dict[str, Any]:
     if (
         sum(
@@ -937,6 +1049,7 @@ def _evaluate_connector_checkpoint(
                 profile_text,
                 combat_bridge,
                 combat_discard,
+                new_run,
             )
         )
         > 1
@@ -960,6 +1073,24 @@ def _evaluate_connector_checkpoint(
         "template_unchanged",
         "natural_shutdown",
     )
+    if new_run:
+        required = tuple(
+            name
+            for name in required
+            if name not in {"native_continue_offered", "native_checkpoint_loaded"}
+        ) + (
+            "no_continue_used",
+            "normal_new_run_embarked",
+            "Ironclad_A8_selected",
+            "same_public_initial_run_facts",
+            "benchmark_profile_bound_before_launch",
+        )
+    if natural_run:
+        if not new_run:
+            raise ValueError("Natural shipped runs require normal fresh startup")
+        required += ("natural_full_run_observed",)
+        if "natural_run_compute_within_budget" in checks:
+            required += ("natural_run_compute_within_budget", "all_natural_run_actions_delivered")
     if rest_bridge:
         required = tuple(
             name

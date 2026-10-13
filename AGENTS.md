@@ -39,6 +39,13 @@ migrate or resume them on new rules. Obtain the exact new game, qualify public i
 measure complete-run speed before a new neural pilot. The prepared large v3 emulator pilot is
 deferred. Emulator porting, other difficulties and larger GA batches are not prerequisites.
 
+On 2026-10-12 the owner tightened the qualification finish line: complete the unattended
+Ironclad/A8 public decision loop and genuine endings, test representative consequential
+mechanics and fix encountered gaps, measure full runs/isolation, then integrate the existing
+learner and perform a short learning check. Do not require exhaustive content interactions or
+repeated fixture matrices before returning to learning. Bulk training still requires explicit
+admission; a diagnostic run cannot grant it. Follow `docs/actual-engine-a8-finish-line.md`.
+
 The next v0.111.0 startup contract is explicitly `native_benchmark_full_v1`: native full content,
 all native acts discovered, Ironclad/A8, the shipped lobby's seeded random act selection and
 enabled tutorials with no completed entries. It uses synthetic isolated benchmark progress,
