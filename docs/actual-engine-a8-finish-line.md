@@ -69,8 +69,18 @@ These are ordinary losses, not full-game fidelity or playing-strength evidence. 
 shipped menu starts match; a new Host prefix reaches 54 gameplay actions/two combats before
 the short cap. The fixed app resets with zero new copies.
 
-The next owner stage is **one complete natural shipped run**, not another eight-case fixture
-matrix. [Its guide](actual-engine-natural-runs.md) provides one command and explicit caps.
+The first owner shipped attempt stops alive on an unsupported floor-5 screen after 73 gameplay
+actions. Its evidence stays preserved. The four authorized repairs add exact tutorial controls,
+reached-progress reporting, bounded issue collection/recovery and consistent take/skip/leave
+semantics. A subsequent short probe finds and records the combat-reward tutorial; the final
+separately built Host also implements its control and the remaining standard single-player
+tutorial controls. These are implementation/short-check results, not complete shipped admission.
+
+The next owner stage is **two independent natural shipped discovery runs**, with serial app reuse,
+complete failure denominators and verified reset between seeds. Unknown screens without current
+controls still stop the affected game; a verified legal exit can continue diagnostic discovery.
+Recovered runs cannot satisfy the clean environment gate or enter ordinary learning data.
+[The guide](actual-engine-natural-runs.md) provides one command and explicit caps.
 Later-act/victory checks, known input omissions, worker isolation, learner integration and the
 short learning control remain required. Short jobs may run automatically; the owner launches
 and monitors stages expected to take five minutes or more. No diagnostic automatically admits

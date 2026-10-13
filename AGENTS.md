@@ -46,6 +46,13 @@ learner and perform a short learning check. Do not require exhaustive content in
 repeated fixture matrices before returning to learning. Bulk training still requires explicit
 admission; a diagnostic run cannot grant it. Follow `docs/actual-engine-a8-finish-line.md`.
 
+The owner authorized bounded diagnostic issue collection on 2026-10-13. Record every missing
+field and reached public progress, continue only through existing verified current exit/decline
+controls, and try other planned seeds after verified reset. A blocking unknown owner still stops
+that game. Recovered/incomplete runs never count as clean admission or ordinary learning data;
+uncertain delivery is not resubmitted. Preserve old failures, and keep optional Skip/leave actions
+selectable without inventing permissions for mandatory choices.
+
 The next v0.111.0 startup contract is explicitly `native_benchmark_full_v1`: native full content,
 all native acts discovered, Ironclad/A8, the shipped lobby's seeded random act selection and
 enabled tutorials with no completed entries. It uses synthetic isolated benchmark progress,

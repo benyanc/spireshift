@@ -39,6 +39,7 @@ from spireshift.engine_qualification import (
     _sha_file,
     verify_game_archive,
 )
+from spireshift.engine_startup import _script_closure
 from spireshift.full_run_experience import atomic_json
 
 HELPERS = {
@@ -129,6 +130,11 @@ def _verify_saved_observation(row: dict[str, Any], runtime: str) -> None:
 
 def load_run_recipe(path: Path, qualification: EngineQualificationConfig) -> dict[str, Any]:
     document = json.loads(path.read_text())
+    helpers = (
+        _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v2.mjs"})
+        if document.get("policy_revision") == "diagnostic_v2"
+        else HELPERS
+    )
     if (
         document.get("schema_version") != "engine-native-run-config-v1"
         or document.get("qualification_config_id") != qualification.config_id
@@ -150,7 +156,8 @@ def load_run_recipe(path: Path, qualification: EngineQualificationConfig) -> dic
         or type(document.get("max_decisions")) is not int
         or not 1 <= document["max_decisions"] <= 4096
         or document.get("max_repeated_states") != 3
-        or set(document.get("helpers_sha256", {})) != HELPERS
+        or document.get("policy_revision") not in {None, "diagnostic_v2"}
+        or set(document.get("helpers_sha256", {})) != helpers
     ):
         raise ValueError("Expected a short, fixed-A8 natural public-run diagnostic recipe")
     return dict(document)
@@ -257,7 +264,7 @@ def probe_native_run(
     atomic_json(workspace / "in-progress.json", {"config_id": manifest_identifier(recipe)})
     sources = workspace / "source-at-launch"
     sources.mkdir()
-    for name in HELPERS:
+    for name in recipe["helpers_sha256"]:
         (sources / name).write_bytes((qualification.root / "scripts" / name).read_bytes())
     atomic_json(sources / "recipe.json", recipe)
     profile = workspace / "private-profile"
@@ -308,7 +315,18 @@ def probe_native_run(
     timed_out = False
     with (workspace / "stdout.log").open("wb") as out, (workspace / "stderr.log").open("wb") as err:
         child = subprocess.Popen(
-            [str(node), str(qualification.root / "scripts/probe-engine-native-run-v1.mjs")],
+            [
+                str(node),
+                str(
+                    qualification.root
+                    / "scripts"
+                    / (
+                        "probe-engine-native-run-v2.mjs"
+                        if recipe.get("policy_revision") == "diagnostic_v2"
+                        else "probe-engine-native-run-v1.mjs"
+                    )
+                ),
+            ],
             stdin=subprocess.PIPE,
             stdout=out,
             stderr=err,

@@ -1,11 +1,54 @@
 # SpireShift backlog
 
-Updated 2026-10-13 with the bounded Ironclad/A8 loop and the next owner-run ending check.
+Updated 2026-10-13 with the owner's natural-run blocker and four authorized repairs.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
 
 ## Current handoff and direction
+
+**Current repair package (#145):** the first owner-run shipped attempt stopped after 73 gameplay
+actions / 130.735 seconds at a living floor-5 shop (44/80 HP), with no published current controls.
+Logs identify an unhandled map-selection tutorial as the leading cause. The old summary's floor 4
+is its last supported screen, not the last reached floor. Saved verification validates evidence,
+not completion. Preserve that failed attempt and every old recipe.
+
+**Implemented repair package; final shipped validation remains pending.** The owner authorized
+all four fixes before the next long attempt:
+
+1. Bind the exact native map-selection tutorial and its current confirmation control. Host v12
+   reproduces; a short new probe encounters the distinct combat-reward tutorial at floor 2.
+   Host v13 additionally implements the remaining standard single-player tutorial controls,
+   preserving separate merchant/end-turn highlight choices. Two fresh builds reproduce and
+   16 targeted Host controls pass; unknown/disabled controls remain unsupported. Final shipped
+   confirmation of v13 is pending because the owner's Steam game is open.
+2. Record progress from every public observation, including unsupported screens, and distinguish
+   reached progress from last supported progress and genuine terminal outcomes.
+3. Add bounded diagnostic issue collection: enumerate all missing facts in each snapshot,
+   deduplicate issues, continue only through verified current controls and other planned seeds,
+   retain blocked/capped attempts, and exclude recovered/incomplete runs from clean admission or
+   training. Never guess a keypress, replay an uncertain action, or hide a failed denominator.
+4. Give native and shipped take/skip/leave choices common semantic identities and deterministic
+   public tie-breaking. Keep every game-permitted decline selectable; never create a skip for a
+   mandatory choice. The initializer is a diagnostic player, not learned deck-building quality.
+
+Repository validation passes **1,251 tests**, formatting/types/protocol checks; 37 new/current
+Node policy/discovery/tutorial controls pass. Two short native runs with the shared policy reach
+genuine candidate deaths (86/75 decisions; floors 6/5) and pass saved audits. The short shipped
+collector preserves 35 actions, both missing fields, alive floor-2 progress and a verified app
+reset; it creates zero app copies. Earlier owner and short-probe results still audit unchanged.
+Recovery continuation is tested with synthetic current-control cases, not yet claimed as a
+natural recovered game. All these results remain diagnostic, with no model training/admission.
+
+**One next owner command:** `bash scripts/discover-natural-a8-runs-v1.sh`, after closing any running
+game. It runs two independent seeds serially, approximately 10–20 minutes total, with a 32-minute
+batch cap. An unsupported screen without usable controls stops that case; after verified reset
+and saved audit, the next seed continues. Common omissions are deduplicated and failed/unattempted
+cases remain counted. Recovered cases cannot become clean passes or ordinary learning examples.
+[Guide](actual-engine-natural-runs.md) and
+[evidence](evidence/actual-engine-v0.111.0-discovery-and-declines-v1.json) record scope and limits.
+The owner launches/monitors this long stage. A clean unattended ending and the remaining bounded
+environment/learner checks still precede bulk training.
 
 **Current finish line:** [the bounded Ironclad/A8 contract](actual-engine-a8-finish-line.md)
 supersedes the open-ended mechanics queue below. Build the complete unattended public-action
@@ -44,12 +87,10 @@ the exact Power-card tutorial and a partial-hand reshuffle are supported. A save
 reconstructs all five startup actions and 54 gameplay actions. This partial run has not reached
 a shipped ending. One fixed app/inode is reused, with zero copies and verified reset.
 
-**One next owner command:** `bash scripts/check-natural-a8-run-v1.sh`. Expect approximately
-5–10 minutes; one game has a 15-minute cap and the resource wrapper a 16-minute cap. It starts
-naturally with a weak diagnostic player, records progress every 25 actions, stops at the first
-unsupported/uncertain state and preserves evidence. It does not train, retry or launch another
-stage. Preflight passes with zero game launches. [Guide](actual-engine-natural-runs.md) and
-[scoped evidence](evidence/actual-engine-v0.111.0-natural-run-foundation-v1.json) record the results.
+**Historical owner stage:** `scripts/check-natural-a8-run-v1.sh` has the saved 73-action incomplete
+attempt described above and now audits it without replay. Its original 15/16-minute caps, failures
+and [foundation evidence](evidence/actual-engine-v0.111.0-natural-run-foundation-v1.json) stay unchanged.
+The two-seed discovery command above supersedes that handoff; no old recipe is retried or relabeled.
 
 **Remaining before the new neural pilot:** qualify the shipped natural ending and targeted
 later-act/victory semantics; close encountered public-input/selection omissions; measure bounded
@@ -579,7 +620,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; headless panel complete, shipped ending next | Eight natural headless candidate endings and two fresh shipped starts pass; the new Host completes a 54-action prefix. The owner runs one complete shipped attempt, then targeted later-act/victory and known input gaps complete the bounded gate. Extra repeat matrices and exhaustive coverage are deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; four repairs implemented, final shipped validation pending | Preserve the alive floor-5 owner interruption. Typed tutorial controls, reached-progress accounting, bounded issue/recovery collection and consistent take/skip/leave choices pass short/offline checks. The next owner stage collects two independent shipped seeds with verified serial reset and complete failure denominators; then close remaining encountered/later-act/ending gaps. Extra repeat matrices and exhaustive coverage remain deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After the bounded environment gate | Measure one-worker complete-run timing/failures and bounded two-worker isolation; connect the separately versioned A8 public encoder/experience to existing neural/PPO machinery, pass a short learning check and prepare one finite owner pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

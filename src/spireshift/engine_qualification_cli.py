@@ -69,6 +69,7 @@ from spireshift.engine_reward_bridge import (
 )
 from spireshift.engine_reward_generation import check_native_reward_generation
 from spireshift.engine_run import preflight_native_run, probe_native_run, verify_native_run
+from spireshift.engine_run_discovery import discover_runs, verify_discovery_runs
 from spireshift.engine_shop_bridge import compare_shop_bridge, compare_shop_bridges
 from spireshift.engine_shop_verification import verify_shop_bridge, verify_shop_bridges
 from spireshift.engine_source import inspect_game_source
@@ -141,6 +142,9 @@ def add_engine_parser(commands: Any) -> None:
         "compare-new-run",
         "preflight-new-run",
         "verify-new-run",
+        "discover-natural-runs",
+        "preflight-natural-discovery",
+        "verify-natural-discovery",
         "probe-cli-rest-bridge",
         "probe-cli-shop-bridge",
         "inspect-game-source",
@@ -245,6 +249,13 @@ def add_engine_parser(commands: Any) -> None:
         }:
             command.add_argument("probe_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
+        if name in {
+            "discover-natural-runs",
+            "preflight-natural-discovery",
+            "verify-natural-discovery",
+        }:
+            command.add_argument("discovery_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
         if name == "extract-game-text":
             command.add_argument("text_config", type=Path)
         if name == "inspect-game-source":
@@ -316,6 +327,22 @@ def run_engine_command(args: argparse.Namespace) -> int:
         elif args.engine_command == "verify-new-run":
             result = verify_new_run(config, args.run_config, node=args.node)
             code = 0
+        elif args.engine_command in {"discover-natural-runs", "preflight-natural-discovery"}:
+            preflight = args.engine_command == "preflight-natural-discovery"
+            result = discover_runs(
+                config, args.discovery_config, node=args.node, preflight=preflight
+            )
+            code = (
+                0
+                if result.get("ready_for_diagnostic") is True
+                or result.get("status") == "discovery_complete"
+                else 1
+            )
+            if not preflight:
+                result = {key: value for key, value in result.items() if key != "cases"}
+        elif args.engine_command == "verify-natural-discovery":
+            result = verify_discovery_runs(config, args.discovery_config, node=args.node)
+            code = 0 if result["valid"] else 1
         elif args.engine_command == "download-plan":
             result = download_plan(load_engine_download_config(args.downloader_config, config))
             code = 0

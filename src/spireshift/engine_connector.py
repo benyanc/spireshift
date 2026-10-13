@@ -473,7 +473,11 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-natural-shipped-run-v3.mjs"
+                "engine-natural-shipped-run-v4.mjs"
+                if fixture is not None
+                and fixture.get("natural_run") is True
+                and fixture.get("shipped_ui_revision") == "natural_v4"
+                else "engine-natural-shipped-run-v3.mjs"
                 if fixture is not None
                 and fixture.get("natural_run") is True
                 and fixture.get("shipped_ui_revision") == "natural_v3"
@@ -524,7 +528,10 @@ def _run_menu_probe(
                 else "engine-menu-probe.mjs"
             )
             client_command = [str(node), str(config.qualification.root / "scripts" / helper)]
-            if fixture is not None and fixture.get("shipped_ui_revision") == "natural_v3":
+            if fixture is not None and fixture.get("shipped_ui_revision") in {
+                "natural_v3",
+                "natural_v4",
+            }:
                 _run_natural_client(client_command, spec, attempt, cap - 10)
             else:
                 client_result = subprocess.run(
@@ -632,7 +639,7 @@ def _validate_benchmark_fixture_scope(fixture: dict[str, Any] | None) -> None:
         if (
             fixture.get("comparison_mode") != "new_run_v1"
             or fixture.get("natural_run") is not True
-            or fixture.get("shipped_ui_revision") != "natural_v3"
+            or fixture.get("shipped_ui_revision") not in {"natural_v3", "natural_v4"}
             or not isinstance(limits, dict)
             or set(limits) != {"schema_version", "max_wall_seconds", "max_decisions"}
             or limits.get("schema_version") != "engine-natural-run-limits-v1"
@@ -642,6 +649,34 @@ def _validate_benchmark_fixture_scope(fixture: dict[str, Any] | None) -> None:
             or not 1 <= limits["max_decisions"] <= 4096
         ):
             raise ValueError("Longer caps require the explicit bounded natural new-run scope")
+    if fixture is not None and fixture.get("shipped_ui_revision") == "natural_v4":
+        limits = fixture.get("diagnostic_limits", {})
+        if (
+            fixture.get("natural_run") is not True
+            or "natural_run_limits" not in fixture
+            or set(limits)
+            != {
+                "schema_version",
+                "mode",
+                "max_unique_issues",
+                "max_issue_observations",
+                "max_recoveries",
+                "unsupported_grace_ms",
+            }
+            or limits.get("schema_version") != "engine-run-diagnostic-limits-v1"
+            or limits.get("mode") not in {"validation", "discovery"}
+            or any(
+                type(limits.get(key)) is not int or not lower <= limits[key] <= upper
+                for key, lower, upper in (
+                    ("max_unique_issues", 1, 128),
+                    ("max_issue_observations", 1, 256),
+                    ("max_recoveries", 0, 32),
+                    ("unsupported_grace_ms", 3000, 5000),
+                )
+            )
+            or (limits.get("mode") == "validation" and limits.get("max_recoveries") != 0)
+        ):
+            raise ValueError("Expected bounded explicit diagnostic recovery limits")
     if (
         fixture is not None
         and fixture.get("comparison_mode") == "new_run_v1"
@@ -1091,6 +1126,8 @@ def _evaluate_connector_checkpoint(
         required += ("natural_full_run_observed",)
         if "natural_run_compute_within_budget" in checks:
             required += ("natural_run_compute_within_budget", "all_natural_run_actions_delivered")
+        if "natural_run_clean" in checks:
+            required += ("natural_run_clean",)
     if rest_bridge:
         required = tuple(
             name

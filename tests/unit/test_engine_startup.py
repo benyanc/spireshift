@@ -87,3 +87,28 @@ def test_progress_relay_does_not_print_unstructured_client_output(
 def test_progress_client_is_stopped_when_it_exceeds_its_cap(tmp_path: Path) -> None:
     with pytest.raises(subprocess.TimeoutExpired):
         _run_natural_client([sys.executable, "-c", "import time;time.sleep(5)"], {}, tmp_path, 1)
+
+
+def test_new_discovery_limits_are_explicit_and_finite() -> None:
+    fixture = scope()
+    fixture["shipped_ui_revision"] = "natural_v4"
+    with pytest.raises(ValueError, match="diagnostic recovery"):
+        _validate_benchmark_fixture_scope(fixture)
+    fixture["diagnostic_limits"] = {
+        "schema_version": "engine-run-diagnostic-limits-v1",
+        "mode": "discovery",
+        "max_unique_issues": 64,
+        "max_issue_observations": 128,
+        "max_recoveries": 16,
+        "unsupported_grace_ms": 3000,
+    }
+    _validate_benchmark_fixture_scope(fixture)
+    for key, value in [
+        ("max_recoveries", 100),
+        ("mode", "validation"),
+        ("max_unique_issues", True),
+    ]:
+        invalid = copy.deepcopy(fixture)
+        invalid["diagnostic_limits"][key] = value
+        with pytest.raises(ValueError, match="diagnostic recovery"):
+            _validate_benchmark_fixture_scope(invalid)

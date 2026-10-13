@@ -9,30 +9,72 @@ benchmark. Keep the frozen v0.111.0 / `41cef1ea` archive and `native_benchmark_f
 From the SpireShift repository:
 
 ```bash
-bash scripts/check-natural-a8-run-v1.sh
+bash scripts/discover-natural-a8-runs-v1.sh
 ```
 
-Close any running STS2 game first. Expect approximately **5–10 minutes** based on the short
-54-action shipped prefix and complete native runs. One game has a **15-minute process cap**;
-the whole command has a **16-minute elapsed cap**, **1,800 CPU seconds**, **8 GB memory** and
+Close any running STS2 game first. This runs **two independent seeds, one at a time**. Allow
+approximately **5–10 minutes per game / 10–20 minutes total**; a blocking screen or ordinary
+death can end a case earlier. Each game has a **15-minute process cap**;
+the whole command has a **32-minute elapsed cap**, **3,600 CPU seconds**, **8 GB memory** and
 **4 GB tracked storage**. Storage includes the existing shared app/pool and external profile
 area, including pre-existing retained files there; it is not a 4 GB allowance for new app copies.
 
-The command checks pinned inputs first, then starts one natural standard Ironclad/A8 run via
+The command checks both pinned cases first, then starts natural standard Ironclad/A8 runs via
 the normal menus. It imports no saved run, injects no gameplay fixture and uses no learned
 checkpoint. It reuses the fixed serial app, gives the attempt a fresh private profile, shows
 numeric progress every 25 actions and records every advertised choice/delivery. An ordinary
 loss is a valid environment completion and remains a loss.
 
-The first unsupported state, uncertain delivery, repeated public state, decision/compute/time
-cap or integrity failure stops the attempt. All records remain preserved. A partial/failed
-saved result is displayed and audited on repeat invocation; it is not automatically retried.
+Every persistent unsupported observation records all its missing fields and reached floor/act/HP.
+In discovery mode, a complete current native menu may provide a verified operand-free Skip,
+leave, close, cancel or Proceed control even if descriptions are incomplete. Only those existing
+controls can recover the case. Unknown modals, unavailable/truncated/stale menus and mandatory
+choices without an exit get no invented fallback. At most 16 recoveries, 64 distinct issue records
+and 128 distinct unsupported observations are retained per case. Identity, information-boundary,
+delivery and compute checks remain mandatory.
+
+A blocking unsupported state, uncertain delivery, repeated public state or decision/compute/time
+cap stops that game. After verified app reset and saved auditing, the next planned seed continues.
+Integrity failures stop the batch. Reports deduplicate common omissions across seeds and retain
+every failed/unattempted denominator. Recovered games remain diagnostic and cannot count as clean
+environment passes or training examples. “Discovery complete” means all planned cases were
+collected/audited; it does not mean they completed the game. All evidence stays saved.
+
+A saved result is displayed and audited on repeat invocation; it is not automatically retried.
 Interrupted attempts without a sealed summary stay blocked for inspection. No training,
 promotion, next experiment or bulk-learning admission follows. Share the printed summaries.
 
-The recipe controls the output/resource paths and binds 14 local helper dependencies, the
+The recipe controls the output/resource paths and binds all transitive local helper dependencies, the
 exact Host build, public starting reference, profile policy, objective and finite limits.
 Saved observations/action receipts are checked after the run without opening another game.
+
+## Four repairs and short checks, 2026-10-13
+
+The original owner attempt made 73 gameplay actions in 130.735 resource seconds, then stopped alive
+at a floor-5 shop with 44/80 HP and zero current controls. Logs point to the previously unsupported
+map-selection tutorial. Its historical floor-4 counter and failed report are unchanged.
+
+The separately built Host v12 adds the native map tutorial. The first short check of the new runner
+records 35 gameplay actions / 82.171 resource seconds before encountering a distinct combat-reward
+tutorial, alive at floor 2. Its two missing fields are both retained; saved auditing independently
+reconstructs reached progress and verifies the app reset. This is not a death or clean pass.
+
+Host v13 additionally binds the standard combat-reward, can-play-card, cannot-play-card and merchant
+tutorials, using their audited native controls. The merchant/end-turn highlight choices remain
+separate from ordinary confirmation; unknown or unavailable controls remain unsupported. The
+diagnostic player confirms guidance before choosing from the refreshed gameplay menu. Two fresh
+builds reproduce; the original game DLL and older Host artifacts stay unchanged.
+
+Native and shipped card Skip/leave actions now share a diagnostic semantic contract. They have no
+automatic take-card/spend-gold preference, accept an external scorer over every legal choice, and
+break ties using public facts instead of generated action IDs/menu order. Costs and named amounts
+remain distinct; mandatory menus receive no invented Skip. This initializer is not trained deck
+quality, and the two interfaces' full policy trajectories are not claimed identical.
+
+Two short native runs using the shared policy reach genuine candidate deaths (86 and 75 decisions,
+floors 6 and 5) and pass saved audits with zero app copies. Full shipped testing of the final Host,
+later acts/endings, worker isolation and neural integration remain pending. An open Steam game
+blocks further isolated launches and must be closed before the command above.
 
 ## What already passes
 

@@ -60,23 +60,29 @@ def compare_new_run(
     recipe = json.loads(recipe_path.read_text())
     natural = recipe.get("natural_run") is True
     revision = recipe.get("shipped_ui_revision")
-    if natural and revision not in {None, "natural_v2", "natural_v3"}:
+    if natural and revision not in {None, "natural_v2", "natural_v3", "natural_v4"}:
         raise ValueError("Unknown natural shipped-run implementation")
     expected_helpers = HELPERS | (
         {
-            "engine-natural-shipped-run-v3.mjs"
+            "engine-natural-shipped-run-v4.mjs"
+            if revision == "natural_v4"
+            else "engine-natural-shipped-run-v3.mjs"
             if revision == "natural_v3"
             else "engine-natural-shipped-run-v2.mjs"
             if revision
             else "engine-natural-shipped-run-v1.mjs",
             "engine-run-contract-v1.mjs",
             "engine-journey-tutorial-v4.mjs",
-            "engine-natural-tutorial-v1.mjs" if revision else "engine-combat-shuffle-v1.mjs",
+            "engine-natural-tutorial-v3.mjs"
+            if revision == "natural_v4"
+            else "engine-natural-tutorial-v1.mjs"
+            if revision
+            else "engine-combat-shuffle-v1.mjs",
         }
         if natural
         else set()
     )
-    if revision == "natural_v3":
+    if revision in {"natural_v3", "natural_v4"}:
         expected_helpers = _script_closure(qualification.root / "scripts", expected_helpers)
     if (
         recipe.get("schema_version") != "engine-new-run-config-v1"
@@ -91,7 +97,7 @@ def compare_new_run(
     ):
         raise ValueError("Expected a pinned fresh-menu A8 startup comparison")
     objective = load_objective(qualification.root / "configs/default.toml")
-    if revision == "natural_v3" and (
+    if revision in {"natural_v3", "natural_v4"} and (
         recipe.get("objective_config") != "configs/default.toml"
         or recipe.get("objective_sha256") != _sha_file(qualification.root / "configs/default.toml")
         or "natural_run_limits" not in recipe
@@ -150,6 +156,7 @@ def compare_new_run(
             if "natural_run_limits" in recipe
             else {}
         ),
+        **({"diagnostic_limits": recipe["diagnostic_limits"]} if revision == "natural_v4" else {}),
     }
     _validate_benchmark_fixture_scope(fixture)
     if preflight:
@@ -208,6 +215,11 @@ def compare_new_run(
         "benchmark_denominator": 1,
         "full_run_attempts": result["full_run_attempts"],
         "gameplay": result.get("probe", {}).get("gameplay"),
+        **(
+            {"diagnostics": result.get("probe", {}).get("diagnostics")}
+            if revision == "natural_v4"
+            else {}
+        ),
         "games_launched": result["games_launched"],
         "checkpoint_imported": False,
         "optimizer_steps": 0,
@@ -244,6 +256,10 @@ def verify_new_run(
         or report["optimizer_steps"] != 0
         or report["native_report_id"] != recipe["native_report_id"]
         or report["gameplay"] != shipped["probe"].get("gameplay")
+        or (
+            recipe.get("shipped_ui_revision") == "natural_v4"
+            and report.get("diagnostics") != shipped["probe"].get("diagnostics")
+        )
     ):
         raise ValueError("Saved new-run scope, outcome or provenance changed")
     sources = workspace / "source-at-launch"
@@ -277,7 +293,18 @@ def verify_new_run(
     ):
         raise ValueError("Saved native starting reference changed")
     checked = subprocess.run(
-        [str(node), str(qualification.root / "scripts/verify-engine-new-run-v1.mjs")],
+        [
+            str(node),
+            str(
+                qualification.root
+                / "scripts"
+                / (
+                    "verify-engine-new-run-v2.mjs"
+                    if recipe.get("shipped_ui_revision") == "natural_v4"
+                    else "verify-engine-new-run-v1.mjs"
+                )
+            ),
+        ],
         input=json.dumps(
             {
                 "report": str(path),
