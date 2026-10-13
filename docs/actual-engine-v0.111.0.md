@@ -5,7 +5,7 @@ Exact acquisition and preservation [#144](https://github.com/benyanc/spireshift/
 complete. Public control/mechanics [#145](https://github.com/benyanc/spireshift/issues/145) are current;
 full-run speed and neural integration [#146](https://github.com/benyanc/spireshift/issues/146) follow.
 
-## Current status — combat effects pass short comparisons; repeats prepared
+## Current status — repeated combat effects pass; potion discard repeats prepared
 
 Two current-wrapper/Host comparisons agree through turn two: Corruption's skill-cost/exhaust
 changes and a separate Strength/Dexterity/potion/Pen Nib fixture. Both saved-only audits pass.
@@ -14,14 +14,23 @@ reshuffle tutorial. The original game supplies the effects. Native v15 passes 84
 28 combat/rest/shop fixtures, and all 1,209 repository tests pass. The shared app is reused with
 fresh profiles, zero new app copies and verified resets.
 
-The next owner stage is **one eight-case combat-effects repeat panel**, expected 6–9 minutes:
-`bash scripts/compare-combat-effects-v1.sh`. Read-only preflight passes; the batch has not been
-launched. [Guide](actual-engine-combat-effects.md) and
-[evidence](evidence/actual-engine-v0.111.0-combat-effects-v1.json) describe the scoped comparisons.
-Native combat potion discard is missing from the shipped Host and is explicitly excluded from
-this effect comparison. Fix it before general training admission. Broader decision/mode coverage,
-shipped lobby initialization, later acts and actual endings remain before #146 throughput and a
-new A8 learning lineage. No training or full-run attempt follows these fixtures.
+The owner completed **8/8 combat-effect comparisons**, zero failures or unattempted cases,
+with identical repeated public prefixes. Independent saved-only reconstruction verifies 72
+observations, 64 effect decisions, 104 game/UI actions and 32 fresh tutorial confirmations/pages.
+The resource wall time is 404.901 seconds; no new app copies or cap hits occurred. This stage is
+complete and needs no rerun. [Guide](actual-engine-combat-effects.md) and
+[completed panel evidence](evidence/actual-engine-v0.111.0-combat-panel-v1.json) record the scope.
+
+The separately identified Host v9 now exposes exact-slot combat potion discard. Two short
+checks and saved audits pass, including an automatic potion and two identical Strength Potions.
+The new native projection publishes the visible slot rather than relying on a definition-only
+fallback. Both current menus and effects agree through turn two. All 1,213 repository tests pass.
+The next owner stage is `bash scripts/compare-combat-potion-discard-v1.sh`, eight cases expected
+to take 6–9 minutes. [Guide](actual-engine-combat-potion-discard.md) and
+[evidence](evidence/actual-engine-v0.111.0-combat-discard-v1.json) record its exact scope and limits.
+It has not been launched. Broader decision/mode coverage, shipped lobby initialization, later
+acts and actual endings remain before #146 throughput and new A8 learning. No training or full-run
+attempt follows these assigned fixtures.
 
 ## Completed benchmark profile and description panel
 

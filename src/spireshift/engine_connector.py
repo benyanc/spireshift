@@ -427,7 +427,9 @@ def _run_menu_probe(
             if fixture is not None:
                 spec["fixture"] = fixture
             helper = (
-                "engine-combat-shipped-probe-v4.mjs"
+                "engine-combat-shipped-probe-v5.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "combat_bridge_v5"
+                else "engine-combat-shipped-probe-v4.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "combat_bridge_v4"
                 else "engine-profile-shipped-probe-v1.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "profile_text_v1"
@@ -557,6 +559,7 @@ def _fresh_reward_profile_required(mode: object) -> bool:
 BENCHMARK_PROFILE_MODES = {
     "profile_text_v1",
     "combat_bridge_v4",
+    "combat_bridge_v5",
 }
 
 
@@ -846,6 +849,7 @@ def _probe_connector_private(
                 in {"reward_bridge_v1", "reward_bridge_v2", "reward_bridge_v3"},
                 profile_text=fixture.get("comparison_mode") == "profile_text_v1",
                 combat_bridge=fixture.get("comparison_mode") == "combat_bridge_v4",
+                combat_discard=fixture.get("comparison_mode") == "combat_bridge_v5",
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -920,6 +924,7 @@ def _evaluate_connector_checkpoint(
     reward_bridge: bool = False,
     profile_text: bool = False,
     combat_bridge: bool = False,
+    combat_discard: bool = False,
 ) -> dict[str, Any]:
     if (
         sum(
@@ -931,6 +936,7 @@ def _evaluate_connector_checkpoint(
                 reward_bridge,
                 profile_text,
                 combat_bridge,
+                combat_discard,
             )
         )
         > 1
@@ -1024,7 +1030,7 @@ def _evaluate_connector_checkpoint(
             "same_public_profile_descriptions",
             "native_current_act_preserved",
         )
-    if combat_bridge:
+    if combat_bridge or combat_discard:
         required += (
             "benchmark_profile_bound_before_launch",
             "native_current_act_preserved",
@@ -1032,6 +1038,11 @@ def _evaluate_connector_checkpoint(
             "combat_all_actions_delivered",
             "combat_effect_signals_verified",
             "combat_fresh_tutorials_preserve_facts",
+        )
+    if combat_discard:
+        required += (
+            "combat_full_potion_action_menu_compared",
+            "combat_exact_slot_discard_effects",
         )
     if fresh_rest_tutorial:
         required += ("fresh_rest_tutorial_dismissed", "fresh_rest_progress_absent_before_launch")

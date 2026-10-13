@@ -30,9 +30,10 @@ Keep all v0.107.1 artifacts and the relational repair unchanged; the older large
 is deferred. The current guide records completed checks and the next qualification work.
 The [current combat-effect checks](docs/actual-engine-combat-effects.md) now agree with the game
 through turn two on two assigned A8 fixtures, after repairing Weak damage descriptions and the
-fresh reshuffle confirmation. One owner-run eight-case repeat panel is prepared. Broader
-mechanics qualification, including the missing shipped combat potion-discard action, still
-precedes full-run throughput and new learning.
+fresh reshuffle confirmation. The owner eight-case repeat panel and independent saved-only audit
+pass. Broader mechanics qualification, including the separately repaired
+[potion-discard scope](docs/actual-engine-combat-potion-discard.md), still precedes full-run
+throughput and new learning.
 
 The repository also contains the research contracts and a seeded mock vertical slice:
 

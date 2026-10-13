@@ -48,22 +48,52 @@ HELPERS = {
 }
 SEEDS = {"SPIRESHIFTPROFILE003": "Stone Humidifier", "SPIRESHIFTPROFILE004": "Winged Boots"}
 SCENARIOS = {"corruption", "temporary-stats"}
+DISCARD_SCENARIOS = {"discard-automatic", "discard-duplicate"}
+DISCARD_HELPERS = (
+    HELPERS
+    - {
+        "engine-combat-bridge-contract-v6.mjs",
+        "engine-combat-shipped-probe-v4.mjs",
+        "verify-engine-combat-saved-v4.mjs",
+    }
+) | {
+    "engine-combat-bridge-contract-v7.mjs",
+    "engine-combat-shipped-probe-v5.mjs",
+    "verify-engine-combat-saved-v5.mjs",
+    "engine-combat-surface-v2.mjs",
+}
+
+
+def combat_scope(document: dict[str, Any]) -> tuple[set[str], set[str], str, str, str]:
+    revision = document.get("bridge_revision", "effects_v1")
+    if revision == "effects_v1":
+        return SCENARIOS, HELPERS, "v6", "combat_bridge_v4", "verify-engine-combat-saved-v4.mjs"
+    if revision == "potion_discard_v1":
+        return (
+            DISCARD_SCENARIOS,
+            DISCARD_HELPERS,
+            "v7",
+            "combat_bridge_v5",
+            "verify-engine-combat-saved-v5.mjs",
+        )
+    raise ValueError("Unknown finite combat comparison revision")
 
 
 def combat_bridge_inputs(
     qualification: EngineQualificationConfig, path: Path
 ) -> tuple[dict[str, Any], Path, dict[str, Any]]:
     document = json.loads(path.read_text())
+    scenarios, helpers, native_revision, _, _ = combat_scope(document)
     if (
         document.get("schema_version") != "engine-combat-bridge-config-v1"
         or document.get("qualification_config_id") != qualification.config_id
         or document.get("training_allowed") is not False
         or document.get("seed") not in SEEDS
-        or document.get("scenario") not in SCENARIOS
-        or set(document.get("helpers_sha256", {})) != HELPERS
+        or document.get("scenario") not in scenarios
+        or set(document.get("helpers_sha256", {})) != helpers
         or any(
             _sha_file(qualification.root / "scripts" / name) != document["helpers_sha256"][name]
-            for name in HELPERS
+            for name in helpers
         )
     ):
         raise ValueError("Expected a pinned, finite two-scenario A8 combat comparison")
@@ -71,7 +101,7 @@ def combat_bridge_inputs(
     native = json.loads(native_path.read_text())
     if (
         manifest_identifier(native) != document["native_config_id"]
-        or native.get("combat_bridge_revision") != "v6"
+        or native.get("combat_bridge_revision") != native_revision
         or native.get("content_policy") != "native_benchmark_full_v1"
         or native.get("seed") != document["seed"]
         or native.get("combat_bridge", {}).get("scenario") != document["scenario"]
@@ -90,9 +120,10 @@ def compare_combat_bridge(
 ) -> dict[str, Any]:
     started = time.monotonic()
     document, native_path, template = combat_bridge_inputs(qualification, path)
+    scenarios, _, _, mode, _ = combat_scope(document)
     seed = case["seed"] if case else document["seed"]
     scenario = case["scenario"] if case else document["scenario"]
-    if seed not in SEEDS or scenario not in SCENARIOS:
+    if seed not in SEEDS or scenario not in scenarios:
         raise ValueError("Unknown frozen combat seed/scenario")
     directory = workspace or _private_path(qualification.root, document["workspace"])
     if directory.exists():
@@ -155,7 +186,7 @@ def compare_combat_bridge(
         )
         fixture = {
             "workspace": str((directory / "shipped").relative_to(qualification.root)),
-            "comparison_mode": "combat_bridge_v4",
+            "comparison_mode": mode,
             "seed": seed,
             "scenario": scenario,
             "combat_report_path": str(directory / "native-report.json"),
@@ -192,13 +223,14 @@ def verify_combat_bridge(
     qualification: EngineQualificationConfig, path: Path, directory: Path, *, node: Path
 ) -> dict[str, Any]:
     document, _, template = combat_bridge_inputs(qualification, path)
+    scenarios, _, _, _, verifier = combat_scope(document)
     effective = json.loads((directory / "native-recipe.json").read_text())
     native = _hashed(directory / "native-report.json")
     if (
         native.get("config_id") != manifest_identifier(effective)
         or native.get("status") != "combat_bridge_public_projection_regression_pass"
         or effective.get("seed") not in SEEDS
-        or effective.get("combat_bridge", {}).get("scenario") not in SCENARIOS
+        or effective.get("combat_bridge", {}).get("scenario") not in scenarios
         or effective
         != {
             **template,
@@ -253,7 +285,7 @@ def verify_combat_bridge(
     }:
         raise ValueError("Shipped combat benchmark profile was not bound before launch")
     process = subprocess.run(
-        [str(node), str(qualification.root / "scripts/verify-engine-combat-saved-v4.mjs")],
+        [str(node), str(qualification.root / "scripts" / verifier)],
         input=json.dumps(
             {
                 "native": str(directory / "native-report.json"),
@@ -278,7 +310,10 @@ def verify_combat_bridge(
     return result
 
 
-def validate_combat_cases(document: dict[str, Any]) -> list[dict[str, str]]:
+def validate_combat_cases(
+    document: dict[str, Any], *, scenarios: set[str] | None = None
+) -> list[dict[str, str]]:
+    scenarios = SCENARIOS if scenarios is None else scenarios
     cases = document.get("cases", [])
     counts: dict[tuple[str, str], int] = {}
     if not isinstance(cases, list) or len(cases) != 8:
@@ -290,7 +325,7 @@ def validate_combat_cases(document: dict[str, Any]) -> list[dict[str, str]]:
             or not isinstance(case["seed"], str)
             or case["seed"] not in SEEDS
             or not isinstance(case["scenario"], str)
-            or case["scenario"] not in SCENARIOS
+            or case["scenario"] not in scenarios
             or not isinstance(case["case_id"], str)
             or not case["case_id"].replace("-", "").isalnum()
         ):
@@ -298,7 +333,7 @@ def validate_combat_cases(document: dict[str, Any]) -> list[dict[str, str]]:
         pair = (case["seed"], case["scenario"])
         counts[pair] = counts.get(pair, 0) + 1
     if len({row["case_id"] for row in cases}) != 8 or counts != {
-        (seed, scene): 2 for seed in SEEDS for scene in SCENARIOS
+        (seed, scene): 2 for seed in SEEDS for scene in scenarios
     }:
         raise ValueError("Every combat seed/scenario must repeat exactly twice")
     return list(cases)
@@ -317,12 +352,13 @@ def _combat_batch(
     ):
         raise ValueError("Expected the separate owner combat-effects panel")
     template = qualification.root / document["template"]
-    _, _, _ = combat_bridge_inputs(qualification, template)
+    bridge, _, _ = combat_bridge_inputs(qualification, template)
+    scenarios, _, _, _, _ = combat_scope(bridge)
     if manifest_identifier(json.loads(template.read_text())) != document["template_id"]:
         raise ValueError("Combat panel template changed")
     return (
         document,
-        validate_combat_cases(document),
+        validate_combat_cases(document, scenarios=scenarios),
         template,
         _private_path(qualification.root, document["workspace"]),
     )
@@ -352,7 +388,10 @@ def preflight_combat_bridges(
         != build_config["local_patch_sha256"]
         or _sha_file(qualification.root / "scripts/engine-cli-local-build.mjs")
         != build_config["helper_sha256"]
-        or _sha_file(qualification.root / "scripts/probe-engine-cli-combat-bridge-v6.mjs")
+        or _sha_file(
+            qualification.root
+            / f"scripts/probe-engine-cli-combat-bridge-{native['combat_bridge_revision']}.mjs"
+        )
         != native["helper_sha256"]
     ):
         raise ValueError("Combat candidate, build or native helper changed")
@@ -414,6 +453,7 @@ def compare_combat_bridges(
 ) -> dict[str, Any]:
     started = time.monotonic()
     document, cases, template, workspace = _combat_batch(qualification, path)
+    bridge, _, _ = combat_bridge_inputs(qualification, template)
     preflight = preflight_combat_bridges(qualification, path, node=node)
     workspace.mkdir(parents=True)
     result: dict[str, Any] = {
@@ -434,7 +474,9 @@ def compare_combat_bridges(
         "optimizer_steps": 0,
         "training_allowed": False,
         "shipped_cross_host_parity": False,
-        "claim_scope": "repeated_privileged_two_scenario_second_turn_public_combat_effects_only",
+        "claim_scope": "repeated_privileged_two_scenario_exact_slot_combat_potion_discard_only"
+        if bridge.get("bridge_revision") == "potion_discard_v1"
+        else "repeated_privileged_two_scenario_second_turn_public_combat_effects_only",
     }
     atomic_json(workspace / "in-progress.json", result)
     active = False

@@ -193,10 +193,17 @@ def _probe_cli_document(
         }
         if (
             not projected
-            or combat_revision != "v6"
+            or combat_revision not in {"v6", "v7"}
+            or combat_revision == "v7"
+            and document.get("combat_surface_revision") != "v2"
             or document.get("content_policy") != "native_benchmark_full_v1"
             or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
-            or plan.get("scenario") not in {"corruption", "temporary-stats"}
+            or plan.get("scenario")
+            not in (
+                {"discard-automatic", "discard-duplicate"}
+                if combat_revision == "v7"
+                else {"corruption", "temporary-stats"}
+            )
             or plan.get("max_actions") != 20
             or plan.get("starting_option") not in {"Stone Humidifier", "Winged Boots"}
             or set(document.get("bridge_helpers_sha256", {})) != names
@@ -609,6 +616,12 @@ def verify_projection_inputs(
     qualification: EngineQualificationConfig, document: dict[str, Any]
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Bind the exact MIT hook, public surface helper and installed SDK without downloads."""
+    if "combat_surface_revision" in document and (
+        document.get("combat_surface_revision") != "v2"
+        or document.get("combat_bridge_revision") != "v7"
+        or document.get("schema_version") != "engine-cli-combat_bridge-projection-config-v1"
+    ):
+        raise ValueError("Explicit potion-slot projection is restricted to its new bridge revision")
     pins = document["projection"]
     headless = next(
         item for item in qualification.document["sources"] if item["name"] == "headless"
@@ -634,7 +647,14 @@ def verify_projection_inputs(
     if revision in {"selection_shop_v2", "selection_shop_v3", "combat_v4", "bundle_v5"}:
         helpers.extend(["engine-selection-shop-surface.mjs", "probe-engine-cli-shop.mjs"])
         if revision in {"combat_v4", "bundle_v5"}:
-            helpers.extend(["engine-combat-surface.mjs", "probe-engine-cli-combat.mjs"])
+            helpers.extend(
+                [
+                    "engine-combat-surface-v2.mjs"
+                    if document.get("combat_surface_revision") == "v2"
+                    else "engine-combat-surface.mjs",
+                    "probe-engine-cli-combat.mjs",
+                ]
+            )
         if revision == "bundle_v5":
             helpers.extend(
                 [

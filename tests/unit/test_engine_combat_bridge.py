@@ -156,6 +156,7 @@ def test_combat_batch_stops_on_first_failure_and_keeps_full_denominator(
         lambda *a: ({"max_wall_seconds": 900}, cases, tmp_path / "recipe", tmp_path / "batch"),
     )
     monkeypatch.setattr(bridge, "preflight_combat_bridges", lambda *a, **k: {})
+    monkeypatch.setattr(bridge, "combat_bridge_inputs", lambda *a: ({}, tmp_path / "recipe", {}))
     calls = []
 
     def fail(*a: Any, **k: Any) -> dict[str, str]:
@@ -172,3 +173,42 @@ def test_combat_batch_stops_on_first_failure_and_keeps_full_denominator(
     assert result["not_attempted_cases"] == 7
     assert result["status"] == "combat_comparisons_incomplete"
     assert not (tmp_path / "batch/in-progress.json").exists()
+
+
+@pytest.mark.parametrize(
+    "missing", ["combat_full_potion_action_menu_compared", "combat_exact_slot_discard_effects"]
+)
+def test_discard_verdict_requires_full_menu_and_exact_slot_effect(missing: str) -> None:
+    required = _evaluate_connector_checkpoint({}, combat_discard=True)["errors"]
+    checks = {key: True for key in required}
+    assert (
+        _evaluate_connector_checkpoint(checks, combat_discard=True)["status"]
+        == "shipped_checkpoint_input_pass"
+    )
+    checks[missing] = False
+    assert missing in _evaluate_connector_checkpoint(checks, combat_discard=True)["errors"]
+
+
+def test_discard_scope_cannot_inherit_the_old_filtered_combat_scope() -> None:
+    with pytest.raises(ValueError):
+        _evaluate_connector_checkpoint({}, combat_discard=True, combat_bridge=True)
+    _validate_benchmark_fixture_scope(
+        {"comparison_mode": "combat_bridge_v5", "benchmark_progress": "progress"}
+    )
+
+
+def test_discard_panel_requires_both_new_scenarios_without_replacing_old_recipes() -> None:
+    from spireshift.engine_combat_bridge import DISCARD_SCENARIOS, combat_scope
+
+    document = panel()
+    for row in document["cases"]:
+        row["scenario"] = (
+            "discard-automatic" if row["scenario"] == "corruption" else "discard-duplicate"
+        )
+    assert len(validate_combat_cases(document, scenarios=DISCARD_SCENARIOS)) == 8
+    with pytest.raises(ValueError):
+        validate_combat_cases(document)
+    assert combat_scope({})[2:4] == ("v6", "combat_bridge_v4")
+    assert combat_scope({"bridge_revision": "potion_discard_v1"})[2:4] == ("v7", "combat_bridge_v5")
+    with pytest.raises(ValueError):
+        combat_scope({"bridge_revision": "unknown"})

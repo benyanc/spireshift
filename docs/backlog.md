@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-12 after v15 combat-effect short comparisons and saved audits passed.
+Updated 2026-10-12 after the owner combat-effect repeat panel passed.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
@@ -31,23 +31,35 @@ only. [Completed panel evidence](evidence/actual-engine-v0.111.0-profile-panel-v
 counts, identities, storage scope and remaining gaps; the
 [implementation evidence](evidence/actual-engine-v0.111.0-profile-descriptions-v13.json) stays unchanged.
 
-**Current handoff:** two v15/current-Host combat-effect comparisons and saved audits pass.
-Corruption's zero-cost skills/exhaust, Strength/Dexterity ownership and expiry, potion consumption,
-Pen Nib's counter and the second turn agree with the game. Comparing them exposed and repaired
-Weak damage descriptions and a missing fresh reshuffle confirmation. The current wrapper passes
-841 subchecks across 28 native combat/rest/shop fixtures; 1,209 repository tests pass. Both short
-cases reuse the shared app/inode, zero new copies and verified resets. These assigned fixtures
-are not full-run learning data or evidence of a strong player.
+**Completed combat stage:** all eight owner comparisons and an independent saved-only audit
+pass, zero failed or unattempted cases. Two independent seeds × both fixtures × two repeats have
+identical public prefixes. The audit verifies 72 observations, 64 effect decisions, 104 game/UI
+actions, 24 combat tutorial pages and eight reshuffle confirmations. Corruption cost/exhaust,
+Strength/Dexterity expiry, potion consumption, Pen Nib and the second turn agree in this scope.
 
-**Next owner task:** run only `bash scripts/compare-combat-effects-v1.sh` (6–9 minutes, 15-minute
-cap). The prepared eight cases cover two seeds, both fixtures, each twice; first difference stops,
-all planned cases stay in the denominator, and only a saved audit follows success. The batch has
-not been launched. [Implementation guide](actual-engine-combat-effects.md) and
-[evidence](evidence/actual-engine-v0.111.0-combat-effects-v1.json) record exact scope and identities.
-**Known actionable gap:** native combat potion discard is missing from the shipped Host. It is
-explicitly excluded from this finite comparison; implement and qualify it before general training.
+Resource wall/CPU is **404.901/182.310 seconds**, peak memory **945,356,800 bytes**, with no cap hit.
+One app/inode, eight fresh profiles and **zero new copies** have verified reset receipts. Evidence
+retains 71,543,111 logical bytes of case records and 1,461,424 bytes of external profiles; tracked
+storage includes the one shared app. **This stage is complete; no rerun is needed.** Its helper only
+displays/audits saved results on repeat invocation. These assigned fixtures are not training data
+or player-strength evidence. [Completed panel evidence](evidence/actual-engine-v0.111.0-combat-panel-v1.json)
+preserves all counts/identities; the earlier short-check evidence remains unchanged.
 
-**After the repeat panel under #145:** broader current-wrapper/Host mechanics and complete public
+**Current implementation under #145:** exact-slot combat potion discard is implemented in
+separately identified Host v9 and passes two short native/shipped checks plus saved audits.
+An automatic potion is discardable without a manual-use choice; two identical Strength Potions
+retain distinct slots. Discarding one leaves the other unchanged, and using the second gives
+exactly one Strength bonus. The new menu compares all offered play/use/discard/end-turn choices.
+Seven Host checks, five identity/menu tests and 1,213 repository tests pass. The original game DLL,
+older recipes and completed eight-case audit remain unchanged.
+
+**Next owner task:** run only `bash scripts/compare-combat-potion-discard-v1.sh` (6–9 minutes,
+15-minute cap). The eight cases cover two seeds and both fixtures, each twice, using one shared
+app with fresh profiles. First mismatch stops; only a saved audit follows success. Preflight
+passes, but this new repeat panel has not been launched. [Guide](actual-engine-combat-potion-discard.md)
+and [evidence](evidence/actual-engine-v0.111.0-combat-discard-v1.json) preserve its scope and identities.
+
+**Further work under #145:** broader current-wrapper/Host mechanics and complete public
 facts: transient costs/effects/relic counters, mandatory/optional/nested selectors, consequential
 mode references, shipped new-run initialization, later-act advancement and actual terminal
 endings. Initial checkpoint inspection does not test the shipped lobby or act progression.
@@ -311,7 +323,7 @@ saved data. Two runner regressions cover this mismatch without game launches. No
 [Completed panel evidence](evidence/actual-engine-v0.111.0-reward-panel-v8.json) records the scope.
 
 The v13 profile/text package above implements the pending contract and exporter repair.
-Its owner repeat panel is complete. The new combat-effects repeat panel above is pending; then
+Its owner repeat panel is complete. The combat-effects repeat panel above is also complete; then
 continue the remaining mode reviews alongside encountered mechanics coverage. Broader rest/relic options,
 full public effects and remaining decision coverage follow. Remaining work includes
 remaining modifier/expiry/relic-counter interactions beyond the two assigned turn-two fixtures,
@@ -524,7 +536,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; v15 combat-effect short checks pass; owner repeat panel prepared | Owner runs the eight-case combat-effects panel. Then repair missing combat potion discard and continue current-Host/mode/mechanics/public-state/later-act/ending coverage. Completed profile/bundle/reward panels need no rerun. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; repeated combat effects pass; discard short checks pass; owner repeats prepared | Owner runs the eight-case potion-discard panel, then continue current-Host/mode/mechanics/public-state/later-act/ending coverage. Completed profile/bundle/reward panels need no rerun. Existing shipped panels retain their finite scope. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After mechanics qualification | Benchmark actual-engine full-run speed/failures at one and bounded parallel workers, integrate a new public engine/encoder/experience lineage with existing neural/PPO machinery, and prepare a finite owner A8 learning pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

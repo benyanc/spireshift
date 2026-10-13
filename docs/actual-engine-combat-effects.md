@@ -51,31 +51,31 @@ are retained with an exact path/hash index under private artifacts; qualified he
 stay in the repository. [Evidence](evidence/actual-engine-v0.111.0-combat-effects-v1.json) records
 all current identities, successful checks, rejected attempts and limits.
 
-## One next owner command
+## Completed owner repeat panel
 
-Close STS2, then run from the repository:
+The owner completed all eight planned cases: zero failures or unattempted cases, with identical
+public prefixes for each repeat. Two independent seeds and both assigned fixtures were each
+tested twice. Independent saved-only reconstruction exactly reproduces the recorded audit:
+**72 observations, 64 effect decisions, 104 game/UI actions, 24 combat tutorial pages and eight
+reshuffle confirmations**, with no games launched by the audit.
 
-```bash
-bash scripts/compare-combat-effects-v1.sh
-```
+Resource wall time is **404.901 seconds** (6 minutes 45 seconds), CPU **182.310 seconds** and peak
+memory **945,356,800 bytes**; no cap was hit. Eight distinct profiles reuse one app/inode with
+zero new app copies and verified resets. Case evidence occupies 71,543,111 logical bytes and
+external private profiles 1,461,424 bytes; final tracked storage includes the one existing app.
+Logical APFS sizes do not measure independently allocated blocks.
 
-Expected duration is **6–9 minutes**, based on the short cases, with a 15-minute elapsed cap,
-1,800 CPU seconds, 8 GB memory and 6 GB tracked files including the shared app pool. Read-only
-preflight checks the native build, runtime, localization, SDK, Host, benchmark policy and idle
-worker before allocating the batch workspace. Eight cases test two independent seeds and both
-fixtures, each twice. All run serially on the one shared app, with a fresh profile per case.
-
-Each case reports progress. The first disagreement stops the batch and keeps failed evidence;
-missing cases remain in the denominator. Repeated public facts/action semantics must match.
-Success is followed only by saved-result verification. Reinvoking a completed batch displays
-and audits it without playing again; an incomplete attempt is preserved and requires inspection.
-No full run, training, adaptive controller or next experiment follows automatically.
+The stage is complete and needs no rerun. `scripts/compare-combat-effects-v1.sh` displays and
+audits the saved result without game replay. [Completed panel evidence](evidence/actual-engine-v0.111.0-combat-panel-v1.json)
+records its identities and limits. The original implementation evidence retains its then-pending
+owner panel. No full run or training followed.
 
 ## Remaining limits
 
-Native combat exposes potion discard while the shipped Host currently omits it. This comparison
+The Host used in this completed panel omits combat potion discard. This comparison
 explicitly excludes discard from its effect menu; it does **not** establish complete combat-action
-parity. Fix and test that gap under #145 before general training admission. Other selectors,
+parity. A separate [exact-slot discard package](actual-engine-combat-potion-discard.md) now passes short checks;
+its repeat panel is pending before general training admission. Other selectors,
 remaining modes, later acts, actual endings and startup through the shipped new-run lobby still
 need qualification. Historical panels do not automatically qualify a changed Host binary.
 Original headless diagnostics are preserved; a passing scoped result is not a clean-runtime claim.
