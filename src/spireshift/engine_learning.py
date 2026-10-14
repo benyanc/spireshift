@@ -60,6 +60,8 @@ IMPLEMENTATION = (
     "training_objective.py",
 )
 
+FAILURE_POLICY = "record_retire_continue_v1"
+
 
 def implementation_files(root: Path) -> dict[str, str]:
     return {name: _sha_file(root / "src/spireshift" / name) for name in IMPLEMENTATION}
@@ -158,6 +160,13 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         if len(set(selected)) != len(selected) or not set(selected) <= groups[owner]:
             raise ValueError("Native learning crosses complete-run seed ownership")
     network, ppo = d["network"], d["learning"]["ppo"]
+    if d.get("failure_policy") != {
+        "id": FAILURE_POLICY,
+        "maximum_failed_games_per_panel": 0 if d["stage"] == "short_learning_control" else 2,
+        "retry_failed_seeds": False,
+        "train_on_failed_games": False,
+    }:
+        raise ValueError("Native learning must declare its bounded per-game failure policy")
     initial_actor(
         environment["manifest_id"], network["dimension"], network["hidden_units"], network["seed"]
     )
@@ -233,6 +242,17 @@ def summarize(cases: list[dict[str, Any]], denominator: int) -> dict[str, Any]:
         "best_victory": best["victory"] if best else False,
         "decisions": sum(len(c["decisions"]) for c in cases),
         "cpu_seconds": sum(c["cpu_seconds"] for c in cases),
+        "failed_cases": [
+            {
+                "seed": c["seed"],
+                "error": c.get("error", "Outcome outside admitted budget"),
+                "maximum_floor": c["maximum_floor"],
+                "worker_workspace": c.get("worker_workspace"),
+                "excluded_from_training": True,
+            }
+            for c in cases
+            if c["status"] != "terminal"
+        ],
     }
 
 
@@ -291,13 +311,24 @@ def run_neural_experiment(
         def worker_batch(index: int) -> list[dict[str, Any]]:
             worker: EngineWorker | None = None
             batch: list[dict[str, Any]] = []
+            segment: list[dict[str, Any]] = []
+            generation = 0
+
+            def audit_segment() -> None:
+                assert worker is not None
+                audit = audit_worker_experience(worker.workspace, segment)
+                atomic_json(worker.workspace / "experience-audit.json", audit)
+
             try:
-                worker = EngineWorker(
-                    q, inputs, panel / f"worker-{index}", node, d["helpers_sha256"]
-                )
                 for seed_id in ids[index :: d["workers"]]:
                     if time.monotonic() >= deadline:
                         raise TimeoutError("Native experiment wall cap")
+                    if worker is None:
+                        name = f"worker-{index}"
+                        if generation:
+                            name += f"-generation-{generation}"
+                        worker = EngineWorker(q, inputs, panel / name, node, d["helpers_sha256"])
+                        segment = []
                     seed = by_id[seed_id]
                     sampling_seed = int.from_bytes(
                         hashlib.sha256(
@@ -315,6 +346,12 @@ def run_neural_experiment(
                             predict, actor, rng=rng, temperature=learning["ppo"]["temperature"]
                         ),
                     )
+                    case["worker_workspace"] = str(worker.workspace.relative_to(output))
+                    if score_episode(case, seed_id, score)["completed"] is not True:
+                        case.update(
+                            status="failed",
+                            error=case.get("error", "Outcome outside admitted budget"),
+                        )
                     binding = {
                         "environment_id": d["environment_manifest"]["id"],
                         "config_id": manifest_identifier(d),
@@ -332,15 +369,23 @@ def run_neural_experiment(
                     save_native_episode(saved_path, case, binding)
                     saved = read_native_episode(saved_path, binding)
                     saved["score"] = score_episode(saved, seed_id, score)
-                    if saved["score"]["completed"] is not True:
-                        saved["status"] = "failed"
                     batch.append(saved)
+                    segment.append(saved)
                     if saved["status"] != "terminal":
-                        break
-                if not worker.closed:
+                        error = saved.get("error", "Outcome outside admitted budget")
+                        worker.retire(error)
+                        audit_segment()
+                        print(
+                            f"{label}: seed {seed_id} failed at floor {saved['maximum_floor']}: "
+                            f"{error}. Preserved and excluded from training; "
+                            "next planned seed follows.",
+                            flush=True,
+                        )
+                        worker = None
+                        generation += 1
+                if worker is not None and not worker.closed:
                     worker.close()
-                    audit = audit_worker_experience(worker.workspace, batch)
-                    atomic_json(worker.workspace / "experience-audit.json", audit)
+                    audit_segment()
                 return batch
             except (ValueError, TimeoutError, OSError, subprocess.TimeoutExpired) as exc:
                 atomic_json(
@@ -361,6 +406,7 @@ def run_neural_experiment(
         summary["panel"] = label
         summary["model_id"] = actor.model_id
         summary["worker_failures"] = len(list(panel.glob("worker-*-failure.json")))
+        summary["retired_workers"] = len(list(panel.glob("worker-*/retired.json")))
         panels.append(summary)
         atomic_json(panel / "summary.json", summary)
         print(
@@ -370,20 +416,21 @@ def run_neural_experiment(
             f"failures/missing {summary['failed_games'] + summary['not_attempted_games']}.",
             flush=True,
         )
-        if summary["failed_games"] or summary["not_attempted_games"] or summary["worker_failures"]:
-            raise ValueError(
-                "Native panel has a failed/capped/missing game; training stops without replacement"
-            )
+        if summary["not_attempted_games"] or summary["worker_failures"]:
+            raise ValueError("Native panel has missing games or an unauditable worker")
+        if summary["failed_games"] > d["failure_policy"]["maximum_failed_games_per_panel"]:
+            raise ValueError("Native panel exceeded its declared failed-game allowance")
         return results
 
-    def rank(cases: list[dict[str, Any]]) -> tuple[float, float]:
+    def rank(cases: list[dict[str, Any]]) -> tuple[float, float, float]:
         return (
-            sum(c["victory"] for c in cases) / len(cases),
+            sum(c["victory"] for c in cases if c["status"] == "terminal") / len(cases),
             sum(c["score"]["auxiliary_progress_return"] for c in cases) / len(cases),
+            sum(c["status"] == "terminal" for c in cases) / len(cases),
         )
 
     try:
-        selection_rank = (-1.0, -1.0)
+        selection_rank = (-1.0, -1.0, -1.0)
         if d["stage"] == "bounded_policy_only_pilot":
             selection_rank = rank(
                 collect("initial-confirmation", learning["confirmation_seeds"], initial, False)
@@ -392,6 +439,8 @@ def run_neural_experiment(
             cases = collect(f"round-{index:03}-sampled", ids, model, True)
             samples = []
             for case in cases:
+                if case["status"] != "terminal":
+                    continue
                 samples.extend(
                     verified_native_samples(
                         case,
@@ -412,6 +461,8 @@ def run_neural_experiment(
                 raise ValueError("Short native update did not change finite model parameters")
             update = {
                 "round": index,
+                "completed_training_games": sum(c["status"] == "terminal" for c in cases),
+                "excluded_failed_training_games": sum(c["status"] != "terminal" for c in cases),
                 "behavior_model_id": previous.model_id,
                 "updated_model_id": model.model_id,
                 "actor_l2_change": math.sqrt(
@@ -479,7 +530,11 @@ def run_neural_experiment(
         "status": (
             "short_learning_control_pass"
             if d["stage"] == "short_learning_control"
-            else "bounded_pilot_complete"
+            else (
+                "bounded_pilot_complete_with_failures"
+                if any(p["failed_games"] for p in panels)
+                else "bounded_pilot_complete"
+            )
         )
         if failure is None
         else "stopped_incomplete",
@@ -496,6 +551,8 @@ def run_neural_experiment(
         "completed_games": sum(p["completed_games"] for p in panels),
         "failed_games": sum(p["failed_games"] for p in panels),
         "worker_failures": sum(p["worker_failures"] for p in panels),
+        "retired_workers": sum(p["retired_workers"] for p in panels),
+        "failure_policy": d["failure_policy"],
         "not_attempted_games": (4 if d["stage"] == "short_learning_control" else 336) - game_count,
         "sampled_decisions_verified": sample_count,
         "optimizer_steps": optimizer.steps,

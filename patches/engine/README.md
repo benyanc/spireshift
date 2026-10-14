@@ -502,3 +502,21 @@ original batch statuses stay preserved; a new saved-only audit fixes JSON key-or
 comparison without replaying the already successful final sequence.
 
 See [scoped evidence](../../docs/evidence/actual-engine-v0.111.0-progression-v1.json).
+
+## Dense Vegetation and native decision boundaries (host v27)
+
+`sts2-cli-v0.111.0-native-run-v27.patch` extends v24. A narrow, signature/count-checked
+transpiler replaces only four sound/camera calls in Dense Vegetation Rest's native async body.
+Healing, option transitions, the Fight action and combat/RNG remain native. Failed event options
+return their actual exception instead of exporting an unchanged menu after partial execution.
+The game rules assembly stays byte-for-byte unchanged. The v25 development prototype failed
+startup because one sound-stop signature omitted its fade-time argument; its source/builds and
+failed regression are privately preserved, and no learning is admitted on that prototype.
+
+The host additionally awaits the native next player turn after End Turn.
+EndPlayerTurnAction only marks readiness; an empty action queue does not mean the
+async enemy turn has finished. Wait for the native turn-number advance/play phase, a pending
+selection or a genuine ending, with a five-second cap. DetectDecisionPoint also awaits a real
+combat decision and raises a timeout instead of exporting an intermediate enemy phase.
+The original failing seed completes to a floor-7 loss on this host; v26's full-seed enemy-phase
+failure remains preserved. No enemy actions, outcomes, turn counters or rules are fabricated.

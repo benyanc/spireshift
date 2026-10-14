@@ -112,6 +112,7 @@ def build_cli_candidate(
             "spireshift_cli_native_run_v22_local_toolchain",
             "spireshift_cli_native_run_v23_local_toolchain",
             "spireshift_cli_native_run_v24_local_toolchain",
+            "spireshift_cli_native_run_v27_local_toolchain",
         }:
             raise ValueError("Repaired CLI requires its distinct local build lineage")
         patch_relative = Path(document.get("local_patch", ""))

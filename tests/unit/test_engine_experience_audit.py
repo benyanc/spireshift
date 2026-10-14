@@ -146,3 +146,60 @@ def test_interrupted_worker_marker_blocks_experience_admission(tmp_path: Path) -
     (tmp_path / "active.json").write_text("{}")
     with pytest.raises(ValueError, match="cleanly"):
         audit_worker_experience(tmp_path, cases)
+
+
+def retired_fixture(path: Path) -> list[dict[str, Any]]:
+    cases = fixture(path)
+    (path / "closed.json").unlink()
+    (path / "active.json").write_text("{}")
+    (path / "native-process-stop.json").write_text(
+        json.dumps({"process_id": 123, "exit": {"code": None, "signal": "SIGTERM"}})
+    )
+    (path / "retired.json").write_text(
+        json.dumps(
+            {
+                "schema_version": "actual-engine-worker-retirement-v1",
+                "controller_process_stopped": True,
+                "native_process_stopped": True,
+                "native_process_id": 123,
+                "workspace_reusable": False,
+                "failed_seed_retried": False,
+            }
+        )
+    )
+    # A mount can fail before exporting any new observation or start response.
+    # The prior game's complete delivery and ending chain remains independently auditable.
+    cases.append({"status": "failed", "seed": "NEXTSEED", "decisions": [{"unknown": True}]})
+    return cases
+
+
+def test_retired_worker_keeps_verified_prefix_and_excludes_partial_last_game(
+    tmp_path: Path,
+) -> None:
+    result = audit_worker_experience(tmp_path, retired_fixture(tmp_path))
+    assert result["valid"] and result["games"] == result["decisions"] == 1
+    assert result["excluded_failed_games"] == 1 and result["worker_retired"]
+    assert (tmp_path / "active.json").exists()
+    assert "retired.json" in result["source_sha256"]
+
+
+@pytest.mark.parametrize("change", ["live", "wrong_process", "reuse", "middle_failure", "corrupt"])
+def test_retired_prefix_requires_shutdown_and_unaltered_completed_game(
+    tmp_path: Path, change: str
+) -> None:
+    cases = retired_fixture(tmp_path)
+    p = tmp_path / "retired.json"
+    d = json.loads(p.read_text())
+    if change == "live":
+        d["native_process_stopped"] = False
+    elif change == "wrong_process":
+        d["native_process_id"] = 456
+    elif change == "reuse":
+        d["workspace_reusable"] = True
+    elif change == "middle_failure":
+        cases.reverse()
+    else:
+        cases[0]["decisions"][0]["choice"]["action_index"] = 1
+    p.write_text(json.dumps(d))
+    with pytest.raises(ValueError):
+        audit_worker_experience(tmp_path, cases)

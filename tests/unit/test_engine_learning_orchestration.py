@@ -31,8 +31,9 @@ def test_progress_best_game_is_one_real_game_and_prioritizes_a_full_win() -> Non
     assert (summary["best_floor"], summary["best_completed_acts"]) == (52, 3)
 
 
-def test_pilot_freezes_selection_before_independent_development(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+@pytest.mark.parametrize("fault", ["none", "confirmation", "training", "widespread", "retirement"])
+def test_pilot_freezes_selection_and_isolates_failed_games(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fault: str
 ) -> None:
     # This is an orchestration fixture, never environment qualification or playing evidence.
     score_path = Path(
@@ -57,6 +58,12 @@ def test_pilot_freezes_selection_before_independent_development(
         "maximum_decisions": 10,
         "episode_wall_seconds": 60,
         "workers": 2,
+        "failure_policy": {
+            "id": learning.FAILURE_POLICY,
+            "maximum_failed_games_per_panel": 2,
+            "retry_failed_seeds": False,
+            "train_on_failed_games": False,
+        },
         "learning": {
             "rollout_panels": [list(range(i * 32 + 1, (i + 1) * 32 + 1)) for i in range(8)],
             "confirmation_seeds": list(range(501, 517)),
@@ -96,8 +103,18 @@ def test_pilot_freezes_selection_before_independent_development(
                 assert (root / "selection-freeze.json").is_file()
                 assert (root / "selected-checkpoint.json").is_file()
             visible = public()
+            failed = (
+                fault == "confirmation"
+                and seed == "CNF502"
+                or fault in {"training", "retirement"}
+                and seed == "TRN2"
+                or fault == "widespread"
+                and seed in {"TRN2", "TRN4", "TRN6"}
+            )
+            self.closed = failed
             return {
-                "status": "terminal",
+                "status": "failed" if failed else "terminal",
+                **({"error": "synthetic stuck game"} if failed else {}),
                 "seed": seed,
                 "victory": False,
                 "privileged_fixture": False,
@@ -121,6 +138,11 @@ def test_pilot_freezes_selection_before_independent_development(
         def stop(self) -> None:
             self.closed = True
 
+        def retire(self, reason: str) -> None:
+            if fault == "retirement":
+                raise ValueError("synthetic shutdown could not be verified")
+            (self.workspace / "retired.json").write_text(json.dumps({"reason": reason}))
+
     monkeypatch.setattr(learning, "_require_native_launch_support", lambda: None)
     monkeypatch.setattr(learning, "_running_games", lambda: [])
     monkeypatch.setattr(learning, "load_learning_config", lambda *a: cfg)
@@ -134,10 +156,29 @@ def test_pilot_freezes_selection_before_independent_development(
     monkeypatch.setattr(learning, "audit_worker_experience", lambda *a: {"synthetic_only": True})
     monkeypatch.setattr(learning, "EngineWorker", Worker)
     result = learning.run_neural_experiment(q, tmp_path / "unused.json", node=score_path)
-    assert result["status"] == "bounded_pilot_complete"
+    training_seeds = [seed for seed in launched if seed.startswith("TRN")]
+    assert len(training_seeds) == len(set(training_seeds))
+    if fault in {"widespread", "retirement"}:
+        assert result["status"] == "stopped_incomplete"
+        assert result["optimizer_steps"] == 0 and result["rounds"] == []
+        assert not any(seed.startswith("DEV") for seed in launched)
+        if fault == "widespread":
+            assert "allowance" in result["error"]
+        else:
+            assert result["worker_failures"]
+        return
+    expected_failures = {"none": 0, "confirmation": 3, "training": 1}[fault]
+    assert result["status"] == (
+        "bounded_pilot_complete_with_failures" if expected_failures else "bounded_pilot_complete"
+    )
     assert result["planned_games"] == result["recorded_games"] == len(launched) == 336
-    assert result["sampled_decisions_verified"] == 256
-    assert result["completed_games"] == 336 and result["failed_games"] == 0
+    assert result["sampled_decisions_verified"] == (255 if fault == "training" else 256)
+    assert result["completed_games"] == 336 - expected_failures
+    assert result["failed_games"] == result["retired_workers"] == expected_failures
+    assert result["not_attempted_games"] == 0
+    assert result["rounds"][0]["excluded_failed_training_games"] == int(fault == "training")
+    if fault == "training":
+        assert (root / "round-001-sampled/worker-1-generation-1").is_dir()
     assert len(result["rounds"]) == 8 and result["adaptive_controller_allowed"] is False
     freeze = json.loads((root / "selection-freeze.json").read_text())
     assert freeze["development_opened"] is False

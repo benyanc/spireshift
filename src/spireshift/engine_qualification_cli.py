@@ -374,7 +374,12 @@ def run_engine_command(args: argparse.Namespace) -> int:
             result = run_neural_experiment(config, args.learning_config, node=args.node)
             code = (
                 0
-                if result["status"] in {"short_learning_control_pass", "bounded_pilot_complete"}
+                if result["status"]
+                in {
+                    "short_learning_control_pass",
+                    "bounded_pilot_complete",
+                    "bounded_pilot_complete_with_failures",
+                }
                 else 1
             )
         elif args.engine_command == "preflight-native-learning":

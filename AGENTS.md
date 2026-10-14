@@ -53,6 +53,13 @@ that game. Recovered/incomplete runs never count as clean admission or ordinary 
 uncertain delivery is not resubmitted. Preserve old failures, and keep optional Skip/leave actions
 selectable without inventing permissions for mandatory choices.
 
+On 2026-10-14 the owner authorized isolated failed-game continuation in the native learning pilot.
+Retire and prove shutdown of the affected worker, preserve its marker/logs and audit any earlier
+clean episodes before starting a fresh worker for the next planned seed. Never retry the failed
+seed, reset an uncertain process or train on its partial episode. Count failures in the original
+evaluation denominator. The pilot allows at most two failed games per panel; evidence corruption,
+unverified shutdown, missing games or failures beyond that allowance still stop learning.
+
 The next v0.111.0 startup contract is explicitly `native_benchmark_full_v1`: native full content,
 all native acts discovered, Ironclad/A8, the shipped lobby's seeded random act selection and
 enabled tutorials with no completed entries. It uses synthetic isolated benchmark progress,

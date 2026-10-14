@@ -1,4 +1,4 @@
-"""Saved-only public choice/delivery audit for a cleanly closed native worker."""
+"""Audit clean episodes, including the verified prefix of an explicitly retired worker."""
 
 from __future__ import annotations
 
@@ -14,12 +14,42 @@ from spireshift.engine_run import _verify_saved_observation
 
 def audit_worker_experience(workspace: Path, cases: list[dict[str, Any]]) -> dict[str, Any]:
     def records(name: str) -> list[dict[str, Any]]:
+        if not (workspace / name).exists():
+            return []
         with gzip.open(workspace / name, "rt") as stream:
             return [json.loads(line) for line in stream]
 
-    closed = json.loads((workspace / "closed.json").read_text())
-    if closed.get("clean_exit") is not True or (workspace / "active.json").exists():
-        raise ValueError("Native experience worker did not finish cleanly")
+    excluded = [c for c in cases if c["status"] != "terminal"]
+    complete = [c for c in cases if c["status"] == "terminal"]
+    retired = workspace / "retired.json"
+    closure = "closed.json"
+    if retired.exists():
+        closure = "retired.json"
+        retirement = json.loads(retired.read_text())
+        stopped = json.loads((workspace / "native-process-stop.json").read_text())
+        if (
+            len(excluded) != 1
+            or cases[-1]["status"] == "terminal"
+            or retirement.get("schema_version") != "actual-engine-worker-retirement-v1"
+            or retirement.get("controller_process_stopped") is not True
+            or retirement.get("native_process_stopped") is not True
+            or retirement.get("workspace_reusable") is not False
+            or retirement.get("failed_seed_retried") is not False
+            or stopped.get("process_id") != retirement.get("native_process_id")
+            or not stopped.get("exit")
+            or not (workspace / "active.json").is_file()
+            or (workspace / "closed.json").exists()
+        ):
+            raise ValueError("Native failed worker lacks verified retirement; prefix not admitted")
+    else:
+        closed = json.loads((workspace / closure).read_text())
+        if (
+            excluded
+            or closed.get("clean_exit") is not True
+            or closed.get("episodes") != len(cases)
+            or (workspace / "active.json").exists()
+        ):
+            raise ValueError("Native experience worker did not finish cleanly")
     raw = records("private-transcript.jsonl.gz")
     observations = records("public-observations.jsonl.gz")
     receipts = records("public-receipts.jsonl.gz")
@@ -36,13 +66,15 @@ def audit_worker_experience(workspace: Path, cases: list[dict[str, Any]]) -> dic
     }
     starts = [r["request"] for r in raw if r["request"]["cmd"] in {"start_run", "reset_run"}]
     if (
-        len(starts) != len(cases)
-        or closed["episodes"] != len(cases)
+        len(starts) not in ({len(complete), len(cases)} if excluded else {len(cases)})
+        or any(
+            start.get("seed") != case["seed"] for case, start in zip(cases, starts, strict=False)
+        )
         or any(row["request"]["cmd"] not in allowed for row in raw)
     ):
         raise ValueError("Native experience contains an unbound start or fixture mutation")
     decisions = 0
-    for episode, (case, start) in enumerate(zip(cases, starts, strict=True), 1):
+    for episode, (case, start) in enumerate(zip(complete, starts[: len(complete)], strict=True), 1):
         if (
             case["status"] != "terminal"
             or case["privileged_fixture"]
@@ -96,7 +128,9 @@ def audit_worker_experience(workspace: Path, cases: list[dict[str, Any]]) -> dic
     body = {
         "schema_version": "actual-engine-saved-experience-audit-v1",
         "valid": True,
-        "games": len(cases),
+        "games": len(complete),
+        "excluded_failed_games": len(excluded),
+        "worker_retired": bool(excluded),
         "decisions": decisions,
         "games_replayed": 0,
         "source_sha256": {
@@ -105,8 +139,10 @@ def audit_worker_experience(workspace: Path, cases: list[dict[str, Any]]) -> dic
                 "private-transcript.jsonl.gz",
                 "public-observations.jsonl.gz",
                 "public-receipts.jsonl.gz",
-                "closed.json",
+                closure,
+                *(["native-process-stop.json"] if excluded else []),
             )
+            if (workspace / name).exists()
         },
         "claim_scope": "saved_public_menu_input_choice_delivery_and_native_ending_chain",
     }

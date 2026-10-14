@@ -1,7 +1,7 @@
 """Isolated actual-engine workers. Frozen inputs are shared; mutable profiles are private.
 
 One Node control process and one native process per worker. A failed/uncertain worker
-is stopped, never silently reset/replaced. An exclusive workspace marker survives failure.
+is stopped and explicitly retired; its workspace and marker are never reused.
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ from spireshift.engine_qualification import GAME_RELATIVE, EngineQualificationCo
 from spireshift.engine_startup import _script_closure
 from spireshift.full_run_experience import atomic_json
 
-WORKER_SCRIPT = "engine-native-worker-v3.mjs"
+WORKER_SCRIPT = "engine-native-worker-v4.mjs"
 ISOLATION_ID = "actual-engine-process-profile-reset-v1"
 
 
@@ -266,6 +266,32 @@ class EngineWorker:
         finally:
             self.stop()
 
+    def retire(self, reason: str) -> dict[str, Any]:
+        """Prove shutdown before a caller starts a fresh worker for a different seed."""
+        self.stop()
+        native = json.loads((self.workspace / "native-process-stop.json").read_text())
+        native_pid = self.identity["runtime_identity"]["process_id"]
+        for pid in (self.child.pid, native_pid):
+            try:
+                os.kill(pid, 0)
+            except ProcessLookupError:
+                continue
+            raise ValueError("Failed worker process still exists; no successor worker allowed")
+        if native["process_id"] != native_pid or self.child.poll() is None:
+            raise ValueError("Failed worker shutdown identity differs")
+        result = {
+            "schema_version": "actual-engine-worker-retirement-v1",
+            "controller_process_id": self.child.pid,
+            "native_process_id": native_pid,
+            "controller_process_stopped": True,
+            "native_process_stopped": True,
+            "reason": reason,
+            "workspace_reusable": False,
+            "failed_seed_retried": False,
+        }
+        atomic_json(self.workspace / "retired.json", result)
+        return result
+
     def stop(self) -> None:
         if not self.closed:
             try:
@@ -273,7 +299,7 @@ class EngineWorker:
                 if self.child.stdin is not None and not self.child.stdin.closed:
                     self.child.stdin.close()
                 try:
-                    self.child.wait(timeout=4)
+                    self.child.wait(timeout=6)
                 except subprocess.TimeoutExpired:
                     _stop_child(self.child)
             finally:
