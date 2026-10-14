@@ -11,9 +11,13 @@ from spireshift import engine_run_discovery as discovery
 from spireshift.engine_qualification import EngineQualificationConfig
 
 
-def setup_batch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> EngineQualificationConfig:
+def setup_batch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, reporting_revision: str | None = None
+) -> EngineQualificationConfig:
     q = EngineQualificationConfig(document={}, root=tmp_path)
-    document = {"workspace": "artifacts/discovery", "max_wall_seconds": 1000}
+    document: dict[str, Any] = {"workspace": "artifacts/discovery", "max_wall_seconds": 1000}
+    if reporting_revision is not None:
+        document["reporting_revision"] = reporting_revision
     recipes = [
         (
             tmp_path / f"recipe-{n}.json",
@@ -134,3 +138,75 @@ def test_preflight_never_runs_a_game(tmp_path: Path, monkeypatch: pytest.MonkeyP
     assert len(calls) == 3
     assert result["games_launched"] == 0
     assert not (tmp_path / "artifacts").exists()
+
+
+def test_zero_missing_fields_does_not_hide_a_repeated_state_failure() -> None:
+    cases = [
+        {
+            **saved_case("natural_shipped_run_pass", terminal=True, issues=[]),
+            "case_id": "complete",
+        },
+        {
+            **saved_case("natural_shipped_run_incomplete", terminal=False, issues=[]),
+            "case_id": "loop",
+            "verification": {"error": "Repeated natural-run public state; no further action"},
+        },
+    ]
+    result = discovery.discovery_summary(cases, 3, include_outcomes=True)
+    assert result["completed_cases"] == 1
+    assert result["failed_cases"] == 1
+    assert result["not_attempted_cases"] == 1
+    assert result["unique_issues"] == 0
+    assert result["failures_by_kind"] == {"repeated_state": 1}
+    assert result["case_outcomes"][0]["outcome"] == "completed_loss"
+    assert result["case_outcomes"][1]["error"].startswith("Repeated natural-run")
+    assert "case_outcomes" not in discovery.discovery_summary(cases, 3)
+
+
+@pytest.mark.parametrize(
+    ("error", "expected"),
+    [
+        ("Unknown natural-run delivery; no retry", "action_delivery"),
+        ("No fresh complete public menu before the run cap", "resource_or_decision_cap"),
+        (None, "unclassified_incomplete"),
+    ],
+)
+def test_incomplete_reasons_remain_visible_without_unsupported_fields(
+    error: str | None, expected: str
+) -> None:
+    case = {
+        **saved_case("natural_shipped_run_incomplete", terminal=False, issues=[]),
+        "case_id": "failed",
+        "error": error,
+    }
+    outcome = discovery.case_outcome(case)
+    assert outcome["failure_kind"] == expected
+    assert outcome["error"] == error
+    assert outcome["outcome"] == "incomplete"
+
+
+def test_new_progress_and_saved_summary_include_the_case_failure_reason(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    q = setup_batch(tmp_path, monkeypatch, reporting_revision="outcomes_v2")
+
+    def compare(*_args: Any, **kwargs: Any) -> dict[str, Any]:
+        if kwargs.get("preflight"):
+            return {"ready_for_diagnostic": True}
+        return saved_case("natural_shipped_run_incomplete", terminal=False, issues=[])
+
+    monkeypatch.setattr(discovery, "compare_new_run", compare)
+    monkeypatch.setattr(
+        discovery,
+        "verify_new_run",
+        lambda *_args, **_kwargs: {
+            "valid": True,
+            "error": "Repeated natural-run public state; no further action",
+        },
+    )
+    result = discovery.discover_runs(q, tmp_path / "recipe.json", node=tmp_path / "node")
+    assert result["status"] == "discovery_complete"
+    assert result["failed_cases"] == 3
+    assert result["failures_by_kind"] == {"repeated_state": 3}
+    assert len(result["case_outcomes"]) == 3
+    assert "reason: repeated_state: Repeated natural-run public state" in capsys.readouterr().out

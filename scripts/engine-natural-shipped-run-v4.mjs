@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 import { completePublicMenu, validateLoadedIdentity } from "./engine-menu-probe.mjs";
 import { chooseStartupAction, startingFacts, firstDifference } from "./engine-new-run-contract-v1.mjs";
 import { publicProgressKey, assertPublicBoundary } from "./engine-run-contract-v1.mjs";
-import { chooseRunAction, publicActionKey, newDiagnosticNavigation, recordDiagnosticNavigation } from "./engine-run-policy-v3.mjs";
+import { chooseRunAction, publicActionKey, newDiagnosticNavigation, recordDiagnosticNavigation } from "./engine-run-policy-v4.mjs";
 import { freshRunObservation, newIssueCollection } from "./engine-run-diagnostics-v1.mjs";
 import { shippedEnding } from "./engine-natural-shipped-contract-v1.mjs";
 import { naturalTutorialAction } from "./engine-natural-tutorial-v3.mjs";

@@ -1,68 +1,50 @@
 # SpireShift backlog
 
-Updated 2026-10-13 with the four authorized repairs, shipped tutorial confirmation and shop-loop fix.
+Updated 2026-10-14 with the first clean shipped ending and the card-reward navigation repair.
 GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
 tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
 or more. Use saved timings and explicit caps.
 
 ## Current handoff and direction
 
-**Current repair package (#145):** the first owner-run shipped attempt stopped after 73 gameplay
-actions / 130.735 seconds at a living floor-5 shop (44/80 HP), with no published current controls.
-Logs identify an unhandled map-selection tutorial as the leading cause. The old summary's floor 4
-is its last supported screen, not the last reached floor. Saved verification validates evidence,
-not completion. Preserve that failed attempt and every old recipe.
+**First natural shipped ending verified (#145):** the owner's two-seed batch records one genuine
+loss after **144 gameplay actions on floor 6**, through normal startup, public actions and the
+shipped game-over result. The second seed stops alive after 42 actions on floor 2 because the
+initializer repeatedly reopens a card offer after Skip. Both attempts remain in the denominator;
+all observations/actions and app resets verify, with **zero new app copies**. The batch's
+`discovery_complete` means both planned cases were collected/audited, not two completed games.
+Its zero missing-field issues do not erase the separately recorded repeated-state failure.
 
-**Implemented repair package; short shipped checks now verified.** The owner authorized
-all four fixes before the next long attempt:
+**The encountered card-reward loop is repaired.** Native Skip closes the card preview while its
+reward row can remain available. The diagnostic initializer now associates a delivered card-offer
+opening with its delivered Skip, remembers that particular offer for this room and ranks other
+advertised rewards/exits above reopening it. Same-text offers remain distinct. Mandatory menus
+receive no invented exit, uncertain actions are not replayed, and an external learned scorer
+retains every legal choice, including taking a card or revisiting a declined offer.
 
-1. Bind the exact native map-selection tutorial and its current confirmation control. Host v12
-   reproduces; a short new probe encounters the distinct combat-reward tutorial at floor 2.
-   Host v13 additionally implements the remaining standard single-player tutorial controls,
-   preserving separate merchant/end-turn highlight choices. Two fresh builds reproduce and
-   16 targeted Host controls pass; unknown/disabled controls remain unsupported. Host v13 now
-   handles the native combat-reward and map tutorials during a normal shipped run; complete
-   shipped endings and the other remaining controls still need the bounded panel.
-2. Record progress from every public observation, including unsupported screens, and distinguish
-   reached progress from last supported progress and genuine terminal outcomes.
-3. Add bounded diagnostic issue collection: enumerate all missing facts in each snapshot,
-   deduplicate issues, continue only through verified current controls and other planned seeds,
-   retain blocked/capped attempts, and exclude recovered/incomplete runs from clean admission or
-   training. Never guess a keypress, replay an uncertain action, or hide a failed denominator.
-4. Give native and shipped take/skip/leave choices common semantic identities and deterministic
-   public tie-breaking. Keep every game-permitted decline selectable; never create a skip for a
-   mandatory choice. The initializer is a diagnostic player, not learned deck-building quality.
+The fresh short check records **95 gameplay actions**, declines the card once, claims gold,
+continues and reaches **floor 5** with zero unsupported issues. It remains alive at the
+165-second client cap (**177.461 resource seconds**), so it is not a completed game. Its saved
+navigation/actions/progress and shared-app reset independently verify. The successful first
+seed's **137 non-tutorial choices** still match the new policy in a saved-only comparison;
+tutorial controls and the Host are unchanged. Keep that original ending; no repeat is required.
+This trace comparison is not another played game or a claim of general trajectory equivalence.
 
-Repository validation passes **1,251 tests**, formatting/types/protocol checks; 44 new/current
-Node policy/discovery/tutorial controls pass. Two short native runs with the shared policy reach
-genuine candidate deaths (86/75 decisions; floors 6/5) and pass saved audits. The short shipped
-collector preserves 35 actions, both missing fields, alive floor-2 progress and a verified app
-reset; it creates zero app copies. Earlier owner and short-probe results still audit unchanged.
-Recovery continuation is tested with synthetic current-control cases, not yet claimed as a
-natural recovered game. All these results remain diagnostic, with no model training/admission.
+Repository validation passes **1,256 tests**, formatting/types/protocol checks and **53 current
+Node controls**. New versioned case reporting shows a terminal loss/victory or an explicit
+incomplete reason and failure-category counts, even when no public field is missing. Old recipes
+and saved summaries retain their original schema, identifiers and results.
 
-**Short shipped confirmation and navigation repair:** the first final-Host check handles both
-blocking tutorials and reaches floor 5, then the simple player repeatedly opens/closes the shop.
-Its 99 actions and failure remain preserved. The repaired initializer records only delivered
-inventory inspections from public act/floor history and prefers the existing shop exit on return;
-an external learned scorer still has every legal choice, including reopening or buying.
-The fresh short check records **101 gameplay actions**, correctly opens/closes/leaves the shop
-and reaches **floor 6**, with **zero unsupported issues**, before the 165-second client cap
-(177.328 resource seconds). Saved auditing reconstructs navigation, progress and actions and
-verifies the shared-app reset with **zero new app copies**. This capped living prefix is not a
-completed game or admission. Both prepared owner cases pass read-only preflight; no long batch
-has run. [New short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json)
-preserves both attempts and their limits.
-
-**One next owner command:** `bash scripts/discover-natural-a8-runs-v1.sh`, after closing any running
-game. It runs two independent seeds serially, approximately 10–20 minutes total, with a 32-minute
-batch cap. An unsupported screen without usable controls stops that case; after verified reset
-and saved audit, the next seed continues. Common omissions are deduplicated and failed/unattempted
-cases remain counted. Recovered cases cannot become clean passes or ordinary learning examples.
+**One next owner command:** `bash scripts/check-reward-decline-a8-run-v1.sh`. It starts only the
+previously blocked second seed from normal menus, about **5–10 minutes**, with a **15-minute
+game cap / 16-minute command cap**, 1,800 CPU seconds, 8 GB memory and 4 GB tracked storage.
+The fixed app is reused with a fresh profile; the first seed is not replayed. Read-only preflight
+passes. The owner launches/monitors this stage; no long follow-up, training or admission has run.
 [Guide](actual-engine-natural-runs.md) and
-[evidence](evidence/actual-engine-v0.111.0-discovery-and-declines-v1.json) record scope and limits.
-The owner launches/monitors this long stage. A clean unattended ending and the remaining bounded
-environment/learner checks still precede bulk training.
+[current evidence](evidence/actual-engine-v0.111.0-reward-decline-v1.json) bind the original two
+outcomes, repair, capped short check, trace comparison and new one-case recipe. Historical
+[interface](evidence/actual-engine-v0.111.0-discovery-and-declines-v1.json) and
+[shop](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) evidence stay unchanged.
 
 **Current finish line:** [the bounded Ironclad/A8 contract](actual-engine-a8-finish-line.md)
 supersedes the open-ended mechanics queue below. Build the complete unattended public-action
@@ -634,7 +616,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; four repairs and encountered shop loop implemented, short shipped prefix verified | Preserve the earlier alive interruptions. The final Host handles map/reward tutorials; a fresh 101-action prefix inspects/closes/leaves the shop, reaches floor 6 with zero unsupported issues, and stops at the short cap. The next owner stage collects two independent shipped seeds with verified serial reset and complete failure denominators; then close remaining encountered/later-act/ending gaps. Extra repeat matrices and exhaustive coverage remain deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Current; first clean shipped loss verified, reward loop repaired in a short check | Preserve the two-case owner batch: one 144-action floor-6 loss, one repeated card-preview/Skip loop. The repaired second seed reaches floor 5 in 95 actions before the short cap; explicit per-case failure reporting is versioned. Keep the first successful trace and run only the affected second seed to its genuine ending; then close remaining encountered/later-act/ending gaps. Extra repeat matrices and exhaustive coverage remain deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | After the bounded environment gate | Measure one-worker complete-run timing/failures and bounded two-worker isolation; connect the separately versioned A8 public encoder/experience to existing neural/PPO machinery, pass a short learning check and prepare one finite owner pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |

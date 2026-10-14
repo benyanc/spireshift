@@ -9,44 +9,64 @@ benchmark. Keep the frozen v0.111.0 / `41cef1ea` archive and `native_benchmark_f
 From the SpireShift repository:
 
 ```bash
-bash scripts/discover-natural-a8-runs-v1.sh
+bash scripts/check-reward-decline-a8-run-v1.sh
 ```
 
-Close any running STS2 game first. This runs **two independent seeds, one at a time**. Allow
-approximately **5–10 minutes per game / 10–20 minutes total**; a blocking screen or ordinary
-death can end a case earlier. Each game has a **15-minute process cap**;
-the whole command has a **32-minute elapsed cap**, **3,600 CPU seconds**, **8 GB memory** and
-**4 GB tracked storage**. Storage includes the existing shared app/pool and external profile
-area, including pre-existing retained files there; it is not a 4 GB allowance for new app copies.
+Close any running STS2 game first. This runs **only the previously blocked second seed**.
+Allow approximately **5–10 minutes**; a blocking screen or ordinary death can end it earlier.
+The game has a **15-minute process cap**; the whole command has a **16-minute elapsed cap**,
+**1,800 CPU seconds**, **8 GB memory** and **4 GB tracked storage**. Tracked storage includes
+pre-existing shared app/pool and external profile files, not just newly written files.
 
-The command checks both pinned cases first, then starts natural standard Ironclad/A8 runs via
-the normal menus. It imports no saved run, injects no gameplay fixture and uses no learned
-checkpoint. It reuses the fixed serial app, gives the attempt a fresh private profile, shows
-numeric progress every 25 actions and records every advertised choice/delivery. An ordinary
-loss is a valid environment completion and remains a loss.
+The command checks its pinned case first, then starts a natural standard Ironclad/A8 run through
+normal menus. It imports no saved run, injects no gameplay fixture and uses no learned checkpoint.
+It reuses the fixed app, creates a fresh private profile, shows numeric progress every 25 actions
+and retains every advertised choice/delivery. An ordinary loss is a valid environment completion
+and remains a loss. The successful first seed is not replayed.
 
-Every persistent unsupported observation records all its missing fields and reached floor/act/HP.
-In discovery mode, a complete current native menu may provide a verified operand-free Skip,
-leave, close, cancel or Proceed control even if descriptions are incomplete. Only those existing
-controls can recover the case. Unknown modals, unavailable/truncated/stale menus and mandatory
-choices without an exit get no invented fallback. At most 16 recoveries, 64 distinct issue records
-and 128 distinct unsupported observations are retained per case. Identity, information-boundary,
-delivery and compute checks remain mandatory.
+Every persistent unsupported observation retains all missing fields and reached floor/act/HP.
+Only existing verified current native exits/declines can recover a diagnostic case. Unknown
+modals, stale/truncated menus and mandatory choices without an exit get no invented fallback.
+Limits remain 16 recoveries, 64 distinct missing-field issues and 128 distinct observations.
+Blocking unsupported states, uncertain delivery, repeated public states and caps stop the game.
+Recovered/incomplete cases cannot count as clean passes or ordinary learning examples.
 
-A blocking unsupported state, uncertain delivery, repeated public state or decision/compute/time
-cap stops that game. After verified app reset and saved auditing, the next planned seed continues.
-Integrity failures stop the batch. Reports deduplicate common omissions across seeds and retain
-every failed/unattempted denominator. Recovered games remain diagnostic and cannot count as clean
-environment passes or training examples. “Discovery complete” means all planned cases were
-collected/audited; it does not mean they completed the game. All evidence stays saved.
+The final summary includes **case_outcomes** and **failures_by_kind**, alongside the original
+failure/omission denominators. It distinguishes a completed loss/victory from repeated states,
+unsupported screens, delivery errors and caps, including the original error text. Zero missing
+fields can coexist with a failed game. `discovery_complete` means the finite collection was
+finished and audited; it does not mean its game completed successfully.
 
-A saved result is displayed and audited on repeat invocation; it is not automatically retried.
-Interrupted attempts without a sealed summary stay blocked for inspection. No training,
-promotion, next experiment or bulk-learning admission follows. Share the printed summaries.
+Saved results are audited on rerun, never automatically retried. Interrupted output stays blocked
+for inspection. No training, promotion, next experiment or bulk-learning admission follows.
+Share the printed summaries. The recipe pins the outputs/resources, complete helper dependency
+inventory, Host, starting reference, profile, objective and finite limits.
 
-The recipe controls the output/resource paths and binds all transitive local helper dependencies, the
-exact Host build, public starting reference, profile policy, objective and finite limits.
-Saved observations/action receipts are checked after the run without opening another game.
+## Latest verified results, 2026-10-14
+
+The owner two-seed batch takes **357.933 resource seconds**. One game reaches a genuine shipped
+loss on **floor 6 after 144 gameplay actions**. The second stops alive on floor 2 after 42 actions:
+opening its card reward, choosing Skip and reopening the same still-available offer repeatedly.
+Both cases and app resets audit correctly with zero app copies; all failed attempts remain counted.
+This is the first verified naturally played shipped ending, not a win or training admission.
+
+The repaired initializer remembers a delivered Skip for that particular public reward handle and
+room, then prefers other legal rewards/exits. Its identity is used only to associate that offer
+with its earlier preview, never as a preference tie-breaker. Same-text offers remain separate;
+a custom learned scorer can still take, decline or revisit any advertised choice.
+
+A fresh short check declines the card, claims gold and continues to **floor 5 in 95 actions**,
+with zero unsupported issues, before its 165-second client cap (**177.461 resource seconds**).
+Saved auditing independently reconstructs the navigation, decisions and progress and verifies reset.
+The new policy also matches all **137 non-tutorial actions** in the successful first seed's saved
+trace; tutorial controls and Host stay unchanged. Keep that success and run only the affected seed.
+This comparison opens no games and proves equality only on the already observed trace.
+
+Repository checks pass **1,256 tests** and **53 current Node controls**. The new one-case recipe
+passes read-only preflight and has not run. The old two-case wrapper now audits its saved batch;
+use only the command above for the new stage.
+[Evidence](evidence/actual-engine-v0.111.0-reward-decline-v1.json) preserves every original outcome,
+the repair, short cap, trace comparison, reporting revision and owner-stage limits.
 
 ## Four repairs and short checks, 2026-10-13
 
@@ -85,11 +105,11 @@ The new short check performs **101 gameplay actions**, including opening, closin
 shop, and reaches **floor 6** with **zero unsupported issues**. It stops alive at the short
 165-second client cap; resource wall time is **177.328 seconds**. Saved auditing reproduces the
 navigation memory, choices and reached progress, and verifies reset with **zero new app copies**.
-Repository checks and 44 current Node controls pass. Both longer owner cases pass read-only
-preflight; the long batch has not run.
+At that stage repository checks and 44 current Node controls passed; the subsequent owner batch
+and its remaining repair are recorded above.
 [Short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) preserves the two
-new attempts. Full shipped endings, later acts, other remaining controls, worker isolation and
-neural integration remain pending. Close any running Steam game before the command above.
+new attempts. Broader shipped ending coverage, later acts, other remaining controls, worker
+isolation and neural integration remain pending.
 
 ## What already passes
 
@@ -112,7 +132,7 @@ The game canonicalizes seed letters `I`/`O` to `1`/`0`. New cross-host recipes u
 canonical seeds; earlier literal-seed observations retain their historical identities.
 
 [Evidence](evidence/actual-engine-v0.111.0-natural-run-foundation-v1.json) records identities,
-counts, timings and scope. Shipped full-run endings, later-act/victory semantics, outstanding
+counts, timings and scope. Broader shipped ending coverage, later-act/victory semantics, outstanding
 input/large-selection gaps, parallel isolation and a useful neural learner remain unqualified.
 After the bounded environment gate, #146 connects existing neural/PPO machinery and runs a short
 learning control. The owner launches the subsequent finite learning pilot.

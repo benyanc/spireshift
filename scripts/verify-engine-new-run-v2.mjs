@@ -10,8 +10,10 @@ const { startingFacts } = await import(pathToFileURL(`${spec.sources}/engine-new
 const { currentBoundMenu, recordRunProgress, newIssueCollection, recordUnsupported, recoveryAction,
   assertObservationIdentity } = await import(pathToFileURL(`${spec.sources}/engine-run-diagnostics-v1.mjs`).href);
 const recipe = JSON.parse(readFileSync(`${spec.sources}/recipe.json`, "utf8"));
-const hasNavigation = "engine-run-policy-v3.mjs" in recipe.helpers_sha256;
-const policy = await import(pathToFileURL(`${spec.sources}/engine-run-policy-${hasNavigation ? "v3" : "v2"}.mjs`).href);
+const policyRevision = "engine-run-policy-v4.mjs" in recipe.helpers_sha256 ? "v4"
+  : "engine-run-policy-v3.mjs" in recipe.helpers_sha256 ? "v3" : "v2";
+const hasNavigation = policyRevision !== "v2";
+const policy = await import(pathToFileURL(`${spec.sources}/engine-run-policy-${policyRevision}.mjs`).href);
 const { publicActionKey, chooseRunAction } = policy;
 const navigation = hasNavigation ? policy.newDiagnosticNavigation() : null;
 const tutorial = "engine-natural-tutorial-v3.mjs" in recipe.helpers_sha256

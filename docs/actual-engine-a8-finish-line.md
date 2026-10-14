@@ -82,14 +82,35 @@ navigation preference inspects a shop once, then chooses its advertised exit whe
 all legal choices remain available to an external learned scorer. A fresh **101-action** prefix
 reaches **floor 6** with no unsupported issues and stops at its short cap. Its saved actions,
 navigation/progress counters and shared-app reset verify; **zero new app copies** are created.
-Both prepared owner cases now pass preflight. This is not a completed game or training admission.
+At that stage both prepared owner cases passed preflight. That capped prefix was not a completed
+game or training admission.
 [Short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) preserves the
 new capped prefix and the earlier navigation failure separately.
 
-The next owner stage is **two independent natural shipped discovery runs**, with serial app reuse,
-complete failure denominators and verified reset between seeds. Unknown screens without current
-controls still stop the affected game; a verified legal exit can continue diagnostic discovery.
-Recovered runs cannot satisfy the clean environment gate or enter ordinary learning data.
+## First shipped ending and remaining handoff, 2026-10-14
+
+The owner two-seed batch now verifies one naturally played shipped **loss on floor 6 after 144
+gameplay actions**. The second seed stops alive after 42 actions because the initializer reopens
+the same still-available card reward after Skip. Both original outcomes, all failure denominators
+and the verified app resets stay preserved; no app copies are created. Batch completion is not
+game completion, and zero missing fields does not erase a repeated-state failure.
+
+The initializer now remembers the particular offer it declined using delivered public-action
+history. A new short check chooses Skip, claims gold, continues and reaches **floor 5 in 95
+actions** before its 165-second client cap. Saved actions/navigation/progress and reset verify.
+All 137 non-tutorial decisions in the successful first seed's saved trace still match the new
+policy; tutorials and the Host are unchanged. Preserve that success without another game.
+
+The next owner stage is **only the previously blocked second seed**, expected 5–10 minutes,
+with a 15-minute game cap and 16-minute resource cap. Its versioned reporting includes each
+case's ending or failure reason even if no public field is missing. Preflight passes; the long
+follow-up has not run. [Current evidence](evidence/actual-engine-v0.111.0-reward-decline-v1.json)
+binds the original outcomes, short check, trace comparison and new recipe. The trace comparison
+is not a replayed game or a claim about unseen trajectories.
+
+Unknown screens without current controls still stop the affected game; a verified legal exit can
+continue diagnostic discovery. Recovered runs cannot satisfy the clean environment gate or enter
+ordinary learning data. Optional Skip remains selectable and learned scorers remain unrestricted.
 [The guide](actual-engine-natural-runs.md) provides one command and explicit caps.
 Later-act/victory checks, known input omissions, worker isolation, learner integration and the
 short learning control remain required. Short jobs may run automatically; the owner launches

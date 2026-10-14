@@ -24,6 +24,7 @@ def load_discovery_recipe(
         or document.get("qualification_config_id") != qualification.config_id
         or document.get("training_allowed") is not False
         or document.get("workers") != 1
+        or document.get("reporting_revision") not in {None, "outcomes_v2"}
         or not isinstance(cases, list)
         or not 1 <= len(cases) <= 8
         or type(document.get("max_wall_seconds")) is not int
@@ -61,7 +62,50 @@ def load_discovery_recipe(
     return document, loaded
 
 
-def discovery_summary(cases: list[dict[str, Any]], planned: int) -> dict[str, Any]:
+def case_outcome(case: dict[str, Any]) -> dict[str, Any]:
+    """Distinguish a complete diagnostic batch from its games and interface omissions."""
+    gameplay = case["gameplay"]
+    error = case.get("error")
+    if error is None and case.get("verification"):
+        error = case["verification"].get("error")
+    recovered = bool(case["diagnostics"].get("recoveries"))
+    completed = case["status"] == "natural_shipped_run_pass"
+    message = str(error or "").lower()
+    if completed:
+        failure = None
+    elif case["status"] == "infrastructure_failure":
+        failure = "infrastructure"
+    elif "delivery" in message:
+        failure = "action_delivery"
+    elif "repeated natural-run public state" in message:
+        failure = "repeated_state"
+    elif "cap" in message:
+        failure = "resource_or_decision_cap"
+    elif case["diagnostics"].get("issues"):
+        failure = "unsupported_state"
+    elif recovered:
+        failure = "diagnostic_recovery"
+    else:
+        failure = "unclassified_incomplete"
+    return {
+        "case_id": case["case_id"],
+        "seed": case.get("seed"),
+        "status": case["status"],
+        "outcome": ("completed_victory" if gameplay.get("victory") is True else "completed_loss")
+        if completed
+        else "incomplete",
+        "terminal_observed": gameplay.get("terminal") is True,
+        "recovered": recovered,
+        "decisions": gameplay.get("decisions", 0),
+        "reached_floor": gameplay.get("maximum_floor", 0),
+        "failure_kind": failure,
+        "error": error,
+    }
+
+
+def discovery_summary(
+    cases: list[dict[str, Any]], planned: int, *, include_outcomes: bool = False
+) -> dict[str, Any]:
     issues: dict[str, dict[str, Any]] = {}
     clean = recovered = terminal = victories = 0
     for case in cases:
@@ -80,7 +124,7 @@ def discovery_summary(cases: list[dict[str, Any]], planned: int) -> dict[str, An
                 issues[key].update(occurrences=0, affected_cases=[])
             issues[key]["occurrences"] += issue["occurrences"]
             issues[key]["affected_cases"].append(case["case_id"])
-    return {
+    result = {
         "benchmark_denominator": planned,
         "completed_cases": clean,
         "failed_cases": len(cases) - clean,
@@ -91,12 +135,22 @@ def discovery_summary(cases: list[dict[str, Any]], planned: int) -> dict[str, An
         "issues": list(issues.values()),
         "unique_issues": len(issues),
     }
+    if include_outcomes:
+        outcomes = [case_outcome(case) for case in cases]
+        failures: dict[str, int] = {}
+        for outcome in outcomes:
+            if outcome["failure_kind"] is not None:
+                kind = outcome["failure_kind"]
+                failures[kind] = failures.get(kind, 0) + 1
+        result.update(case_outcomes=outcomes, failures_by_kind=failures)
+    return result
 
 
 def discover_runs(
     qualification: EngineQualificationConfig, path: Path, *, node: Path, preflight: bool = False
 ) -> dict[str, Any]:
     document, recipes = load_discovery_recipe(qualification, path)
+    include_outcomes = document.get("reporting_revision") == "outcomes_v2"
     workspace = _private_path(qualification.root, document["workspace"])
     if workspace.exists() and not preflight:
         raise FileExistsError("Preserve the saved discovery batch; no automatic retry")
@@ -164,8 +218,21 @@ def discover_runs(
             # A sealed incomplete case is safe to move past only after its app/profile reset
             # and saved evidence verify. Infrastructure/integrity errors abort the batch.
             verification = verify_new_run(qualification, recipe_path, node=node)
-            case.update(status=report["status"], verification=verification)
-            summary = discovery_summary(result["cases"], len(recipes))
+            case.update(
+                status=report["status"], verification=verification, error=verification.get("error")
+            )
+            summary = discovery_summary(
+                result["cases"], len(recipes), include_outcomes=include_outcomes
+            )
+            if include_outcomes:
+                outcome = case_outcome(case)
+                print(
+                    f"Case {case['case_id']}: {outcome['outcome']}; "
+                    f"floor {outcome['reached_floor']}; {outcome['decisions']} actions; "
+                    f"reason: {outcome['failure_kind'] or 'none'}"
+                    f"{': ' + outcome['error'] if outcome['error'] else ''}.",
+                    flush=True,
+                )
             print(
                 f"Discovery: {len(result['cases'])}/{len(recipes)} cases; "
                 f"{summary['completed_cases']} clean endings; "
@@ -181,7 +248,9 @@ def discover_runs(
         result["error"] = str(error)
         if result["cases"] and result["cases"][-1]["status"] == "infrastructure_failure":
             result["cases"][-1]["error"] = str(error)
-    result.update(discovery_summary(result["cases"], len(recipes)))
+    result.update(
+        discovery_summary(result["cases"], len(recipes), include_outcomes=include_outcomes)
+    )
     result.update(
         wall_seconds=time.monotonic() - started,
         games_launched=None
@@ -203,6 +272,7 @@ def verify_discovery_runs(
     qualification: EngineQualificationConfig, path: Path, *, node: Path
 ) -> dict[str, Any]:
     document, recipes = load_discovery_recipe(qualification, path)
+    include_outcomes = document.get("reporting_revision") == "outcomes_v2"
     workspace = _private_path(qualification.root, document["workspace"])
     report = json.loads((workspace / "summary.json").read_text())
     if report["report_id"] != manifest_identifier(
@@ -231,9 +301,10 @@ def verify_discovery_runs(
             or case["gameplay"] != child["gameplay"]
             or case["diagnostics"] != child["diagnostics"]
             or case["status"] != child["status"]
+            or (include_outcomes and case.get("error") != verified.get("error"))
         ):
             raise ValueError("Saved discovery case changed")
-    expected = discovery_summary(report["cases"], len(recipes))
+    expected = discovery_summary(report["cases"], len(recipes), include_outcomes=include_outcomes)
     if any(report[key] != value for key, value in expected.items()) or len(report["cases"]) > len(
         recipes
     ):
