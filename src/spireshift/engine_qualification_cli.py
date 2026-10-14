@@ -1,4 +1,4 @@
-"""Separate identity, acquisition and bounded native checks; never starts training."""
+"""Exact-engine qualification and separately admitted, explicit bounded learning."""
 
 from __future__ import annotations
 
@@ -37,6 +37,8 @@ from spireshift.engine_download import (
 from spireshift.engine_journey import probe_shipped_journey
 from spireshift.engine_journey_bridges import run_journey_bridges
 from spireshift.engine_journey_verification import verify_journey_bridges
+from spireshift.engine_learning import run_neural_experiment
+from spireshift.engine_learning_admission import preflight_native_learning, show_native_learning
 from spireshift.engine_localization import extract_native_localization
 from spireshift.engine_mode_audit import audit_mode_references
 from spireshift.engine_native import (
@@ -82,6 +84,7 @@ from spireshift.engine_shop_verification import verify_shop_bridge, verify_shop_
 from spireshift.engine_source import inspect_game_source
 from spireshift.engine_starting_bridges import run_starting_bridges, verify_starting_bridges
 from spireshift.engine_startup import compare_new_run, verify_new_run
+from spireshift.engine_worker_qualification import run_worker_qualification
 from spireshift.engine_working_app import load_working_app_policy, working_app_inventory
 from spireshift.full_run_experience import atomic_json
 
@@ -146,6 +149,11 @@ def add_engine_parser(commands: Any) -> None:
         "preflight-native-run",
         "probe-native-run",
         "verify-native-run",
+        "check-native-workers",
+        "check-native-learning",
+        "train-native-ppo",
+        "preflight-native-learning",
+        "show-native-learning",
         "compare-new-run",
         "preflight-new-run",
         "verify-new-run",
@@ -294,6 +302,18 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("--node", required=True, type=Path)
         if name == "verify-native-run":
             command.add_argument("report", type=Path)
+        if name == "check-native-workers":
+            command.add_argument("worker_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name in {
+            "check-native-learning",
+            "train-native-ppo",
+            "preflight-native-learning",
+            "show-native-learning",
+        }:
+            command.add_argument("learning_config", type=Path)
+        if name in {"check-native-learning", "train-native-ppo"}:
+            command.add_argument("--node", required=True, type=Path)
         if name in {"compare-new-run", "preflight-new-run", "verify-new-run"}:
             command.add_argument("run_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
@@ -338,6 +358,30 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0 if result["status"] == "candidate_terminal" else 1
         elif args.engine_command == "verify-native-run":
             result = verify_native_run(config, args.report)
+            code = 0
+        elif args.engine_command == "check-native-workers":
+            result = run_worker_qualification(config, args.worker_config, node=args.node)
+            code = 0 if result["status"] == "worker_isolation_pass" else 1
+        elif args.engine_command in {"check-native-learning", "train-native-ppo"}:
+            stage = json.loads(args.learning_config.read_text()).get("stage")
+            expected = (
+                "short_learning_control"
+                if args.engine_command == "check-native-learning"
+                else "bounded_policy_only_pilot"
+            )
+            if stage != expected:
+                raise ValueError("Use the command for this explicitly declared experiment stage")
+            result = run_neural_experiment(config, args.learning_config, node=args.node)
+            code = (
+                0
+                if result["status"] in {"short_learning_control_pass", "bounded_pilot_complete"}
+                else 1
+            )
+        elif args.engine_command == "preflight-native-learning":
+            result = preflight_native_learning(config, args.learning_config)
+            code = 0 if result["ready"] else 1
+        elif args.engine_command == "show-native-learning":
+            result = show_native_learning(config, args.learning_config)
             code = 0
         elif args.engine_command == "check-native-progression":
             result = run_native_progression(config, args.progression_config)

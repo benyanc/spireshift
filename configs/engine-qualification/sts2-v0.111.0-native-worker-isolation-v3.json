@@ -1,0 +1,45 @@
+{
+  "schema_version": "actual-engine-worker-qualification-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "base_run_recipe": "configs/engine-qualification/sts2-v0.111.0-native-worker-inputs-v1.json",
+  "base_run_recipe_id": "sha256:ff465396f21bd6c6a631416082bd27a1de29b04e3ce78196ddd6d3d816c11db4",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v3",
+  "isolation_id": "actual-engine-process-profile-reset-v1",
+  "helpers_sha256": {
+    "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "engine-cli-local-build.mjs": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a",
+    "engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-native-worker-v2.mjs": "fb47c0e0154f3f0004041f37f8c9bee8ef7482c688442306522101aaa39775a6",
+    "engine-player-projection.mjs": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155",
+    "engine-public-input-v1.mjs": "bb138e33a61119ccc81219c1ca947175f2c42edb4109cd1773c742594387d3fe",
+    "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "engine-run-contract-v2.mjs": "953984e8a629a319269ee5d81e879290a44181711ad4d5296549bdbf6195c44a",
+    "engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "engine-run-policy-v5.mjs": "cd1176eacf5aa7a47f26124dedd8398df29f23e0762794b6b643dbd090362c8f",
+    "engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+  },
+  "serial_seeds": [
+    "SP1RESH1FTA8D1AG001",
+    "SP1RESH1FTA8D1AG002",
+    "SP1RESH1FTA8D1AG003",
+    "SP1RESH1FTA8D1AG004",
+    "SP1RESH1FTA8D1AG005",
+    "SP1RESH1FTA8D1AG006",
+    "SP1RESH1FTA8D1AG007",
+    "SP1RESH1FTA8D1AG008"
+  ],
+  "parallel_seeds": [
+    "SP1RESH1FTA8D1AG001",
+    "SP1RESH1FTA8D1AG002"
+  ],
+  "repeats": 2,
+  "maximum_decisions": 4096,
+  "episode_wall_seconds": 45,
+  "training_allowed": false
+}

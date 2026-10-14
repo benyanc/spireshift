@@ -36,18 +36,38 @@ new app copies. One saved successful case is reused and seven new games finish i
 collection. All are losses; the old v21 1,115-decision/15-family panel stays separate. A capped
 v23 cleanup failure and a private collector error remain preserved.
 
-**One concrete input blocker comes first in #146:** consistent renaming of temporary target IDs
-changes which enemy the initializer gives a Weak Potion. The semantic tie-break key accidentally
-includes `target_entity_ids`. This is a saved-state regression, not evidence that the old neural
-model used IDs. Resolve public references and keep opaque handles out of ranking/learned features;
-add renaming controls covering reference arrays and different target HP/statuses. Do this before
-fair player comparisons or new learning.
+**The temporary target-ID bug is fixed (#146).** New diagnostic policy v5 and the actual-engine
+public entity graph replace runtime handles with visible local occurrences and retain target
+HP/statuses/intents, ownership and per-copy facts. All **783 saved observations** pass **2,349**
+renaming comparisons. Old helpers, recipes and results remain unchanged. The weak diagnostic
+initializer's historical floor differences were not learned-model comparisons.
 
-**Next: the semantic input fix, cost/isolation and learner integration (#146).** Measure isolated
-full runs and connect the public encoder, actor/critic and experience stream to the existing neural/PPO learner. Pass a
-short learning control before one finite owner-run A8 pilot. No adaptive controller, broad GA
-batch, other difficulty or exhaustive mechanics matrix is a prerequisite. Training remains
-unadmitted; a diagnostic fixture cannot change that.
+**Worker isolation and the neural connection now pass.** The final versioned panel completes
+**12/12 games and 1,214 decisions**, including eight serial seeds and two parallel workers each
+repeating its seed after reset. Semantic traces match; profiles/processes are separate, sibling
+profile access is denied, protected inputs stay unchanged and shutdown verifies. It takes
+**19.07 seconds including the resource wrapper**, retains **66.57 MB**, and creates **zero app
+copies**. Earlier startup/sandbox/controller failures stay preserved and are not admitted.
+
+The final actual-engine learning control completes **four games**, verifies **209 sampled
+decisions**, applies **six PPO updates**, changes both actor and critic, reloads the checkpoint
+and checks saved public input/action/delivery/ending chains. Its two greedy control games reach
+floors 17 and 14; **all four games are losses**. Their different seeds/behaviors do not establish
+improvement. The workflow reuses the tested PPO mathematics with a new public encoder and model;
+no old v0.107.1 input or trained weights are silently migrated. Every decision family remains
+learnable, including Skip and public memory of previously declined offers.
+
+**Next is the owner's finite actual-engine A8 pilot (#146).** Explicit admission is limited to
+one policy-only bootstrap pilot: 256 sampled games, 48 training-confirmation games and 32 paired
+independent-development games, **336 planned attempts total**. The selected checkpoint is frozen
+before development opens. The recipe, runner, seed ownership and resource caps are pinned;
+preflight launches no games. Use the **one command** in
+[the pilot guide](actual-engine-neural-pilot.md). Codex has not started this long stage.
+Strong-base readiness and adaptive thinking remain unpassed. Assess the pilot before scaling
+or selecting another method; GA, other difficulties and patch-transfer work remain later.
+For a promising native checkpoint, connect its new input/action schema to the existing reused
+shipped-app runner and check action semantics before a neural UI demonstration. The current
+shipped diagnostic player and native neural pilot are separate players.
 
 **Current finish line:** [the bounded Ironclad/A8 contract](actual-engine-a8-finish-line.md)
 supersedes the open-ended mechanics queue below. Build the complete unattended public-action
@@ -59,8 +79,7 @@ connect the existing neural/PPO learner with a short learning check. Exhaustive 
 every static mode reference, other heroes/difficulties and repeated fixture matrices are later
 coverage work. Historical evidence below keeps its original scope.
 
-**Current work: #146 semantic inputs and actual-engine learning, with #145's final bounded input
-gate still open.** The separately frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
+**Current work: #146 owner pilot and assessment; #145's bounded Ironclad/A8 environment gate is complete.** The separately frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
 full-run victory stays primary. Preserve all v0.107.1 archives, models, encoders and results.
 [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md) orders public/mechanics
 qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
@@ -621,8 +640,8 @@ independent evaluation, numerical stability and historical evidence preservation
 | --- | --- | --- |
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
-| Current; first clean shipped loss verified, reward loop repaired in a short check | Preserve the two-case owner batch: one 144-action floor-6 loss, one repeated card-preview/Skip loop. The repaired second seed reaches floor 5 in 95 actions before the short cap; explicit per-case failure reporting is versioned. Keep the first successful trace and run only the affected second seed to its genuine ending; then close remaining encountered/later-act/ending gaps. Extra repeat matrices and exhaustive coverage remain deferred. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| After the bounded environment gate | Measure one-worker complete-run timing/failures and bounded two-worker isolation; connect the separately versioned A8 public encoder/experience to existing neural/PPO machinery, pass a short learning check and prepare one finite owner pilot. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
+| Implemented and short controls pass; owner pilot next | Temporary-ID-safe public inputs, serial/parallel/reset isolation and actual-engine neural/PPO experience are integrated. Launch the finite 336-attempt owner pilot, then assess frozen paired development results before scaling. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

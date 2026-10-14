@@ -128,3 +128,23 @@ Then measure full-run costs and worker isolation, and integrate the public encod
 experience stream with the existing learner. Pass the short learning control before the owner launches one finite A8 neural
 pilot. No diagnostic automatically admits bulk training or adaptive thinking. Do not expand this
 finish line into all content combinations or repeated fixture matrices.
+
+## Worker and learning gate, 2026-10-14
+
+The temporary-ID targeting defect is repaired with a separately versioned public entity graph
+and diagnostic policy. Renaming controls pass 783 saved observations / 2,349 comparisons.
+A source-pinned eight-seed serial plus two-worker repeated-seed panel completes all 12 games,
+checks matching semantic traces across processes/resets, denies sibling profile access and
+verifies protected inputs and shutdown. Managed simulations create no app copies.
+
+The actual-engine neural encoder, compact actor/critic and sealed experience now use the
+existing PPO numerical routines. A four-game control verifies 209 sampled decisions and six
+updates, reloads the changed checkpoint and audits the saved public action/delivery chains.
+All four games are ordinary losses; this is a pipeline pass, not a useful-player or readiness
+claim. Complete-run seed ownership separates training, confirmation, control and development.
+
+The bounded environment/integration finish line is reached. Admission permits one finite
+Ironclad/A8 policy-only bootstrap pilot, with a frozen checkpoint before independent paired
+development evaluation. [The pilot guide](actual-engine-neural-pilot.md) gives one owner command.
+Strong-base readiness, adaptive control and broad mechanics/other-difficulty/GA work remain
+separate. New unsupported decisions still stop learning and require an encountered-case repair.
