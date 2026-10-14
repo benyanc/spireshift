@@ -4,69 +4,45 @@ The bounded finish line is [the environment contract](actual-engine-a8-finish-li
 This stage exercises the interface with a simple player; it is not model training or a strength
 benchmark. Keep the frozen v0.111.0 / `41cef1ea` archive and `native_benchmark_full_v1` profile.
 
-## Run this one command next
+## Completed stage, 2026-10-14
 
-From the SpireShift repository:
+The owner's repaired second seed reaches a genuine shipped **loss on floor 5 after 104 actions**.
+Saved observations/actions, navigation, explicit ending and app reset verify, with no unsupported
+issues, recoveries, delivery failures or cap. It takes **206.268 resource seconds**. The original
+first seed's **144-action, floor-6 loss** remains valid and was not replayed. These are two
+independent environment completions under recorded diagnostic policy revisions, with zero wins.
+The original second-seed repeated-state failure and every earlier capped check remain preserved.
+
+No rerun is needed. `scripts/check-reward-decline-a8-run-v1.sh` now audits its saved completed
+result and launches no game. The initializer still allows taking or declining cards; its offer
+memory only prevents accidental reopening in the simple diagnostic policy. A learned scorer
+retains every advertised choice. Recovered or incomplete runs cannot enter clean admission or
+ordinary training data.
+
+The next targeted package now also verifies native Act 1→2, Act 2→3 and final Architect→explicit
+win semantics. The app passes the two earlier transitions with fresh map tutorials; a supplemental
+saved-only audit verifies its completed final sequence without replay. The original final-check
+batch keeps its key-order verifier failure and denominator. Forced boss removals make these
+**privileged fixtures**, not victories by the agent. App copies created: **zero**; resets verify.
+They compare transitions/endings, not all checkpoint reward/RNG behavior.
+
+For inspection, this single command audits all saved transition evidence without games or training:
 
 ```bash
-bash scripts/check-reward-decline-a8-run-v1.sh
+bash scripts/check-act-progression-v1.sh
 ```
 
-Close any running STS2 game first. This runs **only the previously blocked second seed**.
-Allow approximately **5–10 minutes**; a blocking screen or ordinary death can end it earlier.
-The game has a **15-minute process cap**; the whole command has a **16-minute elapsed cap**,
-**1,800 CPU seconds**, **8 GB memory** and **4 GB tracked storage**. Tracked storage includes
-pre-existing shared app/pool and external profile files, not just newly written files.
+[Current evidence](evidence/actual-engine-v0.111.0-progression-v1.json) binds the new outcomes,
+repairs, preserved failures and scope. The [bounded finish line](actual-engine-a8-finish-line.md)
+still requires current-build regression/admission, full-run costs and isolation, the actual-engine
+public learning adapter and a short learning control before a finite owner training pilot.
+The controller that selects thinking budgets stays behind the strong-base readiness gate.
 
-The command checks its pinned case first, then starts a natural standard Ironclad/A8 run through
-normal menus. It imports no saved run, injects no gameplay fixture and uses no learned checkpoint.
-It reuses the fixed app, creates a fresh private profile, shows numeric progress every 25 actions
-and retains every advertised choice/delivery. An ordinary loss is a valid environment completion
-and remains a loss. The successful first seed is not replayed.
-
-Every persistent unsupported observation retains all missing fields and reached floor/act/HP.
-Only existing verified current native exits/declines can recover a diagnostic case. Unknown
-modals, stale/truncated menus and mandatory choices without an exit get no invented fallback.
-Limits remain 16 recoveries, 64 distinct missing-field issues and 128 distinct observations.
-Blocking unsupported states, uncertain delivery, repeated public states and caps stop the game.
-Recovered/incomplete cases cannot count as clean passes or ordinary learning examples.
-
-The final summary includes **case_outcomes** and **failures_by_kind**, alongside the original
-failure/omission denominators. It distinguishes a completed loss/victory from repeated states,
-unsupported screens, delivery errors and caps, including the original error text. Zero missing
-fields can coexist with a failed game. `discovery_complete` means the finite collection was
-finished and audited; it does not mean its game completed successfully.
-
-Saved results are audited on rerun, never automatically retried. Interrupted output stays blocked
-for inspection. No training, promotion, next experiment or bulk-learning admission follows.
-Share the printed summaries. The recipe pins the outputs/resources, complete helper dependency
-inventory, Host, starting reference, profile, objective and finite limits.
-
-## Latest verified results, 2026-10-14
-
-The owner two-seed batch takes **357.933 resource seconds**. One game reaches a genuine shipped
-loss on **floor 6 after 144 gameplay actions**. The second stops alive on floor 2 after 42 actions:
-opening its card reward, choosing Skip and reopening the same still-available offer repeatedly.
-Both cases and app resets audit correctly with zero app copies; all failed attempts remain counted.
-This is the first verified naturally played shipped ending, not a win or training admission.
-
-The repaired initializer remembers a delivered Skip for that particular public reward handle and
-room, then prefers other legal rewards/exits. Its identity is used only to associate that offer
-with its earlier preview, never as a preference tie-breaker. Same-text offers remain separate;
-a custom learned scorer can still take, decline or revisit any advertised choice.
-
-A fresh short check declines the card, claims gold and continues to **floor 5 in 95 actions**,
-with zero unsupported issues, before its 165-second client cap (**177.461 resource seconds**).
-Saved auditing independently reconstructs the navigation, decisions and progress and verifies reset.
-The new policy also matches all **137 non-tutorial actions** in the successful first seed's saved
-trace; tutorial controls and Host stay unchanged. Keep that success and run only the affected seed.
-This comparison opens no games and proves equality only on the already observed trace.
-
-Repository checks pass **1,256 tests** and **53 current Node controls**. The new one-case recipe
-passes read-only preflight and has not run. The old two-case wrapper now audits its saved batch;
-use only the command above for the new stage.
-[Evidence](evidence/actual-engine-v0.111.0-reward-decline-v1.json) preserves every original outcome,
-the repair, short cap, trace comparison, reporting revision and owner-stage limits.
+The latest native v24 regression also passes eight endings and clean shutdowns: **775 decisions,
+10 families, 25.855 summed case wall seconds**. V23's quit failure and the original v21 results
+remain separate. A saved-only control now shows temporary target IDs influence the diagnostic
+tie-breaker; fix semantic reference handling before fair policy comparisons or learned features.
+No playing-strength gain, old-model ID-leakage finding or training admission is claimed.
 
 ## Four repairs and short checks, 2026-10-13
 

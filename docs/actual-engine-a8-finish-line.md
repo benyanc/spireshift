@@ -87,32 +87,44 @@ game or training admission.
 [Short-check evidence](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) preserves the
 new capped prefix and the earlier navigation failure separately.
 
-## First shipped ending and remaining handoff, 2026-10-14
+## Completed endings and targeted progression, 2026-10-14
 
-The owner two-seed batch now verifies one naturally played shipped **loss on floor 6 after 144
-gameplay actions**. The second seed stops alive after 42 actions because the initializer reopens
-the same still-available card reward after Skip. Both original outcomes, all failure denominators
-and the verified app resets stay preserved; no app copies are created. Batch completion is not
-game completion, and zero missing fields does not erase a repeated-state failure.
+The repaired owner seed completes **104 gameplay actions** and a genuine shipped **loss on
+floor 5**, with no unsupported issues, recoveries, uncertain deliveries or caps. Saved auditing
+and fixed-app reset verify. The earlier first seed's **144-action, floor-6 loss** remains valid;
+it was not replayed. The original second-seed repeated-card-offer failure stays preserved.
+These are two independent natural endings under recorded diagnostic policy revisions, not wins
+or a policy-strength comparison. The old owner command now audits saved data only.
 
-The initializer now remembers the particular offer it declined using delivered public-action
-history. A new short check chooses Skip, claims gold, continues and reaches **floor 5 in 95
-actions** before its 165-second client cap. Saved actions/navigation/progress and reset verify.
-All 137 non-tutorial decisions in the successful first seed's saved trace still match the new
-policy; tutorials and the Host are unchanged. Preserve that success without another game.
+A bounded privileged fixture reaches each boss through the native debug map command, forces its
+defeat, declines rewards and uses native Proceed. Native v22–v24 restore missing graphics/call bindings
+and supply the absent audio singleton without skipping the boss's gameplay hooks or changing
+the original rules DLL. A separately recorded v23 regression reaches endings but stalls on quit;
+v24 fixes the missing call binding and explicitly checks native cleanup. The checker distinguishes unfinished Architect dialogue from official
+run completion, and verifies explicit victory even though the native ending sets HP to zero.
 
-The next owner stage is **only the previously blocked second seed**, expected 5–10 minutes,
-with a 15-minute game cap and 16-minute resource cap. Its versioned reporting includes each
-case's ending or failure reason even if no public field is missing. Preflight passes; the long
-follow-up has not run. [Current evidence](evidence/actual-engine-v0.111.0-reward-decline-v1.json)
-binds the original outcomes, short check, trace comparison and new recipe. The trace comparison
-is not a replayed game or a claim about unseen trajectories.
+The app passes **Act 1→2 and Act 2→3**, including each fresh map tutorial. Its final sequence also
+reaches explicit native/public win; a new saved-only audit verifies that trace without another
+game. The original final-check batch retains its JSON key-order verifier failure. A corrected
+verifier compares values independently of object-key order. Earlier fixture/import/control/wait
+failures and unattempted cases remain counted in their original batches.
 
-Unknown screens without current controls still stop the affected game; a verified legal exit can
-continue diagnostic discovery. Recovered runs cannot satisfy the clean environment gate or enter
-ordinary learning data. Optional Skip remains selectable and learned scorers remain unrestricted.
-[The guide](actual-engine-natural-runs.md) provides one command and explicit caps.
-Later-act/victory checks, known input omissions, worker isolation, learner integration and the
-short learning control remain required. Short jobs may run automatically; the owner launches
-and monitors stages expected to take five minutes or more. No diagnostic automatically admits
-bulk training or adaptive thinking.
+One fixed app/inode serves every app check, with separate profiles, zero new copies and verified
+reset. These assigned fixtures are **not ordinary runs, player wins or learning examples**.
+Imported post-boss saves re-offer rewards; the scoped check declines them and compares act targets
+and endings. It does not establish general checkpoint reward/RNG resume parity or exhaustive
+mechanics equivalence. [Evidence](evidence/actual-engine-v0.111.0-progression-v1.json) binds every
+result and source identity; [the guide](actual-engine-natural-runs.md) gives one saved-only audit.
+
+The current v24 native panel passes eight clean endings and shutdowns: 775 decisions, ten
+families and 25.855 summed case wall seconds. These are ordinary losses, not a quality comparison;
+the earlier v21 panel and the failed v23 shutdown batch retain their own identities/denominators.
+
+A saved-only renaming control exposes one concrete remaining input issue: `target_entity_ids`
+influences the initializer's tie-break key, changing which enemy receives a potion despite identical
+public game facts. Fix semantic reference handling and enforce renaming invariance before fair
+comparisons/learning. This finding is not a claim that an old trained neural model used those IDs.
+Then measure full-run costs and worker isolation, and integrate the public encoder/actor/critic/
+experience stream with the existing learner. Pass the short learning control before the owner launches one finite A8 neural
+pilot. No diagnostic automatically admits bulk training or adaptive thinking. Do not expand this
+finish line into all content combinations or repeated fixture matrices.

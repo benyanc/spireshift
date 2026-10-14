@@ -1,0 +1,407 @@
+{
+  "schema_version": "engine-progression-evidence-v1",
+  "recorded_date": "2026-10-14",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "fixed_scope": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "character": "Ironclad",
+    "ascension": 8,
+    "profile": "native_benchmark_full_v1",
+    "objective": "terminal-victory-v1"
+  },
+  "owner_second_seed": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-a8-reward-decline-v1/summary.json",
+    "sha256": "cbb192f718262f62dc6b35ed31d1e88d8eb817ff3287fc054c9f33484d10c46e",
+    "report_id": "sha256:097eb9e169753829c90588935384b316c79c13e1a4ee5d7449362854794a6fcf",
+    "status": "discovery_complete",
+    "config_id": "sha256:7d57f75d02d465efe97629acbc8d3bb8a162f0149b13373e8bf5934346e46db5",
+    "claim_scope": "finite_natural_A8_diagnostic_issue_collection_only",
+    "case_outcomes": [
+      {
+        "case_id": "seed-002",
+        "decisions": 104,
+        "error": null,
+        "failure_kind": null,
+        "outcome": "completed_loss",
+        "reached_floor": 5,
+        "recovered": false,
+        "seed": "SP1RESH1FTA8D1AG002",
+        "status": "natural_shipped_run_pass",
+        "terminal_observed": true
+      }
+    ],
+    "failed_cases": 0,
+    "not_attempted_cases": 0,
+    "recoveries": 0,
+    "resource": {
+      "path": "artifacts/resources/natural-shipped-a8-reward-decline-v1.json",
+      "sha256": "cff8e65119830232a0a316b1e1c3f431efb198c3fb03338e4e639c2a36bbc0da",
+      "report_id": "sha256:5722fb0157e1448b10e11664b8eb1571561bb089819558e20861515ddb75193f",
+      "status": "completed",
+      "wall_seconds": 206.26803079200909,
+      "cpu_seconds": 57.489908506,
+      "peak_memory_bytes": 708509696,
+      "tracked_storage_bytes": 2442033874,
+      "cap": null
+    },
+    "saved_verification_valid": true
+  },
+  "natural_shipped_endings": {
+    "independent_seeds": 2,
+    "victories": 0,
+    "first_seed_report_id": "sha256:73fb3ec644e83f541c2e171907599ebd8f95382de7e2b866d0be2135fa6d8d72",
+    "first_seed_decisions": 144,
+    "first_seed_floor": 6,
+    "second_seed_decisions": 104,
+    "second_seed_floor": 5,
+    "common_policy_strength_estimate": false,
+    "original_failure_reports_unchanged": true
+  },
+  "current_native_build": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v24.json",
+    "sha256": "125909eef15297fe2104b80845c14c771a0895e55f168f74831b9c4a097c0121",
+    "report_id": "sha256:92f6e53620a8aeac9514aef6f3ecd45f13fc3e875edce0fa4c626c94a7441997",
+    "status": "candidate_built_unqualified",
+    "config_id": "sha256:07eb170e89ae91c9725ab28ad94af767576a96ad079bb320ad53b2948f5d808a",
+    "claim_scope": "exact_pinned_cli_build_only_not_runtime_or_semantic_parity",
+    "exact_pins": {
+      "artifact_sha256": "b75a62cb41bfccf7f955046540264c7465dfed062f0b9fc7f2c1a595d433f628",
+      "artifact_mvid": "9c46af94-0bbe-48c2-bc28-5d4f3a8a0494",
+      "godot_stub_sha256": "b2cf968e7b023cc4dacff9d4c044b6006ad470dab32c2d6170d680ae1fee2fb4",
+      "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+      "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+      "source_diff_id": "c156bbd64976e325260069e8045a97219495e1bd7e3b1a6b1b8958439896bf47",
+      "runtime_dependencies_id": "cab31dee39f4462f7d261e0761325f00fb492ec6d5b14129811ca7a1689cc673"
+    },
+    "baseline_builds": 2,
+    "repaired_builds": 2,
+    "official_game_DLL_unchanged": true,
+    "repairs": [
+      "exact CanvasItem.SetVisible(bool) binding",
+      "native audio singleton only in TestMode; boss gameplay hooks preserved",
+      "exact GodotObject.Call(StringName,Variant[]) binding for native audio cleanup"
+    ]
+  },
+  "native_privileged_progression": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v6/summary.json",
+    "sha256": "2717dcf5a7673c2a0f5d05d7d6cc3f9bcb86fcc2e2ff2d671bea70479b21ed4e",
+    "report_id": "sha256:23898a4b36f68493c1fa115a33a44f076961936c622516fa401767c35d9f1eeb",
+    "status": "native_progression_pass",
+    "config_id": "sha256:6a2072a3f79ba2c0615f95eef2200728c77a1814abd8fdc66d749365d985ea1a",
+    "claim_scope": "privileged_forced_boss_defeats_native_Proceed_act_transitions_and_Architect_victory_only",
+    "recipe": "configs/engine-qualification/sts2-v0.111.0-native-run-progression-v6.json",
+    "check_count": 42,
+    "forced_boss_defeats": 3,
+    "completed_native_act_targets": 3,
+    "native_victory_requires_game_over": true,
+    "victory_with_zero_HP": true,
+    "Architect_room_not_yet_a_completed_win": true,
+    "cleanup_explicitly_verified": true,
+    "natural_victories": 0,
+    "resource": {
+      "path": "artifacts/resources/native-run-progression-v6.json",
+      "sha256": "a84f6e1fcd554b67b71258a7727f14f784e6f9804510f04b627df59d6ad3bff6",
+      "report_id": "sha256:5c8b83e77995fe189ede22aed514db063784218a35b02ab52199d122f3df607c",
+      "status": "completed",
+      "wall_seconds": 4.079772916971706,
+      "cpu_seconds": 3.065962785,
+      "peak_memory_bytes": 200589312,
+      "tracked_storage_bytes": 357225,
+      "cap": null
+    }
+  },
+  "shipped_progression": {
+    "earlier_transitions": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v4/summary.json",
+      "sha256": "7b8c62be6cca3efdb5908ed27a6ac542bd31eb65d520db8907c1f1b2ed832fde",
+      "report_id": "sha256:346744ca1164af25025acbd5ec2805f4dd15a8d8f55f20532f6bdca0626612b6",
+      "status": "progression_comparisons_pass",
+      "config_id": "sha256:b594037ba8cfe7fdaddb4334aad6a69a00653e5bf836fc7110a45e1e4659031e",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only"
+    },
+    "final_sequence_saved_audit": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-saved-audit-v1.json",
+      "sha256": "c8d8ddd57c9d4b44e8e9dfe6fc48f169420844f821103bd439868fcd425663a7",
+      "config_id": "sha256:aa7758a4f6d83797e2b62d086ae5188ac1c39317b0266eeef201dff2f9aed3f6",
+      "claim_scope": "supplemental_saved_shipped_transition_audit_only_original_batch_unchanged"
+    },
+    "final_source_batch_status_unchanged": "progression_comparisons_incomplete",
+    "final_source_batch_denominator": {
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 0,
+      "planned_cases": 1
+    },
+    "passing_transition_cases": [
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v4/act-1/shipped-report.json",
+        "sha256": "a87443345d752ab32f9d5971d06fbb48e148de79d56896f13e4511cb9838c639",
+        "report_id": "sha256:8a573a59f1218aebbdfa7c1b8099bf0f4773566801f684b77674afe068ed8b6e",
+        "config_id": "sha256:61010c82eaf865723344decf422c83f24d564d5a6d760e25f742a206ec7f83fd",
+        "claim_scope": "single_native_checkpoint_shipped_public_input_only",
+        "act": 1,
+        "process_wall_seconds": 22.380781874991953,
+        "app_copies_created": 0,
+        "app_inode": 347602255,
+        "reset_verified": true,
+        "all_checks_pass": true
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v4/act-2/shipped-report.json",
+        "sha256": "670129b0aadfef08bdcf0dc004c51567f6a5022eaf7befc3bbfaf9924e8e0a84",
+        "report_id": "sha256:b99ce893c3b0281c75f7f54f34038ef1ff34eb6a6efcc1f2924fc00def02b020",
+        "config_id": "sha256:61010c82eaf865723344decf422c83f24d564d5a6d760e25f742a206ec7f83fd",
+        "claim_scope": "single_native_checkpoint_shipped_public_input_only",
+        "act": 2,
+        "process_wall_seconds": 22.33447050000541,
+        "app_copies_created": 0,
+        "app_inode": 347602255,
+        "reset_verified": true,
+        "all_checks_pass": true
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-smoke-v3/act-3/shipped-report.json",
+        "sha256": "d58f66e891481db79ef067f1493e335dfdbdac2192a7072378ea06cd2eab563c",
+        "report_id": "sha256:76b179bacd712f3ed6c1db9ac4607e5d10ba7398d71bef479819df3d3d459f83",
+        "config_id": "sha256:61010c82eaf865723344decf422c83f24d564d5a6d760e25f742a206ec7f83fd",
+        "claim_scope": "single_native_checkpoint_shipped_public_input_only",
+        "act": 3,
+        "process_wall_seconds": 26.738935417030007,
+        "app_copies_created": 0,
+        "app_inode": 347602255,
+        "reset_verified": true,
+        "all_checks_pass": true
+      }
+    ],
+    "verified_snapshots": 13,
+    "delivered_actions": 10,
+    "new_app_copies": 0,
+    "claimed_natural_victories": 0,
+    "scope_limit": "privileged reloadable boss saves; imported rewards can reappear and are declined; act targets and explicit ending only, not full save/reward/RNG parity",
+    "selected_native_v23_v24_comparison": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-v23-v24-selected-facts-v1.json",
+      "sha256": "e76e4d7c23b20c6c3f2584f9ec41d9ef8011b4538b27bdab81959ba4515039bb",
+      "report_id": "sha256:65d445efc1f37e7f0b8bf5bb0857940159d6ff1e11b63b7db32b5abd93725b55",
+      "claim_scope": "saved_selected_act_definition_A8_phase_HP_and_ending_flags_only_not_all_public_or_RNG_state"
+    },
+    "earlier_transitions_resource": {
+      "path": "artifacts/resources/progression-bridges-v4.json",
+      "sha256": "177ab8243122ac6d39684cf20f15e899d74cba90b358718a0d61263d81a34750",
+      "report_id": "sha256:6951a96cc23e818cad4979769e29f3792e705791bab107aa62ca528764d163e1",
+      "status": "completed",
+      "wall_seconds": 70.89992841694038,
+      "cpu_seconds": 37.105850742,
+      "peak_memory_bytes": 983728128,
+      "tracked_storage_bytes": 2431832372,
+      "cap": null
+    },
+    "final_source_resource_status_preserved": {
+      "path": "artifacts/resources/progression-bridges-smoke-v3.json",
+      "sha256": "00b8a5ca8c0f0de416dda1110589f4238a6edb80b602dc283c1ff0fc4487c96d",
+      "report_id": "sha256:e8509447a118db363bd1430a179bd988171a9844deb8dedbc3213f1335ab5e89",
+      "status": "failed",
+      "wall_seconds": 40.986516540986486,
+      "cpu_seconds": 20.072683074999997,
+      "peak_memory_bytes": 937967616,
+      "tracked_storage_bytes": 2428155127,
+      "cap": null
+    }
+  },
+  "current_build_natural_regression": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-regression-v24/completed-summary-v1.json",
+    "sha256": "709cc5744819e7892352e6cade39a50f83a5920fa026000f6d89a50a8c8bc1ef",
+    "report_id": "sha256:c50f1197c78517a023ef37e2a510c73124eadaac6e0fe7bff6966e361a9591d6",
+    "status": "completed",
+    "input_recipe": "configs/engine-qualification/sts2-v0.111.0-native-run-inputs-v24.json",
+    "planned_cases": 8,
+    "completed_cases": 8,
+    "failed_cases": 0,
+    "not_attempted_cases": 0,
+    "decisions": 775,
+    "victories": 0,
+    "maximum_floor": 8,
+    "sum_case_wall_seconds": 25.855240750010125,
+    "new_games_in_final_collection": 7,
+    "saved_cases_reused": 1,
+    "policy_revision": "diagnostic_v2",
+    "playing_strength_comparison_allowed": false,
+    "resource": {
+      "path": "artifacts/resources/native-regression-v24-completion-v1.json",
+      "sha256": "8e04f412befdb00c5e24a5a4ed60c54ddb4b271ead6b1f7652803f34fcc12e19",
+      "report_id": "sha256:cede404d69d29d57ff8afd58cc9b84c6f95204837c9f440a4b266a4a1a0f7e82",
+      "status": "completed",
+      "wall_seconds": 29.64336300001014,
+      "cpu_seconds": 23.622969329,
+      "peak_memory_bytes": 378716160,
+      "tracked_storage_bytes": 81698148,
+      "cap": null
+    }
+  },
+  "preserved_failures": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v1/summary.json",
+      "sha256": "b48e1c439a201ed540f8a164a7c79d5e0214c7e060dcbb4642e828c8f207d011",
+      "report_id": "sha256:3c58e76aff598be1e860c50946d617632b49252ef6e6d7603352f86296f7696a",
+      "status": "native_progression_incomplete",
+      "config_id": "sha256:b9ed90201182eaf69409d13ef4a38636be2bdfc6c141b156cf623ac32110d2ff",
+      "claim_scope": "privileged_forced_boss_defeats_native_Proceed_act_transitions_and_Architect_victory_only",
+      "error": "Native fixture prematurely ended or misclassified the victory room"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v2/summary.json",
+      "sha256": "5bd53b9bf2a0e7f615e996c427b47fe966ceffca0666e78afd00734206af348e",
+      "report_id": "sha256:10460d96fc1d84f8e9d83c78aca74896d765a599640c502ad36d07306106c612",
+      "status": "native_progression_incomplete",
+      "config_id": "sha256:e65a368d08c629236fbd26d2057ea1b811bbb4d7bfdb4928c5a5490d77742d21",
+      "claim_scope": "privileged_forced_boss_defeats_native_Proceed_act_transitions_and_Architect_victory_only",
+      "error": "Native fixture prematurely ended or misclassified the victory room"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v4/summary.json",
+      "sha256": "bd45f9dd3de56c6b1b32d828dd2f1774a9446b281af3dc128f2aff5d1e87d4c4",
+      "report_id": "sha256:b874e4f11b85511a07c30c23a0e9166592f6fc235915737ef1fe039daa749ca5",
+      "status": "native_progression_incomplete",
+      "config_id": "sha256:131a1e014681463f19839b6de4df5d5183b383f50145d8787df92811aa02e8ab",
+      "claim_scope": "privileged_forced_boss_defeats_native_Proceed_act_transitions_and_Architect_victory_only",
+      "error": "Native progression failed or changed a protected input; inspect saved evidence"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-smoke-v1/summary.json",
+      "sha256": "e58307a4222089d95ec33f28464000152e52e2b3655c2e7f3d2a6f1194d0b5c4",
+      "report_id": "sha256:02e28823e9dade6a140cce8b09abae7595a6814dded59d9e91a1a7ffb78f100f",
+      "status": "progression_comparisons_incomplete",
+      "config_id": "sha256:6602367bf06c000fa2ce48bd26bbf73fd97bdf27e1446b85470cc348b50ba6b7",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only",
+      "planned_cases": 1,
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 0
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-smoke-v2/summary.json",
+      "sha256": "107fd01bbec5850d9ce7de424653571380d06813ca12ae0a7a6ea4ad3bed05c7",
+      "report_id": "sha256:9f23858a571c088a6ff4be17822c101805629b3cee70d6b4578a67525e0e9f29",
+      "status": "progression_comparisons_incomplete",
+      "config_id": "sha256:39ddf03fe243644ad44bdfa8b4b82269262a1ddffefd0eac13b1aad570700418",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only",
+      "planned_cases": 1,
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 0
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-smoke-v3/summary.json",
+      "sha256": "b25338ca6b47b3bc9ce4a69f56200aa8dba1fb2ba94a11cdab50b57e42e0f814",
+      "report_id": "sha256:41d349d74133fa0877cfe53fc17661caa1c6a3bbab44619a291404ce9272369f",
+      "status": "progression_comparisons_incomplete",
+      "config_id": "sha256:4f0adc902402aa0ebcb14cc6760c9d10773a27cbabc9de3ad50ba1bc31cda9dc",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only",
+      "planned_cases": 1,
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 0
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v1/summary.json",
+      "sha256": "23b7c22b69a8cd5d61564baeed47101db11613818872c3f9c941c9f7b244e47a",
+      "report_id": "sha256:f024544b4f6199e3c34f5ff44e631be418afe10a5382242b74d9a550f007f3be",
+      "status": "progression_comparisons_incomplete",
+      "config_id": "sha256:4680716983d4baa14fb5d2b3f6095b68d8042b046795ad325f64697fa7910cae",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only",
+      "planned_cases": 2,
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 1
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v2/summary.json",
+      "sha256": "c443e583bc310e327f71556761fcda2daaa717d2e9bde38cf4ad25fd074602a6",
+      "report_id": "sha256:b567247edb965c9a9f22e2bcb8c83a515b43b520aebf8dbc586944c5217de2e6",
+      "status": "progression_comparisons_incomplete",
+      "config_id": "sha256:e928305469253489cc867216cfceb485576ee2735a25b71260d776fcd1e303b5",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only",
+      "planned_cases": 2,
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 1
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v3/summary.json",
+      "sha256": "adc83c4a23dc2d5133fea6294c090a3c66616a878e33e362317ab9534a8a0f64",
+      "report_id": "sha256:307cc5223eae103544c631cb43f13b35b240697ed79803a772646097385a25aa",
+      "status": "progression_comparisons_incomplete",
+      "config_id": "sha256:16459d3d0c610c7db5d6b419426cfa880bb4a2b8cc742210359f8da87f1851b2",
+      "claim_scope": "privileged_before_Proceed_saves_native_act_targets_and_explicit_final_win_only",
+      "planned_cases": 2,
+      "completed_cases": 0,
+      "failed_cases": 1,
+      "not_attempted_cases": 1
+    }
+  ],
+  "preserved_cleanup_regression_cap": {
+    "path": "artifacts/resources/native-regression-v23.json",
+    "sha256": "698336bb07e4d0e7942c51f64c31074fc2e93a22a1ae45309419a964144d3425",
+    "report_id": "sha256:cdcd90a044a432d33e93fe22f9071974b3508594e5d9d3643faa7317b3078d2b",
+    "status": "capped",
+    "wall_seconds": 190.14170379098505,
+    "cpu_seconds": 7.23834794,
+    "peak_memory_bytes": 245858304,
+    "tracked_storage_bytes": 18731515,
+    "cap": {
+      "limit": 190.0,
+      "observed": 190.09518962504808,
+      "resource": "wall_seconds"
+    },
+    "planned_cases": 8,
+    "observed_attempt_workspaces": 2,
+    "remaining_unattempted": 6,
+    "scope": "partial interrupted evidence; no clean completion claim; both recorded quit replies report MissingMethodException"
+  },
+  "preserved_first_v24_collector_failure": {
+    "path": "artifacts/resources/native-regression-v24.json",
+    "sha256": "a4a730e9ebdd5ffe1ac04ce54304c190adac19025a615686a51f204b8de2e23a",
+    "report_id": "sha256:ffd1f774922284f42e6ebb6edce375a5491e3f1f7754cd0b43784f938a19ab3f",
+    "status": "failed",
+    "wall_seconds": 7.333826667047106,
+    "cpu_seconds": 4.685148254,
+    "peak_memory_bytes": 294748160,
+    "tracked_storage_bytes": 9328108,
+    "cap": null,
+    "reason": "private collector attempted to overwrite immutable summary.json; completed first game reused only after independent saved verification"
+  },
+  "next_public_input_issue": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/diagnostic-id-renaming-audit-v1.json",
+    "sha256": "3ac9272b5a1ddb24b177337cfb7aa2231c79bcbf8083f956f41dffbbd700ea96",
+    "claim_scope": "same_saved_public_state_consistent_referent_ID_renaming_changes_diagnostic_choice",
+    "effects": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/diagnostic-id-renaming-audit-v1-effects.json",
+      "sha256": "9c55d1c150e8679751ab6c814fe72be551e02019b8e3c582677b00c882583c0a"
+    },
+    "problem": "target_entity_ids remains in the diagnostic tie-break key; consistent referent-ID renaming changes which rat receives Weak Potion",
+    "original_target_HP": 12,
+    "renamed_target_HP": 15,
+    "priority": "first #146 public encoder/initializer task before fair comparisons or new learning",
+    "old_neural_model_ID_leakage_claimed": false
+  },
+  "validation": {
+    "repository_tests": 1281,
+    "repository_test_seconds": 48.46,
+    "formatting_types_protocol": "passed",
+    "targeted_Node_controls": 38,
+    "targeted_unit_tests": 25,
+    "saved_only_audit_script": "scripts/check-act-progression-v1.sh"
+  },
+  "remaining": [
+    "ID-independent semantic action keys and actual-engine learning features with reference-resolution/renaming controls",
+    "bounded worker reset/isolation and full-run resource measurement",
+    "existing unified actor/critic/PPO integration and short learnability control",
+    "one finite owner-run A8 neural pilot after explicit admission"
+  ],
+  "training_allowed": false,
+  "bulk_learning_admitted": false,
+  "adaptive_controller_allowed": false,
+  "optimizer_steps": 0,
+  "claim_scope": "two_natural_shipped_losses_plus_targeted_privileged_act_endings_and_clean_current_native_regression_only_not_useful_player_or_training_admission",
+  "evidence_id": "sha256:bccb2f0527488d6383bacc977dedde1ce224638349f960577a8b0c277c6c5ef1"
+}

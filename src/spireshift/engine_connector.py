@@ -489,6 +489,16 @@ def _run_menu_probe(
                 if fixture is not None and fixture.get("natural_run") is True
                 else "engine-new-run-shipped-probe-v1.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "new_run_v1"
+                else "engine-progression-shipped-probe-v1.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "progression_v1"
+                else "engine-progression-shipped-probe-v2.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "progression_v2"
+                else "engine-progression-shipped-probe-v3.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "progression_v3"
+                else "engine-progression-shipped-probe-v4.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "progression_v4"
+                else "engine-progression-shipped-probe-v5.mjs"
+                if fixture is not None and fixture.get("comparison_mode") == "progression_v5"
                 else "engine-combat-shipped-probe-v5.mjs"
                 if fixture is not None and fixture.get("comparison_mode") == "combat_bridge_v5"
                 else "engine-combat-shipped-probe-v4.mjs"
@@ -626,6 +636,11 @@ def _fresh_reward_profile_required(mode: object) -> bool:
 
 
 BENCHMARK_PROFILE_MODES = {
+    "progression_v1",
+    "progression_v2",
+    "progression_v3",
+    "progression_v4",
+    "progression_v5",
     "profile_text_v1",
     "combat_bridge_v4",
     "combat_bridge_v5",
@@ -634,6 +649,26 @@ BENCHMARK_PROFILE_MODES = {
 
 
 def _validate_benchmark_fixture_scope(fixture: dict[str, Any] | None) -> None:
+    if (
+        fixture is not None
+        and fixture.get("comparison_mode")
+        in {
+            "progression_v1",
+            "progression_v2",
+            "progression_v3",
+            "progression_v4",
+            "progression_v5",
+        }
+        and (
+            fixture.get("privileged_fixture") is not True
+            or fixture.get("natural_run") is True
+            or fixture.get("act") not in {1, 2, 3}
+            or "benchmark_progress" not in fixture
+            or "profile_policy" not in fixture
+            or "checkpoint_path" not in fixture
+        )
+    ):
+        raise ValueError("Progression checks require explicitly privileged benchmark checkpoints")
     if fixture is not None and "natural_run_limits" in fixture:
         limits = fixture["natural_run_limits"]
         if (
@@ -715,10 +750,20 @@ def _probe_connector_private(
     _validate_benchmark_fixture_scope(fixture)
     if (
         fixture is not None
-        and fixture.get("comparison_mode") == "new_run_v1"
+        and fixture.get("comparison_mode")
+        in {
+            "new_run_v1",
+            "progression_v1",
+            "progression_v2",
+            "progression_v3",
+            "progression_v4",
+            "progression_v5",
+        }
         and working_app is None
     ):
-        raise ValueError("New-run comparisons require the explicit fixed-app reuse policy")
+        raise ValueError(
+            "New-run and progression comparisons require the explicit fixed-app reuse policy"
+        )
     if type(retain_working_game) is not bool or (
         not retain_working_game and fixture is None and working_app is None
     ):
@@ -989,6 +1034,14 @@ def _probe_connector_private(
                 combat_discard=fixture.get("comparison_mode") == "combat_bridge_v5",
                 new_run=fixture.get("comparison_mode") == "new_run_v1",
                 natural_run=fixture.get("natural_run") is True,
+                progression=fixture.get("comparison_mode")
+                in {
+                    "progression_v1",
+                    "progression_v2",
+                    "progression_v3",
+                    "progression_v4",
+                    "progression_v5",
+                },
             )
             if fixture is not None
             else evaluate_connector_menu(checks)
@@ -1072,6 +1125,7 @@ def _evaluate_connector_checkpoint(
     combat_discard: bool = False,
     new_run: bool = False,
     natural_run: bool = False,
+    progression: bool = False,
 ) -> dict[str, Any]:
     if (
         sum(
@@ -1085,6 +1139,7 @@ def _evaluate_connector_checkpoint(
                 combat_bridge,
                 combat_discard,
                 new_run,
+                progression,
             )
         )
         > 1
@@ -1119,6 +1174,21 @@ def _evaluate_connector_checkpoint(
             "Ironclad_A8_selected",
             "same_public_initial_run_facts",
             "benchmark_profile_bound_before_launch",
+        )
+    if progression:
+        required = tuple(
+            name
+            for name in required
+            if name
+            not in {
+                "complete_public_starting_event",
+                "same_starting_public_option_titles_and_availability",
+            }
+        ) + (
+            "benchmark_profile_bound_before_launch",
+            "progression_source_not_terminal",
+            "progression_target_observed",
+            "progression_all_actions_delivered",
         )
     if natural_run:
         if not new_run:

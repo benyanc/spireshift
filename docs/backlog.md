@@ -1,50 +1,53 @@
 # SpireShift backlog
 
-Updated 2026-10-14 with the first clean shipped ending and the card-reward navigation repair.
-GitHub holds acceptance criteria and historical evidence. Codex may launch short builds, audits,
-tests and jobs autonomously. The owner launches and monitors tasks expected to take five minutes
-or more. Use saved timings and explicit caps.
+Updated 2026-10-14 with two clean natural shipped endings and the targeted act/victory checks.
+GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
+launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**First natural shipped ending verified (#145):** the owner's two-seed batch records one genuine
-loss after **144 gameplay actions on floor 6**, through normal startup, public actions and the
-shipped game-over result. The second seed stops alive after 42 actions on floor 2 because the
-initializer repeatedly reopens a card offer after Skip. Both attempts remain in the denominator;
-all observations/actions and app resets verify, with **zero new app copies**. The batch's
-`discovery_complete` means both planned cases were collected/audited, not two completed games.
-Its zero missing-field issues do not erase the separately recorded repeated-state failure.
+**The owner's repaired second seed is complete (#145).** It plays **104 actions** and ends in a
+native **loss on floor 5**, with no unsupported states, recovery, delivery failures or caps.
+Its saved trace and shared-app reset verify. Together with the original first seed's **144-action,
+floor-6 loss**, we have two independent naturally played shipped endings. They use explicitly
+recorded diagnostic policy revisions; this is environment evidence, not a common-policy strength
+estimate. The old repeated-card-offer failure remains unchanged. The old command now audits saved
+results; no new game is required.
 
-**The encountered card-reward loop is repaired.** Native Skip closes the card preview while its
-reward row can remain available. The diagnostic initializer now associates a delivered card-offer
-opening with its delivered Skip, remembers that particular offer for this room and ranks other
-advertised rewards/exits above reopening it. Same-text offers remain distinct. Mandatory menus
-receive no invented exit, uncertain actions are not replayed, and an external learned scorer
-retains every legal choice, including taking a card or revisiting a declined offer.
+**Targeted later-act, victory and cleanup handling is implemented.** Native v22–v24 restore missing
+graphics/call bindings and the absent test-mode audio service used by a boss death hook, retaining
+the original game rules DLL. A new explicit cleanup gate catches shutdown failures.
+A separately marked fixture reaches all three transitions through native Proceed and the final
+Architect dialogue. The shipped app verifies Act 1→2 and Act 2→3, including the fresh map tutorial.
+A saved-only supplemental audit verifies the already played final sequence through explicit win;
+its original batch still records the JSON key-order verifier failure. Zero HP alone is not loss,
+and entering the Architect's victory room alone is not yet a completed win.
 
-The fresh short check records **95 gameplay actions**, declines the card once, claims gold,
-continues and reaches **floor 5** with zero unsupported issues. It remains alive at the
-165-second client cap (**177.461 resource seconds**), so it is not a completed game. Its saved
-navigation/actions/progress and shared-app reset independently verify. The successful first
-seed's **137 non-tutorial choices** still match the new policy in a saved-only comparison;
-tutorial controls and the Host are unchanged. Keep that original ending; no repeat is required.
-This trace comparison is not another played game or a claim of general trajectory equivalence.
+All targeted app checks reuse the same app/inode with fresh profiles, zero new copies and verified
+reset. Forced boss defeats are privileged fixtures: **zero player victories and zero learning
+examples**. Imported boss saves re-offer rewards, so these checks compare act targets/endings,
+not full reward/RNG resume parity. Unknown states, missing fields and uncertain delivery remain
+failures. [Current evidence](evidence/actual-engine-v0.111.0-progression-v1.json) retains the owner
+result, new repairs, passing checks and every preceding failed diagnostic.
 
-Repository validation passes **1,256 tests**, formatting/types/protocol checks and **53 current
-Node controls**. New versioned case reporting shows a terminal loss/victory or an explicit
-incomplete reason and failure-category counts, even when no public field is missing. Old recipes
-and saved summaries retain their original schema, identifiers and results.
+**The current native regression passes 8/8 clean endings and shutdowns:** 775 decisions across
+10 decision families, 25.855 seconds of summed case wall time, zero failed/unattempted cases or
+new app copies. One saved successful case is reused and seven new games finish in the final
+collection. All are losses; the old v21 1,115-decision/15-family panel stays separate. A capped
+v23 cleanup failure and a private collector error remain preserved.
 
-**One next owner command:** `bash scripts/check-reward-decline-a8-run-v1.sh`. It starts only the
-previously blocked second seed from normal menus, about **5–10 minutes**, with a **15-minute
-game cap / 16-minute command cap**, 1,800 CPU seconds, 8 GB memory and 4 GB tracked storage.
-The fixed app is reused with a fresh profile; the first seed is not replayed. Read-only preflight
-passes. The owner launches/monitors this stage; no long follow-up, training or admission has run.
-[Guide](actual-engine-natural-runs.md) and
-[current evidence](evidence/actual-engine-v0.111.0-reward-decline-v1.json) bind the original two
-outcomes, repair, capped short check, trace comparison and new one-case recipe. Historical
-[interface](evidence/actual-engine-v0.111.0-discovery-and-declines-v1.json) and
-[shop](evidence/actual-engine-v0.111.0-shop-navigation-v1.json) evidence stay unchanged.
+**One concrete input blocker comes first in #146:** consistent renaming of temporary target IDs
+changes which enemy the initializer gives a Weak Potion. The semantic tie-break key accidentally
+includes `target_entity_ids`. This is a saved-state regression, not evidence that the old neural
+model used IDs. Resolve public references and keep opaque handles out of ranking/learned features;
+add renaming controls covering reference arrays and different target HP/statuses. Do this before
+fair player comparisons or new learning.
+
+**Next: the semantic input fix, cost/isolation and learner integration (#146).** Measure isolated
+full runs and connect the public encoder, actor/critic and experience stream to the existing neural/PPO learner. Pass a
+short learning control before one finite owner-run A8 pilot. No adaptive controller, broad GA
+batch, other difficulty or exhaustive mechanics matrix is a prerequisite. Training remains
+unadmitted; a diagnostic fixture cannot change that.
 
 **Current finish line:** [the bounded Ironclad/A8 contract](actual-engine-a8-finish-line.md)
 supersedes the open-ended mechanics queue below. Build the complete unattended public-action
@@ -56,14 +59,16 @@ connect the existing neural/PPO learner with a short learning check. Exhaustive 
 every static mode reference, other heroes/difficulties and repeated fixture matrices are later
 coverage work. Historical evidence below keeps its original scope.
 
-**Current work: #145, actual-engine public inputs and mechanics qualification.** The separately
-frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
+**Current work: #146 semantic inputs and actual-engine learning, with #145's final bounded input
+gate still open.** The separately frozen v0.111.0 / `41cef1ea` game and #144 preservation are complete. Ironclad/A8 stays fixed;
 full-run victory stays primary. Preserve all v0.107.1 archives, models, encoders and results.
 [ADR 0005](decisions/0005-actual-engine-v0.111.0-qualification.md) orders public/mechanics
 qualification, complete-run speed, then a separately versioned neural pilot. Emulator porting,
 other difficulties and larger unchanged PPO/GA batches remain deferred.
 
-**The natural headless loop now completes 8/8 candidate endings**, with zero unsupported states,
+## Historical qualification notes
+
+**The v21 natural headless loop completes 8/8 candidate endings**, with zero unsupported states,
 unknown actions, liveness failures or runtime errors in this frozen panel. It records **1,115
 decisions across 15 decision families** and takes **28.813 seconds** in total case wall time,
 including launches/integrity checks. All eight ordinary losses retain their original native death
@@ -88,8 +93,8 @@ attempt described above and now audits it without replay. Its original 15/16-min
 and [foundation evidence](evidence/actual-engine-v0.111.0-natural-run-foundation-v1.json) stay unchanged.
 The two-seed discovery command above supersedes that handoff; no old recipe is retried or relabeled.
 
-**Remaining before the new neural pilot:** qualify the shipped natural ending and targeted
-later-act/victory semantics; close encountered public-input/selection omissions; measure bounded
+**Remaining before the new neural pilot:** close the current-build environment checklist and
+encountered public-input/selection omissions; measure bounded
 worker isolation and whole-run costs; connect the new public experience/encoder to the existing
 learner and pass a short learning control. Broader combinations and repeat matrices stay deferred.
 

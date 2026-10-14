@@ -478,3 +478,27 @@ but has not run. Scope is visible pack identity/cost/upgrade and persistent owne
 full card-effect text, every selector or full-run fidelity. The official game DLL, shipped Host,
 SDK, historical patches and results remain preserved. Exact pins and limits:
 [v12 evidence](../../docs/evidence/actual-engine-v0.111.0-bundle-choice-v12.json).
+
+## Native v22–v24 transition and cleanup repairs
+
+The cumulative `sts2-cli-v0.111.0-native-run-v22.patch` adds the exact
+`CanvasItem.SetVisible(bool)` compatibility method. An Act 2 boss invokes this API even
+with native test mode enabled. The v23 patch also supplies the missing native audio
+singleton in test mode; the game's own sound methods already return without playback.
+It does not skip or replace monster death hooks, combat rules or RNG. The original
+`sts2.dll` remains unchanged. Fresh baseline/repaired builds retain separate exact pins.
+The current v24 patch adds the exact `GodotObject.Call(StringName, Variant[])` binding
+needed to compile the native test-mode audio cleanup method. V23 reaches endings but its
+CLI quit stalls on that missing binding; that capped regression remains preserved. The
+new fixture explicitly verifies cleanup, with no active run or pending operations afterward.
+
+The privileged progression checker uses native debug map entry, forced boss removals,
+reward decline, native Proceed and Architect dialogue to reach all three transitions.
+It exports reloadable boss coordinates/history and checks native game-over separately
+from the victory room and zero HP. Shipped comparisons use one fixed app and fresh
+benchmark profiles. These are transition/ending checks, not ordinary victories, whole
+checkpoint/RNG parity, playing strength or learning data. Historical failures and their
+original batch statuses stay preserved; a new saved-only audit fixes JSON key-order
+comparison without replaying the already successful final sequence.
+
+See [scoped evidence](../../docs/evidence/actual-engine-v0.111.0-progression-v1.json).

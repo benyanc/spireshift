@@ -51,6 +51,13 @@ from spireshift.engine_profile_bridge import (
     preflight_profile_bridges,
     verify_profile_bridges,
 )
+from spireshift.engine_progression import run_native_progression, verify_native_progression
+from spireshift.engine_progression_bridge import (
+    audit_saved_progression,
+    compare_progression_bridges,
+    preflight_progression_bridges,
+    verify_progression_bridges,
+)
 from spireshift.engine_qualification import (
     default_archive_path,
     engine_preflight,
@@ -145,6 +152,12 @@ def add_engine_parser(commands: Any) -> None:
         "discover-natural-runs",
         "preflight-natural-discovery",
         "verify-natural-discovery",
+        "check-native-progression",
+        "verify-native-progression",
+        "compare-progression-bridges",
+        "preflight-progression-bridges",
+        "verify-progression-bridges",
+        "audit-saved-progression",
         "probe-cli-rest-bridge",
         "probe-cli-shop-bridge",
         "inspect-game-source",
@@ -154,6 +167,18 @@ def add_engine_parser(commands: Any) -> None:
     ):
         command = sub.add_parser(name)
         command.add_argument("config", type=Path)
+        if name in {"check-native-progression", "verify-native-progression"}:
+            command.add_argument("progression_config", type=Path)
+        if name == "audit-saved-progression":
+            command.add_argument("progression_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+        if name in {
+            "compare-progression-bridges",
+            "preflight-progression-bridges",
+            "verify-progression-bridges",
+        }:
+            command.add_argument("progression_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
         if name in ("download-plan", "download-game"):
             command.add_argument("downloader_config", type=Path)
         if name in ("bootstrap-profile", "model-inventory"):
@@ -313,6 +338,24 @@ def run_engine_command(args: argparse.Namespace) -> int:
             code = 0 if result["status"] == "candidate_terminal" else 1
         elif args.engine_command == "verify-native-run":
             result = verify_native_run(config, args.report)
+            code = 0
+        elif args.engine_command == "check-native-progression":
+            result = run_native_progression(config, args.progression_config)
+            code = 0 if result["status"] == "native_progression_pass" else 1
+        elif args.engine_command == "verify-native-progression":
+            result = verify_native_progression(config, args.progression_config)
+            code = 0
+        elif args.engine_command == "preflight-progression-bridges":
+            result = preflight_progression_bridges(config, args.progression_config, node=args.node)
+            code = 0
+        elif args.engine_command == "compare-progression-bridges":
+            result = compare_progression_bridges(config, args.progression_config, node=args.node)
+            code = 0 if result["status"] == "progression_comparisons_pass" else 1
+        elif args.engine_command == "verify-progression-bridges":
+            result = verify_progression_bridges(config, args.progression_config, node=args.node)
+            code = 0
+        elif args.engine_command == "audit-saved-progression":
+            result = audit_saved_progression(config, args.progression_config, node=args.node)
             code = 0
         elif args.engine_command == "compare-new-run":
             result = compare_new_run(config, args.run_config, node=args.node)
