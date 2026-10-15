@@ -543,3 +543,17 @@ exploration. Optional Skip/claim/Proceed remain selectable. New environment/work
 bind this policy and host; historical recipes/results stay unchanged. The next v3 pilot starts
 from the original numerical initializer with zero Adam steps, per the owner's explicit choice.
 See [current evidence](../../docs/evidence/actual-engine-event-presentation-repair-v1.json).
+
+## Registry-driven all-pool coverage
+
+`sts2-cli-v0.111.0-native-run-v31.patch` extends the v28 baseline with hero-independent native
+stars/current star costs, ordered orb hover values and owned companion facts. Card legality stays
+with native CanPlay; native automatic targets are retained. Choice completion clears its old
+pending generation before invoking continuations. Executor/reward waits recognize newly opened
+card/reward/bundle boundaries. The original game DLL is unchanged.
+
+Separate privileged catalog/fixture commands enumerate the native ModelDb registry and prepare
+bounded cross-character card/potion/menu tests. They are available only through the diagnostic
+worker entry point, never the normal learner protocol. Generated/native text, fixture states and
+catalogs remain private; no fixture is PPO experience or a player win. A shared immutable projection
+cache removes the per-case source clone. See [coverage and the owner command](../../docs/actual-engine-mechanics-coverage.md).

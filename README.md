@@ -1,5 +1,10 @@
 # SpireShift
 
+Current handoff (2026-10-15): the native A8 v3 pilot finished, with no wins and inconclusive
+independent progress. The [systematic native mechanics coverage pass](docs/actual-engine-mechanics-coverage.md)
+now inventories every frozen model and tests cards/resources from all pools. Fifteen short controls
+pass; the larger owner-run sweep is the next command. No training follows that sweep automatically.
+
 SpireShift is a research environment and full-run agent for studying budgeted deliberation in
 Slay the Spire 2.
 

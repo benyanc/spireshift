@@ -13,7 +13,15 @@ original 17,473 numerical parameters and a zeroed optimizer. Only its explicit r
 binding differs. It does not load trained v2 weights or Adam state. All old results and checkpoints
 remain saved and unchanged.
 
-## One next command
+## Completed pilot; current handoff
+
+The owner has finished this v3 pilot: 332 normal endings, four failures and zero wins across
+336 attempts; 627 updates and 26,416 verified sampled decisions. Independent progress remains
+inconclusive. This command now reads historical results. **For current work use the single
+command in [the mechanics coverage guide](actual-engine-mechanics-coverage.md).** New all-pool
+inputs are separately versioned and cannot silently resume this experiment.
+
+## Historical pilot command
 
 Close the game, then run this from any directory:
 
@@ -21,12 +29,11 @@ Close the game, then run this from any directory:
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-native-a8-ppo-v3.sh
 ```
 
-Expect roughly **10–20 minutes**, with a **30-minute** hard cap. Codex has not launched this stage.
+Expect roughly **10–20 minutes**, with a **30-minute** hard cap. The owner completed this stage.
 The wrapper checks frozen inputs and saved admission, then prints wins, average floor, best game
 and failures for each batch. Share its final summary for assessment. Re-running a completed batch
 displays its saved result. Interrupted workspaces are preserved for inspection.
-The old v1/v2 commands still display their original stopped results. Use the v3 command above for
-new training; it writes a separate workspace.
+The old v1/v2 commands still display their original stopped results. The v3 command above now displays the saved completed pilot.
 
 ## Event effects and bounded exploration
 

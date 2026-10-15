@@ -148,7 +148,12 @@ def test_pilot_freezes_selection_and_isolates_failed_games(
     monkeypatch.setattr(learning, "load_learning_config", lambda *a: cfg)
     monkeypatch.setattr(learning, "load_worker_config", lambda *a: {"base_run_recipe": "unused"})
     monkeypatch.setattr(
-        learning, "_run_inputs", lambda *a: {"objective": score.evaluation_objective.as_dict()}
+        learning,
+        "_run_inputs",
+        lambda *a: {
+            "objective": score.evaluation_objective.as_dict(),
+            "inputs": {"combat_surface_revision": "v2"},
+        },
     )
     monkeypatch.setattr(learning, "identified", lambda *a: seeds)
     monkeypatch.setattr(learning, "_shared_snapshot", lambda *a: {})

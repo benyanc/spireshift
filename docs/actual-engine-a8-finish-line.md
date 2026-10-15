@@ -157,3 +157,17 @@ calls and a versioned worker policy permits bounded reward-menu exploration. Tar
 replays, twelve worker games and the four-game learning control pass. Per the owner's choice,
 v3 starts afresh from the original numerical initializer with zero Adam steps. Historical results
 remain unchanged. No new broad qualification campaign is required before that owner-run pilot.
+
+
+## Systematic coverage after the completed pilot, 2026-10-15
+
+The owner completed v3 (336 attempts, 332 normal endings, four failures, zero wins). A saved
+assessment verifies 627 updates and 26,416 clean sampled decisions; the independent progress
+comparison is inconclusive. The first-pilot finish line above has been reached. Following the
+owner's new request, the next finite package inventories every frozen native model, repairs
+cross-character resources/targets and nested choices, and generates all-pool card/combat-potion
+checks plus representative interaction regressions. Inventory does not prove effects; a blocked
+prerequisite does not count as exercised. Shared frozen inputs and one interface cache avoid app
+copies. Unknown and untested families remain explicit. See
+[the coverage contract and one owner command](actual-engine-mechanics-coverage.md). This is not a
+requirement to exhaust every card/relic/history combination or a change to Ironclad/A8 priority.

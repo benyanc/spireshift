@@ -267,6 +267,10 @@ def run_neural_experiment(
     d = load_learning_config(path, q)
     wcfg = load_worker_config(q.root / d["worker_qualification_config"], q)
     inputs = _run_inputs(q, q.root / wcfg["base_run_recipe"])
+    if inputs["inputs"].get("combat_surface_revision") == "v3":
+        from spireshift.engine_coverage import require_mechanics_coverage
+
+        require_mechanics_coverage(q, inputs, d.get("mechanics_coverage"))
     score = load_training_score_spec(q.root / d["training_spec"]["path"])
     if score.evaluation_objective.as_dict() != inputs["objective"]:
         raise ValueError("Native learner objective differs from the admitted whole-run CPU budget")

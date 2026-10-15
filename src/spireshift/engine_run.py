@@ -131,7 +131,9 @@ def _verify_saved_observation(row: dict[str, Any], runtime: str) -> None:
 def load_run_recipe(path: Path, qualification: EngineQualificationConfig) -> dict[str, Any]:
     document = json.loads(path.read_text())
     helpers = (
-        _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v2.mjs"})
+        _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v3.mjs"})
+        if document.get("policy_revision") == "diagnostic_v3"
+        else _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v2.mjs"})
         if document.get("policy_revision") == "diagnostic_v2"
         else HELPERS
     )
@@ -156,7 +158,7 @@ def load_run_recipe(path: Path, qualification: EngineQualificationConfig) -> dic
         or type(document.get("max_decisions")) is not int
         or not 1 <= document["max_decisions"] <= 4096
         or document.get("max_repeated_states") != 3
-        or document.get("policy_revision") not in {None, "diagnostic_v2"}
+        or document.get("policy_revision") not in {None, "diagnostic_v2", "diagnostic_v3"}
         or set(document.get("helpers_sha256", {})) != helpers
     ):
         raise ValueError("Expected a short, fixed-A8 natural public-run diagnostic recipe")
@@ -175,7 +177,7 @@ def _run_inputs(qualification: EngineQualificationConfig, path: Path) -> dict[st
         or inputs.get("schema_version") != "engine-native-run-inputs-config-v1"
         or inputs.get("public_projection_revision") != "native_run_v1"
         or inputs.get("combat_bridge_revision") != "v7"
-        or inputs.get("combat_surface_revision") != "v2"
+        or inputs.get("combat_surface_revision") not in {"v2", "v3"}
         or inputs.get("qualification_config_id") != qualification.config_id
         or inputs.get("content_policy") != PROFILE
     ):
@@ -321,7 +323,9 @@ def probe_native_run(
                     qualification.root
                     / "scripts"
                     / (
-                        "probe-engine-native-run-v2.mjs"
+                        "probe-engine-native-run-v3.mjs"
+                        if recipe.get("policy_revision") == "diagnostic_v3"
+                        else "probe-engine-native-run-v2.mjs"
                         if recipe.get("policy_revision") == "diagnostic_v2"
                         else "probe-engine-native-run-v1.mjs"
                     )

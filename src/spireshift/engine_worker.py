@@ -50,10 +50,10 @@ class _EpisodeLiveness:
             raise ValueError("Repeated public-state exploration cap")
 
 
-def worker_helpers(root: Path) -> dict[str, str]:
+def worker_helpers(root: Path, script: str = WORKER_SCRIPT) -> dict[str, str]:
     return {
         name: _sha_file(root / "scripts" / name)
-        for name in sorted(_script_closure(root / "scripts", {WORKER_SCRIPT}))
+        for name in sorted(_script_closure(root / "scripts", {script}))
     }
 
 
@@ -65,10 +65,17 @@ class EngineWorker:
         workspace: Path,
         node: Path,
         helpers: dict[str, str],
+        *,
+        script: str = WORKER_SCRIPT,
+        projection_cache: Path | None = None,
     ) -> None:
         self.root, self.workspace, self.inputs = qualification.root, workspace, inputs
         _private_path(self.root, str(workspace.relative_to(self.root)))
-        if helpers != worker_helpers(self.root):
+        if script not in {WORKER_SCRIPT, "engine-mechanics-worker-v1.mjs"}:
+            raise ValueError("Unqualified worker entry point")
+        if projection_cache is not None and script != "engine-mechanics-worker-v1.mjs":
+            raise ValueError("Shared projection is diagnostic-only")
+        if helpers != worker_helpers(self.root, script):
             raise ValueError("Native worker helper inventory changed")
         # mkdir itself is exclusive: no automatic reuse/clearing of an interrupted marker.
         workspace.mkdir(parents=True, exist_ok=False)
@@ -102,6 +109,8 @@ class EngineWorker:
         (profile / "tmp").mkdir()
         headless = next(x for x in qualification.document["sources"] if x["name"] == "headless")
         spec = {
+            "projection_cache": str(projection_cache) if projection_cache is not None else None,
+            "coverage_diagnostic": script == "engine-mechanics-worker-v1.mjs",
             "headless_root": str(_private_path(self.root, headless["path"])),
             "attempt": str(workspace),
             "profile": str(profile),
@@ -124,7 +133,7 @@ class EngineWorker:
             environment.pop(name, None)
         self.stderr = (workspace / "stderr.log").open("wb")
         self.child = subprocess.Popen(
-            [str(node), str(self.root / "scripts" / WORKER_SCRIPT)],
+            [str(node), str(self.root / "scripts" / script)],
             cwd=self.root,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,

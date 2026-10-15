@@ -195,7 +195,7 @@ def _probe_cli_document(
             not projected
             or combat_revision not in {"v6", "v7"}
             or combat_revision == "v7"
-            and document.get("combat_surface_revision") != "v2"
+            and document.get("combat_surface_revision") not in {"v2", "v3"}
             or document.get("content_policy") != "native_benchmark_full_v1"
             or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
             or plan.get("scenario")
@@ -386,6 +386,9 @@ def _probe_cli_document(
             "spireshift_cli_native_run_v24_local_toolchain",
             "spireshift_cli_native_run_v27_local_toolchain",
             "spireshift_cli_native_run_v28_local_toolchain",
+            "spireshift_cli_native_run_v29_local_toolchain",
+            "spireshift_cli_native_run_v30_local_toolchain",
+            "spireshift_cli_native_run_v31_local_toolchain",
         }
         and localization is None
     ):
@@ -628,7 +631,7 @@ def verify_projection_inputs(
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Bind the exact MIT hook, public surface helper and installed SDK without downloads."""
     if "combat_surface_revision" in document and (
-        document.get("combat_surface_revision") != "v2"
+        document.get("combat_surface_revision") not in {"v2", "v3"}
         or document.get("combat_bridge_revision") != "v7"
         or document.get("schema_version")
         not in {
@@ -637,6 +640,11 @@ def verify_projection_inputs(
         }
     ):
         raise ValueError("Explicit potion-slot projection is restricted to its new bridge revision")
+    if document.get("combat_surface_revision") == "v3" and (
+        document.get("schema_version") != "engine-native-run-inputs-config-v1"
+        or document.get("public_projection_revision") != "native_run_v1"
+    ):
+        raise ValueError("All-pool combat projection requires separately pinned native-run inputs")
     pins = document["projection"]
     headless = next(
         item for item in qualification.document["sources"] if item["name"] == "headless"
@@ -672,8 +680,8 @@ def verify_projection_inputs(
         if revision in {"combat_v4", "bundle_v5", "native_run_v1"}:
             helpers.extend(
                 [
-                    "engine-combat-surface-v2.mjs"
-                    if document.get("combat_surface_revision") == "v2"
+                    f"engine-combat-surface-{document['combat_surface_revision']}.mjs"
+                    if document.get("combat_surface_revision") in {"v2", "v3"}
                     else "engine-combat-surface.mjs",
                     "probe-engine-cli-combat.mjs",
                 ]

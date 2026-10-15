@@ -1,34 +1,32 @@
 # SpireShift backlog
 
-Updated 2026-10-14 with two clean natural shipped endings and the targeted act/victory checks.
+Updated 2026-10-15 with the completed native v3 pilot and the systematic mechanics coverage pass.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**Native PPO really trained; the next pilot starts afresh (#146, 2026-10-14).** The owner's v2
-pilot completed three training rounds: **222 optimizer steps and 9,307 verified sampled
-decisions**. It recorded 144/336 planned games (137 normal endings, seven failures). The fourth
-panel had three failures, exceeding its two-failure allowance, so no round-4 update or independent
-development comparison followed. All observed endings were losses; playing strength is unproven.
+**The actual-engine v3 pilot is complete; systematic coverage is next (#148 / #146, 2026-10-15).**
+The owner finished all 336 attempts: **332 normal endings, four failures, 627 PPO updates and
+26,416 verified sampled training decisions**. There are no wins. Independent average floor is
+8.75 selected versus 7.4375 initial (8.625 selected with its failed game scored zero); the paired
+interval includes zero. Preserve every checkpoint, the four failures and the inspected development
+panel. This is inconclusive quality evidence, not base readiness or permission to scale blindly.
 
-Host v28 repairs the shared missing event presentation calls that broke Jungle Maze Adventure
-and Punch-Off. It discovers exact sound/camera call sites in native event methods and their async
-bodies/closures, preserving the native game effects, choices and RNG. Nine methods across five
-events contain nineteen bridged calls. The original failing choices now complete with the correct
-42-gold award and Injury/relic offer. Dense Vegetation's two branches still pass. A reward-menu
-cycle also exposed the old three-visits cutoff as too strict. New workers allow bounded exploration
-without removing Skip or forcing a card: eight consecutive identical observations, sixty-four visits
-to any public state, with the existing decision/time/CPU caps unchanged. The old failed seed now
-completes 118 decisions to a genuine floor-5 loss after the identical 93-choice prefix.
+The new private inventory joins all **1,660 native model types** without missing/extra classes.
+Host v31 and public combat v3 remove hero-only resource assumptions, preserve foreign orbs,
+companions and current star costs, and fix reentrant choices plus reward-to-bundle waiting.
+The finite generated suite has **1,824 contexts** across 596 non-mock cards, 65 potions and ten
+named interaction regressions. All 15 short controls pass (14 effects and one native unplayable state). They test cost reduction, multiple
+rest actions, shop restocking/removal and Skip. They share frozen inputs and one small interface
+cache; no app copies or training follow. Inventory and effect coverage are separate claims.
 
-Short checks pass: twelve isolated/reset games, a four-game/six-update learning control and saved-only
-admission/preflight. Shared inputs stay unchanged and zero app copies are made. **The owner chose
-a fresh comparison:** v3 uses exactly the original 17,473 numerical parameters and a zeroed optimizer;
-it does not load the three trained rounds. Every old result/checkpoint remains preserved.
-**Next: the owner runs the fresh v3 pilot** using the single command in
-[the pilot guide](actual-engine-neural-pilot.md). No further broad qualification campaign is needed.
-See [the repair evidence](evidence/actual-engine-event-presentation-repair-v1.json).
+**Next: the owner runs the single sweep command in [the coverage guide](actual-engine-mechanics-coverage.md).**
+Collect other cases after a failed worker is proved stopped; keep unsupported/prerequisite-blocked/
+untested mechanics explicit. Resolve shared causes and the remaining outside-combat potion,
+random-sequence and lifecycle requirements before a new environment/worker/neural admission.
+The new all-pool path has a coverage gate; historical pilot results are not retroactively upgraded.
+The earlier v1/v2 stops and their event-presentation repairs remain preserved.
 
 **The owner's repaired second seed is complete (#145).** It plays **104 actions** and ends in a
 native **loss on floor 5**, with no unsupported states, recovery, delivery failures or caps.
@@ -81,18 +79,11 @@ improvement. The workflow reuses the tested PPO mathematics with a new public en
 no old v0.107.1 input or trained weights are silently migrated. Every decision family remains
 learnable, including Skip and public memory of previously declined offers.
 
-**Next is the owner's fresh v3 actual-engine A8 pilot (#146).** Its explicit admission retains
-the policy-only bootstrap design: 256 sampled games, 48 training-confirmation games and 32 paired
-independent-development games, **336 planned attempts total**. The selected checkpoint is frozen
-before development opens. The recipe, runner, seed ownership and resource caps are pinned;
-preflight launches no games. Use the **one command** in
-[the pilot guide](actual-engine-neural-pilot.md). The owner's stopped v1/v2 results stay separate;
-Codex has not started the long v3 stage.
-Strong-base readiness and adaptive thinking remain unpassed. Assess the pilot before scaling
-or selecting another method; GA, other difficulties and patch-transfer work remain later.
-For a promising native checkpoint, connect its new input/action schema to the existing reused
-shipped-app runner and check action semantics before a neural UI demonstration. The current
-shipped diagnostic player and native neural pilot are separate players.
+**The v3 neural pilot is now historical, not the next command.** Its finite learning and
+independent comparison are complete. Use the coverage guide for the current owner handoff.
+Strong-base readiness and adaptive thinking remain unpassed. GA, other difficulties and patch
+transfer remain later; a useful native checkpoint still needs its new schema connected to the
+reused shipped-app runner before a neural UI demonstration.
 
 **Current finish line:** [the bounded Ironclad/A8 contract](actual-engine-a8-finish-line.md)
 supersedes the open-ended mechanics queue below. Build the complete unattended public-action
@@ -667,7 +658,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| Shared event presentation/liveness repaired; owner fresh v3 pilot next | Preserve v2’s 222 updates/9,307 verified decisions and stopped fourth panel. Exact failed-choice replays, Dense Vegetation, worker isolation and short learning pass. Run the fresh finite 336-attempt pilot from the original parameters; assess frozen development results. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| v3 pilot finished; systematic coverage implemented, owner sweep next ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve 627 updates/26,416 verified decisions, 332 normal endings and four failures; no wins or reliable held-out improvement. Inventory all native types, exercise all-pool cards/potions and named interactions, collect isolated gaps, then qualify new native learning inputs. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

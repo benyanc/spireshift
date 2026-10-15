@@ -104,6 +104,7 @@ def add_engine_parser(commands: Any) -> None:
         "download-game",
         "bootstrap-profile",
         "model-inventory",
+        "check-mechanics-coverage",
         "prepare-connector",
         "probe-connector-menu",
         "probe-shipped-checkpoint",
@@ -262,6 +263,10 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-connector-menu":
             command.add_argument("--node", required=True, type=Path)
+        if name == "check-mechanics-coverage":
+            command.add_argument("coverage_config", type=Path)
+            command.add_argument("--node", required=True, type=Path)
+            command.add_argument("--stage", choices=["inventory", "smoke", "sweep"], required=True)
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
@@ -347,7 +352,22 @@ def run_engine_command(args: argparse.Namespace) -> int:
             return 0 if result["status"] == "downloaded_identity_matches" else 1
         if args.output is not None and (args.output.exists() or args.output.is_symlink()):
             raise FileExistsError(f"Refusing to overwrite an existing result: {args.output}")
-        if args.engine_command == "inventory-working-apps":
+        if args.engine_command == "check-mechanics-coverage":
+            from spireshift.engine_coverage import run_mechanics_coverage
+
+            result = run_mechanics_coverage(
+                config, args.coverage_config, node=args.node, stage=args.stage
+            )
+            code = (
+                0
+                if result["inventory_complete"]
+                and (
+                    args.stage == "inventory"
+                    or (not result["known_gaps"] and not result["not_attempted_cases"])
+                )
+                else 1
+            )
+        elif args.engine_command == "inventory-working-apps":
             result = working_app_inventory(config)
             code = 0
         elif args.engine_command == "preflight-native-run":

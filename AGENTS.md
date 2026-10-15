@@ -65,6 +65,14 @@ the repaired v3 pilot afresh for a clean comparison. Use the original seeded num
 initializer and zero Adam state; preserve v2's trained checkpoints and results separately.
 Do not automatically resume those trained weights in this pilot.
 
+On 2026-10-15 the owner requested a systematic native mechanics coverage pass after the v3
+pilot finished with four failures. Inventory every registered model and test all card pools,
+including cross-character resources on Ironclad/A8, current costs, nested choices and representative
+rest/shop/reward interactions. Distinguish inventoried, observed, effect-exercised and untested
+mechanics; do not claim exhaustive interaction proof. Large generated sweeps are owner-run.
+Keep this finite pass and its known-gap gate separate from PPO experience and prior admissions.
+See `docs/actual-engine-mechanics-coverage.md`.
+
 The next v0.111.0 startup contract is explicitly `native_benchmark_full_v1`: native full content,
 all native acts discovered, Ironclad/A8, the shipped lobby's seeded random act selection and
 enabled tutorials with no completed entries. It uses synthetic isolated benchmark progress,
