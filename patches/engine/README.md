@@ -557,3 +557,22 @@ bounded cross-character card/potion/menu tests. They are available only through 
 worker entry point, never the normal learner protocol. Generated/native text, fixture states and
 catalogs remain private; no fixture is PPO experience or a player win. A shared immutable projection
 cache removes the per-case source clone. See [coverage and the owner command](../../docs/actual-engine-mechanics-coverage.md).
+
+## Configured event cards and native play receipts (host v32)
+
+`sts2-cli-v0.111.0-native-run-v32.patch` extends v31. The first complete owner sweep found
+50 failures in three groups. Native AnyAlly target geometry can include the owner even when
+CanPlay denies the card with NoLivingAllies; public combat v4 retains these disabled facts and
+never offers a multiplayer action. Malformed geometry or a playable unsupported ally still fails.
+
+The canonical Mad Science template has no chosen type or rider. Its coverage fixture now clones
+the nine configured previews from native Tinker Time type/rider options, then applies native
+upgrades. It does not implement the card's effects or invent a valid rider. This tests private
+configured preview clones, not the complete naturally played event path.
+
+Particle Wall legitimately returns to the hand. Manual play observes native combat history for
+a newly started non-autoplay entry referencing that exact card, latching before combat cleanup
+can clear the history. This private delivery evidence does not enter public/model inputs. Old
+history and another card's play cannot satisfy it; uncertain delivery is never resubmitted.
+The rules DLL remains unchanged. A one-copy fixture checks two successive plays of the same card;
+the old failed sweep remains preserved. This host is not a learning admission.

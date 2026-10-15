@@ -267,7 +267,7 @@ def run_neural_experiment(
     d = load_learning_config(path, q)
     wcfg = load_worker_config(q.root / d["worker_qualification_config"], q)
     inputs = _run_inputs(q, q.root / wcfg["base_run_recipe"])
-    if inputs["inputs"].get("combat_surface_revision") == "v3":
+    if inputs["inputs"].get("combat_surface_revision") in {"v3", "v4"}:
         from spireshift.engine_coverage import require_mechanics_coverage
 
         require_mechanics_coverage(q, inputs, d.get("mechanics_coverage"))

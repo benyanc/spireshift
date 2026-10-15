@@ -2,8 +2,10 @@
 
 Current handoff (2026-10-15): the native A8 v3 pilot finished, with no wins and inconclusive
 independent progress. The [systematic native mechanics coverage pass](docs/actual-engine-mechanics-coverage.md)
-now inventories every frozen model and tests cards/resources from all pools. Fifteen short controls
-pass; the larger owner-run sweep is the next command. No training follows that sweep automatically.
+inventories every frozen model and tests cards/resources from all pools. The owner completed all
+1,824 checks and found 50 failures in three shared causes. The repairs add valid event-card forms
+and native play receipts. All 90 focused repaired controls pass; the owner's full recheck is next.
+No training follows automatically.
 
 SpireShift is a research environment and full-run agent for studying budgeted deliberation in
 Slay the Spire 2.

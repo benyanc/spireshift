@@ -6,7 +6,7 @@ launches and monitors tasks expected to take five minutes or more. Use saved tim
 
 ## Current handoff and direction
 
-**The actual-engine v3 pilot is complete; systematic coverage is next (#148 / #146, 2026-10-15).**
+**The actual-engine v3 pilot and first mechanics sweep are complete (#148 / #146, 2026-10-15).**
 The owner finished all 336 attempts: **332 normal endings, four failures, 627 PPO updates and
 26,416 verified sampled training decisions**. There are no wins. Independent average floor is
 8.75 selected versus 7.4375 initial (8.625 selected with its failed game scored zero); the paired
@@ -16,14 +16,23 @@ panel. This is inconclusive quality evidence, not base readiness or permission t
 The new private inventory joins all **1,660 native model types** without missing/extra classes.
 Host v31 and public combat v3 remove hero-only resource assumptions, preserve foreign orbs,
 companions and current star costs, and fix reentrant choices plus reward-to-bundle waiting.
-The finite generated suite has **1,824 contexts** across 596 non-mock cards, 65 potions and ten
-named interaction regressions. All 15 short controls pass (14 effects and one native unplayable state). They test cost reduction, multiple
-rest actions, shop restocking/removal and Skip. They share frozen inputs and one small interface
-cache; no app copies or training follow. Inventory and effect coverage are separate claims.
+The owner finished **1,824/1,824 contexts** in **44 minutes**: 1,691 native effects,
+83 observed prerequisite blocks and 50 failures. The failures share three causes: 45 disabled
+multiplayer-card geometry checks, three invalid uninitialized Mad Science fixtures, and two
+Particle Wall plays incorrectly marked undelivered after returning to hand. Original results stay
+unchanged. Host v32/public combat v4 repair these causes; native Tinker Time previews supply nine
+valid card forms, and exact new manual-play history confirms return-to-hand delivery. The expanded
+plan has **1,849 cases**, including a same-card repeat check. Shared frozen inputs/cache created
+zero apps and retained about **357 MB** for the original sweep.
 
-**Next: the owner runs the single sweep command in [the coverage guide](actual-engine-mechanics-coverage.md).**
-Collect other cases after a failed worker is proved stopped; keep unsupported/prerequisite-blocked/
-untested mechanics explicit. Resolve shared causes and the remaining outside-combat potion,
+**The repaired controls pass 90/90:** 44 effects and 46 native prerequisite blocks, zero failures,
+127.81 seconds, 19.08 MB retained evidence. Same physical Particle Wall replay and nine distinct
+configured card forms verify. All original and repaired case hashes verify; 1,339 repository tests
+and 19 focused new Node checks pass.
+
+**Next: the owner's full recheck in [the coverage guide](actual-engine-mechanics-coverage.md).**
+Other cases continue only after a failed worker is proved stopped; keep unsupported/prerequisite-
+blocked/untested mechanics explicit. Resolve the remaining outside-combat potion,
 random-sequence and lifecycle requirements before a new environment/worker/neural admission.
 The new all-pool path has a coverage gate; historical pilot results are not retroactively upgraded.
 The earlier v1/v2 stops and their event-presentation repairs remain preserved.
@@ -658,7 +667,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| v3 pilot finished; systematic coverage implemented, owner sweep next ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve 627 updates/26,416 verified decisions, 332 normal endings and four failures; no wins or reliable held-out improvement. Inventory all native types, exercise all-pool cards/potions and named interactions, collect isolated gaps, then qualify new native learning inputs. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| v3 pilot and first sweep complete; three shared causes repaired, recheck next ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve 627 updates/26,416 verified decisions, 332 normal endings and four failures; no wins or reliable held-out improvement. First sweep completed all 1,824 cases with 50 failures in three groups. Validate v32/combat v4 and all nine native event-card forms in the new 1,849-case plan, resolve remaining requirements, then qualify new learning inputs. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

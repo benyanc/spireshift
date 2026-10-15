@@ -7,6 +7,7 @@ an exercised effect. Fixtures, source signals and failures never become PPO data
 from __future__ import annotations
 
 import json
+import re
 import time
 from collections import Counter
 from pathlib import Path
@@ -19,7 +20,7 @@ from spireshift.engine_run import _assert_saved_public, _run_inputs
 from spireshift.engine_worker import EngineWorker, worker_helpers
 from spireshift.full_run_experience import atomic_json
 
-SCRIPT = "engine-mechanics-worker-v1.mjs"
+SCRIPT = "engine-mechanics-worker-v2.mjs"
 IMPLEMENTATION = ("engine_coverage.py", "engine_worker.py", "engine_run.py", "engine_cli_probe.py")
 
 
@@ -48,6 +49,7 @@ REQUIREMENTS = {
     "foreign_companion": "summon-osty",
     "nested_replayed_card_selection": "headbutt-replay",
     "dynamic_cost_interactions": "enlightenment",
+    "return_to_hand_manual_replay": "particle-wall-repeat",
     "reward_to_nested_bundle": "reward-scroll-boxes",
     "multiple_rest_actions_and_exit": "rest-multiple-options",
     "shop_restock_remove_leave": "shop-restock-remove",
@@ -76,6 +78,21 @@ def generate_plan(catalog: dict[str, Any], registry: dict[str, Any]) -> dict[str
     if len({row["class"] for row in models}) != len(models):
         raise ValueError("Duplicate live native model class")
     live = {row["class"]: row for row in models}
+    variants: dict[str, list[dict[str, str]]] = {}
+    for variant in catalog.get("card_fixture_variants", []):
+        if (
+            not isinstance(variant, dict)
+            or set(variant) != {"card_id", "variant_id", "card_type", "construction_authority"}
+            or variant["card_type"] not in {"Attack", "Skill", "Power"}
+            or not re.fullmatch(r"[a-z]+-[a-z]+", variant["variant_id"])
+            or variant["construction_authority"] != "native_TinkerTime_current_option_card_preview"
+            or variant["card_id"] not in {r["id"].split(".")[-1] for r in models}
+        ):
+            raise ValueError("Incomplete native configured-card construction inventory")
+        existing = variants.setdefault(variant["card_id"], [])
+        if any(v["variant_id"] == variant["variant_id"] for v in existing):
+            raise ValueError("Duplicate native configured-card variant")
+        existing.append(variant)
     registered = {row["type"] for row in registry["models"]}
     gaps = sorted(registered - set(live))
     rows, cases = [], []
@@ -95,16 +112,41 @@ def generate_plan(catalog: dict[str, Any], registry: dict[str, Any]) -> dict[str
                 maximum = row.get("maximum_upgrade")
                 if type(maximum) is not int or maximum < 0:
                     raise ValueError("Unknown native upgrade limit")
-                for upgrade, funded in [(0, False), (0, True)] + ([(1, True)] if maximum else []):
-                    case = {
-                        "case_id": f"{card_id}-u{upgrade}-{'funded' if funded else 'normal'}",
-                        "fixture": {"card_id": card_id, "upgrade": upgrade, "funded": funded},
-                        "kind": "generated_card",
-                        "model_class": item["type"],
-                        "required_effect": False,
-                    }
-                    cases.append(case)
-                status = "planned_base_and_first_upgrade" if maximum else "planned_base"
+                initialized = variants.get(card_id, [])
+                if row.get("card_type") == "None" and not initialized:
+                    # The raw template is not a playable card; do not manufacture its effects.
+                    status = "native_fixture_initialization_missing"
+                else:
+                    forms: list[dict[str, str] | None] = (
+                        list(initialized) if initialized else [None]
+                    )
+                    for form in forms:
+                        for upgrade, funded in [(0, False), (0, True)] + (
+                            [(1, True)] if maximum else []
+                        ):
+                            suffix = f"-{form['variant_id']}" if form else ""
+                            fixture: dict[str, Any] = {
+                                "card_id": card_id,
+                                "upgrade": upgrade,
+                                "funded": funded,
+                            }
+                            if form:
+                                fixture["card_variant"] = form["variant_id"]
+                            funding = "funded" if funded else "normal"
+                            case = {
+                                "case_id": f"{card_id}{suffix}-u{upgrade}-{funding}",
+                                "fixture": fixture,
+                                "kind": "generated_card",
+                                "model_class": item["type"],
+                                "required_effect": False,
+                                **(
+                                    {"construction_authority": form["construction_authority"]}
+                                    if form
+                                    else {}
+                                ),
+                            }
+                            cases.append(case)
+                    status = "planned_base_and_first_upgrade" if maximum else "planned_base"
         if row and item["family"] == "Potions" and status == "inventoried_only":
             potion_id = row["id"].split(".")[-1]
             cases.append(
@@ -140,6 +182,7 @@ def generate_plan(catalog: dict[str, Any], registry: dict[str, Any]) -> dict[str
         ("summon-osty", "BODYGUARD", {"summon_osty": True}),
         ("headbutt-replay", "HEADBUTT", {"enchantment": "GLAM", "discard_filler": True}),
         ("enlightenment", "ENLIGHTENMENT", {"hand_extra": "METEOR_STRIKE"}),
+        ("particle-wall-repeat", "PARTICLE_WALL", {"copies": 1}),
         ("reward-scroll-boxes", "STRIKE_IRONCLAD", {"reward_relic": "SCROLL_BOXES"}),
         (
             "rest-multiple-options",
@@ -164,7 +207,7 @@ def generate_plan(catalog: dict[str, Any], registry: dict[str, Any]) -> dict[str
             }
         )
     body = {
-        "schema_version": "native-mechanics-plan-v1",
+        "schema_version": "native-mechanics-plan-v2",
         "registry_id": registry["registry_id"],
         "catalog_id": catalog["report_id"],
         "models": rows,
@@ -176,7 +219,8 @@ def generate_plan(catalog: dict[str, Any], registry: dict[str, Any]) -> dict[str
         },
         "unknown_target_types": unknown_targets,
         "requirements": REQUIREMENTS,
-        "maximum_upgrade_exercised": 1,
+        "card_fixture_variants": catalog.get("card_fixture_variants", []),
+        "maximum_planned_upgrade_level": 1,
         "unbounded_upgrade_combinations_exhausted": False,
         "all_interactions_proven": False,
         "training_allowed": False,
@@ -203,7 +247,10 @@ def coverage_summary(
         plan["runtime_missing_classes"]
         or plan["unregistered_runtime_classes"]
         or plan["unknown_target_types"]
-        or any(row["status"] == "metadata_incomplete" for row in plan["models"])
+        or any(
+            row["status"] in {"metadata_incomplete", "native_fixture_initialization_missing"}
+            for row in plan["models"]
+        )
     )
     named = {
         row["spec"]["case_id"]: row["status"]
@@ -270,6 +317,8 @@ def _exercise(worker: EngineWorker, spec: dict[str, Any], maximum: int) -> dict[
     actions: list[dict[str, Any]] = []
     decisions: list[str] = []
     played = False
+    plays = 0
+    repeat = spec["case_id"] == "particle-wall-repeat"
     initial_context = current["model_input"]["context"]
     purchases = 0
     removal = False
@@ -285,6 +334,7 @@ def _exercise(worker: EngineWorker, spec: dict[str, Any], maximum: int) -> dict[
             break
         if (
             played
+            and (not repeat or plays >= 2)
             and spec["case_id"]
             not in {"rest-multiple-options", "shop-restock-remove", "skip-card-reward"}
             and kind
@@ -339,7 +389,7 @@ def _exercise(worker: EngineWorker, spec: dict[str, Any], maximum: int) -> dict[
             )
             played = True
         elif kind == "combat_turn":
-            if played:
+            if played and (not repeat or plays >= 2):
                 break
             eligible = [
                 i
@@ -362,6 +412,7 @@ def _exercise(worker: EngineWorker, spec: dict[str, Any], maximum: int) -> dict[
                 }
             index = eligible[0]
             played = True
+            plays += 1
         else:
             # Follow only current native choices. Never guess an exit or retry uncertain delivery.
             eligible = [
@@ -434,6 +485,19 @@ def _exercise(worker: EngineWorker, spec: dict[str, Any], maximum: int) -> dict[
             raise ValueError("Optional card reward did not offer Skip")
         if name == "headbutt-replay" and decisions.count("card_selection") < 2:
             raise ValueError("Replayed selection did not exercise two separate native choices")
+        if name == "particle-wall-repeat":
+            before = initial_context["interaction"]["content"]["context"]["player"]
+            if (
+                plays != 2
+                or len(before["hand"]) != 1
+                or len(player.get("hand", [])) != 1
+                or not str(player["hand"][0]["definition_id"]).endswith("PARTICLE_WALL")
+                or player.get("block", 0) <= before.get("block", 0)
+                or player.get("stars") != before["stars"] - 4
+            ):
+                raise ValueError(
+                    "The same native Particle Wall did not play twice and return to hand"
+                )
     return {
         "status": "effect_exercised",
         "public_keys": observations,
@@ -636,7 +700,7 @@ def require_mechanics_coverage(
     This never admits bulk learning by itself. Existing worker, short-control,
     information-boundary and explicit experiment-admission checks still apply.
     """
-    if inputs["inputs"].get("combat_surface_revision") != "v3":
+    if inputs["inputs"].get("combat_surface_revision") not in {"v3", "v4"}:
         return
     if not isinstance(reference, dict) or set(reference) != {"config", "report_id"}:
         raise ValueError("All-pool learning requires a frozen mechanics coverage gate")

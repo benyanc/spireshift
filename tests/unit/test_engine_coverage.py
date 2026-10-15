@@ -167,7 +167,63 @@ def test_new_all_pool_learning_requires_explicit_coverage_even_after_a_smoke() -
     from spireshift.engine_coverage import require_mechanics_coverage
 
     q = SimpleNamespace(root=Path("/unused"))
-    with pytest.raises(ValueError, match="frozen mechanics coverage gate"):
-        require_mechanics_coverage(q, {"inputs": {"combat_surface_revision": "v3"}}, None)  # type: ignore[arg-type]
+    for revision in ("v3", "v4"):
+        with pytest.raises(ValueError, match="frozen mechanics coverage gate"):
+            require_mechanics_coverage(q, {"inputs": {"combat_surface_revision": revision}}, None)  # type: ignore[arg-type]
     # Historical contracts keep their own original gates and are not retroactively relabelled.
     require_mechanics_coverage(q, {"inputs": {"combat_surface_revision": "v2"}}, None)  # type: ignore[arg-type]
+
+
+def test_configured_cards_use_each_native_form_instead_of_the_uninitialized_template() -> None:
+    catalog, registry = inventory()
+    row = catalog["models"][0]
+    row["card_type"] = "None"
+    forms = [
+        (kind, rider) for kind in ("Attack", "Skill", "Power") for rider in ("one", "two", "three")
+    ]
+    catalog["card_fixture_variants"] = [
+        {
+            "card_id": "FOREIGN",
+            "variant_id": f"{kind.lower()}-{rider}",
+            "card_type": kind,
+            "construction_authority": "native_TinkerTime_current_option_card_preview",
+        }
+        for kind, rider in forms
+    ]
+    plan = generate_plan(catalog, registry)
+    cases = [c for c in plan["cases"] if c.get("model_class") == "Foreign"]
+    assert len(cases) == 27
+    assert len({c["case_id"] for c in cases}) == 27
+    assert {c["fixture"]["card_variant"] for c in cases} == {f"{k.lower()}-{r}" for k, r in forms}
+    assert all(c["construction_authority"].startswith("native_TinkerTime") for c in cases)
+    assert not any(c["case_id"] == "FOREIGN-u0-normal" for c in cases)
+    catalog["card_fixture_variants"].append(copy.deepcopy(catalog["card_fixture_variants"][0]))
+    with pytest.raises(ValueError, match="Duplicate native configured"):
+        generate_plan(catalog, registry)
+
+
+def test_uninitialized_card_template_remains_a_gap_without_native_construction() -> None:
+    catalog, registry = inventory()
+    for row in catalog["models"]:
+        row["metadata_complete"] = True
+    catalog["models"][0]["card_type"] = "None"
+    plan = generate_plan(catalog, registry)
+    assert not any(c.get("model_class") == "Foreign" for c in plan["cases"])
+    assert plan["models"][0]["status"] == "native_fixture_initialization_missing"
+    report = coverage_summary(plan, [], len(plan["cases"]))
+    assert report["inventory_complete"] is False
+    assert report["training_allowed"] is False
+
+
+def test_fixture_construction_requires_native_provenance() -> None:
+    catalog, registry = inventory()
+    catalog["card_fixture_variants"] = [
+        {
+            "card_id": "FOREIGN",
+            "variant_id": "attack-one",
+            "card_type": "Attack",
+            "construction_authority": "guessed_effects",
+        }
+    ]
+    with pytest.raises(ValueError, match="construction inventory"):
+        generate_plan(catalog, registry)
