@@ -41,7 +41,7 @@ from spireshift.engine_neural import (
 )
 from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
 from spireshift.engine_run import _run_inputs
-from spireshift.engine_worker import EngineWorker, worker_helpers
+from spireshift.engine_worker import LIVENESS_POLICY, EngineWorker, worker_helpers
 from spireshift.engine_worker_qualification import immutable_checks, load_worker_config
 from spireshift.full_run_experience import atomic_json
 from spireshift.full_run_ppo_math import Adam
@@ -87,6 +87,7 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         or d.get("maximum_decisions") != 4096
         or d.get("episode_wall_seconds") != 60
         or d.get("adaptive_controller_allowed") is not False
+        or d.get("liveness_policy") != LIVENESS_POLICY
     ):
         raise ValueError("Native learning requires its pinned, fixed-A8 implementation and caps")
     wcfg = load_worker_config(q.root / d["worker_qualification_config"], q)
@@ -112,6 +113,7 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         or environment["ascension"] != 8
         or environment["profile"] != "native_benchmark_full_v1"
         or environment["encoder_id"] != ENCODER
+        or environment.get("liveness_policy") != LIVENESS_POLICY
         or environment["helpers_sha256"] != worker_helpers(q.root)
         or score.spec_id != d["training_spec"]["id"]
         or score.scope.ruleset_manifest_id != environment["manifest_id"]

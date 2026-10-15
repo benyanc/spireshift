@@ -24,6 +24,30 @@ from spireshift.full_run_experience import atomic_json
 
 WORKER_SCRIPT = "engine-native-worker-v4.mjs"
 ISOLATION_ID = "actual-engine-process-profile-reset-v1"
+LIVENESS_POLICY: dict[str, Any] = {
+    "id": "public_exploration_bounded_v1",
+    "maximum_consecutive_identical_observations": 8,
+    "maximum_visits_per_public_state": 64,
+    "forced_actions": False,
+}
+
+
+class _EpisodeLiveness:
+    """Bound actual no-ops and menu cycles without masking optional actions."""
+
+    def __init__(self) -> None:
+        self.visits: dict[str, int] = {}
+        self.previous: str | None = None
+        self.consecutive = 0
+
+    def observe(self, key: str) -> None:
+        self.visits[key] = self.visits.get(key, 0) + 1
+        self.consecutive = self.consecutive + 1 if key == self.previous else 1
+        self.previous = key
+        if self.consecutive > LIVENESS_POLICY["maximum_consecutive_identical_observations"]:
+            raise ValueError("Consecutive unchanged public observation cap")
+        if self.visits[key] > LIVENESS_POLICY["maximum_visits_per_public_state"]:
+            raise ValueError("Repeated public-state exploration cap")
 
 
 def worker_helpers(root: Path) -> dict[str, str]:
@@ -171,7 +195,7 @@ class EngineWorker:
         decisions: list[dict[str, Any]] = []
         maximum_floor = maximum_act = 0
         families: dict[str, int] = {}
-        seen: dict[str, int] = {}
+        liveness = _EpisodeLiveness()
         result: dict[str, Any] = {
             "schema_version": "actual-engine-episode-v1",
             "seed": seed,
@@ -180,6 +204,7 @@ class EngineWorker:
             "privileged_fixture": False,
             "recovered": False,
             "decisions": decisions,
+            "liveness_policy": dict(LIVENESS_POLICY),
         }
         used = 0.0
         try:
@@ -205,9 +230,7 @@ class EngineWorker:
                 if len(decisions) >= maximum_decisions:
                     raise ValueError("Whole-episode decision cap")
                 key = current["public_key"]
-                seen[key] = seen.get(key, 0) + 1
-                if seen[key] > 3:
-                    raise ValueError("Repeated unchanged public state")
+                liveness.observe(key)
                 inference_started = time.thread_time()
                 choice = (
                     chooser(current["model_input"])

@@ -147,4 +147,13 @@ The bounded environment/integration finish line is reached. Admission permits on
 Ironclad/A8 policy-only bootstrap pilot, with a frozen checkpoint before independent paired
 development evaluation. [The pilot guide](actual-engine-neural-pilot.md) gives one owner command.
 Strong-base readiness, adaptive control and broad mechanics/other-difficulty/GA work remain
-separate. New unsupported decisions still stop learning and require an encountered-case repair.
+separate. Within the declared pilot, retire and verify shutdown after an isolated failed game,
+exclude its partial data and continue the next original seed. More than two failures per panel,
+missing games, corrupt evidence or unverified shutdown still stop learning.
+
+The owner's v2 pilot performed 222 updates over three rounds, then stopped at three event failures
+in round 4, before independent evaluation. Host v28 repairs the shared missing event presentation
+calls and a versioned worker policy permits bounded reward-menu exploration. Targeted event
+replays, twelve worker games and the four-game learning control pass. Per the owner's choice,
+v3 starts afresh from the original numerical initializer with zero Adam steps. Historical results
+remain unchanged. No new broad qualification campaign is required before that owner-run pilot.

@@ -23,7 +23,7 @@ from spireshift.engine_qualification import (
     verify_game_archive,
 )
 from spireshift.engine_run import _run_inputs
-from spireshift.engine_worker import ISOLATION_ID, EngineWorker, worker_helpers
+from spireshift.engine_worker import ISOLATION_ID, LIVENESS_POLICY, EngineWorker, worker_helpers
 from spireshift.full_run_experience import atomic_json
 
 WORKER_IMPLEMENTATION = ("engine_worker.py", "engine_worker_qualification.py", "engine_run.py")
@@ -47,6 +47,7 @@ def load_worker_config(path: Path, q: EngineQualificationConfig) -> dict[str, An
         or d.get("repeats") != 2
         or d.get("maximum_decisions") != 4096
         or d.get("episode_wall_seconds") != 45
+        or d.get("liveness_policy") != LIVENESS_POLICY
     ):
         raise ValueError("Worker qualification must bind its finite A8 panel and current helpers")
     recipe = json.loads((q.root / d["base_run_recipe"]).read_text())
@@ -198,6 +199,7 @@ def run_worker_qualification(
         "build_report_id": inputs["inputs"]["build_report_id"],
         "objective": inputs["objective"],
         "isolation_id": ISOLATION_ID,
+        "liveness_policy": d["liveness_policy"],
         "python_sha256": d["python_sha256"],
         "status": "worker_isolation_pass" if error is None else "worker_isolation_incomplete",
         "error": error,

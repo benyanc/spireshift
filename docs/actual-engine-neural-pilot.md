@@ -1,56 +1,61 @@
 # Actual-engine Ironclad/A8 neural pilot
 
-Use the frozen v0.111.0 / `41cef1ea` game and the declared full benchmark profile.
-The first pilot stopped during its starting measurement: fourteen normal losses, one stuck
-Dense Vegetation event, one unattempted confirmation seed, and zero learning updates. Its
-results remain unchanged. The repaired **v2 pilot** uses a separately pinned host/environment
-and a bounded failed-game continuation policy. The next long experiment belongs to the owner.
+Use the frozen v0.111.0 / `41cef1ea` game, Ironclad/A8 and the declared full benchmark profile.
+The owner's v2 pilot **really trained**: three rounds, 222 optimizer steps and 9,307 verified sampled
+decisions. It stopped when round 4 exceeded the two-failure allowance. Jungle Maze Adventure and
+Punch-Off called absent sound/camera services; another game hit an overstrict reward-menu visit
+limit. The saved run records 137 normal endings and seven failures out of 144 attempted games,
+with 192 not attempted. All observed endings were losses. The first checkpoint comparison after
+round 4 and the independent development comparison were not reached, so improvement is unproven.
+
+The owner chose to **start afresh for a clean comparison**. The repaired v3 pilot uses exactly the
+original 17,473 numerical parameters and a zeroed optimizer. Only its explicit repaired-environment
+binding differs. It does not load trained v2 weights or Adam state. All old results and checkpoints
+remain saved and unchanged.
 
 ## One next command
 
 Close the game, then run this from any directory:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-native-a8-ppo-v2.sh
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-native-a8-ppo-v3.sh
 ```
 
-Expect roughly **10–20 minutes** from the four-game control, with a **30-minute** hard cap.
-The wrapper checks the frozen inputs and saved admission before launching. It prints the best
-game, average floor, wins and failures for each batch. Share its final summary for assessment.
-One failed/unsupported/capped game is recorded and isolated while remaining planned games
-continue. More than two failures in a panel, missing games, an unverified shutdown or broken
-experience evidence stop the pilot before another update. No next experiment follows.
-An interrupted workspace is preserved for inspection, rather than overwritten or silently restarted.
-Re-running a completed experiment displays its saved result without training.
-The old v1 command still displays its original failed result. Use the v2 command above to
-start the repaired experiment; it has a new workspace and does not overwrite or resume v1.
+Expect roughly **10–20 minutes**, with a **30-minute** hard cap. Codex has not launched this stage.
+The wrapper checks frozen inputs and saved admission, then prints wins, average floor, best game
+and failures for each batch. Share its final summary for assessment. Re-running a completed batch
+displays its saved result. Interrupted workspaces are preserved for inspection.
+The old v1/v2 commands still display their original stopped results. Use the v3 command above for
+new training; it writes a separate workspace.
 
-## The event repair and failure handling
+## Event effects and bounded exploration
 
-Dense Vegetation's native Rest method called missing sound/camera services after applying its
-heal. The wrapper swallowed the exception and presented the old menu again. Host v26 skips
-exactly two sound-play calls, one sound-stop call and one camera-rumble call in that method's
-async body. It verifies their signatures and count. Native healing, event state changes,
-choice creation and combat/RNG logic still execute. Host v27 also waits for the native
-player turn number/phase after End Turn: that queued action only marks the player ready,
-and the native asynchronous turn loop owns the subsequent enemy actions. An intermediate
-enemy turn is never exported as a player decision. Native option exceptions now reach the
-worker with their cause, rather than appearing to be successful unchanged decisions.
+Host v28 discovers exact native debug-audio and camera call sites in event methods and their nested
+async bodies/closures. In headless TestMode it replaces only those presentation calls, with matching
+signatures and stack effects. It does not instantiate the rendered game singleton or replace native
+gameplay methods. The original game DLL remains byte-identical. The frozen inventory contains
+nineteen calls in nine methods across Amalgamator, Dense Vegetation, Doll Room, Jungle Maze Adventure
+and Punch-Off. This is a bounded repair, not exhaustive mechanics qualification.
 
-Both natural-seed branches are checked: Rest heals 60→80 HP and offers Fight!, which enters
-combat; Trudge On changes 60→52 HP and 273→338 gold, then Proceed reaches the map. The
-original failing seed also completes normally through the event fight to a floor-7 loss. A short
-injected collector failure verifies shutdown, preservation/audit of a clean earlier episode,
-and a different native process for the next planned seed. It supplies no learning examples.
+The saved failing public prefixes replay unchanged until the repaired choice. Jungle Maze's Join
+Forces grants 42 gold with unchanged HP. Punch-Off's Nab adds one Injury and offers the native random
+relic. Both diagnostic games then reach normal endings. Dense Vegetation still heals 60→80 HP and
+offers Fight!, which enters combat; Trudge On changes 60→52 HP and 273→338 gold before Proceed
+reaches the map. Exceptions retain their native cause and stack. The existing End Turn boundary
+continues to wait for the next native player turn, selection or ending.
 
-On failure, keep the affected worker's profile, diagnostics, partial trace and active marker.
-Prove that its native and controller processes have stopped, seal an explicit retirement, and
-audit the earlier complete games before starting a fresh worker for the next original seed.
-Never retry the failed seed, reuse the failed workspace or retry uncertain action delivery.
-Only verified complete games supply PPO targets; failed games stay in the planned evaluation
-denominator and receive zero ranking return. Floor reached remains a diagnostic, including
-partial progress explicitly identified in failed-case details. Each panel prints the failed
-seed, cause and floor as it continues. Completed pilots with failures are labeled accordingly.
+Sampled policies may reopen a declined card offer. Those are valid choices. Workers now allow up
+to eight consecutive identical public observations and sixty-four visits to any public state. The
+existing time, CPU and total-decision caps remain. Skip, claim and Proceed stay selectable; no forced
+action or action mask is added. A replay of the old failure passes its original 93 choices and reaches
+a genuine floor-5 loss after 118 decisions, including a fourth visit to the previously capped state.
+
+On failure, preserve the worker's profile, diagnostics, partial trace and marker. Verify both
+processes stopped, retire the worker, audit its earlier complete games and start a fresh worker for
+the next original seed. No failed seed is retried within a recipe. Partial failed games supply no
+PPO targets and receive zero ranking return, while remaining in the planned denominator. Up to two
+failures per panel are allowed. Missing games, broken evidence, unverified shutdown or excess
+failures stop the pilot before another update. No next experiment or model promotion follows.
 
 ## What runs
 
@@ -110,7 +115,7 @@ comparison. This establishes a working training connection, not a useful player 
 The repaired host also repeats the twelve-game serial/parallel/reset control with no failures
 and unchanged shared inputs. These short regressions do not expand the bounded finish line.
 The current identities and preserved failed attempts are recorded in
-[the event and failure-isolation evidence](evidence/actual-engine-dense-vegetation-repair-v1.json).
+[the event and exploration repair evidence](evidence/actual-engine-event-presentation-repair-v1.json).
 
 Assess the pilot's frozen paired development results next. If the player stalls, diagnose the
 learning signal, representation and exploration before scaling. Strong-base evaluation,

@@ -385,6 +385,7 @@ def _probe_cli_document(
             "spireshift_cli_native_run_v23_local_toolchain",
             "spireshift_cli_native_run_v24_local_toolchain",
             "spireshift_cli_native_run_v27_local_toolchain",
+            "spireshift_cli_native_run_v28_local_toolchain",
         }
         and localization is None
     ):

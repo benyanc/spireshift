@@ -520,3 +520,26 @@ selection or a genuine ending, with a five-second cap. DetectDecisionPoint also 
 combat decision and raises a timeout instead of exporting an intermediate enemy phase.
 The original failing seed completes to a floor-7 loss on this host; v26's full-seed enemy-phase
 failure remains preserved. No enemy actions, outcomes, turn counters or rules are fabricated.
+
+
+## Shared headless event presentation (host v28)
+
+`sts2-cli-v0.111.0-native-run-v28.patch` extends v27. The owner's next pilot reached previously
+unguarded debug-audio calls in Jungle Maze Adventure and camera trauma in Punch-Off. A registry
+walk now inventories exact presentation call sites across native events, including async state
+machines and closures. It bridges only typed Play/Stop/StopAll and camera-rumble/trauma/hit-stop
+calls in TestMode, validates replacement signatures, and preserves labels/stack shape. The frozen
+inventory contains nineteen calls in nine methods across five events. `NGame` stays absent;
+no native gameplay/RNG/choice method is replaced. Event fault rethrows preserve the native stack.
+
+The failed Join Forces/Nab public prefixes replay unchanged on the byte-identical final Host:
+42 gold with unchanged HP; one Injury plus the native relic offer. Both diagnostic games reach
+normal endings. The existing Dense Vegetation branch checks still pass. Two fresh baseline and
+two fresh repaired builds reproduce their pinned identities with the original game DLL unchanged.
+This is scoped regression evidence, not exhaustive event or shipped-Host parity.
+
+The Python worker separately replaces its three-total-visits liveness rule with versioned bounded
+exploration. Optional Skip/claim/Proceed remain selectable. New environment/worker/learning recipes
+bind this policy and host; historical recipes/results stay unchanged. The next v3 pilot starts
+from the original numerical initializer with zero Adam steps, per the owner's explicit choice.
+See [current evidence](../../docs/evidence/actual-engine-event-presentation-repair-v1.json).

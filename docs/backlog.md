@@ -6,22 +6,29 @@ launches and monitors tasks expected to take five minutes or more. Use saved tim
 
 ## Current handoff and direction
 
-**Dense Vegetation and isolated failures are repaired (#146, 2026-10-14).** The owner's first
-native pilot stopped after fourteen ordinary losses and one stuck event, before any PPO update.
-The missing presentation calls, swallowed option exception and asynchronous End Turn boundary
-are repaired in host v27. Both event branches pass, and the original failing seed completes
-normally through the event fight to a floor-7 loss. New workers preserve diagnostics, explicitly retire
-after failure, and allow the next planned seed in a fresh process after verified shutdown.
-Earlier complete games remain auditable; partial games never supply gradients or disappear
-from the evaluation denominator. The v2 pilot permits at most two failed games per panel;
-wider failures, missing games, broken evidence and unverified shutdown still stop it.
+**Native PPO really trained; the next pilot starts afresh (#146, 2026-10-14).** The owner's v2
+pilot completed three training rounds: **222 optimizer steps and 9,307 verified sampled
+decisions**. It recorded 144/336 planned games (137 normal endings, seven failures). The fourth
+panel had three failures, exceeding its two-failure allowance, so no round-4 update or independent
+development comparison followed. All observed endings were losses; playing strength is unproven.
 
-Short regressions pass: twelve isolated/reset games, a four-game/six-update neural control,
-and an injected collector failure followed by a successful new worker. The first pilot and all
-development failures remain preserved. **Next: the owner runs the repaired v2 pilot**, using
-the single command in [the pilot guide](actual-engine-neural-pilot.md), then we assess its frozen
-independent development results. No additional broad qualification campaign is required.
-See [the repair evidence](evidence/actual-engine-dense-vegetation-repair-v1.json).
+Host v28 repairs the shared missing event presentation calls that broke Jungle Maze Adventure
+and Punch-Off. It discovers exact sound/camera call sites in native event methods and their async
+bodies/closures, preserving the native game effects, choices and RNG. Nine methods across five
+events contain nineteen bridged calls. The original failing choices now complete with the correct
+42-gold award and Injury/relic offer. Dense Vegetation's two branches still pass. A reward-menu
+cycle also exposed the old three-visits cutoff as too strict. New workers allow bounded exploration
+without removing Skip or forcing a card: eight consecutive identical observations, sixty-four visits
+to any public state, with the existing decision/time/CPU caps unchanged. The old failed seed now
+completes 118 decisions to a genuine floor-5 loss after the identical 93-choice prefix.
+
+Short checks pass: twelve isolated/reset games, a four-game/six-update learning control and saved-only
+admission/preflight. Shared inputs stay unchanged and zero app copies are made. **The owner chose
+a fresh comparison:** v3 uses exactly the original 17,473 numerical parameters and a zeroed optimizer;
+it does not load the three trained rounds. Every old result/checkpoint remains preserved.
+**Next: the owner runs the fresh v3 pilot** using the single command in
+[the pilot guide](actual-engine-neural-pilot.md). No further broad qualification campaign is needed.
+See [the repair evidence](evidence/actual-engine-event-presentation-repair-v1.json).
 
 **The owner's repaired second seed is complete (#145).** It plays **104 actions** and ends in a
 native **loss on floor 5**, with no unsupported states, recovery, delivery failures or caps.
@@ -74,13 +81,13 @@ improvement. The workflow reuses the tested PPO mathematics with a new public en
 no old v0.107.1 input or trained weights are silently migrated. Every decision family remains
 learnable, including Skip and public memory of previously declined offers.
 
-**Next is the owner's repaired v2 actual-engine A8 pilot (#146).** Its explicit admission retains
+**Next is the owner's fresh v3 actual-engine A8 pilot (#146).** Its explicit admission retains
 the policy-only bootstrap design: 256 sampled games, 48 training-confirmation games and 32 paired
 independent-development games, **336 planned attempts total**. The selected checkpoint is frozen
 before development opens. The recipe, runner, seed ownership and resource caps are pinned;
 preflight launches no games. Use the **one command** in
-[the pilot guide](actual-engine-neural-pilot.md). The owner's failed v1 stays separate;
-Codex has not started the long v2 stage.
+[the pilot guide](actual-engine-neural-pilot.md). The owner's stopped v1/v2 results stay separate;
+Codex has not started the long v3 stage.
 Strong-base readiness and adaptive thinking remain unpassed. Assess the pilot before scaling
 or selecting another method; GA, other difficulties and patch-transfer work remain later.
 For a promising native checkpoint, connect its new input/action schema to the existing reused
@@ -660,7 +667,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| Dense Vegetation/failure isolation repaired; owner v2 pilot next | Both event branches, verified worker retirement/clean-prefix salvage, serial/parallel/reset checks and the short neural control pass. Run the repaired finite 336-attempt pilot; count isolated failures and exclude their partial data, then assess frozen development results. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Shared event presentation/liveness repaired; owner fresh v3 pilot next | Preserve v2’s 222 updates/9,307 verified decisions and stopped fourth panel. Exact failed-choice replays, Dense Vegetation, worker isolation and short learning pass. Run the fresh finite 336-attempt pilot from the original parameters; assess frozen development results. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

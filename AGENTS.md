@@ -60,6 +60,11 @@ seed, reset an uncertain process or train on its partial episode. Count failures
 evaluation denominator. The pilot allows at most two failed games per panel; evidence corruption,
 unverified shutdown, missing games or failures beyond that allowance still stop learning.
 
+After v2 stopped with three completed training rounds, the owner chose on 2026-10-14 to start
+the repaired v3 pilot afresh for a clean comparison. Use the original seeded numerical
+initializer and zero Adam state; preserve v2's trained checkpoints and results separately.
+Do not automatically resume those trained weights in this pilot.
+
 The next v0.111.0 startup contract is explicitly `native_benchmark_full_v1`: native full content,
 all native acts discovered, Ironclad/A8, the shipped lobby's seeded random act selection and
 enabled tutorials with no completed entries. It uses synthetic isolated benchmark progress,
