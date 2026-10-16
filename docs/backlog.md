@@ -1,10 +1,29 @@
 # SpireShift backlog
 
-Updated 2026-10-16 after value/credit controls and two short native integration checks.
+Updated 2026-10-16 after the owner finished both credit methods and saved-result assessment.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**The owner-run credit comparison is complete: no clear gameplay gain (#35 / #146).**
+Both methods finish 336/336 ordinary endings: 672 attempts total, zero failures, missing games,
+wins, completed acts or app copies. On the same 16 independent development seeds, both trained
+players average **7.1875 floors**, versus **7.0625 initially**. Their +0.125-floor differences
+have paired intervals including zero. The new predictor improves its training return estimates,
+but this does not establish a better policy. Best-trained checkpoints were actually evaluated;
+neither comparison silently repeated the initializer. All 64 shared initial-policy traces match.
+The saved-only audit checks every episode, 68,929 decisions and 2,866 files without new play.
+See [the results and limitations](native-a8-credit-comparison-result.md).
+
+**Next work:** #143's short saved-TRAIN normalization/duplication and conditional-learning
+controls, preserving every public entity/amount relation and legal action family. Then declare
+a one-factor native test if justified. #35's independent-run batch-size/gradient-agreement
+control remains important; lower prediction error alone does not justify short-trace GAE or
+a larger unchanged run. No new owner command is needed now. Rerunning the comparison script
+only checks/displays the two saved complete arms. Base readiness/adaptive thinking remain unmet.
+
+### Preserved pre-comparison handoff
 
 **Native A8 pilot v5 completed reliably but retained no trained improvement (#146 / #143).**
 All 336 attempts ended normally: zero failures, missing games, wins or completed acts. It ran
@@ -29,7 +48,7 @@ networks learn an artificial HP-conditioned rest choice on 18 held-aside trainin
 Gradient derivatives pass real-state checks. No unique causal explanation or native ablation
 is claimed. See [the measured diagnosis](native-a8-pilot-v5-learning-diagnosis.md).
 
-**Value/credit implementation is complete; gameplay effect remains untested (#35 / #146).**
+**Historical pre-comparison state: value/credit implementation complete (#35 / #146).**
 The integer-zero optimizer edge case is fixed. A small public-state predictor is cross-fitted
 by whole games, with equal-game fitting weights and no self-outcome leakage. Using only v5's
 256 TRAIN runs, its later-round squared error is 31.7% below a fitted constant and 61.6% below
@@ -39,16 +58,15 @@ Objective-preserving credit telescopes on all saved runs; lambda=1 recovers the 
 return-minus-value credit exactly. Shorter-trace GAE stays disabled. Both new four-game pipeline
 controls and saved-credit reconstruction pass, with zero failures or app copies.
 
-**Next owner command:** `bash scripts/compare-native-a8-credit-v1.sh` from the repository.
+**Completed owner command:** `bash scripts/compare-native-a8-credit-v1.sh` from the repository.
 This is a matched old/new credit comparison: 672 planned attempts, two sequential methods,
 the same actor/training seeds/RNG/score/update budget, and fresh confirmation/development seeds.
 Both explicitly evaluate the best trained player, keeping the incumbent separate. Expect
-25–40 minutes total; 30-minute cap per method. Admissions/preflight pass; no long task has
-started. See [the implementation, results and exact command](native-a8-value-credit.md).
+25–40 minutes total; 30-minute cap per method. The owner has now finished both arms in 30.84
+minutes. The [implementation guide](native-a8-value-credit.md) preserves the launch contract.
 
 Remaining ordered work:
-1. #35 / #146: owner runs that comparison; audit saved outcomes, paired development differences,
-   failures and per-round prediction quality. One training replication is exploratory evidence.
+1. #35 / #146: completed comparison and saved outcome audit above; retain as exploratory evidence.
 2. #143: test representation normalization/reduced duplication against saturation and conditional
    learning controls if needed after this one-factor comparison. Preserve every action family
    and public entity/amount relation; do not enlarge the model without demonstrated need.
@@ -57,7 +75,7 @@ Remaining ordered work:
    method helps from prediction error alone. No larger unchanged PPO/GA, sweep or controller now.
 
 All v5 sources, checkpoints, optimizer states and results remain preserved. Re-running its
-training script only shows the saved result; use the new comparison command above. V4 remains
+training script only shows the saved result; both comparison methods are also now complete. V4 remains
 stopped with five training rounds, 191 normal losses, one failure and 144 unplayed; do not
 restart it under repaired sources. [Repair evidence](native-a8-worker-potion-repairs.md) and the
 [v4 stop report](native-a8-pilot-v4-stop.md) retain the earlier chronology.

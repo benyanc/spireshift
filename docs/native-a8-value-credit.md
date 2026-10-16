@@ -1,8 +1,13 @@
 # Native A8 value prediction and action credit
 
-The next experiment changes the prediction subtracted from each action's final run score.
-The new predictor passes saved-data accuracy controls. Its effect on gameplay remains unknown.
+The experiment changes the prediction subtracted from each action's final run score.
+The new predictor passes saved-data accuracy controls; the completed gameplay result is below.
 All v5 sources, game traces, checkpoints and optimizer states remain intact.
+
+**Completed outcome:** the owner has now finished both methods. Both trained players average
+7.1875 floors on 16 reserved seeds versus 7.0625 initially, with zero wins or completed acts.
+Neither improvement is established. See the [verified result](native-a8-credit-comparison-result.md).
+The launch instructions below preserve the original contract; no new run is needed.
 
 ## What is implemented
 
@@ -114,8 +119,9 @@ frozen game and shared support-code cache; no game app is copied. About 0.6 GB c
 output is expected, not guaranteed. Each batch reports wins, average floor, best result and
 failures. Failed games retain the original denominator and never supply training targets.
 
-Both controls and read-only admission/preflight checks pass. The long comparison has **not
-started**. Completed arms are preserved and skipped on rerun; unfinished evidence stops for
-inspection. No adaptive controller, promotion or subsequent experiment starts afterward.
+Both controls and read-only admission/preflight checks pass. **The owner completed both arms**;
+the assessment is linked above. Completed arms are preserved and skipped on rerun; unfinished
+evidence stops for inspection. No adaptive controller, promotion or subsequent experiment
+starts afterward.
 After the results, assess the paired trained-player outcomes and round-by-round prediction
 quality before deciding on representation normalization, larger independent batches or GAE.
