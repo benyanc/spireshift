@@ -95,3 +95,12 @@ The v3 assessment source fingerprints, report identity, resources and timings ar
 `docs/evidence/native-a8-pilot-v4-stop-v1.json`. Synthetic tests cover corrupted evidence,
 seed/RNG ownership, native-ending consistency, failed-game scoring, missing attempts, live-result
 protection, cached verification, historical source preservation and zero-win uncertainty.
+
+## Completed v5 assessment
+
+The owner completed v5 and Codex already ran `scripts/assess-native-a8-pilot-v5.sh` under a
+three-minute cap. Its separate v1 recipe/report preserve the existing assessment policy and
+current source bytes. All 336 attempts and 1,427 saved files verify. The initial checkpoint
+was retained, so development-selected is the same model/RNG as development-initial. Read
+[the v5 result](native-a8-pilot-v5-result.md) before interpreting a zero paired floor difference
+as a trained-model comparison. This post-result audit starts no games or updates.

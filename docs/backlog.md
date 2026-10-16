@@ -1,37 +1,40 @@
 # SpireShift backlog
 
-Updated 2026-10-16 after worker startup and queued-discard repairs passed their short controls.
+Updated 2026-10-16 after owner pilot v5 completed and its saved evidence was audited.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**The repaired native A8 pilot v5 is ready for the owner; it has not been started (#146).**
-One verified immutable support-code cache replaces per-worker Git clones. Worker v9 keeps
-separate native processes, sessions, ledgers and profiles, with zero app copies. Host v34
-accepts the native queued potion discard during a card selection, rejects duplicate/stale
-submissions and settles it after the choice. The game DLL and effects remain unchanged.
+**Native A8 pilot v5 completed reliably but retained no trained improvement (#146 / #143).**
+All 336 attempts ended normally: zero failures, missing games, wins or completed acts. It ran
+eight training rounds, 627 updates and 26,061 verified training decisions in 14.82 minutes,
+retaining 300 MB with zero app copies. All unchanged-input checks passed. Worker v9 and host
+v34's cache/queued-discard repairs worked throughout this panel.
 
-Checks pass: two reproduced old-host failures and two repaired queued-discard prefixes;
-12/12 serial/parallel/reset games; 25/25 potion controls; new-host act/ending fixtures;
-4/4 short learning games with 228 verified training decisions and six optimizer steps;
-5,175 saved ID-renaming comparisons; 1,413 repository tests. These are pipeline controls,
-not evidence of stronger play. The original 1,849-case sweep keeps its host-v32 scope.
+The starting player scored 7.5625 average floors on confirmation seeds; checkpoints after
+rounds four and eight scored 6.8125 and 7.1875. Both also lost under the exact declared auxiliary
+score. Selection correctly retained the initializer. The final two development panels therefore
+used the same original player and RNG, each averaging 7.375 floors. They do not independently
+evaluate a trained checkpoint. The best recorded game reached floor 17. The saved-only audit
+verified every case and 1,427 source files; no games or updates followed.
 
-**Next:** the owner runs `bash scripts/train-native-a8-ppo-v5.sh` once (roughly 10–20 minutes,
-30-minute cap). It starts from the original seeded initializer and zero Adam state; it plans
-336 attempts over eight rounds, then checks the frozen selected player on independent seeds.
-All decisions remain learnable and optional exits remain selectable. Share its final result
-before any follow-up. See [the repair and run instructions](native-a8-worker-potion-repairs.md).
+**Next:** diagnose the learning signal, representation and credit assignment using frozen
+**training** data under #143/#146. Measure meaningful choice separation, feature collisions/
+clipping/saturation, critic/advantage behavior and per-family policy changes. Then choose one
+supported intervention and freeze a separate short comparison. Do not simply enlarge this PPO
+batch or launch a larger GA. A candidate cause is noisy whole-run credit; it is not yet proven.
+Wins remain primary, every legal action family remains learnable, A8 stays fixed and independent
+panels must not choose the intervention. See [the v5 result](native-a8-pilot-v5-result.md).
 
-Preserve v4 as stopped: five training rounds, 393 updates, 16,345 verified decisions;
-191 normal losses, one failed game and 144 unplayed out of 336. Its checkpoints/optimizer
-states and setup failures remain unchanged. Do not restart it under repaired sources.
-No independent v4 quality conclusion exists. The [stop report](native-a8-pilot-v4-stop.md)
-and [saved-only assessment](native-a8-pilot-assessment.md) retain the historical evidence.
+All v5 sources, checkpoints, optimizer states and results remain preserved. Re-running its
+training script only shows the saved result; no new owner command is needed now. V4 remains
+stopped with five training rounds, 191 normal losses, one failure and 144 unplayed; do not
+restart it under repaired sources. [Repair evidence](native-a8-worker-potion-repairs.md) and the
+[v4 stop report](native-a8-pilot-v4-stop.md) retain the earlier chronology.
 
-After v5, assess failure types and independent progress before scaling. Adaptive thinking,
-cross-patch transfer, selectable difficulties and larger GA batches remain later work.
+Base readiness and adaptive thinking remain unpassed. Patch transfer, other difficulties and
+larger unchanged GA/PPO batches stay later work.
 
 ### Preserved pre-v4 handoff
 
@@ -742,7 +745,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | Finite mechanics package complete ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior pilots and failed sweep. Repaired 1,849-case sweep, nine random-action games, act/endings, outside-combat potions and Foul Potion merchant controls pass. The composed gate preserves the sweep's host-v32 scope and binds new v33 controls. These are interface checks, not playing strength or base readiness. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
-| V4 stopped; worker setup and nested potion delivery are next | Preserve five training rounds and the original 336-game denominator. Replace repeated local Git clones with verified immutable projection code and isolated sessions; reproduce nested-choice discard and qualify delivery before a new admitted pilot. The saved-only v2 assessment reports stop details and exact confirmation-score auditing; v3 quality remains inconclusive. | [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| V5 complete; reliable pipeline, no retained improvement | Preserve 336/336 normal endings, 627 updates and all checkpoints. Initializer beat both checked trained checkpoints on confirmation; development repeated that same initial player. Diagnose native training signals, encoding and credit assignment under #143 before another learning intervention. V4 remains stopped and unchanged. | [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
