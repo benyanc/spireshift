@@ -1,12 +1,12 @@
 # SpireShift backlog
 
-Updated 2026-10-15 with outside-combat potions, the composed mechanics gate and a fresh native pilot handoff.
+Updated 2026-10-15 with outside-combat potions, the fresh native pilot and saved-only result assessment.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**The finite native mechanics package is complete (#148); owner-run A8 pilot v4 is next (#146).**
+**The finite native mechanics package is complete (#148); the owner reports A8 pilot v4 running (#146).**
 Host v33 supports all five AnyTime potions outside combat, exact real/fake merchant targets for
 Foul Potion, inventory open/close and current-slot discard. Native effects and game rules remain
 in the original DLL. Twenty-five potion controls, two merchant purchase/exit checks, new lifecycle
@@ -19,12 +19,17 @@ learner's public memory; the new explicitly stochastic control passes **4/4 game
 training decisions and six updates**. Fixed evaluation RNG streams are shared across checkpoints;
 every action remains selectable. These are four losses and pipeline evidence, not stronger play.
 
-**Next:** the owner runs the single command in
-[outside-combat potions and training](actual-engine-outside-combat-potions.md). Pilot v4 starts
-from the original seeded network and zero optimizer state: eight rounds, 336 planned games,
-independent development evaluation and bounded failed-worker continuation. Codex has not started
-this long task. Assess generalization and failure types before scaling; restore greedy-quality
-checks before base readiness. Adaptive thinking, cross-patch work and larger GA batches stay later.
+**Next:** let the current pilot finish, then use the
+[saved-only assessment](native-a8-pilot-assessment.md). Pilot v4 starts from the original seeded
+network and zero optimizer state: eight rounds, 336 planned games, independent development
+evaluation and bounded failed-worker continuation. The assessment checks ownership, ending
+evidence and the original confirmation selection, reports paired uncertainty, and keeps failed
+games in the denominator with zero progress in the main comparison. It reads no partial games
+before the final summary and launches nothing. No live results were inspected during its
+implementation; all pinned pilot inputs remain unchanged. A historical v3 regression reproduces
+its inconclusive result. Assess generalization and failure types before scaling; restore
+greedy-quality checks before base readiness. Adaptive thinking, cross-patch work and larger GA
+batches stay later.
 
 ### Preserved earlier milestones
 
@@ -66,11 +71,10 @@ are zero player wins and zero PPO examples. Combined wall time **33.83s**, peak 
 The earlier blocked launch reports remain intact. [Current evidence](evidence/actual-engine-mechanics-sweep-and-followups-v1.json)
 binds the sweep, follow-ups, native build and resources.
 
-**Next: outside-combat potion controls and Foul Potion's non-creature merchant target.** These
-are the two remaining declared mechanics requirements before a new environment/worker/neural
-admission. Do not repeat either completed batch under its unchanged recipe, reinterpret random
-play as model quality or automatically migrate old models. Strong-base readiness still comes
-before adaptive thinking.
+**Historical pre-potion handoff, now completed above:** outside-combat potion controls and
+Foul Potion's merchant target were the remaining declared requirements. Do not repeat completed
+batches, reinterpret random play as model quality or automatically migrate old models.
+Strong-base readiness still comes before adaptive thinking.
 
 The following paragraphs describe the earlier pre-potion handoff. Other cases continue only after a failed worker is proved stopped; keep unsupported/prerequisite-
 blocked/untested mechanics explicit. Resolve the remaining potion requirements before a new
@@ -708,7 +712,8 @@ independent evaluation, numerical stability and historical evidence preservation
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| Repaired sweep and same-build follow-ups pass; potion controls next ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior no-win pilot and failed sweep. Repaired 1,849-case sweep passes with zero failures; nine random-action games deliver 522 decisions with repeatability, and v32 act/ending fixtures pass. Qualify outside-combat potion actions and non-creature merchant targets, then bind new learning inputs. These are interface checks, not base readiness or better policy strength. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Finite mechanics package complete ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior pilots and failed sweep. Repaired 1,849-case sweep, nine random-action games, act/endings, outside-combat potions and Foul Potion merchant controls pass. The composed gate preserves the sweep's host-v32 scope and binds new v33 controls. These are interface checks, not playing strength or base readiness. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Owner reports v4 running; saved-only assessment implemented | Preserve all pinned pilot sources. After completion, audit saved cases/worker evidence, original selection and paired development seeds; distinguish wins from floor progress, count failures and report uncertainty before choosing another experiment. Historical v3 regression remains inconclusive. No automatic scale-up or controller. | [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
