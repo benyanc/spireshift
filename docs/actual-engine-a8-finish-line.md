@@ -171,3 +171,19 @@ prerequisite does not count as exercised. Shared frozen inputs and one interface
 copies. Unknown and untested families remain explicit. See
 [the coverage contract and one owner command](actual-engine-mechanics-coverage.md). This is not a
 requirement to exhaust every card/relic/history combination or a change to Ironclad/A8 priority.
+
+## Current handoff, 2026-10-15
+
+The finite all-pool mechanics pass and the remaining outside-combat potion/merchant requirements
+are complete. Host v33/new worker v8 pass 25 potion fixtures, two merchant purchase/exit checks,
+native lifecycle fixtures and 12 natural serial/parallel/reset controls. The composed gate keeps
+the old 1,849-case sweep labelled host v32 and rechecks its evidence before carrying forward only
+unchanged game-model/combat-projection coverage. No exhaustive interaction or shipped parity claim
+is added. All workers share frozen inputs and create zero app copies.
+
+A four-game short neural control passes with 228 verified training decisions and six optimizer
+steps. Its preceding failed greedy control is preserved. The next finite pilot explicitly uses
+categorical policy evaluation at temperature 0.8 and fixed paired RNG streams, with all choices
+still selectable; greedy robustness remains a model-quality limitation. The original seeded
+network/zero optimizer initialize a fresh 336-game A8 pilot, which only the owner runs.
+See [the single current command](actual-engine-outside-combat-potions.md).

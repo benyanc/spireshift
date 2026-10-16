@@ -576,3 +576,18 @@ can clear the history. This private delivery evidence does not enter public/mode
 history and another card's play cannot satisfy it; uncertain delivery is never resubmitted.
 The rules DLL remains unchanged. A one-copy fixture checks two successive plays of the same card;
 the old failed sweep remains preserved. This host is not a learning admission.
+
+## Outside-combat potion and merchant presentation (host v33)
+
+`sts2-cli-v0.111.0-native-run-v33.patch` extends v32 without changing the rules DLL, native
+program/fixture protocol or Godot stub sources. It exposes a closed merchant approach and
+open/close inventory controls. Foul Potion binds the exact native presentation button and room;
+stale potion/target/room operands fail before enqueueing. The native custom usability check,
+OnUse, gold and fake-merchant event combat/rewards remain authoritative. A typed headless UI
+seam supplies the absent merchant presentation and suppresses only fake-merchant animation.
+
+Public run contract v5 appends current noncombat belt controls without duplicating reward
+discard, retaining native availability and automatic/combat-only restrictions. New ordinary
+worker v8 contains no fixture protocol; a separate diagnostic entry point supplies fixtures.
+Versioned input/helper/model manifests prevent silently resuming old checkpoints. The finite
+potion checks and scope are documented [here](../../docs/actual-engine-outside-combat-potions.md).

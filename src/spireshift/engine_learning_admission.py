@@ -13,7 +13,7 @@ from spireshift.engine_neural import NativeActorCritic
 from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
 from spireshift.engine_run import _run_inputs
 from spireshift.engine_startup import _script_closure
-from spireshift.engine_worker_qualification import load_worker_config
+from spireshift.engine_worker_qualification import load_worker_config, worker_script
 from spireshift.full_run_experience import atomic_json
 from spireshift.training_objective import load_training_score_spec
 
@@ -99,12 +99,25 @@ def create_learning_admission(
     d = load_learning_config(control_path, q)
     control = audit_learning_control(q, control_path)
     id_audit = json.loads(id_audit_path.read_text())
+    current_worker = worker_script(d)
+    new_policy = current_worker == "engine-native-worker-v8.mjs"
+    observations = id_audit.get("observations", 0)
     if (
-        id_audit.get("schema_version") != "actual-engine-id-invariance-audit-v1"
+        id_audit.get("schema_version")
+        != (
+            "actual-engine-id-invariance-audit-v2"
+            if new_policy
+            else "actual-engine-id-invariance-audit-v1"
+        )
         or id_audit.get("valid") is not True
-        or id_audit.get("observations") != 783
-        or id_audit.get("comparisons", 0) < 2349
+        or (observations < 100 if new_policy else observations != 783)
+        or id_audit.get("comparisons", 0) < observations * 3
         or id_audit.get("game_attempts") != 0
+        or (
+            new_policy
+            and not {"shop_inventory", "rest_site", "reward_claim", "map_navigation", "combat_turn"}
+            <= set(id_audit.get("families", {}))
+        )
     ):
         raise ValueError("Public ID invariance is not verified over the frozen saved panel")
     for ref in id_audit["files"]:
@@ -112,7 +125,14 @@ def create_learning_admission(
             raise ValueError("ID audit source trace bytes changed")
     helpers = {
         name: _sha_file(q.root / "scripts" / name)
-        for name in _script_closure(q.root / "scripts", {"audit-engine-public-input-v1.mjs"})
+        for name in _script_closure(
+            q.root / "scripts",
+            {
+                "audit-engine-public-input-v2.mjs"
+                if new_policy
+                else "audit-engine-public-input-v1.mjs"
+            },
+        )
     }
     if id_audit.get("helpers_sha256") != helpers:
         raise ValueError(
@@ -139,6 +159,8 @@ def create_learning_admission(
         "character": "Ironclad",
         "ascension": 8,
         "scope": "native_v0.111.0_policy_only_bootstrap_pilot",
+        "evaluation_policy": d.get("evaluation_policy", {"behavior": "greedy"}),
+        "mechanics_coverage": d.get("mechanics_coverage"),
         "base_readiness_passed": False,
         "adaptive_controller_allowed": False,
         "gameplay_strength_proven": False,

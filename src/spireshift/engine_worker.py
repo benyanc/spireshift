@@ -73,13 +73,17 @@ class EngineWorker:
         _private_path(self.root, str(workspace.relative_to(self.root)))
         if script not in {
             WORKER_SCRIPT,
+            "engine-native-worker-v7.mjs",
+            "engine-native-worker-v8.mjs",
             "engine-mechanics-worker-v1.mjs",
             "engine-mechanics-worker-v2.mjs",
+            "engine-mechanics-worker-v3.mjs",
         }:
             raise ValueError("Unqualified worker entry point")
         if projection_cache is not None and script not in {
             "engine-mechanics-worker-v1.mjs",
             "engine-mechanics-worker-v2.mjs",
+            "engine-mechanics-worker-v3.mjs",
         }:
             raise ValueError("Shared projection is diagnostic-only")
         if helpers != worker_helpers(self.root, script):
@@ -118,7 +122,11 @@ class EngineWorker:
         spec = {
             "projection_cache": str(projection_cache) if projection_cache is not None else None,
             "coverage_diagnostic": script
-            in {"engine-mechanics-worker-v1.mjs", "engine-mechanics-worker-v2.mjs"},
+            in {
+                "engine-mechanics-worker-v1.mjs",
+                "engine-mechanics-worker-v2.mjs",
+                "engine-mechanics-worker-v3.mjs",
+            },
             "headless_root": str(_private_path(self.root, headless["path"])),
             "attempt": str(workspace),
             "profile": str(profile),

@@ -6,7 +6,7 @@ truncations and an identical repeat trace. The same-build act/ending fixtures pa
 [Completed evidence](evidence/actual-engine-mechanics-sweep-and-followups-v1.json) binds the
 underlying cases, native build, separate saved-only verification and resource measurements.
 
-This stage leaves every Python file, helper, native build, recipe and workspace pinned by
+At its completion, this stage left every Python file, helper, native build, recipe and workspace pinned by
 that sweep unchanged. The original failed sweep and the blocked short launch reports remain
 preserved; they were not relabelled as successful.
 
@@ -60,15 +60,17 @@ The earlier [implementation-only evidence](evidence/actual-engine-mechanics-foll
 remains unchanged; the new completed evidence is linked above.
 
 A successful combined result resolves only bounded-random-sequence and same-build lifecycle
-requirements. **Outside-combat potion controls and non-creature targeting remain unfinished.**
+requirements. **The outside-combat potion and non-creature-target requirements left by this stage are now
+qualified separately.** See [the new controls and training handoff](actual-engine-outside-combat-potions.md).
 Foul Potion changes its target kind outside combat and uses a merchant presentation target;
 its successful combat fixture does not qualify that use. No training, model migration,
 base-readiness pass or adaptive controller follows automatically.
 
 ## Saved verification
 
-This batch is complete. The existing command now verifies the saved full sweep and follow-up
-evidence; it plays no games and launches no next experiment:
+This batch is complete. The original command below is preserved for its frozen source revision. Later worker changes
+make its current-source check intentionally reject; the new composed gate instead rechecks the
+preserved case/artifact bytes and explicit host delta. No repeat of this completed batch is needed:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/check-native-mechanics-followups-v1.sh

@@ -42,13 +42,20 @@ from spireshift.engine_neural import (
 from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
 from spireshift.engine_run import _run_inputs
 from spireshift.engine_worker import LIVENESS_POLICY, EngineWorker, worker_helpers
-from spireshift.engine_worker_qualification import immutable_checks, load_worker_config
+from spireshift.engine_worker_qualification import (
+    immutable_checks,
+    load_worker_config,
+    worker_script,
+)
 from spireshift.full_run_experience import atomic_json
 from spireshift.full_run_ppo_math import Adam
 from spireshift.training_objective import load_training_score_spec
 
 IMPLEMENTATION = (
     "engine_learning.py",
+    "engine_learning_admission.py",
+    "engine_mechanics_admission.py",
+    "engine_potion_checks.py",
     "engine_neural.py",
     "engine_experience.py",
     "engine_experience_audit.py",
@@ -74,6 +81,34 @@ def identified(path: Path, key: str = "report_id") -> dict[str, Any]:
     return dict(doc)
 
 
+def evaluation_policy(document: dict[str, Any]) -> dict[str, Any]:
+    policy = document.get("evaluation_policy", {"behavior": "greedy"})
+    if policy == {"behavior": "greedy"}:
+        return dict(policy)
+    if (
+        not isinstance(policy, dict)
+        or set(policy) != {"behavior", "temperature", "sampling_seed", "coupling"}
+        or policy["behavior"] != "sampled_softmax"
+        or type(policy["sampling_seed"]) is not int
+        or policy["coupling"] != "same_run_seed_across_checkpoints"
+        or type(policy["temperature"]) not in {int, float}
+        or not math.isfinite(policy["temperature"])
+        or policy["temperature"] <= 0
+    ):
+        raise ValueError("Evaluation must freeze greedy or categorical policy semantics")
+    return dict(policy)
+
+
+def choice_sampling_seed(document: dict[str, Any], label: str, seed_id: int, training: bool) -> int:
+    evaluation = evaluation_policy(document)
+    source = (
+        f"{evaluation['sampling_seed']}|frozen-policy-evaluation|{seed_id}"
+        if not training and evaluation["behavior"] == "sampled_softmax"
+        else f"{document['learning']['sampling_seed']}|{label}|{seed_id}"
+    )
+    return int.from_bytes(hashlib.sha256(source.encode()).digest()[:8], "big")
+
+
 def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, Any]:
     d = json.loads(path.read_text())
     if (
@@ -81,7 +116,7 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         or d.get("qualification_config_id") != q.config_id
         or d.get("stage") not in {"short_learning_control", "bounded_policy_only_pilot"}
         or d.get("implementation_sha256") != implementation_files(q.root)
-        or d.get("helpers_sha256") != worker_helpers(q.root)
+        or d.get("helpers_sha256") != worker_helpers(q.root, worker_script(d))
         or d.get("encoder_id") != ENCODER
         or d.get("workers") != 2
         or d.get("maximum_decisions") != 4096
@@ -90,7 +125,10 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         or d.get("liveness_policy") != LIVENESS_POLICY
     ):
         raise ValueError("Native learning requires its pinned, fixed-A8 implementation and caps")
+    evaluation_policy(d)
     wcfg = load_worker_config(q.root / d["worker_qualification_config"], q)
+    if worker_script(d) != worker_script(wcfg):
+        raise ValueError("Learning and qualified worker entry points differ")
     worker = identified(q.root / d["worker_report"]["path"])
     if (
         worker["report_id"] != d["worker_report"]["id"]
@@ -107,6 +145,7 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
     score = load_training_score_spec(q.root / d["training_spec"]["path"])
     if (
         environment["manifest_id"] != d["environment_manifest"]["id"]
+        or worker_script(environment) != worker_script(d)
         or environment["input_config_id"] != worker["input_config_id"]
         or environment["build_report_id"] != worker["build_report_id"]
         or environment["character"] != "Ironclad"
@@ -114,7 +153,7 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         or environment["profile"] != "native_benchmark_full_v1"
         or environment["encoder_id"] != ENCODER
         or environment.get("liveness_policy") != LIVENESS_POLICY
-        or environment["helpers_sha256"] != worker_helpers(q.root)
+        or environment["helpers_sha256"] != worker_helpers(q.root, worker_script(d))
         or score.spec_id != d["training_spec"]["id"]
         or score.scope.ruleset_manifest_id != environment["manifest_id"]
         or score.scope.character != "ironclad"
@@ -267,7 +306,13 @@ def run_neural_experiment(
     d = load_learning_config(path, q)
     wcfg = load_worker_config(q.root / d["worker_qualification_config"], q)
     inputs = _run_inputs(q, q.root / wcfg["base_run_recipe"])
-    if inputs["inputs"].get("combat_surface_revision") in {"v3", "v4"}:
+    if inputs["inputs"].get("potion_surface_revision") == "native_belt_v1":
+        from spireshift.engine_mechanics_admission import require_composed_mechanics
+
+        if worker_script(d) not in {"engine-native-worker-v7.mjs", "engine-native-worker-v8.mjs"}:
+            raise ValueError("The native belt requires its newly qualified worker")
+        require_composed_mechanics(q, inputs, d.get("mechanics_coverage"))
+    elif inputs["inputs"].get("combat_surface_revision") in {"v3", "v4"}:
         from spireshift.engine_coverage import require_mechanics_coverage
 
         require_mechanics_coverage(q, inputs, d.get("mechanics_coverage"))
@@ -333,24 +378,31 @@ def run_neural_experiment(
                         name = f"worker-{index}"
                         if generation:
                             name += f"-generation-{generation}"
-                        worker = EngineWorker(q, inputs, panel / name, node, d["helpers_sha256"])
+                        worker = EngineWorker(
+                            q,
+                            inputs,
+                            panel / name,
+                            node,
+                            d["helpers_sha256"],
+                            script=worker_script(d),
+                        )
                         segment = []
                     seed = by_id[seed_id]
-                    sampling_seed = int.from_bytes(
-                        hashlib.sha256(
-                            f"{learning['sampling_seed']}|{label}|{seed_id}".encode()
-                        ).digest()[:8],
-                        "big",
+                    policy = evaluation_policy(d)
+                    stochastic = sampled or policy["behavior"] == "sampled_softmax"
+                    sampling_seed = choice_sampling_seed(d, label, seed_id, sampled)
+                    rng = random.Random(sampling_seed) if stochastic else None
+                    temperature = (
+                        learning["ppo"]["temperature"]
+                        if sampled
+                        else policy.get("temperature", learning["ppo"]["temperature"])
                     )
-                    rng = random.Random(sampling_seed) if sampled else None
                     case = worker.episode(
                         seed["seed"],
                         maximum_decisions=d["maximum_decisions"],
                         wall_seconds=min(d["episode_wall_seconds"], deadline - time.monotonic()),
                         cpu_seconds=score.evaluation_objective.whole_run_budget,
-                        chooser=partial(
-                            predict, actor, rng=rng, temperature=learning["ppo"]["temperature"]
-                        ),
+                        chooser=partial(predict, actor, rng=rng, temperature=temperature),
                     )
                     case["worker_workspace"] = str(worker.workspace.relative_to(output))
                     if score_episode(case, seed_id, score)["completed"] is not True:
@@ -369,7 +421,8 @@ def run_neural_experiment(
                         "model_id": actor.model_id,
                         "training_spec_id": score.spec_id,
                         "sampling_seed": sampling_seed,
-                        "behavior": "sampled_softmax" if sampled else "greedy",
+                        "behavior": "sampled_softmax" if stochastic else "greedy",
+                        "panel_purpose": "training" if sampled else "frozen_policy_evaluation",
                     }
                     saved_path = panel / f"case-{seed_id}.json"
                     save_native_episode(saved_path, case, binding)
@@ -519,7 +572,14 @@ def run_neural_experiment(
             },
         )
         if d["stage"] == "short_learning_control":
-            collect("control-greedy", learning["control_seeds"], selected, False)
+            collect(
+                "control-greedy"
+                if evaluation_policy(d)["behavior"] == "greedy"
+                else "control-policy",
+                learning["control_seeds"],
+                selected,
+                False,
+            )
         else:
             collect("development-initial", learning["development_seeds"], initial, False)
             collect("development-selected", learning["development_seeds"], selected, False)
@@ -533,6 +593,7 @@ def run_neural_experiment(
         "schema_version": "actual-engine-neural-experiment-report-v1",
         "config_id": manifest_identifier(d),
         "stage": d["stage"],
+        "evaluation_policy": evaluation_policy(d),
         "status": (
             "short_learning_control_pass"
             if d["stage"] == "short_learning_control"

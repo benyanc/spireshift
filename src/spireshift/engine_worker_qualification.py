@@ -23,7 +23,13 @@ from spireshift.engine_qualification import (
     verify_game_archive,
 )
 from spireshift.engine_run import _run_inputs
-from spireshift.engine_worker import ISOLATION_ID, LIVENESS_POLICY, EngineWorker, worker_helpers
+from spireshift.engine_worker import (
+    ISOLATION_ID,
+    LIVENESS_POLICY,
+    WORKER_SCRIPT,
+    EngineWorker,
+    worker_helpers,
+)
 from spireshift.full_run_experience import atomic_json
 
 WORKER_IMPLEMENTATION = ("engine_worker.py", "engine_worker_qualification.py", "engine_run.py")
@@ -33,6 +39,13 @@ def worker_implementation(root: Path) -> dict[str, str]:
     return {name: _sha_file(root / "src/spireshift" / name) for name in WORKER_IMPLEMENTATION}
 
 
+def worker_script(document: dict[str, Any]) -> str:
+    script = document.get("worker_script", WORKER_SCRIPT)
+    if script not in {WORKER_SCRIPT, "engine-native-worker-v7.mjs", "engine-native-worker-v8.mjs"}:
+        raise ValueError("Unqualified production worker entry point")
+    return str(script)
+
+
 def load_worker_config(path: Path, q: EngineQualificationConfig) -> dict[str, Any]:
     d = json.loads(path.read_text())
     if (
@@ -40,7 +53,7 @@ def load_worker_config(path: Path, q: EngineQualificationConfig) -> dict[str, An
         or d.get("qualification_config_id") != q.config_id
         or d.get("isolation_id") != ISOLATION_ID
         or d.get("training_allowed") is not False
-        or d.get("helpers_sha256") != worker_helpers(q.root)
+        or d.get("helpers_sha256") != worker_helpers(q.root, worker_script(d))
         or d.get("python_sha256") != worker_implementation(q.root)
         or d.get("serial_seeds") != [f"SP1RESH1FTA8D1AG{i:03}" for i in range(1, 9)]
         or d.get("parallel_seeds") != d["serial_seeds"][:2]
@@ -110,7 +123,9 @@ def run_worker_qualification(
 
     def batch(name: str, seeds: list[str]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         records: list[dict[str, Any]] = []
-        worker = EngineWorker(q, inputs, output / name, node, d["helpers_sha256"])
+        worker = EngineWorker(
+            q, inputs, output / name, node, d["helpers_sha256"], script=worker_script(d)
+        )
         try:
             for index, seed in enumerate(seeds):
                 case = worker.episode(

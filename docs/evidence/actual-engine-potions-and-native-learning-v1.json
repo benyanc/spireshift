@@ -1,0 +1,263 @@
+{
+  "schema_version": "native-potions-and-learning-evidence-v1",
+  "date": "2026-10-15",
+  "game": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "character": "Ironclad",
+    "ascension": 8,
+    "host": "v33",
+    "game_assembly_unchanged": true
+  },
+  "evidence": {
+    "build": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v33.json",
+      "report_id": "sha256:ed6399c209b91fb5af3177377e655d592171a289ba4a7f3b111771d9dbb2606e",
+      "config_id": "sha256:c7d47735867e909d6a7d166ee4dfbd33582c385ac181e6e0bb5f18961cbe9ab5",
+      "status": "candidate_built_unqualified",
+      "optimizer_steps": 0
+    },
+    "potions": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/potion-controls-v2/summary.json",
+      "report_id": "sha256:4dd6ac2b9450d3b1824140ba8abd23ddf4b6df99211512a5a2e9e2254f54d6f7",
+      "config_id": "sha256:424de16bc4a07bf70237bb8a73461b969eaeff6618126723c3f01b67b19adde1",
+      "status": "native_potion_checks_pass",
+      "completed_cases": 25,
+      "error": null,
+      "optimizer_steps": 0,
+      "wall_seconds": 27.276418666006066,
+      "checks": {
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "native_anytime_potion_ids": [
+        "POTION.AMBERGRIS",
+        "POTION.BLOOD_POTION",
+        "POTION.ENTROPIC_BREW",
+        "POTION.FOUL_POTION",
+        "POTION.FRUIT_JUICE"
+      ],
+      "resources": {
+        "path": "artifacts/resources/native-potion-controls-v2-attempt-1.json",
+        "report_id": "sha256:a22ed04ff1be2199c9d9458a83d167587662f5fa85928b46167e54058bcb76ad",
+        "average_cpu_utilization": 0.045803823821402016,
+        "cpu_hours": 0.0052209282200000005,
+        "cpu_seconds": 18.795341592000003,
+        "energy_kwh": null,
+        "final_storage_bytes": 38411654,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 5,
+        "peak_resident_memory_bytes": 288473088,
+        "peak_storage_bytes": 38411654,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 29.310312708024867
+      }
+    },
+    "merchant_smoke": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/merchant-controls-v2/summary.json",
+      "report_id": "sha256:4212a5592a03e74d8d6ed1a74167b0b70efd6b7a308733ab1ddbc30c3f6bd812",
+      "completed_cases": 2,
+      "wall_seconds": 2.216147291008383
+    },
+    "lifecycle": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v8/summary.json",
+      "report_id": "sha256:d546d46aa3bbc71d1b5f0dc37c4a587525e6ff4e87a25e41cff5c8937d4e1659",
+      "config_id": "sha256:5550433b360dab6410872441e6c7b1e1d11b78336b4a24d13cccc0f41395629b",
+      "status": "native_progression_pass",
+      "optimizer_steps": 0,
+      "checks": {
+        "act_1_advanced_once": true,
+        "act_1_boss_defeat_not_run_victory": true,
+        "act_1_checkpoint_saved": true,
+        "act_1_current": true,
+        "act_1_enemies_present": true,
+        "act_1_explicit_proceed": true,
+        "act_1_native_boss_map_coordinate": true,
+        "act_1_native_boss_room": true,
+        "act_1_not_ended_before_fixture": true,
+        "act_1_pre_finished_native_room": true,
+        "act_1_proceed_is_not_immediate_victory": true,
+        "act_2_advanced_once": true,
+        "act_2_boss_defeat_not_run_victory": true,
+        "act_2_checkpoint_saved": true,
+        "act_2_current": true,
+        "act_2_enemies_present": true,
+        "act_2_explicit_proceed": true,
+        "act_2_native_boss_map_coordinate": true,
+        "act_2_native_boss_room": true,
+        "act_2_not_ended_before_fixture": true,
+        "act_2_pre_finished_native_room": true,
+        "act_2_proceed_is_not_immediate_victory": true,
+        "act_3_boss_defeat_not_run_victory": true,
+        "act_3_checkpoint_saved": true,
+        "act_3_current": true,
+        "act_3_enemies_present": true,
+        "act_3_explicit_proceed": true,
+        "act_3_native_boss_map_coordinate": true,
+        "act_3_native_boss_room": true,
+        "act_3_not_ended_before_fixture": true,
+        "act_3_pre_finished_native_room": true,
+        "act_3_proceed_is_not_immediate_victory": true,
+        "architect_requires_another_decision": true,
+        "fixed_A8": true,
+        "global_test_mode_retained": true,
+        "native_cleanup_completed": true,
+        "native_game_over": true,
+        "native_victory_room": true,
+        "third_act_stays_third_until_architect": true,
+        "three_native_acts": true,
+        "victory_despite_zero_hp": true,
+        "wrapper_explicit_victory": true
+      }
+    },
+    "workers": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v11/summary.json",
+      "report_id": "sha256:602fbb8de84b08a01bcc33a9eb1e03aa61b7480ea2ed790634644a23afba626d",
+      "config_id": "sha256:2ba7dfc120018565339a877340b57a5f26856cf19a2799a14fbfc5d1d6fee11c",
+      "status": "worker_isolation_pass",
+      "completed_games": 12,
+      "failed_games": 0,
+      "error": null,
+      "optimizer_steps": 0,
+      "wall_seconds": 17.02403929096181,
+      "checks": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "resources": {
+        "path": "artifacts/resources/native-worker-isolation-v11-attempt-1.json",
+        "report_id": "sha256:506ce9b8188c08a3acabe3198830e917a8e20ddf02bbabaa48e212de67513a64",
+        "average_cpu_utilization": 0.06367146354085353,
+        "cpu_hours": 0.004742953459444445,
+        "cpu_seconds": 17.074632454,
+        "energy_kwh": null,
+        "final_storage_bytes": 68575745,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 757497856,
+        "peak_storage_bytes": 68575745,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 19.154838541988283
+      }
+    },
+    "failed_control": {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v7/summary.json",
+      "report_id": "sha256:eeca052e8db4277ca18807454e0344887d96f9b5fe095fe4c1aa7a3d31fca8f3",
+      "config_id": "sha256:0c8adb73ddc2b911ea5057bdf83107ea1c08fbc02ba22b7bf0de64f5d0cbb27d",
+      "status": "stopped_incomplete",
+      "completed_games": 2,
+      "failed_games": 2,
+      "error": "Native panel exceeded its declared failed-game allowance",
+      "optimizer_steps": 6,
+      "sampled_decisions_verified": 228,
+      "wall_seconds": 71.41463691694662,
+      "checks": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      }
+    },
+    "control": {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v8/summary.json",
+      "report_id": "sha256:4d7bfd92b56ec9f67c23a9e8e38d1b1fddbf57d279ca13f765771d4cab9fb247",
+      "config_id": "sha256:b3840c9782503b98cf00369143d02354d28378d821469ff64f9f0ecddab59e18",
+      "status": "short_learning_control_pass",
+      "completed_games": 4,
+      "failed_games": 0,
+      "error": null,
+      "optimizer_steps": 6,
+      "sampled_decisions_verified": 228,
+      "wall_seconds": 14.656395916943438,
+      "checks": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "resources": {
+        "path": "artifacts/resources/native-a8-control-v8-attempt-1.json",
+        "report_id": "sha256:6c77cb483c9e2a66217f8d0f3b7358a47df6eaab139b9dc1795e8eb361eb116b",
+        "average_cpu_utilization": 0.06630342689000665,
+        "cpu_hours": 0.006110328405277778,
+        "cpu_seconds": 21.997182259000002,
+        "energy_kwh": null,
+        "final_storage_bytes": 12520577,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 733888512,
+        "peak_storage_bytes": 12520577,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 23.69752783398144
+      }
+    },
+    "admission": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-a8-learning-admission-v4.json",
+      "report_id": "sha256:9ecde3eb3d411dd33ea36439dd3720a71f7a8dd04722d80546a2aa9bfa771047",
+      "status": "admitted_for_bounded_native_policy_only_pilot",
+      "optimizer_steps": 0
+    },
+    "preflight": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-a8-pilot-v4-preflight.json",
+      "config_id": "sha256:e929b7b3e5666f4de6924ff1da1450c1b8efd6d4337df9916d45caa938dca1cb",
+      "optimizer_steps": 0,
+      "ready": true
+    }
+  },
+  "inherited_coverage": {
+    "host": "v32",
+    "cases": 1849,
+    "report_id": "sha256:1d4b84bb60d9cf5f59d9b461835f2a4f459ee459d28180404583a9a97c03e1dc",
+    "all_cases_and_supplementary_artifacts_reverified": true,
+    "relabelled_as_new_host_sweep": false
+  },
+  "id_audit": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/public-input-audit-v2.json",
+    "observations": 548,
+    "renaming_comparisons": 1644,
+    "valid": true
+  },
+  "owner_pilot": {
+    "config": "configs/native-learning/sts2-v0.111.0-a8-pilot-v4.json",
+    "wrapper": "scripts/train-native-a8-ppo-v4.sh",
+    "planned_games": 336,
+    "game_attempts": 0,
+    "started_by_codex": false,
+    "initialization": "original_seeded_network_and_zero_adam",
+    "evaluation": "categorical_temperature_0.8_same_run_rng_across_checkpoints"
+  },
+  "limitations": [
+    "no_new_shipped_app_comparison",
+    "finite_diagnostic_coverage_not_all_interaction_proof",
+    "greedy_looping_remains_a_quality_limitation",
+    "short_control_is_not_evidence_of_improved_play"
+  ],
+  "game_apps_created": 0,
+  "player_victories": 0,
+  "checkpoint_promoted": false,
+  "base_readiness_passed": false,
+  "adaptive_controller_allowed": false,
+  "repository_validation": {
+    "python_tests": 1373,
+    "python_types_and_formatting_passed": true,
+    "csharp_protocol_passed": true,
+    "focused_node_tests": 28,
+    "diff_whitespace_check_passed": true
+  }
+}

@@ -1,5 +1,9 @@
 # Native mechanics coverage before another A8 pilot
 
+**Current:** the finite mechanics gate is complete. Outside-combat potion and merchant targeting
+controls, new worker isolation and a short neural control pass. The next owner task is the fresh
+[v4 native pilot](actual-engine-outside-combat-potions.md); the sweep below remains host-v32 evidence.
+
 The v3 actual-engine pilot finished 336 attempts: 332 native normal endings and four isolated
 failures. It made 627 PPO updates from 26,416 verified sampled decisions. No wins occurred.
 The selected player's independent average floor was 8.75 versus the initializer's 7.4375;
@@ -26,7 +30,8 @@ card × relic × enemy × history combination is not the claim of this pass.
   health/block/statuses/ownership. Native rules handle effects and cost interactions.
 - Classify all ten native target types. Bind current enemy operands; keep native automatic
   self/player/Osty targeting; retain disabled single-player AnyAlly cards. Unknown targets stop
-  that case. Non-creature potion targeting remains an explicit unsupported requirement.
+  that case. Non-creature potion targeting was outside this sweep and is now qualified separately by the
+  [potion supplement](actual-engine-outside-combat-potions.md).
 - Fix reentrant card-choice completion: clear the old request before its continuation can install
   another. Recognize newly pending selections and reward-to-bundle choices during native waits.
 - Refresh the ordinary public action menu after every choice. Repeated rest/shop actions, Skip,

@@ -107,6 +107,8 @@ def add_engine_parser(commands: Any) -> None:
         "check-mechanics-coverage",
         "check-mechanics-sequences",
         "verify-mechanics-sequences",
+        "check-potion-controls",
+        "verify-potion-controls",
         "check-mechanics-followups",
         "verify-mechanics-followups",
         "prepare-connector",
@@ -267,6 +269,10 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("--node", required=True, type=Path)
         if name == "probe-connector-menu":
             command.add_argument("--node", required=True, type=Path)
+        if name in {"check-potion-controls", "verify-potion-controls"}:
+            command.add_argument("potion_config", type=Path)
+        if name == "check-potion-controls":
+            command.add_argument("--node", required=True, type=Path)
         if name == "check-mechanics-coverage":
             command.add_argument("coverage_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
@@ -364,7 +370,16 @@ def run_engine_command(args: argparse.Namespace) -> int:
             return 0 if result["status"] == "downloaded_identity_matches" else 1
         if args.output is not None and (args.output.exists() or args.output.is_symlink()):
             raise FileExistsError(f"Refusing to overwrite an existing result: {args.output}")
-        if args.engine_command in {"check-mechanics-followups", "verify-mechanics-followups"}:
+        if args.engine_command in {"check-potion-controls", "verify-potion-controls"}:
+            from spireshift.engine_potion_checks import run_potion_checks, verify_potion_checks
+
+            if args.engine_command == "check-potion-controls":
+                result = run_potion_checks(config, args.potion_config, node=args.node)
+                code = 0 if result["status"] == "native_potion_checks_pass" else 1
+            else:
+                result = verify_potion_checks(config, args.potion_config)
+                code = 0
+        elif args.engine_command in {"check-mechanics-followups", "verify-mechanics-followups"}:
             from spireshift.engine_mechanics_followups import (
                 run_mechanics_followups,
                 verify_mechanics_followups,

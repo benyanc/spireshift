@@ -71,6 +71,7 @@ PRIVATE_FIELDS = {
     "room_ref",
     "option_ref",
     "selection_ref",
+    "merchant_ref",
     "raw_request",
     "seed",
     "rng",
@@ -131,7 +132,9 @@ def _verify_saved_observation(row: dict[str, Any], runtime: str) -> None:
 def load_run_recipe(path: Path, qualification: EngineQualificationConfig) -> dict[str, Any]:
     document = json.loads(path.read_text())
     helpers = (
-        _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v4.mjs"})
+        _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v5.mjs"})
+        if document.get("policy_revision") == "diagnostic_v5"
+        else _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v4.mjs"})
         if document.get("policy_revision") == "diagnostic_v4"
         else _script_closure(qualification.root / "scripts", {"probe-engine-native-run-v3.mjs"})
         if document.get("policy_revision") == "diagnostic_v3"
@@ -161,7 +164,7 @@ def load_run_recipe(path: Path, qualification: EngineQualificationConfig) -> dic
         or not 1 <= document["max_decisions"] <= 4096
         or document.get("max_repeated_states") != 3
         or document.get("policy_revision")
-        not in {None, "diagnostic_v2", "diagnostic_v3", "diagnostic_v4"}
+        not in {None, "diagnostic_v2", "diagnostic_v3", "diagnostic_v4", "diagnostic_v5"}
         or set(document.get("helpers_sha256", {})) != helpers
     ):
         raise ValueError("Expected a short, fixed-A8 natural public-run diagnostic recipe")

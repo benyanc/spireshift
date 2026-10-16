@@ -1,10 +1,32 @@
 # SpireShift backlog
 
-Updated 2026-10-15 with the completed repaired sweep and same-build short follow-up checks.
+Updated 2026-10-15 with outside-combat potions, the composed mechanics gate and a fresh native pilot handoff.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**The finite native mechanics package is complete (#148); owner-run A8 pilot v4 is next (#146).**
+Host v33 supports all five AnyTime potions outside combat, exact real/fake merchant targets for
+Foul Potion, inventory open/close and current-slot discard. Native effects and game rules remain
+in the original DLL. Twenty-five potion controls, two merchant purchase/exit checks, new lifecycle
+fixtures and a 12-game isolated worker panel pass with zero app copies.
+
+The composed gate retains the **host-v32** 1,849-case sweep and its true scope, rechecks saved
+hashes, binds the reviewed presentation delta and requires new controls. A first short greedy
+learning check failed on legal loops and stays preserved. Merchant inspection now reaches the
+learner's public memory; the new explicitly stochastic control passes **4/4 games, 228 verified
+training decisions and six updates**. Fixed evaluation RNG streams are shared across checkpoints;
+every action remains selectable. These are four losses and pipeline evidence, not stronger play.
+
+**Next:** the owner runs the single command in
+[outside-combat potions and training](actual-engine-outside-combat-potions.md). Pilot v4 starts
+from the original seeded network and zero optimizer state: eight rounds, 336 planned games,
+independent development evaluation and bounded failed-worker continuation. Codex has not started
+this long task. Assess generalization and failure types before scaling; restore greedy-quality
+checks before base readiness. Adaptive thinking, cross-patch work and larger GA batches stay later.
+
+### Preserved earlier milestones
 
 **The actual-engine v3 pilot and first mechanics sweep are complete (#148 / #146, 2026-10-15).**
 The owner finished all 336 attempts: **332 normal endings, four failures, 627 PPO updates and
@@ -50,7 +72,7 @@ admission. Do not repeat either completed batch under its unchanged recipe, rein
 play as model quality or automatically migrate old models. Strong-base readiness still comes
 before adaptive thinking.
 
-Other cases continue only after a failed worker is proved stopped; keep unsupported/prerequisite-
+The following paragraphs describe the earlier pre-potion handoff. Other cases continue only after a failed worker is proved stopped; keep unsupported/prerequisite-
 blocked/untested mechanics explicit. Resolve the remaining potion requirements before a new
 environment/worker/neural admission.
 The new all-pool path has a coverage gate; historical pilot results are not retroactively upgraded.
