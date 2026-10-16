@@ -1,24 +1,37 @@
 # SpireShift backlog
 
-Updated 2026-10-15 after the native v4 pilot stopped; worker setup and nested potion delivery are next.
+Updated 2026-10-16 after worker startup and queued-discard repairs passed their short controls.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**A8 pilot v4 stopped during round-6 worker setup (#146).**
-It saved five training rounds, 393 updates and 16,345 verified training decisions. Of 336 planned
-games, 191 ended normally, one failed and 144 remain unplayed; there are no wins. Both round-6
-workers timed out while Git was creating local support-code checkouts, before recording a game.
-The earlier isolated failure discarded a potion while a combat card selection was pending.
-There is no independent development comparison or playing-strength conclusion.
+**The repaired native A8 pilot v5 is ready for the owner; it has not been started (#146).**
+One verified immutable support-code cache replaces per-worker Git clones. Worker v9 keeps
+separate native processes, sessions, ledgers and profiles, with zero app copies. Host v34
+accepts the native queued potion discard during a card selection, rejects duplicate/stale
+submissions and settles it after the choice. The game DLL and effects remain unchanged.
 
-**Next:** remove repeated Git cloning from worker startup with verified immutable local code and
-isolated mutable sessions; reproduce and fix nested-choice potion availability/delivery; then
-qualify bounded worker/neural controls and prepare a new owner-run pilot. Preserve v4 as stopped;
-do not retry it under changed sources. The [stop report](native-a8-pilot-v4-stop.md) records scope
-and acceptance criteria. Saved-only assessment v2 now displays worker errors and uses the exact
-declared confirmation score. Its v3 regression remains inconclusive; original v1 reports remain.
+Checks pass: two reproduced old-host failures and two repaired queued-discard prefixes;
+12/12 serial/parallel/reset games; 25/25 potion controls; new-host act/ending fixtures;
+4/4 short learning games with 228 verified training decisions and six optimizer steps;
+5,175 saved ID-renaming comparisons; 1,413 repository tests. These are pipeline controls,
+not evidence of stronger play. The original 1,849-case sweep keeps its host-v32 scope.
+
+**Next:** the owner runs `bash scripts/train-native-a8-ppo-v5.sh` once (roughly 10–20 minutes,
+30-minute cap). It starts from the original seeded initializer and zero Adam state; it plans
+336 attempts over eight rounds, then checks the frozen selected player on independent seeds.
+All decisions remain learnable and optional exits remain selectable. Share its final result
+before any follow-up. See [the repair and run instructions](native-a8-worker-potion-repairs.md).
+
+Preserve v4 as stopped: five training rounds, 393 updates, 16,345 verified decisions;
+191 normal losses, one failed game and 144 unplayed out of 336. Its checkpoints/optimizer
+states and setup failures remain unchanged. Do not restart it under repaired sources.
+No independent v4 quality conclusion exists. The [stop report](native-a8-pilot-v4-stop.md)
+and [saved-only assessment](native-a8-pilot-assessment.md) retain the historical evidence.
+
+After v5, assess failure types and independent progress before scaling. Adaptive thinking,
+cross-patch transfer, selectable difficulties and larger GA batches remain later work.
 
 ### Preserved pre-v4 handoff
 

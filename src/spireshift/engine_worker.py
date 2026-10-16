@@ -18,6 +18,7 @@ from typing import Any
 from spireshift.core.manifest import manifest_identifier
 from spireshift.engine_connector import _stop_child
 from spireshift.engine_native import DATA_RELATIVE, _private_path, _sandbox
+from spireshift.engine_projection_cache import prepare_projection_cache
 from spireshift.engine_qualification import GAME_RELATIVE, EngineQualificationConfig, _sha_file
 from spireshift.engine_startup import _script_closure
 from spireshift.full_run_experience import atomic_json
@@ -75,19 +76,36 @@ class EngineWorker:
             WORKER_SCRIPT,
             "engine-native-worker-v7.mjs",
             "engine-native-worker-v8.mjs",
+            "engine-native-worker-v9.mjs",
+            "engine-potion-queue-worker-v1.mjs",
             "engine-mechanics-worker-v1.mjs",
             "engine-mechanics-worker-v2.mjs",
             "engine-mechanics-worker-v3.mjs",
+            "engine-mechanics-worker-v4.mjs",
         }:
             raise ValueError("Unqualified worker entry point")
         if projection_cache is not None and script not in {
             "engine-mechanics-worker-v1.mjs",
             "engine-mechanics-worker-v2.mjs",
             "engine-mechanics-worker-v3.mjs",
+            "engine-mechanics-worker-v4.mjs",
         }:
             raise ValueError("Shared projection is diagnostic-only")
         if helpers != worker_helpers(self.root, script):
             raise ValueError("Native worker helper inventory changed")
+        headless = next(x for x in qualification.document["sources"] if x["name"] == "headless")
+        shared_projection = (
+            prepare_projection_cache(
+                self.root, _private_path(self.root, headless["path"]), inputs["projection"]
+            )
+            if script
+            in {
+                "engine-native-worker-v9.mjs",
+                "engine-potion-queue-worker-v1.mjs",
+                "engine-mechanics-worker-v4.mjs",
+            }
+            else None
+        )
         # mkdir itself is exclusive: no automatic reuse/clearing of an interrupted marker.
         workspace.mkdir(parents=True, exist_ok=False)
         self.marker = workspace / "active.json"
@@ -110,6 +128,7 @@ class EngineWorker:
             candidate,
             runtime,
             localization,
+            *([Path(shared_projection["directory"])] if shared_projection is not None else []),
         ]
         (workspace / "profile-isolation.sb").write_text(
             _sandbox(denied)
@@ -118,14 +137,16 @@ class EngineWorker:
             + f"(require-not (subpath {json.dumps(str(workspace))}))))\n"
         )
         (profile / "tmp").mkdir()
-        headless = next(x for x in qualification.document["sources"] if x["name"] == "headless")
         spec = {
+            "shared_projection": shared_projection,
             "projection_cache": str(projection_cache) if projection_cache is not None else None,
             "coverage_diagnostic": script
             in {
                 "engine-mechanics-worker-v1.mjs",
                 "engine-mechanics-worker-v2.mjs",
                 "engine-mechanics-worker-v3.mjs",
+                "engine-mechanics-worker-v4.mjs",
+                "engine-potion-queue-worker-v1.mjs",
             },
             "headless_root": str(_private_path(self.root, headless["path"])),
             "attempt": str(workspace),

@@ -109,6 +109,13 @@ per attempt. Managed-engine simulations already share frozen inputs and do not n
 per game. Preserve old recipes for historical reproduction; do not use their retention defaults
 for new work.
 
+For native worker v9 and later, share the verified immutable local support-code cache as well
+as the frozen game/runtime/SDK. Warm worker startup must not clone or patch a Git checkout.
+Keep mutable sessions, ledgers, navigation state and profiles separate. Preserve interrupted
+or changed caches for inspection; never clear them automatically. See
+`docs/native-a8-worker-potion-repairs.md`. Native queued actions need exact acceptance and
+completion checks; an unchanged belt while gathering a card choice is not itself a failure.
+
 Runner wrappers must read the case workspace from the pinned recipe and use that same path for
 cached results, resource tracking and outputs. Do not duplicate a versioned workspace literal
 in the wrapper. Keep historical output locations and measurements unchanged when repairing a

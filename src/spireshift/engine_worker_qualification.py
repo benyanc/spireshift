@@ -16,6 +16,7 @@ from spireshift.engine_native import (
     _running_games,
     _shared_snapshot,
 )
+from spireshift.engine_projection_cache import verify_projection_cache
 from spireshift.engine_qualification import (
     EngineQualificationConfig,
     _inventory,
@@ -32,7 +33,12 @@ from spireshift.engine_worker import (
 )
 from spireshift.full_run_experience import atomic_json
 
-WORKER_IMPLEMENTATION = ("engine_worker.py", "engine_worker_qualification.py", "engine_run.py")
+WORKER_IMPLEMENTATION = (
+    "engine_worker.py",
+    "engine_worker_qualification.py",
+    "engine_run.py",
+    "engine_projection_cache.py",
+)
 
 
 def worker_implementation(root: Path) -> dict[str, str]:
@@ -41,7 +47,12 @@ def worker_implementation(root: Path) -> dict[str, str]:
 
 def worker_script(document: dict[str, Any]) -> str:
     script = document.get("worker_script", WORKER_SCRIPT)
-    if script not in {WORKER_SCRIPT, "engine-native-worker-v7.mjs", "engine-native-worker-v8.mjs"}:
+    if script not in {
+        WORKER_SCRIPT,
+        "engine-native-worker-v7.mjs",
+        "engine-native-worker-v8.mjs",
+        "engine-native-worker-v9.mjs",
+    }:
         raise ValueError("Unqualified production worker entry point")
     return str(script)
 
@@ -181,17 +192,30 @@ def run_worker_qualification(
             raise ValueError("Serial/parallel/reset semantic traces differ")
         if len({w["runtime_identity"]["process_id"] for w in workers}) != 3:
             raise ValueError("Workers shared a native process")
+        if worker_script(d) == "engine-native-worker-v9.mjs":
+            caches = [w["shared_projection"] for w in workers]
+            if any(cache != caches[0] for cache in caches):
+                raise ValueError("Workers did not reuse one verified support-code cache")
+            if (
+                verify_projection_cache(Path(caches[0]["directory"]), inputs["projection"])
+                != caches[0]
+            ):
+                raise ValueError("Shared worker support code changed")
         # Exercise the exact sandbox on a sentinel: own profile is writable; a sibling
         # profile is neither readable nor writable. No account/frozen files are touched.
         sandbox = output / "serial/profile-isolation.sb"
         own = output / "serial/private-profile/isolation-sentinel"
         other = output / "parallel-0/private-profile/isolation-sentinel"
         other.write_text("sibling sentinel")
-        for command, expected in (
+        sentinels = [
             (["/usr/bin/touch", str(own)], 0),
             (["/usr/bin/touch", str(other)], 1),
             (["/bin/cat", str(other)], 1),
-        ):
+        ]
+        if worker_script(d) == "engine-native-worker-v9.mjs":
+            cache = Path(workers[0]["shared_projection"]["directory"])
+            sentinels.append((["/usr/bin/touch", str(cache / ".isolation-write-check")], 1))
+        for command, expected in sentinels:
             check = subprocess.run(
                 ["/usr/bin/sandbox-exec", "-f", str(sandbox), *command],
                 capture_output=True,

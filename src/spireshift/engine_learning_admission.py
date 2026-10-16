@@ -100,7 +100,7 @@ def create_learning_admission(
     control = audit_learning_control(q, control_path)
     id_audit = json.loads(id_audit_path.read_text())
     current_worker = worker_script(d)
-    new_policy = current_worker == "engine-native-worker-v8.mjs"
+    new_policy = current_worker in {"engine-native-worker-v8.mjs", "engine-native-worker-v9.mjs"}
     observations = id_audit.get("observations", 0)
     if (
         id_audit.get("schema_version")

@@ -52,10 +52,12 @@ from spireshift.full_run_ppo_math import Adam
 from spireshift.training_objective import load_training_score_spec
 
 IMPLEMENTATION = (
+    "engine_projection_cache.py",
     "engine_learning.py",
     "engine_learning_admission.py",
     "engine_mechanics_admission.py",
     "engine_potion_checks.py",
+    "engine_potion_queue_checks.py",
     "engine_neural.py",
     "engine_experience.py",
     "engine_experience_audit.py",
@@ -309,7 +311,11 @@ def run_neural_experiment(
     if inputs["inputs"].get("potion_surface_revision") == "native_belt_v1":
         from spireshift.engine_mechanics_admission import require_composed_mechanics
 
-        if worker_script(d) not in {"engine-native-worker-v7.mjs", "engine-native-worker-v8.mjs"}:
+        if worker_script(d) not in {
+            "engine-native-worker-v7.mjs",
+            "engine-native-worker-v8.mjs",
+            "engine-native-worker-v9.mjs",
+        }:
             raise ValueError("The native belt requires its newly qualified worker")
         require_composed_mechanics(q, inputs, d.get("mechanics_coverage"))
     elif inputs["inputs"].get("combat_surface_revision") in {"v3", "v4"}:

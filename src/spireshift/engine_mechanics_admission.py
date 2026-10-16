@@ -16,6 +16,7 @@ from spireshift.engine_cli_probe import verify_local_build_report
 from spireshift.engine_coverage import _read_sealed, _saved_case
 from spireshift.engine_mechanics_followups import assert_completed_sweep
 from spireshift.engine_potion_checks import verify_potion_checks
+from spireshift.engine_potion_queue_checks import verify_queue_checks
 from spireshift.engine_progression import verify_native_progression
 from spireshift.engine_qualification import EngineQualificationConfig, _sha_file
 from spireshift.engine_worker import worker_helpers
@@ -36,7 +37,11 @@ def require_composed_mechanics(
         or cfg.get("helpers_sha256")
         != worker_helpers(q.root, cfg.get("worker_script", "engine-native-worker-v7.mjs"))
         or cfg.get("worker_script", "engine-native-worker-v7.mjs")
-        not in {"engine-native-worker-v7.mjs", "engine-native-worker-v8.mjs"}
+        not in {
+            "engine-native-worker-v7.mjs",
+            "engine-native-worker-v8.mjs",
+            "engine-native-worker-v9.mjs",
+        }
         or cfg.get("training_allowed") is not False
         or cfg.get("all_interactions_proven") is not False
         or inputs["inputs"].get("potion_surface_revision") != "native_belt_v1"
@@ -131,12 +136,18 @@ def require_composed_mechanics(
         or lifecycle_cfg["build_report_id"] != cfg["build_report_id"]
     ):
         raise ValueError("New host lifecycle was not separately qualified")
+    queue = None
+    if cfg.get("worker_script") == "engine-native-worker-v9.mjs":
+        if not isinstance(cfg.get("queued_potion_discard"), dict):
+            raise ValueError("Shared-worker host requires its queued-discard controls")
+        queue = verify_queue_checks(q, cfg["queued_potion_discard"], cfg["build_report_id"])
     return {
         "valid": True,
         "gate_id": reference["id"],
         "inherited_sweep_report_id": report["report_id"],
         "inherited_sweep_host": "v32",
-        "current_host": "v33",
+        "current_host": "v34" if queue is not None else "v33",
+        "verified_queued_discard_cases": queue["verified_cases"] if queue is not None else 0,
         "verified_sweep_cases": len(cases),
         "verified_potion_cases": potion["verified_cases"],
         "all_interactions_proven": False,

@@ -21,9 +21,14 @@ from spireshift.engine_worker import EngineWorker, worker_helpers
 from spireshift.engine_worker_qualification import immutable_checks
 from spireshift.full_run_experience import atomic_json
 
-SCRIPT = "engine-mechanics-worker-v3.mjs"
+SCRIPT = "engine-mechanics-worker-v4.mjs"
 ANYTIME = {"AMBERGRIS", "BLOOD_POTION", "ENTROPIC_BREW", "FOUL_POTION", "FRUIT_JUICE"}
-IMPLEMENTATION = ("engine_potion_checks.py", "engine_worker.py", "engine_run.py")
+IMPLEMENTATION = (
+    "engine_potion_checks.py",
+    "engine_worker.py",
+    "engine_run.py",
+    "engine_projection_cache.py",
+)
 
 
 def potion_implementation(root: Path) -> dict[str, str]:
