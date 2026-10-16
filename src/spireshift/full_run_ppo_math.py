@@ -253,6 +253,15 @@ class Adam:
         value_rate: float,
         maximum_norm: float,
     ) -> tuple[ActorCritic, Adam, float]:
+        for name, rate in (("actor rate", actor_rate), ("value rate", value_rate)):
+            if type(rate) not in (int, float) or not math.isfinite(rate) or rate < 0:
+                raise ValueError(f"{name} must be finite and nonnegative")
+        if (
+            type(maximum_norm) not in (int, float)
+            or not math.isfinite(maximum_norm)
+            or maximum_norm <= 0
+        ):
+            raise ValueError("Gradient norm limit must be finite and positive")
         np = _numpy()
         g = np.asarray(finite_vector(tuple(gradient), model.parameter_count, "gradient"))
         norm = float(np.linalg.norm(g))
@@ -262,7 +271,8 @@ class Adam:
             0.9 * np.asarray(self.first) + 0.1 * g,
             0.999 * np.asarray(self.second) + 0.001 * g * g,
         )
-        rate = np.full(model.parameter_count, value_rate)
+        # An integer zero is a valid frozen-head rate, not an integer array dtype.
+        rate = np.full(model.parameter_count, value_rate, dtype=np.float64)
         rate[: model.actor.parameter_count] = actor_rate
         weights = np.asarray(model.weights()) - rate * (m / (1 - 0.9**t)) / (
             np.sqrt(v / (1 - 0.999**t)) + 1e-8

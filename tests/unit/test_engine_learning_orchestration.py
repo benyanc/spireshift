@@ -31,9 +31,16 @@ def test_progress_best_game_is_one_real_game_and_prioritizes_a_full_win() -> Non
     assert (summary["best_floor"], summary["best_completed_acts"]) == (52, 3)
 
 
-@pytest.mark.parametrize("fault", ["none", "confirmation", "training", "widespread", "retirement"])
+@pytest.mark.parametrize(
+    "fault,comparison",
+    [
+        (f, "initial_vs_incumbent")
+        for f in ("none", "confirmation", "training", "widespread", "retirement")
+    ]
+    + [("none", "initial_vs_best_trained")],
+)
 def test_pilot_freezes_selection_and_isolates_failed_games(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fault: str
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fault: str, comparison: str
 ) -> None:
     # This is an orchestration fixture, never environment qualification or playing evidence.
     score_path = Path(
@@ -45,6 +52,7 @@ def test_pilot_freezes_selection_and_isolates_failed_games(
     q = EngineQualificationConfig(document={}, root=tmp_path)
     cfg: dict[str, Any] = {
         "stage": "bounded_policy_only_pilot",
+        "development_comparison": comparison,
         "workspace": "artifacts/pilot-fixture",
         "worker_qualification_config": "workers.json",
         "training_spec": {"path": "score.json"},
@@ -188,7 +196,20 @@ def test_pilot_freezes_selection_and_isolates_failed_games(
     freeze = json.loads((root / "selection-freeze.json").read_text())
     assert freeze["development_opened"] is False
     assert freeze["model_id"] == result["selected_model_id"]
-    assert result["panels"][-1]["model_id"] == result["selected_model_id"]
+    assert (
+        result["panels"][-1]["model_id"]
+        == result[
+            "best_trained_model_id"
+            if comparison == "initial_vs_best_trained"
+            else "selected_model_id"
+        ]
+    )
     assert result["panels"][-2]["model_id"] == result["initial_model_id"]
     assert result["panels"][-2]["panel"] == "development-initial"
-    assert result["panels"][-1]["panel"] == "development-selected"
+    assert result["panels"][-1]["panel"] == (
+        "development-best-trained"
+        if comparison == "initial_vs_best_trained"
+        else "development-selected"
+    )
+    assert result["best_trained_model_id"] != result["initial_model_id"]
+    assert freeze["best_trained_model_id"] == result["best_trained_model_id"]

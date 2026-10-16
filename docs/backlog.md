@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-16 after owner pilot v5 completed and its saved evidence was audited.
+Updated 2026-10-16 after value/credit controls and two short native integration checks.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
@@ -29,21 +29,35 @@ networks learn an artificial HP-conditioned rest choice on 18 held-aside trainin
 Gradient derivatives pass real-state checks. No unique causal explanation or native ablation
 is claimed. See [the measured diagnosis](native-a8-pilot-v5-learning-diagnosis.md).
 
-Ordered work:
-1. #35: fix the discovered integer-zero optimizer-rate edge case (not v5's cause), then implement
-   critic/advantage quality controls and whole-run-grouped baseline comparisons. Diagnose the
-   estimator before adding more value bootstrapping.
-2. #35: compare objective-preserving return/credit redistribution after the value controls,
-   with telescoping/end/skip/loop tests and the terminal-victory contract unchanged.
-3. #143: test representation normalization/reduced duplication against saturation and conditional
-   learning controls. Keep every action family and public entity/amount relation; do not enlarge
-   the model without evidence that capacity blocks the task.
-4. #146 / #134: freeze a one-factor matched native comparison with enough independent training
-   runs, separate best-trained and incumbent evaluation, preserved source/seed ownership and an
-   owner-run long stage. No larger unchanged PPO/GA, new sweep or adaptive controller now.
+**Value/credit implementation is complete; gameplay effect remains untested (#35 / #146).**
+The integer-zero optimizer edge case is fixed. A small public-state predictor is cross-fitted
+by whole games, with equal-game fitting weights and no self-outcome leakage. Using only v5's
+256 TRAIN runs, its later-round squared error is 31.7% below a fitted constant and 61.6% below
+the old critic; it improves all four audit rounds. Gradient agreement improves in round 1 but
+worsens in round 8, so lower prediction error is not yet a demonstrated learning improvement.
+Objective-preserving credit telescopes on all saved runs; lambda=1 recovers the original
+return-minus-value credit exactly. Shorter-trace GAE stays disabled. Both new four-game pipeline
+controls and saved-credit reconstruction pass, with zero failures or app copies.
+
+**Next owner command:** `bash scripts/compare-native-a8-credit-v1.sh` from the repository.
+This is a matched old/new credit comparison: 672 planned attempts, two sequential methods,
+the same actor/training seeds/RNG/score/update budget, and fresh confirmation/development seeds.
+Both explicitly evaluate the best trained player, keeping the incumbent separate. Expect
+25–40 minutes total; 30-minute cap per method. Admissions/preflight pass; no long task has
+started. See [the implementation, results and exact command](native-a8-value-credit.md).
+
+Remaining ordered work:
+1. #35 / #146: owner runs that comparison; audit saved outcomes, paired development differences,
+   failures and per-round prediction quality. One training replication is exploratory evidence.
+2. #143: test representation normalization/reduced duplication against saturation and conditional
+   learning controls if needed after this one-factor comparison. Preserve every action family
+   and public entity/amount relation; do not enlarge the model without demonstrated need.
+3. #35 / #134: address remaining run-level gradient noise using measured independent-batch-size
+   controls and/or shorter-trace credit only if value evidence supports it. Do not assume either
+   method helps from prediction error alone. No larger unchanged PPO/GA, sweep or controller now.
 
 All v5 sources, checkpoints, optimizer states and results remain preserved. Re-running its
-training script only shows the saved result; no new owner command is needed now. V4 remains
+training script only shows the saved result; use the new comparison command above. V4 remains
 stopped with five training rounds, 191 normal losses, one failure and 144 unplayed; do not
 restart it under repaired sources. [Repair evidence](native-a8-worker-potion-repairs.md) and the
 [v4 stop report](native-a8-pilot-v4-stop.md) retain the earlier chronology.

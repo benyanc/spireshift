@@ -49,6 +49,7 @@ from spireshift.engine_worker_qualification import (
 )
 from spireshift.full_run_experience import atomic_json
 from spireshift.full_run_ppo_math import Adam
+from spireshift.native_credit_training import prepare_credit_samples, validate_credit_config
 from spireshift.training_objective import load_training_score_spec
 
 IMPLEMENTATION = (
@@ -67,6 +68,8 @@ IMPLEMENTATION = (
     "full_run_ppo_math.py",
     "full_run_policy.py",
     "training_objective.py",
+    "native_value_credit.py",
+    "native_credit_training.py",
 )
 
 FAILURE_POLICY = "record_retire_continue_v1"
@@ -128,6 +131,11 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
     ):
         raise ValueError("Native learning requires its pinned, fixed-A8 implementation and caps")
     evaluation_policy(d)
+    if d.get("development_comparison", "initial_vs_incumbent") not in {
+        "initial_vs_incumbent",
+        "initial_vs_best_trained",
+    }:
+        raise ValueError("Native development comparison must freeze its trained/incumbent target")
     wcfg = load_worker_config(q.root / d["worker_qualification_config"], q)
     if worker_script(d) != worker_script(wcfg):
         raise ValueError("Learning and qualified worker entry points differ")
@@ -203,6 +211,7 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         if len(set(selected)) != len(selected) or not set(selected) <= groups[owner]:
             raise ValueError("Native learning crosses complete-run seed ownership")
     network, ppo = d["network"], d["learning"]["ppo"]
+    validate_credit_config(q.root, d["learning"].get("credit_assignment"), score.spec_id)
     if d.get("failure_policy") != {
         "id": FAILURE_POLICY,
         "maximum_failed_games_per_panel": 0 if d["stage"] == "short_learning_control" else 2,
@@ -252,6 +261,9 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
             or admission["implementation_sha256"] != d["implementation_sha256"]
             or admission["worker_report_id"] != worker["report_id"]
             or admission["adaptive_controller_allowed"] is not False
+            or admission.get("credit_assignment") != d["learning"].get("credit_assignment")
+            or admission.get("development_comparison", "initial_vs_incumbent")
+            != d.get("development_comparison", "initial_vs_incumbent")
         ):
             raise ValueError("Bounded native learning is not explicitly admitted")
         if (
@@ -346,6 +358,8 @@ def run_neural_experiment(
         )
     )
     model, selected = initial, initial
+    trained_selected: NativeActorCritic | None = None
+    trained_selection_rank = (-1.0, -1.0, -1.0)
     optimizer = Adam.zero(model.parameter_count)
     atomic_json(output / "initial-checkpoint.json", model.as_dict())
     rounds: list[dict[str, Any]] = []
@@ -515,6 +529,11 @@ def run_neural_experiment(
                     )
                 )
             sample_count += len(samples)
+            samples, credit_report = prepare_credit_samples(
+                cases, samples, learning.get("credit_assignment"), score, index
+            )
+            if credit_report is not None:
+                atomic_json(output / f"round-{index:03}-credit.json", credit_report)
             previous = model
             model, optimizer, diagnostic = fit_native_round(
                 model, optimizer, samples, learning["ppo"], index
@@ -543,6 +562,7 @@ def run_neural_experiment(
                     )
                 ),
                 "diagnostics": diagnostic,
+                **({"credit_report_id": credit_report["report_id"]} if credit_report else {}),
             }
             rounds.append(update)
             atomic_json(output / f"round-{index:03}-update.json", update)
@@ -561,12 +581,16 @@ def run_neural_experiment(
                 )
                 if candidate_rank > selection_rank:
                     selected, selection_rank = model, candidate_rank
+                if candidate_rank > trained_selection_rank:
+                    trained_selected, trained_selection_rank = model, candidate_rank
             print(
                 f"Update {index}: {diagnostic['optimizer_steps']} optimizer steps; "
                 f"all action families remain trainable.",
                 flush=True,
             )
         atomic_json(output / "selected-checkpoint.json", selected.as_dict())
+        if trained_selected is not None:
+            atomic_json(output / "best-trained-checkpoint.json", trained_selected.as_dict())
         atomic_json(
             output / "selection-freeze.json",
             {
@@ -575,6 +599,7 @@ def run_neural_experiment(
                 if d["stage"] == "short_learning_control"
                 else "confirmation",
                 "development_opened": False,
+                "best_trained_model_id": trained_selected.model_id if trained_selected else None,
             },
         )
         if d["stage"] == "short_learning_control":
@@ -588,7 +613,17 @@ def run_neural_experiment(
             )
         else:
             collect("development-initial", learning["development_seeds"], initial, False)
-            collect("development-selected", learning["development_seeds"], selected, False)
+            if d.get("development_comparison") == "initial_vs_best_trained":
+                if trained_selected is None:
+                    raise ValueError("No trained checkpoint was frozen for development")
+                collect(
+                    "development-best-trained",
+                    learning["development_seeds"],
+                    trained_selected,
+                    False,
+                )
+            else:
+                collect("development-selected", learning["development_seeds"], selected, False)
     except (ValueError, TimeoutError, OSError) as exc:
         failure = str(exc)
     checks = immutable_checks(q, inputs)
@@ -619,6 +654,9 @@ def run_neural_experiment(
         "worker_report_id": d["worker_report"]["id"],
         "initial_model_id": initial.model_id,
         "selected_model_id": selected.model_id,
+        "best_trained_model_id": trained_selected.model_id if trained_selected else None,
+        "development_comparison": d.get("development_comparison", "initial_vs_incumbent"),
+        "credit_assignment": learning.get("credit_assignment"),
         "planned_games": 4 if d["stage"] == "short_learning_control" else 336,
         "recorded_games": game_count,
         "completed_games": sum(p["completed_games"] for p in panels),

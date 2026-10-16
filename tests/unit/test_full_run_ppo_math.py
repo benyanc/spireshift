@@ -136,3 +136,32 @@ def test_nonfinite_and_mismatched_models_or_optimizer_are_rejected() -> None:
         Adam.from_mapping({"steps": 0, "first": [0], "second": [-1]}, 1)
     with pytest.raises(ValueError):
         log_softmax([float("inf"), 0])
+
+
+@pytest.mark.parametrize("actor_rate,value_rate", [(0.003, 0), (0.003, 0.0), (0, 0.003)])
+def test_adam_head_rates_do_not_depend_on_integer_zero_dtype(
+    actor_rate: float, value_rate: float
+) -> None:
+    source = model()
+    updated, optimizer, _ = Adam.zero(source.parameter_count).update(
+        source,
+        [1.0] * source.parameter_count,
+        actor_rate=actor_rate,
+        value_rate=value_rate,
+        maximum_norm=1.0,
+    )
+    assert (updated.actor.genome != source.actor.genome) is bool(actor_rate)
+    assert (updated.value_weights != source.value_weights) is bool(value_rate)
+    assert optimizer.steps == 1
+
+
+@pytest.mark.parametrize("rate", [-1, float("nan"), float("inf"), True])
+def test_adam_rejects_invalid_rates(rate: float) -> None:
+    source = model()
+    for key in ("actor_rate", "value_rate", "maximum_norm"):
+        settings = {"actor_rate": 0.001, "value_rate": 0.003, "maximum_norm": 1.0}
+        settings[key] = rate
+        with pytest.raises(ValueError):
+            Adam.zero(source.parameter_count).update(
+                source, [1.0] * source.parameter_count, **settings
+            )

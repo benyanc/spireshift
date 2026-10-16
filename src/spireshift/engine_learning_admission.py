@@ -15,6 +15,7 @@ from spireshift.engine_run import _run_inputs
 from spireshift.engine_startup import _script_closure
 from spireshift.engine_worker_qualification import load_worker_config, worker_script
 from spireshift.full_run_experience import atomic_json
+from spireshift.native_credit_training import prepare_credit_samples
 from spireshift.training_objective import load_training_score_spec
 
 
@@ -66,6 +67,7 @@ def audit_learning_control(q: EngineQualificationConfig, config_path: Path) -> d
     ):
         raise ValueError("Native experience audit denominator differs")
     verified = 0
+    credit_cases, credit_samples = [], []
     score = load_training_score_spec(q.root / d["training_spec"]["path"])
     for path in sorted((root / "round-001-sampled").glob("case-*.json")):
         binding = json.loads(path.read_text())["binding"]
@@ -78,11 +80,25 @@ def audit_learning_control(q: EngineQualificationConfig, config_path: Path) -> d
             raise ValueError("Native control experience crosses policy/seed ownership")
         case = read_native_episode(path, binding)
         target = score_episode(case, binding["seed_id"], score)["training_return"]
-        verified += len(
-            verified_native_samples(case, initial, target, d["learning"]["ppo"]["temperature"])
+        samples = verified_native_samples(
+            case, initial, target, d["learning"]["ppo"]["temperature"]
         )
+        verified += len(samples)
+        case["score"] = score_episode(case, binding["seed_id"], score)
+        credit_cases.append(case)
+        credit_samples.extend(samples)
     if verified != report["sampled_decisions_verified"]:
         raise ValueError("Native control sampled decision denominator differs")
+    if d["learning"].get("credit_assignment") is not None:
+        _, credit_report = prepare_credit_samples(
+            credit_cases, credit_samples, d["learning"]["credit_assignment"], score, 1
+        )
+        saved_credit = identified(root / "round-001-credit.json")
+        if (
+            credit_report != saved_credit
+            or report["rounds"][0].get("credit_report_id") != saved_credit["report_id"]
+        ):
+            raise ValueError("Saved whole-run cross-fit action credit does not reconstruct")
     return {
         "valid": True,
         "control_report_id": report["report_id"],
@@ -160,6 +176,8 @@ def create_learning_admission(
         "ascension": 8,
         "scope": "native_v0.111.0_policy_only_bootstrap_pilot",
         "evaluation_policy": d.get("evaluation_policy", {"behavior": "greedy"}),
+        "credit_assignment": d["learning"].get("credit_assignment"),
+        "development_comparison": d.get("development_comparison", "initial_vs_incumbent"),
         "mechanics_coverage": d.get("mechanics_coverage"),
         "base_readiness_passed": False,
         "adaptive_controller_allowed": False,
