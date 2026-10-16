@@ -1,12 +1,28 @@
 # SpireShift backlog
 
-Updated 2026-10-15 with outside-combat potions, the fresh native pilot and saved-only result assessment.
+Updated 2026-10-15 after the native v4 pilot stopped; worker setup and nested potion delivery are next.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**The finite native mechanics package is complete (#148); the owner reports A8 pilot v4 running (#146).**
+**A8 pilot v4 stopped during round-6 worker setup (#146).**
+It saved five training rounds, 393 updates and 16,345 verified training decisions. Of 336 planned
+games, 191 ended normally, one failed and 144 remain unplayed; there are no wins. Both round-6
+workers timed out while Git was creating local support-code checkouts, before recording a game.
+The earlier isolated failure discarded a potion while a combat card selection was pending.
+There is no independent development comparison or playing-strength conclusion.
+
+**Next:** remove repeated Git cloning from worker startup with verified immutable local code and
+isolated mutable sessions; reproduce and fix nested-choice potion availability/delivery; then
+qualify bounded worker/neural controls and prepare a new owner-run pilot. Preserve v4 as stopped;
+do not retry it under changed sources. The [stop report](native-a8-pilot-v4-stop.md) records scope
+and acceptance criteria. Saved-only assessment v2 now displays worker errors and uses the exact
+declared confirmation score. Its v3 regression remains inconclusive; original v1 reports remain.
+
+### Preserved pre-v4 handoff
+
+The finite native mechanics package was completed under its declared scope (#148).
 Host v33 supports all five AnyTime potions outside combat, exact real/fake merchant targets for
 Foul Potion, inventory open/close and current-slot discard. Native effects and game rules remain
 in the original DLL. Twenty-five potion controls, two merchant purchase/exit checks, new lifecycle
@@ -19,7 +35,7 @@ learner's public memory; the new explicitly stochastic control passes **4/4 game
 training decisions and six updates**. Fixed evaluation RNG streams are shared across checkpoints;
 every action remains selectable. These are four losses and pipeline evidence, not stronger play.
 
-**Next:** let the current pilot finish, then use the
+**Earlier handoff, superseded by the stopped result above:** let the pilot finish, then use the
 [saved-only assessment](native-a8-pilot-assessment.md). Pilot v4 starts from the original seeded
 network and zero optimizer state: eight rounds, 336 planned games, independent development
 evaluation and bounded failed-worker continuation. The assessment checks ownership, ending
@@ -713,7 +729,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | Finite mechanics package complete ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior pilots and failed sweep. Repaired 1,849-case sweep, nine random-action games, act/endings, outside-combat potions and Foul Potion merchant controls pass. The composed gate preserves the sweep's host-v32 scope and binds new v33 controls. These are interface checks, not playing strength or base readiness. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
-| Owner reports v4 running; saved-only assessment implemented | Preserve all pinned pilot sources. After completion, audit saved cases/worker evidence, original selection and paired development seeds; distinguish wins from floor progress, count failures and report uncertainty before choosing another experiment. Historical v3 regression remains inconclusive. No automatic scale-up or controller. | [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| V4 stopped; worker setup and nested potion delivery are next | Preserve five training rounds and the original 336-game denominator. Replace repeated local Git clones with verified immutable projection code and isolated sessions; reproduce nested-choice discard and qualify delivery before a new admitted pilot. The saved-only v2 assessment reports stop details and exact confirmation-score auditing; v3 quality remains inconclusive. | [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

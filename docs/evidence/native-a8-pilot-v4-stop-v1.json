@@ -1,0 +1,143 @@
+{
+  "schema_version": "native-pilot-stopped-assessment-evidence-v1",
+  "source_pilot_report": {
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/summary.json",
+    "id": "sha256:25752c685b479193b0523c16aba345a2fe4705cfdeb7c0aed147da265f82fb06"
+  },
+  "source_resource_report": {
+    "id": "sha256:81274a58a72bce149aecf74b4506cc83fa8aace5aa2b7c5158e9d0ead98d53a7",
+    "status": "failed",
+    "path": "artifacts/resources/native-a8-ppo-pilot-v4-attempt-1.json"
+  },
+  "accounting": {
+    "planned_games": 336,
+    "recorded_games": 192,
+    "completed_games": 191,
+    "failed_games": 1,
+    "not_attempted_games": 144,
+    "optimizer_steps": 393,
+    "sampled_decisions_verified": 16345,
+    "worker_failures": 2,
+    "retired_workers": 1
+  },
+  "completed_training_rounds": 5,
+  "worker_failure_details": [
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-006-sampled/worker-0-failure.json",
+      "sha256": "af04e0bbc81e5c9cb7d15cf5ebecfd72eb7fffe2bd4e4a91096fdca9549bfe97",
+      "error": "Native worker failed: spawnSync git ETIMEDOUT",
+      "recorded_games": 0,
+      "replacement_started": false
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-006-sampled/worker-1-failure.json",
+      "sha256": "af04e0bbc81e5c9cb7d15cf5ebecfd72eb7fffe2bd4e4a91096fdca9549bfe97",
+      "error": "Native worker failed: spawnSync git ETIMEDOUT",
+      "recorded_games": 0,
+      "replacement_started": false
+    }
+  ],
+  "failed_game": {
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-004-sampled/case-106.json",
+    "sha256": "1f2f0299753d86546a0ad708f51b86df23044c0dfb68fd76b3088aad81e28ded",
+    "seed_id": 106,
+    "error": "Native worker failed: Native discard_potion: Potion discard delivery is unknown because the exact potion remains in slot 0",
+    "maximum_floor": 3,
+    "preceding_decision": "card_select",
+    "attempted_action": "discard_potion"
+  },
+  "checkpoints_and_optimizer_files_preserved": [
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-001-checkpoint.json",
+      "sha256": "47fddcc16ea90097e14bacbfa2328768966094f93144e25ed4cc65b21fda6f64"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-001-optimizer.json",
+      "sha256": "038e9d82201851ab486295263bb6c628989d53cdd87d2f7c3df420424213b4c7"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-002-checkpoint.json",
+      "sha256": "dc85d4a78264324089f8370be8bc3de50e7c523106da774e16da1a7d0bcd5465"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-002-optimizer.json",
+      "sha256": "98de158cfad3ae2b39a1e5abcf9541af9ec00f088f549f63f6fb78fb50206c75"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-003-checkpoint.json",
+      "sha256": "f2f24b67300b473b41d360d552217f5694689956fb7304f88f1c2b1cedafca70"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-003-optimizer.json",
+      "sha256": "43cb916633299f281bec27163314d389e12747372e9e73fa3420e2d62c1a2831"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-004-checkpoint.json",
+      "sha256": "9ab48613512ce7ae58a619bda5abd9b22aadff7f7a31cdd9020e49d0b6964d55"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-004-optimizer.json",
+      "sha256": "2c392d986ae04cbd8a0caeaf6115e891b9f4d61f5daefe21d4d7ca5ccf4ad54c"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-005-checkpoint.json",
+      "sha256": "7a71f6024d51a7437a0e7abd4ae830a83f999ab0f9ca8d56dceeecd6f848f486"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-005-optimizer.json",
+      "sha256": "16a6ab454201290e14c1d9f495495e62e747f68ee9868b93d027d56130971ec5"
+    }
+  ],
+  "source_experiment_resources": {
+    "wall_seconds": 655.7022069171071,
+    "cpu_seconds": 671.5190578709999,
+    "peak_resident_memory_bytes": 1454899200,
+    "final_storage_bytes": 195624091
+  },
+  "saved_stop_assessment": {
+    "path": "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v4-v3/report.json",
+    "id": "sha256:020d83035c93678c8428c7ab163ff04e27d82eea0744f52fb5c0645cc661fc29",
+    "source_episode_audit_completed": false
+  },
+  "corrected_historical_assessment": {
+    "path": "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v3-v3/report.json",
+    "id": "sha256:00086db891b843f8a346c6b768b0b00fb097c7aca3bbdca4687bd99554323723",
+    "selection_rule": "confirmation_wins_then_declared_auxiliary_progress_then_completion_strict_improvement",
+    "verdict": "no_clear_improvement",
+    "selected_checkpoint_and_development_conclusion_unchanged": true
+  },
+  "assessment_correction": "exact_declared_auxiliary_score_replaces_raw_floor_ranking_shortcut",
+  "verification": {
+    "python_tests_passed": 1401,
+    "focused_assessment_tests": 28,
+    "formatting_types_protocol": "pass",
+    "shell_syntax": "pass",
+    "repository_check_report_id": "sha256:c209cf4d466f9a5266e898d99cfa0e44d8ee4874f812610b9253c66c2c469461"
+  },
+  "protected_pilot_inputs_checked": 42,
+  "protected_pilot_inputs_unchanged": true,
+  "source_files": {
+    "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/summary.json": "bd83db15a6529715804f32aa74ef737d08f76d4de6814bc00df7f8fecae816e4",
+    "artifacts/resources/native-a8-ppo-pilot-v4-attempt-1.json": "61d3b5b330f1b0e3106b0fabbb7e6489167e366eae08ca08131e27fb39e42464",
+    "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v4-v3/report.json": "5aeaf58787fc1fa81d3823840f534af6d3d4765ca618cfab5663a194f66940ae",
+    "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v3-v3/report.json": "80fbbadcbe4cfd89be2ec1333f4ac679c2920a80c51738480349f8c1efc537c7",
+    "artifacts/resources/native-pilot-assessment-v2-repository-check-attempt-2.json": "14066dd4c0b58cdd25fea33f8f58323677082741070cd5c03a336a59c2c1a479",
+    "configs/native-assessment/sts2-v0.111.0-a8-pilot-v3-v3.json": "4f5a72622333fbdda69c13118b8028c5402deea330d8db29a379c27aa23f63f2",
+    "configs/native-assessment/sts2-v0.111.0-a8-pilot-v4-v3.json": "71e80cf793b3c442c03f6bd5d0c538761ba5ced14b6c77a4c345a867f9084d0e",
+    "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-006-sampled/worker-0-failure.json": "af04e0bbc81e5c9cb7d15cf5ebecfd72eb7fffe2bd4e4a91096fdca9549bfe97",
+    "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-006-sampled/worker-1-failure.json": "af04e0bbc81e5c9cb7d15cf5ebecfd72eb7fffe2bd4e4a91096fdca9549bfe97",
+    "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4/round-004-sampled/case-106.json": "1f2f0299753d86546a0ad708f51b86df23044c0dfb68fd76b3088aad81e28ded"
+  },
+  "games_launched": 0,
+  "optimizer_steps": 0,
+  "checkpoint_promoted": false,
+  "base_readiness_passed": false,
+  "development_comparison_available": false,
+  "claim_scope": "stopped_v4_metadata_diagnosis_and_corrected_saved_v3_assessment_no_new_play",
+  "remaining_work": [
+    "qualify_shared_local_projection_startup",
+    "reproduce_nested_choice_potion_discard_delivery",
+    "new_repaired_implementation_admission_and_bounded_learning_control"
+  ],
+  "evidence_id": "sha256:f1842e4cc32eccf5df7a6e55c69b478466e59d467ca76e40b93b97bd49287add"
+}

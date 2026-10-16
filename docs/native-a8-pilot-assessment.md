@@ -4,9 +4,10 @@ The follow-up checks saved results and explains whether the selected player impr
 reserved development seeds. It never starts a game, fits weights, selects a new checkpoint or
 changes the source experiment. It shares no worker or mutable output directory with training.
 
-The v4 assessment was prepared while the owner reported pilot v4 running, before opening its
-results. No running experiment, log or partial episode was inspected. The original v4 runner,
-learner, helpers, environment, score and seed manifest remain unchanged.
+The initial v4 assessment was prepared before opening its results. After the owner reported the
+stopped run, assessment v2 adds worker-error details and corrects the confirmation-selection
+audit. The original v4 runner, learner, helpers, environment, score and seed manifest remain
+unchanged. See [the v4 stop report](native-a8-pilot-v4-stop.md).
 
 ## One command after the pilot finishes
 
@@ -21,7 +22,7 @@ creating assessment output, waiting or polling. A stopped pilot receives a stopp
 with its sealed summary counts and error, without a quality comparison or episode-audit claim.
 
 For a finished pilot, output is saved separately under
-`artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v4-v1/`: `report.md` is the readable result;
+`artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v4-v3/`: `report.md` is the readable result;
 `report.json` contains the numerical comparison and source fingerprints. Repeating the command
 verifies the existing report and its sources. It does not silently overwrite an interrupted or
 changed assessment. Resource reports remain separate under `artifacts/resources/`.
@@ -57,7 +58,8 @@ Zero observed wins must not produce a zero-width victory interval.
 Floor progress is auxiliary. The main floor comparison gives a failed game zero progress and
 uses every originally planned seed in the denominator. Reached-before-failure and completed-only
 means are separately named diagnostics. This does not rewrite the original pilot's saved metrics
-or confirmation selection, which used reached-before-failure floors. The exploratory floor
+or confirmation selection. Selection uses wins first, then the declared bounded auxiliary
+return, then completion rate; failed games receive zero auxiliary return. The exploratory floor
 interval resamples complete paired seeds, using 2,000 fixed-seed percentile-bootstrap replicates;
 it does not resample individual decisions or count repeated confirmations as new seeds.
 
@@ -77,7 +79,19 @@ The paired difference is +1.1875 floors; the fixed exploratory 95% interval is
 [-1.1875, +3.3125], so improvement remains inconclusive. The old reached-floor mean remains 8.75.
 This is verification of an already inspected result, not a new blind evaluation or v4 evidence.
 
+### Correction to the initial selection audit
+
+Assessment v1 incorrectly substituted reached-floor averages for the learner's exact auxiliary
+score when checking checkpoint selection. That could misidentify the selected checkpoint when
+acts differ, failures occur or saturation changes an average's ordering. V2 recomputes each saved
+outcome using the frozen `TrainingScoreSpec`, including acts, the saturating floor term and zero
+return for failures, and verifies the exact confirmation ranking. A synthetic reversal test
+catches the old shortcut. The v3 selected checkpoint and its quality conclusion are unchanged.
+V4 never reached development evaluation and receives no quality verdict. Original v1 recipes
+and reports remain preserved; the wrapper now uses separate v2 recipes and outputs.
+
 The v3 assessment source fingerprints, report identity, resources and timings are recorded in
-`docs/evidence/native-a8-pilot-assessment-v1.json`. Synthetic tests cover corrupted evidence,
+`docs/evidence/native-a8-pilot-assessment-v1.json`; the correction and stopped v4 result are in
+`docs/evidence/native-a8-pilot-v4-stop-v1.json`. Synthetic tests cover corrupted evidence,
 seed/RNG ownership, native-ending consistency, failed-game scoring, missing attempts, live-result
 protection, cached verification, historical source preservation and zero-win uncertainty.

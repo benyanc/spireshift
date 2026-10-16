@@ -412,9 +412,11 @@ def test_stopped_pilot_has_no_quality_verdict(pilot: tuple[Path, Path]) -> None:
     summary.update(
         status="stopped_incomplete",
         error="synthetic stopped worker",
-        completed_games=2,
-        failed_games=1,
+        completed_games=3,
+        failed_games=0,
+        recorded_games=3,
         not_attempted_games=4,
+        panels=summary["panels"][:3],
     )
     write(path, summary, "report_id")
     (root / "artifacts/pilot/development-selected/case-3.json").write_text("unfinished")
@@ -482,6 +484,7 @@ def test_missing_attempts_stay_in_original_denominator() -> None:
                 "completed_acts": 0,
                 "decisions": 3,
                 "cpu_seconds": 1,
+                "auxiliary_progress_return": 0.01,
             }
         ],
         2,
@@ -525,3 +528,45 @@ def test_current_learner_changes_do_not_invalidate_historical_source_bytes(
     (root / "artifacts/pilot/source-at-launch/historical.py").write_text("changed launch bytes")
     with pytest.raises(ValueError, match="learner source"):
         assessment.assess_completed_pilot(root, config)
+
+
+def test_confirmation_selection_uses_the_actual_act_and_floor_score(
+    pilot: tuple[Path, Path],
+) -> None:
+    root, config = pilot
+    base = root / "artifacts/pilot"
+    summary = json.loads((base / "summary.json").read_text())
+    for label, floor, acts in (("initial-confirmation", 20, 1), ("round-001-confirmation", 30, 0)):
+        path = base / label / "case-2.json"
+        case = json.loads(path.read_text())
+        case["episode"].update(maximum_floor=floor, completed_acts=acts)
+        reseal_case(path, case)
+        panel = next(p for p in summary["panels"] if p["panel"] == label)
+        panel["mean_floor"] = floor
+        write(base / label / "summary.json", panel)
+    write(base / "summary.json", summary, "report_id")
+    # Raw floor would incorrectly accept the updated checkpoint. Native selection
+    # prioritizes the completed act via the bounded auxiliary return instead.
+    with pytest.raises(ValueError, match="confirmation-only rule"):
+        assessment.assess_completed_pilot(root, config)
+
+
+def test_stopped_worker_error_files_are_hashed_and_shown(pilot: tuple[Path, Path]) -> None:
+    root, config = pilot
+    base = root / "artifacts/pilot"
+    summary = json.loads((base / "summary.json").read_text())
+    summary.update(status="stopped_incomplete", error="synthetic missing worker", worker_failures=1)
+    write(base / "summary.json", summary, "report_id")
+    worker_error = base / "round-001-sampled/worker-9-failure.json"
+    write(
+        worker_error,
+        {"error": "spawnSync git ETIMEDOUT", "recorded_games": 0, "replacement_started": False},
+    )
+    result = assessment.run_assessment(root, recipe(root, config))
+    assert result["verdict"] is None
+    markdown = (root / "artifacts/assessment/report.md").read_text()
+    assert "spawnSync git ETIMEDOUT" in markdown
+    assert "1 training rounds" in markdown
+    worker_error.write_text("changed error")
+    with pytest.raises(ValueError, match="sources changed"):
+        assessment.run_assessment(root, root / "assessment.json")

@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-spireshift_assessment_config=configs/native-assessment/sts2-v0.111.0-a8-pilot-v4-v1.json
+spireshift_assessment_config=configs/native-assessment/sts2-v0.111.0-a8-pilot-v4-v3.json
 IFS=$'\t' read -r spireshift_pilot_workspace spireshift_assessment_workspace spireshift_wall spireshift_cpu spireshift_storage spireshift_memory < <(
   uv run --no-sync python - "$spireshift_assessment_config" <<'PY'
 import json, sys
@@ -24,14 +24,14 @@ if [[ ! -f "$spireshift_pilot_workspace/summary.json" ]]; then
 fi
 
 spireshift_attempt=1
-while [[ -e "artifacts/resources/native-a8-pilot-v4-assessment-v1-attempt-$spireshift_attempt.json" || -L "artifacts/resources/native-a8-pilot-v4-assessment-v1-attempt-$spireshift_attempt.json" ]]; do
+while [[ -e "artifacts/resources/native-a8-pilot-v4-assessment-v3-attempt-$spireshift_attempt.json" || -L "artifacts/resources/native-a8-pilot-v4-assessment-v3-attempt-$spireshift_attempt.json" ]]; do
   spireshift_attempt=$((spireshift_attempt + 1))
 done
 printf 'Checking the finished saved pilot: same reserved seeds, original failure counts and uncertainty.\n'
 printf 'Expected duration: under one minute; hard cap three minutes. No games, training or checkpoint changes.\n'
 uv run --no-sync spireshift resources run \
   --kind other \
-  --report "artifacts/resources/native-a8-pilot-v4-assessment-v1-attempt-$spireshift_attempt.json" \
+  --report "artifacts/resources/native-a8-pilot-v4-assessment-v3-attempt-$spireshift_attempt.json" \
   --artifact-root "$spireshift_assessment_workspace" \
   --workers 1 \
   --max-wall-seconds "$spireshift_wall" \

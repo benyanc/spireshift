@@ -23,10 +23,16 @@ from spireshift.engine_native import _private_path
 from spireshift.engine_neural import NativeActorCritic
 from spireshift.engine_qualification import _sha_file
 from spireshift.full_run_experience import atomic_json
-from spireshift.training_objective import load_training_score_spec
+from spireshift.training_objective import (
+    RunStatus,
+    TrainingOutcome,
+    TrainingScoreSpec,
+    load_training_score_spec,
+    score_training_outcome,
+)
 
 SCHEMA = "native-pilot-assessment-v1"
-POLICY = "wins_primary_failed_runs_zero_progress_paired_seed_v1"
+POLICY = "wins_primary_exact_confirmation_score_paired_seed_v2"
 
 
 class SavedFiles:
@@ -239,7 +245,7 @@ def _case(
     panel: dict[str, Any],
     seed: dict[str, Any],
     model_id: str,
-    cpu_budget: float,
+    score: TrainingScoreSpec,
 ) -> dict[str, Any]:
     doc = files.read(path)
     if doc.get("schema_version") != "actual-engine-on-policy-experience-v1" or doc.get(
@@ -352,17 +358,29 @@ def _case(
     cpu = episode["cpu_seconds"]
     if type(cpu) not in {int, float} or not math.isfinite(cpu) or cpu < 0:
         raise ValueError("Saved native CPU measurement is invalid")
-    if terminal and cpu > cpu_budget:
+    if terminal and cpu > score.evaluation_objective.whole_run_budget:
         raise ValueError("Completed game exceeded the frozen whole-run CPU budget")
     floor = episode["maximum_floor"]
     if type(floor) is not int or floor < 0:
         raise ValueError("Saved reached floor is invalid")
+    scored = score_training_outcome(
+        score,
+        TrainingOutcome(
+            seed["id"],
+            (RunStatus.VICTORY if win else RunStatus.LOSS) if terminal else RunStatus.ERROR,
+            episode["completed_acts"],
+            floor,
+            count,
+            cpu,
+        ),
+    )
     return {
         "seed_id": seed["id"],
         "terminal": terminal,
         "win": win,
         "floor_zero": floor if terminal else 0,
         "floor_reached": floor,
+        "auxiliary_progress_return": scored["auxiliary_progress_return"],
         "completed_acts": episode["completed_acts"] if terminal else 0,
         "decisions": count,
         "cpu_seconds": cpu,
@@ -389,6 +407,8 @@ def panel_metrics(rows: list[dict[str, Any]], denominator: int) -> dict[str, Any
         "win_rate": sum(r["win"] for r in rows) / denominator,
         "mean_floor_failures_zero": sum(r["floor_zero"] for r in rows) / denominator,
         "mean_floor_reached_diagnostic": sum(r["floor_reached"] for r in rows) / denominator,
+        "mean_auxiliary_progress_return": math.fsum(r["auxiliary_progress_return"] for r in rows)
+        / denominator,
         "mean_floor_completed_only_diagnostic": sum(r["floor_reached"] for r in terminal)
         / len(terminal)
         if terminal
@@ -421,6 +441,45 @@ def _worker_audits(
         for name, digest in cfg["helpers_sha256"].items():
             if files.pin(worker / "source-at-launch" / name) != digest:
                 raise ValueError("Saved worker helper source changed")
+
+
+def stopped_details(files: SavedFiles, pilot: Path, summary: dict[str, Any]) -> dict[str, Any]:
+    """Inspect final panel/error metadata, without treating partial episodes as audited play."""
+    counts = [
+        summary[k]
+        for k in (
+            "planned_games",
+            "recorded_games",
+            "completed_games",
+            "failed_games",
+            "not_attempted_games",
+        )
+    ]
+    if (
+        any(type(n) is not int or n < 0 for n in counts)
+        or summary["recorded_games"] != summary["completed_games"] + summary["failed_games"]
+        or summary["planned_games"] != summary["recorded_games"] + summary["not_attempted_games"]
+    ):
+        raise ValueError("Stopped pilot summary counts do not reconstruct")
+    workers: list[dict[str, Any]] = []
+    failed_games: list[dict[str, Any]] = []
+    for panel in summary["panels"]:
+        folder = files.path(str((pilot / panel["panel"]).relative_to(files.root)))
+        if files.read(folder / "summary.json") != panel:
+            raise ValueError("Stopped panel differs from its final pilot summary")
+        for path in sorted(folder.glob("worker-*-failure.json")):
+            failure = files.read(path)
+            workers.append({"path": str(path.relative_to(pilot)), **failure})
+        failed_games.extend({"panel": panel["panel"], **r} for r in panel.get("failed_cases", []))
+    if len(workers) != summary.get("worker_failures", 0):
+        raise ValueError("Stopped pilot worker-failure records are missing or inconsistent")
+    return {
+        "recorded_games": summary["recorded_games"],
+        "completed_training_rounds": len(summary["rounds"]),
+        "source_optimizer_steps": summary["optimizer_steps"],
+        "worker_failure_details": workers,
+        "recorded_failed_game_details": failed_games,
+    }
 
 
 def assess_completed_pilot(
@@ -488,6 +547,7 @@ def assess_completed_pilot(
         if files.pin(pilot / "source-at-launch" / name) != digest:
             raise ValueError("Saved learner source differs from source at launch")
     if summary["status"] == "stopped_incomplete":
+        details = stopped_details(files, pilot, summary)
         return {
             "schema_version": SCHEMA,
             "assessment_policy": POLICY,
@@ -506,6 +566,7 @@ def assess_completed_pilot(
             "source_files": files.sources(),
             "checkpoint_promoted": False,
             "base_readiness_passed": False,
+            **details,
         }
     if (
         summary.get("error") is not None
@@ -594,7 +655,7 @@ def assess_completed_pilot(
                     panel,
                     seed,
                     models[panel["round"]],
-                    score.evaluation_objective.whole_run_budget,
+                    score,
                 )
             )
         metrics = panel_metrics(rows, len(panel["ids"]))
@@ -628,7 +689,7 @@ def assess_completed_pilot(
         if panel["partition"] == "confirmation":
             rank = (
                 metrics["win_rate"],
-                metrics["mean_floor_reached_diagnostic"],
+                metrics["mean_auxiliary_progress_return"],
                 metrics["completed_games"] / metrics["planned_games"],
             )
             if selected_rank is None or rank > selected_rank:
@@ -677,7 +738,7 @@ def assess_completed_pilot(
         "initial_model_id": models[0],
         "selected_model_id": models["selected"],
         "selection_rule": (
-            "confirmation_wins_then_recorded_reached_floor_then_completion_strict_improvement"
+            "confirmation_wins_then_declared_auxiliary_progress_then_completion_strict_improvement"
         ),
         "verdict": verdict,
         "accounting": total,
@@ -728,7 +789,39 @@ def assess_completed_pilot(
 
 def render_assessment(report: dict[str, Any]) -> str:
     if report["status"] != "completed_saved_assessment":
-        return f"# Native A8 pilot assessment\n\n{report['status']}: {report.get('error', '')}\n"
+        lines = [
+            "# Native A8 pilot assessment",
+            "",
+            "The pilot stopped before finishing.",
+            "",
+            f"Saved summary: {report['completed_games']} normal endings, "
+            f"{report['failed_games']} failed games, "
+            f"{report['not_attempted_games']} unplayed out of {report['planned_games']} planned.",
+            f"{report['completed_training_rounds']} training rounds and "
+            f"{report['source_optimizer_steps']} optimizer steps were saved.",
+            "",
+            f"Stop reason: {report['error']}",
+            "",
+            "## Worker errors",
+            "",
+        ]
+        lines.extend(
+            f"- {row['path']}: {row['error']} ({row['recorded_games']} recorded games)."
+            for row in report["worker_failure_details"]
+        )
+        lines += ["", "## Recorded failed games", ""]
+        lines.extend(
+            f"- {row['panel']}, seed {row['seed']}: {row['error']}."
+            for row in report["recorded_failed_game_details"]
+        )
+        lines += [
+            "",
+            "This is final summary/error metadata only; the saved episodes were not "
+            "audited as a complete comparison. No model-quality verdict, replay, training "
+            "or checkpoint promotion follows.",
+            "",
+        ]
+        return "\n".join(lines)
     comparison, total = report["comparison"], report["accounting"]
     labels = {
         "victory_improvement_supported": "The reserved panel supports a higher win rate.",
