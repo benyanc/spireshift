@@ -19,13 +19,28 @@ used the same original player and RNG, each averaging 7.375 floors. They do not 
 evaluate a trained checkpoint. The best recorded game reached floor 17. The saved-only audit
 verified every case and 1,427 source files; no games or updates followed.
 
-**Next:** diagnose the learning signal, representation and credit assignment using frozen
-**training** data under #143/#146. Measure meaningful choice separation, feature collisions/
-clipping/saturation, critic/advantage behavior and per-family policy changes. Then choose one
-supported intervention and freeze a separate short comparison. Do not simply enlarge this PPO
-batch or launch a larger GA. A candidate cause is noisy whole-run credit; it is not yet proven.
-Wins remain primary, every legal action family remains learnable, A8 stays fixed and independent
-panels must not choose the intervention. See [the v5 result](native-a8-pilot-v5-result.md).
+**Diagnosis completed; next is a controlled learning repair (#35 / #143 / #146 / #134).**
+The critic increases choice-bearing target variance in six of seven rounds after its first fit;
+round-8 actor-gradient trace variance is 18.5% above a centered-constant reference. Thirty-two
+independent runs per update produce weakly agreeing gradients; 26,061 decisions are only 256
+whole-run outcome lessons. A sampled combat probe shows hidden saturation rising from 10.2%
+to 58.9%, but no exact candidate-vector aliases and little hard clipping. Both initial/trained
+networks learn an artificial HP-conditioned rest choice on 18 held-aside training examples.
+Gradient derivatives pass real-state checks. No unique causal explanation or native ablation
+is claimed. See [the measured diagnosis](native-a8-pilot-v5-learning-diagnosis.md).
+
+Ordered work:
+1. #35: fix the discovered integer-zero optimizer-rate edge case (not v5's cause), then implement
+   critic/advantage quality controls and whole-run-grouped baseline comparisons. Diagnose the
+   estimator before adding more value bootstrapping.
+2. #35: compare objective-preserving return/credit redistribution after the value controls,
+   with telescoping/end/skip/loop tests and the terminal-victory contract unchanged.
+3. #143: test representation normalization/reduced duplication against saturation and conditional
+   learning controls. Keep every action family and public entity/amount relation; do not enlarge
+   the model without evidence that capacity blocks the task.
+4. #146 / #134: freeze a one-factor matched native comparison with enough independent training
+   runs, separate best-trained and incumbent evaluation, preserved source/seed ownership and an
+   owner-run long stage. No larger unchanged PPO/GA, new sweep or adaptive controller now.
 
 All v5 sources, checkpoints, optimizer states and results remain preserved. Re-running its
 training script only shows the saved result; no new owner command is needed now. V4 remains
