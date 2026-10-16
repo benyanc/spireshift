@@ -73,10 +73,15 @@ all 90 repaired case hashes verify; the old results are preserved.
 Two fresh repaired builds match their source/assembly pins; the original game DLL stays unchanged.
 The repository check passes **1,339 tests** plus formatting, types and the C# protocol contract;
 19 focused new Node checks pass. [Sweep and repair evidence](evidence/actual-engine-mechanics-coverage-repairs-v1.json)
-contains aggregate counts and identities without publishing the raw game catalog. The new full
-sweep has **not** started. Focused success does not relabel it as passed or permit training.
+contains aggregate counts and identities without publishing the raw game catalog. The owner now
+reports the full recheck running; its result has not been assessed. Focused success does not
+relabel it as passed or permit training.
 
-## One next command
+## Current owner-run recheck
+
+Leave the running job below undisturbed. The [short follow-up stage](actual-engine-mechanics-followups.md)
+is implemented separately and requires a verified successful full result before launch. Its new
+code does not change this sweep's pinned implementation or helpers.
 
 Close the game and run:
 

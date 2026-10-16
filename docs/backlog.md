@@ -30,7 +30,15 @@ zero apps and retained about **357 MB** for the original sweep.
 configured card forms verify. All original and repaired case hashes verify; 1,339 repository tests
 and 19 focused new Node checks pass.
 
-**Next: the owner's full recheck in [the coverage guide](actual-engine-mechanics-coverage.md).**
+**The owner reports the full recheck running; its result is pending assessment.**
+The [short follow-up runner](actual-engine-mechanics-followups.md) is implemented separately:
+nine random legal prefixes with independent action seeds and an exact repeat, plus act/ending
+fixtures on the same v32 build. It verifies actual full-sweep success before launch; no training
+is unlocked from an assumption. Both initial short launch attempts were blocked before playing
+by the active-game guard. Finish offline verification now; execute and verify the native panel
+after the current job. Outside-combat potion controls and Foul Potion's non-creature merchant
+target remain explicit follow-up work. The current sweep's bound code/helpers remain unchanged.
+
 Other cases continue only after a failed worker is proved stopped; keep unsupported/prerequisite-
 blocked/untested mechanics explicit. Resolve the remaining outside-combat potion,
 random-sequence and lifecycle requirements before a new environment/worker/neural admission.

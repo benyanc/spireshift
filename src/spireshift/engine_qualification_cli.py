@@ -105,6 +105,10 @@ def add_engine_parser(commands: Any) -> None:
         "bootstrap-profile",
         "model-inventory",
         "check-mechanics-coverage",
+        "check-mechanics-sequences",
+        "verify-mechanics-sequences",
+        "check-mechanics-followups",
+        "verify-mechanics-followups",
         "prepare-connector",
         "probe-connector-menu",
         "probe-shipped-checkpoint",
@@ -267,6 +271,14 @@ def add_engine_parser(commands: Any) -> None:
             command.add_argument("coverage_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
             command.add_argument("--stage", choices=["inventory", "smoke", "sweep"], required=True)
+        if name in {"check-mechanics-sequences", "verify-mechanics-sequences"}:
+            command.add_argument("sequence_config", type=Path)
+        if name == "check-mechanics-sequences":
+            command.add_argument("--node", required=True, type=Path)
+        if name in {"check-mechanics-followups", "verify-mechanics-followups"}:
+            command.add_argument("followup_config", type=Path)
+        if name == "check-mechanics-followups":
+            command.add_argument("--node", required=True, type=Path)
         if name == "build-cli-candidate":
             command.add_argument("candidate_config", type=Path)
             command.add_argument("--node", required=True, type=Path)
@@ -352,7 +364,30 @@ def run_engine_command(args: argparse.Namespace) -> int:
             return 0 if result["status"] == "downloaded_identity_matches" else 1
         if args.output is not None and (args.output.exists() or args.output.is_symlink()):
             raise FileExistsError(f"Refusing to overwrite an existing result: {args.output}")
-        if args.engine_command == "check-mechanics-coverage":
+        if args.engine_command in {"check-mechanics-followups", "verify-mechanics-followups"}:
+            from spireshift.engine_mechanics_followups import (
+                run_mechanics_followups,
+                verify_mechanics_followups,
+            )
+
+            if args.engine_command == "check-mechanics-followups":
+                result = run_mechanics_followups(config, args.followup_config, node=args.node)
+            else:
+                result = verify_mechanics_followups(config, args.followup_config)
+            code = 0 if result["status"] == "scoped_followups_pass" else 1
+        elif args.engine_command in {"check-mechanics-sequences", "verify-mechanics-sequences"}:
+            from spireshift.engine_sequence_checks import (
+                run_legal_sequences,
+                verify_legal_sequences,
+            )
+
+            if args.engine_command == "check-mechanics-sequences":
+                result = run_legal_sequences(config, args.sequence_config, node=args.node)
+                code = 0 if result["status"] == "legal_sequence_panel_pass" else 1
+            else:
+                result = verify_legal_sequences(config, args.sequence_config)
+                code = 0
+        elif args.engine_command == "check-mechanics-coverage":
             from spireshift.engine_coverage import run_mechanics_coverage
 
             result = run_mechanics_coverage(
