@@ -48,8 +48,12 @@ from spireshift.engine_worker_qualification import (
     worker_script,
 )
 from spireshift.full_run_experience import atomic_json
-from spireshift.full_run_ppo_math import Adam
+from spireshift.full_run_policy import dense_features
+from spireshift.full_run_ppo_math import Adam, Sample
 from spireshift.native_credit_training import prepare_credit_samples, validate_credit_config
+from spireshift.native_input_normalization import NONE
+from spireshift.native_normalization_admission import require_normalization_checks
+from spireshift.neural_combat import _numpy
 from spireshift.training_objective import load_training_score_spec
 
 IMPLEMENTATION = (
@@ -70,9 +74,45 @@ IMPLEMENTATION = (
     "training_objective.py",
     "native_value_credit.py",
     "native_credit_training.py",
+    "native_input_normalization.py",
+    "native_normalization_admission.py",
 )
 
 FAILURE_POLICY = "record_retire_continue_v1"
+
+
+def activation_diagnostics(
+    model: NativeActorCritic, samples: list[Sample], seed: int
+) -> dict[str, Any]:
+    """Bounded TRAIN-state diagnostics; no outcomes, policy changes or new sampling RNG."""
+    eligible = [i for i, s in enumerate(samples) if len(s.rows) > 1]
+    chosen = sorted(random.Random(seed).sample(eligible, min(128, len(eligible))))
+    if not chosen:
+        return {
+            "states": 0,
+            "candidate_rows": 0,
+            "mean_hidden_saturation": None,
+            "sample_indices": [],
+        }
+    rows = tuple(row for i in chosen for row in samples[i].rows)
+    x = dense_features(rows, model.actor.dimension)
+    np = _numpy()
+    w, b, _, _ = model.actor.unpack()
+    hidden = np.tanh(x @ w.T + b)
+    offset = 0
+    state_means = []
+    for i in chosen:
+        count = len(samples[i].rows)
+        state_means.append(float(np.mean(np.abs(hidden[offset : offset + count]) > 0.99)))
+        offset += count
+    return {
+        "states": len(chosen),
+        "candidate_rows": len(rows),
+        "mean_hidden_saturation": math.fsum(state_means) / len(state_means),
+        "sample_indices": chosen,
+        "input_normalization": model.actor.input_normalization,
+        "weighting": "equal_sampled_choice_bearing_state",
+    }
 
 
 def implementation_files(root: Path) -> dict[str, str]:
@@ -211,6 +251,9 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
         if len(set(selected)) != len(selected) or not set(selected) <= groups[owner]:
             raise ValueError("Native learning crosses complete-run seed ownership")
     network, ppo = d["network"], d["learning"]["ppo"]
+    normalization = require_normalization_checks(
+        q.root, network, d.get("input_normalization_checks")
+    )
     validate_credit_config(q.root, d["learning"].get("credit_assignment"), score.spec_id)
     if d.get("failure_policy") != {
         "id": FAILURE_POLICY,
@@ -220,7 +263,11 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
     }:
         raise ValueError("Native learning must declare its bounded per-game failure policy")
     initial_actor(
-        environment["manifest_id"], network["dimension"], network["hidden_units"], network["seed"]
+        environment["manifest_id"],
+        network["dimension"],
+        network["hidden_units"],
+        network["seed"],
+        input_normalization=normalization,
     )
     for key in ("epochs", "minibatch_decisions"):
         if type(ppo[key]) is not int or not 1 <= ppo[key] <= 256:
@@ -264,6 +311,8 @@ def load_learning_config(path: Path, q: EngineQualificationConfig) -> dict[str, 
             or admission.get("credit_assignment") != d["learning"].get("credit_assignment")
             or admission.get("development_comparison", "initial_vs_incumbent")
             != d.get("development_comparison", "initial_vs_incumbent")
+            or admission.get("input_normalization", NONE) != normalization
+            or admission.get("input_normalization_checks") != d.get("input_normalization_checks")
         ):
             raise ValueError("Bounded native learning is not explicitly admitted")
         if (
@@ -355,6 +404,7 @@ def run_neural_experiment(
             network["dimension"],
             network["hidden_units"],
             network["seed"],
+            input_normalization=network.get("input_normalization", NONE),
         )
     )
     model, selected = initial, initial
@@ -535,8 +585,13 @@ def run_neural_experiment(
             if credit_report is not None:
                 atomic_json(output / f"round-{index:03}-credit.json", credit_report)
             previous = model
+            activation_before = activation_diagnostics(previous, samples, 20261016 + index)
             model, optimizer, diagnostic = fit_native_round(
                 model, optimizer, samples, learning["ppo"], index
+            )
+            diagnostic["activation_before_update"] = activation_before
+            diagnostic["activation_after_update"] = activation_diagnostics(
+                model, samples, 20261016 + index
             )
             # Force the same validation/load path the owner will use on saved checkpoints.
             model = NativeActorCritic.from_mapping(model.as_dict())
@@ -657,6 +712,7 @@ def run_neural_experiment(
         "best_trained_model_id": trained_selected.model_id if trained_selected else None,
         "development_comparison": d.get("development_comparison", "initial_vs_incumbent"),
         "credit_assignment": learning.get("credit_assignment"),
+        "actor_input_normalization": model.actor.input_normalization,
         "planned_games": 4 if d["stage"] == "short_learning_control" else 336,
         "recorded_games": game_count,
         "completed_games": sum(p["completed_games"] for p in panels),

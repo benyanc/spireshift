@@ -85,7 +85,9 @@ def verified_native_samples(
     samples = []
     for decision in case["decisions"]:
         public, choice = decision["public_input"], decision["choice"]
-        rows, state = encode_public_input(public, model.actor.dimension)
+        rows, state = encode_public_input(
+            public, model.actor.dimension, model.actor.input_normalization
+        )
         action = choice["action_index"]
         if (
             choice.get("model_id") != model.model_id

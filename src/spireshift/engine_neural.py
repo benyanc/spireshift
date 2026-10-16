@@ -25,6 +25,12 @@ from spireshift.full_run_ppo_math import (
     log_softmax,
     sigmoid,
 )
+from spireshift.native_input_normalization import (
+    NONE,
+    normalization_from_mapping,
+    normalization_spec,
+    normalize_actor_rows,
+)
 from spireshift.neural_combat import _numpy
 
 INPUT_SCHEMA = "actual-engine-public-entity-graph-v1"
@@ -131,7 +137,7 @@ def hash_tokens(tokens: dict[str, float], dimension: int, offset: int = 0) -> di
 
 
 def encode_public_input(
-    value: dict[str, Any], dimension: int
+    value: dict[str, Any], dimension: int, input_normalization: str = NONE
 ) -> tuple[tuple[dict[int, float], ...], tuple[float, ...]]:
     validate_public_input(value)
     if not 128 <= dimension <= 4096:
@@ -169,7 +175,7 @@ def encode_public_input(
             if all(type(a) in (int, float) for a in attacks):
                 direct[DIRECT.index("target_attack")] = math.asinh(sum(attacks)) / 5
         rows.append({**direct, **hash_tokens(tokens, dimension, len(DIRECT))})
-    return tuple(rows), state
+    return normalize_actor_rows(tuple(rows), len(DIRECT), input_normalization), state
 
 
 @dataclass(frozen=True, slots=True)
@@ -178,8 +184,10 @@ class NativeActor:
     dimension: int
     hidden_units: int
     genome: tuple[float, ...]
+    input_normalization: str = NONE
 
     def __post_init__(self) -> None:
+        normalization_spec(self.input_normalization)
         if not self.environment_id.startswith("sha256:") or len(self.environment_id) != 71:
             raise ValueError("Native actor requires an exact environment identity")
         if type(self.dimension) is not int or not 128 <= self.dimension <= 4096:
@@ -213,6 +221,11 @@ class NativeActor:
             "genome": list(self.genome),
             "scope": "every_current_supplied_legal_action",
             "activation": "tanh",
+            **(
+                {"input_normalization": normalization_spec(self.input_normalization)}
+                if self.input_normalization != NONE
+                else {}
+            ),
         }
 
     @property
@@ -229,6 +242,7 @@ class NativeActor:
             value["dimension"],
             value["hidden_units"],
             tuple(value["genome"]),
+            normalization_from_mapping(value.get("input_normalization")),
         )
         if model.as_dict() != value:
             raise ValueError(
@@ -238,7 +252,12 @@ class NativeActor:
 
 
 def initial_actor(
-    environment_id: str, dimension: int = 512, hidden: int = 32, seed: int = 0
+    environment_id: str,
+    dimension: int = 512,
+    hidden: int = 32,
+    seed: int = 0,
+    *,
+    input_normalization: str = NONE,
 ) -> NativeActor:
     rng = random.Random(seed)
     scale = math.sqrt(6 / (dimension + hidden))
@@ -259,7 +278,9 @@ def initial_actor(
         "declined_reward": -2.0,
     }.items():
         linear[DIRECT.index(name)] = amount
-    return NativeActor(environment_id, dimension, hidden, tuple(weights + linear))
+    return NativeActor(
+        environment_id, dimension, hidden, tuple(weights + linear), input_normalization
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -327,7 +348,9 @@ def predict(
     rng: random.Random | None,
     temperature: float = 1.0,
 ) -> dict[str, Any]:
-    rows, state = encode_public_input(public, model.actor.dimension)
+    rows, state = encode_public_input(
+        public, model.actor.dimension, model.actor.input_normalization
+    )
     if not rows:
         raise ValueError("Neural policy requires a nonterminal complete menu")
     # The casts adapt structural numerical interfaces only; no historical actor,

@@ -1,10 +1,30 @@
 # SpireShift backlog
 
-Updated 2026-10-16 after the owner finished both credit methods and saved-result assessment.
+Updated 2026-10-16 after input-scaling controls, native integration and comparison preflight.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Input-normalization checks and native integration pass (#143 / #146).**
+The explicit `native-actor-hash-quarter-v1` transform scales hashed actor coordinates by 0.25,
+preserving direct action signals, critic inputs, all actions and every existing encoded fact.
+All 278 sampled TRAIN states / 1,175 candidate vectors recover exactly; zero new aliases.
+With old round-8 weights, probe saturation falls from 21.48% overall / 66.70% in combat to zero;
+this is a sensitivity result, not a newly trained player. Artificial conditional learning passes
+on 28 examples from 14 held TRAIN games; removing HP information gives chance performance.
+A coherent three-view HP supplement also passes. Both four-game native controls pass, with
+456 verified training decisions / 12 updates, zero failures or app copies. The unscaled
+checkpoint exactly reproduces its prior control. Legacy model identities remain intact.
+
+**Next owner command:** `bash scripts/compare-native-a8-normalization-v1.sh` from the repository.
+One scaling factor changes; both methods keep the cross-fitted credit estimator and all other
+training settings. Each has 336 attempts, 672 total, run sequentially; expected 25–40 minutes,
+30-minute cap per method. Fresh confirmation/development seeds, each method's own initializer
+and best trained player, plus per-update saturation measurements. Admissions/preflight pass;
+neither long method has started. See [the checks, limits and exact command](native-a8-input-normalization.md).
+
+### Preserved completed credit experiment
 
 **The owner-run credit comparison is complete: no clear gameplay gain (#35 / #146).**
 Both methods finish 336/336 ordinary endings: 672 attempts total, zero failures, missing games,
@@ -16,12 +36,12 @@ neither comparison silently repeated the initializer. All 64 shared initial-poli
 The saved-only audit checks every episode, 68,929 decisions and 2,866 files without new play.
 See [the results and limitations](native-a8-credit-comparison-result.md).
 
-**Next work:** #143's short saved-TRAIN normalization/duplication and conditional-learning
-controls, preserving every public entity/amount relation and legal action family. Then declare
-a one-factor native test if justified. #35's independent-run batch-size/gradient-agreement
+**Follow-up now implemented above:** #143's short saved-TRAIN normalization and conditional
+controls preserve public entity/amount relations and every legal action family. No fields are
+deduplicated by this scaling treatment. #35's independent-run batch-size/gradient-agreement
 control remains important; lower prediction error alone does not justify short-trace GAE or
-a larger unchanged run. No new owner command is needed now. Rerunning the comparison script
-only checks/displays the two saved complete arms. Base readiness/adaptive thinking remain unmet.
+a larger unchanged run. The old credit comparison is complete; use the new scaling command
+above. Base readiness/adaptive thinking remain unmet.
 
 ### Preserved pre-comparison handoff
 

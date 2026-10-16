@@ -16,6 +16,7 @@ from spireshift.engine_startup import _script_closure
 from spireshift.engine_worker_qualification import load_worker_config, worker_script
 from spireshift.full_run_experience import atomic_json
 from spireshift.native_credit_training import prepare_credit_samples
+from spireshift.native_input_normalization import NONE
 from spireshift.training_objective import load_training_score_spec
 
 
@@ -178,6 +179,8 @@ def create_learning_admission(
         "evaluation_policy": d.get("evaluation_policy", {"behavior": "greedy"}),
         "credit_assignment": d["learning"].get("credit_assignment"),
         "development_comparison": d.get("development_comparison", "initial_vs_incumbent"),
+        "input_normalization": d["network"].get("input_normalization", NONE),
+        "input_normalization_checks": d.get("input_normalization_checks"),
         "mechanics_coverage": d.get("mechanics_coverage"),
         "base_readiness_passed": False,
         "adaptive_controller_allowed": False,
