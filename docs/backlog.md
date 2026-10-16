@@ -1,6 +1,6 @@
 # SpireShift backlog
 
-Updated 2026-10-15 with the completed native v3 pilot and the systematic mechanics coverage pass.
+Updated 2026-10-15 with the completed repaired sweep and same-build short follow-up checks.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
@@ -30,18 +30,29 @@ zero apps and retained about **357 MB** for the original sweep.
 configured card forms verify. All original and repaired case hashes verify; 1,339 repository tests
 and 19 focused new Node checks pass.
 
-**The owner reports the full recheck running; its result is pending assessment.**
-The [short follow-up runner](actual-engine-mechanics-followups.md) is implemented separately:
-nine random legal prefixes with independent action seeds and an exact repeat, plus act/ending
-fixtures on the same v32 build. It verifies actual full-sweep success before launch; no training
-is unlocked from an assumption. Both initial short launch attempts were blocked before playing
-by the active-game guard. Finish offline verification now; execute and verify the native panel
-after the current job. Outside-combat potion controls and Foul Potion's non-creature merchant
-target remain explicit follow-up work. The current sweep's bound code/helpers remain unchanged.
+**The repaired sweep passes 1,849/1,849 checks:** 1,721 native effects, 128 observed prerequisite
+blocks and zero failures/unattempted cases. All saved case hashes and the original denominator
+verify. The owner finished it in **45m30s**, retaining **353.07 MB**, with **379.31 MB** peak memory
+and zero app copies. The original failed sweep remains preserved.
+
+**The [short follow-ups](actual-engine-mechanics-followups.md) also pass.** Codex ran all nine
+random-action games: **522 decisions**, nine observed decision families, zero interface failures
+or truncations, and an identical exact-repeat trace. Skip and offered shop choices were exercised.
+Privileged act-transition/Architect/zero-HP-victory fixtures pass on the same v32 build; these
+are zero player wins and zero PPO examples. Combined wall time **33.83s**, peak memory
+**302.87 MB**, retained evidence **7.20 MB**, zero app copies. Saved-only verification passes.
+The earlier blocked launch reports remain intact. [Current evidence](evidence/actual-engine-mechanics-sweep-and-followups-v1.json)
+binds the sweep, follow-ups, native build and resources.
+
+**Next: outside-combat potion controls and Foul Potion's non-creature merchant target.** These
+are the two remaining declared mechanics requirements before a new environment/worker/neural
+admission. Do not repeat either completed batch under its unchanged recipe, reinterpret random
+play as model quality or automatically migrate old models. Strong-base readiness still comes
+before adaptive thinking.
 
 Other cases continue only after a failed worker is proved stopped; keep unsupported/prerequisite-
-blocked/untested mechanics explicit. Resolve the remaining outside-combat potion,
-random-sequence and lifecycle requirements before a new environment/worker/neural admission.
+blocked/untested mechanics explicit. Resolve the remaining potion requirements before a new
+environment/worker/neural admission.
 The new all-pool path has a coverage gate; historical pilot results are not retroactively upgraded.
 The earlier v1/v2 stops and their event-presentation repairs remain preserved.
 
@@ -675,7 +686,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Complete; exact download/archive independently verified | Preserve and preflight the v0.111.0 actual-game copy and pinned sources. Keep old v0.107.1 artifacts immutable; file identity alone does not admit gameplay. | [#144](https://github.com/benyanc/spireshift/issues/144), parent [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
-| v3 pilot and first sweep complete; three shared causes repaired, recheck next ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve 627 updates/26,416 verified decisions, 332 normal endings and four failures; no wins or reliable held-out improvement. First sweep completed all 1,824 cases with 50 failures in three groups. Validate v32/combat v4 and all nine native event-card forms in the new 1,849-case plan, resolve remaining requirements, then qualify new learning inputs. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Repaired sweep and same-build follow-ups pass; potion controls next ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior no-win pilot and failed sweep. Repaired 1,849-case sweep passes with zero failures; nine random-action games deliver 522 decisions with repeatability, and v32 act/ending fixtures pass. Qualify outside-combat potion actions and non-creature merchant targets, then bind new learning inputs. These are interface checks, not base readiness or better policy strength. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

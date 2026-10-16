@@ -73,23 +73,28 @@ all 90 repaired case hashes verify; the old results are preserved.
 Two fresh repaired builds match their source/assembly pins; the original game DLL stays unchanged.
 The repository check passes **1,339 tests** plus formatting, types and the C# protocol contract;
 19 focused new Node checks pass. [Sweep and repair evidence](evidence/actual-engine-mechanics-coverage-repairs-v1.json)
-contains aggregate counts and identities without publishing the raw game catalog. The owner now
-reports the full recheck running; its result has not been assessed. Focused success does not
-relabel it as passed or permit training.
+contains aggregate counts and identities without publishing the raw game catalog. The owner
+subsequently completed the full repaired recheck: **1,849/1,849 cases**, **1,721 effects**,
+**128 native prerequisite blocks** and **zero failures**. It took **45m30s**, retained **353.07 MB**
+and used **379.31 MB** peak memory, with zero app copies. Every saved case hash verifies.
+The [completed sweep and follow-up evidence](evidence/actual-engine-mechanics-sweep-and-followups-v1.json)
+preserves the new result separately from the original failures and short repair panel.
 
-## Current owner-run recheck
+## Completed owner-run recheck
 
-Leave the running job below undisturbed. The [short follow-up stage](actual-engine-mechanics-followups.md)
-is implemented separately and requires a verified successful full result before launch. Its new
-code does not change this sweep's pinned implementation or helpers.
+The command below now displays the verified saved result, without starting another sweep.
+The [short follow-up stage](actual-engine-mechanics-followups.md) also passes: nine random-action
+runs with 522 decisions and exact repeatability, plus same-v32 act/ending fixtures. Its separate
+saved-only audit passes. Outside-combat potion actions and non-creature targets are the two
+remaining declared requirements before a new training admission.
 
-Close the game and run:
+Historical owner command, retained for saved-result inspection:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/check-native-mechanics-coverage-v2.sh
 ```
 
-Allow roughly **40–90 minutes**; the first complete sweep took 44 minutes. The new plan has
+The original estimate was **40–90 minutes**; the repaired sweep took 45m30s. Its plan has
 1,849 cases and reuses its 90 verified same-plan controls. The hard limits are four hours,
 14,400 CPU seconds, 4 GB memory and 4 GB evidence.
 Only the owner launches/monitors this larger stage. It does not train or start another experiment.
