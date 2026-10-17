@@ -1,5 +1,9 @@
 # Native A8 input-normalization checks and next comparison
 
+**Completed:** both comparison methods have finished. The saved audit confirms sustained lower
+saturation but no demonstrated gameplay advantage. See [the measured results and next work](native-a8-normalization-comparison-result.md).
+The launch instructions below preserve the original experiment; re-running shows saved results.
+
 The fixed input-scaling candidate passes saved-TRAIN controls and short native integration.
 It reduces saturation on the sampled old checkpoints without losing their encoded inputs.
 Whether it improves full-run learning still requires the owner-run comparison below.
@@ -110,7 +114,7 @@ never supply ordinary training targets. Completed methods are preserved/skipped;
 evidence stops for inspection. No promotion, adaptive controller or further experiment follows.
 
 The complete repository checks pass: **1,477 tests**, formatting, types and the native build.
-Controls, scoped admissions and read-only preflight pass. **Neither long method has started.**
+Controls, scoped admissions and read-only preflight pass. **This was the pre-launch status; both methods are now complete.**
 One training replication per method and 16 development seeds are exploratory. After completion,
 assess paired gameplay differences and actual before/after-update saturation; if improvement
 is still unclear, prioritize independent-run gradient/batch-size controls rather than assuming

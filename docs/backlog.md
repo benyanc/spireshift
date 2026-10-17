@@ -1,10 +1,38 @@
 # SpireShift backlog
 
-Updated 2026-10-16 after input-scaling controls, native integration and comparison preflight.
+Updated 2026-10-16 after the completed normalization comparison and saved-only outcome audit.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**The owner-run normalization comparison is complete: numerical conditioning improves,
+but stronger play remains unproven (#143 / #146 / #35).** Both methods finish 336/336 normal
+endings: 672 total, zero failed/missing games, wins, completed acts or app copies. On the
+same 16 fresh development seeds, the unscaled player rises from 6.5 to 7.25 average floors;
+normalized rises from 6.5 to 7.0625. Both gain intervals include zero. Normalized-minus-unscaled
+is -0.1875 floors, interval [-1.625, +0.875]; its nonlinear auxiliary score is slightly higher,
+also uncertain. No demonstrated superiority, inferiority or equivalence; one training replicate
+per method. Both real round-eight trained models were frozen on confirmation before evaluation.
+
+Normalization remains at **0% saturation in all recorded before/after training probes**;
+unscaled reaches **52.36%** after round eight. The saved-only assessment reconstructs all probes
+and verifies 672 episodes, 67,963 decisions and 2,878 source files in 33.62 seconds. Actual work
+is 25,917 / 25,883 TRAIN decisions and 615 / 618 updates; identical collection rules are not
+identical realized work. Owner runtime is 32.16 minutes combined; 599.37 MB retained, peak
+memory 1.976 GB, protected inputs unchanged. See [results and limits](native-a8-normalization-comparison-result.md).
+
+**Next priority: #35's independent-run gradient/batch-size controls**, beginning with bounded
+saved-TRAIN checks of whether different complete games recommend consistent changes. Do not
+pool rounds from different behavior policies, count correlated decisions as independent games,
+or treat resampling as new evidence. A justified larger-batch comparison must fix total games,
+score and method, use fresh reserved evaluation seeds and report actual work. No new owner
+command or long task is queued yet. Keep both candidates/results frozen; do not promote or
+choose normalization from this inspected development panel. Base readiness/adaptive thinking
+remain unmet. #143's normalization ablation is complete under this finite scope; broader
+representation changes need a demonstrated gap, not another saturation-only test.
+
+### Preserved normalization launch handoff (completed)
 
 **Input-normalization checks and native integration pass (#143 / #146).**
 The explicit `native-actor-hash-quarter-v1` transform scales hashed actor coordinates by 0.25,
@@ -17,12 +45,12 @@ A coherent three-view HP supplement also passes. Both four-game native controls 
 456 verified training decisions / 12 updates, zero failures or app copies. The unscaled
 checkpoint exactly reproduces its prior control. Legacy model identities remain intact.
 
-**Next owner command:** `bash scripts/compare-native-a8-normalization-v1.sh` from the repository.
+**Completed owner command:** `bash scripts/compare-native-a8-normalization-v1.sh` from the repository.
 One scaling factor changes; both methods keep the cross-fitted credit estimator and all other
 training settings. Each has 336 attempts, 672 total, run sequentially; expected 25–40 minutes,
 30-minute cap per method. Fresh confirmation/development seeds, each method's own initializer
 and best trained player, plus per-update saturation measurements. Admissions/preflight pass;
-neither long method has started. See [the checks, limits and exact command](native-a8-input-normalization.md).
+both methods have now completed. See [the original checks, limits and launch command](native-a8-input-normalization.md).
 
 ### Preserved completed credit experiment
 
@@ -40,8 +68,8 @@ See [the results and limitations](native-a8-credit-comparison-result.md).
 controls preserve public entity/amount relations and every legal action family. No fields are
 deduplicated by this scaling treatment. #35's independent-run batch-size/gradient-agreement
 control remains important; lower prediction error alone does not justify short-trace GAE or
-a larger unchanged run. The old credit comparison is complete; use the new scaling command
-above. Base readiness/adaptive thinking remain unmet.
+a larger unchanged run. Both the credit comparison and the scaling comparison above are now
+complete. Base readiness/adaptive thinking remain unmet.
 
 ### Preserved pre-comparison handoff
 
