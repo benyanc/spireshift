@@ -1,10 +1,45 @@
 # SpireShift backlog
 
-Updated 2026-10-16 after the completed normalization comparison and saved-only outcome audit.
+Updated 2026-10-17 after independent-game gradient/batch controls and frozen-pool qualification.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Independent-game gradient and batch-size checks are implemented and pass (#35 / #146).**
+The study reconstructs the production actor gradient at behavior to at most 2.15e-16 error,
+including the full cross-fitted return baseline, all menus, normalization and entropy. Four
+separate 32-game TRAIN cohorts verify 128 trajectories / 12,741 decisions from 64 native seeds;
+cohorts/models are never pooled. No reserved evaluation episode is opened, no actor is updated.
+
+Every pair uses disjoint games, separately fitted predictors and its own advantage moments.
+Repeated partitions are correlated finite-pool descriptions, not independent replications.
+At 16 games/group, median game-driven cosine is 0.200 / 0.039 / -0.035 / 0.322 for unscaled
+rounds 1/8 and normalized rounds 1/8; opposing pairs range 12.5–53.1%. The full-batch entropy
+term is 3.53–9.77% of the data-gradient norm and does not dominate these initial gradients.
+These observations do not identify the best batch size or prove a cause of weak gameplay.
+The saved-only study takes 58.01 seconds and 1.150 GB peak memory. Sizes 32/64/128 per independent
+group remain unmeasured because the saved pool contains only 32 games per behavior model.
+
+**Next owner command:** `bash scripts/check-native-a8-batch-sizes-v1.sh` from the repository.
+It collects 256 fresh TRAIN games with one frozen normalized pre-round-eight model, then
+compares genuinely disjoint 32/64/128-game groups. This player is fixed by training phase,
+not chosen from development rankings. It never updates/promotes a player. Expected 15–25
+minutes; collection cap 20 minutes / two workers / 4 GB RAM, analysis cap 10 minutes / one
+worker / 8 GB RAM, 2 GB retained-output cap per stage. One shared frozen game/code cache;
+zero app copies. It reports batch progress, preserves source failures and requires every
+planned clean game for analysis. The longer collection has not started.
+
+The four-game / 360-decision native collector/analysis control passes with zero failures,
+missing games, optimizer steps or protected-input changes. A memory bound retains sparse
+menus for only four numeric reference games while verifying behavior and retaining derivatives
+for every game. The v1 control/preparation stays preserved; the launch script selects v2.
+These four control seeds repeat across the two short source versions, not eight independent
+outcomes. Collection control and preflight pass. [Method, evidence, caps and exact command](native-a8-independent-gradients.md).
+Strong-base readiness, full wins and adaptive thinking remain unmet. After the larger pool,
+freeze an equal-game-budget learning comparison only if the TRAIN evidence justifies it.
+
+### Preserved completed normalization comparison
 
 **The owner-run normalization comparison is complete: numerical conditioning improves,
 but stronger play remains unproven (#143 / #146 / #35).** Both methods finish 336/336 normal
@@ -22,12 +57,12 @@ is 25,917 / 25,883 TRAIN decisions and 615 / 618 updates; identical collection r
 identical realized work. Owner runtime is 32.16 minutes combined; 599.37 MB retained, peak
 memory 1.976 GB, protected inputs unchanged. See [results and limits](native-a8-normalization-comparison-result.md).
 
-**Next priority: #35's independent-run gradient/batch-size controls**, beginning with bounded
+**Follow-up implemented above: #35's independent-run gradient/batch-size controls**, beginning with bounded
 saved-TRAIN checks of whether different complete games recommend consistent changes. Do not
 pool rounds from different behavior policies, count correlated decisions as independent games,
 or treat resampling as new evidence. A justified larger-batch comparison must fix total games,
-score and method, use fresh reserved evaluation seeds and report actual work. No new owner
-command or long task is queued yet. Keep both candidates/results frozen; do not promote or
+score and method, use fresh reserved evaluation seeds and report actual work. The owner
+frozen-pool command above is now prepared. Keep both candidates/results frozen; do not promote or
 choose normalization from this inspected development panel. Base readiness/adaptive thinking
 remain unmet. #143's normalization ablation is complete under this finite scope; broader
 representation changes need a demonstrated gap, not another saturation-only test.
