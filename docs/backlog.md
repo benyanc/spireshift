@@ -1,10 +1,31 @@
 # SpireShift backlog
 
-Updated 2026-10-17 after independent-game gradient/batch controls and frozen-pool qualification.
+Updated 2026-10-17 after synthetic end-to-end PPO controls alongside the owner-run batch study.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Synthetic end-to-end learning controls implemented and assessed (#35 / #146).**
+The unchanged native numerical learner runs three tiny known-solution tasks, three training
+seeds each, using fresh sampled binary terminal outcomes and no supervised action labels.
+The delayed task learns from about 7.6% to 99.3–99.6% expected victory in all three seeds.
+Immediate choice improves to 46.3–50.9% but misses the frozen 75% action-probability criterion;
+it receives only 96 optimizer steps, versus 288 with continuation menus. Contextual risk
+stays at 48.1–54.2%, below its 70% optimum; every final greedy player makes the same choice
+at both HP levels. Frozen-actor and missing-HP negative controls behave as expected.
+The overall learning check **does not pass**. This is not native skill/readiness evidence
+or proof of a unique causal defect. Preserve the result; do not tune the frozen experiment
+or increase its budget just to get a pass. [Method, measurements and limits](native-ppo-known-task-controls.md).
+
+The control finishes in 34.09 seconds, 121.37 MB peak RAM and 4.11 MB retained output:
+18,688 synthetic episodes / 2,052 synthetic updates, zero real games or production updates.
+All 24 Python inputs pinned by the owner's running gradient study remain unchanged.
+The owner reports that the larger pool command below is running; Codex has not inspected
+its live output or launched/monitored another native batch. No further owner task is needed now.
+Independent next follow-up: a bounded direct-teaching-versus-PPO conditional control on the
+same synthetic inputs, matching/reporting optimizer work and preserving every attempted
+setting. Assess the larger pool before freezing any new native training comparison.
 
 **Independent-game gradient and batch-size checks are implemented and pass (#35 / #146).**
 The study reconstructs the production actor gradient at behavior to at most 2.15e-16 error,
@@ -28,7 +49,7 @@ not chosen from development rankings. It never updates/promotes a player. Expect
 minutes; collection cap 20 minutes / two workers / 4 GB RAM, analysis cap 10 minutes / one
 worker / 8 GB RAM, 2 GB retained-output cap per stage. One shared frozen game/code cache;
 zero app copies. It reports batch progress, preserves source failures and requires every
-planned clean game for analysis. The longer collection has not started.
+planned clean game for analysis. The owner reports the longer collection is running.
 
 The four-game / 360-decision native collector/analysis control passes with zero failures,
 missing games, optimizer steps or protected-input changes. A memory bound retains sparse
