@@ -1,7 +1,10 @@
 # Bounded collection and recovery of the capped A8 pool
 
-Implemented and verified 2026-10-17 under #35 / #146. The next owner step is saved-data
-gradient analysis, **not replaying the 256 games or training a player**.
+Implemented and verified 2026-10-17 under #35 / #146. The owner has completed saved-data
+gradient analysis: 114.20 seconds, 3.917 GB peak RAM, no cap. See the
+[analysis result and next work](native-a8-recovered-gradient-result.md). No replay or
+player training followed. The implementation and pre-analysis measurements below remain
+historical evidence; the original portable recovery summary is unchanged.
 
 ## What failed and what changed
 
@@ -37,8 +40,9 @@ The ordered delivery chain and original public/native ending agree for all **254
 games**: 126 from the interrupted worker's completed prefix and 128 from the clean worker.
 Each advertised input, chosen action, delivered target, successor and native ending is
 checked. Saved sampling/model ownership and original CPU/score boundaries also verify.
-Numeric behavior likelihood/gradient verification for the full pool remains the pending
-analysis step; the short mixed-origin check below covers only four games.
+At recovery, full-pool numeric behavior verification was still pending. The completed
+analysis now reconstructs all saved likelihoods; its separate exact gradient reference
+covers four games / 549 decisions. The earlier mixed-origin check below covers four games.
 
 The native logs prove seed **700253 was started but did not finish**; it is not retried.
 Seed **700255 was never started**. Two short fresh workers play 700255 and one explicitly
@@ -88,7 +92,7 @@ directory retains about 5.69 MB, mainly the four controls and two additions. Ori
 preserved source storage, 211.91 MB at the cap, is outside that new resource root and is
 not represented as newly generated output or deleted to make the measurement smaller.
 
-## One owner command
+## Completed owner command
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/analyze-native-a8-recovered-pool-v1.sh
@@ -97,7 +101,7 @@ bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac26
 Allow up to **10 minutes**, one numerical thread, **8 GB memory**, 2 GB output cap.
 The saved Jacobians alone need approximately 3.54 GB; bounded input verification does
 not eliminate the explicitly budgeted derivative arrays. This full-size analysis has
-not been launched by Codex. It uses existing files and never starts games or updates a
+been completed by the owner. It uses existing files and never starts games or updates a
 player, so closing Steam is unnecessary. No automatic next experiment follows.
 
 The wrapper reads its workspace and limits from the pinned recipe. Finished results
@@ -111,11 +115,11 @@ Recipe: `configs/native-gradient/sts2-v0.111.0-a8-stream-recovery-v1.json`.
 Separate seed extension: `manifests/splits/sts2-v0.111.0-native-a8-gradient-recovery-v1.json`.
 Private workspace: `artifacts/native-gradient/sts2-v0.111.0-a8-stream-recovery-v1`.
 Reports: `recovery.json`, `control.json`, `completion.json`, `union.json`, and
-`union-binding-control.json`; full analysis will produce `gradient-report.json`.
+`union-binding-control.json`; completed analysis adds `gradient-report.json`.
 Portable summary: `docs/evidence/native-a8-memory-recovery-v1.json`.
 
-After the owner shares the analysis, assess whether independent games stabilize the
-learning signal. A native learning comparison still needs a justified game/update
+The [completed assessment](native-a8-recovered-gradient-result.md) finds no clear direction
+agreement even at 128 games/group. A native learning comparison still needs a justified game/update
 budget and fresh reserved evaluation. The toy HP-dependent learning gap remains open.
 No foundation/adaptive readiness, improved player, or new training admission follows
 from this memory repair. Future large collections must use the bounded streaming path.

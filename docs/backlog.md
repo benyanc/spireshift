@@ -1,12 +1,37 @@
 # SpireShift backlog
 
-Updated 2026-10-17 after bounded collection/verification and recovery of the capped A8 pool.
+Updated 2026-10-17 after the owner completed analysis of the recovered A8 pool.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**Memory repair and diagnostic recovery complete (#35 / #146); owner analysis next.**
+**Recovered-pool analysis complete (#35 / #146); larger batches alone are not an established repair.**
+The owner analysis finishes in **114.20 seconds / 3.917 GB** peak RAM with no cap, no new
+games, optimizer steps or app copies. All 256 diagnostic games' saved likelihoods verify;
+the independent numerical gradient reference passes on four games / 549 decisions only.
+A separate saved-result check verifies 596 source seals and recomputes recorded partition
+summaries without differentiating again. [Results, evidence and limits](native-a8-recovered-gradient-result.md).
+
+At 32 / 64 / 128 games per disjoint group, median game-driven direction agreement is
+-0.017 / +0.020 / +0.061, with 53.1% / 50.0% / 37.5% opposing pairs. Agreement remains
+near zero; the trend is not uniformly improving. Including exploration at 128 games gives
+-0.093 median agreement and 65.6% opposing pairs. Its full-pool norm is 35.8% of the
+game-driven norm; this does not prove domination or a cause of weak learning. Partitions
+reuse one finite frozen-player pool, not independent training replications. No optimal
+batch size, actual learning benefit or impossibility of improvement is established.
+
+**Next implementation:** a bounded direct-teaching versus PPO conditional-HP control on
+the same public inputs, with matched/reportable actual optimizer work and all attempted
+settings preserved. The earlier learner misses the conditional rule while learning a
+constant delayed choice; distinguish available capacity/optimization from reward-driven
+conditioning before another native training change. This is a short synthetic diagnostic,
+not a new mechanics gate. No owner command is pending. Stronger play, full wins and
+base/adaptive readiness remain unmet; no larger unchanged PPO/GA or difficulty work follows.
+
+### Preserved memory-repair handoff (analysis now complete)
+
+**Memory repair and diagnostic recovery complete (#35 / #146).**
 The owner collection hit its 4 GB RAM cap in 399.52 seconds. It saved 254 terminal records,
 left seed 700253 interrupted and 700255 unstarted, and produced no final audit/summary.
 The old collector retained full histories and its auditor loaded whole journals. The
@@ -23,12 +48,12 @@ collection is not relabelled clean, and recovered inputs are not ordinary PPO ad
 Mixed-origin saved verification passes on two recovered/two new games, 422 decisions.
 No optimizer steps, promotions or app copies; the full native 256-game collection was not replayed.
 
-**Next owner command:** `bash scripts/analyze-native-a8-recovered-pool-v1.sh` from the repository.
+**Completed owner command:** `bash scripts/analyze-native-a8-recovered-pool-v1.sh` from the repository.
 Saved-data analysis only; up to ten minutes, one numerical thread, 8 GB memory, 2 GB output.
-It has not started. This replaces the old owner command below; do not rerun/clear the capped
+It is complete; its wrapper now shows saved results. Do not rerun/clear the capped
 folder. [Recovery, measurements and accounting](native-a8-memory-recovery.md).
-Assess the full-pool gradient findings before any native training change. The toy
-conditional-learning follow-up remains useful; stronger play and base/adaptive readiness
+The full-pool findings are assessed above. The toy conditional-learning follow-up is next;
+stronger play and base/adaptive readiness
 remain unmet. No new action masks, model changes, larger GA or difficulty work is added.
 
 ### Preserved synthetic-control and earlier batch handoffs
