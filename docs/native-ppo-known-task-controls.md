@@ -4,6 +4,10 @@ Implemented and assessed 2026-10-17 under #35 / #146. This is a synthetic diagno
 not another STS2 training run, a mechanics qualification, or an additional readiness gate.
 The owner-run 256-game gradient study's 24 pinned Python inputs remain unchanged.
 
+The [matched-work teaching/PPO follow-up](native-conditional-teaching.md) is now complete.
+Both methods miss the contextual criterion; direct teaching learns only a weak
+conditional preference. Preserve this original experiment and its different budgets.
+
 ## What the control checks
 
 The actual native public encoder, quarter input scaling, 512-input / 32-hidden-unit

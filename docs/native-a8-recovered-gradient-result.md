@@ -5,6 +5,10 @@ successfully. Larger groups do not clearly stabilize the proposed learning direc
 in this finite pool. This does not demonstrate a better player or justify a larger
 unchanged training run.
 
+The proposed [direct-teaching/PPO follow-up](native-conditional-teaching.md) has now
+completed. Neither method meets its contextual criterion; a local initialization
+probe motivates testing explicit public context-by-candidate interactions next.
+
 ## What was measured
 
 The analysis uses one frozen normalized behavior model and 256 distinct TRAIN games:

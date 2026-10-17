@@ -1,10 +1,39 @@
 # SpireShift backlog
 
-Updated 2026-10-17 after the owner completed analysis of the recovered A8 pool.
+Updated 2026-10-17 after the matched-work synthetic conditional-learning comparison.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Direct teaching versus PPO implemented and assessed (#35 / #146): conditional learning remains weak.**
+The same synthetic HP task, initial numerical weights, public inputs and actual optimizer
+work are paired across three seeds. Each primary method uses 288 updates / 36,864 decision
+presentations / 6,144 choice presentations. PPO receives terminal outcomes only; the
+teacher gets separate oracle action labels. All three PPO final IDs/evaluations exactly
+reproduce the historical control. Frozen-actor and missing-HP controls pass. All 96 round
+records / 99 round-and-pair file seals verify. No native input or checkpoint is opened.
+
+Neither method meets the frozen learning criterion in any seed. The teacher's expected
+victory is 51.49–51.66% against a 70% optimum; it learns a small HP-dependent preference.
+One seed has 100% greedy accuracy but only about 50–52% optimal-action probabilities,
+well below the 75% criterion. This does not prove inadequate model capacity or a unique
+PPO defect. It shows that sampled reward noise alone does not explain this control's gap.
+The comparison completes in **37.43 seconds / 166.07 MB** peak RAM, retaining 1.56 MB,
+with 6,144 sampled synthetic episodes / 2,052 synthetic updates including controls;
+zero native games, production updates, app copies or promotions.
+
+The initialization probe retains HP correctly, but the shared linear context cancels
+between these candidate scores. The hidden branch's conditional-contrast gradient norm
+is only 0.027–0.040% of the ordinary preference gradient norm. This is a local sensitivity
+measurement, not an Adam speed ratio or proof of native causality. **Next implementation:**
+a finite, separately versioned public context-by-candidate interaction control at the same
+network size and controlled work/initial policies. Test this measured representation gap
+before another native learning change; do not retune or extend the completed comparison.
+[Method, results and limits](native-conditional-teaching.md). No owner command is pending.
+Stronger play, full wins and base/adaptive readiness remain unmet.
+
+### Preserved recovered-pool result (conditional comparison now complete)
 
 **Recovered-pool analysis complete (#35 / #146); larger batches alone are not an established repair.**
 The owner analysis finishes in **114.20 seconds / 3.917 GB** peak RAM with no cap, no new
@@ -21,7 +50,7 @@ game-driven norm; this does not prove domination or a cause of weak learning. Pa
 reuse one finite frozen-player pool, not independent training replications. No optimal
 batch size, actual learning benefit or impossibility of improvement is established.
 
-**Next implementation:** a bounded direct-teaching versus PPO conditional-HP control on
+**Completed follow-up above:** a bounded direct-teaching versus PPO conditional-HP control on
 the same public inputs, with matched/reportable actual optimizer work and all attempted
 settings preserved. The earlier learner misses the conditional rule while learning a
 constant delayed choice; distinguish available capacity/optimization from reward-driven
@@ -949,7 +978,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | Finite mechanics package complete ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior pilots and failed sweep. Repaired 1,849-case sweep, nine random-action games, act/endings, outside-combat potions and Foul Potion merchant controls pass. The composed gate preserves the sweep's host-v32 scope and binds new v33 controls. These are interface checks, not playing strength or base readiness. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
-| V5 complete; reliable pipeline, no retained improvement | Preserve 336/336 normal endings, 627 updates and all checkpoints. Initializer beat both checked trained checkpoints on confirmation; development repeated that same initial player. Diagnose native training signals, encoding and credit assignment under #143 before another learning intervention. V4 remains stopped and unchanged. | [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| V5 and scoped diagnoses complete; conditional representation control next | Preserve native pilots, completed credit/scaling comparisons, recovered-pool analysis and matched-work teaching/PPO negative result. Test explicit public context-by-candidate interactions on the synthetic task at the same network size before a native intervention. No larger unchanged training or automatic promotion. | [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143), [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |
