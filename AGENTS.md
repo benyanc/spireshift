@@ -129,6 +129,14 @@ separately qualified follow-ups. See `docs/working-app-reuse.md` and #147/#146.
 
 ## Verification
 
+New large native collectors must retain sealed paths and compact outcomes, not every
+episode's decision history. Verify compressed worker journals as ordered streams, keeping
+at most the current episode and a bounded record window. Use the separately versioned
+streaming implementation; preserve historical pinned collectors/auditors for reproduction.
+An interrupted worker's verified completed prefix is diagnostic evidence only, under an
+explicit recovery manifest with the original interrupted/missing attempts still counted.
+Never clear its marker, reuse its profile or replay an uncertain seed to complete a panel.
+
 Run `uv run spireshift check` before committing. Tests that enforce the objective contract and
 public-state boundary are release blocking.
 

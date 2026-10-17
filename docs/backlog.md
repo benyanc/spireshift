@@ -1,10 +1,37 @@
 # SpireShift backlog
 
-Updated 2026-10-17 after synthetic end-to-end PPO controls alongside the owner-run batch study.
+Updated 2026-10-17 after bounded collection/verification and recovery of the capped A8 pool.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Memory repair and diagnostic recovery complete (#35 / #146); owner analysis next.**
+The owner collection hit its 4 GB RAM cap in 399.52 seconds. It saved 254 terminal records,
+left seed 700253 interrupted and 700255 unstarted, and produced no final audit/summary.
+The old collector retained full histories and its auditor loaded whole journals. The
+new streaming implementation retains sealed paths/compact outcomes, releases each trace,
+and verifies logs in order. Historical pinned sources and the original failure remain.
+
+All 254 saved delivery/ending chains now verify in **25.15 seconds / 116.33 MB** peak RAM,
+with zero replays, marker edits or worker reuse. Four repeated-control-seed games pass
+the new collector/auditor and exact numerical reference; two short workers complete only
+the unstarted 700255 and explicitly added fresh 700257. Seed 700253 is never retried.
+The union contains **256 clean diagnostic games from 257 actual diagnostic attempts**;
+the original interruption stays counted. Four control starts are separate. The old
+collection is not relabelled clean, and recovered inputs are not ordinary PPO admission.
+Mixed-origin saved verification passes on two recovered/two new games, 422 decisions.
+No optimizer steps, promotions or app copies; the full native 256-game collection was not replayed.
+
+**Next owner command:** `bash scripts/analyze-native-a8-recovered-pool-v1.sh` from the repository.
+Saved-data analysis only; up to ten minutes, one numerical thread, 8 GB memory, 2 GB output.
+It has not started. This replaces the old owner command below; do not rerun/clear the capped
+folder. [Recovery, measurements and accounting](native-a8-memory-recovery.md).
+Assess the full-pool gradient findings before any native training change. The toy
+conditional-learning follow-up remains useful; stronger play and base/adaptive readiness
+remain unmet. No new action masks, model changes, larger GA or difficulty work is added.
+
+### Preserved synthetic-control and earlier batch handoffs
 
 **Synthetic end-to-end learning controls implemented and assessed (#35 / #146).**
 The unchanged native numerical learner runs three tiny known-solution tasks, three training
@@ -21,8 +48,9 @@ or increase its budget just to get a pass. [Method, measurements and limits](nat
 The control finishes in 34.09 seconds, 121.37 MB peak RAM and 4.11 MB retained output:
 18,688 synthetic episodes / 2,052 synthetic updates, zero real games or production updates.
 All 24 Python inputs pinned by the owner's running gradient study remain unchanged.
-The owner reports that the larger pool command below is running; Codex has not inspected
-its live output or launched/monitored another native batch. No further owner task is needed now.
+At that point the owner reported the larger pool running; Codex did not monitor it.
+Its later capped outcome and recovery are assessed above; that handoff supersedes the
+historical batch command below.
 Independent next follow-up: a bounded direct-teaching-versus-PPO conditional control on the
 same synthetic inputs, matching/reporting optimizer work and preserving every attempted
 setting. Assess the larger pool before freezing any new native training comparison.
@@ -42,14 +70,14 @@ These observations do not identify the best batch size or prove a cause of weak 
 The saved-only study takes 58.01 seconds and 1.150 GB peak memory. Sizes 32/64/128 per independent
 group remain unmeasured because the saved pool contains only 32 games per behavior model.
 
-**Next owner command:** `bash scripts/check-native-a8-batch-sizes-v1.sh` from the repository.
+**Historical owner command:** `bash scripts/check-native-a8-batch-sizes-v1.sh` from the repository.
 It collects 256 fresh TRAIN games with one frozen normalized pre-round-eight model, then
 compares genuinely disjoint 32/64/128-game groups. This player is fixed by training phase,
 not chosen from development rankings. It never updates/promotes a player. Expected 15–25
 minutes; collection cap 20 minutes / two workers / 4 GB RAM, analysis cap 10 minutes / one
 worker / 8 GB RAM, 2 GB retained-output cap per stage. One shared frozen game/code cache;
 zero app copies. It reports batch progress, preserves source failures and requires every
-planned clean game for analysis. The owner reports the longer collection is running.
+planned clean game for analysis. The collection later hit its RAM cap; use the recovery above.
 
 The four-game / 360-decision native collector/analysis control passes with zero failures,
 missing games, optimizer steps or protected-input changes. A memory bound retains sparse

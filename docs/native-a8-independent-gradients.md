@@ -1,5 +1,11 @@
 # Native A8 independent-game gradient and batch checks
 
+**Current handoff, 2026-10-17:** the owner collection below hit its RAM cap after saving
+254 terminal episodes. Bounded verification recovered those games, and two short additions
+formed an explicit diagnostic union without retrying the interrupted seed. Follow
+[the memory-recovery guide](native-a8-memory-recovery.md) and its one saved-data analysis
+command. The collection command in this guide is historical; preserve its capped folder.
+
 Implemented 2026-10-17 under #35 / #146. The checks reconstruct the exact actor gradient at
 the player that generated each batch, then ask whether disjoint groups of complete games
 recommend similar changes. They do not optimize a player, establish a win rate or promote
@@ -106,7 +112,7 @@ moving to the next seed; it never retries that failed seed. Uncertain worker fai
 lane. Failures and unplayed games retain the original denominator. Analysis requires **every
 planned game** to be clean and audited; it cannot silently drop failures into a smaller pool.
 
-## One owner command
+## Historical owner collection command
 
 Close any open game, then run:
 
@@ -132,8 +138,9 @@ The player is frozen, so those progress lines are not a learning curve.
 The original frozen game and verified support-code cache are reused with zero app copies.
 The script preserves a finished collection and can analyze it without replaying games. An
 unfinished collection stops for inspection. Finished analysis is shown without new games or
-fitting. **The 256-game collection has not started.** No actor training, model promotion,
-adaptive controller or subsequent experiment starts afterward.
+fitting. The owner later launched the collection and hit its memory cap. Its recovery
+and pending saved-data analysis are now documented in the current handoff above.
+No actor training, model promotion or adaptive controller follows these diagnostics.
 
 The [evidence record](evidence/native-a8-independent-gradients-v1.json) binds the controls,
 implementation, private sources and resource receipts. Strong-base readiness and full-run
