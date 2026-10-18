@@ -1,10 +1,67 @@
 # SpireShift backlog
 
-Updated 2026-10-18 after completing and verifying the native context comparison.
+Updated 2026-10-18 after the TRAIN-only optimizer study and short native restart control.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Optimizer study and compact learning-curve runner implemented; owner-run comparison next
+(#143 / #35 / #146).** The previous input comparison remains flat: original combined mean floor
+7.1250→6.9375, crossed 7.1250→7.1250; both 0/32 final wins over two numerical replicates.
+Its 46 units / 288 new games and historical results are unchanged. Useful native learning,
+full wins and base/adaptive readiness remain unproven.
+
+A frozen TRAIN-only study reuses two clean 32-game first-round cohorts. Standard updates exactly
+reproduce both historical model IDs. Nine passes fit the assigned in-sample training signal
+2.4–2.6× more than three passes; higher-rate fits are also preserved. None reaches the existing
+per-update KL cap. Separate 16-game halves suggest weakly related directions (cosine −0.1019 and
++0.0057); these single-split diagnostics do not establish causality, optimal batch size or stronger
+play. Study: 88.42 s, 723 MB peak RAM, 825 numerical updates, zero new games or promotions.
+
+Compact sparse inputs preserve float64 values, loss, gradients, credit, model weights and complete
+Adam state. A saved 32-game batch exactly reproduces its historical model after 81 updates with
+about 168 MB additional preparation memory. The short native control passes 8/8 games / 24 updates
+across three launches: 54.45 s, 681 MB peak RAM, 11.55 MB output, zero failures or app copies. Its
+two-game batches prove integration and resumption, not actual 128-game memory or learning quality.
+
+**One next owner command:** `bash scripts/train-native-a8-optimizer-v1.sh`.
+Close the Steam game. Expected 2–3 hours; three-hour invocation budget, two workers, 4 GB RAM,
+6 GB retained output. Clean 15-minute sessions continue within the same finite plan; failed/capped
+sessions stop without automatic retries. The same command resumes a clean pause and verifies
+complete results on repeat. Required complete repository checks precede any game collection.
+The long experiment has not been launched. [Protocol](native-optimizer-learning.md) /
+[evidence](evidence/native-optimizer-learning-v1.json).
+
+Ordered remaining work:
+
+1. **Assess the frozen learning curve, owner-run:** standard 32-game batches / three passes versus
+   candidate 128-game batches / up to nine passes. Each player gets 512 fresh training games;
+   two new numerical initializers, paired seed plans, 16 reserved development games at
+   0/128/256/384/512. Total 2,368 attempts, 340 sealed units. This deliberately bundles larger
+   independent batches and reuse, has equal game budgets but different fitting compute, and
+   cannot attribute a gain to either component alone. Final-only comparison; no promotion.
+2. **Improve action credit if fresh play remains flat:** stop at the fixed horizon; do not
+   automatically extend unchanged PPO. Test better return/action-value estimates or qualified
+   search/demonstration lessons. The earlier full-trace score timing change was numerically
+   identical; arbitrary HP bonuses are not a repair. Diagnose noise versus fitting with saved
+   evidence before changing the objective or adding restrictions.
+3. **Better lessons and practice:** qualify actual-engine action branches before fixed-budget
+   search/demonstrations become teachers. Keep hidden information out of policy inputs, quantify
+   label noise and retain full-run A8 evaluation. Saved diagnostic fits are not fresh PPO data.
+4. **Scale only after repeatable progress:** confirm a promising method on fresh seeds, then
+   justify larger owner-run learning curves. Count games, decisions, updates, failures and CPU
+   separately. The current two-replicate development comparison cannot certify strong win rate.
+
+Keep fixed Ironclad/A8, all public legal choices, the declared floor/act bootstrap score and
+primary terminal-victory objective. No arbitrary health rewards, permanent action restrictions,
+automatic adaptive thinking or difficulty expansion. GA/direct evolution remains a separate
+later comparison. Shared frozen game/runtime/SDK/support code are reused with isolated workers;
+no app copies. Interrupted prefixes remain diagnostic only; original denominators and historical
+source/config/result bytes stay preserved. #143/#35/#146 remain open. Full repository checks are
+required before a local commit; no push or GitHub Actions is needed.
+
+### Preserved completed input comparison
 
 **Comparison complete; useful native learning remains unproven (#143 / #35 / #146).**
 The fresh matched pair finishes all 46 units / 288 new games, with zero failed games and no app
