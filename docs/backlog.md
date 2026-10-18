@@ -1,12 +1,26 @@
 # SpireShift backlog
 
-Updated 2026-10-18 after the TRAIN-only optimizer study and short native restart control.
+Updated 2026-10-18 after the separate completed-TRAIN behavior/credit diagnostic.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**Optimizer study and compact learning-curve runner implemented; owner-run comparison next
+**Parallel saved-record diagnostic complete; owner reports the learning curve running.**
+The new tool analyzes only the two completed historical TRAIN cohorts: 64 games / 6,995
+records, in 45.81 seconds / 291.23 MB, with zero games, policy updates or running-record reads.
+All 36 protected experiment files remain unchanged. Reopening its sealed result reuses it.
+Mandatory menus are 24.3% of records, but excluding them from advantage normalization alone
+changes the sign on only 9/5,297 real choices. Combat supplies 75.2% of real choices; rest sites
+only 19 and shops 88. Card skipping occurs 30/181 times; end turns with plays remaining are
+39/1,254 chosen end turns. These are observed behaviors, not proven mistakes or optimal actions.
+The actor changes probabilities on saved inputs; useful new-game learning is still unproven.
+[Method and first interpretation](native-completed-training-diagnostics.md) /
+[evidence](evidence/native-completed-training-diagnostics-v1.json). No new owner command or
+additional learning gate is introduced. Complete the current comparison unchanged; then assess
+its fresh results before choosing a credit/teacher change. Do not tune the running recipe.
+
+**Optimizer study and compact learning-curve runner implemented; owner comparison awaiting results
 (#143 / #35 / #146).** The previous input comparison remains flat: original combined mean floor
 7.1250→6.9375, crossed 7.1250→7.1250; both 0/32 final wins over two numerical replicates.
 Its 46 units / 288 new games and historical results are unchanged. Useful native learning,
@@ -30,7 +44,8 @@ Close the Steam game. Expected 2–3 hours; three-hour invocation budget, two wo
 6 GB retained output. Clean 15-minute sessions continue within the same finite plan; failed/capped
 sessions stop without automatic retries. The same command resumes a clean pause and verifies
 complete results on repeat. Required complete repository checks precede any game collection.
-The long experiment has not been launched. [Protocol](native-optimizer-learning.md) /
+The owner reports this comparison running; Codex has not launched or monitored it.
+[Protocol](native-optimizer-learning.md) /
 [evidence](evidence/native-optimizer-learning-v1.json).
 
 Ordered remaining work:
