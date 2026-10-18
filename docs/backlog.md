@@ -1,76 +1,128 @@
 # SpireShift backlog
 
-Updated 2026-10-17 after the context-by-action comparison and native bridge check.
+Updated 2026-10-18 after completing and verifying the native context comparison.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**Implemented: learn more from each A8 game; owner native comparison next (#143 / #35 / #146).**
-Keep the declared floor/act bootstrap score and terminal-victory evaluation unchanged.
-No health penalty or healing bonus is added. Prioritize useful learning per collected
-game before scaling unchanged PPO to millions of attempts. Larger independent batches
-and longer iterative training are separate questions; the gradient study did not prove
-that more games cannot help.
+**Comparison complete; useful native learning remains unproven (#143 / #35 / #146).**
+The fresh matched pair finishes all 46 units / 288 new games, with zero failed games and no app
+copies. Both successful sessions total 861.35 seconds (14 min 21 s), peak RAM 1.07 GB and new-workspace
+storage 280.21 MB. One refused launch while Steam's game was open is retained separately. There is
+no pending owner command for this completed comparison; rerunning its launcher only verifies it.
 
-The crossed public encoding passes the conditional PPO criterion in **3/3 seeds**:
-68.68–69.32% exact expected victory against a 70% optimum, versus 48.07–54.26%
-with the original encoding. All primary learners use exactly 288 updates and the
-same game budget/initial probabilities. A shared-numeric-only control helps the
-teacher but does not pass PPO. Missing-health controls remain unable to solve it.
-All 318 artifact seals and 21 saved numerical models/evaluations verify. This is
-a synthetic learning repair, not evidence of better native play.
+| Method, two numerical seeds | Initial mean floor | Final mean floor | Final wins |
+| --- | ---: | ---: | ---: |
+| Original encoding | 7.1250 | 6.9375 | 0/32 |
+| Public numeric-by-candidate features | 7.1250 | 7.1250 | 0/32 |
 
-The original graph remains a component; 19 public numeric measurements are crossed
-with each legal candidate's public fields. No hand-written health reward or action
-restriction is added. Hashed mixing still has collision risk. A representative
-saved-TRAIN probe covers 278 states / 1,175 candidates / 13 families, with zero
-observed aliases. The native bridge completes **8/8 games, 12 updates**, no failures,
-no shared-input changes and no app copies, in **65.04 seconds / 694.26 MB** peak RAM.
-Historical sources/results stay unchanged. [Details and limits](native-action-context.md).
-Release checks pass: 1,606 tests, lint/types and C# protocol/build contracts.
-The full test suite takes 298.59 seconds; allow for the five-minute owner boundary
-when planning future complete repository checks.
+The crossed method is ahead by only 0.1875 floor in each replicate and has no aggregate improvement
+over its own initializer. Both methods improve slightly in replicate 0 and regress in replicate 1.
+These are exploratory development results, not a significance claim or a useful base player. Each
+player has only 128 training games; the result does not prove more data cannot help. Preserve the
+successful synthetic control as synthetic evidence, without claiming it fixed actual-game learning.
 
-**One next owner command:** `bash scripts/train-native-a8-context-v1.sh`.
-Read-only preflight passes; the 640-game A8 comparison has **not** been launched.
-It pairs original/crossed players across two numerical seeds, four 32-game rounds
-and each player's own initial/final development panel. Expect 25–40 minutes;
-one-hour / 4 GB RAM / 6 GB generated-file caps. Only final checkpoints are compared;
-all attempted games, failures and actual optimizer work remain counted. It grants
-no base/bulk/adaptive admission and cannot automatically promote a checkpoint.
+A read-only assessment verifies all 46 unit receipts / 5,567 source seals and reconstructs the
+reported comparison. It launches no games and performs no fitting. All fresh fits reach their epoch
+limit, gradients are nonzero and policies change: these records do not support a completely frozen
+optimizer. They also do not establish that larger steps or more epochs improve gameplay.
+[Results and method](native-context-restart.md) / [evidence](evidence/native-context-comparison-v2.json).
 
-Ordered work from the owner's 2026-10-17 request:
+The old 640-game attempt and its 520 sealed games remain unchanged: 496 closed audited games,
+24 interrupted-prefix games excluded from PPO, and 120 original slots without sealed headers.
+The primary completed comparison uses the old seed-0 pair, the 32 verified old seed-1 starting
+panels and the fresh matched seed-1 pair. The extra old seed-1 baseline stays diagnostic. No unsafe
+worker/profile reset, uncertain seed replay, checkpoint promotion or readiness/adaptive pass occurs.
 
-1. **Public situation-by-action representation, complete:** preserve the original input graph,
-   every legal candidate, direct coordinates, critic inputs and core network dimensions.
-   Compare original encoding, extra shared numeric facts and explicit numeric-by-candidate
-   features. Match initial action probabilities, games and training rules; report actual
-   update counts rather than assuming KL stopping produces equal work. Keep oracle
-   teaching separate from PPO and record held-out synthetic contexts without selection.
-2. **Controlled native connection, owner comparison ready:** saved TRAIN projection and
-   short live integration checks pass. Run the frozen comparison above, then assess paired
-   final-minus-initial progress and wins across its two training seeds. A toy/bridge pass
-   does not establish native improvement; 16 development games per seed remain exploratory.
-3. **Optimizer efficiency:** bounded tests of initialization, learning rate and updates
-   per collected game, preserving every attempted setting and earlier negative controls.
-4. **Earlier action credit:** improve action-value/return estimates and test shorter credit
-   horizons only when prediction evidence justifies them. The prior improved baseline did
-   not establish better gameplay; moving the same terminal score earlier with full-trace
-   credit already leaves the update unchanged. No arbitrary HP rewards.
-5. **Better lessons and practice:** qualify actual-engine action-branch comparisons before
-   using fixed-budget search/demonstrations as teachers. Compare noisy candidate outcomes,
-   keep hidden information out of policy inputs, and retain full-run A8 evaluation.
-   Targeted A8 training states and public consequence-prediction auxiliaries are later
-   scoped experiments, not permission to reuse diagnostic/recovered episodes as PPO data.
-6. **Measured scaling:** after repeatable improvement, launch owner-run thousands-game
-   learning curves, then larger budgets if justified. Count fresh games, decisions,
-   updates, failures and CPU separately. Stale games can supply explicitly separate
-   supervised/value tasks; never silently feed them back as current on-policy PPO.
+Ordered remaining work:
 
-Original sources/results remain preserved. Selectable difficulties, larger unchanged GA
-and adaptive thinking remain deferred. Short jobs are agent-run; five-minute-plus tasks
-remain owner-run. The native comparison above is the sole pending owner run.
+1. **Optimizer efficiency, next implementation:** reconstruct the saved TRAIN-only batches and
+   measure probability movement against their assigned advantages, losses and independent-game
+   gradient evidence. Compare predeclared step sizes or update counts with matched initialization,
+   game budget and whole-game ordering. Numerical fitting success is not stronger play. Use new
+   reserved development seeds for the next frozen native experiment; do not tune on these final
+   panels. Record every attempted setting and actual work. Leave long experiments owner-run.
+2. **Action credit:** if updates fit their noisy lessons without improving independent play, test
+   better return/action-value estimates and narrower credit only when prediction evidence supports
+   them. Moving the same score earlier under full-trace credit already leaves the update unchanged.
+3. **Better lessons and practice:** qualify actual-engine action branches before fixed-budget
+   search/demonstrations become teachers. Keep hidden information out of policy inputs, quantify
+   label noise and retain full-run A8 evaluation. Separate supervised studies from ordinary PPO.
+4. **Measured scaling:** use owner-run learning curves and larger independent batches after the
+   next bounded check, with a declared stop/plateau rule. More games are a testable intervention,
+   not an assumed cure. Count games, decisions, updates, failures and CPU separately.
+
+Keep fixed Ironclad/A8, the declared floor/act bootstrap score and primary terminal-victory
+objective. No arbitrary health rewards, permanent action restrictions, automatic adaptive thinking
+or difficulty expansion. GA/direct evolution remains a separate deferred comparison. The cache,
+restart mechanism, short control and native comparison work are complete; broader learning issues
+remain open. Run the full repository check before committing changes; no push/Actions is needed.
+
+### Preserved restart preparation (completed above)
+
+**Implemented: immutable model-ID cache and restartable comparison; owner fresh matched pair next
+(#143 / #35 / #146).** The original one-hour attempt did not complete. Keep the declared floor/act
+bootstrap score, terminal-victory evaluation, all legal choices and existing PPO settings unchanged.
+No health rewards, action masks or adaptive controller are added. Stronger native play is unproven.
+
+The old 640-game plan retains **520 sealed games**: 496 in closed audited panels, 24 in interrupted
+workers (diagnostic only), and 120 original slots without sealed headers. Unsealed attempt count is
+unknown. Its capped report's zero exit code is not experiment completion. Original and crossed
+seed-0 players change mean floor 6.4375→6.5625 and 6.4375→6.7500; the extra old baseline seed-1
+changes 7.8125→7.2500. All have zero wins in their 16-game final development panels. This is weak,
+exploratory evidence, not success of the synthetic repair in the actual game.
+
+The owner chose a **fresh matched seed-1 pair**. Preserve the completed seed-0 pair in the primary
+comparison and the old extra baseline as diagnostic evidence. Reuse both verified seed-1 starting
+panels (32 games), including reconstruction of saved behavior probabilities. Collect 128 fresh TRAIN
+seeds per method, paired across methods and disjoint from legacy TRAIN/uncertain seeds, then 16 final
+reserved development games each: **288 new games**. Never admit the interrupted prefix as PPO data.
+The primary comparison has two numerical replicates, with final-only evaluation and no promotion.
+
+IDs, serialized models, probabilities and draws are unchanged by the cache; new weights get a new
+cache. Saved-decision processing is 5.10–6.76× faster in a small profile, not a whole-game speed claim.
+The new runner commits eight-game collections and complete model/Adam checkpoints separately; the
+training batch remains 32, with historical two-lane ordering restored before deterministic fitting.
+Each launch lasts at most 15 minutes, two workers, 4 GB RAM / 4 GB new-workspace cap. Pauses happen
+between committed units. Abruptly interrupted units remain preserved and require inspection; no seed
+replay, profile clearing or pretending partial work is complete. The two-failure allowance applies to
+an entire logical round/evaluation. Shared frozen game inputs/cache are reused; no app copies.
+
+The short native restart control passes **8/8 games, 12 updates**, across three launches paused after
+units 3 and 6: **63.04 total resource-tracked seconds / 697.30 MB** peak RAM, no failures or shared-input
+changes. Reopening it performs no new games or updates. A read-only import seals every historical
+file and verifies saved models, case/trace seals, worker audits and stopped interrupted processes.
+Targeted checks plus repository lint/types pass; the complete release check is still pending.
+[Protocol, evidence and limits](native-context-restart.md). Historical pinned sources stay unchanged.
+
+**One next owner command:** `bash scripts/continue-native-a8-context-v2.sh`.
+It first runs the required full repository checks (about 5–6 minutes, ten-minute cap), then one bounded
+comparison session if they pass. Reuse the same command after a clean pause; completed collections,
+fits, Adam state and the exact-file release-check receipt are verified and reused. The long comparison
+has **not** been launched. No commit/push or GitHub Actions run before the complete check passes.
+
+Ordered remaining work:
+
+1. **Representation and execution repairs, implemented:** the earlier synthetic context-by-action
+   control passes 3/3 seeds (68.68–69.32% versus 48.07–54.26%, 70% optimum). Its native bridge/projection
+   and this cache/restart control pass. Synthetic learning and plumbing are not native strength.
+2. **Finish and assess the controlled native comparison:** owner runs the new fresh-pair command.
+   Compare paired final-minus-initial floors, terminal wins, failures and actual optimizer work;
+   preserve the original interruption and the extra unpaired baseline. Do not select on final panels.
+3. **Optimizer efficiency:** if the method remains flat, bounded tests of initialization, learning
+   rate and updates per collected game; retain every attempted setting and negative control.
+4. **Earlier action credit:** improve action-value/return estimates when prediction evidence supports
+   them. Moving the same score earlier with full-trace credit already leaves the update unchanged;
+   no arbitrary HP rewards. The previous improved baseline did not establish better gameplay.
+5. **Better lessons and practice:** qualify actual-engine action branches before fixed-budget search
+   or demonstrations become teachers. Keep hidden information out of policy inputs and preserve
+   full-run A8 evaluation. Recovered/stale episodes may serve separate supervised studies, not PPO.
+6. **Measured scaling:** after repeatable improvement, owner-run thousands-game learning curves and
+   larger budgets if justified. Count games, decisions, updates, failures and CPU separately.
+
+Selectable difficulties, larger unchanged GA and adaptive thinking remain deferred. The complete
+repository check followed by a bounded fresh-pair session is the sole pending owner command.
 
 ### Preserved conditional comparison (interaction follow-up now being implemented)
 
