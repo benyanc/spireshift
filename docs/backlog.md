@@ -1,5 +1,70 @@
 # SpireShift backlog
 
+Updated 2026-10-19 after the completed shop continuation and native runtime repairs.
+Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
+
+## Current handoff: repaired native mechanics and bounded round-48 continuation
+
+The shop run finished **1,344 attempts / 1,342 terminal / two failed TRAIN**, zero full wins.
+The 128-pair fresh holdout improved **9.484375→10.3671875** mean floor (+0.8828125,
+95% seed-bootstrap interval [0.2734375, 1.5078125]); no held-out Act 1 clears. This is
+modest auxiliary progress, not strong play or victory readiness. Both current round-48
+states remain intact, **1,536 scheduled training slots/player, Adam 4470 / 4692**.
+
+Implemented: native **Crystal Sphere** grid/tools/payment/curse/rewards and missing Godot
+ABI for **Rolling Boulder**. New v35 builds reproduce; six scoped native effect checks pass.
+Covered grid contents stay hidden; native models own all game effects. Old binaries/results
+are preserved, no app copies, and old coverage is not relabeled as new-host parity.
+
+Read-only TRAIN audit: **830 clean games**, no evaluation histories. Only 51 of 17,823 end
+turns still had a playable card. Terminal fights: 352 elite / 107 boss / 368 ordinary;
+boss losses began at 73.7% average health. **747 Rest versus two Smith**, including 37
+full-health rests with Smith available. Optional card Skip remains available and was used
+377 times. These observations prioritize exploration/deck/combat strength, not hard-coded
+health rewards, forced cards, or a claim that simply adding volume must work.
+
+Next bounded step preserves BOTH latest weights and all Adam moments/counters; first fit
+**round 49**, same 32-game batches / three passes / temperature / credit / objective.
+At most **256 new TRAIN attempts/player** to 1,792 each, development at 1536/1664/1792,
+then a separate 64-seed/player paired holdout versus imported states on the repaired host.
+Maximum **960 attempts**, including 512 TRAIN, 192 development and 256 holdout attempts.
+All old consumed/reserved seeds and the integration control are excluded. No failed or
+recovered episode enters PPO; existing retirement/failure/session caps stay enforced.
+
+The live integration control passes **12/12 attempts**, zero failures, two round-49
+fits; Adam **4470→4476 / 4692→4698**. Originals remain unchanged; clean resumption
+reuses both fits, with zero app copies.
+
+[Repair, loss findings and next run](native-runtime-continuation.md) /
+[evidence](evidence/native-runtime-continuation-v1.json).
+
+**One next owner command; main continuation remains unstarted:**
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-native-a8-runtime-v1.sh
+```
+
+Close STS2. Expect **60–90 minutes**, two-hour invocation cap, clean 15-minute sessions,
+two workers, **4 GB RAM / 4 GB generated outputs**, shared immutable inputs, zero app copies.
+Clean reruns retain committed games/fits/full Adam; uncertain or failed work is preserved.
+No automatic promotion/readiness/adaptive controller or further extension follows.
+
+Ordered remaining work:
+
+1. **Assess this finite repaired continuation.** Full wins, paired final holdout, both players,
+   failures, optimizer continuity and resources; do not treat development as independent test.
+2. **Improve exploration and action quality if progress remains weak.** Prioritize the strong
+   Rest-over-Smith skew and weak elite/boss play. Test a declared exploration intervention or
+   qualify a native combat teacher; preserve both players and use fresh paired evaluation.
+   Measure the effects instead of imposing arbitrary HP rewards or fixed strategic masks.
+3. **Prove policy/value/calibration/search readiness before adaptive thinking.** Full victories
+   remain missing. GA/direct evolution and other difficulties remain deferred.
+
+#143 / #35 / #146 remain open. Full local checks precede the commit; no push or GitHub Actions.
+
+### Preserved shop-repair preparation (before its now-completed owner run)
+
+
 Updated 2026-10-19 after the stopped extension is audited and shop repair is implemented.
 Codex runs short checks; the owner launches and monitors tasks expected to take five minutes
 or more. Keep prior scientific evidence, source files, seeds and numerical states unchanged.

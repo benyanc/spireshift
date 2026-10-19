@@ -591,3 +591,14 @@ discard, retaining native availability and automatic/combat-only restrictions. N
 worker v8 contains no fixture protocol; a separate diagnostic entry point supplies fixtures.
 Versioned input/helper/model manifests prevent silently resuming old checkpoints. The finite
 potion checks and scope are documented [here](../../docs/actual-engine-outside-combat-potions.md).
+
+## Native run v35 — Crystal Sphere and Rolling Boulder
+
+`sts2-cli-v0.111.0-native-run-v35.patch` is a separate cumulative successor to v34.
+It adds the native Vector2I.One and exact Godot signal/deferred ABI, with guarded
+presentation bodies, and exposes the original Crystal Sphere minigame through
+public event options. Native payments, Debt, grid/reveals/rewards and growing Boulder
+damage remain in the unchanged game assembly. The three-file source delta, two
+reproducible builds and six effect checks are pinned separately. No old binary,
+patch, frozen game or support cache is modified. See
+[the implementation and limits](../../docs/native-runtime-continuation.md).

@@ -1,6 +1,9 @@
 # Shop navigation repair and bounded continuation
 
-Prepared 2026-10-19 for #143 / #35 / #146. Keep fixed native v0.111.0 / 41cef1ea,
+Historical preparation, 2026-10-19. This run is now complete.
+See [the result, runtime repairs and next command](native-runtime-continuation.md).
+
+Prepared for #143 / #35 / #146. Keep fixed native v0.111.0 / 41cef1ea,
 Ironclad/A8, the existing public encoder, numerical model and full-run objective.
 
 ## Why the prior run stopped
