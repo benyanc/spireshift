@@ -4,6 +4,9 @@ Assessed 2026-10-18. **The predeclared auxiliary-progress confirmation passes.**
 Both trained standard players improve on fresh game seeds. Full-game wins remain
 zero, so strong play and base/value/search readiness are still unmet.
 
+Follow-up: the [bounded full-Adam continuation](native-policy-continuation.md) is
+implemented and ready for the owner. The confirmation evidence below stays preserved.
+
 ## Frozen players, fresh games
 
 Each final standard player had 512 training games under 32-game batches / three
