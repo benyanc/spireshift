@@ -1,3 +1,6 @@
+Historical preparation: the owner has now completed this continuation. Its final 960-attempt
+result and the next bounded comparison are recorded in [rest exploration](native-rest-exploration.md).
+
 # Native runtime repairs, combat losses and the next A8 step
 
 Prepared 2026-10-19 for #143 / #35 / #146. Keep native v0.111.0 / 41cef1ea,

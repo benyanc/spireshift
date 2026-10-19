@@ -1,5 +1,71 @@
 # SpireShift backlog
 
+Updated 2026-10-19 after the completed round-56 continuation and selection-menu repair.
+Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
+
+## Current handoff: selection repair and matched rest-exploration comparison
+
+The repaired-runtime run finished **960 attempts / 958 terminal / two failed**, zero full wins.
+One TRAIN and one development game exceeded the old subset-menu limit. The failed TRAIN game
+was excluded. All final comparison games completed. On 128 paired fresh test seeds, mean floor
+rose **10.6796875→11.3671875**, gain **0.6875**, 95% fixed-initializer seed-bootstrap interval
+**[-0.09375, 1.4609375]**. This does **not** confirm stronger play. Three clean TRAIN games
+cleared Act 1; neither final trained player cleared it on the final test. Both current round-56
+states remain intact, **1,792 scheduled TRAIN slots/player; Adam 5268 / 5589**.
+
+Implemented: large card subsets now use an ordered public selection cursor instead of enumerating
+every combination. All subsets/orders, true native cancellation and allowed empty confirmation
+remain available. Only final confirmation/cancellation reaches the game. Small menus stay
+unchanged. Four scoped native checks pass: Pael five-of-21 removal twice (including reverse
+order), Kifuda up-to-three enchantment and empty confirmation. Native host, game/SDK/runtime and
+existing helpers stay unchanged. UI prefixes have a separate exact streaming replay audit.
+No app copies or changes to the Steam account profile.
+
+Prepared **standard versus rest-only 20% uniform exploration** from BOTH same round-56 states,
+including every Adam moment/counter. Every current legal strategic action stays learnable;
+there are no Smith/HP bonuses, forced upgrades or permanent baseline-proximity guards.
+Rest exploration includes any currently offered potion/Proceed controls. All other sampling
+stays unchanged. PPO differentiates and verifies the actual mixture; zero-mixture updates
+match the existing trainer exactly. Final tests turn exploration off for all players.
+
+The bounded comparison has four 32-game batches per method/player, **rounds 57–60**. Same fresh
+TRAIN seeds across methods, independent players, separate matched final tests, final states
+only. At most **896 attempts: 512 TRAIN + 384 tests**, with exact state/chunk resumption,
+worker retirement, streaming memory bounds and 4 GB generated-output/RAM caps. The separate
+control passes **20/20 attempts**, zero failures, four round-57 fits and 33
+optimizer updates. Adam: player 2 standard **5274**, exploration **5277**; player 3 both
+**5598**. Resumption reconstructs exactly; original states are unchanged. The main comparison
+uses the original round-56 states and excludes control seeds/weights. It remains unstarted.
+
+[Design, qualification and next command](native-rest-exploration.md).
+
+**One next owner command (integration control passed; the runner verifies local checks):**
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-a8-rest-exploration-v1.sh
+```
+
+Expected **30–60 minutes**, two-hour launch cap and clean 15-minute sessions; two private-profile
+workers share immutable inputs. Close STS2. A clean rerun resumes completed work; a failed or
+uncertain session stops for inspection. No automatic extension/promotion/adaptive controller.
+
+Ordered remaining work:
+
+1. **Assess the frozen exploration comparison.** Wins first, act clears, paired floors and
+   uncertainty, failures, both initializers and computation. Check TRAIN Rest/Smith/other counts
+   to establish whether exploration actually happened; counts alone do not prove better play.
+2. **Improve elite/boss decisions if this remains weak.** Test a declared combat/deck exploration
+   intervention or qualify a native search teacher. Preserve the current models/Adam states;
+   use fresh paired evaluation. Do not replace learning with arbitrary health or upgrade rewards.
+3. **Pass policy/value/calibration/search readiness before adaptive thinking.** Full-run victories
+   remain missing. GA/direct evolution and other difficulties remain deferred.
+
+#143 / #35 / #146 remain open. Local checks precede the commit; no push or GitHub Actions.
+
+### Preserved runtime-repair preparation (before the now-completed owner run)
+
+# SpireShift backlog
+
 Updated 2026-10-19 after the completed shop continuation and native runtime repairs.
 Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
 
