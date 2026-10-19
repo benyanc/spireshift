@@ -1,10 +1,76 @@
 # SpireShift backlog
 
-Updated 2026-10-18 after bounded full-Adam continuation is implemented and checked.
-GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
-launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
+Updated 2026-10-19 after the stopped extension is audited and shop repair is implemented.
+Codex runs short checks; the owner launches and monitors tasks expected to take five minutes
+or more. Keep prior scientific evidence, source files, seeds and numerical states unchanged.
 
 ## Current handoff and direction
+
+**Shop navigation repair and bounded continuation prepared (#143 / #35 / #146).**
+The old extension stops after 1,440 attempts / three shop loops. Its 221 completed units and
+both latest round-35 full model/Adam states are verified. Preserve the uncommitted eight-game
+collection (seven terminal, one failed) diagnostically, and exclude the whole unfitted 32-game
+round. No fabricated completion, worker reset, uncertain seed replay or old-policy PPO follows.
+All three recorded loop states now choose Leave shop under the repaired public contract,
+without replaying a game. Original states/markers/records remain unchanged.
+
+Automatically inspect inventory once. Purchases, removal, potion use/discard, closing and
+leaving remain real current choices; redundant reopening after closing is navigation rather
+than a learned action. Foul Potion still targets the closed merchant and permits fresh
+inspection after use. Keep every raw delivery; exclude automatic opening from PPO and verify
+exact effective-menu probabilities under a separate behavior contract. Other menus and
+optional card skipping are unchanged. No arbitrary HP rewards or strategic item rankings.
+
+Restore BOTH latest states: 1,120 scheduled training games/player, Adam counters **3216 / 3261**.
+Continue absolute round **36** with fresh seeds, 32-game batches / three passes and the same
+native v0.111.0 / 41cef1ea Ironclad/A8 inputs, model, numerical kernel, temperature and objective.
+At most **416 new TRAIN attempts/player**, preserving the original 1,536-game ceiling. Evaluate
+32 development seeds/player at 1120/1248/1376/1536 under the repaired contract. Wins first then
+floor; stop both after two stale checks once 256 new attempts/player finish, or at the horizon.
+Keep current states, not best-seen. Then open a separate 64-seed/player paired holdout comparing
+round-35 starters with stopped players under the same repair. No evaluation data enters PPO.
+Maximum **1,344 attempts / 199 units**, on 1,024 distinct fresh seeds. Every old reserved seed,
+including unfinished/unused reservations, plus the new control is excluded.
+
+[Repair, audit and continuation](native-shop-continuation.md) /
+[evidence](evidence/native-shop-continuation-v1.json).
+
+The live control passes **12/12 attempts**, zero failures, seven automatic shop openings and
+15 optimizer updates: **3216→3225 / 3261→3267**. It resumes cleanly across two launches without
+repeating a fit. Total 287.45 s / 764.25 MB peak RAM / 56.71 MB output; zero app copies.
+All **1,770 tests** pass. This is an integration check, not a strength claim; its trained
+weights never start the main continuation.
+
+**One next owner command; main continuation remains unstarted:**
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-native-a8-shop-v1.sh
+```
+
+Close STS2. Expect **1–2 hours** at horizon, possibly less at plateau. Three-hour invocation
+cap; clean 15-minute sessions, two workers, **4 GB RAM / 4 GB generated output**. Shared frozen
+game/runtime/SDK/cache and zero app copies. Clean reruns resume games/fits/full Adam state;
+failed/capped sessions stop without automatic retry. Do not resume the old stopped launcher.
+No automatic promotion, readiness pass, adaptive controller or further experiment follows.
+
+Ordered remaining work:
+
+1. **Assess the owner-run repaired continuation.** Genuine wins, paired final holdout,
+   per-player curves, failures/navigation counts, resource use and full Adam/round continuity.
+   Starting and stopping players use the same repair; do not attribute their difference solely
+   to navigation or reuse the old development results as a fresh holdout.
+2. **If progress remains weak, improve action credit or qualify actual-engine teachers.**
+   Do not blindly scale a stalled recipe, add arbitrary health rewards or permanently constrain
+   strategic actions. The old extension's development gains became mixed; zero full wins remain.
+3. **Full policy/value/calibration/search readiness before adaptive thinking.**
+   GA/direct evolution and other difficulties remain later work.
+
+The old fresh confirmation remains preserved: mean floor 7.2890625→8.859375, zero full wins.
+The stopped continuation's pooled development mean is 8.34375→9.15625→8.75 at 512/768/1024;
+its final holdout was never opened. These are auxiliary observations, not strong play or a
+readiness pass. #143/#35/#146 stay open; no push or GitHub Actions.
+
+### Preserved initial continuation preparation
 
 **Bounded standard continuation implemented; owner launch is next (#143 / #35 / #146).**
 Restore BOTH confirmed final 512-game players, original weights and all Adam moments/counters.

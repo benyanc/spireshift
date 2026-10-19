@@ -1,6 +1,12 @@
 # Bounded continuation of both standard A8 players
 
-Prepared 2026-10-18 for #143 / #35 / #146. The fresh-seed confirmation improved
+Prepared 2026-10-18 for #143 / #35 / #146.
+
+**Stopped 2026-10-19 after three shop-navigation loops. Preserve this historical
+recipe; use the [audited shop repair and continuation](native-shop-continuation.md)
+for the next owner run.**
+
+Original preparation follows. The fresh-seed confirmation improved
 mean floor from 7.2890625 to 8.859375 in both trained players, with zero full wins.
 This finite extension tests how far the same learner continues to improve.
 It preserves the confirmed numerical method rather than introducing another treatment.
