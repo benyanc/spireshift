@@ -4,6 +4,11 @@ Updated 2026-10-18. #143 / #35 / #146 remain open. The previous input comparison
 we have not established a strong native player. This implementation tests whether the learner
 needs less noisy batches and more fitting per collected game before changing action credit again.
 
+**Completed result:** all 2,368 games finish without failures. Standard mean floor rises
+6.28125→9.09375, versus 7.40625 for the larger-batch candidate; both final methods have zero
+full wins. [Assessment, measured costs and next work](native-optimizer-learning-result.md).
+The prospective protocol below is preserved; its command now verifies saved results.
+
 ## What the short study actually found
 
 Two saved, clean, on-policy TRAIN cohorts contain 32 games each, from numerical initializers

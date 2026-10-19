@@ -1,10 +1,74 @@
 # SpireShift backlog
 
-Updated 2026-10-18 after the separate completed-TRAIN behavior/credit diagnostic.
+Updated 2026-10-18 after the completed 512-game-per-player native learning curve.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
+
+**Learning curve complete: keep the standard setup for fresh confirmation (#143 / #35 / #146).**
+All 340 units / 2,368 game attempts complete, zero failures and zero app copies. A read-only
+assessment verifies 25,409 source seals and all episode headers, reconstructing model/Adam
+chains, seed ownership, scores, panel outcomes, curves and final comparisons without replay
+or optimization. Assessment: 23.71 seconds / 122.47 MB. Historical sources/results stay intact.
+
+| Method, two training initializers | Initial mean floor | Final mean floor | Final full wins |
+| --- | ---: | ---: | ---: |
+| Standard: 32 games / 3 passes | 6.28125 | **9.09375** | 0/32 |
+| Candidate: 128 games / up to 9 passes | 6.28125 | 7.40625 | 0/32 |
+
+Standard improves in both replicates (+2.5625 and +3.0625 floors). Across its paired development
+seeds, 20 improve, nine tie and three regress. Its averaged curve rises 6.28125→6.9375→7.625→
+7.8125→9.09375 at 0/128/256/384/512 training games. This supports learning auxiliary progress;
+it is not a win-rate/readiness pass or proof of population algorithm superiority. Both methods
+have zero full wins, and there are zero full wins across all 2,368 attempts. The standard
+method's best sampled TRAIN game reaches floor 27 / one completed act; frozen development
+reaches floor 17 / zero completed acts. Do not substitute a sampled training best for reliability.
+
+Keep the standard method as the candidate for the next confirmation. The larger-batch/reuse
+bundle is worse in both replicates despite more fitting work (7,794 versus 2,766 steps). It
+changes batch size and reuse together, so the result does not isolate their separate effects
+or establish that larger batches/additional passes are generally harmful. All fits reach
+normal epoch limits; the optimizer is not permanently frozen. Primary terminal victory remains
+unmet, but the prior 'both methods flat' condition no longer describes this comparison.
+
+The full experiment uses 15 successful sessions: 8,389.71 resource wall seconds (2h19m50s),
+8,524.26 CPU seconds, 1.136 GB peak RAM and 2.402 GB retained output. The final report's
+59.16 seconds covers only its final session. [Results, limits and costs](native-optimizer-learning-result.md)
+/ [evidence](evidence/native-optimizer-learning-curve-result-v1.json).
+
+Ordered remaining work:
+
+1. **Next implementation: independent standard-player confirmation.** Preserve both final
+   512-game players and their own initializers; compare them on newly reserved, paired panels
+   of at least 64 complete-run seeds per initializer. Same sampled evaluation policy, temperature,
+   rules and budgets; failures stay counted. No selecting intermediate checkpoints or tuning
+   on the just-completed development panels. Approximately 256 attempts, owner-run when prepared.
+2. **Measured continuation if confirmed.** Continue both standard players with their complete
+   Adam state and fresh training seeds under a new finite horizon, stop rule and fresh evaluation
+   plan. This now has a positive empirical basis; it is still not a promise of full wins or
+   authorization for an unbounded run. Do not reset or choose just the better initializer.
+3. **Credit/teacher improvement if progress disappears or plateaus.** Use the completed-record
+   diagnostic to target informative combat and rare run-level lessons; qualify actual-engine
+   branches before they become search/demonstration teachers. No arbitrary HP rewards or
+   permanent action restrictions. Recovered/stale episodes never become ordinary PPO data.
+4. **Readiness before adaptive thinking.** Establish full wins, independent policy improvement,
+   value/calibration quality and search benefit under the frozen readiness evaluation. GA/direct
+   evolution and difficulty expansion remain separate deferred comparisons.
+
+The diagnostic tool is complete: 64 historical TRAIN games / 6,995 records in 45.81 seconds /
+291.23 MB; mandatory menus are 24.3%, with only 9/5,297 credit-sign changes from their exclusion
+from normalization alone. Combat supplies 75.2% of choices, rest 19 menus and shops 88. Card
+skipping is available and used. These are observations, not optimal-action labels. See
+[native completed-record diagnostics](native-completed-training-diagnostics.md).
+
+**No new owner command is pending.** The completed training command only verifies saved
+results. Prepare the independent confirmation next; do not replay the finished comparison or
+launch an unplanned extension. Short jobs remain agent-run; tasks expected at least five
+minutes remain owner-run. #143/#35/#146 stay open. Full repository checks precede local commits;
+no push or GitHub Actions is needed.
+
+### Preserved optimizer preparation and parallel diagnostic (completed above)
 
 **Parallel saved-record diagnostic complete; owner reports the learning curve running.**
 The new tool analyzes only the two completed historical TRAIN cohorts: 64 games / 6,995
