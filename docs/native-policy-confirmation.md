@@ -5,6 +5,11 @@ development mean floor from 6.28125 to 9.09375 under the standard 32-game / thre
 method, with no full wins. This comparison tests whether that progress repeats on
 new seeds. It does not train, select another checkpoint or promote a player.
 
+**Completed:** all 256 attempts finish without failures. Original mean floor is
+7.2890625 versus trained 8.859375; the predeclared auxiliary criterion passes,
+with zero full wins. See the [result and next work](native-policy-confirmation-result.md).
+The prospective plan below stays preserved; its completed command only verifies results.
+
 ## Frozen plan
 
 Use both original numerical initializers (2 and 3) and their own final standard

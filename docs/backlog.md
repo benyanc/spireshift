@@ -1,67 +1,66 @@
 # SpireShift backlog
 
-Updated 2026-10-18 after preparing the fresh-seed four-player confirmation.
+Updated 2026-10-18 after the fresh-seed confirmation passes its auxiliary criterion.
 GitHub retains acceptance criteria and historical evidence. Codex runs short checks; the owner
 launches and monitors tasks expected to take five minutes or more. Use saved timings and caps.
 
 ## Current handoff and direction
 
-**Fresh-seed confirmation implemented and ready for the owner (#143 / #35 / #146).**
-The standard players improved in both 512-game learning replicates (development mean floor
-6.28125→9.09375, zero full wins). Preserve that finished experiment and all four original/final
-states. The next comparison has **128 new seeds / 256 attempts**: each of the two final standard
-players versus its own initializer on 64 paired complete-run seeds. Exclude all 16 prior native
-seed manifests and the new four-seed runner control. No retraining or intermediate selection.
+**Fresh-seed progress confirmed; next implement bounded standard continuation (#143 / #35 / #146).**
+All **32 chunks / 256 attempts** finish on 128 new paired seeds: zero failed or missing games.
+The saved-only assessment reconstructs headers/outcomes/comparison and verifies 28,447 source
+seals; all original reports/player states and shared inputs remain unchanged. No games or fitting
+in the assessment (31.56 s / 132.92 MB). No app copies or checkpoint promotion.
 
-The new loader binds the finished source report, exact final/original state hashes and model
-identities, inherited native Ironclad/A8 environment, original sampled policy at temperature 0.8,
-whole-run budgets and paired draws. All public legal actions and existing worker mechanics stay
-unchanged. Streaming audits, isolated failed-worker retirement, sealed eight-game chunks and
-source checks preserve evidence. Clean restarts reuse completed games. Uncertain chunks stop
-without replay. Failures stay in the original denominator; at most two per 64-game player panel,
-never two per chunk. Confirmation endpoints count failed games as zero floor/wins.
+| Frozen player, 64 paired seeds each | Original mean floor | Trained mean floor | Paired gain | Trained full wins |
+| --- | ---: | ---: | ---: | ---: |
+| Initializer 2 | 6.953125 | 8.640625 | +1.687500 | 0/64 |
+| Initializer 3 | 7.625000 | 9.078125 | +1.453125 | 0/64 |
+| Combined | 7.2890625 | **8.859375** | **+1.5703125** | 0/128 |
 
-The agent's separate **8/8 control passes with zero failures**, zero updates and zero app copies:
-69.46 resource wall seconds / 734.66 MB peak RAM / 20.86 MB retained output. All four players and
-shared inputs stay unchanged. This checks the runner, not strength, and cannot satisfy the
-confirmation rule. Full repository checks pass before the local commit. [Plan and execution](native-policy-confirmation.md)
-/ [sanitized evidence](evidence/native-policy-confirmation-v1.json).
+The pooled paired floor-change bootstrap 95% interval is **+0.9296875 to +2.2265625**;
+both individual intervals also lie above zero. Across 128 pairs: 66 higher, 34 tied, 28 lower.
+The rule declared before execution passes: both mean gains positive, pooled lower bound positive,
+no observed win regression and zero failures. This uncertainty conditions on the two fixed
+players, with one trajectory each per seed; it does not cover a population of initializers.
+Floor gains transfer to new games, but **zero full wins and zero completed acts** in this
+confirmation leave strong play/base/value/search/adaptive readiness unmet. Best trained floor: 17.
+The older sampled TRAIN best (floor 27 / one act) stays separate. Do not compare the old 9.09
+mean to the new 8.86 without their matched originals; different seed panels have different means.
 
-**Owner's next command (no fresh comparison attempts started):**
-
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/confirm-native-a8-policy-v1.sh
-```
-
-Expect **10–20 minutes**, with a one-hour invocation cap, clean 15-minute sessions, two workers,
-4 GB memory / 2 GB generated output. Close any running STS2 game. The same command resumes a
-clean pause; after completion it verifies saved results and plays no more games. A failed/capped
-session stops without automatic retry. The agent does not run or monitor this long batch.
+The two successful owner sessions total **721.13 wall seconds (12m1s)** / 752.13 CPU seconds,
+971.26 MB peak RAM / 275.79 MB retained output. The final report's 108.31 s is only its last
+session. [Results and limits](native-policy-confirmation-result.md) /
+[evidence](evidence/native-policy-confirmation-result-v1.json). Source result:
+`sha256:fadc40d9d80e48e776cc118e54c23c0ed451763d7eceabf95b4cbb7df7ecb487`.
 
 Ordered remaining work:
 
-1. **Assess the fresh confirmation.** Require both paired mean floor gains to be positive,
-   pooled seed-bootstrap 95% lower bound positive, no observed win regression for either player,
-   and zero failures. Report genuine wins first. The uncertainty conditions on these two fixed
-   players, not a population of initializers. A zero-win floor gain is only auxiliary progress.
-2. **Bounded standard continuation if confirmed.** Prepare a new finite horizon, fresh TRAIN
-   seeds and fresh evaluation panels, keeping both players and their full saved Adam states.
-   No automatic training or checkpoint promotion follows this comparison.
-3. **Credit/qualified teachers if progress fails to repeat or later plateaus.** Use the completed
-   TRAIN diagnostic. Keep all decision families learnable; no arbitrary HP rewards or permanent
-   baseline-proximity rules. Qualify actual-engine branches before using them as teachers.
-4. **Readiness before adaptive thinking.** Establish full wins and pass policy/value/calibration/
-   search checks. GA/direct evolution and other difficulties remain deferred.
+1. **Next implementation: bounded continuation of both trained standard players.** Reuse the
+   qualified native worker/trainer, same public inputs, objective/bootstrap score, all legal
+   actions, original temperature and **32-game batches / three passes**. Preserve weights and
+   full Adam state and continue the round/minibatch randomness schedule. No reset or selecting
+   just the better initializer. Define the finite horizon and compute/storage caps before launch.
+2. **Fresh training and evaluation plan.** Exclude every prior TRAIN/development/control and
+   these consumed confirmation seeds from new training. Reserve separate matched evaluation
+   panels, declare milestones, final-only comparison and plateau/resource stop rules. Perform
+   only the necessary short continuation parity/isolation checks, then provide one owner command.
+   Do not insert another unrelated mechanics inventory or repeat the completed confirmation.
+3. **Act on the learning curve.** A controlled extension now has empirical support, not a promise
+   of wins. If gains disappear or plateau, prioritize action-credit/qualified actual-engine teacher
+   work using the completed-record diagnostic. No arbitrary HP rewards or permanent action masks.
+4. **Full readiness before adaptive thinking.** Establish genuine full wins and policy/value/
+   calibration/search quality. GA/direct evolution and other difficulties remain deferred.
 
-The original curve completed 340 units / 2,368 attempts, zero failures and zero full wins, with
-standard final mean floor 9.09375 versus larger-batch 7.40625. Best sampled TRAIN game: floor 27 /
-one act; frozen development best: floor 17 / zero acts. Total cost: 8,389.71 resource wall seconds
-(2h19m50s), 1.136 GB peak RAM / 2.402 GB retained. Do not replay it or conflate its sampled best
-with reliable play. [Completed assessment](native-optimizer-learning-result.md).
+**No new owner task is pending yet.** The completed confirmation command now only verifies
+saved results. No continuation recipe, new training or long experiment is launched in this
+assessment. The next implementation should prepare the finite continuation rather than ask
+for another run of this finished comparison. Long execution remains owner-run.
 
-The read-only diagnostic remains complete: 64 historical TRAIN games / 6,995 decisions,
-mandatory menus 24.3%, only 9/5,297 normalization-only credit-sign changes. It does not train
-or label optimal actions. No push or GitHub Actions is needed; #143/#35/#146 remain open.
+The original 512-game learning curve and read-only TRAIN diagnostic remain preserved; see
+[native optimizer result](native-optimizer-learning-result.md) and
+[completed-record diagnostic](native-completed-training-diagnostics.md). Full repository checks
+precede local commits. No push or GitHub Actions is needed; #143/#35/#146 remain open.
 
 ### Preserved optimizer preparation and parallel diagnostic (completed above)
 
