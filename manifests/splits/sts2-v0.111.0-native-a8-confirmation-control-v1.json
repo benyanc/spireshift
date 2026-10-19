@@ -1,0 +1,32 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:3c0d9dd51966c0f0db828772f74516e1c5cfa8c049d26971acb016202738b84b",
+  "purpose": "four_frozen_players_control_only",
+  "schema_version": "native-complete-run-seed-plan-v1",
+  "seeds": [
+    {
+      "id": 910001,
+      "numerical_seed": 2,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CFMC000001"
+    },
+    {
+      "id": 910002,
+      "numerical_seed": 2,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CFMC000002"
+    },
+    {
+      "id": 910003,
+      "numerical_seed": 3,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CFMC000003"
+    },
+    {
+      "id": 910004,
+      "numerical_seed": 3,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CFMC000004"
+    }
+  ]
+}

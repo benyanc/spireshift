@@ -5,6 +5,9 @@ Assessed 2026-10-18. The finite comparison is complete: **340/340 sealed units,
 frozen Ironclad/A8 v0.111.0 environment, whole-run bootstrap score and public action loop.
 No checkpoint is promoted and no readiness or adaptive-controller pass is granted.
 
+Follow-up: the [fresh-seed frozen-player comparison](native-policy-confirmation.md) is now
+implemented and ready for the owner. The assessment below preserves the completed study.
+
 ## Observed progress
 
 Each player receives 512 training games. Each numerical initializer has 16 development
