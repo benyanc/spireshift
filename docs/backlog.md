@@ -1,3 +1,70 @@
+## Current handoff — saved errors show rare outcomes, dictionary omissions and coupled shrinkage
+
+**Saved prediction-error diagnosis is complete.** All 128 ordinary TRAIN games and
+13,793 choice-bearing public inputs reconstruct exactly; published held-game errors
+match, with no refits, game attempts, actor/Adam changes or promotion. The current
+ridge remains the best tested baseline. See [diagnosis](native-value-error-diagnosis.md)
+and [portable evidence](evidence/native-value-error-diagnosis-v1.json).
+
+Material findings (#143 / #35 / #146):
+
+- **One Act 1 clear contributes 54.75% of current-ridge squared error.** Its own fitting
+  fold has no act clears. Most error is before the eventual advancement; after entering
+  Act 2 its progress-aware prediction is close to the observed auxiliary return. This
+  does not prove the rare outcome was predictable from early public information.
+- **The rich models also lose on the other 127 games:** rich linear +30.05% MSE;
+  rich neural +65.21%. Removing the rare game is a sensitivity analysis, never a new
+  official denominator or a reason to reduce successful outcomes' weight.
+- **Unfamiliar content is only part of the picture.** About 6.34% of public fact
+  occurrences are new to the fitting games; 74.01% are familiar, varying facts omitted
+  by the bounded dictionary. These are redundant encoder-fact counts, not semantic
+  information percentages. Unseen entity definitions correlate with baseline error,
+  but weakly with the rich model's excess error; causality is not established.
+- **One penalty also suppresses the simple features.** The rich arm's simple-feature
+  coefficient norm is a median 2.63% of the coarse-only arm's. Removing its rich term
+  makes its own forecast worse; the issue is not evidence that all rich information
+  is useless. Correlated columns can redistribute coefficients too: this motivates a
+  controlled test, not a causal conclusion or a validated alternative predictor.
+- **Broader saved TRAIN coverage is still sparse:** five act-clearing trajectories,
+  zero wins in 512 games across different behavior policies. Do not pool them as one
+  unchanged player's on-policy data or count exploration-arm repeats as independent
+  successful seeds. Critic dictionary omissions do not imply missing engine mechanics.
+
+Next work, in order:
+
+1. **Implement one coarse-baseline-preserving rich correction comparison.** Refit the
+   current coarse baseline separately within each inner fitting set; learn a rich
+   residual with its own regularization, including no correction as a candidate. Select
+   only on inner whole games, then refit outer train and test outer held games. Preserve
+   the current predictor, both actors and all Adam state. An outer-fitted baseline must
+   never supply inner-fold offsets. This tests coupled shrinkage without another
+   large architecture change or any new actor restriction.
+2. **If needed, test a compact shared entity/field representation.** Keep identity,
+   ownership and current numeric values; measure coverage and generalization instead
+   of enlarging the owner/full-text dictionary blindly. No exhaustive mechanics sweep
+   or alternate ascension support is a prerequisite for this A8 learning work.
+3. **Plan additional independent outcome coverage only with a declared purpose.**
+   Measure learning curves and act-clear coverage, retain policy ownership or qualify
+   policy conditioning, and consider an explicit curriculum if weak play cannot
+   generate informative outcomes. Leave long collection/training to the owner. Do not
+   silently alter the victory objective, add strategic rewards or relabel historical
+   counterfactual games as fresh PPO experience.
+4. **Fresh confirmation, then useful action credit.** Freeze a supported recipe before
+   untouched whole-game forecasts and bounded equal-compute learning from both saved
+   players/full Adam. If the one controlled correction test has no useful signal,
+   return to the actor/action-learning bottleneck rather than endlessly tuning critics.
+   Adaptive thinking remains behind base readiness; GA and other difficulties deferred.
+
+All diagnostic jobs finished within short caps (10–77 seconds each); zero app copies,
+optimizer updates and game attempts. Existing model reports/code remain immutable.
+All **1,886 repository tests**, formatting/lint, strict types and the C# protocol
+contract pass in **124.02 seconds** (105.77 CPU seconds, 388.92 MB peak RAM). The
+post-check audit verifies **11,842 source files**, including both players and every
+Adam moment/counter, unchanged. The diagnosis is ready for local commit; no push,
+GitHub Actions, new training or owner-run task follows this inspection.
+
+### Preserved completed linear-comparison handoff
+
 ## Current handoff — regularized public linear values with whole-game validation
 
 The **matched-input neural study is complete**, 16 encoded folds / 48 paired fits,
