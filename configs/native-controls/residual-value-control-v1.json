@@ -1,0 +1,47 @@
+{
+  "schema_version": "native-residual-value-config-v1",
+  "parent_comparison": {
+    "path": "artifacts/native-linear-value/sts2-v0.111.0-a8-comparison-v1/report.json",
+    "id": "sha256:8c52d32d034bf591c7ceaff0665aecdada306ac37891c033a66e0b4a584671c1"
+  },
+  "parent_recipe": "configs/native-controls/linear-value-comparison-v1.json",
+  "coarse_regularization": 0.001,
+  "no_correction_candidate": true,
+  "correction_intercept": 0.0,
+  "regularization": [
+    1e-06,
+    1e-05,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "inner_folds": 3,
+  "inner_salt": "native-linear-value-whole-game-v1",
+  "implementation_sha256": {
+    "native_residual_value.py": "c2dee127a8694a3920e66fe950ae00e586100bac6a5530232a6799404e8c153d",
+    "native_residual_value_curves.py": "92e9b948a1308eb1ad318d9747f2f84e53ba2b224a7e5d7ff99afcedf9e9d2df",
+    "native_residual_value_study.py": "b5f12a6056846ffe6c094e21978597a78003f51c6d6ecfc9412cea8a15144eb7"
+  },
+  "entry_sha256": {
+    "compare-native-residual-value-v1.sh": "65da882eee68d198c321f6d21e296042de32a47de02d9c3ea18c22a4da186cc4",
+    "native-residual-value-v1.py": "23e77b404127979f435ef6260f51298715a2cb916ed01a8576840e65babc83c4"
+  },
+  "stage": "short_control",
+  "workspace": "artifacts/native-residual-value/sts2-v0.111.0-a8-control-v1",
+  "cohorts": [
+    "seed-2-standard-round-057-fit"
+  ],
+  "outer_folds": [
+    0
+  ],
+  "resource_limits": {
+    "wall_seconds": 240,
+    "cpu_seconds": 240,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 500000000
+  }
+}

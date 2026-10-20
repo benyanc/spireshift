@@ -1,3 +1,62 @@
+## Current handoff — baseline-preserving rich correction completed; retain the current predictor
+
+**The controlled correction test is implemented and complete.** It reuses 128 saved
+ordinary TRAIN games in 16 outer whole-game folds, preserving both players and every
+Adam state. The original 20-feature ridge keeps lambda 0.001; only extra rich slopes
+receive a separately selected penalty. No correction is an explicit candidate.
+Each inner split refits its own coarse offset, without validation-return leakage.
+See [design and result](native-residual-value.md) and
+[portable evidence](evidence/native-residual-value-v1.json).
+
+- **No useful gain:** equal-game withheld MSE is **5.512797865e-5 baseline** versus
+  **5.532921364e-5 correction** (+0.365%). No correction is selected in 10/16 folds;
+  four choose lambda 100, two choose 10. Two cohorts improve slightly, two worsen.
+- **Baseline preservation passes:** all 16 original coarse coefficient arrays and
+  forecasts match bit-for-bit. Saved-only verification reconstructs all selected
+  models, choices, predictions, pure fitting errors and separate penalties.
+- **All 128 games remain in the official result.** The rare act clear and ordinary
+  127-game sensitivity both fail to reveal a useful gain. Do not remove rare successes
+  or reinterpret reused development evidence as untouched confirmation.
+- **Short execution only:** control 24.97 seconds, complete comparison 44.27 seconds,
+  saved verification 27.62 seconds; zero new games, app copies or actor/Adam steps.
+  The main comparison uses 730.07 MB peak RAM and 4.49 MB new output. Source checks
+  protect 11,755 files including the two full model/optimizer checkpoints.
+
+Next work, in order (#35 / #143 / #146):
+
+1. **Keep the current predictor; return to informative action learning.** Do not
+   integrate this correction, repeat unchanged PPO at greater scale or search another
+   critic grid on these same outer targets. The negative result does not prove that
+   rich information is useless or that regularization alone caused the earlier gap.
+2. **Predeclare a revised finite action-comparison pilot.** The completed first native
+   combat teacher has 78.1% ties and zero admitted preferences from fight-entry roots.
+   Use more consequential later-turn positions or coherent turn choices, retaining
+   whole-run outcome labels, uncertainty and source/policy/world ownership. Keep
+   confidence thresholds intact; dependent fixed-world branches are not new ordinary
+   PPO games or public-belief-optimal labels. Use existing diagnosis rather than
+   another general audit with no proposed change. Long collection remains owner-run.
+3. **Test whether useful lessons change the actor and improve fresh games.** Preserve
+   both players and full Adam in separate forks. Declare any auxiliary supervision
+   separately, keep all legal decision families learnable, and compare gameplay on
+   fresh whole-game seeds at equal compute. Forecast MSE alone is not the goal.
+4. **Representation/data follow-ups remain conditional.** A compact shared entity/field
+   encoder or additional independent act-clear coverage may help, but are not a new
+   mandatory critic-tuning sequence before action learning. Qualify policy conditioning
+   before pooling different players' outcomes. No strategic reward redesign is implied.
+   Full wins remain primary, readiness precedes adaptive thinking, GA/other difficulties
+   remain deferred.
+
+**No owner rerun is needed for this completed test.** No new learning, collection,
+promotion, push or GitHub Actions follows automatically.
+
+**Verification passes:** 1,904 repository tests (18 new controls), formatting/lint,
+strict types on 381 files and the C# protocol contract in **113.76 seconds**, with
+399.16 MB peak RAM and no cap hit. The post-check audit verifies all protected source
+bytes and both full model/Adam checkpoints unchanged. Their optimizer counters remain
+5,658 and 6,045, with every first and second moment preserved.
+
+### Preserved completed prediction-error diagnosis
+
 ## Current handoff — saved errors show rare outcomes, dictionary omissions and coupled shrinkage
 
 **Saved prediction-error diagnosis is complete.** All 128 ordinary TRAIN games and
