@@ -5,6 +5,34 @@ improvement in fresh play. This teacher adds more direct lessons: replay a known
 position, try every legal choice, and measure what happens by the end of the game.
 There are no hand-written health, damage or upgrade rewards and no model updates here.
 
+## Completed result and next work
+
+The owner finished **384/384 genuine terminal branches**, zero failed/skipped branches,
+zero full wins and **zero admitted preferences**. The saved-result audit verifies all
+384 branch receipts and rebuilds every action table from the sealed outcomes. Native
+journal bytes are verified; their delivery semantics are not reaudited in that result
+audit. Source/player/Adam bytes are unchanged.
+
+Of 320 paired alternatives against the reference, **37 improve, 33 worsen and 250 tie**.
+The smallest one-sided improvement sign p-value is **0.1875**. Six positions have some
+variation in mean returns; two are entirely flat. All eight selected roots occur at
+fight entry, so a single early card often has a small signal through the weak fixed
+continuation. The original confidence rule remains unchanged.
+
+These are **eight original hidden worlds**, not 384 independent new starting seeds.
+Thirty-three branches complete an act and the best reaches floor 23, but these dependent
+teacher results are not policy evaluation. No model has been trained from them.
+Total resource-session time is **1,160.37 wall seconds / 940.52 CPU seconds**, peak RAM
+**411.37 MB**, final cumulative output **639.71 MB**. No game app copies occur.
+
+The next work is [richer public-state value prediction](native-public-value.md), then
+a declared action-credit comparison. A future teacher should predeclare more diverse
+later-turn roots, coherent turn plans or a stronger continuation. Soft value fitting
+need not discard every uncertain mean, but must retain uncertainty and independent
+evaluation; it cannot relabel these data as reliable optimal-action labels or fresh PPO.
+See [portable result](evidence/native-combat-teacher-result-v1.json). The prior preparation
+text below remains historical; there is no outstanding owner collection task for v1.
+
 ## Frozen pilot
 
 Eight public positions come from eight distinct natural TRAIN seeds in the final
@@ -95,7 +123,8 @@ for inspection rather than being replayed automatically. Failed workers are reti
 shutdown proof, and the rest of that root's branches are skipped. Independent planned
 roots can continue. Prefix drift or evidence corruption stops collection for inspection.
 
-The owner runs the main collection with:
+The original main command below now displays/verifies the completed result. There is no
+outstanding collection task; use the current [value-study handoff](native-public-value.md).
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-combat-teacher-v1.sh
@@ -106,8 +135,8 @@ Allow roughly **20–30 minutes**, based on the native control. It uses one nati
 sessions after two hours; an already started session retains its own 15-minute cap.
 Completed branches resume on a clean rerun. No training, adaptive controller or follow-on
 experiment is triggered after the teacher.
-See [teacher evidence](evidence/native-combat-teacher-v1.json) for measured control and
-local verification results; the main pilot is left for the owner.
+See [teacher preparation evidence](evidence/native-combat-teacher-v1.json) for the historical
+control and [completed result](evidence/native-combat-teacher-result-v1.json) for the main pilot.
 
 Full repository verification passes **1,830 tests**, strict types on 357 source files,
 formatting/lint and C# build/protocol checks. The resource-tracked check takes 107.32

@@ -1,7 +1,91 @@
 # SpireShift backlog
 
-Updated 2026-10-19 after the full feedback audit and native combat teacher implementation.
+Updated 2026-10-19 after the completed teacher and public-state/value discussion.
 Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
+
+## Current priority: richer public-state value prediction, then better action credit
+
+The combat teacher is complete: **384/384 terminal branches, zero failures, zero wins,
+zero reliable action preferences**. Eight original TRAIN worlds cover 48 offered actions,
+with eight continuation-policy streams each. Of 320 reference-versus-alternative pairs,
+**250 tie (78.125%)**; the smallest one-sided improvement sign p-value is 0.1875.
+Every selected position is at fight entry, which often makes one card's effect small
+relative to the rest of a weak player's run. The confidence rule stays unchanged.
+These are eight original hidden worlds, not 384 independent starting games. No player
+was trained or promoted. Total owner-run time: **19.34 minutes**, peak RAM **411.37 MB**,
+final private output **639.71 MB**. See [completed result](evidence/native-combat-teacher-result-v1.json).
+
+Delayed rewards themselves are supported: the existing crossed-input synthetic PPO control
+learns a health-dependent choice followed by five forced steps, using only terminal outcomes,
+in all three seeds. The native learner already uses undiscounted full-game return. Repeating
+that control or adding more unchanged games is not the next priority.
+
+The actual credit baseline uses **20 coarse linear measurements**. It cannot distinguish
+different cards/relics at equal counts or many strategically different combat positions.
+That can make credit noisy; it does not invalidate the policy-gradient estimator or prove
+the only cause of poor play. The policy's richer 512-coordinate hashed input is also a
+compression, not a guarantee of complete understanding.
+
+Ordered work (#143 / #35 / #146):
+
+1. **Implement and qualify richer public-state value inputs.** Reuse the qualified public
+   graph; bind identities, current card costs/upgrades/modifiers, named status amounts,
+   enemy intents, cross-character resources, relic/potion counters, public map/progress,
+   complete menus, prices/requirements and recorded public history. Resolve temporary IDs
+   to public content. Preserve meaningful order, pool declared unordered piles, retain
+   optional Skip/leave choices. Test finite perturbations, relationships and invariances.
+   No hidden RNG, true draw order, future rewards or handwritten card-rule simulator.
+2. **Compare value forecasts on held-out whole TRAIN games.** A separately fitted small
+   nonlinear critic uses the richer inputs; compare current 20-feature ridge, constant,
+   current progress and a 20-feature nonlinear control. Freeze vocabulary/scaling on
+   fitting games only; report missing/rare facts, per-game errors and both player cohorts.
+   Use separate files, fixed epochs and resumable folds. Preserve all players and Adam
+   states. Better prediction is a prerequisite for this candidate, not proof of better play.
+3. **Integrate only a supported candidate into a bounded learning comparison.** Compare
+   current Monte Carlo credit against declared multi-step TD/GAE credit using the improved
+   value model. Check terminal/truncation handling and delay invariance; keep independent
+   whole-game credit folds, both saved players/full Adam states, fresh on-policy training
+   seeds and untouched evaluation seeds. Wins first, auxiliary floor/acts second; report
+   failures and compute. No automatic promotion or arbitrary health/Smith rewards.
+4. **Improve teacher information and strategy diversity.** Predeclare later-turn/diverse
+   roots, coherent whole-turn plans or stronger continuation. Soft value supervision may
+   use uncertain measured targets without pretending they are reliable action labels.
+   Historical/counterfactual branches remain separate from ordinary PPO. Qualify hidden-world
+   sampling before public-belief search claims. Do not loosen the completed pilot's gate.
+5. **Representation and readiness follow-ups.** Test fitting-state coverage versus useful
+   learned use, identity/cost interactions and longer observed history. A common structured
+   schema can serve actor and critic, with separate weights initially. Do not require every
+   possible interaction as a new gate. GA/direct evolution, other difficulties and large
+   sequence models remain deferred; adaptive thinking still requires a strong base player
+   and measured equal-compute search benefit.
+
+Implemented now: a reusable owner-bound public-state feature encoder, a separate 32-hidden-unit
+nonlinear residual critic, and a bounded saved-data comparison. No feature hashing in the new
+dictionary; its finite 1,024-fact capacity can still omit rare/unseen facts and reports that
+coverage explicitly. Existing actors, actual credit code, native runtime and completed
+experiment sources remain unchanged. See [public-state value study](native-public-value.md).
+
+The final short control completes in **30.83 seconds**, **203.62 MB** peak RAM and
+**3.44 MB** output, with zero games/player updates/app copies. It exposes all five
+varying public sources after repairing the initial dictionary crowding. Its held-game
+MSE is **worse** than the current ridge (5.6232e-5 versus 2.8931e-5); no improvement or
+adoption is claimed. Both old/new saved controls reopen with fitting disabled and their
+source seals verified. Full local checks pass **1,849 tests**, strict types, formatting/lint
+and C# contracts. GitHub #143 / #35 / #146 are updated with prior history retained.
+
+**One next owner command (saved-data comparison only, approximately 10–20 minutes):**
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-public-value-v2.sh
+```
+
+The main study is preflighted and **not started**. It compares forecasts on 128 saved
+TRAIN games, four cohorts / 16 whole-game folds, with no new game attempts. One numerical
+thread, 15-minute launches, 2 GB memory / 500 MB generated output. Rerun the same command
+after a clean pause; completed folds are reused. No player training, promotion or automatic
+next stage. The prediction target remains auxiliary return, not victory probability.
+
+### Preserved teacher preparation (completed above)
 
 ## Current handoff: collect native combat comparisons, then test numerical lessons
 

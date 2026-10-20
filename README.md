@@ -1,6 +1,14 @@
 # SpireShift
 
-Current handoff (2026-10-15): the native A8 v3 pilot finished, with no wins and inconclusive
+Current handoff (2026-10-19): the native combat teacher completed 384 branches but yielded
+no reliable action preferences. The next step is a [richer public-state value predictor](docs/native-public-value.md),
+compared against the current 20-feature predictor on held-out whole saved TRAIN games.
+Short integration checks pass; better forecasts/play are **not** established. Both players
+and their full optimizer states are preserved. The larger saved-data comparison is ready
+for the owner, with no new games or app copies. See the [ordered backlog](docs/backlog.md)
+for the one current command. Full local verification: 1,849 tests plus lint/types/C# contracts.
+
+Preserved mechanics handoff (2026-10-15): the native A8 v3 pilot finished, with no wins and inconclusive
 independent progress. The [systematic native mechanics coverage pass](docs/actual-engine-mechanics-coverage.md)
 inventories every frozen model and tests cards/resources from all pools. The owner completed all
 1,824 checks and found 50 failures in three shared causes. The repairs add valid event-card forms
@@ -16,7 +24,7 @@ The project asks whether an agent can maximize terminal victory while deciding b
 to take and how much computation to spend. A strong inexpensive policy handles routine choices;
 search is reserved for decisions where it is expected to improve full-run victory probability.
 
-## Current status
+## Earlier simulator and engine development
 
 The completed [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md) pilot played 5,504 attempts and
 changed the unified neural player. Its independent 128-seed comparison remains inconclusive:

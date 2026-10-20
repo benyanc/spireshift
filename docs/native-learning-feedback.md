@@ -114,7 +114,9 @@ clean reruns reuse those results. A partially written analysis chunk is preserve
 inspection rather than being silently replaced. No native games or production optimizer
 updates occur. There is no automatic training, promotion, adaptive controller or next study.
 
-The next stage is the [native combat comparison teacher](native-combat-teacher.md).
+The subsequent [native combat comparison teacher](native-combat-teacher.md) is now complete
+(384 terminal branches, no admitted preferences). Current next work is the separately
+versioned [public-state value comparison](native-public-value.md). The teacher's original design follows:
 It compares actual legal actions from verified TRAIN prefixes, continuing to genuine
 full-run endings. Its initial experiment retains each original native seed/hidden world;
 only continuation-policy sampling varies. That limitation is explicitly marked privileged

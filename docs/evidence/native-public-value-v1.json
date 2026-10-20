@@ -1,0 +1,455 @@
+{
+  "schema_version": "native-public-state-value-evidence-v1",
+  "controls": [
+    {
+      "control_version": 1,
+      "report_id": "sha256:95cd3f3c6ab7ed2918c430c8a73d6f41748e2da5e82dfe95a9d79615dc35c1b6",
+      "config_id": "sha256:f53e450eebd68a08bd6fcee17ca190bb4c3861cef676365e28e0e8c6670db29b",
+      "recipe_path": "configs/native-controls/public-state-value-control-v1.json",
+      "summary": {
+        "adaptive_controller_allowed": false,
+        "automatic_training_follows": false,
+        "by_cohort": {
+          "seed-2-standard-round-057-fit": {
+            "coarse_mlp": 3.331577079926996e-05,
+            "current_progress": 0.00013227790840675415,
+            "current_ridge": 2.8930948254198507e-05,
+            "other_game_constant": 3.311752249483657e-05,
+            "structured_mlp": 3.148671052248673e-05
+          }
+        },
+        "checkpoint_promoted": false,
+        "equal_game_mse": {
+          "coarse_mlp": 3.331577079926996e-05,
+          "current_progress": 0.00013227790840675415,
+          "current_ridge": 2.8930948254198507e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "structured_mlp": 3.148671052248673e-05
+        },
+        "held_game_predictions": 8,
+        "prediction_target": "declared_bootstrap_return_not_victory_probability",
+        "stronger_native_play_established": false,
+        "structured_beats_current_ridge": false
+      },
+      "coverage": [
+        {
+          "fold": 0,
+          "vocabulary_size": 1024,
+          "source_counts": {
+            "persistent": 0,
+            "inventory": 0,
+            "interaction": 1024,
+            "entities": 0,
+            "menu": 0,
+            "other": 0
+          },
+          "facts": {
+            "fit": {
+              "present_facts": 1234407,
+              "represented_facts": 34187,
+              "unrepresented_facts": 1200220
+            },
+            "held": {
+              "present_facts": 1204661,
+              "represented_facts": 38661,
+              "unrepresented_facts": 1166000
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "vocabulary_size": 1024,
+          "source_counts": {
+            "persistent": 0,
+            "inventory": 0,
+            "interaction": 1024,
+            "entities": 0,
+            "menu": 0,
+            "other": 0
+          },
+          "facts": {
+            "fit": {
+              "present_facts": 1204661,
+              "represented_facts": 39210,
+              "unrepresented_facts": 1165451
+            },
+            "held": {
+              "present_facts": 1234407,
+              "represented_facts": 33722,
+              "unrepresented_facts": 1200685
+            }
+          }
+        }
+      ],
+      "resource_report": {
+        "path": "artifacts/resources/native-public-value-control-v1-1.json",
+        "id": "sha256:aba9fb1e6fc83c2077f87af002df12498be2d091b526d88b13d9160d5b4d38fc"
+      },
+      "usage": {
+        "average_cpu_utilization": 0.059260886301126116,
+        "cpu_hours": 0.006444891308888889,
+        "cpu_seconds": 23.201608712,
+        "energy_kwh": null,
+        "final_storage_bytes": 3418577,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 172326912,
+        "peak_storage_bytes": 3418577,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 27.965456957928836
+      }
+    },
+    {
+      "control_version": 2,
+      "report_id": "sha256:e9d1a959341804741fd051add89ada24e151296e7c6fc5298ad075bd85d261c1",
+      "config_id": "sha256:170ac4ee5ec26ad1e2e58db48a5d87d42ef9729c6d2dfbcdddbbd1285ad26f10",
+      "recipe_path": "configs/native-controls/public-state-value-control-v2.json",
+      "summary": {
+        "adaptive_controller_allowed": false,
+        "automatic_training_follows": false,
+        "by_cohort": {
+          "seed-2-standard-round-057-fit": {
+            "coarse_mlp": 3.331577079926996e-05,
+            "current_progress": 0.00013227790840675415,
+            "current_ridge": 2.8930948254198507e-05,
+            "other_game_constant": 3.311752249483657e-05,
+            "structured_mlp": 5.6232233405966375e-05
+          }
+        },
+        "checkpoint_promoted": false,
+        "equal_game_mse": {
+          "coarse_mlp": 3.331577079926996e-05,
+          "current_progress": 0.00013227790840675415,
+          "current_ridge": 2.8930948254198507e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "structured_mlp": 5.6232233405966375e-05
+        },
+        "held_game_predictions": 8,
+        "prediction_target": "declared_bootstrap_return_not_victory_probability",
+        "stronger_native_play_established": false,
+        "structured_beats_current_ridge": false
+      },
+      "coverage": [
+        {
+          "fold": 0,
+          "vocabulary_size": 1024,
+          "source_counts": {
+            "persistent": 204,
+            "inventory": 205,
+            "interaction": 205,
+            "entities": 205,
+            "menu": 205,
+            "other": 0
+          },
+          "facts": {
+            "fit": {
+              "entities_present_facts": 314841,
+              "entities_represented_facts": 24568,
+              "interaction_present_facts": 437402,
+              "interaction_represented_facts": 17041,
+              "inventory_present_facts": 224973,
+              "inventory_represented_facts": 49567,
+              "menu_present_facts": 129971,
+              "menu_represented_facts": 19983,
+              "other_present_facts": 456,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 126764,
+              "persistent_represented_facts": 30951,
+              "present_facts": 1234407,
+              "represented_facts": 142110,
+              "unrepresented_facts": 1092297
+            },
+            "held": {
+              "entities_present_facts": 297210,
+              "entities_represented_facts": 23087,
+              "interaction_present_facts": 430746,
+              "interaction_represented_facts": 16450,
+              "inventory_present_facts": 241848,
+              "inventory_represented_facts": 44219,
+              "menu_present_facts": 122773,
+              "menu_represented_facts": 18329,
+              "other_present_facts": 444,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 111640,
+              "persistent_represented_facts": 28224,
+              "present_facts": 1204661,
+              "represented_facts": 130309,
+              "unrepresented_facts": 1074352
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "vocabulary_size": 1024,
+          "source_counts": {
+            "persistent": 204,
+            "inventory": 205,
+            "interaction": 205,
+            "entities": 205,
+            "menu": 205,
+            "other": 0
+          },
+          "facts": {
+            "fit": {
+              "entities_present_facts": 297210,
+              "entities_represented_facts": 20364,
+              "interaction_present_facts": 430746,
+              "interaction_represented_facts": 15837,
+              "inventory_present_facts": 241848,
+              "inventory_represented_facts": 49403,
+              "menu_present_facts": 122773,
+              "menu_represented_facts": 16701,
+              "other_present_facts": 444,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 111640,
+              "persistent_represented_facts": 22943,
+              "present_facts": 1204661,
+              "represented_facts": 125248,
+              "unrepresented_facts": 1079413
+            },
+            "held": {
+              "entities_present_facts": 314841,
+              "entities_represented_facts": 21259,
+              "interaction_present_facts": 437402,
+              "interaction_represented_facts": 16169,
+              "inventory_present_facts": 224973,
+              "inventory_represented_facts": 52635,
+              "menu_present_facts": 129971,
+              "menu_represented_facts": 17862,
+              "other_present_facts": 456,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 126764,
+              "persistent_represented_facts": 24720,
+              "present_facts": 1234407,
+              "represented_facts": 132645,
+              "unrepresented_facts": 1101762
+            }
+          }
+        }
+      ],
+      "resource_report": {
+        "path": "artifacts/resources/native-public-value-control-v2-1.json",
+        "id": "sha256:7bc354b18f96145b539bd40fc73bf53e599730e5ecda20d36355f6f3403cc955"
+      },
+      "usage": {
+        "average_cpu_utilization": 0.05945548092447342,
+        "cpu_hours": 0.007216629212222223,
+        "cpu_seconds": 25.979865164000003,
+        "energy_kwh": null,
+        "final_storage_bytes": 3435657,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 228458496,
+        "peak_storage_bytes": 3435657,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 31.211666707880795
+      }
+    },
+    {
+      "control_version": 3,
+      "report_id": "sha256:79fa4a4f0d6cd662cc47e8672fe38c1c57117722fe1aac42bb67db63f0651a8c",
+      "config_id": "sha256:738969e9da27efc8ac1a6cc7a1104a397c6ceb28be7dc983e47921e7aa0503e8",
+      "recipe_path": "configs/native-controls/public-state-value-control-v3.json",
+      "summary": {
+        "adaptive_controller_allowed": false,
+        "automatic_training_follows": false,
+        "by_cohort": {
+          "seed-2-standard-round-057-fit": {
+            "coarse_mlp": 3.331577079926996e-05,
+            "current_progress": 0.00013227790840675415,
+            "current_ridge": 2.8930948254198507e-05,
+            "other_game_constant": 3.311752249483657e-05,
+            "structured_mlp": 5.6232233405966375e-05
+          }
+        },
+        "checkpoint_promoted": false,
+        "equal_game_mse": {
+          "coarse_mlp": 3.331577079926996e-05,
+          "current_progress": 0.00013227790840675415,
+          "current_ridge": 2.8930948254198507e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "structured_mlp": 5.6232233405966375e-05
+        },
+        "held_game_predictions": 8,
+        "prediction_target": "declared_bootstrap_return_not_victory_probability",
+        "stronger_native_play_established": false,
+        "structured_beats_current_ridge": false
+      },
+      "coverage": [
+        {
+          "fold": 0,
+          "vocabulary_size": 1024,
+          "source_counts": {
+            "persistent": 204,
+            "inventory": 205,
+            "interaction": 205,
+            "entities": 205,
+            "menu": 205,
+            "other": 0
+          },
+          "facts": {
+            "fit": {
+              "entities_present_facts": 314841,
+              "entities_represented_facts": 24568,
+              "interaction_present_facts": 437402,
+              "interaction_represented_facts": 17041,
+              "inventory_present_facts": 224973,
+              "inventory_represented_facts": 49567,
+              "menu_present_facts": 129971,
+              "menu_represented_facts": 19983,
+              "other_present_facts": 456,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 126764,
+              "persistent_represented_facts": 30951,
+              "present_facts": 1234407,
+              "represented_facts": 142110,
+              "unrepresented_facts": 1092297
+            },
+            "held": {
+              "entities_present_facts": 297210,
+              "entities_represented_facts": 23087,
+              "interaction_present_facts": 430746,
+              "interaction_represented_facts": 16450,
+              "inventory_present_facts": 241848,
+              "inventory_represented_facts": 44219,
+              "menu_present_facts": 122773,
+              "menu_represented_facts": 18329,
+              "other_present_facts": 444,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 111640,
+              "persistent_represented_facts": 28224,
+              "present_facts": 1204661,
+              "represented_facts": 130309,
+              "unrepresented_facts": 1074352
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "vocabulary_size": 1024,
+          "source_counts": {
+            "persistent": 204,
+            "inventory": 205,
+            "interaction": 205,
+            "entities": 205,
+            "menu": 205,
+            "other": 0
+          },
+          "facts": {
+            "fit": {
+              "entities_present_facts": 297210,
+              "entities_represented_facts": 20364,
+              "interaction_present_facts": 430746,
+              "interaction_represented_facts": 15837,
+              "inventory_present_facts": 241848,
+              "inventory_represented_facts": 49403,
+              "menu_present_facts": 122773,
+              "menu_represented_facts": 16701,
+              "other_present_facts": 444,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 111640,
+              "persistent_represented_facts": 22943,
+              "present_facts": 1204661,
+              "represented_facts": 125248,
+              "unrepresented_facts": 1079413
+            },
+            "held": {
+              "entities_present_facts": 314841,
+              "entities_represented_facts": 21259,
+              "interaction_present_facts": 437402,
+              "interaction_represented_facts": 16169,
+              "inventory_present_facts": 224973,
+              "inventory_represented_facts": 52635,
+              "menu_present_facts": 129971,
+              "menu_represented_facts": 17862,
+              "other_present_facts": 456,
+              "other_represented_facts": 0,
+              "persistent_present_facts": 126764,
+              "persistent_represented_facts": 24720,
+              "present_facts": 1234407,
+              "represented_facts": 132645,
+              "unrepresented_facts": 1101762
+            }
+          }
+        }
+      ],
+      "resource_report": {
+        "path": "artifacts/resources/native-public-value-control-v2-2.json",
+        "id": "sha256:373aa2b9fa9ab23e21df85bf1349145604da718a95e053f511727ff6cb13927f"
+      },
+      "usage": {
+        "average_cpu_utilization": 0.05949717486359497,
+        "cpu_hours": 0.007133669428055555,
+        "cpu_seconds": 25.681209941,
+        "energy_kwh": null,
+        "final_storage_bytes": 3435657,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 203620352,
+        "peak_storage_bytes": 3435657,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 30.831247749971226
+      }
+    }
+  ],
+  "selected_control": 3,
+  "original_global_dictionary_rejected": true,
+  "balanced_numeric_results_reproduced_after_formatting": true,
+  "native_games": 0,
+  "actor_optimizer_steps": 0,
+  "production_states_unchanged": true,
+  "claim_scope": "finite_encoder_and_offline_value_integration_not_better_play_or_forecasts",
+  "larger_comparison": {
+    "recipe": "configs/native-controls/public-state-value-comparison-v2.json",
+    "saved_train_games": 128,
+    "folds": 16,
+    "new_games": 0,
+    "status": "preflighted_not_started"
+  },
+  "historical_source_snapshots": "artifacts/validation/native-public-value-v1/source-snapshots",
+  "source_snapshot_sha256": {
+    "native-public-value-v2.py": "dc18027345d2d531278f0a8f4d1bbbf7ab4bc19b5e47940e5c3ea6ceaef574a0",
+    "native_public_value_study_v2.py": "51d620bde7f26b5dfa7e776e7935f40cf385d0fa6d1a65dac075fffb45379e1e"
+  },
+  "verification": {
+    "tests_passed": 1849,
+    "new_tests": 19,
+    "format_lint_types_CSharp_contracts_passed": true,
+    "resource_report_id": "sha256:128d35d428ffc336c02cdd9b3d998bf3b7347b5534457e38c4ffa31ecf981e4e",
+    "wall_seconds": 107.06096891593188,
+    "peak_resident_memory_bytes": 399622144,
+    "read_only_result_check": {
+      "main_comparison_unstarted": true,
+      "report_id": "sha256:b38fb4a598cc44a0cda83f487a5df5009f670bb36281bcfbb8a5f9f50a4974ba",
+      "results": [
+        {
+          "actor_optimizer_steps": 0,
+          "control_version": 1,
+          "fold_fit_calls": 0,
+          "native_games": 0,
+          "report_id": "sha256:95cd3f3c6ab7ed2918c430c8a73d6f41748e2da5e82dfe95a9d79615dc35c1b6",
+          "source_seals_rechecked": true
+        },
+        {
+          "actor_optimizer_steps": 0,
+          "control_version": 3,
+          "fold_fit_calls": 0,
+          "native_games": 0,
+          "report_id": "sha256:79fa4a4f0d6cd662cc47e8672fe38c1c57117722fe1aac42bb67db63f0651a8c",
+          "source_seals_rechecked": true
+        }
+      ],
+      "schema_version": "native-public-value-readonly-check-v1"
+    }
+  },
+  "evidence_id": "sha256:b180930651eb81a2a7574402dfdfc009e1fc738a0f6e109ede44a4543fbcdb83"
+}
