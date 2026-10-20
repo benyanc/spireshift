@@ -125,17 +125,22 @@ fitting disabled verifies all their source seals and launches zero numerical fit
 Full local verification passes **1,849 tests** (19 new), formatting/lint, strict types and
 C# build/protocol contracts in 107.06 resource-tracked seconds. No push or GitHub Actions.
 
-The 128-game comparison is preflighted and **not started by Codex**. Based on the eight-game
-control, expect roughly **10–20 minutes**. Run exactly:
+The 128-game comparison is now **complete: 16/16 folds**, with 128 held-game predictions.
+The owner completed 15 folds in a cleanly paused session; Codex finished the remaining short
+fold in 60.53 resource-tracked seconds, reusing all prior results. Current ridge MSE is
+**5.5128e-5**, coarse neural MSE **5.8746e-5**, and rich neural MSE **7.3666e-5**. Rich error
+is **33.6% higher** than ridge and worse in all four player/round cohorts. No player or
+Adam state changed, no game ran and no candidate was adopted.
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-public-value-v2.sh
-```
+This comparison also changed parameter count/initialization scale with input dimension.
+Its negative result does not identify one causal mechanism or establish that rich public
+information is useless. The next separately versioned work matches full network shape,
+starting arrays and normalization, masks extra inputs in one arm, and records fitting
+prediction error separately from weight penalties. See
+[matched-input comparison](native-matched-value.md) and
+[completed result evidence](evidence/native-public-value-result-v2.json).
 
-Run the same command again after a clean pause if needed. Portable measurements and
-source/result identities: [evidence](evidence/native-public-value-v1.json).
-
-After completion, assess held-game errors against the current ridge in **both** player
+For this completed result, assess held-game errors against the current ridge in **both** player
 cohorts and inspect omitted identities/current fields. Better forecasts justify a new
 bounded on-policy credit comparison; they do not authorize silently swapping the baseline
 in an old run. If errors worsen, preserve that result and revise a specific measured
