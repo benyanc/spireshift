@@ -1,3 +1,78 @@
+## Current handoff — complete-turn teacher ready; owner-run pilot next
+
+**The complete-turn comparison teacher is implemented and qualified.** It compares
+complete remaining-turn sequences through an observed native boundary. Both players,
+full Adam states and the coarse predictor remain unchanged. No new fitting or model
+promotion occurs. See [design, evidence and owner command](native-complete-turn-teacher.md)
+and [portable metrics](evidence/native-complete-turn-teacher-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Preserve the eight public TRAIN roots, both continuation players, native A8
+  rules, full-run objective and score. Propose one greedy reference turn and one
+  sampled complete turn for every legal first action; all offered moves remain in
+  scope. Include nested choices and native early endings; reject unknown ownership
+  and truncated/capped turns. Bound plans to 64 decisions / 1 MB each.
+- [x] Seal proposals before their continuation choices and freeze all candidate sets
+  before scored comparisons. Exact trace deduplication retains aliases/reference;
+  selection accepts no final-return/floor/win fields. Native proposal games finish
+  for clean closure, but their outcomes do not rank or filter candidates.
+- [x] Complete **39/39 native control branches** (13 proposals, 12 distinct plans,
+  26 comparisons), including exact duplicate reference traces. All public turn
+  boundaries match; zero failures/skips/wins/app copies or optimizer updates.
+  Two sessions total **142.37 seconds**, 390.59 MB peak RAM / 66.46 MB cumulative
+  output. This control has no native nested selection; unit regressions cover those
+  paths and the existing bridge's qualification remains separate.
+- [x] Reconstruct **6,077 saved public decisions**, proposal sampling, forced choices,
+  boundaries, continuation probabilities, returns, candidate sets and all tables.
+  Saved audit takes **32.52 seconds**; main admission requires this exact control
+  and audit. Fixed-world streams remain ineligible for ordinary PPO/public-belief
+  optimality claims. Native delivery is audited during collection; saved recheck
+  verifies journal bytes, not an independent native-delivery semantic reaudit.
+- [x] Pass **1,979 tests (52 new)**, strict types on 396 files, formatting/lint and C#
+  protocol checks in **118.44 seconds**. Verify **30,487 protected original/control
+  files** and both exact full model/Adam checkpoints unchanged (counters 5,658 / 6,045).
+  Cached control reuse and main preflight pass with native hosts explicitly disabled.
+- [x] Freeze the main recipe and one owner wrapper: eight original worlds, 65 proposals
+  plus at most 520 comparisons (**585 total attempts**), eight matched continuation
+  streams per unique plan. Proposal temperature 1.2, continuation temperature 0.8;
+  independent namespaces avoid consuming continuation randomness during generation.
+
+Next work, in order:
+
+1. **Owner runs the finite pilot — NOT STARTED.** Allow roughly 30–45 minutes from
+   current timing, one process, shared immutable game/runtime/support files, zero
+   app copies, 15-minute sessions, 2 GB memory / 4 GB outputs. Clean resumption reuses
+   sealed attempts; uncertain evidence is preserved and never retried automatically.
+   Verified failed workers block their root while other planned worlds may continue.
+   All source worlds, failures and skipped work remain reported.
+2. **Assess whether coherent turns provide useful lessons.** Reconstruct tables,
+   examine uncertainty, ties, rare outcomes and source diversity. Original worlds
+   stay the independent units; 585 attempts do not mean 585 independent seeds.
+   Retain the original preference rule and full wins as primary. Do not manufacture
+   winning labels, choose a convenient outcome subset or treat a best sample as a
+   stronger player. If still flat, assess stronger continuation before scaling.
+3. **Declare a bounded student/credit experiment only if feedback supports it.**
+   Future student inputs are only the public state at the decision being taught,
+   never later plan observations. Fork both players and complete Adam state, keep
+   all legal families learnable, and test fresh complete games at equal compute.
+   Teacher counterfactuals are separate supervision, not ordinary PPO episodes.
+4. **Keep foundation work focused.** No new critic grid, other difficulties, large
+   GA or adaptive controller is required for this pilot. Source/world-aware input
+   or continuation improvements remain conditional. Readiness precedes adaptive
+   thinking; no automatic training or next experiment follows collection.
+
+Single next command (from any directory, with STS2 closed):
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-complete-turn-teacher-v1.sh
+```
+
+No long collection, new fitting, model promotion, push or GitHub Actions is started
+by Codex. Historical teacher/value results and implementation bytes remain preserved.
+
+### Preserved completed later-turn teacher assessment
+
 ## Current handoff — later-turn teacher complete; improve the feedback before more training
 
 The owner completed **456/456 native branches**, with zero failures/skips/wins or app
