@@ -1,3 +1,69 @@
+## Current handoff — later-turn teacher ready; owner-run 456-branch pilot next
+
+The next action-learning work package is implemented. **Keep the current coarse value
+predictor.** The revised teacher chooses later public combat positions with visible
+incoming attacks, rather than fight-entry choices. Reuse the frozen branch transport,
+continuation players, whole-run target and uncertainty/preference rules; no reward,
+actor, optimizer or action-space restriction changes.
+See [design and single owner command](native-later-combat-teacher.md) and
+[portable evidence](evidence/native-later-combat-teacher-v2.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Freeze eight distinct ordinary TRAIN worlds, public rounds 2–4 / floors 5–17,
+  with 57 offered actions across eight complete menus. Selection ignores final outcomes.
+- [x] Record the unavailable initial symmetric quota without launching games. The
+  second player has no qualifying later boss menu; the separately frozen available
+  curriculum substitutes a normal fight. Final coverage: five normal, two elite,
+  one boss. Do not imply balanced boss coverage or broad boss competence.
+- [x] Run the short native replay/all-action/duplicate-trace control: **24/24 normal
+  endings**, zero failures/skips/wins, identical duplicate traces, zero app copies or
+  optimizer updates. Resource time **99.08 seconds**, 367.33 MB peak RAM / 42.32 MB output.
+- [x] Reconstruct all **3,950 saved public decisions**, forced choices, continuation
+  probabilities/values, returns and action tables. Complete task/seed/model bindings
+  agree; all sources and both players/full Adam remain unchanged. Saved audit: 25.85
+  seconds / 131.38 MB RAM. This is collection correctness, not improved play.
+- [x] Prepare a source-bound main recipe, immutable branch resumption, per-session
+  resource limits, all failures counted and one exact owner command. Plan-only check
+  passes for **456 branches** without starting any. No automatic training follows.
+- [x] Full verification: **1,927 tests** (23 new controls), strict types on 387 files,
+  formatting/lint and C# protocol pass in **129.74 seconds**. Post-check source audit
+  verifies 12,711 files; both full Adam counters/moments and player weights unchanged.
+  Completed control reuse and pilot preflight pass with host launches disabled.
+
+Next work, in order:
+
+1. **Owner runs the finite pilot — NOT STARTED.** Eight continuation-policy streams
+   for every offered action at each root. Allow roughly 30–45 minutes, one worker,
+   15-minute sessions, 2 GB RAM / 4 GB outputs. Reuse immutable game/runtime/support
+   files, create no app copies, preserve interrupted evidence and all checkpoints.
+2. **Audit the completed tables and actual feedback quality.** Count higher/lower/tied
+   alternatives, uncertainty, complete world/action coverage and any failures. These
+   are eight original hidden worlds, not 456 independent game seeds or fresh PPO
+   experience. Do not lower confidence gates to manufacture optimal-action labels.
+3. **Declare a bounded learning intervention if the tables are informative.** Soft
+   value/ranking supervision can use uncertain action means and poor-action evidence
+   in an explicitly experimental loss; zero admitted strict preferences is not alone
+   a reason to discard all information. Retain uncertainty and fixed-world scope,
+   fork both saved players/full Adam, keep all strategic families learnable, and
+   compare fresh complete games at equal compute. No such training starts here.
+4. **If still flat, change the source of action feedback.** Assess coherent turn
+   choices or stronger continuation before enlarging the same teacher batch. Avoid
+   another general audit/critic grid without a material intervention. Rich shared
+   entity encoding, independent outcome coverage or curriculum remain conditional;
+   wins stay primary, readiness precedes adaptive thinking, GA/difficulties deferred.
+
+Single next command (from any directory):
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-later-combat-teacher-v2.sh
+```
+
+Close STS2 before launching. Completed branches resume at clean boundaries. No long
+collection, promotion, push or GitHub Actions has been started by Codex.
+
+### Preserved completed rich-correction handoff
+
 ## Current handoff — baseline-preserving rich correction completed; retain the current predictor
 
 **The controlled correction test is implemented and complete.** It reuses 128 saved
