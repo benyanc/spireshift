@@ -1,66 +1,62 @@
-## Current handoff — later-turn teacher ready; owner-run 456-branch pilot next
+## Current handoff — later-turn teacher complete; improve the feedback before more training
 
-The next action-learning work package is implemented. **Keep the current coarse value
-predictor.** The revised teacher chooses later public combat positions with visible
-incoming attacks, rather than fight-entry choices. Reuse the frozen branch transport,
-continuation players, whole-run target and uncertainty/preference rules; no reward,
-actor, optimizer or action-space restriction changes.
-See [design and single owner command](native-later-combat-teacher.md) and
-[portable evidence](evidence/native-later-combat-teacher-v2.json).
+The owner completed **456/456 native branches**, with zero failures/skips/wins or app
+copies. The saved assessment reconstructs terminal returns and action tables, verifies
+all receipts / 28,943 source files, and preserves both players and complete Adam states.
+No fitting, model promotion or adaptive-controller work occurred.
+See [result and evidence](native-later-combat-teacher-result.md) and
+[original collection design](native-later-combat-teacher.md).
 
 Completed (#35 / #143 / #146):
 
-- [x] Freeze eight distinct ordinary TRAIN worlds, public rounds 2–4 / floors 5–17,
-  with 57 offered actions across eight complete menus. Selection ignores final outcomes.
-- [x] Record the unavailable initial symmetric quota without launching games. The
-  second player has no qualifying later boss menu; the separately frozen available
-  curriculum substitutes a normal fight. Final coverage: five normal, two elite,
-  one boss. Do not imply balanced boss coverage or broad boss competence.
-- [x] Run the short native replay/all-action/duplicate-trace control: **24/24 normal
-  endings**, zero failures/skips/wins, identical duplicate traces, zero app copies or
-  optimizer updates. Resource time **99.08 seconds**, 367.33 MB peak RAM / 42.32 MB output.
-- [x] Reconstruct all **3,950 saved public decisions**, forced choices, continuation
-  probabilities/values, returns and action tables. Complete task/seed/model bindings
-  agree; all sources and both players/full Adam remain unchanged. Saved audit: 25.85
-  seconds / 131.38 MB RAM. This is collection correctness, not improved play.
-- [x] Prepare a source-bound main recipe, immutable branch resumption, per-session
-  resource limits, all failures counted and one exact owner command. Plan-only check
-  passes for **456 branches** without starting any. No automatic training follows.
-- [x] Full verification: **1,927 tests** (23 new controls), strict types on 387 files,
-  formatting/lint and C# protocol pass in **129.74 seconds**. Post-check source audit
-  verifies 12,711 files; both full Adam counters/moments and player weights unchanged.
-  Completed control reuse and pilot preflight pass with host launches disabled.
+- [x] Collect all 57 actions across eight later combat menus with eight continuation
+  streams each. Eight original hidden worlds are the independent source units;
+  the 456 fixed-world branches are not ordinary PPO games or 456 independent seeds.
+- [x] Rebuild the full paired comparison: **23 higher, 79 lower and 290 tied returns**
+  (74.0% ties), six varied menus / two flat. Zero alternatives pass the unchanged
+  improvement rule; the smallest improvement sign p-value is 0.3633. Three dependent
+  branches clear an act and reach floor 21; no full-run wins or policy gain established.
+- [x] Inspect negative examples and rare gains. Ending the turn is clearly worse in
+  two menus, but its current policy probability is already only 0.0066% / 0.1011%.
+  Some apparent better choices depend heavily on one continuation or rare act clear.
+  Post-hoc reverse tests and leave-one-out checks do not admit new trusted labels.
+- [x] Verify exact bindings, sealed headers/traces, native ending fields, whole-run
+  scores, uncertainty and tables in a **17.49-second saved-only check**. Both full
+  player/Adam byte seals and counters (5,658 / 6,045) agree. Eight current public-root
+  policy distributions reproduce the reference choices. Full continuation probabilities
+  across 68,524 declared decisions are not rerun by this assessment; the prior 24-branch
+  control reconstructed all of its 3,950 choices. Do not imply a full behavior reaudit.
+- [x] Reconcile both collection resource sessions: **23.01 minutes total wall time**,
+  1,127.77 CPU seconds, 391.79 MB peak RAM, 674.54 MB cumulative output. The main report's
+  wall-time field covers the final collector session only. Do not add cumulative storage.
 
 Next work, in order:
 
-1. **Owner runs the finite pilot — NOT STARTED.** Eight continuation-policy streams
-   for every offered action at each root. Allow roughly 30–45 minutes, one worker,
-   15-minute sessions, 2 GB RAM / 4 GB outputs. Reuse immutable game/runtime/support
-   files, create no app copies, preserve interrupted evidence and all checkpoints.
-2. **Audit the completed tables and actual feedback quality.** Count higher/lower/tied
-   alternatives, uncertainty, complete world/action coverage and any failures. These
-   are eight original hidden worlds, not 456 independent game seeds or fresh PPO
-   experience. Do not lower confidence gates to manufacture optimal-action labels.
-3. **Declare a bounded learning intervention if the tables are informative.** Soft
-   value/ranking supervision can use uncertain action means and poor-action evidence
-   in an explicitly experimental loss; zero admitted strict preferences is not alone
-   a reason to discard all information. Retain uncertainty and fixed-world scope,
-   fork both saved players/full Adam, keep all strategic families learnable, and
-   compare fresh complete games at equal compute. No such training starts here.
-4. **If still flat, change the source of action feedback.** Assess coherent turn
-   choices or stronger continuation before enlarging the same teacher batch. Avoid
-   another general audit/critic grid without a material intervention. Rich shared
-   entity encoding, independent outcome coverage or curriculum remain conditional;
-   wins stay primary, readiness precedes adaptive thinking, GA/difficulties deferred.
+1. **Implement a small coherent-turn comparison teacher.** Compare bounded legal move
+   sequences through end turn, instead of forcing one card and immediately reverting
+   to the same continuation. Freeze generation, roots and budgets before outcomes.
+   Preserve the existing teacher and all results; this is a hypothesis, not a proven
+   improvement. No larger repeat of the unchanged one-action batch is the next task.
+2. **Qualify the changed feedback and run one finite owner pilot.** Native transitions,
+   public-only student inputs, fixed-world ownership, repeated continuations and the
+   declared full-run outcomes/auxiliary score remain explicit. No handwritten HP or
+   upgrade rewards. If turns remain flat, assess stronger continuation before scaling.
+3. **Test a declared numerical learning intervention only when useful signal exists.**
+   Use uncertain sequence/action targets, whole-source-world fitting/selection and
+   fresh complete games at equal compute. Fork both players and every Adam moment;
+   all legal decision families remain learnable. Do not manufacture confidence labels
+   or treat hindsight branches as on-policy PPO. Wins remain primary.
+4. **Keep the current critic and difficulty.** No new critic grid, other ascensions,
+   large GA or adaptive budget controller is required here. Rich shared representation
+   and independent outcome coverage remain conditional follow-ups. Foundation readiness
+   still precedes adaptive thinking.
 
-Single next command (from any directory):
-
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-later-combat-teacher-v2.sh
-```
-
-Close STS2 before launching. Completed branches resume at clean boundaries. No long
-collection, promotion, push or GitHub Actions has been started by Codex.
+**No owner command is needed for this completed collection.** Long collection/fitting
+remains owner-run. No new games, training, push or GitHub Actions follows automatically.
+Result documentation passes formatting/lint and strict types. The full repository
+suite stops at its 240-second cap; this is not a new full pass. Preserve the capped
+resource receipt rather than automatically launching a longer check. Learner code
+and all player/optimizer files remain unchanged.
 
 ### Preserved completed rich-correction handoff
 

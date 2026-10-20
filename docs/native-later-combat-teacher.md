@@ -1,5 +1,10 @@
 # Later-turn action comparisons
 
+**Completed:** the owner collected all 456 branches. Receipt/outcome/table assessment
+finds 74.0% paired ties and zero admitted preferences. The clearest poor actions
+already have very low policy probability. See [result and next work](native-later-combat-teacher-result.md).
+No collector rerun is needed. The preparation and command below are retained as history.
+
 The rich correction test produced no useful forecast gain, so the current coarse value
 predictor stays in place. This next experiment returns to action learning: compare all
 offered actions at positions where a choice might matter more. It prepares numerical
@@ -97,12 +102,12 @@ with strict types on 387 files, formatting/lint and the C# protocol contract. Th
 check takes **129.74 seconds** (101.49 CPU seconds, 268.27 MB peak RAM). The post-check
 audit verifies **12,711 protected source files** and both complete player/Adam states.
 Reopening the completed control and reading the pilot plan also pass with native host
-launches explicitly disabled. The pilot workspace does not exist yet.
+launches explicitly disabled. At preparation, the pilot workspace did not exist yet.
 
-## Owner handoff
+## Historical owner handoff before collection
 
-**The 456-branch pilot has not started.** Close any running STS2 game, then run this one
-command from any directory:
+At preparation, the 456-branch pilot had not started. The frozen collection command,
+run with STS2 closed and from any directory, was:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-later-combat-teacher-v2.sh
@@ -122,6 +127,9 @@ continue. A prefix mismatch stops collection. No automatic training, model promo
 adaptive controller or new experiment follows completion. Send back the final summary.
 
 ## Next step after the result
+
+The completed result is assessed in [the result note](native-later-combat-teacher-result.md).
+The following was the predeclared decision path:
 
 Reconstruct the saved action tables and assess non-tied outcome differences, uncertainty
 and source diversity. Do not select a convenient subset using evaluation results or call
