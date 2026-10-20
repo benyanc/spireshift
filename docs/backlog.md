@@ -1,5 +1,79 @@
 # SpireShift backlog
 
+Updated 2026-10-19 after the full feedback audit and native combat teacher implementation.
+Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
+
+## Current handoff: collect native combat comparisons, then test numerical lessons
+
+The owner completed the **512-TRAIN-game / 71,293-decision** feedback audit. All 16
+behavior and credit reports reconstruct exactly; 96 finite input probes, 16 order checks
+and all disposable teaching controls pass. The actual credit predictor beats the
+other-fold constant in every batch. Training changes probabilities with assigned credit,
+but the prior fresh-game comparisons still do **not** confirm stronger play. This supports
+testing better action-level lessons rather than repeating an unchanged PPO recipe.
+
+Implemented the separately versioned **native combat comparison teacher**. It replays a
+sealed TRAIN prefix in a fresh isolated native worker, verifies the exact public root,
+forces one offered action, then continues with the unchanged round-60 player to a genuine
+full-run ending. Eight distinct seeds cover four ordinary fights, two elites and two
+bosses across both players. Every action in each selected menu is compared: **48 actions
+× eight continuation-policy streams = 384 planned branches**. All original and final
+weights, Adam moments/counters, runtime, SDK, frozen game and account profile are preserved.
+
+The short native control passes **24/24 terminal branches**, zero failures/skips/wins/app
+copies, both duplicate public traces identical. It takes **75.04 seconds**, **373.26 MB**
+peak RAM and **34.01 MB** private outputs. It verifies exact prefix/root delivery and
+complete menus; two policy samples per action do not qualify training targets. No optimizer
+updates or checkpoint promotion occur. The main pilot is preflighted and remains unstarted.
+
+This first teacher is explicitly **privileged fixed-world evidence**: each root keeps its
+original native seed/hidden world. Only continuation-policy sampling varies; it does not
+resample unknown draw orders. Student inputs remain public. It is not an optimal-action
+oracle, a public-belief search result or ordinary on-policy PPO experience. All failures
+remain visible; a failed root supplies no lessons and its remaining branches are skipped
+after verified worker retirement. Prefix drift or uncertain delivery stops for inspection.
+
+Next, in order:
+
+1. **Owner runs the finite teacher pilot.** Collect full-run wins and declared auxiliary
+   floor/act returns, with matched policy streams, native delivery audit, complete candidate
+   coverage, sampling uncertainty and source provenance. No HP/Smith rewards or strategic
+   masks. Eight roots are a feasibility pilot, not enough diversity to establish good play.
+2. **Audit lesson quality and feed numerical targets into a separate training fork.** Check
+   action binding, signal/uncertainty and behavior across independent roots. Use an explicitly
+   privileged-teacher supervised value/ranking loss; preserve both players' full Adam state.
+   Historical/counterfactual data must never be relabeled fresh PPO. A pilot with no reliable
+   preferences is a result to inspect, not a reason to loosen its gate after seeing outcomes.
+3. **Compare fresh full-run learning with matched compute.** Test teacher-assisted versus
+   unchanged training from both saved players, with untouched evaluation seeds. Judge wins
+   first, then auxiliary floor/act progress, failures and compute. Expand root diversity or
+   revise the teacher only in a new predeclared study. No automatic follow-up or promotion.
+4. **Qualify public-consistent hidden-world sampling before public-belief search claims.**
+   More policy samples in one original world do not solve hidden-information bias. Separate
+   this experimental teacher from the eventual low/medium/high thinking controller.
+5. **Readiness before adaptive thinking.** Strong base play, value/calibration and equal-compute
+   search benefits remain unmet. GA/direct evolution and other difficulties remain deferred.
+
+**One next owner command (approximately 20–30 minutes):**
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-combat-teacher-v1.sh
+```
+
+One native worker, 15-minute sessions, 2 GB RAM / 4 GB generated-output caps. Clean reruns
+reuse sealed branches; an interrupted uncommitted branch is preserved for inspection.
+No app copies, optimizer updates, adaptive controller or automatic next experiment.
+See [design and limits](native-combat-teacher.md),
+[completed audit](evidence/native-learning-feedback-result-v1.json) and
+[teacher evidence](evidence/native-combat-teacher-v1.json).
+Full local verification passes **1,830 tests**, formatting/lint, strict types and C#
+contracts. GitHub #143 / #35 / #146 reflect this handoff with prior history retained.
+No push or GitHub Actions.
+
+### Preserved feedback-audit preparation (the owner completed it above)
+
+# SpireShift backlog
+
 Updated 2026-10-19 after the completed rest-exploration comparison and owner discussion.
 Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
 

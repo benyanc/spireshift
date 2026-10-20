@@ -88,10 +88,18 @@ assigned feedback, not proof that the feedback identifies good moves. The two ar
 labels rise from 0.00380% / 0.00174% to 99.98% / 99.85% after 64 steps each, with complete
 copied Adam state. This is a one-input memorization test, not learned game strategy.
 
-These findings do not justify calling the learner disconnected or the baseline useless.
-They prioritize checking the complete current batches and then qualifying better native
-action comparisons if the remaining checks agree. The full 512-game audit is prepared,
-preflighted and **not started** by Codex.
+The owner has now completed the full audit: **512 TRAIN games / 71,293 decisions**.
+All 16 actual likelihood/credit reports reconstruct exactly. All 96 finite fact probes,
+16 candidate-order checks and 16 disposable teaching controls pass. The credit predictor
+beats its other-fold constant in every batch; mean MSE is approximately 28% lower for
+standard training and 31% lower for rest exploration. Combat probabilities move with their
+assigned credit on the saved inputs. These are connected numerical updates, not evidence
+that the assigned credit identifies the best move or produces stronger fresh play.
+
+The audit used 501.54 wall seconds, 486.82 CPU seconds, 350.45 MB peak RAM and 5.11 MB
+reports. No new native games or production updates occurred. Its separate result evidence
+is [completed feedback audit](evidence/native-learning-feedback-result-v1.json); the earlier
+preparation evidence remains unchanged.
 
 The historical training implementation, recipes, source report, models and full Adam states
 are unchanged. New code/configs and reports use their own workspace. The initial development
@@ -106,20 +114,16 @@ clean reruns reuse those results. A partially written analysis chunk is preserve
 inspection rather than being silently replaced. No native games or production optimizer
 updates occur. There is no automatic training, promotion, adaptive controller or next study.
 
-The one owner command for the complete saved-record audit is:
-
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/diagnose-native-learning-feedback-v1.sh
-```
-
-Allow roughly **8–12 minutes**, with a 15-minute launch cap. A clean pause can be continued
-using the same command. This performs analysis of existing games, not another training run.
-The short control runs under a four-minute cap and belongs to Codex; the full audit belongs
-to the owner under the five-minute execution boundary.
+The next stage is the [native combat comparison teacher](native-combat-teacher.md).
+It compares actual legal actions from verified TRAIN prefixes, continuing to genuine
+full-run endings. Its initial experiment retains each original native seed/hidden world;
+only continuation-policy sampling varies. That limitation is explicitly marked privileged
+teacher evidence, while the student's inputs remain public. It is not a public-belief
+search benchmark and cannot enter ordinary on-policy PPO.
 
 Measured control and local-check evidence: [learning feedback evidence](evidence/native-learning-feedback-v1.json).
 
-Repository verification passes **1,822 tests** (117.69 seconds), formatting/lint, strict types
+At audit preparation, repository verification passed **1,822 tests** (117.69 seconds), formatting/lint, strict types
 on 352 source files, and C# build/protocol checks with zero warnings/errors. The resource-tracked
 check takes 122.10 seconds and 377.29 MB peak RAM. Reopening the completed control with analysis
 disabled verifies its saved result in 8.46 seconds; no extra numerical updates occur.
