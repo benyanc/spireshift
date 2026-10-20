@@ -1,5 +1,75 @@
 # SpireShift backlog
 
+Updated 2026-10-19 after the completed rest-exploration comparison and owner discussion.
+Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
+
+## Current handoff: turn completed-game diagnosis into numerical learning improvements
+
+The rest-exploration experiment is complete: **896/896 genuine terminal attempts, zero
+technical failures, zero full wins, zero app copies**. Its 512 TRAIN attempts and 384 final
+test attempts remain distinct. The final 128-game/version test means are **11.0859375 original,
+11.453125 standard, 11.3203125 exploration**. Exploration minus standard is **−0.1328125**,
+95% paired-seed interval **[−0.8125, 0.546875]**. Neither training arm establishes stronger play.
+All four round-60 forks, their original round-56 states and every Adam moment/counter are kept.
+
+Smith is card upgrading. Its rarity is **not an error or failure criterion**: poor earlier
+combat can make healing necessary. Training Smith counts rise 1→30 under exploration, but
+this alone supplies neither an optimal-action label nor a reason to reward upgrades.
+The correct mixture gradient can give very unlikely exploratory actions weak direct feedback;
+this is a mechanism to measure, not proof that changing it would win games.
+
+The next work must produce a corrected input/learning mechanism or trustworthy numerical
+lessons. Written assessments do not train a neural network. Do not launch another unchanged
+large continuation, invent HP/Smith bonuses, or treat old-policy records as fresh PPO data.
+
+Ordered work (#143 / #35 / #146):
+
+1. **Current completed-TRAIN feedback and learning controls.** Reconstruct the exact 16 saved
+   32-game batches (512 attempts), their behavior likelihoods, whole-game cross-fitted credit,
+   and before/after probabilities. Compare prediction errors against same-fold constant and
+   current-progress references, expose game/menu weighting, rest health context and observed
+   final combat encounters. Check finite public-fact perturbations and candidate order, then
+   teach an explicitly invented numerical label to a disposable full model/Adam copy. Reuse the
+   earlier successful conditional-input controls; do not repeat an exhaustive mechanics gate.
+   No evaluation histories, native game attempts, production updates or causal action labels.
+   Run a short control first; leave the complete audit to the owner if ≥5 minutes.
+2. **Repair a measured defect or qualify native action comparisons.** If actual inputs or
+   arithmetic fail, fix and verify them before collecting again. Otherwise qualify bounded,
+   public-information native combat branches and produce state/action/return comparisons with
+   exact seeds, budgets, uncertainty and provenance. A single losing trajectory does not identify
+   the bad action. Native short-horizon targets remain auxiliary to full-run victory.
+3. **Feed verified lessons into training and test fresh play.** Use a declared supervised
+   action-ranking/imitation or value loss; keep historical/off-policy lessons separate from
+   fresh on-policy PPO. Verify target binding, loss/gradient direction and generalization before
+   a bounded teacher-versus-PPO comparison with preserved weights/Adam and independent seeds.
+   Measure wins first, floor/act progress, failures and compute; no forced strategic choices.
+4. **Readiness before adaptive thinking.** Strong base play, value/calibration and equal-compute
+   search benefits remain unmet. GA/direct evolution and other difficulties remain deferred.
+
+The completed source experiment is immutable. New diagnostics live in their own workspace.
+The short control and full-audit handoff are documented in [learning feedback](native-learning-feedback.md).
+The short control passes on **64 saved TRAIN games / 9,462 decisions** in 81.92 seconds,
+320.52 MB peak RAM. Both actual credit reports reconstruct exactly; finite health, energy,
+cost, damage, block, target-health and candidate-order checks pass. Both disposable actors
+memorize their artificial numerical targets (>99.8% after 64 steps); this is not native
+action-quality or PPO-discovery evidence. The actor's credit predictor beats a same-fold
+constant in both batches. The complete 16-batch audit is preflighted and remains unstarted.
+
+**One next owner command (saved-data analysis only, approximately 8–12 minutes):**
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/diagnose-native-learning-feedback-v1.sh
+```
+
+One numerical thread, 15-minute launch cap, 2 GB RAM / 100 MB generated outputs. Completed
+32-game analyses are reused on a clean rerun. No games, production training or automatic follow-up.
+Full local verification passes **1,822 tests**, formatting/lint, strict types and C# contracts.
+GitHub #143 / #35 / #146 reflect this handoff with prior history preserved. No push or GitHub Actions.
+
+### Preserved selection repair and exploration preparation (main run now completed above)
+
+# SpireShift backlog
+
 Updated 2026-10-19 after the completed round-56 continuation and selection-menu repair.
 Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
 
