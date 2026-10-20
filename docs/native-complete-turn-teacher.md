@@ -5,6 +5,10 @@ changing one card and immediately returning control to the same player. It colle
 numerical lessons and tests replay correctness. It does not train or promote a model.
 Both original players and their complete Adam states stay unchanged.
 
+**The owner has completed the main pilot: 569 attempts, zero failures and no
+admitted improvement preferences.** See the [completed result and next work](native-complete-turn-teacher-result.md).
+The design and preparation measurements below remain the original experiment record.
+
 ## Candidate generation
 
 Reuse the eight frozen later-combat TRAIN positions from the previous teacher: five
@@ -132,16 +136,15 @@ audit verifies **30,487 protected original/control files**, with both full playe
 byte seals unchanged. Cached control reuse and main preflight also pass with native
 host launches explicitly disabled. These are correctness checks, not stronger play.
 
-**The main pilot has not started.** Close any running STS2 game and run this one command
-from any directory:
+The main pilot is now complete. This was the original owner command, retained for
+reproduction and cached-result access; **there is no need to run it again**:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-complete-turn-teacher-v1.sh
 ```
 
-Allow roughly **30–45 minutes**, estimated from the measured control. Exact deduplication
-and continuation lengths can change the total. The upper bound is 585 attempts; the
-comparison count becomes exact after all 65 proposals are sealed. The wrapper continues
-only this finite plan across clean sessions; if it stops at its invocation limit,
-re-running the same command resumes completed receipts. No fitting follows. Send back
-the final summary so we can assess whether coherent turns provide useful new lessons.
+The preparation estimate was 30–45 minutes; the completed pilot used **28.71 wall
+minutes across three sessions**, with 65 proposals and 504 scored branches after
+deduplication. The wrapper only resumes this finite plan or displays its sealed saved
+result. No fitting follows. The [result assessment](native-complete-turn-teacher-result.md)
+supersedes the original owner-run handoff.

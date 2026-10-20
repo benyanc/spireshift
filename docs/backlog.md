@@ -1,3 +1,62 @@
+## Current handoff — complete-turn pilot finished; test combat continuation before scaling
+
+**The finite complete-turn teacher completed cleanly, but it has not established
+better play or reliable better-turn labels.** Both exact players and all Adam state
+remain intact. See [completed result](native-complete-turn-teacher-result.md),
+[portable evidence](evidence/native-complete-turn-teacher-result-v1.json) and the
+[preserved collection design](native-complete-turn-teacher.md).
+
+Completed (#35 / #143 / #146):
+
+- [x] Finish **569/569 native attempts**: 65 proposals become 63 unique plans,
+  followed by 504 scored branches across eight original TRAIN worlds. Zero
+  failures/skips/full wins/app copies or optimizer updates. Five dependent branches
+  clear an act; best floor 22. No nested-selection decisions occur in this pilot.
+- [x] Reconstruct all outcome tables: **25 higher / 65 lower / 350 tied paired
+  returns (79.5% ties)**. Greedy reference has the highest sampled mean, including
+  ties, in six of eight positions. No alternative passes the unchanged preference
+  rule; smallest positive-mean improvement sign p is 0.1445. Two positions are flat.
+- [x] Check why turns tie: **40 alternatives change the exact public boundary; 18
+  still have identical paired final returns**. An elite turn leaves 28 HP against
+  53 enemy HP, another 20 against 84, yet both lose every continuation on floor 7.
+  This is a feedback limitation, not proof that HP alone should become a reward
+  or that stronger continuation will necessarily recover these source positions.
+- [x] Verify **569 receipts / 33,426 source files**, terminal evidence, bindings,
+  returns, candidate freeze and all tables in **33.56 seconds**. Decode 9,942
+  proposal decisions and verify 65 proposal boundaries / 225 turn steps. Preserve
+  both complete model/Adam seals and counters **5,658 / 6,045**. Scored continuation
+  probabilities are not independently reconstructed by this saved-only assessment;
+  native journal bytes verify and collection delivery audits remain preserved.
+- [x] Reconcile all three collection sessions: **28.71 wall minutes**, 1,391.65 CPU
+  seconds, 425.44 MB peak memory and 850.26 MB cumulative output. Do not add
+  cumulative storage or mistake the final-session duration for the experiment total.
+- [x] Pass **1,979 tests**, strict types on 396 source files, formatting/lint and C#
+  protocol checks in **119.65 seconds**; tracked changes are documentation only.
+
+Next work, in order:
+
+1. **Qualify a bounded combat planner as continuation and candidate source.** Keep
+   frozen public roots/plans, native transitions, outcome-blind proposals and equal
+   declared compute. Start with a short correctness/cost control, then freeze one
+   finite owner-run comparison. Record fight completion, postfight health and loss
+   location as diagnostics alongside genuine complete-run outcomes and the explicit
+   bootstrap score. No silent HP reward, outcome-selected positions or claim of
+   stronger play before measurement. Weak continuation, limited candidates and
+   already difficult source positions remain competing explanations.
+2. **Declare a bounded student intervention only if feedback supports it.** Preserve
+   uncertainty and whole-source-world validation; fork both players and every Adam
+   moment, keep every legal decision family learnable, and test fresh complete games
+   at equal compute. Teacher counterfactuals remain separate from ordinary PPO.
+3. **Do not scale the unchanged teacher or loosen its preference rule.** No further
+   critic grid, other difficulty, large GA or adaptive controller is required here.
+   Foundation readiness still precedes variable thinking budgets.
+
+**No owner command is needed for this completed collection.** No new game, fitting,
+model promotion, push or GitHub Actions follows the saved assessment. Long tasks stay
+owner-run; the next command will accompany a separately implemented and qualified plan.
+
+### Preserved complete-turn preparation handoff (commands below are historical)
+
 ## Current handoff — complete-turn teacher ready; owner-run pilot next
 
 **The complete-turn comparison teacher is implemented and qualified.** It compares
