@@ -98,16 +98,29 @@ The wrapper derives its output workspace and limits from the pinned recipe. The 
 extra supplies NumPy/matplotlib; the lockfile fixes resolved packages. Runtime versions are
 recorded. All original experiment source files remain unchanged and readable.
 
-Owner command after the short control/preflight is complete:
+Historical entry point — this study is now complete:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-matched-value-v1.sh
 ```
 
-Repeat that same command after a clean pause. The main comparison has not been launched
-by Codex. Estimate **20–35 minutes total**, based on the saved control and preceding
-128-game study. Each launch remains capped at 15 minutes; use the same command after
-its clean pause. The main source/control preflight passes with zero new fits/games.
+The owner completed 61 units in a capped launch; the final three cached fits took
+14.16 resource-tracked seconds. All **64/64 units** are now complete: 16 encodings,
+48 paired fits and 128 unique held TRAIN games. Both saved players and their Adam
+states remain unchanged. Do not rerun this study to tune settings after seeing outcomes.
+
+At the fixed primary update 24, equal-game held MSE is **5.5128e-5** for current ridge,
+**5.5841e-5** for masked inputs and **7.1256e-5** for rich inputs. Rich is **29.3% worse**
+than ridge; the direction holds across all four cohorts and three numerical initializers.
+At update 96 rich fitting MSE falls from **4.5684e-5 to 2.6804e-5**, while held MSE rises
+from **5.5128e-5 to 7.3388e-5**. Of the combined fitting-loss decrease, **99.4%** is a
+smaller weight penalty. This is a fitting/generalization gap for this recipe, not proof
+that richer public facts can never help or that more games alone will solve learning.
+
+No candidate is adopted. The next authorized experiment is the separately versioned
+[regularized linear value comparison](native-linear-value.md), with whole-game tuning
+and testing using these cached inputs. Its reuse is explicitly development evidence.
+[Completed main evidence](evidence/native-matched-value-result-v1.json).
 
 ## Completed short checks
 

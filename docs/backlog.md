@@ -1,80 +1,74 @@
-# SpireShift backlog
+## Current handoff — regularized public linear values with whole-game validation
 
-Updated 2026-10-20 after the completed public-value comparison and matched-input request.
-Codex runs short checks; the owner launches/monitors tasks expected to take ≥5 minutes.
-
-## Current priority: isolate value-input effects and fitting behavior before more player training
-
-The 128-saved-TRAIN-game public-value study is complete: **16/16 folds**, zero new games
-or player/Adam changes. Current ridge held MSE is **5.5128e-5**; coarse neural **5.8746e-5**;
-rich neural **7.3666e-5**. Rich error is **33.6% higher** than ridge and worse in all four
-player/round cohorts. This candidate is not adopted. See
-[completed evidence](evidence/native-public-value-result-v2.json).
-
-The last comparison changed input count, parameter count (705 versus 33,473), initialization
-scale and the effect of weight penalties together. It does not isolate whether useful input
-information, limited data, optimization or generalization explains the negative result. Model
-size alone does not prove overfitting. The current 20-measurement credit baseline and saved
-players remain unchanged; their identity/interaction limitations are still real.
-
-The combat teacher remains complete with 384 terminal branches, zero failures/wins and zero
-admitted preferences; 250/320 comparisons tie. Delayed full-return synthetic PPO controls
-already pass. Repeating those controls or adding unchanged games blindly is not the next item.
+The **matched-input neural study is complete**, 16 encoded folds / 48 paired fits,
+128 saved TRAIN games, three numerical initializers. At the fixed primary update 24,
+held MSE is **5.5128e-5 current ridge**, **5.5841e-5 coarse masked neural** and
+**7.1256e-5 rich neural**. Rich is **29.3% worse** than ridge, in all four cohorts and
+all three initializer summaries. Fitting error falls as held error rises; 99.4% of the
+combined fitting-loss decrease is a smaller weight penalty. This supports testing
+regularization and generalization, not adopting this network or assuming more games
+alone will fix it. Existing reports/code and both players/full Adam states are preserved.
 
 Ordered work (#143 / #35 / #146):
 
-1. **Matched-input comparison and separate error curves — implemented and verified.** Same full input dimensions/32-hidden-unit network, exact starting
-   arrays, zero moments, shared fitting-only normalization, frozen ridge, games and settings.
-   Mask only additional standardized inputs in one arm. Three paired numerical initializers;
-   report their variation separately from the two saved policy players. Extra active inputs
-   still change effective capacity. Keep the previous code/results immutable.
-2. **Owner runs the frozen 128-game matched study.** Sixteen cached encodings / 48 paired fits,
-   64 independently sealed units. Reuse encodings and completed fits. Record pure fitting/held
-   MSE, clipped errors, weight penalty and their combined objective at fixed updates
-   0/1/4/8/16/24/48/96. Primary comparison stays update 24; no held-target epoch selection.
-   Preserve all saved weights/Adam, source seals, public boundaries and A8/objective scope.
-3. **Use those measurements to choose one targeted change.** Check input omissions and
-   optimizer/convergence versus generalization before selecting simpler models, different
-   regularization or more games. Treat the reused 128 games as development evidence; freeze
-   any selected recipe before untouched whole-game confirmation. Avoid calling numerical
-   repeats or overlapping folds independent games. No automatic adoption or larger PPO batch.
-4. **Only a supported candidate enters a bounded gameplay/credit comparison.** Preserve both
-   players/full Adam; use fresh on-policy training and untouched evaluation seeds, equal
-   compute and explicit failure accounting. Keep Monte Carlo/TD/GAE changes separately
-   declared. Wins remain primary, auxiliary floor/acts secondary; forecast error is not play.
-5. **Teacher/representation/readiness follow-ups.** Later-turn/diverse roots, coherent plans
-   or stronger continuation may improve teacher information; uncertain labels remain marked.
-   Public-belief search requires qualified hidden-world sampling. GA/direct evolution, other
-   difficulties and large sequence models remain deferred. Adaptive thinking still requires a
-   useful base player and measured equal-compute search benefit.
+1. **Regularized rich-input linear value — implemented and benchmarked.**
+   Compare current ridge, tuned coarse linear and tuned rich linear on the sealed input
+   cache. Closed-form ridge removes neural initialization, Adam and epoch count. Keep
+   separate pure prediction errors and penalties; do not tune on outer-held targets.
+2. **Whole-game nested selection.** Each outer fold fits on 24 games and holds eight.
+   Select ridge strength using three 16-fit/eight-validation inner splits, separately
+   for each arm; refit all 24 and score the untouched outer eight. Each game has equal
+   mass. Keep the four player/round cohorts separate. The progress offset is fixed;
+   never reuse the old outer-fit ridge as an inner offset, which leaks validation returns.
+3. **Freeze the cached dictionary honestly.** It was selected using outer-fitting inputs
+   in the previous study; it excludes outer-held inputs but is not rebuilt within inner
+   folds. Means/scales/centering and coefficients fit only the current fitting games.
+   Reused development games cannot provide untouched confirmation, and overlapping folds
+   or numerical repeats cannot be counted as independent games/players.
+4. **Require fresh confirmation before credit integration.** Only a supported frozen
+   value recipe advances to fresh whole-game forecast validation and then bounded
+   learning from both saved players/full Adam states. Measure gameplay at equal compute;
+   wins remain primary and auxiliary floor/acts secondary. No automatic adoption, PPO
+   expansion, reward redesign, adaptive controller or game attempts follow this study.
+5. **Later follow-ups remain evidence-driven.** More informative combat teacher roots,
+   policy-conditioned values, additional independent games or another model are separate
+   choices. GA/direct evolution, other difficulties and large sequence models remain
+   deferred; useful base play/readiness precedes adaptive thinking.
 
-The new implementation consumes only sealed ordinary TRAIN histories. It creates CSV and
-matplotlib curve artifacts, saves primary/final experimental value weights separately, and
-never updates production weights or Adam states. Each pause gets a new immutable progress
-snapshot; completed work is verified and reused. No game apps or new trajectories are needed.
-See [matched-input design and owner guide](native-matched-value.md).
+The short control uses one real cached 24/8 outer fold; the main comparison has 16
+independently sealed restartable folds. It reuses public inputs without decoding histories,
+never touches the saved actors/optimizers, and verifies source bytes before and after.
+See [design, validation boundaries and execution guide](native-linear-value.md).
 
-**Verification complete:** 1,869 repository tests (20 new), formatting/lint, strict types and
-C# contracts pass in 104.52 seconds. The eight-game / six-pair integration check completes
-in **33.84 seconds**, **265.06 MB** peak RAM and **16.66 MB** output. All 12 saved primary
-value models reconstruct their predictions/error/penalty terms; 11,324 source seals,
-including both players and all saved Adam states, verify unchanged. The main preflight
-passes with zero new games/fits; its workspace has not been started.
+**Completed result:** all 16 folds / 128 whole-game predictions, **896 closed-form
+ridge solutions**, in **84.96 seconds** (495.50 MB peak RAM, 5.30 MB output). Current
+ridge MSE is **5.5128e-5**; tuned coarse linear **5.5328e-5** (+0.36%); tuned rich linear
+**6.3903e-5** (+15.92%). Rich remains worse in every cohort. Most rich folds select
+strong shrinkage (lambda 10; three choose 1, two choose 100). **No replacement is adopted.**
+All 32 saved models and chosen lambdas reconstruct; forecasts agree bit-for-bit, separate
+fitting error and penalty terms agree, and **11,681 source seals** verify unchanged.
+The saved-only audit takes 10.00 seconds, no refits or games.
 
-The tiny control remains a negative forecast result: step-24 held MSE is **5.0596e-5** for
-rich, **2.8686e-5** for masked and **2.8931e-5** for ridge. Later rich fitting error drops
-while held error rises; the four-fitting-game folds do not establish the main cause or
-stronger play. No settings/epoch were selected from it. [Portable evidence](evidence/native-matched-value-v1.json).
+**Next evidence-driven item:** inspect whether remaining errors concentrate in rare long
+runs and unseen public facts before selecting a new data/representation intervention.
+Do not search another grid on outer targets or blindly expand PPO. More independent
+whole games, stronger interaction features or better training lessons remain hypotheses;
+none is established as the fix by this negative study. Any new collection is separately
+bounded and owner-run when long. Keep both players and all Adam state as starting points.
 
-**One next owner command (about 20–35 minutes total, in resumable 15-minute launches):**
+**Final repository verification passed on 2026-10-20.** The owner completed the full
+formatting/lint, strict typing, test suite and C# protocol check in **116.07 seconds**,
+with **99.39 CPU seconds** and **385.27 MB** peak RAM. Receipt:
+`sha256:bf55e76c5586d10008893d30f0aaf68c3bcbfd7aae4b5d188f7f937efc80ee33`.
+The earlier four-minute capped check remains preserved as incomplete historical evidence;
+the completed owner receipt supersedes its pending handoff. All **11,681 protected source
+files**, including both players and full Adam states, verify unchanged after the check.
+The 17 focused regression tests also pass. The implementation is ready for a local commit;
+no push, GitHub Actions or long follow-up is started by Codex.
+[Portable results, receipts and limitations](evidence/native-linear-value-v1.json).
 
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-matched-value-v1.sh
-```
-
-The main comparison is not launched by Codex. It uses one numerical thread, 15-minute
-launches, 2 GB memory / 500 MB output; rerun the same command after a clean pause. No
-player fitting, promotion, adaptive controller or automatic next stage follows.
+**No rerun is needed.** The comparison and final verification are complete. The next
+work item is the saved-prediction diagnosis above, not another unchanged training run.
 
 ### Preserved teacher preparation (completed above)
 
