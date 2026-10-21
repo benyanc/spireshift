@@ -1,3 +1,77 @@
+## Current handoff — bounded combat-consequence learning implemented; fresh-game comparison next
+
+**Test whether extra numerical feedback from combat helps the copied players play
+better.** The unchanged originals remain in the comparison. Their exact round-60
+weights and every PPO Adam moment/counter **5,658 / 6,045** remain read-only. This
+is a separately labeled supervised experiment, not ordinary PPO continuation.
+See the [design and single owner command](native-combat-consequence-learning.md)
+and [portable evidence](evidence/native-combat-consequence-learning-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Extract **442 combat decisions / 51 plans / seven TRAIN worlds** from the
+  completed teacher, one episode at a time. Average eight conditional returns per
+  plan without duplicating its fight eight times. Retain the eighth no-root source
+  in the historical denominator. Current public graph plus chosen legal action
+  supplies inputs; later observations, plan IDs and hidden state supply no inputs.
+- [x] Add explicit native-observed HP, enemy-HP, next-turn, encounter-exit/survival
+  and potion-count prediction targets, with honest missing-target masks and nested
+  choice boundaries. Health is a prediction task, **not an HP reward or action
+  ranking rule**. Full-run victory, the 128-CPU-second budget and existing bootstrap
+  score remain unchanged. These are recorded continuations, not causal or optimal
+  action values; seven related worlds cannot establish broad generalization.
+- [x] Implement matched return-only / consequence-assisted learning and an
+  action-blind prediction control. Both principal arms fit identical extra heads;
+  only their feedback into the shared representation differs. Use fitting-only
+  scaling, equal source/plan/decision weights, a frozen 128-epoch schedule, separate
+  fitting/held curves and leave-one-whole-world-out folds for each original player.
+- [x] Copy both complete parent/Adam states into four disposable forks. Fix the
+  deployment initializer and final epoch before native outcomes, rather than
+  choosing a winner on validation data. Fork Adam counters are **5,786 / 6,173**;
+  original critic weights and both original state files remain unchanged.
+- [x] Pass mathematical gradient/stop-gradient controls and **8/8 native checks**,
+  including both identical exact-repeat traces: zero failures, app copies or
+  production updates. Verify **106 matched noncombat draws / 56 identical-input
+  comparisons**. Shared weights can change noncombat choices; match the rule and
+  random draws without falsely claiming those choices are frozen.
+- [x] Preserve the preparatory work-unit naming failure and its exact inputs/code;
+  it ran no games or fits. Repair key generation and add actual-journal tests.
+  Seal each extraction/fit/game unit; restart only clean completed boundaries,
+  never uncertain work. Reuse shared frozen engine/runtime/SDK/support files.
+- [x] Complete all **63 whole-world validation fits** in **156.78 seconds**, with
+  zero evaluation games. Added feedback lowers immediate-HP prediction MSE by
+  **16.2% / 4.8%** for the two players and lowers enemy-HP errors, but increases
+  final-return errors. Later predictions are mixed, and simple persistence still
+  wins several endpoints. Constant potion/survival labels supply no evidence of
+  useful mechanics learning. Preserve the predeclared forks rather than retuning.
+- [x] Pass **2,171 tests (61 new; four skipped)**, strict types on 435 files,
+  formatting/lint and the C# protocol in **132.00 seconds**. Original full-state
+  byte hashes and every saved fork/Adam counter still match. Main gameplay remains
+  **0/192 attempted**; better play, readiness and promotion are not established.
+
+Next work, in order:
+
+1. **Owner runs the 192-game comparison — NOT STARTED.** Use 32 fresh development
+   worlds, both original players and both learned forks. Greedy combat and matched
+   noncombat sampling rules apply to every arm. Keep failures in the denominator;
+   no forced rest, HP heuristic, extra search, app copy or automatic next experiment.
+2. **Assess prediction and actual play separately.** Report fixed-epoch whole-world
+   errors against return-only, action-blind, constant and persistence controls;
+   inspect fitting versus held errors. In fresh games report wins first, then acts,
+   floors, score, failures and CPU. Compare both forks with the originals, not just
+   with each other. Two fixed parents and seven training worlds limit conclusions.
+3. **Choose the next bounded learning change from those results.** Better tactical
+   prediction alone does not establish better decisions. Preserve all forks and
+   Adam state; do not silently expand training, reward HP, promote a checkpoint,
+   enable adaptive thinking, repeat the unchanged teacher or unfreeze difficulty.
+4. **Later runner wording:** distinguish a completed teacher schedule with no
+   eligible position from a crashed game, preserving old status/receipts.
+
+The longer owner command and qualified saved-data results are recorded in the
+linked handoff. No production checkpoint, push or GitHub Actions follows this work.
+
+### Preserved greedy-turn teacher result (commands below are historical)
+
 ## Current handoff — fresh TRAIN greedy-turn teacher complete; qualify richer learning feedback next
 
 **All 469 scheduled game attempts ended cleanly; this teacher still supplies no
