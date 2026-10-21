@@ -1,3 +1,69 @@
+## Current handoff — fresh greedy-versus-sampled combat comparison qualified; owner run next
+
+**The requested combat-only comparison is implemented and qualified.** Both exact
+round-60 players, full weights, every Adam moment and counters **5,658 / 6,045** remain
+unchanged. The long comparison has not started. See
+[design and single owner command](native-combat-behavior-comparison.md) and
+[portable evidence](evidence/native-combat-behavior-comparison-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Change only combat behavior: temperature-0.8 sampling versus the current
+  policy's exact argmax, including combat-owned nested selections. Preserve every
+  advertised strategic option and existing shop navigation. Use observed public
+  ownership/exits; unknown owners fail instead of inventing actions. No search,
+  privileged future plans, HP reward, model fitting or automatic promotion.
+- [x] Match outside-combat policy, temperature and RNG by game seed, public room,
+  family and visit. Combat choices do not advance noncombat streams; an extra reward
+  cannot shift another floor's rest draw. Same public inputs/slots produce identical
+  choices; differing HP/resources can legitimately change noncombat decisions.
+- [x] Freeze **64 fresh development game seeds × two players × two arms = 256
+  attempts**, excluding all 26 historical native seed manifests and two new control
+  seeds. Counterbalance arm order without outcomes. Summarize both players and
+  bootstrap paired complete-game seeds jointly across them; do not treat 128
+  player/seed pairs as independent worlds or infer true win equality from zero wins.
+- [x] Complete **12/12 native control games** with zero failures/app copies/updates:
+  eight primary cells plus four matching exact repeats. Verify **207 shared
+  noncombat draw slots / 50 identical-input choices**. Observe 13 nested combat
+  selections plus noncombat selections, generated cards, rests, shops and rewards.
+  Scoped correctness coverage, not playing-strength evidence.
+- [x] Reconstruct **all 2,053 saved decisions**, ownership, draws/probabilities,
+  endings, scores, repeat traces and paired tables in **36.51 seconds**. Native
+  control takes **76.00 seconds**, 56.05 CPU seconds, 398.02 MB peak memory and
+  35.80 MB retained. Collection audits delivery; saved recheck verifies journal bytes.
+- [x] Pass **2,058 tests (33 new; four skipped)**, strict types on 414 files,
+  formatting/lint and C# protocol in **120.25 seconds**. Verify **63,176 protected
+  old files / 35,038 control-source files** and both full player/Adam byte seals.
+  Main preflight passes with native hosts disabled and creates no comparison
+  workspace. Only passed control/audit references change from the frozen template.
+
+Next work, in order:
+
+1. **Owner runs the finite fresh-game comparison — NOT STARTED.** Allow **20–35
+   minutes**; one native process, shared frozen files, zero app copies, 15-minute
+   sessions, 2 GB memory / 4 GB cumulative outputs. Resume sealed games at clean
+   boundaries. Preserve uncertain work, never retry it automatically or replace seeds.
+2. **Assess playing benefit before more teacher collection or fitting.** Compare
+   full wins first, then acts/floors/declared bootstrap returns, failures and actual
+   CPU. Keep each player's result and whole-seed uncertainty. Verified failures and
+   unattempted games retain the original denominator and zero evaluation value.
+3. **Choose the next bounded learning change from that evidence.** Better combat
+   continuation or candidate quality remains the goal; do not scale the prior flat
+   teacher, loosen its preference rule, silently reward HP or tune on the old eight
+   inspected worlds. Preserve both full states and require fresh complete-game
+   evaluation. Foundation readiness still precedes adaptive thinking.
+
+Single owner command, from any directory with STS2 closed:
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-combat-behavior-v1.sh
+```
+
+Codex ran only short controls, saved audits and checks. No long comparison, training,
+promotion, push or GitHub Actions was started. No next experiment follows the command.
+
+### Preserved combat-planning result handoff (commands below are historical)
+
 ## Current handoff — combat-planning pilot complete; isolate cheap greedy behavior next
 
 **The finite planner comparison finished cleanly, with mixed strategic results and
