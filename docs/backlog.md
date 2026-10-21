@@ -1,3 +1,75 @@
+## Current handoff — bounded combat-planning comparison qualified; owner pilot next
+
+**The bounded native planner comparison is implemented and qualified.** It preserves
+both exact players and all Adam state, reuses the complete-turn pilot's baseline,
+and tests whether completing a fight with sampled planning improves full-run feedback.
+See [design and owner command](native-bounded-combat-planning.md) and
+[portable evidence](evidence/native-bounded-combat-planning-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Generate four combat remainders per original initial turn: one greedy and
+  three sampled continuations. Native transitions handle subsequent turns and nested
+  choices. Seal each encounter exit before later decisions; reject unknown ownership,
+  incomplete traces, changed observations/costs/targets and decision/storage caps.
+- [x] Select by observed alive exit, remaining public HP and fixed proposal order.
+  The selector accepts no later run scores, floors or wins. This is an explicit
+  tactical heuristic, not a new HP reward. Original full-run victory and bootstrap
+  score remain unchanged; fixed-world teacher branches are not ordinary PPO.
+- [x] Charge every evaluation for all four search episodes plus its own execution,
+  without amortization, inside the original 128-CPU-second whole-run ceiling. Search
+  is capped at 64 CPU seconds total / 32 per proposal. Retain actual resource usage
+  separately; equal ceilings do not mean equal CPU spending.
+- [x] Complete **28/28 native control attempts** with zero failures/skips/blocked
+  turns or app copies. Exact duplicate selected traces and two fresh original
+  baseline traces match. Eight old baseline episodes are reused. Two sessions use
+  **247.23 wall seconds**, 158.20 CPU seconds, 372.93 MB peak memory and 56.26 MB
+  cumulative output. The two-world control is a correctness check, not better play.
+- [x] Reconstruct all **4,338 saved public decisions**, probabilities, plans,
+  encounter exits, tactical selection, charged costs and tables in **60.92 seconds**.
+  Native delivery is audited during collection; saved verification checks those
+  journal bytes without claiming a new independent delivery semantic reaudit.
+- [x] Pass **2,029 tests (50 new)**, strict types on 406 files, formatting/lint and
+  C# protocol in **129.17 seconds**. Verify **51,213 original evidence files** and
+  **34,547 control-source files**, preserving both full player/Adam byte seals and
+  counters **5,658 / 6,045**. Main preflight passes with native hosts disabled and
+  creates no pilot workspace. Only control/audit IDs change from the predeclared
+  main template; roots, proposals, ranking and budgets stay fixed.
+
+Next work, in order:
+
+1. **Owner runs the finite comparison — NOT STARTED.** Reuse all 504 old baseline
+   episodes. Eight original TRAIN worlds / 63 initial turns require 252 search
+   attempts plus 504 selected-plan evaluations: **at most 756 new attempts**. Allow
+   roughly 60–90 minutes, shared immutable game/runtime/support files, one process,
+   15-minute sessions, 2 GB memory / 4 GB outputs. Clean pauses resume sealed work;
+   uncertain or changed evidence stops for inspection. No automatic retry/repair.
+2. **Assess actual benefit before more collection or fitting.** Compare full-run
+   wins, floor/return changes, encounter exits, failures, actual/charged CPU and how
+   often initial turns still tie. One hidden world per root; conditional streams
+   are not independent seeds. Keep the original preference rule and uncertainty.
+   HP selection can spend scarce resources; it is not proof of strategic improvement.
+3. **Choose a bounded student intervention from the evidence.** Keep public-only
+   current inputs and whole-world fitting/selection, fork both exact full states
+   and every Adam moment, keep all legal families learnable, and test fresh complete
+   games at equal declared compute. No future plan observations in student features.
+4. **Keep the foundation priority.** No new critic grid, other difficulties, large
+   GA, model promotion or adaptive controller follows this collector. Readiness
+   still precedes variable thinking budgets. Revise a flat method rather than
+   automatically scaling it.
+
+Single owner command, from any directory with STS2 closed:
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-combat-planning-v1.sh
+```
+
+Codex ran only the short control, saved audits and repository checks. No long pilot,
+training, promotion, push or GitHub Actions was started. The command resumes only
+this finite comparison; no subsequent experiment or fitting follows completion.
+
+### Preserved complete-turn result handoff (commands below are historical)
+
 ## Current handoff — complete-turn pilot finished; test combat continuation before scaling
 
 **The finite complete-turn teacher completed cleanly, but it has not established
