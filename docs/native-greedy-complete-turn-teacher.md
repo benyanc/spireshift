@@ -1,5 +1,12 @@
 # Fresh-training-world complete-turn teacher with greedy continuation
 
+**Collection finished on 2026-10-21.** All 469 scheduled native attempts ended
+cleanly. Seven of eight source games yielded comparison positions; the remaining
+source never reached a publicly eligible position and remains in the denominator.
+No alternative passes the original improvement rule. See the
+[completed result and next work](native-greedy-complete-turn-teacher-result.md).
+The original preparation evidence below describes qualification before collection.
+
 This bounded teacher tests whether alternative complete turns produce useful
 full-run lessons when later combat follows the existing policy greedily. It builds
 on the [fresh-game behavior result](native-combat-behavior-result.md), where greedy
@@ -130,7 +137,7 @@ at 120 wall seconds and 4,096 decisions. The same command resumes only sealed wo
 at clean session boundaries. Stage progress is shown every eight resolved attempts.
 An already complete command verifies and displays saved results.
 
-## Single owner command
+## Completed qualification and historical collection command
 
 The native control completes **16/16 attempts** with zero failures, skipped branches,
 app copies or optimizer updates. Both exact reference repeats match. Four paired
@@ -155,19 +162,17 @@ strict types on 424 files, formatting/lint and the C# protocol in **122.76 secon
 See [portable qualification evidence](evidence/native-greedy-complete-turn-teacher-v1.json)
 for the frozen identities, controls, resource receipts and exact scope.
 
-The long collection has **not started**. Allow roughly **30–90 minutes**, based on
-the control's complete-game timings; actual menus, episode lengths and exact-trace
-deduplication determine the workload. The invocation limit is two hours; cleanly
-paused work continues with the same command.
-
-With STS2 closed, run from any directory:
+The owner completed the collection in three sessions. **No rerun is needed.** The
+command below is retained for reproduction; it now displays the sealed result and
+does not retry the source game that had no eligible position:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-greedy-turn-teacher-v1.sh
 ```
 
-Share its final summary. No training or further experiment follows automatically.
-Assess reliable better/worse turns and whole-world coverage before preparing a
-separate bounded student update. Preserve both parents and their complete optimizer
-states; any trained student needs fresh full-game evaluation. Base readiness still
-precedes adaptive thinking.
+The last resource report retains exit code 1 because the frozen collector uses
+`complete_with_gaps` for a missing eligible source position. This does not mean a
+game crashed or a resource cap was reached. No training or further experiment
+follows automatically. Preserve both parents and their complete optimizer states;
+any trained student needs fresh full-game evaluation. Base readiness still precedes
+adaptive thinking.

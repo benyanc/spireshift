@@ -1,0 +1,381 @@
+{
+  "schema_version": "native-greedy-complete-turn-teacher-result-evidence-v1",
+  "date": "2026-10-21",
+  "original_report": {
+    "path": "artifacts/native-greedy-turn-teacher/sts2-v0.111.0-a8-pilot-v1/report.json",
+    "report_id": "sha256:bd4df21bfdc75ee357926364e0168e3e91e51dfa5a3d1af284e8f9a3bca678bc",
+    "config_id": "sha256:aaf95958f80f3fcf9007c65b498a9176953176783781ccaee50c810d70de12b0",
+    "status": "native_greedy_turn_teacher_complete_with_gaps"
+  },
+  "collection": {
+    "native_attempts": 469,
+    "completed_units": 469,
+    "planned_source_worlds": 8,
+    "usable_source_roots": 7,
+    "unavailable_source_worlds": 1,
+    "planned_proposals": 53,
+    "planned_comparison_branches": 408,
+    "candidate_plans": 51,
+    "completed_source_comparisons": 7,
+    "failed_branches": 0,
+    "skipped_branches": 0,
+    "blocked_source_roots": 0,
+    "noncombat_matching": {
+      "candidate_reference_pairs": 352,
+      "identical_public_inputs_with_identical_choices": 3911,
+      "shared_noncombat_draw_keys": 7654,
+      "valid": true
+    },
+    "proposal_cpu_seconds": 142.002315668,
+    "full_run_wins_in_comparison_samples": 0,
+    "admitted_exploratory_preferences": 0,
+    "source_roots_sealed_before_later_outcomes": true,
+    "all_turns_frozen_before_scored_comparisons": true,
+    "proposal_outcomes_used_for_selection": false,
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    }
+  },
+  "scope": {
+    "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+    "privileged_fixed_world_teacher": true,
+    "student_inputs_public_only": true,
+    "ordinary_PPO_eligible": false,
+    "public_belief_search_eligible": false,
+    "policy_streams_per_plan": 8,
+    "independent_hidden_worlds_per_root": 1
+  },
+  "source_worlds": [
+    {
+      "decisions": 118,
+      "maximum_floor": 8,
+      "numerical_seed": 2,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 8.0,
+        "displayed_attack_total": 8.0,
+        "encounter_type": "normal",
+        "play_or_use_candidates": 5,
+        "public_round": 2,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 5
+      },
+      "root_available": true,
+      "root_id": "sha256:4e554476ba87198bd1b553a13ade17400560a30b99c8cf39655693dd2d9dc9c4",
+      "seed_id": 1910000
+    },
+    {
+      "decisions": 112,
+      "maximum_floor": 9,
+      "numerical_seed": 3,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 9.0,
+        "displayed_attack_total": 9.0,
+        "encounter_type": "normal",
+        "play_or_use_candidates": 9,
+        "public_round": 2,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 5
+      },
+      "root_available": true,
+      "root_id": "sha256:b817ac2bdde076122d46e4c1d8d7124aa23356e704953d7a104088d8d0af1e65",
+      "seed_id": 1910001
+    },
+    {
+      "decisions": 127,
+      "maximum_floor": 9,
+      "numerical_seed": 2,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 16.0,
+        "displayed_attack_total": 16.0,
+        "encounter_type": "elite",
+        "play_or_use_candidates": 4,
+        "public_round": 2,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 9
+      },
+      "root_available": true,
+      "root_id": "sha256:df8df32a0478e2b66cb11f0ee0a7a2a28cb53dc226f6b629083fc73f402b443c",
+      "seed_id": 1910002
+    },
+    {
+      "decisions": 128,
+      "maximum_floor": 5,
+      "numerical_seed": 3,
+      "public_eligible_position": null,
+      "root_available": false,
+      "root_id": null,
+      "seed_id": 1910003
+    },
+    {
+      "decisions": 141,
+      "maximum_floor": 11,
+      "numerical_seed": 2,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 8.0,
+        "displayed_attack_total": 8.0,
+        "encounter_type": "normal",
+        "play_or_use_candidates": 4,
+        "public_round": 2,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 5
+      },
+      "root_available": true,
+      "root_id": "sha256:4f5fffbee1e9f89f087be8cfb3fa9fba29c8f749efb386141abf3167b8def065",
+      "seed_id": 1910004
+    },
+    {
+      "decisions": 189,
+      "maximum_floor": 15,
+      "numerical_seed": 3,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 12.0,
+        "displayed_attack_total": 12.0,
+        "encounter_type": "normal",
+        "play_or_use_candidates": 5,
+        "public_round": 4,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 13
+      },
+      "root_available": true,
+      "root_id": "sha256:1051cde72c50e544d68a21812e0ad259e6f48cec7e5455f837c98e0ecfa72f05",
+      "seed_id": 1910005
+    },
+    {
+      "decisions": 197,
+      "maximum_floor": 17,
+      "numerical_seed": 2,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 22.0,
+        "displayed_attack_total": 22.0,
+        "encounter_type": "normal",
+        "play_or_use_candidates": 4,
+        "public_round": 4,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 6
+      },
+      "root_available": true,
+      "root_id": "sha256:fe3e6adc8165f575b69cee0936d115a8eb70b18423fc123a0aa5c3423124b9bf",
+      "seed_id": 1910006
+    },
+    {
+      "decisions": 126,
+      "maximum_floor": 8,
+      "numerical_seed": 3,
+      "public_eligible_position": {
+        "attack_excess_is_exact_hp_loss_prediction": false,
+        "current_block": 0.0,
+        "displayed_attack_excess": 6.0,
+        "displayed_attack_total": 6.0,
+        "encounter_type": "normal",
+        "play_or_use_candidates": 8,
+        "public_round": 2,
+        "selection_uses_final_outcomes": false,
+        "source_floor": 5
+      },
+      "root_available": true,
+      "root_id": "sha256:6ea22a57e15eb360d8a117fb30e1961ff0355740d9ceb01556d67f41a4a7079a",
+      "seed_id": 1910007
+    }
+  ],
+  "metrics": {
+    "alternative_reference_pairs": 352,
+    "paired_return_directions": {
+      "negative_pairs": 28,
+      "positive_pairs": 23,
+      "tied_pairs": 301
+    },
+    "mean_return_directions_by_alternative": {
+      "higher": 9,
+      "lower": 8,
+      "tied": 27
+    },
+    "strongest_unadmitted_preference": {
+      "admitted_exploratory_preference": false,
+      "label_kind": "auxiliary_bootstrap_only",
+      "mean_bootstrap_return_difference": 0.0024621212121212124,
+      "negative_pairs": 0,
+      "one_sided_sign_p": 0.015625,
+      "paired_difference_standard_error": 0.0012992085048517434,
+      "positive_pairs": 6,
+      "preferred_plan_id": "sha256:7f2ddcc1b0636c1af50e7b242bdfd4a2050a463410ea4bfc6e3dfed07ffa3a08",
+      "reference_plan_id": "sha256:12d3654d8db95c8cd7fdef01b9584f0c16459efb01dd9a3e91012a9223b09662",
+      "tied_pairs": 2,
+      "within_root_threshold": 0.005555555555555556
+    },
+    "smallest_posthoc_reverse_sign_p": 0.0625,
+    "all_scored_plans_have_identical_current_fight_traces_across_eight_streams": true,
+    "posthoc_local_outcome_diagnostics_not_rewards_or_training_labels": {
+      "different_exit_hp_same_final_floor": 120,
+      "higher_exit_hp": 56,
+      "lower_exit_hp": 112,
+      "same_exit_hp": 184
+    },
+    "comparison_full_run_wins": 0,
+    "comparison_act_clearing_games": 0
+  },
+  "diagnostic_examples": [
+    {
+      "source_seed_id": 1910006,
+      "reference_exit_HP": 42,
+      "end_turn_alternative_exit_HP": 20,
+      "maximum_floor_all_eight_streams_both_plans": 16,
+      "same_full_run_bootstrap_score": true
+    },
+    {
+      "source_seed_id": 1910004,
+      "reference_exit_HP": 53,
+      "reference_mean_floor": 9.5,
+      "end_turn_alternative_exit_HP": 38,
+      "alternative_mean_floor": 11.0,
+      "not_evidence_that_lower_HP_is_generally_better": true
+    }
+  ],
+  "assessment": {
+    "path": "artifacts/native-greedy-turn-teacher/result-assessment-v1/report.json",
+    "report_id": "sha256:02108dfc0f550e62a7b9f36d65487fe2fad5c5f8153aa81bd9d2973eabdbfff6",
+    "auditor_path": "artifacts/native-greedy-turn-teacher/result-assessment-v1/assess.py",
+    "resource_path": "artifacts/resources/native-greedy-turn-result-assessment-v1-2.json",
+    "resource_id": "sha256:17da055b8c8f85bdbb5fed6e7e65a291a36c0933761af8375bcce0b7f953ac53",
+    "auditor_sha256": "195dac61afe840a1f924f7945d5eb20f5df14495fc140f0e840a1844ce49004f",
+    "source_files_verified": 64766,
+    "branch_receipts_verified": 469,
+    "full_episode_histories_decoded_one_at_a_time": 469,
+    "public_decisions_verified": 73123,
+    "counts_from_public_choice_metadata": {
+      "candidate_turn_generation": 170,
+      "forced_frozen_turn": 1320,
+      "fresh_natural_source": 1138,
+      "greedy_combat_matched_noncombat_continuation": 34803,
+      "verified_source_prefix": 35692
+    },
+    "all_public_trace_ids_reconstructed": true,
+    "first_public_roots_prefixes_frozen_turns_boundaries_reconstructed": true,
+    "all_scores_costs_freezes_and_lesson_tables_reconstructed": true,
+    "collection_native_delivery_and_all_choice_inference_receipts_verified": true,
+    "native_journal_bytes_verified": true,
+    "native_delivery_semantically_reaudited": false,
+    "neural_logits_probabilities_or_value_predictions_independently_recomputed": false,
+    "original_eight_world_denominator_preserved": true,
+    "wall_seconds": 91.72133033303544,
+    "cpu_seconds": 50.463925902,
+    "peak_resident_memory_bytes": 252444672,
+    "prior_failed_saved_only_assessment": {
+      "resource_path": "artifacts/resources/native-greedy-turn-result-assessment-v1-1.json",
+      "resource_id": "sha256:fe1f5fe6889652501fba7d1a03ccba9af79b39596b1d0731af500227aa235216",
+      "cause": "Private audit read players from wrapper instead of its already-bound behavior recipe; stopped before branch verification. No game evidence changed or retried."
+    }
+  },
+  "collection_resources": [
+    {
+      "cpu_seconds": 495.43987287299984,
+      "exit_code": 0,
+      "final_storage_bytes": 185370778,
+      "path": "artifacts/resources/native-greedy-turn-teacher-pilot-v1-1.json",
+      "peak_resident_memory_bytes": 378486784,
+      "report_id": "sha256:5aa1be642eac86f2cfb370275920e89a0b1da4ca6488f361aa5049cb9e5ad5af",
+      "status": "completed",
+      "wall_seconds": 791.0079482500441
+    },
+    {
+      "cpu_seconds": 581.0624693780004,
+      "exit_code": 0,
+      "final_storage_bytes": 468786149,
+      "path": "artifacts/resources/native-greedy-turn-teacher-pilot-v1-2.json",
+      "peak_resident_memory_bytes": 434077696,
+      "report_id": "sha256:913b2d0a42e444212ae7b1070392705992032a5fe09a5e5afb3ea444cbe172be",
+      "status": "completed",
+      "wall_seconds": 774.1560080829076
+    },
+    {
+      "cpu_seconds": 598.999535409001,
+      "exit_code": 1,
+      "final_storage_bytes": 797710262,
+      "path": "artifacts/resources/native-greedy-turn-teacher-pilot-v1-3.json",
+      "peak_resident_memory_bytes": 383500288,
+      "report_id": "sha256:60ed341a488f774e7158867e67c7aae209c6c1e649ffbccc2e241e23f85c6a32",
+      "status": "failed",
+      "wall_seconds": 717.1031128340401
+    }
+  ],
+  "collection_totals": {
+    "collection_wall_seconds_sum_of_sessions": 2282.267069166992,
+    "collection_cpu_seconds_sum_of_sessions": 1675.5018776600014,
+    "collection_peak_resident_memory_bytes": 434077696,
+    "collection_final_storage_bytes_cumulative_not_summed": 797710262
+  },
+  "status_explanation": {
+    "last_resource_exit_code": 1,
+    "last_resource_status_preserved": "failed",
+    "reason": "completed finite schedule with one no-eligible-root source, not a game crash or resource cap",
+    "failed_game_attempts": 0,
+    "missing_source_replaced_or_retried": false
+  },
+  "preserved_players": [
+    {
+      "Adam_steps": 5658,
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "state_path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "state_sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+    },
+    {
+      "Adam_steps": 6045,
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "state_path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "state_sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+    }
+  ],
+  "original_players_and_full_Adam_unchanged": true,
+  "production_optimizer_steps": 0,
+  "new_games_during_assessment": 0,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "base_readiness_passed": false,
+  "adaptive_controller_allowed": false,
+  "automatic_training_follows": false,
+  "next_work": [
+    "Qualify bounded auxiliary combat-consequence learning with whole-source-game splits and a fixed full-run-only control.",
+    "Keep observed transition prediction separate from strategic utility and the unchanged full-run victory/bootstrap objective.",
+    "Only after fitting/gradient/generalization controls, prepare bounded student forks preserving both complete Adam states and test fresh complete games."
+  ],
+  "new_learning_method_implemented": false,
+  "owner_command_needed_for_completed_collection": false,
+  "repository_check": {
+    "resource_path": "artifacts/resources/native-greedy-turn-result-repository-check-v1-1.json",
+    "resource_id": "sha256:9ab8c432453f2ba01a0211f847502699370e21f742f9ad3fef7c451ab194ef4c",
+    "passed": true,
+    "tests_passed": 2110,
+    "tests_skipped": 4,
+    "strictly_typed_source_files": 424,
+    "formatting_lint_and_CSharp_protocol_passed": true,
+    "wall_seconds": 129.50175320799462,
+    "cpu_seconds": 117.11118300599999,
+    "peak_resident_memory_bytes": 380600320
+  },
+  "github_issues_updated": [
+    35,
+    143,
+    146
+  ],
+  "tracked_change_scope": "Documentation and portable evidence only; frozen implementations and recipes unchanged.",
+  "evidence_id": "sha256:505b07aad21ade40c5f86e75bceb9f049c1c50add293353da73a1c0fa4944c6b"
+}

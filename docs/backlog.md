@@ -1,3 +1,73 @@
+## Current handoff — fresh TRAIN greedy-turn teacher complete; qualify richer learning feedback next
+
+**All 469 scheduled game attempts ended cleanly; this teacher still supplies no
+admitted better-turn preferences.** Seven of eight new TRAIN source games yield
+eligible positions; source `1910003` dies on floor 5 without one. Keep it in the
+original denominator, with no replacement or retry. Both round-60 players and
+all Adam moments/counters **5,658 / 6,045** remain unchanged. See the
+[completed result](native-greedy-complete-turn-teacher-result.md) and
+[portable evidence](evidence/native-greedy-complete-turn-teacher-result-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Finish **8 source games + 53 proposals + 408 scored continuations**: seven
+  roots / 51 plans, zero failed/skipped branches, blocked roots, full wins, act
+  clears, app copies or optimizer updates. Six roots are normal fights, one elite;
+  usable roots split four/three across the two players.
+- [x] Preserve and explain `complete_with_gaps` / resource exit **1**: the frozen
+  runner treats an unavailable source as a gap. This is completed collection with
+  one absent eligible position, not a crashed game or exhausted resource cap.
+- [x] Rebuild **352 alternative/reference pairs: 23 higher / 28 lower / 301 tied
+  returns (85.5% ties)**. Nine alternatives have higher means, eight lower, 27 tie.
+  The strongest has six higher/two tied streams, p **0.015625**, above its unchanged
+  adjusted threshold **0.005556**. No post-hoc reversal supplies an admitted target.
+- [x] Decode all **469 histories / 73,123 decisions** one at a time and verify
+  **64,766 source files**, root/no-root sampling, prefixes, full plans/boundaries,
+  native endings, CPU/returns, freezes and lesson tables in **91.72 seconds**.
+  Check **7,654 matched noncombat draws / 3,911 identical-input choices**. Neural
+  probabilities and delivery semantics are not independently recomputed here;
+  the collector's sealed native and full-choice audits remain verified.
+- [x] Establish that all 51 plans repeat the same current-fight trace across their
+  eight streams. At six roots all plans survive; at the elite root all die. Exit
+  HP differs in **168 pairs**, but **120** still reach the same final floor. One
+  42-versus-20-HP comparison dies on floor 16 in every stream. Another lower-HP
+  plan reaches farther on average: HP alone is not a strategic utility label.
+- [x] Record **38.04 wall minutes / 1,675.50 CPU seconds**, 434.08 MB peak RAM and
+  797.71 MB final cumulative output across all three collection sessions. Preserve
+  original collectors, models, optimizer state, resources and qualification evidence.
+- [x] Pass **2,110 tests (four skipped)**, strict types on 424 files,
+  formatting/lint and the C# protocol in **129.50 seconds**. Update GitHub #35 /
+  #143 / #146 while preserving their previous handoffs. No push or Actions.
+
+Next work, in order:
+
+1. **Qualify a bounded auxiliary combat-consequence learning test.** Turn saved
+   public decisions and observed native turn/encounter consequences into explicit
+   numerical targets. Check fitting, gradient direction and held-out whole-game
+   prediction against simple/current-state controls. Keep every related branch and
+   stream in its source game's split; seven roots alone cannot establish broad
+   generalization. Both fixed players need separate coverage. Future observations
+   are labels only, never extra information in an earlier student input.
+2. **Separate tactical prediction from strategic value.** Keep full-run victory and
+   the existing bootstrap score unchanged. Auxiliary prediction requires a separate
+   versioned loss and an unchanged full-run-only control. Do not silently reward HP,
+   Smith or immediate fight survival, relax the original preference gate, recycle
+   privileged teacher episodes as ordinary PPO, or repeat an unchanged teacher or
+   critic grid. The seven roots do not distinguish fight survival within a root.
+3. **Return to a bounded student intervention, then fresh full games.** After short
+   numerical controls pass, fork both exact weights and complete Adam states for a
+   matched auxiliary-versus-control test. All legal decision families remain
+   learnable. Report wins first, then acts/floors/failures and compute. Readiness,
+   promotion and adaptive thinking remain unpassed; GA/other difficulties deferred.
+4. **Clarify future runner status text** for completed schedules with no-eligible
+   sources, retaining original denominators and historical failed resource receipts.
+
+The next learning method is **backlog work, not implemented or launched**. No owner
+command is needed for the completed collection. Codex ran only saved-data checks;
+no game, fitting job, promotion, push or GitHub Actions follows this assessment.
+
+### Preserved greedy-turn teacher preparation (commands below are historical)
+
 ## Current handoff — fresh TRAIN complete-turn teacher implemented; owner collection next
 
 **The bounded teacher now uses greedy combat continuation and fresh TRAIN worlds.**
