@@ -1,0 +1,18 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:a5d772823e674f824661ef3aa2aae5e3efd7f5b6b1d3993f3a7d36818ff6c8e0",
+  "partition": "control",
+  "schema_version": "native-greedy-turn-seeds-v1",
+  "seeds": [
+    {
+      "id": 1900000,
+      "numerical_seed": 2,
+      "seed": "SP1RESH1FTTURNCHK0000"
+    },
+    {
+      "id": 1900001,
+      "numerical_seed": 3,
+      "seed": "SP1RESH1FTTURNCHK0001"
+    }
+  ]
+}

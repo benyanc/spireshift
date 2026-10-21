@@ -1,3 +1,79 @@
+## Current handoff — fresh TRAIN complete-turn teacher implemented; owner collection next
+
+**The bounded teacher now uses greedy combat continuation and fresh TRAIN worlds.**
+Both exact round-60 weights, every Adam moment and counters **5,658 / 6,045** remain
+unchanged. The long collection has not started. See the
+[design and single owner command](native-greedy-complete-turn-teacher.md) and
+[portable qualification evidence](evidence/native-greedy-complete-turn-teacher-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Freeze **eight distinct new TRAIN worlds**, alternating four per player,
+  excluding all 28 earlier native seed manifests and two separate control worlds.
+  Capture at most one publicly eligible later combat root per source; seal it before
+  later outcomes. Failed/no-root sources remain in the eight-world denominator and
+  are never replaced. Preserve the inspected development comparison separately.
+- [x] Generate one greedy reference turn and a sampled remainder for **every legal
+  first move**, including end turn and current potion controls. Keep native nested
+  choices/costs/targets; freeze exact plans before continuations. Deduplicate only
+  identical traces in fixed order. No final-return, HP or winning-plan selection.
+- [x] Replay frozen turns exactly, then use greedy combat, including owned nested
+  selections, and matched temperature-0.8 noncombat decisions. Root/repeat/room/family
+  draw slots isolate future choices from different combat lengths and proposals.
+- [x] Bound proposal CPU at **64 seconds per root / 32 per attempt**. Charge every
+  alternative all proposal episode CPU, without amortization, plus its own episode;
+  the greedy-only reference pays no proposal overhead. Preserve the original
+  whole-run victory / 128-CPU-second objective and bootstrap score. Stop/record
+  exhausted budgets and incomplete turns; block failed roots, never retry uncertain
+  delivery, retain original source counts and stop beyond two pilot failures.
+- [x] Complete **16/16 native controls** in **90.79 seconds**, with zero failures,
+  skipped branches, app copies or updates. Both exact repeats match. Verify **28
+  shared noncombat draws / 12 identical-input choices** across four candidate/reference
+  pairs. Four unique turns contain 13 steps; this short native sample has no nested
+  turn steps. Nested behavior is covered by unit tests and preserved earlier native
+  qualification, not newly observed in these four turns.
+- [x] Saved audit reconstructs **all 1,792 decisions**, first-root sampling, complete
+  plans/boundaries, draws/probabilities, CPU charges, repeats and lesson tables in
+  **53.29 seconds**, without games or fitting. Journal hashes verify; native delivery
+  is not independently semantically reaudited. These are correctness controls,
+  not strength evidence or a readiness pass.
+- [x] Host-disabled main preflight verifies **75,022 protected old files** and both
+  full player/Adam seals, creates no main workspace, and fills only the two passed
+  control/audit references in the template frozen before native controls. Runtime
+  is **72.96 seconds**, with no games or updates.
+- [x] Pass **2,110 tests (52 new; four skipped)**, strict types on 424 files,
+  formatting/lint and the C# protocol in **122.76 seconds**. Source checks and both
+  complete player files still match; the long teacher remains unstarted.
+
+Next work, in order:
+
+1. **Owner runs the finite eight-world teacher — NOT STARTED.** The upper bound is
+   **944 native attempts** before menu/trace deduplication: eight sources, up to
+   104 proposals and 832 comparisons. Use one worker, shared frozen inputs, zero app
+   copies and 15-minute sessions; 2 GB memory / 4 GB cumulative output. Completed
+   attempts resume; uncertain evidence remains preserved. No automatic next stage.
+2. **Assess useful lessons before fitting.** Report wins first, then acts/floors/
+   bootstrap returns, ties, reliable better/worse turns, CPU and whole-world coverage.
+   Keep the eight-source denominator, fixed-world scope and original preference
+   rule. Eight streams vary noncombat policy actions, not independent hidden worlds;
+   they may be identical under greedy combat. Do not tune on inspected development
+   worlds, loosen admission or silently add HP rewards.
+3. **Prepare a bounded student test only if targets support it.** Fork both complete
+   saved states, preserve every Adam moment, keep legal families learnable and test
+   fresh full games against frozen parents. Privileged teacher branches are not
+   ordinary PPO data. Base readiness still precedes promotion and adaptive thinking.
+
+Single owner command, from any directory with STS2 closed:
+
+```bash
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-greedy-turn-teacher-v1.sh
+```
+
+Codex runs only short controls, saved audits and checks. No long collection,
+training, promotion, push or GitHub Actions has started.
+
+### Preserved fresh combat comparison result handoff (commands below are historical)
+
 ## Current handoff — fresh combat comparison complete; improve teacher continuation next
 
 **Greedy combat improves average progress for both fixed players, with no full wins.**

@@ -1,0 +1,273 @@
+{
+  "contracts": {
+    "HP_reward_added": false,
+    "all_proposals_resolved_before_scored_comparisons": true,
+    "candidate_selection": "all_first_moves_exact_trace_dedup_no_outcome_filter",
+    "cost_accounting": "all_proposal_episode_CPU_to_each_alternative_reference_zero_no_amortization",
+    "maximum_episode_decisions": 4096,
+    "maximum_episode_wall_seconds": 120,
+    "maximum_plan_bytes": 1000000,
+    "maximum_plan_steps": 64,
+    "missing_sources_replaced": false,
+    "noncombat_temperature": 0.8,
+    "original_value_baseline_changed": false,
+    "policy_contract": "native_fresh_train_complete_turn_greedy_continuation_v1",
+    "preference_rule_changed": false,
+    "proposal_call_cpu_cap": 32.0,
+    "proposal_cpu_cap_per_root": 64.0,
+    "proposal_temperature": 1.2,
+    "root_sealed_before_later_source_outcomes": true,
+    "root_selection": "first_eligible_public_later_combat_in_manifest_order_no_replacement_v1",
+    "turn_sealed_before_continuation": true,
+    "whole_run_cpu_ceiling": 128
+  },
+  "control_saved_audit": {
+    "all_action_tables_exactly_reconstructed": true,
+    "all_choices_and_root_selection_reconstructed": true,
+    "all_proposal_CPU_charges_reconstructed": true,
+    "auditor_sha256": "98fd56f97d78f07aae4881789596949cb00c444d4a036b0aeb09e7c6d268b536",
+    "branch_receipts_verified": 16,
+    "checkpoint_promoted": false,
+    "continuation_probabilities_reconstructed": true,
+    "matched_noncombat": {
+      "candidate_reference_pairs": 4,
+      "identical_public_inputs_with_identical_choices": 12,
+      "shared_noncombat_draw_keys": 28,
+      "valid": true
+    },
+    "native_delivery_semantically_reaudited": false,
+    "native_journal_bytes_verified": true,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "ordinary_PPO_eligible": false,
+    "original_players_and_full_Adam_unchanged": true,
+    "path": "artifacts/native-greedy-turn-teacher/checks-v1/control-audit.json",
+    "proposal_selection_outcome_blind": true,
+    "public_decisions_reconstructed": 1792,
+    "report_id": "sha256:33a0763e569464b59211c9daf05ad7f71b6a74c8e223462307724d1a90520e88",
+    "resource": {
+      "cpu_seconds": 25.528226979999996,
+      "final_storage_bytes": 1171,
+      "path": "artifacts/resources/native-greedy-turn-control-audit-v1-1.json",
+      "peak_resident_memory_bytes": 209534976,
+      "report_id": "sha256:b7f6a0d89d8afd3c61d56dca41052ec7e34fe44a177b234cff5287cf17e76eff",
+      "wall_seconds": 53.286221334012225
+    },
+    "source_worlds": 2,
+    "turn_boundaries_and_plans_reconstructed": true
+  },
+  "date": "2026-10-21",
+  "entry_sha256": {
+    "collect-native-greedy-turn-teacher-v1.sh": "f9b635cb0c744b0253dd428d87e9c36e484fbbcc7a67ddca09d75bbc6eff4a4b",
+    "native-greedy-turn-teacher-v1.py": "2f3f337c04a8a6e0dcecc318eb37de6c48f85309fd50cbc50df716b60cfef2de"
+  },
+  "main": {
+    "config_id": "sha256:aaf95958f80f3fcf9007c65b498a9176953176783781ccaee50c810d70de12b0",
+    "excluded_short_control_manifest": [
+      {
+        "id": "sha256:a5d772823e674f824661ef3aa2aae5e3efd7f5b6b1d3993f3a7d36818ff6c8e0",
+        "path": "manifests/splits/sts2-v0.111.0-native-a8-greedy-turn-control-v1.json"
+      }
+    ],
+    "expected_wall_minutes_estimate_from_control": [
+      30,
+      90
+    ],
+    "fresh_TRAIN_source_worlds": 8,
+    "invocation_wall_seconds_limit": 7200,
+    "maximum_proposal_games": 104,
+    "maximum_scored_comparisons": 832,
+    "native_attempt_upper_bound": 944,
+    "noncombat_continuation_streams_per_turn": 8,
+    "path": "configs/native-teacher/sts2-v0.111.0-a8-greedy-turn-pilot-v1.json",
+    "seed_manifest": {
+      "id": "sha256:3d42d39f01c68dc4f8cc57b37ea5d45d4fc9fdadd6592dbc30bbd993005266ab",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-greedy-turn-pilot-v1.json"
+    },
+    "session_limits": {
+      "cpu_seconds": 1800,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 900
+    },
+    "source_games": 8,
+    "started": false,
+    "workspace": "artifacts/native-greedy-turn-teacher/sts2-v0.111.0-a8-pilot-v1",
+    "worlds_per_fixed_player": 4
+  },
+  "main_preflight": {
+    "config_id": "sha256:aaf95958f80f3fcf9007c65b498a9176953176783781ccaee50c810d70de12b0",
+    "control_audit_id": "sha256:33a0763e569464b59211c9daf05ad7f71b6a74c8e223462307724d1a90520e88",
+    "control_coverage_id": "sha256:774857b1cd653c5f5207729c138a4e636ef78a3e5f482f1ab7e7d4228011560e",
+    "control_report_id": "sha256:f128e88a65583f5055df04b012c2dec1715f098d21bd049d1d5bc9bbe1603be1",
+    "main_status": {
+      "continuation_streams_per_plan": 8,
+      "fixed_players": 2,
+      "fresh_source_worlds": 8,
+      "native_attempt_upper_bound": 944,
+      "new_games": 0,
+      "optimizer_steps": 0,
+      "status": "greedy_turn_teacher_plan_only"
+    },
+    "main_workspace_created": false,
+    "native_hosts_disabled_during_preflight": true,
+    "new_games": 0,
+    "only_passed_control_references_changed_from_precontrol_template": true,
+    "optimizer_steps": 0,
+    "original_full_weights_and_all_Adam_unchanged": true,
+    "path": "artifacts/native-greedy-turn-teacher/checks-v1/main-preflight.json",
+    "protected_old_files_verified": 75022,
+    "report_id": "sha256:edd4b42380abba3e309998dcc665a25205d4a2ae763e4ab64452d84bc0c3f3b2",
+    "resource": {
+      "cpu_seconds": 31.079145729,
+      "final_storage_bytes": 2834,
+      "path": "artifacts/resources/native-greedy-turn-main-preflight-v1-1.json",
+      "peak_resident_memory_bytes": 275677184,
+      "report_id": "sha256:c61a4a06c11fd0f6455fa1736747ecbb0c1a4070f5cebf204bff74900302d782",
+      "wall_seconds": 72.95701500005089
+    },
+    "schema_version": "native-greedy-turn-main-preflight-v1"
+  },
+  "native_control": {
+    "admitted_exploratory_preferences": 0,
+    "candidate_plans": 4,
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "comparison_games_including_two_exact_repeats": 10,
+    "config_id": "sha256:b69411acd680d147d18954470b5be2a5f5f34cf47d2560dc0b72e71db501f765",
+    "duplicate_public_traces_identical": true,
+    "failed_branches": 0,
+    "game_apps_created": 0,
+    "native_attempts": 16,
+    "noncombat_matching": {
+      "candidate_reference_pairs": 4,
+      "identical_public_inputs_with_identical_choices": 12,
+      "shared_noncombat_draw_keys": 28,
+      "valid": true
+    },
+    "path": "artifacts/native-greedy-turn-teacher/sts2-v0.111.0-a8-control-v1/report.json",
+    "production_optimizer_steps": 0,
+    "proposal_games": 4,
+    "report_id": "sha256:f128e88a65583f5055df04b012c2dec1715f098d21bd049d1d5bc9bbe1603be1",
+    "resource": {
+      "cpu_seconds": 52.745321626,
+      "final_storage_bytes": 37662723,
+      "path": "artifacts/resources/native-greedy-turn-teacher-control-v1-1.json",
+      "peak_resident_memory_bytes": 396820480,
+      "report_id": "sha256:ba790abd90132c3541d4f8ff547c57523aea18542eb365225dfc2ded8c664836",
+      "wall_seconds": 90.79322787513956
+    },
+    "skipped_branches": 0,
+    "source_games": 2,
+    "usable_source_roots": 2
+  },
+  "new_implementation_sha256": {
+    "native_greedy_turn_audit.py": "98fd56f97d78f07aae4881789596949cb00c444d4a036b0aeb09e7c6d268b536",
+    "native_greedy_turn_branch.py": "d3f60f28730f206c8598ae81f5ff19212b9e557526ada883cec108ed922e8c01",
+    "native_greedy_turn_config.py": "7064a6afcea37b2d384d72534ecc32ea3affacf3a07fdef7afe43e6c077f4461",
+    "native_greedy_turn_data.py": "33e105292c8489daa8f022abe42104be474d556942c9220dba6fe551645ebca7",
+    "native_greedy_turn_policy.py": "c4150aa2b9b6006913d4ba3a61c76f682a995f48dfb0289ba200deef8178cce0",
+    "native_greedy_turn_teacher.py": "4023bffb57813f2902de37b865a882baa648c8dc145a4fa142c63d2671b2f4ce"
+  },
+  "next_work": [
+    "owner_run_finite_fresh_TRAIN_teacher",
+    "assess_ties_reliable_preferences_failures_CPU_and_whole_world_coverage_before_distillation",
+    "if_targets_support_it_prepare_separate_bounded_student_forks_and_fresh_full_run_evaluation"
+  ],
+  "observed_control_coverage": {
+    "nested_steps_in_unique_turns": 0,
+    "new_games": 0,
+    "not_exhaustive_mechanics_proof": true,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-greedy-turn-teacher/checks-v1/observed-coverage.json",
+    "public_decisions": 1792,
+    "report_id": "sha256:774857b1cd653c5f5207729c138a4e636ef78a3e5f482f1ab7e7d4228011560e",
+    "schema_version": "native-greedy-turn-control-coverage-v1",
+    "scope": "observed_control_only_nested_boundaries_covered_by_unit_tests_and_preserved_earlier_native_qualification",
+    "source_report_id": "sha256:f128e88a65583f5055df04b012c2dec1715f098d21bd049d1d5bc9bbe1603be1",
+    "unique_complete_turns": 4,
+    "unique_plan_steps": 13
+  },
+  "owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-greedy-turn-teacher-v1.sh",
+  "preparation": {
+    "excluded_prior_seed_manifests": 28,
+    "main_template_sha256_before_native_control": "eb26dd10208c70afb86d60a9d3ba79b72d78eb33d1331f4c323006b27e707a62",
+    "path": "artifacts/native-greedy-turn-teacher/preparation-v1/report.json",
+    "protected_files_verified": 75022,
+    "report_id": "sha256:fb743c6bca63f6f66553b4a7d6bdd6c3a0289a7a33c02956594cf5889b547b98",
+    "resource": {
+      "cpu_seconds": 26.531951154,
+      "final_storage_bytes": 15645042,
+      "path": "artifacts/resources/native-greedy-turn-preparation-v1-1.json",
+      "peak_resident_memory_bytes": 307560448,
+      "report_id": "sha256:1e83aeb99a0894aeefd1c45c68f37d1eeea27b884718f7fbac3070440d4388a9",
+      "wall_seconds": 62.07022904208861
+    }
+  },
+  "private_preparation_sources": {
+    "artifacts/native-greedy-turn-teacher/preparation-v1/finalize.py": "521d709207fba289776e87c52f182ced09b33c5c04b55826954e8eaa19fe74c7",
+    "artifacts/native-greedy-turn-teacher/preparation-v1/prepare.py": "708ca09c77a5ee6741d1e3b170d3cc5893da25f51f2bfd694c7078b3cd4c098a"
+  },
+  "protected_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "report_id": "sha256:9d7bc064fe4a46e4966ac4bb0ef838f1b808c7b3923555a0127c6ce259534130",
+  "repository_check": {
+    "CSharp_protocol_verified": true,
+    "cpu_seconds": 111.488989485,
+    "format_files": 582,
+    "lint_passed": true,
+    "new_tests": 52,
+    "path": "artifacts/resources/native-greedy-turn-repository-check-v1-1.json",
+    "peak_resident_memory_bytes": 429146112,
+    "report_id": "sha256:4165b666835b7b9e2e6dbecea20af6ce919aba8537d20527fc9feb931e6985d5",
+    "strict_type_files": 424,
+    "tests_passed": 2110,
+    "tests_skipped": 4,
+    "wall_seconds": 122.75721125002019
+  },
+  "result": "bounded_fresh_TRAIN_greedy_continuation_teacher_qualified_owner_pilot_not_started",
+  "schema_version": "native-greedy-complete-turn-teacher-evidence-v1",
+  "scope": {
+    "adaptive_controller_allowed": false,
+    "ascension": 8,
+    "automatic_training_follows": false,
+    "base_readiness_passed": false,
+    "character": "Ironclad",
+    "checkpoint_promoted": false,
+    "controls_are_strength_evidence": false,
+    "fixed_native_version": "v0.111.0 / 41cef1ea",
+    "game_apps_created": 0,
+    "independent_hidden_worlds_per_root": 1,
+    "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+    "optimizer_steps": 0,
+    "ordinary_PPO_eligible": false,
+    "original_full_weights_and_all_Adam_states_unchanged": true,
+    "privileged_fixed_world_teacher": true,
+    "public_belief_search_eligible": false,
+    "streams_vary_only_noncombat_policy_sampling": true,
+    "student_inputs_public_only": true,
+    "terminal_victory_primary": true,
+    "training_allowed": false
+  }
+}
