@@ -1,3 +1,61 @@
+## Current handoff — fresh combat comparison complete; improve teacher continuation next
+
+**Greedy combat improves average progress for both fixed players, with no full wins.**
+The owner completed all 256 fresh-game attempts. Both exact round-60 weights and
+every Adam moment/counter **5,658 / 6,045** remain unchanged. See the
+[completed assessment](native-combat-behavior-result.md) and
+[portable result evidence](evidence/native-combat-behavior-result-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Complete **64 fresh development worlds × two players × two arms = 256/256
+  games**, with zero failures, unattempted games, app copies or optimizer updates.
+  The sole change is combat sampling at temperature 0.8 versus exact argmax,
+  including nested combat choices. Preserve all legal menus and noncombat behavior.
+- [x] Measure **0/128 wins in both arms**, **0 → 2 act-clearing games**, mean floor
+  **10.523 → 11.305**, best floor **17 → 27**, mean bootstrap return
+  **0.023875 → 0.025864**. Mean game CPU is **2.470 → 2.561 seconds**, under the
+  unchanged 128-second whole-run ceiling. This is behavior benefit, not a learned
+  weight improvement, search benefit or readiness pass.
+- [x] Rebuild the predeclared whole-world paired bootstrap: pooled floor gain
+  **+0.781 [95%: +0.242, +1.344]**. Individual gains: player 2 **+0.734
+  [−0.078, +1.625]**, player 3 **+0.828 [+0.234, +1.469]**. Resample 64 worlds
+  jointly across both fixed players; zero observed wins do not prove equivalence.
+- [x] Verify **5,403 shared noncombat draws / 1,392 identical-input choices** across
+  128 paired player/seeds. Saved audit checks **256 receipts / 45,281 files**, all
+  bindings/endings/returns/CPU, compact RNG receipts and tables in **42.46 seconds**.
+  Both full player/Adam seals match. Collection audited every decision; this short
+  outcome check does not repeat neural inference or semantic delivery auditing.
+- [x] Record **39,343 decisions / 252 nested combat selections** and two collection
+  sessions totaling **19.16 wall minutes / 927.23 CPU seconds**, 437.03 MB peak RAM
+  and **421.91 MB final cumulative output**. Do not sum cumulative storage or use
+  only the last session's time as the entire experiment.
+- [x] Pass **2,058 tests (four skipped)**, strict types on 414 files, formatting/lint
+  and the C# protocol in **123.75 seconds**. Tracked changes are documentation only;
+  the private audit uses saved evidence and both complete player files still match.
+
+Next work, in order:
+
+1. **Prepare a bounded complete-turn teacher test with greedy combat continuation.**
+   Use fresh TRAIN worlds and matched noncombat behavior. Compare alternative turns
+   against the cheap greedy-only reference; charge any search separately. This
+   result supports the continuation choice, not additional search or useful labels.
+2. **Check teaching signal before another student update.** Count ties, reliable
+   better/worse turns and independent-world coverage under the original rule. Keep
+   fixed-hidden-world teacher data explicitly privileged and separate from ordinary
+   PPO. Do not tune on these inspected development worlds, enlarge the old flat
+   teacher, loosen admission or silently add HP rewards.
+3. **Test supported targets in a bounded student comparison.** Fork both full
+   weights and every Adam moment, keep all legal action families learnable and
+   evaluate fresh complete games against the frozen parents at equal CPU ceilings.
+   Greedy evaluation does not replace the actual sampled behavior required for
+   ordinary PPO. Foundation readiness still precedes promotion and adaptive thinking.
+
+**No owner command is needed for this completed comparison.** No new long task,
+training, promotion, push or GitHub Actions follows this saved assessment.
+
+### Preserved combat-behavior preparation handoff (commands below are historical)
+
 ## Current handoff — fresh greedy-versus-sampled combat comparison qualified; owner run next
 
 **The requested combat-only comparison is implemented and qualified.** Both exact

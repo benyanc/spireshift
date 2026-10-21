@@ -93,7 +93,13 @@ saved result. Progress shows accumulated wins, average floor and best floor per 
 after each four-game seed group. Actual resource reports remain per session; final
 cumulative storage must not be summed across sessions.
 
-## Qualification and owner command
+## Preserved qualification and owner command
+
+The owner completed the 256-game comparison on 2026-10-21. See the
+[completed assessment](native-combat-behavior-result.md) and
+[result evidence](evidence/native-combat-behavior-result-v1.json). The preparation
+measurements and original command below are historical. No new run is required;
+the command now verifies and displays its saved result.
 
 The native control completes **12/12 games** with zero failures, app copies or
 optimizer updates. All four exact repeats match. Its four primary player/seed pairs
@@ -122,16 +128,15 @@ the 256-game main plan. Native hosts are explicitly disabled and no main workspa
 is created. Only the two passed control/audit references change from the template
 frozen before the control. Preflight takes **88.94 seconds**.
 
-The longer comparison has **not started**. Close any running STS2 game, then run this
-one command from any directory:
+At qualification, the longer comparison had **not started**. Its owner command was:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-combat-behavior-v1.sh
 ```
 
-Allow roughly **20–35 minutes**, estimated from the short control, with 256 planned
-complete-game attempts and the resource/session limits above. The command continues
-only this finite comparison across clean sessions. Share its final summary. No
-training or further experiment follows automatically.
+The original estimate was **20–35 minutes**, based on the short control, with 256
+planned complete-game attempts and the resource/session limits above. Actual
+collection took 19.16 wall minutes across two sessions. No training or further
+experiment follows automatically.
 
 See [portable qualification evidence](evidence/native-combat-behavior-comparison-v1.json).
