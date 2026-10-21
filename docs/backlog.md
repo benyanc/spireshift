@@ -1,3 +1,65 @@
+## Current handoff — combat-planning pilot complete; isolate cheap greedy behavior next
+
+**The finite planner comparison finished cleanly, with mixed strategic results and
+no reliable new better-turn labels.** Neither player was trained. Both exact weights,
+all Adam state and counters **5,658 / 6,045** remain unchanged. See
+[completed assessment](native-bounded-combat-planning-result.md) and
+[portable result evidence](evidence/native-bounded-combat-planning-result-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Finish **756/756 native attempts**: 252 combat proposals + 504 selected-plan
+  evaluations, reusing 504 verified old baselines. Zero failures/skips/blocked turns,
+  app copies, full wins or optimizer updates. Eight original TRAIN worlds / 63 turns;
+  dependent branches are not independent fresh games or ordinary PPO experience.
+- [x] Measure the mixed outcome: tested encounter exits alive **332 → 344 / 504**,
+  average floor **11.377 → 11.784**, act-clearing branches **5 → 3**, best floor
+  **22 → 22**, mean bootstrap return **0.025742 → 0.026040**. Planning versus its
+  paired baseline gives **96 higher / 34 lower / 374 tied returns**. Four worlds
+  have identical paired returns; three have positive mean changes and one negative.
+- [x] Rebuild alternative-turn feedback: **25/65/350 higher/lower/tied** becomes
+  **39/84/317** (79.5% → 72.0% ties). The unchanged rule admits **zero** better-turn
+  preferences; smallest positive-mean sign p remains **0.1445**. No readiness pass.
+- [x] Decompose proposals: **51/63 selections use the greedy remainder**. Twelve
+  choose another sample: one survival rescue, eleven higher-HP alive exits. Eleven
+  turns have four identical proposals; all four die for twenty turns. The original
+  comparator samples actions, so the benefit of search over cheap greedy combat
+  remains unmeasured. Do not equate surviving with better full-run play.
+- [x] Verify **756 receipts / 63,175 source files**, all bindings, endings, returns,
+  CPU charges, selection and tables in **130.06 seconds**. Decode 38,460 proposal
+  decisions / 252 exits and reconstruct 2,453 remainder steps. Preserve both full
+  states. Scored continuation probabilities are not independently reconstructed;
+  retained native journals and collection delivery audits remain verified.
+- [x] Reconcile all sessions: **37.76 wall minutes**, 1,842.17 CPU seconds,
+  465.16 MB peak RAM / 1.282 GB cumulative output. Mean charged case CPU is
+  **2.125 → 10.464 seconds**, inside the same 128-second ceiling. Repeated search
+  accounting charges are separate from physical experiment CPU.
+- [x] Pass **2,025 tests (four skipped)**, strict types on 406 files,
+  formatting/lint and C# protocol in **119.54 seconds**. Tracked changes are
+  documentation only; both complete player/Adam byte seals still match afterward.
+
+Next work, in order:
+
+1. **Prepare a small matched sampled-versus-greedy combat control.** Use both
+   preserved players, identical noncombat behavior, explicit RNG streams and fresh
+   whole-game seeds. If reusing the old roots to compare search, include an
+   always-greedy remainder arm. Measure wins, acts, floors, failures and actual CPU;
+   do not tune against these already inspected eight worlds.
+2. **Improve continuation or candidate quality from that evidence.** Do not expand
+   the unchanged four-proposal teacher, loosen its preference rule, silently reward
+   HP or launch another critic grid. Local survival alone has not supplied reliable
+   strategic targets. Freeze any changed teacher/student method separately and
+   validate across whole worlds.
+3. **Use supported targets for a bounded student test.** Fork both exact full
+   weights and every Adam moment, keep all legal action families learnable, separate
+   privileged teacher data from ordinary PPO and evaluate fresh complete games.
+   Foundation readiness still precedes model promotion and adaptive thinking.
+
+**No owner command is needed for this completed comparison.** No new long task,
+training, promotion, push or GitHub Actions follows the saved assessment.
+
+### Preserved bounded-combat preparation handoff (commands below are historical)
+
 ## Current handoff — bounded combat-planning comparison qualified; owner pilot next
 
 **The bounded native planner comparison is implemented and qualified.** It preserves

@@ -1,5 +1,11 @@
 # Bounded combat-planning comparison
 
+**Completed 2026-10-20.** The owner finished all 756 attempts. See the
+[result and next work](native-bounded-combat-planning-result.md): modest floor and
+encounter-survival gains, zero wins or admitted better-turn preferences. Both
+players and full optimizer states remain unchanged. No new owner run is requested.
+The design and qualification below describe the preserved original experiment.
+
 This experiment tests whether a small sampled combat planner makes complete-turn
 feedback more informative. It preserves both exact players and every Adam moment.
 It collects comparisons; it does not fit or promote a model or change the coarse
@@ -127,17 +133,15 @@ The main plan passes with native hosts disabled and creates no pilot workspace.
 Only passed control/audit identities change from its predeclared template.
 
 See [portable verification evidence](evidence/native-bounded-combat-planning-v1.json).
-**The longer pilot has not started.** Close any running STS2 game and run this one
-command from any directory:
+The finite pilot has now completed. The preserved entry point below displays the
+saved result on repeat; it does not request another collection:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-combat-planning-v1.sh
 ```
 
-Allow roughly **60–90 minutes**, estimated from the short control and longer source
-prefixes in the full curriculum. The finite upper bound is 756 new attempts, reusing
-504 baseline episodes. Clean pauses reuse completed receipts when the same command
-continues; changed or uncertain work is preserved and refused. The wrapper stops
-starting sessions at its two-hour invocation limit. No fitting or next experiment
-follows. Share the final summary so we can assess whether combat planning supplies
-more useful feedback.
+The original estimate was 60–90 minutes. Actual collection took **37.76 wall minutes**
+over three sessions, reusing the 504 baseline episodes. The saved-only assessment
+verifies the full denominator, selection, returns and costs. No fitting or next
+experiment follows. Read the [completed result](native-bounded-combat-planning-result.md)
+before considering another teacher or student run.
