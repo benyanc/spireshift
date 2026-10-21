@@ -1,3 +1,73 @@
+## Current handoff — consequence-learning test complete; both updates regress
+
+**The 192-game test completed cleanly, but neither trained fork should replace
+the original player.** All variants win zero full games. Keep both original
+weights and every Adam moment/counter **5,658 / 6,045** unchanged. See the
+[completed assessment](native-combat-consequence-learning-result.md) and
+[result evidence](evidence/native-combat-consequence-learning-result-v1.json).
+The preparation and its earlier prediction gains remain preserved below.
+
+| Variant, pooled across both fixed parents | Games | Wins | Act completions | Mean floor |
+| --- | ---: | ---: | ---: | ---: |
+| Original | 64 | 0 | 2 | 10.84375 |
+| Return-only supervised update | 64 | 0 | 0 | 7.96875 |
+| Same update plus combat-consequence feedback | 64 | 0 | 0 | 8.25000 |
+
+Completed (#35 / #143 / #146):
+
+- [x] Finish **192/192 planned development games**, on 32 distinct worlds shared
+  across two fixed parents and three variants. Zero failures, omitted games,
+  app copies or production updates; original models and all four frozen forks
+  remain byte/identity valid. The owner's two sessions take **18.37 wall minutes /
+  702.83 CPU seconds**, with 509.71 MB peak RAM / 395.88 MB cumulative main output.
+- [x] Rebuild the paired results: consequence versus original floor difference
+  **−2.59375 [−3.859375, −1.3125]**; return-only versus original **−2.875
+  [−4.125, −1.59375]**. Consequence versus return-only is **+0.28125
+  [−0.046875, +0.640625]**, inconclusive. These are exploratory seed-clustered
+  intervals for two fixed parents; zero observed wins do not prove zero true
+  win probability. Better immediate prediction did not establish better play.
+- [x] Saved-only audit verifies **73,174 files / 255 units / 192 histories /
+  22,842 decisions** and reconstructs traces, endings, scores, paired summaries
+  and randomness receipts in **28.19 seconds**, with zero games or fitting.
+  Collector native-delivery/inference audits stay sealed; their semantics/logits
+  are not independently recomputed by this result audit.
+- [x] Verify **3,524 matched noncombat draws / 1,073 identical-input comparisons**,
+  with 41 changed learned choices. All 128 original/fork comparisons first differ
+  at an identical current public input: **72 combat / 56 noncombat** choices.
+  This confirms shared-policy changes, not causal attribution to specific mistakes.
+- [x] Identify the common update for follow-up: both arms regress the original
+  actor scores onto standardized recorded returns, updating encoder/readout/direct
+  path. The auxiliary gradient is their only treatment difference. Tiny fitting
+  error on seven related TRAIN worlds does not establish good action ranking.
+  Overfitting, score calibration and changed ranking are hypotheses, not isolated
+  causes. Preserve the original critic and all historical learning recipes.
+- [x] Pass the required repository check again: **2,171 tests (four skipped)**,
+  strict types on 435 files, formatting/lint and the C# protocol in **133.96
+  seconds**. No training source, recipe, original weights or optimizer state changes.
+
+Next work, in order:
+
+1. **Diagnose saved-menu ranking and calibration before more games.** Compare
+   original/fork margins, action ordering and noncombat sampling changes, separating
+   common return-regression effects from extra consequence feedback. Do not use
+   development outcomes as new teacher labels or select a winning fork post hoc.
+2. **Separate prediction from policy learning in a new bounded recipe.** Outcomes
+   get their own readout; a prediction-only control must preserve original action
+   scores and choices exactly. Any deliberate policy update needs a distinct
+   objective and derivative checks. All legal families can remain learnable;
+   this is not a permanent small-change or combat-only restriction.
+3. **Only then collect the experience the declared update needs.** On-policy PPO
+   requires fresh sampled behavior, not these greedy evaluation games or privileged
+   teacher continuations. Preference training requires qualified ranking evidence.
+   Compare with both original players on fresh whole-game seeds. Do not expand or
+   repeat this rejected update merely because fitting loss is small.
+
+No owner command, new game/fit job, checkpoint promotion or adaptive-controller
+admission follows this assessment. The earlier owner command below is completed
+and historical. GA/other difficulties remain separate deferred work.
+
+### Preserved consequence-learning preparation (commands below are historical)
+
 ## Current handoff — bounded combat-consequence learning implemented; fresh-game comparison next
 
 **Test whether extra numerical feedback from combat helps the copied players play
