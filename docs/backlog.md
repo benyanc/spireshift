@@ -1,3 +1,66 @@
+## Current handoff — policy checks pass; owner fresh-game comparison next
+
+**The policy-update checks and eight-game native control pass.** The bounded
+main comparison is prepared, with **zero main games / zero main optimizer updates**.
+Both originals and every Adam moment/counter **5,658 / 6,045** remain byte-identical.
+The main copies start from those exact originals. See the
+[design and single owner command](native-policy-update-comparison.md) and
+[qualification evidence](evidence/native-policy-update-comparison-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Qualify the existing PPO action-probability loss separately from outcome
+  fitting. Check positive/negative advantages, both clipping directions, common
+  score shifts, candidate permutations and finite differences on both originals.
+  Maximum checked derivative error **3.48×10⁻¹¹**. Outcome targets with fixed
+  advantages leave actor gradients unchanged; prediction-only loss gives no actor
+  gradient. These are mathematical controls, not guarantees of stronger gameplay.
+- [x] Preserve warm Adam exactly on import and test every moment/counter's
+  continuation. Add an explicit skip when centered batch credit has zero variance:
+  warm momentum alone must not move weights in that case. Keep all actor layers
+  and legal decision families learnable; no permanent proximity penalty.
+- [x] Complete **eight clean native control games**: four fresh sampled training
+  games, then four frozen original/updated checks. Only disposable copies advance
+  **5,658→5,667 / 6,045→6,054**. Native delivery, probabilities, endings, frozen
+  inputs and account-profile checks pass. Native session **41.43 seconds**,
+  **777.68 MB peak RAM / 19.28 MB output**; no app copies. One control evaluation
+  world is not performance evidence.
+- [x] Prepare **128 fresh sampled training games / 128 fresh evaluation games**,
+  final-only checkpoints, two fixed initializers and unchanged-original controls.
+  Bind and exclude all 32 historical v0.111.0 seed manifests and separate control
+  worlds. Main data preflight imports the exact original states without launching
+  games or fitting them. Completed units reuse their full state and source seals.
+- [x] Keep the qualified 20-feature state-only cross-fit baseline unchanged for
+  this trial. It still omits deck/relic identities. The action-conditional rich
+  predictor is not silently used as a state-value baseline, policy or reward.
+- [x] Saved audit verifies **444 files / 11 units**, reconstructs **682 sampled
+  TRAIN / 593 evaluation decisions** and exact main-state imports in **8.20
+  seconds**. Pass **2,268 tests (52 new; four skipped)**, strict types on 452 files,
+  formatting/lint and the C# protocol in **121.90 seconds**.
+
+Next work, in order:
+
+1. **OWNER runs the one linked comparison command**, roughly 15–30 minutes from
+   short-control timing. Two rounds of 32 sampled games per player; then 32 new
+   worlds shared by originals/updated copies. Eight-game training chunks use two
+   workers. Show each batch's best result; freeze final states before evaluation.
+2. **Assess the saved paired full-game result before adding more rounds.** Report
+   terminal victories first, then acts, floors, score and failed attempts. Account
+   for fixed initializers and shared worlds; no checkpoint selection on these
+   outcomes. Do not equate successful math or prediction fitting with better play.
+3. **Use that result to choose the next material learning change.** Preserve
+   the originals and all experimental states. Rich state-value representation,
+   more useful independent experience, stronger action-teacher evidence and GA
+   remain separate possible work; do not expand the unchanged recipe automatically.
+
+Per-session caps: 15 wall minutes / 1,800 CPU seconds / 4 GB memory / 4 GB main
+output. Clean sessions resume the same finite job; one-hour invocation cap.
+Uncertain units stop for inspection. Full-run victory / 128-CPU-second budget
+remain primary. No main gameplay, promotion, readiness, controller, push or Actions
+has occurred. The earlier completed inspection below remains historical.
+
+### Preserved completed ranking assessment
+
 ## Current handoff — saved rankings complete; deliberate actor learning next
 
 **The owner has finished the inspection. Do not rerun its completed command or
