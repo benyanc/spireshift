@@ -1,3 +1,71 @@
+## Current handoff — outcome prediction separated; finish saved-menu ranking inspection
+
+**Outcome fitting now trains a separate network and cannot overwrite the saved
+player's action scores.** Both original model files and every PPO Adam moment /
+counter **5,658 / 6,045** remain read-only. All four rejected experimental forks
+remain preserved. See the [design and one owner command](native-action-prediction-separation.md)
+and [qualification evidence](evidence/native-action-prediction-separation-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Implement same-public-menu comparison of original / return-only /
+  consequence action rankings, top-score gaps, centered score spread, strict
+  inversions, entropy/KL and same-draw noncombat choices. Reconstruct historical
+  ownership, shop navigation, all recorded actions and probabilities. Keep source
+  policies separate and weight games equally; omit forced/singleton menus only
+  from strategic comparison rates, not from source denominators.
+- [x] Give recorded-return and six consequence predictions their **own 512×32×7
+  network / 16,647 parameters and separate Adam state**. Copied initial hidden
+  weights become independent predictor parameters. Original encoder, readout,
+  direct action path and critic receive no prediction gradient. Policy/chooser
+  calls never consult predictions; checkpoint schemas remain separate.
+- [x] Complete **seven whole-source-world prediction folds plus two all-TRAIN
+  prediction fits**, fixed initializer / 128 epochs, fitting-only scaling and
+  original per-head world/plan/decision weighting. Keep masks, constant labels and
+  future observations as labels only. No development menu or outcome trains this
+  predictor. Its action-dependent estimates are not automatically PPO baselines,
+  causal action values, victory probabilities or new action-teacher admission.
+- [x] Short real-data check: **6/192 saved cases / 600 decisions**, both players /
+  all three variants on one development world, **46.77 wall seconds**, zero game
+  attempts, app copies or policy/PPO updates. Recorded source choices reproduce;
+  fitting predictions leaves original scores/probabilities exactly unchanged on
+  those menus. All nine prediction states and completed ranking units are sealed.
+- [x] On the two original-player paths in that one world, the old consequence fork
+  compresses combat score spread **2.739→0.296 / 1.535→0.233**, with top-action
+  changes on **36.4% / 52.9%** of strategic combat menus. This supports score/rank
+  disruption as a hypothesis; one world cannot establish its prevalence or blame
+  individual changed choices for final losses. Original behavior remains intact
+  under the new separated predictor; improved gameplay is not claimed.
+- [x] Pass **2,216 tests (45 new; four skipped)**, strict types on 443 files,
+  formatting/lint and the C# protocol in **134.42 seconds**. Tests cover numerical
+  derivatives, held-label poisoning, all original/PPO-state preservation, exact
+  nested/noncombat routing, checkpoint separation, constant/missing targets and
+  safe saved-unit restart. No runtime source changes follow the qualified sample.
+
+Next work, in order:
+
+1. **Owner finishes the remaining 186 saved-case ranking inspections.** The
+   measured 600-decision sample takes 9.61 seconds; expect **7–10 minutes** for the
+   remaining full pass including source checks. Use the single linked command;
+   all nine prediction fits and six ranking cases resume. It reads saved files,
+   requires no game closure and starts no games. Four-minute sessions / 2 GB RAM /
+   1 GB cumulative output; the same finite job has a 30-minute invocation cap.
+2. **Assess complete rank/scale effects by parent, source policy and menu owner.**
+   Separate common return-regression changes from extra consequence gradients.
+   Do not pool repeated menus as independent worlds, create action-quality labels
+   from these diagnostics, retune on development outcomes or repeat the old update.
+3. **Declare the next deliberate policy-learning step separately.** The isolated
+   predictor does not itself improve the actor. Qualify the policy objective and
+   derivatives, collect the sampled experience or reliable preferences it actually
+   requires, and compare with originals on fresh full games. All legal action
+   families may remain learnable; this is not a permanent proximity restriction.
+
+Full-run victory / 128-CPU-second budget remain primary. No promotion, search
+controller, new gameplay batch, push or Actions follows this work. GA/other
+difficulties remain deferred. The earlier finished comparison is preserved below.
+
+### Preserved negative consequence-learning result
+
 ## Current handoff — consequence-learning test complete; both updates regress
 
 **The 192-game test completed cleanly, but neither trained fork should replace
