@@ -1,3 +1,61 @@
+## Current handoff — saved rankings complete; deliberate actor learning next
+
+**The owner has finished the inspection. Do not rerun its completed command or
+repeat the rejected actor-score regression.** Outcome prediction is separated
+successfully; stronger gameplay is not established. Both original players and
+every PPO Adam moment/counter **5,658 / 6,045** remain byte-identical. Preserve all
+four rejected forks. See the [completed result](native-action-prediction-separation-result.md)
+and [result evidence](evidence/native-action-prediction-separation-result-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Finish **192/192 saved games / 22,842 decisions**, on 32 shared development
+  worlds, with source policies stratified and games equally weighted. Original
+  scores/probabilities are exactly unchanged under the independently fitted
+  predictor on every inspected menu. Source ownership, navigation, choices and
+  probabilities replay; no new games, app copies or original PPO updates.
+- [x] Confirm common ranking/scale disruption from both rejected updates. On
+  original paths, consequence-fork combat score RMS shrinks **2.842→0.287 /
+  1.643→0.248**; top actions change on **42.49% / 49.19%** of strategic menus.
+  Return-only changes **42.94% / 49.35%**; the two forks differ on **7.49% / 6.64%**.
+  Consequence versus original changes **27.00% / 25.12%** of sampled noncombat
+  choices under the same draw. Compression alone cannot explain greedy changes;
+  rankings also changed. This does not identify optimal actions or causal blame.
+- [x] Complete all **seven whole-TRAIN-world folds / two all-TRAIN predictor fits**.
+  The nine new prediction states have independent Adam counters of 128; original
+  actor and optimizer remain untouched. Final-return generalization is mixed:
+  player 2 slightly beats a fitting constant, player 3 does worse. Seven worlds
+  do not establish causal action values, victory probabilities or a PPO baseline.
+- [x] Audit **73,988 sealed files / 201 units** and rebuild all numeric ranking
+  summaries in **19.22 seconds**, without fitting or neural/native replay. The
+  owner's remaining saved pass takes **6.19 minutes**; total output is **84.98 MB**.
+  The original collector's exact inference checks remain sealed and verified.
+
+Next work, in order:
+
+1. **Qualify deliberate actor learning separately from outcome fitting.** Reuse
+   the existing PPO implementation where appropriate. Check known positive and
+   negative advantages, relative action-probability changes, common-score-shift
+   invariance and zero actor gradient from prediction-only fitting. Stop using
+   raw actor scores as supervised outcome predictions. This is a learning-loss
+   correction, not a permanent small-change or combat-only restriction.
+2. **Prepare a bounded, matched on-policy trial from both originals.** Preserve
+   each copied player's weights and complete Adam state. Collect fresh sampled
+   full games with exact behavior probabilities; keep every legal family
+   learnable. Qualify any state-only baseline separately. This action-dependent
+   predictor, greedy development histories and privileged teacher continuations
+   are not automatically valid PPO credit or experience. Freeze the schedule and
+   retain unchanged-original controls before any owner-run stage.
+3. **Evaluate frozen updates on fresh full games.** Terminal victory under the
+   128-CPU-second budget remains primary; floors are auxiliary. Do not promote
+   based on fitting loss, ranking change or prediction accuracy. Readiness before
+   adaptive search remains required; GA/other difficulties stay deferred.
+
+No new learning/game batch, owner command, promotion, push or Actions follows
+this completed assessment. The preparation below is historical.
+
+### Preserved prediction separation preparation
+
 ## Current handoff — outcome prediction separated; finish saved-menu ranking inspection
 
 **Outcome fitting now trains a separate network and cannot overwrite the saved
