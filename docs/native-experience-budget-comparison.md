@@ -1,9 +1,14 @@
 # Bounded fresh-experience comparison on the repaired A8 player
 
+**Completed on 2026-10-22:** all 832 attempts / 283 sealed units, zero failures,
+and no established full-run improvement from either arm. See the
+[verified final result](native-experience-budget-comparison-result.md).
+The design and command below are historical; do not repeat or scale this run.
+
 This tests whether a larger fresh on-policy experience budget improves learning
 without changing the network, credit predictor, reward, game rules or PPO settings.
-Both arms use the now repaired owned combat relic-counter observation. No main
-training/evaluation games have started.
+Both arms use the repaired owned combat relic-counter observation. The preparation
+and qualification details below record the pre-launch state.
 
 ## Frozen design
 
@@ -96,9 +101,10 @@ another automatic enlargement of this same PPO run. A richer state-value model,
 wider network, GA and other ascensions remain separate candidates. There is no
 automatic promotion, readiness pass or adaptive-controller training.
 
-## Owner command
+## Historical owner command
 
-The short control is assessed. Run this one main command:
+The completed experiment used this command. Re-running verifies/displays the saved
+result; it does not start a new experiment:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-experience-v1.sh

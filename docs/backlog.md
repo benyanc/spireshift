@@ -1,4 +1,65 @@
-## Current handoff — experience comparison paused; saved-update diagnostics qualified
+## Current handoff — experience comparison complete; larger batches do not improve fresh play
+
+The owner completed **832 / 832 attempts and 283 / 283 sealed units**, with zero
+failed or missing games: **640 sampled TRAIN attempts + 192 frozen fresh-game
+evaluations**. The saved-only audit verifies 66,324 source files, every task and
+predecessor receipt, exact original numerical imports/full Adam lineage, all four
+finals and the reported paired summary. It makes no games, baseline fits or updates.
+Do not rerun, enlarge or select a checkpoint from this completed comparison.
+
+Fresh evaluation pools two fixed players on the same 32 new worlds, 64 attempts
+per version. All three versions win **0 / 64**. Average floor is **11.1875 original,
+11.640625 batch32, 11.15625 batch128**. The smaller arm clears an act in three
+games (best floor 23); the original and larger arm clear none (best floor 17).
+These are auxiliary progress results; they do not establish useful full-run play.
+
+- [x] Primary larger-minus-smaller floor difference is **-0.484375**, paired 95%
+  interval **[-1.171875, +0.171875]**. Larger-minus-original is **-0.03125**, interval
+  **[-0.75, +0.625]**. No improvement is demonstrated by the larger experience budget.
+- [x] Smaller-minus-original is **+0.453125 floors**, interval **[-0.328125,
+  +1.1875]**. Its higher bootstrap training-return score is a limited auxiliary
+  signal, not a win-rate gain, confirmed floor improvement or basis for promotion.
+- [x] Keep the 32-world shared dependence explicit. Intervals cluster worlds
+  jointly over both fixed parents; 192 attempts are not 192 independent worlds.
+  All-zero empirical victory intervals do not prove equivalence or a zero true
+  win probability. The recipe changes experience, batch support and training
+  compute together, not variety alone. This does not prove more data never helps.
+- [x] Confirm **2,175 source optimizer steps**, all legal families still learnable,
+  and sparse later-game experience: **10 / 512** larger-arm training games clear
+  an act; **0 / 128** smaller-arm games do. No training victory is observed.
+  More card/relic definitions were encountered without an established fresh-game gain.
+- [x] Preserve both originals, full Adam counters **5,658 / 6,045**, historical
+  finals and all four new experimental final states. No automatic promotion,
+  readiness pass, adaptive thinking or new training follows. Zero app copies.
+- [x] Pass **2,414 tests / five skipped**, strict types on 511 files, formatting /
+  lint and the C# contract in 137.36 seconds. No pinned implementation or recipe
+  changes were needed for this assessment. Update GitHub #35 / #143 / #146.
+
+Next, in order:
+
+1. Finish the already implemented saved-TRAIN feedback diagnostic's remaining
+   **three cohorts / 288 old games**, if needed to guide the next intervention.
+   This is owner-run analysis, not more gameplay. Check matched histories, baseline
+   error and feedback signs on the same choices, per-family update movement and
+   rare-choice/game weighting. Do not infer correct actions from assigned credit.
+2. Qualify a finite stronger native teacher/curriculum sample using TRAIN-only
+   situations, including later combat and deck/relic variety. First show useful
+   alternative-action consequences and exact public menus, then test student
+   learning on different whole worlds. Old bank roots need exact-environment
+   replay qualification; missing public counters cannot silently migrate.
+3. Test one declared teacher/student intervention on copies of both preserved
+   parents with full Adam state, then fresh full runs. Privileged fixed-world
+   teacher evidence remains labelled and cannot become ordinary on-policy PPO.
+4. Defer another unchanged PPO enlargement, predictor grids, hidden-size changes,
+   GA, other ascensions and adaptive thinking. Choose any later change separately
+   from the completed evaluation; do not tune on its 32 worlds.
+
+See [the completed result and limitations](native-experience-budget-comparison-result.md)
+and [portable verified evidence](evidence/native-experience-budget-comparison-result-v1.json).
+
+### Preserved mid-comparison status and independent diagnostics qualification
+
+## Historical handoff — experience comparison paused; saved-update diagnostics qualified
 
 The 32-versus-128-game comparison is **not complete**. The 2026-10-22 status
 snapshot has **584 / 832 attempts and 83 sealed units**, all from training, with

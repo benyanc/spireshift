@@ -114,9 +114,11 @@ uses zero. The capped audit took **91.06 seconds**, with 297.09 MB peak RAM and
 and stay owner-run. Passing checks cover 2,414 tests (five skipped), strict types,
 formatting/lint and the C# protocol.
 
-The 2026-10-22 gameplay-comparison snapshot is **584 / 832 attempts saved**, cleanly
-paused, with no final report or active process. Fresh evaluation has not begun.
-**Resume that existing comparison first**, using its guide's existing command.
-Completing the optional saved-update audit is independent and does not advance
-the remaining training or fresh-game evaluation. Neither source-batch probability
-movement nor lower saved prediction error establishes a stronger player.
+The 2026-10-22 mid-run snapshot was **584 / 832 attempts saved**, cleanly paused,
+before fresh evaluation. The owner has since completed the comparison:
+**832 / 832 attempts, zero failures and no established full-run improvement**.
+See the [final assessment](native-experience-budget-comparison-result.md).
+The remaining saved-update audit can now help explain feedback and update
+mechanisms without more gameplay. Neither source-batch probability movement nor
+lower saved prediction error establishes a stronger player. Preserve the earlier
+diagnostic qualification and its dated mid-run snapshot as historical evidence.
