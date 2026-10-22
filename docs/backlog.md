@@ -1,4 +1,65 @@
-## Current handoff — varied TRAIN situation bank complete; current experiment unchanged
+## Current handoff — experience comparison paused; saved-update diagnostics qualified
+
+The 32-versus-128-game comparison is **not complete**. The 2026-10-22 status
+snapshot has **584 / 832 attempts and 83 sealed units**, all from training, with
+no completion report, active comparison process or unfinished unit. Fresh-game
+evaluation has not started. These are saved progress counts, not a performance
+result; unattempted evaluation placeholders must not be treated as losses.
+
+The owner resumes the existing finite comparison with the same command in
+[the comparison guide](native-experience-budget-comparison.md). Completed games,
+weights and all Adam moments/counters are reused. Do not launch it on the owner's
+behalf, start a replacement experiment, or change its pinned learner/environment.
+
+Completed independently (#35 / #143 / #146):
+
+- [x] Adapt the existing saved-training diagnostics to the four already sealed
+  first-round updates: both parents and both batch sizes, **320 TRAIN attempts /
+  128 worlds**. Keep reports separate; never decode evaluation, later-round,
+  active or uncommitted source units. Shared worlds are not independent repeats.
+- [x] Reconstruct sampled actions, effective public menus and behavior probabilities
+  using each exact pre-update full state. Restore the saved whole-game cross-fit
+  coefficients rather than refitting; reproduce forecasts, raw feedback moments
+  and original clean/planned denominators. Failures remain counted and excluded
+  from learning examples. Decode one raw episode at a time.
+- [x] Measure before/after probabilities and diagnostic gradients by decision
+  family, health and public opportunities; report deck/relic signatures, rare
+  choices, forced menus and game weighting. Verify shared first-round histories
+  before comparing feedback signs/value errors on identical choices. These
+  measurements do not identify good actions or establish stronger gameplay.
+- [x] Finish the separate tiny control: **12 saved TRAIN games / 1,654 decisions**,
+  four capped sessions totaling 179.66 seconds, no baseline fits, games or updates.
+  Shared clean histories match for both players; the tiny sample selects no method.
+- [x] Qualify one real **32-game / 4,144-decision** cohort in **91.06 seconds /
+  297.09 MB peak RAM / 11.05 MB retained**. Original forecasts and normalization
+  reproduce. The 99 steps describe the saved source update; this audit makes zero
+  updates. Other **288 saved games / three cohorts** remain an optional owner-run
+  audit, not a prerequisite for finishing the gameplay comparison.
+- [x] Pass **2,414 tests / five skipped**, strict types on 511 files, formatting /
+  lint on 695 files and C# protocol verification in 205.57 seconds. Both original
+  weights and all Adam moments/counters **5,658 / 6,045**, historical finals and
+  sealed first-round sources remain unchanged. No app copies or Actions runs.
+
+Next, in order:
+
+1. Owner resumes the existing comparison and finishes its **248 remaining attempts**
+   (56 training, then 192 fresh evaluation). Assess paired full-run wins, floors,
+   compute and failures only after all finals are frozen and evaluation completes.
+2. If needed, finish the separate saved-update audit with its one command in
+   [the diagnostic guide](native-experience-training-diagnostics.md). Use it to
+   explain coverage/feedback/update mechanisms, never as a substitute for fresh
+   game results or a reason to retune the unfinished comparison.
+3. Decide the next bounded intervention from that evidence. The completed varied
+   situation bank remains available; native replay and stronger teacher/curriculum
+   labels still need separate qualification under the correct observation version.
+4. Keep scaling, new predictor searches, capacity changes, GA, other ascensions and
+   adaptive thinking deferred. No automatic promotion or subsequent training.
+
+See [portable diagnostic qualification](evidence/native-experience-training-diagnostics-v1.json).
+
+### Preserved varied-situation-bank qualification
+
+## Historical handoff — varied TRAIN situation bank complete; current experiment unchanged
 
 The owner reports the bounded experience-budget comparison is running. This parallel
 work does not inspect its output units, change its pinned files, read its changing
