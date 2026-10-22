@@ -106,6 +106,15 @@ interpret it as qualification of full-run credit. Next compare structured public
 with hashing, keeping capacity effects separate; preserve all original full states/Adam.
 See `docs/native-tactical-learning-result.md`.
 
+The owner authorized the bounded structured-input comparison after the tactical result.
+Use the named supplement, equal-size hashed supplement and unchanged-input control,
+with exact inherited weights/Adam and matched starting behavior. Keep the native engine,
+full-run reward/score, public-only boundary and current value baseline unchanged. The
+20-game integration control passes; main games are owner-run. The layout uses saved TRAIN
+inputs only; new PPO experience must come from each arm's own sampled games. Freeze all
+finals before fresh full-game evaluation. This bounded supplement is not a lossless
+whole-state encoder. See `docs/native-structured-input-comparison.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

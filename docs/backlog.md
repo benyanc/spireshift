@@ -1,67 +1,62 @@
-## Current handoff — native tactical learning passes; structured inputs next
+## Current handoff — structured-input comparison qualified; owner main run next
 
-The fixed [256-attempt full-game comparison](native-policy-update-comparison-result.md)
-remains complete with no demonstrated improvement. The follow-up **native tactical
-learning diagnostic also completes and passes for both players and both methods**.
-Before fitting, held-out greedy correctness is 8/16 and 6/16; afterward all four
-copies are correct on 16/16, with worst successful-action probability **99.9639%**.
-This establishes narrow learnability with clear immediate feedback, not stronger
-full-game play or a cause for its failure. Both original full states and Adam
-counters **5,658 / 6,045** remain unchanged.
-See the [result and limitations](native-tactical-learning-result.md) and
-[portable evidence](evidence/native-tactical-learning-result-v1.json).
-Do not repeat either completed experiment or promote the diagnostic forks.
+The native tactical check passes, while the earlier full-game trial still shows no
+established improvement. The next agreed intervention is now implemented and qualified:
+**named public-input columns versus an equally sized hashed supplement**, with a
+separate unchanged-input PPO control. Both original players and every Adam moment
+remain unchanged at counters **5,658 / 6,045**. See the
+[design and single owner command](native-structured-input-comparison.md).
 
 Completed (#35 / #143 / #146):
 
-- [x] Complete and assess the unchanged 128-training / 128-evaluation full-game trial.
-  Audit 151 sealed units / 7,021 source files without games or fitting. Its pooled
-  floor change is -0.46875, paired 95% interval [-1.375, 0.4375]. No evaluation wins.
-- [x] Implement and run small native A8 decision-learning controls: 32 fresh worlds,
-  64 roots / 192 native branches, then fixed oracle-baseline diagnostic PPO and
-  direct-teaching fits on isolated copies. All four predeclared criteria pass.
-  No full-run attempts, production updates, app copies or automatic follow-up.
-- [x] Audit all 66 sealed tactical units / 6,763 source files, reconstruct native
-  labels, recompute final held-out probabilities and check every original state.
-  There are only **two genuinely new held-out public inputs**, both survival
-  fixtures; both pass. Eleven of 13 distinct held-out inputs occur in fitting.
-  Fresh seeds alone are not broad state generalization. The production 20-feature
-  credit baseline, target selection and discount/setup sequences are not qualified.
-- [x] Finish the previously pending full repository check: passing receipt for the
-  exact preparation files, 132.70 seconds. The diagnostic finishes in 575.63 seconds,
-  304.91 MB peak memory / 67.06 MB retained. Saved-only audit takes 4.61 seconds.
+- [x] Fit a frozen input vocabulary from 128 prior TRAIN games: 18,736 distinct
+  public situations / 14 families. Equal-game/family-balanced selection supplies
+  1,024 named facts; full public inputs remain in the original encoder. Unfamiliar,
+  unselected and free-text facts are not silently discarded. No outcome labels,
+  development data or old on-policy updates fit the vocabulary.
+- [x] Preserve starting behavior and all inherited weights/Adam during explicit
+  dimension extension. Named and hashed variants both have 1,536 inputs, 32 hidden
+  units and 52,289 total parameters; unchanged has 512 / 32 / 17,473. New input weights
+  and moments start at zero; all actor paths remain trainable. Value inputs/credit
+  and the full-run objective remain unchanged. A larger hidden network is separate.
+- [x] Pass varied-input controls on 56 distinct natural TRAIN situations, including
+  amount ownership, current-cost changes, optional declines, candidate order,
+  unfamiliar facts, private-state rejection and new-column derivatives.
+- [x] Complete 20 native integration attempts, zero failures, 36 updates on copies.
+  Six exact state imports and four initially matched player/world trace groups
+  verify. Saved audit: 27 units / 7,999 source files / 2,628 decisions, 4.20 seconds.
+  Original full states unchanged; no app copies. One evaluation world is not evidence
+  of improved strength. Native control sessions total 118.96 seconds, 816.38 MB peak RAM.
+- [x] Prepare 384 sampled training attempts / 256 fresh evaluation attempts. Main
+  actors start from the originals, never the control-trained forks. All final states
+  freeze before the first evaluation; no epoch selection on evaluation outcomes.
 
-Ordered follow-ups (each assessed before combining another):
+- [x] Pass the full repository check: 2,321 tests (34 new; four skipped), strict types
+  on 476 files, formatting/lint and the C# protocol, 135.94 seconds. Main saved-only
+  checks/imports pass in 8.72 seconds with zero main games or optimizer updates.
 
-1. **NEXT — structured public state/candidate inputs (#143).** Explicit identities,
-   owner/property amounts, current costs, card copies/piles, relic/potion counters,
-   enemy intents and target relationships. Preserve every current legal family and
-   the public-information boundary. Compare hashing versus structured inputs at
-   comparable/reportable capacity; test larger networks separately. Freeze and
-   report initialization/Adam handling when feature shapes change rather than
-   silently importing incompatible weights. Use the same saved games for
-   representation/fitting checks, track duplicate and unfamiliar inputs, then
-   fresh matched own-policy games for actual PPO learning. Old-policy traces
-   cannot silently become new on-policy experience. No owner command is prepared
-   or needed for this next stage yet; the prior diagnostic command is complete.
-2. **QUEUED — richer state-only credit predictor (#35 / #143).** Whole-game fitting,
-   selection and validation, separate regularization and fitting/error curves.
-   Compare actual subsequent learning, not MSE alone. An action-conditional head
-   cannot silently become an action-independent baseline. TD/shorter GAE needs
-   its own controlled check after useful value evidence, preserving long-term intent.
-3. **QUEUED — larger, more varied bounded experience (#35 / #146).** Count independent
-   complete games, decisions, updates and CPU; diagnose decision-family coverage and
-   sampled/greedy behavior. Freeze the seed/compute schedule and independent
-   evaluation before an owner-run stage. No automatic thousands of unchanged games.
-4. **QUEUED — qualified native planning/demonstration teachers (#35 / #146).** Require
-   genuinely distinguished actions and enough independent situations. Compare
-   imitation followed by full-run RL against a matched baseline; retain privileged
-   fixed-world labels and keep them out of ordinary PPO.
+Owner next:
 
-Full-run victory under 128 CPU seconds remains primary; floor/act bootstrap targets
-are separate. No HP/Smith reward changes, promotion, adaptive controller, other
-ascension work or larger unchanged GA. Long stages remain owner-run. Preserve all
-historical trials and both original players; shared frozen inputs remain mandatory.
+1. Run the **one command** in the linked guide. Main training/evaluation games are
+   **not started**. Budget roughly 45–90 minutes; clean resumptions use that same
+   command. Two workers, 15-minute sessions, 4-GB memory/artifact caps; no app copies.
+2. Assess named versus equally sized hashed inputs first, then added-block/unchanged
+   controls and every final player versus its original. There are 64 training worlds
+   and 32 separate evaluation worlds shared across arms: attempts are not independent
+   worlds. Report terminal victories first, failures in the denominator, then acts,
+   floors, CPU and unfamiliar-state coverage. The additional-block control does not
+   isolate generic hidden-network capacity, and two fixed initializers are not a
+   population-level training replication.
+3. Preserve a negative result if it occurs. No automatic larger run, model promotion,
+   base-readiness pass, changed rewards or adaptive-controller training follows.
+
+Then separately: richer state-only credit prediction with whole-game validation and
+actual learning evaluation; more varied bounded experience; qualified stronger
+teachers/imitation plus RL. Wider hidden networks, GA and other ascensions remain
+separate backlog work. No HP/Smith reward adjustments or silent off-policy reuse.
+The original 256-attempt and tactical results remain preserved:
+[full-game assessment](native-policy-update-comparison-result.md),
+[tactical assessment](native-tactical-learning-result.md).
 
 ### Preserved comparison preparation (completed and assessed above)
 

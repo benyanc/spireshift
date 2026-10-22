@@ -1,0 +1,487 @@
+{
+  "schema_version": "native-structured-comparison-seeds-v1",
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "seeds": [
+    {
+      "id": 2201000,
+      "seed": "SP1RESH1FTSTRUCTM001",
+      "partition": "train"
+    },
+    {
+      "id": 2201001,
+      "seed": "SP1RESH1FTSTRUCTM002",
+      "partition": "train"
+    },
+    {
+      "id": 2201002,
+      "seed": "SP1RESH1FTSTRUCTM003",
+      "partition": "train"
+    },
+    {
+      "id": 2201003,
+      "seed": "SP1RESH1FTSTRUCTM004",
+      "partition": "train"
+    },
+    {
+      "id": 2201004,
+      "seed": "SP1RESH1FTSTRUCTM005",
+      "partition": "train"
+    },
+    {
+      "id": 2201005,
+      "seed": "SP1RESH1FTSTRUCTM006",
+      "partition": "train"
+    },
+    {
+      "id": 2201006,
+      "seed": "SP1RESH1FTSTRUCTM007",
+      "partition": "train"
+    },
+    {
+      "id": 2201007,
+      "seed": "SP1RESH1FTSTRUCTM008",
+      "partition": "train"
+    },
+    {
+      "id": 2201008,
+      "seed": "SP1RESH1FTSTRUCTM009",
+      "partition": "train"
+    },
+    {
+      "id": 2201009,
+      "seed": "SP1RESH1FTSTRUCTM010",
+      "partition": "train"
+    },
+    {
+      "id": 2201010,
+      "seed": "SP1RESH1FTSTRUCTM011",
+      "partition": "train"
+    },
+    {
+      "id": 2201011,
+      "seed": "SP1RESH1FTSTRUCTM012",
+      "partition": "train"
+    },
+    {
+      "id": 2201012,
+      "seed": "SP1RESH1FTSTRUCTM013",
+      "partition": "train"
+    },
+    {
+      "id": 2201013,
+      "seed": "SP1RESH1FTSTRUCTM014",
+      "partition": "train"
+    },
+    {
+      "id": 2201014,
+      "seed": "SP1RESH1FTSTRUCTM015",
+      "partition": "train"
+    },
+    {
+      "id": 2201015,
+      "seed": "SP1RESH1FTSTRUCTM016",
+      "partition": "train"
+    },
+    {
+      "id": 2201016,
+      "seed": "SP1RESH1FTSTRUCTM017",
+      "partition": "train"
+    },
+    {
+      "id": 2201017,
+      "seed": "SP1RESH1FTSTRUCTM018",
+      "partition": "train"
+    },
+    {
+      "id": 2201018,
+      "seed": "SP1RESH1FTSTRUCTM019",
+      "partition": "train"
+    },
+    {
+      "id": 2201019,
+      "seed": "SP1RESH1FTSTRUCTM020",
+      "partition": "train"
+    },
+    {
+      "id": 2201020,
+      "seed": "SP1RESH1FTSTRUCTM021",
+      "partition": "train"
+    },
+    {
+      "id": 2201021,
+      "seed": "SP1RESH1FTSTRUCTM022",
+      "partition": "train"
+    },
+    {
+      "id": 2201022,
+      "seed": "SP1RESH1FTSTRUCTM023",
+      "partition": "train"
+    },
+    {
+      "id": 2201023,
+      "seed": "SP1RESH1FTSTRUCTM024",
+      "partition": "train"
+    },
+    {
+      "id": 2201024,
+      "seed": "SP1RESH1FTSTRUCTM025",
+      "partition": "train"
+    },
+    {
+      "id": 2201025,
+      "seed": "SP1RESH1FTSTRUCTM026",
+      "partition": "train"
+    },
+    {
+      "id": 2201026,
+      "seed": "SP1RESH1FTSTRUCTM027",
+      "partition": "train"
+    },
+    {
+      "id": 2201027,
+      "seed": "SP1RESH1FTSTRUCTM028",
+      "partition": "train"
+    },
+    {
+      "id": 2201028,
+      "seed": "SP1RESH1FTSTRUCTM029",
+      "partition": "train"
+    },
+    {
+      "id": 2201029,
+      "seed": "SP1RESH1FTSTRUCTM030",
+      "partition": "train"
+    },
+    {
+      "id": 2201030,
+      "seed": "SP1RESH1FTSTRUCTM031",
+      "partition": "train"
+    },
+    {
+      "id": 2201031,
+      "seed": "SP1RESH1FTSTRUCTM032",
+      "partition": "train"
+    },
+    {
+      "id": 2201032,
+      "seed": "SP1RESH1FTSTRUCTM033",
+      "partition": "train"
+    },
+    {
+      "id": 2201033,
+      "seed": "SP1RESH1FTSTRUCTM034",
+      "partition": "train"
+    },
+    {
+      "id": 2201034,
+      "seed": "SP1RESH1FTSTRUCTM035",
+      "partition": "train"
+    },
+    {
+      "id": 2201035,
+      "seed": "SP1RESH1FTSTRUCTM036",
+      "partition": "train"
+    },
+    {
+      "id": 2201036,
+      "seed": "SP1RESH1FTSTRUCTM037",
+      "partition": "train"
+    },
+    {
+      "id": 2201037,
+      "seed": "SP1RESH1FTSTRUCTM038",
+      "partition": "train"
+    },
+    {
+      "id": 2201038,
+      "seed": "SP1RESH1FTSTRUCTM039",
+      "partition": "train"
+    },
+    {
+      "id": 2201039,
+      "seed": "SP1RESH1FTSTRUCTM040",
+      "partition": "train"
+    },
+    {
+      "id": 2201040,
+      "seed": "SP1RESH1FTSTRUCTM041",
+      "partition": "train"
+    },
+    {
+      "id": 2201041,
+      "seed": "SP1RESH1FTSTRUCTM042",
+      "partition": "train"
+    },
+    {
+      "id": 2201042,
+      "seed": "SP1RESH1FTSTRUCTM043",
+      "partition": "train"
+    },
+    {
+      "id": 2201043,
+      "seed": "SP1RESH1FTSTRUCTM044",
+      "partition": "train"
+    },
+    {
+      "id": 2201044,
+      "seed": "SP1RESH1FTSTRUCTM045",
+      "partition": "train"
+    },
+    {
+      "id": 2201045,
+      "seed": "SP1RESH1FTSTRUCTM046",
+      "partition": "train"
+    },
+    {
+      "id": 2201046,
+      "seed": "SP1RESH1FTSTRUCTM047",
+      "partition": "train"
+    },
+    {
+      "id": 2201047,
+      "seed": "SP1RESH1FTSTRUCTM048",
+      "partition": "train"
+    },
+    {
+      "id": 2201048,
+      "seed": "SP1RESH1FTSTRUCTM049",
+      "partition": "train"
+    },
+    {
+      "id": 2201049,
+      "seed": "SP1RESH1FTSTRUCTM050",
+      "partition": "train"
+    },
+    {
+      "id": 2201050,
+      "seed": "SP1RESH1FTSTRUCTM051",
+      "partition": "train"
+    },
+    {
+      "id": 2201051,
+      "seed": "SP1RESH1FTSTRUCTM052",
+      "partition": "train"
+    },
+    {
+      "id": 2201052,
+      "seed": "SP1RESH1FTSTRUCTM053",
+      "partition": "train"
+    },
+    {
+      "id": 2201053,
+      "seed": "SP1RESH1FTSTRUCTM054",
+      "partition": "train"
+    },
+    {
+      "id": 2201054,
+      "seed": "SP1RESH1FTSTRUCTM055",
+      "partition": "train"
+    },
+    {
+      "id": 2201055,
+      "seed": "SP1RESH1FTSTRUCTM056",
+      "partition": "train"
+    },
+    {
+      "id": 2201056,
+      "seed": "SP1RESH1FTSTRUCTM057",
+      "partition": "train"
+    },
+    {
+      "id": 2201057,
+      "seed": "SP1RESH1FTSTRUCTM058",
+      "partition": "train"
+    },
+    {
+      "id": 2201058,
+      "seed": "SP1RESH1FTSTRUCTM059",
+      "partition": "train"
+    },
+    {
+      "id": 2201059,
+      "seed": "SP1RESH1FTSTRUCTM060",
+      "partition": "train"
+    },
+    {
+      "id": 2201060,
+      "seed": "SP1RESH1FTSTRUCTM061",
+      "partition": "train"
+    },
+    {
+      "id": 2201061,
+      "seed": "SP1RESH1FTSTRUCTM062",
+      "partition": "train"
+    },
+    {
+      "id": 2201062,
+      "seed": "SP1RESH1FTSTRUCTM063",
+      "partition": "train"
+    },
+    {
+      "id": 2201063,
+      "seed": "SP1RESH1FTSTRUCTM064",
+      "partition": "train"
+    },
+    {
+      "id": 2201064,
+      "seed": "SP1RESH1FTSTRUCTM065",
+      "partition": "development"
+    },
+    {
+      "id": 2201065,
+      "seed": "SP1RESH1FTSTRUCTM066",
+      "partition": "development"
+    },
+    {
+      "id": 2201066,
+      "seed": "SP1RESH1FTSTRUCTM067",
+      "partition": "development"
+    },
+    {
+      "id": 2201067,
+      "seed": "SP1RESH1FTSTRUCTM068",
+      "partition": "development"
+    },
+    {
+      "id": 2201068,
+      "seed": "SP1RESH1FTSTRUCTM069",
+      "partition": "development"
+    },
+    {
+      "id": 2201069,
+      "seed": "SP1RESH1FTSTRUCTM070",
+      "partition": "development"
+    },
+    {
+      "id": 2201070,
+      "seed": "SP1RESH1FTSTRUCTM071",
+      "partition": "development"
+    },
+    {
+      "id": 2201071,
+      "seed": "SP1RESH1FTSTRUCTM072",
+      "partition": "development"
+    },
+    {
+      "id": 2201072,
+      "seed": "SP1RESH1FTSTRUCTM073",
+      "partition": "development"
+    },
+    {
+      "id": 2201073,
+      "seed": "SP1RESH1FTSTRUCTM074",
+      "partition": "development"
+    },
+    {
+      "id": 2201074,
+      "seed": "SP1RESH1FTSTRUCTM075",
+      "partition": "development"
+    },
+    {
+      "id": 2201075,
+      "seed": "SP1RESH1FTSTRUCTM076",
+      "partition": "development"
+    },
+    {
+      "id": 2201076,
+      "seed": "SP1RESH1FTSTRUCTM077",
+      "partition": "development"
+    },
+    {
+      "id": 2201077,
+      "seed": "SP1RESH1FTSTRUCTM078",
+      "partition": "development"
+    },
+    {
+      "id": 2201078,
+      "seed": "SP1RESH1FTSTRUCTM079",
+      "partition": "development"
+    },
+    {
+      "id": 2201079,
+      "seed": "SP1RESH1FTSTRUCTM080",
+      "partition": "development"
+    },
+    {
+      "id": 2201080,
+      "seed": "SP1RESH1FTSTRUCTM081",
+      "partition": "development"
+    },
+    {
+      "id": 2201081,
+      "seed": "SP1RESH1FTSTRUCTM082",
+      "partition": "development"
+    },
+    {
+      "id": 2201082,
+      "seed": "SP1RESH1FTSTRUCTM083",
+      "partition": "development"
+    },
+    {
+      "id": 2201083,
+      "seed": "SP1RESH1FTSTRUCTM084",
+      "partition": "development"
+    },
+    {
+      "id": 2201084,
+      "seed": "SP1RESH1FTSTRUCTM085",
+      "partition": "development"
+    },
+    {
+      "id": 2201085,
+      "seed": "SP1RESH1FTSTRUCTM086",
+      "partition": "development"
+    },
+    {
+      "id": 2201086,
+      "seed": "SP1RESH1FTSTRUCTM087",
+      "partition": "development"
+    },
+    {
+      "id": 2201087,
+      "seed": "SP1RESH1FTSTRUCTM088",
+      "partition": "development"
+    },
+    {
+      "id": 2201088,
+      "seed": "SP1RESH1FTSTRUCTM089",
+      "partition": "development"
+    },
+    {
+      "id": 2201089,
+      "seed": "SP1RESH1FTSTRUCTM090",
+      "partition": "development"
+    },
+    {
+      "id": 2201090,
+      "seed": "SP1RESH1FTSTRUCTM091",
+      "partition": "development"
+    },
+    {
+      "id": 2201091,
+      "seed": "SP1RESH1FTSTRUCTM092",
+      "partition": "development"
+    },
+    {
+      "id": 2201092,
+      "seed": "SP1RESH1FTSTRUCTM093",
+      "partition": "development"
+    },
+    {
+      "id": 2201093,
+      "seed": "SP1RESH1FTSTRUCTM094",
+      "partition": "development"
+    },
+    {
+      "id": 2201094,
+      "seed": "SP1RESH1FTSTRUCTM095",
+      "partition": "development"
+    },
+    {
+      "id": 2201095,
+      "seed": "SP1RESH1FTSTRUCTM096",
+      "partition": "development"
+    }
+  ],
+  "manifest_id": "sha256:722ed73ea8337d95eab803a7cb24133f5317fbd63baeeb6c3ee498c4f42a3d41"
+}
