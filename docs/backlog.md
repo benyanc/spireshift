@@ -1,6 +1,80 @@
-## Current handoff — inventory-credit diagnosis complete; retain current baseline
+## Current handoff — inventory distinction repair qualified; owner experience test next
 
-**No owner run is needed.** The saved-data diagnosis finishes all 12 separate
+**The short audit, repair and learning control are complete.** The next task is the
+owner-run bounded comparison of 32 versus 128 fresh games per training round. Both
+original players and every Adam moment/counter **5,658 / 6,045**, plus all six
+historical structured-input finals, remain unchanged. Main preparation has imported
+exact numerical states with explicit new observation metadata; **zero main games
+and zero main learning updates** have run.
+
+Completed in the accepted order (#35 / #143 / #146):
+
+- [x] Separate player inputs from the coarse credit predictor. Audit 128 saved
+  TRAIN attempts / 64 worlds / 18,481 learning rows / 14 families. Eighty same-count
+  controlled probes across ten deck/relic/cost/upgrade/ownership distinctions pass
+  through the actual original/hashed/named encoders; 16 natural pairs also differ.
+  This proves scoped wiring, not native reachability or correct strategic choices.
+- [x] Find the actual upstream gap: all 12,518 inspected combat rows omit the
+  counter view; 53 source attempts have a numeric native relic-counter witness.
+  Add only public owned ID/counter pairs in separately versioned worker v11.
+  Preserve legacy workers, game/runtime/SDK/cache and all action operands.
+- [x] Qualify four short native diagnostic replays on two TRAIN worlds: 498 actions,
+  336 combat observations, identical legacy public traces/actions/endings, ordered
+  native/public counter equality and zero failures. Zero and null are exercised;
+  nonzero ownership changes have code-level controls, not a natural-panel claim.
+- [x] Keep the production 20-feature cross-fit ridge fixed. The richer inventory
+  correction's held-game error remains 5.17% worse; do not silently install it or
+  repeat penalty searches. New observation metadata is explicit; all numerical
+  weights and full Adam state are copied exactly into future experimental forks.
+- [x] Prepare two fixed parents / two arms / two rounds: 64 versus 256 training
+  games per player, followed by 32 fresh evaluation worlds shared by each initial
+  player and both finals. Main total **640 training + 192 evaluation = 832 attempts**,
+  283 sealed units, 256 independent train worlds. This compares experience budgets
+  and batch support, not data diversity alone or equal training compute.
+- [x] Pass the separate 18-attempt native integration control / 19 sealed units:
+  zero failures, 42 updates on copies, 143.30 seconds, 693.27 MB peak / 56.23 MB
+  retained, no app copies. Its one evaluation world does not select an arm or
+  establish improved gameplay. Both main forks still start from the originals.
+- [x] Audit the saved control independently: 33,839 source seals, all 18 games /
+  3,180 decisions / 1,654 TRAIN decisions and exact full weight/Adam imports verify
+  without refitting or new games. Main saved-only preflight seals just policy checks
+  and two exact imports; it cannot launch games.
+- [x] Pass 2,373 tests (25 new passed, one new skipped; five total skipped), strict
+  types on 498 files, formatting/lint on 676 files and C# protocol in 142.35 seconds.
+
+Owner next:
+
+1. Run **the one command** in the
+   [experience comparison guide](native-experience-budget-comparison.md). Plan about
+   60–120 minutes, with two isolated workers and restartable clean sessions. Eight
+   games per collection chunk; 15-minute / 4-GB session limits. The same command
+   resumes saved states and every Adam moment; uncertain work stops for inspection.
+2. Assess larger versus smaller and each final versus its migrated initial player.
+   Terminal full wins remain primary; report acts, paired floors/returns, CPU and
+   failures, plus useful independent deck/relic/later-game experience and per-family
+   credit. More attempts do not guarantee better play. Freeze all finals before
+   evaluation; no checkpoint selection from its outcomes.
+3. If ordinary experience remains uninformative, qualify a stronger native teacher /
+   curriculum and imitation plus full-run RL as a separate intervention. Richer
+   nonlinear value/typed sharing, wider hidden layers, GA and other ascensions remain
+   separate later work. Preserve the failed rich-predictor results. No automatic
+   scale-up, promotion, readiness pass or adaptive controller follows.
+
+See [the input audit and repair](native-inventory-input-audit.md),
+[input evidence](evidence/native-inventory-input-repair-v1.json) and
+[experiment qualification](evidence/native-experience-budget-comparison-v1.json).
+
+### Preserved completed inventory-credit diagnosis
+
+## Historical handoff — inventory-credit diagnosis assessed; distinction audit pending
+
+The next short task is a saved-state check of the **player's actual inputs**.
+The completed diagnosis below concerns its separate state-only credit predictor;
+its same-count aliases do not establish identical player encodings or action scores.
+Do not launch the next long comparison until meaningful deck/relic distinctions
+pass or any demonstrated information-loss bug is repaired.
+
+The saved-data diagnosis finishes all 12 separate
 cohorts / 384 prior TRAIN attempts / 64 worlds / 55,368 learning rows. Both
 originals and all six experimental finals, including full Adam states, remain
 unchanged. See the [diagnosis](native-inventory-credit-diagnosis.md) and
@@ -35,14 +109,26 @@ Completed (#35 / #143 / #146):
 
 Next material work:
 
-1. **Prepare a bounded experience/learning comparison**, measuring independent
+1. **Audit meaningful actor inventory distinctions using saved TRAIN states.**
+   Keep counts fixed while changing public card definitions, per-copy upgrades,
+   displayed/current costs, relic identities and visible owner-bound counters.
+   Check the actual compressed policy inputs, public/handle boundary and candidate
+   ownership; do not mistake predictor aliases or isolated hash-coordinate
+   collisions for identical whole player inputs. Preserve original weights/Adam.
+   Use small controlled mutations and natural saved pairs, without replaying games
+   or requiring different choices from a policy that has not learned the distinction.
+   Repair a demonstrated bug before more collection; do not demand exhaustive
+   card/relic interaction coverage or a perfect predictor.
+2. **Prepare a bounded experience/learning comparison**, measuring independent
    games, rare later-game coverage, per-family credit and fresh full-game outcomes.
-   Preserve original weights/Adam; do not automatically launch a larger unchanged
-   PPO run or claim that more games guarantee improvement.
-2. If ordinary experience remains uninformative, separately qualify stronger
+   Keep the verified coarse predictor fixed as the control; broader experience
+   and a richer predictor are separate hypotheses. Preserve original weights/Adam;
+   do not automatically launch a larger unchanged PPO run or claim that more games
+   guarantee improvement.
+3. If ordinary experience remains uninformative, separately qualify stronger
    native teachers/curricula and imitation plus full-run RL. Keep privileged
    teacher branches out of ordinary PPO and public-belief search claims.
-3. Retain richer nonlinear state-value/typed entity sharing and a wider hidden
+4. Retain richer nonlinear state-value/typed entity sharing and a wider hidden
    network as separate evidence-driven candidates. Do not repeat the rejected
    rich linear/correction grids. GA, other ascensions and adaptive thinking remain
    later work; no next experiment has started.

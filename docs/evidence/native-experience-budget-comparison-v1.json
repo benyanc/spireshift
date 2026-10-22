@@ -1,0 +1,56 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_original_weights_and_Adam_unchanged": true,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "qualified_bounded_fresh_on_policy_experience_budget_comparison_not_playing_strength",
+  "coarse_credit_predictor_unchanged": true,
+  "control_attempts": 18,
+  "control_config": "configs/native-experience/sts2-v0.111.0-a8-control-v1.json",
+  "control_decisions": 3180,
+  "control_failures": 0,
+  "control_peak_resident_bytes": 693272576,
+  "control_report": {
+    "id": "sha256:6715be7d04445f226aab3cc266e54ee26a8ddbf58b84021cf47f0e00595d4088",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-control-v1/report.json"
+  },
+  "control_resource_report": {
+    "id": "sha256:70e8784c568aca29c483dcd2bf75bfe33b20a7a8e4aeea7d068a409f5c43e05f",
+    "path": "artifacts/resources/native-experience-control-v1-1.json"
+  },
+  "control_source_files_verified": 33839,
+  "control_train_decisions": 1654,
+  "control_units": 19,
+  "control_updates": 42,
+  "control_wall_seconds": 143.30423745908774,
+  "evidence_id": "sha256:be80fb25eb97e99b218e0659b0afde5b9b6b504085252240bf4747a4c8990111",
+  "fixed_parent_initializers": 2,
+  "game_apps_created": 0,
+  "gameplay_improvement_established": false,
+  "main_config": "configs/native-experience/sts2-v0.111.0-a8-comparison-v1.json",
+  "main_distinct_evaluation_worlds": 32,
+  "main_distinct_training_worlds": 256,
+  "main_evaluation_attempts": 192,
+  "main_games_launched": 0,
+  "main_optimizer_updates": 0,
+  "main_planned_attempts": 832,
+  "main_preflight": {
+    "id": "sha256:270b5014bad0c31a271e6d3552d32bfa5e208dadae699d811f3b7081c22b0e25",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/sessions/session-001.json"
+  },
+  "main_training_attempts": 640,
+  "main_units": 283,
+  "pure_diversity_or_equal_training_compute_comparison": false,
+  "repository_check": {
+    "id": "sha256:9ed3bfc71cecde720ef80db0bc8388c3dc2e74414fd04abcf90599e3cff8e3e0",
+    "path": "artifacts/resources/native-experience-repository-check-v1.json"
+  },
+  "repository_tests_passed": 2373,
+  "repository_tests_skipped": 5,
+  "saved_control_audit": {
+    "id": "sha256:16ae7c0893cbbfcce801908530a34dd1644c2d5966b329f6d98913c158d770ac",
+    "path": "artifacts/native-experience/control-audit-v1/report.json"
+  },
+  "schema_version": "native-experience-budget-qualification-evidence-v1",
+  "strict_type_source_files": 498
+}

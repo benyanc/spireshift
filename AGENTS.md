@@ -131,11 +131,39 @@ worlds / 12 policy cohorts. Original folds, coarse coefficients and credit repro
 typed deck/relic information exposes real omissions but its fixed linear correction
 increases withheld MSE by 5.17%. Keep the existing production baseline and all full
 player/Adam states. Do not rerun predictor grids or silently promote this probe.
-Next consider a bounded experience/learning comparison and useful later-game outcome
-coverage, then qualified teachers/curricula as a separate intervention. Prediction
+The owner has now put a short saved-state actor distinction audit before that
+comparison: hold inventory counts constant while checking card definitions,
+per-copy upgrades/costs, relic identities and owner-bound visible counters through
+the actual policy encoders. Distinguish missing predictor inputs from lost player
+inputs; differing inputs do not require an untrained policy to choose differently.
+Repair any actual information-loss/ownership bug before new training. This audit
+does not require lossless encoding of every state or adoption of a rejected rich
+predictor. Then prepare a bounded experience/learning comparison and useful later-game
+outcome coverage, then qualified teachers/curricula as a separate intervention. Prediction
 error and changed credit signs do not establish better action selection. The active
 diagnostic recipe/entry is v2; its v1 failed numerical verifier and source snapshot
 remain preserved. See `docs/native-inventory-credit-diagnosis.md`.
+
+The accepted actor-inventory distinction audit is now complete: 80 controlled
+probes preserve meaningful deck/relic/upgrade/cost/ownership information in the
+checked policy inputs. It separately found the upstream combat relic-counter
+omission. Worker v11 adds only public owned ID/counter pairs; four native diagnostic
+replays preserve every legacy input/action/ending and verify ordered counter
+delivery. Do not resume old recipes under this changed observation. New environment
+manifest v9 explicitly changes observation metadata while preserving the frozen
+game and every imported numerical weight/Adam moment/counter.
+
+The separate 18-attempt experience-budget integration control passes, with zero
+failures and 42 updates on experimental copies. Its one evaluation world is not
+performance evidence or an arm-selection criterion. The owner-run main comparison
+is 32 versus 128 fresh games per round, two rounds/two fixed parents, with 640
+training and 192 fresh evaluation attempts. The coarse credit predictor, actor
+size, rewards and PPO settings stay fixed; this changes experience/batch/compute
+budget, not data variety alone. Both originals, all historical finals and full
+Adam state remain read-only. Main imports/policy checks are complete; zero main
+games/updates have run. Jobs expected to take five minutes or more stay owner-run.
+No promotion, larger unchanged follow-up or adaptive controller is automatic.
+See `docs/native-experience-budget-comparison.md`.
 
 ## Information boundary
 
