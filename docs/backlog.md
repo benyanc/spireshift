@@ -1,3 +1,70 @@
+## Current handoff — native tactical learning passes; structured inputs next
+
+The fixed [256-attempt full-game comparison](native-policy-update-comparison-result.md)
+remains complete with no demonstrated improvement. The follow-up **native tactical
+learning diagnostic also completes and passes for both players and both methods**.
+Before fitting, held-out greedy correctness is 8/16 and 6/16; afterward all four
+copies are correct on 16/16, with worst successful-action probability **99.9639%**.
+This establishes narrow learnability with clear immediate feedback, not stronger
+full-game play or a cause for its failure. Both original full states and Adam
+counters **5,658 / 6,045** remain unchanged.
+See the [result and limitations](native-tactical-learning-result.md) and
+[portable evidence](evidence/native-tactical-learning-result-v1.json).
+Do not repeat either completed experiment or promote the diagnostic forks.
+
+Completed (#35 / #143 / #146):
+
+- [x] Complete and assess the unchanged 128-training / 128-evaluation full-game trial.
+  Audit 151 sealed units / 7,021 source files without games or fitting. Its pooled
+  floor change is -0.46875, paired 95% interval [-1.375, 0.4375]. No evaluation wins.
+- [x] Implement and run small native A8 decision-learning controls: 32 fresh worlds,
+  64 roots / 192 native branches, then fixed oracle-baseline diagnostic PPO and
+  direct-teaching fits on isolated copies. All four predeclared criteria pass.
+  No full-run attempts, production updates, app copies or automatic follow-up.
+- [x] Audit all 66 sealed tactical units / 6,763 source files, reconstruct native
+  labels, recompute final held-out probabilities and check every original state.
+  There are only **two genuinely new held-out public inputs**, both survival
+  fixtures; both pass. Eleven of 13 distinct held-out inputs occur in fitting.
+  Fresh seeds alone are not broad state generalization. The production 20-feature
+  credit baseline, target selection and discount/setup sequences are not qualified.
+- [x] Finish the previously pending full repository check: passing receipt for the
+  exact preparation files, 132.70 seconds. The diagnostic finishes in 575.63 seconds,
+  304.91 MB peak memory / 67.06 MB retained. Saved-only audit takes 4.61 seconds.
+
+Ordered follow-ups (each assessed before combining another):
+
+1. **NEXT — structured public state/candidate inputs (#143).** Explicit identities,
+   owner/property amounts, current costs, card copies/piles, relic/potion counters,
+   enemy intents and target relationships. Preserve every current legal family and
+   the public-information boundary. Compare hashing versus structured inputs at
+   comparable/reportable capacity; test larger networks separately. Freeze and
+   report initialization/Adam handling when feature shapes change rather than
+   silently importing incompatible weights. Use the same saved games for
+   representation/fitting checks, track duplicate and unfamiliar inputs, then
+   fresh matched own-policy games for actual PPO learning. Old-policy traces
+   cannot silently become new on-policy experience. No owner command is prepared
+   or needed for this next stage yet; the prior diagnostic command is complete.
+2. **QUEUED — richer state-only credit predictor (#35 / #143).** Whole-game fitting,
+   selection and validation, separate regularization and fitting/error curves.
+   Compare actual subsequent learning, not MSE alone. An action-conditional head
+   cannot silently become an action-independent baseline. TD/shorter GAE needs
+   its own controlled check after useful value evidence, preserving long-term intent.
+3. **QUEUED — larger, more varied bounded experience (#35 / #146).** Count independent
+   complete games, decisions, updates and CPU; diagnose decision-family coverage and
+   sampled/greedy behavior. Freeze the seed/compute schedule and independent
+   evaluation before an owner-run stage. No automatic thousands of unchanged games.
+4. **QUEUED — qualified native planning/demonstration teachers (#35 / #146).** Require
+   genuinely distinguished actions and enough independent situations. Compare
+   imitation followed by full-run RL against a matched baseline; retain privileged
+   fixed-world labels and keep them out of ordinary PPO.
+
+Full-run victory under 128 CPU seconds remains primary; floor/act bootstrap targets
+are separate. No HP/Smith reward changes, promotion, adaptive controller, other
+ascension work or larger unchanged GA. Long stages remain owner-run. Preserve all
+historical trials and both original players; shared frozen inputs remain mandatory.
+
+### Preserved comparison preparation (completed and assessed above)
+
 ## Current handoff — policy checks pass; owner fresh-game comparison next
 
 **The policy-update checks and eight-game native control pass.** The bounded
@@ -2702,7 +2769,7 @@ independent evaluation, numerical stability and historical evidence preservation
 | Serial reuse implemented and owner repeat panel verified; maintenance remains | Eight cases reuse one protected app with fresh profiles, zero new app copies and verified resets. Explicit blocked-worker repair/retirement remains; parallel reuse follows under #146. | [#147](https://github.com/benyanc/spireshift/issues/147), [#145](https://github.com/benyanc/spireshift/issues/145), [#146](https://github.com/benyanc/spireshift/issues/146) |
 | Complete for the bounded Ironclad/A8 environment gate | Two ordinary shipped losses, explicit later-act/endings, the ID-safe public input and representative mechanics stand. Native serial/parallel/reset and short neural integration controls pass. Earlier failures stay preserved; new encountered omissions still require repair. | [#145](https://github.com/benyanc/spireshift/issues/145), [#141](https://github.com/benyanc/spireshift/issues/141), [#143](https://github.com/benyanc/spireshift/issues/143) |
 | Finite mechanics package complete ([#148](https://github.com/benyanc/spireshift/issues/148)) | Preserve prior pilots and failed sweep. Repaired 1,849-case sweep, nine random-action games, act/endings, outside-combat potions and Foul Potion merchant controls pass. The composed gate preserves the sweep's host-v32 scope and binds new v33 controls. These are interface checks, not playing strength or base readiness. | [#146](https://github.com/benyanc/spireshift/issues/146), [#35](https://github.com/benyanc/spireshift/issues/35), [#78](https://github.com/benyanc/spireshift/issues/78) |
-| V5 and scoped diagnoses complete; conditional representation control next | Preserve native pilots, completed credit/scaling comparisons, recovered-pool analysis and matched-work teaching/PPO negative result. Test explicit public context-by-candidate interactions on the synthetic task at the same network size before a native intervention. No larger unchanged training or automatic promotion. | [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143), [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
+| Controlled PPO comparison assessed; native tactical learning controls next | Preserve the clean 256-attempt result: no demonstrated improvement. Proceed through native tactical controls, structured inputs/separate capacity, richer whole-game value prediction, bounded varied experience and qualified teachers, one assessed intervention at a time. No automatic scaling. | [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143), [#146](https://github.com/benyanc/spireshift/issues/146), [#78](https://github.com/benyanc/spireshift/issues/78) |
 | Scoped learning admission complete; broader parity open | Repaired A8 source/native/public adapter admitted with all captured evidence and explicit limitations. Empirical Act 2/3 UI parity and complete mechanic fidelity remain before exact/live claims. | [#141](https://github.com/benyanc/spireshift/issues/141), [#37](https://github.com/benyanc/spireshift/issues/37) |
 | Implemented | Versioned bounded bootstrap score, win-first population ranking, failures/caps and terminal-only staging rules. | [#136](https://github.com/benyanc/spireshift/issues/136) |
 | Implemented | Unified compact full-run neural policy, public features, legal candidate scoring and deterministic genome/gradients. | [#137](https://github.com/benyanc/spireshift/issues/137), parent [#78](https://github.com/benyanc/spireshift/issues/78), iteration [#134](https://github.com/benyanc/spireshift/issues/134) |

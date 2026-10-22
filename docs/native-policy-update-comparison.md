@@ -1,5 +1,10 @@
 # Policy-update qualification and bounded fresh-game comparison
 
+**Completed:** all 256 attempts ended cleanly, with no demonstrated improvement.
+See the [saved-result assessment and agreed follow-up order](native-policy-update-comparison-result.md).
+The preparation and zero-game statements below are historical; its command now displays
+the saved result. Do not rerun the experiment or scale it automatically.
+
 The numerical policy checks and **eight-game native bridge control pass**. Both
 original players and every saved PPO Adam moment/counter remain byte-identical:
 **5,658 / 6,045**. The main comparison is prepared but has played **zero games**;

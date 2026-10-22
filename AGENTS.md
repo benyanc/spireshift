@@ -87,6 +87,25 @@ development milestone; genuine full wins remain the goal. More games alone do no
 useful workflow. Revise a stalled method using evidence, and keep the readiness gate before
 adaptive thinking. See ADR 0003 and the ordered backlog.
 
+On 2026-10-21 the owner chose to finish and assess the already prepared policy-update
+comparison before scaling or changing the learner. Its saved 256-attempt result is now
+complete, with zero failures and no demonstrated improvement. Preserve it, both original
+players and their complete Adam state; do not repeat or enlarge it automatically. The
+agreed follow-up order is small understandable native A8 learning controls, structured
+public inputs with a separate capacity comparison, a richer state-only value baseline
+validated on whole games, larger/more varied bounded experience, and qualified stronger
+teachers. Implement and evaluate each separately. Prior synthetic controls are historical
+evidence, not proof that the native tactical cases are learned. Diagnostic subtask rewards
+and privileged branch outcomes must never silently replace full-run rewards or become
+ordinary PPO experience. See `docs/native-policy-update-comparison-result.md`.
+
+The native tactical follow-up is complete and passes for both players and both methods.
+It uses privileged short-horizon fixtures and an oracle diagnostic baseline; only two
+held-out public inputs are genuinely unseen. Do not rerun it, promote its forks or
+interpret it as qualification of full-run credit. Next compare structured public inputs
+with hashing, keeping capacity effects separate; preserve all original full states/Adam.
+See `docs/native-tactical-learning-result.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
