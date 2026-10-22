@@ -1,5 +1,10 @@
 # Delayed native decisions: production learned versus exact baseline
 
+**The main comparison is complete. Both baselines pass for both players.**
+See the [saved-result assessment](native-delayed-learning-result.md) for the
+measured results, limitations and next work item. No further run is needed.
+The implementation and original qualification below remain preserved.
+
 This diagnostic tests a gap left by the immediate-action controls: can the current
 learning machinery learn sequences whose useful consequence arrives after several
 actions? It uses both preserved original players and their entire Adam state.
@@ -137,10 +142,11 @@ a finite-difference check of the delayed policy gradient against expected termin
 success, grouped-fold isolation and bit-exact full-state/Adam resumption. Exact
 receipts and caveats are in [the evidence record](evidence/native-delayed-learning-v1.json).
 
-## One owner command
+## Historical owner command — already completed
 
-The main recipe passes read-only preparation; **zero main units have executed**.
-Close STS2, then run:
+The following was the prepared launch instruction. The owner has now completed
+all 94 units; do not repeat the experiment. An unchanged invocation verifies and
+displays its saved result. Original preparation instructions:
 
 ```bash
 bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/check-native-delayed-learning-v1.sh

@@ -1,4 +1,69 @@
-## Current handoff — production-path delayed learning comparison prepared
+## Current handoff — delayed learning passes with learned and exact baselines
+
+The owner completed the fixed comparison: **94 / 94 units, 204 native branches,
+16,384 sampled diagnostic sequences and 868 optimizer steps on four copies**.
+Both original players, their full Adam states and every historical final remain
+preserved. This is a successful short-horizon learning control, not stronger
+full-game play, a preferred baseline or a reason to repeat unchanged PPO scaling.
+
+Completed (#35 / #143 / #146):
+
+- [x] Both learned-baseline copies and both exact-baseline copies pass the frozen
+  fitting and held-out criteria. Initial mean fitting success is **34.34% / 34.85%**.
+  Final fitting success is **99.98% / 99.99%** for player 2 learned/exact and
+  **99.91% / 99.98%** for player 3 learned/exact. Every copy is greedily successful
+  on all 16 fitting and eight held-out cases.
+- [x] Held-out mean success is **99.982% / 99.991%** for player 2 learned/exact and
+  **99.920% / 99.979%** for player 3 learned/exact. The weakest held-out result
+  is still **99.815%**. All eight public roots are distinct from fitting roots;
+  they cover four worlds and the same two task patterns, not eight new mechanics.
+- [x] Retain the learning curves: the fitting criterion first passes at round
+  **4 / 4** for player 2 learned/exact and **8 / 7** for player 3 learned/exact,
+  with no subsequent criterion failure. The earlier four-round control's player 3
+  learned failure remains historical evidence; the fixed longer schedule resolves
+  it without relaxing thresholds or tuning on held-out outcomes.
+- [x] Explain the **222 zero-update rounds**: all 32 sampled sequences succeed in
+  each, and the learned baseline leaves essentially constant centered credit.
+  The existing guard skips the complete update and preserves Adam. Player 2 makes
+  **42 / 382** updates and player 3 **60 / 384**, learned/exact. Different counts
+  follow the frozen update rules; they do not establish method superiority.
+- [x] Record **695.73 seconds / 444.96 CPU seconds / 356.94 MB peak / 244.30 MB
+  retained**. No failed native branch, full-run attempt, app copy, promotion,
+  readiness pass, adaptive controller or automatic next experiment is produced.
+- [x] Pass the separate saved-only audit in **59.88 seconds**: **75,658 source
+  files / 94 receipts / 204 native paths / 372 goal-path deliveries**, all 512
+  saved rounds, eight reconstructed boundary batches and all final expected
+  probabilities. Verify full imports, Adam lineage and 17 entirely zero-step
+  chunks remaining bit-exact. No baseline refit, native replay or update occurs.
+- [x] Pass **2,428 tests / five skipped**, strict types on 520 files,
+  formatting/lint on 709 files and the C# protocol in **133.69 seconds**.
+  Only assessment/handoff documents change; frozen production sources and
+  recipes remain unchanged. Update GitHub #35 / #143 / #146.
+
+Next, in order:
+
+1. Close this diagnostic after the saved-only audit. Do not rerun it or import
+   its specialized forks as ordinary full-game players. The production encoder,
+   sampler and update can learn these two- and three-action terminal subgoals with
+   the existing coarse baseline; full-run credit and strategic horizons remain
+   unverified. Do not claim a universal optimizer or baseline defect from stalled
+   full-run performance, or declare all such defects ruled out.
+2. Qualify a finite teacher/curriculum sample on **natural multi-turn TRAIN-only
+   situations**, including varying health, decks, relics and later encounters.
+   Use the varied situation bank as provenance, not as optimal-action labels.
+   Its old missing-counter inputs require explicit replay qualification under the
+   repaired observation contract; no silent migration. Show reliable alternative
+   consequences and held-world learning before another gameplay intervention.
+3. Declare one student intervention on copies of both preserved parents, then
+   freeze both final players before fresh full-game evaluation. Measure whether
+   useful local learning survives the full loop and improves terminal wins or
+   repeatable auxiliary progress. Keep the current full-run objective explicit.
+4. Defer another unchanged PPO enlargement, predictor grids, capacity/GA changes,
+   other ascensions and adaptive thinking. No next experiment starts automatically.
+
+See the [completed comparison assessment](native-delayed-learning-result.md).
+
+## Historical handoff — production-path delayed learning comparison prepared
 
 The owner requested a delayed-decision test before another gameplay intervention.
 Implement it separately from the completed 832-attempt comparison and preserve

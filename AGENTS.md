@@ -153,17 +153,30 @@ delivery. Do not resume old recipes under this changed observation. New environm
 manifest v9 explicitly changes observation metadata while preserving the frozen
 game and every imported numerical weight/Adam moment/counter.
 
-The separate 18-attempt experience-budget integration control passes, with zero
-failures and 42 updates on experimental copies. Its one evaluation world is not
-performance evidence or an arm-selection criterion. The owner-run main comparison
-is 32 versus 128 fresh games per round, two rounds/two fixed parents, with 640
-training and 192 fresh evaluation attempts. The coarse credit predictor, actor
-size, rewards and PPO settings stay fixed; this changes experience/batch/compute
-budget, not data variety alone. Both originals, all historical finals and full
-Adam state remain read-only. Main imports/policy checks are complete; zero main
-games/updates have run. Jobs expected to take five minutes or more stay owner-run.
-No promotion, larger unchanged follow-up or adaptive controller is automatic.
-See `docs/native-experience-budget-comparison.md`.
+The experience-budget comparison is now complete: 832 attempts / zero failures,
+640 training and 192 fresh evaluation attempts, 2,175 updates on experimental copies.
+Neither the larger batch nor the smaller batch establishes a fresh full-game gain;
+all three frozen versions win 0/64. Preserve its result, four finals, both original
+full players and all Adam state. Do not rerun, enlarge or select a winner automatically.
+The recipe changes experience/batch/compute budget, not data variety alone.
+See `docs/native-experience-budget-comparison-result.md`.
+
+The subsequent production-path delayed-decision comparison also completes: 94 units,
+204 native branches, 16,384 sampled diagnostic sequences and 868 copied-optimizer
+updates. Both learned-baseline and exact-current-policy-baseline copies pass fitting
+and all eight new held-out public roots for both original players. Preserve the
+four-round control's earlier player 3 learned failure; the fixed 128-round study
+resolves it without relaxed thresholds. This qualifies two- and three-action native
+subgoals, not strategic horizons or full-run credit. The 222 skipped learned-arm
+rounds have all-success batches and effectively constant centered credit; the
+existing guard preserves warm Adam rather than drifting without signal. Do not
+promote these specialized forks or rerun the completed study. Next qualify useful
+natural multi-turn TRAIN teacher/curriculum examples with explicit observation
+replay ownership, then one declared student intervention and fresh full games.
+Earlier fixed-world preferences and old missing-counter bank roots are not silently
+admitted. Jobs expected to take five minutes or more stay owner-run. No promotion,
+larger unchanged follow-up or adaptive controller is automatic.
+See `docs/native-delayed-learning-result.md` and the ordered backlog.
 
 ## Information boundary
 
