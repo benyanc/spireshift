@@ -115,6 +115,17 @@ inputs only; new PPO experience must come from each arm's own sampled games. Fre
 finals before fresh full-game evaluation. This bounded supplement is not a lossless
 whole-state encoder. See `docs/native-structured-input-comparison.md`.
 
+The structured-input comparison is now complete: 640 attempts / zero failures and
+1,314 updates on experimental copies; named inputs show no established improvement
+over equal-size hashing or the originals. Preserve its result and every full
+model/Adam state; do not repeat, scale, select a winner or train an adaptive controller
+automatically. Next assess state-only credit using the newly saved TRAIN games,
+with whole-world validation and separate behavior-policy cohorts before any new
+gameplay intervention. Prior rich neural/linear and residual-correction studies were
+negative; do not repeat their grids or silently adopt rejected predictors. A better
+forecast still needs its own bounded fresh-game learning comparison. See
+`docs/native-structured-input-comparison-result.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

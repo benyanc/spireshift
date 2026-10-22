@@ -1,4 +1,50 @@
-## Current handoff — structured-input comparison qualified; owner main run next
+## Current handoff — structured-input comparison complete; no established gain
+
+The owner's restart completed the finite plan correctly: **640/640 attempts,
+323/323 sealed units, zero failures**. No rerun or further owner command is needed.
+Both originals and complete Adam state remain unchanged at **5,658 / 6,045**.
+See the [completed assessment](native-structured-input-comparison-result.md) and
+[portable evidence](evidence/native-structured-input-comparison-result-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Finish 384 sampled training attempts and 256 fresh frozen evaluations.
+  Each trained copy receives 64 games; shared worlds are 64 train / 32 evaluation,
+  not 640 independent worlds. All methods have 0/64 evaluation wins.
+- [x] Assess the predeclared equal-size named-versus-hashed comparison. Average
+  floors: original 11.453125; unchanged-input PPO 11.3125; hashed supplement
+  11.78125; named supplement 11.390625. Named minus hashed is -0.390625, paired
+  95% interval [-1.15625, +0.34375]. No demonstrated improvement or clear floor
+  regression. Sparse act clears and a highest point estimate do not select a winner.
+- [x] Verify 32,677 source files, all 323 units / 640 endings / 95,266 decisions,
+  six exact full-state imports and 64 identical initial player/world trace groups.
+  Full optimizer continuation and paired tables verify. The wider actors' new
+  input weights changed; fitting did not silently skip them. Audit: 30.49 seconds,
+  zero new games or updates.
+- [x] Preserve all six experimental finals, the original players and every Adam
+  moment/counter. Record 1,314 actual updates, about 60.18 owner-run wall minutes,
+  1.12 GB peak RAM / 1.052 GB final main artifacts. No app copies, promotion,
+  readiness pass or adaptive-controller training.
+
+Next, in the agreed order:
+
+1. **Diagnose state-only credit on the newly saved TRAIN games.** Keep behavior
+   policies separate and all fresh evaluation worlds out of fitting. Check deck,
+   relic and resource distinctions, rare long runs, whole-world generalization and
+   whether forecasts change useful action-credit/gradient signal. Preserve the
+   negative rich neural, linear and residual-correction results; do not repeat
+   their grids or silently install rejected predictors.
+2. **Only advance a materially supported state-value candidate to a separate
+   bounded learning comparison**, with unchanged actor/reward/engine settings,
+   preserved original full states/Adam and a new frozen full-game evaluation.
+   Prediction error alone cannot qualify a player. No such experiment is launched.
+3. Then assess larger/more varied bounded experience and qualified teachers. A
+   wider hidden-network control, GA and other ascensions remain separate later work.
+   Do not automatically repeat or scale this completed 640-attempt recipe.
+
+### Preserved structured-input preparation
+
+## Historical handoff — structured-input comparison qualified; owner main run next
 
 The native tactical check passes, while the earlier full-game trial still shows no
 established improvement. The next agreed intervention is now implemented and qualified:

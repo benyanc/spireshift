@@ -1,9 +1,11 @@
 # Structured public-input comparison
 
-The finite Ironclad/A8 comparison is implemented. The **20-game integration control
-passes**, and its saved audit verifies the original full states/Adam and matched
-initial native traces. **No main training or evaluation games have started.**
-The owner runs the longer experiment with the single command below.
+The finite Ironclad/A8 comparison is **complete and assessed**: 640/640 attempts,
+zero failures, no demonstrated advantage for named inputs and no full-run wins.
+The restart preserved saved work and both original full states/Adam. **No owner
+rerun is needed.** See the [completed result](native-structured-input-comparison-result.md).
+The design, qualification measurements and launch instructions below document the
+original preparation; its zero-main-game statements describe that earlier stage.
 
 ## Question and controlled change
 
@@ -144,7 +146,7 @@ on 476 files, formatting/lint and the C# protocol contract in **135.94 seconds**
 The main saved-only preflight imports all six exact original model/Adam copies in
 8.72 seconds, with **zero main games / zero main updates**.
 
-## One owner command
+## Historical owner command — complete; no rerun needed
 
 Close any running STS2 game, then run **only**:
 
