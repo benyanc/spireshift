@@ -1,4 +1,78 @@
-## Current handoff — experience comparison complete; larger batches do not improve fresh play
+## Current handoff — production-path delayed learning comparison prepared
+
+The owner requested a delayed-decision test before another gameplay intervention.
+Implement it separately from the completed 832-attempt comparison and preserve
+both original players, all Adam moments/counters **5,658 / 6,045**, historical
+forks and all four experience-test finals. No adaptive controller or new full-game
+training follows this diagnostic.
+
+Completed (#35 / #143 / #146):
+
+- [x] Use the production v11 public projection/action delivery, encoder, sampler,
+  20-feature ridge, PPO loss/settings and full inherited optimizer state. A separate
+  privileged diagnostic collector enumerates finite native transition trees;
+  sampled training sequences then look up those observed transitions. This is
+  not the ordinary full-game episode/admission path and is never labelled as such.
+- [x] Verify two genuine delayed goals: Thunderclap then Bludgeon must win the
+  encounter after at least **two actions**; Footwork then Defend then End Turn must
+  survive the native advertised attack after at least **three actions**. No
+  immediate action succeeds. Native order/upgrade variants counter a constant
+  first-option shortcut. Every current legal action has an observed continuation.
+- [x] Compare only action-independent baselines: current learned public ridge
+  versus exact expected terminal diagnostic success under that copy's current
+  policy, not the best action. Rewards arrive only at the goal boundary; discount
+  and trace lambda remain one. No HP bonus or correct-action label enters PPO.
+- [x] Collect 32 own-policy sequences per round. Begin both arms from identical
+  full states and matching private draw schedules; verify first-batch equality.
+  Keep related families/repeats of a native world in the same value fold. Freeze
+  all finals before held-out evaluation; report genuinely unseen public roots and
+  aliases rather than treating new seed strings as proof of novelty.
+- [x] Pass the separate **16-unit / 51-native-branch** integration control in
+  **96.27 seconds / 345.55 MB peak / 52.72 MB retained**: 512 sampled diagnostic
+  sequences and 43 optimizer steps on copies, zero full runs or app copies.
+  Original parents remain unchanged. All four copies succeed greedily on the two
+  new held-out public roots. This is just one held-out world and two task patterns.
+- [x] Keep the stricter result explicit: both exact-baseline copies pass the fitting
+  confidence criterion; only one learned-baseline copy does after four rounds.
+  Player 3 learned has 88.47% mean fitting success but a 67.94% weakest case, below
+  the frozen 80% minimum. Do not relax it or call this baseline superiority.
+- [x] Prepare and validate the main recipe read-only: **12 worlds / 24 trees /
+  expected 204 native branches**, eight fitting worlds and four held out. Four
+  experimental copies receive 128 fixed rounds, at most **16,384 sampled diagnostic
+  sequences / 1,536 optimizer steps**, with eight-round checkpoints. Main has not
+  been launched. The unchanged production settings include the diagnostic value
+  head's loss/rate, temperature, entropy, clipping and per-round KL stop.
+- [x] Independently verify **68,172 source files / 16 receipts / 51 native paths /
+  93 goal-path deliveries**, restore saved ridge coefficients without refitting,
+  reproduce first sampled batches and all final probabilities, and verify exact
+  imports/Adam lineage in 31.80 seconds. No native game or optimizer is rerun.
+- [x] Pass **2,428 tests / five skipped**, strict types on 520 files, formatting /
+  lint on 708 files and the C# protocol in 135.75 seconds. Fourteen new tests cover
+  true delayed goals, complete menus, exact current-policy values, terminal-success
+  finite-difference gradients, grouped folds, withheld inputs and bit-exact restart.
+
+Next, in order:
+
+1. Owner runs the one command in the [delayed comparison guide](native-delayed-learning.md).
+   Allow about 15–25 minutes with 15-minute clean sessions. Completed native trees,
+   weights and all Adam moments resume; uncertain units are preserved, never retried.
+2. Assess fitting learnability separately from held-world transfer and genuinely
+   new public states. Exact passes / learned fails suggests sensitivity to baseline
+   quality in these tasks; both pass establishes only this narrow delayed-learning
+   bridge. Both fail requires investigating the full update/representation. No
+   result alone establishes the cause of stalled full-run play or readiness.
+3. Use the saved-training feedback audit as needed, then qualify useful stronger
+   native teacher/curriculum examples on varied TRAIN-only situations. Earlier
+   rejected fixed-world preferences are not automatically admitted. Follow with
+   one declared student intervention and fresh full-game evaluation.
+4. Keep unchanged PPO scaling, predictor grids, capacity/GA changes, other
+   ascensions and adaptive thinking separate and deferred.
+
+See [portable implementation/qualification evidence](evidence/native-delayed-learning-v1.json).
+
+### Preserved completed experience-budget comparison assessment
+
+## Historical handoff — experience comparison complete; larger batches do not improve fresh play
 
 The owner completed **832 / 832 attempts and 283 / 283 sealed units**, with zero
 failed or missing games: **640 sampled TRAIN attempts + 192 frozen fresh-game
