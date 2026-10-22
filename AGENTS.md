@@ -126,6 +126,17 @@ negative; do not repeat their grids or silently adopt rejected predictors. A bet
 forecast still needs its own bounded fresh-game learning comparison. See
 `docs/native-structured-input-comparison-result.md`.
 
+The saved-TRAIN inventory-credit diagnosis is complete on 384 prior attempts / 64
+worlds / 12 policy cohorts. Original folds, coarse coefficients and credit reproduce;
+typed deck/relic information exposes real omissions but its fixed linear correction
+increases withheld MSE by 5.17%. Keep the existing production baseline and all full
+player/Adam states. Do not rerun predictor grids or silently promote this probe.
+Next consider a bounded experience/learning comparison and useful later-game outcome
+coverage, then qualified teachers/curricula as a separate intervention. Prediction
+error and changed credit signs do not establish better action selection. The active
+diagnostic recipe/entry is v2; its v1 failed numerical verifier and source snapshot
+remain preserved. See `docs/native-inventory-credit-diagnosis.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

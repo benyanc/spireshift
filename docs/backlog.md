@@ -1,4 +1,55 @@
-## Current handoff — structured-input comparison complete; no established gain
+## Current handoff — inventory-credit diagnosis complete; retain current baseline
+
+**No owner run is needed.** The saved-data diagnosis finishes all 12 separate
+cohorts / 384 prior TRAIN attempts / 64 worlds / 55,368 learning rows. Both
+originals and all six experimental finals, including full Adam states, remain
+unchanged. See the [diagnosis](native-inventory-credit-diagnosis.md) and
+[portable evidence](evidence/native-inventory-credit-diagnosis-v1.json).
+
+Completed (#35 / #143 / #146):
+
+- [x] Reproduce the exact production folds, coarse coefficients, prediction
+  metrics and credit mean/deviation before testing extra information. Decode
+  only saved TRAIN games, reconstruct effective menus, exclude deterministic
+  navigation, and retain every planned complete game. No new native attempts.
+- [x] Add generic typed owned-card identities, paired per-copy upgrade/cost,
+  native types and aggregate costs/upgrades; relic identities and available
+  owner-bound counters. Do not encode offered/chosen actions, slots, seed or
+  hidden state. Numeric zero and unavailable counters stay distinct.
+- [x] Diagnose 435 cohort-level exact coarse-input groups with different
+  inventory states across worlds. Test deck-only, relic-only and combined
+  residual forecasts at one fixed separate penalty, with whole-world folds and
+  no held-out tuning. Combined withheld MSE is **5.17% worse**, in 12/12 cohorts;
+  fitting MSE improves about 42%. Keep the current predictor; do not promote.
+- [x] Measure per-family credit and exact selected-logit coefficients without
+  optimizer updates. Combined credit signs change on 4.90–10.30% of choice rows,
+  which is not evidence of correctness. Only two act-clearing trajectories on
+  one world supply 43.70% of baseline error; all remain in the denominator.
+- [x] Restore 144 saved inventory models/forecasts bit-for-bit; audit 32,907
+  protected files without refitting. Successful sessions total 80.15 seconds,
+  750.52 MB peak RAM / 32.49 MB retained. Preserve the initial rounding-related
+  failed verifier and its exact source snapshot separately; active recipe is v2.
+- [x] Pass 2,348 tests (27 new; four skipped), strict types on 483 files,
+  formatting/lint and C# protocol in 129.45 seconds. No player/Adam updates,
+  app copies, promotion, readiness pass or adaptive-controller work.
+
+Next material work:
+
+1. **Prepare a bounded experience/learning comparison**, measuring independent
+   games, rare later-game coverage, per-family credit and fresh full-game outcomes.
+   Preserve original weights/Adam; do not automatically launch a larger unchanged
+   PPO run or claim that more games guarantee improvement.
+2. If ordinary experience remains uninformative, separately qualify stronger
+   native teachers/curricula and imitation plus full-run RL. Keep privileged
+   teacher branches out of ordinary PPO and public-belief search claims.
+3. Retain richer nonlinear state-value/typed entity sharing and a wider hidden
+   network as separate evidence-driven candidates. Do not repeat the rejected
+   rich linear/correction grids. GA, other ascensions and adaptive thinking remain
+   later work; no next experiment has started.
+
+### Preserved structured-input result and credit-diagnosis handoff
+
+## Historical handoff — structured-input comparison complete; no established gain
 
 The owner's restart completed the finite plan correctly: **640/640 attempts,
 323/323 sealed units, zero failures**. No rerun or further owner command is needed.
