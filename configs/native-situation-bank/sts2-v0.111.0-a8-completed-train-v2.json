@@ -1,0 +1,34 @@
+{
+  "entry_sha256": {
+    "build-native-situation-bank-v2.py": "0cdff03558b76806c1ca03c15a664b03fbdde86455e04b97956eb42dd347df2c",
+    "build-native-situation-bank-v2.sh": "a44023832cecc3efe3b8534951a4641abfc0ffafe926b775691967bc1ceb6eef"
+  },
+  "implementation_sha256": {
+    "native_situation_coverage.py": "0c5fc6dad22e40bcc1fefead50811877137ba6f0de8cb52556ec3c7f577a0cfa",
+    "native_situation_reselection.py": "c55e71d33b736c9231d8e7eb62d24a28efb641f293d7853685ed9aa03db7016e"
+  },
+  "parent_report": {
+    "id": "sha256:4b7aff22560c884e274f11cf6a199da189171576abee947acab89f0febd1034e",
+    "path": "artifacts/native-situation-bank/sts2-v0.111.0-a8-completed-train-v1/report.json"
+  },
+  "sampling_limits": {
+    "per_episode_bucket": 2,
+    "per_split_family": 32,
+    "per_split_inventory_bucket": 2,
+    "per_world": 12,
+    "per_world_family": 2,
+    "split_sizes": {
+      "fit": 192,
+      "validation": 64
+    }
+  },
+  "schema_version": "native-situation-bank-coverage-config-v2",
+  "selection_policy": "public_family_act_floor_encounter_health_opportunity_coverage_then_balance_v2",
+  "session_limits": {
+    "cpu_seconds": 240,
+    "resident_memory_bytes": 1000000000,
+    "storage_bytes": 25000000,
+    "wall_seconds": 240
+  },
+  "workspace": "artifacts/native-situation-bank/sts2-v0.111.0-a8-completed-train-v2"
+}

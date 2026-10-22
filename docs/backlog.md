@@ -1,4 +1,79 @@
-## Current handoff — inventory distinction repair qualified; owner experience test next
+## Current handoff — varied TRAIN situation bank complete; current experiment unchanged
+
+The owner reports the bounded experience-budget comparison is running. This parallel
+work does not inspect its output units, change its pinned files, read its changing
+checkpoints or add another training/game workload. Both original players, all Adam
+moments/counters **5,658 / 6,045** and historical experimental finals remain unchanged.
+The comparison's fresh-game result still determines the next learning intervention.
+
+Completed independently (#35 / #143 / #146):
+
+- [x] Build a fixed bank from the completed audited structured experiment's **384
+  TRAIN attempts / 64 native worlds / 12 policy cohorts**, not its evaluation games
+  or the live run. Account for all 55,642 decisions: 41,816 genuine choices, 274
+  forced navigation controls and 13,552 single-choice menus. Decode one raw episode
+  at a time; verify source, policy, menu and complete-game provenance.
+- [x] Organize public situations by decision family, act/floor, health, encounter,
+  owned cards with per-copy upgrades/current advertised costs, and relic identity /
+  available counters. Preserve full original menus, including take/skip, rest
+  alternatives, shops, targeting, potion use and zero-current-cost plays. These are
+  opportunities, not optimal-action labels or extra rewards.
+- [x] Bound repetitive early-combat sampling, remove 7,641 exact duplicate
+  references from 14,121 retained candidates and select **256 situations / 14
+  families**. Keep 192 fitting / 64 validation roots on disjoint **48 / 16 whole
+  native worlds**, grouping every related player/arm/branch. The active v2 bank
+  includes 188 deck signatures, 109 relic-state signatures, 22 take/skip menus,
+  15 Heal/Smith menus, 14 shop controls and seven zero-current-cost-play opportunities.
+- [x] Repair a measured sampling omission before accepting the bank: v1 misses
+  validation later-game/boss roots despite their availability. Preserve its code,
+  candidate pool, result and audit. Separately version coverage-first selection;
+  reuse the exact world split and caps. V2 covers all **62 fitting / 53 validation
+  declared public groups** with no omitted available group. No outcome labels or
+  validation performance select the roots.
+- [x] Resolve **all 256 selected roots** to their exact saved public/effective
+  menus and recorded prefixes; verify 34,625 protected source seals. Native seeds
+  and prefix actions stay outside student inputs. No root action is labelled
+  correct; no native replay or public-belief teacher is qualified by saved resolution.
+- [x] Complete the 32-game control in 22.69 seconds, initial candidate bank in
+  **72.22 seconds / 192.14 MB peak RAM / 46.82 MB retained**, v2 coverage correction
+  in **17.87 seconds / 8.25 MB**, and corrected all-root resolution in 73.38 seconds.
+  No game attempts, app copies, optimizer updates or automatic follow-up.
+- [x] Pass **2,396 tests / five skipped**, strict types on 506 files, formatting /
+  lint on 689 files and the C# contract. The 23 new passed tests cover source/public
+  boundaries, deterministic sampling, rare-group reservation, quota shortages,
+  optional actions, ownership, whole-world splits, exact deduplication and resolution.
+
+Keep limitations explicit: these are historical TRAIN worlds already seen by the
+parents. Bank validation is a future teacher/student split, not fresh-game evaluation.
+All 23 selected combat roots predate the public relic-counter repair; missing fields
+stay unavailable and cannot silently migrate to the current worker. V2 includes
+20 floor-17+ and four boss roots; **validation has just two floor-17+ roots and one
+boss**. Group coverage is now satisfied, but these tiny samples cannot establish
+later-game generalization. No world assignment was changed after seeing coverage.
+
+Next, in order:
+
+1. Let the existing comparison finish unchanged and assess its paired fresh-game
+   result before deciding on more training, another predictor or an enlarged run.
+   No extra owner command is needed for the completed bank.
+2. If a teacher/curriculum is warranted, select a finite public-state sample from
+   this frozen bank and qualify native replay/menu equality under its exact source
+   environment, or explicitly recollect/qualify it under the repaired environment.
+   Fill later-game/validation gaps with separately planned TRAIN experience rather
+   than pretending this bank contains unseen states. Collect trustworthy alternative
+   action consequences before any imitation; fixed-world evidence stays privileged.
+3. Test one separately declared teacher/student or curriculum intervention on forks
+   with preserved full Adam state, then fresh full games. A balanced example bank
+   alone is not a learning signal, win-rate gain, readiness pass or PPO dataset.
+4. Keep rich-predictor grids, hidden-size changes, GA, other ascensions and adaptive
+   thinking separate and deferred. No action restrictions or HP/Smith reward bonuses.
+
+See [bank design, use and limitations](native-training-situation-bank.md) and
+[portable qualification evidence](evidence/native-training-situation-bank-v1.json).
+
+### Preserved inventory qualification and owner experience-test handoff
+
+## Historical handoff — inventory distinction repair qualified; owner experience test next
 
 **The short audit, repair and learning control are complete.** The next task is the
 owner-run bounded comparison of 32 versus 128 fresh games per training round. Both
