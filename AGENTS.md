@@ -238,6 +238,26 @@ Adam and every previous final. No automatic fitting, promotion or adaptive
 controller. Keep long jobs owner-run, reuse frozen inputs and retain old evidence.
 See `docs/native-coordinated-teacher-result.md` and the current backlog.
 
+The owner has now authorized the separate controlled teaching/fresh-game test.
+Use the sealed two-world fitting bank: the single-change 23-HP rescue on world
+148 and coordinated 48-HP plan on world 192, selected with fitting outcomes only.
+Both source worlds belong to player 2; both fixed initializers may learn the same
+public lessons on copies without manufacturing more independent worlds. Keep
+the four held-out worlds excluded from fitting and selection. Compare improved
+plan cloning, reference cloning and untouched originals. Four trained copies
+receive 16 epochs/four updates/32 choices, 64 updates each; inherit numerical
+weights and full warm Adam exactly and leave all original files unchanged.
+Critic weights, credit predictor, full-run score and primary objective stay fixed.
+Seal all finals before any native evaluation; do not select an epoch from results.
+Main then checks 36 fitting/held-out fights and 192 fresh full games across
+32 common new worlds and both initializers, with matched greedy combat/sampled
+noncombat evaluation. This is categorical imitation, not ordinary PPO. The short
+control completes nine native attempts without errors, but does not demonstrate
+stronger play. Main remains owner-run and unstarted. Preserve sealed full states,
+receipts and uncertain attempts; never retry failed seeds or clear active markers.
+No promotion, adaptive controller or next experiment is automatic. See
+`docs/native-plan-teaching-test.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

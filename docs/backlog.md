@@ -1,4 +1,74 @@
-## Current handoff — coordinated teacher complete; small student-transfer test next
+## Current handoff — controlled teaching test implemented; owner main run next
+
+The owner authorized the matched teaching/fresh-game test. Both original full
+players and every Adam moment/counter (**5,658 / 6,045**) remain unchanged. The
+completed teacher and old unstarted natural-v1 curriculum stay preserved. Main
+teaching/evaluation is a separate finite experiment and remains unstarted.
+
+Implemented (#35 / #143 / #146):
+
+- [x] Freeze the **two improved fitting plans**: single-change rescue at **23 HP**
+  on world 148 and coordinated win at **48 versus 31 HP** on world 192. Select
+  from fitting outcomes only, with exact menu ownership and native confirmation.
+  Public inputs/action labels alone reach the learner; no held-out fitting data.
+- [x] Compare improved-plan copies, reference-plan copies and untouched originals
+  for both preserved initializers. Both use the same two source-player-2 worlds;
+  keep that limited coverage explicit. Equal-world categorical teaching uses
+  **16 epochs × four updates × 32 draws**, **64 updates per copy / 256 total**.
+  Preserve the original files and start each main copy with exact warm Adam.
+- [x] Record full-plan loss/probability and the **three changed-choice targets**
+  separately. Keep critic/value-credit inputs, scores and rewards unchanged.
+  Save full weights/Adam each epoch; seal all six final/original states in a
+  barrier before any evaluation. No best-epoch selection or evaluation feedback.
+- [x] Prepare **36 natural-fight checks** and **192 fresh full games** on **32
+  disjoint canonical native worlds**, three versions and two fixed initializers.
+  Match behavior and compute, counterbalance order, retain failure denominators,
+  and report each initializer plus native-world-clustered paired intervals.
+- [x] Seal/resume each work unit and optimizer predecessor exactly. Retire verified
+  failed attempts and proceed within the declared two-failure allowance; uncertain
+  delivery or changed receipts stop without retries. Share the app/runtime/cache,
+  use isolated profiles and create zero game app copies. Display batch summaries.
+- [x] Pass **14 new tests** covering fitting-only public labels, teacher selection,
+  fixed work, final barriers, freshness/aliases, exact warm-Adam resumption,
+  unchanged originals, failure continuation/denominators, changed checkpoints and
+  open-game refusal before an evaluation marker is created.
+- [x] Prepare the **28,046,877-byte** public lesson bank from preserved sources in
+  **132.71 seconds**, with zero games or optimizer updates. Freeze both recipes
+  and fresh panels; main excludes all inherited panels and the new control seed.
+- [x] Complete the short integration control in **107.93 seconds**: **16 units /
+  16 copied optimizer updates / three fight checks / six full games / no errors**.
+  All four copied optimizers and the final-state barrier execute. Its three
+  fitting-fight checks still lose and full-game wins remain zero; this is runner
+  qualification, not a strength result or a tuning/early-stop condition.
+- [x] Pass **41.06-second saved-only verification** of **106,359 sources / 16
+  receipts**, exact full-state/Adam reproduction for all **16 copied updates**,
+  nine repeated native audits and six reconstructed full-game traces. Main
+  read-only preparation passes without creating its workspace. Preserve the v1
+  verifier's raw-versus-filtered-count error; v2 checks both counts correctly.
+- [x] Pass **2,485 tests / five skips**, format/lint, strict types on 544 files and
+  the C# protocol build in **147.13 seconds**. Update GitHub #35 / #143 / #146 with
+  prior history preserved. Main remains unstarted; originals and old pinned code
+  are unchanged.
+
+Next, in order:
+
+1. **Owner runs the main test** using the one command in the
+   [teaching-test guide](native-plan-teaching-test.md). Main imports the originals,
+   not trained control copies. One worker, 15-minute sessions, 2 GB memory / 3 GB
+   generated phase output; completed units survive clean pauses. No further
+   collection or training experiment follows this bounded fit/evaluation.
+2. Assess whether copied players learn the changed choices, execute the natural
+   fitting/held-out fights and improve fresh full-run outcomes against **both**
+   reference-clone and untouched controls. A probability/loss improvement alone,
+   or beating a degraded reference clone, does not establish better play.
+3. Keep terminal victory / 128 CPU seconds primary, world/initializer limitations
+   and technical failures visible. No readiness, model promotion, adaptive effort
+   controller or automatic larger run follows a local diagnostic gain.
+
+See [implementation and owner command](native-plan-teaching-test.md) and
+[portable evidence](evidence/native-plan-teaching-test-v1.json).
+
+## Historical handoff — coordinated teacher complete; small student-transfer test next
 
 The finite earlier/coordinated comparison is complete. Preserve both original
 full players and every Adam moment/counter (**5,658 / 6,045**), all earlier finals,

@@ -1,0 +1,304 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": {
+    "all_four_copied_full_weights_and_Adam_exact": true,
+    "copied_optimizer_steps_reconstructed_exactly": 16,
+    "critic_weights_unchanged": true,
+    "driver": {
+      "path": "artifacts/native-teaching/assessment-v2/run.py",
+      "sha256": "885bc83ae21c9aa00f04c6baae05a9e95af3e90370b2191fdbecbd08e5102bb9"
+    },
+    "failed_prior_verifier": {
+      "path": "artifacts/native-teaching/assessment-v1/run.py",
+      "production_sources_changed": false,
+      "reason": "raw_decision_count_incorrectly_compared_with_non_navigation_learning_records",
+      "resources": {
+        "cap": null,
+        "cpu_seconds": 18.533308087,
+        "final_storage_bytes": 7499,
+        "id": "sha256:c39e0ea397582ce4cb0d6794d80cefbb7e6b12ae3d553d3d326b2d79df29cce8",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 1000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-plan-teaching-assessment-v1.json",
+        "peak_resident_memory_bytes": 345423872,
+        "status": "failed",
+        "wall_seconds": 33.30699704098515
+      }
+    },
+    "final_state_barrier_verified": true,
+    "id": "sha256:804e0a67f10dce667298d6a48f6120f51348431f7378d9cac0beda9c4d191610",
+    "main_read_only_preparation_passed": true,
+    "main_workspace_created": false,
+    "native_delivery_audits_repeated": 9,
+    "new_native_attempts": 0,
+    "original_full_states_and_Adam_unchanged": true,
+    "path": "artifacts/native-teaching/assessment-v2/report.json",
+    "production_optimizer_steps": 0,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 25.355446000999997,
+      "final_storage_bytes": 8451,
+      "id": "sha256:44dca97ca5b2ae819d3167aea7c09ea09705bb45d81f40bfa9fc15f22a77c48e",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-plan-teaching-assessment-v2.json",
+      "peak_resident_memory_bytes": 282181632,
+      "status": "completed",
+      "wall_seconds": 41.05652887490578
+    },
+    "sealed_receipts_verified": 16,
+    "six_full_game_behavior_traces_reconstructed": true,
+    "valid": true,
+    "verified_sources": 106359
+  },
+  "automatic_next_experiment": false,
+  "bank": {
+    "bytes": 28046877,
+    "changed_choice_targets": 3,
+    "heldout_used_for_fitting": false,
+    "id": "sha256:5fe9cde71945afb5a68952437747bc35d316bbec5b06d07defa0e7323d0e92d1",
+    "lessons": [
+      {
+        "chosen_search_arm": "single_change",
+        "confirmation_fight_id": "sha256:085ee328f719e299770f5922489f2b84c243b3c73e44467418a9c4036eaad087",
+        "reference_fight_id": "sha256:abc22c240d068b8481783319482fa19e6c3d99db61c92d61b3b16823b00bc182",
+        "reference_hp": 0.0,
+        "reference_outcome": "loss",
+        "root_id": "sha256:997fe27ed3ecca1ca68355df3d0a189a59893cd39ec9da9e06e054e7fc3a3e27",
+        "source_player": 2,
+        "teacher_fight_id": "sha256:a8e8dfc18e5ecd7dd82362447eb40e491fbf3b96a310d44535154973ac4bac07",
+        "teacher_hp": 23.0,
+        "teacher_outcome": "win",
+        "world": "SP1RESH1FTEXPM148"
+      },
+      {
+        "chosen_search_arm": "coordinated",
+        "confirmation_fight_id": "sha256:f43d215109a9f00153fa8712afd6e20c593d5392f29bc4bcb86f00a34329a8e3",
+        "reference_fight_id": "sha256:ab22dee75834175a6d24d2a0766a4259ccb3e88beba977e8d58ea31c0be5a0df",
+        "reference_hp": 31.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:3f3df44c25eae41b6a292c2c0835c88086d3304453d61fc94c7a0d7d4752b010",
+        "source_player": 2,
+        "teacher_fight_id": "sha256:d885631bd70bf51bbc8a07be8ec69409b3cc212f5fc7d9196c6953a65f643389",
+        "teacher_hp": 48.0,
+        "teacher_outcome": "win",
+        "world": "SP1RESH1FTEXPM192"
+      }
+    ],
+    "path": "artifacts/native-teaching/lessons-v1/bank.json",
+    "privileged_fixed_world_teacher": true,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 58.999731931,
+      "final_storage_bytes": 28048983,
+      "id": "sha256:600d1521bf83f54459d9e4945f0d07792d7ad22119e0c06c73a32e7c7bc8ac6a",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-plan-teaching-preparation-v1.json",
+      "peak_resident_memory_bytes": 330989568,
+      "status": "completed",
+      "wall_seconds": 132.71237025014125
+    },
+    "selection_scope": "best_verified_early_plan_per_fitting_world_from_both_search_methods",
+    "source_files": 105964,
+    "source_players": {
+      "2": 2,
+      "3": 0
+    },
+    "student_inputs_public_only": true
+  },
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "contract": "native_verified_plan_student_transfer_v1",
+  "control": {
+    "all_finals_frozen_before_evaluation": true,
+    "checks": {
+      "all_evaluations_clean": true,
+      "frozen_final_barrier_present": true,
+      "p2_reference_clone_fixed_work": true,
+      "p2_teacher_clone_fixed_work": true,
+      "p3_reference_clone_fixed_work": true,
+      "p3_teacher_clone_fixed_work": true
+    },
+    "completed_units": 16,
+    "copied_optimizer_steps": 16,
+    "fitting_fight_outcomes": [
+      "loss",
+      "loss",
+      "loss"
+    ],
+    "fresh_full_games": 6,
+    "fresh_game_wins": 0,
+    "id": "sha256:47104672cff0471cd2f207a032b79c04e24f235ff5fd948e40cc7d2827219fb0",
+    "native_attempts": 9,
+    "natural_fight_checks": 3,
+    "passed": true,
+    "path": "artifacts/native-teaching/sts2-v0.111.0-a8-control-v1/report.json",
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 72.54957368,
+      "final_storage_bytes": 74673194,
+      "id": "sha256:86d6648e2716560e4985b4b52e227f58eeb10373fbd8193ac491efa8fc7df55e",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-plan-teaching-control-v1-1.json",
+      "peak_resident_memory_bytes": 495239168,
+      "status": "completed",
+      "wall_seconds": 107.9273440418765
+    },
+    "strength_claimed": false
+  },
+  "evidence_id": "sha256:8b8f9980d4d48b0bd00815e73c815b35b8b7be8dd9bb192ad25f47def4f8d772",
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "limitations": [
+    "Only two fitting worlds, both source-player-2; numerical copies do not create more training worlds.",
+    "Local privileged fight improvements do not establish strategic full-run utility.",
+    "The short one-epoch control confirms execution and saved-state correctness, not stronger play.",
+    "Main remains unstarted and cannot select epochs using held-out or fresh-game outcomes.",
+    "Unchanged value prediction and sparse demonstrations may limit generalization even if fitting loss improves."
+  ],
+  "main_prepared": {
+    "all_final_epochs_evaluated_no_selection": true,
+    "all_finals_frozen_before_evaluation": true,
+    "batch_choices": 32,
+    "control_weights_not_imported": true,
+    "copied_initializers": [
+      2,
+      3
+    ],
+    "critic_and_credit_predictor_unchanged": true,
+    "epochs": 16,
+    "equal_behavior": "greedy_combat_sampled_noncombat_v1",
+    "failure_allowance": 2,
+    "failure_zero_in_original_denominators": true,
+    "fresh_worlds": 32,
+    "freshness_exclusions": 43,
+    "full_games": 192,
+    "interval_unit": "native_world_jointly_across_two_fixed_initializers",
+    "learning_coverage": "two_fitting_worlds_only",
+    "main_native_attempts_executed": 0,
+    "maximum_native_attempts": 228,
+    "natural_fight_checks": 36,
+    "optimizer_updates_per_copy": 64,
+    "planned_units": 295,
+    "teaching_loss": "categorical_cross_entropy",
+    "total_optimizer_updates_on_copies": 256,
+    "updates_per_epoch": 4,
+    "variants": [
+      "initial",
+      "reference_clone",
+      "teacher_clone"
+    ],
+    "whole_world_weighting": "equal_source_world_then_within_world_position",
+    "workspace_created": false
+  },
+  "ordinary_PPO_eligible": false,
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "original_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "owner_next": {
+    "command": "bash scripts/test-native-plan-teaching-v1.sh",
+    "completed_chunks_and_full_Adam_resumed": true,
+    "expected_minutes": [
+      30,
+      60
+    ],
+    "maximum_sessions_per_invocation": 3,
+    "phase_output_cap_bytes": 3000000000,
+    "session_cpu_seconds": 1800,
+    "session_memory_bytes": 2000000000,
+    "session_wall_seconds": 900
+  },
+  "recipes": [
+    {
+      "id": "sha256:a807c604618620ca78e94c89eb35b6e1e648801041688bbc00b383cb153c68e6",
+      "path": "configs/native-teaching/sts2-v0.111.0-a8-control-v1.json"
+    },
+    {
+      "id": "sha256:23a31c5f586760451e6b9ffc2a96161084c72c569ee49fc3a48a2b69522e7010",
+      "path": "configs/native-teaching/sts2-v0.111.0-a8-comparison-v1.json"
+    }
+  ],
+  "repository_verification": {
+    "csharp_protocol_build_passed": true,
+    "earlier_test_type_and_lint_failures_preserved": [
+      "artifacts/resources/native-plan-teaching-repository-check-v1.json",
+      "artifacts/resources/native-plan-teaching-repository-check-v2.json"
+    ],
+    "format_passed": true,
+    "lint_passed": true,
+    "new_tests": 14,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 134.52557305800005,
+      "final_storage_bytes": 0,
+      "id": "sha256:37b646ff76634e99e7c8bb3186e0873ece5091cdc8bd811c3c5ac61cb35aeb67",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-plan-teaching-repository-check-v3.json",
+      "peak_resident_memory_bytes": 346947584,
+      "status": "completed",
+      "wall_seconds": 147.12882766593248
+    },
+    "strict_type_source_files": 544,
+    "tests_passed": 2485,
+    "tests_skipped": 5
+  },
+  "schema_version": "native-plan-teaching-evidence-v1",
+  "status": "implemented_qualified_owner_main_next",
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}
