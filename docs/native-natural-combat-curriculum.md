@@ -1,5 +1,11 @@
 # Natural multi-turn combat teacher and curriculum test
 
+**Collection completed:** 190 native attempts / 12 worlds / zero technical
+failures. The fitting-only quality gate fails: zero usable improved fitting plans.
+The implemented curriculum remains **unstarted**. See the
+[completed result and next work](native-natural-combat-result.md); the design and
+qualification below describe the preserved v1 experiment.
+
 This is the next bounded learning intervention after the delayed-decision control.
 It asks whether verified lessons from naturally reached fights can improve the
 preserved Ironclad/A8 players. The existing learned baseline, full-run objective,
@@ -143,7 +149,7 @@ value in the original denominator. Paired intervals cluster the 32 worlds jointl
 across the two fixed parents; there are not 192 independent worlds or a population
 of independently trained initializers. Per-parent outcomes remain in sealed receipts.
 
-## Qualification and next owner command
+## Qualification and completed collection
 
 The saved-only root preparation completes in **58.66 seconds / 216.89 MB peak /
 17.99 MB output**, with zero games or updates. A separate **52.56-second** native
@@ -184,20 +190,17 @@ creating its workspace.
 
 Repository checks pass: **2,451 tests / five skips**, formatting, lint, strict types
 and the C# protocol build. The full check takes **127.86 seconds** under a
-four-minute cap. These checks establish implementation consistency; the main
-teacher's useful signal and fresh-game effect remain unmeasured.
+four-minute cap. These qualification checks establish implementation consistency.
+The completed collection below measures teacher signal; its effect on student
+learning and fresh full games remains unmeasured.
 
-The main collection is **not started**. Close STS2 and run only:
-
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/test-natural-combat-curriculum-v1.sh
-```
-
-Allow approximately **15–30 minutes** from the smaller measured control, with
-15-minute clean sessions. This launch collects teacher comparisons only; no fitting
-or fresh-game evaluation follows it. Share the summary before the next stage.
-The same command resumes sealed units after a clean pause. Interrupted or changed
-units stop for inspection and are not automatically replayed.
+The main collection now completes across **two bounded sessions / 18.24 minutes**.
+Its declared fitting-only gate fails, so no fitting or fresh-game evaluation
+follows. There is **no next owner command** for v1. The existing wrapper displays
+and verifies saved results; do not repeat the collection or launch its curriculum.
+The [result assessment](native-natural-combat-result.md) explains the useful
+three-choice lesson, the separate held-out improvements and why the prepared
+comparison lacks enough improved fitting targets.
 
 One worker shares the frozen inputs. Each phase allows at most **2 GB memory /
 3 GB generated files**. The existing 17.99-MB root bank, old source artifacts and

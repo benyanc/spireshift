@@ -1,4 +1,70 @@
-## Current handoff — natural multi-turn teacher and matched curriculum implemented
+## Current handoff — natural teacher complete; stronger fitting lessons still needed
+
+The owner completed the finite natural multi-turn collection. **190 native attempts /
+12 worlds finish without failed or capped branches.** No student fitting follows:
+the frozen fitting-only quality gate fails. Both original full players, every Adam
+moment/counter (**5,658 / 6,045**) and all prior experiment finals remain preserved.
+
+Completed (#35 / #143 / #146):
+
+- [x] Verify all 12 natural roots and exact reference/selected confirmations:
+  **12 references / 154 alternatives / 24 confirmations**, with zero missing roots,
+  game-app copies, optimizer steps or fresh full-game attempts.
+- [x] Separate the actual fitting signal: six of eight reference fights already
+  win; selected plans still win six. One winning fitting plan preserves **seven
+  HP**, but has three choices across two rounds. Four other winning plans pass
+  the declared four-choice/two-round criterion; none improves its reference.
+- [x] Explain the design cutoff honestly: a three-choice lesson can be useful to
+  a network. It does not qualify this particular multi-turn test, and counting it
+  would still supply only **one**, not the required **two**, fitting improvements.
+  Preserve it as diagnostic evidence, not a reason to retroactively pass v1.
+- [x] Keep the **two held-out HP improvements (+2 / +7)** out of fitting and gate
+  decisions. Their reference fights already win; no death-to-win rescue occurs
+  in any of the four losing reference worlds. These are local fight outcomes,
+  not full-run victory rates or a teacher-trained player's evaluation.
+- [x] Check whether resource restrictions caused the shortage: **zero higher-HP
+  winning paths are rejected by the recorded resource guards**. All alternatives
+  retain equal recorded non-HP resource views at their root; those views are not
+  a complete strategic equivalence test. **131 / 154** alternatives also tie the
+  reference's recorded outcome/resources. No unsupported-state repair is indicated.
+- [x] Pass a **99.65-second saved-only audit** of **83,768 sealed source files /
+  190 receipts / 3,124 reconstructed action distributions and selected actions**,
+  exact confirmations and the unchanged fitting-only gate. No native replay,
+  baseline refit or optimizer update. The v1 curriculum workspace remains absent.
+- [x] Record the actual two-session collection cost: **18.24 wall minutes /
+  784.30 CPU seconds / 444.58 MB peak / 495.58 MB final cumulative output**.
+  Preserve both resource reports; do not present the final report's unit-loop
+  duration as the whole experiment or add cumulative storage measurements.
+- [x] Pass **2,451 tests / five skips**, lint, formatting, strict types and the
+  C# protocol build in **138.01 seconds**. Update only result/handoff documentation
+  and portable evidence; frozen collector, learner, recipes and full states remain
+  unchanged. GitHub #35 / #143 / #146 record the result with history preserved.
+
+Next, in order:
+
+1. **Design a separately bounded teacher coverage/recoverability test**, subject
+   to owner authorization. Compare the existing one-change-plus-greedy continuation
+   with plans making coordinated decisions. Consider first-turn roots before
+   inherited damage/resource loss. Use fitting/TRAIN worlds for development and
+   new withheld worlds for assessment; do not reuse observed v1 held-out outcomes
+   as unseen validation. Preserve all attempted-root denominators and finite caps.
+2. Predeclare how useful shorter plans enter a future curriculum separately from
+   its multi-turn qualification. Seek actual better fitting plans rather than
+   loosening the old criterion or merely cloning unchanged successful behavior.
+   Stronger search and earlier roots are hypotheses, not established fixes.
+3. Only after a separate teacher supplies adequate verified lessons, run a
+   declared matched student intervention against reference cloning and untouched
+   originals, with fixed work, all finals frozen and fresh full-game evaluation.
+   The implemented **v1 curriculum remains unstarted**; there is no owner command
+   for the completed collection now.
+4. Keep unchanged PPO enlargement, predictor grids, capacity/GA changes, other
+   ascensions and adaptive thinking deferred. No checkpoint promotion or readiness
+   pass follows local fight wins or HP improvements.
+
+See [result assessment](native-natural-combat-result.md) and
+[portable evidence](evidence/native-natural-combat-result-v1.json).
+
+## Historical handoff — natural multi-turn teacher and matched curriculum implemented
 
 The owner requested useful natural multi-turn lessons after the delayed-learning
 control. Implement a separate finite teacher collection and a guarded curriculum /

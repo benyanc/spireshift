@@ -178,20 +178,22 @@ admitted. Jobs expected to take five minutes or more stay owner-run. No promotio
 larger unchanged follow-up or adaptive controller is automatic.
 See `docs/native-delayed-learning-result.md` and the ordered backlog.
 
-The owner next authorized the natural multi-turn combat teacher and curriculum test.
-Its implementation selects only repaired completed TRAIN situations, with outcome-blind
-whole-world splitting and exact native prefix replay. The main collection is prepared,
-not started: 12 natural worlds, up to 228 first-divergence/confirmation branches across
-multiple turns. Local fight wins and guarded HP improvements remain explicitly auxiliary
-teaching evidence, not full-run strategic labels or ordinary PPO. Do not price escape as
-victory or silently adopt the old rejected preferences. The fitting-only quality gate
-requires four confirmed winning multi-turn worlds and two local improvements before
-the matched categorical-imitation test. Compare teacher cloning, reference cloning and
-unchanged originals; preserve all original weights/Adam and freeze finals before withheld
-fights and fresh full games. The small native/control path completes with 32 copied-Adam
-updates but zero demonstrated teacher or gameplay gain. It does not admit the main
-teacher automatically. The next owner command collects lessons only and stops before
-fitting. See `docs/native-natural-combat-curriculum.md`.
+The natural multi-turn teacher collection now completes on 12 natural worlds: 190
+native attempts, no failed/capped paths and no optimizer updates. Preserve its result
+and the qualified collector. The fitting-only quality gate fails: four usable winning
+fitting plans contain zero improvements. A separate three-choice/two-round plan saves
+seven HP but falls outside the declared four-choice criterion; even admitting that
+short example would supply only one of the required two improved fitting worlds.
+Two held-out improvements must not become fitting labels. Resource guards reject no
+higher-HP winning alternative; all four losing reference worlds remain losses.
+The prepared v1 curriculum/fresh-game comparison stays unstarted. Do not relax its
+gate, repeat the collection, rerun unchanged PPO or import old rejected preferences.
+The next proposed work is a separately frozen teacher coverage/recoverability test
+with earlier combat roots and coordinated decisions, not an automatically authorized
+search expansion. Short successful lessons are not inherently unlearnable; declare
+their use prospectively. Preserve both original full states/all Adam and all prior
+finals. Local fixed-world lessons remain auxiliary, never full-run strategic proof
+or ordinary PPO. See `docs/native-natural-combat-result.md` and the ordered backlog.
 
 ## Information boundary
 
