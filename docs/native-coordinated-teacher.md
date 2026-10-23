@@ -6,13 +6,13 @@ unchanged run, relaxation of the old gate or automatic student training. Both
 original full players and all Adam moments/counters **5,658 / 6,045** remain
 read-only. Every previous result, final model and recipe stays unchanged.
 
-The v2 control now passes: **48 native paths / eight confirmed cells / no failures
-or caps**. Both players execute coordinated changes across rounds. One control's
-later-start coordinated plan wins with **75 HP versus 68 HP** for single-change
-search; the other within-entry method comparisons tie. These control worlds
-establish execution, not consistently useful lessons or stronger full-game play.
-**The next owner stage is the prepared eight-world main comparison.** Both
-original players and their optimizer states remain unchanged.
+The control and main comparison are now complete. Main seals **576 work units /
+533 native paths / eight worlds / 32 verified cells**, with no failures or caps.
+It finds two useful fitting worlds, both from player 2, but no demonstrated
+advantage for coordinated search over single changes. No student is fitted.
+**Do not rerun either completed stage.** Both original players and all optimizer
+state remain unchanged. See the [result assessment](native-coordinated-teacher-result.md)
+for the evidence and proposed separately declared student-transfer test.
 
 The capped v1 qualification attempt remains preserved: 43 sealed paths, one
 interrupted prefix and four unattempted units. The interrupted world is not
@@ -229,15 +229,10 @@ lint, strict types and the C# protocol build, in **134.53 total wall seconds**.
 Only handoff documents and portable result evidence change; the qualified
 collector, recipes, worker and all model/optimizer files remain unchanged.
 
-Run only the main comparison next:
-
-```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-coordinated-teacher-v2.sh
-```
-
-Close STS2 first. Allow roughly **30–60 minutes** for at most 576 paths. One
-invocation permits at most three 15-minute sessions; rerun this same command
-after a clean pause if it is incomplete. Share the final result. No model fitting,
-full-game evaluation, checkpoint promotion or next experiment follows. The failed
-natural-v1 curriculum remains untouched. Assess fitting and held-out worlds
-separately before declaring any student intervention.
+The owner has since completed the main collection in four sessions totaling
+**44.02 minutes**, with **533 native paths / 43 unavailable proposals / zero
+failures or caps**. All 32 cells verify. The entry scripts and recipes remain
+frozen for provenance; there is no next collection command. No model fitting,
+full-game evaluation, checkpoint promotion or follow-up starts automatically.
+The failed natural-v1 curriculum remains untouched. See
+[main result](native-coordinated-teacher-result.md) before declaring a student test.

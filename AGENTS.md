@@ -220,11 +220,23 @@ not fitting evidence, a stronger full-game player or approval to fit a student.
 Saved-only assessment independently rechecks 48 native journals/receipts and
 reconstructs 786 action distributions/choices, all cells, confirmations and exact
 later suffixes. Main read-only preparation passes without creating its workspace.
-The prepared at-most-576-attempt/eight-world main comparison is next and owner-run.
-Do not repeat the completed control or work around long-job boundaries with
-short-clock drivers. Reuse frozen inputs and preserve all old receipts/source
-snapshots. See
-`docs/native-coordinated-teacher.md` and the current backlog.
+The owner subsequently completed the eight-world main comparison: 576 sealed work
+units, 533 native paths and 43 unavailable proposals, no failures/caps, all 32
+cells verified. Both methods rescue the same two fights (one fit, one held out);
+the two improved fitting worlds both come from player 2. Coordinated search has
+no demonstrated advantage over single changes; its four initial lineages also
+miss alternatives found by wider single-change coverage. Preserve the result and
+do not repeat or enlarge this collection. Saved-only assessment reconstructs all
+576 receipts/requests/plans and independently rechecks 64 reference/confirmation
+journals and 1,175 distributions/choices; original full-state hashes/Adam match.
+No student or full-game evaluation has run. Next propose a separately frozen,
+small teacher/reference-clone/original transfer test using useful fitting plans
+only, with explicit two-world coverage.
+Held-out plans remain excluded, the old v1 curriculum/gate is not relaxed and local
+fixed-world labels are never ordinary PPO. Preserve both full original states/all
+Adam and every previous final. No automatic fitting, promotion or adaptive
+controller. Keep long jobs owner-run, reuse frozen inputs and retain old evidence.
+See `docs/native-coordinated-teacher-result.md` and the current backlog.
 
 ## Information boundary
 

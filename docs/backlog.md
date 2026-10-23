@@ -1,4 +1,63 @@
-## Current handoff — coordinated control passed; owner main comparison next
+## Current handoff — coordinated teacher complete; small student-transfer test next
+
+The finite earlier/coordinated comparison is complete. Preserve both original
+full players and every Adam moment/counter (**5,658 / 6,045**), all earlier finals,
+the failed natural-v1 collection and its unstarted curriculum. There is no next
+collection command and no student fitting or fresh full-game result yet.
+
+Completed (#35 / #143 / #146):
+
+- [x] Seal all **576 work units / 533 native paths / 43 unavailable proposals**,
+  with **zero failed/capped paths**, all **32 cells / eight worlds** verified.
+  Confirm references, both selected traces and exact original later suffixes.
+  The main report's control-only boolean stays false; it is not a failed main gate.
+- [x] Find useful plans in **two fitting worlds**, both from player 2: one lost
+  fight becomes a win, another saves **17 HP** with coordinated changes. Simpler
+  search also supplies useful lessons and a better **23-HP versus 17-HP** rescue.
+  Player 3 supplies no improved fitting world in this bank.
+- [x] Keep all **four held-out worlds** separate. Both methods rescue the same
+  held-out fight. Single-change search selects three improved later worlds versus
+  two for coordinated search; no consistent advantage of coordination or earlier
+  roots is established. These are selected local fight plans, not full-run wins.
+- [x] Explain the finite coverage tradeoff using saved fitting paths: four early
+  single changes all lose on world 148; coordination rescues it, but wider search
+  finds a better single change at candidate 10. Extending world 192 improves
+  43 HP to 48 HP. Do not infer that search depth or earlier access always helps.
+- [x] Preserve all four resource reports: **44.02 total wall minutes / 1,947.80 CPU
+  seconds / 643.66 MB peak / 1.425 GB final cumulative output / zero app copies**.
+  Do not sum cumulative storage or use the last unit-loop time as the total cost.
+- [x] Pass a **171.85-second saved-only assessment** of **105,961 sealed files /
+  576 receipts and request/plan reconstructions**. Independently recompute **1,175
+  distributions/choices** and re-audit **64 reference/confirmation native journals**;
+  all cells, paired comparisons and original full-state hashes/Adam counters match.
+  No native launch or optimizer update. Other candidate audits remain sealed.
+- [x] Pass repository checks in **137.76 seconds**: **2,471 tests / five skips**,
+  lint/format, strict types and C# protocol. Update result documentation, portable
+  evidence and GitHub #35 / #143 / #146 with prior history intact. No implementation,
+  recipe, learner, original weight or optimizer file changes.
+
+Next, in order:
+
+1. **Design a separately declared small student-transfer comparison** using the
+   useful fitting plans, with an explicit two-world data limitation. Fitting-only
+   selection may combine the better verified plan from each search method. Do not
+   import held-out lessons or silently resume the incompatible v1 curriculum.
+2. Compare teaching the improved plans, cloning original reference behavior and
+   unchanged originals at fixed work. Balance whole-world contributions. Both
+   preserved initializers may learn from the same fitting bank on experimental
+   copies; that does not create extra independent worlds. Preserve full originals
+   and every Adam moment. No automatic training follows this assessment.
+3. Check changed-choice learning and natural fight completion, then freeze finals
+   before fresh full-game evaluation with matched combat/noncombat behavior and
+   compute. Terminal victory remains primary; no readiness pass follows local HP.
+4. Keep further teacher-search expansion, unchanged PPO scaling, predictor grids,
+   capacity/GA changes, other difficulties and adaptive thinking deferred while
+   testing whether these useful lessons transfer into a player.
+
+See [result assessment](native-coordinated-teacher-result.md) and
+[portable evidence](evidence/native-coordinated-teacher-result-v2.json).
+
+## Historical handoff — coordinated control passed; owner main comparison next
 
 The owner authorized a separate bounded search comparison after the insufficient
 natural v1 result. Preserve both original full players and every Adam moment/counter
