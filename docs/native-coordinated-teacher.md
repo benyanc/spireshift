@@ -6,12 +6,18 @@ unchanged run, relaxation of the old gate or automatic student training. Both
 original full players and all Adam moments/counters **5,658 / 6,045** remain
 read-only. Every previous result, final model and recipe stays unchanged.
 
-The collector is implemented. **The next owner stage is v2 control qualification,
-not the main comparison.** A capped v1 qualification attempt remains preserved:
-43 sealed paths, one interrupted prefix and four unattempted units. The interrupted
-world is not retried. Both v2 control worlds are fresh; the eight unstarted main
-worlds remain exactly as originally selected. Useful teacher strength has not been
-established, and main execution stays behind completed native qualification.
+The v2 control now passes: **48 native paths / eight confirmed cells / no failures
+or caps**. Both players execute coordinated changes across rounds. One control's
+later-start coordinated plan wins with **75 HP versus 68 HP** for single-change
+search; the other within-entry method comparisons tie. These control worlds
+establish execution, not consistently useful lessons or stronger full-game play.
+**The next owner stage is the prepared eight-world main comparison.** Both
+original players and their optimizer states remain unchanged.
+
+The capped v1 qualification attempt remains preserved: 43 sealed paths, one
+interrupted prefix and four unattempted units. The interrupted world is not
+retried. Both completed v2 controls are fresh; the eight unstarted main worlds
+remain exactly as originally selected.
 
 ## What is being compared
 
@@ -135,7 +141,7 @@ It is not a claim that this planner fits a 128-second complete-run deployment
 budget. Terminal full-run victory under that budget remains the project objective;
 local HP comparisons and fight wins are auxiliary evidence only.
 
-## Short qualification and owner handoff
+## Qualification and owner handoff
 
 Pure tests cover delayed joint improvements, prefix/edit ownership, fixed lineages,
 slot limits, exhausted proposals, whole-world exclusions, the exact greedy late
@@ -200,16 +206,38 @@ one worker and **2 GB memory / 3 GB phase output** caps. It preserves completed
 units across clean pauses. An interrupted or changed unit stops for inspection;
 it is not reset, overwritten or automatically replayed.
 
-Run only the v2 qualification control next:
+The owner completed the v2 control in **304.07 total wall seconds / 186.89 CPU
+seconds**, with **372.42 MB peak memory / 106.98 MB final output**. The report's
+203.91-second unit-loop duration excludes dependency checks; it is not the total
+launch duration. All 48 paths and eight cells complete, with no unavailable
+proposals. The later references reproduce the original greedy suffixes and all
+selected paths pass separate native confirmation. The seven-HP benefit is one
+local control observation, not fitting evidence or a full-run gain.
+
+A separate **120.07-second saved-record audit** verifies **85,615 source files /
+48 sealed receipts**, independently rechecks all **48 native journals** and
+reconstructs **786 action distributions and choices**. It reproduces all eight
+cells and paired comparisons, including 12 confirmation replays and both exact
+greedy later suffixes. The main recipe now passes read-only preparation; its
+workspace remains absent. No game launches or optimizer updates occur. Both
+original full-state hashes and Adam counters match. See
+[control result evidence](evidence/native-coordinated-control-v2.json); earlier
+implementation evidence remains a historical pre-owner receipt.
+
+Repository checks also pass again: **2,471 tests / five skips**, formatting,
+lint, strict types and the C# protocol build, in **134.53 total wall seconds**.
+Only handoff documents and portable result evidence change; the qualified
+collector, recipes, worker and all model/optimizer files remain unchanged.
+
+Run only the main comparison next:
 
 ```bash
-bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-coordinated-teacher-v2.sh --control
+bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-coordinated-teacher-v2.sh
 ```
 
-Close STS2 first. Allow roughly **5–10 minutes** within a 15-minute session cap;
-rerun this same command after a clean pause. Share its result. Main comparison
-cannot start until this control passes. It is separately prepared for roughly
-30–60 minutes and at most 576 paths, but is **not the next command**.
-Neither phase fits a model, launches full-game evaluation, promotes a checkpoint
-or starts another experiment automatically. The failed natural-v1 curriculum
-remains untouched.
+Close STS2 first. Allow roughly **30–60 minutes** for at most 576 paths. One
+invocation permits at most three 15-minute sessions; rerun this same command
+after a clean pause if it is incomplete. Share the final result. No model fitting,
+full-game evaluation, checkpoint promotion or next experiment follows. The failed
+natural-v1 curriculum remains untouched. Assess fitting and held-out worlds
+separately before declaring any student intervention.

@@ -212,10 +212,18 @@ unattempted units; it does not grant main admission. The agent's final control d
 started its unit clock after dependency reads and hit the unchanged outer cap.
 Do not retry that seed or clear either active marker. V2 uses fresh controls, the
 same eight unstarted main worlds, strict whole-path/prefix/request deadlines and
-a 150-second session reserve. Full v2 control qualification is now a long owner job;
-do not work around the boundary with more short-clock drivers. After that control
-passes, the separately prepared at-most-576-attempt main comparison is also owner-run.
-Reuse frozen inputs and preserve all old receipts/source snapshots. See
+a 150-second session reserve. The owner completed v2 control: all 48 paths/eight
+cells, no failures/caps, confirmed three-edit/cross-round execution for both
+players. A later-start coordinated plan saves seven HP on one control world;
+the other within-entry method comparisons tie. This is implementation qualification,
+not fitting evidence, a stronger full-game player or approval to fit a student.
+Saved-only assessment independently rechecks 48 native journals/receipts and
+reconstructs 786 action distributions/choices, all cells, confirmations and exact
+later suffixes. Main read-only preparation passes without creating its workspace.
+The prepared at-most-576-attempt/eight-world main comparison is next and owner-run.
+Do not repeat the completed control or work around long-job boundaries with
+short-clock drivers. Reuse frozen inputs and preserve all old receipts/source
+snapshots. See
 `docs/native-coordinated-teacher.md` and the current backlog.
 
 ## Information boundary

@@ -1,10 +1,10 @@
-## Current handoff — bounded earlier/coordinated teacher comparison implemented
+## Current handoff — coordinated control passed; owner main comparison next
 
 The owner authorized a separate bounded search comparison after the insufficient
 natural v1 result. Preserve both original full players and every Adam moment/counter
-**5,658 / 6,045**, historical finals and the unstarted v1 curriculum. **The main
-earlier/coordinated comparison is not started. The next long owner stage is fresh
-v2 control qualification; main collection remains gated behind it.**
+**5,658 / 6,045**, historical finals and the unstarted v1 curriculum. **V2 control
+qualification passes. The main earlier/coordinated comparison remains unstarted
+and is the next long owner stage.**
 
 Implementation (#35 / #143 / #146):
 
@@ -59,20 +59,32 @@ Implementation (#35 / #143 / #146):
   strict types on 537 files and C# protocol build in **132.08 seconds**. Record all
   four v1 prototype resource reports, including the cap; do not sum cumulative
   storage. Update GitHub #35 / #143 / #146 without losing earlier history.
+- [x] Complete the owner's v2 control: **48 paths / eight verified cells / zero
+  failures or caps**, with three actual edits across rounds for both players.
+  One later-start coordinated plan saves **seven HP** over the reference and
+  single-change method; the other within-entry method comparisons tie. These
+  worlds supply implementation evidence, not fitting labels or stronger full-run play.
+- [x] Record **304.07 total wall seconds / 186.89 CPU seconds / 372.42 MB peak /
+  106.98 MB final output**. The report's 203.91-second unit-loop time excludes
+  dependency checks. Keep all original full weights/Adam and historical evidence.
+- [x] Independently re-audit **48 native journals / 48 sealed receipts**, reproduce
+  **786 action distributions/choices**, all cells and paired comparisons, and verify
+  the main recipe read-only in **120.07 seconds**. No game or optimizer runs; the
+  main workspace remains absent. Original full-state hashes and Adam counters match.
+- [x] Repeat repository verification in **134.53 seconds**: **2,471 tests / five
+  skips**, lint/format, strict types and C# protocol pass. Change only handoff
+  documents and result evidence; all qualified implementation and recipes stay pinned.
 
 Next, in order:
 
-1. **Owner runs only fresh v2 control qualification** in the
-   [coordinated-teacher guide](native-coordinated-teacher.md), up to **48 native
-   attempts / two worlds**, roughly 5–10 minutes within a 15-minute session. Assess
-   all eight cells and verified joint execution before main admission. Preserve
-   clean units across pauses; an interrupted unit is never automatically retried.
-2. After qualification passes, the separate main comparison permits at most
+1. **Owner runs only the prepared main comparison** in the
+   [coordinated-teacher guide](native-coordinated-teacher.md), at most
    **576 native attempts / eight worlds**, one worker, clean resumable sessions,
    2 GB RAM / 3 GB phase output and no app copies. No optimizer updates or automatic
    student/fresh-game stage follows. Shared root banks and historical evidence
-   remain explicitly outside the phase output accounting. Audit fit/held-out
-   results separately. Compare search methods within entry
+   remain explicitly outside the phase output accounting. Preserve clean units;
+   never automatically retry an interrupted unit. Do not repeat the passed control.
+2. Audit fitting/held-out results separately. Compare search methods within entry
    and entry timing within method, keeping world denominators, local tradeoffs,
    actual joint edit depth and CPU visible. Search packages also differ in
    expansion/menu targeting; do not claim an isolated action-count effect, optimal
@@ -87,7 +99,9 @@ Next, in order:
    is evidence to assess, not permission to expand until it passes.
 
 See [implementation guide](native-coordinated-teacher.md) and
-[portable evidence](evidence/native-coordinated-teacher-v2.json).
+[control result evidence](evidence/native-coordinated-control-v2.json). The earlier
+[implementation evidence](evidence/native-coordinated-teacher-v2.json) preserves
+the pre-owner handoff and prototype history.
 
 ## Historical handoff — natural teacher complete; stronger fitting lessons still needed
 
