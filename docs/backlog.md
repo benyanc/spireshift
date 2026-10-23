@@ -1,4 +1,84 @@
-## Current handoff — delayed learning passes with learned and exact baselines
+## Current handoff — natural multi-turn teacher and matched curriculum implemented
+
+The owner requested useful natural multi-turn lessons after the delayed-learning
+control. Implement a separate finite teacher collection and a guarded curriculum /
+fresh-game comparison. Preserve both original players and full Adam counters
+**5,658 / 6,045**, all prior finals and every completed diagnostic. **The larger
+teacher collection is not started; it is the next owner-run stage.**
+
+Completed (#35 / #143 / #146):
+
+- [x] Prepare roots from **256 completed repaired TRAIN attempts**, with **1,389
+  public candidate positions**. No final floor, win, return or counterfactual
+  outcome selects a root. Use the actual v11 counter view; preserve the older
+  missing-counter bank without silent migration. Preparation takes **58.66s**.
+- [x] Freeze **two control / eight fitting / four held-out worlds**, one root per
+  world. Main covers **12 decks / 11 relic states**, six normal fights, four elites
+  and two bosses, floors **5–17**, low/middle/high health and five zero-current-cost
+  opportunities. This is eight of 18 available public groups, not full coverage.
+- [x] Verify exact natural seed/prefix replay before every branch. Record the
+  parent's remaining fight, propose up to **16 first divergences across its first
+  three observed rounds**, then separately confirm the complete reference and
+  selected traces/resources. Every actual legal choice remains available; bounded
+  search is not exhaustive. Main upper bound: **228 native attempts**.
+- [x] Keep local labels explicit: actual room rewards establish a fight win;
+  death is a loss; escape/other rewards are not victories. Prefer a rescue from
+  death or a higher-HP win with the declared retained-resource guards. Relic
+  charges, draw/RNG changes and future utility are not completely priced. No local
+  result or HP comparison silently becomes a full-run reward or trusted win gain.
+- [x] Require useful confirmed multi-turn lessons on **four fitting worlds**, with
+  **two strict local improvements / two enemy sets / three decks**. Held-out worlds
+  cannot rescue this gate. Retain failed/capped roots and attempt denominators;
+  no replacements or uncertain retries. More than two technical failures stops.
+- [x] Implement **categorical action imitation**, not return-to-action-score
+  regression. Compare teacher cloning, matched reference cloning and untouched
+  originals. Exact inherited weights/full Adam start each copy; fixed **16 epochs /
+  256 total updates / 8,192 choice presentations**; world-balanced examples and
+  full checkpoints every epoch. Actor layers remain mutable; value weights and
+  the coarse predictor stay fixed. These are not ordinary PPO episodes.
+- [x] Freeze all four final copies before **24 withheld-fight branches + 192 fresh
+  full games** on 32 distinct seeds. Keep terminal wins primary, failures in the
+  original denominator, unchanged 128-CPU-second run budget and joint world-clustered
+  paired intervals. No epoch selection, promotion or adaptive thinking follows.
+- [x] Pass a separate **52.56s / two-branch** natural replay probe. The short
+  teacher control completes **14 branches / two natural fights** in **120.48s**, no
+  failures or app copies. Both already win; zero better plans are found. This is
+  wiring qualification, not evidence that the main teacher gate passes.
+- [x] Complete the **22-unit** student/evaluation control across two short bounded
+  launches (**166.20s / 162.68s**), preserving the actual clean pause after epoch one.
+  Four copies make **32 total updates**, fitting loss decreases for each, all six
+  held-fight branches and six fresh-game attempts finish without technical failure.
+  One fresh world / zero wins / equal mean floor 11 establishes no gameplay gain.
+  The larger experiment always starts again from the preserved original full states.
+- [x] Pass a **72.95s saved-only audit**: **76,724 source files / 14 teacher and
+  22 curriculum receipts**, 176 recomputed teacher action distributions, fitting
+  metrics, exact imports/full Adam lineage and read-only main preparation. In this
+  actual no-treatment control, both arms' final weights, every Adam moment and
+  withheld/fresh traces match exactly per parent. No game, fit or update is rerun.
+- [x] Pass repository checks: **2,451 tests / five skips**, lint, formatting, strict
+  types and the C# protocol build in **127.86s**, under a four-minute resource cap.
+
+Next, in order:
+
+1. **Owner runs only the teacher collection command** in the
+   [natural curriculum guide](native-natural-combat-curriculum.md), approximately
+   15–30 minutes with clean resumable sessions and no fitting afterward. Shared
+   frozen inputs, one worker, 2 GB RAM / 3 GB output per phase; no app copies.
+2. Audit and assess the actual teacher signal: availability, caps/failures, native
+   replay equality, local improvements, resource tradeoffs, public state variety
+   and the predeclared fitting-only gate. No automatic expansion or threshold
+   relaxation if the lessons are insufficient. Do not admit old rejected preferences.
+3. If the declared main gate passes, use the implemented matched curriculum/fresh-game
+   stage on four new copies. Assess both trained versions against the untouched
+   originals, separately by parent as well as pooled. A weaker reference clone is
+   not a useful gain. Future noncombat lessons/full-run reinforcement learning
+   remain separate decisions after this actual result.
+4. Keep unchanged PPO enlargement, predictor grids, capacity/GA changes, other
+   ascensions and adaptive thinking deferred. Do not rerun the completed controls.
+
+See [implementation and qualification evidence](evidence/native-natural-combat-curriculum-v1.json).
+
+## Historical handoff — delayed learning passes with learned and exact baselines
 
 The owner completed the fixed comparison: **94 / 94 units, 204 native branches,
 16,384 sampled diagnostic sequences and 868 optimizer steps on four copies**.
