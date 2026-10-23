@@ -1,4 +1,58 @@
-## Current handoff — controlled teaching test implemented; owner main run next
+## Current parallel work — completed-record teaching diagnosis
+
+The owner reports the controlled teaching test running and authorized a separate
+diagnostic using completed records. Its live workspace is not inspected, locked
+or changed. Keep its recipe/implementation, both numerical parents, all saved
+weights and every Adam moment/counter unchanged.
+
+- [x] Implement a separate completed-only report connecting action learning,
+  independent fight execution, unrelated choice movement and full-game transfer.
+  Require the final complete marker before opening source units; no partial-session
+  fallback, polling, new games, fitting or automatic continuation.
+- [x] Verify exact requests, predecessors, final-state barrier and original full
+  parent/Adam imports. Retain per-epoch plan losses, but show the three changed
+  targets' probability, greedy choice and margin separately.
+- [x] Locate the first exact public-state/action departure in completed fight
+  traces and reconstruct the saved frozen greedy distributions. Do not realign
+  later divergent states or call an unreached target wrong. No departure alone
+  establishes a mistake, and local HP/fight wins are not full-game utility.
+- [x] Inspect at most **128 public menus / 16 predeclared historical TRAIN worlds**,
+  excluding teacher roots and fresh panels. Reconstruct effective menus, retain
+  optional choices, balance families/worlds, and report rest/card-skip/potion/shop
+  probability movement without making optimal-action or causal-damage labels.
+- [x] Qualify on the **completed short control** in **90.74 seconds** with zero
+  new games/optimizer updates. Verify **106,365 source seals**, all **16 work
+  receipts**, **79 saved fight distributions**, both originals/full Adam and
+  unchanged frozen main inputs. Historical extraction accounts for **1,981 raw
+  decisions / 1,515 genuine choices**; the 128-state probe covers **14 families,
+  69 deck signatures and 24 relic-state signatures**, with no observed family
+  omitted. Retain only one raw episode at a time, **278.38 MB peak memory /
+  23.59 MB reports**, with zero app copies or new trajectories.
+- [x] Prepare an explicitly selected completed-main analysis recipe. It is not
+  run while the main experiment is active; no settings or model selection follow
+  this control-only diagnosis.
+- [x] Pass **12 new tests**, full repository verification (**2,497 passed / five
+  skipped**), strict types on **549 files**, format/lint and the C# protocol build
+  in **165.13 seconds**. New implementation/configuration files remain separate
+  from the frozen experiment's pinned code and settings.
+- [x] Reopen the identical saved report after repository checks in **53.70
+  seconds**. All protected sources/checkpoints verify again, with no repeated
+  analysis, extra output copies or live-experiment access.
+- [ ] Assess the main result after the owner finishes it, using this report to
+  distinguish example learning, execution and transfer. Keep both comparison
+  controls and native-world uncertainty; do not repeat or scale automatically.
+
+The control shows why these measurements differ: changed-action probabilities
+increase, but the first taught rescue action still loses the greedy ranking.
+All three control versions depart at that same choice and lose that fight.
+This is a one-epoch control result, not a forecast or assessment of the running
+16-epoch experiment. Continue the declared experiment unchanged.
+
+See [report guide](native-teaching-diagnostics.md) and
+[portable evidence](evidence/native-teaching-diagnostics-v1.json). No additional
+owner command is needed while the teaching test runs.
+
+## Historical handoff — controlled teaching test implemented; owner main run next
 
 The owner authorized the matched teaching/fresh-game test. Both original full
 players and every Adam moment/counter (**5,658 / 6,045**) remain unchanged. The
