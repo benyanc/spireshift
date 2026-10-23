@@ -1,4 +1,95 @@
-## Current handoff — natural teacher complete; stronger fitting lessons still needed
+## Current handoff — bounded earlier/coordinated teacher comparison implemented
+
+The owner authorized a separate bounded search comparison after the insufficient
+natural v1 result. Preserve both original full players and every Adam moment/counter
+**5,658 / 6,045**, historical finals and the unstarted v1 curriculum. **The main
+earlier/coordinated comparison is not started. The next long owner stage is fresh
+v2 control qualification; main collection remains gated behind it.**
+
+Implementation (#35 / #143 / #146):
+
+- [x] Compare **single-change versus coordinated search at early/later roots of
+  the same fight**. The later prefix fixes the original greedy opening and its
+  reference must reproduce the exact early-reference suffix. Absent later play
+  phases stay in the original world denominator, without replacement or retries.
+- [x] Preserve four first-change lineages and extend them through **4 + 8 + 4**
+  candidate slots, up to three edits. Losing intermediate plans can be extended.
+  Every edit binds an actually observed current menu and replays prior edits;
+  no guessed card physics, forecast menu or new hidden student input is used.
+- [x] Give both search methods **16 candidate slots per entry**. Retain actual
+  path/CPU counts and unfilled proposals; this is not an equal-CPU claim or
+  exhaustive planning. Native reference and selected full traces are confirmed.
+- [x] Select **eight new main worlds / two control worlds** from **918 turn-one
+  positions / 256 repaired completed TRAIN games**, using public descriptors only.
+  Exclude all 14 old teacher/control worlds. Split whole worlds before diversity
+  selection: four fitting / four held out, balanced across both fixed parents.
+- [x] Main spans **eight decks / eight relic states**, four normal fights, two
+  elites, two bosses, floors **5–17**, low/middle/high HP and a maximum 217-action
+  source prefix. These are new teacher positions from existing TRAIN games, not
+  newly played full-game evaluation seeds or exhaustive mechanics coverage.
+- [x] Count useful shorter verified wins in this new comparison; preserve the
+  old four-choice gate/result. Local guarded HP gains and fight wins remain
+  auxiliary fixed-world evidence, not full-run rewards or ordinary PPO labels.
+- [x] Bound physical paths by **192 fight actions / 12 observed rounds / 60 wall
+  seconds / 128 CPU seconds**. Share the frozen app/runtime/SDK/cache, with isolated
+  profiles and zero app copies. Stop mismatched confirmations/prefixes, retire
+  failed workers, preserve failures/caps and allow no automatic replacement.
+- [x] Pass **20 pure/mocked tests**, including a joint improvement with losing
+  single-change intermediates, observed-prefix ownership, three changed rounds,
+  fixed lineages/budgets, short lessons, whole-world splits, exhausted proposals,
+  late-prefix equality, cached resumption, open-game refusal before activation and
+  bounded request/prefix retirement without action retry or success labels.
+- [x] Preserve the v1 prototype exactly: three clean pauses and **43 sealed paths**,
+  followed by one interrupted prefix and four unattempted units. Both parents
+  exercise actual three-edit/cross-round plans, but only six cells are confirmed;
+  this is not a complete qualification pass. The capped final driver failed to
+  charge dependency checks against its unit timer. No failed delivery is retried.
+- [x] Prepare v2 with fresh control worlds, unchanged main roots, 60-second whole
+  path limits including prefix/initialization, request timeouts bounded by remaining
+  time, a global session clock and a **150-second** new-unit reserve. Preserve old
+  markers, receipts and source snapshots. Full control now needs an owner-run
+  15-minute-cap session; do not manually extend another short-clock driver.
+
+- [x] Pass a **101.66-second saved-only preservation audit**: independently recheck
+  all **43 completed native journals**, reconstruct **654 action distributions /
+  choices**, and verify observed proposals/confirmations. V2 read-only preparation
+  passes, with both new workspaces absent. The incomplete v1 control remains
+  unqualified; no native process or optimizer runs during this audit.
+- [x] Pass repository verification: **2,471 tests / five skips**, lint/format,
+  strict types on 537 files and C# protocol build in **132.08 seconds**. Record all
+  four v1 prototype resource reports, including the cap; do not sum cumulative
+  storage. Update GitHub #35 / #143 / #146 without losing earlier history.
+
+Next, in order:
+
+1. **Owner runs only fresh v2 control qualification** in the
+   [coordinated-teacher guide](native-coordinated-teacher.md), up to **48 native
+   attempts / two worlds**, roughly 5–10 minutes within a 15-minute session. Assess
+   all eight cells and verified joint execution before main admission. Preserve
+   clean units across pauses; an interrupted unit is never automatically retried.
+2. After qualification passes, the separate main comparison permits at most
+   **576 native attempts / eight worlds**, one worker, clean resumable sessions,
+   2 GB RAM / 3 GB phase output and no app copies. No optimizer updates or automatic
+   student/fresh-game stage follows. Shared root banks and historical evidence
+   remain explicitly outside the phase output accounting. Audit fit/held-out
+   results separately. Compare search methods within entry
+   and entry timing within method, keeping world denominators, local tradeoffs,
+   actual joint edit depth and CPU visible. Search packages also differ in
+   expansion/menu targeting; do not claim an isolated action-count effect, optimal
+   planning, 576 independent samples or stronger complete-run play.
+3. If there are useful confirmed fitting plans, design a separate matched
+   categorical student/reference-clone/original comparison and fresh full games.
+   Preserve original weights/Adam, freeze finals before evaluation and assess
+   terminal wins first. Neither the old v1 gate nor held-out lessons are adopted
+   as fitting evidence automatically.
+4. Keep unchanged PPO scaling, predictor grids, capacity/GA changes, other
+   difficulties and adaptive thinking deferred. A failed or weak teacher comparison
+   is evidence to assess, not permission to expand until it passes.
+
+See [implementation guide](native-coordinated-teacher.md) and
+[portable evidence](evidence/native-coordinated-teacher-v2.json).
+
+## Historical handoff — natural teacher complete; stronger fitting lessons still needed
 
 The owner completed the finite natural multi-turn collection. **190 native attempts /
 12 worlds finish without failed or capped branches.** No student fitting follows:

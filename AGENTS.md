@@ -195,6 +195,29 @@ their use prospectively. Preserve both original full states/all Adam and all pri
 finals. Local fixed-world lessons remain auxiliary, never full-run strategic proof
 or ordinary PPO. See `docs/native-natural-combat-result.md` and the ordered backlog.
 
+The owner subsequently authorized the separate bounded earlier-turn/coordinated
+teacher comparison. Preserve the insufficient v1 collection and unstarted curriculum.
+The new 2x2 design compares single-change versus coordinated search, each from a
+turn-one root and after the same original greedy opening. Later roots must reproduce
+that original reference's exact suffix. Main uses eight new TRAIN worlds, split
+four fitting/four held out before selection, excluding all 14 previous teacher/control
+worlds. Four lineages expand through 4 + 8 + 4 candidate slots, preserving earlier
+edits and extending losing intermediates; all actual legal menus remain available.
+Equal candidate limits do not imply equal CPU. Short verified lessons are counted
+without retroactively changing the old gate. This is an offline fixed-world local
+teacher comparison, never ordinary PPO or proof of full-run utility. It makes zero
+optimizer updates and starts no student or fresh full-game stage automatically.
+Prototype v1 preserves 43 sealed paths, one wall-capped interrupted prefix and four
+unattempted units; it does not grant main admission. The agent's final control driver
+started its unit clock after dependency reads and hit the unchanged outer cap.
+Do not retry that seed or clear either active marker. V2 uses fresh controls, the
+same eight unstarted main worlds, strict whole-path/prefix/request deadlines and
+a 150-second session reserve. Full v2 control qualification is now a long owner job;
+do not work around the boundary with more short-clock drivers. After that control
+passes, the separately prepared at-most-576-attempt main comparison is also owner-run.
+Reuse frozen inputs and preserve all old receipts/source snapshots. See
+`docs/native-coordinated-teacher.md` and the current backlog.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
