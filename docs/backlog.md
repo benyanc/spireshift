@@ -1,4 +1,52 @@
-## Current handoff — interface-wide audit and consolidated repairs; owner panel next
+## Current handoff — four adapter fixes and systematic checks from saved records
+
+The owner completed the repaired-interface diagnostic and requested these fixes
+and broader discovery without relying on more games. Track under
+[#149](https://github.com/benyanc/spireshift/issues/149). Preserve both complete
+players/all Adam, prior failures and the offline-layout prototype. No training,
+promotion or adaptive controller follows.
+
+- [x] Assess all four stops: public game-over controls, scoped selected-card flags,
+  stale reads before the next choice, and the missing native-only shop flag.
+  Verify 771 delivered choices/receipts and all app/profile/archive resets.
+- [x] Repair terminal result handling, source-scoped card descriptions/legality/
+  selection, explicit room/open-inventory routing and bounded read-only refresh.
+  Never retry a submitted action, default an unknown Boolean or drop legal choices.
+- [x] Replay all **778** completed frames with zero converter failures, including
+  both formerly rejected frames. Pass **1,586** frozen-player input probes;
+  these are feasibility checks, not new games or action-correctness evidence.
+- [x] Cross-check **24** source-declared interfaces, generate **20** structural
+  policy/terminal envelopes and **38** corruption/preservation checks. Audit literal
+  public consumers and numeric value-field requirements. Keep the four startup/
+  tutorial families, unobserved concrete variants and effects coverage explicit.
+- [x] Retain the caught development tooltip regression, incomplete synthetic combat
+  fixture and their failed receipt/snapshot. The corrected saved audit completes
+  in **16.14 seconds / 247.53 MB / 6.90 MB**, with zero games or updates.
+- [x] Preserve **1,644** pre-existing pinned files/full states. New shared manifest
+  **v6** imports exact original numeric weights/Adam; the old v4/v5 tuples and all
+  source snapshots remain preserved. Changed inputs can still change behavior.
+- [x] Pass the new eight-delivery wiring control with clean app/profile/archive
+  reset: **41.45 seconds / 1.18 GB / 7.12 MB**, zero app copies or updates. Rebuild
+  every input/choice/actual receipt independently in **3.96 seconds** without games.
+- [x] Pass **2,549 repository tests**, strict types on **573 files**, format/lint and
+  C# protocol in **143.95 seconds**, plus the isolated Node/prototype suites.
+- [ ] Expand targeted protocol lifecycle/status/settling tests alongside the
+  remaining source-layout mappings. Structural family coverage is not complete
+  transition or mechanics coverage.
+- [ ] Extend remaining input-layout mappings using completed records and targeted
+  property/transition tests; retain unknown facts and view ownership. The offline
+  prototype is deliberately separate; full input equivalence remains unproved.
+- [ ] Qualify important unobserved live interfaces/effects with bounded targeted
+  fixtures. Do not demand exhaustive content combinations or repeatedly collect
+  whole games to find basic schema/routing gaps.
+- [ ] Qualify complete checkpoint input/action/effect compatibility, integrate the
+  gate into new learning/resume/promotion, then return to learning. Fresh official
+  original/trained full games remain a promotion gate.
+
+See [repairs, offline coverage and limits](native-interface-controls.md). The new
+canary stays separate from the completed blocked run; no old seed is retried.
+
+## Historical handoff — interface-wide audit; owner panel subsequently completed
 
 The owner authorized the coordinated audit/fix on 2026-10-24 under
 [#149](https://github.com/benyanc/spireshift/issues/149). Preserve both original
@@ -37,11 +85,10 @@ terminal victory and the whole-run compute budget stay unchanged.
 - [x] Pass **2,543 repository tests**, strict types on **568 files**, format/lint and
   C# protocol in **147.53 seconds**. Verify **1,623** prior pinned files/full states
   unchanged. Main preflight passes and its workspace remains absent.
-- [ ] **Owner runs the repaired broader diagnostic**, using the single command in
-  [the interface-audit guide](native-interface-wide-audit.md): both original players,
-  two new worlds, four pairs/eight starts, up to 128 choices per host. Allow
-  15–25 minutes total, resumable at clean 15-minute boundaries. Audit all saved
-  frames afterward; no training or promotion follows.
+- [x] The owner completed the repaired broader diagnostic: both original players,
+  two new worlds, four pairs/eight starts and 771 delivered choices. Its four
+  official stops and all 778 saved frames are assessed in the current handoff.
+  Preserve the completed result and its worlds; do not rerun the old command.
 - [ ] Consolidate remaining semantic layout/duplicate/read mappings using the full
   gap report. Keep meaningful costs, owners, zones, current previews, counters and
   optional choices. Never manufacture input equality by dropping unknown facts.

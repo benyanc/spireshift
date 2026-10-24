@@ -343,6 +343,35 @@ adaptive controller, promotion or upstream publication is automatic. Add targete
 matched effects for important unobserved interfaces rather than requiring every
 possible content combination. See `docs/native-interface-wide-audit.md`.
 
+The owner subsequently completed interface canary v1: eight starts, 771 delivered
+choices/receipts, 778 raw public captures and four official stops. Normal public
+loss/result controls, transform-selection view flags, a stale read before sampling
+and an absent native-only shop flag caused the stops; all app/profile/archive
+shutdown/reset checks pass. Preserve this completed blocked report and its worlds.
+The owner authorized four repairs and systematic discovery without more bulk games.
+
+New shared helper v3 scopes selection/description/legality by owned public view,
+keeps exact result-screen controls outside policy delivery, maps typed shop-room/
+open-inventory state and refreshes only explicit stale reads before any new choice.
+No submitted or uncertain action is retried. A source inventory, 20 generated
+policy/terminal envelopes, 38 mutation checks and all 778 saved frames now pass;
+1,586 frozen input probes make zero optimizer updates or new game attempts.
+They do not prove all content combinations, effects or playing strength. The
+caught development tooltip regression/fixture omission and earlier receipts remain.
+The active offline recipe is interface-controls-offline-v3 / shared manifest v6;
+new numerical weights and all Adam are exact imports of both original players.
+Do not resume old recipes under these changed inputs or use the separate offline
+layout prototype as a live contract. The short live wiring control now passes all
+eight delivered choices with exact
+app/profile/archive reset (41.45 seconds, no app copies). Saved-only verification
+rebuilds every input, frozen choice and actual receipt in 3.96 seconds. Repository
+checks pass 2,549 tests, strict types on 573 files and C# protocol in 143.95 seconds.
+A fresh broader live canary is prepared/preflighted but remains unstarted; do not
+run it automatically. Next consolidate remaining semantic layouts and targeted
+effects/protocol transitions before new learning. Source changes invalidate
+qualification; long jobs remain owner-run.
+See `docs/native-interface-controls.md` and the current backlog.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
