@@ -372,6 +372,37 @@ effects/protocol transitions before new learning. Source changes invalidate
 qualification; long jobs remain owner-run.
 See `docs/native-interface-controls.md` and the current backlog.
 
+
+The current input-layout repair is implemented as CLI v38, official connector v15,
+worker v13, shared helper v7/layout v4 and shared manifest v11. New recipes reject
+ambiguous O/I seed aliases and verify the official mounted seed outside model
+inputs. Both original full weights/all Adam remain exact; 3,018 earlier pinned
+files are protected. Typed reversible layouts keep owners, costs, card previews,
+optional actions and unfamiliar facts. The saved bank passes 823 public frames,
+20 envelopes, 843 exact reconstructions/raw bindings and 1,676 frozen input probes.
+The earlier four-choice paired control matches completely through first combat,
+with independent saved receipt reconstruction. Preserve all intermediate tuples,
+startup/filter/shop failures and later fresh controls.
+
+The later control correctly blocks on a real selection decision-boundary mismatch:
+CLI commits a selected card immediately, whereas shipped UI selects, previews and
+confirms. The compared card-definition/cost/ordinary-description/numeric-preview fields
+agree; full selection contexts
+also differ in per-copy identities, missing selected flags, ownership/layout and
+upgrade-preview line breaks.
+Repair those source exports with the selected common protocol. The owner is
+choosing a common semantic
+committed-card action with exact native UI execution versus model-controlled UI
+primitives. Do not expand the canary or learning until that contract and targeted
+transition tests are qualified. Official noncombat potion-HUD controls and exact
+native belt/HUD instance identity are implemented, with 11 C# permission checks
+and four binding regressions; their shipped effects are not yet qualified. No
+weights/Adam change, promotion, automatic collection/training or broader input
+parity claim follows. Keep short jobs autonomous and long jobs owner-run.
+Repository checks pass 2,562 tests / 599 strict-typed files plus C# protocol;
+all eight current choices/receipts reconstruct independently with zero new games.
+See `docs/native-input-layout-compatibility.md` and the current backlog.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

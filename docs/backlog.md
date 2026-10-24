@@ -1,4 +1,67 @@
-## Current handoff — four adapter fixes and systematic checks from saved records
+## Current handoff — common official/CLI layouts and exact comparison worlds
+
+The owner requested the remaining input repairs and targeted compatibility tests
+under [#149](https://github.com/benyanc/spireshift/issues/149). Preserve both original
+full players/all Adam and every old source/result. No training, promotion or
+adaptive controller follows this work.
+
+- [x] Identify a real setup mismatch: official `SeedHelper` changes O/I to 0/1,
+  while the CLI accepts literal seeds. Require already canonical recipe seeds and
+  verify the official mounted seed through authenticated provenance outside the
+  model. Exclude previously attempted worlds and their aliases.
+- [x] Implement separately versioned typed owner/duplicate/layout conversion,
+  reversible evidence, exact current raw action bindings, source-scoped card
+  stats/descriptions/selection, and complete optional choices. Unknown facts,
+  foreign owners, nonzero block and later-act local floors remain explicit.
+- [x] Consolidate CLI v38 / official connector v15 / worker v13 exports: event
+  metadata, visible card keywords/preview/upgrade/affliction information,
+  current enemy-intent amounts and discardable potions. Preserve the game DLL.
+  Both native/official fresh builds reproduce independently.
+- [x] Add protocol/status/settling, startup deadline and actual-seed tests, plus
+  card-copy costs, zero/X star costs, named status owners, selection, repeated
+  rest, optional Skip and Foul Potion's merchant-target regressions. Card star
+  cost normalization does not change unrelated numeric fields.
+- [x] Save the development filter/shop failures, startup stop and intermediate
+  tuples. No uncertain action or prior seed is retried. Initial four-step matched
+  live check reaches combat with identical inputs/keys/choices and clean reset;
+  independently reconstruct all eight inputs, choices and actual receipts.
+- [x] Keep **3,018** prior pinned files, both complete originals and every Adam
+  moment/counter unchanged (5,658 / 6,045). Changed input metadata is explicit;
+  unchanged numerical weights do not promise unchanged probabilities.
+- [x] Final saved bank: **823 frames + 20 envelopes**, all **843** reversible
+  conversions/raw bindings pass and **1,676** frozen-player input probes pass.
+  Zero games/updates in this audit. The earlier live prefix matches through first
+  combat; later fresh worlds correctly expose belt and selection-protocol gaps.
+- [x] Implement official noncombat potion-HUD controls with exact current
+  owner/slot/target checks, revalidation and queued-discard settling. Pass 11 C#
+  permission cases/four native binding regressions; shipped effects need their
+  targeted transition check. Do not represent an unexercised effect as qualified.
+- [ ] Resolve the **selection decision boundary**, before a broader canary:
+  CLI commits the chosen card immediately; official UI selects/previews/confirms.
+  The compared definition/cost/ordinary-description/numeric-preview fields
+  match; full selection contexts
+  still differ in per-copy identities, missing selected flags, owner/layout and upgrade-preview line breaks.
+  Fix those exports with the common contract. The owner is choosing one semantic choice with
+  exact UI execution (recommended) versus model-controlled UI primitives.
+  Preserve every legal subset/order, cancellation and optional decline. Qualify
+  ownership/cancellation/uncertain-delivery behavior in a new pinned tuple.
+- [x] Pass **2,562 repository tests / 599 strict-typed files**, format/lint and
+  C# protocol in **150.17 seconds**. Reconstruct all eight actual choices and
+  receipts of the latest blocked control in **5.37 seconds**, without new games.
+  Retain current-tuple/earlier equal-prefix reconstruction and all 3,018 protected
+  files. See [the guide](native-input-layout-compatibility.md) and
+  [portable evidence](evidence/native-input-layout-v1.json).
+- [ ] After selection transition qualification, prepare one specific owner command
+  for the broader live canary for both originals/two fresh worlds. Reuse sealed pairs at clean boundaries, retain failures and stop on
+  uncertain delivery. Do not realign divergent states or infer mechanics parity
+  from a short prefix. No learning follows automatically.
+- [ ] Add matched effects/transitions for important unobserved interfaces and
+  cross-character card/resource variants. Source inventories, generated mutations
+  and recorded frames find schema gaps without bulk gameplay; they do not prove
+  every content combination. Complete checkpoint compatibility still gates new
+  learning/resume/promotion; fresh official original/trained games gate scaling.
+
+## Historical handoff — four adapter fixes and systematic checks from saved records
 
 The owner completed the repaired-interface diagnostic and requested these fixes
 and broader discovery without relying on more games. Track under
