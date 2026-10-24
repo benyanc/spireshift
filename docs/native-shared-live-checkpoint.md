@@ -1,5 +1,11 @@
 # Shared public inputs and live checkpoint delivery
 
+**Subsequent handoff:** the owner completed the diagnostic below. Its blocked shop
+case, full saved-record audit and separately versioned export/converter repairs
+are now in [the interface-wide audit guide](native-interface-wide-audit.md).
+Use that guide's single current owner command. The startup results below remain
+historical evidence and do not grant full input equivalence.
+
 The current saved player can now make decisions in the separately frozen official
 game through the same public-input conversion used around the CLI. The short
 control **passes delivery**, while **complete input equivalence remains blocked**.

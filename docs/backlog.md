@@ -1,4 +1,65 @@
-## Current handoff — shared contract and live adapter implemented; broader diagnostic next
+## Current handoff — interface-wide audit and consolidated repairs; owner panel next
+
+The owner authorized the coordinated audit/fix on 2026-10-24 under
+[#149](https://github.com/benyanc/spireshift/issues/149). Preserve both original
+players, all earlier finals and every Adam moment/counter. Fixed Ironclad/A8,
+terminal victory and the whole-run compute budget stay unchanged.
+
+- [x] Assess the completed v1 owner canary: eight prefix starts / **487 delivered
+  choices**, four CLI passes and three official passes; one official shop stop
+  after 39 choices. All official workers shut down/reset. Full input prefixes
+  already differ at Neow. Preserve the blocked result; do not replay its seeds.
+- [x] Inventory **24 declared official surfaces / four public read types / 116
+  typed records / 688 declared fields**, including nullability and static limits.
+  Record per-kind observed/unobserved coverage rather than claiming all interactions.
+- [x] Stream **497 complete public frames** and accumulate every detectable gap,
+  with field/type inventories and bounded witnesses. Distinguish unmatched schema
+  coverage from matched gameplay effects. Final saved audit: **4.55 seconds /
+  193.86 MB / 1.27 MB**, zero games or updates. Preserve development snapshots.
+- [x] Repair all **14 public shop-slot references** using exact offer-slot relations,
+  without granting read-only slots action authority or accepting arbitrary IDs.
+  All 497 saved frames convert. Reject ambiguous ownership.
+- [x] Build **CLI export v36** reproducibly: native event flags, relic descriptions,
+  keyword/card hover previews are carried through the public projection. Game DLL
+  and rules remain unchanged. Four pinned builds take **14.42 seconds / 522.80 MB**;
+  224.13 MB of host/build files, zero game app copies.
+- [x] Join option enablement from the same already-public bound referent; preserve
+  false and reject unknown/conflicting values. Validate surface-card read target
+  identity and declared nullable omissions; never guess missing Boolean flags.
+- [x] Import exact original weights/full Adam into explicitly labelled shared
+  manifest **v4** (5,658 / 6,045 steps), preserving every previous lineage. Pass
+  the final four-action-per-host live control and all app/archive/profile checks:
+  **42.04 seconds / 1.25 GB / 7.03 MB phase output**, no copies or updates.
+- [x] Audit the short repaired capture: all nine frames convert; no unresolved
+  declared field/reference occurrences. Reproduce all **eight choices and actual
+  receipts** in **3.08 seconds**, without gameplay. Full input parity still fails;
+  layout/nesting/duplicate-fact differences are not automatically game-rule bugs.
+- [x] Pass **2,543 repository tests**, strict types on **568 files**, format/lint and
+  C# protocol in **147.53 seconds**. Verify **1,623** prior pinned files/full states
+  unchanged. Main preflight passes and its workspace remains absent.
+- [ ] **Owner runs the repaired broader diagnostic**, using the single command in
+  [the interface-audit guide](native-interface-wide-audit.md): both original players,
+  two new worlds, four pairs/eight starts, up to 128 choices per host. Allow
+  15–25 minutes total, resumable at clean 15-minute boundaries. Audit all saved
+  frames afterward; no training or promotion follows.
+- [ ] Consolidate remaining semantic layout/duplicate/read mappings using the full
+  gap report. Keep meaningful costs, owners, zones, current previews, counters and
+  optional choices. Never manufacture input equality by dropping unknown facts.
+- [ ] Add bounded matched-effect fixtures for important unobserved rest, treasure,
+  ending and selection variants. Keep source inventory, observed inputs and effects
+  as separate coverage claims; exhaustive content combinations are not required.
+- [ ] Qualify the full current checkpoint compatibility receipt and integrate it
+  into new learning/resume/promotion entry points. Then return to the agreed
+  learning order; fresh official original/trained games remain a promotion gate.
+- [ ] Prepare small generic upstream fixes with minimal reproductions and tests
+  where the defect belongs upstream. Our converter fixes stay here; archived
+  connector/headless dependencies may need maintained forks. No contribution or
+  external publication is automatic; preserve the pinned local development branch.
+
+See [implementation, limits and the one owner command](native-interface-wide-audit.md)
+and [portable evidence](evidence/native-interface-wide-audit-v1.json).
+
+## Historical handoff — shared contract and live adapter; owner diagnostic subsequently completed
 
 The owner authorized the shared official-game/CLI input contract and current-format
 checkpoint adapter under [#149](https://github.com/benyanc/spireshift/issues/149).

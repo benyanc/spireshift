@@ -65,3 +65,11 @@ a conversion vocabulary gap, not the remaining Neow public-export gaps.
 
 See [implementation/result](../native-compatibility-gate.md) and
 [portable evidence](../evidence/native-compatibility-gate-v1.json).
+
+The owner's subsequent v1 canary completes but blocks one official prefix at a
+shop. Its coordinated source/record audit, exact public relation repairs and
+export-only v36 build are separately versioned. All original weights/full Adam
+remain exact; complete input parity is still unqualified. See the
+[interface-wide audit](../native-interface-wide-audit.md). All-gap diagnosis across
+independent saved frames does not authorize an unknown live action or make
+divergent later states matched-effect evidence.

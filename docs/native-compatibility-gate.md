@@ -4,7 +4,10 @@ Update: the shared converter and current-checkpoint live adapter are now impleme
 The short actual-game delivery control passes, with original numeric weights/full
 Adam preserved, while current Neow input exports still differ. The next owner
 diagnostic and exact scope are in [the live-adapter guide](native-shared-live-checkpoint.md).
-The saved-record result below remains preserved and does not grant compatibility.
+The owner has since completed that diagnostic. The current coordinated audit,
+export/reference repairs and next owner command are in the
+[interface-wide audit guide](native-interface-wide-audit.md). The saved-record result
+below remains preserved and does not grant compatibility.
 
 Tracked in [#149](https://github.com/benyanc/spireshift/issues/149).
 

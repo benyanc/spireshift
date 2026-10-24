@@ -319,6 +319,30 @@ shutdown/reset. Explicit SDK selection aliases preserve card lists, ownership,
 bounds and controls; do not discard meaningful fields to force parity. See
 `docs/native-shared-live-checkpoint.md`.
 
+The owner subsequently completed the v1 live diagnostic and authorized a coordinated
+interface audit/repair. Preserve its eight prefix starts/487 delivered choices and
+official shop stop after 39 deliveries; every shared app reset verifies. The new
+saved audit inventories 24 surface kinds, four reads and 116 record declarations,
+streams all 497 current complete frames, and keeps schema differences distinct
+from matched-state effect evidence. Shop-slot declarations use existing public
+offer-slot relations, never new action authority. Exact option enablement joins,
+card-detail target checks and typed nullable omissions are separately validated.
+CLI export v36 carries native event/hover facts; shared manifest v4 preserves
+both original numerical weights/all Adam. The active short control is interface
+control v2; old development sources/configs/results remain preserved.
+
+The final four-choice-per-host control and eight saved choice/receipt reconstructions
+pass, with zero app copies or optimizer updates. Declared short-sample field checks
+have no remaining gaps, but full input equality still fails on layouts/duplication;
+do not confuse that narrow pass with full compatibility or stronger play. Main
+interface canary v1 is owner-run: two fresh worlds/both originals/four paired
+prefixes, up to 128 choices per host, 15-minute session cap and clean resumption.
+Its workspace is unstarted. Audit every saved public frame afterward, retain
+unknown/uncertain attempts, and do not realign divergent games. No new learning,
+adaptive controller, promotion or upstream publication is automatic. Add targeted
+matched effects for important unobserved interfaces rather than requiring every
+possible content combination. See `docs/native-interface-wide-audit.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
