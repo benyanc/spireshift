@@ -1,5 +1,11 @@
 # Controlled teaching and fresh-game test
 
+**This experiment is now complete.** Both taught plans are learned/executed,
+but fresh full-game improvement is not established. Preserve every result and
+full model/Adam state. See the [result assessment](native-plan-teaching-result.md);
+the original handoff and qualification details below remain historical evidence.
+Do not rerun or extend the experiment automatically.
+
 The owner authorized this separate test after the earlier/coordinated teacher
 comparison. It uses the useful fitting plans already collected; it starts no new
 teacher search and leaves the failed natural-v1 curriculum unchanged. Both original

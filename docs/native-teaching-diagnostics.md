@@ -1,5 +1,9 @@
 # Completed teaching diagnosis
 
+The main experiment and its saved-only diagnosis are now complete. See
+[the result assessment](native-plan-teaching-result.md). The control qualification
+and original running-experiment boundaries below remain preserved history.
+
 This is a separate saved-record report prepared while the owner runs the controlled
 teaching test. It does not monitor or resume that experiment, open its live workspace,
 change its pinned implementation/recipe, launch a game or fit any model. Both original
@@ -138,3 +142,18 @@ without repeating inference, extraction or analysis. It confirms all source seal
 again after repository checks; no main workspace is opened, no output is changed,
 and no additional games or optimizer steps occur. Its storage measurement is the
 same existing 23.59 MB, not another copy of that output.
+
+## Completed main diagnosis
+
+Explicit `--main` analysis now completes in **73.21 seconds**, using **316.87 MB
+peak RAM / 25.61 MB output**. It verifies **115,651 source seals / 295 complete
+receipts**, reconstructs **615 saved fight distributions/choices**, and reproduces
+fresh-game comparisons with the one capped reference case still counted. Native
+delivery audits retain their existing sealed verification. There are zero new
+games, optimizer steps, predictor fits or app copies; every source/full state/Adam
+remains unchanged.
+
+Both taught versions reproduce both complete lesson sequences, with all three
+changed targets greedy. That passes execution on the taught roots, while the
+192-game final panel establishes no full-run gain. The main diagnostic is at
+`artifacts/native-teaching-diagnostics/sts2-v0.111.0-a8-comparison-v1/summary.md`.

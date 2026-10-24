@@ -1,4 +1,68 @@
-## Current parallel work — completed-record teaching diagnosis
+## Current handoff — teaching learned; full-game transfer not established
+
+The owner completed the controlled teaching comparison. Preserve both original
+players, all four copied finals, every Adam moment/counter, native evidence and
+all historical experiments. No new games or fitting follow this assessment.
+
+- [x] Complete **295 sealed units / 256 copied updates / 36 fight checks / 192
+  fresh full-game attempts**. Freeze all finals first. Retain the one reference
+  copy's 4,096-decision-cap failure in the original denominator; no retry, replacement
+  or learning from the partial game. All planned attempts are accounted for.
+- [x] Both taught players independently reproduce the **entire two taught plans**:
+  rescue the lost fight with **23 HP**, improve the other to **48 HP**, and make
+  all three changed targets greedy. Their target probabilities reach **83.6–98.0%**.
+  The changed-action learning and multi-turn execution pathway works on these roots.
+- [x] Keep limited held-out gains explicit: HP improves in some already-won fights,
+  but each version wins the same **two of four held-out fights per player**. No
+  held-out losing fight is rescued; do not turn those selected plans into labels.
+- [x] Assess fresh results: **0/64 full wins for every version**; mean floor
+  **13.2500 original / 12.6406 reference copy / 12.5156 taught copy**. Teacher minus
+  reference is **−0.125 floors [−0.9844, +0.7031]**; teacher minus original is
+  **−0.7344 [−2.0000, +0.4219]**. No stronger full-run player is established.
+  Act-completing runs are **5/64 original / 2/64 reference / 0/64 taught**.
+- [x] Run the prepared saved-only main diagnosis in **73.21 seconds**: verify
+  **115,651 seals / 295 receipts / 615 frozen fight distributions**, original
+  full weights/Adam, fixed critics and complete comparison denominators. **316.87
+  MB peak RAM / 25.61 MB reports / zero games or optimizer updates**.
+- [x] Identify meaningful interference hypotheses from the same historical probe.
+  Player 3's taught copy changes top combat choices on a world-balanced 81.8% of
+  14 selected states/11 worlds and shop choices on 50% of seven states/four worlds.
+  These balanced small samples measure movement, not causal harm or gameplay rates.
+- [x] Inspect the capped reference game from saved public records: at round **1,004**,
+  all five Strikes/Bash are in exhaust; the player cycles Havoc/Defend against a
+  ten-HP Toadpole. Public `combat_piles` identities are present and delivery verifies.
+  This supports a long-term consequence learning check, not an invented adapter bug.
+- [x] Pass **2,497 tests / five skips**, strict types on **549 files**, format/lint
+  and the C# protocol in **146.79 seconds**. Verify preserved full model/Adam bytes
+  and both experiment recipes unchanged; only result/handoff documentation changes.
+
+Next, in order:
+
+1. **Qualify card-zone/exhaustion ownership in the actual actor encoding** using
+   saved public situations with the permanent deck held constant. Check available
+   discard/exhaust identities, current costs and ownership; distinguish missing
+   representation from a policy that has not learned to use existing information.
+   Do not repeat an exhaustive mechanics inventory or demand an untrained policy
+   immediately choose differently. Preserve all model/optimizer files.
+2. **Propose a bounded, broader fitting-only teacher/student curriculum** covering
+   different fights/decks and delayed effects, including removing future attacks.
+   Match teaching work, preserve the original/reference controls, split worlds
+   before selection and use new final evaluation worlds. More optimizer steps on
+   the same two fights are not the next default. No collection/fitting is automatic.
+3. **Isolate shared-policy interference in a separately declared comparison**;
+   for example, match original noncombat behavior while comparing changed combat.
+   This tests a cause of transfer failure; it does not permanently freeze decision
+   families, prohibit substantial improvements or reinstate weak-parent proximity
+   gates. Probability movement alone does not establish the causal answer.
+4. Keep full-run victory / 128 CPU seconds primary. No promotion, unchanged PPO
+   scaling, repeated critic grid, GA expansion, new difficulty or adaptive effort
+   controller follows automatically from local teaching success.
+
+See [result and interpretation](native-plan-teaching-result.md) and
+[portable evidence](evidence/native-plan-teaching-result-v1.json). There is no
+additional owner-run command from this completed comparison.
+
+## Historical parallel work — completed-record teaching diagnosis
 
 The owner reports the controlled teaching test running and authorized a separate
 diagnostic using completed records. Its live workspace is not inspected, locked

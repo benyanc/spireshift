@@ -253,10 +253,30 @@ Main then checks 36 fitting/held-out fights and 192 fresh full games across
 32 common new worlds and both initializers, with matched greedy combat/sampled
 noncombat evaluation. This is categorical imitation, not ordinary PPO. The short
 control completes nine native attempts without errors, but does not demonstrate
-stronger play. Main remains owner-run and unstarted. Preserve sealed full states,
+stronger play. Main subsequently completes as assessed below. Preserve sealed full states,
 receipts and uncertain attempts; never retry failed seeds or clear active markers.
 No promotion, adaptive controller or next experiment is automatic. See
 `docs/native-plan-teaching-test.md`.
+
+The owner completed the controlled teaching test: 295 sealed units, 256 updates
+on four copies, 36 completed fight checks and 192 fresh full-game attempts.
+Both taught players independently reproduce both complete improved plans, saving
+the lost fight at 23 HP and finishing the other at 48 HP. Every version still
+wins 0/64 full games; improved-plan copies average 12.5156 floors versus 13.2500
+for originals and 12.6406 for reference copies. One reference-copy game exhausts
+all attacks and reaches the 4,096-decision cap; keep its failure in the denominator,
+do not retry or use the partial game for learning. Its public pile identities
+are present; do not mistake summary pile counts for a missing adapter field.
+Saved-only diagnosis verifies 115,651 seals/295 receipts and 615 fight
+distributions, with exact original weights/all Adam preserved. No promotion or
+unchanged expansion follows. Next qualify public card-zone/exhaustion distinctions
+through the actual encoder, then propose a more varied fitting-only curriculum
+with matched work and a separate shared-policy-interference comparison. Noncombat
+matching is a diagnostic, not a permanent restriction or a proximity guard.
+Do not reuse the 32 final evaluation worlds or held-out plans as fitting labels.
+Preserve every full state, outcome, source pin and old gate. No new collection,
+training or adaptive controller starts automatically. See
+`docs/native-plan-teaching-result.md` and the current backlog.
 
 ## Information boundary
 
