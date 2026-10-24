@@ -47,5 +47,21 @@ prerequisite to useful learning. Continue to share the app/runtime/SDK, isolate
 profiles, retain immutable reports and leave jobs expected to take five minutes
 or more to the owner. No training or live collection follows a saved audit.
 
+The subsequent shared-converter/current-checkpoint startup control passes on one
+new world: two model actions per host, with exact numerical/full-Adam imports into
+a separately labelled actual-v35/shared environment and zero app copies/updates.
+Current Neow hover/option exports still differ, so this proves scoped delivery,
+not complete host equivalence. The prepared broader owner diagnostic and remaining
+source-export repairs are documented in
+[the live-adapter guide](../native-shared-live-checkpoint.md). No full compatibility
+receipt, new learning or model promotion is granted by this control.
+
+The active control is v3/shared manifest v2, exercising Neow and a pack-selection
+preview. Preserve the first control's Neow/Proceed result and the second seed's
+selection-family rejection. The latter verifies clean natural shutdown/app reset.
+Explicit aliases from the pinned SDK now retain selection purpose/cards/bounds;
+unknown families still stop with their raw public reads preserved. This closes
+a conversion vocabulary gap, not the remaining Neow public-export gaps.
+
 See [implementation/result](../native-compatibility-gate.md) and
 [portable evidence](../evidence/native-compatibility-gate-v1.json).

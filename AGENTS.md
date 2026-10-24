@@ -298,6 +298,27 @@ follows this diagnosis. Keep card-zone/exhaustion, broader curricula and policy
 interference next in the learning backlog, rather than restarting unchanged PPO.
 See `docs/native-compatibility-gate.md` and the current backlog.
 
+The owner then authorized the shared input contract/current checkpoint live adapter.
+The converter and actual-game delivery control now pass: one new player-2 world,
+two actions per host (Neow choice and card-pack selection), zero updates/app
+copies. Both original numerical weights/all Adam are exactly preserved in explicitly
+labelled shared-environment copies binding CLI v35, worker v11 and official v13;
+the old v9 label and all prior files remain unchanged. New input conversion can
+change behavior despite exact numeric imports. Saved-only verification reproduces
+all four choices/actual receipts. Full input equivalence remains blocked by current
+Neow hover-card/option-flag export gaps and duplicate layouts. Do not filter those
+facts or assume absent flags false. The prepared owner diagnostic covers both
+initializers/two fresh worlds/four paired prefixes, up to 64 decisions per host;
+it is not PPO, a full-game evaluation or automatic compatibility admission. No
+main game has run. Preserve completed units and uncertain attempts, do not realign
+divergent states, and leave this approximately 10–15-minute task to the owner.
+Then repair complete public exports and qualify current-host checkpoint equivalence
+before another learning intervention. The active short control is v3/shared manifest
+v2; retain the v1 pass and v2 selection-name failure. That failure verifies clean
+shutdown/reset. Explicit SDK selection aliases preserve card lists, ownership,
+bounds and controls; do not discard meaningful fields to force parity. See
+`docs/native-shared-live-checkpoint.md`.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

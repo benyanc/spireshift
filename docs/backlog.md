@@ -1,4 +1,65 @@
-## Current handoff — recurring official-game compatibility before new learning
+## Current handoff — shared contract and live adapter implemented; broader diagnostic next
+
+The owner authorized the shared official-game/CLI input contract and current-format
+checkpoint adapter under [#149](https://github.com/benyanc/spireshift/issues/149).
+Both original players, all experimental finals and every optimizer moment/counter
+remain intact. This is interface qualification; no new learning or promotion.
+
+- [x] Use one public-input converter in both hosts. Require complete snapshot-bound
+  reads/menus, normalize transport/visible occurrence ordering, join already-public
+  operand facts, preserve owned costs/zones/statuses/relic counters and every legal
+  option, and retain unfamiliar public fields. Bind model choices to the exact
+  current raw action, with no cached temporary-ID targeting.
+- [x] Import both fixed initializers into an explicitly labelled shared environment
+  that pins **actual CLI v35 / worker v11 / official connector v13**. Prove every
+  numerical weight and full Adam state exact (**5,658 / 6,045**); preserve v9's
+  historical label/results. Changed input conversion is not unchanged behavior.
+- [x] Run the short **player-2/two-action paired control**: two real game starts,
+  a Neow choice and card-pack selection per host, no failures, **35.31 seconds /
+  1.18 GB peak RAM / 6.85 MB phase output**. One shared app, **zero new app copies**;
+  exact shutdown/reset, archive and personal-profile checks pass. No updates.
+  V1's Neow/Proceed pass and v2's rejected card-removal menu remain preserved.
+  V2 verifies clean natural shutdown/reset on rejection. Shared manifest v2 adds
+  explicit SDK selection aliases while preserving their full card/menu semantics;
+  the current v3 control is separate. These are prefix checks, not full games.
+- [x] Independently rebuild both input sequences and **four frozen choices and
+  actual delivery receipts** from completed journals in **2.32 seconds**. Preserve
+  the earlier verifier-only transport/JSON-number mismatches; no game is replayed.
+  Verify **1,560 protected pre-existing files/full states** unchanged.
+- [x] Find a real **current public-export gap**, not only historical schema drift:
+  official Neow hover-card details and option flags are missing from the CLI view.
+  Other duplicate context/layout differences remain. Complete first-state action
+  keys match; full input equivalence does not. Do not drop meaningful information
+  or infer a game-rules mismatch/learning cause from this limited control.
+- [x] Prepare and preflight a finite broader **diagnostic** for both frozen players,
+  two new worlds, **four pairs / eight game starts / up to 512 policy actions**.
+  Seal/reuse completed pairs, pause at clean boundaries, preserve uncertain attempts
+  and source snapshots. Main remains unstarted; there is no training follow-up.
+- [x] Pass **nine explicit Node contract tests**, including all seven selection
+  aliases. Recheck all protected files/full states unchanged after verification.
+  Final repository checks pass **2,531 tests / seven skips**, strict types on
+  **561 files**, format/lint and C# protocol in **139.94 seconds**.
+- [ ] **Owner runs the diagnostic canary** using the single command in the
+  [live-adapter guide](native-shared-live-checkpoint.md), about 10–15 minutes.
+  Gather current combat/noncombat layouts and delivery gaps. Do not realign states
+  after divergence or interpret these prefixes as a full-game benchmark/admission.
+- [ ] Repair native/official public exports and explicit schema aliases using this
+  evidence. Preserve hover information, flags, current numerical previews and all
+  legal decisions; never default unknown flags to false to force agreement.
+- [ ] Qualify complete current checkpoint input/action/successor equivalence and
+  integrate the resulting receipt into new batch/resume/promotion entry points.
+  The startup delivery control alone cannot satisfy the full automated gate.
+- [ ] Before promotion/scaling, compare untouched and trained frozen players on
+  fresh official-game full runs at matched behavior/compute. Terminal wins remain
+  primary; compatibility and stronger play are separate requirements.
+
+After fidelity qualification, keep card-zone/exhaustion actor checks, more varied
+fitting-only lessons and interference tests next. Other difficulties, GA expansion,
+unchanged PPO scaling and adaptive effort remain deferred. See
+[implementation, limits and owner command](native-shared-live-checkpoint.md) and
+[portable evidence](evidence/native-shared-live-checkpoint-v1.json).
+
+## Historical handoff — recurring official-game compatibility before new learning
 
 The owner requested this priority after reviewing the fast CLI, community bridges
 and official game. Preserve both original players, all copied finals/full Adam,

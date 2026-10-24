@@ -1,5 +1,11 @@
 # Checkpoint compatibility with the shipped game
 
+Update: the shared converter and current-checkpoint live adapter are now implemented.
+The short actual-game delivery control passes, with original numeric weights/full
+Adam preserved, while current Neow input exports still differ. The next owner
+diagnostic and exact scope are in [the live-adapter guide](native-shared-live-checkpoint.md).
+The saved-record result below remains preserved and does not grant compatibility.
+
 Tracked in [#149](https://github.com/benyanc/spireshift/issues/149).
 
 The shipped v0.111.0 game is the reference. Our fast training host uses its game
