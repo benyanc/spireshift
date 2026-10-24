@@ -278,6 +278,26 @@ Preserve every full state, outcome, source pin and old gate. No new collection,
 training or adaptive controller starts automatically. See
 `docs/native-plan-teaching-result.md` and the current backlog.
 
+The owner accepted recurring official-game compatibility checks on 2026-10-23
+after discussing the community CLI/bridge and shipped-game distinction. The next
+priority is ADR 0006, before another learning intervention: exact batch/resume
+identity, complete recorded policy-input/action regressions for every checkpoint,
+current checkpoint delivery canaries at execution changes/milestones, and fresh
+official-game original/trained evaluation before promotion or substantial scaling.
+The first saved-only gate is implemented and BLOCKED: model manifest v9 names
+v34 while the separately pinned experiment uses v35; four historical mechanics
+pairs also differ as complete current-policy inputs and lack retained pile reads.
+Do not infer a current rules mismatch, silently normalize missing information or
+edit historical model labels. Qualify a versioned common public-input/checkpoint
+adapter and explicit numeric/full-Adam-preserving environment import next. The
+standalone guard rejects training without environment, recorded-input and live
+delivery scopes; saved fixtures cannot certify that last scope. New experiment
+entry points must use the qualified guard; preserved old runners are not globally
+wrapped or retroactively admitted. No new game, fitting, promotion or controller
+follows this diagnosis. Keep card-zone/exhaustion, broader curricula and policy
+interference next in the learning backlog, rather than restarting unchanged PPO.
+See `docs/native-compatibility-gate.md` and the current backlog.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

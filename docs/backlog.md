@@ -1,4 +1,62 @@
-## Current handoff — teaching learned; full-game transfer not established
+## Current handoff — recurring official-game compatibility before new learning
+
+The owner requested this priority after reviewing the fast CLI, community bridges
+and official game. Preserve both original players, all copied finals/full Adam,
+frozen experiments, shared game apps and prior negative results. Fixed Ironclad/A8,
+terminal full wins and the 128-CPU-second whole-run budget remain unchanged.
+Track recurring qualification in [#149](https://github.com/benyanc/spireshift/issues/149),
+with learning integration in #146 and public representation in #143.
+
+- [x] Implement a separate checkpoint-bound saved-record regression and command
+  guard. Verify exact environment/dependencies/full checkpoints, reconstruct old
+  official/native evidence, compare complete menus/public inputs through the real
+  encoder/scorer, retain difference witnesses and invalidate changed receipts.
+- [x] Run the finite audit: **six frozen players / four historical sequences /
+  36 paired observations / two independent seeds**, **6.12 seconds / 174.44 MB
+  peak RAM / 0.52 MB output**, zero games, updates or app copies. All old scoped
+  mechanics reconstructions pass; **zero full input checks pass per checkpoint**.
+  Keep historical-build/incomplete-read limitations explicit.
+- [x] Find the model-manifest **v34 label versus separately verified v35 execution**
+  mismatch. Do not claim the experiment was unpinned or rewrite saved model labels.
+  Context/option layouts and 16 full menus also differ in the old records; their
+  24 combat states lack retained advertised pile reads. This is not proof of a
+  current-host mechanics defect or the cause of weak play.
+- [x] Verify identical-receipt reuse and a real blocked child command (exit 2 before
+  execution). Missing live-delivery evidence always blocks new guarded training or
+  promotion. A completed saved diagnosis cannot issue that scope. Historical entry
+  points remain preserved; this is not global enforcement on every old script.
+- [x] Pass **2,515 tests / six skips**, strict types on **553 files**, format/lint
+  and C# protocol in **151.42 seconds**, plus **four explicit Node tests**. Recheck
+  **443 protected frozen dependencies and complete model/Adam files** unchanged.
+- [ ] **Next: common complete public-input and current-checkpoint official adapter.**
+  Align semantic decisions and legitimate presentation/ID differences, retain all
+  meaningful owners/zones/costs, optional actions and advertised reads. Add exact
+  no-change numeric/full-Adam import into a correctly labeled environment.
+- [ ] Qualify bounded **current-host versus official-game policy delivery canaries**
+  covering consequential observed decisions, complete repeated menus and successor
+  effects. Bind the current tuple/checkpoint and integrate the gate into new batch
+  and resume commands. Renew canaries at relevant execution changes/milestones;
+  historical fixture passes cannot grant current execution parity.
+- [ ] Require **fresh official-game original-versus-trained evaluation** before
+  promotion or substantial scaling, with matched behavior/compute, complete failure
+  denominators and no evaluation feedback into fitting. Normal losses do not fail
+  compatibility. Preserve drift evidence and identify affected learning lineage.
+- [ ] Benchmark faster faithful official execution before deciding whether to move
+  bulk training there. Existing timing ratios include startup/UI/connector overhead;
+  keep the CLI fast path conditional on evidence. No new speed job starts now.
+
+Then resume the learning order below: card-zone/exhaustion actor checks, broader
+fitting-only lessons and isolated shared-policy interference. GA/hybrid work and
+other ascension levels remain later options; adaptive thinking remains behind a
+useful base player. Do not expand unchanged PPO or retry rejected predictor grids.
+No exhaustive mechanics-combination requirement and no per-game app copies.
+
+See [gate/result and next steps](native-compatibility-gate.md),
+[ADR 0006](decisions/0006-recurring-official-game-compatibility.md) and
+[portable evidence](evidence/native-compatibility-gate-v1.json). No owner-run long
+task is needed from this saved-only stage; live adapter qualification comes next.
+
+## Historical handoff — teaching learned; full-game transfer not established
 
 The owner completed the controlled teaching comparison. Preserve both original
 players, all four copied finals, every Adam moment/counter, native evidence and

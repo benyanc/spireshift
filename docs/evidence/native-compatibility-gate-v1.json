@@ -1,0 +1,163 @@
+{
+  "schema_version": "native-compatibility-gate-evidence-v1",
+  "config_id": "sha256:b8b4af1c99ce294674ed249a8db54bbcb4a58f38b1009d0a7a7bf23b3144c796",
+  "audit_report_id": "sha256:890b6870cda7d65fb56f275f2ab0e712e8f2c96ac1371ffb625da686c02da0b1",
+  "resource_report_id": "sha256:f4fac1dcbd5d60162670674172070c80fb716193a896b88b4413ea0a821a75a2",
+  "status": "blocked",
+  "claim_scope": "checkpoint_bound_recorded_public_input_regression_only",
+  "gates": {
+    "current_host_official_checkpoint_delivery": false,
+    "manifest_matches_verified_execution": false,
+    "recorded_public_input_equivalence": false
+  },
+  "environment_checks": {
+    "manifest_build_report_id": "sha256:e18dc8f4f895ab7736022053534fff123ab3f2b240309fb04a5fa8240e5f2fd3",
+    "manifest_input_config_id": "sha256:481539b873bac8629056df9ec2233c6e8ea07b02bc2531567aa1ccb0cc300de1",
+    "passed": false,
+    "verified_build_report_id": "sha256:1ee3fd664a66633562c82d1614d5a4266e11c31b1509f0d4cfba804f4e17fa7d",
+    "verified_input_config_id": "sha256:600a7f92e2d69fe0d560cb57158ac74ab34b2e6d27ea1fd9033d169d71efbe52"
+  },
+  "independent_native_seeds": 2,
+  "paired_observations": 36,
+  "reference_sequences": 4,
+  "reference_builds_are_current": false,
+  "all_scoped_mechanics_reconstructions_pass": true,
+  "checkpoints": [
+    {
+      "families": {
+        "combat_turn": 24,
+        "event_option": 8,
+        "map_navigation": 4
+      },
+      "matching_contexts": 0,
+      "matching_distributions": 6,
+      "matching_features": 0,
+      "matching_menus": 20,
+      "model_id": "sha256:ba72e41d7e7d81a03701416310461a2accdd4455f7f40817c51905fe865dc241",
+      "observations": 36,
+      "optimizer_id": "sha256:b335e78b09a2a57736f94a45f84cb2ff541492a5b2d77e107a78a7328787b0d2",
+      "optimizer_steps": 5722,
+      "passed_observations": 0,
+      "sha256": "578219363d1debfcbf786e5149e689960a8ba3bb1e281264da2453cae9f69377",
+      "state_id": "sha256:6583d75cbcf2a1b91a8d6b07fb8b67865c379e3581ecede81d73d6c2b01ffecf"
+    },
+    {
+      "families": {
+        "combat_turn": 24,
+        "event_option": 8,
+        "map_navigation": 4
+      },
+      "matching_contexts": 0,
+      "matching_distributions": 6,
+      "matching_features": 0,
+      "matching_menus": 20,
+      "model_id": "sha256:1fcadae80cd7fe2c2bef49397b84c42d2205bd48eff25abc0062a91ccc432255",
+      "observations": 36,
+      "optimizer_id": "sha256:dc41f724c47419d0256f3a8470a8226862f171b2a4ab16a8dbf0ddf91afc3e6a",
+      "optimizer_steps": 5722,
+      "passed_observations": 0,
+      "sha256": "aeec2786b7d611f1c30cc088b179c50db0dcfdf5c85aed9a292e19873d6e96e6",
+      "state_id": "sha256:a8d2895315960f67dbc930eae9766b8f93e6da34e72800dacae51a247147da51"
+    },
+    {
+      "families": {
+        "combat_turn": 24,
+        "event_option": 8,
+        "map_navigation": 4
+      },
+      "matching_contexts": 0,
+      "matching_distributions": 6,
+      "matching_features": 0,
+      "matching_menus": 20,
+      "model_id": "sha256:c4d9d0ad53a74c4e20f7a50998e56dba7e915aa09aa491e9a38f471da05e9460",
+      "observations": 36,
+      "optimizer_id": "sha256:dc4fead0a45e5f631cccd6d8056752372069c22e0027a1d447fb9bbacf1132c8",
+      "optimizer_steps": 6109,
+      "passed_observations": 0,
+      "sha256": "aedf3f5faf1a365fd076047ada4f2948a19c4b9296f96ad16c499f8c11608ad5",
+      "state_id": "sha256:5bd185077b5b7bdd5817630c6c7ffd9d4080a8f3cf69102786ec23335c1fc265"
+    },
+    {
+      "families": {
+        "combat_turn": 24,
+        "event_option": 8,
+        "map_navigation": 4
+      },
+      "matching_contexts": 0,
+      "matching_distributions": 6,
+      "matching_features": 0,
+      "matching_menus": 20,
+      "model_id": "sha256:d38fb520c5efea1d23b48f332304cf29139bb4cfd60e3cf53b9a55ac292f9d00",
+      "observations": 36,
+      "optimizer_id": "sha256:0f3fac6edf337940be0f308c49de0a70787dbdfb896a72e50bcdbddbdf01a288",
+      "optimizer_steps": 6109,
+      "passed_observations": 0,
+      "sha256": "2c5624f001e553db7016af7994080d314ef818d99cb623c009c4b90bac69adf9",
+      "state_id": "sha256:fe67a71c46d8bc02f6d62da036b2016458b66139bfaa7da40cd7a50d1a01b6bf"
+    },
+    {
+      "families": {
+        "combat_turn": 24,
+        "event_option": 8,
+        "map_navigation": 4
+      },
+      "matching_contexts": 0,
+      "matching_distributions": 6,
+      "matching_features": 0,
+      "matching_menus": 20,
+      "model_id": "sha256:dcafc006c9a3569bf8caa7995501c2b403fb742939014582b1c7b327ccb12097",
+      "observations": 36,
+      "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+      "optimizer_steps": 5658,
+      "passed_observations": 0,
+      "sha256": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+      "state_id": "sha256:f013e689500a7e8ad6c3b893c9ce9771f91d44bdedc6be2aa938c210f8eeef8a"
+    },
+    {
+      "families": {
+        "combat_turn": 24,
+        "event_option": 8,
+        "map_navigation": 4
+      },
+      "matching_contexts": 0,
+      "matching_distributions": 6,
+      "matching_features": 0,
+      "matching_menus": 20,
+      "model_id": "sha256:9188a1065b89b43a40238c63c6d14a6e906af3fa42ae74226f4f71f45f8320c6",
+      "observations": 36,
+      "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+      "optimizer_steps": 6045,
+      "passed_observations": 0,
+      "sha256": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+      "state_id": "sha256:6dc93df587ab6c1bea17a9999740dacb216b46c4485abee272db7f4d58d56b82"
+    }
+  ],
+  "resources": {
+    "wall_seconds": 6.1222210000269115,
+    "cpu_seconds": 5.205334816,
+    "peak_resident_memory_bytes": 174440448,
+    "final_storage_bytes": 521259
+  },
+  "actual_blocked_child_command_exit_code": 2,
+  "blocked_child_sentinel_created": false,
+  "identical_receipt_reused": true,
+  "new_games_launched": 0,
+  "optimizer_steps": 0,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "training_allowed": false,
+  "required_next_step": "align_complete_official_inputs_then_current_host_policy_canary",
+  "verification": {
+    "repository_tests_passed": 2515,
+    "repository_tests_skipped": 6,
+    "explicit_node_tests_passed": 4,
+    "focused_python_tests_passed": 18,
+    "strict_typechecked_files": 553,
+    "CSharp_protocol_verified": true,
+    "repository_check_wall_seconds": 151.42385487491265,
+    "repository_check_report_id": "sha256:369512c5676080b550980bae9aa37b2f3fd62a351bede627f3bbd27a7578a9b2",
+    "protected_frozen_files_and_full_states": 443,
+    "all_protected_bytes_unchanged": true
+  },
+  "evidence_id": "sha256:da67b4156415890644bb7101d9dc3e150c43918dd37f4c196635d1f621f4b842"
+}
