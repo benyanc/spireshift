@@ -384,24 +384,40 @@ The earlier four-choice paired control matches completely through first combat,
 with independent saved receipt reconstruction. Preserve all intermediate tuples,
 startup/filter/shop failures and later fresh controls.
 
-The later control correctly blocks on a real selection decision-boundary mismatch:
-CLI commits a selected card immediately, whereas shipped UI selects, previews and
-confirms. The compared card-definition/cost/ordinary-description/numeric-preview fields
-agree; full selection contexts
-also differ in per-copy identities, missing selected flags, ownership/layout and
-upgrade-preview line breaks.
-Repair those source exports with the selected common protocol. The owner is
-choosing a common semantic
-committed-card action with exact native UI execution versus model-controlled UI
-primitives. Do not expand the canary or learning until that contract and targeted
-transition tests are qualified. Official noncombat potion-HUD controls and exact
-native belt/HUD instance identity are implemented, with 11 C# permission checks
-and four binding regressions; their shipped effects are not yet qualified. No
-weights/Adam change, promotion, automatic collection/training or broader input
-parity claim follows. Keep short jobs autonomous and long jobs owner-run.
-Repository checks pass 2,562 tests / 599 strict-typed files plus C# protocol;
-all eight current choices/receipts reconstruct independently with zero new games.
-See `docs/native-input-layout-compatibility.md` and the current backlog.
+The owner chose one committed model card answer on 2026-10-24. The current
+semantic tuple is CLI v40 / official connector v16 / worker v14 / shared helper
+v9 / layout v6 / shared manifest v14. All earlier tuples and failed attempts remain
+preserved. Native selected-card IDs now reuse their actual deck/pile identities;
+source flags, selector ownership and upgrade-preview text are explicit. The
+official adapter executes only the chosen cards and required native confirmation,
+checks each current owner/control, never resubmits uncertain input and acknowledges
+the model only after authenticated completion. Empty answers and cancellation
+remain distinct. More than 512 ordered answers rejects the entire state rather
+than silently truncating; a compact large-domain protocol remains a follow-up.
+
+The targeted control passes all four complete inputs/action menus and deliveries
+in both hosts, including one actual card removal via two native UI steps for one
+model choice. Independent saved verification reconstructs all eight choices and
+receipts. Both decks change from 11 to 10 cards, exactly the chosen Strike copy
+is removed and every other visible card is unchanged. A preceding observation-only
+scan checked four new starting menus, submitted no actions and used only public
+menus/frozen choices to select this scenario; it is not fresh strength evidence.
+Keep the v39 missing-description failure and the completed v40 reward-layout
+mismatch. V40 uses the game's description-existence/formatting check; layout v6
+maps the actually advertised reward skip control and visible color markup without
+inventing an exit or removing unknown text. Never replay an uncertain seed.
+
+The saved audit now passes 845 complete frames plus 20 generated envelopes, all
+865 reversible reconstructions/raw bindings and 1,720 frozen input probes. All
+3,119 earlier pinned files and both original numerical weights/all Adam remain
+byte-exact. These controls do not qualify every selector/potion effect or stronger
+play. The prepared broader canary is unstarted and preflighted: both originals,
+two new worlds, four paired prefixes, up to 128 choices per host, 15-minute launch
+cap and clean resumption. Only the owner launches this long task using
+`scripts/compare-semantic-selection-v3.sh`; the v1/v2 launch prototypes remain
+historical and must not be used. No fitting, promotion, automatic collection or
+adaptive controller follows. Source changes invalidate qualification. See
+`docs/native-semantic-card-selection.md` and the current backlog.
 
 ## Information boundary
 

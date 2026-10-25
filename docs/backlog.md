@@ -1,4 +1,49 @@
-## Current handoff — common official/CLI layouts and exact comparison worlds
+## Current handoff — one model choice for a committed card answer
+
+The owner selected the semantic committed-card contract. Keep both original full
+players and every Adam moment/counter unchanged; no learning or promotion follows.
+See [the selection guide](native-semantic-card-selection.md).
+
+- [x] Implement all ordered legal card answers, legal empty answers and separate
+  cancellation, with exact physical card identities, selection flags, current owner
+  and full preview/detail facts. Reject oversized domains rather than truncate.
+- [x] Implement official select → preview → confirm execution with native current
+  owner/control checks, no repeated uncertain input and authenticated completion
+  before acknowledging one model decision.
+- [x] Preserve prior runtime tuples. CLI v40 uses the game's description-existence
+  and formatting rules; retain v39's blocked Neow attempt and source snapshot.
+  Official v16 and native v40 reproduce independently from fresh builds.
+- [x] Saved audit: 832 recorded frames + 20 generated envelopes, 852 exact
+  reconstructions/raw bindings, 1,694 frozen probes and 3,119 unchanged prior files.
+- [x] Targeted ordered/empty/cancel, physical-copy, preference, pending, changed
+  target, exact completion and read-enumeration tests; no model fitting.
+- [x] Qualify all four complete inputs/action menus and deliveries in both hosts:
+  actual card removal uses two native UI steps for one model choice. All eight
+  choices/receipts independently reconstruct; both decks lose exactly the chosen
+  Strike copy, with every other visible card unchanged (11 → 10 cards).
+- [x] Use four public starting-menu observations with zero actions/outcomes to
+  target the selection scenario. Preserve the earlier reward mismatch; layout v6
+  maps its actual skip control and known display colors without inventing choices.
+- [x] Final audit grows to **845 frames + 20 envelopes**, **865** reversible
+  reconstructions/raw bindings and **1,720** frozen probes. Preserve all **3,119**
+  prior files. Active tuple: CLI v40, official v16, shared layout v6/manifest v14.
+- [ ] Owner next: run `bash scripts/compare-semantic-selection-v3.sh` for both
+  frozen players/two fresh worlds/four paired prefixes, up to 128 choices per host.
+  The plan is preflighted and unstarted, with a 15-minute launch cap and completed
+  pairs reused after a clean pause. No fitting or automatic follow-up. Older
+  selection launch prototypes are historical, not the current command.
+- [ ] Add specific shipped effect fixtures for remaining selector families and
+  noncombat potion controls; the current source/tests do not establish their effects.
+  Include nonzero/X star costs in cross-character selector/detail views, rather
+  than inferring coverage from ordinary energy-only cards.
+- [x] Repository checks: **2,573 tests**, **613** strict-typed files and C# protocol
+  pass in **146.25 seconds**. The latest targeted suite separately passes 12 Python
+  tests / 20 Node cases, with 20 C# transaction/permission checks.
+- [ ] Resolve large selection domains if reached, then qualify common inputs and
+  current checkpoints before the next learning intervention. Keep broader curricula,
+  zone/exhaustion distinction and shared-policy interference in the learning backlog.
+
+## Historical handoff — common official/CLI layouts and exact comparison worlds
 
 The owner requested the remaining input repairs and targeted compatibility tests
 under [#149](https://github.com/benyanc/spireshift/issues/149). Preserve both original
