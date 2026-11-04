@@ -1,0 +1,116 @@
+{
+  "schema_version": "native-modal-coordination-evidence-v2",
+  "status": "saved_first_control_adopted_three_controls_unstarted",
+  "diagnosis": "coordinator_v1_accessed_nonexistent_verifier_evidence_map_after_successful_verification",
+  "actual_verifier_contract": [
+    "schema_version",
+    "valid",
+    "source_report_id",
+    "verifier_sha256",
+    "cases",
+    "games_launched",
+    "optimizer_updates",
+    "original_weights_and_all_Adam_unchanged"
+  ],
+  "first_control_matching_choices_per_host": 57,
+  "independently_verified_decisions": 114,
+  "completed_controls": 1,
+  "remaining_controls": 3,
+  "saved_only_adoption_report_id": "sha256:aa65c19f7b4049ddb6a2df2f828fe826064c2333f379bcfae015ade5315af933",
+  "actual_saved_only_core_wall_seconds": 0.12870041700080037,
+  "original_plan_and_marker_preserved": true,
+  "completed_first_control_replayed": false,
+  "prior_verification_replayed": false,
+  "same_controls_seeds_launch_limits_and_gameplay_sources": true,
+  "new_bookkeeping_ledger_only": true,
+  "new_game_starts_during_repair": 0,
+  "optimizer_updates": 0,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "training_allowed": false,
+  "broader_compatibility_granted": false,
+  "original_full_weight_and_Adam_files_exact": {
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8"
+  },
+  "protected_prior_files_unchanged": 15721,
+  "targeted_regression_tests_passed": 14,
+  "strict_source_test_and_coordinator_type_check_files": 714,
+  "tests_include": [
+    "real_verifier_schema_without_evidence",
+    "saved_only_then_complete_resume_with_no_replay",
+    "cached_final_without_launch",
+    "transitive_evidence_integrity",
+    "wrong_report_verifier_counts_or_guarantees",
+    "capped_verification_with_zero_exit",
+    "unverified_shutdown",
+    "uncertain_case_no_retry",
+    "short_prefix_cannot_pass_target"
+  ],
+  "next_owner_command": "bash scripts/compare-selection-flows-v14.sh",
+  "estimated_remaining_minutes": [
+    15,
+    25
+  ],
+  "maximum_new_pairs": 3,
+  "maximum_new_host_starts": 6,
+  "outer_wall_seconds": 5400,
+  "evidence": {
+    "original_plan": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-map-settling-panel-v1.json",
+      "sha256": "ba5e548e4ab69435e87b15302d6661add0581b5cacc9fcad30ce6bea8eb46550"
+    },
+    "original_stopped_summary": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/report.json",
+      "sha256": "791d815ed9517fb07af289a2527a95f68113be7738e85e16662b5a9d83ece2f3",
+      "report_id": "sha256:7f5b49b70e3f3b77599016501f735291a15279994cb41e2f40be63bc47b7fae8"
+    },
+    "original_active_marker": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/active.json",
+      "sha256": "ff7c0a84d8b93b4f8846fad1da921e8a5a070be8d1a22bb76c650a1d56e4380d"
+    },
+    "first_completed_control": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/reward-glyphs/report.json",
+      "sha256": "c10242a4524cd7a8bd93e586cf4e1b07ede4cccbae63956f322c3c0e0b95a0ed",
+      "report_id": "sha256:b2f42bf789dc425d725e917547e5a11b1d9ba19de183cdf49d25b8def0596fb2"
+    },
+    "independent_verification": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/reward-glyphs/verification-v1/report.json",
+      "sha256": "fbea12d1a44f57189919748a1defe0791741f458832d885b1adcc56fabd4615d",
+      "report_id": "sha256:33eab5c84d0c510ea21617ca6879b2c498a5e00a63f60e0dcc0b2ed803a5e98c"
+    },
+    "verification_resources": {
+      "path": "artifacts/resources/map-settling-control-1-verify-v1.json",
+      "sha256": "1de076d709e8660456d5ad3d49b53894df913e5c691a411156abcc74c11da7b8",
+      "report_id": "sha256:d6bd16800c9c97b925f0f420474bfa6a68a0d3edba22e9e7dc79eef29adf7bb4"
+    },
+    "new_coordination_plan": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-map-settling-panel-v2.json",
+      "sha256": "a0c95ebdcac727750299acafc2602380ab79f056092c31958de95b0cd9321e6b"
+    },
+    "new_immutable_unit": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-coordination-v2/units/01.json",
+      "sha256": "7ce63784f770a436721d416f34280b12eb81dcbfd9c823b4341ca034ee431587",
+      "report_id": "sha256:1e879228a940a441be742448afdd2c809d4e3acbc92a2fca0fb410bfe9702473"
+    },
+    "saved_only_progress": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-coordination-v2/saved-progress-1.json",
+      "sha256": "5f7142b3daed0451f22287bb5c491194a6f8a7f0d880e372d435b47dbee3fe3b",
+      "report_id": "sha256:aa65c19f7b4049ddb6a2df2f828fe826064c2333f379bcfae015ade5315af933"
+    },
+    "coordinator": {
+      "path": "scripts/modal-panel-session-v2.py",
+      "sha256": "b5fdf3491cf717865eedbc6a1276774b3ea53d9f1ac127bed188694d13fb5b4b"
+    },
+    "owner_wrapper": {
+      "path": "scripts/compare-selection-flows-v14.sh",
+      "sha256": "5deb788f67d69686bfd20998b45517f12ac2402e083b9fb05d4109cd2d874975"
+    },
+    "regression_tests": {
+      "path": "tests/unit/test_native_modal_coordination.py",
+      "sha256": "27757190511a691b9940aba5d980abcbbe75015571b9792418cab85393bc816e"
+    }
+  },
+  "repository_check": "Required against the final exact repository files before gameplay; see artifacts/native-modal-coordination/final-handoff-v2.json for the generated receipt.",
+  "report_id": "sha256:79f03a7dfbdb5973aff7ffd457b9f4bd18d26b5758e517f16119817f8c2fe7a9"
+}

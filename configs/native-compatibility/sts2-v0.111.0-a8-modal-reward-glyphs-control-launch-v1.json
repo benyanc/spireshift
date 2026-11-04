@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-modal-reward-glyphs-control-v1.json",
+    "sha256": "65b67fee49e9f1738ff24925fc671b36e26869ea87f3fa52921b6753353e6dfc"
+  },
+  "wall_seconds": 340,
+  "cpu_seconds": 680,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

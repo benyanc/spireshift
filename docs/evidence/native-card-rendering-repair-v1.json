@@ -1,0 +1,84 @@
+{
+  "Host_tests_passed": 265,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "card_export_call_sites": 17,
+  "checkpoint_promoted": false,
+  "compiled_card_context_vectors": 112,
+  "connector_build_report_id": "sha256:dc19c990aee930d9755cc4ed9fa820daf9517f1cd1b62088077d8e5748cecceb",
+  "connector_source_revision": "4d0b95d38b0f8e0e0c273a7b4fa5fb7a0a0ad1ca",
+  "current_diagnostic_choices": 670,
+  "environment_id": "sha256:4c445e402d31ceea743165d203b03c1b9b6744f1a6a8396a797bb4a412efbc81",
+  "failure_notes": [
+    "First probe used an invalid constructor; all 265 Host tests in that resource passed before probe compilation failed.",
+    "First probe driver used a missing objective key, before launching a source world.",
+    "SDK runtime10 cannot initialize the frozen Harmony runtime; source probe now uses private pinned9.0.7 without runtime installation.",
+    "First portable install used workspace root rather than SDK lockfile folder.",
+    "First two saved diagnostics omitted the separate surface-card Read copy; v3 updates that exact same visible entity too. No production comparison field was ignored and no game/action was replayed.",
+    "A preparation seed inventory encountered a noncanonical old seed field; v2 records only valid canonical worlds."
+  ],
+  "full_game_playing_strength_evaluated": false,
+  "historical_actual_deliveries_reconstructed": 781,
+  "historical_reports_and_captures_unchanged": true,
+  "matching_historical_choices_acknowledged_diagnostically": 668,
+  "new_full_games": 0,
+  "new_official_app_games": 0,
+  "next_natural_pairs": [
+    "SP1RESH1FTE2E611",
+    "SP1RESH1FTE2E612"
+  ],
+  "next_natural_panel_unstarted": true,
+  "next_owner_command": "bash scripts/compare-render-endings-v1.sh",
+  "official_live_Connector31_qualification_granted": false,
+  "optimizer_updates": 0,
+  "original_game_CLI56_worker24_converter16_layout12_and_full_players_Adam_unchanged": true,
+  "player2_diagnostic_stops_before_repaired_choice_delivery": true,
+  "player3_all_247_choices_inputs_and_terminal_facts_match_diagnostically": true,
+  "preserved_development_failures": [
+    {
+      "path": "artifacts/resources/card-rendering-compiled-checks-v1.json",
+      "sha256": "3b47415203c0d419e81d35f25ff627e600e9933ea4caa1a4fdcdbfa6e6071ef2"
+    },
+    {
+      "path": "artifacts/resources/card-rendering-native-probe-v1.json",
+      "sha256": "6b472f42772a695235be7b1a55c27c0dd4c9235c2a23a6c62d8bd76c2cc167d5"
+    },
+    {
+      "path": "artifacts/resources/card-rendering-native-probe-v2.json",
+      "sha256": "56852c901b34e4c67c1a156a005248fed16faa2bfee930370a3ede40875fa26e"
+    },
+    {
+      "path": "artifacts/resources/card-rendering-portable-v1.json",
+      "sha256": "ecd488425471ac46e84dde574f7abc5069cecd03b9df1251df9d8a6c88844e6c"
+    },
+    {
+      "path": "artifacts/resources/card-rendering-saved-checks-v1.json",
+      "sha256": "d943956d6e83de2557642f50e0e4d93c5a17ba364203e4b10972b6dd4d62891d"
+    },
+    {
+      "path": "artifacts/resources/card-rendering-saved-checks-v2.json",
+      "sha256": "f9cb8d7b7c95c26cfaefd40bd675ea3c31eececb6959b240f5fc02bd2e352214"
+    }
+  ],
+  "privileged_formatter_source_worlds_initialized": 1,
+  "protected_prior_files_exact": 21356,
+  "report_id": "sha256:d8ecd753a75504aff5f804a422b9b4ae9f0b4c700d3f17b645d7d9e486a70ce0",
+  "schema_version": "native-card-rendering-repair-evidence-v1",
+  "source_probe_native_gameplay_actions": 0,
+  "source_saved_report_id": "sha256:4332f79007cf50dbae5f28f9bcd95b4363d79ab1dbcb3737a02fb9c58a9b0f84",
+  "source_saved_resource_id": "sha256:a9df4630a09757cdd279881c3c23a079cefabca16202632ebbe1ca55d13c1312",
+  "source_saved_wall_seconds": 73.20917983300751,
+  "sources": {
+    "artifacts/native-card-rendering/connector-build-v31/report.json": "bfec7ebbdb806e2708709c58c0252eb3d493ba06885e6738ac97f1c069bbf744",
+    "artifacts/native-card-rendering/saved-checks-v3/report.json": "4b6d8d904ae49488850856edd5e8800d40b174148c0226462524b5131cf887e3",
+    "artifacts/resources/card-rendering-saved-checks-v3.json": "7105be6f7f416db221c8fa27e6d996d066777290ee936272612ff993ea5ee168",
+    "configs/engine-qualification/sts2-v0.111.0-connector-card-rendering-build-v31.json": "f5b3b280e098e3f459fd12b59e5ad2c9cd4ae1aa227f78f83e00c28c8212213b",
+    "configs/engine-qualification/sts2-v0.111.0-connector-card-rendering-v31.json": "9a19825cc23af6819a104cad235ee68e670b1d935ccc74bc98e6171c63b34e09",
+    "configs/native-compatibility/sts2-v0.111.0-a8-render-endings-v1.json": "0f1f3f5a0c4218771490264289e0080776ff21924f78e3fb7951267395eec6f7",
+    "configs/native-compatibility/sts2-v0.111.0-a8-shared-environment-v48.json": "20c4813df6bba297feee5674b3eefbb0f45613bfb47721bfbdd1050a63a9de0b",
+    "patches/engine/sts2-connector-v0.111.0-card-rendering-v31.patch": "3a0231b212bacb867452bc24273fe078ce677c44a51932a6a112ff9366a8e375",
+    "scripts/compare-render-endings-v1.sh": "27f5f9ee3fb505231961ef899e772bd391457d08d9fd76ab677f725e1d744ffa"
+  },
+  "status": "render_context_and_text_source_saved_qualified",
+  "training_allowed": false
+}

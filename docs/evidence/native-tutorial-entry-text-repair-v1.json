@@ -1,0 +1,217 @@
+{
+  "adapters": {
+    "CLI": 56,
+    "Connector": 27,
+    "converter": 16,
+    "environment": 44,
+    "layout": 12,
+    "worker": 24
+  },
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "canonical_Connector_artifact_reproduced_twice": true,
+  "checkpoint_promoted": false,
+  "claim_scope": "frozen_English_corpus_declared_source_and_saved_regressions_fresh_live_panel_pending",
+  "connector_production_scope": [
+    "LiveHost/TutorialModalSurfaceReader.cs",
+    "NativeUi/NativeTutorialEntryTransition.cs",
+    "PlayerEnvironment/Observation/SnapshotBuilder.cs"
+  ],
+  "counter_rules_unchanged": true,
+  "diagnostic_phase_vectors_exported_as_player_facts": false,
+  "environment_id": "sha256:33b7174b6cc5d09fbfcbc303a93f04219c84fbfb8adf0d2a72cb1936cd6b51f0",
+  "final_exact_check_handoff": "artifacts/native-entry-text-repair/preparation-v1/final-handoff-v1.json",
+  "final_recipe_revision": 2,
+  "full_game_playing_strength_evaluated": false,
+  "game": {
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "commit": "41cef1ea",
+    "unchanged": true,
+    "version": "v0.111.0"
+  },
+  "historical_failed_pairs_relabelled_as_pass": false,
+  "historical_failures_and_raw_inputs_preserved": true,
+  "initial_development_build_identity_rejection_preserved": true,
+  "native_production_scope": "StripVisibleText_only",
+  "new_games": 0,
+  "offline_audit_type_check_failure_and_source_snapshot_preserved": true,
+  "old_worlds_and_actions_retried": false,
+  "optimizer_updates": 0,
+  "original_players_and_all_Adam_unchanged": true,
+  "owner_plan": {
+    "cases": [
+      "player-2-natural-605",
+      "player-3-natural-606"
+    ],
+    "command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-entry-text-endings-v1.sh\"",
+    "fixture_saves": false,
+    "forced_outcomes": false,
+    "maximum_decisions": 384,
+    "maximum_pair_wall_seconds": 600,
+    "one_fixed_app": true,
+    "outer_wall_seconds": 2400,
+    "preflight_valid": true,
+    "whole_run_cpu_seconds": 128,
+    "workspace_unstarted": true
+  },
+  "prior_live_effects_relabelled_as_current": false,
+  "references": [
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-entry-text-saved-v2.json",
+      "sha256": "4291ac604ce20536df76f4cc0c02bcebfff7ee571046085c85522d3ca8cdd27c"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-entry-text-endings-v2.json",
+      "sha256": "85246564ca4ba84f95f30e5f65b1a6ce90764a7c8860cecca20028373007e039"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-shared-environment-v44.json",
+      "sha256": "f106b4552708d61eb889b1b1630c5e41d93ff556e740e1205c4587b959d091e9"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/native-build-v56/report.json",
+      "sha256": "4f4637e05e3937ab0051aab2baf01457e6c7649e824f696c3817e35f8c8cd9ef"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/connector-build-reproduced-v27/report.json",
+      "sha256": "e0b291cba3f52d701055df7519c205718cdae57f6b0bca2e23e753545f3b5e7a"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/source-saved-v2/report.json",
+      "sha256": "ccfde6f175bb8a8cbff06637cae426f106a982f4e9e61384ee50887100138689"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/reconciliation-v2/report.json",
+      "sha256": "1bafe2c548980036a009508a85a70b23cfc09ade8906b0eec4eb769960a1235a"
+    },
+    {
+      "path": "artifacts/resources/entry-text-native-build-v56.json",
+      "sha256": "b1f5a584f68baa52244154e381b9749462a7a137e3ef9d926730aaf3630f3673"
+    },
+    {
+      "path": "artifacts/resources/entry-text-host-reproduced-build-v27.json",
+      "sha256": "3e6e45ec31f38b19e939dcd876da113dd11320b632ab27ec064fe09036c44265"
+    },
+    {
+      "path": "artifacts/resources/entry-text-source-saved-v2.json",
+      "sha256": "491b557cd52cbab9f8b03ad50c30cbc0e82e27f67962219c1efe84dadeabb6de"
+    },
+    {
+      "path": "artifacts/resources/entry-text-reconciliation-v2.json",
+      "sha256": "68259e0fe368399ddcf993c81f9fe651df4859f99b2b560d2c9988546e7b9a62"
+    },
+    {
+      "path": "artifacts/resources/entry-text-unit-tests-v1.json",
+      "sha256": "225a19e4b08ac3b80c705d1c8b43d8b1140e3bdaeddb152326d0918dba8013a2"
+    },
+    {
+      "path": "artifacts/resources/entry-text-owner-preflight-v2.json",
+      "sha256": "d8033dbce7f1a09c8f34e4882901da193c26a6c5825c39db1094a3d4aeb5a1e6"
+    },
+    {
+      "path": "artifacts/resources/entry-text-host-build-v27.json",
+      "sha256": "19a834845577b32f3a3fb9df3343de3130dce399072495cf5001a5431e094e88"
+    },
+    {
+      "path": "artifacts/resources/entry-text-repository-check-v1.json",
+      "sha256": "c833327de071a44490009d51f627b91ad4d0370093bedf043be125089a56e935"
+    },
+    {
+      "path": "artifacts/resources/entry-text-types-v2.json",
+      "sha256": "eacf21fdbdb4477416cdbc1ec936575dee893edd5f55e193386f88f20943e6a4"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/preparation-v1/pre-type-fix-source-snapshot/manifest.json",
+      "sha256": "54ce010824376ba7d6c8d7be3cead6454a06eb1ddaa55c293cb7d9433eb0101d"
+    },
+    {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-entry-readiness-v27.json",
+      "sha256": "343213473c970754a656bcd13f7811b1a34510424d5643d71fec9a791f176f62"
+    },
+    {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-entry-readiness-reproduced-v27.json",
+      "sha256": "6133ff4aa5cfc09bfb75da65da4733f4f2cedc642be83f0825930fa6681e9c65"
+    },
+    {
+      "path": "artifacts/native-chest-repair/owner-assessment-v1/report.json",
+      "sha256": "dfdb664f2dbe39b0b20dfa3bb0e291a0929f30cf32fa9d14c6df31e184444bd2"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/preparation-v1/protected.json",
+      "sha256": "9bc2c053be3708d6ce7c38cfad93cb49507a0cb201cb1d5644afda66a8610a35"
+    },
+    {
+      "path": "scripts/compare-entry-text-endings-v1.sh",
+      "sha256": "d23f42b8c301347348c12e4d391ed03b8702f99baed02ad5608ab14d1657955c"
+    },
+    {
+      "path": "src/spireshift/native_entry_text_inputs.py",
+      "sha256": "0fd05787cefe3f3b0728e80b3b6437e75ef7f2a723797ee92d751d4a0401c113"
+    },
+    {
+      "path": "src/spireshift/native_entry_text_audit.py",
+      "sha256": "c3c1fe866ce4617fe88637ceb1e5c173012e853264b5f7a133238b87290ba06d"
+    },
+    {
+      "path": "src/spireshift/native_entry_text_endings.py",
+      "sha256": "d1bf1e8c47a8a79f8413a80cf22b37b72bcb8af34ea866b89f47471f29fd9710"
+    },
+    {
+      "path": "tests/unit/test_native_entry_text.py",
+      "sha256": "e230153403e8017999db34e7a94d392bdca0048f9f4da8e4d6b0e033f8eab50b"
+    },
+    {
+      "path": "backend-patches/tutorial-entry-text-v1/Program.cs",
+      "sha256": "13c221693b7d95097f9ae4cb3344026b0f3325d8d43cd912aafba32126612da1"
+    },
+    {
+      "path": "backend-patches/tutorial-entry-text-v1/Probe.csproj",
+      "sha256": "54511cfc5d6c88eabbe60615476814416d041aa1cea1b2ca5b9e7e755018acf1"
+    },
+    {
+      "path": "backend-patches/tutorial-entry-text-v1/README.md",
+      "sha256": "b9423cc8c6c3aaaa1ff38ecea89d3d43ecc845bdd6aafadaadb4e706b70d025e"
+    },
+    {
+      "path": "patches/engine/sts2-cli-v0.111.0-entry-text-v56.patch",
+      "sha256": "aceac4d026fb5e406d2e8714b62ea7bcfbf9a525705b306a394aded1c6481d0d"
+    },
+    {
+      "path": "patches/engine/sts2-connector-v0.111.0-entry-readiness-v27.patch",
+      "sha256": "a7cc0a3a8d80045522db1c049f4ee2498f0423a456d83985711412f322f46d8e"
+    },
+    {
+      "path": "docs/native-tutorial-entry-text-repair.md",
+      "sha256": "53617dd2230561b475b0c6c7258cda896b8df24fb3c3625b765e0d02b42f0215"
+    }
+  ],
+  "report_id": "sha256:b03a3d877c9b3f6884481b20a885f81a46ba2b3324746d15c2662cf5fb07425f",
+  "saved_reconciliation": {
+    "current_input_and_choice_replays": 728,
+    "original_weights_and_all_Adam_unchanged": true,
+    "report_id": "sha256:26e12e49a8ef53375afb7fe2c398909fa4666baa39566f595d2ebbfbe24a67cd",
+    "verified_historical_deliveries": 728,
+    "wall_seconds": 91.8403349170112
+  },
+  "schema_version": "native-entry-text-preparation-evidence-v1",
+  "short_checks": {
+    "changed_localization_keys": [
+      "epochs.json/DEFECT7_EPOCH.description",
+      "events.json/AROMA_OF_CHAOS.pages.INITIAL.description",
+      "events.json/COLOSSAL_FLOWER.pages.INITIAL.description",
+      "events.json/CRYSTAL_SPHERE.banter.REVEAL_GOOD.2"
+    ],
+    "compiled_entry_vectors": 142,
+    "host_tests_passed": 221,
+    "localization_strings_checked": 6902,
+    "protected_prior_files_exact": 20380,
+    "report_id": "sha256:5fc3082c6d43818a78bfadb936b6f2b96430632b2cd0fbd8d4353eb898d73f71",
+    "saved_repaired_input_matches": true,
+    "text_edge_vectors": 18,
+    "unchanged_localization_strings": 6898,
+    "wall_seconds": 23.369630542001687
+  },
+  "status": "source_saved_repairs_qualified_owner_natural_panel_prepared",
+  "training_allowed": false
+}

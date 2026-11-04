@@ -1,0 +1,53 @@
+{
+  "activation_snapshots_with_zero_authority": 28,
+  "assessment": {
+    "path": "artifacts/native-systematic-comparison/owner-assessment-v2/report.json",
+    "sha256": "0138e36383871dfb024e7a6f1e2e93a0cd5781903b921c8a2475b1acf25136f0"
+  },
+  "assessment_resources": {
+    "path": "artifacts/native-systematic-comparison/owner-assessment-v1/resources.json",
+    "sha256": "0a92bdcd0f76bf0e35bcb4f4e66e7dd259fa815786ed091dba139018cb6fc238"
+  },
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "combined_scoped_verified_deliveries": 48,
+  "environment_id": "sha256:6758241eac863b1308148f82ecc3a0f9064f42d58505d143bd4a081f4b6869c2",
+  "frozen_game_archive_valid": true,
+  "full_game_playing_strength_evaluated": false,
+  "independently_verified_deliveries": 38,
+  "matching_states_including_final_successors": 23,
+  "new_games_in_assessment": 0,
+  "optimizer_updates": 0,
+  "original_weights_and_all_Adam_unchanged": true,
+  "owner_cpu_seconds": 119.46042796600003,
+  "owner_peak_resident_memory_bytes": 1234944000,
+  "owner_peak_storage_bytes": 2419908614,
+  "owner_resource_cap_hit": false,
+  "owner_resources": {
+    "path": "artifacts/resources/systematic-transitions-v1-attempt-1.json",
+    "sha256": "823c4e757d4156c491f18b9a3c8373c888d72aedec2305d28593ea4d8714a504"
+  },
+  "owner_wall_seconds": 226.8619777499698,
+  "prior_short_control_deliveries": 10,
+  "protected_prior_files_exact": 18832,
+  "qualified_scope": "declared_rest_Smith_repeated_rest_and_HappyFlower_counter_energy_transitions_only",
+  "raw_reconstruction_assessment": {
+    "path": "artifacts/native-systematic-comparison/owner-assessment-v1/report.json",
+    "sha256": "fcc22f179e77bbfc86e766361a70a9903370a065fdcfaedc13583012eaaa99bf"
+  },
+  "report_id": "sha256:e5e93525db642c5da3556898fbffdd57355cd040d241a97b281d4b33b8188daf",
+  "rerun_required": false,
+  "saved_assessment_wall_seconds": 17.12526933301706,
+  "schema_version": "native-systematic-owner-result-evidence-v1",
+  "selection_scope_note": "Smith exercises the derived public card_selection root. This does not automatically qualify every declared source UI selection variant.",
+  "source_panel_report": {
+    "path": "artifacts/native-systematic-comparison/owner-panel-v1/report.json",
+    "sha256": "7e24c96cb209cba77a0fe7a031de423970b6be2a65a7456bbd8830f985500e80"
+  },
+  "source_semantic_effects_report": {
+    "path": "artifacts/native-systematic-comparison/owner-panel-v1/semantic-effects-report.json",
+    "sha256": "08c465733d9b7de4687e5fe0f912a0163cdfc99e2a1249b80068b0988ac123cc"
+  },
+  "status": "completed_owner_panel_saved_only_verified",
+  "training_allowed": false
+}

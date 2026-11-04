@@ -1,0 +1,107 @@
+{
+  "schema_version": "native-card-star-cost-repair-v1",
+  "diagnosis": "Particle Wall has numeric 2 in hand and textual 2 in selector; scalar normalization previously followed entity join",
+  "scope": "compatibility_diagnostics_only",
+  "interrupted_prefix_review": {
+    "path": "artifacts/native-star-cost/development-v1/interrupted-review-v2.json",
+    "sha256": "44947bf60c91e94b97d8ab9bd44b9a8bf24a7dd9b2862f19f34c96749d43d698"
+  },
+  "historical_native_delivered_decisions": 96,
+  "historical_raw_observations": 97,
+  "historical_official_starts": 0,
+  "interrupted_seed_retried": false,
+  "interrupted_workspace_and_markers_preserved": true,
+  "source_tuple": {
+    "CLI": "v51",
+    "official_connector": "v20",
+    "worker": "v21",
+    "converter": "v14",
+    "layout": "v11",
+    "environment": {
+      "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v37.json",
+      "sha256": "93a6b986d7bded11fd1597468a90d27121bde5e30f6eb623929f01fd04510090"
+    }
+  },
+  "saved_audit": {
+    "path": "artifacts/native-selection-flows/star-cost-offline-v1/report.json",
+    "sha256": "93b76ed697bc4f0a994420efc7b3fed7deba3e194065c14669dc9d3d2c53532b"
+  },
+  "saved_frames": 4861,
+  "frozen_policy_probes": 9728,
+  "protected_files_unchanged": 11594,
+  "raw_frame_round_trip": {
+    "path": "artifacts/native-star-cost/development-v1/raw-frame-preservation.json",
+    "sha256": "6d13f2d63f22839cacd59b269242b2f56986bb8bc73ccd6c0cc350a02b245bbe"
+  },
+  "controls": {
+    "owned-relic-preview": {
+      "report": {
+        "path": "artifacts/native-selection-flows/star-cost-owned-relic-preview-control-v1/report.json",
+        "sha256": "9eb146ce7c331e8d25df62b5b766660048b9a56f00b7338031d8991090a25b39"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/star-cost-owned-relic-preview-control-v1/verification-v1/report.json",
+        "sha256": "26e6efc03632e3106b03b9c1b681a29f1261133cb05afece00360b1bede3c46e"
+      },
+      "matched_decisions": 8,
+      "verified_decisions": 16,
+      "wall_seconds": 47.54696083301678
+    },
+    "generated-card-choice": {
+      "report": {
+        "path": "artifacts/native-selection-flows/star-cost-generated-card-choice-control-v1/report.json",
+        "sha256": "7e76a26a02a6557654d925c1b21c0c9474c3c943702cc3976093505b867e19ce"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/star-cost-generated-card-choice-control-v1/verification-v1/report.json",
+        "sha256": "a95c14b5c208f8c9dbc3c873d36c8a85b4b9153e6835747fcc6c09b08cb4b788"
+      },
+      "matched_decisions": 8,
+      "verified_decisions": 16,
+      "wall_seconds": 49.79255437501706
+    },
+    "shop-card-reads": {
+      "report": {
+        "path": "artifacts/native-selection-flows/star-cost-shop-card-reads-control-v1/report.json",
+        "sha256": "c1a028f905031b8dcd0e4ffe187df13ff603fe396c210d678f7d4cbd48231e50"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/star-cost-shop-card-reads-control-v1/verification-v1/report.json",
+        "sha256": "17be04c867c05198c16b731e5424b4da9cd8e5438aaa7a97a5b349eb60b5ee6a"
+      },
+      "matched_decisions": 64,
+      "verified_decisions": 128,
+      "wall_seconds": 119.96190637513064
+    }
+  },
+  "native_star_cost_fixture": {
+    "path": "artifacts/native-star-cost/particle-wall-fixture-v2/report.json",
+    "sha256": "8f2bcf595b1347da42972f5570a573b0cf59eb8d259fd3279be701f39b6bba4c"
+  },
+  "native_fixture_scope": "privileged CLI v51 / worker v20; worker v21 changes potion labels only; no shipped-host fixture parity claim",
+  "development_failures_preserved": [
+    "read_only_review_v1_expected_exit1_mistakenly_required_clean_exit",
+    "native_fixture_v1_omitted_converter_acknowledgement"
+  ],
+  "targeted_Node_regressions": 22,
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "optimizer_updates": 0,
+  "game_apps_created": 0,
+  "full_game_strength_claim": false,
+  "exhaustive_mechanic_coverage": false,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "next_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-star-cost-canary-v1.json",
+    "sha256": "fd64be625128368c66ef0b1bbaa6550ea975ac76081b43658be39c589208278b"
+  },
+  "next_launch": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-star-cost-launch-v1.json",
+    "sha256": "c6f249b3d1ad83d6e7f57514151ba0e2b0ca201a49126d5de71c4e3ecd446976"
+  },
+  "next_owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-selection-flows-v10.sh",
+  "main_workspace_unstarted": true,
+  "repository_check_required_before_long_launch": true,
+  "report_id": "sha256:17f2bc46c7c39e04093c17bfd309f07e92d2083aceb33cc4cfe210c717d60a25"
+}

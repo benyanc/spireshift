@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-reward-glyphs-control-v1.json",
+    "sha256": "fe652cee158efea8f0084a8b858e98058ed25f553817f6ce390d3b49e247f3b3"
+  },
+  "wall_seconds": 900,
+  "cpu_seconds": 1800,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}
