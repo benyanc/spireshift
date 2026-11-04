@@ -1,4 +1,1103 @@
-## Current handoff — one model choice for a committed card answer
+## Current handoff — 256-update copy fitting prepared; owner run next
+
+See [the fitting-only preparation](native-varied-fitting-comparison.md) and
+[evidence](evidence/native-varied-fitting-comparison-v1.json). Original recipe,
+assessed bank, game/CLI56/Connector31/worker24/converter16/layout12/environment48
+and original full weights/Adam stay frozen.
+
+- [x] Prepare a separately pinned fitting-only launcher: exact assessed saved
+  bank, four copies × 64 updates/2,048 draws, 67 sealed units and final barrier.
+- [x] Verify actual saved-bank gradients on four disposable copies, a fresh-process
+  full-Adam resume and exact numerical reconstruction. Twenty diagnostic copy
+  updates and four reconstruction steps stay outside the unstarted main study.
+- [x] Pin 28,855 prior files and reject stale assessment, source/runtime drift,
+  withheld labels, larger work or automatic follow-up. Preserve clean seals and
+  stop on unfinished updates without replay.
+- [ ] Owner runs `bash scripts/fit-varied-teaching-v1.sh`, about 6–12 minutes;
+  30-minute/3,600-CPU-second/4-GB session. Fit only, freeze finals, then stop.
+- [ ] Independently assess all four finals/complete Adam and work before the six
+  fresh changed-checkpoint/mode official/native ending canaries.
+- [ ] Assess the subsequent withheld/fresh full-game and separate same-final
+  interference results. No automatic PPO, promotion, scaling or controller.
+
+## Historical handoff — varied lesson bank assessed; matched copy fitting next
+
+See [the assessed collection](native-varied-teaching-collection-result.md) and
+[evidence](evidence/native-varied-teaching-collection-result-v1.json). Keep game
+v0.111.0/41cef1ea, CLI56/Connector31/worker24/converter16/layout12/environment48,
+both originals and full Adam frozen. Preserve the completed collection; do not rerun it.
+
+- [x] Complete 12 clean natural source games and all 64 planned teacher proposals;
+  three selected improvements reproduce in their declared confirmations.
+- [x] Independently reconstruct all 6,738 actual deliveries and 79 sealed units,
+  including eight capped proposals. Rebuild all public roots, selection and the
+  exact public lesson bank; all frozen inputs/profile receipts verify.
+- [x] Admit 12 lessons from eight fitting worlds, both source players, eight enemy
+  compositions and 12 deck compositions; retain four disjoint withheld roots.
+  All three improvements are player-2-sourced floor-2 already-won fights,
+  with +1/+1/+5 HP. This is a modest local teacher signal; strength is unevaluated.
+- [ ] Next separately select the prepared matched fitting diagnostic: four copied
+  actors, 64 updates / 2,048 draws each, full warm Adam, exact pause/resume and
+  recorded compatibility checks. Give the owner one capped fitting-only command
+  after short checks; no original updates, best-epoch choice or automatic evaluation.
+- [ ] Freeze all finals, then separately run their six current-checkpoint/mode
+  official/native natural-ending canaries. Only then evaluate withheld fights
+  and the fresh full-game comparison / same-final interference ablation.
+- [ ] Assess terminal-victory outcomes with original denominators before further
+  learning or scaling. No automatic PPO, promotion or adaptive controller.
+
+## Historical handoff — learner guard connected; varied curriculum and interference test prepared
+
+See [the guarded study](native-varied-teaching.md) and
+[evidence](evidence/native-varied-teaching-v1.json). Game v0.111.0/41cef1ea and
+CLI56/Connector31/worker24/converter16/layout12/environment48 remain frozen.
+Both original numerical players and full Adam stay unchanged.
+
+- [x] Bind the verified two-ending result, exact original/imported full states,
+  execution runtime and complete paired input regressions to the new learner
+  guard. Admit only the declared copy-based diagnostic; changed finals/routed
+  modes need their own live canaries. No old guard or admission label is rewritten.
+- [x] Prepare eight fresh fitting/four withheld worlds, public outcome-blind
+  early/later root selection, fixed teacher proposals/confirmations and a
+  fitting-only diversity/improvement gate. Old finals/withheld/canary worlds
+  never supply labels. Collection stops for assessment before main fitting.
+- [x] Prepare matched 64-update reference/teacher copies per original, exact
+  warm-Adam resumption, every-checkpoint recorded checks and an all-finals
+  barrier. The separate shared-vs-original-noncombat routing test uses the
+  same teacher final and zero extra optimizer work.
+- [x] Qualify the exact-source native control on fresh VTC907/908 and independently
+  verify 11 seals, 361 raw deliveries and all 16 copied updates/Adam.
+  Both successful controls total 32 disposable-copy updates; originals/main stay
+  unchanged. The relaxed control quality gate is not main teacher admission.
+  Preserve failed controls, the initial test typing rejection and source snapshots.
+- [ ] Owner runs `bash scripts/prepare-varied-teaching-v1.sh`: collect/qualify
+  the new bank only, about 10–25 minutes with a 30-minute session cap. It is
+  unstarted; clean sealed boundaries resume, uncertain units do not retry.
+- [ ] Assess that teacher-quality result before main fitting. Later phases
+  separately require six fresh checkpoint/mode ending canaries, then withheld
+  fights and 16 fresh full-game worlds/four modes. No automatic follow-up,
+  bulk PPO, promotion, scaling or adaptive controller.
+
+## Historical handoff — two complete paired endings pass; return to learning preparation
+
+See [the assessed result](native-render-ending-result.md) and
+[evidence](evidence/native-render-ending-result-v1.json). E2E611/E2E612 pass for
+both original players on frozen CLI56 / Connector31 / worker24 / converter16 /
+layout12 / environment48. Every original full state/Adam and game input stays exact.
+
+- [x] Independently reconstruct all 584 actual deliveries: 166 per host for player 2,
+  126 for player 3. All 292 playable input/menu pairs and frozen choices/numerics
+  match in order, through genuine losses, full terminal facts/reads and both
+  official native summaries. Verify all resets with no caps or retries.
+- [x] Verify three naturally completed shop purchases and Blood Potion's actual
+  retained task completion in the shop; both hosts heal 36 to 52 HP. Preserve the
+  source/saved scope of Body Slam and Regal Pillow, absent from these worlds.
+- [x] Preserve all 21,356 prior files, original models/full Adam, frozen archive,
+  fixed idle app and the completed owner reports. Record this bounded workflow
+  milestone separately from global mechanics or playing-strength claims.
+- [ ] Bind the scoped assessed compatibility evidence to a new learner entry/
+  start-resume guard. Do not silently reuse stale historical admission labels.
+- [ ] Prepare the ordered varied fitting-only teaching curriculum and separate
+  shared-policy-interference comparison, with original/reference controls,
+  matched work, prospective splits and held-out worlds excluded from fitting.
+  Reuse the completed sibling card-zone audit; avoid repeated unchanged PPO.
+- [ ] Validate changed checkpoints and declare fresh original/trained official
+  evaluation before promotion/scaling. No training, broad live admission,
+  controller or next experiment follows automatically. No new long command is
+  prepared; do not rerun E2E611/E2E612 or the completed wrapper.
+
+## Historical handoff — card rendering and rest text repaired; fresh endings pending
+
+See [the repair and owner command](native-card-rendering-repair.md) and
+[evidence](evidence/native-card-rendering-repair-v1.json). The original game,
+CLI56 / worker24 / converter16 / layout12 and both full original players/Adam
+remain exact. New official adapter is Connector31 / environment48.
+
+- [x] Audit all 17 shared card-export calls. Require explicit display context;
+  eight visible-widget callers use their actual NCard.DisplayingPile. Legacy
+  helpers also require a context; no shared Hand default remains.
+- [x] Share LF-to-space handling across card/rest descriptions while preserving
+  every other codepoint, amount, order and glyph. Keep exact input comparison.
+- [x] Pass 265 Host tests, 112 native formatter vectors, eight compiled text
+  vectors, portable checks and two reproducible source builds. Delivery and
+  task-completion code remains unchanged; no new live support claim yet.
+- [x] Reconstruct all 781 historical actual deliveries. Diagnostic repaired
+  inputs and choices match through player2 input87 and all 247 player3 choices.
+  Stop player2 before the changed choice is committed; its later old suffix is
+  not a repaired game. Preserve old blocked reports and all 21,356 prior files.
+- [ ] Owner runs `bash scripts/compare-render-endings-v1.sh`: fresh natural
+  E2E611/E2E612, about 5–15 minutes, unchanged 128-CPU-second/384-choice host guard,
+  ten-minute pairs and 40-minute outer cap. Prepared; unstarted.
+- [ ] Assess exact inputs/endings/summaries/task proofs/resets before broader
+  admission and fitting-only teaching/interference. Source inventory and
+  formatter vectors do not prove all content interactions. No automatic
+  training, promotion, controller or next experiment.
+
+## Historical handoff — shop tasks verify; two text projection gaps remain
+
+See [the completed ending assessment](native-shop-ending-result.md) and
+[evidence](evidence/native-shop-ending-result-v1.json). E2E609/E2E610 both remain
+blocked. All four real losses, both official native summaries and clean resets
+verify. The original game and tuple47 stay unchanged; no resource cap is hit.
+
+- [x] Independently reconstruct all 781 actual deliveries: p2 144 native/143
+  official; p3 247 per host. Preserve complete original traces and comparisons.
+- [x] Isolate p2 input 87 after Attack Potion: generated Body Slam has a combat
+  hint only in the Connector. Native widget and CLI use display pile None;
+  Connector implicitly uses shared Hand default. The same original player
+  chooses Body Slam versus Skip with the same draw key, then play diverges.
+  Do not add the erroneous hint to CLI or realign the later suffix.
+- [x] Isolate p3's only differing input, 168: newline versus space before
+  Regal Pillow's bonus. Both choose Rest and heal 8 to 47 HP; all 247 action
+  indices and standalone terminal facts/reads match diagnostically.
+- [x] Verify two natural card-purchase task completions at p3 inputs 29/30.
+  No locked option, Pendulum offer or repaired noncombat use is exercised;
+  retain prior focused qualification without expanding its coverage.
+- [x] Verify original full weights/Adam, frozen archive, idle app and all
+  21,031 prior protected files. Saved-only assessment passes in 56.03 seconds;
+  no game, action or completed control is replayed.
+- [ ] Audit every card-export caller's native rendering context and require
+  explicit display-pile binding. Cover conditional generated/simple/deck/shop/
+  pile/hand/upgrade descriptions through saved/source cases.
+- [ ] Standardize visible text line-break handling for rest descriptions while
+  preserving words, amounts, order and glyphs. Keep exact input comparison.
+- [ ] Prepare a new finite owner command only after those repairs qualify.
+  No replacement long command exists yet; do not rerun the completed launcher
+  or E2E609/E2E610. No automatic training, promotion or controller follows.
+
+## Historical handoff — event/shop facts repaired; native shop tasks guarded
+
+See [the repairs and owner command](native-shop-readiness-repair.md) and
+[evidence](evidence/native-shop-readiness-repair-v1.json). The original game,
+CLI56 / worker24 / converter16 / layout12 and full original players/Adam remain
+exact. Official adapter is Connector30 / environment47.
+
+- [x] Export event enablement from both the button and native option lock;
+  keep surface/referent/action semantics consistent.
+- [x] Split shop and owned-inventory relic rendering. Remove shop-only counter
+  leakage while retaining real owned counters, zero values and other facts.
+- [x] Retain the actual native wrapper task for card/relic/potion purchases
+  and concrete card removal, including awaited final hooks. Gate ordinary and
+  atomic authority until completion; preserve exact task-owned child overlays
+  across awaits. Faults, unknown delivery and foreign identity stay blocked.
+- [x] Pass 257 Host tests, 36 compiled fact vectors, eight proof tests, four
+  script-safety tests and portable checks. Incremental source inventory covers
+  all 158 Connector delivery methods, including the one new tracker entry.
+- [x] Independently reconstruct 486 old actual deliveries and replay 486
+  current inputs/choices in 62.47 seconds. Compiled diagnostic fixes resolve
+  all seven differing inputs without changing historical blocked reports.
+- [x] Fresh paired removal confirmation and cancellation pass all 12 deliveries
+  and eight states with exact native task/child/completion proof and clean resets.
+  Preserve rejected SH0P801, unattempted SH0P802 and initial saved-verifier log
+  collision. No old world/action/control is replayed.
+- [x] Verify all 21,031 prior files, frozen archive, idle working app and original
+  full weights/Adam. Preserve preparation failures; the accidentally addressed
+  old build recipe is restored byte for byte and the new recipe is separate.
+- [ ] Owner runs `bash scripts/compare-shop-endings-v1.sh`: fresh natural
+  E2E609/E2E610, about 5–15 minutes, same 128-CPU-second/384-choice host guard,
+  ten-minute pairs and 40-minute outer cap. This panel remains unstarted.
+- [ ] Assess the integration result before broader admission and returning to
+  fitting-only teaching/interference. Awaited shop-task completion is guarded;
+  source inventory and passing controls do not prove every background callback
+  or content interaction. No automatic training, promotion or controller.
+
+## Historical handoff — natural endings complete; two Connector facts still differ
+
+See [the completed lifecycle ending assessment](native-action-lifecycle-ending-result.md)
+and [evidence](evidence/native-action-lifecycle-ending-result-v1.json). E2E607/E2E608
+both remain blocked by earlier public-input differences despite matching standalone
+terminal state/reads, all four natural losses and both official native summaries.
+The frozen game and CLI56 / Connector29 / worker24 / converter16 / layout12 remain exact.
+
+- [x] Independently reconstruct all 486 actual deliveries: 106 per host for
+  player 2 and 137 per host for player 3. All legal menus and selected candidates
+  agree diagnostically. No realignment, game replay, optimizer update or cap.
+- [x] Isolate player 2's sole differing input, index 47: locked Self-Help Book
+  option exported as enabled by the Connector despite its native lock. Both
+  hosts already exclude that option from legal actions.
+- [x] Isolate player 3's six differing inputs, 31–36: unpurchased shop Pendulum
+  has no native counter versus official zero. Owned relic facts match; the shared
+  Connector exporter applies inventory-counter visibility to a merchant icon.
+- [x] Keep potion evidence precise: no repaired noncombat use is exercised.
+  Player 3 uses Dexterity Potion in combat. Earlier focused noncombat use/discard
+  controls keep their scope; this panel supplies no new noncombat-use proof.
+- [x] Verify original weights/full Adam, protected source/evidence, frozen master
+  and restored idle app. Preserve the first saved-assessment report-format check
+  failure and corrected saved-only assessment; no original report is rewritten.
+- [ ] Repair public event enablement and shop relic counter visibility using
+  saved/source regressions. Check surface/referent/menu consistency and rendering
+  context while retaining legitimate owned counters. No game-rule change.
+- [ ] Resolve the separate shop background-task completion qualification risk
+  before broader admission. Source path inventory is not proof of every public
+  semantic fact or delayed hook.
+- [ ] Prepare any new finite owner command only after those repairs qualify.
+  No new long command exists yet; do not rerun the completed launcher or worlds.
+  Compatibility, training, promotion and controller admission remain ungranted.
+
+## Historical handoff — action lifecycles audited; potion completion qualified
+
+See [the lifecycle audit and repair](action-lifecycle-audit-and-potion-completion.md)
+and [evidence](evidence/action-lifecycle-audit-and-potion-completion-v1.json).
+Original game v0.111.0 / 41cef1ea and CLI56 / worker24 / converter16 / layout12
+remain exact. Final official adapter is Connector29, environment46.
+
+- [x] Compiler-derived audit of all 17 original and 26 current CLI gameplay
+  commands, control/support mutation sites and 144/156/157 original/previous/current
+  Connector delivery methods. Keep source review, tested effects and unknown
+  interactions separate. Unknown action/provider additions invalidate coverage.
+- [x] Attribute original CLI fallback discards/forced recovery separately from
+  our Connector's enqueue-only use and premature discard completion.
+- [x] Capture exact native potion use identity and wait for terminal task proof;
+  preserve actual required screen/hand selectors and deferred choices. Pending
+  discard also requires actual completion/cancellation, not bottle removal.
+- [x] Pass 244 compiled Host tests, ten Python and nine proof tests. Fresh
+  postcombat use/discard controls match seven states and all ten deliveries:
+  HP 54 to 70 for use, HP 54 unchanged for discard. Native effect completion proof
+  and zero-authority unfinished-heal observations verify independently.
+- [x] Preserve the collector exact-eight footer rejection and native-only wrong
+  discard-verb attempt. No old world/action is retried; retired markers remain.
+  The original completed use is independently verified from saved captures.
+- [x] Reproduce Connector29 twice and reconcile all 728 earlier deliveries and
+  current inputs/menus/original-player choices under environment46 in 78.87 seconds.
+  All 20,590 prior files, frozen master, restored app and full weights/Adam exact.
+- [ ] Owner runs `bash scripts/compare-action-lifecycle-endings-v1.sh`: fresh
+  E2E607/E2E608, about 5–15 minutes, unchanged 128-CPU-second/384-choice host guard,
+  ten-minute pairs and 40-minute outer cap. Plan remains unstarted.
+- [ ] Resolve the audit's explicit shop background-task qualification risk and
+  assess fresh integration evidence before broader admission. Natural-game passes
+  alone do not prove every delayed pickup or UI callback. No automatic learning,
+  promotion, controller, exhaustive matrix or strength claim follows.
+
+## Historical handoff — one matching ending; noncombat potion completion remains
+
+See [the completed assessment](native-entry-text-ending-result.md) and
+[evidence](evidence/native-entry-text-ending-result-v1.json). E2E606 passes the
+complete declared workflow; E2E605 remains blocked. Original game and tuple44
+remain exact. Do not rerun the completed launcher or either world/action.
+
+- [x] Independently reconstruct all 620 actual deliveries: 104 per host for
+  player 2, 206 per host for player 3. All four real endings and both official
+  Continue/summary proofs verify, with clean shutdown/app/profile/archive resets.
+- [x] Confirm live tutorial readiness: both map tutorials dismiss once without
+  rejection/retry; all 45 settling captures publish zero mutation actions.
+  Neither case reaches Aroma or a chest; do not expand their live coverage.
+- [x] Isolate the sole player-2 input mismatch: after Blood Potion use at index
+  42, inputs 43/44 expose native HP 70 versus official 54. Bottle is gone in both;
+  official HP reaches 70 at index 45. All menus and selected indices agree, but
+  do not realign later states or relabel this pair as a pass.
+- [x] Trace source ordering: noncombat use acknowledges enqueueing before its
+  asynchronous effect finishes. Bottle removal precedes hooks/presentation/effect;
+  the heal amount agrees. Existing pending tracking covers discards, not uses.
+- [x] Saved-only assessment passes in 44.70 seconds. All original weights/full
+  Adam, frozen game, restored app and 20,569 prior files remain exact. Preserve
+  the corrected offline source probe's initial failure. No new game or update.
+- [ ] Repair/qualify actual noncombat potion-use completion readiness before
+  another successor decision, preserving any effect-owned selector and discard
+  behavior. Add saved/source and focused fresh transition controls first.
+- [ ] Freeze any new finite owner proposal only after those checks. No next
+  long command exists yet. No hardcoded healing/delay, historical retry, training,
+  promotion, controller, exhaustive matrix or strength claim follows this result.
+
+## Historical handoff — tutorial entry and native text repaired; fresh endings prepared
+
+See [the repair and owner command](native-tutorial-entry-text-repair.md) and
+[evidence](evidence/native-tutorial-entry-text-repair-v1.json). Original game
+v0.111.0 / 41cef1ea stays frozen. New adapter tuple: CLI56 / Connector27 /
+worker24 / converter16 / layout12 / environment44.
+
+- [x] Withhold map-tutorial mutation/potion/atomic authority during native combat
+  entry, then recheck before its first click. Preserve setup tutorials, an open
+  map retaining a completed room, and modal-disabled public play permission.
+- [x] Repair numeric rainbow parameters only in the native text formatter.
+  Check all 6,902 frozen English strings: four supported formatting fixes and
+  6,898 unchanged outputs. Preserve glyphs, numbers and unfamiliar facts.
+- [x] Pass all 221 compiled Host tests, 142 compiled readiness vectors and
+  18 text edge cases. The saved Aroma body/full diagnostic public input matches
+  official exactly. Preserve E2E603's rejected receipt and counter facts.
+- [x] Reproduce native/Connector builds independently. Preserve the initial
+  development artifact identity rejection; canonical fresh source builds pass.
+  Source/saved qualification takes 23.37 seconds and launches no games.
+- [x] Independently verify all 728 historical deliveries and replay all 728
+  current inputs/menus and original-player choices under environment44 in
+  91.84 seconds. Full original weights/Adam and 20,380 prior files remain exact.
+- [x] Freeze one fresh finite proposal using E2E605/E2E606. The existing
+  genuine-ending, receipt, full-public-state, summary and shutdown/reset guards
+  remain exact. Both historical pairs stay blocked; no old seed/action is retried.
+- [ ] Owner runs `bash scripts/compare-entry-text-endings-v1.sh`, about
+  5–15 minutes, ten minutes per pair, 128 gameplay CPU seconds and 384 choices
+  per host; 40-minute outer cap. No fixture saves or forced outcomes. Gameplay
+  remains unstarted; source/saved diagnostics do not grant live qualification.
+- [ ] Assess the fresh result before finishing finite compatibility and
+  returning to varied fitting-only teaching and separate interference work.
+  No automatic training, promotion, controller or exhaustive matrix follows.
+
+## Historical handoff — ending panel assessed; tutorial settling and text rendering remain
+
+See [the completed result](native-chest-ending-result.md) and
+[evidence](evidence/native-chest-ending-result-v1.json). The owner ran both
+E2E603/E2E604 pairs; both remain blocked. No outer or gameplay compute cap occurs.
+
+- [x] Independently reconstruct all 421 acknowledged gameplay deliveries in
+  27.47 seconds, including an explicit diagnostic copy of the stopped 36-choice
+  official prefix. All source/raw reports, 20,108 protected prior files, original
+  full players/Adam, frozen archive and restored app remain exact.
+- [x] Confirm the summary fix: player 3 reaches a real loss, Continue and native
+  summary in 129 choices / 77.15 gameplay CPU seconds. The full retained proof,
+  native schema, persistent state and summary reads verify independently.
+- [x] Identify player 2's actual rejection: `map_select_ftue` Got it!,
+  `not_delivered / stale_snapshot` while underlying context changes unknown to
+  combat and Ornamental Fan's counter becomes visible at 2. Both tutorial/control
+  remain the same. No resubmission; all 36 preceding policy inputs match.
+- [x] Identify player 3's first input difference at index 45: native Aroma of Chaos
+  body retains `[rainbow freq=0.3 sat=0.8 val=1]`; official rendered words omit
+  that display tag. Menu keys agree. Do not discard or relabel the raw mismatch.
+- [ ] Repair/qualify tutorial authority during incomplete combat entry, using
+  saved transitions and native source predicates before the first submission.
+- [ ] Inventory supported parameterized text tags and repair native rendering,
+  preserving glyphs, amounts and unknown facts; add source/saved regressions.
+- [ ] Freeze any required new short controls and a finite owner proposal after
+  those repairs. No next owner command is prepared. Do not retry E2E603/E2E604,
+  raise the budget, realign later divergent states or repeat the chest fixtures.
+- [ ] On the required scoped workflow pass and saved assessment, finish finite
+  compatibility and return to varied fitting-only teaching/interference work.
+  No automatic learning, promotion, controller or exhaustive content matrix.
+
+## Historical handoff — chest repair qualified; replacement ending panel prepared
+
+See [the chest repair](native-chest-lifecycle-repair.md) and its
+[evidence](evidence/native-chest-lifecycle-repair-v1.json). Preserve all earlier
+blocked results and worlds. The game remains v0.111.0 / 41cef1ea.
+
+- [x] Qualify CLI55 complete chest exports and worker24 public lifecycle/actions,
+  Connector26 stable Take/Skip authority and delivery recheck, converter16 chest
+  pre-sampling guard and unchanged layout12 in shared environment43.
+- [x] Both short Take/Skip pairs match all seven complete states, including final
+  successors. All ten deliveries reconstruct. The selected relic is added once;
+  Skip preserves persistent facts/deck. All worker/app/profile/archive resets pass.
+- [x] Saved assessment checks 12 partial-choice captures with zero actions,
+  both actual complete Take/Skip menus, rejection of the historical premature
+  menu and a corrupted receipt copy. Preserve the initial zero-action fixture
+  wiring failure and its corrected fresh-seed native check.
+- [x] Independently verify all 728 prior deliveries and replay all 728 current
+  inputs/menus and unchanged-player choices under environment43, with exact full
+  Adam. Verify all 20,108 protected prior files and unchanged original game.
+- [x] Bind the corrected native summary field and proof-before-validation
+  collector, strict saved proof verification, 128 gameplay CPU seconds and
+  genuine-ending requirement into a fresh finite owner plan.
+- [ ] Owner runs `bash scripts/compare-chest-endings-v1.sh`, about 5–15 minutes:
+  fresh E2E603/E2E604, one pair per original player, ten minutes per pair and a
+  40-minute outer cap. The plan is preflighted and gameplay remains unstarted.
+  Long jobs stay owner-run; no fixture save, forced outcome or historical retry.
+- [ ] Assess exact playable prefixes, both native endings, all public game facts,
+  receipts, summary proof and clean resets. On the scoped pass, return to varied
+  fitting-only teaching and the separate interference test. No automatic
+  training/promotion/controller or exhaustive content matrix follows.
+
+## Historical handoff — natural ending panel blocked; chest and summary gaps isolated
+
+See [the assessed result](native-e2e-ending-qualification.md) and
+[result evidence](evidence/native-e2e-owner-result-v1.json). Both completed pairs
+remain in the denominator. Do not rerun E2E601/E2E602 or their historical launcher.
+
+- [x] Inspect both first divergences: closed treasure chest at inputs 122/44
+  (zero-based). Different action/owner shapes, relic details and delayed official
+  Skip matter. In E2E601 native skips and official takes Venerable Tea Set; later
+  traces cannot be realigned to claim parity.
+- [x] Reconstruct all 747 acknowledged deliveries from raw captures in a separate
+  saved-only assessment, including explicitly diagnostic official prefixes.
+  Preserve original source/recipes/limits, all prior evidence and full Adam.
+- [x] Identify E2E601's 128-CPU-second official gameplay guard as incomplete,
+  with no outer resource cap, and E2E602's real native summary as a verifier
+  rejection (`total_floor` versus actual `floor_reached`). All resets pass.
+- [x] Prepare separate summary helper/collector v2 with the actual field and
+  full proof journalling before validation; 16 regressions pass. Keep old files
+  frozen. The old missing summary-read proof is not invented or retrofitted.
+- [ ] Repair/qualify treasure lifecycle projection, full relic facts and stable
+  Skip authority with targeted source/saved/effect checks before further games.
+- [ ] Bind corrected summary collection and chest handling in a new frozen tuple;
+  retain 128 gameplay CPU seconds. No replacement owner command is prepared yet.
+  Do not repeat failed worlds or raise the budget to complete these cases.
+- [ ] After a finite equal-input/ending/summary check passes and is assessed,
+  finish compatibility and return to varied fitting-only teaching and the separate
+  interference comparison. No exhaustive content matrix or automatic training.
+
+## Historical handoff — saved evidence reconciled; natural ending panel prepared
+
+See [the finite end-to-end plan](native-e2e-ending-qualification.md) and
+[preparation evidence](evidence/native-e2e-preparation-v1.json). All production
+components remain frozen at game v0.111.0 / CLI54 / Connector25 / worker23 /
+converter15 / layout12 / environment42.
+
+- [x] Independently reverify the earlier 728 deliveries and reproduce all 728
+  current inputs/menus, sampled choices, draws, log probabilities and values
+  with exact original numerical players/Adam. The final saved-only pass takes
+  75.94 seconds. No new games or updates occur.
+- [x] Verify the narrow source delta: 72 production Connector files unchanged;
+  only the qualified counter guard/wiring differ. Layout changes are confined
+  to rest; converter changes to its layout import. Preserve original effect
+  provenance and the old final-uncaptured-successor limit.
+- [x] Add/test a genuine-ending requirement, strict typed public comparison,
+  final-at-choice-limit capture, independent receipts and official Continue /
+  summary proof. Limits never manufacture losses or trigger action retries.
+- [ ] Owner runs `bash scripts/compare-e2e-endings-v1.sh`, about 5–15 minutes:
+  two natural pairs, one per original player on fresh worlds E2E601/E2E602.
+  Ten minutes per pair, 128 gameplay CPU seconds and 384-choice guard per host;
+  40-minute outer cap includes exact repository checks/raw verification.
+  The plan is unstarted, uses one fixed app and no fixture saves/forced outcomes.
+- [ ] Assess matching playable states, explicit ending facts, all receipts and
+  summary/reset evidence. On that scoped pass, finish compatibility and prepare
+  varied fitting-only lessons plus the separate interference check. Avoid new
+  exhaustive matrices or unchanged reruns. No training/promotion is automatic.
+
+## Historical handoff — systematic transition panel completed and verified
+
+All four owner pairs pass in 3m47s under unchanged game v0.111.0, CLI54 /
+Connector25 / worker23 / converter15 / layout12 / environment42. See
+[the completed assessment](native-systematic-comparison.md) and
+[owner-result evidence](evidence/native-systematic-owner-result-v1.json).
+
+- [x] Independently reconstruct all 38 host deliveries and 23 matched states,
+  including every final successor, in a 17.13-second saved-only assessment.
+- [x] Verify Smith upgrades the selected card without changing deck size,
+  repeated healing/Smith/Proceed effects, and two Happy Flower cycles from
+  each saved starting value. All 28 activation snapshots have zero actions.
+- [x] Verify uncapped execution, clean app/profile/archive resets, the frozen
+  game and all 18,832 protected prior files/full original players/Adam.
+  Keep every earlier failure unchanged; no new game or optimizer update occurs
+  in assessment. These are privileged fixtures and no strength evaluation.
+- [x] Update coverage with the observed atomic Smith card_selection root;
+  leave other source UI selection variants and untested effects explicit.
+- [ ] Reconcile previously valid source/saved compatibility evidence with the
+  current tuple, then define one finite end-to-end/ending qualification for
+  actual remaining gaps. Reuse passed evidence and targeted fixtures; the
+  completed systematic panel needs no rerun or larger unchanged sweep.
+- [ ] After the required compatibility gate, prepare varied fitting-only
+  teaching and the separate interference comparison. Preserve the completed
+  sibling card-zone audit. Training, broader admission, promotion and adaptive
+  readiness remain ungranted; no new stage or owner command is frozen yet.
+
+## Historical handoff — systematic comparison short checks passed
+
+The frozen game and CLI54 remain unchanged. Official Connector25 / converter15 /
+layout12 / shared environment42 fix rest aliases and wait for Happy Flower's
+native activation display to settle. See [the systematic suite](native-systematic-comparison.md)
+and [evidence](evidence/native-systematic-comparison-v1.json).
+
+- [x] Inventory 24 surfaces and 193 compiled connector records / 1,135 properties,
+  including body properties and nullable declarations. Keep inventory separate
+  from paired semantics, live effects and remaining coverage.
+- [x] Pass all 6,818 saved public frames, 116 generated comparisons, 38 original
+  player probes, 199 connector tests and two reproducible host builds.
+- [x] Match Rest/Proceed healing and map departure and Happy Flower's full cycle
+  and energy effect, including both final successors. All ten actual deliveries
+  independently reconstruct. Five actual counter-3 frames have zero authority.
+- [x] Reject historical premature counter authority and a corrupted actual
+  receipt without new games. Preserve failed development attempts and every
+  prior source/result/model/full Adam; no training or app copies occur.
+- [ ] Owner runs `bash scripts/compare-systematic-compatibility-v1.sh`, about
+  5–12 minutes, four targeted save-based pairs with a 30-minute outer cap.
+  It adds Smith, repeated rest choices and two complete Happy Flower cycles
+  from different saved starting values. The fixed app and original game stay
+  frozen. Uncertain/interrupted attempts are never retried. The panel is unstarted.
+- [ ] Assess that result before any further compatibility admission or varied
+  fitting-only teaching and interference comparison. No ordinary full-game
+  strength, broad ending parity, training, promotion or adaptive readiness is
+  granted by these diagnostics. Retain the completed sibling card-zone audit.
+
+## Historical handoff — broader panel assessed; counter and rest gaps remained
+
+The owner completed all four pairs/eight starts on 2026-11-02 in 999.55 outer wall
+seconds, without a resource cap. See [the assessed result](native-reward-map-owner.md)
+and [evidence](evidence/native-broader-compatibility-result-v1.json). The completed
+v1 command is historical; no unchanged rerun or new game follows automatically.
+
+- [x] Confirm both player-3 pairs match all 128 complete input/menu observations
+  per host. Player 2/world417 matches 11 before Happy Flower counter 0 versus 3;
+  world418 matches 112 before rest-site role/enablement/exit field differences.
+  Complete menu keys agree at both first differences. Preserve all later divergent
+  traces without treating them as matched effects.
+- [x] Identify the stopped official action: world417/player2 has 72 completed
+  acknowledgements, then Play Evil Eye returns not_delivered / stale_snapshot.
+  The returned snapshot's sole non-transport change is Happy Flower counter 3
+  to 0. All eight game/app/profile/archive shutdown/reset checks pass. Preserve
+  this attempt without retry; do not conflate it with the old enemy-phase stall.
+- [x] Explain raw-reconstruction=false: the coordinator's all-host delivery gate
+  skipped its verifier. Preserve that original report. A separate saved-only
+  assessment independently rebuilds 852 deliveries across seven completed host
+  paths and 72 acknowledged deliveries in a declared diagnostic-only partial
+  prefix, excluding rejected choice 73. Total 924 verify in 24.86 seconds, zero
+  games/updates; every original journal, model/full Adam and source hash is exact.
+- [x] Retain the isolated sibling actor card-zone/exhaustion audit: 48 controlled
+  pairs / 96 actual-player comparisons, all distinctions preserved, 20 tests pass.
+  It changed no active-run file and grants no training/native-effect admission.
+- [ ] Inspect the native/official Happy Flower public counter source and settling
+  lifecycle. Preserve actual amounts; a blind 0/3 alias or dropped counter is not
+  a repair. Source-level cause and a qualified correction remain open.
+- [ ] Repair exact rest-site option role, enabled/is_enabled and can_leave/
+  can_proceed aliases with preserved current authority, false values, unfamiliar
+  facts and raw action bindings. Add targeted saved/source/effect checks.
+- [ ] Only after targeted qualification, freeze a new bounded owner comparison.
+  No next command is frozen yet; do not replay world417/player2's stopped attempt
+  or repeat a larger unchanged panel. Broader compatibility and ending parity
+  remain unqualified; no training, promotion or adaptive controller follows.
+- [ ] After compatibility qualifies, propose varied fitting-only teacher/student
+  lessons with matched original/reference controls and a separate interference
+  comparison. Preserve the completed encoder audit instead of rerunning it.
+
+## Historical handoff — same-build broader canary prepared; owner run next
+
+The owner requested this finite broader check on 2026-11-02. See [the current
+guide](native-reward-map-owner.md) and [preparation evidence](evidence/native-broader-compatibility-v1.json).
+The completed v15 panel and all older failures remain unchanged.
+
+- [x] Freeze two fresh worlds, 417/418, both full original players and four
+  paired prefixes under exactly CLI54 / official24 / worker23 / converter14 /
+  layout11 / shared environment41. Check at most 128 choices per host or an
+  actual ending. No game binary, adapter, numerical weight or Adam state changes.
+- [x] Reuse the qualified frozen live driver and per-choice verifier. Add source-
+  and checkpoint-bound orchestration, no-marker refusal for an open game, sealed
+  evidence reuse after a clean pause and refusal to retry uncertain attempts.
+- [x] Pass 22 focused regressions, strict types/lint/format and shell syntax.
+  Final-source preflight passes in 10.19 seconds; all 728 saved v15 deliveries
+  pass the new validation/coverage code in 1.05 seconds, with nine observed decision
+  families and no genuine endings. These short checks launch zero games.
+- [x] Scan 909 prior configuration/manifest files and 7,415 canonical seed names;
+  select no outcome-dependent worlds. Protect all 1,519 current dependency/evidence
+  files, both full originals and the completed v15 pass. Preserve the earlier
+  unstarted coordinator preparation/preflight snapshot separately.
+- [ ] Owner runs `bash scripts/compare-broader-compatibility-v1.sh`, expected
+  20–35 minutes, one fixed app, four serial pairs and a 90-minute outer cap.
+  Exact repository checks and saved reconstruction are included. Both long-run
+  workspaces remain unstarted; no fresh stage follows automatically.
+- [ ] Assess complete inputs/menus, actual checkpoint delivery, matched successor
+  observations between decisions and reported family/transition/ending coverage.
+  Do not claim unobserved endings or the final uncaptured successor. Ordinary
+  losses can qualify ending controls; this is not a playing-strength evaluation.
+  Preserve any enemy-phase stall without replaying world415 or uncertain actions.
+- [ ] After required compatibility scopes qualify, resume the saved actor
+  card-zone/exhaustion audit, varied fitting-only lessons and a separate
+  shared-policy-interference comparison. No training, promotion or adaptive
+  controller is authorized by this diagnostic alone.
+
+Final repository/source-check receipts are recorded after freezing all files in
+`artifacts/native-broader-compatibility/preparation-v1/final-handoff-v1.json`.
+
+## Historical handoff — four targeted controls pass; broader qualification next
+
+The owner completed v15 on 2026-11-02. See [the assessed result](native-reward-map-owner.md)
+and [its evidence](evidence/native-reward-map-panel-result-v1.json). Preserve the
+earlier blocked v14 result, all uncertain markers and both full original players/Adam.
+
+- [x] Pass all four controls under unchanged CLI54 / official24 / worker23 /
+  converter14 / layout11 / shared environment41: 57/77/118/112 complete matching
+  choices per host, 364 decision pairs and 728 verified host deliveries. All
+  eight starts reach their targets and restore the app/profile/archive cleanly.
+- [x] Recheck 337 source and 1,510 evidence files, all child identities, exact
+  verifier schemas/hashes/counts and successful uncapped verification receipts.
+  Saved-only assessment takes 18.05 seconds; no new games or updates occur.
+- [x] Account for the whole owner run: 932.78 outer wall seconds (15.55 minutes),
+  390.75 CPU seconds, 988,168,192 bytes peak RAM and 2,455,195,574 bytes final
+  storage including the shared app. No cap, app copy or optimizer update occurs.
+- [x] Keep scope explicit: the fresh world416 selector prefix completes all
+  112 choices per host; it does not establish the cause of world415's old
+  enemy-phase stall. That uncertain action/seed and the scripted world412 potion
+  replay are not repeated. Broader compatibility and playing strength remain
+  separately unqualified. The completed v15 panel needs no rerun.
+- [ ] Prepare a separately frozen finite broader compatibility proposal under
+  this same tuple, covering representative public decisions/successor effects and
+  genuine ending controls, with fresh worlds, bounded owner-run work and exact
+  new batch/resume gate bindings. Reuse qualified evidence; do not require every
+  content combination. No broader plan or next owner command is frozen yet.
+- [ ] After the required compatibility scopes qualify, use saved public records
+  for the actual actor's card-zone/exhaustion distinction audit. Then propose
+  varied fitting-only teaching with matched original/reference controls and a
+  separate shared-policy-interference comparison. Fresh full-game terminal wins
+  at equal whole-run compute remain primary; no new training, promotion, larger
+  unchanged experiment or adaptive controller follows automatically.
+
+## Historical handoff — qualify the reward/map ownership correction
+
+See [the result and correction](native-reward-map-owner.md). The owner finished
+the complete v14 panel; it did not hit a resource cap. Preserve its completed
+negative result, all earlier markers and both original full players/all Adam.
+
+- [x] Confirm the three current-source passes: reward glyphs 57, status titles
+  77 and modified deck 118 complete matching choices per host, with all 504
+  deliveries independently verified and clean app/profile/archive restoration.
+  The map-travel guard passes the earlier modified-deck regression.
+- [x] Reconstruct the fourth native prefix's 112 choices and the official host's
+  47 acknowledged choices before the first difference. After reward Continue,
+  both hosts show the map and discard the same potion. CLI then reopens 11 skipped
+  Gold; official stays on the map. Later divergent states are not matched evidence.
+- [x] Implement CLI v54 presentation ownership: retain the exact dismissed native
+  RewardsSet behind the open map, while allowing genuinely new reward/card owners
+  to appear. Clear presentation ownership on room travel/reset. Never remove or
+  claim rewards to simulate UI closure; reject stale background reward actions.
+- [x] Reproduce both source builds independently, with the actual game DLL exact.
+  Eight executable ownership controls pass, including equal-valued distinct reward
+  owners and nested/new owners. Four isolated native fixtures reproduce the old
+  bug for both discard and AnyTime use, and verify both repaired effects in 10.03
+  seconds. Gold is unchanged; Fruit Juice actually increases maximum HP.
+- [x] Pass both saved banks under shared environment 41: 5,889 historical and 676
+  newly saved frames, plus the same 20 artificial envelopes in each bank. All
+  13,172 frozen-policy probes pass, with 16,903 prior files and both full original
+  players/all Adam unchanged. No official game or full run was launched by repair.
+- [x] Prepare the finite new-source panel and six coordinator regression tests.
+  Use the three fully completed, independently verified cases as explicitly
+  labelled regressions; use fresh world 416 for the stopped selector case.
+  Preserve world 415 and its final accepted End Turn without a ready successor;
+  never replay that uncertain case. The existing scripted world 412 potion replay
+  is not repeated. New-source evidence does not relabel earlier runs.
+- [ ] Owner runs `bash scripts/compare-selection-flows-v15.sh` (about 15–25
+  minutes). One shared app, four pairs, ten minutes per pair plus shutdown reserve,
+  and a 90-minute outer allowance. Exact repository checks are cached separately.
+- [ ] Investigate the separate official enemy-phase stall if reproduced or if a
+  source-level cause is found. The saved stop has round 2/enemy phase, 56 submitted
+  choices and 55 completed acknowledgements. It occurred after divergence; its
+  cause and repair are not established by the reward/map fix. Do not bypass
+  readiness checks, retry End Turn or count its partial trace as ordinary PPO.
+- [ ] Assess the new panel before broader compatibility, learning or promotion.
+  If historical training used the affected reward/map transition, audit that data
+  separately before reuse; do not assume it explains earlier poor learning.
+  No training, adaptive controller, promotion or automatic next stage follows.
+
+## Historical handoff — continue three unstarted controls after the summary repair
+
+See [the consolidated repairs and current handoff](native-modal-display-repair.md)
+and [the coordination evidence](evidence/native-modal-coordination-v2.json).
+Both original full players/all Adam remain exact. The game, bridge, converter,
+four control recipes, seed set and launch limits are unchanged.
+
+- [x] Assess the owner's v13 run. The reward control passes all 57 complete
+  public-input/action pairs with verified app/profile/archive restoration.
+  The independent verifier reconstructs all 114 native/official choices.
+- [x] Identify the summary failure: the coordinator expected `evidence` in a
+  verification report whose real contract binds the source report, verifier hash
+  and per-host counts instead. This is not another game compatibility failure.
+  Preserve the failed summary, its active marker and all completed case evidence.
+- [x] Implement coordinator v2 against that actual producer contract. Check the
+  exact source/engine/helper identity, verifier code hash, both host counts and
+  successful uncapped verification. Retain transitive raw evidence hashes.
+- [x] Add 14 regression tests, including a saved-only adoption followed by a full
+  mocked continuation. Never launch the completed case; run only cases 2–4.
+  Test changed evidence, invalid verification, capped checks, incomplete shutdown,
+  uncertain cases and matching prefixes shorter than the declared target.
+- [x] Freeze a separate coordination ledger while retaining the same finite plan.
+  Saved-only adoption records the completed 57-choice control and immutable unit,
+  with zero new games or verification replay. All 15,721 protected prior files
+  remain exact. The three remaining control workspaces are unstarted.
+- [ ] Owner runs `bash scripts/compare-selection-flows-v14.sh` (about 15–25
+  minutes). This reuses case 1 and completes only the existing status-title,
+  modified-deck and fresh selector/potion controls. Up to six new host starts;
+  no repeat of the scripted p3/world412 replay. Exact repository checks are
+  cached separately; the unchanged 90-minute outer cap covers all work.
+- [ ] Assess the four completed controls before a broader comparison or learning.
+  No training, promotion, adaptive controller or automatic next stage follows.
+
+## Historical handoff — owner-run targeted comparison with the map-transition guard
+
+See [the consolidated repairs and evidence](native-modal-display-repair.md).
+Both original full players/all Adam and all prior source tuples remain exact.
+No training, promotion, game copies or automatic long follow-up are authorized.
+
+- [x] Implement all four original source repairs and targeted regressions:
+  reward image glyphs, actual status titles, per-copy modifier/upgrade values,
+  and owned potion permissions/identity under combat card selection.
+- [x] Pass the v39 saved-only audit and current 57/77-choice reward/title controls,
+  independently reconstructing all 114/154 delivered choices.
+- [x] Pass the owner's single authorized potion replay: 112 matching inputs per
+  host, with a queued discard, card answer and actual potion removal. Independently
+  reconstruct 112 native inputs/receipts and recompute the 109 frozen choices.
+- [x] Preserve the new modified-card control's interrupted official attempt:
+  native 118 choices, official 82 acknowledged choices, first difference at 67.
+  Independently reconstruct all 200 choices/receipts in 23.65 seconds. Preserve
+  both attempt markers and the blocked worker. It is diagnostic-only evidence.
+- [x] Identify old Wood Carvings controls with the new floor after a map choice,
+  while native has Unrest Site. The earlier v38 and current v39 native 118-input
+  prefixes are identical; do not attribute later unmatched states to card logic.
+- [x] Implement a separately versioned native map-travel readiness guard. Suppress
+  mutation and atomic advancement while the game's IsTraveling flag spans old-room
+  exit; classify even a transient unknown surface as settling. Preserve other
+  snapshot states when travel completes. All 190 Host tests pass; candidate v24
+  reproduces twice from source patch v23. This guard is not live-qualified yet.
+- [x] Inspect the stopped worker without resetting it: all 435 original app files
+  and the account/frozen archive remain exact, no game process runs, and all five
+  known added connector/settings files plus the original worker marker are backed
+  up separately. Prepare the checked restoration procedure; delete nothing.
+- [x] Owner approves inspected worker restoration and one longer replacement
+  diagnostic. Restore the same app in 13.47 seconds, remove only the five backed-up
+  additions, and recheck the original inventory. Every failed-attempt file and its
+  case/plan markers remain intact; no failed game is resumed or replayed here.
+- [x] Freeze CLI 52 / official candidate 24 / worker 23 / shared environment 40.
+  The new saved audit passes 5,889 observations, 20 artificial envelopes and 11,782
+  frozen-policy probes in 164.46 seconds; all 15,721 protected prior files remain
+  exact. Both original full player/Adam files remain unchanged.
+- [x] Prepare and preflight one finite owner-run panel: four separately verified
+  matched controls, ten minutes per pair, a 45-second shutdown reserve, and
+  15-minute per-case launch allowances. Reuse completed results; record independent
+  clean-reset delivery gaps, but stop on an unverified worker. Ten operational
+  regressions pass. The 90-minute outer cap includes both results and the one fixed
+  app in storage accounting. No panel game has started; world 415 remains fresh.
+- [ ] Owner runs `bash scripts/compare-selection-flows-v13.sh` (about 20–30 minutes).
+  This requalifies all four targets under the final source tuple and the approved
+  replacement for interrupted p3/world411. The potion case p3/world412 is not
+  replayed again. No broader canary, training or automatic next stage follows.
+- [ ] Assess the four controls before freezing a broader comparison; source changes
+  require fresh qualification. The earlier canary-v2 plan remains unfrozen.
+- [ ] Establish broader input/action compatibility before returning to learning.
+
+## Historical handoff — final potion-reference qualification
+
+See [the four repairs and current evidence](native-modal-display-repair.md).
+Preserve both original full players/all Adam, every prior tuple and all failed
+attempts. No training, promotion or controller follows automatically.
+
+- [x] Implement native reward glyph rendering, virtual localized power titles,
+  and game-owned per-copy dynamic previews with cleanup and detached upgrades.
+- [x] Reproduce CLI v52 and connector v22 with the game assembly unchanged.
+  Pass 183 Host tests, four native modifier/title/effect fixtures, and independent
+  Sharp damage verification. Preserve the initial tool-runtime and fixture errors.
+- [x] Match all 57/77/118 reward/title/modifier choices on source tuple v38;
+  independently verify every choice and app/profile/archive restoration.
+- [x] Preserve the potion control's strict duplicate-reference failure before an
+  official launch: 108 acknowledged choices/109 inputs, pending last choice,
+  stopped worker and unchanged markers. Quarantine it from ordinary PPO.
+- [x] Assign one global-HUD reference per owned bottle and needed player target,
+  retaining all inspectable context/inventory. Worker v23/atomic v6 share the
+  declared identity. Tighten synthetic tests to reject duplicate IDs; all 20 pass.
+- [x] Pass the strict native Headbutt/potion fixture: accepted discard waits behind
+  the card answer, cannot be enqueued twice, drains after the answer and returns
+  to combat with the bottle removed. Clean shutdown; 6.47 seconds, zero updates.
+- [x] Pass the v39 saved audit: 5,889 observations, 20 artificial envelopes,
+  11,782 frozen-policy probes and exact scalar/layout reconstruction. All 14,753
+  protected prior files and both original full player/Adam states remain exact.
+- [x] Owner authorizes one isolated replay of the known potion-selector case.
+  Preserve the interrupted attempt; use the earlier fully completed verified
+  case as the reference and explicitly label the scripted discard/answer suffix.
+- [x] Pass the authorized replay in 232.06 seconds: all 112 public inputs match,
+  one exact official queued-discard ID, no duplicate enqueue, card answer drains
+  it and actually removes the bottle. All official app/profile/archive checks pass.
+  Independently reconstruct 112 inputs/receipts and recompute 109 frozen choices
+  in 12.51 seconds. Preserve the read-only verifier's two harness errors.
+- [ ] Complete final repository checks before live continuation.
+- [ ] Qualify the final tuple with current matched controls and the explicit
+  official queued-discard/card-answer test, then prepare the next long owner task.
+  Do not treat v38's controls as v39 live qualification or start training.
+
+## Historical handoff — reward glyphs, status titles, modified cards and selector potions
+
+See [the completed comparison assessment](native-star-cost-canary-result.md).
+Both original full players/all Adam and every historical source/result stay exact.
+This is an input-compatibility follow-up, with no learning or promotion.
+
+- [x] Assess completed v10: eight clean 128-choice host prefixes, no cap or recurring
+  star-cost rejection, 1,039.61 seconds, zero complete matching pairs. Preserve all
+  first differences after 56/76/117/109 identical decisions and the full journals.
+- [x] Independently reconstruct all 1,024 checkpoint choices and delivery receipts
+  from saved observations in 24.37 seconds; no games or optimizer updates occur.
+- [x] Identify four actionable first differences. Treat later divergent states as
+  unmatched evidence, not independent compatibility bugs or a compatibility rate.
+- [x] Normalize Energy Potion/reward rich-image glyph syntax using the shared
+  visible-text contract; retain each glyph's identity, order and multiplicity.
+  Cover varied reward kinds and glyphs, not a hard-coded potion description.
+- [x] Resolve actual localized native status titles, preserving definition IDs,
+  amounts and descriptions. Test missing-key diagnostics and other status models.
+- [x] Render permanent per-copy modifiers in current deck descriptions: Nimble
+  amount 2 Defend must expose the correct modified Block. Verify actual effects
+  and descriptions together across representative enchantments/upgrade contexts.
+- [ ] Repair potion permissions, owned identity and context under nested combat
+  selectors. Qualify the actual official selection owner's current controls:
+  CLI currently adds Discard during Headbutt selection; the official menu omits
+  it while its sparse summary says can_use true. Do not trust that summary alone
+  or remove public potion facts just to force equality. Preserve exact bindings.
+- [ ] Add regressions from all four saved first differences and short targeted
+  native/official controls before freezing a replacement broader comparison.
+  Preserve prior tuples; no automatic long run, training, promotion or controller.
+- [ ] Establish broader complete input/action compatibility before new learning.
+  Finite controls do not prove all mechanics or playing strength. The completed
+  v10 plan only reuses its result; repeating it cannot repair these differences.
+
+## Historical handoff — typed star costs before joining card views
+
+See [the diagnosis and repair](native-star-cost-normalization.md). Preserve both
+full original players/all Adam and every prior source and result. No learning or
+promotion occurs in this compatibility repair.
+
+- [x] Reconstruct all 96 acknowledged choices from interrupted canary v6; reproduce
+  the same Particle Wall rejection. Preserve both markers and forced-stop evidence.
+  No official game starts; this partial episode is never ordinary learning data.
+- [x] Normalize declared numeric/text star costs before joining current card views.
+  Keep zero, absent cost, X, different costs and distinct physical copies separate.
+  Leave all other public facts, permissions, resource types and raw bindings intact.
+- [x] Independently restore exact raw scalar types as well as the pre-layout graph;
+  make genuine conflicts and unsupported typed values fail explicitly.
+- [x] Verify the rejected saved observation, all prior 96 unchanged inputs/choices,
+  seven scalar tests and fifteen existing flow regressions on the repaired converter.
+- [x] Pass the native Particle Wall/Gambler's Brew selection fixture: three separate
+  two-star copies, combat/pile context, one committed choice and clean shutdown.
+  Preserve the earlier diagnostic acknowledgement error; use a separate new seed.
+- [x] Pass the 4,861-frame/20-envelope audit, 9,728 frozen-policy probes and exact
+  raw scalar/layout reconstruction. Pass all 8/8/64 full input/menu controls;
+  independently verify all 160 choices and app restoration. All 11,594 protected
+  files and both original full players/all Adam remain exact.
+- [x] Freeze/preflight the next finite comparison on fresh worlds 411/412; keep
+  reserved worlds 409/410 excluded and all interrupted evidence unchanged.
+- [x] Owner completed v10 in 1,039.61 seconds, within budget. Eight clean prefixes
+  and all 1,024 choices independently verify. The star-cost crash is absent, but
+  complete input equality still fails in all four pairs after 56/76/117/109 choices.
+  Preserve the result. The current handoff supersedes this completed launcher.
+- [ ] Establish broader complete input/action compatibility before new learning
+  or promotion. Finite controls are not exhaustive coverage or strength evidence.
+
+## Historical handoff — generated choices, owned previews and merchant reads
+
+See [the repair and evidence](native-selection-owner-read.md). Preserve both original
+full weights/all Adam and every prior result. No new learning or promotion occurs.
+
+- [x] Assess completed canary v5: eight clean prefixes within budget, zero complete
+  matching pairs, first differences after 1/1/53/1 equal inputs. Verify all 964 choices.
+- [x] Fold the repeated owned relic preview only when all its same-owner facts are
+  present under the persistent scoped preview; retain unknown/conflicting facts.
+- [x] Replace the generated-choice legacy fallback with actual native ownership,
+  initial presentation, card copies/views, header and canSkip. Preserve exact bindings
+  and both optional/mandatory choices. Retain full combat context and public piles.
+- [x] Inspect generated-choice combat callers; pass the native Discovery fixture with
+  three offered copies, actual Skip permission and clean shutdown. Keep failed probes.
+- [x] Consolidate only exact same-card merchant catalog/detail duplicates, retaining
+  all prices, views, unknown fields and reversible source evidence.
+- [x] Preserve the initial merchant control's next difference at 54 after buying a
+  potion. Repair null-item visibility at the source for all three item groups, keep
+  removal-service visibility separate, and remove the false Card removal potion label.
+- [x] Reproduce CLI v51 twice, unchanged game DLL/connector v20. Final worker v21,
+  converter v13/layout v10/environment v36 declare the changed public interface.
+- [x] Pass all final 8/8/64 matched input/menu controls (45.95/
+  50.75/119.83 seconds); independently reconstruct
+  all 160 choices. All app/profile/archive checks pass, with zero app copies/updates.
+- [x] Pass 15 Node regressions and the 4,760-frame/9,526-probe saved audit;
+  10429 prior files and both full players/all Adam remain unchanged.
+- [x] Freeze/preflight the next finite comparison, with the exact-file repository
+  gate separate from gameplay. Preserve all development negatives and old launchers.
+- [x] Owner ran v9. Canary v6 stops at observation 97 with a typed star-cost
+  conflict after 96 acknowledged native choices; no official game starts.
+  Preserve the interrupted workspace and both reserved worlds. Current handoff
+  supersedes this launcher; never clear markers or replay it as a clean case.
+- [ ] Qualify full broader inputs/actions/effects before new learning or promotion.
+  Finite compatibility controls do not prove all mechanics or playing strength.
+
+## Historical handoff — reward guidance, card-copy identity and enchantment previews
+
+Canary v3 is complete: eight clean prefixes, all 880 delivered model choices
+independently verified. It still has zero fully matching pairs. The repeat command
+displayed the saved 914.72-second result in five seconds; it started no new games.
+Preserve both original full players/all Adam and every earlier result.
+
+- [x] Separate delivery success from input equality: the old `control_pass` label
+  was misleading while `full_prefix_input_equivalence` was false. New reports/exit
+  status require both; preserve the old report as historical evidence.
+- [x] Trace all three extra reward decisions to `combat_reward_ftue`. It interrupts
+  Continue, then returns to the unchanged reward owner. The prior timing fix missed
+  that guidance sequence; a tutorial is not proof that the reward owner departed.
+- [x] Implement one committed model Continue across the exact warning, its native
+  non-gameplay dismissal, and a freshly revalidated final confirmation. Retain the
+  original owner, full state/menu and accepted receipts. Unknown delivery, changed
+  state or repeated warnings stop without retrying uncertain gameplay input.
+- [x] Anchor selector-copy labels to ordered visible selection positions before
+  unordered pile/deck reads, then resolve unordered ties with those canonical labels.
+  Retain all distinct physical copies, current facts and exact raw action bindings.
+  Keep selector/hand order and all unknown facts. Layout v8 is separately identified.
+- [x] Reconstruct the captured seven-card Headbutt state: complete inputs/menus
+  match, all seven copies remain separate and the full original layout restores.
+  Replay the saved warning → rewards → map trace without a new game or update.
+- [x] Pass eight targeted Node regressions and 18 focused Python tests. The saved
+  audit passes 3,436 frames, 20 generated envelopes and 6,886 frozen probes; all
+  8,461 protected prior files remain unchanged. No native or official game binary
+  changes: CLI v46 / connector v20 / worker v16 remain pinned, shared environment v29.
+- [x] Qualify the actual warning/confirmation flow in a separate 64-choice
+  clean-case regression: all complete inputs/menus match in 149.59 seconds; all
+  128 delivered choices independently verify, including the real warning/confirmation.
+- [x] Execute the separate 112-choice selector regression. The duplicate-copy repair
+  works through decision 106, including the original seven-card mismatch at 96.
+  It then exposes missing native Spiral enchantment preview and event body alias
+  at 107. All 224 delivered choices verify. Preserve this negative control; never
+  shorten the prefix or drop public enchantment facts to hide its failure.
+- [x] Export pending enchantment identity, actual amount and native formatted text
+  from the exact native command, using a display clone. Preserve applied card facts;
+  do not infer effects from event names. Keep the preview in atomic selection inputs.
+  Normalize only declared provenance labels and the event-owner body alias, retaining
+  effect/name/amount, unfamiliar fields, source reconstruction and conflict rejection.
+- [x] Freeze new source versions and reproduce both CLI builds without altering the
+  game DLL or official connector. Preserve the initial misplaced-export development
+  build v47. V48 then exposes a patch-state type collision before any policy
+  decision or official start; preserve its stopped worker/markers and nonexecution
+  review. V49 separates the two capture scopes and passes an actual native event
+  preview fixture in 6.82 seconds. Worker v17/layout v9 declare the new observation.
+- [x] Repeat both targeted controls on v49: 64/64 inputs/menus match in 154.00
+  seconds, including the actual warning/final confirmation; 112/112 match in 224.54
+  seconds, including distinct copies, a committed pack and the actual Spiral preview.
+  All 352 choices independently reconstruct. All app/profile/archive checks pass.
+- [x] Pass 11 targeted Node regressions and 18 focused Python tests. The exact v49
+  saved audit passes 3,790 frames/20 envelopes/7,594 frozen probes; all 9,043 prior
+  protected files remain unchanged. Preserve both complete original weights/all Adam.
+- [x] Freeze/preflight the new finite fresh-world comparison after both controls
+  and independent witnesses pass. Its exact-file repository-check gate runs
+  separately before gameplay. Preserve all uncertain earlier attempts and receipts.
+- [x] Preserve the frozen runtime after a cosmetic line-wrap failure: one explicit
+  formatting exception, exact source SHA/identical formatted AST regression, with
+  full lint/type/behavioral coverage unchanged. Format future versions before freezing.
+- [x] Owner completed v5 in 928.52 seconds: all eight prefixes/964 choices verify,
+  but all four inputs differ. Preserve it; the current handoff supersedes its launcher.
+- [ ] Full input/action/effect compatibility still gates new learning or promotion.
+  These diagnostics do not establish stronger play or exhaustive game coverage.
+
+## Historical handoff — reward departure, combat potions and merchant entry
+
+Preserve both original complete players/all Adam and the completed canary v2.
+The batch finishes within its budget; it does **not** qualify compatibility.
+Three official prefixes execute their full 128 choices and one stops during
+hand selection. All four pairs have input differences (after 48, 88, 6 and 88
+matching decisions). Game delivery success and full input equality are separate.
+
+- [x] Inspect all four first differences and the saved observations, choices,
+  native receipts and game log together. Preserve the uncertain player-3/world-403
+  selection; do not replay that attempt or clear its markers.
+- [x] Keep a closing reward panel out of the next policy decision, even when its
+  snapshot/signature changes. Wait for actual reward-family departure after the
+  single accepted Continue; never click it again to accelerate closure.
+- [x] Fix combat potion identity to the same owned inventory occurrence. Keep
+  distinct copies, actual belt slots, current use/discard permission, target
+  operands and hover facts. Match the existing official command labels and typed
+  views; do not merge different potions or infer new legal actions.
+- [x] Fix hand-selection completion: the hand display persists after its selection
+  mode finishes. Retain the exact chosen-card transaction and native confirmation;
+  use selection-mode lifetime instead of waiting for the whole hand to disappear.
+- [x] Export the current player-openable merchant catalog while inventory is closed,
+  retaining stock/prices/previews and disabled purchase authority. Match the actual
+  shop-room controls; opening/closing inventory remains a real model decision.
+- [x] Preserve all previous source tuples. Native CLI v46 and official connector
+  v20 reproduce twice; worker v16/shared environment v28 declare the new exports.
+  Saved reconstruction matches the captured potion and shop inputs/complete menus.
+  This reconstruction is diagnostic evidence, not execution of a repaired game.
+- [x] Pass 170 exact-game Host tests, connector portable checks, five new targeted
+  Node regressions and 13 focused Python tests. Audit 2,550 saved frames plus 20
+  generated envelopes / 5,122 frozen probes with 5,973 prior files unchanged.
+- [x] Make progress output distinguish `INPUTS MATCH` from `INPUT MISMATCH` and
+  report game delivery separately. Preserve original comparison denominators.
+- [x] Pass the short paired control: 32 complete input/menu pairs in 86.47 seconds,
+  all 64 delivered choices independently verified, exact selected pack added and
+  app/profile/archive restoration verified. Separately exercise all 14 native
+  closed-shop offers with no purchase authority. No uncertain seed is replayed.
+- [x] Full repaired-code repository check passes 2,587 tests, strict types on 640
+  files and C# protocol in 150.35 seconds. Preserve its exact resource receipt.
+- [x] Freeze/preflight the replacement finite comparison on fresh worlds 405/406,
+  both originals. Keep 30 minutes for the batch, six minutes per pair and a separate
+  cached repository-check allowance. Its workspace is unstarted.
+- [x] Owner completed canary v3: all eight prefixes execute cleanly, but all four
+  inputs differ. Preserve its saved result, verification and cached-display launch.
+  The current handoff above supersedes this historical launcher.
+- [ ] Qualify complete broader inputs/deliveries and remaining consequential effects
+  before compatibility admission or another learning intervention. No training,
+  promotion, adaptive controller or automatic follow-up is authorized by a prefix.
+
+## Historical handoff — consistent upgraded-card titles
+
+See [the card-title repair](native-card-title-repair.md). Preserve both complete
+players/all Adam, the stopped native prefix and every previous receipt.
+
+- [x] Assess the owner run: repository checks pass 2,585 tests in 151.71 seconds.
+  The comparison stops after 50 native choices / 51 frames, before any official
+  prefix or completed pair. Preserve the stopped process, markers and world 401.
+- [x] Trace the conflict to one upgraded card copy: the transform selector says
+  `Strike`, while the deck says `Strike+`. Keep the strict conflict rejection.
+- [x] Replace all six CLI base-name export lookups with the game's current title.
+  Keep definition, physical identity, upgrades, costs and all other facts explicit.
+  CLI v45 reproduces twice; shared environment v27 binds the new assembly without
+  changing the frozen game, converter, official connector or either player's numbers.
+- [x] Add six title/copy/conflict regressions. Reconstruct the captured state using
+  its already visible same-copy deck title: all 12 choices pass the SDK decoder.
+  This remains diagnostic substitution, not native execution or training evidence.
+- [x] Pass the saved audit: 1,642 frames, 20 envelopes, 3,306 frozen probes and
+  3,981 unchanged prior files. Prepare/preflight a 32-choice regression on the
+  previously completed, clean, independently verified world 556.
+- [x] Owner closes Steam. Four isolated native rendering fixtures pass: base and
+  upgraded Strike, upgraded Defend and upgraded Cold Snap; all three-copy names,
+  upgrade flags, SDK decoding and clean shutdown agree. No learning or app copies.
+- [x] Complete the paired regression in 86.64 seconds: all 32 complete inputs/menus
+  match per host, all 64 choices/receipts independently verify and exactly the
+  selected pack is added in both hosts (11 → 14 cards). All prior cards stay exact.
+- [x] Full repaired-code repository check passes 2,586 tests, strict types on 633
+  files and C# protocol in 150.81 seconds. Preserve the earlier passing receipt.
+- [x] Freeze and preflight the replacement four-pair comparison on fresh worlds
+  403/404 with both originals. Keep 128 choices per host, 30 minutes overall / six
+  minutes per pair, one fixed app and the separate repository-check allowance.
+- [x] Owner completed the v2 batch within its allowance. Preserve its four-pair
+  blocked result: all four inputs differ, and one official selection is uncertain.
+  Its launcher is historical; the current handoff above supersedes it.
+- [ ] Finish broader matching and consequential merchant-removal effects before
+  compatibility admission or another learning intervention. These finite controls
+  do not prove all card interactions or stronger full-game play.
+
+## Historical handoff — rewards, packs and shop removal
+
+The owner requested these consolidated compatibility repairs and enough launch
+allowance for the entire comparison. Preserve both original full players/all Adam,
+old canaries and failed development attempts. See [the flow guide](native-selection-flows.md)
+and [#149](https://github.com/benyanc/spireshift/issues/149).
+
+- [x] Record the previous canary as complete: four pairs/eight starts, 790 delivered
+  policy choices. Card rewards/packs still differ; the last merchant removal is
+  blocked by the catalog-owner validator. No parity or training admission granted.
+- [x] Export actual reward cards, previews, physical identities and detail reads,
+  preserving the native alternatives and mandatory/optional distinction. Keep a
+  pending reward's stable identity when Skip returns to the reward list.
+- [x] Define one committed pack choice. The official adapter verifies the chosen
+  preview and confirms it once before acknowledging the model; ambiguous or
+  uncertain input is preserved, never resubmitted.
+- [x] Preserve the merchant owner and complete read-only catalog under removal.
+  Require that owner and the atomic-card contract; do not manufacture purchases
+  from an overlay. Keep native prices, stock, affordability and permissions.
+- [x] Catch incomplete view metadata through the full SDK decoder. Retain both
+  failed native development attempts and their source snapshots; never replay
+  their uncertain worlds. Test empty-belt aliases without dropping nonempty facts.
+- [x] In the completed short check, execute 32 choices per host and a real pack
+  preview/confirm (two UI steps for one model choice); independently reconstruct
+  all 64 choices/receipts. Preserve its boss-name/input mismatch as negative evidence.
+- [x] Repair encountered native encounter-title and public combat-pile preview
+  omissions. Use the game title/current public powers, not monster-name guesses
+  or an unpowered pile description. No game rules or learner weights change.
+- [x] Unify the completed combat rewards view with the empty reward list, retaining
+  the public boss-room fact and waiting for Continue to leave its owner. Map the
+  rendered event page to one body field without changing text or named amounts.
+- [x] Declare read-only merchant slots before the worker's diagnostic graph. Keep
+  combat-context card views without registering the same selectable hand card twice;
+  the actual saved Armaments failure now passes the full decoder with three unique
+  card referents. Preserve its failed world; no uncertain seed is replayed.
+- [x] Restore actual public pile reads during combat selection and retain other
+  inspectable combat operands exactly once. The saved Headbutt input/menu now
+  matches the official frame, including each selected pile copy. Keep hidden draw
+  order excluded. Render status-image glyphs without losing their visible meaning.
+- [x] Keep launch budgets separate from immutable experiment and completed-unit
+  identity. Required repository checks have a separate 10-minute allowance, cached
+  against exact files. The next four-pair plan allows 30 minutes overall, six minutes per
+  pair, isolated profiles, one fixed app and no extra game attempts or training.
+- [x] Qualify the final CLI v44 / official v19 / worker v15 / shared helper v10 /
+  layout v7 / shared manifest v26 tuple. Offline v13 passes 1,642 saved frames,
+  20 envelopes and 3,306 frozen probes with 3,609 prior files unchanged. Targeted
+  control v11 matches all 32 complete inputs/menus in both hosts in 88.16 seconds;
+  all 64 choices/receipts independently reconstruct. Both decks add exactly the
+  chosen pack's three cards (11 → 14), with prior visible cards unchanged.
+- [x] Focused checks pass 11 Python tests / 26 Node cases, strict types on 632
+  source files, style and C# protocol. Preserve the earlier full-check cap as
+  incomplete. The owner launcher runs the full final repository check first.
+- [x] Owner attempted the broader v1 plan after the full repository check passed.
+  It stopped in the first native prefix on a conflicting upgraded-card title.
+  No pair completed. Preserve that workspace; the current handoff above replaces
+  its next command after the separately qualified repair.
+- [ ] Qualify remaining consequential selector/potion effects and large selection
+  domains if encountered. Current bounds reject more than 512 answers wholesale;
+  source inventories and finite controls do not prove every mechanic combination.
+  Full input/action/effect compatibility still gates new learning and promotion.
+
+## Historical handoff — one model choice for a committed card answer
 
 The owner selected the semantic committed-card contract. Keep both original full
 players and every Adam moment/counter unchanged; no learning or promotion follows.
@@ -27,11 +1126,10 @@ See [the selection guide](native-semantic-card-selection.md).
 - [x] Final audit grows to **845 frames + 20 envelopes**, **865** reversible
   reconstructions/raw bindings and **1,720** frozen probes. Preserve all **3,119**
   prior files. Active tuple: CLI v40, official v16, shared layout v6/manifest v14.
-- [ ] Owner next: run `bash scripts/compare-semantic-selection-v3.sh` for both
-  frozen players/two fresh worlds/four paired prefixes, up to 128 choices per host.
-  The plan is preflighted and unstarted, with a 15-minute launch cap and completed
-  pairs reused after a clean pause. No fitting or automatic follow-up. Older
-  selection launch prototypes are historical, not the current command.
+- [x] Owner completed the historical semantic-selection canary: four pairs/eight
+  starts, 790 delivered choices, with reward/pack differences and the merchant
+  removal stop preserved. It grants no compatibility admission. Do not rerun its
+  launcher; the current handoff above names the repaired comparison.
 - [ ] Add specific shipped effect fixtures for remaining selector families and
   noncombat potion controls; the current source/tests do not establish their effects.
   Include nonzero/X star costs in cross-character selector/detail views, rather

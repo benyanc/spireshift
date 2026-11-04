@@ -1,0 +1,86 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_original_weights_and_full_Adam_unchanged": true,
+  "assessed_collection": {
+    "path": "artifacts/native-varied-teaching/collection-assessment-v1/report.json",
+    "sha256": "7414258c984eedf92ddc68dcf35c2b059c8a22950d1c2f2256a3127a13fd24aa"
+  },
+  "automatic_follow_up": false,
+  "bank": {
+    "path": "artifacts/native-varied-teaching/study-v1/collection/bank.json",
+    "sha256": "db5bb4f1de60b33369f0483f61cc4004e97b7b2db198225f796f96df9b572081"
+  },
+  "completed_collection_recipe_and_core_implementation_unchanged": true,
+  "disposable_short_check_updates": 20,
+  "expected_fitted_Adam_steps": {
+    "p2": 5722,
+    "p3": 6109
+  },
+  "fitting_launch": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-varied-fitting-launch-v1.json",
+    "sha256": "f898e677b26b909449e732cde51db6c17bf2ae17090bb920ab7114ecb90d9761"
+  },
+  "fitting_lessons": 12,
+  "fitting_schedule": {
+    "batch_draws": 32,
+    "epochs": 16,
+    "updates_per_epoch": 4
+  },
+  "fitting_work": {
+    "copies": 4,
+    "draws_per_copy": 2048,
+    "total_updates": 256,
+    "updates_per_copy": 64
+  },
+  "fresh_process_resume_verified": true,
+  "game_CLI_connector_worker_converter_layout_unchanged": true,
+  "launch_binding_id": "sha256:f0f6ea25d9b84933e48824e1458daaf7c7e12553cc1ee743f238946f89d1e9ce",
+  "main_config_id": "sha256:4bbaa639528094a3b18e746d211d816eeee6b9e271734d5f9cbea6e1f8c125c7",
+  "main_optimizer_updates_started": 0,
+  "new_games": 0,
+  "ordinary_PPO_allowed": false,
+  "original_Adam_steps": {
+    "p2": 5658,
+    "p3": 6045
+  },
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/fit-varied-teaching-v1.sh\"",
+  "owner_phase": "fit_only_then_stop",
+  "prior_files_protected": 28855,
+  "promotion_allowed": false,
+  "protection": {
+    "path": "artifacts/native-varied-fitting/preparation-v1/protected-before-fitting.json",
+    "sha256": "9179b7499ab80a7ffd8cf42a2040e2c9e4c15758a40146570f18f5cebe3b3987"
+  },
+  "report_id": "sha256:ddd324a1b7999931b8586449a5292a1e9aa1693b1bfb93b75fcfee390ccf3abe",
+  "schema_version": "native-varied-fitting-preparation-evidence-v1",
+  "separate_numerical_reconstruction_steps": 4,
+  "session_limits": {
+    "cpu_seconds": 3600,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 1800
+  },
+  "short_control": {
+    "path": "artifacts/native-varied-fitting/control-v1/report.json",
+    "sha256": "ef1d98ebc258815ffb7a9cf04ad8afd274f1362d548b3fe9acb2c526074d6cf2"
+  },
+  "short_control_report_id": "sha256:9c3da673fc75a054993ec711358c7ae1bdaf99cd7a35ba27aceec30f4341a2ce",
+  "short_control_resource": {
+    "path": "artifacts/resources/varied-fitting-short-control-v1.json",
+    "sha256": "b9a2657a7ab0b34d984713ab49b4422bd14dec999f2a1171d440379cbff3a84e"
+  },
+  "short_control_resource_id": "sha256:73b2e74299bbd09f599c72cbf82dd905c13de00273ff097552da39e18acb6b4a",
+  "short_control_wall_seconds": 143.28250320802908,
+  "sources": {
+    "scripts/fit-varied-teaching-v1.sh": "afcbc0ed99cfd187b4a6aa1fc32f6cb3b741fffab9bb402c219368dccd911fea",
+    "scripts/varied-fitting-session-v1.py": "6bac5ac4bd59c4f384a32bd5281b1786730a39c8e4fba463887632ae78471e98",
+    "src/spireshift/native_fitting_session.py": "da4bee32ef36f8598e6490e1f52dfd2822cf5ad618f866888d8db8bac51e609a",
+    "tests/unit/test_native_fitting_session.py": "f28a901f67d59f32445c476ba6981aaf509c015d349a8f7fb32d9c3bfc83c450"
+  },
+  "status": "assessed_bank_four_copy_fitting_only_command_prepared",
+  "withheld_evaluation_started": false,
+  "worlds": {
+    "fitting": 8,
+    "withheld": 4
+  }
+}
