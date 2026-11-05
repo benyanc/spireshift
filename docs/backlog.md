@@ -9,11 +9,11 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — next implementation | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Prepare a new frozen-native development scope and useful training-owned examples across all acts, deck/path/resource decisions and final bosses. Qualify stronger successful continuations and explicitly marked later-act/boss training starts. Pass a short real-data learning control before one owner-run command. |
+| 1 — collection prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Run and assess the new 56-fitting / 12-development-case collection across all act definitions and twelve bosses. Require confirmed successful later-game labels, strict goal rescues and whole-game decision coverage. See [the prepared recipe and short checks](native-win-curriculum.md); the main bank remains uncollected. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
-| 5 — at promising candidate milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Keep automated parity regressions and fix reached correctness defects. Verify promising candidates through real official games before claiming official-game competence. Prepare a new declared schedule; old unpassed guards and reports stay intact. |
+| 5 — targeted defects now; official games at promising milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Repair/qualify the newly reached headless Architect completion before normal-start victory validation. Keep automated parity regressions; verify promising candidates through real official games before claiming official competence. Preserve old guards/results. |
 | 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports items 1–3 when
@@ -46,8 +46,37 @@ relabel incomplete experiments.
 The preserved canary panel stays **3 matching / 1 incomplete / 2 unattempted**;
 its active marker, exact finals, original weights/full Adam and blocked command
 remain unchanged. CPU profiling and completing that old scope are not the next
-work. A new competence recipe/admission scope needs implementation and regressions
-before collection/training; no existing permission is fabricated by this plan.
+work. The new competence recipe/admission is implemented under
+[ADR 0008](decisions/0008-native-win-curriculum-admission.md); it grants only its
+declared collection scope after exact short checks, with no inherited official
+qualification. Its unstarted main bank still needs owner collection and assessment.
+
+## Current handoff — win-focused curriculum implemented; owner collection next
+
+See [the curriculum guide](native-win-curriculum.md) and
+[evidence](evidence/native-win-curriculum-v1.json). Preserve the frozen game,
+original and fitted full weights/Adam, and all old canary evidence.
+
+- [x] Implement a separate pinned native-development scope, public student boundary,
+  explicit training-only native starts, whole-world partitions and quality gates.
+- [x] Declare early/middle/late acts, all twelve bosses including all three final
+  bosses, diverse decks/resources and combat/strategic decision families.
+- [x] Add fixed public-state teacher candidates, native outcome selection, raw
+  action verification, independent confirmation and strict goal-rescue accounting.
+- [x] Pass exact-source start and collect/learn/reload/act controls: 621 verified
+  gameplay deliveries, two disposable copies, separate unseen-world loss gains,
+  unchanged originals/build, 2,804 tests and a zero-game launch preflight.
+- [ ] Owner runs `bash scripts/prepare-win-curriculum-v1.sh`. It collects only;
+  clean seals resume and incomplete units remain preserved. Zero main updates.
+- [ ] Assess actual bank quality across bosses, families and independent worlds.
+  A prepared case list or a successful short control is not an admitted main bank.
+- [ ] Prepare #134/#35 base learning and #146 independent natural-start gameplay.
+  Repair the reached Architect completion gap before claiming full-run victory.
+
+Prepared final-boss successes stop at native completed-boss reward ownership,
+not a terminal full-run win. The final-event failure and all earlier provisional
+controls remain preserved. No ordinary training, promotion, A10 or adaptive
+controller follows automatically.
 
 ## Historical handoff — three canary pairs match; diagnose the official CPU guard
 

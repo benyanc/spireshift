@@ -32,8 +32,9 @@ model-guided search improves at equal compute.
 The owner reprioritized the program on 2026-11-04: build a useful full-game base player and
 demonstrate sustained A8 wins, then attempt A10. This directive and ADR 0007 supersede the
 older handoffs below that put CPU attribution or completing the six exact-final canaries next.
-The ordered current backlog is docs/backlog.md. Parent #78 owns the base milestone; next #152
-prepares a win-focused curriculum spanning all acts, strategic decisions and final bosses.
+The ordered current backlog is docs/backlog.md. Parent #78 owns the base milestone; #152's
+win-focused curriculum implementation spans all acts, strategic decisions and final bosses.
+Its sustained owner-run collection and assessment precede the actual base-learning recipe.
 #134/#35 own whole-game learning, #143 demonstrated model/input needs, #146 fresh-game strength,
 #149 targeted parity/final official validation and #142 later A10 support.
 
@@ -66,6 +67,22 @@ all frozen files and the blocked launcher. Do not retry VTV204 or relabel this a
 Its completion, the old same-final interference experiment, CPU/budget research, GA/hybrid
 bakeoffs and unrelated platform work are deferred. Practical wall/memory/storage caps remain
 for bounded execution. This reprioritization launches no training, game, promotion or long job.
+
+On 2026-11-05 the owner requested implementation of #152. ADR 0008 and
+docs/native-win-curriculum.md define the separate native-only curriculum admission,
+56 fitting / 12 development cases, all four act definitions and twelve bosses,
+constructed training starts and quality gates. The owner command collects only,
+with zero main updates; no automatic base training follows. Preserve original
+full weights/Adam and every prior result. Use only fitting labels; final-test
+seeds stay unlaunched. Short collect/learn/reload/act controls use disposable copies.
+
+The final-boss control newly reaches the frozen headless Architect completion
+failure. Prepared final-act goals stop at the native completed-boss reward owner
+after actual boss combat, not a fabricated terminal victory. Keep its failure
+evidence, explicit known-gap flag and unchanged natural-start terminal-win rule.
+Targeted completion repair/qualification under #149/#146 is required before
+full-run victory claims. Do not replay the failed control worlds or silently
+patch CLI56. The sustained bank still needs owner collection and assessment.
 
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
