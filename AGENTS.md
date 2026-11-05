@@ -1635,6 +1635,36 @@ routing interference comparison. See docs/native-varied-fitting-comparison.md,
 its evidence and current backlog. Final repository/preflight/handoff receipts
 live under artifacts/native-varied-fitting/preparation-v1.
 
+The owner completed the four-copy fitting stage: all fixed 256 updates and
+four epoch16 finals are sealed, frozen_finals_id dbcb5980..., report b5c79b14...,
+same study4bbaa639/bank0099b16/environment48. The owner used 563.02 wall/508.20
+CPU seconds, no outer cap, about 331 MB peak RAM/119 MB output. Do not rerun fitting.
+
+Saved-only owner-assessment-v1 independently reconstructs all 256 numerical
+updates, every saved weight and complete Adam moment/counter, work record and
+recorded receipt exactly. Four bounded independent copy audits use disposable
+paths; their 256 mathematical reconstruction steps are separately counted, not
+new registered study updates. All 67 sealed units and 66 unique checkpoint
+regressions pass. Work is 64 updates/2048 draws per copy, 256 draws per fitting
+world per copy; critic unchanged. Original Adam 5658/6045 stays exact; copies end
+5722/6109. All original weights, frozen engine/CLI/connector/runtime and protected
+inputs remain exact. Fixed final epoch16 preceded all external evaluation.
+
+Own-plan mean label probability rises from 43–46% to 79–82%. On the three specific
+changed fitting menus, teacher copies prefer 3/3 (p2) and 2/3 (p3) teacher actions;
+reference clones 0/3 each, originals 0/3 and 1/3. This is seen-menu fitting evidence,
+not fresh gameplay, generalization or victory. The p3 third target remains
+unlearned by this greedy diagnostic; do not add epochs or select another final.
+
+Next prepare the six declared fresh native/official natural-ending canaries,
+binding each reference/teacher/routed mode to these exact frozen full states/Adam
+and unchanged sources/build. No changed policy has live qualification yet; no
+canary/evaluation workspace is started by this assessment. Only successful exact
+natural endings/summaries/resets gate separately selected withheld and fresh
+full-game / same-final interference tests. No automatic next run, ordinary PPO,
+promotion, scaling or controller. See docs/native-varied-fitting-result.md, its
+evidence and current backlog; keep GitHub work items aligned with this result.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

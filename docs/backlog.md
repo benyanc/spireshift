@@ -1,4 +1,26 @@
-## Current handoff — 256-update copy fitting prepared; owner run next
+## Current handoff — all 256 fitting updates verified; exact-final live canaries next
+
+See [the assessed fitting result](native-varied-fitting-result.md) and
+[evidence](evidence/native-varied-fitting-result-v1.json). Preserve all four fixed
+finals, the completed bank, original weights/full Adam and frozen game tuple48.
+
+- [x] Complete four copies × 64 updates / 2,048 draws, with exactly 256 draws per
+  fitting world per copy. Original Adam stays 5,658/6,045; copies end 5,722/6,109.
+- [x] Independently reconstruct every epoch: all 256 numerical updates, complete
+  Adam, work records and recorded compatibility receipts match exactly. Verify
+  all 67 seals and 66 unique checkpoint regressions. Critic weights stay fixed.
+- [x] Assess fitting-only evidence: teacher copies greedily prefer 3/3 and 2/3
+  changed teacher labels; reference copies prefer 0/3 each. These are three seen
+  menus per initializer, not holdout or gameplay wins. Do not fit extra epochs.
+- [ ] Prepare the six fresh exact-final/mode official/native natural-ending
+  canaries on unchanged code/build, with short checks and one capped owner command.
+  No completed new-policy live canary is claimed; fitting must not rerun.
+- [ ] After those canaries pass, separately evaluate withheld fights and the
+  fresh full-game / same-final interference comparison. Preserve failure/cap/
+  missing denominators and the terminal-victory objective. No automatic training,
+  PPO, promotion, scaling or adaptive controller.
+
+## Historical handoff — 256-update copy fitting prepared; owner run next
 
 See [the fitting-only preparation](native-varied-fitting-comparison.md) and
 [evidence](evidence/native-varied-fitting-comparison-v1.json). Original recipe,

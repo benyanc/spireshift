@@ -1,5 +1,7 @@
 # Four-copy fitting comparison on the assessed varied lesson bank
 
+The owner run is now complete and independently assessed. See [the fitting result](native-varied-fitting-result.md); this page preserves its preparation.
+
 The next owner command runs only the prospectively fixed fitting phase on the
 independently verified saved bank. It freezes all finals and stops for assessment.
 It starts no game, canary, withheld evaluation or follow-up experiment. The

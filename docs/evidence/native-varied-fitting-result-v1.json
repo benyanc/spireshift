@@ -1,0 +1,167 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_original_weights_and_full_Adam_unchanged": true,
+  "assessment_id": "sha256:d965b1f608f832c1061e382382e9b048920d27573bdb041666ebc22775f17e7e",
+  "assessment_resource": {
+    "path": "artifacts/resources/varied-fitting-owner-assessment-v1.json",
+    "sha256": "d6e854c8e14159f1ec446a271c10db30eb90d561e0334adfd2058a1424648940"
+  },
+  "automatic_follow_up": false,
+  "bank_id": "sha256:0099b16f0b22b15b83d0a10f1525460fbf13eb8bd9d25d1cfccca5bedda340df",
+  "changed_training_choice_summary": {
+    "p2": {
+      "original": {
+        "denominator": 3,
+        "mean_teacher_label_probability": 0.17150667179745913,
+        "teacher_label_greedy_matches": 0
+      },
+      "reference": {
+        "denominator": 3,
+        "mean_teacher_label_probability": 0.10816566854732024,
+        "teacher_label_greedy_matches": 0
+      },
+      "teacher": {
+        "denominator": 3,
+        "mean_teacher_label_probability": 0.6551685126360266,
+        "teacher_label_greedy_matches": 3
+      }
+    },
+    "p3": {
+      "original": {
+        "denominator": 3,
+        "mean_teacher_label_probability": 0.18393537391518466,
+        "teacher_label_greedy_matches": 1
+      },
+      "reference": {
+        "denominator": 3,
+        "mean_teacher_label_probability": 0.10827662353140954,
+        "teacher_label_greedy_matches": 0
+      },
+      "teacher": {
+        "denominator": 3,
+        "mean_teacher_label_probability": 0.4957888311951595,
+        "teacher_label_greedy_matches": 2
+      }
+    }
+  },
+  "claim_scope": "fixed_bank_imitation_and_exact_saved_numerics_only",
+  "config_id": "sha256:4bbaa639528094a3b18e746d211d816eeee6b9e271734d5f9cbea6e1f8c125c7",
+  "copy_fitting_metrics": [
+    {
+      "Adam_steps": 5722,
+      "copy": "p2-reference",
+      "draws": 2048,
+      "final": {
+        "root_equal_cross_entropy": 0.2783012568597259,
+        "root_equal_label_probability": 0.7881251744345691
+      },
+      "initial": {
+        "root_equal_cross_entropy": 1.2191851440558896,
+        "root_equal_label_probability": 0.43979404596450905
+      },
+      "optimizer_id": "sha256:72d4efaaec742818970bea71345f84d0601c4badb58aee5c5c9e7bd1a1a120d3",
+      "state_id": "sha256:fdaa4815dfe6aaead0fdf076a77b24ffb7ddf9e256648f158236e06e9750a7d2",
+      "updates": 64
+    },
+    {
+      "Adam_steps": 5722,
+      "copy": "p2-teacher",
+      "draws": 2048,
+      "final": {
+        "root_equal_cross_entropy": 0.2900403585083412,
+        "root_equal_label_probability": 0.7863411464073784
+      },
+      "initial": {
+        "root_equal_cross_entropy": 1.2510068901142966,
+        "root_equal_label_probability": 0.4301324549870202
+      },
+      "optimizer_id": "sha256:4bb4db732a46bc3848be54237c3626242419877308f7273d89983622e47253e1",
+      "state_id": "sha256:d8100e74937ebbaff1784e66aa9c18db576dca380bd74777f57946d8f9a67da0",
+      "updates": 64
+    },
+    {
+      "Adam_steps": 6109,
+      "copy": "p3-reference",
+      "draws": 2048,
+      "final": {
+        "root_equal_cross_entropy": 0.24136522346094472,
+        "root_equal_label_probability": 0.8147540908700809
+      },
+      "initial": {
+        "root_equal_cross_entropy": 1.1304473879075407,
+        "root_equal_label_probability": 0.46369881144433833
+      },
+      "optimizer_id": "sha256:c5650886ee8e670b9b8754d3670e57563111a4b83307ec1f988563afed043e14",
+      "state_id": "sha256:ec75937f84a0a2748dfa8e463e461ee3393648db708ecdb4176a98a13e834b81",
+      "updates": 64
+    },
+    {
+      "Adam_steps": 6109,
+      "copy": "p3-teacher",
+      "draws": 2048,
+      "final": {
+        "root_equal_cross_entropy": 0.24010257717311442,
+        "root_equal_label_probability": 0.8203951727701505
+      },
+      "initial": {
+        "root_equal_cross_entropy": 1.1676320476553388,
+        "root_equal_label_probability": 0.46390495474029714
+      },
+      "optimizer_id": "sha256:169c58a0728aa49c34f3a01d7ff152f2f6d5954ef6594102b8aeac5435b83b20",
+      "state_id": "sha256:86cb5feb4598982e6affccdd854ce41c85091d58afd69fb661ee43a96d644907",
+      "updates": 64
+    }
+  ],
+  "copy_reconstruction_report_ids": [
+    "sha256:f98d30ef543b8679a077cc2e674d613cc8e1ea03a8dce860f3ea0974990bdf42",
+    "sha256:a9980d92d9a13c77daeeb03c9b415f5d998c9fb54ce823c068ca24d00436423a",
+    "sha256:f47b3318272894143273f3fa97564ae6764aa06b21f68bca5ad8e100dc436467",
+    "sha256:b61d8f1bc530da2e9c55914507e3f5ef83e3722e2827f3dcab20bf9902b235f2"
+  ],
+  "critic_weights_unchanged": true,
+  "environment_id": "sha256:4c445e402d31ceea743165d203b03c1b9b6744f1a6a8396a797bb4a412efbc81",
+  "fresh_mode_specific_canaries_still_required": true,
+  "frozen_finals_id": "sha256:dbcb59804525246e6cd92a2a1273f7094afb735eca8c69dfa9171350f124d189",
+  "frozen_input_checks": {
+    "candidate_unchanged": true,
+    "execution_runtime_exact": true,
+    "frozen_archive_unchanged": true,
+    "game_archive_verified": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_learning_or_game_retries_started": false,
+  "guard_receipt_id": "sha256:e61b1c0eedea55fa880e8f898396fe74b9456d1a3c73cc3aacc3b9e14e391b39",
+  "new_checkpoint_live_delivery_qualified": false,
+  "new_game_attempts": 0,
+  "new_registered_study_optimizer_updates": 0,
+  "next_stage": "separately_prepare_and_qualify_six_fresh_final_policy_mode_native_official_ending_pairs",
+  "no_evaluation_used_for_final_selection": true,
+  "ordinary_PPO_allowed": false,
+  "playing_strength_evaluated": false,
+  "promotion_allowed": false,
+  "registered_main_optimizer_updates": 256,
+  "report_id": "sha256:8929713ace97bb0e7ecaffb6798b19bc433d87cf8699ab17755f7510b363e656",
+  "resources": {
+    "owner_cpu_seconds": 508.19728460999994,
+    "owner_output_bytes": 119063589,
+    "owner_peak_memory_bytes": 330743808,
+    "owner_wall_seconds": 563.0235305419774
+  },
+  "saved_assessment": {
+    "path": "artifacts/native-varied-fitting/owner-assessment-v1/report.json",
+    "sha256": "b5b296d9ed6bdfdc600a6c79517b17742b1f2a5be767e3ac1656b1b96f738d70"
+  },
+  "schema_version": "native-varied-fitting-result-evidence-v1",
+  "sealed_units_verified": 67,
+  "separate_numerical_reconstruction_steps": 256,
+  "source_report": {
+    "path": "artifacts/native-varied-teaching/study-v1/fitting/report.json",
+    "sha256": "76b4b45ed9025d6247ac13c56a4eb2302a350ace43d5a88fb3e125d8e2a05297"
+  },
+  "source_report_id": "sha256:b5c79b141bf18d499606bc1b5dd06add639b5af7aacb5b794aeeb05a92f38984",
+  "source_resource_id": "sha256:16b71f8db03a50855850e0c43dcde0ce23a12d372104782696062459d4699c4c",
+  "status": "all_256_updates_full_Adam_and_fixed_finals_independently_reconstructed",
+  "unique_checkpoint_recorded_regressions_verified": 66,
+  "withheld_or_full_game_evaluation_started": false
+}
