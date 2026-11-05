@@ -2,14 +2,17 @@
 
 ## Binding objective
 
-SpireShift maximizes terminal full-run victory probability subject to a fixed whole-run
-computation budget. Act completion, floor reached, HP, and resource preservation are auxiliary
-targets and diagnostics. They must never silently replace terminal victory as the primary
-optimization or headline evaluation metric.
+SpireShift's current priority is a base player that consistently wins complete Ironclad/A8 runs
+from normal starts on unseen worlds, followed by separately validated A10 play. Terminal full-run
+victory is the primary optimization and evaluation outcome. Act completion, floor, HP and
+resources are auxiliary diagnostics. CPU costs are secondary operational measurements; CPU
+profiling, equal-budget studies and adaptive allocation must not displace base-player learning.
 
 Every experiment must load a versioned `ObjectiveSpec`. Changes to the primary objective,
 terminal condition, or compute constraint require an architecture decision record and explicit
-test updates.
+test updates before execution. Historical experiments retain their fixed whole-run constraints,
+including the 128-CPU-second guard. ADR 0007 changes future work priority and compatibility scope;
+it does not silently mutate an existing objective, guard, recipe or result.
 
 New full-run learning may also declare a versioned `TrainingScoreSpec` for an explicit bootstrap
 learner return (ADR 0002). Keep it separate from binary environment rewards and terminal-victory
@@ -25,6 +28,44 @@ value regret, calibration, confident catastrophic errors, held-out generalizatio
 model-guided search improves at equal compute.
 
 ## Current learning priority
+
+The owner reprioritized the program on 2026-11-04: build a useful full-game base player and
+demonstrate sustained A8 wins, then attempt A10. This directive and ADR 0007 supersede the
+older handoffs below that put CPU attribution or completing the six exact-final canaries next.
+The ordered current backlog is docs/backlog.md. Parent #78 owns the base milestone; next #152
+prepares a win-focused curriculum spanning all acts, strategic decisions and final bosses.
+#134/#35 own whole-game learning, #143 demonstrated model/input needs, #146 fresh-game strength,
+#149 targeted parity/final official validation and #142 later A10 support.
+
+Use the frozen native engine for learning/development with current source/public-input/action,
+known-gap and reset checks. Prepare a separately versioned admission/recipe before new work;
+the old six-case live gate is not silently bypassed or declared passed. For the new program,
+target official checks to changed interface/mechanisms and promising candidate milestones,
+with genuine official validation before claiming official-game competence. Repeated full
+official endings for every numerical checkpoint and renderer CPU profiling are off the critical
+path. A demonstrated input/action/effect defect still requires a targeted fix/regression.
+
+The present teaching studies establish narrow fitting, not a useful player: prior full-game
+versions won 0/64, and the latest three teacher gains are +1/+1/+5 HP in already-won floor-2
+fights. Seek successful varied continuations and meaningful later-game/boss learning, not
+merely more copies of weak early labels. Explicit training-only late-act/boss starts are a
+prospective curriculum tool; qualify their state/reset semantics and keep their outcomes
+separate from normal-start full-run evaluation. No privileged teacher state reaches student
+inputs, and held-out worlds never become labels.
+
+Keep original/fitted full states and Adam as immutable baselines. New lineages may change all
+learnable decision families, representation, architecture and policy/value training; exact warm
+Adam, a fixed critic and proximity to a weak original are not universal requirements. Choose
+material changes from evidence rather than automatically repeat or enlarge failed recipes.
+Measure unseen natural-start wins, failure denominators and uncertainty; freeze the competence
+threshold and confirmation scope before the assessment. Base competence precedes A10 and the
+separate value/risk/search-readiness requirements for adaptive controllers.
+
+Preserve the old canary result as three passes, one incomplete and two unattempted, its marker,
+all frozen files and the blocked launcher. Do not retry VTV204 or relabel this as qualification.
+Its completion, the old same-final interference experiment, CPU/budget research, GA/hybrid
+bakeoffs and unrelated platform work are deferred. Practical wall/memory/storage caps remain
+for bounded execution. This reprioritization launches no training, game, promotion or long job.
 
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;

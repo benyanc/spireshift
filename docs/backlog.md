@@ -1,4 +1,55 @@
-## Current handoff — three canary pairs match; diagnose the official CPU guard
+## Current priority — build a base player that consistently wins A8, then A10
+
+Owner direction, November 4, 2026. [ADR 0007](decisions/0007-a8-base-competence-first.md)
+supersedes the older next-step handoffs below. The goal is genuine normal-start
+full-run wins on unseen A8 worlds. CPU cost is an operational diagnostic; local
+lesson fitting and passing compatibility checks are implementation milestones.
+The numerical definition of sustained competence and confirmation panel must be
+frozen before its assessment; no new numerical target is claimed accepted here.
+
+| Order | Work item | Required outcome |
+| --- | --- | --- |
+| 1 — next implementation | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Prepare a new frozen-native development scope and useful training-owned examples across all acts, deck/path/resource decisions and final bosses. Qualify stronger successful continuations and explicitly marked later-act/boss training starts. Pass a short real-data learning control before one owner-run command. |
+| 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
+| 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
+| 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
+| 5 — at promising candidate milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Keep automated parity regressions and fix reached correctness defects. Verify promising candidates through real official games before claiming official-game competence. Prepare a new declared schedule; old unpassed guards and reports stay intact. |
+| 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
+
+[#143](https://github.com/benyanc/spireshift/issues/143) supports items 1–3 when
+observed learning failures justify representation or capacity changes; it is not
+a prerequisite for another broad feature audit. [#5](https://github.com/benyanc/spireshift/issues/5)
+defines the separate foundation/search-readiness scorecard; its closed definition
+task is not evidence that a player passed it. Calibration and adaptive-search
+readiness follow useful base play and do not hold up ordinary base development.
+
+Items 1–3 form the development loop; the table orders the next implementation,
+not a request to finish a large isolated study before testing gameplay benefit.
+Freeze train/development/final-test ownership, candidate selection and practical
+resource caps before each new run. Preserve public-state-only student inputs,
+complete legal actions, original failure denominators, immutable evidence and
+the game build. Old full checkpoints/Adam remain reference baselines, while new
+lineages may change the architecture and learning method. Long jobs remain owner-run.
+
+**Deferred from the critical path:** CPU attribution/profiling; matched-budget
+and compute-allocation research ([#7](https://github.com/benyanc/spireshift/issues/7),
+[#28](https://github.com/benyanc/spireshift/issues/28)–[#34](https://github.com/benyanc/spireshift/issues/34),
+[#36](https://github.com/benyanc/spireshift/issues/36)); GA/hybrid comparisons
+([#135](https://github.com/benyanc/spireshift/issues/135),
+[#139](https://github.com/benyanc/spireshift/issues/139),
+[#140](https://github.com/benyanc/spireshift/issues/140)); the old six-pair ending
+panel and same-final routing-interference stage; unrelated platform/patch/overlay
+work. Resume a supporting task only when it resolves a concrete base-learning
+blocker or after the A8 milestone. This does not disable correctness checks or
+relabel incomplete experiments.
+
+The preserved canary panel stays **3 matching / 1 incomplete / 2 unattempted**;
+its active marker, exact finals, original weights/full Adam and blocked command
+remain unchanged. CPU profiling and completing that old scope are not the next
+work. A new competence recipe/admission scope needs implementation and regressions
+before collection/training; no existing permission is fabricated by this plan.
+
+## Historical handoff — three canary pairs match; diagnose the official CPU guard
 
 See [the assessed canary result](native-varied-final-canary-result.md) and
 [evidence](evidence/native-varied-final-canary-result-v1.json). Keep the original
