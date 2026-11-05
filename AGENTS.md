@@ -1702,6 +1702,42 @@ rerun the completed fitting stage. See docs/native-varied-final-canaries.md,
 its evidence, current backlog and new preparation receipts; update GitHub with
 this prepared/unstarted status and preserve earlier histories.
 
+The owner completed the exact-final canary attempt: VTV201/202 reference and
+VTV203 player-2 teacher pairs pass with genuine matching losses, native ending
+facts/all public reads, official summaries and clean resets. VTV204 player-3
+teacher native reaches a loss after 261 choices, but official stops after 239
+delivered choices at 128.184731264 host CPU seconds, before a genuine ending.
+VTV205/206 routed modes remain unattempted. Preserve the six-pair denominator:
+three passes, one incomplete, two missing. No global qualification is granted.
+
+Saved-only owner-assessment-v1 independently reconstructs all 1,448 actual
+deliveries, the three seals and all shop/atomic/reward/summary proofs. The
+incomplete fourth pair matches 239 delivered choices and 240 offered menus,
+including its last unsubmitted nonterminal menu. A diagnostic-only prefix
+verifier retains the raw checks, explicitly requires this exact CPU abort and
+grants no ending scope; the frozen full-ending verifier remains unchanged.
+No observed common-prefix public-input/menu/choice/delivery divergence is found.
+Do not impute the native suffix/ending to the official host.
+
+The outer cap is null (1432.02 wall / 550.05 CPU seconds). The per-host official
+guard counts Python coordinator delta plus Godot and SDK Node CPU from before
+game launch; it is not inference-only time. Component CPU attribution was not
+retained, so the cause within those processes is unmeasured. The SDK message
+"No checkpoint choice supplied" follows intentional guard abort, not a missing
+legal action. Keep the 128-second objective; next propose a separately frozen
+saved/source CPU-accounting and official-runner performance investigation.
+
+All 29,714 protected prior files, exact dbcb5980... finals and complete Adam,
+original full weights/Adam and tuple48 game/runtime remain unchanged. Native
+hosts shut down cleanly, official checks pass and the app restores its baseline.
+Preserve VTV204's active marker and raw evidence; the launcher correctly blocks
+automatic replay. Do not retry its world, clear the marker, raise the compute
+constraint, refit, skip the failed denominator or rerun the old command. Zero
+new games/updates in assessment; no withheld/full-game/interference evaluation,
+ordinary PPO, promotion, scaling, controller or next experiment is automatic.
+See docs/native-varied-final-canary-result.md, its evidence and the backlog;
+supersede the prepared/unstarted handoff on GitHub while retaining history.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

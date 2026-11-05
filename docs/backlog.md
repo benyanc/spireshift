@@ -1,4 +1,32 @@
-## Current handoff — six exact-final live canary pairs prepared; owner run next
+## Current handoff — three canary pairs match; diagnose the official CPU guard
+
+See [the assessed canary result](native-varied-final-canary-result.md) and
+[evidence](evidence/native-varied-final-canary-result-v1.json). Keep the original
+six-pair denominator: three matching endings, one CPU-limited incomplete pair,
+two unattempted routed pairs. Exact finals and the frozen build stay unchanged.
+
+- [x] Independently reconstruct all 1,448 actual native/official deliveries,
+  three sealed genuine-ending pairs, native ending facts/public reads, official
+  summary proofs and clean resets. The fourth pair matches all 239 delivered
+  choices plus its last unsubmitted menu; no observed common-prefix divergence.
+- [x] Identify the stop: official player-3 teacher VTV204 reaches 128.184731264
+  host CPU seconds before an ending. The outer resource cap is null. Preserve
+  its active marker, complete native counterpart and incomplete official prefix;
+  the existing launcher correctly refuses replay. VTV205/206 remain unattempted.
+- [x] Verify all 29,714 protected files, exact final/original full weights/Adam,
+  game/runtime/CLI/connector/worker/converter/layout and app resets unchanged.
+  Saved audits perform zero games/updates and grant no new panel qualification.
+- [ ] Next separately implement CPU attribution/performance diagnostics for the
+  official runner, starting with saved/source evidence. Its guard counts the
+  coordinator, shipped game and SDK process; inference-only cost is not measured.
+  Keep the 128-second objective and exact finals. Do not raise limits, refit,
+  replay VTV204, discard its denominator or start another panel automatically.
+- [ ] After a separately qualified remedy, prepare the required fresh scope and
+  remaining exact-mode live qualification. Only a successful gate admits later
+  withheld/fresh full-game and same-final interference evaluation. No automatic
+  ordinary PPO, promotion, scaling or adaptive controller.
+
+## Historical handoff — six exact-final live canary pairs prepared; owner run next
 
 See [the canary-only preparation](native-varied-final-canaries.md) and
 [evidence](evidence/native-varied-final-canaries-v1.json). Freeze the exact
