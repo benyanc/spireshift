@@ -98,6 +98,24 @@ owner command collects only and stops, with zero optimizer updates. The linked
 case denominator is 69, including the historical failed case; old commands stay
 blocked. Architect completion and full-game competence remain unqualified.
 
+The v2 #152 owner run completed thirty cases before a runtime-error stop in
+fit-031/reference. The saved audits verify 168 reusable seals, 138 complete
+episodes / 9,208 deliveries, eighteen confirmed lessons and thirteen strict goal
+rescues. Keep both failed worlds/markers and all old data unchanged. The observed
+fit-031 loss is not a clean outcome: an earlier Reattach death-visual call hit the
+missing Godot.Node.GetIndex(Boolean) support API. Its 245 actions are diagnostic only.
+
+docs/native-win-curriculum-reattach.md defines the separately qualified support
+build57 and v3 continuation. Only a Godot stub method is added; the archived
+CLI56, CLI/gameplay source, frozen game assembly and original/fitted full Adam
+remain intact. Native controls must preserve 25-HP segment revival/targetability
+and all-segment combat completion; runtime errors are never whitelisted. The
+new execution manifest retains the same public input contract without inheriting
+official qualification. Import the thirty verified cases without games, retain
+both historical failures and use one fresh replacement for fit-031. The linked
+denominator is 70. The 37 unattempted cases and quality/ownership rules remain
+unchanged. The owner command collects only, then stops with zero updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

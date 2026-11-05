@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — continuation prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Continue and assess the all-act/twelve-boss collection using the [reward-belt repair and explicit recovery](native-win-curriculum-recovery.md). Six completed cases/five lessons are verified; retain the failed seventh case and use its one fresh replacement. The main bank remains incomplete. |
+| 1 — support repair and continuation prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Continue the all-act/twelve-boss collection using the [Reattach support repair](native-win-curriculum-reattach.md). Thirty cases/eighteen lessons are verified; retain both failed cases and use one fresh replacement for fit-031. The main bank remains incomplete. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
@@ -51,7 +51,30 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. Its unstarted main bank still needs owner collection and assessment.
 
-## Current handoff — reward-belt repair; preserve and continue the collection
+## Current handoff — Reattach support repair after thirty completed cases
+
+The v2 collection's guard rejected an earlier missing Godot.GetIndex support
+method after a native loss. Saved audits verify 138 complete episodes / 9,208
+deliveries, eighteen confirmed lessons and thirteen strict goal rescues. The
+failed case's 245 actions remain diagnostic only, alongside the older failed
+world. The frozen game and original/fitted full states/Adam stay unchanged.
+
+- [x] Build a separate support revision57 with only the missing Node method;
+  reproduce the old JIT failure and verify two identical repaired builds.
+- [x] Verify native 25-HP revival/targetability, all-segment death/rewards and
+  clean shutdown, with twelve actual deliveries and fatal runtime guards intact.
+- [x] Prepare thirty-case immutable imports, both historical failures in a
+  70-slot linked denominator, one fresh replacement and one owner command.
+- [ ] Owner runs `bash scripts/continue-win-curriculum-v3.sh`, then assess the
+  completed all-boss/decision-family/held-world bank before learning.
+- [ ] Prepare #134/#35 learning and #146 fresh full-game evaluation. The separate
+  Architect completion repair and official candidate verification remain pending.
+
+See [the current continuation](native-win-curriculum-reattach.md) and
+[evidence](evidence/native-win-curriculum-reattach-v1.json). No automatic fitting,
+promotion or adaptive controller follows. Earlier commands remain historical.
+
+## Historical handoff — reward-belt repair; preserve and continue the collection
 
 The owner run stopped on duplicate owned potion referents after six completed
 cases. The saved audit reconstructs 1,148 deliveries and five confirmed lessons,
