@@ -1,4 +1,26 @@
-## Current handoff — all 256 fitting updates verified; exact-final live canaries next
+## Current handoff — six exact-final live canary pairs prepared; owner run next
+
+See [the canary-only preparation](native-varied-final-canaries.md) and
+[evidence](evidence/native-varied-final-canaries-v1.json). Freeze the exact
+dbcb5980… finals, original full weights/Adam, tuple48 game and historical code.
+
+- [x] Bind the independently reconstructed 256-update assessment, all four full
+  fitted states/Adam and both original routing anchors to a separate launch scope.
+- [x] Retain all six predeclared worlds VTV201–206 and reference/teacher/routed
+  modes. Preserve ten-minute pairs, 128 gameplay CPU seconds per host and
+  384-choice guards; zero optimizer updates and no automatic follow-up.
+- [x] Verify 1,752 paired saved-menu mode comparisons without starting any game
+  or consuming a planned world. These checks grant no live qualification.
+- [ ] Owner runs `bash scripts/compare-varied-finals-v1.sh`, about 25–45 minutes,
+  with one 70-minute/7,200-CPU-second/4-GB outer session. Qualify six pairs only,
+  then stop. Clean seals resume; incomplete or uncertain attempts are not retried.
+- [ ] Independently assess all six genuine ending pairs, raw deliveries,
+  official summaries and clean resets against their exact final/mode bindings.
+- [ ] Only after that gate, separately select withheld/fresh full-game and
+  same-final interference evaluation. No fitting, PPO, promotion, scaling or
+  adaptive controller follows automatically from this preparation.
+
+## Historical handoff — all 256 fitting updates verified; exact-final live canaries next
 
 See [the assessed fitting result](native-varied-fitting-result.md) and
 [evidence](evidence/native-varied-fitting-result-v1.json). Preserve all four fixed

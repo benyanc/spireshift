@@ -1665,6 +1665,43 @@ full-game / same-final interference tests. No automatic next run, ordinary PPO,
 promotion, scaling or controller. See docs/native-varied-fitting-result.md, its
 evidence and current backlog; keep GitHub work items aligned with this result.
 
+The owner authorized preparing six fresh native/official canary pairs for the
+exact independently assessed dbcb5980… finals, preserving the game and all
+original/fitted weights and full Adam. New native_final_canary_session plus
+compare-varied-finals-v1 wrapper use a separate operational attempt-scope
+receipt; all historical study/fitting/runner/converter files remain unchanged.
+Pin source/test hashes, fitting assessment/resource/report, all six full state
+and Adam bindings, predeclared VTV201–206 cases and 29,714 prior files.
+This attempt scope grants no inherited live admission or ordinary PPO permission.
+
+Saved-mode control passes in 194.82s: six exact factories × 292 paired saved menus,
+1,752 comparisons, matching complete input/action/feature/distribution/value,
+ownership/navigation/RNG outputs with the required actor. These are explicitly
+counterfactual chooser inferences on old recorded states, not new-policy actual
+deliveries or game trajectories. Zero worlds/games/updates; no live scope is
+granted. Current canary/evaluation workspaces remain unstarted at handoff.
+
+One owner command scripts/compare-varied-finals-v1.sh runs the six fixed pairs
+only, about 25–45 minutes. A separate 70-minute/7200-CPU-second/4-GB outer session
+allows the whole panel without changing ten-minute pair boundaries or 128
+gameplay CPU seconds/384 choices per host. The original study's default session
+metadata remains immutable; the operational launcher passes this full-panel
+deadline explicitly. Source/workspace/output caps bind the actual canary journal
+and launch receipts; fixed game/runtime/app and prior bank/fitting are read-only
+inputs. One managed app is reused serially, with fresh isolated profiles.
+
+Require exact playable inputs/menus/receipts, genuine matching natural endings,
+full terminal facts/persistent state/all reads, official native summary and clean
+resets. Presentation-only terminal graph differences stay retained, never realign
+divergent suffixes. Limits remain incomplete. Clean sealed prefixes resume with
+the same command; unfinished/changed cases preserve markers/profiles and block
+automatic replay. All six named mode/case pairs must pass. No forced outcomes,
+new fitting, heldout/fresh evaluation, PPO, promotion, scaling or controller follows.
+Assess the owner canary result before separately selected evaluation. Do not
+rerun the completed fitting stage. See docs/native-varied-final-canaries.md,
+its evidence, current backlog and new preparation receipts; update GitHub with
+this prepared/unstarted status and preserve earlier histories.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
