@@ -9,11 +9,11 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — support repair and continuation prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Continue the all-act/twelve-boss collection using the [Reattach support repair](native-win-curriculum-reattach.md). Thirty cases/eighteen lessons are verified; retain both failed cases and use one fresh replacement for fit-031. The main bank remains incomplete. |
+| 1 — compact-answer continuation prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Continue the all-act/twelve-boss collection using [compact ordered answers](native-win-curriculum-large-selection.md). Thirty-one complete cases/eighteen lessons are verified; retain all three failures and use one fresh replacement for fit-032. The main bank remains incomplete. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
-| 5 — targeted defects now; official games at promising milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Repair/qualify the newly reached headless Architect completion before normal-start victory validation. Keep automated parity regressions; verify promising candidates through real official games before claiming official competence. Preserve old guards/results. |
+| 5 — targeted defects now; official games at promising milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Repair/qualify headless Architect completion and official delivery of compact large selections before normal-start victory validation. Keep automated parity regressions; verify promising candidates through real official games before claiming official competence. Preserve old guards/results. |
 | 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports items 1–3 when
@@ -51,7 +51,31 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. Its unstarted main bank still needs owner collection and assessment.
 
-## Current handoff — Reattach support repair after thirty completed cases
+## Current handoff — compact ordered answers after case 31
+
+Gambling Chip's six-card replacement menu exceeds the old 512-answer bound:
+1,957 ordered answers. The [new native-only contract](native-win-curriculum-large-selection.md)
+constructs a complete ordered answer with bounded internal factors and sends one
+native commit. All lengths/copies/orderings remain reachable. Partial plans provide
+no labels; the new bank groups factors as one answer without increasing its weight.
+
+- [x] Reconstruct 31 complete cases / 173 seals / 10,172 clean deliveries, retaining
+  eighteen confirmed lessons and thirteen strict goal rescues. Preserve the
+  interrupted case's three completed siblings and 187-action diagnostic prefix.
+- [x] Preserve all three failures, their markers and original worlds. Prepare a
+  71-slot linked denominator and one disjoint replacement for fit-032; no replay.
+- [x] Reproduce the saved rejection and check all 1,957 ordered answers, a 100-card
+  grammar, exact card order, empty/cancel/bounds and strict public decoding.
+- [ ] Owner runs `bash scripts/continue-win-curriculum-v4.sh`, then assess the
+  complete curriculum bank before a separately selected #134/#35 learning recipe.
+- [ ] Support grouped answer labels in that future learner; qualify official
+  compact delivery and Architect completion before full-game victory claims.
+
+The game, original CLI56/support57 and full original/fitted weights/Adam remain
+frozen. Main collection is unstarted by the repair; no optimizer updates or
+adaptive control follows. Previous handoffs and commands below are historical.
+
+## Historical handoff — Reattach support repair after thirty completed cases
 
 The v2 collection's guard rejected an earlier missing Godot.GetIndex support
 method after a native loss. Saved audits verify 138 complete episodes / 9,208

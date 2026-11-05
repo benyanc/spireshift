@@ -1,0 +1,353 @@
+{
+  "A8_competence_established": false,
+  "Architect_completion_qualified": false,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "checks": {
+    "CSharp_build_and_contracts": true,
+    "JavaScript_grammar_and_tamper_regressions": 7,
+    "Python_new_unit_tests": 8,
+    "commit_hooks": true,
+    "exact_current_implementation_pins_match": true,
+    "format": true,
+    "lint": true,
+    "repository_check_resource": {
+      "cap": null,
+      "path": "artifacts/resources/win-curriculum-plan-check-v3.json",
+      "report_id": "sha256:311070e1f6f6eb276606ee03fde54e9eeb645f861aa4287a8d1dbe7b22986e91",
+      "sha256": "52364aff0a602e6ff9ff270302a36452cc05f80af87e081b279887fb6d6ecee5",
+      "status": "completed",
+      "wall_seconds": 165.06272229203023
+    },
+    "repository_tests_passed": 2836,
+    "strict_types": true,
+    "strictly_checked_source_files": 822
+  },
+  "claim_scope": "Retained complete constructed-start curriculum cases, finite ordered-answer grammar, actual native Gambling Chip controls and bounded collection-path integration; main bank incomplete; no natural-start full-run competence claim.",
+  "collection_path_integration": {
+    "all_173_imports_validate_actual_original_requests": true,
+    "all_three_historical_markers_preserved": true,
+    "complete_collector_saved_verifier_compact_answers": [
+      {
+        "actual_native_answers": 1,
+        "factors": 1,
+        "fixture_labels_allowed": false,
+        "mode": "reference2"
+      },
+      {
+        "actual_native_answers": 1,
+        "factors": 8,
+        "fixture_labels_allowed": false,
+        "mode": "reference3"
+      },
+      {
+        "actual_native_answers": 1,
+        "factors": 8,
+        "fixture_labels_allowed": false,
+        "mode": "teacher2"
+      },
+      {
+        "actual_native_answers": 1,
+        "factors": 8,
+        "fixture_labels_allowed": false,
+        "mode": "teacher3"
+      }
+    ],
+    "new_main_started": false,
+    "new_normal_and_loaded_start_native_deliveries": 4,
+    "report": {
+      "path": "artifacts/native-win-curriculum/plan-integration-v2/report.json",
+      "report_id": "sha256:8ca457cbeb3ab36700adc176188dc580308f513befd8d4f5af848474d857c61f",
+      "sha256": "b75d6780b1df503f7a3392129c9abf86b71ce4af650783ed1cc143b725270a0a"
+    },
+    "resource": {
+      "cap": null,
+      "path": "artifacts/resources/win-curriculum-plan-integration-v2.json",
+      "report_id": "sha256:2b55303c2c769d4f615d8d881575159bf7ecf9318f72286437b8615aa4124dd2",
+      "sha256": "00110f7e19ddadb58f9532161d72ce71a1345eaf195a4ff73ff41b41eaa63fe5",
+      "status": "completed",
+      "wall_seconds": 60.88062991690822
+    }
+  },
+  "compact_decision_contract": {
+    "all_lengths_copies_and_orderings_preserved": true,
+    "conditional_factor_probabilities_and_joint_behavior_probability_reconstruct": true,
+    "each_atomic_answer_label_weight": 1.0,
+    "full_observed_domain_1957_answers_compared": true,
+    "grouped_bank_schema": "native-win-curriculum-bank-v2",
+    "hundred_card_domain_checked_without_enumeration": true,
+    "id": "factorized_ordered_card_answer_v1",
+    "incomplete_answers_labels_allowed": false,
+    "native_scope_only": true,
+    "official_Connector31_large_domain_still_unsupported": true,
+    "old_flat_label_learner_automatically_compatible": false,
+    "one_native_commit_or_cancel_per_logical_answer": true,
+    "persistent_policy_memory_committed_only_at_native_completion": true,
+    "prefix_actions_delivered_to_native_game": 0,
+    "root_native_belt_permissions_preserved": true,
+    "small_selector_path_unchanged": true
+  },
+  "config": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v4.json",
+    "sha256": "e0bfbe96da03e260b84fb586f1a1e10cef6179e84e4033434b239e76899b8808"
+  },
+  "config_id": "sha256:290673f0b1e317ac462749cfde5d9a4add924243b88f4b524f592c0606931b00",
+  "continuation": {
+    "automatic_follow_up": false,
+    "collect_and_assess_then_stop": true,
+    "complete_cases_imported_without_games": 31,
+    "current_recipe_cases": 68,
+    "data_ownership_objectives_quality_and_teacher_score_unchanged": true,
+    "fresh_replacement_cases": 1,
+    "fresh_replacement_key": "fit-032-replacement-1",
+    "linked_case_denominator": 71,
+    "new_main_started": false,
+    "optimizer_updates": 0,
+    "replacement_seed_pool": [
+      "SP1RESH1FTW4F032P01",
+      "SP1RESH1FTW4F032P02",
+      "SP1RESH1FTW4F032P03",
+      "SP1RESH1FTW4F032P04",
+      "SP1RESH1FTW4F032P05",
+      "SP1RESH1FTW4F032P06",
+      "SP1RESH1FTW4F032P07",
+      "SP1RESH1FTW4F032P08"
+    ],
+    "retained_historical_failed_cases": 3,
+    "teacher_conditional_decision_representation_explicitly_versioned": true,
+    "unattempted_cases_unchanged": 36
+  },
+  "current_native_control": {
+    "actual_native_committed_answers": 6,
+    "checks": {
+      "all_conditional_choices_and_joint_probabilities_reconstruct": true,
+      "both_original_numerical_initializers_and_teacher_modes": true,
+      "clean_shutdown_and_originals_frozen": true,
+      "main_unstarted_zero_updates": true,
+      "native_Gambling_Chip_ordered_and_empty_answers": true,
+      "one_native_commit_per_answer_no_native_prefix_actions": true
+    },
+    "diagnostic_fixtures_labels_allowed": false,
+    "local_factors_separately_accounted": 23,
+    "optimizer_updates": 0,
+    "report": {
+      "path": "artifacts/native-win-curriculum/plan-control-v4/report.json",
+      "report_id": "sha256:f52ebf69435d9378e1880bdb5e7e3f14ede438593226fe8b323a012a8836e868",
+      "sha256": "86055c7ad207442e32b442d3c77652d4893b208b2299adf5a9e1468d518626c8"
+    },
+    "resource": {
+      "cap": null,
+      "path": "artifacts/resources/win-curriculum-plan-control-v4.json",
+      "report_id": "sha256:f84ab1c8fcdd28466374d85b7489045090dc3076f9827f72973e2d3f4f99f090",
+      "sha256": "9fe2ac5b7c5a096b124bdddcb14c541968d7f43dc62869f1aca57ae22fa00336",
+      "status": "completed",
+      "wall_seconds": 74.59380000003148
+    }
+  },
+  "failure": {
+    "acknowledged_diagnostic_actions": 187,
+    "case": "fit-032/scaling",
+    "game_update_or_rules_discrepancy_established": false,
+    "labels_allowed": false,
+    "max_select": 999999999,
+    "mechanism": "Gambling Chip combat-entry replace-any-number hand selection",
+    "min_select": 0,
+    "native_exit_after_stop": 143,
+    "native_large_selector_response_preserved": true,
+    "old_adapter_action_limit": 512,
+    "ordered_answers_including_empty": 1957,
+    "original_worker_termination_verified": true,
+    "selectable_physical_cards": 6,
+    "three_complete_siblings_episodes_verified_but_labels_excluded": true,
+    "unacknowledged_next_map_action": true
+  },
+  "frozen": {
+    "Connector": 31,
+    "converter": 16,
+    "game_assembly_CLI_source_and_support_build_unchanged": true,
+    "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "game_revision": "41cef1ea",
+    "game_version": "0.111.0",
+    "layout": 12,
+    "managed_runtime_SDK_Python_Numpy_and_uv_unchanged": true,
+    "native_support_build": 57,
+    "new_native_decision_execution_environment_id": "sha256:4c969b678847ec8c0eb0f673125276c7807ab70eb0818e7f394afd0095ac341b",
+    "ordinary_worker": 24,
+    "original_CLI": 56,
+    "original_and_prior_final_full_weights_and_Adam_unchanged": true,
+    "pinned_Node_restored_exactly": true,
+    "public_graph_input_contract_environment": 48
+  },
+  "full_game_strength_evaluated": false,
+  "implementation_id": "sha256:dd3600601e5342ebe4451b36c3358f22ecbef6b1ef3d7b576e4204cb11a99014",
+  "launch_binding_id": "sha256:19a0b4f250042ba6a56b8a784d1d6081107a2e52b34f15772ebf12da279083ab",
+  "official_live_qualification_granted": false,
+  "old_canary_pass_incomplete_unattempted": [
+    3,
+    1,
+    2
+  ],
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-win-curriculum-v4.sh\"",
+  "parent_owner_failed_resource": {
+    "path": "artifacts/resources/win-curriculum-v3-attempt-1.json",
+    "report_id": "sha256:593e8ef8e5eacdb0de18f93c9bd7bf13bdfa214a0ba497cf478918c05715d254",
+    "sha256": "de0eb0e226cd0771aef288ba95c732929c67a62835ed1d340b621ff55a52eef9"
+  },
+  "preserved_diagnostic_preparations": {
+    "all_preparation_optimizer_updates": 0,
+    "completed_check2_log_preserved": {
+      "path": "artifacts/native-win-curriculum/plan-preparation-v1/repository-check-v2.log",
+      "sha256": "f67abbee555935c9fd7a48106f821a480720fe0a75560c7eed4c57684cdff142"
+    },
+    "control3_and_check2_outer_resource_trackers_interrupted": true,
+    "first_integration_four_native_deliveries": {
+      "path": "artifacts/resources/win-curriculum-plan-integration-v1.json",
+      "report_id": "sha256:04d35c8c777ee811c1895e10040f2f32d69fcae32c8eab785db0dbc0ceb08823",
+      "sha256": "b8159364218ab5295b5d9267c61f8b5cec5204aef91ff1c612869616881b749a"
+    },
+    "first_saved_audit_runtime_environment_and_path_failures_preserved": true,
+    "historical_failed_worlds_replayed": false,
+    "missing_resource_receipts_fabricated": false,
+    "native_control_3_completed_child_report": {
+      "path": "artifacts/native-win-curriculum/plan-control-v3/report.json",
+      "report_id": "sha256:011c39c638303d6f33ea2544ab90f15275ce8c11bf4a4e81451e24d2bcbde320",
+      "sha256": "c52e81b8527e2293a8354bdd098ac14f6aee8378fc5748ca8954bd847bcf403d"
+    },
+    "native_controls_1_and_2": [
+      {
+        "path": "artifacts/native-win-curriculum/plan-control-v1/report.json",
+        "report_id": "sha256:ecff50b57687c973143ce68200b14b84e324f0fd92b1dadf404744cfddb13a6d",
+        "sha256": "2295629da4e0fb22f32c3e0b76ba55c6ac16f6e9bc7d3f128e8542c53b65de51"
+      },
+      {
+        "path": "artifacts/native-win-curriculum/plan-control-v2/report.json",
+        "report_id": "sha256:963c6598c0fc2e4d27dbe672b3d7265522c2323b1660f6dbbe734b1de829c8ef",
+        "sha256": "c64ef8a05a94fce500e1c41714ca9972e69775119057f4f9a1ea36296af36aea"
+      }
+    ],
+    "provisional_or_diagnostic_labels_included": false,
+    "source_archives_control1_and_control2_preserved": true,
+    "type_annotation_check_failure": {
+      "path": "artifacts/resources/win-curriculum-plan-check-v1.json",
+      "report_id": "sha256:5f73915aedf1ec7c9f7cab47b8d772862bf0ae0146da42c60a0b6d45089bb3b3",
+      "sha256": "d8a2f045ab33856d4e7a698632d4141b7c9655c5e549b4a553a084375aa39e1f"
+    }
+  },
+  "promotion_allowed": false,
+  "protection": {
+    "files": 53441,
+    "path": "artifacts/native-win-curriculum/plan-preparation-v1/protected-v3-result.json",
+    "sha256": "136c3fa8f0b9589975659b507cb0330dd1dbff694d31b2e0ec4e853d4ced2a97"
+  },
+  "report_id": "sha256:f0e5afabdd417c5e31f94662a19ce099e49f5ce8dde93a66234c2fbc49ec3813",
+  "runtime_drift_and_restoration": {
+    "app_managed_path": "/Users/benjamin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "app_managed_replacement_currently_restored_to_original_pin": true,
+    "byte_identical_original_restored": true,
+    "detected_changed_sha256": "05d9888b3883526095889643ea7b14457ccb9c070875e5b9543bc0314601fb40",
+    "expected_and_restored_sha256": "7d2b4ed360d609a4de6485b0cbea57370eee4dba157877799e83104db570cbdd",
+    "future_app_updates_prevented_claimed": false,
+    "future_runtime_hash_drift_blocks_admission": true,
+    "new_source_game_or_model_upgrade_admitted": false,
+    "old_game_and_model_files_touched": false,
+    "optimizer_updates": 0,
+    "preserved_changed_copy": "artifacts/native-win-curriculum/plan-preparation-v1/node-runtime-drift/app-managed-replaced-node",
+    "preserved_exact_source": "/Users/benjamin/Library/Application Support/Codex/artifact-sessions/runtime-generations/generation-avULgb/runtime/bin/node",
+    "project_frozen_copy": {
+      "path": "artifacts/engine-tooling/node-v24.22.1-darwin-arm64-frozen-v1/node",
+      "sha256": "7d2b4ed360d609a4de6485b0cbea57370eee4dba157877799e83104db570cbdd"
+    },
+    "report": {
+      "path": "artifacts/native-win-curriculum/plan-preparation-v1/node-runtime-drift/report.json",
+      "sha256": "bd97f02c3498473a79b5a8eaa0c0a963048c7c53fb9c1f6ebdd3a76abf586ca4"
+    },
+    "schema_version": "pinned-node-runtime-restoration-v1",
+    "unchanged_node_version": "v24.22.1"
+  },
+  "saved_audit": {
+    "complete_cases": 31,
+    "confirmed_lessons": 18,
+    "historical_failures": [
+      {
+        "accepted_prefix_deliveries": 26,
+        "key": "fit-007",
+        "labels_allowed": false,
+        "marker_preserved": true,
+        "native_process_terminated": true,
+        "status": "historical_observation_failed",
+        "unacknowledged_next_action": true
+      },
+      {
+        "acknowledged_deliveries": 245,
+        "key": "fit-031",
+        "labels_allowed": false,
+        "marker_preserved": true,
+        "native_exit_code": 0,
+        "native_terminal_loss_observed": true,
+        "runtime_error": "[ERROR] [ERROR] System.MissingMethodException: Method not found: 'Int32 Godot.Node.GetIndex(Boolean)'.",
+        "seed": "SP1RESH1FTW1F031P01",
+        "status": "historical_runtime_error",
+        "worker_termination_verified": true
+      },
+      {
+        "acknowledged_diagnostic_deliveries": 187,
+        "adapter_bound": 512,
+        "clean_siblings_labels_allowed": false,
+        "key": "fit-032",
+        "labels_allowed": false,
+        "marker_preserved": true,
+        "native_exit_code": 143,
+        "ordered_answers": 1957,
+        "status": "historical_large_selection_unsupported",
+        "unacknowledged_next_action": true,
+        "worker_termination_verified": true
+      }
+    ],
+    "new_case_31_replacement_deliveries": 964,
+    "new_case_31_teacher_successes": 0,
+    "partial_case_32_complete_sibling_deliveries_diagnostic_only": 499,
+    "report": {
+      "path": "artifacts/native-win-curriculum/plan-audit-v3/report.json",
+      "report_id": "sha256:d2ce9ef7ef33c7b2b85e69e8187cc92833c9f1a79201d432d9ed535c59b7af92",
+      "sha256": "cf66b30dc987fa42a04e2073f3ca2933d6448b160271baa9987bb0185b1e24a8"
+    },
+    "resource": {
+      "cap": null,
+      "path": "artifacts/resources/win-curriculum-plan-audit-v3.json",
+      "report_id": "sha256:d96f094e8a2f3cd1781e745e9ba74b436fc4726c85c8847628982c3c0728da32",
+      "sha256": "9d55d63f6295bb7eaeb966b5b1f299d674751e95157c5280a607d5155843acd0",
+      "status": "completed",
+      "wall_seconds": 98.30290058394894
+    },
+    "reusable_actual_deliveries": 10172,
+    "reusable_complete_episodes": 142,
+    "reusable_seals": 173,
+    "strict_goal_rescues": 13
+  },
+  "saved_exact_response_regression": {
+    "exact_ordered_native_indices": [
+      4,
+      1
+    ],
+    "input": {
+      "path": "artifacts/native-win-curriculum/plan-preparation-v1/saved-probe-input.json",
+      "sha256": "dab47934e04ff6915b0fb6ff48a33097c496e9059aafe41e09ae508fa9aa1816"
+    },
+    "new_games": 0,
+    "old_rejection_reproduced": true,
+    "output": {
+      "path": "artifacts/native-win-curriculum/plan-preparation-v1/saved-probe-result-r2.json",
+      "sha256": "cb83b075945289910ebdbf4eadc72a961a981dcc509de76338957a1e87bf98e0"
+    },
+    "strict_SDK_and_public_shared_input_pass": true
+  },
+  "schema_version": "native-win-curriculum-large-selection-preparation-v1",
+  "session_limits": {
+    "cpu_seconds": 14400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 5400
+  },
+  "status": "compact_ordered_answers_verified_owner_continuation_prepared",
+  "training_allowed": false
+}

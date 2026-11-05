@@ -116,6 +116,27 @@ both historical failures and use one fresh replacement for fit-031. The linked
 denominator is 70. The 37 unattempted cases and quality/ownership rules remain
 unchanged. The owner command collects only, then stops with zero updates.
 
+The v3 collection completed the case-31 replacement, then reached Gambling
+Chip's six-card any-number selector in fit-032/scaling. Its 1,957 ordered answers
+exceed the documented 512-answer adapter domain. Preserve all three failures and
+the latest 187 acknowledged diagnostic actions plus unacknowledged next action.
+Thirty-one complete cases / 173 seals / 10,172 deliveries remain reusable, with
+eighteen confirmed lessons and thirteen strict goal rescues. The three completed
+siblings of interrupted case 32 stay diagnostic only; they supply no labels.
+
+docs/native-win-curriculum-large-selection.md defines a separate native-only v4
+contract. Bounded internal policy factors construct one ordered answer; only final
+commit/cancel reaches the game. Preserve every admissible length, physical copy
+and ordering, exact native bounds/permissions and delivered-only persistent memory.
+Partial plans provide no labels; group all factors as one answer with weight one.
+Future fitting must explicitly support the grouped version-2 bank. The game,
+CLI56/support57, original/fitted full states and all older code remain fixed.
+Import the 31 completed cases without games, preserve three failed worlds/markers
+and the linked 71-slot denominator, leave 36 unattempted cases unchanged and use
+one fresh disjoint replacement for fit-032. Owner collection only; zero updates.
+Official Connector31's large-domain limit and Architect completion remain explicit
+#149 gaps; the new inference contract inherits no official qualification.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
