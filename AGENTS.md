@@ -84,6 +84,20 @@ Targeted completion repair/qualification under #149/#146 is required before
 full-run victory claims. Do not replay the failed control worlds or silently
 patch CLI56. The sustained bank still needs owner collection and assessment.
 
+The first owner #152 collection stopped on a full-belt reward referent collision
+after six completed cases. The saved audit verifies 35 reusable seals, 1,148
+complete-gameplay deliveries, five confirmed lessons and three strict goal rescues.
+Preserve study-v1 and the interrupted fit-007 marker/world, including its 26
+acknowledged diagnostic prefix actions; do not replay or train on that prefix.
+The v2 continuation in docs/native-win-curriculum-recovery.md imports the six
+completed cases, retains the historical failure and declares one fresh replacement.
+The 61 unattempted cases and all quality/data-ownership rules remain unchanged.
+Only the new curriculum wrapper repairs full-belt reward registration; game,
+CLI56, Connector31, ordinary worker24 and converter16 remain frozen. The new
+owner command collects only and stops, with zero optimizer updates. The linked
+case denominator is 69, including the historical failed case; old commands stay
+blocked. Architect completion and full-game competence remain unqualified.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

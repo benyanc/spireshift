@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — collection prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Run and assess the new 56-fitting / 12-development-case collection across all act definitions and twelve bosses. Require confirmed successful later-game labels, strict goal rescues and whole-game decision coverage. See [the prepared recipe and short checks](native-win-curriculum.md); the main bank remains uncollected. |
+| 1 — continuation prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Continue and assess the all-act/twelve-boss collection using the [reward-belt repair and explicit recovery](native-win-curriculum-recovery.md). Six completed cases/five lessons are verified; retain the failed seventh case and use its one fresh replacement. The main bank remains incomplete. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
@@ -51,7 +51,32 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. Its unstarted main bank still needs owner collection and assessment.
 
-## Current handoff — win-focused curriculum implemented; owner collection next
+## Current handoff — reward-belt repair; preserve and continue the collection
+
+The owner run stopped on duplicate owned potion referents after six completed
+cases. The saved audit reconstructs 1,148 deliveries and five confirmed lessons,
+including three strict goal rescues. The failed case's 26 acknowledged prefix
+deliveries remain diagnostic only. No main optimizer updates occurred.
+
+The [versioned continuation](native-win-curriculum-recovery.md) preserves the old
+workspace/marker, imports 35 verified seals without games, retains the failed
+case in the 69-slot linked denominator and uses one fresh replacement world.
+It repairs only the curriculum's full-belt reward projection. The game build,
+original/fitted full states and Adam, ordinary native interface, teacher method,
+data ownership and bank-quality rules stay frozen. The old command stays blocked.
+
+- [x] Reproduce the exact saved duplicate-ID failure and repair registration
+  with the same strict SDK; preserve native permissions and action operands.
+- [x] Audit all six complete cases and their selected confirmations; preserve
+  the interrupted worker's terminated process, raw evidence and marker.
+- [x] Prepare a separate v2 recipe/import manifest, targeted fresh controls and
+  one owner command, with no interrupted-world replay or automatic learning.
+- [ ] Owner runs `bash scripts/continue-win-curriculum-v2.sh`, then assess actual
+  all-boss/family/rescue coverage before #134/#35 learning.
+- [ ] Qualify the separate Architect completion repair before native full-run
+  victory claims, then measure independent normal-start A8 strength under #146.
+
+## Historical preparation — win-focused curriculum implemented; owner collection next
 
 See [the curriculum guide](native-win-curriculum.md) and
 [evidence](evidence/native-win-curriculum-v1.json). Preserve the frozen game,
