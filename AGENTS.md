@@ -137,6 +137,22 @@ one fresh disjoint replacement for fit-032. Owner collection only; zero updates.
 Official Connector31's large-domain limit and Architect completion remain explicit
 #149 gaps; the new inference contract inherits no official qualification.
 
+The v4 curriculum sealed case 38, then stopped in fit-039/reference when
+Test Subject's Intangible color callback hit the missing CanvasItem setter.
+Preserve its 26 acknowledged diagnostic actions, unknown End Turn and marker.
+Support build 58 supplies SetSelfModulate(Color) on the existing property and
+uses the frozen game assembly. The native control must reach both revivals,
+third-form Intangible application and removal, and the boss reward owner.
+The ABI reference inventory is a source audit rather than runtime reachability.
+
+The v5 declaration derives the plan from v4 with one disjoint replacement for
+case 39. It imports 38 complete cases and 210 seals with 20 confirmed lessons
+and 14 strict goal rescues, including the prepared Queen rescue. Collect the
+30 remaining slots with the owner command in docs/native-win-curriculum-test-subject.md.
+Keep four historical failures in the 72-slot linked denominator. Treat the
+failed prefix and diagnostic controls as evidence only. Owner collection and
+quality assessment use zero optimizer updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

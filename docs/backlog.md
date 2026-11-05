@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — compact-answer continuation prepared | [#152: win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Continue the all-act/twelve-boss collection using [compact ordered answers](native-win-curriculum-large-selection.md). Thirty-one complete cases/eighteen lessons are verified; retain all three failures and use one fresh replacement for fit-032. The main bank remains incomplete. |
+| 1 — Test Subject continuation prepared | [#152 win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Import 38 completed cases and collect 30 remaining slots using the repaired [Test Subject support](native-win-curriculum-test-subject.md). The partial bank has 20 lessons and 14 strict goal rescues. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
@@ -51,7 +51,25 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. Its unstarted main bank still needs owner collection and assessment.
 
-## Current handoff — compact ordered answers after case 31
+## Current handoff — Test Subject support after case 38
+
+Case 39 stopped when a missing Godot color setter faulted Test Subject's turn
+loop during Intangible. Support build 58 supplies the setter. The native
+control covers both revivals, third-form Intangible, and the boss reward owner.
+The static Godot reference inventory supplies a reachability review list for
+#149. [Test Subject repair and continuation](native-win-curriculum-test-subject.md)
+
+The saved audit verifies 38 cases, 210 seals and 12,105 native deliveries. It
+adds two confirmed lessons, including the prepared Queen strict rescue. The
+current total is 20 lessons and 14 strict goal rescues. The failed End Turn
+and the 26-action prefix stay diagnostic. Four failures remain in the 72-slot
+linked denominator.
+
+Run `bash scripts/continue-win-curriculum-v5.sh` for the 30 remaining slots.
+The command imports complete cases, uses a disjoint replacement for case 39
+and stops after collection and quality assessment with zero optimizer updates.
+
+## Historical handoff — compact ordered answers after case 31
 
 Gambling Chip's six-card replacement menu exceeds the old 512-answer bound:
 1,957 ordered answers. The [new native-only contract](native-win-curriculum-large-selection.md)
