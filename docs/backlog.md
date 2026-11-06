@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — Trial continuation prepared | [#152 win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Import 42 complete cases and collect 26 remaining slots with the [Trial repair](native-win-curriculum-trial.md). The partial bank has 22 confirmed lessons and 16 strict goal rescues, including prepared lessons for all three final bosses. |
+| 1 — final curriculum collection prepared | [#152 win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Import 66 complete cases and collect [one Soul Fysh fitting supplement and two held-out cases](native-win-curriculum-soul-nexus.md). The partial bank has 24 confirmed lessons and 18 strict goal rescues. Soul Fysh is the remaining boss coverage gate. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
@@ -51,7 +51,20 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. Its unstarted main bank still needs owner collection and assessment.
 
-## Current handoff — Trial support after case 42
+## Current handoff — Soul Nexus repair and Soul Fysh supplement
+
+The v6 run sealed all 56 fitting cases and ten held-out cases before the
+Soul Nexus death callback faulted in held-out case 11. Support build 60
+guards its combat scene lookup. [Repair and owner continuation](native-win-curriculum-soul-nexus.md)
+
+The saved 354 seals include five complete held-out successes and confirmed
+fitting lessons for eleven of twelve bosses. The v7 command imports them
+and collects a Soul Fysh fitting supplement and the two remaining held-out
+slots, including a fresh case 11 replacement. Six historical failures
+count in the 75-slot linked denominator. Collection and quality assessment
+use zero optimizer updates.
+
+## Historical handoff — Trial support after case 42
 
 Trial Accept stopped in case 43 before the native defendant choice because
 the headless process lacked the portrait scene. The [Trial repair and v6

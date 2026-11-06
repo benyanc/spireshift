@@ -1,0 +1,235 @@
+{
+  "automatic_follow_up": false,
+  "config_id": "sha256:8749dbd1429d6a5c5a259c99a816a93afa488323bccd6d56e0e1f65ec121c1f6",
+  "continuation": {
+    "fitting_supplement": "fit-soul-fysh-supplement-01",
+    "heldout_replacement": "heldout-011-replacement-1",
+    "linked_denominator": 75,
+    "main_unstarted": true,
+    "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-win-curriculum-v7.sh\"",
+    "planned_fitting_cases": 57,
+    "planned_heldout_cases": 12,
+    "quality_thresholds_inherited": true,
+    "remaining_slots": 3,
+    "session_limits": {
+      "cpu_seconds": 14400,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 5400
+    },
+    "supplement_profile_basis": "fit-038 block deck, full HP and additional Block Potion",
+    "unchanged_unattempted_slot": "heldout-012"
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "full_game_playing_strength_evaluated": false,
+  "game_revision": "41cef1ea",
+  "game_version": "v0.111.0",
+  "interrupted_attempt": {
+    "acknowledged_diagnostic_deliveries": 134,
+    "action": "Play Bludgeon on Soul Nexus",
+    "case": "heldout-011/balanced",
+    "final_transport_delivered": true,
+    "final_worker_successor_accepted": false,
+    "labels_allowed": false,
+    "marker_preserved": true,
+    "native_error": "[ERROR] [ERROR] System.NullReferenceException: Object reference not set to an instance of an object.",
+    "native_exit_code": 143,
+    "native_process_terminated": true,
+    "reference_sibling": {
+      "complete_case_outcome": false,
+      "native_deliveries": 250,
+      "report_id": "sha256:cae7f2cabeeb1279f3d4e8dca728281a8c3c2a9b856b108a61f51293e3572d04"
+    },
+    "seed": "SP1RESH1FTW1H011P01",
+    "source_boundary": "SoulNexus.AfterDeath -> NCombatRoom.Instance.GetCreatureNode"
+  },
+  "native_controls": {
+    "checks": {
+      "independent_public_reconstruction_and_shutdown": true,
+      "nexus_native_lethal_hit_and_elite_rewards": true,
+      "soul_fysh_native_boss_and_next_act": true
+    },
+    "nexus": {
+      "clean_shutdown": true,
+      "initial_nexus_hp": 254,
+      "lethal_card": "BLUDGEON",
+      "native_deliveries": 18,
+      "native_elite_rewards": true,
+      "seed": "SP1RESH1FTW7NXCHK1P01"
+    },
+    "report": {
+      "path": "artifacts/native-win-curriculum/nexus-control-v1/report.json",
+      "report_id": "sha256:20985542ed38b22ee74df9a59d5e778531e231f2a9e6abcefd67fb84fdf94563",
+      "sha256": "9459fd6b33e10c8406943c93d8aa67c010fe7bf187e9281e47f8d0030c02213a"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-control-v1.json",
+      "report_id": "sha256:34b0905ea1aef2b4936cd169b70da464c34962eb1f4b0d6e1e16a53b93d69f87",
+      "sha256": "eff4e48b5fb4a89690b8fd919bcced7a3ac77c443715e30516adfcadfc397fba",
+      "status": "completed",
+      "wall_seconds": 175.35145595797803
+    },
+    "soul_fysh": {
+      "actual_boss_combat_observed": true,
+      "actual_deliveries_independently_verified": 14,
+      "curriculum_success": true,
+      "ending_hp": 80,
+      "full_run_win": false,
+      "variant": "defensive"
+    },
+    "training_labels_allowed": false
+  },
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "original_and_fitted_weights_and_full_Adam_exact": true,
+  "prior_owner_resource": {
+    "path": "artifacts/resources/win-curriculum-v6-attempt-1.json",
+    "report_id": "sha256:f1971dc662a40a463d69195cec2f2ffddad3aca7a5c44e067b4572521068f45b",
+    "sha256": "2c4b6a55aad66eb3b7e39c3a470263e6eef91882054132e8b5304844978ea064",
+    "status": "failed",
+    "wall_seconds": 745.6824400000041
+  },
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v7.json",
+    "sha256": "2419f2bd2e162360d87d8d403af9921f8574f0a7d02478a2940f80c79c84be1b"
+  },
+  "report_id": "sha256:f03f94edefc32868e833e90090c24d5d0e591297783e9f4a317082190832460f",
+  "retained_evidence": {
+    "audit": {
+      "path": "artifacts/native-win-curriculum/nexus-audit-v1/report.json",
+      "report_id": "sha256:4674db72e393ba3c4138fc3f47790c77053cee804367f36d62673619a318a380",
+      "sha256": "953d304ba7274efdd62488011d46c245fcf0990f5a5a001c12abba71d273f149"
+    },
+    "complete_episodes": 288,
+    "complete_fitting_cases": 56,
+    "complete_heldout_cases": 10,
+    "complete_heldout_successes": 5,
+    "confirmed_lessons": 24,
+    "historical_failures": [
+      "fit-007",
+      "fit-031",
+      "fit-032",
+      "fit-039",
+      "fit-043",
+      "heldout-011"
+    ],
+    "missing_bosses": [
+      "SOUL_FYSH_BOSS"
+    ],
+    "native_deliveries": 25266,
+    "protected_files": 68732,
+    "protection": {
+      "path": "artifacts/native-win-curriculum/nexus-preparation-v1/protected-v6-result.json",
+      "sha256": "f13d4008cc6b40dab1ea7f5a5ad20c24fe51105d13187ac9a17d66c05ffab2ad"
+    },
+    "quality_checks": {
+      "all_act_definitions_with_successful_labels": true,
+      "all_declared_bosses_with_successful_labels": false,
+      "all_final_bosses_with_successful_labels": true,
+      "all_required_meaningful_decision_families": true,
+      "final_boss_goal_rescue": true,
+      "fixed_teacher_heldout_successes": true,
+      "independent_goal_rescues": true
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-audit-v1.json",
+      "report_id": "sha256:debf6f0c0202d4fedf44f419694367d1d4f1d4671073ac7f100df1cc030af633",
+      "sha256": "64a6382c83a359ef9bafd41b14caeda4534142488b716744198dd140bd1316e9",
+      "status": "completed",
+      "wall_seconds": 266.59725025005173
+    },
+    "reusable_seals": 354,
+    "strict_goal_rescues": 18,
+    "targeted_saved_reconstructions": [
+      {
+        "native_deliveries": 43,
+        "unit": "fit-045-chosen"
+      },
+      {
+        "native_deliveries": 43,
+        "unit": "fit-045-confirm"
+      },
+      {
+        "native_deliveries": 91,
+        "unit": "fit-048-chosen"
+      },
+      {
+        "native_deliveries": 91,
+        "unit": "fit-048-confirm"
+      },
+      {
+        "native_deliveries": 250,
+        "unit": "heldout-011-reference"
+      }
+    ]
+  },
+  "schema_version": "native-win-curriculum-soul-nexus-preparation-v1",
+  "status": "nexus_support_verified_owner_continuation_prepared",
+  "support": {
+    "fingerprints": {
+      "artifact_mvid": "a6d0150d-e266-44d6-a5f4-a899d8c4d14a",
+      "artifact_sha256": "8e0aba9e9c1f0e9eebfcf8238ba01a274a0c7d4920ae345d9efcd281615b1665",
+      "godot_stub_sha256": "02111b7c2ca9274904ea243f4a92237bdf8bc4518735b1482b4d49913604c1ae",
+      "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4"
+    },
+    "independent_builds_match": true,
+    "native_death_unsubscribe_preserved": true,
+    "production_source_files": [
+      "Sts2Headless/RunSimulator.cs"
+    ],
+    "report": {
+      "path": "artifacts/native-win-curriculum/soul-nexus-build-v60/report.json",
+      "report_id": "sha256:53784c4aaf43d4f254d1b108e490a01cf977b8a284bbf023f09b0ed94bb68ec7",
+      "sha256": "e42972f9a5028fc7eecf5e1e737b1f298cd741343b9fa15b3a0fa8e42db8616e"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-build-v60.json",
+      "report_id": "sha256:55a358bc827180c43ed9e7559cd6fca3f3872ae757c56d4848e7663469658e46",
+      "sha256": "335656fdbc08f89a5f040dfc38ba561ca808307c54d243dbf01367c0dffbadbd",
+      "status": "completed",
+      "wall_seconds": 111.24668341700453
+    },
+    "revision": 60,
+    "scoped_test_mode_scene_lookup_calls": 1
+  },
+  "training_allowed": false,
+  "verification": {
+    "collector_preflight": {
+      "path": "artifacts/native-win-curriculum/nexus-preflight-v1/report.json",
+      "report_id": "sha256:bafbce6d0ac477496bbfa7a27fec44f95a0d37965caf2c68d7b2e6cdc3103950",
+      "sha256": "73e87b78a3ca17985628bd87263f11fb6a690556e02fa9e2ff879641de42deab"
+    },
+    "commit_hooks": {
+      "path": "artifacts/resources/win-curriculum-nexus-hooks-v1.json",
+      "report_id": "sha256:2ca14cbae40308fba41d731ca114125785f6881ed56d34f8c65d278aa43059e6",
+      "sha256": "a5d194ba5afb4e479f988e07ab6df1f6185040afa620b79cba618c638ce078d2",
+      "status": "completed",
+      "wall_seconds": 0.8265405409038067
+    },
+    "frozen_inputs": {
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "original_and_prior_final_weights_full_Adam_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "new_games_in_preflight": 0,
+    "preflight_resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-preflight-v1.json",
+      "report_id": "sha256:c9858456c06d21fa34a9d91b20d26959237f345379a0094fa2d566c76765bee5",
+      "sha256": "5e6cc4a1b43764effdd603f532180cd6269d5eb9a1ffe7c8b33549221927d0cd",
+      "status": "completed",
+      "wall_seconds": 176.69607883307617
+    },
+    "repository_checks": {
+      "path": "artifacts/resources/win-curriculum-nexus-check-v1.json",
+      "report_id": "sha256:552f44302a84cda19069db393a24dacc426455e4725674dbef1e521ae1d4b540",
+      "sha256": "543fe69cf7f80388afc3be7b84bee58832802a1c41044d8bc1a0774bebfeaa18",
+      "status": "completed",
+      "wall_seconds": 211.16944554203656
+    },
+    "repository_tests_passed": 2836,
+    "repository_tests_skipped": 0,
+    "retained_imports_and_quality_reconstructed": true
+  }
+}

@@ -168,6 +168,20 @@ including one disjoint replacement for case 43. Preserve five historical
 failures in the 73-slot linked denominator. Collection and quality assessment
 use zero optimizer updates.
 
+The v6 run sealed all 56 fitting cases and ten held-out cases. Held-out case 11
+stopped at Soul Nexus's death callback on a delivered Bludgeon. Its 134
+acknowledged actions, unaccepted final successor, start and successful
+reference sibling stay diagnostic. Support build 60 guards the absent scene
+lookup and preserves the native death event and rewards.
+
+The v7 declaration imports 66 complete cases and 354 seals. The partial bank
+has 24 confirmed lessons and 18 strict goal rescues. Soul Fysh is the only
+missing boss lesson. The owner command in docs/native-win-curriculum-soul-nexus.md
+collects one fitting-only Soul Fysh supplement, a fresh held-out case 11 and
+the original case 12. Preserve both original Soul Fysh losses and six
+historical failures in the 75-slot linked denominator. Keep the same quality
+thresholds and held-out ownership. Collection uses zero optimizer updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
