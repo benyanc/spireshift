@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — prepare fitting from the admitted bank | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Fit disposable copies with the 25 confirmed #152 lessons under a separately pinned recipe. Balance fitting worlds and measure strategic as well as combat decisions. |
+| 1 — owner fitting run prepared | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Run the [world-balanced fitting recipe](native-a8-world-balanced-fitting.md). Fit one copy per original for 200 updates each and report separate offline combat and strategic diagnostics. |
 | 2 — qualify the native victory endpoint | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Qualify the Architect terminal transition before counting normal-start native wins. This can proceed alongside offline fitting preparation. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
@@ -51,7 +51,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — curriculum admitted
+## Current handoff — world-balanced fitting
+
+The [fitting command](native-a8-world-balanced-fitting.md) uses all 25 admitted
+worlds with one draw per world per update. Each copied checkpoint inherits
+its full Adam state and freezes at update 200. Six held-out teacher traces
+supply diagnostics only. The main run is owner-launched and stops with two
+frozen candidates for a separately qualified gameplay comparison.
+
+## Prior handoff — curriculum admitted
 
 The [completed #152 bank](native-win-curriculum-result.md) covers all twelve
 bosses and required decision families. It has 25 confirmed prepared lessons,

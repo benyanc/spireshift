@@ -192,6 +192,15 @@ seeds sealed. Qualify the native Architect victory endpoint under #149
 before counting #146 normal-start wins. The collection and assessment
 performed zero optimizer updates.
 
+The owner requested #134/#35 world-balanced fitting from the admitted bank.
+Use docs/native-a8-world-balanced-fitting.md and its versioned owner command.
+Each copy starts with the full original weights and Adam and receives one
+decision per admitted world per update for 200 updates. The fitting-only scope
+uses public action labels and fixed critic weights. Keep development metrics
+separate from update and final selection. The short checks use disposable
+copies. The owner run stops after freezing both candidates and leaves the
+normal-start evaluation to #146.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
