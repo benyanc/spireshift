@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — diagnose the Act 1 losses | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Use the [48-game paired result](native-a8-paired-finals-result.md) to compare early survival, boss reach, routes and shop choices before selecting a data or training change. |
+| 1 — collect verified Act 1 rescues | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Qualify a teacher on fresh normal starts and collect outcome-verified lessons for lethal HP spending, potion choices and Rest versus Smith. Use the [saved loss audit](native-a8-act1-loss-audit.md) to choose decision types while keeping its worlds for development diagnosis. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Track Trial Double Down confirmation and official delivery of compact large selections. Keep parity regressions and verify promising candidates through official games. |
@@ -50,7 +50,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — paired A8 result recovered
+## Current handoff — Act 1 losses diagnosed
+
+The [saved Act 1 audit](native-a8-act1-loss-audit.md) found four immediate
+fitted deaths from lethal HP spending and much less potion availability
+in fitted combat. The next proposed fit changes the lesson source to
+verified Act 1 rescues from fresh normal starts. The audit used zero
+new games or optimizer updates.
+
+## Prior handoff — paired A8 result recovered
 
 All 48 normal-start games ended in losses. Only fitted player 2 cleared Act 1,
 once. The saved audit recovered the [paired result](native-a8-paired-finals-result.md)

@@ -1,0 +1,241 @@
+{
+  "schema_version": "native-a8-act1-loss-audit-evidence-v1",
+  "status": "act1_loss_comparison_verified",
+  "audit": {
+    "path": "artifacts/native-a8-paired/act1-loss-audit-v1/report.json",
+    "sha256": "f67ea276dac240ff12f4c545c3ed1156e5733ef8f207b9d3951b5b4571a9b073",
+    "report_id": "sha256:61b11d09417d554dc3de25f51bb94d3861c30378c94c210d1504df4ca0bb1863",
+    "status": "act1_loss_comparison_verified"
+  },
+  "resource": {
+    "path": "artifacts/resources/native-a8-act1-loss-audit-v1.json",
+    "sha256": "dcfe56e1e94492e88304bb56c0d1ecf6360c961fd63a19869f89d8a5bb8ff851",
+    "report_id": "sha256:71ebff0ea7ad37875aa1e836890a0265b4973ec788b2028d4e10b660d5a0405b",
+    "status": "completed"
+  },
+  "source": {
+    "path": "scripts/audit-a8-act1-losses-v1.py",
+    "sha256": "87a37e97c5943dab8860f743ce45636047720555bc855330324b718a3fd95955"
+  },
+  "source_panel_id": "sha256:74309c2264ea0fe22b042a2146ac1d96688b8d8a52464fba5f7e9704f102ec40",
+  "pairs": 24,
+  "games": 48,
+  "native_act1_deliveries": 6873,
+  "first_difference_counts": {
+    "card_bundle_selection": 1,
+    "card_reward_selection": 1,
+    "combat_turn": 6,
+    "event_option": 5,
+    "map_navigation": 6,
+    "same_displayed_label": 5
+  },
+  "arms": {
+    "fitted": {
+      "combat_by_room_type": {
+        "boss": {
+          "fatal": 3,
+          "mean_entry_hp": 27.0,
+          "started": 4
+        },
+        "elite": {
+          "fatal": 11,
+          "mean_entry_hp": 43.3125,
+          "started": 16
+        },
+        "normal": {
+          "fatal": 9,
+          "mean_entry_hp": 51.30769230769231,
+          "started": 104
+        }
+      },
+      "counts": {
+        "act1_clears": 1,
+        "bought_then_immediately_discarded_only_potion": 4,
+        "camp_rest": 10,
+        "camp_smith": 17,
+        "card_purchases": 27,
+        "combat_potion_uses": 1,
+        "discarded_last_potion": 47,
+        "low_hp_camp_with_rest": 20,
+        "low_hp_smith_with_rest": 12,
+        "native_deliveries": 2867,
+        "potion_discards": 48,
+        "potion_purchases": 6
+      },
+      "death_room_counts": {
+        "boss": 3,
+        "elite": 11,
+        "normal": 9
+      },
+      "fatal_action_counts": {
+        "end_turn": 19,
+        "lethal_hp_spend": 4
+      },
+      "fights_with_potion_use_offered": 1,
+      "games": 24,
+      "mean_first_fight_exit_hp": 57.041666666666664
+    },
+    "original": {
+      "combat_by_room_type": {
+        "boss": {
+          "fatal": 7,
+          "mean_entry_hp": 65.42857142857143,
+          "started": 7
+        },
+        "elite": {
+          "fatal": 9,
+          "mean_entry_hp": 56.4,
+          "started": 20
+        },
+        "normal": {
+          "fatal": 7,
+          "mean_entry_hp": 55.91818181818182,
+          "started": 110
+        }
+      },
+      "counts": {
+        "bought_then_immediately_discarded_only_potion": 6,
+        "camp_rest": 35,
+        "card_purchases": 16,
+        "combat_potion_uses": 24,
+        "discarded_last_potion": 37,
+        "low_hp_camp_with_rest": 17,
+        "native_deliveries": 4006,
+        "potion_discards": 39,
+        "potion_purchases": 15
+      },
+      "death_room_counts": {
+        "boss": 7,
+        "elite": 9,
+        "event_option": 1,
+        "normal": 7
+      },
+      "fatal_action_counts": {
+        "activate": 1,
+        "end_turn": 23
+      },
+      "fights_with_potion_use_offered": 25,
+      "games": 24,
+      "mean_first_fight_exit_hp": 58.0
+    }
+  },
+  "lethal_hp_spend_cases": [
+    {
+      "key": "world-04-p2-fitted",
+      "card_hp_cost": 2,
+      "defend_offered": true,
+      "encounter": "normal",
+      "family": "combat_turn",
+      "floor": 5,
+      "hp": 1,
+      "kind": "lethal_hp_spend",
+      "label": "Play Blood Wall+",
+      "line": 133,
+      "next_hp": 0
+    },
+    {
+      "key": "world-08-p2-fitted",
+      "card_hp_cost": 3,
+      "defend_offered": true,
+      "encounter": "boss",
+      "family": "combat_turn",
+      "floor": 17,
+      "hp": 2,
+      "kind": "lethal_hp_spend",
+      "label": "Play Bloodletting",
+      "line": 341,
+      "next_hp": 0
+    },
+    {
+      "key": "world-10-p2-fitted",
+      "card_hp_cost": 3,
+      "defend_offered": true,
+      "encounter": "elite",
+      "family": "combat_turn",
+      "floor": 9,
+      "hp": 2,
+      "kind": "lethal_hp_spend",
+      "label": "Play Bloodletting",
+      "line": 245,
+      "next_hp": 0
+    },
+    {
+      "key": "world-10-p3-fitted",
+      "card_hp_cost": 2,
+      "defend_offered": true,
+      "encounter": "elite",
+      "family": "combat_turn",
+      "floor": 9,
+      "hp": 1,
+      "kind": "lethal_hp_spend",
+      "label": "Play Hemokinesis on Skulking Colony",
+      "line": 237,
+      "next_hp": 0
+    }
+  ],
+  "fitted_purchase_discard_cases": [
+    {
+      "key": "world-05-p2-fitted",
+      "family": "shop_inventory",
+      "floor": 5,
+      "hp": 44,
+      "kind": "immediate_purchase_discard",
+      "label": "Discard Energy Potion",
+      "line": 119,
+      "next_hp": 44,
+      "purchase_line": 117
+    },
+    {
+      "key": "world-10-p2-fitted",
+      "family": "shop_inventory",
+      "floor": 7,
+      "hp": 26,
+      "kind": "immediate_purchase_discard",
+      "label": "Discard Vulnerable Potion",
+      "line": 199,
+      "next_hp": 26,
+      "purchase_line": 197
+    },
+    {
+      "key": "world-10-p3-fitted",
+      "family": "shop_inventory",
+      "floor": 7,
+      "hp": 38,
+      "kind": "immediate_purchase_discard",
+      "label": "Discard Vulnerable Potion",
+      "line": 187,
+      "next_hp": 38,
+      "purchase_line": 185
+    },
+    {
+      "key": "world-11-p3-fitted",
+      "family": "shop_inventory",
+      "floor": 6,
+      "hp": 15,
+      "kind": "immediate_purchase_discard",
+      "label": "Discard Vulnerable Potion",
+      "line": 181,
+      "next_hp": 15,
+      "purchase_line": 179
+    }
+  ],
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "new_game_launches": 0,
+  "optimizer_updates": 0,
+  "panel_worlds_are_development_only": true,
+  "proposed_training_change": "world_balanced_fit_from_verified_act1_rescues_on_fresh_normal_starts",
+  "repository_check": {
+    "path": "artifacts/validation/native-a8-act1-loss-audit-v1/resources.json",
+    "sha256": "d87bc3693a3e76f281fb92053488cdf45ece01badb7fca93393c633c453012cc",
+    "report_id": "sha256:d614d57dd5192e34e4b821fb5bc9f90d571d97838503eb4adc97c20cad2e17ea",
+    "status": "completed",
+    "tests_passed": 2843
+  },
+  "report_id": "sha256:347d0fb9bc8cc22d37cead3bfa11d99d170ef1f17a8984b43e1a1fe0eb65a9ab"
+}
