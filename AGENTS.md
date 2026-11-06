@@ -182,6 +182,16 @@ the original case 12. Preserve both original Soul Fysh losses and six
 historical failures in the 75-slot linked denominator. Keep the same quality
 thresholds and held-out ownership. Collection uses zero optimizer updates.
 
+The v7 owner run completed and admitted the #152 bank. The saved assessment
+in docs/native-win-curriculum-result.md verifies 370 seals, 25 confirmed
+prepared fitting lessons and all twelve bosses, including Soul Fysh. The
+32 normal-start collection attempts recorded zero wins. Next prepare a
+separately versioned #134/#35 fitting recipe bound to this exact bank and
+full-state copies. Keep held-out worlds for diagnostics and final-test
+seeds sealed. Qualify the native Architect victory endpoint under #149
+before counting #146 normal-start wins. The collection and assessment
+performed zero optimizer updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

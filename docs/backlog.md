@@ -9,11 +9,11 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — final curriculum collection prepared | [#152 win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Import 66 complete cases and collect [one Soul Fysh fitting supplement and two held-out cases](native-win-curriculum-soul-nexus.md). The partial bank has 24 confirmed lessons and 18 strict goal rescues. Soul Fysh is the remaining boss coverage gate. |
-| 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
+| 1 — prepare fitting from the admitted bank | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Fit disposable copies with the 25 confirmed #152 lessons under a separately pinned recipe. Balance fitting worlds and measure strategic as well as combat decisions. |
+| 2 — qualify the native victory endpoint | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Qualify the Architect terminal transition before counting normal-start native wins. This can proceed alongside offline fitting preparation. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
-| 5 — targeted defects now, official games at promising milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Track Trial Double Down confirmation, headless Architect completion and official delivery of compact large selections. Keep automated parity regressions and verify promising candidates through real official games before claiming official competence. |
+| 5 — targeted defects and official games at promising milestones | #149 | Track Trial Double Down confirmation and official delivery of compact large selections. Keep automated parity regressions and verify promising candidates through real official games before claiming official competence. |
 | 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports items 1–3 when
@@ -49,9 +49,18 @@ remain unchanged. CPU profiling and completing that old scope are not the next
 work. The new competence recipe/admission is implemented under
 [ADR 0008](decisions/0008-native-win-curriculum-admission.md); it grants only its
 declared collection scope after exact short checks, with no inherited official
-qualification. Its unstarted main bank still needs owner collection and assessment.
+qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Soul Nexus repair and Soul Fysh supplement
+## Current handoff — curriculum admitted
+
+The [completed #152 bank](native-win-curriculum-result.md) covers all twelve
+bosses and required decision families. It has 25 confirmed prepared lessons,
+18 strict rescues and six successful held-out probes. The saved assessment
+verified 370 seals. The 32 normal-start collection attempts recorded zero wins.
+The next milestone is an independently fitted candidate and its wins on new
+normal starts.
+
+## Historical handoff — Soul Nexus repair and Soul Fysh supplement
 
 The v6 run sealed all 56 fitting cases and ten held-out cases before the
 Soul Nexus death callback faulted in held-out case 11. Support build 60
