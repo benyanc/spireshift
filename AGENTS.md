@@ -201,6 +201,15 @@ separate from update and final selection. The short checks use disposable
 copies. The owner run stops after freezing both candidates and leaves the
 normal-start evaluation to #146.
 
+The world-balanced owner run completed. The saved assessment in
+docs/native-a8-world-balanced-fitting-result.md verifies both update-200
+finals and the original full-state hashes. Offline held-out agreement
+improved on both. Map and shop results warrant separate gameplay readings.
+Keep both finals frozen for a paired normal-start development comparison
+against their originals. First qualify the Architect endpoint with valid
+native history under #149. The preserved failed fixture has an Ancient map
+visit with no event-room record.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

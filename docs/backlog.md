@@ -9,9 +9,9 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — owner fitting run prepared | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Run the [world-balanced fitting recipe](native-a8-world-balanced-fitting.md). Fit one copy per original for 200 updates each and report separate offline combat and strategic diagnostics. |
-| 2 — qualify the native victory endpoint | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Qualify the Architect terminal transition before counting normal-start native wins. This can proceed alongside offline fitting preparation. |
-| 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
+| 1 — qualify the native victory endpoint | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Qualify the Architect terminal transition with valid native history. The saved prepared fixture has an Ancient visit with an empty room list. Verify genuine victory and persisted progress on the current frozen build. |
+| 2 — compare both fitted players with their originals | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test the two exact [update-200 finals](native-a8-world-balanced-fitting-result.md) from fresh paired normal starts. Report wins first, act and boss progress, route and shop outcomes, failure denominators and uncertainty. |
+| 3 — continue base learning from gameplay evidence | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The first world-balanced fitting run is complete. Diagnose normal-start generalization before deciding which data or training changes to make. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
 | 5 — targeted defects and official games at promising milestones | #149 | Track Trial Double Down confirmation and official delivery of compact large selections. Keep automated parity regressions and verify promising candidates through real official games before claiming official competence. |
 | 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
@@ -51,7 +51,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — world-balanced fitting
+## Current handoff — both fitting candidates frozen
+
+The [fitting result](native-a8-world-balanced-fitting-result.md) verifies
+400 optimizer updates across the two copied actors. Both improved offline
+held-out agreement. Map agreement and shop loss moved in the wrong direction
+on sparse development samples. Preserve both finals and qualify the native
+victory endpoint before the paired normal-start comparison.
+
+## Prior handoff — world-balanced fitting preparation
 
 The [fitting command](native-a8-world-balanced-fitting.md) uses all 25 admitted
 worlds with one draw per world per update. Each copied checkpoint inherits
