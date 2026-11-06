@@ -210,6 +210,15 @@ against their originals. First qualify the Architect endpoint with valid
 native history under #149. The preserved failed fixture has an Ancient map
 visit with no event-room record.
 
+The fresh save-enabled Architect diagnostic passed on support build 60.
+Native history has an Ancient event in every act. The native save manager
+reloaded the explicit win and the private profile's one-win increment.
+Its three forced boss defeats are diagnostic. The #146 paired development
+panel in docs/native-a8-paired-finals.md compares both exact update-200 finals
+with their originals on 12 fresh shared worlds. Its four-cell prefix check
+passed. Leave the 48 normal-start games owner-run, preserve unresolved cells
+and final-test ownership, and keep all full states frozen.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

@@ -9,16 +9,15 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — qualify the native victory endpoint | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Qualify the Architect terminal transition with valid native history. The saved prepared fixture has an Ancient visit with an empty room list. Verify genuine victory and persisted progress on the current frozen build. |
-| 2 — compare both fitted players with their originals | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test the two exact [update-200 finals](native-a8-world-balanced-fitting-result.md) from fresh paired normal starts. Report wins first, act and boss progress, route and shop outcomes, failure denominators and uncertainty. |
-| 3 — continue base learning from gameplay evidence | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The first world-balanced fitting run is complete. Diagnose normal-start generalization before deciding which data or training changes to make. |
-| 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
-| 5 — targeted defects and official games at promising milestones | #149 | Track Trial Double Down confirmation and official delivery of compact large selections. Keep automated parity regressions and verify promising candidates through real official games before claiming official competence. |
-| 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
+| 1 — run the paired development comparison | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Run the prepared [48-game panel](native-a8-paired-finals.md) on 12 fresh shared worlds. Compare both update-200 players with their originals and report wins, progress, route and shop outcomes. |
+| 2 — continue base learning from gameplay evidence | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Diagnose normal-start generalization before deciding which data or training changes to make. |
+| 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
+| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Track Trial Double Down confirmation and official delivery of compact large selections. Keep parity regressions and verify promising candidates through official games. |
+| 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
 
-[#143](https://github.com/benyanc/spireshift/issues/143) supports items 1–3 when
-observed learning failures justify representation or capacity changes; it is not
-a prerequisite for another broad feature audit. [#5](https://github.com/benyanc/spireshift/issues/5)
+[#143](https://github.com/benyanc/spireshift/issues/143) supports learning and
+evaluation when observed failures justify representation or capacity changes.
+[#5](https://github.com/benyanc/spireshift/issues/5)
 defines the separate foundation/search-readiness scorecard; its closed definition
 task is not evidence that a player passed it. Calibration and adaptive-search
 readiness follow useful base play and do not hold up ordinary base development.
@@ -51,13 +50,21 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — both fitting candidates frozen
+## Current handoff — paired A8 comparison prepared
+
+The [Architect persistence check](native-a8-paired-finals.md) passed with
+valid native room history, explicit victory, a reloaded winning run record
+and one saved profile win. The independent four-cell prefix check verified
+24 deliveries and the same initial menu across both originals and both
+fitted checkpoints. The 48-game panel is ready for the owner to run.
+
+## Prior handoff — both fitting candidates frozen
 
 The [fitting result](native-a8-world-balanced-fitting-result.md) verifies
 400 optimizer updates across the two copied actors. Both improved offline
 held-out agreement. Map agreement and shop loss moved in the wrong direction
-on sparse development samples. Preserve both finals and qualify the native
-victory endpoint before the paired normal-start comparison.
+on sparse development samples. Both finals are inputs to the paired normal-start
+comparison.
 
 ## Prior handoff — world-balanced fitting preparation
 
