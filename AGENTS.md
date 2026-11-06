@@ -219,6 +219,12 @@ with their originals on 12 fresh shared worlds. Its four-cell prefix check
 passed. Leave the 48 normal-start games owner-run, preserve unresolved cells
 and final-test ownership, and keep all full states frozen.
 
+The 48-game panel sealed 48 terminal losses. Only fitted player 2 reached Act 2.
+The CI matrix edit tripped the inherited final protection check after gameplay.
+The saved-only audit in docs/native-a8-paired-finals-result.md verified all seals
+with the original workflow bytes in a detached checkout. Preserve the failed
+owner receipt and use the recovered development result for Act 1 diagnosis.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
@@ -1972,6 +1978,13 @@ receipts and unexpected files. Parallel reuse and explicit worker repair/retirem
 separately qualified follow-ups. See `docs/working-app-reuse.md` and #147/#146.
 
 ## Verification
+
+Before editing a checkout with an active experiment, check its running session
+and protection manifest. Make repository or CI edits from a separate worktree
+when they touch a pinned path. Keep the execution checkout available through
+final verification. New recipes should pin their execution inputs separately
+from administrative repository files and retain the launch guard facts for
+saved-only assessment.
 
 New large native collectors must retain sealed paths and compact outcomes, not every
 episode's decision history. Verify compressed worker journals as ordered streams, keeping

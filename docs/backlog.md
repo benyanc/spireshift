@@ -9,8 +9,8 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — run the paired development comparison | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Run the prepared [48-game panel](native-a8-paired-finals.md) on 12 fresh shared worlds. Compare both update-200 players with their originals and report wins, progress, route and shop outcomes. |
-| 2 — continue base learning from gameplay evidence | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Diagnose normal-start generalization before deciding which data or training changes to make. |
+| 1 — diagnose the Act 1 losses | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Use the [48-game paired result](native-a8-paired-finals-result.md) to compare early survival, boss reach, routes and shop choices before selecting a data or training change. |
+| 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Track Trial Double Down confirmation and official delivery of compact large selections. Keep parity regressions and verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
@@ -50,13 +50,20 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — paired A8 comparison prepared
+## Current handoff — paired A8 result recovered
+
+All 48 normal-start games ended in losses. Only fitted player 2 cleared Act 1,
+once. The saved audit recovered the [paired result](native-a8-paired-finals-result.md)
+after the inherited protection check rejected the CI edit. Review the existing
+Act 1 journals before choosing the next base-learning change.
+
+## Prior handoff — paired A8 comparison prepared
 
 The [Architect persistence check](native-a8-paired-finals.md) passed with
 valid native room history, explicit victory, a reloaded winning run record
 and one saved profile win. The independent four-cell prefix check verified
 24 deliveries and the same initial menu across both originals and both
-fitted checkpoints. The 48-game panel is ready for the owner to run.
+fitted checkpoints. That control qualified the 48-game owner launch.
 
 ## Prior handoff — both fitting candidates frozen
 

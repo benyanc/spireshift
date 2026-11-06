@@ -1,5 +1,8 @@
 # Paired A8 gameplay comparison
 
+The [saved development result](native-a8-paired-finals-result.md) verifies all
+48 terminal games and records the original final-check failure.
+
 ## Architect persistence
 
 The short check used a fresh private profile on frozen STS2 v0.111.0 / 41cef1ea
@@ -49,10 +52,10 @@ benchmark starts and its terminal facts.
 The short control used a separate world. All four checkpoints had the same
 initial public input and menu. The verifier reconstructed all 24 delivered
 choices from the raw observations and receipts, and every worker shut down
-cleanly. The 48 main games are unstarted. See the
+cleanly. At preflight the 48 main games were unstarted. See the
 [saved verification record](evidence/native-a8-paired-finals-preflight-v1.json).
 
-Close STS2 before running. Allow about 10–30 minutes with a 90-minute outer cap.
+The historical owner launch used the following command.
 
 ```bash
 bash scripts/compare-a8-fitted-v1.sh
