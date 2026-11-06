@@ -9,11 +9,11 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — Test Subject continuation prepared | [#152 win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Import 38 completed cases and collect 30 remaining slots using the repaired [Test Subject support](native-win-curriculum-test-subject.md). The partial bank has 20 lessons and 14 strict goal rescues. |
+| 1 — Trial continuation prepared | [#152 win-focused curriculum](https://github.com/benyanc/spireshift/issues/152) | Import 42 complete cases and collect 26 remaining slots with the [Trial repair](native-win-curriculum-trial.md). The partial bank has 22 confirmed lessons and 16 strict goal rescues, including prepared lessons for all three final bosses. |
 | 2 | [#134: whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35: learning updates](https://github.com/benyanc/spireshift/issues/35) | Learn decisions with whole-game consequences from the new evidence. Retain old players as baselines; allow policy/value updates and model changes. Do not automatically repeat the unchanged failed PPO or tiny imitation recipe. |
 | 3 | [#146: fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Test frozen candidates from normal starts on disjoint development/confirmation worlds. Report wins first, act/boss failure strata and uncertainty. Diagnose generalization and revise learning from the results; training-start boss wins are separate. |
 | 4 | [#78: consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success/confirmation criteria. A first win is progress; a few favorable seeds do not establish consistency. |
-| 5 — targeted defects now; official games at promising milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Repair/qualify headless Architect completion and official delivery of compact large selections before normal-start victory validation. Keep automated parity regressions; verify promising candidates through real official games before claiming official competence. Preserve old guards/results. |
+| 5 — targeted defects now, official games at promising milestones | [#149: official-game validation](https://github.com/benyanc/spireshift/issues/149) | Track Trial Double Down confirmation, headless Architect completion and official delivery of compact large selections. Keep automated parity regressions and verify promising candidates through real official games before claiming official competence. |
 | 6 — after consistent A8 | [#142: A10 validation](https://github.com/benyanc/spireshift/issues/142) | Implement/verify genuine A10 settings on the frozen build, train/adapt in a separate lineage and measure its independent full-run win rate. Do not silently relabel A8 games. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports items 1–3 when
@@ -51,7 +51,21 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. Its unstarted main bank still needs owner collection and assessment.
 
-## Current handoff — Test Subject support after case 38
+## Current handoff — Trial support after case 42
+
+Trial Accept stopped in case 43 before the native defendant choice because
+the headless process lacked the portrait scene. The [Trial repair and v6
+continuation](native-win-curriculum-trial.md) bind the frozen game and prior
+Godot support DLLs. The saved audit verified 232 reusable seals and preserved
+the failed prefix. The two new prepared boss lessons cover Test Subject and
+Aeonglass and join the Queen lesson from case 38.
+
+Use the owner command in the handoff to import the 42 complete cases and
+collect the 26 remaining slots. Five preserved failures count in the 73-slot
+linked denominator. The command assesses curriculum quality with zero
+optimizer updates.
+
+## Historical handoff — Test Subject support after case 38
 
 Case 39 stopped when a missing Godot color setter faulted Test Subject's turn
 loop during Intangible. Support build 58 supplies the setter. The native

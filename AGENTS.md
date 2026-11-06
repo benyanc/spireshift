@@ -153,6 +153,21 @@ Keep four historical failures in the 72-slot linked denominator. Treat the
 failed prefix and diagnostic controls as evidence only. Owner collection and
 quality assessment use zero optimizer updates.
 
+The v5 curriculum sealed case 42 and stopped at Trial Accept in
+fit-043/reference. Preserve its 89 acknowledged diagnostic actions, unknown
+Accept receipt, sealed start and active marker. Support build 59 gates the
+three Trial portrait calls in TestMode and uses the exact prior game and Godot
+DLLs. Keep the native RNG, verdicts and public choice contract. Track Trial
+Double Down's abandon confirmation separately under #149.
+
+The v6 declaration imports 42 complete cases and 232 seals, with 22 confirmed
+lessons and 16 strict goal rescues across the partial bank. The Queen, Test
+Subject and Aeonglass each have a confirmed prepared boss lesson. The owner
+command in docs/native-win-curriculum-trial.md collects the 26 remaining slots,
+including one disjoint replacement for case 43. Preserve five historical
+failures in the 73-slot linked denominator. Collection and quality assessment
+use zero optimizer updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
