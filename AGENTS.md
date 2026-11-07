@@ -261,6 +261,13 @@ Its short controls reached the map after an actual Skip, with 144 verified
 native deliveries. Use docs/native-a8-act1-boss-reward-lifecycle.md for the
 eight fresh owner-run worlds and the existing qualification gate.
 
+The v2 owner qualification completed all 32 arms with native losses and
+zero caps. The boss teacher died at five elites and three bosses. The
+saved review in docs/native-a8-act1-boss-v2-result.md identifies the
+Terror Eel attack sequence and Waterfall Giant delayed damage for
+targeted native branch checks. Preserve the v2 outcomes, frozen inputs,
+and qualification seed ownership. The audit starts zero games.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

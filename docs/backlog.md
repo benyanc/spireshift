@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — qualify the boss-focused Act 1 teacher | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Run the prepared [reward-safe qualification](native-a8-act1-boss-reward-lifecycle.md) on eight new worlds. Verify reproduced clears against the survival teacher and both frozen references before opening a new collection. |
+| 1 — verify targeted Act 1 combat branches | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Use the [v2 losses](native-a8-act1-boss-v2-result.md) to verify a Terror Eel attack sequence and earlier Waterfall Giant defense. Confirm useful native fight outcomes before a fresh qualification or fitting collection. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
@@ -50,13 +50,13 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Reward-safe Act 1 boss qualification prepared
+## Current handoff — Reward-safe Act 1 boss qualification finished
 
-The v1 boss teacher capped seven times while reopening declined card rewards.
-The [v2 owner qualification](native-a8-act1-boss-reward-lifecycle.md) binds the
-repair and preserves the v1 denominator. Both fresh short controls verified a
-delivered card decline and an actual exit to the map. The eight new worlds are
-unstarted. Terminal A8 wins remain the primary evaluation goal.
+The [v2 result](native-a8-act1-boss-v2-result.md) verified eight complete
+worlds, 32 losses and zero caps. The boss teacher died in five elites
+and reached three bosses. Confirm the saved Terror Eel attack sequence
+and an earlier Waterfall Giant defense branch before a fresh panel.
+There were zero admitted lessons and optimizer updates.
 
 ## Prior handoff — Act 1 teacher qualified and collection stopped
 

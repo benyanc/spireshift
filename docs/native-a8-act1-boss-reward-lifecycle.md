@@ -1,5 +1,9 @@
 # Reward-safe Act 1 boss qualification
 
+The v2 owner run finished all eight worlds with no caps and no Act 1
+clears. See the [verified result](native-a8-act1-boss-v2-result.md) for
+the boss and elite diagnosis and the next development step.
+
 The first boss qualification sealed all eight worlds. Its boss teacher had
 one native Act 1 loss and seven incomplete runs. Six reached their per-run
 wall limit and one reached the choice limit. The survival teacher cleared
