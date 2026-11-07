@@ -1,0 +1,225 @@
+{
+  "branch_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-combat-branches-v1.json",
+    "sha256": "fe2435740a1de4e5c516f53d393ec8a457b1233909af54399821e5a2e2dfad53"
+  },
+  "control_resource": "artifacts/resources/a8-act1-tactical-control-v3.json",
+  "control_workspace": "artifacts/native-a8-act1-boss/tactical-control-v3",
+  "controls": [
+    {
+      "encounter": "elite",
+      "enemy": "TERROR_EEL",
+      "expected": [
+        "Play Thunderclap+",
+        "elite_lethal_turn"
+      ],
+      "expected_lethal_sequence": [
+        "Play Thunderclap+",
+        "Play Strike on Terror Eel",
+        "Play Strike on Terror Eel"
+      ],
+      "floor": 8,
+      "input_digest": "af2915a600589a7222766aacb88258c6fe17938d6413cfb7dd6353c7d3d64243",
+      "key": "eel-lethal",
+      "line": 261,
+      "seed": "SP1RESH1FTA8BR006",
+      "source": "qualification",
+      "world": "boss-v2-006"
+    },
+    {
+      "encounter": "boss",
+      "enemy": "WATERFALL_GIANT",
+      "expected": [
+        "Play Defend",
+        "giant_preserve_hp"
+      ],
+      "expected_lethal_sequence": [],
+      "floor": 17,
+      "input_digest": "660571a8f3560d152ac07a69373a9b68c0d6de80f761b71e5fcbb9b7dfbc9774",
+      "key": "giant-early",
+      "line": 511,
+      "seed": "SP1RESH1FTA8BR003",
+      "source": "qualification",
+      "world": "boss-v2-003"
+    },
+    {
+      "encounter": "boss",
+      "enemy": "WATERFALL_GIANT",
+      "expected": [
+        "Play Defend",
+        "giant_preserve_hp"
+      ],
+      "expected_lethal_sequence": [],
+      "floor": 17,
+      "input_digest": "1b0d155596dfd5c2338633473512f53b1c65e78765096dd5c6689c630a195f31",
+      "key": "giant-round-three",
+      "line": 517,
+      "seed": "SP1RESH1FTA8BR003",
+      "source": "qualification",
+      "world": "boss-v2-003"
+    },
+    {
+      "encounter": "boss",
+      "enemy": "WATERFALL_GIANT",
+      "expected": [
+        "Play Bash on Waterfall Giant",
+        "giant_trigger_death_blow"
+      ],
+      "expected_lethal_sequence": [
+        "Play Bash on Waterfall Giant",
+        "Play Anger on Waterfall Giant",
+        "Play Strike on Waterfall Giant"
+      ],
+      "floor": 17,
+      "input_digest": "5c5f38d597b5f6044952797d40d20dad7ca4fc2fec12e28d6fba7db45d53007e",
+      "key": "giant-transition",
+      "line": 551,
+      "seed": "SP1RESH1FTA8BR003",
+      "source": "waterfall-giant-round-2",
+      "world": "boss-v2-003"
+    }
+  ],
+  "diagnostic_resource_prefix": "artifacts/resources/a8-act1-tactical-diagnostic-v1",
+  "diagnostic_workspace": "artifacts/native-a8-act1-boss/tactical-diagnostic-v1",
+  "diagnostic_worlds": [
+    {
+      "key": "diagnostic-001",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPD001"
+    },
+    {
+      "key": "diagnostic-002",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPD002"
+    },
+    {
+      "key": "diagnostic-003",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPD003"
+    },
+    {
+      "key": "diagnostic-004",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPD004"
+    },
+    {
+      "key": "diagnostic-005",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPD005"
+    },
+    {
+      "key": "diagnostic-006",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPD006"
+    },
+    {
+      "key": "diagnostic-007",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPD007"
+    },
+    {
+      "key": "diagnostic-008",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPD008"
+    }
+  ],
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "gate": {
+    "minimum_confirmed_clears": 3,
+    "strict_rescue_initializers": [
+      2,
+      3
+    ]
+  },
+  "implementation": {
+    "scripts/qualify-act1-tactical-teacher-v1.sh": "0a7aec05b1fc107bf6999e38ecd7844b667374af5e7871696b8bd97705d14a0b",
+    "src/spireshift/native_a8_tactical_episode.py": "276341f2e6e9c13e4e79b010f77e50d6b41e41e3eae904c0f7d74c1d64da5d52",
+    "src/spireshift/native_a8_tactical_policy.py": "d4a9e6d82ac406d934a381dade5c0b72b0cbcd69e699733d4eb561298c2eaa9b",
+    "src/spireshift/native_a8_tactical_session.py": "13600349f2f92a2884861c58ba5558db5e2d6943226a09ddebbca5845c16a798"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "references": [
+    "original",
+    "fitted",
+    "survival",
+    "boss_v2"
+  ],
+  "resource_prefix": "artifacts/resources/a8-act1-tactical-study-v1",
+  "schema_version": "native-a8-act1-tactical-qualification-v1",
+  "smoke": {
+    "key": "fresh-smoke",
+    "player": 2,
+    "seed": "SP1RESH1FTA8TPC003"
+  },
+  "source_evidence": {
+    "branches": {
+      "path": "docs/evidence/native-a8-act1-combat-branches-v1.json",
+      "sha256": "dbaf3a8255ea6fc03251e80a3b0cc3e0b50ff032ef4857cab22d3ac108fcc068"
+    },
+    "qualification": {
+      "path": "docs/evidence/native-a8-act1-boss-v2-result-v1.json",
+      "sha256": "beaef5e9197102027e65e1850fd5c98211f4c15a3b767c059e551cad269d1cc9"
+    }
+  },
+  "teacher": "normal_start_act1_tactical_teacher_v3",
+  "workspace": "artifacts/native-a8-act1-boss/tactical-study-v1",
+  "worlds": [
+    {
+      "key": "tactical-001",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPQ001"
+    },
+    {
+      "key": "tactical-002",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPQ002"
+    },
+    {
+      "key": "tactical-003",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPQ003"
+    },
+    {
+      "key": "tactical-004",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPQ004"
+    },
+    {
+      "key": "tactical-005",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPQ005"
+    },
+    {
+      "key": "tactical-006",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPQ006"
+    },
+    {
+      "key": "tactical-007",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TPQ007"
+    },
+    {
+      "key": "tactical-008",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TPQ008"
+    }
+  ]
+}

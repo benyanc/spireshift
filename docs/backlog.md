@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — plan lethal elite turns and boss survival | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Use the [verified combat branches](native-a8-act1-combat-branches.md). Check complete legal lethal sequences before block in elite fights. Plan Waterfall Giant damage and defense through Death Blow before a fresh qualification or fitting collection. |
+| 1 — measure the tactical teacher on fresh starts | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [tactical teacher](native-a8-act1-tactical-teacher.md) verified the Eel lethal line and brought Giant Death Blow down to 30. Run the separate fresh diagnostic to measure the policy. Qualification still requires a native Giant rescue. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
@@ -50,7 +50,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Act 1 combat branches verified
+## Current handoff — Act 1 tactical teacher
+
+The [tactical short checks](native-a8-act1-tactical-teacher.md) verified
+the elite lethal sequence and the earlier Giant phase transition. The
+closest Giant branches died at 17 HP plus 13 block against 30 damage.
+The fresh eight-world diagnostic is prepared. The Giant rescue gate
+still blocks qualification and all checkpoints remain frozen.
+
+## Prior handoff — Act 1 combat branches verified
 
 The [targeted branches](native-a8-act1-combat-branches.md) verified a native
 Terror Eel kill with three attacks and two Waterfall Giant losses at Death

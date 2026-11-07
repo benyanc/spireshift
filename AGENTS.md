@@ -275,6 +275,14 @@ Use the Eel evidence for lethal sequencing and account for the Giant's
 phase timing and subsequent block before another qualification. The
 diagnostic worlds stay excluded from fitting.
 
+The tactical teacher in docs/native-a8-act1-tactical-teacher.md plans
+supported elite lethal sequences and budgets Waterfall Giant defense
+through Death Blow. The final short check reconstructed 1,115 deliveries
+and confirmed the Eel kill and the earlier Giant transition. The Giant
+survival gate remains blocked. The owner command runs a separate fresh
+diagnostic comparison. Preserve all three short studies, the frozen
+build and full states, and the seed ownership boundaries.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

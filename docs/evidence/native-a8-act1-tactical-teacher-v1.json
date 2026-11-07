@@ -1,0 +1,314 @@
+{
+  "final_short_check": {
+    "cases": {
+      "eel-lethal": {
+        "death_blow": null,
+        "final_hp": 10,
+        "floor": 8,
+        "outcome": "fight_win",
+        "verified_native_deliveries": 133
+      },
+      "fresh-smoke": {
+        "death_blow": null,
+        "final_hp": 0,
+        "floor": 9,
+        "outcome": "act1_loss",
+        "verified_native_deliveries": 137
+      },
+      "giant-early": {
+        "death_blow": {
+          "block_before": 13,
+          "damage": 30,
+          "hp_before": 17
+        },
+        "final_hp": 0,
+        "floor": 17,
+        "outcome": "fight_loss",
+        "verified_native_deliveries": 282
+      },
+      "giant-round-three": {
+        "death_blow": {
+          "block_before": 13,
+          "damage": 30,
+          "hp_before": 12
+        },
+        "final_hp": 0,
+        "floor": 17,
+        "outcome": "fight_loss",
+        "verified_native_deliveries": 281
+      },
+      "giant-transition": {
+        "death_blow": {
+          "block_before": 13,
+          "damage": 30,
+          "hp_before": 17
+        },
+        "final_hp": 0,
+        "floor": 17,
+        "outcome": "fight_loss",
+        "verified_native_deliveries": 282
+      }
+    },
+    "config_id": "sha256:725f351af1ed460053f7be2f28d838c5101913053a853230e43bbe5f771fe938",
+    "execution_id": "sha256:90d93d75d76d1e3ff0d05cab682990a03279da0e643c716beb95ca9ebe275690",
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "gate": {
+      "eel_native_three_attack_kill": true,
+      "fresh_normal_start_complete": true,
+      "giant_earlier_block_delivered": true,
+      "giant_earlier_branch_survived": false,
+      "giant_triggered_before_eruption_growth": true
+    },
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/tactical-control-v3/report.json",
+      "report_id": "sha256:f16aaa3eb4860be4b8ed2fcdfde451cacfd62da893a451cbd28ff9242491bb21",
+      "sha256": "7472172fe54840458d10640e5f2d8107ec48191ac058f08b3f5e9210026b219f"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-act1-tactical-control-v3.json",
+      "report_id": "sha256:39476b4929397942448c065fa55ddcae1570d8f2a961561acecac23cb7a04b62",
+      "sha256": "baf20fc7591bad61e66b2897e70f99fc0803dbad6413f743c3a07f0441911ab4"
+    },
+    "seals": {
+      "eel-lethal": "sha256:d2582c49042b9bc42c99c14555a0428d25715ec3143a1fe51a05f2130879d8d6",
+      "fresh-smoke": "sha256:f0c5a37c934b7dc7c493cf57acfd0e85d68eaa5d7c5cab7bde1319c69297b248",
+      "giant-early": "sha256:eeede56e88bcd19ff90d83486dded611efc0c7cb8c7d24cb15f421d7aebceb8b",
+      "giant-round-three": "sha256:c28af5fdcf981a46d42509be87b551af32650e3b01183e0674bc453c7ea8a606",
+      "giant-transition": "sha256:82db42bc7bdfc047462b87e837095efd0e02cce39014ee1372e630ad78169bee"
+    },
+    "status": "tactical_short_gate_blocked",
+    "verified_native_deliveries": 1115,
+    "wall_seconds": 47.61503270803951
+  },
+  "fresh_diagnostic_launcher_verified": true,
+  "fresh_diagnostic_started": false,
+  "lessons_admitted": 0,
+  "matched_smoke": {
+    "first_different_teacher_action": {
+      "choice_ordinal_including_local_factors": 170,
+      "family": "combat_turn",
+      "fitted_action_index": 4,
+      "public_input_id": "sha256:80f3778c49721d4f3a9d27cfb315af702c85c22091d95277f5af2eb08e766a0e",
+      "reason": "giant_preserve_hp",
+      "teacher_action_index": 5
+    },
+    "outcomes": {
+      "boss": "act1_loss",
+      "boss_v2": "act1_loss",
+      "fitted": "act1_loss",
+      "original": "act1_loss",
+      "survival": "act1_loss"
+    },
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/tactical-matched-smoke-v1/report.json",
+      "report_id": "sha256:503ca59f6da31d975b077b8dfcac2f8d9ba2dab61d9b5c947212c87d56703541",
+      "sha256": "c6d14e35c1b94b703af5a4c4a2c3937f8391dfbf3007d43a2fe57b4869ef1b20"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-act1-tactical-matched-smoke-v1.json",
+      "report_id": "sha256:77ae4949487515f86cfc1cdddd79ed22c686d03a27c9f311c27a027597fe7a53",
+      "sha256": "ece621f5d98a9f3e184ee1904336980690890e626cfd2a1349d76b0ca9b099ec"
+    },
+    "seal_id": "sha256:27f4f1aa9f1151b5e282a9a0176169388db5177647c0cac3887a8edf7bef0ebf",
+    "status": "matched_tactical_launcher_smoke_verified",
+    "verified_native_deliveries": 997
+  },
+  "optimizer_updates": 0,
+  "preserved_development_controls": [
+    {
+      "cases": {
+        "eel-lethal": {
+          "death_blow": null,
+          "final_hp": 10,
+          "floor": 8,
+          "outcome": "fight_win",
+          "verified_native_deliveries": 133
+        },
+        "fresh-smoke": {
+          "death_blow": null,
+          "final_hp": 0,
+          "floor": 11,
+          "outcome": "act1_loss",
+          "verified_native_deliveries": 167
+        },
+        "giant-block-first": {
+          "death_blow": {
+            "block_before": 13,
+            "damage": 30,
+            "hp_before": 17
+          },
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "fight_loss",
+          "verified_native_deliveries": 282
+        },
+        "giant-early": {
+          "death_blow": {
+            "block_before": 13,
+            "damage": 30,
+            "hp_before": 17
+          },
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "fight_loss",
+          "verified_native_deliveries": 282
+        },
+        "giant-transition": {
+          "death_blow": {
+            "block_before": 13,
+            "damage": 30,
+            "hp_before": 17
+          },
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "fight_loss",
+          "verified_native_deliveries": 282
+        }
+      },
+      "config_id": "sha256:1e684f381141a00fc62fcb134c73dcb9feaa2d381a0c9429f6397e776ae49010",
+      "execution_id": "sha256:45182e4a805e831fbeeda207d89c4c7cd639bd3d28eee9d2965ab8cd74d6aaa9",
+      "frozen_checks": {
+        "all_four_full_states_and_Adam_exact": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "localization_exact": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "gate": {
+        "eel_native_three_attack_kill": true,
+        "fresh_normal_start_complete": true,
+        "giant_earlier_block_delivered": true,
+        "giant_earlier_branch_survived": false,
+        "giant_triggered_before_eruption_growth": true
+      },
+      "report": {
+        "path": "artifacts/native-a8-act1-boss/tactical-control-v1/report.json",
+        "report_id": "sha256:eab897761047c17e64020bb4fcf2bc658668ccaf67d990c42f51e7c8f76d4be4",
+        "sha256": "80f1b2d7cf78b535830ceaa119cd17ccc0bbd66924646c3333e28565bc27071d"
+      },
+      "resources": {
+        "path": "artifacts/resources/a8-act1-tactical-control-v1.json",
+        "report_id": "sha256:66df5305b1568267ebc3f20b4ff663010e086b08aa69ff70081d540727d90c19",
+        "sha256": "2460060f8e68f50fb6dc31c6d23db0193e4cba3c2cfd3349b528762ad93625fe"
+      },
+      "seals": {
+        "eel-lethal": "sha256:80f10a8ce54481ca1e7226ad012dcc61b175681d3b0ff487133119c19ec53e92",
+        "fresh-smoke": "sha256:07bad373e653c41a8a0e1e01f993967122b461bc0d171f2a9950c157726538ba",
+        "giant-block-first": "sha256:5ee51ed47d70a38d9a53414140847d6435b70090e3deeb7d2c8d072570758fbe",
+        "giant-early": "sha256:398ca2f5082a23edcfd38d7c2319b5d148675a4c58bff759da2d125499a47ec8",
+        "giant-transition": "sha256:3ec3de21bb43f7c301a309f2dd5eb6224a1a101e8008f5bbbb1e4309d631649f"
+      },
+      "status": "tactical_short_gate_blocked",
+      "verified_native_deliveries": 1146,
+      "wall_seconds": 48.53782662504818
+    },
+    {
+      "cases": {
+        "eel-lethal": {
+          "death_blow": null,
+          "final_hp": 10,
+          "floor": 8,
+          "outcome": "fight_win",
+          "verified_native_deliveries": 133
+        },
+        "fresh-smoke": {
+          "death_blow": null,
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "act1_loss",
+          "verified_native_deliveries": 196
+        },
+        "giant-early": {
+          "death_blow": {
+            "block_before": 8,
+            "damage": 33,
+            "hp_before": 17
+          },
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "fight_loss",
+          "verified_native_deliveries": 290
+        },
+        "giant-round-three": {
+          "death_blow": {
+            "block_before": 13,
+            "damage": 30,
+            "hp_before": 12
+          },
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "fight_loss",
+          "verified_native_deliveries": 281
+        },
+        "giant-transition": {
+          "death_blow": {
+            "block_before": 13,
+            "damage": 30,
+            "hp_before": 17
+          },
+          "final_hp": 0,
+          "floor": 17,
+          "outcome": "fight_loss",
+          "verified_native_deliveries": 282
+        }
+      },
+      "config_id": "sha256:9a09d85e4f828ef024748047df0b2b09a85b1d8354db72944d6110b510d39903",
+      "execution_id": "sha256:9c928e84286df78a78ed9308b73a7529e4dfff8eaae069432d3dfa66826370d6",
+      "frozen_checks": {
+        "all_four_full_states_and_Adam_exact": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "localization_exact": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "gate": {
+        "eel_native_three_attack_kill": true,
+        "fresh_normal_start_complete": true,
+        "giant_earlier_block_delivered": true,
+        "giant_earlier_branch_survived": false,
+        "giant_triggered_before_eruption_growth": true
+      },
+      "report": {
+        "path": "artifacts/native-a8-act1-boss/tactical-control-v2/report.json",
+        "report_id": "sha256:3dd9cddc03a9a28bab348d37b3ac1a782daba8727550dcc91cf43798573c4e22",
+        "sha256": "9e40a58fba1d05d7b0836b843ab81dea8342c027edfa4f673122adac367a972e"
+      },
+      "resources": {
+        "path": "artifacts/resources/a8-act1-tactical-control-v2.json",
+        "report_id": "sha256:4bb13469bfc9264fd60772c4d275f1da4ba99fbfc67550a138f8dea6d598dbdc",
+        "sha256": "5523d2a82a70a5962c43bc060eba725d5f8796e2755f6d26bc60f05675ec0a68"
+      },
+      "seals": {
+        "eel-lethal": "sha256:8270e1ae7d17edf6bbda0a6285b1d1f09d6f2d0b8e41ba0e721ae4c5769ed5da",
+        "fresh-smoke": "sha256:4564121f5f526603c7c29fc49a81f8d764e0bd5ba11c2052d10ca355653a7708",
+        "giant-early": "sha256:318ce6fa928b3c8c6fc1c3d8d5c996f67d2088b03010d82a798c3a36b2b0f58c",
+        "giant-round-three": "sha256:42fa824e903763711100c18afc844e2f44d5a4e991f29fd0342be3c3278d86d3",
+        "giant-transition": "sha256:83f500e9fdb3635328ce85b869c77d97af9c276734700e3ea04ce3a85922b3d7"
+      },
+      "status": "tactical_short_gate_blocked",
+      "verified_native_deliveries": 1182,
+      "wall_seconds": 51.31606512493454
+    }
+  ],
+  "qualification_granted": false,
+  "report_id": "sha256:0cff718b779d3205296185ebd0cd0a9874ed8dbad7ba1d4f04ef3615b516cd09",
+  "repository_check": {
+    "dotnet_protocol_contract_verified": true,
+    "path": "artifacts/resources/a8-act1-tactical-repository-check-v1.json",
+    "report_id": "sha256:2eb3dbce49c9ce6dd36e83c3a62449acc6f0e39b455ed8eb74395ad0ad225473",
+    "sha256": "8bb4626ab86a8c53d3c59ee6c445e5eec37d3d8da2cb4237d59d8e2667eb14ec",
+    "status": "completed",
+    "tests_passed": 2860
+  },
+  "schema_version": "native-a8-act1-tactical-teacher-evidence-v1",
+  "status": "tactical_controls_reconstructed_giant_survival_gate_blocked"
+}
