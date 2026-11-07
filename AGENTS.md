@@ -254,6 +254,13 @@ failure and 64 native deliveries. The owner command qualifies only.
 Preserve the prior study, frozen support60 and all four full checkpoint
 and Adam files. Qualification worlds stay excluded from fitting.
 
+The v1 boss qualification recorded one loss and seven reward-loop caps.
+All eight worlds and the v1 execution files stay preserved. The v2 teacher
+honors the delivered decline flag for the exact reward in both proposal paths.
+Its short controls reached the map after an actual Skip, with 144 verified
+native deliveries. Use docs/native-a8-act1-boss-reward-lifecycle.md for the
+eight fresh owner-run worlds and the existing qualification gate.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

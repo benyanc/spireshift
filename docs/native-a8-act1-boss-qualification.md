@@ -1,5 +1,9 @@
 # Boss-focused Act 1 teacher qualification
 
+The v1 run sealed all eight worlds and recorded seven reward-loop caps
+in the boss-teacher arm. Use the [verified v2 repair and owner command](native-a8-act1-boss-reward-lifecycle.md)
+for fresh qualification.
+
 The first teacher reproduced two Act 2 entries in qualification. It reached
 three bosses in seven complete collection worlds and lost all three with
 substantial enemy HP remaining. The new qualification compares a teacher
