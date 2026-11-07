@@ -245,6 +245,15 @@ passes the exact saved strict-decoder regression. See
 docs/native-a8-act1-rescue-result.md. Improve boss play before collecting a
 new fitting bank. Qualification worlds stay excluded from fitting.
 
+The owner requested the boss-focused teacher and fresh qualification.
+docs/native-a8-act1-boss-qualification.md defines the new worker, deck
+and turn policy, eight disjoint normal starts and four matched arms.
+The generated-choice belt repair is active for all arms. The short
+checks verified five saved policy choices, the exact potion-belt
+failure and 64 native deliveries. The owner command qualifies only.
+Preserve the prior study, frozen support60 and all four full checkpoint
+and Adam files. Qualification worlds stay excluded from fitting.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

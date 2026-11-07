@@ -9,10 +9,10 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — improve the Act 1 teacher's boss fights | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [normal-start study](native-a8-act1-rescue-result.md) qualified the teacher, then produced zero rescues in seven complete collection worlds. Improve boss preparation and turn planning, and verify reproduced clears before opening a new collection. |
+| 1 — qualify the boss-focused Act 1 teacher | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Run the prepared [fresh-start qualification](native-a8-act1-boss-qualification.md). Verify reproduced clears against the survival teacher and both frozen references before opening a new collection. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
-| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Carry the saved-verified generated-choice potion-belt repair into the next separately pinned worker. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
+| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports learning and
@@ -50,7 +50,17 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Act 1 teacher qualified and collection stopped
+## Current handoff — Boss-focused Act 1 qualification prepared
+
+The [owner qualification](native-a8-act1-boss-qualification.md) compares
+both teachers and the two frozen references on eight fresh worlds. The
+new teacher improves deck preparation and plans visible boss turns. The
+repaired worker passed its saved potion-belt regression and short native
+prefix checks. The main panel is unstarted. Review its reproduced Act 2
+entries before preparing collection. Terminal A8 wins remain the primary
+evaluation goal.
+
+## Prior handoff — Act 1 teacher qualified and collection stopped
 
 The [owner result](native-a8-act1-rescue-result.md) records two reproduced
 rescues across both initializers in qualification. Seven collection worlds
