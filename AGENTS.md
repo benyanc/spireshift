@@ -268,6 +268,13 @@ Terror Eel attack sequence and Waterfall Giant delayed damage for
 targeted native branch checks. Preserve the v2 outcomes, frozen inputs,
 and qualification seed ownership. The audit starts zero games.
 
+The combat diagnostics in docs/native-a8-act1-combat-branches.md rebuilt
+642 exact saved prefix menus and verified 702 native deliveries. Terror Eel
+died to the three-attack sequence. Both Giant branches lost at Death Blow.
+Use the Eel evidence for lethal sequencing and account for the Giant's
+phase timing and subsequent block before another qualification. The
+diagnostic worlds stay excluded from fitting.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

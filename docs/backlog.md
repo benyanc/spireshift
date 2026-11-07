@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — verify targeted Act 1 combat branches | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Use the [v2 losses](native-a8-act1-boss-v2-result.md) to verify a Terror Eel attack sequence and earlier Waterfall Giant defense. Confirm useful native fight outcomes before a fresh qualification or fitting collection. |
+| 1 — plan lethal elite turns and boss survival | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Use the [verified combat branches](native-a8-act1-combat-branches.md). Check complete legal lethal sequences before block in elite fights. Plan Waterfall Giant damage and defense through Death Blow before a fresh qualification or fitting collection. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
@@ -50,7 +50,16 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Reward-safe Act 1 boss qualification finished
+## Current handoff — Act 1 combat branches verified
+
+The [targeted branches](native-a8-act1-combat-branches.md) verified a native
+Terror Eel kill with three attacks and two Waterfall Giant losses at Death
+Blow. The closest Giant defense had 12 HP and 13 block against 30 damage.
+Use the win as an elite lethal-sequencing regression and plan Giant
+survival across the phase change. All 702 deliveries reconstructed, with
+zero admitted lessons and optimizer updates.
+
+## Prior handoff — Reward-safe Act 1 boss qualification finished
 
 The [v2 result](native-a8-act1-boss-v2-result.md) verified eight complete
 worlds, 32 losses and zero caps. The boss teacher died in five elites
