@@ -1,0 +1,263 @@
+{
+  "assessment_report_id": "sha256:892459f2eabd201a51750d9ad8b59860162b70a941f45c6dba70a542d3691f86",
+  "assessment_sha256": "7b271ba5f68f984e17e41a81c22f012a5836a0dd25f0d26d72177370854caeb4",
+  "config_id": "sha256:c01d2aa15583294e119e6948cccdc6f337c3033fd36e354429ca714432fb58f0",
+  "decision": {
+    "adaptive_controller_allowed": false,
+    "automatic_scale_up_allowed": false,
+    "base_readiness_passed": false,
+    "checkpoint_promoted": false,
+    "complete_clean_comparison": true,
+    "next_step": "small_native_A8_decision_learning_controls_before_representation_changes",
+    "no_observed_wins_is_not_proof_of_zero_win_probability": true,
+    "pooled_floor_interval95": [
+      -1.375,
+      0.4375
+    ],
+    "small_comparison_cannot_identify_the_cause_of_stalled_learning": true,
+    "updated_players_have_positive_floor_point_estimates": false,
+    "victories_observed": 0
+  },
+  "fitting_diagnostics": [
+    {
+      "choice_decisions": 3250,
+      "clean_games": 32,
+      "decisions": 4232,
+      "final_behavior_kl": 0.005828905440438466,
+      "optimizer_steps": 102,
+      "prediction_quality": {
+        "choice_bearing_decisions": 3250,
+        "explained_variance": 0.2549515144049137,
+        "independent_runs": 32,
+        "mean_prediction_error": 2.907445391276112e-05,
+        "mse": 2.4489639753919358e-05,
+        "residual_variance": 2.448879443004903e-05,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "stop_reason": "epoch_limit",
+      "unit": "fit-p2-r01"
+    },
+    {
+      "choice_decisions": 3917,
+      "clean_games": 32,
+      "decisions": 5276,
+      "final_behavior_kl": 0.007773178208561554,
+      "optimizer_steps": 126,
+      "prediction_quality": {
+        "choice_bearing_decisions": 3917,
+        "explained_variance": 0.24022949205234934,
+        "independent_runs": 32,
+        "mean_prediction_error": 0.0004632247841711631,
+        "mse": 0.00015633141865642708,
+        "residual_variance": 0.00015611684145575662,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "stop_reason": "epoch_limit",
+      "unit": "fit-p3-r01"
+    },
+    {
+      "choice_decisions": 3202,
+      "clean_games": 32,
+      "decisions": 4204,
+      "final_behavior_kl": 0.006423351085819288,
+      "optimizer_steps": 99,
+      "prediction_quality": {
+        "choice_bearing_decisions": 3202,
+        "explained_variance": 0.3213792332848754,
+        "independent_runs": 32,
+        "mean_prediction_error": 0.0001367084134043745,
+        "mse": 0.00014762537035482853,
+        "residual_variance": 0.000147606681164533,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "stop_reason": "epoch_limit",
+      "unit": "fit-p2-r02"
+    },
+    {
+      "choice_decisions": 3930,
+      "clean_games": 32,
+      "decisions": 5241,
+      "final_behavior_kl": 0.0055157115651910775,
+      "optimizer_steps": 123,
+      "prediction_quality": {
+        "choice_bearing_decisions": 3930,
+        "explained_variance": 0.27300634696640336,
+        "independent_runs": 32,
+        "mean_prediction_error": -3.999934107447502e-05,
+        "mse": 2.1872091845655393e-05,
+        "residual_variance": 2.1870491898369e-05,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "stop_reason": "epoch_limit",
+      "unit": "fit-p3-r02"
+    }
+  ],
+  "game_apps_created": 0,
+  "games_launched": 0,
+  "native_delivery_and_probability_audits_reused_from_sealed_collection": true,
+  "native_games_or_policy_fitting_replayed": false,
+  "optimizer_steps": 0,
+  "original_full_states_and_Adam_unchanged": true,
+  "report_id": "sha256:3a7cb79b18d5df07ab8549cf6e1776e24582ed9589d5b850795b4fbfcfb6da30",
+  "schema_version": "native-policy-update-result-evidence-v1",
+  "source_report_id": "sha256:d1677a87bedf193f339d0e9aeea878db65f8093266bd643943f8ef7e21ef1a23",
+  "summary": {
+    "base_readiness_passed": false,
+    "checkpoint_promoted": false,
+    "evaluation_games_recorded": 128,
+    "failure_and_unattempted_values": 0,
+    "fixed_parent_initializers": 2,
+    "independent_development_worlds": 32,
+    "interval_covers_population_of_training_initializers": false,
+    "interval_method": "seed_clustered_bootstrap_jointly_across_two_fixed_parents",
+    "planned_evaluation_games": 128,
+    "players": [
+      {
+        "arms": {
+          "original": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.02623047063417856,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 12.15625,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          },
+          "ppo": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.02547716436433368,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 11.59375,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          }
+        },
+        "numerical_seed": 2,
+        "ppo_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.875,
+              0.84375
+            ],
+            "mean": -0.5625
+          },
+          "training_return": {
+            "interval95": [
+              -0.002502245799085282,
+              0.0010610693313621083
+            ],
+            "mean": -0.0007533062698448754
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        }
+      },
+      {
+        "arms": {
+          "original": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.02478942425883018,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 11.125,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          },
+          "ppo": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.02431809415458216,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 10.75,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          }
+        },
+        "numerical_seed": 3,
+        "ppo_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.75,
+              0.9375
+            ],
+            "mean": -0.375
+          },
+          "training_return": {
+            "interval95": [
+              -0.0022706261632892064,
+              0.0012552772810924988
+            ],
+            "mean": -0.0004713301042480202
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        }
+      }
+    ],
+    "pooled_ppo_minus_original": {
+      "completed_acts": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      },
+      "maximum_floor": {
+        "interval95": [
+          -1.375,
+          0.4375
+        ],
+        "mean": -0.46875
+      },
+      "training_return": {
+        "interval95": [
+          -0.0018025010254147703,
+          0.0005848521867981896
+        ],
+        "mean": -0.0006123181870464478
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    },
+    "terminal_victory_primary": true,
+    "zero_observed_wins_do_not_establish_zero_true_win_probability": true
+  },
+  "summary_reconstructed_from_sealed_units": true,
+  "verified_source_files": 7021,
+  "verified_units": 151,
+  "wall_seconds": 3.1327050421386957
+}

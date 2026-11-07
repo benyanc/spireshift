@@ -1,0 +1,57 @@
+{
+  "cohorts": [
+    "fit-p2-unchanged-r01",
+    "fit-p2-hashed-r01",
+    "fit-p2-named-r01",
+    "fit-p3-unchanged-r01",
+    "fit-p3-hashed-r01",
+    "fit-p3-named-r01",
+    "fit-p2-unchanged-r02",
+    "fit-p2-hashed-r02",
+    "fit-p2-named-r02",
+    "fit-p3-unchanged-r02",
+    "fit-p3-hashed-r02",
+    "fit-p3-named-r02"
+  ],
+  "entry_sha256": {
+    "diagnose-native-inventory-credit-v1.py": "de48564d02f37034ed970f1f7e3f01f8847db7b219ca926510ce71a31afc49d0",
+    "diagnose-native-inventory-credit-v1.sh": "727539d37045046151622b4c4837abc5c97f73601a6d2519c9a1a1205c22888b"
+  },
+  "fold_salt": "native-whole-run-value-crossfit-v1",
+  "folds": 4,
+  "implementation_sha256": {
+    "native_inventory_credit_data.py": "2af8a44da356b9ce2cecfaff335b985d581dd1b91b941aeb70c54a170aa2c96b",
+    "native_inventory_credit_features.py": "86da4b74f3a1030cdc9f59a871c99402da8d47d1673871c79f3d00a27a6d2869",
+    "native_inventory_credit_math.py": "3793ce4ac16109e6b1c0fe051d988d5865bf4a314691123f094ea695f341eac4",
+    "native_inventory_credit_report.py": "b8ad2ec4b5fce4d3e0afac2b34462428041c6cd1c19728dd9d5c9dec5f4a77ed",
+    "native_inventory_credit_study.py": "ec7fafb9332f39a3eb4dd4a79f23b634a737c14a983908900be2c50b0d286a0c",
+    "native_linear_value.py": "bda2f5e75229bd5281a0ed405866b73c27a3b05e671edcf7625893963412d904",
+    "native_matched_value.py": "051b317cedf4ef04ef91b289a77eba656cb6375472de0f947e618b4cf0a0e193",
+    "native_public_value.py": "6f6ce562e7b2a674e934230fa3242c6585643d00c4ae7428fd8066c3bf66911a",
+    "native_residual_value.py": "c2dee127a8694a3920e66fe950ae00e586100bac6a5530232a6799404e8c153d",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774"
+  },
+  "inventory_regularization": 1.0,
+  "methods": [
+    "current",
+    "deck",
+    "relic",
+    "deck_relic"
+  ],
+  "schema_version": "native-inventory-credit-diagnosis-config-v1",
+  "session_limits": {
+    "cpu_seconds": 900,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 500000000,
+    "wall_seconds": 900
+  },
+  "source_audit": {
+    "id": "sha256:c6b4023b49da75f99587272fd17a1751673b1ac3c231d956710432b2e7168c79",
+    "path": "artifacts/native-structured/comparison-audit-v1/report.json"
+  },
+  "source_report": {
+    "id": "sha256:a8ecf0239aab0ff4cca0a0ee9af189b7159bc94df89765fc3029231d96142d3a",
+    "path": "artifacts/native-structured/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "workspace": "artifacts/native-inventory-credit/sts2-v0.111.0-a8-diagnosis-v1"
+}

@@ -1,0 +1,76 @@
+{
+  "adapter": {
+    "component_id": "spireshift-evangambit-environment-adapter",
+    "digest": {
+      "algorithm": "sha256",
+      "value": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f"
+    },
+    "revision": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f",
+    "source": "https://github.com/benyanc/spireshift/blob/main/src/spireshift/adapters/evangambit.py",
+    "version": "1"
+  },
+  "admission_status": "pending_conformance",
+  "engine": {
+    "component_id": "evangambit-sts2-nativeaot",
+    "digest": {
+      "algorithm": "git-commit-sha1",
+      "value": "99fad6a73912e26af6872c2f0742ebeb5ffb3581"
+    },
+    "revision": "99fad6a73912e26af6872c2f0742ebeb5ffb3581",
+    "source": "https://github.com/evangambit/sts2",
+    "version": "sts2-v0.107.1"
+  },
+  "interface": {
+    "action_schema": "action-v1",
+    "information_policy_id": "public-state-v1",
+    "observation_schema": "observation-v1"
+  },
+  "manifest_id": "sha256:4f49cbbbcbbc58cafa91680efc0980745086ce0ac8ad432e9bd2d485daf62bcd",
+  "mechanics": [
+    {
+      "architecture": "arm64",
+      "artifact_id": "sts2-v0.107.1-macos-arm64-assembly",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18"
+      },
+      "kind": "authoritative-game-assembly",
+      "platform": "macos",
+      "size_bytes": 9363456,
+      "version": "v0.107.1/59260271"
+    },
+    {
+      "architecture": null,
+      "artifact_id": "evangambit-sts2-v0.107.1-rules",
+      "digest": {
+        "algorithm": "git-commit-sha1",
+        "value": "99fad6a73912e26af6872c2f0742ebeb5ffb3581"
+      },
+      "kind": "simulator-rule-source",
+      "platform": null,
+      "size_bytes": null,
+      "version": "99fad6a73912e26af6872c2f0742ebeb5ffb3581"
+    },
+    {
+      "architecture": "arm64",
+      "artifact_id": "evangambit-sts2-nativeaot-macos-arm64-37e4264",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "cc08d7e9c75e2f86cfd84a52e5fd106b16986448f72f860848fb84f9be8b1eb0"
+      },
+      "kind": "compiled-simulator-library",
+      "platform": "macos",
+      "size_bytes": 5203824,
+      "version": "99fad6a73912e26af6872c2f0742ebeb5ffb3581"
+    }
+  ],
+  "patch": {
+    "branch": "v0.107.1",
+    "game_commit": "59260271",
+    "game_version": "v0.107.1",
+    "patch_id": "sts2-v0.107.1-59260271",
+    "release_date": "2026-06-18T15:43:56-07:00",
+    "steam_build_id": "23811903"
+  },
+  "schema_version": "patch-manifest-v1"
+}

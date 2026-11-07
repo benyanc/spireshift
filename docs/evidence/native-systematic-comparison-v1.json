@@ -1,0 +1,135 @@
+{
+  "CLI_revision": "v54_unchanged",
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "source_inventory_saved_structural_checks_and_declared_paired_rest_heal_proceed_and_HappyFlower_cycle_only",
+  "compiled_properties": 1135,
+  "compiled_records": 193,
+  "connector_fresh_builds_reproduce": true,
+  "connector_host_tests": 199,
+  "converter_revision": "v15",
+  "environment_id": "sha256:6758241eac863b1308148f82ecc3a0f9064f42d58505d143bd4a081f4b6869c2",
+  "expected_owner_minutes": [
+    5,
+    12
+  ],
+  "failed_development_attempt_scope": "one protection-receipt shape error and three diagnostic save/loading/entry controls; no full-game evaluation or training",
+  "failed_development_attempts_preserved": [
+    "short-audit-v1/active.json",
+    "short-audit-v2/short-rest/active.json",
+    "short-audit-v3/short-rest/active.json",
+    "short-audit-v4/short-rest/active.json"
+  ],
+  "frozen_actor_probes": 38,
+  "full_game_playing_strength_evaluated": false,
+  "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "generated_checks": 116,
+  "inventoried_surfaces": 24,
+  "layout_revision": "v12",
+  "long_panel_cases": 4,
+  "long_panel_unstarted": true,
+  "observed_activation_frames_with_zero_authority": 5,
+  "official_connector_revision": "v25",
+  "optimizer_updates": 0,
+  "ordinary_worker_revision": "v23_unchanged",
+  "original_weights_and_all_Adam_unchanged": true,
+  "owner_command": "bash scripts/compare-systematic-compatibility-v1.sh",
+  "owner_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-systematic-owner-v1.json",
+    "sha256": "0478719b688b10494b193014888941ceccae17f04bcc30f8aba2afc3e7dbccba"
+  },
+  "prior_protected_files": 18832,
+  "report_id": "sha256:a11f8e3363ff487acb2ba059be359fb6a892565b4f1ae63a1023b5ca2e9b27f8",
+  "saved_frames": 6818,
+  "schema_version": "native-systematic-comparison-evidence-v1",
+  "short_audit": {
+    "path": "artifacts/native-systematic-comparison/saved-audit-v5/report.json",
+    "sha256": "c16641d8caa7d12fbac08b424ce7ce49438ac5d782ddc55275839ebf6c01ab9d"
+  },
+  "short_qualification": {
+    "path": "artifacts/native-systematic-comparison/short-qualification-v1/report.json",
+    "sha256": "71c80ddb89887c3d7a64909899ecfd655fb70b2425429a697e5c0fc036c4668d"
+  },
+  "short_transition_controls": [
+    {
+      "effects": {
+        "native": {
+          "after_hp": 100,
+          "before_hp": 40,
+          "proceed_reached_map": true
+        },
+        "official": {
+          "after_hp": 100,
+          "before_hp": 40,
+          "proceed_reached_map": true
+        }
+      },
+      "independently_verified_deliveries": {
+        "native": 2,
+        "official": 2
+      },
+      "matched_states_including_final_successor": 3,
+      "report": {
+        "path": "artifacts/native-systematic-comparison/short-controls-v5/short-rest/report.json",
+        "sha256": "2738d8ebd5a3971e96fda85c71eb6981111b139bd6b2f7f7660c7f2d8ec95f91"
+      },
+      "status": "transition_comparison_pass",
+      "wall_seconds": 33.76873987499857
+    },
+    {
+      "effects": {
+        "native": {
+          "counters": [
+            2,
+            0,
+            1,
+            2
+          ],
+          "energies": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "rollovers": 1
+        },
+        "official": {
+          "counters": [
+            2,
+            0,
+            1,
+            2
+          ],
+          "energies": [
+            3,
+            4,
+            3,
+            3
+          ],
+          "rollovers": 1
+        }
+      },
+      "independently_verified_deliveries": {
+        "native": 3,
+        "official": 3
+      },
+      "matched_states_including_final_successor": 4,
+      "report": {
+        "path": "artifacts/native-systematic-comparison/short-controls-v5/short-flower/report.json",
+        "sha256": "f96db1d2e2cb0fd3cf8729b93b87de3774c56fde47c62c212a6fd4e2fd1d9106"
+      },
+      "status": "transition_comparison_pass",
+      "wall_seconds": 50.25690525001846
+    }
+  ],
+  "status": "short_checks_pass_owner_transition_panel_prepared",
+  "training_allowed": false,
+  "zero_game_negative_controls": {
+    "path": "artifacts/native-systematic-comparison/negative-controls-v1/report.json",
+    "sha256": "636015ada9b29f0a5903e00d165002acf0bf47a08f539dd5230161e4f2e191a3"
+  }
+}

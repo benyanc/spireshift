@@ -1,0 +1,71 @@
+{
+  "archive_verification_after": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+  "archive_verification_before": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+  "ascension": 8,
+  "build_report_id": "sha256:9ea9851179ecf8274a360b33fb8ef9b9c12d328f33b036f4801953f9cd6fd1b2",
+  "candidate_lineage": "spireshift_cli_rest_v1_local_toolchain",
+  "canonical_delivery": {
+    "delivered_actions": 21,
+    "invalid_native_inputs": 21,
+    "native_action_calls": 42,
+    "request_ledger_checked": true,
+    "rest_snapshots": 20,
+    "sdk_validation_enabled": true,
+    "selection_snapshots": 7
+  },
+  "canonical_rest_projection_adapted": true,
+  "character": "Ironclad",
+  "checks_passed": 226,
+  "checks_total": 226,
+  "claim_scope": "nine_privileged_managed_native_rest_scenarios_through_canonical_SDK_not_shipped_parity",
+  "config_id": "sha256:de1e9aa610a9fa392d9ddcc6571f8c9deb9a39a36583d701746dd9caaeada99e",
+  "date": "2026-10-10",
+  "diagnostic_entries_retained": 130,
+  "diagnostic_retention_limit": 10000,
+  "evidence_id": "sha256:0f4f84cf73ad0baa068aff14af7efa825ffee12e0d29e604e7b15237d6e99952",
+  "full_run_attempts": 0,
+  "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "helper_sha256": "1b4d0ac7740f9a1310bfcde54d8c41d3153bc3441dba8b3c288272f2e9ccdbad",
+  "host_artifact_sha256": "4f660b352f41374e4824bb1ecf2d32367a504152621f1629173d613150330123",
+  "integrity_and_isolation_checks": {
+    "frozen_archive_unchanged": true,
+    "native_rest_regressions_pass": true,
+    "pinned_sdk_tree_unchanged": true,
+    "projection_identity_bound": true,
+    "same_private_candidate_unchanged": true,
+    "shared_profile_unchanged": true,
+    "uncapped_successful_process": true
+  },
+  "issue_145_complete": false,
+  "managed_runtime_version": "10.0.12",
+  "native_scenarios": 9,
+  "optimizer_steps": 0,
+  "other_selector_preferences_qualified": false,
+  "projection_helpers_sha256": {
+    "engine-player-projection.mjs": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155",
+    "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "probe-engine-cli-rest.mjs": "8df72169414ef86f501d3c8900dea3e9e1fc55b9ba8bde487603881b24dadfc9"
+  },
+  "projection_identity": {
+    "patch_sha256": "302c096ccbaa82b2c616d28238e32e00a064537f7eab727bb5a2802c4dea2cc8",
+    "patched_source_sha256": "83d1af4008f31c740f38a645f32aa23d82de0e892569ac72e8f8e552c9f41736",
+    "sdk_inventory_id": "sha256:34d054042a5a9acc43491a23e7cb5a4f8b813aa031a4590a6c1ee2b7979f7978",
+    "source_revision": "4961b52a587777277816bc4407108f6f4274f801",
+    "source_sha256": "5926fc27e2bae08939f623f73017e4640085cee7d217bc7562773ac65455ec35"
+  },
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "remaining": [
+    "shop_purchase_restock_and_card_removal",
+    "other_selection_preferences",
+    "card_costs_modifiers_status_owner_and_secondary_intents",
+    "shipped_host_differential",
+    "full_run_speed_before_new_A8_learning"
+  ],
+  "report_id": "sha256:fe59ce5530bf32a425d267482069d2245bbe700aa3849fdc3d3cc84a10aee17a",
+  "schema_version": "actual-engine-public-rest-projection-evidence-v1",
+  "shipped_cross_host_parity": false,
+  "training_allowed": false,
+  "wall_seconds": 3.1299943329649977
+}

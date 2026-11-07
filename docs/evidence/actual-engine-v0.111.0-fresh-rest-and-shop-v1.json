@@ -1,0 +1,600 @@
+{
+  "schema_version": "engine-scoped-qualification-evidence-v1",
+  "recorded_at": "2026-10-11",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "game_version": "v0.111.0",
+  "game_commit": "41cef1ea",
+  "character": "Ironclad",
+  "ascension": 8,
+  "training_allowed": false,
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "checkpoint_promoted": false,
+  "shipped_cross_host_parity": false,
+  "historical_evidence": "docs/evidence/actual-engine-v0.111.0-rest-panel-and-tutorial-v1.json",
+  "completed_fresh_rest_panel": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-bridges-v1/batch.json",
+    "report_id": "sha256:5f1c2cfa7fcffd2bba75cf2abeb3e98dbe3220eacf77bc69cee02401d4a41ca9",
+    "config_id": "sha256:5b82028fb41513989beb3f6dc9b5c4dfe17d0b11e771d8aefedea8783bca32dd",
+    "planned_cases": 8,
+    "completed_cases": 8,
+    "failed_cases": 0,
+    "not_attempted_cases": 0,
+    "independent_seeds": 2,
+    "seed_scenario_pairs": 4,
+    "privileged_fixture": true,
+    "fresh_rest_tutorial_required": true,
+    "repeated_public_prefixes_identical": true,
+    "rest_tutorial_steps": 8,
+    "wall_seconds": 428.7621202499722,
+    "claim_scope": "repeated_privileged_single_card_rest_fixture_and_fresh_tutorial_public_effects_only",
+    "config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-rest-tutorial-bridges-v1.json",
+      "config_id": "sha256:5b82028fb41513989beb3f6dc9b5c4dfe17d0b11e771d8aefedea8783bca32dd"
+    },
+    "saved_verification": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-bridges-v1/saved-verification-v1.json",
+      "report_id": "sha256:128952a6a9d45ca634c5ab219d383e28c224a6cd56552565a55e82685ec6e184",
+      "valid": true,
+      "verified_cases": 8,
+      "compared_snapshots": 56,
+      "semantic_actions_delivered": 48,
+      "public_actions_delivered": 56,
+      "upgrade_ui_steps": 8,
+      "rest_tutorial_steps": 8,
+      "verifier_sha256": "9ab950d2989e9ecc44957f2c8bd47a37403313ad8382f95caa2af756c2d1ebd5",
+      "games_launched": 0
+    },
+    "resources": {
+      "path": "artifacts/resources/rest-tutorial-comparisons-v1.json",
+      "report_id": "sha256:1e10689e2597a635af0c6297e86a7284500e051c5a6100ace4d222744f066ebf",
+      "status": "completed",
+      "average_cpu_utilization": 0.024949287491403273,
+      "cpu_hours": 0.04162162285361112,
+      "cpu_seconds": 149.83784227300004,
+      "energy_kwh": null,
+      "final_storage_bytes": 30979317,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 6,
+      "peak_resident_memory_bytes": 890224640,
+      "peak_storage_bytes": 2437682619,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 428.97830341599183,
+      "cost_complete": false,
+      "missing_cost_inputs": [
+        "cpu_rate",
+        "gpu_usage",
+        "storage_rate",
+        "energy_usage"
+      ]
+    }
+  },
+  "rest_only_Host_v2_prior_family_regressions": {
+    "scope": "two_targeted_starting_and_first_combat_prefixes_on_rest_only_Host_v2_not_a_new_repeated_panel",
+    "saved_verification": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-host-regression-saved-v1.json",
+      "report_id": "sha256:60b8ebab79983deb11de894c5f9fb05c2d7805587b84a631d528bb7eba7cc1b1",
+      "valid": true,
+      "audits": [
+        {
+          "compared_snapshots": 8,
+          "public_actions_delivered": 7,
+          "tutorial_steps": 3
+        },
+        {
+          "compared_snapshots": 7,
+          "public_actions_delivered": 6,
+          "tutorial_steps": 3
+        }
+      ],
+      "games_launched": 0,
+      "repeatability_claim": false
+    },
+    "cases": [
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shipped-rest-host-regression-boots-v1.json",
+        "report_id": "sha256:cffba8f915d8fba4f89498f768eef32bb3aee3d966f2901a66a6588b1b6b04d6",
+        "journey_config_id": "sha256:70f48dc1701fa1685f6bac172ed38044baced7225f94007f93e16bdd8d8ea83e",
+        "native_report_id": "sha256:609d42c3a48289f3d00adc35d5d1c3c28209460773c22249396770ec800d3a03",
+        "status": "first_combat_prefix_pass",
+        "disposable_payload_removed_after_verified_success": true,
+        "compared_snapshots": 8,
+        "public_actions_delivered": 7,
+        "tutorial_steps": 3,
+        "shipped_process_seconds": 41.09691891702823
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shipped-rest-host-regression-rod-v2.json",
+        "report_id": "sha256:5feefcf39bec4aad49f1467ba157d41eace07da9333420bf236dbe6dfd33550c",
+        "journey_config_id": "sha256:d3caa4452820079a41b46c971ce02daa891f18bb0ea0ee16a6c96009ff20f309",
+        "native_report_id": "sha256:afa0e2d8ca3a688867ce9a6077e36d9ec2ae8f1d774f41248d8ea9feb254c8cd",
+        "status": "first_combat_prefix_pass",
+        "disposable_payload_removed_after_verified_success": true,
+        "compared_snapshots": 7,
+        "public_actions_delivered": 6,
+        "tutorial_steps": 3,
+        "shipped_process_seconds": 39.61768175003817
+      }
+    ]
+  },
+  "native_potion_pricing_repair": {
+    "upstream_revision": "d11aa883b582dd68bd39b331f3370746b30d447e",
+    "patch": {
+      "path": "patches/engine/sts2-cli-v0.111.0-potion-pricing-v9.patch",
+      "sha256": "8cea0b1c56cedda4a1616a06c7fb787c3c704ce3a65d107915574dab610b14c9"
+    },
+    "license": "patches/engine/LICENSE",
+    "build_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-cli-build-potion-pricing-v9.json",
+      "config_id": "sha256:06808b20c01c29656febd38c688663724408a57becc3b2f1e839abb3aee5e30f"
+    },
+    "build_report": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-potion-pricing-v9.json",
+      "report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d",
+      "config_id": "sha256:06808b20c01c29656febd38c688663724408a57becc3b2f1e839abb3aee5e30f",
+      "candidate_lineage": "spireshift_cli_potion_pricing_v9_local_toolchain",
+      "status": "candidate_built_unqualified"
+    },
+    "fresh_baseline_builds": 2,
+    "fresh_repaired_builds": 2,
+    "fresh_builds_identical_within_lineage": true,
+    "upstream_binary_reproduced": false,
+    "wall_seconds": 21.595846167008858,
+    "repaired_identity": {
+      "artifact_sha256": "c47fafb1dab14f73227f8709f542cf2fc8c49232a8559dfda16aade0384d4ab8",
+      "artifact_mvid": "a813471b-2515-4267-95b6-3553a9ae4f49",
+      "godot_stub_sha256": "4cbc15bd3058ab2104c4c7b9764aa2e4e72dd6b823ed1f031feba068d5bdb4b1",
+      "original_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+      "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+      "source_diff_id": "c25dd269faa6eb9e10eb5a457140c1d6d07b1e3eb2b558f5ba6e779a9e8ec1f5",
+      "reference_version": "9.0.20",
+      "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+      "runtime_dependencies_id": "4539331c8760d932eaa8fb159fe9224100b6c8eef9c05dfd27c524591ef9d145"
+    },
+    "runtime_version": "9.0.7",
+    "scope": "only_MerchantPotionEntry_CalcCost_exact_TestMode_branch_for_original_native_price_adjustment_and_RNG_consumption",
+    "global_TestMode_changed": false,
+    "official_game_assembly_bytes_unchanged": true,
+    "remaining_TestMode_rule_and_RNG_branches_qualified": false,
+    "observed_initial_potion_quote_before_fix": {
+      "managed_gold": 75,
+      "shipped_gold": 79
+    },
+    "native_regressions": [
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-combat-potion-pricing-v9.json",
+        "report_id": "sha256:efdbdeae807d53e79e7326a2720cfc81590bae7f9e167cf9c8c39377abccd13d",
+        "config_id": "sha256:b7846343d68d6531a8b6029769c2034a197ae27385a1edf38ef595eb47cf2008",
+        "build_report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d",
+        "status": "combat_public_projection_regression_pass",
+        "fixtures": 12,
+        "passed_subchecks": 370,
+        "canonical_delivery": {
+          "combat_snapshots": 34,
+          "delivered_actions": 23,
+          "invalid_native_inputs": 4,
+          "native_action_calls": 27,
+          "request_ledger_checked": true,
+          "rest_snapshots": 0,
+          "sdk_validation_enabled": true,
+          "selection_snapshots": 1,
+          "shop_snapshots": 0
+        },
+        "wall_seconds": 4.034096000017598
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-rest-potion-pricing-v9.json",
+        "report_id": "sha256:b2df19e382b8f11b87dd7a9187e655b66a3cfcf9c4d436b8366b9f9a554c3cdd",
+        "config_id": "sha256:28558ead084f46bb26326e822f21059edaca159c676bf12d65f9563ffd5a3977",
+        "build_report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d",
+        "status": "rest_public_projection_regression_pass",
+        "fixtures": 9,
+        "passed_subchecks": 270,
+        "canonical_delivery": {
+          "combat_snapshots": 1,
+          "delivered_actions": 21,
+          "invalid_native_inputs": 21,
+          "native_action_calls": 42,
+          "request_ledger_checked": true,
+          "rest_snapshots": 20,
+          "sdk_validation_enabled": true,
+          "selection_snapshots": 7,
+          "shop_snapshots": 0
+        },
+        "wall_seconds": 4.034242083027493
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-shop-potion-pricing-v9.json",
+        "report_id": "sha256:a5bec8a89c9ed6b90d9835a4f9be5c4ecb3839a492a1d3b3d021e0641004713e",
+        "config_id": "sha256:48b5d0a63264d8c7e8230e4239d1ebb618d874df0c492efd3db696abceb2f61c",
+        "build_report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d",
+        "status": "shop_public_projection_regression_pass",
+        "fixtures": 7,
+        "passed_subchecks": 201,
+        "canonical_delivery": {
+          "combat_snapshots": 0,
+          "delivered_actions": 16,
+          "invalid_native_inputs": 9,
+          "native_action_calls": 25,
+          "request_ledger_checked": true,
+          "rest_snapshots": 0,
+          "sdk_validation_enabled": true,
+          "selection_snapshots": 5,
+          "shop_snapshots": 17
+        },
+        "wall_seconds": 4.034085499995854
+      }
+    ]
+  },
+  "local_rest_and_potion_Host_v3": {
+    "upstream_revision": "e0651024117d22bdeb95142766917103d87c0185",
+    "patch": {
+      "path": "patches/engine/sts2-connector-v0.111.0-rest-potion-tutorial-v2.patch",
+      "sha256": "47ff88124d6a6b688f369ac650f5fc828e0bfffd358252c2b8a6f76eb5a5ebc4"
+    },
+    "license": "patches/engine/sts2-connector-MIT-LICENSE.txt",
+    "build_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-rest-potion-build-v3.json",
+      "config_id": "sha256:39e2f005efdc4817bb68566c9d5ac086203db56b48c34f0f5aea662d533768df"
+    },
+    "connector_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-rest-potion-tutorial-v3.json",
+      "config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3"
+    },
+    "build_report": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-rest-potion-build-v3.json",
+      "report_id": "sha256:744479a86edbf8996a8c37baea04f3407dba327523e7f498475858f888020a50",
+      "config_id": "sha256:39e2f005efdc4817bb68566c9d5ac086203db56b48c34f0f5aea662d533768df",
+      "source_revision": "3769f2a20b3d122959047b25bc9af876a1fcd887",
+      "sdk_version": "10.0.401",
+      "status": "local_connector_built_unqualified",
+      "wall_seconds": 16.620522457989864
+    },
+    "toolchain_report": {
+      "path": "artifacts/engine-tooling/connector-rest-potion-tutorial-v3/toolchain.json",
+      "report_id": "sha256:da45bd30c2964240c0aa5806969878f3fe20c32232cdbe44dc32c20db06e6e89",
+      "config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3"
+    },
+    "fresh_builds": 2,
+    "fresh_builds_identical": true,
+    "host_identity": {
+      "file_name": "STS2_MCP.dll",
+      "module_version_id": "3bacb44d-f16f-4240-9e30-7aa62ce62e50",
+      "schema_version": 1,
+      "sha256": "0c6833f8dc426c3ca1951aaaa1cd9f6735a1639eb15289e34eb80cc3ca3b4d92"
+    },
+    "runtime_seal_authority": "none_local_source_canary_not_upstream_release",
+    "official_game_assembly_and_SDK_unchanged": true,
+    "scope": "exact_current_rest_site_and_obtain_potion_visible_native_confirmation_only",
+    "focused_tutorial_tests_passed": 4
+  },
+  "current_Host_v3_and_native_v9_regressions": {
+    "rest": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-potion-host-regression-v2/comparison.json",
+      "report_id": "sha256:d04b7fa1432c479358d5713f95d78d031a5e8fc2ee453ae6d1a9cc29910192fa",
+      "config_id": "sha256:9f050acec55009b6a25fd7fdfbedf9b2640854fe37419febc9ff242c6827892e",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-smith-cancel-heal",
+      "status": "rest_action_comparison_pass",
+      "compared_snapshots": 7,
+      "semantic_actions_delivered": 6,
+      "public_actions_delivered": 7,
+      "rest_tutorial_steps": 1,
+      "upgrade_ui_steps": 1,
+      "native_public_prefix_id": "sha256:b8b0f289d2d7bb33bd431d4a02d2b9ad10cbf11a8b14e347d8e6fa4a3926a2ab",
+      "disposable_payload_removed_after_verified_success": true,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-potion-host-regression-v2/native-report.json",
+        "report_id": "sha256:06dfaa05cf721911e8f046f9fd762c3b61be6fa5a1723783714e1b73eb493c09",
+        "config_id": "sha256:a6875692e7c3ab6c9256fa2879ef9abf4a4104b8e5fac96dbd46c303d63b8e67",
+        "build_report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-potion-host-regression-v2/shipped-report.json",
+        "report_id": "sha256:4a36925425b5c69f5f80ab845fa32cdb0aac23bb705fbb44c23b35592d63675b",
+        "config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3",
+        "toolchain_report_id": "sha256:da45bd30c2964240c0aa5806969878f3fe20c32232cdbe44dc32c20db06e6e89"
+      },
+      "native_process_seconds": 3.7394009580020793,
+      "shipped_process_seconds": 42.700200624996796,
+      "saved_verification": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-potion-host-regression-v2/saved-verification-v1.json",
+        "report_id": "sha256:a651b69467d8596542f1c27739ef90495f1442d0d4a2b32709b35bc80f6e113e",
+        "valid": true,
+        "games_launched": 0,
+        "audits": [
+          {
+            "compared_snapshots": 7,
+            "public_actions_delivered": 7,
+            "rest_tutorial_steps": 1,
+            "semantic_actions_delivered": 6,
+            "upgrade_ui_steps": 1
+          }
+        ]
+      }
+    },
+    "first_combat": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shipped-potion-host-regression-boots-v1.json",
+      "report_id": "sha256:289cbfa2c89a8323c5b1a50b0a1e6160d75e73e6e5830f23d06e9e582e276465",
+      "journey_config_id": "sha256:8e77da647d6efc0e54a098f6663e02f6ced38bda71557adcfc172860d5c3b75e",
+      "native_report_id": "sha256:677b8cc9b9b3a3466a96b8ced8edb0eb210389316435cc07e15ced851ce12222",
+      "status": "first_combat_prefix_pass",
+      "disposable_payload_removed_after_verified_success": true,
+      "compared_snapshots": 8,
+      "public_actions_delivered": 7,
+      "tutorial_steps": 3,
+      "shipped_process_seconds": 41.16815891704755
+    },
+    "first_combat_saved_verification": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/potion-host-regression-saved-v1.json",
+      "report_id": "sha256:499cbd0d0ce60c71d0eb17c4d6cd2ac4b62cd6b3f0999b150935696d130cdd3a",
+      "valid": true,
+      "cases": [
+        {
+          "compared_snapshots": 8,
+          "public_actions_delivered": 7,
+          "tutorial_steps": 3
+        }
+      ],
+      "verifier_sha256": "22e2f85ac776a8e753bc7e0526a0f019c411f8e31defa349dc112de9587af5a6",
+      "games_launched": 0,
+      "claim_scope": "one_saved_first_combat_prefix_on_local_rest_potion_Host_v3_only"
+    },
+    "scope": "one_targeted_rest_and_one_first_combat_prefix_on_current_binaries_not_a_repeated_panel"
+  },
+  "shop_smokes": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v6/comparison.json",
+      "report_id": "sha256:8369ad250addceb0c7e1f9aba12aafe0602bbb79cb102d838d71ec07146c123a",
+      "config_id": "sha256:7967641fe711dd5ef3355ab43453ca1136a905f5c69e63787a2750f8a66a9307",
+      "seed": "SPIRESHIFTSHOPBRIDGE003",
+      "scenario": "ordinary-purchases-removal",
+      "status": "shop_action_comparison_pass",
+      "compared_snapshots": 9,
+      "semantic_actions_delivered": 8,
+      "public_actions_delivered": 12,
+      "shop_ui_steps": 3,
+      "potion_tutorial_steps": 1,
+      "native_public_prefix_id": "sha256:023e997d0dd59d2d71c9802ac8b54dac16299159e5836a7ada9812e8550770ff",
+      "disposable_payload_removed_after_verified_success": true,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v6/native-report.json",
+        "report_id": "sha256:844fd253035cab2a13afbe7d7109d296dfc9e46ac7f2847e203b4a0a9a489ffb",
+        "config_id": "sha256:b5a0e92b4ba01a55838865e8d5b32a3d8e2a273b5f66de0ec3e435778704f463",
+        "build_report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v6/shipped-report.json",
+        "report_id": "sha256:e43d32483b160493d9f2cf0f56641eac2be29b0d0cb8d7562c830b32becb0012",
+        "config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3",
+        "toolchain_report_id": "sha256:da45bd30c2964240c0aa5806969878f3fe20c32232cdbe44dc32c20db06e6e89"
+      },
+      "native_process_seconds": 3.7673937089857645,
+      "shipped_process_seconds": 39.386560041981284,
+      "saved_verification": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v6/saved-verification-v1.json",
+        "report_id": "sha256:400c76884e775e3c4237622610c51b41f691c75f863307d5baf1cbfeec8a6c94",
+        "valid": true,
+        "games_launched": 0,
+        "verifier_sha256": "133795eb28f88e550d7880d1c13a79c215d5e5e1918bb32db8aaea148dbf943e",
+        "audits": [
+          {
+            "compared_snapshots": 9,
+            "potion_tutorial_steps": 1,
+            "public_actions_delivered": 12,
+            "semantic_actions_delivered": 8,
+            "shop_ui_steps": 3
+          }
+        ]
+      }
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-courier-v2/comparison.json",
+      "report_id": "sha256:cfd0de897965db6256bdf7e015bf035ddcf40fcf7efc47c620713fce8623493f",
+      "config_id": "sha256:c6b712c648d5c986cd71e482ace48cde6c961272998670e7908e057ccd72a997",
+      "seed": "SPIRESHIFTSHOPBRIDGE006",
+      "scenario": "courier-restock-removal",
+      "status": "shop_action_comparison_pass",
+      "compared_snapshots": 10,
+      "semantic_actions_delivered": 9,
+      "public_actions_delivered": 13,
+      "shop_ui_steps": 3,
+      "potion_tutorial_steps": 1,
+      "native_public_prefix_id": "sha256:259253b6e6477db60079c41be8b2bbe99653da7b6c805a7050ab768acdb5598e",
+      "disposable_payload_removed_after_verified_success": true,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-courier-v2/native-report.json",
+        "report_id": "sha256:76c4db7846c7939515dfb1fb5fb42104d6c759b7ed6c686235584e6e156a9fbc",
+        "config_id": "sha256:988d7bfc5298de997b4c8e9feaf2996984bcaa075ecb31c3fd1d7708da9e4245",
+        "build_report_id": "sha256:f9ea5318265eb9d8fe41d9713d6984f37fb33e9143ee6e32ca919438bbec755d"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-courier-v2/shipped-report.json",
+        "report_id": "sha256:7bdc257607f34f48fd31a3333540cfcf3e702195d3b00ea5ac69e4f1cbcf94df",
+        "config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3",
+        "toolchain_report_id": "sha256:da45bd30c2964240c0aa5806969878f3fe20c32232cdbe44dc32c20db06e6e89"
+      },
+      "native_process_seconds": 4.100941375014372,
+      "shipped_process_seconds": 37.199741125048604,
+      "saved_verification": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-courier-v2/saved-verification-v1.json",
+        "report_id": "sha256:29ff6f1871e32847efc4f256e912f283f7120e6360339866d52ed55df92d5fe0",
+        "valid": true,
+        "games_launched": 0,
+        "verifier_sha256": "133795eb28f88e550d7880d1c13a79c215d5e5e1918bb32db8aaea148dbf943e",
+        "audits": [
+          {
+            "compared_snapshots": 10,
+            "potion_tutorial_steps": 1,
+            "public_actions_delivered": 13,
+            "semantic_actions_delivered": 9,
+            "shop_ui_steps": 3
+          }
+        ]
+      }
+    }
+  ],
+  "shop_scope": {
+    "privileged_fixture": true,
+    "initial_deck_cards": 1,
+    "initial_gold": 1000,
+    "initial_empty_potion_slots": 2,
+    "optional_initial_relic": "The Courier",
+    "naturally_reached_room": false,
+    "sold_out_display_model_identity_compared": false,
+    "current_stock_prices_availability_and_legal_menus_compared": true,
+    "complete_public_deck_card_definition_cost_and_upgrade_compared": true,
+    "card_and_potion_ownership_gold_removal_cancel_reopen_confirm_and_exit_compared": true,
+    "fresh_potion_tutorial_clicked_with_underlying_facts_unchanged": true,
+    "raw_saved_audits_require_snapshot_binding_and_current_unique_operands": true,
+    "unqualified": [
+      "merchant_exit_before_opening_inventory_tutorial",
+      "relic_purchases",
+      "out_of_combat_potion_use_and_discard",
+      "general_card_effect_text_or_preview_stats",
+      "naturally_reached_shops",
+      "other_discount_or_relic_interactions",
+      "later_acts_and_terminal_endings"
+    ]
+  },
+  "preserved_failures": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v1/comparison.json",
+      "report_id": "sha256:26af901bcfea22eddd71f30fa7bf641d16f0e474434378b6b77e6e2143961f52",
+      "config_id": "sha256:504f313b709a894fccb9d66cda7209af97d93e235db952ff4b0519d411036af7",
+      "status": "shop_comparison_incomplete",
+      "native_report_id": "sha256:5ce8a8597924691db8b6c0e6d697ff45fded1d98a842afbaa203c51e368ac766",
+      "shipped_report_id": "sha256:9c7c8e9f8838a62535028414e45f610dedb2e44d496158b21fdc9f78c2457018",
+      "reason": "wrong SDK client constructor; no public actions before cap",
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v2/comparison.json",
+      "report_id": "sha256:fbd5a40f6f49fd8715a77393a1ec4c3ae2a0bd2693cdf4b884e04dad384bf759",
+      "config_id": "sha256:3ff3db95b47dabe0b3b570c4b06db9d73619d8b155abad64367f4d5ff430b331",
+      "status": "shop_comparison_incomplete",
+      "native_report_id": "sha256:610b6cca7f9baa074549a1c25fb520b742a5e7576001a4e1cf1e1b2a0dd76df9",
+      "shipped_report_id": "sha256:4fbdc2ae2c9eca67362fb94a521b94f4aceac886bea63aa20a477b8629eb963d",
+      "reason": "exact Close inventory action alias omission; raw potion prices reveal TestMode rule/RNG divergence",
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v3/comparison.json",
+      "report_id": "sha256:7bd6126462da96b9b19ee0a0486380d4926295e8e140f67948811f44eb5e8f9d",
+      "config_id": "sha256:dddb012b9ffac67f50a9a666979145f731573938e2c5bd6afdad2cd1a33ab4a9",
+      "status": "shop_comparison_incomplete",
+      "native_report_id": "sha256:733c756de9844a29ded0daa833c5797bfd81d6659dd15efe3b7c349f000adec2",
+      "shipped_report_id": "sha256:01d8305dbf58cd49d0d85026e3d654dbb87c017a5dde0ff511363caf5f35685f",
+      "reason": "first-obtain-potion tutorial unsupported by rest-only Host",
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v4/comparison.json",
+      "report_id": "sha256:b11cead26dca7a4a3b663b60743484856c766d9fa7e128f6df9dfb238d3ed447",
+      "config_id": "sha256:0ddfcd0e2f8715c55a825aa761db47558c8752c805acfcfdf065d86477e80f34",
+      "status": "shop_comparison_incomplete",
+      "native_report_id": "sha256:7bdffceff85fe723d3fac8f288802e2f9b30e95b18250d00da024c40c030b7e4",
+      "shipped_report_id": "sha256:c75c29da6f8dd5acb5a4d52ec9961b4cdbbb8ed1cfef527be38d8864e987e10e",
+      "reason": "one-card removal automatically enters preview; helper assumed an extra open-preview step",
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-courier-v1/comparison.json",
+      "report_id": "sha256:179a89046964e4930104839739556cdaa4cda15596d3d12d75fa902855f83df7",
+      "config_id": "sha256:b75c700d86767116b8df87755f98eb50bba9c64decb9f37ab09fd3659bb25c13",
+      "status": "shop_comparison_incomplete",
+      "native_report_id": "sha256:31b9e2a54bf1c0a27355a9a432b9020137bd73a6b7f19099644ac298081bb12e",
+      "shipped_report_id": "sha256:fa24bc616a51c2a966c4ad23e19c4f0d04cf4ec747aa7bf739584b14b270c5df",
+      "reason": "effect assertion sorted records before rebuilding key order; fresh semantic sorting fixes bookkeeping",
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shipped-rest-host-regression-rod-v1/checkpoint-vtq1skko/failure.json",
+      "reason": "installation timeout before game launch; separate named retry passed",
+      "cause_established": false,
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-potion-host-regression-v1/private-copy-failure-record-v1.json",
+      "report_id": "sha256:2bcd05ef46e25e48b0aa07b9e238d9ebdc87e6f743ec3623462ec84e93248738",
+      "reason": "disk full during game copy before launch; partial pack preserved; new pre-copy 3.5GB guard",
+      "games_launched": 0,
+      "private_workspace_preserved": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-ordinary-v5/saved-verification-v1.json",
+      "report_id": "sha256:3e779a3f14a5bea7be1e4bcb21b9ac8ce867aa61d5c510ebfa8b09a292e587f4",
+      "reason": "saved-only assertion initially compared read timestamps; validated snapshot-bound semantic facts now pass",
+      "games_launched_in_saved_audit": 0
+    }
+  ],
+  "failure_payload_preservation": {
+    "paths_and_bytes_preserved": true,
+    "partial_pack_preserved": true,
+    "identical_full_packs_replaced_only_with_independent_copy_on_write_clones_of_verified_frozen_pack": true,
+    "records": [
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-failure-payload-deduplication-v1.json",
+        "report_id": "sha256:69a2b70de2f03fd34aa0e84550d0be425cb70ac921a3a32f11045b69f37c020c"
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-failure-payload-deduplication-v2.json",
+        "report_id": "sha256:a07d6f5de3625220f9ebe124b6a5d702dd689d496284eb52de2c6d391565b120"
+      },
+      {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-failure-payload-deduplication-v3.json",
+        "report_id": "sha256:1d53c2847f29fdc05807ac63fc15806ce22f4420f85565cff4b1a4fbdc0048f5"
+      }
+    ]
+  },
+  "next_owner_stage": {
+    "script": "scripts/compare-shop-actions-v1.sh",
+    "batch_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-shop-bridges-v1.json",
+      "config_id": "sha256:d701588f0a6e1808c9a10a06f7f015567b267ba944aa6996a095b384ee684222"
+    },
+    "template_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-shop-template-v1.json",
+      "config_id": "sha256:a161d957a47d15c9597b1804cb23494131ebe0d0c63cfce3cf1541efc5d60d53"
+    },
+    "native_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-cli-shop-bridge-v3.json",
+      "config_id": "sha256:e5f0e0b57eda41b86c333a61d1f0a70dbabdf031a5818ae47f6764b729470f8c"
+    },
+    "planned_cases": 8,
+    "independent_seeds": 2,
+    "seed_scenario_pairs": 4,
+    "repeats_per_pair": 2,
+    "codex_launched_batch": false,
+    "expected_minutes": "8-12",
+    "max_wall_seconds": 900,
+    "max_cpu_seconds": 1800,
+    "max_resident_memory_bytes": 8000000000,
+    "max_generated_storage_bytes": 4000000000,
+    "minimum_pre_copy_free_bytes": 3500000000,
+    "stop_on_first_failure": true,
+    "automatic_next_stage": false,
+    "training_allowed": false,
+    "full_run_attempts": 0
+  },
+  "validation": {
+    "repository_command": "uv run spireshift check",
+    "repository_tests_passed": 1071,
+    "repository_test_seconds": 49.31,
+    "formatting_types_and_CSharp_protocol_pass": true,
+    "standalone_Node_tests_passed": 88,
+    "focused_Host_tutorial_tests_passed": 4,
+    "synthetic_checks_are_not_gameplay_strength": true
+  },
+  "remaining_work": [
+    "repeat current shop fixture across both seeds/scenarios",
+    "audit rule_and_RNG_changing_TestMode_branches_in_pinned_native_assembly",
+    "qualify complete public effects modifiers expiry relic counters and all reachable decision families",
+    "verify broader native/shipped mechanics later acts and terminal endings",
+    "measure complete run speed before separate fixed_A8 neural lineage"
+  ],
+  "evidence_id": "sha256:c8f3c796a4aca552825308caa2d2088a383b0045e533469b7a0eb302e78eddfc"
+}

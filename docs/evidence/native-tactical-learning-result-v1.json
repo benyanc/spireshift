@@ -1,0 +1,229 @@
+{
+  "schema_version": "native-tactical-learning-result-evidence-v1",
+  "source_report_id": "sha256:0827356a48f8e47c59b136076e6a5043e91c6d42ea0d3963133b52121f3fc559",
+  "assessment_report_id": "sha256:cb99db6bb5a79ed368dfe93b32f5bb5ecaf3473af0f8106efef183d76d0d84eb",
+  "resource_report_id": "sha256:a4004058a1ab049c8bf8d00dc32f97a303fa623ef3d36a37a028a3c4e723b969",
+  "repository_check_resource_report_id": "sha256:a1ca72a76bca81ce9391c87add73f0c50ae594436ec90e27586f42351a7d594e",
+  "status": "tactical_diagnostic_complete",
+  "verified_units": 66,
+  "verified_source_files": 6763,
+  "native_roots": 64,
+  "native_branches": 192,
+  "native_worlds": 32,
+  "fitting_worlds": 24,
+  "heldout_worlds": 8,
+  "fixed_rounds_per_method_player": 256,
+  "coverage": {
+    "distinct_fitting_public_inputs": 31,
+    "distinct_heldout_public_inputs": 13,
+    "heldout_public_inputs_absent_from_fitting": 2,
+    "heldout_seeds_do_not_necessarily_mean_unseen_public_states": true,
+    "public_inputs_in_both_partitions": 11
+  },
+  "players": [
+    {
+      "initial_heldout": {
+        "candidate_permutation_control_passed": true,
+        "cases": 16,
+        "families": {
+          "finish_combat": {
+            "cases": 8,
+            "mean_success_probability": 0.7496087917514955
+          },
+          "survive_turn": {
+            "cases": 8,
+            "mean_success_probability": 0.13469209062127363
+          }
+        },
+        "greedy_accuracy": 0.5,
+        "mean_success_probability": 0.4421504411863846,
+        "minimum_success_probability": 0.06449012225719272
+      },
+      "methods": {
+        "ppo": {
+          "all_heldout": {
+            "candidate_permutation_control_passed": true,
+            "cases": 16,
+            "families": {
+              "finish_combat": {
+                "cases": 8,
+                "mean_success_probability": 0.9999962007165845
+              },
+              "survive_turn": {
+                "cases": 8,
+                "mean_success_probability": 0.9999537240905693
+              }
+            },
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.9999749624035769,
+            "minimum_success_probability": 0.9998881222887976
+          },
+          "criterion_passed": true,
+          "first_round_min_fit_probability_ge_80pct": 5,
+          "new_optimizer_steps": 761,
+          "unseen_public_states_only": {
+            "case_rows": 2,
+            "distinct_public_inputs": 2,
+            "families": [
+              "survive_turn"
+            ],
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.9999508633941834,
+            "minimum_success_probability": 0.9999219911084017
+          }
+        },
+        "teaching": {
+          "all_heldout": {
+            "candidate_permutation_control_passed": true,
+            "cases": 16,
+            "families": {
+              "finish_combat": {
+                "cases": 8,
+                "mean_success_probability": 0.9998662424018336
+              },
+              "survive_turn": {
+                "cases": 8,
+                "mean_success_probability": 0.9998891676445402
+              }
+            },
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.999877705023187,
+            "minimum_success_probability": 0.9997197197565137
+          },
+          "criterion_passed": true,
+          "first_round_min_fit_probability_ge_80pct": 4,
+          "new_optimizer_steps": 761,
+          "unseen_public_states_only": {
+            "case_rows": 2,
+            "distinct_public_inputs": 2,
+            "families": [
+              "survive_turn"
+            ],
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.9998823155341712,
+            "minimum_success_probability": 0.9998081600448059
+          }
+        }
+      },
+      "original_Adam_steps": 5658,
+      "original_state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "player": 2
+    },
+    {
+      "initial_heldout": {
+        "candidate_permutation_control_passed": true,
+        "cases": 16,
+        "families": {
+          "finish_combat": {
+            "cases": 8,
+            "mean_success_probability": 0.42928068088363236
+          },
+          "survive_turn": {
+            "cases": 8,
+            "mean_success_probability": 0.702583971256684
+          }
+        },
+        "greedy_accuracy": 0.375,
+        "mean_success_probability": 0.5659323260701582,
+        "minimum_success_probability": 0.410683294581084
+      },
+      "methods": {
+        "ppo": {
+          "all_heldout": {
+            "candidate_permutation_control_passed": true,
+            "cases": 16,
+            "families": {
+              "finish_combat": {
+                "cases": 8,
+                "mean_success_probability": 0.9999929135104839
+              },
+              "survive_turn": {
+                "cases": 8,
+                "mean_success_probability": 0.9999174845786879
+              }
+            },
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.999955199044586,
+            "minimum_success_probability": 0.9997755351752915
+          },
+          "criterion_passed": true,
+          "first_round_min_fit_probability_ge_80pct": 3,
+          "new_optimizer_steps": 766,
+          "unseen_public_states_only": {
+            "case_rows": 2,
+            "distinct_public_inputs": 2,
+            "families": [
+              "survive_turn"
+            ],
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.9998938297390925,
+            "minimum_success_probability": 0.9997908304604933
+          }
+        },
+        "teaching": {
+          "all_heldout": {
+            "candidate_permutation_control_passed": true,
+            "cases": 16,
+            "families": {
+              "finish_combat": {
+                "cases": 8,
+                "mean_success_probability": 0.9998508990497927
+              },
+              "survive_turn": {
+                "cases": 8,
+                "mean_success_probability": 0.9998379399462672
+              }
+            },
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.9998444194980299,
+            "minimum_success_probability": 0.999639016152774
+          },
+          "criterion_passed": true,
+          "first_round_min_fit_probability_ge_80pct": 3,
+          "new_optimizer_steps": 766,
+          "unseen_public_states_only": {
+            "case_rows": 2,
+            "distinct_public_inputs": 2,
+            "families": [
+              "survive_turn"
+            ],
+            "greedy_accuracy": 1.0,
+            "mean_success_probability": 0.9998006290509205,
+            "minimum_success_probability": 0.9996464126434883
+          }
+        }
+      },
+      "original_Adam_steps": 6045,
+      "original_state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "player": 3
+    }
+  ],
+  "diagnostic_PPO_baseline": "exact_action_independent_oracle_value_of_native_diagnostic_bandit",
+  "ordinary_full_run_PPO_eligible": false,
+  "privileged_fixture": true,
+  "public_student_inputs_only": true,
+  "original_full_states_and_Adam_unchanged": true,
+  "full_run_improvement_established": false,
+  "production_credit_qualified_by_this_diagnostic": false,
+  "full_run_attempts": 0,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "base_readiness_passed": false,
+  "adaptive_controller_allowed": false,
+  "audit_games_launched": 0,
+  "audit_optimizer_updates": 0,
+  "resources": {
+    "wall_seconds": 575.6254343751352,
+    "cpu_seconds": 473.8570769900002,
+    "peak_resident_memory_bytes": 304906240,
+    "retained_bytes": 67055038
+  },
+  "owner_repository_check": {
+    "status": "completed",
+    "exit_code": 0,
+    "wall_seconds": 132.70275604189374,
+    "repository_snapshot": "175f21dfda2fc3c2b0891149d5bacfc573db4a2a87671d35feda1f9b46273300"
+  },
+  "next_step": "structured_public_inputs_versus_hashing_with_capacity_tested_separately",
+  "stronger_teachers_larger_batches_richer_value_each_separate": true
+}

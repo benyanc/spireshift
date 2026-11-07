@@ -1,0 +1,234 @@
+{
+  "admitted": false,
+  "claim_scope": "native_interface_checks_and_saved_reference_coverage_not_full_live_game_fidelity_or_policy_strength",
+  "evidence_id": "sha256:09fc9b76ca4ac6350f43a9a2618392fffb4145f6b41482363fcf80e4664f1bb1",
+  "final_test_opened": false,
+  "native_contract": {
+    "checks": [
+      {
+        "check_id": "identity",
+        "metrics": {},
+        "status": "pass"
+      },
+      {
+        "check_id": "reset",
+        "metrics": {},
+        "status": "pass"
+      },
+      {
+        "check_id": "legal_actions",
+        "metrics": {
+          "action_count": 3
+        },
+        "status": "pass"
+      },
+      {
+        "check_id": "stepping",
+        "metrics": {},
+        "status": "pass"
+      },
+      {
+        "check_id": "illegal_action",
+        "metrics": {},
+        "status": "pass"
+      },
+      {
+        "check_id": "faithful_clone",
+        "metrics": {},
+        "status": "pass"
+      },
+      {
+        "check_id": "hidden_resampling",
+        "metrics": {
+          "divergence_step": 2,
+          "resample_seed": 17
+        },
+        "status": "pass"
+      },
+      {
+        "check_id": "replay",
+        "metrics": {
+          "decisions": 11
+        },
+        "status": "pass"
+      },
+      {
+        "check_id": "public_state_isolation",
+        "metrics": {
+          "observations": 22
+        },
+        "status": "pass"
+      },
+      {
+        "check_id": "terminal_reward",
+        "metrics": {
+          "decisions": 20,
+          "losses": 2,
+          "seeds": 2,
+          "victories": 0
+        },
+        "status": "pass"
+      }
+    ],
+    "conformance_source_sha256": "b66e8be97c557f47efedb0a49a7a53cc7bee1ae7c8882e80d6a0973f226efe42",
+    "cpu_seconds": 0.69963889,
+    "max_probe_steps": 256,
+    "objective": {
+      "auxiliary": [
+        "combat_survival",
+        "act_completion",
+        "floor_reached",
+        "terminal_hp"
+      ],
+      "auxiliary_reward_allowed": false,
+      "constraint": "cpu_time_per_run",
+      "id": "terminal-victory-v1",
+      "primary": "terminal_victory",
+      "whole_run_budget": 128
+    },
+    "report_id": "sha256:8cd4d81d189478a77e9f43744b91b4e7062a682142a8713881edfb827873e28f",
+    "report_path": "artifacts/compatibility/full-run-event-contract-v1-retry1/contract-probe.json",
+    "resource_report_id": "sha256:f370b92020da7e1e8064cd8e4fd447f85a9faeee722464e250cb880ec250fd19",
+    "ruleset_manifest_id": "sha256:46dfcf7480d7eebda430f067a8257a5f400f62eab64443ab6ef6d9952c9db255",
+    "scope": "environment_interface_probes_on_inspected_training_seeds_not_live_fidelity_or_policy_strength",
+    "seeds": [
+      100058,
+      100083
+    ],
+    "summary": {
+      "fail": 0,
+      "inconclusive": 0,
+      "pass": 10
+    },
+    "wall_seconds": 0.8252387910033576
+  },
+  "optimizer_steps": 0,
+  "preserved_initial_reporting_failure": {
+    "failure": "Reporting accessed nonexistent LoadedPublicChoiceBackend.manifest after the probes; separate corrected report reads the checked manifest directly.",
+    "path": "artifacts/resources/full-run-event-contract-v1.json",
+    "resource_report_id": "sha256:ea441251fb928156ea74f49aba9fa04947db04c60948f40872bb17dc2092a01b",
+    "wall_seconds": 0.9120101669977885
+  },
+  "recorded_on": "2026-10-09",
+  "saved_live_reference_coverage": {
+    "acts_observed": [
+      1
+    ],
+    "complete_event_action_parity_verified": false,
+    "event_fixtures": [
+      {
+        "after_is_unsettled_known_capture": false,
+        "ascension": 8,
+        "captured_after_options": [],
+        "event": "DenseVegetation",
+        "game": {
+          "release": "v0.107.1",
+          "steam_buildid": "23811903"
+        },
+        "initial_enabled_options": [
+          0,
+          1
+        ],
+        "path": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1/tests/fixtures/events/DenseVegetation-options.json",
+        "sha256": "eea7ab8ee0602d578a0ec2229c4e2422c9adc648fd250d5e00f205387255c9ed"
+      },
+      {
+        "after_is_unsettled_known_capture": true,
+        "ascension": 8,
+        "captured_after_options": [
+          0,
+          1
+        ],
+        "event": "DenseVegetation",
+        "game": {
+          "release": "v0.107.1",
+          "steam_buildid": "23811903"
+        },
+        "initial_enabled_options": [
+          0,
+          1
+        ],
+        "path": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1/tests/fixtures/events/DenseVegetation-opt1.json",
+        "sha256": "569affcd9ffdbfcd9c373c39d8a8987c3c98189c1838996904358e4e0b1a06f4"
+      },
+      {
+        "after_is_unsettled_known_capture": false,
+        "ascension": 8,
+        "captured_after_options": [],
+        "event": "PunchOff",
+        "game": {
+          "release": "v0.107.1",
+          "steam_buildid": "23811903"
+        },
+        "initial_enabled_options": [
+          0,
+          1
+        ],
+        "path": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1/tests/fixtures/events/PunchOff-options.json",
+        "sha256": "9ff30c8490c87f51f4338962462f8dbda85498fef7a8bce4c09cf1950ee91ebd"
+      },
+      {
+        "after_is_unsettled_known_capture": false,
+        "ascension": 8,
+        "captured_after_options": [
+          0
+        ],
+        "event": "PunchOff",
+        "game": {
+          "release": "v0.107.1",
+          "steam_buildid": "23811903"
+        },
+        "initial_enabled_options": [
+          0,
+          1
+        ],
+        "path": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1/tests/fixtures/events/PunchOff-opt1.json",
+        "sha256": "6ace9de4fe89614c43493cdb022819cdb1b651ffe703230ac5df7f6f2bf95184"
+      },
+      {
+        "after_is_unsettled_known_capture": false,
+        "ascension": 8,
+        "captured_after_options": [],
+        "event": "TheLanternKey",
+        "game": {
+          "release": "v0.107.1",
+          "steam_buildid": "23811903"
+        },
+        "initial_enabled_options": [
+          0,
+          1
+        ],
+        "path": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1/tests/fixtures/events/TheLanternKey-options.json",
+        "sha256": "e695a98d327ffe1d8707ac570401d9b14642c13513be6abce6505aa7d8ceeecb"
+      },
+      {
+        "after_is_unsettled_known_capture": false,
+        "ascension": 8,
+        "captured_after_options": [
+          0
+        ],
+        "event": "TheLanternKey",
+        "game": {
+          "release": "v0.107.1",
+          "steam_buildid": "23811903"
+        },
+        "initial_enabled_options": [
+          0,
+          1
+        ],
+        "path": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1/tests/fixtures/events/TheLanternKey-opt1.json",
+        "sha256": "5b0347d4e4ddefd27da3e3782ff30d659dfdd2ac7326bee92a61887bdf674efb"
+      }
+    ],
+    "later_act_endings_supported_by_these_traces": false,
+    "limitations": [
+      "All 32 saved run traces observe Act 1 only; they do not cover later-act transitions or a full win.",
+      "Captured initial pages for the three repaired events expose only options 0 and 1. Current source regression tests deliberately preserve the historical extra skip action 3, so the full initial action surface remains unresolved.",
+      "DenseVegetation-opt1 was captured mid-transition and is not a settled continuation-page oracle."
+    ],
+    "run_trace_files": 32,
+    "run_trace_inventory_id": "sha256:184f167d29658490a21c8876ae9d8f96e3e86a87827e9013d4cdb22ebcdbb67e"
+  },
+  "schema_version": "event-interface-and-reference-coverage-v1",
+  "training_allowed": false
+}

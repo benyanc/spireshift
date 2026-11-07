@@ -170,6 +170,25 @@ def test_parses_modern_and_legacy_steam_library_formats() -> None:
     ]
 
 
+def test_modern_library_app_sizes_are_not_game_library_paths() -> None:
+    content = """
+"libraryfolders"
+{
+    "0"
+    {
+        "path" "/Users/owner/Library/Application Support/Steam"
+        "apps"
+        {
+            "2868840" "2323747842"
+        }
+    }
+}
+"""
+    assert parse_steam_library_folders(content) == [
+        "/Users/owner/Library/Application Support/Steam"
+    ]
+
+
 def cast_dict(value: object) -> dict[str, object]:
     assert isinstance(value, dict)
     return value

@@ -1,0 +1,127 @@
+{
+  "control_deliveries": 72,
+  "control_limits": {
+    "cpu_seconds": 300,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 285
+  },
+  "control_resource": "artifacts/resources/a8-act1-boss-control-v2.json",
+  "control_workspace": "artifacts/native-a8-act1-boss/control-v2",
+  "control_worlds": [
+    {
+      "key": "decline-probe-1",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BC201"
+    },
+    {
+      "key": "decline-probe-2",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BC202"
+    }
+  ],
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "gate": {
+    "minimum_confirmed_clears": 3,
+    "strict_rescue_initializers": [
+      2,
+      3
+    ]
+  },
+  "implementation": {
+    "scripts/qualify-act1-boss-teacher-v2.sh": "0a3eef6fd7ef9eaa38d5272f3a822dc27e7d840a867f72ea1e375ea7f959bd46",
+    "src/spireshift/native_a8_boss2_checks.py": "950e22205029301a5f537d4b42e71679e9e9306be82eb3fa42ec68799e6f98be",
+    "src/spireshift/native_a8_boss2_game.py": "f7747af4e0ba41610f6d01d045669ab9c23fe81b4182403d0cb27c9e2717dca8",
+    "src/spireshift/native_a8_boss2_inputs.py": "3edf7b8ad6f33450ef02ecbdd626f1dce9aa88183775a78a0e0dffaa2643d02a",
+    "src/spireshift/native_a8_boss2_policy.py": "ce2e0d8888ea195b6b8db0bda370f0c08e515f68460f39b5ec88be84c880145c",
+    "src/spireshift/native_a8_boss2_session.py": "210e5ca95755a4ef785d8cf8577303a39efb0956265ad2cd89dc48406a458c92"
+  },
+  "liveness_policy": {
+    "forced_actions": false,
+    "id": "public_exploration_bounded_v1",
+    "maximum_consecutive_identical_observations": 8,
+    "maximum_visits_per_public_state": 64
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "previous_attempt": {
+    "path": "artifacts/native-a8-act1-boss/study-v1/attempt-1794067461556879000.json",
+    "sha256": "82e153d71eda28d35080738de3541df62b77e7d65e1538f12d0343e47dbe5f3f"
+  },
+  "previous_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-boss-qualification-v1.json",
+    "sha256": "878f19350068ed0c204be071c187e3178ffd2c28cb08ecab3ac981d2d4145766"
+  },
+  "previous_resource": {
+    "path": "artifacts/resources/a8-act1-boss-v1-1794067461556879000.json",
+    "sha256": "8825ef1ab385051b60feaea8a344b54da0379bb307c26ba6c964a5f7b9b1996f"
+  },
+  "projection": "act1_generated_choice_belt_v1",
+  "schema_version": "native-a8-act1-boss-qualification-v2",
+  "session_limits": {
+    "cpu_seconds": 14400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 5400
+  },
+  "teacher": "normal_start_act1_boss_teacher_reward_progress_v2",
+  "workspace": "artifacts/native-a8-act1-boss/study-v2",
+  "worlds": [
+    {
+      "key": "boss-v2-001",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BR001"
+    },
+    {
+      "key": "boss-v2-002",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BR002"
+    },
+    {
+      "key": "boss-v2-003",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BR003"
+    },
+    {
+      "key": "boss-v2-004",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BR004"
+    },
+    {
+      "key": "boss-v2-005",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BR005"
+    },
+    {
+      "key": "boss-v2-006",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BR006"
+    },
+    {
+      "key": "boss-v2-007",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BR007"
+    },
+    {
+      "key": "boss-v2-008",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BR008"
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "schema_version": "native-matched-input-value-evidence-v1",
+  "control": {
+    "path": "artifacts/native-matched-value/sts2-v0.111.0-a8-control-v1/report.json",
+    "report_id": "sha256:2436d1a233b34723afb290aa3be560c4bb38204a02aaaac3a9a5e50c1432e5bb",
+    "config_id": "sha256:2d8610b9b3a4a96631d3b9815c0165fb7c25dadce43f0d85bbfaf472726b4604",
+    "completed_encodings": 2,
+    "completed_fits": 6,
+    "summary": {
+      "adaptive_controller_allowed": false,
+      "automatic_training_follows": false,
+      "by_cohort": {
+        "seed-2-standard-round-057-fit": {
+          "coarse_masked": 2.868622002909854e-05,
+          "current_ridge": 2.8930948254198507e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "rich": 5.0596162628384224e-05
+        }
+      },
+      "by_network_initializer": {
+        "20261020": {
+          "coarse_masked": 2.8223019350206032e-05,
+          "current_ridge": 2.8930948254198503e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "rich": 5.464411720488323e-05
+        },
+        "20261021": {
+          "coarse_masked": 2.9731146965646447e-05,
+          "current_ridge": 2.8930948254198503e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "rich": 5.3410864237410184e-05
+        },
+        "20261022": {
+          "coarse_masked": 2.810449377144314e-05,
+          "current_ridge": 2.8930948254198503e-05,
+          "other_game_constant": 3.311752249483657e-05,
+          "rich": 4.373350644285924e-05
+        }
+      },
+      "checkpoint_promoted": false,
+      "curve_snapshots_are_not_epoch_selection": true,
+      "curves": {
+        "coarse_masked": [
+          {
+            "fitting_clipped_mse": 1.9815064433021292e-05,
+            "fitting_mse": 1.9815064433021292e-05,
+            "held_clipped_mse": 2.8930948254198496e-05,
+            "held_mse": 2.8930948254198496e-05,
+            "regularized_fitting_loss": 0.0032237606894316563,
+            "step": 0,
+            "weight_penalty": 0.0032039456249986346
+          },
+          {
+            "fitting_clipped_mse": 2.1484348439972286e-05,
+            "fitting_mse": 2.1484348439972286e-05,
+            "held_clipped_mse": 3.258398212806722e-05,
+            "held_mse": 3.258398212806722e-05,
+            "regularized_fitting_loss": 0.002760781655856809,
+            "step": 1,
+            "weight_penalty": 0.0027392973074168367
+          },
+          {
+            "fitting_clipped_mse": 2.2698609709138593e-05,
+            "fitting_mse": 2.2698609709138593e-05,
+            "held_clipped_mse": 3.108868892464452e-05,
+            "held_mse": 3.108868892464452e-05,
+            "regularized_fitting_loss": 0.001693213349749152,
+            "step": 4,
+            "weight_penalty": 0.0016705147400400135
+          },
+          {
+            "fitting_clipped_mse": 2.104068744476749e-05,
+            "fitting_mse": 2.104068744476749e-05,
+            "held_clipped_mse": 3.104776116450603e-05,
+            "held_mse": 3.104776116450603e-05,
+            "regularized_fitting_loss": 0.0008527514637517047,
+            "step": 8,
+            "weight_penalty": 0.0008317107763069373
+          },
+          {
+            "fitting_clipped_mse": 1.976841968317082e-05,
+            "fitting_mse": 1.976841968317082e-05,
+            "held_clipped_mse": 2.9018365324676298e-05,
+            "held_mse": 2.9018365324676298e-05,
+            "regularized_fitting_loss": 0.00024172977982349104,
+            "step": 16,
+            "weight_penalty": 0.00022196136014032022
+          },
+          {
+            "fitting_clipped_mse": 1.9987977658339932e-05,
+            "fitting_mse": 1.9987977658339932e-05,
+            "held_clipped_mse": 2.868622002909854e-05,
+            "held_mse": 2.868622002909854e-05,
+            "regularized_fitting_loss": 0.00010829497002634093,
+            "step": 24,
+            "weight_penalty": 8.830699236800098e-05
+          },
+          {
+            "fitting_clipped_mse": 1.9703644770334628e-05,
+            "fitting_mse": 1.9703644770334628e-05,
+            "held_clipped_mse": 2.9197504130557566e-05,
+            "held_mse": 2.9197504130557566e-05,
+            "regularized_fitting_loss": 2.91312317272137e-05,
+            "step": 48,
+            "weight_penalty": 9.427586956879074e-06
+          },
+          {
+            "fitting_clipped_mse": 1.956681081041318e-05,
+            "fitting_mse": 1.956681081041318e-05,
+            "held_clipped_mse": 2.8968020041727753e-05,
+            "held_mse": 2.8968020041727753e-05,
+            "regularized_fitting_loss": 1.9831838919112235e-05,
+            "step": 96,
+            "weight_penalty": 2.6502810869905534e-07
+          }
+        ],
+        "rich": [
+          {
+            "fitting_clipped_mse": 1.9815064433021292e-05,
+            "fitting_mse": 1.9815064433021292e-05,
+            "held_clipped_mse": 2.8930948254198496e-05,
+            "held_mse": 2.8930948254198496e-05,
+            "regularized_fitting_loss": 0.0032237606894316563,
+            "step": 0,
+            "weight_penalty": 0.0032039456249986346
+          },
+          {
+            "fitting_clipped_mse": 0.00010518698211678592,
+            "fitting_mse": 0.00011243119544134218,
+            "held_clipped_mse": 0.00012759854680334724,
+            "held_mse": 0.00012933679434435846,
+            "regularized_fitting_loss": 0.002851728767433365,
+            "step": 1,
+            "weight_penalty": 0.0027392975719920227
+          },
+          {
+            "fitting_clipped_mse": 0.00018003010019686724,
+            "fitting_mse": 0.0001864548449623743,
+            "held_clipped_mse": 0.00019184230290384988,
+            "held_mse": 0.0001973610869289743,
+            "regularized_fitting_loss": 0.002174520264190753,
+            "step": 4,
+            "weight_penalty": 0.001988065419228379
+          },
+          {
+            "fitting_clipped_mse": 5.421543983865096e-05,
+            "fitting_mse": 5.421543983865096e-05,
+            "held_clipped_mse": 6.932193830860503e-05,
+            "held_mse": 6.932193830860503e-05,
+            "regularized_fitting_loss": 0.0014251513688639363,
+            "step": 8,
+            "weight_penalty": 0.001370935929025285
+          },
+          {
+            "fitting_clipped_mse": 5.121184776934949e-05,
+            "fitting_mse": 5.121184776934949e-05,
+            "held_clipped_mse": 7.601698566795277e-05,
+            "held_mse": 7.601698566795277e-05,
+            "regularized_fitting_loss": 0.0007407801454513658,
+            "step": 16,
+            "weight_penalty": 0.0006895682976820164
+          },
+          {
+            "fitting_clipped_mse": 1.8008085826620046e-05,
+            "fitting_mse": 1.8008085826620046e-05,
+            "held_clipped_mse": 5.059616262838421e-05,
+            "held_mse": 5.059616262838421e-05,
+            "regularized_fitting_loss": 0.00039344244326728565,
+            "step": 24,
+            "weight_penalty": 0.0003754343574406656
+          },
+          {
+            "fitting_clipped_mse": 6.259395874296621e-06,
+            "fitting_mse": 6.259395874296621e-06,
+            "held_clipped_mse": 5.726984782095123e-05,
+            "held_mse": 5.726984782095123e-05,
+            "regularized_fitting_loss": 7.48584508372182e-05,
+            "step": 48,
+            "weight_penalty": 6.859905496292157e-05
+          },
+          {
+            "fitting_clipped_mse": 3.323031565817688e-06,
+            "fitting_mse": 3.323031565817688e-06,
+            "held_clipped_mse": 6.217414663633726e-05,
+            "held_mse": 6.217414663633726e-05,
+            "regularized_fitting_loss": 7.685384853501786e-06,
+            "step": 96,
+            "weight_penalty": 4.362353287684099e-06
+          }
+        ]
+      },
+      "folds_and_numerical_repeats_are_not_independent_games": true,
+      "held_forecasts_including_numerical_repeats": 24,
+      "prediction_target": "declared_bootstrap_return_not_victory_probability",
+      "primary_equal_game_clipped_mse": {
+        "coarse_masked": 2.868622002909854e-05,
+        "current_ridge": 2.8930948254198507e-05,
+        "other_game_constant": 3.311752249483657e-05,
+        "rich": 5.0596162628384224e-05
+      },
+      "primary_step": 24,
+      "statistical_scope": "saved_train_development_not_independent_confirmation",
+      "stronger_native_play_established": false,
+      "unique_held_games": 8
+    },
+    "production_states_unchanged": true,
+    "new_games": 0,
+    "actor_optimizer_steps": 0,
+    "game_apps_created": 0,
+    "resource_report": {
+      "path": "artifacts/resources/native-matched-value-control-v1-1.json",
+      "report_id": "sha256:8f67ce86085338f3aaa4441c906409bab0bbb9a411f51c926f31f4c74d899e73"
+    },
+    "usage": {
+      "average_cpu_utilization": 0.059029585369959975,
+      "cpu_hours": 0.007768278015833334,
+      "cpu_seconds": 27.965800857,
+      "energy_kwh": null,
+      "final_storage_bytes": 16664323,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 2,
+      "peak_resident_memory_bytes": 265060352,
+      "peak_storage_bytes": 16664323,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 33.83993283286691
+    },
+    "curves": [
+      "artifacts/native-matched-value/sts2-v0.111.0-a8-control-v1/curves.csv",
+      "artifacts/native-matched-value/sts2-v0.111.0-a8-control-v1/curves.png"
+    ],
+    "numerical_runtime": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.4.6",
+      "python": "3.11.14"
+    }
+  },
+  "repository_check": {
+    "path": "artifacts/resources/native-matched-value-repository-check-v1-1.json",
+    "report_id": "sha256:f3acbcfc4fa2245161a2f8db2edc5e7276d4ef1b556a6a89f9da4b623f8d8a5b",
+    "tests_passed": 1869,
+    "new_tests": 20,
+    "format_lint_types_and_csharp_protocol_passed": true,
+    "usage": {
+      "average_cpu_utilization": 0.0643298771090357,
+      "cpu_hours": 0.02614811473444445,
+      "cpu_seconds": 94.13321304400002,
+      "energy_kwh": null,
+      "final_storage_bytes": 0,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 8,
+      "peak_resident_memory_bytes": 414416896,
+      "peak_storage_bytes": 0,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 104.52065562503412
+    }
+  },
+  "main": {
+    "recipe": "configs/native-controls/matched-input-value-comparison-v1.json",
+    "config_id": "sha256:4baf7f78b4d302eab97b9cc880ff83e398f3ef7c0863bc7f221b3b335d0a847d",
+    "unique_saved_train_games": 128,
+    "folds": 16,
+    "network_initializers": 3,
+    "encodings": 16,
+    "paired_fits": 48,
+    "planned_units": 64,
+    "primary_step": 24,
+    "started": false,
+    "expected_total_minutes": [
+      20,
+      35
+    ],
+    "session_wall_and_cpu_cap_minutes": 15,
+    "whole_game_folds_and_network_repeats_are_not_independent_games": true,
+    "claim_scope": "saved_train_development_not_independent_confirmation",
+    "preflight": {
+      "passed": true,
+      "resource_report": {
+        "path": "artifacts/resources/native-matched-value-main-preflight-v1-1.json",
+        "report_id": "sha256:55075967bfd182b43b0abe8d807850da386a0afdd5870e80a30d6800a7f2bf34"
+      },
+      "usage": {
+        "average_cpu_utilization": 0.04820393736868023,
+        "cpu_hours": 0.0016792071980555555,
+        "cpu_seconds": 6.045145913,
+        "energy_kwh": null,
+        "final_storage_bytes": 3191,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 139264000,
+        "peak_storage_bytes": 3191,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 8.957694333977997
+      },
+      "new_games": 0,
+      "numerical_fits": 0
+    }
+  },
+  "interpretation": "The eight-game control proves matched fitting, reporting and preservation. Rich step-24 held MSE is worse than current ridge and masked inputs. Later fitting improves while held error worsens; this tiny sample is not proof of the main cause or gameplay quality. No adoption or epoch selection.",
+  "saved_only_verification": {
+    "path": "artifacts/native-matched-value/checks-v1/saved-control-verification.json",
+    "result": {
+      "actor_optimizer_steps": 0,
+      "control_report_id": "sha256:2436d1a233b34723afb290aa3be560c4bb38204a02aaaac3a9a5e50c1432e5bb",
+      "new_games": 0,
+      "new_numerical_fits": 0,
+      "original_players_and_Adam_unchanged": true,
+      "primary_forecasts_fitting_error_and_penalty_reconstructed": true,
+      "primary_models_reconstructed": 12,
+      "protected_source_files_verified": 11324,
+      "report_id": "sha256:cb65df3a728f764c052f59ca78ad9ba38afd2822fd0314512df4334b56204ba7",
+      "schema_version": "matched-value-saved-control-verification-v1",
+      "valid": true
+    },
+    "resource_report": {
+      "path": "artifacts/resources/native-matched-value-saved-control-verification-v1-2.json",
+      "report_id": "sha256:5503bf206328786033280920f4a8ccedea6a9dab4442c9398b67508ed89c024c"
+    },
+    "usage": {
+      "average_cpu_utilization": 0.032953578072682045,
+      "cpu_hours": 0.0006979898836111111,
+      "cpu_seconds": 2.512763581,
+      "energy_kwh": null,
+      "final_storage_bytes": 6932,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 2,
+      "peak_resident_memory_bytes": 129138688,
+      "peak_storage_bytes": 6932,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 5.4465439999476075
+    }
+  },
+  "preserved_audit_failure": {
+    "resource_report_path": "artifacts/resources/native-matched-value-saved-control-verification-v1-1.json",
+    "reason": "The independent audit grouped floating-point additions differently, causing at most 6.94e-18 differences. Its corrected version uses the declared grouping and reproduces all twelve forecasts bit-for-bit. No fitting code/results/tolerance were changed."
+  },
+  "evidence_id": "sha256:9b78d3c3435ed42f7645005b7faf44cdb3338f1bdec6bedb9e12adcc8d0278a7"
+}

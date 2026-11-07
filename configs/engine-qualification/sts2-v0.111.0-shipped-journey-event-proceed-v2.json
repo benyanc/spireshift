@@ -1,0 +1,23 @@
+{
+  "schema_version": "engine-shipped-journey-config-v1",
+  "stage": "single_first_combat_public_action_differential_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "checkpoint_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-journey-event-proceed-v2.json",
+  "checkpoint_report_id": "sha256:3052653bd78eb8593d248b0ec169748d0b0c3299503a27e7cb0880a57702cfa7",
+  "snapshot_sha256": "420da6f3d5d2faac79e42fa75e6bae507985079bff63b5c8117a9fce6a788c6d",
+  "seed": "SPIRESHIFTSTART003",
+  "helpers_sha256": {
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-checkpoint-shipped-probe.mjs": "842f12cadb5636a2d8d073eb8e72a0a884611bd896adbf308cb44027f4422b72",
+    "engine-journey-contract.mjs": "7397145695374e6df4ca1856724998de5c70ad4fa482e64a19986d572e21ce8b",
+    "engine-journey-shipped-probe.mjs": "b20e806ed8e03febacb1593be96cbeff2682cdaeac3388dc4cfa6a94c8f3e84f"
+  },
+  "training_allowed": false,
+  "successful_payload_policy": "remove_after_verified_success",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shipped-journey-event-proceed-v2",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-cli-journey-event-proceed-v2.json",
+  "starting_bridge_config": "configs/engine-qualification/sts2-v0.111.0-starting-bridges-v1.json",
+  "starting_bridge_report_id": "sha256:d0f8a433828ada18c35224292129547c26cf3a1d6b3a7c6e529f39d68995d99d"
+}

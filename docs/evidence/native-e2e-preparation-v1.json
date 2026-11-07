@@ -1,0 +1,70 @@
+{
+  "automatic_follow_up": false,
+  "current_connector_live_effects_claimed_by_replay": false,
+  "current_input_and_choice_replays": 728,
+  "environment_id": "sha256:6758241eac863b1308148f82ecc3a0f9064f42d58505d143bd4a081f4b6869c2",
+  "final_uncaptured_successor_qualified_by_replay": false,
+  "finish_line": "assess_two_equal_natural_endings_and_summary_receipts_then_return_to_planned_fitting_and_interference_work",
+  "full_game_playing_strength_evaluated": false,
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "javascript_ending_contract_tests": 14,
+  "maximum_pair_wall_seconds": 600,
+  "new_games_in_preparation": 0,
+  "optimizer_updates": 0,
+  "original_weights_and_all_Adam_unchanged": true,
+  "owner_command": "bash scripts/compare-e2e-endings-v1.sh",
+  "owner_outer_wall_seconds": 2400,
+  "owner_panel_unstarted": true,
+  "owner_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-e2e-endings-v1.json",
+    "sha256": "f161a6117f7348981865fa72919b897681a5d4c9b9ee863e09976ecb093f461e"
+  },
+  "planned_maximum_choices_per_host": 384,
+  "planned_natural_pairs": 2,
+  "production_source_changed_files": [
+    "NativeUi/NativeRelicCounterTransition.cs",
+    "PlayerEnvironment/Observation/SnapshotBuilder.cs"
+  ],
+  "protected_prior_files": 19737,
+  "python_focused_tests": 10,
+  "reconciliation": {
+    "path": "artifacts/native-e2e-qualification/reconciliation-v2/report.json",
+    "sha256": "081f993f5780c0a07ced2b9ea6265ae24c8f8e25f48019bd6152f89f6bf1e0a1"
+  },
+  "reconciliation_resources": {
+    "path": "artifacts/native-e2e-qualification/preparation-v1/reconciliation-resources-v2.json",
+    "sha256": "23523f0544de00c1a60bd8356fe86587675c38fe6d75bed2e535c9a0fbd1c081"
+  },
+  "reconciliation_wall_seconds": 75.93991779198404,
+  "replayed_source_families": [
+    "card_bundle_selection",
+    "card_reward_selection",
+    "card_selection",
+    "combat_turn",
+    "event_option",
+    "map_navigation",
+    "reward_claim",
+    "shop_inventory",
+    "shop_room"
+  ],
+  "report_id": "sha256:1c9c75c791c57cf92cc97e0654133501730a0967d3664d060a272c14938aa7dc",
+  "runtime_and_host_pins": {
+    "host_machine": "arm64",
+    "host_release": "24.3.0",
+    "host_system": "Darwin",
+    "node_path": "/Users/benjamin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "node_sha256": "7d2b4ed360d609a4de6485b0cbea57370eee4dba157877799e83104db570cbdd",
+    "python_path": "/Users/benjamin/.local/share/uv/python/cpython-3.11.14-macos-aarch64-none/bin/python3.11",
+    "python_sha256": "e6eedfbc57422e986a0e3b24b18ee45764b809ff1385d3af42e9c22b5bd00de5",
+    "python_version": "3.11.14",
+    "uv_path": "/opt/homebrew/Cellar/uv/0.10.6/bin/uv",
+    "uv_sha256": "da18f9231b5f03cfe6bd9ba69563a826479f5c80d08940beee9d733f0b12f731"
+  },
+  "schema_version": "native-e2e-preparation-evidence-v1",
+  "status": "saved_reconciliation_pass_natural_owner_panel_prepared",
+  "training_allowed": false,
+  "unchanged_production_source_files": 72,
+  "verified_historical_deliveries": 728,
+  "whole_run_gameplay_cpu_seconds": 128
+}

@@ -1,0 +1,285 @@
+{
+  "build": {
+    "admitted": false,
+    "agent_integration_complete": false,
+    "automatic_followup": false,
+    "candidate_manifest_id": "sha256:2ee3801b4b6664a703209410b1e8c09d59f5c0f484b759867edbcb16b80c367a",
+    "candidate_revision": "65ddaa0a7fa870bcdb72d6df3c22fd8345c3a037",
+    "captured_event_choice_checks": {
+      "coverage": {
+        "initial": 52,
+        "other_screen_after": 46,
+        "settled_event_after": 57,
+        "unsettled_event_after": 1
+      },
+      "inventory_id": "sha256:d9acc4ca2dd8247393a73c0c761f38aba2a4df608a66077d9e7d265f64822a5a"
+    },
+    "checkpoint_promoted": false,
+    "claim_scope": "native_build_and_pinned_event_choice_captures_not_complete_game_fidelity",
+    "config_id": "sha256:40af259c5b27d12f6fbb2e9d087e18efd24ad6f6f0e848d5c2ee2b052fbb61b7",
+    "games_played": 0,
+    "native_sha256": "eb40927a87c3ddb5d54b56a1808fd7d6dfa5651e465a6c64e0f5756b090c2a96",
+    "native_size_bytes": 5203840,
+    "preparation_id": "sha256:7db80ed532e6ef4bf76d1012e2037c6fab9294e5d714e67d6f35bf9104945f8f",
+    "public_choice_export_check": {
+      "games_played": 0,
+      "schema_version": "public-choice-export-check-v1",
+      "view": {
+        "bundle_selection": null,
+        "combat_selection": null,
+        "fixed_profile": {
+          "live_game_conformance_verified": false,
+          "profile_id": "evangambit-source-fixed-ascension-8-v1",
+          "selectable_difficulty": false,
+          "source_declared_ascension_level": 8
+        },
+        "phase": "combat",
+        "schema_id": "public-run-choices-v1"
+      }
+    },
+    "regression_tests": {
+      "executed": 240,
+      "failed": 0,
+      "passed": 240,
+      "total": 240
+    },
+    "remaining_checks": [
+      "derive_new_adapter_manifest_for_event_choice_native_identity",
+      "verify_corrected_choices_in_public_agent_interface",
+      "validate_changed_act_boundaries_against_the_frozen_game",
+      "readmit_new_ruleset_before_a_new_training_recipe"
+    ],
+    "report_id": "sha256:ea9182ae9a4b75d04e593d42fd8f6f451a3864b01f1cc205cea0354004127e60",
+    "schema_version": "full-run-backend-repair-build-v1",
+    "test_report": "build-attempts/attempt-0001/completion.trx",
+    "test_report_sha256": "39c2135682a4a6a4110eb2bd940f32bf6de03fba195761501d35fc870b036422",
+    "test_runtime": {
+      "dotnet_executable": "/opt/homebrew/Cellar/dotnet/10.0.401/bin/dotnet",
+      "expected_test_runtime": {
+        "directory": "/opt/homebrew/Cellar/dotnet/10.0.401/libexec/shared/Microsoft.NETCore.App",
+        "version": "10.0.12"
+      },
+      "installed_core_runtimes": [
+        {
+          "directory": "/opt/homebrew/Cellar/dotnet/10.0.401/libexec/shared/Microsoft.NETCore.App",
+          "version": "10.0.12"
+        }
+      ],
+      "policy_id": "net9-preferred-net10-test-host-v1",
+      "roll_forward": "Major",
+      "scope": "regression_test_host_only_native_target_unchanged",
+      "sdk_version": "10.0.401",
+      "target_framework": "net9.0"
+    },
+    "test_runtime_report": "build-attempts/attempt-0001/test-runtime.json",
+    "test_runtime_report_sha256": "a22850d11d2acecac9d424620c087efd2781fd63d935f6a6953059c4d06b73dc",
+    "training_allowed": false
+  },
+  "config_id": "sha256:40af259c5b27d12f6fbb2e9d087e18efd24ad6f6f0e848d5c2ee2b052fbb61b7",
+  "config_path": "configs/backend-repair/sts2-v0.107.1-event-choices-v3.json",
+  "evidence_id": "sha256:129dca70375216cbda16c94f2be01e8100748e49ac510e564cd1b2a9b82779c3",
+  "failed_attempts_preserved": [
+    {
+      "candidate": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v4",
+      "configuration": "configs/backend-repair/sts2-v0.107.1-event-choices-v1.json",
+      "games_started": 0,
+      "kind": "compile_scope_conflict"
+    },
+    {
+      "candidate": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v4-retry1",
+      "failed": 1,
+      "full_suite": "artifacts/compatibility/event-choice-full-suite-v1/full-suite.trx",
+      "games_started": 0,
+      "kind": "obsolete_test_expected_an_invented_skip",
+      "passed": 4941,
+      "skipped": 1
+    },
+    {
+      "final_test_opened": false,
+      "games_started": 0,
+      "kind": "training_seed_membership_preflight",
+      "path": "artifacts/compatibility/event-choices-public-player-v1/probe.py"
+    }
+  ],
+  "fixture_inventory": {
+    "coverage": {
+      "initial": 52,
+      "other_screen_after": 46,
+      "settled_event_after": 57,
+      "unsettled_event_after": 1
+    },
+    "inventory_id": "sha256:d9acc4ca2dd8247393a73c0c761f38aba2a4df608a66077d9e7d265f64822a5a"
+  },
+  "fixture_inventory_sha256": "450641976a1a669239ca2b7b302d9586734a3b035d31861b1a5129a8aaad2429",
+  "fresh_player_probe": {
+    "benchmark_denominator": 8,
+    "claim_scope": "eight_train_seed_untrained_public_player_compatibility_not_playing_strength",
+    "model_id": "sha256:5dfcf85d0d79fc4534566cb01b09345b8d1ea831f879ba46478faec7ccafaba2",
+    "report_id": "sha256:267c2beb9d197bbe2fbb152989b1af24597814261b5eeac5e726013f8a028457",
+    "ruleset_manifest_id": "sha256:479924c13ad06571b597cfa67a6bbdbf6b2bd46f167640abfc5d3886b03bb980",
+    "scored_transitions": 1082,
+    "split_manifest_id": "sha256:8cc751cfcb3e8a08ac4764434e0c4b012ff7f27e273616c64e3cbd82abf562bb",
+    "summary": {
+      "terminal_loss": 8
+    }
+  },
+  "full_native_suite": {
+    "admitted": false,
+    "build_report_id": "sha256:ea9182ae9a4b75d04e593d42fd8f6f451a3864b01f1cc205cea0354004127e60",
+    "candidate_revision": "65ddaa0a7fa870bcdb72d6df3c22fd8345c3a037",
+    "claim_scope": "full_native_test_suite_including_real_event_choice_and_outcome_captures_not_full_game_fidelity",
+    "counts": {
+      "executed": 4942,
+      "failed": 0,
+      "notExecuted": 0,
+      "passed": 4942,
+      "total": 4943
+    },
+    "games_played": 0,
+    "native_sha256": "eb40927a87c3ddb5d54b56a1808fd7d6dfa5651e465a6c64e0f5756b090c2a96",
+    "optimizer_steps": 0,
+    "report_id": "sha256:a23fd46dcd8eb1184fb2415a987abeacefac70af636fd26e2c5d299d6e1974ed",
+    "schema_version": "event-choice-native-suite-v1",
+    "skips": [
+      "Sts2Emulator.Tests.StepCostProbe.WhereDoesAStepGo"
+    ],
+    "test_report_sha256": "a5e25fc93d3e8d8a47cd735599083ca67fb382a9918f0b31091a8c8d9186a2de",
+    "training_allowed": false
+  },
+  "observed_on": "2026-10-09",
+  "public_interface_probe": {
+    "path": "artifacts/compatibility/full-run-event-choices-contract-v1/contract-probe.json",
+    "report_id": "sha256:47eaa04a2141b2f7c80fc9f414a85afdb778bd6b407ebb56fd08ecf7eda21234",
+    "scope": "environment_interface_probes_on_inspected_training_seeds_not_live_fidelity_or_policy_strength",
+    "summary": {
+      "fail": 0,
+      "inconclusive": 0,
+      "pass": 10
+    }
+  },
+  "public_manifest_id": "sha256:479924c13ad06571b597cfa67a6bbdbf6b2bd46f167640abfc5d3886b03bb980",
+  "public_manifest_path": "manifests/patches/sts2-v0.107.1-evangambit-event-choices-v4-retry2-pending.json",
+  "remaining": [
+    "Declare the next learning difficulty; A0 is recommended, while this source remains fixed A8.",
+    "If A0 is selected, implement real per-run difficulty effects and a new native/profile/recipe identity; changing a label is insufficient.",
+    "Empirical later-act and final UI ending coverage remains absent in the saved Act-1-only traces.",
+    "Readmit the chosen truthful ruleset and freeze a fresh learning recipe before sustained training."
+  ],
+  "resources": [
+    {
+      "cpu_seconds": 7.312641915,
+      "limits": {
+        "cpu_seconds": 960.0,
+        "resident_memory_bytes": 12000000000,
+        "storage_bytes": 4000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/event-choices-backend-v1-attempt-1.json",
+      "report_id": "sha256:7909afcf3f7f9908d0169826e0dbb29c110251a13d6c94f6f885d8b90f7f7276",
+      "status": "failed",
+      "wall_seconds": 3.1580034159997012
+    },
+    {
+      "cpu_seconds": 19.379439253,
+      "limits": {
+        "cpu_seconds": 960.0,
+        "resident_memory_bytes": 12000000000,
+        "storage_bytes": 4000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/event-choices-backend-v1-attempt-2.json",
+      "report_id": "sha256:4f4e6ca488845cf2ebdb4a28c7d487a1eea0c1f3fda0291f99b3c3097617bb74",
+      "status": "completed",
+      "wall_seconds": 21.141636457992718
+    },
+    {
+      "cpu_seconds": 19.51999134300001,
+      "limits": {
+        "cpu_seconds": 960.0,
+        "resident_memory_bytes": 12000000000,
+        "storage_bytes": 4000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/event-choices-backend-v1-attempt-3.json",
+      "report_id": "sha256:aeee58bb999bc604d0139a2664dd861d08cb22fb8e4e8aaf78361b3aba85a556",
+      "status": "completed",
+      "wall_seconds": 17.64055587502662
+    },
+    {
+      "cpu_seconds": 51.812574960000006,
+      "limits": {
+        "cpu_seconds": 960.0,
+        "resident_memory_bytes": 12000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/event-choice-full-suite-v1.json",
+      "report_id": "sha256:6397d138c75b778569ad7caace464addcb6a0d9e5ac0a1b430b3481021dea97f",
+      "status": "failed",
+      "wall_seconds": 49.67076391601586
+    },
+    {
+      "cpu_seconds": 56.785887145000004,
+      "limits": {
+        "cpu_seconds": 960.0,
+        "resident_memory_bytes": 12000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/event-choice-full-suite-v1-retry1.json",
+      "report_id": "sha256:f9a04791c82994eea6f3648a385aa8e7d749ef82795380ab2afb1ed798f19615",
+      "status": "completed",
+      "wall_seconds": 54.545319666998694
+    },
+    {
+      "cpu_seconds": 0.6180776040000001,
+      "limits": {
+        "cpu_seconds": 45.0,
+        "resident_memory_bytes": 1000000000,
+        "storage_bytes": 10000000,
+        "wall_seconds": 45.0
+      },
+      "path": "artifacts/resources/full-run-event-choices-contract-v1.json",
+      "report_id": "sha256:711a9bcacbc4a19569c99be9940bee17aa8639d0469ce89b1436903baf37ebf1",
+      "status": "completed",
+      "wall_seconds": 0.9824610410141759
+    },
+    {
+      "cpu_seconds": 0.005686458,
+      "limits": {
+        "cpu_seconds": 120.0,
+        "resident_memory_bytes": 1000000000,
+        "storage_bytes": 10000000,
+        "wall_seconds": 120.0
+      },
+      "path": "artifacts/resources/event-choices-public-player-v1.json",
+      "report_id": "sha256:d2574e8d6d49bd4c7d73a1f41e4ee7f28093ebf5b7857401cafec144037e4835",
+      "status": "failed",
+      "wall_seconds": 0.13697754198801704
+    },
+    {
+      "cpu_seconds": 7.47205849,
+      "limits": {
+        "cpu_seconds": 120.0,
+        "resident_memory_bytes": 1000000000,
+        "storage_bytes": 10000000,
+        "wall_seconds": 120.0
+      },
+      "path": "artifacts/resources/event-choices-public-player-v1-retry1.json",
+      "report_id": "sha256:49352a107cb4914db7e8e56383be097e93e9336f43f1afeac9839e8d758c8e86",
+      "status": "completed",
+      "wall_seconds": 7.686851665988797
+    }
+  ],
+  "schema_version": "event-choice-repair-evidence-v1",
+  "scope": {
+    "admitted": false,
+    "checkpoint_promoted": false,
+    "final_test_opened": false,
+    "full_game_fidelity_established": false,
+    "historical_actions_or_models_migrated": false,
+    "old_89_case_report_relabelled": false,
+    "optimizer_steps": 0,
+    "sustained_training_allowed": false
+  }
+}

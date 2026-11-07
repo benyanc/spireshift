@@ -1,0 +1,271 @@
+{
+  "schema_version": "engine-reward-decline-evidence-v1",
+  "recorded_date": "2026-10-14",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "fixed_scope": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "character": "Ironclad",
+    "ascension": 8,
+    "profile": "native_benchmark_full_v1",
+    "objective_id": "terminal-victory-v1",
+    "primary_objective": "terminal_victory"
+  },
+  "original_owner_batch": {
+    "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-a8-discovery-v1/summary.json",
+    "report_id": "sha256:152c7595adaff3fe4d8c2d8303c9c9d06b6de0d348fdea10a93d7dac49b33771",
+    "original_status": "discovery_complete",
+    "independent_seeds": 2,
+    "completed_cases": 1,
+    "failed_cases": 1,
+    "not_attempted_cases": 0,
+    "missing_field_issues": 0,
+    "observed_terminal_runs": 1,
+    "victories": 0,
+    "cases": [
+      {
+        "case_id": "seed-001",
+        "seed": "SP1RESH1FTA8D1AG001",
+        "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-a8-discovery-v1/seed-001/summary.json",
+        "report_id": "sha256:73fb3ec644e83f541c2e171907599ebd8f95382de7e2b866d0be2135fa6d8d72",
+        "status": "natural_shipped_run_pass",
+        "gameplay": {
+          "decisions": 144,
+          "ending_basis": "shipped_public_RunHistory_Win_context",
+          "families": {
+            "card_reward_selection": 5,
+            "combat_turn": 111,
+            "event_option": 2,
+            "game_over": 1,
+            "map_navigation": 5,
+            "reward_claim": 11,
+            "shop_inventory": 1,
+            "shop_room": 2,
+            "tutorial": 7
+          },
+          "last_observed": {
+            "act": 1,
+            "floor": 6,
+            "hp": 0,
+            "interaction_kind": "game_over",
+            "max_hp": 80,
+            "snapshot_id": "state_33b87fa761_265",
+            "status": "interactive"
+          },
+          "last_supported_act": 1,
+          "last_supported_floor": 6,
+          "maximum_act": 1,
+          "maximum_floor": 6,
+          "terminal": true,
+          "tutorials": 7,
+          "victory": false
+        },
+        "error": null,
+        "saved_verification_valid": true,
+        "fixed_app_reset_verified": true,
+        "app_copies_created": 0,
+        "process_wall_seconds": 255.81335724995006
+      },
+      {
+        "case_id": "seed-002",
+        "seed": "SP1RESH1FTA8D1AG002",
+        "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-a8-discovery-v1/seed-002/summary.json",
+        "report_id": "sha256:4852fddabf2d71e6147f1a69ab09f2d4ba88307af79c5a5a3919f9149f070145",
+        "status": "natural_shipped_run_incomplete",
+        "gameplay": {
+          "decisions": 42,
+          "families": {
+            "card_reward_selection": 3,
+            "combat_turn": 28,
+            "event_option": 2,
+            "map_navigation": 1,
+            "reward_claim": 3,
+            "tutorial": 5
+          },
+          "last_observed": {
+            "act": 1,
+            "floor": 2,
+            "hp": 57,
+            "interaction_kind": "reward_claim",
+            "max_hp": 80,
+            "snapshot_id": "state_60a861e3b9_b2",
+            "status": "interactive"
+          },
+          "last_supported_act": 1,
+          "last_supported_floor": 2,
+          "maximum_act": 1,
+          "maximum_floor": 2,
+          "terminal": false,
+          "tutorials": 5,
+          "victory": false
+        },
+        "error": "Repeated natural-run public state; no further action",
+        "saved_verification_valid": true,
+        "fixed_app_reset_verified": true,
+        "app_copies_created": 0,
+        "process_wall_seconds": 74.71490537503269
+      }
+    ],
+    "supplemental_case_outcomes": [
+      {
+        "case_id": "seed-001",
+        "seed": "SP1RESH1FTA8D1AG001",
+        "status": "natural_shipped_run_pass",
+        "outcome": "completed_loss",
+        "terminal_observed": true,
+        "recovered": false,
+        "decisions": 144,
+        "reached_floor": 6,
+        "failure_kind": null,
+        "error": null
+      },
+      {
+        "case_id": "seed-002",
+        "seed": "SP1RESH1FTA8D1AG002",
+        "status": "natural_shipped_run_incomplete",
+        "outcome": "incomplete",
+        "terminal_observed": false,
+        "recovered": false,
+        "decisions": 42,
+        "reached_floor": 2,
+        "failure_kind": "repeated_state",
+        "error": "Repeated natural-run public state; no further action"
+      }
+    ],
+    "historical_summary_modified": false,
+    "resource_report": "artifacts/resources/natural-shipped-a8-discovery-v1.json",
+    "resource_report_id": "sha256:938acc5b4b1047e79271f269989c3ba0819040537970f2b93d6f29feb5d060bd",
+    "resource_wall_seconds": 357.93333295802586,
+    "CPU_seconds": 102.924286439,
+    "peak_resident_memory_bytes": 987365376,
+    "tracked_storage_including_existing_pool_bytes": 2455049895
+  },
+  "repair": {
+    "policy": "scripts/engine-run-policy-v4.mjs",
+    "policy_sha256": "7dd555d2c79b2c7448bdeaca19ff27997870a2245fd5cab79b8f0f5d4800109c",
+    "native_Skip_behavior_unchanged": true,
+    "behavior": "Associate a delivered card-reward opening with its delivered Skip; remember that particular public offer for its room and prefer other advertised rewards/exits over reopening it.",
+    "public_handles": "Used only to associate an offer with its own earlier preview; same-text offers remain separate, renaming handles consistently does not rank choices.",
+    "tutorial_interruption": "Pending public association survives tutorial acknowledgements.",
+    "learned_scorer": "Retains every advertised choice, including revisiting a declined offer; no mandatory exit is invented.",
+    "uncertain_actions_replayed": false
+  },
+  "short_check": {
+    "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-run-smoke-002-v1.json",
+    "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-run-smoke-002-v1/summary.json",
+    "report_id": "sha256:6e82653b2dc947c951b743e037e71a105f4687e6f62863881e0482495a6841f7",
+    "status": "natural_shipped_run_incomplete",
+    "gameplay": {
+      "decisions": 95,
+      "families": {
+        "card_reward_selection": 3,
+        "combat_turn": 70,
+        "event_option": 2,
+        "map_navigation": 4,
+        "reward_claim": 8,
+        "tutorial": 8
+      },
+      "last_observed": {
+        "act": 1,
+        "floor": 5,
+        "hp": 58,
+        "interaction_kind": "combat_turn",
+        "max_hp": 80,
+        "snapshot_id": "state_c07ea1fcd3_1a2",
+        "status": "settling"
+      },
+      "last_supported_act": 1,
+      "last_supported_floor": 5,
+      "maximum_act": 1,
+      "maximum_floor": 5,
+      "terminal": false,
+      "tutorials": 8,
+      "victory": false
+    },
+    "error": "No fresh complete public menu before the run cap",
+    "unique_unsupported_issues": 0,
+    "recoveries": 0,
+    "declined_card_offers": 1,
+    "observed_repair_prefix": [
+      "open card offer",
+      "Skip",
+      "claim 10 Gold",
+      "skip remaining rewards and continue"
+    ],
+    "saved_verification_valid": true,
+    "fixed_app_reset_verified": true,
+    "app_copies_created": 0,
+    "archive_unchanged": true,
+    "real_profile_unchanged": true,
+    "internal_client_cap_seconds": 165,
+    "resource_report": "artifacts/resources/natural-shipped-run-smoke-002-v1.json",
+    "resource_report_id": "sha256:584f64a7fabfdcf902878c8fa2ca10f56bba06135fb0ec0d5d70090e1648637a",
+    "resource_wall_seconds": 177.46077370794956,
+    "CPU_seconds": 41.421164257,
+    "peak_resident_memory_bytes": 910524416,
+    "tracked_storage_including_existing_pool_bytes": 2440759536,
+    "resource_cap": null
+  },
+  "successful_first_seed_comparison": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/reward-decline-policy-seed-001-comparison-v1.json",
+    "sha256": "3c70d5aae1f5dfc2aa7f84090c5d2cdd71d4e129536875ad5cef926bf72b1bac",
+    "saved_report_id": "sha256:73fb3ec644e83f541c2e171907599ebd8f95382de7e2b866d0be2135fa6d8d72",
+    "checked_non_tutorial_actions": 137,
+    "first_difference": null,
+    "games_replayed": 0,
+    "claim_scope": "current_policy_equals_saved_observed_action_prefix_only",
+    "tutorial_controls": "Unchanged; seven tutorial actions were excluded from this policy-only comparison.",
+    "scope_limit": "Equality on already observed inputs only; no replayed game or unseen-trajectory claim."
+  },
+  "reporting_repair": {
+    "revision": "outcomes_v2",
+    "includes": [
+      "case_outcomes",
+      "failures_by_kind",
+      "original_error",
+      "terminal_outcome",
+      "reached_floor",
+      "decisions"
+    ],
+    "old_recipe_and_summary_schema_preserved": true,
+    "case_errors_bound_to_saved_child_verification": true,
+    "batch_completion_is_not_game_completion": true
+  },
+  "validation": {
+    "repository_tests": 1256,
+    "repository_test_seconds": 48.46,
+    "formatting_types_protocol": "passed",
+    "current_Node_controls": 53,
+    "new_reward_navigation_controls": 9,
+    "source_discovery_tests": 9,
+    "saved_original_batch_and_short_check": "passed without replaying games"
+  },
+  "owner_stage": {
+    "command": "bash scripts/check-reward-decline-a8-run-v1.sh",
+    "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-reward-decline-v1.json",
+    "config_id": "sha256:7d57f75d02d465efe97629acbc8d3bb8a162f0149b13373e8bf5934346e46db5",
+    "planned_cases": 1,
+    "seed": "SP1RESH1FTA8D1AG002",
+    "successful_first_seed_replayed": false,
+    "preflight_ready": true,
+    "preflight_games_launched": 0,
+    "expected_minutes": [
+      5,
+      10
+    ],
+    "game_process_cap_seconds": 900,
+    "resource_caps": {
+      "max_wall_seconds": 960,
+      "max_cpu_seconds": 1800,
+      "max_storage_bytes": 4000000000,
+      "max_memory_bytes": 8000000000
+    },
+    "launched": false
+  },
+  "training_allowed": false,
+  "bulk_learning_admitted": false,
+  "adaptive_controller_allowed": false,
+  "optimizer_steps": 0,
+  "claim_scope": "one_verified_natural_shipped_loss_and_repaired_card_decline_navigation_prefix_only_not_playing_strength_or_full_training_admission",
+  "evidence_id": "sha256:4aedfa1d756ccf84a037cac3d1a3ef76d2a1765bc29295b6798d98bbeab288da"
+}

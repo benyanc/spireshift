@@ -27,6 +27,10 @@ Copy `STS2_MCP.dll` and the upstream `mod_manifest.json` into the game's mod dir
 the manifest to `STS2_MCP.json`. Launch the game and complete its mod consent flow. The bridge then
 serves its local read API on port 15526.
 
+For the verified private v0.107.1 archive, use the [preserved-game launcher and installation
+override](frozen-live-game.md). Keep `SPIRESHIFT_GAME_DIR` pointed at that copy when Steam's
+managed installation changes; verify the running bridge/executable as well as the files on disk.
+
 ## Capturing a snapshot
 
 ```bash

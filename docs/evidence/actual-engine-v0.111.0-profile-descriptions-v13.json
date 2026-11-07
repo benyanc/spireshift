@@ -1,0 +1,140 @@
+{
+  "benchmark_history_is_synthetic": true,
+  "benchmark_progress_sha256": "50d0cae6bab731db8807aa0406590867e915e21edc5e309a4c99e1f432565137",
+  "build_report_id": "sha256:61e34a7b0134a191d8f887f3ab804dfe7e8ea49b80c50142e33d0b325405a948",
+  "build_seconds": 15.612792709027417,
+  "candidate": "e76add2d191e9f2ab7e3941855667762e7f313ed3c6f876b91844d3218b2d521",
+  "candidate_mvid": "9762aadf-2712-4ecc-aa02-66d441f41a1e",
+  "card_descriptions": 33,
+  "cases": [
+    {
+      "app_copies_created": 0,
+      "case_wall_seconds": null,
+      "comparison_id": "sha256:31ef4804a363e0159de04116b4f51e8e34fa2e197571df397b9bb51d1e55e594",
+      "current_act": "OVERGROWTH",
+      "native_act_selection_reference": [
+        "ACT.OVERGROWTH",
+        "ACT.HIVE",
+        "ACT.GLORY"
+      ],
+      "native_report_id": "sha256:73e0972c4b4edf1dd766989040e3f8fbe4bbcd3037ab5a39a89f606c56da98ad",
+      "native_seconds": 1.680272249970585,
+      "saved_verification_id": "sha256:955fdd5beb5ecf05f610ea942d5ad5a7a0587d3fa771d44861e1eee3d113a343",
+      "seed": "SPIRESHIFTPROFILE001",
+      "shipped_report_id": "sha256:02d6846ca89dafe65ecf8b4cd803430890528c3527d262510f01309fe28d1d4f",
+      "shipped_seconds": 29.588970083976164,
+      "working_app_inode": 347602255
+    },
+    {
+      "app_copies_created": 0,
+      "case_wall_seconds": null,
+      "comparison_id": "sha256:6e3fd9f944fa76b875a449114082380887f2b18c7263a80316a1bd3e58a05167",
+      "current_act": "OVERGROWTH",
+      "native_act_selection_reference": [
+        "ACT.OVERGROWTH",
+        "ACT.HIVE",
+        "ACT.GLORY"
+      ],
+      "native_report_id": "sha256:43dd87b8309a539f6e7baaad7859245cb270dccc78b5871cdd02026a4fc8c413",
+      "native_seconds": 1.4247313330415636,
+      "saved_verification_id": "sha256:32d24bf7dba90bcce26bd95dd0fe356dc9d4586b36102889e946b396188ac772",
+      "seed": "SPIRESHIFTPROFILE002",
+      "shipped_report_id": "sha256:51a38054d486dc3c52bcfa7583e8634a22897604f04f7645a836e6a479d7f6d8",
+      "shipped_seconds": 20.201694209012203,
+      "working_app_inode": 347602255
+    },
+    {
+      "app_copies_created": 0,
+      "case_wall_seconds": 32.35769099998288,
+      "comparison_id": "sha256:ba15c2887c6c0d334f42ed19237650ca5e510bc05f005c1576612ecccfaec139",
+      "current_act": "UNDERDOCKS",
+      "native_act_selection_reference": [
+        "ACT.UNDERDOCKS",
+        "ACT.HIVE",
+        "ACT.GLORY"
+      ],
+      "native_report_id": "sha256:4c57d718cf1f0e74a2106a843fc7ffea33258814ba5cada0b8a1cdd9dbd5e2a4",
+      "native_seconds": 1.5229108749772422,
+      "saved_verification_id": "sha256:4a1281e94781ab30cf273aac4ef60a585c4aba4baa4e2b343800ee174b58890a",
+      "seed": "SPIRESHIFTPROFILE003",
+      "shipped_report_id": "sha256:42a98949ea400878fcbfd02a2a2e9d9619a56b0110db4529028279e4e137f485",
+      "shipped_seconds": 17.21791150001809,
+      "working_app_inode": 347602255
+    }
+  ],
+  "claim_scope": "fixed_Ironclad_A8_isolated_full_content_all_acts_seen_profile_native_description_oracle_and_three_shipped_inspection_prefixes",
+  "completed_short_shipped_cases": 3,
+  "date": "2026-10-12",
+  "distinct_profiles": 3,
+  "evidence_id": "sha256:8378760834b308c3d4ebc0e19f23da4312a0853a2fb6f951ef118852c0581803",
+  "fresh_tutorials_enabled": true,
+  "full_run_attempts": 0,
+  "issues": [
+    145,
+    146
+  ],
+  "limitations": [
+    "Three shipped cases import native-generated checkpoints; they do not exercise the shipped new-run lobby or prove complete cross-host parity.",
+    "Native seeded act selection and its RNG match the original normal method for this all-acts-seen profile; other discovery profiles retain their historical unsupported scope.",
+    "Two potions are explicitly assigned in inspection fixtures; these are not natural rewards or learning trajectories.",
+    "Registry text tests do not exhaust transient costs, all modifier/expiry states, relic lifecycles, nested selectors, later acts or endings.",
+    "Historical v0.107.1 and earlier v0.111.0 recipes/results remain immutable; no training or model promotion follows."
+  ],
+  "local_patch_sha256": "3131da1362e0074a2aed9b6961c9ba6b3b89d2ce15de73be416f3c9fe3f428ad",
+  "menu_actions": 3,
+  "native_act_count": 4,
+  "native_description_catalogue": {
+    "base_cards": 596,
+    "exclusion_authority": "native potion pool IsMock property",
+    "potions": 65,
+    "registered_mock_potions_explicitly_excluded": 1,
+    "relics": 299,
+    "scope": "owned_models_at_initial_A8_ancient_base_and_upgraded_pile_descriptions_not_all_contexts_or_interactions",
+    "successful_descriptions_per_case": 1517,
+    "upgraded_cards": 557
+  },
+  "native_encounter_count": 85,
+  "native_epoch_count": 57,
+  "native_prior_run_count": 999999999,
+  "new_app_copies": 0,
+  "observations": 3,
+  "optimizer_steps": 0,
+  "option_descriptions": 9,
+  "owner_next": {
+    "batch_started": false,
+    "command": "bash scripts/compare-profile-descriptions-v1.sh",
+    "config": "configs/engine-qualification/sts2-v0.111.0-profile-bridges-v1.json",
+    "config_id": "sha256:ddf1320163f95c3e3ca065866b4e1e7123120e8ede13bbf42dfe7b6c2ab2b631",
+    "expected_minutes": [
+      5,
+      8
+    ],
+    "independent_seeds": 4,
+    "max_wall_seconds": 900,
+    "planned_cases": 8
+  },
+  "potion_descriptions": 6,
+  "preserved_failures": [
+    "Initial native profile export rejected duplicate relic-discovery IDs; construction now uses native ModelId uniqueness.",
+    "Development build rejected an incorrect pile variable; current pile is read from its actual native card.",
+    "First discovery build needed the recorded SDK fingerprint roll-forward; a separately versioned retry preserves the failure.",
+    "Second discovery build had included base setup changes twice; cumulative repair now contains only Program.cs and RunSimulator.cs over the pinned managed base.",
+    "The initial catalogue counted one unlocalized test-only potion; it remains in the denominator as a native IsMock exclusion.",
+    "The original native-only recipe omitted its bundle-probe revision for later projection; it and its results remain separate from corrected v2."
+  ],
+  "profile_policy": "configs/engine-qualification/sts2-v0.111.0-profile-policy-v1.json",
+  "profile_policy_id": "sha256:03cc86344257b4aae4ae87e1b8001ab52e2df2fa5c8a57be51a29a9c6e154e3c",
+  "progress_schema": 24,
+  "real_account_modified": false,
+  "relic_descriptions": 3,
+  "saved_negative_audit_rejected_cases": 7,
+  "schema_version": "actual-engine-profile-description-evidence-v1",
+  "stored_official_game_unchanged": true,
+  "training_allowed": false,
+  "validation": {
+    "csharp_protocol_contract_passed": true,
+    "format_lint_strict_types_passed": true,
+    "repository_tests_passed": 1181,
+    "strict_type_files": 215
+  }
+}

@@ -1,0 +1,1015 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": {
+    "final_return_errors_worse_for_both_players": true,
+    "immediate_HP_and_enemy_HP_MSE_lower_for_both_players": true,
+    "later_outcomes_mixed": true,
+    "next_HP_MSE_reduction_percent_vs_return_only": {
+      "2": 16.220601511717735,
+      "3": 4.77908592974215
+    },
+    "player2_only_death_world_is_elite": true,
+    "player3_encounter_alive_constant_one_head_inactive": true,
+    "potion_change_constant_zero_head_inactive": true,
+    "seven_source_worlds_cannot_establish_broad_generalization": true,
+    "several_HP_endpoints_still_lose_to_persistence": true,
+    "stronger_play_not_established": true,
+    "unchanged_predeclared_forks_retained": true
+  },
+  "automatic_further_experiment": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "control": {
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "completed_games": 8,
+    "config_id": "sha256:0a23ad21213cc710665d47cb9075eeadac6804ea70a85b3f800296d2d9321bc9",
+    "duplicate_traces_match": true,
+    "failed_games": 0,
+    "mathematical_controls": {
+      "passed": true,
+      "players": [
+        {
+          "auxiliary_gradient_reaches_hidden_encoder_only": true,
+          "auxiliary_heads_identically_fitted_in_both_arms": true,
+          "finite_difference_coordinates": 8,
+          "invented_labels_only_not_game_evidence": true,
+          "maximum_absolute_gradient_error": 3.8766340831886126e-11,
+          "numerical_seed": 2,
+          "parent_weights_and_every_Adam_moment_unchanged": true,
+          "passed": true,
+          "return_only_encoder_equals_return_loss_gradient": true
+        },
+        {
+          "auxiliary_gradient_reaches_hidden_encoder_only": true,
+          "auxiliary_heads_identically_fitted_in_both_arms": true,
+          "finite_difference_coordinates": 8,
+          "invented_labels_only_not_game_evidence": true,
+          "maximum_absolute_gradient_error": 1.5142054277106354e-11,
+          "numerical_seed": 3,
+          "parent_weights_and_every_Adam_moment_unchanged": true,
+          "passed": true,
+          "return_only_encoder_equals_return_loss_gradient": true
+        }
+      ]
+    },
+    "noncombat_matching": {
+      "identical_inputs_with_changed_learned_choice": 0,
+      "identical_public_input_pairs": 56,
+      "paired_model_seed_cells": 4,
+      "same_rule_and_draws_not_frozen_noncombat_weights": true,
+      "shared_noncombat_draw_keys": 106,
+      "valid": true
+    },
+    "path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/report.json",
+    "report_id": "sha256:c444b701e150198d8725c66b397821bf257e650b7bf5545a1c3d998d2f73cde3",
+    "sha256": "06488cd7a538b0dde7cdf49f895e7c48357235a39baf9c45a436f341762a2183",
+    "short_control_not_strength_evidence": true
+  },
+  "control_config": {
+    "config_id": "sha256:0a23ad21213cc710665d47cb9075eeadac6804ea70a85b3f800296d2d9321bc9",
+    "path": "configs/native-consequence/sts2-v0.111.0-a8-control-v1.json",
+    "sha256": "f1ed138f0c97dac2ed816cbe1c8d2501bc37b7bc3af994954922ccf7ed4df4a6"
+  },
+  "data": {
+    "combat_decisions": 442,
+    "independent_hidden_worlds_per_root": 1,
+    "nested_choices_resolved_in_labels_not_standalone_inputs": true,
+    "plans": 51,
+    "player_worlds": {
+      "2": 4,
+      "3": 3
+    },
+    "repeat_zero_combat_trace_used_once_per_plan": true,
+    "returns_averaged_over_eight_streams_not_eight_combat_data_copies": true,
+    "source_prefix_and_postfight_decisions_excluded": true,
+    "source_world_denominator": 8,
+    "streams_per_plan": 8,
+    "target_valid_counts": {
+      "encounter_alive_exit": 442,
+      "encounter_exit_hp_delta": 442,
+      "next_public_enemy_hp_sum_delta": 391,
+      "next_public_hp_delta": 442,
+      "next_public_potion_count_delta": 436,
+      "next_turn_hp_delta": 442,
+      "recorded_continuation_full_run_return": 442
+    },
+    "unavailable_world_not_replaced": 1910003,
+    "units": [
+      {
+        "combat_decisions": 55,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910000",
+        "encoded_sha256": "3cc9a46f61a4d5d91d8f63628e040a42d9611be524c4baef8a30c4eacfe57550",
+        "labels_sha256": "7ae3ce1859006f1c32621f7f105ccb8a8d359e54102a534138e83cfe0117b6a9",
+        "numerical_seed": 2,
+        "plans": 6,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910000,
+        "stage": "data",
+        "valid_target_counts": [
+          55,
+          55,
+          49,
+          55,
+          55,
+          55,
+          55
+        ]
+      },
+      {
+        "combat_decisions": 136,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910001",
+        "encoded_sha256": "79d27285ee03b563db2bc9073b0ef7ef31b7d49069e8dbc4234ee1e4689be959",
+        "labels_sha256": "fbdf54670951e47bb4ddcb1bb31ea45721a0e9a16f4d3135005588525ad27f6b",
+        "numerical_seed": 3,
+        "plans": 11,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910001,
+        "stage": "data",
+        "valid_target_counts": [
+          136,
+          136,
+          125,
+          136,
+          136,
+          136,
+          136
+        ]
+      },
+      {
+        "combat_decisions": 21,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910002",
+        "encoded_sha256": "e5ad330b7dcbf04571d6e255da20b1e0e540e9dadcdad602e3eb755984d9fced",
+        "labels_sha256": "b922170c7359e6e29a8a63a38ef4d903c00bc4ff928cb8fb01c201e936f20c46",
+        "numerical_seed": 2,
+        "plans": 6,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910002,
+        "stage": "data",
+        "valid_target_counts": [
+          21,
+          21,
+          15,
+          21,
+          21,
+          21,
+          15
+        ]
+      },
+      {
+        "combat_decisions": 78,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910004",
+        "encoded_sha256": "2b760057a2b37f5bd5122aba97b8211a18471acf2efacafaf6790c6d973acd2c",
+        "labels_sha256": "c0ed22756d7db5bb809f48bc305caaad14d58ecad5be269aa9256673cc8fedb0",
+        "numerical_seed": 2,
+        "plans": 6,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910004,
+        "stage": "data",
+        "valid_target_counts": [
+          78,
+          78,
+          72,
+          78,
+          78,
+          78,
+          78
+        ]
+      },
+      {
+        "combat_decisions": 20,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910005",
+        "encoded_sha256": "c85075311cfd8cad147244252500734a0e8bd6d47f76167f0eb63b99f8724cef",
+        "labels_sha256": "e3879602934fb74786ed63af58030611136a1561df058fdc37b1545272e201cb",
+        "numerical_seed": 3,
+        "plans": 7,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910005,
+        "stage": "data",
+        "valid_target_counts": [
+          20,
+          20,
+          13,
+          20,
+          20,
+          20,
+          20
+        ]
+      },
+      {
+        "combat_decisions": 7,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910006",
+        "encoded_sha256": "843570ae0e2ab7c7d91709e5d029bc1d5dd00b682219578b51022418af9233d7",
+        "labels_sha256": "f6d151e0510adcf7298a33345f963289e7aaf967a089c80f276f69191b75d939",
+        "numerical_seed": 2,
+        "plans": 5,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910006,
+        "stage": "data",
+        "valid_target_counts": [
+          7,
+          7,
+          2,
+          7,
+          7,
+          7,
+          7
+        ]
+      },
+      {
+        "combat_decisions": 125,
+        "directory": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/data-1910007",
+        "encoded_sha256": "778adcf5836b6ea6fb701966dce1db2f09deecfedcdff51cac1611005456717e",
+        "labels_sha256": "09aa3e82615cafeac2a40ac8a0956759cf15a1df0383e61baac7848175bb9a7f",
+        "numerical_seed": 3,
+        "plans": 10,
+        "scope": "fixed_world_recorded_continuations_not_optimal_action_or_PPO_targets",
+        "source_seed_id": 1910007,
+        "stage": "data",
+        "valid_target_counts": [
+          125,
+          125,
+          115,
+          125,
+          125,
+          125,
+          125
+        ]
+      }
+    ],
+    "usable_source_worlds": 7
+  },
+  "date": "2026-10-21",
+  "entry_sha256": {
+    "native-combat-consequences-v1.py": "302218f30e14f9337109247f006f579ee4b43b68b5c6cca07365d5020dc241aa",
+    "test-native-combat-consequences-v1.sh": "c80cda5875c274bce47eb53cf64cf4ba541174f9edf1b21d7d8db3fd06cfa350"
+  },
+  "forks": [
+    {
+      "arm": "return_only",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 5658,
+      "model_id": "sha256:39bc20d37aa2b18912e714657a93e463406c31647ee58af0cff1ddf2dfc9b665",
+      "numerical_seed": 2,
+      "optimizer_steps": 5786,
+      "purpose": "final_fork",
+      "report_id": "sha256:4f42eb38fd4133c2c0abd1deefbd095e8662a69162daf7c5424d30c0bd0fef4a",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-return-only/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-return-only/state.json"
+    },
+    {
+      "arm": "consequence",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 5658,
+      "model_id": "sha256:f1a4842678f1dce9d1a90e12c142b175b0e7b39c33b9e8d587fc9d662553a32d",
+      "numerical_seed": 2,
+      "optimizer_steps": 5786,
+      "purpose": "final_fork",
+      "report_id": "sha256:7409fc1111348066c7c364d56153510ee0e44515e0b7224abd7591d39663475f",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-consequence/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-consequence/state.json"
+    },
+    {
+      "arm": "return_only",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 6045,
+      "model_id": "sha256:f94c89d7b6cdfb0d948b4faa4f4040def1cf61961b7bff3e1d2eb1810a678794",
+      "numerical_seed": 3,
+      "optimizer_steps": 6173,
+      "purpose": "final_fork",
+      "report_id": "sha256:aaab300b45d78d50d86ec52f57a393e2b720a2015dfb2b4e212701b97f4a2993",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-return-only/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-return-only/state.json"
+    },
+    {
+      "arm": "consequence",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 6045,
+      "model_id": "sha256:c324bbbc9b9a240f61cc82f27d1542f9654ff585c929edcd893b2c00ff23afd6",
+      "numerical_seed": 3,
+      "optimizer_steps": 6173,
+      "purpose": "final_fork",
+      "report_id": "sha256:69324cc2eedfb2b0e17045786f5fa93468804ec48dec8c1e83678ce2be035805",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-consequence/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-consequence/state.json"
+    }
+  ],
+  "game_apps_created": 0,
+  "implementation_sha256": {
+    "native_consequence_config.py": "e1a404f6cd799b4beac5c20ef068baacccd28670bb2565e8ba456c659c7429b1",
+    "native_consequence_data.py": "7fa88694347915bc7667808efc2db7af0b03ba1481206d05523a20b237360557",
+    "native_consequence_evaluation.py": "0b6aa07eee4c9809d18680ff730ba948cb2b954407340e27c4a0edaabf26acb4",
+    "native_consequence_math.py": "efd4fa6a998dc0ebc07b84ffd43903347c5ac47e194ef5b85dd8e0fcaa94f7f8",
+    "native_consequence_sources.py": "f72861fd498314c4d3b00ffc557ef6287d660bb4d0a57f3981dac9948d0e1a02",
+    "native_consequence_study.py": "a7541232d95c2da19d590aa10657e22e0bdd339b8ee986fe59a2634ef768dd29"
+  },
+  "information_boundary": {
+    "causal_optimal_action_or_public_belief_labels": false,
+    "future_observations": "labels only, never feature inputs",
+    "gameplay": "public policy only, no search or hidden engine state",
+    "ordinary_PPO_eligible": false,
+    "student_inputs": "current public graph plus currently legal chosen action",
+    "training": "supervised fixed-world recorded continuations"
+  },
+  "learning": {
+    "HP_is_a_prediction_label_not_reward": true,
+    "action_blind_control": "same-size mean of current legal-menu feature rows, never deployed",
+    "actor_hidden_units": 32,
+    "actor_input_dimension": 512,
+    "additional_training_only_head_parameters": 198,
+    "all_current_legal_action_families_remain_available": true,
+    "arms": [
+      "return_only",
+      "consequence",
+      "action_blind"
+    ],
+    "contract": "public_combat_action_observed_consequences_not_rewards_v1",
+    "equal_world_then_plan_then_valid_decision_weighting": true,
+    "fitting_only_target_scaling": true,
+    "full_run_score_or_environment_reward_changed": false,
+    "original_critic_weights_unchanged": true,
+    "return_control": "same auxiliary heads fitted; auxiliary gradients stopped before shared encoder",
+    "settings": {
+      "auxiliary_weight": 0.25,
+      "epochs": 128,
+      "gradient_clip": 5.0,
+      "l2": 0.0001,
+      "learning_rate": 0.001
+    },
+    "shared_encoder_can_change_noncombat_decisions": true,
+    "training_target_not_victory_probability": true,
+    "treatment": "same recorded-return regression plus consequence gradient into shared encoder"
+  },
+  "main_config": {
+    "config_id": "sha256:7fd458bd7e64951e5f77bebac1bce9e9d298f7f2a5dd7f397223afaa73ff7989",
+    "path": "configs/native-consequence/sts2-v0.111.0-a8-comparison-v1.json",
+    "sha256": "54aff99d22495790e728edfbd41629b1d98dfe060e9a26b2522b3d8ad6dc2547"
+  },
+  "offline_validation": {
+    "completed_fits": 63,
+    "config_id": "sha256:7fd458bd7e64951e5f77bebac1bce9e9d298f7f2a5dd7f397223afaa73ff7989",
+    "curves_keep_fitting_and_held_errors_separate": true,
+    "full_results": {
+      "completed_fits": 63,
+      "fixed_final_epoch_not_selected_on_held_outcomes": true,
+      "numerical_head_replicates_are_not_new_game_worlds": true,
+      "players": [
+        {
+          "arms": {
+            "action_blind": {
+              "encounter_alive_exit": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.24999999999999997,
+                "mean_fitting_mse": 0.057720102252581264,
+                "mean_held_mse": 0.34914185838965855,
+                "mean_other_world_constant_mse": 0.33333333333333287
+              },
+              "encounter_exit_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.012204841298766542,
+                "mean_fitting_mse": 0.005104652778611049,
+                "mean_held_mse": 0.02063952422859873,
+                "mean_other_world_constant_mse": 0.01971626499048585
+              },
+              "next_public_enemy_hp_sum_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.009596868982987975,
+                "mean_fitting_mse": 0.003549284728312937,
+                "mean_held_mse": 0.007905140662212661,
+                "mean_other_world_constant_mse": 0.007423752659780322
+              },
+              "next_public_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.006458352828358602,
+                "mean_fitting_mse": 0.0049144338773196095,
+                "mean_held_mse": 0.007696699422397329,
+                "mean_other_world_constant_mse": 0.007408479385561562
+              },
+              "next_public_potion_count_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 0.0,
+                "mean_held_mse": 0.0,
+                "mean_other_world_constant_mse": 0.0
+              },
+              "next_turn_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.012493796022671868,
+                "mean_fitting_mse": 0.005747408508265124,
+                "mean_held_mse": 0.01718950744119649,
+                "mean_other_world_constant_mse": 0.01705883149823775
+              },
+              "recorded_continuation_full_run_return": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 4.519249155922322e-05,
+                "mean_fitting_mse": 3.8760502529041464e-07,
+                "mean_held_mse": 1.998876893294649e-05,
+                "mean_other_world_constant_mse": 2.424767106300523e-05
+              }
+            },
+            "consequence": {
+              "encounter_alive_exit": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.24999999999999997,
+                "mean_fitting_mse": 0.0938481148135305,
+                "mean_held_mse": 0.3379191352443336,
+                "mean_other_world_constant_mse": 0.33333333333333287
+              },
+              "encounter_exit_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.012204841298766542,
+                "mean_fitting_mse": 0.006164204005644744,
+                "mean_held_mse": 0.017100238276916906,
+                "mean_other_world_constant_mse": 0.01971626499048585
+              },
+              "next_public_enemy_hp_sum_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.009596868982987975,
+                "mean_fitting_mse": 0.0037442253537589266,
+                "mean_held_mse": 0.006113119795972402,
+                "mean_other_world_constant_mse": 0.007423752659780322
+              },
+              "next_public_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.006458352828358602,
+                "mean_fitting_mse": 0.0035222205112360933,
+                "mean_held_mse": 0.004711029127380916,
+                "mean_other_world_constant_mse": 0.007408479385561562
+              },
+              "next_public_potion_count_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 0.0,
+                "mean_held_mse": 0.0,
+                "mean_other_world_constant_mse": 0.0
+              },
+              "next_turn_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.012493796022671868,
+                "mean_fitting_mse": 0.006138407326965682,
+                "mean_held_mse": 0.013359562022848792,
+                "mean_other_world_constant_mse": 0.01705883149823775
+              },
+              "recorded_continuation_full_run_return": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 4.519249155922322e-05,
+                "mean_fitting_mse": 3.85834703897928e-07,
+                "mean_held_mse": 3.032970573273409e-05,
+                "mean_other_world_constant_mse": 2.424767106300523e-05
+              }
+            },
+            "return_only": {
+              "encounter_alive_exit": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.24999999999999997,
+                "mean_fitting_mse": 0.13153288070046273,
+                "mean_held_mse": 0.34719593438521734,
+                "mean_other_world_constant_mse": 0.33333333333333287
+              },
+              "encounter_exit_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.012204841298766542,
+                "mean_fitting_mse": 0.008738445836203769,
+                "mean_held_mse": 0.01883745068939896,
+                "mean_other_world_constant_mse": 0.01971626499048585
+              },
+              "next_public_enemy_hp_sum_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.009596868982987975,
+                "mean_fitting_mse": 0.004095687092478439,
+                "mean_held_mse": 0.006296685446595308,
+                "mean_other_world_constant_mse": 0.007423752659780322
+              },
+              "next_public_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.006458352828358602,
+                "mean_fitting_mse": 0.004449903387987461,
+                "mean_held_mse": 0.005623135534972622,
+                "mean_other_world_constant_mse": 0.007408479385561562
+              },
+              "next_public_potion_count_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 0.0,
+                "mean_held_mse": 0.0,
+                "mean_other_world_constant_mse": 0.0
+              },
+              "next_turn_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 0.012493796022671868,
+                "mean_fitting_mse": 0.008374133271528502,
+                "mean_held_mse": 0.01483107096331627,
+                "mean_other_world_constant_mse": 0.01705883149823775
+              },
+              "recorded_continuation_full_run_return": {
+                "head_initializers": 3,
+                "held_source_worlds": 4,
+                "mean_current_state_persistence_mse": 4.519249155922322e-05,
+                "mean_fitting_mse": 3.005403836602911e-07,
+                "mean_held_mse": 2.5332984281293088e-05,
+                "mean_other_world_constant_mse": 2.424767106300523e-05
+              }
+            }
+          },
+          "numerical_seed": 2
+        },
+        {
+          "arms": {
+            "action_blind": {
+              "encounter_alive_exit": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 3.948413176653084e-30,
+                "mean_held_mse": 3.9484131766530856e-30,
+                "mean_other_world_constant_mse": 3.9484131766530856e-30
+              },
+              "encounter_exit_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0038936280187923974,
+                "mean_fitting_mse": 0.0027142347315070353,
+                "mean_held_mse": 0.003316141059766443,
+                "mean_other_world_constant_mse": 0.0033704343289008756
+              },
+              "next_public_enemy_hp_sum_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.018837589901548837,
+                "mean_fitting_mse": 0.009905257248154003,
+                "mean_held_mse": 0.010677066506718756,
+                "mean_other_world_constant_mse": 0.011455854474297427
+              },
+              "next_public_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.002018328632746183,
+                "mean_fitting_mse": 0.0016966145813507331,
+                "mean_held_mse": 0.0020185210855223363,
+                "mean_other_world_constant_mse": 0.00208166392096623
+              },
+              "next_public_potion_count_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 0.0,
+                "mean_held_mse": 0.0,
+                "mean_other_world_constant_mse": 0.0
+              },
+              "next_turn_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0048774399517268864,
+                "mean_fitting_mse": 0.00405910203004251,
+                "mean_held_mse": 0.005535009042150257,
+                "mean_other_world_constant_mse": 0.005712800547531995
+              },
+              "recorded_continuation_full_run_return": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 4.159793713791774e-05,
+                "mean_fitting_mse": 6.741033496176681e-07,
+                "mean_held_mse": 3.3916649403326414e-05,
+                "mean_other_world_constant_mse": 2.5725850164007124e-05
+              }
+            },
+            "consequence": {
+              "encounter_alive_exit": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 3.948413176653084e-30,
+                "mean_held_mse": 3.9484131766530856e-30,
+                "mean_other_world_constant_mse": 3.9484131766530856e-30
+              },
+              "encounter_exit_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0038936280187923974,
+                "mean_fitting_mse": 0.0025401572554252707,
+                "mean_held_mse": 0.0033492101249562997,
+                "mean_other_world_constant_mse": 0.0033704343289008756
+              },
+              "next_public_enemy_hp_sum_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.018837589901548837,
+                "mean_fitting_mse": 0.008621871724984458,
+                "mean_held_mse": 0.0097337758669798,
+                "mean_other_world_constant_mse": 0.011455854474297427
+              },
+              "next_public_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.002018328632746183,
+                "mean_fitting_mse": 0.001328869159498316,
+                "mean_held_mse": 0.0016933311500407777,
+                "mean_other_world_constant_mse": 0.00208166392096623
+              },
+              "next_public_potion_count_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 0.0,
+                "mean_held_mse": 0.0,
+                "mean_other_world_constant_mse": 0.0
+              },
+              "next_turn_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0048774399517268864,
+                "mean_fitting_mse": 0.0036812080325340215,
+                "mean_held_mse": 0.0054913946321994275,
+                "mean_other_world_constant_mse": 0.005712800547531995
+              },
+              "recorded_continuation_full_run_return": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 4.159793713791774e-05,
+                "mean_fitting_mse": 7.322031085570483e-07,
+                "mean_held_mse": 4.004320228278126e-05,
+                "mean_other_world_constant_mse": 2.5725850164007124e-05
+              }
+            },
+            "return_only": {
+              "encounter_alive_exit": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 3.948413176653084e-30,
+                "mean_held_mse": 3.9484131766530856e-30,
+                "mean_other_world_constant_mse": 3.9484131766530856e-30
+              },
+              "encounter_exit_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0038936280187923974,
+                "mean_fitting_mse": 0.0027911793588697846,
+                "mean_held_mse": 0.003322297791112235,
+                "mean_other_world_constant_mse": 0.0033704343289008756
+              },
+              "next_public_enemy_hp_sum_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.018837589901548837,
+                "mean_fitting_mse": 0.009431801276723197,
+                "mean_held_mse": 0.010102266143946166,
+                "mean_other_world_constant_mse": 0.011455854474297427
+              },
+              "next_public_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.002018328632746183,
+                "mean_fitting_mse": 0.0015894167900754792,
+                "mean_held_mse": 0.0017783185202269423,
+                "mean_other_world_constant_mse": 0.00208166392096623
+              },
+              "next_public_potion_count_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0,
+                "mean_fitting_mse": 0.0,
+                "mean_held_mse": 0.0,
+                "mean_other_world_constant_mse": 0.0
+              },
+              "next_turn_hp_delta": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 0.0048774399517268864,
+                "mean_fitting_mse": 0.004228042585914162,
+                "mean_held_mse": 0.0055345583370579494,
+                "mean_other_world_constant_mse": 0.005712800547531995
+              },
+              "recorded_continuation_full_run_return": {
+                "head_initializers": 3,
+                "held_source_worlds": 3,
+                "mean_current_state_persistence_mse": 4.159793713791774e-05,
+                "mean_fitting_mse": 7.157068138841332e-07,
+                "mean_held_mse": 3.9474706216517376e-05,
+                "mean_other_world_constant_mse": 2.5725850164007124e-05
+              }
+            }
+          },
+          "numerical_seed": 3
+        }
+      ],
+      "seven_source_worlds_cannot_establish_broad_generalization": true,
+      "tactical_prediction_does_not_establish_better_play": true,
+      "whole_source_world_is_independent_unit": true
+    },
+    "head_initializers": [
+      20261022,
+      20261023,
+      20261024
+    ],
+    "main_games_attempted": 0,
+    "path": "artifacts/native-consequences/sts2-v0.111.0-a8-comparison-v1/sessions/session-001.json",
+    "report_id": "sha256:835140b9741f6ed6ff16e97e1f006bf02516442211fd26e203e0dcf0cc16c80a",
+    "sha256": "d517fb4bd3b2fb6e2c38aa1c1deb35c2386f4b7695bf06c715ca615eaaa7e82c",
+    "source_world_fold_counts": {
+      "2": 4,
+      "3": 3
+    }
+  },
+  "original_parent_full_states_byte_identical": true,
+  "owner_gameplay": {
+    "combat": "greedy including owned nested choices",
+    "command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/test-native-combat-consequences-v1.sh",
+    "estimated_minutes": [
+      20,
+      40
+    ],
+    "failures_kept_in_original_denominator": true,
+    "fresh_development_worlds_shared_across_parents": 32,
+    "freshness_exclusions": {
+      "additional_separate_consequence_control_worlds": 2,
+      "earlier_native_seed_manifests": 30
+    },
+    "interval_method": "seed-clustered percentile bootstrap jointly across two fixed parents",
+    "invocation_wall_cap_seconds": 7200,
+    "maximum_failed_games": 2,
+    "multiple_contrasts_exploratory_no_corrected_victory_claim": true,
+    "noncombat": "matched temperature 0.8 rule and world/room/family/visit uniform draws, not frozen weights/choices",
+    "per_game_wall_seconds": 120,
+    "planned_attempts": 192,
+    "players": 2,
+    "session_limits": {
+      "cpu_seconds": 1800,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 900
+    },
+    "started": false,
+    "terminal_victory_primary": true,
+    "uncertain_delivery_never_replayed": true,
+    "variants": [
+      "original",
+      "return_only",
+      "consequence"
+    ],
+    "whole_run_CPU_seconds": 128
+  },
+  "parents": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "predeclared_protocol": {
+    "deployment_epoch": 128,
+    "deployment_initializer": 20261022,
+    "held_outcomes_select_no_model_or_schedule": true,
+    "main_template_sha256": "0ad516d75990d3cd381857a1d4b99796a8625a5fb42035d4c5fb9aa8ee4a3f6d",
+    "only_filled_main_template_field": "control_report.id",
+    "path": "artifacts/native-consequences/preparation-v1/protocol-before-native-control-keyfix.json",
+    "report_id": "sha256:96cdf7f822dc3356b11658abe17feb23b1e28bda0b0e4b0a704a9c1421b1f2e6",
+    "sha256": "01021033b92949c68a2bb92f73cdb112f4f32e9b3755284db0f691221d0c08bb",
+    "template_path": "artifacts/native-consequences/preparation-v1/main-template-before-native-control-keyfix.json"
+  },
+  "preserved_preparation": {
+    "failed_control_preparation_fits": 0,
+    "failed_control_preparation_games": 0,
+    "failed_preparation_data_units": 7,
+    "failed_preparation_resource": {
+      "cap": null,
+      "exit_code": 1,
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-combat-consequences-control-offline-v1-1.json",
+      "report_id": "sha256:f2389f14a56f1f7fe0c6e045578cbbe2f014c25d796905014573eecf442b44dc",
+      "sha256": "86dfee679dc959e6ab4292f77983d63566a99db15c91d08c33f0e67f12368583",
+      "status": "failed",
+      "usage": {
+        "average_cpu_utilization": 0.0356863444425118,
+        "cpu_hours": 0.0089886306375,
+        "cpu_seconds": 32.359070295,
+        "energy_kwh": null,
+        "final_storage_bytes": 2259523,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 306970624,
+        "peak_storage_bytes": 2259523,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 64.76881283405237
+      }
+    },
+    "failure": "invalid journal unit name containing underscores",
+    "matching_old_config_and_source_copies": "artifacts/native-consequences/preparation-v1/before-journal-key-repair",
+    "probe_disposable_CV_fits": 6,
+    "probe_features_and_labels_identical_to_qualified_extraction": true,
+    "probe_is_separate_from_failed_control_preparation": true,
+    "probe_native_games": 0,
+    "repair": "journal-safe names only; fixed targets/loss/optimizer/seeds/deployment schedule unchanged",
+    "saved_input_timing_probe": {
+      "path": "artifacts/native-consequences/preparation-v1/probe-report.json",
+      "report_id": "sha256:0404019441a902fdd61d3298cc58b425c88856d2d1ba17dd3744396d4d722815",
+      "sha256": "1298c71c37c2aaf2d1273a211b6b94d618193df21ffa9dc2f7caa8f5f900ee7a"
+    }
+  },
+  "production_optimizer_steps": 0,
+  "push_or_GitHub_Actions_started": false,
+  "report_id": "sha256:091e4b2e63f7e42f2fa74a0572190909325907d20de626c97aef6e0eb45421d1",
+  "resources": {
+    "native_control_final_cumulative_storage_bytes": 67976584,
+    "native_control_peak_RAM_bytes": 465387520,
+    "native_control_sessions": [
+      {
+        "cap": null,
+        "exit_code": 0,
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 1000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-combat-consequences-control-v1-1.json",
+        "report_id": "sha256:fadaa756e7c785154d54a619cab7158185981a4fa393444bacef29951d1ccc82",
+        "sha256": "3e939d259074aacfb9b0b3745398173f1e58eebe2990977ade8febea7acc3041",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.03825901613143019,
+          "cpu_hours": 0.017065321984444444,
+          "cpu_seconds": 61.435159144,
+          "energy_kwh": null,
+          "final_storage_bytes": 36086649,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 4,
+          "peak_resident_memory_bytes": 465387520,
+          "peak_storage_bytes": 36086649,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 114.6978175828699
+        }
+      },
+      {
+        "cap": null,
+        "exit_code": 0,
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 1000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-combat-consequences-control-v1-2.json",
+        "report_id": "sha256:8e02a97c6c133f7451622e65c54a88f976ea7a39b5882f3e11ee09cc86c29d11",
+        "sha256": "19712b770fcbaf28f47c4d52734b0305cf8a7e5c4dc56097850551db57e90af3",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.033380095729729886,
+          "cpu_hours": 0.01336153278722222,
+          "cpu_seconds": 48.101518033999994,
+          "energy_kwh": null,
+          "final_storage_bytes": 67976584,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 4,
+          "peak_resident_memory_bytes": 397869056,
+          "peak_storage_bytes": 67976584,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 102.93028349988163
+        }
+      }
+    ],
+    "native_control_total_CPU_seconds": 109.53667717799999,
+    "native_control_total_wall_seconds": 217.62810108275153,
+    "offline_full_validation": {
+      "cap": null,
+      "exit_code": 0,
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 4000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-combat-consequences-comparison-offline-v1-1.json",
+      "report_id": "sha256:6f425648f25883b609f39177f9ccbf9c231c3e0ce715b5e1b29417aa122c880c",
+      "sha256": "a6591be992e72758fcecfb0231016dbdf77a3927d6cc95d3be6e974057600822",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.04797494066002097,
+        "cpu_hours": 0.0292505598725,
+        "cpu_seconds": 105.302015541,
+        "energy_kwh": null,
+        "final_storage_bytes": 115882005,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 285835264,
+        "peak_storage_bytes": 115882005,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 156.78127862513065
+      }
+    },
+    "storage_scope": "Each workspace has its own cumulative cap. Main excludes inherited control data/forks, saved teacher, frozen engine/runtime/SDK and separate preparation. Sum distinct workspace totals once, not cumulative repeated resource snapshots."
+  },
+  "saved_state_and_array_controls": {
+    "path": "artifacts/native-consequences/preparation-v1/saved-controls-v1.json",
+    "report_id": "sha256:975bd1a374b5860206d58922554675faa7397ac1ce310230b4f22b5f6b551a67",
+    "sha256": "2f7b4946efc22d6c56ebcef1fd571d522795a1b873f9a8c28eeb68f3d207d8f5"
+  },
+  "schema_version": "native-combat-consequence-learning-evidence-v1",
+  "source_teacher": {
+    "id": "sha256:bd4df21bfdc75ee357926364e0168e3e91e51dfa5a3d1af284e8f9a3bca678bc",
+    "path": "artifacts/native-greedy-turn-teacher/sts2-v0.111.0-a8-pilot-v1/report.json"
+  },
+  "source_teacher_assessment": {
+    "id": "sha256:02108dfc0f550e62a7b9f36d65487fe2fad5c5f8153aa81bd9d2973eabdbfff6",
+    "path": "artifacts/native-greedy-turn-teacher/result-assessment-v1/report.json"
+  },
+  "status": "implemented_qualified_saved_validation_complete_owner_gameplay_not_started",
+  "verification": {
+    "format_lint_and_CSharp_protocol_passed": true,
+    "new_tests": 61,
+    "repo_check_resource": {
+      "cap": null,
+      "exit_code": 0,
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-consequence-repository-check-v1-2.json",
+      "report_id": "sha256:efb0cc7ad23fe2c06d5447bf9052c686fb86908a70d30fa3068232a7d9efaf8b",
+      "sha256": "72a861961c5c0a3b80bd39d2a986512890fe710b97fb771bef90ae35fb9eda90",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.06387806437599067,
+        "cpu_hours": 0.03279046905472221,
+        "cpu_seconds": 118.04568859699995,
+        "energy_kwh": null,
+        "final_storage_bytes": 0,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 8,
+        "peak_resident_memory_bytes": 360841216,
+        "peak_storage_bytes": 0,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 131.99891045782715
+      }
+    },
+    "strict_typed_files": 435,
+    "tests_passed": 2171,
+    "tests_skipped": 4
+  }
+}

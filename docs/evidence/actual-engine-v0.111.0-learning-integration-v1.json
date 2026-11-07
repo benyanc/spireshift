@@ -1,0 +1,200 @@
+{
+  "schema_version": "actual-engine-learning-integration-evidence-v1",
+  "date": "2026-10-14",
+  "game": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "character": "Ironclad",
+    "ascension": 8,
+    "profile": "native_benchmark_full_v1"
+  },
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "input_config_id": "sha256:25308309204c103b846a5bdb497fe89f83456517ecba4599e4587c4b68ac2a7e",
+  "build_report_id": "sha256:92f6e53620a8aeac9514aef6f3ecd45f13fc3e875edce0fa4c626c94a7441997",
+  "id_fix": {
+    "policy": "engine-run-policy-v5.mjs",
+    "encoder_input": "actual-engine-public-entity-graph-v1",
+    "saved_audit": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/public-input-id-audit-v3.json",
+    "audit_sha256": "53bf5c07b4ec047bdabbf989a69398fb7837fd1bb90564131d6ba0e3f034cce1",
+    "observations": 783,
+    "decisions": 775,
+    "renaming_comparisons": 2349,
+    "valid": true,
+    "new_games": 0
+  },
+  "worker_isolation": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-native-worker-isolation-v5.json",
+    "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v5/summary.json",
+    "report_id": "sha256:1d3f04eee35b0c1bef9633a85009ca6a6071a3a2e62c066c6b4ada8f5c7b0f42",
+    "status": "worker_isolation_pass",
+    "planned_games": 12,
+    "independent_seeds": 8,
+    "completed_games": 12,
+    "decisions": 1214,
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "protected_sibling_read_write_sentinel_passed": true,
+    "serial_parallel_reset_semantic_traces_equal": true,
+    "resource_report": "artifacts/resources/native-worker-isolation-v5.json",
+    "resource_report_id": "sha256:48304e8d82a421ee2963e60cf8bcb5b015231e4c98374984b7d09b1a35ba176e",
+    "resource_wall_seconds": 19.06697591696866,
+    "retained_bytes": 66571310,
+    "new_app_copies": 0
+  },
+  "neural_control": {
+    "config": "configs/native-learning/sts2-v0.111.0-a8-control-v3.json",
+    "report": "artifacts/native-learning/sts2-v0.111.0-a8-control-v3/summary.json",
+    "report_id": "sha256:cb1708793bc5ef7c47132e4075ddfe862f261d05989b5f1e8fd449ac58b68768",
+    "status": "short_learning_control_pass",
+    "completed_games": 4,
+    "sampled_decisions_verified": 209,
+    "optimizer_steps": 6,
+    "actor_l2_change": 0.47273996189683143,
+    "critic_l2_change": 0.06193445540159796,
+    "panels": [
+      {
+        "best_completed_acts": 0,
+        "best_floor": 8,
+        "best_victory": false,
+        "completed_games": 2,
+        "cpu_seconds": 5.804360667,
+        "decisions": 209,
+        "failed_games": 0,
+        "mean_floor": 7.0,
+        "model_id": "sha256:d0942056359f0f550948cc604e8e06ec822e8a31d2ac85920bfe35c22208d7ea",
+        "not_attempted_games": 0,
+        "panel": "round-001-sampled",
+        "planned_games": 2,
+        "wins": 0,
+        "worker_failures": 0
+      },
+      {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 2,
+        "cpu_seconds": 7.379850665999999,
+        "decisions": 321,
+        "failed_games": 0,
+        "mean_floor": 15.5,
+        "model_id": "sha256:54141aa7117a4bac1c387b0fad25bf3a7454b8cfce24287a23b14a6330765dc1",
+        "not_attempted_games": 0,
+        "panel": "control-greedy",
+        "planned_games": 2,
+        "wins": 0,
+        "worker_failures": 0
+      }
+    ],
+    "resource_report": "artifacts/resources/native-neural-control-v3.json",
+    "resource_report_id": "sha256:1512386112a6599ae1da22ba3e64c80d7edf4fffad2a305c737cfd43ae04dc40",
+    "resource_wall_seconds": 16.635051624965854,
+    "retained_bytes": 12868348,
+    "all_games_losses": true,
+    "different_seed_behavior_panels_are_not_improvement_evidence": true,
+    "delivery_audits": [
+      "sha256:a9fab2a4b58ed4ade7a44ccf8b0b94a9f8a107ddd4338e0a50de471a342c4cb5",
+      "sha256:3d09832e46b3669617fd06e38855be54a91cccdf50f0ef7d6fa504a12568bc95",
+      "sha256:789547821e18a98c66a2f3f12f3bd5a33a57ef0471909511811bc9ee3ee1c699",
+      "sha256:9ec60172cd799a54eef31d56526a84bb631dba75febe17566f8529237ea2a99e"
+    ],
+    "new_app_copies": 0
+  },
+  "earlier_attempts_preserved": [
+    {
+      "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v1",
+      "original_report_counts_unchanged": true,
+      "supplemental_interpretation": "One native start failed before public observation under an over-restrictive file sandbox; controller termination also failed before a case was published. No clean game or admission.",
+      "native_starts": 1,
+      "failed_starts": 1,
+      "planned_games": 12,
+      "other_unattempted": 11
+    },
+    {
+      "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v2",
+      "original_report_counts_unchanged": true,
+      "supplemental_interpretation": "Native self-reported CPU accounting worked; one native start still failed under the file sandbox. No clean game or admission.",
+      "native_starts": 1,
+      "failed_starts": 1,
+      "planned_games": 12,
+      "other_unattempted": 11
+    },
+    {
+      "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v3",
+      "supplemental_interpretation": "Eight terminal candidates were saved, but the Node control process kept its stdin open after native quit. No aggregate pass or parallel stage; all evidence retained.",
+      "saved_terminal_candidates": 8,
+      "parallel_unattempted": 4
+    },
+    {
+      "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v4",
+      "status": "superseded_scoped_pass",
+      "completed_games": 12,
+      "reason": "The final v5 separately pins and archives Python source and the public navigation-history input."
+    },
+    {
+      "workspace": "artifacts/native-learning/sts2-v0.111.0-a8-control-v1",
+      "status": "superseded_scoped_pass",
+      "reason": "Final control v2 incorporates mandatory saved delivery-chain audits and current implementation pins."
+    },
+    {
+      "workspace": "artifacts/native-learning/sts2-v0.111.0-a8-control-v2",
+      "status": "superseded_scoped_pass",
+      "reason": "Final control v3 binds reporting that takes best floor/acts from one real game and prioritizes a full win. Training behavior and learned weights are unchanged."
+    }
+  ],
+  "validation": {
+    "python_tests_passed": 1315,
+    "node_tests_passed": 281,
+    "node_tests_skipped": 34,
+    "node_failures": 0,
+    "repository_check": "artifacts/native-learning-repository-check-v5.log",
+    "node_check": "artifacts/native-learning-node-check-v1.log",
+    "csharp_protocol_contract": "passed",
+    "synthetic_pilot_orchestration": "Eight-round, 336-fixture-case selection/development order tested without game attempts; best-progress pair comes from one actual case, with victory first."
+  },
+  "admission": {
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v1-admission-v2.json",
+    "report_id": "sha256:414e23ec964112e1c382396a67d685aa5cf7b2ab9440745fa983b5503adc676f",
+    "status": "admitted_for_bounded_native_policy_only_pilot",
+    "scope": "one finite actual-engine Ironclad/A8 policy-only bootstrap pilot",
+    "base_readiness_passed": false,
+    "adaptive_controller_allowed": false
+  },
+  "owner_handoff": {
+    "config": "configs/native-learning/sts2-v0.111.0-a8-pilot-v1.json",
+    "config_id": "sha256:ac584ba12c5a780a3c6c3e533b486c0740515235db071e93b40518b9fda6902d",
+    "script": "scripts/train-native-a8-ppo-v1.sh",
+    "planned_games": 336,
+    "sampled_games": 256,
+    "confirmation_games": 48,
+    "paired_development_games": 32,
+    "workers": 2,
+    "resource_limits": {
+      "wall_seconds": 1800,
+      "cpu_seconds": 3600,
+      "storage_bytes": 4000000000,
+      "resident_memory_bytes": 4000000000
+    },
+    "preflight_ready": true,
+    "long_pilot_started": false,
+    "previous_preflight_recipe_preserved_at": "artifacts/native-learning/pilot-v1-preflight-recipe-before-progress-summary-fix.json",
+    "final_preflight": "artifacts/native-learning/pilot-v1-final-preflight.json"
+  },
+  "claim_scope": "ID_invariance_worker_isolation_and_neural_pipeline_control_plus_scoped_pilot_admission_not_playing_strength_or_universal_fidelity",
+  "feature_collision_audit": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v5/feature-collision-audit-v1.json",
+    "report_id": "sha256:ed305ce3b9ece1c9cf9befef3a782062efad59ccf4446bc8bf6ddf47d975d3c9",
+    "observations": 1226,
+    "candidates": 5137,
+    "distinct_structured_candidate_vector_aliases": 0,
+    "dimension": 512,
+    "scope": "within_observed_current_legal_menus_only_not_global_feature_injectivity",
+    "games_launched": 0
+  },
+  "evidence_id": "sha256:10e5c967cd1adab94bbd8c3e72f144021fa1e3bf4d66aee1141563555dc4d289"
+}

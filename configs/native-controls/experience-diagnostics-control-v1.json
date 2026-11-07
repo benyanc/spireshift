@@ -1,0 +1,42 @@
+{
+  "cohorts": [
+    "fit-p2-batch32-r01",
+    "fit-p2-batch128-r01",
+    "fit-p3-batch32-r01",
+    "fit-p3-batch128-r01"
+  ],
+  "entry_sha256": {
+    "diagnose-native-experience-v1.py": "7ce762f329ba9d5ad230d61a20c2c88989b488af88c07db55e2dcd4bfb6c6a14",
+    "diagnose-native-experience-v1.sh": "6db69f558c9cd8847574225bbc8bdad488bb187c03e52b29c6fac53d11440d59"
+  },
+  "implementation_sha256": {
+    "native_compact_training.py": "de301779281eea3af437f243be4081bcbb5e542b3df0337786ac1109bc921080",
+    "native_experience_diagnostic_data.py": "680d81e5514871b2a306b2467bdf4ef7af9c9a96764a1fbe5b93611c8f915961",
+    "native_experience_diagnostic_sources.py": "77bf9499c119870e122ad6737f1808e0a75cb03b6e5afac3d958b35029351a72",
+    "native_experience_diagnostics.py": "57bcc294f9bacab03a9c80fbca537adf52fabfb591911bb280e9e3ee15f5428f",
+    "native_experience_feedback.py": "fdfce73821ed453006dae685c9658495627e74100b90d668cc0cc84988d75efa",
+    "native_inventory_credit_features.py": "86da4b74f3a1030cdc9f59a871c99402da8d47d1673871c79f3d00a27a6d2869",
+    "native_optimizer_probe.py": "76309ef78228c27c48f1e96af3ebe9a9f7670bc9e44a13f25fd8256af76a3e1b",
+    "native_structured_policy.py": "2f76551eecaa39033e92a286ab3698af593f212da62e70d21526bcf39024bfb3",
+    "native_structured_state.py": "df2cb6e3334b34ec5f69a403c17e2d8093ab72e1245891a57efa424a0321c6ae",
+    "native_training_diagnostics.py": "42517c4e880ca0ca686a9ad8d2642cf58e3593869314a392d068e36468b15bbb",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774"
+  },
+  "protection_report": {
+    "id": "sha256:6715be7d04445f226aab3cc266e54ee26a8ddbf58b84021cf47f0e00595d4088",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-control-v1/report.json"
+  },
+  "schema_version": "native-experience-diagnostic-config-v1",
+  "session_limits": {
+    "cpu_seconds": 240,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 100000000,
+    "wall_seconds": 240
+  },
+  "source_recipe": {
+    "id": "sha256:c809c94ea099177ca963713f9407c40cf8c50c56c98a0e123df1338e172d82bd",
+    "path": "configs/native-experience/sts2-v0.111.0-a8-control-v1.json"
+  },
+  "stage": "short_control",
+  "workspace": "artifacts/native-experience-diagnostics/sts2-v0.111.0-a8-control-v1"
+}

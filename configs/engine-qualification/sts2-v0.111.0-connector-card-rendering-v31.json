@@ -1,0 +1,43 @@
+{
+  "schema_version": "engine-connector-config-v2",
+  "stage": "local_shipped_menu_control_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "workspace": "artifacts/native-card-rendering/connector-probe-v31",
+  "toolchain": "artifacts/native-card-rendering/connector-tools-v31",
+  "bootstrap_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-bootstrap-v1.json",
+  "bootstrap_report_id": "sha256:fb0c446d837855c5ea1257eca18a71fa3aa01cc72e716516fc1a9a566918daec",
+  "bootstrap_settings_sha256": "e188477a47f0bf353b8317c6162d935889645ac626ade9f4ff55710c4c1b9870",
+  "max_wall_seconds": 120,
+  "connector": {
+    "version": "1.1.0-rc.1",
+    "protocol": "1.0.0",
+    "source_revision": "4d0b95d38b0f8e0e0c273a7b4fa5fb7a0a0ad1ca",
+    "artifact_sha256": "539c18da70c7bd90b5e891b809d45c6c7b5056180352a4c4d7d46f0e0eaaab34",
+    "artifact_mvid": "daf71d1f-c5e6-4ab3-af30-8f74d970cb76"
+  },
+  "assets": {
+    "host": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/STS2-Connector-1.1.0-rc.1-host.tar.gz",
+      "sha256": "b2f7321dab36689c26133eb198955321722d5ca928f2b6a0b5a125c6df861de2"
+    },
+    "sdk": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/rsgcsg-sts2-connector-client-1.0.0.tgz",
+      "sha256": "4a12777aaaa6b469cb939456a0f59a4b7385dbfe87f721870ce89dd1b14eb062"
+    },
+    "seal": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/STS2-Connector-1.1.0-rc.1-runtime-seal.json",
+      "sha256": "d3691730345e8b461a83e206e0c6ac70fe60371c2e8bb61be083fb987f33c3bc"
+    },
+    "zod": {
+      "url": "https://registry.npmjs.org/zod/-/zod-3.25.76.tgz",
+      "sha256": "9e1f1a05f0dd0c1dab64ee91ceb9bf55cd44d35368c70edda80a2fdc70a88377"
+    }
+  },
+  "training_allowed": false,
+  "local_build": {
+    "build_config": "configs/engine-qualification/sts2-v0.111.0-connector-card-rendering-build-v31.json",
+    "build_config_id": "sha256:21515b854de4e3db44d35ae48e11b913d7a19c3b3622e5b746dcf54bdcf8bdeb",
+    "build_report": "artifacts/native-card-rendering/connector-build-v31/report.json"
+  }
+}

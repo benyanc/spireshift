@@ -1,0 +1,64 @@
+{
+  "acceptance": {
+    "minimum_exact_victory_gain": 0.1,
+    "minimum_optimal_action_probability": 0.75
+  },
+  "episodes_per_round": 64,
+  "held_out_hp": [
+    16,
+    24,
+    64,
+    72
+  ],
+  "held_reward_rule": "commit_linear_0.1_to_0.85_between_HP_8_and_80_decline_0.55",
+  "implementation_sha256": {
+    "core/objective.py": "50fbd4b770f0736dd68a5ecee6a96f5865ae53d37b590ca2e534d43302cf8311",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "native_action_context_study.py": "80d5b643d38e1bde2ba5c07038daf5d6401630239a5353b182a8365fd3782c87",
+    "native_conditional_control.py": "ec522cc1877ec115dd168522fcaa0b589101430d21bde5d34e2c8a3a71ac41ba",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_learning_control.py": "b54f56dc9d195c4b41c4d26842ab0b08c5a1bb97e492de2af26fc3cbaa3699f9",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285"
+  },
+  "initializer": "common_zero_hidden_output_no_frozen_layers_v1",
+  "modes": [
+    "native-original-quarter-v1",
+    "native-public-numeric-shared-v1",
+    "native-public-numeric-candidate-cross-v1"
+  ],
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "reference_control": {
+    "id": "sha256:b12b9dde6ec7f46a1a1d062fa018debc4cc6ee6539cb5d6aa95cc0aa5a694816",
+    "path": "configs/native-controls/conditional-teaching-v1.json"
+  },
+  "resource_limits": {
+    "cpu_seconds": 240,
+    "resident_memory_bytes": 1000000000,
+    "storage_bytes": 40000000,
+    "wall_seconds": 240
+  },
+  "rounds": 32,
+  "schema_version": "native-action-context-study-config-v1",
+  "training_seeds": [
+    0,
+    1,
+    2
+  ],
+  "workspace": "artifacts/synthetic-learning/native-action-context-v1"
+}

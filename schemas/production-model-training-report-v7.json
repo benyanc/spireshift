@@ -1,0 +1,542 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-model-training-report-v7.json",
+  "type": "object",
+  "required": [
+    "train_dataset_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "model_id",
+    "report_id",
+    "schema_version",
+    "model_type",
+    "trajectory_finetuning",
+    "training_runs",
+    "validation_runs",
+    "training_records",
+    "validation_records",
+    "eligible_preferences",
+    "fit_preferences",
+    "selection_preferences",
+    "fit_anchor_records",
+    "selection_anchor_records",
+    "collection_summary",
+    "exclusions",
+    "parent_selection_preferences",
+    "parent_strong_selection_preferences",
+    "parent_selection_policy",
+    "parent_validation_policy",
+    "held_out_metrics",
+    "validation_drift",
+    "validation_checks",
+    "preference_diagnostics",
+    "inference_diagnostics",
+    "terminal_value_status",
+    "floor_thresholds",
+    "training_history",
+    "candidate_eligible",
+    "status",
+    "terminal_victory_positive_labels",
+    "checkpoint_promoted",
+    "claim_scope",
+    "selection_note",
+    "starting_option_training"
+  ],
+  "properties": {
+    "train_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "validation_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "schema_version": {
+      "const": "production-model-training-report-v7"
+    },
+    "model_type": {
+      "const": "sparse-anchored-starting-option-residual-v1"
+    },
+    "trajectory_finetuning": {
+      "$ref": "https://spireshift.dev/schemas/trajectory-policy-training-config-v1.json#/$defs/binding"
+    },
+    "training_runs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "validation_runs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "training_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "validation_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eligible_preferences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fit_preferences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "selection_preferences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fit_anchor_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "selection_anchor_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "collection_summary": {
+      "type": "object"
+    },
+    "exclusions": {
+      "type": "object"
+    },
+    "parent_selection_preferences": {
+      "type": "object"
+    },
+    "parent_strong_selection_preferences": {
+      "type": "object"
+    },
+    "parent_selection_policy": {
+      "type": "object"
+    },
+    "parent_validation_policy": {
+      "type": "object"
+    },
+    "held_out_metrics": {
+      "type": "object"
+    },
+    "validation_drift": {
+      "type": "object"
+    },
+    "validation_checks": {
+      "type": "object"
+    },
+    "preference_diagnostics": {
+      "type": "object"
+    },
+    "inference_diagnostics": {
+      "type": "object"
+    },
+    "terminal_value_status": {
+      "type": "object"
+    },
+    "floor_thresholds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "training_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "candidate_eligible": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "validation_candidate",
+        "rejected_or_no_update"
+      ]
+    },
+    "terminal_victory_positive_labels": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "anchored_train_trajectory_auxiliary_policy_candidate"
+    },
+    "selection_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "starting_option_training": {
+      "type": "object",
+      "required": [
+        "config",
+        "known_option_ids",
+        "residual_head_id",
+        "coverage",
+        "parent_checkpoint_unchanged",
+        "coverage_source"
+      ],
+      "properties": {
+        "config": {
+          "$ref": "https://spireshift.dev/schemas/starting-option-policy-training-config-v1.json"
+        },
+        "known_option_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "residual_head_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "coverage": {
+          "type": "object",
+          "required": [
+            "fit_anchors",
+            "selection_anchors",
+            "validation",
+            "fit_preferences",
+            "selection_preferences",
+            "excluded_activity_preferences"
+          ],
+          "properties": {
+            "fit_anchors": {
+              "type": "object",
+              "required": [
+                "records",
+                "scoped_records",
+                "scoped_complete_runs",
+                "candidate_options",
+                "unique_option_ids",
+                "unknown_candidate_options",
+                "unknown_option_ids"
+              ],
+              "properties": {
+                "records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                },
+                "unknown_candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unknown_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "selection_anchors": {
+              "type": "object",
+              "required": [
+                "records",
+                "scoped_records",
+                "scoped_complete_runs",
+                "candidate_options",
+                "unique_option_ids",
+                "unknown_candidate_options",
+                "unknown_option_ids"
+              ],
+              "properties": {
+                "records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                },
+                "unknown_candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unknown_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "validation": {
+              "type": "object",
+              "required": [
+                "records",
+                "scoped_records",
+                "scoped_complete_runs",
+                "candidate_options",
+                "unique_option_ids",
+                "unknown_candidate_options",
+                "unknown_option_ids"
+              ],
+              "properties": {
+                "records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                },
+                "unknown_candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unknown_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "fit_preferences": {
+              "type": "object",
+              "required": [
+                "records",
+                "scoped_records",
+                "scoped_complete_runs",
+                "candidate_options",
+                "unique_option_ids",
+                "unknown_candidate_options",
+                "unknown_option_ids"
+              ],
+              "properties": {
+                "records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                },
+                "unknown_candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unknown_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "selection_preferences": {
+              "type": "object",
+              "required": [
+                "records",
+                "scoped_records",
+                "scoped_complete_runs",
+                "candidate_options",
+                "unique_option_ids",
+                "unknown_candidate_options",
+                "unknown_option_ids"
+              ],
+              "properties": {
+                "records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                },
+                "unknown_candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unknown_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            },
+            "excluded_activity_preferences": {
+              "type": "object",
+              "required": [
+                "records",
+                "scoped_records",
+                "scoped_complete_runs",
+                "candidate_options",
+                "unique_option_ids",
+                "unknown_candidate_options",
+                "unknown_option_ids"
+              ],
+              "properties": {
+                "records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_records": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "scoped_complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                },
+                "unknown_candidate_options": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unknown_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "parent_checkpoint_unchanged": {
+          "const": true
+        },
+        "coverage_source": {
+          "const": "verified_saved_public_inputs_no_engine"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

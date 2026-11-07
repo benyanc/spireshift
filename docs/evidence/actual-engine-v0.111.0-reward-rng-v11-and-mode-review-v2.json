@@ -1,0 +1,219 @@
+{
+  "schema_version": "actual-engine-reward-rng-and-mode-review-evidence-v1",
+  "date": "2026-10-11",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "prior_mode_evidence": "docs/evidence/actual-engine-v0.111.0-mode-audit-v1.json",
+  "mode_review_correction": "Original bundle TestMode defaults to bundle zero, but the existing wrapper already installs a choice prefix. The remaining issues are warning-only installation, missing-simulator and invalid-index fallbacks, synchronization and cleanup; unconditional first-bundle play was not established.",
+  "build": {
+    "config_id": "sha256:3de65b75b25f4335d9c4136165da60db3be2617e7cc019a2939fe95e40acbf07",
+    "report_id": "sha256:33dd457bfc3022d2f02c87bebb1ba4ed8a8a634dbe1ce706e6f3cf73ec9fbecc",
+    "wall_seconds": 13.831787333008833,
+    "two_fresh_baselines_two_fresh_repaired_outputs_match": true,
+    "candidate_lineage": "spireshift_cli_reward_rng_v11_local_toolchain",
+    "candidate_pins": {
+      "artifact_sha256": "0c6ede84e6769c5d277a6f922ac84fa95b2e16e301bc376800de62596ba36712",
+      "artifact_mvid": "4b632d1a-8860-4aff-a476-af1188be9875",
+      "godot_stub_sha256": "4cbc15bd3058ab2104c4c7b9764aa2e4e72dd6b823ed1f031feba068d5bdb4b1",
+      "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+      "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+      "source_diff_id": "7f2e4ed86e5f92e11384e6c6a9e31ee80efd3034689f8be227f9325c7454bc92",
+      "runtime_dependencies_id": "4539331c8760d932eaa8fb159fe9224100b6c8eef9c05dfd27c524591ef9d145"
+    },
+    "local_patch": "patches/engine/sts2-cli-v0.111.0-reward-rng-v11.patch",
+    "local_patch_sha256": "32dc894e1d6ade5952b57b3fb3e8ce11d4f9201b7dabefaf885492b1e1cbd3a7",
+    "source_diff_id": "7f2e4ed86e5f92e11384e6c6a9e31ee80efd3034689f8be227f9325c7454bc92",
+    "official_game_stored_bytes_preserved": true
+  },
+  "repair": {
+    "methods": [
+      "CallingBell.GenerateRewards",
+      "Cauldron.GenerateRewards"
+    ],
+    "changed_behavior": "Replace the single method-local TestMode.IsOn call with false after checking exact original IL hashes; preserve game-owned reward constructors, population, pools and RNG. Global TestMode remains on. Initialization completion is recorded after hook installation succeeds.",
+    "not_changed": [
+      "native game bytes",
+      "existing native reward selector",
+      "bundle selector hook",
+      "shipped Host and SDK",
+      "generation factories or RNG algorithms"
+    ]
+  },
+  "native_generation_comparison": {
+    "archive_verification_after": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+    "archive_verification_before": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+    "build_report_ids": {
+      "legacy": "sha256:a2516e7ba9d3d1da5080b837e22a57fac8a32edbce0bd07519996f66665b9fb1",
+      "repaired": "sha256:33dd457bfc3022d2f02c87bebb1ba4ed8a8a634dbe1ce706e6f3cf73ec9fbecc"
+    },
+    "checker_sha256": "32a921348ec219388cc1b553e0b778867986ccad0294a142e620b6670c63d9b5",
+    "claim_scope": "two_relics_generation_and_population_only_shared_native_initialization_stubs_and_pools_not_pickup_or_shipped_UI_parity",
+    "completed_cases": 8,
+    "config_id": "sha256:786645a8f324b17a50cd963df0ffdd5e77aec18131931b1714d65391b63eb9c7",
+    "full_run_attempts": 0,
+    "independent_seeds": 2,
+    "mechanics_qualified": false,
+    "native_fixture_starts": 24,
+    "optimizer_steps": 0,
+    "planned_cases": 8,
+    "privileged_fixture": true,
+    "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+    "repeated_private_state_identical": true,
+    "report_id": "sha256:7a47d7987bbbc4fa7b04e8d9ead02a0145febe9cd03b062698e34eaec57d16ef",
+    "reward_selections": 0,
+    "schema_version": "engine-native-reward-generation-v1",
+    "seed_relic_pairs": 4,
+    "shared_profile_unchanged": true,
+    "shipped_game_compared": false,
+    "status": "native_original_method_differentials_pass",
+    "training_allowed": false,
+    "wall_seconds": 19.045981333008967
+  },
+  "mode_review_v2": {
+    "config_id": "sha256:8e88f5815f456689c640d3c75fc92a4c4e526f4354126961867ff6a83450a470",
+    "report_id": "sha256:65dcd369e8da2d6105472e5cb8aca54144aa55733cb304e9c1cd852aae86468f",
+    "inventories": {
+      "game": {
+        "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+        "decoded_instructions": 1457929,
+        "inventory_id": "sha256:d50c8cc78f19c521c072f6fcac32140dc1017a7cdd8faf283f87837535d6dc76",
+        "method_bodies": 50816,
+        "methods": 51602,
+        "module_mvid": "57785517-0b16-42b9-8b36-bad6fb28384b",
+        "references": 434,
+        "undecoded_bodies": 0
+      },
+      "wrapper": {
+        "assembly_sha256": "0c6ede84e6769c5d277a6f922ac84fa95b2e16e301bc376800de62596ba36712",
+        "decoded_instructions": 20165,
+        "inventory_id": "sha256:a9b466a7e56a608603a17d34212a7bfc9db3e3050337f645e4d1f101a668c4b9",
+        "method_bodies": 435,
+        "methods": 435,
+        "module_mvid": "4b632d1a-8860-4aff-a476-af1188be9875",
+        "references": 3,
+        "undecoded_bodies": 0
+      }
+    },
+    "assessment": {
+      "classifications": {
+        "choice_or_lifecycle_seam": 5,
+        "mode_definition": 10,
+        "presentation_or_diagnostics": 4,
+        "profile_dependent_rules": 2,
+        "rules_rng_divergence": 3
+      },
+      "findings": [
+        {
+          "classification": "rules_rng_divergence",
+          "method": "MegaCrit.Sts2.Core.Models.Relics.CallingBell.GenerateRewards",
+          "rationale": "The original native TestMode branch uses preset relics. V11 now restores the normal branch with exact IL guards; eight generation/population cases compare original-normal, legacy-test and repaired-test rewards and complete RNG/pool state. Shared stubs/initialization do not prove shipped pickup, curse or nested reward parity."
+        },
+        {
+          "classification": "rules_rng_divergence",
+          "method": "MegaCrit.Sts2.Core.Models.Relics.Cauldron.GenerateRewards",
+          "rationale": "The original native TestMode branch uses preset potions. V11 restores normal generated rewards with exact IL guards; generation/population and full RNG/pool state match the original-normal reference in the bounded native panel. Shipped pickup, capacity, skip/cancel and nested hooks remain unqualified."
+        },
+        {
+          "classification": "profile_dependent_rules",
+          "method": "MegaCrit.Sts2.Core.Models.ActModel.GetRandomList",
+          "rationale": "The normal undiscovered alternative-act preference is skipped in test mode. A fully unlocked content policy does not specify discovered acts. Freeze the progress/discovery contract and compare initial act choices and RNG advancement."
+        },
+        {
+          "classification": "choice_or_lifecycle_seam",
+          "method": "MegaCrit.Sts2.Core.Commands.CardSelectCmd.FromChooseABundleScreen",
+          "rationale": "The original native TestMode branch selects the first bundle. The existing v10/v11 LocPatches.BundleScreenPrefix already presents pending bundles when the simulator binding exists; do not infer unconditional first-bundle play. Installation catches errors as warnings, missing simulator binding falls back to bundle zero, and DoSelectBundle falls back on an invalid index. Verify actual installation, legal nonfirst choices, invalid/stale rejection, cleanup and synchronization before qualification."
+        },
+        {
+          "classification": "choice_or_lifecycle_seam",
+          "method": "MegaCrit.Sts2.Core.Commands.CardSelectCmd.Reset",
+          "rationale": "Native selector-stack cleanup is conditional on test mode being off. Interrupted selections and repeated resets need a bound clean-state test; wrapper scope disposal alone is not proof that all native stacks reset."
+        },
+        {
+          "classification": "choice_or_lifecycle_seam",
+          "method": "MegaCrit.Sts2.Core.Rewards.RewardsSet.Offer",
+          "rationale": "Test mode uses a test selector or selects rewards automatically. The v10 wrapper installs its reward selector in both start and load paths. This is a declared control seam that needs multi-reward, capacity and cancellation coverage rather than assuming the branch harmless."
+        },
+        {
+          "classification": "choice_or_lifecycle_seam",
+          "method": "MegaCrit.Sts2.Core.Models.Powers.RollingBoulderPower.AfterPlayerTurnStart",
+          "rationale": "Test mode applies damage to the enemy list directly; the normal path schedules damage per visual-hit callback. Death and on-damage ordering need a differential with multiple enemies; batching cannot be declared presentation-only."
+        },
+        {
+          "classification": "choice_or_lifecycle_seam",
+          "method": "MegaCrit.Sts2.Core.Entities.RestSite.RestSiteOption.Generate",
+          "rationale": "A non-null test generator replaces native rest-option generation. Assert it remains unset in production collection and across resets. Existing finite rest fixtures do not establish all hook/option coverage."
+        },
+        {
+          "classification": "profile_dependent_rules",
+          "method": "MegaCrit.Sts2.Core.Runs.RunRngSet.GetMockInstance",
+          "rationale": "Test mode allows a fallback mock RNG when no run is attached. Ensure gameplay models use the active run and player RNGs; model-preview use is separate from seeded gameplay. No fallback reachability claim follows static reading."
+        },
+        {
+          "classification": "rules_rng_divergence",
+          "method": "MegaCrit.Sts2.Core.Entities.Merchant.MerchantPotionEntry.CalcCost",
+          "rationale": "Original test-mode branch skips price RNG. The current v9/v10 wrapper restores this exact branch and the eight-case v2 shop panel verifies scoped price/effect agreement. This is a known scoped mitigation, not a new unfixed price regression."
+        }
+      ],
+      "mechanics_qualified": false,
+      "method_groups": 383,
+      "references": 434,
+      "reviewed_method_groups": 24,
+      "reviewed_references": 25,
+      "semantic_review_complete": false,
+      "training_allowed": false,
+      "unreviewed_references": 409
+    },
+    "wall_seconds": 1.5954400000046007
+  },
+  "native_regressions": [
+    {
+      "panel": "combat",
+      "report_id": "sha256:ea7345f06bfa88f752c1c9359eb94ab9ba993ed5c9c54c596de8568735e20aff",
+      "status": "combat_public_projection_regression_pass",
+      "subchecks": 370,
+      "native_fixture_starts": 12,
+      "wall_seconds": 3.12062474997947
+    },
+    {
+      "panel": "rest",
+      "report_id": "sha256:6bd9c8f50a4cd8a42d4f0292de771efa8cc108824523ea574ec820911081e055",
+      "status": "rest_public_projection_regression_pass",
+      "subchecks": 270,
+      "native_fixture_starts": 9,
+      "wall_seconds": 2.7809476659749635
+    },
+    {
+      "panel": "shop",
+      "report_id": "sha256:f0b40fa47c6e1c660cc73a4e8a4d3ec079e3ee6dce98b1e65389caeccb33a4c9",
+      "status": "shop_public_projection_regression_pass",
+      "subchecks": 201,
+      "native_fixture_starts": 7,
+      "wall_seconds": 3.1578750000335276
+    }
+  ],
+  "validation": {
+    "repository_tests_passed": 1102,
+    "repository_test_seconds": 46.96,
+    "format_lint_strict_types_and_CSharp_protocol_pass": true,
+    "reward_checker_build_errors": 0,
+    "reward_checker_build_warnings": 0,
+    "required_check_log": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/reward-rng-v11-full-check-retry2.log"
+  },
+  "limits": [
+    "Generation/population only; no AfterObtained, curse addition, reward claim, capacity, skip/cancel or nested pickup hooks tested.",
+    "The reference shares native initialization, Godot stubs and population behavior with the candidate; this is not a shipped-game UI differential.",
+    "24 original game method groups / 25 references reviewed; 409 references still unreviewed. Reflection, other aliases and stub behavior remain outside the static scanner.",
+    "Previous shipped rest/shop panels retain their frozen v10/Host scope, not automatic v11 parity."
+  ],
+  "next_work": [
+    "Qualify full Calling Bell/Cauldron pickup and reward choices against the shipped game.",
+    "Make existing bundle choice interception fail explicitly; reject invalid and stale operands; compare nonfirst choice and reset behavior.",
+    "Freeze content/discovery profile contract and continue remaining mode/mechanics reviews."
+  ],
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "mechanics_qualified": false,
+  "raw_proprietary_material_committed": false,
+  "claim_scope": "native_candidate_reward_generation_repair_and_scoped_original_method_comparison_not_full_game_fidelity_or_player_strength",
+  "evidence_id": "sha256:1f443a2d096a670b1617fc53410955f9a0843f3dc895642bde814ad629e9c0cb"
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "engine-connector-build-config-v1",
+  "stage": "local_host_build_only_no_games",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "source_url": "https://github.com/rsgcsg/STS2-Connector.git",
+  "source_revision": "e0651024117d22bdeb95142766917103d87c0185",
+  "source_cache": "artifacts/engine-sources/connector-v1.1.0-rc.1",
+  "base_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "base_connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "patch": "patches/engine/sts2-connector-v0.111.0-combat-shuffle-tutorial-v4.patch",
+  "patch_sha256": "e507fb13bb854471bfbf16a0d4f33a9626ef675de7da39b7d7140ebb0a306ca5",
+  "sdk_version": "10.0.401",
+  "commit_date": "2026-10-12T23:30:00Z",
+  "commit_message": "Expose the exact fresh combat reshuffle tutorial confirmation",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-combat-tutorial-build-v8",
+  "output_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-combat-tutorial-build-v8.json",
+  "output_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-combat-tutorial-v8.json",
+  "max_wall_seconds": 180,
+  "training_allowed": false
+}

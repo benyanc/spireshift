@@ -1,0 +1,23 @@
+{
+  "anchors": {
+    "path": "artifacts/native-normalization/sts2-v0.111.0-a8-input-checks-v1/probe-states.json",
+    "sha256": "ea28939bf597708bd62d0824f67694af300a52ae3bd1e6375d9d0b1820764928"
+  },
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "implementation_sha256": {
+    "engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "native_context_game.py": "327075c2d4073994fecd4cd003e2b03223330b86b71a65d5e14e3a7ad2d37326"
+  },
+  "maximum_states": 278,
+  "schema_version": "native-action-context-probe-config-v1",
+  "source_report": {
+    "id": "sha256:a10c142b97d527203ee274b6eb3e03fdfddb6fc44b0f22b5a9bb5f65c41e41bb",
+    "path": "artifacts/native-normalization/sts2-v0.111.0-a8-input-checks-v1/report.json"
+  },
+  "study_config": {
+    "id": "sha256:baa19e78a7ff43661da7775121fd4f29cf1443c7b18e9cd51142d5ca27af2374",
+    "path": "configs/native-controls/action-context-v1.json"
+  },
+  "workspace": "artifacts/synthetic-learning/native-action-context-game-probe-v1"
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": "native-mechanics-followups-implementation-evidence-v1",
+  "date": "2026-10-15",
+  "game_version": "v0.111.0",
+  "game_commit": "41cef1ea",
+  "character": "Ironclad",
+  "ascension": 8,
+  "host_version": "v32",
+  "followup_config": "configs/engine-qualification/sts2-v0.111.0-mechanics-followups-v1.json",
+  "followup_config_id": "sha256:6fc31d590284b786e670611e4457e163089bd0b7bf38dcd05ab2ee1a7cdf9977",
+  "sequence_config": "configs/engine-qualification/sts2-v0.111.0-native-legal-sequences-v2.json",
+  "protected_sweep_config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v7.json",
+  "protected_sweep_config_id": "sha256:81baffb50e6132134eed45c0d776a0b39848fdb6fd87994a1380732ad68b44bf",
+  "protected_python_and_helpers_unchanged": true,
+  "owner_reports_sweep_running": true,
+  "sweep_success_assumed": false,
+  "long_job_started_or_monitored_by_codex": false,
+  "planned_sequence_cases": 9,
+  "planned_independent_game_seeds": 4,
+  "planned_action_rng_seeds": 2,
+  "planned_exact_repeat_controls": 1,
+  "maximum_decisions_per_sequence": 256,
+  "lifecycle_build_report_id": "sha256:f4706519db08ff3649994d6ad73d0ce9a81b8d43c1e61ba44c42206194cab350",
+  "native_sequence_panel_executed": false,
+  "native_lifecycle_panel_executed": false,
+  "blocked_prelaunch_reports": [
+    {
+      "kind": "sequence",
+      "report_id": "sha256:78cc24ad3a7931482ecc2bdf3d311ae910b336aaf2d46af10d124f407806b834",
+      "cause": "active_game_guard",
+      "games_launched": 0
+    },
+    {
+      "kind": "lifecycle",
+      "report_id": "sha256:971fe788e07ed57cac6a8ab8518de25fd100ec3b865a858892b1142b53f79dba",
+      "cause": "active_game_guard",
+      "games_launched": 0
+    }
+  ],
+  "validation": {
+    "focused_offline_tests": 28,
+    "repository_tests": 1367,
+    "types_formatting_and_csharp_protocol": "pass",
+    "recipe_preflight": "pass_without_launching_or_inspecting_running_sweep"
+  },
+  "not_resolved": [
+    "out_of_combat_potion_use",
+    "non_creature_potion_target"
+  ],
+  "full_run_attempts": 0,
+  "game_apps_created": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "checkpoint_promoted": false,
+  "model_quality_improved": false,
+  "claim_scope": "implementation_and_offline_checks_only_live_native_validation_pending",
+  "evidence_id": "sha256:05e5b7bb26ed76310b9aac8d160adee163059d51f92349bece5b2d45f6cdf97e"
+}

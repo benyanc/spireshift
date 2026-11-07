@@ -1,0 +1,41 @@
+{
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "completed_chunks": 8,
+  "control_cpu_seconds": 48.207054456,
+  "control_games": 8,
+  "control_report": {
+    "id": "sha256:0d811e1aa626aed9286dd5fd090aa365fbfe96666087fbd42284dbb5fc9ad7ac",
+    "path": "artifacts/native-context/sts2-v0.111.0-a8-context-chunks-control-v2/report.json"
+  },
+  "control_resource_ids": [
+    "sha256:a9ea0274747420a5d667e80b22ca5b0bfb71175c4f30123b687ad6624035ba3f",
+    "sha256:92553be40c0bff83f399b4376e88a4e6fc815580fa73a38125b0c9434917d21b",
+    "sha256:b71cce58ab561f5de999d71565655538ca4b17e85952d22651fb170eb4e92774"
+  ],
+  "control_wall_seconds": 63.03542400000151,
+  "game_apps_created": 0,
+  "legacy_import": {
+    "id": "sha256:fc45221cb45f22e4ca5a1e3866c8ced2d91e437520902f870ad04ac3c32298c9",
+    "path": "artifacts/native-context/restart-v2-checks/legacy-import.json"
+  },
+  "long_comparison_launched": false,
+  "optimizer_steps": 12,
+  "pause_after_committed_chunks": [
+    3,
+    6
+  ],
+  "peak_resident_memory_bytes": 697303040,
+  "profiling": {
+    "id": "sha256:cb18c379421e57f846821d0773f10df77c2344349611366bb2470d46b8971d2b",
+    "path": "artifacts/native-context/restart-v2-checks/profile.json"
+  },
+  "repeat_completed_session_new_games": 0,
+  "repeat_completed_session_new_optimizer_steps": 0,
+  "report_id": "sha256:325de564b06085e8be92529fe5fd8feb75fb47d9ec293a6c4459e6f3a3736288",
+  "schema_version": "native-context-restart-evidence-v2",
+  "sources": {
+    "configs/native-controls/action-context-chunks-comparison-v2.json": "999d654ea882326c510283187391cff87d964cec7f74bf4fbe7f70b77506115a",
+    "configs/native-controls/action-context-chunks-control-v2.json": "97c164a67c346a8a4fd8dfd018c4bbf3343bdb7bbd50cd863be4b2bc1fe31524"
+  }
+}

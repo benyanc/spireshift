@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-enchantment-preview-canary-v1.json",
+    "sha256": "c87e580d7a1da28ae4e44847bf7aadb7d3ddb39a07b34a7e37070b69d87e05ed"
+  },
+  "wall_seconds": 1800,
+  "cpu_seconds": 3600,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "patch-manifest-v1",
+  "manifest_id": "sha256:46dfcf7480d7eebda430f067a8257a5f400f62eab64443ab6ef6d9952c9db255",
+  "admission_status": "pending_conformance",
+  "patch": {
+    "patch_id": "sts2-v0.107.1-59260271",
+    "game_version": "v0.107.1",
+    "game_commit": "59260271",
+    "branch": "v0.107.1",
+    "release_date": "2026-06-18T15:43:56-07:00",
+    "steam_build_id": "23811903"
+  },
+  "engine": {
+    "component_id": "evangambit-sts2-nativeaot",
+    "version": "sts2-v0.107.1",
+    "revision": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd",
+    "source": "https://github.com/evangambit/sts2",
+    "digest": {
+      "algorithm": "git-commit-sha1",
+      "value": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd"
+    }
+  },
+  "adapter": {
+    "component_id": "spireshift-evangambit-public-choices-adapter",
+    "version": "2",
+    "revision": "57b65e1e9dbca056e22ecaa38fab3f73eac86038c9fd9147865d9d9192bd384a",
+    "source": "https://github.com/benyanc/spireshift/blob/main/src/spireshift/adapters/evangambit_public_choices.py",
+    "digest": {
+      "algorithm": "sha256",
+      "value": "57b65e1e9dbca056e22ecaa38fab3f73eac86038c9fd9147865d9d9192bd384a"
+    }
+  },
+  "mechanics": [
+    {
+      "artifact_id": "sts2-v0.107.1-macos-arm64-assembly",
+      "kind": "authoritative-game-assembly",
+      "version": "v0.107.1/59260271",
+      "platform": "macos",
+      "architecture": "arm64",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18"
+      },
+      "size_bytes": 9363456
+    },
+    {
+      "artifact_id": "evangambit-sts2-v0.107.1-rules",
+      "kind": "simulator-rule-source",
+      "version": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd",
+      "platform": null,
+      "architecture": null,
+      "digest": {
+        "algorithm": "git-commit-sha1",
+        "value": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd"
+      },
+      "size_bytes": null
+    },
+    {
+      "artifact_id": "evangambit-sts2-nativeaot-macos-arm64-37e4264",
+      "kind": "compiled-simulator-library",
+      "version": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd",
+      "platform": "macos",
+      "architecture": "arm64",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "3cfcd92924135fdb5fa0d27c7667ef94aec5458a1d66a623ac32becdcaabcc92"
+      },
+      "size_bytes": 5203840
+    }
+  ],
+  "interface": {
+    "observation_schema": "observation-v1",
+    "action_schema": "action-v1",
+    "information_policy_id": "public-state-v1"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "engine-rest-bridges-config-v1",
+  "stage": "owner_privileged_rest_fixture_differentials_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "template": "configs/engine-qualification/sts2-v0.111.0-rest-bridge-template-v1.json",
+  "template_id": "sha256:b0d346be1b5ab2c13d16dab68462fa1ccb2656fa2fb77f717ddb1bc5e2d6f22e",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridges-v1",
+  "max_wall_seconds": 900,
+  "training_allowed": false,
+  "cases": [
+    {
+      "case_id": "seed-03-heal-repeat-01",
+      "seed": "SPIRESHIFTRESTBRIDGE003",
+      "scenario": "tent-heal-cancel-smith"
+    },
+    {
+      "case_id": "seed-03-smith-repeat-01",
+      "seed": "SPIRESHIFTRESTBRIDGE003",
+      "scenario": "tent-smith-cancel-heal"
+    },
+    {
+      "case_id": "seed-06-heal-repeat-01",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-heal-cancel-smith"
+    },
+    {
+      "case_id": "seed-06-smith-repeat-01",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-smith-cancel-heal"
+    },
+    {
+      "case_id": "seed-03-heal-repeat-02",
+      "seed": "SPIRESHIFTRESTBRIDGE003",
+      "scenario": "tent-heal-cancel-smith"
+    },
+    {
+      "case_id": "seed-03-smith-repeat-02",
+      "seed": "SPIRESHIFTRESTBRIDGE003",
+      "scenario": "tent-smith-cancel-heal"
+    },
+    {
+      "case_id": "seed-06-heal-repeat-02",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-heal-cancel-smith"
+    },
+    {
+      "case_id": "seed-06-smith-repeat-02",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-smith-cancel-heal"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "trajectory-mutation-preference-verification-v1",
+  "preference_set_id": "sha256:24a7356ac133d897cb974470c265449327e5d4c38939f0d19b2f9576b838d2a1",
+  "valid": true,
+  "verified_lineage_trajectories": 8,
+  "verified_mutations": 7,
+  "errors": [],
+  "verification_id": "sha256:e82541260660c10a2dcb28a181dcb65cf4bf6df85837e04738da741c9214826c"
+}

@@ -1,0 +1,97 @@
+{
+  "assessed_at_utc": "2026-10-12T02:54:35Z",
+  "claim_scope": "zero_case_space_failure_preserved_and_fresh_retry_preflight_only",
+  "evidence_id": "sha256:98979d7129c5292bb9aa18f6871a69e58846ff7ff8221fb137ec8fc23de2acd4",
+  "fresh_retry": {
+    "batch_started": false,
+    "cases_attempted": 0,
+    "config": "configs/engine-qualification/sts2-v0.111.0-bundle-bridges-v2.json",
+    "config_id": "sha256:b7a0f82b70bdba926074db9f4d151d4fc55c5d9527ffc9e794b19ea08821f40a",
+    "expected_minutes": [
+      6,
+      8
+    ],
+    "owner_command": "bash scripts/compare-bundle-actions-v2.sh",
+    "same_seeds_packs_and_repeats_as_v1": true,
+    "template": "configs/engine-qualification/sts2-v0.111.0-bundle-bridge-template-v12-v5.json",
+    "template_id": "sha256:3d707dd69aee573805a5d17ba75a580dbe722b3f51f04fef5df22e6115d2d75e",
+    "wall_cap_seconds": 900,
+    "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/bundle-bridges-v2"
+  },
+  "full_run_attempts": 0,
+  "games_launched_by_this_package": 0,
+  "implementation": {
+    "blockers_checked_before_batch_and_resource_results": true,
+    "direct_runner_rechecks_preflight": true,
+    "first_difference_stops_remaining_cases": true,
+    "prior_results_never_overwritten": true,
+    "source_sha256": {
+      "scripts/compare-bundle-actions-v2.sh": "326439b98c07c926f08d0f47d64ee1dcde704c08fef425163fab024d1a5f62b3",
+      "src/spireshift/engine_bundle_bridge.py": "066660b963f163cc79ef8ce6c3069df9024d27daae92f8a8ff65e9ba5320cb7c",
+      "src/spireshift/engine_qualification_cli.py": "4f2fe71b784a62c86719a47e86288733d0944f6bf275178434615467e8249e24"
+    },
+    "space_checked_before_each_case": true
+  },
+  "limits": [
+    "Launch prerequisites alone do not verify game behavior or player strength.",
+    "The fresh repeated bundle UI panel still requires its owner-run eight comparisons and saved audit.",
+    "Full reward pickup/choices, discovery/profile state, remaining mechanics/public facts and actual endings precede full-run speed and neural integration."
+  ],
+  "mechanics_qualified": false,
+  "optimizer_steps": 0,
+  "preflight": {
+    "claim_scope": "read_only_bundle_batch_launch_prerequisites_only",
+    "config_id": "sha256:b7a0f82b70bdba926074db9f4d151d4fc55c5d9527ffc9e794b19ea08821f40a",
+    "free_disk_bytes": 72401416192,
+    "games_launched": 0,
+    "independent_seeds": 2,
+    "minimum_free_disk_bytes": 3500000000,
+    "optimizer_steps": 0,
+    "planned_cases": 8,
+    "prerequisites": {
+      "archive_verification_id": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+      "bootstrap_report_id": "sha256:fb0c446d837855c5ea1257eca18a71fa3aa01cc72e716516fc1a9a566918daec",
+      "candidate_inventory_verified": true,
+      "connector_config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3",
+      "connector_toolchain_report_id": "sha256:da45bd30c2964240c0aa5806969878f3fe20c32232cdbe44dc32c20db06e6e89",
+      "localization_verified": true,
+      "managed_runtime_inventory_id": "sha256:31ba28406ab7b3fc44d963ac7abf2903afe80fa68cc2be419249dc8c3a7e19b0",
+      "native_build_report_id": "sha256:dc26bf6a521ae0afa82f99e0c31c209254d8cebfa2e23802d9e30b4bb4284b69",
+      "native_config_id": "sha256:0600d5ad3881ddbbc0453b115b620d5fd6586423a6a44d11570d37288edd86aa",
+      "sdk_inventory_id": "sha256:34d054042a5a9acc43491a23e7cb5a4f8b813aa031a4590a6c1ee2b7979f7978"
+    },
+    "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+    "report_id": "sha256:fc455eeb84e07b6e00fbb4d4092f9cc30f142f0f9d351a41f88089fea810ded0",
+    "schema_version": "engine-bundle-preflight-v1",
+    "status": "bundle_preflight_pass",
+    "training_allowed": false,
+    "wall_seconds": 1.9968952909694053,
+    "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/bundle-bridges-v2",
+    "workspace_created": false
+  },
+  "preserved_failure": {
+    "batch_report_id": "sha256:ae2d38cc6634cc0d05dd5ef0aba3277eaa482a9d4c0eb3a07c90388e634f9803",
+    "completed_cases": 0,
+    "error": "Allow 3.5 GB free before the next disposable game copy",
+    "failed_cases": 0,
+    "game_mechanics_mismatch_observed": false,
+    "not_attempted_cases": 8,
+    "planned_cases": 8,
+    "resource_report_id": "sha256:52036b5ea988d3277276481f7d8a5a77c1b6757a6fa22b925815360d0b0717f5",
+    "resource_wall_seconds": 0.19718537502922118,
+    "status": "bundle_comparisons_incomplete"
+  },
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "schema_version": "actual-engine-bundle-retry-evidence-v1",
+  "training_allowed": false,
+  "validation": {
+    "command": "uv run spireshift check",
+    "csharp_protocol_contract_passed": true,
+    "format_lint_types_passed": true,
+    "new_launch_blocker_and_denominator_tests": 9,
+    "owner_script_syntax_passed": true,
+    "pytest_wall_seconds": 46.27,
+    "repository_tests_passed": 1125,
+    "strict_types_source_files": 207
+  }
+}

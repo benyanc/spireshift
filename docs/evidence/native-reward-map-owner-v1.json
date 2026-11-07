@@ -1,0 +1,134 @@
+{
+  "schema_version": "native-reward-map-owner-repair-evidence-v1",
+  "status": "source_repair_and_short_checks_pass_owner_panel_unstarted",
+  "parent_panel_status": "targeted_panel_completed_with_mismatches",
+  "positive_controls_matching_choices_per_host": {
+    "reward_glyphs": 57,
+    "status_titles": 77,
+    "modified_deck": 118
+  },
+  "positive_controls_verified_decisions": 504,
+  "blocked_case_matching_prefix": 47,
+  "blocked_native_completed_choices": 112,
+  "blocked_official_inputs_and_submissions": 56,
+  "blocked_official_completed_acknowledgements": 55,
+  "first_difference": "discarding a potion after reward Continue reopens the native background Gold reward; official stays on map",
+  "source_correction": "exact background reward owner tracking and current-owner rejection; no reward mutation",
+  "source_revision": "v54",
+  "prior_unqualified_build_v53_preserved": true,
+  "independent_reproductions": 2,
+  "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "executable_owner_contract_controls": 8,
+  "native_fixture_cases": 4,
+  "native_fixture_wall_seconds": 10.03416020818986,
+  "native_old_and_repaired_discard_and_AnyTime_effects_verified": true,
+  "new_coordinator_contract_tests": 6,
+  "saved_banks": [
+    {
+      "frames": 5889,
+      "artificial_envelopes": 20,
+      "frozen_policy_probes": 11782,
+      "wall_seconds": 138.76371404202655,
+      "report_id": "sha256:a71a396fc2a4281c1db675109fe80ad3ab500e2772d5afaa1a2dc73a3a2460e3"
+    },
+    {
+      "frames": 676,
+      "artificial_envelopes": 20,
+      "frozen_policy_probes": 1390,
+      "wall_seconds": 26.496943083126098,
+      "report_id": "sha256:427c73fd3c39f9575406f52fc488eb28ac4c965d94e049baa3ad5b333a084875"
+    }
+  ],
+  "total_saved_frames": 6565,
+  "total_frozen_policy_probes": 13172,
+  "protected_prior_files_unchanged": 16903,
+  "original_full_weights_and_Adam_exact": {
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8"
+  },
+  "later_official_enemy_phase_stall": {
+    "completed_acknowledged_choices": 55,
+    "last_submitted_action_has_no_ready_successor": true,
+    "matched_state_cause_established": false,
+    "policy_inputs_and_submissions": 56,
+    "readiness": "settling",
+    "round": 2,
+    "side": "enemy"
+  },
+  "later_stall_cause_resolved": false,
+  "new_official_game_starts_by_repair": 0,
+  "full_run_attempts": 0,
+  "optimizer_updates": 0,
+  "game_apps_created": 0,
+  "training_allowed": false,
+  "checkpoint_promoted": false,
+  "broader_live_qualification_granted": false,
+  "new_panel_unstarted": true,
+  "next_owner_command": "bash scripts/compare-selection-flows-v15.sh",
+  "next_panel_estimated_minutes": [
+    15,
+    25
+  ],
+  "next_panel_regressions": 3,
+  "next_panel_fresh_selector_seed": "SP1RESH1FTFL0W416",
+  "stopped_seed415_never_replayed": true,
+  "prior_scripted_p3_world412_not_replayed": true,
+  "references": {
+    "completed_panel": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-coordination-v2/report.json",
+      "sha256": "7fbea4657d4d4e909486d4af209a538a480a0faa16a468155304c6c6a8df5ef9",
+      "report_id": "sha256:7272120167db061ac28361863dd45e7c2fa362d420dcc46b03ce8f3bc160d43c"
+    },
+    "saved_assessment": {
+      "path": "artifacts/native-reward-map/saved-assessment-v1/report.json",
+      "sha256": "0c4893fc28819ec6318ab62028659dde54d24da879a535d021d6eadbdf6f8965",
+      "report_id": "sha256:9da082c1f608dcb1e2fce37a8c04ddd57e15821325d57eba280d53259249193d"
+    },
+    "native_fixture": {
+      "path": "artifacts/native-reward-map/native-fixtures-v1/report.json",
+      "sha256": "b602c23ac2c61169eb07e189e64fb3870f90fa83568a9077d6e6159477eab390",
+      "report_id": "sha256:e380c7ee2802a81d1f81f82fde3d4994c71e6251d15f8d64535e319bbe69ea91"
+    },
+    "native_build54": {
+      "path": "artifacts/native-reward-map/native-build-v54/report.json",
+      "sha256": "83e39ff762bd53983b19e0bdf6f374745608d021c5e44a576d4e49585f6f700d",
+      "report_id": "sha256:3542a9e5f11c2f5e4d7d2a99235df02e0cb05751a4c64ffd9d02720f3147b1b0"
+    },
+    "build_config54": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-reward-map-owner-build-v54.json",
+      "sha256": "6c1feacb33618ba3ddb38fd6e20b257658473368e30e0bfad703c456894b6546"
+    },
+    "old_unqualified_build53": {
+      "path": "artifacts/native-reward-map/native-build-v53/candidate-build.json",
+      "sha256": "0d59bdf2bb1fe4570bb5ffbcaeff50635bb7357a11f962987003ebb123577f07"
+    },
+    "original_bank": {
+      "path": "artifacts/native-selection-flows/reward-map-offline-v1/report.json",
+      "sha256": "631ce4a4a922de34f9a986a1b9226c8905c1bc74dbec622fca4b20fdabd21c76",
+      "report_id": "sha256:a71a396fc2a4281c1db675109fe80ad3ab500e2772d5afaa1a2dc73a3a2460e3"
+    },
+    "new_records": {
+      "path": "artifacts/native-selection-flows/reward-map-current-records-v1/report.json",
+      "sha256": "acaea1a2a23cfdcc89c95a060b50cfc3bd7f8f1d920aa973fc4861e6f61e80d8",
+      "report_id": "sha256:427c73fd3c39f9575406f52fc488eb28ac4c965d94e049baa3ad5b333a084875"
+    },
+    "new_panel": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-panel-v1.json",
+      "sha256": "2e048f8520a0b66b0ff1a6825bc125284dff7a2daf9dfa1797e57fa649c5a949"
+    },
+    "preflight": {
+      "path": "artifacts/native-reward-map/development-v1/panel-preflight-v1.log",
+      "sha256": "8b585879e7077f9c284e62f7836b62d899e578a060c8df2399a1349ee62e33f7"
+    },
+    "original_parent_marker": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/active.json",
+      "sha256": "ff7c0a84d8b93b4f8846fad1da921e8a5a070be8d1a22bb76c650a1d56e4380d"
+    },
+    "completed_parent_marker": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-coordination-v2/complete.json",
+      "sha256": "15af6525982aea44750eea690e401aae25cbc1dd0bcf7ddb14ec425e00ad0392"
+    }
+  },
+  "repository_checks": "Final exact-file receipt is recorded in artifacts/native-reward-map/final-handoff-v1.json after all repository sources are frozen.",
+  "report_id": "sha256:082259a9bebeea2c0b7a91beaff3f48e46425ef4e2e0699426212dcb4aeb8b00"
+}

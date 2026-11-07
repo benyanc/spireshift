@@ -1,0 +1,116 @@
+{
+  "all_original_weights_and_Adam_exact": true,
+  "assessment": {
+    "path": "artifacts/native-e2e-qualification/owner-assessment-v1/report.json",
+    "sha256": "1a58d7d2fac917005e80dc191a4436e9513c885ba210d65d73224570c89c6917"
+  },
+  "assessment_id": "sha256:526e47cbba868db1e50e5cf0f491b7a1f34e7527d17d4e590a19b621b5320244",
+  "assessment_resources": {
+    "path": "artifacts/native-e2e-qualification/owner-assessment-v1/resources.json",
+    "sha256": "c8913fbf983371a9bdce4efa0a982adc48a25d3de8a343016e4c4124849565c5"
+  },
+  "assessment_wall_seconds": 35.277535083005205,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "case_results": [
+    {
+      "clean_reset": true,
+      "first_difference_zero_based": 122,
+      "key": "player-2-natural-601",
+      "native_choices": 262,
+      "native_ending": "explicit_loss",
+      "official_acknowledged_choices": 235,
+      "official_ending": null,
+      "official_stop": "128_gameplay_CPU_second_guard"
+    },
+    {
+      "clean_reset": true,
+      "first_difference_zero_based": 44,
+      "key": "player-3-natural-602",
+      "native_choices": 125,
+      "native_ending": "explicit_loss",
+      "official_acknowledged_choices": 125,
+      "official_ending": "explicit_loss",
+      "official_stop": "summary_verifier_wrong_field"
+    }
+  ],
+  "checkpoint_promoted": false,
+  "chest_repair_required": true,
+  "chest_skip_permission_changes_actual_player2_choice": true,
+  "collector_syntax_pass": true,
+  "environment_id": "sha256:6758241eac863b1308148f82ecc3a0f9064f42d58505d143bd4a081f4b6869c2",
+  "first_difference_family": "treasure_chest_lifecycle_actions_and_public_fields",
+  "frozen_game_and_working_app_exact": true,
+  "full_game_playing_strength_evaluated": false,
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "genuine_matching_ending_pairs": 0,
+  "historical_complete_summary_read_proof_retained": false,
+  "historical_launcher_must_not_be_rerun": "scripts/compare-e2e-endings-v1.sh",
+  "historical_result_relabelled": false,
+  "independently_verified_acknowledged_deliveries": 747,
+  "native_deliveries": 387,
+  "native_treasure_Skip_delay_seconds": 2.5,
+  "new_games": 0,
+  "next_action": "qualify_chest_lifecycle_details_and_Skip_readiness_then_bind_new_summary_collection",
+  "next_owner_command": null,
+  "node_new_regressions": 16,
+  "node_old_and_new_tests": 30,
+  "node_test_resources": {
+    "path": "artifacts/native-e2e-qualification/summary-repair-v2/node-tests-resources.json",
+    "sha256": "ddc37b0031702863eab43fb527948362519a5a19a90936976f23269d2cc138de"
+  },
+  "official_diagnostic_deliveries": 360,
+  "official_summary_snapshot_observed": {
+    "ascension": 8,
+    "floor_reached": 8,
+    "result": "loss",
+    "score": 144
+  },
+  "optimizer_updates": 0,
+  "original_128_gameplay_CPU_second_budget_unchanged": true,
+  "owner_outer_resource_cap_hit": false,
+  "owner_resources": {
+    "path": "artifacts/resources/e2e-endings-v1-attempt-1.json",
+    "sha256": "ac1815e9a303154b34f7682d018d075ef3366700f11adf5fe90277d9b966b668"
+  },
+  "owner_wall_seconds": 718.7711753749754,
+  "panel": {
+    "path": "artifacts/native-e2e-qualification/natural-ending-panel-v1/report.json",
+    "sha256": "1aea7a491305bb8cdf6a729a30886278b1e68a5f9342c1b52a57d2259dcf4799"
+  },
+  "panel_id": "sha256:bcffe72e1c42e5a8a412ac90d9063760055f373e15330b58bbb0b7a2d7154a4b",
+  "prepared_summary_repairs": [
+    {
+      "path": "scripts/engine-natural-summary-v2.mjs",
+      "sha256": "7abdd99dc4cd7a3361c765e47718d5f3714d3505c067d3e9898177ef9ae7401c"
+    },
+    {
+      "path": "scripts/engine-natural-checkpoint-v2.mjs",
+      "sha256": "4b58900127d79d3b1278fbe871568f0cea76d4473448978378b39ab835d0745c"
+    },
+    {
+      "path": "scripts/engine-natural-summary-v2.test.mjs",
+      "sha256": "19b480dce50a7541dff9548c81c80391e4091f5585c5d3e35f8bbd66056c1fb1"
+    }
+  ],
+  "prepared_summary_repairs_bound_into_new_owner_recipe": false,
+  "prepared_summary_repairs_live_qualified": false,
+  "protected_prior_files_exact": 19737,
+  "python_existing_guards": 10,
+  "python_test_resources": {
+    "path": "artifacts/native-e2e-qualification/summary-repair-v2/python-tests-resources.json",
+    "sha256": "fffd413ca8b0989d952b0acf0e11195016f667aca6b3e3c4916ff610b84448b8"
+  },
+  "recovery_manifest": {
+    "path": "artifacts/native-e2e-qualification/owner-assessment-v1/recovery-manifest.json",
+    "sha256": "e3d6dcf953377405645553443278cb7b5c34e58be65f53d05c84a93accfd7b09"
+  },
+  "report_id": "sha256:0e94b4f9fc69f4b68c90bb543231970cdd1ea1ab193104a054f40b9797c3a594",
+  "schema_version": "native-natural-ending-owner-result-evidence-v1",
+  "status": "owner_panel_blocked_saved_assessment_complete",
+  "summary_historical_incorrect_field": "total_floor",
+  "summary_native_field": "floor_reached",
+  "training_allowed": false,
+  "workflow_qualification_candidate": false
+}

@@ -1,0 +1,56 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:896c58b4c42538c1af7f136c24b8d8a1f336098eb3ef10632dbfce4a1503a410",
+  "purpose": "short_shop_routing_full_Adam_control",
+  "schema_version": "native-complete-run-seed-plan-v1",
+  "seeds": [
+    {
+      "id": 1100001,
+      "numerical_seed": 2,
+      "partition": "control",
+      "seed": "SP1RESH1FTSHOP1T2000001"
+    },
+    {
+      "id": 1100002,
+      "numerical_seed": 2,
+      "partition": "control",
+      "seed": "SP1RESH1FTSHOP1T2000002"
+    },
+    {
+      "id": 1100003,
+      "numerical_seed": 2,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTSHOP1D2000001"
+    },
+    {
+      "id": 1100004,
+      "numerical_seed": 2,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTSHOP1D2000002"
+    },
+    {
+      "id": 1100005,
+      "numerical_seed": 3,
+      "partition": "control",
+      "seed": "SP1RESH1FTSHOP1T3000001"
+    },
+    {
+      "id": 1100006,
+      "numerical_seed": 3,
+      "partition": "control",
+      "seed": "SP1RESH1FTSHOP1T3000002"
+    },
+    {
+      "id": 1100007,
+      "numerical_seed": 3,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTSHOP1D3000001"
+    },
+    {
+      "id": 1100008,
+      "numerical_seed": 3,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTSHOP1D3000002"
+    }
+  ]
+}

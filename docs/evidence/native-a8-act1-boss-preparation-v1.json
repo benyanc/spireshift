@@ -1,0 +1,98 @@
+{
+  "arms": [
+    "original",
+    "fitted",
+    "survival",
+    "boss"
+  ],
+  "automatic_follow_up": false,
+  "config_id": "sha256:bec3aee57009a570d66cb11a6115c08e9b05e7ccc969eeef94cf97c9467bd3d8",
+  "execution_id": "sha256:26b2dba349e14bb662bcfa1028882ae8c25db849d8b03f368dc7045ea00c5cca",
+  "frozen_build_environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "gate": {
+    "minimum_confirmed_clears": 3,
+    "strict_rescue_initializers": [
+      2,
+      3
+    ]
+  },
+  "lessons_admitted": 0,
+  "live_same_menu_change": {
+    "boss_action_index": 2,
+    "boss_teacher": "Take Cinder",
+    "choice_ordinal_including_local_factors": 24,
+    "family": "card_reward_selection",
+    "public_input_id": "sha256:1968ad15f81d5fb19aa54fc66f91cc7a576c10b4277aac57d5678d0431963d2a",
+    "reason": "boss_preparation",
+    "survival_action_index": 3,
+    "survival_teacher": "Take Uppercut"
+  },
+  "native_deliveries": 64,
+  "native_prefixes": 2,
+  "optimizer_updates": 0,
+  "prior_result": {
+    "path": "docs/evidence/native-a8-act1-rescue-result-v1.json",
+    "report_id": "sha256:52cc87f505f7e180f3bb139ba1e1397bd9dd4a7ed03059c6bbcb42d181d9d865",
+    "sha256": "cb836c6a63c2197dc50f32ed2b90b48e1bffd211e21fa1e13c888e6b53e30f92",
+    "status": "act1_teacher_qualified_collection_stopped_with_no_bank"
+  },
+  "projection": "act1_generated_choice_belt_v1",
+  "qualification_started": false,
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-boss-qualification-v1.json",
+    "sha256": "878f19350068ed0c204be071c187e3178ffd2c28cb08ecab3ac981d2d4145766"
+  },
+  "report_id": "sha256:6c2605e2ab2b33c21aaeb017ce11af54fac1632bca6dd865e972f40e291bea93",
+  "repository_check": {
+    "dotnet_protocol_passed": true,
+    "focused_node_tests_passed": 11,
+    "path": "artifacts/resources/a8-act1-boss-repository-check-v2.json",
+    "report_id": "sha256:cf36b9a61db9994c02e4c94075ea53814356180ad430b7c8e7d7e849c311fc3f",
+    "sha256": "99630aed0d29fc860dcd69498acc7c8e61a49835591119316590555535cf6b1b",
+    "status": "completed",
+    "tests_passed": 2849
+  },
+  "saved_menu_regressions": 5,
+  "saved_potion_belt_regression": {
+    "distinct_copies_and_single_player_target_verified": true,
+    "duplicate_label": "Liquid Bronze",
+    "empty_belt_observation_unchanged": true,
+    "new_games": 0,
+    "old_strict_decoder_rejects": true,
+    "optimizer_updates": 0,
+    "preserved_public_reads": 5,
+    "preserved_raw_actions": 5,
+    "repaired_strict_sdk_and_converter_pass": true
+  },
+  "saved_worker_observation": {
+    "path": "artifacts/native-a8-act1-boss/saved-worker-projection-v1/report.json",
+    "report_id": "sha256:2b0f96db7224dab235534d46599c72a1172c3d05da883c97b2ab954581c0a331",
+    "sha256": "9b4539d222af200137c970f7f7bc909ddd1905514bf71c189407014caa8df1a2",
+    "status": "saved_generated_choice_worker_observation_verified"
+  },
+  "schema_version": "native-a8-act1-boss-preparation-evidence-v1",
+  "shared_profile_unchanged": true,
+  "short_check": {
+    "path": "artifacts/native-a8-act1-boss/control-v1/report.json",
+    "report_id": "sha256:4940c75385c4c696e389b9461e20ff132a1e3bbc30976f2100eaf91b8daeb52c",
+    "sha256": "9f3f49a96732e0bd08e0edbf62395bf3b075af49ab36927982b59549067adc5c",
+    "status": "act1_boss_short_check_verified"
+  },
+  "short_check_resource": {
+    "path": "artifacts/resources/a8-act1-boss-control-v1.json",
+    "report_id": "sha256:30e0ae6c25d79e782cade2b2819663c9484a8de4d36f18380827bc0d6bc8a6a2",
+    "sha256": "d5e6e01d2efab4bcf056c8308c5ff8373a1e6ce9f9f0eed047247364b1e2004b",
+    "status": "completed"
+  },
+  "status": "fresh_start_boss_teacher_qualification_prepared",
+  "teacher": "normal_start_act1_boss_teacher_v1",
+  "worlds": 8
+}

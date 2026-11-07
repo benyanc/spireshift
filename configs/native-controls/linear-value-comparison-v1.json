@@ -1,0 +1,57 @@
+{
+  "schema_version": "native-linear-value-config-v1",
+  "parent_comparison": {
+    "path": "artifacts/native-matched-value/sts2-v0.111.0-a8-comparison-v1/report.json",
+    "id": "sha256:759c8fa5e9a23b16fb2b6cd5e06834d8e9ec909e9aec5fb6aaa6db5a313ba49c"
+  },
+  "training_spec": {
+    "path": "configs/training-objective/sts2-v0.111.0-ironclad-a8-native-bootstrap-v8.json",
+    "id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+  },
+  "regularization": [
+    1e-06,
+    1e-05,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "inner_folds": 3,
+  "inner_salt": "native-linear-value-whole-game-v1",
+  "implementation_sha256": {
+    "native_linear_value.py": "bda2f5e75229bd5281a0ed405866b73c27a3b05e671edcf7625893963412d904",
+    "native_linear_value_curves.py": "37adb332bc9ae4bcec7351f4350c3239f7c14ec91483fc737a474887c7ec3f70",
+    "native_linear_value_study.py": "a6231c8c0b7c5c33b99f8fb10e3adde76df1db5da69609dac765387f7c5c4221"
+  },
+  "entry_sha256": {
+    "compare-native-linear-value-v1.sh": "f1471a6f231702298a3b10e596f77824f6adfc3fa295f6a808136571f5750da9",
+    "native-linear-value-v1.py": "b8e92e0c421023534f41cf30c40aabff45c3ff8c1d35659c2fa461450b3506f9"
+  },
+  "stage": "saved_train_comparison",
+  "workspace": "artifacts/native-linear-value/sts2-v0.111.0-a8-comparison-v1",
+  "cohorts": [
+    "seed-2-standard-round-057-fit",
+    "seed-3-standard-round-057-fit",
+    "seed-2-standard-round-060-fit",
+    "seed-3-standard-round-060-fit"
+  ],
+  "outer_folds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "resource_limits": {
+    "wall_seconds": 900,
+    "cpu_seconds": 900,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 500000000
+  },
+  "control_report": {
+    "path": "artifacts/native-linear-value/sts2-v0.111.0-a8-control-v1-verified/report.json",
+    "id": "sha256:8d9ee1eb90492f86a550d3138b1fca876941f3640c47af7b5d2dfc193548c117"
+  }
+}

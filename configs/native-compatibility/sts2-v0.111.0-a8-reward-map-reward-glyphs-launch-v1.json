@@ -1,0 +1,16 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-map-settling-reward-glyphs-control-v1.json",
+    "sha256": "262c63345898008fb47f7cc6ab288d6c632c7ac2063f15214c83d651759069ec"
+  },
+  "wall_seconds": 900,
+  "cpu_seconds": 1800,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000,
+  "experiment_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-reward-glyphs-control-v1.json",
+    "sha256": "fe652cee158efea8f0084a8b858e98058ed25f553817f6ce390d3b49e247f3b3"
+  },
+  "experiment_config_id": "sha256:fed61f2d4bfd28768c148db6e3962f44ab0bd8d2f7e3dd666d50e93b1d291fad"
+}

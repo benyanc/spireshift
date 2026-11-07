@@ -1,0 +1,162 @@
+{
+  "adapter_repair_scope": "saved_regression_only_separately_versioned_adapter",
+  "automatic_follow_up": false,
+  "bank_id": null,
+  "collection": {
+    "checks": {
+      "all_target_reasons_delivered": false,
+      "both_initializers": false,
+      "declared_cases_finished": false,
+      "minimum_distinct_rescues": false
+    },
+    "eligible_initializers": [],
+    "eligible_reasons": [],
+    "eligible_rescues": [],
+    "outcomes_by_arm": {
+      "fitted": {
+        "act1_clear": 0,
+        "act1_loss": 7,
+        "capped": 0
+      },
+      "original": {
+        "act1_clear": 0,
+        "act1_loss": 7,
+        "capped": 0
+      },
+      "teacher": {
+        "act1_clear": 0,
+        "act1_loss": 7,
+        "capped": 0
+      }
+    },
+    "passed": false,
+    "planned_worlds": 12,
+    "sealed_worlds": 7,
+    "strict_rescues": []
+  },
+  "config_id": "sha256:15dded835a176c7a8f8dae2e2cacaedc995069a75ee8332e08906cc7a0b1c8b4",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fitted_acknowledged_prefix": 3,
+  "fitted_unacknowledged_action": "Use Attack Potion",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "interrupted_case": {
+    "key": "collect-008",
+    "phase": "collect",
+    "player": 3,
+    "seed": "SP1RESH1FTA8RF008"
+  },
+  "new_games": 0,
+  "optimizer_updates": 0,
+  "owner_attempt": {
+    "path": "artifacts/native-a8-act1-rescue/study-v1/attempt-1794026671116975000.json",
+    "report_id": "sha256:729d18966b465c245cdc10308be6a3b621ad337229a2ab650e61d9338d28353b",
+    "sha256": "7139c93bb9ad1def732b262a3aff43955fd4cdab7a9776a128848fc82c17ee8c",
+    "status": "stopped_preserving_evidence"
+  },
+  "owner_resource": {
+    "path": "artifacts/resources/a8-act1-rescue-v1-1794026671116975000.json",
+    "report_id": "sha256:57d31fb918dda8194b59a65c4ab518f7abe0a0a94541f46bfc542916f2888259",
+    "sha256": "31ffaadd91715f3fd50e6579b392d79912f3d57285ba85337bc183cc62de5015",
+    "status": "failed"
+  },
+  "qualification": {
+    "checks": {
+      "both_initializers": true,
+      "declared_cases_finished": true,
+      "minimum_distinct_rescues": true,
+      "no_capped_qualification_arms": true,
+      "teacher_cleared_more_than_each_reference": true
+    },
+    "eligible_initializers": [
+      2,
+      3
+    ],
+    "eligible_reasons": [],
+    "eligible_rescues": [
+      "qualify-003",
+      "qualify-006"
+    ],
+    "outcomes_by_arm": {
+      "fitted": {
+        "act1_clear": 1,
+        "act1_loss": 7,
+        "capped": 0
+      },
+      "original": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "teacher": {
+        "act1_clear": 2,
+        "act1_loss": 6,
+        "capped": 0
+      }
+    },
+    "passed": true,
+    "planned_worlds": 8,
+    "sealed_worlds": 8,
+    "strict_rescues": [
+      "qualify-003",
+      "qualify-006"
+    ]
+  },
+  "qualification_worlds_trainable": false,
+  "raw_replayed_strict_rescue_deliveries": 1733,
+  "report_id": "sha256:52cc87f505f7e180f3bb139ba1e1397bd9dd4a7ed03059c6bbcb42d181d9d865",
+  "repository_check": {
+    "dotnet_protocol_passed": true,
+    "focused_node_tests_passed": 28,
+    "path": "artifacts/resources/a8-act1-rescue-stopped-repository-check-v1.json",
+    "report_id": "sha256:1ff9e42f2bf5244c9664d3a05d677dde1007153b95ff3c0e866968cafdf7be44",
+    "sha256": "fa61b36ba22033ed22b1035de5958d1a5daa700032974e7bf91b2c4eca9be035",
+    "status": "completed",
+    "tests_passed": 2846
+  },
+  "saved_audit": {
+    "path": "artifacts/native-a8-act1-rescue/stopped-audit-v2/report.json",
+    "report_id": "sha256:6135b8ca53658a4cbc6900ed19afb5d4f43d6be64f8e242713f85603f695bab6",
+    "sha256": "a9068a38768279a075873487e28c9d9e1e160542ab4df6c12de20d70922a6abd",
+    "status": "stopped_act1_rescue_study_verified"
+  },
+  "saved_audit_resource": {
+    "path": "artifacts/resources/a8-act1-rescue-stopped-audit-v2.json",
+    "report_id": "sha256:7330b0b305a16d95f05685abb78185d523de1c7d119680174aee3c065eea9ee4",
+    "sha256": "a95c62c792d34d407d41f87d5e704ced60c0f19ef04317fb9c226ca88ac3732f",
+    "status": "completed"
+  },
+  "saved_projection_regression": {
+    "distinct_copies_and_single_player_target_verified": true,
+    "duplicate_label": "Liquid Bronze",
+    "empty_belt_observation_unchanged": true,
+    "new_games": 0,
+    "old_strict_decoder_rejects": true,
+    "optimizer_updates": 0,
+    "preserved_public_reads": 5,
+    "preserved_raw_actions": 5,
+    "repaired_strict_sdk_and_converter_pass": true
+  },
+  "schema_version": "native-a8-act1-rescue-result-evidence-v1",
+  "sealed_deliveries": 8239,
+  "sealed_episodes": 47,
+  "sealed_worlds": 15,
+  "sources": {
+    "scripts/audit-a8-act1-rescue-v1.py": "ba335484dd232506fd87d775438dc8c82c463ce040e666ea9d865b8873fa63bc",
+    "scripts/engine-generated-choice-belt-regression-v1.mjs": "24f091e6165a5dd67988381fa848270a7d8ca666492c40bac913ae8cc801e64a",
+    "scripts/engine-generated-choice-belt-surface-v1.mjs": "af058abe30f59f74ae0a5d131460d34afbd2dae3c8335cde4ce5830cf9a9ef45"
+  },
+  "status": "act1_teacher_qualified_collection_stopped_with_no_bank",
+  "unstarted_worlds": [
+    "collect-009",
+    "collect-010",
+    "collect-011",
+    "collect-012"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "schema_version": "native-transition-owner-repair-evidence-v1",
+  "status": "short_control_qualified_owner_comparison_prepared",
+  "prior_result": {
+    "report": {
+      "path": "artifacts/native-selection-flows/canary-v2/report.json",
+      "sha256": "c30ca8e6dde21a62afe5da156dd6722e5af738b09325970768c91d7b61e6952b"
+    },
+    "complete_pairs_matching": 0,
+    "official_complete_prefixes": 3,
+    "official_blocked_prefixes": 1,
+    "matching_prefix_decisions": [
+      48,
+      88,
+      6,
+      88
+    ],
+    "not_a_time_cap": true,
+    "uncertain_player_3_world_403_preserved_never_replayed": true
+  },
+  "repairs": [
+    "wait_for_reward_family_departure_without_repeating_accepted_Continue",
+    "same_owned_potion_occurrence_exact_belt_slot_permissions_and_target_operands",
+    "persistent_hand_selection_mode_lifetime_not_hand_visibility",
+    "closed_merchant_inspectable_catalog_without_purchase_authority",
+    "separate_input_equality_from_delivery_status_in_progress_messages"
+  ],
+  "runtime": {
+    "environment": {
+      "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v28.json",
+      "sha256": "ac23b1c8035332ee0c584dc9d4c7d151e8ba9a68c37b97c9925dc12e083ce34d"
+    },
+    "native_CLI_revision": 46,
+    "official_connector_revision": 20,
+    "native_worker_revision": 16,
+    "shared_converter_revision": 10,
+    "shared_input_layout_revision": 7,
+    "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "native_reproduced_build": {
+      "path": "artifacts/native-transition-repair/native-build-v46/report.json",
+      "sha256": "bb702e1a75e66d6ddc2dc6b7c3e32f927a03d42ed774bb8e3e2750df7386742a"
+    },
+    "connector_reproduced_build": {
+      "path": "artifacts/native-transition-repair/connector-build-v20/report.json",
+      "sha256": "dc297b46a171cf95867bd75bb63730d8c0801f07160ebb4c178d24c743781944"
+    }
+  },
+  "saved_checks": {
+    "report": {
+      "path": "artifacts/native-selection-flows/transition-offline-v1/report.json",
+      "sha256": "70ec7d27c53958be995d4af6183faaddfe237668ef8f79ee45e1dd497e68bb6d"
+    },
+    "frames": 2550,
+    "generated_envelopes": 20,
+    "frozen_probes": 5122,
+    "diagnostic_reconstruction": {
+      "path": "artifacts/native-transition-repair/development-v1/saved-projection-check.json",
+      "sha256": "dbef9996f6dc699e99b8e8706a8ab23a93a3e666f1cd81186aa4893ec89bbdec"
+    },
+    "reconstruction_is_not_game_execution": true
+  },
+  "source_fixture": {
+    "report": {
+      "path": "artifacts/native-transition-repair/catalog-fixture-v1/report.json",
+      "sha256": "70ed5a5ed8244722dacb764a382403479a1bba48cf3a1277122faff3f8bdfc3c"
+    },
+    "privileged": true,
+    "actual_closed_offers": 14,
+    "purchases_disabled": true,
+    "full_run_attempts": 0,
+    "wall_seconds": 2.6946702080313116
+  },
+  "paired_regression": {
+    "report": {
+      "path": "artifacts/native-selection-flows/transition-control-v1/report.json",
+      "sha256": "05a787062f9218afc807d725a3ee7b8f0a9c692b0c69a1cb8567b15242796df1"
+    },
+    "verified_choices": 64,
+    "equal_complete_inputs_and_menus": 32,
+    "verification": {
+      "path": "artifacts/native-selection-flows/transition-control-v1/verification-v1/report.json",
+      "sha256": "bc43c8716e71375818958aa0bdaae1dedc2081391d301e9a50995bf22cebc067"
+    },
+    "pack_effect": {
+      "path": "artifacts/native-selection-flows/transition-control-v1/pack-effect.json",
+      "sha256": "f2502f1cbcbe18191081f57d8839a56d038cbd4f230a1a88c98330e2405d1cf6"
+    },
+    "explicit_clean_regression_world": "SP1RESH1FTFL0W556",
+    "hand_and_potion_lifetimes_not_all_live_exercised_by_this_control": true,
+    "wall_seconds": 86.46882483293302,
+    "all_restoration_checks": true
+  },
+  "tests": {
+    "repository_resource": {
+      "path": "artifacts/resources/native-transition-repository-check-v1.json",
+      "sha256": "13e251107604b7368c295e9c2498e665d91c83b9648ecf9e6139cfa123de09e9"
+    },
+    "repository_tests": 2587,
+    "strict_type_files": 640,
+    "CSharp_protocol_pass": true,
+    "wall_seconds": 150.3548553751316,
+    "new_Node_regressions": 5,
+    "focused_Python_tests": 13,
+    "exact_game_connector_tests": 170,
+    "connector_test_log": {
+      "path": "artifacts/native-transition-repair/development-v1/connector-tests-v20.log",
+      "sha256": "7f202b4b87b285de3954d5b53a629428add3f8e28d2730ad2a4039800d9611d9"
+    },
+    "connector_portable_check_log": {
+      "path": "artifacts/native-transition-repair/development-v1/connector-npm-check-v20.log",
+      "sha256": "fcd2fed2c3042740d65306bb441afbc4378a8dee7d0cb10b21ffe74b6ad9680b"
+    },
+    "final_comparison_metadata_separately_preflighted_owner_launcher_checks_exact_current_files": true
+  },
+  "preservation": {
+    "protected_prior_files": 5973,
+    "receipt": {
+      "path": "artifacts/native-transition-repair/development-v1/protection.json",
+      "sha256": "d2993d271efc6d38d7130c70f90a5a16659836678a7f6dcce79b61ee8bb76f10"
+    },
+    "originals": [
+      {
+        "player": 2,
+        "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json",
+        "sha256": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+        "preserved_Adam_steps": 5658
+      },
+      {
+        "player": 3,
+        "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json",
+        "sha256": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+        "preserved_Adam_steps": 6045
+      }
+    ],
+    "all_original_weights_and_Adam_unchanged": true,
+    "optimizer_updates": 0,
+    "game_apps_created": 0
+  },
+  "owner_comparison": {
+    "recipe": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-transition-canary-v1.json",
+      "sha256": "eedf53a96a08fe61073f74675a037f743c623ce0e0d385c620aa9b8c0a7b44b5"
+    },
+    "launch": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-transition-launch-v1.json",
+      "sha256": "1517355a791a8a50cc4904d9e9a1ba665602a07d08c5390a4d8fd19530e6fef5"
+    },
+    "preflight": {
+      "path": "artifacts/native-transition-repair/development-v1/main-preflight.json",
+      "sha256": "dc04c93fab6e848a9987805768e3cc2f310ffb1b63a9bd5babdadea614ce9843"
+    },
+    "workspace_unstarted": true,
+    "new_worlds": [
+      "SP1RESH1FTFL0W405",
+      "SP1RESH1FTFL0W406"
+    ],
+    "planned_pairs": 4,
+    "maximum_choices_per_host": 128,
+    "pair_seconds": 360,
+    "batch_seconds": 1800,
+    "separate_repository_seconds": 600,
+    "launcher": "scripts/compare-selection-flows-v3.sh"
+  },
+  "training_allowed": false,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "full_game_strength_evidence": false,
+  "exhaustive_mechanics_parity": false,
+  "report_id": "sha256:621842a42113aecd63779be2c2de6ed89e05b1b686fcc02c9b80b179c8790b8f"
+}

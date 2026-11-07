@@ -1,0 +1,304 @@
+{
+  "schema_version": "native-learning-feedback-evidence-v1",
+  "completed_exploration": {
+    "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/report.json",
+    "id": "sha256:f078398afd36251058af667bcc9b62fb79a6faff56b1d4ef26dcdf0eb6fcf089",
+    "attempts": 896,
+    "train_attempts": 512,
+    "final_test_attempts": 384,
+    "failures": 0,
+    "wins": 0,
+    "paired_exploration_minus_standard": {
+      "adaptive_controller_allowed": false,
+      "aggregate": {
+        "initial": {
+          "denominator": 128,
+          "failed_games": 0,
+          "mean_floor": 11.453125,
+          "wins": 0
+        },
+        "trained": {
+          "denominator": 128,
+          "failed_games": 0,
+          "mean_floor": 11.3203125,
+          "wins": 0
+        }
+      },
+      "automatic_training_follows": false,
+      "auxiliary_progress_confirmed": false,
+      "base_readiness_passed": false,
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 20261019,
+      "checkpoint_promoted": false,
+      "confirmation_rule": "both_positive_floor_gain_pooled_lower95_positive_no_win_regression_zero_failures_v1",
+      "failure_floor_and_win_value": 0,
+      "independent_training_replicates": 2,
+      "interval_method": "fixed_percentile_seed_bootstrap_within_each_fixed_initializer",
+      "mean_floor_change": -0.1328125,
+      "one_sampled_trajectory_per_player_seed": true,
+      "paired_floor_change_interval95": [
+        -0.8125,
+        0.546875
+      ],
+      "players": [
+        {
+          "higher_floor_seeds": 14,
+          "initial": {
+            "denominator": 64,
+            "failed_games": 0,
+            "mean_floor": 11.890625,
+            "wins": 0
+          },
+          "initial_only_wins": 0,
+          "lower_floor_seeds": 14,
+          "mean_floor_change": -0.234375,
+          "numerical_seed": 2,
+          "paired_floor_change_interval95": [
+            -1.09375,
+            0.609375
+          ],
+          "tied_floor_seeds": 36,
+          "trained": {
+            "denominator": 64,
+            "failed_games": 0,
+            "mean_floor": 11.65625,
+            "wins": 0
+          },
+          "trained_only_wins": 0
+        },
+        {
+          "higher_floor_seeds": 15,
+          "initial": {
+            "denominator": 64,
+            "failed_games": 0,
+            "mean_floor": 11.015625,
+            "wins": 0
+          },
+          "initial_only_wins": 0,
+          "lower_floor_seeds": 24,
+          "mean_floor_change": -0.03125,
+          "numerical_seed": 3,
+          "paired_floor_change_interval95": [
+            -1.09375,
+            1.0
+          ],
+          "tied_floor_seeds": 25,
+          "trained": {
+            "denominator": 64,
+            "failed_games": 0,
+            "mean_floor": 10.984375,
+            "wins": 0
+          },
+          "trained_only_wins": 0
+        }
+      ],
+      "terminal_victory_primary": true,
+      "uncertainty_covers_population_of_training_initializers": false
+    }
+  },
+  "short_control": {
+    "path": "artifacts/native-feedback/sts2-v0.111.0-a8-control-v2/report.json",
+    "id": "sha256:a1f34753cab5e0b10578265548ba138032a44e6bfe0b7a645b3e7092ea401545",
+    "games": 64,
+    "decisions": 9462,
+    "credit_reports_exactly_reconstructed": 2,
+    "input_checks": [
+      [
+        {
+          "all_exercised_facts_distinguished": true,
+          "candidate_order_equivariant": true,
+          "probes": [
+            {
+              "fact": "current_health",
+              "maximum_row_change": 0.44424225507378906,
+              "relative_row_change": 0.5935789759251215
+            },
+            {
+              "fact": "current_energy",
+              "maximum_row_change": 0.15170785663361924,
+              "relative_row_change": 0.1956568060859298
+            },
+            {
+              "fact": "current_card_cost",
+              "maximum_row_change": 0.9446984231283816,
+              "relative_row_change": 0.9446984231283816
+            },
+            {
+              "fact": "current_target_health",
+              "maximum_row_change": 0.005336075412630212,
+              "relative_row_change": 0.005336075412630212
+            },
+            {
+              "fact": "current_card_damage",
+              "maximum_row_change": 0.03629918194268074,
+              "relative_row_change": 0.03629918194268074
+            },
+            {
+              "fact": "current_card_block",
+              "maximum_row_change": 0.046495552155256484,
+              "relative_row_change": 0.046495552155256484
+            }
+          ],
+          "scope": "finite_encoder_perturbations_not_native_effect_or_optimal_action_proof"
+        }
+      ],
+      [
+        {
+          "all_exercised_facts_distinguished": true,
+          "candidate_order_equivariant": true,
+          "probes": [
+            {
+              "fact": "current_health",
+              "maximum_row_change": 0.4078173422313321,
+              "relative_row_change": 0.5257997262143357
+            },
+            {
+              "fact": "current_energy",
+              "maximum_row_change": 0.14638887964643796,
+              "relative_row_change": 0.1914183862065263
+            },
+            {
+              "fact": "current_card_cost",
+              "maximum_row_change": 1.190752461109803,
+              "relative_row_change": 1.190752461109803
+            },
+            {
+              "fact": "current_target_health",
+              "maximum_row_change": 0.003998873566030365,
+              "relative_row_change": 0.003998873566030365
+            },
+            {
+              "fact": "current_card_damage",
+              "maximum_row_change": 0.036366630949826936,
+              "relative_row_change": 0.036366630949826936
+            },
+            {
+              "fact": "current_card_block",
+              "maximum_row_change": 0.04624402560178599,
+              "relative_row_change": 0.04624402560178599
+            }
+          ],
+          "scope": "finite_encoder_perturbations_not_native_effect_or_optimal_action_proof"
+        }
+      ]
+    ],
+    "teaching_checks": [
+      {
+        "criterion": "at_least_75_percent_on_one_artificial_label_after_64_steps",
+        "diagnostic_model_id": "sha256:f0ed212535f0873a6d557aa3e323c3036155ab83e1ce6170c610a502a27fb157",
+        "ending_optimizer_steps": 5332,
+        "fixed_steps": 64,
+        "label_index": 4,
+        "label_probability_after": 0.9997772666363378,
+        "label_probability_before": 3.7982846826836427e-05,
+        "label_source": "invented_known_answer_memorization_control_only",
+        "memorization_criterion_passed": true,
+        "model_saved_or_promoted": false,
+        "native_action_quality_label": false,
+        "not_a_PPO_or_native_gameplay_learning_test": true,
+        "probability_increased": true,
+        "production_optimizer_steps": 0,
+        "source_model_and_all_Adam_state_unchanged": true,
+        "starting_optimizer_steps": 5268,
+        "synthetic_optimizer_steps": 64
+      },
+      {
+        "criterion": "at_least_75_percent_on_one_artificial_label_after_64_steps",
+        "diagnostic_model_id": "sha256:f8708c57d1338b79202fec8bb08aaa3ef987012d1550e4ba2c05fd2d96b879ee",
+        "ending_optimizer_steps": 5653,
+        "fixed_steps": 64,
+        "label_index": 6,
+        "label_probability_after": 0.9984857823523688,
+        "label_probability_before": 1.7362699496174146e-05,
+        "label_source": "invented_known_answer_memorization_control_only",
+        "memorization_criterion_passed": true,
+        "model_saved_or_promoted": false,
+        "native_action_quality_label": false,
+        "not_a_PPO_or_native_gameplay_learning_test": true,
+        "probability_increased": true,
+        "production_optimizer_steps": 0,
+        "source_model_and_all_Adam_state_unchanged": true,
+        "starting_optimizer_steps": 5589,
+        "synthetic_optimizer_steps": 64
+      }
+    ],
+    "value_quality": [
+      {
+        "credit_baseline_beats_current_progress": true,
+        "credit_baseline_beats_other_fold_constant": true,
+        "current_progress_is_an_unfitted_reference_not_a_learned_forecast": true,
+        "independent_games": 32,
+        "mse": {
+          "credit_baseline": 2.7327670061391234e-05,
+          "current_progress": 0.00011394997555103938,
+          "other_fold_constant": 3.91920031526587e-05,
+          "recorded_critic": 3.54041612383586e-05
+        },
+        "recorded_critic_is_not_the_cross_fitted_predictor_used_for_actor_credit": true,
+        "target_is_bootstrap_return_not_victory_probability": true,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      {
+        "credit_baseline_beats_current_progress": true,
+        "credit_baseline_beats_other_fold_constant": true,
+        "current_progress_is_an_unfitted_reference_not_a_learned_forecast": true,
+        "independent_games": 32,
+        "mse": {
+          "credit_baseline": 2.58758367896336e-05,
+          "current_progress": 0.0001297126308931079,
+          "other_fold_constant": 4.657883987909708e-05,
+          "recorded_critic": 7.224291795266942e-05
+        },
+        "recorded_critic_is_not_the_cross_fitted_predictor_used_for_actor_credit": true,
+        "target_is_bootstrap_return_not_victory_probability": true,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      }
+    ],
+    "wall_seconds": 81.92497687507421,
+    "peak_resident_memory_bytes": 320520192,
+    "final_storage_bytes": 2954984,
+    "resource_report": {
+      "path": "artifacts/resources/native-learning-feedback-control-v1-2.json",
+      "id": "sha256:d9c69f416b717f0a78ed0326c1d09be9cd389ff608cd2509e433c54507b7ec93"
+    }
+  },
+  "development_control_preserved": {
+    "recipe": "configs/native-controls/completed-learning-feedback-control-v1.json",
+    "report": "artifacts/native-feedback/sts2-v0.111.0-a8-control-v1/report.json",
+    "source_snapshot": "artifacts/validation/native-feedback-v1/development-source-v1",
+    "admitted": false
+  },
+  "prepared_audit": {
+    "path": "configs/native-controls/completed-learning-feedback-audit-v1.json",
+    "cohorts": 16,
+    "train_attempts": 512,
+    "started": false,
+    "maximum_wall_seconds": 900,
+    "maximum_resident_memory_bytes": 2000000000,
+    "maximum_storage_bytes": 100000000
+  },
+  "production_training_started": false,
+  "new_native_games": 0,
+  "native_action_quality_labels_generated": 0,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "validation": {
+    "targeted_tests": 42,
+    "new_tests": 12,
+    "full_repository_exit_code": 0,
+    "full_repository_test_summary": "1822 passed in 117.69s (0:01:57)",
+    "resource_report": {
+      "path": "artifacts/resources/native-learning-feedback-repository-check-v1.json",
+      "id": "sha256:a2261e15adc5b119c00538ef9ec12607f9da3d80e9be0012abe93767f478b121"
+    },
+    "wall_seconds": 122.1009218338877,
+    "peak_resident_memory_bytes": 377290752,
+    "saved_control_reopens_without_new_analysis": true,
+    "main_audit_started": false
+  },
+  "github_issues_updated": [
+    143,
+    35,
+    146
+  ]
+}

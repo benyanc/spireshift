@@ -1,0 +1,63 @@
+{
+  "automatic_follow_up": false,
+  "bank_admitted": false,
+  "collection_started": false,
+  "collection_worlds": 12,
+  "config_id": "sha256:15dded835a176c7a8f8dae2e2cacaedc995069a75ee8332e08906cc7a0b1c8b4",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "initial_native_control_refusal": {
+    "native_games_started": 0,
+    "path": "artifacts/resources/a8-act1-rescue-short-v1.json",
+    "reason": "interactive_game_open",
+    "report_id": "sha256:be52b35093884c22e406392725e8299bb020ed37dd79e332dcfb2518b7849393",
+    "sha256": "d8d056cad2457fd53ef5d9b871d3c677271edbb9bf31685d62fdede666b01b32",
+    "status": "failed"
+  },
+  "native_prefix_check": "pending",
+  "optimizer_updates": 0,
+  "qualification_started": false,
+  "qualification_worlds": 8,
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-rescue-v1.json",
+    "sha256": "fb65723070ab3075d8810aa95f830b1a0737bfdf861b002d8cb7488ccb0cbf78"
+  },
+  "report_id": "sha256:5f76008ddf7a0a82b4defaf4021cd2256ab53dfff18774944d57e5d4204696ee",
+  "repository_check": {
+    "dotnet_protocol_passed": true,
+    "path": "artifacts/resources/a8-act1-rescue-repository-check-v1.json",
+    "report_id": "sha256:def3f5339884469571b4b88d8531d68027791769314e36b919242ff11df70e90",
+    "sha256": "2dc2899a3609d16bf5db3adb348932576a073906c6933333cdd2dc4daebdea97",
+    "status": "completed",
+    "tests_passed": 2846
+  },
+  "saved_checks": {
+    "path": "artifacts/native-a8-act1-rescue/saved-check-v1/report.json",
+    "report_id": "sha256:9969ab4e6e9217ff1566a849582a3ddec964e06c16005ac7d45badfe30dc36ef",
+    "sha256": "0bbe483a4530029d29f7e1a2ca0fe76ac5b0cffa36ccc9fb20afd01cbc6d53b3",
+    "status": "all_saved_act1_teacher_checks_verified"
+  },
+  "saved_native_deliveries_reconstructed": 321,
+  "saved_raw_replay": {
+    "path": "artifacts/native-a8-act1-rescue/raw-replay-check-v1/report.json",
+    "report_id": "sha256:7cf0b1787fd67c10988e9718a401cd58647e2db2030e70752d7e4545ac159e2b",
+    "sha256": "9445a889a579e591f2459cde8b419cb6dddfda8905bf01cb9932fdda7cce04b2",
+    "status": "saved_native_loss_and_act2_deliveries_reconstructed"
+  },
+  "saved_regressions": {
+    "hp_spend": 4,
+    "potion": 4,
+    "rest": 12
+  },
+  "schema_version": "native-a8-act1-rescue-preparation-evidence-v1",
+  "status": "ready_for_short_native_control_and_owner_qualification",
+  "teacher_qualified": false
+}

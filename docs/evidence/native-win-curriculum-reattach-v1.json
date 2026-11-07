@@ -1,0 +1,385 @@
+{
+  "A10_allowed": false,
+  "A8_competence_established": false,
+  "Architect_completion_qualified": false,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "checks": {
+    "CSharp_build_and_contracts": true,
+    "all_168_imports_match_actual_original_requests": true,
+    "capped_final_check": {
+      "cap": {
+        "limit": 290.0,
+        "observed": 290.07383258396294,
+        "resource": "wall_seconds"
+      },
+      "exit_code": 0,
+      "path": "artifacts/resources/win-curriculum-reattach-check-v3.json",
+      "report_id": "sha256:d37de5011c39f0c2a1d42ba2875378844f7868b8cdfbd4d16c0e0f6686ab7900",
+      "sha256": "9295e57323c0b9c227baf98f5ad48acfff2b687b41d2b15fb2ac23da8689aabb",
+      "status": "capped",
+      "wall_seconds": 290.09597695898265
+    },
+    "commit_hooks": true,
+    "completion_passed": 1362,
+    "coverage_plan": {
+      "path": "artifacts/native-win-curriculum/reattach-preparation-v1/completion-plan.json",
+      "sha256": "0483b22986d8748f20e7a569a0ce2b8c5fdbb9a1a439e09624c7cf76f5dfe374"
+    },
+    "format": true,
+    "lint": true,
+    "new_Python_unit_tests": 12,
+    "ordinary_full_command_cache_fabricated": false,
+    "overlap": 12,
+    "prefix_passed": 1478,
+    "repository_tests_passed_unique": 2828,
+    "resource_receipts": {
+      "godot-index-build-v57-r2": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-godot-index-build-v57-r2.json",
+        "report_id": "sha256:d730075dcc58e4ea562f01b28fd836a8abfe6ab0c5f06cb3853e3f9680f955dc",
+        "sha256": "616b461ea4574009fa8097c965b366125b5ce51429c769adcdccc7d75f9f5d85",
+        "status": "completed",
+        "wall_seconds": 38.06244495802093
+      },
+      "reattach-audit-1-10-v1": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-reattach-audit-1-10-v1.json",
+        "report_id": "sha256:2fe04f652f686439cb9704bd04b9eda8bfef5b836a134099c497cf8bb140963c",
+        "sha256": "ab5a30ac83e4c8776615d37fa97b79f909cede84d9e3b151d49d3278f5512120",
+        "status": "completed",
+        "wall_seconds": 124.06832416600082
+      },
+      "reattach-audit-11-20-v1": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-reattach-audit-11-20-v1.json",
+        "report_id": "sha256:77310ca803bdb50e74084ecbdc0d9af96c9003f0b4f19804e1d9b27a1217384c",
+        "sha256": "aaacd633e9341f8d5cdf82d878b8f40471e25d311ba1d010fbec17c7c8a4969d",
+        "status": "completed",
+        "wall_seconds": 113.64712791598868
+      },
+      "reattach-audit-21-30-v1": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-reattach-audit-21-30-v1.json",
+        "report_id": "sha256:9ff400c87287f1492142763676653976b88af8749227e8a5ceaa2fc714ede296",
+        "sha256": "e2247ada52ce36b4a1b4f3a173145e258f92e55a6e337c9058d6593c23921c56",
+        "status": "completed",
+        "wall_seconds": 113.6595835830085
+      },
+      "reattach-check-completion-v1": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-reattach-check-completion-v1.json",
+        "report_id": "sha256:50066062fe76dc32b4b3be87abfcf664ff2cfd3b5daea2a6ccd7f7c0e755437e",
+        "sha256": "59e49264a40b3b1541c4f0aeb2f0a3985ab0adce4f649d712d31114b1cce4042",
+        "status": "completed",
+        "wall_seconds": 98.2659184159711
+      },
+      "reattach-control-v3": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-reattach-control-v3.json",
+        "report_id": "sha256:4e0ed690e8373b26563ad65a814c743426348b56070d075e4f3fdc1e86ac4f4d",
+        "sha256": "76f8ea502794d88defff7dbb542632466480de5919c4827e83e62c675fdceba1",
+        "status": "completed",
+        "wall_seconds": 95.22820187499747
+      },
+      "reattach-preflight-v1": {
+        "cap": null,
+        "exit_code": 0,
+        "path": "artifacts/resources/win-curriculum-reattach-preflight-v1.json",
+        "report_id": "sha256:da1bfec75e9d942e5628c28ef8f86767ef5a8cd0b1e79ca7dbd3ca6e0f19dc3c",
+        "sha256": "39822414c713eaf75fdfadf9f4afa785d89e1443d1cfdc3ef05ebd2ae4b2892e",
+        "status": "completed",
+        "wall_seconds": 122.86663520790171
+      }
+    },
+    "runtime_error_JavaScript_regressions": 3,
+    "strict_types": true,
+    "test_completion": {
+      "cap": null,
+      "exit_code": 0,
+      "path": "artifacts/resources/win-curriculum-reattach-check-completion-v1.json",
+      "report_id": "sha256:50066062fe76dc32b4b3be87abfcf664ff2cfd3b5daea2a6ccd7f7c0e755437e",
+      "sha256": "59e49264a40b3b1541c4f0aeb2f0a3985ab0adce4f649d712d31114b1cce4042",
+      "status": "completed",
+      "wall_seconds": 98.2659184159711
+    },
+    "zero_game_preflight": {
+      "path": "artifacts/native-win-curriculum/reattach-preflight-v1/report.json",
+      "report_id": "sha256:1ac484c82bf1d6c47c0a8b2fcf1514e90365f53a2c706ca9fe9e633070a94d6c",
+      "sha256": "fac421c5e9162cc0b31aca6844892f483e8b6541aea15323f63907cccfdb02b3"
+    }
+  },
+  "claim_scope": "Thirty completed constructed-start curriculum cases and isolated native support repair controls; main bank incomplete; no normal-start full-game competence claim.",
+  "config": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v3.json",
+    "sha256": "44911dbac2d7d074b71872e9e745ca2c69b126764fc4e7d6133618e792b4aac2"
+  },
+  "config_id": "sha256:09f67b760f91ca078f67c618676f96a78bad39a3c6587f85d613056c07a4a8bc",
+  "continuation": {
+    "automatic_follow_up": false,
+    "collect_only_then_stop": true,
+    "completed_cases_imported_without_games": 30,
+    "current_recipe_cases": 68,
+    "fresh_replacement_cases": 1,
+    "heldout_and_final_test_ownership_unchanged": true,
+    "historical_failed_cases_retained": 2,
+    "linked_case_denominator": 70,
+    "new_main_started": false,
+    "old_markers_preserved": true,
+    "optimizer_updates": 0,
+    "replacement_key": "fit-031-replacement-1",
+    "replacement_seed_pool": [
+      "SP1RESH1FTW3F031P01",
+      "SP1RESH1FTW3F031P02",
+      "SP1RESH1FTW3F031P03",
+      "SP1RESH1FTW3F031P04",
+      "SP1RESH1FTW3F031P05",
+      "SP1RESH1FTW3F031P06",
+      "SP1RESH1FTW3F031P07",
+      "SP1RESH1FTW3F031P08"
+    ],
+    "teacher_objective_and_quality_rules_unchanged": true,
+    "unattempted_original_cases_unchanged": 37
+  },
+  "failure": {
+    "acknowledged_diagnostic_deliveries": 245,
+    "case": "fit-031/reference",
+    "cause": "MissingMethodException: Int32 Godot.Node.GetIndex(Boolean) in ReattachPower.DoFadeOutOnAllSegments",
+    "earlier_runtime_error_makes_episode_ineligible": true,
+    "labels_allowed": false,
+    "native_exit_code": 0,
+    "native_terminal_loss_observed": true,
+    "outer_resource_cap_fired": false
+  },
+  "frozen": {
+    "Connector": 31,
+    "converter": 16,
+    "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "game_revision": "41cef1ea",
+    "game_version": "0.111.0",
+    "input_contract_environment": 48,
+    "layout": 12,
+    "managed_runtime_and_SDK_unchanged": true,
+    "official_live_qualification_inherited": false,
+    "ordinary_worker": 24,
+    "original_CLI_candidate": 56,
+    "original_and_prior_final_weights_and_full_Adam_unchanged": true,
+    "runtime_errors_whitelisted": false,
+    "separate_support_build": 57,
+    "support_execution_environment_id": "sha256:7d975410b480a1d318130164d23e00604bda06e486503f11868cc1b487013f3c"
+  },
+  "full_game_strength_evaluated": false,
+  "historical_failures": [
+    {
+      "accepted_prefix_deliveries": 26,
+      "key": "fit-007",
+      "labels_allowed": false,
+      "marker_preserved": true,
+      "native_process_terminated": true,
+      "status": "historical_observation_failed",
+      "unacknowledged_next_action": true
+    },
+    {
+      "acknowledged_deliveries": 245,
+      "key": "fit-031",
+      "labels_allowed": false,
+      "marker_preserved": true,
+      "native_exit_code": 0,
+      "native_terminal_loss_observed": true,
+      "runtime_error": "[ERROR] [ERROR] System.MissingMethodException: Method not found: 'Int32 Godot.Node.GetIndex(Boolean)'.",
+      "seed": "SP1RESH1FTW1F031P01",
+      "status": "historical_runtime_error",
+      "worker_termination_verified": true
+    }
+  ],
+  "implementation_id": "sha256:6641e03fa0e358174d97aae93f9df578cdcd750737eee853086f14dfebc5534c",
+  "launch_binding_id": "sha256:b8d126d09d03ef6be31836a2b41a29b21ff7b8f7708b60c5f23d47c2b1f9b4cd",
+  "main_optimizer_updates": 0,
+  "native_control": {
+    "actual_deliveries_verified": 12,
+    "all_three_dead_segments_reach_native_reward_owner": true,
+    "checks": {
+      "all_segment_death_visual_path_completes_cleanly": true,
+      "native_regeneration_and_targeting_preserved": true,
+      "new_native_mount_and_load_deliveries": true,
+      "no_optimizer_updates": true,
+      "no_runtime_error_whitelist": true,
+      "originals_and_game_frozen": true
+    },
+    "direct_enemy_HP_energy_or_outcome_assignment": false,
+    "main_started": false,
+    "optimizer_updates": 0,
+    "privileged_fixtures_labels_allowed": false,
+    "provisional_generations_1_and_2_preserved_without_replay": true,
+    "report": {
+      "path": "artifacts/native-win-curriculum/reattach-control-v3/report.json",
+      "report_id": "sha256:82e90d4207a8bd60dffe28ecc606eac003945cc3f886341b4ae6b79334fa0edc",
+      "sha256": "fd014515e8a9b6efa5f8f4d7924a4c5d00e1a8ad11bd80143ddf3b94c10eada1"
+    },
+    "single_dead_segment_revives_with_25_HP_and_is_targetable": true
+  },
+  "old_canary_pass_incomplete_unattempted": [
+    3,
+    1,
+    2
+  ],
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-win-curriculum-v3.sh\"",
+  "parent_owner_failure": {
+    "cap": null,
+    "exit_code": 2,
+    "path": "artifacts/resources/win-curriculum-v2-attempt-1.json",
+    "report_id": "sha256:9ee39752d56806ac7604d7fcd35df080a44f44ee8984e02040596bfc7e4524c6",
+    "sha256": "a73f4124695831b3a7346ab87bc0042365b6337bf9d6d96eb5d4c41329262aeb",
+    "status": "failed",
+    "wall_seconds": 568.9386146669276
+  },
+  "promotion_allowed": false,
+  "protection": {
+    "files": 52041,
+    "path": "artifacts/native-win-curriculum/reattach-preparation-v1/protected-v2-result.json",
+    "sha256": "6078bb34cfc545599e421a09c368a38d2301b263ceb497fe91eff310cba93e48"
+  },
+  "report_id": "sha256:8bc21580b04216ce81be2152a7e8f8fa5d598ef3ca22b69f2dc25fffe8ac2b10",
+  "saved_audits": [
+    {
+      "complete_gameplay_episodes": 48,
+      "completed_cases": 10,
+      "confirmed_lessons": 8,
+      "first_case": 1,
+      "last_case": 10,
+      "report": {
+        "path": "artifacts/native-win-curriculum/reattach-audit-01-10-v1/report.json",
+        "report_id": "sha256:66a1ef3d59bb75fb35e94816a712a924bbc513a5bcff7aaa418984be587e16e9",
+        "sha256": "f5ce6a90ce327da71877b2b6920aec065f7409bee84bc2f0934680be940d91f1"
+      },
+      "resource": {
+        "path": "artifacts/resources/win-curriculum-reattach-audit-1-10-v1.json",
+        "report_id": "sha256:2fe04f652f686439cb9704bd04b9eda8bfef5b836a134099c497cf8bb140963c",
+        "sha256": "ab5a30ac83e4c8776615d37fa97b79f909cede84d9e3b151d49d3278f5512120"
+      },
+      "reusable_seals": 58,
+      "strict_goal_rescues": 6,
+      "verified_deliveries": 3775
+    },
+    {
+      "complete_gameplay_episodes": 44,
+      "completed_cases": 10,
+      "confirmed_lessons": 4,
+      "first_case": 11,
+      "last_case": 20,
+      "report": {
+        "path": "artifacts/native-win-curriculum/reattach-audit-11-20-v1/report.json",
+        "report_id": "sha256:de78be9f4de727bca74fed91e26cdb4afe6dced4729e7e71b202c34b5269b6d2",
+        "sha256": "f80d106caa78c12b64ba2027d9695c47dbd82f754717ec4689b67ede5bf9b7cc"
+      },
+      "resource": {
+        "path": "artifacts/resources/win-curriculum-reattach-audit-11-20-v1.json",
+        "report_id": "sha256:77310ca803bdb50e74084ecbdc0d9af96c9003f0b4f19804e1d9b27a1217384c",
+        "sha256": "aaacd633e9341f8d5cdf82d878b8f40471e25d311ba1d010fbec17c7c8a4969d"
+      },
+      "reusable_seals": 54,
+      "strict_goal_rescues": 3,
+      "verified_deliveries": 3107
+    },
+    {
+      "complete_gameplay_episodes": 46,
+      "completed_cases": 10,
+      "confirmed_lessons": 6,
+      "first_case": 21,
+      "last_case": 30,
+      "report": {
+        "path": "artifacts/native-win-curriculum/reattach-audit-21-30-v1/report.json",
+        "report_id": "sha256:80e9d98d48535f90448da65ad978e9862701d5e29f5074c0dc82ee6d149cfd47",
+        "sha256": "58f2170c1585bfa83efc125735138df5699224ba89650c1b1aa8e008f5ebe867"
+      },
+      "resource": {
+        "path": "artifacts/resources/win-curriculum-reattach-audit-21-30-v1.json",
+        "report_id": "sha256:9ff400c87287f1492142763676653976b88af8749227e8a5ceaa2fc714ede296",
+        "sha256": "e2247ada52ce36b4a1b4f3a173145e258f92e55a6e337c9058d6593c23921c56"
+      },
+      "reusable_seals": 56,
+      "strict_goal_rescues": 4,
+      "verified_deliveries": 2326
+    }
+  ],
+  "saved_totals": {
+    "complete_gameplay_episodes": 138,
+    "completed_cases": 30,
+    "confirmed_lessons": 18,
+    "reusable_seals": 168,
+    "strict_goal_rescues": 13,
+    "verified_deliveries": 9208
+  },
+  "schema_version": "native-win-curriculum-reattach-preparation-v1",
+  "session_limits": {
+    "cpu_seconds": 14400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 5400
+  },
+  "source_provenance": {
+    "all_other_source_and_evidence_drift_rejected": true,
+    "exact_saved_audit_source_at_launch": {
+      "path": "artifacts/native-win-curriculum/reattach-preparation-v1/saved-audit-source-v1.py",
+      "sha256": "7116f15566bb5d9de247b349d248209f747e58b2add4017713b62a5af70a30b4"
+    },
+    "exact_support_build_source_at_launch": {
+      "path": "artifacts/native-win-curriculum/reattach-preparation-v1/support-build-source-v57.py",
+      "sha256": "982eadf577e9058e178992de7cb2f9ac2b4c6a3948d249d183969d45a0fad909"
+    }
+  },
+  "status": "support_repair_verified_owner_continuation_prepared",
+  "support_build": {
+    "all_CLI_and_gameplay_source_unchanged": true,
+    "builds": [
+      {
+        "artifact_mvid": "e94e381e-cd13-4411-9108-67fd1d6be648",
+        "artifact_sha256": "aa878d03a2b3f3a1f4396c068026e1bba582e05a58c42bb89f2087cebe1dba6c",
+        "candidate": "artifacts/native-win-curriculum/godot-index-build-v57-r2/candidate",
+        "godot_stub_sha256": "92f964c981104cacc7860232d56644002fa128ce4a983ce6759cc23596a38d19",
+        "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4"
+      },
+      {
+        "artifact_mvid": "e94e381e-cd13-4411-9108-67fd1d6be648",
+        "artifact_sha256": "aa878d03a2b3f3a1f4396c068026e1bba582e05a58c42bb89f2087cebe1dba6c",
+        "candidate": "artifacts/native-win-curriculum/godot-index-build-v57-r2/independent-build",
+        "godot_stub_sha256": "92f964c981104cacc7860232d56644002fa128ce4a983ce6759cc23596a38d19",
+        "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4"
+      }
+    ],
+    "compiler": {
+      "csc_sha256": "6773e3c868c74a2d293750f4e6b44b93090b3def33639887e802aab6666d8496",
+      "dotnet_command": "dotnet",
+      "runtime_list": "Microsoft.AspNetCore.App 10.0.12 [/opt/homebrew/Cellar/dotnet/10.0.401/libexec/shared/Microsoft.AspNetCore.App]\nMicrosoft.NETCore.App 10.0.12 [/opt/homebrew/Cellar/dotnet/10.0.401/libexec/shared/Microsoft.NETCore.App]\n",
+      "sdk_version": "10.0.401"
+    },
+    "old_native_JIT_failure_reproduced": {
+      "error": "Method not found: 'Int32 Godot.Node.GetIndex(Boolean)'.",
+      "game_commands": 0,
+      "jit_prepared": false,
+      "method": "DoFadeOutOnAllSegments"
+    },
+    "only_changed_production_source": [
+      "GodotStubs/Core.cs"
+    ],
+    "original_CLI56_preserved": true,
+    "plain_node_API_probes_passed": 6,
+    "report": {
+      "path": "artifacts/native-win-curriculum/godot-index-build-v57-r2/report.json",
+      "report_id": "sha256:e5c3daf4c6134ca638a26f55cffd4b48938229fc85768ceed51f8019b6de1369",
+      "sha256": "ade263f03bff7bb49a0b809faf308c1457c26ef51972f4d606b1989fa22eb1db"
+    },
+    "source_at_launch": {
+      "path": "artifacts/native-win-curriculum/reattach-preparation-v1/support-build-source-v57.py",
+      "sha256": "982eadf577e9058e178992de7cb2f9ac2b4c6a3948d249d183969d45a0fad909"
+    },
+    "two_independent_builds_match": true
+  },
+  "training_allowed": false
+}

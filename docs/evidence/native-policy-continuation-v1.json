@@ -1,0 +1,104 @@
+{
+  "adaptive_controller_allowed": false,
+  "base_readiness_passed": false,
+  "bounded_config": {
+    "id": "sha256:f19cb00ea339b071b137a6808c6ca0d58b69d8143cd5f5d0101391ab5a70ab94",
+    "path": "configs/native-learning/sts2-v0.111.0-a8-standard-continuation-v1.json"
+  },
+  "checkpoint_promoted": false,
+  "claim_scope": "finite_continuation_prepared_with_live_restore_fit_resume_control_only",
+  "control": {
+    "attempts": 12,
+    "config": {
+      "id": "sha256:04942479a8869713edc4f4325b9e22f8aea07d3653df6a8abd1ca1238ba36f88",
+      "path": "configs/native-controls/policy-continuation-control-v1.json"
+    },
+    "ending_optimizer_steps": {
+      "2": 1362,
+      "3": 1419
+    },
+    "failed_games": 0,
+    "fit_rounds": [
+      17,
+      17
+    ],
+    "game_apps_created": 0,
+    "optimizer_steps_added": 15,
+    "original_states_unchanged": true,
+    "report": {
+      "id": "sha256:b533641ee747b101573ec7176165f0782401cafd8063edfef08a76ebd019a6e4",
+      "path": "artifacts/native-continuation/sts2-v0.111.0-a8-continuation-control-v1/report.json"
+    },
+    "resource": {
+      "id": "sha256:1b4bf255aabbcddd74e8633e5e1091e1de1a2d2203316f5f017a09066e080330",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-continuation-control-v1-session-1.json",
+      "usage": {
+        "average_cpu_utilization": 0.048534852291256175,
+        "cpu_hours": 0.026443503394722224,
+        "cpu_seconds": 95.19661222100001,
+        "energy_kwh": null,
+        "final_storage_bytes": 37699310,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 754548736,
+        "peak_storage_bytes": 37699310,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 140.10051941603888
+      }
+    },
+    "starting_optimizer_steps": {
+      "2": 1353,
+      "3": 1413
+    },
+    "status": "native_standard_continuation_control_pass"
+  },
+  "control_does_not_establish_strength": true,
+  "control_states_and_seeds_excluded_from_main": true,
+  "date": "2026-10-18",
+  "excluded_seed_manifests": 19,
+  "main_extension_started": false,
+  "maximum_additional_games_per_player": 1024,
+  "maximum_game_attempts": 2624,
+  "maximum_units": 398,
+  "milestones": [
+    768,
+    1024,
+    1280,
+    1536
+  ],
+  "numerical_resume_parity": "unit_verified_complete_nonzero_Adam_round_17_matches_uninterrupted_fit",
+  "players": [
+    {
+      "model_id": "sha256:f704ed48395466b1699db4a60d432ebfa38e4fcf549d111b8f2a102d7def3495",
+      "numerical_seed": 2,
+      "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/chunks/seed-2-standard-batch-016-fit/state.json",
+      "sha256": "5bfff55e5089b9a492ea3a8f5a44889f4cd2562164b71ddc13693dd0ea1980de",
+      "state_id": "sha256:cf8c28a8b6cba0cb6afdd600feac7d0a4e34e1e1ce7fce4bac5b198754353327",
+      "version": "trained"
+    },
+    {
+      "model_id": "sha256:7fb879faf3292f40cc9ca122214a3cffa3794a27815a5415e70cc4971bde7827",
+      "numerical_seed": 3,
+      "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/chunks/seed-3-standard-batch-016-fit/state.json",
+      "sha256": "c24d6e668ec474a333ab7e9ce40039bc8197ac862a133b06cb8a533c50e1c566",
+      "state_id": "sha256:ca3bfe4b2c86459ac28797a4b01a59ff7323eb538bc61f50a8667fb6dffef188",
+      "version": "trained"
+    }
+  ],
+  "report_id": "sha256:a286220349c116ae1078102b00aba1039d7ba26133f9744e267b833084d1d03e",
+  "schema_version": "native-standard-continuation-preparation-evidence-v1",
+  "seed_manifest": {
+    "id": "sha256:7240db06ab2bded9c5bc3258b47a5ff56435f235e080f43556c42acba0f8f807",
+    "path": "manifests/splits/sts2-v0.111.0-native-a8-standard-continuation-v1.json"
+  },
+  "source_confirmation": {
+    "id": "sha256:fadc40d9d80e48e776cc118e54c23c0ed451763d7eceabf95b4cbb7df7ecb487",
+    "path": "artifacts/native-confirmation/sts2-v0.111.0-a8-standard-fresh-v1/report.json"
+  },
+  "starting_training_games_per_player": 512,
+  "stopping_rule": "pooled_wins_then_floor_two_stale_checks_after_512_new_games_v1",
+  "unique_seeds": 2240
+}

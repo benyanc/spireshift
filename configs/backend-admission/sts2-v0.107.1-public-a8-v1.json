@@ -1,0 +1,34 @@
+{
+  "schema_version": "public-a8-admission-config-v1",
+  "inputs": {
+    "repair_config": {
+      "path": "configs/backend-repair/sts2-v0.107.1-event-choices-v3.json",
+      "sha256": "0f14936453d21ce26ceed313cc572c5371d1300ab1b22653e8d2a602ce04fba5"
+    },
+    "public_manifest": {
+      "path": "manifests/patches/sts2-v0.107.1-evangambit-event-choices-v4-retry2-pending.json",
+      "sha256": "2aec40f8029939abafccc643a642d763a555a704354957ede9ee8559e1c2dac2"
+    },
+    "native_suite": {
+      "path": "artifacts/compatibility/event-choice-full-suite-v1-retry1/full-suite.json",
+      "sha256": "f77d70eb14e94443a54efe9b5cc5583f801dca911416d0124cc7836dc90c320a"
+    },
+    "python_suite": {
+      "path": "artifacts/qualification/a8-public-v1-retry2/python-checks.json",
+      "sha256": "4f7debbbf157a661901a2ad9edf7187881ccfbbfa8b9656cd63b85f4043ee8b8"
+    },
+    "contract": {
+      "path": "artifacts/compatibility/full-run-event-choices-contract-v1/contract-probe.json",
+      "sha256": "243cb3b65827b6a9cf3ccbe8a94d19589d7f356e6c038c0d93acf07f223c3fe4"
+    },
+    "rule_audit": {
+      "path": "docs/evidence/frozen-run-rule-audit-v1-evidence.json",
+      "sha256": "da22b0cb4688ae1fa2cfc9528413353f16c576fc0dd053b7c3361c60f9594b8b"
+    }
+  },
+  "authoritative_fixture_tree": "66af8c2a510dcf8978dacfb0a3ab0a606c8a0b3a",
+  "inspected_train_seed": 100058,
+  "output_dir": "artifacts/qualification/a8-public-v1-retry2",
+  "admitted_manifest": "manifests/patches/sts2-v0.107.1-evangambit-public-a8-v1-admitted.json",
+  "config_id": "sha256:3dcbbea4d3f20fb9cf132a7f9c8dd42745e9a4a29a1418da1706853dbfb39eef"
+}

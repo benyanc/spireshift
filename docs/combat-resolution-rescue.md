@@ -34,29 +34,17 @@ least eight qualifying interventions span at least four seeds, at least one is b
 is harmful. The report always emits `validation_allowed=false`. If this gate fails, tactical rescue
 stops; neither another horizon nor another scalar threshold is justified.
 
-## Next operator command
+## Completed result
 
-Run this one resource-capped command and return its final output. It is sustained exact-engine work
-and must be started and observed by the operator.
+The operator run completed 24/24 base trajectories and 15/15 exact interventions. Eleven
+interventions were beneficial, three tied, and one was harmful; neither base nor counterfactual
+runs won. The harmful seed-150 intervention had a `+0.737` estimated search advantage but reduced
+maximum floor from 17 to 14. Seeds 159 and 162 entered policy cycles because this retired runner
+predated the shared public no-op guard.
 
-```bash
-uv run spireshift resources run \
-  --kind rollout \
-  --report artifacts/resources/combat-resolution-intervention-v2.json \
-  --metrics artifacts/resources/combat-resolution-intervention-v2-metrics.json \
-  --artifact-root artifacts/evaluations/combat-resolution-intervention-v2 \
-  --workers 1 \
-  --max-wall-seconds 14400 \
-  --max-cpu-seconds 14400 \
-  --max-storage-bytes 1000000000 \
-  --max-memory-bytes 16000000000 \
-  -- \
-  uv run --extra evangambit spireshift model evaluate-combat-search-interventions \
-    configs/combat-search-intervention/sts2-v0.107.1-base-v3-combat-resolution-train-v2.json \
-    artifacts/models/sts2-v0.107.1-base-v3/checkpoint.json \
-    --report artifacts/models/sts2-v0.107.1-base-v3/training-report.json \
-    --split-manifest manifests/splits/sts2-v0.107.1-evangambit-seeds-000000-000999-v1.json \
-    --upstream-root artifacts/backend/evangambit-v0.107.1 \
-    --manifest artifacts/backend/evangambit-v0.107.1-admitted.json \
-    --output-dir artifacts/evaluations/combat-resolution-intervention-v2
-```
+The frozen report is
+`sha256:fb3f7186d88efbb9c3cc8d9c0c6b85f11d5da713beda54236c0813098ec8bf90`; the resource
+report is `sha256:7ce212b167e24deff1ae647a6a9cb70fe14f85d41b35d4aa41ea9b885f175a6a`.
+The promotion gate rejected the rule. This command is complete and must not be rerun as the next
+project step. The next operator work is the
+[cycle-safe production policy-improvement collection](production-policy-improvement.md).

@@ -1,0 +1,630 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_original_reports_and_raw_captures_unchanged": true,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "cases": [
+    {
+      "all_menus_and_chosen_candidates_equal_diagnostic_only": true,
+      "differences": [
+        {
+          "index": 47,
+          "paths": [
+            "/context/interaction/content/surface/options/2/is_enabled",
+            "/context/referents/3/properties/is_enabled",
+            "/context/referents/3/state/enabled"
+          ]
+        }
+      ],
+      "key": "player-2-natural-607",
+      "matching_policy_inputs": 47,
+      "noncombat_potion_use_exercised": false,
+      "official_gameplay_CPU_seconds": 27.986336832000003,
+      "official_summary": {
+        "ascension": 8,
+        "floor_reached": 11,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 288
+      },
+      "raw_map_tutorial_settling_observations_with_zero_actions": 5,
+      "selected_potion_actions": [],
+      "standalone_terminal_persistent_and_all_reads_equal_diagnostic_only": true,
+      "unique_map_tutorial_settling_snapshots_with_zero_actions": 2,
+      "verified_deliveries": {
+        "native": 106,
+        "official": 106
+      }
+    },
+    {
+      "all_menus_and_chosen_candidates_equal_diagnostic_only": true,
+      "differences": [
+        {
+          "index": 31,
+          "paths": [
+            "/context/reads/1/content/relics/0/relic/counter"
+          ]
+        },
+        {
+          "index": 32,
+          "paths": [
+            "/context/interaction/content/surface/relics/0/relic/counter",
+            "/context/reads/1/content/relics/0/relic/counter",
+            "/context/referents/18/properties/relic/counter",
+            "/context/referents/19/properties/counter"
+          ]
+        },
+        {
+          "index": 33,
+          "paths": [
+            "/context/interaction/content/surface/relics/0/relic/counter",
+            "/context/reads/1/content/relics/0/relic/counter",
+            "/context/referents/19/properties/relic/counter",
+            "/context/referents/20/properties/counter"
+          ]
+        },
+        {
+          "index": 34,
+          "paths": [
+            "/context/interaction/content/surface/relics/0/relic/counter",
+            "/context/reads/1/content/relics/0/relic/counter",
+            "/context/referents/20/properties/relic/counter",
+            "/context/referents/21/properties/counter"
+          ]
+        },
+        {
+          "index": 35,
+          "paths": [
+            "/context/interaction/content/surface/relics/0/relic/counter",
+            "/context/reads/1/content/relics/0/relic/counter",
+            "/context/referents/19/properties/relic/counter",
+            "/context/referents/20/properties/counter"
+          ]
+        },
+        {
+          "index": 36,
+          "paths": [
+            "/context/reads/1/content/relics/0/relic/counter"
+          ]
+        }
+      ],
+      "key": "player-3-natural-608",
+      "matching_policy_inputs": 31,
+      "noncombat_potion_use_exercised": false,
+      "official_gameplay_CPU_seconds": 36.7316064,
+      "official_summary": {
+        "ascension": 8,
+        "floor_reached": 8,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 144
+      },
+      "raw_map_tutorial_settling_observations_with_zero_actions": 4,
+      "selected_potion_actions": [
+        {
+          "candidate": {
+            "arguments": [],
+            "history": {
+              "card_reward_declined": false,
+              "shop_inspected": true
+            },
+            "label": "Buy Vulnerable Potion for 49 gold",
+            "subject": {
+              "label": "Vulnerable Potion",
+              "properties": {
+                "affordable": true,
+                "can_purchase": true,
+                "definition_id": "VULNERABLE_POTION",
+                "description": "Apply 3 Vulnerable.",
+                "entity_id": {
+                  "public_slot": 48
+                },
+                "inventory_index": 11,
+                "name": "Vulnerable Potion",
+                "price": 49,
+                "rarity": "Common",
+                "slot_entity_id": {
+                  "public_slot": 44
+                },
+                "stocked": true,
+                "visible": true
+              },
+              "public_slot": 48,
+              "role": "potion",
+              "state": {
+                "visible": true
+              }
+            },
+            "verb": "activate"
+          },
+          "family": "shop_inventory",
+          "index": 32
+        },
+        {
+          "candidate": {
+            "arguments": [],
+            "history": {
+              "card_reward_declined": false,
+              "shop_inspected": true
+            },
+            "label": "Buy Block Potion for 51 gold",
+            "subject": {
+              "label": "Block Potion",
+              "properties": {
+                "affordable": true,
+                "can_purchase": true,
+                "definition_id": "BLOCK_POTION",
+                "description": "Gain 12 Block.",
+                "entity_id": {
+                  "public_slot": 48
+                },
+                "inventory_index": 10,
+                "name": "Block Potion",
+                "price": 51,
+                "rarity": "Common",
+                "slot_entity_id": {
+                  "public_slot": 44
+                },
+                "stocked": true,
+                "visible": true
+              },
+              "public_slot": 48,
+              "role": "potion",
+              "state": {
+                "visible": true
+              }
+            },
+            "verb": "activate"
+          },
+          "family": "shop_inventory",
+          "index": 33
+        },
+        {
+          "candidate": {
+            "arguments": [],
+            "history": {
+              "card_reward_declined": false,
+              "shop_inspected": true
+            },
+            "label": "Discard Block Potion",
+            "subject": {
+              "label": "Block Potion",
+              "properties": {
+                "can_discard": true,
+                "can_use": false,
+                "card_previews": [],
+                "definition_id": "BLOCK_POTION",
+                "description": "Gain 12 Block.",
+                "entity_id": {
+                  "public_slot": 2
+                },
+                "keywords": [
+                  {
+                    "description": "Until next turn, prevents damage.",
+                    "name": "Block"
+                  }
+                ],
+                "name": "Block Potion",
+                "slot": 1,
+                "target_entity_ids": [],
+                "target_type": "AnyPlayer",
+                "usage": "CombatOnly"
+              },
+              "public_slot": 2,
+              "role": "potion",
+              "state": {
+                "enabled": false,
+                "visible": true
+              }
+            },
+            "verb": "activate"
+          },
+          "family": "shop_inventory",
+          "index": 34
+        },
+        {
+          "candidate": {
+            "arguments": [],
+            "history": {
+              "card_reward_declined": false,
+              "shop_inspected": false
+            },
+            "label": "Discard Vulnerable Potion",
+            "subject": {
+              "label": "Vulnerable Potion",
+              "properties": {
+                "can_discard": true,
+                "can_use": false,
+                "card_previews": [],
+                "definition_id": "VULNERABLE_POTION",
+                "description": "Apply 3 Vulnerable.",
+                "entity_id": {
+                  "public_slot": 1
+                },
+                "keywords": [
+                  {
+                    "description": "Vulnerable creatures take 50% more damage from Attacks.",
+                    "name": "Vulnerable"
+                  }
+                ],
+                "name": "Vulnerable Potion",
+                "slot": 0,
+                "target_entity_ids": [],
+                "target_type": "AnyEnemy",
+                "usage": "CombatOnly"
+              },
+              "public_slot": 1,
+              "role": "potion",
+              "state": {
+                "enabled": false,
+                "visible": true
+              }
+            },
+            "verb": "activate"
+          },
+          "family": "event_option",
+          "index": 38
+        },
+        {
+          "candidate": {
+            "arguments": [],
+            "history": {
+              "card_reward_declined": false,
+              "shop_inspected": false
+            },
+            "label": "Claim Dexterity Potion",
+            "subject": {
+              "label": "Dexterity Potion",
+              "properties": {
+                "description": "Gain 2 Dexterity.",
+                "enabled": true,
+                "entity_id": {
+                  "public_slot": 22
+                },
+                "kind": "potion",
+                "label": "Dexterity Potion"
+              },
+              "public_slot": 22,
+              "role": "reward",
+              "state": {
+                "enabled": true,
+                "visible": true
+              }
+            },
+            "verb": "activate"
+          },
+          "family": "reward_claim",
+          "index": 59
+        },
+        {
+          "candidate": {
+            "arguments": [
+              {
+                "entity": {
+                  "label": "The Ironclad",
+                  "properties": {
+                    "block": 5,
+                    "character_definition_id": "IRONCLAD",
+                    "character_name": "The Ironclad",
+                    "companions": [],
+                    "discard_pile_count": 2,
+                    "draw_pile_count": 11,
+                    "energy": 0,
+                    "entity_id": {
+                      "public_slot": 0
+                    },
+                    "exhaust_pile_count": 1,
+                    "gold": 19,
+                    "hand": [
+                      {
+                        "cost": "1",
+                        "definition_id": "STRIKE_IRONCLAD",
+                        "entity_id": {
+                          "public_slot": 39
+                        },
+                        "existing_enchantment": null,
+                        "is_upgraded": false,
+                        "keywords": null,
+                        "name": "Strike",
+                        "public_card_views": {
+                          "referent:player:/properties/hand/*": {
+                            "after_upgrade": null,
+                            "can_play": false,
+                            "description": "Deal 6 damage.",
+                            "is_selected": false,
+                            "stats": {
+                              "damage": 6
+                            },
+                            "target_type": "AnyEnemy",
+                            "unplayable_reason": "EnergyCostTooHigh"
+                          }
+                        },
+                        "rarity": "Basic",
+                        "star_cost": null,
+                        "type": "Attack"
+                      },
+                      {
+                        "cost": "1",
+                        "definition_id": "DEFEND_IRONCLAD",
+                        "entity_id": {
+                          "public_slot": 40
+                        },
+                        "existing_enchantment": null,
+                        "is_upgraded": false,
+                        "keywords": null,
+                        "name": "Defend",
+                        "public_card_views": {
+                          "referent:player:/properties/hand/*": {
+                            "after_upgrade": null,
+                            "can_play": false,
+                            "description": "Gain 5 Block.",
+                            "is_selected": false,
+                            "stats": {
+                              "block": 5
+                            },
+                            "target_type": "Self",
+                            "unplayable_reason": "EnergyCostTooHigh"
+                          }
+                        },
+                        "rarity": "Basic",
+                        "star_cost": null,
+                        "type": "Skill"
+                      }
+                    ],
+                    "hp": 44,
+                    "max_energy": 3,
+                    "max_hp": 80,
+                    "max_potion_slots": 2,
+                    "orb_slots": 0,
+                    "orbs": [],
+                    "player_entity_id": {
+                      "public_slot": 0
+                    },
+                    "potion_states": [
+                      {
+                        "automatic": false,
+                        "can_use": true,
+                        "entity_id": {
+                          "public_slot": 1
+                        },
+                        "target_type": "AnyPlayer"
+                      }
+                    ],
+                    "potions": [
+                      {
+                        "card_previews": [],
+                        "definition_id": "DEXTERITY_POTION",
+                        "description": "Gain 2 Dexterity.",
+                        "entity_id": {
+                          "public_slot": 1
+                        },
+                        "keywords": [
+                          {
+                            "description": "Dexterity improves Block gained from cards.",
+                            "name": "Dexterity"
+                          }
+                        ],
+                        "name": "Dexterity Potion",
+                        "slot": 0
+                      }
+                    ],
+                    "relics": [
+                      {
+                        "card_previews": [],
+                        "definition_id": "BURNING_BLOOD",
+                        "description": "At the end of combat, heal 6 HP.",
+                        "entity_id": {
+                          "public_slot": 2
+                        },
+                        "keywords": [],
+                        "name": "Burning Blood"
+                      },
+                      {
+                        "card_previews": [
+                          {
+                            "cost": "1",
+                            "definition_id": "NEOWS_FURY",
+                            "entity_id": {
+                              "public_slot": 4
+                            },
+                            "existing_enchantment": null,
+                            "is_upgraded": false,
+                            "keywords": [
+                              "Exhaust"
+                            ],
+                            "name": "Neow's Fury",
+                            "public_card_views": {
+                              "persistent:/player/relics/*/card_previews/*": {
+                                "after_upgrade": null,
+                                "can_play": null,
+                                "description": "Deal 10 damage. Put up to 2 cards from your Discard Pile into your Hand. Exhaust.",
+                                "is_selected": false,
+                                "stats": null,
+                                "target_type": null,
+                                "unplayable_reason": null
+                              }
+                            },
+                            "rarity": "Ancient",
+                            "star_cost": null,
+                            "type": "Attack"
+                          }
+                        ],
+                        "definition_id": "NEOWS_TORMENT",
+                        "description": "Upon pickup, add 1 Neow's Fury to your Deck.",
+                        "entity_id": {
+                          "public_slot": 3
+                        },
+                        "keywords": [
+                          {
+                            "description": "Removed until the end of combat.",
+                            "name": "Exhaust"
+                          }
+                        ],
+                        "name": "Neow's Torment"
+                      },
+                      {
+                        "card_previews": [],
+                        "counter": 0,
+                        "definition_id": "SWORD_OF_STONE",
+                        "description": "Transforms into a powerful Relic after defeating 5 Elites.",
+                        "entity_id": {
+                          "public_slot": 5
+                        },
+                        "keywords": [],
+                        "name": "Sword of Stone"
+                      }
+                    ],
+                    "stars_visible": false,
+                    "statuses": []
+                  },
+                  "public_slot": 0,
+                  "role": "player",
+                  "state": {
+                    "visible": true
+                  }
+                },
+                "name": null,
+                "role": "target"
+              }
+            ],
+            "history": {
+              "card_reward_declined": false,
+              "shop_inspected": false
+            },
+            "label": "Use Dexterity Potion",
+            "subject": {
+              "label": "Dexterity Potion",
+              "properties": {
+                "automatic": false,
+                "can_use": true,
+                "card_previews": [],
+                "definition_id": "DEXTERITY_POTION",
+                "description": "Gain 2 Dexterity.",
+                "entity_id": {
+                  "public_slot": 1
+                },
+                "keywords": [
+                  {
+                    "description": "Dexterity improves Block gained from cards.",
+                    "name": "Dexterity"
+                  }
+                ],
+                "name": "Dexterity Potion",
+                "slot": 0,
+                "target_entity_ids": [
+                  {
+                    "public_slot": 0
+                  }
+                ],
+                "target_type": "AnyPlayer"
+              },
+              "public_slot": 1,
+              "role": "potion",
+              "state": {
+                "visible": true
+              }
+            },
+            "verb": "use"
+          },
+          "family": "combat_turn",
+          "index": 66
+        }
+      ],
+      "standalone_terminal_persistent_and_all_reads_equal_diagnostic_only": true,
+      "unique_map_tutorial_settling_snapshots_with_zero_actions": 1,
+      "verified_deliveries": {
+        "native": 137,
+        "official": 137
+      }
+    }
+  ],
+  "checkpoint_promoted": false,
+  "environment_id": "sha256:c7f1b750a7c863a8aba837e8873f91b925de27ced45c8eaec41685e5b9675ace",
+  "expanded_protected_files_exact": 21012,
+  "first_assessment_report_format_failure_preserved": true,
+  "frozen_game_and_current_adapters_unchanged": true,
+  "full_game_playing_strength_evaluated": false,
+  "genuine_matching_ending_pairs": 0,
+  "later_states_realigned_for_admission": false,
+  "new_games": 0,
+  "next_owner_command": null,
+  "next_step": "source_saved_repairs_for_event_enablement_and_shop_counter_visibility_then_address_shop_task_risk",
+  "noncombat_potion_use_exercised_by_this_panel": false,
+  "optimizer_updates": 0,
+  "original_weights_and_all_Adam_unchanged": true,
+  "overall_workflow_qualification_granted": false,
+  "prior_focused_potion_controls_keep_their_existing_scope": true,
+  "prior_protection_files_exact": 20590,
+  "reconstructed_deliveries": 486,
+  "references": [
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v2/report.json",
+      "sha256": "de9c40ebf3a8deb0f4723c94877faf0e972a1aabc8ce39bb19d9fa6bc83bf03c"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v2/assess.py",
+      "sha256": "cae718df0f04aec9c5b42fb02b33f67966e52c23ad52d7656a92ea63b40d99b6"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v2/locked-event-option-gap.json",
+      "sha256": "9e45a9b191e91f31083355094749d7d4fa3a955ccb2b04cd70b1355171b0e2b6"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v2/shop-relic-counter-gap.json",
+      "sha256": "2cfbdbc6006fad1b32c481238c8ab7cacde5cd4a51fda56b476f99a17fa55e3d"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v2/source-diagnosis.json",
+      "sha256": "d501ebf42b0e0e10963290872b8b8cc65023886ba15b99961adec6ca487381d6"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v2/protected.json",
+      "sha256": "6574686263f0a83e8b4a55b1979c6d358dcd3c1ffe455423edaacc8f957b02c2"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-owner-assessment-v2.json",
+      "sha256": "e283896b88e6867d0bf0c3e751446260e62e149caf29cd423e015a28b45b1441"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-owner-assessment-v1.json",
+      "sha256": "342c0eb26ab717c73a86d53def37a04fd26c6bc42e857e6d947e798ff3b76621"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/owner-assessment-v1/assess.py",
+      "sha256": "9570ae92e61c6938f59c10a71dd591473c44304bf802e8c8a482f6d8b277601e"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/natural-ending-panel-v1/report.json",
+      "sha256": "23bd764458607f5d852eaed7c3bde17d44c079ea6711bd344e37a87e15bb2d29"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-endings-v1-attempt-1.json",
+      "sha256": "953c8c3f904117344fdeb758beb9e3c1d39ca2714275c2cee9e59959caa68f41"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-action-lifecycle-endings-v1.json",
+      "sha256": "f2dd861ff759afc7151ac23603458f73e4cece5915d88a94d107a4d371f8d44c"
+    },
+    {
+      "path": "docs/native-action-lifecycle-ending-result.md",
+      "sha256": "ddf8389bd10babf71e5ed5a1fd70f5662cf6691d0aae775ddff9aa82ad28a4b5"
+    }
+  ],
+  "remaining_gaps": [
+    "locked_event_option_public_enablement",
+    "shop_relic_counter_visibility",
+    "shop_background_task_completion_qualification_risk"
+  ],
+  "report_id": "sha256:01a1f7278b8fa0812fd1443258acc10353a4765ec80feae26040747dad9b0326",
+  "saved_assessment_resource_id": "sha256:ebb6bea4dacbd3ed5629883c51f1cbf6ceb2efb4dbe09325ac5fe8a4d754c4f4",
+  "saved_assessment_wall_seconds": 46.2431103750132,
+  "schema_version": "native-action-lifecycle-ending-owner-evidence-v1",
+  "source_assessment_id": "sha256:f5e4d64a52a9848f72c72e77fa490b9e08808cc3f22374b0c8b79148a213cf17",
+  "source_inventory_does_not_prove_all_public_fact_semantics": true,
+  "source_panel_id": "sha256:77bf83c992b34d348566d5c7b9c33e1011cd912f58b9f81d1766c830aa624dfd",
+  "source_resource_id": "sha256:c4706af36c29561e2b52faa0f4bd886324bd1b528d78f17dc1ecf03c9bd6c9db",
+  "status": "two_public_fact_projection_gaps_no_new_noncombat_potion_use_evidence",
+  "training_allowed": false
+}

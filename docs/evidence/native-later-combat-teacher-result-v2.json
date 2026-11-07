@@ -1,0 +1,121 @@
+{
+  "schema_version": "native-later-combat-teacher-portable-result-v2",
+  "assessment": "completed_sparse_later_turn_feedback_no_admitted_improvements_prioritize_coherent_turn_teacher",
+  "source_report_id": "sha256:c712ceb099e5776ed3ef6721650147ea61c33ea21feaab80719b9dc078aa16dc",
+  "config_id": "sha256:33a912e986aaf0ce9b88dd083bd243d825c280bdfef3ab7a9ba4c67b9c6de433",
+  "saved_outcome_assessment_id": "sha256:dff99ae0bc276ea221f734696ff264aeb415025f7b49cca57810ec3de9ed2b03",
+  "public_root_policy_check_id": "sha256:913b3d42f072360b3d3e53a29d4c389577fb5b9d8d02ba90d0afdd16396ba1b0",
+  "receipt_and_outcome_auditor_sha256": "3c1e75932437f9ce2877f0aacd7134d5b0dcfcb0b32df2e0cec5bba59a46841d",
+  "verification": {
+    "branch_receipts_verified": 456,
+    "source_files_verified": 28943,
+    "decision_counts_from_sealed_headers": 68524,
+    "decision_histories_decoded": 0,
+    "production_choice_probabilities_reconstructed": false,
+    "native_journal_bytes_verified": true,
+    "native_delivery_semantically_reaudited": false,
+    "branch_bindings_and_terminal_returns_reconstructed": true,
+    "action_tables_exactly_reconstructed": true,
+    "original_players_and_full_Adam_unchanged": true,
+    "strict_preference_gate_unchanged": true
+  },
+  "results": {
+    "admitted_preferences": 0,
+    "paired_alternative_counts": {
+      "negative_pairs": 79,
+      "positive_pairs": 23,
+      "tied_pairs": 290
+    },
+    "tied_pair_fraction": 0.7397959183673469,
+    "distinct_original_worlds": 8,
+    "roots_with_different_action_means": 6,
+    "roots_with_all_branch_returns_identical": 2,
+    "act_clearing_branches": 3,
+    "full_run_wins": 0,
+    "maximum_floor": 21
+  },
+  "smallest_improvement_sign_p": 0.36328125,
+  "current_end_turn_probabilities_at_clearest_negative_examples": [
+    {
+      "root_index": 0,
+      "end_turn_probability": 6.569659867785679e-05,
+      "reference_probability": 0.40273127341852016
+    },
+    {
+      "root_index": 7,
+      "end_turn_probability": 0.0010111508320023261,
+      "reference_probability": 0.3541987097295511
+    }
+  ],
+  "root_greedy_choices_match_frozen_references": true,
+  "collection_resources": [
+    {
+      "cpu_seconds": 649.1620589269996,
+      "final_storage_bytes": 412287560,
+      "path": "artifacts/resources/native-later-combat-teacher-pilot-v2-1.json",
+      "peak_resident_memory_bytes": 391790592,
+      "report_id": "sha256:e6953e962fbfcc1b691c20533d15fb8349ca333eeef2c6619f7130e7c51cc834",
+      "wall_seconds": 788.3641815420706
+    },
+    {
+      "cpu_seconds": 478.6106791859997,
+      "final_storage_bytes": 674543587,
+      "path": "artifacts/resources/native-later-combat-teacher-pilot-v2-2.json",
+      "peak_resident_memory_bytes": 385990656,
+      "report_id": "sha256:682c3c5589d36cfb98285459d977d66474ae9cdfedbd9cd523b9e782a50dee2b",
+      "wall_seconds": 592.4904675830621
+    }
+  ],
+  "collection_totals": {
+    "collection_wall_seconds_sum_of_sessions": 1380.8546491251327,
+    "collection_cpu_seconds_sum_of_sessions": 1127.7727381129994,
+    "collection_peak_resident_memory_bytes": 391790592,
+    "collection_final_storage_bytes_cumulative_not_summed": 674543587
+  },
+  "assessment_resources": {
+    "report_id": "sha256:cc8389c0853dc7d4f20fef7cd994c62d386f178500c151f9e01e95abc21a8267",
+    "wall_seconds": 17.493339292006567,
+    "cpu_seconds": 11.486561442000001,
+    "peak_resident_memory_bytes": 150945792
+  },
+  "protected_players": [
+    {
+      "Adam_steps": 5658,
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "state_sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+    },
+    {
+      "Adam_steps": 6045,
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "state_sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+    }
+  ],
+  "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+  "conditional_replicates_not_independent_worlds": true,
+  "reverse_tests_and_leave_one_out_are_posthoc_descriptive": true,
+  "different_roots_prevent_causal_comparison_with_v1": true,
+  "next_work": "separately_versioned_bounded_coherent_turn_feedback_before_more_of_the_same_collection_or_supervision",
+  "new_games": 0,
+  "optimizer_steps": 0,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "ordinary_PPO_eligible": false,
+  "automatic_training_follows": false,
+  "repository_verification": {
+    "report_id": "sha256:0fa7ff02b67b5ec7aac55f7f2cdc0c7471387e879ec7aa8877f9ee2626913c6a",
+    "status": "capped",
+    "wall_seconds": 240.14143337495625,
+    "wall_cap_seconds": 240,
+    "format_lint_and_strict_types_passed": true,
+    "full_current_suite_pass_established": false,
+    "last_implementation_check_passed_tests": 1927,
+    "tracked_changes_documentation_only": true,
+    "longer_run_automatically_started": false
+  },
+  "evidence_id": "sha256:7d887ab845eb70ca21a9d4ddee22b994ac3bef1351bd672f04179d3958a17760"
+}

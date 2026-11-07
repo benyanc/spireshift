@@ -1,0 +1,123 @@
+{
+  "schema_version": "native-mechanics-sweep-and-followups-evidence-v1",
+  "date": "2026-10-15",
+  "game": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "character": "Ironclad",
+    "ascension": 8,
+    "host": "v32"
+  },
+  "sweep": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v7.json",
+    "report_id": "sha256:1d4b84bb60d9cf5f59d9b461835f2a4f459ee459d28180404583a9a97c03e1dc",
+    "plan_id": "sha256:c2ba20df295b02f05286c247c8630b3a079553f0b6338bf2bad0b60d30ab79d7",
+    "planned_cases": 1849,
+    "completed_cases": 1849,
+    "not_attempted_cases": 0,
+    "case_statuses": {
+      "effect_exercised": 1721,
+      "observed_prerequisite_blocked": 128
+    },
+    "known_gaps": [],
+    "inventory_complete": true,
+    "registered_native_types": 1660,
+    "all_saved_case_hashes_reverified": true,
+    "resources": {
+      "report_id": "sha256:be66663993367c283c99cb485fe355613eff5227811d172fb0faf066fcfca0e1",
+      "wall_seconds": 2730.1384016249795,
+      "cpu_seconds": 1916.9361194320009,
+      "peak_resident_memory_bytes": 379305984,
+      "final_storage_bytes": 353067667
+    }
+  },
+  "followups": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-followups-v1.json",
+    "report_id": "sha256:2e6c8c94410940e208b31a90a0420c913222e0f700ca569af9a3ab8ed5cb912b",
+    "status": "scoped_followups_pass",
+    "resources": {
+      "report_id": "sha256:b73ab54c7b55cb4652e9fac4d92ae6a3e1c79a511909f15d22eeb38dd5d94169",
+      "wall_seconds": 33.829247665940784,
+      "cpu_seconds": 21.155958629000008,
+      "peak_resident_memory_bytes": 302874624,
+      "final_storage_bytes": 7201328
+    },
+    "saved_only_verification_passed": true
+  },
+  "random_legal_sequences": {
+    "report_id": "sha256:b276c17426b6a1bba9fead9d2107b7046c0df8f8ad2c183e87cda9979ad026e4",
+    "planned_cases": 9,
+    "completed_cases": 9,
+    "not_attempted_cases": 0,
+    "failed_cases": 0,
+    "independent_game_seeds": 4,
+    "decisions": 522,
+    "families": {
+      "card_reward_selection": 12,
+      "card_selection": 5,
+      "combat_turn": 412,
+      "event_option": 20,
+      "game_over": 9,
+      "map_navigation": 26,
+      "reward_claim": 33,
+      "reward_completion": 6,
+      "shop_inventory": 8
+    },
+    "verbs": {
+      "activate": 89,
+      "close": 4,
+      "confirm": 5,
+      "end_turn": 123,
+      "play": 283,
+      "select": 8,
+      "skip": 4,
+      "use": 6
+    },
+    "repeat_controls_identical": true,
+    "bounded_prefixes": 0,
+    "terminal_observations": 9,
+    "full_run_attempts": 9,
+    "terminal_outcomes_readiness_eligible": false,
+    "policy_quality_evaluated": false
+  },
+  "native_lifecycle": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-native-run-progression-v7.json",
+    "report_id": "sha256:41e8c2f0211866f5563a7a4f07d813183181c6ee78953aff42055bfcbca4af53",
+    "status": "native_progression_pass",
+    "forced_boss_defeats": 3,
+    "player_victories_qualified": 0,
+    "act_boundaries": [
+      1,
+      2,
+      3
+    ],
+    "architect_dialogue_and_zero_hp_victory_checked": true,
+    "same_build_as_sweep": true,
+    "isolation": {
+      "archive_unchanged": true,
+      "candidate_unchanged": true,
+      "runtime_unchanged": true,
+      "shared_profile_unchanged": true
+    },
+    "games_replayed_by_saved_verification": 0
+  },
+  "requirements_resolved_by_followups": {
+    "act_and_terminal_transitions": "exercised_native_diagnostic",
+    "random_legal_action_sequences": "exercised_native_diagnostic"
+  },
+  "requirements_remaining": [
+    "out_of_combat_potion_use",
+    "non_creature_potion_target"
+  ],
+  "prior_failed_sweep_and_blocked_launch_reports_preserved": true,
+  "game_apps_created": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "checkpoint_promoted": false,
+  "source_code_changed": false,
+  "existing_repository_test_count": 1367,
+  "all_interactions_proven": false,
+  "shipped_cross_host_parity": false,
+  "claim_scope": "finite_all_pool_fixtures_bounded_random_sequences_and_privileged_same_build_lifecycle_only",
+  "evidence_id": "sha256:5897121a56a40ca31174b300446d6596d3ba418630c1abc13e80113a5713d7d2"
+}

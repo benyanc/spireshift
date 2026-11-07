@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-option-evidence-config-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "config_id",
+    "encoder_id",
+    "trajectory_config",
+    "selection_fraction",
+    "selection_salt",
+    "complete_run_subfolds",
+    "minimum_runs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "starting-option-evidence-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "encoder_id": {
+      "const": "starting-ancient-public-option-v1"
+    },
+    "trajectory_config": {
+      "$ref": "https://spireshift.dev/schemas/run-level-trajectory-search-config-v4.json"
+    },
+    "selection_fraction": {
+      "const": 0.25
+    },
+    "selection_salt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "complete_run_subfolds": {
+      "type": "object",
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "properties": {
+        "fit": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "selection": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "minimum_runs": {
+      "type": "object",
+      "required": [
+        "fit",
+        "selection",
+        "strong_selection"
+      ],
+      "properties": {
+        "fit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "selection": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "strong_selection": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

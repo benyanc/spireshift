@@ -1,0 +1,1388 @@
+{
+  "aggregate_fresh_game_progress": {
+    "initial": {
+      "attempts": 64,
+      "best_floor": 33,
+      "runs_completing_an_act": 5
+    },
+    "reference_clone": {
+      "attempts": 64,
+      "best_floor": 27,
+      "runs_completing_an_act": 2
+    },
+    "teacher_clone": {
+      "attempts": 64,
+      "best_floor": 17,
+      "runs_completing_an_act": 0
+    }
+  },
+  "changed_target_probabilities": {
+    "2": [
+      {
+        "targets": [
+          {
+            "cross_entropy": 0.12843005664180573,
+            "greedy_matches": true,
+            "log_probability_margin_over_best_other": 2.5752822908799615,
+            "probability": 0.879475073707341
+          }
+        ],
+        "world": "SP1RESH1FTEXPM148"
+      },
+      {
+        "targets": [
+          {
+            "cross_entropy": 0.020646606686963054,
+            "greedy_matches": true,
+            "log_probability_margin_over_best_other": 3.8789695387936263,
+            "probability": 0.9795650751565189
+          },
+          {
+            "cross_entropy": 0.022921723985884768,
+            "greedy_matches": true,
+            "log_probability_margin_over_best_other": 3.7793890724514627,
+            "probability": 0.9773389829792386
+          }
+        ],
+        "world": "SP1RESH1FTEXPM192"
+      }
+    ],
+    "3": [
+      {
+        "targets": [
+          {
+            "cross_entropy": 0.17876108605522134,
+            "greedy_matches": true,
+            "log_probability_margin_over_best_other": 2.2928445737727854,
+            "probability": 0.8363056806200229
+          }
+        ],
+        "world": "SP1RESH1FTEXPM148"
+      },
+      {
+        "targets": [
+          {
+            "cross_entropy": 0.029917336361410918,
+            "greedy_matches": true,
+            "log_probability_margin_over_best_other": 3.665505474418846,
+            "probability": 0.9705257574231169
+          },
+          {
+            "cross_entropy": 0.026776626474386944,
+            "greedy_matches": true,
+            "log_probability_margin_over_best_other": 3.6236688807067168,
+            "probability": 0.9735786889416451
+          }
+        ],
+        "world": "SP1RESH1FTEXPM192"
+      }
+    ]
+  },
+  "complete_taught_traces_reproduced": [
+    {
+      "changed_target_reach": [
+        {
+          "exact_state_reached": true,
+          "observed_positions_and_actions": [
+            [
+              5,
+              3
+            ]
+          ],
+          "public_input_id": "sha256:c27d60bb9a24320fd3f2d13a8e66111aefbe1a89a7dcf19e548e9140506096f2",
+          "target_action": 3,
+          "target_taken_on_every_visit": true
+        }
+      ],
+      "player": 2,
+      "versus_taught_plan": {
+        "departure_is_proven_mistake": false,
+        "exact_common_prefix_actions": 27,
+        "executed_actions": 27,
+        "expected_actions": 27,
+        "first_departure": null,
+        "post_departure_states_compared_by_position": false,
+        "same_complete_trace": true
+      },
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "changed_target_reach": [
+        {
+          "exact_state_reached": true,
+          "observed_positions_and_actions": [
+            [
+              5,
+              3
+            ]
+          ],
+          "public_input_id": "sha256:c27d60bb9a24320fd3f2d13a8e66111aefbe1a89a7dcf19e548e9140506096f2",
+          "target_action": 3,
+          "target_taken_on_every_visit": true
+        }
+      ],
+      "player": 3,
+      "versus_taught_plan": {
+        "departure_is_proven_mistake": false,
+        "exact_common_prefix_actions": 27,
+        "executed_actions": 27,
+        "expected_actions": 27,
+        "first_departure": null,
+        "post_departure_states_compared_by_position": false,
+        "same_complete_trace": true
+      },
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "changed_target_reach": [
+        {
+          "exact_state_reached": true,
+          "observed_positions_and_actions": [
+            [
+              0,
+              2
+            ]
+          ],
+          "public_input_id": "sha256:7d2a432cd8718a3401d045326aff2be40f208bc5f80cff5b567a632e5127f600",
+          "target_action": 2,
+          "target_taken_on_every_visit": true
+        },
+        {
+          "exact_state_reached": true,
+          "observed_positions_and_actions": [
+            [
+              2,
+              3
+            ]
+          ],
+          "public_input_id": "sha256:eeaa5582f1b3c7b4e87e6929da7d4c8314d21e009d08649b00aea8fd427b6e9c",
+          "target_action": 3,
+          "target_taken_on_every_visit": true
+        }
+      ],
+      "player": 2,
+      "versus_taught_plan": {
+        "departure_is_proven_mistake": false,
+        "exact_common_prefix_actions": 11,
+        "executed_actions": 11,
+        "expected_actions": 11,
+        "first_departure": null,
+        "post_departure_states_compared_by_position": false,
+        "same_complete_trace": true
+      },
+      "world": "SP1RESH1FTEXPM192"
+    },
+    {
+      "changed_target_reach": [
+        {
+          "exact_state_reached": true,
+          "observed_positions_and_actions": [
+            [
+              0,
+              2
+            ]
+          ],
+          "public_input_id": "sha256:7d2a432cd8718a3401d045326aff2be40f208bc5f80cff5b567a632e5127f600",
+          "target_action": 2,
+          "target_taken_on_every_visit": true
+        },
+        {
+          "exact_state_reached": true,
+          "observed_positions_and_actions": [
+            [
+              2,
+              3
+            ]
+          ],
+          "public_input_id": "sha256:eeaa5582f1b3c7b4e87e6929da7d4c8314d21e009d08649b00aea8fd427b6e9c",
+          "target_action": 3,
+          "target_taken_on_every_visit": true
+        }
+      ],
+      "player": 3,
+      "versus_taught_plan": {
+        "departure_is_proven_mistake": false,
+        "exact_common_prefix_actions": 11,
+        "executed_actions": 11,
+        "expected_actions": 11,
+        "first_departure": null,
+        "post_departure_states_compared_by_position": false,
+        "same_complete_trace": true
+      },
+      "world": "SP1RESH1FTEXPM192"
+    }
+  ],
+  "completed_units": 295,
+  "diagnosis_resources": {
+    "id": "sha256:a3d210ff5ec782aa59e98496edf36e89b8090194a965426425622a58e0d03ccb",
+    "path": "artifacts/resources/native-teaching-diagnosis-comparison-v1-1.json"
+  },
+  "evidence_id": "sha256:b5cc8b5e5c503a641781242a768fb866b29ae7c13a3b38319a56ca7f687abb65",
+  "failure": {
+    "case_id": "sha256:e1453c8b4b75fd7efdac29b4f6a803791f956e5597ddbc213b90c86d116dbed4",
+    "counted_as_zero_in_original_denominator": true,
+    "decisions": 4096,
+    "error": "Whole-episode decision cap",
+    "last_public_hp": 12,
+    "last_public_round": 1004,
+    "last_six_public_actions": [
+      {
+        "action": "Play Defend",
+        "decision": 4090,
+        "public_input_id": "sha256:32838ec76caf85775fc06b98be6d0e6c3c7349b28cb7ebd44785227bd923bdbd"
+      },
+      {
+        "action": "End turn",
+        "decision": 4091,
+        "public_input_id": "sha256:bab481e8a7a3a4df8b2eb38140c248de1739b98f7c3621fe9424c129ecad6ac9"
+      },
+      {
+        "action": "Play Havoc",
+        "decision": 4092,
+        "public_input_id": "sha256:3b32ebe3fa60db80723e7d498d2ddeb89474659951ac845e301f8a9cbea190c5"
+      },
+      {
+        "action": "Play Defend",
+        "decision": 4093,
+        "public_input_id": "sha256:b2777e990cfe7e2f3409fd5be8e5213bc7d1c9698d128622889ce966129df592"
+      },
+      {
+        "action": "Play Defend",
+        "decision": 4094,
+        "public_input_id": "sha256:14cba52a3749ac011213fccca78d6c6eced7d824cbd701e45009bcfb43291415"
+      },
+      {
+        "action": "End turn",
+        "decision": 4095,
+        "public_input_id": "sha256:cd03b48ce49489a7218f5cb0faf0551276491eabf342ee9c54a567e280c1ef7b"
+      }
+    ],
+    "public_enemy_states": [
+      {
+        "block": 0,
+        "definition_id": "TOADPOLE",
+        "hp": 10
+      }
+    ],
+    "public_piles": [
+      {
+        "card_count": 0,
+        "card_definitions": [],
+        "ordering_semantics": "unordered_multiset",
+        "zone": "draw"
+      },
+      {
+        "card_count": 3,
+        "card_definitions": [
+          "DEFEND_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "HAVOC"
+        ],
+        "ordering_semantics": "unordered_multiset",
+        "zone": "discard"
+      },
+      {
+        "card_count": 9,
+        "card_definitions": [
+          "ASCENDERS_BANE",
+          "BASH",
+          "BLOOD_WALL",
+          "DEFEND_IRONCLAD",
+          "STRIKE_IRONCLAD",
+          "STRIKE_IRONCLAD",
+          "STRIKE_IRONCLAD",
+          "STRIKE_IRONCLAD",
+          "STRIKE_IRONCLAD"
+        ],
+        "ordering_semantics": "unordered_multiset",
+        "zone": "exhaust"
+      }
+    ],
+    "retried": false,
+    "seed": "SP1RESH1FTSTUDM021",
+    "source_bytes_unchanged": true,
+    "source_header": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/fresh-2601020-p3-reference-clone/episode.json",
+    "trace_sha256": "dc9cae4db8f4763f43c3d23ceed43d56ca67b622d20f5d08bf28e137f98641c4",
+    "used_for_training": false
+  },
+  "fitting_fights": [
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:6ee77d83fba8d69e1a3940fe98c4115f729771de87884a5f45f1cfc04197584c",
+        "gold": 26.0,
+        "hp": 23.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "OLD_COIN",
+          "SMALL_CAPSULE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "arm": "initial",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:6ee77d83fba8d69e1a3940fe98c4115f729771de87884a5f45f1cfc04197584c",
+        "gold": 26.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "OLD_COIN",
+          "SMALL_CAPSULE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:6ee77d83fba8d69e1a3940fe98c4115f729771de87884a5f45f1cfc04197584c",
+        "gold": 26.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "OLD_COIN",
+          "SMALL_CAPSULE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "arm": "initial",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:6ee77d83fba8d69e1a3940fe98c4115f729771de87884a5f45f1cfc04197584c",
+        "gold": 26.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "OLD_COIN",
+          "SMALL_CAPSULE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:6ee77d83fba8d69e1a3940fe98c4115f729771de87884a5f45f1cfc04197584c",
+        "gold": 26.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "OLD_COIN",
+          "SMALL_CAPSULE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:6ee77d83fba8d69e1a3940fe98c4115f729771de87884a5f45f1cfc04197584c",
+        "gold": 26.0,
+        "hp": 23.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "OLD_COIN",
+          "SMALL_CAPSULE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM148"
+    },
+    {
+      "arm": "initial",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:cc20a7b0f37f6a424253a1984a68f0966195791725bbc85e360bcdef38233979",
+        "gold": 107.0,
+        "hp": 31.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "PRECISE_SCISSORS"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM192"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:cc20a7b0f37f6a424253a1984a68f0966195791725bbc85e360bcdef38233979",
+        "gold": 107.0,
+        "hp": 31.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "PRECISE_SCISSORS"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM192"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:cc20a7b0f37f6a424253a1984a68f0966195791725bbc85e360bcdef38233979",
+        "gold": 107.0,
+        "hp": 48.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "PRECISE_SCISSORS"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM192"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:cc20a7b0f37f6a424253a1984a68f0966195791725bbc85e360bcdef38233979",
+        "gold": 107.0,
+        "hp": 31.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "PRECISE_SCISSORS"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM192"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:cc20a7b0f37f6a424253a1984a68f0966195791725bbc85e360bcdef38233979",
+        "gold": 107.0,
+        "hp": 48.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "PRECISE_SCISSORS"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM192"
+    },
+    {
+      "arm": "initial",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:cc20a7b0f37f6a424253a1984a68f0966195791725bbc85e360bcdef38233979",
+        "gold": 107.0,
+        "hp": 36.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "PRECISE_SCISSORS"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM192"
+    }
+  ],
+  "fresh_games": {
+    "checkpoint_promoted": false,
+    "complete": true,
+    "failures_and_unattempted_value": 0,
+    "independent_unit": "native_seed_jointly_across_two_fixed_initializers",
+    "paired_by_player": {
+      "2": {
+        "reference_clone_minus_initial": {
+          "completed_acts": {
+            "interval95": [
+              -0.09375,
+              0.0
+            ],
+            "mean": -0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -2.1875,
+              1.0625
+            ],
+            "mean": -0.46875
+          },
+          "training_return": {
+            "interval95": [
+              -0.008516011627540326,
+              0.0012448945530842083
+            ],
+            "mean": -0.0025587915086948453
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "teacher_clone_minus_initial": {
+          "completed_acts": {
+            "interval95": [
+              -0.09375,
+              0.0
+            ],
+            "mean": -0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -2.40625,
+              0.1875
+            ],
+            "mean": -0.9375
+          },
+          "training_return": {
+            "interval95": [
+              -0.008643511910587836,
+              0.0003843045609637114
+            ],
+            "mean": -0.0029879197025344337
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "teacher_clone_minus_reference_clone": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.5,
+              0.46875
+            ],
+            "mean": -0.46875
+          },
+          "training_return": {
+            "interval95": [
+              -0.0017548178864647645,
+              0.0008009678363815813
+            ],
+            "mean": -0.00042912819383958813
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        }
+      },
+      "3": {
+        "reference_clone_minus_initial": {
+          "completed_acts": {
+            "interval95": [
+              -0.1875,
+              0.0625
+            ],
+            "mean": -0.0625
+          },
+          "maximum_floor": {
+            "interval95": [
+              -2.4375,
+              1.125
+            ],
+            "mean": -0.75
+          },
+          "training_return": {
+            "interval95": [
+              -0.013765989968915133,
+              0.004111497848075093
+            ],
+            "mean": -0.004878767754572881
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "teacher_clone_minus_initial": {
+          "completed_acts": {
+            "interval95": [
+              -0.25,
+              -0.03125
+            ],
+            "mean": -0.125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -2.40625,
+              1.25
+            ],
+            "mean": -0.53125
+          },
+          "training_return": {
+            "interval95": [
+              -0.01680452301952947,
+              -0.00047576414559764185
+            ],
+            "mean": -0.007928626140586302
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "teacher_clone_minus_reference_clone": {
+          "completed_acts": {
+            "interval95": [
+              -0.15625,
+              0.0
+            ],
+            "mean": -0.0625
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.15625,
+              1.5
+            ],
+            "mean": 0.21875
+          },
+          "training_return": {
+            "interval95": [
+              -0.009876877586165643,
+              0.002148695724695023
+            ],
+            "mean": -0.0030498583860134234
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        }
+      }
+    },
+    "players": [
+      {
+        "arms": {
+          "initial": {
+            "best_floor": 25,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_floor": 12.125,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          },
+          "reference_clone": {
+            "best_floor": 17,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_floor": 11.65625,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          },
+          "teacher_clone": {
+            "best_floor": 17,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_floor": 11.1875,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          }
+        },
+        "player": 2
+      },
+      {
+        "arms": {
+          "initial": {
+            "best_floor": 33,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_floor": 14.375,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          },
+          "reference_clone": {
+            "best_floor": 27,
+            "denominator": 32,
+            "failed_games": 1,
+            "mean_floor": 13.625,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          },
+          "teacher_clone": {
+            "best_floor": 17,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_floor": 13.84375,
+            "not_attempted_games": 0,
+            "recorded": 32,
+            "wins": 0
+          }
+        },
+        "player": 3
+      }
+    ],
+    "pooled_paired": {
+      "reference_clone_minus_initial": {
+        "completed_acts": {
+          "interval95": [
+            -0.109375,
+            0.015625
+          ],
+          "mean": -0.046875
+        },
+        "maximum_floor": {
+          "interval95": [
+            -1.953125,
+            0.78125
+          ],
+          "mean": -0.609375
+        },
+        "training_return": {
+          "interval95": [
+            -0.009048037831574866,
+            0.0014196153565181097
+          ],
+          "mean": -0.003718779631633863
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      },
+      "teacher_clone_minus_initial": {
+        "completed_acts": {
+          "interval95": [
+            -0.140625,
+            -0.015625
+          ],
+          "mean": -0.078125
+        },
+        "maximum_floor": {
+          "interval95": [
+            -2.0,
+            0.421875
+          ],
+          "mean": -0.734375
+        },
+        "training_return": {
+          "interval95": [
+            -0.01056374256051141,
+            -0.001008135987652662
+          ],
+          "mean": -0.005458272921560369
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      },
+      "teacher_clone_minus_reference_clone": {
+        "completed_acts": {
+          "interval95": [
+            -0.078125,
+            0.0
+          ],
+          "mean": -0.03125
+        },
+        "maximum_floor": {
+          "interval95": [
+            -0.984375,
+            0.703125
+          ],
+          "mean": -0.125
+        },
+        "training_return": {
+          "interval95": [
+            -0.005176167522102685,
+            0.0010010813551092302
+          ],
+          "mean": -0.001739493289926506
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      }
+    },
+    "primary_comparison": "teacher_clone_minus_reference_clone",
+    "terminal_victory_primary": true,
+    "training_worlds": 2,
+    "uncertainty_covers_population_of_initializers": false,
+    "untouched_original_comparisons_required": true
+  },
+  "heldout_fights": [
+    {
+      "arm": "reference_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:b4e56897bca456882e187c911c1a5b340603ff688cc89fa9bc325dcb896a101b",
+        "gold": 50.0,
+        "hp": 37.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "LEAD_PAPERWEIGHT"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM247"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:b4e56897bca456882e187c911c1a5b340603ff688cc89fa9bc325dcb896a101b",
+        "gold": 50.0,
+        "hp": 46.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "LEAD_PAPERWEIGHT"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM247"
+    },
+    {
+      "arm": "initial",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:b4e56897bca456882e187c911c1a5b340603ff688cc89fa9bc325dcb896a101b",
+        "gold": 50.0,
+        "hp": 37.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "LEAD_PAPERWEIGHT"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM247"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:b4e56897bca456882e187c911c1a5b340603ff688cc89fa9bc325dcb896a101b",
+        "gold": 50.0,
+        "hp": 48.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "LEAD_PAPERWEIGHT"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM247"
+    },
+    {
+      "arm": "initial",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:b4e56897bca456882e187c911c1a5b340603ff688cc89fa9bc325dcb896a101b",
+        "gold": 50.0,
+        "hp": 20.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "LEAD_PAPERWEIGHT"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM247"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:b4e56897bca456882e187c911c1a5b340603ff688cc89fa9bc325dcb896a101b",
+        "gold": 50.0,
+        "hp": 50.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "LEAD_PAPERWEIGHT"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM247"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:03696c2f7153c78e6d496911baf3c8b45eb9942fadd0d66196f6b0f644a64c74",
+        "gold": 13.0,
+        "hp": 0.0,
+        "max_hp": 67.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "FRESNEL_LENS",
+          "PHIAL_HOLSTER"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM232"
+    },
+    {
+      "arm": "initial",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:03696c2f7153c78e6d496911baf3c8b45eb9942fadd0d66196f6b0f644a64c74",
+        "gold": 13.0,
+        "hp": 0.0,
+        "max_hp": 67.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "FRESNEL_LENS",
+          "PHIAL_HOLSTER"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM232"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:03696c2f7153c78e6d496911baf3c8b45eb9942fadd0d66196f6b0f644a64c74",
+        "gold": 13.0,
+        "hp": 0.0,
+        "max_hp": 67.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "FRESNEL_LENS",
+          "PHIAL_HOLSTER"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM232"
+    },
+    {
+      "arm": "initial",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:03696c2f7153c78e6d496911baf3c8b45eb9942fadd0d66196f6b0f644a64c74",
+        "gold": 13.0,
+        "hp": 0.0,
+        "max_hp": 67.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "FRESNEL_LENS",
+          "PHIAL_HOLSTER"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM232"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:03696c2f7153c78e6d496911baf3c8b45eb9942fadd0d66196f6b0f644a64c74",
+        "gold": 13.0,
+        "hp": 0.0,
+        "max_hp": 67.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "FRESNEL_LENS",
+          "PHIAL_HOLSTER"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM232"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:03696c2f7153c78e6d496911baf3c8b45eb9942fadd0d66196f6b0f644a64c74",
+        "gold": 13.0,
+        "hp": 0.0,
+        "max_hp": 67.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "FRESNEL_LENS",
+          "PHIAL_HOLSTER"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM232"
+    },
+    {
+      "arm": "initial",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:f3b2b3a04f9180d1ef16476aecfdb76907a25bdaebe987dca85fe1412ef78c4c",
+        "gold": 141.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "HEFTY_TABLET"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM175"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:f3b2b3a04f9180d1ef16476aecfdb76907a25bdaebe987dca85fe1412ef78c4c",
+        "gold": 141.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "HEFTY_TABLET"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM175"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "loss",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:f3b2b3a04f9180d1ef16476aecfdb76907a25bdaebe987dca85fe1412ef78c4c",
+        "gold": 141.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "HEFTY_TABLET"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM175"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:f3b2b3a04f9180d1ef16476aecfdb76907a25bdaebe987dca85fe1412ef78c4c",
+        "gold": 141.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "HEFTY_TABLET"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM175"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:f3b2b3a04f9180d1ef16476aecfdb76907a25bdaebe987dca85fe1412ef78c4c",
+        "gold": 141.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "HEFTY_TABLET"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM175"
+    },
+    {
+      "arm": "initial",
+      "outcome": "loss",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:f3b2b3a04f9180d1ef16476aecfdb76907a25bdaebe987dca85fe1412ef78c4c",
+        "gold": 141.0,
+        "hp": 0.0,
+        "max_hp": 80.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "HEFTY_TABLET"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM175"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:6150bd042c681033735cd30b31a922e21d7d4b4a7c16d16a5a83443024efab3b",
+        "gold": 135.0,
+        "hp": 36.0,
+        "max_hp": 87.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "SILVER_CRUCIBLE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM188"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:6150bd042c681033735cd30b31a922e21d7d4b4a7c16d16a5a83443024efab3b",
+        "gold": 135.0,
+        "hp": 42.0,
+        "max_hp": 87.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "SILVER_CRUCIBLE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM188"
+    },
+    {
+      "arm": "initial",
+      "outcome": "win",
+      "player": 2,
+      "resources": {
+        "deck": "sha256:6150bd042c681033735cd30b31a922e21d7d4b4a7c16d16a5a83443024efab3b",
+        "gold": 135.0,
+        "hp": 40.0,
+        "max_hp": 87.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "SILVER_CRUCIBLE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM188"
+    },
+    {
+      "arm": "teacher_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:6150bd042c681033735cd30b31a922e21d7d4b4a7c16d16a5a83443024efab3b",
+        "gold": 135.0,
+        "hp": 29.0,
+        "max_hp": 87.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "SILVER_CRUCIBLE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM188"
+    },
+    {
+      "arm": "initial",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:6150bd042c681033735cd30b31a922e21d7d4b4a7c16d16a5a83443024efab3b",
+        "gold": 135.0,
+        "hp": 29.0,
+        "max_hp": 87.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "SILVER_CRUCIBLE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM188"
+    },
+    {
+      "arm": "reference_clone",
+      "outcome": "win",
+      "player": 3,
+      "resources": {
+        "deck": "sha256:6150bd042c681033735cd30b31a922e21d7d4b4a7c16d16a5a83443024efab3b",
+        "gold": 135.0,
+        "hp": 12.0,
+        "max_hp": 87.0,
+        "potions": [],
+        "relics": [
+          "BURNING_BLOOD",
+          "SILVER_CRUCIBLE"
+        ]
+      },
+      "status": "complete",
+      "world": "SP1RESH1FTEXPM188"
+    }
+  ],
+  "natural_fight_attempts": 36,
+  "new_copied_optimizer_updates_in_source_experiment": 256,
+  "new_experiment_or_training_authorized_by_result": false,
+  "next_proposed_work": [
+    "saved_public_card_zone_exhaustion_actor_distinction_audit",
+    "broader_fitting_only_curriculum_matched_teaching_work",
+    "separately_declared_shared_policy_interference_comparison"
+  ],
+  "owner_resource_reports": [
+    {
+      "id": "sha256:a07708a84c81677f66bd4d2ff5996761920732f85b7a41b9482fb02e7d47a4bc",
+      "path": "artifacts/resources/native-plan-teaching-comparison-v1-1.json"
+    },
+    {
+      "id": "sha256:8c98767812ba1f8f113da53dd1deee3bedf7c685aaa74a28400c723d515d562a",
+      "path": "artifacts/resources/native-plan-teaching-comparison-v1-2.json"
+    },
+    {
+      "id": "sha256:7d2c77d039cd7da64a80f9d467b668bbd0200a1471f5a94345f555494ef30f81",
+      "path": "artifacts/resources/native-plan-teaching-comparison-v1-3.json"
+    }
+  ],
+  "owner_resource_total": {
+    "cpu_seconds": 1474.8143499110004,
+    "cumulative_storage_is_summed": false,
+    "final_cumulative_storage_bytes": 633247870,
+    "peak_resident_memory_bytes": 719503360,
+    "wall_seconds": 2038.827392165549
+  },
+  "planned_units": 295,
+  "protected_checks": {
+    "all_saved_checkpoints_and_pinned_sources_unchanged": true,
+    "automatic_training_follows": false,
+    "baseline_fits": 0,
+    "checkpoint_promoted": false,
+    "game_apps_created": 0,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "original_weights_and_all_Adam_unchanged": true
+  },
+  "repository_verification": {
+    "format_lint_and_CSharp_protocol_passed": true,
+    "passed_tests": 2497,
+    "resource_path": "artifacts/resources/native-plan-teaching-result-repository-check-v1.json",
+    "resource_report_id": "sha256:6faa8a0c3f5246074b4ee2efa36d6fa92a4d4af7d7429f20ea197dbed006ce2b",
+    "skipped_tests": 5,
+    "status": "completed",
+    "strict_type_files": 549,
+    "wall_seconds": 146.79385029198602
+  },
+  "saved_diagnosis": {
+    "id": "sha256:ce19ec9fda4a8632e1673231ec6d7a546860b8fcc75251bcc58403da74e555ac",
+    "path": "artifacts/native-teaching-diagnostics/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "saved_diagnosis_sources_verified": 115651,
+  "saved_fight_distributions_reconstructed": 615,
+  "schema_version": "native-plan-teaching-result-evidence-v1",
+  "source_report": {
+    "id": "sha256:9464e364ab84069077047ac04cbfe11430f30b231ca992961752be417086e994",
+    "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/report.json"
+  }
+}

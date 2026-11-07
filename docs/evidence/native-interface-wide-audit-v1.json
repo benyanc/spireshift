@@ -1,0 +1,170 @@
+{
+  "schema_version": "native-interface-wide-audit-evidence-v1",
+  "previous_owner_canary_report_id": "sha256:00a2975f4511f6f3dd45afde723652893b212b5e5c67cddcf8613d98d78b92d1",
+  "source_inventory": {
+    "official_surface_kinds": 24,
+    "official_read_kinds": 4,
+    "typed_record_declarations": 116,
+    "declared_fields": 688,
+    "unclassified_surface_kinds": []
+  },
+  "saved_audit": {
+    "report_id": "sha256:7bea67ebd8e46bc74288fd3803008327cbfdc9049d3c5e98e6069c32a794c1d8",
+    "frames": 497,
+    "converted_with_consolidated_slot_fix": 497,
+    "slot_reference_repaired_frames": 1,
+    "resolved_issue_occurrences": 41,
+    "remaining_issue_occurrences": 108,
+    "wall_seconds": 4.37737433379516,
+    "protected_prior_files_unchanged": 1623
+  },
+  "build_report_id": "sha256:4d561fb1fe9a041fc0a9a5a2520f08ba427582268b1f29833bee5c36e23e3ddd",
+  "export_build_assembly_sha256": "81f51537f94d47304d21b900656a996e6db65600c320a1f399dd2f0960ff554a",
+  "short_control": {
+    "report_id": "sha256:0ac7fd6fd2bdae037e696081b888a218ee86363931f5ce50e63e5e9ca8f07523",
+    "environment_id": "sha256:820cb408d099b9fecf5d59dc9c42e9ba810c6dd2cfa9595964415623d4721ae8",
+    "status": "live_checkpoint_delivery_control_pass",
+    "game_starts": 2,
+    "wall_seconds": 37.152332375058904,
+    "full_prefix_input_equivalence": false,
+    "original_weights_and_all_Adam_unchanged": true,
+    "optimizer_updates": 0
+  },
+  "short_control_audit": {
+    "report_id": "sha256:ac14e5568b5e2cb9c34fcccb833ac676891c1f465f01fd09cdf81f1dada91fe9",
+    "frames": 9,
+    "resolved_issue_occurrences": 4,
+    "remaining_issue_occurrences": 0,
+    "wall_seconds": 2.870003875112161
+  },
+  "saved_verification": {
+    "report_id": "sha256:349b81b701470983cea83dea3abc35cd3e7613049b07cc2bc8f12388b8a4599d",
+    "valid": true,
+    "cases": [
+      {
+        "host": "native",
+        "key": "player-2-interface-control-002",
+        "verified_decisions": 4
+      },
+      {
+        "host": "official",
+        "key": "player-2-interface-control-002",
+        "verified_decisions": 4
+      }
+    ],
+    "wall_seconds": 3.080290500074625
+  },
+  "native_export_probe": {
+    "actions_delivered": 0,
+    "full_game_performance_evaluated": false,
+    "game_apps_created": 0,
+    "hover_kinds_observed": {
+      "card": 1,
+      "text": 1
+    },
+    "legacy_initial_public_facts_identical": true,
+    "native_prefix_starts": 3,
+    "optimizer_updates": 0,
+    "report_id": "sha256:3048a04943c6fa957846d5252c87ed52cafc775e295979d3358a59bd902ec903",
+    "schema_version": "native-interface-export-probe-v1",
+    "training_allowed": false,
+    "wall_seconds": 2.7996972918044776
+  },
+  "imports": [
+    {
+      "model_id": "sha256:0e88fffdd3dfb19b926947d2aa5e55ef2b3e47e6d2b125d0d2257c692cdc3d65",
+      "environment_id": "sha256:820cb408d099b9fecf5d59dc9c42e9ba810c6dd2cfa9595964415623d4721ae8",
+      "numeric_weights_exact": true,
+      "all_Adam_moments_and_counter_exact": true,
+      "optimizer_steps": 5658,
+      "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+      "original_bytes_unchanged": true
+    },
+    {
+      "model_id": "sha256:61cb351882f5c33a4e826d9974db780ca24987aa5b8acce6d0ca0f9ad7d20bf4",
+      "environment_id": "sha256:820cb408d099b9fecf5d59dc9c42e9ba810c6dd2cfa9595964415623d4721ae8",
+      "numeric_weights_exact": true,
+      "all_Adam_moments_and_counter_exact": true,
+      "optimizer_steps": 6045,
+      "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+      "original_bytes_unchanged": true
+    }
+  ],
+  "repository_checks": {
+    "resource_report_id": "sha256:7807fa6acdc454039f27ee02f728a119582405e1c4a2c8c8ed469788d395f056",
+    "wall_seconds": 147.52995929098688,
+    "tests_passed": 2543,
+    "strict_type_checked_files": 568,
+    "format_lint_protocol_passed": true
+  },
+  "resources": {
+    "saved_audit": {
+      "average_cpu_utilization": 0.05401546891622705,
+      "cpu_hours": 0.0009562428219444444,
+      "cpu_seconds": 3.442474159,
+      "energy_kwh": null,
+      "final_storage_bytes": 1271951,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 3,
+      "peak_resident_memory_bytes": 193855488,
+      "peak_storage_bytes": 1271951,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 4.552233208203688
+    },
+    "export_build": {
+      "average_cpu_utilization": 0.05386885689184574,
+      "cpu_hours": 0.0030199980672222216,
+      "cpu_seconds": 10.871993041999998,
+      "energy_kwh": null,
+      "final_storage_bytes": 224134242,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 6,
+      "peak_resident_memory_bytes": 522797056,
+      "peak_storage_bytes": 224134242,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 14.415953416842967
+    },
+    "short_control": {
+      "average_cpu_utilization": 0.04240066417839478,
+      "cpu_hours": 0.00693194570583333,
+      "cpu_seconds": 24.95500454099999,
+      "energy_kwh": null,
+      "final_storage_bytes": 7025864,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 6,
+      "peak_resident_memory_bytes": 1252360192,
+      "peak_storage_bytes": 7025864,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 42.03944345912896
+    }
+  },
+  "resource_storage_exclusions": {
+    "short_official_profile_bytes": 189038,
+    "existing_shared_app_pool_frozen_inputs_and_shared_support_code_excluded": true
+  },
+  "new_app_copies": 0,
+  "optimizer_updates": 0,
+  "checkpoint_promoted": false,
+  "full_input_equivalence_granted": false,
+  "ordinary_PPO_eligible": false,
+  "static_inventory_is_exhaustive_runtime_interaction_proof": false,
+  "unmatched_schema_differences_are_matched_effect_evidence": false,
+  "owner_panel": {
+    "workspace": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1",
+    "started": false,
+    "pairs": 4,
+    "game_starts": 8,
+    "maximum_decisions_per_host": 128,
+    "maximum_total_policy_actions": 1024,
+    "wall_seconds_per_launch": 900
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "audit": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/revival-audit-v2/report.json",
+      "sha256": "162f2e2a6f5d6a0823800a4bbaf68b0fb87a4f55416ecff867b8af0e44191812"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-revival-audit-v2.json",
+      "sha256": "0b673a9e08bd7c6c2e8ec09ff0c791aa4d967d6553d34e9be99493ace3450e1f"
+    }
+  },
+  "control": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/revival-control-v2/report.json",
+      "sha256": "8d665cea57c6df12c56efd20ba6427ca84234bec9bbe36d10a8be7815f9de222"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-revival-control-v2.json",
+      "sha256": "4490887f76bc35d51b33600c7fe03430632bf880e743ba469cce5c0374a19bee"
+    }
+  },
+  "implementation": {
+    "backend-patches/godot-canvas-item-v1/Probe.csproj": "d7838c82e8d97b2b353619837ee65888bdd2dcca7bedae85f784ed42ab5713eb",
+    "backend-patches/godot-canvas-item-v1/Program.cs": "e11dae5bdbf38fe5e2275656af0557dc0795a9c46d7cb12d60ee6a59e1010841",
+    "backend-patches/godot-canvas-item-v1/README.md": "be1efec13b2245e74e2efb8b1c69dda73cdd77f3e52e9e08e03fb31f9ce404b5",
+    "backend-patches/godot-canvas-item-v1/self-modulate.patch": "734b2604f5c8255c5f6207be72e189dae2e08b683c971831b267a5e2a5d8df7c",
+    "scripts/continue-win-curriculum-v5.sh": "6d06c03c7a4899e8e0674f2d12a99e718ded629070e0da0c120b2f64ea1dd327",
+    "src/spireshift/native_win5_build.py": "02669081e371e1e2bd727424be9aab9d26b4612694ee579c572aa51b44009f34",
+    "src/spireshift/native_win5_control.py": "1668542da09439dfd106aad11e63d69eed3af0d206d975929e0eb9d2cffc4824",
+    "src/spireshift/native_win5_inputs.py": "b71b9794b16b379e6b63e314fa68b6d0dcf6e4c15748987afb4c030482696e4e",
+    "src/spireshift/native_win5_recovery.py": "cb585a32a86594c2d008e62cf4362cdd845b8cc23b0edffbc9a739459372c757",
+    "src/spireshift/native_win5_session.py": "d952deef28a6ad33b33640ca8c5e153bee9adc92a4cff81e19d74a3ccd66afc7",
+    "src/spireshift/native_win5_study.py": "192da4c984aeed492e02ed0bfc39d278958308a56fec8bbfe724698d1c27a9e3"
+  },
+  "launch_workspace": "artifacts/native-win-curriculum/launch-v5",
+  "parent": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v4.json",
+    "sha256": "e0bfbe96da03e260b84fb586f1a1e10cef6179e84e4033434b239e76899b8808"
+  },
+  "protected": {
+    "path": "artifacts/native-win-curriculum/revival-preparation-v1/protected-v4-result.json",
+    "sha256": "7b44069f5ef4df755f52ac6f3b1f73e8c2f9a78c302ea1d47af3e3faed5f0551"
+  },
+  "schema_version": "native-win-curriculum-continuation-v5",
+  "support": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/godot-canvas-build-v58/report.json",
+      "sha256": "e926eb26a1a21a17fdc31b5bd87f86d3b0f2bfb7846dcd8b008b530f8df617c9"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-canvas-build-v58.json",
+      "sha256": "1ed18f69d211121d32f50cd3c2e4dc280f142e9f3f468fc33113cd08c97fdf90"
+    }
+  },
+  "workspace": "artifacts/native-win-curriculum/study-v5"
+}
