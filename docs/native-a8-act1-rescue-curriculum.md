@@ -82,7 +82,17 @@ updates and stop after the declared work.
 All 20 saved decision regressions passed. The new verifier reconstructed
 321 saved native deliveries, covering one real Act 1 loss and one real
 Act 2 entry. All 2,846 repository tests and the .NET protocol check passed.
-The fresh native prefix check is pending. The first attempt stopped at
-the open-game guard before starting a worker. The owner command runs
-the short check before any qualification worlds if a passing receipt
-is still absent. [Verification record](evidence/native-a8-act1-rescue-preparation-v1.json).
+After the owner closed STS2, the fresh native prefix check passed. Three
+isolated starts delivered 18 choices each. All 54 deliveries reconstructed
+from the raw journals, including the teacher's first different action on
+the same combat menu. Each worker exited cleanly. The frozen build,
+runtime, localization and all four full checkpoint and Adam files passed
+verification, as did the shared-profile check. The owner launcher now
+accepts both completed receipts. These prefixes cover the control seed.
+[Short-check record](evidence/native-a8-act1-rescue-short-check-v1.json).
+
+The [initial preparation record](evidence/native-a8-act1-rescue-preparation-v1.json)
+retains the earlier open-game refusal. A second invocation while the
+short check is writing its report and resource receipt can see an
+incomplete control. Once both receipts pass verification, the same
+owner command reuses them.

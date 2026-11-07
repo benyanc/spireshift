@@ -229,9 +229,11 @@ The owner requested the normal-start Act 1 teacher and rescue curriculum.
 docs/native-a8-act1-rescue-curriculum.md defines eight qualification worlds
 and twelve disjoint collection worlds. The command requires the short native
 prefix control before qualification and opens collection only on a pass.
-Saved decision and raw replay checks passed. The fresh short check initially
-stopped because the official game was open. Both main stages remain
-unstarted. Keep v0.111.0 / 41cef1ea, native support60 and the four full
+Saved decision and raw replay checks passed. After the owner closed the
+official game, the fresh short check passed with three isolated 18-choice
+prefixes and 54 independently reconstructed native deliveries. Keep the
+initial open-game refusal as historical evidence. Both main stages remain
+owner-run. Keep v0.111.0 / 41cef1ea, native support60 and the four full
 checkpoint and Adam files frozen. The study performs zero optimizer updates.
 
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves

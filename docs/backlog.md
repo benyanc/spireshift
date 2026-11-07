@@ -58,6 +58,8 @@ passes. A strict rescue requires a native loss for both frozen references and
 a reproduced teacher clear on the same seed. The [saved Act 1 audit](native-a8-act1-loss-audit.md)
 worlds remain diagnostic. Review the collection before preparing a copied-checkpoint
 fit. The target for fresh gameplay assessment remains terminal A8 wins.
+The fresh short check passed with 54 independently reconstructed native
+deliveries and clean shutdowns. Qualification and collection remain owner-run.
 
 ## Prior handoff — paired A8 result recovered
 
