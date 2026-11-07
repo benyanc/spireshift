@@ -225,6 +225,15 @@ The saved-only audit in docs/native-a8-paired-finals-result.md verified all seal
 with the original workflow bytes in a detached checkout. Preserve the failed
 owner receipt and use the recovered development result for Act 1 diagnosis.
 
+The owner requested the normal-start Act 1 teacher and rescue curriculum.
+docs/native-a8-act1-rescue-curriculum.md defines eight qualification worlds
+and twelve disjoint collection worlds. The command requires the short native
+prefix control before qualification and opens collection only on a pass.
+Saved decision and raw replay checks passed. The fresh short check initially
+stopped because the official game was open. Both main stages remain
+unstarted. Keep v0.111.0 / 41cef1ea, native support60 and the four full
+checkpoint and Adam files frozen. The study performs zero optimizer updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
