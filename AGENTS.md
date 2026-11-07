@@ -236,6 +236,15 @@ initial open-game refusal as historical evidence. Both main stages remain
 owner-run. Keep v0.111.0 / 41cef1ea, native support60 and the four full
 checkpoint and Adam files frozen. The study performs zero optimizer updates.
 
+The v1 owner run qualified the teacher with two reproduced Act 2 entries
+and completed seven collection worlds with zero clears. The fitted player
+in collect-008 used Attack Potion, whose generated card-choice surface
+registered Liquid Bronze twice. Preserve the incomplete marker, all
+receipts and the four unstarted worlds. The separately versioned adapter
+passes the exact saved strict-decoder regression. See
+docs/native-a8-act1-rescue-result.md. Improve boss play before collecting a
+new fitting bank. Qualification worlds stay excluded from fitting.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must

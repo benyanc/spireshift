@@ -1,5 +1,9 @@
 # A8 Act 1 teacher qualification and rescue curriculum
 
+The v1 owner run completed qualification and stopped during collection.
+See the [verified result](native-a8-act1-rescue-result.md) for the preserved
+world, decoder diagnosis and next development step.
+
 This study follows the [saved Act 1 loss audit](native-a8-act1-loss-audit.md)
 under [#134](https://github.com/benyanc/spireshift/issues/134) and
 [#35](https://github.com/benyanc/spireshift/issues/35). It prepares better

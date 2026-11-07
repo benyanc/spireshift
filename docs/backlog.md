@@ -9,10 +9,10 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — qualify the Act 1 teacher and collect rescues | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Run the prepared [normal-start qualification and collection](native-a8-act1-rescue-curriculum.md). Use delivered HP-spend, potion and Rest labels from reproduced Act 2 entries on disjoint collection worlds. |
+| 1 — improve the Act 1 teacher's boss fights | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [normal-start study](native-a8-act1-rescue-result.md) qualified the teacher, then produced zero rescues in seven complete collection worlds. Improve boss preparation and turn planning, and verify reproduced clears before opening a new collection. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
-| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Track Trial Double Down confirmation and official delivery of compact large selections. Keep parity regressions and verify promising candidates through official games. |
+| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | Carry the saved-verified generated-choice potion-belt repair into the next separately pinned worker. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports learning and
@@ -50,16 +50,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Act 1 rescue curriculum prepared
+## Current handoff — Act 1 teacher qualified and collection stopped
 
-The [owner run](native-a8-act1-rescue-curriculum.md) qualifies the teacher on
-eight fresh worlds, then collects on twelve disjoint worlds if qualification
-passes. A strict rescue requires a native loss for both frozen references and
-a reproduced teacher clear on the same seed. The [saved Act 1 audit](native-a8-act1-loss-audit.md)
-worlds remain diagnostic. Review the collection before preparing a copied-checkpoint
-fit. The target for fresh gameplay assessment remains terminal A8 wins.
-The fresh short check passed with 54 independently reconstructed native
-deliveries and clean shutdowns. Qualification and collection remain owner-run.
+The [owner result](native-a8-act1-rescue-result.md) records two reproduced
+rescues across both initializers in qualification. Seven collection worlds
+completed with zero clears. On world 8, the fitted player's Attack Potion
+opened a generated card choice whose potion-belt referent was duplicated.
+Saved replay verified a scoped adapter repair. Preserve the incomplete
+world and four unstarted worlds in the denominator. Improve boss play
+before a fresh collection. The primary evaluation goal is terminal A8 wins.
 
 ## Prior handoff — paired A8 result recovered
 
