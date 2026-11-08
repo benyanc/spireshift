@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — measure the tactical teacher on fresh starts | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [tactical teacher](native-a8-act1-tactical-teacher.md) verified the Eel lethal line and brought Giant Death Blow down to 30. Run the separate fresh diagnostic to measure the policy. Qualification still requires a native Giant rescue. |
+| 1 — measure ordinary fight lethal planning | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The tactical diagnostic tied v2 at one Act 1 clear. The [ordinary-fight extension](native-a8-act1-ordinary-lethal.md) verified the Sewer Clam three-Strike kill. Compare the extension with the previous tactical teacher on the sixteen fresh matched starts. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
@@ -50,7 +50,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Act 1 tactical teacher
+## Current handoff — Ordinary fight lethal planning
+
+The [Clam proof and smoke pair](native-a8-act1-ordinary-lethal.md) verified
+the three-Strike kill, four live ordinary lethal choices and all frozen
+inputs. The smoke pair ended in two floor-13 losses. The separate
+sixteen-world comparison is prepared to measure progress and Act 1
+clears with zero updates.
+
+## Prior handoff — Act 1 tactical teacher
 
 The [tactical short checks](native-a8-act1-tactical-teacher.md) verified
 the elite lethal sequence and the earlier Giant phase transition. The

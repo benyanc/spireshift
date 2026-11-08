@@ -1,5 +1,6 @@
 from typing import Any
 
+from spireshift.native_a8_ordinary_policy import ordinary_lethal_plan
 from spireshift.native_a8_tactical_policy import (
     DYING_HP,
     GIANT,
@@ -170,3 +171,43 @@ def test_giant_stun_prepares_block_for_the_next_turn() -> None:
         },
     ]
     assert tactical_choice(public, indices) == (1, "giant_prepare_block")
+
+
+def test_ordinary_clam_line_counts_existing_plating_block_and_current_strength() -> None:
+    clam = enemy("SEWER_CLAM", 38, 12, PLATING_POWER=6, STRENGTH_POWER=8)
+    clam["block"] = 6
+    public, combat, indices = menu(
+        "normal",
+        clam,
+        16,
+        [
+            card("BASH", 1, 2, target=12, damage=17, vulnerablepower=2),
+            *(card("STRIKE_IRONCLAD", i, 1, target=12, damage=15) for i in (2, 3, 4, 5)),
+        ],
+    )
+    combat["player"]["statuses"] = [
+        {"definition_id": "DEMON_FORM_POWER", "amount": 3},
+        {"definition_id": "STRENGTH_POWER", "amount": 9},
+    ]
+    assert lethal_plan(public, indices, combat) == ()
+    assert ordinary_lethal_plan(public, indices) == (2, 3, 4)
+    assert len(clam["statuses"]) == len(combat["player"]["statuses"]) == 2
+    assert clam["block"] == 6
+    clam["block"] = 8
+    assert ordinary_lethal_plan(public, indices) == ()
+    clam["block"] = 6
+    combat["player"]["energy"] = 2
+    assert ordinary_lethal_plan(public, indices) == ()
+
+
+def test_ordinary_search_leaves_other_encounters_and_unknown_effects_to_parent() -> None:
+    foe = enemy("SEWER_CLAM", 6, 12)
+    public, combat, indices = menu(
+        "elite", foe, 16, [card("STRIKE_IRONCLAD", 1, 1, target=12, damage=6)]
+    )
+    assert ordinary_lethal_plan(public, indices) == ()
+    assert tactical_choice(public, indices) == (1, "elite_lethal_turn")
+    combat["encounter_type"] = "normal"
+    assert ordinary_lethal_plan(public, indices) == (1,)
+    foe["statuses"].append({"definition_id": "HARDENED_SHELL_POWER", "amount": 1})
+    assert ordinary_lethal_plan(public, indices) == ()

@@ -283,6 +283,14 @@ survival gate remains blocked. The owner command runs a separate fresh
 diagnostic comparison. Preserve all three short studies, the frozen
 build and full states, and the seed ownership boundaries.
 
+The tactical diagnostic tied its v2 reference at one Act 1 clear and
+four boss reaches across eight sealed worlds. The ordinary-fight
+extension in docs/native-a8-act1-ordinary-lethal.md follows the verified
+Sewer Clam three-Strike kill. Preserve the exact saved loss, the native
+branch and the fresh smoke pair. The owner command compares the new
+planner on sixteen disjoint worlds with the tactical teacher as its
+reference. This comparison performs zero optimizer updates.
+
 The owner chose fixed Ironclad / Ascension 8 on 2026-10-09. First establish a workflow that improves
 full-run play at that difficulty. Selectable A0 or other ascension levels are deferred under #142;
 they are not prerequisites for A8 training and must not displace learning work. New recipes must
