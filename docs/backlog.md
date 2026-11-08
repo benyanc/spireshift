@@ -9,7 +9,7 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — measure ordinary fight lethal planning | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The tactical diagnostic tied v2 at one Act 1 clear. The [ordinary-fight extension](native-a8-act1-ordinary-lethal.md) verified the Sewer Clam three-Strike kill. Compare the extension with the previous tactical teacher on the sixteen fresh matched starts. |
+| 1 — measure ordinary fight lethal planning | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The original comparison sealed six matched losses. The ordinary arm reached Act 2 at 19 HP on world 7 in the saved recovery. [Continue the nine unstarted pairs](native-a8-act1-ordinary-lethal-continuation.md) with the shared reward-exit check and measure fresh confirmed rescues. |
 | 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
@@ -52,11 +52,10 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current handoff — Ordinary fight lethal planning
 
-The [Clam proof and smoke pair](native-a8-act1-ordinary-lethal.md) verified
-the three-Strike kill, four live ordinary lethal choices and all frozen
-inputs. The smoke pair ended in two floor-13 losses. The separate
-sixteen-world comparison is prepared to measure progress and Act 1
-clears with zero updates.
+The [shared reward-exit check and saved recovery](native-a8-act1-ordinary-lethal-continuation.md)
+verified the ordinary arm's Act 2 entry on world 7. Keep it as a saved
+diagnostic alongside the original interrupted attempt. The nine remaining
+normal-start pairs are prepared with both planners and zero updates.
 
 ## Prior handoff — Act 1 tactical teacher
 

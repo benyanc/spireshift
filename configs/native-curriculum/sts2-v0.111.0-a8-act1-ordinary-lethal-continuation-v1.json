@@ -1,0 +1,63 @@
+{
+  "control_resource": "artifacts/resources/a8-act1-ordinary-lethal-exit-control-v2.json",
+  "control_workspace": "artifacts/native-a8-act1-boss/ordinary-lethal-exit-control-v2",
+  "implementation": {
+    "scripts/continue-act1-ordinary-lethal-v1.sh": "1806389be915b6183e376ab632af64084d69f0ccfd106336c75f08eeb7dd3780",
+    "src/spireshift/native_a8_reward_exit.py": "761467dde89c94e1efc0beed8e8391ce70bbcff9eca56057a74dc629e0d62083",
+    "src/spireshift/native_a8_reward_exit_episode.py": "b2b670fff5c454922671ef9061da9b22da11218f3193d3ced4649fdcc5f01b14",
+    "src/spireshift/native_a8_reward_exit_recovery.py": "04218b15410eef345dc9b1ca4346ab7ba9a5a8be55e2bcba3ef1e16189faddae",
+    "src/spireshift/native_a8_reward_exit_session.py": "9bd4522bc3e9cff50d7d45e7a3d2d5c6122a4015c7e1e30ba35b01f25217c35c"
+  },
+  "interrupted_chunk_id": "sha256:ff24e3f1dbed2e20499699580aa95bd6170f951b24d2edd98ed3a21bc43d5bc6",
+  "previous_attempt": {
+    "path": "artifacts/native-a8-act1-boss/ordinary-lethal-study-v1/attempt-1794112420375087000.json",
+    "sha256": "87cfb2702d1b74432aee2001cca074e90d194d91f8e398c675d026a13e133982"
+  },
+  "previous_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-ordinary-lethal-v1.json",
+    "sha256": "de55e93bd4026f157dc89da5c7e48dfbeaf4bd8d7c5dc0b3bb45e963407a8757"
+  },
+  "previous_resources": {
+    "path": "artifacts/resources/a8-act1-ordinary-lethal-study-v1-1794112420375087000.json",
+    "sha256": "0d16fff3f471b2a9f9ca3f9b40fb13a3d699e136566c7393b578c7aafabfc8f6"
+  },
+  "remaining_worlds": [
+    "ordinary-008",
+    "ordinary-009",
+    "ordinary-010",
+    "ordinary-011",
+    "ordinary-012",
+    "ordinary-013",
+    "ordinary-014",
+    "ordinary-015",
+    "ordinary-016"
+  ],
+  "resource_prefix": "artifacts/resources/a8-act1-ordinary-lethal-continuation-v1",
+  "saved_regressions": [
+    {
+      "arm": "boss",
+      "key": "diagnostic-002",
+      "seal": {
+        "path": "artifacts/native-a8-act1-boss/tactical-diagnostic-v1/chunks/diagnostic-002/done.json",
+        "sha256": "5358a7940ccb224438d689dd46afaf13987cc5c58d39f611ebcc95da3a398b0b"
+      },
+      "study": "tactical"
+    },
+    {
+      "arm": "teacher",
+      "key": "qualify-003",
+      "seal": {
+        "path": "artifacts/native-a8-act1-rescue/study-v1/chunks/qualify-003/done.json",
+        "sha256": "36c0fb8ddad88949bd195d4ac9d78b4c7c8f0a5bc06aba8b54fcf7a6fa6ffb63"
+      },
+      "study": "survival"
+    }
+  ],
+  "schema_version": "native-a8-ordinary-lethal-continuation-v1",
+  "smoke": {
+    "key": "ordinary-exit-smoke-002",
+    "player": 3,
+    "seed": "SP1RESH1FTA8OLEXC002"
+  },
+  "workspace": "artifacts/native-a8-act1-boss/ordinary-lethal-continuation-v1"
+}

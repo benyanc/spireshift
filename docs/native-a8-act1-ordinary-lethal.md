@@ -29,19 +29,9 @@ and Adam files, the build, runtime, SDK, localization and shared save
 profile passed verification. Optimizer updates and admitted lessons
 were both zero. [Verification record](evidence/native-a8-act1-ordinary-lethal-v1.json).
 
-## Fresh matched comparison
+## Matched comparison
 
-With STS2 closed, run this command from the checkout. It compares the
-previous tactical teacher with the ordinary-fight extension on sixteen
-fresh normal-start Ironclad/A8 worlds.
-
-```bash
-bash scripts/compare-act1-ordinary-lethal-v1.sh
-```
-
-Allow about 5–10 minutes. The launcher requires the sealed Clam proof
-and passing smoke pair. It records boss reaches, Act 1 clears and the
-first same-menu intervention on each changed world. Candidate-only
-clears receive a fresh confirmation. The comparison is diagnostic and
-performs zero optimizer updates. Uncertain attempts retain their
-evidence for inspection.
+The original sixteen-world diagnostic sealed six matched losses and
+stopped at the Act 2 boundary on world 7. See the
+[saved recovery and continuation](native-a8-act1-ordinary-lethal-continuation.md)
+for the shared reward-exit check and launcher for the nine unstarted worlds.
