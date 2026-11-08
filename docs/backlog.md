@@ -9,8 +9,8 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — measure ordinary fight lethal planning | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The original comparison sealed six matched losses. The ordinary arm reached Act 2 at 19 HP on world 7 in the saved recovery. [Continue the nine unstarted pairs](native-a8-act1-ordinary-lethal-continuation.md) with the shared reward-exit check and measure fresh confirmed rescues. |
-| 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The first update-200 comparison verified 48 terminal losses. Use the same terminal-win outcome and matched normal starts when an evidence-driven candidate is ready. |
+| 1 — train from the model's own full games | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [full-menu PPO launcher](native-a8-own-policy.md) passed collect, fit and reload on both disposable copies. The owner run is prepared for 48 fresh normal starts across two rounds per copy. |
+| 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The launcher compares both fixed round-two finals with their originals on six separate matched worlds. Use terminal victories as the primary outcome and retain the whole denominator. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
@@ -50,12 +50,29 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Ordinary fight lethal planning
+## Current handoff — Model-owned full-run training
+
+The [full-menu audit](native-a8-own-policy.md) verified 6,948 observed
+native menus. The older shop router forced 53 choices and omitted 111
+options. The new path scored each complete menu and supplied 1,073
+verified native decisions from four fresh games to the learner. Both
+disposable copies took optimizer updates and delivered reloaded play.
+The [owner launcher](native-a8-own-policy.md) is prepared for training
+and matched development evaluation.
+
+## Prior handoff — Status pressure in Act 1
+
+The partial kill on world 15 left the player with five Infections and an
+Act 1 loss. Earlier damage and energy sequencing won the world 14 fight.
+The [tempo comparison](native-a8-act1-status-tempo.md) then recorded
+identical choices and three clears for each arm across 12 fresh starts.
+
+## Prior handoff — Ordinary fight lethal planning
 
 The [shared reward-exit check and saved recovery](native-a8-act1-ordinary-lethal-continuation.md)
 verified the ordinary arm's Act 2 entry on world 7. Keep it as a saved
-diagnostic alongside the original interrupted attempt. The nine remaining
-normal-start pairs are prepared with both planners and zero updates.
+diagnostic alongside the original interrupted attempt. The final panel
+has 14 sealed pairs, zero confirmed rescues, and two unsealed worlds.
 
 ## Prior handoff — Act 1 tactical teacher
 

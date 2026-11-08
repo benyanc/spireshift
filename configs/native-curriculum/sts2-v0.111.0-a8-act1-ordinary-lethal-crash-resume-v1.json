@@ -1,0 +1,27 @@
+{
+  "continuation_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-ordinary-lethal-continuation-v1.json",
+    "sha256": "dda2444c06d546307702987df595a433d401e48596eb2cea27bc0f0bb1138930"
+  },
+  "crash_audit": {
+    "path": "artifacts/native-a8-act1-boss/ordinary-lethal-crash-audit-v1/report.json",
+    "sha256": "59787b1b0dc38f81c5f57b3971d6b0de492239ad5fdca071500556f935c61011"
+  },
+  "implementation": {
+    "scripts/resume-act1-ordinary-lethal-v1.sh": "e15ca507a7073c0b67ab15d920f99427488365916b267af673e9d946685735db",
+    "src/spireshift/native_a8_crash_resume.py": "cec875ae30bf045555e3c7baa1cce5ef547b6ef36b223c0207900b1234522524"
+  },
+  "launch_worlds": [
+    "ordinary-013",
+    "ordinary-014",
+    "ordinary-015",
+    "ordinary-016"
+  ],
+  "node": {
+    "path": "artifacts/native-a8-act1-boss/frozen-node-v24.22.1-7d2b4ed3/bin/node",
+    "sha256": "7d2b4ed360d609a4de6485b0cbea57370eee4dba157877799e83104db570cbdd"
+  },
+  "resource_prefix": "artifacts/resources/a8-act1-ordinary-lethal-crash-resume-v1",
+  "schema_version": "native-a8-ordinary-lethal-crash-resume-v1",
+  "workspace": "artifacts/native-a8-act1-boss/ordinary-lethal-crash-resume-v1"
+}

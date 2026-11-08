@@ -38,18 +38,15 @@ v0.111.0 / 41cef1ea build, native runtime, SDK, localization, all four full
 checkpoint and Adam states, and the shared save profile passed verification.
 The checks performed zero optimizer updates. [Verification record](evidence/native-a8-act1-ordinary-lethal-continuation-v1.json).
 
-## Remaining nine worlds
+## Completed continuation
 
-Close STS2, then run from this checkout.
+The crash left four more seals from worlds 8–11 and an unsealed world 12.
+The separate restart verified the pinned local Node copy and ran only
+worlds 13–16. Both planners lost on all four. Across the 14 sealed
+pairs, the tactical planner recorded 13 losses and one time cap, and
+the ordinary planner recorded 14 losses. World 7 remains diagnostic.
+World 12 remains incomplete. The comparison recorded zero confirmed
+rescues and zero optimizer updates.
 
-```bash
-bash scripts/continue-act1-ordinary-lethal-v1.sh
-```
-
-Allow about 4–8 minutes. The launcher checks the saved recovery and smoke
-receipts before starting only `ordinary-008` through `ordinary-016`.
-It keeps the original six sealed pairs, the saved-only result for world 7,
-and the new pair results separately identified. A new ordinary-only
-clear needs a clean matching confirmation to count as a confirmed rescue.
-An unsealed new world stops without retry. This stage is a native Act 1
-diagnostic with zero updates.
+The [status-pressure comparison](native-a8-act1-status-tempo.md) follows
+the saved Phrog Parasite investigation.
