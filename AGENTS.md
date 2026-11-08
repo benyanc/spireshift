@@ -1,5 +1,32 @@
 # SpireShift engineering instructions
 
+## Required assessment before choosing work
+
+Apply these checks in order when starting work, assessing a result, or deciding what to do next.
+
+1. **Decision framework.** Review relevant action families and known gaps against the latest
+   coverage and lifecycle evidence. The framework must expose the frozen game's complete current
+   legal menu, including optional skips, targets, and compound choices. The model owns the choice.
+   Verify delivery to the correct owner, the native effect, and the successor or terminal state.
+   Use source and saved evidence first, then targeted native or official checks as needed.
+   Fix shared invariants across affected families and record the scope of coverage.
+2. **Learning priority.** Identify the highest-leverage next step toward consistent full-run
+   Ironclad/A8 wins from unseen normal starts, followed by A10. Favor work that unlocks valid
+   model-owned experience, improves learning across worlds, or makes the win comparison more
+   trustworthy. Use act and floor progress to diagnose failures. Compare frozen candidates on
+   separate worlds and retain capped, failed, and unattempted cases in the denominator.
+3. **Issue assessment.** Classify the issue as a framework defect, a learning bottleneck, supporting
+   work, or an unresolved observation. Rank it against `docs/backlog.md` by impact on the current
+   milestone, affected scope, and dependencies. Choose the smallest broadly applicable next step
+   and state what evidence would close, defer, or change its priority.
+
+Re-rank after each bounded result or blocker and before another pass on the same fight or seed.
+A named fight can reproduce a shared defect or suggest a learning hypothesis. Continue only
+with evidence of broader impact or a test that can measure transfer on independent cases.
+Contain unresolved framework gaps to their affected scope and keep independently valid learning
+work moving. Use the current backlog and latest verified evidence to choose work. Earlier
+handoffs retain their experiment constraints and historical results.
+
 ## Binding objective
 
 SpireShift's current priority is a base player that consistently wins complete Ironclad/A8 runs
@@ -32,11 +59,10 @@ model-guided search improves at equal compute.
 The owner reprioritized the program on 2026-11-04: build a useful full-game base player and
 demonstrate sustained A8 wins, then attempt A10. This directive and ADR 0007 supersede the
 older handoffs below that put CPU attribution or completing the six exact-final canaries next.
-The ordered current backlog is docs/backlog.md. Parent #78 owns the base milestone; #152's
-win-focused curriculum implementation spans all acts, strategic decisions and final bosses.
-Its sustained owner-run collection and assessment precede the actual base-learning recipe.
-#134/#35 own whole-game learning, #143 demonstrated model/input needs, #146 fresh-game strength,
-#149 targeted parity/final official validation and #142 later A10 support.
+The ordered current backlog is docs/backlog.md. Parent #78 owns the base milestone.
+#134/#35 own model-only whole-game learning, #143 demonstrated model/input needs,
+#146 fresh-game strength, #149 targeted parity and final official validation, and #142
+later A10 support. #152's admitted curriculum bank is a separate source of evidence.
 
 Use the frozen native engine for learning/development with current source/public-input/action,
 known-gap and reset checks. Prepare a separately versioned admission/recipe before new work;
@@ -46,13 +72,12 @@ with genuine official validation before claiming official-game competence. Repea
 official endings for every numerical checkpoint and renderer CPU profiling are off the critical
 path. A demonstrated input/action/effect defect still requires a targeted fix/regression.
 
-The present teaching studies establish narrow fitting, not a useful player: prior full-game
-versions won 0/64, and the latest three teacher gains are +1/+1/+5 HP in already-won floor-2
-fights. Seek successful varied continuations and meaningful later-game/boss learning, not
-merely more copies of weak early labels. Explicit training-only late-act/boss starts are a
-prospective curriculum tool; qualify their state/reset semantics and keep their outcomes
-separate from normal-start full-run evaluation. No privileged teacher state reaches student
-inputs, and held-out worlds never become labels.
+The earlier teaching studies establish narrow fitting. Prior full-game versions won 0/64,
+and three recorded teacher gains were +1/+1/+5 HP in already-won floor-2 fights. Use the
+model-only loop as the default learning path. Consider a separate curriculum when evidence
+shows a broad coverage gap. Qualify state/reset semantics for any training-only late-act or
+boss start and keep its outcomes separate from normal-start evaluation. No privileged teacher
+state reaches student inputs, and held-out worlds never become labels.
 
 Keep original/fitted full states and Adam as immutable baselines. New lineages may change all
 learnable decision families, representation, architecture and policy/value training; exact warm

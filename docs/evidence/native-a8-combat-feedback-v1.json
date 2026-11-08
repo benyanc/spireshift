@@ -1,0 +1,139 @@
+{
+  "adapter_build": {
+    "path": "artifacts/native-a8-combat-feedback/adapter-v2/report.json",
+    "report_id": "sha256:64836ce24f0a5c48e752f41ce15087661d97c6c10cb64ed4e5245cebcb167f70",
+    "sha256": "c2741bfd2e46128656713102ef85456bde4d7040992725e7ae7a6c992856276d"
+  },
+  "development_games_launched": 0,
+  "development_worlds": 8,
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "independently_rebuilt_adapter_sha256": "10c6eebd7e9e1828224fa808c4e75d611e0db7b85a2bd6d4df0fe99d0f0e37d4",
+  "matched_control_prefixes": 6,
+  "matched_fits": {
+    "2": {
+      "checkpoints": {
+        "floor": {
+          "model_id": "sha256:06236172677c73aaf0291f6ad703d350fc30a8679a00ec34aa96516c7e8d79e4",
+          "optimizer_id": "sha256:282d19568c4c074020f54acf016c1f952cd380f029a28440bdae58f7af56ff77",
+          "optimizer_steps": 5694,
+          "state_id": "sha256:06116004a8b4a1be36bbf1370a30ea8b3ffc2091bb66093c09cac2ca4b170f77"
+        },
+        "original": {
+          "model_id": "sha256:f356284cc932a8f60dee6a43153617f4f16d57887c93df39999b3882febb3a05",
+          "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+          "optimizer_steps": 5658,
+          "state_id": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d"
+        },
+        "room": {
+          "model_id": "sha256:dc32ee2b3b5caaefbd36e22be73b62748e33433c295b684289629d8092ed43f6",
+          "optimizer_id": "sha256:89bb2263d73f7a804b70a9e6c682ad75c7a99b5049f43e9fb870d7d3f86c6ed4",
+          "optimizer_steps": 5694,
+          "state_id": "sha256:9b1bdf412244c6f7ac54d40905d0a5d3a30219137e7884e0d52a87f7fa8fa9d3"
+        }
+      },
+      "critic_weights_match_floor_only": true,
+      "decisions": 1427,
+      "floor_model_and_Adam_reproduced": true,
+      "games": 12,
+      "matched_optimizer_updates_per_fitted_arm": 36,
+      "room_actor_changed": true,
+      "room_credit_decisions": 705,
+      "room_outcomes_used": {
+        "elite": {
+          "reward_reached": 4,
+          "terminal_loss": 6
+        },
+        "normal": {
+          "reward_reached": 39,
+          "terminal_loss": 6
+        }
+      }
+    },
+    "3": {
+      "checkpoints": {
+        "floor": {
+          "model_id": "sha256:57353f4095f0614ab65d69917a42354a25d72f9092c1c6a6c5bb5cdd34b97b47",
+          "optimizer_id": "sha256:516c94e5c5e409f8c6aeb91e8c4fbb21d67a67474ce3077b6360b6507b16ee16",
+          "optimizer_steps": 6090,
+          "state_id": "sha256:44c810dc72977ca731261aa64e89955261fadaa27a4a6109177152cc194aa1c2"
+        },
+        "original": {
+          "model_id": "sha256:f5b9604413bb997c80d87630fb3c6fdc6f172ad29230c1770825757900732da8",
+          "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+          "optimizer_steps": 6045,
+          "state_id": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+        },
+        "room": {
+          "model_id": "sha256:4002fef46484c9aace9c46640c7959fb62ef3c066333f93e9705ad2c7edaa3c6",
+          "optimizer_id": "sha256:a86446398fc3cccc27b757372fd6265fa8366b29e42196ae26bab9c6cc6c8af4",
+          "optimizer_steps": 6090,
+          "state_id": "sha256:9f67e1eba3c383384f90b827d81faef0a648a5c804ddcba2996731d7357dcf4c"
+        }
+      },
+      "critic_weights_match_floor_only": true,
+      "decisions": 1799,
+      "floor_model_and_Adam_reproduced": true,
+      "games": 12,
+      "matched_optimizer_updates_per_fitted_arm": 45,
+      "room_actor_changed": true,
+      "room_credit_decisions": 1068,
+      "room_outcomes_used": {
+        "elite": {
+          "reward_reached": 2,
+          "terminal_loss": 5
+        },
+        "normal": {
+          "reward_reached": 43,
+          "terminal_loss": 6
+        }
+      }
+    }
+  },
+  "official_live_qualification_granted": false,
+  "planned_development_games": 48,
+  "preparation": {
+    "path": "artifacts/native-a8-combat-feedback/preparation-v1/report.json",
+    "report_id": "sha256:d08273cd3bd7765cefbca475e728c4b943dc867af13a1a2b35b6900fbd7cdff4",
+    "sha256": "90276e868e3c7554346b7298ddf388bccb96b5a48d47a4f1315e2b27779bc14e"
+  },
+  "preparation_resource": {
+    "path": "artifacts/native-a8-combat-feedback/preparation-v1-resources.json",
+    "report_id": "sha256:f24273df6baf5a0d11adf2fbe56242a62a45f44c36de2799414c45c60f8ff502",
+    "sha256": "bebf0eb72b773ae01a1d0cc432b43c6b2b1a0064bec503a2800f1cdc6f91a3f9"
+  },
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-combat-feedback-v1.json",
+    "sha256": "efc4300dfe855fc5f5bdb746994c082687e9f96804683b6f0f4655d8b5ce5498"
+  },
+  "report_id": "sha256:9b31fe7783d1b6b78528554341a1df2569421253149c81159c302a3b1d52a0b2",
+  "saved_endings": {
+    "flipped_labels_rejected": 73,
+    "saved_correct_endings_accepted": 73
+  },
+  "schema_version": "native-a8-matched-combat-feedback-evidence-v1",
+  "shared_profile_unchanged": true,
+  "source_study_report_id": "sha256:58eca49b6fe902aa7ae61248c6d5a66fcd3ff4f621b89b10833b7cf6cf419f6c",
+  "status": "matched_combat_feedback_ready",
+  "trial_control": {
+    "cancel_restored_event": true,
+    "clean_worker_shutdown": true,
+    "confirm_native_abandoned": true,
+    "diagnostic_only": true,
+    "native_deliveries": 5,
+    "native_outcome": "loss",
+    "optimizer_updates": 0,
+    "report_id": "sha256:1fee1543ed87324d02e99e9680fe172941446eace0cbe76d1ab7d0992ec08103",
+    "seal_id": "sha256:2d6fa394afdccf6b60fd6da9fc2222a6ebb6d1cbc8f0c93a80c23154ed0c77b9",
+    "status": "native_confirmation_control_verified"
+  }
+}

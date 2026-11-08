@@ -1,5 +1,9 @@
 # Model-owned decisions on the frozen A8 game
 
+The owner run is complete. The [saved result](native-a8-own-training-result.md)
+verifies all 72 games and four PPO rounds. Use the result and current
+backlog for the next learning stage.
+
 The engine supplies the public state, current legal actions, delivered
 effects and terminal outcome. The model scores the entire advertised
 menu and samples its action. The transport verifies the exact binding
@@ -59,9 +63,8 @@ zero training games. The game, native support build, runtime, SDK,
 localization, shared profile and all four reference checkpoints passed
 verification. [Preparation evidence](evidence/native-a8-own-training-v1.json).
 
-The prepared study has 48 training games followed by the fixed development
-comparison. Allow roughly 15–35 minutes with a 90-minute outer cap.
-Close STS2, then run from this checkout.
+The historical owner command launched 48 training games followed by
+the fixed development comparison. Its outer cap was 90 minutes.
 
 ```bash
 bash scripts/train-a8-own-policy-v1.sh

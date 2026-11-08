@@ -9,10 +9,10 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — train from the model's own full games | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [full-menu PPO launcher](native-a8-own-policy.md) passed collect, fit and reload on both disposable copies. The owner run is prepared for 48 fresh normal starts across two rounds per copy. |
-| 2 — evaluate the next candidate on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | The launcher compares both fixed round-two finals with their originals on six separate matched worlds. Use terminal victories as the primary outcome and retain the whole denominator. |
+| 1 — test shorter combat feedback | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [matched fits](native-a8-combat-feedback.md) are frozen. Both initializers use their same first-round games and exact floor-only control. The room-feedback copy changes the actor signal on verified combat decisions at matched optimizer work. |
+| 2 — evaluate the candidates on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Run the [prepared 48-game panel](native-a8-combat-feedback.md) across eight fresh normal-start worlds. Compare terminal victories first and retain the full planned denominator. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
-| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The qualification worker now uses the saved-verified generated-choice potion-belt repair. Track Trial Double Down confirmation and official delivery of compact large selections. Verify promising candidates through official games. |
+| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The [new headless learner](native-a8-combat-feedback.md) passed the Trial confirmation lifecycle and saved ending regressions. Track the shipped-game Connector's large-selection limit and verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
 
 [#143](https://github.com/benyanc/spireshift/issues/143) supports learning and
@@ -50,15 +50,17 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Model-owned full-run training
+## Current handoff — Matched combat feedback
 
-The [full-menu audit](native-a8-own-policy.md) verified 6,948 observed
-native menus. The older shop router forced 53 choices and omitted 111
-options. The new path scored each complete menu and supplied 1,073
-verified native decisions from four fresh games to the learner. Both
-disposable copies took optimizer updates and delivered reloaded play.
-The [owner launcher](native-a8-own-policy.md) is prepared for training
-and matched development evaluation.
+The [saved audit](native-a8-own-training-result.md) verified 10,937
+model-owned native deliveries and the four sealed update states.
+Every run ended in Act 1. Seven training games reached a boss and none
+cleared the act. The observed development win counts were zero for both
+originals and both PPO finals. The [next comparison](native-a8-combat-feedback.md)
+uses the same verified first-round training games for both fits and
+has eight fresh worlds ready for development play. The four prepared
+practice cases covered all three acts and recorded one training-only
+Act 1 clear.
 
 ## Prior handoff — Status pressure in Act 1
 
