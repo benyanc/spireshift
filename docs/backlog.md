@@ -7,17 +7,18 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Collect more varied model-owned experience.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Collect 48 fresh normal starts and 24 independent continuations from eight naturally reached training roots. Verify the regenerated prefixes, native endings and clean resets. Track fresh games and training-only suffixes separately. [Collection](native-a8-temporal-credit-result.md#model-owned-coverage-collection) |
-| 2 | **Assess the coverage and learning signal.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Reconstruct the sealed outcomes and inspect Act 1 clears, later decision families, and outcome variation across distinct worlds and both initializers. Keep caps, failures and missing runs in the denominator. Reassess collection before fitting if the batch still supplies little variation. |
-| 3 | **Fit one change on checkpoint copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | If the new data qualifies, compare the contribution of the training-only suffixes against fresh normal starts alone. Fix the learning settings and use the shared scorer for both arms. Count each native choice once and exclude regenerated prefixes from fitting. |
+| 1 | **Test a more selective training sampler.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Compare 32 training-only continuations at temperature 0.8 and 0.4 from verified elite and boss openings. Verify matched prefixes, legal menus, draws, native outcomes and clean resets. [Sampling study](native-a8-coverage-result.md#paired-sampling-qualification) |
+| 2 | **Verify useful Act 1 outcome coverage.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Apply the fixed clear gate to both initializers and count distinct worlds. If it passes, collect independently sourced training experience under the qualified behavior. If it remains flat, prioritize improving action scores before another sampling batch. |
+| 3 | **Fit one supported change on checkpoint copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use a separately admitted bank with outcomes that vary across independent worlds for both initializers. Bind each example to its behavior policy and native receipt, match the learning settings and exclude regenerated prefixes from fitting. |
 | 4 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
 | 5 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-All 64 temporal-credit games ended in Act 1. Every arm had zero wins and Act 1
-clears. The 48 world-credit training games supplied 5,447 decisions with multiple
-legal choices, all in Act 1. Neither trace met the screen for recurring conflict
-between combat and noncombat updates across both initializers. Keep the shared
-scorer for the coverage study. [Results and family screen](native-a8-temporal-credit-result.md).
+All 72 model-owned coverage games ended in Act 1. Fresh starts reached six
+bosses and continuations reached nine. The only root with different terminal
+returns belonged to player 3. The proposed normal-only versus added-suffix fit
+is blocked on outcome variation. The next study tests sampling with the shared
+scorer. [Saved coverage result](native-a8-coverage-result.md),
+[earlier family screen](native-a8-temporal-credit-result.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -55,14 +56,14 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current owner handoff — Model-owned coverage collection
+## Current owner handoff — Paired A8 sampling comparison
 
-The collection runs 48 fresh training games and 24 training-only continuations
-with zero optimizer updates. Close STS2 and allow about 15–25 minutes.
-[Collection details](native-a8-temporal-credit-result.md#model-owned-coverage-collection).
+The comparison uses 16 matched pairs from eight training roots, with zero
+optimizer updates. Close STS2 and allow about 8–15 minutes.
+[Sampling details](native-a8-coverage-result.md#paired-sampling-qualification).
 
 ```bash
-bash scripts/collect-a8-model-owned-coverage-v1.sh
+bash scripts/compare-a8-sampling-v1.sh
 ```
 
 ## Prior handoff — Status pressure in Act 1
