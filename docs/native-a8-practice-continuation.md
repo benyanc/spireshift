@@ -50,8 +50,8 @@ The candidate has three Act 2 and four Act 3 boss reward outcomes
 from prepared starts. All eight Act 1 pre-boss segments ended in
 losses.
 
-The next fitting stage can compare normal-start experience with a mix
-of normal and prepared experience on copies of both original models.
-Give the prepared goals their own training signal and measure full
-native wins on separate fresh normal starts. The continuation and
-saved assessment made zero optimizer updates.
+The [matched fitting recipe](native-a8-matched-practice-fitting.md)
+uses this candidate for auxiliary room feedback on copies of both
+original models. It measures full native wins on separate fresh normal
+starts. The continuation and saved assessment made zero optimizer
+updates.
