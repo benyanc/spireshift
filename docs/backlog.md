@@ -1,34 +1,44 @@
 ## Current priority — build a base player that consistently wins A8, then A10
 
 Owner direction, November 4, 2026. [ADR 0007](decisions/0007-a8-base-competence-first.md)
-supersedes the older next-step handoffs below. The goal is genuine normal-start
-full-run wins on unseen A8 worlds. CPU cost is an operational diagnostic; local
-lesson fitting and passing compatibility checks are implementation milestones.
-The numerical definition of sustained competence and confirmation panel must be
-frozen before its assessment; no new numerical target is claimed accepted here.
+supersedes the older next-step handoffs below. The goal is consistent full-run
+Ironclad/A8 wins from unseen normal starts. Act clears and floor progress guide
+development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — test shorter credit for model-owned decisions | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [world-credit result](native-a8-world-credit-result.md) qualified for fitting and yielded zero wins. The [temporal credit screen](native-a8-temporal-credit.md) passed on saved training data. Compare the two fixed credit traces with the original and within-world references. |
-| 2 — measure transfer on fresh normal starts | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Run the declared 64-game A8 panel on eight fresh normal-start worlds. Use full-run wins first and retain the complete denominator. |
-| 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
-| 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The [practice runner](native-a8-practice-continuation.md) passed the combat selector potion binding and native effect checks. Track the shipped-game Connector's large-selection limit and verify promising candidates through official games. |
-| 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
+| 1 | **Run and verify the temporal credit comparison.** [#146](https://github.com/benyanc/spireshift/issues/146), [#134](https://github.com/benyanc/spireshift/issues/134) | Complete the prepared 64-game panel on eight fresh normal-start worlds. Compare the two fixed credit traces with the original and within-world references for both initializers. Verify saved menus, deliveries, successors and endings. Report wins first and retain capped, failed and unattempted games in the denominator. [Comparison](native-a8-temporal-credit.md) |
+| 2 | **Identify the next learning bottleneck.** [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Use paired outcomes to see whether shorter credit transfers across worlds. On saved training data, measure decision-family coverage and whether combat and noncombat updates consistently conflict across worlds and initializers. Use the evidence to select one change for the next comparison. |
+| 3 | **Collect more varied model-owned experience.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Collect fresh games from the policies being trained on independent training worlds for both initializers. If normal starts still yield little outcome variation, qualify repeated continuations from varied states the model actually reached on training worlds. Verify save, restore and reset semantics, and track these continuations separately from normal-start games. |
+| 4 | **Fit and evaluate the next change on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#146](https://github.com/benyanc/spireshift/issues/146), [#143](https://github.com/benyanc/spireshift/issues/143) | Compare one change at a time against a matched control on fresh normal starts. The shared scorer is the default for the next data or credit comparison. If step 2 finds repeatable interference, compare a shared model with separate combat and noncombat scoring heads against the single scorer using the same experience and training settings. |
+| 5 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-[#143](https://github.com/benyanc/spireshift/issues/143) supports learning and
-evaluation when observed failures justify representation or capacity changes.
-[#5](https://github.com/benyanc/spireshift/issues/5)
-defines the separate foundation/search-readiness scorecard; its closed definition
-task is not evidence that a player passed it. Calibration and adaptive-search
-readiness follow useful base play and do not hold up ordinary base development.
+The 48 world-credit training games contain 3,745 combat and 1,702 noncombat
+menus with multiple legal choices. The noncombat count includes 265 card-reward,
+163 path and 104 event menus. Those counts come from the saved training journals
+using recorded combat ownership and menu size. An older shared update changed
+roughly a quarter of noncombat picks on identical saved menus with the same random
+draws. The later compatibility panel stopped before its split-policy cases. This
+supports a bounded interference screen. Separate models for individual strategic
+families would divide the sparse experience further. [World-credit audit](native-a8-world-credit-result.md),
+[saved choice audit](native-action-prediction-separation-result.md),
+[routing canary result](native-varied-final-canary-result.md).
 
-Items 1–3 form the development loop; the table orders the next implementation,
-not a request to finish a large isolated study before testing gameplay benefit.
-Freeze train/development/final-test ownership, candidate selection and practical
-resource caps before each new run. Preserve public-state-only student inputs,
-complete legal actions, original failure denominators, immutable evidence and
-the game build. Old full checkpoints/Adam remain reference baselines, while new
-lineages may change the architecture and learning method. Long jobs remain owner-run.
+Use the game's public decision owner to select a scoring head if that experiment
+qualifies. The model scores every legal option, including skips, targets and
+compound choices. Both heads learn toward the same full-run objective. Repair
+demonstrated menu, delivery, effect or ending defects before admitting affected
+experience. Track the official Connector's large-selection limit under
+[#149](https://github.com/benyanc/spireshift/issues/149). [Native selector controls](native-a8-practice-continuation.md),
+[official coverage and limits](native-win-curriculum-large-selection.md).
+
+Freeze training, development and final-test ownership, candidate selection and
+practical resource caps before each run. Verify the frozen game build and exact
+original and reference checkpoints, including all Adam state. Use versioned
+recipes and checkpoint copies for new fits. Reassess the order after each result.
+Long jobs are owner-run. [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142)
+follows sustained A8 wins. [#5](https://github.com/benyanc/spireshift/issues/5)
+tracks separate readiness criteria for adaptive search.
 
 **Deferred from the critical path:** CPU attribution/profiling; matched-budget
 and compute-allocation research ([#7](https://github.com/benyanc/spireshift/issues/7),
@@ -50,14 +60,16 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Shorter credit from verified model-owned runs
+## Current owner handoff — Temporal credit comparison
 
-The [world-credit result](native-a8-world-credit-result.md) verified
-variation on seven and six training worlds, and 48 native evaluation
-losses. Within-world credit reached a little farther, with zero Act 1
-clears. The [next study](native-a8-temporal-credit.md) uses the same
-model-owned training runs to compare shorter and full credit traces
-on exact copies and measure wins on fresh starts.
+All 48 world-credit evaluation games ended in Act 1. The prepared temporal
+credit comparison tests the fitted copies on fresh starts with zero optimizer
+updates. Close STS2 and allow about 15–25 minutes. [World-credit result](native-a8-world-credit-result.md),
+[temporal credit preparation](native-a8-temporal-credit.md).
+
+```bash
+bash scripts/compare-a8-temporal-credit-v1.sh
+```
 
 ## Prior handoff — Status pressure in Act 1
 
