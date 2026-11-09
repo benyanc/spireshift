@@ -7,17 +7,15 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Test a more selective training sampler.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Compare 32 training-only continuations at temperature 0.8 and 0.4 from verified elite and boss openings. Verify matched prefixes, legal menus, draws, native outcomes and clean resets. [Sampling study](native-a8-coverage-result.md#paired-sampling-qualification) |
-| 2 | **Verify useful Act 1 outcome coverage.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Apply the fixed clear gate to both initializers and count distinct worlds. If it passes, collect independently sourced training experience under the qualified behavior. If it remains flat, prioritize improving action scores before another sampling batch. |
-| 3 | **Fit one supported change on checkpoint copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use a separately admitted bank with outcomes that vary across independent worlds for both initializers. Bind each example to its behavior policy and native receipt, match the learning settings and exclude regenerated prefixes from fitting. |
+| 1 | **Collect verified alternatives for improving action scores.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Probe 24 alternative sequences from 12 distinct training-only combat losses. Match the public root, deliver a different legal choice and check the actual reward or loss in the same fight. [Turn rescue collection](native-a8-sampling-result.md#collect-action-scoring-evidence-from-verified-combat-outcomes) |
+| 2 | **Assess the turn-rescue gate.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Verify all endpoints and count distinct rescued worlds for both initializers and at least two encounter types. Preserve ties and incomplete runs. Base any new collection or fitting decision on the measured outcomes. |
+| 3 | **Fit and validate a supported action-ranking change on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use a separately admitted contrast bank. Group by source world, exclude setup choices and keep positive sequences distinct from ordinary PPO. Require improved rankings on held worlds before a fresh strength panel. |
 | 4 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
 | 5 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-All 72 model-owned coverage games ended in Act 1. Fresh starts reached six
-bosses and continuations reached nine. The only root with different terminal
-returns belonged to player 3. The proposed normal-only versus added-suffix fit
-is blocked on outcome variation. The next study tests sampling with the shared
-scorer. [Saved coverage result](native-a8-coverage-result.md),
+All 32 paired sampling games ended in Act 1. Sharper sampling changed choices
+in every pair and tied the standard arm at 0/16 clears. The next priority is
+native outcome evidence for better action scores. [Saved sampling result](native-a8-sampling-result.md),
 [earlier family screen](native-a8-temporal-credit-result.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
@@ -56,14 +54,14 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current owner handoff — Paired A8 sampling comparison
+## Current owner handoff — Native combat outcome contrasts
 
-The comparison uses 16 matched pairs from eight training roots, with zero
-optimizer updates. Close STS2 and allow about 8–15 minutes.
-[Sampling details](native-a8-coverage-result.md#paired-sampling-qualification).
+The collection tries 24 model-generated alternatives across 12 training-only
+combat roots with zero optimizer updates. Close STS2 and allow about 6–12 minutes.
+[Turn rescue details](native-a8-sampling-result.md#collect-action-scoring-evidence-from-verified-combat-outcomes).
 
 ```bash
-bash scripts/compare-a8-sampling-v1.sh
+bash scripts/collect-a8-turn-rescues-v1.sh
 ```
 
 ## Prior handoff — Status pressure in Act 1
