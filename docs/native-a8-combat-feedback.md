@@ -1,5 +1,9 @@
 # Matched A8 combat feedback
 
+The [saved result](native-a8-combat-feedback-result.md) covers all 48 games.
+The room-feedback arm recorded one Act 1 clear and all three arms had
+zero full-run wins.
+
 The comparison uses the frozen Slay the Spire 2 v0.111.0 build
 (`41cef1ea`), the original headless executable, runtime and public input
 converter. A separately built startup adapter adds Trial's abandon
@@ -45,10 +49,9 @@ match the floor-only copies. All six full states reloaded and delivered
 the exact four-choice control prefixes. The shared profile and all
 frozen inputs passed their integrity checks. [Preparation evidence](evidence/native-a8-combat-feedback-v1.json).
 
-## Owner comparison
+## Completed owner comparison
 
-Run from the checkout after closing STS2. Allow about 10–25 minutes
-with a 90-minute outer cap.
+The completed study used this command with a 90-minute outer cap.
 
 ```bash
 bash scripts/compare-a8-combat-feedback-v1.sh
