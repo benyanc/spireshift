@@ -1,5 +1,9 @@
 # Model-owned A8 practice mix
 
+The [collection and continuation result](native-a8-practice-continuation.md)
+records the original interruption and the completed matched practice
+candidate.
+
 The [matched combat-feedback result](native-a8-combat-feedback-result.md)
 recorded one Act 1 clear and zero wins in 48 normal-start games. This
 collection measures how much useful experience the original models can
@@ -46,7 +50,7 @@ collecting varied practice and records the harder outcomes separately.
 The original states, Adam, game build and shared profile passed
 verification. [Preparation evidence](evidence/native-a8-practice-mix-v1.json).
 
-Run from the checkout after closing STS2. Allow about 7–15 minutes.
+The original owner run used this command.
 
 ```bash
 bash scripts/collect-a8-practice-mix-v1.sh
