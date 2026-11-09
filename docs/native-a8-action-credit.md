@@ -1,5 +1,9 @@
 # A8 action-credit collection
 
+**Completed.** The [saved audit](native-a8-action-credit-result.md)
+verified nine informative pairs against a minimum of twelve.
+The pairs remain diagnostic evidence.
+
 The [matched practice result](native-a8-matched-practice-result.md)
 verified 72 Act 1 losses. Each fitted arm reached the Act 1 boss twice,
 and each recorded zero clears. The next experiment tests whether model

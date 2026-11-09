@@ -9,8 +9,8 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — collect matched evidence about individual choices | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [practice comparison](native-a8-matched-practice-result.md) recorded zero Act 1 clears. Use the [action-credit pilot](native-a8-action-credit.md) to collect matched legal choices and native continuations across combat, route, and resource decisions. |
-| 2 — fit and test if the evidence qualifies | [#35 learning updates](https://github.com/benyanc/spireshift/issues/35), [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Require useful paired choices across both initializers and all three strata. Fit copies with a separate recipe, then measure full-run wins on fresh normal starts with the complete denominator. |
+| 1 — learn from independent model-owned runs | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [single-action pilot](native-a8-action-credit-result.md) supplied nine contrasts against a minimum of twelve. The [world-credit study](native-a8-world-credit.md) samples three full-menu runs per training world and compares fitted copies only when both initializers have varied outcomes. |
+| 2 — measure transfer on fresh normal starts | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Compare both fixed world-credit fits with the originals across 48 declared fresh games. Use full-run wins first and retain the complete denominator. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The [practice runner](native-a8-practice-continuation.md) passed the combat selector potion binding and native effect checks. Track the shipped-game Connector's large-selection limit and verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
@@ -50,14 +50,13 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — A8 action credit after the mixed-practice comparison
+## Current handoff — World-relative credit from model-owned runs
 
-The [saved comparison](native-a8-matched-practice-result.md) verified
-24 Act 1 losses per arm. Each arm reached the boss twice and none
-cleared the act. The new [paired collection](native-a8-action-credit.md)
-isolates a model-sampled alternative on the same public menu and
-scores its native continuation. Its worlds are training-only, and
-its results determine whether there is enough evidence for a new fit.
+The [saved pilot](native-a8-action-credit-result.md) verified all
+36 pairs. All 72 games ended in Act 1, and nine informative pairs
+fell short of the fitting gate. The [next study](native-a8-world-credit.md)
+uses independent full-menu runs on each normal-start world, compares
+two actor baselines on exact copies, and measures wins on fresh starts.
 
 ## Prior handoff — Status pressure in Act 1
 
