@@ -9,8 +9,8 @@ frozen before its assessment; no new numerical target is claimed accepted here.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 — compare the matched practice fits on fresh worlds | [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Run the [72-game paired comparison](native-a8-matched-practice-fitting.md) from 12 fresh normal starts. Use full-run wins first and count every planned game. |
-| 2 — choose the next base-learning change | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | Compare the normal-only and mixed fits against each other and the original reference. Use the paired outcomes and progress to decide whether prepared experience transfers and what the next training change should target. |
+| 1 — collect matched evidence about individual choices | [#134 whole-game base learning](https://github.com/benyanc/spireshift/issues/134), [#35 learning updates](https://github.com/benyanc/spireshift/issues/35) | The [practice comparison](native-a8-matched-practice-result.md) recorded zero Act 1 clears. Use the [action-credit pilot](native-a8-action-credit.md) to collect matched legal choices and native continuations across combat, route, and resource decisions. |
+| 2 — fit and test if the evidence qualifies | [#35 learning updates](https://github.com/benyanc/spireshift/issues/35), [#146 fresh A8 gameplay evaluation](https://github.com/benyanc/spireshift/issues/146) | Require useful paired choices across both initializers and all three strata. Fit copies with a separate recipe, then measure full-run wins on fresh normal starts with the complete denominator. |
 | 3 — confirm sustained competence | [#78 consistent A8 base milestone](https://github.com/benyanc/spireshift/issues/78) | Demonstrate sustained full-run A8 wins across unseen worlds using prospectively frozen success and confirmation criteria. |
 | 4 — targeted defects and official games at promising milestones | [#149 native and official correctness](https://github.com/benyanc/spireshift/issues/149) | The [practice runner](native-a8-practice-continuation.md) passed the combat selector potion binding and native effect checks. Track the shipped-game Connector's large-selection limit and verify promising candidates through official games. |
 | 5 — after consistent A8 | [#142 A10 validation](https://github.com/benyanc/spireshift/issues/142) | Verify A10 on the frozen build, train or adapt a separate lineage and measure its independent full-run win rate. |
@@ -50,18 +50,14 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current handoff — Matched practice fitting and fresh evaluation
+## Current handoff — A8 action credit after the mixed-practice comparison
 
-The [saved combat-feedback comparison](native-a8-combat-feedback-result.md)
-verified 48 losses and one Act 1 clear. The model-owned practice
-collection produced 51 prepared goals and 13 losses in the
-[matched candidate](native-a8-practice-continuation.md).
-Both fitted arms sealed with the same normal-start trajectories,
-whole-run targets and matched value weights. The mixed arm
-used the prepared bank for half of its auxiliary room samples.
-Six reload and two native ending controls passed. The
-[next comparison](native-a8-matched-practice-fitting.md)
-measures transfer to unseen normal A8 starts.
+The [saved comparison](native-a8-matched-practice-result.md) verified
+24 Act 1 losses per arm. Each arm reached the boss twice and none
+cleared the act. The new [paired collection](native-a8-action-credit.md)
+isolates a model-sampled alternative on the same public menu and
+scores its native continuation. Its worlds are training-only, and
+its results determine whether there is enough evidence for a new fit.
 
 ## Prior handoff — Status pressure in Act 1
 

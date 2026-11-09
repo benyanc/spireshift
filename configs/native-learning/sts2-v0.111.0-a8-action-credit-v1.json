@@ -1,0 +1,392 @@
+{
+  "assessment": {
+    "path": "docs/evidence/native-a8-matched-practice-result-v2.json",
+    "sha256": "b324bae0d52ed3093e4deeb8b67848899a55dfa88c3cfa66241278249df6c91f"
+  },
+  "contract": "native_a8_paired_action_credit_v1",
+  "control": [
+    {
+      "key": "control-01-p2",
+      "minimum_floor": 2,
+      "partition": "credit_control",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1C001",
+      "seed_id": 97221,
+      "stratum": "combat"
+    },
+    {
+      "key": "control-02-p3",
+      "minimum_floor": 2,
+      "partition": "credit_control",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1C002",
+      "seed_id": 97322,
+      "stratum": "route"
+    },
+    {
+      "key": "control-03-p2",
+      "minimum_floor": 2,
+      "partition": "credit_control",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1C003",
+      "seed_id": 97223,
+      "stratum": "resources"
+    }
+  ],
+  "control_resource": "artifacts/native-a8-action-credit/control-v1-resources.json",
+  "control_workspace": "artifacts/native-a8-action-credit/control-v1",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "gate": {
+    "minimum_pairs": 12,
+    "minimum_per_initializer": 3,
+    "minimum_per_stratum": 2
+  },
+  "implementation": {
+    "scripts/collect-a8-action-credit-v1.sh": "b5e21b3e1d87f245282929e0d5e250cbabcb8a6d5db5fa6a33f906b74dd65eae",
+    "src/spireshift/native_a8_action_credit_policy.py": "d7f0ecb9795ce812e83ec1898f2f1cc8920111d8b08d94b059389a0455bd32e4",
+    "src/spireshift/native_a8_action_credit_session.py": "467fd6f2cfcb415d954d04d8c9a94f55300dac57f3b3e7d540f12d8aa9e082e9",
+    "src/spireshift/native_a8_mix_audit.py": "0214dad5ece0d1f67539495349e805333d416b8d0913d19141a8c5726d0a4cce"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "schema_version": "native-a8-action-credit-collection-v1",
+  "score_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "study": [
+    {
+      "key": "train-01-p2",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T001",
+      "seed_id": 97201,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-01-p3",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T001",
+      "seed_id": 97301,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-02-p2",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T002",
+      "seed_id": 97202,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-02-p3",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T002",
+      "seed_id": 97302,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-03-p2",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T003",
+      "seed_id": 97203,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-03-p3",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T003",
+      "seed_id": 97303,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-04-p2",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T004",
+      "seed_id": 97204,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-04-p3",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T004",
+      "seed_id": 97304,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-05-p2",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T005",
+      "seed_id": 97205,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-05-p3",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T005",
+      "seed_id": 97305,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-06-p2",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T006",
+      "seed_id": 97206,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-06-p3",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T006",
+      "seed_id": 97306,
+      "stratum": "combat"
+    },
+    {
+      "key": "train-07-p2",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T007",
+      "seed_id": 97207,
+      "stratum": "route"
+    },
+    {
+      "key": "train-07-p3",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T007",
+      "seed_id": 97307,
+      "stratum": "route"
+    },
+    {
+      "key": "train-08-p2",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T008",
+      "seed_id": 97208,
+      "stratum": "route"
+    },
+    {
+      "key": "train-08-p3",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T008",
+      "seed_id": 97308,
+      "stratum": "route"
+    },
+    {
+      "key": "train-09-p2",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T009",
+      "seed_id": 97209,
+      "stratum": "route"
+    },
+    {
+      "key": "train-09-p3",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T009",
+      "seed_id": 97309,
+      "stratum": "route"
+    },
+    {
+      "key": "train-10-p2",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T010",
+      "seed_id": 97210,
+      "stratum": "route"
+    },
+    {
+      "key": "train-10-p3",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T010",
+      "seed_id": 97310,
+      "stratum": "route"
+    },
+    {
+      "key": "train-11-p2",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T011",
+      "seed_id": 97211,
+      "stratum": "route"
+    },
+    {
+      "key": "train-11-p3",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T011",
+      "seed_id": 97311,
+      "stratum": "route"
+    },
+    {
+      "key": "train-12-p2",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T012",
+      "seed_id": 97212,
+      "stratum": "route"
+    },
+    {
+      "key": "train-12-p3",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T012",
+      "seed_id": 97312,
+      "stratum": "route"
+    },
+    {
+      "key": "train-13-p2",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T013",
+      "seed_id": 97213,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-13-p3",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T013",
+      "seed_id": 97313,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-14-p2",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T014",
+      "seed_id": 97214,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-14-p3",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T014",
+      "seed_id": 97314,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-15-p2",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T015",
+      "seed_id": 97215,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-15-p3",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T015",
+      "seed_id": 97315,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-16-p2",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T016",
+      "seed_id": 97216,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-16-p3",
+      "minimum_floor": 2,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T016",
+      "seed_id": 97316,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-17-p2",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T017",
+      "seed_id": 97217,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-17-p3",
+      "minimum_floor": 4,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T017",
+      "seed_id": 97317,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-18-p2",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 2,
+      "seed": "SP1RESH1FTA8AC1T018",
+      "seed_id": 97218,
+      "stratum": "resources"
+    },
+    {
+      "key": "train-18-p3",
+      "minimum_floor": 6,
+      "partition": "credit_train",
+      "player": 3,
+      "seed": "SP1RESH1FTA8AC1T018",
+      "seed_id": 97318,
+      "stratum": "resources"
+    }
+  ],
+  "workspace": "artifacts/native-a8-action-credit/collection-v1"
+}

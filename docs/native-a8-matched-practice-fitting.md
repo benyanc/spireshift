@@ -1,5 +1,8 @@
 # Matched A8 practice fitting
 
+**Completed.** The [saved assessment](native-a8-matched-practice-result.md)
+verified 72 Act 1 losses across the three arms.
+
 The previous normal-start panel recorded 48 losses and one Act 1
 clear. The [practice bank](native-a8-practice-continuation.md)
 adds 64 model-owned segments from 32 matched training worlds,
