@@ -1,0 +1,131 @@
+{
+  "development_games_planned": 64,
+  "development_games_started": 0,
+  "fits": {
+    "2": {
+      "checkpoints": {
+        "full_trace": {
+          "model_id": "sha256:893a743bce4ebe3e5bcf0565b6b72b13354de0041547ebe5fe66b9b817e9abc3",
+          "optimizer_id": "sha256:7fbe58e74b39d2498d0bc0e0198f546a4d219fe2169a6b532f194eea09a34764",
+          "optimizer_steps": 5687,
+          "state_id": "sha256:6c43e35207c2d126d5653eef485aff61fe843d0a6e885f0a2a8478cdf120c20c"
+        },
+        "short_trace": {
+          "model_id": "sha256:d2384d16834f0ac0aaa985b050f6a632ae323deefedc7371ca85b16ebeb41f97",
+          "optimizer_id": "sha256:2c5ce326e4dae33cc9fd49a5e52416b605a6cc380dbaa2d76b0cf774ab0b3323",
+          "optimizer_steps": 5687,
+          "state_id": "sha256:ece532217e461d4146bbca1f75ca4fc7be6c043af7022649f8da8d5c3b1a98be"
+        }
+      },
+      "critics_exactly_matched": true,
+      "native_training_decisions": 3687,
+      "optimizer_updates_per_copy": 29,
+      "work": {
+        "full_trace": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.002926991852772543,
+          "optimizer_steps": 29,
+          "raw_advantage_mean": 0.0007228384048494726,
+          "raw_advantage_std": 0.004197631032788473,
+          "stop_reason": "epoch_limit"
+        },
+        "short_trace": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.0032692140337419566,
+          "optimizer_steps": 29,
+          "raw_advantage_mean": 0.0003269160210505258,
+          "raw_advantage_std": 0.001617856696387813,
+          "stop_reason": "epoch_limit"
+        }
+      }
+    },
+    "3": {
+      "checkpoints": {
+        "full_trace": {
+          "model_id": "sha256:390ea71a92f67dac468c2becafe6a9b1431d0f98bd6535ead6c4e7cbb494c54b",
+          "optimizer_id": "sha256:aea492867770ff61ddedfebd79d9e4b4cd941beaf389e53d96524881df7ec6e9",
+          "optimizer_steps": 6073,
+          "state_id": "sha256:fba85beee0013f661f606619a60b15ddd8b51933527dab8dc14801c6d6883ce3"
+        },
+        "short_trace": {
+          "model_id": "sha256:ac98312715afddb36cc759bffa25afc4ae747e1688b7200dcb84d62e481d2253",
+          "optimizer_id": "sha256:1e605b5dff0446d9933653887b48ac115caa997032eb1082084e920c00a16df3",
+          "optimizer_steps": 6073,
+          "state_id": "sha256:6209ce9835c5c06abd0af33d7d3d2e9e3ab128f47b696338b09473ecbc80e91e"
+        }
+      },
+      "critics_exactly_matched": true,
+      "native_training_decisions": 3559,
+      "optimizer_updates_per_copy": 28,
+      "work": {
+        "full_trace": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.002433084673106509,
+          "optimizer_steps": 28,
+          "raw_advantage_mean": 0.0017806484591756126,
+          "raw_advantage_std": 0.004839189048643725,
+          "stop_reason": "epoch_limit"
+        },
+        "short_trace": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.0032766058786842314,
+          "optimizer_steps": 28,
+          "raw_advantage_mean": 0.0005461980686319593,
+          "raw_advantage_std": 0.0018155486386386376,
+          "stop_reason": "epoch_limit"
+        }
+      }
+    }
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "native_controls": {
+    "prefix-01-p2-full-trace": {
+      "native_decisions": 4,
+      "seal_id": "sha256:93efec23aa2fd9bb1980ce3f5376c9ca58ead6d101d64b7adc4a506f37352dc2"
+    },
+    "prefix-01-p2-short-trace": {
+      "native_decisions": 4,
+      "seal_id": "sha256:555c52837bd6be90e442874f4590cc08350b40f4f16bdbdef0a89b1dcc7b7dce"
+    },
+    "prefix-01-p3-full-trace": {
+      "native_decisions": 4,
+      "seal_id": "sha256:f45e8c4742e7dd31d347ae50991362e766a979f4227ce6bb2d8bb25f2d68fb15"
+    },
+    "prefix-01-p3-short-trace": {
+      "native_decisions": 4,
+      "seal_id": "sha256:ffb05bb89be0bb8237a3b33eda805244b16603febfc6fb0b9f81ffcccdac07f9"
+    }
+  },
+  "optimizer_updates_on_copies": 114,
+  "original_optimizer_updates": 0,
+  "preparation": {
+    "path": "artifacts/native-a8-temporal-credit/preparation-v1/report.json",
+    "report_id": "sha256:d1a68dd3e364dfd3a599b6feb4fd8b079251a86e295573635da95ea61e671b6a",
+    "sha256": "9601bafcf4a09a6e6f0666747d6c65013c5b3b19e13d53fa75f5237569a6c261"
+  },
+  "preparation_resources": {
+    "path": "artifacts/native-a8-temporal-credit/preparation-v1-resources.json",
+    "report_id": "sha256:c232d01bf7472252d559cd8f6515bf86304e6ee13c810a1a879b60d2345950c4",
+    "sha256": "b074aeec77f9833b74e7af43cce5e6be472bc86b42b798c36fb72e119fff0142"
+  },
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-temporal-credit-v1.json",
+    "sha256": "da99f9265cb84aa853ad9c343513d77aac960ea82ed0df57d64aad78374f9dcd"
+  },
+  "report_id": "sha256:dc3e0a62de3a11246f728abebbc8fe88d226cead7be79a9342a51849c8a747d4",
+  "schema_version": "native-a8-temporal-credit-preparation-evidence-v1",
+  "screen": {
+    "path": "docs/evidence/native-a8-temporal-credit-screen-v1.json",
+    "report_id": "sha256:e0736bfd7c8d66596aade92884c150391d5e238ab4bc3680f8f26e7d7d96ddd4",
+    "sha256": "4aa24887d2b9ea7e533f8df3a088baf89d9cf710ee762f7bafdcac8de56d848b"
+  },
+  "status": "temporal_credit_fits_frozen",
+  "verified_reload_choices": 16
+}

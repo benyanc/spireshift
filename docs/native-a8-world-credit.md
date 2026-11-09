@@ -1,5 +1,9 @@
 # A8 world-relative learning comparison
 
+**Completed.** Both initializers qualified for fitting. The
+[saved evaluation](native-a8-world-credit-result.md) verified
+zero wins across the three arms.
+
 The [action-credit pilot](native-a8-action-credit-result.md) verified
 legal alternatives and their effects. Nine pairs changed the training
 return, below the twelve needed to fit. The next experiment asks whether
