@@ -7,22 +7,17 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Run and verify the temporal credit comparison.** [#146](https://github.com/benyanc/spireshift/issues/146), [#134](https://github.com/benyanc/spireshift/issues/134) | Complete the prepared 64-game panel on eight fresh normal-start worlds. Compare the two fixed credit traces with the original and within-world references for both initializers. Verify saved menus, deliveries, successors and endings. Report wins first and retain capped, failed and unattempted games in the denominator. [Comparison](native-a8-temporal-credit.md) |
-| 2 | **Identify the next learning bottleneck.** [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Use paired outcomes to see whether shorter credit transfers across worlds. On saved training data, measure decision-family coverage and whether combat and noncombat updates consistently conflict across worlds and initializers. Use the evidence to select one change for the next comparison. |
-| 3 | **Collect more varied model-owned experience.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Collect fresh games from the policies being trained on independent training worlds for both initializers. If normal starts still yield little outcome variation, qualify repeated continuations from varied states the model actually reached on training worlds. Verify save, restore and reset semantics, and track these continuations separately from normal-start games. |
-| 4 | **Fit and evaluate the next change on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#146](https://github.com/benyanc/spireshift/issues/146), [#143](https://github.com/benyanc/spireshift/issues/143) | Compare one change at a time against a matched control on fresh normal starts. The shared scorer is the default for the next data or credit comparison. If step 2 finds repeatable interference, compare a shared model with separate combat and noncombat scoring heads against the single scorer using the same experience and training settings. |
+| 1 | **Collect more varied model-owned experience.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Collect 48 fresh normal starts and 24 independent continuations from eight naturally reached training roots. Verify the regenerated prefixes, native endings and clean resets. Track fresh games and training-only suffixes separately. [Collection](native-a8-temporal-credit-result.md#model-owned-coverage-collection) |
+| 2 | **Assess the coverage and learning signal.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Reconstruct the sealed outcomes and inspect Act 1 clears, later decision families, and outcome variation across distinct worlds and both initializers. Keep caps, failures and missing runs in the denominator. Reassess collection before fitting if the batch still supplies little variation. |
+| 3 | **Fit one change on checkpoint copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | If the new data qualifies, compare the contribution of the training-only suffixes against fresh normal starts alone. Fix the learning settings and use the shared scorer for both arms. Count each native choice once and exclude regenerated prefixes from fitting. |
+| 4 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
 | 5 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-The 48 world-credit training games contain 3,745 combat and 1,702 noncombat
-menus with multiple legal choices. The noncombat count includes 265 card-reward,
-163 path and 104 event menus. Those counts come from the saved training journals
-using recorded combat ownership and menu size. An older shared update changed
-roughly a quarter of noncombat picks on identical saved menus with the same random
-draws. The later compatibility panel stopped before its split-policy cases. This
-supports a bounded interference screen. Separate models for individual strategic
-families would divide the sparse experience further. [World-credit audit](native-a8-world-credit-result.md),
-[saved choice audit](native-action-prediction-separation-result.md),
-[routing canary result](native-varied-final-canary-result.md).
+All 64 temporal-credit games ended in Act 1. Every arm had zero wins and Act 1
+clears. The 48 world-credit training games supplied 5,447 decisions with multiple
+legal choices, all in Act 1. Neither trace met the screen for recurring conflict
+between combat and noncombat updates across both initializers. Keep the shared
+scorer for the coverage study. [Results and family screen](native-a8-temporal-credit-result.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -60,15 +55,14 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current owner handoff — Temporal credit comparison
+## Current owner handoff — Model-owned coverage collection
 
-All 48 world-credit evaluation games ended in Act 1. The prepared temporal
-credit comparison tests the fitted copies on fresh starts with zero optimizer
-updates. Close STS2 and allow about 15–25 minutes. [World-credit result](native-a8-world-credit-result.md),
-[temporal credit preparation](native-a8-temporal-credit.md).
+The collection runs 48 fresh training games and 24 training-only continuations
+with zero optimizer updates. Close STS2 and allow about 15–25 minutes.
+[Collection details](native-a8-temporal-credit-result.md#model-owned-coverage-collection).
 
 ```bash
-bash scripts/compare-a8-temporal-credit-v1.sh
+bash scripts/collect-a8-model-owned-coverage-v1.sh
 ```
 
 ## Prior handoff — Status pressure in Act 1

@@ -1,0 +1,492 @@
+{
+  "assessment": {
+    "path": "artifacts/native-a8-temporal-credit/assessment-v1-1794239333646300000/report.json",
+    "report_id": "sha256:085b75bc6cbc5c384dfbd9d949bc1a09e25193d04a3037eb098c397cfb81625c",
+    "sha256": "6d3f17a8487b0190ed238cc0c43f38b7a4fafe739fa5be22a2fd7230648e9d73"
+  },
+  "comparison": {
+    "adaptive_controller_allowed": false,
+    "arms": {
+      "full_trace": {
+        "act1_bosses_reached": 2,
+        "act1_clears": 0,
+        "by_initializer": {
+          "2": {
+            "act1_bosses_reached": 0,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 6.5,
+            "wins": 0
+          },
+          "3": {
+            "act1_bosses_reached": 2,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 10.5,
+            "wins": 0
+          }
+        },
+        "games": 16,
+        "losses_by_terminal_encounter": {
+          "boss": 2,
+          "elite": 9,
+          "normal": 5
+        },
+        "mean_maximum_floor": 8.5,
+        "wins": 0
+      },
+      "original": {
+        "act1_bosses_reached": 1,
+        "act1_clears": 0,
+        "by_initializer": {
+          "2": {
+            "act1_bosses_reached": 0,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 6.875,
+            "wins": 0
+          },
+          "3": {
+            "act1_bosses_reached": 1,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 8.875,
+            "wins": 0
+          }
+        },
+        "games": 16,
+        "losses_by_terminal_encounter": {
+          "boss": 1,
+          "elite": 9,
+          "normal": 6
+        },
+        "mean_maximum_floor": 7.875,
+        "wins": 0
+      },
+      "short_trace": {
+        "act1_bosses_reached": 1,
+        "act1_clears": 0,
+        "by_initializer": {
+          "2": {
+            "act1_bosses_reached": 0,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 6.75,
+            "wins": 0
+          },
+          "3": {
+            "act1_bosses_reached": 1,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 9.25,
+            "wins": 0
+          }
+        },
+        "games": 16,
+        "losses_by_terminal_encounter": {
+          "boss": 1,
+          "elite": 10,
+          "normal": 5
+        },
+        "mean_maximum_floor": 8.0,
+        "wins": 0
+      },
+      "within_world": {
+        "act1_bosses_reached": 1,
+        "act1_clears": 0,
+        "by_initializer": {
+          "2": {
+            "act1_bosses_reached": 0,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 6.25,
+            "wins": 0
+          },
+          "3": {
+            "act1_bosses_reached": 1,
+            "act1_clears": 0,
+            "games": 8,
+            "mean_maximum_floor": 9.625,
+            "wins": 0
+          }
+        },
+        "games": 16,
+        "losses_by_terminal_encounter": {
+          "boss": 1,
+          "elite": 9,
+          "normal": 6
+        },
+        "mean_maximum_floor": 7.9375,
+        "wins": 0
+      }
+    },
+    "audit_counts": {
+      "local_factors": 0,
+      "native_deliveries": 8647,
+      "sealed_files": 3904
+    },
+    "automatic_follow_up": false,
+    "config_id": "sha256:9afc97bd521ff9619616997addd9d529f9ce6bc6603f4c51b9cc9ef9c26b379f",
+    "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+    "final_test_worlds_used": false,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "native_game_launches": 0,
+    "official_live_qualification_granted": false,
+    "optimizer_updates": 0,
+    "outcomes": {
+      "capped": 0,
+      "failed": 0,
+      "loss": 64,
+      "unattempted": 0,
+      "win": 0
+    },
+    "owner": {
+      "path": "artifacts/native-a8-temporal-credit/comparison-v1/attempt-1794239333646300000.json",
+      "report_id": "sha256:52425000183596a943a35266ac86b86adb84370c6eb0a3cde85e1c4827b27a46",
+      "sha256": "0a7a03c97fc570678e7e480d4ee143ef66cc379e84be81be940c1cc111a4be23"
+    },
+    "paired_floors": {
+      "short_trace_minus_full_trace": {
+        "floor_delta_interval_95_descriptive": [
+          -2.0,
+          0.4375
+        ],
+        "higher": 2,
+        "lower": 1,
+        "mean_floor_delta": -0.5,
+        "tied": 13
+      },
+      "short_trace_minus_original": {
+        "floor_delta_interval_95_descriptive": [
+          -0.125,
+          0.4375
+        ],
+        "higher": 2,
+        "lower": 1,
+        "mean_floor_delta": 0.125,
+        "tied": 13
+      },
+      "short_trace_minus_within_world": {
+        "floor_delta_interval_95_descriptive": [
+          -0.1875,
+          0.375
+        ],
+        "higher": 2,
+        "lower": 1,
+        "mean_floor_delta": 0.0625,
+        "tied": 13
+      }
+    },
+    "preparation_id": "sha256:d1a68dd3e364dfd3a599b6feb4fd8b079251a86e295573635da95ea61e671b6a",
+    "promotion_allowed": false,
+    "report_id": "sha256:085b75bc6cbc5c384dfbd9d949bc1a09e25193d04a3037eb098c397cfb81625c",
+    "resources": {
+      "path": "artifacts/native-a8-temporal-credit/comparison-v1-1794239333646300000-resources.json",
+      "report_id": "sha256:c5a696bc3a17af23fbcea904778c0b518c5d534c134867b9507636810eebb737",
+      "sha256": "8a244a9baaf921dfcae2d76df6c106f140ee093bf4557aa6c84f0aafbaa5194e"
+    },
+    "schema_version": "native-a8-temporal-credit-saved-audit-v1",
+    "status": "temporal_credit_saved_verified"
+  },
+  "coverage_preparation": {
+    "control": {
+      "path": "artifacts/native-a8-model-owned-coverage/control-v1/report.json",
+      "report_id": "sha256:c3014b11ac1f884b1a34f4575acff2f56b5635e9160ab5c9d9101d5b20605367",
+      "sha256": "03c1f1d21ba7e92ebd06f18da3e121aaed5aa2dce830a98b9f6d37df894190d8"
+    },
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "live_control_prefix_deliveries": 396,
+    "live_control_runs": 4,
+    "live_control_suffix_deliveries": 16,
+    "optimizer_updates": 0,
+    "planned_fresh_training_games": 48,
+    "planned_training_continuations": 24,
+    "recipe": {
+      "config_id": "sha256:3275d444558abf80569425a8bfe98a257ba0213efe038d17e901e0d738f593cc",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-model-owned-coverage-v1.json",
+      "sha256": "eafad8de6f96b3a7f8796d0794a4793af400d94a23db0ba82610eef622ed9c91"
+    },
+    "resources": {
+      "path": "artifacts/native-a8-model-owned-coverage/control-v1-resources.json",
+      "report_id": "sha256:2818775d2cef3209c9fec39dbbd37ae70c14f791df6bfd0f3e25e8db52e7adee",
+      "sha256": "cffe83de5d1cd597be97143f9c689f2224c805ff9aa52da91c37ec25883b3450"
+    },
+    "saved_prefix_deliveries": 1457,
+    "saved_roots": {
+      "path": "artifacts/native-a8-model-owned-coverage/saved-root-replay-v1.json",
+      "report_id": "sha256:766a984f03b8d61de44bca806dfb691924161e02ac5e596ca505bc0ea5366219",
+      "sha256": "d06be57b8b1dbfecb35a46931fc6ee0e33c64ec878e1d372c895fbbbb19cb683"
+    },
+    "saved_roots_checked": 8
+  },
+  "family_credit_screen": {
+    "path": "artifacts/native-a8-temporal-credit/family-credit-screen-v1/report.json",
+    "report_id": "sha256:e86f00c59cee4206230706864d9666e0a29c6c1dfff7e0ce42d79ab6e4037e81",
+    "sha256": "07b671e64e83ce507ec658cc7c35b2db73a9386a86ca0e95ba4de3a86d5d706f"
+  },
+  "family_diagnostics": {
+    "by_initializer": {
+      "2": {
+        "coverage": {
+          "by_family": [
+            {
+              "decisions": 18,
+              "family": "card_selection",
+              "owner": "combat",
+              "worlds": 4
+            },
+            {
+              "decisions": 1583,
+              "family": "combat_turn",
+              "owner": "combat",
+              "worlds": 8
+            },
+            {
+              "decisions": 1,
+              "family": "native_generated_card_choice",
+              "owner": "combat",
+              "worlds": 1
+            },
+            {
+              "decisions": 166,
+              "family": "card_reward_selection",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 9,
+              "family": "card_selection",
+              "owner": "noncombat",
+              "worlds": 5
+            },
+            {
+              "decisions": 46,
+              "family": "event_option",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 74,
+              "family": "map_navigation",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 12,
+              "family": "rest_site",
+              "owner": "noncombat",
+              "worlds": 4
+            },
+            {
+              "decisions": 345,
+              "family": "reward_claim",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 421,
+              "family": "shop_inventory",
+              "owner": "noncombat",
+              "worlds": 7
+            },
+            {
+              "decisions": 6,
+              "family": "treasure_room",
+              "owner": "noncombat",
+              "worlds": 4
+            }
+          ],
+          "games": 24,
+          "independent_worlds": 8,
+          "multi_choice_native_decisions_by_act": {
+            "1": 2681
+          }
+        },
+        "directions": {
+          "full_trace": {
+            "disjoint_four_world_halves": {
+              "defined": 70,
+              "median_cosine": 0.0009177140399541267,
+              "opposing": 34,
+              "planned": 70
+            },
+            "pooled_direction_cosine": 0.03508614635873111,
+            "recurring_conflict": false,
+            "same_world": {
+              "defined": 8,
+              "median_cosine": 0.01547584603448849,
+              "opposing": 3,
+              "planned": 8
+            },
+            "world_equal_contribution_l2": {
+              "combat": 0.03437317068761245,
+              "noncombat": 0.03518320878813418
+            }
+          },
+          "short_trace": {
+            "disjoint_four_world_halves": {
+              "defined": 70,
+              "median_cosine": 0.011079888049969573,
+              "opposing": 18,
+              "planned": 70
+            },
+            "pooled_direction_cosine": 0.014475062446680101,
+            "recurring_conflict": false,
+            "same_world": {
+              "defined": 8,
+              "median_cosine": -0.006106827306257914,
+              "opposing": 5,
+              "planned": 8
+            },
+            "world_equal_contribution_l2": {
+              "combat": 0.03818594482410377,
+              "noncombat": 0.05732658982883363
+            }
+          }
+        }
+      },
+      "3": {
+        "coverage": {
+          "by_family": [
+            {
+              "decisions": 33,
+              "family": "card_selection",
+              "owner": "combat",
+              "worlds": 4
+            },
+            {
+              "decisions": 2108,
+              "family": "combat_turn",
+              "owner": "combat",
+              "worlds": 8
+            },
+            {
+              "decisions": 2,
+              "family": "native_generated_card_choice",
+              "owner": "combat",
+              "worlds": 2
+            },
+            {
+              "decisions": 99,
+              "family": "card_reward_selection",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 13,
+              "family": "card_selection",
+              "owner": "noncombat",
+              "worlds": 4
+            },
+            {
+              "decisions": 58,
+              "family": "event_option",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 89,
+              "family": "map_navigation",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 18,
+              "family": "rest_site",
+              "owner": "noncombat",
+              "worlds": 4
+            },
+            {
+              "decisions": 281,
+              "family": "reward_claim",
+              "owner": "noncombat",
+              "worlds": 8
+            },
+            {
+              "decisions": 56,
+              "family": "shop_inventory",
+              "owner": "noncombat",
+              "worlds": 6
+            },
+            {
+              "decisions": 9,
+              "family": "treasure_room",
+              "owner": "noncombat",
+              "worlds": 5
+            }
+          ],
+          "games": 24,
+          "independent_worlds": 8,
+          "multi_choice_native_decisions_by_act": {
+            "1": 2766
+          }
+        },
+        "directions": {
+          "full_trace": {
+            "disjoint_four_world_halves": {
+              "defined": 70,
+              "median_cosine": -0.020740484131219206,
+              "opposing": 45,
+              "planned": 70
+            },
+            "pooled_direction_cosine": -0.020998944949047377,
+            "recurring_conflict": false,
+            "same_world": {
+              "defined": 8,
+              "median_cosine": 0.01672488078746051,
+              "opposing": 3,
+              "planned": 8
+            },
+            "world_equal_contribution_l2": {
+              "combat": 0.04589533231701621,
+              "noncombat": 0.023325119568599444
+            }
+          },
+          "short_trace": {
+            "disjoint_four_world_halves": {
+              "defined": 70,
+              "median_cosine": -0.001049514029141393,
+              "opposing": 36,
+              "planned": 70
+            },
+            "pooled_direction_cosine": -0.00136511836979049,
+            "recurring_conflict": false,
+            "same_world": {
+              "defined": 8,
+              "median_cosine": 0.023720074578011775,
+              "opposing": 3,
+              "planned": 8
+            },
+            "world_equal_contribution_l2": {
+              "combat": 0.0552380081467673,
+              "noncombat": 0.03341675307419274
+            }
+          }
+        }
+      }
+    },
+    "diagnostic_gate_per_initializer": {
+      "opposing_disjoint_half_pairs": 47,
+      "opposing_same_worlds": 6
+    },
+    "held_out_evaluation_data_used": false,
+    "qualifying_traces": [],
+    "scope": "behavior_actor_gradient_only_with_global_credit_normalization_and_equal_worlds"
+  },
+  "report_id": "sha256:c82b5d91907aa6f68d5a8ef308333b1a6f14702dc68f73ee896ebcfaa11158b2",
+  "schema_version": "native-a8-temporal-credit-and-coverage-evidence-v1"
+}
