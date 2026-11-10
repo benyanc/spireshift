@@ -2,6 +2,8 @@
 
 All 16 matched pairs completed as 32 genuine native losses. Sharper sampling
 yielded zero Act 1 clears and missed the predeclared clear gate.
+The subsequent turn-rescue collection completed with zero rescues.
+[Turn rescue result](native-a8-turn-rescue-result.md).
 
 | Sampling | Games | A8 wins | Act 1 clears | Bosses reached | Opening fight rewards reached |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -51,8 +53,8 @@ The collector records incomplete games and performs zero optimizer updates.
 
 Both short controls regenerated their exact roots, delivered a different legal
 choice, and reached genuine losses with clean resets. They verified the
-collection path. The 24-probe preflight passed and the main collection awaits
-its first launch. [Control evidence](evidence/native-a8-sampling-result-v1.json).
+collection path. The 24-probe preflight passed.
+[Control evidence](evidence/native-a8-sampling-result-v1.json).
 
 Close STS2 and allow about 6–12 minutes.
 

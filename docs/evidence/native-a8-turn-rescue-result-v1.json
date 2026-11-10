@@ -1,0 +1,187 @@
+{
+  "exploratory_saved_screen": {
+    "diagnostic_worlds": [
+      "SP1RESH1FTA8CV1T013",
+      "SP1RESH1FTA8CV1T020"
+    ],
+    "distinct_matched_menus": 5,
+    "distinct_worlds": 50,
+    "distinct_worlds_with_opposite_room_outcomes": 2,
+    "encounter_types_with_opposite_outcomes": [
+      "elite"
+    ],
+    "held_out_traces_used": false,
+    "opposite_room_outcome_pairs": 8,
+    "source_audits": {
+      "action_credit": {
+        "path": "artifacts/native-a8-action-credit/assessment-v1-1794193097255948000/report.json",
+        "report_id": "sha256:128c82819b7b0721fbfc3d7bc18eccaf9472c624ef800969827b7b00423b82fe",
+        "sha256": "10b61de254db64dc9d59915b2e8dc8f5e808128a283b5ca5f83849a54091d36f"
+      },
+      "model_owned_coverage": {
+        "path": "artifacts/native-a8-model-owned-coverage/assessment-v1-1794243638550996000/report.json",
+        "report_id": "sha256:524ced8ab67e1414f36cb284b2a54e3da7d59d9ada6bdb818f77e988cf3bb672",
+        "sha256": "51c45e649ec1a4db324ea6d7a4163c0cc54c9b3a49910b3ea912c2553d3908d5"
+      },
+      "sampling": {
+        "path": "artifacts/native-a8-sampling/assessment-v1-1794256498012401000/report.json",
+        "report_id": "sha256:bcbf011f31a7d8c6d85315a62682be87be7f5735a2f6e65d29657d5ffef2dac7",
+        "sha256": "2c22d2b122c9eaa247872b450c0f25daf8a0e8721dd63d1fb57d1ba4e361d162"
+      },
+      "turn_rescue": {
+        "path": "artifacts/native-a8-turn-rescue/assessment-v1-1794269728053855000/report.json",
+        "report_id": "sha256:d3845cb7d21ae393bfdf411765841105629a623d25c140f31c6d438ecf6ed0b5",
+        "sha256": "ebd4e2966f23a6a4716cd1a07c3ff7591d4706df9fe458981b445cc947468f9f"
+      },
+      "world_credit": {
+        "path": "artifacts/native-a8-world-credit/assessment-v3-1794195529702565000/report.json",
+        "report_id": "sha256:97d9c0605c2140605f58078519677a2e7e8a01edc007e6603dc544acb6b2479f",
+        "sha256": "6c366454f87306007532f289027c2631f2749bae4733c7388a0a1c2dabcf5059"
+      }
+    },
+    "training_admission_granted": false,
+    "training_traces_by_study": {
+      "action_credit": 72,
+      "model_owned_coverage": 72,
+      "sampling": 32,
+      "turn_rescue": 24,
+      "world_credit": 48
+    }
+  },
+  "opening_contrast_preparation": {
+    "anchors": {
+      "loss": 8,
+      "reward": 8
+    },
+    "control": {
+      "path": "artifacts/native-a8-opening-contrast/control-v1/report.json",
+      "report_id": "sha256:24fc483fd25593b805cf961c3ae08bd44a3c7af06412a305b1287695a7f76795",
+      "sha256": "7a50aba349e6a0679fab8abd2a3749b1de930b038eb605fc25535754cad54360"
+    },
+    "control_distinct_alternatives_per_root": {
+      "control-p2-normal-reward-1": 2,
+      "control-p3-normal-reward-1": 2
+    },
+    "control_outcomes": {
+      "capped": 0,
+      "failed": 0,
+      "loss": 4,
+      "unattempted": 0,
+      "win": 0
+    },
+    "control_prefix_deliveries": 12,
+    "control_room_rewards": 4,
+    "control_suffix_deliveries": 516,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "optimizer_updates": 0,
+    "original_full_state_ids": {
+      "2": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+      "3": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+    },
+    "planned_probes": 32,
+    "recipe": {
+      "config_id": "sha256:46f63c3763628e96166bdd31e808137b3786c1335254c868a31827518e0dcf49",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-opening-contrast-v1.json",
+      "sha256": "b8af555de0e4e5769177cd4c5f95065f76366b578cacaf51dedf45f8b73bae80"
+    },
+    "resources": {
+      "path": "artifacts/native-a8-opening-contrast/control-v1-resources.json",
+      "report_id": "sha256:b8f6b91b267a48533553dba5fbd8a12fd677c54f246a9d22a083c98fc1a8863e",
+      "sha256": "d4e3ed7ee68bc1066faa75ac58d4043e675854940ad8a399618dcbaf016c0fab"
+    },
+    "training_worlds": 16
+  },
+  "report_id": "sha256:aac6bcf26cda8fe9b72b6062d4d6c7d3ddd32b4f84cc305afe4bae719a0230f4",
+  "schema_version": "native-a8-turn-rescue-and-opening-contrast-evidence-v1",
+  "turn_rescue_audit": {
+    "path": "artifacts/native-a8-turn-rescue/assessment-v1-1794269728053855000/report.json",
+    "report_id": "sha256:d3845cb7d21ae393bfdf411765841105629a623d25c140f31c6d438ecf6ed0b5",
+    "sha256": "ebd4e2966f23a6a4716cd1a07c3ff7591d4706df9fe458981b445cc947468f9f"
+  },
+  "turn_rescue_result": {
+    "adaptive_controller_allowed": false,
+    "audit_counts": {
+      "local_factors": 0,
+      "native_deliveries": 4287,
+      "prefix_deliveries": 4078,
+      "sealed_files": 1464,
+      "suffix_deliveries": 209
+    },
+    "automatic_follow_up": false,
+    "config_id": "sha256:7a2a5568578e8fe3ed79bdd6b9323f31edc74a2e542f1b42a6f5838f36535e14",
+    "control_id": "sha256:32f68f605746c9815c3070451336fb084f45b526c9559e40a71fd54595f31e06",
+    "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+    "final_test_worlds_used": false,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "native_game_launches": 0,
+    "official_live_qualification_granted": false,
+    "optimizer_updates": 0,
+    "outcomes": {
+      "capped": 0,
+      "failed": 0,
+      "loss": 24,
+      "unattempted": 0,
+      "win": 0
+    },
+    "owner": {
+      "path": "artifacts/native-a8-turn-rescue/collection-v1/attempt-1794269728053855000.json",
+      "report_id": "sha256:4c0348a1348dd7d3109c95c5fa89b791e4f869b036fdf762b87cee75103fefab",
+      "sha256": "28f7a99628f7fd9a3662772a5ab6a2bdc665997ebf6d980d27ff6d8c8e7606e2"
+    },
+    "promotion_allowed": false,
+    "report_id": "sha256:d3845cb7d21ae393bfdf411765841105629a623d25c140f31c6d438ecf6ed0b5",
+    "resources": {
+      "path": "artifacts/native-a8-turn-rescue/collection-v1-1794269728053855000-resources.json",
+      "report_id": "sha256:3565532b2e582c4f6918ddacbf51e3b85245823a1ea89f7004cd88df2d42aa64",
+      "sha256": "1b5a9debe8179618a5b3265e5e96e609616facc9ebb96c666ecc77c275788b33"
+    },
+    "room_outcomes": {
+      "boss": {
+        "loss": 8
+      },
+      "elite": {
+        "loss": 8
+      },
+      "normal": {
+        "loss": 8
+      }
+    },
+    "root_diagnostics": {
+      "below_half_health": 11,
+      "distinct_roots": 12,
+      "maximum_hp": 40,
+      "minimum_hp": 1,
+      "same_first_alternative_in_both_draws": 8
+    },
+    "schema_version": "native-a8-turn-rescue-audit-v1",
+    "status": "turn_rescue_saved_verified",
+    "summary": {
+      "candidate_for_separate_preference_admission": false,
+      "distinct_rescued_roots": 0,
+      "planned_probes": 24,
+      "rescued_encounter_types": [],
+      "rescued_worlds_by_initializer": {
+        "2": 0,
+        "3": 0
+      },
+      "resolved_room_outcomes": 24,
+      "reward_successes": 0,
+      "terminal_probes": 24
+    },
+    "training_admission_granted": false
+  }
+}
