@@ -31,6 +31,9 @@ be checked on independent worlds. [Source audits](evidence/native-a8-turn-rescue
 
 ## Collect earlier matched combat outcomes
 
+This collection has completed and missed the fitting gate.
+[Saved opening comparison](native-a8-opening-contrast-result.md).
+
 The [recipe](../configs/native-learning/sts2-v0.111.0-a8-opening-contrast-v1.json)
 uses 16 distinct worlds from the verified normal-start training bank,
 balanced across both initializers, ordinary and elite fights, and

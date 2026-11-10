@@ -7,18 +7,17 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Collect useful training outcomes at earlier combat choices.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35) | Compare two distinct legal alternatives at each of 16 matched openings in ordinary and elite fights. Use saved native rewards and losses as references. [Opening comparison](native-a8-turn-rescue-result.md#collect-earlier-matched-combat-outcomes) |
-| 2 | **Verify that the outcomes support learning across worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Require resolved outcomes and at least three distinct worlds with a contrast per initializer, covering both encounter types and both reference outcomes. Preserve ties and incomplete runs. A flat result calls for a different source of successful data. |
-| 3 | **Fit and validate a supported sequence-ranking change on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use a separately admitted contrast bank. Group by source world, exclude setup choices and keep paired sequences distinct from ordinary PPO. Require improved rankings on held worlds before a fresh strength panel. |
+| 1 | **Qualify a complete winning A8 replay on the frozen build.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Replay a reload-free, exact-build, solo normal-start Ironclad/A8 journal through the complete native public menus and a genuine terminal victory. [Source check](native-a8-opening-contrast-result.md#qualify-a-source-of-full-run-wins) |
+| 2 | **Admit successful runs across distinct training worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Require verified start, recorded actions, native receipts, complete endings and disjoint seed ownership. Count whole worlds and coverage across acts and decision families. |
+| 3 | **Fit a full-menu candidate on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use separately admitted demonstrations and world-balanced fitting. Verify held-world behavior before fresh games. Keep demonstrations distinct from ordinary PPO. |
 | 4 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
 | 5 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-Sharper sampling tied at 0/16 Act 1 clears and the 24 losing-turn probes
-produced zero room rescues. A screen of 248 saved training traces found
-matched outcomes with opposite results on two worlds. The next priority
-is outcome variation earlier in fights across independent training
-worlds. [Saved turn rescue result](native-a8-turn-rescue-result.md),
-[sampling result](native-a8-sampling-result.md).
+The 32 opening probes supplied contrasts on three worlds and zero Act 1
+clears. They missed the fitting gate. The next priority is successful
+normal-start experience across all acts. A public replay journal matched
+the frozen native start and first delivered choice.
+[Saved result and replay evidence](native-a8-opening-contrast-result.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -56,15 +55,17 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current owner handoff — Earlier matched combat outcomes
+## Current work — Qualify a winning replay source
 
-The collection tries two distinct alternatives at each of 16 training
-openings with zero optimizer updates. Close STS2 and allow about 8–15 minutes.
-[Collection details](native-a8-turn-rescue-result.md#collect-earlier-matched-combat-outcomes).
+The short check verified the first recorded Neow choice on the frozen
+host. End-to-end replay qualification precedes the next owner run.
+[Replay qualification](native-a8-opening-contrast-result.md#qualify-a-source-of-full-run-wins).
 
-```bash
-bash scripts/collect-a8-opening-contrasts-v1.sh
-```
+## Prior handoff — Earlier matched combat outcomes
+
+The 32 probes completed with 17 room rewards and contrast worlds split
+two for player 2 and one for player 3. The fitting gate stays closed.
+[Saved result](native-a8-opening-contrast-result.md).
 
 ## Prior handoff — Native combat outcome contrasts
 
