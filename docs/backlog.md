@@ -7,17 +7,16 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Qualify a complete winning A8 replay on the frozen build.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Replay a reload-free, exact-build, solo normal-start Ironclad/A8 journal through the complete native public menus and a genuine terminal victory. [Source check](native-a8-opening-contrast-result.md#qualify-a-source-of-full-run-wins) |
-| 2 | **Admit successful runs across distinct training worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Require verified start, recorded actions, native receipts, complete endings and disjoint seed ownership. Count whole worlds and coverage across acts and decision families. |
-| 3 | **Fit a full-menu candidate on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use separately admitted demonstrations and world-balanced fitting. Verify held-world behavior before fresh games. Keep demonstrations distinct from ordinary PPO. |
-| 4 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
-| 5 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
+| 1 | **Admit successful runs across distinct training worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Require verified start, recorded actions, native receipts, complete endings and disjoint seed ownership. Count whole worlds and coverage across acts and decision families. |
+| 2 | **Fit a full-menu candidate on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use separately admitted demonstrations and world-balanced fitting. Verify held-world behavior before fresh games. Keep demonstrations distinct from ordinary PPO. |
+| 3 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
+| 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-The 32 opening probes supplied contrasts on three worlds and zero Act 1
-clears. They missed the fitting gate. The next priority is successful
-normal-start experience across all acts. A public replay journal matched
-the frozen native start and first delivered choice.
-[Saved result and replay evidence](native-a8-opening-contrast-result.md).
+One reload-free normal-start Ironclad/A8 archive journal reached genuine
+native victory on the frozen build. The audit verified 896 deliveries across
+all three acts and 22 fights. The next priority is qualifying successful
+normal-start demonstrations across distinct worlds.
+[Replay qualification](native-a8-archive-replay.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -55,11 +54,11 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Qualify a winning replay source
+## Current work — Admit successful runs across distinct training worlds
 
-The short check verified the first recorded Neow choice on the frozen
-host. End-to-end replay qualification precedes the next owner run.
-[Replay qualification](native-a8-opening-contrast-result.md#qualify-a-source-of-full-run-wins).
+The Queen replay supplies the first qualified source world for the admission
+review. Additional worlds need their own source completeness, delivery,
+ending and seed ownership checks. [Verified native win](native-a8-archive-replay.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 
