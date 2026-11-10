@@ -12,10 +12,10 @@ development. CPU cost is an operational diagnostic.
 | 3 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
 | 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-The archive pilot re-verified one normal-start Ironclad/A8 victory on the
-frozen build. Four journals failed source screening and two fresh replays
-stopped at a source-to-menu mismatch. The fitting gate requires three
-distinct verified worlds. [Batch evidence](native-a8-archive-batch.md).
+The archive qualification has one verified normal-start Ironclad/A8 victory
+and four clean replay stops. The fitting gate requires three distinct verified
+winning worlds with coverage across openings and bosses.
+[Saved result and continuation](native-a8-archive-effects-v5.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -55,15 +55,14 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current work — Admit successful runs across distinct training worlds
 
-The versioned batch now checks source continuity, native deliveries, genuine
-endings and disjoint seed ownership. Shared matching now handles corroborated
-shop purchases, cancelled removal, opening discards and repeated rewards. The
-native gold and card reward controls verified both gold claims and both
-Kaleidoscope card selections. Preflight matched the next action at all four
-clean stops after reconstructing 611 prior deliveries. The owner can now
-run the full qualification batch from Neow with four distinct replay seeds
-and the saved Queen victory. The fitting gate remains at one of three
-verified winning worlds. [Qualification and command](native-a8-archive-rewards-v4.md).
+Replay matching now tracks discarded card copies, verifies automatic singleton
+exhaust effects and binds stolen-card rewards to their current native owner.
+The short boss-map control verified that the native menu offers the boss route
+when free travel is active and that the bound vote enters the correct fight.
+All four clean continuations have a verified next action. The v5 batch starts
+those worlds from Neow and retains the saved Queen victory. Keep the full-run
+victory and coverage gates before fitting on copies.
+[Qualification and command](native-a8-archive-effects-v5.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 
