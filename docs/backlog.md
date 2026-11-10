@@ -57,12 +57,13 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 The versioned batch now checks source continuity, native deliveries, genuine
 endings and disjoint seed ownership. Shared matching now handles corroborated
-shop purchases, cancelled removal and opening discards. The fresh Aeonglass
-replay reached Act 2 floor 30 with 506 verified deliveries and stopped at two
-separate 15-gold claims. Next, reconcile repeated reward occurrences and their
-native effects using the saved menu and source records. Then qualify a fresh
-cohort with varied openings and bosses. The fitting gate remains at one of
-three verified winning worlds. [Owner matching evidence](native-a8-archive-owners-v2.md).
+shop purchases, cancelled removal, opening discards and repeated rewards. The
+native gold and card reward controls verified both gold claims and both
+Kaleidoscope card selections. Preflight matched the next action at all four
+clean stops after reconstructing 611 prior deliveries. The owner can now
+run the full qualification batch from Neow with four distinct replay seeds
+and the saved Queen victory. The fitting gate remains at one of three
+verified winning worlds. [Qualification and command](native-a8-archive-rewards-v4.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 
