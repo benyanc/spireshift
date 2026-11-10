@@ -12,11 +12,10 @@ development. CPU cost is an operational diagnostic.
 | 3 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
 | 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-One reload-free normal-start Ironclad/A8 archive journal reached genuine
-native victory on the frozen build. The audit verified 896 deliveries across
-all three acts and 22 fights. The next priority is qualifying successful
-normal-start demonstrations across distinct worlds.
-[Replay qualification](native-a8-archive-replay.md).
+The archive pilot re-verified one normal-start Ironclad/A8 victory on the
+frozen build. Four journals failed source screening and two fresh replays
+stopped at a source-to-menu mismatch. The fitting gate requires three
+distinct verified worlds. [Batch evidence](native-a8-archive-batch.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -56,9 +55,12 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current work — Admit successful runs across distinct training worlds
 
-The Queen replay supplies the first qualified source world for the admission
-review. Additional worlds need their own source completeness, delivery,
-ending and seed ownership checks. [Verified native win](native-a8-archive-replay.md).
+The versioned batch now checks source continuity, native deliveries, genuine
+endings and disjoint seed ownership. The next archive work is reconciling
+recorded choices with the native owners that deliver them, including shop
+purchases, cancelled removal and opening selectors. Use the saved menus and
+journals as regressions, then qualify a fresh cohort with varied openings and
+bosses. [Pilot report](native-a8-archive-batch.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 
