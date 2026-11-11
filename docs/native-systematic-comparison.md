@@ -4,6 +4,9 @@
 
 # Systematic headless / official comparison
 
+The selector extension exercises both native card-answer formats across
+shop, combat, rest, event, and treasure ownership. [Selector verification](native-systematic-selectors-v1.md).
+
 This suite discovers interface differences from the frozen source inventory,
 actual producer examples, saved public observations and short paired transitions.
 Whole games remain integration validation. The suite does not claim equality for

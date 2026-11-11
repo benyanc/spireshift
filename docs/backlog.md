@@ -58,8 +58,13 @@ and 48 matched development games with zero wins and Act 1 clears. The
 shared selector repair recovered two additional native Act 2 entries.
 The matched expanded fit uses three full wins and two Act 1 clears,
 with two more clears held out. Compare its two frozen copies against the
-exact three-world fits. [PPO result](native-a8-archive-own-training-v1.md) ·
-[Expanded fit and comparison](native-a8-expanded-archive-v1.md).
+exact three-world fits. The original comparison sealed 31 losses before
+a shop-owned Kifuda selector stopped the panel. The shared selector repair
+qualifies both formats and prepares the 16 games that had yet to start.
+Use the four remaining worlds to assess the expanded fit on the repaired
+native path. [PPO result](native-a8-archive-own-training-v1.md) ·
+[Expanded fit and comparison](native-a8-expanded-archive-v1.md) ·
+[Selector verification and continuation](native-systematic-selectors-v1.md).
 
 ## Prior handoff — Additional Act 1 demonstrations
 
