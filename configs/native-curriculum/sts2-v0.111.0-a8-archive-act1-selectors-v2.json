@@ -1,0 +1,35 @@
+{
+  "case_seconds": 90,
+  "cases": [
+    "e65b66a983586853",
+    "37b61b4895014be7"
+  ],
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "implementation": {
+    "scripts/qualify-a8-archive-act1-selectors-v2.sh": "ecb02773c85748ffd101144efc8c896149972880adc70421dba2fae82c779b6f",
+    "src/spireshift/native_a8_archive_act1_game.py": "02552d24a43103c0e34a74821029c76f23541f7599c4655de32c4dda974cbcde",
+    "src/spireshift/native_a8_archive_act1_selector_session.py": "492e468a0cd9432d56e26d28da5a765fab7c80caa0ee1a40d93e3ebe65608af8",
+    "src/spireshift/native_a8_archive_act1_selectors.py": "7b58b0368577e0d9b95c60ca017102df6efdd19ba949b63770c95884b39b144c",
+    "src/spireshift/native_a8_archive_act1_session.py": "8c14333a852b7eb67c95f12febfaaf5466c7f785c200fdcd0c4dfdd6a517ca85",
+    "src/spireshift/native_a8_archive_act1_source.py": "e602cf8ca4ed352a7609827024e6c45a7116aca25d24cafa5ab1063c3c6a29f5"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "previous_result": {
+    "path": "artifacts/native-a8-archive-batch/act1-selector-qualification-v1/result.json",
+    "sha256": "9e10f4fb1d7944b02364abd8e09f0843807d013222419cdb0ece7ca6789199b3"
+  },
+  "schema_version": "native-a8-archive-act1-selector-qualification-v2",
+  "workspace": "artifacts/native-a8-archive-batch/act1-selector-qualification-v2"
+}

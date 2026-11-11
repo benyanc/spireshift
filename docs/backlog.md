@@ -7,8 +7,8 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Train on states reached by the archive-fitted models.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Start from the exact fitted copies and collect model-owned full-run A8 experience. Compare the new frozen copies against those same archive fits on separate normal-start worlds, with wins primary. |
-| 2 | **Expand successful normal-start coverage as sources qualify.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the two verified Act 1 clears and the seven archive stops. Add independently verified successful worlds when available. Prioritize shared replay or delivery repairs when they enable useful learning coverage. |
+| 1 | **Test more verified successful A8 examples.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Compare the five-world fit with the three-world fit on fresh matched starts. The two added training worlds reached native Act 2, and the two held-out demonstrations stay separate. |
+| 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
 The three [qualified full-run demonstrations](native-a8-archive-transitions-v6.md)
@@ -51,14 +51,15 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Continue learning from the archive fits
+## Current work — Compare the expanded demonstration fit
 
-The archive fits improved agreement on 424 choice-bearing menus from two
-unseen human Act 1 clears. They still cleared zero acts in the 48-game
-development comparison. Use the exact archive fits to initialize two
-independent on-policy lineages. Compare their finals against the frozen
-archive fits on separate normal-start A8 worlds.
-[Model-owned continuation](native-a8-archive-own-training-v1.md).
+The archive-initialized PPO continuation completed 32 training games
+and 48 matched development games with zero wins and Act 1 clears. The
+shared selector repair recovered two additional native Act 2 entries.
+The matched expanded fit uses three full wins and two Act 1 clears,
+with two more clears held out. Compare its two frozen copies against the
+exact three-world fits. [PPO result](native-a8-archive-own-training-v1.md) ·
+[Expanded fit and comparison](native-a8-expanded-archive-v1.md).
 
 ## Prior handoff — Additional Act 1 demonstrations
 

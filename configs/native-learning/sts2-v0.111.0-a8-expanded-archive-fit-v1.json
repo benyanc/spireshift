@@ -1,0 +1,42 @@
+{
+  "act1_results": [
+    {
+      "path": "artifacts/native-a8-archive-batch/act1-qualification-v2/result.json",
+      "sha256": "c4ef2b26d699cccc550373a6634d48a525dd4485a957aad97fa0cb506a739984"
+    },
+    {
+      "path": "artifacts/native-a8-archive-batch/act1-selector-qualification-v2/result.json",
+      "sha256": "32fe32e05ec9c0c0caa111901fb654b78ad6f1f0f28dec48f51bd2d88a2d2d7d"
+    }
+  ],
+  "baseline_result": {
+    "path": "artifacts/native-a8-archive-fitting/study-v1/report.json",
+    "sha256": "18d1537e59765f26fc669ac68a6f349b5d6b95712cf9c39834f386a015a3f336"
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "implementation": {
+    "src/spireshift/native_a8_archive_expand_fit.py": "65fc470ce52da94cfff2559e34cdee384be6c7d377b3fc92f03959cc7c1d4087",
+    "src/spireshift/native_a8_archive_fit_inputs.py": "739a197979bac6c8dbb9f607a9ab1b789642136e2b9fc2b6d417bb17c155d8a5",
+    "src/spireshift/native_a8_archive_fit_session.py": "a07fe4418f2f56c69e416ef0483f91062a0c31a5d95224a488551ebcaad1e33e"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "on_policy_assessment": {
+    "path": "artifacts/native-a8-archive-own-training/saved-audit-v1.json",
+    "sha256": "6f51b432e2d47f5ee33a9daae65f2fcc6e2feb7d76bd369b22d5d9eb8e113042"
+  },
+  "schema_version": "native-a8-expanded-archive-fit-v1",
+  "updates_per_copy": 112,
+  "workspace": "artifacts/native-a8-archive-fitting/expanded-fit-v1"
+}
