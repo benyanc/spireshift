@@ -1,0 +1,362 @@
+{
+  "fit_comparison_id": "sha256:c86437fa230fa19d8c0e6fab8f357163b31e929f40c8f06cfbf4ad799ec22f35",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_wins_evaluated": false,
+  "optimizer_updates": 0,
+  "report_id": "sha256:1629dec02ae5d75cf0205e80d1f89ec1b0ddf595c0524a59fe264c06bbfdabc6",
+  "schema_version": "native-a8-archive-act1-held-world-agreement-v1",
+  "scores": {
+    "2": {
+      "fitted": {
+        "all": {
+          "decisions": 424,
+          "mean_world_joint_nll": 1.1576438680885692,
+          "mean_world_top_one_agreement": 0.5344551282051282,
+          "worlds": 2
+        },
+        "card_reward_selection": {
+          "decisions": 18,
+          "mean_world_joint_nll": 1.4644809417478832,
+          "mean_world_top_one_agreement": 0.3625,
+          "worlds": 2
+        },
+        "card_selection": {
+          "decisions": 11,
+          "mean_world_joint_nll": 1.8792752761769225,
+          "mean_world_top_one_agreement": 0.26666666666666666,
+          "worlds": 2
+        },
+        "combat": {
+          "decisions": 276,
+          "mean_world_joint_nll": 1.2913272486321592,
+          "mean_world_top_one_agreement": 0.4765957446808511,
+          "worlds": 2
+        },
+        "combat_turn": {
+          "decisions": 276,
+          "mean_world_joint_nll": 1.2913272486321592,
+          "mean_world_top_one_agreement": 0.4765957446808511,
+          "worlds": 2
+        },
+        "event_option": {
+          "decisions": 7,
+          "mean_world_joint_nll": 1.0750799093548862,
+          "mean_world_top_one_agreement": 0.65,
+          "worlds": 2
+        },
+        "map_navigation": {
+          "decisions": 27,
+          "mean_world_joint_nll": 1.2272844796692435,
+          "mean_world_top_one_agreement": 0.5333333333333333,
+          "worlds": 2
+        },
+        "native_generated_card_choice": {
+          "decisions": 3,
+          "mean_world_joint_nll": 1.3731866438835558,
+          "mean_world_top_one_agreement": 0.25,
+          "worlds": 2
+        },
+        "rest_site": {
+          "decisions": 12,
+          "mean_world_joint_nll": 0.5004775637589435,
+          "mean_world_top_one_agreement": 0.6666666666666666,
+          "worlds": 2
+        },
+        "reward_claim": {
+          "decisions": 60,
+          "mean_world_joint_nll": 0.4701241373465338,
+          "mean_world_top_one_agreement": 0.8642533936651584,
+          "worlds": 2
+        },
+        "shop_inventory": {
+          "decisions": 5,
+          "mean_world_joint_nll": 1.3971116789972726,
+          "mean_world_top_one_agreement": 0.6,
+          "worlds": 1
+        },
+        "strategic": {
+          "decisions": 148,
+          "mean_world_joint_nll": 0.9096648883749396,
+          "mean_world_top_one_agreement": 0.6419178082191781,
+          "worlds": 2
+        },
+        "treasure_room": {
+          "decisions": 5,
+          "mean_world_joint_nll": 0.5067607309546478,
+          "mean_world_top_one_agreement": 0.5833333333333333,
+          "worlds": 2
+        }
+      },
+      "original": {
+        "all": {
+          "decisions": 424,
+          "mean_world_joint_nll": 2.036219160449918,
+          "mean_world_top_one_agreement": 0.3408119658119658,
+          "worlds": 2
+        },
+        "card_reward_selection": {
+          "decisions": 18,
+          "mean_world_joint_nll": 2.590603192237144,
+          "mean_world_top_one_agreement": 0.0625,
+          "worlds": 2
+        },
+        "card_selection": {
+          "decisions": 11,
+          "mean_world_joint_nll": 2.381976430260729,
+          "mean_world_top_one_agreement": 0.2,
+          "worlds": 2
+        },
+        "combat": {
+          "decisions": 276,
+          "mean_world_joint_nll": 2.113618349730439,
+          "mean_world_top_one_agreement": 0.3349881796690307,
+          "worlds": 2
+        },
+        "combat_turn": {
+          "decisions": 276,
+          "mean_world_joint_nll": 2.113618349730439,
+          "mean_world_top_one_agreement": 0.3349881796690307,
+          "worlds": 2
+        },
+        "event_option": {
+          "decisions": 7,
+          "mean_world_joint_nll": 1.0667990738558102,
+          "mean_world_top_one_agreement": 0.5,
+          "worlds": 2
+        },
+        "map_navigation": {
+          "decisions": 27,
+          "mean_world_joint_nll": 1.8820792005509688,
+          "mean_world_top_one_agreement": 0.5,
+          "worlds": 2
+        },
+        "native_generated_card_choice": {
+          "decisions": 3,
+          "mean_world_joint_nll": 1.3615060477684646,
+          "mean_world_top_one_agreement": 0.25,
+          "worlds": 2
+        },
+        "rest_site": {
+          "decisions": 12,
+          "mean_world_joint_nll": 2.542322269142498,
+          "mean_world_top_one_agreement": 0.5,
+          "worlds": 2
+        },
+        "reward_claim": {
+          "decisions": 60,
+          "mean_world_joint_nll": 1.7449028893994047,
+          "mean_world_top_one_agreement": 0.330316742081448,
+          "worlds": 2
+        },
+        "shop_inventory": {
+          "decisions": 5,
+          "mean_world_joint_nll": 1.119280669613648,
+          "mean_world_top_one_agreement": 0.4,
+          "worlds": 1
+        },
+        "strategic": {
+          "decisions": 148,
+          "mean_world_joint_nll": 1.8943593521936815,
+          "mean_world_top_one_agreement": 0.3512328767123287,
+          "worlds": 2
+        },
+        "treasure_room": {
+          "decisions": 5,
+          "mean_world_joint_nll": 1.1576813459849746,
+          "mean_world_top_one_agreement": 0.41666666666666663,
+          "worlds": 2
+        }
+      }
+    },
+    "3": {
+      "fitted": {
+        "all": {
+          "decisions": 424,
+          "mean_world_joint_nll": 1.1660660378914227,
+          "mean_world_top_one_agreement": 0.5022257834757835,
+          "worlds": 2
+        },
+        "card_reward_selection": {
+          "decisions": 18,
+          "mean_world_joint_nll": 1.3246623888402786,
+          "mean_world_top_one_agreement": 0.35,
+          "worlds": 2
+        },
+        "card_selection": {
+          "decisions": 11,
+          "mean_world_joint_nll": 1.838527388963937,
+          "mean_world_top_one_agreement": 0.08333333333333333,
+          "worlds": 2
+        },
+        "combat": {
+          "decisions": 276,
+          "mean_world_joint_nll": 1.3396278526059622,
+          "mean_world_top_one_agreement": 0.4375886524822695,
+          "worlds": 2
+        },
+        "combat_turn": {
+          "decisions": 276,
+          "mean_world_joint_nll": 1.3396278526059622,
+          "mean_world_top_one_agreement": 0.4375886524822695,
+          "worlds": 2
+        },
+        "event_option": {
+          "decisions": 7,
+          "mean_world_joint_nll": 0.9881761546106876,
+          "mean_world_top_one_agreement": 0.65,
+          "worlds": 2
+        },
+        "map_navigation": {
+          "decisions": 27,
+          "mean_world_joint_nll": 1.1615550599202817,
+          "mean_world_top_one_agreement": 0.4666666666666667,
+          "worlds": 2
+        },
+        "native_generated_card_choice": {
+          "decisions": 3,
+          "mean_world_joint_nll": 1.438878130132105,
+          "mean_world_top_one_agreement": 0.25,
+          "worlds": 2
+        },
+        "rest_site": {
+          "decisions": 12,
+          "mean_world_joint_nll": 0.5172904997119845,
+          "mean_world_top_one_agreement": 0.5833333333333333,
+          "worlds": 2
+        },
+        "reward_claim": {
+          "decisions": 60,
+          "mean_world_joint_nll": 0.40570532583263863,
+          "mean_world_top_one_agreement": 0.8597285067873304,
+          "worlds": 2
+        },
+        "shop_inventory": {
+          "decisions": 5,
+          "mean_world_joint_nll": 1.4383047444661683,
+          "mean_world_top_one_agreement": 0.6,
+          "worlds": 1
+        },
+        "strategic": {
+          "decisions": 148,
+          "mean_world_joint_nll": 0.8439542655956418,
+          "mean_world_top_one_agreement": 0.622283105022831,
+          "worlds": 2
+        },
+        "treasure_room": {
+          "decisions": 5,
+          "mean_world_joint_nll": 0.22998978424073097,
+          "mean_world_top_one_agreement": 1.0,
+          "worlds": 2
+        }
+      },
+      "original": {
+        "all": {
+          "decisions": 424,
+          "mean_world_joint_nll": 2.0341976470173693,
+          "mean_world_top_one_agreement": 0.3350249287749288,
+          "worlds": 2
+        },
+        "card_reward_selection": {
+          "decisions": 18,
+          "mean_world_joint_nll": 1.9729716802284558,
+          "mean_world_top_one_agreement": 0.3375,
+          "worlds": 2
+        },
+        "card_selection": {
+          "decisions": 11,
+          "mean_world_joint_nll": 2.356449977080067,
+          "mean_world_top_one_agreement": 0.26666666666666666,
+          "worlds": 2
+        },
+        "combat": {
+          "decisions": 276,
+          "mean_world_joint_nll": 2.149220549451222,
+          "mean_world_top_one_agreement": 0.27872340425531916,
+          "worlds": 2
+        },
+        "combat_turn": {
+          "decisions": 276,
+          "mean_world_joint_nll": 2.149220549451222,
+          "mean_world_top_one_agreement": 0.27872340425531916,
+          "worlds": 2
+        },
+        "event_option": {
+          "decisions": 7,
+          "mean_world_joint_nll": 0.9336179385228118,
+          "mean_world_top_one_agreement": 0.55,
+          "worlds": 2
+        },
+        "map_navigation": {
+          "decisions": 27,
+          "mean_world_joint_nll": 1.9454766556482426,
+          "mean_world_top_one_agreement": 0.35833333333333334,
+          "worlds": 2
+        },
+        "native_generated_card_choice": {
+          "decisions": 3,
+          "mean_world_joint_nll": 2.720649118805049,
+          "mean_world_top_one_agreement": 0.25,
+          "worlds": 2
+        },
+        "rest_site": {
+          "decisions": 12,
+          "mean_world_joint_nll": 4.778220393152742,
+          "mean_world_top_one_agreement": 0.08333333333333333,
+          "worlds": 2
+        },
+        "reward_claim": {
+          "decisions": 60,
+          "mean_world_joint_nll": 1.1360117966284693,
+          "mean_world_top_one_agreement": 0.6165158371040724,
+          "worlds": 2
+        },
+        "shop_inventory": {
+          "decisions": 5,
+          "mean_world_joint_nll": 0.9572557489427096,
+          "mean_world_top_one_agreement": 0.6,
+          "worlds": 1
+        },
+        "strategic": {
+          "decisions": 148,
+          "mean_world_joint_nll": 1.821426199598587,
+          "mean_world_top_one_agreement": 0.4397260273972603,
+          "worlds": 2
+        },
+        "treasure_room": {
+          "decisions": 5,
+          "mean_world_joint_nll": 1.649763098709683,
+          "mean_world_top_one_agreement": 0.25,
+          "worlds": 2
+        }
+      }
+    }
+  },
+  "source_admission_id": "sha256:4b5d1966fed9e74f3c74dad6bd8abfcdecfcce9acba8c8e6a024532f49aed6c1",
+  "worlds": {
+    "c2d89ae06f0cb160": {
+      "boss": "CEREMONIAL_BEAST_BOSS",
+      "choice_bearing": 216,
+      "labels": {
+        "path": "artifacts/native-a8-archive-batch/act1-qualification-v2/chunks/c2d89ae06f0cb160/public-answers.jsonl.gz",
+        "sha256": "f2b4295cbc35a353750407676e5406d8c8275420230b98214556973f09792393"
+      },
+      "recorded_decisions": 249
+    },
+    "f57f56dc8aaaa022": {
+      "boss": "THE_KIN_BOSS",
+      "choice_bearing": 208,
+      "labels": {
+        "path": "artifacts/native-a8-archive-batch/act1-qualification-v2/chunks/f57f56dc8aaaa022/public-answers.jsonl.gz",
+        "sha256": "25b5f1d9f317cbdfeeda1cbda2e17b716163affe6b97bf4cc6f294675caa1b0a"
+      },
+      "recorded_decisions": 235
+    }
+  }
+}

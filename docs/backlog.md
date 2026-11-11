@@ -7,14 +7,13 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Admit the qualified demonstrations and fit on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Bind the fitting recipe to the three sealed winning worlds. Score the full public menu, keep ordered answers together and weight worlds evenly. Keep demonstrations distinct from ordinary PPO. |
-| 2 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
+| 1 | **Train on states reached by the archive-fitted models.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Start from the exact fitted copies and collect model-owned full-run A8 experience. Compare the new frozen copies against those same archive fits on separate normal-start worlds, with wins primary. |
+| 2 | **Expand successful normal-start coverage as sources qualify.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the two verified Act 1 clears and the seven archive stops. Add independently verified successful worlds when available. Prioritize shared replay or delivery repairs when they enable useful learning coverage. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-The archive qualification passed with three verified normal-start Ironclad/A8
-victories, three openings, two Act 1 bosses and all three final bosses. The
-two clean replay stops stay outside the bank.
-[Saved qualification](native-a8-archive-transitions-v6.md).
+The three [qualified full-run demonstrations](native-a8-archive-transitions-v6.md)
+improved fitting agreement. The [fresh comparison](native-a8-archive-copy-fit-v1.md)
+completed all 48 games with zero A8 wins and zero Act 1 clears in either arm.
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -52,14 +51,22 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Fit and evaluate the verified A8 demonstrations
+## Current work — Continue learning from the archive fits
 
-Both fitted copies are sealed after 112 updates each with equal weight per
-world across the three victories. The short control verified reloads, paired
-openings and a native terminal result. The owner run reuses the sealed copies
-and compares 48 normal-start games on 12 separate development worlds. Keep
-both divergent prefixes as replay regressions.
-[Fitting result and command](native-a8-archive-copy-fit-v1.md).
+The archive fits improved agreement on 424 choice-bearing menus from two
+unseen human Act 1 clears. They still cleared zero acts in the 48-game
+development comparison. Use the exact archive fits to initialize two
+independent on-policy lineages. Compare their finals against the frozen
+archive fits on separate normal-start A8 worlds.
+[Model-owned continuation](native-a8-archive-own-training-v1.md).
+
+## Prior handoff — Additional Act 1 demonstrations
+
+The audit reconstructed 6,813 choices from the completed 48-game comparison.
+Two of nine new archive prefixes reached verified Act 2 entry. The seven
+other sources stopped with clean divergences. The expanded bank missed its
+fitting threshold. The two verified sources keep their distinct ownership.
+[Admission evidence](native-a8-archive-act1-v1.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 

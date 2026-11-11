@@ -32,18 +32,36 @@ Both full fits completed and were sealed with 112 updates apiece. The mean
 loss on demonstrated answers fell from 2.349 to 1.066 for player 2 and from
 2.146 to 1.074 for player 3. The fitting report is
 `sha256:e2d8d659e8f32736ee495a7f2c456690220759678ae671dab6c99a2996f34b37`.
-The development worlds measure whether the learned changes transfer to wins.
 
-Close STS2 before launching the comparison. The launcher verifies and reuses
-the sealed fitted copies. Allow about 12 to 25 minutes, with a 40-minute outer
-cap.
+## Saved development result
 
-```bash
-bash scripts/fit-and-compare-a8-archive-v1.sh
-```
+All 48 games ended in native losses. Both fits reached zero full-run wins
+and zero Act 1 clears on the 12 fresh worlds. Player 3 reached the same
+Lagavulin Matriarch boss on one world in both arms.
 
-The recipe declares the output directory and the process limits. The report
-binds each fitted checkpoint and evaluated game to its seal. An interrupted
-or uncertain case preserves its evidence and stops further play. This is a
-development comparison, with candidate selection and confirmation reserved
-for a separate assessment.
+| Initializer and arm | A8 wins | Act 1 clears | Act 1 bosses reached | Mean maximum floor |
+| --- | ---: | ---: | ---: | ---: |
+| Player 2 original | 0/12 | 0/12 | 0/12 | 8.92 |
+| Player 2 fitted | 0/12 | 0/12 | 0/12 | 7.83 |
+| Player 3 original | 0/12 | 0/12 | 1/12 | 9.75 |
+| Player 3 fitted | 0/12 | 0/12 | 1/12 | 9.58 |
+
+The fits reached a higher floor in six of 24 matched pairs, tied in nine
+and finished lower in nine. Twenty-seven losses were in ordinary fights,
+19 in elites and two at the Act 1 boss. The fitted players ended a turn
+with a card play offered in 33 of 1,463 such menus. The originals did so
+in three of 1,872. These rates describe the different states each policy
+visited. They do not identify which choice caused a loss.
+
+The saved audit reconstructed 6,813 native deliveries and checked 2,934
+sealed files, including the two exact fitted states and their complete
+Adam. Each world had the same opening menu across all four arms. The
+frozen build and all original and reference full states verified. Zero
+updates occurred during evaluation. The final-test worlds remain reserved.
+[Saved audit](evidence/native-a8-archive-copy-fit-result-v1.json).
+
+The three demonstrations improved agreement on their own menus. The
+fresh results prioritize additional successful, independent early-game
+worlds before another fit. The [Act 1 archive qualification](native-a8-archive-act1-v1.md)
+uses uninterrupted prefixes of separate published journals and checks
+their actual native Act 2 entry.
