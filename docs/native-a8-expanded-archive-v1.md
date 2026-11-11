@@ -1,8 +1,8 @@
 # Expanded A8 demonstration fit
 
-The original comparison stopped after 31 sealed losses. The current
-launcher covers the 16 games that had yet to start, using the shared
-selector repair. [Saved result and continuation](native-systematic-selectors-v1.md).
+The original comparison stopped after 31 sealed losses. All 16 games
+in the separately reported continuation ended in native Act 1 losses.
+[Saved continuation result](native-systematic-selectors-v1.md#saved-a8-continuation-result).
 
 The [archive-initialized PPO run](native-a8-archive-own-training-v1.md)
 had zero wins and Act 1 clears across 32 training and 48 development

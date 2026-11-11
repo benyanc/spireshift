@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Test more verified successful A8 examples.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Compare the five-world fit with the three-world fit on fresh matched starts. The two added training worlds reached native Act 2, and the two held-out demonstrations stay separate. |
+| 1 | **Test early-combat training weight.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Compare the same training data and optimizer work with greater weight on opening combat. Measure early room survival and Act 1 clears on fresh matched normal starts, with full-run A8 wins as the primary outcome. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -51,20 +51,22 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Compare the expanded demonstration fit
+## Current work — Diagnose early combat transfer
 
 The archive-initialized PPO continuation completed 32 training games
 and 48 matched development games with zero wins and Act 1 clears. The
 shared selector repair recovered two additional native Act 2 entries.
-The matched expanded fit uses three full wins and two Act 1 clears,
-with two more clears held out. Compare its two frozen copies against the
-exact three-world fits. The original comparison sealed 31 losses before
-a shop-owned Kifuda selector stopped the panel. The shared selector repair
-qualifies both formats and prepares the 16 games that had yet to start.
-Use the four remaining worlds to assess the expanded fit on the repaired
-native path. [PPO result](native-a8-archive-own-training-v1.md) ·
+The matched expanded fit used three full wins and two Act 1 clears,
+with two more clears held out. The original comparison sealed 31 losses
+before the shop-owned Kifuda selector stopped the panel. All 16 games
+in the separately reported continuation ended in native losses before
+the Act 1 boss. Eleven losses came in ordinary fights. Combat through
+floor 6 made up 11.1% of the five-world fit's decision draws, and its
+log loss on held-out early combat choices increased for both initializers.
+Use that evidence to isolate the effect of early-combat training weight.
+[PPO result](native-a8-archive-own-training-v1.md) ·
 [Expanded fit and comparison](native-a8-expanded-archive-v1.md) ·
-[Selector verification and continuation](native-systematic-selectors-v1.md).
+[Saved selector continuation](native-systematic-selectors-v1.md#saved-a8-continuation-result).
 
 ## Prior handoff — Additional Act 1 demonstrations
 

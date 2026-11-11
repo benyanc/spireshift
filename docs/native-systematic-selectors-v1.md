@@ -43,7 +43,7 @@ model-owned normal start also reached a verified native ending. The
 diagnostic saves and normal control have separate receipts from the
 evaluation. The shipped game's Connector31 retains its large-selector limit.
 
-## Continue the A8 comparison
+## A8 continuation declaration
 
 The prior panel recorded 31 sealed losses, zero Act 1 clears, one stopped
 game, and 16 games that had yet to start. The continuation uses both exact
@@ -53,10 +53,55 @@ can change compact public inputs. The current recipe verifies the frozen
 game build v0.111.0 / 41cef1ea, original and fitted checkpoints with
 full Adam state, saved evidence, and short controls before playing.
 
-Close STS2 and allow about 3–6 minutes. The continuation retains the
-existing per-game guards, reports caps as incomplete, and preserves an
-uncertain attempt and its evidence for inspection.
+The owner ran the continuation with the existing per-game guards and
+the sealed short controls.
 
 ```bash
 bash scripts/continue-a8-expanded-archive-v2.sh
 ```
+
+## Saved A8 continuation result
+
+All 16 games ended in native losses. Across the eight matched pairs,
+the five-world fit went farther three times, tied three times, and
+finished earlier twice. Each arm played eight games on the same four
+worlds using both initializers.
+
+| Fit | A8 wins | Act 1 clears | Act 1 bosses reached | Mean maximum floor | Losses in ordinary fights | Losses in elites |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Three worlds | 0/8 | 0/8 | 0/8 | 7.25 | 6 | 2 |
+| Five worlds | 0/8 | 0/8 | 0/8 | 7.50 | 5 | 3 |
+
+Eight games ended by floor 6. In six of the eight pairs, the first
+changed action came on an identical combat menu. Both fits for both
+initializers died in the same floor 6 fight on world 10, even though
+the five-world fits entered it with 19 and 26 more HP, respectively.
+These are observations of the sampled runs.
+
+The saved audit checked 1,056 sealed files and reconstructed all 1,699
+delivered decisions, all matched starts, and all 16 native loss endings.
+The continuation encountered zero compact selectors. The saved Kifuda
+handoff and the short native shop fixtures retain that coverage. The
+earlier panel retains its 31 sealed losses and one stopped game, with
+separate results. The frozen game, runtime, original and fitted full
+states, and Adam verified with zero optimizer updates. The continuation
+report is `sha256:657b79388da87c455092e985c778836eb0c6aaefda27415cadf62b76e41b2c3e`.
+
+## Next learning priority
+
+Combat through floor 6 accounted for 499 of 4,480 decision draws in
+the five-world fit. The three-world fit used 179 of 2,688. On 62
+choice-bearing early combat decisions across two held-out successful
+Act 1 paths, the average negative log probability of the demonstrated
+choices increased for both initializers, from 1.191 to 1.212 and
+from 1.270 to 1.298. Highest-score agreement rose from 43.1% to
+47.8% and from 45.8% to 46.8%. These measures describe the same
+held-out demonstration menus.
+
+Test increased training weight on early combat against the same
+training worlds and optimizer work. Keep the full legal menu and
+model-owned choices, and compare the copied checkpoints on fresh
+normal-start A8 worlds. Track early room survival and Act 1 clears
+as diagnostics alongside the primary full-run victory outcome. The
+four continuation worlds remain development evidence. The next study
+needs its own frozen recipe and independent evaluation worlds.
