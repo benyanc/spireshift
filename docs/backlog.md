@@ -52,14 +52,14 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Use the verified A8 demonstration bank
+## Current work — Fit and evaluate the verified A8 demonstrations
 
-The bank has 2,380 committed native decisions across the three verified
-victories. The transport audit recovered Test Subject from saved receipts and
-the first-turn effect check qualified Aeonglass. Prepare separate world-balanced
-fitting on copies, then compare full-run wins on the declared development
-worlds. Keep both divergent prefixes as replay regressions.
-[Qualification and scope](native-a8-archive-transitions-v6.md).
+Both fitted copies are sealed after 112 updates each with equal weight per
+world across the three victories. The short control verified reloads, paired
+openings and a native terminal result. The owner run reuses the sealed copies
+and compares 48 normal-start games on 12 separate development worlds. Keep
+both divergent prefixes as replay regressions.
+[Fitting result and command](native-a8-archive-copy-fit-v1.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 
