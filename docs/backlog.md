@@ -7,15 +7,14 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Admit successful runs across distinct training worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Require verified start, recorded actions, native receipts, complete endings and disjoint seed ownership. Count whole worlds and coverage across acts and decision families. |
-| 2 | **Fit a full-menu candidate on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Use separately admitted demonstrations and world-balanced fitting. Verify held-world behavior before fresh games. Keep demonstrations distinct from ordinary PPO. |
-| 3 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
-| 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
+| 1 | **Admit the qualified demonstrations and fit on copies.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134) | Bind the fitting recipe to the three sealed winning worlds. Score the full public menu, keep ordered answers together and weight worlds evenly. Keep demonstrations distinct from ordinary PPO. |
+| 2 | **Measure transfer on fresh normal starts.** [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | Freeze both candidates and compare terminal wins on separate development worlds. Use Act 1 clears and later-act progress to diagnose transfer. Verify menus, deliveries, successors and endings on the paths the models reach. |
+| 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
-The archive qualification has one verified normal-start Ironclad/A8 victory
-and four clean replay stops. The fitting gate requires three distinct verified
-winning worlds with coverage across openings and bosses.
-[Saved result and continuation](native-a8-archive-effects-v5.md).
+The archive qualification passed with three verified normal-start Ironclad/A8
+victories, three openings, two Act 1 bosses and all three final bosses. The
+two clean replay stops stay outside the bank.
+[Saved qualification](native-a8-archive-transitions-v6.md).
 
 Use the game's public decision owner to select a scoring head if that experiment
 qualifies. The model scores every legal option, including skips, targets and
@@ -53,16 +52,14 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Admit successful runs across distinct training worlds
+## Current work — Use the verified A8 demonstration bank
 
-Replay matching now tracks discarded card copies, verifies automatic singleton
-exhaust effects and binds stolen-card rewards to their current native owner.
-The short boss-map control verified that the native menu offers the boss route
-when free travel is active and that the bound vote enters the correct fight.
-All four clean continuations have a verified next action. The v5 batch starts
-those worlds from Neow and retains the saved Queen victory. Keep the full-run
-victory and coverage gates before fitting on copies.
-[Qualification and command](native-a8-archive-effects-v5.md).
+The bank has 2,380 committed native decisions across the three verified
+victories. The transport audit recovered Test Subject from saved receipts and
+the first-turn effect check qualified Aeonglass. Prepare separate world-balanced
+fitting on copies, then compare full-run wins on the declared development
+worlds. Keep both divergent prefixes as replay regressions.
+[Qualification and scope](native-a8-archive-transitions-v6.md).
 
 ## Prior handoff — Earlier matched combat outcomes
 
