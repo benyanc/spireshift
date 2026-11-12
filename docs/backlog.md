@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Finish the 58 untouched A8 holdout worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Evaluate the four sealed round-64 checkpoints. Retain the verified games and interrupted world in the original 512-game denominator. |
+| 1 | **Train the shared head with later-act exposure.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Continue copies of the two shared round-64 checkpoints on normal starts and verified Act 2 and Act 3 saves. Compare full-run A8 wins on 32 fresh normal-start worlds. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -41,7 +41,8 @@ and compute-allocation research ([#7](https://github.com/benyanc/spireshift/issu
 panel and same-final routing-interference stage; unrelated platform/patch/overlay
 work. Resume a supporting task only when it resolves a concrete base-learning
 blocker or after the A8 milestone. This does not disable correctness checks or
-relabel incomplete experiments.
+relabel incomplete experiments. The remaining 58 shared-versus-split holdout
+worlds stay available for the sealed round-64 checkpoints.
 
 The preserved canary panel stays **3 matching / 1 incomplete / 2 unattempted**;
 its active marker, exact finals, original weights/full Adam and blocked command
@@ -51,7 +52,16 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Compare scoring heads with sustained training
+## Current work — Shared-head training with later-act experience
+
+The [later-act study](native-a8-shared-later-act-training-v1.md) trains
+from a mix of normal starts, Act 2 and Act 3 entries, and pre-boss rest
+sites. The current shared policy generates every action. A later-act
+training return counts only progress earned after loading. The
+evaluation compares the final copies with their frozen parents on
+fresh normal-start A8 worlds.
+
+## Prior handoff — Compare scoring heads with sustained training
 
 Both methods finished all 64 training rounds, with zero A8 wins in
 2,048 training games each. The owner run sealed 278 holdout games.
