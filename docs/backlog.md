@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Test early-combat training weight.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Compare the same training data and optimizer work with greater weight on opening combat. Measure early room survival and Act 1 clears on fresh matched normal starts, with full-run A8 wins as the primary outcome. |
+| 1 | **Train shared and separate scoring heads through 64 matched A8 rounds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Match both starting checkpoints, training worlds and PPO work. Track fixed progress panels and compare full-run wins on 128 separate final comparison worlds. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -15,9 +15,9 @@ The three [qualified full-run demonstrations](native-a8-archive-transitions-v6.m
 improved fitting agreement. The [fresh comparison](native-a8-archive-copy-fit-v1.md)
 completed all 48 games with zero A8 wins and zero Act 1 clears in either arm.
 
-Use the game's public decision owner to select a scoring head if that experiment
-qualifies. The model scores every legal option, including skips, targets and
-compound choices. Both heads learn toward the same full-run objective. Repair
+In the split arm, use the game's public decision owner to select the combat
+or strategy head. The model scores every legal option, including skips, targets
+and compound choices. Both methods learn toward the same full-run objective. Repair
 demonstrated menu, delivery, effect or ending defects before admitting affected
 experience. Track the official Connector's large-selection limit under
 [#149](https://github.com/benyanc/spireshift/issues/149). [Native selector controls](native-a8-practice-continuation.md),
@@ -51,7 +51,7 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Diagnose early combat transfer
+## Current work — Compare scoring heads with sustained training
 
 The archive-initialized PPO continuation completed 32 training games
 and 48 matched development games with zero wins and Act 1 clears. The
@@ -61,9 +61,11 @@ with two more clears held out. The original comparison sealed 31 losses
 before the shop-owned Kifuda selector stopped the panel. All 16 games
 in the separately reported continuation ended in native losses before
 the Act 1 boss. Eleven losses came in ordinary fights. Combat through
-floor 6 made up 11.1% of the five-world fit's decision draws, and its
-log loss on held-out early combat choices increased for both initializers.
-Use that evidence to isolate the effect of early-combat training weight.
+floor 6 made up 11.1% of the five-world fit's decision draws. Treat
+that as a progress diagnostic. The next study uses the repaired adapter
+for sustained model-owned play with one shared actor and a split actor,
+starting from identical policies. Compare round 64 on the declared
+128-world panel. [Scoring-head study](native-a8-scoring-heads-v1.md).
 [PPO result](native-a8-archive-own-training-v1.md) ·
 [Expanded fit and comparison](native-a8-expanded-archive-v1.md) ·
 [Saved selector continuation](native-systematic-selectors-v1.md#saved-a8-continuation-result).
