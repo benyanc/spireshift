@@ -1,5 +1,9 @@
 # A8 scoring-head comparison after round 57
 
+The resumed run finished training through round 64 and stopped during
+holdout world 70. Follow the [evaluation-only continuation](native-a8-scoring-heads-holdout-resume-v1.md)
+for the saved round-64 results and the 58 untouched holdout worlds.
+
 The original run sealed 57 rounds for both initializers before stopping
 after 9 hours 40 minutes. Each method completed 912 training worlds per
 initializer with matched PPO work. That was 2,736 optimizer steps per

@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Finish the shared-versus-split A8 study from round 57.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Resume the matched PPO schedule with the Crystal Sphere repair. Compare the round 64 checkpoints on the 128 separate final comparison worlds. |
+| 1 | **Finish the 58 untouched A8 holdout worlds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Evaluate the four sealed round-64 checkpoints. Retain the verified games and interrupted world in the original 512-game denominator. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -53,15 +53,22 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current work — Compare scoring heads with sustained training
 
+Both methods finished all 64 training rounds, with zero A8 wins in
+2,048 training games each. The owner run sealed 278 holdout games.
+Shared cleared Act 1 five times and split twice, with zero A8 wins
+in either arm. The native Stampede autoplay on world 70 stopped
+terminal verification. The
+[evaluation-only continuation](native-a8-scoring-heads-holdout-resume-v1.md)
+uses the sealed round-64 states on the 58 untouched worlds and
+keeps the original failed and unattempted cells in the denominator.
+
 The owner run sealed rounds 1–57 for both initializers. Both methods had
 zero A8 wins. Shared and split averaged floor 10.25 and 10.81 on the round-48
 development panel, up from 7.91 at the start. Round 58 reached the native
 Crystal Sphere grid and stopped at the ordinary event decoder. The
-[verified continuation](native-a8-scoring-heads-grid-resume-v1.md) restores
-all four round-57 weights and Adam states, retains two already sealed
-round-58 pairs, and uses one fresh matched world for the interrupted slot.
-Run the remaining rounds and the original 128-world comparison to measure
-full-run strength.
+[Crystal Sphere continuation](native-a8-scoring-heads-grid-resume-v1.md) restored
+all four round-57 weights and Adam states, retained two already sealed
+round-58 pairs, and used one fresh matched world for the interrupted slot.
 
 The archive-initialized PPO continuation completed 32 training games
 and 48 matched development games with zero wins and Act 1 clears. The
