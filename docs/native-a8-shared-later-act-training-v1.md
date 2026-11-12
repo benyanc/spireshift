@@ -6,6 +6,10 @@ head is the baseline for this experiment. Copies of the two sealed
 round-64 shared checkpoints inherit the exact actor, critic and complete
 Adam state.
 
+The original run stopped in round 2. Use the
+[save-load continuation](native-a8-shared-later-act-resume-v1.md)
+for its verified results and the remaining work.
+
 ## Training
 
 Each initializer plays eight rounds of 16 games. Each round has eight
