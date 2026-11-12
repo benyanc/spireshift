@@ -1,5 +1,9 @@
 # Sustained A8 scoring-head comparison
 
+The original run stopped during round 58 at the native Crystal Sphere grid.
+Use the [saved assessment and continuation](native-a8-scoring-heads-grid-resume-v1.md)
+to finish from the four sealed round-57 checkpoints.
+
 The shared actor and the combat-and-strategy actor start from the same
 five-world archive fit for each of the two initializers. The split version
 copies the parent actor's weights and Adam moments into both heads. Both

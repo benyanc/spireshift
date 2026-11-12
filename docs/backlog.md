@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Train shared and separate scoring heads through 64 matched A8 rounds.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Match both starting checkpoints, training worlds and PPO work. Track fixed progress panels and compare full-run wins on 128 separate final comparison worlds. |
+| 1 | **Finish the shared-versus-split A8 study from round 57.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Resume the matched PPO schedule with the Crystal Sphere repair. Compare the round 64 checkpoints on the 128 separate final comparison worlds. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -53,6 +53,16 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current work — Compare scoring heads with sustained training
 
+The owner run sealed rounds 1–57 for both initializers. Both methods had
+zero A8 wins. Shared and split averaged floor 10.25 and 10.81 on the round-48
+development panel, up from 7.91 at the start. Round 58 reached the native
+Crystal Sphere grid and stopped at the ordinary event decoder. The
+[verified continuation](native-a8-scoring-heads-grid-resume-v1.md) restores
+all four round-57 weights and Adam states, retains two already sealed
+round-58 pairs, and uses one fresh matched world for the interrupted slot.
+Run the remaining rounds and the original 128-world comparison to measure
+full-run strength.
+
 The archive-initialized PPO continuation completed 32 training games
 and 48 matched development games with zero wins and Act 1 clears. The
 shared selector repair recovered two additional native Act 2 entries.
@@ -62,7 +72,7 @@ before the shop-owned Kifuda selector stopped the panel. All 16 games
 in the separately reported continuation ended in native losses before
 the Act 1 boss. Eleven losses came in ordinary fights. Combat through
 floor 6 made up 11.1% of the five-world fit's decision draws. Treat
-that as a progress diagnostic. The next study uses the repaired adapter
+that as a progress diagnostic. The scoring-head study uses the repaired adapter
 for sustained model-owned play with one shared actor and a split actor,
 starting from identical policies. Compare round 64 on the declared
 128-world panel. [Scoring-head study](native-a8-scoring-heads-v1.md).
