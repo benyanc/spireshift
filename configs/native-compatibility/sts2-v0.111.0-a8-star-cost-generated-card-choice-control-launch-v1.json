@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-star-cost-generated-card-choice-control-v1.json",
+    "sha256": "8db2f8ad97cd66dbb8868d552bf79e3fb104ca4100b06523a15a6cdce0f93c64"
+  },
+  "wall_seconds": 290,
+  "cpu_seconds": 580,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

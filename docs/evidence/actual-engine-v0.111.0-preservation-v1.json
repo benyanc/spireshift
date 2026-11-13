@@ -1,0 +1,75 @@
+{
+  "acquisition": {
+    "availability": "not_yet_verified_with_Steam_servers",
+    "depot_id": "2868842",
+    "download_bytes": 1288429216,
+    "evidence": "owner_local_Steam_appcache",
+    "evidence_sha256": "eff1372922833ef5832edbd0230f4b4413c252d1d9e087f0f4b25bb3e11e1dfd",
+    "installed_bytes": 2406415347,
+    "manifest_id": "5045320271505434676",
+    "observed_steam_build_id": "24724944"
+  },
+  "claim_scope": "implementation_and_local_missing_input_preflight_not_runtime_qualification",
+  "config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "date": "2026-10-10",
+  "decision": {
+    "adaptive_controller_allowed": false,
+    "backend_admitted": false,
+    "training_allowed": false
+  },
+  "game_downloads_started": 0,
+  "games_launched": 0,
+  "implemented": [
+    "exact_file_and_source_preflight",
+    "full_private_game_archive",
+    "archive_integrity_verification",
+    "immutable_outputs_and_partial_failure_evidence",
+    "one_owner_Steam_console_handoff"
+  ],
+  "issues": [
+    144,
+    145,
+    146
+  ],
+  "observed_installed_game": {
+    "commit": "59260271",
+    "steam_build_id": "23811903",
+    "version": "v0.107.1"
+  },
+  "old_game_and_experiments_preserved": true,
+  "optimizer_steps": 0,
+  "pending": [
+    "owner_exact_depot_download",
+    "actual_v0.111.0_file_and_archive_verification",
+    "isolated_profile_and_modset",
+    "shipped_and_cli_boot_and_reset",
+    "complete_public_observation_and_legal_actions",
+    "same_build_targeted_mechanics_comparison",
+    "real_full_run_terminal_condition",
+    "single_and_parallel_worker_performance"
+  ],
+  "preflight_report_id": "sha256:f7425811ad6b462d829fd00e752a7fc3ad45036f33334ee6d0a517c5988e2024",
+  "report_id": "sha256:30f615b271b883dd8168fd7650989cb257bc9a91f4f360b15a73593ad2e1fcb7",
+  "schema_version": "actual-engine-preservation-evidence-v1",
+  "source_pins": [
+    {
+      "clean": true,
+      "commit": "4961b52a587777277816bc4407108f6f4274f801",
+      "name": "headless"
+    },
+    {
+      "clean": true,
+      "commit": "084d1aa3d8e118ca7ce8d8774ad16d6be9c92367",
+      "name": "cli"
+    }
+  ],
+  "verification": {
+    "csharp_build": true,
+    "focused_engine_and_doctor_tests": 26,
+    "formatting": true,
+    "protocol_contract": true,
+    "repository_test_wall_seconds": 48.56,
+    "repository_tests_passed": 918,
+    "typing": true
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "event-public-integration-audit-config-v1",
+  "base_config": {
+    "path": "configs/backend-repair/sts2-v0.107.1-public-integration-audit-v1.json",
+    "id": "sha256:1c41b757d4170319b7a8d88f35727e7302f74567de772c138b3aac807728bcea"
+  },
+  "previous_audit": {
+    "path": "artifacts/compatibility/full-run-public-integration-v1/integration-audit.json",
+    "id": "sha256:eaaa0e1a239b0fe14ac6b0a8aca3dd3cefcc47df5fc303e292366992e0ffec3a"
+  },
+  "backend_config": {
+    "path": "configs/backend-repair/sts2-v0.107.1-event-continuation-v1.json",
+    "id": "sha256:3266c492a1752aee43dc72df82524c6ff84ced3c50c0bcc5169cf62182c5b869"
+  },
+  "integration_manifest": {
+    "path": "manifests/patches/sts2-v0.107.1-evangambit-event-public-v3-pending.json",
+    "id": "sha256:46dfcf7480d7eebda430f067a8257a5f400f62eab64443ab6ef6d9952c9db255"
+  },
+  "event_endpoints": [
+    {
+      "source_case_id": "sha256:5f82f3e22d66956791b4cf12af805b732538c3a38aefef0ca85d75bd4011ae42",
+      "event_id": 12,
+      "expected_encounter_id": 55,
+      "source_floor": 5,
+      "first_invalid_decision": 93,
+      "skipped_noop_actions": 3
+    },
+    {
+      "source_case_id": "sha256:884ef4b3b107fc2cf02890e269b7d483300bfc7f270e06582d2b6a1fef506007",
+      "event_id": 23,
+      "expected_encounter_id": 56,
+      "source_floor": 11,
+      "first_invalid_decision": 99,
+      "skipped_noop_actions": 3
+    },
+    {
+      "source_case_id": "sha256:eec91b43df92574c8404ca607146a75c6304968254ea0bff50bc18a795206cc1",
+      "event_id": 23,
+      "expected_encounter_id": 56,
+      "source_floor": 15,
+      "first_invalid_decision": 173,
+      "skipped_noop_actions": 3
+    },
+    {
+      "source_case_id": "sha256:f3bcb2f47595e50e8c6cf60070e2313686b8a28d3f349ced02405782ebe24d35",
+      "event_id": 12,
+      "expected_encounter_id": 55,
+      "source_floor": 7,
+      "first_invalid_decision": 97,
+      "skipped_noop_actions": 3
+    }
+  ],
+  "output_dir": "artifacts/compatibility/full-run-event-integration-v1",
+  "resource_limits": {
+    "wall_seconds": 240,
+    "cpu_seconds": 240,
+    "memory_bytes": 8000000000,
+    "storage_bytes": 2000000000
+  },
+  "automatic_training": false,
+  "automatic_admission": false,
+  "config_id": "sha256:e65d04fe2d1d3535d425a090391445c50d72b7b7a42d73b1634988f9392c1a81"
+}

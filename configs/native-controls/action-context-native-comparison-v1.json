@@ -1,0 +1,73 @@
+{
+  "checkpoint_selection": "final_only",
+  "control_report": {
+    "id": "sha256:dc1a89d969541e837dcb6df68f4eb18e501ee5238ab0d51ab399fd612032be0c",
+    "path": "artifacts/native-context/sts2-v0.111.0-a8-context-control-v1/report.json"
+  },
+  "evaluation_games": 16,
+  "games_per_round": 32,
+  "implementation_sha256": {
+    "engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "engine_experience_audit.py": "dcb9d2fa3856793ce4e491267e7aa2e58c5c187e2e18a9b6cb956d19c79ea079",
+    "engine_experience_stream.py": "32d1386cd8602d43c7ccceaafcc2d944d8c1e1330bed50fc52afbb1eb097ca1a",
+    "engine_learning.py": "85e300466d103bcb3ccf48c7b6bedb55d40e6d837179b3949f1459da3f3b68e6",
+    "engine_learning_admission.py": "d29891e745e9e2778e441bd782d6c2f4abf6ac2e41b7feb3a325178456b68af5",
+    "engine_mechanics_admission.py": "6f2447d18ecee61c49f40b5a094c2cd08fff16e872c702952e011fe851152008",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "engine_potion_checks.py": "b7eb0c3b00e5a325db634521a2b52843917473fad013664fa080b22dabb45e51",
+    "engine_potion_queue_checks.py": "a192f0f4be2e061cf4e9e52db519371ff566da1ec566e2c1fc678133840b936b",
+    "engine_projection_cache.py": "08260155da26b01de380fa55e72e092c98122a3b4a76e957e81c86d11164be43",
+    "engine_run.py": "005794120b8f9f21217cdbc51a200d35d0ea34cf6388c99cd3dd1daba32704a4",
+    "engine_worker.py": "5ca26ab96913bd3257c9e3766373b9219a3412d7ed30ae7b986b3deb9508cf56",
+    "engine_worker_qualification.py": "e6626b9d7dc719432d496896cfe76d68fd19fcbc5d4dffa6d91fc9b52d435367",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "native_context_game.py": "327075c2d4073994fecd4cd003e2b03223330b86b71a65d5e14e3a7ad2d37326",
+    "native_context_trial.py": "ed9d73aadb7949b806d6990936743be143e7c7797184fc9b3c4168b49e8a27c4",
+    "native_credit_training.py": "8e53505899626019e99bf3eb569e2d2c8847eb5c531613aec2c71f82d729131b",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_normalization_admission.py": "b3aecd8b81187a9c73a2e560f71a57fd55c7555ee5fc7e78e955c69d08e30f2d",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285"
+  },
+  "initializer": "common_zero_hidden_output_no_frozen_layers_v1",
+  "modes": [
+    "native-original-quarter-v1",
+    "native-public-numeric-candidate-cross-v1"
+  ],
+  "parent_recipe": {
+    "id": "sha256:c80020346b5c76382cece3fe6c219a669748578ce7f5b6fa7d7d3194649dd5c6",
+    "path": "configs/native-learning/sts2-v0.111.0-a8-input-normalized-v1.json"
+  },
+  "projection_report": {
+    "id": "sha256:b1f72a4e33a0479c68cb3b1d8fada21ae86e76c28bf898b3d767ccf022644777",
+    "path": "artifacts/synthetic-learning/native-action-context-game-probe-v1/report.json"
+  },
+  "resource_limits": {
+    "cpu_seconds": 7200,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 6000000000,
+    "wall_seconds": 3600
+  },
+  "rounds": 4,
+  "schema_version": "native-action-context-trial-config-v1",
+  "seed_manifest": {
+    "id": "sha256:c9364cd1918b76d4e1112c38bbbfa58139bb36d93d5182613f7d855d9473f6fc",
+    "path": "manifests/splits/sts2-v0.111.0-native-a8-context-comparison-v1.json"
+  },
+  "stage": "bounded_native_comparison",
+  "study_config": {
+    "id": "sha256:baa19e78a7ff43661da7775121fd4f29cf1443c7b18e9cd51142d5ca27af2374",
+    "path": "configs/native-controls/action-context-v1.json"
+  },
+  "study_report": {
+    "id": "sha256:404879462ef66aeef754ba3605afc6201bba487890a40f4b8f976358b35fd9d6",
+    "path": "artifacts/synthetic-learning/native-action-context-v1/report.json"
+  },
+  "training_seeds": [
+    0,
+    1
+  ],
+  "workspace": "artifacts/native-context/sts2-v0.111.0-a8-context-comparison-v1"
+}

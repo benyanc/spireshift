@@ -1,0 +1,50 @@
+--- a/src/Sts2Headless/RunSimulator.cs
++++ b/src/Sts2Headless/RunSimulator.cs
+@@ -4237,4 +4237,47 @@
+                 throw new InvalidOperationException("Expected native event presentation calls are absent");
++            InstallTrialPortraitGuards(harmony);
+             Installed = true;
+         }
++
++        private static readonly MethodInfo IsLocalPlayer = typeof(LocalContext).GetMethod(
++            nameof(LocalContext.IsMe), new[] { typeof(Player) })
++            ?? throw new MissingMethodException("Native LocalContext.IsMe(Player)");
++
++        private static void InstallTrialPortraitGuards(Harmony harmony)
++        {
++            var trial = typeof(MegaCrit.Sts2.Core.Models.Events.Trial);
++            var transpiler = new HarmonyMethod(typeof(HeadlessEventPresentation)
++                .GetMethod(nameof(TrialPortraitGuards))!);
++            foreach (var (name, count) in new[] { ("Accept", 2), ("AddVfxAnchoredToPortrait", 1) })
++            {
++                var method = trial.GetMethod(name, Declared)
++                    ?? throw new MissingMethodException(trial.FullName, name);
++                var guards = PatchProcessor.GetOriginalInstructions(method)
++                    .Count(c => c.opcode == OpCodes.Call && Equals(c.operand, IsLocalPlayer));
++                if (guards != count)
++                    throw new InvalidOperationException($"Trial.{name} portrait guards changed");
++                harmony.Patch(method, transpiler: transpiler);
++                Inventory.Add(new Dictionary<string, object?>
++                {
++                    ["event"] = trial.Name,
++                    ["method"] = trial.FullName + "." + name,
++                    ["calls"] = Enumerable.Repeat("LocalContext.IsMe:TrialPortrait", count).ToList(),
++                });
++            }
++        }
++
++        public static IEnumerable<CodeInstruction> TrialPortraitGuards(IEnumerable<CodeInstruction> instructions)
++        {
++            var portrait = typeof(HeadlessEventPresentation).GetMethod(nameof(ShowTrialPortrait))!;
++            foreach (var instruction in instructions)
++            {
++                if (instruction.opcode == OpCodes.Call && Equals(instruction.operand, IsLocalPlayer))
++                    instruction.operand = portrait;
++                yield return instruction;
++            }
++        }
++
++        // These three branches only clear, load or display the Trial portrait.
++        public static bool ShowTrialPortrait(Player player) => !TestMode.IsOn && LocalContext.IsMe(player);
++
+         public static IEnumerable<CodeInstruction> Transpile(IEnumerable<CodeInstruction> instructions)

@@ -1,0 +1,212 @@
+{
+  "Connector_implicitly_uses_Hand_for_generated_offer": true,
+  "adaptive_controller_allowed": false,
+  "all_original_reports_and_raw_captures_unchanged": true,
+  "assessment_resource_id": "sha256:f71538878e1c3f845bce55da4f829864719cef542fa22c42c34211d4eb0dc9b6",
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "cases": [
+    {
+      "clean_reset": true,
+      "first_difference": {
+        "index": 87,
+        "menu_keys_equal": true,
+        "paths": [
+          "/candidates/0/subject/properties/public_card_views/interaction:/surface/cards/*/description",
+          "/candidates/0/subject/properties/public_card_views/read:surface_card:/description",
+          "/context/interaction/content/surface/cards/1/public_card_views/interaction:/surface/cards/*/description",
+          "/context/reads/3/content/public_card_views/read:surface_card:/description",
+          "/context/referents/2/properties/public_card_views/interaction:/surface/cards/*/description",
+          "/context/referents/2/properties/public_card_views/read:surface_card:/description"
+        ]
+      },
+      "key": "player-2-natural-609",
+      "native_terminal_floor": 8,
+      "official_gameplay_CPU_seconds": 81.116126208,
+      "official_native_summary": {
+        "ascension": 8,
+        "floor_reached": 9,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 162
+      },
+      "official_terminal_floor": 9,
+      "policy_numbers_at_first_difference": {
+        "native": {
+          "action_index": 0,
+          "behavior": "greedy_combat",
+          "draw_key": "sha256:6eb85ff68d94262e6607f30067375fd96c70c69645398409077a098b09f246d8",
+          "log_probability": 0.0,
+          "policy_log_probability": -0.878172397433056,
+          "value": 0.04173282474177609
+        },
+        "official": {
+          "action_index": 3,
+          "behavior": "greedy_combat",
+          "draw_key": "sha256:6eb85ff68d94262e6607f30067375fd96c70c69645398409077a098b09f246d8",
+          "log_probability": 0,
+          "policy_log_probability": -0.9365493610278075,
+          "value": 0.0347668385191196
+        }
+      },
+      "remaining_gap": "generated_card_description_display_pile_context",
+      "selected_candidates_at_first_difference": {
+        "native": "Choose Body Slam",
+        "official": "Skip"
+      },
+      "shop_task_completion_count": 0,
+      "standalone_terminal_difference_paths_diagnostic_only": [
+        "/persistent/run/floor"
+      ],
+      "verified_deliveries": {
+        "native": 144,
+        "official": 143
+      }
+    },
+    {
+      "clean_reset": true,
+      "first_difference": {
+        "index": 168,
+        "menu_keys_equal": true,
+        "paths": [
+          "/candidates/0/subject/properties/description",
+          "/context/interaction/content/surface/options/0/description",
+          "/context/referents/0/properties/description"
+        ]
+      },
+      "key": "player-3-natural-610",
+      "native_terminal_floor": 15,
+      "official_gameplay_CPU_seconds": 122.619781376,
+      "official_native_summary": {
+        "ascension": 8,
+        "floor_reached": 15,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 273
+      },
+      "official_terminal_floor": 15,
+      "policy_numbers_at_first_difference": {
+        "native": {
+          "action_index": 0,
+          "behavior": "sampled_softmax",
+          "draw_key": "sha256:56efa9a54ff4f7c08e2559e6b633bbd6e27be4cf318d9796eb02504e252ee7c4",
+          "log_probability": -0.0014918488648065775,
+          "policy_log_probability": -0.0014918488648065775,
+          "value": 0.029035721225098066
+        },
+        "official": {
+          "action_index": 0,
+          "behavior": "sampled_softmax",
+          "draw_key": "sha256:56efa9a54ff4f7c08e2559e6b633bbd6e27be4cf318d9796eb02504e252ee7c4",
+          "log_probability": -0.0022099690533519123,
+          "policy_log_probability": -0.0022099690533519123,
+          "value": 0.02904436511959735
+        }
+      },
+      "remaining_gap": "rest_description_visible_line_break_contract",
+      "selected_candidates_at_first_difference": {
+        "native": "Rest",
+        "official": "Rest"
+      },
+      "shop_task_completion_count": 2,
+      "standalone_terminal_difference_paths_diagnostic_only": [],
+      "verified_deliveries": {
+        "native": 247,
+        "official": 247
+      }
+    }
+  ],
+  "checkpoint_promoted": false,
+  "do_not_add_false_combat_hint_to_CLI": true,
+  "environment_id": "sha256:ee1008673da84267143e3fdecb4bd54b3484b3e10b20dfebc4bb05e5cf16beed",
+  "expanded_protected_files_exact": 21336,
+  "frozen_game_and_adapters_unchanged": true,
+  "full_game_playing_strength_evaluated": false,
+  "generated_offer_native_widget_and_CLI_use_None": true,
+  "generated_offer_same_draw_key_different_choice": true,
+  "genuine_matching_ending_pairs": 0,
+  "new_games": 0,
+  "new_locked_event_or_Pendulum_offer_coverage": false,
+  "new_noncombat_potion_use_coverage": false,
+  "next_owner_command": null,
+  "next_step": "explicit_card_renderer_context_audit_and_consistent_visible_text_line_break_source_saved_repairs",
+  "no_resource_cap_caused_result": true,
+  "optimizer_updates": 0,
+  "original_weights_and_full_Adam_unchanged": true,
+  "overall_workflow_qualification_granted": false,
+  "p2_later_play_diverges_and_is_not_realigned": true,
+  "p3_all_247_selected_indices_match_diagnostic_only": true,
+  "p3_only_input_168_differs_diagnostic_only": true,
+  "p3_rest_heal_HP_in_both_hosts": [
+    8,
+    47
+  ],
+  "p3_terminal_persistent_and_all_reads_match_diagnostic_only": true,
+  "prior_protection_files_exact": 21031,
+  "reconstructed_actual_deliveries": 781,
+  "references": [
+    {
+      "path": "artifacts/native-shop-readiness/owner-assessment-v1/report.json",
+      "sha256": "839894b47c2ef6309e9e33b9e28f1d474236def1fc0639ebf01d799ad82278dd"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/owner-assessment-v1/assess.py",
+      "sha256": "ad5a137a43232011d74618c33a6eda4ac8ebed2b08cece1cba5721f21dc082ac"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/owner-assessment-v1/generated-card-display-gap.json",
+      "sha256": "567416ab3ea91b3f8e4e6f255eed97c0fea066b89f8b2166dd847390ea9ecf83"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/owner-assessment-v1/rest-visible-newline-gap.json",
+      "sha256": "e17cd846c05a16da2a97e823ef26d78c48f4fae1d50873cdd2d8492a0b1cf425"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/owner-assessment-v1/source-diagnosis.json",
+      "sha256": "0e008563b7e3a9e3df06a2d3d287b135cdea3db047ae3f6c7afd84588db6bfea"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/owner-assessment-v1/protected.json",
+      "sha256": "fb7b18444340bafb1d2815eeda3efa5f267a15ca618d23003581fdeeffe897fb"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/natural-ending-panel-v1/report.json",
+      "sha256": "b18ea1684a135f60eba2b4087d5d1971b6e16b5ea030d12ceda4f073e34259c9"
+    },
+    {
+      "path": "artifacts/resources/shop-endings-v1-attempt-1.json",
+      "sha256": "2448a14a3ae6c1e70cda2b220d219b119682fe7b610b0de958e1c86f540050de"
+    },
+    {
+      "path": "artifacts/resources/shop-ending-owner-assessment-v1.json",
+      "sha256": "b8ddbcc748c2e787ce9725ffaa826e4000b97d9eaebf0b326c43c15f62f6cc34"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-shop-endings-v1.json",
+      "sha256": "2223698dfb2de9f4808f280dce2abe4d30fd5c96f84ec280d9ecc5f4017f820c"
+    },
+    {
+      "path": "docs/native-shop-ending-result.md",
+      "sha256": "ee7d9bf52a801c19f08e58885c010bbfbea725a83ee80b8307d036017092d5f0"
+    }
+  ],
+  "remaining_gaps": [
+    "generated_card_description_display_pile_context",
+    "rest_description_visible_line_break_contract"
+  ],
+  "report_id": "sha256:e7a5d5b36cc494bb562716c3e38fc643a2cabab1f7df0db53f38c88ee944af6a",
+  "saved_assessment_wall_seconds": 56.02689633303089,
+  "schema_version": "native-shop-ending-owner-evidence-v1",
+  "shop_purchases_before_first_difference_indices": [
+    29,
+    30
+  ],
+  "source_assessment_id": "sha256:834b969698d73ccf9ab1ff2d507452a8decbf6e7dc6b29ad0d0947d60b8655b5",
+  "source_panel_id": "sha256:50e599159cd6af20e4d93bf82f939e6a200e5589b128e7eff24034294dc94d4b",
+  "source_resource_id": "sha256:13bf8d549ce34de10c7141a3fd6b62e833d3d75d90e5ffa6b58a4553c8d187b1",
+  "status": "two_Connector_text_projection_gaps_one_behavior_divergence",
+  "training_allowed": false,
+  "verified_natural_shop_card_purchase_completions": 2
+}

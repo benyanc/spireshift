@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-dagger-verification-v1.json",
+  "title": "SpireShift Production DAgger Verification v1",
+  "type": "object",
+  "required": ["schema_version", "valid", "report_id", "verified_cases", "errors"],
+  "properties": {
+    "schema_version": {"const": "production-dagger-verification-v1"},
+    "valid": {"type": "boolean"},
+    "report_id": {"type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$"},
+    "verified_cases": {"type": "integer", "minimum": 0},
+    "errors": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

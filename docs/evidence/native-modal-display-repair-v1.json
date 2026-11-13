@@ -1,0 +1,211 @@
+{
+  "schema_version": "native-four-gap-repair-evidence-v1",
+  "status": "repairs_implemented_ready_for_owner_targeted_comparison",
+  "four_source_repairs": [
+    "native reward glyph rendering retaining identity/order/multiplicity",
+    "actual virtual localized status titles",
+    "native per-copy modifier and upgrade descriptions verified against actual effects",
+    "modal potion permissions, unique owned references, queued discard and card answer"
+  ],
+  "v39_current_control_choices_per_host": {
+    "reward": 57,
+    "title": 77,
+    "scripted_potion": 112
+  },
+  "v38_previous_source_controls_choices_per_host": {
+    "reward": 57,
+    "title": 77,
+    "modified_card": 118
+  },
+  "v38_controls_do_not_qualify_new_sources": true,
+  "scripted_potion_owner_authorized_replays": 1,
+  "scripted_potion_frozen_prefix_choices": 109,
+  "scripted_potion_forced_suffix_choices": 3,
+  "CSharp_Host_tests_with_extra_map_guard": 190,
+  "Node_targeted_tests": 20,
+  "saved_observations": 5889,
+  "artificial_envelopes": 20,
+  "frozen_policy_input_probes": 11782,
+  "protected_prior_files": 15721,
+  "interrupted_modified_control": {
+    "native_acknowledged_choices": 118,
+    "official_acknowledged_choices": 82,
+    "first_input_difference_zero_based": 67,
+    "new_floor_and_old_event_screen_exposed": true,
+    "all_acknowledged_choices_independently_reconstructed": true,
+    "official_natural_shutdown": false,
+    "case_and_plan_markers_preserved": true,
+    "ordinary_PPO_eligible": false,
+    "worker_was_blocked": true
+  },
+  "map_guard": {
+    "patch": "patches/engine/sts2-connector-v0.111.0-map-settling-v23.patch",
+    "candidate": "configs/engine-qualification/sts2-v0.111.0-connector-map-settling-v24.json",
+    "native_travel_readiness_and_authority_guard_implemented": true,
+    "extra_Host_tests": 7,
+    "independent_builds": 2,
+    "live_qualified": false
+  },
+  "worker_inspection": {
+    "original_official_files_exact": 435,
+    "added_files_backed_up": 5,
+    "unknown_additions": 0,
+    "no_game_process_running": true,
+    "reset_performed": false,
+    "owner_restore_and_replacement_diagnostic_decision": "approved_and_reset_completed",
+    "reviewed_reset_performed": true
+  },
+  "original_full_weights_and_Adam_files_exact": {
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8"
+  },
+  "fresh_control_world415_started": false,
+  "game_apps_created": 0,
+  "optimizer_updates": 0,
+  "checkpoint_promoted": false,
+  "training_allowed": false,
+  "exhaustive_compatibility_proven": false,
+  "evidence": {
+    "native_build52": {
+      "path": "artifacts/native-modal-repair/native-build-v52-retry1/report.json",
+      "sha256": "e8a0245488352fdb277e97eb6a41877c7b1054c155ca8d223f6d94fd78d3dc50",
+      "id": "sha256:0408f5512103a520bf897f9c0d3908e85cf599b434612e5cc75f5e89602e6504"
+    },
+    "official_build22": {
+      "path": "artifacts/native-modal-repair/connector-build-v22/report.json",
+      "sha256": "80dd04bf319d8e1f070dbc6512a929c84d1f2a0dd39e1c3c3dec2b3b27cc8b1a",
+      "id": "sha256:fcd5e3ee3e390db588302fd63c30cc9675f18848949d6ddb1575211d53fbf7a3"
+    },
+    "map_guard_build24": {
+      "path": "artifacts/native-modal-repair/connector-build-v24/report.json",
+      "sha256": "89e23dab09f8743f7bab864f137ad9cc57088e65401e50030789b7fcd3913fbd",
+      "id": "sha256:9de24caa27ffec4c99c39c284fe9d0b43ed0fa8760dc0a4e60bec85433fcec1e"
+    },
+    "native_effects": {
+      "path": "artifacts/native-modal-repair/native-effects-v2/report.json",
+      "sha256": "e2a96a46c13b048211e444a57311b4aece597ed9f1126dff08b61dfc1ff44a12",
+      "id": "sha256:ef005c1df00822091aa35865ef05c86226c680c36b694f1b9bec3c814d6bd1e9"
+    },
+    "strict_native_queued_fixture": {
+      "path": "artifacts/native-modal-repair/native-belt-v1/report.json",
+      "sha256": "725bae0d2022a908e437d8d60e6c90d910259d7c7a1f1ebf2eae9333c488c831",
+      "id": "sha256:1446ebd24177538b17d42b80032b58a2741a079244bc0877879b434a4a55c470"
+    },
+    "sharp_actual_damage": {
+      "path": "artifacts/native-modal-repair/development-v1/sharp-effect-confirmation.json",
+      "sha256": "50bc463800fb92908cc2b09c7eb46ac5e2b0957f571384e6d11a5827169960e9",
+      "id": "sha256:0c7e48ef311f34a4faaa882368424292f38f92062de95301b935c7436c89c97f"
+    },
+    "saved_input_audit39": {
+      "path": "artifacts/native-selection-flows/modal-display-offline-v2/report.json",
+      "sha256": "214b8953d542dc4b88dfd7aea53c33fc287b6bd61bf0e0b5868a3e85b150d612",
+      "id": "sha256:e69e3441385806dbadcabaaf32bb0ec4b65d62f00482cdbad1abc7b6dcc1e28e"
+    },
+    "scripted_potion_replay": {
+      "path": "artifacts/native-modal-repair/scripted-discard-v2/report.json",
+      "sha256": "312b757adb2684ae500f2815f428df65f0dcfae5d09eee8dc87c3bbb5b9f80cf",
+      "id": "sha256:2a9822c2150378c09a145361c64ed93d19062c0c1a76a47b9663bf72f0cc1898"
+    },
+    "scripted_reconstruction": {
+      "path": "artifacts/native-modal-repair/scripted-discard-verification-v2.json",
+      "sha256": "b6ea16ef62727aaf4753f170c2977e7ce1af12bb760b13c7d75a6f784f948238",
+      "id": "sha256:292a6a774335bf44598e01e3ddd25b7220aa6dd7c7bbd4ad4f8577cd0050e4d0"
+    },
+    "reward_control39": {
+      "path": "artifacts/native-selection-flows/modal-reward-glyphs-control-v2/report.json",
+      "sha256": "d22ec5f3e38ca81214f9c1a6e5c9361fd4b47b7d635f0433abf981ac61128f22",
+      "id": "sha256:5e1b0833781bc344bc0d784ed49c9876dd2c1517c21c7cc21ca6d17f0043a90c"
+    },
+    "reward_verification": {
+      "path": "artifacts/native-selection-flows/modal-reward-glyphs-control-v2/verification-v1/report.json",
+      "sha256": "c98fc702d05f163740ca6dbb18dc1639190769c13d7c1c78d91671f3d0a9add9",
+      "id": "sha256:ad9cf18b2b3ccbc3039d59a2d23246a8781792d199a47e9c7b0fc0ecc7f3dba9"
+    },
+    "title_control39": {
+      "path": "artifacts/native-selection-flows/modal-status-titles-control-v2/report.json",
+      "sha256": "e1950dc2181f6faf19c0d301b2c635fba1ab904571f332615a3d961422e407d4",
+      "id": "sha256:753ae1ed3f0764c1eb87195876d91e451fccbe28a78fd55659d726b23f285131"
+    },
+    "title_verification": {
+      "path": "artifacts/native-selection-flows/modal-status-titles-control-v2/verification-v1/report.json",
+      "sha256": "f88fe3f23dfb200cf18b73cb8dc5b8f9f5f5d0dd1cf1312a17e3cbcc5efc112d",
+      "id": "sha256:56426f79a948ff14aadad753a22d7574e95d464c72b2e3c8ce9ffa11f167f1f0"
+    },
+    "interrupted_control_reconstruction": {
+      "path": "artifacts/native-modal-repair/stopped-modifier-prefix-v1/report.json",
+      "sha256": "22ea84ac51a67fbb0934b86b1d8184ba55bfd41a1f266e5ddfed9bb3ba4eb657",
+      "id": "sha256:b5386ecd23fabf57b83c32a3bed52955044d8a57c576d8ce6a71502bce6500f6"
+    },
+    "read_only_worker_inspection": {
+      "path": "artifacts/native-modal-repair/stopped-worker-inspection-v1/report.json",
+      "sha256": "7b160f648ae6a406986818646519073adab94480b236b23b3c2d6a1c67e18061",
+      "id": "sha256:5ae0dc9715de54b9d83aab476e666a7bc6284f0e1e419dd66417561723cb0ef3"
+    },
+    "saved_input_audit40": {
+      "path": "artifacts/native-selection-flows/map-settling-offline-v1/report.json",
+      "sha256": "9ea9c3513edf0e91053014db67c62cd3c856a6e0bcd3f21c5213a45a058ceb73",
+      "id": "sha256:60eefd3f7d4309443f485afae128221d3e5ccd556b9abaf8b970e53ccf57f5cb"
+    },
+    "reviewed_worker_reset": {
+      "path": "artifacts/native-modal-repair/stopped-worker-restoration-v1/report.json",
+      "sha256": "5a39713054af9e7cfcf631b40004809b1e33692bde8d8ef0d3dab93513a802f9",
+      "id": "sha256:15470af17739b2d76cbd41c835bc952302a58a1d68c9850f731d26bbc845427e"
+    },
+    "owner_panel_plan": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-map-settling-panel-v1.json",
+      "sha256": "ba5e548e4ab69435e87b15302d6661add0581b5cacc9fcad30ce6bea8eb46550",
+      "id": "sha256:0b4bb56ccc0f0ced856b91d22954d1c3aeb7a9b424ba8a0a38eea59cda013589"
+    }
+  },
+  "repository_checks": "Exact-source check receipt is recorded separately under artifacts/validation/selection-flows-v1.",
+  "latest_environment": {
+    "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v40.json",
+    "sha256": "4796d07cccb706344f1b5f67f242efbdee2cf048630ecc4e00daac6707be31a7",
+    "id": "sha256:8c46195683d44dc645070cf21bb41960508da0484fedf880f0cb9638965fd8d2"
+  },
+  "worker_ready_for_new_panel": true,
+  "current_source_tuple": {
+    "CLI": 52,
+    "official_connector": 24,
+    "worker": 23,
+    "shared_input_converter": 14,
+    "input_layout": 11,
+    "environment": 40
+  },
+  "long_owner_panel": {
+    "launcher": "scripts/compare-selection-flows-v13.sh",
+    "planned_controls": 4,
+    "maximum_game_starts": 8,
+    "expected_minutes": [
+      20,
+      30
+    ],
+    "per_pair_wall_seconds": 600,
+    "shutdown_reserve_seconds": 45,
+    "per_pair_launch_wall_seconds": 900,
+    "outer_wall_seconds": 5400,
+    "separate_repository_check_wall_seconds": 600,
+    "preflight_valid": true,
+    "games_launched_in_preparation": 0,
+    "workspace_absent": true,
+    "approved_replacement_world": "p3/world411",
+    "fresh_world": "p3/world415",
+    "potion_replay_world412_not_repeated": true,
+    "ordinary_PPO_eligible": false,
+    "automatic_follow_up": false,
+    "storage_includes_shared_app": true,
+    "all_four_targets_require_requalification_under_one_tuple": true
+  },
+  "Python_operational_tests": 10,
+  "broader_canary_recipe_frozen": false,
+  "static_typing": {
+    "config": "mypy.ini",
+    "sha256": "72363653bfa6bea06f62144144a93e1cc4d32960dc9e946dd8d86ffaf57fddaf",
+    "src_and_tests_checked": true,
+    "checked_source_files": 712,
+    "strict_body_checks_retained": true,
+    "normal_python_import_reexports_only_for": "spireshift.native_flow_session_v12",
+    "pinned_runtime_and_test_files_unchanged": true
+  },
+  "report_id": "sha256:bdeb0d8a978355103b5f7590c3862f092c778d2481c79ed8d201d462bf2652e7"
+}

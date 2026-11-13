@@ -1,0 +1,28 @@
+{
+  "schema_version": "engine-rest-bridge-config-v1",
+  "stage": "privileged_rest_save_public_action_differential_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-cli-rest-bridge-v7.json",
+  "native_config_id": "sha256:257f0fbda14bd4220c20da016ed6175eb26bc14dab3a529c0671045217330e00",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "journey_bridge_config": "configs/engine-qualification/sts2-v0.111.0-first-combat-bridges-v1.json",
+  "journey_bridge_report_id": "sha256:7fc6aaa51ae8cb3812cc57fa998a284b861afd871b6278712606ebab6b14f66a",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v5",
+  "seed": "SPIRESHIFTRESTBRIDGE003",
+  "scenario": "tent-heal-cancel-smith",
+  "training_allowed": false,
+  "helpers_sha256": {
+    "engine-rest-shipped-probe.mjs": "ee5d89975819100a2abb2af8826d0a49ff9cd585ff96c5e27f8267d195d927b0",
+    "engine-rest-bridge-contract.mjs": "982815ae6908d35e7848a6ffcbac9cbc2caa48f425c691d3ef8b3df2e39b513e",
+    "engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+  },
+  "rest_tutorial_baseline": {
+    "path": "artifacts/engine-assets/sts2-v0.111.0-rest-tutorial-seen-v1/progress.save",
+    "sha256": "d531c1ab9bd577e3abbeba0bad29a89bb7c6a40ae7f2e45375deb0aca47c8135",
+    "source_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridge-smoke-v2/shipped-report.json",
+    "source_report_id": "sha256:f05e17b87f8846a299ede50e7aafbbba89dd5cd5df797c2184c9875cd0bcde4b",
+    "scope": "native_generated_rest_site_ftue_seen_only_not_other_tutorial_or_fresh_profile_control"
+  }
+}

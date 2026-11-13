@@ -1,0 +1,37 @@
+{
+  "expected_toolchain": {
+    "csc_sha256": "6773e3c868c74a2d293750f4e6b44b93090b3def33639887e802aab6666d8496",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+    "reference_version": "9.0.20",
+    "sdk_version": "10.0.401"
+  },
+  "clone_cache": "/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v35/build-n5e9h4ub/candidate",
+  "local_patch": "/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/patches/engine/sts2-cli-v0.111.0-transition-views-v46.patch",
+  "local_patch_sha256": "d6a7be3509f338ad5155b09f8c89ff3889288226dbaa9afcee56dcfa60e74ec0",
+  "expected_source_diff_id": "5cc914dc1515946c7c33cf60187a51a84286f020b8923d7b0a52080fb58b7d7d",
+  "schema_version": "native-layout-export-config-v1",
+  "games_allowed": false,
+  "workspace": "artifacts/native-transition-repair/native-build-v46",
+  "expected_baseline": {
+    "artifact_sha256": "f1514466352ca96f73deaa2d82a1a632b5b4a706c47e0ec5d8f5e978d4753afd",
+    "artifact_mvid": "db366e9a-3a27-4b4f-8f28-1d55bf53a06f",
+    "godot_stub_sha256": "4cbc15bd3058ab2104c4c7b9764aa2e4e72dd6b823ed1f031feba068d5bdb4b1",
+    "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+    "source_diff_id": "eeddfcc92f065402e061d745a73dd95eed3f86d15f1fda5b146bd56aae97ac54",
+    "runtime_dependencies_id": "4539331c8760d932eaa8fb159fe9224100b6c8eef9c05dfd27c524591ef9d145"
+  },
+  "expected_repaired": {
+    "artifact_sha256": "f2095502add8e3a07ab4906ca1073914046a1cfec6cec0a438b7688606ea39b7",
+    "artifact_mvid": "65a427b1-9f6c-4797-800f-b520c0e84777",
+    "godot_stub_sha256": "1a59c1488400256faf29905ae088ef0fefc8e313f2ee82593a78447f4b2262dd",
+    "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+    "source_diff_id": "5cc914dc1515946c7c33cf60187a51a84286f020b8923d7b0a52080fb58b7d7d",
+    "runtime_dependencies_id": "7401730fcb44b4c824432d75d9e3ea543a2bbef033b422e6907b9061f5e97ae6"
+  },
+  "sources": {
+    "scripts/engine-cli-local-build.mjs": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a",
+    "patches/engine/sts2-cli-v0.111.0-transition-views-v46.patch": "d6a7be3509f338ad5155b09f8c89ff3889288226dbaa9afcee56dcfa60e74ec0"
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-policy-training-config-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-policy-training-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "foundation_config": {
+      "$ref": "combat-foundation-audit-config-v1.json"
+    },
+    "foundation_report_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "foundation_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "validation_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "optimization": {
+      "type": "object",
+      "properties": {
+        "epochs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "anchor_strength": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "proximal_strength": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gradient_clip": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "adagrad_epsilon": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "vector_dimension": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 65536
+        },
+        "normalization": {
+          "const": "equal_signal_run_equal_signal_state_margin_weighted_pairs"
+        }
+      },
+      "required": [
+        "epochs",
+        "learning_rate",
+        "anchor_strength",
+        "proximal_strength",
+        "gradient_clip",
+        "adagrad_epsilon",
+        "vector_dimension",
+        "normalization"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "maximum_accuracy_drop": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum_mean_total_variation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum_pair_loss_increase": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximum_regret_increase": {
+          "type": "number",
+          "minimum": 0
+        },
+        "minimum_preference_loss_improvement": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "maximum_accuracy_drop",
+        "maximum_mean_total_variation",
+        "maximum_pair_loss_increase",
+        "maximum_regret_increase",
+        "minimum_preference_loss_improvement"
+      ],
+      "additionalProperties": false
+    },
+    "fresh_confirmation": {
+      "type": "object",
+      "properties": {
+        "partition": {
+          "const": "train"
+        },
+        "run_offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "run_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seeds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "prior_train_prefix_stop": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comparison": {
+          "const": "paired_policy_only_candidate_vs_frozen_parent"
+        },
+        "max_decisions_per_run": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "primary_metric": {
+          "const": "terminal_full_run_victory"
+        },
+        "promotion_rule": {
+          "const": "no_automatic_promotion_auxiliary_floor_insufficient"
+        },
+        "launch": {
+          "const": "separate_owner_run_after_eligible_training_review"
+        },
+        "claim_scope": {
+          "const": "fresh_train_development_confirmation_not_final_test"
+        }
+      },
+      "required": [
+        "partition",
+        "run_offset",
+        "run_count",
+        "seeds",
+        "prior_train_prefix_stop",
+        "comparison",
+        "max_decisions_per_run",
+        "primary_metric",
+        "promotion_rule",
+        "launch",
+        "claim_scope"
+      ],
+      "additionalProperties": false
+    },
+    "resource_limits": {
+      "type": "object",
+      "properties": {
+        "wall_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cpu_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "memory_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "storage_bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "wall_seconds",
+        "cpu_seconds",
+        "memory_bytes",
+        "storage_bytes"
+      ],
+      "additionalProperties": false
+    },
+    "frozen_parent_metrics": {
+      "type": "object",
+      "required": [
+        "maximum_floor_distribution",
+        "tactical_death_risk",
+        "terminal_value",
+        "terminal_value_status"
+      ],
+      "properties": {
+        "maximum_floor_distribution": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "tactical_death_risk": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "terminal_value": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "terminal_value_status": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "config_id",
+    "foundation_config",
+    "foundation_report_path",
+    "foundation_report_id",
+    "validation_path",
+    "validation_dataset_id",
+    "optimization",
+    "limits",
+    "fresh_confirmation",
+    "resource_limits",
+    "frozen_parent_metrics"
+  ],
+  "additionalProperties": false
+}

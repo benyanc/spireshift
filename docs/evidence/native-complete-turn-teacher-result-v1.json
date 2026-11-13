@@ -1,0 +1,250 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": "completed_flat_feedback_no_admitted_improvements_test_bounded_combat_continuation_before_scaling",
+  "assessment_resources": {
+    "cpu_seconds": 20.800775827000002,
+    "peak_resident_memory_bytes": 193118208,
+    "report_id": "sha256:896b9201a2f79a1a4b7e4eb9bb9fcc2b91edc852aaabf536f882ff24036b8198",
+    "wall_seconds": 33.562159167137
+  },
+  "attempts": {
+    "failed": 0,
+    "proposals": 65,
+    "scored_comparisons": 504,
+    "skipped": 0,
+    "total": 569,
+    "unique_plans": 63
+  },
+  "automatic_training_follows": false,
+  "checkpoint_promoted": false,
+  "collection_resources": [
+    {
+      "cpu_seconds": 664.0623341899998,
+      "final_storage_bytes": 428131567,
+      "path": "artifacts/resources/native-complete-turn-teacher-pilot-v1-1.json",
+      "peak_resident_memory_bytes": 425443328,
+      "report_id": "sha256:74a1b8718f77ce66708d31f8cad47ce247807a32fe817e1900876d1225cb04df",
+      "wall_seconds": 784.1584021670278
+    },
+    {
+      "cpu_seconds": 618.2838314289999,
+      "final_storage_bytes": 784460800,
+      "path": "artifacts/resources/native-complete-turn-teacher-pilot-v1-2.json",
+      "peak_resident_memory_bytes": 392986624,
+      "report_id": "sha256:dc6d9f25550508698d60d5f75ee802486938527a2535132bbe49c2cfcc670a53",
+      "wall_seconds": 790.3777045831084
+    },
+    {
+      "cpu_seconds": 109.30809158699992,
+      "final_storage_bytes": 850257872,
+      "path": "artifacts/resources/native-complete-turn-teacher-pilot-v1-3.json",
+      "peak_resident_memory_bytes": 348930048,
+      "report_id": "sha256:25fc72adc4ac8bd8b7ae374a8cf0687435494f599079868548f11ad548ef64c9",
+      "wall_seconds": 148.03009287500754
+    }
+  ],
+  "collection_totals": {
+    "collection_cpu_seconds_sum_of_sessions": 1391.6542572059998,
+    "collection_final_storage_bytes_cumulative_not_summed": 850257872,
+    "collection_peak_resident_memory_bytes": 425443328,
+    "collection_wall_seconds_sum_of_sessions": 1722.5661996251438
+  },
+  "comparison_with_prior_single_action_pilot_not_causal": true,
+  "conditional_replicates_not_independent_worlds": true,
+  "config_id": "sha256:43f7de10c4b6fd6ddacc047ccaa0386222194563a37106db10cf2851f5fc1752",
+  "elite_boundary_example": {
+    "each_plan_final_floors": [
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "first_turn": {
+      "enemy_hp": 53,
+      "player_hp": 28
+    },
+    "posthoc_diagnostic_not_training_reward": true,
+    "root_index": 4,
+    "second_turn": {
+      "enemy_hp": 84,
+      "player_hp": 20
+    }
+  },
+  "full_pilot_behavior_reaudit_not_run_expected_over_five_minutes": true,
+  "game_apps_created": 0,
+  "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+  "new_games": 0,
+  "next_work": "qualify_finite_bounded_combat_planner_continuation_and_candidate_control_before_more_teacher_collection_or_student_fitting",
+  "optimizer_steps": 0,
+  "ordinary_PPO_eligible": false,
+  "posthoc_boundary_and_leave_one_out_analysis": true,
+  "protected_players": [
+    {
+      "Adam_steps": 5658,
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "state_sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+    },
+    {
+      "Adam_steps": 6045,
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "state_sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+    }
+  ],
+  "receipt_and_outcome_auditor_sha256": "5d31e90ec6f9282d9ffcd77e4c5935dcd594fc1af967ea196fc0b623a191ac35",
+  "results": {
+    "act_clearing_comparison_branches": 5,
+    "admitted_preferences": 0,
+    "alternatives_with_different_public_boundary": 40,
+    "different_boundary_alternatives_with_identical_paired_returns": 18,
+    "distinct_original_worlds": 8,
+    "full_run_wins": 0,
+    "maximum_floor": 22,
+    "paired_alternative_counts": {
+      "negative_pairs": 65,
+      "positive_pairs": 25,
+      "tied_pairs": 350
+    },
+    "roots_where_greedy_reference_has_highest_sample_mean": 6,
+    "roots_with_all_branch_returns_identical": 2,
+    "roots_with_different_plan_means": 6,
+    "smallest_positive_mean_improvement_sign_p": 0.14453125,
+    "tied_pair_fraction": 0.7954545454545454
+  },
+  "root_summaries": [
+    {
+      "all_branches_same_return": false,
+      "alternatives_with_different_public_boundary": 5,
+      "different_boundary_alternatives_with_identical_paired_returns": 0,
+      "distinct_public_boundary_ids": 5,
+      "encounter_type": "elite",
+      "numerical_seed": 2,
+      "plans": 7,
+      "reference_has_highest_sample_mean": true,
+      "root_index": 0,
+      "source_floor": 12
+    },
+    {
+      "all_branches_same_return": false,
+      "alternatives_with_different_public_boundary": 5,
+      "different_boundary_alternatives_with_identical_paired_returns": 0,
+      "distinct_public_boundary_ids": 3,
+      "encounter_type": "normal",
+      "numerical_seed": 2,
+      "plans": 7,
+      "reference_has_highest_sample_mean": true,
+      "root_index": 1,
+      "source_floor": 5
+    },
+    {
+      "all_branches_same_return": false,
+      "alternatives_with_different_public_boundary": 1,
+      "different_boundary_alternatives_with_identical_paired_returns": 0,
+      "distinct_public_boundary_ids": 2,
+      "encounter_type": "normal",
+      "numerical_seed": 2,
+      "plans": 6,
+      "reference_has_highest_sample_mean": true,
+      "root_index": 2,
+      "source_floor": 7
+    },
+    {
+      "all_branches_same_return": true,
+      "alternatives_with_different_public_boundary": 12,
+      "different_boundary_alternatives_with_identical_paired_returns": 12,
+      "distinct_public_boundary_ids": 10,
+      "encounter_type": "boss",
+      "numerical_seed": 2,
+      "plans": 13,
+      "reference_has_highest_sample_mean": true,
+      "root_index": 3,
+      "source_floor": 17
+    },
+    {
+      "all_branches_same_return": true,
+      "alternatives_with_different_public_boundary": 5,
+      "different_boundary_alternatives_with_identical_paired_returns": 5,
+      "distinct_public_boundary_ids": 5,
+      "encounter_type": "elite",
+      "numerical_seed": 3,
+      "plans": 6,
+      "reference_has_highest_sample_mean": true,
+      "root_index": 4,
+      "source_floor": 7
+    },
+    {
+      "all_branches_same_return": false,
+      "alternatives_with_different_public_boundary": 4,
+      "different_boundary_alternatives_with_identical_paired_returns": 1,
+      "distinct_public_boundary_ids": 5,
+      "encounter_type": "normal",
+      "numerical_seed": 3,
+      "plans": 9,
+      "reference_has_highest_sample_mean": false,
+      "root_index": 5,
+      "source_floor": 6
+    },
+    {
+      "all_branches_same_return": false,
+      "alternatives_with_different_public_boundary": 7,
+      "different_boundary_alternatives_with_identical_paired_returns": 0,
+      "distinct_public_boundary_ids": 8,
+      "encounter_type": "normal",
+      "numerical_seed": 3,
+      "plans": 9,
+      "reference_has_highest_sample_mean": false,
+      "root_index": 6,
+      "source_floor": 5
+    },
+    {
+      "all_branches_same_return": false,
+      "alternatives_with_different_public_boundary": 1,
+      "different_boundary_alternatives_with_identical_paired_returns": 0,
+      "distinct_public_boundary_ids": 2,
+      "encounter_type": "normal",
+      "numerical_seed": 3,
+      "plans": 6,
+      "reference_has_highest_sample_mean": true,
+      "root_index": 7,
+      "source_floor": 6
+    }
+  ],
+  "saved_outcome_assessment_id": "sha256:86309ed28d1387779367f4f27a6f195fc6b15c64ebb5ad367fb7d2f2b4465f57",
+  "schema_version": "native-complete-turn-teacher-portable-result-v1",
+  "source_report_id": "sha256:132e2cc98baebd27071a8f4815120885a209bcfbc3bc52ff53b9d481b6f39678",
+  "verification": {
+    "branch_bindings_and_terminal_returns_reconstructed": true,
+    "branch_receipts_verified": 569,
+    "candidate_freeze_and_all_tables_reconstructed": true,
+    "comparison_histories_decoded": 0,
+    "decision_counts_from_sealed_headers": 85090,
+    "native_delivery_semantically_reaudited": false,
+    "native_journal_bytes_verified": true,
+    "original_players_and_full_Adam_unchanged": true,
+    "production_choice_probabilities_reconstructed": false,
+    "proposal_boundaries_reconstructed": 65,
+    "proposal_decisions_decoded": 9942,
+    "proposal_turn_steps_reconstructed_without_policy_inference": 225,
+    "source_files_verified": 33426,
+    "strict_preference_gate_unchanged": true
+  },
+  "repository_verification": {
+    "report_id": "sha256:d9c8bdf5fa1b7fc8c9ae039052133d5dc5e6bee83d3cdead361686a17be50fef",
+    "status": "completed",
+    "passed_tests": 1979,
+    "strict_types_source_files": 396,
+    "format_lint_and_CSharp_protocol_passed": true,
+    "wall_seconds": 119.6502051660791,
+    "cpu_seconds": 106.502030527,
+    "peak_resident_memory_bytes": 362741760,
+    "tracked_changes_documentation_only": true
+  },
+  "evidence_id": "sha256:2c56365cc4da42c10aeab9add8a4b458ba8d17e05d8698ddce83ba8826d63917"
+}

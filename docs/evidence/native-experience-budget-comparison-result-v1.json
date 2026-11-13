@@ -1,0 +1,422 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": {
+    "id": "sha256:374c76fd063703354cb108a2f6e8a75293b0e2827dd86e64f99fbbcd38f8347b",
+    "path": "artifacts/native-experience-assessment/sts2-v0.111.0-a8-comparison-v1/assessment.json"
+  },
+  "automatic_training_follows": false,
+  "baseline_refits": 0,
+  "causal_scope": "four_times_fresh_games_per_update_round_with_changed_batch_critic_support_and_training_compute",
+  "checkpoint_promoted": false,
+  "data_variety_alone_causally_isolated": false,
+  "evidence_id": "sha256:584b60a3b8dd4321a5a2754e89e00d6f03067852750649925654def068869fce",
+  "fresh_evaluation": {
+    "batch128": {
+      "act_clearing_games": 0,
+      "attempts": 64,
+      "best_floor": 17,
+      "cpu_seconds": 185.93534162599994,
+      "decisions": 9565,
+      "mean_cpu_seconds": 2.90523971290625,
+      "mean_floor": 11.15625,
+      "wins": 0
+    },
+    "batch32": {
+      "act_clearing_games": 3,
+      "attempts": 64,
+      "best_floor": 23,
+      "cpu_seconds": 196.68823478800002,
+      "decisions": 10173,
+      "mean_cpu_seconds": 3.0732536685625,
+      "mean_floor": 11.640625,
+      "wins": 0
+    },
+    "initial": {
+      "act_clearing_games": 0,
+      "attempts": 64,
+      "best_floor": 17,
+      "cpu_seconds": 190.32538441699995,
+      "decisions": 9798,
+      "mean_cpu_seconds": 2.973834131515625,
+      "mean_floor": 11.1875,
+      "wins": 0
+    }
+  },
+  "game_apps_created": 0,
+  "games_launched": 0,
+  "github_issues_updated": [
+    35,
+    143,
+    146
+  ],
+  "interpretation": {
+    "all_game_mechanics_exhaustively_verified": false,
+    "floor_differences_uncertain": true,
+    "full_run_learning_improvement_established": false,
+    "no_automatic_unchanged_scale_up_justified": true,
+    "no_observed_wins_does_not_prove_zero_true_win_rate": true,
+    "smaller_arm_has_limited_auxiliary_score_signal": true
+  },
+  "last_owner_session_not_total_experiment": {
+    "cumulative_storage_bytes": 1386624176,
+    "resource_id": "sha256:8a2f6f37e3654ca2d2c76ae7516790de7fe7271ca040553ff5afde3730adee71",
+    "wall_seconds": 508.840148499934
+  },
+  "next_order": [
+    "finish_remaining_three_sealed_TRAIN_feedback_diagnostic_cohorts_if_needed",
+    "qualify_useful_TRAIN_only_native_teacher_or_curriculum_lessons",
+    "bounded_student_learning_and_fresh_full_game_test_as_separate_intervention"
+  ],
+  "optimizer_updates": 0,
+  "original_Adam_counters": [
+    5658,
+    6045
+  ],
+  "preserved_finals": [
+    {
+      "arm": "batch128",
+      "model_id": "sha256:8011e9f69f61bce2fd59e8bb5b6275c15249e65d942d0a27df73361cf8811cfb",
+      "optimizer_steps": 6465,
+      "player": 2,
+      "state_id": "sha256:a3e3666634ac4612f200078384b58039a2f9b61e300c860cfeb1f8a297f8ea43",
+      "state_path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/chunks/fit-p2-batch128-r02/state.json"
+    },
+    {
+      "arm": "batch32",
+      "model_id": "sha256:9dd065690702d84be405df19679b22e45e2ac53a167ff48ffad89cf391eba340",
+      "optimizer_steps": 5853,
+      "player": 2,
+      "state_id": "sha256:34bd88c2d309bb372a3c3aaab59d86003bebedf19154e35e6a6a4acdf2ff2400",
+      "state_path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/chunks/fit-p2-batch32-r02/state.json"
+    },
+    {
+      "arm": "batch32",
+      "model_id": "sha256:513ee2be792f736dc1b3d5dc6675cba29f81221c6d25bc9e35ed6fcd54aed050",
+      "optimizer_steps": 6273,
+      "player": 3,
+      "state_id": "sha256:6547c3e5a8f8b6692acc70ff7523a9b8970d543be4c502fbcf865ce0e5002c9e",
+      "state_path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/chunks/fit-p3-batch32-r02/state.json"
+    },
+    {
+      "arm": "batch128",
+      "model_id": "sha256:b9ef072430eb30ae56a7dd712966090e88c52562b5c072bd76141973b231a93e",
+      "optimizer_steps": 6990,
+      "player": 3,
+      "state_id": "sha256:395f20fb199f56724b1fc4de76894d8b952b0dacab9e22671963d98bc26782f9",
+      "state_path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/chunks/fit-p3-batch128-r02/state.json"
+    }
+  ],
+  "repository_verification": {
+    "csharp_protocol": true,
+    "formatted_files": 696,
+    "id": "sha256:c05d80584fe8463b4a9eadd301cfb24063f2411c8c8576e70fa761eabb7fcd82",
+    "passed_tests": 2414,
+    "path": "artifacts/resources/native-experience-result-repository-check-v1.json",
+    "skipped_tests": 5,
+    "strict_type_files": 511,
+    "wall_seconds": 137.36013245792128
+  },
+  "saved_only_audit_resource": {
+    "cpu_seconds": 24.939247929,
+    "final_storage_bytes": 8807,
+    "id": "sha256:41e8d1e5380a320bab999b2f49d20f49dfaad5923a82e2ee3b69a98791ec0b9f",
+    "path": "artifacts/resources/native-experience-result-audit-v1.json",
+    "peak_resident_memory_bytes": 159039488,
+    "wall_seconds": 49.378296583890915
+  },
+  "schema_version": "native-experience-budget-comparison-result-evidence-v1",
+  "source_report": {
+    "id": "sha256:dc95bb4fa6c23f26885f0388199e3227a76dfd2494dcf4e470729f75eeff792d",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "status": "complete_no_full_run_improvement_established",
+  "summary": {
+    "checkpoint_promoted": false,
+    "failure_and_unattempted_values": 0,
+    "fixed_parent_initializers": 2,
+    "independent_development_worlds": 32,
+    "independent_training_worlds": 256,
+    "interval_covers_population_of_initializers": false,
+    "interval_method": "world_clustered_bootstrap_jointly_across_two_fixed_parents",
+    "players": [
+      {
+        "arms": {
+          "batch128": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 11.96875,
+            "recorded": 32,
+            "wins": 0
+          },
+          "batch32": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_completed_acts": 0.0625,
+            "mean_floor": 12.53125,
+            "recorded": 32,
+            "wins": 0
+          },
+          "initial": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 11.90625,
+            "recorded": 32,
+            "wins": 0
+          }
+        },
+        "player": 2
+      },
+      {
+        "arms": {
+          "batch128": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 10.34375,
+            "recorded": 32,
+            "wins": 0
+          },
+          "batch32": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_completed_acts": 0.03125,
+            "mean_floor": 10.75,
+            "recorded": 32,
+            "wins": 0
+          },
+          "initial": {
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 10.46875,
+            "recorded": 32,
+            "wins": 0
+          }
+        },
+        "player": 3
+      }
+    ],
+    "pooled_paired_comparisons": {
+      "batch128_minus_batch32": {
+        "completed_acts": {
+          "interval95": [
+            -0.09375,
+            0.0
+          ],
+          "mean": -0.046875
+        },
+        "maximum_floor": {
+          "interval95": [
+            -1.171875,
+            0.171875
+          ],
+          "mean": -0.484375
+        },
+        "training_return": {
+          "interval95": [
+            -0.007226239603899724,
+            -0.0005323962522706899
+          ],
+          "mean": -0.003532783532577016
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      },
+      "batch128_minus_initial": {
+        "completed_acts": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        },
+        "maximum_floor": {
+          "interval95": [
+            -0.75,
+            0.625
+          ],
+          "mean": -0.03125
+        },
+        "training_return": {
+          "interval95": [
+            -0.0009837711127300708,
+            0.000781537334731252
+          ],
+          "mean": -6.0223310018523313e-05
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      },
+      "batch32_minus_initial": {
+        "completed_acts": {
+          "interval95": [
+            0.0,
+            0.09375
+          ],
+          "mean": 0.046875
+        },
+        "maximum_floor": {
+          "interval95": [
+            -0.328125,
+            1.1875
+          ],
+          "mean": 0.453125
+        },
+        "training_return": {
+          "interval95": [
+            0.00039119255934550427,
+            0.007179851860127651
+          ],
+          "mean": 0.0034725602225584924
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      }
+    },
+    "primary_comparison": "batch128_minus_batch32",
+    "terminal_victory_primary": true,
+    "training_attempts_or_decisions_are_independent_worlds": false
+  },
+  "training_cohorts": [
+    {
+      "act_clearing_games": 0,
+      "arm": "batch32",
+      "attempts": 32,
+      "cpu_seconds": 81.78936458099999,
+      "distinct_owned_card_definitions": 66,
+      "distinct_owned_relic_definitions": 37,
+      "full_wins": 0,
+      "games_reaching_floor_17": 5,
+      "mean_floor": 9.8125,
+      "player": 2,
+      "round": 1,
+      "updates": 99
+    },
+    {
+      "act_clearing_games": 0,
+      "arm": "batch128",
+      "attempts": 128,
+      "cpu_seconds": 316.569463666,
+      "distinct_owned_card_definitions": 111,
+      "distinct_owned_relic_definitions": 75,
+      "full_wins": 0,
+      "games_reaching_floor_17": 22,
+      "mean_floor": 10.0703125,
+      "player": 2,
+      "round": 1,
+      "updates": 384
+    },
+    {
+      "act_clearing_games": 4,
+      "arm": "batch128",
+      "attempts": 128,
+      "cpu_seconds": 450.36913162600007,
+      "distinct_owned_card_definitions": 111,
+      "distinct_owned_relic_definitions": 95,
+      "full_wins": 0,
+      "games_reaching_floor_17": 19,
+      "mean_floor": 10.0,
+      "player": 3,
+      "round": 1,
+      "updates": 456
+    },
+    {
+      "act_clearing_games": 0,
+      "arm": "batch32",
+      "attempts": 32,
+      "cpu_seconds": 89.02089224999999,
+      "distinct_owned_card_definitions": 68,
+      "distinct_owned_relic_definitions": 45,
+      "full_wins": 0,
+      "games_reaching_floor_17": 3,
+      "mean_floor": 9.53125,
+      "player": 3,
+      "round": 1,
+      "updates": 108
+    },
+    {
+      "act_clearing_games": 1,
+      "arm": "batch128",
+      "attempts": 128,
+      "cpu_seconds": 342.2426212379998,
+      "distinct_owned_card_definitions": 109,
+      "distinct_owned_relic_definitions": 91,
+      "full_wins": 0,
+      "games_reaching_floor_17": 35,
+      "mean_floor": 11.6875,
+      "player": 2,
+      "round": 2,
+      "updates": 423
+    },
+    {
+      "act_clearing_games": 0,
+      "arm": "batch32",
+      "attempts": 32,
+      "cpu_seconds": 81.28949716799998,
+      "distinct_owned_card_definitions": 61,
+      "distinct_owned_relic_definitions": 44,
+      "full_wins": 0,
+      "games_reaching_floor_17": 5,
+      "mean_floor": 10.1875,
+      "player": 2,
+      "round": 2,
+      "updates": 96
+    },
+    {
+      "act_clearing_games": 0,
+      "arm": "batch32",
+      "attempts": 32,
+      "cpu_seconds": 87.90840741699999,
+      "distinct_owned_card_definitions": 63,
+      "distinct_owned_relic_definitions": 48,
+      "full_wins": 0,
+      "games_reaching_floor_17": 2,
+      "mean_floor": 10.0,
+      "player": 3,
+      "round": 2,
+      "updates": 120
+    },
+    {
+      "act_clearing_games": 5,
+      "arm": "batch128",
+      "attempts": 128,
+      "cpu_seconds": 385.5943362040001,
+      "distinct_owned_card_definitions": 116,
+      "distinct_owned_relic_definitions": 110,
+      "full_wins": 0,
+      "games_reaching_floor_17": 26,
+      "mean_floor": 10.8984375,
+      "player": 3,
+      "round": 2,
+      "updates": 489
+    }
+  ],
+  "verification": {
+    "exact_imports_and_Adam_lineage_verified": true,
+    "frozen_final_ids_and_summary_reproduce": true,
+    "saved_evaluation_attempts": 192,
+    "saved_training_attempts": 640,
+    "source_files_verified": 66324,
+    "source_full_states_unchanged": true,
+    "source_update_steps": 2175,
+    "technical_failures": 0,
+    "verified_units": 283
+  }
+}

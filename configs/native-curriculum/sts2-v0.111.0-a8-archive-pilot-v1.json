@@ -1,0 +1,121 @@
+{
+  "schema_version": "native-a8-archive-batch-v1",
+  "batch": "pilot-v1-verified-start",
+  "game_build": "v0.111.0+41cef1ea",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "replay_implementation": {
+    "src/spireshift/native_a8_replay_probe.py": "cbff9f07a7bb733468262aaf5722a399f1bef9d0b51e0847308c745cd4260c42",
+    "src/spireshift/native_a8_replay_source.py": "8677d6b184a19b9d0e7ecb79df831c3976db29e875e7c5dd1c12986c3be116c9"
+  },
+  "wall_seconds": 270,
+  "case_wall_seconds": 115,
+  "development_seeds": [
+    "SP1RESH1FTA8ARD001",
+    "SP1RESH1FTA8ARD002",
+    "SP1RESH1FTA8ARD003",
+    "SP1RESH1FTA8ARD004",
+    "SP1RESH1FTA8ARD005",
+    "SP1RESH1FTA8ARD006",
+    "SP1RESH1FTA8ARD007",
+    "SP1RESH1FTA8ARD008",
+    "SP1RESH1FTA8ARD009",
+    "SP1RESH1FTA8ARD010",
+    "SP1RESH1FTA8ARD011",
+    "SP1RESH1FTA8ARD012"
+  ],
+  "final_test_seeds": [
+    "SP1RESH1FTA8ART001",
+    "SP1RESH1FTA8ART002",
+    "SP1RESH1FTA8ART003",
+    "SP1RESH1FTA8ART004",
+    "SP1RESH1FTA8ART005",
+    "SP1RESH1FTA8ART006",
+    "SP1RESH1FTA8ART007",
+    "SP1RESH1FTA8ART008",
+    "SP1RESH1FTA8ART009",
+    "SP1RESH1FTA8ART010",
+    "SP1RESH1FTA8ART011",
+    "SP1RESH1FTA8ART012"
+  ],
+  "cases": [
+    {
+      "run_id": "ee2ffb605c67742f",
+      "seed": "5SELZ5UWJ3SK",
+      "source": {
+        "path": "artifacts/native-a8-replay-source/qualification-ee2ffb605c67742f.ndjson",
+        "sha256": "b348c86840e35e9e23547fa380bb377ffe1cf88482e83b7313fae08f84c373df"
+      },
+      "saved": {
+        "path": "docs/evidence/native-a8-archive-replay-v1.json",
+        "sha256": "9e9e9e959eda26798790e79a073da25fc3905dc16b105b6aa20926acd7fea985"
+      }
+    },
+    {
+      "run_id": "3b747e9621031ae1",
+      "seed": "CQUS5RS5KGWY",
+      "source": {
+        "path": "artifacts/native-a8-replay-source/qualification-3b747e9621031ae1.ndjson",
+        "sha256": "9970fa6943adb75a704167e4a25a5200598b5323ca5e99483a23d9462fdf711a"
+      }
+    },
+    {
+      "run_id": "9dc545337e0fc3eb",
+      "seed": "R7NX1ZQYF1Y3",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/sources/9dc545337e0fc3eb.ndjson",
+        "sha256": "b6b8eaeed4a1d5e87e99b505561c04010ed106467ca90e6f063539b79625576f"
+      }
+    },
+    {
+      "run_id": "3cb0429d17be9210",
+      "seed": "KW29JLFEXV15",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/sources/3cb0429d17be9210.ndjson",
+        "sha256": "fddef1ec377f6ba1e001a31473cc3c4fb530cdba53dc65145ff4439d3a9b868a"
+      }
+    },
+    {
+      "run_id": "6739ccb495f9b471",
+      "seed": "U9FFKTML1M9G",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/sources/6739ccb495f9b471.ndjson",
+        "sha256": "44369e70c0855cdceb85e17725ac8ef2b15fd11913d7dda5d75e5285ccd4d347"
+      }
+    },
+    {
+      "run_id": "6f7d841fbdf0bb23",
+      "seed": "XLWMFZGUB1P7",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/sources/6f7d841fbdf0bb23.ndjson",
+        "sha256": "8b93389e558c83072406ca0fdf315d490fde1924f663456563aa4128dd5b3236"
+      }
+    },
+    {
+      "run_id": "28b20eb6e1e88812",
+      "seed": "68NJLNJQRCLB",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/sources/28b20eb6e1e88812.ndjson",
+        "sha256": "c4a2b38a1bc8fed3e14e2a8504919bf75727b4b456d34d5a6d50c58336b97068"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-selection-flows-control-v6.json",
+    "sha256": "a3e27b2af66a1d936b197ecc98db632253ac4c899496af6a7708cd0cdf1a1b60"
+  },
+  "wall_seconds": 290,
+  "cpu_seconds": 580,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

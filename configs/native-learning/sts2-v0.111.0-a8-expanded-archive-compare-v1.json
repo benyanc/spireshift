@@ -1,0 +1,44 @@
+{
+  "control_workspace": "artifacts/native-a8-archive-fitting/expanded-comparison-control-v2",
+  "development": [
+    "SP1RESH1FTA8AEXD001",
+    "SP1RESH1FTA8AEXD002",
+    "SP1RESH1FTA8AEXD003",
+    "SP1RESH1FTA8AEXD004",
+    "SP1RESH1FTA8AEXD005",
+    "SP1RESH1FTA8AEXD006",
+    "SP1RESH1FTA8AEXD007",
+    "SP1RESH1FTA8AEXD008",
+    "SP1RESH1FTA8AEXD009",
+    "SP1RESH1FTA8AEXD010",
+    "SP1RESH1FTA8AEXD011",
+    "SP1RESH1FTA8AEXD012"
+  ],
+  "ending_world": "SP1RESH1FTA8AEXC004",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fit_result": {
+    "path": "artifacts/native-a8-archive-fitting/expanded-fit-v1/report.json",
+    "sha256": "2db000f8cf9b6ae3ad2e0d423231053ddaf59f40c276b78a8de35d75f91d1b07"
+  },
+  "implementation": {
+    "scripts/compare-a8-expanded-archive-v1.sh": "31949eb8362a937cf021465a57cd71bd8f48ee48d14cc36e1e24dfb28e7d9269",
+    "src/spireshift/native_a8_archive_expand_compare.py": "92a8b6c75a4f664fa2a1e663a10ade2ecea56a6148cd52fe7d2b9a73ee3fe163",
+    "src/spireshift/native_a8_archive_expand_fit.py": "65fc470ce52da94cfff2559e34cdee384be6c7d377b3fc92f03959cc7c1d4087"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "prefix_world": "SP1RESH1FTA8AEXC003",
+  "schema_version": "native-a8-expanded-archive-comparison-v1",
+  "workspace": "artifacts/native-a8-archive-fitting/expanded-comparison-v1"
+}

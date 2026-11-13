@@ -1,0 +1,188 @@
+{
+  "adaptive_controller_allowed": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_TRAIN_optimizer_sensitivity_exact_compact_parity_and_short_native_resume_not_stronger_play",
+  "compact_parity": {
+    "decisions": 3413,
+    "exact_model_id": "sha256:a184fe16a6a9f37b5fa34044f29623b9a77579ab60333ddd66a9cd10f6440520",
+    "id": "sha256:ed83c183eed60b788fdb6f5e871d634a61a7b33191b7a6c30b6132d728ba4dd2",
+    "numeric_quantization": false,
+    "packed_payload_bytes": 54443220,
+    "path": "artifacts/native-optimizer/compact-check-v1/report.json",
+    "proof_of_128_game_memory_bound": false,
+    "raw_episode_limit": 1,
+    "resident_increase_bytes": 167952384,
+    "saved_games": 32,
+    "updates": 81
+  },
+  "date": "2026-10-18",
+  "game_apps_created": 0,
+  "historical_sources_configs_results_preserved": true,
+  "native_control": {
+    "committed_units": 8,
+    "effective_batch_games": 2,
+    "failed_training_games": 0,
+    "failures": 0,
+    "game_apps_created": 0,
+    "games": 8,
+    "id": "sha256:d6b35b2ec639b43b2bfe19e34bbcdb0f975df600fbd97818362b7dd5c01f1492",
+    "optimizer_steps": 24,
+    "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-control-v1/report.json",
+    "peak_resident_memory_bytes": 680935424,
+    "rerun_launches_new_games": false,
+    "resources": [
+      {
+        "id": "sha256:8ae79e2141c99db4f6104c244fd5eb0dea2840b366982580feaecd627f496a26",
+        "path": "artifacts/resources/native-optimizer-control-v1-session-1.json"
+      },
+      {
+        "id": "sha256:a1c5ce8794cc7bd33945a070ef06e4e05231107cfed9a70c8490fd14b61f134b",
+        "path": "artifacts/resources/native-optimizer-control-v1-session-2.json"
+      },
+      {
+        "id": "sha256:ca25240427ac726f5389fd1998fe3c37e5e2d7a7f77ace62515c4a469fb7fc87",
+        "path": "artifacts/resources/native-optimizer-control-v1-session-3.json"
+      }
+    ],
+    "retained_bytes": 11553337,
+    "sessions": 3,
+    "wall_seconds": 54.45398679189384
+  },
+  "next_experiment": {
+    "bundles_batch_size_and_reuse": true,
+    "development_games": 320,
+    "equal_fitting_compute": false,
+    "equal_game_budget": true,
+    "evaluation_games_per_player_per_milestone": 16,
+    "expectation_not_guarantee": true,
+    "expected_hours": [
+      2,
+      3
+    ],
+    "final_only_comparison_no_selection": true,
+    "game_attempts": 2368,
+    "invocation_seconds": 10800,
+    "methods": [
+      {
+        "batch_games": 32,
+        "epoch_multiplier": 1,
+        "name": "standard"
+      },
+      {
+        "batch_games": 128,
+        "epoch_multiplier": 3,
+        "name": "larger-batch"
+      }
+    ],
+    "milestones_including_initial": [
+      0,
+      128,
+      256,
+      384,
+      512
+    ],
+    "new_seed_manifest": {
+      "id": "sha256:4722fe9d6b0755a8e5f97e88c306a4fdda545aa7998870b1e59a1fe68c3b13ef",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-optimizer-learning-v1.json"
+    },
+    "next_if_both_flat": "revise_action_credit_or_qualified_teacher_lessons_do_not_automatically_scale_unchanged_PPO",
+    "numerical_initializers": [
+      2,
+      3
+    ],
+    "owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/train-native-a8-optimizer-v1.sh",
+    "recipe": {
+      "id": "sha256:65be72ead0a2efdfc91f8f8bdbfccbadbb11f7cb65a3310a3f28b43e0072b78c",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-optimizer-learning-curve-v1.json"
+    },
+    "sealed_units": 340,
+    "session_limits": {
+      "cpu_seconds": 1800,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 6000000000,
+      "wall_seconds": 900
+    },
+    "status": "prepared_not_launched",
+    "training_games": 2048,
+    "training_games_per_player": 512
+  },
+  "prior_input_comparison": "docs/evidence/native-context-comparison-v2.json",
+  "probe": {
+    "clean_saved_games": 64,
+    "exact_baseline_model_reconstructions": 2,
+    "id": "sha256:22c6bfe0b1a3846a1e30b9dfa32023c888aba152ba85a2b77165d13428577ca8",
+    "new_games": 0,
+    "optimizer_steps": 825,
+    "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-probe-v1/report.json",
+    "peak_resident_memory_bytes": 723288064,
+    "resource_report": {
+      "id": "sha256:6f216646dc1a8e83fac63760c5943d6c219c4534342228da581a026a93d3492a",
+      "path": "artifacts/resources/native-optimizer-probe-v1.json"
+    },
+    "results": [
+      {
+        "choice_menu_kl": 0.005444163194602363,
+        "cohort": 0,
+        "epochs": 3,
+        "in_sample_surrogate_gain": 0.010311678775357847,
+        "stop": "epoch_limit",
+        "updates": 81,
+        "variant": "standard"
+      },
+      {
+        "choice_menu_kl": 0.01004859433669751,
+        "cohort": 0,
+        "epochs": 3,
+        "in_sample_surrogate_gain": 0.01632362414306944,
+        "stop": "epoch_limit",
+        "updates": 81,
+        "variant": "larger-step"
+      },
+      {
+        "choice_menu_kl": 0.012458296297409696,
+        "cohort": 0,
+        "epochs": 9,
+        "in_sample_surrogate_gain": 0.02638355864847865,
+        "stop": "epoch_limit",
+        "updates": 243,
+        "variant": "more-passes"
+      },
+      {
+        "choice_menu_kl": 0.005464139991360113,
+        "cohort": 1,
+        "epochs": 3,
+        "in_sample_surrogate_gain": 0.011732682881946496,
+        "stop": "epoch_limit",
+        "updates": 84,
+        "variant": "standard"
+      },
+      {
+        "choice_menu_kl": 0.007272312003785873,
+        "cohort": 1,
+        "epochs": 3,
+        "in_sample_surrogate_gain": 0.0197565509777628,
+        "stop": "epoch_limit",
+        "updates": 84,
+        "variant": "larger-step"
+      },
+      {
+        "choice_menu_kl": 0.011379620403049866,
+        "cohort": 1,
+        "epochs": 9,
+        "in_sample_surrogate_gain": 0.028237330065233372,
+        "stop": "epoch_limit",
+        "updates": 252,
+        "variant": "more-passes"
+      }
+    ],
+    "single_split_gradient_cosines": [
+      -0.10190919254650446,
+      0.0057307249120850355
+    ],
+    "wall_seconds": 88.4233702919446
+  },
+  "report_id": "sha256:f072da9f798d2bff097664e65a8f96e0ae4fabc1f0afee57b3271b6cc0ab5915",
+  "schema_version": "native-optimizer-learning-evidence-v1",
+  "stronger_play_established": false
+}

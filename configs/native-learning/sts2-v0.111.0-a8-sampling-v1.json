@@ -1,0 +1,521 @@
+{
+  "control": [
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p2-elite-1-draw-0-standard",
+      "partition": "control",
+      "player": 2,
+      "root": "p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T020"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p2-elite-1-draw-0-sharp",
+      "partition": "control",
+      "player": 2,
+      "root": "p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T020"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p3-elite-1-draw-0-standard",
+      "partition": "control",
+      "player": 3,
+      "root": "p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T013"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p3-elite-1-draw-0-sharp",
+      "partition": "control",
+      "player": 3,
+      "root": "p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T013"
+    }
+  ],
+  "control_resource": "artifacts/native-a8-sampling/control-v1-resources.json",
+  "control_workspace": "artifacts/native-a8-sampling/control-v1",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/compare-a8-sampling-v1.sh": "caf2c1131365295985b6d2fb6055e41b12fa5b54b70329ff5c478c4f80376e5c",
+    "src/spireshift/native_a8_coverage_audit.py": "dd4ddfe3fe6f639df17f44261f165299cee8fb0b3e99a4fa4c0ed519eb4cbbd1",
+    "src/spireshift/native_a8_sampling_roots.py": "db21cde8f08aaacfa3463cc5dcfb6e114b5c4ba5cccca86d65b6808c64324a27",
+    "src/spireshift/native_a8_sampling_session.py": "9832f8102e792d240f8a8772b6410a3f397cd4959f1bd2060a703d92c403ba37"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "original_full_state_ids": {
+    "2": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+    "3": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+  },
+  "root_selection": "two_per_owner_by_public_health_then_depth_then_task_per_initializer_v1",
+  "roots": [
+    {
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 80,
+      "id": "p2-boss-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 189,
+      "root_input_id": "sha256:5aa3cfb94481197849428b56b73434a3f2545d4b12827a6951ee8ec9e376bb42",
+      "source_seal_id": "sha256:3d4c7ec514b1014592feca546fe195acbef1f9154e31c1bb82d40b43cbffdbea",
+      "source_task": {
+        "key": "normal-15-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T015",
+        "seed_id": 410015
+      }
+    },
+    {
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 83,
+      "id": "p2-boss-2",
+      "max_hp": 83,
+      "prefix_native_deliveries": 195,
+      "root_input_id": "sha256:f1496fadee8cf03e6234a7e28b29f086cd12c135969d9b24fdb05b2a0ce5a4b3",
+      "source_seal_id": "sha256:7fa3abdd16403a2c8d4ddde7880b3d549225728c1e6b1b63b462a960b601a6bf",
+      "source_task": {
+        "key": "normal-18-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T018",
+        "seed_id": 410018
+      }
+    },
+    {
+      "encounter": "elite",
+      "floor": 14,
+      "hp": 58,
+      "id": "p2-elite-1",
+      "max_hp": 67,
+      "prefix_native_deliveries": 207,
+      "root_input_id": "sha256:7911ab9fc911f83f309dd0c02ce56b3da76f5af09474be3e02ee56aa67ce861f",
+      "source_seal_id": "sha256:2bbeab08f059b21c1988e787383ffee119feb588c619c11c164ec6984e72b1f3",
+      "source_task": {
+        "key": "normal-20-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T020",
+        "seed_id": 410020
+      }
+    },
+    {
+      "encounter": "elite",
+      "floor": 8,
+      "hp": 76,
+      "id": "p2-elite-2",
+      "max_hp": 91,
+      "prefix_native_deliveries": 105,
+      "root_input_id": "sha256:45ab59b18e924cd1b720b7b48ae5232ea0a125f4d37f497bf7290e0b37277854",
+      "source_seal_id": "sha256:2905c6bbf57a96ef78d53002e56bc29946221b91d3d07156cabd2d9ef298ab68",
+      "source_task": {
+        "key": "normal-12-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T012",
+        "seed_id": 410012
+      }
+    },
+    {
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 80,
+      "id": "p3-boss-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 178,
+      "root_input_id": "sha256:548b358d11682f08d967362cde9377e3d8db4757d54d7fb580ec315fc1b6296d",
+      "source_seal_id": "sha256:e8f563d586ca320601c3774ebe6ae0d49a83b77fecb3a03a8fd9550a15111fa6",
+      "source_task": {
+        "key": "normal-15-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T015",
+        "seed_id": 410015
+      }
+    },
+    {
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 80,
+      "id": "p3-boss-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 165,
+      "root_input_id": "sha256:3d05846bd2161f3ee9900614fb6abbb660f4b0d7e5e7414dd58819611b049ce4",
+      "source_seal_id": "sha256:a776d575b5fba337cd97f9715d50886fff5c98dfcf59f800e0929d8dc98ca54d",
+      "source_task": {
+        "key": "normal-18-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T018",
+        "seed_id": 410018
+      }
+    },
+    {
+      "encounter": "elite",
+      "floor": 13,
+      "hp": 80,
+      "id": "p3-elite-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 138,
+      "root_input_id": "sha256:ea03466a13ba7c6e915b86e4365bb545444e1e000b211519744049ffa58ff525",
+      "source_seal_id": "sha256:e608ecb0a65602be06410707ad3376bf36975ac4069da6cefab283851279c09a",
+      "source_task": {
+        "key": "normal-13-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T013",
+        "seed_id": 410013
+      }
+    },
+    {
+      "encounter": "elite",
+      "floor": 11,
+      "hp": 77,
+      "id": "p3-elite-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 122,
+      "root_input_id": "sha256:10e56f188408554368f1640cfbdc5532edc0f1ad7120f448ffaa32a3fc1e6b3d",
+      "source_seal_id": "sha256:8cd166e60d521266a4d4029b0a8b21af93ae44a0c8774b140841b4e95c1d9203",
+      "source_task": {
+        "key": "normal-12-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T012",
+        "seed_id": 410012
+      }
+    }
+  ],
+  "schema_version": "native-a8-act1-sampling-v1",
+  "score_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "source_audit": {
+    "path": "artifacts/native-a8-model-owned-coverage/assessment-v1-1794243638550996000/report.json",
+    "report_id": "sha256:524ced8ab67e1414f36cb284b2a54e3da7d59d9ada6bdb818f77e988cf3bb672",
+    "sha256": "51c45e649ec1a4db324ea6d7a4163c0cc54c9b3a49910b3ea912c2553d3908d5"
+  },
+  "study": [
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p2-boss-1-draw-0-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p2-boss-1-draw-0-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p2-boss-1-draw-1-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p2-boss-1-draw-1-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p2-boss-2-draw-0-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p2-boss-2-draw-0-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p2-boss-2-draw-1-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p2-boss-2-draw-1-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p2-elite-1-draw-0-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T020"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p2-elite-1-draw-0-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T020"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p2-elite-1-draw-1-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T020"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p2-elite-1-draw-1-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T020"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p2-elite-2-draw-0-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p2-elite-2-draw-0-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p2-elite-2-draw-1-standard",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p2-elite-2-draw-1-sharp",
+      "partition": "training_only",
+      "player": 2,
+      "root": "p2-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p3-boss-1-draw-0-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p3-boss-1-draw-0-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p3-boss-1-draw-1-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p3-boss-1-draw-1-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p3-boss-2-draw-0-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p3-boss-2-draw-0-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p3-boss-2-draw-1-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p3-boss-2-draw-1-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p3-elite-1-draw-0-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T013"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p3-elite-1-draw-0-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T013"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p3-elite-1-draw-1-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T013"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p3-elite-1-draw-1-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T013"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "p3-elite-2-draw-0-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "sharp",
+      "draw": 0,
+      "key": "p3-elite-2-draw-0-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "p3-elite-2-draw-1-standard",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "sharp",
+      "draw": 1,
+      "key": "p3-elite-2-draw-1-sharp",
+      "partition": "training_only",
+      "player": 3,
+      "root": "p3-elite-2",
+      "seed": "SP1RESH1FTA8CV1T012"
+    }
+  ],
+  "temperatures": {
+    "sharp": 0.4,
+    "standard": 0.8
+  },
+  "workspace": "artifacts/native-a8-sampling/comparison-v1"
+}

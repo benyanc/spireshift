@@ -1,0 +1,117 @@
+{
+  "schema_version": "native-runtime-continuation-evidence-v1",
+  "date": "2026-10-19",
+  "source_result": {
+    "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/report.json",
+    "id": "sha256:e2dc1041f16b67dceeaba5a486c21621278c84d919538b679126c56cebc8f5b5",
+    "attempts": 1344,
+    "terminal_games": 1342,
+    "failed_train_games": 2,
+    "terminal_victories": 0,
+    "paired_seed_units": 128,
+    "mean_floor_before": 9.484375,
+    "mean_floor_after": 10.3671875,
+    "paired_difference": 0.8828125,
+    "paired_bootstrap_95_interval": [
+      0.2734375,
+      1.5078125
+    ]
+  },
+  "loss_audit": {
+    "path": "artifacts/native-loss-audit/sts2-v0.111.0-a8-shop-v2/report.json",
+    "id": "sha256:a563c8126b5cc66699cb8693705a590300573c78625bd480a34f13f28815f3dd",
+    "train_games": 830,
+    "evaluation_histories_opened": 0,
+    "turns_ended_with_play_available": 51,
+    "end_turns": 17823,
+    "terminal_normal_fights": 368,
+    "terminal_elite_fights": 352,
+    "terminal_boss_fights": 107,
+    "not_current_combat": 3,
+    "rest_choices": 747,
+    "smith_choices": 2,
+    "rest_with_smith_available": 747,
+    "full_health_rest_choices": 37,
+    "card_rewards_taken": 3272,
+    "card_rewards_skipped": 377,
+    "label_scope": "descriptive_opportunities_not_counterfactual_quality"
+  },
+  "build": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v35.json",
+    "report_id": "sha256:1ee3fd664a66633562c82d1614d5a4266e11c31b1509f0d4cfba804f4e17fa7d",
+    "changed_source_files": 3,
+    "reproduced_repaired_builds": 2,
+    "native_game_assembly_unchanged": true
+  },
+  "mechanics_effects": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-runtime-gaps-v1.json",
+    "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/runtime-gap-effects-v4/report.json",
+    "report_id": "sha256:72b6c14d06087477de98145806c73b5d0f5ccb7b77e4459bbb6da157c9333ae2",
+    "cases": 6,
+    "privileged_fixture": true,
+    "shipped_cross_host_parity": false
+  },
+  "integration_control": {
+    "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-control-v1/report.json",
+    "id": "sha256:44c01d1898bc3bb5cc451731aa52b057bf9dfe6f171c2d145743f2ae2cba42ee",
+    "attempts": 12,
+    "failures": 0,
+    "fit_rounds": [
+      49,
+      49
+    ],
+    "optimizer_before": {
+      "2": 4470,
+      "3": 4692
+    },
+    "optimizer_after": {
+      "2": 4476,
+      "3": 4698
+    },
+    "new_optimizer_steps": 12,
+    "original_states_unchanged": true,
+    "resource_wall_seconds": 327.80758033297025,
+    "cpu_seconds": 164.903912023,
+    "peak_resident_memory_bytes": 732954624,
+    "retained_storage_bytes": 61119168,
+    "game_apps_created": 0
+  },
+  "next": {
+    "config": "configs/native-learning/sts2-v0.111.0-a8-runtime-continuation-v1.json",
+    "config_id": "sha256:bf09911186e52a1644358f8d45954043e387d1e704563fa35f7647a0c62ee46c",
+    "players": [
+      {
+        "numerical_seed": 2,
+        "version": "trained",
+        "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-2-round-048-fit/state.json",
+        "sha256": "cfa1aa1964f69e2b55a2d1bd07b29e12783b8e7f0ff5ced629501505a772a75e",
+        "model_id": "sha256:c4b4e33d76b68a42e6f8c5d7262ee41937c1658f2b1fce5416f4f52fba6edf2b",
+        "state_id": "sha256:69c1e1e071858ffc11c5174426768d5817d42ea1c205fd4f1d61d3167c37d1e5",
+        "optimizer_steps": 4470,
+        "round": 48,
+        "scheduled_training_games": 1536
+      },
+      {
+        "numerical_seed": 3,
+        "version": "trained",
+        "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-3-round-048-fit/state.json",
+        "sha256": "4d9cf7ef7221076be86be22ecfcc77eb0cc75fea0afa51aabda888e3354b23d5",
+        "model_id": "sha256:13dd8277013c7335197fa201b8e983104daba73f5acc129ae4783fd83147f783",
+        "state_id": "sha256:2ef7dd7ec3400151505cc5d5cc214e8bb49867f603c16dfba0f01d1d2123251e",
+        "optimizer_steps": 4692,
+        "round": 48,
+        "scheduled_training_games": 1536
+      }
+    ],
+    "first_fit_round": 49,
+    "maximum_attempts": 960,
+    "maximum_units": 140,
+    "maximum_training_attempts_per_player": 256,
+    "scheduled_training_slots_at_horizon": 1792,
+    "main_run_started": false,
+    "owner_launches_long_run": true,
+    "automatic_extension_follows": false,
+    "checkpoint_promoted": false,
+    "base_readiness_passed": false
+  }
+}

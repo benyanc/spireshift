@@ -1,0 +1,139 @@
+{
+  "assessment": {
+    "path": "docs/evidence/native-a8-matched-practice-result-v2.json",
+    "report_id": "sha256:e278a9797b8e25047eef34c242112435a4a0f2e65874bc9edeb564cd8145fcf7",
+    "sha256": "b324bae0d52ed3093e4deeb8b67848899a55dfa88c3cfa66241278249df6c91f"
+  },
+  "collection_games_started": 0,
+  "control": {
+    "path": "artifacts/native-a8-action-credit/control-v1/attempt-1794192423082475000.json",
+    "report_id": "sha256:3d74dc444ef9bd7696d939c47a53b2ac71c3466c7723e9ab5c501dcc0c11eecb",
+    "sha256": "9013628ff6ec8ad6efca5966e30136cc5d3254d94296056f9213b6b007a60ace"
+  },
+  "control_games": {
+    "control-01-p2-alternate": {
+      "initial_public_input_id": "sha256:b4e52786c917f2b7782e4fa6a8282990d51ec128a6d2b836b9ff706f02aeaa32",
+      "maximum_floor": 8,
+      "native_decisions": 70,
+      "outcome": "loss",
+      "seal_id": "sha256:352eb4a1b027d333ae56ffcfdc6085954c74fba52bdbf0ed6127270cbee8552a"
+    },
+    "control-01-p2-reference": {
+      "initial_public_input_id": "sha256:b4e52786c917f2b7782e4fa6a8282990d51ec128a6d2b836b9ff706f02aeaa32",
+      "maximum_floor": 8,
+      "native_decisions": 70,
+      "outcome": "loss",
+      "seal_id": "sha256:d4b745e348b1d96f831a9eda842195a0d6faa6bff598c65773fe729e3f3a1fe4"
+    },
+    "control-02-p3-alternate": {
+      "initial_public_input_id": "sha256:db7a0b5a29151b8b00b199bbe003be7b85ce5450fc51e67b5d85770a6b887feb",
+      "maximum_floor": 7,
+      "native_decisions": 81,
+      "outcome": "loss",
+      "seal_id": "sha256:665e8b0c349419a845e3b79271f868737e1f556145ac1bd5ceea9523af0bf83e"
+    },
+    "control-02-p3-reference": {
+      "initial_public_input_id": "sha256:db7a0b5a29151b8b00b199bbe003be7b85ce5450fc51e67b5d85770a6b887feb",
+      "maximum_floor": 7,
+      "native_decisions": 105,
+      "outcome": "loss",
+      "seal_id": "sha256:2612574b51861c5221ed049aea8671e470512abbdeadbed71d5811d45b4c1f91"
+    },
+    "control-03-p2-alternate": {
+      "initial_public_input_id": "sha256:830975031611ada7876f322da0431487573cf5c16b00f4d52456e2a523746382",
+      "maximum_floor": 6,
+      "native_decisions": 105,
+      "outcome": "loss",
+      "seal_id": "sha256:aa0d19138747dd7e0597cd368585237b2b4e343f8312ce891861420dedde4388"
+    },
+    "control-03-p2-reference": {
+      "initial_public_input_id": "sha256:830975031611ada7876f322da0431487573cf5c16b00f4d52456e2a523746382",
+      "maximum_floor": 6,
+      "native_decisions": 105,
+      "outcome": "loss",
+      "seal_id": "sha256:65adfe9aaa008a55783aedc0da2aa4d2038b2ae17f29a3a506d4b1febb0f6700"
+    }
+  },
+  "control_pairs": {
+    "control-01-p2": {
+      "preferred_arm": null,
+      "returns": {
+        "alternate": 0.020833333333333332,
+        "reference": 0.020833333333333332
+      },
+      "root": {
+        "alternate_action": 7,
+        "different_display_label": true,
+        "different_public_successor": true,
+        "family": "combat_turn",
+        "floor": 2,
+        "input_id": "sha256:529343e407c00fceba3ca26151490ea863f4101194365693f07ebfc4a64f450a",
+        "reference_action": 5,
+        "stratum": "combat"
+      },
+      "status": "complete"
+    },
+    "control-02-p3": {
+      "preferred_arm": null,
+      "returns": {
+        "alternate": 0.019021739130434784,
+        "reference": 0.019021739130434784
+      },
+      "root": {
+        "alternate_action": 1,
+        "different_display_label": true,
+        "different_public_successor": true,
+        "family": "map_navigation",
+        "floor": 2,
+        "input_id": "sha256:67fdf0f6c8cd3b021d4541f5e057abe5bed8fa7e3a3b56c5bad7fae730a4b6f0",
+        "reference_action": 0,
+        "stratum": "route"
+      },
+      "status": "complete"
+    },
+    "control-03-p2": {
+      "preferred_arm": null,
+      "returns": {
+        "alternate": 0.017045454545454544,
+        "reference": 0.017045454545454544
+      },
+      "root": {
+        "alternate_action": 0,
+        "different_display_label": true,
+        "different_public_successor": true,
+        "family": "reward_claim",
+        "floor": 2,
+        "input_id": "sha256:e91f07cf304185d9b70d0f78c384942e017bb8d9df3b3609f0c2417ab0530f97",
+        "reference_action": 1,
+        "stratum": "resources"
+      },
+      "status": "complete"
+    }
+  },
+  "control_resources": {
+    "path": "artifacts/native-a8-action-credit/control-v1-resources.json",
+    "report_id": "sha256:f5b42bb3bebdc595c81b439822ccf5a36e8b5dc7edd49a61b40b7bb1a4fe7e99",
+    "sha256": "f4b0e1c4aa5ba538e6089310b50127643a51cba8e0ce10d39147b9c1dd74d505"
+  },
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "informative_control_pairs": 0,
+  "native_deliveries_verified": 536,
+  "optimizer_updates": 0,
+  "planned_collection_games": 72,
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-action-credit-v1.json",
+    "sha256": "eb5f85e71e701b9444985bcb7a5a6d136b298123df22b18b181da8fd38d93c53"
+  },
+  "report_id": "sha256:b1ea7b565f50b6c91a97369198928a59fd29785c80d57ee0fd4c59c7fb005dcd",
+  "schema_version": "native-a8-action-credit-control-evidence-v1",
+  "status": "paired_action_credit_controls_verified"
+}

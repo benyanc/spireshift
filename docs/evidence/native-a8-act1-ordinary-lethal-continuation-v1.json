@@ -1,0 +1,176 @@
+{
+  "automatic_follow_up": false,
+  "execution_id": "sha256:0f7faa5718418992e07bd1a115b32b2ea1ae7a8088e777946ea1212a954a08de",
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "lessons_admitted": 0,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "original_attempt": {
+    "confirmed_rescues": [],
+    "planned_worlds": 16,
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/ordinary-lethal-study-v1/attempt-1794112420375087000.json",
+      "report_id": "sha256:ec8c58aec572159641187068daeab9e8b9c736e0abea39e084757d670aa40575",
+      "sha256": "87cfb2702d1b74432aee2001cca074e90d194d91f8e398c675d026a13e133982"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-act1-ordinary-lethal-study-v1-1794112420375087000.json",
+      "report_id": "sha256:27a9cf6100b1a70f3517d1466a1203c34ee949c9511d69868ead44c021d0500c",
+      "sha256": "0d16fff3f471b2a9f9ca3f9b40fb13a3d699e136566c7393b578c7aafabfc8f6"
+    },
+    "sealed_outcomes_by_arm": {
+      "ordinary": {
+        "act1_clear": 0,
+        "act1_loss": 6,
+        "capped": 0
+      },
+      "tactical": {
+        "act1_clear": 0,
+        "act1_loss": 6,
+        "capped": 0
+      }
+    },
+    "sealed_worlds": 6,
+    "stop": {
+      "error": "Act 2 requires delivered Act 1 boss rewards and a living player",
+      "reason": "unsealed_world",
+      "world": "ordinary-007"
+    }
+  },
+  "owner_comparison_started": false,
+  "owner_launcher_preflight_verified": true,
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-ordinary-lethal-continuation-v1.json",
+    "sha256": "dda2444c06d546307702987df595a433d401e48596eb2cea27bc0f0bb1138930"
+  },
+  "remaining_worlds": [
+    "ordinary-008",
+    "ordinary-009",
+    "ordinary-010",
+    "ordinary-011",
+    "ordinary-012",
+    "ordinary-013",
+    "ordinary-014",
+    "ordinary-015",
+    "ordinary-016"
+  ],
+  "report_id": "sha256:4d7628d0b3f19a451aa35dfa75330541821a3036b2abd0f01004e3a4057f3eaf",
+  "repository_check": {
+    "dotnet_protocol_contract_verified": true,
+    "resources": {
+      "path": "artifacts/resources/a8-act1-ordinary-lethal-continuation-repository-check-v1.json",
+      "report_id": "sha256:9a219cc5e5345823a7f687c855f3b4de30ffaaf8ee617ece897c902f6a1013b0",
+      "sha256": "923340b5117800c42e7acd5d1758bd7273d3e77c6ff423e24abea504d2677a91"
+    },
+    "tests_passed": 2875
+  },
+  "saved_world_7": {
+    "case": {
+      "key": "ordinary-007",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ007"
+    },
+    "claim_scope": "saved_native_diagnostic_only",
+    "confirmed_rescue": false,
+    "final_receipt_index": 255,
+    "first_change": {
+      "choice_ordinal_including_local_factors": 25,
+      "family": "combat_turn",
+      "fitted_action_index": 1,
+      "public_input_id": "sha256:f362453b51c1181d0dc2d4567458c48eec4b6163e814d3d1768057f98bf352f7",
+      "reason": "ordinary_lethal_turn",
+      "teacher_action_index": 4
+    },
+    "native_operation": "proceed",
+    "native_replay_started": false,
+    "native_reward_owner": "reward_set",
+    "ordinary_final_act": 2,
+    "ordinary_final_hp": 19,
+    "ordinary_outcome": "act1_clear",
+    "original_chunk_id": "sha256:ff24e3f1dbed2e20499699580aa95bd6170f951b24d2edd98ed3a21bc43d5bc6",
+    "original_clean_shutdown": false,
+    "original_seal_exists": false,
+    "original_worker_exit": {
+      "code": 143,
+      "error": null,
+      "signal": null
+    },
+    "recovered_final_observation": {
+      "path": "artifacts/native-a8-act1-boss/ordinary-lethal-exit-control-v2/chunks/saved-world-recovery/ordinary/recovered-final-observation.json",
+      "report_id": "sha256:4026ab9b4fefd84cc1492ce10e324eef6a5ea76c200ecbb6de09babffe62746c",
+      "sha256": "0495a2bd21be778851b89e46e675f0aa5495cdcfb012edf321375e397f2ac982"
+    },
+    "recovery_proof": {
+      "path": "artifacts/native-a8-act1-boss/ordinary-lethal-exit-control-v2/chunks/saved-world-recovery/done.json",
+      "report_id": "sha256:b4d967984910ad02676659b7450fcbe96eab2421db6066e28b441d2444f2f995",
+      "sha256": "d5a30ccd1f28c5bb6bdfc19fec23355e2d55929270cc9e543e086c9d7367183a"
+    },
+    "tactical_outcome": "act1_loss",
+    "verified_native_deliveries_by_arm": {
+      "ordinary": 256,
+      "tactical": 277
+    }
+  },
+  "schema_version": "native-a8-ordinary-lethal-continuation-preparation-v1",
+  "shared_profile_unchanged": true,
+  "short_check": {
+    "case": {
+      "key": "ordinary-exit-smoke-002",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLEXC002"
+    },
+    "focused_regression_cases": 13,
+    "outcomes": {
+      "ordinary": "act1_loss",
+      "tactical": "act1_loss"
+    },
+    "prior_smoke_stop": {
+      "path": "artifacts/resources/a8-act1-ordinary-lethal-exit-control-v1.json",
+      "report_id": "sha256:10e6c43583f74ddc5912611b4c502dcfed3d53f4b739bb2c190189345758f00f",
+      "sha256": "86daf89e0e8b09e5e91284598c8d01915d190f13187b713db603de693faa3883"
+    },
+    "prior_smoke_stop_reason": "Live step replies omit the episode field present in saved observation records",
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/ordinary-lethal-exit-control-v2/report.json",
+      "report_id": "sha256:3b0a16de0b1aefaf60d3db6fc9609991156c2df21726779c30c18a09ec8ecd98",
+      "sha256": "5aa61f3b0337d08748945eac38e9cb1850923ec23b887002a28727cba3d7b274"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-act1-ordinary-lethal-exit-control-v2.json",
+      "report_id": "sha256:f9d23fe6ffe7e67daf1f20b2f0b105953f40bc3f2c91d82f64c09d7574a7aa82",
+      "sha256": "80137acb8e5feb62a9b7dc76f748b7844d8a82f17415f9c7a8020c764cf82f02"
+    },
+    "saved_regressions": {
+      "diagnostic-002": {
+        "act": 2,
+        "hp": 9,
+        "owner": "combat_rewards_complete",
+        "source_report_id": "sha256:6a60bf467e40ea06ed51ed32ef38cb5980e2231e63e5d78529e88a2578d0691b"
+      },
+      "qualify-003": {
+        "act": 2,
+        "hp": 14,
+        "owner": "combat_rewards_complete",
+        "source_report_id": "sha256:3045ddd422419894149cb3f0b8898e6e1d3abdcf1f6835b46597738771b2a38a"
+      }
+    },
+    "seal": {
+      "path": "artifacts/native-a8-act1-boss/ordinary-lethal-exit-control-v2/chunks/ordinary-exit-smoke-002/done.json",
+      "report_id": "sha256:fed0f37dd07b3c5657f51ecd7debbabf4b44f863f169deee609926b664d8d719",
+      "sha256": "22d74b38142196d7bdfdb6c47fdbb24594570cfbf5269c62598bec4f6aeb84fc"
+    },
+    "verified_native_deliveries": 321
+  },
+  "status": "ordinary_lethal_continuation_ready",
+  "training_allowed": false
+}

@@ -1,0 +1,13 @@
+{
+  "credit_recipe": "configs/native-controls/inventory-credit-diagnosis-v2.json",
+  "credit_report": {
+    "id": "sha256:7837ce10fe96fb97bd407fa0b76f4e1cc83cc2f1b30de19039546860d7aabc8c",
+    "path": "artifacts/native-inventory-credit/sts2-v0.111.0-a8-diagnosis-v2/report.json"
+  },
+  "implementation_sha256": {
+    "native_inventory_input_audit.py": "b2dd657502bb9602f0e461af348344891b4fcf0e1d0b712154f853e94d5cc0c9",
+    "native_inventory_input_probes.py": "b33701baf4d4509141d0aa1071b8458c880e6964d096ec7169766e8dfa7149ee"
+  },
+  "schema_version": "native-inventory-input-audit-config-v1",
+  "workspace": "artifacts/native-inventory-input/sts2-v0.111.0-a8-audit-v1"
+}

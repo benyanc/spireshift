@@ -1,0 +1,228 @@
+{
+  "automatic_follow_up": false,
+  "config_id": "sha256:6f3cc3063ad8ba8e202817eb311be417c30b2afc6faedc90e490b937091213bb",
+  "continuation": {
+    "fresh_replacement": "fit-039-replacement-1",
+    "historical_failures_retained": 4,
+    "linked_denominator": 72,
+    "main_unstarted": true,
+    "objective_ownership_and_quality_inherited": true,
+    "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-win-curriculum-v5.sh\"",
+    "planned_cases": 68,
+    "previous_unattempted_slots": 29,
+    "remaining_slots": 30,
+    "retained_cases": 38,
+    "session_limits": {
+      "cpu_seconds": 14400,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 5400
+    }
+  },
+  "environment_id": "sha256:37b6257af0df0621fb1fc340ebf8e020fa27c888bf28d695dd24fc53cfb2f135",
+  "full_game_playing_strength_evaluated": false,
+  "game_revision": "41cef1ea",
+  "game_version": "v0.111.0",
+  "interrupted_attempt": {
+    "acknowledged_actions_diagnostic_only": 26,
+    "active_marker_preserved": true,
+    "case": "fit-039/reference",
+    "encounter": "TEST_SUBJECT_BOSS",
+    "first_fault": "MissingMethodException for Godot.CanvasItem.SetSelfModulate(Godot.Color)",
+    "labels_allowed": false,
+    "native_worker_termination_verified": true,
+    "outer_symptom": "End Turn timed out after the native combat loop faulted",
+    "path": [
+      "NemesisPower.AfterSideTurnEnd",
+      "IntangiblePower applied",
+      "TestSubject.AfterPowerApplied",
+      "TestSubject.SetColor"
+    ],
+    "unknown_end_turns": 1
+  },
+  "native_control": {
+    "checks": {
+      "both_native_revivals": true,
+      "clean_shutdown": true,
+      "independent_public_action_receipt_reconstruction": true,
+      "intangible_applied_then_removed_in_third_form": true,
+      "native_completed_boss_reward_owner": true,
+      "third_form_enemy_turn_completed": true
+    },
+    "form_entry_rounds": [
+      1,
+      2,
+      3
+    ],
+    "form_hp": [
+      111,
+      212,
+      313
+    ],
+    "game_effects_from_native_card_and_potion_actions": true,
+    "report": {
+      "path": "artifacts/native-win-curriculum/revival-control-v2/report.json",
+      "sha256": "8d665cea57c6df12c56efd20ba6427ca84234bec9bbe36d10a8be7815f9de222"
+    },
+    "report_id": "sha256:3b71884ee44b42c5a573ae66814175dd2c2fed3bfde68860d48de6050e69a232",
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-revival-control-v2.json",
+      "report_id": "sha256:8bbe46c05292c119ef7dba34e21b6977a4046693b0bff68cf6a3a79b84d1836a",
+      "sha256": "4490887f76bc35d51b33600c7fe03430632bf880e743ba469cce5c0374a19bee",
+      "status": "completed",
+      "wall_seconds": 67.4054860000033
+    },
+    "training_labels_allowed": false,
+    "verified_native_deliveries": 13
+  },
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "original_and_fitted_weights_and_full_Adam_exact": true,
+  "prior_owner_resource": {
+    "path": "artifacts/resources/win-curriculum-v4-attempt-1.json",
+    "report_id": "sha256:c37403496ca29c736b10b5b0be510fe91f68b9ae56720d35dad1e8554d5c7b89",
+    "sha256": "fd1165c54eb51b3d3a44b28786a2fc6eb13e10ea23800d71281786fc74a2e9fb",
+    "status": "failed",
+    "wall_seconds": 190.6726017500041
+  },
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v5.json",
+    "sha256": "f416d50895dcf2c38a7a94627aad6d09cb7d77cdcbe2f1eb051b96032eb56b67"
+  },
+  "report_id": "sha256:c0cbd58005a270dfc94c64ef5ae16e3310e55edf4f3d5e96409cd06e488a7d26",
+  "retained_evidence": {
+    "actual_deliveries": 12105,
+    "audit": {
+      "path": "artifacts/native-win-curriculum/revival-audit-v2/report.json",
+      "sha256": "162f2e2a6f5d6a0823800a4bbaf68b0fb87a4f55416ecff867b8af0e44191812"
+    },
+    "audit_id": "sha256:353495ec03921f4986db99a5bd62c4a6672cc554f7f3c5347f8d64722e3152e0",
+    "complete_cases": 38,
+    "complete_episodes": 172,
+    "confirmed_lessons": 20,
+    "historical_failures": [
+      "fit-007",
+      "fit-031",
+      "fit-032",
+      "fit-039"
+    ],
+    "new_complete_episodes": 30,
+    "new_deliveries": 1933,
+    "new_lessons": [
+      {
+        "boss": null,
+        "case": "fit-033",
+        "lesson_id": "sha256:3f1f02299192ef5fe7f2763a586fc1af7dc4b50a0ae8a6fc092fe55cc12a6166",
+        "meaningful_choices": 24,
+        "strict_goal_rescue": false
+      },
+      {
+        "boss": "QUEEN_BOSS",
+        "case": "fit-038",
+        "lesson_id": "sha256:a4df0ee867869c238da0ee26ac25be3e1051bbead8a2ea12f8a1cb09ffd23c8c",
+        "meaningful_choices": 18,
+        "strict_goal_rescue": true
+      }
+    ],
+    "protected_files": 56884,
+    "protection": {
+      "path": "artifacts/native-win-curriculum/revival-preparation-v1/protected-v4-result.json",
+      "sha256": "7b44069f5ef4df755f52ac6f3b1f73e8c2f9a78c302ea1d47af3e3faed5f0551"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-revival-audit-v2.json",
+      "report_id": "sha256:058297c29418c2ba23c8a76b2e6bfc23f9177789474bae53fb897f5095980503",
+      "sha256": "0b673a9e08bd7c6c2e8ec09ff0c791aa4d967d6553d34e9be99493ace3450e1f",
+      "status": "completed",
+      "wall_seconds": 125.9094302499434
+    },
+    "seals": 210,
+    "strict_goal_rescues": 14
+  },
+  "schema_version": "native-win-curriculum-test-subject-preparation-v1",
+  "status": "test_subject_support_verified_owner_continuation_prepared",
+  "support": {
+    "existing_per_item_tint_property_setter_verified": true,
+    "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "godot_method_reference_inventory": {
+      "checked": 1045,
+      "dynamic_and_generic_type_spec_calls_included": false,
+      "runtime_reachability_established_by_inventory": false,
+      "scope": "MemberReference methods with a GodotSharp TypeReference parent",
+      "unresolved_after": 606,
+      "unresolved_before": 607
+    },
+    "independent_host_and_stub_builds_match": true,
+    "old_method_compilation_fault_reproduced": "Method not found: 'Void Godot.CanvasItem.SetSelfModulate(Godot.Color)'.",
+    "patched_method_compiles": true,
+    "production_source_file": "GodotStubs/UI.cs",
+    "report": {
+      "path": "artifacts/native-win-curriculum/godot-canvas-build-v58/report.json",
+      "sha256": "e926eb26a1a21a17fdc31b5bd87f86d3b0f2bfb7846dcd8b008b530f8df617c9"
+    },
+    "report_id": "sha256:c56f491ba609588923fc070b421759204076cfea08788d39ad45ade577e7c0f2",
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-canvas-build-v58.json",
+      "report_id": "sha256:9e2f092d52876aa241a4b41b26eedab58ff66426df3a84a3d07b883f50552745",
+      "sha256": "1ed18f69d211121d32f50cd3c2e4dc280f142e9f3f468fc33113cd08c97fdf90",
+      "status": "completed",
+      "wall_seconds": 72.52868712495547
+    },
+    "revision": 58
+  },
+  "training_allowed": false,
+  "verification": {
+    "actual_imports_without_games": 210,
+    "collector_import_preflight": {
+      "path": "artifacts/native-win-curriculum/revival-preflight-v1/report.json",
+      "sha256": "95a12dee4e5e858ec1012959ffaf896b0ee6a153ff6d883356da0e4a70e72f9c"
+    },
+    "commit_hooks_passed": true,
+    "earlier_audit_receipt": {
+      "path": "artifacts/resources/win-curriculum-revival-audit-v1.json",
+      "report_id": "sha256:07b7f6ff24f6d9f3510e7dfcc927eb51d26b72bafb793e49d07364e0e727196a",
+      "sha256": "229e5fb325aa837a1c039cddd6e7a5663ae1966db07898c8b3abfe6f6f1dafb7",
+      "status": "failed",
+      "wall_seconds": 60.48626787494868
+    },
+    "earlier_auditor_source": {
+      "path": "artifacts/native-win-curriculum/revival-preparation-v1/auditor-at-v1.py",
+      "sha256": "5f55c7620ad413e44b2454954357e548aaf58621c1657e63bc2273614037ca80"
+    },
+    "earlier_control_failure": "The verifier expected Intangible in form two. The saved fight reached rewards with Intangible in form three.",
+    "earlier_control_receipt": {
+      "path": "artifacts/resources/win-curriculum-revival-control-v1.json",
+      "report_id": "sha256:078175081f6f5bd1cc7a8c371800089dbb8e434430a5fdfe053e14a848b5c610",
+      "sha256": "d8615e7c5f14c7103aed35997d4708875c8763f735115403e98c70ffd93c07bc",
+      "status": "failed",
+      "wall_seconds": 54.87971274997108
+    },
+    "earlier_control_source": {
+      "path": "artifacts/native-win-curriculum/revival-preparation-v1/control-source-v1.py",
+      "sha256": "faaef66c3753fb33d2079a235a881e7f90fe3e93c65b95e51f39286d1cf50504"
+    },
+    "frozen_inputs": {
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "original_and_prior_final_weights_full_Adam_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "lint_format_strict_types_and_CSharp_contract_passed": true,
+    "preflight_resource": {
+      "path": "artifacts/resources/win-curriculum-revival-preflight-v1.json",
+      "report_id": "sha256:78bc5fbff61abd51f110056ab6698aedb9564d9a9cbff86958c34f98cb169c5e",
+      "sha256": "f8020319005e8360cfecc187bba33aa4e8586e888add7ea33c1b7e730cd42ddd",
+      "status": "completed",
+      "wall_seconds": 81.57921241607983
+    },
+    "repository_checks": {
+      "path": "artifacts/resources/win-curriculum-revival-check-v1.json",
+      "report_id": "sha256:7dc9e43165e18e7496354a23968df0cba83beb4d20c0459c63fa8085d66e5b20",
+      "sha256": "9d6ef0e265d0fae59472251491729826e95fbbf591197ffd2f0aa3ae8b4e34b8",
+      "status": "completed",
+      "wall_seconds": 155.56750120897777
+    },
+    "repository_tests_passed": 2836
+  }
+}

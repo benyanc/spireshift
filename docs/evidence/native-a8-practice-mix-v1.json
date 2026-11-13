@@ -1,0 +1,107 @@
+{
+  "balanced_control": {
+    "path": "artifacts/native-a8-practice-mix/control-v2/report.json",
+    "report_id": "sha256:1a006c68fbfa16788fc75df7cf1152df13e0b4386945c8c254d931eb82f57381",
+    "sha256": "fba9b1f322b2d66d9d32c393740d50ababf5f40f6775f65703c4cf1fa1467a8e"
+  },
+  "balanced_control_resource": {
+    "path": "artifacts/native-a8-practice-mix/control-v2-resources.json",
+    "report_id": "sha256:8b232b4c361be28d906e1c5c40f10daa22282573a6befc321d370a94827b1683",
+    "sha256": "0db77689fdc499f38ca81f0b841bad41ce70b1336f4266499de45db2ea75191b"
+  },
+  "balanced_control_summary": {
+    "coverage": {
+      "all_segments_completed": true,
+      "attainable_room_outcomes_in_each_act": true,
+      "by_act_definition_and_tier": {
+        "GLORY": {
+          "healthy": {
+            "goal": 2
+          },
+          "lean": {
+            "loss": 2
+          }
+        },
+        "HIVE": {
+          "healthy": {
+            "goal": 2
+          },
+          "lean": {
+            "goal": 1,
+            "loss": 1
+          },
+          "preboss": {
+            "loss": 2
+          }
+        },
+        "OVERGROWTH": {
+          "healthy": {
+            "goal": 2
+          },
+          "lean": {
+            "goal": 2
+          }
+        },
+        "UNDERDOCKS": {
+          "healthy": {
+            "goal": 2
+          },
+          "lean": {
+            "goal": 2
+          }
+        }
+      },
+      "later_act_boss_goal_successes": 0,
+      "room_coverage_candidate": true
+    },
+    "goals": 13,
+    "losses": 5,
+    "native_deliveries": 1023,
+    "segments": 18,
+    "worlds": 9
+  },
+  "final_test_worlds_used": false,
+  "first_control_scope": {
+    "completed_segments": 10,
+    "glory_lean_losses": 2,
+    "hive_preboss_goals": 1
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "initial_feasibility_probe": {
+    "path": "artifacts/native-a8-practice-mix/probe-v1/report.json",
+    "report_id": "sha256:d35b6330ebd61080987707e4071679ffea7eb34ceafa9634b724451d3d30a9e0",
+    "sha256": "2cbf20549f2ccb303231def344d1a3fc67f5cf7839f6365f634ff700b3516bb6"
+  },
+  "main_segments_launched": 0,
+  "normal_start_evaluation_games": 0,
+  "optimizer_updates": 0,
+  "planned_main_segments": 64,
+  "planned_main_worlds": 32,
+  "preserved_first_control": {
+    "path": "artifacts/native-a8-practice-mix/control-v1/report.json",
+    "report_id": "sha256:9e0b237a0191260a473c3040ac71aa44687fa3271f80e996daa8a88e6617a70d",
+    "sha256": "a9ba96e9185bf34ddf920096783d411ebb2fc8022e11047981c92bc81d9070a9"
+  },
+  "preserved_first_control_resource": {
+    "path": "artifacts/native-a8-practice-mix/control-v1-resources.json",
+    "report_id": "sha256:40515e4d86011f0b76e258ed3ea40faf567ded57673986d450c621826cc043ee",
+    "sha256": "d6bb06cf25891596041787697532033f1b044d9008eaddf008e3b3b8bd23115d"
+  },
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-practice-mix-v2.json",
+    "sha256": "be862eecc35295f991a5c56c726f9a016d29de56094c1df1a2319e819e78fc57"
+  },
+  "report_id": "sha256:1bc428f9f29311ecd0badc67a77ff46a598a7fb1738a2ff7aff7d251ff646d31",
+  "schema_version": "native-a8-practice-mix-preparation-v1",
+  "shared_profile_unchanged": true,
+  "status": "practice_collection_ready",
+  "training_admission_granted": false
+}

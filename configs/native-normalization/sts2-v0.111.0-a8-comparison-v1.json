@@ -1,0 +1,15 @@
+{
+  "arms": {
+    "normalized": {
+      "id": "sha256:c80020346b5c76382cece3fe6c219a669748578ce7f5b6fa7d7d3194649dd5c6",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-input-normalized-v1.json"
+    },
+    "unscaled": {
+      "id": "sha256:5e897eace892178ff44d3fd6c3ec0c4d398192ba1843602816598a775a1dcf6e",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-input-unscaled-v1.json"
+    }
+  },
+  "implementation_sha256": "0f762a52bd775e0bca6852bc3d49e145bddeda0c5222a895e90c03ff39ebd505",
+  "qualification_config": "configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json",
+  "schema_version": "native-input-normalization-comparison-config-v1"
+}

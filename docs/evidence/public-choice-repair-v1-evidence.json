@@ -1,0 +1,93 @@
+{
+  "admitted": false,
+  "bounded_synthetic_regression_check": {
+    "limits": {
+      "cpu_seconds": 120.0,
+      "resident_memory_bytes": 8000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 45.0
+    },
+    "native_library_published": false,
+    "regression_tests": {
+      "executed": 23,
+      "failed": 0,
+      "passed": 23,
+      "total": 23
+    },
+    "required_classes": [
+      "SpireShiftFullRunCompletionTests",
+      "SpireShiftPublicChoicesTests"
+    ],
+    "resource_report_id": "sha256:bf687d2f3adb97454619f2697f98cad814740cc857d54860192aa2fe2432c746",
+    "scope": "filtered_managed_tests_no_native_publish_or_agent_games",
+    "test_report_path": "artifacts/backend-repair/public-choices-v1/synthetic-check-v1/public-choices.trx",
+    "test_report_sha256": "f4173a0113f01dd69f6f726c88785846949de00051f8a28f7a7587f089cdd9a0",
+    "usage": {
+      "cpu_seconds": 4.686630428000001,
+      "peak_resident_memory_bytes": 424706048,
+      "peak_storage_bytes": 107143826,
+      "wall_seconds": 5.004635708988644
+    }
+  },
+  "checkpoint_promoted": false,
+  "claim_scope": "synthetic_public_menu_source_binding_and_parent_native_build_not_agent_strength_or_live_conformance",
+  "completion_repair_owner_build": {
+    "admission_status": "pending_conformance",
+    "build_report_id": "sha256:82760b3fde5383fe5aabc86a78218adb6fa23fa76b2569e1d564d8c6379d65fc",
+    "candidate_manifest_id": "sha256:4f49cbbbcbbc58cafa91680efc0980745086ce0ac8ad432e9bd2d485daf62bcd",
+    "candidate_revision": "99fad6a73912e26af6872c2f0742ebeb5ffb3581",
+    "cpu_seconds": 16.481172027999996,
+    "native_sha256": "cc08d7e9c75e2f86cfd84a52e5fd106b16986448f72f860848fb84f9be8b1eb0",
+    "native_size_bytes": 5203824,
+    "regression_tests": {
+      "executed": 9,
+      "failed": 0,
+      "passed": 9,
+      "total": 9
+    },
+    "resource_report_id": "sha256:e2008beea0b5d31fab77eebec5a5c69dd18f90c0406375675c42d2051ce5cc1f",
+    "test_report_sha256": "436ceb366da77dc7029f00ae338bcb2d01d941fbb2e710dbe72c60b7a7662b0a",
+    "test_runtime_report_sha256": "a22850d11d2acecac9d424620c087efd2781fd63d935f6a6953059c4d06b73dc",
+    "wall_seconds": 10.284453458007192
+  },
+  "games_played": 0,
+  "optimizer_steps": 0,
+  "public_choice_candidate": {
+    "admitted": false,
+    "base_revision": "99fad6a73912e26af6872c2f0742ebeb5ffb3581",
+    "candidate_revision": "9d531713416ae8f29380ffa80c3ef99bb1ca39e5",
+    "candidate_tree": "4443b81c5f54e3e7b5197566bf597f19e94c6248",
+    "config_id": "sha256:77d7fce9a357003bdc0a5c107f2e0fa989503bbfe10328988324c29a49ed5cf3",
+    "native_build_started": false,
+    "patch_sha256": "21e206909ac7463ac78e8900812f5ceb6a02dbb16c4319f1cfd48c4ba236de6b",
+    "regression_tests_sha256": "22a3a5cb245f106e458007dd26bb62406b337f95f37d198b8016a7c91fb6fced",
+    "report_id": "sha256:d8389ae89491ba430889e0e7120686f7e3262327d299f5b601e3da8fcd22f8e4",
+    "schema_version": "full-run-backend-repair-preparation-v1",
+    "training_allowed": false
+  },
+  "public_contract": {
+    "agent_integration_complete": false,
+    "all_offered_combat_cards_required": true,
+    "hidden_pile_order_exposed": false,
+    "live_game_conformance_verified": false,
+    "schema_id": "public-run-choices-v1",
+    "selectable_difficulty": false,
+    "selected_bundle_and_confirmation_exposed": true,
+    "source_declared_ascension_level": 8,
+    "state_lists": [
+      22,
+      23,
+      24
+    ]
+  },
+  "remaining_checks": [
+    "owner_publish_public_choice_native_candidate_and_check_exports",
+    "integrate_into_new_versioned_adapter_and_full_run_encoder",
+    "verify_source_fixed_ascension_8_against_frozen_game",
+    "validate_changed_act_boundaries_against_frozen_game",
+    "readmit_new_ruleset_before_new_learning_recipe"
+  ],
+  "report_id": "sha256:38431a790625810674b711ddb6bb076234655d1e5e19b1cff895daecd342c0df",
+  "schema_version": "public-choice-repair-evidence-v1",
+  "training_allowed": false
+}

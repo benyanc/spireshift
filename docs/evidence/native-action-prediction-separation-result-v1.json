@@ -1,0 +1,739 @@
+{
+  "PPO_Adam_updates": 0,
+  "adaptive_controller_allowed": false,
+  "all_other_source_strata_preserved_in_private_report": true,
+  "assessment": {
+    "auditor_path": "artifacts/native-prediction/result-assessment-v1/assess.py",
+    "auditor_sha256": "efc9eab0c3bac2325d594d5ef5ef5cf7d4bb85f6489c6c80f5bdea5a1cf99174",
+    "path": "artifacts/native-prediction/result-assessment-v1/report.json",
+    "report_id": "sha256:4e48abe29b74909c17efb4a5589a78128e7638886f58dc7eefccc2d4ed40e7ad",
+    "sha256": "b376b767ee2625a232ec5c62cc35451c32a182727e757ce7b977250468340849"
+  },
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "common_update_disruption_observed_not_causal_loss_decomposition": true,
+  "config": {
+    "config_id": "sha256:dda6fa4306aad1ffff8866e5ae633f07bb93013aca4ac852328cf9e620274f2a",
+    "path": "configs/native-prediction/sts2-v0.111.0-a8-action-separation-v1.json",
+    "sha256": "99f284a60266d82ccb4652c060de51e048b56366ca516b4bfab10d37f90c5a47"
+  },
+  "date": "2026-10-21",
+  "development_worlds": 32,
+  "equal_game_within_stratum": true,
+  "fitted_prediction_did_not_change_original_action_scores_or_probabilities": true,
+  "fixed_parent_initializers": 2,
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "games_launched": 0,
+  "historical_preparation_evidence": {
+    "path": "docs/evidence/native-action-prediction-separation-v1.json",
+    "report_id": "sha256:4e8dc7305bf57e2ccd8928df3d361fb5882008e0fb7472a82a4758a19cfcf353"
+  },
+  "independent_numeric_history_aggregation_passed": true,
+  "menu_counts": {
+    "all_combat": 15727,
+    "all_navigation": 122,
+    "all_noncombat": 6993,
+    "strategic_combat": 12549,
+    "strategic_noncombat": 4941
+  },
+  "neural_inference_or_native_delivery_independently_rerun_by_result_audit": false,
+  "new_learning_recipe_prepared": false,
+  "next_work": "qualify_deliberate_actor_objective_then_prepare_bounded_fresh_on_policy_comparison",
+  "optimizer_updates_this_assessment": 0,
+  "original_parents": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "verified_byte_identical": true
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "verified_byte_identical": true
+    }
+  ],
+  "original_path_ranking_cells": [
+    {
+      "contrast": "original_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.4179434097102609,
+        "after_centered_RMS": 0.2866024049591333,
+        "after_margin": 0.28478857372525934,
+        "before_centered_RMS": 2.842443485120469,
+        "before_margin": 1.0562370305177635,
+        "entropy_change": 0.527583099497861,
+        "greedy_changed": 0.4248841064458077,
+        "same_draw_choice_changed": null
+      },
+      "games_with_eligible_menus": 32,
+      "group": "combat",
+      "numerical_seed": 2,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_return_only",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.42266658690809145,
+        "after_centered_RMS": 0.28163390370322544,
+        "after_margin": 0.2734470931665251,
+        "before_centered_RMS": 2.842443485120469,
+        "before_margin": 1.0562370305177635,
+        "entropy_change": 0.5322755993208781,
+        "greedy_changed": 0.4294186436436159,
+        "same_draw_choice_changed": null
+      },
+      "games_with_eligible_menus": 32,
+      "group": "combat",
+      "numerical_seed": 2,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "return_only_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.0017169208867050764,
+        "after_centered_RMS": 0.2866024049591333,
+        "after_margin": 0.28478857372525934,
+        "before_centered_RMS": 0.28163390370322544,
+        "before_margin": 0.2734470931665251,
+        "entropy_change": -0.004692499823017099,
+        "greedy_changed": 0.07494475674476585,
+        "same_draw_choice_changed": null
+      },
+      "games_with_eligible_menus": 32,
+      "group": "combat",
+      "numerical_seed": 2,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.1872946851534283,
+        "after_centered_RMS": 0.5572223416384665,
+        "after_margin": 0.7337484670482777,
+        "before_centered_RMS": 1.1435850203382512,
+        "before_margin": 1.6072155820799674,
+        "entropy_change": 0.30012651461127754,
+        "greedy_changed": 0.22251064680218438,
+        "same_draw_choice_changed": 0.27001720128446516
+      },
+      "games_with_eligible_menus": 32,
+      "group": "noncombat",
+      "numerical_seed": 2,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_return_only",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.18865497082266022,
+        "after_centered_RMS": 0.5571704860478914,
+        "after_margin": 0.7360986648908062,
+        "before_centered_RMS": 1.1435850203382512,
+        "before_margin": 1.6072155820799674,
+        "entropy_change": 0.300160966376079,
+        "greedy_changed": 0.22751572346576363,
+        "same_draw_choice_changed": 0.26922797035791285
+      },
+      "games_with_eligible_menus": 32,
+      "group": "noncombat",
+      "numerical_seed": 2,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "return_only_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.0002190247500843931,
+        "after_centered_RMS": 0.5572223416384665,
+        "after_margin": 0.7337484670482777,
+        "before_centered_RMS": 0.5571704860478914,
+        "before_margin": 0.7360986648908062,
+        "entropy_change": -3.445176480134119e-05,
+        "greedy_changed": 0.018549571581429423,
+        "same_draw_choice_changed": 0.014242494113254662
+      },
+      "games_with_eligible_menus": 32,
+      "group": "noncombat",
+      "numerical_seed": 2,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.3957699959582098,
+        "after_centered_RMS": 0.24784102728756513,
+        "after_margin": 0.15475075512059092,
+        "before_centered_RMS": 1.6428417875396992,
+        "before_margin": 0.774622360704224,
+        "entropy_change": 0.4872710719448776,
+        "greedy_changed": 0.49186879817442364,
+        "same_draw_choice_changed": null
+      },
+      "games_with_eligible_menus": 32,
+      "group": "combat",
+      "numerical_seed": 3,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_return_only",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.3968559400575319,
+        "after_centered_RMS": 0.2449220992002555,
+        "after_margin": 0.15575555893332624,
+        "before_centered_RMS": 1.6428417875396992,
+        "before_margin": 0.774622360704224,
+        "entropy_change": 0.4883296562333793,
+        "greedy_changed": 0.49351724766849503,
+        "same_draw_choice_changed": null
+      },
+      "games_with_eligible_menus": 32,
+      "group": "combat",
+      "numerical_seed": 3,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "return_only_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.0008535998267881888,
+        "after_centered_RMS": 0.24784102728756513,
+        "after_margin": 0.15475075512059092,
+        "before_centered_RMS": 0.2449220992002555,
+        "before_margin": 0.15575555893332624,
+        "entropy_change": -0.0010585842885015703,
+        "greedy_changed": 0.0664127034914157,
+        "same_draw_choice_changed": null
+      },
+      "games_with_eligible_menus": 32,
+      "group": "combat",
+      "numerical_seed": 3,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.14922758774515174,
+        "after_centered_RMS": 0.6600164307867619,
+        "after_margin": 0.9556141347369634,
+        "before_centered_RMS": 1.342735669649556,
+        "before_margin": 1.951840983345401,
+        "entropy_change": 0.3113601523972461,
+        "greedy_changed": 0.16072996397722192,
+        "same_draw_choice_changed": 0.25119614226096143
+      },
+      "games_with_eligible_menus": 32,
+      "group": "noncombat",
+      "numerical_seed": 3,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "original_to_return_only",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.15280496605763813,
+        "after_centered_RMS": 0.6575255276442453,
+        "after_margin": 0.9497076154626971,
+        "before_centered_RMS": 1.342735669649556,
+        "before_margin": 1.951840983345401,
+        "entropy_change": 0.31314710900900233,
+        "greedy_changed": 0.15918781551895506,
+        "same_draw_choice_changed": 0.2522037067450884
+      },
+      "games_with_eligible_menus": 32,
+      "group": "noncombat",
+      "numerical_seed": 3,
+      "source_policy": "original"
+    },
+    {
+      "contrast": "return_only_to_consequence",
+      "equal_game_mean": {
+        "KL_before_to_after": 0.0001879614358575816,
+        "after_centered_RMS": 0.6600164307867619,
+        "after_margin": 0.9556141347369634,
+        "before_centered_RMS": 0.6575255276442453,
+        "before_margin": 0.9497076154626971,
+        "entropy_change": -0.0017869566117561738,
+        "greedy_changed": 0.009542464114832536,
+        "same_draw_choice_changed": 0.009818328373015873
+      },
+      "games_with_eligible_menus": 32,
+      "group": "noncombat",
+      "numerical_seed": 3,
+      "source_policy": "original"
+    }
+  ],
+  "owner_command_to_rerun": null,
+  "prediction_fits": [
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:5b409350f2e112a79f5689a977bddfc58bb71883907518182698299419670718",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910000/fit-report.json",
+      "state_id": "sha256:d69e63b5c71815cb9c6d31c5963a5307c5734689518b57c18f72bd0e37efb5f1",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910000/predictor-state.json",
+      "state_sha256": "0cac59c2ce664ff0321021e986988cfef88f8f86a18e3173a8031553d2810042",
+      "task": {
+        "held_world": 1910000,
+        "key": "predictor-p2-w1910000",
+        "numerical_seed": 2,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:76bba69292853b7a1752e7d0b4eb16d1b6e30fd8e792302bfafed4204611bea9",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910002/fit-report.json",
+      "state_id": "sha256:9b6c861e6283c4fee89b591b5dc2409c75376754b4ee87d8ec8c8d65b96383f4",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910002/predictor-state.json",
+      "state_sha256": "b6e0a5f1d4a025981bc4ed1b1719e9bd447da869bf0fba080269641b460426db",
+      "task": {
+        "held_world": 1910002,
+        "key": "predictor-p2-w1910002",
+        "numerical_seed": 2,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:654a8a046e1c05fd44fe4a4c3be32e80bb00dcdecc8813e17c8cc79bf3cef6b9",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910004/fit-report.json",
+      "state_id": "sha256:d0711312c15c565bd5f03d41e4fccce545eeee5c5c28b383ae5e3cb503b8bb03",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910004/predictor-state.json",
+      "state_sha256": "77531bad8e067f3077b3063cc4d8fef934cab0ffe1e8ad70071d26a305cdfc67",
+      "task": {
+        "held_world": 1910004,
+        "key": "predictor-p2-w1910004",
+        "numerical_seed": 2,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:366571c6294a6d9173af803d18dc3ae5726e622ac9fbeb74f371adf20c98e61d",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910006/fit-report.json",
+      "state_id": "sha256:8e1c2dca210875743ba1550f2d2b2197dfff8fb90eefcf40c1c9e1c3e65854f3",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-w1910006/predictor-state.json",
+      "state_sha256": "7c85b47a4806167a17f61390bc820988c9a661ca0ad6ad089f9b9e5fac104c9b",
+      "task": {
+        "held_world": 1910006,
+        "key": "predictor-p2-w1910006",
+        "numerical_seed": 2,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:334476ab90f82b0cb6af4df9058c8c31a93a6e11e3f0f450ed87dd2716ac9236",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-final/fit-report.json",
+      "state_id": "sha256:bec8ae1ba8a7e3cab2a23019e75312bcfedb024b92f5f10a5007437a4ec82a12",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p2-final/predictor-state.json",
+      "state_sha256": "fb7b1f2816b68c4d24fe4c89acc498fd6ef33971644f45442ad12c59a480b5a5",
+      "task": {
+        "held_world": null,
+        "key": "predictor-p2-final",
+        "numerical_seed": 2,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:dc64c39432160a4b9fcbddb13051df07ae6b65225cb3323e1c7746b64c11f04c",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-w1910001/fit-report.json",
+      "state_id": "sha256:a016a0af3e657424904c970acb1dc021ba0a450c4372ce35fccb731b9e53848e",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-w1910001/predictor-state.json",
+      "state_sha256": "597d1b17e06550a455068978b565023e0aff72f6422e805cf3b1290478889600",
+      "task": {
+        "held_world": 1910001,
+        "key": "predictor-p3-w1910001",
+        "numerical_seed": 3,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:128e44047b8ee2df47a7f5969b00e8a94e8edc56b270509494d5734c990069f2",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-w1910005/fit-report.json",
+      "state_id": "sha256:9f3244126865f312ad87bf01129a430d729072c512d66c1fb4bb6468a175695f",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-w1910005/predictor-state.json",
+      "state_sha256": "edbf3480a1f6d2bd51c4dd547526e27494af18881247cd19ca9323cd6479e049",
+      "task": {
+        "held_world": 1910005,
+        "key": "predictor-p3-w1910005",
+        "numerical_seed": 3,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:1337c0955eca28459be0f261a4bbdbe5cc45026c921e76b8f1011dfbdd91d37b",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-w1910007/fit-report.json",
+      "state_id": "sha256:d379ae20b1e29a82840c2b2614e17034135190ab5010a48cebb0314b3336d308",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-w1910007/predictor-state.json",
+      "state_sha256": "91d493ac4a7714cf1e707fad978f79acd1c0e397b700ca3caaa95f2cd09900fb",
+      "task": {
+        "held_world": 1910007,
+        "key": "predictor-p3-w1910007",
+        "numerical_seed": 3,
+        "stage": "prediction_fit"
+      }
+    },
+    {
+      "independent_prediction_Adam_steps": 128,
+      "predictor_id": "sha256:09dac01e28d50e2976a01dfe9f23e81a3bef7d44622a670e5471e6e5bfac57fd",
+      "report_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-final/fit-report.json",
+      "state_id": "sha256:2f3638c0349170779355ec610b1a9aac730d739dbce5c178b46e63becbe5879c",
+      "state_path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/chunks/predictor-p3-final/predictor-state.json",
+      "state_sha256": "91a8042df55ab9d0b5062a28655627271592e5a94433b9485eb70bdd7c148ff0",
+      "task": {
+        "held_world": null,
+        "key": "predictor-p3-final",
+        "numerical_seed": 3,
+        "stage": "prediction_fit"
+      }
+    }
+  ],
+  "prediction_label_scope": {
+    "TRAIN_worlds": 7,
+    "all_TRAIN_predictors": 2,
+    "causal_action_value_quality_established": false,
+    "combat_rows": 442,
+    "development_outcomes_or_menus_used_for_fitting": false,
+    "full_victory_probabilities_established": false,
+    "matched_improvement_over_historical_predictors_established": false,
+    "own_Adam_steps_each": 128,
+    "prediction_folds": 7,
+    "predictor_epochs": 128,
+    "predictor_initializers": 1,
+    "related_plans": 51,
+    "state_only_PPO_baseline_admitted": false
+  },
+  "prediction_world_errors": [
+    {
+      "equal_world_mean_errors": {
+        "encounter_alive_exit": {
+          "fitting_MSE": 0.004755053121117395,
+          "fitting_constant_held_MSE": 0.33333333333333287,
+          "held_MSE": 0.3111709912018957
+        },
+        "encounter_exit_hp_delta": {
+          "fitting_MSE": 0.0004872920440690978,
+          "fitting_constant_held_MSE": 0.019716264990485854,
+          "held_MSE": 0.01782028003686757
+        },
+        "next_public_enemy_hp_sum_delta": {
+          "fitting_MSE": 0.0006340741812161336,
+          "fitting_constant_held_MSE": 0.007423752659780325,
+          "held_MSE": 0.0027350737389230198
+        },
+        "next_public_hp_delta": {
+          "fitting_MSE": 0.0005766703392919754,
+          "fitting_constant_held_MSE": 0.007408479385561561,
+          "held_MSE": 0.0036777426556596263
+        },
+        "next_public_potion_count_delta": {
+          "fitting_MSE": 0.0,
+          "fitting_constant_held_MSE": 0.0,
+          "held_MSE": 0.0
+        },
+        "next_turn_hp_delta": {
+          "fitting_MSE": 0.0009958137406432565,
+          "fitting_constant_held_MSE": 0.017058831498237746,
+          "held_MSE": 0.016565807971560098
+        },
+        "recorded_continuation_full_run_return": {
+          "fitting_MSE": 1.7938197996009828e-07,
+          "fitting_constant_held_MSE": 2.424767106300523e-05,
+          "held_MSE": 2.2293402315767663e-05
+        }
+      },
+      "numerical_seed": 2,
+      "whole_world_folds": 4
+    },
+    {
+      "equal_world_mean_errors": {
+        "encounter_alive_exit": {
+          "fitting_MSE": 3.948413176653085e-30,
+          "fitting_constant_held_MSE": 3.9484131766530856e-30,
+          "held_MSE": 3.9484131766530856e-30
+        },
+        "encounter_exit_hp_delta": {
+          "fitting_MSE": 0.0008069485681809676,
+          "fitting_constant_held_MSE": 0.0033704343289008743,
+          "held_MSE": 0.0028279958567006616
+        },
+        "next_public_enemy_hp_sum_delta": {
+          "fitting_MSE": 0.0007427555511829979,
+          "fitting_constant_held_MSE": 0.01145585447429743,
+          "held_MSE": 0.008464514187200943
+        },
+        "next_public_hp_delta": {
+          "fitting_MSE": 0.0003959590703973023,
+          "fitting_constant_held_MSE": 0.00208166392096623,
+          "held_MSE": 0.0015545704404633161
+        },
+        "next_public_potion_count_delta": {
+          "fitting_MSE": 0.0,
+          "fitting_constant_held_MSE": 0.0,
+          "held_MSE": 0.0
+        },
+        "next_turn_hp_delta": {
+          "fitting_MSE": 0.0011066736111919522,
+          "fitting_constant_held_MSE": 0.005712800547531997,
+          "held_MSE": 0.004035228087833528
+        },
+        "recorded_continuation_full_run_return": {
+          "fitting_MSE": 5.045793767474481e-07,
+          "fitting_constant_held_MSE": 2.5725850164007124e-05,
+          "held_MSE": 2.8821668915047702e-05
+        }
+      },
+      "numerical_seed": 3,
+      "whole_world_folds": 3
+    }
+  ],
+  "protected_source_files": 73988,
+  "report_id": "sha256:398dbc7f871fe5386690b690a86610ff6a9a1a36ca2b137601dc71d6b4341acb",
+  "resources": {
+    "all_inspection_CPU_seconds_including_short_sample": 357.85540565400004,
+    "all_inspection_wall_seconds_including_short_sample": 418.13941016583703,
+    "cumulative_storage_snapshots_not_summed": true,
+    "final_cumulative_output_bytes": 84979334,
+    "inspection_sessions": [
+      {
+        "exit_code": 0,
+        "path": "artifacts/resources/native-action-separation-v1-1.json",
+        "report_id": "sha256:792be69185d717c3506881b61bd625d874d329d8d6b0e71033db283c28a71853",
+        "sha256": "c500d875c8d33d6087e9332b795886c3bb3cf14f0762d6f8b50c33d5ec034d81",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.0402179324275548,
+          "cpu_hours": 0.007315293109166667,
+          "cpu_seconds": 26.335055193,
+          "energy_kwh": null,
+          "final_storage_bytes": 28899838,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 2,
+          "peak_resident_memory_bytes": 195084288,
+          "peak_storage_bytes": 28899838,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 46.77205558284186
+        }
+      },
+      {
+        "exit_code": 0,
+        "path": "artifacts/resources/native-action-separation-v1-2.json",
+        "report_id": "sha256:3ddbd9e84714f71a2ae6cbe16599394a9ca56f6dad2e899147901b4a3c1c234d",
+        "sha256": "8d4ea8d9d53682cc7ac924755bd3c9c6979ff009e389fd9597a687a2035f48f5",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.06381164001030196,
+          "cpu_hours": 0.05022275095472223,
+          "cpu_seconds": 180.80190343700002,
+          "energy_kwh": null,
+          "final_storage_bytes": 49742733,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 2,
+          "peak_resident_memory_bytes": 234799104,
+          "peak_storage_bytes": 49742733,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 202.38347849994898
+        }
+      },
+      {
+        "exit_code": 0,
+        "path": "artifacts/resources/native-action-separation-v1-3.json",
+        "report_id": "sha256:357627450e7cafbca51830471f9cc703251f418cd441ffc2f6c33e3969bc95ee",
+        "sha256": "01b53d9ad0ae4a40ef34205e605d60a11d5dca3874fbe94948dd3c54fa18bf14",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.06370787325038305,
+          "cpu_hours": 0.04186623528444444,
+          "cpu_seconds": 150.718447024,
+          "energy_kwh": null,
+          "final_storage_bytes": 84979334,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 2,
+          "peak_resident_memory_bytes": 274382848,
+          "peak_storage_bytes": 84979334,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 168.9838760830462
+        }
+      }
+    ],
+    "owner_remaining_CPU_seconds": 331.520350461,
+    "owner_remaining_wall_seconds": 371.3673545829952,
+    "peak_inspection_resident_bytes": 274382848,
+    "repository_check_attempts": [
+      {
+        "cap": {
+          "limit": 240.0,
+          "observed": 240.21217858418822,
+          "resource": "wall_seconds"
+        },
+        "path": "artifacts/resources/native-action-separation-result-repository-check-v1.json",
+        "report_id": "sha256:42268e11840dd751b09117ed3c84a1d290614c4888d4f0ae79b4c9c089720040",
+        "reported_child_exit_code": 0,
+        "sha256": "bbaf9744ab916adbc2270b72a8874ef422cba5db4990d46aa9940db10bef96f2",
+        "status": "capped",
+        "usage": {
+          "average_cpu_utilization": 0.020200081970000516,
+          "cpu_hours": 0.018872795487500003,
+          "cpu_seconds": 67.942063755,
+          "energy_kwh": null,
+          "final_storage_bytes": 0,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 6,
+          "peak_resident_memory_bytes": 219054080,
+          "peak_storage_bytes": 0,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 240.24677529209293
+        }
+      },
+      {
+        "cap": null,
+        "numerical_threads": {
+          "MKL_NUM_THREADS": 1,
+          "OMP_NUM_THREADS": 1,
+          "OPENBLAS_NUM_THREADS": 1,
+          "VECLIB_MAXIMUM_THREADS": 1
+        },
+        "path": "artifacts/resources/native-action-separation-result-repository-check-v2.json",
+        "report_id": "sha256:2d8b38ade38864005d92d5292357d678ed32cca7a00e65379a22d34ffecfe59e",
+        "reported_child_exit_code": 0,
+        "sha256": "1ec9f4fec6f0837c712c12769ca6c898f8011954c3fc5287fcabe8de94629436",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.04128551559526921,
+          "cpu_hours": 0.03628119910555555,
+          "cpu_seconds": 130.61231678,
+          "energy_kwh": null,
+          "final_storage_bytes": 0,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 8,
+          "peak_resident_memory_bytes": 394936320,
+          "peak_storage_bytes": 0,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 225.9739539171569
+        }
+      }
+    ],
+    "result_audit": {
+      "exit_code": 0,
+      "path": "artifacts/resources/native-action-separation-result-assessment-v1.json",
+      "report_id": "sha256:d54c9a10c791c9c734d8eee83cea06e7d5b1f0b11897aa30c7f76a26c0cc78c1",
+      "sha256": "c9cc65c2554d255f29e0db140a8c47fd99922ccba0887206ec2a0fa447f4174d",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.0320275089808087,
+        "cpu_hours": 0.002394138553611111,
+        "cpu_seconds": 8.618898793,
+        "energy_kwh": null,
+        "final_storage_bytes": 42830,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 241500160,
+        "peak_storage_bytes": 42830,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 19.222088999813423
+      }
+    },
+    "scope": "Only new inspection and result audit outputs; inherited teacher/game/native inputs are read-only and excluded."
+  },
+  "saved_decisions": 22842,
+  "saved_episodes": 192,
+  "schema_version": "native-action-prediction-separation-result-evidence-v1",
+  "source_choices_ownership_navigation_and_probabilities_replayed_by_collector": true,
+  "source_experiment_report_id": "sha256:e7609ad585e66bf738f6e9f623b591eedd3d0360408b20d8445ff02b77b4e7bd",
+  "source_policies_stratified": true,
+  "source_policy_variants": 3,
+  "source_report": {
+    "path": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1/report.json",
+    "report_id": "sha256:90850766417b607314aeb584f81e41136b3d939c3a57d778479d0c8a10f57de4",
+    "sha256": "c90584ce90ca9fbfed996db5779489d7a725c619e375e00f2f29d604948bfa7c"
+  },
+  "status": "completed_saved_inspection_independent_prediction_control_passed",
+  "strategic_menu_rates_exclude_singleton_and_forced_navigation_only": true,
+  "stronger_play_established": false,
+  "tracking_issues": [
+    35,
+    143,
+    146
+  ],
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "verification": {
+    "first_result_check_status": "capped_at_240_wall_seconds_not_a_full_pass",
+    "fresh_format_lint_and_CSharp_protocol_passed": true,
+    "fresh_full_repository_check_complete": true,
+    "fresh_passed_tests": 2216,
+    "fresh_skipped_tests": 4,
+    "fresh_strict_typed_files": 443,
+    "git_diff_check_passed": true,
+    "local_document_links_and_evidence_identifier_verified": true,
+    "previous_implementation_check": {
+      "cap": null,
+      "path": "artifacts/resources/native-action-separation-repository-check-v1.json",
+      "report_id": "sha256:f43bb9ac987460995a18fb54c55c70f898e6dee9cfe83a57d8adc1a2e36d1cc8",
+      "reported_child_exit_code": 0,
+      "sha256": "810c4281a198ec1009ae95674c95bdd1f01e70a31f5be2cc649e6fe169245abd",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.06374792122146908,
+        "cpu_hours": 0.033323253503333324,
+        "cpu_seconds": 119.96371261199997,
+        "energy_kwh": null,
+        "final_storage_bytes": 0,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 390692864,
+        "peak_storage_bytes": 0,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 134.41750649991445
+      }
+    },
+    "previous_implementation_check_passed_tests": 2216,
+    "previous_implementation_check_skipped_tests": 4,
+    "previous_implementation_check_strict_typed_files": 443,
+    "resource_status_and_cap_determine_completion_not_child_exit_code_alone": true,
+    "saved_result_audit_passed": true,
+    "scope_of_committed_changes": "result documentation and backlog only; historical runtime sources and recipes unchanged",
+    "single_thread_capped_retry_pending": false
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "automatic_follow_up": false,
+  "config_id": "sha256:71ee4f3d67351c2b421e6b5eed40187c03d26f370443871dc0b8e151de0e3dde",
+  "coverage": {
+    "act1_bosses": [
+      "LAGAVULIN_MATRIARCH_BOSS"
+    ],
+    "bank": {
+      "ee2ffb605c67742f": {
+        "path": "artifacts/native-a8-archive-batch/pilot-v1-verified-start/chunks/ee2ffb605c67742f/public-answers.jsonl.gz",
+        "seed": "5SELZ5UWJ3SK",
+        "sha256": "0ed7601fdb8b1d8eca42629a23afbad69cfbb95c7337a9768807d5a1d9f117a5"
+      }
+    },
+    "candidate_for_separate_fitting_admission": false,
+    "checks": {
+      "all_acts_and_decision_families": true,
+      "all_cases_resolved": true,
+      "three_distinct_winning_worlds": false,
+      "two_distinct_act1_bosses": false,
+      "two_distinct_final_bosses": false,
+      "two_distinct_openings": false
+    },
+    "final_bosses": [
+      "QUEEN_BOSS"
+    ],
+    "native_delivery_count": 896,
+    "openings": [
+      "NEOW.pages.INITIAL.options.ARCANE_SCROLL"
+    ],
+    "outcomes": {
+      "diverged": 2,
+      "source_rejected": 4,
+      "verified_native_victory": 1
+    },
+    "planned_worlds": 7,
+    "public_answers_by_act_and_owner": {
+      "1": {
+        "card_reward_selection": 8,
+        "card_selection": 7,
+        "combat_turn": 199,
+        "event_option": 6,
+        "map_navigation": 16,
+        "rest_site": 8,
+        "reward_claim": 28,
+        "shop_inventory": 4,
+        "treasure_room": 3
+      },
+      "2": {
+        "card_reward_selection": 8,
+        "card_selection": 2,
+        "combat_turn": 180,
+        "event_option": 8,
+        "map_navigation": 16,
+        "native_generated_card_choice": 3,
+        "rest_site": 4,
+        "reward_claim": 28,
+        "shop_inventory": 9,
+        "treasure_room": 3
+      },
+      "3": {
+        "card_reward_selection": 6,
+        "card_selection": 19,
+        "combat_turn": 270,
+        "event_option": 11,
+        "map_navigation": 15,
+        "native_generated_card_choice": 1,
+        "rest_site": 4,
+        "reward_claim": 23,
+        "shop_inventory": 4,
+        "treasure_room": 3
+      }
+    },
+    "verified_worlds": 1
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "promotion_allowed": false,
+  "report_id": "sha256:73091aa61511c702b757e78bdc70d374566a7c4ca63df739f19db21c40f33b8a",
+  "schema_version": "native-a8-archive-batch-v1-result",
+  "seals": {
+    "28b20eb6e1e88812": "sha256:6220ee641d4413f391a1cb773af9fb850e720f5a1a014f95ee12aa2db44546be",
+    "3b747e9621031ae1": "sha256:49506e06ec58bfd60d4f04d8f80ce17402c02a8c6b039e08d1ff9f78ac3cb812",
+    "3cb0429d17be9210": "sha256:1f0080a196fadc1e603daeae30df620f18b6b10211ff0980cebb80340c6dc109",
+    "6739ccb495f9b471": "sha256:32b2e34abd871d7d9630534d67eda20a7972c5e611f396a4252ba786c6d8b6fa",
+    "6f7d841fbdf0bb23": "sha256:e814e52fd65ddaeca91aa4479ebb1cec62ecfbe811461d9c15ab106f76658dde",
+    "9dc545337e0fc3eb": "sha256:ffa2bb90a802002626483def26a6d0c84dd1c700ce95ffd83e2dc8b6dc672b93",
+    "ee2ffb605c67742f": "sha256:d74f3b05040299eb3653ede4b8deb90b8f496030a65d013c4cff2362cfd199e3"
+  },
+  "seed_ownership": {
+    "development": [
+      "SP1RESH1FTA8ARD001",
+      "SP1RESH1FTA8ARD002",
+      "SP1RESH1FTA8ARD003",
+      "SP1RESH1FTA8ARD004",
+      "SP1RESH1FTA8ARD005",
+      "SP1RESH1FTA8ARD006",
+      "SP1RESH1FTA8ARD007",
+      "SP1RESH1FTA8ARD008",
+      "SP1RESH1FTA8ARD009",
+      "SP1RESH1FTA8ARD010",
+      "SP1RESH1FTA8ARD011",
+      "SP1RESH1FTA8ARD012"
+    ],
+    "final_test": [
+      "SP1RESH1FTA8ART001",
+      "SP1RESH1FTA8ART002",
+      "SP1RESH1FTA8ART003",
+      "SP1RESH1FTA8ART004",
+      "SP1RESH1FTA8ART005",
+      "SP1RESH1FTA8ART006",
+      "SP1RESH1FTA8ART007",
+      "SP1RESH1FTA8ART008",
+      "SP1RESH1FTA8ART009",
+      "SP1RESH1FTA8ART010",
+      "SP1RESH1FTA8ART011",
+      "SP1RESH1FTA8ART012"
+    ]
+  },
+  "shared_profile_unchanged": true,
+  "status": "archive_batch_gate_blocked",
+  "stop": null,
+  "training_admission_granted": false,
+  "worlds": {
+    "28b20eb6e1e88812": {
+      "error": "Require a recorded special reward acquisition",
+      "seed": "68NJLNJQRCLB",
+      "status": "source_rejected"
+    },
+    "3b747e9621031ae1": {
+      "error": "Crystal Sphere Payment Plan has no recorded grid answer",
+      "seed": "CQUS5RS5KGWY",
+      "status": "source_rejected"
+    },
+    "3cb0429d17be9210": {
+      "error": "Recorded and native card reward owner differ",
+      "replay_report_id": "sha256:6a5822d6ac618baf8cccb1be8eb760d45c0d2f6b7979cbdfe616b18408a1fa2c",
+      "seed": "KW29JLFEXV15",
+      "status": "diverged",
+      "stop": {
+        "delivery_uncertain": false,
+        "error": "Recorded and native card reward owner differ",
+        "kind": "card_reward",
+        "mismatch": {
+          "archive": "card_reward_selection",
+          "field": "card reward owner",
+          "native": "shop_inventory"
+        },
+        "source_record": 143
+      }
+    },
+    "6739ccb495f9b471": {
+      "error": "not enough values to unpack (expected 1, got 0)",
+      "seed": "U9FFKTML1M9G",
+      "status": "source_rejected"
+    },
+    "6f7d841fbdf0bb23": {
+      "error": "Recorded and native combat owner differ",
+      "replay_report_id": "sha256:99675657477c05e9f93d13bd4748004834c532a3a501d7f84a9e9a53bddebf85",
+      "seed": "XLWMFZGUB1P7",
+      "status": "diverged",
+      "stop": {
+        "delivery_uncertain": false,
+        "error": "Recorded and native combat owner differ",
+        "kind": "combat_start",
+        "mismatch": {
+          "archive": "combat_turn",
+          "field": "combat owner",
+          "native": "card_selection"
+        },
+        "source_record": 313
+      }
+    },
+    "9dc545337e0fc3eb": {
+      "error": "Require a complete ordered set of source fights",
+      "seed": "R7NX1ZQYF1Y3",
+      "status": "source_rejected"
+    },
+    "ee2ffb605c67742f": {
+      "act1_boss": "LAGAVULIN_MATRIARCH_BOSS",
+      "by_act": {
+        "1": {
+          "card_reward_selection": 8,
+          "card_selection": 7,
+          "combat_turn": 199,
+          "event_option": 6,
+          "map_navigation": 16,
+          "rest_site": 8,
+          "reward_claim": 28,
+          "shop_inventory": 4,
+          "treasure_room": 3
+        },
+        "2": {
+          "card_reward_selection": 8,
+          "card_selection": 2,
+          "combat_turn": 180,
+          "event_option": 8,
+          "map_navigation": 16,
+          "native_generated_card_choice": 3,
+          "rest_site": 4,
+          "reward_claim": 28,
+          "shop_inventory": 9,
+          "treasure_room": 3
+        },
+        "3": {
+          "card_reward_selection": 6,
+          "card_selection": 19,
+          "combat_turn": 270,
+          "event_option": 11,
+          "map_navigation": 15,
+          "native_generated_card_choice": 1,
+          "rest_site": 4,
+          "reward_claim": 23,
+          "shop_inventory": 4,
+          "treasure_room": 3
+        }
+      },
+      "decisions": 896,
+      "deliveries": 896,
+      "final_boss": "QUEEN_BOSS",
+      "labels": {
+        "path": "artifacts/native-a8-archive-batch/pilot-v1-verified-start/chunks/ee2ffb605c67742f/public-answers.jsonl.gz",
+        "sha256": "0ed7601fdb8b1d8eca42629a23afbad69cfbb95c7337a9768807d5a1d9f117a5"
+      },
+      "opening": "NEOW.pages.INITIAL.options.ARCANE_SCROLL",
+      "replay_report_id": "sha256:f516f995f2d67cd770a0670ac547bdd857a7fe97bcf001029cb269326edb1990",
+      "seed": "5SELZ5UWJ3SK",
+      "source_intents": 872,
+      "status": "verified_native_victory"
+    }
+  }
+}

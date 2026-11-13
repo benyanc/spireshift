@@ -1,0 +1,16 @@
+{
+  "schema_version": "native-pilot-assessment-config-v1",
+  "assessment_policy": "wins_primary_exact_confirmation_score_paired_seed_v2",
+  "implementation_sha256": "4f99ab2dec84b06f9f9a76608fdde64dd3cf226ef2430a114008f2979fd05e02",
+  "experiment_config": "configs/native-learning/sts2-v0.111.0-a8-pilot-v3.json",
+  "experiment_config_id": "sha256:dede7b2ba05398e0189acb683fa3bb8c27dc4a20869b93b566d48f279e283719",
+  "workspace": "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v3-v3",
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20261016,
+  "resource_limits": {
+    "wall_seconds": 180,
+    "cpu_seconds": 180,
+    "storage_bytes": 100000000,
+    "resident_memory_bytes": 1000000000
+  }
+}

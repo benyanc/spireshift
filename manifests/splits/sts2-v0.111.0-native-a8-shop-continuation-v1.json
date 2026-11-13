@@ -1,0 +1,6152 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:c54f6fbb04d812dc67b59e09e29ee2cdf61d56002e285dae8f1f0c219eb4dfed",
+  "purpose": "finite_shop_repair_continuation_train_development_and_unopened_holdout",
+  "schema_version": "native-complete-run-seed-plan-v1",
+  "seeds": [
+    {
+      "id": 1200001,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000001"
+    },
+    {
+      "id": 1200002,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000002"
+    },
+    {
+      "id": 1200003,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000003"
+    },
+    {
+      "id": 1200004,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000004"
+    },
+    {
+      "id": 1200005,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000005"
+    },
+    {
+      "id": 1200006,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000006"
+    },
+    {
+      "id": 1200007,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000007"
+    },
+    {
+      "id": 1200008,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000008"
+    },
+    {
+      "id": 1200009,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000009"
+    },
+    {
+      "id": 1200010,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000010"
+    },
+    {
+      "id": 1200011,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000011"
+    },
+    {
+      "id": 1200012,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000012"
+    },
+    {
+      "id": 1200013,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000013"
+    },
+    {
+      "id": 1200014,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000014"
+    },
+    {
+      "id": 1200015,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000015"
+    },
+    {
+      "id": 1200016,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000016"
+    },
+    {
+      "id": 1200017,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000017"
+    },
+    {
+      "id": 1200018,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000018"
+    },
+    {
+      "id": 1200019,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000019"
+    },
+    {
+      "id": 1200020,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000020"
+    },
+    {
+      "id": 1200021,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000021"
+    },
+    {
+      "id": 1200022,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000022"
+    },
+    {
+      "id": 1200023,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000023"
+    },
+    {
+      "id": 1200024,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000024"
+    },
+    {
+      "id": 1200025,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000025"
+    },
+    {
+      "id": 1200026,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000026"
+    },
+    {
+      "id": 1200027,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000027"
+    },
+    {
+      "id": 1200028,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000028"
+    },
+    {
+      "id": 1200029,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000029"
+    },
+    {
+      "id": 1200030,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000030"
+    },
+    {
+      "id": 1200031,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000031"
+    },
+    {
+      "id": 1200032,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000032"
+    },
+    {
+      "id": 1200033,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000033"
+    },
+    {
+      "id": 1200034,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000034"
+    },
+    {
+      "id": 1200035,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000035"
+    },
+    {
+      "id": 1200036,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000036"
+    },
+    {
+      "id": 1200037,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000037"
+    },
+    {
+      "id": 1200038,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000038"
+    },
+    {
+      "id": 1200039,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000039"
+    },
+    {
+      "id": 1200040,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000040"
+    },
+    {
+      "id": 1200041,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000041"
+    },
+    {
+      "id": 1200042,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000042"
+    },
+    {
+      "id": 1200043,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000043"
+    },
+    {
+      "id": 1200044,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000044"
+    },
+    {
+      "id": 1200045,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000045"
+    },
+    {
+      "id": 1200046,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000046"
+    },
+    {
+      "id": 1200047,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000047"
+    },
+    {
+      "id": 1200048,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000048"
+    },
+    {
+      "id": 1200049,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000049"
+    },
+    {
+      "id": 1200050,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000050"
+    },
+    {
+      "id": 1200051,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000051"
+    },
+    {
+      "id": 1200052,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000052"
+    },
+    {
+      "id": 1200053,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000053"
+    },
+    {
+      "id": 1200054,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000054"
+    },
+    {
+      "id": 1200055,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000055"
+    },
+    {
+      "id": 1200056,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000056"
+    },
+    {
+      "id": 1200057,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000057"
+    },
+    {
+      "id": 1200058,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000058"
+    },
+    {
+      "id": 1200059,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000059"
+    },
+    {
+      "id": 1200060,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000060"
+    },
+    {
+      "id": 1200061,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000061"
+    },
+    {
+      "id": 1200062,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000062"
+    },
+    {
+      "id": 1200063,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000063"
+    },
+    {
+      "id": 1200064,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000064"
+    },
+    {
+      "id": 1200065,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000065"
+    },
+    {
+      "id": 1200066,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000066"
+    },
+    {
+      "id": 1200067,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000067"
+    },
+    {
+      "id": 1200068,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000068"
+    },
+    {
+      "id": 1200069,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000069"
+    },
+    {
+      "id": 1200070,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000070"
+    },
+    {
+      "id": 1200071,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000071"
+    },
+    {
+      "id": 1200072,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000072"
+    },
+    {
+      "id": 1200073,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000073"
+    },
+    {
+      "id": 1200074,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000074"
+    },
+    {
+      "id": 1200075,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000075"
+    },
+    {
+      "id": 1200076,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000076"
+    },
+    {
+      "id": 1200077,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000077"
+    },
+    {
+      "id": 1200078,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000078"
+    },
+    {
+      "id": 1200079,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000079"
+    },
+    {
+      "id": 1200080,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000080"
+    },
+    {
+      "id": 1200081,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000081"
+    },
+    {
+      "id": 1200082,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000082"
+    },
+    {
+      "id": 1200083,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000083"
+    },
+    {
+      "id": 1200084,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000084"
+    },
+    {
+      "id": 1200085,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000085"
+    },
+    {
+      "id": 1200086,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000086"
+    },
+    {
+      "id": 1200087,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000087"
+    },
+    {
+      "id": 1200088,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000088"
+    },
+    {
+      "id": 1200089,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000089"
+    },
+    {
+      "id": 1200090,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000090"
+    },
+    {
+      "id": 1200091,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000091"
+    },
+    {
+      "id": 1200092,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000092"
+    },
+    {
+      "id": 1200093,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000093"
+    },
+    {
+      "id": 1200094,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000094"
+    },
+    {
+      "id": 1200095,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000095"
+    },
+    {
+      "id": 1200096,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000096"
+    },
+    {
+      "id": 1200097,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000097"
+    },
+    {
+      "id": 1200098,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000098"
+    },
+    {
+      "id": 1200099,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000099"
+    },
+    {
+      "id": 1200100,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000100"
+    },
+    {
+      "id": 1200101,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000101"
+    },
+    {
+      "id": 1200102,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000102"
+    },
+    {
+      "id": 1200103,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000103"
+    },
+    {
+      "id": 1200104,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000104"
+    },
+    {
+      "id": 1200105,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000105"
+    },
+    {
+      "id": 1200106,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000106"
+    },
+    {
+      "id": 1200107,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000107"
+    },
+    {
+      "id": 1200108,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000108"
+    },
+    {
+      "id": 1200109,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000109"
+    },
+    {
+      "id": 1200110,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000110"
+    },
+    {
+      "id": 1200111,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000111"
+    },
+    {
+      "id": 1200112,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000112"
+    },
+    {
+      "id": 1200113,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000113"
+    },
+    {
+      "id": 1200114,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000114"
+    },
+    {
+      "id": 1200115,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000115"
+    },
+    {
+      "id": 1200116,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000116"
+    },
+    {
+      "id": 1200117,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000117"
+    },
+    {
+      "id": 1200118,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000118"
+    },
+    {
+      "id": 1200119,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000119"
+    },
+    {
+      "id": 1200120,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000120"
+    },
+    {
+      "id": 1200121,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000121"
+    },
+    {
+      "id": 1200122,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000122"
+    },
+    {
+      "id": 1200123,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000123"
+    },
+    {
+      "id": 1200124,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000124"
+    },
+    {
+      "id": 1200125,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000125"
+    },
+    {
+      "id": 1200126,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000126"
+    },
+    {
+      "id": 1200127,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000127"
+    },
+    {
+      "id": 1200128,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000128"
+    },
+    {
+      "id": 1200129,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000129"
+    },
+    {
+      "id": 1200130,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000130"
+    },
+    {
+      "id": 1200131,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000131"
+    },
+    {
+      "id": 1200132,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000132"
+    },
+    {
+      "id": 1200133,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000133"
+    },
+    {
+      "id": 1200134,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000134"
+    },
+    {
+      "id": 1200135,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000135"
+    },
+    {
+      "id": 1200136,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000136"
+    },
+    {
+      "id": 1200137,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000137"
+    },
+    {
+      "id": 1200138,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000138"
+    },
+    {
+      "id": 1200139,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000139"
+    },
+    {
+      "id": 1200140,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000140"
+    },
+    {
+      "id": 1200141,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000141"
+    },
+    {
+      "id": 1200142,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000142"
+    },
+    {
+      "id": 1200143,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000143"
+    },
+    {
+      "id": 1200144,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000144"
+    },
+    {
+      "id": 1200145,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000145"
+    },
+    {
+      "id": 1200146,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000146"
+    },
+    {
+      "id": 1200147,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000147"
+    },
+    {
+      "id": 1200148,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000148"
+    },
+    {
+      "id": 1200149,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000149"
+    },
+    {
+      "id": 1200150,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000150"
+    },
+    {
+      "id": 1200151,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000151"
+    },
+    {
+      "id": 1200152,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000152"
+    },
+    {
+      "id": 1200153,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000153"
+    },
+    {
+      "id": 1200154,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000154"
+    },
+    {
+      "id": 1200155,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000155"
+    },
+    {
+      "id": 1200156,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000156"
+    },
+    {
+      "id": 1200157,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000157"
+    },
+    {
+      "id": 1200158,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000158"
+    },
+    {
+      "id": 1200159,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000159"
+    },
+    {
+      "id": 1200160,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000160"
+    },
+    {
+      "id": 1200161,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000161"
+    },
+    {
+      "id": 1200162,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000162"
+    },
+    {
+      "id": 1200163,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000163"
+    },
+    {
+      "id": 1200164,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000164"
+    },
+    {
+      "id": 1200165,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000165"
+    },
+    {
+      "id": 1200166,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000166"
+    },
+    {
+      "id": 1200167,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000167"
+    },
+    {
+      "id": 1200168,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000168"
+    },
+    {
+      "id": 1200169,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000169"
+    },
+    {
+      "id": 1200170,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000170"
+    },
+    {
+      "id": 1200171,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000171"
+    },
+    {
+      "id": 1200172,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000172"
+    },
+    {
+      "id": 1200173,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000173"
+    },
+    {
+      "id": 1200174,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000174"
+    },
+    {
+      "id": 1200175,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000175"
+    },
+    {
+      "id": 1200176,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000176"
+    },
+    {
+      "id": 1200177,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000177"
+    },
+    {
+      "id": 1200178,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000178"
+    },
+    {
+      "id": 1200179,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000179"
+    },
+    {
+      "id": 1200180,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000180"
+    },
+    {
+      "id": 1200181,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000181"
+    },
+    {
+      "id": 1200182,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000182"
+    },
+    {
+      "id": 1200183,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000183"
+    },
+    {
+      "id": 1200184,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000184"
+    },
+    {
+      "id": 1200185,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000185"
+    },
+    {
+      "id": 1200186,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000186"
+    },
+    {
+      "id": 1200187,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000187"
+    },
+    {
+      "id": 1200188,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000188"
+    },
+    {
+      "id": 1200189,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000189"
+    },
+    {
+      "id": 1200190,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000190"
+    },
+    {
+      "id": 1200191,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000191"
+    },
+    {
+      "id": 1200192,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000192"
+    },
+    {
+      "id": 1200193,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000193"
+    },
+    {
+      "id": 1200194,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000194"
+    },
+    {
+      "id": 1200195,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000195"
+    },
+    {
+      "id": 1200196,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000196"
+    },
+    {
+      "id": 1200197,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000197"
+    },
+    {
+      "id": 1200198,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000198"
+    },
+    {
+      "id": 1200199,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000199"
+    },
+    {
+      "id": 1200200,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000200"
+    },
+    {
+      "id": 1200201,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000201"
+    },
+    {
+      "id": 1200202,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000202"
+    },
+    {
+      "id": 1200203,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000203"
+    },
+    {
+      "id": 1200204,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000204"
+    },
+    {
+      "id": 1200205,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000205"
+    },
+    {
+      "id": 1200206,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000206"
+    },
+    {
+      "id": 1200207,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000207"
+    },
+    {
+      "id": 1200208,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000208"
+    },
+    {
+      "id": 1200209,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000209"
+    },
+    {
+      "id": 1200210,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000210"
+    },
+    {
+      "id": 1200211,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000211"
+    },
+    {
+      "id": 1200212,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000212"
+    },
+    {
+      "id": 1200213,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000213"
+    },
+    {
+      "id": 1200214,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000214"
+    },
+    {
+      "id": 1200215,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000215"
+    },
+    {
+      "id": 1200216,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000216"
+    },
+    {
+      "id": 1200217,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000217"
+    },
+    {
+      "id": 1200218,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000218"
+    },
+    {
+      "id": 1200219,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000219"
+    },
+    {
+      "id": 1200220,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000220"
+    },
+    {
+      "id": 1200221,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000221"
+    },
+    {
+      "id": 1200222,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000222"
+    },
+    {
+      "id": 1200223,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000223"
+    },
+    {
+      "id": 1200224,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000224"
+    },
+    {
+      "id": 1200225,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000225"
+    },
+    {
+      "id": 1200226,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000226"
+    },
+    {
+      "id": 1200227,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000227"
+    },
+    {
+      "id": 1200228,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000228"
+    },
+    {
+      "id": 1200229,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000229"
+    },
+    {
+      "id": 1200230,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000230"
+    },
+    {
+      "id": 1200231,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000231"
+    },
+    {
+      "id": 1200232,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000232"
+    },
+    {
+      "id": 1200233,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000233"
+    },
+    {
+      "id": 1200234,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000234"
+    },
+    {
+      "id": 1200235,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000235"
+    },
+    {
+      "id": 1200236,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000236"
+    },
+    {
+      "id": 1200237,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000237"
+    },
+    {
+      "id": 1200238,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000238"
+    },
+    {
+      "id": 1200239,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000239"
+    },
+    {
+      "id": 1200240,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000240"
+    },
+    {
+      "id": 1200241,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000241"
+    },
+    {
+      "id": 1200242,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000242"
+    },
+    {
+      "id": 1200243,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000243"
+    },
+    {
+      "id": 1200244,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000244"
+    },
+    {
+      "id": 1200245,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000245"
+    },
+    {
+      "id": 1200246,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000246"
+    },
+    {
+      "id": 1200247,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000247"
+    },
+    {
+      "id": 1200248,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000248"
+    },
+    {
+      "id": 1200249,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000249"
+    },
+    {
+      "id": 1200250,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000250"
+    },
+    {
+      "id": 1200251,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000251"
+    },
+    {
+      "id": 1200252,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000252"
+    },
+    {
+      "id": 1200253,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000253"
+    },
+    {
+      "id": 1200254,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000254"
+    },
+    {
+      "id": 1200255,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000255"
+    },
+    {
+      "id": 1200256,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000256"
+    },
+    {
+      "id": 1200257,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000257"
+    },
+    {
+      "id": 1200258,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000258"
+    },
+    {
+      "id": 1200259,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000259"
+    },
+    {
+      "id": 1200260,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000260"
+    },
+    {
+      "id": 1200261,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000261"
+    },
+    {
+      "id": 1200262,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000262"
+    },
+    {
+      "id": 1200263,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000263"
+    },
+    {
+      "id": 1200264,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000264"
+    },
+    {
+      "id": 1200265,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000265"
+    },
+    {
+      "id": 1200266,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000266"
+    },
+    {
+      "id": 1200267,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000267"
+    },
+    {
+      "id": 1200268,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000268"
+    },
+    {
+      "id": 1200269,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000269"
+    },
+    {
+      "id": 1200270,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000270"
+    },
+    {
+      "id": 1200271,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000271"
+    },
+    {
+      "id": 1200272,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000272"
+    },
+    {
+      "id": 1200273,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000273"
+    },
+    {
+      "id": 1200274,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000274"
+    },
+    {
+      "id": 1200275,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000275"
+    },
+    {
+      "id": 1200276,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000276"
+    },
+    {
+      "id": 1200277,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000277"
+    },
+    {
+      "id": 1200278,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000278"
+    },
+    {
+      "id": 1200279,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000279"
+    },
+    {
+      "id": 1200280,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000280"
+    },
+    {
+      "id": 1200281,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000281"
+    },
+    {
+      "id": 1200282,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000282"
+    },
+    {
+      "id": 1200283,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000283"
+    },
+    {
+      "id": 1200284,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000284"
+    },
+    {
+      "id": 1200285,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000285"
+    },
+    {
+      "id": 1200286,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000286"
+    },
+    {
+      "id": 1200287,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000287"
+    },
+    {
+      "id": 1200288,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000288"
+    },
+    {
+      "id": 1200289,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000289"
+    },
+    {
+      "id": 1200290,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000290"
+    },
+    {
+      "id": 1200291,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000291"
+    },
+    {
+      "id": 1200292,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000292"
+    },
+    {
+      "id": 1200293,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000293"
+    },
+    {
+      "id": 1200294,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000294"
+    },
+    {
+      "id": 1200295,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000295"
+    },
+    {
+      "id": 1200296,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000296"
+    },
+    {
+      "id": 1200297,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000297"
+    },
+    {
+      "id": 1200298,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000298"
+    },
+    {
+      "id": 1200299,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000299"
+    },
+    {
+      "id": 1200300,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000300"
+    },
+    {
+      "id": 1200301,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000301"
+    },
+    {
+      "id": 1200302,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000302"
+    },
+    {
+      "id": 1200303,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000303"
+    },
+    {
+      "id": 1200304,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000304"
+    },
+    {
+      "id": 1200305,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000305"
+    },
+    {
+      "id": 1200306,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000306"
+    },
+    {
+      "id": 1200307,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000307"
+    },
+    {
+      "id": 1200308,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000308"
+    },
+    {
+      "id": 1200309,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000309"
+    },
+    {
+      "id": 1200310,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000310"
+    },
+    {
+      "id": 1200311,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000311"
+    },
+    {
+      "id": 1200312,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000312"
+    },
+    {
+      "id": 1200313,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000313"
+    },
+    {
+      "id": 1200314,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000314"
+    },
+    {
+      "id": 1200315,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000315"
+    },
+    {
+      "id": 1200316,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000316"
+    },
+    {
+      "id": 1200317,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000317"
+    },
+    {
+      "id": 1200318,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000318"
+    },
+    {
+      "id": 1200319,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000319"
+    },
+    {
+      "id": 1200320,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000320"
+    },
+    {
+      "id": 1200321,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000321"
+    },
+    {
+      "id": 1200322,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000322"
+    },
+    {
+      "id": 1200323,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000323"
+    },
+    {
+      "id": 1200324,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000324"
+    },
+    {
+      "id": 1200325,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000325"
+    },
+    {
+      "id": 1200326,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000326"
+    },
+    {
+      "id": 1200327,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000327"
+    },
+    {
+      "id": 1200328,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000328"
+    },
+    {
+      "id": 1200329,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000329"
+    },
+    {
+      "id": 1200330,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000330"
+    },
+    {
+      "id": 1200331,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000331"
+    },
+    {
+      "id": 1200332,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000332"
+    },
+    {
+      "id": 1200333,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000333"
+    },
+    {
+      "id": 1200334,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000334"
+    },
+    {
+      "id": 1200335,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000335"
+    },
+    {
+      "id": 1200336,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000336"
+    },
+    {
+      "id": 1200337,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000337"
+    },
+    {
+      "id": 1200338,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000338"
+    },
+    {
+      "id": 1200339,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000339"
+    },
+    {
+      "id": 1200340,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000340"
+    },
+    {
+      "id": 1200341,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000341"
+    },
+    {
+      "id": 1200342,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000342"
+    },
+    {
+      "id": 1200343,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000343"
+    },
+    {
+      "id": 1200344,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000344"
+    },
+    {
+      "id": 1200345,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000345"
+    },
+    {
+      "id": 1200346,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000346"
+    },
+    {
+      "id": 1200347,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000347"
+    },
+    {
+      "id": 1200348,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000348"
+    },
+    {
+      "id": 1200349,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000349"
+    },
+    {
+      "id": 1200350,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000350"
+    },
+    {
+      "id": 1200351,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000351"
+    },
+    {
+      "id": 1200352,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000352"
+    },
+    {
+      "id": 1200353,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000353"
+    },
+    {
+      "id": 1200354,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000354"
+    },
+    {
+      "id": 1200355,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000355"
+    },
+    {
+      "id": 1200356,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000356"
+    },
+    {
+      "id": 1200357,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000357"
+    },
+    {
+      "id": 1200358,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000358"
+    },
+    {
+      "id": 1200359,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000359"
+    },
+    {
+      "id": 1200360,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000360"
+    },
+    {
+      "id": 1200361,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000361"
+    },
+    {
+      "id": 1200362,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000362"
+    },
+    {
+      "id": 1200363,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000363"
+    },
+    {
+      "id": 1200364,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000364"
+    },
+    {
+      "id": 1200365,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000365"
+    },
+    {
+      "id": 1200366,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000366"
+    },
+    {
+      "id": 1200367,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000367"
+    },
+    {
+      "id": 1200368,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000368"
+    },
+    {
+      "id": 1200369,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000369"
+    },
+    {
+      "id": 1200370,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000370"
+    },
+    {
+      "id": 1200371,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000371"
+    },
+    {
+      "id": 1200372,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000372"
+    },
+    {
+      "id": 1200373,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000373"
+    },
+    {
+      "id": 1200374,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000374"
+    },
+    {
+      "id": 1200375,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000375"
+    },
+    {
+      "id": 1200376,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000376"
+    },
+    {
+      "id": 1200377,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000377"
+    },
+    {
+      "id": 1200378,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000378"
+    },
+    {
+      "id": 1200379,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000379"
+    },
+    {
+      "id": 1200380,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000380"
+    },
+    {
+      "id": 1200381,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000381"
+    },
+    {
+      "id": 1200382,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000382"
+    },
+    {
+      "id": 1200383,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000383"
+    },
+    {
+      "id": 1200384,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000384"
+    },
+    {
+      "id": 1200385,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000385"
+    },
+    {
+      "id": 1200386,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000386"
+    },
+    {
+      "id": 1200387,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000387"
+    },
+    {
+      "id": 1200388,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000388"
+    },
+    {
+      "id": 1200389,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000389"
+    },
+    {
+      "id": 1200390,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000390"
+    },
+    {
+      "id": 1200391,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000391"
+    },
+    {
+      "id": 1200392,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000392"
+    },
+    {
+      "id": 1200393,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000393"
+    },
+    {
+      "id": 1200394,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000394"
+    },
+    {
+      "id": 1200395,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000395"
+    },
+    {
+      "id": 1200396,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000396"
+    },
+    {
+      "id": 1200397,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000397"
+    },
+    {
+      "id": 1200398,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000398"
+    },
+    {
+      "id": 1200399,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000399"
+    },
+    {
+      "id": 1200400,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000400"
+    },
+    {
+      "id": 1200401,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000401"
+    },
+    {
+      "id": 1200402,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000402"
+    },
+    {
+      "id": 1200403,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000403"
+    },
+    {
+      "id": 1200404,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000404"
+    },
+    {
+      "id": 1200405,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000405"
+    },
+    {
+      "id": 1200406,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000406"
+    },
+    {
+      "id": 1200407,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000407"
+    },
+    {
+      "id": 1200408,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000408"
+    },
+    {
+      "id": 1200409,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000409"
+    },
+    {
+      "id": 1200410,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000410"
+    },
+    {
+      "id": 1200411,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000411"
+    },
+    {
+      "id": 1200412,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000412"
+    },
+    {
+      "id": 1200413,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000413"
+    },
+    {
+      "id": 1200414,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000414"
+    },
+    {
+      "id": 1200415,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000415"
+    },
+    {
+      "id": 1200416,
+      "numerical_seed": 2,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T2000416"
+    },
+    {
+      "id": 1200417,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000001"
+    },
+    {
+      "id": 1200418,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000002"
+    },
+    {
+      "id": 1200419,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000003"
+    },
+    {
+      "id": 1200420,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000004"
+    },
+    {
+      "id": 1200421,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000005"
+    },
+    {
+      "id": 1200422,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000006"
+    },
+    {
+      "id": 1200423,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000007"
+    },
+    {
+      "id": 1200424,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000008"
+    },
+    {
+      "id": 1200425,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000009"
+    },
+    {
+      "id": 1200426,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000010"
+    },
+    {
+      "id": 1200427,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000011"
+    },
+    {
+      "id": 1200428,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000012"
+    },
+    {
+      "id": 1200429,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000013"
+    },
+    {
+      "id": 1200430,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000014"
+    },
+    {
+      "id": 1200431,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000015"
+    },
+    {
+      "id": 1200432,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000016"
+    },
+    {
+      "id": 1200433,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000017"
+    },
+    {
+      "id": 1200434,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000018"
+    },
+    {
+      "id": 1200435,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000019"
+    },
+    {
+      "id": 1200436,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000020"
+    },
+    {
+      "id": 1200437,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000021"
+    },
+    {
+      "id": 1200438,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000022"
+    },
+    {
+      "id": 1200439,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000023"
+    },
+    {
+      "id": 1200440,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000024"
+    },
+    {
+      "id": 1200441,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000025"
+    },
+    {
+      "id": 1200442,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000026"
+    },
+    {
+      "id": 1200443,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000027"
+    },
+    {
+      "id": 1200444,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000028"
+    },
+    {
+      "id": 1200445,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000029"
+    },
+    {
+      "id": 1200446,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000030"
+    },
+    {
+      "id": 1200447,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000031"
+    },
+    {
+      "id": 1200448,
+      "numerical_seed": 2,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D2000032"
+    },
+    {
+      "id": 1200449,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000001"
+    },
+    {
+      "id": 1200450,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000002"
+    },
+    {
+      "id": 1200451,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000003"
+    },
+    {
+      "id": 1200452,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000004"
+    },
+    {
+      "id": 1200453,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000005"
+    },
+    {
+      "id": 1200454,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000006"
+    },
+    {
+      "id": 1200455,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000007"
+    },
+    {
+      "id": 1200456,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000008"
+    },
+    {
+      "id": 1200457,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000009"
+    },
+    {
+      "id": 1200458,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000010"
+    },
+    {
+      "id": 1200459,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000011"
+    },
+    {
+      "id": 1200460,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000012"
+    },
+    {
+      "id": 1200461,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000013"
+    },
+    {
+      "id": 1200462,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000014"
+    },
+    {
+      "id": 1200463,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000015"
+    },
+    {
+      "id": 1200464,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000016"
+    },
+    {
+      "id": 1200465,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000017"
+    },
+    {
+      "id": 1200466,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000018"
+    },
+    {
+      "id": 1200467,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000019"
+    },
+    {
+      "id": 1200468,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000020"
+    },
+    {
+      "id": 1200469,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000021"
+    },
+    {
+      "id": 1200470,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000022"
+    },
+    {
+      "id": 1200471,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000023"
+    },
+    {
+      "id": 1200472,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000024"
+    },
+    {
+      "id": 1200473,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000025"
+    },
+    {
+      "id": 1200474,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000026"
+    },
+    {
+      "id": 1200475,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000027"
+    },
+    {
+      "id": 1200476,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000028"
+    },
+    {
+      "id": 1200477,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000029"
+    },
+    {
+      "id": 1200478,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000030"
+    },
+    {
+      "id": 1200479,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000031"
+    },
+    {
+      "id": 1200480,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000032"
+    },
+    {
+      "id": 1200481,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000033"
+    },
+    {
+      "id": 1200482,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000034"
+    },
+    {
+      "id": 1200483,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000035"
+    },
+    {
+      "id": 1200484,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000036"
+    },
+    {
+      "id": 1200485,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000037"
+    },
+    {
+      "id": 1200486,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000038"
+    },
+    {
+      "id": 1200487,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000039"
+    },
+    {
+      "id": 1200488,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000040"
+    },
+    {
+      "id": 1200489,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000041"
+    },
+    {
+      "id": 1200490,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000042"
+    },
+    {
+      "id": 1200491,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000043"
+    },
+    {
+      "id": 1200492,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000044"
+    },
+    {
+      "id": 1200493,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000045"
+    },
+    {
+      "id": 1200494,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000046"
+    },
+    {
+      "id": 1200495,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000047"
+    },
+    {
+      "id": 1200496,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000048"
+    },
+    {
+      "id": 1200497,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000049"
+    },
+    {
+      "id": 1200498,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000050"
+    },
+    {
+      "id": 1200499,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000051"
+    },
+    {
+      "id": 1200500,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000052"
+    },
+    {
+      "id": 1200501,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000053"
+    },
+    {
+      "id": 1200502,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000054"
+    },
+    {
+      "id": 1200503,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000055"
+    },
+    {
+      "id": 1200504,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000056"
+    },
+    {
+      "id": 1200505,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000057"
+    },
+    {
+      "id": 1200506,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000058"
+    },
+    {
+      "id": 1200507,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000059"
+    },
+    {
+      "id": 1200508,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000060"
+    },
+    {
+      "id": 1200509,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000061"
+    },
+    {
+      "id": 1200510,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000062"
+    },
+    {
+      "id": 1200511,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000063"
+    },
+    {
+      "id": 1200512,
+      "numerical_seed": 2,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H2000064"
+    },
+    {
+      "id": 1200513,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000001"
+    },
+    {
+      "id": 1200514,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000002"
+    },
+    {
+      "id": 1200515,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000003"
+    },
+    {
+      "id": 1200516,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000004"
+    },
+    {
+      "id": 1200517,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000005"
+    },
+    {
+      "id": 1200518,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000006"
+    },
+    {
+      "id": 1200519,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000007"
+    },
+    {
+      "id": 1200520,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000008"
+    },
+    {
+      "id": 1200521,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000009"
+    },
+    {
+      "id": 1200522,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000010"
+    },
+    {
+      "id": 1200523,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000011"
+    },
+    {
+      "id": 1200524,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000012"
+    },
+    {
+      "id": 1200525,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000013"
+    },
+    {
+      "id": 1200526,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000014"
+    },
+    {
+      "id": 1200527,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000015"
+    },
+    {
+      "id": 1200528,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000016"
+    },
+    {
+      "id": 1200529,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000017"
+    },
+    {
+      "id": 1200530,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000018"
+    },
+    {
+      "id": 1200531,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000019"
+    },
+    {
+      "id": 1200532,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000020"
+    },
+    {
+      "id": 1200533,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000021"
+    },
+    {
+      "id": 1200534,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000022"
+    },
+    {
+      "id": 1200535,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000023"
+    },
+    {
+      "id": 1200536,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000024"
+    },
+    {
+      "id": 1200537,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000025"
+    },
+    {
+      "id": 1200538,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000026"
+    },
+    {
+      "id": 1200539,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000027"
+    },
+    {
+      "id": 1200540,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000028"
+    },
+    {
+      "id": 1200541,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000029"
+    },
+    {
+      "id": 1200542,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000030"
+    },
+    {
+      "id": 1200543,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000031"
+    },
+    {
+      "id": 1200544,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000032"
+    },
+    {
+      "id": 1200545,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000033"
+    },
+    {
+      "id": 1200546,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000034"
+    },
+    {
+      "id": 1200547,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000035"
+    },
+    {
+      "id": 1200548,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000036"
+    },
+    {
+      "id": 1200549,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000037"
+    },
+    {
+      "id": 1200550,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000038"
+    },
+    {
+      "id": 1200551,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000039"
+    },
+    {
+      "id": 1200552,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000040"
+    },
+    {
+      "id": 1200553,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000041"
+    },
+    {
+      "id": 1200554,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000042"
+    },
+    {
+      "id": 1200555,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000043"
+    },
+    {
+      "id": 1200556,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000044"
+    },
+    {
+      "id": 1200557,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000045"
+    },
+    {
+      "id": 1200558,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000046"
+    },
+    {
+      "id": 1200559,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000047"
+    },
+    {
+      "id": 1200560,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000048"
+    },
+    {
+      "id": 1200561,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000049"
+    },
+    {
+      "id": 1200562,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000050"
+    },
+    {
+      "id": 1200563,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000051"
+    },
+    {
+      "id": 1200564,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000052"
+    },
+    {
+      "id": 1200565,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000053"
+    },
+    {
+      "id": 1200566,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000054"
+    },
+    {
+      "id": 1200567,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000055"
+    },
+    {
+      "id": 1200568,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000056"
+    },
+    {
+      "id": 1200569,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000057"
+    },
+    {
+      "id": 1200570,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000058"
+    },
+    {
+      "id": 1200571,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000059"
+    },
+    {
+      "id": 1200572,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000060"
+    },
+    {
+      "id": 1200573,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000061"
+    },
+    {
+      "id": 1200574,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000062"
+    },
+    {
+      "id": 1200575,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000063"
+    },
+    {
+      "id": 1200576,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000064"
+    },
+    {
+      "id": 1200577,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000065"
+    },
+    {
+      "id": 1200578,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000066"
+    },
+    {
+      "id": 1200579,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000067"
+    },
+    {
+      "id": 1200580,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000068"
+    },
+    {
+      "id": 1200581,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000069"
+    },
+    {
+      "id": 1200582,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000070"
+    },
+    {
+      "id": 1200583,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000071"
+    },
+    {
+      "id": 1200584,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000072"
+    },
+    {
+      "id": 1200585,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000073"
+    },
+    {
+      "id": 1200586,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000074"
+    },
+    {
+      "id": 1200587,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000075"
+    },
+    {
+      "id": 1200588,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000076"
+    },
+    {
+      "id": 1200589,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000077"
+    },
+    {
+      "id": 1200590,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000078"
+    },
+    {
+      "id": 1200591,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000079"
+    },
+    {
+      "id": 1200592,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000080"
+    },
+    {
+      "id": 1200593,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000081"
+    },
+    {
+      "id": 1200594,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000082"
+    },
+    {
+      "id": 1200595,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000083"
+    },
+    {
+      "id": 1200596,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000084"
+    },
+    {
+      "id": 1200597,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000085"
+    },
+    {
+      "id": 1200598,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000086"
+    },
+    {
+      "id": 1200599,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000087"
+    },
+    {
+      "id": 1200600,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000088"
+    },
+    {
+      "id": 1200601,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000089"
+    },
+    {
+      "id": 1200602,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000090"
+    },
+    {
+      "id": 1200603,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000091"
+    },
+    {
+      "id": 1200604,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000092"
+    },
+    {
+      "id": 1200605,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000093"
+    },
+    {
+      "id": 1200606,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000094"
+    },
+    {
+      "id": 1200607,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000095"
+    },
+    {
+      "id": 1200608,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000096"
+    },
+    {
+      "id": 1200609,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000097"
+    },
+    {
+      "id": 1200610,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000098"
+    },
+    {
+      "id": 1200611,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000099"
+    },
+    {
+      "id": 1200612,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000100"
+    },
+    {
+      "id": 1200613,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000101"
+    },
+    {
+      "id": 1200614,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000102"
+    },
+    {
+      "id": 1200615,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000103"
+    },
+    {
+      "id": 1200616,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000104"
+    },
+    {
+      "id": 1200617,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000105"
+    },
+    {
+      "id": 1200618,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000106"
+    },
+    {
+      "id": 1200619,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000107"
+    },
+    {
+      "id": 1200620,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000108"
+    },
+    {
+      "id": 1200621,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000109"
+    },
+    {
+      "id": 1200622,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000110"
+    },
+    {
+      "id": 1200623,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000111"
+    },
+    {
+      "id": 1200624,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000112"
+    },
+    {
+      "id": 1200625,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000113"
+    },
+    {
+      "id": 1200626,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000114"
+    },
+    {
+      "id": 1200627,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000115"
+    },
+    {
+      "id": 1200628,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000116"
+    },
+    {
+      "id": 1200629,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000117"
+    },
+    {
+      "id": 1200630,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000118"
+    },
+    {
+      "id": 1200631,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000119"
+    },
+    {
+      "id": 1200632,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000120"
+    },
+    {
+      "id": 1200633,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000121"
+    },
+    {
+      "id": 1200634,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000122"
+    },
+    {
+      "id": 1200635,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000123"
+    },
+    {
+      "id": 1200636,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000124"
+    },
+    {
+      "id": 1200637,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000125"
+    },
+    {
+      "id": 1200638,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000126"
+    },
+    {
+      "id": 1200639,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000127"
+    },
+    {
+      "id": 1200640,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000128"
+    },
+    {
+      "id": 1200641,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000129"
+    },
+    {
+      "id": 1200642,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000130"
+    },
+    {
+      "id": 1200643,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000131"
+    },
+    {
+      "id": 1200644,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000132"
+    },
+    {
+      "id": 1200645,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000133"
+    },
+    {
+      "id": 1200646,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000134"
+    },
+    {
+      "id": 1200647,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000135"
+    },
+    {
+      "id": 1200648,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000136"
+    },
+    {
+      "id": 1200649,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000137"
+    },
+    {
+      "id": 1200650,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000138"
+    },
+    {
+      "id": 1200651,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000139"
+    },
+    {
+      "id": 1200652,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000140"
+    },
+    {
+      "id": 1200653,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000141"
+    },
+    {
+      "id": 1200654,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000142"
+    },
+    {
+      "id": 1200655,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000143"
+    },
+    {
+      "id": 1200656,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000144"
+    },
+    {
+      "id": 1200657,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000145"
+    },
+    {
+      "id": 1200658,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000146"
+    },
+    {
+      "id": 1200659,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000147"
+    },
+    {
+      "id": 1200660,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000148"
+    },
+    {
+      "id": 1200661,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000149"
+    },
+    {
+      "id": 1200662,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000150"
+    },
+    {
+      "id": 1200663,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000151"
+    },
+    {
+      "id": 1200664,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000152"
+    },
+    {
+      "id": 1200665,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000153"
+    },
+    {
+      "id": 1200666,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000154"
+    },
+    {
+      "id": 1200667,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000155"
+    },
+    {
+      "id": 1200668,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000156"
+    },
+    {
+      "id": 1200669,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000157"
+    },
+    {
+      "id": 1200670,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000158"
+    },
+    {
+      "id": 1200671,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000159"
+    },
+    {
+      "id": 1200672,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000160"
+    },
+    {
+      "id": 1200673,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000161"
+    },
+    {
+      "id": 1200674,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000162"
+    },
+    {
+      "id": 1200675,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000163"
+    },
+    {
+      "id": 1200676,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000164"
+    },
+    {
+      "id": 1200677,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000165"
+    },
+    {
+      "id": 1200678,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000166"
+    },
+    {
+      "id": 1200679,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000167"
+    },
+    {
+      "id": 1200680,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000168"
+    },
+    {
+      "id": 1200681,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000169"
+    },
+    {
+      "id": 1200682,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000170"
+    },
+    {
+      "id": 1200683,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000171"
+    },
+    {
+      "id": 1200684,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000172"
+    },
+    {
+      "id": 1200685,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000173"
+    },
+    {
+      "id": 1200686,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000174"
+    },
+    {
+      "id": 1200687,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000175"
+    },
+    {
+      "id": 1200688,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000176"
+    },
+    {
+      "id": 1200689,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000177"
+    },
+    {
+      "id": 1200690,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000178"
+    },
+    {
+      "id": 1200691,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000179"
+    },
+    {
+      "id": 1200692,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000180"
+    },
+    {
+      "id": 1200693,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000181"
+    },
+    {
+      "id": 1200694,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000182"
+    },
+    {
+      "id": 1200695,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000183"
+    },
+    {
+      "id": 1200696,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000184"
+    },
+    {
+      "id": 1200697,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000185"
+    },
+    {
+      "id": 1200698,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000186"
+    },
+    {
+      "id": 1200699,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000187"
+    },
+    {
+      "id": 1200700,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000188"
+    },
+    {
+      "id": 1200701,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000189"
+    },
+    {
+      "id": 1200702,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000190"
+    },
+    {
+      "id": 1200703,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000191"
+    },
+    {
+      "id": 1200704,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000192"
+    },
+    {
+      "id": 1200705,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000193"
+    },
+    {
+      "id": 1200706,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000194"
+    },
+    {
+      "id": 1200707,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000195"
+    },
+    {
+      "id": 1200708,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000196"
+    },
+    {
+      "id": 1200709,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000197"
+    },
+    {
+      "id": 1200710,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000198"
+    },
+    {
+      "id": 1200711,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000199"
+    },
+    {
+      "id": 1200712,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000200"
+    },
+    {
+      "id": 1200713,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000201"
+    },
+    {
+      "id": 1200714,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000202"
+    },
+    {
+      "id": 1200715,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000203"
+    },
+    {
+      "id": 1200716,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000204"
+    },
+    {
+      "id": 1200717,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000205"
+    },
+    {
+      "id": 1200718,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000206"
+    },
+    {
+      "id": 1200719,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000207"
+    },
+    {
+      "id": 1200720,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000208"
+    },
+    {
+      "id": 1200721,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000209"
+    },
+    {
+      "id": 1200722,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000210"
+    },
+    {
+      "id": 1200723,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000211"
+    },
+    {
+      "id": 1200724,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000212"
+    },
+    {
+      "id": 1200725,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000213"
+    },
+    {
+      "id": 1200726,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000214"
+    },
+    {
+      "id": 1200727,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000215"
+    },
+    {
+      "id": 1200728,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000216"
+    },
+    {
+      "id": 1200729,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000217"
+    },
+    {
+      "id": 1200730,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000218"
+    },
+    {
+      "id": 1200731,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000219"
+    },
+    {
+      "id": 1200732,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000220"
+    },
+    {
+      "id": 1200733,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000221"
+    },
+    {
+      "id": 1200734,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000222"
+    },
+    {
+      "id": 1200735,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000223"
+    },
+    {
+      "id": 1200736,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000224"
+    },
+    {
+      "id": 1200737,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000225"
+    },
+    {
+      "id": 1200738,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000226"
+    },
+    {
+      "id": 1200739,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000227"
+    },
+    {
+      "id": 1200740,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000228"
+    },
+    {
+      "id": 1200741,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000229"
+    },
+    {
+      "id": 1200742,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000230"
+    },
+    {
+      "id": 1200743,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000231"
+    },
+    {
+      "id": 1200744,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000232"
+    },
+    {
+      "id": 1200745,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000233"
+    },
+    {
+      "id": 1200746,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000234"
+    },
+    {
+      "id": 1200747,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000235"
+    },
+    {
+      "id": 1200748,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000236"
+    },
+    {
+      "id": 1200749,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000237"
+    },
+    {
+      "id": 1200750,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000238"
+    },
+    {
+      "id": 1200751,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000239"
+    },
+    {
+      "id": 1200752,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000240"
+    },
+    {
+      "id": 1200753,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000241"
+    },
+    {
+      "id": 1200754,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000242"
+    },
+    {
+      "id": 1200755,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000243"
+    },
+    {
+      "id": 1200756,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000244"
+    },
+    {
+      "id": 1200757,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000245"
+    },
+    {
+      "id": 1200758,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000246"
+    },
+    {
+      "id": 1200759,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000247"
+    },
+    {
+      "id": 1200760,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000248"
+    },
+    {
+      "id": 1200761,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000249"
+    },
+    {
+      "id": 1200762,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000250"
+    },
+    {
+      "id": 1200763,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000251"
+    },
+    {
+      "id": 1200764,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000252"
+    },
+    {
+      "id": 1200765,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000253"
+    },
+    {
+      "id": 1200766,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000254"
+    },
+    {
+      "id": 1200767,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000255"
+    },
+    {
+      "id": 1200768,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000256"
+    },
+    {
+      "id": 1200769,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000257"
+    },
+    {
+      "id": 1200770,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000258"
+    },
+    {
+      "id": 1200771,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000259"
+    },
+    {
+      "id": 1200772,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000260"
+    },
+    {
+      "id": 1200773,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000261"
+    },
+    {
+      "id": 1200774,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000262"
+    },
+    {
+      "id": 1200775,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000263"
+    },
+    {
+      "id": 1200776,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000264"
+    },
+    {
+      "id": 1200777,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000265"
+    },
+    {
+      "id": 1200778,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000266"
+    },
+    {
+      "id": 1200779,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000267"
+    },
+    {
+      "id": 1200780,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000268"
+    },
+    {
+      "id": 1200781,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000269"
+    },
+    {
+      "id": 1200782,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000270"
+    },
+    {
+      "id": 1200783,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000271"
+    },
+    {
+      "id": 1200784,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000272"
+    },
+    {
+      "id": 1200785,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000273"
+    },
+    {
+      "id": 1200786,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000274"
+    },
+    {
+      "id": 1200787,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000275"
+    },
+    {
+      "id": 1200788,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000276"
+    },
+    {
+      "id": 1200789,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000277"
+    },
+    {
+      "id": 1200790,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000278"
+    },
+    {
+      "id": 1200791,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000279"
+    },
+    {
+      "id": 1200792,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000280"
+    },
+    {
+      "id": 1200793,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000281"
+    },
+    {
+      "id": 1200794,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000282"
+    },
+    {
+      "id": 1200795,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000283"
+    },
+    {
+      "id": 1200796,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000284"
+    },
+    {
+      "id": 1200797,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000285"
+    },
+    {
+      "id": 1200798,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000286"
+    },
+    {
+      "id": 1200799,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000287"
+    },
+    {
+      "id": 1200800,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000288"
+    },
+    {
+      "id": 1200801,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000289"
+    },
+    {
+      "id": 1200802,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000290"
+    },
+    {
+      "id": 1200803,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000291"
+    },
+    {
+      "id": 1200804,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000292"
+    },
+    {
+      "id": 1200805,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000293"
+    },
+    {
+      "id": 1200806,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000294"
+    },
+    {
+      "id": 1200807,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000295"
+    },
+    {
+      "id": 1200808,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000296"
+    },
+    {
+      "id": 1200809,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000297"
+    },
+    {
+      "id": 1200810,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000298"
+    },
+    {
+      "id": 1200811,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000299"
+    },
+    {
+      "id": 1200812,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000300"
+    },
+    {
+      "id": 1200813,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000301"
+    },
+    {
+      "id": 1200814,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000302"
+    },
+    {
+      "id": 1200815,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000303"
+    },
+    {
+      "id": 1200816,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000304"
+    },
+    {
+      "id": 1200817,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000305"
+    },
+    {
+      "id": 1200818,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000306"
+    },
+    {
+      "id": 1200819,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000307"
+    },
+    {
+      "id": 1200820,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000308"
+    },
+    {
+      "id": 1200821,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000309"
+    },
+    {
+      "id": 1200822,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000310"
+    },
+    {
+      "id": 1200823,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000311"
+    },
+    {
+      "id": 1200824,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000312"
+    },
+    {
+      "id": 1200825,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000313"
+    },
+    {
+      "id": 1200826,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000314"
+    },
+    {
+      "id": 1200827,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000315"
+    },
+    {
+      "id": 1200828,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000316"
+    },
+    {
+      "id": 1200829,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000317"
+    },
+    {
+      "id": 1200830,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000318"
+    },
+    {
+      "id": 1200831,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000319"
+    },
+    {
+      "id": 1200832,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000320"
+    },
+    {
+      "id": 1200833,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000321"
+    },
+    {
+      "id": 1200834,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000322"
+    },
+    {
+      "id": 1200835,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000323"
+    },
+    {
+      "id": 1200836,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000324"
+    },
+    {
+      "id": 1200837,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000325"
+    },
+    {
+      "id": 1200838,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000326"
+    },
+    {
+      "id": 1200839,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000327"
+    },
+    {
+      "id": 1200840,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000328"
+    },
+    {
+      "id": 1200841,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000329"
+    },
+    {
+      "id": 1200842,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000330"
+    },
+    {
+      "id": 1200843,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000331"
+    },
+    {
+      "id": 1200844,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000332"
+    },
+    {
+      "id": 1200845,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000333"
+    },
+    {
+      "id": 1200846,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000334"
+    },
+    {
+      "id": 1200847,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000335"
+    },
+    {
+      "id": 1200848,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000336"
+    },
+    {
+      "id": 1200849,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000337"
+    },
+    {
+      "id": 1200850,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000338"
+    },
+    {
+      "id": 1200851,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000339"
+    },
+    {
+      "id": 1200852,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000340"
+    },
+    {
+      "id": 1200853,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000341"
+    },
+    {
+      "id": 1200854,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000342"
+    },
+    {
+      "id": 1200855,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000343"
+    },
+    {
+      "id": 1200856,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000344"
+    },
+    {
+      "id": 1200857,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000345"
+    },
+    {
+      "id": 1200858,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000346"
+    },
+    {
+      "id": 1200859,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000347"
+    },
+    {
+      "id": 1200860,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000348"
+    },
+    {
+      "id": 1200861,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000349"
+    },
+    {
+      "id": 1200862,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000350"
+    },
+    {
+      "id": 1200863,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000351"
+    },
+    {
+      "id": 1200864,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000352"
+    },
+    {
+      "id": 1200865,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000353"
+    },
+    {
+      "id": 1200866,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000354"
+    },
+    {
+      "id": 1200867,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000355"
+    },
+    {
+      "id": 1200868,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000356"
+    },
+    {
+      "id": 1200869,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000357"
+    },
+    {
+      "id": 1200870,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000358"
+    },
+    {
+      "id": 1200871,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000359"
+    },
+    {
+      "id": 1200872,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000360"
+    },
+    {
+      "id": 1200873,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000361"
+    },
+    {
+      "id": 1200874,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000362"
+    },
+    {
+      "id": 1200875,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000363"
+    },
+    {
+      "id": 1200876,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000364"
+    },
+    {
+      "id": 1200877,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000365"
+    },
+    {
+      "id": 1200878,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000366"
+    },
+    {
+      "id": 1200879,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000367"
+    },
+    {
+      "id": 1200880,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000368"
+    },
+    {
+      "id": 1200881,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000369"
+    },
+    {
+      "id": 1200882,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000370"
+    },
+    {
+      "id": 1200883,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000371"
+    },
+    {
+      "id": 1200884,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000372"
+    },
+    {
+      "id": 1200885,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000373"
+    },
+    {
+      "id": 1200886,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000374"
+    },
+    {
+      "id": 1200887,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000375"
+    },
+    {
+      "id": 1200888,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000376"
+    },
+    {
+      "id": 1200889,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000377"
+    },
+    {
+      "id": 1200890,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000378"
+    },
+    {
+      "id": 1200891,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000379"
+    },
+    {
+      "id": 1200892,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000380"
+    },
+    {
+      "id": 1200893,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000381"
+    },
+    {
+      "id": 1200894,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000382"
+    },
+    {
+      "id": 1200895,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000383"
+    },
+    {
+      "id": 1200896,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000384"
+    },
+    {
+      "id": 1200897,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000385"
+    },
+    {
+      "id": 1200898,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000386"
+    },
+    {
+      "id": 1200899,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000387"
+    },
+    {
+      "id": 1200900,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000388"
+    },
+    {
+      "id": 1200901,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000389"
+    },
+    {
+      "id": 1200902,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000390"
+    },
+    {
+      "id": 1200903,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000391"
+    },
+    {
+      "id": 1200904,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000392"
+    },
+    {
+      "id": 1200905,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000393"
+    },
+    {
+      "id": 1200906,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000394"
+    },
+    {
+      "id": 1200907,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000395"
+    },
+    {
+      "id": 1200908,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000396"
+    },
+    {
+      "id": 1200909,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000397"
+    },
+    {
+      "id": 1200910,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000398"
+    },
+    {
+      "id": 1200911,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000399"
+    },
+    {
+      "id": 1200912,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000400"
+    },
+    {
+      "id": 1200913,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000401"
+    },
+    {
+      "id": 1200914,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000402"
+    },
+    {
+      "id": 1200915,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000403"
+    },
+    {
+      "id": 1200916,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000404"
+    },
+    {
+      "id": 1200917,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000405"
+    },
+    {
+      "id": 1200918,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000406"
+    },
+    {
+      "id": 1200919,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000407"
+    },
+    {
+      "id": 1200920,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000408"
+    },
+    {
+      "id": 1200921,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000409"
+    },
+    {
+      "id": 1200922,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000410"
+    },
+    {
+      "id": 1200923,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000411"
+    },
+    {
+      "id": 1200924,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000412"
+    },
+    {
+      "id": 1200925,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000413"
+    },
+    {
+      "id": 1200926,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000414"
+    },
+    {
+      "id": 1200927,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000415"
+    },
+    {
+      "id": 1200928,
+      "numerical_seed": 3,
+      "partition": "train",
+      "seed": "SP1RESH1FTSHOP2T3000416"
+    },
+    {
+      "id": 1200929,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000001"
+    },
+    {
+      "id": 1200930,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000002"
+    },
+    {
+      "id": 1200931,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000003"
+    },
+    {
+      "id": 1200932,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000004"
+    },
+    {
+      "id": 1200933,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000005"
+    },
+    {
+      "id": 1200934,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000006"
+    },
+    {
+      "id": 1200935,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000007"
+    },
+    {
+      "id": 1200936,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000008"
+    },
+    {
+      "id": 1200937,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000009"
+    },
+    {
+      "id": 1200938,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000010"
+    },
+    {
+      "id": 1200939,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000011"
+    },
+    {
+      "id": 1200940,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000012"
+    },
+    {
+      "id": 1200941,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000013"
+    },
+    {
+      "id": 1200942,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000014"
+    },
+    {
+      "id": 1200943,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000015"
+    },
+    {
+      "id": 1200944,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000016"
+    },
+    {
+      "id": 1200945,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000017"
+    },
+    {
+      "id": 1200946,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000018"
+    },
+    {
+      "id": 1200947,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000019"
+    },
+    {
+      "id": 1200948,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000020"
+    },
+    {
+      "id": 1200949,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000021"
+    },
+    {
+      "id": 1200950,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000022"
+    },
+    {
+      "id": 1200951,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000023"
+    },
+    {
+      "id": 1200952,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000024"
+    },
+    {
+      "id": 1200953,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000025"
+    },
+    {
+      "id": 1200954,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000026"
+    },
+    {
+      "id": 1200955,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000027"
+    },
+    {
+      "id": 1200956,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000028"
+    },
+    {
+      "id": 1200957,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000029"
+    },
+    {
+      "id": 1200958,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000030"
+    },
+    {
+      "id": 1200959,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000031"
+    },
+    {
+      "id": 1200960,
+      "numerical_seed": 3,
+      "partition": "development",
+      "seed": "SP1RESH1FTSHOP2D3000032"
+    },
+    {
+      "id": 1200961,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000001"
+    },
+    {
+      "id": 1200962,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000002"
+    },
+    {
+      "id": 1200963,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000003"
+    },
+    {
+      "id": 1200964,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000004"
+    },
+    {
+      "id": 1200965,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000005"
+    },
+    {
+      "id": 1200966,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000006"
+    },
+    {
+      "id": 1200967,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000007"
+    },
+    {
+      "id": 1200968,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000008"
+    },
+    {
+      "id": 1200969,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000009"
+    },
+    {
+      "id": 1200970,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000010"
+    },
+    {
+      "id": 1200971,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000011"
+    },
+    {
+      "id": 1200972,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000012"
+    },
+    {
+      "id": 1200973,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000013"
+    },
+    {
+      "id": 1200974,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000014"
+    },
+    {
+      "id": 1200975,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000015"
+    },
+    {
+      "id": 1200976,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000016"
+    },
+    {
+      "id": 1200977,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000017"
+    },
+    {
+      "id": 1200978,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000018"
+    },
+    {
+      "id": 1200979,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000019"
+    },
+    {
+      "id": 1200980,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000020"
+    },
+    {
+      "id": 1200981,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000021"
+    },
+    {
+      "id": 1200982,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000022"
+    },
+    {
+      "id": 1200983,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000023"
+    },
+    {
+      "id": 1200984,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000024"
+    },
+    {
+      "id": 1200985,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000025"
+    },
+    {
+      "id": 1200986,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000026"
+    },
+    {
+      "id": 1200987,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000027"
+    },
+    {
+      "id": 1200988,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000028"
+    },
+    {
+      "id": 1200989,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000029"
+    },
+    {
+      "id": 1200990,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000030"
+    },
+    {
+      "id": 1200991,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000031"
+    },
+    {
+      "id": 1200992,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000032"
+    },
+    {
+      "id": 1200993,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000033"
+    },
+    {
+      "id": 1200994,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000034"
+    },
+    {
+      "id": 1200995,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000035"
+    },
+    {
+      "id": 1200996,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000036"
+    },
+    {
+      "id": 1200997,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000037"
+    },
+    {
+      "id": 1200998,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000038"
+    },
+    {
+      "id": 1200999,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000039"
+    },
+    {
+      "id": 1201000,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000040"
+    },
+    {
+      "id": 1201001,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000041"
+    },
+    {
+      "id": 1201002,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000042"
+    },
+    {
+      "id": 1201003,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000043"
+    },
+    {
+      "id": 1201004,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000044"
+    },
+    {
+      "id": 1201005,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000045"
+    },
+    {
+      "id": 1201006,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000046"
+    },
+    {
+      "id": 1201007,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000047"
+    },
+    {
+      "id": 1201008,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000048"
+    },
+    {
+      "id": 1201009,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000049"
+    },
+    {
+      "id": 1201010,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000050"
+    },
+    {
+      "id": 1201011,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000051"
+    },
+    {
+      "id": 1201012,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000052"
+    },
+    {
+      "id": 1201013,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000053"
+    },
+    {
+      "id": 1201014,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000054"
+    },
+    {
+      "id": 1201015,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000055"
+    },
+    {
+      "id": 1201016,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000056"
+    },
+    {
+      "id": 1201017,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000057"
+    },
+    {
+      "id": 1201018,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000058"
+    },
+    {
+      "id": 1201019,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000059"
+    },
+    {
+      "id": 1201020,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000060"
+    },
+    {
+      "id": 1201021,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000061"
+    },
+    {
+      "id": 1201022,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000062"
+    },
+    {
+      "id": 1201023,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000063"
+    },
+    {
+      "id": 1201024,
+      "numerical_seed": 3,
+      "partition": "holdout",
+      "seed": "SP1RESH1FTSHOP2H3000064"
+    }
+  ]
+}

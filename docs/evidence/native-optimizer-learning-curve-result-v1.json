@@ -1,0 +1,696 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_game_wins": 0,
+  "assessment": {
+    "id": "sha256:0751184f726c650f2d3e0cb8167b870de2abde9e1c74b017f0f5cf4911e3b359",
+    "path": "artifacts/assessments/native-optimizer-learning-curve-v1/report.json"
+  },
+  "assessment_resource": {
+    "id": "sha256:dcb59c293e81fa54437e6a9e748a4486b8ad2597f0c47e3da3117abd5af10f3c",
+    "path": "artifacts/resources/native-optimizer-curve-assessment-v1.json",
+    "peak_resident_memory_bytes": 122470400,
+    "wall_seconds": 23.714136416907422
+  },
+  "assessment_wall_seconds": 23.565511082997546,
+  "audit_script_sha256": "fecac16df5030c3f15f775f95f1b4834f2290b87745d00fd5ff94c94b49eceb3",
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_completed_development_learning_curve_progress_not_full_win_readiness",
+  "completed_receipts_verified": 340,
+  "config_id": "sha256:65be72ead0a2efdfc91f8f8bdbfccbadbb11f7cb65a3310a3f28b43e0072b78c",
+  "date": "2026-10-18",
+  "decisions": 260523,
+  "evaluation_cases": 320,
+  "failed_games": 0,
+  "final_comparison": {
+    "automatic_promotion": false,
+    "development_only_no_untouched_test_claim": true,
+    "independent_training_replicates": 2,
+    "methods": [
+      {
+        "arm": "standard",
+        "denominator": 32,
+        "failed_games": 0,
+        "final_mean_floor": 9.09375,
+        "mean_floor_change": 2.8125,
+        "wins": 0
+      },
+      {
+        "arm": "larger-batch",
+        "denominator": 32,
+        "failed_games": 0,
+        "final_mean_floor": 7.40625,
+        "mean_floor_change": 1.125,
+        "wins": 0
+      }
+    ],
+    "players": [
+      {
+        "arm": "standard",
+        "denominator": 16,
+        "final_failed_games": 0,
+        "final_mean_floor": 8.875,
+        "final_wins": 0,
+        "initial_mean_floor": 6.3125,
+        "initial_wins": 0,
+        "mean_floor_change": 2.5625,
+        "numerical_seed": 2
+      },
+      {
+        "arm": "larger-batch",
+        "denominator": 16,
+        "final_failed_games": 0,
+        "final_mean_floor": 7.5625,
+        "final_wins": 0,
+        "initial_mean_floor": 6.3125,
+        "initial_wins": 0,
+        "mean_floor_change": 1.25,
+        "numerical_seed": 2
+      },
+      {
+        "arm": "standard",
+        "denominator": 16,
+        "final_failed_games": 0,
+        "final_mean_floor": 9.3125,
+        "final_wins": 0,
+        "initial_mean_floor": 6.25,
+        "initial_wins": 0,
+        "mean_floor_change": 3.0625,
+        "numerical_seed": 3
+      },
+      {
+        "arm": "larger-batch",
+        "denominator": 16,
+        "final_failed_games": 0,
+        "final_mean_floor": 7.25,
+        "final_wins": 0,
+        "initial_mean_floor": 6.25,
+        "initial_wins": 0,
+        "mean_floor_change": 1.0,
+        "numerical_seed": 3
+      }
+    ],
+    "terminal_victory_primary": true
+  },
+  "games_launched": 0,
+  "headers_verified": 2368,
+  "interpretation": {
+    "candidate_changes_two_factors_so_cause_not_isolated": true,
+    "larger_batch_final_mean_floor": 7.40625,
+    "next_work": "fresh_seed_frozen_standard_final_vs_own_initializer_confirmation_then_bounded_continuation_if_supported",
+    "no_claim_of_population_algorithm_superiority": true,
+    "standard_final_mean_floor": 9.09375,
+    "standard_improves_in_both_training_replicates": true,
+    "standard_initial_mean_floor": 6.28125,
+    "standard_minus_candidate_final_floor": 1.6875,
+    "standard_progress_is_auxiliary_not_terminal_readiness": true,
+    "standard_relative_floor_increase": 0.4477611940298507
+  },
+  "learning_curves": [
+    {
+      "arm": "standard",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 9,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 22.754389292,
+        "decisions": 1574,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.3125,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 0
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 12,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 23.67483571,
+        "decisions": 1646,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.6875,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 128
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 15,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.673061128,
+        "decisions": 1765,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.6875,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 256
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 15,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 23.917352544,
+        "decisions": 1750,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 384
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 25.972187126000005,
+        "decisions": 1844,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 8.875,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 512
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 9,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 22.787583123000005,
+        "decisions": 1574,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.3125,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 0
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 13,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.383758124,
+        "decisions": 1742,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.375,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 128
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 14,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.642365165999998,
+        "decisions": 1724,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.25,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 256
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.746804044000005,
+        "decisions": 1777,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.75,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 384
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 14,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 25.807256915999996,
+        "decisions": 1789,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.5625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 512
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 8,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 22.073934626000007,
+        "decisions": 1442,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.25,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 0
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 15,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.799674167,
+        "decisions": 1681,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.1875,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 128
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 14,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 26.457271126000002,
+        "decisions": 1777,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.5625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 256
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 25.728984080999993,
+        "decisions": 1886,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 8.0,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 384
+    },
+    {
+      "arm": "standard",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 28.602661122,
+        "decisions": 2143,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 9.3125,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 512
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 8,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 21.791293914999994,
+        "decisions": 1442,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.25,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 0
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 12,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.289903955,
+        "decisions": 1573,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.0625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 128
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.431342624,
+        "decisions": 1689,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 8.0625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 256
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 14,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 24.462436457,
+        "decisions": 1734,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.75,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 384
+    },
+    {
+      "arm": "larger-batch",
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 13,
+        "best_victory": false,
+        "completed_games": 16,
+        "cpu_seconds": 25.810849334,
+        "decisions": 1687,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.25,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "wins": 0
+      },
+      "training_games": 512
+    }
+  ],
+  "methods": [
+    {
+      "arm": "standard",
+      "best_completed_acts": 1,
+      "best_training_floor": 27,
+      "epochs_completed": {
+        "3": 32
+      },
+      "fits": 32,
+      "optimizer_steps": 2766,
+      "stop_reasons": {
+        "epoch_limit": 32
+      },
+      "training_decisions": 115937,
+      "training_failures": 0,
+      "training_games": 1024,
+      "training_wins": 0
+    },
+    {
+      "arm": "larger-batch",
+      "best_completed_acts": 0,
+      "best_training_floor": 17,
+      "epochs_completed": {
+        "9": 8
+      },
+      "fits": 8,
+      "optimizer_steps": 7794,
+      "stop_reasons": {
+        "epoch_limit": 8
+      },
+      "training_decisions": 110347,
+      "training_failures": 0,
+      "training_games": 1024,
+      "training_wins": 0
+    }
+  ],
+  "optimizer_steps": 0,
+  "paired_changes": [
+    {
+      "arm": "standard",
+      "better_floor_seeds": 9,
+      "mean_floor_change": 2.5625,
+      "numerical_seed": 2,
+      "tied_floor_seeds": 5,
+      "worse_floor_seeds": 2
+    },
+    {
+      "arm": "larger-batch",
+      "better_floor_seeds": 10,
+      "mean_floor_change": 1.25,
+      "numerical_seed": 2,
+      "tied_floor_seeds": 3,
+      "worse_floor_seeds": 3
+    },
+    {
+      "arm": "standard",
+      "better_floor_seeds": 11,
+      "mean_floor_change": 3.0625,
+      "numerical_seed": 3,
+      "tied_floor_seeds": 4,
+      "worse_floor_seeds": 1
+    },
+    {
+      "arm": "larger-batch",
+      "better_floor_seeds": 6,
+      "mean_floor_change": 1.0,
+      "numerical_seed": 3,
+      "tied_floor_seeds": 7,
+      "worse_floor_seeds": 3
+    }
+  ],
+  "peak_resident_memory_bytes": 1135853568,
+  "raw_trajectories_decoded": 0,
+  "report_id": "sha256:2229afe401c5ea9c6d5af5339ec811ad81bfa9982501a7bfd2799cc0b52999c3",
+  "resource_reports": [
+    {
+      "completed_at": "2026-10-18T22:08:06.910044Z",
+      "exit_code": 0,
+      "id": "sha256:5570bbf2fbeb860885899cac4ac4998f2a34060e0bef7bc6a646169a7610522e",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-1.json",
+      "started_at": "2026-10-18T21:58:35.391718Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T22:18:06.912946Z",
+      "exit_code": 0,
+      "id": "sha256:d42e895bf87539ab91d2a283efe875b0cae6da5ab89d884cb15c20b424b1bbde",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-2.json",
+      "started_at": "2026-10-18T22:08:07.525332Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T22:27:51.109393Z",
+      "exit_code": 0,
+      "id": "sha256:2f14f8b3dced94e32664c85f880240881b240044bf156b666311c740655d8c0d",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-3.json",
+      "started_at": "2026-10-18T22:18:07.403524Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T22:38:05.035012Z",
+      "exit_code": 0,
+      "id": "sha256:f36cf61cea549eb33e8e7a2c868bd92a5295bc118f1b4a7ec922db4399d1b03a",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-4.json",
+      "started_at": "2026-10-18T22:27:51.797396Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T22:48:27.562399Z",
+      "exit_code": 0,
+      "id": "sha256:4d10a81baf9dfb2dc0700bd37fe766d32c77985ff0d8008fbc88542583f6eb6e",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-5.json",
+      "started_at": "2026-10-18T22:38:05.671483Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T22:58:04.460187Z",
+      "exit_code": 0,
+      "id": "sha256:cefe0a8a9b072d248f8faf4b66869d37c47f2ae629793b1af31fdc056b4824d6",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-6.json",
+      "started_at": "2026-10-18T22:48:28.245183Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T23:07:50.103397Z",
+      "exit_code": 0,
+      "id": "sha256:0283b70469a2e66eedbf6e0bcd289686b69536056cb6fc729895ce1af513a7d5",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-7.json",
+      "started_at": "2026-10-18T22:58:05.250160Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T23:17:42.104400Z",
+      "exit_code": 0,
+      "id": "sha256:c12a2a58bb30ea61d0daff7a5c1da2012ca11437dd1a19613c0d87d5723e81c4",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-8.json",
+      "started_at": "2026-10-18T23:07:50.838363Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T23:27:23.465917Z",
+      "exit_code": 0,
+      "id": "sha256:9d7fefe0d0a959a07c440c2377ef4d4fef2ba7564fea5abf3e3ed0e3c1778219",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-9.json",
+      "started_at": "2026-10-18T23:17:42.905916Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T23:37:03.989799Z",
+      "exit_code": 0,
+      "id": "sha256:cc256ec516cb473c36d8bf307298e4bfc0966d1ac31c983bb92c452d8deffe74",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-10.json",
+      "started_at": "2026-10-18T23:27:24.284288Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T23:46:58.829794Z",
+      "exit_code": 0,
+      "id": "sha256:2dbe88b39e6f3a53b2d0a72807ae1ba2e945916bab53e6f7604268d165e01cd3",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-11.json",
+      "started_at": "2026-10-18T23:37:05.444323Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-18T23:56:48.582041Z",
+      "exit_code": 0,
+      "id": "sha256:9ed9954168e2377cb0c683d1f2feea7219a71f00c6d20321acef4fccc881ef01",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-12.json",
+      "started_at": "2026-10-18T23:46:59.605595Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-19T00:07:07.153752Z",
+      "exit_code": 0,
+      "id": "sha256:425a4f32e2b6e16ff7cca519f3e142b06c38223988b2f67ab11d0302ef547c8e",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-13.json",
+      "started_at": "2026-10-18T23:56:49.473268Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-19T00:17:31.742302Z",
+      "exit_code": 0,
+      "id": "sha256:fa981703112dfc9408effc600095f16183118e71d396e20e46940b5851e75cf4",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-14.json",
+      "started_at": "2026-10-19T00:07:07.975808Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-19T00:18:36.538929Z",
+      "exit_code": 0,
+      "id": "sha256:8a503562baac3df331a8b5b1d3454912ce29fe487299ca612138a2afb808f122",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-learning-curve-v1-session-15.json",
+      "started_at": "2026-10-19T00:17:32.962676Z",
+      "status": "completed"
+    }
+  ],
+  "retained_bytes": 2401951705,
+  "schema_version": "native-optimizer-learning-curve-result-evidence-v1",
+  "source_report": {
+    "id": "sha256:5be34f750d8bbe3fc17066446e556c403cf3bc5be8cf985eda2fa8a71826ea44",
+    "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/report.json"
+  },
+  "source_seals_verified": 25409,
+  "total_cpu_seconds": 8524.263830693999,
+  "total_resource_wall_seconds": 8389.71107820922,
+  "training_cases": 2048
+}

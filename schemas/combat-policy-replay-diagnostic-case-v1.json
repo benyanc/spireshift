@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-policy-replay-diagnostic-case-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-policy-replay-diagnostic-case-v1"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "policy_kind": {
+      "enum": [
+        "production_checkpoint",
+        "reference_production_checkpoint"
+      ]
+    },
+    "source_case_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "replay_result": {
+      "$ref": "production-policy-evaluation-case-v5.json"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "decision_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "observation": {
+            "$ref": "observation-v1.json"
+          },
+          "legal_actions": {
+            "type": "array",
+            "items": {
+              "$ref": "action-v1.json"
+            },
+            "minItems": 1
+          },
+          "executed_action_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "predictions": {
+            "type": "object",
+            "properties": {
+              "production_checkpoint": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "selected_index": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "action_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "policy": {
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "minItems": 1
+                      },
+                      "top_probability_gap": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "required": [
+                      "selected_index",
+                      "action_id",
+                      "policy",
+                      "top_probability_gap"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reference_production_checkpoint": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "selected_index": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "action_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "policy": {
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "minItems": 1
+                      },
+                      "top_probability_gap": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "required": [
+                      "selected_index",
+                      "action_id",
+                      "policy",
+                      "top_probability_gap"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "production_checkpoint",
+              "reference_production_checkpoint"
+            ],
+            "additionalProperties": false
+          },
+          "shadow_error": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "combat": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "context": {
+                    "type": "object"
+                  },
+                  "bindings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "minItems": 1
+                  },
+                  "available_card_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "uniqueItems": true
+                  },
+                  "card_ids_absent_from_fit": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "uniqueItems": true
+                  },
+                  "card_ids_absent_from_signal": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "context",
+                  "bindings",
+                  "available_card_ids",
+                  "card_ids_absent_from_fit",
+                  "card_ids_absent_from_signal"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "binding_error": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transition": {
+            "anyOf": [
+              {
+                "$ref": "transition-v1.json"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "decision_index",
+          "observation",
+          "legal_actions",
+          "executed_action_id",
+          "predictions",
+          "shadow_error",
+          "combat",
+          "binding_error",
+          "transition"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "semantic_matches": {
+      "type": "boolean"
+    },
+    "mismatched_fields": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "status",
+          "error",
+          "decisions",
+          "terminal",
+          "victory",
+          "truncated",
+          "termination_reason",
+          "liveness",
+          "fallback",
+          "maximum_floor",
+          "maximum_act",
+          "final_state_hash",
+          "action_trace_sha256",
+          "public_progress",
+          "failure_kind"
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "case_id",
+    "config_id",
+    "seed",
+    "policy_kind",
+    "source_case_id",
+    "replay_result",
+    "rows",
+    "semantic_matches",
+    "mismatched_fields"
+  ],
+  "additionalProperties": false
+}

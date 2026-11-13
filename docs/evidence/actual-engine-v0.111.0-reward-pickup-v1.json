@@ -1,0 +1,204 @@
+{
+  "aggregate": {
+    "effect_decisions": 17,
+    "new_app_copies": 0,
+    "observations": 21,
+    "public_game_ui_actions": 23,
+    "tutorial_steps": 4
+  },
+  "ascension": 8,
+  "cases": [
+    {
+      "comparison_report_id": "sha256:fbbe4cd9a554be6e711460c2ae0cfbf452d8cd8f688ad67a57d11fa31ebe4e0e",
+      "cpu_seconds": 25.226481483,
+      "effect_decisions": 4,
+      "native_report_id": "sha256:ff0bdccece4bd9be54809503e208b6915889ab5f6d7f2be0fcdba76854a48ff0",
+      "new_app_copies": 0,
+      "observations": 5,
+      "public_game_ui_actions": 5,
+      "resource_report_id": "sha256:e894f5ae4d5bd356b6495bf08e3b53c0d1070cdf0feb2830358c300bd2340b40",
+      "saved_verification_report_id": "sha256:b3d1bc885b9e3b1e8bd5334dc733a854810931ccd78148818626c455e90e3705",
+      "scenario": "calling-bell-claim-all",
+      "seed": "SPIRESHIFTREWARD003",
+      "shipped_report_id": "sha256:783b7b0bfdb7a47d2642842cea0250c4fabcb8764a2e705a4b6983137661702b",
+      "tutorial_steps": 1,
+      "wall_seconds": 44.01465287501924
+    },
+    {
+      "comparison_report_id": "sha256:aba3cf00b801fed7334fd002c614950d6b175263d3e516b6fbaea78e68d89b7e",
+      "cpu_seconds": 27.878678523999998,
+      "effect_decisions": 6,
+      "native_report_id": "sha256:85f5ed4e4682be2d35fb9fc9945545e680ff9c6f2a84e30e0f42388b2fb3d7df",
+      "new_app_copies": 0,
+      "observations": 7,
+      "public_game_ui_actions": 8,
+      "resource_report_id": "sha256:71026b53a06acf6b294e1fc55a0e70f1f65f96046023e9cae61214acff2e4e6b",
+      "saved_verification_report_id": "sha256:f5eb46fbdcad964aa381b3f806b253417df6310b64fa258cfc53dd70befc6410",
+      "scenario": "cauldron-fill-replace-skip",
+      "seed": "SPIRESHIFTREWARD001",
+      "shipped_report_id": "sha256:3fef331dab3996932af10af0c7c350657e814e73ba515216235635719c4d4ca5",
+      "tutorial_steps": 1,
+      "wall_seconds": 56.74694808298955
+    },
+    {
+      "comparison_report_id": "sha256:6680557f0fe9fe50616118cc542452a8feb01dadaf59053a8d43c4bbcc0c82c9",
+      "cpu_seconds": 25.799792806000003,
+      "effect_decisions": 3,
+      "native_report_id": "sha256:ff0436a589a49d062368bfec1a472dffdfdc74566fb67532ed42d614cf173aa3",
+      "new_app_copies": 0,
+      "observations": 4,
+      "public_game_ui_actions": 4,
+      "resource_report_id": "sha256:33186278d73f2403a352bb2b4391d2b3d4b41d424c9784a98efbd3ee48d64904",
+      "saved_verification_report_id": "sha256:1f9a797d62ef99cc8a6424f224521afe75eec1e74aed5a7f80626025012856be",
+      "scenario": "calling-bell-claim-skip",
+      "seed": "SPIRESHIFTREWARD004",
+      "shipped_report_id": "sha256:e16d29ab0726b5585611231ac50bfd462c7ee2a2de17641d38893cb1ac010690",
+      "tutorial_steps": 1,
+      "wall_seconds": 47.75486429099692
+    },
+    {
+      "comparison_report_id": "sha256:ab11055da2375899debb2273ffac8b9970ea6b966744128b5f3575f695812d8f",
+      "cpu_seconds": 26.560425266000006,
+      "effect_decisions": 4,
+      "native_report_id": "sha256:9046a2745609fde294a6cf2aaf33100cb690d65ac2f508060b4470632d989971",
+      "new_app_copies": 0,
+      "observations": 5,
+      "public_game_ui_actions": 6,
+      "resource_report_id": "sha256:1ec21ef083423dd31284ecd9e63483450aad53413c682f1935535b8266ff6192",
+      "saved_verification_report_id": "sha256:282922968d351498eb26a2741df5bcc26d6f0b73517f5105e44c6fb7e1fd8f6c",
+      "scenario": "cauldron-fill-skip",
+      "seed": "SPIRESHIFTREWARD032",
+      "shipped_report_id": "sha256:023b3cd4e042efa31f6d38a99a77cf4bcaf0c914d8bb91b2949c20cda65a125d",
+      "tutorial_steps": 1,
+      "wall_seconds": 48.24289887503255
+    }
+  ],
+  "character": "Ironclad",
+  "claim_scope": "four_privileged_serialized_A8_fixture_prefixes_public_Calling_Bell_and_Cauldron_pickup_claim_skip_capacity_replacement_and_fresh_tutorials_only",
+  "completed_short_cases": 4,
+  "date": "2026-10-12",
+  "distinct_profiles": 4,
+  "evidence_id": "sha256:84b727828ff6a97ba731f80dfd13f1571f60445042134f4297fc5d4ffa3cde4a",
+  "full_run_attempts": 0,
+  "host_repair": {
+    "artifact_mvid": "19713ca4-5134-490a-8e95-e65e207c0161",
+    "artifact_sha256": "786566728f3b5268775f0907be26f6800df08f0e10ab66598c6af78d087dcca5",
+    "build_report_id": "sha256:d84255b298c2dcd634d9f4c3dc605e75793de6b258014ca14942b68cf0140c6a",
+    "exact_relic_tutorial_added": true,
+    "focused_rest_potion_relic_tests_passed": 3,
+    "fresh_builds": 2,
+    "patch_sha256": "61345583937281bca727c985ca076074fb55629902526d56809fc7036691db9b",
+    "source_revision": "6200b2391b1bbf83082bc00067e20343ee8a8a2b",
+    "unknown_modals_remain_unsupported": true,
+    "wall_seconds": 8.203593749960419
+  },
+  "independent_seeds": 4,
+  "issues": [
+    145,
+    146
+  ],
+  "limitations": [
+    "Darv is explicitly installed at the initial ancient and shops at the initial map point, with one Strike and 1,000 gold; these are not naturally reached rooms or full runs.",
+    "This covers the four declared seeds/scenarios, not every nested reward, relic modifier, card interaction or public information field.",
+    "Other same-Host shipped families retain their historical scope; no general Host or full mechanics admission follows.",
+    "Broader modifier/counter/effect text, selectors, act discovery, remaining mode references, later acts and endings still precede full-run throughput and neural integration.",
+    "A legacy persistent-potion description fallback was observed to substitute a card-count noun incorrectly; full public effect-text export needs a separate repair/check before learning admission.",
+    "The eight-case repeated owner panel has not started, and no new learning/training follows."
+  ],
+  "negative_saved_audit": {
+    "games_launched": 0,
+    "rejected_corruptions": 16,
+    "unaltered_cases": 2
+  },
+  "optimizer_steps": 0,
+  "owner_next": {
+    "batch_started": false,
+    "command": "bash scripts/compare-reward-actions-v1.sh",
+    "config": "configs/engine-qualification/sts2-v0.111.0-reward-bridges-v8.json",
+    "config_id": "sha256:a5a9226f667f1b611cfd579e778a42c0870b72e091e14e04f519b7760995c23b",
+    "expected_minutes": [
+      6,
+      9
+    ],
+    "independent_seeds": 4,
+    "max_cpu_seconds": 1800,
+    "max_memory_bytes": 8000000000,
+    "max_storage_bytes": 6000000000,
+    "max_wall_seconds": 900,
+    "planned_cases": 8,
+    "seed_scenario_pairs": 4
+  },
+  "preserved_failed_resources": [
+    {
+      "resource_name": "reward-smoke-bell-v1",
+      "resource_report_id": "sha256:e1828b37731e51c8fd364821613dbd621188ce01a0cafe8a990c62418ff05b9a",
+      "status": "failed",
+      "wall_seconds": 96.63220645795809
+    },
+    {
+      "resource_name": "reward-smoke-bell-v2",
+      "resource_report_id": "sha256:c3de37677d818dbf9138f18a2074e3d7d2be5d667918b23aefd0785a868e8dbd",
+      "status": "failed",
+      "wall_seconds": 1.8501360829686746
+    },
+    {
+      "resource_name": "reward-smoke-bell-v3",
+      "resource_report_id": "sha256:4ee72c1e1e0ec73ea55edec23f958099d75f9995371ba232a93e720895b676f4",
+      "status": "failed",
+      "wall_seconds": 41.52341699996032
+    },
+    {
+      "resource_name": "reward-smoke-bell-v4",
+      "resource_report_id": "sha256:6da02aba689866940c61d08c2508fbdfa072c924adbe7e5273e6a44226f216aa",
+      "status": "failed",
+      "wall_seconds": 42.42038212501211
+    },
+    {
+      "resource_name": "reward-smoke-bell-v5",
+      "resource_report_id": "sha256:ea6185b0040f70279981010effd4bda93089e5ff1dfc078909d4f1214f80be31",
+      "status": "failed",
+      "wall_seconds": 42.3020376249915
+    },
+    {
+      "resource_name": "reward-smoke-bell-v6",
+      "resource_report_id": "sha256:e643c7880dc97df2d0d4e77797f13054f2698643e628edf58584c0421345206f",
+      "status": "failed",
+      "wall_seconds": 46.58034200000111
+    },
+    {
+      "resource_name": "reward-smoke-cauldron-v7",
+      "resource_report_id": "sha256:7b32d08cce36c17cc81e2645d8dc6cef76207a11bf81d60c767d58ee572be95d",
+      "status": "failed",
+      "wall_seconds": 40.32169195800088
+    },
+    {
+      "resource_name": "reward-smoke-cauldron-v8",
+      "resource_report_id": "sha256:5856384bf3b9264f9f91572302fc30130376506a3691fa2b4c64edad7288e91e",
+      "status": "failed",
+      "wall_seconds": 82.32387479103636
+    }
+  ],
+  "privileged_fixture": true,
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "repairs": [
+    "Exact first-relic tutorial control, with a fresh profile and its actual button click.",
+    "Versioned reward-only rendering of observed gold/blue/green tags and the Ironclad energy glyph; numbers, words, order and icon multiplicity remain intact.",
+    "Current shop inventory and priced-offer binding normalizes flat native and nested shipped relic operands.",
+    "Current potion/slot binding normalizes potion and discardable_potion roles; full-belt claim blocking remains required.",
+    "Every supported reward recipe records its fresh-profile sentinel.",
+    "Build proposal schema and exact recipe/report linkage are checked before compilation/toolchain creation."
+  ],
+  "same_working_app_path_and_inode": true,
+  "schema_version": "actual-engine-reward-pickup-evidence-v1",
+  "seed_scenario_pairs": 4,
+  "shipped_cross_host_parity": false,
+  "training_allowed": false,
+  "validation": {
+    "csharp_protocol_contract_passed": true,
+    "focused_node_tests_passed": 13,
+    "format_lint_types_passed": true,
+    "owner_script_syntax_passed": true,
+    "repository_tests_passed": 1164,
+    "strict_types_source_files": 211
+  }
+}

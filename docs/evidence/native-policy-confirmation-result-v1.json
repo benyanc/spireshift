@@ -1,0 +1,221 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_shared_input_checks_passed": true,
+  "assessment": {
+    "id": "sha256:42932eb331dd9a871260c6c155859e1d3bc930c36b52320fcf4bf1060beff459",
+    "path": "artifacts/assessments/native-policy-confirmation-v1/report.json"
+  },
+  "assessment_resource": {
+    "id": "sha256:c9c55863cb298e3b7810442b9264f457f9870db5e05582af4c38cd148da2a990",
+    "path": "artifacts/resources/native-policy-confirmation-assessment-v1.json",
+    "peak_resident_memory_bytes": 132923392,
+    "wall_seconds": 31.555600750027224
+  },
+  "assessment_wall_seconds": 31.385341666988097,
+  "audit_script_sha256": "e78cab65abbd2aeac143124d3b4317f845039a44387f86314bfd7977d1becfcc",
+  "base_readiness_passed": false,
+  "best_trained_completed_acts": 0,
+  "best_trained_floor": 17,
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_fresh_fixed_player_auxiliary_progress_confirmation_not_wins_or_population_readiness",
+  "comparison": {
+    "adaptive_controller_allowed": false,
+    "aggregate": {
+      "initial": {
+        "denominator": 128,
+        "failed_games": 0,
+        "mean_floor": 7.2890625,
+        "wins": 0
+      },
+      "trained": {
+        "denominator": 128,
+        "failed_games": 0,
+        "mean_floor": 8.859375,
+        "wins": 0
+      }
+    },
+    "automatic_training_follows": false,
+    "auxiliary_progress_confirmed": true,
+    "base_readiness_passed": false,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20261019,
+    "checkpoint_promoted": false,
+    "confirmation_rule": "both_positive_floor_gain_pooled_lower95_positive_no_win_regression_zero_failures_v1",
+    "failure_floor_and_win_value": 0,
+    "independent_training_replicates": 2,
+    "interval_method": "fixed_percentile_seed_bootstrap_within_each_fixed_initializer",
+    "mean_floor_change": 1.5703125,
+    "one_sampled_trajectory_per_player_seed": true,
+    "paired_floor_change_interval95": [
+      0.9296875,
+      2.2265625
+    ],
+    "players": [
+      {
+        "higher_floor_seeds": 36,
+        "initial": {
+          "denominator": 64,
+          "failed_games": 0,
+          "mean_floor": 6.953125,
+          "wins": 0
+        },
+        "initial_only_wins": 0,
+        "lower_floor_seeds": 11,
+        "mean_floor_change": 1.6875,
+        "numerical_seed": 2,
+        "paired_floor_change_interval95": [
+          0.890625,
+          2.546875
+        ],
+        "tied_floor_seeds": 17,
+        "trained": {
+          "denominator": 64,
+          "failed_games": 0,
+          "mean_floor": 8.640625,
+          "wins": 0
+        },
+        "trained_only_wins": 0
+      },
+      {
+        "higher_floor_seeds": 30,
+        "initial": {
+          "denominator": 64,
+          "failed_games": 0,
+          "mean_floor": 7.625,
+          "wins": 0
+        },
+        "initial_only_wins": 0,
+        "lower_floor_seeds": 17,
+        "mean_floor_change": 1.453125,
+        "numerical_seed": 3,
+        "paired_floor_change_interval95": [
+          0.484375,
+          2.46875
+        ],
+        "tied_floor_seeds": 17,
+        "trained": {
+          "denominator": 64,
+          "failed_games": 0,
+          "mean_floor": 9.078125,
+          "wins": 0
+        },
+        "trained_only_wins": 0
+      }
+    ],
+    "terminal_victory_primary": true,
+    "uncertainty_covers_population_of_training_initializers": false
+  },
+  "config_id": "sha256:0e3d9c5969ab95f214f4a42c1ed6ade6e66bf8e864af4ce8bb567998b5f711a9",
+  "date": "2026-10-18",
+  "decisions": 29129,
+  "episode_headers_reconstructed": 256,
+  "experiment_cpu_seconds": 752.1259818380003,
+  "experiment_peak_resident_memory_bytes": 971259904,
+  "experiment_resource_wall_seconds": 721.1286376670469,
+  "final_report_wall_is_last_session_only": true,
+  "games_launched": 0,
+  "next_work": "bounded_both_standard_players_full_Adam_continuation_with_fresh_train_and_evaluation_seeds",
+  "optimizer_steps": 0,
+  "original_report_and_four_states_unchanged": true,
+  "paired_higher_floor_seeds": 66,
+  "paired_lower_floor_seeds": 28,
+  "paired_tied_floor_seeds": 34,
+  "panels": [
+    {
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 13,
+        "best_victory": false,
+        "completed_games": 64,
+        "cpu_seconds": 98.820241124,
+        "decisions": 6428,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 6.953125,
+        "not_attempted_games": 0,
+        "planned_games": 64,
+        "wins": 0
+      },
+      "version": "initial"
+    },
+    {
+      "numerical_seed": 2,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 64,
+        "cpu_seconds": 109.38344370600001,
+        "decisions": 7756,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 8.640625,
+        "not_attempted_games": 0,
+        "planned_games": 64,
+        "wins": 0
+      },
+      "version": "trained"
+    },
+    {
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 64,
+        "cpu_seconds": 102.98169762800002,
+        "decisions": 6906,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 7.625,
+        "not_attempted_games": 0,
+        "planned_games": 64,
+        "wins": 0
+      },
+      "version": "initial"
+    },
+    {
+      "numerical_seed": 3,
+      "summary": {
+        "best_completed_acts": 0,
+        "best_floor": 17,
+        "best_victory": false,
+        "completed_games": 64,
+        "cpu_seconds": 114.56613199600001,
+        "decisions": 8039,
+        "failed_cases": [],
+        "failed_games": 0,
+        "mean_floor": 9.078125,
+        "not_attempted_games": 0,
+        "planned_games": 64,
+        "wins": 0
+      },
+      "version": "trained"
+    }
+  ],
+  "raw_trajectories_decoded": 0,
+  "report_id": "sha256:4e198db91c2ab72f659fc1328132fcfceb8cac692e97cc1d325413c0e3c31353",
+  "resource_reports": [
+    {
+      "completed_at": "2026-10-19T02:02:56.936957Z",
+      "id": "sha256:d0aa2c516c27e82809f82b31e7246ab3bde8a3b07a7afc06a0f0c00b335dc770",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-standard-fresh-v1-session-1.json",
+      "started_at": "2026-10-19T01:52:54.478916Z"
+    },
+    {
+      "completed_at": "2026-10-19T02:04:56.292534Z",
+      "id": "sha256:8cc6caa16626a0ed8c36982ffc1fdbce98c45fb618954ca0c0602afcb1b3a2fd",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-standard-fresh-v1-session-2.json",
+      "started_at": "2026-10-19T02:02:57.614370Z"
+    }
+  ],
+  "retained_comparison_bytes": 275787980,
+  "schema_version": "native-policy-confirmation-result-evidence-v1",
+  "source_report": {
+    "id": "sha256:fadc40d9d80e48e776cc118e54c23c0ed451763d7eceabf95b4cbb7df7ecb487",
+    "path": "artifacts/native-confirmation/sts2-v0.111.0-a8-standard-fresh-v1/report.json"
+  },
+  "source_seals_verified": 28447,
+  "verified_completed_chunks": 32
+}

@@ -1,0 +1,52 @@
+{
+  "admitted_manifest_id": "sha256:b626c146fbb41dc5370a7e4b6fd773279288df2065c3def3989c238c9a67042f",
+  "agent_games_played": 0,
+  "authoritative_fixture_tree": "66af8c2a510dcf8978dacfb0a3ab0a606c8a0b3a",
+  "automatic_followup": false,
+  "build_report_id": "sha256:585af3be239925d9a527c4fd92429f685e1cd63a855c0a6dccf406d1bf60ac70",
+  "claim_scope": "pinned_captured_fixture_and_public_contract_admission_not_complete_live_fidelity",
+  "config_id": "sha256:7d0e2ca66060fdc74456ad2be67dbc8f5bcd8e48a2c2ea78da529d27793fb968",
+  "contract_report_id": "sha256:86001f0dd8b626e91f5266aeaa8bcf8de8abb28b444d5694eace799d5731fec5",
+  "coverage_limitations": [
+    "Only executed committed game fixtures have differential coverage.",
+    "Act 2/3 boundaries have synthetic regressions and a pinned-game source audit, not UI captures.",
+    "Forced Architect closing dialogue is collapsed; live playback still needs those UI steps.",
+    "Six legacy combat captures omit per-turn hands.",
+    "Reachable uncaptured cards, later ancient relics and exact generation odds remain incomplete.",
+    "Hidden-world search requires its separate clone qualification; admission is policy-only.",
+    "No trained agent win, complete live fidelity or foundation readiness is established."
+  ],
+  "empirical_later_act_ui_parity": false,
+  "foundation_readiness_established": false,
+  "lifecycle_probe_id": "sha256:5233c30799c7ca0e094aa26c3d193f1121867711a95cb59f33672506b8452f4c",
+  "lifecycle_regressions": 7,
+  "native_profile_resets": 1,
+  "native_suite_report_id": "sha256:8b03a3d9c5bf3259a627593a46fc56ccfcc0d39b4f6d2c82b1bed8a4ec40fb34",
+  "optimizer_steps": 0,
+  "profile": {
+    "live_game_conformance_verified": false,
+    "profile_id": "evangambit-source-fixed-ascension-8-v1",
+    "selectable_difficulty": false,
+    "source_declared_ascension_level": 8
+  },
+  "python_suite_report_id": "sha256:e58a0ef651443e4d5fcafa3801ce20b8b993a3b86dd4068b16416c1d96fd485d",
+  "report_id": "sha256:c7220a673444c266f5fc97a9e5fea3ece5da9f6013ffafbe65efdf3c10cdcfbf",
+  "rule_audit_id": "sha256:273a153462b76dbf27bd235e28da40236012964a9ab8989cd223371ce648b5a6",
+  "runtime": {
+    "game_version": "v0.107.1",
+    "native_library": {
+      "architecture": "arm64",
+      "filename": "Sts2Emulator.dylib",
+      "platform": "macos",
+      "sha256": "d1dcd8427568ab5eab6b42b944b5fffe5cecc02cd4a6b94f1dec0b7e9463931d",
+      "size_bytes": 5203840
+    },
+    "steam_build_id": "23811903",
+    "upstream_revision": "512906eb50bcb26973dbbd84dd8e233d9fca5784",
+    "upstream_tree": "d34070e908b1002c61144d2d491dbfbdd7e598e1"
+  },
+  "schema_version": "public-a8-policy-learning-admission-v1",
+  "source_manifest_id": "sha256:7b8f105cb576e42336cf45912728a293be58d08a33868e1737479f3e03cb2155",
+  "three_act_and_terminal_regressions": 9,
+  "verdict": "admitted_for_policy_only_a8_learning"
+}

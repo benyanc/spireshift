@@ -1,0 +1,85 @@
+{
+  "all_original_weights_and_full_Adam_preserved": true,
+  "all_workers_clean_shutdown_and_app_profile_archive_reset": true,
+  "assessed_date": "2026-11-02",
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "complete_host_paths_independently_reconstructed": 7,
+  "complete_host_verified_decisions": 852,
+  "complete_matching_pairs": [
+    "player-3-world-1",
+    "player-3-world-2"
+  ],
+  "counter_settling_hypothesis": "At the stale-snapshot rejection the only non-transport snapshot difference is Happy Flower counter 3 to 0; inspect the public counter source and settling before repair. This does not prove an engine-rules change or permit a blind 0/3 alias.",
+  "diagnostic_partial_acknowledged_prefix_verified_decisions": 72,
+  "first_input_differences": {
+    "player-2-world-1": {
+      "field": "Happy Flower public counter",
+      "native": 0,
+      "official": 3,
+      "zero_based_decision": 11
+    },
+    "player-2-world-2": {
+      "complete_menu_keys_equal": true,
+      "field": "rest-site option roles and enabled/exit field names",
+      "zero_based_decision": 112
+    }
+  },
+  "game_version_and_source_pins_unchanged": true,
+  "genuine_matched_ending_pairs": 0,
+  "isolated_actor_audit_evidence": "../spireshift-card-zone-audit/docs/evidence/native-card-zone-distinction-audit-v1.json",
+  "last_rejected_choice_excluded": 73,
+  "matching_input_prefixes": {
+    "player-2-world-1": 11,
+    "player-2-world-2": 112,
+    "player-3-world-1": 128,
+    "player-3-world-2": 128
+  },
+  "new_games_in_assessment": 0,
+  "new_owner_command_frozen": false,
+  "next_order": [
+    "Inspect and correct native/official Happy Flower public counter semantics and pre-choice settling; preserve actual counter values and the rejected world417/player2 attempt.",
+    "Repair exact rest-site DTO/role aliases with preserved enabled/optional/exit authority, unknown facts and raw bindings.",
+    "Add targeted saved/source/effect controls before preparing any separately frozen owner comparison; do not rerun the completed broader v1 panel.",
+    "Retain the independently completed isolated actor card-zone audit; after compatibility qualifies, propose varied fitting-only lessons and a separate interference test."
+  ],
+  "optimizer_updates": 0,
+  "original_partial_game_still_blocked": true,
+  "original_reports_and_raw_flag_unchanged": true,
+  "owner_all_four_pairs_completed": true,
+  "owner_cpu_seconds": 393.456106965,
+  "owner_exit_code": 2,
+  "owner_final_storage_bytes_including_shared_app": 2440966556,
+  "owner_host_starts": 8,
+  "owner_peak_memory_bytes": 1317273600,
+  "owner_resource_cap": null,
+  "owner_resource_report": {
+    "path": "artifacts/resources/broader-compatibility-v1-attempt-1.json",
+    "report_id": "sha256:a7b9ca5b3c5faa622695f4d239bf5a2bbd8531f9ac013a03e4fef7ee01eb18e1",
+    "sha256": "946e694f0fb0c4dcea247e9ba35b27c7d02109960ae53ca3b9e46a187d6eed8f"
+  },
+  "owner_wall_seconds": 999.5482154160272,
+  "raw_flag_false_explanation": "The original coordinator skipped its batch verifier when any host failed delivery; the saved-only assessment verifies complete paths and an explicitly quarantined acknowledged prefix separately.",
+  "report_id": "sha256:8fb0ea9d385f90f0a6119d3c8d66a2270fc1a85e5a1eacf5d5e2050fb76392f2",
+  "saved_assessment": {
+    "path": "artifacts/native-broader-compatibility/assessment-v1/report.json",
+    "report_id": "sha256:2e24c8b3335d4f747bbae77ee3bcdb3945d225be1ad07a5b22cec5c5e7729765",
+    "sha256": "2833e0416dcaa31ded8852ce569142316ec0bf0f2359eca602c9f74d94b0def8"
+  },
+  "saved_assessment_wall_seconds": 24.855087958974764,
+  "schema_version": "native-broader-compatibility-result-evidence-v1",
+  "source_tuple": "CLI54 / official24 / worker23 / converter14 / layout11 / shared environment41",
+  "status": "completed_blocked_panel_assessed",
+  "stopped_official_game": {
+    "attempted_choice": 73,
+    "case": "player-2-world-1",
+    "counter_after": 0,
+    "counter_before": 3,
+    "delivery": "not_delivered",
+    "label": "Play Evil Eye",
+    "reason_code": "stale_snapshot",
+    "resubmitted": false
+  },
+  "total_verified_acknowledged_deliveries": 924,
+  "training_allowed": false
+}

@@ -1,0 +1,398 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_next_experiment": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "contract": "natural_earlier_coordinated_teacher_comparison_v1",
+  "evidence_id": "sha256:81fe717b9f95fd367a933bafcd60fad68e0bdbe74d4b60adada9995dae24e016",
+  "full_game_attempts": 0,
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "limitations": [
+    "Native algorithm prototype is partially verified; v2 full qualification remains owner-run.",
+    "Two fixed parents and only eight main worlds, not a population of training initializers.",
+    "Matched proposal slots do not imply equal CPU or isolate every search component.",
+    "Single arm preserves combat-turn mutation targeting; coordinated extensions can also change nested choices.",
+    "Fixed-world local fight/HP improvements do not establish strategic full-run utility or deployable 128-second planning.",
+    "Neither exhaustive search nor a guaranteed stronger teacher."
+  ],
+  "main_prepared": {
+    "blocked_until_completed_v2_control": true,
+    "candidate_slots_per_arm_and_entry": 16,
+    "coordinated_generations": [
+      4,
+      8,
+      4
+    ],
+    "entries": [
+      "early",
+      "later"
+    ],
+    "equal_CPU_claimed": false,
+    "fitting_uses_heldout": false,
+    "later_roots_follow_original_greedy_opening": true,
+    "main_worlds": 8,
+    "maximum_joint_edits": 3,
+    "maximum_native_attempts": 576,
+    "native_attempts_executed": 0,
+    "search_arms": [
+      "single_change",
+      "coordinated"
+    ],
+    "short_winning_plans_excluded": false,
+    "workspace_created": false
+  },
+  "new_optimizer_steps": 0,
+  "ordinary_PPO_eligible": false,
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "original_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "owner_next": {
+    "command": "bash scripts/compare-coordinated-teacher-v2.sh --control",
+    "control_worlds": 2,
+    "expected_minutes": [
+      5,
+      10
+    ],
+    "maximum_native_attempts": 48,
+    "qualifies_main_only_after_all_checks_pass": true,
+    "report_path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v2/report.json",
+    "stage": "v2_control_qualification_only",
+    "workspace_created": false
+  },
+  "preservation_assessment": {
+    "action_distributions_and_choices_recomputed": 654,
+    "id": "sha256:2ecc8ce512db8432191bd466a7387fe87568f8e6c96616c833fbc1fe3a2a1dc7",
+    "native_attempts_launched": 0,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-coordinated/preservation-assessment-v2/report.json",
+    "plan_and_confirmation_reconstruction_passed": true,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 49.969419365,
+      "final_storage_bytes": 6181,
+      "id": "sha256:139ee83b6a6f08a9401599bdfcb6c1e195ea3a306582d981c419e2c5ae59c2a3",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-preservation-assessment-v2.json",
+      "peak_resident_memory_bytes": 504758272,
+      "status": "completed",
+      "wall_seconds": 101.65634179092012
+    },
+    "sealed_native_journals_independently_reaudited": 43,
+    "source": {
+      "path": "artifacts/native-coordinated/preservation-assessment-v2/run.py",
+      "sha256": "5edc679bc1d5ed7233e6d46ee145353620f90fadc0dd1eac20f9bd4378a9b52e"
+    },
+    "v1_control_remains_unqualified": true,
+    "v2_read_only_preparation_passed": true
+  },
+  "recipes": [
+    {
+      "id": "sha256:ced01cce478f3a294088bc7f2319e02a47322a68afb29b191762dfedbd0aeb84",
+      "path": "configs/native-coordinated/sts2-v0.111.0-a8-control-v1.json",
+      "version": 1
+    },
+    {
+      "id": "sha256:a40b0d70a28f9f7a87a04c015ae7706347fbfa943171e7cbe30b6e3179649521",
+      "path": "configs/native-coordinated/sts2-v0.111.0-a8-comparison-v1.json",
+      "version": 1
+    },
+    {
+      "id": "sha256:6513f8304b4f2a488bc4e56b81ef4e8af31d2033a7871aab893f9b5b6ac75d92",
+      "path": "configs/native-coordinated/sts2-v0.111.0-a8-control-v2.json",
+      "version": 2
+    },
+    {
+      "id": "sha256:93f539e37b169f332b7c076f0e24fd58741eacf2025e7600a92853a355b2499c",
+      "path": "configs/native-coordinated/sts2-v0.111.0-a8-comparison-v2.json",
+      "version": 2
+    }
+  ],
+  "repository_verification": {
+    "csharp_protocol_build_passed": true,
+    "format_passed": true,
+    "lint_passed": true,
+    "pure_and_mocked_tests": 20,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 121.03150480600002,
+      "final_storage_bytes": 0,
+      "id": "sha256:5019594bb0d821508d4aa1a10ac98ce083383090eacc4d40ba41013839956c82",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-repository-check-v2.json",
+      "peak_resident_memory_bytes": 375488512,
+      "status": "completed",
+      "wall_seconds": 132.08490879205056
+    },
+    "strict_type_source_files": 537,
+    "tests_passed": 2471,
+    "tests_skipped": 5
+  },
+  "root_banks": [
+    {
+      "bytes": 19359927,
+      "id": "sha256:f16d87d0beec39afea9420d8fa90822d14a17d3678e247df96e5c4cae68671b5",
+      "path": "artifacts/native-coordinated/roots-v1/report.json"
+    },
+    {
+      "bytes": 19316781,
+      "id": "sha256:1f0855709f908bcc07756c3f061e0e75d522701032d9effcd1bc60bd9b08b822",
+      "path": "artifacts/native-coordinated/roots-v2/report.json"
+    }
+  ],
+  "root_preparation": {
+    "candidate_first_turn_positions": 918,
+    "fit_worlds": 4,
+    "fixed_parents": 2,
+    "heldout_worlds": 4,
+    "main_deck_signatures": 8,
+    "main_maximum_prefix": 217,
+    "main_relic_signatures": 8,
+    "main_roots_unchanged": true,
+    "main_worlds": 8,
+    "old_teacher_worlds_excluded": 14,
+    "resources_v1": {
+      "cap": null,
+      "cpu_seconds": 41.758068516,
+      "final_storage_bytes": 571,
+      "id": "sha256:da84b2a2f588ecb30c0a39441fea425a8d6f6bd915b97f0f2e2725215362212d",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-root-preparation-v1.json",
+      "peak_resident_memory_bytes": 357793792,
+      "status": "completed",
+      "wall_seconds": 83.78812129190192
+    },
+    "resources_v2_aggregate": {
+      "cap": null,
+      "cpu_seconds": 48.455632401,
+      "final_storage_bytes": 172768903,
+      "id": "sha256:f69b70a128ed98a9842f5c053c124addb95830198c233af35b45b17447868c91",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-v2-preparation-v1.json",
+      "peak_resident_memory_bytes": 378290176,
+      "status": "completed",
+      "wall_seconds": 98.1570753750857
+    },
+    "source_train_attempts": 256,
+    "v1_bank_excluded_from_driver_storage_bytes": 19359927,
+    "v2_aggregate_includes_preserved_v1_artifacts_and_both_banks": true,
+    "v2_controls": [
+      {
+        "player": 2,
+        "prefix": 43,
+        "root_id": "sha256:59c8f7122685f327d0f19c97e77d3615b45d9a6e65938e2523fb83446fcfb37f",
+        "world": "SP1RESH1FTEXPM228"
+      },
+      {
+        "player": 3,
+        "prefix": 38,
+        "root_id": "sha256:458b694874286ade81cb427a304f679d05012b464a890eb9b2627e4eb5b9c72a",
+        "world": "SP1RESH1FTEXPM130"
+      }
+    ],
+    "v2_controls_exclude_all_v1_worlds": true,
+    "v2_legacy_exclusion_field_scope": "new_control_selection_only_24_reserved_or_previous_worlds_main_eight_intentionally_retained"
+  },
+  "schema_version": "native-coordinated-teacher-evidence-v2",
+  "status": "implemented_owner_fresh_control_qualification_next",
+  "student_inputs_public_only": true,
+  "teacher_is_privileged_fixed_world": true,
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "v1_prototype": {
+    "active_markers_preserved": true,
+    "completed_sealed_native_paths": 43,
+    "control_passed": false,
+    "cumulative_cpu_seconds": 351.423584027,
+    "cumulative_storage_summed": false,
+    "cumulative_wall_seconds": 755.1569793322124,
+    "final_cumulative_storage_bytes": 134060090,
+    "interrupted_native_paths": 1,
+    "interrupted_world_retried": false,
+    "interruption_evidence": {
+      "id": "sha256:6ec887310371e7d4a1fda81fb8779141ed4cba27cf9235d41de6082b415db477",
+      "interrupted_units": [
+        {
+          "active_marker_preserved": true,
+          "key": "root-01-later-single-change-03",
+          "native_attempt_status": "interrupted_unknown",
+          "observations": 60,
+          "owner_process": 13962,
+          "owner_process_gone": true,
+          "retry_allowed": false,
+          "root_prefix_actions": 95,
+          "target_root_reached": false,
+          "world": "SP1RESH1FTEXPM219"
+        }
+      ],
+      "path": "artifacts/native-coordinated/control-v1-interruption-v1/report.json"
+    },
+    "planned_units": 48,
+    "private_final_driver_failure": "unit_clock_started_after_dependency_checks_outer_wall_cap_interrupted_prefix",
+    "private_final_driver_path": "artifacts/native-coordinated/finish-control-v1/run.py",
+    "private_final_driver_sha256": "a61af0ec422f25d09d19e03614c51eacb39126f5173c18fb487476a3b4e79d45",
+    "resources": [
+      {
+        "cap": null,
+        "cpu_seconds": 91.34506154599995,
+        "final_storage_bytes": 39993589,
+        "id": "sha256:2e84f2be7b061eea96d695a1f354459a41c75c04e793b88871289f957f150886",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 3000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/coordinated-teacher-control-v1-1.json",
+        "peak_resident_memory_bytes": 388546560,
+        "status": "completed",
+        "wall_seconds": 162.03074420802295
+      },
+      {
+        "cap": null,
+        "cpu_seconds": 88.55254534800001,
+        "final_storage_bytes": 83711407,
+        "id": "sha256:85ffbe312ed9a57bf926a1b9743849d1f34bab5ca9eab82fe9c552fa41762ad6",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 3000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/coordinated-teacher-control-v1-2.json",
+        "peak_resident_memory_bytes": 406945792,
+        "status": "completed",
+        "wall_seconds": 160.0603167079389
+      },
+      {
+        "cap": null,
+        "cpu_seconds": 93.02674400200003,
+        "final_storage_bytes": 126816062,
+        "id": "sha256:0a273a2f63dd5c66d59b5fef9b228de2eca8d28a9df7f94b5307763f85bd2f1f",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 3000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/coordinated-teacher-control-v1-3.json",
+        "peak_resident_memory_bytes": 420478976,
+        "status": "completed",
+        "wall_seconds": 192.76193020818755
+      },
+      {
+        "cap": {
+          "limit": 240.0,
+          "observed": 240.2412709160708,
+          "resource": "wall_seconds"
+        },
+        "cpu_seconds": 78.499233131,
+        "final_storage_bytes": 134060090,
+        "id": "sha256:07b219678ac6890ab78b5b93bc4d945443f70d707ad5ada8eff3caaa0d044a99",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 3000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/coordinated-teacher-control-final-qualification-v1.json",
+        "peak_resident_memory_bytes": 366903296,
+        "status": "capped",
+        "wall_seconds": 240.30398820806295
+      }
+    ],
+    "root_opening_not_target_fight_interrupted": true,
+    "source_snapshots": [
+      {
+        "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v1/python-at-launch/native_coordinated_branch.py",
+        "sha256": "b8433a59307d41892fab1250abbb9092f3323560370b2efb95ee25664f7bbc04"
+      },
+      {
+        "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v1/python-at-launch/native_coordinated_data.py",
+        "sha256": "130aab0fd0e7608d2541a85be120cc8c79185df11e7f3229caee20cb1c9ef678"
+      },
+      {
+        "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v1/python-at-launch/native_coordinated_inputs.py",
+        "sha256": "dbf5990356525a167d1a892ea18b802826ca7f5160fe2161ac7dc34d43274eef"
+      },
+      {
+        "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v1/python-at-launch/native_coordinated_roots.py",
+        "sha256": "d4285e06e3fd3c1dcb1de7906bc48382feeb8a46fed3e5c92837bc8856b5fdea"
+      },
+      {
+        "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v1/python-at-launch/native_coordinated_study.py",
+        "sha256": "d715e6ecf9c46f95ec77aecd7af28b77d366167f6c64fee54290a6237e288339"
+      },
+      {
+        "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v1/python-at-launch/native_coordinated_teacher.py",
+        "sha256": "d69da1b6c4ca94d6f9ae0c14b6b8dd6ffe7dba6e5704987d497da47b1f7636bd"
+      }
+    ],
+    "total_control_worlds": 2,
+    "unattempted_units": 4,
+    "unqualified_data_admitted": false,
+    "verified_cells": 6
+  },
+  "v2_hardening": {
+    "agent_launch_of_v2_long_control": false,
+    "fresh_control_worlds": true,
+    "new_unit_session_reserve_seconds": 150,
+    "owner_qualification_cpu_cap_seconds": 1800,
+    "owner_qualification_wall_cap_seconds": 900,
+    "request_timeout_seconds": "min(20,remaining_path_and_session_allowance)",
+    "session_clock_includes_dependency_checks": true,
+    "whole_path_wall_seconds_including_initialization_and_prefix": 60
+  }
+}

@@ -50,6 +50,7 @@ from spireshift.calibration import (
     verify_calibration_artifacts,
     write_calibration_artifact,
 )
+from spireshift.causal_preferences import freeze_causal_preferences
 from spireshift.combat_search_diagnostic import (
     load_combat_search_diagnostic,
     load_combat_search_diagnostic_spec,
@@ -106,12 +107,19 @@ from spireshift.live_run import (
     verify_live_run,
 )
 from spireshift.mechanics_audit import audit_mechanics_fixture
+from spireshift.milestone_curriculum import freeze_milestone_trajectory_state_set
 from spireshift.models import (
     TrainingConfig,
     load_model_checkpoint,
     load_training_report,
     train_initial_models,
     write_model_artifact,
+)
+from spireshift.production_dagger import (
+    ProductionDaggerReference,
+    load_production_dagger_config,
+    run_production_dagger_collection,
+    verify_production_dagger_collection,
 )
 from spireshift.production_evaluation import (
     load_production_policy_evaluation,
@@ -124,6 +132,7 @@ from spireshift.production_inference import (
 )
 from spireshift.production_models import (
     ProductionTrainingConfig,
+    blend_production_policy,
     load_production_model_checkpoint,
     load_production_training_report,
     train_production_base_model,
@@ -153,6 +162,7 @@ from spireshift.resource_tracking import (
     load_cost_rates,
     load_resource_report,
     run_tracked_command,
+    update_experiment_metrics,
     verify_resource_report,
     write_experiment_metrics,
 )
@@ -168,6 +178,7 @@ from spireshift.search_benchmark import (
 )
 from spireshift.search_workers import (
     SearchBackendSpec,
+    load_search_environment,
     load_search_task,
     run_search_worker_batch,
     verify_search_worker_batch,
@@ -180,6 +191,35 @@ from spireshift.splits import (
     load_split_manifest,
     write_frozen_dataset_index,
     write_frozen_split_manifest,
+)
+from spireshift.starting_evidence import (
+    FILENAME as STARTING_EVIDENCE_FILENAME,
+)
+from spireshift.starting_evidence import (
+    collect_starting_option_evidence,
+    load_starting_evidence_config,
+    verify_starting_option_evidence,
+)
+from spireshift.starting_evidence_diagnostic import (
+    diagnose_starting_evidence_policy,
+    load_starting_evidence_diagnostic_config,
+    load_starting_evidence_diagnostic_report,
+    summarize_starting_evidence_diagnosis,
+)
+from spireshift.starting_evidence_training import (
+    train_starting_evidence_policy,
+    verify_starting_evidence_policy,
+)
+from spireshift.starting_options import load_starting_option_config
+from spireshift.starting_repeatability import (
+    FILENAME as STARTING_REPEATABILITY_FILENAME,
+)
+from spireshift.starting_repeatability import (
+    analyze_starting_repeatability,
+    load_starting_repeatability_config,
+    load_starting_repeatability_report,
+    prepare_starting_repeatability,
+    summarize_starting_repeatability,
 )
 from spireshift.tactical_handoff import (
     benchmark_mock_tactical_handoff,
@@ -195,6 +235,31 @@ from spireshift.teacher_data import (
     teacher_dataset_index,
     verify_teacher_dataset,
     write_teacher_dataset,
+)
+from spireshift.terminal_discovery import (
+    load_terminal_discovery_config,
+    run_terminal_trajectory_discovery,
+    verify_terminal_trajectory_discovery,
+)
+from spireshift.training_objective import (
+    assess_training_graduation,
+    load_training_panel,
+    load_training_score_spec,
+    score_training_panel,
+)
+from spireshift.trajectory_diagnostic import diagnose_trajectory_policy
+from spireshift.trajectory_policy import load_trajectory_policy_config, train_trajectory_policy
+from spireshift.trajectory_preferences import (
+    freeze_trajectory_mutation_preference_collection,
+    freeze_trajectory_mutation_preferences,
+    verify_trajectory_mutation_preference_collection,
+    verify_trajectory_mutation_preferences,
+)
+from spireshift.trajectory_search import (
+    compare_trajectory_search_ablation,
+    load_trajectory_search_config,
+    run_trajectory_search,
+    verify_trajectory_search,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -215,6 +280,32 @@ DEFAULT_MECHANICS_FIXTURE = PROJECT_ROOT / "tests/fixtures/mechanics/mock-v1.jso
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="spireshift")
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    from spireshift.full_run_cli import add_full_run_parser
+
+    add_full_run_parser(subparsers)
+
+    from spireshift.engine_qualification_cli import add_engine_parser
+
+    add_engine_parser(subparsers)
+
+    objective = subparsers.add_parser(
+        "objective", help="Inspect or score saved full-run training outcomes; never runs games"
+    )
+    objective_commands = objective.add_subparsers(dest="objective_command", required=True)
+    objective_inspect = objective_commands.add_parser("inspect", help="Inspect a training score")
+    objective_inspect.add_argument("specification", type=Path)
+    objective_score = objective_commands.add_parser("score", help="Score a saved outcome panel")
+    objective_score.add_argument("specification", type=Path)
+    objective_score.add_argument("panel", type=Path)
+    objective_score.add_argument("--output", type=Path)
+    objective_graduation = objective_commands.add_parser(
+        "graduation", help="Assess saved train/development evidence for terminal-only training"
+    )
+    objective_graduation.add_argument("specification", type=Path)
+    objective_graduation.add_argument("train", type=Path)
+    objective_graduation.add_argument("development", type=Path)
+    objective_graduation.add_argument("--output", type=Path)
 
     doctor = subparsers.add_parser("doctor", help="Check local development prerequisites")
     doctor.add_argument(
@@ -591,6 +682,104 @@ def build_parser() -> argparse.ArgumentParser:
     bootstrap_discover.add_argument("--policy-report", type=Path)
     bootstrap_discover.add_argument("--combat-advancement-config", type=Path)
     bootstrap_discover.add_argument("--run-offset", type=int, default=0)
+    bootstrap_milestone = bootstrap_commands.add_parser(
+        "freeze-milestone-trajectory",
+        help="Exactly replay an accepted searched trajectory and freeze selected train states",
+    )
+    bootstrap_milestone.add_argument("search_report", type=Path)
+    bootstrap_milestone.add_argument("search_config", type=Path)
+    bootstrap_milestone.add_argument("output", type=Path)
+    bootstrap_milestone.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_milestone.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_milestone.add_argument("--upstream-root", type=Path)
+    bootstrap_milestone.add_argument("--manifest", type=Path)
+    bootstrap_milestone.add_argument("--policy-checkpoint", type=Path, required=True)
+    bootstrap_milestone.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_milestone.add_argument("--seed", type=int, required=True)
+    bootstrap_milestone.add_argument("--trajectory-id", required=True)
+    bootstrap_milestone.add_argument("--exclude-dataset", type=Path, action="append", default=[])
+    bootstrap_milestone.add_argument("--predecessor-count", type=int, default=1)
+    bootstrap_milestone.add_argument("--frontier-minimum-floor", type=int, default=17)
+    bootstrap_milestone.add_argument("--frontier-minimum-actions", type=int, default=2)
+    bootstrap_milestone.add_argument("--expected-mutations", type=int, default=7)
+    bootstrap_preferences = bootstrap_commands.add_parser(
+        "freeze-trajectory-preferences",
+        help="Replay an accepted lineage and freeze strict parent-child preferences",
+    )
+    bootstrap_preferences.add_argument("search_report", type=Path)
+    bootstrap_preferences.add_argument("search_config", type=Path)
+    bootstrap_preferences.add_argument("output", type=Path)
+    bootstrap_preferences.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_preferences.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_preferences.add_argument("--upstream-root", type=Path)
+    bootstrap_preferences.add_argument("--manifest", type=Path)
+    bootstrap_preferences.add_argument("--policy-checkpoint", type=Path, required=True)
+    bootstrap_preferences.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_preferences.add_argument("--seed", type=int, required=True)
+    bootstrap_preferences.add_argument("--trajectory-id", required=True)
+    bootstrap_preferences.add_argument("--minimum-training-runs", type=int, default=2)
+    bootstrap_verify_preferences = bootstrap_commands.add_parser(
+        "verify-trajectory-preferences",
+        help="Verify strict preferences by replaying their complete source lineage",
+    )
+    bootstrap_verify_preferences.add_argument("preferences", type=Path)
+    bootstrap_verify_preferences.add_argument("search_report", type=Path)
+    bootstrap_verify_preferences.add_argument("search_config", type=Path)
+    bootstrap_verify_preferences.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_verify_preferences.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_verify_preferences.add_argument("--upstream-root", type=Path)
+    bootstrap_verify_preferences.add_argument("--manifest", type=Path)
+    bootstrap_verify_preferences.add_argument("--policy-checkpoint", type=Path, required=True)
+    bootstrap_verify_preferences.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_verify_preferences.add_argument("--seed", type=int, required=True)
+    bootstrap_verify_preferences.add_argument("--trajectory-id", required=True)
+    bootstrap_verify_preferences.add_argument("--minimum-training-runs", type=int, default=2)
+    bootstrap_verify_preferences.add_argument("--output", type=Path)
+    bootstrap_preference_collection = bootstrap_commands.add_parser(
+        "freeze-trajectory-preference-collection",
+        help="Replay every accepted search lineage and freeze a multi-run preference collection",
+    )
+    bootstrap_preference_collection.add_argument("search_report", type=Path)
+    bootstrap_preference_collection.add_argument("search_config", type=Path)
+    bootstrap_preference_collection.add_argument("output_dir", type=Path)
+    bootstrap_preference_collection.add_argument("--split-manifest", type=Path, required=True)
+    bootstrap_preference_collection.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_preference_collection.add_argument("--upstream-root", type=Path)
+    bootstrap_preference_collection.add_argument("--manifest", type=Path)
+    bootstrap_preference_collection.add_argument("--policy-checkpoint", type=Path, required=True)
+    bootstrap_preference_collection.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_preference_collection.add_argument("--minimum-training-runs", type=int, default=2)
+    bootstrap_verify_preference_collection = bootstrap_commands.add_parser(
+        "verify-trajectory-preference-collection",
+        help="Verify a multi-run preference collection by replaying every accepted lineage",
+    )
+    bootstrap_verify_preference_collection.add_argument("collection", type=Path)
+    bootstrap_verify_preference_collection.add_argument("search_report", type=Path)
+    bootstrap_verify_preference_collection.add_argument("search_config", type=Path)
+    bootstrap_verify_preference_collection.add_argument(
+        "--split-manifest", type=Path, required=True
+    )
+    bootstrap_verify_preference_collection.add_argument(
+        "--backend", choices=("mock", "tactical_mock", "evangambit"), default="evangambit"
+    )
+    bootstrap_verify_preference_collection.add_argument("--upstream-root", type=Path)
+    bootstrap_verify_preference_collection.add_argument("--manifest", type=Path)
+    bootstrap_verify_preference_collection.add_argument(
+        "--policy-checkpoint", type=Path, required=True
+    )
+    bootstrap_verify_preference_collection.add_argument("--policy-report", type=Path, required=True)
+    bootstrap_verify_preference_collection.add_argument(
+        "--minimum-training-runs", type=int, default=2
+    )
+    bootstrap_verify_preference_collection.add_argument("--output", type=Path)
     bootstrap_generate = bootstrap_commands.add_parser(
         "generate", help="Generate paired terminal-first curriculum targets"
     )
@@ -684,6 +873,124 @@ def build_parser() -> argparse.ArgumentParser:
     production_train.add_argument("--adagrad-epsilon", type=float, default=1e-8)
     production_train.add_argument("--selection-fraction", type=float, default=0.25)
     production_train.add_argument("--selection-salt", default="production-base-model-selection-v1")
+    production_train.add_argument(
+        "--causal-preferences",
+        type=Path,
+        help="Add verified train-only intervention preferences to the policy head",
+    )
+    production_train.add_argument("--intervention-spec", type=Path)
+    production_train.add_argument("--intervention-report", type=Path)
+    production_train.add_argument(
+        "--ruleset-manifest",
+        type=Path,
+        help="Frozen ruleset used to reconstruct causal public-state representations",
+    )
+    for command, description in (
+        (
+            "finetune-trajectory-policy",
+            "Fit policy-only trajectory preferences with parent-policy anchoring",
+        ),
+        (
+            "finetune-starting-option-policy",
+            "Fit a public option-identity residual over an immutable base policy",
+        ),
+    ):
+        trajectory_train = model_commands.add_parser(command, help=description)
+        trajectory_train.add_argument("config", type=Path)
+        trajectory_train.add_argument("parent_checkpoint", type=Path)
+        trajectory_train.add_argument("checkpoint", type=Path)
+        trajectory_train.add_argument("--parent-report", type=Path, required=True)
+        trajectory_train.add_argument("--report", type=Path, required=True)
+        trajectory_train.add_argument("--collection", type=Path, required=True)
+        trajectory_train.add_argument("--search-report", type=Path, required=True)
+        trajectory_train.add_argument("--search-config", type=Path, required=True)
+        trajectory_train.add_argument("--train-report", type=Path, required=True)
+        trajectory_train.add_argument("--validation-report", type=Path, required=True)
+        trajectory_train.add_argument("--split-manifest", type=Path, required=True)
+        trajectory_train.add_argument("--ruleset-manifest", type=Path, required=True)
+        trajectory_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    for command, description in (
+        (
+            "finetune-starting-evidence-policy",
+            "Fit a frozen starting-option residual from exhaustive branch evidence",
+        ),
+        (
+            "verify-starting-evidence-policy",
+            "Verify saved starting-option training against its inputs without retraining",
+        ),
+        (
+            "diagnose-starting-evidence-policy",
+            "Diagnose saved starting-choice learning without optimization or game replay",
+        ),
+    ):
+        evidence_train = model_commands.add_parser(command, help=description)
+        evidence_train.add_argument("config", type=Path)
+        evidence_train.add_argument("parent_checkpoint", type=Path)
+        evidence_train.add_argument("checkpoint", type=Path)
+        for argument in (
+            "parent-report",
+            "report",
+            "evidence",
+            "evidence-config",
+            "anchor-assignment-report",
+            "train-report",
+            "validation-report",
+            "split-manifest",
+            "ruleset-manifest",
+        ):
+            evidence_train.add_argument(f"--{argument}", type=Path, required=True)
+        evidence_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+        if command == "diagnose-starting-evidence-policy":
+            evidence_train.add_argument("--diagnostic-config", type=Path, required=True)
+            evidence_train.add_argument("--resource-report", type=Path, required=True)
+            evidence_train.add_argument("--output", type=Path, required=True)
+    evidence_show = model_commands.add_parser(
+        "show-starting-evidence-diagnosis",
+        help="Show a cached diagnostic after checking its identity",
+    )
+    evidence_show.add_argument("report", type=Path)
+    evidence_show.add_argument("--diagnostic-config", type=Path, required=True)
+    trajectory_diagnostic = model_commands.add_parser(
+        "diagnose-trajectory-policy",
+        help="Explain a saved trajectory policy update without training or replay",
+    )
+    trajectory_diagnostic.add_argument("config", type=Path)
+    trajectory_diagnostic.add_argument("parent_checkpoint", type=Path)
+    trajectory_diagnostic.add_argument("candidate_checkpoint", type=Path)
+    trajectory_diagnostic.add_argument("--parent-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--candidate-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--collection", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--search-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--search-config", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--train-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--validation-report", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--ruleset-manifest", type=Path, required=True)
+    trajectory_diagnostic.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    trajectory_diagnostic.add_argument("--output", type=Path, required=True)
+    production_blend = model_commands.add_parser(
+        "blend-curriculum",
+        help="Select the largest safe causal-policy blend on frozen validation data",
+    )
+    production_blend.add_argument("anchor_checkpoint", type=Path)
+    production_blend.add_argument("candidate_checkpoint", type=Path)
+    production_blend.add_argument("validation_report", type=Path)
+    production_blend.add_argument("checkpoint", type=Path)
+    production_blend.add_argument("--anchor-report", type=Path, required=True)
+    production_blend.add_argument("--candidate-report", type=Path, required=True)
+    production_blend.add_argument("--report", type=Path, required=True)
+    production_blend.add_argument("--split-manifest", type=Path, required=True)
+    production_blend.add_argument("--causal-preferences", type=Path, required=True)
+    production_blend.add_argument("--intervention-spec", type=Path, required=True)
+    production_blend.add_argument("--intervention-report", type=Path, required=True)
+    production_blend.add_argument("--ruleset-manifest", type=Path, required=True)
+    production_blend.add_argument(
+        "--candidate-weights",
+        type=float,
+        nargs="+",
+        default=[offset / 20 for offset in range(21)],
+        help="Candidate-policy shares evaluated on validation (default: 0.00 through 1.00 by 0.05)",
+    )
     production_verify = model_commands.add_parser(
         "verify-curriculum",
         help="Verify a production curriculum checkpoint and optional training report",
@@ -716,6 +1023,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     production_evaluate.add_argument("checkpoint", type=Path)
     production_evaluate.add_argument("--report", type=Path, required=True)
+    production_evaluate.add_argument("--reference-checkpoint", type=Path)
+    production_evaluate.add_argument("--reference-report", type=Path)
     production_evaluate.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate.add_argument("--upstream-root", type=Path, required=True)
     production_evaluate.add_argument("--manifest", type=Path, required=True)
@@ -741,8 +1050,191 @@ def build_parser() -> argparse.ArgumentParser:
     production_evaluate_verify.add_argument("evaluation", type=Path)
     production_evaluate_verify.add_argument("checkpoint", type=Path)
     production_evaluate_verify.add_argument("--report", type=Path, required=True)
+    production_evaluate_verify.add_argument("--reference-checkpoint", type=Path)
+    production_evaluate_verify.add_argument("--reference-report", type=Path)
     production_evaluate_verify.add_argument("--split-manifest", type=Path, required=True)
     production_evaluate_verify.add_argument("--output", type=Path)
+    terminal_discovery = model_commands.add_parser(
+        "discover-terminal-trajectories",
+        help="Run reproducible sparse policy exploration on train-only complete runs",
+    )
+    terminal_discovery.add_argument("config", type=Path)
+    terminal_discovery.add_argument("checkpoint", type=Path)
+    terminal_discovery.add_argument("--report", type=Path, required=True)
+    terminal_discovery.add_argument("--split-manifest", type=Path, required=True)
+    terminal_discovery.add_argument("--upstream-root", type=Path, required=True)
+    terminal_discovery.add_argument("--manifest", type=Path, required=True)
+    terminal_discovery.add_argument("--output-dir", type=Path, required=True)
+    terminal_discovery.add_argument("--resume", action="store_true")
+    terminal_discovery_verify = model_commands.add_parser(
+        "verify-terminal-trajectories",
+        help="Verify terminal-discovery identities, coverage, cases, and summaries",
+    )
+    terminal_discovery_verify.add_argument("discovery", type=Path)
+    terminal_discovery_verify.add_argument("config", type=Path)
+    terminal_discovery_verify.add_argument("--split-manifest", type=Path, required=True)
+    terminal_discovery_verify.add_argument("--output", type=Path)
+    starting_collect = model_commands.add_parser(
+        "collect-starting-option-evidence",
+        help="Compare all starting options on frozen train runs with a fixed continuation policy",
+    )
+    starting_collect.add_argument("config", type=Path)
+    starting_collect.add_argument("checkpoint", type=Path)
+    starting_collect.add_argument("--report", type=Path, required=True)
+    starting_collect.add_argument("--split-manifest", type=Path, required=True)
+    starting_collect.add_argument("--upstream-root", type=Path, required=True)
+    starting_collect.add_argument("--manifest", type=Path, required=True)
+    starting_collect.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    starting_collect.add_argument("--output-dir", type=Path, required=True)
+    starting_collect.add_argument("--resume", action="store_true")
+    starting_verify = model_commands.add_parser(
+        "verify-starting-option-evidence",
+        help="Verify saved starting-option comparisons and coverage without replay or training",
+    )
+    starting_verify.add_argument("evidence", type=Path)
+    starting_verify.add_argument("config", type=Path)
+    starting_verify.add_argument("--split-manifest", type=Path, required=True)
+    starting_verify.add_argument("--manifest", type=Path, required=True)
+    repeatability = model_commands.add_parser(
+        "study-starting-repeatability",
+        help="Collect one frozen fresh-seed cohort and audit starting-choice repeatability",
+    )
+    repeatability.add_argument("config", type=Path)
+    repeatability.add_argument("checkpoint", type=Path)
+    repeatability.add_argument("--report", type=Path, required=True)
+    repeatability.add_argument("--split-manifest", type=Path, required=True)
+    repeatability.add_argument("--upstream-root", type=Path, required=True)
+    repeatability.add_argument("--manifest", type=Path, required=True)
+    repeatability.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    repeatability.add_argument("--project-root", type=Path, default=Path("."))
+    repeatability.add_argument("--output-dir", type=Path, required=True)
+    repeatability.add_argument("--resume", action="store_true")
+    repeatability_show = model_commands.add_parser(
+        "show-starting-repeatability",
+        help="Check and display a cached repeatability report without collection or source audit",
+    )
+    repeatability_show.add_argument("study", type=Path)
+    repeatability_show.add_argument("--config", type=Path, required=True)
+    combat_audit = model_commands.add_parser(
+        "audit-combat-foundation",
+        help="Audit saved combat lessons and public action bindings without games or fitting",
+    )
+    combat_audit.add_argument("config", type=Path)
+    combat_audit.add_argument("--split-manifest", type=Path, required=True)
+    combat_audit.add_argument("--manifest", type=Path, required=True)
+    combat_audit.add_argument("--upstream-root", type=Path, required=True)
+    combat_audit.add_argument("--project-root", type=Path, default=Path("."))
+    combat_audit.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    combat_audit.add_argument("--output", type=Path, required=True)
+    combat_audit_show = model_commands.add_parser(
+        "show-combat-foundation",
+        help="Check/display the cached combat data audit without re-reading source cases",
+    )
+    combat_audit_show.add_argument("audit", type=Path)
+    combat_audit_show.add_argument("--config", type=Path, required=True)
+    combat_train = model_commands.add_parser(
+        "train-combat-policy",
+        help="Fit one frozen public combat residual from saved lessons, without game attempts",
+    )
+    combat_train.add_argument("config", type=Path)
+    combat_train.add_argument("--split-manifest", type=Path, required=True)
+    combat_train.add_argument("--manifest", type=Path, required=True)
+    combat_train.add_argument("--upstream-root", type=Path, required=True)
+    combat_train.add_argument("--project-root", type=Path, default=Path("."))
+    combat_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    combat_train.add_argument("--output-dir", type=Path, required=True)
+    combat_train_show = model_commands.add_parser(
+        "show-combat-policy-training",
+        help="Check/display a saved combat training result without source audit or retraining",
+    )
+    combat_train_show.add_argument("output_dir", type=Path)
+    combat_train_show.add_argument("--config", type=Path, required=True)
+    neural_train = model_commands.add_parser(
+        "train-neural-combat-policy",
+        help="Fit one compact neural combat pilot from saved lessons, without games",
+    )
+    neural_train.add_argument("config", type=Path)
+    neural_train.add_argument("--split-manifest", type=Path, required=True)
+    neural_train.add_argument("--manifest", type=Path, required=True)
+    neural_train.add_argument("--upstream-root", type=Path, required=True)
+    neural_train.add_argument("--project-root", type=Path, default=Path("."))
+    neural_train.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    neural_train.add_argument("--output-dir", type=Path, required=True)
+    neural_show = model_commands.add_parser(
+        "show-neural-combat-training",
+        help="Verify a saved neural pilot without source audit, fitting or games",
+    )
+    neural_show.add_argument("output_dir", type=Path)
+    neural_show.add_argument("--config", type=Path, required=True)
+    combat_gate_audit = model_commands.add_parser(
+        "audit-combat-selection-gate",
+        help="Check gate feasibility from saved artifacts without source replay or fitting",
+    )
+    combat_gate_audit.add_argument("config", type=Path)
+    combat_gate_audit.add_argument("model_root", type=Path)
+    combat_gate_audit.add_argument("--resource-report", type=Path, required=True)
+    combat_gate_audit.add_argument("--project-root", type=Path, default=Path("."))
+    combat_gate_audit.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+    combat_gate_audit.add_argument("--output", type=Path, required=True)
+    for confirmation_name in ("confirm-combat-policy", "show-combat-confirmation"):
+        confirmation_parser = model_commands.add_parser(
+            confirmation_name, help="Run or verify the frozen fresh combat-policy comparison"
+        )
+        confirmation_parser.add_argument("config", type=Path)
+        confirmation_parser.add_argument("--project-root", type=Path, default=Path("."))
+        confirmation_parser.add_argument("--split-manifest", type=Path, required=True)
+        confirmation_parser.add_argument("--manifest", type=Path, required=True)
+        confirmation_parser.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+        confirmation_parser.add_argument("--output-dir", type=Path, required=True)
+        if confirmation_name == "confirm-combat-policy":
+            confirmation_parser.add_argument("--upstream-root", type=Path, required=True)
+            confirmation_parser.add_argument("--resume", action="store_true")
+    for diagnostic_name in ("diagnose-combat-confirmation", "show-combat-confirmation-diagnosis"):
+        diagnostic_parser = model_commands.add_parser(
+            diagnostic_name,
+            help="Replay or verify public choices from an inspected combat comparison",
+        )
+        diagnostic_parser.add_argument("config", type=Path)
+        diagnostic_parser.add_argument("--project-root", type=Path, default=Path("."))
+        diagnostic_parser.add_argument("--split-manifest", type=Path, required=True)
+        diagnostic_parser.add_argument("--manifest", type=Path, required=True)
+        diagnostic_parser.add_argument("--objective-config", type=Path, default=DEFAULT_CONFIG)
+        diagnostic_parser.add_argument("--output-dir", type=Path, required=True)
+        if diagnostic_name == "diagnose-combat-confirmation":
+            diagnostic_parser.add_argument("--upstream-root", type=Path, required=True)
+            diagnostic_parser.add_argument("--resume", action="store_true")
+    trajectory_search = model_commands.add_parser(
+        "search-run-trajectories",
+        help="Run exact-replay train-only beam search over coherent run trajectories",
+    )
+    trajectory_search.add_argument("config", type=Path)
+    trajectory_search.add_argument("checkpoint", type=Path)
+    trajectory_search.add_argument("--report", type=Path, required=True)
+    trajectory_search.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_search.add_argument("--upstream-root", type=Path, required=True)
+    trajectory_search.add_argument("--manifest", type=Path, required=True)
+    trajectory_search.add_argument("--output-dir", type=Path, required=True)
+    trajectory_search.add_argument("--resume", action="store_true")
+    trajectory_search_verify = model_commands.add_parser(
+        "verify-run-trajectory-search",
+        help="Verify trajectory-search identities, parentage, monotonicity, and summaries",
+    )
+    trajectory_search_verify.add_argument("search", type=Path)
+    trajectory_search_verify.add_argument("config", type=Path)
+    trajectory_search_verify.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_search_verify.add_argument("--output", type=Path)
+    trajectory_search_compare = model_commands.add_parser(
+        "compare-run-trajectory-search",
+        help="Verify and compare the three frozen same-budget trajectory-search arms",
+    )
+    trajectory_search_compare.add_argument("legacy_report", type=Path)
+    trajectory_search_compare.add_argument("frontier_report", type=Path)
+    trajectory_search_compare.add_argument("diverse_report", type=Path)
+    trajectory_search_compare.add_argument("--legacy-config", type=Path, required=True)
+    trajectory_search_compare.add_argument("--frontier-config", type=Path, required=True)
+    trajectory_search_compare.add_argument("--diverse-config", type=Path, required=True)
+    trajectory_search_compare.add_argument("--split-manifest", type=Path, required=True)
+    trajectory_search_compare.add_argument("--output", type=Path)
     combat_search_diagnostic = model_commands.add_parser(
         "evaluate-combat-search",
         help="Run the paired train-only combat-search diagnostic sweep",
@@ -881,6 +1373,33 @@ def build_parser() -> argparse.ArgumentParser:
     dagger_verify.add_argument("reference_dataset", type=Path)
     dagger_verify.add_argument("--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST)
     dagger_verify.add_argument("--output", type=Path)
+    dagger_collect_production = dagger_commands.add_parser(
+        "collect-production",
+        help="Collect cycle-safe train trajectories and freeze a teacher-ready state set",
+    )
+    dagger_collect_production.add_argument("config", type=Path)
+    dagger_collect_production.add_argument("output_dir", type=Path)
+    dagger_collect_production.add_argument("--checkpoint", type=Path, required=True)
+    dagger_collect_production.add_argument("--report", type=Path, required=True)
+    dagger_collect_production.add_argument("--reference-dataset", type=Path, required=True)
+    dagger_collect_production.add_argument("--intervention-spec", type=Path, required=True)
+    dagger_collect_production.add_argument("--intervention-report", type=Path, required=True)
+    dagger_collect_production.add_argument(
+        "--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST
+    )
+    dagger_collect_production.add_argument("--upstream-root", type=Path, required=True)
+    dagger_collect_production.add_argument("--manifest", type=Path, required=True)
+    dagger_collect_production.add_argument("--resume", action="store_true")
+    dagger_verify_production = dagger_commands.add_parser(
+        "verify-production",
+        help="Verify a production DAgger collection and its linked evidence",
+    )
+    dagger_verify_production.add_argument("collection", type=Path)
+    dagger_verify_production.add_argument("config", type=Path)
+    dagger_verify_production.add_argument(
+        "--split-manifest", type=Path, default=DEFAULT_SPLIT_MANIFEST
+    )
+    dagger_verify_production.add_argument("--output", type=Path)
 
     tactical_handoff = subparsers.add_parser(
         "tactical-handoff", help="Evaluate tactical leaves with terminal run value"
@@ -972,6 +1491,42 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "engine":
+        from spireshift.engine_qualification_cli import run_engine_command
+
+        return run_engine_command(args)
+    if args.command == "full-run":
+        from spireshift.full_run_cli import run_full_run_command
+
+        return run_full_run_command(args)
+    if args.command == "objective":
+        try:
+            training_score_spec = load_training_score_spec(args.specification)
+            if args.objective_command == "inspect":
+                objective_result = {
+                    "training_spec_id": training_score_spec.spec_id,
+                    **training_score_spec.as_dict(),
+                }
+            elif args.objective_command == "score":
+                training_panel = load_training_panel(args.panel, training_score_spec)
+                objective_result = score_training_panel(training_score_spec, training_panel)
+            else:
+                objective_result = assess_training_graduation(
+                    training_score_spec,
+                    load_training_panel(args.train, training_score_spec),
+                    load_training_panel(args.development, training_score_spec),
+                )
+            objective_output = getattr(args, "output", None)
+            if objective_output is not None:
+                objective_output.parent.mkdir(parents=True, exist_ok=True)
+                with objective_output.open("x", encoding="utf-8") as handle:
+                    handle.write(json.dumps(objective_result, indent=2) + "\n")
+            _emit_json(objective_result, None)
+            return 0
+        except (OSError, ValueError) as error:
+            # A failed check must not overwrite a previously saved scoring report.
+            _emit_json({"status": "error", "error": str(error)}, None)
+            return 1
     if args.command == "doctor":
         print(json.dumps(diagnostics_as_dict(), indent=2))
         if args.manifest is not None:
@@ -1573,6 +2128,114 @@ def main(argv: Sequence[str] | None = None) -> int:
                 write_bootstrap_state_set(document, args.output)
                 _emit_json(document, None)
                 return 0
+            if args.bootstrap_command == "freeze-milestone-trajectory":
+                if args.backend == "evangambit":
+                    if args.upstream_root is None or args.manifest is None:
+                        raise ValueError(
+                            "EvanGambit milestone replay requires --upstream-root and --manifest"
+                        )
+                    milestone_backend = SearchBackendSpec.evangambit(
+                        args.upstream_root, args.manifest
+                    )
+                elif args.backend == "tactical_mock":
+                    milestone_backend = SearchBackendSpec.tactical_mock()
+                else:
+                    milestone_backend = SearchBackendSpec.mock()
+                milestone_policy = _bootstrap_policy_artifacts(
+                    args.policy_checkpoint,
+                    args.policy_report,
+                    None,
+                )
+                if milestone_policy is None:
+                    raise ValueError("Milestone replay requires a production policy checkpoint")
+                document = freeze_milestone_trajectory_state_set(
+                    search_report_path=args.search_report,
+                    search_config=load_trajectory_search_config(args.search_config),
+                    output_path=args.output,
+                    split_manifest=split_manifest,
+                    backend=milestone_backend,
+                    policy_artifacts=milestone_policy,
+                    run_seed=args.seed,
+                    trajectory_id=args.trajectory_id,
+                    excluded_dataset_paths=tuple(args.exclude_dataset),
+                    predecessor_count=args.predecessor_count,
+                    frontier_minimum_floor=args.frontier_minimum_floor,
+                    frontier_minimum_actions=args.frontier_minimum_actions,
+                    expected_mutations=args.expected_mutations,
+                )
+                _emit_json(document, None)
+                return 0
+            if args.bootstrap_command in {
+                "freeze-trajectory-preferences",
+                "verify-trajectory-preferences",
+                "freeze-trajectory-preference-collection",
+                "verify-trajectory-preference-collection",
+            }:
+                if args.backend == "evangambit":
+                    if args.upstream_root is None or args.manifest is None:
+                        raise ValueError(
+                            "EvanGambit trajectory preferences require --upstream-root and "
+                            "--manifest"
+                        )
+                    preference_backend = SearchBackendSpec.evangambit(
+                        args.upstream_root, args.manifest
+                    )
+                elif args.backend == "tactical_mock":
+                    preference_backend = SearchBackendSpec.tactical_mock()
+                else:
+                    preference_backend = SearchBackendSpec.mock()
+                preference_probe = load_search_environment(preference_backend)
+                try:
+                    preference_ruleset = preference_probe.ruleset
+                    preference_policy = ProductionCheckpointPolicy.from_paths(
+                        args.policy_checkpoint,
+                        args.policy_report,
+                        ruleset=preference_ruleset,
+                    )
+                finally:
+                    close = getattr(preference_probe, "close", None)
+                    if callable(close):
+                        close()
+                preference_arguments = {
+                    "search_report_path": args.search_report,
+                    "search_config": load_trajectory_search_config(args.search_config),
+                    "split_manifest": split_manifest,
+                    "environment_factory": lambda: load_search_environment(preference_backend),
+                    "ruleset": preference_ruleset,
+                    "policy": preference_policy,
+                    "minimum_training_runs": args.minimum_training_runs,
+                }
+                if args.bootstrap_command == "freeze-trajectory-preferences":
+                    preference_document = freeze_trajectory_mutation_preferences(
+                        output_path=args.output,
+                        run_seed=args.seed,
+                        trajectory_id=args.trajectory_id,
+                        **preference_arguments,
+                    )
+                    _emit_json(preference_document, None)
+                    return 0
+                if args.bootstrap_command == "verify-trajectory-preferences":
+                    preference_verification = verify_trajectory_mutation_preferences(
+                        args.preferences,
+                        run_seed=args.seed,
+                        trajectory_id=args.trajectory_id,
+                        **preference_arguments,
+                    )
+                    _emit_json(preference_verification, args.output)
+                    return 0 if preference_verification["valid"] is True else 1
+                if args.bootstrap_command == "freeze-trajectory-preference-collection":
+                    preference_collection = freeze_trajectory_mutation_preference_collection(
+                        output_directory=args.output_dir,
+                        **preference_arguments,
+                    )
+                    _emit_json(preference_collection, None)
+                    return 0
+                preference_verification = verify_trajectory_mutation_preference_collection(
+                    args.collection,
+                    **preference_arguments,
+                )
+                _emit_json(preference_verification, args.output)
+                return 0 if preference_verification["valid"] is True else 1
             if args.bootstrap_command == "discover-states":
                 discovery_policy = _bootstrap_policy_artifacts(
                     args.policy_checkpoint,
@@ -1882,34 +2545,803 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 _emit_json(readiness_assessment, None)
                 return 0 if readiness_assessment["ready"] is True else 1
+            if args.model_command == "verify-terminal-trajectories":
+                terminal_verification = verify_terminal_trajectory_discovery(
+                    args.discovery,
+                    config=load_terminal_discovery_config(args.config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                )
+                _emit_json(terminal_verification, args.output)
+                return 0 if terminal_verification["valid"] is True else 1
+            if args.model_command == "discover-terminal-trajectories":
+                terminal_config = load_terminal_discovery_config(args.config)
+                terminal_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                terminal_training_report = load_production_training_report(
+                    args.report, checkpoint=terminal_checkpoint
+                )
+                terminal_split = load_split_manifest(args.split_manifest)
+                terminal_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=terminal_config.maximum_decisions_per_run + 1,
+                )
+                probe_environment = terminal_backend.factory()
+                try:
+                    terminal_ruleset = probe_environment.ruleset
+                    terminal_policy = ProductionCheckpointPolicy(
+                        checkpoint=terminal_checkpoint,
+                        training_report=terminal_training_report,
+                        ruleset=terminal_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                terminal_result = run_terminal_trajectory_discovery(
+                    environment_factory=terminal_backend.factory,
+                    ruleset=terminal_ruleset,
+                    policy=terminal_policy,
+                    split_manifest=terminal_split,
+                    training_report_id=str(terminal_training_report["report_id"]),
+                    config=terminal_config,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                terminal_summary = terminal_result.report["summary"]["overall"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(terminal_summary["benchmark_denominator"]),
+                        transitions=int(terminal_summary["decisions"]),
+                    )
+                )
+                _emit_json(terminal_result.report, None)
+                return 0 if terminal_result.successful else 1
+            if args.model_command == "verify-run-trajectory-search":
+                trajectory_verification = verify_trajectory_search(
+                    args.search,
+                    config=load_trajectory_search_config(args.config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                )
+                _emit_json(trajectory_verification, args.output)
+                return 0 if trajectory_verification["valid"] is True else 1
+            if args.model_command == "compare-run-trajectory-search":
+                trajectory_comparison = compare_trajectory_search_ablation(
+                    legacy_report_path=args.legacy_report,
+                    frontier_report_path=args.frontier_report,
+                    diverse_report_path=args.diverse_report,
+                    legacy_config=load_trajectory_search_config(args.legacy_config),
+                    frontier_config=load_trajectory_search_config(args.frontier_config),
+                    diverse_config=load_trajectory_search_config(args.diverse_config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                )
+                _emit_json(trajectory_comparison, args.output)
+                return 0
+            if args.model_command == "verify-starting-option-evidence":
+                starting_verification = verify_starting_option_evidence(
+                    args.evidence,
+                    config=load_starting_evidence_config(args.config),
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                )
+                _emit_json(starting_verification, None)
+                return 0
+            if args.model_command == "audit-combat-selection-gate":
+                from spireshift.combat_gate import (
+                    audit_saved_combat_selection_gate,
+                    load_combat_gate_audit,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                cached_gate_audit = None
+                if args.output.exists() or args.output.is_symlink():
+                    if not args.output.is_file() or args.output.is_symlink():
+                        raise FileExistsError("Combat gate diagnostic output exists")
+                    cached_gate_audit = load_combat_gate_audit(args.output)
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                combat_gate_report = audit_saved_combat_selection_gate(
+                    config_path=args.config,
+                    model_root=args.model_root,
+                    resource_path=args.resource_report,
+                    project_root=args.project_root,
+                    objective=load_objective(args.objective_config),
+                )
+                if cached_gate_audit is not None:
+                    if cached_gate_audit != combat_gate_report:
+                        raise ValueError("Cached gate audit belongs to a different experiment")
+                    _emit_json(cached_gate_audit, None)
+                    return 0
+                _publish_json(args.output, combat_gate_report)
+                _emit_json(combat_gate_report, None)
+                return 0
+            if args.model_command in (
+                "diagnose-combat-confirmation",
+                "show-combat-confirmation-diagnosis",
+            ):
+                from spireshift.combat_replay_diagnostic import (
+                    load_combat_replay_config,
+                    load_combat_replay_report,
+                    prepare_combat_replay,
+                    run_combat_replay,
+                )
+
+                diagnostic_cached = args.model_command == "show-combat-confirmation-diagnosis"
+                diagnostic_activity = [0, 0]
+                if not diagnostic_cached:
+                    write_experiment_metrics(
+                        ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                    )
+                print(
+                    "Checking saved comparison, models and public fitting coverage; "
+                    "no training or source-case audit.",
+                    flush=True,
+                )
+                diagnostic_inputs = prepare_combat_replay(
+                    config=load_combat_replay_config(args.config),
+                    project_root=args.project_root,
+                    split=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                diagnostic_report_path = args.output_dir / "diagnostic.json"
+                if diagnostic_cached:
+                    diagnostic_report = load_combat_replay_report(
+                        diagnostic_report_path, diagnostic_inputs
+                    )
+                else:
+                    if diagnostic_report_path.exists():
+                        raise FileExistsError(
+                            "Combat diagnosis is complete; display its saved result"
+                        )
+                    diagnostic_backend = load_evangambit_backend(
+                        args.upstream_root,
+                        args.manifest,
+                        max_episode_steps=diagnostic_inputs.confirmation.document[
+                            "maximum_decisions_per_run"
+                        ]
+                        + 1,
+                    )
+
+                    def record_diagnostic_activity(runs: int, transitions: int) -> None:
+                        diagnostic_activity[:] = [runs, transitions]
+                        update_experiment_metrics(
+                            ExperimentMetrics(
+                                trajectories=runs, simulations=0, transitions=transitions
+                            )
+                        )
+
+                    print(
+                        "Replaying only the inspected comparison and recording public choices. "
+                        "No training or automatic follow-up.",
+                        flush=True,
+                    )
+                    diagnostic_report = run_combat_replay(
+                        inputs=diagnostic_inputs,
+                        environment_factory=diagnostic_backend.factory,
+                        output_directory=args.output_dir,
+                        resume=args.resume,
+                        progress=lambda completed, total: print(
+                            f"Combat diagnosis: {completed}/{total} replays saved.", flush=True
+                        ),
+                        activity=record_diagnostic_activity,
+                    )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "report_id": diagnostic_report["report_id"],
+                        "config_id": diagnostic_inputs.config.document["config_id"],
+                        "comparison_report_id": diagnostic_report["comparison_report_id"],
+                        "summary": diagnostic_report["summary"],
+                        "decision": diagnostic_report["decision"],
+                        "claim_scope": diagnostic_report["claim_scope"],
+                        "games_this_command": diagnostic_activity[0],
+                        "transitions_this_command": diagnostic_activity[1],
+                    },
+                    None,
+                )
+                return (
+                    0
+                    if diagnostic_cached or diagnostic_report["summary"]["analysis_integrity_pass"]
+                    else 1
+                )
+            if args.model_command in ("confirm-combat-policy", "show-combat-confirmation"):
+                from spireshift.combat_confirmation import (
+                    load_combat_confirmation_config,
+                    load_confirmation_policies,
+                )
+
+                confirmation_config = load_combat_confirmation_config(args.config)
+                confirmation_document = confirmation_config.document
+                confirmation_split = load_split_manifest(args.split_manifest)
+                confirmation_ruleset = load_patch_manifest(args.manifest).ruleset_identity()
+                confirmation_is_cached = args.model_command == "show-combat-confirmation"
+                if not confirmation_is_cached:
+                    write_experiment_metrics(
+                        ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                    )
+                print(
+                    "Checking frozen models and reserved seed metadata; no source-case audit.",
+                    flush=True,
+                )
+                candidate_policy, frozen_policy = load_confirmation_policies(
+                    config=confirmation_config,
+                    project_root=args.project_root,
+                    split=confirmation_split,
+                    ruleset=confirmation_ruleset,
+                    objective=load_objective(args.objective_config),
+                )
+                confirmation_report_path = args.output_dir / "production-policy-evaluation.json"
+                if confirmation_is_cached:
+                    confirmation_report = load_production_policy_evaluation(
+                        confirmation_report_path,
+                        model_id=candidate_policy.model_id,
+                        training_report_id=confirmation_document["candidate"]["report_id"],
+                        split_manifest=confirmation_split,
+                        reference_model_id=frozen_policy.model_id,
+                        reference_training_report_id=confirmation_document["reference"][
+                            "report_id"
+                        ],
+                    )
+                    if confirmation_report["confirmation_config"] != confirmation_document:
+                        raise ValueError("Saved confirmation belongs to a different experiment")
+                    confirmation_successful = True
+                else:
+                    if confirmation_report_path.exists():
+                        raise FileExistsError(
+                            "Combat confirmation is complete; display its saved result instead"
+                        )
+                    confirmation_backend = load_evangambit_backend(
+                        args.upstream_root,
+                        args.manifest,
+                        max_episode_steps=confirmation_document["maximum_decisions_per_run"] + 1,
+                    )
+                    print(
+                        "Playing the fixed paired comparison with one worker. "
+                        "No automatic follow-up.",
+                        flush=True,
+                    )
+
+                    def record_confirmation_activity(runs: int, transitions: int) -> None:
+                        update_experiment_metrics(
+                            ExperimentMetrics(
+                                trajectories=runs, simulations=0, transitions=transitions
+                            )
+                        )
+
+                    confirmation_result = run_production_policy_evaluation(
+                        environment_factory=confirmation_backend.factory,
+                        ruleset=confirmation_ruleset,
+                        learned_policy=candidate_policy,
+                        split_manifest=confirmation_split,
+                        training_report_id=confirmation_document["candidate"]["report_id"],
+                        reference_policy=frozen_policy,
+                        reference_training_report_id=confirmation_document["reference"][
+                            "report_id"
+                        ],
+                        seeds=confirmation_document["seeds"],
+                        workers=1,
+                        maximum_decisions_per_run=confirmation_document[
+                            "maximum_decisions_per_run"
+                        ],
+                        cycle_repetition_threshold=confirmation_document[
+                            "cycle_repetition_threshold"
+                        ],
+                        liveness_tail_length=confirmation_document["liveness_tail_length"],
+                        no_op_fallback_threshold=confirmation_document["no_op_fallback_threshold"],
+                        output_directory=args.output_dir,
+                        partition=SplitName.TRAIN,
+                        resume=args.resume,
+                        confirmation=confirmation_config,
+                        progress=lambda completed, total: print(
+                            f"Combat comparison: {completed}/{total} game attempts saved.",
+                            flush=True,
+                        ),
+                        record_activity=record_confirmation_activity,
+                    )
+                    confirmation_report = confirmation_result.report
+                    confirmation_successful = confirmation_result.successful
+                    update_experiment_metrics(
+                        ExperimentMetrics(
+                            trajectories=confirmation_result.new_runs,
+                            simulations=0,
+                            transitions=confirmation_result.new_transitions,
+                        )
+                    )
+                _emit_json(
+                    {
+                        "valid": True,
+                        "report_id": confirmation_report["report_id"],
+                        "config_id": confirmation_document["config_id"],
+                        "model_id": candidate_policy.model_id,
+                        "reference_model_id": frozen_policy.model_id,
+                        "summary": confirmation_report["summary"],
+                        "decision": confirmation_report["decision"],
+                        "claim_scope": confirmation_report["claim_scope"],
+                        "games_this_command": 0
+                        if confirmation_is_cached
+                        else confirmation_result.new_runs,
+                    },
+                    None,
+                )
+                return 0 if confirmation_successful else 1
+            if args.model_command in {"train-neural-combat-policy", "show-neural-combat-training"}:
+                from spireshift.neural_combat import (
+                    load_neural_combat_config,
+                    load_neural_combat_inputs,
+                    summarize_neural_combat_training,
+                    train_neural_combat_inputs,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                neural_config = load_neural_combat_config(args.config)
+                neural_checkpoint_path = args.output_dir / "checkpoint.json"
+                neural_report_path = args.output_dir / "training-report.json"
+                if args.model_command == "show-neural-combat-training":
+                    saved_checkpoint = load_production_model_checkpoint(neural_checkpoint_path)
+                    saved_report = load_production_training_report(
+                        neural_report_path, checkpoint=saved_checkpoint
+                    )
+                    if saved_report["neural_config"] != neural_config.document:
+                        raise ValueError("Saved neural pilot uses a different frozen recipe")
+                    _emit_json(
+                        {
+                            **summarize_neural_combat_training(saved_report),
+                            "source_inputs_reaudited": False,
+                            "optimizer_steps_this_command": 0,
+                        },
+                        None,
+                    )
+                    return 0
+                if any(
+                    p.exists() or p.is_symlink()
+                    for p in (neural_checkpoint_path, neural_report_path)
+                ):
+                    raise FileExistsError(
+                        "Neural result exists; display it rather than overwrite it"
+                    )
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                print(
+                    "Verifying saved lessons, printed card properties and separate seeds; "
+                    "no games will run.",
+                    flush=True,
+                )
+                neural_inputs, neural_catalog = load_neural_combat_inputs(
+                    config=neural_config,
+                    project_root=args.project_root,
+                    upstream_root=args.upstream_root,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                print(
+                    "Training the frozen neural pilot. "
+                    "No gameplay or automatic next round follows.",
+                    flush=True,
+                )
+                neural_result = train_neural_combat_inputs(
+                    inputs=neural_inputs,
+                    config=neural_config,
+                    catalog=neural_catalog,
+                    progress=lambda epoch, total: print(
+                        f"Neural combat training: {epoch}/{total} epochs complete.", flush=True
+                    ),
+                )
+                _publish_json(neural_checkpoint_path, neural_result.checkpoint)
+                _publish_json(neural_report_path, neural_result.report)
+                _emit_json(summarize_neural_combat_training(neural_result.report), None)
+                return 0
+            if args.model_command in {"train-combat-policy", "show-combat-policy-training"}:
+                from spireshift.combat_policy import (
+                    load_combat_policy_config,
+                    load_combat_policy_inputs,
+                    summarize_combat_policy_training,
+                    train_combat_policy_inputs,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                combat_policy_config = load_combat_policy_config(args.config)
+                combat_checkpoint_path = args.output_dir / "checkpoint.json"
+                combat_report_path = args.output_dir / "training-report.json"
+                if args.model_command == "show-combat-policy-training":
+                    cached_combat_checkpoint = load_production_model_checkpoint(
+                        combat_checkpoint_path
+                    )
+                    cached_combat_training = load_production_training_report(
+                        combat_report_path, checkpoint=cached_combat_checkpoint
+                    )
+                    if cached_combat_training["config"] != combat_policy_config.document:
+                        raise ValueError("Cached combat training uses a different frozen recipe")
+                    _emit_json(
+                        {
+                            **summarize_combat_policy_training(cached_combat_training),
+                            "source_inputs_reaudited": False,
+                            "optimizer_steps_this_command": 0,
+                        },
+                        None,
+                    )
+                    return 0
+                if any(
+                    p.exists() or p.is_symlink()
+                    for p in (combat_checkpoint_path, combat_report_path)
+                ):
+                    raise FileExistsError("Saved combat training output exists; display it instead")
+                # This command never initializes a game, including failed data preflights.
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                print(
+                    "Verifying saved combat lessons and reserved seeds; no games will run.",
+                    flush=True,
+                )
+                combat_policy_inputs = load_combat_policy_inputs(
+                    config=combat_policy_config,
+                    project_root=args.project_root,
+                    upstream_root=args.upstream_root,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                print("Fitting one combat adjustment for the frozen number of epochs.", flush=True)
+                combat_training_result = train_combat_policy_inputs(
+                    inputs=combat_policy_inputs,
+                    config=combat_policy_config,
+                    progress=lambda epoch, total: print(
+                        f"Combat training: {epoch}/{total} epochs complete.", flush=True
+                    ),
+                )
+                _publish_json(combat_checkpoint_path, combat_training_result.checkpoint)
+                _publish_json(combat_report_path, combat_training_result.report)
+                _emit_json(summarize_combat_policy_training(combat_training_result.report), None)
+                return 0
+            if args.model_command in {"audit-combat-foundation", "show-combat-foundation"}:
+                from spireshift.combat_foundation import (
+                    load_combat_foundation_config,
+                    load_combat_foundation_report,
+                    run_combat_foundation_audit,
+                    summarize_combat_foundation,
+                )
+                from spireshift.starting_evidence import _publish_json
+
+                combat_foundation_config = load_combat_foundation_config(args.config)
+                if args.model_command == "show-combat-foundation":
+                    cached_combat = load_combat_foundation_report(
+                        args.audit, combat_foundation_config
+                    )
+                    _emit_json(
+                        {
+                            **summarize_combat_foundation(cached_combat),
+                            "source_inputs_reaudited": False,
+                        },
+                        None,
+                    )
+                    return 0
+                if args.output.exists() or args.output.is_symlink():
+                    raise FileExistsError("Completed combat data audit exists; display it instead")
+                print(
+                    "Checking saved combat lessons and public bindings; no games or training.",
+                    flush=True,
+                )
+                combat_foundation_audit = run_combat_foundation_audit(
+                    config=combat_foundation_config,
+                    project_root=args.project_root,
+                    upstream_root=args.upstream_root,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.manifest).ruleset_identity(),
+                    objective=load_objective(args.objective_config),
+                )
+                _publish_json(args.output, combat_foundation_audit)
+                write_experiment_metrics(
+                    ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+                )
+                _emit_json(
+                    {
+                        **summarize_combat_foundation(combat_foundation_audit),
+                        "report_path": str(args.output),
+                        "source_integrity_verified": True,
+                    },
+                    None,
+                )
+                return 0
+            if args.model_command == "show-starting-repeatability":
+                cached_study = load_starting_repeatability_report(
+                    args.study, load_starting_repeatability_config(args.config)
+                )
+                _emit_json(
+                    {
+                        **summarize_starting_repeatability(cached_study),
+                        "source_inputs_reaudited": False,
+                    },
+                    None,
+                )
+                return 0
+            if args.model_command == "study-starting-repeatability":
+                from spireshift.starting_evidence import (
+                    _publish_json,
+                    load_verified_starting_option_evidence,
+                )
+
+                study_output = args.output_dir / STARTING_REPEATABILITY_FILENAME
+                if study_output.exists() or study_output.is_symlink():
+                    raise FileExistsError(
+                        "Completed repeatability output exists; display it instead"
+                    )
+                study_config = load_starting_repeatability_config(args.config)
+                study_ruleset = load_patch_manifest(args.manifest).ruleset_identity()
+                study_split = load_split_manifest(args.split_manifest)
+                print(
+                    "Verifying prior evidence and frozen fresh-seed ownership before collection.",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                study_inputs = prepare_starting_repeatability(
+                    config=study_config,
+                    project_root=args.project_root,
+                    split_manifest=study_split,
+                    ruleset=study_ruleset,
+                    objective=load_objective(args.objective_config),
+                )
+                study_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                study_parent_report = load_production_training_report(
+                    args.report, checkpoint=study_checkpoint
+                )
+                if (study_checkpoint["model_id"], study_parent_report["report_id"]) != (
+                    study_config.collection.runner.model_id,
+                    study_config.collection.runner.training_report_id,
+                ):
+                    raise ValueError("Repeatability fixed continuation model/report differ")
+                fresh_directory = args.output_dir / "evidence"
+                fresh_path = fresh_directory / STARTING_EVIDENCE_FILENAME
+                existing_seeds = {
+                    seed
+                    for seed in study_config.collection.seeds
+                    if (fresh_directory / "cases" / f"seed-{seed:06d}.json").exists()
+                }
+                if not fresh_path.exists():
+                    study_policy = ProductionCheckpointPolicy(
+                        checkpoint=study_checkpoint,
+                        training_report=study_parent_report,
+                        ruleset=study_ruleset,
+                    )
+                    study_backend = load_evangambit_backend(
+                        args.upstream_root,
+                        args.manifest,
+                        max_episode_steps=study_config.collection.runner.maximum_decisions_per_run
+                        + 1,
+                    )
+
+                    def repeatability_progress(done: int, total: int) -> None:
+                        if done == 1 or done % 8 == 0 or done == total:
+                            print(f"Repeatability seeds completed: {done}/{total}", flush=True)
+
+                    collect_starting_option_evidence(
+                        environment_factory=study_backend.factory,
+                        ruleset=study_ruleset,
+                        policy=study_policy,
+                        split_manifest=study_split,
+                        training_report_id=str(study_parent_report["report_id"]),
+                        config=study_config.collection,
+                        objective=study_inputs.objective,
+                        output_directory=fresh_directory,
+                        resume=args.resume,
+                        progress=repeatability_progress,
+                    )
+                print(
+                    "Collection saved. Checking cases and comparing lessons; no training follows.",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                fresh_report, fresh_cases = load_verified_starting_option_evidence(
+                    fresh_path,
+                    config=study_config.collection,
+                    split_manifest=study_split,
+                    ruleset=study_ruleset,
+                )
+                new_trajectories = [
+                    branch["trajectory"]
+                    for case in fresh_cases
+                    if case["run_seed"] not in existing_seeds
+                    for branch in case["branches"]
+                    if branch["trajectory"] is not None
+                ]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=len(new_trajectories),
+                        transitions=sum(len(t["decisions"]) for t in new_trajectories),
+                    )
+                )
+                study_result = analyze_starting_repeatability(
+                    study_inputs, fresh_report, fresh_cases
+                )
+                _publish_json(study_output, study_result)
+                _emit_json(
+                    {
+                        **summarize_starting_repeatability(study_result),
+                        "report_path": str(study_output),
+                        "source_integrity_verified": True,
+                    },
+                    None,
+                )
+                return 0
+            if args.model_command == "collect-starting-option-evidence":
+                if (args.output_dir / STARTING_EVIDENCE_FILENAME).exists():
+                    raise FileExistsError("Completed starting evidence already exists; verify it")
+                starting_config = load_starting_evidence_config(args.config)
+                starting_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                starting_report = load_production_training_report(
+                    args.report, checkpoint=starting_checkpoint
+                )
+                starting_ruleset = load_patch_manifest(args.manifest).ruleset_identity()
+                starting_policy = ProductionCheckpointPolicy(
+                    checkpoint=starting_checkpoint,
+                    training_report=starting_report,
+                    ruleset=starting_ruleset,
+                )
+                starting_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=starting_config.runner.maximum_decisions_per_run + 1,
+                )
+
+                def starting_progress(done: int, total: int) -> None:
+                    if done == 1 or done % 8 == 0 or done == total:
+                        print(f"Starting-option runs completed: {done}/{total}", flush=True)
+
+                starting_result = collect_starting_option_evidence(
+                    environment_factory=starting_backend.factory,
+                    ruleset=starting_ruleset,
+                    policy=starting_policy,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    training_report_id=str(starting_report["report_id"]),
+                    config=starting_config,
+                    objective=load_objective(args.objective_config),
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                    progress=starting_progress,
+                )
+                starting_summary = starting_result["summary"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(starting_summary["recorded_trajectories"]),
+                        transitions=int(starting_summary["recorded_transitions"]),
+                    )
+                )
+                _emit_json(
+                    {
+                        "report_id": starting_result["report_id"],
+                        "report_path": str(args.output_dir / STARTING_EVIDENCE_FILENAME),
+                        "integrity_verified": True,
+                        "summary": starting_summary,
+                        "training_started": False,
+                        "checkpoint_promoted": False,
+                    },
+                    None,
+                )
+                return 0 if starting_summary["failed_runs"] == 0 else 1
+            if args.model_command == "search-run-trajectories":
+                search_config = load_trajectory_search_config(args.config)
+                search_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                search_training_report = load_production_training_report(
+                    args.report, checkpoint=search_checkpoint
+                )
+                search_split = load_split_manifest(args.split_manifest)
+                search_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=search_config.maximum_decisions_per_run + 1,
+                )
+                probe_environment = search_backend.factory()
+                try:
+                    search_ruleset = probe_environment.ruleset
+                    search_policy = ProductionCheckpointPolicy(
+                        checkpoint=search_checkpoint,
+                        training_report=search_training_report,
+                        ruleset=search_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                trajectory_result = run_trajectory_search(
+                    environment_factory=search_backend.factory,
+                    ruleset=search_ruleset,
+                    policy=search_policy,
+                    split_manifest=search_split,
+                    training_report_id=str(search_training_report["report_id"]),
+                    config=search_config,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                trajectory_summary = trajectory_result.report["summary"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(trajectory_summary["evaluated_trajectories"]),
+                        transitions=int(trajectory_summary["decisions"]),
+                    )
+                )
+                _emit_json(trajectory_result.report, None)
+                return 0 if trajectory_result.successful else 1
             if args.model_command == "verify-evaluation-curriculum":
                 evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 evaluation_training_report = load_production_training_report(
                     args.report, checkpoint=evaluation_checkpoint
                 )
+                if (args.reference_checkpoint is None) != (args.reference_report is None):
+                    raise ValueError(
+                        "Evaluation reference checkpoint and report must be provided together"
+                    )
+                reference_checkpoint = (
+                    load_production_model_checkpoint(args.reference_checkpoint)
+                    if args.reference_checkpoint is not None
+                    else None
+                )
+                reference_training_report = (
+                    load_production_training_report(
+                        args.reference_report, checkpoint=reference_checkpoint
+                    )
+                    if args.reference_report is not None
+                    else None
+                )
                 evaluation_split = load_split_manifest(args.split_manifest)
                 if evaluation_checkpoint["split_manifest_id"] != evaluation_split.manifest_id:
                     raise ValueError("Production evaluation checkpoint and split identities differ")
+                if reference_checkpoint is not None and (
+                    reference_checkpoint["split_manifest_id"] != evaluation_split.manifest_id
+                ):
+                    raise ValueError("Production reference checkpoint and split identities differ")
                 evaluation = load_production_policy_evaluation(
                     args.evaluation,
                     model_id=str(evaluation_checkpoint["model_id"]),
                     training_report_id=str(evaluation_training_report["report_id"]),
                     split_manifest=evaluation_split,
+                    reference_model_id=(
+                        str(reference_checkpoint["model_id"])
+                        if reference_checkpoint is not None
+                        else None
+                    ),
+                    reference_training_report_id=(
+                        str(reference_training_report["report_id"])
+                        if reference_training_report is not None
+                        else None
+                    ),
                 )
-                _emit_json(
-                    {
-                        "valid": True,
-                        "model_id": evaluation_checkpoint["model_id"],
-                        "training_report_id": evaluation_training_report["report_id"],
-                        "evaluation_report_id": evaluation["report_id"],
-                    },
-                    args.output,
-                )
+                evaluation_verification = {
+                    "valid": True,
+                    "model_id": evaluation_checkpoint["model_id"],
+                    "training_report_id": evaluation_training_report["report_id"],
+                    "evaluation_report_id": evaluation["report_id"],
+                }
+                if reference_checkpoint is not None and reference_training_report is not None:
+                    evaluation_verification.update(
+                        {
+                            "reference_model_id": reference_checkpoint["model_id"],
+                            "reference_training_report_id": reference_training_report["report_id"],
+                        }
+                    )
+                _emit_json(evaluation_verification, args.output)
                 return 0
             if args.model_command == "evaluate-curriculum":
                 evaluation_checkpoint = load_production_model_checkpoint(args.checkpoint)
                 evaluation_training_report = load_production_training_report(
                     args.report, checkpoint=evaluation_checkpoint
+                )
+                if (args.reference_checkpoint is None) != (args.reference_report is None):
+                    raise ValueError(
+                        "Evaluation reference checkpoint and report must be provided together"
+                    )
+                reference_checkpoint = (
+                    load_production_model_checkpoint(args.reference_checkpoint)
+                    if args.reference_checkpoint is not None
+                    else None
+                )
+                reference_training_report = (
+                    load_production_training_report(
+                        args.reference_report, checkpoint=reference_checkpoint
+                    )
+                    if args.reference_report is not None
+                    else None
                 )
                 evaluation_split = load_split_manifest(args.split_manifest)
                 evaluation_partition = SplitName(args.partition)
@@ -1932,6 +3364,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                         training_report=evaluation_training_report,
                         ruleset=evaluation_ruleset,
                     )
+                    reference_policy = (
+                        ProductionCheckpointPolicy(
+                            checkpoint=reference_checkpoint,
+                            training_report=reference_training_report,
+                            ruleset=evaluation_ruleset,
+                        )
+                        if reference_checkpoint is not None
+                        and reference_training_report is not None
+                        else None
+                    )
                 finally:
                     close = getattr(probe_environment, "close", None)
                     if callable(close):
@@ -1946,6 +3388,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                     workers=args.workers,
                     maximum_decisions_per_run=args.max_decisions_per_run,
                     output_directory=args.output_dir,
+                    reference_policy=reference_policy,
+                    reference_training_report_id=(
+                        str(reference_training_report["report_id"])
+                        if reference_training_report is not None
+                        else None
+                    ),
                     partition=evaluation_partition,
                     cycle_repetition_threshold=args.cycle_repetition_threshold,
                     liveness_tail_length=args.liveness_tail_length,
@@ -1954,8 +3402,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
                 evaluation_summary = evaluation_result.report["summary"]
                 if isinstance(evaluation_summary, dict):
-                    learned_summary = evaluation_summary.get("learned")
-                    baseline_summary = evaluation_summary.get("baseline")
+                    learned_summary = evaluation_summary.get(
+                        "candidate", evaluation_summary.get("learned")
+                    )
+                    baseline_summary = evaluation_summary.get(
+                        "reference", evaluation_summary.get("baseline")
+                    )
                     if isinstance(learned_summary, dict) and isinstance(baseline_summary, dict):
                         write_experiment_metrics(
                             ExperimentMetrics(
@@ -2013,6 +3465,46 @@ def main(argv: Sequence[str] | None = None) -> int:
                         close()
                 _emit_json(smoke_document, None)
                 return 0
+            if args.model_command == "blend-curriculum":
+                if args.checkpoint.resolve() == args.report.resolve():
+                    raise ValueError(
+                        "Production checkpoint and training report outputs must differ"
+                    )
+                blend_result = blend_production_policy(
+                    anchor_checkpoint_path=args.anchor_checkpoint,
+                    anchor_report_path=args.anchor_report,
+                    candidate_checkpoint_path=args.candidate_checkpoint,
+                    candidate_report_path=args.candidate_report,
+                    validation_report_path=args.validation_report,
+                    causal_preference_path=args.causal_preferences,
+                    intervention_spec_path=args.intervention_spec,
+                    intervention_report_path=args.intervention_report,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    candidate_weights=tuple(args.candidate_weights),
+                )
+                write_production_model_artifact(
+                    blend_result.checkpoint,
+                    args.checkpoint,
+                    label="blended production model checkpoint",
+                )
+                write_production_model_artifact(
+                    blend_result.report,
+                    args.report,
+                    label="blended production model report",
+                )
+                blend = blend_result.report["policy_blend"]
+                _emit_json(
+                    {
+                        "model_id": blend_result.checkpoint["model_id"],
+                        "report_id": blend_result.report["report_id"],
+                        "candidate_weight": blend["candidate_weight"],
+                        "validation_policy": blend_result.report["held_out_metrics"]["policy"],
+                        "causal_policy": blend["selected_causal_policy"],
+                    },
+                    None,
+                )
+                return 0
             if args.model_command == "verify-curriculum":
                 checkpoint = load_production_model_checkpoint(args.checkpoint)
                 curriculum_training_report = (
@@ -2033,12 +3525,329 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.output,
                 )
                 return 0
+            if args.model_command == "diagnose-trajectory-policy":
+                if args.output.resolve() in {
+                    path.resolve()
+                    for path in (
+                        args.config,
+                        args.parent_checkpoint,
+                        args.candidate_checkpoint,
+                        args.parent_report,
+                        args.candidate_report,
+                        args.collection,
+                        args.search_report,
+                        args.search_config,
+                        args.train_report,
+                        args.validation_report,
+                        args.split_manifest,
+                        args.ruleset_manifest,
+                        args.objective_config,
+                    )
+                }:
+                    raise ValueError("Diagnostic output must differ from every source artifact")
+                trajectory_diagnosis = diagnose_trajectory_policy(
+                    parent_checkpoint_path=args.parent_checkpoint,
+                    parent_report_path=args.parent_report,
+                    candidate_checkpoint_path=args.candidate_checkpoint,
+                    candidate_report_path=args.candidate_report,
+                    collection_path=args.collection,
+                    search_report_path=args.search_report,
+                    search_config=load_trajectory_search_config(args.search_config),
+                    train_report_path=args.train_report,
+                    validation_report_path=args.validation_report,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    config=load_trajectory_policy_config(args.config),
+                    objective=load_objective(args.objective_config),
+                )
+                write_production_model_artifact(
+                    trajectory_diagnosis, args.output, label="trajectory policy diagnosis"
+                )
+                _emit_json(
+                    {
+                        "report_id": trajectory_diagnosis["report_id"],
+                        "report_path": str(args.output),
+                        "reconciliation_pass": trajectory_diagnosis["reconciliation_pass"],
+                        "validation_summary": trajectory_diagnosis["validation_summary"],
+                        "validation_by_decision_type": trajectory_diagnosis[
+                            "validation_by_decision_type"
+                        ],
+                        "preference_coverage": trajectory_diagnosis["preference_coverage"],
+                        "validation_checks": trajectory_diagnosis["validation_checks"],
+                        "checkpoint_promoted": False,
+                    },
+                    None,
+                )
+                return 0
+            if args.model_command == "show-starting-evidence-diagnosis":
+                cached_starting_diagnosis = load_starting_evidence_diagnostic_report(
+                    args.report, load_starting_evidence_diagnostic_config(args.diagnostic_config)
+                )
+                _emit_json(
+                    {
+                        **summarize_starting_evidence_diagnosis(cached_starting_diagnosis),
+                        "verification_scope": "cached_report_identity_and_frozen_bindings_only",
+                        "source_inputs_reaudited": False,
+                    },
+                    None,
+                )
+                return 0
+            if args.model_command in {
+                "finetune-starting-evidence-policy",
+                "verify-starting-evidence-policy",
+                "diagnose-starting-evidence-policy",
+            }:
+                verify_only = args.model_command == "verify-starting-evidence-policy"
+                diagnose_only = args.model_command == "diagnose-starting-evidence-policy"
+                if diagnose_only:
+                    if args.output.exists() or args.output.resolve() in {
+                        path.resolve()
+                        for path in (
+                            args.config,
+                            args.parent_checkpoint,
+                            args.checkpoint,
+                            args.parent_report,
+                            args.report,
+                            args.evidence,
+                            args.evidence_config,
+                            args.anchor_assignment_report,
+                            args.train_report,
+                            args.validation_report,
+                            args.split_manifest,
+                            args.ruleset_manifest,
+                            args.objective_config,
+                            args.diagnostic_config,
+                            args.resource_report,
+                        )
+                    }:
+                        raise ValueError(
+                            "Diagnostic output must be new and differ from every source"
+                        )
+                elif not verify_only:
+                    outputs = (args.checkpoint.resolve(), args.report.resolve())
+                    if outputs[0] == outputs[1] or any(path.exists() for path in outputs):
+                        raise ValueError(
+                            "Starting evidence outputs must be distinct and new; "
+                            "use verify-starting-evidence-policy for a completed result"
+                        )
+                starting_training_inputs = {
+                    "config": load_starting_option_config(args.config),
+                    "evidence_config": load_starting_evidence_config(args.evidence_config),
+                    "evidence_path": args.evidence,
+                    "anchor_assignment_report_path": args.anchor_assignment_report,
+                    "parent_checkpoint_path": args.parent_checkpoint,
+                    "parent_report_path": args.parent_report,
+                    "train_report_path": args.train_report,
+                    "validation_report_path": args.validation_report,
+                    "split_manifest": load_split_manifest(args.split_manifest),
+                    "ruleset": load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    "objective": load_objective(args.objective_config),
+                }
+                if diagnose_only:
+                    print(
+                        (
+                            "Checking saved sources and learning history; no training or game "
+                            "attempts."
+                        ),
+                        file=sys.stderr,
+                    )
+                    starting_diagnosis = diagnose_starting_evidence_policy(
+                        diagnostic_config=load_starting_evidence_diagnostic_config(
+                            args.diagnostic_config
+                        ),
+                        checkpoint_path=args.checkpoint,
+                        report_path=args.report,
+                        resource_report_path=args.resource_report,
+                        source_paths={
+                            "config": args.config,
+                            "parent_checkpoint": args.parent_checkpoint,
+                            "checkpoint": args.checkpoint,
+                            **{
+                                f"--{key.replace('_', '-')}": getattr(args, key)
+                                for key in (
+                                    "parent_report",
+                                    "report",
+                                    "evidence",
+                                    "evidence_config",
+                                    "anchor_assignment_report",
+                                    "train_report",
+                                    "validation_report",
+                                    "split_manifest",
+                                    "ruleset_manifest",
+                                )
+                            },
+                        },
+                        **starting_training_inputs,
+                    )
+                    write_production_model_artifact(
+                        starting_diagnosis, args.output, label="starting evidence diagnosis"
+                    )
+                    result_summary = {
+                        **summarize_starting_evidence_diagnosis(starting_diagnosis),
+                        "report_path": str(args.output),
+                        "verification_scope": (
+                            "verified_sources_and_recorded_history_no_optimizer_steps"
+                        ),
+                    }
+                elif verify_only:
+                    result_summary = verify_starting_evidence_policy(
+                        checkpoint_path=args.checkpoint,
+                        report_path=args.report,
+                        **starting_training_inputs,
+                    )
+                else:
+                    starting_trained = train_starting_evidence_policy(**starting_training_inputs)
+                    write_production_model_artifact(
+                        starting_trained.checkpoint,
+                        args.checkpoint,
+                        label="starting evidence policy checkpoint",
+                    )
+                    write_production_model_artifact(
+                        starting_trained.report,
+                        args.report,
+                        label="starting evidence policy training report",
+                    )
+                    result_summary = {
+                        "model_id": starting_trained.checkpoint["model_id"],
+                        "report_id": starting_trained.report["report_id"],
+                        "checkpoint_path": str(args.checkpoint),
+                        "report_path": str(args.report),
+                        "selected_epoch": starting_trained.report["trajectory_finetuning"][
+                            "selected_epoch"
+                        ],
+                        "candidate_eligible": starting_trained.report["candidate_eligible"],
+                        "status": starting_trained.report["status"],
+                        "eligible_preferences": starting_trained.report["eligible_preferences"],
+                        "fit_preferences": starting_trained.report["fit_preferences"],
+                        "selection_preferences": starting_trained.report["selection_preferences"],
+                        "validation_records": starting_trained.report["validation_records"],
+                        "validation_checks": starting_trained.report["validation_checks"],
+                        "starting_evidence_training": starting_trained.report[
+                            "starting_evidence_training"
+                        ],
+                        "coverage": starting_trained.report["starting_option_training"]["coverage"],
+                        "terminal_victory_positive_labels": 0,
+                        "checkpoint_promoted": False,
+                    }
+                _emit_json(result_summary, None)
+                return 0
+            if args.model_command in {
+                "finetune-trajectory-policy",
+                "finetune-starting-option-policy",
+            }:
+                outputs = (args.checkpoint.resolve(), args.report.resolve())
+                if outputs[0] == outputs[1] or any(path.exists() for path in outputs):
+                    raise ValueError(
+                        "Trajectory outputs must be distinct and must not already exist"
+                    )
+                residual_config = (
+                    load_starting_option_config(args.config)
+                    if args.model_command == "finetune-starting-option-policy"
+                    else None
+                )
+                trajectory_training_result = train_trajectory_policy(
+                    parent_checkpoint_path=args.parent_checkpoint,
+                    parent_report_path=args.parent_report,
+                    collection_path=args.collection,
+                    search_report_path=args.search_report,
+                    search_config=load_trajectory_search_config(args.search_config),
+                    train_report_path=args.train_report,
+                    validation_report_path=args.validation_report,
+                    split_manifest=load_split_manifest(args.split_manifest),
+                    ruleset=load_patch_manifest(args.ruleset_manifest).ruleset_identity(),
+                    config=(
+                        load_trajectory_policy_config(args.config)
+                        if residual_config is None
+                        else residual_config.recipe
+                    ),
+                    objective=load_objective(args.objective_config),
+                    residual_config=residual_config,
+                )
+                write_production_model_artifact(
+                    trajectory_training_result.checkpoint,
+                    args.checkpoint,
+                    label="trajectory policy checkpoint",
+                )
+                write_production_model_artifact(
+                    trajectory_training_result.report,
+                    args.report,
+                    label="trajectory policy training report",
+                )
+                _emit_json(
+                    {
+                        "model_id": trajectory_training_result.checkpoint["model_id"],
+                        "report_id": trajectory_training_result.report["report_id"],
+                        "checkpoint_path": str(args.checkpoint),
+                        "report_path": str(args.report),
+                        "selected_epoch": trajectory_training_result.report[
+                            "trajectory_finetuning"
+                        ]["selected_epoch"],
+                        "candidate_eligible": trajectory_training_result.report[
+                            "candidate_eligible"
+                        ],
+                        "status": trajectory_training_result.report["status"],
+                        "eligible_preferences": trajectory_training_result.report[
+                            "eligible_preferences"
+                        ],
+                        "validation_checks": trajectory_training_result.report["validation_checks"],
+                        "held_out_policy": trajectory_training_result.report["held_out_metrics"][
+                            "policy"
+                        ],
+                        "terminal_victory_positive_labels": 0,
+                        "checkpoint_promoted": False,
+                        **(
+                            {
+                                "starting_option_config_id": residual_config.document["config_id"],
+                                "starting_option_coverage": {
+                                    key: {
+                                        **{
+                                            label: value[label]
+                                            for label in (
+                                                "records",
+                                                "scoped_records",
+                                                "scoped_complete_runs",
+                                                "candidate_options",
+                                                "unknown_candidate_options",
+                                            )
+                                        },
+                                        "unique_option_ids": len(value["unique_option_ids"]),
+                                        "unknown_option_ids": len(value["unknown_option_ids"]),
+                                    }
+                                    for key, value in trajectory_training_result.report[
+                                        "starting_option_training"
+                                    ]["coverage"].items()
+                                },
+                            }
+                            if residual_config is not None
+                            else {}
+                        ),
+                    },
+                    None,
+                )
+                return 0
             if args.model_command == "train-curriculum":
                 if args.checkpoint.resolve() == args.report.resolve():
                     raise ValueError(
                         "Production checkpoint and training report outputs must differ"
                     )
+                causal_inputs = (
+                    args.causal_preferences,
+                    args.intervention_spec,
+                    args.intervention_report,
+                    args.ruleset_manifest,
+                )
+                if any(value is not None for value in causal_inputs) and not all(
+                    value is not None for value in causal_inputs
+                ):
+                    raise ValueError(
+                        "Causal policy fitting requires all four causal evidence options"
+                    )
                 split_manifest = load_split_manifest(args.split_manifest)
+                causal_ruleset = (
+                    None
+                    if args.ruleset_manifest is None
+                    else load_patch_manifest(args.ruleset_manifest).ruleset_identity()
+                )
                 production_result = train_production_base_model(
                     train_report_path=args.train_report,
                     validation_report_path=args.validation_report,
@@ -2058,6 +3867,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                         selection_fraction=args.selection_fraction,
                         selection_salt=args.selection_salt,
                     ),
+                    causal_preference_path=args.causal_preferences,
+                    intervention_spec_path=args.intervention_spec,
+                    intervention_report_path=args.intervention_report,
+                    ruleset=causal_ruleset,
                 )
                 write_production_model_artifact(
                     production_result.checkpoint,
@@ -2244,6 +4057,73 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "dagger":
         try:
             split_manifest = load_split_manifest(args.split_manifest)
+            if args.dagger_command == "verify-production":
+                production_verification = verify_production_dagger_collection(
+                    args.collection,
+                    config=load_production_dagger_config(args.config),
+                    split_manifest=split_manifest,
+                )
+                _emit_json(production_verification, args.output)
+                return 0 if production_verification["valid"] is True else 1
+            if args.dagger_command == "collect-production":
+                production_config = load_production_dagger_config(args.config)
+                production_checkpoint = load_production_model_checkpoint(args.checkpoint)
+                production_report = load_production_training_report(
+                    args.report,
+                    checkpoint=production_checkpoint,
+                )
+                reference = ProductionDaggerReference.from_dataset(
+                    args.reference_dataset,
+                    split_manifest=split_manifest,
+                )
+                intervention_spec = load_combat_search_intervention_spec(args.intervention_spec)
+                causal_preferences = freeze_causal_preferences(
+                    intervention_report_path=args.intervention_report,
+                    intervention_spec=intervention_spec,
+                    split_manifest=split_manifest,
+                )
+                production_backend = load_evangambit_backend(
+                    args.upstream_root,
+                    args.manifest,
+                    max_episode_steps=production_config.maximum_decisions_per_run + 1,
+                )
+                probe_environment = production_backend.factory()
+                try:
+                    production_ruleset = probe_environment.ruleset
+                    production_policy = ProductionCheckpointPolicy(
+                        checkpoint=production_checkpoint,
+                        training_report=production_report,
+                        ruleset=production_ruleset,
+                    )
+                finally:
+                    close = getattr(probe_environment, "close", None)
+                    if callable(close):
+                        close()
+                policy_artifacts = BootstrapPolicyArtifacts.from_paths(
+                    args.checkpoint,
+                    args.report,
+                )
+                dagger_result = run_production_dagger_collection(
+                    environment_factory=production_backend.factory,
+                    ruleset=production_ruleset,
+                    policy=production_policy,
+                    policy_artifacts=policy_artifacts,
+                    split_manifest=split_manifest,
+                    reference=reference,
+                    causal_preferences=causal_preferences,
+                    config=production_config,
+                    output_directory=args.output_dir,
+                    resume=args.resume,
+                )
+                summary = dagger_result.report["summary"]
+                write_experiment_metrics(
+                    ExperimentMetrics(
+                        trajectories=int(summary["benchmark_denominator"]),
+                        transitions=int(summary["decisions"]),
+                    )
+                )
+                _emit_json(dagger_result.report, None)
+                return 0 if dagger_result.successful else 1
             source_checkpoint = load_model_checkpoint(args.source_checkpoint)
             reference_dataset = load_teacher_dataset(args.reference_dataset)
             if args.dagger_command == "verify":
@@ -2337,7 +4217,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             return 0
         except (OSError, ValueError, RuntimeError, json.JSONDecodeError) as error:
-            error_output = args.output if args.dagger_command == "verify" else None
+            error_output = (
+                args.output if args.dagger_command in {"verify", "verify-production"} else None
+            )
             _emit_json({"status": "error", "error": str(error)}, error_output)
             return 1
     if args.command == "tactical-handoff":

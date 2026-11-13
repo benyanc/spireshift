@@ -1,0 +1,206 @@
+{
+  "actual_native_deliveries_verified": 11591,
+  "adaptive_controller_allowed": false,
+  "arms": {
+    "mixed": {
+      "act1_bosses_reached": 2,
+      "act1_clears": 0,
+      "games": 24,
+      "local_answer_factors": 0,
+      "losses_by_last_owner": {
+        "boss": 2,
+        "elite": 6,
+        "normal": 16
+      },
+      "mean_maximum_floor": 9.625,
+      "native_decisions": 3930,
+      "native_decisions_by_family": {
+        "card_bundle_selection": 1,
+        "card_reward_selection": 127,
+        "card_selection": 57,
+        "combat_turn": 2652,
+        "event_option": 148,
+        "map_navigation": 210,
+        "native_generated_card_choice": 4,
+        "rest_site": 29,
+        "reward_claim": 368,
+        "shop_inventory": 153,
+        "shop_room": 146,
+        "treasure_room": 35
+      },
+      "shop_open_and_close": 268,
+      "wins": 0
+    },
+    "normal": {
+      "act1_bosses_reached": 2,
+      "act1_clears": 0,
+      "games": 24,
+      "local_answer_factors": 0,
+      "losses_by_last_owner": {
+        "boss": 2,
+        "elite": 8,
+        "normal": 14
+      },
+      "mean_maximum_floor": 9.833333333333334,
+      "native_decisions": 4029,
+      "native_decisions_by_family": {
+        "card_bundle_selection": 1,
+        "card_reward_selection": 131,
+        "card_selection": 61,
+        "combat_turn": 2698,
+        "event_option": 148,
+        "map_navigation": 217,
+        "native_generated_card_choice": 4,
+        "rest_site": 31,
+        "reward_claim": 386,
+        "shop_inventory": 162,
+        "shop_room": 152,
+        "treasure_room": 38
+      },
+      "shop_open_and_close": 282,
+      "wins": 0
+    },
+    "original": {
+      "act1_bosses_reached": 2,
+      "act1_clears": 0,
+      "games": 24,
+      "local_answer_factors": 0,
+      "losses_by_last_owner": {
+        "boss": 2,
+        "elite": 8,
+        "normal": 14
+      },
+      "mean_maximum_floor": 9.208333333333334,
+      "native_decisions": 3632,
+      "native_decisions_by_family": {
+        "card_bundle_selection": 1,
+        "card_reward_selection": 126,
+        "card_selection": 51,
+        "combat_turn": 2518,
+        "event_option": 136,
+        "map_navigation": 201,
+        "native_generated_card_choice": 4,
+        "rest_site": 31,
+        "reward_claim": 361,
+        "shop_inventory": 92,
+        "shop_room": 83,
+        "treasure_room": 28
+      },
+      "shop_open_and_close": 148,
+      "wins": 0
+    }
+  },
+  "automatic_follow_up": false,
+  "comparisons": {
+    "mixed_minus_normal": {
+      "first_difference_families": {
+        "card_selection": 1,
+        "combat_turn": 20,
+        "event_option": 1,
+        "reward_claim": 1
+      },
+      "first_difference_floors": {
+        "2": 16,
+        "3": 2,
+        "4": 3,
+        "5": 1,
+        "6": 1
+      },
+      "first_different_action_with_same_label": 8,
+      "floor_higher": 2,
+      "floor_lower": 3,
+      "floor_mean_difference": -0.20833333333333334,
+      "floor_same": 19,
+      "pairs_with_a_different_action": 23,
+      "win_rate_difference": [
+        0.0,
+        0.0
+      ]
+    },
+    "mixed_minus_original": {
+      "first_difference_families": {
+        "card_reward_selection": 1,
+        "combat_turn": 21,
+        "event_option": 1,
+        "reward_claim": 1
+      },
+      "first_difference_floors": {
+        "1": 2,
+        "2": 19,
+        "3": 1,
+        "4": 2
+      },
+      "first_different_action_with_same_label": 6,
+      "floor_higher": 7,
+      "floor_lower": 3,
+      "floor_mean_difference": 0.4166666666666667,
+      "floor_same": 14,
+      "pairs_with_a_different_action": 24,
+      "win_rate_difference": [
+        0.0,
+        0.0
+      ]
+    },
+    "normal_minus_original": {
+      "first_difference_families": {
+        "card_reward_selection": 1,
+        "combat_turn": 22,
+        "event_option": 1
+      },
+      "first_difference_floors": {
+        "1": 2,
+        "2": 17,
+        "3": 1,
+        "4": 3,
+        "9": 1
+      },
+      "first_different_action_with_same_label": 8,
+      "floor_higher": 7,
+      "floor_lower": 3,
+      "floor_mean_difference": 0.625,
+      "floor_same": 14,
+      "pairs_with_a_different_action": 24,
+      "win_rate_difference": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "config_id": "sha256:700d1cadd856953dd502eb412ceae344af6afe343be2bcf9d9bf5e021f4863ec",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "native_game_launches": 0,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "owner_report": {
+    "path": "artifacts/native-a8-matched-practice/comparison-v2/attempt-1794188151258059000.json",
+    "report_id": "sha256:f47035f6ac132b5de112cdd2948dfda98b78d2f6c6288498d9c1f17bd67884c6",
+    "sha256": "78a70702fffdbef05ad945de0624313a2716edef25d6ca98dc7e3f6f79e09b17"
+  },
+  "owner_resources": {
+    "path": "artifacts/native-a8-matched-practice/comparison-v2-1794188151258059000-resources.json",
+    "report_id": "sha256:31eb391895384b5abf93c87c3cf9f1aee25507b1a8f66fdf775062dc75eb1f18",
+    "sha256": "177544a9ec5880f74959ba6f3532abd624e1d8365af694138490df6c12255fa7"
+  },
+  "preparation_id": "sha256:d132077a2b4d2bc3161f444025cd5748af6ac0dc525e9233907ada36bcc9b16a",
+  "promotion_allowed": false,
+  "replay_audit": {
+    "path": "artifacts/native-a8-matched-practice/assessment-v2-1794188151258059000/report.json",
+    "report_id": "sha256:0680412c4a547ed9aa620e6dbb9bf23b0eb624e6a690b3d240785ca9a6e86a79",
+    "sha256": "ac9500795ab3c9fdc7994e2a6fbf49dd8a9e6b1f946c0e232caa229124590c52"
+  },
+  "report_id": "sha256:e278a9797b8e25047eef34c242112435a4a0f2e65874bc9edeb564cd8145fcf7",
+  "schema_version": "native-a8-matched-practice-saved-audit-v2",
+  "sealed_files_verified": 4392,
+  "sealed_terminal_games": 72,
+  "status": "matched_practice_saved_verified",
+  "worlds": 12
+}

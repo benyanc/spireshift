@@ -1,0 +1,190 @@
+{
+  "automatic_follow_up": false,
+  "bank_id": "sha256:4c57bea49d719b1dba36e3b1f2ff8c2c3955ec9a06ce6dc988cb1b2793115f60",
+  "collection_assessment": {
+    "path": "docs/evidence/native-win-curriculum-result-v1.json",
+    "sha256": "6fec23a7d39669ae0544ca1b899c3c78734b53d4a6b034384171ccfde414eda5"
+  },
+  "control": {
+    "checks": {
+      "critic_weights_preserved": true,
+      "development_separate_from_fitting": true,
+      "equal_world_draws_and_complete_main_coverage": true,
+      "resume_matches_uninterrupted_full_state": true,
+      "warm_full_adam_copy_and_reload": true
+    },
+    "copy_updates": 8,
+    "earlier_failed_source_guard": {
+      "path": "artifacts/resources/win-world-balanced-fitting-control-v1.json",
+      "report_id": "sha256:eddaa456c068bc3d905c05b1bc415e0fa524862d9cf8d0cd7ea4bfb1740b3596",
+      "sha256": "a75163b413ab014a6aae0509cf1295df3456cae6010e4c04951dee765ed01341",
+      "status": "failed",
+      "wall_seconds": 0.5427169579779729
+    },
+    "earlier_failure_reason": "The proposed module names matched the historical collection source glob. Renaming the new modules restored the exact old inventory before any fitting.",
+    "report": {
+      "path": "artifacts/native-win-fitting/control-v2/control.json",
+      "report_id": "sha256:ce88e42684ec7e0f57abd6d7e937ca88d890aa79ec7dc3d77eac1cdc7963ad10",
+      "sha256": "15e1521b3f396c72b1d67df6367938004c1046ace6ee80d1d83b71b5caa674e7"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-world-balanced-fitting-control-v2.json",
+      "report_id": "sha256:6d85e4e7833add1ef7bde7e931a62efa3dbdc8c5fbabb7a7ee6e6686cfa9aece",
+      "sha256": "d6f79906e4c957d05349fb9376303ce1b41c7d2e924735ba66e66a8e387d2223",
+      "status": "completed",
+      "wall_seconds": 157.45608379202895
+    },
+    "results": {
+      "2": {
+        "development_diagnostics": {
+          "final": 1.8470157704278118,
+          "initial": 1.9589160405628656
+        },
+        "fit_diagnostics": {
+          "final": 1.5706618489697732,
+          "initial": 1.7090813367321953
+        },
+        "optimizer_steps": 5662,
+        "state_id": "sha256:516a0a002662db6fedbe15bb76b00ddb01210b6d8266be5afaa4ddbbd6bd9010"
+      },
+      "3": {
+        "development_diagnostics": {
+          "final": 1.8527054086312915,
+          "initial": 2.034321239560949
+        },
+        "fit_diagnostics": {
+          "final": 1.853811507300364,
+          "initial": 2.0914941945072334
+        },
+        "optimizer_steps": 6049,
+        "state_id": "sha256:23e292907bcee0daf44bf5156f78ffd524ca722705dbb7ddb2849352e10b336b"
+      }
+    },
+    "uninterrupted_reconstruction_updates": 8
+  },
+  "control_states_enter_main": false,
+  "dataset": {
+    "development_cases": 12,
+    "development_decisions": 1026,
+    "development_probe_worlds": 6,
+    "fit_decisions": 1141,
+    "fit_families": {
+      "card_reward_selection": 46,
+      "card_selection": 16,
+      "combat_turn": 877,
+      "event_option": 16,
+      "map_navigation": 14,
+      "native_generated_card_choice": 4,
+      "rest_site": 17,
+      "reward_claim": 141,
+      "shop_inventory": 2,
+      "shop_room": 1,
+      "treasure_room": 7
+    },
+    "fit_grouped_answers": 0,
+    "fit_worlds": 25
+  },
+  "dataset_id": "sha256:8a65f54d0ae30c47024c34e18557461cc459d5b44d5caa69bc580cd8074a9b7f",
+  "declared_final_adam_steps": {
+    "2": 5858,
+    "3": 6245
+  },
+  "declared_work": {
+    "actor_rate": 0.001,
+    "draws_per_world_per_update": 1,
+    "gradient_clip": 1.0,
+    "objective": "mean_joint_negative_log_probability_per_native_decision",
+    "players": [
+      2,
+      3
+    ],
+    "temperature": 0.8,
+    "updates_per_chunk": 20,
+    "updates_per_copy": 200,
+    "value_rate": 0.0
+  },
+  "development_labels_used_for_updates_or_selection": false,
+  "draws_per_copy": 5000,
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "full_game_playing_strength_evaluated": false,
+  "game_launches": 0,
+  "job_id": "sha256:1d378bf829c3c81d3e5c266eda53f04f80d4d9fe6bf48aa89ded5c5d0e5d1b8b",
+  "launch_binding_id": "sha256:e8153192041efae4f3370f027c7686cc191f89bee2a2c5d191dc396be42a6039",
+  "main_fitting_started": false,
+  "main_optimizer_updates": 0,
+  "official_live_qualification_granted": false,
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/fit-win-curriculum-v1.sh\"",
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-world-balanced-fitting-v1.json",
+    "sha256": "92bd9593c2cda2ec5b67c51065bc6b82d303fb8878ffe52c85ae3d78e000e6b1"
+  },
+  "report_id": "sha256:b91446aa604acd8bc49065ed5b3ba5e5c65225a120637317ffdfbf78bfc83998",
+  "schema_version": "native-a8-world-balanced-fitting-preparation-v1",
+  "status": "world_balanced_fitting_prepared_and_preflight_verified",
+  "verification": {
+    "frozen_inputs": {
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "original_and_prior_final_weights_full_Adam_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "preflight": {
+      "path": "artifacts/native-win-fitting/preparation-v1/preflight.json",
+      "report_id": "sha256:59f4ddf6c58d54180acabe01ea68dafdd40b49c52accafdd02938263bd44757f",
+      "sha256": "83a69edc92166a14b7ebeefce36f1f6bdbb98050387673a02498df3a65094ca1"
+    },
+    "preflight_resource": {
+      "path": "artifacts/resources/win-world-balanced-fitting-preflight-v1.json",
+      "report_id": "sha256:a7880cd351b67ebae2626588937c99fe501507d9e627650195cda05dc4206787",
+      "sha256": "feae3732e6167c427f5034a8b537fffbaeceefbb3315772af2592ff2e8e9bbce",
+      "status": "completed",
+      "wall_seconds": 122.95793899998534
+    },
+    "repository_checks": {
+      "path": "artifacts/resources/win-world-balanced-fitting-check-v1.json",
+      "report_id": "sha256:50903bc795ca96cbd4bb626c80e65702c78a3d3a5bba305d6f34258fc98da9ce",
+      "sha256": "6b83f16955d699b7d6849dd7754f1324eb4b0e6ccddc9c1b45f28b0d8c0edded",
+      "status": "completed",
+      "wall_seconds": 166.61289737501647
+    },
+    "repository_tests_passed": 2840,
+    "repository_tests_skipped": 0,
+    "shared_encoded_menu_examples": {
+      "card_reward_selection": [
+        "sha256:6f8e18f706a7415e9e4af6c37c03747424be8eb658ff369de7e55fd83bf1f38b"
+      ],
+      "card_selection": [
+        "sha256:b46d6f93f6e4ef8d524f4d8959d9a7175a530ee3ad48c4fd5bbf5ee5417caab0"
+      ],
+      "combat_turn": [
+        "sha256:4b128a330e1d4409bff37be69c599203b4d0cdad65c73387afc15cc25093e52c"
+      ],
+      "event_option": [
+        "sha256:957920747bbe1568a93d610a25e79452a1f17d5633c4aa952a4f32a6fc8766a5"
+      ],
+      "map_navigation": [
+        "sha256:88a640532ec71209bc0de8b32efdb69b990de89a119c10cf69a72b9968103c11"
+      ],
+      "native_generated_card_choice": [
+        "sha256:bbb248c48aadf1547a3f5b45243ab53963f3e59e90092aa78430a58677034d88"
+      ],
+      "rest_site": [
+        "sha256:d0a5183311ef76168ada808edb45286179c9cb0bcbb441e6e919f86b1a5d9de0"
+      ],
+      "reward_claim": [
+        "sha256:d953d4ae3e76a789432f5c73c3ba138574cb66939e1ac2268bac27db73fb8e71"
+      ],
+      "shop_inventory": [
+        "sha256:1927df7ae7a3b9beb41e7c00099a727cde946430e1a8f62503d1548b718ae8d5"
+      ],
+      "shop_room": [
+        "sha256:716490d891e75bd9a3893bb5d43248c8757246f44f253c0ed132a1250fc09542"
+      ],
+      "treasure_room": [
+        "sha256:3fd8efe4af60fd9da41d5aaeed73255548e1633ac775ff9e68390e972f764d5c"
+      ]
+    }
+  }
+}

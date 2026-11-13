@@ -1,0 +1,9 @@
+{
+  "schema_version": "starting-evidence-diagnostic-config-v1",
+  "objective_id": "terminal-victory-v1",
+  "training_config_id": "sha256:d727ff3716365e292d097bd4a95f0ce2b5a42750c6e7a39b6745e8304f9fe2c0",
+  "candidate_model_id": "sha256:ab1942b2ea4eea6aaee39724f66c41f23db7d1523573434379210b018112e0c9",
+  "candidate_report_id": "sha256:da8125f404051f2251273e7ac91ff75eeacb5250f5c5fc1105fbe3f7cffebd6f",
+  "resource_report_id": "sha256:4e94edaefb367f7e121809bc691a71c4f2eef341c1aad8a3aa6be68feef353a7",
+  "config_id": "sha256:93f66b34670c7f70196f26cc4176c6897d194ffe272afbc7ecde237d68727680"
+}

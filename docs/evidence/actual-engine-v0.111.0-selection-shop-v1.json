@@ -1,0 +1,183 @@
+{
+  "ascension": 8,
+  "baseline": {
+    "checks_passed": 22,
+    "checks_total": 39,
+    "config_id": "sha256:d2bf08bb4fe97a728a2eaf0e5a7f781386da14ad76d1a4c5c45aea7b7d8033bd",
+    "failed_native_checks": [
+      "changed_price_quote_refused",
+      "forbidden_potion_purchase_refused",
+      "full_potion_purchase_refused",
+      "full_potion_slots_not_offered_as_purchase",
+      "modal_native_selection_preferences_retained",
+      "native_forbidden_potions_not_offered_as_purchase",
+      "old_restocked_item_quote_refused",
+      "removal_native_selection_preferences_retained",
+      "removal_retry_native_selection_preferences_retained",
+      "repeat_removal_refused",
+      "restocked_item_has_new_binding",
+      "shop_purchase_while_selection_pending_refused",
+      "single_card_explicit_removal_commits_once",
+      "single_removal_native_selection_preferences_retained",
+      "single_removal_retry_native_selection_preferences_retained",
+      "successful_removal_marks_native_service_used",
+      "wrong_selection_binding_refused"
+    ],
+    "report_id": "sha256:0b36be506715579c6c094011f2b6213f7db3fa75216e865b667248ae7756f024",
+    "wall_seconds": 3.438431624963414
+  },
+  "build": {
+    "config_id": "sha256:756f76ea4cfd3dd4c19a7a1bca2f7116d68aa4898e192afb5b5851211744e202",
+    "helper_sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a",
+    "local_patch_sha256": "01cb27062325cb643cf9fbdf487f374ccb09f2c78261b09df74a2f7a02d8fba3",
+    "report_id": "sha256:dc6dacc16464dee357010e98ec3de26cccf6caf5c82aa4428a6d80c03fb87e8f",
+    "upstream_revision": "d11aa883b582dd68bd39b331f3370746b30d447e"
+  },
+  "build_wall_seconds": 29.405001624953,
+  "candidate_lineage": "spireshift_cli_selection_shop_v3_local_toolchain",
+  "character": "Ironclad",
+  "claim_scope": "sixteen_named_privileged_managed_native_rest_and_shop_scenarios_through_canonical_SDK_not_shipped_parity",
+  "compiler_sdk_version": "10.0.401",
+  "date": "2026-10-10",
+  "evidence_id": "sha256:93dc096d7e25877d4698c870248653c07886fd9b8de58b6398bfaa4c4fcb6b07",
+  "full_run_attempts": 0,
+  "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "helper_sha256": "1a356b96f6a0e040cd1735f62b20c4a959fa71b6630a0b40b0939350cd61aec8",
+  "host_artifact_mvid": "f58d8d74-01d9-4ca1-8bba-66e932c830e4",
+  "host_artifact_sha256": "e0e833736bf46884c396752a648170ea8655a30e35ff7c71dc5460c0295f2f46",
+  "issue_145_complete": false,
+  "managed_runtime": {
+    "directory": "artifacts/engine-tooling/dotnet-runtime-9.0.7-osx-arm64-v1/runtime",
+    "dotnet_sha256": "73be03a8f4e0d88d9653b333306fd9992a536e2109932578503a92fa2672c26f",
+    "inventory_id": "sha256:31ba28406ab7b3fc44d963ac7abf2903afe80fa68cc2be419249dc8c3a7e19b0",
+    "package_sha512": "0deb23ac714dad69bf7d0c67e4253256d0845881b805cc8b9c6f2051283d5f9bbb000d363058523dce4c7361c2b460016a865b6d6baa5843c9263591d539eb20",
+    "package_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.7/dotnet-runtime-9.0.7-osx-arm64.tar.gz",
+    "roll_forward": "LatestPatch",
+    "source_metadata": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/9.0/releases.json",
+    "version": "9.0.7"
+  },
+  "optimizer_steps": 0,
+  "panels": {
+    "rest": {
+      "archive_verification_after": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+      "archive_verification_before": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+      "canonical_delivery": {
+        "delivered_actions": 21,
+        "invalid_native_inputs": 21,
+        "native_action_calls": 42,
+        "request_ledger_checked": true,
+        "rest_snapshots": 20,
+        "sdk_validation_enabled": true,
+        "selection_snapshots": 7,
+        "shop_snapshots": 0
+      },
+      "checks_passed": 235,
+      "checks_total": 235,
+      "config_id": "sha256:b00e625bf65b0fbe79a962ae145611e09d75c122e09d028593ed97d9cc559d04",
+      "diagnostic_entries_retained": 132,
+      "integrity_and_isolation_checks": {
+        "frozen_archive_unchanged": true,
+        "native_rest_regressions_pass": true,
+        "pinned_managed_runtime_unchanged": true,
+        "pinned_sdk_tree_unchanged": true,
+        "projection_identity_bound": true,
+        "same_private_candidate_unchanged": true,
+        "shared_profile_unchanged": true,
+        "uncapped_successful_process": true
+      },
+      "native_scenarios": 9,
+      "public_snapshot_completeness": {
+        "complete": 27,
+        "missing": [],
+        "partial": 0
+      },
+      "report_id": "sha256:c871f3b81ec908c8b5f3a6ca3e7713b03a94865dfa2bd985db3ac619d6bf368f",
+      "wall_seconds": 6.81662854203023
+    },
+    "shop": {
+      "archive_verification_after": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+      "archive_verification_before": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+      "canonical_delivery": {
+        "delivered_actions": 16,
+        "invalid_native_inputs": 9,
+        "native_action_calls": 25,
+        "request_ledger_checked": true,
+        "rest_snapshots": 0,
+        "sdk_validation_enabled": true,
+        "selection_snapshots": 5,
+        "shop_snapshots": 17
+      },
+      "checks_passed": 179,
+      "checks_total": 179,
+      "config_id": "sha256:325522fd7f81ea4fcf33da5398c54c078c2c118dd4bfb1b0fa49e9d95df98c4f",
+      "diagnostic_entries_retained": 131,
+      "integrity_and_isolation_checks": {
+        "frozen_archive_unchanged": true,
+        "native_shop_regressions_pass": true,
+        "pinned_managed_runtime_unchanged": true,
+        "pinned_sdk_tree_unchanged": true,
+        "projection_identity_bound": true,
+        "same_private_candidate_unchanged": true,
+        "shared_profile_unchanged": true,
+        "uncapped_successful_process": true
+      },
+      "native_scenarios": 7,
+      "public_snapshot_completeness": {
+        "complete": 22,
+        "missing": [],
+        "partial": 0
+      },
+      "report_id": "sha256:03746a785e87d33d4c23f93746075bf7d145b8b15e06443331bc9214ddc3d4cb",
+      "wall_seconds": 4.532869666989427
+    }
+  },
+  "preserved_negative_history": [
+    {
+      "cause": "native_preference_instrumentation_refused_unsupported_NET10_runtime",
+      "report_id": "sha256:fe24867ea760853d0641aa96ba09789177c3115673c505eed50ead88dd24026e"
+    },
+    {
+      "cause": "upgrade_selection_boundary_not_observed",
+      "report_id": "sha256:c5514e91c44e2162048ee207290c8d62b76a048121c6fc426d5779ec253e8b1b"
+    },
+    {
+      "cause": "probe_compared_plain_visible_prompt_to_raw_colored_markup",
+      "report_id": "sha256:8461446123015e2a39d4c5aeb405bb54f1f78c9f19a77eb6e0712f31bfd420ef"
+    }
+  ],
+  "projection_helpers_sha256": {
+    "engine-player-projection.mjs": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155",
+    "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "probe-engine-cli-rest.mjs": "8df72169414ef86f501d3c8900dea3e9e1fc55b9ba8bde487603881b24dadfc9",
+    "probe-engine-cli-shop.mjs": "218a54c22e9dbc388db4aa8a7373fc4ea9a3b857ea14d32142323867f5a67fed"
+  },
+  "projection_identity": {
+    "patch_sha256": "302c096ccbaa82b2c616d28238e32e00a064537f7eab727bb5a2802c4dea2cc8",
+    "patched_source_sha256": "83d1af4008f31c740f38a645f32aa23d82de0e892569ac72e8f8e552c9f41736",
+    "sdk_inventory_id": "sha256:34d054042a5a9acc43491a23e7cb5a4f8b813aa031a4590a6c1ee2b7979f7978",
+    "source_revision": "4961b52a587777277816bc4407108f6f4274f801",
+    "source_sha256": "5926fc27e2bae08939f623f73017e4640085cee7d217bc7562773ac65455ec35"
+  },
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "reference_pack_version": "9.0.20",
+  "remaining": [
+    "shipped_host_differential",
+    "current_card_costs_modifiers_expiry_X_cost_and_effect_order",
+    "status_counter_and_secondary_intent_ownership",
+    "native_shop_discounts_and_relic_purchase_effects",
+    "out_of_combat_potion_controls_and_targeting",
+    "mandatory_optional_reward_bundle_and_hand_upgrade_selection",
+    "large_selection_action_space_without_silent_caps",
+    "normal_offered_content_seed_reset_resume_and_terminal_semantics",
+    "full_run_speed_before_new_A8_learning"
+  ],
+  "schema_version": "actual-engine-selection-shop-evidence-v1",
+  "selection_mechanics_exhaustively_qualified": false,
+  "selection_preference_boundaries_installed": 8,
+  "shipped_cross_host_parity": false,
+  "source_diff_id": "f6650fb3212d6d03ea4fc26a7e430b416a164c706bf9bd5c94ac4bb607798e2e",
+  "training_allowed": false
+}

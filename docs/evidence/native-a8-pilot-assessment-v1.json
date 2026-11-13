@@ -1,0 +1,73 @@
+{
+  "schema_version": "native-pilot-assessment-implementation-evidence-v1",
+  "assessment_recipe": "configs/native-assessment/sts2-v0.111.0-a8-pilot-v3-v1.json",
+  "assessment_report": {
+    "path": "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v3-v1/report.json",
+    "id": "sha256:306279f3e0f481d1bb9edd29c86810649aac5a666a81a62490b24308d3f1626f"
+  },
+  "resource_report": {
+    "path": "artifacts/resources/native-a8-pilot-v3-assessment-v1-attempt-1.json",
+    "id": "sha256:e33b308e7cfdff20828801f80f46f965d42f2a5224266611bba76cd4a916f810"
+  },
+  "source_pilot_report_id": "sha256:04a05e39b6ee07bef713ee6260706c5456049b77296308c9ec13a210bf9a1c24",
+  "source_files_verified": 1384,
+  "historical_attempts_verified": 336,
+  "historical_failures_preserved": 4,
+  "historical_optimizer_steps_preserved": 627,
+  "development_comparison": {
+    "auxiliary_progress_supported": false,
+    "base_readiness_passed": false,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20261016,
+    "floor_difference_95_interval": [
+      -1.1875,
+      3.3125
+    ],
+    "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+    "independent_unit": "complete_run_seed",
+    "initial_only_wins": 0,
+    "initial_win_rate_95_interval": [
+      0.0,
+      0.2059072142078227
+    ],
+    "mean_floor_difference_failures_zero": 1.1875,
+    "pairs": 16,
+    "selected_only_wins": 0,
+    "selected_win_rate_95_interval": [
+      0.0,
+      0.2059072142078227
+    ],
+    "victory_difference_95_interval": [
+      -0.23957414314634135,
+      0.23957414314634135
+    ],
+    "victory_improvement_supported": false,
+    "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+    "victory_rate_difference": 0.0
+  },
+  "assessment_resources": {
+    "wall_seconds": 7.871378249954432,
+    "cpu_seconds": 7.327142974999999,
+    "peak_resident_memory_bytes": 82804736,
+    "final_storage_bytes": 323055
+  },
+  "protected_pilot_files_checked": 42,
+  "current_pilot_sources_unchanged": true,
+  "current_pilot_results_inspected": false,
+  "games_launched": 0,
+  "optimizer_steps": 0,
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_historical_v3_regression_only_v4_assessment_prepared_without_opening_v4_results",
+  "verification": {
+    "python_tests_passed": 1399,
+    "new_focused_tests": 26,
+    "formatting_types_protocol": "pass",
+    "shell_syntax": "pass",
+    "historical_saved_cache": "verified",
+    "repository_check_resource_report": {
+      "path": "artifacts/resources/native-pilot-assessment-v1-repository-check-attempt-1.json",
+      "id": "sha256:ff03fcf257afeb63d166d51eaacf114850d483f6d0aa2a44fc74a408ec6580de"
+    }
+  },
+  "evidence_id": "sha256:d1216a999d51e9764f2ebf8b96cee9df022edf7ea74dd546ff222c3bd227d0af"
+}

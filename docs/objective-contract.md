@@ -14,6 +14,20 @@ nonterminal transition = 0
 The optimization target is terminal victory under a whole-run compute constraint. Training may
 use auxiliary prediction losses, but auxiliary events must not contribute to environment reward.
 
+## Explicit bootstrap learner objective
+
+New full-run learning experiments may declare `full-run-progress-bootstrap-v1` through the
+separate versioned `TrainingScoreSpec`. This supplies a bounded whole-episode learner return
+from public act/floor progress while all candidates lose. It does **not** alter `Transition.reward`,
+the `terminal-victory-v1` evaluation contract, or previous experiment identities. Evolutionary
+population ranking prioritizes actual win rate; progress can distinguish tied/all-loss panels.
+
+The initial profile, return formula, failure/stall handling and terminal-only staging trigger are
+implemented and tested. See [the score guide](full-run-training-score.md) and
+[ADR 0002](decisions/0002-full-run-bootstrap-training.md). The proxy score is not a victory
+probability or a foundation readiness pass. Changing its constants creates a different scoring
+identity and requires a newly declared experiment before use.
+
 ## Compute constraint
 
 Compute is accumulated across the complete run. Every decision records its tier, simulation count,

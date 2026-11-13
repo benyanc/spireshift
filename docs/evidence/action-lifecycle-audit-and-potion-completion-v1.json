@@ -1,0 +1,232 @@
+{
+  "Connector_delivery_methods": {
+    "current": 157,
+    "original": 144,
+    "previous": 156
+  },
+  "actual_native_acceptance_and_completion_recorded": true,
+  "adapters": {
+    "CLI": 56,
+    "Connector": 29,
+    "converter": 16,
+    "environment": 46,
+    "layout": 12,
+    "worker": 24
+  },
+  "adaptive_controller_allowed": false,
+  "all_mechanic_interactions_proven": false,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "checkpoint_promoted": false,
+  "compiled_host_tests": 244,
+  "discard_effect": {
+    "after_hp": 54,
+    "before_hp": 54,
+    "bottle_removed_once": true,
+    "max_hp": 80
+  },
+  "environment_id": "sha256:c7f1b750a7c863a8aba837e8873f91b925de27ced45c8eaec41685e5b9675ace",
+  "failed_native_discard_before_potion_delivery_retired_and_preserved": true,
+  "final_handoff": "artifacts/native-action-lifecycles/preparation-v1/final-handoff-v1.json",
+  "findings": [
+    {
+      "detail": "Potion-use failure or unconsumed bottle could trigger manual discard; direct enqueue bypassed EnqueueManualUse.",
+      "id": "CLI-UPSTREAM-01",
+      "owner": "original_CLI",
+      "status": "historical_replaced_in_our_CLI"
+    },
+    {
+      "detail": "Event/selection/end-turn recovery contains forced map/reset behavior; it is not qualification evidence for the original CLI.",
+      "id": "CLI-UPSTREAM-02",
+      "owner": "original_CLI",
+      "status": "historical_replaced_in_our_CLI"
+    },
+    {
+      "detail": "Noncombat use acknowledged enqueue while bottle removal preceded heal; exact native action/task now gates unrelated successor input.",
+      "id": "CONNECTOR-POTION-01",
+      "owner": "our_Connector27",
+      "status": "fixed_in_Connector29"
+    },
+    {
+      "detail": "Pending discard expired on bottle removal or action-state label alone; now requires native terminal completion/cancellation task.",
+      "id": "CONNECTOR-POTION-02",
+      "owner": "our_Connector27",
+      "status": "fixed_in_Connector29"
+    },
+    {
+      "detail": "Purchase/removal starts native async task and returns delivery. Current shop readiness does not retain that task. Existing passed effects do not prove every delayed pickup/hook.",
+      "id": "CONNECTOR-SHOP-01",
+      "owner": "original_and_custom_Connector",
+      "status": "open_source_risk_requires_targeted_qualification"
+    },
+    {
+      "detail": "UI ForceClick/EmitSignal delivery requires actual next-owner/effect evidence; readiness of a button alone never certifies every callback is finished.",
+      "id": "UI-CALLBACK-01",
+      "owner": "original_and_custom_Connector",
+      "status": "source_reviewed_content_interactions_not_exhaustive"
+    }
+  ],
+  "focused_python_tests": 10,
+  "full_game_playing_strength_evaluated": false,
+  "game": {
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "commit": "41cef1ea",
+    "unchanged": true,
+    "version": "v0.111.0"
+  },
+  "gameplay_commands": {
+    "original_CLI": 17,
+    "our_CLI": 26
+  },
+  "gameplay_controls_are_privileged_diagnostics_not_learning_episodes": true,
+  "matched_states": 7,
+  "node_completion_proof_tests": 9,
+  "open_shop_completion_risk_not_fixed_by_potion_work": true,
+  "optimizer_updates": 0,
+  "original_failed_worlds_replayed": false,
+  "original_use_collector_verifier_rejection_preserved": true,
+  "original_weights_and_all_Adam_unchanged": true,
+  "owner_plan": {
+    "cases": [
+      "player-2-natural-607",
+      "player-3-natural-608"
+    ],
+    "maximum_choices": 384,
+    "open_source_risks_not_automatically_closed_by_natural_pass": true,
+    "outer_wall_seconds": 2400,
+    "pair_wall_seconds": 600,
+    "preflight_valid": true,
+    "whole_run_CPU_seconds": 128,
+    "workspace_unstarted": true
+  },
+  "paired_actual_deliveries": 10,
+  "protected_prior_files_exact": 20590,
+  "references": [
+    {
+      "path": "docs/action-lifecycle-audit-and-potion-completion.md",
+      "sha256": "e77238cd3bb90e295be84a3df504b7a1d4fd97a7dd010a384623baacf77e2ea7"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/source-audit-v4/report.json",
+      "sha256": "4b9ab5c0b1d0952c26d66aef46badcd8cb8376938ac92791416edd18f912dd76"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/source-audit-v4/audit.json",
+      "sha256": "efc7754b6bf6549974156308f9aff299d0e642b6cf4677d13b10c0b13667da41"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/short-qualification-v1/report.json",
+      "sha256": "005ae27142cd706c96d10742dc49d23314c048c399dd3a3cd882f051640a8514"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/short-qualification-v1/native-completion-proof.json",
+      "sha256": "6a05081ea1296c559fab9acbf0d95c618f66efc3bc4c6434336988a6b4e7f1ae"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/reconciliation-v2/report.json",
+      "sha256": "ae9491ec03d2f95466cff4f5c081447618c1c7a1f6be535a994a93ec9cdb4c86"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/connector-build-v29/report.json",
+      "sha256": "24b479b2b37849ce9ff9006d32dfd2eab31aa5943e1bd855c4f2ecb0547a9d2c"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/short-controls-v3/blood-use-postcombat/report.json",
+      "sha256": "add52fcc72e3d2a8c32c09de496700b54ba0f855420a9293117bfa559bb75027"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/short-controls-v4/blood-discard-postcombat/report.json",
+      "sha256": "cdd6297e48e5a4dff55eeebd4d4c06200dfcb93c509c759f73904092b781f61e"
+    },
+    {
+      "path": "artifacts/native-action-lifecycles/short-controls-v3/blood-discard-postcombat/native-retirement.json",
+      "sha256": "a0f9f8ce9faf802aaa4a7824af1eb597a7f7c8436676f358107ad8ca4bf71283"
+    },
+    {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-action-lifecycle-v29.json",
+      "sha256": "d992f5368acddbc42c2161b8d5a7543f23b564c8d9409ae8a1c97bd25479213c"
+    },
+    {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-action-lifecycle-build-v29.json",
+      "sha256": "ca11d626f632b15392d30d8f700e152939cc01965dbc7726da0670039ba5c13f"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-shared-environment-v46.json",
+      "sha256": "545575fcdc48a32dcd0614aa69b0a97c48f97755d15484e8a79afa831a00070d"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-action-lifecycle-short-v4.json",
+      "sha256": "7539b92ddc76cdbb41357aaa8ea470d252e9abcef7a24df0d532b207c4161761"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-action-lifecycle-endings-v1.json",
+      "sha256": "f2dd861ff759afc7151ac23603458f73e4cece5915d88a94d107a4d371f8d44c"
+    },
+    {
+      "path": "patches/engine/sts2-connector-v0.111.0-action-lifecycle-v29.patch",
+      "sha256": "1b57d878c01c6a0668a07abfb89624fe0bb4811bc5e718b7e91af3b7ba18806c"
+    },
+    {
+      "path": "scripts/compare-action-lifecycle-endings-v1.sh",
+      "sha256": "e143e2def7c87cebaf422842d57c8f096df0d2e8fbc1557f3c6b7da262bd77ee"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-owner-preflight-v1.json",
+      "sha256": "df5b700dff72d3ddfb465c95d2abc06d1dbbb7738c9ae901f660ea0cea1079e0"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-source-audit-v4.json",
+      "sha256": "220cdabd4f094ca93c1f7d72a46a2ba15816c4af3786c0c0d3f84ed26e085d82"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-short-qualification-v1.json",
+      "sha256": "8d559b45dcede55724f87600fe157efcb36320e63c27b987b404e55ed624a71f"
+    },
+    {
+      "path": "artifacts/resources/action-lifecycle-reconciliation-v2.json",
+      "sha256": "630f67ea4d684837146625a3638596ebefb456cdd9bae974c30e99b0112467a6"
+    }
+  ],
+  "report_id": "sha256:9660a35e07e9011b29ca1b4fad63772c8ba5ed417011352f3e28ac7aadfd5085",
+  "saved_reconciliation": {
+    "actual_old_deliveries_verified": 728,
+    "current_inputs_and_choices_replayed": 728,
+    "report_id": "sha256:c57fc8fc73d80b524c5fe2deb2a147bfebce7e9cb52c58472672fa619cb28dcf",
+    "wall_seconds": 78.86906508397078
+  },
+  "schema_version": "action-lifecycle-audit-repair-evidence-v1",
+  "short_qualification_id": "sha256:d532d9abf3a76a4b39176f0131fde90aeac1886fab2d00cbf8056c6be9980dcc",
+  "source_audit_id": "sha256:9ae71f04b6be763f15c4d7187bbf5ecea938335062c46573ef077f0c42b0418c",
+  "source_counts_include_routers_helpers_and_validators": true,
+  "source_layers": {
+    "original_CLI": {
+      "files": 10,
+      "methods": 345
+    },
+    "original_Connector": {
+      "files": 69,
+      "methods": 716
+    },
+    "our_CLI56": {
+      "files": 11,
+      "methods": 474
+    },
+    "our_Connector27": {
+      "files": 76,
+      "methods": 775
+    },
+    "our_Connector29": {
+      "files": 77,
+      "methods": 783
+    }
+  },
+  "status": "all_action_entrypoints_source_audited_potion_controls_qualified_owner_integration_prepared",
+  "training_allowed": false,
+  "unfinished_heal_snapshots_zero_actions": 4,
+  "use_effect": {
+    "after_hp": 70,
+    "before_hp": 54,
+    "bottle_removed_once": true,
+    "max_hp": 80
+  }
+}

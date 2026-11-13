@@ -1,0 +1,13 @@
+{
+  "environment_id": "sha256:ba4096d61dcf0f8f0e2267a40fa2bdfa4ce35b17fa238abf39453444e19e4dde",
+  "manifest_id": "sha256:8347013d953e3761e06a7b6c857f16f2f2ba6c26a95fe0dbf36395b32fe19659",
+  "purpose": "frozen_final_fresh_full_game_evaluation_only",
+  "schema_version": "native-plan-teaching-seeds-v1",
+  "seeds": [
+    {
+      "id": 2600000,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDC001"
+    }
+  ]
+}

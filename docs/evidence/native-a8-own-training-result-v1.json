@@ -1,0 +1,209 @@
+{
+  "audit": {
+    "decision_families": {
+      "card_bundle_selection": 1,
+      "card_reward_selection": 420,
+      "card_selection": 147,
+      "combat_turn": 7525,
+      "event_option": 360,
+      "map_navigation": 588,
+      "native_generated_card_choice": 11,
+      "rest_site": 106,
+      "reward_claim": 1189,
+      "shop_inventory": 535,
+      "treasure_room": 55
+    },
+    "game_launches": 0,
+    "native_deliveries": 10937,
+    "new_optimizer_updates": 0,
+    "path": "artifacts/native-a8-own-training/result-audit-v1/report.json",
+    "report_id": "sha256:29122dc17ed157684a444e330ee88082b20efc1cde06192096f2351aa75303a4",
+    "sealed_files_verified": 4188,
+    "sealed_units": 78,
+    "sha256": "f6d53397bbb59529b2b5d26c431dc15d5b685c4c5bc1240bd8f270396225b48d"
+  },
+  "development_floor_by_initializer": {
+    "2": {
+      "fitted_mean_floor": 8.833333333333334,
+      "original_mean_floor": 10.166666666666666,
+      "paired_floor_deltas": [
+        -3,
+        -3,
+        -3,
+        1,
+        0,
+        0
+      ],
+      "worlds": 6
+    },
+    "3": {
+      "fitted_mean_floor": 9.333333333333334,
+      "original_mean_floor": 9.333333333333334,
+      "paired_floor_deltas": [
+        -4,
+        3,
+        0,
+        1,
+        0,
+        0
+      ],
+      "worlds": 6
+    }
+  },
+  "experiment": {
+    "all_games_ended_in_act_1": true,
+    "completed_development_games": 24,
+    "completed_training_games": 48,
+    "config_id": "sha256:8a2724690e6e1d03687eeb862a8c035534b8112cdcaa469ad67b9970497d9c03",
+    "development_caps_failures_or_unattempted": 0,
+    "optimizer_updates": 174,
+    "resource_report_id": "sha256:518dae232baa262a1267bbeca455098c3ab9eb5b2c11c95dfd52626152142cbb",
+    "study_report_id": "sha256:58eca49b6fe902aa7ae61248c6d5a66fcd3ff4f621b89b10833b7cf6cf419f6c",
+    "study_report_sha256": "aa63a55797de84606cc61df10346134966e960a7691feaeec2f47d54044d2d41"
+  },
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "official_live_qualification_granted": false,
+  "outcomes": {
+    "fitted": {
+      "act_clears": 0,
+      "bosses_reached": 0,
+      "games": 12,
+      "maximum_floor": 11,
+      "mean_floor": 9.083333333333334,
+      "native_wins": 0
+    },
+    "original": {
+      "act_clears": 0,
+      "bosses_reached": 0,
+      "games": 12,
+      "maximum_floor": 15,
+      "mean_floor": 9.75,
+      "native_wins": 0
+    },
+    "train": {
+      "act_clears": 0,
+      "bosses_reached": 7,
+      "games": 48,
+      "maximum_floor": 17,
+      "mean_floor": 8.854166666666666,
+      "native_wins": 0
+    }
+  },
+  "prepared_practice_probe": {
+    "covered_act_definitions": [
+      "GLORY",
+      "HIVE",
+      "OVERGROWTH",
+      "UNDERDOCKS"
+    ],
+    "native_deliveries": 226,
+    "natural_start_evaluation_games": 0,
+    "planned_and_sealed_cases": 4,
+    "prepared_goal_successes": 1,
+    "report": {
+      "path": "artifacts/native-a8-own-training/practice-probe-v1/report.json",
+      "report_id": "sha256:b49b30ea7a2ce03c94314a7a67cc412952b09fde31ac2482f8832746410381c8",
+      "sha256": "81b2230bb16cc414fa0827c474c821fa54b23f19f61ff732397b8b35c86f6e4f"
+    },
+    "resource": {
+      "path": "artifacts/resources/a8-own-practice-probe-v1.json",
+      "report_id": "sha256:536a293a5e98a96d9f6b50456b565f0fdf3746d9c2e1cba36f8f4c077b7c988a",
+      "sha256": "3258a6ba04e7bb6a29313e431b3da63a38b875a033dbee9620e7891f10626ebb"
+    },
+    "training_admission_granted": false
+  },
+  "promotion_allowed": false,
+  "report_id": "sha256:c9f607da2d4d7e5603c62899c220a9d5a5b5c4c66978af4e96de271f36a4ef20",
+  "saved_room_credit_probe": {
+    "direction_agreement_gate_met": true,
+    "higher_median_agreement_batches": 3,
+    "report": {
+      "path": "artifacts/native-a8-own-training/room-credit-probe-v1/report.json",
+      "report_id": "sha256:9aeb88aed2cbf12540ff433619db7a2be6a125d1cdde117b7c95c866b23bfbb2",
+      "sha256": "4a286dee8941b1bf70d0a1b34953afd68e451963b983416e332184bf73fb4a72"
+    },
+    "resolved_combat_room_counts": {
+      "boss": {
+        "reward_reached": 0,
+        "terminal_loss": 7
+      },
+      "elite": {
+        "reward_reached": 12,
+        "terminal_loss": 19
+      },
+      "normal": {
+        "reward_reached": 185,
+        "terminal_loss": 22
+      }
+    },
+    "resource": {
+      "path": "artifacts/resources/a8-own-room-credit-probe-v1.json",
+      "report_id": "sha256:8762e4d245f0b4d491be0bf8191a2af54142fbaf0a9d2e8e28b4e1c21cfcd908",
+      "sha256": "bbb9153506165bc39176b2639866bdb70401327939282ca26f74098888532b7e"
+    },
+    "same_training_menus_compared": 3694,
+    "total_batches": 4
+  },
+  "schema_version": "native-a8-own-training-result-evidence-v1",
+  "status": "sealed_result_assessed",
+  "training_combat_floors_observed": 245,
+  "training_combat_floors_with_native_rewards": 197,
+  "training_rounds": {
+    "fit-p2-r1": {
+      "actor_changed": true,
+      "distinct_floor_only_returns": 7,
+      "games": 12,
+      "median_half_cosine": -0.03830131664740909,
+      "opposing_half_splits": 323,
+      "raw_advantage_std": 0.00476043688194954,
+      "same_policy_half_splits": 462,
+      "saved_joint_kl": 0.012117126633229579,
+      "steps_after": 5694,
+      "steps_before": 5658
+    },
+    "fit-p2-r2": {
+      "actor_changed": true,
+      "distinct_floor_only_returns": 5,
+      "games": 12,
+      "median_half_cosine": 0.26231296808478133,
+      "opposing_half_splits": 9,
+      "raw_advantage_std": 0.005958835460427828,
+      "same_policy_half_splits": 462,
+      "saved_joint_kl": 0.014378540102616818,
+      "steps_after": 5742,
+      "steps_before": 5694
+    },
+    "fit-p3-r1": {
+      "actor_changed": true,
+      "distinct_floor_only_returns": 6,
+      "games": 12,
+      "median_half_cosine": 0.02162890425576283,
+      "opposing_half_splits": 210,
+      "raw_advantage_std": 0.005805424473248248,
+      "same_policy_half_splits": 462,
+      "saved_joint_kl": 0.010683510538645751,
+      "steps_after": 6090,
+      "steps_before": 6045
+    },
+    "fit-p3-r2": {
+      "actor_changed": true,
+      "distinct_floor_only_returns": 7,
+      "games": 12,
+      "median_half_cosine": -0.04361024316093848,
+      "opposing_half_splits": 349,
+      "raw_advantage_std": 0.005175420951085826,
+      "same_policy_half_splits": 462,
+      "saved_joint_kl": 0.015588124448567409,
+      "steps_after": 6135,
+      "steps_before": 6090
+    }
+  }
+}

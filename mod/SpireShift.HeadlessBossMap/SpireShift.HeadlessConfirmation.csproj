@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>SpireShift.HeadlessBossMap</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <PathMap>$(MSBuildProjectDirectory)/..=/_/mod</PathMap>
+    <NoWarn>$(NoWarn);CA2255</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../SpireShift.HeadlessConfirmation/StartupHook.cs" Link="StartupHook.cs" />
+    <Reference Include="Sts2Headless" HintPath="$(CandidateDirectory)/src/Sts2Headless/bin/Release/net9.0/Sts2Headless.dll" Private="false" />
+    <Reference Include="GodotSharp" HintPath="$(CandidateDirectory)/src/Sts2Headless/bin/Release/net9.0/GodotSharp.dll" Private="false" />
+    <Reference Include="sts2" HintPath="$(CandidateDirectory)/lib/sts2.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(CandidateDirectory)/lib/0Harmony.dll" Private="false" />
+  </ItemGroup>
+</Project>

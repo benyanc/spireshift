@@ -1,0 +1,38 @@
+{
+  "schema_version": "public-a8-admission-config-v2",
+  "inputs": {
+    "repair_config": {
+      "path": "configs/backend-repair/sts2-v0.107.1-turn-end-reward-v4.json",
+      "sha256": "8089be980e85c1e889ec4ffaef52e1c8534e97ddf471b931f118b7b00f4fbb91"
+    },
+    "public_manifest": {
+      "path": "manifests/patches/sts2-v0.107.1-evangambit-turn-end-reward-v5-retry3-pending.json",
+      "sha256": "14200b18b6931eecdaf7c32f94e576fee156e817242238e2cfce8c2f031da519"
+    },
+    "native_suite": {
+      "path": "artifacts/compatibility/turn-end-reward-full-suite-v2/full-suite.json",
+      "sha256": "b7db6627c2459cb8c019cba729e7757e467e9575373175dd66b94edb604f0145"
+    },
+    "python_suite": {
+      "path": "artifacts/qualification/a8-public-v2-retry2/python-checks.json",
+      "sha256": "a7e0e87bd1e56467b5272a6575d8bfc80b20863cdccb64dda6eec71113c23eec"
+    },
+    "contract": {
+      "path": "artifacts/compatibility/turn-end-reward-contract-v2/contract-probe.json",
+      "sha256": "1c18d930ec3a09fbc5c4ad4091bff86a316ab21a12f77654931818592e281ace"
+    },
+    "rule_audit": {
+      "path": "docs/evidence/frozen-run-rule-audit-v1-evidence.json",
+      "sha256": "da22b0cb4688ae1fa2cfc9528413353f16c576fc0dd053b7c3361c60f9594b8b"
+    },
+    "lifecycle_probe": {
+      "path": "artifacts/ppo-repair/turn-end-reward-v3/lifecycle-probe.json",
+      "sha256": "55bd4ba21fe69871f4aa723e033fe07e2326b46c1afb16ae15778f6b44a4968e"
+    }
+  },
+  "authoritative_fixture_tree": "66af8c2a510dcf8978dacfb0a3ab0a606c8a0b3a",
+  "inspected_train_seed": 100058,
+  "output_dir": "artifacts/qualification/a8-public-v2-retry2",
+  "admitted_manifest": "manifests/patches/sts2-v0.107.1-evangambit-public-a8-v2-admitted.json",
+  "config_id": "sha256:7d0e2ca66060fdc74456ad2be67dbc8f5bcd8e48a2c2ea78da529d27793fb968"
+}

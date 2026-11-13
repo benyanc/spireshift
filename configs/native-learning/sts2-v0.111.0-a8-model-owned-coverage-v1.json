@@ -1,0 +1,798 @@
+{
+  "audit": {
+    "path": "artifacts/native-a8-temporal-credit/assessment-v1-1794239333646300000/report.json",
+    "report_id": "sha256:085b75bc6cbc5c384dfbd9d949bc1a09e25193d04a3037eb098c397cfb81625c",
+    "sha256": "6d3f17a8487b0190ed238cc0c43f38b7a4fafe739fa5be22a2fd7230648e9d73"
+  },
+  "control": [
+    {
+      "key": "p2-middle-combat-draw-0",
+      "partition": "continuation_control",
+      "player": 2,
+      "root": "p2-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T003",
+      "seed_id": 99332
+    },
+    {
+      "key": "p2-middle-combat-draw-1",
+      "partition": "continuation_control",
+      "player": 2,
+      "root": "p2-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T003",
+      "seed_id": 99332
+    },
+    {
+      "key": "p3-middle-combat-draw-0",
+      "partition": "continuation_control",
+      "player": 3,
+      "root": "p3-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T006",
+      "seed_id": 99460
+    },
+    {
+      "key": "p3-middle-combat-draw-1",
+      "partition": "continuation_control",
+      "player": 3,
+      "root": "p3-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T006",
+      "seed_id": 99460
+    }
+  ],
+  "control_resource": "artifacts/native-a8-model-owned-coverage/control-v1-resources.json",
+  "control_workspace": "artifacts/native-a8-model-owned-coverage/control-v1",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "family_screen": {
+    "path": "artifacts/native-a8-temporal-credit/family-credit-screen-v1/report.json",
+    "report_id": "sha256:e86f00c59cee4206230706864d9666e0a29c6c1dfff7e0ce42d79ab6e4037e81",
+    "sha256": "07b671e64e83ce507ec658cc7c35b2db73a9386a86ca0e95ba4de3a86d5d706f"
+  },
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/collect-a8-model-owned-coverage-v1.sh": "c5bc2ef838961441d7745127de2847f48438817841f413c8bc006d74e442aa39",
+    "src/spireshift/native_a8_coverage_policy.py": "77d8a9f0e845daeea0ab1ad063f401dddccbc4022a09d3a0f37a54d9f0fe11f5",
+    "src/spireshift/native_a8_coverage_session.py": "bd69b995bbd0e74a3e1e7f60577d10cd5ca8b04fc66d6a991ec4e2157a03982b",
+    "src/spireshift/native_a8_family_credit.py": "824fa612de7a9bf7952f3e0c4dd4a32efc02a78a492d246daf84fd1d6a4d1d2d",
+    "src/spireshift/native_a8_temporal_credit_audit.py": "02d26aba86139d0665dfcf11da8459c8d069971e0431aa3cd4e860660ce94da3"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "original_full_state_ids": {
+    "2": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+    "3": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+  },
+  "roots": [
+    {
+      "family": "combat_turn",
+      "floor": 17,
+      "id": "p2-late-combat",
+      "prefix_native_deliveries": 218,
+      "root_input_id": "sha256:2109cd3833eb706d08fcfb16ed8971569e44e49dda062f1f8eb2c4c304d5c471",
+      "source_seal_id": "sha256:ae1780461b7aebae15ccd4c694a1ab0207fd14e4f4afbf7150414d5d0712843f",
+      "source_task": {
+        "draw": 2,
+        "key": "t-08-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99382
+      }
+    },
+    {
+      "family": "map_navigation",
+      "floor": 14,
+      "id": "p2-late-map",
+      "prefix_native_deliveries": 227,
+      "root_input_id": "sha256:3822333b4f4a15a056fb647f9dcae8ac2db3e619db4cf8d21176bfe782c7ad92",
+      "source_seal_id": "sha256:1bbdf65af7149b56365cbdb1fd3a1f40dba7176c281864f28d27581914c2565e",
+      "source_task": {
+        "draw": 1,
+        "key": "t-02-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99321
+      }
+    },
+    {
+      "family": "combat_turn",
+      "floor": 9,
+      "id": "p2-middle-combat",
+      "prefix_native_deliveries": 121,
+      "root_input_id": "sha256:6238d351029e880495048d82753c52a330069a1561581407be4fd550a6051bf8",
+      "source_seal_id": "sha256:ef62576419bf73914645f81eb11bf5c282e0b50cb806a5144ef835b9c0dac54b",
+      "source_task": {
+        "draw": 2,
+        "key": "t-03-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99332
+      }
+    },
+    {
+      "family": "map_navigation",
+      "floor": 9,
+      "id": "p2-middle-map",
+      "prefix_native_deliveries": 144,
+      "root_input_id": "sha256:645c5275715cad47d0e9dd726d0686f7e55f07b9204a49e79dcc19e4fe84aca0",
+      "source_seal_id": "sha256:457104f6cf22b4a29368a6a74dd9f903f6e516b6ec1cabb1079082c13d7b999a",
+      "source_task": {
+        "draw": 0,
+        "key": "t-05-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99350
+      }
+    },
+    {
+      "family": "combat_turn",
+      "floor": 17,
+      "id": "p3-late-combat",
+      "prefix_native_deliveries": 240,
+      "root_input_id": "sha256:0b47b770ab45ac6b22a92720b5ddeebca7791ced0d5cbf8132b588f0eff708c1",
+      "source_seal_id": "sha256:94287794c27dca393ef52a727032aa189f26bb19f052e3cc59383b5a8f4536fd",
+      "source_task": {
+        "draw": 0,
+        "key": "t-07-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99470
+      }
+    },
+    {
+      "family": "map_navigation",
+      "floor": 14,
+      "id": "p3-late-map",
+      "prefix_native_deliveries": 232,
+      "root_input_id": "sha256:e3590c26e94663069d74b7f11e0441a110d729809cdabe18ace1482e251114ff",
+      "source_seal_id": "sha256:3c304410737a721ddb213a08fa81c4806f40a287731e9aedb6ea311db38068f4",
+      "source_task": {
+        "draw": 1,
+        "key": "t-02-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99421
+      }
+    },
+    {
+      "family": "combat_turn",
+      "floor": 9,
+      "id": "p3-middle-combat",
+      "prefix_native_deliveries": 77,
+      "root_input_id": "sha256:9222188b0e533d9982278814bfac575b528d685b0f848c5d153cfa3fe1e17e92",
+      "source_seal_id": "sha256:d2e7c8b9ffaf4d629689ad4faf50814ee8d7abea489796e01b5bc83fac605e0b",
+      "source_task": {
+        "draw": 0,
+        "key": "t-06-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99460
+      }
+    },
+    {
+      "family": "map_navigation",
+      "floor": 9,
+      "id": "p3-middle-map",
+      "prefix_native_deliveries": 198,
+      "root_input_id": "sha256:43b6e24913125b03641d56f72267138bbcd20a9a3f85e5c5f9a964ef3c4cbd13",
+      "source_seal_id": "sha256:b9d194382f6ebcad526ac3a848e25415c8bb0afd7307987243134992127c171d",
+      "source_task": {
+        "draw": 1,
+        "key": "t-04-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99441
+      }
+    }
+  ],
+  "schema_version": "native-a8-model-owned-coverage-v1",
+  "score_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "study": [
+    {
+      "key": "normal-01-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T001",
+      "seed_id": 410001
+    },
+    {
+      "key": "normal-01-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T001",
+      "seed_id": 410001
+    },
+    {
+      "key": "normal-02-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T002",
+      "seed_id": 410002
+    },
+    {
+      "key": "normal-02-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T002",
+      "seed_id": 410002
+    },
+    {
+      "key": "normal-03-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T003",
+      "seed_id": 410003
+    },
+    {
+      "key": "normal-03-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T003",
+      "seed_id": 410003
+    },
+    {
+      "key": "normal-04-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T004",
+      "seed_id": 410004
+    },
+    {
+      "key": "normal-04-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T004",
+      "seed_id": 410004
+    },
+    {
+      "key": "normal-05-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T005",
+      "seed_id": 410005
+    },
+    {
+      "key": "normal-05-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T005",
+      "seed_id": 410005
+    },
+    {
+      "key": "normal-06-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T006",
+      "seed_id": 410006
+    },
+    {
+      "key": "normal-06-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T006",
+      "seed_id": 410006
+    },
+    {
+      "key": "normal-07-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T007",
+      "seed_id": 410007
+    },
+    {
+      "key": "normal-07-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T007",
+      "seed_id": 410007
+    },
+    {
+      "key": "normal-08-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T008",
+      "seed_id": 410008
+    },
+    {
+      "key": "normal-08-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T008",
+      "seed_id": 410008
+    },
+    {
+      "key": "normal-09-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T009",
+      "seed_id": 410009
+    },
+    {
+      "key": "normal-09-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T009",
+      "seed_id": 410009
+    },
+    {
+      "key": "normal-10-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T010",
+      "seed_id": 410010
+    },
+    {
+      "key": "normal-10-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T010",
+      "seed_id": 410010
+    },
+    {
+      "key": "normal-11-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T011",
+      "seed_id": 410011
+    },
+    {
+      "key": "normal-11-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T011",
+      "seed_id": 410011
+    },
+    {
+      "key": "normal-12-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T012",
+      "seed_id": 410012
+    },
+    {
+      "key": "normal-12-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T012",
+      "seed_id": 410012
+    },
+    {
+      "key": "normal-13-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T013",
+      "seed_id": 410013
+    },
+    {
+      "key": "normal-13-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T013",
+      "seed_id": 410013
+    },
+    {
+      "key": "normal-14-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T014",
+      "seed_id": 410014
+    },
+    {
+      "key": "normal-14-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T014",
+      "seed_id": 410014
+    },
+    {
+      "key": "normal-15-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T015",
+      "seed_id": 410015
+    },
+    {
+      "key": "normal-15-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T015",
+      "seed_id": 410015
+    },
+    {
+      "key": "normal-16-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T016",
+      "seed_id": 410016
+    },
+    {
+      "key": "normal-16-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T016",
+      "seed_id": 410016
+    },
+    {
+      "key": "normal-17-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T017",
+      "seed_id": 410017
+    },
+    {
+      "key": "normal-17-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T017",
+      "seed_id": 410017
+    },
+    {
+      "key": "normal-18-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T018",
+      "seed_id": 410018
+    },
+    {
+      "key": "normal-18-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T018",
+      "seed_id": 410018
+    },
+    {
+      "key": "normal-19-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T019",
+      "seed_id": 410019
+    },
+    {
+      "key": "normal-19-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T019",
+      "seed_id": 410019
+    },
+    {
+      "key": "normal-20-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T020",
+      "seed_id": 410020
+    },
+    {
+      "key": "normal-20-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T020",
+      "seed_id": 410020
+    },
+    {
+      "key": "normal-21-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T021",
+      "seed_id": 410021
+    },
+    {
+      "key": "normal-21-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T021",
+      "seed_id": 410021
+    },
+    {
+      "key": "normal-22-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T022",
+      "seed_id": 410022
+    },
+    {
+      "key": "normal-22-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T022",
+      "seed_id": 410022
+    },
+    {
+      "key": "normal-23-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T023",
+      "seed_id": 410023
+    },
+    {
+      "key": "normal-23-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T023",
+      "seed_id": 410023
+    },
+    {
+      "key": "normal-24-p2",
+      "partition": "train",
+      "player": 2,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T024",
+      "seed_id": 410024
+    },
+    {
+      "key": "normal-24-p3",
+      "partition": "train",
+      "player": 3,
+      "round": 1,
+      "seed": "SP1RESH1FTA8CV1T024",
+      "seed_id": 410024
+    },
+    {
+      "key": "p2-late-combat-draw-0",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-late-combat",
+      "seed": "SP1RESH1FTA8WR1T008",
+      "seed_id": 99382
+    },
+    {
+      "key": "p2-late-combat-draw-1",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-late-combat",
+      "seed": "SP1RESH1FTA8WR1T008",
+      "seed_id": 99382
+    },
+    {
+      "key": "p2-late-combat-draw-2",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-late-combat",
+      "seed": "SP1RESH1FTA8WR1T008",
+      "seed_id": 99382
+    },
+    {
+      "key": "p2-late-map-draw-0",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-late-map",
+      "seed": "SP1RESH1FTA8WR1T002",
+      "seed_id": 99321
+    },
+    {
+      "key": "p2-late-map-draw-1",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-late-map",
+      "seed": "SP1RESH1FTA8WR1T002",
+      "seed_id": 99321
+    },
+    {
+      "key": "p2-late-map-draw-2",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-late-map",
+      "seed": "SP1RESH1FTA8WR1T002",
+      "seed_id": 99321
+    },
+    {
+      "key": "p2-middle-combat-draw-0",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T003",
+      "seed_id": 99332
+    },
+    {
+      "key": "p2-middle-combat-draw-1",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T003",
+      "seed_id": 99332
+    },
+    {
+      "key": "p2-middle-combat-draw-2",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T003",
+      "seed_id": 99332
+    },
+    {
+      "key": "p2-middle-map-draw-0",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-middle-map",
+      "seed": "SP1RESH1FTA8WR1T005",
+      "seed_id": 99350
+    },
+    {
+      "key": "p2-middle-map-draw-1",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-middle-map",
+      "seed": "SP1RESH1FTA8WR1T005",
+      "seed_id": 99350
+    },
+    {
+      "key": "p2-middle-map-draw-2",
+      "partition": "continuation_training_only",
+      "player": 2,
+      "root": "p2-middle-map",
+      "seed": "SP1RESH1FTA8WR1T005",
+      "seed_id": 99350
+    },
+    {
+      "key": "p3-late-combat-draw-0",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-late-combat",
+      "seed": "SP1RESH1FTA8WR1T007",
+      "seed_id": 99470
+    },
+    {
+      "key": "p3-late-combat-draw-1",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-late-combat",
+      "seed": "SP1RESH1FTA8WR1T007",
+      "seed_id": 99470
+    },
+    {
+      "key": "p3-late-combat-draw-2",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-late-combat",
+      "seed": "SP1RESH1FTA8WR1T007",
+      "seed_id": 99470
+    },
+    {
+      "key": "p3-late-map-draw-0",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-late-map",
+      "seed": "SP1RESH1FTA8WR1T002",
+      "seed_id": 99421
+    },
+    {
+      "key": "p3-late-map-draw-1",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-late-map",
+      "seed": "SP1RESH1FTA8WR1T002",
+      "seed_id": 99421
+    },
+    {
+      "key": "p3-late-map-draw-2",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-late-map",
+      "seed": "SP1RESH1FTA8WR1T002",
+      "seed_id": 99421
+    },
+    {
+      "key": "p3-middle-combat-draw-0",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T006",
+      "seed_id": 99460
+    },
+    {
+      "key": "p3-middle-combat-draw-1",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T006",
+      "seed_id": 99460
+    },
+    {
+      "key": "p3-middle-combat-draw-2",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-middle-combat",
+      "seed": "SP1RESH1FTA8WR1T006",
+      "seed_id": 99460
+    },
+    {
+      "key": "p3-middle-map-draw-0",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-middle-map",
+      "seed": "SP1RESH1FTA8WR1T004",
+      "seed_id": 99441
+    },
+    {
+      "key": "p3-middle-map-draw-1",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-middle-map",
+      "seed": "SP1RESH1FTA8WR1T004",
+      "seed_id": 99441
+    },
+    {
+      "key": "p3-middle-map-draw-2",
+      "partition": "continuation_training_only",
+      "player": 3,
+      "root": "p3-middle-map",
+      "seed": "SP1RESH1FTA8WR1T004",
+      "seed_id": 99441
+    }
+  ],
+  "workspace": "artifacts/native-a8-model-owned-coverage/collection-v1"
+}

@@ -1,0 +1,152 @@
+{
+  "adaptive_controller_allowed": false,
+  "admission": {
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v3-admission-v1.json",
+    "report_id": "sha256:80256f93a495cc95066a4fec9622cfac71ad565be606d2cc6f35b73ad50105ab",
+    "sha256": "da33eb789483769862962ac89d1c19f44a66d46c07e68acf0a7a365748e19683"
+  },
+  "date": "2026-10-14",
+  "dense_vegetation_regression": {
+    "path": "artifacts/native-learning/dense-vegetation-regression-v5/summary.json",
+    "report_id": "sha256:f39242619c81864dae29cf52b9cb566c00016ab745eb41582fdfb755f3c1b478",
+    "sha256": "915e7ede206f4fc3c9a433f9969197138918637fff36698b93319e56b0ffa73f"
+  },
+  "fresh_initialization": {
+    "path": "artifacts/native-learning/pilot-v3-fresh-initialization.json",
+    "sha256": "6fc5295750f289998d1f5756be7604baa7cbf4dfc002d75777692b96c9aa551c"
+  },
+  "game_apps_created": 0,
+  "gameplay_strength_proven": false,
+  "learning_control": {
+    "completed_games": 4,
+    "optimizer_steps": 6,
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v6/summary.json",
+    "report_id": "sha256:98ff75ceee2b08b61f50cdc1228c4ba8bcb0447466657b78c37f2810e104da0b",
+    "sampled_decisions_verified": 209,
+    "sha256": "87e7332e891188e6d2d9c541e16ea1ae0a10cb3f7427854d540046db492ec07b",
+    "wall_seconds": 17.18519724998623
+  },
+  "liveness_policy": {
+    "forced_actions": false,
+    "id": "public_exploration_bounded_v1",
+    "maximum_consecutive_identical_observations": 8,
+    "maximum_visits_per_public_state": 64
+  },
+  "long_pilot_launched_by_codex": false,
+  "next_command": "bash scripts/train-native-a8-ppo-v3.sh",
+  "owner_choice": {
+    "next_pilot": "start_afresh",
+    "old_results_and_checkpoints_preserved": true,
+    "original_17473_parameters_exactly_preserved": true,
+    "starting_optimizer_steps": 0,
+    "trained_v2_weights_loaded": false
+  },
+  "owner_result": {
+    "completed_games": 137,
+    "completed_training_rounds": 3,
+    "evidence": {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v2/summary.json",
+      "report_id": "sha256:1539b6da9aa57180f54e07c9ee8d3a7514f5517fdbcb83dc64512a6cfcaebd3e",
+      "sha256": "4f709fc433db2e54735d7c71509e31d0fc9f8aeff8bf288a2ecd3f66e9de7ed5"
+    },
+    "failed_games": 7,
+    "independent_development_opened": false,
+    "last_panel_failures": 3,
+    "not_attempted_games": 192,
+    "optimizer_steps": 222,
+    "planned_games": 336,
+    "recorded_games": 144,
+    "round_4_updated": false,
+    "sampled_decisions_verified": 9307,
+    "wins": 0
+  },
+  "planned_new_attempts": 336,
+  "preflight": {
+    "path": "artifacts/native-learning/pilot-v3-preflight.json",
+    "sha256": "3b726803c4e5da9015a7985a8566b830f66318c16ef4b3403ebc32e230f5e561"
+  },
+  "public_exploration_regression": {
+    "path": "artifacts/native-learning/public-exploration-regression-v1/summary.json",
+    "report_id": "sha256:fef128b09284c8412f4a4ab3072985313138932509801eb1b835fb38ba8c259d",
+    "sha256": "675f7148a6cae8742b77a467f6ec5490d9f6f59ba0c55544112c68b885a1b5ea"
+  },
+  "repairs": {
+    "build": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v28.json",
+      "report_id": "sha256:711a3e59564f5142e6457eb47765b9d27556d62b2784330eaf8f0dd47a48052a",
+      "sha256": "bc1dfd401091fa40eae7a1bc8df21de6ef487a2e3f2523d715d614a14097aca8"
+    },
+    "event_exception_stack_preserved": true,
+    "event_methods": 9,
+    "fake_rendered_game_singleton_created": false,
+    "host_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v28.json",
+    "host_mvid": "f856d15e-3189-421a-920b-3bd1acbe3ea3",
+    "host_sha256": "7a99ca87a0947885feabd5ba020495c4cdd0e42d5e24c36c17b1c40b9b9baa16",
+    "inventory": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-event-v25-development/targeted-replay-v28/presentation-inventory-45.json",
+      "sha256": "315b119cf402993eaa57f1cf0648997136e8ea01a0c8f85f666795e45a175369"
+    },
+    "methods_per_event": {
+      "Amalgamator": 2,
+      "DenseVegetation": 2,
+      "DollRoom": 2,
+      "JungleMazeAdventure": 2,
+      "PunchOff": 1
+    },
+    "native_game_assembly_unchanged": true,
+    "presentation_call_sites": 19
+  },
+  "report_id": "sha256:82187265967c8e6eb29fe92a50e66109d635176456dcd72abf98a021a69d58a8",
+  "schema_version": "actual-engine-event-presentation-repair-evidence-v1",
+  "scope": "frozen_v0.111.0_41cef1ea_Ironclad_A8_public_policy_only_pilot",
+  "targeted_failed_choice_replays": {
+    "cases": [
+      {
+        "evidence": {
+          "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-event-v25-development/targeted-replay-v28/result-45.json",
+          "report_id": "sha256:39d0bdb74256a2d5d384dacfbc5c935f0e816896c0ecb4e533bae13925e87dea",
+          "sha256": "41daead36e1f005b857d665537f0441ca2ac60c59744557b065959b7fd8884ba"
+        },
+        "maximum_floor": 11,
+        "native_ending_evidence_agrees": true,
+        "replayed_public_choices": 27,
+        "seed_id": 45,
+        "victory": false
+      },
+      {
+        "evidence": {
+          "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-event-v25-development/targeted-replay-v28/result-44.json",
+          "report_id": "sha256:49f7aca1cccd4c8b296421ca41f764396af99f7b927f9b4333cf84bfa0c90f55",
+          "sha256": "14360b864a2559dc011eb90c3c9c7d14ae1bc6256227118634d03fe640c5beb8"
+        },
+        "maximum_floor": 11,
+        "native_ending_evidence_agrees": true,
+        "replayed_public_choices": 79,
+        "seed_id": 44,
+        "victory": false
+      }
+    ],
+    "execution": "private_development_candidate_verified_byte_identical_to_both_final_pinned_builds",
+    "jungle_gold_delta": 42,
+    "jungle_hp_unchanged": true,
+    "learning_examples": 0,
+    "ordinary_native_endings": 2,
+    "punch_injury_delta": 1,
+    "punch_native_relic_offered": true
+  },
+  "verification": {
+    "node_checks": "artifacts/native-event-node-check-v28.log",
+    "python_checks": "artifacts/native-event-repository-check-v28-fresh.log",
+    "python_tests_passed": 1328,
+    "selected_node_tests_passed": 10
+  },
+  "worker_qualification": {
+    "completed_games": 12,
+    "decisions": 1214,
+    "failed_games": 0,
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v9/summary.json",
+    "report_id": "sha256:c0f961b95053b36a4ce38157cbee657cbd7dbe42cd7adf79c6d9e0fd8144da77",
+    "sha256": "c0ef49461af9aac1250543e25a79e0061aeea1211947921700784a7675a0d1ae",
+    "wall_seconds": 17.546132541028783
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "full-run-backend-repair-config-v1",
+  "base_upstream": "artifacts/backend/evangambit-v0.107.1",
+  "base_revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+  "base_manifest": "manifests/patches/sts2-v0.107.1-evangambit-37e4264-macos-arm64-admitted.json",
+  "base_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+  "patch": {
+    "path": "backend-patches/full-run-completion-v1/run-completion.patch",
+    "sha256": "0a2dcad2e0e2d87b4e43925e8a0e60fbd690e464628a47b28909ba83ff308dc2"
+  },
+  "regression_tests": {
+    "path": "backend-patches/full-run-completion-v1/SpireShiftFullRunCompletionTests.cs",
+    "sha256": "ffe2b1e147597fb10628d14e9635aeed1b96924b5b7e9a3aadb09c51ecdc94cf"
+  },
+  "engine_source": {
+    "path": "src/Sts2Emulator/Core/Run/RunEngine.cs",
+    "base_sha256": "582e8c1c3237d1afc9215cb398a2015745bd932de8b558ea19441cbe5c7fd0cb",
+    "repaired_sha256": "74b0bad3b3ffb189d39e0237c95820dda5af2bbe15367819f3626f368c9e70dc"
+  },
+  "candidate_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v1",
+  "output_dir": "artifacts/backend-repair/full-run-completion-v1",
+  "runtime": "osx-arm64",
+  "resource_limits": {
+    "wall_seconds": 1800,
+    "cpu_seconds": 7200,
+    "memory_bytes": 12000000000,
+    "storage_bytes": 4000000000
+  },
+  "automatic_training": false,
+  "automatic_admission": false,
+  "minimum_regression_tests": 9,
+  "config_id": "sha256:214b5fdb1bc667b034d1417b0c3be2963f234a25533853707fcdee677c172cb1"
+}

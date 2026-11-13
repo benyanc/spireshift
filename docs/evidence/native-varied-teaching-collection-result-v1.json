@@ -1,0 +1,126 @@
+{
+  "actual_deliveries_independently_reconstructed": 6738,
+  "adaptive_controller_allowed": false,
+  "all_21669_prior_protected_files_exact": true,
+  "all_caps_are_declared_branch_round_limits": true,
+  "artifact_retention": "preserve_all_source_branch_confirmation_caps_and_sealed_units_no_rerun",
+  "assessment_resource": {
+    "path": "artifacts/resources/varied-teaching-collection-assessment-v1.json",
+    "sha256": "28715ae4efc8b5f8f8411de3abd03d746a2b0c003cbc4e2e1a7a19df0483aa60"
+  },
+  "assessment_resource_id": "sha256:ed25758db6181cd1ebb65b1416951a30a7ba3966d7321a4e8223b687a8dda5af",
+  "automatic_follow_up": false,
+  "bank_id": "sha256:0099b16f0b22b15b83d0a10f1525460fbf13eb8bd9d25d1cfccca5bedda340df",
+  "candidate_status_counts": {
+    "capped": 8,
+    "complete": 56
+  },
+  "capped_proposals_supply_no_labels": true,
+  "claim_scope": "public_lesson_bank_quality_and_frozen_input_integrity_only",
+  "config_id": "sha256:4bbaa639528094a3b18e746d211d816eeee6b9e271734d5f9cbea6e1f8c125c7",
+  "confirmed_strict_improvements": [
+    {
+      "floor": 2,
+      "hp_gain": 1.0,
+      "permanent_and_consumable_resources_preserved": true,
+      "reference_hp": 49.0,
+      "reference_outcome": "win",
+      "root_index": 0,
+      "selected_candidate": 1,
+      "source_player": 2,
+      "teacher_hp": 50.0,
+      "teacher_outcome": "win",
+      "world": "SP1RESH1FTVTF001"
+    },
+    {
+      "floor": 2,
+      "hp_gain": 1.0,
+      "permanent_and_consumable_resources_preserved": true,
+      "reference_hp": 60.0,
+      "reference_outcome": "win",
+      "root_index": 8,
+      "selected_candidate": 3,
+      "source_player": 2,
+      "teacher_hp": 61.0,
+      "teacher_outcome": "win",
+      "world": "SP1RESH1FTVTF005"
+    },
+    {
+      "floor": 2,
+      "hp_gain": 5.0,
+      "permanent_and_consumable_resources_preserved": true,
+      "reference_hp": 48.0,
+      "reference_outcome": "win",
+      "root_index": 12,
+      "selected_candidate": 1,
+      "source_player": 2,
+      "teacher_hp": 53.0,
+      "teacher_outcome": "win",
+      "world": "SP1RESH1FTVTF007"
+    }
+  ],
+  "deck_compositions_in_admitted_lessons": 12,
+  "enemy_compositions_in_admitted_lessons": 8,
+  "environment_id": "sha256:4c445e402d31ceea743165d203b03c1b9b6744f1a6a8396a797bb4a412efbc81",
+  "fitting_roots_considered": 16,
+  "fitting_worlds": 8,
+  "guard_receipt_id": "sha256:e61b1c0eedea55fa880e8f898396fe74b9456d1a3c73cc3aacc3b9e14e391b39",
+  "lesson_bank": {
+    "path": "artifacts/native-varied-teaching/study-v1/collection/bank.json",
+    "sha256": "db5bb4f1de60b33369f0483f61cc4004e97b7b2db198225f796f96df9b572081"
+  },
+  "limitations": [
+    "All three improvements preserve an already-won fight; HP gains are 1, 1 and 5.",
+    "All improved roots are early floor-2 fights sourced by player 2. No broader teaching or full-run strength gain is established.",
+    "The diagnostic uses privileged fixed-world outcomes for teacher selection; those outcomes stay outside student inputs and ordinary PPO.",
+    "Changed final policies and routed modes still require their own official/native canaries before withheld/full-run evaluation."
+  ],
+  "main_fitting_started": false,
+  "main_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-varied-v1.json",
+    "sha256": "54bf314aafb7c87da82124bccf829743e61dbc05b007170ae36b28de1898e440"
+  },
+  "meaningful_plan_steps": {
+    "reference": 164,
+    "teacher": 161
+  },
+  "natural_source_games": 12,
+  "next_stage": "separately_selected_256_updates_on_four_fixed_reference_teacher_copies",
+  "next_stage_automatically_started": false,
+  "optimizer_updates": 0,
+  "ordinary_PPO_allowed": false,
+  "original_weights_and_complete_Adam_unchanged": true,
+  "playing_strength_evaluated": false,
+  "promotion_allowed": false,
+  "proposed_candidate_slots": 64,
+  "quality": {
+    "checks": {
+      "both_source_players": true,
+      "deck_compositions": true,
+      "enemy_compositions": true,
+      "independent_fitting_worlds": true,
+      "strictly_improved_worlds": true
+    },
+    "fitting_worlds": 8,
+    "passed": true,
+    "strictly_improved_worlds": 3
+  },
+  "report_id": "sha256:2c0775a47728fe33e5c85155edf57e10d4c4672ec3e54e886afd30bfe5325eaa",
+  "saved_assessment": {
+    "path": "artifacts/native-varied-teaching/collection-assessment-v1/report.json",
+    "sha256": "7414258c984eedf92ddc68dcf35c2b059c8a22950d1c2f2256a3127a13fd24aa"
+  },
+  "saved_assessment_id": "sha256:4744faf9d50437e4049cba4b62c5a81d363e0c94ed22efc80e490ec909cfaf95",
+  "schema_version": "native-varied-curriculum-collection-result-evidence-v1",
+  "sealed_units_verified": 79,
+  "selected_public_lessons": 12,
+  "source_report": {
+    "path": "artifacts/native-varied-teaching/study-v1/collection/report.json",
+    "sha256": "db11673a8f41d920ca33ceda1d8a2dd7b80a5dc0d7e2fa3bfde9a09f75a925d2"
+  },
+  "source_report_id": "sha256:62e8fe8810f66c328eed79e287e60ef960cf0c38fe8053f52d9848513822826c",
+  "source_resource_id": "sha256:6401a7d90fe59e345bb6a04da9d5042122791fb0451e0d12ad642571c52d52c0",
+  "status": "finite_curriculum_independently_verified_ready_for_declared_copy_fitting",
+  "strictly_improved_worlds": 3,
+  "withheld_worlds": 4
+}

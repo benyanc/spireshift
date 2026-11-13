@@ -1,0 +1,264 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:61d235ff4dcbcfaaecd3540bbfd60a9e5b1307b9ba7f42899d048036643cd88a",
+  "partition": "development",
+  "schema_version": "native-combat-behavior-seeds-v1",
+  "seeds": [
+    {
+      "id": 1800000,
+      "seed": "SP1RESH1FTGREEDYA8DEV0000"
+    },
+    {
+      "id": 1800001,
+      "seed": "SP1RESH1FTGREEDYA8DEV0001"
+    },
+    {
+      "id": 1800002,
+      "seed": "SP1RESH1FTGREEDYA8DEV0002"
+    },
+    {
+      "id": 1800003,
+      "seed": "SP1RESH1FTGREEDYA8DEV0003"
+    },
+    {
+      "id": 1800004,
+      "seed": "SP1RESH1FTGREEDYA8DEV0004"
+    },
+    {
+      "id": 1800005,
+      "seed": "SP1RESH1FTGREEDYA8DEV0005"
+    },
+    {
+      "id": 1800006,
+      "seed": "SP1RESH1FTGREEDYA8DEV0006"
+    },
+    {
+      "id": 1800007,
+      "seed": "SP1RESH1FTGREEDYA8DEV0007"
+    },
+    {
+      "id": 1800008,
+      "seed": "SP1RESH1FTGREEDYA8DEV0008"
+    },
+    {
+      "id": 1800009,
+      "seed": "SP1RESH1FTGREEDYA8DEV0009"
+    },
+    {
+      "id": 1800010,
+      "seed": "SP1RESH1FTGREEDYA8DEV0010"
+    },
+    {
+      "id": 1800011,
+      "seed": "SP1RESH1FTGREEDYA8DEV0011"
+    },
+    {
+      "id": 1800012,
+      "seed": "SP1RESH1FTGREEDYA8DEV0012"
+    },
+    {
+      "id": 1800013,
+      "seed": "SP1RESH1FTGREEDYA8DEV0013"
+    },
+    {
+      "id": 1800014,
+      "seed": "SP1RESH1FTGREEDYA8DEV0014"
+    },
+    {
+      "id": 1800015,
+      "seed": "SP1RESH1FTGREEDYA8DEV0015"
+    },
+    {
+      "id": 1800016,
+      "seed": "SP1RESH1FTGREEDYA8DEV0016"
+    },
+    {
+      "id": 1800017,
+      "seed": "SP1RESH1FTGREEDYA8DEV0017"
+    },
+    {
+      "id": 1800018,
+      "seed": "SP1RESH1FTGREEDYA8DEV0018"
+    },
+    {
+      "id": 1800019,
+      "seed": "SP1RESH1FTGREEDYA8DEV0019"
+    },
+    {
+      "id": 1800020,
+      "seed": "SP1RESH1FTGREEDYA8DEV0020"
+    },
+    {
+      "id": 1800021,
+      "seed": "SP1RESH1FTGREEDYA8DEV0021"
+    },
+    {
+      "id": 1800022,
+      "seed": "SP1RESH1FTGREEDYA8DEV0022"
+    },
+    {
+      "id": 1800023,
+      "seed": "SP1RESH1FTGREEDYA8DEV0023"
+    },
+    {
+      "id": 1800024,
+      "seed": "SP1RESH1FTGREEDYA8DEV0024"
+    },
+    {
+      "id": 1800025,
+      "seed": "SP1RESH1FTGREEDYA8DEV0025"
+    },
+    {
+      "id": 1800026,
+      "seed": "SP1RESH1FTGREEDYA8DEV0026"
+    },
+    {
+      "id": 1800027,
+      "seed": "SP1RESH1FTGREEDYA8DEV0027"
+    },
+    {
+      "id": 1800028,
+      "seed": "SP1RESH1FTGREEDYA8DEV0028"
+    },
+    {
+      "id": 1800029,
+      "seed": "SP1RESH1FTGREEDYA8DEV0029"
+    },
+    {
+      "id": 1800030,
+      "seed": "SP1RESH1FTGREEDYA8DEV0030"
+    },
+    {
+      "id": 1800031,
+      "seed": "SP1RESH1FTGREEDYA8DEV0031"
+    },
+    {
+      "id": 1800032,
+      "seed": "SP1RESH1FTGREEDYA8DEV0032"
+    },
+    {
+      "id": 1800033,
+      "seed": "SP1RESH1FTGREEDYA8DEV0033"
+    },
+    {
+      "id": 1800034,
+      "seed": "SP1RESH1FTGREEDYA8DEV0034"
+    },
+    {
+      "id": 1800035,
+      "seed": "SP1RESH1FTGREEDYA8DEV0035"
+    },
+    {
+      "id": 1800036,
+      "seed": "SP1RESH1FTGREEDYA8DEV0036"
+    },
+    {
+      "id": 1800037,
+      "seed": "SP1RESH1FTGREEDYA8DEV0037"
+    },
+    {
+      "id": 1800038,
+      "seed": "SP1RESH1FTGREEDYA8DEV0038"
+    },
+    {
+      "id": 1800039,
+      "seed": "SP1RESH1FTGREEDYA8DEV0039"
+    },
+    {
+      "id": 1800040,
+      "seed": "SP1RESH1FTGREEDYA8DEV0040"
+    },
+    {
+      "id": 1800041,
+      "seed": "SP1RESH1FTGREEDYA8DEV0041"
+    },
+    {
+      "id": 1800042,
+      "seed": "SP1RESH1FTGREEDYA8DEV0042"
+    },
+    {
+      "id": 1800043,
+      "seed": "SP1RESH1FTGREEDYA8DEV0043"
+    },
+    {
+      "id": 1800044,
+      "seed": "SP1RESH1FTGREEDYA8DEV0044"
+    },
+    {
+      "id": 1800045,
+      "seed": "SP1RESH1FTGREEDYA8DEV0045"
+    },
+    {
+      "id": 1800046,
+      "seed": "SP1RESH1FTGREEDYA8DEV0046"
+    },
+    {
+      "id": 1800047,
+      "seed": "SP1RESH1FTGREEDYA8DEV0047"
+    },
+    {
+      "id": 1800048,
+      "seed": "SP1RESH1FTGREEDYA8DEV0048"
+    },
+    {
+      "id": 1800049,
+      "seed": "SP1RESH1FTGREEDYA8DEV0049"
+    },
+    {
+      "id": 1800050,
+      "seed": "SP1RESH1FTGREEDYA8DEV0050"
+    },
+    {
+      "id": 1800051,
+      "seed": "SP1RESH1FTGREEDYA8DEV0051"
+    },
+    {
+      "id": 1800052,
+      "seed": "SP1RESH1FTGREEDYA8DEV0052"
+    },
+    {
+      "id": 1800053,
+      "seed": "SP1RESH1FTGREEDYA8DEV0053"
+    },
+    {
+      "id": 1800054,
+      "seed": "SP1RESH1FTGREEDYA8DEV0054"
+    },
+    {
+      "id": 1800055,
+      "seed": "SP1RESH1FTGREEDYA8DEV0055"
+    },
+    {
+      "id": 1800056,
+      "seed": "SP1RESH1FTGREEDYA8DEV0056"
+    },
+    {
+      "id": 1800057,
+      "seed": "SP1RESH1FTGREEDYA8DEV0057"
+    },
+    {
+      "id": 1800058,
+      "seed": "SP1RESH1FTGREEDYA8DEV0058"
+    },
+    {
+      "id": 1800059,
+      "seed": "SP1RESH1FTGREEDYA8DEV0059"
+    },
+    {
+      "id": 1800060,
+      "seed": "SP1RESH1FTGREEDYA8DEV0060"
+    },
+    {
+      "id": 1800061,
+      "seed": "SP1RESH1FTGREEDYA8DEV0061"
+    },
+    {
+      "id": 1800062,
+      "seed": "SP1RESH1FTGREEDYA8DEV0062"
+    },
+    {
+      "id": 1800063,
+      "seed": "SP1RESH1FTGREEDYA8DEV0063"
+    }
+  ]
+}

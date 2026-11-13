@@ -1,0 +1,52 @@
+{
+  "schema_version": "engine-shop-bridges-config-v1",
+  "stage": "owner_privileged_shop_fixture_differentials_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "template": "configs/engine-qualification/sts2-v0.111.0-shop-template-v2.json",
+  "template_id": "sha256:642baabfda5fa519fb0e9724b3b410e8f90a518d0ddf9082d40d1b1091e31b29",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridges-v2",
+  "max_wall_seconds": 900,
+  "training_allowed": false,
+  "cases": [
+    {
+      "case_id": "seed-03-ordinary-repeat-01",
+      "seed": "SPIRESHIFTSHOPBRIDGE003",
+      "scenario": "ordinary-purchases-removal"
+    },
+    {
+      "case_id": "seed-03-courier-repeat-01",
+      "seed": "SPIRESHIFTSHOPBRIDGE003",
+      "scenario": "courier-restock-removal"
+    },
+    {
+      "case_id": "seed-06-ordinary-repeat-01",
+      "seed": "SPIRESHIFTSHOPBRIDGE006",
+      "scenario": "ordinary-purchases-removal"
+    },
+    {
+      "case_id": "seed-06-courier-repeat-01",
+      "seed": "SPIRESHIFTSHOPBRIDGE006",
+      "scenario": "courier-restock-removal"
+    },
+    {
+      "case_id": "seed-03-ordinary-repeat-02",
+      "seed": "SPIRESHIFTSHOPBRIDGE003",
+      "scenario": "ordinary-purchases-removal"
+    },
+    {
+      "case_id": "seed-03-courier-repeat-02",
+      "seed": "SPIRESHIFTSHOPBRIDGE003",
+      "scenario": "courier-restock-removal"
+    },
+    {
+      "case_id": "seed-06-ordinary-repeat-02",
+      "seed": "SPIRESHIFTSHOPBRIDGE006",
+      "scenario": "ordinary-purchases-removal"
+    },
+    {
+      "case_id": "seed-06-courier-repeat-02",
+      "seed": "SPIRESHIFTSHOPBRIDGE006",
+      "scenario": "courier-restock-removal"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "engine-starting-bridges-config-v1",
+  "stage": "owner_native_shipped_starting_inputs_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_template": "configs/engine-qualification/sts2-v0.111.0-cli-checkpoint-projection-localization-v6-retry1.json",
+  "native_template_id": "sha256:3902d4b400878df1e9dcffdedea1b3128fea7aa6b70f02fb399e357544b102e2",
+  "shipped_template": "configs/engine-qualification/sts2-v0.111.0-shipped-checkpoint-v2.json",
+  "shipped_template_id": "sha256:8754f9241499df9de2fd7dd4bd92a13369a14fdd6df319cf95d611ea494e00e9",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/starting-bridges-v1",
+  "max_wall_seconds": 900,
+  "successful_payload_policy": "remove_after_verified_success",
+  "cases": [
+    {
+      "case_id": "seed-01-repeat-01",
+      "seed": "SPIRESHIFTSTART001"
+    },
+    {
+      "case_id": "seed-02-repeat-01",
+      "seed": "SPIRESHIFTSTART002"
+    },
+    {
+      "case_id": "seed-03-repeat-01",
+      "seed": "SPIRESHIFTSTART003"
+    },
+    {
+      "case_id": "seed-04-repeat-01",
+      "seed": "SPIRESHIFTSTART004"
+    },
+    {
+      "case_id": "seed-05-repeat-01",
+      "seed": "SPIRESHIFTSTART005"
+    },
+    {
+      "case_id": "seed-06-repeat-01",
+      "seed": "SPIRESHIFTSTART006"
+    },
+    {
+      "case_id": "seed-01-repeat-02",
+      "seed": "SPIRESHIFTSTART001"
+    },
+    {
+      "case_id": "seed-02-repeat-02",
+      "seed": "SPIRESHIFTSTART002"
+    },
+    {
+      "case_id": "seed-03-repeat-02",
+      "seed": "SPIRESHIFTSTART003"
+    },
+    {
+      "case_id": "seed-04-repeat-02",
+      "seed": "SPIRESHIFTSTART004"
+    },
+    {
+      "case_id": "seed-05-repeat-02",
+      "seed": "SPIRESHIFTSTART005"
+    },
+    {
+      "case_id": "seed-06-repeat-02",
+      "seed": "SPIRESHIFTSTART006"
+    }
+  ],
+  "training_allowed": false
+}

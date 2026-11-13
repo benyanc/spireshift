@@ -1,0 +1,9 @@
+{
+  "schema_version": "engine-source-config-v1",
+  "stage": "private_source_inspection_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1",
+  "max_wall_seconds": 1200,
+  "training_allowed": false
+}

@@ -1,0 +1,168 @@
+{
+  "environment_id": "sha256:ba4096d61dcf0f8f0e2267a40fa2bdfa4ce35b17fa238abf39453444e19e4dde",
+  "manifest_id": "sha256:2d93f2440c282f10647bbc14ff595b20f0094443764f70a28701eac11b732312",
+  "purpose": "frozen_final_fresh_full_game_evaluation_only",
+  "schema_version": "native-plan-teaching-seeds-v1",
+  "seeds": [
+    {
+      "id": 2601000,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM001"
+    },
+    {
+      "id": 2601001,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM002"
+    },
+    {
+      "id": 2601002,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM003"
+    },
+    {
+      "id": 2601003,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM004"
+    },
+    {
+      "id": 2601004,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM005"
+    },
+    {
+      "id": 2601005,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM006"
+    },
+    {
+      "id": 2601006,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM007"
+    },
+    {
+      "id": 2601007,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM008"
+    },
+    {
+      "id": 2601008,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM009"
+    },
+    {
+      "id": 2601009,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM010"
+    },
+    {
+      "id": 2601010,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM011"
+    },
+    {
+      "id": 2601011,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM012"
+    },
+    {
+      "id": 2601012,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM013"
+    },
+    {
+      "id": 2601013,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM014"
+    },
+    {
+      "id": 2601014,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM015"
+    },
+    {
+      "id": 2601015,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM016"
+    },
+    {
+      "id": 2601016,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM017"
+    },
+    {
+      "id": 2601017,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM018"
+    },
+    {
+      "id": 2601018,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM019"
+    },
+    {
+      "id": 2601019,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM020"
+    },
+    {
+      "id": 2601020,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM021"
+    },
+    {
+      "id": 2601021,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM022"
+    },
+    {
+      "id": 2601022,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM023"
+    },
+    {
+      "id": 2601023,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM024"
+    },
+    {
+      "id": 2601024,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM025"
+    },
+    {
+      "id": 2601025,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM026"
+    },
+    {
+      "id": 2601026,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM027"
+    },
+    {
+      "id": 2601027,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM028"
+    },
+    {
+      "id": 2601028,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM029"
+    },
+    {
+      "id": 2601029,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM030"
+    },
+    {
+      "id": 2601030,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM031"
+    },
+    {
+      "id": 2601031,
+      "partition": "development",
+      "seed": "SP1RESH1FTSTUDM032"
+    }
+  ]
+}

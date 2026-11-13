@@ -1,0 +1,35 @@
+{
+  "discount_factor": 1.0,
+  "evaluation_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "graduation": {
+    "minimum_development_runs": 64,
+    "minimum_development_victory_seeds": 3,
+    "minimum_train_victory_seeds": 3
+  },
+  "population_ranking": "victory_rate_then_auxiliary_progress_then_completion_rate",
+  "progress": {
+    "floor_scale": 16,
+    "loss_progress_weight": 0.25,
+    "total_acts": 3
+  },
+  "schema_version": "full-run-training-objective-v1",
+  "scope": {
+    "ascension": 8,
+    "character": "ironclad",
+    "ruleset_manifest_id": "sha256:ab32cf7075c080ec1f0104bf9feac17299361e345161daaf8e7a5febd863bacc"
+  },
+  "stage": "progress_bootstrap",
+  "training_objective_id": "full-run-progress-bootstrap-v1"
+}

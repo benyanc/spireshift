@@ -1,0 +1,316 @@
+{
+  "adaptive_controller_allowed": false,
+  "arms": {
+    "original": {
+      "act1_bosses_reached": 2,
+      "act1_clears": 0,
+      "losses_by_last_owner": {
+        "boss": 2,
+        "elite": 4,
+        "event_option": 1,
+        "normal": 9
+      },
+      "mean_maximum_floor": 9.9375,
+      "planned_games": 16,
+      "wins": 0
+    },
+    "pooled": {
+      "act1_bosses_reached": 2,
+      "act1_clears": 0,
+      "losses_by_last_owner": {
+        "boss": 2,
+        "elite": 4,
+        "normal": 10
+      },
+      "mean_maximum_floor": 9.5,
+      "planned_games": 16,
+      "wins": 0
+    },
+    "within_world": {
+      "act1_bosses_reached": 3,
+      "act1_clears": 0,
+      "losses_by_last_owner": {
+        "boss": 3,
+        "elite": 5,
+        "event_option": 1,
+        "normal": 7
+      },
+      "mean_maximum_floor": 10.8125,
+      "planned_games": 16,
+      "wins": 0
+    }
+  },
+  "audit_counts": {
+    "evaluation_choices": 7357,
+    "local_factors": 0,
+    "sealed_files": 5862,
+    "training_choices": 7246
+  },
+  "automatic_follow_up": false,
+  "comparisons": {
+    "pooled_minus_original": {
+      "floor_delta_interval_95_descriptive": [
+        -1.375,
+        0.1875
+      ],
+      "higher": 2,
+      "lower": 3,
+      "mean_floor_delta": -0.4375,
+      "same_choices_entire_trace": 0,
+      "tied": 11,
+      "win_rate_difference": [
+        0.0,
+        0.0
+      ]
+    },
+    "within_world_minus_original": {
+      "floor_delta_interval_95_descriptive": [
+        -0.25,
+        2.125
+      ],
+      "higher": 6,
+      "lower": 2,
+      "mean_floor_delta": 0.875,
+      "same_choices_entire_trace": 0,
+      "tied": 8,
+      "win_rate_difference": [
+        0.0,
+        0.0
+      ]
+    },
+    "within_world_minus_pooled": {
+      "floor_delta_interval_95_descriptive": [
+        0.0,
+        2.625
+      ],
+      "higher": 6,
+      "lower": 2,
+      "mean_floor_delta": 1.3125,
+      "same_choices_entire_trace": 1,
+      "tied": 8,
+      "win_rate_difference": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "config_id": "sha256:eac9a3f3dcafe860f34cfe4ee743780d224c7e1bb2691498d74aad6614241902",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "evaluation": {
+    "capped": 0,
+    "failed": 0,
+    "loss": 48,
+    "unattempted": 0,
+    "win": 0
+  },
+  "final_test_worlds_used": false,
+  "fits": {
+    "2": {
+      "checkpoints": {
+        "pooled": {
+          "model_id": "sha256:2e280c57059f890fac443fbfa2af00cb363bee1dddb2d2aead12294f83c45867",
+          "optimizer_id": "sha256:58f9c22e5f6872f19b535959c79f00e7eab2e696e4e205fadb016b636f7f649b",
+          "optimizer_steps": 5687,
+          "state_id": "sha256:6a04c22db73e628ad70e01d4962dbcd13a6294cada57733d3eeeefc79965f4d0"
+        },
+        "within_world": {
+          "model_id": "sha256:866141c2a59f551f5b96b27989531b9536087b45fd3c73fd920fbe9549c87020",
+          "optimizer_id": "sha256:1937c64475def669c24e9c0c06acdaa831994c0234c1929afcc23a86a7749228",
+          "optimizer_steps": 5687,
+          "state_id": "sha256:84009363600aa6dc549dc8513bf732f8f795c96983620221fd677b4ae340dfa6"
+        }
+      },
+      "critics_exactly_matched": true,
+      "initial_behavior_kl": 2.566118042440485e-31,
+      "native_decisions": 3687,
+      "optimizer_updates_per_copy": 29,
+      "player": 2,
+      "predecessor_state_id": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+      "training_games": 24,
+      "training_returns": {
+        "SP1RESH1FTA8WR1T001": [
+          0.019021739130434784,
+          0.020833333333333332,
+          0.0225
+        ],
+        "SP1RESH1FTA8WR1T002": [
+          0.028017241379310345,
+          0.03024193548387097,
+          0.01488095238095238
+        ],
+        "SP1RESH1FTA8WR1T003": [
+          0.019021739130434784,
+          0.017045454545454544,
+          0.0225
+        ],
+        "SP1RESH1FTA8WR1T004": [
+          0.020833333333333332,
+          0.017045454545454544,
+          0.01488095238095238
+        ],
+        "SP1RESH1FTA8WR1T005": [
+          0.02546296296296296,
+          0.019021739130434784,
+          0.019021739130434784
+        ],
+        "SP1RESH1FTA8WR1T006": [
+          0.0225,
+          0.02546296296296296,
+          0.019021739130434784
+        ],
+        "SP1RESH1FTA8WR1T007": [
+          0.017045454545454544,
+          0.017045454545454544,
+          0.017045454545454544
+        ],
+        "SP1RESH1FTA8WR1T008": [
+          0.019021739130434784,
+          0.019021739130434784,
+          0.032196969696969696
+        ]
+      },
+      "varied_worlds": 7,
+      "work": {
+        "pooled": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.0034712018097910143,
+          "optimizer_steps": 29,
+          "raw_advantage_mean": 0.001329292904162354,
+          "raw_advantage_std": 0.005021811502700635,
+          "stop_reason": "epoch_limit"
+        },
+        "within_world": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.0035707903850665363,
+          "optimizer_steps": 29,
+          "raw_advantage_mean": 0.0011571619945514439,
+          "raw_advantage_std": 0.005780173574830824,
+          "stop_reason": "epoch_limit"
+        }
+      }
+    },
+    "3": {
+      "checkpoints": {
+        "pooled": {
+          "model_id": "sha256:194d16fe14c1346198ac2c860f9e26f0fa23374927ad3894c9686d664afdf662",
+          "optimizer_id": "sha256:5cd4fe408915fa8e36640a5fdf7cc0877b4eea6caabb919531fa82dc14bf1c42",
+          "optimizer_steps": 6073,
+          "state_id": "sha256:40bcc06d5511f3b5a8dbfcc7bed30df20886309fa549d9d6823cf94873482fbd"
+        },
+        "within_world": {
+          "model_id": "sha256:e0f157e495a6b6353711c8b49db201a55977070d3e948288055bfd4859da606c",
+          "optimizer_id": "sha256:5836126e4a1cf62e4f2416c2c8ed92d59c326839f00d53759c37571119c48f3d",
+          "optimizer_steps": 6073,
+          "state_id": "sha256:3d8c66f3db038c0fb160fe1c707355b2761b73cd99c04395948868d0755b84ee"
+        }
+      },
+      "critics_exactly_matched": true,
+      "initial_behavior_kl": 3.0001691853654726e-31,
+      "native_decisions": 3559,
+      "optimizer_updates_per_copy": 28,
+      "player": 3,
+      "predecessor_state_id": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee",
+      "training_games": 24,
+      "training_returns": {
+        "SP1RESH1FTA8WR1T001": [
+          0.020833333333333332,
+          0.0225,
+          0.019021739130434784
+        ],
+        "SP1RESH1FTA8WR1T002": [
+          0.03024193548387097,
+          0.032196969696969696,
+          0.020833333333333332
+        ],
+        "SP1RESH1FTA8WR1T003": [
+          0.01488095238095238,
+          0.01488095238095238,
+          0.01488095238095238
+        ],
+        "SP1RESH1FTA8WR1T004": [
+          0.020833333333333332,
+          0.028017241379310345,
+          0.01488095238095238
+        ],
+        "SP1RESH1FTA8WR1T005": [
+          0.019021739130434784,
+          0.019021739130434784,
+          0.019021739130434784
+        ],
+        "SP1RESH1FTA8WR1T006": [
+          0.026785714285714284,
+          0.019021739130434784,
+          0.017045454545454544
+        ],
+        "SP1RESH1FTA8WR1T007": [
+          0.032196969696969696,
+          0.020833333333333332,
+          0.026785714285714284
+        ],
+        "SP1RESH1FTA8WR1T008": [
+          0.019021739130434784,
+          0.019021739130434784,
+          0.017045454545454544
+        ]
+      },
+      "varied_worlds": 6,
+      "work": {
+        "pooled": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.007204437002400146,
+          "optimizer_steps": 28,
+          "raw_advantage_mean": 0.0018385138718324382,
+          "raw_advantage_std": 0.006469832919537047,
+          "stop_reason": "epoch_limit"
+        },
+        "within_world": {
+          "epochs_completed": 1,
+          "final_behavior_joint_kl": 0.005849420502194074,
+          "optimizer_steps": 28,
+          "raw_advantage_mean": 0.001065840606049621,
+          "raw_advantage_std": 0.005493394508420042,
+          "stop_reason": "epoch_limit"
+        }
+      }
+    }
+  },
+  "fitting_qualified": true,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "minimum_varied_worlds_per_initializer": 4,
+  "native_game_launches": 0,
+  "official_live_qualification_granted": false,
+  "optimizer_updates_during_audit": 0,
+  "optimizer_updates_on_copies": 114,
+  "owner": {
+    "path": "artifacts/native-a8-world-credit/study-v3/attempt-1794195529702565000.json",
+    "report_id": "sha256:29a1dc1a4a388d368b0b86b7c5023c5b3613555c8b13822ee856174b4f498754",
+    "sha256": "ffdddbfa2da96c795c6bab383891e494f97c174e08d0991a4fcda37d9b036243"
+  },
+  "promotion_allowed": false,
+  "report_id": "sha256:97d9c0605c2140605f58078519677a2e7e8a01edc007e6603dc544acb6b2479f",
+  "resources": {
+    "path": "artifacts/native-a8-world-credit/study-v3-1794195529702565000-resources.json",
+    "report_id": "sha256:514a89c5cce9fa12d43fa6af460ec0834dbe98043c0a2eda0248fb218674e0cc",
+    "sha256": "1f29e421cfc34cb62d86cdbacccb64c3a3fa771b005c091e27b1e5d4b936befe"
+  },
+  "schema_version": "native-a8-world-credit-saved-audit-v1",
+  "status": "world_credit_saved_verified",
+  "training": {
+    "capped": 0,
+    "failed": 0,
+    "loss": 48,
+    "unattempted": 0,
+    "win": 0
+  },
+  "varied_worlds_by_initializer": {
+    "2": 7,
+    "3": 6
+  }
+}

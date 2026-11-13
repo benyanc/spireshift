@@ -1,0 +1,28 @@
+{
+  "first_unstarted_world": 71,
+  "implementation": {
+    "scripts/finish-a8-scoring-heads-holdout-v1.sh": "fe116558f0928e8a66100ba252c024f8e36ef630e4b497c63c30c851b75d0711",
+    "src/spireshift/native_a8_head_holdout_resume.py": "a24ae44ec351d15537962ea74d5e1c148f0a9f210393e58be4ffa0297f1d9e6f"
+  },
+  "limits": {
+    "cpu_seconds": 86400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 8000000000,
+    "wall_seconds": 7200
+  },
+  "parent_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-scoring-heads-grid-resume-v1.json",
+    "sha256": "defbd3f9d05043a6249ab66397985c7fe79bab16ffa7b4441ea90b3b0c75e104"
+  },
+  "parent_report": {
+    "path": "artifacts/native-a8-scoring-heads/grid-resume-v1/session-1794502069471384000.json",
+    "sha256": "eeb4a86dfce866ab3f99602a8814be25d9b6248075d83aa8679a3acd11604d16"
+  },
+  "parent_resources": {
+    "path": "artifacts/native-a8-scoring-heads/grid-resume-v1/resources-1794502069471384000.json",
+    "sha256": "f2e5377664bba6592420aa0245cf4594b8979eb1eee8609462ee830060f9b789"
+  },
+  "schema_version": "native-a8-scoring-heads-holdout-continuation-v1",
+  "stopped_evidence_id": "sha256:4bc19d6293651576de422ed22d6c5ca102d7e4e57095e19bc10eca06d505c58b",
+  "workspace": "artifacts/native-a8-scoring-heads/holdout-resume-v1"
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-modal-selector-belt-control-v1.json",
+    "sha256": "95ea1f007a3f3c7a4e6ab48b2db15f163d4994dccc3cb35b5df7aaf3e5713c42"
+  },
+  "wall_seconds": 340,
+  "cpu_seconds": 680,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

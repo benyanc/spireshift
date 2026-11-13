@@ -1,0 +1,558 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/run-level-trajectory-search-case-v3.json",
+  "title": "SpireShift Run-Level Trajectory Search Case v3",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "case_id",
+    "config_id",
+    "seed",
+    "partition",
+    "model_id",
+    "policy_id",
+    "ruleset_manifest_id",
+    "milestone_id",
+    "search_controller_id",
+    "hidden_state_resampling",
+    "status",
+    "error",
+    "baseline_trajectory_id",
+    "best_trajectory_id",
+    "best_trajectory",
+    "generations",
+    "trajectories"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "run-level-trajectory-search-case-v3"
+    },
+    "case_id": {
+      "$ref": "#/$defs/id"
+    },
+    "config_id": {
+      "$ref": "#/$defs/id"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partition": {
+      "const": "train"
+    },
+    "model_id": {
+      "$ref": "#/$defs/id"
+    },
+    "policy_id": {
+      "type": "string",
+      "pattern": "^production-checkpoint-policy-v1:sha256:[a-f0-9]{64}$"
+    },
+    "ruleset_manifest_id": {
+      "$ref": "#/$defs/id"
+    },
+    "milestone_id": {
+      "$ref": "#/$defs/id"
+    },
+    "search_controller_id": {
+      "const": "public-frontier-trajectory-beam-v3"
+    },
+    "hidden_state_resampling": {
+      "const": false
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed"
+      ]
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "baseline_trajectory_id": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "best_trajectory_id": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "best_trajectory": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "generations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/generation"
+      }
+    },
+    "trajectories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trajectory"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "generation": {
+      "type": "object",
+      "required": [
+        "generation",
+        "evaluated_trajectory_ids",
+        "incumbent_trajectory_id",
+        "incumbent_rank",
+        "incumbent_auxiliary_rank",
+        "beam_trajectory_ids",
+        "beam_distinct_strategic_traces"
+      ],
+      "properties": {
+        "generation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluated_trajectory_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "incumbent_trajectory_id": {
+          "$ref": "#/$defs/id"
+        },
+        "incumbent_rank": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "incumbent_auxiliary_rank": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "beam_trajectory_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "beam_distinct_strategic_traces": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "trajectory": {
+      "type": "object",
+      "required": [
+        "trajectory_id",
+        "generation",
+        "parent_trajectory_id",
+        "mutation",
+        "decisions",
+        "terminal",
+        "victory",
+        "truncated",
+        "termination_reason",
+        "maximum_floor",
+        "observed_acts",
+        "boss_reached",
+        "act1_cleared",
+        "final_state_hash",
+        "action_trace_sha256",
+        "liveness",
+        "fallback",
+        "public_frontier"
+      ],
+      "properties": {
+        "trajectory_id": {
+          "$ref": "#/$defs/id"
+        },
+        "generation": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parent_trajectory_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mutation": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/decision"
+          }
+        },
+        "terminal": {
+          "type": "boolean"
+        },
+        "victory": {
+          "type": "boolean"
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "termination_reason": {
+          "enum": [
+            "terminal",
+            "policy_cycle",
+            "decision_limit"
+          ]
+        },
+        "maximum_floor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "observed_acts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boss_reached": {
+          "type": "boolean"
+        },
+        "act1_cleared": {
+          "type": "boolean"
+        },
+        "final_state_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_trace_sha256": {
+          "$ref": "#/$defs/id"
+        },
+        "liveness": {
+          "type": "object"
+        },
+        "fallback": {
+          "type": "object"
+        },
+        "public_frontier": {
+          "$ref": "#/$defs/public_frontier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "decision_index",
+        "decision_type",
+        "source_state_hash",
+        "source_floor",
+        "source_act",
+        "candidate_action_ids",
+        "policy",
+        "argmax_action_id",
+        "selected_action_id",
+        "selection_source",
+        "next_state_hash",
+        "terminal_after_action",
+        "victory_after_action"
+      ],
+      "properties": {
+        "decision_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_state_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_floor": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source_act": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "candidate_action_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "policy": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "argmax_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selected_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selection_source": {
+          "enum": [
+            "base_policy",
+            "parent_replay",
+            "mutation"
+          ]
+        },
+        "next_state_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "terminal_after_action": {
+          "type": "boolean"
+        },
+        "victory_after_action": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "public_frontier": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "frontier_id",
+        "ranking_id",
+        "information_policy_id",
+        "state_hash",
+        "last_actionable_state_hash",
+        "enemy_snapshot_state_hash",
+        "floor",
+        "act",
+        "decision_type",
+        "last_actionable_decision_type",
+        "phase",
+        "terminal",
+        "player_hp",
+        "player_max_hp",
+        "player_hp_fraction",
+        "last_actionable_player_hp_fraction",
+        "encounter_id",
+        "encounter",
+        "decisions_on_floor",
+        "distinct_public_states_on_floor",
+        "enemy_hp_available",
+        "enemy_hp_current",
+        "enemy_hp_reference",
+        "enemy_hp_defeated_fraction",
+        "living_enemy_count",
+        "encounter_cleared",
+        "strategic_trace_sha256"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "public-trajectory-frontier-v2"
+        },
+        "frontier_id": {
+          "$ref": "#/$defs/id"
+        },
+        "ranking_id": {
+          "$ref": "#/$defs/id"
+        },
+        "information_policy_id": {
+          "const": "public-state-v1"
+        },
+        "state_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_actionable_state_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enemy_snapshot_state_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "floor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "act": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "decision_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_actionable_decision_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phase": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "terminal": {
+          "type": "boolean"
+        },
+        "player_hp": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "player_max_hp": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "player_hp_fraction": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_actionable_player_hp_fraction": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "encounter_id": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "encounter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decisions_on_floor": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "distinct_public_states_on_floor": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "enemy_hp_available": {
+          "type": "boolean"
+        },
+        "enemy_hp_current": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "enemy_hp_reference": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "enemy_hp_defeated_fraction": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "living_enemy_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "encounter_cleared": {
+          "type": "boolean"
+        },
+        "strategic_trace_sha256": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

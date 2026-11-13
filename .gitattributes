@@ -1,2 +1,5 @@
 *.jsonl text eol=lf
 *.json text eol=lf
+# Preserve fingerprinted patch bytes, including significant blank context spaces.
+# The native build checks patch payload whitespace with git apply --whitespace=error-all.
+patches/engine/*.patch -text -whitespace

@@ -1,0 +1,168 @@
+{
+  "environment_id": "sha256:ba4096d61dcf0f8f0e2267a40fa2bdfa4ce35b17fa238abf39453444e19e4dde",
+  "manifest_id": "sha256:be591ea22c66a5c117a29f634fe12a288e5c3bd00627baa43bd85ecb3f2074bc",
+  "purpose": "fresh_full_game_evaluation_not_fitting",
+  "schema_version": "natural-curriculum-evaluation-seeds-v1",
+  "seeds": [
+    {
+      "id": 2501000,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM001"
+    },
+    {
+      "id": 2501001,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM002"
+    },
+    {
+      "id": 2501002,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM003"
+    },
+    {
+      "id": 2501003,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM004"
+    },
+    {
+      "id": 2501004,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM005"
+    },
+    {
+      "id": 2501005,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM006"
+    },
+    {
+      "id": 2501006,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM007"
+    },
+    {
+      "id": 2501007,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM008"
+    },
+    {
+      "id": 2501008,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM009"
+    },
+    {
+      "id": 2501009,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM010"
+    },
+    {
+      "id": 2501010,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM011"
+    },
+    {
+      "id": 2501011,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM012"
+    },
+    {
+      "id": 2501012,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM013"
+    },
+    {
+      "id": 2501013,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM014"
+    },
+    {
+      "id": 2501014,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM015"
+    },
+    {
+      "id": 2501015,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM016"
+    },
+    {
+      "id": 2501016,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM017"
+    },
+    {
+      "id": 2501017,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM018"
+    },
+    {
+      "id": 2501018,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM019"
+    },
+    {
+      "id": 2501019,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM020"
+    },
+    {
+      "id": 2501020,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM021"
+    },
+    {
+      "id": 2501021,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM022"
+    },
+    {
+      "id": 2501022,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM023"
+    },
+    {
+      "id": 2501023,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM024"
+    },
+    {
+      "id": 2501024,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM025"
+    },
+    {
+      "id": 2501025,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM026"
+    },
+    {
+      "id": 2501026,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM027"
+    },
+    {
+      "id": 2501027,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM028"
+    },
+    {
+      "id": 2501028,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM029"
+    },
+    {
+      "id": 2501029,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM030"
+    },
+    {
+      "id": 2501030,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM031"
+    },
+    {
+      "id": 2501031,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATM032"
+    }
+  ]
+}

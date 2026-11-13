@@ -1,0 +1,397 @@
+{
+  "ascension": 8,
+  "character": "Ironclad",
+  "claim_scope": "six_repeated_starting_seeds_and_two_scoped_first_combat_prefix_smokes_with_a_separately_rebuilt_managed_UI_seam",
+  "date": "2026-10-10",
+  "evidence_id": "sha256:eb606ce41fe85d6fc103a8dd590d76c7f57aabaaebb7d7b7951a1772cbb14135",
+  "first_combat_smokes": [
+    {
+      "checks": {
+        "archive_still_valid": true,
+        "complete_public_starting_event": true,
+        "endpoint_owned_by_child": true,
+        "journey_all_actions_delivered": true,
+        "journey_all_snapshots_match": true,
+        "journey_second_turn_observed": true,
+        "loaded_identity": true,
+        "loopback_endpoint": true,
+        "native_A8_seed_preserved": true,
+        "native_checkpoint_loaded": true,
+        "native_continue_offered": true,
+        "natural_shutdown": true,
+        "profile_path_logged": true,
+        "same_starting_public_option_titles_and_availability": true,
+        "shared_profile_unchanged": true,
+        "steam_disabled_observed": true,
+        "template_unchanged": true,
+        "working_game_unchanged": true
+      },
+      "comparison_exclusions": [
+        "effect_text",
+        "card_preview_stats",
+        "relic_counters",
+        "full_map_topology",
+        "pile_contents",
+        "other_decision_families",
+        "later_turns_acts_and_endings"
+      ],
+      "disposable_payload_removed_after_verified_success": true,
+      "game_actions_delivered": 7,
+      "native_config_id": "sha256:1d15bd791379690125d5f8015296d14e443835693f6af40d84322eb71f295ebe",
+      "native_report_id": "sha256:edb7de0e986e2268ba7b295591764d26ef3727404112c438bfac222242176aeb",
+      "native_wall_seconds": 3.0121007920242846,
+      "seed": "SPIRESHIFTSTART003",
+      "shipped_config_id": "sha256:48962e9a3a357ff706fbc64471e4f0ee54e0f5563c8464fc5edd5546e6e91145",
+      "shipped_report_id": "sha256:cd6576f4443ee786b5389ff87bfb6875275a08d118058ba1ff673258568909c7",
+      "shipped_wall_seconds": 41.53062579204561,
+      "snapshots_compared": 8,
+      "starting_option": "Winged Boots",
+      "status": "first_combat_prefix_pass",
+      "tutorial_steps": 3
+    },
+    {
+      "checks": {
+        "archive_still_valid": true,
+        "complete_public_starting_event": true,
+        "endpoint_owned_by_child": true,
+        "journey_all_actions_delivered": true,
+        "journey_all_snapshots_match": true,
+        "journey_second_turn_observed": true,
+        "loaded_identity": true,
+        "loopback_endpoint": true,
+        "native_A8_seed_preserved": true,
+        "native_checkpoint_loaded": true,
+        "native_continue_offered": true,
+        "natural_shutdown": true,
+        "profile_path_logged": true,
+        "same_starting_public_option_titles_and_availability": true,
+        "shared_profile_unchanged": true,
+        "steam_disabled_observed": true,
+        "template_unchanged": true,
+        "working_game_unchanged": true
+      },
+      "comparison_exclusions": [
+        "effect_text",
+        "card_preview_stats",
+        "relic_counters",
+        "full_map_topology",
+        "pile_contents",
+        "other_decision_families",
+        "later_turns_acts_and_endings"
+      ],
+      "disposable_payload_removed_after_verified_success": true,
+      "game_actions_delivered": 6,
+      "native_config_id": "sha256:9ea71b86e3398cbab0b005e1bb2606c582e6f0f0186d61a0c0759d9435489720",
+      "native_report_id": "sha256:33f5866028c8c9989a2f9d663a7172f46cd1363b2b4eac6f80c5870e3158f274",
+      "native_wall_seconds": 2.0307113750022836,
+      "seed": "SPIRESHIFTSTART003",
+      "shipped_config_id": "sha256:e283dc51c70e6b2476362f27a8b06d0d9e1e52ae1a40b6529086232ea69276ab",
+      "shipped_report_id": "sha256:177de7b00fc208e3609e07fd357b58a494486efc69fdfebf7cff2323f2520438",
+      "shipped_wall_seconds": 36.91505287500331,
+      "snapshots_compared": 7,
+      "starting_option": "Dowsing Rod",
+      "status": "first_combat_prefix_pass",
+      "tutorial_steps": 3
+    }
+  ],
+  "full_run_attempts": 0,
+  "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "issue_145_complete": false,
+  "native_only_recipe_preflights": [
+    {
+      "config_id": "sha256:5fcb579b6444f819492db4c9d86452987b290162b041b4207f2c389cbb101d80",
+      "native_report_id": "sha256:382a430c5d569211cbc2af84afae38c19d873ca3f446e4175a18750935251621",
+      "seed": "SPIRESHIFTSTART006",
+      "shipped_comparison_executed": false,
+      "starting_option": "Winged Boots",
+      "status": "journey_public_projection_regression_pass",
+      "wall_seconds": 2.757311250024941
+    },
+    {
+      "config_id": "sha256:a1ce3b14594c961e759dcd7c264d2ff11d0657fb5af882b6136946108684d4b8",
+      "native_report_id": "sha256:0d06e07c548802fec2817ae9fa85a954ea7f504f3744bda30a9950c86ad564a6",
+      "seed": "SPIRESHIFTSTART006",
+      "shipped_comparison_executed": false,
+      "starting_option": "Dowsing Rod",
+      "status": "journey_public_projection_regression_pass",
+      "wall_seconds": 2.2530405829893425
+    }
+  ],
+  "next_owner_stage": {
+    "command": "bash scripts/compare-first-combat-v1.sh",
+    "config": "configs/engine-qualification/sts2-v0.111.0-first-combat-bridges-v1.json",
+    "config_id": "sha256:a3fde76028f2b1d2b12e9bd7ae10d4c9836a73ba3b24c215e0c7f2cbd7eb9769",
+    "expected_wall_minutes": [
+      6,
+      8
+    ],
+    "independent_seeds": 2,
+    "launched_by_codex": false,
+    "max_wall_seconds": 900,
+    "planned_cases": 8,
+    "repeats_per_pair": 2,
+    "seed_option_pairs": 4,
+    "training_allowed": false
+  },
+  "official_game_assembly_modified": false,
+  "optimizer_steps": 0,
+  "owner_startup": {
+    "claim_scope": "six_native_A8_starting_seeds_twice_imported_into_shipped_Host_public_option_titles_and_availability_only",
+    "completed_cases": 12,
+    "config_id": "sha256:968360f5cd2dac2e44a87df120d6d262aaa49fe7cb20a8897af931ece54c6ba1",
+    "failed_cases": 0,
+    "independent_seeds": 6,
+    "not_attempted_cases": 0,
+    "planned_cases": 12,
+    "repeated_seed_choices_identical": true,
+    "report_id": "sha256:d0f8a433828ada18c35224292129547c26cf3a1d6b3a7c6e529f39d68995d99d",
+    "wall_seconds": 454.0725244170171
+  },
+  "owner_startup_resources": {
+    "estimated_cost": {
+      "complete": false,
+      "components": {
+        "cpu": null,
+        "energy": null,
+        "gpu": null,
+        "storage": null
+      },
+      "currency": "USD",
+      "known_subtotal": 0,
+      "missing": [
+        "cpu_rate",
+        "gpu_usage",
+        "storage_rate",
+        "energy_usage"
+      ]
+    },
+    "exit_code": 0,
+    "report_id": "sha256:5938da7241f92a561a50d39486a8acbc4f09948e412a05c5a1e91bcb22681b2b",
+    "status": "completed",
+    "usage": {
+      "average_cpu_utilization": 0.02753665654471132,
+      "cpu_hours": 0.04864822644138889,
+      "cpu_seconds": 175.133615189,
+      "energy_kwh": null,
+      "final_storage_bytes": 29904107,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 6,
+      "peak_resident_memory_bytes": 1034780672,
+      "peak_storage_bytes": 2437422006,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 454.2869582499843
+    }
+  },
+  "portable_verification": {
+    "csharp_build_and_contract_passed": true,
+    "gameplay_evidence": false,
+    "mypy_passed": true,
+    "node_adapter_tests": 49,
+    "repository_tests": 1054,
+    "ruff_and_format_passed": true
+  },
+  "preserved_failures": [
+    {
+      "error": "First divergence: $public.actions.0.subject.col",
+      "failed_payload_retained": true,
+      "first_divergence": {
+        "field": "$public.actions.0.subject.col",
+        "index": 1,
+        "managed": 1
+      },
+      "private_report_retained": true,
+      "report_id": "sha256:bec898734a3b5a020b90e418fb0a1fd0908cf07745c94c9031d56fb93f893518",
+      "status": "first_combat_prefix_incomplete"
+    },
+    {
+      "error": "Unqualified journey observation: tutorial",
+      "failed_payload_retained": true,
+      "first_divergence": {
+        "error": "Unqualified journey observation: tutorial",
+        "field": "$public_contract",
+        "index": 3
+      },
+      "private_report_retained": true,
+      "report_id": "sha256:762371b72088b4bdf18696da7835b68c35f6dac9261f58a066087a9ac17819c1",
+      "status": "first_combat_prefix_incomplete"
+    },
+    {
+      "error": "Unqualified tutorial modal; no automatic dismissal",
+      "failed_payload_retained": true,
+      "first_divergence": null,
+      "private_report_retained": true,
+      "report_id": "sha256:de3c570424ae08f86720837590bc92206588883cd3723e0ac3249d96532a7115",
+      "status": "first_combat_prefix_incomplete"
+    },
+    {
+      "error": "No unique public forward tutorial control",
+      "failed_payload_retained": true,
+      "first_divergence": null,
+      "private_report_retained": true,
+      "report_id": "sha256:643a4ca9119685680882047a13636462cd447a555ab200bfc6621c9a77e17a8b",
+      "status": "first_combat_prefix_incomplete"
+    }
+  ],
+  "previous_evidence_id": "sha256:789f896fa6e2271159de2bf2268ae2d213878bb664133fba1dcab6502201a341",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "remaining": [
+    "shipped_rest_and_shop_effects",
+    "modifiers_expiry_and_relic_counters",
+    "other_rewards_and_card_selection_families",
+    "out_of_combat_potions_and_shop_discounts",
+    "other_decision_families_later_acts_and_actual_endings"
+  ],
+  "repair": {
+    "authority": "version_bound_NEventRoom_finished_Proceed_UI_seam_using_native_EventOption_and_existing_map_flag",
+    "native_effects_and_map_vote_unchanged": true,
+    "observed_gap": "finished native event had been skipped to map; shipped game still offered Proceed",
+    "tutorial": "all_three_observed_Combat_Basics_pages_use_current_public_advance_tutorial_control",
+    "tutorial_game_facts_unchanged_checked": true
+  },
+  "saved_startup_verification": {
+    "batch_report_id": "sha256:d0f8a433828ada18c35224292129547c26cf3a1d6b3a7c6e529f39d68995d99d",
+    "claim_scope": "saved_starting_option_titles_and_lock_availability_only",
+    "config_id": "sha256:968360f5cd2dac2e44a87df120d6d262aaa49fe7cb20a8897af931ece54c6ba1",
+    "games_launched": 0,
+    "independent_seeds": 6,
+    "optimizer_steps": 0,
+    "report_id": "sha256:d4fa3793f61fd0707979b874f3908ce1879f55651e142233bc33636f5dd5ea17",
+    "schema_version": "engine-starting-bridges-verification-v1",
+    "shipped_cross_host_parity": false,
+    "training_allowed": false,
+    "valid": true,
+    "verified_cases": 12
+  },
+  "schema_version": "actual-engine-qualification-evidence-v1",
+  "shipped_cross_host_parity": false,
+  "training_allowed": false,
+  "v7_build": {
+    "compiler": {
+      "csc_sha256": "6773e3c868c74a2d293750f4e6b44b93090b3def33639887e802aab6666d8496",
+      "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+      "reference_version": "9.0.20",
+      "sdk_version": "10.0.401"
+    },
+    "config_id": "sha256:a7328b1fd0fb30e9183644a734c75f2435489ec835e40131317d0654138b1c94",
+    "host_artifact_mvid": "32ec0a6a-b6e6-4f73-9633-d36a021091b0",
+    "host_artifact_sha256": "01196e953c024c8e9e1bacc290371956f9b8867913a09579626fcc5d20ae7f71",
+    "local_patch_sha256": "da99be818a9371a2b9ed20136d4b2849418deec3a3413e8d20d87224fa7d9b7e",
+    "process": {
+      "returncode": 0,
+      "timed_out": false,
+      "wall_seconds": 43.856685083010234
+    },
+    "report_id": "sha256:0fe44e74096e7888f3d48ed95f2cabdf91e2b1f633738a752b118fa750f2863d",
+    "runtime_version": "9.0.7",
+    "source_diff_id": "3c67c52c3019056ccd3698ca83cd0d1cbef8b3481bbad2d6ec789911d364fd5a"
+  },
+  "v7_panels": {
+    "combat": {
+      "canonical_delivery": {
+        "combat_snapshots": 34,
+        "delivered_actions": 23,
+        "invalid_native_inputs": 4,
+        "native_action_calls": 27,
+        "request_ledger_checked": true,
+        "rest_snapshots": 0,
+        "sdk_validation_enabled": true,
+        "selection_snapshots": 1,
+        "shop_snapshots": 0
+      },
+      "checks": {
+        "frozen_archive_unchanged": true,
+        "native_combat_regressions_pass": true,
+        "pinned_managed_runtime_unchanged": true,
+        "pinned_sdk_tree_unchanged": true,
+        "projection_identity_bound": true,
+        "same_private_candidate_unchanged": true,
+        "shared_profile_unchanged": true,
+        "uncapped_successful_process": true
+      },
+      "config_id": "sha256:7a825426235dfa9b245a07c50f844f0d4368ae6e27e0ae2edf76bb7387fc0db2",
+      "passed_subchecks": 370,
+      "privileged_scenarios": true,
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 3.7046465830062516
+      },
+      "report_id": "sha256:4cc7690154ebb5e15c64e37d41c78a236048ffe6cba23520e39d605f75b24a25",
+      "status": "combat_public_projection_regression_pass",
+      "total_subchecks": 370
+    },
+    "rest": {
+      "canonical_delivery": {
+        "combat_snapshots": 1,
+        "delivered_actions": 21,
+        "invalid_native_inputs": 21,
+        "native_action_calls": 42,
+        "request_ledger_checked": true,
+        "rest_snapshots": 20,
+        "sdk_validation_enabled": true,
+        "selection_snapshots": 7,
+        "shop_snapshots": 0
+      },
+      "checks": {
+        "frozen_archive_unchanged": true,
+        "native_rest_regressions_pass": true,
+        "pinned_managed_runtime_unchanged": true,
+        "pinned_sdk_tree_unchanged": true,
+        "projection_identity_bound": true,
+        "same_private_candidate_unchanged": true,
+        "shared_profile_unchanged": true,
+        "uncapped_successful_process": true
+      },
+      "config_id": "sha256:d1893102f0382d8598a03a0d3c7157e154bc9df7a8e68bdc6cc888b292675aff",
+      "passed_subchecks": 270,
+      "privileged_scenarios": true,
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 3.1147926669800654
+      },
+      "report_id": "sha256:16c0d46cf4c1d1f227f4b04fe0c529503c57af6bf1262608b1d242686722c439",
+      "status": "rest_public_projection_regression_pass",
+      "total_subchecks": 270
+    },
+    "shop": {
+      "canonical_delivery": {
+        "combat_snapshots": 0,
+        "delivered_actions": 16,
+        "invalid_native_inputs": 9,
+        "native_action_calls": 25,
+        "request_ledger_checked": true,
+        "rest_snapshots": 0,
+        "sdk_validation_enabled": true,
+        "selection_snapshots": 5,
+        "shop_snapshots": 17
+      },
+      "checks": {
+        "frozen_archive_unchanged": true,
+        "native_shop_regressions_pass": true,
+        "pinned_managed_runtime_unchanged": true,
+        "pinned_sdk_tree_unchanged": true,
+        "projection_identity_bound": true,
+        "same_private_candidate_unchanged": true,
+        "shared_profile_unchanged": true,
+        "uncapped_successful_process": true
+      },
+      "config_id": "sha256:f5cd2159d9417d6fea143e99a49040cf6332d8abc0312c8600d75167ad04da00",
+      "passed_subchecks": 201,
+      "privileged_scenarios": true,
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 3.040018916944973
+      },
+      "report_id": "sha256:4ead32680f602bd69a941b71efd59fada1126f3356e38bb58ec2fc44d875d3bf",
+      "status": "shop_public_projection_regression_pass",
+      "total_subchecks": 201
+    }
+  }
+}

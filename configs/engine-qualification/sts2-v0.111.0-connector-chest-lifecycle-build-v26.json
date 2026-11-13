@@ -1,0 +1,20 @@
+{
+  "schema_version": "engine-connector-build-config-v1",
+  "stage": "local_host_build_only_no_games",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "source_url": "https://github.com/rsgcsg/STS2-Connector.git",
+  "source_revision": "e0651024117d22bdeb95142766917103d87c0185",
+  "source_cache": "artifacts/engine-sources/connector-v1.1.0-rc.1",
+  "base_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "base_connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "patch": "patches/engine/sts2-connector-v0.111.0-chest-lifecycle-v26.patch",
+  "patch_sha256": "fe854d7cfa19acca717cba2dbd6490d53b7ee5ba3ce667323e9e3303ccdce8de",
+  "sdk_version": "10.0.401",
+  "commit_date": "2026-11-03T15:50:00Z",
+  "commit_message": "Publish stable native treasure choices with complete Skip authority",
+  "workspace": "artifacts/native-chest-repair/connector-build-v26",
+  "output_report": "artifacts/native-chest-repair/connector-build-v26/report.json",
+  "output_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-chest-lifecycle-v26.json",
+  "max_wall_seconds": 180,
+  "training_allowed": false
+}

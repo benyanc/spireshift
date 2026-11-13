@@ -1,0 +1,98 @@
+{
+  "archive_verification_after": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+  "archive_verification_before": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+  "artifact_bytes_at_stage_completion": 19468859,
+  "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "assets_localization_or_native_engine_source_extracted": false,
+  "authorization": "owner_explicitly_authorized_Codex_to_run_this_extraction_and_assess_results",
+  "checks": {
+    "archive_still_valid": true,
+    "project_created": true,
+    "sources_present": true,
+    "tool_completed": true,
+    "tools_unchanged": true
+  },
+  "claim_scope": "verified_private_exact_assembly_source_extraction_and_static_mechanics_review_only",
+  "complete_state_space_or_interaction_coverage_claimed": false,
+  "cpu_seconds": 141.32790074899998,
+  "date": "2026-10-10",
+  "evidence_id": "sha256:7fa96df8023f75460bd055b0224bce9fe6a600de7a93890df5d45334d6c50036",
+  "failure_marker_scan_exhaustive": false,
+  "fresh_source_inventory_verified": true,
+  "full_run_attempts": 0,
+  "generated_files": 3538,
+  "issue_145_complete": false,
+  "known_decompiler_failure_marker_files": 0,
+  "native_game_processes": 0,
+  "next_step": "fix_and_qualify_CLI_identity_and_native_rest_transitions_then_public_projection_mechanics_panel",
+  "normal_play_content_eligibility_qualified": false,
+  "optimizer_steps": 0,
+  "peak_resident_memory_bytes": 1421574144,
+  "private_binding_id": "sha256:51a40bcb4a73a9e4a804c1e2c3a40eda1ad3f6b7fc1483a00d43887862adbc3e",
+  "process_wall_seconds": 16.94959266699152,
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "raw_game_source_and_type_bindings_private": true,
+  "raw_proprietary_material_committed": false,
+  "registered_type_binding_ambiguities": 0,
+  "registered_type_binding_failures": 0,
+  "registered_types_bound_to_top_level_source_declarations": 1660,
+  "registry_id": "sha256:8d3b62b616f6d1e139d1d3e8f33074c0d04aeaf1935acd721afa2806afc93cec",
+  "resource_report_id": "sha256:db8345c15e8c624917928f52519a77405605a7d135f48d70831cf4efb2764fef",
+  "reviewed_file_sha256": {
+    "card_energy_cost": "c2b18b52ad44a44acbac01c5df4a209f5534a6ec7138e748ea73d66b2dcedd53",
+    "card_selection_bounds_and_confirmation": "be907ced510772bbac02fd30e7553a360e426c4868c4436224d454d0f8177086",
+    "merchant_price_and_restocking": "dbd59a15346ec9afcd5bf0a4a980985ff5d02d8f34d8a8ff2281e70c8f45ccf4",
+    "merchant_refresh_after_purchase": "09c67a4379b740f3dfa1a3757611afe5b40dfe1e50ee9db4cdd37e99034fb710",
+    "relic_allowing_remaining_rest_choices": "bff5579ca0489078bed1ab678da853295dd32650e9e62fe3315e56b43907d45f",
+    "rest_site_choice_completion": "dc61cb74d46515d6d4b790ad5d2dafca56c376f6a774fbf926e450aef85a888b",
+    "rest_site_option_generation": "6e2e319e70884ff6c39a6362447353ba3a052caeba1ec12192d682d3e09db9e8",
+    "unqualified_cli_transitions": "b632ce6e28e8f85d1636dd0b6dfb77b52ae11e396bee7aeaa3a805a6db0390a4"
+  },
+  "runtime_mechanics_comparison_completed": false,
+  "schema_version": "actual-engine-private-source-assessment-v1",
+  "source_bytes": 18737149,
+  "source_config_id": "sha256:101ddc8825bd702a003b358497e11781998fcd11f5d345362f964b3c1f6055f6",
+  "source_files": 3537,
+  "source_inventory_id": "sha256:521d542ff05de6add004747806e0f31cde3964afd0118eb0ecab4c336621b9b1",
+  "source_project_compiled": false,
+  "source_report_id": "sha256:26fb682a4e3623a0d09ae8e23c14fb13fbb3271cf1ac3ebb5cc5d2b0a2a9c2b8",
+  "static_findings": [
+    {
+      "finding": "The game may preserve remaining choices after a successful rest-site action; the candidate forces map presentation after nonselection choices and after rest-site card selection.",
+      "id": "rest_site_forced_exit",
+      "priority": "blocking_before_cli_learning",
+      "required_behavior": "Wait for the native action to complete, then read the refreshed choice state; leave only through a currently legal native continuation or leave action.",
+      "status": "static_candidate_control_flow_discrepancy_runtime_regression_pending"
+    },
+    {
+      "finding": "Printed cost, local modifiers, combat hooks, modifier expiration and X-cost spending have separate rules. The candidate already calls the native spending-cost getter; the rest of the projection remains to be checked.",
+      "id": "card_effective_cost_and_expiry",
+      "required_behavior": "Expose the current public cost for each card copy, retain its identity and visible modifiers, and refresh after every action; test expiry, ordering and X-cost effects.",
+      "status": "actual_game_rules_traced_public_projection_and_runtime_cases_pending"
+    },
+    {
+      "finding": "Shop cost includes dynamic price hooks; successful purchases may restock and trigger inventory updates.",
+      "id": "merchant_refresh",
+      "required_behavior": "Use current native prices, stock and capacity, then refresh inventory and actions after the purchase or any selection it opens.",
+      "status": "actual_game_rules_traced_runtime_cases_pending"
+    },
+    {
+      "finding": "Card selections have minimum/maximum counts, cancellation and manual-confirmation requirements.",
+      "id": "selection_completion",
+      "required_behavior": "Represent those fields and the current selection state rather than treating selection as an unconditional one-card choice.",
+      "status": "actual_game_rules_traced_runtime_cases_pending"
+    }
+  ],
+  "stderr_bytes": 0,
+  "stdout_bytes": 0,
+  "training_allowed": false,
+  "verification": {
+    "csharp_protocol_build_and_contract": "passed",
+    "format_lint_type_checks": "passed",
+    "gameplay_runtime_regressions_run": 0,
+    "owner_helper_shell_syntax": "passed",
+    "pytest_wall_seconds": 43.85,
+    "repository_tests_passed": 967
+  },
+  "wall_seconds": 18.621306790970266
+}

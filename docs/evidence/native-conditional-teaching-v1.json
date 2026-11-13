@@ -1,0 +1,203 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment_date": "2026-10-17",
+  "assessment_report_id": "sha256:4277539880bd329116e592eca4e392dd6323dece58c9ca629c3c7ae93c0e37c7",
+  "base_readiness_passed": false,
+  "capacity_proven_insufficient": false,
+  "checkpoint_promoted": false,
+  "checks": {
+    "all_three_pairs_complete": true,
+    "frozen_actor_control_executes_optimizer": true,
+    "hp_removed_cannot_resolve_context": true,
+    "paired_actual_work_equal": true
+  },
+  "claim_scope": "synthetic_HP_conditional_learning_with_matched_optimizer_work_not_native_skill_or_method_superiority",
+  "comparison_integrity_pass": true,
+  "completed_training_pairs": 3,
+  "config_id": "sha256:b12b9dde6ec7f46a1a1d062fa018debc4cc6ee6539cb5d6aa95cc0aa5a694816",
+  "config_path": "configs/native-controls/conditional-teaching-v1.json",
+  "derivative_probe_proves_cause_or_learning_speed": false,
+  "evidence_id": "sha256:339c6f7d275ec40d6e62b3af8a98b6230850ab5fab2b7e4912a14fca2c72d178",
+  "failed_training_pairs": 0,
+  "game_apps_created": 0,
+  "games_launched": 0,
+  "held_out_generalization_claimed": false,
+  "historical_PPO_model_and_performance_reproduced": {
+    "0": true,
+    "1": true,
+    "2": true
+  },
+  "initial_conditioning": [
+    {
+      "HP_difference_same_for_both_candidate_rows": true,
+      "actual_optimizer_updates_measured_by_this_probe": false,
+      "conditional_to_ordinary_gradient_norm_ratio": 0.0004006203357795138,
+      "direct_linear_conditional_gradient_norm": 0.0,
+      "initial_high_minus_low_commit_logit_gap": -1.3825939885495249e-05,
+      "initial_model_id": "sha256:60ab663ca84fe8e483ae74ffd4a86f1885028e360736e654dc1e45a346ed3918",
+      "ordinary_action_preference_gradient_norm": 1.5892841062904621,
+      "public_HP_difference_survives_encoding": true,
+      "seed": 0,
+      "whole_actor_conditional_gradient_norm": 0.0006366995323111294
+    },
+    {
+      "HP_difference_same_for_both_candidate_rows": true,
+      "actual_optimizer_updates_measured_by_this_probe": false,
+      "conditional_to_ordinary_gradient_norm_ratio": 0.0002677356279280401,
+      "direct_linear_conditional_gradient_norm": 0.0,
+      "initial_high_minus_low_commit_logit_gap": -2.083493425711694e-06,
+      "initial_model_id": "sha256:64c9818366d042d6b284d6f9f241899eec0f71b0ddf8bc429d09c106e95b46fa",
+      "ordinary_action_preference_gradient_norm": 1.575799179975698,
+      "public_HP_difference_survives_encoding": true,
+      "seed": 1,
+      "whole_actor_conditional_gradient_norm": 0.00042189758293928415
+    },
+    {
+      "HP_difference_same_for_both_candidate_rows": true,
+      "actual_optimizer_updates_measured_by_this_probe": false,
+      "conditional_to_ordinary_gradient_norm_ratio": 0.0003161867379558097,
+      "direct_linear_conditional_gradient_norm": 0.0,
+      "initial_high_minus_low_commit_logit_gap": 1.301182754016644e-05,
+      "initial_model_id": "sha256:b1b767348c08b9dcd9987e9a299c241096d095a7e24a540ccfd40be1b187912b",
+      "ordinary_action_preference_gradient_norm": 1.6246652533070889,
+      "public_HP_difference_survives_encoding": true,
+      "seed": 2,
+      "whole_actor_conditional_gradient_norm": 0.0005136976067133177
+    }
+  ],
+  "native_episodes_opened": 0,
+  "next_work": "finite_separately_versioned_public_context_by_candidate_interaction_control_before_native_training_changes",
+  "not_attempted_training_pairs": 0,
+  "passing_training_seeds": {
+    "direct_teaching": 0,
+    "ppo": 0
+  },
+  "planned_training_pairs": 3,
+  "primary_paired_choice_presentations_each": 6144,
+  "primary_paired_optimizer_steps_each": 288,
+  "primary_paired_sample_decision_presentations_each": 36864,
+  "production_checkpoints_written": 0,
+  "production_optimizer_steps": 0,
+  "report_id": "sha256:8c9f5cd97783e54d86f31281d5ab3ee209bea453da82cc4e9d639c33990b45ac",
+  "resources": {
+    "cpu_seconds": 37.233414049,
+    "final_storage_bytes": 1558332,
+    "path": "artifacts/resources/native-conditional-teaching-v1-attempt-1.json",
+    "peak_resident_memory_bytes": 166068224,
+    "report_id": "sha256:0c7927bef1e93e8e4b13e3bf50d81ee1175f682a8c54c7c75b23c62eb6a8e31c",
+    "wall_seconds": 37.43304170889314
+  },
+  "same_CPU_or_information_budget_claimed": false,
+  "sampled_synthetic_episodes": 6144,
+  "schema_version": "native-conditional-teaching-evidence-v1",
+  "sealed_rounds": 96,
+  "summaries": [
+    {
+      "expected_victory": 0.5424534220709767,
+      "greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_action_probability": 0.10207820748682307,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "expected_victory": 0.5150360227827284,
+      "greedy_accuracy": 0.5,
+      "method": "direct_teaching",
+      "minimum_optimal_action_probability": 0.4989168946482064,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "expected_victory": 0.5113351857044314,
+      "greedy_accuracy": 0.5,
+      "method": "hp_removed",
+      "minimum_optimal_action_probability": 0.4844691427257521,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "expected_victory": 0.4806979372623651,
+      "greedy_accuracy": 0.5,
+      "method": "frozen_actor",
+      "minimum_optimal_action_probability": 0.07597492339628288,
+      "optimizer_work": {
+        "choice_presentations": 768,
+        "optimizer_steps": 36,
+        "sample_decision_presentations": 4608
+      },
+      "passed": false,
+      "seed": 0
+    },
+    {
+      "expected_victory": 0.48059176157117095,
+      "greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_action_probability": 0.07455273423850675,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "expected_victory": 0.5165796443518726,
+      "greedy_accuracy": 1.0,
+      "method": "direct_teaching",
+      "minimum_optimal_action_probability": 0.5014171544130887,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 1
+    },
+    {
+      "expected_victory": 0.515605700806084,
+      "greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_action_probability": 0.4599068716038665,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 2
+    },
+    {
+      "expected_victory": 0.5148598518425613,
+      "greedy_accuracy": 0.5,
+      "method": "direct_teaching",
+      "minimum_optimal_action_probability": 0.49609856985795775,
+      "optimizer_work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      },
+      "passed": false,
+      "seed": 2
+    }
+  ],
+  "synthetic_optimizer_steps": 2052,
+  "teacher_uses_extra_oracle_information": true,
+  "verified_round_and_pair_files": 99
+}

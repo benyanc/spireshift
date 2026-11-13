@@ -1,0 +1,28 @@
+{
+  "schema_version": "engine-combat-bridge-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-cli-combat-discard-duplicate-v1.json",
+  "native_config_id": "sha256:9c95ca274e8f209a8581686e90b211fa7313c7d7a93c4b747542e3d062fcab30",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-combat-discard-v9.json",
+  "working_app_config": "configs/engine-qualification/sts2-v0.111.0-working-app-serial-v1.json",
+  "working_app_config_id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959",
+  "seed": "SPIRESHIFTPROFILE004",
+  "scenario": "discard-duplicate",
+  "saved_native_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-discard-duplicate-v1.json",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-potion-discard-smoke-v1/discard-duplicate",
+  "helpers_sha256": {
+    "engine-checkpoint-shipped-probe.mjs": "842f12cadb5636a2d8d073eb8e72a0a884611bd896adbf308cb44027f4422b72",
+    "engine-combat-bridge-contract-v7.mjs": "b6e5ac2471daef03687063e8194abd9318cfc23be7334b9dd8cbf0b699963943",
+    "engine-combat-shipped-probe-v5.mjs": "4bf18dd8ca200cbb41df9760ada349dc5fe9d27f7f14a956c1d5b09b69cff9ef",
+    "engine-combat-shuffle-v1.mjs": "cf9a3024258027f7b68d5872a36e068b5cfe44766cc0cd3cfdddb8a422f9b2d4",
+    "engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "engine-journey-tutorial-v4.mjs": "ba8a537a5c7446ed69b4f482614d434eaf60295f00bbb9205c2b9888f9e35f76",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-rest-bridge-contract.mjs": "b0122918993ff4b6613868e588b2c4953a9469123ddb384ca65cdc1b18aea896",
+    "verify-engine-combat-saved-v5.mjs": "c4fbaa58588ee18e1bde142e74bacef6fd9314f96793e6d583ba7f4514b8a0f5"
+  },
+  "training_allowed": false,
+  "bridge_revision": "potion_discard_v1",
+  "connector_config_id": "sha256:1a10209a0e3583a3c37cadb59e0c4c381a5f152b30fcd20f61085ebfd20b84eb"
+}

@@ -1,0 +1,208 @@
+{
+  "active_entry": "scripts/diagnose-native-inventory-credit-v2.sh",
+  "active_recipe": "configs/native-controls/inventory-credit-diagnosis-v2.json",
+  "adaptive_controller_allowed": false,
+  "alias_observations_not_independent_mechanics": {
+    "coarse_groups": 52019,
+    "cross_world_inventory_alias_groups": 435,
+    "groups_with_distinct_decks": 288,
+    "groups_with_distinct_relics": 434,
+    "rows_in_cross_world_inventory_alias_groups": 1341
+  },
+  "assessment_resource": {
+    "path": "artifacts/resources/native-inventory-credit-saved-assessment-v1.json",
+    "report_id": "sha256:b472fda344439fe94b2b1c9f3df52a83008d41abba6aa13d138278a8d66912af",
+    "wall_seconds": 14.101813249988481
+  },
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "behavior_cohorts_never_pooled_for_fitting": true,
+  "checkpoint_promoted": false,
+  "choice_bearing_decisions": 41816,
+  "claim_scope": "saved_TRAIN_inventory_information_forecast_generalization_and_credit_components_not_action_correctness_or_stronger_play",
+  "combined_inventory_worse_cohorts": 12,
+  "completed_cohorts": 12,
+  "config_id": "sha256:8ab749bab57f4b2f7869f2f27cafcd2d1dced0e91349c3ac37f919efdae46e03",
+  "current_coarse_folds_coefficients_metrics_and_credit_reproduced": true,
+  "date": "2026-10-22",
+  "deterministic_navigation_decisions_excluded": 274,
+  "distinct_training_worlds": 64,
+  "evidence_id": "sha256:dc0bc2e2f363a083b1eac80ac82c2c25e83a704e739ac95f9663ff0ba1809f6e",
+  "first_round_source_traces_repeated_across_arms": true,
+  "fitting_error_assessment": {
+    "baseline_or_inventory_refits": 0,
+    "games_launched": 0,
+    "mean_equal_fold_fitting_mse": {
+      "current": 3.4886253769060606e-05,
+      "deck": 2.9947371659861188e-05,
+      "deck_relic": 2.037767985654041e-05,
+      "relic": 2.259419387973516e-05
+    },
+    "original_full_states_and_Adam_unchanged": true,
+    "player_Adam_updates": 0,
+    "rare_act_clear_credit": [
+      {
+        "choices": 283,
+        "cohort": "fit-p3-hashed-r02",
+        "normalized_credit_positive_fraction": 0.7455830388692579,
+        "raw_credit_positive_fraction": 0.9681978798586572,
+        "world": 2201036
+      },
+      {
+        "choices": 276,
+        "cohort": "fit-p3-named-r02",
+        "normalized_credit_positive_fraction": 0.7608695652173914,
+        "raw_credit_positive_fraction": 0.9746376811594203,
+        "world": 2201036
+      }
+    ],
+    "rare_act_clear_share_of_current_squared_error": 0.4370475447922181,
+    "report_id": "sha256:573591099ef278c45f1170bff8dc2ea8d87b7c75e53450f57379decf0413676b",
+    "restored_inventory_models": 144,
+    "schema_version": "native-inventory-credit-saved-assessment-v1",
+    "script_sha256": "772b1b484c9e0cdbd4bf0b18c1af478226d8d238ebdab1e7fc04cfbdf124260c",
+    "source_files_verified": 32907,
+    "source_report_id": "sha256:7837ce10fe96fb97bd407fa0b76f4e1cc83cc2f1b30de19039546860d7aabc8c"
+  },
+  "fixed_separate_inventory_regularization": 1.0,
+  "game_apps_created": 0,
+  "games_launched": 0,
+  "hyperparameter_grid_or_held_selection": false,
+  "inventory_feature_groups": [
+    "owned_definition_counts",
+    "joint_definition_upgrade_displayed_cost_copy_counts",
+    "native_card_type_counts",
+    "displayed_cost_and_upgrade_aggregates",
+    "relic_definition_counts",
+    "owner_bound_available_relic_counters"
+  ],
+  "mean_squared_errors": {
+    "constant": 6.558466275517226e-05,
+    "current": 4.079339983281561e-05,
+    "deck": 4.2047504734178144e-05,
+    "deck_relic": 4.290109828867251e-05,
+    "relic": 4.178998934035227e-05
+  },
+  "mse_relative_change_percent": {
+    "constant": 60.77273045139451,
+    "current": 0.0,
+    "deck": 3.074283846166903,
+    "deck_relic": 5.166763409019404,
+    "relic": 2.443016545865273
+  },
+  "next_step": "bounded_independent_experience_learning_comparison_then_qualified_teacher_or_curriculum_if_needed",
+  "normalized_choice_credit_sign_flip_range": [
+    0.04898975920287849,
+    0.10300684727597499
+  ],
+  "original_full_states_and_Adam_unchanged": true,
+  "outcome_groups": {
+    "act_clear": {
+      "cohort_game_observations": 2,
+      "distinct_worlds": 1,
+      "mean_squared_error": {
+        "constant": 0.006142212364661195,
+        "current": 0.003423101806206594,
+        "deck": 0.0035334748859891145,
+        "deck_relic": 0.0035702271085114737,
+        "relic": 0.0034327716699721665
+      }
+    },
+    "all_inventory_features_seen_in_fitting": {
+      "cohort_game_observations": 71,
+      "distinct_worlds": 21,
+      "mean_squared_error": {
+        "constant": 3.16707863236272e-05,
+        "current": 2.002581204501407e-05,
+        "deck": 2.335593678457986e-05,
+        "deck_relic": 2.3441324109422658e-05,
+        "relic": 2.1429067855336246e-05
+      }
+    },
+    "floor_ge_17": {
+      "cohort_game_observations": 79,
+      "distinct_worlds": 23,
+      "mean_squared_error": {
+        "constant": 0.00021102966084066407,
+        "current": 0.00012618076310598152,
+        "deck": 0.00013068492211962583,
+        "deck_relic": 0.00013083192180802364,
+        "relic": 0.00012649133543721062
+      }
+    },
+    "floor_lt_17": {
+      "cohort_game_observations": 305,
+      "distinct_worlds": 58,
+      "mean_squared_error": {
+        "constant": 2.7912023906798975e-05,
+        "current": 1.86766729522251e-05,
+        "deck": 1.9088960558931045e-05,
+        "deck_relic": 2.0125573508250426e-05,
+        "relic": 1.985095215460864e-05
+      }
+    },
+    "no_act_clear": {
+      "cohort_game_observations": 382,
+      "distinct_worlds": 64,
+      "mean_squared_error": {
+        "constant": 3.37698580331512e-05,
+        "current": 2.308497885703667e-05,
+        "deck": 2.376778022499e-05,
+        "deck_relic": 2.4433422842479843e-05,
+        "relic": 2.4036158551704038e-05
+      }
+    },
+    "unfamiliar_inventory_features": {
+      "cohort_game_observations": 313,
+      "distinct_worlds": 62,
+      "mean_squared_error": {
+        "constant": 7.327758680194446e-05,
+        "current": 4.5504258404489446e-05,
+        "deck": 4.628744506779309e-05,
+        "deck_relic": 4.7315296265435263e-05,
+        "relic": 4.640860092321534e-05
+      }
+    }
+  },
+  "player_Adam_updates": 0,
+  "preserved_failed_verifier": {
+    "cause": "held_only_BLAS_batch_differs_by_at_most_6.94e-18_from_original_full_batch",
+    "games_launched": 0,
+    "player_Adam_updates": 0,
+    "recipe": "configs/native-controls/inventory-credit-diagnosis-v1.json",
+    "repair": "restore_using_original_full_matrix_batch_without_loosening_equality",
+    "resource_report_id": "sha256:7e48fdf078aae8f0f240c23119f126eaa56c018d861170410b3b99c8d91b9101",
+    "source_snapshot": "artifacts/native-inventory-credit/sts2-v0.111.0-a8-diagnosis-v1/source-at-launch/source-manifest.json"
+  },
+  "production_baseline_changed": false,
+  "raw_training_decisions": 55642,
+  "report_id": "sha256:7837ce10fe96fb97bd407fa0b76f4e1cc83cc2f1b30de19039546860d7aabc8c",
+  "report_path": "artifacts/native-inventory-credit/sts2-v0.111.0-a8-diagnosis-v2/report.json",
+  "repository_check": {
+    "CSharp_protocol_passed": true,
+    "formatted_files": 659,
+    "new_regression_tests": 27,
+    "path": "artifacts/resources/native-inventory-credit-repository-check-v1.json",
+    "report_id": "sha256:d2dd13827a8dbfc93ee301128e734124716eb1f8af80658f046cf9f8d7ae8782",
+    "strict_type_files": 483,
+    "tests_passed": 2348,
+    "tests_skipped": 4,
+    "wall_seconds": 129.44939374993555
+  },
+  "schema_version": "native-inventory-credit-diagnosis-evidence-v1",
+  "source_evaluation_inputs_or_targets_used_for_fitting": false,
+  "source_report_id": "sha256:a8ecf0239aab0ff4cca0a0ee9af189b7159bc94df89765fc3029231d96142d3a",
+  "source_training_wins": 0,
+  "status": "native_inventory_credit_diagnosis_complete",
+  "successful_diagnosis_resources": {
+    "final_storage_bytes": 32492406,
+    "peak_resident_memory_bytes": 750518272,
+    "reports": [
+      "sha256:a17ebc3de9f77347dd6d5ba573ff567891539b7456e076d7c6044e0af16f5de9",
+      "sha256:1da05c1a839eee659ca0f7fe720e37fcebdb495e95f4a3b4c5eec6d27bf573c2"
+    ],
+    "wall_seconds": 80.14792583393864
+  },
+  "training_attempts": 384,
+  "training_learning_decisions": 55368
+}

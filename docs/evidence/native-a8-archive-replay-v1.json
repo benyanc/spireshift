@@ -1,0 +1,49 @@
+{
+  "archive_end_reason": "death",
+  "archive_record_count": 5750,
+  "archive_reload_count": 0,
+  "automatic_follow_up": false,
+  "clean_shutdown": true,
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fights_replayed": 22,
+  "final_floor": 48,
+  "final_frame_id": "sha256:9d1bd6dd75d8d9f44c2c6e1f49f3b821ff33074676438d985e89dadb9fbf5863",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "game_build": "v0.111.0+41cef1ea",
+  "load_or_reset_commands": 0,
+  "local_evidence_directory": "artifacts/native-a8-replay-source/ee2ffb605c67742f/archive-qualification-v21",
+  "native_game_over": true,
+  "native_public_ending": {
+    "basis": "native_public_explicit_terminal_boolean",
+    "victory": true
+  },
+  "native_report_id": "sha256:f516f995f2d67cd770a0670ac547bdd857a7fe97bcf001029cb269326edb1990",
+  "native_start_commands": 1,
+  "native_victory_room": true,
+  "optimizer_updates": 0,
+  "pre_architect_hp": 38,
+  "preserved_selector_stop_id": "sha256:e5ef514b728cb4e7da4afd172c96b473e9e238bd1dc09d6d17323a2924e37b32",
+  "replay_config_id": "sha256:cf41dd0ed19165d5c4cd6a1ac09f5715aca4577c8b8ac6ccccd87a39ca5150ef",
+  "report_id": "sha256:8282e4d403415e0ddc23b00f33c437e17ea1126c128d60a121ccc7f4fd0576eb",
+  "saved_selector_stop_audit_id": "sha256:031a1787f3a4fe4f90cd27d374e274839910026bea2dfc93a65741a3c01be2d7",
+  "schema_version": "native-a8-archive-replay-result-v1",
+  "seed": "5SELZ5UWJ3SK",
+  "source_intents": 872,
+  "source_sha256": "b348c86840e35e9e23547fa380bb377ffe1cf88482e83b7313fae08f84c373df",
+  "source_url": "https://spire-codex.com/runs/ee2ffb605c67742f/replay",
+  "status": "native_archive_victory_verified",
+  "terminal_hp": 0,
+  "training_admission_granted": false,
+  "verified_delivery_counts": {
+    "native": 896
+  },
+  "worker_observations_sha256": "c32de25a6d3ec05f54bce8c5d7846832452b3ad4139a09da80dc237f3326b9ee",
+  "worker_receipts_sha256": "b5915e07bda5aa9825fba82df5f52615ed5132a7660a6beafaedafbbe71373e1"
+}

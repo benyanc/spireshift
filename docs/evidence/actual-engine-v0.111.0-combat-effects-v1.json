@@ -1,0 +1,212 @@
+{
+  "app_copies_created_for_final_checks": 0,
+  "checkpoint_promoted": false,
+  "claim_scope": "two_distinct_fixed_A8_assigned_fixtures_public_play_use_end_turn_cost_effect_ownership_expiry_counter_and_second_turn_parity_only",
+  "date": "2026-10-12",
+  "development_sources_archive_id": "sha256:593da1d82478550ff30bbd57ee66aac9be667679d0ad985896d15d2e53049e55",
+  "effect_decisions": 16,
+  "evidence_id": "sha256:1b9864241f38aa7722f96968eb90338dfc9f94ca3a16a0df915e5954ad635bad",
+  "failed_development_comparisons_preserved": [
+    {
+      "case": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-effects-smoke-v1/corruption-seed-003",
+      "error": "Shipped combat effect comparison failed; preserve its first difference",
+      "report_id": "sha256:9b8963c6fcf6f4a17650dffc18732f52f92b080fbd74be0ff5eaa83538afa0c6",
+      "status": "combat_comparison_incomplete"
+    },
+    {
+      "case": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-effects-smoke-v2/corruption-seed-003",
+      "error": "Shipped combat effect comparison failed; preserve its first difference",
+      "report_id": "sha256:34c5a953992f16b2f55bae46cc202f20b649297807ac12f9a5d9ec755e43dc62",
+      "status": "combat_comparison_incomplete"
+    },
+    {
+      "case": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-effects-smoke-v3/corruption-seed-003",
+      "error": "Benchmark progress is restricted to its explicit comparison scope",
+      "report_id": "sha256:e499bf2fac5c5653574326405b745fbdf6ec28673d3bee9279b9544b5d3d7b5c",
+      "status": "combat_comparison_incomplete"
+    },
+    {
+      "case": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-effects-smoke-v4/corruption-seed-003",
+      "error": "Shipped combat effect comparison failed; preserve its first difference",
+      "report_id": "sha256:f69f16c67f19733ed087700e9073bba6816a70d26b067cb190e4d8e0b8c9169d",
+      "status": "combat_comparison_incomplete"
+    },
+    {
+      "case": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-effects-smoke-v5/corruption-seed-003",
+      "error": "Benchmark progress is restricted to its explicit comparison scope",
+      "report_id": "sha256:0d87ee1b94bb3e06c6cf23a25a287b7053a434e830bba322137843853e5323ea",
+      "status": "combat_comparison_incomplete"
+    },
+    {
+      "case": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/combat-effects-smoke-v6/corruption-seed-003",
+      "error": "Shipped combat effect comparison failed; preserve its first difference",
+      "report_id": "sha256:41696ee29a26c0de4d78dad4c7f8aaf1bbb3f54f6b2da434ce2fec6232d38fba",
+      "status": "combat_comparison_incomplete"
+    }
+  ],
+  "final_short_comparisons": [
+    {
+      "app_copies_created": 0,
+      "case_id": "corruption-seed-003",
+      "combat_tutorial_steps": 3,
+      "comparison_report_id": "sha256:3a762ebf4086aadb68df44a4ff93724827b9e2d65dbbce9dd8954511dc2d13ae",
+      "current_first_act": "UNDERDOCKS",
+      "effect_checks": {
+        "corruption_owned_by_player": true,
+        "native_global_cost_reduction": true,
+        "second_turn_observed": true,
+        "skills_exhaust_and_preserve_energy": true
+      },
+      "effect_decisions": 7,
+      "native_report_id": "sha256:c31dbb66bcafeef97c5d84398dbc59fb61c6b48558011d140bf30f5e11eaa675",
+      "observations": 8,
+      "original_headless_logs_preserved": true,
+      "public_game_ui_actions": 12,
+      "reset_report_id": "sha256:ec59481d6d9afcaf13c9f0fc4e0b3d02e89e1e43a6fcc7b13443848727a02da7",
+      "saved_verification_id": "sha256:1933609ce1cdb1407c95ff219830782548047900f044d6a84e2e8e446edccef4",
+      "scenario": "corruption",
+      "seed": "SPIRESHIFTPROFILE003",
+      "shipped_report_id": "sha256:e1015ac8057097f3af8fc677ef28367235f78965cbb2bf6f55354606cae0e177",
+      "shuffle_steps": 1,
+      "status": "combat_comparison_pass",
+      "wall_seconds": 40.703907042043284,
+      "working_app_inode": 347602255
+    },
+    {
+      "app_copies_created": 0,
+      "case_id": "temporary-seed-004",
+      "combat_tutorial_steps": 3,
+      "comparison_report_id": "sha256:656a85ea035a9ab31e56b4a6ab0b6e3e38e74ff042407d674a2df45c35c60b65",
+      "current_first_act": "OVERGROWTH",
+      "effect_checks": {
+        "consumed_potions_removed": true,
+        "relic_counter_tracks_attack": true,
+        "second_turn_observed": true,
+        "separate_strength_dexterity": true,
+        "temporary_stats_expire": true
+      },
+      "effect_decisions": 9,
+      "native_report_id": "sha256:1b72c95db8a635938bc427ed91c0acff6b50806f89af59a1c3ce6acb30e6a92b",
+      "observations": 10,
+      "original_headless_logs_preserved": true,
+      "public_game_ui_actions": 14,
+      "reset_report_id": "sha256:2efcc4b1c7e42eab95f5e4d646dd24947733260aaf35c1278a3663cc1ceec2de",
+      "saved_verification_id": "sha256:174779e00ab24cd166ca3cd31615039c0f1e0e53d0dafede6f2895326e82616d",
+      "scenario": "temporary-stats",
+      "seed": "SPIRESHIFTPROFILE004",
+      "shipped_report_id": "sha256:dd8257ba1f1225784f122d1894d3cb365362f38b9a7345058aaba25c8750005e",
+      "shuffle_steps": 1,
+      "status": "combat_comparison_pass",
+      "wall_seconds": 51.283143375010695,
+      "working_app_inode": 347602255
+    }
+  ],
+  "final_short_comparisons_passed": 2,
+  "frozen_master_and_idle_worker_preflight_pass": true,
+  "full_run_attempts": 0,
+  "host_build_report_id": "sha256:0c76ddd043b94797a74d7037f9a5d0a0948a3036a34789b99e304ed5e7baaf91",
+  "host_build_seconds": 7.381516584020574,
+  "host_identity": {
+    "artifact_mvid": "a6bee9d3-afc5-44ce-9594-3b6b8705b7d9",
+    "artifact_sha256": "8a7ee793e7939539d0d832bb5bcd50f7ff45a6e0bea5e374e82314a7d8553d97",
+    "protocol": "1.0.0",
+    "source_revision": "53a9f429896ba91b5515f4f718c7fca940221126",
+    "version": "1.1.0-rc.1"
+  },
+  "independent_seeds": 2,
+  "issues": [
+    145,
+    146,
+    147
+  ],
+  "limitations": [
+    "Two short cases are not the prepared eight-case repeat panel or exhaustive game fidelity.",
+    "Assigned decks and potions and native-obtained Pen Nib are privileged initial fixtures, not natural learning trajectories.",
+    "Native combat exposes potion discard, while the shipped Host omits it. This action is explicitly excluded from this finite comparison and remains a #145 gap before general training admission.",
+    "Only whitespace is normalized in compared text; named amounts, order, glyph counts, owned statuses, costs and counters remain significant.",
+    "Continue loads a native checkpoint. Shipped new-run lobby, later acts, actual endings and other public decision families remain unqualified.",
+    "All original headless diagnostics and failed prototypes remain saved; success is not a diagnostic-free execution claim.",
+    "Shared app reuse is serial only. Full-run speed and bounded parallel isolation remain #146 work."
+  ],
+  "native_build_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-combat-preview-v15.json",
+  "native_build_report_id": "sha256:9094519899e1fece3748b5c8a4e933e28d297ef1e7352381b09eb142e6977b9f",
+  "native_build_seconds": 16.014080625027418,
+  "native_identity": {
+    "artifact_mvid": "7156ab3f-fd5e-4c4a-9a87-fda9d7633c36",
+    "artifact_sha256": "e8c2214931a250d9ec2e8236935c9485f20bf574b8ed2b011c3b83ad466f335e",
+    "godot_stub_sha256": "4cbc15bd3058ab2104c4c7b9764aa2e4e72dd6b823ed1f031feba068d5bdb4b1",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+    "runtime_dependencies_id": "4539331c8760d932eaa8fb159fe9224100b6c8eef9c05dfd27c524591ef9d145",
+    "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "source_diff_id": "ae2bd6a08b8b26d2076759e54fe3c39dfb942731df7a2cc0e114100d427fdc1a"
+  },
+  "native_regression_fixtures": 28,
+  "native_regression_subchecks": 841,
+  "native_regressions": [
+    {
+      "native_fixtures": 12,
+      "panel": "combat",
+      "report_id": "sha256:c4831ef57b7726e97130051ab4a274dbbc61e5f9e2d20d41bb8fe0f396554d85",
+      "subchecks": 370,
+      "wall_seconds": 3.9426732920110226
+    },
+    {
+      "native_fixtures": 9,
+      "panel": "rest",
+      "report_id": "sha256:9a5d8c33bad5805898390f2f5699f8e6b347b7cad3be803e914597380ab860d2",
+      "subchecks": 270,
+      "wall_seconds": 3.9426918330136687
+    },
+    {
+      "native_fixtures": 7,
+      "panel": "shop",
+      "report_id": "sha256:5ed5d40aef36c7128133478dcddc0258cf858e82a39d3b7f991b8f3942bdb7c2",
+      "subchecks": 201,
+      "wall_seconds": 3.942677624989301
+    }
+  ],
+  "node_contract_and_shuffle_tests": 15,
+  "one_shared_app_with_distinct_profiles": true,
+  "optimizer_steps": 0,
+  "owner_panel": {
+    "command": "bash scripts/compare-combat-effects-v1.sh",
+    "config": "configs/engine-qualification/sts2-v0.111.0-combat-effects-bridges-v1.json",
+    "config_id": "sha256:b295848c761cce368f3b8ba5898905fbfccf41a7deea93ede9a76b895600d0f2",
+    "cpu_seconds_cap": 1800,
+    "expected_minutes": [
+      6,
+      9
+    ],
+    "external_private_profiles_counted_separately": true,
+    "independent_seeds": 2,
+    "launched": false,
+    "memory_bytes_cap": 8000000000,
+    "planned_cases": 8,
+    "preflight_report_id": "sha256:7702c39ae14e12bef1cb2b1729f23c3b25a1af0af40cfa5b445627aeec10bf4d",
+    "repeats": 2,
+    "seed_scenario_pairs": 4,
+    "tracked_storage_bytes_cap": 6000000000,
+    "tracked_storage_includes_shared_app_pool": true,
+    "wall_seconds_cap": 900,
+    "workspace_created": false
+  },
+  "prelaunch_recovery_report_id": "sha256:d33e1dc01eb683a82101733af0dc0cf19c8c0bcb324c07f941d3ccc22831b368",
+  "privileged_fixture": true,
+  "public_game_ui_actions": 26,
+  "public_observations": 18,
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "raw_saved_audits_reproduced_without_game_replay": true,
+  "repairs": [
+    "Visible power export fails visibly instead of silently dropping an owned status on formatter errors.",
+    "A fresh native observe after fixture setup replaces stale initial state.",
+    "Hand description renders while actual dynamic preview is active before finally restoring it; Weak Strike was incorrectly described as 6 instead of 4.",
+    "The exact visible enabled NShuffleFtue confirmation resumes native pending draw; unknown modals remain unsupported.",
+    "Benchmark scope is validated before working-app preparation; one inspected mode-only prelaunch failure was explicitly restored without deleting evidence."
+  ],
+  "repeat_panel_completed": false,
+  "repository_tests": 1209,
+  "saved_audit_corruptions_rejected_per_scenario": 15,
+  "saved_audit_tests_per_scenario": 16,
+  "schema_version": "engine-public-combat-effects-evidence-v1",
+  "training_allowed": false
+}

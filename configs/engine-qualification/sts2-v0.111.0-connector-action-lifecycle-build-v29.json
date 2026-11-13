@@ -1,0 +1,20 @@
+{
+  "schema_version": "engine-connector-build-config-v1",
+  "stage": "local_host_build_only_no_games",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "source_url": "https://github.com/rsgcsg/STS2-Connector.git",
+  "source_revision": "e0651024117d22bdeb95142766917103d87c0185",
+  "source_cache": "artifacts/engine-sources/connector-v1.1.0-rc.1",
+  "base_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "base_connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "patch": "patches/engine/sts2-connector-v0.111.0-action-lifecycle-v29.patch",
+  "patch_sha256": "1b57d878c01c6a0668a07abfb89624fe0bb4811bc5e718b7e91af3b7ba18806c",
+  "sdk_version": "10.0.401",
+  "commit_date": "2026-11-03T20:00:00Z",
+  "commit_message": "Track native potion completion and exact screen or hand choice owners",
+  "workspace": "artifacts/native-action-lifecycles/connector-build-v29",
+  "output_report": "artifacts/native-action-lifecycles/connector-build-v29/report.json",
+  "output_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-action-lifecycle-v29.json",
+  "max_wall_seconds": 180,
+  "training_allowed": false
+}

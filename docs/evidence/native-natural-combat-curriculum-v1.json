@@ -1,0 +1,397 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_next_stage": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "curriculum_control": {
+    "checks": {
+      "evaluations_clean": true,
+      "p2_reference_clone_fitting_loss_decreased": true,
+      "p2_reference_clone_fixed_work": true,
+      "p2_teacher_clone_fitting_loss_decreased": true,
+      "p2_teacher_clone_fixed_work": true,
+      "p3_reference_clone_fitting_loss_decreased": true,
+      "p3_reference_clone_fixed_work": true,
+      "p3_teacher_clone_fitting_loss_decreased": true,
+      "p3_teacher_clone_fixed_work": true
+    },
+    "checks_passed": true,
+    "clean_pause_after_units": 6,
+    "completed_units": 22,
+    "cumulative_wall_seconds": 328.88619387475774,
+    "final_cumulative_storage_bytes": 85726218,
+    "fresh_full_game_attempts": 6,
+    "full_games": {
+      "arms": {
+        "initial": {
+          "denominator": 2,
+          "failed_games": 0,
+          "mean_floor": 11.0,
+          "recorded": 2,
+          "wins": 0
+        },
+        "reference_clone": {
+          "denominator": 2,
+          "failed_games": 0,
+          "mean_floor": 11.0,
+          "recorded": 2,
+          "wins": 0
+        },
+        "teacher_clone": {
+          "denominator": 2,
+          "failed_games": 0,
+          "mean_floor": 11.0,
+          "recorded": 2,
+          "wins": 0
+        }
+      },
+      "interval_unit": "whole_world_cluster_jointly_across_two_fixed_parents",
+      "paired": {
+        "reference_clone_minus_initial": {
+          "completed_acts": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "training_return": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "victory": {
+            "interval95": null,
+            "mean": 0.0
+          }
+        },
+        "teacher_clone_minus_initial": {
+          "completed_acts": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "training_return": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "victory": {
+            "interval95": null,
+            "mean": 0.0
+          }
+        },
+        "teacher_clone_minus_reference_clone": {
+          "completed_acts": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "training_return": {
+            "interval95": null,
+            "mean": 0.0
+          },
+          "victory": {
+            "interval95": null,
+            "mean": 0.0
+          }
+        }
+      },
+      "primary_comparison": "teacher_clone_minus_reference_clone",
+      "terminal_victory_primary": true,
+      "unchanged_original_comparisons_required": true
+    },
+    "heldout_encounter_attempts": 6,
+    "id": "sha256:1abb42111ed2b3ea51d52cbbc04c4df0a9f7d3914e6e878cb2bd3f198377482d",
+    "independent_fresh_worlds": 1,
+    "optimizer_steps_on_copies": 32,
+    "path": "artifacts/native-natural/sts2-v0.111.0-a8-control-v1/curriculum/report.json",
+    "peak_resident_memory_bytes": 590004224,
+    "planned_units": 22,
+    "remaining_unit_driver": {
+      "description": "same curriculum API, only the 16 remaining predeclared units, unchanged four-minute outer cap including all dependency checks",
+      "path": "artifacts/native-natural/qualify-control-v1/run.py",
+      "sha256": "1ff28306c921c127f790ccd0be8b30633f303af98a2b57f501912608dbcb1e2b"
+    },
+    "resources": [
+      {
+        "cpu_seconds": 61.76003944199999,
+        "final_storage_bytes": 26612011,
+        "id": "sha256:67d65c788c95b5f85d7fea3556ce3aa17f96d3f33be80b8d770efdc9c85d06a6",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 3000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/natural-combat-control-curriculum-v1-1.json",
+        "peak_resident_memory_bytes": 299597824,
+        "wall_seconds": 166.20245495787822
+      },
+      {
+        "cpu_seconds": 94.13188011900002,
+        "final_storage_bytes": 85726218,
+        "id": "sha256:f266f090674e2adce1b4cf8443a6674f7d6d3dd10936f370e1015b45b67a48ba",
+        "limits": {
+          "cpu_seconds": 480.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 3000000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/natural-combat-control-curriculum-qualification-v1.json",
+        "peak_resident_memory_bytes": 590004224,
+        "wall_seconds": 162.68373891687952
+      }
+    ],
+    "resumed_units": 16,
+    "weights_and_Adam_not_reset": true
+  },
+  "evidence_id": "sha256:49436df58794b6bd1d4bec5e3dfe8c018ce45136a5cded468edc305ac43a96c4",
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "limitations": [
+    "Only 12 sampled natural worlds; eight of 18 available public groups.",
+    "At most 16 first-divergence alternatives with greedy continuation, not exhaustive or optimal planning.",
+    "Local outcome and retained-resource guards do not price all relic charges, future draw/RNG effects or strategic utility.",
+    "The control has no better teacher plan and only one fresh evaluation world; it is an actual no-treatment execution check, not gameplay improvement.",
+    "Successful ordinary full games remain the primary evaluation; teacher episodes are never ordinary PPO experience."
+  ],
+  "main_prepared": {
+    "all_final_states_frozen_before_evaluation": true,
+    "confirmation_repeats_are_independent_worlds": false,
+    "critic_weights_and_coarse_baseline_fixed": true,
+    "epochs_per_copy": 16,
+    "fitting_gate_uses_heldout": false,
+    "fixed_parents": 2,
+    "fresh_full_game_attempts": 192,
+    "guarded_local_labels_are_full_run_rewards": false,
+    "heldout_encounter_attempts": 24,
+    "independent_fresh_full_game_worlds": 32,
+    "main_units_executed": 0,
+    "main_workspace_created": false,
+    "maximum_mutations_per_root": 16,
+    "maximum_teacher_attempts": 228,
+    "minimum_deck_signatures": 3,
+    "minimum_enemy_sets": 2,
+    "minimum_local_improvements": 2,
+    "minimum_usable_fitting_worlds": 4,
+    "mutation_reference_public_rounds": 3,
+    "native_teacher_worlds": 12,
+    "owner_first_stage": "teacher_collection_only_then_assess",
+    "public_belief_search_eligible": false,
+    "student_arms": [
+      "reference_clone",
+      "teacher_clone"
+    ],
+    "teacher_is_privileged_fixed_world": true,
+    "total_choice_presentations": 8192,
+    "total_optimizer_steps": 256,
+    "untouched_original_comparator": true
+  },
+  "main_training_allowed_by_control_alone": false,
+  "native_probe": {
+    "branches": 2,
+    "path": "artifacts/native-natural/probe-v1/report.json",
+    "public_rounds": 3,
+    "repeated_public_trace_identical": true,
+    "resources": {
+      "cpu_seconds": 24.529597315,
+      "final_storage_bytes": 2283853,
+      "id": "sha256:d44c9e509f8d7cd79d0057fe79089fecbb1721cdece9a0657efd8bf909b1639f",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/natural-combat-probe-v1.json",
+      "peak_resident_memory_bytes": 386564096,
+      "wall_seconds": 52.55547079211101
+    },
+    "sha256": "860fc6b20234bc0c65a3852861638f22c6de5ea129b190dc2bb8584457898a2f"
+  },
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "original_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "sha256:2c712c644b2be9b3da54d47662929a5351d233fd4f65d88aef8ab601310e368d",
+      "path": "configs/native-natural/sts2-v0.111.0-a8-control-v1.json",
+      "seed_manifest": {
+        "id": "sha256:faed11ffb93519f3ed7cbbd9c3fe162df8ad609ccf24d9559fbb8469204a1743",
+        "path": "manifests/native-natural/sts2-v0.111.0-a8-control-v1.json"
+      }
+    },
+    {
+      "id": "sha256:1459acad5e4ab7fcdc341941f5b663460363704c044e26c256f851fc3110dda1",
+      "path": "configs/native-natural/sts2-v0.111.0-a8-comparison-v1.json",
+      "seed_manifest": {
+        "id": "sha256:be591ea22c66a5c117a29f634fe12a288e5c3bd00627baa43bd85ecb3f2074bc",
+        "path": "manifests/native-natural/sts2-v0.111.0-a8-comparison-v1.json"
+      }
+    }
+  ],
+  "repository_verification": {
+    "cpu_seconds": 117.721354336,
+    "csharp_protocol_build_passed": true,
+    "format_passed": true,
+    "id": "sha256:9c779678e346930ffda57be8e19fc1f663ceaf77bbba6d848f445044964f58cc",
+    "limits": {
+      "cpu_seconds": 480.0,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 100000000,
+      "wall_seconds": 240.0
+    },
+    "lint_passed": true,
+    "path": "artifacts/resources/natural-combat-repository-check-v1.json",
+    "peak_resident_memory_bytes": 453181440,
+    "strict_types_passed": true,
+    "tests_passed": 2451,
+    "tests_skipped": 5,
+    "wall_seconds": 127.85642395913601
+  },
+  "root_bank": {
+    "available_public_groups": 18,
+    "bosses": 2,
+    "candidate_roots": 1389,
+    "control_worlds": 2,
+    "deck_signatures": 12,
+    "elites": 4,
+    "fitting_worlds": 8,
+    "heldout_worlds": 4,
+    "id": "sha256:dd9e8ca2499b229a3eb27e7a7b3d4b0ae8a74e4f75a458e376492651396a1dfc",
+    "main_worlds": 12,
+    "maximum_floor": 17,
+    "maximum_selected_prefix": 223,
+    "minimum_floor": 5,
+    "normal_fights": 6,
+    "old_missing_counter_bank_silently_migrated": false,
+    "path": "artifacts/native-natural/roots-v1/report.json",
+    "relic_signatures": 11,
+    "resources": {
+      "cpu_seconds": 31.414482409999998,
+      "final_storage_bytes": 17986907,
+      "id": "sha256:99ec4c15a9c76b204551d99763413ad957370f2067b6600f53a42d532e71cfdf",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 250000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/natural-combat-root-preparation-v1.json",
+      "peak_resident_memory_bytes": 216891392,
+      "wall_seconds": 58.660559500101954
+    },
+    "selected_public_groups": 8,
+    "selection_uses_final_outcomes": false,
+    "source_games": 256,
+    "zero_current_cost_roots": 5
+  },
+  "saved_only_audit": {
+    "baseline_refits": 0,
+    "curriculum_receipts": 22,
+    "exact_parent_imports_and_Adam_lineage": true,
+    "fitting_metrics_reproduced": true,
+    "id": "sha256:fb0a9cf01afc187e9053e4146d007c61cc02b757dcbce13ee9a483056ab5dc2b",
+    "main_read_only_preparation_passed": true,
+    "main_workspace_exists": false,
+    "native_attempts_launched_by_audit": 0,
+    "native_control_attempts": 26,
+    "no_treatment_full_weights_and_Adam_equal": true,
+    "no_treatment_held_and_fresh_traces_equal": true,
+    "optimizer_steps_by_audit": 0,
+    "path": "artifacts/native-natural/control-assessment-v1/report.json",
+    "resources": {
+      "cpu_seconds": 33.602354491,
+      "final_storage_bytes": 9529,
+      "id": "sha256:ce4467e979a806ae4296eddd2042a30b1b54b205343163f6cfeed92eedc8dcae",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 1000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/natural-combat-control-assessment-v1.json",
+      "peak_resident_memory_bytes": 517193728,
+      "wall_seconds": 72.95211441605352
+    },
+    "source": {
+      "path": "artifacts/native-natural/control-assessment-v1/run.py",
+      "sha256": "8d4d0630304b0ff65878876113a5eae45c9abda2ee4d76cc324094cb6226c0d5"
+    },
+    "source_files_verified": 76724,
+    "source_optimizer_steps": 32,
+    "teacher_action_probabilities_recomputed": 176,
+    "teacher_receipts": 14
+  },
+  "schema_version": "native-natural-combat-curriculum-evidence-v1",
+  "status": "implemented_native_controls_qualified_main_teacher_owner_run",
+  "student_loss": "root_balanced_categorical_cross_entropy_not_action_score_return_regression_or_PPO",
+  "teacher_control": {
+    "completed_units": 14,
+    "failed_branches": 0,
+    "id": "sha256:5421791621d30bf049927c2ea97b6d73c131122ccd00a41b60beb4f30bae23fa",
+    "main_quality_gate_passed": false,
+    "native_attempts": 14,
+    "path": "artifacts/native-natural/sts2-v0.111.0-a8-control-v1/teacher/report.json",
+    "public_rounds": [
+      3,
+      4
+    ],
+    "resources": {
+      "cpu_seconds": 72.2571515,
+      "final_storage_bytes": 55002085,
+      "id": "sha256:4fa96e3689697b57853befac6071ab3afa22c615eaadfe63361b8dd333cbda51",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/natural-combat-control-collect-v1-1.json",
+      "peak_resident_memory_bytes": 397377536,
+      "wall_seconds": 120.47569883312099
+    },
+    "root_worlds": 2,
+    "strict_local_improvements": 0
+  },
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}

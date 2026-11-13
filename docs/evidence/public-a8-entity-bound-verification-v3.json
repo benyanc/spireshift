@@ -1,0 +1,25 @@
+{
+  "schema_version": "public-a8-entity-bound-verification-v3",
+  "verification_command": [
+    "uv",
+    "run",
+    "spireshift",
+    "check"
+  ],
+  "status": "completed",
+  "exit_code": 0,
+  "python_tests_passed": 897,
+  "ruff_check_passed": true,
+  "formatted_files_checked": 252,
+  "mypy_passed": true,
+  "typed_source_files": 171,
+  "csharp_protocol_build_passed": true,
+  "resource_report_id": "sha256:92b85d20e224461d3f344e5f1d348421df8c9bd35781c04e5e6bece2c261704e",
+  "wall_seconds": 49.423202374979155,
+  "cpu_seconds": 40.491792882999995,
+  "owner_long_stage_started": false,
+  "github_actions_started": false,
+  "earlier_short_pipeline_printing_failure_preserved": true,
+  "claim_scope": "repository_verification_not_gameplay_quality_or_foundation_readiness",
+  "verification_id": "sha256:f8a39f5fe603e73fce8df53c213927604076dc91f3380ac04a4f3f5966e490c8"
+}

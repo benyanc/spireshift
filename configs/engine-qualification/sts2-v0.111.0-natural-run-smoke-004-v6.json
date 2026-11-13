@@ -1,0 +1,25 @@
+{
+  "schema_version": "engine-native-run-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "stage": "natural_public_loop_diagnostic_only",
+  "character": "Ironclad",
+  "ascension": 8,
+  "content_policy": "native_benchmark_full_v1",
+  "input_config": "configs/engine-qualification/sts2-v0.111.0-native-run-inputs-v20.json",
+  "input_config_id": "sha256:1bfaf8ef3a82286c379401c3fac4387d1efe52a982ce87f734e58f710a737730",
+  "objective_config": "configs/default.toml",
+  "objective_sha256": "f6c81ba6f3774b339de2c22e5de28024d35235805d42eeade5af3bd97c6b32e3",
+  "seed": "SPIRESHIFTA8DIAG004",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-runs-v6/seed-004",
+  "max_wall_seconds": 120,
+  "max_decisions": 4096,
+  "max_repeated_states": 3,
+  "helpers_sha256": {
+    "probe-engine-native-run-v1.mjs": "60cdce278958d62e2d9f9448621557cc0ac1a1471da135c065cded8f4df03513",
+    "engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+  },
+  "privileged_fixture": false,
+  "training_allowed": false
+}

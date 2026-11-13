@@ -1,0 +1,103 @@
+{
+  "first_reload_stop": {
+    "clean_shutdown": true,
+    "failed_unit": "reload-01-p2-pooled",
+    "native_deliveries": 0,
+    "single_nonterminal_observation": true
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "optimizer_updates_on_disposable_copies": 42,
+  "original_optimizer_updates": 0,
+  "planned_evaluation_games": 48,
+  "planned_training_games": 48,
+  "reload_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-world-credit-reload-v3.json",
+    "sha256": "c0b9f692cc9a06be42520d6a23850f6369d67ac09e297135c8ffe93c01b8d720"
+  },
+  "reload_resources": {
+    "path": "artifacts/native-a8-world-credit/reload-control-v3-resources.json",
+    "report_id": "sha256:7b6592fedc49c3022158d2eef0642b176a4fb8ae9a7e5b0d3808b6ccd358d80a",
+    "sha256": "cfba976d5da71cb38cd64c3cb67d143533839f98acf322e0909ccd4cadd512da"
+  },
+  "report_id": "sha256:829ece4442c0f4faf56e2c163231da6d4c8d4dd7dfaa2cf26e4ca6273f2db01b",
+  "schema_version": "native-a8-world-credit-control-evidence-v3",
+  "second_reload_stop": {
+    "reason": "invalid_chunk_key_before_second_worker",
+    "resources": {
+      "path": "artifacts/native-a8-world-credit/reload-control-v2-resources.json",
+      "report_id": "sha256:6d4a3d22ced9dd9706a181713d4873107bbaf3b0f80edc773e3bb84e6be1425f",
+      "sha256": "ea386d2a5ec119447b083930b12426a665470384f63838004b82c76ab377ad84"
+    },
+    "sealed_reload": {
+      "path": "artifacts/native-a8-world-credit/reload-control-v2/chunks/reload-p2-pooled/done.json",
+      "report_id": "sha256:bb6f0357f1266399cd8705a341593f83daa22427a4e7474f0af3ad257f7d5ff4",
+      "sha256": "e52033ffc97892c7bed5da69aaa2abc6d6d14b978f7083b28af8486c6bb56283"
+    }
+  },
+  "short_copies": {
+    "2": {
+      "pooled": {
+        "model_id": "sha256:f08e0a3f8a604dbcce330d0a9d11adb295d27750d781bbd7bab3c6b7d01a1082",
+        "optimizer_id": "sha256:af5b7197c861245c08faab5f45c5e778e82da3e9047945c4ab50ca3ff73cecd9",
+        "optimizer_steps": 5667,
+        "state_id": "sha256:67fad351e35aa05be2d9f83f1c20fa9b33f172a16d8768f6854dc242ac94ce31"
+      },
+      "within_world": {
+        "model_id": "sha256:4c9eb750df24cd5b6287be7f666b5eac4a7f3aa5d432d256f76e8dd65c16a8d0",
+        "optimizer_id": "sha256:c0a8af029304cf8a51f78d806b1b4d9c36bbe162efa1c0bba39694cc33348a68",
+        "optimizer_steps": 5667,
+        "state_id": "sha256:12727a92ef5573c293da08dad3bbca7010f163c75ba89ecd820bdb394d194da8"
+      }
+    },
+    "3": {
+      "pooled": {
+        "model_id": "sha256:1b63617630d8434aa42655d59bb7e76ad4f138db2f40916d631f69be5bd7914d",
+        "optimizer_id": "sha256:6ae8ac8d61625decf143da9807ce9224772317ba94f924782d80373d8d2bfe74",
+        "optimizer_steps": 6057,
+        "state_id": "sha256:2150a633091bc39269802974f125b9e71804a8e9c279cd64b18aa03c8b22c755"
+      },
+      "within_world": {
+        "model_id": "sha256:305114399bd1194fb2a244f51238edf101333a8e486f0f7168b513dfe620924f",
+        "optimizer_id": "sha256:45c37e152ad15fc285be3f9db018b2147bdaeca7d4eb006a437de5ec25e438c0",
+        "optimizer_steps": 6057,
+        "state_id": "sha256:481073657822dda77c6bb5423e48d4e7688f25056cac01457ae8cb679a48243e"
+      }
+    }
+  },
+  "status": "world_credit_short_checks_verified",
+  "study_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-world-credit-study-v3.json",
+    "sha256": "c4a5ee0d95ff5c059596229560963eccd5366a804e8576f00a5360e13b8495bc"
+  },
+  "study_started_games": 0,
+  "training_and_copy_fit": {
+    "path": "artifacts/native-a8-world-credit/control-v1/attempt-1794194729728058000.json",
+    "report_id": "sha256:2d0318dd1f8aefa16688ce0decf480cb07b153b3f953b870adad201518aa73ba",
+    "sha256": "e8b9cb436113e62c12aa31d102bfe39a75ae907fbac5976ce0332fb2037a2ed8"
+  },
+  "training_resources": {
+    "path": "artifacts/native-a8-world-credit/control-v1-resources.json",
+    "report_id": "sha256:5046d13db2655a70be1d83518a5f97bcfdac001a41b05d96cc962bfd60e79a68",
+    "sha256": "6f185568d5076b8f08d410f7393d11f22df981f93bf19cd0049917fc5eed80d9"
+  },
+  "value_weights_exactly_matched": true,
+  "varied_control_worlds_by_initializer": {
+    "2": 2,
+    "3": 1
+  },
+  "verified_reload": {
+    "path": "artifacts/native-a8-world-credit/reload-control-v3/report.json",
+    "report_id": "sha256:4200eae355e308ade5adb1bdb5cd3cdddef71073c1cc8b141e8518eb17f072de",
+    "sha256": "7c59b33692c21af7ca7a320c7559eee0ea2dbe6ac5cc1381b2c7641b613710a1"
+  },
+  "verified_reload_choices": 16,
+  "verified_short_training_choices": 2653,
+  "verified_short_training_games": 12
+}

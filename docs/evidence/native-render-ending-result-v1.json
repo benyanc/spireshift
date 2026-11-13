@@ -1,0 +1,98 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_four_hosts_reached_real_losses_both_official_summaries_verified": true,
+  "assessment": {
+    "path": "artifacts/native-card-rendering/owner-assessment-v2/report.json",
+    "sha256": "082eb6bd7f1788484f65ecdc91c1685cbf4ed61c8fa10d64e7786654ce16ff5e"
+  },
+  "assessment_report_id": "sha256:ff28291abd1975d5d40281f64d22ce2c6a5e51e2bdd53a2636464d8df7291c9c",
+  "assessment_resource": {
+    "path": "artifacts/resources/render-ending-owner-assessment-v2.json",
+    "sha256": "0de67b29b6f31bac67c908426fa6d686a75599a63495dea8b78060bf51f7d697"
+  },
+  "assessment_resource_id": "sha256:692237d9aa318fc402f3f3c68ce0ab1a123ed8185253ada544b39373adad5f95",
+  "assessment_wall_seconds": 59.448045291996095,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "cases": [
+    {
+      "case": {
+        "key": "player-2-natural-611",
+        "player": 2,
+        "seed": "SP1RESH1FTE2E611"
+      },
+      "deliveries": {
+        "native": 166,
+        "official": 166
+      },
+      "exact_inputs_menus_choices_ending_facts_reads_and_reset": true,
+      "gameplay_CPU_seconds": {
+        "native": 5.815717499999998,
+        "official": 41.30097286400001
+      },
+      "official_native_summary": {
+        "ascension": 8,
+        "floor_reached": 9,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 162
+      }
+    },
+    {
+      "case": {
+        "key": "player-3-natural-612",
+        "player": 3,
+        "seed": "SP1RESH1FTE2E612"
+      },
+      "deliveries": {
+        "native": 126,
+        "official": 126
+      },
+      "exact_inputs_menus_choices_ending_facts_reads_and_reset": true,
+      "gameplay_CPU_seconds": {
+        "native": 4.100295912,
+        "official": 30.914964672000004
+      },
+      "official_native_summary": {
+        "ascension": 8,
+        "floor_reached": 7,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 127
+      }
+    }
+  ],
+  "checkpoint_promoted": false,
+  "complete_content_or_stronger_play_proven": false,
+  "config_id": "sha256:07498ae8895f0aabc14b6aa41904aeb004aaab5d440741f060eb20ff5096a717",
+  "environment_id": "sha256:4c445e402d31ceea743165d203b03c1b9b6744f1a6a8396a797bb4a412efbc81",
+  "expanded_protected_files_exact": 21647,
+  "game_and_all_adapters_original_full_players_and_Adam_unchanged": true,
+  "genuine_matching_ending_pairs": 2,
+  "independently_reconstructed_actual_deliveries": 584,
+  "matching_decision_pairs": 292,
+  "natural_noncombat_Blood_Potion_completion_proofs": 1,
+  "natural_shop_purchases_with_completed_task_proof": 3,
+  "next_owner_command": null,
+  "next_proposed_implementation": "bind_scoped_compatibility_evidence_to_new_learner_entry_and_prepare_varied_fitting_only_curriculum_with_separate_shared_policy_interference_test",
+  "no_mismatch_or_guard_limit": true,
+  "optimizer_updates": 0,
+  "owner_CPU_seconds": 161.565973598,
+  "owner_wall_seconds": 635.386885416985,
+  "preserved_failed_saved_audit": {
+    "path": "artifacts/resources/render-ending-owner-assessment-v1.json",
+    "sha256": "f9700b67a697e5f6f29de4349cec4ba85845758840eb59055715062aba5b5236"
+  },
+  "prior_protection_files_exact": 21356,
+  "qualification_scope": "two_original_frozen_players_declared_fresh_worlds_playable_inputs_native_endings_public_reads_and_official_summaries_only",
+  "report_id": "sha256:8f393d60360d7e26d0f5acacd9845c52e33950ecb131a217c34bfa46e98f6cd6",
+  "saved_audit_failure_note": "The first saved checker imported its potion helper one directory too high. The separate v2 corrects the path; no production source, game, profile or old action is rerun.",
+  "schema_version": "native-render-ending-result-evidence-v1",
+  "source_panel_id": "sha256:ea3b20bcb0c5e4b16690953f5dcb1576c8d9194874df25802ebedd6932d3247f",
+  "source_resource_id": "sha256:476bb19bb9cd950569864cb282edb35cf22e7a57b04e242b74bfd0eaabf98a62",
+  "status": "scoped_current_checkpoint_natural_workflow_verified",
+  "training_allowed": false,
+  "training_guard_receipt_minted": false
+}

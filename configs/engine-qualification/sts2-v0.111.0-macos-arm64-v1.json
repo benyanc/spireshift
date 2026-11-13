@@ -1,0 +1,54 @@
+{
+  "schema_version": "engine-qualification-config-v1",
+  "stage": "identity_and_preservation_only",
+  "required_game_files": [
+    "SlayTheSpire2.app/Contents/Info.plist",
+    "SlayTheSpire2.app/Contents/Resources/Slay the Spire 2.pck",
+    "SlayTheSpire2.app/Contents/Resources/data_sts2_macos_arm64/sts2.deps.json"
+  ],
+  "target": {
+    "app_id": "2868840",
+    "platform": "macos",
+    "architecture": "arm64",
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "executable_sha256": "ec8c10831dbb424c45859907f5ef6a7711f7a6e9a02f386ad13922ba8a7fcbe7",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "godotsharp_sha256": "0e4897ecdfb31456a97c7d8028dfb8d7dbdc632e2f73fc9b438d7b266a139289",
+    "runtime_main_assembly_hash": 1010476334,
+    "authority": "https://github.com/rsgcsg/STS2-headless/blob/4961b52a587777277816bc4407108f6f4274f801/docs/COMPATIBILITY.md"
+  },
+  "sources": [
+    {
+      "name": "headless",
+      "repository": "https://github.com/rsgcsg/STS2-headless.git",
+      "commit": "4961b52a587777277816bc4407108f6f4274f801",
+      "path": "artifacts/engine-sources/sts2-headless-v1.0.1"
+    },
+    {
+      "name": "cli",
+      "repository": "https://github.com/wuhao21/sts2-cli.git",
+      "commit": "084d1aa3d8e118ca7ce8d8774ad16d6be9c92367",
+      "path": "artifacts/engine-sources/sts2-cli-084d1aa"
+    }
+  ],
+  "acquisition": {
+    "depot_id": "2868842",
+    "manifest_id": "5045320271505434676",
+    "observed_steam_build_id": "24724944",
+    "download_bytes": 1288429216,
+    "installed_bytes": 2406415347,
+    "evidence": "owner_local_Steam_appcache",
+    "evidence_sha256": "eff1372922833ef5832edbd0230f4b4413c252d1d9e087f0f4b25bb3e11e1dfd",
+    "availability": "not_yet_verified_with_Steam_servers"
+  },
+  "archive_name": "sts2-v0.111.0-41cef1ea-macos-arm64-v1",
+  "qualification_required": [
+    "isolated_profile_and_modset",
+    "shipped_and_cli_boot_and_reset",
+    "complete_public_observation_and_legal_actions",
+    "same_build_targeted_mechanics_comparison",
+    "real_full_run_terminal_condition",
+    "single_and_parallel_worker_performance"
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "schema_version": "native-selection-flows-implementation-evidence-v1",
+  "status": "targeted_current_tuple_pass_broader_comparison_prepared",
+  "active_tuple": {
+    "CLI_export": 44,
+    "official_connector": 19,
+    "worker": 15,
+    "shared_helper": 10,
+    "layout": 7,
+    "environment": 26,
+    "environment_id": "sha256:2f1d8eaa8e932f2ba21ec059afed868dbb9e5c345aab2b0927e3f40f661a9cb1",
+    "config": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-selection-flows-canary-v1.json",
+      "sha256": "3fade72dbb563fceafe876ed23ef01612d426596a90559d79a58da0eebbf467e"
+    }
+  },
+  "native_build": {
+    "report": {
+      "path": "artifacts/native-selection-flows/native-build-v44-retry1/report.json",
+      "sha256": "741e04324cf62f73693de7e488fddf1828e0a24b2df22b0b67a7215cd057a50c"
+    },
+    "fresh_baselines": 2,
+    "fresh_repaired_builds": 2,
+    "artifact_sha256": "d35bcdf88b68278b4ebfb83005227191a6657753e361a6b76c17531755858ed1",
+    "game_assembly_unchanged": true
+  },
+  "official_build": {
+    "report": {
+      "path": "artifacts/native-selection-flows/connector-build-v19/report.json",
+      "sha256": "c25a0589524f1c39282cb1f3bd6200486dd7f39329e57af3ccf6528d397f8d94"
+    },
+    "fresh_repaired_builds": 2
+  },
+  "saved_inputs": {
+    "report": {
+      "path": "artifacts/native-selection-flows/offline-v13/report.json",
+      "sha256": "1c97987cee00a566bbb3934973410e1a54ed48354324f26f9d73f81938f48517"
+    },
+    "saved_frames": 1642,
+    "artificial_envelopes": 20,
+    "exact_round_trips": 1662,
+    "converted_frames_and_envelopes": 1662,
+    "frozen_policy_input_probes": 3306,
+    "protected_prior_files": 3609
+  },
+  "targeted_live_check": {
+    "report": {
+      "path": "artifacts/native-selection-flows/control-v11/report.json",
+      "sha256": "3d45ad853ed653a38691e2192a1b162d9cb024629e13d015f3459b226457b66d"
+    },
+    "complete_input_equivalence": true,
+    "decisions_per_host": 32,
+    "matched_action_menus": true,
+    "actual_pack_UI_steps": 2,
+    "actual_pack_model_choices": 1,
+    "wall_seconds": 88.1559198340401,
+    "families": {
+      "event_option": 2,
+      "card_bundle_selection": 1,
+      "map_navigation": 2,
+      "combat_turn": 23,
+      "reward_claim": 3,
+      "card_reward_selection": 1
+    },
+    "source": "one_public_menu_targeted_world_not_strength_evaluation"
+  },
+  "independent_receipt_verification": {
+    "report": {
+      "path": "artifacts/native-selection-flows/control-v11/verification.json/report.json",
+      "sha256": "1a98f5c0efdec5b553ae836f9d1ba47a84d3b70c30497c70fdc7fb3c390be8e9"
+    },
+    "verified_choices_and_receipts": 64,
+    "new_games": 0
+  },
+  "actual_pack_effect": {
+    "report": {
+      "path": "artifacts/native-selection-flows/control-v11/pack-effect.json",
+      "sha256": "cdb6519489cfff22b6f65d6665e69c765c7d4cfd33695580df03565c02008585"
+    },
+    "before_deck_cards": 11,
+    "after_deck_cards": 14,
+    "exactly_chosen_3_cards_added_in_both_hosts": true,
+    "other_visible_cards_unchanged": true
+  },
+  "saved_nested_selection_decoder": {
+    "report": {
+      "path": "artifacts/native-selection-flows/development-v1/selector-piles-decoder-check.json",
+      "sha256": "bfc3d5dc88e69999521629d506944f58b863ffb6c55c2797ba888df22d354d40"
+    },
+    "Armaments_and_Headbutt_full_decoder_pass": true,
+    "Headbutt_repaired_complete_input_and_menu_matches_saved_official_root": true,
+    "draw_true_order_excluded": true,
+    "new_games": 0
+  },
+  "checks": {
+    "focused_python_tests": 11,
+    "focused_node_cases": 26,
+    "strict_typed_source_files": 632,
+    "style_formatted_files": 843,
+    "logs": [
+      {
+        "path": "artifacts/native-selection-flows/development-v1/pytest-final-v4.log",
+        "sha256": "08faea39fd19189f6544839f505d91d76ecb1367e219f5db362cdf22916ef869"
+      },
+      {
+        "path": "artifacts/native-selection-flows/development-v1/node-tests-v12.log",
+        "sha256": "090c3ee8c4b602b2e1f6b9799935fd255fcb65673ab9b82e2d835c2477af1e18"
+      },
+      {
+        "path": "artifacts/native-selection-flows/development-v1/mypy-final-v3.log",
+        "sha256": "c8f6dcc105ae89475b2d24573e18bd341af611d015e8c67f38abb498a88176d6"
+      },
+      {
+        "path": "artifacts/native-selection-flows/development-v1/ruff-final.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "path": "artifacts/native-selection-flows/development-v1/format-final.log",
+        "sha256": "f9eb103d7b831cc320a92183f56917cc53d106aaef68ef083fcd1e254e7c954e"
+      },
+      {
+        "path": "artifacts/native-selection-flows/development-v1/protocol-final.log",
+        "sha256": "102d9268279ae598596cb028288d56570abd763d8052f73af859a3c8f6cd8b7b"
+      }
+    ],
+    "current_full_repository_check": "pending_owner_launcher_separate_600_second_allowance",
+    "incomplete_full_check_is_not_accepted_as_pass": true
+  },
+  "preservation": {
+    "prior_file_protection": {
+      "path": "artifacts/native-selection-flows/development-v1/protection.json",
+      "sha256": "285ea854cd42ac650076154c2b728483ce3e69afae33474f1bd62868e62496ed"
+    },
+    "unchanged_prior_files": 3609,
+    "players": {
+      "2": {
+        "model_id": "sha256:dcafc006c9a3569bf8caa7995501c2b403fb742939014582b1c7b327ccb12097",
+        "optimizer_steps": 5658,
+        "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json",
+        "sha256": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+        "state_id": "sha256:f013e689500a7e8ad6c3b893c9ce9771f91d44bdedc6be2aa938c210f8eeef8a"
+      },
+      "3": {
+        "model_id": "sha256:9188a1065b89b43a40238c63c6d14a6e906af3fa42ae74226f4f71f45f8320c6",
+        "optimizer_steps": 6045,
+        "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json",
+        "sha256": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+        "state_id": "sha256:6dc93df587ab6c1bea17a9999740dacb216b46c4485abee272db7f4d58d56b82"
+      }
+    },
+    "additional_full_parents": [
+      {
+        "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+        "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+      },
+      {
+        "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+        "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+      }
+    ],
+    "original_weights_and_all_Adam_unchanged": true,
+    "optimizer_updates": 0,
+    "game_apps_created": 0,
+    "old_failed_or_divergent_attempts_preserved": true,
+    "uncertain_worlds_replayed": false
+  },
+  "next_comparison": {
+    "recipe": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-selection-flows-canary-v1.json",
+      "sha256": "3fade72dbb563fceafe876ed23ef01612d426596a90559d79a58da0eebbf467e"
+    },
+    "launch": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-selection-flows-launch-v1.json",
+      "sha256": "935f7da958369344df78a47a2085ae1261945513c4d298c5c747ccf268d333ff"
+    },
+    "preflight": {
+      "path": "artifacts/native-selection-flows/development-v1/main-preflight.json",
+      "sha256": "feda7ef84a95ed91726e0f1c2c8fffc6a99d33b1ec247561955058b3e159bdbf"
+    },
+    "unstarted_workspace_absent": true,
+    "pairs": 4,
+    "maximum_game_starts": 8,
+    "maximum_model_choices_per_host": 128,
+    "pair_wall_seconds": 360,
+    "launch_wall_seconds": 1800,
+    "launch_cpu_seconds": 3600,
+    "separate_repository_check_wall_seconds": 600,
+    "completed_pairs_reused_without_changing_experiment_identity": true,
+    "single_fixed_app": true,
+    "training_follows": false
+  },
+  "limitations": [
+    "finite_input_delivery_and_pack_effect_checks_only",
+    "merchant_removal_owner_and_catalog_decoder_tested_actual_paid_effect_still_requires_broader_matching",
+    "no_exhaustive_content_interaction_claim",
+    "no_complete_full_game_parity_or_playing_strength_claim",
+    "no_training_readiness_or_promotion_granted"
+  ],
+  "report_id": "sha256:fa2fda9bc15c59ad88505093302dc0cc3f092f4d2309ecaf0ae740b2f250a9c8"
+}

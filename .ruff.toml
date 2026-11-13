@@ -1,0 +1,9 @@
+# Completed compatibility records pin this file byte for byte. Its only
+# formatting difference is one line wrap; never invalidate those receipts.
+# The dedicated regression checks its exact hash and formatted AST. Lint,
+# types and all behavioral tests still include this file. New versions must
+# be formatted before freezing, without adding another exception.
+extend = "pyproject.toml"
+
+[format]
+exclude = ["src/spireshift/native_flow_inputs_v4.py"]

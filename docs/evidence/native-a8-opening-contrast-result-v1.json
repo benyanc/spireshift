@@ -1,0 +1,215 @@
+{
+  "opening_contrast_audit": {
+    "path": "artifacts/native-a8-opening-contrast/assessment-v2-1794280837904540000/report.json",
+    "report_id": "sha256:7cc857ee14bdace830c51407c8f4e25e86e9add387dee10d50f4c3ab99c993d5",
+    "sha256": "746f6050f5b50ceaa506a90eeb217ca93af88c4fc817d8bd32485ffb12450258"
+  },
+  "opening_contrast_result": {
+    "adaptive_controller_allowed": false,
+    "audit_counts": {
+      "act1_clears": 0,
+      "local_factors": 0,
+      "native_deliveries": 5911,
+      "prefix_deliveries": 3592,
+      "sealed_files": 1952,
+      "suffix_deliveries": 2319
+    },
+    "audit_source_sha256": "614edbcdb033214b6ccaef2fc84969aa2dd30ebcc93bbe2efef4deeab08ef545",
+    "automatic_follow_up": false,
+    "config_id": "sha256:46f63c3763628e96166bdd31e808137b3786c1335254c868a31827518e0dcf49",
+    "contrast_probes_by_root": {
+      "train-p2-elite-reward-1": [
+        "train-p2-elite-reward-1-draw-0",
+        "train-p2-elite-reward-1-draw-1"
+      ],
+      "train-p2-normal-loss-2": [
+        "train-p2-normal-loss-2-draw-0"
+      ],
+      "train-p3-normal-loss-2": [
+        "train-p3-normal-loss-2-draw-0",
+        "train-p3-normal-loss-2-draw-1"
+      ]
+    },
+    "control_id": "sha256:24fc483fd25593b805cf961c3ae08bd44a3c7af06412a305b1287695a7f76795",
+    "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+    "final_test_worlds_used": false,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "native_game_launches": 0,
+    "official_live_qualification_granted": false,
+    "optimizer_updates": 0,
+    "outcomes": {
+      "capped": 0,
+      "failed": 0,
+      "loss": 32,
+      "unattempted": 0,
+      "win": 0
+    },
+    "owner": {
+      "path": "artifacts/native-a8-opening-contrast/collection-v1/attempt-1794280837904540000.json",
+      "report_id": "sha256:25081462ef62a558818a29e33d52316b7861c00949fb068c9c51c3d2bf4ee3c8",
+      "sha256": "a9131c9a46342540a869325179f34a1974cf172e5f1be21a5d79f9d7807f593a"
+    },
+    "promotion_allowed": false,
+    "report_id": "sha256:7cc857ee14bdace830c51407c8f4e25e86e9add387dee10d50f4c3ab99c993d5",
+    "resources": {
+      "path": "artifacts/native-a8-opening-contrast/collection-v1-1794280837904540000-resources.json",
+      "report_id": "sha256:2c9350898bde951d51f0fd14c0423c3c29f9116c9cf9f446ef6f22e12a6867e6",
+      "sha256": "d2ef1bcaaa62e254b128c0d40a369bfcb60d8f54586223e67bc301829743d3f7"
+    },
+    "room_outcomes": {
+      "elite": {
+        "loss": 10,
+        "reward": 6
+      },
+      "normal": {
+        "loss": 5,
+        "reward": 11
+      }
+    },
+    "schema_version": "native-a8-opening-contrast-audit-v1",
+    "status": "opening_contrast_saved_verified",
+    "summary": {
+      "candidate_for_separate_preference_admission": false,
+      "contrast_worlds_by_initializer": {
+        "2": 2,
+        "3": 1
+      },
+      "encounter_types_with_a_contrast": [
+        "elite",
+        "normal"
+      ],
+      "planned_probes": 32,
+      "reference_outcomes_with_a_contrast": {
+        "loss": 2,
+        "reward": 1
+      },
+      "resolved_room_outcomes": 32
+    },
+    "training_admission_granted": false,
+    "verified_parts": [
+      {
+        "path": "artifacts/native-a8-opening-contrast/assessment-v2-1794280837904540000/part-1/report.json",
+        "report_id": "sha256:04ec4de7db6ed449c234bcfddf9c732fa349b45cc1ba91e296a5136b4d2201fd",
+        "sha256": "570abd9ee384c68930cac5625a4b3406c9467b553d7e47015d9faf475d31e769"
+      },
+      {
+        "path": "artifacts/native-a8-opening-contrast/assessment-v2-1794280837904540000/part-2/report.json",
+        "report_id": "sha256:687dfe72b97941bdd8d47f5d7b781ce94e4ecd7e0587552a6e9b8a0731d2b657",
+        "sha256": "da85361df1823434526a98dc3f7d9f10306c93c7a3727d5159d83bc0af0333e6"
+      }
+    ]
+  },
+  "replay_entry_check": {
+    "differing_start_fields": [],
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "native_game_launches": 1,
+    "next_public_menu": {
+      "path": "artifacts/native-a8-replay-source/diagnostic-v1/successor.json",
+      "report_id": "sha256:a1dd193eab7e2c2e69288ed6f75b2f1bc76f5f0d0eee1e056a3c52317e54f0bd",
+      "sha256": "a9d82679d0bf0f0d7b312a48a2738d6acb079f2bd3e2fa6f78049a2372f8d04e"
+    },
+    "optimizer_updates": 0,
+    "reconstructed_native_choices": 1,
+    "recorded_pack_matched_one_current_bundle": true,
+    "report": {
+      "path": "artifacts/native-a8-replay-source/diagnostic-v1/report.json",
+      "report_id": "sha256:2e2482f45f7e4d1a9a686a7fdf5e47b8e7e727f0c423fc8c0988dd9545645373",
+      "sha256": "9386a9ea7928b74a8e9556165ad7f0e182db27e320580d6765fb13f8a59ff718"
+    }
+  },
+  "replay_source": {
+    "api_docs": "https://github.com/ptrlrd/spire-codex/blob/main/contributing/API_REFERENCE.md#replays",
+    "ascension": 8,
+    "build_id_full": "v0.111.0+41cef1ea",
+    "catalog_query": "https://spire-codex.com/api/replays?character=ironclad&win=true&players=1&game_mode=standard&ascension=8&build_id=v0.111.0&limit=4",
+    "character": "IRONCLAD",
+    "complete_native_replay_verified": false,
+    "event_counts": {
+      "acquire": 27,
+      "act": 3,
+      "afflict": 50,
+      "attack": 38,
+      "block": 398,
+      "buy": 6,
+      "combat_end": 21,
+      "combat_start": 22,
+      "death": 39,
+      "decision": 85,
+      "deck": 61,
+      "draw": 936,
+      "draw_order": 22,
+      "enchant": 2,
+      "end": 3,
+      "end_turn": 216,
+      "energy": 185,
+      "event_proceed": 13,
+      "exhaust": 123,
+      "flush": 108,
+      "generate": 46,
+      "gold": 24,
+      "header": 3,
+      "hit": 555,
+      "hp": 41,
+      "hp_loss": 2,
+      "intent": 213,
+      "map": 3,
+      "map_room": 2,
+      "max_hp": 2,
+      "move": 132,
+      "outcome": 50,
+      "pick": 14,
+      "play": 467,
+      "potion_dropped": 2,
+      "potion_got": 8,
+      "potion_start": 7,
+      "potion_used": 7,
+      "power": 578,
+      "power_lost": 251,
+      "power_negated": 3,
+      "relic": 16,
+      "relic_counter": 15,
+      "remap": 2,
+      "remove": 3,
+      "resolve": 52,
+      "rest": 10,
+      "resume": 2,
+      "room": 51,
+      "room_exit": 50,
+      "shop": 8,
+      "shuffle": 43,
+      "spawn": 4,
+      "transform": 1,
+      "turn": 238,
+      "unafflict": 34,
+      "upgrade": 74
+    },
+    "filtered_catalog_total_at_review": 33,
+    "last_journal_end_reason": "left_run",
+    "mode": "standard",
+    "player_count": 1,
+    "player_end_turns": 108,
+    "private_sample_path": "artifacts/native-a8-replay-source/public-sample-3b544415c39161ba.ndjson",
+    "provider": "Spire Codex",
+    "reloads": 2,
+    "review_date_toronto": "2026-11-09",
+    "sample_replay": "https://spire-codex.com/runs/3b544415c39161ba/replay",
+    "sample_sha256": "156b74b2f8c9ecd423aebf96c1001b04ba3f23475fc611d4b4c0f7322109e070",
+    "training_admission_granted": false
+  },
+  "report_id": "sha256:3f2e96eed4ea6971ecc12672f4c543766f63af5476d114286ddaba487b0384a2",
+  "schema_version": "native-a8-opening-contrast-and-replay-source-evidence-v1"
+}

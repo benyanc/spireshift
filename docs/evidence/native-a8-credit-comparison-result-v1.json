@@ -1,0 +1,638 @@
+{
+  "adaptive_controller_allowed": false,
+  "arms": {
+    "crossfit": {
+      "accounting": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 17,
+        "completed_games": 336,
+        "cpu_seconds": 622.383382376,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.01909250740635262,
+        "mean_floor_completed_only_diagnostic": 7.232142857142857,
+        "mean_floor_failures_zero": 7.232142857142857,
+        "mean_floor_reached_diagnostic": 7.232142857142857,
+        "not_attempted_games": 0,
+        "planned_games": 336,
+        "recorded_games": 336,
+        "recorded_selections": 34432,
+        "terminal_delivered_selections": 34432,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "best_trained_model_id": "sha256:64cb6769400df441a906d65c38c2f12a4e5d971c834515a9eeea1c25128d08e2",
+      "best_trained_round": 8,
+      "confirmation": {
+        "initial-confirmation": {
+          "best_completed_acts": 0,
+          "best_floor_completed": 13,
+          "completed_games": 16,
+          "cpu_seconds": 31.723728294000004,
+          "failed_games": 0,
+          "mean_auxiliary_progress_return": 0.018529645485698708,
+          "mean_floor_completed_only_diagnostic": 6.875,
+          "mean_floor_failures_zero": 6.875,
+          "mean_floor_reached_diagnostic": 6.875,
+          "not_attempted_games": 0,
+          "planned_games": 16,
+          "recorded_games": 16,
+          "recorded_selections": 1677,
+          "terminal_delivered_selections": 1677,
+          "win_rate": 0.0,
+          "wins": 0
+        },
+        "round-004-confirmation": {
+          "best_completed_acts": 0,
+          "best_floor_completed": 13,
+          "completed_games": 16,
+          "cpu_seconds": 32.2945145,
+          "failed_games": 0,
+          "mean_auxiliary_progress_return": 0.0194210098684424,
+          "mean_floor_completed_only_diagnostic": 7.4375,
+          "mean_floor_failures_zero": 7.4375,
+          "mean_floor_reached_diagnostic": 7.4375,
+          "not_attempted_games": 0,
+          "planned_games": 16,
+          "recorded_games": 16,
+          "recorded_selections": 1688,
+          "terminal_delivered_selections": 1688,
+          "win_rate": 0.0,
+          "wins": 0
+        },
+        "round-008-confirmation": {
+          "best_completed_acts": 0,
+          "best_floor_completed": 17,
+          "completed_games": 16,
+          "cpu_seconds": 34.009999836,
+          "failed_games": 0,
+          "mean_auxiliary_progress_return": 0.020396767705613283,
+          "mean_floor_completed_only_diagnostic": 8.1875,
+          "mean_floor_failures_zero": 8.1875,
+          "mean_floor_reached_diagnostic": 8.1875,
+          "not_attempted_games": 0,
+          "planned_games": 16,
+          "recorded_games": 16,
+          "recorded_selections": 1829,
+          "terminal_delivered_selections": 1829,
+          "win_rate": 0.0,
+          "wins": 0
+        }
+      },
+      "credit_reports": [
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2333,
+            "explained_variance": -2.220446049250313e-16,
+            "independent_runs": 32,
+            "mean_prediction_error": 0.0019078427981459648,
+            "mse": 2.1029204705665025e-05,
+            "residual_variance": 1.73893405632276e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2333,
+            "explained_variance": 0.2913616696097674,
+            "independent_runs": 32,
+            "mean_prediction_error": 1.8049676026239206e-05,
+            "mse": 1.2323079054117406e-05,
+            "residual_variance": 1.2322753263312753e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:737c316eb34544c19f071a73163e6344c6572b56d732deb834786b6fcb476dfd",
+          "round": 1
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2479,
+            "explained_variance": -0.1868299407953231,
+            "independent_runs": 32,
+            "mean_prediction_error": -0.00142132797632776,
+            "mse": 2.3352737231848976e-05,
+            "residual_variance": 2.133256401555701e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2479,
+            "explained_variance": 0.32890449924757015,
+            "independent_runs": 32,
+            "mean_prediction_error": 1.3234055612428749e-05,
+            "mse": 1.2062718591701614e-05,
+            "residual_variance": 1.2062543451473661e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:e620e868279d5a621fe45cda4dfe57f21e698e3cdb2f668a98f1dd25fca75fc1",
+          "round": 2
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2450,
+            "explained_variance": -0.41403358052744377,
+            "independent_runs": 32,
+            "mean_prediction_error": -0.0001964793151201356,
+            "mse": 2.245164004279563e-05,
+            "residual_variance": 2.2413035921525554e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2450,
+            "explained_variance": 0.3110388891996254,
+            "independent_runs": 32,
+            "mean_prediction_error": 7.340069460951979e-05,
+            "mse": 1.0925715395022772e-05,
+            "residual_variance": 1.0920327733053612e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:2b359f87c414226166120a637f4015d44cbde21e1ba627c74100bf19dd8aa01e",
+          "round": 3
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2524,
+            "explained_variance": -0.2559457510690917,
+            "independent_runs": 32,
+            "mean_prediction_error": -0.00030977473230639637,
+            "mse": 1.4534064447174915e-05,
+            "residual_variance": 1.4438104062399415e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2524,
+            "explained_variance": 0.10442569805090252,
+            "independent_runs": 32,
+            "mean_prediction_error": -0.00017423693939009263,
+            "mse": 1.0325703637336419e-05,
+            "residual_variance": 1.0295345126288392e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:0dbd1d178a33c13cd1d2e69e1fe08cf2fb23e016f7e3955068c100a36de6f78f",
+          "round": 4
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2295,
+            "explained_variance": -0.6307779447619652,
+            "independent_runs": 32,
+            "mean_prediction_error": 0.0015800407786619479,
+            "mse": 1.8005364654019404e-05,
+            "residual_variance": 1.5508835791784748e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2295,
+            "explained_variance": 0.17803653516931517,
+            "independent_runs": 32,
+            "mean_prediction_error": 4.195808571767956e-06,
+            "mse": 7.816959478380367e-06,
+            "residual_variance": 7.816941873570796e-06,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:57417bc1c51c71c267a504001755e8c80f391945fc3ea5db089d50db324d030e",
+          "round": 5
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2557,
+            "explained_variance": -0.18822346189398087,
+            "independent_runs": 32,
+            "mean_prediction_error": -0.0016089389019364492,
+            "mse": 2.8674378076897995e-05,
+            "residual_variance": 2.6085693686733528e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2557,
+            "explained_variance": 0.39224062752051003,
+            "independent_runs": 32,
+            "mean_prediction_error": 3.852175709129248e-06,
+            "mse": 1.3342475524616488e-05,
+            "residual_variance": 1.3342460685358793e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:d9cb9ba9c0186cea71d359a65d0302c39ca02ae640439a5d83376daffbbc0f02",
+          "round": 6
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2377,
+            "explained_variance": -2.928035996052995,
+            "independent_runs": 32,
+            "mean_prediction_error": 0.0019470737819501035,
+            "mse": 2.2382765762959902e-05,
+            "residual_variance": 1.8591669450602424e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2377,
+            "explained_variance": 6.519019494588552e-05,
+            "independent_runs": 32,
+            "mean_prediction_error": -4.4555628336306565e-05,
+            "mse": 4.7347466844934044e-06,
+            "residual_variance": 4.7327614804769616e-06,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:3d171e3289e345664eb89d1e80b52ed8bc61a22abc66a7a98a29bcfe4ab02100",
+          "round": 7
+        },
+        {
+          "behavior_critic_quality": {
+            "choice_bearing_decisions": 2469,
+            "explained_variance": -0.29363932102070955,
+            "independent_runs": 32,
+            "mean_prediction_error": -0.0001678221204815586,
+            "mse": 1.4448191311245725e-05,
+            "residual_variance": 1.4420027047122799e-05,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "prediction_quality": {
+            "choice_bearing_decisions": 2469,
+            "explained_variance": 0.16963626414073718,
+            "independent_runs": 32,
+            "mean_prediction_error": 2.8872809972795145e-05,
+            "mse": 9.256788784824039e-06,
+            "residual_variance": 9.255955145668314e-06,
+            "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+          },
+          "report_id": "sha256:9d0f5f8b0fdd86499864705c9054948fc8053203520f92023e84491edd46160e",
+          "round": 8
+        }
+      ],
+      "development_initial": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 11,
+        "completed_games": 16,
+        "cpu_seconds": 32.196009417999996,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.018931009107639542,
+        "mean_floor_completed_only_diagnostic": 7.0625,
+        "mean_floor_failures_zero": 7.0625,
+        "mean_floor_reached_diagnostic": 7.0625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1690,
+        "terminal_delivered_selections": 1690,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "development_trained": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 11,
+        "completed_games": 16,
+        "cpu_seconds": 32.053029168,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.01913701586255934,
+        "mean_floor_completed_only_diagnostic": 7.1875,
+        "mean_floor_failures_zero": 7.1875,
+        "mean_floor_reached_diagnostic": 7.1875,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1631,
+        "terminal_delivered_selections": 1631,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "incumbent_model_id": "sha256:64cb6769400df441a906d65c38c2f12a4e5d971c834515a9eeea1c25128d08e2",
+      "initial_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449",
+      "optimizer_steps": 615,
+      "sampled_training_decisions": 25917,
+      "source_report_id": "sha256:affb9d660ab8b969c7337ae6d82b4b5dc4c6d8f39fd41f177b5f85da3ecc8db8",
+      "trained_vs_initial": {
+        "auxiliary_progress_supported": false,
+        "base_readiness_passed": false,
+        "bootstrap_replicates": 10000,
+        "bootstrap_seed": 20261016,
+        "floor_difference_95_interval": [
+          -0.625,
+          0.875
+        ],
+        "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+        "independent_unit": "complete_run_seed",
+        "initial_only_wins": 0,
+        "initial_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "mean_floor_difference_failures_zero": 0.125,
+        "pairs": 16,
+        "selected_only_wins": 0,
+        "selected_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "victory_difference_95_interval": [
+          -0.23957414314634135,
+          0.23957414314634135
+        ],
+        "victory_improvement_supported": false,
+        "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+        "victory_rate_difference": 0.0
+      }
+    },
+    "legacy": {
+      "accounting": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 17,
+        "completed_games": 336,
+        "cpu_seconds": 638.535947593,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.01911937716351348,
+        "mean_floor_completed_only_diagnostic": 7.267857142857143,
+        "mean_floor_failures_zero": 7.267857142857143,
+        "mean_floor_reached_diagnostic": 7.267857142857143,
+        "not_attempted_games": 0,
+        "planned_games": 336,
+        "recorded_games": 336,
+        "recorded_selections": 34497,
+        "terminal_delivered_selections": 34497,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "best_trained_model_id": "sha256:7f3ec04c9a541849ca47d9d41086c65bb8004e1cfc884b30e3df4f6d54edb3a2",
+      "best_trained_round": 4,
+      "confirmation": {
+        "initial-confirmation": {
+          "best_completed_acts": 0,
+          "best_floor_completed": 13,
+          "completed_games": 16,
+          "cpu_seconds": 33.589447961,
+          "failed_games": 0,
+          "mean_auxiliary_progress_return": 0.018529645485698708,
+          "mean_floor_completed_only_diagnostic": 6.875,
+          "mean_floor_failures_zero": 6.875,
+          "mean_floor_reached_diagnostic": 6.875,
+          "not_attempted_games": 0,
+          "planned_games": 16,
+          "recorded_games": 16,
+          "recorded_selections": 1677,
+          "terminal_delivered_selections": 1677,
+          "win_rate": 0.0,
+          "wins": 0
+        },
+        "round-004-confirmation": {
+          "best_completed_acts": 0,
+          "best_floor_completed": 14,
+          "completed_games": 16,
+          "cpu_seconds": 33.926620541,
+          "failed_games": 0,
+          "mean_auxiliary_progress_return": 0.02079005748749002,
+          "mean_floor_completed_only_diagnostic": 8.3125,
+          "mean_floor_failures_zero": 8.3125,
+          "mean_floor_reached_diagnostic": 8.3125,
+          "not_attempted_games": 0,
+          "planned_games": 16,
+          "recorded_games": 16,
+          "recorded_selections": 1781,
+          "terminal_delivered_selections": 1781,
+          "win_rate": 0.0,
+          "wins": 0
+        },
+        "round-008-confirmation": {
+          "best_completed_acts": 0,
+          "best_floor_completed": 17,
+          "completed_games": 16,
+          "cpu_seconds": 33.828488375,
+          "failed_games": 0,
+          "mean_auxiliary_progress_return": 0.02075569358178054,
+          "mean_floor_completed_only_diagnostic": 8.3125,
+          "mean_floor_failures_zero": 8.3125,
+          "mean_floor_reached_diagnostic": 8.3125,
+          "not_attempted_games": 0,
+          "planned_games": 16,
+          "recorded_games": 16,
+          "recorded_selections": 1710,
+          "terminal_delivered_selections": 1710,
+          "win_rate": 0.0,
+          "wins": 0
+        }
+      },
+      "credit_reports": [],
+      "development_initial": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 11,
+        "completed_games": 16,
+        "cpu_seconds": 32.966775543,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.018931009107639542,
+        "mean_floor_completed_only_diagnostic": 7.0625,
+        "mean_floor_failures_zero": 7.0625,
+        "mean_floor_reached_diagnostic": 7.0625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1690,
+        "terminal_delivered_selections": 1690,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "development_trained": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 14,
+        "completed_games": 16,
+        "cpu_seconds": 32.366263790000005,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.019037881402011837,
+        "mean_floor_completed_only_diagnostic": 7.1875,
+        "mean_floor_failures_zero": 7.1875,
+        "mean_floor_reached_diagnostic": 7.1875,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1578,
+        "terminal_delivered_selections": 1578,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "incumbent_model_id": "sha256:7f3ec04c9a541849ca47d9d41086c65bb8004e1cfc884b30e3df4f6d54edb3a2",
+      "initial_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449",
+      "optimizer_steps": 627,
+      "sampled_training_decisions": 26061,
+      "source_report_id": "sha256:97fb8046c09b59bfffa6a52f2a4d1a1456a49ee66b45e1d1aea429040bd14d5a",
+      "trained_vs_initial": {
+        "auxiliary_progress_supported": false,
+        "base_readiness_passed": false,
+        "bootstrap_replicates": 10000,
+        "bootstrap_seed": 20261016,
+        "floor_difference_95_interval": [
+          -0.8125,
+          1.0
+        ],
+        "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+        "independent_unit": "complete_run_seed",
+        "initial_only_wins": 0,
+        "initial_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "mean_floor_difference_failures_zero": 0.125,
+        "pairs": 16,
+        "selected_only_wins": 0,
+        "selected_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "victory_difference_95_interval": [
+          -0.23957414314634135,
+          0.23957414314634135
+        ],
+        "victory_improvement_supported": false,
+        "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+        "victory_rate_difference": 0.0
+      }
+    }
+  },
+  "assessment_report_id": "sha256:0a6adc766c121a3393edd95e357500e9bf1fd206dfde5fd855a3a1ebda4f9edc",
+  "audited_source_files": 2866,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "sealed_complete_two_arm_seed_paired_development_assessment_no_new_play_or_selection",
+  "comparison_config_id": "sha256:9b871150e4a9e0aa7cc6dda50a5308f362b19e2bff17fcd2694e4468ae5aaa93",
+  "crossfit_minus_legacy": {
+    "auxiliary_progress_supported": false,
+    "base_readiness_passed": false,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261016,
+    "floor_difference_95_interval": [
+      -0.875,
+      0.9375
+    ],
+    "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+    "independent_unit": "complete_run_seed",
+    "initial_only_wins": 0,
+    "initial_win_rate_95_interval": [
+      0.0,
+      0.2059072142078227
+    ],
+    "mean_floor_difference_failures_zero": 0.0,
+    "pairs": 16,
+    "selected_only_wins": 0,
+    "selected_win_rate_95_interval": [
+      0.0,
+      0.2059072142078227
+    ],
+    "victory_difference_95_interval": [
+      -0.23957414314634135,
+      0.23957414314634135
+    ],
+    "victory_improvement_supported": false,
+    "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+    "victory_rate_difference": 0.0
+  },
+  "date": "2026-10-16",
+  "evidence_id": "sha256:6310803d2d2b0fcb3c888dad57a4c659bcd72aab63609a94a33edd1abe16cda3",
+  "github_issues_updated": [
+    35,
+    143,
+    134,
+    146
+  ],
+  "initial_policy_trace_pairs_identical": 64,
+  "limitations": [
+    "16_development_seeds",
+    "one_training_replication_per_method",
+    "one_evaluation_rng_stream_per_seed",
+    "delivery_and_source_seals_verified_no_engine_replay_or_gradient_recompute",
+    "equal_rollout_and_update_rules_not_identical_realized_optimizer_steps"
+  ],
+  "new_games_launched_for_assessment": 0,
+  "next_work_item": 143,
+  "optimizer_steps_for_assessment": 0,
+  "private_and_implementation_evidence": [
+    {
+      "path": "artifacts/native-assessments/sts2-v0.111.0-a8-credit-comparison-v1/report.json",
+      "sha256": "6ff11736c40e5f33cead63dc6b0d684c39615b1f25f8ece9041b99a5bd584050"
+    },
+    {
+      "path": "artifacts/native-assessments/sts2-v0.111.0-a8-credit-comparison-v1/audit.py",
+      "sha256": "10bdba6963427b47c7fb6d9a930d437ffcfd0ebdc6e73840484fd41d4c688f37"
+    },
+    {
+      "path": "src/spireshift/native_pilot_assessment.py",
+      "sha256": "4f99ab2dec84b06f9f9a76608fdde64dd3cf226ef2430a114008f2979fd05e02"
+    },
+    {
+      "path": "configs/native-value/sts2-v0.111.0-a8-credit-comparison-v1.json",
+      "sha256": "f2dadaa721af8912e054183dbabe84492eef9fe6269e88dd6e7626f2b3d5ada2"
+    },
+    {
+      "path": "artifacts/resources/native-a8-credit-comparison-assessment-v1.json",
+      "sha256": "a524b69658101c19f409c2c06b85d7988bd5af76662527ec8b16fc922c434431"
+    },
+    {
+      "path": "artifacts/resources/native-a8-credit-legacy-v1-attempt-1.json",
+      "sha256": "d912307cac8dddccf3b5f84dc5e88802a0d14fe6d0f5d49e94981291b51dfbad"
+    },
+    {
+      "path": "artifacts/resources/native-a8-credit-crossfit-v1-attempt-1.json",
+      "sha256": "dacb9a1c2cc9c27aea094bd5b49710ecc789392ddf1e8eef3affa76c2423a5ee"
+    }
+  ],
+  "repository_check": {
+    "formatting_types_and_csharp_build_passed": true,
+    "path": "artifacts/resources/native-a8-credit-result-repository-checks-v1.json",
+    "report_id": "sha256:e7c9d4afe98916b4b52b64fa0cd8240ee9114a89ea59b7d6909108f20b4c58cf",
+    "sha256": "c40fe0c10de3e3d2d7cb1cefc6f676a17374e5d45a16dd8d18ed6c560a16ff39",
+    "tests_passed": 1447,
+    "wall_seconds": 57.965632542036474
+  },
+  "resources": {
+    "crossfit": {
+      "limits": {
+        "cpu_seconds": 3600.0,
+        "resident_memory_bytes": 4000000000,
+        "storage_bytes": 4000000000,
+        "wall_seconds": 1800.0
+      },
+      "report_id": "sha256:b5b74d5a9338485723a3c8422cc63208cc2abad7f81cf85fd0318d045cc5a671",
+      "source_sha256": "dacb9a1c2cc9c27aea094bd5b49710ecc789392ddf1e8eef3affa76c2423a5ee",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.07863542847668745,
+        "cpu_hours": 0.2819480831224999,
+        "cpu_seconds": 1015.0130992409997,
+        "energy_kwh": null,
+        "final_storage_bytes": 302533281,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 2094989312,
+        "peak_storage_bytes": 302533281,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 921.9881809579674
+      }
+    },
+    "legacy": {
+      "limits": {
+        "cpu_seconds": 3600.0,
+        "resident_memory_bytes": 4000000000,
+        "storage_bytes": 4000000000,
+        "wall_seconds": 1800.0
+      },
+      "report_id": "sha256:02dc6483017242fcc860c7b5d08bd3c92773ac5e4f6834e9ffc9609dd3f10525",
+      "source_sha256": "d912307cac8dddccf3b5f84dc5e88802a0d14fe6d0f5d49e94981291b51dfbad",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.07925972088440027,
+        "cpu_hours": 0.2861516389663889,
+        "cpu_seconds": 1030.145900279,
+        "energy_kwh": null,
+        "final_storage_bytes": 304511531,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 1976434688,
+        "peak_storage_bytes": 304511531,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 928.3637287500314
+      }
+    }
+  },
+  "schema_version": "native-credit-comparison-result-evidence-v1",
+  "source_episode_audit_completed": true,
+  "training_replicates_per_method": 1,
+  "verdict": "no_clear_gameplay_improvement"
+}

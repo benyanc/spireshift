@@ -1,0 +1,158 @@
+{
+  "batch_config": "configs/engine-qualification/sts2-v0.111.0-reward-bridges-v8.json",
+  "batch_config_id": "sha256:a5a9226f667f1b611cfd579e778a42c0870b72e091e14e04f519b7760995c23b",
+  "batch_report_id": "sha256:edbe489a0ca97a636bda85f03dd89da8655327c5963572c7b9361449e97b0f69",
+  "batch_wall_seconds": 347.81314245896647,
+  "cases": [
+    {
+      "case_id": "seed-03-calling-bell-claim-all-repeat-01",
+      "comparison_report_id": "sha256:1a3f98aaf4ac207aaa8959b5c0d0f318cb19b238c9c4a807c18b0996a4cd4c59",
+      "saved_case_verification_id": "sha256:9a79a24d8fd2e04b4c4115b8617c7d72b5a3b9243b3fb06f876920f3f992238d",
+      "scenario": "calling-bell-claim-all",
+      "seed": "SPIRESHIFTREWARD003",
+      "working_app_reset_report_id": "sha256:b9c398e2e778923897852580005f6b17873d7b1c5a17a794e5063f89b6318176"
+    },
+    {
+      "case_id": "seed-03-calling-bell-claim-all-repeat-02",
+      "comparison_report_id": "sha256:55f8b00ba8f7551bc98f1ff00281eed9cc6114d3c921cf24c316eecc07b70a55",
+      "saved_case_verification_id": "sha256:6a0b6fd99ed6d068762ea86a88bafa53722a94f201fffc0985cc30346fe2ee02",
+      "scenario": "calling-bell-claim-all",
+      "seed": "SPIRESHIFTREWARD003",
+      "working_app_reset_report_id": "sha256:460825c3a8ca0916223c734dc5bced4c68b05e33ea208d61d6bfc7112f2ba0f7"
+    },
+    {
+      "case_id": "seed-04-calling-bell-claim-skip-repeat-01",
+      "comparison_report_id": "sha256:9ead728a853caa4e2124721a6677be4b097d593280d8268cce4847b9bb80fec2",
+      "saved_case_verification_id": "sha256:28dd8d565524bfca0d1430a39b131d56c6f2fcc45fe3d93b0e9b562838c7d230",
+      "scenario": "calling-bell-claim-skip",
+      "seed": "SPIRESHIFTREWARD004",
+      "working_app_reset_report_id": "sha256:c40645b3d282f3202d3a1f672b702fdcdda30c32c65ac932aa7752902e00d1e9"
+    },
+    {
+      "case_id": "seed-04-calling-bell-claim-skip-repeat-02",
+      "comparison_report_id": "sha256:fb2c7fddafa167c946e98f38461fcfd5e716d06dcee2c6527cc940fb9995d06a",
+      "saved_case_verification_id": "sha256:c5fae0d99f1e53fe1847f61695bcc0d46450e4314f4559a5fc199e3e91236644",
+      "scenario": "calling-bell-claim-skip",
+      "seed": "SPIRESHIFTREWARD004",
+      "working_app_reset_report_id": "sha256:d626b12992245a0314889da4118d1a85c6efcea8172e2034f5862caeaff7030d"
+    },
+    {
+      "case_id": "seed-01-cauldron-fill-replace-skip-repeat-01",
+      "comparison_report_id": "sha256:c2410ab7e25d15036693784fe685019d894de06fb13fac1d308d4485bf211f47",
+      "saved_case_verification_id": "sha256:9b912e9e6a64c25e1e2bc24b0b1c925e0872631fd9ee814bb72fea72766bb615",
+      "scenario": "cauldron-fill-replace-skip",
+      "seed": "SPIRESHIFTREWARD001",
+      "working_app_reset_report_id": "sha256:003f2ecda7f4bc1acba096564cb612ea9a3511be367ea683e4e705d5d6ca7569"
+    },
+    {
+      "case_id": "seed-01-cauldron-fill-replace-skip-repeat-02",
+      "comparison_report_id": "sha256:1164f0125fdd9bc97d989078fda5aa4693b3b891f31c330f975c4132f8db1705",
+      "saved_case_verification_id": "sha256:6e495e4da16305afae91d7ce8300f37a5e00157e719ffaed1085a9c28e17e85b",
+      "scenario": "cauldron-fill-replace-skip",
+      "seed": "SPIRESHIFTREWARD001",
+      "working_app_reset_report_id": "sha256:1b580dc529f91423a57c1bd6d93e51d429002b6d68a689675c07fb465c4eec79"
+    },
+    {
+      "case_id": "seed-32-cauldron-fill-skip-repeat-01",
+      "comparison_report_id": "sha256:26c410279a15bea7e1bfac96d43faf8254c096b0020ddd91cc1a926aa87bfd45",
+      "saved_case_verification_id": "sha256:36bcd156ce2f73d0987c07c3613dd542a6f93d9887dd5ec068caab8511c7f734",
+      "scenario": "cauldron-fill-skip",
+      "seed": "SPIRESHIFTREWARD032",
+      "working_app_reset_report_id": "sha256:33d1b8f3ad09dcb6ff58dc41bad9f96c1177a1c225297f7152fecd80ef2339a7"
+    },
+    {
+      "case_id": "seed-32-cauldron-fill-skip-repeat-02",
+      "comparison_report_id": "sha256:735a1e1c348ffe35a0cff9adaefaacaadeca18a64ef7ce01fcbb0faaf94167ce",
+      "saved_case_verification_id": "sha256:6a95bebe376fbd3d7a489ad7830b98d55a7411a84d7989d7f7b7b8384b693285",
+      "scenario": "cauldron-fill-skip",
+      "seed": "SPIRESHIFTREWARD032",
+      "working_app_reset_report_id": "sha256:369fd210e0c7dc55acb0d0ca4b7d40704f03247e1304adb99ea8b548fe0dfe73"
+    }
+  ],
+  "claim_scope": "four_serialized_A8_reward_seed_scenario_pairs_twice_public_pickup_curse_claim_capacity_replacement_skip_and_fresh_tutorials_only",
+  "completed_cases": 8,
+  "date": "2026-10-12",
+  "evidence_id": "sha256:5f119bbb7262613d490bb96720b3d0edfb6c41369b34eabbdf8ea95909a5e1c4",
+  "failed_cases": 0,
+  "full_run_attempts": 0,
+  "historical_failures_overwritten": false,
+  "independent_seeds": 4,
+  "issues": [
+    145,
+    146
+  ],
+  "limitations": [
+    "Explicit one-Strike/1,000-gold initial shop/Darv fixtures do not establish naturally reached rooms or model strength.",
+    "Eight cases represent four independent seeds and four repeated scenario pairs, not exhaustive reward/selection/hook coverage.",
+    "The historical script tracked the output folder rather than the recipe-owned cases folder; reported storage excludes those cases and external profiles. Preserve it unchanged; true historical peak is unknown.",
+    "The corrected runner tracks the recipe-owned case workspace and shared app pool. External fresh profiles are separately measured; logical APFS bytes do not measure independently allocated blocks.",
+    "Content/act-discovery profile state, public effect text, remaining mode/mechanics/decisions, later acts and terminal endings remain before #146 throughput and a new A8 neural pilot."
+  ],
+  "next_work": "Freeze explicit content/act-discovery profile semantics and repair the known persistent public potion-text export before broader mechanics checks under #145.",
+  "not_attempted_cases": 0,
+  "optimizer_steps": 0,
+  "owner_ran_batch": true,
+  "planned_cases": 8,
+  "privileged_fixture": true,
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "repeated_public_prefixes_identical": true,
+  "resource_limits": {
+    "cpu_seconds": 1800.0,
+    "resident_memory_bytes": 8000000000,
+    "storage_bytes": 6000000000,
+    "wall_seconds": 900.0
+  },
+  "resource_report_id": "sha256:f33f0a322f8a258b41ce886f46bbb3e1fe558af779e7a18256e842dfe6fc1ca1",
+  "resources": {
+    "average_cpu_utilization": 0.04230943407189321,
+    "cpu_hours": 0.05785071883111116,
+    "cpu_seconds": 208.26258779200018,
+    "energy_kwh": null,
+    "final_storage_bytes": 2406630121,
+    "gpu_hours": null,
+    "gpu_seconds": null,
+    "peak_process_count": 5,
+    "peak_resident_memory_bytes": 1131216896,
+    "peak_storage_bytes": 2407650538,
+    "simulations": null,
+    "trajectories": null,
+    "transitions": null,
+    "wall_seconds": 351.5976862919633
+  },
+  "runner_bookkeeping": {
+    "completed_runner_reads_saved_results_only": true,
+    "current_total_logical_bytes_app_cases_original_outputs_and_profiles": 2435700103,
+    "historical_peak_storage_recoverable": false,
+    "historical_resource_report_preserved": true,
+    "historical_storage_measurement_complete": false,
+    "original_output_and_tracked_root": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/reward-bridges-v8",
+    "recipe_workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v8/reward-bridges-v8",
+    "regression_tests": 2,
+    "repair": "Runner derives the case workspace from the pinned recipe for cached results, resource tracking and new output paths."
+  },
+  "saved_effect_decisions": 34,
+  "saved_observations": 42,
+  "saved_public_game_ui_actions": 46,
+  "saved_reaudit_launched_games": 0,
+  "saved_tutorial_steps": 8,
+  "saved_verification_report_id": "sha256:0060c29210f98bc3178db3f5d605f51f5d0fade1900cfa4f808839e7c2cc0b8e",
+  "schema_version": "actual-engine-reward-panel-evidence-v1",
+  "seed_scenario_pairs": 4,
+  "serial_reuse": {
+    "all_profile_sentinels_unchanged": true,
+    "all_reset_receipts_valid": true,
+    "batch_result_logical_bytes": 28336683,
+    "current_archive_verification_id": "sha256:e27a00015d88132aa1d5de0e6465b9b97f4773ddda29fda9bf1d11fdbce806d0",
+    "current_worker_matches_original_baseline": true,
+    "distinct_profiles": 8,
+    "fresh_profile_logical_bytes": 732367,
+    "managed_app_logical_bytes": 2406594686,
+    "managed_apps": 1,
+    "nested_game_payloads": 0,
+    "new_app_copies": 0,
+    "original_output_logical_bytes": 36367,
+    "same_app_path_and_inode": true
+  },
+  "shipped_cross_host_parity": false,
+  "training_allowed": false
+}

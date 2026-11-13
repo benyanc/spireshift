@@ -1,0 +1,401 @@
+{
+  "automatic_follow_up": false,
+  "build_config": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-entry-text-build-v56.json",
+    "sha256": "2a80d6d48e131f14ec10f18e92ee8bab0c6eb708ab170b9f48f19981ae46ca43"
+  },
+  "build_report": {
+    "path": "artifacts/native-entry-text-repair/native-build-v56/report.json",
+    "sha256": "4f4637e05e3937ab0051aab2baf01457e6c7649e824f696c3817e35f8c8cd9ef"
+  },
+  "cases": [
+    {
+      "key": "player-2-natural-605",
+      "player": 2,
+      "seed": "SP1RESH1FTE2E605"
+    },
+    {
+      "key": "player-3-natural-606",
+      "player": 3,
+      "seed": "SP1RESH1FTE2E606"
+    }
+  ],
+  "connector": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-connector-entry-readiness-reproduced-v27.json",
+    "sha256": "6133ff4aa5cfc09bfb75da65da4733f4f2cedc642be83f0825930fa6681e9c65"
+  },
+  "environment": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-shared-environment-v44.json",
+    "sha256": "f106b4552708d61eb889b1b1630c5e41d93ff556e740e1205c4587b959d091e9"
+  },
+  "game_data": "/Users/benjamin/Library/Application Support/SpireShift/frozen-games/sts2-v0.111.0-41cef1ea-macos-arm64-v1/steamapps/common/Slay the Spire 2/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_arm64",
+  "historical_units": [
+    {
+      "kind": "reward_glyphs",
+      "recipe": {
+        "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-reward-glyphs-control-v1.json",
+        "sha256": "fe652cee158efea8f0084a8b858e98058ed25f553817f6ce390d3b49e247f3b3"
+      },
+      "report": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/reward-glyphs/report.json",
+        "sha256": "d17febd2135b7f422d478c271fc7dbda4f35572c39f5d9269add487afa70e286"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/reward-glyphs/verification-v1/report.json",
+        "sha256": "ae35fa3894e0c0435ecbf9ab8140713fbf20580164d096671154c1f312dfac00"
+      }
+    },
+    {
+      "kind": "status_titles",
+      "recipe": {
+        "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-status-titles-control-v1.json",
+        "sha256": "2266ecfbe3a90b9834c0df93c1146ec088769e8440b4bb50f72bc9216e7e305b"
+      },
+      "report": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/status-titles/report.json",
+        "sha256": "9e2cbcfb893a8d5fcd3d475e37659daed34ab51910ae7d33fd2c5a71db47cd28"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/status-titles/verification-v1/report.json",
+        "sha256": "62fde941018b76788a8d79fc02e0c68e48dc292d45d8855bd6d450586a929b97"
+      }
+    },
+    {
+      "kind": "modified_deck",
+      "recipe": {
+        "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-modified-deck-control-v1.json",
+        "sha256": "c8ac9e19b305a26f6c6d704f603d72e5ba16761255278ab51b380f28d0dbea71"
+      },
+      "report": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/modified-deck/report.json",
+        "sha256": "86385c8a1fc26a7e07c765576e4d6e70fdc46af0774cf14d3c561ee54ccb3232"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/modified-deck/verification-v1/report.json",
+        "sha256": "62a04a5f072db23cb84d6f87cc368ab6f6ae9bc971b48ab4f16dc456a085ae4f"
+      }
+    },
+    {
+      "kind": "selector_belt",
+      "recipe": {
+        "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-selector-belt-control-v1.json",
+        "sha256": "393cb222927dcc680ad5f605822f7a94cbec9d01c8f8d5990fd910446af0551e"
+      },
+      "report": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/selector-belt/report.json",
+        "sha256": "a8ce1367c1005214fd3252d60960ce02914a64f109b3cc948e16b34bf9fab4f3"
+      },
+      "verification": {
+        "path": "artifacts/native-selection-flows/reward-map-panel-v1/selector-belt/verification-v1/report.json",
+        "sha256": "d0e320c451563e1ae77085341d0b52a5320fe5ea46fd486cc088aa3f03172981"
+      }
+    }
+  ],
+  "implementation": {
+    "backend-patches/tutorial-entry-text-v1/Probe.csproj": "54511cfc5d6c88eabbe60615476814416d041aa1cea1b2ca5b9e7e755018acf1",
+    "backend-patches/tutorial-entry-text-v1/Program.cs": "13c221693b7d95097f9ae4cb3344026b0f3325d8d43cd912aafba32126612da1",
+    "scripts/compare-entry-text-endings-v1.sh": "cacc1fae30d1ca1d0b4de8e3c82e6eff565907a5308b3a09bb3cee1da5352832",
+    "src/spireshift/native_entry_text_audit.py": "563f53368ef1d88e3c9e8a9b06d340a5f635241369e176b5790cb7e77df8239c",
+    "src/spireshift/native_entry_text_endings.py": "d1bf1e8c47a8a79f8413a80cf22b37b72bcb8af34ea866b89f47471f29fd9710",
+    "src/spireshift/native_entry_text_inputs.py": "0fd05787cefe3f3b0728e80b3b6437e75ef7f2a723797ee92d751d4a0401c113",
+    "tests/unit/test_native_entry_text.py": "e230153403e8017999db34e7a94d392bdca0048f9f4da8e4d6b0e033f8eab50b"
+  },
+  "maximum_decisions": 384,
+  "maximum_pair_wall_seconds": 600,
+  "node": "/Users/benjamin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "parent_build_report": {
+    "path": "artifacts/native-chest-repair/native-build-v55/report.json",
+    "sha256": "2c515ff476ee14985484515cc361bcbdd3b5f7bda9b3c1a28cff5638560ffb3a"
+  },
+  "parent_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-chest-endings-v1.json",
+    "sha256": "b32e680d96b9c93e1de8bba70b4bfc644362d0f1f445b6c9a9c79d590436b40f"
+  },
+  "players": {
+    "2": {
+      "model_id": "sha256:dcafc006c9a3569bf8caa7995501c2b403fb742939014582b1c7b327ccb12097",
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json",
+      "sha256": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+      "state_id": "sha256:f013e689500a7e8ad6c3b893c9ce9771f91d44bdedc6be2aa938c210f8eeef8a"
+    },
+    "3": {
+      "model_id": "sha256:9188a1065b89b43a40238c63c6d14a6e906af3fa42ae74226f4f71f45f8320c6",
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json",
+      "sha256": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+      "state_id": "sha256:6dc93df587ab6c1bea17a9999740dacb216b46c4485abee272db7f4d58d56b82"
+    }
+  },
+  "protection": {
+    "path": "artifacts/native-entry-text-repair/preparation-v1/protected.json",
+    "sha256": "9bc2c053be3708d6ce7c38cfad93cb49507a0cb201cb1d5644afda66a8610a35"
+  },
+  "resource_limits": {
+    "cpu_seconds": 900,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 1000000000,
+    "wall_seconds": 270
+  },
+  "schema_version": "native-entry-text-config-v1",
+  "seed_history": {
+    "path": "artifacts/native-entry-text-repair/preparation-v1/seed-history-v1.json",
+    "sha256": "99bd1a66d9dcfb8d2676cb56e7d0e9f324d004f4afdb4847939610598fad445e"
+  },
+  "source_delta": {
+    "chest_and_summary_repairs_unchanged": true,
+    "connector_changed_production_files": [
+      "LiveHost/TutorialModalSurfaceReader.cs",
+      "NativeUi/NativeTutorialEntryTransition.cs",
+      "PlayerEnvironment/Observation/SnapshotBuilder.cs"
+    ],
+    "connector_new_sources": {
+      "AssemblyInfo.cs": "8dd03ff308f41b266feec0daac5b9427293c24ef9d1aeb3b6c2eaedd555dfe21",
+      "Authority/EnvironmentIdentityRuntime.cs": "4f3fd7a23a9c50cce234a14f6e68ebe34cfe9be7629e1460b7fc119cea2fa3bf",
+      "Authority/ExactArtifactCompatibility.cs": "29e32e5407aadd17bb508a46348f1e5188697d25d8cc0e963689ae33a21bf8cf",
+      "Authority/ExactGameCompatibility.cs": "e84b0c7d95ca74eef620d149ecb6f201305731ac1cd99741ec2530147fa1406d",
+      "Authority/HostArtifactIdentity.cs": "0f7eff0289ab1abcf52a25c2056f814d736b995fbd603389f369a038b4606d68",
+      "Authority/MutationControlContracts.cs": "92aa46f70b4e919d3b7ad091243ab48d7ce86b5c7c4ccaf68332871765bad7ae",
+      "Authority/MutationControlRuntime.cs": "1174dd44e5b129d0cfbfef106327662b85f8afd51a8068ec42411a679c9e4769",
+      "Authority/MutationControllerCoordinator.cs": "9d19fbb71cc5ca098c32ee7716738f371ca960307b17d5f886cb09d156dfaa19",
+      "ConnectorMod.Helpers.cs": "be1f816bfaa830db139c71048c1d2b76e2af2437dcb8f714e9c3943520940ecb",
+      "ConnectorMod.cs": "344ee6d1a82c7f67682d843d518ef5541523b3a8b80db7127731c652e9110752",
+      "HostControl/ConnectorMod.HostControl.cs": "e15f1a0fbba52c5f9c5bb5e10351780a5702d924368cf7b0cf63921006181ebb",
+      "HostControl/HostLifecycleControl.cs": "27d61faa6d5b5911b464afa443c233430750b0793b28e334f9b72e48cfa92493",
+      "HostControl/HostRunSeedControl.cs": "66add809774096591bd5c88259f6641ff151dc16ede4c3b182d9b152e3bc51cb",
+      "LiveHost/ActiveInputResolver.cs": "13f96bac30c2ec242b19e92145f441601b0f7ae0004f8d4356ad9a531ea2031a",
+      "LiveHost/BoundedCardSelectionFacts.cs": "339c93f394d82e1c0d45d3a13823d1a960868ec8e165bf7b672aa0ccbe001621",
+      "LiveHost/BoundedSettlingWindow.cs": "f7475d4d8677802b447b9b5c1982bde48e93468aa9e8415076a39e6b49dbdca3",
+      "LiveHost/CardBundleSelectionSurfaceReader.cs": "ce5905cb9cba4dcd6271eff9fc4c71853dddb9b7509377121a0ba94120b753d7",
+      "LiveHost/CardRewardSurfaceReader.cs": "a86d87307b9287873eb4ce71ef2bfc2037ff0672cd8916695c864493e625e980",
+      "LiveHost/CharacterSelectSurfaceReader.cs": "79a4931fba8ed7409b741ac69548d00be1a0353b0adc7c015f2e38e82e8718be",
+      "LiveHost/CombatHandCardSelectionSurfaceReader.cs": "a2fe7fc61caf3e125741098515fe23d1716735f0cdaf8e9495c4e03606c5e556",
+      "LiveHost/CombatTurnSurfaceReader.cs": "b58de938aabddac81119148649b689f24e578117d1184e0e34decd662a8123e5",
+      "LiveHost/DeckEnchantSurfaceReader.cs": "f0f0af712cf7d217f8909de54d765ae81af14ffcfc2c69f1e3818570f617d806",
+      "LiveHost/EventDialogueSurfaceReader.cs": "70e2fe9baeaa1d176eccecae04b46ddef512f099056652da38fd698a5d67a6b8",
+      "LiveHost/EventOptionSurfaceReader.cs": "13e55225d3126e0e32d7a19ecc5ddc064d807bdf50214479e8f0aad15bfcfcf9",
+      "LiveHost/FailClosedObservation.cs": "fb0f4084971b685cfda103ec7a1f094baa0e7cd3773b4d9e95533d9b8a04c8de",
+      "LiveHost/GameOverSurfaceReader.cs": "994e202db2c814f5948ab599d4d297651252bf4020ea205ca8efebd7604f3734",
+      "LiveHost/HostDiagnostics.cs": "237a5a36b1da7052be405c4009e06cca9e7c3021fa72de0218aaba54d0d546b1",
+      "LiveHost/INativeSurfaceReader.cs": "57f0ba0893d12a93760b74e47653703dbb77238b0a0ba76fc5609d20ccbc6956",
+      "LiveHost/LiveContextReader.cs": "4f5ecf5381c638c08aff03c17f2f17d94f18adfa52d578322d8906e3e5bda3e7",
+      "LiveHost/LiveHostContracts.cs": "e5a315d239a61ec2927d2bcba841b46f9d73aed8df4968b9177b13816500394b",
+      "LiveHost/LiveModsetIdentity.cs": "27225d5e81fac3d8f374e1b5f9dcb094a16bbb6ea7a11155c47e9e307437525f",
+      "LiveHost/LiveObservation.cs": "19eae3c1c97fffb9f53e2a36e24e8c59ce1cd7f997a4a2616c00984406b20463",
+      "LiveHost/LiveObservationReader.cs": "bd958ba6adcf946fd93a081a3a92cac40667183c8819c2fc7030530d7cb3ad3c",
+      "LiveHost/MapNavigationSurfaceReader.cs": "a45ba374a0bb46824079852f2a2958b39fb85cf8ef644e56583f843405965331",
+      "LiveHost/MenuSurfaceReaders.cs": "1c41e4676470656f7e991f49843426da5ea182a93d301db38e7435b5e5490942",
+      "LiveHost/PersistentVisibleStateReader.cs": "cb25f462712ab9ebcdfc7932cd3e48a5f341f5741886c7f6f22b5f2fbd187288",
+      "LiveHost/PlayerVisibilityCatalog.cs": "d41c6c30cf633f5f2e186a5908bd48008acc3a09664efbcb797d2501227b14fa",
+      "LiveHost/PlayerVisibleReadBuilder.cs": "27e683a0f445e25f844b79654698283c6cfcbad321df4d715c8b9caf0a45b3c0",
+      "LiveHost/RewardClaimSurfaceReader.cs": "c93cc769171fa0df3105e6a75c7f3d4d339ac3a1a494378238af5647503468dd",
+      "LiveHost/ShopSurfaceReaders.cs": "6c671c7049ad0d95964852a143804ff4b8b92fb6fffc9929cdc24a301b5ba21f",
+      "LiveHost/TreasureRoomSurfaceReader.cs": "df8965d73374401810c42311f98332eb159c5f15db9e7e16ff33ca325809d80d",
+      "LiveHost/TutorialModalSurfaceReader.cs": "7e29cb32fc625a11f675df198236be03610daf4e0282be6216add6617bef81e3",
+      "LiveHost/VisibleEntityFacts.cs": "e6bd8fdfd36052accf01f246c2a37912972db976daa24819f456b7dbec2358c1",
+      "NativeUi/AtomicCardSelection.cs": "6e15037633ec4a727538627e7f60809dbba660ef1ed0b8b0fac3b0131d67ec5d",
+      "NativeUi/AtomicSelectionKernel.cs": "f0f3ab68ed0fe41179b8d8fc42e85ca895f8b9207cf71d239987589efa03a97b",
+      "NativeUi/NativeCombatPileSelection.cs": "89f8cdcc2ff3b4558d47572155e20f331dd44c4474cf0c146bc77336022b8db0",
+      "NativeUi/NativeDeckCardSelection.cs": "8b0a50b4cb373fd92cba996edf8fc2a0ce6d137ebafa7fd34081a1c8355e8cd8",
+      "NativeUi/NativeDeckTransformSelection.cs": "126ca75064b763d30d3882c200cadd14e814ce62e91cab99a4a8af3bc5c427f3",
+      "NativeUi/NativeDeckUpgradeSelection.cs": "b3e310dcc6199ba2424b0824009a7dc842bfefd3005d62828e7f7c9da91e2f36",
+      "NativeUi/NativeEntityRegistry.cs": "1c178e830ca87dffd7b62f12bf2b11496b00a8392a9862d4fa2d77fc7dde78e2",
+      "NativeUi/NativeGeneratedCardChoice.cs": "21653ae9d253a9d1b48dcbb7886b1ba08f5f94827ac66e2eb4dd146a5c739b1f",
+      "NativeUi/NativeInputResult.cs": "4eaf918958172b9a6da443b291516ded7c9fafa5f57b19e9b8a86cf337f24373",
+      "NativeUi/NativeMapTransition.cs": "3ac04ea09a2ef9b435dcfb4b6dee634a6980ba3c2b21e3605ab52fdda1f55dc0",
+      "NativeUi/NativeNonCombatPotions.cs": "df3e322f5cafe1fef01c17cef91c775483faf94b8ff24bde2186dc84fae2e884",
+      "NativeUi/NativeRelicCounterTransition.cs": "4a59f284454320ddf6c44659c95f6fc361df8dc9e4d55c05069c0c5489c514a0",
+      "NativeUi/NativeRestSite.cs": "6799cb43247534202bb5040c6b4598acd5b0dc46e92d96d6be12a13cefc30723",
+      "NativeUi/NativeSimpleCardSelection.cs": "96cee6ff900373037936b2fd0cfd6dee531ba888cfec49e82700be4b280b439b",
+      "NativeUi/NativeTreasureTransition.cs": "e6ebac859bea6453db9fa7cd8fa345c36989e6b79c983c313c503ba57859d339",
+      "NativeUi/NativeTutorialEntryTransition.cs": "7516e1e01fff116f9de25bdb40772445e66d0a3a944d7e6b16a2e51f97e0d3fe",
+      "NativeUi/NativeUiActionContracts.cs": "79fd344001af2ca0a17149e0fff67887a5acc3665ec7d88bdae35fb6b32e530c",
+      "NativeUi/NativeUiActionRuntime.cs": "f67ee8f9d0de2931e363a0c5dcc85f57fca186f5498e7338203312f9f42b8b81",
+      "NativeUi/NativeUiRuntime.cs": "57d041c69568bf0bf3a1e04242069f6ee6dd680554c162d30b3f74db2b21e25e",
+      "NativeUi/SnapshotIdentityTracker.cs": "44e1b7ab89278fa56dbfe4c42b22a2d434b482e6ec1f30562b3bf29e65848049",
+      "NativeUi/StableIdentityHash.cs": "587523053528414115fe764c0b829edb497c5828118c121713c1e1a5dfacdbfc",
+      "PlayerEnvironment/Control/ControllerService.cs": "8888ee1d75de6cb81923c8bd6c829b199e49aa838a8dca6422b8b4f17160eaf6",
+      "PlayerEnvironment/Core/PlayerEnvironmentService.cs": "add25da15aee76f38f73614c032710f850fbe9890b7f949e77e0dd885dc8453d",
+      "PlayerEnvironment/Execution/ActionSubmission.cs": "5cc4f5a46e709065d465ead3538e21e8c59d44402399d32097f19edac819adfa",
+      "PlayerEnvironment/Observation/SnapshotBuilder.cs": "fdb556e7f3e7a0aeefed8839f2e43c8668a43a417edfccfab9c016af1a6cd751",
+      "PlayerEnvironment/Observation/VisibleInteractionProjection.cs": "759374454cd20137a051ff1ca8414eecd66d3cb678e501cb65746a0a0c108791",
+      "PlayerEnvironment/Projection/BoundActionProjection.cs": "6b31bf7b82e131187df8db4bbfc86b90413deead406ee4cd766cd1bf377c835e",
+      "PlayerEnvironment/Protocol/PlayerEnvironmentContracts.cs": "443a369cc84a89706d9752b3549125f2ce32022055e2fe647f82ecab3b1e784c",
+      "PlayerEnvironment/Reads/NativePageEvidence.cs": "e71b879361e3a5e744ffdff74edbdd021e61bd43a0a51a39b1d629c65e107731",
+      "PlayerEnvironment/Reads/ReadService.cs": "748032c9255f3c21af7b298e37268244f92d03ee4ec0ad3b0d0fb59958affd55",
+      "PlayerEnvironment/Transport/ConnectorMod.PlayerEnvironment.cs": "5edeefcd1906c9a6448a2ceb0d9c8b32cb8142ccdb76aff1a34ae68ab5069824",
+      "Transport/ConnectorMod.HttpContracts.cs": "ac1adb35b9b95cbc09e4052802ba6187baa5cc1c7dd74e7ee40dc091d3092713",
+      "Transport/LoopbackOriginPolicy.cs": "36c39be97e64e5ca2dd2b86104fd81ccd429f2ce96ad4092f2afeb1fd0478d9e"
+    },
+    "connector_old_sources": {
+      "AssemblyInfo.cs": "8dd03ff308f41b266feec0daac5b9427293c24ef9d1aeb3b6c2eaedd555dfe21",
+      "Authority/EnvironmentIdentityRuntime.cs": "4f3fd7a23a9c50cce234a14f6e68ebe34cfe9be7629e1460b7fc119cea2fa3bf",
+      "Authority/ExactArtifactCompatibility.cs": "29e32e5407aadd17bb508a46348f1e5188697d25d8cc0e963689ae33a21bf8cf",
+      "Authority/ExactGameCompatibility.cs": "e84b0c7d95ca74eef620d149ecb6f201305731ac1cd99741ec2530147fa1406d",
+      "Authority/HostArtifactIdentity.cs": "0f7eff0289ab1abcf52a25c2056f814d736b995fbd603389f369a038b4606d68",
+      "Authority/MutationControlContracts.cs": "92aa46f70b4e919d3b7ad091243ab48d7ce86b5c7c4ccaf68332871765bad7ae",
+      "Authority/MutationControlRuntime.cs": "1174dd44e5b129d0cfbfef106327662b85f8afd51a8068ec42411a679c9e4769",
+      "Authority/MutationControllerCoordinator.cs": "9d19fbb71cc5ca098c32ee7716738f371ca960307b17d5f886cb09d156dfaa19",
+      "ConnectorMod.Helpers.cs": "be1f816bfaa830db139c71048c1d2b76e2af2437dcb8f714e9c3943520940ecb",
+      "ConnectorMod.cs": "344ee6d1a82c7f67682d843d518ef5541523b3a8b80db7127731c652e9110752",
+      "HostControl/ConnectorMod.HostControl.cs": "e15f1a0fbba52c5f9c5bb5e10351780a5702d924368cf7b0cf63921006181ebb",
+      "HostControl/HostLifecycleControl.cs": "27d61faa6d5b5911b464afa443c233430750b0793b28e334f9b72e48cfa92493",
+      "HostControl/HostRunSeedControl.cs": "66add809774096591bd5c88259f6641ff151dc16ede4c3b182d9b152e3bc51cb",
+      "LiveHost/ActiveInputResolver.cs": "13f96bac30c2ec242b19e92145f441601b0f7ae0004f8d4356ad9a531ea2031a",
+      "LiveHost/BoundedCardSelectionFacts.cs": "339c93f394d82e1c0d45d3a13823d1a960868ec8e165bf7b672aa0ccbe001621",
+      "LiveHost/BoundedSettlingWindow.cs": "f7475d4d8677802b447b9b5c1982bde48e93468aa9e8415076a39e6b49dbdca3",
+      "LiveHost/CardBundleSelectionSurfaceReader.cs": "ce5905cb9cba4dcd6271eff9fc4c71853dddb9b7509377121a0ba94120b753d7",
+      "LiveHost/CardRewardSurfaceReader.cs": "a86d87307b9287873eb4ce71ef2bfc2037ff0672cd8916695c864493e625e980",
+      "LiveHost/CharacterSelectSurfaceReader.cs": "79a4931fba8ed7409b741ac69548d00be1a0353b0adc7c015f2e38e82e8718be",
+      "LiveHost/CombatHandCardSelectionSurfaceReader.cs": "a2fe7fc61caf3e125741098515fe23d1716735f0cdaf8e9495c4e03606c5e556",
+      "LiveHost/CombatTurnSurfaceReader.cs": "b58de938aabddac81119148649b689f24e578117d1184e0e34decd662a8123e5",
+      "LiveHost/DeckEnchantSurfaceReader.cs": "f0f0af712cf7d217f8909de54d765ae81af14ffcfc2c69f1e3818570f617d806",
+      "LiveHost/EventDialogueSurfaceReader.cs": "70e2fe9baeaa1d176eccecae04b46ddef512f099056652da38fd698a5d67a6b8",
+      "LiveHost/EventOptionSurfaceReader.cs": "13e55225d3126e0e32d7a19ecc5ddc064d807bdf50214479e8f0aad15bfcfcf9",
+      "LiveHost/FailClosedObservation.cs": "fb0f4084971b685cfda103ec7a1f094baa0e7cd3773b4d9e95533d9b8a04c8de",
+      "LiveHost/GameOverSurfaceReader.cs": "994e202db2c814f5948ab599d4d297651252bf4020ea205ca8efebd7604f3734",
+      "LiveHost/HostDiagnostics.cs": "237a5a36b1da7052be405c4009e06cca9e7c3021fa72de0218aaba54d0d546b1",
+      "LiveHost/INativeSurfaceReader.cs": "57f0ba0893d12a93760b74e47653703dbb77238b0a0ba76fc5609d20ccbc6956",
+      "LiveHost/LiveContextReader.cs": "4f5ecf5381c638c08aff03c17f2f17d94f18adfa52d578322d8906e3e5bda3e7",
+      "LiveHost/LiveHostContracts.cs": "e5a315d239a61ec2927d2bcba841b46f9d73aed8df4968b9177b13816500394b",
+      "LiveHost/LiveModsetIdentity.cs": "27225d5e81fac3d8f374e1b5f9dcb094a16bbb6ea7a11155c47e9e307437525f",
+      "LiveHost/LiveObservation.cs": "19eae3c1c97fffb9f53e2a36e24e8c59ce1cd7f997a4a2616c00984406b20463",
+      "LiveHost/LiveObservationReader.cs": "bd958ba6adcf946fd93a081a3a92cac40667183c8819c2fc7030530d7cb3ad3c",
+      "LiveHost/MapNavigationSurfaceReader.cs": "a45ba374a0bb46824079852f2a2958b39fb85cf8ef644e56583f843405965331",
+      "LiveHost/MenuSurfaceReaders.cs": "1c41e4676470656f7e991f49843426da5ea182a93d301db38e7435b5e5490942",
+      "LiveHost/PersistentVisibleStateReader.cs": "cb25f462712ab9ebcdfc7932cd3e48a5f341f5741886c7f6f22b5f2fbd187288",
+      "LiveHost/PlayerVisibilityCatalog.cs": "d41c6c30cf633f5f2e186a5908bd48008acc3a09664efbcb797d2501227b14fa",
+      "LiveHost/PlayerVisibleReadBuilder.cs": "27e683a0f445e25f844b79654698283c6cfcbad321df4d715c8b9caf0a45b3c0",
+      "LiveHost/RewardClaimSurfaceReader.cs": "c93cc769171fa0df3105e6a75c7f3d4d339ac3a1a494378238af5647503468dd",
+      "LiveHost/ShopSurfaceReaders.cs": "6c671c7049ad0d95964852a143804ff4b8b92fb6fffc9929cdc24a301b5ba21f",
+      "LiveHost/TreasureRoomSurfaceReader.cs": "df8965d73374401810c42311f98332eb159c5f15db9e7e16ff33ca325809d80d",
+      "LiveHost/TutorialModalSurfaceReader.cs": "639110cb6db2ce800e25e1c44fd7edc3926a5fc0b951ae0764c7490566df7f3f",
+      "LiveHost/VisibleEntityFacts.cs": "e6bd8fdfd36052accf01f246c2a37912972db976daa24819f456b7dbec2358c1",
+      "NativeUi/AtomicCardSelection.cs": "6e15037633ec4a727538627e7f60809dbba660ef1ed0b8b0fac3b0131d67ec5d",
+      "NativeUi/AtomicSelectionKernel.cs": "f0f3ab68ed0fe41179b8d8fc42e85ca895f8b9207cf71d239987589efa03a97b",
+      "NativeUi/NativeCombatPileSelection.cs": "89f8cdcc2ff3b4558d47572155e20f331dd44c4474cf0c146bc77336022b8db0",
+      "NativeUi/NativeDeckCardSelection.cs": "8b0a50b4cb373fd92cba996edf8fc2a0ce6d137ebafa7fd34081a1c8355e8cd8",
+      "NativeUi/NativeDeckTransformSelection.cs": "126ca75064b763d30d3882c200cadd14e814ce62e91cab99a4a8af3bc5c427f3",
+      "NativeUi/NativeDeckUpgradeSelection.cs": "b3e310dcc6199ba2424b0824009a7dc842bfefd3005d62828e7f7c9da91e2f36",
+      "NativeUi/NativeEntityRegistry.cs": "1c178e830ca87dffd7b62f12bf2b11496b00a8392a9862d4fa2d77fc7dde78e2",
+      "NativeUi/NativeGeneratedCardChoice.cs": "21653ae9d253a9d1b48dcbb7886b1ba08f5f94827ac66e2eb4dd146a5c739b1f",
+      "NativeUi/NativeInputResult.cs": "4eaf918958172b9a6da443b291516ded7c9fafa5f57b19e9b8a86cf337f24373",
+      "NativeUi/NativeMapTransition.cs": "3ac04ea09a2ef9b435dcfb4b6dee634a6980ba3c2b21e3605ab52fdda1f55dc0",
+      "NativeUi/NativeNonCombatPotions.cs": "df3e322f5cafe1fef01c17cef91c775483faf94b8ff24bde2186dc84fae2e884",
+      "NativeUi/NativeRelicCounterTransition.cs": "4a59f284454320ddf6c44659c95f6fc361df8dc9e4d55c05069c0c5489c514a0",
+      "NativeUi/NativeRestSite.cs": "6799cb43247534202bb5040c6b4598acd5b0dc46e92d96d6be12a13cefc30723",
+      "NativeUi/NativeSimpleCardSelection.cs": "96cee6ff900373037936b2fd0cfd6dee531ba888cfec49e82700be4b280b439b",
+      "NativeUi/NativeTreasureTransition.cs": "e6ebac859bea6453db9fa7cd8fa345c36989e6b79c983c313c503ba57859d339",
+      "NativeUi/NativeUiActionContracts.cs": "79fd344001af2ca0a17149e0fff67887a5acc3665ec7d88bdae35fb6b32e530c",
+      "NativeUi/NativeUiActionRuntime.cs": "f67ee8f9d0de2931e363a0c5dcc85f57fca186f5498e7338203312f9f42b8b81",
+      "NativeUi/NativeUiRuntime.cs": "57d041c69568bf0bf3a1e04242069f6ee6dd680554c162d30b3f74db2b21e25e",
+      "NativeUi/SnapshotIdentityTracker.cs": "44e1b7ab89278fa56dbfe4c42b22a2d434b482e6ec1f30562b3bf29e65848049",
+      "NativeUi/StableIdentityHash.cs": "587523053528414115fe764c0b829edb497c5828118c121713c1e1a5dfacdbfc",
+      "PlayerEnvironment/Control/ControllerService.cs": "8888ee1d75de6cb81923c8bd6c829b199e49aa838a8dca6422b8b4f17160eaf6",
+      "PlayerEnvironment/Core/PlayerEnvironmentService.cs": "add25da15aee76f38f73614c032710f850fbe9890b7f949e77e0dd885dc8453d",
+      "PlayerEnvironment/Execution/ActionSubmission.cs": "5cc4f5a46e709065d465ead3538e21e8c59d44402399d32097f19edac819adfa",
+      "PlayerEnvironment/Observation/SnapshotBuilder.cs": "e4aad54b9928830fdd9c7d9dbd404c11fa265b35c5bd7dcae8f8f23ea1cb6f42",
+      "PlayerEnvironment/Observation/VisibleInteractionProjection.cs": "759374454cd20137a051ff1ca8414eecd66d3cb678e501cb65746a0a0c108791",
+      "PlayerEnvironment/Projection/BoundActionProjection.cs": "6b31bf7b82e131187df8db4bbfc86b90413deead406ee4cd766cd1bf377c835e",
+      "PlayerEnvironment/Protocol/PlayerEnvironmentContracts.cs": "443a369cc84a89706d9752b3549125f2ce32022055e2fe647f82ecab3b1e784c",
+      "PlayerEnvironment/Reads/NativePageEvidence.cs": "e71b879361e3a5e744ffdff74edbdd021e61bd43a0a51a39b1d629c65e107731",
+      "PlayerEnvironment/Reads/ReadService.cs": "748032c9255f3c21af7b298e37268244f92d03ee4ec0ad3b0d0fb59958affd55",
+      "PlayerEnvironment/Transport/ConnectorMod.PlayerEnvironment.cs": "5edeefcd1906c9a6448a2ceb0d9c8b32cb8142ccdb76aff1a34ae68ab5069824",
+      "Transport/ConnectorMod.HttpContracts.cs": "ac1adb35b9b95cbc09e4052802ba6187baa5cc1c7dd74e7ee40dc091d3092713",
+      "Transport/LoopbackOriginPolicy.cs": "36c39be97e64e5ca2dd2b86104fd81ccd429f2ce96ad4092f2afeb1fd0478d9e"
+    },
+    "connector_unchanged_production_files": 73,
+    "counter_rules_unchanged": true,
+    "native_changed_production_files": [
+      "Sts2Headless/RunSimulator.cs"
+    ],
+    "native_changes_outside_StripVisibleText": false,
+    "native_new_sha256": "be3b2d106dbcc870ce04cadc3d3809e3ddaa6ba51490a3e813fd98104b85e5ad",
+    "native_old_sha256": "c370dea1683e99484cc64394f02f30136c3243e914b73b7418ca849b759c40c2",
+    "native_unchanged_production_files": 12,
+    "shared_converter_unchanged": true,
+    "shared_layout_unchanged": true,
+    "worker_unchanged": true
+  },
+  "sources": {
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Combat/CombatManager.cs": "590b7a9b013b5f72cfc90330330f3eca7e7fd2adaed180872b521549e654d1ad",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/OrnamentalFan.cs": "96dcaeb91b7e6dc95a84802b1b1814131c9be636e44b090c5c84cfcce6e2c2e6",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Nodes/Ftue/NMapSelectFtue.cs": "790bf723a702a2a18f5252cc242b5dfe126c356f9f18e5ce9ec368fe7f587dbb",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Nodes/Screens/Map/NMapScreen.cs": "33a9abcdf0379727029f2b59ba8d41886341e22b9ba31292541fe5487c5d9e2c",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/addons/mega_text/MegaRichTextLabel.cs": "42e924f16e703864a3b9a9d1953d8de37ac393df1e5db20f85302361c560297e",
+    "artifacts/native-chest-repair/native-build-v55/report.json": "2c515ff476ee14985484515cc361bcbdd3b5f7bda9b3c1a28cff5638560ffb3a",
+    "artifacts/native-chest-repair/natural-ending-panel-v1/player-2-natural-603/official/live-public.jsonl.gz": "eac03ce6b2c203e7f3a2e7298631ce66c7ab2037a5f19819e2b6334adba15999",
+    "artifacts/native-chest-repair/natural-ending-panel-v1/player-3-natural-604/native/shared-public.jsonl.gz": "2811736912d6f68ee40fb2726fdac574bc2934e4331a58155622483fe0c80556",
+    "artifacts/native-chest-repair/natural-ending-panel-v1/player-3-natural-604/official/live-public.jsonl.gz": "5bbb1df4349f4b5cdd2edff6f0dc009c9d445d72cda095c55ae09e34bb776d82",
+    "artifacts/native-chest-repair/owner-assessment-v1/rejected-tutorial.json": "b0e24ddfebe013a721f543790ef336c22f46f9fa007fc6db3289581789bd5c3d",
+    "artifacts/native-chest-repair/owner-assessment-v1/report.json": "dfdb664f2dbe39b0b20dfa3bb0e291a0929f30cf32fa9d14c6df31e184444bd2",
+    "artifacts/native-entry-text-repair/connector-build-reproduced-v27/report.json": "e0b291cba3f52d701055df7519c205718cdae57f6b0bca2e23e753545f3b5e7a",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/achievements.json": "ac683e310e1ecb876d3d4a8c5d10086d8172678273939a96c93e7ad42738ee99",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/acts.json": "d55c4186f0f85a75f9e4c83e4af022306a14022f3e91e83030737b295d4ca0ca",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/afflictions.json": "62e6b24bfa2ea7d01a843880b23bd626e1805db92ef9b6c6cd82e61e9989a6b8",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/ancients.json": "2eb524e85bf9297e7b4efaaa7119de5ccab0cb2f34a830eac6fe1d574f5f8ed0",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/ascension.json": "444dd4e2b9f5874fbb947010f68121fb4490d0f1c3e80926443c5c31616bd34f",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/badges.json": "01d360470521c6c15ef288ee74524cc770e5be5680e0a15672a2691716db394d",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/bestiary.json": "c9d370386eaf51164a274b51e7815bba5c73f22a5206411c7430e0f3307f81e0",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/card_keywords.json": "4d84243b0540c06c90f2854d1f757aad2243300f0c6056e39a0cb39225c289cc",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/card_library.json": "305afbdefcc38756dbb1db576c483b6843ca56770a9850dd48ac0c24ba3f795a",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/card_reward_ui.json": "7760bb95ab8adce90dffc1ee9be44e338913a1f1d157defa947e2188dba21414",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/card_selection.json": "7568f0915ed1887b947dd52d2c2715ac9a34328e61b5a945054b1fc0dcf48b55",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/cards.json": "7a12193627a89c91f58443c81bc7fdb6ecd440e504d6daf20066cd0867db8832",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/characters.json": "7c8943e433c54cd04a93b702d34842e7c04dc0ed776e5581f528aea3cdefe35f",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/combat_messages.json": "9a62f5ebf042b1a94618508468a3e26504ebb8f6347586daf59fb8d09bb2482f",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/credits.json": "434d51c81c85bbdbd6874e79ee48d7d7b1dd709885deb724e961ed0116b94c3f",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/enchantments.json": "4f38a86d51ee6055b3ecedb060d50b3864c739bf9acceee13dac998f8542c937",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/encounters.json": "c9587f8fc2aeeaa10df0cde3a7d475c0402b8b48ebe56772b3d980d62e4506ba",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/epochs.json": "6f21a6261abe86df8b728dbd918322c2dc55038e7ad6e9dd9b97b0ec533a5b8e",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/eras.json": "97302738b2716ae406e75aa56d24457d4e95ca31fd9cfb752166f772890c26e3",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/events.json": "bc9608bfdfb4db3526bd56d98fc3e41f47e2bb5199cf0dc3c71c577fd10f1c8a",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/extensions.json": "490c6538175639b087ae801d71085a6d8f16c8d814328baeeb86b7a106586ef9",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/ftues.json": "59285fac84c5d8748dc8f6e8f5d189ca4504cb478106c8d8f22c677c871e5b49",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/game_modes.json": "30b9859cef050a563036e86a2106f8f9724ef0ffc5ce02385b8dc927262d71e6",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/game_over_screen.json": "570640c8d00b6f345adcc94e8eb64d0ec689072732de1b6bd231cbdcfce3a36e",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/gameplay_ui.json": "8b420b7427b8ebfb15d888ff0ae876bdcaaeac7e57b0c45b41937ca2627b9a91",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/inspect_relic_screen.json": "fa3e1744c413f254c63b2d0892abb73305f91df67f41026c9963c2e5f7ad1e74",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/intents.json": "f75be763a9c001cd14e57e5d14d9e226a0a0ab7ed14148d49b347e4596691e0f",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/main_menu_ui.json": "8182993d7fbdeffb6a5dc4d164226bc902e8e6908c0238e775d904fd351eb08d",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/map.json": "60ed72189308c5c05eff932a3b5563284d80e5373fb024bd04d3a37b600d6069",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/merchant_room.json": "449a479228ce14adf113bc65ae3f3b0ee014a21502c1327cdb44bcc0a068b8e3",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/modifiers.json": "bc62bff75fa72fd1c3e707a309dc5311c06a69f389c762497e9f3307fc22efd9",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/monsters.json": "197db6a843cb5d8d0a7bf4d6bfc188e99ecedbe42823d2794a9517fad90e781d",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/orbs.json": "70ac60d34b872c580409cafba57b149a334dad261c87e26b1801e54409ea5a12",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/potion_lab.json": "bedabb7a2392c658c6b9ed9e29eccff28f312c81b1937e636da45ddced2bbb87",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/potions.json": "0e93ba3da53410b4a3414dc56524ad2bd3f35fd444520aa9d4b5d67073bbbe3d",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/powers.json": "44583ceb2866456d16947095621789bdfb1d80de195b447a3023d5b227c803b5",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/relic_collection.json": "b7099bbe2ea2ef57a5cb648e9fd38d979d4178992c811c530e444e8c1bb90bbc",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/relics.json": "a0cc3a12bdbe7a850916075a6dd4d10b4114026e319fc1dc1216860b33079c2c",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/rest_site_ui.json": "d6e612c05c4c856b8d084435aac56f56cd1aa6db0936bd92b61f347ac6cc3cf5",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/rich_presence.json": "bbb19069fc4d66733b669023936c8633be76e0056ba05dc2b138bae0bd27d9bd",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/run_history.json": "bd29c7cb9f695bc45af2570c9296a92d5fd5236891c3ef6840a1b6b8c544d2b8",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/settings_ui.json": "1ace29ad57f118bca34a9eca652de59a587d9703b42fc6bd496ec20f86f8f2df",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/static_hover_tips.json": "b0301124fdebdc6f667f33be4236a48408ce402eb0d91bcfc1729909fa54c19c",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/stats_screen.json": "51ccec306c97c1dcb357f46f760f49e72bd2e7dbfc46e3ea8567688353702229",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/timeline.json": "581a812b9cc2036cd99bd49886e5116be3dc0897074e54663e3cf2227ea561fd",
+    "artifacts/native-entry-text-repair/native-build-v56/candidate/localization_eng/vfx.json": "cca0091420d9b4699a088b726d52a0c804f1d0821ac9bf1d11876e296826a657",
+    "artifacts/native-entry-text-repair/native-build-v56/report.json": "4f4637e05e3937ab0051aab2baf01457e6c7649e824f696c3817e35f8c8cd9ef",
+    "artifacts/native-entry-text-repair/preparation-v1/protected.json": "9bc2c053be3708d6ce7c38cfad93cb49507a0cb201cb1d5644afda66a8610a35",
+    "artifacts/native-entry-text-repair/preparation-v1/seed-history-v1.json": "99bd1a66d9dcfb8d2676cb56e7d0e9f324d004f4afdb4847939610598fad445e",
+    "backend-patches/tutorial-entry-text-v1/Probe.csproj": "54511cfc5d6c88eabbe60615476814416d041aa1cea1b2ca5b9e7e755018acf1",
+    "backend-patches/tutorial-entry-text-v1/Program.cs": "13c221693b7d95097f9ae4cb3344026b0f3325d8d43cd912aafba32126612da1",
+    "configs/engine-qualification/sts2-v0.111.0-connector-entry-readiness-reproduced-build-v27.json": "ef3b16dde4d606fb029b24ce45ca236bbe6cad9e97b8bb935013e792f31bdd7f",
+    "configs/engine-qualification/sts2-v0.111.0-connector-entry-readiness-reproduced-v27.json": "6133ff4aa5cfc09bfb75da65da4733f4f2cedc642be83f0825930fa6681e9c65",
+    "configs/native-compatibility/sts2-v0.111.0-a8-chest-endings-v1.json": "b32e680d96b9c93e1de8bba70b4bfc644362d0f1f445b6c9a9c79d590436b40f",
+    "configs/native-compatibility/sts2-v0.111.0-a8-shared-environment-v44.json": "f106b4552708d61eb889b1b1630c5e41d93ff556e740e1205c4587b959d091e9",
+    "configs/native-compatibility/sts2-v0.111.0-entry-text-build-v56.json": "2a80d6d48e131f14ec10f18e92ee8bab0c6eb708ab170b9f48f19981ae46ca43",
+    "patches/engine/sts2-cli-v0.111.0-entry-text-v56.patch": "aceac4d026fb5e406d2e8714b62ea7bcfbf9a525705b306a394aded1c6481d0d",
+    "patches/engine/sts2-connector-v0.111.0-entry-readiness-v27.patch": "a7cc0a3a8d80045522db1c049f4ee2498f0423a456d83985711412f322f46d8e",
+    "scripts/compare-entry-text-endings-v1.sh": "cacc1fae30d1ca1d0b4de8e3c82e6eff565907a5308b3a09bb3cee1da5352832",
+    "src/spireshift/native_entry_text_audit.py": "563f53368ef1d88e3c9e8a9b06d340a5f635241369e176b5790cb7e77df8239c",
+    "src/spireshift/native_entry_text_endings.py": "d1bf1e8c47a8a79f8413a80cf22b37b72bcb8af34ea866b89f47471f29fd9710",
+    "src/spireshift/native_entry_text_inputs.py": "0fd05787cefe3f3b0728e80b3b6437e75ef7f2a723797ee92d751d4a0401c113",
+    "tests/unit/test_native_entry_text.py": "e230153403e8017999db34e7a94d392bdca0048f9f4da8e4d6b0e033f8eab50b"
+  },
+  "stage": "saved_source_checks",
+  "training_allowed": false,
+  "whole_run_cpu_seconds": 128,
+  "workspace": "artifacts/native-entry-text-repair/source-saved-v1"
+}

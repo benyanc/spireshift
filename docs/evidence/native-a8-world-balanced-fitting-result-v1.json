@@ -1,0 +1,387 @@
+{
+  "assessment": {
+    "path": "artifacts/native-win-fitting/result-assessment-v1/report.json",
+    "report_id": "sha256:fda574365cb6edabcc3ec774994b8ce44a69734bdd6610f49d6a4c1fc8980f6c",
+    "sha256": "8799a5790045f789e0f94090018480dd32b614fbcd264563482b1d611be4f525"
+  },
+  "assessment_resource": {
+    "path": "artifacts/resources/win-world-balanced-fitting-assessment-v1.json",
+    "report_id": "sha256:90b0115888d164f0cae8b8e128f02b47ad08342a1b6738b9e50972353d2d1894",
+    "sha256": "04eafc10b035a1fc50731ced8c3236da9de7d893df14fe087d8cda8d268376a3",
+    "status": "completed"
+  },
+  "automatic_follow_up": false,
+  "bank_id": "sha256:4c57bea49d719b1dba36e3b1f2ff8c2c3955ec9a06ce6dc988cb1b2793115f60",
+  "candidates": {
+    "2": {
+      "development_diagnostics": {
+        "final": {
+          "all": {
+            "decisions": 1026,
+            "mean_world_joint_nll": 1.1936730971055047,
+            "mean_world_top_one_agreement": 0.5405465003728713,
+            "worlds": 6
+          },
+          "combat": {
+            "decisions": 766,
+            "mean_world_joint_nll": 1.3269438526815078,
+            "mean_world_top_one_agreement": 0.48987785920127497,
+            "worlds": 6
+          },
+          "map_navigation": {
+            "decisions": 21,
+            "mean_world_joint_nll": 1.2666586882934732,
+            "mean_world_top_one_agreement": 0.28125,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 7,
+            "mean_world_joint_nll": 3.371513030295932,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 2
+          },
+          "strategic": {
+            "decisions": 260,
+            "mean_world_joint_nll": 0.85822453087184,
+            "mean_world_top_one_agreement": 0.6652665419489668,
+            "worlds": 6
+          }
+        },
+        "initial": {
+          "all": {
+            "decisions": 1026,
+            "mean_world_joint_nll": 1.9589160405628656,
+            "mean_world_top_one_agreement": 0.335671102461232,
+            "worlds": 6
+          },
+          "combat": {
+            "decisions": 766,
+            "mean_world_joint_nll": 1.9739214327355885,
+            "mean_world_top_one_agreement": 0.31754626517244805,
+            "worlds": 6
+          },
+          "map_navigation": {
+            "decisions": 21,
+            "mean_world_joint_nll": 1.6121077148138983,
+            "mean_world_top_one_agreement": 0.3794642857142857,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 7,
+            "mean_world_joint_nll": 2.832796111381845,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 2
+          },
+          "strategic": {
+            "decisions": 260,
+            "mean_world_joint_nll": 1.974562907408102,
+            "mean_world_top_one_agreement": 0.37969601465152075,
+            "worlds": 6
+          }
+        }
+      },
+      "fit_diagnostics": {
+        "final": {
+          "all": {
+            "decisions": 1141,
+            "mean_world_joint_nll": 0.5192854536506846,
+            "mean_world_top_one_agreement": 0.8185387904621095,
+            "worlds": 25
+          },
+          "combat": {
+            "decisions": 877,
+            "mean_world_joint_nll": 0.5821302266261893,
+            "mean_world_top_one_agreement": 0.7896041291480477,
+            "worlds": 25
+          },
+          "map_navigation": {
+            "decisions": 14,
+            "mean_world_joint_nll": 1.172819196911446,
+            "mean_world_top_one_agreement": 0.4666666666666667,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 2,
+            "mean_world_joint_nll": 4.513939833680488,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 1
+          },
+          "strategic": {
+            "decisions": 264,
+            "mean_world_joint_nll": 0.2538070098299036,
+            "mean_world_top_one_agreement": 0.9256487719054565,
+            "worlds": 22
+          }
+        },
+        "initial": {
+          "all": {
+            "decisions": 1141,
+            "mean_world_joint_nll": 1.7090813367321953,
+            "mean_world_top_one_agreement": 0.3710843398233684,
+            "worlds": 25
+          },
+          "combat": {
+            "decisions": 877,
+            "mean_world_joint_nll": 1.7307967219930334,
+            "mean_world_top_one_agreement": 0.36103058903216495,
+            "worlds": 25
+          },
+          "map_navigation": {
+            "decisions": 14,
+            "mean_world_joint_nll": 2.3354185530186915,
+            "mean_world_top_one_agreement": 0.4666666666666667,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 2,
+            "mean_world_joint_nll": 4.867079018975517,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 1
+          },
+          "strategic": {
+            "decisions": 264,
+            "mean_world_joint_nll": 1.7344514921831582,
+            "mean_world_top_one_agreement": 0.3778215693991095,
+            "worlds": 22
+          }
+        }
+      },
+      "initial_model_id": "sha256:f356284cc932a8f60dee6a43153617f4f16d57887c93df39999b3882febb3a05",
+      "initial_optimizer_steps": 5658,
+      "initial_state_id": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+      "model_id": "sha256:6f914a5b3e8dfff867d4bcd281a8e68b925a456f452051e33bc197d3bd281947",
+      "optimizer_id": "sha256:6586ebd8336a8252926e31ff6b7a30c6818288ecacafefb856ebbb4399b781b4",
+      "optimizer_steps": 5858,
+      "state_id": "sha256:b2c65a650598711ecf4902341cd8d771976d010a2d52056e47f2240a99fd472b",
+      "state_path": "artifacts/native-win-fitting/study-v1/chunks/p2-u200/state.json",
+      "state_sha256": "7cd0f6b52a9d595921a01868a39e43698478771a1b302f3a3aabaf5692851764"
+    },
+    "3": {
+      "development_diagnostics": {
+        "final": {
+          "all": {
+            "decisions": 1026,
+            "mean_world_joint_nll": 1.1787806680763013,
+            "mean_world_top_one_agreement": 0.5268297836340502,
+            "worlds": 6
+          },
+          "combat": {
+            "decisions": 766,
+            "mean_world_joint_nll": 1.313146024282798,
+            "mean_world_top_one_agreement": 0.48104272225568084,
+            "worlds": 6
+          },
+          "map_navigation": {
+            "decisions": 21,
+            "mean_world_joint_nll": 0.9009534383290876,
+            "mean_world_top_one_agreement": 0.5089285714285714,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 7,
+            "mean_world_joint_nll": 3.1195333407976475,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 2
+          },
+          "strategic": {
+            "decisions": 260,
+            "mean_world_joint_nll": 0.8198825993625044,
+            "mean_world_top_one_agreement": 0.6458990629318772,
+            "worlds": 6
+          }
+        },
+        "initial": {
+          "all": {
+            "decisions": 1026,
+            "mean_world_joint_nll": 2.034321239560949,
+            "mean_world_top_one_agreement": 0.27897667128929254,
+            "worlds": 6
+          },
+          "combat": {
+            "decisions": 766,
+            "mean_world_joint_nll": 2.133197619668313,
+            "mean_world_top_one_agreement": 0.22100716142844892,
+            "worlds": 6
+          },
+          "map_navigation": {
+            "decisions": 21,
+            "mean_world_joint_nll": 1.3765781447280014,
+            "mean_world_top_one_agreement": 0.5446428571428571,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 7,
+            "mean_world_joint_nll": 2.953266663238718,
+            "mean_world_top_one_agreement": 0.29166666666666663,
+            "worlds": 2
+          },
+          "strategic": {
+            "decisions": 260,
+            "mean_world_joint_nll": 1.7790164109314783,
+            "mean_world_top_one_agreement": 0.44331201334816467,
+            "worlds": 6
+          }
+        }
+      },
+      "fit_diagnostics": {
+        "final": {
+          "all": {
+            "decisions": 1141,
+            "mean_world_joint_nll": 0.5685963819124374,
+            "mean_world_top_one_agreement": 0.7984432325104193,
+            "worlds": 25
+          },
+          "combat": {
+            "decisions": 877,
+            "mean_world_joint_nll": 0.6365484359657846,
+            "mean_world_top_one_agreement": 0.7654050436647216,
+            "worlds": 25
+          },
+          "map_navigation": {
+            "decisions": 14,
+            "mean_world_joint_nll": 0.7190981112239194,
+            "mean_world_top_one_agreement": 0.5666666666666667,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 2,
+            "mean_world_joint_nll": 3.966091193636596,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 1
+          },
+          "strategic": {
+            "decisions": 264,
+            "mean_world_joint_nll": 0.2826255620990978,
+            "mean_world_top_one_agreement": 0.9350408207360079,
+            "worlds": 22
+          }
+        },
+        "initial": {
+          "all": {
+            "decisions": 1141,
+            "mean_world_joint_nll": 2.0914941945072334,
+            "mean_world_top_one_agreement": 0.28274068733010765,
+            "worlds": 25
+          },
+          "combat": {
+            "decisions": 877,
+            "mean_world_joint_nll": 2.141207686622985,
+            "mean_world_top_one_agreement": 0.25501461229604927,
+            "worlds": 25
+          },
+          "map_navigation": {
+            "decisions": 14,
+            "mean_world_joint_nll": 1.5229473228053534,
+            "mean_world_top_one_agreement": 0.5583333333333333,
+            "worlds": 4
+          },
+          "shop_inventory": {
+            "decisions": 2,
+            "mean_world_joint_nll": 3.906859222642586,
+            "mean_world_top_one_agreement": 0.0,
+            "worlds": 1
+          },
+          "strategic": {
+            "decisions": 264,
+            "mean_world_joint_nll": 1.8937019804279265,
+            "mean_world_top_one_agreement": 0.4038978401277866,
+            "worlds": 22
+          }
+        }
+      },
+      "initial_model_id": "sha256:f5b9604413bb997c80d87630fb3c6fdc6f172ad29230c1770825757900732da8",
+      "initial_optimizer_steps": 6045,
+      "initial_state_id": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee",
+      "model_id": "sha256:20f7beec7a256813d9078e343c0ffc4fa49b7542d727c51b3948a14f66546ebe",
+      "optimizer_id": "sha256:f2fb6598c9f6d84349732df69352023abddce6f1bd35e5f6c5f57646670045dc",
+      "optimizer_steps": 6245,
+      "state_id": "sha256:cf25b32625fb71e1f356182ad97a6664f6de5b9e5d7f61738d4f904a38d7503c",
+      "state_path": "artifacts/native-win-fitting/study-v1/chunks/p3-u200/state.json",
+      "state_sha256": "c58a24a299314b12ee8633702c94ddf952d1843f16492bfcc9040ec3d8733ad8"
+    }
+  },
+  "dataset_id": "sha256:8a65f54d0ae30c47024c34e18557461cc459d5b44d5caa69bc580cd8074a9b7f",
+  "development_cases": 12,
+  "draws_per_copy": 5000,
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fit_preparation": {
+    "path": "docs/evidence/native-a8-world-balanced-fitting-v1.json",
+    "sha256": "373f0112e1352a0ccd077c3a3b6bca0ae0cae459492d0fbb3c37bb989f553d34"
+  },
+  "fit_worlds": 25,
+  "fitting": {
+    "path": "artifacts/native-win-fitting/study-v1/report.json",
+    "report_id": "sha256:755db5e47e0db3f161d5dce009d4b53dac92fe27ae0dc9bb5bbfef8f2b81a6b6",
+    "sha256": "03a5f72c1becc39604f938bd29eeb2846db0de67cc11b43c900a4d62be543574"
+  },
+  "fitting_resource": {
+    "path": "artifacts/resources/win-world-balanced-fitting-v1-attempt-1.json",
+    "report_id": "sha256:86ee37b251457ce3af17d6468f35724f476fbfbc42f5a16012e6ca3946543a14",
+    "sha256": "8a061a3932a3fc5749148b230b72bc4e155fc522cb75962b0745593edff9cabd",
+    "status": "completed"
+  },
+  "frozen_inputs": {
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "original_and_prior_final_weights_full_Adam_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "job_id": "sha256:1d378bf829c3c81d3e5c266eda53f04f80d4d9fe6bf48aa89ded5c5d0e5d1b8b",
+  "new_game_launches": 0,
+  "new_persisted_optimizer_updates_in_assessment": 0,
+  "official_live_qualification_granted": false,
+  "promotion_allowed": false,
+  "reconstructed_optimizer_updates": 400,
+  "report_id": "sha256:dd579215a6a25bb74a4e1436c6ffe628d3332bced89268ff2a0ea52b7842157c",
+  "repository_check": {
+    "path": "artifacts/resources/win-world-balanced-fitting-result-check-v1.json",
+    "report_id": "sha256:0beb89470a71756ad7f367301ce5137b214cd0e66ba0b85b8c9c3300fd33de45",
+    "sha256": "04fa22f172dd0c0a1161e2466450e2c2f0e17408e05678bc322bdee35385f32a",
+    "status": "completed"
+  },
+  "repository_tests_passed": 2840,
+  "repository_tests_skipped": 0,
+  "schedule_id": "sha256:3d66441c57516d5d43dde20afb84bdd958c52c42151e6eeae3b9b6e1a03c2c9f",
+  "schema_version": "native-a8-world-balanced-fitting-result-evidence-v1",
+  "sealed_chunks": 22,
+  "status": "both_frozen_candidates_independently_verified",
+  "successful_development_teacher_probes": 6,
+  "victory_endpoint_source_finding": {
+    "diagnostics": {
+      "path": "artifacts/native-win-curriculum/control-v6/fit/control-fit-003/balanced/worker/diagnostics.json",
+      "sha256": "86251a6858082c9379edee350e66a7063db07387caf2a4daf101bee0f03e2941"
+    },
+    "empty_ancient_visit_act": 3,
+    "empty_ancient_visit_index": 0,
+    "failed_fixture_resource": {
+      "path": "artifacts/resources/win-curriculum-control-fit-v6.json",
+      "report_id": "sha256:cf4a01499d12ea4caa894887c98f8700cfb613d132559ab3263909dd93a01a7d",
+      "sha256": "74a1c06193bc922401d1b431068da8ca25ac638be9c6bc6a90a04a98d0a2775d",
+      "status": "failed"
+    },
+    "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "history_lookup_source": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Runs/History/MapPointHistoryEntry.cs",
+      "sha256": "caf23cb3594e7d810070cfddd90857f33d67bfdd2f562fa0b611989814f30d2f"
+    },
+    "interpretation": "The missing event room can explain the recorded null reference. A fresh current-build terminal regression with valid native history is pending.",
+    "loaded_fixture": {
+      "path": "artifacts/native-win-curriculum/control-v6/fit/control-fit-003/start.save",
+      "sha256": "20b959f5599cdd85c1b57a8f37e92065e968066068e34d6a4bc5763a084270b4"
+    },
+    "native_ancient_event_model_dereference_has_no_null_guard": true,
+    "new_native_terminal_check": false,
+    "progress_source": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Saves/Managers/ProgressSaveManager.cs",
+      "sha256": "b6f6e061c1e37c81a8a8ac957894638a4bc181f59ed08e764c9549592b4f3ed8"
+    },
+    "raw_transcript": {
+      "path": "artifacts/native-win-curriculum/control-v6/fit/control-fit-003/balanced/worker/private-transcript.jsonl.gz",
+      "sha256": "3eb68907ca0b495b8f30e23727b8fb62e18cbeeaff471535c6a16864adfae344"
+    },
+    "saved_log_reached_singleplayer_victory_progress": true,
+    "status": "prepared_fixture_history_defect_identified"
+  }
+}

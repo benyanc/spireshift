@@ -1,0 +1,40 @@
+{
+  "build_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v34.json",
+  "build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v34.json",
+  "build_report_id": "sha256:e18dc8f4f895ab7736022053534fff123ab3f2b240309fb04a5fa8240e5f2fd3",
+  "checker": "artifacts/engine-tooling/run-progression-check-v9/SpireShift.RunProgressionCheck.dll",
+  "checker_sha256": "c94b61598724b9a25571f0027f2c4fa8bf7b5009cb1500ee7ac45ad3d44d7bea",
+  "checker_sources": {
+    "Program.cs": "6b6b0f8f4a01a94df43b7d600b33b0f336d090287b7f24762b67c9b99c0fdcec",
+    "SpireShift.RunProgressionCheck.csproj": "7f9a50f989f2d7fb712fbbfbb72568dee5fa7745b00a6288325a5a79d3492f33"
+  },
+  "managed_runtime": {
+    "directory": "artifacts/engine-tooling/dotnet-runtime-9.0.7-osx-arm64-v1/runtime",
+    "dotnet_sha256": "73be03a8f4e0d88d9653b333306fd9992a536e2109932578503a92fa2672c26f",
+    "inventory_id": "sha256:31ba28406ab7b3fc44d963ac7abf2903afe80fa68cc2be419249dc8c3a7e19b0",
+    "package_sha512": "0deb23ac714dad69bf7d0c67e4253256d0845881b805cc8b9c6f2051283d5f9bbb000d363058523dce4c7361c2b460016a865b6d6baa5843c9263591d539eb20",
+    "package_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.7/dotnet-runtime-9.0.7-osx-arm64.tar.gz",
+    "roll_forward": "LatestPatch",
+    "source_metadata": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/9.0/releases.json",
+    "version": "9.0.7"
+  },
+  "managed_runtime_version": "9.0.7",
+  "max_wall_seconds": 60,
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "native_localization": {
+    "directory": "artifacts/engine-assets/sts2-v0.111.0-41cef1ea-native-localization-v1",
+    "pack_sha256": "b3c9f133143f98a1c329c3d2efc7d8a9feb395db46fd3965b899487bf1f4d106",
+    "report_id": "sha256:be618fe6a9df33a3311897364dc800ad8c5daf338d9ece829a4b2c4eb3a12962"
+  },
+  "objective_config": "configs/default.toml",
+  "objective_sha256": "f6c81ba6f3774b339de2c22e5de28024d35235805d42eeade5af3bd97c6b32e3",
+  "privileged_fixture": true,
+  "profile_policy": "configs/engine-qualification/sts2-v0.111.0-profile-policy-v1.json",
+  "profile_policy_id": "sha256:03cc86344257b4aae4ae87e1b8001ab52e2df2fa5c8a57be51a29a9c6e154e3c",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "schema_version": "engine-native-progression-config-v1",
+  "seed": "SP1RESH1FTACT001",
+  "stage": "privileged_native_act_and_ending_only",
+  "training_allowed": false,
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v9"
+}
