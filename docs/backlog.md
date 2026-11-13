@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Resume shared-head training with later-act exposure.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Carry forward 56 verified games and 138 sealed updates. Continue with verified file-based saves and compare full-run A8 wins on 32 fresh normal-start worlds. |
+| 1 | **Resume shared-head training with later-act exposure.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Carry forward 87 verified games and 219 sealed updates with the merchant-map repair. Compare full-run A8 wins on 32 fresh normal-start worlds. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -61,12 +61,12 @@ training return counts only progress earned after loading. The
 evaluation compares the final copies with their frozen parents on
 fresh normal-start A8 worlds.
 
-The first run stopped before player 3 received the first public
-observation from an Act 2 save. The saved games include three
-prepared Act 3 victories and no normal-start wins. The
-[continuation](native-a8-shared-later-act-resume-v1.md) keeps the
-failed slot in the training record and resumes with the exact saved
-weights and optimizer states.
+The file-load continuation advanced to 87 sealed training games and
+219 updates before a stale merchant target blocked the map menu.
+One normal start cleared Act 1. Five prepared Act 3 games reached
+native victory. The [merchant-map continuation](native-a8-shared-later-act-merchant-resume-v1.md)
+restores the saved weights and optimizer states. Both failed slots
+stay recorded and all 128 fresh evaluation games remain pending.
 
 ## Prior handoff — Compare scoring heads with sustained training
 

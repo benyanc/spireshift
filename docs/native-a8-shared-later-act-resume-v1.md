@@ -1,5 +1,9 @@
 # Shared-head A8 continuation after a prepared save timeout
 
+This run resumed successfully and later stopped at a merchant-map
+observation. Use the [merchant-map continuation](native-a8-shared-later-act-merchant-resume-v1.md)
+for the latest result and remaining command.
+
 The first run verified 56 training games and sealed 138 optimizer
 updates. Both initializers finished round 1. Player 2 also finished
 round 2. Player 3 was collecting round 2 when the worker timed out.

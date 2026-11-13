@@ -6,9 +6,10 @@ head is the baseline for this experiment. Copies of the two sealed
 round-64 shared checkpoints inherit the exact actor, critic and complete
 Adam state.
 
-The original run stopped in round 2. Use the
-[save-load continuation](native-a8-shared-later-act-resume-v1.md)
-for its verified results and the remaining work.
+The original run stopped in round 2 and the file-load continuation
+advanced into round 3. Use the
+[merchant-map continuation](native-a8-shared-later-act-merchant-resume-v1.md)
+for the latest verified results and the remaining work.
 
 ## Training
 
