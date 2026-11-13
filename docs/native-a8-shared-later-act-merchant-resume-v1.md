@@ -1,5 +1,9 @@
 # Shared-head A8 continuation after shop exit
 
+The continuation and fresh evaluation are complete. See the
+[saved result](native-a8-shared-later-act-result-v1.md) for the
+full-run comparison and the next training step.
+
 The file-load continuation added 31 verified training games and
 81 optimizer updates. Player 2 finished round 3 and player 3
 finished round 2. The two saved attempts now have 87 completed

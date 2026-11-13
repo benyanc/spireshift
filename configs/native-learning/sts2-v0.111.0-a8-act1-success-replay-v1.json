@@ -1,0 +1,84 @@
+{
+  "bank": {
+    "path": "artifacts/native-a8-act1-success-replay/bank-v2/report.json",
+    "sha256": "d53aff0ffb24f2ec9e4be6b18fcc9b8c801f80a63114df456d41eb4701efc6b8"
+  },
+  "comparison": {
+    "path": "artifacts/native-a8-later-act-training/resume-v2/report.json",
+    "sha256": "fd5828a1b89f1703c13fa11e8b4a27cc3ef717224c3bf4a49e5fe495d001edb6"
+  },
+  "control_workspace": "artifacts/native-a8-act1-success-replay/control-v1",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "implementation": {
+    "scripts/train-a8-act1-success-replay-v1.sh": "80b8f209e8bd763b4926af1a0da95d89bc2948060c1c3b943324bfcf5a9dc029",
+    "src/spireshift/native_a8_act1_success_bank.py": "e4164360d3978d915a81bed99b675204f01ebd8f4a818d474431e55124d111ed",
+    "src/spireshift/native_a8_act1_success_study.py": "ff466d660cf3e3c979e617749603cdcd48414c36e97d7ae4b8c6e48deca97f28",
+    "src/spireshift/native_a8_archive_fit_inputs.py": "739a197979bac6c8dbb9f607a9ab1b789642136e2b9fc2b6d417bb17c155d8a5",
+    "src/spireshift/native_a8_bank_fit.py": "18e87c94151e301d96248b4f42ef84985d685f7b416f5c8b716357fa2f27492e"
+  },
+  "limits": {
+    "cpu_seconds": 86400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 3600
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "plan": {
+    "actor_learning_rate": 0.001,
+    "controls": [
+      "SP1RESH1FTA8AS1C001"
+    ],
+    "development": [
+      "SP1RESH1FTA8AS1E001",
+      "SP1RESH1FTA8AS1E002",
+      "SP1RESH1FTA8AS1E003",
+      "SP1RESH1FTA8AS1E004",
+      "SP1RESH1FTA8AS1E005",
+      "SP1RESH1FTA8AS1E006",
+      "SP1RESH1FTA8AS1E007",
+      "SP1RESH1FTA8AS1E008",
+      "SP1RESH1FTA8AS1E009",
+      "SP1RESH1FTA8AS1E010",
+      "SP1RESH1FTA8AS1E011",
+      "SP1RESH1FTA8AS1E012",
+      "SP1RESH1FTA8AS1E013",
+      "SP1RESH1FTA8AS1E014",
+      "SP1RESH1FTA8AS1E015",
+      "SP1RESH1FTA8AS1E016",
+      "SP1RESH1FTA8AS1E017",
+      "SP1RESH1FTA8AS1E018",
+      "SP1RESH1FTA8AS1E019",
+      "SP1RESH1FTA8AS1E020",
+      "SP1RESH1FTA8AS1E021",
+      "SP1RESH1FTA8AS1E022",
+      "SP1RESH1FTA8AS1E023",
+      "SP1RESH1FTA8AS1E024",
+      "SP1RESH1FTA8AS1E025",
+      "SP1RESH1FTA8AS1E026",
+      "SP1RESH1FTA8AS1E027",
+      "SP1RESH1FTA8AS1E028",
+      "SP1RESH1FTA8AS1E029",
+      "SP1RESH1FTA8AS1E030",
+      "SP1RESH1FTA8AS1E031",
+      "SP1RESH1FTA8AS1E032"
+    ],
+    "gradient_clip": 1.0,
+    "temperature": 0.8,
+    "updates_per_copy": 256
+  },
+  "schema_version": "native-a8-act1-success-replay-v1",
+  "score_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "workspace": "artifacts/native-a8-act1-success-replay/study-v1"
+}
