@@ -1,5 +1,8 @@
 # A8 Act 1 success replay comparison
 
+The comparison is complete. See the [saved assessment](native-a8-act1-success-replay-result-v1.md)
+and the [current comparison](native-a8-card-display-v1.md).
+
 The [later-act study](native-a8-shared-later-act-result-v1.md) finished
 128 paired evaluation games with zero full-run wins. Act 1 clears
 were 3/64 for the frozen parents and 1/64 for the fitted copies.

@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Learn from verified normal-start Act 1 clears.** [#35](https://github.com/benyanc/spireshift/issues/35), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Fit copies on the Act 1 successes from 38 training worlds and compare them with the frozen round-64 shared parents on 32 fresh normal-start worlds. |
+| 1 | **Connect current card statistics to the learner.** [#143](https://github.com/benyanc/spireshift/issues/143), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Use the bound hand card's current display values as direct inputs. Compare the exact legacy and corrected replay fits on 32 new normal-start worlds. |
 | 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -52,7 +52,23 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Replay verified Act 1 clears
+## Current work — Direct public card stats
+
+The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
+verified 128 fresh native losses. The fitted arm cleared Act 1
+once versus zero for the parents. Both copies fit saved choices
+more closely and neither cleared Act 2. The audit showed that
+current damage and block appeared in the public hand display
+while the dedicated model inputs read the old flat card fields.
+
+The [card display comparison](native-a8-card-display-v1.md) uses
+the same fitting worlds, update schedule and round-64 parents on
+copies. It compares against the sealed legacy fits. If fresh
+progress stays flat, prioritize collecting independent strong
+normal-start trajectories across the acts before further replay
+fit variants.
+
+## Prior handoff — Replay verified Act 1 clears
 
 The [later-act study](native-a8-shared-later-act-result-v1.md) finished
 all 128 fresh evaluation games. Both arms won zero and the fitted
