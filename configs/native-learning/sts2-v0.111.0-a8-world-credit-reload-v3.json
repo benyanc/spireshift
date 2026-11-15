@@ -1,0 +1,59 @@
+{
+  "control_resource": "artifacts/native-a8-world-credit/reload-control-v3-resources.json",
+  "corrected_study_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-world-credit-study-v3.json",
+    "sha256": "c4a5ee0d95ff5c059596229560963eccd5366a804e8576f00a5360e13b8495bc"
+  },
+  "first_report": {
+    "path": "artifacts/native-a8-world-credit/control-v1/attempt-1794194729728058000.json",
+    "report_id": "sha256:2d0318dd1f8aefa16688ce0decf480cb07b153b3f953b870adad201518aa73ba",
+    "sha256": "e8b9cb436113e62c12aa31d102bfe39a75ae907fbac5976ce0332fb2037a2ed8"
+  },
+  "first_resources": {
+    "path": "artifacts/native-a8-world-credit/control-v1-resources.json",
+    "report_id": "sha256:5046d13db2655a70be1d83518a5f97bcfdac001a41b05d96cc962bfd60e79a68",
+    "sha256": "6f185568d5076b8f08d410f7393d11f22df981f93bf19cd0049917fc5eed80d9"
+  },
+  "implementation": {
+    "scripts/train-a8-world-credit-v3.sh": "810be26e198cc023d63e5fd32fc89984fc1ff6c8de9c52ea37596ff28cfdbf8f",
+    "src/spireshift/native_a8_world_credit_reload.py": "06a42578fc646629964101ed0e967f1e6499d4f924d6a38061cd50310c6adb2b"
+  },
+  "preserved_marker_sha256": "c4a0cff38f96471e0ef4440fd1f9536eff75ffa9b597e27c763f5b82d43e71a6",
+  "preserved_trace_sha256": "e64241df409d2afb7c36e2bd618baa8e03c006d015f7e0a7541d057ab7fb099e",
+  "reloads": [
+    {
+      "arm": "pooled",
+      "key": "reload-p2-pooled",
+      "partition": "reload_control",
+      "player": 2,
+      "seed": "SP1RESH1FTA8WR3P001"
+    },
+    {
+      "arm": "within_world",
+      "key": "reload-p2-within-world",
+      "partition": "reload_control",
+      "player": 2,
+      "seed": "SP1RESH1FTA8WR3P001"
+    },
+    {
+      "arm": "pooled",
+      "key": "reload-p3-pooled",
+      "partition": "reload_control",
+      "player": 3,
+      "seed": "SP1RESH1FTA8WR3P001"
+    },
+    {
+      "arm": "within_world",
+      "key": "reload-p3-within-world",
+      "partition": "reload_control",
+      "player": 3,
+      "seed": "SP1RESH1FTA8WR3P001"
+    }
+  ],
+  "schema_version": "native-a8-world-credit-reload-v3",
+  "study_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-world-credit-v1.json",
+    "sha256": "f89428fb856d7a6a21fe335acf9552e93eb881ec3f8b266e9ee53f16e0dc08d6"
+  },
+  "workspace": "artifacts/native-a8-world-credit/reload-control-v3"
+}

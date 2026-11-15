@@ -1,0 +1,139 @@
+{
+  "control_resource": "artifacts/resources/a8-act1-ordinary-lethal-control-v1.json",
+  "control_workspace": "artifacts/native-a8-act1-boss/ordinary-lethal-control-v1",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/compare-act1-ordinary-lethal-v1.sh": "1f81c8ed859b5ff453c386fe6f91b51135bb9e611babea75131180ad96134a8f",
+    "scripts/verify-sewer-clam-kill-v1.py": "d0a525dd088c87cb359e473fb24ab0eac03669afd2ab80118c7a26d58cc72991",
+    "src/spireshift/native_a8_ordinary_episode.py": "3369e1033bbdc5c3a426cdbab846ef010df493765d543fce9f8879a595e70a19",
+    "src/spireshift/native_a8_ordinary_policy.py": "a9848f40d55258d0aae8b076a4fd3c3c4ff8f0f922739377c4ac26ec541b6c9d",
+    "src/spireshift/native_a8_ordinary_session.py": "c23582e70f5128efadc44fd8f53aa198a2c3c1aefbb35cb979c5315e2f5aa018"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "parent": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-tactical-qualification-v1.json",
+    "sha256": "04b9394c72e1b0251b830ca757c81896bce40bb7bd5d985d8820d27f28a5fb22"
+  },
+  "proof": {
+    "recipe": {
+      "path": "artifacts/native-a8-act1-boss/sewer-clam-control-v1/config-at-launch.json",
+      "sha256": "d6a9a8e17011c1a9ccc5d3d6b7cd1dd486bf33043736977e1f88c00812687546"
+    },
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/sewer-clam-control-v1/report.json",
+      "sha256": "e1e9a9f25001860ba4148cbedf88124903bd5b8a50057d5d9e51b4115c597b03"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-sewer-clam-kill-v1.json",
+      "sha256": "c73eba0f2900e978b518c6d767d0df959616d899c7a761d745f6c59f0c42ad6a"
+    }
+  },
+  "resource_prefix": "artifacts/resources/a8-act1-ordinary-lethal-study-v1",
+  "schema_version": "native-a8-act1-ordinary-lethal-v1",
+  "smoke": {
+    "key": "ordinary-smoke",
+    "player": 3,
+    "seed": "SP1RESH1FTA8OLC001"
+  },
+  "teacher": "normal_start_act1_ordinary_lethal_v4",
+  "workspace": "artifacts/native-a8-act1-boss/ordinary-lethal-study-v1",
+  "worlds": [
+    {
+      "key": "ordinary-001",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ001"
+    },
+    {
+      "key": "ordinary-002",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ002"
+    },
+    {
+      "key": "ordinary-003",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ003"
+    },
+    {
+      "key": "ordinary-004",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ004"
+    },
+    {
+      "key": "ordinary-005",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ005"
+    },
+    {
+      "key": "ordinary-006",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ006"
+    },
+    {
+      "key": "ordinary-007",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ007"
+    },
+    {
+      "key": "ordinary-008",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ008"
+    },
+    {
+      "key": "ordinary-009",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ009"
+    },
+    {
+      "key": "ordinary-010",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ010"
+    },
+    {
+      "key": "ordinary-011",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ011"
+    },
+    {
+      "key": "ordinary-012",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ012"
+    },
+    {
+      "key": "ordinary-013",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ013"
+    },
+    {
+      "key": "ordinary-014",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ014"
+    },
+    {
+      "key": "ordinary-015",
+      "player": 2,
+      "seed": "SP1RESH1FTA8OLQ015"
+    },
+    {
+      "key": "ordinary-016",
+      "player": 3,
+      "seed": "SP1RESH1FTA8OLQ016"
+    }
+  ]
+}

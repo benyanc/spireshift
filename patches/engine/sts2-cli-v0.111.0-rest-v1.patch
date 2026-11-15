@@ -1,0 +1,285 @@
+diff --git a/src/Sts2Headless/Program.cs b/src/Sts2Headless/Program.cs
+index d950eec..b1ce208 100644
+--- a/src/Sts2Headless/Program.cs
++++ b/src/Sts2Headless/Program.cs
+@@ -134,6 +134,9 @@ class Program
+                     ["host_assembly_path"] = hostAssemblyPath,
+                     ["host_assembly_sha256"] = Convert.ToHexStringLower(SHA256.HashData(hostStream)),
+                     ["host_module_mvid"] = hostAssembly.ManifestModule.ModuleVersionId.ToString("D"),
++                    ["managed_runtime_version"] = Environment.Version.ToString(),
++                    ["godot_stub_assembly_sha256"] = Convert.ToHexStringLower(
++                        SHA256.HashData(File.ReadAllBytes(typeof(Godot.OS).Assembly.Location))),
+                     ["sts2_assembly_path"] = assemblyPath,
+                     ["sts2_assembly_sha256"] = Convert.ToHexStringLower(SHA256.HashData(stream)),
+                     ["sts2_module_mvid"] = assembly.ManifestModule.ModuleVersionId.ToString("D"),
+diff --git a/src/Sts2Headless/RunSimulator.cs b/src/Sts2Headless/RunSimulator.cs
+index 0d74927..0d6eae1 100644
+--- a/src/Sts2Headless/RunSimulator.cs
++++ b/src/Sts2Headless/RunSimulator.cs
+@@ -258,6 +258,10 @@ public class RunSimulator
+     private IDisposable? _cardSelectorScope;
+     private Task? _pendingHostOperation;
+     private bool _mapPresentationOpen;
++    private RestSiteRoom? _restPresentationRoom;
++    private bool _restProceedAvailable;
++    private Task<bool>? _restChoice;
++    private string? _restChoiceOptionId;
+     private bool _combatRewardsStarted;
+     private bool _rewardsProcessed;
+     private int _lastKnownHp;
+@@ -413,6 +417,16 @@ public class RunSimulator
+                     }
+                 }
+             }
++            // Privileged fixture setup only. Native obtain binds the relic owner
++            // and runs its hooks; inserting a mutable relic into a list does neither.
++            if (args.TryGetValue("obtain_relics", out var obtainRelicsEl))
++            {
++                foreach (var entry in obtainRelicsEl.EnumerateArray())
++                {
++                    var relic = ModelDb.GetById<RelicModel>(new ModelId("RELIC", entry.GetString()!));
++                    RelicCmd.Obtain(relic.ToMutable(), player).GetAwaiter().GetResult();
++                }
++            }
+             if (args.TryGetValue("potions", out var potionsEl))
+             {
+                 var slots = GetBackingList<PotionModel>(player, "_potionSlots")
+@@ -1531,10 +1545,15 @@ public class RunSimulator
+             return Error("select_cards requires 'indices' (comma-separated card indices)");
+ 
+         var indicesStr = args["indices"]?.ToString() ?? "";
+-        var indices = indicesStr.Split(',')
+-            .Select(s => int.TryParse(s.Trim(), out var v) ? v : -1)
+-            .Where(i => i >= 0)
+-            .ToArray();
++        var pieces = string.IsNullOrWhiteSpace(indicesStr) ? Array.Empty<string>() : indicesStr.Split(',');
++        if (pieces.Any(piece => !int.TryParse(piece.Trim(), out _)))
++            return Error("Card selection indices must all be integers");
++        var indices = pieces.Select(piece => int.Parse(piece.Trim())).ToArray();
++        if (indices.Distinct().Count() != indices.Length
++            || indices.Any(index => index < 0 || index >= _cardSelector.PendingOptions!.Count))
++            return Error("Card selection indices must be distinct and in range");
++        if (indices.Length < _cardSelector.PendingMinSelect || indices.Length > _cardSelector.PendingMaxSelect)
++            return Error("Card selection count is outside the native selection bounds");
+ 
+         Log($"Card selection: indices [{string.Join(",", indices)}]");
+         _cardSelector.ResolvePendingByIndices(indices);
+@@ -1542,18 +1561,7 @@ public class RunSimulator
+         AdvancePendingHostOperation();
+         WaitForActionExecutor();
+ 
+-        // Extra wait for rest-site SMITH: the background ChooseLocalOption task
+-        // needs time to complete the upgrade after card selection resolves.
+-        if (_runState?.CurrentRoom is RestSiteRoom)
+-        {
+-            Thread.Sleep(200);
+-            _syncCtx.Pump();
+-            WaitForActionExecutor();
+-            // Force to map after SMITH completes (same pattern as HEAL)
+-            Log("Card selection in rest site (SMITH), forcing to map");
+-            OpenMapPresentation();
+-            return MapSelectState();
+-        }
++        CompleteRestChoicePresentation();
+ 
+         // Extra wait for shop card removal: the purchase task needs to finish
+         if (_runState?.CurrentRoom is MerchantRoom)
+@@ -1571,11 +1579,14 @@ public class RunSimulator
+     {
+         if (_cardSelector.HasPending)
+         {
++            if (_runState?.CurrentRoom is RestSiteRoom && _restChoiceOptionId != "SMITH")
++                return Error("Cancellation is not qualified for this rest-site selection");
+             Log("Skipping card selection");
+             _cardSelector.CancelPending();
+             _syncCtx.Pump();
+             AdvancePendingHostOperation();
+             WaitForActionExecutor();
++            CompleteRestChoicePresentation();
+         }
+         return DetectDecisionPoint();
+     }
+@@ -1684,45 +1695,28 @@ public class RunSimulator
+         // Dispatch based on ROOM TYPE (not event state) to avoid cross-contamination
+         if (_runState?.CurrentRoom is RestSiteRoom restSiteRoom)
+         {
+-            Log($"Rest site: choosing option {optionIndex}");
+-            try
+-            {
+-                // Run on background thread so Smith card selection can pause
+-                var task = BeginHostOperation(() =>
+-                    RunManager.Instance.RestSiteSynchronizer.ChooseLocalOption(optionIndex));
+-                for (int i = 0; i < 100; i++)
+-                {
+-                    _syncCtx.Pump();
+-                    if (_cardSelector.HasPending) break;
+-                    if (task.IsCompleted) break;
+-                    Thread.Sleep(10);
+-                }
+-                if (_cardSelector.HasPending)
+-                {
+-                    WaitForActionExecutor();
+-                    return DetectDecisionPoint();
+-                }
+-                AdvancePendingHostOperation();
+-            }
+-            catch (Exception ex)
+-            {
+-                Log($"Rest site ChooseLocalOption failed: {ex.Message}");
+-            }
+-
+-            // After non-Smith rest site options (HEAL, etc.), the options may not clear.
+-            // Wait for the action to complete (heal/dig), then force transition to map.
+-            if (!_cardSelector.HasPending)
+-            {
+-                Log("Rest site: option chosen (non-Smith), waiting for action then forcing to map");
+-                // Give the action time to complete (heal HP, dig for relic, etc.)
+-                WaitForActionExecutor();
+-                _syncCtx.Pump();
+-                Thread.Sleep(200);
+-                _syncCtx.Pump();
+-                WaitForActionExecutor();
+-                OpenMapPresentation();
+-                return MapSelectState();
+-            }
++            if (_mapPresentationOpen || _cardSelector.HasPending || _pendingHostOperation is { IsCompleted: false })
++                return Error("Rest options are not the active interaction");
++            if (!args.TryGetValue("room_ref", out var roomRef)
++                || !NativeObjectIdentity.Matches(restSiteRoom, roomRef))
++                return Error("The observed rest room is no longer current");
++            var options = restSiteRoom.Options;
++            if (optionIndex < 0 || optionIndex >= options.Count)
++                return Error("Rest option index is outside the current native options");
++            var option = options[optionIndex];
++            if (!args.TryGetValue("option_ref", out var optionRef)
++                || !NativeObjectIdentity.Matches(option, optionRef))
++                return Error("The observed rest option no longer matches its index");
++            if (!option.IsEnabled)
++                return Error("The native rest option is disabled");
++            EnsureRestPresentation(restSiteRoom);
++            _restChoiceOptionId = option.OptionId;
++            BeginHostOperation(() => _restChoice =
++                RunManager.Instance.RestSiteSynchronizer.ChooseLocalOption(optionIndex));
++            AdvancePendingHostOperation();
++            WaitForActionExecutor();
++            CompleteRestChoicePresentation();
++            return DetectDecisionPoint();
+         }
+         // For events — use EventSynchronizer
+         // Run Chosen() on a background thread so card selections can pause
+@@ -1777,6 +1771,21 @@ public class RunSimulator
+         if (args?.TryGetValue("room_ref", out var expectedRoom) == true
+             && (room == null || !NativeObjectIdentity.Matches(room, expectedRoom)))
+             return Error("The observed room is no longer current");
++        if (room is RestSiteRoom restRoom)
++        {
++            if (args == null || !args.ContainsKey("room_ref"))
++                return Error("Leaving a rest site requires its current room_ref");
++            if (_mapPresentationOpen || _cardSelector.HasPending || _pendingHostOperation is { IsCompleted: false })
++                return Error("The rest-site choice is still awaiting completion or already left");
++            EnsureRestPresentation(restRoom);
++            CompleteRestChoicePresentation();
++            if (!_restProceedAvailable && restRoom.Options.Count != 0)
++                return Error("Rest-site Proceed is not yet available");
++            // Native UI opens the map here. Its next map vote performs room exit,
++            // including the synchronizer's explicit skip of any remaining options.
++            _mapPresentationOpen = true;
++            return MapSelectState();
++        }
+         Log("Leaving room");
+         try { RunManager.Instance.ProceedFromTerminalRewardsScreen().GetAwaiter().GetResult(); }
+         catch { }
+@@ -1961,6 +1970,10 @@ public class RunSimulator
+                 ["cards"] = opts,
+                 ["min_select"] = _cardSelector.PendingMinSelect,
+                 ["max_select"] = _cardSelector.PendingMaxSelect,
++                // Only Smith's cancellation contract has been inspected here.
++                // Other selection preferences remain a qualification task.
++                ["cancelable"] = _restChoiceOptionId == "SMITH" ? true : (bool?)null,
++                ["require_manual_confirmation"] = _restChoiceOptionId == "SMITH" ? true : (bool?)null,
+                 ["player"] = PlayerSummary(player),
+             };
+         }
+@@ -2747,22 +2760,34 @@ public class RunSimulator
+         };
+     }
+ 
++    private void EnsureRestPresentation(RestSiteRoom restRoom)
++    {
++        if (ReferenceEquals(_restPresentationRoom, restRoom)) return;
++        _restPresentationRoom = restRoom;
++        _restProceedAvailable = false;
++        _restChoice = null;
++        _restChoiceOptionId = null;
++    }
++
++    private void CompleteRestChoicePresentation()
++    {
++        if (_restChoice is not { IsCompleted: true } choice) return;
++        _restChoice = null;
++        _restChoiceOptionId = null;
++        if (choice.GetAwaiter().GetResult()) _restProceedAvailable = true;
++    }
++
+     private Dictionary<string, object?> RestSiteState(RestSiteRoom restRoom)
+     {
++        EnsureRestPresentation(restRoom);
++        CompleteRestChoicePresentation();
+         var options = restRoom.Options;
+         var player = _runState!.Players[0];
+ 
+-        if (options == null || options.Count == 0)
+-        {
+-            // Options empty = choice already made (synchronizer cleared them), go to map
+-            Log("Rest site: options empty, proceeding to map");
+-            OpenMapPresentation();
+-            return MapSelectState();
+-        }
+-
+         var optionList = options.Select((opt, i) => new Dictionary<string, object?>
+         {
+             ["index"] = i,
++            ["native_ref"] = NativeObjectIdentity.Get(opt),
+             ["option_id"] = opt.OptionId,
+             ["name"] = StripVisibleText(opt.Title.GetFormattedText()),
+             ["description"] = StripVisibleText(opt.Description.GetFormattedText()),
+@@ -2773,6 +2798,8 @@ public class RunSimulator
+         {
+             ["type"] = "decision",
+             ["decision"] = "rest_site",
++            ["room_ref"] = NativeObjectIdentity.Get(restRoom),
++            ["can_leave"] = _restProceedAvailable || options.Count == 0,
+             ["context"] = RunContext(),
+             ["options"] = optionList,
+             ["player"] = PlayerSummary(player),
+@@ -3775,9 +3802,8 @@ public class RunSimulator
+             if (optList.Count == 0)
+                 return Task.FromResult<IEnumerable<CardModel>>(Array.Empty<CardModel>());
+ 
+-            // If only one option and minSelect requires it, auto-select
+-            if (optList.Count == 1 && minSelect >= 1)
+-                return Task.FromResult<IEnumerable<CardModel>>(optList);
++            // The game already handles automatic choices before calling this
++            // selector. Repeating that shortcut here loses manual confirmation.
+ 
+             // Store pending selection and wait
+             PendingOptions = optList;
+@@ -4175,6 +4201,10 @@ public class RunSimulator
+             _combatRewardsStarted = false;
+             _rewardsProcessed = false;
+             _mapPresentationOpen = false;
++            _restPresentationRoom = null;
++            _restProceedAvailable = false;
++            _restChoice = null;
++            _restChoiceOptionId = null;
+             ResetTreasurePresentation();
+             _turnStarted.Reset();
+             _combatEnded.Reset();
+@@ -4198,6 +4228,7 @@ public class RunSimulator
+             ["active"] = RunManager.Instance.IsInProgress && state != null,
+             ["seed"] = state?.Rng.StringSeed,
+             ["act"] = state == null ? null : state.CurrentActIndex + 1,
++            ["ascension"] = state?.AscensionLevel,
+             ["floor"] = state?.ActFloor,
+             ["action_executor_running"] = RunManager.Instance.IsInProgress
+                 && RunManager.Instance.ActionExecutor.IsRunning,

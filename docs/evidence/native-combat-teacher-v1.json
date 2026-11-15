@@ -1,0 +1,120 @@
+{
+  "schema_version": "native-combat-teacher-evidence-v1",
+  "roots": {
+    "path": "artifacts/native-teacher/sts2-v0.111.0-a8-roots-v1/report.json",
+    "id": "sha256:f95154869c730e40bf2817ec0273b4b3699cc2bec50cf6bd2f5f401d3f495713",
+    "distinct_train_seeds": 8,
+    "total_legal_actions": 48,
+    "encounter_quotas_per_initializer": {
+      "boss": 1,
+      "elite": 1,
+      "normal": 2
+    }
+  },
+  "control": {
+    "report": {
+      "path": "artifacts/native-teacher/sts2-v0.111.0-a8-control-v1/report.json",
+      "id": "sha256:5bbf2a71fbee6cd897cab57e1e409103e75017369b71f3df87902360a678b877"
+    },
+    "resource_report": {
+      "path": "artifacts/resources/native-combat-teacher-control-v1-1.json",
+      "id": "sha256:413b532a9c505ce9cbd1870fe1e69d2e8b508625beeafc15e73aedfd9daa0f2e"
+    },
+    "config_id": "sha256:4ea18bf1a13f103709cf3712154450e7ac6041712fcb7ee488c05613f7d0dc31",
+    "status": "native_combat_teacher_complete",
+    "native_attempts": 24,
+    "failed_branches": 0,
+    "skipped_branches": 0,
+    "duplicate_public_traces_identical": true,
+    "full_run_wins": 0,
+    "production_optimizer_steps": 0,
+    "original_full_states_unchanged": true,
+    "game_apps_created": 0,
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "admitted_exploratory_preferences": 0,
+    "usage": {
+      "average_cpu_utilization": 0.05631458217277125,
+      "cpu_hours": 0.01643277868194445,
+      "cpu_seconds": 59.158003255000025,
+      "energy_kwh": null,
+      "final_storage_bytes": 34007515,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 4,
+      "peak_resident_memory_bytes": 373260288,
+      "peak_storage_bytes": 34007515,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 75.03512408398092
+    },
+    "all_action_tables_complete": true,
+    "training_eligible_control_roots": 0
+  },
+  "preflight": {
+    "control_result_reopened_without_native_host": true,
+    "pilot_preflight": {
+      "status": "native_teacher_plan_only",
+      "roots": 8,
+      "planned_branches": 384,
+      "new_games": 0,
+      "optimizer_steps": 0,
+      "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher"
+    },
+    "pilot_config_id": "sha256:84ffeb6153249e6e94ba8775f927c6558c13c7ed11bc12f8f3def53b3e1c1880"
+  },
+  "saved_continuation_states": [
+    {
+      "numerical_seed": 2,
+      "state_path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "optimizer_steps": 5658
+    },
+    {
+      "numerical_seed": 3,
+      "state_path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "optimizer_steps": 6045
+    }
+  ],
+  "pilot_started": false,
+  "expected_owner_minutes": [
+    20,
+    30
+  ],
+  "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+  "privileged_fixed_world_teacher": true,
+  "student_inputs_public_only": true,
+  "ordinary_PPO_eligible": false,
+  "public_belief_search_eligible": false,
+  "terminal_victory_primary": true,
+  "zero_hidden_world_resampling": true,
+  "automatic_training_follows": false,
+  "validation": {
+    "targeted_unit_tests": 8,
+    "full_repository_check": "passed",
+    "tests_passed": 1830,
+    "pytest_seconds": 104.07,
+    "strict_type_source_files": 357,
+    "format_lint_and_CSharp_protocol_passed": true,
+    "resource_report": {
+      "path": "artifacts/resources/native-combat-teacher-repository-check-v1.json",
+      "id": "sha256:9277319b04fc9af3e2c9fd311442e177aecb9d4055f9b4557155e43e29104810"
+    },
+    "wall_seconds": 107.32280737487599,
+    "peak_resident_memory_bytes": 413908992
+  },
+  "github_issues_updated": [
+    143,
+    35,
+    146
+  ]
+}

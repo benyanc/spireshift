@@ -1,0 +1,89 @@
+{
+  "schema_version": "public-a8-entity-bound-input-repair-evidence-v3",
+  "learning_audit": {
+    "actual_saved_state_alias_pairs": {
+      "legacy": 0,
+      "relational": 0
+    },
+    "checkpoint_promoted": false,
+    "claim_scope": "bounded_train_only_input_repair_evidence_not_playing_strength_or_cause_of_all_losses",
+    "counterfactual_probes": {
+      "claim_scope": "synthetic_public_input_sensitivity_not_engine_outcomes",
+      "relic_counter_swap_v2_indistinguishable": true,
+      "relic_counter_swap_v3_distinguished": true,
+      "status_amount_swap_v2_indistinguishable": true,
+      "status_amount_swap_v3_distinguished": true,
+      "v2_balanced_contrast_expected_accuracy_upper_bound": 0.5
+    },
+    "engine_games_replayed": 0,
+    "final_test_opened": false,
+    "foundation_readiness_established": false,
+    "game_training_optimizer_steps": 0,
+    "initial_actor_id": "sha256:fec96c92e6215da3aff560b99cf0784a408687ae35af730390dfa85996f5db28",
+    "mean_legacy_clamped_coordinates": 11.666666666666666,
+    "mean_trained_hidden_saturated_fraction": 0.564883345637314,
+    "network": {
+      "actor_parameters": 4384,
+      "feature_dimension": 256,
+      "hidden_units": 16
+    },
+    "phase_counts": {
+      "ancient": 7,
+      "card_reward": 5,
+      "card_selection": 4,
+      "combat": 129,
+      "event": 8,
+      "map": 14,
+      "relic_reward": 15,
+      "shop": 7
+    },
+    "relational_initial_actor_id": "sha256:54ea1fe3fc4993a184fcf5edc16ad16ff6f299eb02f947b0b2888a49d098dd0e",
+    "report_id": "sha256:c7c2cac95934ea889f01bca35a21fbc577991b0de7c183ba4c4ec13c4263a646",
+    "ruleset_manifest_id": "sha256:b626c146fbb41dc5370a7e4b6fd773279288df2065c3def3989c238c9a67042f",
+    "sampled_states": 189,
+    "schema_version": "public-a8-learning-input-audit-v1",
+    "source_cases": [
+      {
+        "case_id": "sha256:0c78c75483091de3fedc19f6f4517e8fd7d0a99d3485faca360eb4cd42621cf8",
+        "seed": 300068
+      },
+      {
+        "case_id": "sha256:0cf8f651945ba347482028f31795017020291e8433bd81b9bed9acd454f8bb9e",
+        "seed": 300082
+      },
+      {
+        "case_id": "sha256:0d295dc997899df7a17c278ec8783fa9bea1e5e7baec3cabd97fdcd4641b6028",
+        "seed": 300080
+      },
+      {
+        "case_id": "sha256:0fce4e3512a6cab43eb53f51c808b130e0e781b20bdabb83d9caaef13ce83b6c",
+        "seed": 300135
+      }
+    ],
+    "source_config_id": "sha256:9bade3203f0c1a4e4abba42a4008c6f7c364a4a6590cdf5b00a2d66813e08b15",
+    "source_report_id": "sha256:41644172f31a2e52305fdc9b7762548cd3d1855544551f52d4f3a20a12184b1e",
+    "split_manifest_id": "sha256:4385df70a77e71623e90a24e8abeaf309f770e2db0886ef1fb5da9d29119b2d6",
+    "synthetic_learnability": {
+      "after_correct_action_probabilities": [
+        0.9837229207645776,
+        0.9842351115899198
+      ],
+      "before_correct_action_probabilities": [
+        0.49850737391516275,
+        0.5015251844069999
+      ],
+      "both_preferences_learned": true,
+      "model_saved_or_promoted": false,
+      "synthetic_optimizer_steps": 250,
+      "task": "two_opposite_synthetic_bandit_preferences_not_game_optimality"
+    }
+  },
+  "resource_report_id": "sha256:fe7ad232f003265f0ebc0c58b05eaad27719a552e7d9c646ea95721d407b2582",
+  "audit_wall_seconds": 5.217542583006434,
+  "audit_cpu_seconds": 5.045586675999999,
+  "causes_all_losses_established": false,
+  "real_game_performance_improvement_established": false,
+  "next_stage": "owner_launched_bounded_v3_ppo_with_fresh_train_and_development_seeds",
+  "historical_encoder_and_experiments_unchanged": true,
+  "evidence_id": "sha256:9de03b51dcbae05b2ce4906646732424588b4fcf536a38a14ffc9678a6025b79"
+}

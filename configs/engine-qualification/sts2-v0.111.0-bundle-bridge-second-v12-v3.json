@@ -1,0 +1,22 @@
+{
+  "schema_version": "engine-bundle-bridge-config-v1",
+  "stage": "natural_Neow_bundle_choice_differential_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-cli-bundle-bridge-v12-v3.json",
+  "native_config_id": "sha256:fb993d1cbeda3e883a1185f13b99235c78aa8a18868df47863f98ccb82c51ed3",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-rest-potion-tutorial-v3.json",
+  "connector_config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/bundle-bridge-second-v12-v3",
+  "seed": "SPIRESHIFTBUNDLE003",
+  "index": 1,
+  "training_allowed": false,
+  "helpers_sha256": {
+    "engine-rest-bridge-contract.mjs": "b0122918993ff4b6613868e588b2c4953a9469123ddb384ca65cdc1b18aea896",
+    "engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-checkpoint-shipped-probe.mjs": "842f12cadb5636a2d8d073eb8e72a0a884611bd896adbf308cb44027f4422b72",
+    "engine-bundle-shipped-probe-v2.mjs": "65a5b48ade8d7104049e6861dc711d9ebd11ee909838f4eef2de0bdd69f9722e",
+    "engine-bundle-bridge-contract-v2.mjs": "3e676d645637f2755a083f2033718d6f65563bfd012483f5f8b09dd9b046a9d7"
+  },
+  "bridge_revision": "v2"
+}

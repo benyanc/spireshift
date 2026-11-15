@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/run-level-trajectory-search-config-v1.json",
+  "title": "SpireShift Run-Level Trajectory Search Config v1",
+  "type": "object",
+  "required": [
+    "schema_version", "config_id", "split_manifest_id", "ruleset_manifest_id",
+    "objective_id", "model_id", "training_report_id", "partition", "run_offset",
+    "run_count", "generations", "beam_width", "mutations_per_parent", "workers",
+    "maximum_decisions_per_run", "cycle_repetition_threshold", "liveness_tail_length",
+    "no_op_fallback_threshold", "search_controller_id", "mutation_salt",
+    "exact_replay_only", "milestones"
+  ],
+  "properties": {
+    "schema_version": {"const": "run-level-trajectory-search-config-v1"},
+    "config_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "run_offset": {"type": "integer", "minimum": 0},
+    "run_count": {"type": "integer", "minimum": 1},
+    "generations": {"type": "integer", "minimum": 1},
+    "beam_width": {"type": "integer", "minimum": 1},
+    "mutations_per_parent": {"type": "integer", "minimum": 1},
+    "workers": {"type": "integer", "minimum": 1},
+    "maximum_decisions_per_run": {"type": "integer", "minimum": 1},
+    "cycle_repetition_threshold": {"type": "integer", "minimum": 2},
+    "liveness_tail_length": {"type": "integer", "minimum": 1},
+    "no_op_fallback_threshold": {"type": "integer", "minimum": 1},
+    "search_controller_id": {"const": "policy-guided-trajectory-beam-v1"},
+    "mutation_salt": {"type": "string", "minLength": 1},
+    "exact_replay_only": {"const": true},
+    "milestones": {"$ref": "#/$defs/milestones"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "milestones": {
+      "type": "object",
+      "required": [
+        "schema_version", "milestone_id", "first_act_id", "next_act_id", "boss_floor",
+        "boss_reach_rule", "act1_clear_rule", "terminal_victory_rule"
+      ],
+      "properties": {
+        "schema_version": {"const": "act1-milestone-semantics-v1"},
+        "milestone_id": {"$ref": "#/$defs/id"},
+        "first_act_id": {"type": "string", "minLength": 1},
+        "next_act_id": {"type": "string", "minLength": 1},
+        "boss_floor": {"type": "integer", "minimum": 1},
+        "boss_reach_rule": {"const": "observed_first_act_floor_at_least_boss_floor"},
+        "act1_clear_rule": {"const": "observed_next_act_id"},
+        "terminal_victory_rule": {"const": "environment_terminal_victory_only"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

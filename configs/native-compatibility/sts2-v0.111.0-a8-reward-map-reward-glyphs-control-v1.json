@@ -1,0 +1,1267 @@
+{
+  "schema_version": "native-selection-flow-config-v1",
+  "stage": "short_control",
+  "contract": "official_cli_shared_public_graph_v1",
+  "input_layout": "typed_official_public_layout_v11",
+  "training_allowed": false,
+  "node": "/Users/benjamin/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "workspace": "artifacts/native-selection-flows/reward-map-panel-v1/reward-glyphs",
+  "maximum_decisions": 57,
+  "maximum_case_wall_seconds": 600,
+  "parent_controls_recipe": "configs/native-compatibility/sts2-v0.111.0-a8-interface-controls-offline-v3.json",
+  "environment": {
+    "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v41.json",
+    "sha256": "a0c95d163ea8a9edeedfa5115b9685d0eb365ba94da577fd83781f8a4d1fb2b7"
+  },
+  "players": {
+    "2": {
+      "model_id": "sha256:dcafc006c9a3569bf8caa7995501c2b403fb742939014582b1c7b327ccb12097",
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json",
+      "sha256": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+      "state_id": "sha256:f013e689500a7e8ad6c3b893c9ce9771f91d44bdedc6be2aa938c210f8eeef8a"
+    },
+    "3": {
+      "model_id": "sha256:9188a1065b89b43a40238c63c6d14a6e906af3fa42ae74226f4f71f45f8320c6",
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json",
+      "sha256": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+      "state_id": "sha256:6dc93df587ab6c1bea17a9999740dacb216b46c4485abee272db7f4d58d56b82"
+    }
+  },
+  "protected_originals": [
+    {
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+    },
+    {
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+    }
+  ],
+  "cases": [
+    {
+      "key": "player-2-reward-glyphs",
+      "player": 2,
+      "seed": "SP1RESH1FTFL0W411"
+    }
+  ],
+  "build_config": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-reward-map-owner-build-v54.json",
+    "sha256": "6c1feacb33618ba3ddb38fd6e20b257658473368e30e0bfad703c456894b6546"
+  },
+  "build_report": {
+    "path": "artifacts/native-reward-map/native-build-v54/report.json",
+    "sha256": "83e39ff762bd53983b19e0bdf6f374745608d021c5e44a576d4e49585f6f700d"
+  },
+  "projection_repair": {
+    "patch": "/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/patches/engine/sts2-headless-public-card-projection-v3.patch",
+    "patch_sha256": "45aa700a5f897596015bdf58243b2087a107b14a7afaa82528f144da6e61b999",
+    "patched_source_sha256": "42bfea2eb51d31a52dcd52e66811ce5f5f56af4b01d3dada438bfb7790d73cdf"
+  },
+  "implementation_sha256": {
+    "src/spireshift/__init__.py": "aba7d718e8ef451c1a64a1f7bdff9c5faf83d2fb5a4168404f368f117050ae0d",
+    "src/spireshift/adapters/evangambit.py": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f",
+    "src/spireshift/adapters/evangambit_public_choices.py": "222ffcd51b568eca558cd4f1e32758684b57447bd9982c84b7fee2eaee1c1f95",
+    "src/spireshift/adapters/mock.py": "13a6834d57ec08424e41cd3258725a7041e346baf3c3416223e334ceff9c3417",
+    "src/spireshift/adapters/tactical_mock.py": "37101110f4c4d57d22db6f4ca0877a9227f60335a41241c46111ff35fd00f6df",
+    "src/spireshift/agents/baseline.py": "16be5b5e22df958b2e8f4a9076c6ab211b9b047db50aa77d9fdf1b389c25b10c",
+    "src/spireshift/agents/combat_advancement.py": "9d3c8b703726b6b1210910169b014045bd7c424179097eb7cc7e90dc153a4b50",
+    "src/spireshift/agents/learned.py": "96330138b66df7a6497ccf7028da6d60b9f1b35e6064da8983c3183fb96a1358",
+    "src/spireshift/bootstrap_teacher.py": "03151cc08b2ae94466d452ac8d678bfd93cc1a4852068a6096fed4baefeca45b",
+    "src/spireshift/causal_preferences.py": "adf5307cc85ec1fb9585b88a6c18b727259bad02e7240f618a567acf4798756f",
+    "src/spireshift/combat_features.py": "b8bbe66a3011b12420b36f08dbb0b9bf0c6f68be776cd1bbc7aace59ce29aeb6",
+    "src/spireshift/combat_foundation.py": "630442b8416c47a70273516807f5857c82de5a3c80eb8f24aa40173feb8db24a",
+    "src/spireshift/combat_gate.py": "67bae500df984aae8e215100536426b0c59bffd2255599334e0f797d5e0146a5",
+    "src/spireshift/combat_policy.py": "6a6642a2f1b88f6ae6733d4aa58fb606f74b902e4b87980e18cbe9dd73f2b7cc",
+    "src/spireshift/combat_search_intervention.py": "221b6c60c9e2188c18ecd412a1df81cc01cf3a4e957de8daa4e9340cbf95bd1d",
+    "src/spireshift/core/manifest.py": "750edf0ef3919005371c42e477599c944f83e5f4b24c901f9b7a615ed458cdc6",
+    "src/spireshift/core/objective.py": "50fbd4b770f0736dd68a5ecee6a96f5865ae53d37b590ca2e534d43302cf8311",
+    "src/spireshift/core/protocols.py": "8a280575373d9ed34e77f0ceced4a13d80eba3d1114fee2e36ac7c3e2a2b45c4",
+    "src/spireshift/core/types.py": "af06c99fd67405d928e5338f97134a432ce899f5529c54763745f2040a9b8413",
+    "src/spireshift/dagger.py": "8378b823dffac02dd93078494a2936c67ddd822fabe98687238d9d207385cbe0",
+    "src/spireshift/doctor.py": "862ce8eba6521241f3e102c8be0defc37fe77541b4aa1f102086124e19415c92",
+    "src/spireshift/engine_atomic_worker.py": "b24bd3dcc6b08ca50f3e2a8d75e51d7073d564dd6e54e8effb4d878a8852a7ef",
+    "src/spireshift/engine_belt_worker.py": "905592967f1bf0ea05be9648c0b4c0d55d6d54c13bc3b9120d36f29c775a29e1",
+    "src/spireshift/engine_checkpoint.py": "3cebd6eafd7046b85a9034f17fa0fa84fd78ca8833d23667067baf16cf7b1c4c",
+    "src/spireshift/engine_cli_probe.py": "2d0adf87f314557aad6d2b0077e76df00e5c7c5b23bd750fd85d98466a2c0c93",
+    "src/spireshift/engine_connector.py": "7fef88c31b97f3ad0caadd3bc5fd257600fd596210024b7c2d88b0c92cf378ff",
+    "src/spireshift/engine_coverage.py": "cb356458df92fb6e58a22334ab16617407c6c5c6fa7ad25ccc90f875f7a6cfd6",
+    "src/spireshift/engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "src/spireshift/engine_experience_audit.py": "dcb9d2fa3856793ce4e491267e7aa2e58c5c187e2e18a9b6cb956d19c79ea079",
+    "src/spireshift/engine_experience_stream.py": "32d1386cd8602d43c7ccceaafcc2d944d8c1e1330bed50fc52afbb1eb097ca1a",
+    "src/spireshift/engine_flow_worker_v9.py": "f6496b953dd42c0374795ac89c14b5f129c97550b453a2e87e692d152ee90524",
+    "src/spireshift/engine_journey.py": "6a1062f9b222f36886e3feb8da5e18b3a39ebf630f9fd46144e23d53da094544",
+    "src/spireshift/engine_journey_bridges.py": "785ba08a53ebfc498f26b6bd88964c45fb6436fc18f235018dbc20b6f2a967b7",
+    "src/spireshift/engine_journey_verification.py": "d15a118d160162d3b7e1bcfeed4a5c44348af538cce6439700701bb1e33704a1",
+    "src/spireshift/engine_layout_worker.py": "895d0789db94425e65a0260cb7ec5254be1b0db31a815c87df1c2d1cbb8f38a2",
+    "src/spireshift/engine_learning.py": "85e300466d103bcb3ccf48c7b6bedb55d40e6d837179b3949f1459da3f3b68e6",
+    "src/spireshift/engine_localization.py": "b1131721c69bd4c1995b23269ca1ab683866a0895db6c8b22d5e8e3b7041066f",
+    "src/spireshift/engine_mechanics_admission.py": "6f2447d18ecee61c49f40b5a094c2cd08fff16e872c702952e011fe851152008",
+    "src/spireshift/engine_mechanics_followups.py": "49315be43bdce0734f5a74656ad38dd5abff436ee52dba5f2a92b037886c6d23",
+    "src/spireshift/engine_native.py": "36e74572508dfc2bbb60243839b3a42d69cde4eecdb00057aaa291619d3eff39",
+    "src/spireshift/engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "src/spireshift/engine_potion_checks.py": "b7eb0c3b00e5a325db634521a2b52843917473fad013664fa080b22dabb45e51",
+    "src/spireshift/engine_potion_queue_checks.py": "a192f0f4be2e061cf4e9e52db519371ff566da1ec566e2c1fc678133840b936b",
+    "src/spireshift/engine_profile.py": "7049c0229ff2b61f352ee47385f57fc8ca912a50618f3f267a287bc915b446e6",
+    "src/spireshift/engine_progression.py": "874fb6fa46e506fa27db349109f98c701b2ae94e2dbf6e629fe0538c25e58ebc",
+    "src/spireshift/engine_projection_cache.py": "08260155da26b01de380fa55e72e092c98122a3b4a76e957e81c86d11164be43",
+    "src/spireshift/engine_qualification.py": "e208c0cd7c92994915fd35b75bd9c78d856a7e8fe9853658be07accd75a9db2a",
+    "src/spireshift/engine_relic_worker.py": "902dbfa28c4c2b9a992a751b201e3e3cd18fce2ced8ad01465a19a514a295630",
+    "src/spireshift/engine_run.py": "005794120b8f9f21217cdbc51a200d35d0ea34cf6388c99cd3dd1daba32704a4",
+    "src/spireshift/engine_sequence_checks.py": "abf91db4ae45c94ebdfb54d45663d9af03bb277408eb34a9473b607a509679be",
+    "src/spireshift/engine_starting_bridges.py": "7e63dd3d8fe155632dfe33c6d8bf8f1d04f507555570d0cae7c9df3fcd21ba6a",
+    "src/spireshift/engine_startup.py": "409a7fa70954e0d06d4004e3a1d2e72ccd53832b740d00962a643d0b62cc52f1",
+    "src/spireshift/engine_worker.py": "5ca26ab96913bd3257c9e3766373b9219a3412d7ed30ae7b986b3deb9508cf56",
+    "src/spireshift/engine_worker_qualification.py": "e6626b9d7dc719432d496896cfe76d68fd19fcbc5d4dffa6d91fc9b52d435367",
+    "src/spireshift/engine_working_app.py": "3db8fd2f91635c213afc957ae93504f3fe95acf93a0b41881c96d9dd3bca310e",
+    "src/spireshift/full_run_experience.py": "f4c776e0c7b31cb901c3a892e36e3a375a5fc3d408e18d836297f86122896420",
+    "src/spireshift/full_run_features.py": "10d56648d0dd7e6b3e6e7127bdc2156efd1a09b1a42cfa6edf7632065893a17e",
+    "src/spireshift/full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "src/spireshift/full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "src/spireshift/full_run_public_policy.py": "973b7c126d9045c016195e0b4f113a614b307055d5a9fb4c54656f7bb71eb3de",
+    "src/spireshift/liveness.py": "b2ffd85663fcb29a67654b7ba3f38b68d9f3968351a04996c30f0bfd76c4c032",
+    "src/spireshift/mechanics.py": "f60058569736d2eb2d5cd3493a7c3fd5edee253b17ddc1e5fa18da1f7aaec90c",
+    "src/spireshift/models.py": "4fffb6f7432a3cc5579104d7560fb61476e09f1d90d116f6eb71b8a0c11f7ec4",
+    "src/spireshift/native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "src/spireshift/native_action_context_study.py": "80d5b643d38e1bde2ba5c07038daf5d6401630239a5353b182a8365fd3782c87",
+    "src/spireshift/native_atomic_audit.py": "d6b3dc4394dafb90e59d28c3dc344e5fcd57a36cc37917a7f7b15f411088ca46",
+    "src/spireshift/native_atomic_audit_v2.py": "6cd11cbb38dd681df9cd1b703cc09d4c7196a3a250480731129326f7b92340bb",
+    "src/spireshift/native_atomic_inputs.py": "a1c8fe7a36aa7faa2d5ca4ffaea34d637bb35c37d0d6607358fc46a2f3e0ac77",
+    "src/spireshift/native_atomic_inputs_v2.py": "4c422f18a5b3f09099b4243e434349135358248a4a716033953f5d6b78536f8c",
+    "src/spireshift/native_combat_behavior_policy.py": "d256af8b15c9370733a46c274d22471387b6e71c3d9cb511911064d6a6c85b54",
+    "src/spireshift/native_combat_teacher_data.py": "77d7eab6b633272ffdcad267d8b01b05275d9731c3d49faa6aa46e9a403d8187",
+    "src/spireshift/native_compatibility_contract.py": "8d1fbb9e85f1764caaf47007bcd986340623630246317ca6b461554132e5838f",
+    "src/spireshift/native_compatibility_inputs.py": "48f8b2551ec80e68f4ad7da047c487770924d606b8f323363a3b5c1b65a86a5e",
+    "src/spireshift/native_conditional_control.py": "ec522cc1877ec115dd168522fcaa0b589101430d21bde5d34e2c8a3a71ac41ba",
+    "src/spireshift/native_context_cache.py": "e254039f36552a196785dfec11c7fa0f2136e506e00ebcbd0525515caf64fa74",
+    "src/spireshift/native_context_game.py": "327075c2d4073994fecd4cd003e2b03223330b86b71a65d5e14e3a7ad2d37326",
+    "src/spireshift/native_context_journal.py": "6a49c02c640dc1fe2c28e5726d9b80f940182c993279105494bcafe205cca89e",
+    "src/spireshift/native_context_reuse.py": "61cfb93d959213a4077f80c94744219582198f9fcc44f0d506889df704a9fc9a",
+    "src/spireshift/native_context_trial.py": "ed9d73aadb7949b806d6990936743be143e7c7797184fc9b3c4168b49e8a27c4",
+    "src/spireshift/native_credit_training.py": "8e53505899626019e99bf3eb569e2d2c8847eb5c531613aec2c71f82d729131b",
+    "src/spireshift/native_flow_audit_v12.py": "f5bb3cf0cd47563e27bdf398a17944f6f94538232603341e7fcd16ac04c81739",
+    "src/spireshift/native_flow_inputs_v12.py": "a17fbae95fc592780b95b624a784a8ebe57e3b27018ec3f5c40330ba4f48a706",
+    "src/spireshift/native_flow_live_v12.py": "db5bca201cfd11c32377c96f318a85224cc1b6678c5b0c75ed506392b70ad816",
+    "src/spireshift/native_flow_scenarios.py": "5a99800fffc0dfb3ea68b8456d813040539eb471a674578b31c6d1f55c88d45e",
+    "src/spireshift/native_flow_session_v12.py": "88ba258f7b869ff5303078aebcd66e84ca160a90d8598fbcae1040ab881ec362",
+    "src/spireshift/native_flow_verification_v12.py": "6e8e55ca9b7fd8372317daf0d133dbb09c6bf979da55839b335ce40f4719184d",
+    "src/spireshift/native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "src/spireshift/native_interface_audit.py": "24197394a85cba69d25c126533b477874af920c8446bc7a7648e94e7a24c541b",
+    "src/spireshift/native_interface_build.py": "9d7f127928e772a3ef03311d1756b314a3ea6412f3a29cda1b186c213b9a5fa7",
+    "src/spireshift/native_interface_controls_audit.py": "63703f163a062d51d45d9829bc3ed32adb3886b6ac9bb2cc0df722a855f71e0f",
+    "src/spireshift/native_interface_controls_inputs.py": "b1c2e069b212a1b68615151bfa5545681213bd04d8884d2fe960b5f10f07ed5b",
+    "src/spireshift/native_interface_inputs.py": "d67a883d0d012d05b8e712393f47abfd70b7c70d14ce121054adb247256c7f73",
+    "src/spireshift/native_launch_limits.py": "23913f7a3c9a6c76daa34280169810ceb5b4e728c2b103034c3e27b8b8e8f69c",
+    "src/spireshift/native_layout_audit.py": "1c2639f5cd056e93f782900a5df4e54f32c05a951cbb93cbd87d6ccd29924318",
+    "src/spireshift/native_layout_audit_v2.py": "1d291309452030bbb47cb8048bbd597a8d8bffca56ec9a4228cda1c086168301",
+    "src/spireshift/native_layout_audit_v3.py": "464d34421ff1ad36332263862c7b4e5cbdc8c3da3651554fddfdd0bf2ecc208d",
+    "src/spireshift/native_layout_audit_v4.py": "debb0459994710811bbd52738ba9076c14e21b4c42b72ad805e23c02529a416c",
+    "src/spireshift/native_layout_audit_v5.py": "e1fe04d17104b02c37df7faee563ee377b527eb070e40b1b7e26896d54365380",
+    "src/spireshift/native_layout_inputs.py": "6f377137acdab408b305cdeb24569d02932b245dff8d84590231de2d7721c871",
+    "src/spireshift/native_layout_inputs_v2.py": "76938badf20cdbcb8ee3e1c00abd6ccda22d5048d9348afcc5f599b6dc837ac2",
+    "src/spireshift/native_layout_inputs_v3.py": "5605ebcf6600302cdd8dc5ce4858e02112406d16101eb4f1147cf01172f5cb1b",
+    "src/spireshift/native_layout_inputs_v4.py": "eb48fcf1d99aa5c8109d05054a8b2bf323500a2b9d9b414f2db44c5fc786cb6a",
+    "src/spireshift/native_layout_inputs_v5.py": "42ac944add8668525e73f161627a2a5a8f8bcc3dd7dc90fa624db8eb88405b19",
+    "src/spireshift/native_learning_control.py": "b54f56dc9d195c4b41c4d26842ab0b08c5a1bb97e492de2af26fc3cbaa3699f9",
+    "src/spireshift/native_live_checkpoint.py": "20528440e37c759cc0fbbf5b2da82e56737878b09d92ff04d6033c294eeabe6b",
+    "src/spireshift/native_live_checkpoint_v10.py": "bb6f8ae1fdb52adcd7988e84338fd2a70a69cd2da2139b285ad825425396480a",
+    "src/spireshift/native_live_checkpoint_v2.py": "9f48633fb82f8f7d1085c40f00658399a61cb6b71efed646a3a41e9512ec235b",
+    "src/spireshift/native_live_checkpoint_v3.py": "bc22041e7c9076fb8963e16aadf544d1575f3fc3b688e8c1d2c8a90bb3150bbd",
+    "src/spireshift/native_live_checkpoint_v4.py": "4dca3fe6d7cf285d8e2dfda8b873c3c2e1e12f99b50346596d5de70446d40d0d",
+    "src/spireshift/native_live_checkpoint_v5.py": "55ae422ba58b3e5f21327dbc846c6c9d3ab6e154b80c39c2cffabcd81d2e958f",
+    "src/spireshift/native_live_checkpoint_v6.py": "06d31325599c93d14e34ccdc3f7677c68eefcc45d86ed4ad8a29f601c4212b4d",
+    "src/spireshift/native_live_checkpoint_v7.py": "1a43d4319f46360cf6d7974ff794f2d018d3eaa6b40adaabed4f244f1fc7736d",
+    "src/spireshift/native_live_checkpoint_v8.py": "d6eeb3895fd96298c3775ea305943aa71d6b3833c5280c7397620a45b48a2a1d",
+    "src/spireshift/native_live_checkpoint_v9.py": "6787f884d160b4871d768e7f33ec10ea453ca83d70c28ab3e492743986f84e74",
+    "src/spireshift/native_live_inputs.py": "a5b1ae8eb3617d41bed8a3f77c4d3dbf32c7df2bca9ee6d426c3340e317fd9f9",
+    "src/spireshift/native_live_policy.py": "b22d989e3304c443431c90a9e1cfd8361f04efdddd8d30bc836133dfd9d6be58",
+    "src/spireshift/native_normalization_admission.py": "b3aecd8b81187a9c73a2e560f71a57fd55c7555ee5fc7e78e955c69d08e30f2d",
+    "src/spireshift/native_official_session.py": "6582de09c1e771ed9a8b72e8567e2ef3f3be191eca5ece1e0817d04b8522424b",
+    "src/spireshift/native_official_session_v10.py": "4c82312cc4112558b1456a2d9cc27cd9588162a00dd58955c58be11f03b5e4ec",
+    "src/spireshift/native_official_session_v2.py": "47bc4ca25dc2ac81c2fd1affaf0cdd2f6a238fda554f90f20e1433e8547803ee",
+    "src/spireshift/native_official_session_v3.py": "b05c0f266a90d1f68cd908ba00805741f3793745f0541c146843eca6adea8b7f",
+    "src/spireshift/native_official_session_v4.py": "41e437c2d7b87f7d72ad3ed6ac366b6f9796fbab4e6b225abaef233398daf912",
+    "src/spireshift/native_official_session_v5.py": "b31c62a8c4e69e312e569890ae6e68189cd73d0d8e7226db0b1fe9919a8294ea",
+    "src/spireshift/native_official_session_v6.py": "407fdf1f860b86f22adadebe27d9acdc8d0e36115079679b15b1cf130061d334",
+    "src/spireshift/native_official_session_v7.py": "64ce24b280e86eae9c7b393f252feff1eb7fdfdf397057fa42172993db40706e",
+    "src/spireshift/native_official_session_v8.py": "5e6b2952635dbed9a5371bac6f599b46d0226d4931c319d5735e1b679708f339",
+    "src/spireshift/native_official_session_v9.py": "ef16dbb6aacdcce18679a7f04aa721985e1669a14c9df3d1b5812c5fd5766dc3",
+    "src/spireshift/native_policy_updates.py": "f0b9d43f89beb00736bb02e0e80dfaba52cb2a0f2f7e30bdc4dbfebd2285554b",
+    "src/spireshift/native_rest_exploration.py": "9945d714a19bf5c60b7ef52083b19d20169b09cf52583c340c33e6e58a990091",
+    "src/spireshift/native_selection_scenarios.py": "40ec61959dcf43782492a3b72825b5caa085baabd355a03e9728f8414f462cbc",
+    "src/spireshift/native_shared_transport.py": "42f8a3fb8631251c1cd0fba8750bd8e0f1f5b89e69008a49425fa52d97a4d11c",
+    "src/spireshift/native_shop_policy.py": "c4517e3513e57b42a642762c583600419a4c2d738d49638a799f2e6f57599156",
+    "src/spireshift/native_structured_model.py": "ad6dd6ae79c422a373bfc12cd30989c263861b2f6dddd403e6362ade2ce141e2",
+    "src/spireshift/native_structured_policy.py": "2f76551eecaa39033e92a286ab3698af593f212da62e70d21526bcf39024bfb3",
+    "src/spireshift/native_structured_state.py": "df2cb6e3334b34ec5f69a403c17e2d8093ab72e1245891a57efa424a0321c6ae",
+    "src/spireshift/native_structured_vocabulary.py": "fbf92a0984d4a70256fb76abecc56313a1a45e2db16949dea3cda5b53ab8666a",
+    "src/spireshift/native_turn_teacher_policy.py": "fd7ebf5144879f1c6ac9b4b8c431e40ea4bf78c5dfa0557b8b8a2e29c0897df8",
+    "src/spireshift/native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "src/spireshift/neural_combat.py": "2f598da9097e5f29dd2855018095a542af17fbfdb5bc20a3ae9bf34e9692f73b",
+    "src/spireshift/neural_combat_features.py": "94217fb2d5e62a1101a23f3a85b9a8c1371afa8300bd10b18ab078fa5d13c581",
+    "src/spireshift/production_models.py": "9074a054d013565292b560cc73dc9fe784f2ffa924820c8046ce4c2320701dc0",
+    "src/spireshift/public_run_choices.py": "a93e3f812a84eec557df8017a7b4ca72fc978f3b089e8e0b86ed6842b4455a74",
+    "src/spireshift/recording/jsonl.py": "c9ce46a7641d59ad052dc1b84d497d15bd40b84a300fe5e235c2d01fbfbac125",
+    "src/spireshift/replay.py": "440a7c4132f345f078072d9df80ea58152f675c336ff64abfa280b67c5a23c2b",
+    "src/spireshift/representations.py": "f72af0c9e9dd1de0314b9face657ac2486c08aca5e5003c1777ddbea9b58a78c",
+    "src/spireshift/resource_tracking.py": "1099f545950c48de74f11d6668b06904532fd055c7aca890ace97a8ac2b09e49",
+    "src/spireshift/rollouts.py": "8dd94ecbe60ddf6a6b428a63a41412b4bb14f70e964de612f1bb46f52706f938",
+    "src/spireshift/search_workers.py": "baf06777d2ca7bb5740f0bc007bf2887daaf83253883990b22e9d7fc2488d9f1",
+    "src/spireshift/splits.py": "3191d1c65627cb3bceede4fbdda78e0a3ecd6352a8b25289addcff7ebdbdc7ef",
+    "src/spireshift/starting_evidence.py": "56b958b1be085dd51724e32978995114dd7410e4c70ce2dd7123daff69f0de90",
+    "src/spireshift/starting_evidence_training.py": "dcf9f73b312224367d95c944dd9851a1eaebc03e7d91ac3fa8daf900b378fe97",
+    "src/spireshift/starting_option_training.py": "bc83c595f85d42797ebd2fdf1d75f0f3f99182f17a69b3f7456bbe0b5854b258",
+    "src/spireshift/starting_options.py": "a4304544b0dff41fbb2a9f0ef5bd143ac4f0ff0345c9c36139eb68f7b5c0231c",
+    "src/spireshift/starting_repeatability.py": "66a6bdb28dae81a3c183475e7d980586ce344b65213068ec31dadc2b91bc9f7c",
+    "src/spireshift/teacher_data.py": "b1de51778c6ef12e475f5ba6439acda8d685d74efc81e1bf698a37cbaec0f76f",
+    "src/spireshift/training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285",
+    "src/spireshift/trajectory_policy.py": "3e90bf3d0f29612e48fe71546649d52ce2a9a179fe691eb1063c12a29e0a52b4",
+    "src/spireshift/trajectory_preferences.py": "bdcaa64c394d3199587955d14d3f82f98b978c8df1eeebb249c49f3fe20f8f38",
+    "src/spireshift/trajectory_search.py": "c8293eae1126c427502de16faea1ded288e7988d8e0954082d7dfef89174f700"
+  },
+  "helpers_sha256": {
+    "scripts/audit-selection-flows-v5.mjs": "7e41aeaf3a997e8610bf9c95bc745d8e74f0932dcd1dbba0d211070106172cca",
+    "scripts/engine-atomic-selection-receipt-v1.mjs": "d31e884443995762ade756dc40f510d58c8f9d4a86d2738fc5e769db86cbf257",
+    "scripts/engine-bundle-commit-v1.mjs": "20dce9fce819c91111860eebf55ef815d6b9050db8de13156d11a5f605bdd4f7",
+    "scripts/engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "scripts/engine-card-cost-types-v1.mjs": "2b4e976e207def925452d80b974ff04b879b1ed940e6f69840bceea0b782851d",
+    "scripts/engine-checkpoint-observation-v1.mjs": "681b807ce69102b39ddfafbd59fcf3da372883c586b9cfada592e6f499e5e342",
+    "scripts/engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "scripts/engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "scripts/engine-input-layout-v11.mjs": "a44b25945a6b7545182a60e37cd1474094a150e75682ca45d16cf058f753109f",
+    "scripts/engine-interface-case-bank-v1.mjs": "349b067a84339a57f8fb28d9333545de0d2e432aeafdab6032c758ee81b961c7",
+    "scripts/engine-interface-contract-v2.mjs": "d4ca629e16bf73e6ea2969f3fc64898d7c3cd81111c60345b028e445413c279e",
+    "scripts/engine-interface-scopes-v3.mjs": "f2b7bbd229bc0ceccf28974da006d1741786e464d6267a06b447ae48e588a20e",
+    "scripts/engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "scripts/engine-journey-tutorial-v4.mjs": "ba8a537a5c7446ed69b4f482614d434eaf60295f00bbb9205c2b9888f9e35f76",
+    "scripts/engine-live-checkpoint-v16.mjs": "191ce25fd7849b930992e7a1b652426c8eb7d6e7b317f993252a3a28ed80acf4",
+    "scripts/engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "scripts/engine-natural-shipped-contract-v1.mjs": "9c1b3573a4362b78efa1a1e758affbb53045bcfdf94c4e03f496ed59006635b5",
+    "scripts/engine-natural-tutorial-v1.mjs": "2ba6a18e93a491d6e9fe452ac97fca9235e53a4ccf5687f0feb6226652d18a8c",
+    "scripts/engine-natural-tutorial-v2.mjs": "1eb8ba174b567cdfcd639c1d01319bf4e337ef06ea4d5b8c7c8a2251fa1dc1f9",
+    "scripts/engine-natural-tutorial-v3.mjs": "30f7a344788e7b1b39b0181395c277c2eda2f42c2cf1d400562ddda137a8790b",
+    "scripts/engine-new-run-contract-v1.mjs": "817cde0e5f42048d782272cc4261bda550f42ca6d3775d0c28a8117ae9f98ef8",
+    "scripts/engine-observation-boundary-v1.mjs": "ed1da13d136241cf41549c53d1c3e523c03e1fd1f0a3253fae137c3cc1e0ed73",
+    "scripts/engine-observation-boundary-v2.mjs": "9fa9ef35fed6d528ce9d944fc256e3009a5d227b4544483c8cda0d8e4b08a3f9",
+    "scripts/engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "scripts/engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "scripts/engine-reward-commit-v1.mjs": "4da426d716f5ad8bab76f7ff91ed43d9c3290f53f8647d93320b1e845839286a",
+    "scripts/engine-reward-commit-v3.mjs": "67fd000353953b96a8bc26158e3e49dec1319bd94078972ea20bd6a7771cea54",
+    "scripts/engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "scripts/engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "scripts/engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "scripts/engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "scripts/engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "scripts/engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "scripts/engine-seed-contract-v1.mjs": "1800403f203f3aad7447ae19359b29591d7a4ee03a11ce91cb426dbe5ed076f4",
+    "scripts/engine-selection-scope-v1.mjs": "3612bd3d8eec7e4a7855cd696cbf0e73b4cb341809a27005d648171e906fa726",
+    "scripts/engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "scripts/engine-shared-input-v1.mjs": "242c415b74d1054ccd79ef27ae8a7465bf2fb15801ab3f3c3de4d869618088b3",
+    "scripts/engine-shared-input-v14.mjs": "d21c489044b300a76ecf24060537d500312dc3218fa25214d1fb9f84322f4e9b",
+    "scripts/engine-atomic-selection-v1.mjs": "5121eda9ac515aac71466d0359db8299d25c1c8be3f0798469a4622bbd0a6c52",
+    "scripts/engine-atomic-selection-v6.mjs": "c3217a465a6024421253c3ad9dfcbbd5fa293d51be18b8154aad5016b309b748",
+    "scripts/engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "scripts/engine-combat-surface-v5.mjs": "67eee376ebae9ddfccc7823a375500cd33ed9eb8bd28c3fdbeca1adafb1de0ab",
+    "scripts/engine-combat-surface-v6.mjs": "0278228521d553b041b7b6f09ce21a86e2a27f21e3a2edf388c81b3febb2496c",
+    "scripts/engine-native-worker-v23.mjs": "7fea8eea341eeb8d1e8144e5d19d1fce3f56d536fc5dc76bd93d33164d07fa09",
+    "scripts/engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "scripts/engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "scripts/engine-relic-surface-v1.mjs": "8d13cb14033cea7c4a5a280ccee5c16f931e5de3ee5b76433b222d2f7774d9e6",
+    "scripts/engine-relic-surface-v2.mjs": "aebb9874b61d459004dbb0b90869d2d5a3f590c2eb890c4101ea5cdde0393fb8",
+    "scripts/engine-relic-surface-v3.mjs": "435a84f4c01d1b46794a689360d7fd9915e27d3bd0520d563bdbaf3e09d4dd53",
+    "scripts/engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "scripts/engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "scripts/engine-run-contract-v6.mjs": "f7157ba93a5ea221a52857b946d81d130c91f2e6dd10ebd831ebb484b8f461e0",
+    "scripts/engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "scripts/engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "scripts/engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "scripts/engine-selection-flows-v9.mjs": "bd584228bddec0bb3e49b0b61de9d8e6c4619d57e13a380cbcc7cae88ed7b688",
+    "scripts/engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63"
+  },
+  "entry_sha256": {
+    "scripts/check-selection-flows-v12.sh": "e1c0433a14aeff1dfa45fa0d4535d43e17bf8222597a1be4ffd9f02d60c846ad",
+    "scripts/compare-selection-flows-v13.sh": "a20bd346bc1f4ff48fe9be981bcfa290fafb84a1cd3367afa1fbc26bc7e24fbf",
+    "scripts/selection-flows-session-v12.py": "4dc2c5121dc74a6abcb6281f5730df91524b04371d5dfb6d938f8997a94c426e",
+    "scripts/modal-panel-session-v1.py": "a332e7600cd4a2afdc367209f823b8b3c3ce390ef388ef2cedc3cb15906d03d1"
+  },
+  "captures": [
+    {
+      "host": "native",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-2-interface-001/native/worker/public-observations.jsonl.gz",
+      "record_kind": null,
+      "sha256": "3074fa755670afacd9d223bc11c12bb70f22e48932e65bc13e12df1b7cd489b0",
+      "expected_frames": 97
+    },
+    {
+      "host": "official",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-2-interface-001/official/live-public.jsonl.gz",
+      "record_kind": "public_frame",
+      "sha256": "a1a8bc42745a2097fe6df8008e879224892dacc4b51b49327bd38f5c250e42d1",
+      "expected_frames": 122
+    },
+    {
+      "host": "native",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-3-interface-001/native/worker/public-observations.jsonl.gz",
+      "record_kind": null,
+      "sha256": "5be3b09912b080f030a4f82839af252fea889803a7982df9c433b80c692ef52d",
+      "expected_frames": 123
+    },
+    {
+      "host": "official",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-3-interface-001/official/live-public.jsonl.gz",
+      "record_kind": "public_frame",
+      "sha256": "5869f7704076da1a3e1b586b11f6e8a3340e72062549f1699100391ed5285703",
+      "expected_frames": 101
+    },
+    {
+      "host": "native",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-2-interface-002/native/worker/public-observations.jsonl.gz",
+      "record_kind": null,
+      "sha256": "c030694f3cedd750fd31a4dfc84d9e5ae2e25734035496361d16ba6e558097c7",
+      "expected_frames": 115
+    },
+    {
+      "host": "official",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-2-interface-002/official/live-public.jsonl.gz",
+      "record_kind": "public_frame",
+      "sha256": "e0b12278584859a23658e9470bdf5fc0d77baa54747f10dbc08a915e3c18bd53",
+      "expected_frames": 16
+    },
+    {
+      "host": "native",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-3-interface-002/native/worker/public-observations.jsonl.gz",
+      "record_kind": null,
+      "sha256": "b495ad41f82a18fce5732d4cde83574932bd350f9855ee53765b36503fdf9160",
+      "expected_frames": 129
+    },
+    {
+      "host": "official",
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/player-3-interface-002/official/live-public.jsonl.gz",
+      "record_kind": "public_frame",
+      "sha256": "171fdd01d11809cca04c998bf626ea59da21a0ef4c68058117b7ba24455ecfde",
+      "expected_frames": 75
+    },
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-control-v2/player-2-interface-control-002/native/worker/public-observations.jsonl.gz",
+      "sha256": "6a7feac3fbc2e3c6f1e41ec5d3b85476f793970528f505019d058d7f7bf4b2a3",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-control-v2/player-2-interface-control-002/official/live-public.jsonl.gz",
+      "sha256": "eee37b53715dc84c677bc94577c26007b24e293276d1210ab5f048e44ee84abc",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-controls-control-v1/player-2-controls-003/native/worker/public-observations.jsonl.gz",
+      "sha256": "556b607fbb628e3473da641fda4fbde567289693a82a046e6967ca790bcb1a1f",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-controls-control-v1/player-2-controls-003/official/live-public.jsonl.gz",
+      "sha256": "fda9cbfe690947b962fd3feb8bc7a7c0ee3a69043b76ed3b12d5c285390b9031",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-layout/control-v2/player-2-layout-102/native/worker/public-observations.jsonl.gz",
+      "sha256": "da081a9aa34f0c08c0dc6672cd3bf934b07f70f019dd1d28fdee174894e942e1",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-layout/control-v2/player-2-layout-102/official/live-public.jsonl.gz",
+      "sha256": "7a3fdd720ea856d7ff92db28d9096a5c17ae4cf41460fac5842baf2e72c65652",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-layout/control-v3/player-2-layout-103/native/worker/public-observations.jsonl.gz",
+      "sha256": "0dd4947287651667cb80da49416179a111a351bc7e481e0bc2b4af2c078720c5",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-layout/control-v3/player-2-layout-103/official/live-public.jsonl.gz",
+      "sha256": "4232e47422885cd31e8c85ff0385cf07bbb80e1e22fb14002cb339c64ce2d4bd",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-layout/control-v4/player-2-layout-104/native/worker/public-observations.jsonl.gz",
+      "sha256": "b7d6345b34e3f8b5484d831af316fd19ecd814756af929849c2f81950abdbf0e",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-layout/control-v4/player-2-layout-104/official/live-public.jsonl.gz",
+      "sha256": "547b26024880ace5a36a9873ff37ec23ff1b02e653813a5ce810f3d3ddb77eab",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-layout/control-v5/player-2-layout-105/native/worker/public-observations.jsonl.gz",
+      "sha256": "3243ab3440949dee056cafe77fdf8fb3f983f08f29f1c77637c1e5764292f6e0",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-layout/control-v5/player-2-layout-105/official/live-public.jsonl.gz",
+      "sha256": "35c34497a44c2b729c9c98f5e2f9b20039251993f1b3bd8a9edd93bf0b83e002",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-semantic-selection/control-v2/player-2-selection-106/native/worker/public-observations.jsonl.gz",
+      "sha256": "f34b866aab1d8061b175b2bbe09345c4b8bac17e8cb67017a8491a1890ebee30",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 5
+    },
+    {
+      "path": "artifacts/native-semantic-selection/control-v2/player-2-selection-106/official/live-public.jsonl.gz",
+      "sha256": "265ba91b260ce25a3003552d7d4e298efac584ac0361769e3d060fd5912bc9cd",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-semantic-selection/start-observations-v1/SP1RESH1FTLAY0UT107/public-observations.jsonl.gz",
+      "sha256": "3821508a3742666f606b5e98ee05695b17e716afa2d12cb94ebf6207339d459b",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 1
+    },
+    {
+      "path": "artifacts/native-semantic-selection/start-observations-v1/SP1RESH1FTLAY0UT108/public-observations.jsonl.gz",
+      "sha256": "111b44a2348b281bb75802ff0cb954af598c69b3b0a276917e43e62392f3cc41",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 1
+    },
+    {
+      "path": "artifacts/native-semantic-selection/start-observations-v1/SP1RESH1FTLAY0UT109/public-observations.jsonl.gz",
+      "sha256": "acdf51b38435ac784922a893e7f126c6aa8c54c987ff0692f84120705b8fb580",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 1
+    },
+    {
+      "path": "artifacts/native-semantic-selection/start-observations-v1/SP1RESH1FTLAY0UT110/public-observations.jsonl.gz",
+      "sha256": "c87e9a07694ca53f3d5b621934f08b7672bc032246e3dfafe3892fc5d7c74f05",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 1
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-2-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "776d6d26f5dd88f6a65414d2509bc5b7b4fb63ae16f307ca9a27096245018d2e",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 94
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-2-world-1/official/live-public.jsonl.gz",
+      "sha256": "65e08f1e47b6a1d0e895ce712b4febd5794010893a4b53dccf28be7323ba95b9",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 89
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-2-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "5ff5a3d9b3276c42574d78dd4fdc155974a68f77a331dd659aa434472ee3bc65",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 85
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-2-world-2/official/live-public.jsonl.gz",
+      "sha256": "0d61f052929de1623a73392ecb74249320b12784696732da9c1a25563c94d082",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 92
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-3-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "c61db48c6684050e3e57519be02f064b3f153e2329f99211169ce91351da0a4c",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-3-world-1/official/live-public.jsonl.gz",
+      "sha256": "0f0b0d096f10db00b6b46c255dd0d31e756dfc56ae08cfed4c02c321fa6d4dc8",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-3-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "9314e17be7cc3baeb3647f4a73b66dc3382ff37d4079bbd4b8508298de0d6765",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/player-3-world-2/official/live-public.jsonl.gz",
+      "sha256": "1d126bdc970c52e5f1db69c93ee6db631df1a1aaa18d00fb31ae92cc757e6237",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 51
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-2-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "90fe444721625345ef5d8951300660a01a16f298cf48ca16d4322113175364bb",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-2-world-1/official/live-public.jsonl.gz",
+      "sha256": "55a9a2cfd5e429abc5bed6bade21918fca63aa904109dfca595c7fc7cba82392",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-2-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "3a592e38c017d05dff8a0b988381c90bb9be04de7ea0519b235fb3c1e9403a42",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-2-world-2/official/live-public.jsonl.gz",
+      "sha256": "057f24eecee8ea96ccb556efd3157faa8297f119a71e6b41134c8ae00f370b31",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-3-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "52a7815731edeb40c7539e99b44b6b4ca43649494f52e6faf940c9edb6151ad7",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-3-world-1/official/live-public.jsonl.gz",
+      "sha256": "e004b33888933a0c0f2fa3f87262c7864acb4e8bed7feb900b83640bffeb7376",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 8
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-3-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "6a4ee91becccab4248c157518304f333d365d02030a250340976830bd15e8df9",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/player-3-world-2/official/live-public.jsonl.gz",
+      "sha256": "0fa338a3cc5838b6fdf934bf40f713687bc2ab4af6b5c90981ecf27e55c06341",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-2-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "15b10575960b1ef6df78847cc3fb79cb2eef9519a7545137240cc720ee36aa74",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 96
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-2-world-1/official/live-public.jsonl.gz",
+      "sha256": "84ebc8baeb5086db237994f251a9d4aa262dff04c77f0d715c1d045c4a50a0a4",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 97
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-2-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "27fd1907d36d53211581c3105ca149ac45530417b1fff0903e0a282208870232",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 77
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-2-world-2/official/live-public.jsonl.gz",
+      "sha256": "a156df2fff39afef88ac56cfbef343c9cacdc74ed582c2653bc3caa619d90550",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 102
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-3-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "4014b0901761c403ef10160ab02550552ac7fae32d6240bf230ab177801eca71",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-3-world-1/official/live-public.jsonl.gz",
+      "sha256": "81fcd5f94f44f0e44fbd9d5dc66818d9be2126d6420dde69bbec22b56562b1c6",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-3-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "09e20bc28830ac7cf4de3fe3db26e3026ded3f10a94bf13f7d3ee67eb14cd65d",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/player-3-world-2/official/live-public.jsonl.gz",
+      "sha256": "c513df77341023c34390019db6e8c29a861fa4f1e3ef4cffda683f7352af88b2",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/reward-guidance-control-v1/player-2-reward-guidance/native/worker/public-observations.jsonl.gz",
+      "sha256": "e784c4e8884d00e9dcf514a662ebaa14007aef9ccd1cdb425b6696580b1a09e2",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 65
+    },
+    {
+      "path": "artifacts/native-selection-flows/reward-guidance-control-v1/player-2-reward-guidance/official/live-public.jsonl.gz",
+      "sha256": "1d45c0a72894ecd3fb8dac3124f8a416326360a09459da110e4ecac3ff84ef10",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 64
+    },
+    {
+      "path": "artifacts/native-selection-flows/selector-identity-control-v1/player-3-selector-identity/native/worker/public-observations.jsonl.gz",
+      "sha256": "59e6b7eaa0f346f85b9d0a8d88b4a18e077a58346b4293d351b5dfa3ee6cebdf",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 113
+    },
+    {
+      "path": "artifacts/native-selection-flows/selector-identity-control-v1/player-3-selector-identity/official/live-public.jsonl.gz",
+      "sha256": "eaf5e5395f39e2e4fa58d19b605b2c6311154dd67ac572e26065097da46e0784",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 112
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-2-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "0c49bdc09a5148f54bc1980a74e63d09633a55635cba1862cbbf535ad67b72c9",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 114
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-2-world-1/official/live-public.jsonl.gz",
+      "sha256": "56d064b1a6114ad6e25f9884ba82f6d9d6d5542607cd0a0e5677f9b5c8791450",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 102
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-2-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "cd554b3df116b5b71f083681945114e664d220b72b734f757ffe5014621540b9",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 120
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-2-world-2/official/live-public.jsonl.gz",
+      "sha256": "44aa16606a6b2ec7aea0109600370f0cf80ac7f1fed55012b8bdddee09648b2e",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 120
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-3-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "3b5ea092a44d90a7d48d0acf7dca0d92692de4ab2d48106d5780d45a14d63db9",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-3-world-1/official/live-public.jsonl.gz",
+      "sha256": "e2245a13c12f30ae88e4c9f388ac38e22a8f96a0c41212fe76b41df94d2828e8",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-3-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "94302ca4be670533382e26b46c9e84d065933e8b7644b38715b2fb539814ae88",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/player-3-world-2/official/live-public.jsonl.gz",
+      "sha256": "1d49971551aec1880c67db96eb53d1efee0fc6963c1833e7c034e3aa364e9359",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v6/player-2-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "fa8613f99cb86b16d4e03840a79b197bbf0de70a288e0f00175104df7f5a136d",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 97
+    },
+    {
+      "path": "artifacts/native-star-cost/particle-wall-fixture-v2/worker/public-observations.jsonl.gz",
+      "sha256": "6e24d768cf11d221d9c27f0600996e0b589e46e0f4e14bd4e866f077c20bbf44",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 4
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-2-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "b4ceed7fe83f20a1973175ca7e5488c6dc5e588c70cc952d7dfc1b62e1e4720c",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-2-world-1/official/live-public.jsonl.gz",
+      "sha256": "787db8c68ce170c8c2174d5c47032332f8ef213f21522c7dd9917aada40a1b12",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-2-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "237abce07b161c3e3dd72a092efad2b0cbb7cae1c36cab895fea542ffa2de763",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-2-world-2/official/live-public.jsonl.gz",
+      "sha256": "5a4a646c6347f03e0b3af0b640cf6d07046dbdde4f66a19d08041100a768176d",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-3-world-1/native/worker/public-observations.jsonl.gz",
+      "sha256": "783b19b939f81c5d17ee438b2fe9c847264d148fc2ee4a10596cd1bf4bbca6c1",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-3-world-1/official/live-public.jsonl.gz",
+      "sha256": "05a29eceb13b107312c852e41e68d36f68821502e41a8d93c98d6a354b0cf008",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-3-world-2/native/worker/public-observations.jsonl.gz",
+      "sha256": "0564f5136c03f801f1e5725c38dbd408a89119f9f4a8d453c89397816ecea896",
+      "host": "native",
+      "record_kind": null,
+      "expected_frames": 129
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/player-3-world-2/official/live-public.jsonl.gz",
+      "sha256": "8053102343166736b9a650f4ffde4865ee6527462d0a038f4d27b3f28b817558",
+      "host": "official",
+      "record_kind": "public_frame",
+      "expected_frames": 128
+    }
+  ],
+  "history_reports": [
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-canary-v1/report.json",
+      "sha256": "3b3a8b21f7249eb49c4557354279a2abd5e32bb41983f7e8d56697857b6e0b8e"
+    },
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-control-v2/report.json",
+      "sha256": "effebb9514f65baae833d81d39bcf525b831801c6f8cef3837c4fca8b3e0d74f"
+    },
+    {
+      "path": "artifacts/native-live-adapter/sts2-v0.111.0-a8-interface-controls-control-v1/report.json",
+      "sha256": "6f94e3a4ae1c6b48b6e9eae185ace9efaaa8eae6186cd79d6568ee3c9c1ba2ae"
+    },
+    {
+      "path": "artifacts/native-layout/control-v1/report.json",
+      "sha256": "474b448480664fbc8a6c4da9f8fdba6f1243e2fa2e6848ab8460ae13e055ce5c"
+    },
+    {
+      "path": "artifacts/native-layout/control-v2/report.json",
+      "sha256": "91bb63667e4cd112e7a7f681d48c984ca0fa4a29b2b817913d69e2a799bf17a1"
+    },
+    {
+      "path": "artifacts/native-layout/control-v3/report.json",
+      "sha256": "a9e317fa9739e95e8119cd9eb3ff1761f773cb9c56c97ca6c297a13b41613e3c"
+    },
+    {
+      "path": "artifacts/native-layout/control-v4/report.json",
+      "sha256": "252ee642a09bf776e940bfb496e740ec74b14e49fbaa12a6f4db47b469149487"
+    },
+    {
+      "path": "artifacts/native-layout/control-v5/report.json",
+      "sha256": "9dd947e410fa68da6330596d591ca68169d1bfa256d4cf09599f3160c3f2f941"
+    },
+    {
+      "path": "artifacts/native-semantic-selection/control-v1/blocked-report.json",
+      "sha256": "baaf8b33963332cd80225b372fe061a539136532e7a921442e0251ebdd58882c"
+    },
+    {
+      "path": "artifacts/native-semantic-selection/control-v2/report.json",
+      "sha256": "314264a9f893848e902e9688f6d382c757bacf4da0766b35439e461ed6a0bdaf"
+    },
+    {
+      "path": "artifacts/native-semantic-selection/start-observations-v1/report.json",
+      "sha256": "bd188d0318109d6d4b722ad68db0434426ff829d2c08c5393394f136b9fc4675"
+    },
+    {
+      "path": "artifacts/native-semantic-selection/canary-v1/report.json",
+      "sha256": "c5cdb887cdfee10e0a084ce183de61f27cfa14f09342e15725a858ab31d6955a"
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v1/blocked-report.json",
+      "sha256": "51e100ce9a5be85e76995bb1dbff18aa1eacf3fdecf9b8434df18f6aeba32cf5"
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v2/report.json",
+      "sha256": "c30ca8e6dde21a62afe5da156dd6722e5af738b09325970768c91d7b61e6952b"
+    },
+    {
+      "path": "artifacts/native-selection-flows/card-titles-control-v1/report.json",
+      "sha256": "4e01147a91f8d72de89f3278afa08eebc1e716cde98e84f1b42af18c0b3e08d6"
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v3/report.json",
+      "sha256": "216772a4f961633f53731bf4a74b9c0ffc9a3a3536b7b615ec8fa8d44dfe80ed"
+    },
+    {
+      "path": "artifacts/native-selection-flows/transition-control-v1/report.json",
+      "sha256": "05a787062f9218afc807d725a3ee7b8f0a9c692b0c69a1cb8567b15242796df1"
+    },
+    {
+      "path": "artifacts/native-selection-flows/reward-guidance-control-v1/report.json",
+      "sha256": "b06577fc23d5d069922538605735d8db489d997d4ae6736965a00a12aabe546c"
+    },
+    {
+      "path": "artifacts/native-selection-flows/selector-identity-control-v1/report.json",
+      "sha256": "03ed31c56ab3858426eb479ba72dec4aee44384e4487050a583021952ceecede"
+    },
+    {
+      "path": "artifacts/native-selection-flows/canary-v5/report.json",
+      "sha256": "4a0ec984182b9a47ce68714150c1b0c64b1d17ac1abec533ec7ed3badea635ce"
+    },
+    {
+      "path": "artifacts/native-star-cost/development-v1/interrupted-review-v2.json",
+      "sha256": "44947bf60c91e94b97d8ab9bd44b9a8bf24a7dd9b2862f19f34c96749d43d698"
+    },
+    {
+      "path": "artifacts/native-selection-flows/star-cost-canary-v1/report.json",
+      "sha256": "160dcb3f2f150c61691c6506ffce4f7fe13f945afca49358a689fb1c2742e1d4"
+    },
+    {
+      "path": "artifacts/native-modal-repair/development-v1/failed-belt-review.json",
+      "sha256": "f28245ecfd094b940cbc587343bf436d9b08aecca2866a0b267512b2283a0ae8"
+    },
+    {
+      "path": "artifacts/native-modal-repair/stopped-modifier-prefix-v1/report.json",
+      "sha256": "22ea84ac51a67fbb0934b86b1d8184ba55bfd41a1f266e5ddfed9bb3ba4eb657"
+    },
+    {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/reward-glyphs/report.json",
+      "sha256": "c10242a4524cd7a8bd93e586cf4e1b07ede4cccbae63956f322c3c0e0b95a0ed"
+    },
+    {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/status-titles/report.json",
+      "sha256": "1d64b1c498d7f9d626ea5a60ac56de3f90c004f05b6c3cae84afa1cdfd548f52"
+    },
+    {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/modified-deck/report.json",
+      "sha256": "7b6d4af42e59ab4c0209bc98eedb5e760d01939d8434184e95f2532b1c8df1e7"
+    },
+    {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/selector-belt/report.json",
+      "sha256": "2b9e68e4ed025b5840f3e88fb695528a9ebae7fe0af60dcc312b196c032ca867"
+    }
+  ],
+  "protection_receipt": {
+    "path": "artifacts/native-reward-map/development-v1/protection.json",
+    "sha256": "8f46ceda1efdc235d122652dac86070b33d0946169976c729b222237c754c378"
+  },
+  "sources": {
+    "configs/native-compatibility/sts2-v0.111.0-a8-live-canary-v1.json": "8a1b4df70274f4191273543c09f7337b09ff8df4d096e49e213255d0660537c1",
+    "src/spireshift/__init__.py": "aba7d718e8ef451c1a64a1f7bdff9c5faf83d2fb5a4168404f368f117050ae0d",
+    "src/spireshift/adapters/evangambit.py": "9d9009dbe00416688831ae071a8c7b7f5221e8a539b010661d147b97ec4e2c2f",
+    "src/spireshift/adapters/evangambit_public_choices.py": "222ffcd51b568eca558cd4f1e32758684b57447bd9982c84b7fee2eaee1c1f95",
+    "src/spireshift/adapters/mock.py": "13a6834d57ec08424e41cd3258725a7041e346baf3c3416223e334ceff9c3417",
+    "src/spireshift/adapters/tactical_mock.py": "37101110f4c4d57d22db6f4ca0877a9227f60335a41241c46111ff35fd00f6df",
+    "src/spireshift/agents/baseline.py": "16be5b5e22df958b2e8f4a9076c6ab211b9b047db50aa77d9fdf1b389c25b10c",
+    "src/spireshift/agents/combat_advancement.py": "9d3c8b703726b6b1210910169b014045bd7c424179097eb7cc7e90dc153a4b50",
+    "src/spireshift/agents/learned.py": "96330138b66df7a6497ccf7028da6d60b9f1b35e6064da8983c3183fb96a1358",
+    "src/spireshift/bootstrap_teacher.py": "03151cc08b2ae94466d452ac8d678bfd93cc1a4852068a6096fed4baefeca45b",
+    "src/spireshift/causal_preferences.py": "adf5307cc85ec1fb9585b88a6c18b727259bad02e7240f618a567acf4798756f",
+    "src/spireshift/combat_features.py": "b8bbe66a3011b12420b36f08dbb0b9bf0c6f68be776cd1bbc7aace59ce29aeb6",
+    "src/spireshift/combat_foundation.py": "630442b8416c47a70273516807f5857c82de5a3c80eb8f24aa40173feb8db24a",
+    "src/spireshift/combat_gate.py": "67bae500df984aae8e215100536426b0c59bffd2255599334e0f797d5e0146a5",
+    "src/spireshift/combat_policy.py": "6a6642a2f1b88f6ae6733d4aa58fb606f74b902e4b87980e18cbe9dd73f2b7cc",
+    "src/spireshift/combat_search_intervention.py": "221b6c60c9e2188c18ecd412a1df81cc01cf3a4e957de8daa4e9340cbf95bd1d",
+    "src/spireshift/core/manifest.py": "750edf0ef3919005371c42e477599c944f83e5f4b24c901f9b7a615ed458cdc6",
+    "src/spireshift/core/objective.py": "50fbd4b770f0736dd68a5ecee6a96f5865ae53d37b590ca2e534d43302cf8311",
+    "src/spireshift/core/protocols.py": "8a280575373d9ed34e77f0ceced4a13d80eba3d1114fee2e36ac7c3e2a2b45c4",
+    "src/spireshift/core/types.py": "af06c99fd67405d928e5338f97134a432ce899f5529c54763745f2040a9b8413",
+    "src/spireshift/dagger.py": "8378b823dffac02dd93078494a2936c67ddd822fabe98687238d9d207385cbe0",
+    "src/spireshift/doctor.py": "862ce8eba6521241f3e102c8be0defc37fe77541b4aa1f102086124e19415c92",
+    "src/spireshift/engine_checkpoint.py": "3cebd6eafd7046b85a9034f17fa0fa84fd78ca8833d23667067baf16cf7b1c4c",
+    "src/spireshift/engine_cli_probe.py": "2d0adf87f314557aad6d2b0077e76df00e5c7c5b23bd750fd85d98466a2c0c93",
+    "src/spireshift/engine_connector.py": "7fef88c31b97f3ad0caadd3bc5fd257600fd596210024b7c2d88b0c92cf378ff",
+    "src/spireshift/engine_coverage.py": "cb356458df92fb6e58a22334ab16617407c6c5c6fa7ad25ccc90f875f7a6cfd6",
+    "src/spireshift/engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "src/spireshift/engine_experience_audit.py": "dcb9d2fa3856793ce4e491267e7aa2e58c5c187e2e18a9b6cb956d19c79ea079",
+    "src/spireshift/engine_experience_stream.py": "32d1386cd8602d43c7ccceaafcc2d944d8c1e1330bed50fc52afbb1eb097ca1a",
+    "src/spireshift/engine_journey.py": "6a1062f9b222f36886e3feb8da5e18b3a39ebf630f9fd46144e23d53da094544",
+    "src/spireshift/engine_journey_bridges.py": "785ba08a53ebfc498f26b6bd88964c45fb6436fc18f235018dbc20b6f2a967b7",
+    "src/spireshift/engine_journey_verification.py": "d15a118d160162d3b7e1bcfeed4a5c44348af538cce6439700701bb1e33704a1",
+    "src/spireshift/engine_learning.py": "85e300466d103bcb3ccf48c7b6bedb55d40e6d837179b3949f1459da3f3b68e6",
+    "src/spireshift/engine_localization.py": "b1131721c69bd4c1995b23269ca1ab683866a0895db6c8b22d5e8e3b7041066f",
+    "src/spireshift/engine_mechanics_admission.py": "6f2447d18ecee61c49f40b5a094c2cd08fff16e872c702952e011fe851152008",
+    "src/spireshift/engine_mechanics_followups.py": "49315be43bdce0734f5a74656ad38dd5abff436ee52dba5f2a92b037886c6d23",
+    "src/spireshift/engine_native.py": "36e74572508dfc2bbb60243839b3a42d69cde4eecdb00057aaa291619d3eff39",
+    "src/spireshift/engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "src/spireshift/engine_potion_checks.py": "b7eb0c3b00e5a325db634521a2b52843917473fad013664fa080b22dabb45e51",
+    "src/spireshift/engine_potion_queue_checks.py": "a192f0f4be2e061cf4e9e52db519371ff566da1ec566e2c1fc678133840b936b",
+    "src/spireshift/engine_profile.py": "7049c0229ff2b61f352ee47385f57fc8ca912a50618f3f267a287bc915b446e6",
+    "src/spireshift/engine_progression.py": "874fb6fa46e506fa27db349109f98c701b2ae94e2dbf6e629fe0538c25e58ebc",
+    "src/spireshift/engine_projection_cache.py": "08260155da26b01de380fa55e72e092c98122a3b4a76e957e81c86d11164be43",
+    "src/spireshift/engine_qualification.py": "e208c0cd7c92994915fd35b75bd9c78d856a7e8fe9853658be07accd75a9db2a",
+    "src/spireshift/engine_relic_worker.py": "902dbfa28c4c2b9a992a751b201e3e3cd18fce2ced8ad01465a19a514a295630",
+    "src/spireshift/engine_run.py": "005794120b8f9f21217cdbc51a200d35d0ea34cf6388c99cd3dd1daba32704a4",
+    "src/spireshift/engine_sequence_checks.py": "abf91db4ae45c94ebdfb54d45663d9af03bb277408eb34a9473b607a509679be",
+    "src/spireshift/engine_starting_bridges.py": "7e63dd3d8fe155632dfe33c6d8bf8f1d04f507555570d0cae7c9df3fcd21ba6a",
+    "src/spireshift/engine_startup.py": "409a7fa70954e0d06d4004e3a1d2e72ccd53832b740d00962a643d0b62cc52f1",
+    "src/spireshift/engine_worker.py": "5ca26ab96913bd3257c9e3766373b9219a3412d7ed30ae7b986b3deb9508cf56",
+    "src/spireshift/engine_worker_qualification.py": "e6626b9d7dc719432d496896cfe76d68fd19fcbc5d4dffa6d91fc9b52d435367",
+    "src/spireshift/engine_working_app.py": "3db8fd2f91635c213afc957ae93504f3fe95acf93a0b41881c96d9dd3bca310e",
+    "src/spireshift/full_run_experience.py": "f4c776e0c7b31cb901c3a892e36e3a375a5fc3d408e18d836297f86122896420",
+    "src/spireshift/full_run_features.py": "10d56648d0dd7e6b3e6e7127bdc2156efd1a09b1a42cfa6edf7632065893a17e",
+    "src/spireshift/full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "src/spireshift/full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "src/spireshift/full_run_public_policy.py": "973b7c126d9045c016195e0b4f113a614b307055d5a9fb4c54656f7bb71eb3de",
+    "src/spireshift/liveness.py": "b2ffd85663fcb29a67654b7ba3f38b68d9f3968351a04996c30f0bfd76c4c032",
+    "src/spireshift/mechanics.py": "f60058569736d2eb2d5cd3493a7c3fd5edee253b17ddc1e5fa18da1f7aaec90c",
+    "src/spireshift/models.py": "4fffb6f7432a3cc5579104d7560fb61476e09f1d90d116f6eb71b8a0c11f7ec4",
+    "src/spireshift/native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "src/spireshift/native_action_context_study.py": "80d5b643d38e1bde2ba5c07038daf5d6401630239a5353b182a8365fd3782c87",
+    "src/spireshift/native_combat_behavior_policy.py": "d256af8b15c9370733a46c274d22471387b6e71c3d9cb511911064d6a6c85b54",
+    "src/spireshift/native_combat_teacher_data.py": "77d7eab6b633272ffdcad267d8b01b05275d9731c3d49faa6aa46e9a403d8187",
+    "src/spireshift/native_compatibility_contract.py": "8d1fbb9e85f1764caaf47007bcd986340623630246317ca6b461554132e5838f",
+    "src/spireshift/native_compatibility_inputs.py": "48f8b2551ec80e68f4ad7da047c487770924d606b8f323363a3b5c1b65a86a5e",
+    "src/spireshift/native_conditional_control.py": "ec522cc1877ec115dd168522fcaa0b589101430d21bde5d34e2c8a3a71ac41ba",
+    "src/spireshift/native_context_cache.py": "e254039f36552a196785dfec11c7fa0f2136e506e00ebcbd0525515caf64fa74",
+    "src/spireshift/native_context_game.py": "327075c2d4073994fecd4cd003e2b03223330b86b71a65d5e14e3a7ad2d37326",
+    "src/spireshift/native_context_journal.py": "6a49c02c640dc1fe2c28e5726d9b80f940182c993279105494bcafe205cca89e",
+    "src/spireshift/native_context_reuse.py": "61cfb93d959213a4077f80c94744219582198f9fcc44f0d506889df704a9fc9a",
+    "src/spireshift/native_context_trial.py": "ed9d73aadb7949b806d6990936743be143e7c7797184fc9b3c4168b49e8a27c4",
+    "src/spireshift/native_credit_training.py": "8e53505899626019e99bf3eb569e2d2c8847eb5c531613aec2c71f82d729131b",
+    "src/spireshift/native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "src/spireshift/native_learning_control.py": "b54f56dc9d195c4b41c4d26842ab0b08c5a1bb97e492de2af26fc3cbaa3699f9",
+    "src/spireshift/native_live_checkpoint.py": "20528440e37c759cc0fbbf5b2da82e56737878b09d92ff04d6033c294eeabe6b",
+    "src/spireshift/native_live_inputs.py": "a5b1ae8eb3617d41bed8a3f77c4d3dbf32c7df2bca9ee6d426c3340e317fd9f9",
+    "src/spireshift/native_live_policy.py": "b22d989e3304c443431c90a9e1cfd8361f04efdddd8d30bc836133dfd9d6be58",
+    "src/spireshift/native_normalization_admission.py": "b3aecd8b81187a9c73a2e560f71a57fd55c7555ee5fc7e78e955c69d08e30f2d",
+    "src/spireshift/native_official_session.py": "6582de09c1e771ed9a8b72e8567e2ef3f3be191eca5ece1e0817d04b8522424b",
+    "src/spireshift/native_policy_updates.py": "f0b9d43f89beb00736bb02e0e80dfaba52cb2a0f2f7e30bdc4dbfebd2285554b",
+    "src/spireshift/native_rest_exploration.py": "9945d714a19bf5c60b7ef52083b19d20169b09cf52583c340c33e6e58a990091",
+    "src/spireshift/native_shared_transport.py": "42f8a3fb8631251c1cd0fba8750bd8e0f1f5b89e69008a49425fa52d97a4d11c",
+    "src/spireshift/native_shop_policy.py": "c4517e3513e57b42a642762c583600419a4c2d738d49638a799f2e6f57599156",
+    "src/spireshift/native_structured_model.py": "ad6dd6ae79c422a373bfc12cd30989c263861b2f6dddd403e6362ade2ce141e2",
+    "src/spireshift/native_structured_policy.py": "2f76551eecaa39033e92a286ab3698af593f212da62e70d21526bcf39024bfb3",
+    "src/spireshift/native_structured_state.py": "df2cb6e3334b34ec5f69a403c17e2d8093ab72e1245891a57efa424a0321c6ae",
+    "src/spireshift/native_structured_vocabulary.py": "fbf92a0984d4a70256fb76abecc56313a1a45e2db16949dea3cda5b53ab8666a",
+    "src/spireshift/native_turn_teacher_policy.py": "fd7ebf5144879f1c6ac9b4b8c431e40ea4bf78c5dfa0557b8b8a2e29c0897df8",
+    "src/spireshift/native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "src/spireshift/neural_combat.py": "2f598da9097e5f29dd2855018095a542af17fbfdb5bc20a3ae9bf34e9692f73b",
+    "src/spireshift/neural_combat_features.py": "94217fb2d5e62a1101a23f3a85b9a8c1371afa8300bd10b18ab078fa5d13c581",
+    "src/spireshift/production_models.py": "9074a054d013565292b560cc73dc9fe784f2ffa924820c8046ce4c2320701dc0",
+    "src/spireshift/public_run_choices.py": "a93e3f812a84eec557df8017a7b4ca72fc978f3b089e8e0b86ed6842b4455a74",
+    "src/spireshift/recording/jsonl.py": "c9ce46a7641d59ad052dc1b84d497d15bd40b84a300fe5e235c2d01fbfbac125",
+    "src/spireshift/replay.py": "440a7c4132f345f078072d9df80ea58152f675c336ff64abfa280b67c5a23c2b",
+    "src/spireshift/representations.py": "f72af0c9e9dd1de0314b9face657ac2486c08aca5e5003c1777ddbea9b58a78c",
+    "src/spireshift/resource_tracking.py": "1099f545950c48de74f11d6668b06904532fd055c7aca890ace97a8ac2b09e49",
+    "src/spireshift/rollouts.py": "8dd94ecbe60ddf6a6b428a63a41412b4bb14f70e964de612f1bb46f52706f938",
+    "src/spireshift/search_workers.py": "baf06777d2ca7bb5740f0bc007bf2887daaf83253883990b22e9d7fc2488d9f1",
+    "src/spireshift/splits.py": "3191d1c65627cb3bceede4fbdda78e0a3ecd6352a8b25289addcff7ebdbdc7ef",
+    "src/spireshift/starting_evidence.py": "56b958b1be085dd51724e32978995114dd7410e4c70ce2dd7123daff69f0de90",
+    "src/spireshift/starting_evidence_training.py": "dcf9f73b312224367d95c944dd9851a1eaebc03e7d91ac3fa8daf900b378fe97",
+    "src/spireshift/starting_option_training.py": "bc83c595f85d42797ebd2fdf1d75f0f3f99182f17a69b3f7456bbe0b5854b258",
+    "src/spireshift/starting_options.py": "a4304544b0dff41fbb2a9f0ef5bd143ac4f0ff0345c9c36139eb68f7b5c0231c",
+    "src/spireshift/starting_repeatability.py": "66a6bdb28dae81a3c183475e7d980586ce344b65213068ec31dadc2b91bc9f7c",
+    "src/spireshift/teacher_data.py": "b1de51778c6ef12e475f5ba6439acda8d685d74efc81e1bf698a37cbaec0f76f",
+    "src/spireshift/training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285",
+    "src/spireshift/trajectory_policy.py": "3e90bf3d0f29612e48fe71546649d52ce2a9a179fe691eb1063c12a29e0a52b4",
+    "src/spireshift/trajectory_preferences.py": "bdcaa64c394d3199587955d14d3f82f98b978c8df1eeebb249c49f3fe20f8f38",
+    "src/spireshift/trajectory_search.py": "c8293eae1126c427502de16faea1ded288e7988d8e0954082d7dfef89174f700",
+    "scripts/engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "scripts/engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "scripts/engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "scripts/engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "scripts/engine-journey-tutorial-v4.mjs": "ba8a537a5c7446ed69b4f482614d434eaf60295f00bbb9205c2b9888f9e35f76",
+    "scripts/engine-live-checkpoint-v1.mjs": "c0605d3f025a87e39dd5e9bf46323ed284cf2b6a9f5a10d4f10123a9d2d7aa15",
+    "scripts/engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "scripts/engine-natural-shipped-contract-v1.mjs": "9c1b3573a4362b78efa1a1e758affbb53045bcfdf94c4e03f496ed59006635b5",
+    "scripts/engine-natural-tutorial-v1.mjs": "2ba6a18e93a491d6e9fe452ac97fca9235e53a4ccf5687f0feb6226652d18a8c",
+    "scripts/engine-natural-tutorial-v2.mjs": "1eb8ba174b567cdfcd639c1d01319bf4e337ef06ea4d5b8c7c8a2251fa1dc1f9",
+    "scripts/engine-natural-tutorial-v3.mjs": "30f7a344788e7b1b39b0181395c277c2eda2f42c2cf1d400562ddda137a8790b",
+    "scripts/engine-new-run-contract-v1.mjs": "817cde0e5f42048d782272cc4261bda550f42ca6d3775d0c28a8117ae9f98ef8",
+    "scripts/engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "scripts/engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "scripts/engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "scripts/engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "scripts/engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "scripts/engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "scripts/engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "scripts/engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "scripts/engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "scripts/engine-shared-input-v1.mjs": "242c415b74d1054ccd79ef27ae8a7465bf2fb15801ab3f3c3de4d869618088b3",
+    "scripts/check-live-checkpoint-adapter-v1.sh": "32b5a88484f95d508d330c605c34a7dc23d80d714cdd281eee8fd10666e4ff91",
+    "scripts/compare-live-checkpoint-canary-v1.sh": "bfc82cc40a1d7fbc03c417b458b5532007879e368ff98a1cd1e702779663381c",
+    "configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json": "5e350d2015caca8ef23835181bcfa348d0a7a679e7953e6e73096171211c5719",
+    "configs/engine-qualification/sts2-v0.111.0-runtime-gap-run-v1.json": "6a7a6a5393785f6ca17defb522fc842da5d2e45b067500d1d233c540700ee6cb",
+    "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v2.json": "d1330598469ee207ae4cfe5c4a2e200efd8ec46086c54568f263f8106a73134d",
+    "manifests/engine/sts2-v0.111.0-ironclad-a8-native-v9.json": "37bc1137d31fdcc4844891772590e1dfed076282fd9935228d0f5fcf65228224",
+    "configs/engine-qualification/sts2-v0.111.0-connector-standard-v13.json": "96fb1258e11829527513affb247e793e774beb9554c8768dc48464fa4893e6b1",
+    "configs/engine-qualification/sts2-v0.111.0-working-app-serial-v1.json": "4738f3c1cb11bb510339caede9f021efefaf685914d8637e51209e44768c929e",
+    "configs/engine-qualification/sts2-v0.111.0-profile-policy-v1.json": "d3840b52bb7a14f1335af06cb702b83f313760bc7b5ced0ee32cc49c190c2a0f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/profile-bridges-v1/seed-01-repeat-01/native/benchmark-progress.save": "50d0cae6bab731db8807aa0406590867e915e21edc5e309a4c99e1f432565137",
+    "configs/training-objective/sts2-v0.111.0-ironclad-a8-native-bootstrap-v8.json": "c67b81835fd6e689d9918158e54835798fb73906c08f86fec2cf6a462d9dbf72",
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+    "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+    "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+    "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+    "artifacts/native-live-adapter/sts2-v0.111.0-a8-control-v3/report.json": "1e84c54dd778aeafe0aa743ae607b037d7994a6a001918dc542b988318c681ab",
+    "src/spireshift/native_interface_build.py": "9d7f127928e772a3ef03311d1756b314a3ea6412f3a29cda1b186c213b9a5fa7",
+    "src/spireshift/native_interface_inputs.py": "d67a883d0d012d05b8e712393f47abfd70b7c70d14ce121054adb247256c7f73",
+    "src/spireshift/native_live_checkpoint_v2.py": "9f48633fb82f8f7d1085c40f00658399a61cb6b71efed646a3a41e9512ec235b",
+    "src/spireshift/native_official_session_v2.py": "47bc4ca25dc2ac81c2fd1affaf0cdd2f6a238fda554f90f20e1433e8547803ee",
+    "scripts/engine-interface-contract-v1.mjs": "34688400e70d4ea9da503e8313c7ce031c95ee347324e08e1818d1d93e6af090",
+    "scripts/engine-live-checkpoint-v2.mjs": "d6a052deceba1465e0b2a4bace0a43be8595abda5ba3bcaa009e161bb8302b52",
+    "scripts/engine-shared-input-v2.mjs": "8c5fb9c8596564ca05b8e372a1c2580d6229c6c5128937b0aba06880224b4e08",
+    "scripts/check-interface-compatibility-v1.sh": "67b5de5e267e9a71a1ebad43a8a7a5cfe8dd5e8406fb4199a1327345a4c10fe3",
+    "scripts/compare-interface-compatibility-v1.sh": "42b1ea9025683569220b79a2f4a3104b882f9e21d652b2b7eaffcdf666408bd3",
+    "src/spireshift/native_interface_audit.py": "24197394a85cba69d25c126533b477874af920c8446bc7a7648e94e7a24c541b",
+    "scripts/audit-engine-interface-v1.mjs": "cb8454a6064f8bbc9735e2f04a51d69f6426d6a091c3805b1b0d4cc075b89aaa",
+    "configs/native-compatibility/sts2-v0.111.0-interface-contract-v1.json": "c5eeee3cea46decd821015228b51e9fa5467ccb1b03912f9eedcb694fef76e07",
+    "patches/engine/sts2-headless-interface-projection-v1.patch": "bca68cce1b9f2b047adb85e7bd283c51a72843c08079a269f4290e52718cb217",
+    "configs/native-compatibility/sts2-v0.111.0-interface-audit-v3.json": "43debee182dfb585e64ce3f91278786361ff15f29702496b5987e1d5e2d38f66",
+    "configs/native-compatibility/sts2-v0.111.0-a8-interface-canary-v1.json": "4d45bbd8d6111aa2bb0ecdee6cfb549f43f7c30409a2d5894b4fcb388b199d1b",
+    "configs/native-compatibility/sts2-v0.111.0-interface-export-build-v36.json": "e6d4f0005545f25bfb39eec9b405a8ab021c6145176a0bbb7862b532e19cd505",
+    "artifacts/native-interface-audit/export-build-v36/report.json": "65f402fda0e06c8c0286030a44d26db6838d566da091f1085f20f21f156180b3",
+    "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v4.json": "f00bf520ceb96451f47002d1f8fa536db7e6add4f0b27268b627f30d569daf44",
+    "src/spireshift/native_interface_controls_audit.py": "63703f163a062d51d45d9829bc3ed32adb3886b6ac9bb2cc0df722a855f71e0f",
+    "src/spireshift/native_interface_controls_inputs.py": "b1c2e069b212a1b68615151bfa5545681213bd04d8884d2fe960b5f10f07ed5b",
+    "src/spireshift/native_live_checkpoint_v3.py": "bc22041e7c9076fb8963e16aadf544d1575f3fc3b688e8c1d2c8a90bb3150bbd",
+    "src/spireshift/native_official_session_v3.py": "b05c0f266a90d1f68cd908ba00805741f3793745f0541c146843eca6adea8b7f",
+    "scripts/audit-interface-controls-v1.mjs": "7d4614140c84f9e1e343bb908d1b40e416b19e873bc091f59afe812a564a86d9",
+    "scripts/engine-checkpoint-observation-v1.mjs": "681b807ce69102b39ddfafbd59fcf3da372883c586b9cfada592e6f499e5e342",
+    "scripts/engine-interface-case-bank-v1.mjs": "349b067a84339a57f8fb28d9333545de0d2e432aeafdab6032c758ee81b961c7",
+    "scripts/engine-interface-mutations-v1.mjs": "64a41157924a07f99d698ae4b16a903dfc4d57f5014de4689f2f66228cd0bd9d",
+    "scripts/engine-interface-scopes-v1.mjs": "6f68ee8e5f248f2abb848e15eb9fd0ffec10bcba89bbba00fef02992657afe30",
+    "scripts/engine-live-checkpoint-v3.mjs": "6911386ef71c92a57f1598f2d50d5922a6d24fa2adac2c3efa52486a75f059dd",
+    "scripts/engine-shared-input-v3.mjs": "453114f9c675a92c90a1a55dcdbb5f1e8982af3c5e3d158388dbf74a1ad0c563",
+    "scripts/check-interface-controls-v1.sh": "bd24d9a7d56ac47991fa24074ce77cac72cd06bd5015475a7786aa0cbb58d452",
+    "scripts/compare-interface-controls-v1.sh": "2152d54d66e2bbdd6127720555c58fcda7e63c1586ee4be802280d8cfb26c1ad",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v35/build-n5e9h4ub/candidate/src/Sts2Headless/RunSimulator.cs": "c47827b3840468d491f257bf5e822fb605872b9d10cc2cd75767968505326697",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/ActiveInputResolver.cs": "13f96bac30c2ec242b19e92145f441601b0f7ae0004f8d4356ad9a531ea2031a",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/BoundedCardSelectionFacts.cs": "339c93f394d82e1c0d45d3a13823d1a960868ec8e165bf7b672aa0ccbe001621",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/BoundedSettlingWindow.cs": "f7475d4d8677802b447b9b5c1982bde48e93468aa9e8415076a39e6b49dbdca3",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/CardBundleSelectionSurfaceReader.cs": "ce5905cb9cba4dcd6271eff9fc4c71853dddb9b7509377121a0ba94120b753d7",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/CardRewardSurfaceReader.cs": "eb86a2591daa316192125c865315a4fbdbc5932c174c46b84ab503a96f44bd1f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/CharacterSelectSurfaceReader.cs": "79a4931fba8ed7409b741ac69548d00be1a0353b0adc7c015f2e38e82e8718be",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/CombatHandCardSelectionSurfaceReader.cs": "3f800da9a4e48e4d05b958670b8b8cbedff1b6f9d96198594f676dfe6f1112bf",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/CombatTurnSurfaceReader.cs": "b58de938aabddac81119148649b689f24e578117d1184e0e34decd662a8123e5",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/DeckEnchantSurfaceReader.cs": "1b6d5e59fc08f3bf372fc089854d6e921a74b71a03fa4ea88fcf759744e38a9e",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/EventDialogueSurfaceReader.cs": "70e2fe9baeaa1d176eccecae04b46ddef512f099056652da38fd698a5d67a6b8",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/EventOptionSurfaceReader.cs": "13e55225d3126e0e32d7a19ecc5ddc064d807bdf50214479e8f0aad15bfcfcf9",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/FailClosedObservation.cs": "fb0f4084971b685cfda103ec7a1f094baa0e7cd3773b4d9e95533d9b8a04c8de",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/GameOverSurfaceReader.cs": "994e202db2c814f5948ab599d4d297651252bf4020ea205ca8efebd7604f3734",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/HostDiagnostics.cs": "237a5a36b1da7052be405c4009e06cca9e7c3021fa72de0218aaba54d0d546b1",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/INativeSurfaceReader.cs": "57f0ba0893d12a93760b74e47653703dbb77238b0a0ba76fc5609d20ccbc6956",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/LiveContextReader.cs": "08297ab268857a1824b7917885b8e3585d0e04a0250da54a1096b5593e90c739",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/LiveHostContracts.cs": "88a6ae642fa71b393bab3581340ac409579e97a407f9f24ec3b117934d28917e",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/LiveModsetIdentity.cs": "27225d5e81fac3d8f374e1b5f9dcb094a16bbb6ea7a11155c47e9e307437525f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/LiveObservation.cs": "19eae3c1c97fffb9f53e2a36e24e8c59ce1cd7f997a4a2616c00984406b20463",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/LiveObservationReader.cs": "bd958ba6adcf946fd93a081a3a92cac40667183c8819c2fc7030530d7cb3ad3c",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/MapNavigationSurfaceReader.cs": "a45ba374a0bb46824079852f2a2958b39fb85cf8ef644e56583f843405965331",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/MenuSurfaceReaders.cs": "1c41e4676470656f7e991f49843426da5ea182a93d301db38e7435b5e5490942",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/PersistentVisibleStateReader.cs": "cb25f462712ab9ebcdfc7932cd3e48a5f341f5741886c7f6f22b5f2fbd187288",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/PlayerVisibilityCatalog.cs": "d41c6c30cf633f5f2e186a5908bd48008acc3a09664efbcb797d2501227b14fa",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/PlayerVisibleReadBuilder.cs": "3143a1cf57d42ba2efbd0936e7a50029419ac39d7ec5c6e30fbb93f9bf5e2e79",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/RewardClaimSurfaceReader.cs": "4566a80f8779d821ed5600c82bb1b3577bee2d47d8a04f3a6a614c9406fa1f7b",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/ShopSurfaceReaders.cs": "6d77d2ff541e5ca0e3846a59913b26dc216fa940450bf65a41fce409269222df",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/TreasureRoomSurfaceReader.cs": "a99a0a8ed84d49c835df20251f162912d1fd6934ed40c40dff4592e1d65e74c8",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/TutorialModalSurfaceReader.cs": "639110cb6db2ce800e25e1c44fd7edc3926a5fc0b951ae0764c7490566df7f3f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/LiveHost/VisibleEntityFacts.cs": "e6bd8fdfd36052accf01f246c2a37912972db976daa24819f456b7dbec2358c1",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeCombatPileSelection.cs": "da48db9a20f03db0728d0b9ede842563de04bded6b46590d1503f0d729e33553",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeDeckCardSelection.cs": "8132e90002495d3e21d29fbb480c3b21d800a6275da7de33b3c395fa6a95ebe2",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeDeckTransformSelection.cs": "e35d03297255e97ebc55fbd76ab4c06d710b6a195c5de8e48f9828a6d34c3859",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeDeckUpgradeSelection.cs": "8bb54e01400094d84d5cf31053c894fff3a8732a42d4a9ba91ded91087d2cb46",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeEntityRegistry.cs": "1c178e830ca87dffd7b62f12bf2b11496b00a8392a9862d4fa2d77fc7dde78e2",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeGeneratedCardChoice.cs": "3b4e461dd3b4c18cce203aff55f66283ded25caa53c5b5eb566aff896a83905d",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeInputResult.cs": "4eaf918958172b9a6da443b291516ded7c9fafa5f57b19e9b8a86cf337f24373",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeRestSite.cs": "6799cb43247534202bb5040c6b4598acd5b0dc46e92d96d6be12a13cefc30723",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeSimpleCardSelection.cs": "86bdb81e1790ef32472a96c3c2fac883a75d306628735f340f586412beb88ebb",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeUiActionContracts.cs": "79fd344001af2ca0a17149e0fff67887a5acc3665ec7d88bdae35fb6b32e530c",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeUiActionRuntime.cs": "affd07df936c1b66c689f6c5dfd59dc961c8567bc15e4a767d3d87d075c6caa6",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/NativeUiRuntime.cs": "57d041c69568bf0bf3a1e04242069f6ee6dd680554c162d30b3f74db2b21e25e",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/SnapshotIdentityTracker.cs": "44e1b7ab89278fa56dbfe4c42b22a2d434b482e6ec1f30562b3bf29e65848049",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/NativeUi/StableIdentityHash.cs": "587523053528414115fe764c0b829edb497c5828118c121713c1e1a5dfacdbfc",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/PlayerEnvironment/Reads/NativePageEvidence.cs": "e71b879361e3a5e744ffdff74edbdd021e61bd43a0a51a39b1d629c65e107731",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-v13-development/source/host/PlayerEnvironment/Reads/ReadService.cs": "748032c9255f3c21af7b298e37268244f92d03ee4ec0ad3b0d0fb59958affd55",
+    "configs/native-compatibility/sts2-v0.111.0-a8-interface-controls-offline-v3.json": "a81cdec0af0a92cdd9de0aba5badbd83d5b533877ff9be695bcf138c45769003",
+    "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v6.json": "f8f9d22fd1282dd4200d08a75b3698d4c897019e001a719a8092b4761670077d",
+    "src/spireshift/engine_atomic_worker.py": "b24bd3dcc6b08ca50f3e2a8d75e51d7073d564dd6e54e8effb4d878a8852a7ef",
+    "src/spireshift/engine_belt_worker.py": "905592967f1bf0ea05be9648c0b4c0d55d6d54c13bc3b9120d36f29c775a29e1",
+    "src/spireshift/engine_flow_worker_v9.py": "f6496b953dd42c0374795ac89c14b5f129c97550b453a2e87e692d152ee90524",
+    "src/spireshift/engine_layout_worker.py": "895d0789db94425e65a0260cb7ec5254be1b0db31a815c87df1c2d1cbb8f38a2",
+    "src/spireshift/native_atomic_audit.py": "d6b3dc4394dafb90e59d28c3dc344e5fcd57a36cc37917a7f7b15f411088ca46",
+    "src/spireshift/native_atomic_audit_v2.py": "6cd11cbb38dd681df9cd1b703cc09d4c7196a3a250480731129326f7b92340bb",
+    "src/spireshift/native_atomic_inputs.py": "a1c8fe7a36aa7faa2d5ca4ffaea34d637bb35c37d0d6607358fc46a2f3e0ac77",
+    "src/spireshift/native_atomic_inputs_v2.py": "4c422f18a5b3f09099b4243e434349135358248a4a716033953f5d6b78536f8c",
+    "src/spireshift/native_flow_audit_v12.py": "f5bb3cf0cd47563e27bdf398a17944f6f94538232603341e7fcd16ac04c81739",
+    "src/spireshift/native_flow_inputs_v12.py": "a17fbae95fc592780b95b624a784a8ebe57e3b27018ec3f5c40330ba4f48a706",
+    "src/spireshift/native_flow_live_v12.py": "db5bca201cfd11c32377c96f318a85224cc1b6678c5b0c75ed506392b70ad816",
+    "src/spireshift/native_flow_scenarios.py": "5a99800fffc0dfb3ea68b8456d813040539eb471a674578b31c6d1f55c88d45e",
+    "src/spireshift/native_flow_session_v12.py": "88ba258f7b869ff5303078aebcd66e84ca160a90d8598fbcae1040ab881ec362",
+    "src/spireshift/native_flow_verification_v12.py": "6e8e55ca9b7fd8372317daf0d133dbb09c6bf979da55839b335ce40f4719184d",
+    "src/spireshift/native_launch_limits.py": "23913f7a3c9a6c76daa34280169810ceb5b4e728c2b103034c3e27b8b8e8f69c",
+    "src/spireshift/native_layout_audit.py": "1c2639f5cd056e93f782900a5df4e54f32c05a951cbb93cbd87d6ccd29924318",
+    "src/spireshift/native_layout_audit_v2.py": "1d291309452030bbb47cb8048bbd597a8d8bffca56ec9a4228cda1c086168301",
+    "src/spireshift/native_layout_audit_v3.py": "464d34421ff1ad36332263862c7b4e5cbdc8c3da3651554fddfdd0bf2ecc208d",
+    "src/spireshift/native_layout_audit_v4.py": "debb0459994710811bbd52738ba9076c14e21b4c42b72ad805e23c02529a416c",
+    "src/spireshift/native_layout_audit_v5.py": "e1fe04d17104b02c37df7faee563ee377b527eb070e40b1b7e26896d54365380",
+    "src/spireshift/native_layout_inputs.py": "6f377137acdab408b305cdeb24569d02932b245dff8d84590231de2d7721c871",
+    "src/spireshift/native_layout_inputs_v2.py": "76938badf20cdbcb8ee3e1c00abd6ccda22d5048d9348afcc5f599b6dc837ac2",
+    "src/spireshift/native_layout_inputs_v3.py": "5605ebcf6600302cdd8dc5ce4858e02112406d16101eb4f1147cf01172f5cb1b",
+    "src/spireshift/native_layout_inputs_v4.py": "eb48fcf1d99aa5c8109d05054a8b2bf323500a2b9d9b414f2db44c5fc786cb6a",
+    "src/spireshift/native_layout_inputs_v5.py": "42ac944add8668525e73f161627a2a5a8f8bcc3dd7dc90fa624db8eb88405b19",
+    "src/spireshift/native_live_checkpoint_v10.py": "bb6f8ae1fdb52adcd7988e84338fd2a70a69cd2da2139b285ad825425396480a",
+    "src/spireshift/native_live_checkpoint_v4.py": "4dca3fe6d7cf285d8e2dfda8b873c3c2e1e12f99b50346596d5de70446d40d0d",
+    "src/spireshift/native_live_checkpoint_v5.py": "55ae422ba58b3e5f21327dbc846c6c9d3ab6e154b80c39c2cffabcd81d2e958f",
+    "src/spireshift/native_live_checkpoint_v6.py": "06d31325599c93d14e34ccdc3f7677c68eefcc45d86ed4ad8a29f601c4212b4d",
+    "src/spireshift/native_live_checkpoint_v7.py": "1a43d4319f46360cf6d7974ff794f2d018d3eaa6b40adaabed4f244f1fc7736d",
+    "src/spireshift/native_live_checkpoint_v8.py": "d6eeb3895fd96298c3775ea305943aa71d6b3833c5280c7397620a45b48a2a1d",
+    "src/spireshift/native_live_checkpoint_v9.py": "6787f884d160b4871d768e7f33ec10ea453ca83d70c28ab3e492743986f84e74",
+    "src/spireshift/native_official_session_v10.py": "4c82312cc4112558b1456a2d9cc27cd9588162a00dd58955c58be11f03b5e4ec",
+    "src/spireshift/native_official_session_v4.py": "41e437c2d7b87f7d72ad3ed6ac366b6f9796fbab4e6b225abaef233398daf912",
+    "src/spireshift/native_official_session_v5.py": "b31c62a8c4e69e312e569890ae6e68189cd73d0d8e7226db0b1fe9919a8294ea",
+    "src/spireshift/native_official_session_v6.py": "407fdf1f860b86f22adadebe27d9acdc8d0e36115079679b15b1cf130061d334",
+    "src/spireshift/native_official_session_v7.py": "64ce24b280e86eae9c7b393f252feff1eb7fdfdf397057fa42172993db40706e",
+    "src/spireshift/native_official_session_v8.py": "5e6b2952635dbed9a5371bac6f599b46d0226d4931c319d5735e1b679708f339",
+    "src/spireshift/native_official_session_v9.py": "ef16dbb6aacdcce18679a7f04aa721985e1669a14c9df3d1b5812c5fd5766dc3",
+    "src/spireshift/native_selection_scenarios.py": "40ec61959dcf43782492a3b72825b5caa085baabd355a03e9728f8414f462cbc",
+    "scripts/audit-selection-flows-v5.mjs": "7e41aeaf3a997e8610bf9c95bc745d8e74f0932dcd1dbba0d211070106172cca",
+    "scripts/engine-atomic-selection-receipt-v1.mjs": "d31e884443995762ade756dc40f510d58c8f9d4a86d2738fc5e769db86cbf257",
+    "scripts/engine-bundle-commit-v1.mjs": "20dce9fce819c91111860eebf55ef815d6b9050db8de13156d11a5f605bdd4f7",
+    "scripts/engine-card-cost-types-v1.mjs": "2b4e976e207def925452d80b974ff04b879b1ed940e6f69840bceea0b782851d",
+    "scripts/engine-input-layout-v11.mjs": "a44b25945a6b7545182a60e37cd1474094a150e75682ca45d16cf058f753109f",
+    "scripts/engine-interface-contract-v2.mjs": "d4ca629e16bf73e6ea2969f3fc64898d7c3cd81111c60345b028e445413c279e",
+    "scripts/engine-interface-scopes-v3.mjs": "f2b7bbd229bc0ceccf28974da006d1741786e464d6267a06b447ae48e588a20e",
+    "scripts/engine-live-checkpoint-v16.mjs": "191ce25fd7849b930992e7a1b652426c8eb7d6e7b317f993252a3a28ed80acf4",
+    "scripts/engine-observation-boundary-v1.mjs": "ed1da13d136241cf41549c53d1c3e523c03e1fd1f0a3253fae137c3cc1e0ed73",
+    "scripts/engine-observation-boundary-v2.mjs": "9fa9ef35fed6d528ce9d944fc256e3009a5d227b4544483c8cda0d8e4b08a3f9",
+    "scripts/engine-reward-commit-v1.mjs": "4da426d716f5ad8bab76f7ff91ed43d9c3290f53f8647d93320b1e845839286a",
+    "scripts/engine-reward-commit-v3.mjs": "67fd000353953b96a8bc26158e3e49dec1319bd94078972ea20bd6a7771cea54",
+    "scripts/engine-seed-contract-v1.mjs": "1800403f203f3aad7447ae19359b29591d7a4ee03a11ce91cb426dbe5ed076f4",
+    "scripts/engine-selection-scope-v1.mjs": "3612bd3d8eec7e4a7855cd696cbf0e73b4cb341809a27005d648171e906fa726",
+    "scripts/engine-shared-input-v14.mjs": "d21c489044b300a76ecf24060537d500312dc3218fa25214d1fb9f84322f4e9b",
+    "scripts/engine-atomic-selection-v1.mjs": "5121eda9ac515aac71466d0359db8299d25c1c8be3f0798469a4622bbd0a6c52",
+    "scripts/engine-atomic-selection-v6.mjs": "c3217a465a6024421253c3ad9dfcbbd5fa293d51be18b8154aad5016b309b748",
+    "scripts/engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "scripts/engine-combat-surface-v5.mjs": "67eee376ebae9ddfccc7823a375500cd33ed9eb8bd28c3fdbeca1adafb1de0ab",
+    "scripts/engine-combat-surface-v6.mjs": "0278228521d553b041b7b6f09ce21a86e2a27f21e3a2edf388c81b3febb2496c",
+    "scripts/engine-native-worker-v23.mjs": "7fea8eea341eeb8d1e8144e5d19d1fce3f56d536fc5dc76bd93d33164d07fa09",
+    "scripts/engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "scripts/engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "scripts/engine-relic-surface-v1.mjs": "8d13cb14033cea7c4a5a280ccee5c16f931e5de3ee5b76433b222d2f7774d9e6",
+    "scripts/engine-relic-surface-v2.mjs": "aebb9874b61d459004dbb0b90869d2d5a3f590c2eb890c4101ea5cdde0393fb8",
+    "scripts/engine-relic-surface-v3.mjs": "435a84f4c01d1b46794a689360d7fd9915e27d3bd0520d563bdbaf3e09d4dd53",
+    "scripts/engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "scripts/engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "scripts/engine-run-contract-v6.mjs": "f7157ba93a5ea221a52857b946d81d130c91f2e6dd10ebd831ebb484b8f461e0",
+    "scripts/engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "scripts/engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "scripts/engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "scripts/engine-selection-flows-v9.mjs": "bd584228bddec0bb3e49b0b61de9d8e6c4619d57e13a380cbcc7cae88ed7b688",
+    "scripts/engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "scripts/check-selection-flows-v12.sh": "e1c0433a14aeff1dfa45fa0d4535d43e17bf8222597a1be4ffd9f02d60c846ad",
+    "scripts/compare-selection-flows-v13.sh": "a20bd346bc1f4ff48fe9be981bcfa290fafb84a1cd3367afa1fbc26bc7e24fbf",
+    "scripts/selection-flows-session-v12.py": "4dc2c5121dc74a6abcb6281f5730df91524b04371d5dfb6d938f8997a94c426e",
+    "scripts/modal-panel-session-v1.py": "a332e7600cd4a2afdc367209f823b8b3c3ce390ef388ef2cedc3cb15906d03d1",
+    "scripts/engine-modal-belt-v2.test.mjs": "dc378163e49e4a71e86f10090fe6196534c92c8842e148b66ac6bd2536d4f3d6",
+    "scripts/engine-selection-owner-read-v7.test.mjs": "999ea10b650393b087f4e07637c8ea9ff72f45b9b58077ed34a008af8feaa657",
+    "tests/unit/test_native_modal_belt_v2.py": "bea81ba13e7d0a29bfcb6c33d4becfe76439dd7020b55f8cdc04878b7acd4cd0",
+    "tests/unit/test_native_modal_shutdown.py": "495d104489212cf7bbe68827cbc387e76078de2cb823a0e37f35eb574d44e203",
+    "src/spireshift/engine_choice_fixture_worker_v4.py": "93779f88385509b3fcd7d748cdaaca811aa54427b0b080d854387a30bbb0bc7e",
+    "artifacts/native-modal-repair/stopped-worker-restoration-v1/report.json": "5a39713054af9e7cfcf631b40004809b1e33692bde8d8ef0d3dab93513a802f9",
+    "patches/engine/sts2-cli-v0.111.0-reward-map-owner-v54.patch": "64fefcbe82731a1e269eb8b94fa31902c8b8de90fc79670cc80ae68dcf5e9fbc",
+    "backend-patches/reward-map-owner-v1/RewardMapPresentationOwner.cs": "a21989ba38f8253ad703a1839def42217645f15e50ee39b8210c63df0ec5625e",
+    "backend-patches/reward-map-owner-v1/ContractCheck.csproj": "493023e8c6e18d8d50007bfaf343a0fdd6bd229f1f18878ba4aa19126af29ce9",
+    "backend-patches/reward-map-owner-v1/OwnerContractCheck.cs": "be9f1f05964cf9cef633d781ab6697f1d2edc17177fd2438d38459613e7770b8",
+    "tests/unit/test_native_reward_map_owner.py": "820004327d9e31112014344379fddcb4a6d83d365679edd4fe9b696a9a53ab88",
+    "artifacts/native-reward-map/native-fixtures-v1/report.json": "b602c23ac2c61169eb07e189e64fb3870f90fa83568a9077d6e6159477eab390",
+    "artifacts/native-reward-map/saved-assessment-v1/report.json": "0c4893fc28819ec6318ab62028659dde54d24da879a535d021d6eadbdf6f8965",
+    "scripts/modal-panel-session-v3.py": "2dd708d8cdca540474f6e19afe75ee24d40d56fa9dacd27fab20deff0cd9e137",
+    "scripts/compare-selection-flows-v15.sh": "1b85944150d904944e83c39b13f963b6eb467e62fc54b6815d168cce1a0a71f0",
+    "tests/unit/test_native_reward_map_panel.py": "a387f21a50baee1628dcfdaa7a50b7bdc6125ca431d3c29c8741ac90586e2503",
+    "configs/native-compatibility/sts2-v0.111.0-a8-map-settling-reward-glyphs-control-v1.json": "262c63345898008fb47f7cc6ab288d6c632c7ac2063f15214c83d651759069ec",
+    "artifacts/native-selection-flows/reward-map-offline-v1/report.json": "631ce4a4a922de34f9a986a1b9226c8905c1bc74dbec622fca4b20fdabd21c76"
+  },
+  "expected_saved_frames": 5889,
+  "official_connector": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-connector-map-settling-v24.json",
+    "sha256": "733b6a80d0d869f7bef697c3678bffcdc8fb1c70b507daabda32d4c80981acd8"
+  },
+  "selection_contract": "atomic_public_card_choice_v1",
+  "resource_requirements": {
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 1000000000
+  },
+  "card_cost_types": "public_visible_card_star_cost_text_v1",
+  "control_kind": "reward_glyphs",
+  "offline_receipt": {
+    "path": "artifacts/native-selection-flows/reward-map-offline-v1/report.json",
+    "sha256": "631ce4a4a922de34f9a986a1b9226c8905c1bc74dbec622fca4b20fdabd21c76"
+  },
+  "completed_regression_replay": {
+    "report": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/reward-glyphs/report.json",
+      "sha256": "c10242a4524cd7a8bd93e586cf4e1b07ede4cccbae63956f322c3c0e0b95a0ed"
+    },
+    "verification": {
+      "path": "artifacts/native-selection-flows/map-settling-panel-v1/reward-glyphs/verification-v1/report.json",
+      "sha256": "fbea12d1a44f57189919748a1defe0791741f458832d885b1adcc56fabd4615d"
+    },
+    "fresh_strength_evidence": false,
+    "scope": "declared_regression_of_fully_completed_verified_case_under_new_native_build"
+  }
+}

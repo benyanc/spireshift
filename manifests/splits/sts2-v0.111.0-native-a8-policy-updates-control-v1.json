@@ -1,0 +1,22 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:8fa6f583a5d87ebd12a2583c40b753fcf6dc040c61efcfb51e6b7684b487a54c",
+  "schema_version": "native-policy-update-seeds-v1",
+  "seeds": [
+    {
+      "id": 1940000,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGCTRL0000"
+    },
+    {
+      "id": 1940001,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGCTRL0001"
+    },
+    {
+      "id": 1940002,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGCTRL0002"
+    }
+  ]
+}

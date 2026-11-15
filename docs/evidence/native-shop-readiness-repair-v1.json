@@ -1,0 +1,268 @@
+{
+  "Connector_delivery_methods": 158,
+  "Python_script_tests_passed": 4,
+  "SH0P802_unattempted": true,
+  "actual_native_shop_wrapper_tasks_retained_for_all_four_entry_kinds": true,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "awaited_final_hooks_included": true,
+  "broader_live_qualification_granted": false,
+  "changed_official_saved_inputs_diagnostic_only": {
+    "E2E607": [
+      47
+    ],
+    "E2E608": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ]
+  },
+  "checkpoint_promoted": false,
+  "compiled_fact_vectors": 36,
+  "connector_build_id": "sha256:e1be6cc80aac49bad74be10303cd739368580b53790ace1e95f5393d7b6cb5df",
+  "connector_identity": {
+    "artifact_mvid": "9ab236ff-112b-4589-bc7b-51d602da3f8d",
+    "artifact_sha256": "4e1c0da8c4756dd72310b67342cdf009e38d5289eb5a44fc36a3e57a1d6b5a76",
+    "protocol": "1.0.0",
+    "source_revision": "97c14e74bcb82ed6c0f231dce5ee3ecc45a3a676",
+    "version": "1.1.0-rc.1"
+  },
+  "current_input_choice_replays": 486,
+  "diagnostic_task_state_never_policy_input": true,
+  "environment_id": "sha256:ee1008673da84267143e3fdecb4bd54b3484b3e10b20dfebc4bb05e5cf16beed",
+  "event_option_enabled_requires_button_enabled_and_unlocked": true,
+  "exact_causal_child_overlay_identity_required": true,
+  "final_validation_receipt_location": "artifacts/native-shop-readiness/preparation-v1/final-handoff-v1.json",
+  "fresh_control_actual_deliveries_reconstructed": 12,
+  "fresh_control_matched_states": 8,
+  "fresh_controls": [
+    {
+      "actual_native_task_waiting_owned_child_and_completion_proved": true,
+      "case": {
+        "family": "shop_room",
+        "instructions": [
+          "open_inventory",
+          "remove_card",
+          "confirm_first_card"
+        ],
+        "key": "removal-confirm-803",
+        "player": 2,
+        "relics": [],
+        "room": "shop",
+        "seed": "SP1RESH1FTSH0P803"
+      },
+      "clean_reset": true,
+      "effect": {
+        "deck_after": 2,
+        "deck_before": 3,
+        "gold_after": 900,
+        "gold_before": 1000,
+        "native_child_completed": true,
+        "removed": true
+      },
+      "matched_states": 4,
+      "pending_optional_result_omission_matches_native_JSON": true,
+      "raw_settling_captures_with_zero_actions": 1,
+      "reconstructed_actual_deliveries": {
+        "native": 3,
+        "official": 3
+      },
+      "report_id": "sha256:dbc2b08331c8ef32220f48fef6db7af4ebb8a91b56e7beff6eede51109f28b29",
+      "unique_settling_snapshots_with_zero_actions": 1
+    },
+    {
+      "actual_native_task_waiting_owned_child_and_completion_proved": true,
+      "case": {
+        "family": "shop_room",
+        "instructions": [
+          "open_inventory",
+          "remove_card",
+          "cancel_removal"
+        ],
+        "key": "removal-cancel-804",
+        "player": 3,
+        "relics": [],
+        "room": "shop",
+        "seed": "SP1RESH1FTSH0P804"
+      },
+      "clean_reset": true,
+      "effect": {
+        "deck_after": 3,
+        "deck_before": 3,
+        "gold_after": 1000,
+        "gold_before": 1000,
+        "native_child_completed": true,
+        "removed": false
+      },
+      "matched_states": 4,
+      "pending_optional_result_omission_matches_native_JSON": true,
+      "raw_settling_captures_with_zero_actions": 0,
+      "reconstructed_actual_deliveries": {
+        "native": 3,
+        "official": 3
+      },
+      "report_id": "sha256:b7feec6108853eacefb225fb1071f9a41da0f7aef19e579619617ec1f77032e9",
+      "unique_settling_snapshots_with_zero_actions": 0
+    }
+  ],
+  "frozen_archive_and_idle_working_app_verified": true,
+  "full_game_playing_strength_evaluated": false,
+  "historical_blocked_live_results_unchanged": true,
+  "host_tests_passed": 257,
+  "long_panel_unstarted": true,
+  "long_panel_worlds": [
+    "SP1RESH1FTE2E609",
+    "SP1RESH1FTE2E610"
+  ],
+  "native_false_result_cancellation_qualified": true,
+  "new_game_apps_created": 0,
+  "next_owner_command": "bash scripts/compare-shop-endings-v1.sh",
+  "old_build_recipe_restored_byte_for_byte_before_any_game_launch": true,
+  "optimizer_updates": 0,
+  "original_weights_and_all_Adam_unchanged": true,
+  "owned_visible_counters_including_zero_preserved": true,
+  "proof_tests_passed": 8,
+  "protected_prior_files_exact": 21031,
+  "read_only_qualification_log_collision_preserved": true,
+  "references": [
+    {
+      "path": "docs/native-shop-readiness-repair.md",
+      "sha256": "61ef66f5553680d06fe74ca3f42f593214fad2973ebd067b87cc78ee305f31ea"
+    },
+    {
+      "path": "patches/engine/sts2-connector-v0.111.0-shop-readiness-v30.patch",
+      "sha256": "107693190569e1935676dfac4fbf4b11d508656a4164befbbd400d3074a658d7"
+    },
+    {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-shop-readiness-build-v30.json",
+      "sha256": "762c653f4dc42ade0c8446f24d9ad7e0bbe82ee5ccdb1bfeced16a150a1a711f"
+    },
+    {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-shop-readiness-v30.json",
+      "sha256": "62ff9b158651fcda4cbff578c5148c6fb43caafed8d5cd800e5b8a07f6fa54f9"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-shared-environment-v47.json",
+      "sha256": "92d7abcd94af94c54732dbb9b62a4fd90dabfd500a6e79c4f4eb9d0c8601b66c"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-shop-short-v2.json",
+      "sha256": "fd2a4e01d0d89ddcac333f661980d93bdcc2e3f625a64f6e08b6b36b140ae130"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-shop-endings-v1.json",
+      "sha256": "2223698dfb2de9f4808f280dce2abe4d30fd5c96f84ec280d9ecc5f4017f820c"
+    },
+    {
+      "path": "scripts/compare-shop-endings-v1.sh",
+      "sha256": "1e2525f6f536cb52481b9238ebad68e6fc536beba30fb1e429344211d07376f3"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/connector-build-v30/report.json",
+      "sha256": "3d9332cee157a04f4473300fdf040bb7f97c22bb1c06d794b6ac8034d0818b52"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/saved-checks-v1/report.json",
+      "sha256": "c43f9d04a3106b2ff3f23517d90ed70054d79e45eed1800580fbae3bc635691c"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/saved-checks-v1/source-review.json",
+      "sha256": "cf3caa9fdd1e943c25d2a21d9e99b4257640e5278623220efc9833e6c292e50a"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/saved-checks-v1/compiled-fact-vectors.json",
+      "sha256": "084bb995902aecb03edafe03b5c0581f67e7a9db3ec62522bf7cc7316625418e"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/short-qualification-v2/report.json",
+      "sha256": "1fd4c6057c262cca12b5d2b7f4cc32ebfbfd91d824b77c20d87a028a85eb4fb3"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/short-qualification-v2/first-rejected-control-source-aliases.json",
+      "sha256": "c12b5fb9bace5e4f3b56338542b52a91ad74cbd15699102f8ebe7adb7d5fe9f3"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/short-controls-v2/removal-confirm-803/report.json",
+      "sha256": "a007eb459cd6e7aec0072f7bee4d01d0da70f169449bc217cf5e76a4b1889119"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/short-controls-v2/removal-cancel-804/report.json",
+      "sha256": "44788f70df0b7cdc046111e01b3363a0a26f3204eff03e16ab67b495315e14c4"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/short-controls-v1/removal-confirm-801/report.json",
+      "sha256": "6e30c8f3349fe74dc90622b265df9dfccd0a8a64951fdb66779546bc15e91c1f"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/preparation-v1/protected.json",
+      "sha256": "1761b033c8f7d4da09d5589ed3d156664d931895e294855f06b8eb3fe3ae5ae2"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/preparation-v1/failed-build-preparation-v1/build-host.py",
+      "sha256": "1547c5d39d9f3ea12e099f08e0b2284d54ce3c9d07548fc5eeafd685acfed8d1"
+    },
+    {
+      "path": "artifacts/native-shop-readiness/compiled-checks-v1/host-tests.stdout.log",
+      "sha256": "9d4ae3a58c8ec55bbb65490df35fb6a6f939cdac35a4aa5c42432b5093226b58"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-host-reproduction-v30.json",
+      "sha256": "bf2bd6e60d5b463b0ea25b202bca76f973e3d3ac1040e7a4ae63c4b8f3761501"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-portable-checks-v1.json",
+      "sha256": "20c3f3fe880c6788eee3258cd5974b4b62ad7a4b8e7e7e974f086c5a57092275"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-compiled-checks-v1.json",
+      "sha256": "78739f34edeaf5aae2c6d5dab2d366f15c2a95d2f13bda1ed7caa4c285d3f83c"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-saved-checks-v1.json",
+      "sha256": "18091c7d56744f1bd6344345c9375432392347edbcb428c2b154c7aeaef3036b"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-short-qualification-v2.json",
+      "sha256": "27ad4f9511d5de4896db6122e7cef47566176494cf70ea4839df16f3fd42c489"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-short-qualification-v1.json",
+      "sha256": "e5213d6713812d455deaaac277f76775fb2bd94cb016472dc6b0936a30992061"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-removal-confirm-v1.json",
+      "sha256": "b29adb3c67c90345051bd9687e2be5d18faa2f02112290dce40e76d87bb71c5e"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-removal-confirm-v2.json",
+      "sha256": "d5995d9e4563377b08b1d7dda3a0f08c7f605f2f19ff1210f8de840efb8d03d3"
+    },
+    {
+      "path": "artifacts/resources/shop-readiness-removal-cancel-v1.json",
+      "sha256": "f573fb8075190f1814338861abff1c8d5026c6cd7056325b40862b1b49adde3e"
+    }
+  ],
+  "rejected_SH0P801_preserved_without_retry": true,
+  "report_id": "sha256:c1059511f3f8e2c89b49b5348ddacab606c6065c38005b927b8f89147ce328aa",
+  "saved_actual_deliveries_reconstructed": 486,
+  "saved_check_wall_seconds": 62.46843745902879,
+  "schema_version": "native-shop-readiness-repair-evidence-v1",
+  "shop_counter_projection_follows_actual_renderer": true,
+  "short_qualification_id": "sha256:3f231f32514f4e558f8334620c77042ad9c32601f7ed66bf6b353b10cc44dd24",
+  "source_method_count_is_not_exhaustive_content_proof": true,
+  "source_reconciliation_id": "sha256:d0bf85e83a816eb39fc49b9ea019d0cf3f8080b40bafca7edf379ab7b5044f4b",
+  "status": "repairs_short_qualified_natural_panel_prepared_unstarted",
+  "training_allowed": false,
+  "unchanged_versions": {
+    "CLI": 56,
+    "converter": 16,
+    "game": "v0.111.0 / 41cef1ea",
+    "layout": 12,
+    "worker": 24
+  },
+  "universal_unawaited_native_effects_qualification_granted": false,
+  "unknown_faulted_task_canceled_and_foreign_identity_fail_closed": true
+}

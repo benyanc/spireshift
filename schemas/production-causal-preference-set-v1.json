@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-causal-preference-set-v1.json",
+  "title": "SpireShift Verified Causal Preference Set v1",
+  "type": "object",
+  "required": [
+    "schema_version", "preference_set_id", "intervention_spec_id",
+    "intervention_report_id", "source_model_id", "source_training_report_id",
+    "split_manifest_id", "ruleset_manifest_id",
+    "objective_id", "partition", "preferences", "summary", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "production-causal-preference-set-v1"},
+    "preference_set_id": {"$ref": "#/$defs/id"},
+    "intervention_spec_id": {"$ref": "#/$defs/id"},
+    "intervention_report_id": {"$ref": "#/$defs/id"},
+    "source_model_id": {"$ref": "#/$defs/id"},
+    "source_training_report_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "partition": {"const": "train"},
+    "preferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/preference"}
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "preferences", "unique_runs", "beneficial", "harmful", "tied",
+        "effective_training_weight"
+      ],
+      "properties": {
+        "preferences": {"type": "integer", "minimum": 1},
+        "unique_runs": {"type": "integer", "minimum": 1},
+        "beneficial": {"type": "integer", "minimum": 0},
+        "harmful": {"type": "integer", "minimum": 0},
+        "tied": {"type": "integer", "minimum": 0},
+        "effective_training_weight": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {"const": "verified_train_only_single_intervention_preferences"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "nullableString": {"type": ["string", "null"]},
+    "preference": {
+      "type": "object",
+      "required": [
+        "preference_id", "seed", "intervention_ordinal", "source_case_id",
+        "decision_index", "source_state_hash", "source_floor", "paired_label",
+        "base_action_id", "search_action_id", "preferred_action_id",
+        "disfavored_action_id", "search_over_base_probability", "training_weight",
+        "search_advantage", "maximum_floor_difference", "victory_difference"
+      ],
+      "properties": {
+        "preference_id": {"$ref": "#/$defs/id"},
+        "seed": {"type": "integer", "minimum": 0},
+        "intervention_ordinal": {"type": "integer", "minimum": 0},
+        "source_case_id": {"$ref": "#/$defs/id"},
+        "decision_index": {"type": "integer", "minimum": 0},
+        "source_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_floor": {"type": ["integer", "null"]},
+        "paired_label": {"enum": ["beneficial", "harmful", "tied"]},
+        "base_action_id": {"type": "string", "minLength": 1},
+        "search_action_id": {"type": "string", "minLength": 1},
+        "preferred_action_id": {"$ref": "#/$defs/nullableString"},
+        "disfavored_action_id": {"$ref": "#/$defs/nullableString"},
+        "search_over_base_probability": {"enum": [0, 0.5, 1]},
+        "training_weight": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "search_advantage": {"type": "number", "minimum": 0},
+        "maximum_floor_difference": {"type": ["integer", "null"]},
+        "victory_difference": {"type": ["integer", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

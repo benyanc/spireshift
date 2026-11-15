@@ -1,0 +1,333 @@
+{
+  "schema_version": "native-linear-value-evidence-v1",
+  "date": "2026-10-20",
+  "control": {
+    "path": "artifacts/native-linear-value/sts2-v0.111.0-a8-control-v1-verified/report.json",
+    "report_id": "sha256:8d9ee1eb90492f86a550d3138b1fca876941f3640c47af7b5d2dfc193548c117",
+    "config_id": "sha256:fcc30beb83c0e382724c49f5842759f6f5b903f397a009fb1abf7f894fc1c177",
+    "completed_folds": 1,
+    "summary": {
+      "by_cohort": {
+        "seed-2-standard-round-057-fit": {
+          "coarse_linear": 2.1916606277133255e-05,
+          "current_ridge": 2.2925253300070946e-05,
+          "other_game_constant": 3.7403359090806224e-05,
+          "rich_linear": 3.423045290867215e-05
+        }
+      },
+      "cohorts_not_pooled_for_fitting": true,
+      "folds_are_not_independent_training_replicates": true,
+      "fresh_confirmation_required_before_adoption": true,
+      "independent_training_players": 1,
+      "prediction_target": "declared_bootstrap_return_not_victory_probability",
+      "primary_equal_game_clipped_mse": {
+        "coarse_linear": 2.1916606277133255e-05,
+        "current_ridge": 2.2925253300070946e-05,
+        "other_game_constant": 3.7403359090806224e-05,
+        "rich_linear": 3.423045290867215e-05
+      },
+      "selected_regularization": {
+        "coarse_linear": [
+          0.001
+        ],
+        "rich_linear": [
+          10.0
+        ]
+      },
+      "statistical_scope": "reused_saved_train_development_nested_whole_game_validation",
+      "stronger_native_play_established": false,
+      "unique_held_games": 8
+    },
+    "production_states_unchanged": true,
+    "new_games": 0,
+    "actor_optimizer_steps": 0,
+    "linear_solves": 56,
+    "curves": [
+      "artifacts/native-linear-value/sts2-v0.111.0-a8-control-v1-verified/validation-curves.csv",
+      "artifacts/native-linear-value/sts2-v0.111.0-a8-control-v1-verified/validation-curves.png"
+    ]
+  },
+  "control_resources": {
+    "path": "artifacts/resources/native-linear-value-control-v1-2.json",
+    "report_id": "sha256:9386a62ed57b2f48343d1789e86390fc2fb2c1c163fb759803816a2a9d988151",
+    "status": "completed",
+    "usage": {
+      "average_cpu_utilization": 0.013197476069093807,
+      "cpu_hours": 0.0020044326794444447,
+      "cpu_seconds": 7.215957646000001,
+      "energy_kwh": null,
+      "final_storage_bytes": 2986079,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 2,
+      "peak_resident_memory_bytes": 402685952,
+      "peak_storage_bytes": 2986079,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 39.05485741700977
+    },
+    "limits": {
+      "cpu_seconds": 240.0,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 500000000,
+      "wall_seconds": 240.0
+    },
+    "cap": null
+  },
+  "comparison": {
+    "path": "artifacts/native-linear-value/sts2-v0.111.0-a8-comparison-v1/report.json",
+    "report_id": "sha256:8c52d32d034bf591c7ceaff0665aecdada306ac37891c033a66e0b4a584671c1",
+    "config_id": "sha256:7fb207c5fe64e029988c5089a00e1d8d9da3fe50ffdfa3a6f7d61f2810ca9bc5",
+    "completed_folds": 16,
+    "summary": {
+      "by_cohort": {
+        "seed-2-standard-round-057-fit": {
+          "coarse_linear": 2.6720414012497467e-05,
+          "current_ridge": 2.6049091280158993e-05,
+          "other_game_constant": 3.664371381183387e-05,
+          "rich_linear": 3.294504834765717e-05
+        },
+        "seed-2-standard-round-060-fit": {
+          "coarse_linear": 0.00015443658973420167,
+          "current_ridge": 0.00015462488807280834,
+          "other_game_constant": 0.00022742796397382992,
+          "rich_linear": 0.00016200183263930483
+        },
+        "seed-3-standard-round-057-fit": {
+          "coarse_linear": 2.050452320981933e-05,
+          "current_ridge": 2.089722244362194e-05,
+          "other_game_constant": 3.4682433912782825e-05,
+          "rich_linear": 3.3527417533710385e-05
+        },
+        "seed-3-standard-round-060-fit": {
+          "coarse_linear": 1.965044003974491e-05,
+          "current_ridge": 1.8940712818807762e-05,
+          "other_game_constant": 2.7381669823197383e-05,
+          "rich_linear": 2.7139182323739177e-05
+        }
+      },
+      "cohorts_not_pooled_for_fitting": true,
+      "folds_are_not_independent_training_replicates": true,
+      "fresh_confirmation_required_before_adoption": true,
+      "independent_training_players": 2,
+      "prediction_target": "declared_bootstrap_return_not_victory_probability",
+      "primary_equal_game_clipped_mse": {
+        "coarse_linear": 5.532799174906585e-05,
+        "current_ridge": 5.512797865384927e-05,
+        "other_game_constant": 8.153394538041102e-05,
+        "rich_linear": 6.39033702111029e-05
+      },
+      "selected_regularization": {
+        "coarse_linear": [
+          0.001,
+          0.0001,
+          0.1,
+          0.01,
+          0.01,
+          1e-05,
+          0.01,
+          0.01,
+          1.0,
+          1.0,
+          1.0,
+          0.1,
+          0.01,
+          0.1,
+          0.01,
+          0.01
+        ],
+        "rich_linear": [
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          1.0,
+          100.0,
+          10.0,
+          100.0,
+          1.0,
+          10.0,
+          10.0,
+          10.0,
+          1.0
+        ]
+      },
+      "statistical_scope": "reused_saved_train_development_nested_whole_game_validation",
+      "stronger_native_play_established": false,
+      "unique_held_games": 128
+    },
+    "production_states_unchanged": true,
+    "new_games": 0,
+    "actor_optimizer_steps": 0,
+    "linear_solves": 896,
+    "curves": [
+      "artifacts/native-linear-value/sts2-v0.111.0-a8-comparison-v1/validation-curves.csv",
+      "artifacts/native-linear-value/sts2-v0.111.0-a8-comparison-v1/validation-curves.png"
+    ]
+  },
+  "comparison_resources": {
+    "path": "artifacts/resources/native-linear-value-comparison-v1-short-2.json",
+    "report_id": "sha256:4759af543d0f6a1a1236eebdc833c3794024d5c80f9db4d0471d1081444d74ab",
+    "status": "completed",
+    "usage": {
+      "average_cpu_utilization": 0.026798566730245412,
+      "cpu_hours": 0.008854223498333333,
+      "cpu_seconds": 31.875204594,
+      "energy_kwh": null,
+      "final_storage_bytes": 5304827,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 2,
+      "peak_resident_memory_bytes": 495501312,
+      "peak_storage_bytes": 5304827,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 84.95977979199961
+    },
+    "limits": {
+      "cpu_seconds": 240.0,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 500000000,
+      "wall_seconds": 240.0
+    },
+    "cap": null
+  },
+  "saved_verification": {
+    "actor_optimizer_steps": 0,
+    "maximum_saved_prediction_difference": 0.0,
+    "models_reconstructed": 32,
+    "new_fits": 0,
+    "new_games": 0,
+    "original_players_and_all_Adam_unchanged": true,
+    "report_id": "sha256:b2072340d35a8e21db5980f870175eca825716bdd20fe040a56ef099ccb3f97f",
+    "schema_version": "native-linear-value-saved-verification-v1",
+    "source_files_verified": 11681,
+    "study_report_id": "sha256:8c52d32d034bf591c7ceaff0665aecdada306ac37891c033a66e0b4a584671c1",
+    "valid": true,
+    "whole_game_lambda_selections_reconstructed": 32
+  },
+  "saved_verification_resources": {
+    "path": "artifacts/resources/native-linear-value-saved-verification-v1-1.json",
+    "report_id": "sha256:a4150a4052d042f88464d5b04343fdd4ed4cfa49cb083527c7a733b5b4b83653",
+    "status": "completed",
+    "usage": {
+      "average_cpu_utilization": 0.025399064001626677,
+      "cpu_hours": 0.0009874956277777778,
+      "cpu_seconds": 3.55498426,
+      "energy_kwh": null,
+      "final_storage_bytes": 5047,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 2,
+      "peak_resident_memory_bytes": 478691328,
+      "peak_storage_bytes": 5047,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 9.997511999914423
+    },
+    "limits": {
+      "cpu_seconds": 120.0,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 10000000,
+      "wall_seconds": 120.0
+    },
+    "cap": null
+  },
+  "repository_check": {
+    "path": "artifacts/resources/native-linear-value-repository-owner-v1-1.json",
+    "report_id": "sha256:bf55e76c5586d10008893d30f0aaf68c3bcbfd7aae4b5d188f7f937efc80ee33",
+    "status": "completed",
+    "usage": {
+      "average_cpu_utilization": 0.06116365750511341,
+      "cpu_hours": 0.027607256032222246,
+      "cpu_seconds": 99.38612171600009,
+      "energy_kwh": null,
+      "final_storage_bytes": 0,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 9,
+      "peak_resident_memory_bytes": 385269760,
+      "peak_storage_bytes": 0,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 116.06579762510955
+    },
+    "limits": {
+      "cpu_seconds": 2400.0,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 1000000000,
+      "wall_seconds": 1200.0
+    },
+    "cap": null
+  },
+  "full_repository_verification_pending": false,
+  "interpretation": "Rich regularized linear held error is 15.9182% higher than unchanged ridge, in all four cohort directions. Tuned coarse linear is 0.3628% higher. No replacement is supported. This removes neural optimization/initialization as necessary explanations for the rich-input generalization gap on this development pool; it does not prove richer facts are intrinsically useless or that more games alone will help.",
+  "dictionary_scope": "Frozen prior outer-fitting public schemas; inner scaling and ridge fitting are independent of validation labels, but vocabulary discovery is not repeated within inner folds.",
+  "no_untouched_confirmation_claim": true,
+  "checkpoint_promoted": false,
+  "automatic_training_follows": false,
+  "preserved_provisional_control": {
+    "path": "artifacts/native-linear-value/sts2-v0.111.0-a8-control-v1/report.json",
+    "reason": "Corrected a reporting-only one-player count before final source freeze. Original source bytes and recipe copied to artifacts/native-linear-value/provisional-control-source-v1; settings and numerical forecasts unchanged. Main admits the verified control only."
+  },
+  "preserved_incomplete_main_preflight": {
+    "path": "artifacts/resources/native-linear-value-comparison-v1-short-1.json",
+    "reason": "Called before the matching control pointer was populated; failed before workspace creation or any fit. Completed control dependency was then populated before the main study."
+  },
+  "focused_tests": {
+    "passed": 17,
+    "last_run_wall_seconds": 59.86,
+    "final_source_version": true
+  },
+  "github_items_updated": [
+    143,
+    35,
+    146
+  ],
+  "initial_repository_check": {
+    "path": "artifacts/resources/native-linear-value-repository-check-v1-1.json",
+    "report_id": "sha256:5f334ebf5e394cbfb6ac04f6f42f329e4d6b92397faf35686524667343582ce0",
+    "status": "capped",
+    "usage": {
+      "average_cpu_utilization": 0.007758169494345181,
+      "cpu_hours": 0.007245576783333334,
+      "cpu_seconds": 26.084076420000002,
+      "energy_kwh": null,
+      "final_storage_bytes": 0,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 6,
+      "peak_resident_memory_bytes": 159105024,
+      "peak_storage_bytes": 0,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 240.1530821248889
+    },
+    "limits": {
+      "cpu_seconds": 960.0,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 1000000000,
+      "wall_seconds": 240.0
+    },
+    "cap": {
+      "limit": 240.0,
+      "observed": 240.08983858302236,
+      "resource": "wall_seconds"
+    }
+  },
+  "full_repository_verification": {
+    "format_lint_strict_types_full_test_suite_and_csharp_contract_passed": true,
+    "post_check_protected_source_files_verified": 11681,
+    "both_saved_players_and_all_Adam_unchanged": true,
+    "initial_capped_receipt_preserved": true
+  },
+  "evidence_id": "sha256:c1b2d6f2bae56b57ad863ed8a1281ba856f446bfc64fd33aaa9aaf5789f42503"
+}

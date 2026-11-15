@@ -1,0 +1,20 @@
+{
+  "schema_version": "engine-connector-build-config-v1",
+  "stage": "local_host_build_only_no_games",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "source_url": "https://github.com/rsgcsg/STS2-Connector.git",
+  "source_revision": "e0651024117d22bdeb95142766917103d87c0185",
+  "source_cache": "artifacts/engine-sources/connector-v1.1.0-rc.1",
+  "base_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "base_connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "patch": "patches/engine/sts2-connector-v0.111.0-card-rendering-v31.patch",
+  "patch_sha256": "3a0231b212bacb867452bc24273fe078ce677c44a51932a6a112ff9366a8e375",
+  "sdk_version": "10.0.401",
+  "commit_date": "2026-11-04T16:20:00Z",
+  "commit_message": "Bind every card export to native display context and standardize visible line breaks",
+  "workspace": "artifacts/native-card-rendering/connector-build-v31",
+  "output_report": "artifacts/native-card-rendering/connector-build-v31/report.json",
+  "output_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-card-rendering-v31.json",
+  "max_wall_seconds": 180,
+  "training_allowed": false
+}

@@ -1,0 +1,18 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:f1f5fa213bca1e87bcedde61b3f35aa4f5e67d3704cf9a9aa75bda70bcc2ab44",
+  "partition": "control",
+  "schema_version": "native-combat-consequence-seeds-v1",
+  "seeds": [
+    {
+      "id": 1920000,
+      "numerical_seed": 2,
+      "seed": "SP1RESH1FTCNSCHK0000"
+    },
+    {
+      "id": 1920001,
+      "numerical_seed": 3,
+      "seed": "SP1RESH1FTCNSCHK0001"
+    }
+  ]
+}

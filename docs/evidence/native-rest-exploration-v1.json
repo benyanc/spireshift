@@ -1,0 +1,112 @@
+{
+  "schema_version": "native-rest-exploration-preparation-evidence-v1",
+  "prior_result": {
+    "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-continuation-v1/report.json",
+    "id": "sha256:3fdaf8772da72f9893c3f543711026001a79b65118a094d2b4fc71efbd383197",
+    "attempts": 960,
+    "terminal": 958,
+    "failed_train": 1,
+    "failed_development": 1,
+    "wins": 0,
+    "mean_floor_change": 0.6875,
+    "paired_floor_change_interval95": [
+      -0.09375,
+      1.4609375
+    ],
+    "auxiliary_progress_confirmed": false
+  },
+  "selection_effects": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/selection-effects-v4/report.json",
+    "id": "sha256:06a260493a673522d30dd0c207992e0aec8d25038e918b51f60afde08ca48d99",
+    "native_cases": 4,
+    "native_host_unchanged": true,
+    "sdk_and_frozen_game_unchanged": true,
+    "shipped_cross_host_parity": false,
+    "privileged_fixture": true,
+    "training_allowed": false
+  },
+  "integration_control": {
+    "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-control-v1/report.json",
+    "id": "sha256:a493042487d272fec7ac8156c55e0bd327dbc83ac1923a425a2ad1553fa8f656",
+    "status": "native_rest_exploration_control_pass",
+    "attempts": 20,
+    "failed_games": 0,
+    "all_training_collections_clean": true,
+    "fits": 4,
+    "new_optimizer_steps": 33,
+    "starting_optimizer_steps": {
+      "2": 5268,
+      "3": 5589
+    },
+    "ending_optimizer_steps": {
+      "2-rest_mix20": 5277,
+      "2-standard": 5274,
+      "3-rest_mix20": 5598,
+      "3-standard": 5598
+    },
+    "original_states_unchanged": true,
+    "completed_result_reconstructed": true,
+    "rest_choices_training": {
+      "rest_mix20": {
+        "Discard Speed Potion": 1,
+        "Leave rest site": 4,
+        "Rest": 3,
+        "Smith": 1
+      },
+      "standard": {
+        "Leave rest site": 4,
+        "Rest": 4
+      }
+    },
+    "control_quality_claim": false,
+    "game_apps_created": 0
+  },
+  "prepared_comparison": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-rest-exploration-v1.json",
+    "id": "sha256:92d18330344ffb3bb186f954711cb801098071dbabf49e431f296159b718f58d",
+    "players": [
+      {
+        "numerical_seed": 2,
+        "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-2-round-056-fit/state.json",
+        "sha256": "140a8583a108719817d2947b0e4ba1a80a65d70c808bb2d74a46959a9453547e",
+        "model_id": "sha256:378982ceaff36d32e3d6cf522bfac4e6097102045ba9139f016e663e9c70fdcf",
+        "state_id": "sha256:bfbbb5799cb0d0310adc5916042fdd9191dcce77c3efcb12b6ccacc4ca00fa61",
+        "optimizer_steps": 5268,
+        "round": 56,
+        "scheduled_training_games": 1792
+      },
+      {
+        "numerical_seed": 3,
+        "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-3-round-056-fit/state.json",
+        "sha256": "b42ea3c6a582bae206d2a74985eac21693b5e773a70620f4691406c45e932734",
+        "model_id": "sha256:aca75dcfc2170c52188992c6a9ad311bdb4ad9ed927087338e860a3b8d0e6f67",
+        "state_id": "sha256:f6d338280d0897ad0b7b39ef23cbe3a035ca0a173e251ee6382603dd55aea883",
+        "optimizer_steps": 5589,
+        "round": 56,
+        "scheduled_training_games": 1792
+      }
+    ],
+    "maximum_attempts": 896,
+    "training_attempts": 512,
+    "final_test_attempts": 384,
+    "starting_round": 56,
+    "first_fit_round": 57,
+    "last_fit_round": 60,
+    "main_unstarted": true,
+    "all_current_legal_actions_learnable": true,
+    "evaluation_exploration_disabled": true,
+    "checkpoint_promoted": false,
+    "automatic_extension_follows": false
+  },
+  "verification": {
+    "targeted_Python_tests_passed": 21,
+    "Node_cursor_subtests_passed": 7,
+    "zero_mixture_numerical_parity": true,
+    "mixed_gradient_finite_difference_check": true,
+    "resume_preserves_models_and_Adam_and_never_repeats_games": true,
+    "required_repository_command": "uv run spireshift check",
+    "repository_check_log": "artifacts/validation/native-exploration-v1/repository-check.log"
+  },
+  "owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-a8-rest-exploration-v1.sh",
+  "evidence_id": "sha256:b72178a9f240accc3def9a10908c3e921f29d2a03264034fe4e384af1654e907"
+}

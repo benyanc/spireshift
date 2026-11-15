@@ -1,0 +1,17 @@
+{
+  "schema_version": "engine-shipped-checkpoint-config-v1",
+  "stage": "single_native_A8_checkpoint_public_input_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "checkpoint_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-checkpoint-projection-localization-v6-retry1.json",
+  "checkpoint_report_id": "sha256:b10aafa0a7aae123b6282c269d88f6d8d44066c56b74d2769ed34026e4877608",
+  "snapshot_sha256": "87208d0e3002fbd6f4f1b00b0181883308cc84ca9305e270fcab525078fcbc4c",
+  "seed": "SPIRESHIFTREFERENCEBRIDGE01",
+  "helpers_sha256": {
+    "engine-checkpoint-shipped-probe.mjs": "ff448c7db2d124074f1207b73f4102aa098b9fc4eabdbc93e5f17a1e98296a84",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+  },
+  "training_allowed": false,
+  "comparison_scope": "starting_option_titles_and_availability_only_not_complete_semantic_parity"
+}

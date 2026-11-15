@@ -1,0 +1,272 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "diagnostic_contract": "privileged_native_delayed_terminal_goal_v1",
+  "evidence_id": "sha256:d583df7bd18f0302e0dcc741f1e0a0098ddd845e2e8b71e924b01490123dc87f",
+  "exact_baseline_is_not_max_action_value": true,
+  "exact_baseline_is_not_public_belief_value": true,
+  "explicit_differences_from_ordinary_full_game_training": [
+    "privileged_coverage_fixtures",
+    "finite_verified_native_transition_tree_collector_adapter",
+    "diagnostic_binary_terminal_subgoal",
+    "all_related_native_world_repeats_grouped_together_for_cross_fitting"
+  ],
+  "full_run_attempts": 0,
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "historical_forks_and_experience_final_states_unchanged": true,
+  "limitations": [
+    "Only two diagnostic task patterns, one encounter and three controlled upgrade/order variants.",
+    "Tiny control has two fitting worlds and one held-out world; not baseline superiority.",
+    "Player 3 learned misses the frozen weakest-fitting-case probability threshold after four rounds.",
+    "Repeated tree sampling is not new native gameplay or independent worlds.",
+    "Main seed novelty will be distinguished from exact public-root novelty.",
+    "No qualification of full-run credit at strategic horizons or ordinary full-game readiness."
+  ],
+  "main_preparation": {
+    "arms": 2,
+    "checkpoint_rounds": 8,
+    "episodes_per_round": 32,
+    "expected_native_branches": 204,
+    "expected_owner_minutes": [
+      15,
+      25
+    ],
+    "fitting_worlds": 8,
+    "fixed_parents": 2,
+    "heldout_worlds": 4,
+    "main_units_executed": 0,
+    "main_workspace_created": false,
+    "maximum_optimizer_steps": 1536,
+    "maximum_sampled_diagnostic_sequences": 16384,
+    "native_trees": 24,
+    "native_worlds": 12,
+    "planned_units": 94,
+    "read_only_load_passed": true,
+    "rounds_per_copy": 128
+  },
+  "ordinary_PPO_eligible": false,
+  "original_Adam_counters": [
+    5658,
+    6045
+  ],
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "privileged_fixture": true,
+  "production_components": [
+    "v11_public_projection_and_native_action_delivery",
+    "native_structured_policy.Chooser",
+    "native_structured_model.encode",
+    "public_value_features_and_fit_baseline_and_fold_assignment",
+    "native_policy_updates.update",
+    "unchanged_PPO_settings_normalization_loss_and_full_Adam_continuation"
+  ],
+  "recipes": [
+    {
+      "id": "sha256:4a4c46ea7cd1fb5959bac8467110d28bdac27422e86ed7ea52acea5cbe976398",
+      "path": "configs/native-delayed/sts2-v0.111.0-a8-control-v1.json"
+    },
+    {
+      "id": "sha256:d239d59e300eadf95b9a9641106d7269993cb98dfb235fb9ac40c55e5ad3bab0",
+      "path": "configs/native-delayed/sts2-v0.111.0-a8-comparison-v1.json"
+    }
+  ],
+  "saved_only_audit": {
+    "audit_source": {
+      "path": "artifacts/native-delayed/control-assessment-v1/audit.py",
+      "sha256": "8a4f61518033271e47e4e73285c2ee8d43cc19a20ca3038a1fa4d66303222390"
+    },
+    "baseline_refits": 0,
+    "exact_imports_and_Adam_steps_verified": true,
+    "final_expected_success_and_greedy_outcomes_reconstructed": true,
+    "first_batches_and_coefficients_reconstructed": true,
+    "games_launched": 0,
+    "id": "sha256:2599af8899a07146fb722f83da7949ee7f7afc68b1cd7c142f51ebe983b0e990",
+    "native_path_deliveries_verified": 93,
+    "new_optimizer_steps": 0,
+    "path": "artifacts/native-delayed/control-assessment-v1/report.json",
+    "resources": {
+      "cpu_seconds": 15.616855178999998,
+      "final_storage_bytes": 9496,
+      "id": "sha256:6d6e32f8927502a6ce94a239ea203da479f20835bd6fe7eba35df86857f420c4",
+      "limits": {
+        "cpu_seconds": 180.0,
+        "resident_memory_bytes": 1000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 180.0
+      },
+      "path": "artifacts/resources/native-delayed-control-assessment-v1.json",
+      "peak_resident_memory_bytes": 214958080,
+      "wall_seconds": 31.799498041858897
+    },
+    "source_files_verified": 68172,
+    "whole_world_folds_verified": true
+  },
+  "schema_version": "native-delayed-learning-evidence-v1",
+  "short_control": {
+    "all_finals_frozen_before_heldout_evaluation": true,
+    "completed_units": 16,
+    "every_copy_heldout_greedy_successes": 2,
+    "fitting_criterion_passes": {
+      "exact": 2,
+      "learned": 1
+    },
+    "fitting_worlds": 2,
+    "genuinely_unseen_heldout_public_roots": 2,
+    "heldout_worlds": 1,
+    "id": "sha256:285ca65ca12a475008431676cb92ed1b857ce7f4afda911017a3f42caaaa4e8f",
+    "initial_batches_matched": true,
+    "native_branches": 51,
+    "native_trees": 6,
+    "native_worlds": 3,
+    "optimizer_steps_on_copies": 43,
+    "path": "artifacts/native-delayed/sts2-v0.111.0-a8-control-v1/report.json",
+    "resources": {
+      "cpu_seconds": 63.695591104999984,
+      "final_storage_bytes": 52716321,
+      "id": "sha256:9bd0056c47a840d1620bb42c17fb338d311e091cbf57b1bcf0c36240c734d20c",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-delayed-control-v1-1.json",
+      "peak_resident_memory_bytes": 345554944,
+      "wall_seconds": 96.27322804206051
+    },
+    "results": [
+      {
+        "arm": "learned",
+        "fitting": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9572610674273854,
+          "minimum_success_probability": 0.9447512793906631
+        },
+        "fitting_criterion_passed": true,
+        "heldout": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9524427639719074,
+          "minimum_success_probability": 0.9388950566996366
+        },
+        "heldout_criterion_passed": true,
+        "player": 2
+      },
+      {
+        "arm": "exact",
+        "fitting": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9420228910694975,
+          "minimum_success_probability": 0.9099339022940661
+        },
+        "fitting_criterion_passed": true,
+        "heldout": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9193996388806648,
+          "minimum_success_probability": 0.8745018567414283
+        },
+        "heldout_criterion_passed": true,
+        "player": 2
+      },
+      {
+        "arm": "learned",
+        "fitting": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.8846784524146587,
+          "minimum_success_probability": 0.679362828086764
+        },
+        "fitting_criterion_passed": false,
+        "heldout": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9688219321335125,
+          "minimum_success_probability": 0.9512020819573126
+        },
+        "heldout_criterion_passed": true,
+        "player": 3
+      },
+      {
+        "arm": "exact",
+        "fitting": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9486490361563915,
+          "minimum_success_probability": 0.890888165588805
+        },
+        "fitting_criterion_passed": true,
+        "heldout": {
+          "greedy_accuracy": 1.0,
+          "mean_success_probability": 0.9764550070680753,
+          "minimum_success_probability": 0.9678591064995098
+        },
+        "heldout_criterion_passed": true,
+        "player": 3
+      }
+    ],
+    "sampled_diagnostic_sequences": 512
+  },
+  "sole_treatment": "learned_public_ridge_state_baseline_vs_exact_current_policy_value_in_same_privileged_native_tree",
+  "source_comparison_report": {
+    "id": "sha256:dc95bb4fa6c23f26885f0388199e3227a76dfd2494dcf4e470729f75eeff792d",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "status": "implementation_and_short_production_path_control_qualified_main_owner_run",
+  "student_inputs_public_only": true,
+  "task_minimum_success_actions": {
+    "dexterity_then_block": 3,
+    "vulnerable_then_attack": 2
+  },
+  "verification": {
+    "controls": [
+      "native_delivery_snapshot_and_prefix_reconstruction",
+      "all_legal_actions_observed_and_no_immediate_success",
+      "delayed_policy_gradient_finite_difference_against_expected_terminal_success",
+      "learned_branch_cannot_use_oracle_values",
+      "first_batch_only_advantages_differ",
+      "whole_world_fold_isolation",
+      "heldout_rejection_and_public_root_overlap",
+      "bit_exact_resumption_of_weights_and_all_Adam_moments",
+      "all_finals_frozen_before_heldout_evaluation"
+    ],
+    "csharp_protocol": true,
+    "formatted_files": 708,
+    "new_passed_tests": 14,
+    "new_test_file_sha256": "66966718acbff983205bbfcf7fe1ad27e8cf2ae28f082783e61464631bfd8101",
+    "node_syntax_checked": true,
+    "nonzero_terminal_gradient_coordinates_checked": true,
+    "passed_tests": 2428,
+    "prior_repository_check": {
+      "cpu_seconds": 126.28461500099998,
+      "final_storage_bytes": 0,
+      "id": "sha256:98092bd33197100b0f6be59a2c4ae5c073153b8854d0b3a3d5511b6ad66b38df",
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-delayed-repository-check-v1.json",
+      "peak_resident_memory_bytes": 363249664,
+      "wall_seconds": 138.5735256250482
+    },
+    "resources": {
+      "cpu_seconds": 124.673423797,
+      "final_storage_bytes": 0,
+      "id": "sha256:3bc24ee015cb0171d4433d872c004be43b91b4cd1fe265655123a724a2e8fd8b",
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-delayed-repository-check-v2.json",
+      "peak_resident_memory_bytes": 292732928,
+      "wall_seconds": 135.75382491690107
+    },
+    "skipped_tests": 5,
+    "strict_type_files": 520
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "automatic_follow_up": false,
+  "clean_native_shutdowns": 3,
+  "config_id": "sha256:15dded835a176c7a8f8dae2e2cacaedc995069a75ee8332e08906cc7a0b1c8b4",
+  "control": {
+    "path": "artifacts/native-a8-act1-rescue/control-v1/report.json",
+    "report_id": "sha256:0b142bb9258a9f25fe1140778c8dcd085c1931ecc3b4fbe90de8e54bf3decde1",
+    "sha256": "1276d01afe35095426d2551013cfe4ae1b2522dedc4789969880c00157be2a16",
+    "status": "act1_rescue_short_checks_verified"
+  },
+  "control_resource": {
+    "path": "artifacts/resources/a8-act1-rescue-control-v1.json",
+    "report_id": "sha256:68255fe05f38b38c07c4968a247f78f237f7fcbe70bf0c8fc4f2b40bf7d25e9e",
+    "sha256": "c46d06e2ee49bea0fd9623d59410ef5ce8eb948ab4c380c45d0624264ea9c893",
+    "status": "completed"
+  },
+  "control_world": "SP1RESH1FTA8RC001",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "first_change_on_identical_menu": {
+    "choice_ordinal_including_local_factors": 3,
+    "family": "combat_turn",
+    "fitted_action_index": 3,
+    "public_input_id": "sha256:d79e6942706f70fd8b54ca1ed7368dd13bf8a86317d3a608339f0bb3ac3841b7",
+    "reason": "combat",
+    "teacher_action_index": 1
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "native_prefixes": 3,
+  "optimizer_updates": 0,
+  "owner_launch_gate_verified": true,
+  "preparation": {
+    "path": "docs/evidence/native-a8-act1-rescue-preparation-v1.json",
+    "report_id": "sha256:5f76008ddf7a0a82b4defaf4021cd2256ab53dfff18774944d57e5d4204696ee",
+    "sha256": "f0cfc770e3c993c9f422d70753cb80b0e7d459a16a70a3dd6f329afa10d77e7c",
+    "status": "ready_for_short_native_control_and_owner_qualification"
+  },
+  "qualification_games_in_short_check": 0,
+  "report_id": "sha256:afca6325df36d074ece8f583a6da8fa68d0da5198fca198d22fbc8ea86501839",
+  "repository_check": {
+    "dotnet_protocol_passed": true,
+    "path": "artifacts/resources/a8-act1-rescue-post-control-repository-check-v1.json",
+    "report_id": "sha256:f1d49f33edff662666252e19e368d29789c2f8c7ff2954fa6970df6a250e7de3",
+    "sha256": "e003c754fcd79cc17ec8ef3d1af01d263ddfe7ffd76db2a9ce2030c4c4dc763e",
+    "status": "completed",
+    "tests_passed": 2846
+  },
+  "saved_regressions": {
+    "hp_spend": 4,
+    "potion": 4,
+    "rest": 12
+  },
+  "schema_version": "native-a8-act1-rescue-short-check-evidence-v1",
+  "shared_profile_unchanged": true,
+  "status": "owner_qualification_ready_after_short_native_check",
+  "teacher_qualified_by_short_check": false,
+  "verified_native_deliveries": 54
+}

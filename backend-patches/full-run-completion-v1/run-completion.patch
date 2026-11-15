@@ -1,0 +1,30 @@
+--- a/src/Sts2Emulator/Core/Run/RunEngine.cs
++++ b/src/Sts2Emulator/Core/Run/RunEngine.cs
+@@ -996,8 +996,8 @@
+         obs[offset + 11] = State.RewardCards[2];
+         // The FOURTH option lives at the end of the observation rather than here, so that
+         // adding it moved nothing. See `RunConstants.FourthRewardObsOffset`.
+-        obs[RunConstants.FourthRewardObsOffset] = State.LastingCandyRewardCard;
+-        obs[RunConstants.FourthRewardObsOffset + 1] = State.LastingCandyRewardUpgraded ? 1 : 0;
++        obs[offset + RunConstants.FourthRewardObsOffset] = State.LastingCandyRewardCard;
++        obs[offset + RunConstants.FourthRewardObsOffset + 1] = State.LastingCandyRewardUpgraded ? 1 : 0;
+         for (int i = 0; i < RunConstants.MapChoices; i++)
+         {
+             // Types only. What is BEHIND a node is not on the game's map -- see
+@@ -2288,10 +2288,14 @@
+         // is on rather than assuming the standard one. Golden Compass lays a map a row
+         // taller, and a constant here cut its last room off.
+         int bossRow = RunMapGenerator.BossRow(State);
+-        int terminalFloor = State.Act == RunConstants.ActUnderdocks ? bossRow * 2 + 1 : bossRow + 1;
+-        if (State.Floor >= terminalFloor)
++        // Floor is total run progress and carries across acts. Only the current
++        // map coordinate can reach this act's defensive boundary.
++        if (State.CurrentMapCoord.Row >= bossRow)
+         {
+             State.Phase = RunPhase.Complete;
++            // This backstop is not a final-boss victory. Never carry a previous
++            // combat's win flag into the terminal run result.
++            State.LastPlayerWon = false;
+             terminal = true;
+             return 0;
+         }

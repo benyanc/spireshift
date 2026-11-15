@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-option-evidence-report-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_id",
+    "configuration",
+    "config_id",
+    "ruleset_manifest_id",
+    "model_id",
+    "training_report_id",
+    "split_manifest_id",
+    "patch_id",
+    "objective_id",
+    "partition",
+    "started_at",
+    "completed_at",
+    "cases",
+    "summary",
+    "hidden_state_resampling",
+    "training_started",
+    "checkpoint_promoted",
+    "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "starting-option-evidence-report-v1"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "configuration": {
+      "$ref": "https://spireshift.dev/schemas/starting-option-evidence-config-v1.json"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "ruleset_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "training_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "patch_id": {
+      "type": "string"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "partition": {
+      "const": "train"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "completed_at": {
+      "type": "string"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "run_seed",
+          "path",
+          "sha256",
+          "case_id"
+        ],
+        "properties": {
+          "run_seed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^cases/seed-[0-9]{6}\\.json$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "case_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "benchmark_denominator",
+        "completed_runs",
+        "failed_runs",
+        "candidate_denominator",
+        "completed_branches",
+        "failed_or_missing_branches",
+        "recorded_trajectories",
+        "recorded_transitions",
+        "truncated_trajectories",
+        "terminal_victories",
+        "complete_run_subfolds",
+        "selection_option_ids_absent_from_fitting",
+        "sufficiency_checks",
+        "evidence_sufficient",
+        "independent_unit",
+        "futures_per_option"
+      ],
+      "properties": {
+        "benchmark_denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed_branches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_or_missing_branches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recorded_trajectories": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recorded_transitions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "truncated_trajectories": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "terminal_victories": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete_run_subfolds": {
+          "type": "object",
+          "required": [
+            "fit",
+            "selection"
+          ],
+          "properties": {
+            "fit": {
+              "type": "object",
+              "required": [
+                "configured_runs",
+                "completed_runs",
+                "informative_runs",
+                "strong_runs",
+                "eligible_pairs",
+                "tied_pairs",
+                "activity_only_pairs",
+                "unique_option_ids"
+              ],
+              "properties": {
+                "configured_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "completed_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "informative_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "strong_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "eligible_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tied_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "activity_only_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "selection": {
+              "type": "object",
+              "required": [
+                "configured_runs",
+                "completed_runs",
+                "informative_runs",
+                "strong_runs",
+                "eligible_pairs",
+                "tied_pairs",
+                "activity_only_pairs",
+                "unique_option_ids"
+              ],
+              "properties": {
+                "configured_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "completed_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "informative_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "strong_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "eligible_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tied_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "activity_only_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "unique_option_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "selection_option_ids_absent_from_fitting": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "sufficiency_checks": {
+          "type": "object",
+          "required": [
+            "all_runs_complete_and_terminal",
+            "fit_coverage",
+            "selection_coverage",
+            "strong_selection_coverage"
+          ],
+          "properties": {
+            "all_runs_complete_and_terminal": {
+              "type": "boolean"
+            },
+            "fit_coverage": {
+              "type": "boolean"
+            },
+            "selection_coverage": {
+              "type": "boolean"
+            },
+            "strong_selection_coverage": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "evidence_sufficient": {
+          "type": "boolean"
+        },
+        "independent_unit": {
+          "const": "complete_run_seed"
+        },
+        "futures_per_option": {
+          "const": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "hidden_state_resampling": {
+      "const": false
+    },
+    "training_started": {
+      "const": false
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "train_only_exact_seed_fixed_policy_starting_option_evidence"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,304 @@
+{
+  "act_1_clear": {
+    "act": 2,
+    "bosses_cleared": [
+      {
+        "act": 1,
+        "boss": "LAGAVULIN_MATRIARCH_BOSS"
+      }
+    ],
+    "bosses_reached": [
+      {
+        "act": 1,
+        "boss": "LAGAVULIN_MATRIARCH_BOSS"
+      }
+    ],
+    "floor": 23,
+    "shop_navigation": 150,
+    "shop_visits": 2,
+    "terminal_combat_type": "normal"
+  },
+  "act_2_deliveries": 109,
+  "audit": {
+    "path": "artifacts/native-a8-combat-feedback/owner-assessment-v1/report.json",
+    "report_id": "sha256:f7c0b988feb4a18a14beed9f5a0e690e969fcc34747a0a65b82ec4c7107c7e52",
+    "sha256": "5bb5e026206cb3d1d924a0ef7ea0176107b7bd5f9a515d46ca8a51514fc6c607"
+  },
+  "by_arm": {
+    "floor": {
+      "act_1_boss_reached": 4,
+      "act_1_clear": 0,
+      "act_2_boss_reached": 0,
+      "by_initializer_mean_maximum_floor": {
+        "2": 11.375,
+        "3": 10.5
+      },
+      "completed_games": 16,
+      "mean_maximum_floor": 10.9375,
+      "shop_open_close_deliveries": 386,
+      "shop_visits": 9,
+      "terminal_combat_type": {
+        "boss": 4,
+        "elite": 5,
+        "normal": 7
+      },
+      "verified_combat_room_outcomes": {
+        "boss": {
+          "reward_reached": 0,
+          "terminal_combat_loss": 4
+        },
+        "elite": {
+          "reward_reached": 3,
+          "terminal_combat_loss": 5
+        },
+        "normal": {
+          "reward_reached": 72,
+          "terminal_combat_loss": 7
+        }
+      },
+      "wins": 0
+    },
+    "original": {
+      "act_1_boss_reached": 4,
+      "act_1_clear": 0,
+      "act_2_boss_reached": 0,
+      "by_initializer_mean_maximum_floor": {
+        "2": 11.5,
+        "3": 9.875
+      },
+      "completed_games": 16,
+      "mean_maximum_floor": 10.6875,
+      "shop_open_close_deliveries": 278,
+      "shop_visits": 10,
+      "terminal_combat_type": {
+        "boss": 4,
+        "elite": 7,
+        "normal": 5
+      },
+      "verified_combat_room_outcomes": {
+        "boss": {
+          "reward_reached": 0,
+          "terminal_combat_loss": 4
+        },
+        "elite": {
+          "reward_reached": 4,
+          "terminal_combat_loss": 7
+        },
+        "normal": {
+          "reward_reached": 69,
+          "terminal_combat_loss": 5
+        }
+      },
+      "wins": 0
+    },
+    "room": {
+      "act_1_boss_reached": 4,
+      "act_1_clear": 1,
+      "act_2_boss_reached": 0,
+      "by_initializer_mean_maximum_floor": {
+        "2": 11.0,
+        "3": 10.375
+      },
+      "completed_games": 16,
+      "mean_maximum_floor": 10.6875,
+      "shop_open_close_deliveries": 350,
+      "shop_visits": 10,
+      "terminal_combat_type": {
+        "boss": 3,
+        "elite": 4,
+        "normal": 9
+      },
+      "verified_combat_room_outcomes": {
+        "boss": {
+          "reward_reached": 1,
+          "terminal_combat_loss": 3
+        },
+        "elite": {
+          "reward_reached": 3,
+          "terminal_combat_loss": 4
+        },
+        "normal": {
+          "reward_reached": 71,
+          "terminal_combat_loss": 9
+        }
+      },
+      "wins": 0
+    }
+  },
+  "comparison": {
+    "path": "artifacts/native-a8-combat-feedback/comparison-v1/attempt-1794181821620163000.json",
+    "report_id": "sha256:75f682a8d8e3971daded69474f358a6aa98e3459926f8cbe40822558122c3ae7",
+    "sha256": "813a9679172957acb01ca9610cb45cfdd4ca2be47a557fbcf9f356e66727edca"
+  },
+  "config_id": "sha256:b8e1d303af4364a442153ee5e2c9ece116c341e710b1e202a129fd6a4dbfcf57",
+  "double_down_menus": 0,
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "local_answer_factors": 0,
+  "matched_worlds": 8,
+  "menu_families": {
+    "card_bundle_selection": 10,
+    "card_reward_selection": 276,
+    "card_selection": 181,
+    "combat_turn": 5338,
+    "event_option": 292,
+    "map_navigation": 473,
+    "native_generated_card_choice": 21,
+    "rest_site": 120,
+    "reward_claim": 769,
+    "shop_inventory": 571,
+    "shop_room": 536,
+    "treasure_room": 54
+  },
+  "native_deliveries": 8641,
+  "native_game_launches": 0,
+  "optimizer_updates": 0,
+  "originals_and_all_six_comparison_states_unchanged": true,
+  "preparation_id": "sha256:d08273cd3bd7765cefbca475e728c4b943dc867af13a1a2b35b6900fbd7cdff4",
+  "previous_model_only_training_act_1_clears": 0,
+  "previous_model_only_training_games": 48,
+  "promotion_allowed": false,
+  "release_gates": {
+    "official_live_qualification_granted": false,
+    "promotion_allowed": false
+  },
+  "report_id": "sha256:b21e5fd9d3b98ba31555eed3ab6c4bbeaa3e6f3e0e111daeaf33c96857e68691",
+  "resources": {
+    "path": "artifacts/native-a8-combat-feedback/comparison-v1-1794181821620163000-resources.json",
+    "report_id": "sha256:4c41d8f62cfa289abee057b8bd90752e4eb2df99c76544f7a7ccb14a2c7525e5",
+    "sha256": "6aadd0c835315b77f715661db9a831d2e89028da68a6fe5b082026ebfc17b861"
+  },
+  "room_minus_floor": {
+    "first_choice_divergences_with_same_menu": {
+      "001-p2": {
+        "act": 1,
+        "choice_number": 178,
+        "family": "map_navigation",
+        "floor": 5
+      },
+      "001-p3": {
+        "act": 1,
+        "choice_number": 61,
+        "family": "combat_turn",
+        "floor": 6
+      },
+      "002-p2": {
+        "act": 1,
+        "choice_number": 26,
+        "family": "card_reward_selection",
+        "floor": 2
+      },
+      "002-p3": {
+        "act": 1,
+        "choice_number": 60,
+        "family": "combat_turn",
+        "floor": 4
+      },
+      "003-p2": {
+        "act": 1,
+        "choice_number": 61,
+        "family": "combat_turn",
+        "floor": 7
+      },
+      "003-p3": {
+        "act": 1,
+        "choice_number": 58,
+        "family": "combat_turn",
+        "floor": 3
+      },
+      "004-p2": {
+        "act": 1,
+        "choice_number": 13,
+        "family": "combat_turn",
+        "floor": 2
+      },
+      "004-p3": {
+        "act": 1,
+        "choice_number": 38,
+        "family": "combat_turn",
+        "floor": 3
+      },
+      "005-p2": {
+        "act": 1,
+        "choice_number": 1,
+        "family": "event_option",
+        "floor": 1
+      },
+      "005-p3": {
+        "act": 1,
+        "choice_number": 39,
+        "family": "combat_turn",
+        "floor": 3
+      },
+      "006-p2": {
+        "act": 1,
+        "choice_number": 32,
+        "family": "card_reward_selection",
+        "floor": 3
+      },
+      "006-p3": {
+        "act": 1,
+        "choice_number": 5,
+        "family": "combat_turn",
+        "floor": 2
+      },
+      "007-p2": {
+        "act": 1,
+        "choice_number": 13,
+        "family": "combat_turn",
+        "floor": 2
+      },
+      "008-p2": {
+        "act": 1,
+        "choice_number": 45,
+        "family": "combat_turn",
+        "floor": 3
+      },
+      "008-p3": {
+        "act": 1,
+        "choice_number": 33,
+        "family": "reward_claim",
+        "floor": 2
+      }
+    },
+    "first_divergence_median_floor": 3,
+    "floor_deltas_in_seed_then_initializer_order": [
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -8,
+      0,
+      0,
+      -2,
+      0,
+      1,
+      0,
+      0,
+      6,
+      0
+    ],
+    "higher_same_lower_floor": [
+      2,
+      11,
+      3
+    ],
+    "identical_saved_input_and_choice_paths": 1,
+    "unmatched_successor_before_different_choice": 0
+  },
+  "schema_version": "native-a8-combat-feedback-result-evidence-v1",
+  "sealed_files": 2880,
+  "sealed_games": 48,
+  "shared_profile_unchanged": true,
+  "status": "matched_combat_feedback_independently_verified",
+  "trial_abandon_modals": 0
+}

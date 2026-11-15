@@ -1,0 +1,68 @@
+{
+  "schema_version": "native-interface-controls-evidence-v1",
+  "source_live_report_id": "sha256:0cc1886ac87591c932aa53aab93b34b9b735bf2d50fb5a3f5825748db78fd1cf",
+  "scope": "saved_public_contract_routing_and_short_live_delivery_not_exhaustive_mechanics_or_strength",
+  "environment_id": "sha256:7b5931accf04766d889f89b54e17b23faabd596f42b6eb36ac179ef11ec1f7dc",
+  "offline_report_id": "sha256:bb73ece1627c61aba3ec1b3bc34ae3a027f20ec7fcd7e712a15ef32d4f6b3de7",
+  "live_control_report_id": "sha256:8078bae0a7674a64296594eee3e530fef7221c2d3dc899339780f32864239b27",
+  "verification_report_id": "sha256:e3ea8a32be3a27ff8fa772cc9bb09fd9a8a64b584d63f9d03a6822bbbc2c50d5",
+  "saved_frames": 778,
+  "converted_frames": 778,
+  "repaired_old_converter_failures": 2,
+  "declared_surface_kinds": 24,
+  "structural_policy_and_terminal_envelopes": 20,
+  "presentation_kinds_with_separate_handlers": 4,
+  "generated_fault_or_preservation_mutations": 38,
+  "passed_mutations": 38,
+  "frozen_input_probes": 1586,
+  "passed_frozen_input_probes": 1586,
+  "protected_prior_files": 1644,
+  "offline_game_launches": 0,
+  "new_live_prefix_starts": 2,
+  "live_policy_deliveries": 8,
+  "independently_reconstructed_deliveries": 8,
+  "game_apps_created": 0,
+  "optimizer_updates": 0,
+  "original_full_weights_and_Adam_unchanged": true,
+  "repository_tests_passed": 2549,
+  "repository_tests_skipped": 0,
+  "strict_type_checked_files": 573,
+  "full_input_equivalence": false,
+  "checkpoint_promoted": false,
+  "main_validation_started": false,
+  "main_preflight_passed": true,
+  "resource_measurements": {
+    "offline": {
+      "wall_seconds": 16.136188457952812,
+      "cpu_seconds": 15.307168906000001,
+      "peak_resident_memory_bytes": 247529472,
+      "final_storage_bytes": 6895217
+    },
+    "short_control": {
+      "wall_seconds": 41.45387337496504,
+      "cpu_seconds": 25.044221309999998,
+      "peak_resident_memory_bytes": 1180270592,
+      "final_storage_bytes": 7116806
+    },
+    "verification": {
+      "wall_seconds": 3.9600727499928325,
+      "cpu_seconds": 3.0377366279999998,
+      "peak_resident_memory_bytes": 139149312,
+      "final_storage_bytes": 10432
+    },
+    "repository": {
+      "wall_seconds": 143.95175029197708,
+      "cpu_seconds": 132.78201602000004,
+      "peak_resident_memory_bytes": 435306496,
+      "final_storage_bytes": 0
+    }
+  },
+  "remaining_work": [
+    "semantic_full_input_layout_mapping",
+    "targeted_unobserved_interface_effects",
+    "protocol_status_and_transition_coverage",
+    "full_checkpoint_compatibility_gate"
+  ],
+  "current_guide": "docs/native-interface-controls.md",
+  "explicit_Node_and_prototype_tests_passed": 123
+}

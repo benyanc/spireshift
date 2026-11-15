@@ -1,0 +1,9 @@
+{
+  "schema_version": "native-selection-effects-config-v1",
+  "run": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-runtime-gap-run-v1.json",
+    "id": "sha256:67b26dd3122b96cf2c1c75275917e2b5482a71c95053c85a51d1e5898a1ab5e6"
+  },
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/selection-effects-v4",
+  "seed_offset": 400
+}

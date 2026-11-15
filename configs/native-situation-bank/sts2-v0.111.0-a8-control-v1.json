@@ -1,0 +1,53 @@
+{
+  "cohorts": [
+    "fit-p2-unchanged-r01"
+  ],
+  "entry_sha256": {
+    "build-native-situation-bank-v1.py": "195756541abd4d3f315946097ee7fdc855e4b8f982c05d5d7e8a80ebe60c8ab2",
+    "build-native-situation-bank-v1.sh": "52ea62a6717803e028daa7c7a74522d0049c823614e63a2bc0bd91a88a2a63ac"
+  },
+  "implementation_sha256": {
+    "native_inventory_credit_features.py": "86da4b74f3a1030cdc9f59a871c99402da8d47d1673871c79f3d00a27a6d2869",
+    "native_situation_bank.py": "38eabf20ed6e51d911211659dfbd4dbd6319f798a927893d0cfc7c0c989bea44",
+    "native_situation_features.py": "8beddaed0970d9177ce06ec104ddb40852ad6d02ab22e232a32847bf494608cc",
+    "native_situation_resolve.py": "852ef5df8dbea4547008a0666e6e0194a8b1d5fffa5f9b84ffc4a3c84c82473d",
+    "native_situation_selection.py": "0a97c025d1e2bed6cc9d680b73073094c4c2c2695c3c574ded120fb9deda462d",
+    "native_situation_sources.py": "73a66f5f3cb52ff8df706cc5388cdfb018751446a18159032dd53c023e176295"
+  },
+  "protected_run_recipe": {
+    "path": "configs/native-experience/sts2-v0.111.0-a8-comparison-v1.json",
+    "sha256": "68bce44c7576eb13ffb4dce43df0ea73fec43d328a9ae3974e038fbfcaba496e"
+  },
+  "protection_report": {
+    "id": "sha256:6715be7d04445f226aab3cc266e54ee26a8ddbf58b84021cf47f0e00595d4088",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-control-v1/report.json"
+  },
+  "sampling_limits": {
+    "per_episode_bucket": 2,
+    "per_split_family": 32,
+    "per_split_inventory_bucket": 2,
+    "per_world": 12,
+    "per_world_family": 2,
+    "split_sizes": {
+      "fit": 192,
+      "validation": 64
+    }
+  },
+  "schema_version": "native-situation-bank-config-v1",
+  "session_limits": {
+    "cpu_seconds": 240,
+    "resident_memory_bytes": 1000000000,
+    "storage_bytes": 250000000,
+    "wall_seconds": 240
+  },
+  "source_audit": {
+    "id": "sha256:c6b4023b49da75f99587272fd17a1751673b1ac3c231d956710432b2e7168c79",
+    "path": "artifacts/native-structured/comparison-audit-v1/report.json"
+  },
+  "source_report": {
+    "id": "sha256:a8ecf0239aab0ff4cca0a0ee9af189b7159bc94df89765fc3029231d96142d3a",
+    "path": "artifacts/native-structured/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "stage": "short_control",
+  "workspace": "artifacts/native-situation-bank/sts2-v0.111.0-a8-control-v1"
+}

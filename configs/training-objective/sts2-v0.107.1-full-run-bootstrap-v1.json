@@ -1,0 +1,30 @@
+{
+  "schema_version": "full-run-training-objective-v1",
+  "training_objective_id": "full-run-progress-bootstrap-v1",
+  "stage": "progress_bootstrap",
+  "evaluation_objective": {
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "constraint": "cpu_time_per_run",
+    "whole_run_budget": 128,
+    "auxiliary": ["combat_survival", "act_completion", "floor_reached", "terminal_hp"],
+    "auxiliary_reward_allowed": false
+  },
+  "scope": {
+    "ruleset_manifest_id": "sha256:cd6340f6df24d0a279b10ed407a26681a160fb231aff727be93f38c280f2a41f",
+    "character": "ironclad",
+    "ascension": 0
+  },
+  "progress": {
+    "total_acts": 3,
+    "floor_scale": 16,
+    "loss_progress_weight": 0.25
+  },
+  "discount_factor": 1.0,
+  "population_ranking": "victory_rate_then_auxiliary_progress_then_completion_rate",
+  "graduation": {
+    "minimum_train_victory_seeds": 3,
+    "minimum_development_victory_seeds": 3,
+    "minimum_development_runs": 64
+  }
+}

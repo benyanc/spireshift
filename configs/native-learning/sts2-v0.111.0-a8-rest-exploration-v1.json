@@ -1,0 +1,271 @@
+{
+  "schema_version": "native-rest-exploration-config-v1",
+  "stage": "bounded_rest_exploration",
+  "arms": [
+    {
+      "name": "standard",
+      "uniform_weight": 0.0
+    },
+    {
+      "name": "rest_mix20",
+      "uniform_weight": 0.2
+    }
+  ],
+  "training_seeds": [
+    2,
+    3
+  ],
+  "starting_round": 56,
+  "starting_training_games": 1792,
+  "rounds": 4,
+  "batch_games": 32,
+  "chunk_games": 8,
+  "holdout_games": 64,
+  "checkpoint_selection": "all_current_final_states_no_selection_or_early_stopping",
+  "evaluation_uniform_weight": 0.0,
+  "invocation_wall_seconds": 7200,
+  "session_limits": {
+    "wall_seconds": 900,
+    "cpu_seconds": 1800,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000
+  },
+  "players": [
+    {
+      "numerical_seed": 2,
+      "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-2-round-056-fit/state.json",
+      "sha256": "140a8583a108719817d2947b0e4ba1a80a65d70c808bb2d74a46959a9453547e",
+      "model_id": "sha256:378982ceaff36d32e3d6cf522bfac4e6097102045ba9139f016e663e9c70fdcf",
+      "state_id": "sha256:bfbbb5799cb0d0310adc5916042fdd9191dcce77c3efcb12b6ccacc4ca00fa61",
+      "optimizer_steps": 5268,
+      "round": 56,
+      "scheduled_training_games": 1792
+    },
+    {
+      "numerical_seed": 3,
+      "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-3-round-056-fit/state.json",
+      "sha256": "b42ea3c6a582bae206d2a74985eac21693b5e773a70620f4691406c45e932734",
+      "model_id": "sha256:aca75dcfc2170c52188992c6a9ad311bdb4ad9ed927087338e860a3b8d0e6f67",
+      "state_id": "sha256:f6d338280d0897ad0b7b39ef23cbe3a035ca0a173e251ee6382603dd55aea883",
+      "optimizer_steps": 5589,
+      "round": 56,
+      "scheduled_training_games": 1792
+    }
+  ],
+  "policy_contract": "public_shop_navigation_with_rest_uniform_mixture_v1",
+  "selection_protocol": "public_ordered_card_subset_cursor_v1",
+  "workspace": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1",
+  "source_config": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-runtime-continuation-v1.json",
+    "id": "sha256:bf09911186e52a1644358f8d45954043e387d1e704563fa35f7647a0c62ee46c"
+  },
+  "source_report": {
+    "path": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-continuation-v1/report.json",
+    "id": "sha256:3fdaf8772da72f9893c3f543711026001a79b65118a094d2b4fc71efbd383197"
+  },
+  "qualified_parent": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-input-normalized-v1.json",
+    "id": "sha256:c80020346b5c76382cece3fe6c219a669748578ce7f5b6fa7d7d3194649dd5c6"
+  },
+  "selection_effects": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/selection-effects-v4/report.json",
+    "id": "sha256:06a260493a673522d30dd0c207992e0aec8d25038e918b51f60afde08ca48d99"
+  },
+  "seed_manifest": {
+    "path": "manifests/splits/sts2-v0.111.0-native-a8-rest-exploration-comparison-v1.json",
+    "id": "sha256:1a00eb1a2690d0cd875455f0f4737cc4bb98350b36873abe18aca2d4bef5a05d"
+  },
+  "excluded_seed_manifests": [
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-confirmation-control-v1.json",
+      "id": "sha256:3c0d9dd51966c0f0db828772f74516e1c5cfa8c049d26971acb016202738b84b"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-chunks-control-v2.json",
+      "id": "sha256:393a34e569ebf5315d881835045cb2712c7edc58399d89d68f7da4771dfed493"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-comparison-v1.json",
+      "id": "sha256:c9364cd1918b76d4e1112c38bbbfa58139bb36d93d5182613f7d855d9473f6fc"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-control-v1.json",
+      "id": "sha256:6b24d66bae710474e474e14e3e5d08f55877ee784c5820515ed23a629218d476"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-fresh-pair-v2.json",
+      "id": "sha256:7153469ff5186285706355791b76f6e2aedef74a9683d83db50fc521b5fdbb9b"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-continuation-control-v1.json",
+      "id": "sha256:aefcbb3350d48c49a2052defa2ec366ed78f866d0d33a120a67a0db87a479e4a"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-credit-v1.json",
+      "id": "sha256:925532fff4966a5237ab757037088768391a097271f8ca5dbfd8d050f4cb2b33"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-gradient-pool-v1.json",
+      "id": "sha256:01545fb0146a74c7085ebca1e23aeadb5756f5565ac331297c1c7c55aad76540"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-gradient-recovery-v1.json",
+      "id": "sha256:e96f91d082f016aaaf8a045713db9363ba7532001163c9107d54ab40d18e41e4"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-normalization-v1.json",
+      "id": "sha256:a54584561300c21311ffea3f9035b0f385b6b236fd2f0279e0b429c111417562"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-optimizer-control-v1.json",
+      "id": "sha256:85a0e8a0d0766fa15e3917a923c23a0834cf4357cca1b8a8f4e3f125dccc2a16"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-optimizer-learning-v1.json",
+      "id": "sha256:4722fe9d6b0755a8e5f97e88c306a4fdda545aa7998870b1e59a1fe68c3b13ef"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v1.json",
+      "id": "sha256:362d42b28bcd49cdbbe00702c9cdf975f3acb2888648df0cfd60e2972a95a82d"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v4.json",
+      "id": "sha256:7f2af3c46a204d0a669a2e478f83a3b4e3b832d36abb16730bfd153df1eab0f5"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v5.json",
+      "id": "sha256:5365e08611f237aa1e310a31a39fa2df58d4a12681329422ccb1e2bea72c9aed"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v6.json",
+      "id": "sha256:359f15a6de12c7592ac61cf21c2ce1a3d7c7d5353c83a1cb7c07b95f8718c677"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v7.json",
+      "id": "sha256:28008583d087bc665175be7dfd052364107db1d31c65c72be80cce6b620217af"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v8.json",
+      "id": "sha256:644a24da50f326cd4c97940fb663a41dad482b61a59c1393e5379349abb817d8"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-policy-confirmation-v1.json",
+      "id": "sha256:9b95791c9307624f5e2d6f439a6f6042b3dafe318830998d3d6d786a8eedd772"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-runtime-continuation-v1.json",
+      "id": "sha256:44ebf4f2ca8c70466543ebc556a611fa928a667e330f8656091f6c6e208b0801"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-runtime-control-v1.json",
+      "id": "sha256:01b8450acf6b2df2cacaba3d4f2cafde2d190cdd10ea627b078ee55ebe467dcf"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-shop-continuation-v1.json",
+      "id": "sha256:c54f6fbb04d812dc67b59e09e29ee2cdf61d56002e285dae8f1f0c219eb4dfed"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-shop-control-v1.json",
+      "id": "sha256:896c58b4c42538c1af7f136c24b8d8a1f336098eb3ef10632dbfce4a1503a410"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-standard-continuation-v1.json",
+      "id": "sha256:7240db06ab2bded9c5bc3258b47a5ff56435f235e080f43556c42acba0f8f807"
+    },
+    {
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-rest-exploration-control-v1.json",
+      "id": "sha256:374141a53406994d2aad083b2630f7aa212a434a97c1ef7ae04af1a52510f788"
+    }
+  ],
+  "implementation_sha256": {
+    "engine_projection_cache.py": "08260155da26b01de380fa55e72e092c98122a3b4a76e957e81c86d11164be43",
+    "engine_learning.py": "85e300466d103bcb3ccf48c7b6bedb55d40e6d837179b3949f1459da3f3b68e6",
+    "engine_learning_admission.py": "d29891e745e9e2778e441bd782d6c2f4abf6ac2e41b7feb3a325178456b68af5",
+    "engine_mechanics_admission.py": "6f2447d18ecee61c49f40b5a094c2cd08fff16e872c702952e011fe851152008",
+    "engine_potion_checks.py": "b7eb0c3b00e5a325db634521a2b52843917473fad013664fa080b22dabb45e51",
+    "engine_potion_queue_checks.py": "a192f0f4be2e061cf4e9e52db519371ff566da1ec566e2c1fc678133840b936b",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "engine_experience_audit.py": "dcb9d2fa3856793ce4e491267e7aa2e58c5c187e2e18a9b6cb956d19c79ea079",
+    "engine_worker.py": "5ca26ab96913bd3257c9e3766373b9219a3412d7ed30ae7b986b3deb9508cf56",
+    "engine_worker_qualification.py": "e6626b9d7dc719432d496896cfe76d68fd19fcbc5d4dffa6d91fc9b52d435367",
+    "engine_run.py": "005794120b8f9f21217cdbc51a200d35d0ea34cf6388c99cd3dd1daba32704a4",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "native_credit_training.py": "8e53505899626019e99bf3eb569e2d2c8847eb5c531613aec2c71f82d729131b",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_normalization_admission.py": "b3aecd8b81187a9c73a2e560f71a57fd55c7555ee5fc7e78e955c69d08e30f2d",
+    "engine_experience_stream.py": "32d1386cd8602d43c7ccceaafcc2d944d8c1e1330bed50fc52afbb1eb097ca1a",
+    "native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "native_context_game.py": "327075c2d4073994fecd4cd003e2b03223330b86b71a65d5e14e3a7ad2d37326",
+    "native_context_trial.py": "ed9d73aadb7949b806d6990936743be143e7c7797184fc9b3c4168b49e8a27c4",
+    "native_context_cache.py": "e254039f36552a196785dfec11c7fa0f2136e506e00ebcbd0525515caf64fa74",
+    "native_context_journal.py": "6a49c02c640dc1fe2c28e5726d9b80f940182c993279105494bcafe205cca89e",
+    "native_context_resume.py": "e0302428d277647a1a17e605091b894307bf29b16750f711a565b26d53786947",
+    "native_context_reuse.py": "61cfb93d959213a4077f80c94744219582198f9fcc44f0d506889df704a9fc9a",
+    "native_gradient_checks.py": "1265c0319cbcf5ec1c0cb22cdbdb54ff01e2e24c42c12982d7c1dc09e91e6ff8",
+    "native_optimizer_probe.py": "76309ef78228c27c48f1e96af3ebe9a9f7670bc9e44a13f25fd8256af76a3e1b",
+    "native_compact_training.py": "de301779281eea3af437f243be4081bcbb5e542b3df0337786ac1109bc921080",
+    "native_optimizer_trial.py": "3db3231a7a30a900c4d446d3e3e025b007ccf1aaabc5308011ead7b4565bda4a",
+    "native_confirmation_metrics.py": "8e6e276540df80076d2cfedae98b19f646d439d0a47d1624df2caeafe1e65269",
+    "native_policy_confirmation.py": "c6dd10bdc48173415e725a5bd2fff934dc420e2d7a32e87bdddeb297b7b3bb0e",
+    "native_continuation_plan.py": "06c83952dbb9e5694144c260e64f1de7b930b2a2906d78486136b20becc4c052",
+    "native_policy_continuation.py": "b46701ad98b38968a4089730f858ea025500bb1b0dd4c6efa136283ee4be13fd",
+    "native_shop_policy.py": "c4517e3513e57b42a642762c583600419a4c2d738d49638a799f2e6f57599156",
+    "native_shop_training.py": "0abbf76e3e1dafcca4a52875c46e5ccfbc56bad55a1cb7a2a6395c561c7c665f",
+    "native_shop_collector.py": "f37b49f775e7c97f7ee40e4d1c1bca4ea538683b9a0f061550e4781585a1d77a",
+    "native_shop_execute.py": "d2c54a94c6948375a3287d293a89d4adfee0ec2abe727839c9067bf328264912",
+    "native_shop_recovery.py": "e295fe8a94d15278a38c1c7d3af9fac67e44056b943d51741bfd12db186749ab",
+    "native_shop_plan.py": "804129e636cb4d9926e95552f2efe3debc148807eeb7e89d339a315350c142f2",
+    "native_shop_continuation.py": "b7870e2ef4805f15687db7eb9d2e92a270057b204db86d8ae0bf7128c8c825ab",
+    "engine_runtime_gaps.py": "0b821cb5df7c4e16cb696dd9dfcd67f64fc618fa41e17b046c12ca73d0e98a5b",
+    "native_runtime_admission.py": "a7b3c6002d18328cd3899a24dc9dccc2b7d1137285c2f4b7a2d3fae3aa951106",
+    "native_runtime_execute.py": "5ace367a2b136f80ded06d7e55713d3ef754df34c382a2fe67e175e021661e12",
+    "native_runtime_plan.py": "b7ba552e612269b8dd050c5a3ffbd2596c3b63331cd78db0d9af7fd6e11634c0",
+    "native_runtime_continuation.py": "929d91037e940ee0afcff7a98576f18c8d015761c4a71e354b539343b03d55c0",
+    "engine_selection_worker.py": "f0f3352b11f4508843b4ccbc51d2309f8978b634cab26765b6666144de2bf93f",
+    "engine_selection_checks.py": "a34522446e8ef9b321052981b6088b13f37ff7ff58830ba2f51aed980e28a844",
+    "engine_selection_audit.py": "81f2fa555e88d90f9f4be7ebcdefee2d8791eaddf7e84e2bb80f277fecf52f1a",
+    "native_rest_exploration.py": "9945d714a19bf5c60b7ef52083b19d20169b09cf52583c340c33e6e58a990091",
+    "native_exploration_math.py": "30ffd7f4d050edaa1d31938a9f04dce87bd58753b61b0b183c439b2683ea4eb2",
+    "native_exploration_training.py": "0b11db2f74d5999977033ddb969be43b53841290d7edff0a3e8d1187c6ba90ab",
+    "native_exploration_collector.py": "2da266ceb189630c807afdddad093a034eac313a07b26a47755aab6f04e8cc4a",
+    "native_exploration_plan.py": "7160ddde5491ecec773aa3bb7c6111ccfc3d4ab95c4a72811b78f0b30291eac8",
+    "native_exploration_admission.py": "8400a800316294c27666a270e78f8c77e9e0128293d28ba3f132a929022e805c",
+    "native_exploration_execute.py": "3686f6855fd94bba7ad1d821d6e8abbee198ab5806f71f72ce9e69482492ff35",
+    "native_exploration_comparison.py": "ec5056ed004aa9266367ec9c715b46817662b57c11269e2b747fbea03b5f0e2d"
+  },
+  "entry_sha256": "1013803d65b01b2d2e535202932d67a502231b7b8efd9de89fa78270bc768392",
+  "worker_helpers_sha256": {
+    "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-native-worker-v10.mjs": "29651dd7bc7d79e29d5fbaa2f8e645e3c6319a5b363354508b535861fb955730",
+    "engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+  },
+  "verifier_sha256": "b9988e988d6405a51a469211f1036268186b437b90a81bceaabd8321cdbb9535",
+  "control_report": {
+    "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-control-v1/report.json",
+    "id": "sha256:a493042487d272fec7ac8156c55e0bd327dbc83ac1923a425a2ad1553fa8f656"
+  }
+}

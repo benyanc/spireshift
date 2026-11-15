@@ -1,0 +1,319 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "control": {
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "config_id": "sha256:2a1c4003bdc072b8e72cf16777b90d11c51576d43546de676ec49c96c1d6dbe8",
+    "duplicate_traces_match": true,
+    "failed_games": 0,
+    "fixed_players": 2,
+    "game_apps_created": 0,
+    "independent_control_seeds": 2,
+    "native_attempts": 12,
+    "noncombat_matching": {
+      "complete_player_seed_pairs": 4,
+      "different_public_states_may_legitimately_choose_different_actions": true,
+      "identical_public_inputs_with_identical_choices": 50,
+      "shared_noncombat_draw_keys": 207,
+      "valid": true
+    },
+    "path": "artifacts/native-combat-behavior/sts2-v0.111.0-a8-control-v1/report.json",
+    "primary_games": 8,
+    "production_optimizer_steps": 0,
+    "report_id": "sha256:6fb45507bdb5176a2be46854f5a5b2ec636173e8c4d5ea8c63010731d21840f7",
+    "short_correctness_control_not_strength_evidence": true
+  },
+  "date": "2026-10-20",
+  "expected_minutes": [
+    20,
+    35
+  ],
+  "game_apps_created": 0,
+  "main": {
+    "arm_order_counterbalanced": true,
+    "arms": [
+      "sampled",
+      "greedy"
+    ],
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20261020,
+    "config_id": "sha256:dc01202b19253fa8fbc7bf74fb58f1e2d9b265856ba73c640d33a37e35aeb899",
+    "control_seeds_excluded": 2,
+    "episode_wall_seconds": 120,
+    "failure_allowance_per_player_arm": 2,
+    "failures_and_unattempted_retain_original_denominator": true,
+    "fixed_players": 2,
+    "fresh_development_game_seeds": 64,
+    "historical_seed_manifests_excluded": 26,
+    "information_scope": "current_public_state_only_no_search",
+    "maximum_decisions_per_game": 4096,
+    "models_and_Adam_states_read_only": true,
+    "native_attempt_upper_bound": 256,
+    "noncombat_different_public_states_may_choose_differently": true,
+    "noncombat_randomness_separated_by_public_room_family_visit": true,
+    "ordinary_PPO_eligible": false,
+    "path": "configs/native-evaluation/sts2-v0.111.0-a8-combat-behavior-comparison-v1.json",
+    "players": [
+      {
+        "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+        "numerical_seed": 2,
+        "optimizer_steps": 5658,
+        "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+        "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+        "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+      },
+      {
+        "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+        "numerical_seed": 3,
+        "optimizer_steps": 6045,
+        "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+        "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+        "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+      }
+    ],
+    "pooled_bootstrap_resamples_game_seeds_jointly_across_fixed_players": true,
+    "rng_contract": "world_room_family_visit_separate_combat_noncombat_v1",
+    "seed_manifest": {
+      "id": "sha256:61d235ff4dcbcfaaecd3540bbfd60a9e5b1307b9ba7f42899d048036643cd88a",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-combat-behavior-comparison-v1.json"
+    },
+    "session_limits": {
+      "cpu_seconds": 1800,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 900
+    },
+    "started": false,
+    "temperature": 0.8,
+    "uncertain_work_automatically_retried": false,
+    "whole_run_cpu_ceiling_seconds": 128,
+    "workspace_created": false
+  },
+  "main_parameters_fixed_before_control_except_passed_control_and_audit_ids": true,
+  "no_push_or_GitHub_Actions": true,
+  "observed_control_coverage": {
+    "behavior_counts": {
+      "deterministic_navigation": 10,
+      "greedy_combat": 660,
+      "sampled_combat": 718,
+      "sampled_noncombat": 665
+    },
+    "exhaustive_mechanics_proof": false,
+    "family_ownership_counts": [
+      {
+        "combat_owned": false,
+        "decisions": 66,
+        "family": "card_reward_selection"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 22,
+        "family": "card_selection"
+      },
+      {
+        "combat_owned": true,
+        "decisions": 9,
+        "family": "card_selection"
+      },
+      {
+        "combat_owned": true,
+        "decisions": 1365,
+        "family": "combat_turn"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 84,
+        "family": "event_option"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 147,
+        "family": "map_navigation"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 4,
+        "family": "native_generated_card_choice"
+      },
+      {
+        "combat_owned": true,
+        "decisions": 4,
+        "family": "native_generated_card_choice"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 44,
+        "family": "rest_site"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 169,
+        "family": "reward_claim"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 64,
+        "family": "reward_completion"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 52,
+        "family": "shop_inventory"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 9,
+        "family": "treasure_chest"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 5,
+        "family": "treasure_completion"
+      },
+      {
+        "combat_owned": false,
+        "decisions": 9,
+        "family": "treasure_relic_selection"
+      }
+    ],
+    "nested_combat_selections": 13,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-combat-behavior/checks-v1/observed-coverage.json",
+    "public_decisions": 2053,
+    "report_id": "sha256:1ba1a5eb327a383dced9ddcb213d8f2e5ddaa4e4a5b2ea56b365a13a7966cd22",
+    "saved_audit_id": "sha256:72b785c466f5c04831c704bcb6f71385a824f8f60fafe09ebe6355c3969da8fc",
+    "schema_version": "native-combat-behavior-observed-coverage-v1",
+    "source_report_id": "sha256:6fb45507bdb5176a2be46854f5a5b2ec636173e8c4d5ea8c63010731d21840f7"
+  },
+  "owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-combat-behavior-v1.sh",
+  "preflight": {
+    "cached_control_exact": true,
+    "config_id": "sha256:dc01202b19253fa8fbc7bf74fb58f1e2d9b265856ba73c640d33a37e35aeb899",
+    "control_audit_id": "sha256:72b785c466f5c04831c704bcb6f71385a824f8f60fafe09ebe6355c3969da8fc",
+    "control_report_id": "sha256:6fb45507bdb5176a2be46854f5a5b2ec636173e8c4d5ea8c63010731d21840f7",
+    "control_source_files_verified": 35038,
+    "main_bound_source_files_verified": 35041,
+    "main_plan": {
+      "fixed_players": 2,
+      "fresh_game_seeds": 64,
+      "native_attempt_upper_bound": 256,
+      "new_games": 0,
+      "optimizer_steps": 0,
+      "scored_games": 256,
+      "status": "fresh_combat_behavior_plan_only"
+    },
+    "main_workspace_not_created": true,
+    "native_hosts_disabled": true,
+    "new_games": 0,
+    "only_passed_control_ids_changed_from_template": true,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-combat-behavior/checks-v1/main-preflight.json",
+    "players": [
+      {
+        "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+        "numerical_seed": 2,
+        "optimizer_steps": 5658,
+        "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+        "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+      },
+      {
+        "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+        "numerical_seed": 3,
+        "optimizer_steps": 6045,
+        "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+        "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+      }
+    ],
+    "protected_old_files_verified": 63176,
+    "report_id": "sha256:84293e99cbc49f13c690f9b4aef5668d112844f02159fb5276a25ec9e14a10ad",
+    "schema_version": "native-combat-behavior-main-preflight-v1"
+  },
+  "production_optimizer_steps": 0,
+  "report_id": "sha256:1caf044d0bc0a16981e990514b4c1360c6eedd9fdbf6ad6da8e0dd68708e546c",
+  "repository_check": {
+    "CSharp_protocol_verified": true,
+    "formatted_files": 569,
+    "lint_passed": true,
+    "new_tests": 33,
+    "strict_type_files": 414,
+    "tests_passed": 2058,
+    "tests_skipped": 4
+  },
+  "resources": {
+    "control_preflight": {
+      "cpu_seconds": 3.518960722,
+      "final_storage_bytes": 0,
+      "path": "artifacts/resources/native-combat-behavior-control-preflight-v1-1.json",
+      "peak_resident_memory_bytes": 119603200,
+      "report_id": "sha256:be82855a74ddd094cbb8411cb0700f248c13ced5f6939a4cb43c50f7838e7bd4",
+      "wall_seconds": 8.371421708958223
+    },
+    "main_preflight": {
+      "cpu_seconds": 38.677757042,
+      "final_storage_bytes": 2368,
+      "path": "artifacts/resources/native-combat-behavior-main-preflight-v1-1.json",
+      "peak_resident_memory_bytes": 294043648,
+      "report_id": "sha256:39c513166c2525939d1925c35b96d3f4384605fbbb2fdeff20de89511afa2193",
+      "wall_seconds": 88.94258425012231
+    },
+    "native_control": {
+      "cpu_seconds": 56.05172460199999,
+      "final_storage_bytes": 35802980,
+      "path": "artifacts/resources/native-combat-behavior-control-v1-1.json",
+      "peak_resident_memory_bytes": 398016512,
+      "report_id": "sha256:7a5307bd457dd769d4d68168e0d47a2639d06fd0378c155c3c121696458ef259",
+      "wall_seconds": 76.00337937497534
+    },
+    "preparation": {
+      "cpu_seconds": 11.793580670999999,
+      "final_storage_bytes": 13172077,
+      "path": "artifacts/resources/native-combat-behavior-preparation-v1-1.json",
+      "peak_resident_memory_bytes": 184991744,
+      "report_id": "sha256:a0790ffb5ba9018a373cfaaec10407e918413c5e282ce4f3a4982dc8fa3336aa",
+      "wall_seconds": 28.119351541157812
+    },
+    "repository_check": {
+      "cpu_seconds": 109.79713784900001,
+      "final_storage_bytes": 0,
+      "path": "artifacts/resources/native-combat-behavior-repository-check-v1-1.json",
+      "peak_resident_memory_bytes": 435634176,
+      "report_id": "sha256:24aa58f40a7c85156c8f09cb9cf0d738f65c811b58969b86cdd5f490069260dd",
+      "wall_seconds": 120.25453945901245
+    },
+    "saved_control_audit": {
+      "cpu_seconds": 22.717453212,
+      "final_storage_bytes": 665,
+      "path": "artifacts/resources/native-combat-behavior-control-audit-v1-1.json",
+      "peak_resident_memory_bytes": 200376320,
+      "report_id": "sha256:39d6d49421fdfb83d738d91c580530bcff2d0392a8bbe457feb1b9d7eb4f3a94",
+      "wall_seconds": 36.507036374881864
+    }
+  },
+  "saved_audit": {
+    "all_choices_reconstructed": true,
+    "auditor_sha256": "8de90d71c13326708b71ad64ffa2249ab28b70bbb6bac2355e905d20ada0f404",
+    "episodes_reconstructed": 12,
+    "full_states_unchanged": true,
+    "matched_noncombat_and_tables_reconstructed": true,
+    "native_delivery_semantically_reaudited": false,
+    "native_journal_bytes_verified": true,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-combat-behavior/checks-v1/control-audit.json",
+    "public_decisions_reconstructed": 2053,
+    "report_id": "sha256:72b785c466f5c04831c704bcb6f71385a824f8f60fafe09ebe6355c3969da8fc",
+    "schema_version": "native-combat-behavior-audit-v1",
+    "source_report_id": "sha256:6fb45507bdb5176a2be46854f5a5b2ec636173e8c4d5ea8c63010731d21840f7"
+  },
+  "schema_version": "native-combat-behavior-comparison-evidence-v1",
+  "status": "qualified_owner_fresh_comparison_not_started"
+}

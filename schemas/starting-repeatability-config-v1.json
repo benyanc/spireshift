@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-repeatability-config-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "starting-repeatability-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "historical_evidence_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "historical_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "historical_config": {
+      "$ref": "https://spireshift.dev/schemas/starting-option-evidence-config-v1.json"
+    },
+    "collection_config": {
+      "$ref": "https://spireshift.dev/schemas/starting-option-evidence-config-v1.json"
+    },
+    "prior_train_prefix_stop": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "prior_seed_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "bootstrap_dataset",
+              "trajectory_preference_collection"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "kind",
+          "source_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "matching_levels": {
+          "const": [
+            "encoded_context",
+            "full_menu",
+            "exact_public_state"
+          ]
+        },
+        "minimum_discovery_strict_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_discovery_majority": {
+          "type": "number",
+          "exclusiveMinimum": 0.5,
+          "maximum": 1
+        },
+        "minimum_confirmed_groups": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_confirmation_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_strong_confirmation_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "alpha": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "uncertainty_method": {
+          "const": "independent_run_hoeffding_v1"
+        },
+        "primary_level": {
+          "const": "encoded_context"
+        },
+        "primary_target": {
+          "const": "strong"
+        },
+        "stop_rule": {
+          "const": "one_cohort_no_automatic_extension"
+        }
+      },
+      "required": [
+        "matching_levels",
+        "minimum_discovery_strict_runs",
+        "minimum_discovery_majority",
+        "minimum_confirmed_groups",
+        "minimum_confirmation_runs",
+        "minimum_strong_confirmation_runs",
+        "alpha",
+        "uncertainty_method",
+        "primary_level",
+        "primary_target",
+        "stop_rule"
+      ],
+      "additionalProperties": false
+    },
+    "resource_limits": {
+      "type": "object",
+      "properties": {
+        "wall_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cpu_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "storage_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "memory_bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "wall_seconds",
+        "cpu_seconds",
+        "storage_bytes",
+        "memory_bytes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "config_id",
+    "objective_id",
+    "historical_evidence_path",
+    "historical_report_id",
+    "historical_config",
+    "collection_config",
+    "prior_train_prefix_stop",
+    "prior_seed_sources",
+    "analysis",
+    "resource_limits"
+  ],
+  "additionalProperties": false
+}

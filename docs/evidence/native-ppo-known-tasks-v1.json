@@ -1,0 +1,789 @@
+{
+  "adaptive_controller_allowed": false,
+  "arms": [
+    {
+      "final": {
+        "expected_victory": 0.5424534220709767,
+        "greedy_accuracy": 0.5,
+        "minimum_optimal_action_probability": 0.10207820748682307,
+        "optimal_expected_victory": 0.7,
+        "states": [
+          {
+            "expected_victory": 0.5042833818959063,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.898407515324236
+          },
+          {
+            "expected_victory": 0.5042833818959063,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.898407515324236
+          },
+          {
+            "expected_victory": 0.5806234622460471,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.10207820748682307
+          },
+          {
+            "expected_victory": 0.5806234622460471,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.10207820748682307
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.4806979372623651,
+        "greedy_accuracy": 0.5,
+        "minimum_optimal_action_probability": 0.07597492339628288,
+        "optimal_expected_victory": 0.7,
+        "states": [
+          {
+            "expected_victory": 0.13418871552832728,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07597492339628288
+          },
+          {
+            "expected_victory": 0.13418871552832728,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07597492339628288
+          },
+          {
+            "expected_victory": 0.827207158996403,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9240238633213436
+          },
+          {
+            "expected_victory": 0.827207158996403,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9240238633213436
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/contextual_risk-seed-0.json",
+      "sha256": "ed3a5988d72d36fd575e89cde565282aaf5c663779e3ac3d33d72a3030ab8325",
+      "synthetic_optimizer_steps": 288,
+      "task": "contextual_risk",
+      "training_seed": 0
+    },
+    {
+      "final": {
+        "expected_victory": 0.48059176157117095,
+        "greedy_accuracy": 0.5,
+        "minimum_optimal_action_probability": 0.07455273423850675,
+        "optimal_expected_victory": 0.7,
+        "states": [
+          {
+            "expected_victory": 0.13354873040732804,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07455273423850675
+          },
+          {
+            "expected_victory": 0.13354873040732804,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07455273423850675
+          },
+          {
+            "expected_victory": 0.8276347927350138,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9254493091167126
+          },
+          {
+            "expected_victory": 0.8276347927350138,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9254493091167126
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.4807468348146176,
+        "greedy_accuracy": 0.5,
+        "minimum_optimal_action_probability": 0.07662483273126895,
+        "optimal_expected_victory": 0.7,
+        "states": [
+          {
+            "expected_victory": 0.13448117472907103,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07662483273126895
+          },
+          {
+            "expected_victory": 0.13448117472907103,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07662483273126895
+          },
+          {
+            "expected_victory": 0.8270124949001642,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.923374983000547
+          },
+          {
+            "expected_victory": 0.8270124949001642,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.923374983000547
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/contextual_risk-seed-1.json",
+      "sha256": "4052409f1026c8834396fa2c93e7e48e47052520d5ebf4e51a834a8cf0a0ec59",
+      "synthetic_optimizer_steps": 288,
+      "task": "contextual_risk",
+      "training_seed": 1
+    },
+    {
+      "final": {
+        "expected_victory": 0.515605700806084,
+        "greedy_accuracy": 0.5,
+        "minimum_optimal_action_probability": 0.4599068716038665,
+        "optimal_expected_victory": 0.7,
+        "states": [
+          {
+            "expected_victory": 0.3432393401310081,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.5405318669577958
+          },
+          {
+            "expected_victory": 0.3432393401310081,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.5405318669577958
+          },
+          {
+            "expected_victory": 0.68797206148116,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.4599068716038665
+          },
+          {
+            "expected_victory": 0.68797206148116,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.4599068716038665
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.4807360668946903,
+        "greedy_accuracy": 0.5,
+        "minimum_optimal_action_probability": 0.0764785943939756,
+        "optimal_expected_victory": 0.7,
+        "states": [
+          {
+            "expected_victory": 0.13441536747728902,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.0764785943939756
+          },
+          {
+            "expected_victory": 0.13441536747728902,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.0764785943939756
+          },
+          {
+            "expected_victory": 0.8270567663120916,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9235225543736383
+          },
+          {
+            "expected_victory": 0.8270567663120916,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9235225543736383
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/contextual_risk-seed-2.json",
+      "sha256": "2f548f754290ba68bdb96c0005dce853c7332848b6a6ffed3ae51a73a291384c",
+      "synthetic_optimizer_steps": 288,
+      "task": "contextual_risk",
+      "training_seed": 2
+    },
+    {
+      "final": {
+        "expected_victory": 0.995731127879278,
+        "greedy_accuracy": 1.0,
+        "minimum_optimal_action_probability": 0.9957309472771094,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.9957309472771094,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9957309472771094
+          },
+          {
+            "expected_victory": 0.9957309472771094,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9957309472771094
+          },
+          {
+            "expected_victory": 0.9957313084814466,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9957313084814466
+          },
+          {
+            "expected_victory": 0.9957313084814466,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9957313084814466
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.07597495912286344,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.07597435207363275,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.07597435207363275,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07597435207363275
+          },
+          {
+            "expected_victory": 0.07597435207363275,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07597435207363275
+          },
+          {
+            "expected_victory": 0.07597556617209412,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07597556617209412
+          },
+          {
+            "expected_victory": 0.07597556617209412,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07597556617209412
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/delayed-seed-0.json",
+      "sha256": "690a01ace79831c0e474a9b3495a207c552bb17b655f245b8e5f9b3074c0c932",
+      "synthetic_optimizer_steps": 288,
+      "task": "delayed",
+      "training_seed": 0
+    },
+    {
+      "final": {
+        "expected_victory": 0.9928889680834659,
+        "greedy_accuracy": 1.0,
+        "minimum_optimal_action_probability": 0.9928887493465975,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.9928891868203343,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9928891868203343
+          },
+          {
+            "expected_victory": 0.9928891868203343,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9928891868203343
+          },
+          {
+            "expected_victory": 0.9928887493465975,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9928887493465975
+          },
+          {
+            "expected_victory": 0.9928887493465975,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9928887493465975
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.07662394004100143,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.07662393889224767,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.07662393889224767,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07662393889224767
+          },
+          {
+            "expected_victory": 0.07662393889224767,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07662393889224767
+          },
+          {
+            "expected_victory": 0.07662394118975517,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07662394118975517
+          },
+          {
+            "expected_victory": 0.07662394118975517,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07662394118975517
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/delayed-seed-1.json",
+      "sha256": "8f50108dda713e2dac1277dbb38b06043b4aaa2bc95a5d4cf9a6dd545144079d",
+      "synthetic_optimizer_steps": 288,
+      "task": "delayed",
+      "training_seed": 1
+    },
+    {
+      "final": {
+        "expected_victory": 0.9964954007032004,
+        "greedy_accuracy": 1.0,
+        "minimum_optimal_action_probability": 0.9964953234295373,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.9964954779768636,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9964954779768636
+          },
+          {
+            "expected_victory": 0.9964954779768636,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9964954779768636
+          },
+          {
+            "expected_victory": 0.9964953234295373,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.9964953234295373
+          },
+          {
+            "expected_victory": 0.9964953234295373,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.9964953234295373
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.07647633608733079,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.07647576470867758,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.07647690746598401,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07647690746598401
+          },
+          {
+            "expected_victory": 0.07647690746598401,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07647690746598401
+          },
+          {
+            "expected_victory": 0.07647576470867758,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07647576470867758
+          },
+          {
+            "expected_victory": 0.07647576470867758,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07647576470867758
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/delayed-seed-2.json",
+      "sha256": "80fe94215fd0b6d413e51c7f66cff75a0d07ff69cb139a3dad01c3d5c63d5629",
+      "synthetic_optimizer_steps": 288,
+      "task": "delayed",
+      "training_seed": 2
+    },
+    {
+      "final": {
+        "expected_victory": 0.4634554510637751,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.4634535414560313,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.4634535414560313,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.4634535414560313
+          },
+          {
+            "expected_victory": 0.4634535414560313,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.4634535414560313
+          },
+          {
+            "expected_victory": 0.46345736067151894,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.46345736067151894
+          },
+          {
+            "expected_victory": 0.46345736067151894,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.46345736067151894
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.07597537617811032,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.07597472127869315,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.07597472127869315,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07597472127869315
+          },
+          {
+            "expected_victory": 0.07597472127869315,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07597472127869315
+          },
+          {
+            "expected_victory": 0.07597603107752748,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07597603107752748
+          },
+          {
+            "expected_victory": 0.07597603107752748,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07597603107752748
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/immediate-seed-0.json",
+      "sha256": "34a113f0d10c49ff0e51c690c46a258f81a0d6ad505116eed79994f08b99ef4e",
+      "synthetic_optimizer_steps": 96,
+      "task": "immediate",
+      "training_seed": 0
+    },
+    {
+      "final": {
+        "expected_victory": 0.4916664566118061,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.49166598557045793,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.49166692765315423,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.49166692765315423
+          },
+          {
+            "expected_victory": 0.49166692765315423,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.49166692765315423
+          },
+          {
+            "expected_victory": 0.49166598557045793,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.49166598557045793
+          },
+          {
+            "expected_victory": 0.49166598557045793,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.49166598557045793
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.07662456588477266,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.07662454231298413,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.07662454231298413,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07662454231298413
+          },
+          {
+            "expected_victory": 0.07662454231298413,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07662454231298413
+          },
+          {
+            "expected_victory": 0.0766245894565612,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.0766245894565612
+          },
+          {
+            "expected_victory": 0.0766245894565612,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.0766245894565612
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/immediate-seed-1.json",
+      "sha256": "7f19052a4cc6de57278fc76155c27ba1cbd9eb7dbfaf469b9ea7cbd3ba9e7335",
+      "synthetic_optimizer_steps": 96,
+      "task": "immediate",
+      "training_seed": 1
+    },
+    {
+      "final": {
+        "expected_victory": 0.5087879488268747,
+        "greedy_accuracy": 1.0,
+        "minimum_optimal_action_probability": 0.5087876694937288,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.5087876694937288,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.5087876694937288
+          },
+          {
+            "expected_victory": 0.5087876694937288,
+            "greedy_optimal": true,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.5087876694937288
+          },
+          {
+            "expected_victory": 0.5087882281600206,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.5087882281600206
+          },
+          {
+            "expected_victory": 0.5087882281600206,
+            "greedy_optimal": true,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.5087882281600206
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "initial": {
+        "expected_victory": 0.07647581112549506,
+        "greedy_accuracy": 0.0,
+        "minimum_optimal_action_probability": 0.07647520757706161,
+        "optimal_expected_victory": 1.0,
+        "states": [
+          {
+            "expected_victory": 0.0764764146739285,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.0764764146739285
+          },
+          {
+            "expected_victory": 0.0764764146739285,
+            "greedy_optimal": false,
+            "high_hp": false,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.0764764146739285
+          },
+          {
+            "expected_victory": 0.07647520757706161,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": false,
+            "optimal_action_probability": 0.07647520757706161
+          },
+          {
+            "expected_victory": 0.07647520757706161,
+            "greedy_optimal": false,
+            "high_hp": true,
+            "menu_reversed": true,
+            "optimal_action_probability": 0.07647520757706161
+          }
+        ],
+        "synthetic_episodes_sampled": 0
+      },
+      "path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/immediate-seed-2.json",
+      "sha256": "664acdff18cbae6ccc236cc54c3c41e6915473a8c8db5a61589121315293d575",
+      "synthetic_optimizer_steps": 96,
+      "task": "immediate",
+      "training_seed": 2
+    }
+  ],
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "checks": {
+    "all_planned_arms_complete": true,
+    "all_predeclared_learning_thresholds": false,
+    "frozen_actor_and_performance_unchanged": true,
+    "hp_removed_control_at_most_unconditional_optimum": true
+  },
+  "claim_scope": "synthetic_terminal_only_tasks_with_native_numerical_learner_not_STS2_skill",
+  "complete_synthetic_episodes": 18688,
+  "config_id": "sha256:d2980d6da948d7a54c6797ff11b9ff8dbf35ad8642d2ec90a676796b62916a7f",
+  "config_path": "configs/native-controls/ppo-known-tasks-v1.json",
+  "evidence_id": "sha256:45a53991db087d32b3dbea0e61e309792e4e7e45e4ee9fa718ce0bd976d93bc2",
+  "games_launched": 0,
+  "learning_control_pass": false,
+  "native_episodes_opened": 0,
+  "production_optimizer_steps": 0,
+  "report_id": "sha256:c0743ca420d58fdaae3c44db9cdd4b9599309a34cf3e84a3c677bacb2bca84a2",
+  "report_path": "artifacts/synthetic-learning/native-ppo-known-tasks-v1/report.json",
+  "resource_path": "artifacts/resources/native-ppo-known-tasks-v1-attempt-1.json",
+  "resource_report_id": "sha256:8b76628e05f4f24797d61c6272c3acd04bf088ac277e6b5c9cad8bf2ff73ef60",
+  "resources": {
+    "cpu_seconds": 33.719415019,
+    "final_storage_bytes": 4112805,
+    "peak_resident_memory_bytes": 121372672,
+    "wall_seconds": 34.09030558296945
+  },
+  "running_native_study_sources_unchanged": {
+    "engine_experience.py": true,
+    "engine_experience_audit.py": true,
+    "engine_learning.py": true,
+    "engine_learning_admission.py": true,
+    "engine_mechanics_admission.py": true,
+    "engine_neural.py": true,
+    "engine_potion_checks.py": true,
+    "engine_potion_queue_checks.py": true,
+    "engine_projection_cache.py": true,
+    "engine_run.py": true,
+    "engine_worker.py": true,
+    "engine_worker_qualification.py": true,
+    "full_run_policy.py": true,
+    "full_run_ppo_math.py": true,
+    "native_credit_training.py": true,
+    "native_gradient_checks.py": true,
+    "native_gradient_pool.py": true,
+    "native_gradient_study.py": true,
+    "native_input_normalization.py": true,
+    "native_normalization_admission.py": true,
+    "native_normalization_comparison.py": true,
+    "native_pilot_assessment.py": true,
+    "native_value_credit.py": true,
+    "training_objective.py": true
+  },
+  "schema_version": "synthetic-native-ppo-evidence-v1",
+  "synthetic_optimizer_steps": 2052
+}

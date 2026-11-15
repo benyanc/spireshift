@@ -1,0 +1,238 @@
+{
+  "automatic_follow_up": false,
+  "config_id": "sha256:80d2d7ee21f6b95aba506db0e6c2044d5d3cebcbd5cc308d6f677ce3f20d1d90",
+  "continuation": {
+    "current_recipe_cases": 68,
+    "linked_denominator": 73,
+    "main_unstarted": true,
+    "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-win-curriculum-v6.sh\"",
+    "previous_unattempted_slots": 25,
+    "remaining_slots": 26,
+    "replacement": "fit-043-replacement-1",
+    "retained_cases": 42,
+    "session_limits": {
+      "cpu_seconds": 14400,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 5400
+    }
+  },
+  "environment_id": "sha256:9092ff7f257e546f818d93f1b2f6eee960205237d14e929401181b1e7d24d3a5",
+  "full_game_playing_strength_evaluated": false,
+  "game_revision": "41cef1ea",
+  "game_version": "v0.111.0",
+  "interrupted_attempt": {
+    "acknowledged_diagnostic_deliveries": 89,
+    "case": "fit-043/reference",
+    "fault_before_entrant_rng": true,
+    "labels_allowed": false,
+    "marker_preserved": true,
+    "native_error": "Event EVENT.TRIAL option 0 failed: NullReferenceException: Object reference not set to an instance of an object.",
+    "native_exit_code": 143,
+    "native_process_terminated": true,
+    "path": [
+      "Trial.Accept",
+      "NEventRoom.Instance.Layout.RemoveNodesOnPortrait"
+    ],
+    "unknown_trial_accepts": 1
+  },
+  "native_controls": {
+    "checks": {
+      "clean_shutdown": true,
+      "native_effects_and_proceed": true,
+      "public_inputs_and_deliveries_reconstructed": true,
+      "reject_then_accept": true
+    },
+    "double_down_confirmation_verified": false,
+    "earlier_control": {
+      "path": "artifacts/resources/win-curriculum-trial-control-v1.json",
+      "report_id": "sha256:15b6b88c2566f4bff55851da7f817b10b9da904d8158f12dcf3c18b1063b19c8",
+      "sha256": "4f5a050ddb07feca36806f4043deba602c95a69c59bce047ead9aa2a001c2605",
+      "status": "failed",
+      "wall_seconds": 66.03553945804015
+    },
+    "earlier_control_failure": "The checker read a nonexistent target field after a delivered native card upgrade. It now reads the saved public entity field.",
+    "earlier_control_source": {
+      "path": "artifacts/native-win-curriculum/trial-preparation-v1/control-source-v1.py",
+      "sha256": "0817dca4e3dbb33decb38c64b262682f852a464c860c6e63a115efec1c491d7b"
+    },
+    "fresh_fixture_cases": 6,
+    "native_deliveries": 25,
+    "report": {
+      "path": "artifacts/native-win-curriculum/trial-control-v2/report.json",
+      "report_id": "sha256:0720cd25ba73d1645c313ea0a5090b69196e30ab439e0baa33a9be8afe5d15f8",
+      "sha256": "2640c8922a8004b57e0552e2acc85b4184aced7c5b67a26d9fcd88d936700428"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-trial-control-v2.json",
+      "report_id": "sha256:acc219075e451eed77db853105f79a9a01ec5c5c6ed3ff164d4d347fc343f342",
+      "sha256": "ed8b1210bf0ee08b2e2b30d204e873d846042706e40563cc7ba2dd23148747ff",
+      "status": "completed",
+      "wall_seconds": 81.63369916600641
+    },
+    "training_labels_allowed": false,
+    "verified_verdicts": [
+      "merchant/guilty",
+      "merchant/innocent",
+      "noble/guilty",
+      "noble/innocent",
+      "nondescript/guilty",
+      "nondescript/innocent"
+    ]
+  },
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "original_and_fitted_weights_and_full_Adam_exact": true,
+  "prior_owner_resource": {
+    "path": "artifacts/resources/win-curriculum-v5-attempt-1.json",
+    "report_id": "sha256:7ebf1cc92d410325222544e007ce28ae7935a90b12898add1b478ecee811fe19",
+    "sha256": "fe3fa63915c226ba489258979c999c8a2e48a7a34ef61809766c58f0517d7712",
+    "status": "failed",
+    "wall_seconds": 135.13373462494928
+  },
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v6.json",
+    "sha256": "a6b7a7f1af8b34e0c65f0153349b2fc043cb8f79678c93a33dfabfc406e39b32"
+  },
+  "report_id": "sha256:f1f3cc95aaa62c4198c953ef87189ce3693b2d2f240ce5277d2a7ce40f5e6e91",
+  "retained_evidence": {
+    "actual_deliveries": 12590,
+    "audit": {
+      "path": "artifacts/native-win-curriculum/trial-audit-v2/report.json",
+      "report_id": "sha256:e94ecb309f34c96b6b1e4681f5a2d42d31c74b9721597a681149a52f308aa914",
+      "sha256": "87832aec376da81159fbf414b6160b17d8731630f005df0dab2947d3c7533f96"
+    },
+    "complete_cases": 42,
+    "complete_episodes": 190,
+    "confirmed_lessons": 22,
+    "confirmed_prepared_final_bosses": [
+      "QUEEN_BOSS",
+      "TEST_SUBJECT_BOSS",
+      "AEONGLASS_BOSS"
+    ],
+    "historical_failures": [
+      "fit-007",
+      "fit-031",
+      "fit-032",
+      "fit-039",
+      "fit-043"
+    ],
+    "new_lessons": [
+      {
+        "boss": "TEST_SUBJECT_BOSS",
+        "case": "fit-040",
+        "lesson_id": "sha256:3fd2f4938e7b8d459aa5a9d12fc86d94d01718ec78917892c58aa02f3c90def8",
+        "meaningful_choices": 20,
+        "strict_goal_rescue": true
+      },
+      {
+        "boss": "AEONGLASS_BOSS",
+        "case": "fit-042",
+        "lesson_id": "sha256:9184ae1682ec243a59273323937fad40a4523eec2bddefe4793a76ba8002e1a1",
+        "meaningful_choices": 21,
+        "strict_goal_rescue": true
+      }
+    ],
+    "protected_files": 59434,
+    "protection": {
+      "path": "artifacts/native-win-curriculum/trial-preparation-v1/protected-v5-result.json",
+      "sha256": "57d4c5280dfaba49d8887e25045ec4cd51aabb4f8f497b170b975a198de8bd91"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-trial-audit-v2.json",
+      "report_id": "sha256:18f0c5b818aeb2c97861de482838bf98a64f7897371f98a8818ff29c230e10d6",
+      "sha256": "7b352b55c3bdf4b78661d27b1ec70a0cc9b7e534f7a6ecc5644ac0cfe2d0d4db",
+      "status": "completed",
+      "wall_seconds": 121.81398245808668
+    },
+    "seals": 232,
+    "strict_goal_rescues": 16
+  },
+  "schema_version": "native-win-curriculum-trial-preparation-v1",
+  "status": "trial_portrait_support_verified_owner_continuation_prepared",
+  "support": {
+    "earlier_build": {
+      "path": "artifacts/resources/win-curriculum-trial-build-v59.json",
+      "report_id": "sha256:e9496e390c20b04357286934d9f4177a9433ad5a81475449a0a591c497369545",
+      "sha256": "3ff348038251c9f433da6e4fdf5032d69bb9b16a09bee2766b12b43ac557c041",
+      "status": "failed",
+      "wall_seconds": 69.73909237491898
+    },
+    "earlier_build_failure": "The rebuild stamped the current Git revision into GodotSharp.dll. The passing build uses the original reference and runtime DLLs.",
+    "fingerprints": {
+      "artifact_mvid": "ef0702b9-d08c-4d23-925d-8a533cef59a8",
+      "artifact_sha256": "2199a3ecc096ae9a08f6a33904064ff75401562336f5d44021f2d4733af5a109",
+      "godot_stub_sha256": "02111b7c2ca9274904ea243f4a92237bdf8bc4518735b1482b4d49913604c1ae",
+      "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4"
+    },
+    "independent_builds_match": true,
+    "production_source_files": [
+      "Sts2Headless/RunSimulator.cs"
+    ],
+    "report": {
+      "path": "artifacts/native-win-curriculum/trial-portrait-build-v59-r2/report.json",
+      "report_id": "sha256:1e9ff8c4eb321378c44891bb959c1ad83e7aee2c6d51d160ed5a26857791e471",
+      "sha256": "2b7077b63e7bad17e228473eddf6a238a9107ab56585c131877bd4822621544d"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-trial-build-v59-r2.json",
+      "report_id": "sha256:01bd445e937e94d97f2a1f79022c1f739250e46deb0e0069a61e8793f9f75db9",
+      "sha256": "8f609ca47e7f1b540327427432179638295cb6ddbd76e398a84dd599c6aaf34d",
+      "status": "completed",
+      "wall_seconds": 79.80459945800249
+    },
+    "revision": 59,
+    "test_mode_only_portrait_guards": {
+      "Trial.Accept": 2,
+      "Trial.AddVfxAnchoredToPortrait": 1
+    }
+  },
+  "training_allowed": false,
+  "verification": {
+    "actual_imports_without_games": 232,
+    "collector_preflight": {
+      "path": "artifacts/native-win-curriculum/trial-preflight-v1/report.json",
+      "report_id": "sha256:882ed0a1546b42207977aa766c2148d043e100370d1937269c312f22b94f1e6b",
+      "sha256": "78632dbd5edb067298e2f652918c3f775cc13ee646aba71d152f656df971cec7"
+    },
+    "commit_hooks": {
+      "path": "artifacts/resources/win-curriculum-trial-hooks-v1.json",
+      "report_id": "sha256:403e2525637d6494a2ff4e7025c66f6cf74d5c24530bc58d935cc9de325187e3",
+      "sha256": "c14e9c5335560c96c61cf103437deab5758b6ed8be8590b31164be839a3f3c0f",
+      "status": "completed",
+      "wall_seconds": 0.750860333093442
+    },
+    "earlier_saved_audit": {
+      "path": "artifacts/resources/win-curriculum-trial-audit-v1.json",
+      "report_id": "sha256:b96881b3b51235a250fbad7094432c7b2332bd2fe5554dbef2884734fd72fd50",
+      "sha256": "b3b6a09c66cf544248918d453da7e86323b9cdfc972fffae2ab686240fb1e78a",
+      "status": "failed",
+      "wall_seconds": 39.89969445799943
+    },
+    "earlier_saved_audit_exit": "Stopped before formatting the auditor. The saved-only check completed in a fresh workspace.",
+    "frozen_inputs": {
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "original_and_prior_final_weights_full_Adam_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "lint_format_strict_types_and_CSharp_contract_passed": true,
+    "preflight_resource": {
+      "path": "artifacts/resources/win-curriculum-trial-preflight-v1.json",
+      "report_id": "sha256:7e34c27c2efe536df00f1113a2e990bbde0505b4ec6066282188ceb58170b1cb",
+      "sha256": "7a4c71f9d80a8f48bb987f301641b0f12e69c7a9528db823bc12ef73ed952c2d",
+      "status": "completed",
+      "wall_seconds": 95.80088412505575
+    },
+    "repository_checks": {
+      "path": "artifacts/resources/win-curriculum-trial-check-v1.json",
+      "report_id": "sha256:1058c151bff2d593a1aec3036a43b09a35624d014862d073ac1cc17dc169f3d6",
+      "sha256": "d4855967569de0743399ecd9eca3ea2081e645369d4a5b05dc295c4adb580478",
+      "status": "completed",
+      "wall_seconds": 159.41935366706457
+    },
+    "repository_tests_passed": 2836,
+    "repository_tests_skipped": 0
+  }
+}

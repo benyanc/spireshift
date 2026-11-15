@@ -1,0 +1,15 @@
+{
+  "arms": {
+    "crossfit": {
+      "id": "sha256:0eef30581f663788669bca82c394e909f6c2ba0e3177c6563d0dcda36424f6fb",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-credit-crossfit-v1.json"
+    },
+    "legacy": {
+      "id": "sha256:af47d87925e8e85a47676aa42677799d973fed507422b491ec96f14d72e4a84a",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-credit-legacy-v1.json"
+    }
+  },
+  "implementation_sha256": "1125919ed58e1b9a0e94cfb9de4cceb5a81ca770773eac0f645dd044265150da",
+  "qualification_config": "configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json",
+  "schema_version": "native-matched-credit-comparison-config-v1"
+}

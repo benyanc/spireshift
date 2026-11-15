@@ -1,0 +1,140 @@
+{
+  "admitted": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "89_inspected_train_failure_compatibility_checks_not_policy_strength_or_full_live_game_fidelity",
+  "compatibility_audit": {
+    "benchmark_denominator": 89,
+    "checks": {
+      "bundle_confirmation_progress": 12,
+      "bundle_menu": 56,
+      "combat_menu": 310,
+      "event_continuation_progress": 4,
+      "overflow_endpoint_bound": 65,
+      "overflow_menu": 65,
+      "premature_ending_removed": 7,
+      "rejected_event_action_absent": 4,
+      "reward_endpoint_bound": 1
+    },
+    "completed_cases": 89,
+    "event_endpoints": [
+      {
+        "event_id": 12,
+        "expected_encounter_id": 55,
+        "first_invalid_decision": 93,
+        "skipped_noop_actions": 3,
+        "source_case_id": "sha256:5f82f3e22d66956791b4cf12af805b732538c3a38aefef0ca85d75bd4011ae42",
+        "source_floor": 5
+      },
+      {
+        "event_id": 23,
+        "expected_encounter_id": 56,
+        "first_invalid_decision": 99,
+        "skipped_noop_actions": 3,
+        "source_case_id": "sha256:884ef4b3b107fc2cf02890e269b7d483300bfc7f270e06582d2b6a1fef506007",
+        "source_floor": 11
+      },
+      {
+        "event_id": 23,
+        "expected_encounter_id": 56,
+        "first_invalid_decision": 173,
+        "skipped_noop_actions": 3,
+        "source_case_id": "sha256:eec91b43df92574c8404ca607146a75c6304968254ea0bff50bc18a795206cc1",
+        "source_floor": 15
+      },
+      {
+        "event_id": 12,
+        "expected_encounter_id": 55,
+        "first_invalid_decision": 97,
+        "skipped_noop_actions": 3,
+        "source_case_id": "sha256:f3bcb2f47595e50e8c6cf60070e2313686b8a28d3f349ced02405782ebe24d35",
+        "source_floor": 7
+      }
+    ],
+    "failed_cases": 0,
+    "passed_cases": 89,
+    "path": "artifacts/compatibility/full-run-event-integration-v1/integration-audit.json",
+    "protocol": {
+      "config_id": "sha256:e65d04fe2d1d3535d425a090391445c50d72b7b7a42d73b1634988f9392c1a81",
+      "historical_claimed_ascension_level": 0,
+      "historical_difficulty_claim_valid": false,
+      "implementation_id": "sha256:1157b4fb9c1362318c9bb49c64b72bf42ed25adf87d5dbcf5336ad62e9f23e80",
+      "objective": {
+        "auxiliary": [
+          "combat_survival",
+          "act_completion",
+          "floor_reached",
+          "terminal_hp"
+        ],
+        "auxiliary_reward_allowed": false,
+        "constraint": "cpu_time_per_run",
+        "id": "terminal-victory-v1",
+        "primary": "terminal_victory",
+        "whole_run_budget": 128
+      },
+      "previous_audit_id": "sha256:eaaa0e1a239b0fe14ac6b0a8aca3dd3cefcc47df5fc303e292366992e0ffec3a",
+      "ruleset_manifest_id": "sha256:46dfcf7480d7eebda430f067a8257a5f400f62eab64443ab6ef6d9952c9db255",
+      "source_declared_ascension_level": 8,
+      "source_index_id": "sha256:302fa8b446d29d6a5d9b2373623fe65beeeaef194dfbbd8eebaf4f2f27f781db"
+    },
+    "report_id": "sha256:565998a3e6fe5ace1ac138033f152de69d8c3a1ffcdf8df742f2e77eae6b67bf",
+    "scope": "inspected_training_prefixes_and_corrected_event_endpoints_not_playing_strength_or_live_conformance",
+    "skipped_historical_noop_actions": 12,
+    "transitions": 11939,
+    "unique_source_seeds": 42,
+    "untrained_model_id": "sha256:cab32d911ba236d77e439f9c805657c6d4704d5e664474c946e294202bce1c80"
+  },
+  "evidence_id": "sha256:54a5f564712f3644b8fc3758b9469be39fc12452ae85aac50b85feae005d965c",
+  "execution_boundary": {
+    "long_jobs_launched_and_monitored_by": "owner",
+    "minimum_owner_job_minutes": 5,
+    "short_jobs_launched_by": "codex_or_owner"
+  },
+  "final_test_opened": false,
+  "live_game_conformance_verified": false,
+  "native_build": {
+    "candidate_revision": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd",
+    "cpu_seconds": 8.580987772,
+    "native_sha256": "3cfcd92924135fdb5fa0d27c7667ef94aec5458a1d66a623ac32becdcaabcc92",
+    "regression_tests": {
+      "executed": 32,
+      "failed": 0,
+      "passed": 32,
+      "total": 32
+    },
+    "report_id": "sha256:13fda11c656807cb53b0191c99dd0290472c03b844f39b419c4102cde4254a49",
+    "report_path": "artifacts/backend-repair/event-continuation-v1-retry1/build-report.json",
+    "resource_report_id": "sha256:e11cf156f937b23fe93406248901766b08488372f1a3ef54f8a2d0865053841d",
+    "wall_seconds": 7.392824542010203
+  },
+  "optimizer_steps": 0,
+  "preserved_previous_audit": {
+    "id": "sha256:eaaa0e1a239b0fe14ac6b0a8aca3dd3cefcc47df5fc303e292366992e0ffec3a",
+    "path": "artifacts/compatibility/full-run-public-integration-v1/integration-audit.json"
+  },
+  "public_adapter_manifest": {
+    "id": "sha256:46dfcf7480d7eebda430f067a8257a5f400f62eab64443ab6ef6d9952c9db255",
+    "path": "manifests/patches/sts2-v0.107.1-evangambit-event-public-v3-pending.json"
+  },
+  "recorded_on": "2026-10-09",
+  "remaining_checks": [
+    "verify_actual_source_fixed_a8_against_frozen_game",
+    "check_complete_event_action_sets_against_live_captures",
+    "verify_later_act_boundaries_and_final_terminal_condition",
+    "readmit_new_ruleset_before_new_learning_recipe"
+  ],
+  "resources": {
+    "cpu_seconds": 88.861462594,
+    "limits": {
+      "cpu_seconds": 240.0,
+      "resident_memory_bytes": 8000000000,
+      "storage_bytes": 2000000000,
+      "wall_seconds": 240.0
+    },
+    "report_id": "sha256:17cd55d853d81a8db99d875c15c0493b949ae8caf7d8b22c32878b69ffb7b110",
+    "report_path": "artifacts/resources/full-run-event-integration-v1-attempt-1.json",
+    "trajectories": 89,
+    "wall_seconds": 89.67749095900217
+  },
+  "schema_version": "event-native-integration-evidence-v1",
+  "training_allowed": false
+}

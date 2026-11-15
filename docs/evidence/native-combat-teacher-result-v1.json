@@ -1,0 +1,43 @@
+{
+  "schema_version": "native-combat-teacher-portable-result-v1",
+  "assessment": "completed_collector_sparse_action_feedback_no_admitted_preferences",
+  "audit": {
+    "source_report_id": "sha256:24bc186fd18de041f0686ab0161b0c0b8568d3991613047a50ccf04ac9ea103f",
+    "report_id": "sha256:4a6c56b759941f02ab4d254a53e32120c331858ee99cff267145f618e0f1d2f8",
+    "complete_source_positions": 8,
+    "total_legal_actions": 48,
+    "branch_receipts_verified": 384,
+    "full_run_wins": 0,
+    "admitted_preferences": 0,
+    "matched_pair_counts": {
+      "negative_pairs": 33,
+      "positive_pairs": 37,
+      "tied_pairs": 250
+    },
+    "smallest_one_sided_improvement_sign_p": 0.1875,
+    "tied_pair_fraction": 0.78125,
+    "positions_selected_at_fight_entry": 8,
+    "positions_with_different_mean_outcomes": 6,
+    "positions_with_identical_return_for_every_branch": 2,
+    "action_tables_exactly_reconstructed": true,
+    "saved_native_journal_bytes_verified": true,
+    "native_journals_semantically_reaudited": false,
+    "original_states_unchanged": true,
+    "confidence_rule_unchanged": true,
+    "ordinary_PPO_eligible": false,
+    "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+    "wall_seconds_all_resource_sessions": 1160.3657687907107,
+    "cpu_seconds_all_resource_sessions": 940.5189648569997,
+    "peak_resident_memory_bytes": 411369472,
+    "final_storage_bytes": 639711789,
+    "new_native_games": 0,
+    "optimizer_steps": 0
+  },
+  "independent_starting_worlds": 8,
+  "terminal_branch_attempts": 384,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "next_work": "richer_public_state_value_prediction_then_declared_credit_and_teacher_comparisons",
+  "evidence_id": "sha256:292dfa09a45680b60b3d2d8ba8f41baeffeeb946198567cf32f123bdde799f2a"
+}

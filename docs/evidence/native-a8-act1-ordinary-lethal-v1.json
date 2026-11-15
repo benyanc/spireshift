@@ -1,0 +1,124 @@
+{
+  "clam_proof": {
+    "actions": [
+      "Play Strike on Sewer Clam",
+      "Play Strike on Sewer Clam",
+      "Play Strike on Sewer Clam"
+    ],
+    "enemy_hp_before_each_hit": [
+      38,
+      29,
+      14
+    ],
+    "exact_prefix_choices": 77,
+    "final_reward_hp": 22,
+    "native_deliveries": 80,
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/sewer-clam-control-v1/report.json",
+      "report_id": "sha256:c7e28fe5117bde73c7699aa974203fd5f606662e554660c9d0fa8ba9ecc90c95",
+      "sha256": "e1e9a9f25001860ba4148cbedf88124903bd5b8a50057d5d9e51b4115c597b03"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-sewer-clam-kill-v1.json",
+      "report_id": "sha256:3a757f058ecb94e5503a9b2949e4428d1f4773021a2e5851184b831cdbc6db08",
+      "sha256": "c73eba0f2900e978b518c6d767d0df959616d899c7a761d745f6c59f0c42ad6a"
+    },
+    "root": {
+      "input_digest": "9f2b5ce16eed3c9039b244b0a344cdcc9882263d1517ba7be09c88ac785ac550",
+      "line": 155,
+      "saved_action": "Play Bash on Sewer Clam",
+      "saved_index": 1
+    },
+    "seal_id": "sha256:1127d8ddbe5d7797f5f52bac48215c578fa16b4e719f88637f4fcf2db3df7a55",
+    "source_seal_id": "sha256:e7703cd6db545ac517e7c7de300f61201c060dfc7b22b29d594529b0fc9a228d"
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "lessons_admitted": 0,
+  "optimizer_updates": 0,
+  "owner_comparison_started": false,
+  "owner_comparison_worlds": 16,
+  "owner_launcher_preflight_verified": true,
+  "prior_diagnostic": {
+    "outcomes_by_arm": {
+      "boss": {
+        "act1_clear": 1,
+        "act1_loss": 7,
+        "capped": 0
+      },
+      "boss_v2": {
+        "act1_clear": 1,
+        "act1_loss": 7,
+        "capped": 0
+      },
+      "fitted": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "original": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "survival": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      }
+    },
+    "path": "artifacts/native-a8-act1-boss/tactical-diagnostic-v1/attempt-1794080276572507000.json",
+    "report_id": "sha256:1883933f4bfd5bc99d643ef5b8dff74246302283273d0523f64b11b3e4a9287f",
+    "sha256": "370742d246d06855e6c75fed4ad470b1a229326426ba788b6061314546ba82e8"
+  },
+  "report_id": "sha256:814609b9db4f7805490c2fd1ec63bff4de5dd06407ee97d411ccbc2954b8881c",
+  "repository_check": {
+    "dotnet_protocol_contract_verified": true,
+    "path": "artifacts/resources/a8-act1-ordinary-lethal-repository-check-v1.json",
+    "report_id": "sha256:c8bc5809869c2a768a900a81a4733e4d9f63d6c4acf3ae1d703ed3beddc3a54a",
+    "sha256": "181b8c4308dcbfeaf663ef2e48295e15df8055d6bff532e5a942cdac791c0a0d",
+    "status": "completed",
+    "tests_passed": 2862
+  },
+  "schema_version": "native-a8-act1-ordinary-lethal-evidence-v1",
+  "shared_profile_unchanged": true,
+  "short_pair": {
+    "execution_id": "sha256:196698e4c52636db68a51ae2b17daf63577ec7c3c52e5a6362a4f5c3587c53d4",
+    "final_floors": {
+      "ordinary": 13,
+      "tactical": 13
+    },
+    "first_change": {
+      "choice_ordinal_including_local_factors": 61,
+      "family": "combat_turn",
+      "fitted_action_index": 1,
+      "public_input_id": "sha256:9a4c7dcf1f4adc06799590cdcb55f5f321ba5c61084ca1ca3cb107b35e662916",
+      "reason": "ordinary_lethal_turn",
+      "teacher_action_index": 2
+    },
+    "ordinary_lethal_deliveries": 4,
+    "outcomes": {
+      "ordinary": "act1_loss",
+      "tactical": "act1_loss"
+    },
+    "report": {
+      "path": "artifacts/native-a8-act1-boss/ordinary-lethal-control-v1/report.json",
+      "report_id": "sha256:7702fc954b7a0f43dfc45372601499f08cf4e8746e841ce8d813a246a93d8033",
+      "sha256": "6492988a8d37e50745eb904a308b30e8cc0d912832d06086b2fb805e2fd2f552"
+    },
+    "resources": {
+      "path": "artifacts/resources/a8-act1-ordinary-lethal-control-v1.json",
+      "report_id": "sha256:3420508941fa05687b6651faaa2beb936effbb355686b0e31cea641b06336148",
+      "sha256": "414702763cdb4c14b57abe7555cb29410e9d7c3baf008f999714714623b9a0a3"
+    },
+    "seal_id": "sha256:d353c7013736cf836efffc380e08434ce64240670b99e0f0867e70a573406521",
+    "verified_native_deliveries": 297
+  },
+  "status": "ordinary_lethal_short_verified"
+}

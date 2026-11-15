@@ -1,0 +1,116 @@
+{
+  "control_limits": {
+    "cpu_seconds": 600,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 500000000,
+    "wall_seconds": 275
+  },
+  "control_workspace": "artifacts/native-a8-scoring-heads/control-v2",
+  "credit": {
+    "baseline": "public_residual_ridge",
+    "fold_salt": "a8-full-menu-ppo-credit-v1",
+    "folds": 4,
+    "regularization": 0.001
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/compare-a8-scoring-heads-v1.sh": "498c282aa485da1e5a3296d2cc3834bd83a74f65f078f9b8e6d197327fe4d379",
+    "src/spireshift/engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "src/spireshift/full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "src/spireshift/full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "src/spireshift/native_a8_head_policy.py": "2a29005dd250a5c67e5d4b7129bfa4f53b82ba37dade28bd814def1a6087af0a",
+    "src/spireshift/native_a8_head_study.py": "ef09a028d1c0cf4336372f6d596c7bf65f52141354cbe0498a010e85e018db3e",
+    "src/spireshift/native_a8_head_training.py": "577033336acc4498ae4fbe54fe39a1c5f9c537d550dd3df0df7db75e787e4d2c",
+    "src/spireshift/native_a8_own_experience.py": "57ac83d9cb1e4db4d8dc8edf7b0b2a8a8835aea2958b45970256c8778fa322e2",
+    "src/spireshift/native_a8_own_ppo.py": "fe1f88be226d3af72306b917e867c8382074832dafa54f9c3389864bcb928ecc",
+    "src/spireshift/native_a8_paired_report.py": "b0fb6b662e8b3d9de087f32134519bcbc6e29bcdcf41f62e3c490785e442a3c8",
+    "src/spireshift/native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "src/spireshift/native_combat_behavior_policy.py": "d256af8b15c9370733a46c274d22471387b6e71c3d9cb511911064d6a6c85b54",
+    "src/spireshift/native_context_journal.py": "6a49c02c640dc1fe2c28e5726d9b80f940182c993279105494bcafe205cca89e",
+    "src/spireshift/native_structured_model.py": "ad6dd6ae79c422a373bfc12cd30989c263861b2f6dddd403e6362ade2ce141e2",
+    "src/spireshift/native_structured_policy.py": "2f76551eecaa39033e92a286ab3698af593f212da62e70d21526bcf39024bfb3",
+    "src/spireshift/native_systematic_selectors_v2.py": "e19313fd4c537def7c505bb25be34c8f64b84029c4e33764732effb80aff0b0e",
+    "src/spireshift/native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "src/spireshift/native_win4_game.py": "00e5988aae453effd2f492be7bc8adc5c5618466202f19f8f0606040598a3147",
+    "src/spireshift/native_win4_plan.py": "d8ceaa38d2dfbd3a4eb580d77e287844e6ffa44f10f8f47e73389f0d19f7bc1c",
+    "src/spireshift/resource_tracking.py": "1099f545950c48de74f11d6668b06904532fd055c7aca890ace97a8ac2b09e49"
+  },
+  "limits": {
+    "cpu_seconds": 86400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 72000000000,
+    "wall_seconds": 86400
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "plan": {
+    "arms": [
+      "shared",
+      "split"
+    ],
+    "control_reload_choices": 8,
+    "control_training_worlds": 3,
+    "holdout_worlds": 128,
+    "initializers": [
+      2,
+      3
+    ],
+    "minimum_paired_terminal_worlds": 12,
+    "progress_rounds": [
+      0,
+      16,
+      32,
+      48,
+      64
+    ],
+    "progress_worlds": 16,
+    "rounds": 64,
+    "world_schedule_id": "sha256:199ab3ef75e6e1023b0439a6982f297176deb7f97e08fdbf831ab7133cfedba6",
+    "worlds_per_round": 16
+  },
+  "ppo_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-archive-own-training-v1.json",
+    "sha256": "40eeec9367092ad4917deaa7783e7b98a64433480a8802e060721e2c60de2047"
+  },
+  "schema_version": "native-a8-scoring-heads-comparison-v1",
+  "selector_control_id": "sha256:a0000a5165ed700e47f8f03c6abad34c3b61350b7874e6b1881c1c18a9c53c40",
+  "selector_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-expanded-archive-selector-v2.json",
+    "sha256": "c9450662f3c5fc3dd8ff5a91927d8f63f8b694f9232be1bb65f6fc1c0adbb679"
+  },
+  "settings": {
+    "actor_learning_rate": 0.001,
+    "clip": 0.2,
+    "entropy_coefficient": 0.015,
+    "epochs": 3,
+    "gradient_clip": 1.0,
+    "minibatch_decisions": 128,
+    "target_kl": 0.03,
+    "temperature": 0.8,
+    "value_coefficient": 0.5,
+    "value_learning_rate": 0.003
+  },
+  "starting_states": {
+    "2": "sha256:53e3fc836bf08d6d351d65a2f4bed6fb0ffc4947fa39686b926670adb2488b32",
+    "3": "sha256:8d307faf37446b5792d62f38690a6e2c324f44cff542090a0051c0dd8bf695a9"
+  },
+  "training_score_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "workspace": "artifacts/native-a8-scoring-heads/study-v1"
+}

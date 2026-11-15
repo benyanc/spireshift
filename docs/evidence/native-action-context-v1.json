@@ -1,0 +1,517 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment_report_id": "sha256:4e63b4acaab301fcba13ac78e2729b8ea56675a7c45fdbc31db13e977f8bfd38",
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "finite_representation_control_and_native_bridge_only_no_game_strength_claim",
+  "long_native_comparison_started": false,
+  "native_comparison_config_id": "sha256:8b9e269ac11f18caf6cff1ec14e466c95c7e4ff333f24098bf75b6715d89e59d",
+  "native_control": {
+    "adaptive_controller_allowed": false,
+    "all_legal_decision_families_learnable": true,
+    "base_readiness_passed": false,
+    "checkpoint_promoted": false,
+    "checks": {
+      "account_profile_unchanged": true,
+      "all_planned_arms_complete": true,
+      "all_recorded_training_used_only_own_clean_on_policy_games": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "original_game_denominator_complete": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "claim_scope": "finite_A8_native_final_policy_comparison_not_bulk_learning_or_readiness_admission",
+    "completed_games": 8,
+    "config_id": "sha256:77603b6264e5cdef8c7ad65b377fe7b8aab163e65a522d86f441e083a37b5d4d",
+    "error": null,
+    "failed_games": 0,
+    "game_apps_created": 0,
+    "games_recorded": 8,
+    "native_teacher_or_oracle_labels": 0,
+    "not_attempted_games": 0,
+    "optimizer_steps": 12,
+    "planned_games": 8,
+    "report_id": "sha256:dc1a89d969541e837dcb6df68f4eb18e501ee5238ab0d51ab399fd612032be0c",
+    "schema_version": "native-action-context-trial-v1",
+    "status": "native_context_bridge_control_pass",
+    "terminal_victory_probability_available": false,
+    "unsealed_partial_work_unknown": false
+  },
+  "native_strength_improvement_established": false,
+  "projection": {
+    "adaptive_controller_allowed": false,
+    "candidate_alias_pairs": {
+      "native-original-quarter-v1": 0,
+      "native-public-numeric-candidate-cross-v1": 0,
+      "native-public-numeric-shared-v1": 0
+    },
+    "candidate_rows_per_mode": 1175,
+    "checkpoint_promoted": false,
+    "checks": {
+      "all_original_inputs_rebound_to_sealed_TRAIN_episodes": true,
+      "candidate_alias_pairs_not_increased": true,
+      "direct_signals_and_critic_and_legal_candidates_preserved": true,
+      "finite_representative_rows": true
+    },
+    "claim_scope": "finite_saved_TRAIN_projection_only_not_game_strength_or_training_admission",
+    "config_id": "sha256:afb013c70a2ec748b3bd13a9123f6af342a784ed152bddd22248c0e75fa7d09e",
+    "exhaustive_mechanics_or_information_preservation_proof": false,
+    "families": {
+      "card_bundle_selection": 13,
+      "card_reward_selection": 24,
+      "card_selection": 24,
+      "combat_turn": 24,
+      "event_option": 24,
+      "map_navigation": 24,
+      "native_generated_card_choice": 24,
+      "rest_site": 24,
+      "reward_claim": 24,
+      "reward_completion": 24,
+      "shop_inventory": 24,
+      "treasure_chest": 1,
+      "treasure_relic_selection": 24
+    },
+    "games_launched": 0,
+    "native_training_allowed": false,
+    "optimizer_steps": 0,
+    "projection_pass": true,
+    "report_id": "sha256:b1f72a4e33a0479c68cb3b1d8fada21ae86e76c28bf898b3d767ccf022644777",
+    "runs": 93,
+    "schema_version": "native-action-context-probe-v1",
+    "states": 278
+  },
+  "report_id": "sha256:a3fef0cbe03acc59a18923bbcee6a8050751efae59524fbd923c6ac5f8590004",
+  "resources": {
+    "native_control": {
+      "cap": null,
+      "path": "artifacts/resources/sts2-v0.111.0-a8-context-control-v1-attempt-1.json",
+      "report_id": "sha256:5dd3718615f93a0b38b447d54715b6127aa1c875a03a3e3323f18af17fd2bbc6",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.07883077696191433,
+        "cpu_hours": 0.019940227428888888,
+        "cpu_seconds": 71.78481874399999,
+        "energy_kwh": null,
+        "final_storage_bytes": 10698101,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 694255616,
+        "peak_storage_bytes": 10698101,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 65.04422829195391
+      }
+    },
+    "projection": {
+      "cap": null,
+      "path": "artifacts/resources/native-action-context-game-probe-v1.json",
+      "report_id": "sha256:b0edfc226fa009f5c7c748fca796f1f6f0ca5b4d085d8f96d9e79ef549026d10",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.06827773798396394,
+        "cpu_hours": 0.0013235977513888888,
+        "cpu_seconds": 4.764951904999999,
+        "energy_kwh": null,
+        "final_storage_bytes": 90002,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 152125440,
+        "peak_storage_bytes": 90002,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 4.984841583063826
+      }
+    },
+    "synthetic": {
+      "cap": null,
+      "path": "artifacts/resources/native-action-context-v1-attempt-1.json",
+      "report_id": "sha256:9944c6445b86e2785d4b648a548d2e72ee590e3053603cb5ef945c8cdd148d5d",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.0709577831663981,
+        "cpu_hours": 0.025385716994722224,
+        "cpu_seconds": 91.388581181,
+        "energy_kwh": null,
+        "final_storage_bytes": 14751796,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 134414336,
+        "peak_storage_bytes": 14751796,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 91.9949229999911
+      }
+    }
+  },
+  "schema_version": "native-action-context-portable-evidence-v1",
+  "synthetic_artifacts_verified": 318,
+  "synthetic_games": 18432,
+  "synthetic_optimizer_steps": 6048,
+  "synthetic_report_id": "sha256:404879462ef66aeef754ba3605afc6201bba487890a40f4b8f976358b35fd9d6",
+  "synthetic_results": [
+    {
+      "expected_victory": 0.5425940700907106,
+      "final_model_id": "sha256:25136b082e458c5812aa3a591f6ed1de7ee7e75e4dcc0db117e6aae24e4be03e",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5425290669883058,
+      "held_greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.10033785898469057,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.5152415510475993,
+      "final_model_id": "sha256:8898c4f5f6ade01cfe63de4f6bc4fc5c91fd618b0f0d2f331dcae51c69ecf6f5",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5128922128200148,
+      "held_greedy_accuracy": 0.5,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.4999300756796438,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.511414281820066,
+      "final_model_id": "sha256:6c6c1a571250da9db9ae9803927fec4bff98a97401b099309db479ff9817bbd2",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5114142818200659,
+      "held_greedy_accuracy": 0.5,
+      "method": "hp_removed_teacher",
+      "minimum_optimal_probability": 0.48552375760087896,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6110988607252879,
+      "final_model_id": "sha256:39e81d3b77f0da9d541d0ed50bc382db3512b7c1d255f19b087346e2006f12b2",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.5689172940801096,
+      "held_greedy_accuracy": 0.75,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.5566207946106286,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": false,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6460758314374528,
+      "final_model_id": "sha256:1c9fc027e225dd2696ac306822bea841a4ed0c02991defd3b3c453b4964e34e1",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.5824420895553075,
+      "held_greedy_accuracy": 1.0,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.7765751732764149,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": true,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.5123838237566778,
+      "final_model_id": "sha256:5eb6965163c0a87c139d225494e98ef593541ab9c9eeb3c6f5a8c6b53a1d57a3",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5123838237566778,
+      "held_greedy_accuracy": 0.5,
+      "method": "hp_removed_teacher",
+      "minimum_optimal_probability": 0.4984509834223707,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": false,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6867918366524385,
+      "final_model_id": "sha256:7897d37e9fae3e66f45388be15f1847f5743c0c2c99ebf6167ceac2029b236b0",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.6165173030432116,
+      "held_greedy_accuracy": 1.0,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.9466586065248974,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": true,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6930163092459394,
+      "final_model_id": "sha256:e402211d41f4937008611948c96aebd4c99622afbcd5366a0d2e841390b13108",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.6217512716021701,
+      "held_greedy_accuracy": 1.0,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.9806100321520324,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": true,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.5144539740261111,
+      "final_model_id": "sha256:977f64284d6927b70d15d92ecebf631281ee13286e0dd26e1d4dbc899bf7fcd8",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5144539740261111,
+      "held_greedy_accuracy": 0.5,
+      "method": "hp_removed_teacher",
+      "minimum_optimal_probability": 0.47394701298518477,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": false,
+      "training_seed": 0,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.48067600314678444,
+      "final_model_id": "sha256:148e2e28eff086e70bb83545c5d276374dd5f33546516a1d63fa5f6cd6e6701b",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.4806759968786645,
+      "held_greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.07567994549280255,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 1,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.516763021252679,
+      "final_model_id": "sha256:490b0f955cfbbcfab9d4cd7632ce781b05129af3b5b24ce0f52660040ef5b28a",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.514258008316517,
+      "held_greedy_accuracy": 0.75,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.5017499252242236,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 1,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.4808403139880394,
+      "final_model_id": "sha256:f076989babdfcc08d3441da63ccd353d863245184e874e9d9af908d4780d4333",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.4805980761647444,
+      "held_greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.07296826575893506,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": false,
+      "training_seed": 1,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6455505316080044,
+      "final_model_id": "sha256:8c243de029da8c20678e36c224ca2114a647ac5c63e989153a0c131b0433c712",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.5814866325215644,
+      "held_greedy_accuracy": 1.0,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.7792165441241127,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": true,
+      "training_seed": 1,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6931901420101236,
+      "final_model_id": "sha256:7270ba7ec6fb029c7d8f0e9612bd2f181b04e2e9cb08e78c509b0cb519839c74",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.6226985852297731,
+      "held_greedy_accuracy": 1.0,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.9800503562506886,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": true,
+      "training_seed": 1,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6916525925221293,
+      "final_model_id": "sha256:f25ca687c53eb3a56a8a6db42608e8a88e95a8cc3dab6e605243bd8e559050ad",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.620445326945427,
+      "held_greedy_accuracy": 1.0,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.9764731542549001,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": true,
+      "training_seed": 1,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.5134137950170607,
+      "final_model_id": "sha256:0caa3daa45ee2ad6ec152e93e9cec45d2f8679e632f338e58d177ce6ee5d3b42",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5133045885403662,
+      "held_greedy_accuracy": 0.5,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.49050613186520864,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 2,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.5150441263771679,
+      "final_model_id": "sha256:7deb993a24ab6b5a4932ffaf795f91967cd2a393ae9fee324f091b1a1c08bb00",
+      "greedy_accuracy": 0.5,
+      "held_expected_victory": 0.5126610797531744,
+      "held_greedy_accuracy": 0.5,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.49675626860877337,
+      "mode": "native-original-quarter-v1",
+      "passed": false,
+      "training_seed": 2,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6205884476209214,
+      "final_model_id": "sha256:81379ad0a7d5ca3a4940dad667c51cd3864d0bb94e41e7bbfc5a1b46db188b59",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.571809386255673,
+      "held_greedy_accuracy": 1.0,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.6480943404313407,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": false,
+      "training_seed": 2,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6461556526182217,
+      "final_model_id": "sha256:8d70df69deb05397fc4f9a814b2a553780cae3d095e4071999b92abea19945d6",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.5817172757243798,
+      "held_greedy_accuracy": 1.0,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.7836922776651409,
+      "mode": "native-public-numeric-shared-v1",
+      "passed": true,
+      "training_seed": 2,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.691588653787276,
+      "final_model_id": "sha256:d2ded24b1477566b3c4e02a30cacc5c81afb275e0e12ca56367c1fc523b2dc62",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.6202151153381925,
+      "held_greedy_accuracy": 1.0,
+      "method": "ppo",
+      "minimum_optimal_probability": 0.9769205259487673,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": true,
+      "training_seed": 2,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    },
+    {
+      "expected_victory": 0.6931317049896351,
+      "final_model_id": "sha256:1affc3841cd46634dffd49fe3d86a6ec757959fd4d8b0c123a86e467f64961c1",
+      "greedy_accuracy": 1.0,
+      "held_expected_victory": 0.6220811992209643,
+      "held_greedy_accuracy": 1.0,
+      "method": "teacher",
+      "minimum_optimal_probability": 0.981167919229731,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "passed": true,
+      "training_seed": 2,
+      "work": {
+        "choice_presentations": 6144,
+        "optimizer_steps": 288,
+        "sample_decision_presentations": 36864
+      }
+    }
+  ]
+}

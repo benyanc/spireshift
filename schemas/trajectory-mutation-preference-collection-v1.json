@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/trajectory-mutation-preference-collection-v1.json",
+  "title": "SpireShift Trajectory Mutation Preference Collection v1",
+  "type": "object",
+  "required": [
+    "schema_version", "collection_id", "search_report_id", "search_config_id",
+    "source_model_id", "source_training_report_id", "split_manifest_id",
+    "ruleset_manifest_id", "objective_id", "partition", "information_policy_id",
+    "hidden_state_resampling", "component_schema_version", "cases", "summary", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "trajectory-mutation-preference-collection-v1"},
+    "collection_id": {"$ref": "#/$defs/id"},
+    "search_report_id": {"$ref": "#/$defs/id"},
+    "search_config_id": {"$ref": "#/$defs/id"},
+    "source_model_id": {"$ref": "#/$defs/id"},
+    "source_training_report_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "partition": {"const": "train"},
+    "information_policy_id": {"const": "public-state-v1"},
+    "hidden_state_resampling": {"const": false},
+    "component_schema_version": {"const": "trajectory-mutation-preference-set-v1"},
+    "cases": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["run_seed", "path", "sha256", "preference_set_id"],
+        "properties": {
+          "run_seed": {"type": "integer", "minimum": 0},
+          "path": {"type": "string", "pattern": "^cases/seed-[0-9]{6}\\.json$"},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "preference_set_id": {"$ref": "#/$defs/id"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "cases", "mutations", "strict_improvements", "tied", "regressed", "unique_runs",
+        "minimum_training_runs", "training_ready", "terminal_victory_positive_labels"
+      ],
+      "properties": {
+        "cases": {"type": "integer", "minimum": 2},
+        "mutations": {"type": "integer", "minimum": 2},
+        "strict_improvements": {"type": "integer", "minimum": 1},
+        "tied": {"type": "integer", "minimum": 0},
+        "regressed": {"type": "integer", "minimum": 0},
+        "unique_runs": {"type": "integer", "minimum": 2},
+        "minimum_training_runs": {"type": "integer", "minimum": 2},
+        "training_ready": {"type": "boolean"},
+        "terminal_victory_positive_labels": {"const": 0}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {
+      "const": "verified_train_only_multi_run_auxiliary_policy_preferences"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+  }
+}

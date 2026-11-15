@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-card-titles-control-v1.json",
+    "sha256": "8cbbdd65caa8ea3aa9f1426782fbb61a855e570c8c627dd031f62726f7d1e131"
+  },
+  "wall_seconds": 290,
+  "cpu_seconds": 580,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

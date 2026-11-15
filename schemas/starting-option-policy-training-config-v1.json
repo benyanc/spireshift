@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-option-policy-training-config-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "config_id",
+    "encoder_id",
+    "dimension",
+    "trajectory_recipe"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "starting-option-policy-training-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "encoder_id": {
+      "const": "starting-ancient-public-option-v1"
+    },
+    "dimension": {
+      "type": "integer",
+      "minimum": 128,
+      "maximum": 65536
+    },
+    "trajectory_recipe": {
+      "$ref": "https://spireshift.dev/schemas/trajectory-policy-training-config-v1.json"
+    }
+  },
+  "additionalProperties": false
+}

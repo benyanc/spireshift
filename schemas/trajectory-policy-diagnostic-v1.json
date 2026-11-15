@@ -1,0 +1,914 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/trajectory-policy-diagnostic-v1.json",
+  "title": "Saved trajectory policy regression diagnosis",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "trajectory-policy-diagnostic-v1"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "terminal-victory-v1"
+        },
+        "primary": {
+          "const": "terminal_victory"
+        },
+        "constraint": {
+          "const": "cpu_time_per_run"
+        },
+        "whole_run_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "auxiliary": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "auxiliary_reward_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "auxiliary",
+        "auxiliary_reward_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "parent_model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "parent_training_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "collection_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "search_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "search_config_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "train_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "validation_dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "split_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "ruleset_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "recipe_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "candidate_model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "candidate_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "parent_model_id",
+        "parent_training_report_id",
+        "collection_id",
+        "search_report_id",
+        "search_config_id",
+        "train_dataset_id",
+        "validation_dataset_id",
+        "split_manifest_id",
+        "ruleset_manifest_id",
+        "recipe_id",
+        "candidate_model_id",
+        "candidate_report_id"
+      ],
+      "additionalProperties": false
+    },
+    "complete_run_subfolds": {
+      "type": "object",
+      "properties": {
+        "fit": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "selection": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "additionalProperties": false
+    },
+    "reconciliation_pass": {
+      "const": true
+    },
+    "candidate_eligible": {
+      "type": "boolean"
+    },
+    "validation_checks": {
+      "type": "object",
+      "properties": {
+        "original_auxiliary_gate": {
+          "type": "boolean"
+        },
+        "pair_loss": {
+          "type": "boolean"
+        },
+        "accuracy": {
+          "type": "boolean"
+        },
+        "regret": {
+          "type": "boolean"
+        },
+        "drift": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original_auxiliary_gate",
+        "pair_loss",
+        "accuracy",
+        "regret",
+        "drift"
+      ],
+      "additionalProperties": false
+    },
+    "validation_summary": {
+      "$ref": "#/$defs/summary"
+    },
+    "validation_by_decision_type": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/summary"
+      }
+    },
+    "validation_by_run": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/summary"
+      }
+    },
+    "validation_choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/choice"
+      },
+      "minItems": 1
+    },
+    "anchor_summary": {
+      "$ref": "#/$defs/summary"
+    },
+    "anchor_by_decision_type": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/summary"
+      }
+    },
+    "anchor_by_run": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/summary"
+      }
+    },
+    "anchor_conflicts": {
+      "type": "object",
+      "properties": {
+        "exact_state_action_overlap": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "preference_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "state_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "teacher_utility_gap": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "preference_id",
+              "state_id",
+              "teacher_utility_gap"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "exact_overlap_conflicts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "exact_hashed_contrast_aliases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "preference_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "state_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "run_seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "source_state_hash": {
+                "type": "string",
+                "minLength": 1
+              },
+              "teacher_utility_gap": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "preference_id",
+              "state_id",
+              "run_seed",
+              "source_state_hash",
+              "teacher_utility_gap"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "opposing_aliases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "teacher_margin_directions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "state_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "run_seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "decision_type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subfold": {
+                "enum": [
+                  "fit",
+                  "selection"
+                ]
+              },
+              "teacher_utility_gap": {
+                "type": "number"
+              },
+              "initial_descent_teacher_margin": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "state_id",
+              "run_seed",
+              "decision_type",
+              "subfold",
+              "teacher_utility_gap",
+              "initial_descent_teacher_margin"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "fit_teacher_margins": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fit_margins_opposed_by_initial_preference_gradient": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "exact_state_action_overlap",
+        "exact_overlap_conflicts",
+        "exact_hashed_contrast_aliases",
+        "opposing_aliases",
+        "teacher_margin_directions",
+        "fit_teacher_margins",
+        "fit_margins_opposed_by_initial_preference_gradient",
+        "interpretation"
+      ],
+      "additionalProperties": false
+    },
+    "preference_summary": {
+      "type": "object",
+      "properties": {
+        "all_mutations": {
+          "type": "object"
+        },
+        "exclusions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "parent_fit": {
+          "type": "object"
+        },
+        "candidate_fit": {
+          "type": "object"
+        },
+        "parent_selection": {
+          "type": "object"
+        },
+        "candidate_selection": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "all_mutations",
+        "exclusions",
+        "parent_fit",
+        "candidate_fit",
+        "parent_selection",
+        "candidate_selection"
+      ],
+      "additionalProperties": false
+    },
+    "preference_coverage": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "fit_preferences": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "selection_preferences": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "strong_fit_runs": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "fit_preferences",
+          "selection_preferences",
+          "strong_fit_runs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "preference_choices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/preference"
+      },
+      "minItems": 1
+    },
+    "terminal_victory_positive_labels": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "saved_development_auxiliary_policy_regression_diagnosis"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "objective",
+    "inputs",
+    "complete_run_subfolds",
+    "reconciliation_pass",
+    "candidate_eligible",
+    "validation_checks",
+    "validation_summary",
+    "validation_by_decision_type",
+    "validation_by_run",
+    "validation_choices",
+    "anchor_summary",
+    "anchor_by_decision_type",
+    "anchor_by_run",
+    "anchor_conflicts",
+    "preference_summary",
+    "preference_coverage",
+    "preference_choices",
+    "terminal_victory_positive_labels",
+    "checkpoint_promoted",
+    "claim_scope",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "summary": {
+      "type": "object",
+      "properties": {
+        "decisions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "changed_actions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "harmful_changes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "beneficial_changes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tied_changes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parent_mean_regret": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "candidate_mean_regret": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mean_regret_change": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "total_regret_change": {
+          "type": "number"
+        },
+        "gross_harm": {
+          "type": "number"
+        },
+        "gross_benefit": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "decisions",
+        "changed_actions",
+        "harmful_changes",
+        "beneficial_changes",
+        "tied_changes",
+        "parent_mean_regret",
+        "candidate_mean_regret",
+        "mean_regret_change",
+        "total_regret_change",
+        "gross_harm",
+        "gross_benefit"
+      ],
+      "additionalProperties": false
+    },
+    "choice": {
+      "type": "object",
+      "properties": {
+        "state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_state_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "representation_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "candidate_action_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "teacher_auxiliary_utilities": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1
+        },
+        "teacher_stability_multiplier": {
+          "type": "number"
+        },
+        "parent_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_action_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_action_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parent_probabilities": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 1
+        },
+        "candidate_probabilities": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 1
+        },
+        "probability_note": {
+          "const": "policy_distribution_not_calibrated_game_victory_probability"
+        },
+        "parent_regret": {
+          "type": "number"
+        },
+        "candidate_regret": {
+          "type": "number"
+        },
+        "regret_change": {
+          "type": "number"
+        },
+        "action_changed": {
+          "type": "boolean"
+        },
+        "effect": {
+          "enum": [
+            "harmful",
+            "beneficial",
+            "tied"
+          ]
+        },
+        "weight_attribution": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "parent_new_over_old_margin": {
+                  "type": "number"
+                },
+                "candidate_new_over_old_margin": {
+                  "type": "number"
+                },
+                "weight_update_margin": {
+                  "type": "number"
+                },
+                "action_coordinate_margin": {
+                  "type": "number"
+                },
+                "state_action_coordinate_margin": {
+                  "type": "number"
+                },
+                "initial_preference_descent_margin": {
+                  "type": "number"
+                },
+                "largest_margin_terms": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "coordinate": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "margin_change": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "coordinate",
+                      "margin_change"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 8
+                },
+                "gradient_note": {
+                  "const": "unpreconditioned_derivative_not_saved_optimizer_step"
+                },
+                "most_aligned_fit_preference": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "preference_id": {
+                          "type": "string",
+                          "pattern": "^sha256:[a-f0-9]{64}$"
+                        },
+                        "run_seed": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "decision_type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "rank_component": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "contrast_cosine": {
+                          "type": "number",
+                          "minimum": -1,
+                          "maximum": 1
+                        },
+                        "shared_coordinates": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "preference_id",
+                        "run_seed",
+                        "decision_type",
+                        "rank_component",
+                        "contrast_cosine",
+                        "shared_coordinates"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "most_opposed_fit_preference": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "preference_id": {
+                          "type": "string",
+                          "pattern": "^sha256:[a-f0-9]{64}$"
+                        },
+                        "run_seed": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "decision_type": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "rank_component": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "contrast_cosine": {
+                          "type": "number",
+                          "minimum": -1,
+                          "maximum": 1
+                        },
+                        "shared_coordinates": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "preference_id",
+                        "run_seed",
+                        "decision_type",
+                        "rank_component",
+                        "contrast_cosine",
+                        "shared_coordinates"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "interpretation": {
+                  "const": "hashed_coordinate_association_not_semantic_or_causal_proof"
+                }
+              },
+              "required": [
+                "parent_new_over_old_margin",
+                "candidate_new_over_old_margin",
+                "weight_update_margin",
+                "action_coordinate_margin",
+                "state_action_coordinate_margin",
+                "initial_preference_descent_margin",
+                "largest_margin_terms",
+                "gradient_note",
+                "most_aligned_fit_preference",
+                "most_opposed_fit_preference",
+                "interpretation"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "state_id",
+        "run_seed",
+        "decision_type",
+        "source_state_hash",
+        "representation_hash",
+        "candidate_action_ids",
+        "teacher_auxiliary_utilities",
+        "teacher_stability_multiplier",
+        "parent_action_id",
+        "candidate_action_id",
+        "parent_action_index",
+        "candidate_action_index",
+        "parent_probabilities",
+        "candidate_probabilities",
+        "probability_note",
+        "parent_regret",
+        "candidate_regret",
+        "regret_change",
+        "action_changed",
+        "effect",
+        "weight_attribution"
+      ],
+      "additionalProperties": false
+    },
+    "preference": {
+      "type": "object",
+      "properties": {
+        "preference_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "run_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "subfold": {
+          "enum": [
+            "fit",
+            "selection"
+          ]
+        },
+        "decision_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_state_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deciding_rank_component": {
+          "type": "string",
+          "minLength": 1
+        },
+        "training_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "candidate_action_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "preferred_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disfavored_action_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_margin": {
+          "type": "number"
+        },
+        "candidate_margin": {
+          "type": "number"
+        },
+        "margin_change": {
+          "type": "number"
+        },
+        "parent_direction_correct": {
+          "type": "boolean"
+        },
+        "candidate_direction_correct": {
+          "type": "boolean"
+        },
+        "contrast_nonzero_coordinates": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "preference_id",
+        "run_seed",
+        "subfold",
+        "decision_type",
+        "source_state_hash",
+        "deciding_rank_component",
+        "training_weight",
+        "candidate_action_ids",
+        "preferred_action_id",
+        "disfavored_action_id",
+        "parent_margin",
+        "candidate_margin",
+        "margin_change",
+        "parent_direction_correct",
+        "candidate_direction_correct",
+        "contrast_nonzero_coordinates"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

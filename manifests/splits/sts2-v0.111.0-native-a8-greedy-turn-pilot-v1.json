@@ -1,0 +1,48 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:3d42d39f01c68dc4f8cc57b37ea5d45d4fc9fdadd6592dbc30bbd993005266ab",
+  "partition": "train",
+  "schema_version": "native-greedy-turn-seeds-v1",
+  "seeds": [
+    {
+      "id": 1910000,
+      "numerical_seed": 2,
+      "seed": "SP1RESH1FTTURNTRN0000"
+    },
+    {
+      "id": 1910001,
+      "numerical_seed": 3,
+      "seed": "SP1RESH1FTTURNTRN0001"
+    },
+    {
+      "id": 1910002,
+      "numerical_seed": 2,
+      "seed": "SP1RESH1FTTURNTRN0002"
+    },
+    {
+      "id": 1910003,
+      "numerical_seed": 3,
+      "seed": "SP1RESH1FTTURNTRN0003"
+    },
+    {
+      "id": 1910004,
+      "numerical_seed": 2,
+      "seed": "SP1RESH1FTTURNTRN0004"
+    },
+    {
+      "id": 1910005,
+      "numerical_seed": 3,
+      "seed": "SP1RESH1FTTURNTRN0005"
+    },
+    {
+      "id": 1910006,
+      "numerical_seed": 2,
+      "seed": "SP1RESH1FTTURNTRN0006"
+    },
+    {
+      "id": 1910007,
+      "numerical_seed": 3,
+      "seed": "SP1RESH1FTTURNTRN0007"
+    }
+  ]
+}

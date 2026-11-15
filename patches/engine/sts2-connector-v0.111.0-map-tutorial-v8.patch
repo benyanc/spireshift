@@ -1,0 +1,821 @@
+diff --git a/host/LiveHost/CombatTurnSurfaceReader.cs b/host/LiveHost/CombatTurnSurfaceReader.cs
+index 6854d2c..19f320d 100644
+--- a/host/LiveHost/CombatTurnSurfaceReader.cs
++++ b/host/LiveHost/CombatTurnSurfaceReader.cs
+@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
+ using MegaCrit.Sts2.Core.Entities.Players;
+ using MegaCrit.Sts2.Core.Entities.Potions;
+ using MegaCrit.Sts2.Core.Models;
++using MegaCrit.Sts2.Core.GameActions;
+ using MegaCrit.Sts2.Core.Nodes.Combat;
+ using MegaCrit.Sts2.Core.Nodes.Rooms;
+ using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
+@@ -23,6 +24,7 @@ internal sealed class CombatTurnSurfaceReader : ILiveSurfaceReader
+ {
+     internal const string PlayCardDeliveryEvidence = "native_card_play_accepted";
+     internal const string UsePotionDeliveryEvidence = "native_potion_use_enqueued";
++    internal const string DiscardPotionDeliveryEvidence = "native_combat_potion_discard_enqueued";
+     internal const string EndTurnDeliveryEvidence = "native_end_turn_command_submitted";
+ 
+     public string Kind => "combat_turn";
+@@ -65,10 +67,20 @@ internal sealed class CombatTurnSurfaceReader : ILiveSurfaceReader
+             !hand.InCardPlay && hand.CurrentMode == NPlayerHand.Mode.Play);
+         var playableCards = new List<VisibleCombatCommandOption>();
+         var usablePotions = new List<VisibleCombatCommandOption>();
++        var discardablePotions = new List<VisibleCombatDiscardOption>();
+         if (inputReady)
+         {
+             AddCardOptions(playableCards, player, playerCombat, entities);
+             AddPotionOptions(usablePotions, player, entities);
++            for (int slot = 0; slot < player.PotionSlots.Count; slot++)
++            {
++                PotionModel? potion = player.GetPotionAtSlotIndex(slot);
++                if (CanDiscardPotion(player, potion))
++                    discardablePotions.Add(new VisibleCombatDiscardOption(
++                        entities.GetId(potion!, "potion"),
++                        ConnectorMod.SafeGetText(() => potion!.Title) ?? potion!.Id.Entry,
++                        slot));
++            }
+         }
+ 
+         bool canEndTurn = inputReady;
+@@ -78,7 +90,8 @@ internal sealed class CombatTurnSurfaceReader : ILiveSurfaceReader
+             canEndTurn)
+         {
+             PlayableCards = playableCards,
+-            UsablePotions = usablePotions
++            UsablePotions = usablePotions,
++            DiscardablePotions = discardablePotions
+         };
+         string readiness = inputReady ? "ready" : "settling";
+         var completeness = new StateCompleteness(
+@@ -282,6 +295,29 @@ internal sealed class CombatTurnSurfaceReader : ILiveSurfaceReader
+         return StartUsePotion(player, potion, slot, target);
+     }
+ 
++    internal static NativeInputResult StartDirectDiscardPotion(
++        NativeEntityRegistry entities, string expectedRoomId, string expectedPotionId, int expectedSlot)
++    {
++        if (!TryResolveDirectCombatOwner(entities, expectedRoomId, out Player? player)
++            || !entities.TryResolve(expectedPotionId, out PotionModel? potion)
++            || potion == null || !CanDiscardPotion(player!, potion)
++            || expectedSlot < 0 || expectedSlot >= player!.PotionSlots.Count
++            || !ReferenceEquals(player.GetPotionAtSlotIndex(expectedSlot), potion))
++            return NativeInputResult.Rejected("combat_potion_discard_changed",
++                "The exact combat owner, potion slot or discard permission changed.");
++        RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(
++            new DiscardPotionGameAction(player, (uint)expectedSlot, CombatManager.Instance.IsInProgress));
++        return NativeInputResult.Delivered(DiscardPotionDeliveryEvidence);
++    }
++
++    // Discard permission does not depend on manual usability or target selection.
++    internal static bool DiscardPermission(bool inputReady, bool permission, bool owned, bool queued) =>
++        inputReady && permission && owned && !queued;
++
++    internal static bool CanDiscardPotion(Player player, PotionModel? potion) =>
++        potion != null && DiscardPermission(IsActionablePlayerTurn(player),
++            player.CanUseOrRemovePotions, ReferenceEquals(potion.Owner, player), potion.IsQueued);
++
+     internal static NativeInputResult StartDirectEndTurn(
+         NativeEntityRegistry entities,
+         string expectedRoomId) =>
+diff --git a/host/LiveHost/LiveHostContracts.cs b/host/LiveHost/LiveHostContracts.cs
+index 998e68f..c80eb12 100644
+--- a/host/LiveHost/LiveHostContracts.cs
++++ b/host/LiveHost/LiveHostContracts.cs
+@@ -774,6 +774,8 @@ public sealed record VisibleCombatCommandOption(
+     string? Name,
+     IReadOnlyList<string> TargetEntityIds);
+ 
++public sealed record VisibleCombatDiscardOption(string EntityId, string? Name, int Slot);
++
+ public sealed record CombatTurnSurface(
+     string Kind,
+     string RoomEntityId,
+@@ -783,6 +785,8 @@ public sealed record CombatTurnSurface(
+         Array.Empty<VisibleCombatCommandOption>();
+     public IReadOnlyList<VisibleCombatCommandOption> UsablePotions { get; init; } =
+         Array.Empty<VisibleCombatCommandOption>();
++    public IReadOnlyList<VisibleCombatDiscardOption> DiscardablePotions { get; init; } =
++        Array.Empty<VisibleCombatDiscardOption>();
+ }
+ 
+ public sealed record CombatHandCardSelectionSurface(
+diff --git a/host/LiveHost/TutorialModalSurfaceReader.cs b/host/LiveHost/TutorialModalSurfaceReader.cs
+index 69b70b1..356031f 100644
+--- a/host/LiveHost/TutorialModalSurfaceReader.cs
++++ b/host/LiveHost/TutorialModalSurfaceReader.cs
+@@ -13,8 +13,7 @@ using STS2Connector.NativeUi;
+ namespace STS2Connector.LiveHost;
+ 
+ /// <summary>
+-/// Direct Host binding for the two exact first-run tutorial modals that block
+-/// ordinary single-player entry on the audited game build. Unknown modal types
++/// Direct Host bindings for the exact supported tutorial modals on the audited build. Unknown modal types
+ /// deliberately do not match this reader and therefore remain fail closed.
+ /// </summary>
+ internal sealed class TutorialModalSurfaceReader : ILiveSurfaceReader
+@@ -22,6 +21,20 @@ internal sealed class TutorialModalSurfaceReader : ILiveSurfaceReader
+     internal const string SurfaceKind = "tutorial";
+     internal const string AcceptTutorialsId = "accept_tutorials_ftue";
+     internal const string CombatRulesId = "combat_rules_ftue";
++    internal const string RelicRewardId = "obtain_relic_ftue";
++    internal const string RelicDeliveryEvidence = "native_relic_reward_tutorial_confirm_clicked";
++    internal const string ObtainPotionId = "obtain_potion_ftue";
++    internal const string PotionDeliveryEvidence = "native_obtain_potion_tutorial_confirm_clicked";
++    internal const string ShuffleId = "shuffle_ftue";
++    internal const string ShuffleDeliveryEvidence = "native_shuffle_tutorial_confirm_clicked";
++    internal const string RestSiteId = "rest_site_ftue";
++    internal const string MapSelectId = "map_select_ftue";
++    internal const string MapSelectDeliveryEvidence = "native_map_select_tutorial_confirm_clicked";
++    internal const string PowerCardId = "power_card_ftue";
++    internal const string PowerCardDeliveryEvidence = "native_power_card_tutorial_confirm_clicked";
++    internal const string AscensionId = "ascension_singleplayer_ftue";
++    internal const string AscensionDeliveryEvidence = "native_ascension_tutorial_confirm_clicked";
++    internal const string RestDeliveryEvidence = "native_rest_tutorial_confirm_clicked";
+     internal const string EnableDeliveryEvidence = "native_tutorial_enable_clicked";
+     internal const string DisableDeliveryEvidence = "native_tutorial_disable_clicked";
+     internal const string PreviousDeliveryEvidence = "native_tutorial_previous_clicked";
+@@ -42,6 +55,13 @@ internal sealed class TutorialModalSurfaceReader : ILiveSurfaceReader
+         {
+             NAcceptTutorialsFtue modal => BuildTutorialPreference(modal, entities, game),
+             NCombatRulesFtue modal => BuildCombatRules(modal, entities, game),
++            NMapSelectFtue modal => BuildMapSelect(modal, entities, game),
++            NPowerCardFtue modal => BuildPowerCard(modal, entities, game),
++            NRestSiteFtue modal => BuildRestSite(modal, entities, game),
++            NAscensionSingleplayerFtue modal => BuildAscension(modal, entities, game),
++            NShuffleFtue modal => BuildShuffle(modal, entities, game),
++            NRelicRewardFtue modal => BuildRelicReward(modal, entities, game),
++            NObtainPotionFtue modal => BuildObtainPotion(modal, entities, game),
+             _ => null
+         };
+ 
+@@ -156,6 +176,370 @@ internal sealed class TutorialModalSurfaceReader : ILiveSurfaceReader
+         }
+     }
+ 
++    private static LiveObservation BuildAscension(
++        NAscensionSingleplayerFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("%FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("%Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "%Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NAscensionSingleplayerFtue),
++                    "Ascension tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), AscensionId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NAscensionSingleplayerFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NAscensionSingleplayerFtue),
++                $"Ascension tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartAscension(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NAscensionSingleplayerFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("ascension_tutorial_owner_changed",
++                "The exact ascension tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("%FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("ascension_tutorial_control_changed",
++                    "The ascension tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(AscensionDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("ascension_tutorial_binding_failed",
++                $"The exact ascension tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
++    private static LiveObservation BuildMapSelect(
++        NMapSelectFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("%FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("%Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "%Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NMapSelectFtue),
++                    "Map-selection tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), MapSelectId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NMapSelectFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NMapSelectFtue),
++                $"Map-selection tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartMapSelect(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NMapSelectFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("map_select_tutorial_owner_changed",
++                "The exact map-selection tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("%FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("map_select_tutorial_control_changed",
++                    "The map-selection tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(MapSelectDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("map_select_tutorial_binding_failed",
++                $"The exact map-selection tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
++    private static LiveObservation BuildPowerCard(
++        NPowerCardFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("FtuePopup/Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "FtuePopup/DescriptionContainer/Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NPowerCardFtue),
++                    "Power card tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), PowerCardId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NPowerCardFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NPowerCardFtue),
++                $"Power card tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartPowerCard(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NPowerCardFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("power_card_tutorial_owner_changed",
++                "The exact power card tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("power_card_tutorial_control_changed",
++                    "The power card tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(PowerCardDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("power_card_tutorial_binding_failed",
++                $"The exact power card tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
++    private static LiveObservation BuildRestSite(
++        NRestSiteFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("FtuePopup/Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "FtuePopup/DescriptionContainer/Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NRestSiteFtue),
++                    "Rest tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), RestSiteId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NRestSiteFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NRestSiteFtue),
++                $"Rest tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartRestSite(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NRestSiteFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("rest_tutorial_owner_changed",
++                "The exact rest tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("rest_tutorial_control_changed",
++                    "The rest tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(RestDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("rest_tutorial_binding_failed",
++                $"The exact rest tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
++    private static LiveObservation BuildShuffle(
++        NShuffleFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("FtuePopup/Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "FtuePopup/DescriptionContainer/Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NShuffleFtue),
++                    "Shuffle tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), ShuffleId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NShuffleFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NShuffleFtue),
++                $"Shuffle tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartShuffle(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NShuffleFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("shuffle_tutorial_owner_changed",
++                "The exact shuffle tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("shuffle_tutorial_control_changed",
++                    "The shuffle tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(ShuffleDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("shuffle_tutorial_binding_failed",
++                $"The exact shuffle tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
++    private static LiveObservation BuildObtainPotion(
++        NObtainPotionFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("FtuePopup/Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "FtuePopup/DescriptionContainer/Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NObtainPotionFtue),
++                    "Potion tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), ObtainPotionId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NObtainPotionFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NObtainPotionFtue),
++                $"Potion tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartObtainPotion(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NObtainPotionFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("obtain_potion_tutorial_owner_changed",
++                "The exact potion tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("obtain_potion_tutorial_control_changed",
++                    "The potion tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(PotionDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("obtain_potion_tutorial_binding_failed",
++                $"The exact potion tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
++    private static LiveObservation BuildRelicReward(
++        NRelicRewardFtue modal, NativeEntityRegistry entities, GameBuildIdentity game)
++    {
++        ILiveContext context = LiveContextReader.Build(entities);
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            string? title = ReadLabel(modal.GetNode<MegaLabel>("FtuePopup/Header"));
++            string? body = ReadRichText(modal.GetNode<MegaRichTextLabel>(
++                "FtuePopup/DescriptionContainer/Description"));
++            string? label = ReadLabel(button.GetNode<MegaLabel>("%Label"));
++            if (title == null || body == null || label == null)
++                return BindingUnavailable(game, context, nameof(NRelicRewardFtue),
++                    "Relic reward tutorial text or confirmation label is unavailable.");
++            bool enabled = IsUsable(button);
++            var surface = new TutorialSurface(SurfaceKind, "confirmation",
++                entities.GetId(modal, "screen"), RelicRewardId, null, null, title, body, null,
++                enabled ? new[] { new VisibleTutorialOption("dismiss_tutorial", label, true) }
++                    : Array.Empty<VisibleTutorialOption>());
++            return ReadyObservation(game, context, surface, enabled,
++                "NRelicRewardFtue exact current modal and visible FtueConfirmButton");
++        }
++        catch (Exception ex)
++        {
++            return BindingUnavailable(game, context, nameof(NRelicRewardFtue),
++                $"Relic reward tutorial binding failed: {ex.GetType().Name}.");
++        }
++    }
++
++    internal static NativeInputResult StartRelicReward(
++        NativeEntityRegistry entities, string expectedScreenId)
++    {
++        if (!TryResolveCurrentModal(entities, expectedScreenId, out NRelicRewardFtue? modal)
++            || modal == null)
++            return NativeInputResult.Rejected("relic_reward_tutorial_owner_changed",
++                "The exact relic reward tutorial modal is no longer current.");
++        try
++        {
++            NButton button = modal.GetNode<NButton>("FtuePopup/FtueConfirmButton");
++            if (!IsUsable(button))
++                return NativeInputResult.Rejected("relic_reward_tutorial_control_changed",
++                    "The relic reward tutorial confirmation is no longer visible and enabled.");
++            button.ForceClick();
++            return NativeInputResult.Delivered(RelicDeliveryEvidence);
++        }
++        catch (Exception ex)
++        {
++            return NativeInputResult.Rejected("relic_reward_tutorial_binding_failed",
++                $"The exact relic reward tutorial control could not be resolved: {ex.GetType().Name}.");
++        }
++    }
++
+     internal static NativeInputResult StartPreference(
+         NativeEntityRegistry entities,
+         string expectedScreenId,
+diff --git a/host/NativeUi/NativeUiActionRuntime.cs b/host/NativeUi/NativeUiActionRuntime.cs
+index 8251f95..8f53bd7 100644
+--- a/host/NativeUi/NativeUiActionRuntime.cs
++++ b/host/NativeUi/NativeUiActionRuntime.cs
+@@ -71,7 +71,7 @@ internal static class NativeUiActionRuntime
+             string operandName = descriptor.Kind == "play_card" ? "card_id" : "potion_id";
+             ActionEntityBinding? primary = descriptor.EntityBindings?
+                 .FirstOrDefault(entity => entity.Role == role);
+-            if (descriptor.Kind is "play_card" or "use_potion" && primary != null)
++            if (descriptor.Kind is "play_card" or "use_potion" or "discard_potion" && primary != null)
+             {
+                 string[] targets = descriptor.EntityBindings?
+                     .Where(entity => entity.Role == "target")
+@@ -82,6 +82,12 @@ internal static class NativeUiActionRuntime
+                 {
+                     [operandName] = primary.EntityId
+                 };
++                if (descriptor.Kind == "discard_potion")
++                {
++                    int? slot = ExactDiscardSlot(surface, primary.EntityId);
++                    if (slot == null) continue;
++                    operands["potion_slot"] = slot.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
++                }
+                 var domains = new Dictionary<string, NativeUiOperandDomain>(StringComparer.Ordinal);
+                 if (targets.Length > 0)
+                     domains["target_id"] = new NativeUiOperandDomain("entity_ids", targets);
+@@ -134,6 +140,15 @@ internal static class NativeUiActionRuntime
+                     .Concat(potion.TargetEntityIds.Select(id => new ActionEntityBinding("target", id)))
+                     .ToArray()));
+         }
++        foreach (VisibleCombatDiscardOption potion in surface.DiscardablePotions)
++        {
++            if (ExactDiscardSlot(surface, potion.EntityId) == null) continue;
++            commands.Add(NativeDescriptor(
++                $"discard_potion:{surface.RoomEntityId}:{potion.EntityId}:{potion.Slot}",
++                "discard_potion", "combat", $"Discard {potion.Name ?? potion.EntityId} from slot {potion.Slot + 1}",
++                "CanUseOrRemovePotions+exact-owner-slot+DiscardPotionGameAction",
++                new[] { new ActionEntityBinding("potion", potion.EntityId) }));
++        }
+         if (surface.CanEndTurn)
+         {
+             commands.Add(NativeDescriptor(
+@@ -147,6 +162,14 @@ internal static class NativeUiActionRuntime
+         return commands;
+     }
+ 
++    internal static int? ExactDiscardSlot(CombatTurnSurface surface, string potionId)
++    {
++        var matches = surface.DiscardablePotions.Where(p => p.EntityId == potionId).ToArray();
++        if (matches.Length != 1 || matches[0].Slot < 0
++            || surface.DiscardablePotions.Count(p => p.Slot == matches[0].Slot) != 1) return null;
++        return matches[0].Slot;
++    }
++
+     private static IReadOnlyList<NativeUiBoundAction> BuildShopRoomBindings(
+         LiveObservation draft,
+         ShopRoomSurface surface) => DescribeShopRoomCommands(surface)
+@@ -829,6 +852,34 @@ internal static class NativeUiActionRuntime
+                         option.Label,
+                         $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}",
+                         new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.AscensionId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.MapSelectId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.PowerCardId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.RestSiteId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.ShuffleId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.ObtainPotionId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
++                "dismiss_tutorial" when surface.TutorialId == TutorialModalSurfaceReader.RelicRewardId => NativeDescriptor(
++                    $"tutorial:{surface.TutorialId}:confirm",
++                    option.SemanticId, "configuration", option.Label,
++                    $"{surface.TutorialId}:exact-current-modal:{option.SemanticId}", new[] { screen }),
+                 _ => null
+             })
+             .Where(action => action != null)
+@@ -1373,6 +1424,20 @@ internal static class NativeUiActionRuntime
+                 TutorialModalSurfaceReader.StartPreference(Entities, surface.ScreenEntityId, enable: true),
+             (TutorialModalSurfaceReader.AcceptTutorialsId, "disable_tutorials") =>
+                 TutorialModalSurfaceReader.StartPreference(Entities, surface.ScreenEntityId, enable: false),
++            (TutorialModalSurfaceReader.AscensionId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartAscension(Entities, surface.ScreenEntityId),
++            (TutorialModalSurfaceReader.MapSelectId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartMapSelect(Entities, surface.ScreenEntityId),
++            (TutorialModalSurfaceReader.PowerCardId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartPowerCard(Entities, surface.ScreenEntityId),
++            (TutorialModalSurfaceReader.RestSiteId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartRestSite(Entities, surface.ScreenEntityId),
++            (TutorialModalSurfaceReader.ShuffleId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartShuffle(Entities, surface.ScreenEntityId),
++            (TutorialModalSurfaceReader.ObtainPotionId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartObtainPotion(Entities, surface.ScreenEntityId),
++            (TutorialModalSurfaceReader.RelicRewardId, "dismiss_tutorial") =>
++                TutorialModalSurfaceReader.StartRelicReward(Entities, surface.ScreenEntityId),
+             (TutorialModalSurfaceReader.CombatRulesId, "previous_tutorial_page") when surface.CurrentPage is int page =>
+                 TutorialModalSurfaceReader.StartCombatPage(Entities, surface.ScreenEntityId, page, advance: false),
+             (TutorialModalSurfaceReader.CombatRulesId, "advance_tutorial") when surface.CurrentPage is int page =>
+@@ -2081,6 +2146,12 @@ internal static class NativeUiActionRuntime
+                     surface.RoomEntityId,
+                     potionId,
+                     operands.GetValueOrDefault("target_id")),
++            "discard_potion" when operands.TryGetValue("potion_id", out string? discardId)
++                && operands.TryGetValue("potion_slot", out string? slotText)
++                && int.TryParse(slotText, System.Globalization.NumberStyles.None,
++                    System.Globalization.CultureInfo.InvariantCulture, out int slot)
++                && ExactDiscardSlot(surface, discardId) == slot =>
++                CombatTurnSurfaceReader.StartDirectDiscardPotion(Entities, surface.RoomEntityId, discardId, slot),
+             "end_turn" => CombatTurnSurfaceReader.StartDirectEndTurn(
+                 Entities,
+                 surface.RoomEntityId),
+@@ -2092,7 +2163,7 @@ internal static class NativeUiActionRuntime
+ 
+     private static string PublicCommand(string operation)
+     {
+-        if (operation is "play_card" or "use_potion" or "end_turn")
++        if (operation is "play_card" or "use_potion" or "discard_potion" or "end_turn")
+             return operation;
+         if (operation.StartsWith("purchase_", StringComparison.Ordinal))
+             return "purchase";
+diff --git a/host/PlayerEnvironment/Observation/VisibleInteractionProjection.cs b/host/PlayerEnvironment/Observation/VisibleInteractionProjection.cs
+index 4e054eb..b0485c9 100644
+--- a/host/PlayerEnvironment/Observation/VisibleInteractionProjection.cs
++++ b/host/PlayerEnvironment/Observation/VisibleInteractionProjection.cs
+@@ -305,7 +305,7 @@ internal static partial class PlayerEnvironmentService
+             }),
+             CombatTurnSurface value => ToNode(new
+             {
+-                value.Kind, value.CanEndTurn, value.PlayableCards, value.UsablePotions
++                value.Kind, value.CanEndTurn, value.PlayableCards, value.UsablePotions, value.DiscardablePotions
+             }),
+             CombatHandCardSelectionSurface value => ToNode(new
+             {
+diff --git a/host/PlayerEnvironment/Projection/BoundActionProjection.cs b/host/PlayerEnvironment/Projection/BoundActionProjection.cs
+index b13cd79..c193975 100644
+--- a/host/PlayerEnvironment/Projection/BoundActionProjection.cs
++++ b/host/PlayerEnvironment/Projection/BoundActionProjection.cs
+@@ -225,7 +225,7 @@ internal static partial class PlayerEnvironmentService
+         string[] preferred = command switch
+         {
+             "play_card" => new[] { "card" },
+-            "use_potion" => new[] { "potion" },
++            "use_potion" or "discard_potion" => new[] { "potion" },
+             "select_entity" or "deselect_entity" => new[] { "card", "option", "item", "entity" },
+             "purchase" => new[] { "item", "card", "relic", "potion" },
+             "navigate" => new[] { "map_choice", "node" },
+diff --git a/host/tests/STS2Connector.Host.Tests/CombatDiscardContractTests.cs b/host/tests/STS2Connector.Host.Tests/CombatDiscardContractTests.cs
+new file mode 100644
+index 0000000..452a5fe
+--- /dev/null
++++ b/host/tests/STS2Connector.Host.Tests/CombatDiscardContractTests.cs
+@@ -0,0 +1,46 @@
++using STS2Connector.LiveHost;
++using STS2Connector.LiveHost.Contracts;
++using STS2Connector.NativeUi;
++using STS2Connector.PlayerEnvironment;
++namespace STS2Connector.Tests;
++
++public sealed class CombatDiscardContractTests
++{
++    [Theory]
++    [InlineData(true, true, true, false, true)]
++    [InlineData(false, true, true, false, false)]
++    [InlineData(true, false, true, false, false)]
++    [InlineData(true, true, false, false, false)]
++    [InlineData(true, true, true, true, false)]
++    public void DiscardRequiresReadyPermissionOwnerAndNoQueuedEffect(bool ready, bool permission,
++        bool owner, bool queued, bool expected) =>
++        Assert.Equal(expected, CombatTurnSurfaceReader.DiscardPermission(ready, permission, owner, queued));
++
++    [Fact]
++    public void IdenticalPotionNamesKeepDistinctExactSlots()
++    {
++        var surface = new CombatTurnSurface("combat_turn", "room", true)
++        {
++            DiscardablePotions = new[] { new VisibleCombatDiscardOption("p0", "Same potion", 0),
++                new VisibleCombatDiscardOption("p1", "Same potion", 1) }
++        };
++        Assert.Equal(0, NativeUiActionRuntime.ExactDiscardSlot(surface, "p0"));
++        Assert.Equal(1, NativeUiActionRuntime.ExactDiscardSlot(surface, "p1"));
++        var actions = NativeUiActionRuntime.DescribeCombatCommands(surface).Where(a => a.Kind == "discard_potion").ToArray();
++        Assert.Equal(2, actions.Length);
++        Assert.NotEqual(actions[0].Key, actions[1].Key);
++        Assert.All(actions, a => Assert.Equal("discard_potion", a.Kind));
++        Assert.Equal("activate", PlayerEnvironmentService.GenericAction("discard_potion", "discard_potion"));
++    }
++
++    [Fact]
++    public void EmptyOrAmbiguousSlotsAreNotAdvertised()
++    {
++        var surface = new CombatTurnSurface("combat_turn", "room", true);
++        Assert.Null(NativeUiActionRuntime.ExactDiscardSlot(surface, "absent"));
++        surface = surface with { DiscardablePotions = new[] {
++            new VisibleCombatDiscardOption("p0", "Potion", 0), new VisibleCombatDiscardOption("p1", "Potion", 0) } };
++        Assert.Null(NativeUiActionRuntime.ExactDiscardSlot(surface, "p0"));
++        Assert.DoesNotContain(NativeUiActionRuntime.DescribeCombatCommands(surface), a => a.Kind == "discard_potion");
++    }
++}
+diff --git a/host/tests/STS2Connector.Host.Tests/NativeUiContractTests.cs b/host/tests/STS2Connector.Host.Tests/NativeUiContractTests.cs
+index a416748..8a301f3 100644
+--- a/host/tests/STS2Connector.Host.Tests/NativeUiContractTests.cs
++++ b/host/tests/STS2Connector.Host.Tests/NativeUiContractTests.cs
+@@ -39,6 +39,48 @@ public sealed class NativeUiContractTests
+             typeof(NVerticalPopup).GetProperty("NoButton", flags)?.PropertyType);
+     }
+ 
++    [Fact]
++    public void RestTutorialDismissalIsRestrictedToItsExactEnabledModal()
++    {
++        var surface = new TutorialSurface("tutorial", "confirmation", "rest-popup",
++            TutorialModalSurfaceReader.RestSiteId, null, null, "Rest", "Rest information", null,
++            new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", true) });
++        NativeUiActionDescriptor command = Assert.Single(NativeUiActionRuntime.DescribeTutorialCommands(surface));
++        Assert.Equal("dismiss_tutorial", command.Kind);
++        Assert.Contains(command.EntityBindings!, row => row.Role == "screen" && row.EntityId == "rest-popup");
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with { TutorialId = "unknown_ftue" }));
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with {
++            Options = new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", false) } }));
++    }
++
++    [Fact]
++    public void PotionTutorialDismissalIsRestrictedToItsExactEnabledModal()
++    {
++        var surface = new TutorialSurface("tutorial", "confirmation", "potion-popup",
++            TutorialModalSurfaceReader.ObtainPotionId, null, null, "Potion", "Potion information", null,
++            new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", true) });
++        NativeUiActionDescriptor command = Assert.Single(NativeUiActionRuntime.DescribeTutorialCommands(surface));
++        Assert.Equal("dismiss_tutorial", command.Kind);
++        Assert.Contains(command.EntityBindings!, row => row.Role == "screen" && row.EntityId == "potion-popup");
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with { TutorialId = "unknown_ftue" }));
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with {
++            Options = new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", false) } }));
++    }
++
++    [Fact]
++    public void RelicRewardTutorialDismissalIsRestrictedToItsExactEnabledModal()
++    {
++        var surface = new TutorialSurface("tutorial", "confirmation", "relic-popup",
++            TutorialModalSurfaceReader.RelicRewardId, null, null, "Relic", "Relic information", null,
++            new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", true) });
++        NativeUiActionDescriptor command = Assert.Single(NativeUiActionRuntime.DescribeTutorialCommands(surface));
++        Assert.Equal("dismiss_tutorial", command.Kind);
++        Assert.Contains(command.EntityBindings!, row => row.Role == "screen" && row.EntityId == "relic-popup");
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with { TutorialId = "unknown_ftue" }));
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with {
++            Options = new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", false) } }));
++    }
++
+     [Fact]
+     public void TutorialDiscoveryPublishesOnlyExplicitCurrentControls()
+     {
+diff --git a/host/tests/STS2Connector.Host.Tests/PowerTutorialContractTests.cs b/host/tests/STS2Connector.Host.Tests/PowerTutorialContractTests.cs
+new file mode 100644
+index 0000000..a64c54f
+--- /dev/null
++++ b/host/tests/STS2Connector.Host.Tests/PowerTutorialContractTests.cs
+@@ -0,0 +1,26 @@
++using STS2Connector.LiveHost;
++using STS2Connector.LiveHost.Contracts;
++using STS2Connector.NativeUi;
++using Xunit;
++
++namespace STS2Connector.Host.Tests;
++
++public sealed class PowerTutorialContractTests
++{
++    [Theory]
++    [InlineData("map_select_ftue")]
++    [InlineData("power_card_ftue")]
++    [InlineData("ascension_singleplayer_ftue")]
++    public void OnlyCurrentEnabledTutorialConfirmationCanBecomeACommand(string id)
++    {
++        var surface = new TutorialSurface("tutorial", "confirmation", "current-popup",
++            id, null, null, "Visible title", "Visible body", null,
++            new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", true) });
++        var command = Assert.Single(NativeUiActionRuntime.DescribeTutorialCommands(surface));
++        Assert.Equal("dismiss_tutorial", command.Kind);
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with {
++            TutorialId = "unknown_ftue" }));
++        Assert.Empty(NativeUiActionRuntime.DescribeTutorialCommands(surface with {
++            Options = new[] { new VisibleTutorialOption("dismiss_tutorial", "Continue", false) } }));
++    }
++}

@@ -1,0 +1,300 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "configuration_id": "sha256:1366e81aa095585f6abb3f84887915bc8249ef87825047eea06a454dd617e598",
+  "development_planned_games": 72,
+  "development_planned_worlds": 12,
+  "development_started_games": 0,
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "final_test_worlds_used": false,
+  "fits": {
+    "2": {
+      "behavior_policy_reconstruction_kl": {
+        "anchor": 3.3437274989062047e-31,
+        "normal": 6.2608840904176495e-31,
+        "prepared": 7.0167378280969955e-31
+      },
+      "checkpoints": {
+        "mixed": {
+          "model_id": "sha256:33533837fdb8759895d5994bca575672f5c575a51c6768cb8db86db32468a5ee",
+          "optimizer_id": "sha256:236965428ba7ea5f33b97e548119e7e4969adb79828beb464a34d5751c5f9904",
+          "optimizer_steps": 5682,
+          "state_id": "sha256:44a0a07d3925f638880c92cde7a7fb9d54a8355957546c0ba44ab2ee0d55e0ea"
+        },
+        "normal": {
+          "model_id": "sha256:ee9dc2ccac114aa2e6d887885e0968332d3c09ee6817e03d1b6758d467b6497b",
+          "optimizer_id": "sha256:d8724e89584785a08a59add0a83f78faeaa831653f5e81bb2d24b1e16987bb98",
+          "optimizer_steps": 5682,
+          "state_id": "sha256:295ff9c5c4baf824b0074966589cc31901a2cdb9fe1c506fc569ce784d90d67d"
+        },
+        "original": {
+          "model_id": "sha256:f356284cc932a8f60dee6a43153617f4f16d57887c93df39999b3882febb3a05",
+          "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+          "optimizer_steps": 5658,
+          "state_id": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d"
+        }
+      },
+      "critics_exactly_matched": true,
+      "eligible_room_decisions": {
+        "normal": 705,
+        "prepared": 844
+      },
+      "epochs": 2,
+      "matched_optimizer_updates_per_arm": 24,
+      "normal_native_decisions": 1427,
+      "normal_room_outcomes": {
+        "elite": {
+          "reward_reached": 4,
+          "terminal_loss": 6
+        },
+        "normal": {
+          "reward_reached": 39,
+          "terminal_loss": 6
+        }
+      },
+      "post_epoch_kl": [
+        {
+          "mixed": {
+            "anchor": 0.006982802682034644,
+            "normal_room": 0.004704501557166272,
+            "prepared_room": 0.007368708150022967
+          },
+          "normal": {
+            "anchor": 0.008631943265313314,
+            "normal_room": 0.010486127990101684
+          }
+        },
+        {
+          "mixed": {
+            "anchor": 0.009685318567486287,
+            "normal_room": 0.014412285364766941,
+            "prepared_room": 0.022126239639691122
+          },
+          "normal": {
+            "anchor": 0.01072751893198124,
+            "normal_room": 0.015760772527731375
+          }
+        }
+      ],
+      "prepared_draws_in_mixed_arm": 384,
+      "prepared_feedback_rooms_by_act": {
+        "1": 28,
+        "2": 14,
+        "3": 13
+      },
+      "prepared_native_decisions": 1617,
+      "prepared_room_outcomes": {
+        "boss": {
+          "reward_reached": 4,
+          "terminal_loss": 4
+        },
+        "normal": {
+          "reward_reached": 44,
+          "terminal_loss": 3
+        }
+      },
+      "seal_id": "sha256:7dbb403cc688a3f9843cb719cf0193d53f87cf748ee05a5af9dab4a5f4e76bc9"
+    },
+    "3": {
+      "behavior_policy_reconstruction_kl": {
+        "anchor": 2.83606512731147e-31,
+        "normal": 4.467118767188156e-31,
+        "prepared": 5.2026663983012785e-31
+      },
+      "checkpoints": {
+        "mixed": {
+          "model_id": "sha256:5b3a0b314824ea089cf01d61453a4cca7186fa2baa5d4e4773c00b807da9f869",
+          "optimizer_id": "sha256:e1f32caa801d1626a1f368c9844836dc4fa8895276d4f9114b2524beb1cc3f2b",
+          "optimizer_steps": 6075,
+          "state_id": "sha256:e93f7f712dca57ffcb6d1c6e522d245db7f41eda4f1a92c30c08fa05e8e74751"
+        },
+        "normal": {
+          "model_id": "sha256:fd3e542a12cdbc11ef5a44eb48e6e05201e4585e9e06baf63b131f41b92ec295",
+          "optimizer_id": "sha256:f4a730e25048b5074f79723f34da6574c528fe8d1eb1244d711bd0ebb5f0ee9f",
+          "optimizer_steps": 6075,
+          "state_id": "sha256:62db6f59343a7e1c0a36381d15d926ac63700369fe5178d2824bc86edf650c66"
+        },
+        "original": {
+          "model_id": "sha256:f5b9604413bb997c80d87630fb3c6fdc6f172ad29230c1770825757900732da8",
+          "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+          "optimizer_steps": 6045,
+          "state_id": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+        }
+      },
+      "critics_exactly_matched": true,
+      "eligible_room_decisions": {
+        "normal": 1068,
+        "prepared": 1172
+      },
+      "epochs": 2,
+      "matched_optimizer_updates_per_arm": 30,
+      "normal_native_decisions": 1799,
+      "normal_room_outcomes": {
+        "elite": {
+          "reward_reached": 2,
+          "terminal_loss": 5
+        },
+        "normal": {
+          "reward_reached": 43,
+          "terminal_loss": 6
+        }
+      },
+      "post_epoch_kl": [
+        {
+          "mixed": {
+            "anchor": 0.003055467085953062,
+            "normal_room": 0.00372371216397031,
+            "prepared_room": 0.004812871995460594
+          },
+          "normal": {
+            "anchor": 0.0037751512859902367,
+            "normal_room": 0.0047011278049966096
+          }
+        },
+        {
+          "mixed": {
+            "anchor": 0.014934776156523959,
+            "normal_room": 0.022028060481455176,
+            "prepared_room": 0.01731984801833204
+          },
+          "normal": {
+            "anchor": 0.012906075506620922,
+            "normal_room": 0.01869152494732407
+          }
+        }
+      ],
+      "prepared_draws_in_mixed_arm": 480,
+      "prepared_feedback_rooms_by_act": {
+        "1": 28,
+        "2": 14,
+        "3": 13
+      },
+      "prepared_native_decisions": 1879,
+      "prepared_room_outcomes": {
+        "boss": {
+          "reward_reached": 3,
+          "terminal_loss": 5
+        },
+        "normal": {
+          "reward_reached": 46,
+          "terminal_loss": 1
+        }
+      },
+      "seal_id": "sha256:00c12aed409fc959b4bb904203e35e36648b148a1b180e7a50e26de8322eb508"
+    }
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "native_controls": {
+    "ending-p2-normal": {
+      "episode_report_id": "sha256:a8715d2ec78d3defc948303c472f0e4806f85870923ac8623c1223f6b0831273",
+      "initial_public_input_id": "sha256:41119fd7b6fd52da14a861c133ac869eb590588d67f445c66837d993f7cf6516",
+      "native_decisions": 112,
+      "outcome": "loss",
+      "seal_id": "sha256:cdba3f4c4cf8115756dff2bef0914dc74a7697da354c7e90a7090fed0c5ed0c1"
+    },
+    "ending-p3-mixed": {
+      "episode_report_id": "sha256:a1221adba3b890c8581a5fb2a4f44322cd1c30a6ec730bc8300238bc1ae562a7",
+      "initial_public_input_id": "sha256:41119fd7b6fd52da14a861c133ac869eb590588d67f445c66837d993f7cf6516",
+      "native_decisions": 176,
+      "outcome": "loss",
+      "seal_id": "sha256:88b709428479f683d51229469621e2b3b7c8e00bc9038209c3134a5df741557f"
+    },
+    "prefix-p2-mixed": {
+      "episode_report_id": "sha256:6ab57385427280c3c8edbdb8fcb5c86a7983882b23f47dd6d32c74d92bcf7838",
+      "initial_public_input_id": "sha256:a9160e44d08ee5d1c176047dcfb32c0a53e0fd42853f3db0a0b532ca84681bfc",
+      "native_decisions": 4,
+      "outcome": "capped",
+      "seal_id": "sha256:d3c7b6111e50d392d5ff7e59a9bccb1b07053e01739d14e5add46b01565f7171"
+    },
+    "prefix-p2-normal": {
+      "episode_report_id": "sha256:e46b6d422a0e7a2751c8e1a8e908e924adb146aad5066f1522621088cad5ac81",
+      "initial_public_input_id": "sha256:a9160e44d08ee5d1c176047dcfb32c0a53e0fd42853f3db0a0b532ca84681bfc",
+      "native_decisions": 4,
+      "outcome": "capped",
+      "seal_id": "sha256:d342d623048b595c12e6113326c5b669028f08bf58902f70e58702f0ece3c238"
+    },
+    "prefix-p2-original": {
+      "episode_report_id": "sha256:f2e30db9266a46f21395d4fc86875474095fcdf8748f1fe3b0813e2ed54c6b3d",
+      "initial_public_input_id": "sha256:a9160e44d08ee5d1c176047dcfb32c0a53e0fd42853f3db0a0b532ca84681bfc",
+      "native_decisions": 4,
+      "outcome": "capped",
+      "seal_id": "sha256:130d3223ea711afb978c1e87a2b5ed8c3c31447d310171b8bddcaf4d46b5da91"
+    },
+    "prefix-p3-mixed": {
+      "episode_report_id": "sha256:f275537e204dc5eed32f3ce77f9f2bc7921b8f9d742c575901e6022e70fb287c",
+      "initial_public_input_id": "sha256:a9160e44d08ee5d1c176047dcfb32c0a53e0fd42853f3db0a0b532ca84681bfc",
+      "native_decisions": 4,
+      "outcome": "capped",
+      "seal_id": "sha256:21e3ca700d3c32f2a3d0901213ed2c84b9d172277755d44fb583eece8f2b30fb"
+    },
+    "prefix-p3-normal": {
+      "episode_report_id": "sha256:f4531a3bf187b9188e2bfb1fa195e093819fba38d95a0e34087d1b7a6a8a1592",
+      "initial_public_input_id": "sha256:a9160e44d08ee5d1c176047dcfb32c0a53e0fd42853f3db0a0b532ca84681bfc",
+      "native_decisions": 4,
+      "outcome": "capped",
+      "seal_id": "sha256:a6dc6d79a2b8545d5ccf85cc0d2480afb51ce5b67a02976dbc8034a46c718283"
+    },
+    "prefix-p3-original": {
+      "episode_report_id": "sha256:e02e5c040ed9392c4c21a5d0151e88f47a7ad617255efd9471d9d56182f905af",
+      "initial_public_input_id": "sha256:a9160e44d08ee5d1c176047dcfb32c0a53e0fd42853f3db0a0b532ca84681bfc",
+      "native_decisions": 4,
+      "outcome": "capped",
+      "seal_id": "sha256:fceb2741619ae91e93b1816f7d43a1a9b30f5bf8785744921c5c7be19c0eb4fb"
+    }
+  },
+  "normal_source_training_report_id": "sha256:58eca49b6fe902aa7ae61248c6d5a66fcd3ff4f621b89b10833b7cf6cf419f6c",
+  "official_live_qualification_granted": false,
+  "preparation": {
+    "path": "artifacts/native-a8-matched-practice/preparation-v2/report.json",
+    "report_id": "sha256:d132077a2b4d2bc3161f444025cd5748af6ac0dc525e9233907ada36bcc9b16a",
+    "sha256": "a7096a38eebdd294fb1711838d56e08f1061ae2693a72aa3e8a0dc3dea3b1840"
+  },
+  "preparation_resources": {
+    "path": "artifacts/native-a8-matched-practice/preparation-v2-resources.json",
+    "report_id": "sha256:2b211228d7f831d6cf62e0bf4d69f6fba90d421efce32072896fae794a58528d",
+    "sha256": "94bde6b067fbf55469e08bf152821730180b438c9bed387cdb4217c2b8bf5252"
+  },
+  "prepared_bank_id": "sha256:a3c1bccc0a2235a142593b28704fe8d919b2dd466677f11a55fa0973cf74d5b9",
+  "prior_three_pass_attempt": {
+    "config_id": "sha256:68cf6ffb8306f20368166fda591de229b75aff4cbd7022da3aec3e276f04a742",
+    "recorded_error": "Matched fitting exceeded its policy-change guard at epoch 3: {'normal': {'anchor': 0.01397808669005861, 'normal_room': 0.0169190406931062}, 'mixed': {'anchor': 0.015570028526589277, 'normal_room': 0.019842852811407057, 'prepared_room': 0.030571205447727717}}",
+    "resource": {
+      "path": "artifacts/native-a8-matched-practice/preparation-v1-resources.json",
+      "report_id": "sha256:f856ec24fe647bc93e4965bf7387e939f3bcf17706716759703b1a4db93b1f38",
+      "sha256": "c78da1cae6393ac3511ec8a5f18688e22528f2a0604d863dd470faa248486de3"
+    },
+    "status": "guard_stopped_before_any_fit_or_control_sealed"
+  },
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-matched-practice-fitting-v2.json",
+    "sha256": "e4c5fc3a88dd908b5d7c3d96db3413d74af6abda9cdac4bff4b0aef3870baf3f"
+  },
+  "report_id": "sha256:d31136ada2626abc66ccffe84a0801f74a997948f3cc5d019491b5d0fb117721",
+  "schema_version": "native-a8-matched-practice-fitting-evidence-v2",
+  "sealed_optimizer_updates_on_copies": 108,
+  "shared_profile_unchanged": true,
+  "status": "matched_practice_fits_frozen",
+  "updates_to_originals": 0,
+  "verified_control_deliveries": 312,
+  "whole_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  }
+}

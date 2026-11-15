@@ -1,0 +1,64 @@
+{
+  "assessment": {
+    "path": "docs/evidence/native-win-curriculum-result-v1.json",
+    "sha256": "6fec23a7d39669ae0544ca1b899c3c78734b53d4a6b034384171ccfde414eda5"
+  },
+  "automatic_follow_up": false,
+  "bank_id": "sha256:4c57bea49d719b1dba36e3b1f2ff8c2c3955ec9a06ce6dc988cb1b2793115f60",
+  "collection_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v7.json",
+    "sha256": "2419f2bd2e162360d87d8d403af9921f8574f0a7d02478a2940f80c79c84be1b"
+  },
+  "control_workspace": "artifacts/native-win-fitting/control-v2",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "implementation": {
+    "scripts/fit-win-curriculum-v1.sh": "e2fa91fd4e391bbbd2a91ab24c4166ed3319890bdf7384ea53ce308147233053",
+    "src/spireshift/full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "src/spireshift/full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "src/spireshift/native_a8_bank_fit.py": "18e87c94151e301d96248b4f42ef84985d685f7b416f5c8b716357fa2f27492e",
+    "src/spireshift/native_a8_bank_fit_inputs.py": "dfdc7f585cf3e55307f6cf60c668e84990febfc71383198f2d00ecb2ace70399",
+    "src/spireshift/native_a8_bank_fit_session.py": "e2050265eff5bf3bd235605357adb0db3c8b79076c0bdb0ffa6e440035891732",
+    "src/spireshift/native_context_journal.py": "6a49c02c640dc1fe2c28e5726d9b80f940182c993279105494bcafe205cca89e",
+    "src/spireshift/native_curriculum_store.py": "8b134902175d1c4df75c0cce72e2dc923b8f5c2af318c0816d17d9d369db98bf",
+    "src/spireshift/native_shop_policy.py": "c4517e3513e57b42a642762c583600419a4c2d738d49638a799f2e6f57599156",
+    "src/spireshift/native_structured_model.py": "ad6dd6ae79c422a373bfc12cd30989c263861b2f6dddd403e6362ade2ce141e2",
+    "src/spireshift/native_structured_state.py": "df2cb6e3334b34ec5f69a403c17e2d8093ab72e1245891a57efa424a0321c6ae",
+    "src/spireshift/native_win4_plan.py": "d8ceaa38d2dfbd3a4eb580d77e287844e6ffa44f10f8f47e73389f0d19f7bc1c",
+    "tests/unit/test_native_a8_bank_fit.py": "49ef106665e43353c1f10470ab87be35480bee6ebe7cb8909c3bdda726bb3e51"
+  },
+  "operation": "fit_two_original_copies_then_stop",
+  "ordinary_PPO_allowed": false,
+  "promotion_allowed": false,
+  "schema_version": "native-win-world-balanced-fitting-v1",
+  "session_limits": {
+    "cpu_seconds": 3600,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 1800
+  },
+  "short_check": {
+    "report": {
+      "path": "artifacts/native-win-fitting/control-v2/control.json",
+      "sha256": "15e1521b3f396c72b1d67df6367938004c1046ace6ee80d1d83b71b5caa674e7"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-world-balanced-fitting-control-v2.json",
+      "sha256": "d6f79906e4c957d05349fb9376303ce1b41c7d2e924735ba66e66a8e387d2223"
+    }
+  },
+  "work": {
+    "actor_rate": 0.001,
+    "draws_per_world_per_update": 1,
+    "gradient_clip": 1.0,
+    "objective": "mean_joint_negative_log_probability_per_native_decision",
+    "players": [
+      2,
+      3
+    ],
+    "temperature": 0.8,
+    "updates_per_chunk": 20,
+    "updates_per_copy": 200,
+    "value_rate": 0.0
+  },
+  "workspace": "artifacts/native-win-fitting/study-v1"
+}

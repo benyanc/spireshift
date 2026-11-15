@@ -1,0 +1,190 @@
+{
+  "archive_fit_assessment": {
+    "path": "artifacts/native-a8-archive-fitting/saved-audit-v1.json",
+    "sha256": "d88173564b31e68600936394d6d556c5ca3cec780f4090d4e78c462734da9eda"
+  },
+  "cases": [
+    {
+      "partition": "train",
+      "run_id": "2d9e912731e2ed77",
+      "seed": "21EZGN2TXDPD",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/2d9e912731e2ed77.ndjson",
+        "sha256": "1a1bd3eb2c31e118733996c3e25069d773bf60bc05a40b65871db69db1955928"
+      }
+    },
+    {
+      "partition": "train",
+      "run_id": "69356319e382de0c",
+      "seed": "E9KUE21SC9FB",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/69356319e382de0c.ndjson",
+        "sha256": "b77072ccf33f4602cc4e065a7e6bbb0127b75c63761d7cc054d4605e6821a204"
+      }
+    },
+    {
+      "partition": "train",
+      "run_id": "2bb3d5635bf5bbda",
+      "seed": "2JGBZJBY0L04",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/2bb3d5635bf5bbda.ndjson",
+        "sha256": "a7ea22c079d23023f42113b4ecbe9ca51ebede1466f0fcb9135276c76a4b8495"
+      }
+    },
+    {
+      "partition": "train",
+      "run_id": "c2d89ae06f0cb160",
+      "seed": "SVEJX6QL5AVS",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/c2d89ae06f0cb160.ndjson",
+        "sha256": "42ae0a61f9d830e2ac72d36a180dd6b1ca85dbc61e1319469a66504db31d93b1"
+      }
+    },
+    {
+      "partition": "train",
+      "run_id": "e65b66a983586853",
+      "seed": "E4ZG0RD60YR9",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/e65b66a983586853.ndjson",
+        "sha256": "362ff3b510865299c153a5fb714404ef6074d291a76d6d56c8588508b62444c8"
+      }
+    },
+    {
+      "partition": "train",
+      "run_id": "f711c572d8e23ad5",
+      "seed": "2E92QTMX7BA6",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/f711c572d8e23ad5.ndjson",
+        "sha256": "236393ebd070fd7a1792fe7d0749e9bb80222950c1e5d890fb84fe65f571a3dd"
+      }
+    },
+    {
+      "partition": "holdout",
+      "run_id": "31e20d07b4b159e9",
+      "seed": "TGTPDNH90YAP",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/31e20d07b4b159e9.ndjson",
+        "sha256": "a900908487ecf491c87f0038ee8eca3b37f82452fab36733dfc571a8d919e715"
+      }
+    },
+    {
+      "partition": "holdout",
+      "run_id": "37b61b4895014be7",
+      "seed": "RKJ3WP6TCRTS",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/37b61b4895014be7.ndjson",
+        "sha256": "513d84c5ffcdfa00f2f96629485890f46fff47beb0b01ecd8ccb6f4e7eb2cb52"
+      }
+    },
+    {
+      "partition": "holdout",
+      "run_id": "f57f56dc8aaaa022",
+      "seed": "XY1637LSZ37M",
+      "source": {
+        "path": "artifacts/native-a8-archive-batch/intake-v1/f57f56dc8aaaa022.ndjson",
+        "sha256": "a2c4a5b718284c8f8d5408dea33daea74a614d23b624bb4d87ae43181e4c01b3"
+      }
+    }
+  ],
+  "controls": [
+    "2bb3d5635bf5bbda",
+    "c2d89ae06f0cb160"
+  ],
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/qualify-a8-archive-act1-v2.sh": "386ac75502f6cbe282f30da1b448cadc6c040f0c839f8c06e8f272ec4b162e40",
+    "src/spireshift/native_a8_archive_act1_game.py": "79f2636f1377732b11ac2aa294cdbb65cd68dcdd99b057469a90898d5cf48f0a",
+    "src/spireshift/native_a8_archive_act1_session.py": "b99bce386f8af72ff10d12b674e63a8947412842a6eabe01f9f166081c5fee3e",
+    "src/spireshift/native_a8_archive_act1_source.py": "e602cf8ca4ed352a7609827024e6c45a7116aca25d24cafa5ab1063c3c6a29f5",
+    "src/spireshift/native_a8_reward_exit.py": "761467dde89c94e1efc0beed8e8391ce70bbcff9eca56057a74dc629e0d62083"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "previous_control": {
+    "path": "artifacts/native-a8-archive-batch/act1-qualification-v1/control.json",
+    "sha256": "0abfbe5d3cbb57d668c696a10ca16c93b31ad24df3f502faef998acbbaa22538"
+  },
+  "previous_unsealed_files": {
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/active.json": "df838ea637f5b4b4273918f1418e642f80f392fe0c9640945b347aeb714c5e94",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/converter.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/last-frame.json": "f5b1c863bbbfb5384418a2dd6edacb4b587a6451452ccbbf75e88860834758fc",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/native-start.json": "37594fde0b4c5aafb8bc013c2befecf66383ca394ecc436baf5922a4bfb97c37",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/verify.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/closed.json": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/diagnostics.json": "26c761c8a392e565c7929708d54dfb6bb5747618f1933c7098d3d7b37f960d13",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/identity.json": "0ef887f2c4ad48ede7e752c7580640c550966b04e4b20246281030f35b384c53",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/private-transcript.jsonl.gz": "911ca6c23cdde29ba7772bdede9ef2066ab62d2b6b202677f723dd4ad8e4574d",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/profile-isolation.sb": "e3f95eff9569bad11e1a9e9246ec86ab0f785be89d26f8f016b89b4c2d1b3732",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/public-observations.jsonl.gz": "9f7f59adab26a16a48d0fe2a9fbd5561525e2abe1cb628b8ec77f6b8ea931c17",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-a8-mixed-practice-worker-v1.mjs": "012688970aba5fd8ca23eef7732fd307e525ee03807f0969787c7b2f7ef05ad6",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-abandon-confirmation-surface-v1.mjs": "0e790bfd6f17863fd4f8cfaf8db6e78a1b276aff8703d5686fd2acc2fd19a67b",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-atomic-selection-v1.mjs": "5121eda9ac515aac71466d0359db8299d25c1c8be3f0798469a4622bbd0a6c52",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-atomic-selection-v6.mjs": "c3217a465a6024421253c3ad9dfcbbd5fa293d51be18b8154aad5016b309b748",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-chest-contract-v1.mjs": "182b11336203eaa70977d7ebe9e1c4c5199ec3f6bb15dd6b4174acbe950ce0eb",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-chest-surface-v1.mjs": "dd39708d2070d9711361696a98919d71accb69fa8e385f1bab2d4ca513cd0d45",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-combat-selector-belt-v1.mjs": "297057cc5182cdb45d3c83ec5e2c19ebc270f77dc2eed71f38d1457a0001f082",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-combat-surface-v5.mjs": "67eee376ebae9ddfccc7823a375500cd33ed9eb8bd28c3fdbeca1adafb1de0ab",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-combat-surface-v6.mjs": "0278228521d553b041b7b6f09ce21a86e2a27f21e3a2edf388c81b3febb2496c",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-generated-choice-belt-surface-v1.mjs": "af058abe30f59f74ae0a5d131460d34afbd2dae3c8335cde4ce5830cf9a9ef45",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-interface-contract-v2.mjs": "d4ca629e16bf73e6ea2969f3fc64898d7c3cd81111c60345b028e445413c279e",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-native-ending-v1.mjs": "a8cdbb6753375652394d2277b9817091c893adc02229f9f697043e953f5e94d9",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-native-runtime-errors-v1.mjs": "c46fd3adb346004c46d5b5126348a9b7f99780d844c5d23409b4b22444d25e60",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-native-worker-v24.mjs": "876ee2a49d9f51e1925f6fc535d4312f57dce13d88a15b92b762b954f32f4bc8",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-ordered-plan-surface-v1.mjs": "725753ffd89c28e3a79819697484a16c800b15ee2cdbee37efba8dc2eaf49f90",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-ordered-plan-v1.mjs": "0fb1892a72de324756fd41dd77920931133fe9c94864fd596300d7984646f336",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-relic-surface-v1.mjs": "8d13cb14033cea7c4a5a280ccee5c16f931e5de3ee5b76433b222d2f7774d9e6",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-relic-surface-v2.mjs": "aebb9874b61d459004dbb0b90869d2d5a3f590c2eb890c4101ea5cdde0393fb8",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-relic-surface-v3.mjs": "435a84f4c01d1b46794a689360d7fd9915e27d3bd0520d563bdbaf3e09d4dd53",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-reward-belt-surface-v1.mjs": "2c30d879cf6fdc19490dde285059f3d8c0da3ec2aecc5142be6f5a0379808f0d",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-contract-v7.mjs": "d36dc7a1546270fd1ff2854948639e3c3a36938fc19395b3ef7427665149000d",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-selection-flows-v9.mjs": "bd584228bddec0bb3e49b0b61de9d8e6c4619d57e13a380cbcc7cae88ed7b688",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/engine-shared-input-v1.mjs": "242c415b74d1054ccd79ef27ae8a7465bf2fb15801ab3f3c3de4d869618088b3",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/source-at-launch/helpers.json": "1b6e84b66d1c7c52b66a0a8413db90a0fa0de3893fc6bcca39b92696a8bd9f6e",
+    "artifacts/native-a8-archive-batch/act1-qualification-v1/chunks/69356319e382de0c/worker/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "schema_version": "native-a8-archive-act1-admission-v2",
+  "source_screening": {
+    "path": "artifacts/native-a8-archive-batch/intake-v1/screening.json",
+    "sha256": "f3d2d7b613bf8576dd70185080c4b346be733efc4af0782ca5ff2bb9f1240512"
+  },
+  "workspace": "artifacts/native-a8-archive-batch/act1-qualification-v2"
+}

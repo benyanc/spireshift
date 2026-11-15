@@ -1,0 +1,16 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:f357ed7752b8b8d3bcd934da7510b8ffa116af37253c71908118db60fe5e09c4",
+  "partition": "control",
+  "schema_version": "native-combat-behavior-seeds-v1",
+  "seeds": [
+    {
+      "id": 1790000,
+      "seed": "SP1RESH1FTGREEDYA8CHK0000"
+    },
+    {
+      "id": 1790001,
+      "seed": "SP1RESH1FTGREEDYA8CHK0001"
+    }
+  ]
+}

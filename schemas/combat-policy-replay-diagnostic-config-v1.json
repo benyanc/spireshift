@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-policy-replay-diagnostic-config-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-policy-replay-diagnostic-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "confirmation_config_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confirmation_config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "comparison_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comparison_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "comparison_resource_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comparison_resource_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective": {
+      "$ref": "combat-foundation-audit-config-v1.json#/properties/objective"
+    },
+    "protocol": {
+      "const": {
+        "population": "all_saved_train_seed_policy_pairs_no_replacement",
+        "replay_rule": "saved_outcomes_action_digest_final_hash_and_guard_diagnostics_must_match",
+        "shadow_rule": "same_public_state_ordered_menu_no_shadow_actions_executed",
+        "unsupported_shadow": "record_error_keep_original_driver_choice",
+        "information_policy": "public_observation_only_no_clone_no_hidden_resampling",
+        "compute": "serial_original_cpu_cap_includes_diagnostic_overhead_not_new_benchmark",
+        "interpretation": "descriptive_choices_and_realized_damage_not_causal_action_values",
+        "stop_rule": "owner_review_before_any_new_collection_or_training"
+      }
+    },
+    "claim_scope": {
+      "const": "inspected_train_confirmation_public_replay_diagnosis_no_new_strength_claim"
+    }
+  },
+  "required": [
+    "schema_version",
+    "config_id",
+    "confirmation_config_path",
+    "confirmation_config_id",
+    "comparison_path",
+    "comparison_report_id",
+    "comparison_resource_path",
+    "comparison_resource_report_id",
+    "objective",
+    "protocol",
+    "claim_scope"
+  ],
+  "additionalProperties": false
+}

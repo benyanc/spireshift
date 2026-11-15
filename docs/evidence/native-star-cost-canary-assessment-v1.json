@@ -1,0 +1,88 @@
+{
+  "schema_version": "native-star-cost-canary-assessment-v1",
+  "status": "complete_execution_input_compatibility_blocked",
+  "source_report": {
+    "path": "artifacts/native-selection-flows/star-cost-canary-v1/report.json",
+    "sha256": "160dcb3f2f150c61691c6506ffce4f7fe13f945afca49358a689fb1c2742e1d4"
+  },
+  "source_report_id": "sha256:9c6e8d3be6f9097cf6cb80005444b84ab8a6487efd108f032c7944cc509057ae",
+  "verification": {
+    "path": "artifacts/native-selection-flows/star-cost-canary-v1/verification-v1/report.json",
+    "sha256": "1b63dd4ab54a3ba1b493e03bc98f58ff2f12972b04d18e6a4fda1bce6d9aa063"
+  },
+  "clean_host_prefixes": 8,
+  "verified_delivered_choices": 1024,
+  "complete_matching_pairs": 0,
+  "matching_initial_decisions": [
+    56,
+    76,
+    117,
+    109
+  ],
+  "wall_seconds": 1039.605286834063,
+  "resource_cap_hit": false,
+  "star_cost_crash_recurred": false,
+  "findings": [
+    {
+      "case": "player-2-world-1",
+      "matching_initial_decisions": 56,
+      "code": "energy_reward_glyph_format",
+      "detail": "same two energy glyphs use rich image tags versus normalized glyph tokens",
+      "next_step": "preserve exact glyph identity and multiplicity in all typed public reward descriptions",
+      "menu_keys_equal": true,
+      "evidence": {
+        "path": "artifacts/native-star-cost/result-assessment-v1/player-2-world-1-first-difference.json",
+        "sha256": "157794557e1705675c1e798220ea11129472773dd5b3c48981909283d7f7a993"
+      }
+    },
+    {
+      "case": "player-2-world-2",
+      "matching_initial_decisions": 76,
+      "code": "status_title_localization",
+      "detail": "native status name is SETUP_STRIKE_POWER.title; official name is Setup Strike; ID, amount3 and description match",
+      "next_step": "use native model localized title, retaining definition/amount and explicit missing-localization diagnostics",
+      "menu_keys_equal": true,
+      "evidence": {
+        "path": "artifacts/native-star-cost/result-assessment-v1/player-2-world-2-first-difference.json",
+        "sha256": "1fa509b6d29f4f980d3d15a535db291746170a5f1f7ad531c43a38fbd36fafe0"
+      }
+    },
+    {
+      "case": "player-3-world-1",
+      "matching_initial_decisions": 117,
+      "code": "modified_deck_card_description",
+      "detail": "same Nimble amount2 Defend is described as gain5 Block versus gain7 Block",
+      "next_step": "render current per-copy modifiers through authoritative native card display context and verify actual effects",
+      "menu_keys_equal": true,
+      "evidence": {
+        "path": "artifacts/native-star-cost/result-assessment-v1/player-3-world-1-first-difference.json",
+        "sha256": "59ed93d3ab1a19149ebc14f88a02b410f991cf12821f6a66ae791b27c8346c47"
+      }
+    },
+    {
+      "case": "player-3-world-2",
+      "matching_initial_decisions": 109,
+      "code": "selection_potion_permissions_and_identity",
+      "detail": "CLI adds potion-discard during Headbutt discard-pile selection; official menu omits it; potion context facts and identity also differ",
+      "next_step": "qualify current modal permissions and same owned potion identity through both interfaces; keep public inventory and exact bindings",
+      "menu_keys_equal": false,
+      "evidence": {
+        "path": "artifacts/native-star-cost/result-assessment-v1/player-3-world-2-first-difference.json",
+        "sha256": "c4fdd514eef998d8e8713864db88f2ceae3fed8f83e66702d5a8adc7d786f6f8"
+      }
+    }
+  ],
+  "later_divergent_states_realignable": false,
+  "evidence_scope": "first_difference_after_identical_policy_input_and_action_prefix_only",
+  "both_original_full_weights_and_all_Adam_exact": true,
+  "games_launched_during_assessment": 0,
+  "optimizer_updates": 0,
+  "checkpoint_promoted": false,
+  "training_allowed": false,
+  "next_stage_launched": false,
+  "assessment": {
+    "path": "artifacts/native-star-cost/result-assessment-v1/report.json",
+    "sha256": "26ccde5928feea90f10718caa9e542a53bc9d869fdb0e6e65713b733e3e8ac10"
+  },
+  "report_id": "sha256:3d23a29fe60157de2cf496d35f32cf4396ec10eb40d0dca10e2f6fe559ad72cf"
+}

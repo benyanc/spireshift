@@ -1,0 +1,40 @@
+{
+  "batch_sizes": [
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "experiments": {
+    "normalized": {
+      "id": "sha256:c80020346b5c76382cece3fe6c219a669748578ce7f5b6fa7d7d3194649dd5c6",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-input-normalized-v1.json"
+    },
+    "unscaled": {
+      "id": "sha256:5e897eace892178ff44d3fd6c3ec0c4d398192ba1843602816598a775a1dcf6e",
+      "path": "configs/native-learning/sts2-v0.111.0-a8-input-unscaled-v1.json"
+    }
+  },
+  "implementation_sha256": {
+    "engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "native_gradient_checks.py": "1265c0319cbcf5ec1c0cb22cdbdb54ff01e2e24c42c12982d7c1dc09e91e6ff8",
+    "native_gradient_study.py": "242c28161b727c57987f049ed4663033284edf04000c2f141fbeaa86661e429e",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_normalization_comparison.py": "0f762a52bd775e0bca6852bc3d49e145bddeda0c5222a895e90c03ff39ebd505",
+    "native_pilot_assessment.py": "4f99ab2dec84b06f9f9a76608fdde64dd3cf226ef2430a114008f2979fd05e02",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774"
+  },
+  "partition_salt": 20261017,
+  "partitions": 32,
+  "rounds": [
+    1,
+    8
+  ],
+  "schema_version": "native-independent-gradient-study-config-v1",
+  "workspace": "artifacts/native-gradient/sts2-v0.111.0-a8-independent-v1"
+}

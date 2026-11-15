@@ -1,0 +1,13 @@
+{
+  "environment_id": "sha256:ba4096d61dcf0f8f0e2267a40fa2bdfa4ce35b17fa238abf39453444e19e4dde",
+  "manifest_id": "sha256:faed11ffb93519f3ed7cbbd9c3fe162df8ad609ccf24d9559fbb8469204a1743",
+  "purpose": "fresh_full_game_evaluation_not_fitting",
+  "schema_version": "natural-curriculum-evaluation-seeds-v1",
+  "seeds": [
+    {
+      "id": 2500000,
+      "partition": "development",
+      "seed": "SP1RESH1FTNATC001"
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/neural-combat-policy-training-config-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "neural-combat-policy-training-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "data_config": {
+      "$ref": "combat-policy-training-config-v3.json"
+    },
+    "diagnosis": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "inspected_seeds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "path",
+        "report_id",
+        "inspected_seeds"
+      ],
+      "additionalProperties": false
+    },
+    "network": {
+      "type": "object",
+      "properties": {
+        "encoder_id": {
+          "const": "shared-public-combat-card-properties-v1"
+        },
+        "feature_dimension": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 4096
+        },
+        "hidden_units": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 128
+        },
+        "activation": {
+          "const": "tanh"
+        },
+        "initialization_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "card_source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "card_core_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "card_catalog_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "encoder_id",
+        "feature_dimension",
+        "hidden_units",
+        "activation",
+        "initialization_seed",
+        "card_source_sha256",
+        "card_core_sha256",
+        "card_catalog_id"
+      ],
+      "additionalProperties": false
+    },
+    "optimization": {
+      "type": "object",
+      "properties": {
+        "epochs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "anchor_strength": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "l2_regularization": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "gradient_clip": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "adam_epsilon": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "adam_beta1": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "adam_beta2": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "normalization": {
+          "const": "equal_signal_run_equal_signal_state_margin_weighted_pairs"
+        }
+      },
+      "required": [
+        "epochs",
+        "learning_rate",
+        "anchor_strength",
+        "l2_regularization",
+        "gradient_clip",
+        "adam_epsilon",
+        "adam_beta1",
+        "adam_beta2",
+        "normalization"
+      ],
+      "additionalProperties": false
+    },
+    "fresh_confirmation": {
+      "type": "object",
+      "properties": {
+        "partition": {
+          "const": "train"
+        },
+        "run_offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "run_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "seeds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "prior_train_prefix_stop": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "partition",
+        "run_offset",
+        "run_count",
+        "seeds",
+        "prior_train_prefix_stop"
+      ],
+      "additionalProperties": false
+    },
+    "iteration": {
+      "type": "object",
+      "properties": {
+        "round": {
+          "const": 1
+        },
+        "maximum_rounds": {
+          "const": 3
+        },
+        "automatic_followup": {
+          "const": false
+        },
+        "plateau_rule": {
+          "const": "review_after_three_frozen_rounds_without_gameplay_gain"
+        }
+      },
+      "required": [
+        "round",
+        "maximum_rounds",
+        "automatic_followup",
+        "plateau_rule"
+      ],
+      "additionalProperties": false
+    },
+    "resource_limits": {
+      "type": "object",
+      "properties": {
+        "wall_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cpu_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "memory_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "storage_bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "wall_seconds",
+        "cpu_seconds",
+        "memory_bytes",
+        "storage_bytes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "config_id",
+    "data_config",
+    "diagnosis",
+    "network",
+    "optimization",
+    "fresh_confirmation",
+    "iteration",
+    "resource_limits"
+  ],
+  "additionalProperties": false
+}

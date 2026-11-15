@@ -1,0 +1,133 @@
+{
+  "automatic_follow_up": false,
+  "config_id": "sha256:3e0778f2438d705605b887401b171f0b5b40919f6dd61b60de98a627147d8071",
+  "execution_id": "sha256:cd99b14d7363af4320e66b3001bb4b15b3a2b2627aa777e0a11666b6ebefce46",
+  "frozen_build_environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "gate": {
+    "minimum_confirmed_clears": 3,
+    "strict_rescue_initializers": [
+      2,
+      3
+    ]
+  },
+  "lessons_admitted": 0,
+  "liveness_policy": {
+    "forced_actions": false,
+    "id": "public_exploration_bounded_v1",
+    "maximum_consecutive_identical_observations": 8,
+    "maximum_visits_per_public_state": 64
+  },
+  "native_deliveries": 144,
+  "optimizer_updates": 0,
+  "previous_attempt": {
+    "path": "artifacts/native-a8-act1-boss/study-v1/attempt-1794067461556879000.json",
+    "report_id": "sha256:832936e300f24695b5350d463d573db86acdd5f4e1661d19b949a100bc9f3090",
+    "sha256": "82e153d71eda28d35080738de3541df62b77e7d65e1538f12d0343e47dbe5f3f",
+    "status": "act1_boss_teacher_qualification_blocked"
+  },
+  "previous_qualification": {
+    "boss_encounters_reached_by_arm": {
+      "boss": 0,
+      "fitted": 1,
+      "original": 1,
+      "survival": 2
+    },
+    "checks": {
+      "all_worlds_sealed": true,
+      "boss_teacher_cleared_more_than_each_reference": false,
+      "minimum_confirmed_clears": false,
+      "no_capped_arms": false,
+      "strict_rescues_across_both_initializers": false
+    },
+    "confirmed_clears": [],
+    "outcomes_by_arm": {
+      "boss": {
+        "act1_clear": 0,
+        "act1_loss": 1,
+        "capped": 7
+      },
+      "fitted": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "original": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "survival": {
+        "act1_clear": 1,
+        "act1_loss": 7,
+        "capped": 0
+      }
+    },
+    "passed": false,
+    "planned_worlds": 8,
+    "sealed_worlds": 8,
+    "strict_rescue_initializers": [],
+    "strict_rescues": []
+  },
+  "previous_resource": {
+    "path": "artifacts/resources/a8-act1-boss-v1-1794067461556879000.json",
+    "report_id": "sha256:aa2d67ed41634dbaff4516eda8bdd6d59b120ae6358f1a8504a530ab9ea760ad",
+    "sha256": "8825ef1ab385051b60feaea8a344b54da0379bb307c26ba6c964a5f7b9b1996f",
+    "status": "failed"
+  },
+  "qualification_started": false,
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-boss-qualification-v2.json",
+    "sha256": "2b030bfdf32c4e7031b19d606c369fe3231782b9707cd198887bf51f6cef8914"
+  },
+  "report_id": "sha256:8a8fbd498e2f0a003cd708bdbc31d425aebac502ddb620e6d77485a33bf7e91b",
+  "repository_check": {
+    "dotnet_protocol_passed": true,
+    "path": "artifacts/resources/a8-act1-boss-reward-repository-check-v1.json",
+    "report_id": "sha256:1aac7a668b91773047ab208a6281aefe7b9788cfdec0932a367275116f69ee4c",
+    "sha256": "e9e5fac0eddb875d53dfe8b37ebaed195cfec019f4fd8f12cc9dde421a8847f5",
+    "status": "completed",
+    "tests_passed": 2852
+  },
+  "saved_cap_counts": {
+    "choices": 1,
+    "wall": 6
+  },
+  "saved_potion_belt_regression": {
+    "distinct_copies_and_single_player_target_verified": true,
+    "duplicate_label": "Liquid Bronze",
+    "empty_belt_observation_unchanged": true,
+    "new_games": 0,
+    "old_strict_decoder_rejects": true,
+    "optimizer_updates": 0,
+    "preserved_public_reads": 5,
+    "preserved_raw_actions": 5,
+    "repaired_strict_sdk_and_converter_pass": true
+  },
+  "saved_regression_worlds": 7,
+  "saved_reopens": 6786,
+  "schema_version": "native-a8-act1-boss-reward-preparation-evidence-v2",
+  "shared_profile_unchanged": true,
+  "short_check": {
+    "path": "artifacts/native-a8-act1-boss/control-v2/report.json",
+    "report_id": "sha256:997fbc426f03888aeec9d4934ae3e991bce07c6e4071ff263e8781c2d17a4ba6",
+    "sha256": "82138bb6b322f52d52d1d28b965532bce246419c58f9c64ce8f107fcdafb8852",
+    "status": "act1_boss_reward_lifecycle_short_check_verified"
+  },
+  "short_check_resource": {
+    "path": "artifacts/resources/a8-act1-boss-control-v2.json",
+    "report_id": "sha256:a5d2a68c12268102fa30b13809286322f54a4f00816bb7a54c26216aaacd9770",
+    "sha256": "2afebc3307a2cff35a212d1588aa32eda3e3bd43d8e2f9795e2200f34fb174a0",
+    "status": "completed"
+  },
+  "status": "reward_safe_fresh_start_qualification_prepared",
+  "verified_decline_exits": 2,
+  "worlds": 8
+}

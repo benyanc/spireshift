@@ -1,0 +1,52 @@
+{
+  "additional_seed_ids": [
+    700257
+  ],
+  "analysis_limits": {
+    "cpu_seconds": 1200,
+    "resident_memory_bytes": 8000000000,
+    "storage_bytes": 2000000000,
+    "wall_seconds": 600
+  },
+  "capped_resource_report": {
+    "id": "sha256:0aded1548e5f1352a1a9432579dfd859730fb2913679f6b1165a790bebb6d591",
+    "path": "artifacts/resources/native-a8-batch-collect-v1-attempt-1.json"
+  },
+  "collection_limits": {
+    "cpu_seconds": 360,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 1000000000,
+    "wall_seconds": 180
+  },
+  "expected_recovered_games": 254,
+  "implementation_sha256": {
+    "engine_experience_stream.py": "32d1386cd8602d43c7ccceaafcc2d944d8c1e1330bed50fc52afbb1eb097ca1a",
+    "native_gradient_stream.py": "e8b7af34f0cb075704f9826613a598052e8b82bc4befc78936c4eaeadb27657a"
+  },
+  "interrupted_seed_ids": [
+    700253
+  ],
+  "maximum_retained_episode_histories_per_lane": 1,
+  "ordinary_training_allowed": false,
+  "qualification_config": "configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json",
+  "recovery_limits": {
+    "cpu_seconds": 180,
+    "resident_memory_bytes": 1000000000,
+    "storage_bytes": 500000000,
+    "wall_seconds": 180
+  },
+  "schema_version": "native-streamed-gradient-recovery-config-v1",
+  "seed_manifest": {
+    "id": "sha256:e96f91d082f016aaaf8a045713db9363ba7532001163c9107d54ab40d18e41e4",
+    "path": "manifests/splits/sts2-v0.111.0-native-a8-gradient-recovery-v1.json"
+  },
+  "source_pool_config": {
+    "id": "sha256:0efa8047e5dbbc6389567d540f37cbc63c65d3cce76cd5d3e9cb60e600de1bc3",
+    "path": "configs/native-gradient/sts2-v0.111.0-a8-frozen-pool-v2.json"
+  },
+  "target_clean_diagnostic_games": 256,
+  "unstarted_seed_ids": [
+    700255
+  ],
+  "workspace": "artifacts/native-gradient/sts2-v0.111.0-a8-stream-recovery-v1"
+}

@@ -1,0 +1,171 @@
+{
+  "adaptive_controller_allowed": false,
+  "aggregate_players": [
+    {
+      "final_evaluation_games": 32,
+      "final_failed_games": 0,
+      "final_mean_floor": 6.9375,
+      "final_wins": 0,
+      "initial_mean_floor": 7.125,
+      "initial_wins": 0,
+      "mean_floor_change": -0.1875,
+      "mode": "native-original-quarter-v1",
+      "numerical_replicates": 2,
+      "training_games_per_replicate": 128
+    },
+    {
+      "final_evaluation_games": 32,
+      "final_failed_games": 0,
+      "final_mean_floor": 7.125,
+      "final_wins": 0,
+      "initial_mean_floor": 7.125,
+      "initial_wins": 0,
+      "mean_floor_change": 0.0,
+      "mode": "native-public-numeric-candidate-cross-v1",
+      "numerical_replicates": 2,
+      "training_games_per_replicate": 128
+    }
+  ],
+  "all_invocations_wall_seconds": 863.6553407069296,
+  "assessment_games_replayed": 0,
+  "assessment_optimizer_steps": 0,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "verified_completed_development_comparison_and_execution_recovery_not_strong_play",
+  "comparison": {
+    "evaluation_selection": "final_only",
+    "extra_legacy_baseline_retained_as_diagnostic": true,
+    "independent_training_replicates_per_method": 2,
+    "paired_encoding_effects": [
+      {
+        "cross_minus_original_floor_gain": 0.1875,
+        "cross_minus_original_win_gain": 0,
+        "training_seed": 0
+      },
+      {
+        "cross_minus_original_floor_gain": 0.1875,
+        "cross_minus_original_win_gain": 0,
+        "training_seed": 1
+      }
+    ],
+    "players": [
+      {
+        "better_floor_seeds": 3,
+        "final_failed_games": 0,
+        "final_mean_floor": 6.5625,
+        "final_wins": 0,
+        "initial_mean_floor": 6.4375,
+        "initial_wins": 0,
+        "mean_floor_change": 0.125,
+        "mode": "native-original-quarter-v1",
+        "origin": "preserved_legacy_pair",
+        "planned_evaluation_games": 16,
+        "same_floor_seeds": 11,
+        "training_seed": 0,
+        "wins_change": 0,
+        "worse_floor_seeds": 2
+      },
+      {
+        "better_floor_seeds": 7,
+        "final_failed_games": 0,
+        "final_mean_floor": 7.3125,
+        "final_wins": 0,
+        "initial_mean_floor": 7.8125,
+        "initial_wins": 0,
+        "mean_floor_change": -0.5,
+        "mode": "native-original-quarter-v1",
+        "origin": "fresh_matched_training_seeds",
+        "planned_evaluation_games": 16,
+        "same_floor_seeds": 4,
+        "training_seed": 1,
+        "wins_change": 0,
+        "worse_floor_seeds": 5
+      },
+      {
+        "better_floor_seeds": 4,
+        "final_failed_games": 0,
+        "final_mean_floor": 6.75,
+        "final_wins": 0,
+        "initial_mean_floor": 6.4375,
+        "initial_wins": 0,
+        "mean_floor_change": 0.3125,
+        "mode": "native-public-numeric-candidate-cross-v1",
+        "origin": "preserved_legacy_pair",
+        "planned_evaluation_games": 16,
+        "same_floor_seeds": 8,
+        "training_seed": 0,
+        "wins_change": 0,
+        "worse_floor_seeds": 4
+      },
+      {
+        "better_floor_seeds": 7,
+        "final_failed_games": 0,
+        "final_mean_floor": 7.5,
+        "final_wins": 0,
+        "initial_mean_floor": 7.8125,
+        "initial_wins": 0,
+        "mean_floor_change": -0.3125,
+        "mode": "native-public-numeric-candidate-cross-v1",
+        "origin": "fresh_matched_training_seeds",
+        "planned_evaluation_games": 16,
+        "same_floor_seeds": 4,
+        "training_seed": 1,
+        "wins_change": 0,
+        "worse_floor_seeds": 5
+      }
+    ],
+    "replicates_use_different_training_seed_sets": true,
+    "stronger_play_not_automatically_established": true,
+    "terminal_victory_primary": true,
+    "training_seeds_matched_within_each_replicate": true
+  },
+  "comparison_reconstructed_from_committed_units": true,
+  "comparison_report": {
+    "id": "sha256:967e723319a8e7b2d2fd1f2872a3a86802ab5cffd4155d14c5563efb9f199636",
+    "path": "artifacts/native-context/sts2-v0.111.0-a8-context-fresh-pair-v2/report.json"
+  },
+  "completed_sessions_wall_seconds": 861.3507707909448,
+  "failed_native_games_in_fresh_pair": 0,
+  "fresh_pair_games": 288,
+  "game_apps_created": 0,
+  "new_workspace_storage_bytes": 280208038,
+  "next_work": "bounded_optimizer_efficiency_diagnostics_then_matched_native_learning_curve_if_justified",
+  "peak_resident_memory_bytes": 1071464448,
+  "primary_complete_run_records_including_reused_history": 640,
+  "report_id": "sha256:3e2e0aee907126fbaa5ba17dfaa3bd82bb2a1e855e202a0d931aa4d584ed9dd2",
+  "resource_reports": [
+    {
+      "cpu_seconds": 599.7466891839998,
+      "id": "sha256:59e2d76416ad168badf7e2e0a88519bc404542a463e001497936033fc7294d7e",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-context-fresh-pair-v2-session-1.json",
+      "status": "completed",
+      "wall_seconds": 582.7641338329995
+    },
+    {
+      "cpu_seconds": 1.045968932,
+      "id": "sha256:34b8444578cc31fa7cf8541660710b97bb9c40a819512bd297385cfa4d226837",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-context-fresh-pair-v2-session-2.json",
+      "status": "failed",
+      "wall_seconds": 2.3045699159847572
+    },
+    {
+      "cpu_seconds": 281.95158246600016,
+      "id": "sha256:7b014f8a628802cb010a0b3409cc6067f54d259106532e0c2d080466a9e8f999",
+      "path": "artifacts/resources/sts2-v0.111.0-a8-context-fresh-pair-v2-session-3.json",
+      "status": "completed",
+      "wall_seconds": 278.5866369579453
+    }
+  ],
+  "schema_version": "native-context-comparison-assessment-v2",
+  "source_seals_verified": true,
+  "sources": {
+    "artifacts/native-context/sts2-v0.111.0-a8-context-fresh-pair-v2/report.json": "7b018e04192dccd510b8452626d58e5f2435d78309c41ec17af0401a4ed6fedd",
+    "artifacts/resources/sts2-v0.111.0-a8-context-fresh-pair-v2-session-1.json": "8af34b18a5ae8b4b1175402d2fd6eb125aefb3b0e0ca1169fa560da4971b6047",
+    "artifacts/resources/sts2-v0.111.0-a8-context-fresh-pair-v2-session-2.json": "8e0c94d068fcb1db6078d97c25457301049e185f57d4d829632858d9c13f6974",
+    "artifacts/resources/sts2-v0.111.0-a8-context-fresh-pair-v2-session-3.json": "5fe688318134c99722ff9487eafff89041442c4f9c5ffa8ae45a2f63520d94c9"
+  },
+  "statistical_scope": "exploratory_two_training_replicates_sixteen_paired_development_seeds_each_no_significance_or_held_out_test_claim",
+  "status": "complete_without_established_native_learning_improvement",
+  "verified_chunks": 46,
+  "verified_comparison_source_files": 5567
+}

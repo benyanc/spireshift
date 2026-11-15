@@ -1,0 +1,9 @@
+{
+  "schema_version": "native-combat-loss-audit-config-v1",
+  "source_report": {
+    "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/report.json",
+    "id": "sha256:e2dc1041f16b67dceeaba5a486c21621278c84d919538b679126c56cebc8f5b5"
+  },
+  "workspace": "artifacts/native-loss-audit/sts2-v0.111.0-a8-shop-v2",
+  "training_allowed": false
+}

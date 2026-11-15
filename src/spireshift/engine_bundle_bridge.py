@@ -1,0 +1,577 @@
+"""Finite natural Scroll Boxes native/shipped comparisons; never learning admission."""
+
+from __future__ import annotations
+
+import copy
+import json
+import os
+import re
+import shutil
+import time
+from pathlib import Path
+from typing import Any
+
+from spireshift.core.manifest import manifest_identifier
+from spireshift.engine_bundle_verification import verify_bundle_saved
+from spireshift.engine_checkpoint import verify_checkpoint_input
+from spireshift.engine_cli_probe import (
+    _probe_cli_document,
+    verify_local_build_report,
+    verify_probe_runtime,
+    verify_projection_inputs,
+)
+from spireshift.engine_connector import (
+    _probe_connector_private,
+    _settings_template,
+    _verify_toolchain,
+    load_connector_qualification_config,
+)
+from spireshift.engine_journey_verification import _hashed
+from spireshift.engine_localization import verify_native_localization
+from spireshift.engine_native import (
+    _private_path,
+    _require_native_launch_support,
+    _running_games,
+    _verified_archive,
+    load_native_qualification_config,
+)
+from spireshift.engine_qualification import EngineQualificationConfig, _inventory, _sha_file
+from spireshift.engine_working_app import (
+    WorkingAppPolicy,
+    load_working_app_policy,
+    preflight_working_app,
+    verify_working_app_receipt,
+)
+from spireshift.full_run_experience import atomic_json
+
+HELPERS = {
+    "engine-bundle-shipped-probe-v3.mjs",
+    "engine-bundle-bridge-contract-v3.mjs",
+    "engine-rest-bridge-contract.mjs",
+    "engine-journey-contract-v2.mjs",
+    "engine-menu-probe.mjs",
+    "engine-checkpoint-shipped-probe.mjs",
+    "verify-engine-bundle-saved-v1.mjs",
+}
+MINIMUM_FREE_BYTES = 3_500_000_000
+
+
+def _working_app_policy(
+    qualification: EngineQualificationConfig, path: Path, document: dict[str, Any]
+) -> WorkingAppPolicy | None:
+    if "working_app_config" not in document and "working_app_config_id" not in document:
+        return None
+    if not isinstance(document.get("working_app_config"), str) or not isinstance(
+        document.get("working_app_config_id"), str
+    ):
+        raise ValueError("Working app recipe and exact identity must both be present")
+    policy_path = qualification.root / document["working_app_config"]
+    if policy_path.resolve().parent != path.resolve().parent:
+        raise ValueError("Working app policy must stay beside the bundle template")
+    policy = load_working_app_policy(policy_path, qualification)
+    if policy.config_id != document["working_app_config_id"]:
+        raise ValueError("Pinned working app policy changed")
+    return policy
+
+
+def compare_bundle_bridge(
+    qualification: EngineQualificationConfig,
+    path: Path,
+    *,
+    node: Path,
+    override: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    document = override if override is not None else json.loads(path.read_text())
+    if (
+        document.get("schema_version") != "engine-bundle-bridge-config-v1"
+        or document.get("stage") != "natural_Neow_bundle_choice_differential_only"
+        or document.get("bridge_revision") != "v3"
+        or document.get("qualification_config_id") != qualification.config_id
+        or document.get("training_allowed") is not False
+        or type(document.get("index")) is not int
+        or document["index"] not in {0, 1}
+        or not re.fullmatch(r"[A-Z0-9]{1,64}", str(document.get("seed", "")))
+        or set(document.get("helpers_sha256", {})) != HELPERS
+    ):
+        raise ValueError("Expected one explicitly seeded A8 natural bundle comparison")
+    for name in HELPERS:
+        if _sha_file(qualification.root / "scripts" / name) != document["helpers_sha256"][name]:
+            raise ValueError("Pinned bundle comparison helper changed")
+    native_path = qualification.root / document["native_config"]
+    native_config = json.loads(native_path.read_text())
+    if (
+        native_path.resolve().parent != path.resolve().parent
+        or manifest_identifier(native_config) != document["native_config_id"]
+    ):
+        raise ValueError("Bundle native template changed")
+    connector_path = qualification.root / document["connector_config"]
+    if connector_path.resolve().parent != path.resolve().parent:
+        raise ValueError("Bundle Connector prerequisite must be beside its config")
+    connector = load_connector_qualification_config(connector_path, qualification)
+    if connector.config_id != document["connector_config_id"]:
+        raise ValueError("Bundle shipped Host prerequisite changed")
+    working_app = _working_app_policy(qualification, path, document)
+    if working_app is not None:
+        preflight_working_app(working_app)
+    workspace = _private_path(qualification.root, document["workspace"])
+    if workspace.exists():
+        raise FileExistsError("Preserve this comparison; use a new versioned workspace")
+    workspace.mkdir(parents=True)
+    native_config = copy.deepcopy(native_config)
+    native_config.update(
+        seed=document["seed"],
+        bundle_bridge={"index": document["index"]},
+        workspace=str((workspace / "native").relative_to(qualification.root)),
+    )
+    atomic_json(workspace / "native-config.json", native_config)
+    native = _probe_cli_document(
+        qualification, native_path, node, native_config, panel="bundle_bridge"
+    )
+    native_report = workspace / "native-report.json"
+    atomic_json(native_report, native)
+    result = {
+        "schema_version": "engine-bundle-bridge-v1",
+        "config_id": manifest_identifier(document),
+        "qualification_config_id": qualification.config_id,
+        "seed": document["seed"],
+        "index": document["index"],
+        "native_report": str(native_report.relative_to(qualification.root)),
+        "native_report_id": native["report_id"],
+        "status": "bundle_comparison_incomplete",
+        "full_run_attempts": 0,
+        "optimizer_steps": 0,
+        "training_allowed": False,
+        "shipped_cross_host_parity": False,
+        "claim_scope": (
+            "natural_imported_Neow_Scroll_Boxes_visible_pack_identity_cost_upgrade_"
+            "and_deck_award_only"
+        ),
+    }
+    try:
+        if native["status"] != "bundle_bridge_public_projection_regression_pass":
+            raise ValueError("Native bundle prefix failed; no shipped launch follows")
+        snapshot = Path(native["report_path"]).parent / "private-starting-snapshot.json"
+        bound = {
+            "checkpoint_report": str(native_report.relative_to(qualification.root)),
+            "checkpoint_report_id": native["report_id"],
+            "seed": document["seed"],
+            "snapshot_sha256": _sha_file(snapshot),
+        }
+        fixture = verify_checkpoint_input(qualification, bound, panel="bundle_bridge")
+        fixture.update(
+            workspace=str((workspace / "shipped").relative_to(qualification.root)),
+            bundle_report_path=str(native_report),
+            comparison_mode="bundle_bridge_v3",
+        )
+        shipped = _probe_connector_private(
+            connector,
+            node=node,
+            fixture=fixture,
+            retain_working_game=False,
+            **({"working_app": working_app} if working_app is not None else {}),
+        )
+        atomic_json(workspace / "shipped-report.json", shipped)
+        result.update(
+            shipped_report=str((workspace / "shipped-report.json").relative_to(qualification.root)),
+            shipped_report_id=shipped["report_id"],
+            disposable_payload_removed_after_verified_success=shipped[
+                "disposable_payload_removed_after_verified_success"
+            ],
+        )
+        if working_app is not None:
+            result["working_app"] = shipped["working_app"]
+        if shipped["verdict"]["status"] != "shipped_checkpoint_input_pass":
+            raise ValueError("Shipped bundle comparison failed; evidence preserved")
+        result["status"] = "bundle_action_comparison_pass"
+        result["saved_verification"] = verify_bundle_saved(qualification, result, node=node)
+    except (ValueError, OSError, RuntimeError) as error:
+        result["status"] = "bundle_comparison_incomplete"
+        result["error"] = str(error)
+    result["report_id"] = manifest_identifier(result)
+    atomic_json(workspace / "comparison.json", result)
+    return result
+
+
+def validate_bundle_cases(document: dict[str, Any]) -> list[dict[str, Any]]:
+    cases = document.get("cases")
+    if (
+        not isinstance(cases, list)
+        or len(cases) != 8
+        or any(not isinstance(case, dict) for case in cases)
+        or any(
+            not isinstance(case.get("case_id"), str)
+            or not re.fullmatch(r"[a-z0-9-]{1,48}", case["case_id"])
+            or not isinstance(case.get("seed"), str)
+            or not re.fullmatch(r"[A-Z0-9]{1,64}", case["seed"])
+            or type(case.get("index")) is not int
+            or case["index"] not in {0, 1}
+            for case in cases
+        )
+        or len({case["case_id"] for case in cases}) != 8
+    ):
+        raise ValueError("Expected eight unique named seed/pack comparison cases")
+    pairs = {(case["seed"], case["index"]) for case in cases}
+    if (
+        len({case["seed"] for case in cases}) != 2
+        or len(pairs) != 4
+        or any(sum((case["seed"], case["index"]) == pair for case in cases) != 2 for pair in pairs)
+    ):
+        raise ValueError("Use two seeds, both packs, and two repeats of every seed/pack pair")
+    return [{key: case[key] for key in ("case_id", "seed", "index")} for case in cases]
+
+
+def _bundle_batch_inputs(
+    qualification: EngineQualificationConfig, path: Path
+) -> tuple[dict[str, Any], list[dict[str, Any]], Path, dict[str, Any], Path]:
+    document = json.loads(path.read_text())
+    if (
+        document.get("schema_version") != "engine-bundle-bridges-config-v1"
+        or document.get("stage") != "owner_repeated_natural_bundle_differentials_only"
+        or document.get("qualification_config_id") != qualification.config_id
+        or document.get("training_allowed") is not False
+        or document.get("max_wall_seconds") != 900
+    ):
+        raise ValueError("Expected a finite owner bundle comparison batch")
+    cases = validate_bundle_cases(document)
+    template_path = qualification.root / document["template"]
+    template = json.loads(template_path.read_text())
+    if (
+        template_path.resolve().parent != path.resolve().parent
+        or manifest_identifier(template) != document["template_id"]
+        or template.get("schema_version") != "engine-bundle-bridge-config-v1"
+        or template.get("stage") != "natural_Neow_bundle_choice_differential_only"
+        or template.get("qualification_config_id") != qualification.config_id
+        or template.get("bridge_revision") != "v3"
+        or template.get("training_allowed") is not False
+        or set(template.get("helpers_sha256", {})) != HELPERS
+        or any(
+            _sha_file(qualification.root / "scripts" / name) != template["helpers_sha256"][name]
+            for name in HELPERS
+        )
+    ):
+        raise ValueError("Bundle comparison template or helper changed")
+    workspace = _private_path(qualification.root, document["workspace"])
+    return document, cases, template_path, template, workspace
+
+
+def _verify_bundle_prerequisites(
+    qualification: EngineQualificationConfig,
+    path: Path,
+    template: dict[str, Any],
+    *,
+    panel: str = "bundle_bridge",
+) -> dict[str, Any]:
+    """Read existing pinned inputs only; never copy, build, download or launch a game."""
+    if panel not in {"bundle_bridge", "reward_bridge"}:
+        raise ValueError("Unknown scoped bridge prerequisite panel")
+    native_path = qualification.root / template["native_config"]
+    document = json.loads(native_path.read_text())
+    if (
+        native_path.resolve().parent != path.resolve().parent
+        or manifest_identifier(document) != template["native_config_id"]
+    ):
+        raise ValueError("Bundle native template changed")
+    build_path = qualification.root / document["build_config"]
+    if build_path.resolve().parent != native_path.resolve().parent:
+        raise ValueError("Local build configuration must be beside the native template")
+    build_config = json.loads(build_path.read_text())
+    report = json.loads(_private_path(qualification.root, document["build_report"]).read_text())
+    build = verify_local_build_report(report, build_config, qualification)
+    if report["report_id"] != document["build_report_id"]:
+        raise ValueError("Bundle native template requires its exact completed build")
+    reward_revision = document.get("reward_bridge_revision", "v1")
+    if (
+        document.get("public_projection_revision") != "bundle_v5"
+        or (panel == "bundle_bridge" and document.get("bundle_bridge_revision") != "v3")
+        or _sha_file(
+            qualification.root
+            / "scripts"
+            / (
+                "probe-engine-cli-bundle-bridge-v3.mjs"
+                if panel == "bundle_bridge"
+                else f"probe-engine-cli-reward-bridge-{reward_revision}.mjs"
+            )
+        )
+        != document["helper_sha256"]
+        or _sha_file(qualification.root / "scripts/engine-cli-local-build.mjs")
+        != build_config["helper_sha256"]
+        or _sha_file(qualification.root / build_config["local_patch"])
+        != build_config["local_patch_sha256"]
+    ):
+        raise ValueError("Pinned native bundle helper, build helper or patch changed")
+    candidate = Path(build["candidate_directory"])
+    candidate = _private_path(qualification.root, str(candidate.relative_to(qualification.root)))
+    if _inventory(candidate) != report["private_candidate_inventory"]:
+        raise ValueError("Candidate files changed since the verified local build")
+    projection, _ = verify_projection_inputs(qualification, document)
+    runtime, _ = verify_probe_runtime(qualification, document)
+    if runtime is None:
+        raise ValueError("Bundle preflight requires the pinned game-matching managed runtime")
+    verify_native_localization(qualification, document["native_localization"])
+    native = load_native_qualification_config(
+        qualification.root / build_config["native_config"], qualification
+    )
+    _, archive = _verified_archive(native)
+    connector_path = qualification.root / template["connector_config"]
+    if connector_path.resolve().parent != path.resolve().parent:
+        raise ValueError("Bundle Connector prerequisite must be beside its template")
+    connector = load_connector_qualification_config(connector_path, qualification)
+    if connector.config_id != template["connector_config_id"]:
+        raise ValueError("Bundle shipped Host prerequisite changed")
+    tools = _verify_toolchain(connector)
+    _, settings = _settings_template(connector)
+    return {
+        "native_config_id": template["native_config_id"],
+        "native_build_report_id": report["report_id"],
+        "candidate_inventory_verified": True,
+        "sdk_inventory_id": projection["sdk_inventory_id"],
+        "managed_runtime_inventory_id": document["managed_runtime"]["inventory_id"],
+        "localization_verified": True,
+        "archive_verification_id": archive["report_id"],
+        "connector_config_id": connector.config_id,
+        "connector_toolchain_report_id": tools["report_id"],
+        "bootstrap_report_id": settings["report_id"],
+    }
+
+
+def preflight_bundle_bridges(
+    qualification: EngineQualificationConfig, path: Path, *, node: Path
+) -> dict[str, Any]:
+    """Refuse predictable blockers before allocating an immutable batch workspace."""
+    started = time.monotonic()
+    document, _, template_path, template, workspace = _bundle_batch_inputs(qualification, path)
+    if workspace.exists():
+        raise FileExistsError("Preserve this batch; no automatic resume")
+    _require_native_launch_support()
+    if not node.is_file() or not os.access(node, os.X_OK):
+        raise ValueError("Pass an executable local Node runtime")
+    if _running_games():
+        raise ValueError("Close the existing game before the isolated bundle comparison")
+    parent = next(folder for folder in (workspace, *workspace.parents) if folder.exists())
+    free = shutil.disk_usage(parent).free
+    if free < MINIMUM_FREE_BYTES:
+        raise ValueError("Allow 3.5 GB free before the bundle batch; no result was created")
+    prerequisites = _verify_bundle_prerequisites(qualification, template_path, template)
+    working_app = _working_app_policy(qualification, template_path, template)
+    pool = preflight_working_app(working_app) if working_app is not None else None
+    result = {
+        "schema_version": "engine-bundle-preflight-v1",
+        "status": "bundle_preflight_pass",
+        "config_id": manifest_identifier(document),
+        "qualification_config_id": qualification.config_id,
+        "planned_cases": 8,
+        "independent_seeds": 2,
+        "workspace": document["workspace"],
+        "free_disk_bytes": free,
+        "minimum_free_disk_bytes": MINIMUM_FREE_BYTES,
+        "prerequisites": prerequisites,
+        **({"working_app_pool": pool} if working_app is not None else {}),
+        "workspace_created": False,
+        "games_launched": 0,
+        "optimizer_steps": 0,
+        "training_allowed": False,
+        "wall_seconds": time.monotonic() - started,
+        "claim_scope": "read_only_bundle_batch_launch_prerequisites_only",
+    }
+    result["report_id"] = manifest_identifier(result)
+    return result
+
+
+def compare_bundle_bridges(
+    qualification: EngineQualificationConfig, path: Path, *, node: Path
+) -> dict[str, Any]:
+    preflight = preflight_bundle_bridges(qualification, path, node=node)
+    document, cases, template_path, template, workspace = _bundle_batch_inputs(qualification, path)
+    if preflight["config_id"] != manifest_identifier(document):
+        raise ValueError("Bundle batch configuration changed during preflight")
+    workspace.mkdir(parents=True)
+    result: dict[str, Any] = {
+        "schema_version": "engine-bundle-bridges-v1",
+        "config_id": manifest_identifier(document),
+        "qualification_config_id": qualification.config_id,
+        "preflight": preflight,
+        "status": "in_progress",
+        "cases": [],
+        "planned_cases": 8,
+        "completed_cases": 0,
+        "failed_cases": 0,
+        "not_attempted_cases": 8,
+        "independent_seeds": 2,
+        "seed_pack_pairs": 4,
+        "full_run_attempts": 0,
+        "optimizer_steps": 0,
+        "training_allowed": False,
+        "shipped_cross_host_parity": False,
+        "claim_scope": "repeated_natural_Neow_Scroll_Boxes_pack_preview_and_award_only",
+    }
+    atomic_json(workspace / "in-progress.json", result)
+    started = time.monotonic()
+    active = None
+    try:
+        for number, case in enumerate(cases, 1):
+            if time.monotonic() - started > document["max_wall_seconds"] - 250:
+                raise TimeoutError("Bundle batch reached its finite launch allowance")
+            if shutil.disk_usage(workspace).free < MINIMUM_FREE_BYTES:
+                raise ValueError("Allow 3.5 GB free before the next disposable game copy")
+            active = case
+            result["not_attempted_cases"] -= 1
+            print(
+                f"Bundle comparison {number}/8: {case['case_id']}; one disposable A8 game.",
+                flush=True,
+            )
+            config = copy.deepcopy(template)
+            config.update(
+                seed=case["seed"],
+                index=case["index"],
+                workspace=str((workspace / case["case_id"]).relative_to(qualification.root)),
+            )
+            atomic_json(workspace / f"case-{number:02d}-config.json", config)
+            comparison = compare_bundle_bridge(
+                qualification, template_path, node=node, override=config
+            )
+            result["cases"].append({**case, "comparison": comparison})
+            if comparison["status"] != "bundle_action_comparison_pass":
+                raise ValueError("Bundle comparison failed; no next case follows")
+            result["completed_cases"] += 1
+            active = None
+            atomic_json(workspace / f"progress-{number:02d}.json", result)
+        prefixes: dict[tuple[str, int], list[Any]] = {}
+        for case in result["cases"]:
+            shipped = json.loads(
+                (qualification.root / case["comparison"]["shipped_report"]).read_text()
+            )
+            prefixes.setdefault((case["seed"], case["index"]), []).append(
+                [row["facts"] for row in shipped["probe"]["comparisons"]]
+            )
+        if any(values[0] != values[1] for values in prefixes.values()):
+            raise ValueError("Repeated bundle public prefix changed")
+        result.update(status="bundle_comparisons_pass", repeated_public_prefixes_identical=True)
+    except (ValueError, OSError, RuntimeError, TimeoutError) as error:
+        result.update(status="bundle_comparisons_incomplete", error=str(error))
+        if active is not None:
+            result["failed_cases"] += 1
+    result["wall_seconds"] = time.monotonic() - started
+    result["report_id"] = manifest_identifier(result)
+    atomic_json(workspace / "batch.json", result)
+    (workspace / "in-progress.json").unlink()
+    return result
+
+
+def verify_bundle_bridges(
+    qualification: EngineQualificationConfig, path: Path, *, node: Path
+) -> dict[str, Any]:
+    """Reconstruct a saved eight-case batch; never launch or resume a game."""
+    document = json.loads(path.read_text())
+    planned = validate_bundle_cases(document)
+    if (
+        document.get("schema_version") != "engine-bundle-bridges-config-v1"
+        or document.get("stage") != "owner_repeated_natural_bundle_differentials_only"
+        or document.get("qualification_config_id") != qualification.config_id
+        or document.get("training_allowed") is not False
+    ):
+        raise ValueError("Expected the frozen scoped bundle batch configuration")
+    template_path = qualification.root / document["template"]
+    template = json.loads(template_path.read_text())
+    if (
+        template_path.resolve().parent != path.resolve().parent
+        or manifest_identifier(template) != document["template_id"]
+        or set(template.get("helpers_sha256", {})) != HELPERS
+        or any(
+            _sha_file(qualification.root / "scripts" / name) != template["helpers_sha256"][name]
+            for name in HELPERS
+        )
+    ):
+        raise ValueError("Frozen bundle batch template/helper changed")
+    workspace = _private_path(qualification.root, document["workspace"])
+    batch = _hashed(workspace / "batch.json")
+    if (
+        batch.get("config_id") != manifest_identifier(document)
+        or batch.get("qualification_config_id") != qualification.config_id
+        or batch.get("status") != "bundle_comparisons_pass"
+        or batch.get("completed_cases") != 8
+        or batch.get("planned_cases") != 8
+        or batch.get("failed_cases") != 0
+        or batch.get("not_attempted_cases") != 0
+        or batch.get("repeated_public_prefixes_identical") is not True
+        or batch.get("full_run_attempts") != 0
+        or batch.get("optimizer_steps") != 0
+        or batch.get("training_allowed") is not False
+        or [{k: c.get(k) for k in ("case_id", "seed", "index")} for c in batch["cases"]] != planned
+    ):
+        raise ValueError("Expected the complete frozen eight-case bundle batch")
+    verified = []
+    prefixes: dict[tuple[str, int], list[Any]] = {}
+    for case in batch["cases"]:
+        directory = workspace / case["case_id"]
+        comparison = _hashed(directory / "comparison.json")
+        effective = copy.deepcopy(template)
+        effective.update(
+            seed=case["seed"],
+            index=case["index"],
+            workspace=str(directory.relative_to(qualification.root)),
+        )
+        if (
+            comparison != case["comparison"]
+            or comparison.get("config_id") != manifest_identifier(effective)
+            or comparison.get("native_report")
+            != str((directory / "native-report.json").relative_to(qualification.root))
+            or comparison.get("shipped_report")
+            != str((directory / "shipped-report.json").relative_to(qualification.root))
+        ):
+            raise ValueError("Saved bundle case/config binding changed")
+        working_app = _working_app_policy(qualification, template_path, template)
+        if working_app is None:
+            if comparison.get("disposable_payload_removed_after_verified_success") is not True:
+                raise ValueError("Legacy bundle case did not remove its disposable app")
+        else:
+            shipped = _hashed(qualification.root / comparison["shipped_report"])
+            reuse = comparison.get("working_app")
+            if (
+                not isinstance(reuse, dict)
+                or reuse != shipped.get("working_app")
+                or reuse.get("config_id") != working_app.config_id
+                or reuse.get("worker") != str(working_app.slot)
+                or reuse.get("status") != "restored_to_frozen_baseline"
+                or reuse.get("restored") is not True
+            ):
+                raise ValueError("Saved reusable app identity or restoration receipt changed")
+            attempt = Path(reuse["attempt"])
+            relative = attempt.relative_to(directory / "shipped")
+            if len(relative.parts) != 1 or not relative.name.startswith("checkpoint-"):
+                raise ValueError("Working app receipt must belong to this shipped case")
+            verify_working_app_receipt(
+                working_app, reuse, attempt=attempt, archive_id=shipped["archive_id"]
+            )
+        verification = verify_bundle_saved(qualification, comparison, node=node)
+        if verification != comparison.get("saved_verification"):
+            raise ValueError("Saved bundle reconstruction differs from its recorded audit")
+        verified.append(verification)
+        shipped = _hashed(qualification.root / comparison["shipped_report"])
+        prefixes.setdefault((case["seed"], case["index"]), []).append(
+            [row["facts"] for row in shipped["probe"]["comparisons"]]
+        )
+    if any(len(rows) != 2 or rows[0] != rows[1] for rows in prefixes.values()):
+        raise ValueError("Repeated saved bundle facts differ")
+    result = {
+        "schema_version": "engine-bundle-batch-saved-verification-v1",
+        "valid": True,
+        "batch_report_id": batch["report_id"],
+        "verified_cases": len(verified),
+        "independent_seeds": 2,
+        **{
+            key: sum(row[key] for row in verified)
+            for key in (
+                "observations",
+                "effect_decisions",
+                "public_game_ui_actions",
+                "preview_steps",
+            )
+        },
+        "case_verification_ids": [row["report_id"] for row in verified],
+        "games_launched": 0,
+        "optimizer_steps": 0,
+        "training_allowed": False,
+        "claim_scope": "saved_eight_case_bundle_raw_public_evidence_only",
+    }
+    result["report_id"] = manifest_identifier(result)
+    return result

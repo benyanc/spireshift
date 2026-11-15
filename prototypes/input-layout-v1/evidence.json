@@ -1,0 +1,48 @@
+{
+  "schema_version": "offline-input-layout-prototype-evidence-v1",
+  "scope": "completed_public_graph_preservation_not_live_compatibility_or_playing_strength",
+  "study_report": {
+    "path": "artifacts/native-input-layout/offline-v1/results-v4/report.json",
+    "id": "sha256:c79a7b9cf5f83f4c2deb1a2206f1131c7edb2c8d98e301326e551ca4769bbfa5"
+  },
+  "verification_report": "artifacts/native-input-layout/offline-v1/verification-v3/report.json",
+  "recorded_inputs": 495,
+  "exact_reconstructions": 495,
+  "ordered_legal_choices_preserved": 495,
+  "cohort_inputs": {
+    "historical_export_v35_canary": 487,
+    "repaired_export_v36_control": 8
+  },
+  "synthetic_perturbations_of_saved_inputs": {
+    "deck_definition": 22,
+    "per_copy_cost": 22,
+    "per_copy_upgrade": 22,
+    "relic_definition": 22
+  },
+  "saved_persistent_inventory_counter_perturbations_available": false,
+  "prototype_tests_passed": 36,
+  "original_contract_regressions_passed": 17,
+  "total_targeted_tests_passed": 53,
+  "production_validator_rejections_of_offline_schema": 495,
+  "initial_pairs_equal_after_conversion": 0,
+  "initial_pairs_examined": 5,
+  "later_divergent_states_used_as_paired_effect_evidence": false,
+  "protected_files_byte_identical": 1638,
+  "study_wall_seconds": 2.3117507919999998,
+  "study_peak_process_memory_bytes": 265404416,
+  "running_recipe_unchanged": "configs/native-compatibility/sts2-v0.111.0-a8-interface-canary-v1.json",
+  "source_sha256": {
+    "prototypes/input-layout-v1/converter.mjs": "90866287f5e01ab64091ef6e9954c54728c39e061ad6b86e0495012ee3a8a5b2",
+    "prototypes/input-layout-v1/converter.test.mjs": "ec03c48dd16dd221411a3cd9f17633ea1c09dbb2493a6432e65784bac2ec0f84",
+    "prototypes/input-layout-v1/study.mjs": "1dec16d9c92008cd6e735c1ea5747bbd8875ce897fd13e3bb9528bfa1d32ea54",
+    "prototypes/input-layout-v1/study.test.mjs": "37c56bbd42b5bc213290c6ab7a286e61596544afa68fb6d4b5d54568fa178bbd"
+  },
+  "games_launched": 0,
+  "game_apps_created": 0,
+  "optimizer_updates": 0,
+  "training_allowed": false,
+  "full_compatibility_granted": false,
+  "checkpoint_promoted": false,
+  "repository_wide_check_run": false,
+  "next_step": "assess_completed_owner_diagnostic_then_freeze_new_semantic_mapping_and_live_integration_separately"
+}

@@ -1,0 +1,487 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:d3e6a339929191fe5580ac357387dcef944eb91427a4f472820342db57e49365",
+  "schema_version": "native-policy-update-seeds-v1",
+  "seeds": [
+    {
+      "id": 1950000,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0000"
+    },
+    {
+      "id": 1950001,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0001"
+    },
+    {
+      "id": 1950002,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0002"
+    },
+    {
+      "id": 1950003,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0003"
+    },
+    {
+      "id": 1950004,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0004"
+    },
+    {
+      "id": 1950005,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0005"
+    },
+    {
+      "id": 1950006,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0006"
+    },
+    {
+      "id": 1950007,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0007"
+    },
+    {
+      "id": 1950008,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0008"
+    },
+    {
+      "id": 1950009,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0009"
+    },
+    {
+      "id": 1950010,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0010"
+    },
+    {
+      "id": 1950011,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0011"
+    },
+    {
+      "id": 1950012,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0012"
+    },
+    {
+      "id": 1950013,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0013"
+    },
+    {
+      "id": 1950014,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0014"
+    },
+    {
+      "id": 1950015,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0015"
+    },
+    {
+      "id": 1950016,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0016"
+    },
+    {
+      "id": 1950017,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0017"
+    },
+    {
+      "id": 1950018,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0018"
+    },
+    {
+      "id": 1950019,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0019"
+    },
+    {
+      "id": 1950020,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0020"
+    },
+    {
+      "id": 1950021,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0021"
+    },
+    {
+      "id": 1950022,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0022"
+    },
+    {
+      "id": 1950023,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0023"
+    },
+    {
+      "id": 1950024,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0024"
+    },
+    {
+      "id": 1950025,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0025"
+    },
+    {
+      "id": 1950026,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0026"
+    },
+    {
+      "id": 1950027,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0027"
+    },
+    {
+      "id": 1950028,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0028"
+    },
+    {
+      "id": 1950029,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0029"
+    },
+    {
+      "id": 1950030,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0030"
+    },
+    {
+      "id": 1950031,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0031"
+    },
+    {
+      "id": 1950032,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0032"
+    },
+    {
+      "id": 1950033,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0033"
+    },
+    {
+      "id": 1950034,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0034"
+    },
+    {
+      "id": 1950035,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0035"
+    },
+    {
+      "id": 1950036,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0036"
+    },
+    {
+      "id": 1950037,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0037"
+    },
+    {
+      "id": 1950038,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0038"
+    },
+    {
+      "id": 1950039,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0039"
+    },
+    {
+      "id": 1950040,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0040"
+    },
+    {
+      "id": 1950041,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0041"
+    },
+    {
+      "id": 1950042,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0042"
+    },
+    {
+      "id": 1950043,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0043"
+    },
+    {
+      "id": 1950044,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0044"
+    },
+    {
+      "id": 1950045,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0045"
+    },
+    {
+      "id": 1950046,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0046"
+    },
+    {
+      "id": 1950047,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0047"
+    },
+    {
+      "id": 1950048,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0048"
+    },
+    {
+      "id": 1950049,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0049"
+    },
+    {
+      "id": 1950050,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0050"
+    },
+    {
+      "id": 1950051,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0051"
+    },
+    {
+      "id": 1950052,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0052"
+    },
+    {
+      "id": 1950053,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0053"
+    },
+    {
+      "id": 1950054,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0054"
+    },
+    {
+      "id": 1950055,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0055"
+    },
+    {
+      "id": 1950056,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0056"
+    },
+    {
+      "id": 1950057,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0057"
+    },
+    {
+      "id": 1950058,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0058"
+    },
+    {
+      "id": 1950059,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0059"
+    },
+    {
+      "id": 1950060,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0060"
+    },
+    {
+      "id": 1950061,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0061"
+    },
+    {
+      "id": 1950062,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0062"
+    },
+    {
+      "id": 1950063,
+      "partition": "train",
+      "seed": "SP1RESH1FTPGTRN0063"
+    },
+    {
+      "id": 1960000,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0000"
+    },
+    {
+      "id": 1960001,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0001"
+    },
+    {
+      "id": 1960002,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0002"
+    },
+    {
+      "id": 1960003,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0003"
+    },
+    {
+      "id": 1960004,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0004"
+    },
+    {
+      "id": 1960005,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0005"
+    },
+    {
+      "id": 1960006,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0006"
+    },
+    {
+      "id": 1960007,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0007"
+    },
+    {
+      "id": 1960008,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0008"
+    },
+    {
+      "id": 1960009,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0009"
+    },
+    {
+      "id": 1960010,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0010"
+    },
+    {
+      "id": 1960011,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0011"
+    },
+    {
+      "id": 1960012,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0012"
+    },
+    {
+      "id": 1960013,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0013"
+    },
+    {
+      "id": 1960014,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0014"
+    },
+    {
+      "id": 1960015,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0015"
+    },
+    {
+      "id": 1960016,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0016"
+    },
+    {
+      "id": 1960017,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0017"
+    },
+    {
+      "id": 1960018,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0018"
+    },
+    {
+      "id": 1960019,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0019"
+    },
+    {
+      "id": 1960020,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0020"
+    },
+    {
+      "id": 1960021,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0021"
+    },
+    {
+      "id": 1960022,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0022"
+    },
+    {
+      "id": 1960023,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0023"
+    },
+    {
+      "id": 1960024,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0024"
+    },
+    {
+      "id": 1960025,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0025"
+    },
+    {
+      "id": 1960026,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0026"
+    },
+    {
+      "id": 1960027,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0027"
+    },
+    {
+      "id": 1960028,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0028"
+    },
+    {
+      "id": 1960029,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0029"
+    },
+    {
+      "id": 1960030,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0030"
+    },
+    {
+      "id": 1960031,
+      "partition": "development",
+      "seed": "SP1RESH1FTPGDEV0031"
+    }
+  ]
+}

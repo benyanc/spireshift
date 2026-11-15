@@ -1,0 +1,272 @@
+{
+  "control_report_id": "sha256:8a8ea73264816c606bb9c55e2e6c437408a0388f7e0a3eac7821dec00ccbdbd0",
+  "development": {
+    "2": {
+      "first_changes": {
+        "combat_turn": 9,
+        "map_navigation": 1,
+        "reward_claim": 2
+      },
+      "fitted": {
+        "act1_clears": 0,
+        "boss_reaches": 0,
+        "combat_rooms": 52,
+        "combat_rooms_reaching_rewards": 40,
+        "games": 12,
+        "loss_owners": {
+          "elite": 3,
+          "normal": 9
+        },
+        "mean_floor": 7.25,
+        "wins": 0
+      },
+      "floor_pairs": {
+        "ahead": 1,
+        "behind": 2,
+        "tied": 9
+      },
+      "original": {
+        "act1_clears": 0,
+        "boss_reaches": 0,
+        "combat_rooms": 53,
+        "combat_rooms_reaching_rewards": 41,
+        "games": 12,
+        "loss_owners": {
+          "elite": 3,
+          "normal": 9
+        },
+        "mean_floor": 7.666666666666667,
+        "wins": 0
+      }
+    },
+    "3": {
+      "first_changes": {
+        "card_reward_selection": 1,
+        "combat_turn": 8,
+        "event_option": 1,
+        "map_navigation": 2
+      },
+      "fitted": {
+        "act1_clears": 0,
+        "boss_reaches": 0,
+        "combat_rooms": 55,
+        "combat_rooms_reaching_rewards": 43,
+        "games": 12,
+        "loss_owners": {
+          "elite": 3,
+          "normal": 9
+        },
+        "mean_floor": 7.333333333333333,
+        "wins": 0
+      },
+      "floor_pairs": {
+        "ahead": 2,
+        "behind": 1,
+        "tied": 9
+      },
+      "original": {
+        "act1_clears": 0,
+        "boss_reaches": 1,
+        "combat_rooms": 60,
+        "combat_rooms_reaching_rewards": 48,
+        "games": 12,
+        "loss_owners": {
+          "boss": 1,
+          "elite": 2,
+          "normal": 9
+        },
+        "mean_floor": 7.916666666666667,
+        "wins": 0
+      }
+    }
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "game_launches": 0,
+  "games_verified": 80,
+  "independent_native_projection_reused_from_sealed_episodes": true,
+  "local_answer_factors": 0,
+  "matched_wins": {
+    "by_initializer": {
+      "2": {
+        "arms": {
+          "fitted": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 12,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 12,
+        "terminal_pairs": 12
+      },
+      "3": {
+        "arms": {
+          "fitted": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 12,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 12,
+        "terminal_pairs": 12
+      }
+    },
+    "pooled_fitted_minus_original_win_rate_bounds": [
+      0.0,
+      0.0
+    ],
+    "seed_clustered_bootstrap_95": {
+      "intervals": {
+        "player_2_wins": [
+          0.0,
+          0.0
+        ],
+        "player_3_wins": [
+          0.0,
+          0.0
+        ],
+        "pooled_completed_acts": [
+          0.0,
+          0.0
+        ],
+        "pooled_wins": [
+          0.0,
+          0.0
+        ]
+      },
+      "resamples": 10000,
+      "scope": "descriptive_for_these_worlds_and_two_fixed_initializers",
+      "seed": 20261020
+    }
+  },
+  "optimizer_updates": 0,
+  "report": {
+    "path": "artifacts/native-a8-archive-own-training/study-v1/attempt-1794368222259845000.json",
+    "report_id": "sha256:ad8073ac687f2e65934c7b3095e6aac60c01779300d74ee62c05039069d2bd60",
+    "sha256": "c222041259cafee76e68449903b667e804b84cca5392e1f7345cd7ed0b099d20"
+  },
+  "report_id": "sha256:e45fe063745bc0b46c114914038e9fe926ea9d2d5b7f428349d224f250019960",
+  "resources": {
+    "path": "artifacts/native-a8-archive-own-training/study-v1-1794368222259845000-resources.json",
+    "report_id": "sha256:2242b20f4c2e0f3fb64f489e41a33c4f97b99037f83eaa072d4ee93afa5ada6b",
+    "sha256": "9cd93320913d22a1cab292c51f1501478baaf61ec1ddbd5ec22a5ddaa268e4af"
+  },
+  "rounds": {
+    "fit-p2-r1": {
+      "admitted_native_decisions": 988,
+      "distinct_returns": 6,
+      "games": 8,
+      "policy_joint_kl": 0.0067690869321087995,
+      "updates": 24
+    },
+    "fit-p2-r2": {
+      "admitted_native_decisions": 866,
+      "distinct_returns": 5,
+      "games": 8,
+      "policy_joint_kl": 0.003307581398936619,
+      "updates": 21
+    },
+    "fit-p3-r1": {
+      "admitted_native_decisions": 897,
+      "distinct_returns": 6,
+      "games": 8,
+      "policy_joint_kl": 0.005447528106544458,
+      "updates": 24
+    },
+    "fit-p3-r2": {
+      "admitted_native_decisions": 1121,
+      "distinct_returns": 5,
+      "games": 8,
+      "policy_joint_kl": 0.0031689335686254337,
+      "updates": 27
+    }
+  },
+  "schema_version": "native-a8-archive-own-training-audit-v1",
+  "sealed_files": 4892,
+  "seals": 86,
+  "training": {
+    "act1_clears": 0,
+    "boss_reaches": 3,
+    "combat_rooms": 154,
+    "combat_rooms_reaching_rewards": 122,
+    "games": 32,
+    "loss_owners": {
+      "boss": 3,
+      "elite": 9,
+      "normal": 20
+    },
+    "mean_floor": 9.0,
+    "wins": 0
+  },
+  "unseen_human_choice_agreement": {
+    "2": {
+      "fitted": {
+        "decisions": 424,
+        "mean_world_joint_nll": 1.1491040368572019,
+        "mean_world_top_one_agreement": 0.5391737891737891,
+        "worlds": 2
+      },
+      "original": {
+        "decisions": 424,
+        "mean_world_joint_nll": 1.1576438680885692,
+        "mean_world_top_one_agreement": 0.5344551282051282,
+        "worlds": 2
+      }
+    },
+    "3": {
+      "fitted": {
+        "decisions": 424,
+        "mean_world_joint_nll": 1.1612250723094344,
+        "mean_world_top_one_agreement": 0.5092592592592593,
+        "worlds": 2
+      },
+      "original": {
+        "decisions": 424,
+        "mean_world_joint_nll": 1.1660660378914227,
+        "mean_world_top_one_agreement": 0.5022257834757835,
+        "worlds": 2
+      }
+    }
+  },
+  "verified_native_deliveries": 8977
+}

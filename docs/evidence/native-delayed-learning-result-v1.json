@@ -1,0 +1,284 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_final_players_frozen_before_heldout_evaluation": true,
+  "assessment_baseline_refits": 0,
+  "assessment_games_launched": 0,
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "coverage": {
+    "broad_generalization_established": false,
+    "distinct_fitting_public_roots": 16,
+    "distinct_heldout_public_roots": 8,
+    "genuinely_unseen_heldout_public_roots": 8,
+    "heldout_roots_already_seen_in_fitting": 0,
+    "unseen_heldout_cases": [
+      "case-2200108-vulnerable-then-attack",
+      "case-2200108-dexterity-then-block",
+      "case-2200109-vulnerable-then-attack",
+      "case-2200109-dexterity-then-block",
+      "case-2200110-vulnerable-then-attack",
+      "case-2200110-dexterity-then-block",
+      "case-2200111-vulnerable-then-attack",
+      "case-2200111-dexterity-then-block"
+    ]
+  },
+  "evidence_id": "sha256:118e24f66e3c1cc4ca55bee96a13273d302b1ae42a730d4839ef50c6dc9ecbea",
+  "fitting_passes_by_arm": {
+    "exact": 2,
+    "learned": 2
+  },
+  "full_run_attempts": 0,
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "initial_batches_identical_across_baselines": true,
+  "interpretation": {
+    "baseline_superiority_established": false,
+    "full_run_learning_improvement_established": false,
+    "long_strategic_credit_qualified": false,
+    "narrow_delayed_learning_with_learned_baseline_established": true,
+    "weakest_heldout_success_probability": 0.9981506853728919,
+    "zero_update_reason": "all_32_sampled_sequences_succeed_and_centered_credit_variance_below_existing_guard",
+    "zero_update_rounds": 222
+  },
+  "limitations": [
+    "Two task patterns, one encounter and limited upgrade/order variants.",
+    "Four held-out worlds and two fixed parents; near-ceiling results do not select a superior baseline.",
+    "Reconstructed saved transitions and repeated diagnostic sequences are not new independent native games.",
+    "Production learner is shared; privileged collector, goal rewards and world-grouped repeated episodes differ from ordinary full-game admission.",
+    "Historical situation-bank roots lack repaired combat counter views and require explicit replay qualification."
+  ],
+  "new_assessment_optimizer_steps": 0,
+  "next_work": "qualify_finite_natural_multi_turn_TRAIN_teacher_curriculum_then_one_declared_student_intervention_and_fresh_full_games",
+  "ordinary_PPO_eligible": false,
+  "original_Adam_counters": [
+    5658,
+    6045
+  ],
+  "original_full_players_and_Adam_unchanged": true,
+  "privileged_fixture": true,
+  "recipe": {
+    "id": "sha256:d239d59e300eadf95b9a9641106d7269993cb98dfb235fb9ac40c55e5ad3bab0",
+    "path": "configs/native-delayed/sts2-v0.111.0-a8-comparison-v1.json"
+  },
+  "results": [
+    {
+      "arm": "learned",
+      "final_fitting": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9997987825711538,
+        "minimum_success_probability": 0.999499411278031
+      },
+      "first_fitting_pass_round": 4,
+      "fitting_criterion_passed": true,
+      "heldout": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9998205899868385,
+        "minimum_success_probability": 0.9995027994722175
+      },
+      "heldout_criterion_passed": true,
+      "initial_fitting": {
+        "greedy_accuracy": 0.3125,
+        "mean_success_probability": 0.3434370463589061,
+        "minimum_success_probability": 0.040246259854626244
+      },
+      "last_nonpassing_round": 3,
+      "model_id": "sha256:81a5152a316d25be4d36d33ad9328ba93a9ec0e1280db2b6ddbbae4d15059a05",
+      "new_optimizer_steps": 42,
+      "optimizer_steps": 5700,
+      "player": 2,
+      "skip_reasons": {
+        "no_centered_policy_credit_skip_entire_update": 114
+      },
+      "state_id": "sha256:b74370a711c98e820e08fc369374711892f17524e122e59b499a9d95f950c507",
+      "zero_update_rounds": 114
+    },
+    {
+      "arm": "exact",
+      "final_fitting": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9999196635726788,
+        "minimum_success_probability": 0.9998646961068294
+      },
+      "first_fitting_pass_round": 4,
+      "fitting_criterion_passed": true,
+      "heldout": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9999143975602552,
+        "minimum_success_probability": 0.9998654307908929
+      },
+      "heldout_criterion_passed": true,
+      "initial_fitting": {
+        "greedy_accuracy": 0.3125,
+        "mean_success_probability": 0.3434370463589061,
+        "minimum_success_probability": 0.040246259854626244
+      },
+      "last_nonpassing_round": 3,
+      "model_id": "sha256:cafb0bfa64691ef5d627f31d51565c7591ad78494df43b71cd2f6763ca995830",
+      "new_optimizer_steps": 382,
+      "optimizer_steps": 6040,
+      "player": 2,
+      "skip_reasons": {},
+      "state_id": "sha256:83c2dc390444692bd736a030acad45dccf9788742a273529ff9977d06be43660",
+      "zero_update_rounds": 0
+    },
+    {
+      "arm": "learned",
+      "final_fitting": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9990984466354338,
+        "minimum_success_probability": 0.9979408882838015
+      },
+      "first_fitting_pass_round": 8,
+      "fitting_criterion_passed": true,
+      "heldout": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9991977095913355,
+        "minimum_success_probability": 0.9981506853728919
+      },
+      "heldout_criterion_passed": true,
+      "initial_fitting": {
+        "greedy_accuracy": 0.3125,
+        "mean_success_probability": 0.3484826301692473,
+        "minimum_success_probability": 0.03572492692470649
+      },
+      "last_nonpassing_round": 7,
+      "model_id": "sha256:08168645d0a8841795606e6ae4b959b558675f819feed8b0460c15f62eff8b28",
+      "new_optimizer_steps": 60,
+      "optimizer_steps": 6105,
+      "player": 3,
+      "skip_reasons": {
+        "no_centered_policy_credit_skip_entire_update": 108
+      },
+      "state_id": "sha256:0fe9709fc2ec958d8e354e631b6c5f5605c03c380c9176f5785fd3c7dac99cab",
+      "zero_update_rounds": 108
+    },
+    {
+      "arm": "exact",
+      "final_fitting": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9997716362419515,
+        "minimum_success_probability": 0.9995421845001405
+      },
+      "first_fitting_pass_round": 7,
+      "fitting_criterion_passed": true,
+      "heldout": {
+        "greedy_accuracy": 1.0,
+        "mean_success_probability": 0.9997915900479435,
+        "minimum_success_probability": 0.9995492838407689
+      },
+      "heldout_criterion_passed": true,
+      "initial_fitting": {
+        "greedy_accuracy": 0.3125,
+        "mean_success_probability": 0.3484826301692473,
+        "minimum_success_probability": 0.03572492692470649
+      },
+      "last_nonpassing_round": 6,
+      "model_id": "sha256:d87686b28dbbdb165e1eb2bf8899202518dc5967b58e03c25ecb66a12b580f8b",
+      "new_optimizer_steps": 384,
+      "optimizer_steps": 6429,
+      "player": 3,
+      "skip_reasons": {},
+      "state_id": "sha256:2cce7c1d853cd60dd15bcb7b6bed6361deb519047bbef4937a2f2e06f3f0ef5f",
+      "zero_update_rounds": 0
+    }
+  ],
+  "saved_only_audit": {
+    "boundary_batches_reconstructed_without_refitting": 8,
+    "complete_zero_step_chunks_exactly_unchanged": 17,
+    "id": "sha256:264054f080496bd04503341dbeac8e1f58ce748e698d4a9661c5335e776c1039",
+    "native_path_deliveries_verified": 372,
+    "path": "artifacts/native-delayed/comparison-assessment-v1/report.json",
+    "resources": {
+      "cpu_seconds": 32.197932117,
+      "final_storage_bytes": 18072,
+      "id": "sha256:604373c4871da0ecad20e80aa9900c70912e8afcfbfd11894b1c673a96d17f98",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 1000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-delayed-comparison-assessment-v1.json",
+      "peak_resident_memory_bytes": 308428800,
+      "wall_seconds": 59.88479654211551
+    },
+    "saved_rounds_inspected": 512,
+    "source": {
+      "path": "artifacts/native-delayed/comparison-assessment-v1/audit.py",
+      "sha256": "9894aa7d190c37f49a4cba235fe326feaffbf8e6ab33b35753c2b8f1908650b1"
+    },
+    "source_files_verified": 75658,
+    "verified_units": 94
+  },
+  "schema_version": "native-delayed-learning-result-evidence-v1",
+  "source_execution": {
+    "completed_units": 94,
+    "native_branches": 204,
+    "native_trees": 24,
+    "native_worlds": 12,
+    "optimizer_steps_on_copies": 868,
+    "planned_units": 94,
+    "resources": {
+      "cpu_seconds": 444.9615635740006,
+      "final_storage_bytes": 244295971,
+      "id": "sha256:cb72703974649a1dce154278cff9b0aa7f6036ac539f1f2c6d5e6e604f85463d",
+      "limits": {
+        "cpu_seconds": 1800.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 900.0
+      },
+      "path": "artifacts/resources/native-delayed-comparison-v1-1.json",
+      "peak_resident_memory_bytes": 356941824,
+      "wall_seconds": 695.7309870000463
+    },
+    "sampled_diagnostic_sequences": 16384
+  },
+  "source_optimizer_steps": 868,
+  "source_report": {
+    "id": "sha256:52d2c3f5d35956eb5a0fef8382950ef44d1c93a5ab2db4d547255b61bb437cd4",
+    "path": "artifacts/native-delayed/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "status": "completed_main_diagnostic_assessed_both_baselines_pass_no_full_run_admission",
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "verification": {
+    "csharp_protocol": true,
+    "formatted_files": 709,
+    "passed_tests": 2428,
+    "production_or_recipe_sources_changed": false,
+    "resources": {
+      "cpu_seconds": 121.912810108,
+      "final_storage_bytes": 0,
+      "id": "sha256:6ff0e207c1b98b11bf174a68162f51ddbdea80dd65ff10a02cf7a9ffc5377ed8",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-delayed-result-repository-check-v1.json",
+      "peak_resident_memory_bytes": 358596608,
+      "wall_seconds": 133.69220254197717
+    },
+    "skipped_tests": 5,
+    "strict_type_files": 520
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "full-run-backend-repair-config-v4",
+  "base_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v3-retry1",
+  "base_revision": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd",
+  "base_manifest": "artifacts/backend-repair/event-continuation-v1-retry1/candidate-manifest.json",
+  "base_manifest_id": "sha256:91d5fd3ef13eaae72fac67547021837097c377f3af1890cbb0797f33df343502",
+  "patch": {
+    "path": "backend-patches/event-choices-v1/event-choices-v2.patch",
+    "sha256": "c04b2da0bca870468d0926956a284e5defb65d9182afc0cf404f8c9816b6fc59"
+  },
+  "regression_tests": {
+    "path": "backend-patches/event-choices-v1/SpireShiftEventChoiceParityTests.cs",
+    "sha256": "7d28a12e5e9a9ef91048451f40848e567188464b37c88044e83f48d68ad60be5"
+  },
+  "fixture_inventory": {
+    "path": "backend-patches/event-choices-v1/fixture-inventory.json",
+    "sha256": "450641976a1a669239ca2b7b302d9586734a3b035d31861b1a5129a8aaad2429"
+  },
+  "candidate_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v4-retry1",
+  "output_dir": "artifacts/backend-repair/event-choices-v1-retry1",
+  "runtime": "osx-arm64",
+  "resource_limits": {
+    "wall_seconds": 240,
+    "cpu_seconds": 960,
+    "memory_bytes": 12000000000,
+    "storage_bytes": 4000000000
+  },
+  "automatic_training": false,
+  "automatic_admission": false,
+  "minimum_regression_tests": 240,
+  "engine_sources": [
+    {
+      "path": "src/Sts2Emulator/Core/Run/RunEngine.cs",
+      "base_sha256": "0b4b921ccde36583bf256181c4cce04aad4c2e811d8f569b9458cb28c1ad31ef",
+      "repaired_sha256": "82fa7920d43df64b1e10f51623f90ada7370d1ad30de27201617ee8cb6e8e3dd"
+    }
+  ],
+  "test_updates": [
+    {
+      "path": "src/Sts2Emulator.Tests/SpireShiftEventContinuationTests.cs",
+      "base_sha256": "5d5907f57e6ebcdeb45ddd96d7d54545f6a9c931610398e3545cfa466a4ed41e",
+      "repaired_sha256": "0bed1d499d556de80d498206f298f9f96342d15dbf3b3472dd265d68144c4687"
+    },
+    {
+      "path": "src/Sts2Emulator.Tests/Events/EventOptionGatingTests.cs",
+      "base_sha256": "cda10dce23c8a10290201949c39b0a592ac7a021b7428c10ae76390794303cce",
+      "repaired_sha256": "1726bd1b11b700a3315888f973d6e42b40aa96a62daa0ff1f090356f4f6ba772"
+    },
+    {
+      "path": "src/Sts2Emulator.Tests/Events/EventScreenTests.cs",
+      "base_sha256": "7727e840195d526f71195a29d7c5f033c5fa329801aaa1b39079543e6900eb72",
+      "repaired_sha256": "f1dcf2e1714f1a5a05a0821fb44fa12f41aa63558c80e2f1b2195f2fc9836868"
+    },
+    {
+      "path": "src/Sts2Emulator.Tests/Events/EventMaskAgreesWithStepTests.cs",
+      "base_sha256": "4089e241270a45f77d6346316ff576cc56c643158c5e7815ccb0b7c7c396fb74",
+      "repaired_sha256": "f8afaf0fc038c66cfd1d9b7f8c68d66680b93984783f3e59b09c498517e94c24"
+    }
+  ],
+  "config_id": "sha256:9af59f59071dbee8dbb6e240c3d6b57dbe0f7f78122452790f8d1c5f27dcdb8c"
+}

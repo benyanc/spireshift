@@ -1,0 +1,112 @@
+--- a/src/managed-player-environment.mjs
++++ b/src/managed-player-environment.mjs
+@@ -1532,7 +1532,9 @@
+   environmentFingerprint,
+   sequence,
+   identityMode = "crypto",
+-  validateSdk = true
++  validateSdk = true,
++  surfaceProjector = null,
++  readProjector = null
+ }) {
+   if (!plainObject(state) || state.type !== "decision") {
+     throw new TypeError("Managed Player Environment projection requires a raw decision state.");
+@@ -1552,7 +1554,10 @@
+   const ctx = createProjectionContext({ state, runtimeInstanceId, sequence, identityMode });
+   const contextMs = performance.now() - stageStarted;
+   stageStarted = performance.now();
+-  const surface = currentSurface(state, ctx);
++  const surface = surfaceProjector == null ? currentSurface(state, ctx) : surfaceProjector(state, ctx, {
++    defaultProjector: currentSurface, withoutDeck, cardProperties, visibleText,
++    enumerateSelections, actionLimit: ACTION_LIMIT
++  });
+   const surfaceMs = performance.now() - stageStarted;
+   stageStarted = performance.now();
+   const persistent = buildPersistentVisibleState(state, ctx.snapshotId, ctx.id);
+@@ -1565,11 +1570,12 @@
+     ctx.bindings.clear();
+   }
+   stageStarted = performance.now();
+-  const reads = [
++  let reads = [
+     runDeckRead(ctx.snapshotId, state, ctx.id),
+     combatPilesRead(ctx.snapshotId, state, ctx.id)
+   ]
+     .filter(Boolean);
++  if (readProjector != null) reads = readProjector(state, reads, ctx, { cardProperties, visibleText });
+   const readsMs = performance.now() - stageStarted;
+   stageStarted = performance.now();
+   const missing = [...new Set([
+@@ -1683,6 +1689,9 @@
+   #tainted = false;
+   #identityMode;
+   #validateSdk;
++  #ascension;
++  #surfaceProjector;
++  #readProjector;
+   #performance = new Map();
+ 
+   constructor({
+@@ -1692,8 +1701,17 @@
+     character = "Ironclad",
+     language = "en",
+     identityMode = "crypto",
+-    validateSdk = true
++    validateSdk = true,
++    ascension = null,
++    surfaceProjector = null,
++    readProjector = null
+   }) {
++    if (ascension != null && (!Number.isSafeInteger(ascension) || ascension < 0)) {
++      throw new TypeError("ascension must be a nonnegative integer when supplied.");
++    }
++    if (surfaceProjector != null && typeof surfaceProjector !== "function") {
++      throw new TypeError("surfaceProjector must be a function when supplied.");
++    }
+     if (process == null || typeof process.request !== "function") {
+       throw new TypeError("ManagedPlayerEnvironmentSession requires a JSON-line process.");
+     }
+@@ -1704,6 +1722,10 @@
+     this.#language = language;
+     this.#identityMode = identityMode;
+     this.#validateSdk = validateSdk;
++    this.#ascension = ascension;
++    if (readProjector != null && typeof readProjector !== "function") throw new TypeError("readProjector must be a function");
++    this.#surfaceProjector = surfaceProjector;
++    this.#readProjector = readProjector;
+   }
+ 
+   get tainted() {
+@@ -1740,6 +1762,7 @@
+     const state = await this.#process.request({
+       cmd: reset ? "reset_run" : "start_run",
+       character: this.#character,
++      ...(this.#ascension == null ? {} : { ascension: this.#ascension }),
+       seed,
+       lang: this.#language
+     }, timeoutMs);
+@@ -1750,6 +1773,13 @@
+ 
+   async close() {
+     return this.#process.stop({ request: { cmd: "quit" }, timeoutMs: 5_000 });
++  }
++
++  // Trusted host integration for a native observation after separately labeled fixture setup.
++  // This is not a policy command and never executes gameplay or clears the request ledger.
++  async acceptNativeObservation(state, timeoutMs = 10_000) {
++    if (this.#tainted) throw new Error("A tainted session cannot accept another observation.");
++    return this.#setState(state, timeoutMs);
+   }
+ 
+   observe() {
+@@ -1918,7 +1948,9 @@
+       environmentFingerprint: this.#environmentFingerprint,
+       sequence: this.#sequence,
+       identityMode: this.#identityMode,
+-      validateSdk: this.#validateSdk
++      validateSdk: this.#validateSdk,
++      surfaceProjector: this.#surfaceProjector,
++      readProjector: this.#readProjector
+     });
+     this.#record("projection_total", performance.now() - projectionStarted);
+     for (const [name, milliseconds] of Object.entries(this.#projection.performance)) {

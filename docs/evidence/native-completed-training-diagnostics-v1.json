@@ -1,0 +1,291 @@
+{
+  "action_quality_established": false,
+  "assessment": [
+    "Mandatory menus are common but their exclusion from advantage normalization alone changes the sign on only 9 of 5297 genuine choices. This is not an obvious primary normalization failure in these batches.",
+    "Combat accounts for 3982 of 5297 real choices and 63 of 64 losing runs are last observed in combat. This does not identify a causal mistake.",
+    "Rest sites supply only 19 genuine decision menus and shops 88 across both cohorts; rare-family lessons are limited.",
+    "Card reward skipping is available and selected 30 of 181 observed opportunities. Neither mandatory card-taking nor always ending turns early explains these records.",
+    "In-sample probability movement and gradients are nonzero; the current larger-batch/reuse comparison should finish unchanged before choosing a new intervention."
+  ],
+  "checkpoint_promoted": false,
+  "claim_scope": "completed_TRAIN_behavior_and_in_sample_credit_alignment_not_causal_action_quality",
+  "cohorts": [
+    {
+      "choice_decisions": 2590,
+      "cohort": 0,
+      "decisions": 3413,
+      "effective_games_from_choice_counts": 28.750642893879643,
+      "end_turns": 611,
+      "end_turns_with_play_available": 23,
+      "family_decisions": [
+        {
+          "choices": 1,
+          "decisions": 1,
+          "family": "card_bundle_selection",
+          "mean_choice_tv": 0.00965665193030893
+        },
+        {
+          "choices": 83,
+          "decisions": 83,
+          "family": "card_reward_selection",
+          "mean_choice_tv": 0.0498877715646901
+        },
+        {
+          "choices": 30,
+          "decisions": 30,
+          "family": "card_selection",
+          "mean_choice_tv": 0.0209843522470855
+        },
+        {
+          "choices": 1970,
+          "decisions": 2558,
+          "family": "combat_turn",
+          "mean_choice_tv": 0.03982284026863624
+        },
+        {
+          "choices": 80,
+          "decisions": 147,
+          "family": "event_option",
+          "mean_choice_tv": 0.024170807634469903
+        },
+        {
+          "choices": 99,
+          "decisions": 208,
+          "family": "map_navigation",
+          "mean_choice_tv": 0.026534562946850977
+        },
+        {
+          "choices": 1,
+          "decisions": 1,
+          "family": "native_generated_card_choice",
+          "mean_choice_tv": 0.05615126259858218
+        },
+        {
+          "choices": 7,
+          "decisions": 14,
+          "family": "rest_site",
+          "mean_choice_tv": 0.07999984954405501
+        },
+        {
+          "choices": 269,
+          "decisions": 270,
+          "family": "reward_claim",
+          "mean_choice_tv": 0.05467254751170106
+        },
+        {
+          "choices": 12,
+          "decisions": 51,
+          "family": "reward_completion",
+          "mean_choice_tv": 0.030292381599457036
+        },
+        {
+          "choices": 33,
+          "decisions": 38,
+          "family": "shop_inventory",
+          "mean_choice_tv": 0.05879419510774056
+        },
+        {
+          "choices": 0,
+          "decisions": 5,
+          "family": "treasure_chest",
+          "mean_choice_tv": null
+        },
+        {
+          "choices": 0,
+          "decisions": 2,
+          "family": "treasure_completion",
+          "mean_choice_tv": null
+        },
+        {
+          "choices": 5,
+          "decisions": 5,
+          "family": "treasure_relic_selection",
+          "mean_choice_tv": 0.04454278984055488
+        }
+      ],
+      "forced_decisions": 823,
+      "games": 32,
+      "initial_actor_gradient_from_forced_menus": 0.0,
+      "losses_preceded_by_public_family": {
+        "combat_turn": 31,
+        "event_option": 1
+      },
+      "normalization_sign_changes": 8,
+      "top_quarter_games_share_of_choices": 0.3397683397683397
+    },
+    {
+      "choice_decisions": 2707,
+      "cohort": 1,
+      "decisions": 3582,
+      "effective_games_from_choice_counts": 30.59555253082373,
+      "end_turns": 643,
+      "end_turns_with_play_available": 16,
+      "family_decisions": [
+        {
+          "choices": 98,
+          "decisions": 98,
+          "family": "card_reward_selection",
+          "mean_choice_tv": 0.05299485173821349
+        },
+        {
+          "choices": 44,
+          "decisions": 44,
+          "family": "card_selection",
+          "mean_choice_tv": 0.042791459390042835
+        },
+        {
+          "choices": 2012,
+          "decisions": 2638,
+          "family": "combat_turn",
+          "mean_choice_tv": 0.040792381094383
+        },
+        {
+          "choices": 74,
+          "decisions": 134,
+          "family": "event_option",
+          "mean_choice_tv": 0.02033525731873775
+        },
+        {
+          "choices": 103,
+          "decisions": 211,
+          "family": "map_navigation",
+          "mean_choice_tv": 0.027140895867169078
+        },
+        {
+          "choices": 4,
+          "decisions": 4,
+          "family": "native_generated_card_choice",
+          "mean_choice_tv": 0.04466839588043456
+        },
+        {
+          "choices": 12,
+          "decisions": 22,
+          "family": "rest_site",
+          "mean_choice_tv": 0.03435435171933459
+        },
+        {
+          "choices": 290,
+          "decisions": 293,
+          "family": "reward_claim",
+          "mean_choice_tv": 0.04006195433624458
+        },
+        {
+          "choices": 11,
+          "decisions": 57,
+          "family": "reward_completion",
+          "mean_choice_tv": 0.09749682695216694
+        },
+        {
+          "choices": 55,
+          "decisions": 71,
+          "family": "shop_inventory",
+          "mean_choice_tv": 0.017988800919988737
+        },
+        {
+          "choices": 0,
+          "decisions": 4,
+          "family": "treasure_chest",
+          "mean_choice_tv": null
+        },
+        {
+          "choices": 0,
+          "decisions": 2,
+          "family": "treasure_completion",
+          "mean_choice_tv": null
+        },
+        {
+          "choices": 4,
+          "decisions": 4,
+          "family": "treasure_relic_selection",
+          "mean_choice_tv": 0.040785856956499486
+        }
+      ],
+      "forced_decisions": 875,
+      "games": 32,
+      "initial_actor_gradient_from_forced_menus": 0.0,
+      "losses_preceded_by_public_family": {
+        "combat_turn": 32
+      },
+      "normalization_sign_changes": 1,
+      "top_quarter_games_share_of_choices": 0.3213889915035094
+    }
+  ],
+  "config": {
+    "id": "sha256:4db95fac39bcf91eb29958e26e26778d4521e44df1459a23adc22191b1321f4c",
+    "path": "configs/native-controls/completed-training-diagnostics-v1.json"
+  },
+  "cpu_seconds": 44.222933021,
+  "date": "2026-10-18",
+  "games_launched": 0,
+  "maximum_raw_episodes_retained": 1,
+  "observed_controls": {
+    "card_reward_skip": {
+      "opportunities": 181,
+      "selected": 30
+    },
+    "card_reward_take": {
+      "opportunities": 181,
+      "selected": 150
+    },
+    "end_turn_with_play_available": {
+      "opportunities": 3975,
+      "selected": 39
+    },
+    "potion_discard": {
+      "opportunities": 197,
+      "selected": 62
+    },
+    "potion_use": {
+      "opportunities": 44,
+      "selected": 15
+    },
+    "rest_option_HATCH": {
+      "opportunities": 1,
+      "selected": 1
+    },
+    "rest_option_HEAL": {
+      "opportunities": 18,
+      "selected": 9
+    },
+    "rest_option_SMITH": {
+      "opportunities": 18,
+      "selected": 8
+    },
+    "reward_exit_with_unclaimed_rewards": {
+      "opportunities": 552,
+      "selected": 143
+    },
+    "shop_leave_with_purchase_available": {
+      "opportunities": 28,
+      "selected": 6
+    },
+    "shop_leave_without_prior_inspection": {
+      "opportunities": 27,
+      "selected": 13
+    },
+    "shop_purchase_or_service_control": {
+      "opportunities": 28,
+      "selected": 21
+    }
+  },
+  "peak_resident_memory_bytes": 291225600,
+  "policy_optimizer_steps": 0,
+  "protected_files_unchanged": true,
+  "report": {
+    "id": "sha256:4f05e1a3e0eeeafd2b41962e31de9a600f94e3a6c967054e26f556dfbdc17170",
+    "path": "artifacts/native-diagnostics/sts2-v0.111.0-a8-completed-train-v1/report.json"
+  },
+  "report_id": "sha256:8f9340ffece12ac39547a5a7f3929b80ec7b2e6fab7492e13a7701551ef14a53",
+  "resource": {
+    "id": "sha256:37fd5baefca442649230709ae330c72214735f010bf768e42ebf794fb4f53c22",
+    "path": "artifacts/resources/completed-training-diagnostics-v1-attempt-1.json"
+  },
+  "retained_bytes": 513764,
+  "running_experiment_records_read": 0,
+  "schema_version": "native-completed-training-diagnostics-evidence-v1",
+  "source_decisions": 6995,
+  "source_games": 64,
+  "wall_seconds": 45.813620332977735,
+  "worker_processes_started": 0,
+  "worker_profiles_modified": 0
+}

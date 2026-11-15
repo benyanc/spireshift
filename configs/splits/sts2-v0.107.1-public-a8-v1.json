@@ -1,0 +1,29 @@
+{
+  "assignment": {
+    "algorithm": "sha256-ranked-v1",
+    "counts": {
+      "test": 400,
+      "train": 3200,
+      "validation": 400
+    },
+    "salt": "spireshift-public-a8-complete-runs-v1"
+  },
+  "encounter_policy": {
+    "cross_partition_reuse": "forbidden",
+    "identifier_fields": [
+      "run_id",
+      "encounter_id"
+    ],
+    "inherits_split_from": "complete_run",
+    "unit": "encounter_instance"
+  },
+  "objective_id": "terminal-victory-v1",
+  "ruleset_manifest_id": "sha256:ab32cf7075c080ec1f0104bf9feac17299361e345161daaf8e7a5febd863bacc",
+  "schema_version": "split-manifest-v1",
+  "seed_universe": {
+    "start": 200000,
+    "stop_exclusive": 204000
+  },
+  "split_id": "sts2-v0.107.1-public-a8-seeds-200000-203999-v1",
+  "unit": "complete_run"
+}

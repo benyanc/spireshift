@@ -1,0 +1,103 @@
+{
+  "all_original_weights_and_full_Adam_exact": true,
+  "assessment": {
+    "path": "artifacts/native-chest-repair/owner-assessment-v1/report.json",
+    "sha256": "dfdb664f2dbe39b0b20dfa3bb0e291a0929f30cf32fa9d14c6df31e184444bd2"
+  },
+  "assessment_id": "sha256:6dd0ffa0d816939fbf9fc3f8dbb0b1e5eea02b44bb8890368079304d51a08e7b",
+  "assessment_resources": {
+    "path": "artifacts/native-chest-repair/owner-assessment-v1/resources.json",
+    "sha256": "840e68710e1d2f647c6c765576d6c368abd92c59732507907eb46b12c81e2b4e"
+  },
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "checkpoint_promoted": false,
+  "chests_reached": 0,
+  "complete_ending_host_deliveries": 385,
+  "complete_summary_raw_proof_retained": true,
+  "diagnostic_final_game_facts_equal_does_not_grant_prefix_admission": true,
+  "diagnostic_stopped_official_prefix_deliveries": 36,
+  "do_not_rerun": "scripts/compare-chest-endings-v1.sh",
+  "do_not_retry_seeds": [
+    "SP1RESH1FTE2E603",
+    "SP1RESH1FTE2E604"
+  ],
+  "environment_id": "sha256:c2271abd37eab14ba30145ee2b2b776ae92de7bbabc31986acb6b8b81f2ac128",
+  "frozen_archive_and_restored_working_app_exact": true,
+  "full_game_playing_strength_evaluated": false,
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "genuine_matching_ending_pairs": 0,
+  "new_games_in_assessment": 0,
+  "next_owner_command": null,
+  "next_required_repairs": [
+    "tutorial_authority_during_incomplete_underlying_combat_entry",
+    "native_parameterized_rich_text_formatting_tag_leak"
+  ],
+  "official_summary_context": {
+    "ascension": 8,
+    "floor_reached": 9,
+    "game_mode": "standard",
+    "kind": "game_over",
+    "result": "loss",
+    "score": 162
+  },
+  "official_summary_fix_independently_verified": true,
+  "optimizer_updates": 0,
+  "original_source_reports_raw_journals_unchanged": true,
+  "owner_CPU_seconds": 162.33854240600002,
+  "owner_outer_cap_hit": false,
+  "owner_resources": {
+    "path": "artifacts/resources/chest-endings-v1-attempt-1.json",
+    "sha256": "db47f99030816c336bcd491766c5bf8451926b5871e472354b9155ffa576a97d"
+  },
+  "owner_wall_seconds": 384.6027425409993,
+  "p2_observed_policy_inputs_all_equal": 36,
+  "p2_stop": {
+    "Ornamental_Fan_counter_after": 2,
+    "Ornamental_Fan_counter_before_present": false,
+    "action_executed_claimed": false,
+    "delivery": "not_delivered",
+    "label": "Got it!",
+    "reason_code": "stale_snapshot",
+    "resubmitted": false,
+    "tutorial_and_control_unchanged": true,
+    "tutorial_id": "map_select_ftue",
+    "underlying_context_transition": [
+      "unknown",
+      "combat"
+    ]
+  },
+  "p3_first_difference": {
+    "event_id": "AROMA_OF_CHAOS",
+    "field": "/context/interaction/content/context/body",
+    "menu_keys_equal": true,
+    "native_only_formatting_tag": "[rainbow freq=0.3 sat=0.8 val=1]",
+    "raw_logs_modified": false,
+    "zero_based_index": 45
+  },
+  "p3_gameplay_CPU_seconds_at_ending": 77.154281856,
+  "panel": {
+    "path": "artifacts/native-chest-repair/natural-ending-panel-v1/report.json",
+    "sha256": "1a535d05c61daac4799d20b7f20214c636315019d73022ab250d222ba6712f17"
+  },
+  "panel_id": "sha256:aa3bc510e20f7eae9c6c13af63442226e91c06adcfa2b29ca6d97efbb9b4e08e",
+  "prior_short_chest_qualification_retained": true,
+  "protected_prior_files_exact": 20108,
+  "recovery_manifest": {
+    "path": "artifacts/native-chest-repair/owner-assessment-v1/recovery-manifest.json",
+    "sha256": "f461140d3b344a672fbaf4741b69aef86209c82da3c03b5d3fe2e33aa3835f7d"
+  },
+  "rejected_tutorial_evidence": {
+    "path": "artifacts/native-chest-repair/owner-assessment-v1/rejected-tutorial.json",
+    "sha256": "b0e24ddfebe013a721f543790ef336c22f46f9fa007fc6db3289581789bd5c3d"
+  },
+  "report_id": "sha256:3a307c26b8a6a99539849676fec43a5d7cc676fab84c419b759323c75935fd9d",
+  "saved_assessment_wall_seconds": 27.472391957999207,
+  "schema_version": "native-chest-ending-owner-result-evidence-v1",
+  "status": "completed_owner_panel_blocked_saved_assessment_complete",
+  "summary_native_field": "floor_reached",
+  "training_allowed": false,
+  "verified_acknowledged_deliveries": 421,
+  "workflow_qualification_candidate": false
+}

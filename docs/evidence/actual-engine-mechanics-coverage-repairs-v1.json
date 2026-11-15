@@ -1,0 +1,108 @@
+{
+  "schema_version": "native-mechanics-coverage-repair-evidence-v1",
+  "date": "2026-10-15",
+  "game": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "character": "Ironclad",
+    "ascension": 8
+  },
+  "owner_first_sweep": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v5.json",
+    "report_id": "sha256:c6f2e948a97e9c7a8bf09efe6c46627edba8b2708882446908b4b0a50d69adb1",
+    "plan_id": "sha256:1bf6ff53a6a0fec449d89616a213619db2da3240d4b32d6cdf8a744be71f89fd",
+    "planned_cases": 1824,
+    "completed_cases": 1824,
+    "not_attempted_cases": 0,
+    "case_statuses": {
+      "effect_exercised": 1691,
+      "failed": 50,
+      "observed_prerequisite_blocked": 83
+    },
+    "all_saved_case_hashes_reverified": true,
+    "failed_cases_preserved": true,
+    "resources_report_id": "sha256:79805d14a65e3d72565a315c4ebf82b37b115ddd522758274664f67ea97b445b",
+    "wall_seconds": 2650.597486958024,
+    "cpu_seconds": 1799.7895090859981,
+    "peak_resident_memory_bytes": 370491392,
+    "retained_bytes": 356873527,
+    "game_apps_created": 0
+  },
+  "failure_groups": [
+    {
+      "cases": 45,
+      "cause": "disabled_AnyAlly_geometric_targets_mistaken_for_live_play_permission",
+      "repair": "preserve_native_disabled_facts_and_reason_without_advertising_an_ally_action"
+    },
+    {
+      "cases": 3,
+      "cause": "invalid_uninitialized_MadScience_template_fixture",
+      "repair": "clone_nine_configured_native_TinkerTime_option_previews_then_apply_native_upgrade"
+    },
+    {
+      "cases": 2,
+      "cause": "ParticleWall_return_to_hand_mistaken_for_undelivered_action",
+      "repair": "latch_new_exact_non_autoplay_native_card_play_history_as_private_delivery_evidence"
+    }
+  ],
+  "build": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v32.json",
+    "report_id": "sha256:f4706519db08ff3649994d6ad73d0ce9a81b8d43c1e61ba44c42206194cab350",
+    "host_sha256": "eff0a830a3980d6a0a0cfe1066a52f84468ed8a5d02984c7f7cea76e083c271a",
+    "source_diff_id": "21ebfd1d75307da4779ff65029b482564e3345210d8e49268c0b67e3b0b5df3f",
+    "two_matching_fresh_repaired_builds": true,
+    "original_game_dll_unchanged": true,
+    "public_combat_revision": "v4"
+  },
+  "focused_repair_panel": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v7.json",
+    "config_id": "sha256:81baffb50e6132134eed45c0d776a0b39848fdb6fd87994a1380732ad68b44bf",
+    "plan_id": "sha256:c2ba20df295b02f05286c247c8630b3a079553f0b6338bf2bad0b60d30ab79d7",
+    "smoke_report_id": "sha256:95d45ad33b4133a5859f3457051717f98db19acc618934bbc91d8685b15c21ef",
+    "completed_cases": 90,
+    "not_attempted_cases": 0,
+    "case_statuses": {
+      "effect_exercised": 44,
+      "observed_prerequisite_blocked": 46
+    },
+    "known_gaps": [],
+    "all_case_hashes_reverified": true,
+    "native_preview_forms": 9,
+    "distinct_public_type_description_pairs": 9,
+    "same_particle_wall_copy_confirmed_twice": true,
+    "resources_report_id": "sha256:01e4115e20765d8ea8f4df530e0a9ab14862507d560b81364243311a4aa30d7a",
+    "wall_seconds": 127.81488658301532,
+    "cpu_seconds": 104.48290557799989,
+    "peak_resident_memory_bytes": 306200576,
+    "retained_bytes": 19081903,
+    "game_apps_created": 0
+  },
+  "next_full_plan": {
+    "cases": 1849,
+    "registered_native_types": 1660,
+    "card_contexts": 1773,
+    "combat_potion_contexts": 65,
+    "named_regressions": 11,
+    "started": false,
+    "owner_launcher": "scripts/check-native-mechanics-coverage-v2.sh"
+  },
+  "validation": {
+    "repository_tests": 1339,
+    "focused_node_tests": 19,
+    "formatting_types_and_protocol": "pass"
+  },
+  "limitations": [
+    "Focused repaired controls are not a new full-sweep pass",
+    "Disabled prerequisites verify observation and absence of an action, not the card effect",
+    "Configured event preview clones do not qualify the entire naturally played Tinker Time event",
+    "Outside-combat potions, non-creature targeting, random legal sequences and new-build lifecycle remain follow-ups",
+    "No exhaustive interaction proof or shipped cross-host parity",
+    "Existing neural models and admissions are unchanged"
+  ],
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "checkpoint_promoted": false,
+  "evidence_id": "sha256:3781b02d3a5e70acd3b29686026f23316d420997eff9a300b47267486c3c1b84"
+}

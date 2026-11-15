@@ -1,0 +1,656 @@
+{
+  "schema_version": "native-value-error-diagnosis-evidence-v1",
+  "date": "2026-10-20",
+  "diagnosis": {
+    "path": "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/report.json",
+    "report_id": "sha256:7878009bbcfaccc9af1c35473b905e750957306fa5e759293efc79c761a44567"
+  },
+  "cached_errors": {
+    "path": "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/cached-errors.json",
+    "report_id": "sha256:74f07621d181107ab0b1ffb70a98b92aa5d11bf8b8bbd6edbce917055c3c068d"
+  },
+  "component_diagnosis": {
+    "path": "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/component-diagnosis.json",
+    "report_id": "sha256:d2d5e48ea5fda057afe314b0927fcc6a1a40570eb039e19ab8f1a667a51f9930"
+  },
+  "games": 128,
+  "choice_states": 13793,
+  "independent_saved_players": 2,
+  "equal_game_mse": {
+    "coarse_linear": 5.5327991749065847e-05,
+    "coarse_neural": 5.5840942138887075e-05,
+    "current_ridge": 5.512797865384926e-05,
+    "other_game_constant": 8.153394538041099e-05,
+    "rich_linear": 6.390337021110289e-05,
+    "rich_neural": 7.125646449319411e-05
+  },
+  "outcome_groups": {
+    "act_clear": {
+      "fraction_of_total_error": {
+        "coarse_linear": 0.5432689963773717,
+        "coarse_neural": 0.539169475744048,
+        "current_ridge": 0.5474728868331525,
+        "other_game_constant": 0.5548745378254499,
+        "rich_linear": 0.4923071785644841,
+        "rich_neural": 0.4215820147556158
+      },
+      "games": 1,
+      "mean_floor": 21.0,
+      "mse": {
+        "coarse_linear": 0.003847421766283585,
+        "coarse_neural": 0.003853789631753916,
+        "current_ridge": 0.0038631774232191062,
+        "other_game_constant": 0.005790862113285252,
+        "rich_linear": 0.00402689124984189,
+        "rich_neural": 0.0038451768147715545
+      },
+      "states": 230
+    },
+    "floor_11_17": {
+      "fraction_of_total_error": {
+        "coarse_linear": 0.27058221046286074,
+        "coarse_neural": 0.2699029389295531,
+        "current_ridge": 0.2615704289464156,
+        "other_game_constant": 0.19177340628440123,
+        "rich_linear": 0.3155255496659035,
+        "rich_neural": 0.2988942621711217
+      },
+      "games": 58,
+      "mean_floor": 14.5,
+      "mse": {
+        "coarse_linear": 3.303894136923179e-05,
+        "coarse_neural": 3.326153797711613e-05,
+        "current_ridge": 3.182311508620401e-05,
+        "other_game_constant": 3.450712812889983e-05,
+        "rich_linear": 4.4497977404385025e-05,
+        "rich_neural": 4.700281021708356e-05
+      },
+      "states": 7897
+    },
+    "floor_18_100": {
+      "fraction_of_total_error": {
+        "coarse_linear": 0.5432689963773717,
+        "coarse_neural": 0.539169475744048,
+        "current_ridge": 0.5474728868331525,
+        "other_game_constant": 0.5548745378254499,
+        "rich_linear": 0.4923071785644841,
+        "rich_neural": 0.4215820147556158
+      },
+      "games": 1,
+      "mean_floor": 21.0,
+      "mse": {
+        "coarse_linear": 0.003847421766283585,
+        "coarse_neural": 0.003853789631753916,
+        "current_ridge": 0.0038631774232191062,
+        "other_game_constant": 0.005790862113285252,
+        "rich_linear": 0.00402689124984189,
+        "rich_neural": 0.0038451768147715545
+      },
+      "states": 230
+    },
+    "floor_1_5": {
+      "fraction_of_total_error": {
+        "coarse_linear": 0.04182702567357917,
+        "coarse_neural": 0.04526292065920823,
+        "current_ridge": 0.044331439827850184,
+        "other_game_constant": 0.085308388787831,
+        "rich_linear": 0.03610074156915427,
+        "rich_neural": 0.04828284441797159
+      },
+      "games": 6,
+      "mean_floor": 4.666666666666667,
+      "mse": {
+        "coarse_linear": 4.936971373558941e-05,
+        "coarse_neural": 5.3920514849448175e-05,
+        "current_ridge": 5.213659026184806e-05,
+        "other_game_constant": 0.0001483846295875814,
+        "rich_linear": 4.9215126472299026e-05,
+        "rich_neural": 7.339658216319165e-05
+      },
+      "states": 357
+    },
+    "floor_6_10": {
+      "fraction_of_total_error": {
+        "coarse_linear": 0.1443217674861884,
+        "coarse_neural": 0.14566466466719055,
+        "current_ridge": 0.1466252443925816,
+        "other_game_constant": 0.16804366710231783,
+        "rich_linear": 0.15606653020045813,
+        "rich_neural": 0.23124087865529086
+      },
+      "games": 63,
+      "mean_floor": 7.428571428571429,
+      "mse": {
+        "coarse_linear": 1.6223560250283544e-05,
+        "coarse_neural": 1.6526328099273093e-05,
+        "current_ridge": 1.642291472861393e-05,
+        "other_game_constant": 2.7837487085804394e-05,
+        "rich_linear": 2.0262963315732613e-05,
+        "rich_neural": 3.347790721884595e-05
+      },
+      "states": 5309
+    },
+    "no_act_clear": {
+      "fraction_of_total_error": {
+        "coarse_linear": 0.4567310036226283,
+        "coarse_neural": 0.46083052425595183,
+        "current_ridge": 0.45252711316684735,
+        "other_game_constant": 0.44512546217455007,
+        "rich_linear": 0.507692821435516,
+        "rich_neural": 0.5784179852443841
+      },
+      "games": 127,
+      "mean_floor": 10.527559055118111,
+      "mse": {
+        "coarse_linear": 2.546898565036885e-05,
+        "coarse_neural": 2.593583434664275e-05,
+        "current_ridge": 2.5143337358059832e-05,
+        "other_game_constant": 3.657860547564847e-05,
+        "rich_linear": 3.269874123763213e-05,
+        "rich_neural": 4.154055622328575e-05
+      },
+      "states": 13563
+    }
+  },
+  "largest_current_ridge_error": {
+    "cohort": "seed-2-standard-round-060-fit",
+    "completed_acts": 1,
+    "fitting_act_clear_games": 0,
+    "fraction_of_total_error": 0.5474728868331525,
+    "game": 1610110,
+    "maximum_floor": 21,
+    "mean_prediction": 0.042620843151184806,
+    "mse": 0.0038631774232191062,
+    "target": 0.09797297297297297
+  },
+  "novelty": {
+    "definitions_without_identity_coordinate_fraction": 0.5903165153988883,
+    "dictionary_identity_definitions": 17.5,
+    "fitting_variable_fact_coordinates": 232445.125,
+    "represented_fraction": 0.1195353771346177,
+    "seen_constant_omitted_fraction": 0.07697163856957065,
+    "seen_varying_omitted_fraction": 0.7401260469253991,
+    "states_with_unseen_definitions_fraction": 0.5767766608333627,
+    "states_with_unseen_family_fraction": 0.0005646985720444246,
+    "unseen_definition_fraction": 0.07169379911578391,
+    "unseen_fraction": 0.06336693737041252
+  },
+  "source_group_coverage": {
+    "entities": {
+      "games": 128,
+      "represented": 0.08818844391843973,
+      "seen_constant_omitted": 0.02650499948552636,
+      "seen_varying_omitted": 0.837917565385063,
+      "unseen": 0.04738899121097094
+    },
+    "interaction": {
+      "games": 128,
+      "represented": 0.04887818857242744,
+      "seen_constant_omitted": 0.014820032543110536,
+      "seen_varying_omitted": 0.8743655347595519,
+      "unseen": 0.06193624412491006
+    },
+    "inventory": {
+      "games": 128,
+      "represented": 0.25633028125672314,
+      "seen_constant_omitted": 0.1600353666588377,
+      "seen_varying_omitted": 0.5253033833333942,
+      "unseen": 0.058330968751045
+    },
+    "menu": {
+      "games": 128,
+      "represented": 0.16017743651280528,
+      "seen_constant_omitted": 0.0,
+      "seen_varying_omitted": 0.7926360475968632,
+      "unseen": 0.047186515890331515
+    },
+    "other": {
+      "games": 128,
+      "represented": 0.0,
+      "seen_constant_omitted": 1.0,
+      "seen_varying_omitted": 0.0,
+      "unseen": 0.0
+    },
+    "persistent": {
+      "games": 128,
+      "represented": 0.19930002988130346,
+      "seen_constant_omitted": 0.27669490841225175,
+      "seen_varying_omitted": 0.4341457511631476,
+      "unseen": 0.08985931054329718
+    }
+  },
+  "ordinary_game_novelty_correlations_descriptive_only": {
+    "definitions_without_identity_coordinate_fraction": {
+      "by_cohort_current_ridge_mse": {
+        "seed-2-standard-round-057-fit": 0.18841642228739003,
+        "seed-2-standard-round-060-fit": 0.05241935483870968,
+        "seed-3-standard-round-057-fit": 0.14626099706744866,
+        "seed-3-standard-round-060-fit": 0.12573313782991202
+      },
+      "current_ridge_mse": 0.15267622797150354,
+      "maximum_floor": 0.37889023279188855,
+      "rich_linear_excess_mse": 0.25141193288338953
+    },
+    "seen_varying_omitted_fraction": {
+      "by_cohort_current_ridge_mse": {
+        "seed-2-standard-round-057-fit": -0.14479472140762462,
+        "seed-2-standard-round-060-fit": -0.297983870967742,
+        "seed-3-standard-round-057-fit": -0.4105571847507331,
+        "seed-3-standard-round-060-fit": -0.3632697947214076
+      },
+      "current_ridge_mse": -0.38252835583052114,
+      "maximum_floor": -0.32186937398934107,
+      "rich_linear_excess_mse": -0.006749156355455567
+    },
+    "unseen_definition_fraction": {
+      "by_cohort_current_ridge_mse": {
+        "seed-2-standard-round-057-fit": 0.2511918027343006,
+        "seed-2-standard-round-060-fit": 0.35890714972193793,
+        "seed-3-standard-round-057-fit": 0.20363244669992905,
+        "seed-3-standard-round-060-fit": 0.18775212116782755
+      },
+      "current_ridge_mse": 0.27117543767847124,
+      "maximum_floor": 0.20738017710068413,
+      "rich_linear_excess_mse": 0.06372186133616485
+    },
+    "unseen_fraction": {
+      "by_cohort_current_ridge_mse": {
+        "seed-2-standard-round-057-fit": 0.22470674486803516,
+        "seed-2-standard-round-060-fit": 0.33185483870967747,
+        "seed-3-standard-round-057-fit": 0.4299853372434017,
+        "seed-3-standard-round-060-fit": 0.4138563049853372
+      },
+      "current_ridge_mse": 0.37909519122609675,
+      "maximum_floor": 0.4486768673768847,
+      "rich_linear_excess_mse": 0.083110704911886
+    }
+  },
+  "rare_run_stages": {
+    "act1_floor11_plus": {
+      "states": 94,
+      "mean_current_ridge_prediction": 0.03310088666536386,
+      "current_ridge_mse": 0.00421299894996454
+    },
+    "act1_floor1_to5": {
+      "states": 45,
+      "mean_current_ridge_prediction": 0.020874685021205833,
+      "current_ridge_mse": 0.0059478624347965
+    },
+    "act1_floor6_to10": {
+      "states": 42,
+      "mean_current_ridge_prediction": 0.024877381564268452,
+      "current_ridge_mse": 0.005344120230472239
+    },
+    "act2": {
+      "states": 49,
+      "mean_current_ridge_prediction": 0.09606325972601559,
+      "current_ridge_mse": 8.205036694923128e-06
+    }
+  },
+  "available_TRAIN_header_coverage": {
+    "trajectories": 512,
+    "act_clearing_trajectories": 5,
+    "wins": 0,
+    "behavior_policy_round_cohorts": 16,
+    "act_clearing_trajectories_not_assumed_independent_seeds": true
+  },
+  "coefficient_decomposition": {
+    "median_coarse_norm_ratio_joint_over_coarse_only": 0.026324689743191243,
+    "equal_game_mse_descriptive_only": {
+      "full_rich_linear": 6.390337021110289e-05,
+      "potential_plus_intercept": 7.711537663712459e-05,
+      "zero_coarse_coordinates": 6.513248507117839e-05,
+      "zero_extra_coordinates": 7.468309491524727e-05
+    },
+    "posthoc_not_validated_replacements": true
+  },
+  "cohort_audits": [
+    {
+      "cohort": "seed-2-standard-round-057-fit",
+      "games": 32,
+      "report_id": "sha256:2f1747781e2a0d7cac3022cf8f987c732b468deecb5037e40caed3e8e8efc181",
+      "states": 3127,
+      "wall_seconds": 42.356864207889885
+    },
+    {
+      "cohort": "seed-2-standard-round-060-fit",
+      "games": 32,
+      "report_id": "sha256:b103458f59fcae17cd806af33cb559750d0ca1cf1c9ff2a2eccfa37c57936a7a",
+      "states": 2960,
+      "wall_seconds": 62.29885754198767
+    },
+    {
+      "cohort": "seed-3-standard-round-057-fit",
+      "games": 32,
+      "report_id": "sha256:d1cee1e89b08259eda185b4b25aecd7b8fbb6eddf59235a2b088995763a509ab",
+      "states": 4012,
+      "wall_seconds": 75.67393916705623
+    },
+    {
+      "cohort": "seed-3-standard-round-060-fit",
+      "games": 32,
+      "report_id": "sha256:5950698c98f60d3b02fc69d9ecd1731150689cd5a52def2504b8295452790970",
+      "states": 3694,
+      "wall_seconds": 72.3273719579447
+    }
+  ],
+  "resources": [
+    {
+      "path": "artifacts/resources/native-value-cached-errors-v1-2.json",
+      "report_id": "sha256:f33b4bce15516d2375c6437fad83696a3dbabc7fb193319e60ccbcd35eae2a81",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.03195989682446684,
+        "cpu_hours": 0.0012958040611111112,
+        "cpu_seconds": 4.66489462,
+        "energy_kwh": null,
+        "final_storage_bytes": 4270608,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 484704256,
+        "peak_storage_bytes": 4270608,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 10.425777041818947
+      },
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 240.0
+      },
+      "cap": null
+    },
+    {
+      "path": "artifacts/resources/native-value-public-novelty-seed2-round57-v1-1.json",
+      "report_id": "sha256:da0a8c763f4e25334adfc3205bd11132001e6b70a6a665be4695fc0b05ad8079",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.058131266700920996,
+        "cpu_hours": 0.009716682281666666,
+        "cpu_seconds": 34.980056214,
+        "energy_kwh": null,
+        "final_storage_bytes": 23020037,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 335888384,
+        "peak_storage_bytes": 23020037,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 42.981610167073086
+      },
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 240.0
+      },
+      "cap": null
+    },
+    {
+      "path": "artifacts/resources/native-value-public-novelty-seed3-round57-v1-1.json",
+      "report_id": "sha256:625ae2443bbf5ed8d89929f32d5a77c856b1cc0958862da667bcd4290f06c645",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.048345513660278415,
+        "cpu_hours": 0.014355239201666667,
+        "cpu_seconds": 51.678861126,
+        "energy_kwh": null,
+        "final_storage_bytes": 21715166,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 271187968,
+        "peak_storage_bytes": 21715166,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 76.35345958312973
+      },
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 240.0
+      },
+      "cap": null
+    },
+    {
+      "path": "artifacts/resources/native-value-public-novelty-seed2-round60-v1-1.json",
+      "report_id": "sha256:b8e47efee8e59057310e3dcd165537d207ef3915a8e3959d98be031deeaad284",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.04366194113668702,
+        "cpu_hours": 0.010698522962777778,
+        "cpu_seconds": 38.514682666,
+        "energy_kwh": null,
+        "final_storage_bytes": 17704695,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 284639232,
+        "peak_storage_bytes": 17704695,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 63.007935291854665
+      },
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 240.0
+      },
+      "cap": null
+    },
+    {
+      "path": "artifacts/resources/native-value-public-novelty-seed3-round60-v1-1.json",
+      "report_id": "sha256:aa297d4824b5cd1ac6f991c94269adc1aca2eb42ee370fdb6c00204941517163",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.046724144532887577,
+        "cpu_hours": 0.013259038863333333,
+        "cpu_seconds": 47.732539908,
+        "energy_kwh": null,
+        "final_storage_bytes": 20061798,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 268910592,
+        "peak_storage_bytes": 20061798,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 72.97013504197821
+      },
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 240.0
+      },
+      "cap": null
+    },
+    {
+      "path": "artifacts/resources/native-value-error-summary-v1-1.json",
+      "report_id": "sha256:55581e26e1511fc5c5a6b748a7ee7480bc039f742b501413308a26d1cda312f8",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.023877773322310655,
+        "cpu_hours": 0.004877724255,
+        "cpu_seconds": 17.559807318,
+        "energy_kwh": null,
+        "final_storage_bytes": 85641292,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 166903808,
+        "peak_storage_bytes": 85641292,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 52.52884908299893
+      },
+      "limits": {
+        "cpu_seconds": 180.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 180.0
+      },
+      "cap": null
+    },
+    {
+      "path": "artifacts/resources/native-value-components-v1-1.json",
+      "report_id": "sha256:aa72dd0ff34298854d73dce2fce153c71f2ddcdbce056afa7fc5eda208f2ccce",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.02825593493373209,
+        "cpu_hours": 0.0011982365697222222,
+        "cpu_seconds": 4.313651651,
+        "energy_kwh": null,
+        "final_storage_bytes": 88401546,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 298663936,
+        "peak_storage_bytes": 88401546,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 10.904540083138272
+      },
+      "limits": {
+        "cpu_seconds": 120.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 500000000,
+        "wall_seconds": 120.0
+      },
+      "cap": null
+    }
+  ],
+  "reproduction_scripts": {
+    "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/cached-errors-v2.py": "0a7357fc206a2184d59723e16c43a6377c09005e17e19d933a60634c32941ae3",
+    "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/public-novelty-v1.py": "2d1be76d8e9e1c63711d1b04268bfea2ac33ed311562f4833eb2c7319359f91c",
+    "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/summarize-errors-v1.py": "1ac0978fbe7bc6cc33e50759e8d1c4f137ee4404b3d9ac4c6e3977c57d54cfa0",
+    "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/component-diagnosis-v1.py": "95e7bf49b9426a039d76e11e025969a85e2a48c436a71945e13788deeb11bafd"
+  },
+  "chart": "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/error-diagnosis.png",
+  "private_output_bytes_at_last_resource_report": 88401546,
+  "fact_counts_are_not_information_percentages": true,
+  "definition_counts_unique_per_state_not_card_copies": true,
+  "correlations_not_causal": true,
+  "same_development_games_not_independent_confirmation": true,
+  "both_saved_players_and_all_Adam_unchanged": true,
+  "new_games": 0,
+  "new_fits": 0,
+  "optimizer_steps": 0,
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "next_experiment": "Separately predeclared whole-game nested coarse-baseline-preserving rich residual, with zero correction included. Refit coarse offsets within each inner training partition; no leaked outer offsets.",
+  "next_experiment_not_implemented_or_run": true,
+  "preserved_initial_diagnostic_failure": {
+    "path": "artifacts/resources/native-value-cached-errors-v1-1.json",
+    "reason": "The provisional diagnostic applied the generic report identity helper to a native episode with separately bound trace metadata. The revised audit uses the existing native case-identity contract and independently verified source hashes; no source/model data or tolerances changed."
+  },
+  "repository_check_pending": false,
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "evaluation_objective": {
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "constraint": "cpu_time_per_run",
+    "whole_run_budget": 128,
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false
+  },
+  "prediction_target": "declared_whole_game_bootstrap_return_not_victory_probability",
+  "coefficient_norm_not_a_direct_measure_of_information_or_causal_importance": true,
+  "repository_check": {
+    "path": "artifacts/resources/native-value-error-diagnosis-repository-check-v1-1.json",
+    "report_id": "sha256:ba606bfaa0a287e3d79938817814aebabe0a0c7faa7e32837a70fb0ec4a90729",
+    "status": "completed",
+    "usage": {
+      "average_cpu_utilization": 0.06091865785836776,
+      "cpu_hours": 0.029380268644166686,
+      "cpu_seconds": 105.76896711900007,
+      "energy_kwh": null,
+      "final_storage_bytes": 88401546,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 9,
+      "peak_resident_memory_bytes": 388923392,
+      "peak_storage_bytes": 88401546,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 124.01662295893766
+    },
+    "limits": {
+      "cpu_seconds": 960.0,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 500000000,
+      "wall_seconds": 240.0
+    },
+    "cap": null,
+    "tests_passed": 1886,
+    "format_lint_strict_types_and_CSharp_contract_passed": true
+  },
+  "post_check_verification": {
+    "path": "artifacts/native-value-errors/sts2-v0.111.0-a8-v1/post-check-verification.json",
+    "result": {
+      "analysis_report_id": "sha256:7878009bbcfaccc9af1c35473b905e750957306fa5e759293efc79c761a44567",
+      "component_report_id": "sha256:d2d5e48ea5fda057afe314b0927fcc6a1a40570eb039e19ab8f1a667a51f9930",
+      "full_Adam_states_unchanged": true,
+      "new_fits": 0,
+      "new_games": 0,
+      "optimizer_steps": 0,
+      "players": {
+        "2": {
+          "optimizer_fields": [
+            "first",
+            "second",
+            "steps"
+          ],
+          "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+          "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+          "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+        },
+        "3": {
+          "optimizer_fields": [
+            "first",
+            "second",
+            "steps"
+          ],
+          "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+          "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+          "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+        }
+      },
+      "protected_source_files_verified": 11842,
+      "report_id": "sha256:a34554e285a1e75fc34bb9d72e435cac5c1cf1fa5b24aefd9d2157cba5fea929",
+      "schema_version": "native-value-error-diagnosis-post-check-v1"
+    }
+  },
+  "interpretation": "Sparse early evidence of later success dominates absolute error, but rich models also lose on ordinary games. Most excluded fact occurrences are familiar and varying, not novel. Coupled regularization and correlated columns motivate one baseline-preserving residual control; no causal explanation or stronger player is established.",
+  "preserved_player_optimizer_details": {
+    "2": {
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "optimizer_steps": 5658,
+      "optimizer_parameter_count": 17473
+    },
+    "3": {
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "optimizer_steps": 6045,
+      "optimizer_parameter_count": 17473
+    }
+  },
+  "evidence_id": "sha256:05252dfe75f7ed0a542f0ea1ef07f5782312cf6791ad9f5fe9052682174cf13c"
+}

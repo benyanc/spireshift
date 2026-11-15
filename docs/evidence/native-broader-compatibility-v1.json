@@ -1,0 +1,96 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "canonical_prior_seed_names": 7415,
+  "checkpoint_promoted": false,
+  "ending_scope": "Only actually observed matching terminal controls are reported; unobserved endings remain unqualified.",
+  "environment_id": "sha256:9c7be4987460e3c3725fe0541a430d95a0eb4b54579048dd01fad31e00acc9ac",
+  "expected_minutes": [
+    20,
+    35
+  ],
+  "focused_lint_format_types_shell_syntax_passed": true,
+  "focused_regressions_passed": 22,
+  "fresh_worlds": [
+    "SP1RESH1FTFL0W417",
+    "SP1RESH1FTFL0W418"
+  ],
+  "game_apps_created": 0,
+  "game_build_changes": 0,
+  "launch": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-broader-canary-launch-v1.json",
+    "sha256": "f0e2fa06c502dc724a55d7fbc5823e60d1b96de540e5d789816ab4dc09ce92b7"
+  },
+  "live_batch_wall_seconds": 3000,
+  "maximum_choices_per_host": 128,
+  "maximum_host_deliveries": 1024,
+  "maximum_pair_wall_seconds": 600,
+  "new_games_during_preparation": 0,
+  "new_per_choice_reconstruction_during_preparation": false,
+  "next_owner_command": "bash scripts/compare-broader-compatibility-v1.sh",
+  "optimizer_updates": 0,
+  "outer_memory_bytes": 4000000000,
+  "outer_storage_bytes_including_shared_app": 4000000000,
+  "outer_wall_seconds": 5400,
+  "owner_workspaces_unstarted": true,
+  "paired_prefixes": 4,
+  "plan": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-broader-panel-v1.json",
+    "sha256": "e1ffa5230dad8f8daabadd0fb4b6a54f94d0ff5e59561b5ee15225fdd84cbbc3"
+  },
+  "plan_id": "sha256:a5dcaf45e6cc84c8aa37da926c06722fada0a83a2984a4d49b37125911c0a583",
+  "players": [
+    2,
+    3
+  ],
+  "preflight_resource": {
+    "path": "artifacts/native-broader-compatibility/preparation-v1/preflight-resources-v2.json",
+    "sha256": "6c0a517ba4c3af51dca9ab29fa16a4457557f34f9cefef5e89c33444176a173b"
+  },
+  "preflight_wall_seconds": 10.188794999965467,
+  "prepared_date": "2026-11-02",
+  "preserved_initial_preflight_and_development_snapshot": "artifacts/native-broader-compatibility/preparation-v1/development-before-startup-guard",
+  "prior_configurations_in_seed_inventory": 909,
+  "protected_prior_files": 1519,
+  "protection": {
+    "path": "artifacts/native-broader-compatibility/preparation-v1/protected.json",
+    "sha256": "3d619c45d44c8658087e01357b3e0112bc12ef48650d8e568971892016b4d2a4"
+  },
+  "qualified_targeted_panel": {
+    "path": "artifacts/native-selection-flows/reward-map-panel-v1/report.json",
+    "sha256": "191cd01571f74aa13f067b52e659389a2b2a7dc8ca42ec3421ecdbe63216f988"
+  },
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-broader-canary-v1.json",
+    "sha256": "caa859aa50c1dc695276b60e20bcdd5a685e8367614698eec9125226b0de2290"
+  },
+  "report_id": "sha256:6d9cb4db31f69fa734e329b17608511157a668bdcc33d22fb5bab089327bbbc2",
+  "repository_checks": "Final exact-file repository receipt and resources are recorded after all repository files are frozen in artifacts/native-broader-compatibility/preparation-v1/final-handoff-v1.json.",
+  "same_build_and_full_players_as_completed_v15": true,
+  "saved_controls_check": {
+    "path": "artifacts/native-broader-compatibility/preparation-v1/saved-controls-v2.json",
+    "sha256": "acc8252907db0f2993f1100140bf5be14915188181363a3d4827273fc7ab3f9b"
+  },
+  "saved_controls_wall_seconds": 1.0465913750231266,
+  "saved_genuine_ending_pairs_observed": 0,
+  "saved_observed_family_count": 9,
+  "saved_v15_host_deliveries_checked": 728,
+  "schema_version": "native-broader-compatibility-preparation-evidence-v1",
+  "seed_inventory": {
+    "path": "artifacts/native-broader-compatibility/preparation-v1/seed-inventory.json",
+    "sha256": "fbf811ef1c1fa67214619fcf864082c83deae142ec63041d1e746e7bc6e66a41"
+  },
+  "selection_uses_outcomes": false,
+  "source_tuple": {
+    "cli": 54,
+    "converter": 14,
+    "layout": 11,
+    "official_connector": 24,
+    "shared_environment": 41,
+    "worker": 23
+  },
+  "status": "prepared_short_checks_pass_owner_panel_unstarted",
+  "successor_scope": "Only matched observations between decisions; no claim on the final uncaptured successor or realigned divergent states.",
+  "training_allowed": false
+}

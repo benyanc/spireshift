@@ -1,0 +1,213 @@
+{
+  "additional_games_per_player": 2,
+  "batch_games": 2,
+  "checkpoint_selection": "both_current_stopping_states_not_best_seen",
+  "chunk_games": 2,
+  "entry_sha256": "7477796f82576ecf57e23a3b24015305c9d9602f08b2f465a34308f809141fc8",
+  "evaluation_games": 2,
+  "excluded_seed_manifests": [
+    {
+      "id": "sha256:3c0d9dd51966c0f0db828772f74516e1c5cfa8c049d26971acb016202738b84b",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-confirmation-control-v1.json"
+    },
+    {
+      "id": "sha256:393a34e569ebf5315d881835045cb2712c7edc58399d89d68f7da4771dfed493",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-chunks-control-v2.json"
+    },
+    {
+      "id": "sha256:c9364cd1918b76d4e1112c38bbbfa58139bb36d93d5182613f7d855d9473f6fc",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-comparison-v1.json"
+    },
+    {
+      "id": "sha256:6b24d66bae710474e474e14e3e5d08f55877ee784c5820515ed23a629218d476",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-control-v1.json"
+    },
+    {
+      "id": "sha256:7153469ff5186285706355791b76f6e2aedef74a9683d83db50fc521b5fdbb9b",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-context-fresh-pair-v2.json"
+    },
+    {
+      "id": "sha256:925532fff4966a5237ab757037088768391a097271f8ca5dbfd8d050f4cb2b33",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-credit-v1.json"
+    },
+    {
+      "id": "sha256:01545fb0146a74c7085ebca1e23aeadb5756f5565ac331297c1c7c55aad76540",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-gradient-pool-v1.json"
+    },
+    {
+      "id": "sha256:e96f91d082f016aaaf8a045713db9363ba7532001163c9107d54ab40d18e41e4",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-gradient-recovery-v1.json"
+    },
+    {
+      "id": "sha256:a54584561300c21311ffea3f9035b0f385b6b236fd2f0279e0b429c111417562",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-normalization-v1.json"
+    },
+    {
+      "id": "sha256:85a0e8a0d0766fa15e3917a923c23a0834cf4357cca1b8a8f4e3f125dccc2a16",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-optimizer-control-v1.json"
+    },
+    {
+      "id": "sha256:4722fe9d6b0755a8e5f97e88c306a4fdda545aa7998870b1e59a1fe68c3b13ef",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-optimizer-learning-v1.json"
+    },
+    {
+      "id": "sha256:362d42b28bcd49cdbbe00702c9cdf975f3acb2888648df0cfd60e2972a95a82d",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v1.json"
+    },
+    {
+      "id": "sha256:7f2af3c46a204d0a669a2e478f83a3b4e3b832d36abb16730bfd153df1eab0f5",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v4.json"
+    },
+    {
+      "id": "sha256:5365e08611f237aa1e310a31a39fa2df58d4a12681329422ccb1e2bea72c9aed",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v5.json"
+    },
+    {
+      "id": "sha256:359f15a6de12c7592ac61cf21c2ce1a3d7c7d5353c83a1cb7c07b95f8718c677",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v6.json"
+    },
+    {
+      "id": "sha256:28008583d087bc665175be7dfd052364107db1d31c65c72be80cce6b620217af",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v7.json"
+    },
+    {
+      "id": "sha256:644a24da50f326cd4c97940fb663a41dad482b61a59c1393e5379349abb817d8",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-pilot-v8.json"
+    },
+    {
+      "id": "sha256:9b95791c9307624f5e2d6f439a6f6042b3dafe318830998d3d6d786a8eedd772",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-policy-confirmation-v1.json"
+    },
+    {
+      "id": "sha256:aefcbb3350d48c49a2052defa2ec366ed78f866d0d33a120a67a0db87a479e4a",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-continuation-control-v1.json"
+    },
+    {
+      "id": "sha256:7240db06ab2bded9c5bc3258b47a5ff56435f235e080f43556c42acba0f8f807",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-standard-continuation-v1.json"
+    },
+    {
+      "id": "sha256:896c58b4c42538c1af7f136c24b8d8a1f336098eb3ef10632dbfce4a1503a410",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-shop-control-v1.json"
+    },
+    {
+      "id": "sha256:c54f6fbb04d812dc67b59e09e29ee2cdf61d56002e285dae8f1f0c219eb4dfed",
+      "path": "manifests/splits/sts2-v0.111.0-native-a8-shop-continuation-v1.json"
+    }
+  ],
+  "holdout_games": 0,
+  "implementation_sha256": {
+    "engine_projection_cache.py": "08260155da26b01de380fa55e72e092c98122a3b4a76e957e81c86d11164be43",
+    "engine_learning.py": "85e300466d103bcb3ccf48c7b6bedb55d40e6d837179b3949f1459da3f3b68e6",
+    "engine_learning_admission.py": "d29891e745e9e2778e441bd782d6c2f4abf6ac2e41b7feb3a325178456b68af5",
+    "engine_mechanics_admission.py": "6f2447d18ecee61c49f40b5a094c2cd08fff16e872c702952e011fe851152008",
+    "engine_potion_checks.py": "b7eb0c3b00e5a325db634521a2b52843917473fad013664fa080b22dabb45e51",
+    "engine_potion_queue_checks.py": "a192f0f4be2e061cf4e9e52db519371ff566da1ec566e2c1fc678133840b936b",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "engine_experience_audit.py": "dcb9d2fa3856793ce4e491267e7aa2e58c5c187e2e18a9b6cb956d19c79ea079",
+    "engine_worker.py": "5ca26ab96913bd3257c9e3766373b9219a3412d7ed30ae7b986b3deb9508cf56",
+    "engine_worker_qualification.py": "e6626b9d7dc719432d496896cfe76d68fd19fcbc5d4dffa6d91fc9b52d435367",
+    "engine_run.py": "005794120b8f9f21217cdbc51a200d35d0ea34cf6388c99cd3dd1daba32704a4",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "native_credit_training.py": "8e53505899626019e99bf3eb569e2d2c8847eb5c531613aec2c71f82d729131b",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_normalization_admission.py": "b3aecd8b81187a9c73a2e560f71a57fd55c7555ee5fc7e78e955c69d08e30f2d",
+    "engine_experience_stream.py": "32d1386cd8602d43c7ccceaafcc2d944d8c1e1330bed50fc52afbb1eb097ca1a",
+    "native_action_context.py": "8c8c445de9bcfbf1c379bf25efc5d7e3771ab75e83f4744b17c1e8155d9c6c7c",
+    "native_context_game.py": "327075c2d4073994fecd4cd003e2b03223330b86b71a65d5e14e3a7ad2d37326",
+    "native_context_trial.py": "ed9d73aadb7949b806d6990936743be143e7c7797184fc9b3c4168b49e8a27c4",
+    "native_context_cache.py": "e254039f36552a196785dfec11c7fa0f2136e506e00ebcbd0525515caf64fa74",
+    "native_context_journal.py": "6a49c02c640dc1fe2c28e5726d9b80f940182c993279105494bcafe205cca89e",
+    "native_context_resume.py": "e0302428d277647a1a17e605091b894307bf29b16750f711a565b26d53786947",
+    "native_context_reuse.py": "61cfb93d959213a4077f80c94744219582198f9fcc44f0d506889df704a9fc9a",
+    "native_gradient_checks.py": "1265c0319cbcf5ec1c0cb22cdbdb54ff01e2e24c42c12982d7c1dc09e91e6ff8",
+    "native_optimizer_probe.py": "76309ef78228c27c48f1e96af3ebe9a9f7670bc9e44a13f25fd8256af76a3e1b",
+    "native_compact_training.py": "de301779281eea3af437f243be4081bcbb5e542b3df0337786ac1109bc921080",
+    "native_optimizer_trial.py": "3db3231a7a30a900c4d446d3e3e025b007ccf1aaabc5308011ead7b4565bda4a",
+    "native_confirmation_metrics.py": "8e6e276540df80076d2cfedae98b19f646d439d0a47d1624df2caeafe1e65269",
+    "native_policy_confirmation.py": "c6dd10bdc48173415e725a5bd2fff934dc420e2d7a32e87bdddeb297b7b3bb0e",
+    "native_continuation_plan.py": "06c83952dbb9e5694144c260e64f1de7b930b2a2906d78486136b20becc4c052",
+    "native_policy_continuation.py": "b46701ad98b38968a4089730f858ea025500bb1b0dd4c6efa136283ee4be13fd",
+    "native_shop_policy.py": "c4517e3513e57b42a642762c583600419a4c2d738d49638a799f2e6f57599156",
+    "native_shop_training.py": "0abbf76e3e1dafcca4a52875c46e5ccfbc56bad55a1cb7a2a6395c561c7c665f",
+    "native_shop_collector.py": "f37b49f775e7c97f7ee40e4d1c1bca4ea538683b9a0f061550e4781585a1d77a",
+    "native_shop_execute.py": "d2c54a94c6948375a3287d293a89d4adfee0ec2abe727839c9067bf328264912",
+    "native_shop_recovery.py": "e295fe8a94d15278a38c1c7d3af9fac67e44056b943d51741bfd12db186749ab",
+    "native_shop_plan.py": "804129e636cb4d9926e95552f2efe3debc148807eeb7e89d339a315350c142f2",
+    "native_shop_continuation.py": "b7870e2ef4805f15687db7eb9d2e92a270057b204db86d8ae0bf7128c8c825ab",
+    "engine_runtime_gaps.py": "0b821cb5df7c4e16cb696dd9dfcd67f64fc618fa41e17b046c12ca73d0e98a5b",
+    "native_runtime_admission.py": "a7b3c6002d18328cd3899a24dc9dccc2b7d1137285c2f4b7a2d3fae3aa951106",
+    "native_runtime_execute.py": "5ace367a2b136f80ded06d7e55713d3ef754df34c382a2fe67e175e021661e12",
+    "native_runtime_plan.py": "b7ba552e612269b8dd050c5a3ffbd2596c3b63331cd78db0d9af7fd6e11634c0",
+    "native_runtime_continuation.py": "929d91037e940ee0afcff7a98576f18c8d015761c4a71e354b539343b03d55c0"
+  },
+  "invocation_wall_seconds": 240,
+  "milestones": [
+    1538
+  ],
+  "players": [
+    {
+      "numerical_seed": 2,
+      "version": "trained",
+      "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-2-round-048-fit/state.json",
+      "sha256": "cfa1aa1964f69e2b55a2d1bd07b29e12783b8e7f0ff5ced629501505a772a75e",
+      "model_id": "sha256:c4b4e33d76b68a42e6f8c5d7262ee41937c1658f2b1fce5416f4f52fba6edf2b",
+      "state_id": "sha256:69c1e1e071858ffc11c5174426768d5817d42ea1c205fd4f1d61d3167c37d1e5",
+      "optimizer_steps": 4470,
+      "round": 48,
+      "scheduled_training_games": 1536
+    },
+    {
+      "numerical_seed": 3,
+      "version": "trained",
+      "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/chunks/seed-3-round-048-fit/state.json",
+      "sha256": "4d9cf7ef7221076be86be22ecfcc77eb0cc75fea0afa51aabda888e3354b23d5",
+      "model_id": "sha256:13dd8277013c7335197fa201b8e983104daba73f5acc129ae4783fd83147f783",
+      "state_id": "sha256:2ef7dd7ec3400151505cc5d5cc214e8bb49867f603c16dfba0f01d1d2123251e",
+      "optimizer_steps": 4692,
+      "round": 48,
+      "scheduled_training_games": 1536
+    }
+  ],
+  "policy_contract": "public_shop_navigation_once_with_merchant_potion_reinspection_v1",
+  "schema_version": "native-runtime-continuation-config-v1",
+  "seed_manifest": {
+    "path": "manifests/splits/sts2-v0.111.0-native-a8-runtime-control-v1.json",
+    "id": "sha256:01b8450acf6b2df2cacaba3d4f2cafde2d190cdd10ea627b078ee55ebe467dcf"
+  },
+  "session_limits": {
+    "wall_seconds": 240,
+    "cpu_seconds": 480,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 1000000000
+  },
+  "source_continuation": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-shop-continuation-v1.json",
+    "id": "sha256:3afecb04cf10565f18967370c005c343f1d3864be27255440824a6b6e3e0eaa3"
+  },
+  "stage": "short_bridge_control",
+  "starting_round": 48,
+  "starting_training_games": 1536,
+  "stopping_rule": "pooled_wins_then_floor_two_stale_checks_after_256_new_games_runtime_v1",
+  "training_seeds": [
+    2,
+    3
+  ],
+  "workspace": "artifacts/native-runtime-learning/sts2-v0.111.0-a8-control-v1",
+  "source_report": {
+    "path": "artifacts/native-shop-learning/sts2-v0.111.0-a8-continuation-v1/report.json",
+    "id": "sha256:e2dc1041f16b67dceeaba5a486c21621278c84d919538b679126c56cebc8f5b5"
+  },
+  "runtime_repair": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-runtime-gaps-v1.json",
+    "id": "sha256:156be52b49225604e79cdea5ddf94a013e87d828cea642008197fe58a789ab16"
+  },
+  "runtime_effects": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/runtime-gap-effects-v4/report.json",
+    "id": "sha256:72b6c14d06087477de98145806c73b5d0f5ccb7b77e4459bbb6da157c9333ae2"
+  }
+}

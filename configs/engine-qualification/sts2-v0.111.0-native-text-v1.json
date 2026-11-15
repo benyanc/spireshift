@@ -1,0 +1,8 @@
+{
+  "schema_version": "engine-native-text-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "pack_sha256": "b3c9f133143f98a1c329c3d2efc7d8a9feb395db46fd3965b899487bf1f4d106",
+  "directory": "artifacts/engine-assets/sts2-v0.111.0-41cef1ea-native-localization-v1",
+  "training_allowed": false
+}

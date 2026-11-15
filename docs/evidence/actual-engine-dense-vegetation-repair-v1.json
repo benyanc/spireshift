@@ -1,0 +1,106 @@
+{
+  "schema_version": "actual-engine-dense-vegetation-repair-evidence-v1",
+  "date": "2026-10-14",
+  "scope": "fixed_v0.111.0_41cef1ea_Ironclad_A8_public_policy_only_pilot",
+  "owner_failure": {
+    "evidence": {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v1/summary.json",
+      "report_id": "sha256:9b82926f8c8ac1fcc60e509a5f68d9922395a73b61f056407748429fbf65271b",
+      "sha256": "840f083b57356ee5e65b9360d4abf93406c9f3d6df8ac99930a492ce35cbdd3a"
+    },
+    "recorded_games": 15,
+    "completed_games": 14,
+    "failed_games": 1,
+    "optimizer_steps": 0
+  },
+  "repairs": {
+    "host_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v27.json",
+    "build": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v27.json",
+      "report_id": "sha256:b469492d33209933a287c554cf39a4ba789e5977f979516122154f60872412d8",
+      "sha256": "ef0694800c0ba31bb3375284d0d3003b39f12abd2301267f843ff1fbb8c76949"
+    },
+    "presentation_calls_skipped": {
+      "debug_audio_play": 2,
+      "debug_audio_stop": 1,
+      "camera_rumble": 1
+    },
+    "end_turn": "wait_for_native_turn_number_advance_and_play_phase_or_selection_or_terminal",
+    "native_event_exceptions_propagated": true,
+    "game_rules_assembly_unchanged": true
+  },
+  "event_branches": {
+    "path": "artifacts/native-learning/dense-vegetation-regression-v4/summary.json",
+    "report_id": "sha256:12e72c796274ac651e13a43c25f463480958f3d401c44f59879cdfe1f022a60e",
+    "sha256": "430ef0249bdcfcbf80c02120aa573867eb165353ebb9b2af75c14213eff913ee"
+  },
+  "original_seed_full_run": {
+    "path": "artifacts/native-learning/dense-vegetation-original-seed-full-v2/summary.json",
+    "report_id": "sha256:5ba7208f1e3db7aba285a5bce22995949b2eea33ca86b20fbd0d5163430fb6f5",
+    "sha256": "142a979a05d64e533b7ad64e87461b617552f7a5d196532a421240ce9cc2e979"
+  },
+  "worker_isolation": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v8/summary.json",
+    "report_id": "sha256:d142d42afb3c4d57f122feee5ee6e6adc6851f08844f252e555883f87eff6da4",
+    "sha256": "d177ce88151e3c2e08a3c8252781027265ca02a6fea5e2acc748eed0b829231c"
+  },
+  "failure_isolation_control": {
+    "evidence": {
+      "path": "artifacts/native-learning/failure-isolation-control-v1/summary.json",
+      "report_id": "sha256:d423a716cb653ad36419c46cd6093ccc7f40ef0e415268cb4c933aa097346145",
+      "sha256": "92f387ed311906046f9aabb674dff7b48be126d88a914783a1cab26039630d77"
+    },
+    "scope": "injected_invalid_chooser_on_intermediate_v26_host_same_current_python_and_worker_v4_no_learning_examples",
+    "prior_recipes_private_archive": "artifacts/native-learning/intermediate-v26-source-and-recipes",
+    "completed_games": 2,
+    "injected_failed_games": 1,
+    "prefix_salvaged": true,
+    "failed_seed_retried": false
+  },
+  "learning_control": {
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v5/summary.json",
+    "report_id": "sha256:64789d56a99955f9ec1cb94251f78063b219ff60dcd2ca1467399533cb87f3e9",
+    "sha256": "3c644d5b8a6ad55c98b3b53c797d8ad9d2dd096075df3a5b30188ada70c0f436"
+  },
+  "admission": {
+    "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v2-admission-v2.json",
+    "report_id": "sha256:98def6afdbc882e188343fcb099ba6ed7c1b7764509bcd478ecb047eb3bd46ce",
+    "sha256": "043a743dde5d8236479842ad9500e93b4c50828127754153f293837df440defd"
+  },
+  "preflight": {
+    "path": "artifacts/native-learning/pilot-v2-final-preflight-v2.json",
+    "ready": true,
+    "games_launched": 0,
+    "optimizer_steps": 0
+  },
+  "failure_policy": {
+    "maximum_failed_games_per_panel": 2,
+    "failed_games_in_evaluation_denominator": true,
+    "failed_games_supply_ppo_targets": false,
+    "verified_shutdown_before_new_worker": true,
+    "failed_workspaces_reused": false,
+    "unauditable_prefix_or_missing_games_stop_learning": true
+  },
+  "preserved_development_failures": [
+    "unqualified-v25-source-and-recipes",
+    "intermediate-v26-source-and-recipes",
+    "dense-vegetation-regression-v1",
+    "dense-vegetation-regression-v2",
+    "dense-vegetation-original-seed-full-v1",
+    "dense-vegetation-full-development-v27"
+  ],
+  "verification": {
+    "python_tests_passed": 1325,
+    "python_checks": "artifacts/native-event-repository-check-final.log",
+    "selected_node_tests_passed": 10,
+    "node_checks": "artifacts/native-event-node-check-v2.log",
+    "full_native_seed_decisions": 134,
+    "short_control_optimizer_steps": 6
+  },
+  "next_command": "bash scripts/train-native-a8-ppo-v2.sh",
+  "long_pilot_launched_by_codex": false,
+  "game_apps_created": 0,
+  "gameplay_strength_proven": false,
+  "adaptive_controller_allowed": false,
+  "report_id": "sha256:4c52ba8c8ab47f6d9a221f4c7bdb0e188d5dc51dd3dbf469fa23fb1de36f8582"
+}

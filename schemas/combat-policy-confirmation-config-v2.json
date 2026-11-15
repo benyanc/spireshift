@@ -1,0 +1,279 @@
+{
+  "type": "object",
+  "required": [
+    "schema_version",
+    "config_id",
+    "training_config_path",
+    "training_config_id",
+    "candidate",
+    "reference",
+    "objective",
+    "ruleset_manifest_id",
+    "patch_id",
+    "split_manifest_id",
+    "partition",
+    "seeds",
+    "run_offset",
+    "prior_train_prefix_stop",
+    "maximum_decisions_per_run",
+    "cycle_repetition_threshold",
+    "liveness_tail_length",
+    "no_op_fallback_threshold",
+    "milestones",
+    "compute_boundary",
+    "claim_scope",
+    "promotion_rule",
+    "selection_repair"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "combat-policy-confirmation-config-v2"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "training_config_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "training_config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "checkpoint_path",
+        "report_path",
+        "model_id",
+        "report_id",
+        "resource_path",
+        "resource_report_id"
+      ],
+      "properties": {
+        "checkpoint_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "report_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "resource_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resource_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "checkpoint_path",
+        "report_path",
+        "model_id",
+        "report_id"
+      ],
+      "properties": {
+        "checkpoint_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "report_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "objective": {
+      "$ref": "https://spireshift.dev/schemas/combat-foundation-audit-config-v1.json#/properties/objective"
+    },
+    "ruleset_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "patch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "partition": {
+      "const": "train"
+    },
+    "seeds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "run_offset": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "prior_train_prefix_stop": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "maximum_decisions_per_run": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "cycle_repetition_threshold": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "liveness_tail_length": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "no_op_fallback_threshold": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "milestones": {
+      "$ref": "https://spireshift.dev/schemas/run-level-trajectory-search-config-v4.json#/$defs/milestones"
+    },
+    "compute_boundary": {
+      "const": {
+        "clock": "process_time",
+        "workers": 1,
+        "charged": "all_process_cpu_from_reset_return_through_final_outcome_check",
+        "initialization": "factory_and_reset_cpu_reported_separately",
+        "enforcement": "cooperative_before_and_after_policy_and_transition",
+        "over_budget_outcome": "truncated_non_victory_in_original_denominator",
+        "cleanup": "reported_separately_not_charged_to_decisions"
+      }
+    },
+    "claim_scope": {
+      "const": "paired_inspected_train_neural_selection_compatibility"
+    },
+    "promotion_rule": {
+      "const": "no_automatic_promotion_auxiliary_floor_insufficient"
+    },
+    "selection_repair": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "layout",
+        "weights_rule",
+        "information_policy",
+        "engine_source_root",
+        "engine_source_sha256",
+        "source_confirmation_path",
+        "source_comparison_path",
+        "source_comparison_resource_path",
+        "capture_collection_path",
+        "source_confirmation_id",
+        "source_comparison_report_id",
+        "source_comparison_resource_report_id",
+        "capture_collection_id"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "neural-public-discard-selection-repair-v1"
+        },
+        "layout": {
+          "$ref": "https://spireshift.dev/schemas/public-combat-layout-v4.json"
+        },
+        "weights_rule": {
+          "const": "unchanged_checkpoint_weights_explicit_runtime_layout_extension"
+        },
+        "information_policy": {
+          "const": "public_visible_choices_and_supplied_legal_menu_only"
+        },
+        "engine_source_root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "engine_source_sha256": {
+          "type": "object",
+          "required": [
+            "src/Sts2Emulator/Core/CombatEngine.cs",
+            "src/Sts2Emulator/Core/CombatObservation.cs",
+            "src/Sts2Emulator/Core/PendingCardSelection.cs"
+          ],
+          "properties": {
+            "src/Sts2Emulator/Core/CombatEngine.cs": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "src/Sts2Emulator/Core/CombatObservation.cs": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "src/Sts2Emulator/Core/PendingCardSelection.cs": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "source_confirmation_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_comparison_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_comparison_resource_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capture_collection_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_confirmation_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "source_comparison_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "source_comparison_resource_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "capture_collection_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SpireShift Inspected Neural Selection Compatibility Comparison",
+  "$id": "https://spireshift.dev/schemas/combat-policy-confirmation-config-v2.json"
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "full-run-backend-repair-config-v5",
+  "base_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v4-retry2",
+  "base_revision": "65ddaa0a7fa870bcdb72d6df3c22fd8345c3a037",
+  "base_manifest": "manifests/patches/sts2-v0.107.1-evangambit-public-a8-v1-admitted.json",
+  "base_manifest_id": "sha256:ab32cf7075c080ec1f0104bf9feac17299361e345161daaf8e7a5febd863bacc",
+  "patch": {
+    "path": "backend-patches/turn-end-reward-v1/turn-end-reward-v2.patch",
+    "sha256": "7b57efce0afbcc1e88c021f02341593cf00720b2f0554a0380f796aa0db8136d"
+  },
+  "regression_tests": {
+    "path": "backend-patches/turn-end-reward-v1/SpireShiftTurnEndAndRewardTests-v3.cs",
+    "sha256": "c152acd1fb6bc5d979c77469229cf53790fc99bfb295bc79fa79560bb229c54f"
+  },
+  "fixture_inventory": {
+    "path": "backend-patches/event-choices-v1/fixture-inventory.json",
+    "sha256": "450641976a1a669239ca2b7b302d9586734a3b035d31861b1a5129a8aaad2429"
+  },
+  "candidate_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v5-retry3",
+  "output_dir": "artifacts/backend-repair/turn-end-reward-v1-retry3",
+  "runtime": "osx-arm64",
+  "resource_limits": {
+    "wall_seconds": 240,
+    "cpu_seconds": 960,
+    "memory_bytes": 12000000000,
+    "storage_bytes": 4000000000
+  },
+  "automatic_training": false,
+  "automatic_admission": false,
+  "minimum_regression_tests": 247,
+  "engine_sources": [
+    {
+      "path": "src/Sts2Emulator/Core/CombatEngine.cs",
+      "base_sha256": "17f9ce7852ab84e8c6fe61550c8a70f508a6397788983b06b06d0049ae1af7eb",
+      "repaired_sha256": "26b356fc31f473fef06b8bb161febaa33f011f272707671553fb6fbdf90a997c"
+    },
+    {
+      "path": "src/Sts2Emulator/Core/Run/RunEngine.cs",
+      "base_sha256": "82fa7920d43df64b1e10f51623f90ada7370d1ad30de27201617ee8cb6e8e3dd",
+      "repaired_sha256": "750a8abc2bb65d687e50a10ccd10a320302d879e6dfea3de34bd67426ae0c1d7"
+    }
+  ],
+  "test_updates": [
+    {
+      "path": "src/Sts2Emulator.Tests/RunEngineTests.cs",
+      "base_sha256": "9ec144c7497d28916b645195f3370ad72fcb68cf8cbf8533511862bea8e52bdb",
+      "repaired_sha256": "714876935f7e01773e595af13c087029d5968bf7773242d3970d83752d8e8260"
+    }
+  ],
+  "config_id": "sha256:efb4d23650a7d0c122754e9312bc26068bdf6ff3592436e38e363e5a15c88394"
+}

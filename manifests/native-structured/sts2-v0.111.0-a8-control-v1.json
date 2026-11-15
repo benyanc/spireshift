@@ -1,0 +1,22 @@
+{
+  "schema_version": "native-structured-comparison-seeds-v1",
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "seeds": [
+    {
+      "id": 2200000,
+      "seed": "SP1RESH1FTSTRUCTC001",
+      "partition": "train"
+    },
+    {
+      "id": 2200001,
+      "seed": "SP1RESH1FTSTRUCTC002",
+      "partition": "train"
+    },
+    {
+      "id": 2200002,
+      "seed": "SP1RESH1FTSTRUCTC003",
+      "partition": "development"
+    }
+  ],
+  "manifest_id": "sha256:2e13a466e403c21498963b02cd670524547bd192414be00c4949ad4eae3052d8"
+}

@@ -1,0 +1,121 @@
+--- a/src/Sts2Emulator/Core/Run/RunEngine.cs
++++ b/src/Sts2Emulator/Core/Run/RunEngine.cs
+@@ -2479,6 +2479,15 @@
+     private int StepEvent(int action, out bool terminal)
+     {
+         terminal = false;
++        // A handler must reject locked and nonexistent choices before changing state.
++        // In particular action 3 is a real option only at Welcome to Wongos.
++        Span<int> offered = stackalloc int[RunConstants.MaxActions];
++        WriteEventActionMask(offered);
++        if ((uint)action >= (uint)offered.Length || offered[action] == 0)
++        {
++            return -1;
++        }
++
+         if (State.EventId == RunConstants.EventResultPending)
+         {
+             State.EventId = 0;
+@@ -5394,7 +5403,8 @@
+             return;
+         }
+ 
+-        SetMask(mask, RunConstants.EventSkipAction);
++        // Only event options actually offered by the game belong in this mask.
++        // A free fallback skip bypassed mandatory costs and committed fights.
+         switch (State.EventId)
+         {
+             case RunConstants.EventUnrestSite:
+@@ -5694,7 +5704,7 @@
+                     SetMask(mask, 2);
+                 }
+ 
+-                // Leave, which is action 3 and therefore already set above.
++                // This event really offers Leave as its fourth option.
+                 SetMask(mask, 3);
+                 break;
+             case RunConstants.EventResultPending:
+--- a/src/Sts2Emulator.Tests/SpireShiftEventContinuationTests.cs
++++ b/src/Sts2Emulator.Tests/SpireShiftEventContinuationTests.cs
+@@ -33,11 +33,11 @@
+     [InlineData(RunConstants.EventDenseVegetation)]
+     [InlineData(RunConstants.EventPunchOff)]
+     [InlineData(RunConstants.EventTheLanternKey)]
+-    public void InitialEventMaskIsPreservedByTheContinuationRepair(int eventId)
++    public void InitialEventMaskOffersTheTwoCapturedChoices(int eventId)
+     {
+         var engine = AtEvent(eventId);
+-        // Preserve the historical initial-page surface; this is not a live-parity claim.
+-        Assert.Equal(new[] { 0, 1, RunConstants.EventSkipAction }, Offered(engine));
++        // The frozen game captures offer exactly these two mandatory choices.
++        Assert.Equal(new[] { 0, 1 }, Offered(engine));
+     }
+ 
+     [Theory]
+--- a/src/Sts2Emulator.Tests/Events/EventOptionGatingTests.cs
++++ b/src/Sts2Emulator.Tests/Events/EventOptionGatingTests.cs
+@@ -91,15 +91,11 @@
+             .EnumerateArray()
+             .Where(option => !option.GetProperty("is_locked").GetBoolean())
+             .Select(option => option.GetProperty("index").GetInt32())
+-            // The emulator also offers a "leave without choosing" action that most
+-            // events do not actually offer. That is its own divergence, tracked
+-            // separately; here it is expected so this test can be about the options.
+-            .Append(RunConstants.EventSkipAction)
+             .Distinct()
+             .OrderBy(index => index)
+             .ToArray();
+         var actual = Enumerable
+-            .Range(0, RunConstants.EventSkipAction + 1)
++            .Range(0, mask.Length)
+             .Where(index => mask[index] != 0)
+             .ToArray();
+ 
+--- a/src/Sts2Emulator.Tests/Events/EventScreenTests.cs
++++ b/src/Sts2Emulator.Tests/Events/EventScreenTests.cs
+@@ -87,10 +87,8 @@
+         Assert.Equal(RunPhase.Event, engine.State.Phase);
+         Assert.Equal(hpBefore, engine.State.PlayerHp);
+         Assert.Equal(1, engine.State.EventPage);
+-        // The fight, plus the leave-without-choosing action the emulator offers at every
+-        // event and the game offers at almost none -- its own divergence, tracked by
+-        // EventOptionGatingTests rather than here.
+-        Assert.Equal(new[] { 0, RunConstants.EventSkipAction }, LegalActions(engine));
++        // The captured committed page offers only the fight.
++        Assert.Equal(new[] { 0 }, LegalActions(engine));
+     }
+ 
+     [Fact]
+--- a/src/Sts2Emulator.Tests/Events/EventMaskAgreesWithStepTests.cs
++++ b/src/Sts2Emulator.Tests/Events/EventMaskAgreesWithStepTests.cs
+@@ -231,24 +231,22 @@
+     }
+ 
+     /// <summary>
+-    /// Leaving is always available, whatever the run holds: an event the player cannot
+-    /// afford any option of still has to be escapable.
++    /// A fourth Leave option exists only at Welcome to Wongos. Other events must
++    /// offer their real choices even when taking one costs HP or gold.
+     /// </summary>
+     [Theory]
+     [MemberData(nameof(Events))]
+-    public void LeavingIsAlwaysOffered(string eventName)
++    public void AFreeFallbackLeaveIsNotInvented(string eventName)
+     {
+         int eventId = Names.First(pair => pair.Value == eventName).Key;
+-
+         foreach (var (label, apply) in Situations)
+         {
+             var engine = At(eventId, apply);
+             var mask = new int[RunConstants.MaxActions];
+             engine.WriteActionMask(mask);
+-
+-            Assert.True(
+-                mask[RunConstants.EventSkipAction] != 0,
+-                $"{eventName} offers no way out {label}"
++            Assert.Equal(
++                eventId == RunConstants.EventWelcomeToWongos ? 1 : 0,
++                mask[RunConstants.EventSkipAction]
+             );
+         }
+     }

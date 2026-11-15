@@ -1,0 +1,132 @@
+{
+  "schema_version": "native-selection-owner-read-repair-v1",
+  "historical_canary": {
+    "path": "artifacts/native-selection-flows/canary-v5/report.json",
+    "sha256": "4a0ec984182b9a47ce68714150c1b0c64b1d17ac1abec533ec7ed3badea635ce"
+  },
+  "historical_verification": {
+    "path": "artifacts/native-selection-flows/canary-v5/verification-v1/report.json",
+    "sha256": "612296fb78d65bc78933542dd0efb5589f2269b8945cf18084271bd8744295a4"
+  },
+  "historical_completed_host_prefixes": 8,
+  "historical_matching_whole_pairs": 0,
+  "historical_first_equal_prefixes": [
+    1,
+    1,
+    53,
+    1
+  ],
+  "historical_verified_decisions": 964,
+  "historical_wall_seconds": 928.5195212920662,
+  "scope": "compatibility_diagnostics_only",
+  "source_tuple": {
+    "CLI": "v51",
+    "official_connector": "v20",
+    "worker": "v21",
+    "converter": "v13",
+    "layout": "v10",
+    "environment": {
+      "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v36.json",
+      "sha256": "33c126ec18bcc28dd5b704f27858b28136e352af6ccdfb4aee2f40bdcb104e8a"
+    },
+    "build": {
+      "path": "artifacts/native-selection-owner-read/native-build-v51/report.json",
+      "sha256": "0a1df85b9a521e74bfd36c39949495fc2c445dd56c6a190dbb1796b2f48b4502"
+    }
+  },
+  "saved_audit": {
+    "path": "artifacts/native-selection-flows/selection-owner-read-offline-v4/report.json",
+    "sha256": "61d230ef32488d67db7a7714cd43548f63536170a84212ecb92c2ec3d3c3b32e"
+  },
+  "saved_frames": 4760,
+  "frozen_policy_probes": 9526,
+  "protected_files_unchanged": 10429,
+  "captured_first_difference_check": {
+    "path": "artifacts/native-selection-owner-read/development-v1/captured-check.json",
+    "sha256": "65ab9485375ae7cca8687d95878148a84abd63e1549a59b50080d86f8c4bd4d3"
+  },
+  "controls": {
+    "owned-relic-preview": {
+      "report": {
+        "path": "artifacts/native-selection-flows/owned-relic-preview-control-v2/report.json",
+        "sha256": "2028caec4f74df5b2e13d1643fbf795b294171e4d0165e8729c1fe4c5a58432d"
+      },
+      "report_id": "sha256:1c5fd3a538e3e9fd3f4c9a7e2363c49270b28ddcd1ed8c0a66a4a7fdedb7f50f",
+      "verification": {
+        "path": "artifacts/native-selection-flows/owned-relic-preview-control-v2/verification-v1/report.json",
+        "sha256": "d53cfeca3bf5bc88f1613b912461316a4f934ffd4f5f1f91cab23ecf2c4ce5f4"
+      },
+      "matched_decisions": 8,
+      "verified_decisions": 16,
+      "wall_seconds": 45.94877075008117
+    },
+    "generated-card-choice": {
+      "report": {
+        "path": "artifacts/native-selection-flows/generated-card-choice-control-v2/report.json",
+        "sha256": "1fd9c6e3f1e97924246336ce998b3c552b5adcfd67fecbba5865ffbb284f3cff"
+      },
+      "report_id": "sha256:939d54a4653f54d9d41f2728311465cd762e1854e74561b7f62acd4550a3d64d",
+      "verification": {
+        "path": "artifacts/native-selection-flows/generated-card-choice-control-v2/verification-v1/report.json",
+        "sha256": "aa0e6db8d79c80be18ea3b3b7e826d849293eb36d0bc0eb12bb31e935d41f71c"
+      },
+      "matched_decisions": 8,
+      "verified_decisions": 16,
+      "wall_seconds": 50.75207670801319
+    },
+    "shop-card-reads": {
+      "report": {
+        "path": "artifacts/native-selection-flows/shop-card-reads-control-v2/report.json",
+        "sha256": "363efa81ac614e67de0b1b321dbdd8e6d8c42376e93064564ce3052929fb8237"
+      },
+      "report_id": "sha256:54ceddf50290cfd96c37083d141c36392b7cf4291f8705693629cca4147b05a9",
+      "verification": {
+        "path": "artifacts/native-selection-flows/shop-card-reads-control-v2/verification-v1/report.json",
+        "sha256": "9ccb914cced4b390ba1e6715aa013af29881c1096528e388d84be353409e5680"
+      },
+      "matched_decisions": 64,
+      "verified_decisions": 128,
+      "wall_seconds": 119.82532004080713
+    }
+  },
+  "native_Discovery_combat_fixture": {
+    "path": "artifacts/native-selection-owner-read/discovery-fixture-v4/report.json",
+    "sha256": "a16134baeb1ff766f36ca0f43cf1435da2c44a5609d3840c8a1134e7c6259145"
+  },
+  "Discovery_fixture_scope": "CLI_v50_worker_v20_generated_combat_context_unchanged_by_shop_only_follow_up",
+  "negative_shop_control": {
+    "path": "artifacts/native-selection-flows/shop-card-reads-control-v1/report.json",
+    "sha256": "d26949a85aedd365fa8890bb0c253a8f17626ca34795818fa6106349c7f52f90"
+  },
+  "negative_shop_verification": {
+    "path": "artifacts/native-selection-flows/shop-card-reads-control-v1/verification-v1/report.json",
+    "sha256": "83b7f74723b7b29a48bfb06ba8f26bbe39ebc0bf7750cd23d9428f16da8095c9"
+  },
+  "development_failures_preserved": [
+    "generated_combat_probe_v1_conflicting_relic_copy",
+    "generated_combat_probe_v2_HP_is_in_persistent_context",
+    "generated_combat_probe_v3_native_Discovery_allows_Skip",
+    "control_launch_v2_wrong_schema_rejected_before_any_game"
+  ],
+  "targeted_Node_regressions": 15,
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "optimizer_updates": 0,
+  "game_apps_created": 0,
+  "full_game_strength_claim": false,
+  "exhaustive_mechanic_coverage": false,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "next_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-selection-owner-read-canary-v1.json",
+    "sha256": "643cf0fb09860eb861213d841681799d462173d00e1a884d816b6d7d096d411f"
+  },
+  "next_launch": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-selection-owner-read-launch-v1.json",
+    "sha256": "8e01e41207c36de0ca8603baed0631297933b6f1e4e6d986eb5464ff585424cb"
+  },
+  "next_owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-selection-flows-v9.sh",
+  "main_workspace_unstarted": true,
+  "repository_check_required_before_long_launch": true,
+  "report_id": "sha256:98f17cdec1a7b83fab5253614501bbb8b3441c12b49d3b62c6b29939a384fb5e"
+}

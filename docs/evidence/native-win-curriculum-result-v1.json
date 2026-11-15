@@ -1,0 +1,259 @@
+{
+  "assessment": {
+    "path": "artifacts/native-win-curriculum/final-assessment-v1/report.json",
+    "report_id": "sha256:de492c0e7012034537235d49d5e8bcf40dea0da666a8bf94a451e9cb7d8347a8",
+    "sha256": "b65b5e11da7d2ead6eb2d94e74fd2404aa94ed1d68fd9a35e6ca5076f09fcc20"
+  },
+  "automatic_follow_up": false,
+  "bank": {
+    "bank_id": "sha256:4c57bea49d719b1dba36e3b1f2ff8c2c3955ec9a06ce6dc988cb1b2793115f60",
+    "path": "artifacts/native-win-curriculum/study-v7/bank.json",
+    "sha256": "30ff288db4159b92ba99c26d5f94fb9eae83fffcf2fc2262680ed9f47a8228e3"
+  },
+  "collection": {
+    "path": "artifacts/native-win-curriculum/study-v7/report.json",
+    "report_id": "sha256:8f92bd3cb7091c9fc78d2f00ae8447062328fa973808521ef9d5fd29da983858",
+    "sha256": "a2b340defcb32ce889bee459190b66104732cdbb273dee0d456944a9deed38d0"
+  },
+  "frozen_inputs": {
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "original_and_prior_final_weights_full_Adam_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "native_victory_endpoint": {
+    "failed_world_replayed": false,
+    "fault_path": [
+      "TheArchitect.WinRun",
+      "RunManager.WinRun",
+      "RunManager.OnEnded",
+      "SaveManager.UpdateProgressWithRunData",
+      "ProgressSaveManager.UpdateWithRunData"
+    ],
+    "prepared_failure_resource": {
+      "path": "artifacts/resources/win-curriculum-control-fit-v6.json",
+      "report_id": "sha256:cf4a01499d12ea4caa894887c98f8700cfb613d132559ab3263909dd93a01a7d",
+      "sha256": "74a1c06193bc922401d1b431068da8ca25ac638be9c6bc6a90a04a98d0a2775d",
+      "status": "failed"
+    },
+    "state": "targeted_qualification_pending"
+  },
+  "new_games_in_assessment": 0,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "owner_resource": {
+    "path": "artifacts/resources/win-curriculum-v7-attempt-1.json",
+    "report_id": "sha256:d855d409051035744b599a485f11afd9745b8ae5101dfca58c1cdf1e2ab141e4",
+    "sha256": "3554cd922febd70ea2a2c8166fb82ce30c570edcbbe919c884f37f84f93bef2e",
+    "status": "completed"
+  },
+  "preparation": {
+    "path": "docs/evidence/native-win-curriculum-soul-nexus-v1.json",
+    "sha256": "90ef0a39ff160f9cc18963b1c97ca1dce7e3f6998aa57f35d8103895f61f1799"
+  },
+  "promotion_allowed": false,
+  "report_id": "sha256:becb8b87151430ce14f3cdb1e91714f9f9436645de9b7002118a4679f3cdb976",
+  "repository_check": {
+    "path": "artifacts/resources/win-curriculum-final-assessment-check-v1.json",
+    "report_id": "sha256:29a89dc7ca38c9454fdb5959f2570e47c09a5be704b51f4312bbb08d2874a9bd",
+    "sha256": "193d1205b1f4d17555e417e8f89e27a7a1b9419a0da89ab7518fda335fdabc1c",
+    "status": "completed"
+  },
+  "repository_tests_passed": 2836,
+  "repository_tests_skipped": 0,
+  "saved_assessment_resource": {
+    "path": "artifacts/resources/win-curriculum-final-assessment-v1.json",
+    "report_id": "sha256:13b2f1ba6f92c3c47355fff8c4d2dfd7c70d372f1371b17e3f9e8ef2646f9d30",
+    "sha256": "24b8fc1c703e89ffbe42dd6ef0612b2cf8535e96594717886d0e2699ffc1d6c6",
+    "status": "completed"
+  },
+  "saved_sources": {
+    "artifacts/native-win-curriculum/final-assessment-v1/audit.py": "e3f558930f027a3d97cbb174734844eef1c0765303cfa46f697125935afb7f35",
+    "artifacts/native-win-curriculum/launch-v7/session-1.json": "de4c51e489be1ce48c2a5a5b7993f49e72e713b56c78e3a1f5d13b47474f13bb",
+    "artifacts/native-win-curriculum/study-v7/bank.json": "30ff288db4159b92ba99c26d5f94fb9eae83fffcf2fc2262680ed9f47a8228e3",
+    "artifacts/native-win-curriculum/study-v7/report.json": "a2b340defcb32ce889bee459190b66104732cdbb273dee0d456944a9deed38d0",
+    "artifacts/resources/win-curriculum-v7-attempt-1.json": "3554cd922febd70ea2a2c8166fb82ce30c570edcbbe919c884f37f84f93bef2e"
+  },
+  "schema_version": "native-win-curriculum-result-evidence-v1",
+  "status": "all_act_and_boss_curriculum_admitted",
+  "summary": {
+    "admitted_lessons": 25,
+    "complete_episodes": 301,
+    "config_id": "sha256:8749dbd1429d6a5c5a259c99a816a93afa488323bccd6d56e0e1f65ec121c1f6",
+    "current_fitting_cases": 57,
+    "current_heldout_cases": 12,
+    "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+    "fresh_v7_episode_reconstructions": [
+      {
+        "episode_id": "sha256:7173e0c50f7eb831ea8347d2ca7d102a0c0e7d4ba531cbfa1784f8681095c7d0",
+        "native_deliveries": 42,
+        "unit": "fit-soul-fysh-supplement-01-reference"
+      },
+      {
+        "episode_id": "sha256:1bff91a282155b42784735bfceb761f649c425bcec5e8f92a7cd80a9ba41c5eb",
+        "native_deliveries": 15,
+        "unit": "fit-soul-fysh-supplement-01-balanced"
+      },
+      {
+        "episode_id": "sha256:0a8dec59765f946ce1b291a2503b84dbc160b27a2d410f63a305ef986a8d4389",
+        "native_deliveries": 15,
+        "unit": "fit-soul-fysh-supplement-01-defensive"
+      },
+      {
+        "episode_id": "sha256:38d7087e93d1ef2f45c131c69d6cab7e9f5dc370e73e484000bde3fb3986f245",
+        "native_deliveries": 15,
+        "unit": "fit-soul-fysh-supplement-01-scaling"
+      },
+      {
+        "episode_id": "sha256:4faf9d6082e8a55dd983a8bebfcc60ec54ec12f0fd041a9cbf2f3e176f5ad5c1",
+        "native_deliveries": 15,
+        "unit": "fit-soul-fysh-supplement-01-confirm"
+      },
+      {
+        "episode_id": "sha256:0d679c6c1d74a1d7a659d3fa26b056063ad020544ea5fea007eedbe19469519b",
+        "native_deliveries": 163,
+        "unit": "heldout-011-replacement-1-reference"
+      },
+      {
+        "episode_id": "sha256:a7f27c19bc9076d6193f98a9df4b2645ece2f09912b534159532f15e65f2b479",
+        "native_deliveries": 359,
+        "unit": "heldout-011-replacement-1-balanced"
+      },
+      {
+        "episode_id": "sha256:fe513f7fc25c7473b5f4d8eb314e6cda0bddc5817c5dd627fb02d0ab872e0c44",
+        "native_deliveries": 364,
+        "unit": "heldout-011-replacement-1-defensive"
+      },
+      {
+        "episode_id": "sha256:ebce050c88dfbf6706de3c392f3abe840986e57c7c4ab111669cb487f5ca4e52",
+        "native_deliveries": 275,
+        "unit": "heldout-011-replacement-1-scaling"
+      },
+      {
+        "episode_id": "sha256:c11637a6ffb4833eabfab37510f3423a8cf7cfab15cfd345e7270ba03d04bf41",
+        "native_deliveries": 30,
+        "unit": "heldout-012-reference"
+      },
+      {
+        "episode_id": "sha256:a960e6debb2299301487271aa23cbb5befe51fe14d0a53761548dfe8f61a29d5",
+        "native_deliveries": 23,
+        "unit": "heldout-012-balanced"
+      },
+      {
+        "episode_id": "sha256:28414d2170b47c38a5b6abb3eb3a680597374d8456a7f81711fabfa81c8588ec",
+        "native_deliveries": 20,
+        "unit": "heldout-012-defensive"
+      },
+      {
+        "episode_id": "sha256:d6211cea073b61a5b9093873dd30c2444c52f437bd873a54c0feec4b7e774bbd",
+        "native_deliveries": 21,
+        "unit": "heldout-012-scaling"
+      }
+    ],
+    "grouped_answers": 0,
+    "historical_failures_preserved": 6,
+    "label_families": {
+      "card_reward_selection": 46,
+      "card_selection": 16,
+      "combat_turn": 877,
+      "event_option": 16,
+      "map_navigation": 14,
+      "native_generated_card_choice": 4,
+      "rest_site": 17,
+      "reward_claim": 141,
+      "shop_inventory": 2,
+      "shop_room": 1,
+      "treasure_room": 7
+    },
+    "largest_four_lesson_choices": 558,
+    "lesson_kinds": {
+      "prepared": 25
+    },
+    "linked_denominator": 75,
+    "maximum_lesson_choices": 200,
+    "meaningful_choices": 1141,
+    "minimum_lesson_choices": 14,
+    "native_deliveries": 26623,
+    "natural_training_episodes": 32,
+    "natural_training_full_wins": 0,
+    "prepared_successes": 106,
+    "quality": {
+      "checks": {
+        "all_act_definitions_with_successful_labels": true,
+        "all_declared_bosses_with_successful_labels": true,
+        "all_final_bosses_with_successful_labels": true,
+        "all_required_meaningful_decision_families": true,
+        "final_boss_goal_rescue": true,
+        "fixed_teacher_heldout_successes": true,
+        "independent_goal_rescues": true
+      },
+      "final_boss_rescue_worlds": [
+        "SP1RESH1FTW1F038P01",
+        "SP1RESH1FTW1F040P01",
+        "SP1RESH1FTW1F042P01"
+      ],
+      "goal_rescue_worlds": [
+        "SP1RESH1FTW1F002P04",
+        "SP1RESH1FTW1F005P02",
+        "SP1RESH1FTW1F006P01",
+        "SP1RESH1FTW1F008P05",
+        "SP1RESH1FTW1F009P01",
+        "SP1RESH1FTW1F011P03",
+        "SP1RESH1FTW1F014P06",
+        "SP1RESH1FTW1F017P01",
+        "SP1RESH1FTW1F021P01",
+        "SP1RESH1FTW1F024P06",
+        "SP1RESH1FTW1F028P01",
+        "SP1RESH1FTW1F030P01",
+        "SP1RESH1FTW1F038P01",
+        "SP1RESH1FTW1F040P01",
+        "SP1RESH1FTW1F042P01",
+        "SP1RESH1FTW1F045P01",
+        "SP1RESH1FTW1F048P01",
+        "SP1RESH1FTW2F007P01"
+      ],
+      "heldout_successes": 6,
+      "meaningful_families": [
+        "card_reward_selection",
+        "card_selection",
+        "combat_turn",
+        "event_option",
+        "map_navigation",
+        "native_generated_card_choice",
+        "rest_site",
+        "reward_claim",
+        "shop_inventory",
+        "shop_room",
+        "treasure_room"
+      ],
+      "missing_bosses": [],
+      "missing_families": [],
+      "passed": true,
+      "successful_act_definitions": [
+        "GLORY",
+        "HIVE",
+        "OVERGROWTH",
+        "UNDERDOCKS"
+      ],
+      "successful_boss_definitions": [
+        "AEONGLASS_BOSS",
+        "CEREMONIAL_BEAST_BOSS",
+        "KAISER_CRAB_BOSS",
+        "KNOWLEDGE_DEMON_BOSS",
+        "LAGAVULIN_MATRIARCH_BOSS",
+        "QUEEN_BOSS",
+        "SOUL_FYSH_BOSS",
+        "TEST_SUBJECT_BOSS",
+        "THE_INSATIABLE_BOSS",
+        "THE_KIN_BOSS",
+        "VANTOM_BOSS",
+        "WATERFALL_GIANT_BOSS"
+      ]
+    },
+    "seals_verified": 370,
+    "soul_fysh_lesson_id": "sha256:59a926fa0e1a4ee2ba5c9488a4838da278263c00fbd205b2c4163589829265ed"
+  },
+  "training_allowed": false
+}

@@ -1,0 +1,457 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-foundation-audit-config-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-foundation-audit-config-v1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "objective": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "terminal-victory-v1"
+        },
+        "primary": {
+          "const": "terminal_victory"
+        },
+        "constraint": {
+          "const": "cpu_time_per_run"
+        },
+        "whole_run_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "auxiliary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auxiliary_reward_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "auxiliary",
+        "auxiliary_reward_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "parent_checkpoint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_report": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "training_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "curriculum_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "enum": [
+            "evangambit-public-combat-layout-v1",
+            "evangambit-public-combat-layout-v2"
+          ]
+        },
+        "patch_id": {
+          "type": "string"
+        },
+        "ruleset_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "observation_size": {
+          "const": 682
+        },
+        "hand_offset": {
+          "const": 8
+        },
+        "hand_slots": {
+          "const": 10
+        },
+        "card_slot_size": {
+          "const": 4
+        },
+        "potion_offset": {
+          "const": 48
+        },
+        "potion_slots": {
+          "const": 6
+        },
+        "potion_slot_size": {
+          "const": 2
+        },
+        "player_buff_offset": {
+          "const": 60
+        },
+        "player_buff_slots": {
+          "const": 10
+        },
+        "enemy_offset": {
+          "const": 80
+        },
+        "enemy_slots": {
+          "const": 6
+        },
+        "enemy_slot_size": {
+          "const": 15
+        },
+        "enemy_buff_slots": {
+          "const": 5
+        },
+        "secondary_intent_offset": {
+          "const": 170
+        },
+        "selection_kind_offset": {
+          "const": 183
+        },
+        "orb_capacity_offset": {
+          "const": 225
+        },
+        "orb_offset": {
+          "const": 226
+        },
+        "orb_slots": {
+          "const": 10
+        },
+        "incoming_offset": {
+          "const": 256
+        },
+        "incoming_slots": {
+          "const": 5
+        },
+        "selection_count_offset": {
+          "const": 184
+        },
+        "selection_offset": {
+          "const": 185
+        },
+        "selection_slots": {
+          "const": 10
+        },
+        "upgrade_selection_kind": {
+          "const": 15
+        }
+      },
+      "required": [
+        "schema_version",
+        "patch_id",
+        "ruleset_manifest_id",
+        "observation_size",
+        "hand_offset",
+        "hand_slots",
+        "card_slot_size",
+        "potion_offset",
+        "potion_slots",
+        "potion_slot_size",
+        "player_buff_offset",
+        "player_buff_slots",
+        "enemy_offset",
+        "enemy_slots",
+        "enemy_slot_size",
+        "enemy_buff_slots",
+        "secondary_intent_offset",
+        "selection_kind_offset",
+        "orb_capacity_offset",
+        "orb_offset",
+        "orb_slots",
+        "incoming_offset",
+        "incoming_slots"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "schema_version": {
+                "const": "evangambit-public-combat-layout-v1"
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "selection_count_offset"
+                  ]
+                },
+                {
+                  "required": [
+                    "selection_offset"
+                  ]
+                },
+                {
+                  "required": [
+                    "selection_slots"
+                  ]
+                },
+                {
+                  "required": [
+                    "upgrade_selection_kind"
+                  ]
+                }
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "selection_count_offset",
+              "selection_offset",
+              "selection_slots",
+              "upgrade_selection_kind"
+            ]
+          }
+        }
+      ]
+    },
+    "layout_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "starting_study": {
+      "type": "object",
+      "properties": {
+        "config_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "report_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "config_path",
+        "report_path",
+        "report_id"
+      ],
+      "additionalProperties": false
+    },
+    "complete_run_subfolds": {
+      "type": "object",
+      "properties": {
+        "fit": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "selection": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "additionalProperties": false
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "encoder_id": {
+          "enum": [
+            "evangambit-public-card-target-v1",
+            "evangambit-public-card-target-v2"
+          ]
+        },
+        "vector_dimension": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pairwise_noise_floor": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "minimum_samples": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_fit_signal_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_selection_signal_runs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_fit_card_ids": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_fit_floor_bins": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "half_split_rule": {
+          "const": "both_strict_same_direction"
+        },
+        "outcome_rank": {
+          "const": [
+            "terminal_victory",
+            "maximum_floor"
+          ]
+        },
+        "stop_rule": {
+          "const": "report_only_no_automatic_training_or_collection"
+        }
+      },
+      "required": [
+        "encoder_id",
+        "vector_dimension",
+        "pairwise_noise_floor",
+        "minimum_samples",
+        "minimum_fit_signal_runs",
+        "minimum_selection_signal_runs",
+        "minimum_fit_card_ids",
+        "minimum_fit_floor_bins",
+        "half_split_rule",
+        "outcome_rank",
+        "stop_rule"
+      ],
+      "additionalProperties": false
+    },
+    "resource_limits": {
+      "type": "object",
+      "properties": {
+        "wall_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cpu_seconds": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "memory_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "storage_bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "wall_seconds",
+        "cpu_seconds",
+        "memory_bytes",
+        "storage_bytes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "config_id",
+    "objective",
+    "parent_checkpoint",
+    "parent_report",
+    "model_id",
+    "training_report_id",
+    "curriculum_path",
+    "dataset_id",
+    "split_manifest_id",
+    "layout",
+    "layout_sources",
+    "starting_study",
+    "complete_run_subfolds",
+    "analysis",
+    "resource_limits"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "layout": {
+            "properties": {
+              "schema_version": {
+                "const": "evangambit-public-combat-layout-v2"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "analysis": {
+            "properties": {
+              "encoder_id": {
+                "const": "evangambit-public-card-target-v2"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "analysis": {
+            "properties": {
+              "encoder_id": {
+                "const": "evangambit-public-card-target-v1"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

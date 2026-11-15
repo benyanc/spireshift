@@ -1,0 +1,102 @@
+{
+  "assessment_id": "sha256:4117b2f066b847a7d32ad00403993d2fa3a618f5173785465156e75de3d2532b",
+  "checkpoint_promoted": false,
+  "claim_scope": "completed_owner_PPO_outcome_metadata_assessment_not_full_trace_reaudit_or_readiness",
+  "compressed_traces_reaudited": false,
+  "decision": {
+    "adaptive_controller_allowed": false,
+    "automatic_long_task_allowed": false,
+    "full_run_wins_established": false,
+    "next_step": "bounded_ppo_seeded_whole_actor_evolution",
+    "useful_held_out_gain_established": false
+  },
+  "foundation_readiness_established": false,
+  "games_replayed": 0,
+  "initial": {
+    "benchmark_denominator": 128,
+    "completed_runs": 128,
+    "completion_rate": 1.0,
+    "failed_runs": 0,
+    "fitness_rank": [
+      0.0,
+      0.026829368806395717,
+      1.0
+    ],
+    "mean_auxiliary_progress_return": 0.026829368806395717,
+    "mean_completed_acts": 0.0234375,
+    "mean_maximum_floor": 11.6640625,
+    "mean_training_return": 0.026829368806395717,
+    "missing_runs": 0,
+    "recorded_cpu_seconds": 212.259672,
+    "recorded_decisions": 20286,
+    "recorded_runs": 128,
+    "victories": 0,
+    "victory_rate": 0.0
+  },
+  "initial_model_id": "sha256:19bbb67aa1c44108875b2733174814c1559ebde84b00150de44403ffd89c2dd3",
+  "metadata_checked": true,
+  "next_config_id": "sha256:915322ffb2a603dabac9abfbcecbe5e51b9aedecc40eb998fad627d7753becd3",
+  "optimizer_steps": 0,
+  "paired_development": {
+    "approximate_95_percent_floor_interval": [
+      -0.654790738149596,
+      1.3110407381495959
+    ],
+    "both_completed": 128,
+    "champion_only_victories": 0,
+    "claim_scope": "paired_independent_development_not_final_test_or_foundation_readiness",
+    "comparison_valid": true,
+    "distinct_players": true,
+    "equal_floor": 38,
+    "higher_floor": 48,
+    "initial_only_victories": 0,
+    "interval_method": "paired_normal_approximation_auxiliary_diagnostic_only",
+    "lower_floor": 42,
+    "mean_maximum_floor_difference": 0.328125,
+    "paired_floor_standard_error": 0.5014876215048959,
+    "planned_pairs": 128
+  },
+  "ppo": {
+    "benchmark_denominator": 128,
+    "completed_runs": 128,
+    "completion_rate": 1.0,
+    "failed_runs": 0,
+    "fitness_rank": [
+      0.0,
+      0.02673254312199904,
+      1.0
+    ],
+    "mean_auxiliary_progress_return": 0.02673254312199904,
+    "mean_completed_acts": 0.015625,
+    "mean_maximum_floor": 11.9921875,
+    "mean_training_return": 0.02673254312199904,
+    "missing_runs": 0,
+    "recorded_cpu_seconds": 165.498575,
+    "recorded_decisions": 16097,
+    "recorded_runs": 128,
+    "victories": 0,
+    "victory_rate": 0.0
+  },
+  "ppo_model_id": "sha256:28cd6c4f8db184869114be0a34b87d83d01f3546bb1568c732f7ffc69b299ea7",
+  "prior_PPO_resources": {
+    "cpu_seconds": 11625.37193238399,
+    "report_ids": [
+      "sha256:606a0b91d1a35b4fbac81a5989684bf8224b7ecf93b81d38ce68f54d1265ec59",
+      "sha256:757a129b664a39f63122ab45e72dd5d00e7cc9256d41e0169a8cdf26f33c9740"
+    ],
+    "trajectories": 5504.0,
+    "wall_seconds": 5938.579457333952
+  },
+  "rounds_completed": 32,
+  "schema_version": "public-a8-ppo-pilot-v2-assessment-v1",
+  "selected_round": 24,
+  "source_cases": 5504,
+  "source_optimizer_steps": 14696,
+  "source_public_decisions": 659118,
+  "source_report_id": "sha256:41644172f31a2e52305fdc9b7762548cd3d1855544551f52d4f3a20a12184b1e",
+  "source_status_counts": {
+    "liveness_failure": 16,
+    "terminal_loss": 5487,
+    "unsupported": 1
+  }
+}

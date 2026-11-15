@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-star-cost-shop-card-reads-control-v1.json",
+    "sha256": "944fc4dc651729710ca690e03885a50c6a9e496a02b4beb57291cf166d860939"
+  },
+  "wall_seconds": 290,
+  "cpu_seconds": 580,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

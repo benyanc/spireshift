@@ -1,0 +1,44 @@
+{
+  "entry_sha256": {
+    "diagnose-native-teaching-v1.py": "80b3cf46f3e7ef99d8a7247b269b9e2f9e3e42db0b8a13a0f355fdc30c64a327",
+    "diagnose-native-teaching-v1.sh": "318577521f1bcc4af9bb758d0f2f3705fff81e4bac6a1d1496b2adca25bd7a3b"
+  },
+  "history_chunks": [
+    "train-p2-batch128-r01-c00",
+    "train-p2-batch128-r01-c01"
+  ],
+  "history_recipe": {
+    "id": "sha256:ec352aa95300385dab37ee6e34bb21a24eff88133fcf4361ad9c9a45bddac807",
+    "path": "configs/native-experience/sts2-v0.111.0-a8-comparison-v1.json"
+  },
+  "history_report": {
+    "id": "sha256:dc95bb4fa6c23f26885f0388199e3227a76dfd2494dcf4e470729f75eeff792d",
+    "path": "artifacts/native-experience/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "implementation_sha256": {
+    "native_teaching_diagnostic_history.py": "b7b2b8a42609aa38322884a07e87b287fdaee2a4292bd5ff45de147f1b323c1f",
+    "native_teaching_diagnostic_inputs.py": "4b0ee952243536f9b1074fa395db5825e880479e623485524632bbaa97592b57",
+    "native_teaching_diagnostic_metrics.py": "35e3a8e15769633aa646fbe701c90dd23fcfa8e2846a4c58fe1da106f1f87c39",
+    "native_teaching_diagnostic_report.py": "d64cdc9735e5317bf57bb4ea10d94e2c053cd035a423f5b3103bfe56d9590553"
+  },
+  "maximum_probe_states": 128,
+  "per_world_family_cap": 2,
+  "protected_recipe": {
+    "path": "configs/native-teaching/sts2-v0.111.0-a8-comparison-v1.json",
+    "sha256": "af265abbf7022095b4e89b08a9ad696e2b2a936975ef4343791d4e72bdf25589"
+  },
+  "schema_version": "native-teaching-diagnostic-config-v1",
+  "session_limits": {
+    "cpu_seconds": 240,
+    "resident_memory_bytes": 1000000000,
+    "storage_bytes": 100000000,
+    "wall_seconds": 240
+  },
+  "source_recipe": {
+    "id": "sha256:23a31c5f586760451e6b9ffc2a96161084c72c569ee49fc3a48a2b69522e7010",
+    "path": "configs/native-teaching/sts2-v0.111.0-a8-comparison-v1.json"
+  },
+  "source_report_id": null,
+  "stage": "completed_main_diagnosis",
+  "workspace": "artifacts/native-teaching-diagnostics/sts2-v0.111.0-a8-comparison-v1"
+}

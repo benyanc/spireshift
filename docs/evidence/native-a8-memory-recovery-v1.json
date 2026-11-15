@@ -1,0 +1,114 @@
+{
+  "adaptive_controller_allowed": false,
+  "additional_seed_ids": [
+    700257
+  ],
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "bounded_verification_and_explicit_recovered_diagnostic_pool_not_new_training_admission",
+  "config_id": "sha256:9ee306d1116615494382ab887ebbbb9a40c9ac865cfd0ef36e9513db4d1399da",
+  "config_path": "configs/native-gradient/sts2-v0.111.0-a8-stream-recovery-v1.json",
+  "control_gradient_error": 4.0115480381963664e-17,
+  "diagnostic_attempts_including_interruption": 257,
+  "diagnostic_games": 256,
+  "evidence_id": "sha256:adecb0e07d6c6e0022064d35222eef847dd97c0d863f2ed227ddd2b28ec1e4be",
+  "full_pool_analysis_started": false,
+  "game_apps_created": 0,
+  "mixed_origin_control_decisions": 422,
+  "mixed_origin_gradient_error": 7.24247051220317e-17,
+  "new_completion_games": 2,
+  "new_control_decisions": 360,
+  "optimizer_steps": 0,
+  "ordinary_training_allowed": false,
+  "original_collector_sources_unchanged": {
+    "engine_experience.py": true,
+    "engine_experience_audit.py": true,
+    "engine_learning.py": true,
+    "engine_learning_admission.py": true,
+    "engine_mechanics_admission.py": true,
+    "engine_neural.py": true,
+    "engine_potion_checks.py": true,
+    "engine_potion_queue_checks.py": true,
+    "engine_projection_cache.py": true,
+    "engine_run.py": true,
+    "engine_worker.py": true,
+    "engine_worker_qualification.py": true,
+    "full_run_policy.py": true,
+    "full_run_ppo_math.py": true,
+    "native_credit_training.py": true,
+    "native_gradient_checks.py": true,
+    "native_gradient_pool.py": true,
+    "native_gradient_study.py": true,
+    "native_input_normalization.py": true,
+    "native_normalization_admission.py": true,
+    "native_normalization_comparison.py": true,
+    "native_pilot_assessment.py": true,
+    "native_value_credit.py": true,
+    "training_objective.py": true
+  },
+  "original_interrupted_seed_ids": [
+    700253
+  ],
+  "original_unstarted_seed_ids": [
+    700255
+  ],
+  "owner_command": "bash scripts/analyze-native-a8-recovered-pool-v1.sh",
+  "recovered_finished_games": 254,
+  "report_ids": {
+    "completion": "sha256:faf09a2f82f2a9a04ab93854aa3219288edf17328a61a4fbd9bd47784d5c3679",
+    "control": "sha256:985f943459989835629b1fd76363309e0bde397c45f4975efabfd5188e03b1c0",
+    "recovery": "sha256:98a0869d57aabe3bed610530be43d71227b475ace23ac2b02074893c982e6c80",
+    "union": "sha256:0dadb308124895db89932f6febd113ebd0d59d776fb90f124c39ff565e4e257f",
+    "union-binding-control": "sha256:e25eb3ce4e40773ecbb6a99ad9053b90d27762d89d82a62ac447311acd4446e3"
+  },
+  "resources": {
+    "completion": {
+      "cpu_seconds": 15.620717253,
+      "final_storage_bytes": 5611666,
+      "peak_resident_memory_bytes": 617463808,
+      "report_id": "sha256:8563700323ae0169f57dc594f817cc1ba991405c3fdbcbc1f3af5664d3c46a1c",
+      "status": "completed",
+      "wall_seconds": 32.380602707969956
+    },
+    "control": {
+      "cpu_seconds": 22.154979468999997,
+      "final_storage_bytes": 3729363,
+      "peak_resident_memory_bytes": 598573056,
+      "report_id": "sha256:ca54fa672f869a44be77ebcb1dc9d75e5b75f032e46f66ad12c2394dd36bac19",
+      "status": "completed",
+      "wall_seconds": 38.247477625031024
+    },
+    "mixed_origin_control": {
+      "cpu_seconds": 2.300920823,
+      "final_storage_bytes": 5692799,
+      "peak_resident_memory_bytes": 221396992,
+      "report_id": "sha256:5aab17594fb8cfedd6f8ca881b86cd27f2ed11d7c15dbfcd55779c1dea181749",
+      "status": "completed",
+      "wall_seconds": 2.9374571669613943
+    },
+    "prepare": {
+      "cpu_seconds": 0.7247004400000001,
+      "final_storage_bytes": 5687565,
+      "peak_resident_memory_bytes": 84361216,
+      "report_id": "sha256:9889b8867118635b346e800f586bb698e92ed5a3fa8b435f604f120f4977be7b",
+      "status": "completed",
+      "wall_seconds": 1.935744957998395
+    },
+    "recovery": {
+      "cpu_seconds": 22.348461523999998,
+      "final_storage_bytes": 430700,
+      "peak_resident_memory_bytes": 116326400,
+      "report_id": "sha256:8a3dc014423c76931d349ed19948d6cc51c7a181bf3cb271dbb72ae14b24add5",
+      "status": "completed",
+      "wall_seconds": 25.150221167015843
+    }
+  },
+  "schema_version": "native-a8-memory-recovery-evidence-v1",
+  "separate_repeated_control_seed_starts": 4,
+  "source_capped_report_id": "sha256:0aded1548e5f1352a1a9432579dfd859730fb2913679f6b1165a790bebb6d591",
+  "source_files_modified": 0,
+  "source_model_id": "sha256:776f8af0338a8ef02c35cae1bdab49c8a6aa48287906b161659a64999f8bdb74",
+  "source_storage_bytes_excluded_from_new_output_root": 211912012,
+  "worker_markers_removed": 0,
+  "worker_workspaces_reused": 0
+}

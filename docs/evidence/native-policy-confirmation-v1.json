@@ -1,0 +1,120 @@
+{
+  "adaptive_controller_allowed": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "four_frozen_players_collector_control_and_reserved_fresh_plan_only",
+  "confirmation_rule": "both_positive_floor_gain_pooled_lower95_positive_no_win_regression_zero_failures_v1",
+  "control_collection_wall_seconds": [
+    5.2314491249853745,
+    5.601441667065956,
+    4.705886084004305,
+    4.721762124914676
+  ],
+  "control_does_not_establish_game_strength": true,
+  "control_report": {
+    "attempts": 8,
+    "failed_games": 0,
+    "id": "sha256:9c5947430d2e648a22ccf8e2a45085dcba16856eca3c0032d6badcccb20fd5c5",
+    "path": "artifacts/native-confirmation/sts2-v0.111.0-a8-control-v1/report.json",
+    "source_and_shared_input_checks": {
+      "seed-2-pair-00-initial": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "seed-2-pair-00-trained": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "seed-3-pair-00-initial": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "seed-3-pair-00-trained": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      }
+    },
+    "status": "native_policy_confirmation_control_pass"
+  },
+  "control_resources": {
+    "cpu_seconds": 48.92930485700001,
+    "final_storage_bytes": 20863982,
+    "id": "sha256:62310a19f4751fd4e218d022986faa8ea14b80d7736adf51136c2f5abefaf8b6",
+    "path": "artifacts/resources/sts2-v0.111.0-a8-control-v1-session-1.json",
+    "peak_resident_memory_bytes": 734658560,
+    "wall_seconds": 69.46281412499957
+  },
+  "date": "2026-10-18",
+  "excluded_native_seed_manifests": 17,
+  "expected_duration_minutes": [
+    10,
+    20
+  ],
+  "fresh_attempts_started": 0,
+  "fresh_config": {
+    "id": "sha256:0e3d9c5969ab95f214f4a42c1ed6ade6e66bf8e864af4ce8bb567998b5f711a9",
+    "path": "configs/native-learning/sts2-v0.111.0-a8-policy-confirmation-v1.json"
+  },
+  "game_apps_created": 0,
+  "historical_model_states_unchanged": true,
+  "historical_source_seals_verified": true,
+  "optimizer_steps": 0,
+  "planned_fresh_attempts": 256,
+  "players": [
+    {
+      "model_id": "sha256:07c472de121965eb6f7f582d0918dd7f12997d5dfbc053d966e22055590616ba",
+      "numerical_seed": 2,
+      "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/chunks/seed-2-standard-initial/state.json",
+      "sha256": "7da154073b45ef9ca34ff4224f61fcd3638a329c0f2a9516cbcb564adbe57963",
+      "state_id": "sha256:161a8879f4583e9c712474ac4c55c468255b4114fbab440bc1107cc263e4a182",
+      "version": "initial"
+    },
+    {
+      "model_id": "sha256:f704ed48395466b1699db4a60d432ebfa38e4fcf549d111b8f2a102d7def3495",
+      "numerical_seed": 2,
+      "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/chunks/seed-2-standard-batch-016-fit/state.json",
+      "sha256": "5bfff55e5089b9a492ea3a8f5a44889f4cd2562164b71ddc13693dd0ea1980de",
+      "state_id": "sha256:cf8c28a8b6cba0cb6afdd600feac7d0a4e34e1e1ce7fce4bac5b198754353327",
+      "version": "trained"
+    },
+    {
+      "model_id": "sha256:41ff11b4519e8a107c49afbfdeec35e9a6bef05cbd3b6d3c983bf9b57e213e92",
+      "numerical_seed": 3,
+      "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/chunks/seed-3-standard-initial/state.json",
+      "sha256": "319a8ae2e55635ff56eaaa9f81870c4865277e0350148d5a5c49ef015560cfd6",
+      "state_id": "sha256:1832617ada3580c5fa839bbf62e5c8c12f7135e127bbb4f7a033427c80723115",
+      "version": "initial"
+    },
+    {
+      "model_id": "sha256:7fb879faf3292f40cc9ca122214a3cffa3794a27815a5415e70cc4971bde7827",
+      "numerical_seed": 3,
+      "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/chunks/seed-3-standard-batch-016-fit/state.json",
+      "sha256": "c24d6e668ec474a333ab7e9ce40039bc8197ac862a133b06cb8a533c50e1c566",
+      "state_id": "sha256:ca3bfe4b2c86459ac28797a4b01a59ff7323eb538bc61f50a8667fb6dffef188",
+      "version": "trained"
+    }
+  ],
+  "report_id": "sha256:db70adda77bf0f52ef0c5e4879a56e593d8aa38cc8e7b8ff402fe67c6635a58b",
+  "schema_version": "native-policy-confirmation-preparation-evidence-v1",
+  "seed_manifest": {
+    "id": "sha256:9b95791c9307624f5e2d6f439a6f6042b3dafe318830998d3d6d786a8eedd772",
+    "path": "manifests/splits/sts2-v0.111.0-native-a8-policy-confirmation-v1.json"
+  },
+  "source_report": {
+    "id": "sha256:5be34f750d8bbe3fc17066446e556c403cf3bc5be8cf985eda2fa8a71826ea44",
+    "path": "artifacts/native-optimizer/sts2-v0.111.0-a8-learning-curve-v1/report.json"
+  },
+  "unique_fresh_seeds": 128
+}

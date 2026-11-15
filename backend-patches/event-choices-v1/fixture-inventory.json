@@ -1,0 +1,793 @@
+{
+  "schema_version": "event-choice-fixture-inventory-v1",
+  "source_revision": "37e4264115546b6ac640d54aab3d7e2ac6983d2d",
+  "game_version": "v0.107.1",
+  "steam_build_id": "23811903",
+  "ascension": 8,
+  "seed": "ABCDEF",
+  "files": [
+    {
+      "path": "AbyssalBaths-opt0.json",
+      "sha256": "690366ee7255256d4ff0fd87a54f2b180b003da9f00e8cc93ec6fe916b362858",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "AbyssalBaths-opt1.json",
+      "sha256": "0bf4a652011c9c7958e90cf21b48b2596394dcb3a3e30ce811c841e8c3f64b90",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "AbyssalBaths-options.json",
+      "sha256": "c94a6a198d410fb1b784f3cefb4fa4a11e90a8c8379c3b2a0e4a66342778fa17",
+      "comparison": "initial"
+    },
+    {
+      "path": "Amalgamator-opt0.json",
+      "sha256": "ac5e232954ecee5fb2ab73d5ec347c96aca579eb14165afd3fb64795ba121503",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "Amalgamator-opt1.json",
+      "sha256": "61dfc5e328448d8008c1b6c304913473df30c19fdf7327e47f4de120249318af",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "Amalgamator-options.json",
+      "sha256": "f40544f0e487f71aac0c9ad2c73b574d71956725ced3f3ea56aaa536f01e66a7",
+      "comparison": "initial"
+    },
+    {
+      "path": "AromaOfChaos-opt0.json",
+      "sha256": "e767f9a35f8239d1bb77943f666ab6ba93506dc74049313669dc08ae003f7fe7",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "AromaOfChaos-opt1.json",
+      "sha256": "3e5f5470088fb0f4350775db7dec58d04c74dcb362dc88f267e2779a71d28fbc",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "AromaOfChaos-options.json",
+      "sha256": "1e261aecbbe30f8b7433786a47e5d48e6bb0b1bce3f85908d967bd5e1de6dfc9",
+      "comparison": "initial"
+    },
+    {
+      "path": "BattlewornDummy-opt0.json",
+      "sha256": "7e15aeb9e042e775bd81d1e4c96dd3748a8bd717f6371ff6cbedaad3c7c14bf6",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "BattlewornDummy-opt1.json",
+      "sha256": "2695e11b83330056b9198045088e06c429ecfecc57ff9e359d2f2e7f366eb711",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "BattlewornDummy-opt2.json",
+      "sha256": "dbd4beefe1e25564bcf6f7ec3373b13de90f4fc5d355ef183ea4a84991a0fa9a",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "BattlewornDummy-options.json",
+      "sha256": "ed740870b2400f6b17f422fa7ca3cab3971dbe8c252f3f9b0596cb294a333bc3",
+      "comparison": "initial"
+    },
+    {
+      "path": "BrainLeech-opt0.json",
+      "sha256": "c83a56cc1388e967d6ceea612cb8d58ab206b9c47a518a3d67f1f7e8faadcbd3",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "BrainLeech-opt1.json",
+      "sha256": "d232e32f334eb598362cb55c5bb03afa9365b8ba4a8d75fd0b65e6b19f357bc4",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "BrainLeech-options.json",
+      "sha256": "13b89bd981e6228f7b82e7b5ea51513bdb1141cdff11f174d654b730dd78e7ee",
+      "comparison": "initial"
+    },
+    {
+      "path": "Bugslayer-opt0.json",
+      "sha256": "ed569236266b8b5613e67beb685450f0d0b9e552b9b1edc7621fc4d59582d069",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "Bugslayer-opt1.json",
+      "sha256": "15ca2df6a27166c362a102244e4360a6f0179f074a93b3168dda7a35632ed422",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "Bugslayer-options.json",
+      "sha256": "7bf36f21e51163f189ea828eb39f321a22c38a060ec2d83be34fa8f76efd133f",
+      "comparison": "initial"
+    },
+    {
+      "path": "ByrdonisNest-opt0.json",
+      "sha256": "9dc60eace5dcd3a0473db4d06bb80c5ac73af159a21327286c19c3f4878db291",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "ByrdonisNest-opt1.json",
+      "sha256": "aac59975e3f2e8a2fef301db2d75749e919696f35631eb4761e80348a2d360fc",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "ByrdonisNest-options.json",
+      "sha256": "520c361743112bceb1ec22994f3004d039eaf6fb51562b90f5b588734c5f3467",
+      "comparison": "initial"
+    },
+    {
+      "path": "CrystalSphere-opt0.json",
+      "sha256": "ea1bab23e61783285d11607f49d312f0ce8e6f93160ffc6ce1fcc076a442d7dd",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "CrystalSphere-opt1.json",
+      "sha256": "00d3503246dc9931a29845e58483e33c16b94b470e6b432d14bca288142892cc",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "CrystalSphere-options.json",
+      "sha256": "e7772dcf5d59e51c0f6c5542a7cb92eac3262623e6819c4ba5ae6686c9f832df",
+      "comparison": "initial"
+    },
+    {
+      "path": "CrystalSphere-sphere-curse.json",
+      "sha256": "6781f45efafc4101f609ae912fe8d55a8d3c61b6b84885b1906463b7cd7ad46b",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "CrystalSphere-sphere-gold-card.json",
+      "sha256": "17b14303c34c2b66ff65783413498b4d5d5948619ef1a026d6bc92d5dfb9894b",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "CrystalSphere-sphere-relic-cards.json",
+      "sha256": "e3298b081aaccb582062dfeccfcbe6053b4589d81a3d5612789e22f54b8cfc7b",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "CrystalSphere-sphere-relic-potions.json",
+      "sha256": "c94e3b4349b8f9ab75166cc9da1e6965cc1975173824607c8cdfdf0990094dd1",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "CrystalSphere-sphere-small-tool.json",
+      "sha256": "e40b1ee6b221db0fbe45dc16e153a25ff76b4cf015c108ff3e3c01b5244a262a",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "DenseVegetation-opt0.json",
+      "sha256": "37eaf478e2e28ff441bcf5cb87cd936370a705c89c4c2db6e53353515e341081",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "DenseVegetation-opt1.json",
+      "sha256": "569affcd9ffdbfcd9c373c39d8a8987c3c98189c1838996904358e4e0b1a06f4",
+      "comparison": "unsettled_event_after"
+    },
+    {
+      "path": "DenseVegetation-options.json",
+      "sha256": "eea7ab8ee0602d578a0ec2229c4e2422c9adc648fd250d5e00f205387255c9ed",
+      "comparison": "initial"
+    },
+    {
+      "path": "DollRoom-opt0.json",
+      "sha256": "d3b32c3da575d6b8526c7c944e8090d4c612a6b68ae1cd8eb1fd574265920c2d",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "DollRoom-opt1.json",
+      "sha256": "3ac31a641d8c28b6136264012f2e7f3412888f3637ab553dfeb63c6edb2fd016",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "DollRoom-opt2.json",
+      "sha256": "d2e7fcc3a967a0240fce279fafea27e1c03a9db185c54ea6ae89d0b5eea9b087",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "DollRoom-options.json",
+      "sha256": "4c8a4f06beb75b35d9557fdc3f63ad80401d2adc05235d7c255800a395d1bc23",
+      "comparison": "initial"
+    },
+    {
+      "path": "DoorsOfLightAndDark-opt0.json",
+      "sha256": "55186784c2cdafb4e34eee331e9d50f10a8ab9899dd51b35e8a79c6635c79e6d",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "DoorsOfLightAndDark-opt1.json",
+      "sha256": "d1e15d8248e2a514b3bb65c438251840609ac9d89adfb33b70fbe768da6dda66",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "DoorsOfLightAndDark-options.json",
+      "sha256": "3ddc65e48f591336e155a5a9562c0b7425fdddc3d4febf552f316d014c2a4521",
+      "comparison": "initial"
+    },
+    {
+      "path": "DrowningBeacon-opt0.json",
+      "sha256": "fcb390cc734a6c08bb212ca8c320a4ababaa3dae712b6da887cd2bad40ed8edc",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "DrowningBeacon-opt1.json",
+      "sha256": "6a57e315acaf9b2a903e224c94d7f5a9639dcebd541fc44eab0b930a80b7d1b6",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "DrowningBeacon-options.json",
+      "sha256": "0e5bb2ebbdf9fa6054d3b4d523dd4466c4c498132671f5d794de150768cee69e",
+      "comparison": "initial"
+    },
+    {
+      "path": "EndlessConveyor-opt0.json",
+      "sha256": "7c40eb484a65f2707c8b534f013d43c74058a27e3be7bc670e8a914c9326a5ab",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "EndlessConveyor-opt1.json",
+      "sha256": "1a23f2000ce51a20f6fe293800526a8c4b0c267b1d907a2a70a3c4328ac814c8",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "EndlessConveyor-options.json",
+      "sha256": "ffe7f3e25b77ce038720d6388616fde1da34b55c5c22b311b0ec77133247d826",
+      "comparison": "initial"
+    },
+    {
+      "path": "FieldOfManSizedHoles-opt0.json",
+      "sha256": "9ebc73ef6718914e91f81717a447a8e0f1a71f582b10b1f1ac2ecb6b86ade53e",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "FieldOfManSizedHoles-opt1.json",
+      "sha256": "17df4d6aa2a69e7edbd10cb1a519eb0333235cc9c2dbe7b3bf46551ff5d2b622",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "FieldOfManSizedHoles-options.json",
+      "sha256": "df7c13898320313374328f0a12b4635de09a8c6567647f9202f91445144fe9c8",
+      "comparison": "initial"
+    },
+    {
+      "path": "HungryForMushrooms-opt0.json",
+      "sha256": "b3d1ab2c7ec16da43d342f888cf905cce5f9ac3fb5aa709ff56bdae0d57722c3",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "HungryForMushrooms-opt1.json",
+      "sha256": "9d20ccdcae8cbc03529a0f54113da801f057a8aef13a28e637f6b72ef8722c2c",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "HungryForMushrooms-options.json",
+      "sha256": "1283fb7ae2a7c8e095fbc035638ea90fd5b44f9a99cf6baae0843696b42d1935",
+      "comparison": "initial"
+    },
+    {
+      "path": "InfestedAutomaton-opt0.json",
+      "sha256": "387e3be946b29b57d763d09209b56c89971dfc16b0d485d53f41b6dbd89638d5",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "InfestedAutomaton-opt1.json",
+      "sha256": "0318776a5d2c852faa7a25144bb82c4c010b4369209f991378c3146a837ce03a",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "InfestedAutomaton-options.json",
+      "sha256": "efd48ec998f4aa6a5138de730d8a6cbe10c19e62ce293131ec9df2dad824be32",
+      "comparison": "initial"
+    },
+    {
+      "path": "JungleMazeAdventure-opt0.json",
+      "sha256": "511f54bc4c52b45b8c2d1c63d04cbe59c6d71cdf886d50151f943440b3513d43",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "JungleMazeAdventure-opt1.json",
+      "sha256": "cf2fd59d09af5823b8d67338494867c6b2ffa7a1557f45863b8fdfe9ff5671c1",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "JungleMazeAdventure-options.json",
+      "sha256": "4838f6017b3a47a91c5e4229dbd9aab74790c1df5f036eac0eb52a47ddede871",
+      "comparison": "initial"
+    },
+    {
+      "path": "LostWisp-opt0.json",
+      "sha256": "9f7ea538e4568fe6f354b096735d9f4f835bac4251bea5af4a4db0d67416c8bd",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "LostWisp-opt1.json",
+      "sha256": "fd4ecbab3337f7c9c5eb42638beb7e25bf4f4e184df9b8ab3efbf3e0d83775e4",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "LostWisp-options.json",
+      "sha256": "d01084e12c5fb4f010eeb82ce2551f0d4431354b986b849618b50155c2fc3675",
+      "comparison": "initial"
+    },
+    {
+      "path": "LuminousChoir-opt0.json",
+      "sha256": "fd083a62abc96fd1b7b4655b083231e97111bb7381d142c52f42972408cb16bc",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "LuminousChoir-options.json",
+      "sha256": "30d546f79d70021304664ed7be2fd4e8e922498c12c6b89e5b172520e7dc1b6d",
+      "comparison": "initial"
+    },
+    {
+      "path": "MorphicGrove-opt0.json",
+      "sha256": "0715d1f04cc200ac416fff75479d3b6e0738a0c97ce04043d4488066be6bb565",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "MorphicGrove-opt1.json",
+      "sha256": "812e7c5655762568418ae09d13dc941fa7d09809d47b0b0928b5901d6bb026a9",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "MorphicGrove-options.json",
+      "sha256": "7464e7b861a2ba0155194bf72e7e92cad7595994b17a15cba18c99fb4911fa3c",
+      "comparison": "initial"
+    },
+    {
+      "path": "PotionCourier-opt0.json",
+      "sha256": "28ce4597f98d680d09d58ac4a95cd82b33bc0309f8e2a4856274dbc748bfdbc0",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "PotionCourier-opt1.json",
+      "sha256": "7eab84af4942a98ecdd5d89066fc5285198d016259ed005de6b6290b44173436",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "PotionCourier-options.json",
+      "sha256": "8c33118b5a55eafb0a3c66e77cfed85e9ce7fbbacc32ddfbef9afcc300ec23ea",
+      "comparison": "initial"
+    },
+    {
+      "path": "PunchOff-opt0.json",
+      "sha256": "09a6774caf9947ca861ca162251d44c6bfc9df67a618774f5a248cc10797e9be",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "PunchOff-opt1.json",
+      "sha256": "6ace9de4fe89614c43493cdb022819cdb1b651ffe703230ac5df7f6f2bf95184",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "PunchOff-options.json",
+      "sha256": "9ff30c8490c87f51f4338962462f8dbda85498fef7a8bce4c09cf1950ee91ebd",
+      "comparison": "initial"
+    },
+    {
+      "path": "RanwidTheElder-opt1.json",
+      "sha256": "30e49c93dedbc439444ed0081c07c0badc08c4142f50fffb54dab3f5ee618b17",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "RanwidTheElder-options.json",
+      "sha256": "6f557af1c80ad64992580bc6299fd7cf38484477817f0cc7821cfac418895ef8",
+      "comparison": "initial"
+    },
+    {
+      "path": "Reflections-opt0.json",
+      "sha256": "20afb63854952d3852535bb135a2b3470a9cd107571339eb6385ac16fd9d6177",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "Reflections-opt1.json",
+      "sha256": "652f4b4bf4cfc34c25ab2f05b0688f03f59171499e39e8910b123518029f78c1",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "Reflections-options.json",
+      "sha256": "f546c9e376227d97ced0ebdd618637a30738945dd4f3fe39f259edd4ef524ec7",
+      "comparison": "initial"
+    },
+    {
+      "path": "RelicTrader-opt0.json",
+      "sha256": "75e85cd09ce745d4003f60f32b9effc92287abf3b9578da502bfb1789f75a27f",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "RelicTrader-options.json",
+      "sha256": "bb25f19453fe2731061f54c31251832cc8b90189fe5ea487f22562f3e6e574be",
+      "comparison": "initial"
+    },
+    {
+      "path": "RoomFullOfCheese-opt0.json",
+      "sha256": "35aa18c8068e75f8ef09ce61eb34a37b3d706a2c2338b677e7a71cf6142b959c",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "RoomFullOfCheese-opt1.json",
+      "sha256": "1bb83fa1dbb9197c1ea8041b52afa2f073d5e513b06fadbe609909fe7a2e1250",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "RoomFullOfCheese-options.json",
+      "sha256": "61cfc50b9abbe2978c2597ee1c2ee42166269fdd7205df3c31eb5bb9c2cf3f40",
+      "comparison": "initial"
+    },
+    {
+      "path": "SapphireSeed-opt0.json",
+      "sha256": "027007ea0a84de52b236703365f43a04da162f6ef687e5fd9cb45f0da9888eea",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "SapphireSeed-opt1.json",
+      "sha256": "78bbb58afc237a7e11dc1bfaa86d5852106556d5efa2bc2c87e2f7edefd715b6",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "SapphireSeed-options.json",
+      "sha256": "74c086e675030c947dc461c71c7eb56c95d463da5dab20deabc2b561ed1108a7",
+      "comparison": "initial"
+    },
+    {
+      "path": "SelfHelpBook-opt0.json",
+      "sha256": "ba5b1fc83d9693821b3e0485ec6441bac2f0e38594ef9be273c0b6d27cd1b8ac",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "SelfHelpBook-opt1.json",
+      "sha256": "029f8a27844f228ca8690e5979ce52dfc248e32d66efe90a5c4879bca06d4fe9",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "SelfHelpBook-options.json",
+      "sha256": "a9c7e0c593860c9df479c4cdac37ca7938d0cd7de7f6e00fd41a89646de963b4",
+      "comparison": "initial"
+    },
+    {
+      "path": "SlipperyBridge-opt0.json",
+      "sha256": "0620eec94e0fab727c6fdfc2b1a6dbd3af487d5cd0d6c510e469b047c2f11ec8",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SlipperyBridge-opt1.json",
+      "sha256": "2588affc3dc966b77e1ce74c4e52c731dfe8143337a5e952e1e1d6c1ee76b30b",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SlipperyBridge-options.json",
+      "sha256": "f83680ec58255381090dab1fc90b5c06cef24dcb52757cc4b572b415477fa28c",
+      "comparison": "initial"
+    },
+    {
+      "path": "SpiralingWhirlpool-opt0.json",
+      "sha256": "1242cfdb6158edb892cf383c2893b08ab8c86c6548f57109a7bc4ecf1e1462ef",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "SpiralingWhirlpool-opt1.json",
+      "sha256": "bf0e6d24557074b534d2ade8e1813f7968037d1fd88799d71fe5782815a3dbe8",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SpiralingWhirlpool-options.json",
+      "sha256": "02b8f602f9769a7b5ea37c947f26e6fe9da0043b130a8290f157c324d5d1d19b",
+      "comparison": "initial"
+    },
+    {
+      "path": "SpiritGrafter-opt0.json",
+      "sha256": "72ce0007f1a90c3078a0a73f7243fd7fbe855e968d794e3a5ab6df7aac477807",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SpiritGrafter-opt1.json",
+      "sha256": "468f2fcb875359ec429d17f08d5c349b9678f35794f426982fcb74615bc2b87e",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "SpiritGrafter-options.json",
+      "sha256": "d55f246ad652b27069467ef51e0654c2812d3ea0d0fa5a8b2ef99f1754c98e33",
+      "comparison": "initial"
+    },
+    {
+      "path": "StoneOfAllTime-opt1.json",
+      "sha256": "c45c329958045f329f5f22e4d8eef9629e2290de93fb4d533f3c339eb8027edf",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "StoneOfAllTime-options.json",
+      "sha256": "fddb02e9f9803f932e1a7e069fad92bae99fbb7747727232f64205e03dc116eb",
+      "comparison": "initial"
+    },
+    {
+      "path": "SunkenStatue-opt0.json",
+      "sha256": "725224095f3715e469ae39a5347da01eedd67003637cba0b3f56450eafcf9189",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SunkenStatue-opt1.json",
+      "sha256": "b2c950f12631d8c498af9fe08259f31c26c0c9a503da6ea7246750bd855ad44f",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SunkenStatue-options.json",
+      "sha256": "b40f57b38d3ef1277605de6769d73698324a78a9123d86c4744fe034faa0033f",
+      "comparison": "initial"
+    },
+    {
+      "path": "SunkenTreasury-opt0.json",
+      "sha256": "e43e419cc37068e98f175188f87b15b573d9aa7efb7e527c9f01a8b93dc89699",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SunkenTreasury-opt1.json",
+      "sha256": "ed5f66b845058e388d40d1c0ccfb9e20032bf09c78e5a143f1390b80f92534b3",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "SunkenTreasury-options.json",
+      "sha256": "0a81ee3088da5467a81392a968d6acdb9e0857c502960f9d7f2028f3abe197b4",
+      "comparison": "initial"
+    },
+    {
+      "path": "Symbiote-opt0.json",
+      "sha256": "07956cc6ac68c5262196bd293776ffe2604e6a23315f36d6a7738e8b95dff95a",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "Symbiote-opt1.json",
+      "sha256": "0e25118087582478e5b5b2fe8346f5c2453a1ed038b152976e4e668b3c2ee216",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "Symbiote-options.json",
+      "sha256": "db8938472559760408bf700042afec6b25904f38060057a59768cba0ca579f63",
+      "comparison": "initial"
+    },
+    {
+      "path": "TabletOfTruth-opt0.json",
+      "sha256": "b94f1e691e9f75afc95120ccec9826fbb777f35bba68d3bbfcc7cf7d10346d72",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TabletOfTruth-opt1.json",
+      "sha256": "3111be2f21afad97e7ab423d3d01868f113117f491aa8859be8d987cbbc06eee",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TabletOfTruth-options.json",
+      "sha256": "71b969da86ce02b63d50273e85adf75887d17d01d0adac5b41eb2de8f718dd89",
+      "comparison": "initial"
+    },
+    {
+      "path": "TeaMaster-opt0.json",
+      "sha256": "d25a8ca0b7ebd7f0f0d2dc24e587b63e41b19cbdb617c3b29b168054aa96e457",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TeaMaster-opt2.json",
+      "sha256": "9e414067f6b78be010c83f8b81c0e263b16f1a755bf016bdad472a11c81d72db",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TeaMaster-options.json",
+      "sha256": "2852e8f007480c1d6bdb4eb0b4433dae14029fd849005e8349776425b8c59aa2",
+      "comparison": "initial"
+    },
+    {
+      "path": "TheFutureOfPotions-options.json",
+      "sha256": "c810f8ac0a5e99a9e95e910003099d1b2477cd68da3f94bb438e343d3de8f987",
+      "comparison": "initial"
+    },
+    {
+      "path": "TheLanternKey-opt0.json",
+      "sha256": "9fe3b29bdb7056a0d8bb207f7e8ff5e044759e9421f5153c8af1c8c43d4a03a3",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TheLanternKey-opt1.json",
+      "sha256": "5b0347d4e4ddefd27da3e3782ff30d659dfdd2ac7326bee92a61887bdf674efb",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TheLanternKey-options.json",
+      "sha256": "e695a98d327ffe1d8707ac570401d9b14642c13513be6abce6505aa7d8ceeecb",
+      "comparison": "initial"
+    },
+    {
+      "path": "TheLegendsWereTrue-opt0.json",
+      "sha256": "80f2bdc58b992a68bd1ab50841233dbd8f5ec0e6c5577a3003a59cdb67fdda8c",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TheLegendsWereTrue-opt1.json",
+      "sha256": "2a8ba78aabc7ea155a4e9f2fe09ea6d4609ac0d69663f1a1f29de1b3494a23aa",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "TheLegendsWereTrue-options.json",
+      "sha256": "17c3e1d7cd78273a86036e273b8f97495c4b7202731a96c369a60af13f54b7fa",
+      "comparison": "initial"
+    },
+    {
+      "path": "ThisOrThat-opt0.json",
+      "sha256": "1d7375b485cf6a81f9bcfd6eaebcc3d085d8cbc5f870af5751526b58bb8419a9",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "ThisOrThat-opt1.json",
+      "sha256": "08f0d6a8deb0f0af15e3b3a9684bce0f9d7e10385110bcab4b4bbfd7eefc1569",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "ThisOrThat-options.json",
+      "sha256": "d682cc389070a112144903404bfd0bfd4bd41887b125ad1426621070e59b28ba",
+      "comparison": "initial"
+    },
+    {
+      "path": "TinkerTime-opt0.json",
+      "sha256": "1a790dc93fe662d230d5ef1e34b5edd0d1546091d86b34b2afeee0458c22f8c3",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TinkerTime-options.json",
+      "sha256": "98bb151015fcc7c4cdb18f166e89fb1bcb043d5e8a782243170bdd532c8777c1",
+      "comparison": "initial"
+    },
+    {
+      "path": "TrashHeap-opt0.json",
+      "sha256": "65f2226b0c8c5c20d645b8c552cea506a771d8507b5bbb73b83a2f7e78153986",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TrashHeap-opt1.json",
+      "sha256": "470e04fb5eec49c6fc5b2e5f02005081741fa9311196a9922e080bd7c9fe94ad",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "TrashHeap-options.json",
+      "sha256": "f383fe712c6bd35819ee4d7ed6830a5a2f0928e7cbfb5519da8c4db24465b886",
+      "comparison": "initial"
+    },
+    {
+      "path": "Trial-opt0.json",
+      "sha256": "1edf28a58f328764f8a8d0618e57cb627c1968391addc050028718ff6465da4e",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "Trial-opt1.json",
+      "sha256": "3af768436ec6480455ac07d9a3c8d4732aeb78bf5c7d3447b8e9f13b1bdc8570",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "Trial-options.json",
+      "sha256": "7118897e79dbc3f4d9002ea06b015c9ca4607bfc17c6334be2d425b75358a379",
+      "comparison": "initial"
+    },
+    {
+      "path": "UnrestSite-opt0.json",
+      "sha256": "73ffd4a589f5e423e046f66fec16d826b0b3718e237cb0658d7d6dfdf5ef522f",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "UnrestSite-opt1.json",
+      "sha256": "2456ce2a2ef7246c7630cbfd9580cce28b721e0245f298a84b53fc6e9c9763e4",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "UnrestSite-options.json",
+      "sha256": "b2fc3b489705d13ead6e947fc36391988f7e1d591c6ab929116bcacd1d70adaa",
+      "comparison": "initial"
+    },
+    {
+      "path": "WarHistorianRepy-opt0.json",
+      "sha256": "fbf41d3c1737fae49486055cd2664839a8647723ce0d999e3b4f19cd59b1f09f",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "WarHistorianRepy-opt1.json",
+      "sha256": "a379efa5426308263e36f872a2b6e28fd7ec050eb8712faf62d353420db05425",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WarHistorianRepy-options.json",
+      "sha256": "e198f747d4f62a29c9b635fde420a4e53e0b42539cf104711cac7aa9158b5d5f",
+      "comparison": "initial"
+    },
+    {
+      "path": "WaterloggedScriptorium-opt0.json",
+      "sha256": "e9718df3676d465e713ded1041a64dd6ff39aca66e0201cb6e51f639e783d5e4",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "WaterloggedScriptorium-opt1.json",
+      "sha256": "aefb08a7c779b806fa996fea1ec4cf14b8d101c6ce909e3f6c22ac6b3b829741",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WaterloggedScriptorium-opt2.json",
+      "sha256": "7e20aa9066e8cc17e893c91bb80a98e6052bcb5b361dddd75c990bdd76ea0ebf",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WaterloggedScriptorium-options.json",
+      "sha256": "2032713d36de18c7e57338f31a834246a8d1ed7f4b353f95910ca9ec25b1aa5c",
+      "comparison": "initial"
+    },
+    {
+      "path": "WelcomeToWongos-opt3.json",
+      "sha256": "f89f698311056f974b39ed923d1a948354b8b92eedcd6733d835e4cf929136f3",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "WelcomeToWongos-options.json",
+      "sha256": "a35966e018fdbf84d94bbc63da41bf6be32b1e183dea4c37e1f041920322d33e",
+      "comparison": "initial"
+    },
+    {
+      "path": "Wellspring-opt0.json",
+      "sha256": "b02c1b165f60195eff3383957f0907eadaebe74a56364b6b6744a717477e5dc8",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "Wellspring-opt1.json",
+      "sha256": "ac3a7eebea26f73f0ced989236cb8e0de3059931bfe66716d0c731d96b112465",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "Wellspring-options.json",
+      "sha256": "8a8c28e38f7637c8e8480813825e22f9929384b17e8d7ffdf9481b85c383e96c",
+      "comparison": "initial"
+    },
+    {
+      "path": "WhisperingHollow-opt0.json",
+      "sha256": "7cf0594de733214da16ce3bf7a46e2aa7fba6187e6075baebba7961c77823fcc",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WhisperingHollow-opt1.json",
+      "sha256": "cf88b2baa7c0312eecdf2f6870cf70508462804aad1240783a519cb5aee7372f",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WhisperingHollow-options.json",
+      "sha256": "1d40c38fba1ee0a64313635e0bb9aa48b35892c70c9fe67a4b80fc7351fcdbd0",
+      "comparison": "initial"
+    },
+    {
+      "path": "WoodCarvings-opt0.json",
+      "sha256": "dd57a73f81c8eb962eb428ad83b8bce5507ed9e7133d9acd9ec9dcf2f749f58a",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WoodCarvings-opt1.json",
+      "sha256": "fbe3ad9d2067b4e8d7cb091c4ff9ee0a258b7602e97804a86e88717cbf97dc81",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WoodCarvings-opt2.json",
+      "sha256": "d06344222d5b87b5ab8180fa39311c86654e5746f6e3927dda261c158a276a74",
+      "comparison": "other_screen_after"
+    },
+    {
+      "path": "WoodCarvings-options.json",
+      "sha256": "f75e0d77206dfc5039510bd3dc5ae5453355cb0a0d11d3dd7dd7bfec35239bcf",
+      "comparison": "initial"
+    },
+    {
+      "path": "ZenWeaver-opt0.json",
+      "sha256": "6ca4d4437ba79a006fc5b466b61aa034d2d71fe9836cdb8b0edc576d08099ae0",
+      "comparison": "settled_event_after"
+    },
+    {
+      "path": "ZenWeaver-options.json",
+      "sha256": "9d83a4061ac1936bee5fd92cafc15ca1e56cab0e227aef2ed72cd95424c559ea",
+      "comparison": "initial"
+    }
+  ],
+  "unsettled_exclusion_reason": "DenseVegetation-opt1 was captured before its committed fight page settled, as documented by upstream EventCaptures.g.cs. Its initial choices and outcome effects remain covered separately.",
+  "claim_scope": "captured_initial_and_settled_event_choice_masks_only",
+  "inventory_id": "sha256:d9acc4ca2dd8247393a73c0c761f38aba2a4df608a66077d9e7d265f64822a5a"
+}

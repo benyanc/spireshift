@@ -1,0 +1,230 @@
+{
+  "admission_preflight_failures": [
+    {
+      "agent_games_played": 0,
+      "cost_known": false,
+      "native_profile_resets": 1,
+      "optimizer_steps": 0,
+      "reason": "looked up findings instead of source_findings in frozen rule audit",
+      "resource_report_id": null
+    },
+    {
+      "agent_games_played": 0,
+      "native_profile_resets": 0,
+      "optimizer_steps": 0,
+      "reason": "unsupported resource kind validation rejected by parser before execution",
+      "resource_report_id": null
+    }
+  ],
+  "admission_report_id": "sha256:95a4c57eab6384df72bc0a5ed0dd6eaa888e84fa56241b476b1adb0ed0f2fd41",
+  "checkpoint_promoted": false,
+  "claim_scope": "scoped_simulator_admission_and_short_learning_pipeline_compatibility_not_playing_strength",
+  "evidence_id": "sha256:182c75cfee2c2205843d0e162c8526f7311ef46027c054b44fdadb5af07a6cee",
+  "foundation_readiness_established": false,
+  "games_or_optimizer_steps_started_by_this_document": 0,
+  "native_pipeline_checks": [
+    {
+      "all_episode_costs_known": true,
+      "attempts": 12,
+      "cpu_seconds": 14.51973035,
+      "decisions": 1335,
+      "failed_attempts": 0,
+      "initial_development": {
+        "benchmark_denominator": 2,
+        "completed_runs": 2,
+        "completion_rate": 1.0,
+        "failed_runs": 0,
+        "fitness_rank": [
+          0.0,
+          0.024425287356321837,
+          1.0
+        ],
+        "mean_auxiliary_progress_return": 0.024425287356321837,
+        "mean_completed_acts": 0.0,
+        "mean_maximum_floor": 10.5,
+        "mean_training_return": 0.024425287356321837,
+        "missing_runs": 0,
+        "recorded_cpu_seconds": 1.6876679999999995,
+        "recorded_decisions": 217,
+        "recorded_runs": 2,
+        "victories": 0,
+        "victory_rate": 0.0
+      },
+      "optimizer_steps": 24,
+      "paired_development": {
+        "both_completed": 2,
+        "champion_only_victories": 0,
+        "claim_scope": "paired_independent_development_not_final_test_or_foundation_readiness",
+        "initial_only_victories": 0,
+        "mean_maximum_floor_difference": -0.5,
+        "planned_pairs": 2
+      },
+      "protocol": {
+        "adaptive_controller_allowed": false,
+        "automatic_followup": false,
+        "checkpoint_promoted": false,
+        "claim_scope": "sampled_a8_ppo_bootstrap_with_frozen_independent_greedy_development",
+        "config_id": "sha256:5f81bb37966574e97c3d64e93d40159eec9618d40f109ffecaa5f29aa0d51526",
+        "experience_implementation_id": "sha256:5f2dbf2cb2ba6907460c058e3ce6363e5811826826d015b9affde785843c9321",
+        "final_test_opened": false,
+        "ruleset_manifest_id": "sha256:ab32cf7075c080ec1f0104bf9feac17299361e345161daaf8e7a5febd863bacc",
+        "runner_source_sha256": "e6d45a06d8a3b02384bcdbc54f9c77a3f46d08b639d94e7e87aae16da8bfc808",
+        "split_manifest_id": "sha256:1cd5a17e8141612ff76bd3e7057be3b60b038d09135ffdf9cc0070923269f666",
+        "training_spec_id": "sha256:5f06c3d14b2cf11059aff0b20ec31d46ca8f74cba830b125d96d051d121958b3"
+      },
+      "report_id": "sha256:8c3d5db7dc007cff394fe2e9589b69a9f160f96ba91b451039e20f5412e670e5",
+      "resource_report_id": "sha256:46e399ea7524aa91297a6555562f328dceaba0e82a8e26984422165fb7c497fe",
+      "sampled_decision_families": {
+        "card_selection": 2,
+        "combat": 274,
+        "event": 18,
+        "path": 23,
+        "relic_selection": 40,
+        "rest_site": 1,
+        "reward": 9,
+        "shop": 1
+      },
+      "sampled_decisions": 368,
+      "sampled_non_argmax_decisions": 197,
+      "selected_development": {
+        "benchmark_denominator": 2,
+        "completed_runs": 2,
+        "completion_rate": 1.0,
+        "failed_runs": 0,
+        "fitness_rank": [
+          0.0,
+          0.023519490254872565,
+          1.0
+        ],
+        "mean_auxiliary_progress_return": 0.023519490254872565,
+        "mean_completed_acts": 0.0,
+        "mean_maximum_floor": 10.0,
+        "mean_training_return": 0.023519490254872565,
+        "missing_runs": 0,
+        "recorded_cpu_seconds": 1.5556140000000003,
+        "recorded_decisions": 200,
+        "recorded_runs": 2,
+        "victories": 0,
+        "victory_rate": 0.0
+      },
+      "stage": "short_native_pipeline_check_v1",
+      "wall_seconds": 10.225867582979845
+    },
+    {
+      "all_episode_costs_known": true,
+      "attempts": 12,
+      "cpu_seconds": 15.833503948,
+      "decisions": 1335,
+      "failed_attempts": 0,
+      "initial_development": {
+        "benchmark_denominator": 2,
+        "completed_runs": 2,
+        "completion_rate": 1.0,
+        "failed_runs": 0,
+        "fitness_rank": [
+          0.0,
+          0.024425287356321837,
+          1.0
+        ],
+        "mean_auxiliary_progress_return": 0.024425287356321837,
+        "mean_completed_acts": 0.0,
+        "mean_maximum_floor": 10.5,
+        "mean_training_return": 0.024425287356321837,
+        "missing_runs": 0,
+        "recorded_cpu_seconds": 1.8691609999999996,
+        "recorded_decisions": 217,
+        "recorded_runs": 2,
+        "victories": 0,
+        "victory_rate": 0.0
+      },
+      "optimizer_steps": 24,
+      "paired_development": {
+        "both_completed": 2,
+        "champion_only_victories": 0,
+        "claim_scope": "paired_independent_development_not_final_test_or_foundation_readiness",
+        "initial_only_victories": 0,
+        "mean_maximum_floor_difference": -0.5,
+        "planned_pairs": 2
+      },
+      "protocol": {
+        "adaptive_controller_allowed": false,
+        "automatic_followup": false,
+        "checkpoint_promoted": false,
+        "claim_scope": "sampled_a8_ppo_bootstrap_with_frozen_independent_greedy_development",
+        "config_id": "sha256:5f81bb37966574e97c3d64e93d40159eec9618d40f109ffecaa5f29aa0d51526",
+        "experience_implementation_id": "sha256:8b9e30538341e5afcefe326c882100a4bd4400324d6d3c90aef64a58b313d8b7",
+        "final_test_opened": false,
+        "ruleset_manifest_id": "sha256:ab32cf7075c080ec1f0104bf9feac17299361e345161daaf8e7a5febd863bacc",
+        "runner_source_sha256": "b03e51910a70a077efcfa92023cdc3ef7de3ca4733a73f5c6f8869964601ab19",
+        "split_manifest_id": "sha256:1cd5a17e8141612ff76bd3e7057be3b60b038d09135ffdf9cc0070923269f666",
+        "training_spec_id": "sha256:5f06c3d14b2cf11059aff0b20ec31d46ca8f74cba830b125d96d051d121958b3"
+      },
+      "report_id": "sha256:1bd56063ca749eb3bb0030119b6e4b2b9c97ce67bb592b0b88792f8a64c575ff",
+      "resource_report_id": "sha256:7e82a1c921aaf715bac049753e91d97b1af765b0bbaab23f1fbded6536a43ced",
+      "sampled_decision_families": {
+        "card_selection": 2,
+        "combat": 274,
+        "event": 18,
+        "path": 23,
+        "relic_selection": 40,
+        "rest_site": 1,
+        "reward": 9,
+        "shop": 1
+      },
+      "sampled_decisions": 368,
+      "sampled_non_argmax_decisions": 197,
+      "selected_development": {
+        "benchmark_denominator": 2,
+        "completed_runs": 2,
+        "completion_rate": 1.0,
+        "failed_runs": 0,
+        "fitness_rank": [
+          0.0,
+          0.023519490254872565,
+          1.0
+        ],
+        "mean_auxiliary_progress_return": 0.023519490254872565,
+        "mean_completed_acts": 0.0,
+        "mean_maximum_floor": 10.0,
+        "mean_training_return": 0.023519490254872565,
+        "missing_runs": 0,
+        "recorded_cpu_seconds": 1.6726589999999995,
+        "recorded_decisions": 200,
+        "recorded_runs": 2,
+        "victories": 0,
+        "victory_rate": 0.0
+      },
+      "stage": "short_native_pipeline_check_v2",
+      "wall_seconds": 11.040139667020412
+    }
+  ],
+  "owner_recipe": {
+    "config_id": "sha256:c973981641aed0f3065fc12b51d8a9f051ae110b1d905501809b6342ab3f3d9e",
+    "final_test_opened": false,
+    "maximum_planned_attempts": 2112,
+    "path": "configs/full-run-ppo/sts2-v0.107.1-public-a8-pilot-v1.json",
+    "started": false
+  },
+  "python_qualification": {
+    "gym_passed": 31,
+    "legacy_skipped": 6,
+    "live_fixtures_passed": 420,
+    "preserved_setup_failures": [
+      {
+        "reason": "isolated Python omitted repository import path; no tests executed",
+        "resource_report_id": "sha256:c0353448daf7b3ed6784a9bbf84428bc8cff101e93d07c275c78558e22464b53"
+      },
+      {
+        "reason": "isolated Python imported an unnecessary module needing psutil; no tests executed",
+        "resource_report_id": "sha256:e86bf580bc7856603f8fe0b8c04c5620ac70e10bf83c6d7bd45d7a433370529e"
+      }
+    ],
+    "report_id": "sha256:1da9e705bccb87e8c9b4b820a7aa2d1ef575675a279bef62365d37800e31fcc3",
+    "resource_report_id": "sha256:23ff2431fd5c2388d6cc298d611b7bca86aa87db6722d1c36e73db0370adb8fb",
+    "wall_seconds": 5.518
+  },
+  "recorded_on": "2026-10-09",
+  "schema_version": "public-a8-ppo-pipeline-evidence-v1",
+  "trained_full_win_demonstrated": false,
+  "useful_learning_demonstrated": false
+}

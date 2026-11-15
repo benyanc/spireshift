@@ -1,0 +1,571 @@
+{
+  "activation_probes_reconstructed_states": 2048,
+  "adaptive_controller_allowed": false,
+  "all_672_endings_ordinary_losses": true,
+  "arms": {
+    "normalized": {
+      "accounting": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 17,
+        "completed_games": 336,
+        "cpu_seconds": 647.180686179,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.018910764023180943,
+        "mean_floor_completed_only_diagnostic": 7.142857142857143,
+        "mean_floor_failures_zero": 7.142857142857143,
+        "mean_floor_reached_diagnostic": 7.142857142857143,
+        "not_attempted_games": 0,
+        "planned_games": 336,
+        "recorded_games": 336,
+        "recorded_selections": 34005,
+        "terminal_delivered_selections": 34005,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "activation_controls": [
+        {
+          "after_mean_derivative": 0.8516748199509896,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.8814516737966722,
+          "before_saturation": 0.0,
+          "candidate_rows": 630,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 1,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.8728024735789017,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.8495354640452761,
+          "before_saturation": 0.0,
+          "candidate_rows": 625,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 2,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.8614903454962609,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.8667660911914801,
+          "before_saturation": 0.0,
+          "candidate_rows": 675,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 3,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.7494869559289894,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.8697137930892902,
+          "before_saturation": 0.0,
+          "candidate_rows": 627,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 4,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.8414847804451324,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.7630494016926096,
+          "before_saturation": 0.0,
+          "candidate_rows": 707,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 5,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.8178495915366479,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.8402148818537164,
+          "before_saturation": 0.0,
+          "candidate_rows": 668,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 6,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.7925336001127434,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.8198549642014703,
+          "before_saturation": 0.0,
+          "candidate_rows": 607,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 7,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.7000496983830935,
+          "after_saturation": 0.0,
+          "before_mean_derivative": 0.7804642503681419,
+          "before_saturation": 0.0,
+          "candidate_rows": 628,
+          "input_normalization": "native-actor-hash-quarter-v1",
+          "round": 8,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        }
+      ],
+      "best_trained_model_id": "sha256:146b0ece6996a301b9c5415ae10c21b8f4213316a1348cd419b7872d1807011a",
+      "best_trained_round": 8,
+      "development_initial": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 9,
+        "completed_games": 16,
+        "cpu_seconds": 32.879797835,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.01793631187652927,
+        "mean_floor_completed_only_diagnostic": 6.5,
+        "mean_floor_failures_zero": 6.5,
+        "mean_floor_reached_diagnostic": 6.5,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1627,
+        "terminal_delivered_selections": 1627,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "development_trained": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 12,
+        "completed_games": 16,
+        "cpu_seconds": 32.14060333199999,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.018948216638434028,
+        "mean_floor_completed_only_diagnostic": 7.0625,
+        "mean_floor_failures_zero": 7.0625,
+        "mean_floor_reached_diagnostic": 7.0625,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1575,
+        "terminal_delivered_selections": 1575,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "incumbent_model_id": "sha256:146b0ece6996a301b9c5415ae10c21b8f4213316a1348cd419b7872d1807011a",
+      "initial_model_id": "sha256:0315e0ca62b261125ab1ecb1373ca669c521ae667dc4407848f317e4542cb603",
+      "optimizer_steps": 618,
+      "sampled_training_decisions": 25883,
+      "source_report_id": "sha256:8b390fa84bba9eeed409c88363a98c1ab32bb5088a361c5e2145048aa10d59c0",
+      "trained_vs_initial": {
+        "auxiliary_progress_supported": false,
+        "base_readiness_passed": false,
+        "bootstrap_replicates": 10000,
+        "bootstrap_seed": 20261016,
+        "floor_difference_95_interval": [
+          -0.1875,
+          1.375
+        ],
+        "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+        "independent_unit": "complete_run_seed",
+        "initial_only_wins": 0,
+        "initial_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "mean_floor_difference_failures_zero": 0.5625,
+        "pairs": 16,
+        "selected_only_wins": 0,
+        "selected_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "victory_difference_95_interval": [
+          -0.23957414314634135,
+          0.23957414314634135
+        ],
+        "victory_improvement_supported": false,
+        "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+        "victory_rate_difference": 0.0
+      }
+    },
+    "unscaled": {
+      "accounting": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 17,
+        "completed_games": 336,
+        "cpu_seconds": 659.990010251,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.018934000768875647,
+        "mean_floor_completed_only_diagnostic": 7.133928571428571,
+        "mean_floor_failures_zero": 7.133928571428571,
+        "mean_floor_reached_diagnostic": 7.133928571428571,
+        "not_attempted_games": 0,
+        "planned_games": 336,
+        "recorded_games": 336,
+        "recorded_selections": 33958,
+        "terminal_delivered_selections": 33958,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "activation_controls": [
+        {
+          "after_mean_derivative": 0.40919576787825657,
+          "after_saturation": 0.14906145964495573,
+          "before_mean_derivative": 0.4785539004474332,
+          "before_saturation": 0.0851227514618628,
+          "candidate_rows": 604,
+          "input_normalization": "none",
+          "round": 1,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.3643194717417503,
+          "after_saturation": 0.21763073149181547,
+          "before_mean_derivative": 0.41666904081587947,
+          "before_saturation": 0.1551181369357639,
+          "candidate_rows": 599,
+          "input_normalization": "none",
+          "round": 2,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.3011213007216531,
+          "after_saturation": 0.32916562739560784,
+          "before_mean_derivative": 0.36856702809784175,
+          "before_saturation": 0.2171374388415404,
+          "candidate_rows": 593,
+          "input_normalization": "none",
+          "round": 3,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.2595028952492136,
+          "after_saturation": 0.38463547120468505,
+          "before_mean_derivative": 0.2939117707736293,
+          "before_saturation": 0.32229635903647136,
+          "candidate_rows": 631,
+          "input_normalization": "none",
+          "round": 4,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.24678035299640974,
+          "after_saturation": 0.3961026982999639,
+          "before_mean_derivative": 0.2595837837421966,
+          "before_saturation": 0.38593140529175685,
+          "candidate_rows": 607,
+          "input_normalization": "none",
+          "round": 5,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.20301929745282263,
+          "after_saturation": 0.46513841417100693,
+          "before_mean_derivative": 0.24134549466400593,
+          "before_saturation": 0.4028927273220486,
+          "candidate_rows": 612,
+          "input_normalization": "none",
+          "round": 6,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.20118596039313566,
+          "after_saturation": 0.4814860202189304,
+          "before_mean_derivative": 0.20385172156443554,
+          "before_saturation": 0.468648477309366,
+          "candidate_rows": 632,
+          "input_normalization": "none",
+          "round": 7,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        },
+        {
+          "after_mean_derivative": 0.17592117732693335,
+          "after_saturation": 0.523609125046503,
+          "before_mean_derivative": 0.19872409551883913,
+          "before_saturation": 0.46618855794270836,
+          "candidate_rows": 579,
+          "input_normalization": "none",
+          "round": 8,
+          "sampled_choice_states": 128,
+          "saved_indices_and_saturation_reconstructed": true
+        }
+      ],
+      "best_trained_model_id": "sha256:64cb6769400df441a906d65c38c2f12a4e5d971c834515a9eeea1c25128d08e2",
+      "best_trained_round": 8,
+      "development_initial": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 9,
+        "completed_games": 16,
+        "cpu_seconds": 32.215510540000004,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.01793631187652927,
+        "mean_floor_completed_only_diagnostic": 6.5,
+        "mean_floor_failures_zero": 6.5,
+        "mean_floor_reached_diagnostic": 6.5,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1630,
+        "terminal_delivered_selections": 1630,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "development_trained": {
+        "best_completed_acts": 0,
+        "best_floor_completed": 17,
+        "completed_games": 16,
+        "cpu_seconds": 34.75129154,
+        "failed_games": 0,
+        "mean_auxiliary_progress_return": 0.018861224825898738,
+        "mean_floor_completed_only_diagnostic": 7.25,
+        "mean_floor_failures_zero": 7.25,
+        "mean_floor_reached_diagnostic": 7.25,
+        "not_attempted_games": 0,
+        "planned_games": 16,
+        "recorded_games": 16,
+        "recorded_selections": 1684,
+        "terminal_delivered_selections": 1684,
+        "win_rate": 0.0,
+        "wins": 0
+      },
+      "incumbent_model_id": "sha256:64cb6769400df441a906d65c38c2f12a4e5d971c834515a9eeea1c25128d08e2",
+      "initial_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449",
+      "optimizer_steps": 615,
+      "sampled_training_decisions": 25917,
+      "source_report_id": "sha256:27f17619d47065e32464c112bbc7df0f003369f2e44e03a559f51ac321a0aad1",
+      "trained_vs_initial": {
+        "auxiliary_progress_supported": false,
+        "base_readiness_passed": false,
+        "bootstrap_replicates": 10000,
+        "bootstrap_seed": 20261016,
+        "floor_difference_95_interval": [
+          -0.5,
+          2.3125
+        ],
+        "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+        "independent_unit": "complete_run_seed",
+        "initial_only_wins": 0,
+        "initial_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "mean_floor_difference_failures_zero": 0.75,
+        "pairs": 16,
+        "selected_only_wins": 0,
+        "selected_win_rate_95_interval": [
+          0.0,
+          0.2059072142078227
+        ],
+        "victory_difference_95_interval": [
+          -0.23957414314634135,
+          0.23957414314634135
+        ],
+        "victory_improvement_supported": false,
+        "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+        "victory_rate_difference": 0.0
+      }
+    }
+  },
+  "assessment_report_id": "sha256:28e4bbd7fda4b01e9a28bae17905dc58c7c925a2a8e92bb9eeac2b81a9e4ba0c",
+  "auxiliary_score_assessment": {
+    "checkpoint_promoted": false,
+    "games_launched": 0,
+    "implementation_sha256": "cbe5ed180b7e1f59a9f13ab9b7e0884844837b076c324ffbc82a93eaa2fedba0",
+    "normalized_trained_minus_own_initial": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20261016,
+      "equal": 8,
+      "higher": 5,
+      "improvement_supported_exploratory": false,
+      "lower": 3,
+      "mean_difference": 0.0010119047619047618,
+      "metric": "declared_auxiliary_progress_return_not_victory_probability",
+      "paired_seed_percentile_95_interval": [
+        -0.00029950122341426666,
+        0.0024585921325051756
+      ],
+      "pairs": 16
+    },
+    "normalized_trained_minus_unscaled_trained": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20261016,
+      "equal": 5,
+      "higher": 6,
+      "improvement_supported_exploratory": false,
+      "lower": 5,
+      "mean_difference": 8.699181253529081e-05,
+      "metric": "declared_auxiliary_progress_return_not_victory_probability",
+      "paired_seed_percentile_95_interval": [
+        -0.0019214132787502356,
+        0.0017895374552983256
+      ],
+      "pairs": 16
+    },
+    "optimizer_steps": 0,
+    "parent_report_id": "sha256:28e4bbd7fda4b01e9a28bae17905dc58c7c925a2a8e92bb9eeac2b81a9e4ba0c",
+    "report_id": "sha256:54194f894296c860a023722c4d84409b2775f2ecfee2dd5b4de302e5b56df0cd",
+    "schema_version": "native-normalization-auxiliary-paired-assessment-v1",
+    "unscaled_trained_minus_own_initial": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 20261016,
+      "equal": 5,
+      "higher": 6,
+      "improvement_supported_exploratory": false,
+      "lower": 5,
+      "mean_difference": 0.000924912949369471,
+      "metric": "declared_auxiliary_progress_return_not_victory_probability",
+      "paired_seed_percentile_95_interval": [
+        -0.0010469602860907212,
+        0.0031963918101825693
+      ],
+      "pairs": 16
+    }
+  },
+  "base_readiness_passed": false,
+  "before_after_probe_measurements": 4096,
+  "checkpoint_promoted": false,
+  "claim_scope": "sealed_complete_native_A8_comparison_and_activation_reconstruction_no_new_play_or_training",
+  "comparison_config": "configs/native-normalization/sts2-v0.111.0-a8-comparison-v1.json",
+  "comparison_config_id": "sha256:bb1a92bd8dcc422aacd1a466bbded0e234a6a3f0b750a517763a6368a0ba24eb",
+  "date": "2026-10-16",
+  "decisions_verified": 67963,
+  "evidence_id": "sha256:c1b45d45a3227f4ed0b4d697cff78ed713d0c37b979ee925a1d92388a704f490",
+  "game_apps_created": 0,
+  "games_launched_by_assessment": 0,
+  "next_work": "saved_TRAIN_independent_run_gradient_and_batch_size_controls",
+  "normalized_minus_unscaled": {
+    "auxiliary_progress_supported": false,
+    "base_readiness_passed": false,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261016,
+    "floor_difference_95_interval": [
+      -1.625,
+      0.875
+    ],
+    "floor_interval_method": "paired_seed_percentile_bootstrap_exploratory",
+    "independent_unit": "complete_run_seed",
+    "initial_only_wins": 0,
+    "initial_win_rate_95_interval": [
+      0.0,
+      0.2059072142078227
+    ],
+    "mean_floor_difference_failures_zero": -0.1875,
+    "pairs": 16,
+    "selected_only_wins": 0,
+    "selected_win_rate_95_interval": [
+      0.0,
+      0.2059072142078227
+    ],
+    "victory_difference_95_interval": [
+      -0.23957414314634135,
+      0.23957414314634135
+    ],
+    "victory_improvement_supported": false,
+    "victory_interval_method": "bonferroni_combined_exact_binomial_marginals",
+    "victory_rate_difference": 0.0
+  },
+  "optimizer_steps_by_assessment": 0,
+  "private_evidence": [
+    {
+      "path": "artifacts/native-assessments/sts2-v0.111.0-a8-normalization-comparison-v1/audit.py",
+      "sha256": "7247c3cad4fbb32199afcff5f34aad39d0193bc9acce1782db2fca781d512bbd"
+    },
+    {
+      "path": "artifacts/native-assessments/sts2-v0.111.0-a8-normalization-comparison-v1/report.json",
+      "sha256": "8a6f456cb334900ffb42b50db9af4d7d986e4527d291522a2077e516ae2e1594"
+    },
+    {
+      "path": "artifacts/native-assessments/sts2-v0.111.0-a8-normalization-comparison-v1/score_pairs.py",
+      "sha256": "cbe5ed180b7e1f59a9f13ab9b7e0884844837b076c324ffbc82a93eaa2fedba0"
+    },
+    {
+      "path": "artifacts/native-assessments/sts2-v0.111.0-a8-normalization-comparison-v1/auxiliary-score-pairs.json",
+      "sha256": "58cabd84fe3408eb38334f3fe7a0ca18a79a1a6b84c616f7c4e6be587f5a45e8"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-comparison-assessment-v1.json",
+      "sha256": "da98fb3fa88ffd200b3d8b32ae89dc170a12ee0c7f987660c5d3d65e85042a95"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-score-assessment-v1.json",
+      "sha256": "56da783ee5911ee7b1ff5a57999894bfe66ac88530add90a8f1bd5002700bde3"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-unscaled-v1-attempt-1.json",
+      "sha256": "445bcd66b8eb74f9b6de362d18d2f6589ff52b0297bab4edf3b7206e8ab9e938"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-normalized-v1-attempt-1.json",
+      "sha256": "07c516af4662208027925d929247cf3452293714ee8c1bf2dd496f2e2d4e2184"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-result-repository-checks-v1.json",
+      "sha256": "d1a27a285a86c43e0576713d6d05e7c8e7a94a874e790a156460d2560d5d3b9e"
+    }
+  ],
+  "repository_checks": {
+    "command": "uv run --no-sync spireshift check",
+    "format": true,
+    "lint": true,
+    "native_build": true,
+    "resource_report_id": "sha256:c2cde1db4ce9cca460050086735fecdfa6c343cbe029386363fe9271436e04e0",
+    "tests_passed": 1477,
+    "types": true,
+    "wall_seconds": 87.53881354094483
+  },
+  "resource_reports": {
+    "normalized": {
+      "cap": null,
+      "report_id": "sha256:93b36f93ba8c3224e870575613c8b1e26af67b31c18cee6b7f0a28c23d3383a0",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.07874519574348428,
+        "cpu_hours": 0.29205877193138896,
+        "cpu_seconds": 1051.4115789530003,
+        "energy_kwh": null,
+        "final_storage_bytes": 299900566,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 1975812096,
+        "peak_storage_bytes": 299900566,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 953.7194791249931
+      }
+    },
+    "unscaled": {
+      "cap": null,
+      "report_id": "sha256:37c53e86c72f077cd389cbd20cc812fda91a319c73968c94b01e7dba5f22be4f",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.07862984350726977,
+        "cpu_hours": 0.2983921303347223,
+        "cpu_seconds": 1074.2116692050001,
+        "energy_kwh": null,
+        "final_storage_bytes": 299474308,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 1912324096,
+        "peak_storage_bytes": 299474308,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 975.8305691670394
+      }
+    }
+  },
+  "schema_version": "native-a8-normalization-comparison-evidence-v1",
+  "source_episode_audit_completed": true,
+  "source_files_verified": 2878,
+  "training_replicates_per_method": 1,
+  "verdict": "saturation_reduced_no_demonstrated_gameplay_advantage"
+}

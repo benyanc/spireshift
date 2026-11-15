@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-status-titles-control-v1.json",
+    "sha256": "2266ecfbe3a90b9834c0df93c1146ec088769e8440b4bb50f72bc9216e7e305b"
+  },
+  "wall_seconds": 900,
+  "cpu_seconds": 1800,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

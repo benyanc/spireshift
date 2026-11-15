@@ -1,0 +1,191 @@
+{
+  "affected_menus_in_preserved_segments": 0,
+  "candidate_decisions": 3496,
+  "candidate_outcomes": {
+    "goal": 51,
+    "loss": 13
+  },
+  "candidate_segments": 64,
+  "candidate_worlds": 32,
+  "continuation": {
+    "path": "artifacts/native-a8-practice-mix/collection-continuation-v1/summary-1794186132641400000.json",
+    "report_id": "sha256:d3d127b90d1418fe3ef509961dd6e3faf065895d9b7170cb70ebcbaecf03258a",
+    "sha256": "291de62f546dd9923f6666a0c4e0de3eb7fb4bb3e9b939e9a1fa0c1638dce8ec"
+  },
+  "continuation_resources": {
+    "path": "artifacts/native-a8-practice-mix/collection-continuation-v1-1794186132641400000-resources.json",
+    "report_id": "sha256:ffc1e29a2afbc4e01baba44becf5bbc73b7876a820339bae5fbcc38bcc228c5c",
+    "sha256": "f9ea09e3facce0413f48bd975ca9a9121ffef080b590fba2cdf5155abc16191d"
+  },
+  "fresh_native_potion_controls": {
+    "belt-discard": {
+      "clean_worker_shutdown": true,
+      "diagnostic_only": true,
+      "native_damage_per_target": 0,
+      "native_deliveries": 5,
+      "native_removed_after_card_answer": true,
+      "operation": "discard",
+      "opponents": 3,
+      "optimizer_updates": 0,
+      "queued_once": true,
+      "report_id": "sha256:2d7eefa76110329e4ae9c8d749adf40391222b9b34b90a476105c15ddcc852e3",
+      "seal_id": "sha256:b7c782ceaf3653f363c38f15ba8fc5c9cec5988ff9cc705d4312357a011aba5f",
+      "seed": "SP1RESH1FTA8PM2BQ02P01",
+      "status": "combat_selector_potion_verified"
+    },
+    "belt-use": {
+      "clean_worker_shutdown": true,
+      "diagnostic_only": true,
+      "native_damage_per_target": 12,
+      "native_deliveries": 5,
+      "native_removed_after_card_answer": true,
+      "operation": "use",
+      "opponents": 3,
+      "optimizer_updates": 0,
+      "queued_once": true,
+      "report_id": "sha256:4923b35078547135d39c32d49b98ba7c3cc95b3d541dd74f51c8d26773037bb1",
+      "seal_id": "sha256:8fa760ae6279da0ab6b982d9f3e863cfd1d289e000c4f4f7c92b4321380e7d5e",
+      "seed": "SP1RESH1FTA8PM2BQ01P01",
+      "status": "combat_selector_potion_verified"
+    }
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "later_act_boss_goals": 7,
+  "matched_bank_candidate": {
+    "path": "artifacts/native-a8-practice-mix/collection-continuation-v1/matched-bank-candidate.json",
+    "report_id": "sha256:a3c1bccc0a2235a142593b28704fe8d919b2dd466677f11a55fa0973cf74d5b9",
+    "sha256": "99f6b2aaae0723da1b8f2a2cbc19fc1ec222614d99418f1b3bece7f8c92c1ef8"
+  },
+  "new_native_deliveries_verified": 237,
+  "new_segments_verified": 6,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "original_panel": {
+    "coverage": {
+      "all_segments_completed": false,
+      "attainable_room_outcomes_in_each_act": true,
+      "by_act_definition_and_tier": {
+        "GLORY": {
+          "healthy": {
+            "goal": 6
+          },
+          "lean": {
+            "failed": 1,
+            "goal": 3,
+            "loss": 2
+          },
+          "preboss": {
+            "goal": 4
+          }
+        },
+        "HIVE": {
+          "healthy": {
+            "goal": 6
+          },
+          "lean": {
+            "goal": 6
+          },
+          "preboss": {
+            "goal": 3,
+            "loss": 1
+          }
+        },
+        "OVERGROWTH": {
+          "healthy": {
+            "goal": 6
+          },
+          "lean": {
+            "goal": 6
+          },
+          "preboss": {
+            "loss": 4
+          }
+        },
+        "UNDERDOCKS": {
+          "healthy": {
+            "goal": 6
+          },
+          "lean": {
+            "goal": 6
+          },
+          "preboss": {
+            "loss": 4
+          }
+        }
+      },
+      "later_act_boss_goal_successes": 7,
+      "room_coverage_candidate": false
+    },
+    "outcomes": {
+      "failed": 1,
+      "goal": 52,
+      "loss": 11
+    },
+    "planned_segments": 64,
+    "preserved_failure": "m-030-p3"
+  },
+  "owner_attempt": {
+    "path": "artifacts/native-a8-practice-mix/collection-v1/attempt-1794184273938842000.json",
+    "report_id": "sha256:a188555e8a2e2a955081179046ec1dd5c316890fc3b1a1334681adb323358fe6",
+    "sha256": "8d177d10d06a79b7d0c13136395cc55c351eabc6957a3df9dcb114c132f0a399"
+  },
+  "owner_resources": {
+    "path": "artifacts/native-a8-practice-mix/collection-v1-1794184273938842000-resources.json",
+    "report_id": "sha256:c84de1b12b4bb53ab257a9053844a4ddcf16b50aedab5970aaad7a11e039f3d6",
+    "sha256": "14e0f6a3a2d685429983b5198efc542e2c83cbdf9d4c4f47f17844809078a8d7"
+  },
+  "paired_supplement": {
+    "case": "glory-lean-supplement",
+    "outcomes": {
+      "2": "loss",
+      "3": "loss"
+    }
+  },
+  "prior_native_deliveries_verified": 3331,
+  "prior_sealed_segments": 59,
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-practice-continuation-v1.json",
+    "sha256": "db973334cbb844c5a0a0a81b43baf192b537da7e8b7ea5851f99f5d62bef287d"
+  },
+  "report_id": "sha256:c59d635bab6140841367bbd992297f7f90de615238feb5452501ef9aa45568ac",
+  "saved_assessment": {
+    "path": "artifacts/native-a8-practice-mix/owner-assessment-v1/report.json",
+    "report_id": "sha256:18d5024bcf34edc69687c50fb4ccceeeab6eb6e3d63be64381cd15fa65a32f97",
+    "sha256": "d492b549559e76a874c71d9bdffd689d18723042ef57eeffae967cb52d2e11ed"
+  },
+  "saved_selector": {
+    "native_game_launches": 0,
+    "old_rejected": true,
+    "potion_discards": 1,
+    "potion_uses": 1,
+    "saved_headbutt_delivery_index": 48,
+    "saved_selector_executed": false,
+    "seal_id": "sha256:4370b221fd7ff80e52d83976e0db70d6119775088bde3ba7d5bdd50de5c53065",
+    "selector_choices": 2,
+    "supported_menu": true
+  },
+  "schema_version": "native-a8-practice-continuation-evidence-v1",
+  "selector_controls": {
+    "path": "artifacts/native-a8-practice-mix/selector-belt-control-v2/report.json",
+    "report_id": "sha256:46a24254a18c0b07d865fd998a08c0d5e6f9fcab2513cee5f90cca64920df782",
+    "sha256": "ac681cebcc7620065c79f3aaf8a55aeaacc663f8542fe271caa5e2ea8d9c4233"
+  },
+  "shared_profile_unchanged": true,
+  "status": "matched_practice_candidate_complete",
+  "training_admission_granted": false,
+  "verified_glory_boss_reward_outcomes": {
+    "m-031-p2": "QUEEN_BOSS",
+    "m-031-p3": "QUEEN_BOSS",
+    "m-032-p2": "AEONGLASS_BOSS",
+    "m-032-p3": "AEONGLASS_BOSS"
+  }
+}

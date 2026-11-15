@@ -1,0 +1,112 @@
+{
+  "branch_report": {
+    "path": "artifacts/native-a8-act1-boss/branches-v1/report.json",
+    "report_id": "sha256:2c94c756886952f837f7216d4c8c6f124576afee18df90d9b1e5aa2265c658e0",
+    "sha256": "9fa7d431e6ba2cfd9a51141f7bad4479fce7a8e8552d28305328055fe5603f0b"
+  },
+  "config_id": "sha256:d1ddcc71967cf543a9eabfc5b7043ece7dbd0522ecf47df379ba98a00a0a4474",
+  "exact_prefix_choices": 642,
+  "execution_id": "sha256:cd99b14d7363af4320e66b3001bb4b15b3a2b2627aa777e0a11666b6ebefce46",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "lessons_admitted": 0,
+  "native_resources": {
+    "path": "artifacts/resources/a8-act1-combat-branches-v1.json",
+    "report_id": "sha256:1c246185fbdb64c03b40c6dfe839453cbf23433b6cab4cf69e2d3638ecf7f849",
+    "sha256": "63207ec984c2894d7c1f6917f59894e33648ea5ca95f16e752292907042ba5c3",
+    "wall_seconds": 30.567672541947104
+  },
+  "optimizer_updates": 0,
+  "report_id": "sha256:8a7ce15d96e91c7571bf85631b9546e9dd456b3313f0370f4cd16815e8b1eb32",
+  "repository_check": {
+    "dotnet_protocol_contract_verified": true,
+    "path": "artifacts/resources/a8-act1-combat-branches-repository-check-v2.json",
+    "report_id": "sha256:7f63da8df3fdcfdd8f934cce49503a91c2f4b2c69eefab39b9d9936e23375149",
+    "sha256": "20b741287cf289c9929d0bf02961900bd99f915edb08dfdae6b7271110353a2f",
+    "status": "completed",
+    "tests_passed": 2855
+  },
+  "results": {
+    "terror-eel": {
+      "actions": [
+        "Play Thunderclap+",
+        "Play Strike on Terror Eel",
+        "Play Strike on Terror Eel"
+      ],
+      "death_blow": null,
+      "enemy_hp_before_attacks": [
+        25,
+        15,
+        6
+      ],
+      "exact_prefix_choices": 130,
+      "final_hp": 10,
+      "local_answer_factors": 0,
+      "outcome": "fight_win",
+      "root": {
+        "input_digest": "af2915a600589a7222766aacb88258c6fe17938d6413cfb7dd6353c7d3d64243",
+        "line": 261,
+        "saved_action": "Play Second Wind+",
+        "saved_key": "{\"arguments\":[],\"label\":\"Play Second Wind+\",\"subject\":35,\"verb\":\"play\"}"
+      },
+      "survived_death_blow": false,
+      "verified_native_deliveries": 133
+    },
+    "waterfall-giant-round-2": {
+      "death_blow": {
+        "block_before": 5,
+        "damage": 33,
+        "hp_before": 7
+      },
+      "exact_prefix_choices": 255,
+      "final_hp": 0,
+      "local_answer_factors": 0,
+      "outcome": "fight_loss",
+      "root": {
+        "input_digest": "660571a8f3560d152ac07a69373a9b68c0d6de80f761b71e5fcbb9b7dfbc9774",
+        "line": 511,
+        "saved_action": "Play Strike on Waterfall Giant",
+        "saved_key": "{\"arguments\":[{\"name\":null,\"role\":\"target\",\"slot\":38}],\"label\":\"Play Strike on Waterfall Giant\",\"subject\":39,\"verb\":\"play\"}"
+      },
+      "survived_death_blow": false,
+      "verified_native_deliveries": 286
+    },
+    "waterfall-giant-round-3": {
+      "death_blow": {
+        "block_before": 13,
+        "damage": 30,
+        "hp_before": 12
+      },
+      "exact_prefix_choices": 257,
+      "final_hp": 0,
+      "local_answer_factors": 0,
+      "outcome": "fight_loss",
+      "root": {
+        "input_digest": "e8d8cd6e40a0d099882e23f544e419d59e64b1054079dc9fe05633ffc3a4db2c",
+        "line": 515,
+        "saved_action": "Play Bash on Waterfall Giant",
+        "saved_key": "{\"arguments\":[{\"name\":null,\"role\":\"target\",\"slot\":35}],\"label\":\"Play Bash on Waterfall Giant\",\"subject\":40,\"verb\":\"play\"}"
+      },
+      "survived_death_blow": false,
+      "verified_native_deliveries": 283
+    }
+  },
+  "saved_audit_id": "sha256:039323f4204fea0b534d7617f0cdacdbed0819a7801ae040b55061e44c8d3688",
+  "saved_raw_reconstruction_repeated": true,
+  "schema_version": "native-a8-act1-combat-branches-evidence-v1",
+  "scope": "known_world_local_combat_diagnostic_only",
+  "seals": {
+    "terror-eel": "sha256:84826a14013c76f0a517af018bc7daad20f93c643ec9e248b0a081d80e9303f8",
+    "waterfall-giant-round-2": "sha256:93128493b7603cd55d073e30ff135c866c40beefce3753b8202c62cef8567214",
+    "waterfall-giant-round-3": "sha256:89147183859a5c46b81a9cb8dff966b274f9d178a36f2d085ec53cd370a59fd3"
+  },
+  "shared_profile_unchanged": true,
+  "status": "combat_branches_verified",
+  "verified_native_deliveries": 702
+}

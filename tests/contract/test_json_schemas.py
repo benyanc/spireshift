@@ -29,6 +29,18 @@ def _registry() -> Registry[Any]:
 @pytest.mark.parametrize(
     ("schema_name", "fixture_name"),
     [
+        (
+            "engine-download-config-v1.json",
+            "../../configs/engine-qualification/sts2-v0.111.0-depotdownloader-v1.json",
+        ),
+        (
+            "engine-qualification-config-v1.json",
+            "../../configs/engine-qualification/sts2-v0.111.0-macos-arm64-v1.json",
+        ),
+        (
+            "trajectory-policy-training-config-v1.json",
+            "../../configs/trajectory-policy/sts2-v0.107.1-base-v2-frontier-preferences-v1.json",
+        ),
         ("observation-v1.json", "observation-v1.json"),
         ("action-v1.json", "action-v1.json"),
         ("transition-v1.json", "transition-v1.json"),
@@ -177,6 +189,18 @@ def _registry() -> Registry[Any]:
             "../../manifests/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json",
         ),
         (
+            "bootstrap-state-set-v6.json",
+            "../../manifests/bootstrap/sts2-v0.107.1-base-v2-milestone-trajectory-train-v1.json",
+        ),
+        (
+            "trajectory-mutation-preference-set-v1.json",
+            "../../manifests/preferences/sts2-v0.107.1-base-v2-seed-000300-trajectory-preferences-v1.json",
+        ),
+        (
+            "trajectory-mutation-preference-verification-v1.json",
+            "../../docs/evidence/sts2-v0.107.1-base-v2-seed-000300-trajectory-preferences-v1-verification.json",
+        ),
+        (
             "bootstrap-simulation-task-v1.json",
             "bootstrap/tactical-mock-v1/dataset/cases/train-seed-000007-combat-000/attempt-0001/tasks/588634b5-e038-51ce-97f1-591206578543/request.json",
         ),
@@ -207,6 +231,10 @@ def _registry() -> Registry[Any]:
         (
             "production-model-inference-smoke-v1.json",
             "../../docs/evidence/production-model-inference-smoke-v3-v0.107.1.json",
+        ),
+        (
+            "production-model-inference-smoke-v1.json",
+            "../../docs/evidence/production-model-inference-smoke-v5-v0.107.1.json",
         ),
         (
             "base-model-readiness-spec-v1.json",
@@ -372,6 +400,48 @@ def test_combat_advancement_frontier_configuration_conforms_to_schema(
 ) -> None:
     validator = Draft202012Validator(
         _load(SCHEMA_DIR / "bootstrap-curriculum-discovery-spec-v4.json"),
+        registry=_registry(),
+    )
+    validator.validate(_load(Path(configuration)))
+
+
+def test_terminal_trajectory_discovery_configuration_conforms_to_schema() -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / "terminal-trajectory-discovery-config-v1.json"),
+        registry=_registry(),
+    )
+    validator.validate(
+        _load(Path("configs/terminal-discovery/sts2-v0.107.1-base-v2-train-v1.json"))
+    )
+
+
+@pytest.mark.parametrize(
+    ("schema", "configuration"),
+    [
+        (
+            "run-level-trajectory-search-config-v3.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v3.json",
+        ),
+        (
+            "run-level-trajectory-search-config-v3.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v3.json",
+        ),
+        (
+            "run-level-trajectory-search-config-v4.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-score-train-v4.json",
+        ),
+        (
+            "run-level-trajectory-search-config-v4.json",
+            "configs/trajectory-search/sts2-v0.107.1-base-v2-act1-frontier-diverse-train-v4.json",
+        ),
+    ],
+)
+def test_public_frontier_trajectory_search_configuration_conforms_to_schema(
+    schema: str,
+    configuration: str,
+) -> None:
+    validator = Draft202012Validator(
+        _load(SCHEMA_DIR / schema),
         registry=_registry(),
     )
     validator.validate(_load(Path(configuration)))

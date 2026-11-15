@@ -1,0 +1,558 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment_native_attempts": 0,
+  "assessment_optimizer_steps": 0,
+  "automatic_next_stage": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "collection_resources": [
+    {
+      "path": "artifacts/resources/natural-combat-comparison-collect-v1-1.json",
+      "report_id": "sha256:108be6be9df8808c630b2ed3de2df87ddf7a21e9fd9dc418ab65093f94e18fcc",
+      "usage": {
+        "average_cpu_utilization": 0.05144637904923547,
+        "cpu_hours": 0.16435061873055562,
+        "cpu_seconds": 591.6622274300003,
+        "energy_kwh": null,
+        "final_storage_bytes": 352097484,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 4,
+        "peak_resident_memory_bytes": 427851776,
+        "peak_storage_bytes": 352097484,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 821.4686524998397
+      }
+    },
+    {
+      "path": "artifacts/resources/natural-combat-comparison-collect-v1-2.json",
+      "report_id": "sha256:f26cb4ab80d2f86ac77c89b695065649c79f613b33e76d1677f6e83dca347042",
+      "usage": {
+        "average_cpu_utilization": 0.05045600391012389,
+        "cpu_hours": 0.053511517762222204,
+        "cpu_seconds": 192.64146394399992,
+        "energy_kwh": null,
+        "final_storage_bytes": 495579705,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 4,
+        "peak_resident_memory_bytes": 444579840,
+        "peak_storage_bytes": 495579705,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 272.7149100420065
+      }
+    }
+  ],
+  "collection_totals": {
+    "cpu_seconds": 784.3036913740002,
+    "cumulative_storage_summed": false,
+    "final_cumulative_storage_bytes": 495579705,
+    "peak_resident_memory_bytes": 444579840,
+    "wall_seconds": 1094.1835625418462
+  },
+  "curriculum_workspace_exists": false,
+  "death_to_win_rescues": 0,
+  "even_ignoring_length_only_one_fitting_improvement_not_two": true,
+  "evidence_id": "sha256:875b3f91526f11367796d370d98e4564cc312fb1b9343c7b77e9f2855bcacce3",
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "higher_hp_wins_rejected_by_resource_guards": 0,
+  "length_cutoff_is_study_design_not_general_learning_requirement": true,
+  "limitations": [
+    "Local fixed-hidden-world fight outcomes, not strategic full-run utility.",
+    "Only twelve natural worlds and up to sixteen single-decision mutations per reference.",
+    "Non-HP recorded resource equality does not price all relic charges, random draw changes or future utility.",
+    "No student intervention occurred; this does not test learning from a sufficiently strong natural teacher.",
+    "Three-choice improved lesson is valid but does not meet the preserved multi-turn study criterion."
+  ],
+  "new_full_game_evaluations": 0,
+  "next_teacher_change_authorized": false,
+  "next_work_proposed_not_launched": "separate_bounded_earlier_root_coordinated_decision_teacher_coverage_test",
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "original_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "production_sources_recipes_and_main_outputs_unchanged": true,
+  "qualification_evidence": {
+    "id": "sha256:49436df58794b6bd1d4bec5e3dfe8c018ce45136a5cded468edc305ac43a96c4",
+    "path": "docs/evidence/native-natural-combat-curriculum-v1.json"
+  },
+  "repository_verification": {
+    "cpu_seconds": 125.11461483000002,
+    "csharp_protocol_build_passed": true,
+    "format_passed": true,
+    "id": "sha256:41a0c5a36ca7793a8f15dd10d8e3f5a773bd6df2653fabfb93a2bdc07f6060ac",
+    "limits": {
+      "cpu_seconds": 480.0,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 100000000,
+      "wall_seconds": 240.0
+    },
+    "lint_passed": true,
+    "path": "artifacts/resources/natural-combat-result-repository-check-v1.json",
+    "peak_resident_memory_bytes": 295567360,
+    "strict_types_passed": true,
+    "tests_passed": 2451,
+    "tests_skipped": 5,
+    "wall_seconds": 138.00903241615742
+  },
+  "saved_only_assessment": {
+    "action_distributions_and_actions_recomputed": 3124,
+    "complete_reference_and_selected_confirmations_match": true,
+    "id": "sha256:896b1bd81ea597958d8e1270335c3493cba8eba5615c5f32d114f4e57b03e2cb",
+    "native_delivery_audit_independently_repeated": false,
+    "path": "artifacts/native-natural/main-assessment-v1/report.json",
+    "receipts_verified": 190,
+    "recorded_native_audit_and_sealed_journals_checked": true,
+    "resources": {
+      "cpu_seconds": 55.370209678,
+      "final_storage_bytes": 26211,
+      "id": "sha256:03e43f3b49544fc2c6f0eed67c8ed7f707457b3b086cb512302f27d6fa7f10ab",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/natural-combat-main-assessment-v1.json",
+      "peak_resident_memory_bytes": 407126016,
+      "wall_seconds": 99.64654166693799
+    },
+    "source": {
+      "path": "artifacts/native-natural/main-assessment-v1/run.py",
+      "sha256": "c62c8493fa30f5532d7838af79621409bac4c7ab7382fa95f909f3cc0d21be77"
+    },
+    "source_files_verified": 83768
+  },
+  "schema_version": "native-natural-combat-result-evidence-v1",
+  "status": "completed_teacher_signal_insufficient_v1_curriculum_unstarted",
+  "student_optimizer_steps": 0,
+  "teacher": {
+    "alternatives": 154,
+    "capped_branches": 0,
+    "confirmations": 24,
+    "gate": {
+      "checks": {
+        "four_fitting_worlds": true,
+        "three_decks": true,
+        "two_encounters": true,
+        "two_strict_local_improvements": false
+      },
+      "full_run_utility_established": false,
+      "heldout_results_used": false,
+      "passed": false,
+      "strictly_improved_fitting_roots": 0,
+      "usable_fitting_roots": [
+        "sha256:2ad9f0b592ef09434654c08615641f76f8d993e4554344d5d62773240b737b34",
+        "sha256:9d75b71ecb0f0d4e85881deb2ec2e52d0df62321cf756c7c8ef6b578e2b300a3",
+        "sha256:3e9699fa3554966059bf1896f96e293779338e8766f759aaa9f118225bb2b72b",
+        "sha256:daf07c1fd620093a8c0546e3e20f8735e5b30f86163d96f17ea95ea25141caec"
+      ]
+    },
+    "id": "sha256:11a4e1fddc5a5e658daa4395b4109be2732729f399d671ca3e6b6305fe2b196e",
+    "independent_worlds": 12,
+    "missing_roots": 0,
+    "native_attempts": 190,
+    "nonconfirmation_paths": 166,
+    "panels": {
+      "fit": {
+        "death_to_win_rescues": 0,
+        "identical_recorded_outcome_and_resources_alternatives": 79,
+        "mutations": 90,
+        "reference_fight_wins": 6,
+        "resource_guard_rejected_higher_hp_wins": 0,
+        "selected_fight_wins": 6,
+        "strictly_improved_usable_worlds": 0,
+        "strictly_improved_worlds_before_length_gate": 1,
+        "usable_winning_worlds": 4,
+        "worlds": 8
+      },
+      "heldout": {
+        "death_to_win_rescues": 0,
+        "identical_recorded_outcome_and_resources_alternatives": 52,
+        "mutations": 64,
+        "reference_fight_wins": 2,
+        "resource_guard_rejected_higher_hp_wins": 0,
+        "selected_fight_wins": 2,
+        "strictly_improved_usable_worlds": 2,
+        "strictly_improved_worlds_before_length_gate": 2,
+        "usable_winning_worlds": 2,
+        "worlds": 4
+      }
+    },
+    "path": "artifacts/native-natural/sts2-v0.111.0-a8-comparison-v1/teacher/report.json",
+    "references": 12,
+    "roots": [
+      {
+        "alternatives": 6,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 4,
+        "candidate_outcomes": {
+          "win": 7
+        },
+        "enemy_definitions": [
+          "TOADPOLE",
+          "TOADPOLE"
+        ],
+        "floor": 6,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 7,
+        "partition": "fit",
+        "player": 2,
+        "reference_hp": 28.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:d55aac6293dd506cbb9306e04257c23d27b9d12d0d4baf4f076a5510b68a8e0f",
+        "selected_candidate": 1,
+        "selected_choice_decisions": 3,
+        "selected_hp": 35.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 2,
+        "strict_local_improvement": true,
+        "usable_for_main_test": false,
+        "world": "SP1RESH1FTEXPM189"
+      },
+      {
+        "alternatives": 3,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 1,
+        "candidate_outcomes": {
+          "win": 4
+        },
+        "enemy_definitions": [
+          "WRIGGLER"
+        ],
+        "floor": 9,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 4,
+        "partition": "fit",
+        "player": 2,
+        "reference_hp": 16.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:11a84463845d3024a2eae655a4d82af6c5e4051ff8b17feef4642de893cd4f77",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 2,
+        "selected_hp": 16.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 1,
+        "strict_local_improvement": false,
+        "usable_for_main_test": false,
+        "world": "SP1RESH1FTEXPM193"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 16,
+        "candidate_outcomes": {
+          "loss": 17
+        },
+        "enemy_definitions": [
+          "LAGAVULIN_MATRIARCH"
+        ],
+        "floor": 17,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "fit",
+        "player": 2,
+        "reference_hp": 0.0,
+        "reference_outcome": "loss",
+        "root_id": "sha256:595f6ba3467969f93fe5f157cfb22956210d836c8e27ac988788d57606afba41",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 42,
+        "selected_hp": 0.0,
+        "selected_outcome": "loss",
+        "selected_public_rounds": 9,
+        "strict_local_improvement": false,
+        "usable_for_main_test": false,
+        "world": "SP1RESH1FTEXPM179"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 12,
+        "candidate_outcomes": {
+          "win": 17
+        },
+        "enemy_definitions": [
+          "FLYCONID",
+          "SNAPPING_JAXFRUIT"
+        ],
+        "floor": 11,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "fit",
+        "player": 2,
+        "reference_hp": 40.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:2ad9f0b592ef09434654c08615641f76f8d993e4554344d5d62773240b737b34",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 9,
+        "selected_hp": 40.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 3,
+        "strict_local_improvement": false,
+        "usable_for_main_test": true,
+        "world": "SP1RESH1FTEXPM142"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 15,
+        "candidate_outcomes": {
+          "win": 17
+        },
+        "enemy_definitions": [
+          "SEWER_CLAM"
+        ],
+        "floor": 14,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "fit",
+        "player": 3,
+        "reference_hp": 19.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:9d75b71ecb0f0d4e85881deb2ec2e52d0df62321cf756c7c8ef6b578e2b300a3",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 12,
+        "selected_hp": 19.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 4,
+        "strict_local_improvement": false,
+        "usable_for_main_test": true,
+        "world": "SP1RESH1FTEXPM208"
+      },
+      {
+        "alternatives": 7,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 6,
+        "candidate_outcomes": {
+          "win": 8
+        },
+        "enemy_definitions": [
+          "SEAPUNK"
+        ],
+        "floor": 5,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 8,
+        "partition": "fit",
+        "player": 3,
+        "reference_hp": 28.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:3e9699fa3554966059bf1896f96e293779338e8766f759aaa9f118225bb2b72b",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 4,
+        "selected_hp": 28.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 2,
+        "strict_local_improvement": false,
+        "usable_for_main_test": true,
+        "world": "SP1RESH1FTEXPM136"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 16,
+        "candidate_outcomes": {
+          "loss": 17
+        },
+        "enemy_definitions": [
+          "BYGONE_EFFIGY"
+        ],
+        "floor": 7,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "fit",
+        "player": 3,
+        "reference_hp": 0.0,
+        "reference_outcome": "loss",
+        "root_id": "sha256:2ab81e630a7852b3c6f1f7ceb2b2ada4d848e6552ff2e80b7a380f63225603ab",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 10,
+        "selected_hp": 0.0,
+        "selected_outcome": "loss",
+        "selected_public_rounds": 3,
+        "strict_local_improvement": false,
+        "usable_for_main_test": false,
+        "world": "SP1RESH1FTEXPM229"
+      },
+      {
+        "alternatives": 10,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 9,
+        "candidate_outcomes": {
+          "win": 11
+        },
+        "enemy_definitions": [
+          "CORPSE_SLUG",
+          "CORPSE_SLUG"
+        ],
+        "floor": 13,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 11,
+        "partition": "fit",
+        "player": 3,
+        "reference_hp": 27.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:daf07c1fd620093a8c0546e3e20f8735e5b30f86163d96f17ea95ea25141caec",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 6,
+        "selected_hp": 27.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 2,
+        "strict_local_improvement": false,
+        "usable_for_main_test": true,
+        "world": "SP1RESH1FTEXPM129"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 16,
+        "candidate_outcomes": {
+          "loss": 17
+        },
+        "enemy_definitions": [
+          "PHROG_PARASITE"
+        ],
+        "floor": 7,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "heldout",
+        "player": 2,
+        "reference_hp": 0.0,
+        "reference_outcome": "loss",
+        "root_id": "sha256:71a35206e75ffa7200e84826ade74e3997369f6b6ba701ef77b3c27f832ef7f3",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 13,
+        "selected_hp": 0.0,
+        "selected_outcome": "loss",
+        "selected_public_rounds": 4,
+        "strict_local_improvement": false,
+        "usable_for_main_test": false,
+        "world": "SP1RESH1FTEXPM248"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 11,
+        "candidate_outcomes": {
+          "win": 17
+        },
+        "enemy_definitions": [
+          "CALCIFIED_CULTIST",
+          "DAMP_CULTIST"
+        ],
+        "floor": 14,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "heldout",
+        "player": 2,
+        "reference_hp": 78.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:240e7ccd780cb7fc97c13de859a1e61df65d50be468fe696c80ded3db946ac81",
+        "selected_candidate": 8,
+        "selected_choice_decisions": 9,
+        "selected_hp": 80.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 3,
+        "strict_local_improvement": true,
+        "usable_for_main_test": true,
+        "world": "SP1RESH1FTEXPM162"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 16,
+        "candidate_outcomes": {
+          "loss": 17
+        },
+        "enemy_definitions": [
+          "CEREMONIAL_BEAST"
+        ],
+        "floor": 17,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "heldout",
+        "player": 3,
+        "reference_hp": 0.0,
+        "reference_outcome": "loss",
+        "root_id": "sha256:3929c5e9efe02c2b1bad797367e277c67397cad57c3fe67b9bbf587916f93260",
+        "selected_candidate": 0,
+        "selected_choice_decisions": 16,
+        "selected_hp": 0.0,
+        "selected_outcome": "loss",
+        "selected_public_rounds": 5,
+        "strict_local_improvement": false,
+        "usable_for_main_test": false,
+        "world": "SP1RESH1FTEXPM174"
+      },
+      {
+        "alternatives": 16,
+        "alternatives_with_changed_recorded_non_hp_resources": 0,
+        "alternatives_with_identical_recorded_outcome_and_resources": 9,
+        "candidate_outcomes": {
+          "loss": 1,
+          "win": 16
+        },
+        "enemy_definitions": [
+          "WRIGGLER",
+          "WRIGGLER",
+          "WRIGGLER"
+        ],
+        "floor": 14,
+        "higher_hp_wins_rejected_by_resource_guards": 0,
+        "nonconfirmation_candidates": 17,
+        "partition": "heldout",
+        "player": 3,
+        "reference_hp": 8.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:3abc71e47105ce70b40d63fc72f2b50f8cce7cf8eb229beeb5b784d0728f36f5",
+        "selected_candidate": 9,
+        "selected_choice_decisions": 8,
+        "selected_hp": 15.0,
+        "selected_outcome": "win",
+        "selected_public_rounds": 3,
+        "strict_local_improvement": true,
+        "usable_for_main_test": true,
+        "world": "SP1RESH1FTEXPM205"
+      }
+    ],
+    "sha256": "9540b1a094e88576f2210bd2057f19b63366971b0b73044cfd77f1c476cd14f5",
+    "technical_failures": 0
+  },
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}

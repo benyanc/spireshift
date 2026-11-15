@@ -1,0 +1,116 @@
+{
+  "schema_version": "native-shared-live-checkpoint-evidence-v1",
+  "environment_id": "sha256:fe49accaaaf005ef5e3b5e3028ee4ec968a5e1e838c08de42a9bd0f4441c67e3",
+  "source_report_id": "sha256:69c9438cb59c3b3151d44827dc53e260eed860236719c80e750d9ead4f5573fd",
+  "config_id": "sha256:b5b9621883e98ffeed61a6af162f90e6f3b91ece68faf7a6e1e03ed2ae62ccf1",
+  "control_status": "live_checkpoint_delivery_control_pass",
+  "paired_prefixes": 1,
+  "players_imported": [
+    2,
+    3
+  ],
+  "players_live_exercised": [
+    2
+  ],
+  "policy_actions_per_host": 2,
+  "only_one_nontrivial_choice_per_host": false,
+  "new_game_starts": 2,
+  "ordinary_PPO_eligible": false,
+  "source_originals_preserved": true,
+  "protected_files_verified": 1560,
+  "imports": [
+    {
+      "state_id": "sha256:c486c54896edc9fa9081825d71d788025839e781e7f80c6d87d8d1ca94c5a266",
+      "model_id": "sha256:12767d9db743896872e3d7688b7ac3d9e3761c58d44453b4c603b99540a56dff",
+      "environment_id": "sha256:fe49accaaaf005ef5e3b5e3028ee4ec968a5e1e838c08de42a9bd0f4441c67e3",
+      "numeric_weights_exact": true,
+      "all_Adam_moments_and_counter_exact": true,
+      "optimizer_steps": 5658,
+      "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+      "original_bytes_unchanged": true,
+      "initial_policy_behavior_unchanged_claimed": false
+    },
+    {
+      "state_id": "sha256:2dc5c57318163664b08c2b035d5bdb7e4c13d6ceb2f53ac54317cb2f9c64970d",
+      "model_id": "sha256:3e47c4b6ed1b2b85925c0664f9c99b11739cf93f1d189b4d91d1fa1b8c3631b7",
+      "environment_id": "sha256:fe49accaaaf005ef5e3b5e3028ee4ec968a5e1e838c08de42a9bd0f4441c67e3",
+      "numeric_weights_exact": true,
+      "all_Adam_moments_and_counter_exact": true,
+      "optimizer_steps": 6045,
+      "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+      "original_bytes_unchanged": true,
+      "initial_policy_behavior_unchanged_claimed": false
+    }
+  ],
+  "scoped_live_delivery_passed": true,
+  "prefix_input_equivalence": false,
+  "full_game_performance_evaluated": false,
+  "actual_complete_menu_keys_equal_on_first_state": true,
+  "input_gap_categories": [
+    "CLI_missing_event_tooltips_card_previews_and_option_flags",
+    "different_duplicate_context_option_layouts"
+  ],
+  "both_prefix_actions_independently_reproduced": true,
+  "saved_verification_report_id": "sha256:d994978b786303cf2c685a10423bf54fc141f76ae3821a49ce7185c4473732bd",
+  "saved_verification_seconds": 2.3193411668762565,
+  "resources": {
+    "wall_seconds": 35.30569325014949,
+    "cpu_seconds": 21.860454804,
+    "peak_resident_memory_bytes": 1176338432,
+    "final_storage_bytes": 6845258
+  },
+  "resource_storage_exclusions": {
+    "isolated_official_profile_bytes": 137914,
+    "existing_shared_app_pool_and_frozen_inputs_excluded": true
+  },
+  "new_app_copies": 0,
+  "optimizer_updates": 0,
+  "checkpoint_promoted": false,
+  "live_gate_qualification_granted": false,
+  "owner_canary_planned_pairs": 4,
+  "owner_canary_maximum_policy_actions": 512,
+  "owner_canary_started": false,
+  "owner_canary_purpose": "broader_public_input_and_delivery_gap_diagnosis_not_training_or_admission",
+  "live_control_families": [
+    "event_option",
+    "card_bundle_selection"
+  ],
+  "control_history": [
+    {
+      "version": 1,
+      "game_starts": 2,
+      "status": "delivery_pass_inputs_differ"
+    },
+    {
+      "version": 2,
+      "game_starts": 2,
+      "status": "deck_selection_name_rejected_clean_app_reset_verified"
+    },
+    {
+      "version": 3,
+      "game_starts": 2,
+      "status": "delivery_pass_inputs_differ"
+    }
+  ],
+  "all_control_game_starts": 6,
+  "selection_aliases_implemented": [
+    "native_deck_card_selection",
+    "native_simple_card_selection",
+    "native_combat_pile_selection",
+    "combat_hand_card_selection",
+    "deck_upgrade_selection",
+    "deck_transform_selection",
+    "deck_enchant_selection"
+  ],
+  "rejected_client_waits_for_verified_natural_shutdown": true,
+  "rejected_raw_public_reads_preserved": true,
+  "verification": {
+    "tests_passed": 2531,
+    "tests_skipped": 7,
+    "strict_type_checked_files": 561,
+    "explicit_node_tests_passed": 9,
+    "format_lint_protocol_passed": true,
+    "wall_seconds": 139.943696500035,
+    "resource_report_id": "sha256:2933814ad9e2037ba4dd3d4b3853cff7eebaa19f13a636a2895a4e42dbfbc92f"
+  }
+}

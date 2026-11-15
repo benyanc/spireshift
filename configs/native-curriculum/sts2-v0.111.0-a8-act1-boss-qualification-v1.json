@@ -1,0 +1,161 @@
+{
+  "control": {
+    "key": "boss-control-001",
+    "player": 2,
+    "seed": "SP1RESH1FTA8BC001"
+  },
+  "control_deliveries": 32,
+  "control_limits": {
+    "cpu_seconds": 300,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 285
+  },
+  "control_resource": "artifacts/resources/a8-act1-boss-control-v1.json",
+  "control_workspace": "artifacts/native-a8-act1-boss/control-v1",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "gate": {
+    "minimum_confirmed_clears": 3,
+    "strict_rescue_initializers": [
+      2,
+      3
+    ]
+  },
+  "implementation": {
+    "scripts/engine-act1-boss-worker-v1.mjs": "d4685013451e522e58526c8f60bbb7d51dcb753455b0cd7c55a541d39d68cc69",
+    "scripts/engine-atomic-selection-v1.mjs": "5121eda9ac515aac71466d0359db8299d25c1c8be3f0798469a4622bbd0a6c52",
+    "scripts/engine-atomic-selection-v6.mjs": "c3217a465a6024421253c3ad9dfcbbd5fa293d51be18b8154aad5016b309b748",
+    "scripts/engine-bundle-commit-v1.mjs": "20dce9fce819c91111860eebf55ef815d6b9050db8de13156d11a5f605bdd4f7",
+    "scripts/engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "scripts/engine-card-cost-types-v1.mjs": "2b4e976e207def925452d80b974ff04b879b1ed940e6f69840bceea0b782851d",
+    "scripts/engine-chest-contract-v1.mjs": "182b11336203eaa70977d7ebe9e1c4c5199ec3f6bb15dd6b4174acbe950ce0eb",
+    "scripts/engine-chest-surface-v1.mjs": "dd39708d2070d9711361696a98919d71accb69fa8e385f1bab2d4ca513cd0d45",
+    "scripts/engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "scripts/engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "scripts/engine-combat-surface-v5.mjs": "67eee376ebae9ddfccc7823a375500cd33ed9eb8bd28c3fdbeca1adafb1de0ab",
+    "scripts/engine-combat-surface-v6.mjs": "0278228521d553b041b7b6f09ce21a86e2a27f21e3a2edf388c81b3febb2496c",
+    "scripts/engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "scripts/engine-generated-choice-belt-regression-v1.mjs": "24f091e6165a5dd67988381fa848270a7d8ca666492c40bac913ae8cc801e64a",
+    "scripts/engine-generated-choice-belt-surface-v1.mjs": "af058abe30f59f74ae0a5d131460d34afbd2dae3c8335cde4ce5830cf9a9ef45",
+    "scripts/engine-input-layout-v12.mjs": "854af418b90498a6bfc91478ae7144894876407013f7002d7412b27a0d9107eb",
+    "scripts/engine-interface-contract-v2.mjs": "d4ca629e16bf73e6ea2969f3fc64898d7c3cd81111c60345b028e445413c279e",
+    "scripts/engine-interface-scopes-v3.mjs": "f2b7bbd229bc0ceccf28974da006d1741786e464d6267a06b447ae48e588a20e",
+    "scripts/engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "scripts/engine-native-runtime-errors-v1.mjs": "c46fd3adb346004c46d5b5126348a9b7f99780d844c5d23409b4b22444d25e60",
+    "scripts/engine-native-worker-v24.mjs": "876ee2a49d9f51e1925f6fc535d4312f57dce13d88a15b92b762b954f32f4bc8",
+    "scripts/engine-natural-shipped-contract-v1.mjs": "9c1b3573a4362b78efa1a1e758affbb53045bcfdf94c4e03f496ed59006635b5",
+    "scripts/engine-ordered-plan-surface-v1.mjs": "725753ffd89c28e3a79819697484a16c800b15ee2cdbee37efba8dc2eaf49f90",
+    "scripts/engine-ordered-plan-v1.mjs": "0fb1892a72de324756fd41dd77920931133fe9c94864fd596300d7984646f336",
+    "scripts/engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "scripts/engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "scripts/engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "scripts/engine-relic-surface-v1.mjs": "8d13cb14033cea7c4a5a280ccee5c16f931e5de3ee5b76433b222d2f7774d9e6",
+    "scripts/engine-relic-surface-v2.mjs": "aebb9874b61d459004dbb0b90869d2d5a3f590c2eb890c4101ea5cdde0393fb8",
+    "scripts/engine-relic-surface-v3.mjs": "435a84f4c01d1b46794a689360d7fd9915e27d3bd0520d563bdbaf3e09d4dd53",
+    "scripts/engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "scripts/engine-reward-belt-surface-v1.mjs": "2c30d879cf6fdc19490dde285059f3d8c0da3ec2aecc5142be6f5a0379808f0d",
+    "scripts/engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "scripts/engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "scripts/engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "scripts/engine-run-contract-v7.mjs": "d36dc7a1546270fd1ff2854948639e3c3a36938fc19395b3ef7427665149000d",
+    "scripts/engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "scripts/engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "scripts/engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "scripts/engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "scripts/engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "scripts/engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "scripts/engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "scripts/engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "scripts/engine-selection-flows-v9.mjs": "bd584228bddec0bb3e49b0b61de9d8e6c4619d57e13a380cbcc7cae88ed7b688",
+    "scripts/engine-selection-scope-v1.mjs": "3612bd3d8eec7e4a7855cd696cbf0e73b4cb341809a27005d648171e906fa726",
+    "scripts/engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "scripts/engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "scripts/engine-shared-input-v1.mjs": "242c415b74d1054ccd79ef27ae8a7465bf2fb15801ab3f3c3de4d869618088b3",
+    "scripts/engine-shared-input-v16.mjs": "3edef9cfff30b4f8164e563bb39f456be46bd0ecb4243448aea9aa1e3c466196",
+    "scripts/qualify-act1-boss-teacher-v1.sh": "41ce2de2c8c79eba8911f4bc6d64c10f86bdb0b1d8adff9bdc586ec2be742496",
+    "src/spireshift/native_a8_boss_checks.py": "04cf766cd7c414a6e3d98456cf8fff8757ba92d0902857f5ff2ebcd8f09e37f9",
+    "src/spireshift/native_a8_boss_game.py": "38cbf7376b72f0b703b861932bf603727e9e7338c4eedb8e07f840aa32d60ac4",
+    "src/spireshift/native_a8_boss_inputs.py": "bf04b8194ca50b66a599bcd15600d990b784268358dc263ab690e967ad5e5d45",
+    "src/spireshift/native_a8_boss_policy.py": "cd84024692be6c11a3737c62d3b665fb8957280194dc4f8bc6ebd2ddb9d39c5c",
+    "src/spireshift/native_a8_boss_session.py": "5696af78edd08fbad8dcb37fca8b30486099cac74bf2c4c092aa12746ad64875",
+    "src/spireshift/native_a8_boss_worker.py": "634e5d01f658147c0441cf751fb6b232966c13f4d1aa21c066ea929c152bd44c"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "previous_recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-act1-rescue-v1.json",
+    "sha256": "fb65723070ab3075d8810aa95f830b1a0737bfdf861b002d8cb7488ccb0cbf78"
+  },
+  "previous_result": {
+    "path": "docs/evidence/native-a8-act1-rescue-result-v1.json",
+    "sha256": "cb836c6a63c2197dc50f32ed2b90b48e1bffd211e21fa1e13c888e6b53e30f92"
+  },
+  "projection": "act1_generated_choice_belt_v1",
+  "schema_version": "native-a8-act1-boss-qualification-v1",
+  "session_limits": {
+    "cpu_seconds": 14400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 5400
+  },
+  "teacher": "normal_start_act1_boss_teacher_v1",
+  "workspace": "artifacts/native-a8-act1-boss/study-v1",
+  "worlds": [
+    {
+      "key": "boss-001",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BQ001"
+    },
+    {
+      "key": "boss-002",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BQ002"
+    },
+    {
+      "key": "boss-003",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BQ003"
+    },
+    {
+      "key": "boss-004",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BQ004"
+    },
+    {
+      "key": "boss-005",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BQ005"
+    },
+    {
+      "key": "boss-006",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BQ006"
+    },
+    {
+      "key": "boss-007",
+      "player": 2,
+      "seed": "SP1RESH1FTA8BQ007"
+    },
+    {
+      "key": "boss-008",
+      "player": 3,
+      "seed": "SP1RESH1FTA8BQ008"
+    }
+  ]
+}

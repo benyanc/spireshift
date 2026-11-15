@@ -1,0 +1,113 @@
+{
+  "checks": {
+    "bounded_admission": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-a8-learning-admission-v5.json",
+      "report_id": "sha256:1ad3884f71dce640e5483d413a5bd1a16ab3500700bd1158a5b2f82d0ed3875a",
+      "sha256": "bbfcca9c153f86203b6961d554f35047b128f8f120033777fdb55db660372240",
+      "status": "admitted_for_bounded_native_policy_only_pilot"
+    },
+    "id_invariance": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-learning-integration-v5/id-invariance-audit.json",
+      "report_id": null,
+      "sha256": "c9e55cec44f978bffbbd3f4e7ddda5da6afef0e9eb39c19279b31abd27c38c2b",
+      "status": null
+    },
+    "learning_control": {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v9/summary.json",
+      "report_id": "sha256:b4bcf8e510e28cbc24d9c3b6d9b10ac5e626553eafe7b7e15471638388dfd896",
+      "sha256": "1cd8b3040d8b07cede7d24c213b20b6c1279ad1a1fb2daef5d2410862628d7c3",
+      "status": "short_learning_control_pass"
+    },
+    "native_lifecycle": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v9/summary.json",
+      "report_id": "sha256:fdb724c6a0d47928958706b9b26fa285845dc4bf4fa736ab44d56066e1f1f1a0",
+      "sha256": "063de176eab2e53f14fac06362d0af41e30f4480065ad6562e049e27bc626bf8",
+      "status": "native_progression_pass"
+    },
+    "potion_effects": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/potion-controls-v3/summary.json",
+      "report_id": "sha256:47407f51ea25691e5ba53a18ca74c590a9406442d9c159e3aa6e7f7bf69654b7",
+      "sha256": "97ab11e2dc49a7063bceee75eaa615f641453c3f4cc0934db31a8548b143ff4f",
+      "status": "native_potion_checks_pass"
+    },
+    "queued_discard_controls": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/potion-queue-checks-v1/summary.json",
+      "report_id": "sha256:3961fab9029e1302f916c5b595ffe481ce89fd7688a5d80fb6ef3d33036b8e23",
+      "sha256": "ffce2ac47eb7d05971246cd18b803688ee4aac631f370dc7f2e12328d834ec68",
+      "status": "queue_controls_pass"
+    },
+    "read_only_preflight": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-learning-integration-v5/preflight.json",
+      "report_id": null,
+      "sha256": "ec17791d9fac91496c2a464eeccf8bcdfdaa3336b68c1112f9307523cdde2f12",
+      "status": null
+    },
+    "repaired_build": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v34.json",
+      "report_id": "sha256:e18dc8f4f895ab7736022053534fff123ab3f2b240309fb04a5fa8240e5f2fd3",
+      "sha256": "18192525bc0264e8982d5d51a5d7386ca78ac268e284724a26cdb3b65cc14990",
+      "status": "candidate_built_unqualified"
+    },
+    "worker_isolation": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-worker-isolation-v12/summary.json",
+      "report_id": "sha256:357dbcd3cf7f666fa4542871c1d4c1ae20884e4749fd0e5a2ec4861ad2659edf",
+      "sha256": "0d52af7404df6cbfc4fa0ad83ef705564e370e8b8a957adfed9b44c851c7da4e",
+      "status": "worker_isolation_pass"
+    }
+  },
+  "date": "2026-10-16",
+  "game_assembly_unchanged": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "new_pilot_config": "configs/native-learning/sts2-v0.111.0-a8-pilot-v5.json",
+  "new_pilot_config_id": "sha256:00473ec9bed0344ef86192cc717fc7d031430e2b945e2f152df6633fdb176824",
+  "new_pilot_launched": false,
+  "old_pilot_preserved": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v4",
+  "old_pilot_report_id": "sha256:25752c685b479193b0523c16aba345a2fe4705cfdeb7c0aed147da265f82fb06",
+  "projection_cache_policy": "immutable_shared_local_projection_v2",
+  "report_id": "sha256:747c625d83c182a4f02a5469199c52b1f54741164fa798351e0371c7b35d5597",
+  "resources": [
+    {
+      "path": "artifacts/resources/native-run-v34-frozen-build-v1.json",
+      "sha256": "64b0e952be411cc170066a377e892877a09eeecb7be8b27c3305384b45d67eec"
+    },
+    {
+      "path": "artifacts/resources/potion-queue-controls-v1.json",
+      "sha256": "d47ec0f2513db14ea21f98cea103245859dbd9e634ce20e9967fe7a2327141de"
+    },
+    {
+      "path": "artifacts/resources/native-workers-v12.json",
+      "sha256": "6d732751d9d7f974e0ee9a9b0a294134eb426451474f2a35b934681bbb5e2125"
+    },
+    {
+      "path": "artifacts/resources/native-potion-controls-v3.json",
+      "sha256": "b0b5d2aba288ddf3e1199703f81f0beb029a9fc5f3326ab7bb9c78bcbad7caf5"
+    },
+    {
+      "path": "artifacts/resources/native-run-progression-v9.json",
+      "sha256": "098247b4e8c3e366c07aec8a86d97162d27070354fa015c49b2f70faa0c7a22c"
+    },
+    {
+      "path": "artifacts/resources/native-a8-learning-control-v9.json",
+      "sha256": "db8394ace2672e54342c224f19ea81c5224eb64b1ad093f4eb08207b9a8d45d8"
+    }
+  ],
+  "schema_version": "native-a8-worker-potion-repair-evidence-v1",
+  "summary": {
+    "adaptive_controller_allowed": false,
+    "game_apps_created": 0,
+    "gameplay_strength_proven": false,
+    "old_host_failure_reproductions": 2,
+    "potion_cases_completed": 25,
+    "repaired_queued_discard_passes": 2,
+    "repository_tests_passed": 1413,
+    "saved_id_audit_comparisons": 5175,
+    "saved_id_audit_observations": 1725,
+    "short_control_optimizer_steps": 6,
+    "short_learning_games_completed": 4,
+    "short_learning_games_failed": 0,
+    "training_pilot_still_owner_run": true,
+    "verified_training_decisions": 228,
+    "worker_games_completed": 12,
+    "worker_games_failed": 0
+  },
+  "work_item": 146
+}

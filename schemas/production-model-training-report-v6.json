@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/production-model-training-report-v6.json",
+  "type": "object",
+  "required": [
+    "train_dataset_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "model_id",
+    "report_id",
+    "schema_version",
+    "model_type",
+    "trajectory_finetuning",
+    "training_runs",
+    "validation_runs",
+    "training_records",
+    "validation_records",
+    "eligible_preferences",
+    "fit_preferences",
+    "selection_preferences",
+    "fit_anchor_records",
+    "selection_anchor_records",
+    "collection_summary",
+    "exclusions",
+    "parent_selection_preferences",
+    "parent_strong_selection_preferences",
+    "parent_selection_policy",
+    "parent_validation_policy",
+    "held_out_metrics",
+    "validation_drift",
+    "validation_checks",
+    "preference_diagnostics",
+    "inference_diagnostics",
+    "terminal_value_status",
+    "floor_thresholds",
+    "training_history",
+    "candidate_eligible",
+    "status",
+    "terminal_victory_positive_labels",
+    "checkpoint_promoted",
+    "claim_scope",
+    "selection_note"
+  ],
+  "properties": {
+    "train_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "validation_dataset_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "schema_version": {
+      "const": "production-model-training-report-v6"
+    },
+    "model_type": {
+      "const": "sparse-anchored-trajectory-policy-v1"
+    },
+    "trajectory_finetuning": {
+      "$ref": "https://spireshift.dev/schemas/trajectory-policy-training-config-v1.json#/$defs/binding"
+    },
+    "training_runs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "validation_runs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "training_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "validation_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eligible_preferences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fit_preferences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "selection_preferences": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fit_anchor_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "selection_anchor_records": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "collection_summary": {
+      "type": "object"
+    },
+    "exclusions": {
+      "type": "object"
+    },
+    "parent_selection_preferences": {
+      "type": "object"
+    },
+    "parent_strong_selection_preferences": {
+      "type": "object"
+    },
+    "parent_selection_policy": {
+      "type": "object"
+    },
+    "parent_validation_policy": {
+      "type": "object"
+    },
+    "held_out_metrics": {
+      "type": "object"
+    },
+    "validation_drift": {
+      "type": "object"
+    },
+    "validation_checks": {
+      "type": "object"
+    },
+    "preference_diagnostics": {
+      "type": "object"
+    },
+    "inference_diagnostics": {
+      "type": "object"
+    },
+    "terminal_value_status": {
+      "type": "object"
+    },
+    "floor_thresholds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "training_history": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "candidate_eligible": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "validation_candidate",
+        "rejected_or_no_update"
+      ]
+    },
+    "terminal_victory_positive_labels": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "anchored_train_trajectory_auxiliary_policy_candidate"
+    },
+    "selection_note": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

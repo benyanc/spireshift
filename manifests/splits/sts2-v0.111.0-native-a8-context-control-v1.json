@@ -1,0 +1,27 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:6b24d66bae710474e474e14e3e5d08f55877ee784c5820515ed23a629218d476",
+  "schema_version": "native-context-seed-manifest-v1",
+  "seeds": [
+    {
+      "id": 810001,
+      "partition": "control",
+      "seed": "SP1RESH1FTA8CTXCNT000001"
+    },
+    {
+      "id": 810002,
+      "partition": "control",
+      "seed": "SP1RESH1FTA8CTXCNT000002"
+    },
+    {
+      "id": 811001,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CTXCNE000001"
+    },
+    {
+      "id": 811002,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CTXCNE000002"
+    }
+  ]
+}

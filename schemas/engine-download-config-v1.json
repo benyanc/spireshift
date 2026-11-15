@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/engine-download-config-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "qualification_config_id", "branch", "login_id", "max_downloads", "max_wall_seconds", "downloader"],
+  "properties": {
+    "schema_version": {"const": "engine-download-config-v1"},
+    "qualification_config_id": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "branch": {"const": "public-beta"},
+    "login_id": {"type": "integer", "minimum": 1, "maximum": 4294967295},
+    "max_downloads": {"type": "integer", "minimum": 1, "maximum": 16},
+    "max_wall_seconds": {"type": "integer", "minimum": 1, "maximum": 7200},
+    "downloader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["release", "source_commit", "url", "archive_bytes", "archive_sha256", "executable_sha256", "fingerprint_authority"],
+      "properties": {
+        "release": {"const": "DepotDownloader_3.4.0"},
+        "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "url": {"const": "https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_3.4.0/DepotDownloader-macos-arm64.zip"},
+        "archive_bytes": {"type": "integer", "minimum": 1, "maximum": 50000000},
+        "archive_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "executable_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "fingerprint_authority": {"const": "locally_observed_official_release_asset_not_publisher_signed_checksum"}
+      }
+    }
+  }
+}

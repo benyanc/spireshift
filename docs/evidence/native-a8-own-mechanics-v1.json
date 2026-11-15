@@ -1,0 +1,73 @@
+{
+  "architect": {
+    "forced_fixture_boss_defeats": 3,
+    "initial_private_progress_assertion": {
+      "path": "artifacts/native-a8-own-training/mechanics-assessment-v1/architect/report.json",
+      "report_id": "sha256:1cfe158d6cfe2e5a7b889a75702b03f7e0f843fc75ed57c4a06fce6c089d425c",
+      "sha256": "7dd4e4af3f5eddb6c3a3a8772b3baa5a28942f701d8d86a7122993d19e5920ef"
+    },
+    "matched_saving_disabled_diagnostic": {
+      "path": "artifacts/native-a8-own-training/mechanics-architect-matched-v1/architect/report.json",
+      "report_id": "sha256:acde3167f36ca73ec132b27717a64a3b4f4aabcb912810f042e12bf4e3678b13",
+      "sha256": "9a4030ab3a1326a8b932efc5fef951bdb7dd740c6b2aaf2fa47c01a9d9811488"
+    },
+    "native_flags": {
+      "native_game_over": true,
+      "native_player_dead": true,
+      "native_victory_room": true
+    },
+    "natural_start_victories_verified": 0,
+    "saved_saving_enabled_diagnostic": {
+      "path": "artifacts/native-a8-paired/architect-attempt-3/report.json",
+      "report_id": "sha256:d3102c658bc6a6767638a9854a38643b697f6d0daa1893ab320b7c79cb880834",
+      "sha256": "f39b92c6c7c677763cce0d62fca943d49f9de6f84991fd8e7b3abaab00fc2f14"
+    },
+    "separate_fixture_incomplete_before_architect": {
+      "path": "artifacts/native-a8-own-training/mechanics-architect-endpoint-v1/architect/report.json",
+      "report_id": "sha256:53b642d154353e93c23325f109b48b4db0275347073573b287c9082fcb72de6f",
+      "sha256": "3d61ab0eb1f5a59625c78184a06bdfdda7d0a77529d1afcc986c5c713de72e4e"
+    }
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "game_version": "v0.111.0 / 41cef1ea",
+  "native_ending_verifier": {
+    "contradictory_loss_accepted": true,
+    "source": "scripts/engine-run-contract-v7.mjs",
+    "source_sha256": "d36dc7a1546270fd1ff2854948639e3c3a36938fc19395b3ef7427665149000d",
+    "victory_accepted": true
+  },
+  "optimizer_updates": 0,
+  "report_id": "sha256:d0163909ef97d0650cbc78ea1b43dc236c2ec9812de42dae3bf3aa12395802f8",
+  "schema_version": "native-a8-model-only-mechanics-assessment-v1",
+  "shared_profile_unchanged": true,
+  "shipped_game_connector_31_atomic_answer_limit": 512,
+  "status": "confirmed_scoped_action_and_ending_verifier_defects",
+  "study": {
+    "compound_answer_factors": 0,
+    "double_down_menu_exposures": 0,
+    "mechanics_audit_verified_native_deliveries": 10937,
+    "native_losses_rechecked": 72,
+    "report": {
+      "path": "artifacts/native-a8-own-training/study-v1/attempt-1794165879986703000.json",
+      "report_id": "sha256:58eca49b6fe902aa7ae61248c6d5a66fcd3ff4f621b89b10833b7cf6cf419f6c",
+      "sha256": "aa63a55797de84606cc61df10346134966e960a7691feaeec2f47d54044d2d41"
+    }
+  },
+  "trial_double_down": {
+    "advertised": true,
+    "diagnostic": {
+      "path": "artifacts/native-a8-own-training/mechanics-assessment-v1/trial/report.json",
+      "report_id": "sha256:b768a1e5795bdbb2c2cce619c1f58e32b2824662f9e576b751ddee548591a208",
+      "sha256": "b54c75f29a4cf0b188f0a1488fea78cc95dc8e9e68693bcc15fc375b86b50895"
+    },
+    "failed_before_abandon_confirmation": true
+  }
+}

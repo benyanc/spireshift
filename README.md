@@ -1,5 +1,22 @@
 # SpireShift
 
+Current handoff (2026-10-19): the native combat teacher completed 384 branches but yielded
+no reliable action preferences. The next step is a [richer public-state value predictor](docs/native-public-value.md),
+compared against the current 20-feature predictor on held-out whole saved TRAIN games.
+Short integration checks pass; better forecasts/play are **not** established. Both players
+and their full optimizer states are preserved. The larger saved-data comparison is ready
+for the owner, with no new games or app copies. See the [ordered backlog](docs/backlog.md)
+for the one current command. Full local verification: 1,849 tests plus lint/types/C# contracts.
+
+Preserved mechanics handoff (2026-10-15): the native A8 v3 pilot finished, with no wins and inconclusive
+independent progress. The [systematic native mechanics coverage pass](docs/actual-engine-mechanics-coverage.md)
+inventories every frozen model and tests cards/resources from all pools. The owner completed all
+1,824 checks and found 50 failures in three shared causes. The repairs add valid event-card forms
+and native play receipts. The repaired full sweep passes **1,849/1,849 checks**. The
+[short follow-up checks](docs/actual-engine-mechanics-followups.md) also pass: 522 random legal
+decisions with repeatability, plus same-build act/ending fixtures. Outside-combat potion controls
+remain before the next training admission. These checks do not establish playing strength.
+
 SpireShift is a research environment and full-run agent for studying budgeted deliberation in
 Slay the Spire 2.
 
@@ -7,9 +24,35 @@ The project asks whether an agent can maximize terminal victory while deciding b
 to take and how much computation to spend. A strong inexpensive policy handles routine choices;
 search is reserved for decisions where it is expected to improve full-run victory probability.
 
-## Current status
+## Earlier simulator and engine development
 
-The repository currently contains the research contracts and a seeded mock vertical slice:
+The completed [fixed-A8 full-run PPO](docs/full-run-ppo-a8.md) pilot played 5,504 attempts and
+changed the unified neural player. Its independent 128-seed comparison remains inconclusive:
+mean floor 11.66 initially / 11.99 trained, zero full wins, and three / two first-act clears.
+The subsequent [PPO-seeded evolution](docs/full-run-a8-evolution.md) completed 5,248 attempts
+without a full win or reliable gain; it selected the exact initializer. A bounded audit found
+that the encoder loses which status amount or relic counter belongs to which visible object.
+The [implemented relational repair](docs/full-run-relational-a8-v3.md) repairs those relationships in
+separately versioned actor/critic inputs while keeping the same compact network and PPO math.
+Short sensitivity and synthetic learning controls pass; real playing strength remains unproven.
+The repaired simulator is admitted for scoped policy learning with
+[explicit fidelity limits](docs/decisions/0004-scoped-a8-simulator-learning.md).
+A useful player, full win and adaptive thinking remain to be established. The owner accepted
+[a separately frozen v0.111.0 actual-engine qualification track](docs/actual-engine-v0.111.0.md)
+before another large learning run. Exact-build preflight and private archive tooling are
+implemented, and the exact game is now acquired and privately frozen. A bounded shipped-runtime
+boot verifies separate native saves; the complete generated model-type registry is extracted
+privately. Public mechanics qualification and complete-run speed evidence remain pending.
+Keep all v0.107.1 artifacts and the relational repair unchanged; the older large emulator pilot
+is deferred. The current guide records completed checks and the next qualification work.
+The [current combat-effect checks](docs/actual-engine-combat-effects.md) now agree with the game
+through turn two on two assigned A8 fixtures, after repairing Weak damage descriptions and the
+fresh reshuffle confirmation. The owner eight-case repeat panel and independent saved-only audit
+pass. Broader mechanics qualification, including the separately repaired
+[potion-discard scope](docs/actual-engine-combat-potion-discard.md), still precedes full-run
+throughput and new learning.
+
+The repository also contains the research contracts and a seeded mock vertical slice:
 
 1. environment reset and public observation;
 2. legal-action enumeration;
@@ -52,7 +95,15 @@ The repository currently contains the research contracts and a seeded mock verti
     tactical-risk and ordinal floor heads, held-out auxiliary gates, and an explicit block on
     terminal-value promotion from all-loss data; and
 27. a compute-capped combat-advancement continuation that pairs hidden worlds across legal actions,
-    rejects public-action mismatches, and bootstraps short horizons from learned progress and risk.
+    rejects public-action mismatches, and bootstraps short horizons from learned progress and risk; and
+28. a cycle-safe production DAgger collector with complete-run ownership, resumable cases,
+    uncertainty, rarity, and terminal-frontier selection, plus versioned causal intervention labels; and
+29. an exact-replay, train-only run-level trajectory beam that retains coherent improvements across
+    generations and reports Act 1 boss reach, Act 1 clear, and terminal victory separately; and
+30. an [anchored trajectory-policy trainer](docs/trajectory-policy-training.md) that consumes verified
+    multi-run action comparisons, freezes non-policy heads, and rejects regressions under a frozen
+    recipe. The completed base-v6 update was rejected; later starting-choice experiments also
+    selected no accepted update, so base-v2 remains the production checkpoint.
 
 No game binaries or proprietary assets are stored in this repository. Live-game integration will
 remain a thin, versioned layer around a locally installed bridge.
@@ -194,6 +245,82 @@ runs, probes every decision cheaply, and reserves expensive labels for disagreem
 suspected confident errors, and high-entropy decisions. Verified selected labels can augment the next
 model checkpoint with complete provenance.
 
+The [production policy-improvement iteration](docs/production-policy-improvement.md) binds that
+workflow to the admitted STS2 engine and accepted base-v2 checkpoint. It uses the shared public
+no-op guard, keeps the completed tactical interventions as causal preferences, and emits a
+teacher-ready state set only after its train-only coverage and liveness gates pass.
+
+The [milestone-conditioned run-level trajectory search](docs/run-level-trajectory-search.md) starts
+from exact base-v2 runs, retains useful action prefixes, and adds bounded mutations across
+generations. It uses Act 1 boss reach and clear only as auxiliary foundation signals while preserving
+terminal full-run victory as the objective. Its public-frontier ablation ranks otherwise tied
+trajectories by health and encounter progress, then tests strategic-trace diversity at the same
+trajectory budget as the frozen hash-ranked pilot.
+
+[Saved trajectory-policy diagnosis](docs/trajectory-policy-diagnosis.md) explains the rejected
+base-v6 update by reconciling every changed validation choice and checking overlap with the new
+training comparisons. Its owner-run command reads saved artifacts without training or game replay.
+
+The [starting-option policy trainer](docs/starting-option-policy-training.md) addresses that diagnosis
+with public categorical option identities and a zero-initialized correction over immutable base-v2.
+Its frozen owner-run experiment preserves the same data, complete-run subfolds and all 204
+development-validation checks. The completed base-v7 experiment selected no update; base-v2
+remains accepted. The [starting-option evidence collector](docs/starting-option-evidence.md)
+compares every starting option on 64 fresh train runs, with frozen fitting/selection ownership,
+complete-run traces, all pair comparisons and explicit coverage checks before further training.
+Its completed owner run passed those checks with 172 eligible comparisons and zero victories.
+The completed [starting-choice training experiment](docs/starting-evidence-policy-training.md)
+consumed this evidence while preserving the original anchor groups, frozen base-v2 and all 204
+validation checks. Its best overall selection-loss gain was 0.000926394179, below the unchanged
+0.001 minimum, despite stronger improvement on higher-floor comparisons. Base-v8 selected epoch
+zero and remains ineligible. The owner completed the
+[issue #42 diagnostic](docs/starting-evidence-diagnosis.md): source/history reconciliation passed,
+and nine groups have opposing realized lessons under similar encoded contexts and different menus.
+The cause remains unresolved. [Issue #128](https://github.com/benyanc/spireshift/issues/128)
+completed its [bounded repeatability study](docs/starting-choice-repeatability.md): all 192 fresh
+train seeds and 576 branches completed, but the frozen primary matching covered only two
+confirmation seeds with no non-tied strong comparisons. The inconclusive result triggers the
+stop rule and ends the starting-choice experiment. The
+[public card/target combat features and saved-data audit](docs/combat-foundation.md) verified the
+existing corpus and found useful combat lessons across 35 fitting and 13 selection runs. One
+card-upgrade selection screen blocked complete action binding. The owner completed the corrected
+audit v2: all 529 combat states bind, with zero failures and all frozen coverage checks passing.
+The owner completed 40 epochs of combat training, but every update failed an overall selection
+check that was impossible for a combat-only change: frozen non-combat errors alone exceeded its
+absolute error limit. Base-v9 retained the original policy. [Issue #132](https://github.com/benyanc/spireshift/issues/132)
+completed the corrected owner experiment, retaining all numerical safeguards and the absolute
+check on original validation. Base-v10 selects epoch 20 and passes every safeguard, with three
+changed combat choices and all 135 non-combat predictions unchanged on saved validation data.
+The [training guide](docs/combat-policy-training.md) archives its eligible result. The owner
+completed the [fresh paired comparison](docs/combat-policy-confirmation.md) on all 32 reserved
+development seeds per model: both lose every run without reaching the first boss. Mean floors
+are 6.625 for base-v10 and 6.65625 for base-v2; no playing benefit is established. Base-v2 remains
+accepted and base-v10 is not promoted. The owner completed the
+[public combat replay diagnosis](docs/combat-confirmation-diagnosis.md): all 64 cases verify,
+with zero failed/mismatched replays, binding/shadow failures or non-combat drift. The
+[current backlog](docs/backlog.md) prioritizes a compact neural candidate and bounded gameplay
+improvement rounds under [#134](https://github.com/benyanc/spireshift/issues/134). The accepted
+base-v2 is a sparse feature-based learned scorer. A
+[16,448-parameter neural combat candidate](docs/neural-combat-policy.md) now implements shared
+public card properties and nonlinear state/action interactions, with the same frozen quality
+gates. The owner completed its first saved-data training stage: base-v11 selects eligible epoch 7
+and passes all validation checks, changing two of 69 saved combat choices. The owner completed
+the [paired neural comparison](docs/neural-combat-confirmation.md): zero wins or first-boss
+reaches for either model across 32 attempted development runs each. Two neural attempts stopped
+at unsupported card-choice menus. The 30 completed pairs have one floor improvement, one
+regression and 28 ties, without established playing benefit. Base-v2 stays accepted; base-v11
+is not promoted. The [discard-choice repair](docs/neural-selection-repair.md) now supports
+both failing menus using the unchanged neural weights. Two short smoke attempts finish as
+ordinary losses, with all 168 earlier predictions preserved. The next owner command in that
+guide runs a separate corrective comparison on the inspected seeds before another learning round.
+All non-combat choices and original value/risk heads remain frozen.
+The [genetic/hybrid experiment](https://github.com/benyanc/spireshift/issues/135) is deferred.
+The owner alone launches and monitors sustained tasks.
+
+The privately [preserved v0.107.1 game](docs/frozen-live-game.md) launches successfully outside
+Steam's managed library, with matching executable identity and read-only bridge/menu checks.
+A retest after Steam updates its managed copy and learned-policy live playback remain unfinished.
+
 [Calibration and uncertainty auditing](docs/calibration-and-uncertainty.md) deterministically splits
 complete validation runs into calibrator-fit and audit subfolds. It reports proper scoring rules,
 high-confidence catastrophic errors, false-safe risk predictions, and interpretable inference-time
@@ -224,7 +351,7 @@ objectives.
 6. Learn per-decision and whole-run computation allocation.
 7. Evaluate zero-shot and limited-data recovery across official patches.
 
-See [docs/architecture.md](docs/architecture.md) and
+See the [current backlog and priorities](docs/backlog.md), [docs/architecture.md](docs/architecture.md) and
 [docs/benchmark-protocol.md](docs/benchmark-protocol.md). The executable validation-owned gate and
 current base-v2 rejection are documented in
 [docs/base-model-readiness.md](docs/base-model-readiness.md).

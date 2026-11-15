@@ -1,0 +1,526 @@
+{
+  "control": [
+    {
+      "arm": "full_trace",
+      "key": "prefix-01-p2-full-trace",
+      "partition": "reload_control",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1P001"
+    },
+    {
+      "arm": "short_trace",
+      "key": "prefix-01-p2-short-trace",
+      "partition": "reload_control",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1P001"
+    },
+    {
+      "arm": "full_trace",
+      "key": "prefix-01-p3-full-trace",
+      "partition": "reload_control",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1P001"
+    },
+    {
+      "arm": "short_trace",
+      "key": "prefix-01-p3-short-trace",
+      "partition": "reload_control",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1P001"
+    }
+  ],
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fit_resource": "artifacts/native-a8-temporal-credit/preparation-v1-resources.json",
+  "fit_workspace": "artifacts/native-a8-temporal-credit/preparation-v1",
+  "implementation": {
+    "scripts/compare-a8-temporal-credit-v1.sh": "24d3783944de21cf7c6262f8c29aa877ffe13e918a5e7369fcf817a40886e504",
+    "src/spireshift/native_a8_temporal_credit.py": "de854a712742b9363667aa23cf71915833cbe323ee2bba3fd8f6358fac2138a0",
+    "src/spireshift/native_a8_temporal_credit_session.py": "ef9a9069dc9f2762c74c56869a673c159f23e0adebf97bf133ca782fc01d1612",
+    "src/spireshift/native_a8_world_credit_audit.py": "09aa2b8522a3e04c295139f33463baaedb49b677d5632c5a737ab35df892646a"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "schema_version": "native-a8-temporal-credit-comparison-v1",
+  "screen": {
+    "path": "docs/evidence/native-a8-temporal-credit-screen-v1.json",
+    "sha256": "4aa24887d2b9ea7e533f8df3a088baf89d9cf710ee762f7bafdcac8de56d848b"
+  },
+  "settings": {
+    "actor_learning_rate": 0.0006,
+    "clip": 0.2,
+    "entropy_coefficient": 0.015,
+    "epochs": 1,
+    "gradient_clip": 1.0,
+    "minibatch_decisions": 128,
+    "target_kl": 0.03,
+    "temperature": 0.8,
+    "value_coefficient": 0.5,
+    "value_learning_rate": 0.003
+  },
+  "study": [
+    {
+      "arm": "original",
+      "key": "dev-01-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-01-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-01-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-01-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "original",
+      "key": "dev-01-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-01-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-01-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-01-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D001"
+    },
+    {
+      "arm": "original",
+      "key": "dev-02-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-02-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-02-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-02-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "original",
+      "key": "dev-02-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-02-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-02-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-02-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D002"
+    },
+    {
+      "arm": "original",
+      "key": "dev-03-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-03-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-03-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-03-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "original",
+      "key": "dev-03-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-03-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-03-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-03-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D003"
+    },
+    {
+      "arm": "original",
+      "key": "dev-04-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-04-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-04-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-04-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "original",
+      "key": "dev-04-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-04-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-04-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-04-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D004"
+    },
+    {
+      "arm": "original",
+      "key": "dev-05-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-05-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-05-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-05-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "original",
+      "key": "dev-05-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-05-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-05-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-05-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D005"
+    },
+    {
+      "arm": "original",
+      "key": "dev-06-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-06-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-06-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-06-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "original",
+      "key": "dev-06-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-06-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-06-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-06-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D006"
+    },
+    {
+      "arm": "original",
+      "key": "dev-07-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-07-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-07-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-07-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "original",
+      "key": "dev-07-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-07-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-07-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-07-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D007"
+    },
+    {
+      "arm": "original",
+      "key": "dev-08-p2-original",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-08-p2-within-world",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-08-p2-full-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-08-p2-short-trace",
+      "partition": "development",
+      "player": 2,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "original",
+      "key": "dev-08-p3-original",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "within_world",
+      "key": "dev-08-p3-within-world",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "full_trace",
+      "key": "dev-08-p3-full-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D008"
+    },
+    {
+      "arm": "short_trace",
+      "key": "dev-08-p3-short-trace",
+      "partition": "development",
+      "player": 3,
+      "seed": "SP1RESH1FTA8TC1D008"
+    }
+  ],
+  "traces": {
+    "full_trace": 1.0,
+    "short_trace": 0.95
+  },
+  "workspace": "artifacts/native-a8-temporal-credit/comparison-v1"
+}
