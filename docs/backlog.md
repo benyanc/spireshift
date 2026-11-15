@@ -7,8 +7,8 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Connect current card statistics to the learner.** [#143](https://github.com/benyanc/spireshift/issues/143), [#134](https://github.com/benyanc/spireshift/issues/134), [#146](https://github.com/benyanc/spireshift/issues/146) | Use the bound hand card's current display values as direct inputs. Compare the exact legacy and corrected replay fits on 32 new normal-start worlds. |
-| 2 | **Broaden independent success coverage.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Obtain distinct verified normal-start successes across the acts. Prioritize shared replay or delivery repairs when they materially expand usable data. |
+| 1 | **Exercise combinations and verify learner inputs.** [#149](https://github.com/benyanc/spireshift/issues/149), [#143](https://github.com/benyanc/spireshift/issues/143) | Cover mixed action families, including rest-site options and their nested selectors. Verify that direct features use the bound card's current display and the target's whole announced attack. Keep a ledger of which native menus and successor transitions were actually exercised. |
+| 2 | **Train on verified model-owned play across the acts.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Use the corrected inputs in the learning loop on checkpoint copies. Broaden independent success coverage and compare full-run wins on fresh normal starts. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
 The three [qualified full-run demonstrations](native-a8-archive-transitions-v6.md)
@@ -52,7 +52,13 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Direct public card stats
+## Current work — Mixed action lifecycles and learner inputs
+
+The [mixed mechanics checks](native-mixed-mechanics-v1.md) cover rest-site
+options, child selectors, the potion belt, and map exit. The saved audit also
+found that 3,821 candidate rows in the 128-game card-display comparison read
+per-hit damage where the model expected the total announced attack. The new
+encoder supplies that total to copied checkpoints.
 
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1
@@ -61,12 +67,11 @@ more closely and neither cleared Act 2. The audit showed that
 current damage and block appeared in the public hand display
 while the dedicated model inputs read the old flat card fields.
 
-The [card display comparison](native-a8-card-display-v1.md) uses
+The completed [card display comparison](native-a8-card-display-v1.md) uses
 the same fitting worlds, update schedule and round-64 parents on
-copies. It compares against the sealed legacy fits. If fresh
-progress stays flat, prioritize collecting independent strong
-normal-start trajectories across the acts before further replay
-fit variants.
+copies. The exact legacy and card-display fits went 0/64 in both arms,
+with one and two Act 1 clears respectively. Prioritize independent strong
+normal-start trajectories across the acts before further replay-fit variants.
 
 ## Prior handoff — Replay verified Act 1 clears
 
