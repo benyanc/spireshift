@@ -74,3 +74,18 @@ Use `scripts/check-mixed-mechanics-v1.sh` with `saved`, `native`, `paired`, or
 `paired-extra` for the short checks. With STS2 closed, `paired-all` runs the full
 paired rest matrix with a 30-minute outer cap. The results and journals go under
 `artifacts/native-mixed-mechanics`, including the observed evidence from blocked cases.
+
+## Full matrix launch correction
+
+The first full paired attempt stopped with zero official deliveries. Its
+fixture seed contained an `I`, which the official client rejected after the
+game process started. The interrupted working app remains marked for inspection.
+Every base game file matches the frozen archive. Only the executable mode and
+the test Connector's installed files and profile override differ from baseline.
+
+The full paired plan uses the verified short-control fixture seed for all 24
+orders. The runner checks all paired seeds and the shared app's readiness before
+preparing any fixture. Each prepared save must record its declared seed. All 32
+cases and 185 native deliveries passed on the corrected plan. The native report
+is `native-paired-plan-1794764334595140000/report.json` under the workspace above.
+The full official run requires an inspected reset of the interrupted test copy.

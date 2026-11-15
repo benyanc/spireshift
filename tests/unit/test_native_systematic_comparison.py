@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+from dataclasses import replace
+from pathlib import Path
 from typing import Any
 
 import pytest
 
+from spireshift.native_flow_inputs_v12 import canonical_seed
+from spireshift.native_mixed_rest import cases, paired_cases, paired_matrix_cases
+from spireshift.native_mixed_rest_session import run_cases
 from spireshift.native_systematic_audit_v1 import coverage_ledger
 from spireshift.native_systematic_live_v1 import (
     ScriptedPolicy,
@@ -38,6 +43,32 @@ def test_inventory_and_runtime_observation_do_not_grant_effect_coverage() -> Non
     assert rows[0]["actual_producer_pairs"] == 7
     assert not any(row["live_effects_qualified"] for row in rows)
     assert "actual saved runtime observation" in rows[1]["remaining"]
+
+
+def test_full_rest_pair_plan_uses_canonical_seeds_and_retains_every_case() -> None:
+    matrix = paired_matrix_cases()
+    assert len(matrix) == 32
+    assert all(canonical_seed(case.seed) == case.seed for case in matrix)
+    assert (
+        tuple(
+            replace(case, seed=original.seed)
+            for case, original in zip(matrix, cases(), strict=True)
+        )
+        == cases()
+    )
+    assert set(paired_cases()) <= set(matrix)
+    assert {case.seed for case in matrix if case.name.startswith("order-")} == {
+        paired_cases()[0].seed
+    }
+
+
+def test_invalid_later_rest_case_fails_before_preparing_any_game(tmp_path: Path) -> None:
+    valid = paired_cases()[0]
+    invalid = replace(valid, name="bad-later-case", seed="FIXTURE")
+    target = tmp_path / "rest"
+    with pytest.raises(ValueError, match="bad-later-case: Comparison seeds"):
+        next(run_cases({}, iter([valid, invalid]), target, 0, paired=True))
+    assert not target.exists()
 
 
 def test_comparison_collects_every_first_state_gap_without_realigning() -> None:

@@ -17,7 +17,7 @@ from spireshift.native_a8_feedback_session import inputs
 from spireshift.native_a8_tactical_session import frozen
 from spireshift.native_compatibility_inputs import check_sources
 from spireshift.native_mechanics_evidence import audit
-from spireshift.native_mixed_rest import cases, paired_cases
+from spireshift.native_mixed_rest import cases, paired_cases, paired_matrix_cases
 from spireshift.native_mixed_rest_session import BOOTSTRAP, CONNECTOR, SCRIPT, run_cases
 from spireshift.native_systematic_selectors_v2 import CONVERTER
 from spireshift.native_win4_game import write
@@ -40,6 +40,7 @@ def sources(root: Path) -> dict[str, str]:
             f"src/spireshift/{name}.py"
             for name in (
                 "native_combat_intent_model",
+                "native_flow_inputs_v12",
                 "native_mechanics_evidence",
                 "native_mixed_mechanics",
                 "native_mixed_rest",
@@ -72,7 +73,9 @@ def execute(root: Path, mode: str, output: Path, started: float) -> dict[str, An
             if _running_games():
                 raise ValueError("Close STS2 and wait for other native workers")
             selected = cases()
-            if mode in {"paired", "paired-extra"}:
+            if mode == "paired-all":
+                selected = paired_matrix_cases()
+            elif mode in {"paired", "paired-extra"}:
                 selected = paired_cases()[5:] if mode == "paired-extra" else paired_cases()[:5]
             evidence: list[dict[str, Any]] = []
             result["rest_checks"] = evidence

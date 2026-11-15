@@ -15,6 +15,7 @@ BASE_RELICS = ("MINIATURE_TENT", "SHOVEL", "GIRYA")
 SMITH_BASH = "confirm:BASH"
 COOK_CARDS = "confirm:DEFEND_IRONCLAD,STRIKE_IRONCLAD"
 BELT = ("BLOOD_POTION", "FOUL_POTION")
+PAIRED_ORDER_SEED = "SP1RESH1FTM1XRSTP100"
 Card = tuple[str, bool, str | None, int | None]
 
 
@@ -357,6 +358,20 @@ def paired_cases() -> tuple[Case, ...]:
         "kindle",
     )
     return tuple(
-        replace(next(row for row in rows if row.name == name), seed=f"SP1RESH1FTM1XRSTP{100 + i}")
+        replace(
+            next(row for row in rows if row.name == name),
+            seed=PAIRED_ORDER_SEED if i == 0 else f"SP1RESH1FTM1XRSTP{100 + i}",
+        )
         for i, name in enumerate(selected)
+    )
+
+
+def paired_matrix_cases() -> tuple[Case, ...]:
+    short = {case.name: case for case in paired_cases()}
+    # Keep the same tested starting save across all permutations.
+    return tuple(
+        replace(case, seed=PAIRED_ORDER_SEED)
+        if case.name.startswith("order-")
+        else short.get(case.name, case)
+        for case in cases()
     )

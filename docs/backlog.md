@@ -60,6 +60,12 @@ found that 3,821 candidate rows in the 128-game card-display comparison read
 per-hit damage where the model expected the total announced attack. The new
 encoder supplies that total to copied checkpoints.
 
+The [shared action lifecycle suite](native-a8-shared-lifecycle-v1.md)
+checks complete menus, bound deliveries, native effects and fresh successors.
+It exercises lethal and nonlethal card completion in the repaired headless
+worker and reuses the saved mixed rest controls. The report carries forward
+the remaining source-derived coverage obligations.
+
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1
 once versus zero for the parents. Both copies fit saved choices

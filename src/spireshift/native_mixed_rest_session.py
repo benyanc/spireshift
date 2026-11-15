@@ -14,11 +14,12 @@ from spireshift import native_a8_feedback_host, native_systematic_live_v1
 from spireshift.engine_connector import _verify_toolchain, load_connector_qualification_config
 from spireshift.engine_profile import load_profile_policy, verify_benchmark_progress
 from spireshift.engine_qualification import _sha_file
-from spireshift.engine_working_app import load_working_app_policy
+from spireshift.engine_working_app import load_working_app_policy, preflight_working_app
 from spireshift.full_run_experience import atomic_json
 from spireshift.native_a8_feedback_host import FeedbackWorker
 from spireshift.native_a8_rescue_game import receipt
 from spireshift.native_compatibility_contract import verified
+from spireshift.native_flow_inputs_v12 import canonical_seed
 from spireshift.native_flow_verification_v12 import records
 from spireshift.native_mixed_rest import REST, Case, control, verify
 from spireshift.native_shared_transport import JsonLines
@@ -48,7 +49,7 @@ def conversion(ctx: dict[str, Any], log: Path) -> JsonLines:
     return JsonLines(root, [ctx["node"], str(root / "scripts" / CONVERTER)], log)
 
 
-def official_context(ctx: dict[str, Any], count: int) -> dict[str, Any]:
+def official_context(ctx: dict[str, Any]) -> dict[str, Any]:
     qualification = ctx["qualification"]
     root = qualification.root
     connector = load_connector_qualification_config(root / CONNECTOR, qualification)
@@ -64,7 +65,7 @@ def official_context(ctx: dict[str, Any], count: int) -> dict[str, Any]:
         "working_app": load_working_app_policy(
             verified(root, inputs["working_app"]), qualification
         ),
-        "config": {**ctx["config"], "node": ctx["node"], "maximum_decisions": count},
+        "config": {**ctx["config"], "node": ctx["node"]},
         "progress": progress,
     }
 
@@ -87,6 +88,8 @@ def prepare(ctx: dict[str, Any], case: Case, directory: Path) -> Path:
     finally:
         worker.stop()
     save = result["save"]
+    if save["rng"]["seed"] != case.seed:
+        raise ValueError(f"{case.name}: diagnostic save seed differs from the declared seed")
     (player,) = save["players"]
     if case.girya:
         (girya,) = [r for r in player["relics"] if r["id"] == "RELIC.GIRYA"]
@@ -247,10 +250,20 @@ def run_cases(
     *,
     paired: bool,
 ) -> Iterator[dict[str, Any]]:
+    selected = tuple(checks)
+    earlier = None
+    if paired:
+        for case in selected:
+            try:
+                canonical_seed(case.seed)
+            except ValueError as exc:
+                raise ValueError(f"{case.name}: {exc}") from exc
+        earlier = official_context(ctx)
+        preflight_working_app(earlier["working_app"])
     directory.mkdir()
     root = ctx["qualification"].root
     fixtures: dict[str, Path] = {}
-    for case in checks:
+    for case in selected:
         if time.monotonic() + (55 if paired else 4) >= deadline:
             raise TimeoutError("Insufficient time for another complete rest control")
         target = directory / case.name
@@ -262,12 +275,15 @@ def run_cases(
         native = native_prefix(ctx, case, fixture, target / "native", local_limit)
         effects = verify(case, native)
         result: dict[str, Any] = {"case": asdict(case), "native_effects": effects}
-        if paired:
+        if earlier is not None:
             policy = ScriptedPolicy(list(case.steps))
-            earlier = official_context(ctx, len(case.steps))
+            checkpoint = {
+                **earlier,
+                "config": {**earlier["config"], "maximum_decisions": len(case.steps)},
+            }
             with patch.object(native_systematic_live_v1, "select_action", select):
                 official = official_prefix(
-                    earlier,
+                    checkpoint,
                     {
                         "seed": case.seed,
                         "family": REST,
