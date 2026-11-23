@@ -1,5 +1,11 @@
 # Merchant target lifetime under the map
 
+**Completed:** the owner v7 full run passed all eight pairs. The
+[saved assessment](native-mixed-handoffs-result-v1.md) verifies all twelve main
+mechanisms plus the extra map-use probe. The remaining next step is the
+[qualified model-only learning study](native-qualified-model-only-v1.md).
+The launch instructions below retain the historical preparation state.
+
 The owner full mixed-handoff panel stopped with **five verified pairs, one
 blocked pair and six unattempted counterparts**. Its failure is a headless
 presentation defect: opening the map was treated as exiting the merchant room.

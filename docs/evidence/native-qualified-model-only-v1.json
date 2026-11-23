@@ -1,0 +1,74 @@
+{
+  "schema_version": "native-qualified-model-only-preparation-evidence-v1",
+  "status": "collection_fit_and_saved_input_checks_verified_two_reload_games_waiting_for_closed_game",
+  "learner_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-qualified-model-only-v2.json",
+    "sha256": "1cb480be96a329171f237857c13199f3b314760a3c0e5796fb14cd9d2bb1a3c1",
+    "config_id": "sha256:48ef71394de0086fb12e2bf81f017f1daa62f11cb3b2280e460d508af1cfcf31"
+  },
+  "owner_launch": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-qualified-model-only-launch-v1.json",
+    "sha256": "8a43a5e98ab6ebc838058ab4a163d1b51ac945f794705fcd2e0a43913897d456"
+  },
+  "mixed_assessment": {
+    "path": "artifacts/native-mixed-handoffs/v7/owner-assessment-v1/report.json",
+    "sha256": "08d64940744622bb36856e221d54d1c053306e9d74d1d78e50346bd3ca110369",
+    "report_id": "sha256:1d2e3456f6ac4959e39a824ca46c3df8bdbc28591754789f08cc6fb048247576"
+  },
+  "worker_startup": {
+    "path": "artifacts/native-qualified-learning/preflight-v1/report.json",
+    "sha256": "f738a3045cde2574baa90e90e83615cac77581113117cb8b7748ee24b4010459",
+    "report_id": "sha256:c24ed9d9333f7808d9f16f5dfb9abf33df7b7715fe4b52441020c59aff8e0bdf"
+  },
+  "saved_inputs": {
+    "path": "artifacts/native-qualified-learning/preflight-v1/saved-inputs.json",
+    "sha256": "623895abbabfde7f9e19f16e3bb6323d0d33c281c1013ed63b85fc382b28a683",
+    "report_id": "sha256:78d9c019051dc078a1afecb9fd198a0c5fa8c7b5daa186bcdbd683a8e41b2c66"
+  },
+  "control_stop": {
+    "path": "artifacts/native-qualified-learning/control-v1/stop-1795472987365142000.json",
+    "sha256": "a5d1f6f7c52b5c5114a58097eb28ec3b9803bf017a44bbc4a202105aaedc6077",
+    "report_id": "sha256:4cefb4053ef6c6cd131e61c016d47a3c7dbb758e8bc9d0d8a3f6308b84891eea"
+  },
+  "completed_control_games": 6,
+  "control_outcomes": {
+    "loss": 6,
+    "win": 0,
+    "capped": 0
+  },
+  "control_act1_clears": 0,
+  "native_deliveries_verified": 835,
+  "local_answer_factors": 0,
+  "copy_updates": 4,
+  "completed_control_units": 8,
+  "two_unstarted_reload_worlds_replayed": false,
+  "prelaunch_open_game_refusal": {
+    "path": "artifacts/native-qualified-learning/control-v2/resources-1795473242433577000.json",
+    "sha256": "6330c53fd245313e849a56492fbafaa3776dc474d33827138da48f7e50202157",
+    "report_id": "sha256:72293382c3c69f2398f55ccd76de67e96aee53af0413cfd9e261b4bfdc694916"
+  },
+  "long_study_started": false,
+  "planned_training_games": 2048,
+  "planned_fresh_development_games": 128,
+  "game_version": "0.111.0",
+  "game_revision": "41cef1ea",
+  "host_unchanged": 60,
+  "connector_unchanged": 36,
+  "converter_unchanged": 17,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "original_optimizer_updates": 0,
+  "source_copy_files_unchanged": true,
+  "fixture_imitation_labels_used": false,
+  "promotion_allowed": false,
+  "official_live_qualification_granted": false,
+  "final_test_worlds_used": false,
+  "automatic_follow_up_after_declared_study": false,
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/start-a8-qualified-model-only-v1.sh\""
+}

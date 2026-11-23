@@ -7,8 +7,8 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Exercise combinations and verify learner inputs.** [#149](https://github.com/benyanc/spireshift/issues/149), [#143](https://github.com/benyanc/spireshift/issues/143) | Cover mixed action families, including rest-site options and their nested selectors. Verify that direct features use the bound card's current display and the target's whole announced attack. Keep a ledger of which native menus and successor transitions were actually exercised. |
-| 2 | **Train on verified model-owned play across the acts.** [#134](https://github.com/benyanc/spireshift/issues/134), [#149](https://github.com/benyanc/spireshift/issues/149) | Use the corrected inputs in the learning loop on checkpoint copies. Broaden independent success coverage and compare full-run wins on fresh normal starts. |
+| 1 | **Run sustained model-owned A8 learning on copies.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Use the qualified adapters and current card/intent inputs for 2,048 fresh normal-start training games, then compare the fixed round-64 copies and their frozen starts on 128 fresh development games. Full wins are primary; act clears diagnose progress. |
+| 2 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current. Extend provider, child, target and late-act checks as concrete gaps or promising candidates require them. Reject affected incomplete/uncertain experience while keeping independently valid model-owned learning moving. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
 The three [qualified full-run demonstrations](native-a8-archive-transitions-v6.md)
@@ -52,7 +52,24 @@ work. The new competence recipe/admission is implemented under
 declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
-## Current work — Mixed action lifecycles and learner inputs
+## Current work — Qualified model-owned learning
+
+The [completed mixed-handoff assessment](native-mixed-handoffs-result-v1.md)
+verifies all twelve declared main mechanisms plus the merchant-map potion probe:
+114 complete public states and 101 actual SDK choices reconstruct exactly. The
+historical mismatch is retained. The [new learner](native-qualified-model-only-v1.md)
+selects these adapters, the native ending repair and the corrected card/total
+intent inputs for a shared actor and critic on copies. It learns from fresh
+model-owned games and uses no fixture/scripted imitation labels. Both encoders
+match on all 114 qualified menus for both starting copies.
+
+The six short collection games and four copy updates passed. A pre-reload
+storage-key error is preserved; the v2 launcher reuses all eight clean units
+and needs only the two unstarted reload games. Complete that short control
+before the long owner run. Keep all frozen source checkpoints/Adam and reserved
+final-test worlds unchanged. Broader coverage obligations remain explicit.
+
+## Completed interface work
 
 The [mixed mechanics checks](native-mixed-mechanics-v1.md) cover rest-site
 options, child selectors, the potion belt, and map exit. The saved audit also
@@ -86,20 +103,12 @@ restock hooks, mixed rest boundaries and later-act rewards stay open under the
 coverage inventory. Qualify those bounded combinations next, then use the
 qualified adapters in a separately declared model-owned learning recipe.
 
-The [potion, restocking and rest handoff panel](native-mixed-handoffs-v1.md)
-reached five verified official/native pairs, one merchant-map mismatch and six
-unattempted counterparts. All five passing raw proofs reconstruct exactly
-(51 states, 46 choices). The [merchant-map repair](native-mixed-handoffs-merchant-map-v1.md)
-keeps Foul Potion's actual room target alive under the map until real travel,
-without changing the game or host60. Fresh use and Courier-card replacement
-controls pass 17 matching states and 15 actual SDK choices on both hosts.
-The v7 owner command reuses the
-clean controls and runs only the six original unstarted official counterparts.
-Keep the old failure and supersede its native complete-menu claim. All frozen
-build/checkpoint/Adam checks pass; zero updates. This is a shared framework
-repair, not a policy adjustment or A8 win evaluation. After assessing the
-remaining combinations, select the qualified adapters in the next declared
-model-owned learning recipe; broader source-derived coverage stays explicit.
+The [potion, restocking and rest handoff panel](native-mixed-handoffs-result-v1.md)
+is complete. Its real-merchant repair preserves Foul Potion's target under the
+map until actual travel. The original failure stays in the linked denominator;
+the fresh replacement and all six previously unstarted pairs passed. The saved
+assessment launched no games and made zero updates. Broader providers and
+later-act/final combinations remain open; this result is not an A8 win study.
 
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1

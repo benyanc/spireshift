@@ -2103,6 +2103,38 @@ and all original/fitted full checkpoints/Adam remain frozen. After assessment,
 select qualified adapters explicitly for new model-owned learning; broader
 mechanics coverage and genuine A8 competence remain separate obligations.
 
+The owner completed mixed v7: all eight current pairs pass. The saved-only
+assessment in docs/native-mixed-handoffs-result-v1.md reverified thirteen clean
+pairs across all twelve main mechanisms plus the separate merchant-map use
+probe, with 114 public states and 101 actual SDK choices. Native transport has
+100 game deliveries and one local answer factor. Preserve the historical main
+mismatch and all frozen files; no gameplay was replayed to assess this result.
+Broader coverage rows remain partial, especially Fake Merchant, other providers,
+Dig/Hatch children, unpaired rest orders and later-act/final combinations.
+
+The next priority is docs/native-qualified-model-only-v1.md under #134/#35.
+The normal-start-only worker selects the paired-qualified adapters and corrected
+hand-card/total-intent features. Inference and PPO agree on all 114 menus for
+both source copies (228 comparisons). No fixture choices become labels. Six
+fresh normal-start control games and four disposable copy updates passed.
+The v1 control then stopped at an invalid underscore in a reload storage key,
+before either reload world launched. Preserve its eight clean collection/fit
+units and the failure. The v2 journal reads those exact seals under a shared
+lock and permits only the two unstarted reload games; no games/updates repeat.
+A subsequent prelaunch game-open refusal launched nothing and is retained.
+
+One owner command, scripts/start-a8-qualified-model-only-v1.sh, first verifies
+or finishes the short control and starts the long study only on a pass. It
+declares 64 rounds, 2,048 model-owned normal-start training games on two copies,
+and 128 matched fresh development games against their frozen starting copies.
+Allow about 6–12 hours; the outer cap is 24 hours. Run no long stage as Codex.
+Keep all original/fitted checkpoints/full Adam, both source copy files, game,
+host60, Connector36, converter17 and runtime frozen. Final round 64 is fixed
+before evaluation; reserved final-test worlds stay unopened. Cap/failed/missing
+cases retain denominators. Runtime/owner uncertainty supplies no labels and
+stops for assessment. No fight heuristics, teacher takeover, promotion, A10 or
+adaptive controller follows. See the current backlog and compact evidence.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

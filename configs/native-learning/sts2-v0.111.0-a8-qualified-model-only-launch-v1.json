@@ -1,0 +1,19 @@
+{
+  "schema_version": "native-a8-qualified-learning-owner-launch-v1",
+  "learner_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-qualified-model-only-v2.json",
+    "sha256": "1cb480be96a329171f237857c13199f3b314760a3c0e5796fb14cd9d2bb1a3c1"
+  },
+  "phases": [
+    "verify_or_finish_short_control",
+    "run_fixed_study"
+  ],
+  "implementation": {
+    "scripts/start-a8-qualified-model-only-v1.sh": "1ed4bee7b37d2601e4d159624ca7376bcd36b62b60e4f0e1de67275eca2686d2",
+    "src/spireshift/native_qualified_learning_launch_v1.py": "df5c58cd665274b241f464c56158970955928775b4f75dfcffa3f41b5b805ecb",
+    "tests/unit/test_native_qualified_learning_launch_v1.py": "75e40473852e41097543cbbc717668e86ce26e77bf7be337a698f9a0f9fbaacc"
+  },
+  "original_optimizer_updates": 0,
+  "promotion_allowed": false,
+  "automatic_follow_up_after_declared_study": false
+}
