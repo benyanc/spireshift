@@ -66,6 +66,13 @@ It exercises lethal and nonlethal card completion in the repaired headless
 worker and reuses the saved mixed rest controls. The report carries forward
 the remaining source-derived coverage obligations.
 
+The [shop and reward selector checks](native-a8-selector-lifecycles-v1.md)
+passed six native cases with 46 native deliveries and two local answer factors.
+They cover potion controls during child selection, canceled and confirmed
+removal, direct and ordered relic answers, reward take/skip, exact inventory
+effects and reward completion through the next map vote. Broader mixed-owner
+and official comparison obligations remain open.
+
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1
 once versus zero for the parents. Both copies fit saved choices
