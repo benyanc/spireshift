@@ -73,14 +73,18 @@ removal, direct and ordered relic answers, reward take/skip, exact inventory
 effects and reward completion through the next map vote. Broader mixed-owner
 and official comparison obligations remain open.
 
-The [official/native selector comparison](native-a8-official-selectors-v1.md)
-now prepares six shared-save pairs for those shop and reward branches. Its
-short native controls passed with 48 native deliveries and two local factors.
-The separately built Connector v33 supports the same complete ordered-answer
-grammar above the old 512-answer limit. Actual official delivery remains
-unqualified until the paired panel runs with STS2 closed. The inspected old
-invalid-seed failure keeps its evidence and failed status. This work changes
-the decision adapter and compatibility checks, with zero learning updates.
+The [official/native selector result](native-a8-official-selectors-result-v1.md)
+verifies all six revised shop/reward mechanisms: 58 matching full public states,
+49 game deliveries and three local factors. Shared physical inventory identity,
+ordered execution, reward/belt consistency and the executable enchant minimum
+were repaired in new versioned adapters. Empty enchant confirmation was a shared
+menu defect; its old parity claim is superseded. The linked current panel keeps
+six verified slots and one startup failure, with a separate prelaunch abort
+also preserved. The build and all full checkpoint/Adam states remain frozen;
+there were zero learning updates. Broader acquisition children, replacement and
+restock hooks, mixed rest boundaries and later-act rewards stay open under the
+coverage inventory. Qualify those bounded combinations next, then use the
+qualified adapters in a separately declared model-owned learning recipe.
 
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1

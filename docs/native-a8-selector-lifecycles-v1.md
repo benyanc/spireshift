@@ -1,5 +1,11 @@
 # Shop and reward selector lifecycle checks
 
+The [subsequent official comparison](native-a8-official-selectors-result-v1.md)
+supersedes the complete-menu claims for Kifuda below: the frozen official screen
+cannot confirm zero cards. The historical native effects remain recorded, while
+the corrected adapter publishes a minimum of one. Six revised official/native
+controls now pass. These historical native checks alone grant no official parity.
+
 The six native checks passed on frozen STS2 v0.111.0 / 41cef1ea with
 host v60, public converter v17 and the verified card cleanup adapter.
 They use the shared lifecycle contract to check complete menus, public reads,
@@ -36,7 +42,8 @@ path, and every case retains its evidence with file hashes.
 
 The source-derived inventory keeps the broader combined branches open,
 including official large selectors, other child owners and later-act
-transitions. The interrupted official rest-test copy retains its active lease.
+transitions. The interrupted official rest-test failure remains recorded. Its
+separately inspected pre-controller reset restored the test copy without replay.
 
 The completed report is
 `artifacts/native-selector-lifecycles/v1/full-1795401726303382000/report.json`,

@@ -1,0 +1,20 @@
+{
+  "schema_version": "engine-connector-build-config-v1",
+  "stage": "local_host_build_only_no_games",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "source_url": "https://github.com/rsgcsg/STS2-Connector.git",
+  "source_revision": "e0651024117d22bdeb95142766917103d87c0185",
+  "source_cache": "artifacts/engine-sources/connector-v1.1.0-rc.1",
+  "base_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-menu-v1.json",
+  "base_connector_config_id": "sha256:34200ec455d507fae03de959288e47b412a4d734690d8457a4d5515e1f7320bd",
+  "patch": "patches/engine/sts2-connector-v0.111.0-ordered-completion-v34.patch",
+  "patch_sha256": "79f023dba40dad74b3e82a396e690654f83598f62edab9ac4ee1e00476275b1f",
+  "sdk_version": "10.0.401",
+  "commit_date": "2026-11-23T04:55:00Z",
+  "commit_message": "Validate complete selection domains only before native execution",
+  "workspace": "artifacts/native-official-selectors/v3/connector-build-v34",
+  "output_report": "artifacts/native-official-selectors/v3/connector-build-v34/report.json",
+  "output_connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-ordered-completion-v34.json",
+  "max_wall_seconds": 180,
+  "training_allowed": false
+}

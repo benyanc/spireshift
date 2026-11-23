@@ -2028,6 +2028,34 @@ ordinary PPO, promotion, scaling, controller or next experiment is automatic.
 See docs/native-varied-final-canary-result.md, its evidence and the backlog;
 supersede the prepared/unstarted handoff on GitHub while retaining history.
 
+The owner v1 official selector run stopped at a purchased-relic identity alias.
+The separately versioned repairs and saved assessment in
+docs/native-a8-official-selectors-result-v1.md now verify six current shop/reward
+mechanisms with Connector36, selector worker4, host60 and converter17. Rebuild
+all 58 public states and 52 acknowledged choices (49 game deliveries, three
+local factors) from exact raw receipts. Owned objects join only by their native
+physical reference; ordered publication validation is separate from running
+selection; reward capacity views reuse checked belt facts without duplicate
+discard aliases. The frozen official enchant callback requires a nonempty
+answer despite stored MinSelect=0. Publish minimum one only for that qualified
+owner and preserve other families' zero/cancel semantics. Earlier headless
+empty-answer effects remain historical, but their complete-official-menu claim
+is superseded. Never add a callback bypass to make that empty answer finish.
+
+Four Connector36 pairs passed in v5 before a zero-input asset-loading stall.
+Its exact inspection preserved the five test additions, lease and failed
+evidence before restoring the same baseline app under both locks. V6 imports
+those four proofs, uses a fresh replacement minimum-answer world and the
+unstarted reward-skip world; both pass. Keep the linked seven slots as six
+verified plus one startup failure. A separate macOS process-scan abort occurred
+before app/SDK launch; its empty directory and resource receipt are preserved.
+Do not retry the historical gameplay failures or declare full-game competence.
+No longer run is needed for these six controls. Remaining coverage includes
+other acquisition children, alternative rewards, potion replacement/queued
+effects, restock hooks, mixed rest boundaries and later-act/final owners.
+New learning must explicitly select the qualified adapter versions; historical
+training recipes, the game and all original/fitted full states/Adam stay fixed.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

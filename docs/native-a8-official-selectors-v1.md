@@ -1,5 +1,13 @@
 # Official/native shop and reward selector comparisons
 
+**Historical preparation; superseded by the
+[verified result](native-a8-official-selectors-result-v1.md).** The owner v1
+command stopped at an inventory identity mismatch. Separately versioned repairs
+now have six current paired proofs, retaining the earlier failures. In
+particular, the empty Kifuda answer below does not complete through the frozen
+official UI and is superseded by the one-card minimum-answer control. Do not
+rerun this blocked historical launcher to complete the panel.
+
 The six paired controls are prepared on frozen STS2 v0.111.0 / 41cef1ea.
 The short native panel passed all six with 48 native deliveries and two local
 answer factors. All four full checkpoint and Adam states, the game archive,
@@ -72,7 +80,7 @@ stays intact. Unknown files, changed game bytes, another lease or a running game
 stop the reset. No replacement app copy is created, and no personal save files
 are reset. Other historical interrupted workers remain blocked.
 
-## Run
+## Historical run instructions
 
 Close STS2, then run the command below. Allow roughly 8–15 minutes with a
 20-minute outer limit. The recipe also caps CPU, memory and comparison storage.

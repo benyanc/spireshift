@@ -1,0 +1,334 @@
+{
+  "actual_sdk_deliveries_verified": 52,
+  "automatic_follow_up": false,
+  "continuation_report_id": "sha256:1235cbb91d6396eb50afd7010dacb7bc00010065d668a8b26a5022411196e591",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_game_playing_strength_evaluated": false,
+  "games_launched_by_assessment": 0,
+  "linked_panel": {
+    "slots": 7,
+    "startup_failed": 1,
+    "unattempted": 0,
+    "verified": 6
+  },
+  "matching_public_states": 58,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "parent_report_id": "sha256:65622d49e953d8eebae42f7e9bf7a60cf21244a8d0cbbeac93edf8a9e8a25257",
+  "schema_version": "native-official-selector-saved-assessment-v1",
+  "scope": "declared_privileged_shop_and_reward_selector_chains_only",
+  "separate_prelaunch_process_scan_abort_retained": true,
+  "status": "six_current_selector_mechanisms_verified",
+  "training_allowed": false,
+  "verified_mechanisms": 6,
+  "assessment": {
+    "path": "artifacts/native-official-selectors/v6/owner-assessment-v1.json",
+    "sha256": "65d8dbe138fbf4b36ef1b1013307a63bb5fd00b44acb368bca5a3951698f5cce",
+    "report_id": "sha256:1bb43272c19503d92a45bbd6b424e350efde0517f404599b92031f1c528cc547"
+  },
+  "game_build": {
+    "version": "0.111.0",
+    "revision": "41cef1ea",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "unchanged": true
+  },
+  "current_adapter": {
+    "connector": 36,
+    "native_selector_worker": 4,
+    "native_host": 60,
+    "converter": 17,
+    "original_training_recipes_unchanged": true
+  },
+  "current_pairs": [
+    {
+      "case": {
+        "count": 13,
+        "discard_first": false,
+        "indices": [
+          12,
+          0
+        ],
+        "key": "shop-ordered",
+        "kind": "kifuda",
+        "seed": "SP1RESH1FTA8P5SLC001"
+      },
+      "pair_report_id": "sha256:5e94a7b417117c30577fa0665fe71a5e43e91dc407498dba92ab015d69db1939",
+      "actual_sdk_deliveries_verified": 9,
+      "matching_states": 10,
+      "native_deliveries": 7,
+      "local_answer_factors": 2,
+      "official_atomic_commits": 1,
+      "official_selection_ui_steps": 4,
+      "clean_shutdown_and_reset": true
+    },
+    {
+      "case": {
+        "discard_first": false,
+        "key": "reward-card-take",
+        "kind": "reward_take",
+        "seed": "SP1RESH1FTA8P5SLC002"
+      },
+      "pair_report_id": "sha256:c32cc88d956cd3b70155c8d6146de71da3fd605f18ae0ac45f10e960dd5bf34e",
+      "actual_sdk_deliveries_verified": 9,
+      "matching_states": 10,
+      "native_deliveries": 9,
+      "local_answer_factors": 0,
+      "official_atomic_commits": 0,
+      "official_selection_ui_steps": 0,
+      "clean_shutdown_and_reset": true
+    },
+    {
+      "case": {
+        "count": 13,
+        "discard_first": false,
+        "indices": [
+          12
+        ],
+        "key": "removal-cancel-confirm",
+        "kind": "removal",
+        "seed": "SP1RESH1FTA8P5SLC003"
+      },
+      "pair_report_id": "sha256:269ee654c7a5fb554522c8991f4c89aa46b964319bc0886c20f169c221ad7f74",
+      "actual_sdk_deliveries_verified": 9,
+      "matching_states": 10,
+      "native_deliveries": 9,
+      "local_answer_factors": 0,
+      "official_atomic_commits": 2,
+      "official_selection_ui_steps": 3,
+      "clean_shutdown_and_reset": true
+    },
+    {
+      "case": {
+        "count": 3,
+        "discard_first": true,
+        "indices": [
+          2,
+          0
+        ],
+        "key": "shop-direct",
+        "kind": "kifuda",
+        "seed": "SP1RESH1FTA8P5SLC004"
+      },
+      "pair_report_id": "sha256:432c5b6bccf9a39a7d3423f3b87eef906c316ab33e5291bae604ab70dc0874e1",
+      "actual_sdk_deliveries_verified": 7,
+      "matching_states": 8,
+      "native_deliveries": 7,
+      "local_answer_factors": 0,
+      "official_atomic_commits": 1,
+      "official_selection_ui_steps": 4,
+      "clean_shutdown_and_reset": true
+    },
+    {
+      "case": {
+        "count": 13,
+        "discard_first": true,
+        "indices": [
+          12
+        ],
+        "key": "shop-minimum-answer",
+        "kind": "kifuda",
+        "seed": "SP1RESH1FTA8P6SLC005"
+      },
+      "pair_report_id": "sha256:7cadce7beb7810b3beff037a4ac03c17365adcc0022f90302a8ebf31f22dd490",
+      "actual_sdk_deliveries_verified": 8,
+      "matching_states": 9,
+      "native_deliveries": 7,
+      "local_answer_factors": 1,
+      "official_atomic_commits": 1,
+      "official_selection_ui_steps": 3,
+      "clean_shutdown_and_reset": true
+    },
+    {
+      "case": {
+        "discard_first": true,
+        "key": "reward-card-skip",
+        "kind": "reward_skip",
+        "seed": "SP1RESH1FTA8P5SLC006"
+      },
+      "pair_report_id": "sha256:76eb40b3c54d1ae4524a59c714fab9688ccaf63b654577926e93ae1517aedcc4",
+      "actual_sdk_deliveries_verified": 10,
+      "matching_states": 11,
+      "native_deliveries": 10,
+      "local_answer_factors": 0,
+      "official_atomic_commits": 0,
+      "official_selection_ui_steps": 0,
+      "clean_shutdown_and_reset": true
+    }
+  ],
+  "continuation": {
+    "path": "artifacts/native-official-selectors/v6/comparison-v1/full-result-1795412662418075000.json",
+    "sha256": "bd65a75430089334bc7bedcc08ce3a8b3e670f47755fd7f764c9bb9638f60c6f",
+    "report_id": "sha256:1235cbb91d6396eb50afd7010dacb7bc00010065d668a8b26a5022411196e591"
+  },
+  "continuation_resources": {
+    "path": "artifacts/native-official-selectors/v6/comparison-v1/resources-1795412573360368000.json",
+    "sha256": "ffc56e5cc6bcc8f3ad33995cafbf184fcd6b56fe3c9b7a6d89d809f1fb531090",
+    "report_id": "sha256:82f27c2bb94acbd59508e09c921cabcebd26a2dcf75cef617db3072abe9909be"
+  },
+  "retained_prelaunch_abort": {
+    "path": "artifacts/native-official-selectors/v6/comparison-v1/prelaunch-process-scan-abort-assessment.json",
+    "sha256": "42777855e8bc12c9daed94f51d461c4cfc08a404d47f1f22e9ed6e948765f89b",
+    "report_id": "sha256:47e0fdb1b28be5dc7e26df6f61c5b4ce940c24f362b20e3db61fe2d6c83e264e"
+  },
+  "retained_prelaunch_abort_resources": {
+    "path": "artifacts/native-official-selectors/v6/comparison-v1/resources-1795412506097974000.json",
+    "sha256": "f3e3ba22cbf1bbcf71b0b4a7d120af479b99d211ef8f4b3318fae8a1b190881f",
+    "report_id": "sha256:9681659039b4f80b0ecd4a1359cb07ccfbffdf3609e85b2cdd1893e27eae4df3"
+  },
+  "startup_inspection": {
+    "path": "artifacts/native-official-selectors/v6/startup-reset-inspection-v1.json",
+    "sha256": "4042d3a3a19fd73e98cf66de9d8d75eb7f1103049d97de162d656c60478f1d20",
+    "report_id": "sha256:9350b41c383f3aff73c913f0d0f6fc3e6c1cbcfe951f2bdcb29f7ff80b092433"
+  },
+  "startup_reset": {
+    "path": "artifacts/native-official-selectors/v6/comparison-v1/inspected-reset/report.json",
+    "sha256": "89993eca6c7f76ab38b3af63fb4088321b1cbe93ca0327a494ee392fdb2452e8",
+    "report_id": "sha256:5e006c6ad2f1b958902143592f74c75162edc88376d5e3d92f3151f75a0a3a1b"
+  },
+  "coverage_inventory": {
+    "path": "artifacts/native-mechanics-evidence-map/v1/coverage-inventory.json",
+    "sha256": "9d28029eb8d02145dbbccebd935624956addb4264ec96e856736b2013f94b0cc",
+    "report_id": "sha256:8f260932fc2ab8157ede8429d4ab72c37a6244d0cf85c382a23ab4f37bbff722"
+  },
+  "continuation_wall_seconds": 88.68411954201292,
+  "prior_versions": [
+    {
+      "version": 1,
+      "path": "artifacts/native-official-selectors/v1/comparison-v1/full-result-1795408840369086000.json",
+      "sha256": "613be53c7aa353a59595c57318da3c991113e5a72a9cc965fcf4cadc83edc593",
+      "report_id": "sha256:df5ff183a0f8bb7837e7bfd2171e9eaa3237149c702e862a8cd5db6fea95e177",
+      "status": "blocked_preserving_evidence",
+      "verified_pairs_in_historical_recipe": 0,
+      "planned_pairs": 6,
+      "stop": {
+        "case": "shop-ordered",
+        "reason": "public_input_or_lifecycle_mismatch"
+      },
+      "pre_v5_complete_enchant_menu_claim_superseded": true
+    },
+    {
+      "version": 2,
+      "path": "artifacts/native-official-selectors/v2/comparison-v1/short-result-1795409765795010000.json",
+      "sha256": "f6aacab873b8ebe5dadc0ec2f10709c65fe1da921eed6d948dc48e573809fb7b",
+      "report_id": "sha256:a68d307b0f9bad595267e6daa7526621a2101175e088b786a75522f27d2c9dce",
+      "status": "blocked_preserving_evidence",
+      "verified_pairs_in_historical_recipe": 0,
+      "planned_pairs": 6,
+      "stop": {
+        "case": "shop-ordered",
+        "reason": "public_input_or_lifecycle_mismatch"
+      },
+      "pre_v5_complete_enchant_menu_claim_superseded": true
+    },
+    {
+      "version": 3,
+      "path": "artifacts/native-official-selectors/v3/comparison-v1/short-result-1795410184085707000.json",
+      "sha256": "090ed92db11adf6f2c3f012065cadae36b84dd272a5b2dcfe5cf3fa7832f88fc",
+      "report_id": "sha256:912b31c82e63f1f9b57709530f3e61896f25e056aa8279794382a3685bc7e1ae",
+      "status": "blocked_preserving_evidence",
+      "verified_pairs_in_historical_recipe": 1,
+      "planned_pairs": 6,
+      "stop": {
+        "case": "reward-card-take",
+        "reason": "public_input_or_lifecycle_mismatch"
+      },
+      "pre_v5_complete_enchant_menu_claim_superseded": true
+    },
+    {
+      "version": 4,
+      "path": "artifacts/native-official-selectors/v4/comparison-v1/full-result-1795411097725997000.json",
+      "sha256": "43627eeec543aa3768306f7818d11f712b3bfe3d4f7e7f3021723256b895b05b",
+      "report_id": "sha256:677f9d84322efe5991d81b5a09de9b7f0ec36e175b6a6311a212f85cbba9e0ec",
+      "status": "blocked_preserving_evidence",
+      "verified_pairs_in_historical_recipe": 4,
+      "planned_pairs": 6,
+      "stop": {
+        "case": "shop-ordered-empty",
+        "reason": "public_input_or_lifecycle_mismatch"
+      },
+      "pre_v5_complete_enchant_menu_claim_superseded": true
+    },
+    {
+      "version": 5,
+      "path": "artifacts/native-official-selectors/v5/comparison-v1/full-result-1795411964067706000.json",
+      "sha256": "289cdf2a972f01eeee842b2f622f06810ce4a1288a0511f92c1218fd35f6b7b1",
+      "report_id": "sha256:65622d49e953d8eebae42f7e9bf7a60cf21244a8d0cbbeac93edf8a9e8a25257",
+      "status": "blocked_preserving_evidence",
+      "verified_pairs_in_historical_recipe": 4,
+      "planned_pairs": 6,
+      "stop": {
+        "case": "shop-minimum-answer",
+        "error": "ValueError: Official worker shutdown/integrity unverified; preserve its active lease"
+      },
+      "pre_v5_complete_enchant_menu_claim_superseded": false
+    }
+  ],
+  "connector_builds": [
+    {
+      "connector": 34,
+      "path": "artifacts/native-official-selectors/v3/connector-build-v34/report.json",
+      "sha256": "64430f8c348ebe05e4bccda10c60dca1cb6edfbdee46015b6476e937b6941814",
+      "report_id": "sha256:8d95c6acebc5ed0da3451966f3f3a5ad9e794fba201490525ac82d85e465fc28",
+      "fresh_identical_builds": 2
+    },
+    {
+      "connector": 35,
+      "path": "artifacts/native-official-selectors/v4/connector-build-v35/report.json",
+      "sha256": "7aa9201b29e78e6cfe6d009ee1b5da2fce561f2c3aea72a29b67a9138b0bd1cf",
+      "report_id": "sha256:84c8089111c9ec9f75a81be0acb0ff8f5319c1b650943c71c4bc48e94422a711",
+      "fresh_identical_builds": 2
+    },
+    {
+      "connector": 36,
+      "path": "artifacts/native-official-selectors/v5/connector-build-v36/report.json",
+      "sha256": "944ee45702a16384f7b93f22589869c3b0037b8662c4c2f507835167362bb40f",
+      "report_id": "sha256:5eb57b59846eb331b8eeea61bf0777bee5232d87cfd21aade516267192ede049",
+      "fresh_identical_builds": 2
+    }
+  ],
+  "targeted_checks": {
+    "python_selector_inventory_and_startup_tests": 32,
+    "node_inventory_and_executable_answer_tests": 11,
+    "connector36_targeted_csharp_tests": 26,
+    "all_passed": true
+  },
+  "coverage_updates": [
+    {
+      "id": "shop-child-large-paired",
+      "status": "verified_for_declared_Kifuda_and_removal_children",
+      "remaining": "Other acquisition children and their allowed cancellation rules are unverified."
+    },
+    {
+      "id": "potions-queued-all-owners",
+      "status": "partial",
+      "verified": "Use/discard with direct, compact and reward-card child owners in these six controls.",
+      "remaining": "Queued grants, generated/combat/event owners and replacement effects."
+    },
+    {
+      "id": "reward-belt-child",
+      "status": "partial",
+      "verified": "Full belt plus actual potion reward, card child take/skip, exact sibling gold and next room.",
+      "remaining": "Bottle replacement/grants and alternative providers."
+    },
+    {
+      "id": "shop-belt-remove-restock",
+      "status": "partial",
+      "verified": "Full belt, removal cancel/confirm, subsequent catalog purchase and map exit.",
+      "remaining": "Courier and other restock/discount hooks."
+    },
+    {
+      "id": "input-snapshot-chain",
+      "status": "verified_for_these_six_chains",
+      "remaining": "Other owners and branch variants retain their source-derived obligations."
+    }
+  ],
+  "no_additional_long_run_required_for_declared_six_controls": true
+}
