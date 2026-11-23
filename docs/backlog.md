@@ -86,6 +86,18 @@ restock hooks, mixed rest boundaries and later-act rewards stay open under the
 coverage inventory. Qualify those bounded combinations next, then use the
 qualified adapters in a separately declared model-owned learning recipe.
 
+The [potion, restocking and rest handoff panel](native-mixed-handoffs-v1.md)
+now verifies twelve native controls (95 game deliveries and one local factor).
+Three official/native short pairs match 32 public states and 29 choices:
+slot replacement through a card-reward child, repeated Courier potion purchases,
+and Brew/Smith/third-Lift/Pillow through a second rest. The other nine official
+cases are prepared and unstarted. The owner command in the guide reuses clean
+seals and runs only those remaining counterparts. All build/checkpoint/Adam
+checks pass; zero updates. Three checker-development stops remain recorded,
+and no failed rest world is replayed. This is interface/effect qualification,
+not an A8 win evaluation or a new policy. Assess the full panel before admitting
+these additional combined branches to a new learning recipe.
+
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1
 once versus zero for the parents. Both copies fit saved choices

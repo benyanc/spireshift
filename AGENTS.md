@@ -2056,6 +2056,27 @@ effects, restock hooks, mixed rest boundaries and later-act/final owners.
 New learning must explicitly select the qualified adapter versions; historical
 training recipes, the game and all original/fitted full states/Adam stay fixed.
 
+The owner requested potion replacement, Courier restocking and mixed rest-site
+handoff checks. docs/native-mixed-handoffs-v1.md defines the current v4 recipe:
+twelve native cases pass with 95 game deliveries and one local factor. Two
+complete unaffected native seals are imported and ten controls are new. Three
+official/native short pairs pass with 32 matching states and 29 SDK choices,
+natural shutdown and clean resets. The build, host60, Connector36, converter17,
+SDK/runtime and all four full checkpoint/Adam states stay frozen. No updates.
+
+Keep three earlier checker-development stops and their raw receipts. They
+confused native/canonical rest fields, display labels and map-point versus
+room names. The current checker validates both permission views, binds the
+operand-free exit and legal travel coordinates, then checks the actual next
+owner. Failed rest worlds are not replayed; the current case uses MH4C003.
+Historical partial prefixes are diagnostic only. The long owner command is
+scripts/check-mixed-handoffs-v4.sh full, about 6–10 minutes with a 30-minute
+outer cap. Reaudit and reuse the clean twelve native and three official seals,
+then run only the nine unstarted official counterparts. Stop on incomplete or
+uncertain delivery; no marker clearing or automatic replay, training or
+promotion. Other providers, Dig/Hatch children, discount hooks, the old full
+rest-order matrix and later-act/final owners remain separate obligations.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
