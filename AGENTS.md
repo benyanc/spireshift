@@ -2077,6 +2077,32 @@ uncertain delivery; no marker clearing or automatic replay, training or
 promotion. Other providers, Dig/Hatch children, discount hooks, the old full
 rest-order matrix and later-act/final owners remain separate obligations.
 
+The owner's mixed v4 full run verified five pairs before a merchant-map target
+menu mismatch; six official counterparts remain unattempted. Preserve the failed
+MH3C006 world and its nine matching acknowledged prefix choices. Its old native
+complete-menu claim is superseded. Opening the map does not exit MerchantRoom:
+the frozen official game retains Foul Potion's merchant target until actual
+travel. The old headless presentation and refresh helper cleared it too early.
+
+docs/native-mixed-handoffs-merchant-map-v1.md defines the separately built adapter
+V2 and v7 continuation. Two fresh native/official controls verify target lifetime,
+the genuine 100-gold potion effect, physical consumption and next-room ownership,
+with 17 matching states and 15 choices. Five earlier raw paired proofs also
+reconstruct exactly (51 states, 46 choices). Keep the startup field/property
+reflection failure and the exact code/test snapshots. The v7 saved-only adoption
+permits just the declared test type annotation/import change; all gameplay bytes
+and raw results stay exact. No game is replayed to adopt a seal.
+
+The next owner command is scripts/check-mixed-handoffs-v7.sh full, about 4–8
+minutes. Reuse the two new paired seals and eight native seals; run only the six
+original unstarted official counterparts. Preserve the original mismatch in the
+thirteen linked main attempt slots and count the independent map-use probe
+separately. No failed world/marker is cleared, training is not authorized and
+optimizer work is zero. The game, host60, Connector36, converter17, SDK/runtime
+and all original/fitted full checkpoints/Adam remain frozen. After assessment,
+select qualified adapters explicitly for new model-owned learning; broader
+mechanics coverage and genuine A8 competence remain separate obligations.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded

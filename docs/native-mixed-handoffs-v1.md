@@ -1,5 +1,12 @@
 # Potion replacement, restocking and mixed rest-site handoffs
 
+**Current handoff:** the owner full run verified five pairs, then found a
+merchant target lifetime mismatch in Courier-card restocking; six counterparts
+remain unattempted. The [merchant-map repair and continuation](native-mixed-handoffs-merchant-map-v1.md)
+supersedes the launch instructions below. Preserve the historical v4 result.
+
+The remainder records the original preparation state before that full run.
+
 The twelve native controls pass on frozen STS2 v0.111.0 / 41cef1ea, host60,
 Connector36 and converter17. Three official/native short pairs also pass:
 reward replacement, repeated Courier potion restocking, and a two-rest-site

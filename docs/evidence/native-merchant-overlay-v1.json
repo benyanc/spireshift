@@ -1,0 +1,199 @@
+{
+  "schema_version": "native-merchant-overlay-evidence-v1",
+  "status": "merchant_target_repair_paired_verified_six_original_counterparts_prepared",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-mixed-handoffs-v7.json",
+    "sha256": "d755c4390cd49276d5a544685d4743e045e4b525c7647090931d69c4b07fdc6b",
+    "config_id": "sha256:b8046ec28490a6c14f22c71594965d7bea5ec7baa79ebbf5d90e1eea45470f9e"
+  },
+  "historical_owner_result": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/full-result-1795465094654605000.json",
+    "sha256": "9fdc50d3318e937401a43f7d83c82fc2f6b4fa69c7f01fe70f3c346730d40147",
+    "report_id": "sha256:fba3d3a4f4e2796edefbb08df5daaa64dc695e9780fd7031e0016e747c568fb5"
+  },
+  "historical_owner_resources": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/full-resources-1795464969543656000.json",
+    "sha256": "da8cc87a7a6b31ce054bd5a1b543d573e66711e94dc41e008cbbb28a30de7b05",
+    "report_id": "sha256:171e23d077820f1e9e86e542fa3a9f1c7c41d87768ac641320dd1f4c6f56080e"
+  },
+  "historical_original_inventory": {
+    "planned": 12,
+    "verified": 5,
+    "blocked": 1,
+    "unattempted": 6
+  },
+  "historical_reaudit": {
+    "path": "artifacts/native-mixed-handoffs/v7/control-v1/historical-assessment-v1/report.json",
+    "sha256": "b88bd9ea17ea2b9c9548754339a26e28c4cb9b716b993e183394336fd9d0b8c0",
+    "report_id": "sha256:a590dba1919fe3c96b1174c37de5d8ec1f6f9b19c12e0266569fdfc50b5ca18d"
+  },
+  "historical_matching_states": 51,
+  "historical_actual_sdk_choices": 46,
+  "blocked_case": {
+    "key": "courier-card-restock",
+    "pair_report": {
+      "path": "artifacts/native-mixed-handoffs/v4/control-v1/pairs/courier-card-restock/report.json",
+      "sha256": "99d55bab0625dcc8168aa5e79c8d3d3dfef47601adaca1f63b30de535daf0fc0",
+      "report_id": "sha256:8d4b205d871c1ed5732c34ebe6bd1ccc4100531e669c6fee7ba057c3534f320d"
+    },
+    "native_delivered_matching_prefix": 9,
+    "mismatch_at_offered_choice": 9,
+    "divergent_choice_delivered": false,
+    "cause": "headless_target_cleared_on_map_overlay_before_actual_merchant_room_exit",
+    "old_native_complete_menu_claim_superseded": true
+  },
+  "saved_projection_regression": {
+    "path": "artifacts/native-merchant-overlay/v1/saved-regression-v1.json",
+    "sha256": "f8857051ee2f8a1b9f9de673afab4393feebdf05d55f2768b5a1662673bc5622",
+    "report_id": "sha256:bad32c55b73a7552de428a8b7268e2c7bec5bc3ddf4bd61bb8789c8a2ecb3c9c"
+  },
+  "adapter_build": {
+    "path": "artifacts/native-merchant-overlay/v2/adapter.json",
+    "sha256": "090684bc9586a61c89eea90ff1058d5cb8c7056c7442fda2134829c6b27edd05",
+    "report_id": "sha256:2d7f30526ca88b51890ba104e8dc6f455ff84f3f9325eeaf55d863ab4f840994"
+  },
+  "adapter_sha256": "1d505ef94ec181a10b843bbc9b3b85f618d70c2010ccbea0317d7d22b01cabc8",
+  "native_result": {
+    "path": "artifacts/native-mixed-handoffs/v6/control-v1/native-result-1795466865983719000.json",
+    "sha256": "56984d69add34f0af8fe517af7177170028b068fe17b94a8a67aa13fab2ebe46",
+    "report_id": "sha256:581ce93e51901ac644a091f778caf1ae73c6e590e895050b54ae20464ccb669f"
+  },
+  "native_current_controls": 8,
+  "native_controls_reused": 6,
+  "native_new_controls": 2,
+  "native_new_game_deliveries": 15,
+  "new_native_public_states": 17,
+  "official_short_result": {
+    "path": "artifacts/native-mixed-handoffs/v6/control-v1/short-result-1795466951717444000.json",
+    "sha256": "a2cdc3b313110b70a9f4d333353a30734f27cb41940085f55b93a106ad2fcdfa",
+    "report_id": "sha256:a4a1e99ab622c420bddca3c03817f1545e8c24f88c3d8bc13b8d7be590d403fd"
+  },
+  "official_short_resources": {
+    "path": "artifacts/native-mixed-handoffs/v6/control-v1/short-resources-1795466869666273000.json",
+    "sha256": "9a54c9d1d7b93fdd2c71213d63af56282d6e67714f637f38826ce50e1cf8181d",
+    "report_id": "sha256:29ab571273bf8e1f9ddb4e5753a42899e5a6cf684f592150de68041acbbeaff2"
+  },
+  "new_official_pairs": 2,
+  "new_official_matching_states": 17,
+  "new_actual_sdk_choices": 15,
+  "short_wall_seconds": 81.23175204196014,
+  "fresh_pair_results": [
+    {
+      "case": {
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "courier": false,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "family": "shop",
+        "hp": 31,
+        "key": "merchant-map-use",
+        "operation": "merchant_map_use",
+        "relics": [],
+        "seed": "SP1RESH1FTA8MH6F001"
+      },
+      "report_id": "sha256:881f3aeafffee101d8bf10e6035262e4a6845f150bc2d7eaf2205ce0a1a06992",
+      "status": "verified",
+      "paired": {
+        "actual_sdk_deliveries_verified": 5,
+        "all_public_reads_reconstructed": true,
+        "equal": true,
+        "first_difference": null,
+        "later_divergent_states_realigned": false,
+        "matching_states": 6,
+        "native_states": 6,
+        "official_states": 6
+      }
+    },
+    {
+      "case": {
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "courier": true,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "family": "shop",
+        "hp": 31,
+        "key": "courier-card-restock",
+        "operation": "card",
+        "relics": [
+          "THE_COURIER"
+        ],
+        "seed": "SP1RESH1FTA8MH5C006"
+      },
+      "report_id": "sha256:f53611bb0ee4fc754a6838546472f4f53766d9b56e2ec8c10cfc83bec7429486",
+      "status": "verified",
+      "paired": {
+        "actual_sdk_deliveries_verified": 10,
+        "all_public_reads_reconstructed": true,
+        "equal": true,
+        "first_difference": null,
+        "later_divergent_states_realigned": false,
+        "matching_states": 11,
+        "native_states": 11,
+        "official_states": 11
+      }
+    }
+  ],
+  "source_startup_stop": {
+    "path": "artifacts/native-mixed-handoffs/v5/control-v1/native-result-1795466633764303000.json",
+    "sha256": "e89835db2cbbb730b6e55ebc99065eccb79716ece974baf8bd0648e488586830",
+    "report_id": "sha256:4d9a2c9b116bcba97eab27697423cab736085072da2abf5ecd09e419391d702a"
+  },
+  "startup_stop_before_world_initialization": true,
+  "adopted_saved_scope": {
+    "path": "artifacts/native-mixed-handoffs/v7/control-v1/short-result-1795467203687786000.json",
+    "sha256": "a5051d0318d02e9ae60e3f719c428f419a787a4d388e42b8c59d254d2d070adf",
+    "report_id": "sha256:7523759dad5d41c9bc0e1c5f6ff0eec53620835c3b09efa71f2f6d8e0be819b0"
+  },
+  "adopted_saved_resources": {
+    "path": "artifacts/native-mixed-handoffs/v7/control-v1/short-resources-1795467192134654000.json",
+    "sha256": "0a99594fc676f28e3d5e15b96d99be4d3ac62790204e53472f1bc5094b3a6dbf",
+    "report_id": "sha256:5c1ef0240ab2acae0d96544574de336de641ab8eab7e89e62c061f8a3ab9840c"
+  },
+  "adoption_launched_games": 0,
+  "test_amendment": {
+    "scope": "explicit raw dict type annotation and typing.Any import only",
+    "original_source": {
+      "path": "artifacts/native-merchant-overlay/v2/test_native_merchant_overlay.original.py",
+      "sha256": "37db89c8b379fa29a542a4743d14410ea08f194243ab1507d84f7ff3c19039dc"
+    },
+    "current_source_sha256": "0c9602c1a1294b12cea4e48aa8c91034c27bb4b86a2d69d569793b0d41896b0b",
+    "all_gameplay_source_bytes_identical": true
+  },
+  "current_main_mechanisms_verified": 6,
+  "additional_effect_probes_verified": 1,
+  "current_main_mechanisms_unattempted": 6,
+  "linked_main_attempt_slots": 13,
+  "historical_main_mismatch_retained": 1,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "game_version": "0.111.0",
+  "game_revision": "41cef1ea",
+  "native_host_unchanged": 60,
+  "connector_unchanged": 36,
+  "converter_unchanged": 17,
+  "optimizer_updates": 0,
+  "training_allowed": false,
+  "promotion_allowed": false,
+  "official_live_qualification_granted": false,
+  "full_game_playing_strength_evaluated": false,
+  "automatic_follow_up": false,
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/check-mixed-handoffs-v7.sh\" full"
+}

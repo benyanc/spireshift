@@ -87,16 +87,19 @@ coverage inventory. Qualify those bounded combinations next, then use the
 qualified adapters in a separately declared model-owned learning recipe.
 
 The [potion, restocking and rest handoff panel](native-mixed-handoffs-v1.md)
-now verifies twelve native controls (95 game deliveries and one local factor).
-Three official/native short pairs match 32 public states and 29 choices:
-slot replacement through a card-reward child, repeated Courier potion purchases,
-and Brew/Smith/third-Lift/Pillow through a second rest. The other nine official
-cases are prepared and unstarted. The owner command in the guide reuses clean
-seals and runs only those remaining counterparts. All build/checkpoint/Adam
-checks pass; zero updates. Three checker-development stops remain recorded,
-and no failed rest world is replayed. This is interface/effect qualification,
-not an A8 win evaluation or a new policy. Assess the full panel before admitting
-these additional combined branches to a new learning recipe.
+reached five verified official/native pairs, one merchant-map mismatch and six
+unattempted counterparts. All five passing raw proofs reconstruct exactly
+(51 states, 46 choices). The [merchant-map repair](native-mixed-handoffs-merchant-map-v1.md)
+keeps Foul Potion's actual room target alive under the map until real travel,
+without changing the game or host60. Fresh use and Courier-card replacement
+controls pass 17 matching states and 15 actual SDK choices on both hosts.
+The v7 owner command reuses the
+clean controls and runs only the six original unstarted official counterparts.
+Keep the old failure and supersede its native complete-menu claim. All frozen
+build/checkpoint/Adam checks pass; zero updates. This is a shared framework
+repair, not a policy adjustment or A8 win evaluation. After assessing the
+remaining combinations, select the qualified adapters in the next declared
+model-owned learning recipe; broader source-derived coverage stays explicit.
 
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1
