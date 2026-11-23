@@ -73,6 +73,15 @@ removal, direct and ordered relic answers, reward take/skip, exact inventory
 effects and reward completion through the next map vote. Broader mixed-owner
 and official comparison obligations remain open.
 
+The [official/native selector comparison](native-a8-official-selectors-v1.md)
+now prepares six shared-save pairs for those shop and reward branches. Its
+short native controls passed with 48 native deliveries and two local factors.
+The separately built Connector v33 supports the same complete ordered-answer
+grammar above the old 512-answer limit. Actual official delivery remains
+unqualified until the paired panel runs with STS2 closed. The inspected old
+invalid-seed failure keeps its evidence and failed status. This work changes
+the decision adapter and compatibility checks, with zero learning updates.
+
 The [Act 1 replay result](native-a8-act1-success-replay-result-v1.md)
 verified 128 fresh native losses. The fitted arm cleared Act 1
 once versus zero for the parents. Both copies fit saved choices

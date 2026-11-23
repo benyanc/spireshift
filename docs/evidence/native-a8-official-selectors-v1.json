@@ -1,0 +1,125 @@
+{
+  "schema_version": "native-a8-official-selector-preparation-v1",
+  "status": "native_controls_verified_official_pending_game_close",
+  "config_id": "sha256:3c954c4b747f36479699f98bece9908b0c365981b2ae745bec1b545fbc5654ce",
+  "native_result": {
+    "path": "artifacts/native-official-selectors/v1/comparison-v1/native-result-1795406248456436000.json",
+    "sha256": "8bbeaa7091f0854b9d30f147eb878ccbe0769c110a5866e5c27735b043493e03",
+    "report_id": "sha256:57f221f23cc67e68e7c232585d6fb70f7dc022cfc37fbd4e1e76fc781126179e"
+  },
+  "native_cases": [
+    {
+      "case": {
+        "count": 13,
+        "discard_first": false,
+        "indices": [
+          12,
+          0
+        ],
+        "key": "shop-ordered",
+        "kind": "kifuda",
+        "seed": "SP1RESH1FTA8PSLC001"
+      },
+      "native_deliveries": 7,
+      "local_answer_factors": 2,
+      "native_card_answer_commits": 1
+    },
+    {
+      "case": {
+        "discard_first": false,
+        "key": "reward-card-take",
+        "kind": "reward_take",
+        "seed": "SP1RESH1FTA8PSLC002"
+      },
+      "native_deliveries": 9,
+      "local_answer_factors": 0,
+      "native_card_answer_commits": 0
+    },
+    {
+      "case": {
+        "count": 13,
+        "discard_first": false,
+        "indices": [
+          12
+        ],
+        "key": "removal-cancel-confirm",
+        "kind": "removal",
+        "seed": "SP1RESH1FTA8PSLC003"
+      },
+      "native_deliveries": 9,
+      "local_answer_factors": 0,
+      "native_card_answer_commits": 1
+    },
+    {
+      "case": {
+        "count": 3,
+        "discard_first": true,
+        "indices": [
+          2,
+          0
+        ],
+        "key": "shop-direct",
+        "kind": "kifuda",
+        "seed": "SP1RESH1FTA8PSLC004"
+      },
+      "native_deliveries": 7,
+      "local_answer_factors": 0,
+      "native_card_answer_commits": 1
+    },
+    {
+      "case": {
+        "count": 13,
+        "discard_first": true,
+        "indices": [],
+        "key": "shop-ordered-empty",
+        "kind": "kifuda",
+        "seed": "SP1RESH1FTA8PSLC005"
+      },
+      "native_deliveries": 7,
+      "local_answer_factors": 0,
+      "native_card_answer_commits": 1
+    },
+    {
+      "case": {
+        "discard_first": true,
+        "key": "reward-card-skip",
+        "kind": "reward_skip",
+        "seed": "SP1RESH1FTA8PSLC006"
+      },
+      "native_deliveries": 9,
+      "local_answer_factors": 0,
+      "native_card_answer_commits": 0
+    }
+  ],
+  "native_deliveries": 48,
+  "local_answer_factors": 2,
+  "native_wall_seconds": 52.101370125077665,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "connector": {
+    "version": "1.1.0-rc.1",
+    "protocol": "1.0.0",
+    "source_revision": "278e93e6459999dd6a09d7d5ee4b1faee0966267",
+    "artifact_sha256": "ef5ebd3400234f92d0b2e4291b4daf8842add40534931f61df7eb48dcb7b6f96",
+    "artifact_mvid": "138d85b3-b062-4d9f-bd02-13c552c9628a"
+  },
+  "reproduced_build_report": "artifacts/native-official-selectors/v1/connector-build-v33/report.json",
+  "inspected_reset": {
+    "path": "artifacts/native-official-selectors/v1/invalid-seed-reset-inspection.json",
+    "sha256": "f86756dfdf2d49436fa945b46fbed02d843358d77e653198fcfce4b1f703367e"
+  },
+  "inspected_reset_applied": false,
+  "official_pairs_planned": 6,
+  "official_pairs_verified": 0,
+  "optimizer_updates": 0,
+  "training_allowed": false,
+  "official_live_qualification_granted": false,
+  "full_game_playing_strength_evaluated": false,
+  "automatic_follow_up": false
+}
