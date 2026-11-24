@@ -1,0 +1,104 @@
+{
+  "status": "capacity_collect_fit_reload_and_initial_equivalence_verified",
+  "config_id": "sha256:62e57c40519363d56684d22c85d6c4a5a7731dcd311696e06a32fcd05f1ecee8",
+  "initial_states": {
+    "expanded": {
+      "2": {
+        "actor_parameters": 73012,
+        "actor_steps": 12722,
+        "hidden_units": 128,
+        "model_id": "sha256:eb21b1f9dc95960f5a7244bc40a70f9e04d30c8901ab6e632eec6d5ec2a45771",
+        "state_id": "sha256:0153d2d9c2914a4ae9b4c109567cb75784503a9c17ade66638c336de40e8ec88",
+        "value_steps": 12466
+      },
+      "3": {
+        "actor_parameters": 73012,
+        "actor_steps": 12953,
+        "hidden_units": 128,
+        "model_id": "sha256:718c4515d385b32d58dee4989e0b948ec24cb1f4448d189545f99ab671394ac2",
+        "state_id": "sha256:bf19a5f71279e4d6565cd02412754b6b2d0cd154bba76d279eb9882db18c86f2",
+        "value_steps": 12697
+      }
+    },
+    "standard": {
+      "2": {
+        "actor_parameters": 18676,
+        "actor_steps": 12722,
+        "hidden_units": 32,
+        "model_id": "sha256:546ece036960c53f70cf83c13b60752f91cb145ecde9b4a0b8a7275b06ea8123",
+        "state_id": "sha256:99a4bfd9edb53f9eba6c8b9cad51cbc136f012327c0f32ea4cfc0507b0b71ff9",
+        "value_steps": 12466
+      },
+      "3": {
+        "actor_parameters": 18676,
+        "actor_steps": 12953,
+        "hidden_units": 32,
+        "model_id": "sha256:6ac9dc7e559f3f0fa39a4c3e89af74f4baa70ea7764ed48e087a59a82971b5e4",
+        "state_id": "sha256:fae8e125cfbd43dcc90974add15ea6320485fdcbf84f34166eca3509e49afb64",
+        "value_steps": 12697
+      }
+    }
+  },
+  "initial_native_pairs_verified": 4,
+  "initial_native_choices_verified": 1040,
+  "saved_input_checks": {
+    "fixture_choices_used_as_labels": false,
+    "gameplay_deliveries": 0,
+    "maximum_log_probability_error": 3.552713678800501e-15,
+    "optimizer_updates": 0,
+    "paired_policy_comparisons": 228,
+    "public_states": 114,
+    "seal_id": "sha256:425edcd18ae95c9440e81362ab0b537af20063ccee08aa3f145f77e6686deee0"
+  },
+  "cohort_counts": {
+    "control-p2-expanded": {
+      "loss": 2
+    },
+    "control-p2-standard": {
+      "loss": 2
+    },
+    "control-p3-expanded": {
+      "loss": 2
+    },
+    "control-p3-standard": {
+      "loss": 2
+    },
+    "reload-control-p2-expanded": {
+      "loss": 1
+    },
+    "reload-control-p2-standard": {
+      "loss": 1
+    },
+    "reload-control-p3-expanded": {
+      "loss": 1
+    },
+    "reload-control-p3-standard": {
+      "loss": 1
+    }
+  },
+  "optimizer_updates_on_copies": 8,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "original_optimizer_updates": 0,
+  "promotion_allowed": false,
+  "official_live_qualification_granted": false,
+  "final_test_worlds_used": false,
+  "automatic_follow_up": false,
+  "report_id": "sha256:529f15117b3aed6b3fdf72f5e357cde119b2862a5db586623edf54690ebefef5",
+  "source_control_path": "artifacts/native-policy-capacity/control-v1/report.json",
+  "native_control_games": 12,
+  "native_control_deliveries": 2516,
+  "local_control_factors": 0,
+  "long_training_games": 4096,
+  "long_fresh_comparison_games": 768,
+  "main_initializes_from_control_updated_copies": false,
+  "long_study_started": false,
+  "source_result_assessment_id": "sha256:1fe9e3c8cf8f68ab79d753ea8257867d0efdb6b41f1c29513d6768b05c596111",
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-a8-policy-capacity-v1.sh\""
+}

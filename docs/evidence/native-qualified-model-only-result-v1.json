@@ -1,0 +1,197 @@
+{
+  "completed_training_games": 2046,
+  "development": {
+    "by_initializer": {
+      "2": {
+        "arms": {
+          "fitted": {
+            "act1_clears": 3,
+            "act2_clears": 0,
+            "capped": 0,
+            "failed": 0,
+            "loss": 32,
+            "mean_terminal_floor": 12.46875,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "act1_clears": 2,
+            "act2_clears": 0,
+            "capped": 0,
+            "failed": 0,
+            "loss": 32,
+            "mean_terminal_floor": 12.21875,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 32,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 32,
+        "terminal_pairs": 32
+      },
+      "3": {
+        "arms": {
+          "fitted": {
+            "act1_clears": 3,
+            "act2_clears": 0,
+            "capped": 0,
+            "failed": 0,
+            "loss": 32,
+            "mean_terminal_floor": 13.03125,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "act1_clears": 1,
+            "act2_clears": 0,
+            "capped": 0,
+            "failed": 0,
+            "loss": 32,
+            "mean_terminal_floor": 10.6875,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 32,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 32,
+        "terminal_pairs": 32
+      }
+    },
+    "comparison": "inconclusive",
+    "pooled_fitted_minus_original_win_rate_bounds": [
+      0.0,
+      0.0
+    ],
+    "scope": "descriptive_fresh_normal_starts_two_fixed_initializers_not_final_test",
+    "seed_clustered_bootstrap_95": {
+      "intervals": {
+        "player_2_wins": [
+          0.0,
+          0.0
+        ],
+        "player_3_wins": [
+          0.0,
+          0.0
+        ],
+        "pooled_completed_acts": [
+          -0.015625,
+          0.109375
+        ],
+        "pooled_wins": [
+          0.0,
+          0.0
+        ]
+      },
+      "resamples": 10000,
+      "scope": "descriptive_for_these_worlds_and_two_fixed_initializers",
+      "seed": 20261020
+    }
+  },
+  "development_games_verified": 128,
+  "failed_training_cells": 2,
+  "final_states": {
+    "2": "sha256:99a4bfd9edb53f9eba6c8b9cad51cbc136f012327c0f32ea4cfc0507b0b71ff9",
+    "3": "sha256:fae8e125cfbd43dcc90974add15ea6320485fdcbf84f34166eca3509e49afb64"
+  },
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_model_and_Adam_fits_reloaded": 128,
+  "games_launched": 0,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "optimizer_updates_on_copies": 7101,
+  "original_optimizer_updates": 0,
+  "planned_training_games": 2048,
+  "promotion_allowed": false,
+  "report_id": "sha256:1fe9e3c8cf8f68ab79d753ea8257867d0efdb6b41f1c29513d6768b05c596111",
+  "schema_version": "native-qualified-learning-saved-result-v1",
+  "scope": "two_fixed_initializers_32_fresh_worlds_native_only_no_competence_claim",
+  "shared_profile_unchanged": true,
+  "source_config_id": "sha256:3d7522aaf6d20133db55c00264323fd08e75d78e7e52d354b582541fac316749",
+  "source_report_id": "sha256:7fb7ccd0ae45ece19adfec8efcd6b52be557656b6db7bb1f2e803eed6e72cf13",
+  "status": "completed_a8_training_and_fresh_comparison_independently_verified",
+  "training_act1_clears": 71,
+  "training_act2_clears": 0,
+  "training_counts": {
+    "2": {
+      "loss": 1024
+    },
+    "3": {
+      "failed": 2,
+      "loss": 1022
+    }
+  },
+  "unattempted_training_games": 0,
+  "architecture_diagnostics": {
+    "measurements": {
+      "p2-final": {
+        "actor_parameters": 18676,
+        "critic_parameters": 565,
+        "dimension": 564,
+        "hidden_activation_fraction_above_abs_0_95": 0.6833169291338582,
+        "hidden_units": 32,
+        "mean_end_turn_probability": 0.2918577981790788,
+        "mean_entropy_fraction_of_uniform": 0.39630509794387564,
+        "mean_hidden_range_across_legal_actions": 0.2511551804449277,
+        "sampled_choice_states": 64
+      },
+      "p2-start": {
+        "actor_parameters": 18676,
+        "critic_parameters": 565,
+        "dimension": 564,
+        "hidden_activation_fraction_above_abs_0_95": 0.7559055118110236,
+        "hidden_units": 32,
+        "mean_end_turn_probability": 0.30388464567361045,
+        "mean_entropy_fraction_of_uniform": 0.47069543643686157,
+        "mean_hidden_range_across_legal_actions": 0.18492428705103023,
+        "sampled_choice_states": 64
+      },
+      "p3-final": {
+        "actor_parameters": 18676,
+        "critic_parameters": 565,
+        "dimension": 564,
+        "hidden_activation_fraction_above_abs_0_95": 0.6797127831715211,
+        "hidden_units": 32,
+        "mean_end_turn_probability": 0.1721332065162362,
+        "mean_entropy_fraction_of_uniform": 0.47507408505964094,
+        "mean_hidden_range_across_legal_actions": 0.37009940389399265,
+        "sampled_choice_states": 64
+      },
+      "p3-start": {
+        "actor_parameters": 18676,
+        "critic_parameters": 565,
+        "dimension": 564,
+        "hidden_activation_fraction_above_abs_0_95": 0.7571804207119741,
+        "hidden_units": 32,
+        "mean_end_turn_probability": 0.17465403326234286,
+        "mean_entropy_fraction_of_uniform": 0.5206882514220555,
+        "mean_hidden_range_across_legal_actions": 0.1902297833241688,
+        "sampled_choice_states": 64
+      }
+    },
+    "sampling": "four_hash_selected_combat_states_per_every_fourth_development_cell_v1",
+    "training_labels_created": 0
+  },
+  "source_assessment_path": "artifacts/native-qualified-learning/assessment-v1/report.json"
+}

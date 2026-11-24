@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Finish sustained model-owned A8 learning and its fresh comparison.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Reuse 1,146 sealed games and 3,813 copy updates. Preserve two failed-verification cells; run only 900 unstarted training games and the original 128 fresh comparison games. Require saved/fresh optional-journal checks and exact restore-to-first-new-game proof. Keep round-64 candidates, all settings and model ownership fixed. |
+| 1 | **Test larger shared-policy capacity with sustained learning.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Compare continued 32-unit and expanded 128-unit copies of both exact finals, with identical initial choices, existing inputs/PPO and full-menu model ownership. Run 4,096 fresh training games, then 768 fresh reference/continued/expanded comparisons. Full wins are primary. |
 | 2 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current. Extend provider, child, target and late-act checks as concrete gaps or promising candidates require them. Reject affected incomplete/uncertain experience while keeping independently valid model-owned learning moving. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -63,18 +63,21 @@ intent inputs for a shared actor and critic on copies. It learns from fresh
 model-owned games and uses no fixture/scripted imitation labels. Both encoders
 match on all 114 qualified menus for both starting copies.
 
-The collect/fit/reload control passed. The [owner study assessment and continuation](native-qualified-model-only-continuation-v2.md)
-verify 1,146 sealed games, 33 Act 1 clears, no Act 2 clears and no A8 wins.
-These changing-policy training outcomes do not measure improvement; the 128
-fresh comparison games remain unstarted. A saved checker used the old enchant
-minimum while gameplay correctly used the executable minimum. Its continuation
-then required a lazily created cursor file for a game that used no cursor.
-The new checker verifies both saved cases and two fresh normal-start games
-(272 native deliveries, zero updates). Both failed cells remain diagnostic and
-excluded from fitting. Finish the remaining 900 training games and the fixed
-comparison before selecting the next learning change. Preserve all historical
-seals, failed markers, frozen source checkpoints/full Adam and final-test worlds.
-Broader coverage obligations remain explicit.
+The [completed owner study](native-qualified-model-only-result-v1.md) verifies
+2,046 complete training games, two preserved failed cells, 7,101 copy updates
+and all 128 fresh evaluation games. Wins remain 0/64 in both arms. Act 1 clears
+changed 3/64 to 6/64, with an inconclusive world-clustered interval; Act 2 clears
+remain zero. All original weights/full Adam and the build remain frozen.
+
+The [capacity comparison](native-policy-capacity-v1.md) tests a larger shared
+actor, preserving its starting function and inherited full Adam. The old model
+has 32 hidden units; bounded saved-state diagnostics find many saturated
+activations, which motivates a test but does not prove insufficient capacity.
+Keep the existing input, objectives, PPO, fresh normal starts and model-owned
+menus fixed. Continue a 32-unit control, train a 128-unit copy, and compare both
+with the frozen finals on new worlds. Do not prescribe particular fight actions
+or simply claim another unchanged enlargement will fix the learner. Preserve
+historical evidence and reserved final-test worlds. Broader mechanics rows stay partial.
 
 ## Completed interface work
 

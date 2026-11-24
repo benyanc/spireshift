@@ -1,5 +1,10 @@
 # Sustained model-owned A8 learning with qualified inputs
 
+**Completed:** all 128 fresh games finished. Full wins remain 0/64 per arm;
+Act 1 clears changed 3/64 to 6/64, inconclusive. The [independent result](native-qualified-model-only-result-v1.md)
+and [capacity comparison](native-policy-capacity-v1.md) supersede the continuation
+handoffs below. Preserve the completed study and all failed cells unchanged.
+
 **Current owner handoff:** the run stopped after 1,146 sealed training games and
 3,813 copy updates, before fresh evaluation. The [saved assessment and v4
 continuation](native-qualified-model-only-continuation-v2.md) fix the saved

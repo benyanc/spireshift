@@ -1,5 +1,9 @@
 # Correct optional journals and finish the fixed A8 study
 
+**Completed owner run:** see the [independent assessment](native-qualified-model-only-result-v1.md).
+The current next command is the [controlled capacity comparison](native-policy-capacity-v1.md).
+The v4 continuation details and failed-checker evidence below remain historical.
+
 The second owner continuation stopped after one newly played game, during
 saved verification. The worker creates `selection-cursor.jsonl.gz` only when
 an ordered card answer is constructed. The previous checker incorrectly

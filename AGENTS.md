@@ -2192,6 +2192,39 @@ unchanged. No retry/replacement worlds, fixture labels, teacher rules, promotion
 or final-test use. Assess the completed fixed study before another learning
 change; current 33 training Act 1 clears and zero full wins do not measure gain.
 
+The sustained study is now complete. docs/native-qualified-model-only-result-v1.md
+independently verifies all 2,302 clean units and 128 full actor/critic/Adam fits:
+2,046 complete training games, two preserved failed cells, 7,101 copy updates.
+All 128 fresh development games are terminal losses. Trained Act 1 clears are
+6/64 versus 3/64 for the starts, with a descriptive clustered interval crossing
+zero; no Act 2 clears or full wins. Do not call zero-bootstrap intervals proof
+of equal true win rates. All prior frozen files/failures and final-test seeds stay exact.
+
+The next owner stage is docs/native-policy-capacity-v1.md under #134/#35/#143.
+Test continued 32-unit versus expanded 128-unit shared actors on four copies
+of the exact new finals, keeping original/fitted weights/full Adam frozen.
+New units have seeded random inputs and zero outputs; preserve the entire
+starting policy, critic, inherited weights, Adam moments and separate clocks.
+New moments start at zero under the restored actor clock. Saved mixed menus,
+full initial native trajectories and collect/update/reload controls must pass
+before main learning. Control-updated copies never initialize the main study.
+
+The capacity study declares 64 rounds, 4,096 fresh normal-start training games
+and 768 new reference/continued/expanded development games. Selection is fixed
+at round 64. Input, PPO, training score, terminal A8 objective and whole-game
+guards stay unchanged. All legal decisions remain model-owned. Equal worlds
+do not imply equal optimizer work or compute; do not make that claim. The
+bounded saved-state saturation findings motivate this hypothesis, not a proof
+that width caused the poor results. No fight-specific rules, teacher takeover,
+fixture labels, reserved final-test use, promotion or controller follows.
+
+The one long owner command is scripts/compare-a8-policy-capacity-v1.sh, about
+14–24 hours with a 48-hour outer cap. Long jobs remain owner-run; keep execution
+inputs fixed while active. Reuse only exact clean seals and stop on uncertain
+or changed units without replay or replacement. Source finals and all full
+Adam states remain immutable; only new copies learn. Current broader mechanics
+coverage is still partial and promising A8 competence needs official validation.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
