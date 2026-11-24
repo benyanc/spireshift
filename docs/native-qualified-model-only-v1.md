@@ -1,10 +1,10 @@
 # Sustained model-owned A8 learning with qualified inputs
 
 **Current owner handoff:** the run stopped after 1,146 sealed training games and
-3,813 copy updates, before fresh evaluation. The [saved assessment and v3
-continuation](native-qualified-model-only-continuation-v1.md) fix the outdated
-enchant-answer checker, preserve its failed cell, reuse all complete units,
-and run only the remaining games. The preparation details below are historical;
+3,813 copy updates, before fresh evaluation. The [saved assessment and v4
+continuation](native-qualified-model-only-continuation-v2.md) fix the saved
+checker, preserve both failed cells, reuse all complete units, and run only the
+remaining games. The preparation details below are historical;
 use the continuation command rather than restarting this study.
 
 The learner now selects the paired-qualified inventory, reward, selector,

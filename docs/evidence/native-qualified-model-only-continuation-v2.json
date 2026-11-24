@@ -1,0 +1,94 @@
+{
+  "status": "saved_and_fresh_normal_start_verifier_controls_passed",
+  "config_id": "sha256:51d8176435a596aa198655aeb0d91c23f349f80e9b548bbb191d28d6b36f4d60",
+  "controls": [
+    {
+      "key": "verifier-control-p2",
+      "local_factors": 0,
+      "native_deliveries": 99,
+      "outcome": "loss",
+      "seal_id": "sha256:63825a59a2ac91b91cdb50656eff1df6179181738f4af62a0a96b5f29e631a6c",
+      "selection_cursor_present": false
+    },
+    {
+      "key": "verifier-control-p3",
+      "local_factors": 0,
+      "native_deliveries": 173,
+      "outcome": "loss",
+      "seal_id": "sha256:b55f2c10659eca671c908f2dd6a976cdb3e8b67bdfe88b5589bface0f25681a2",
+      "selection_cursor_present": false
+    }
+  ],
+  "native_games_launched": 2,
+  "optimizer_updates": 0,
+  "training_admission_granted": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "shared_profile_unchanged": true,
+  "report_id": "sha256:93f7442e6394ab54ec3ee9b93d2dba029ecbd6cb73706a9208c13e3e95b1bb87",
+  "saved_assessment_id": "sha256:5c4a3a98b9798520e6790ace3b678f4e0529abdadfad196be90b3d3cc9769708",
+  "saved_diagnostic_cells": {
+    "train-0571-p3-learner": {
+      "exact_choices_probabilities_and_native_loss_verified": true,
+      "local_factors": 3,
+      "native_deliveries": 191,
+      "selection_cursor_present": true,
+      "training_admitted": false
+    },
+    "train-0572-p3-learner": {
+      "exact_choices_probabilities_and_native_loss_verified": true,
+      "local_factors": 0,
+      "native_deliveries": 124,
+      "selection_cursor_present": false,
+      "training_admitted": false
+    }
+  },
+  "restoration": {
+    "config_id": "sha256:3d7522aaf6d20133db55c00264323fd08e75d78e7e52d354b582541fac316749",
+    "current_states": {
+      "2": "sha256:7650cd909864bb394bb833bff61239ac1fbc8119cc005191839567a8d1242b0a",
+      "3": "sha256:bc80228baf29a466fcfba904728e59f6888cd1f431b41a4f54e3b18c995f92f4"
+    },
+    "first_unstarted_game": "train-0573-p3-learner",
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "games_launched": 0,
+    "optimizer_updates": 0,
+    "preserved_failed_cells": 2,
+    "report_id": "sha256:7fde27e58d214ab73bb58316e35e31f0ca94ea7d19c3aad8dba261fd175ea575",
+    "restored_fits": 71,
+    "restored_games": 1146,
+    "restored_optimizer_updates": 3813,
+    "schema_version": "native-qualified-learning-resume-check-v4",
+    "status": "restored_exact_prefix_stopped_before_first_unstarted_game"
+  },
+  "sealed_training_games": 1146,
+  "preserved_failed_training_games": 2,
+  "unstarted_training_games": 900,
+  "development_games_unstarted": 128,
+  "inherited_optimizer_updates": 3813,
+  "training_act1_clears": 33,
+  "training_act2_clears": 0,
+  "training_full_a8_wins": 0,
+  "fresh_comparison_improvement": "unmeasured_all_128_games_unstarted",
+  "continuation_recipe": "configs/native-learning/sts2-v0.111.0-a8-qualified-model-only-v4.json",
+  "continuation_recipe_sha256": "2bb121f280b7f7c6e43657d38a3f78d1c2170fadbff318a059301dfd9e9565ae",
+  "original_optimizer_updates": 0,
+  "promotion_allowed": false,
+  "official_live_qualification_granted": false,
+  "final_test_worlds_used": false,
+  "automatic_follow_up": false,
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-a8-qualified-model-only-v4.sh\""
+}

@@ -1,5 +1,11 @@
 # Sustained A8 training: saved assessment and continuation
 
+**Superseded owner command:** the v3 run exposed a checker assumption that an
+unused cursor file always exists. The [v4 handoff](native-qualified-model-only-continuation-v2.md)
+handles the actual absent-file case, verifies it on saved and fresh normal-start
+games, preserves both failed cells and resumes only the 900 unstarted games.
+The assessment and original evidence below remain historical and unchanged.
+
 The November 24 owner run stopped during saved card-answer verification. It did
 not reach the fresh development comparison. The completed games and copy updates
 are reusable; there is no evidence yet that this study improved full-run wins.

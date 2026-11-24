@@ -2163,6 +2163,35 @@ Adam and the frozen game/runtime remain exact. No individual-fight rules,
 teacher takeover, promotion or reserved final-test use follows. Complete the
 study and assess fresh wins/act clears before selecting a new learning recipe.
 
+The v3 continuation stopped at train-0572-p3 during saved checking because an
+unused selection-cursor journal was absent. The worker writes it lazily; the
+checker had tested only an empty file. The v3 printed rounds were reused seals:
+no optimizer work repeated. Keep that chunk, its stop/resource report, the first
+failed chunk and all 1,217 clean seals unchanged. Both failed cells stay in the
+denominator and supply no labels; the affected round can use fourteen terminal
+games under the original minimum of twelve.
+
+docs/native-qualified-model-only-continuation-v2.md is the current handoff.
+The new streaming checker permits an absent cursor only when raw transport and
+public delivery domains both prove zero local factors/ordered commits. Missing
+required or inconsistent evidence still fails. Both saved failed-verification
+games reconstruct exactly. Two fresh normal-start controls pass with 272 native
+deliveries, clean endings, zero updates, frozen original/full Adam and unchanged
+personal profile. Their choices never become fitting labels. Broader mechanics
+coverage remains partial; no game/adapter/input/learning behavior changed.
+
+The current one owner command is scripts/continue-a8-qualified-model-only-v4.sh,
+about 3–5 hours. It requires the exact controls and a saved-only rehearsal that
+restores all 1,146 games/71 full fits (3,813 updates) and stops before the first
+unstarted train-0573-p3 game with zero new actions or updates. Reused rounds stay
+quiet; only new fits print new updates. Run only 900 unstarted training games,
+then the original 128 fresh comparison games. Hold both predecessor leases.
+Keep the fixed round-64 candidates, seeds, settings, full-menu model ownership,
+whole-run guards, game and every original/fitted source checkpoint/full Adam
+unchanged. No retry/replacement worlds, fixture labels, teacher rules, promotion
+or final-test use. Assess the completed fixed study before another learning
+change; current 33 training Act 1 clears and zero full wins do not measure gain.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
