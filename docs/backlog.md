@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Run sustained model-owned A8 learning on copies.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Use the qualified adapters and current card/intent inputs for 2,048 fresh normal-start training games, then compare the fixed round-64 copies and their frozen starts on 128 fresh development games. Full wins are primary; act clears diagnose progress. |
+| 1 | **Finish sustained model-owned A8 learning and its fresh comparison.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Reuse 1,146 sealed games and 3,813 copy updates. Keep one failed-verification cell diagnostic; run only the 901 unstarted training games and original 128 fresh development games using the repaired saved checker. Keep the fixed round-64 candidates and original recipe. Full wins are primary; act clears diagnose progress. |
 | 2 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current. Extend provider, child, target and late-act checks as concrete gaps or promising candidates require them. Reject affected incomplete/uncertain experience while keeping independently valid model-owned learning moving. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -63,11 +63,16 @@ intent inputs for a shared actor and critic on copies. It learns from fresh
 model-owned games and uses no fixture/scripted imitation labels. Both encoders
 match on all 114 qualified menus for both starting copies.
 
-The six short collection games and four copy updates passed. A pre-reload
-storage-key error is preserved; the v2 launcher reuses all eight clean units
-and needs only the two unstarted reload games. Complete that short control
-before the long owner run. Keep all frozen source checkpoints/Adam and reserved
-final-test worlds unchanged. Broader coverage obligations remain explicit.
+The collect/fit/reload control passed. The [owner study assessment and continuation](native-qualified-model-only-continuation-v1.md)
+verify 1,146 sealed games, 33 Act 1 clears, no Act 2 clears and no A8 wins.
+These changing-policy training outcomes do not measure improvement; the 128
+fresh comparison games remain unstarted. A saved checker used the old enchant
+minimum while gameplay correctly used the executable minimum. The new checker
+reconstructs the complete stopped game; its failed cell stays diagnostic and
+excluded from fitting. Finish the remaining 901 training games and the fixed
+comparison before selecting the next learning change. Preserve all historical
+seals, failed markers, frozen source checkpoints/full Adam and final-test worlds.
+Broader coverage obligations remain explicit.
 
 ## Completed interface work
 

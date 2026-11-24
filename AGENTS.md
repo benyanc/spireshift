@@ -2135,6 +2135,34 @@ cases retain denominators. Runtime/owner uncertainty supplies no labels and
 stops for assessment. No fight heuristics, teacher takeover, promotion, A10 or
 adaptive controller follows. See the current backlog and compact evidence.
 
+The November 24 sustained owner run stopped during saved verification, not
+gameplay. docs/native-qualified-model-only-continuation-v1.md supersedes the
+old next command. The saved assessment verifies 1,217 complete units: 1,146
+normal-start games and 71 full actor/critic/Adam fits (3,813 copy updates).
+There are 33 training Act 1 clears, no Act 2 clears or full wins. The original
+128 fresh development cells remain unopened; do not claim a measured gain.
+
+The gameplay worker correctly required a nonempty enchant answer, but the old
+saved checker expected the stored minimum of zero. The new versioned checker
+uses the qualified executable domain and reconstructs the stopped game's 191
+native deliveries, three local factors, exact ordered commit, sampled choices,
+native loss and clean shutdown. No gameplay, game build or model input changed.
+Keep the old checker, two failed resource reports and unsealed train-0571-p3
+chunk unchanged. That cell remains failed/diagnostic and supplies no PPO label;
+its round can fit the other fifteen terminal games under the original minimum.
+
+The one owner command is scripts/continue-a8-qualified-model-only-v3.sh,
+expected 3–5 hours. Reuse all completed games/full Adam updates without replay,
+then run only 901 unstarted training games and the original 128 fresh comparison
+games. Hold the predecessor lease through execution and verified cleanup.
+Missing/changed imported units, extra predecessor games or uncertain new units
+stop for inspection; never clear markers or generate silent replacement worlds.
+Keep round-64 selection, seeds, learning settings, full-menu model ownership,
+objective and guards unchanged. All original/fitted source checkpoints/full
+Adam and the frozen game/runtime remain exact. No individual-fight rules,
+teacher takeover, promotion or reserved final-test use follows. Complete the
+study and assess fresh wins/act clears before selecting a new learning recipe.
+
 ## Information boundary
 
 Agents may consume only public player-observable state. Privileged engine state may be recorded
