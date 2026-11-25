@@ -7,8 +7,8 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Diagnose the learner on saved training data.** [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Complete the read-only outcome recount and the 16-cohort credit/input/optimizer audit. Reconstruct actual credit; check gradient direction, saturation, critic quality and inherited/reset Adam on disposable copies. No new games or saved probe checkpoints. |
-| 2 | **Apply the measured learning change and test sustained A8 improvement.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Select the smallest supported change to representation, credit, optimizer initialization or practice. Qualify collect/learn/reload on copies; run sustained model-owned learning with fixed fresh normal-start A8 comparison. Source weights/full Adam and the build stay frozen. |
+| 1 | **Test hidden normalization in model-owned learning.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | The completed audit motivates a matched raw/normalized shared correction test, starting with identical reference choices. Qualify collect/learn/reload; run 4,096 fresh training and 768 fixed fresh-development games. Keep rewards, PPO, inputs, native build and all source full Adam fixed. |
+| 2 | **Assess transfer and choose the next measured learning change.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Independently verify exact states, endings and uncertainty. Full A8 wins are primary; act progress and hidden geometry diagnose learning. Lower local loss or less saturation alone cannot select a stronger player. Reassess credit/representation from the result before another long recipe. |
 | 3 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current, including the Connector potion queue gap. Repair demonstrated input/delivery/effect defects before admitting affected experience. Target official checks to changed mechanisms and promising candidates. |
 | 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine official endings before claiming shipped-game competence. |
 
@@ -55,12 +55,20 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current work — Qualified model-owned learning
 
+The [completed learner audit and next comparison](native-hidden-normalization-v1.md)
+verify 44,811 saved decisions and all 64 gradient probes. Local PPO loss decreases
+with both Adam variants, while the wide actor's saturation increases during
+training. The next treatment normalizes each candidate's hidden values in a new
+shared scoring correction; a matched raw correction controls the initialization
+and optimizer reset. This remains a learning hypothesis. It supplies no action
+preferences, official qualification or A8 strength claim.
+
 The [capacity study has finished](native-policy-capacity-result-v1.md): all three
 policies won 0/256 fresh games. Act 1 clears were 15/256 for the frozen reference,
 13/256 for continued 32 units and 7/256 for expanded 128 units; none cleared Act 2.
 Training completed 16,517 copy updates, with three capped and one preserved failed
-training cells retained. The next owner command audits saved training signal and
-optimizer behavior before choosing a further learning change. No candidate is
+training cells retained. The saved signal/optimizer audit and public recount have
+now completed; the normalization comparison above is next. No candidate is
 promoted and no further unchanged capacity run is queued.
 
 The [completed mixed-handoff assessment](native-mixed-handoffs-result-v1.md)

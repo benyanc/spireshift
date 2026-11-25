@@ -29,6 +29,36 @@ handoffs retain their experiment constraints and historical results.
 
 ## Binding objective
 
+Latest handoff, 2026-11-25: the owner completed the saved learner diagnostic
+and the full raw-public capacity outcome recount. The independent assessment
+verifies 16 training cohorts, 256 games, 44,811 decisions, 64 passing numerical
+gradient probes and 32 discarded optimizer steps. Both warm and reset Adam
+lowered the same local loss in all 16 cohorts; reset moved farther, not proven
+to play better. The learned critic has negative explained variance in 8/16
+cohorts, but actor credit uses a separately cross-fitted ridge baseline, positive
+in 15/16. No sampled game supplies a victory label. Expanded-unit saturation
+rose from about 14% at round 1 to 66–69% at round 64. This motivates a conditioning
+hypothesis; it does not prove saturation caused weak play or certify all mechanics.
+
+docs/native-hidden-normalization-v1.md defines the next matched learning test.
+Each treatment starts with the exact same frozen reference logits and a new
+zero-output 32-unit shared correction. Only the correction differs: raw versus
+hidden normalization within each individual legal candidate. Fresh correction
+Adam starts at zero in both; critic/full Adam are identical source copies.
+The reference actor never learns. All legal choices remain model-owned with
+unbounded learned corrections, unchanged input/credit/objective/PPO and no
+teacher, fixture labels or fight tactics. Original/source/final full Adam and
+the game/host/adapters stay frozen. The primary comparison is normalized versus
+raw; comparison with the plain reference also changes the learning architecture.
+
+After exact saved/native collect-fit-reload controls, the owner command is
+scripts/compare-a8-hidden-normalization-v1.sh: 4,096 fresh normal-start training
+games and 768 separate fixed round-64 development games, about 14–24 hours with
+a 48-hour cap. Only exact clean seals resume. Preserve all failed/uncertain or
+capped cells and never replay them; no automatic replacement, promotion,
+controller or next experiment follows. Reserved final-test worlds remain sealed.
+The prior audit command is complete; do not repeat it as the next long stage.
+
 Latest handoff, 2026-11-25: the capacity continuation finished all 64 rounds and
 768 fresh normal-start comparisons. Reference, continued-32 and expanded-128
 policies each won 0/256. Act 1 clears were 15/256, 13/256 and 7/256; Act 2 clears

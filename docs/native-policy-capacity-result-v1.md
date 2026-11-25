@@ -4,6 +4,11 @@ The owner finished the fixed 64-round comparison on November 25, 2026. Extra
 width did not improve full-run A8 results under this initialization and learner.
 No candidate is promoted.
 
+The owner has now completed the learner audit and full raw-public recount
+described below. All 64 numerical probes passed. The current assessment and
+next owner command are in [the hidden-normalization comparison](native-hidden-normalization-v1.md).
+The audit command at the end of this historical handoff is complete.
+
 | Frozen evaluation policy | Full wins / games | Act 1 clears | Act 2 clears | Mean terminal floor |
 | --- | --- | --- | --- | --- |
 | Reference finals | 0 / 256 | 15 / 256 | 0 | 12.29 |
