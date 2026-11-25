@@ -91,7 +91,8 @@ bash scripts/audit-a8-learning-signal-v1.sh
 ```
 
 Allow about **20–60 minutes**, with a three-hour outer cap. This reads existing
-training data; it does not launch STS2 or new games. The game can remain open.
+training data; it does not launch STS2 or new games. Keep STS2 closed so the
+inherited personal-profile guard remains stable.
 Outputs are compact diagnostics under `artifacts/native-learning-health/v1` and
 the saved outcome recount under `artifacts/native-policy-capacity`. Existing
 source data is excluded from the new-output cap. See the linked
