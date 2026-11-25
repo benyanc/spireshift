@@ -29,6 +29,27 @@ handoffs retain their experiment constraints and historical results.
 
 ## Binding objective
 
+Latest handoff, 2026-11-25: the capacity continuation finished all 64 rounds and
+768 fresh normal-start comparisons. Reference, continued-32 and expanded-128
+policies each won 0/256. Act 1 clears were 15/256, 13/256 and 7/256; Act 2 clears
+were zero. Preserve all final states and full Adam, the 16,517 copy updates,
+three capped training games and the failed train-0154-p3-expanded prefix. No
+policy is promoted. The frozen game/host, original weights/Adam and source finals
+remain immutable. Existing mechanics evidence is scoped; no new complete-mechanics
+or official-game competence claim follows from these clean evaluation endings.
+
+docs/native-policy-capacity-result-v1.md defines the next learner diagnostic:
+complete the raw-public outcome recount and inspect 16 saved training cohorts
+from rounds 1/16/32/64, both initializers and both widths. Reconstruct exact
+on-policy credit and measure representation/critic/optimizer behavior. Numerical
+gradient signs are hypothetical checks, never gameplay labels. Warm/reset Adam
+steps use disposable copies; no probe checkpoint is saved or promoted. Keep
+evaluation and final-test outcomes out of fitting. Choose a general learning
+change from that evidence before another sustained training recipe. The owner
+command is scripts/audit-a8-learning-signal-v1.sh, about 20–60 minutes with a
+three-hour cap, reading existing data and launching no game. Broader Connector
+and mechanics gaps remain tracked under #149.
+
 Latest handoff, 2026-11-24: the capacity study stopped at train-0154-p3-expanded
 after a post-End-Turn card selector still advertised potion discard. Preserve
 study-v1 and every failed marker/profile. The saved audit verifies 673 clean

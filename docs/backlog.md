@@ -7,9 +7,10 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Continue the capacity comparison after the potion queue repair.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Restore 633 completed games, 39 fits and 2,429 copy updates. Preserve/exclude the failed potion cell; run only 3,462 unstarted training games, then 768 fresh comparisons. Keep model-owned choices, original inputs/PPO and frozen source states/Adam. Full wins are primary. |
-| 2 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current. Extend provider, child, target and late-act checks as concrete gaps or promising candidates require them. Reject affected incomplete/uncertain experience while keeping independently valid model-owned learning moving. |
-| 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
+| 1 | **Diagnose the learner on saved training data.** [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Complete the read-only outcome recount and the 16-cohort credit/input/optimizer audit. Reconstruct actual credit; check gradient direction, saturation, critic quality and inherited/reset Adam on disposable copies. No new games or saved probe checkpoints. |
+| 2 | **Apply the measured learning change and test sustained A8 improvement.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Select the smallest supported change to representation, credit, optimizer initialization or practice. Qualify collect/learn/reload on copies; run sustained model-owned learning with fixed fresh normal-start A8 comparison. Source weights/full Adam and the build stay frozen. |
+| 3 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current, including the Connector potion queue gap. Repair demonstrated input/delivery/effect defects before admitting affected experience. Target official checks to changed mechanisms and promising candidates. |
+| 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine official endings before claiming shipped-game competence. |
 
 The three [qualified full-run demonstrations](native-a8-archive-transitions-v6.md)
 improved fitting agreement. The [fresh comparison](native-a8-archive-copy-fit-v1.md)
@@ -54,6 +55,14 @@ qualification. The owner collection and saved assessment have now admitted the b
 
 ## Current work — Qualified model-owned learning
 
+The [capacity study has finished](native-policy-capacity-result-v1.md): all three
+policies won 0/256 fresh games. Act 1 clears were 15/256 for the frozen reference,
+13/256 for continued 32 units and 7/256 for expanded 128 units; none cleared Act 2.
+Training completed 16,517 copy updates, with three capped and one preserved failed
+training cells retained. The next owner command audits saved training signal and
+optimizer behavior before choosing a further learning change. No candidate is
+promoted and no further unchanged capacity run is queued.
+
 The [completed mixed-handoff assessment](native-mixed-handoffs-result-v1.md)
 verifies all twelve declared main mechanisms plus the merchant-map potion probe:
 114 complete public states and 101 actual SDK choices reconstruct exactly. The
@@ -79,12 +88,13 @@ with the frozen finals on new worlds. Do not prescribe particular fight actions
 or simply claim another unchanged enlargement will fix the learner. Preserve
 historical evidence and reserved final-test worlds. Broader mechanics rows stay partial.
 
-The [capacity continuation](native-policy-capacity-recovery-v2.md) repairs the
+The historical [capacity continuation](native-policy-capacity-recovery-v2.md) repairs the
 shared potion queue eligibility defect reached after End Turn. Three native
 handoff controls and fresh production learner checks pass. The failed Act 2
 prefix remains diagnostic and is never replayed. Training so far has zero wins;
 Act 1 clears are 12/160 versus 12/160 for initializer 2 and 11/160 versus 7/153
-for initializer 3. Fresh evaluation is unstarted, so no capacity winner is claimed.
+for initializer 3. That was the preserved round-10 prefix; the completed results
+above supersede its unstarted-evaluation status.
 The corresponding Connector36 permission gap and targeted official pairing stay
 open under #149; native learning does not inherit official qualification.
 

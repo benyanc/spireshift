@@ -1,0 +1,65 @@
+{
+  "schema_version": "native-a8-saved-learning-health-v1",
+  "workspace": "artifacts/native-learning-health/v1/full",
+  "short_workspace": "artifacts/native-learning-health/v1/short",
+  "parent_recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-policy-capacity-v2.json",
+    "sha256": "ebfe77fd9c1c38e682d54c3ca06e4eb26ee24ba0fcf48a06af64ce25cbee0b0d"
+  },
+  "source_assessment": {
+    "path": "artifacts/native-policy-capacity/assessment-v1/report.json",
+    "sha256": "0179e5a8b05be5fd43cf5f558c2436178cc2e3add7a3c22e5a95a84686d5e50b"
+  },
+  "implementation": {
+    "configs/native-learning/sts2-v0.111.0-a8-policy-capacity-v2.json": "ebfe77fd9c1c38e682d54c3ca06e4eb26ee24ba0fcf48a06af64ce25cbee0b0d",
+    "scripts/audit-a8-learning-signal-v1.sh": "6deb444e2668d03136d9d66f5756e49f4d70565001732888f85961fd3007d757",
+    "src/spireshift/native_capacity_result_v1.py": "193eb7915943f582d8e18e727301012d3da390763b4c2fe2ae5396641ace4bd6",
+    "src/spireshift/native_learning_health_math_v1.py": "becfa50217bcdb9e246992f60f776cfabb00a75b41f182afea5a9b9a1ca49d10",
+    "src/spireshift/native_learning_health_v1.py": "155051eac4a6ff10d028850a140ac056f9c66522a30a137790b75df26f8b106b",
+    "tests/unit/test_native_capacity_result_v1.py": "f343553e72322651ef11545ceb793d0215d9666b057b4c24887ae08b8f54a4a9",
+    "tests/unit/test_native_learning_health_v1.py": "7abf720b866e6fd4893e3226d9ba75d8306603d28868b6a939318ba25f4270a2"
+  },
+  "plan": {
+    "rounds": [
+      1,
+      16,
+      32,
+      64
+    ],
+    "initializers": [
+      2,
+      3
+    ],
+    "methods": [
+      "standard",
+      "expanded"
+    ],
+    "games_per_cohort": 16,
+    "short_cohort": [
+      2,
+      "standard",
+      1
+    ],
+    "short_games": 2,
+    "probe_decisions_per_world": 8,
+    "gradient_probe_count": 4,
+    "sampling_seed": 20261125,
+    "source_partition": "train",
+    "development_labels_allowed": false,
+    "new_games_allowed": false,
+    "checkpoints_saved": false,
+    "promotion_allowed": false
+  },
+  "limits": {
+    "wall_seconds": 10800,
+    "cpu_seconds": 10800,
+    "storage_bytes": 2000000000,
+    "resident_memory_bytes": 4000000000
+  },
+  "short_limits": {
+    "wall_seconds": 275,
+    "cpu_seconds": 600,
+    "storage_bytes": 2000000000,
+    "resident_memory_bytes": 4000000000
+  }
+}
