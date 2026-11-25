@@ -1,0 +1,94 @@
+{
+  "schema_version": "native-policy-capacity-recovery-evidence-v2",
+  "date": "2026-11-24",
+  "status": "native_queue_repair_and_capacity_continuation_verified",
+  "prefix_assessment": {
+    "path": "artifacts/native-policy-capacity/recovery-v1/report.json",
+    "sha256": "cb59a7fce0def4af9bb0881095955c9c620540389f73123b02f201ab8fa815d5",
+    "report_id": "sha256:8e984f8031cbb42f652cab556f86286885f08c68258be205f42bbbd29ebd2ea4"
+  },
+  "adapter": {
+    "path": "artifacts/native-potion-queue/v1/adapter.json",
+    "sha256": "630e3389119a9c5335b4566d39542ec00cb25b6c56ba1931be8bd8ebef55bd75",
+    "report_id": "sha256:ba9c842add5524f9af84ed9ca04e1ab3b4a6691fe9ed2193b761362724314a63"
+  },
+  "native_controls": {
+    "path": "artifacts/native-potion-queue/v1/control-5/report.json",
+    "sha256": "8e9c2b5a8cfa9fafe304f7dc80bc6d658fcf7bca72af078ef506d426bd5645db",
+    "report_id": "sha256:094a5d029a934a649510b8add20bbf136886e85a2ba1e7de51b13a1ca82ad1a1"
+  },
+  "production_controls": {
+    "path": "artifacts/native-potion-queue/v1/production-controls-v2/report.json",
+    "sha256": "3c34d14cae14ad54d22b71db82eb96623f35b019804f8da6c1b379b32a23429a",
+    "report_id": "sha256:6ade607d56dfdfbb781dbc4ca1fcddbcc1ecd0b664130847d529c7b5e19e96b8"
+  },
+  "restore_control": {
+    "path": "artifacts/native-policy-capacity/resume-check-v2.json",
+    "sha256": "29f7571b0c872a453a4e644610660655035def3ed4e549b8dc95da607be57172",
+    "report_id": "sha256:ae4955886ef9e55313f6a17dcce547d8e16e8b520c696e3584d3f9efa44a37f4"
+  },
+  "restore_resources": {
+    "path": "artifacts/native-policy-capacity/restore-resources-v2.json",
+    "sha256": "03e6d4b438ba38a6c9889cf78571593e7650f39b2fb85719c804be4d2137ba4e",
+    "report_id": "sha256:c3ad420c3d69ac3a1bd63c521211436171b54861ff2ccae5dab8c661276b0392"
+  },
+  "recipe": "configs/native-learning/sts2-v0.111.0-a8-policy-capacity-v2.json",
+  "configuration_id": "sha256:bd9d602ec8078c9997b56c08b2f766fb27768b951ea019b0311bc2589771fbe0",
+  "sealed_training_games": 633,
+  "sealed_fits": 39,
+  "copy_updates_preserved": 2429,
+  "full_wins": 0,
+  "act2_clears": 0,
+  "act1_clears": {
+    "p2-standard": [
+      12,
+      160
+    ],
+    "p2-expanded": [
+      12,
+      160
+    ],
+    "p3-standard": [
+      11,
+      160
+    ],
+    "p3-expanded": [
+      7,
+      153
+    ]
+  },
+  "excluded_failed_unit": "train-0154-p3-expanded",
+  "historical_menus_relabelled": false,
+  "failed_prefix_training_admitted": false,
+  "remaining_training_games": 3462,
+  "remaining_evaluation_games": 768,
+  "native_control_deliveries": 14,
+  "native_control_observations": 17,
+  "preenqueue_rejections": 2,
+  "blood_potion_hp_checks": {
+    "player-choice": [
+      47,
+      63
+    ],
+    "end-turn-choice": [
+      47,
+      63
+    ],
+    "noncombat": [
+      50,
+      66
+    ]
+  },
+  "production_games": 2,
+  "production_native_choices": 375,
+  "original_optimizer_updates": 0,
+  "originals_and_full_Adam_frozen": true,
+  "game_build_frozen": true,
+  "official_live_qualification_granted": false,
+  "known_remaining_scope": [
+    "Connector36 queue eligibility and targeted official pairing",
+    "general headless cancellation callback compatibility",
+    "broader mechanics inventory remains partial"
+  ],
+  "owner_command": "bash scripts/continue-a8-policy-capacity-v2.sh"
+}

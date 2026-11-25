@@ -29,6 +29,28 @@ handoffs retain their experiment constraints and historical results.
 
 ## Binding objective
 
+Latest handoff, 2026-11-24: the capacity study stopped at train-0154-p3-expanded
+after a post-End-Turn card selector still advertised potion discard. Preserve
+study-v1 and every failed marker/profile. The saved audit verifies 673 clean
+units: 633 complete losses, 39 full model/Adam fits and 2,429 copy updates.
+The new source-grounded potion queue adapter checks the native player's queue
+cancellation flags for both use and discard, and rejects invalid requests before
+enqueue. Paused player-turn selectors and noncombat potion operations stay usable.
+Game v0.111.0/41cef1ea, host60 and all source/original/final full Adam states stay
+frozen. Three native lifecycle controls and two fresh production learner games
+pass; no official-game parity or general cancellation-stub support is inferred.
+Connector36's corresponding eligibility gap remains targeted work under #149.
+
+docs/native-policy-capacity-recovery-v2.md defines the capacity continuation:
+restore all clean seals and exact full optimizer states, retain the one failed
+cell in the denominator without fitting its prefix, launch only 3,462 unstarted
+training and 768 fresh evaluation games. No failed world replay/replacement,
+historical-menu relabeling, repeated update or recipe mutation is permitted.
+The restore check must stop before train-0155-p3-expanded with zero new games or
+updates. The owner command is scripts/continue-a8-policy-capacity-v2.sh, about
+12–22 hours with a 48-hour cap. Original capacity v1 and old commands remain
+historical. There is no full win or completed fresh capacity evaluation yet.
+
 SpireShift's current priority is a base player that consistently wins complete Ironclad/A8 runs
 from normal starts on unseen worlds, followed by separately validated A10 play. Terminal full-run
 victory is the primary optimization and evaluation outcome. Act completion, floor, HP and

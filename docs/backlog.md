@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Test larger shared-policy capacity with sustained learning.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Compare continued 32-unit and expanded 128-unit copies of both exact finals, with identical initial choices, existing inputs/PPO and full-menu model ownership. Run 4,096 fresh training games, then 768 fresh reference/continued/expanded comparisons. Full wins are primary. |
+| 1 | **Continue the capacity comparison after the potion queue repair.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Restore 633 completed games, 39 fits and 2,429 copy updates. Preserve/exclude the failed potion cell; run only 3,462 unstarted training games, then 768 fresh comparisons. Keep model-owned choices, original inputs/PPO and frozen source states/Adam. Full wins are primary. |
 | 2 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current. Extend provider, child, target and late-act checks as concrete gaps or promising candidates require them. Reject affected incomplete/uncertain experience while keeping independently valid model-owned learning moving. |
 | 3 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine endings and run targeted shipped-game checks for promising candidates before claiming official-game competence. |
 
@@ -78,6 +78,15 @@ menus fixed. Continue a 32-unit control, train a 128-unit copy, and compare both
 with the frozen finals on new worlds. Do not prescribe particular fight actions
 or simply claim another unchanged enlargement will fix the learner. Preserve
 historical evidence and reserved final-test worlds. Broader mechanics rows stay partial.
+
+The [capacity continuation](native-policy-capacity-recovery-v2.md) repairs the
+shared potion queue eligibility defect reached after End Turn. Three native
+handoff controls and fresh production learner checks pass. The failed Act 2
+prefix remains diagnostic and is never replayed. Training so far has zero wins;
+Act 1 clears are 12/160 versus 12/160 for initializer 2 and 11/160 versus 7/153
+for initializer 3. Fresh evaluation is unstarted, so no capacity winner is claimed.
+The corresponding Connector36 permission gap and targeted official pairing stay
+open under #149; native learning does not inherit official qualification.
 
 ## Completed interface work
 
