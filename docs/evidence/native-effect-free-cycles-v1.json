@@ -1,0 +1,196 @@
+{
+  "control_v1": {
+    "games": [
+      {
+        "decisions_with_withheld_actions": 2,
+        "native_decisions": 197,
+        "outcome": "loss",
+        "task": {
+          "arm": "shared",
+          "key": "control-0001-p2-normalized",
+          "partition": "control",
+          "player": 2,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG001",
+          "seed_id": 1
+        }
+      },
+      {
+        "decisions_with_withheld_actions": 0,
+        "native_decisions": 114,
+        "outcome": "loss",
+        "task": {
+          "arm": "shared",
+          "key": "control-0002-p2-normalized",
+          "partition": "control",
+          "player": 2,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG002",
+          "seed_id": 2
+        }
+      },
+      {
+        "decisions_with_withheld_actions": 4,
+        "native_decisions": 100,
+        "outcome": "loss",
+        "task": {
+          "arm": "shared",
+          "key": "control-0003-p2-normalized",
+          "partition": "control",
+          "player": 2,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG003",
+          "seed_id": 3
+        }
+      },
+      {
+        "decisions_with_withheld_actions": 2,
+        "native_decisions": 167,
+        "outcome": "loss",
+        "task": {
+          "arm": "shared",
+          "key": "control-0004-p3-raw",
+          "partition": "control",
+          "player": 3,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG004",
+          "seed_id": 4
+        }
+      }
+    ],
+    "report_id": "sha256:4da5a023afcc4d5680c25b35b1dda20b1b92c54911d4e30abc689c5606536a0a",
+    "status": "negative_evidence_exit_withheld_forced_purchase"
+  },
+  "control_v2": {
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "games": [
+      {
+        "decisions_with_withheld_actions": 0,
+        "native_decisions": 120,
+        "outcome": "loss",
+        "ppo_decisions_rebuilt": 120,
+        "shop_actions": {},
+        "state_id": "sha256:aa44eb43c22860e4009c5a45ab4781ad44eecee95d5e2aa9d7911011f6e809f7",
+        "task": {
+          "arm": "shared",
+          "key": "control-0001-p2-normalized",
+          "partition": "control",
+          "player": 2,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG101",
+          "seed_id": 1
+        }
+      },
+      {
+        "decisions_with_withheld_actions": 1,
+        "native_decisions": 77,
+        "outcome": "loss",
+        "ppo_decisions_rebuilt": 77,
+        "shop_actions": {
+          "Close shop inventory": 2,
+          "Leave shop": 1,
+          "Open inventory": 2,
+          "buy_potion": 1
+        },
+        "state_id": "sha256:aa44eb43c22860e4009c5a45ab4781ad44eecee95d5e2aa9d7911011f6e809f7",
+        "task": {
+          "arm": "shared",
+          "key": "control-0002-p2-normalized",
+          "partition": "control",
+          "player": 2,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG102",
+          "seed_id": 2
+        }
+      },
+      {
+        "decisions_with_withheld_actions": 1,
+        "native_decisions": 197,
+        "outcome": "loss",
+        "ppo_decisions_rebuilt": 197,
+        "shop_actions": {
+          "Close shop inventory": 2,
+          "Leave shop": 1,
+          "Open inventory": 2,
+          "buy_potion": 1
+        },
+        "state_id": "sha256:aa44eb43c22860e4009c5a45ab4781ad44eecee95d5e2aa9d7911011f6e809f7",
+        "task": {
+          "arm": "shared",
+          "key": "control-0003-p2-normalized",
+          "partition": "control",
+          "player": 2,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG103",
+          "seed_id": 3
+        }
+      },
+      {
+        "decisions_with_withheld_actions": 1,
+        "native_decisions": 146,
+        "outcome": "loss",
+        "ppo_decisions_rebuilt": 146,
+        "shop_actions": {
+          "Leave shop": 1
+        },
+        "state_id": "sha256:be94d6e09503fa7750d5027b0372d5903d44409e0ede6a4480e06f8465f3fb03",
+        "task": {
+          "arm": "shared",
+          "key": "control-0004-p3-raw",
+          "partition": "control",
+          "player": 3,
+          "round": 1,
+          "seed": "SP1RESH1FTA8CYG104",
+          "seed_id": 4
+        }
+      }
+    ],
+    "optimizer_updates": 0,
+    "policy_contract": "native_a8_all_actions_effect_free_cycle_guard_v2",
+    "report_id": "sha256:c6c34707daa2a66321ed82f8f4b96348abd2edb2bb145684445d3dfb4db15394",
+    "status": "effect_free_cycle_guard_native_controls_verified",
+    "training_labels": 0
+  },
+  "games_launched_by_scan": 0,
+  "optimizer_updates": 0,
+  "reports": {
+    "artifacts/effect-free-cycles/control-v1/report.json": "d44a720a36670b32583d6e4d18c317e57dd2c067fff11c7add074d7e7d71e24e",
+    "artifacts/effect-free-cycles/control-v2/report.json": "b2a4091ff3b63415ee3db980009815d9582085016745b74abec451925bef4a25",
+    "artifacts/effect-free-cycles/scan-v1-capacity/report.json": "1e12523ef35a7b726f4ce9c91f1327d2972c3f224c0616f9a20c349ede0a6e33",
+    "artifacts/effect-free-cycles/scan-v1/report.json": "d9f99c614ca67e1800cdab32af3750e66bd22d06a5d9828e41877f3897ea7361"
+  },
+  "scan": {
+    "capacity": {
+      "artifacts/native-policy-capacity/study-v1/chunks": {
+        "cycle_decisions": 4452,
+        "decisions": 103445,
+        "games": 633,
+        "games_with_cycles": 213
+      }
+    },
+    "normalization": {
+      "artifacts/native-hidden-normalization/study-v2/chunks": {
+        "cycle_decisions": 27632,
+        "decisions": 149959,
+        "games": 879,
+        "games_with_cycles": 311
+      }
+    }
+  },
+  "schema_version": "native-effect-free-cycles-evidence-v1",
+  "sources": {
+    "scripts/scan-effect-free-cycles-v1.py": "a2a0e4a416ba7ab6bb7974edcf22bff9aed57c51c14bd204d5f9d2ad20701df1",
+    "src/spireshift/native_cycle_guard_control_v1.py": "de30fd4de5d4460435fe3afc38d605071f7b8e0f1a5dce3e60e7eaa3c6a0b15b",
+    "src/spireshift/native_cycle_guard_control_v2.py": "71b1c590712e66fd7d10e1d421edddc0c283c830d4945dabb5c9b86fd9b22b38",
+    "src/spireshift/native_cycle_guard_v1.py": "5c2ae6b5ce2d0b3931aeb88f7752ac53c27879264892a9eda50034fb91e5551d",
+    "src/spireshift/native_cycle_guard_v2.py": "e3e85a3e842c8af396a7dd38f74669e70d3e8673cdb8cefb7f3f26d1238cc135",
+    "tests/unit/test_native_cycle_guard_v2.py": "9ac9238f68b308d53fc6538f59193df0c1b9eea847a1688a6216031a266f222d"
+  }
+}

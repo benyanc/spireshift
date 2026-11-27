@@ -29,6 +29,16 @@ handoffs retain their experiment constraints and historical results.
 
 ## Binding objective
 
+Latest handoff, 2026-11-27 (later): the owner approved the effect-free cycle
+repair. docs/native-effect-free-cycles-v1.md records a saved-only scan that found
+four sub-menu round-trip shapes, plus native_cycle_guard_v2. The guard withholds
+a non-exit action only after it provably returned to the identical public input,
+never withholds an exit or decline, and is rebuilt exactly by PPO. V1 forced a
+purchase in its native control; keep it as negative evidence. Four v2 native
+controls pass with zero updates. New learning recipes must bind
+using_cycle_guard() explicitly. The search-distillation stage still needs
+separate owner approval.
+
 Latest handoff, 2026-11-27: the normalization v2 continuation completed
 (exit 0, no cap). The saved-only audit in docs/native-hidden-normalization-result-v1.md
 verifies 5,120 seals, all four full actor/critic/Adam lineages (256 fits, 15,714
