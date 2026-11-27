@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-reward-map-modified-deck-control-v1.json",
+    "sha256": "c8ac9e19b305a26f6c6d704f603d72e5ba16761255278ab51b380f28d0dbea71"
+  },
+  "wall_seconds": 900,
+  "cpu_seconds": 1800,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

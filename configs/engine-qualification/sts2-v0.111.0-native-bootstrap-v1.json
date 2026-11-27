@@ -1,0 +1,30 @@
+{
+  "schema_version": "engine-native-config-v1",
+  "stage": "bootstrap_and_static_registry_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-checks-v1",
+  "settings_schema": 8,
+  "max_wall_seconds": 60,
+  "quit_after_frames": 1200,
+  "decompiler": {
+    "version": "9.1.0.7988",
+    "executable": "artifacts/tooling/ilspy-9.1/ilspycmd",
+    "files": [
+      {
+        "path": "artifacts/tooling/ilspy-9.1/ilspycmd",
+        "sha256": "917f1bcee2a899587bd0f2bdc5cc12f11707e098ec58b86121a2af86c97afead"
+      },
+      {
+        "path": "artifacts/tooling/ilspy-9.1/.store/ilspycmd/9.1.0.7988/ilspycmd/9.1.0.7988/tools/net8.0/any/ilspycmd.dll",
+        "sha256": "58ef1a86bea09f2e5a114720b607dd0bdaaf91cfe498c6b7a3412bd960d0f57d"
+      },
+      {
+        "path": "artifacts/tooling/ilspy-9.1/.store/ilspycmd/9.1.0.7988/ilspycmd/9.1.0.7988/tools/net8.0/any/ICSharpCode.Decompiler.dll",
+        "sha256": "2e47c9b7557d071935f4730d5cd692162bd0f6266ce7d29f1d13ffeb6b2dae75"
+      }
+    ]
+  },
+  "profile_override_authority": "https://docs.godotengine.org/en/4.5/classes/class_projectsettings.html",
+  "profile_override_source": "https://github.com/godotengine/godot/blob/4.5.1-stable/core/config/project_settings.cpp",
+  "training_allowed": false
+}

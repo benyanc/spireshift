@@ -1,0 +1,23 @@
+{
+  "schema_version": "engine-shop-bridge-config-v1",
+  "stage": "privileged_shop_save_public_action_differential_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-cli-shop-bridge-v3.json",
+  "native_config_id": "sha256:e5f0e0b57eda41b86c333a61d1f0a70dbabdf031a5818ae47f6764b729470f8c",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-rest-potion-tutorial-v3.json",
+  "connector_config_id": "sha256:55ee6c872ba31b1a7038e9db58d6aaf5e191594249b01e7728937aa36f7465d3",
+  "rest_bridge_config": "configs/engine-qualification/sts2-v0.111.0-rest-tutorial-bridges-v1.json",
+  "rest_bridge_report_id": "sha256:5f1c2cfa7fcffd2bba75cf2abeb3e98dbe3220eacf77bc69cee02401d4a41ca9",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/shop-bridge-courier-v2",
+  "seed": "SPIRESHIFTSHOPBRIDGE006",
+  "scenario": "courier-restock-removal",
+  "training_allowed": false,
+  "comparison_scope": "current_stock_prices_legal_menu_card_potion_purchases_removal_cancel_confirm_and_exit",
+  "helpers_sha256": {
+    "engine-shop-shipped-probe-v1.mjs": "301f0b2a1dac9de122203a54ff188ffbd87f1ff3af30430dd8c51e66e79011ae",
+    "engine-shop-bridge-contract.mjs": "c31b7af2febe9e7febc20c8a2fcf7ff10bab739dbf904f3fae2a33009341b714",
+    "engine-rest-bridge-contract.mjs": "b0122918993ff4b6613868e588b2c4953a9469123ddb384ca65cdc1b18aea896",
+    "engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+  }
+}

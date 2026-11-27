@@ -1,0 +1,240 @@
+{
+  "schema_version": "engine-shop-navigation-evidence-v1",
+  "recorded_date": "2026-10-13",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "fixed_scope": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "character": "Ironclad",
+    "ascension": 8,
+    "profile": "native_benchmark_full_v1"
+  },
+  "host_config": "configs/engine-qualification/sts2-v0.111.0-connector-standard-v13.json",
+  "prior_evidence": "docs/evidence/actual-engine-v0.111.0-discovery-and-declines-v1.json",
+  "new_repair": {
+    "policy": "scripts/engine-run-policy-v3.mjs",
+    "public_history": "Delivered shop inspections identified by public act/floor within a single game; reconstructed from saved receipts.",
+    "initializer_behavior": "Inspect each new shop once; after closing inventory prefer its existing advertised exit.",
+    "learned_policy_behavior": "Every advertised choice remains available to a custom scorer, including reopening, buying or leaving.",
+    "invented_actions": false,
+    "unknown_delivery_replayed": false
+  },
+  "short_checks": [
+    {
+      "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-run-smoke-001-v7.json",
+      "config_id": "sha256:c3a9b29aaaff43acf0805bb37072ec6991228226b8fedf64c97f28c0a6ebca91",
+      "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-run-smoke-001-v7/summary.json",
+      "report_id": "sha256:3401215a95dbf58017ef7c60c0fe56980112191978e42e9622b521bb7c4c3b03",
+      "status": "natural_shipped_run_incomplete",
+      "startup_actions": 5,
+      "gameplay": {
+        "decisions": 99,
+        "families": {
+          "card_reward_selection": 5,
+          "combat_turn": 64,
+          "event_option": 2,
+          "map_navigation": 4,
+          "reward_claim": 11,
+          "shop_inventory": 3,
+          "shop_room": 3,
+          "tutorial": 7
+        },
+        "last_observed": {
+          "act": 1,
+          "floor": 5,
+          "hp": 23,
+          "interaction_kind": "shop_room",
+          "max_hp": 80,
+          "snapshot_id": "state_7d183c98e8_18c",
+          "status": "interactive"
+        },
+        "last_supported_act": 1,
+        "last_supported_floor": 5,
+        "maximum_act": 1,
+        "maximum_floor": 5,
+        "terminal": false,
+        "tutorials": 7,
+        "victory": false
+      },
+      "error": "Repeated natural-run public state; no further action",
+      "unique_unsupported_issues": 0,
+      "recoveries": 0,
+      "tutorial_ids": [
+        "accept_tutorials_ftue",
+        "ascension_singleplayer_ftue",
+        "combat_reward_ftue",
+        "combat_rules_ftue",
+        "map_select_ftue",
+        "power_card_ftue",
+        "shuffle_ftue"
+      ],
+      "shop_actions": [
+        {
+          "kind": "shop_room",
+          "label": "Open shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_inventory",
+          "label": "Close shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_room",
+          "label": "Open shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_inventory",
+          "label": "Close shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_room",
+          "label": "Open shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_inventory",
+          "label": "Close shop inventory",
+          "delivery": "delivered"
+        }
+      ],
+      "diagnostic_navigation": null,
+      "fixed_app_reset_verified": true,
+      "archive_unchanged": true,
+      "shared_profile_unchanged": true,
+      "app_copies_created": 0,
+      "saved_verification_valid": true,
+      "resource_report": "artifacts/resources/natural-shipped-run-smoke-001-v7.json",
+      "resource_report_id": "sha256:627678e4d4daebbb6a2828a82c759d63efc64dd5c875687d88807767589a0944",
+      "resource_wall_seconds": 174.91233275004197,
+      "CPU_seconds": 42.744697773,
+      "peak_resident_memory_bytes": 940523520,
+      "tracked_storage_including_existing_pool_bytes": 2441103058,
+      "resource_cap": null,
+      "internal_client_cap_seconds": 165
+    },
+    {
+      "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-run-smoke-001-v8.json",
+      "config_id": "sha256:6f8f79874fbc95d80c773b4bea9ea17291c933e7e327402ad2253265006b1154",
+      "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-run-smoke-001-v8/summary.json",
+      "report_id": "sha256:0d853d2da2d605a9c93a7702427e837e87056f972cbaf847adeab9f613b39708",
+      "status": "natural_shipped_run_incomplete",
+      "startup_actions": 5,
+      "gameplay": {
+        "decisions": 101,
+        "families": {
+          "card_reward_selection": 5,
+          "combat_turn": 68,
+          "event_option": 2,
+          "map_navigation": 5,
+          "reward_claim": 11,
+          "shop_inventory": 1,
+          "shop_room": 2,
+          "tutorial": 7
+        },
+        "last_observed": {
+          "act": 1,
+          "floor": 6,
+          "hp": 16,
+          "interaction_kind": "combat_turn",
+          "max_hp": 80,
+          "snapshot_id": "state_747c43402d_198",
+          "status": "settling"
+        },
+        "last_supported_act": 1,
+        "last_supported_floor": 6,
+        "maximum_act": 1,
+        "maximum_floor": 6,
+        "terminal": false,
+        "tutorials": 7,
+        "victory": false
+      },
+      "error": "No fresh complete public menu before the run cap",
+      "unique_unsupported_issues": 0,
+      "recoveries": 0,
+      "tutorial_ids": [
+        "accept_tutorials_ftue",
+        "ascension_singleplayer_ftue",
+        "combat_reward_ftue",
+        "combat_rules_ftue",
+        "map_select_ftue",
+        "power_card_ftue",
+        "shuffle_ftue"
+      ],
+      "shop_actions": [
+        {
+          "kind": "shop_room",
+          "label": "Open shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_inventory",
+          "label": "Close shop inventory",
+          "delivery": "delivered"
+        },
+        {
+          "kind": "shop_room",
+          "label": "Leave shop and open map",
+          "delivery": "delivered"
+        }
+      ],
+      "diagnostic_navigation": {
+        "inspected_shop_visits": [
+          "[1,5]"
+        ]
+      },
+      "fixed_app_reset_verified": true,
+      "archive_unchanged": true,
+      "shared_profile_unchanged": true,
+      "app_copies_created": 0,
+      "saved_verification_valid": true,
+      "resource_report": "artifacts/resources/natural-shipped-run-smoke-001-v8.json",
+      "resource_report_id": "sha256:7f741104897a8ddae81eda598dd1dc71fb619b69d7712aa64f27ab7070d3585d",
+      "resource_wall_seconds": 177.32814599992707,
+      "CPU_seconds": 40.535144886000005,
+      "peak_resident_memory_bytes": 1056522240,
+      "tracked_storage_including_existing_pool_bytes": 2441854324,
+      "resource_cap": null,
+      "internal_client_cap_seconds": 165
+    }
+  ],
+  "validation": {
+    "repository_tests": 1251,
+    "repository_test_seconds": 48.61,
+    "formatting_types_protocol": "passed",
+    "current_Node_controls": 44,
+    "new_navigation_controls": 7,
+    "saved_v7_and_v8_reconstruction": "passed; no games during saved verification"
+  },
+  "owner_stage": {
+    "command": "bash scripts/discover-natural-a8-runs-v1.sh",
+    "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-discovery-v1.json",
+    "config_id": "sha256:6d56ea7ac0f5d52b2689794010aa4b6b9096c3c1aea0e6e735d0a20a247b84e3",
+    "planned_cases": 2,
+    "workers": 1,
+    "preflight_ready": true,
+    "preflight_games_launched": 0,
+    "long_batch_launched": false,
+    "expected_minutes": [
+      10,
+      20
+    ],
+    "per_game_process_cap_seconds": 900,
+    "batch_resource_caps": {
+      "max_wall_seconds": 1920,
+      "max_cpu_seconds": 3600,
+      "max_storage_bytes": 4000000000,
+      "max_memory_bytes": 8000000000
+    }
+  },
+  "completed_shipped_games": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "bulk_learning_admitted": false,
+  "adaptive_controller_allowed": false,
+  "remaining": "Complete shipped endings and remaining encountered/later-act/ending controls, bounded run costs/isolation, public neural integration and short learning check.",
+  "claim_scope": "verified_natural_shipped_tutorials_shop_navigation_and_public_progress_prefix_only_not_full_run_admission_or_model_strength",
+  "evidence_id": "sha256:bd0d10305702fc04178bc41f9b887a1a7152765e6cbc0b8b565fc0b511bfb8ac"
+}

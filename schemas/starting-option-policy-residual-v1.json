@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-option-policy-residual-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "encoder_id",
+    "dimension",
+    "known_option_ids",
+    "weights"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "starting-option-policy-residual-v1"
+    },
+    "encoder_id": {
+      "const": "starting-ancient-public-option-v1"
+    },
+    "dimension": {
+      "type": "integer",
+      "minimum": 128,
+      "maximum": 65536
+    },
+    "known_option_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "weights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "index",
+          "value"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

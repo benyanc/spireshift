@@ -1,0 +1,25 @@
+{
+  "schema_version": "native-mechanics-followup-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "sweep_config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v7.json",
+  "sweep_config_id": "sha256:81baffb50e6132134eed45c0d776a0b39848fdb6fd87994a1380732ad68b44bf",
+  "sweep_plan_id": "sha256:c2ba20df295b02f05286c247c8630b3a079553f0b6338bf2bad0b60d30ab79d7",
+  "sequence_config": "configs/engine-qualification/sts2-v0.111.0-native-legal-sequences-v2.json",
+  "sequence_config_id": "sha256:7bd771fe3b1171e15276dfa34cdce89dd4162e0bf44602fcc3a09b000da21f00",
+  "progression_config": "configs/engine-qualification/sts2-v0.111.0-native-run-progression-v7.json",
+  "progression_config_id": "sha256:973c6c05d2227a2b310f6284c8858c14ead2654e1d7073646f4ee673f6d7c5fb",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/mechanics-followups-v1",
+  "implementation_sha256": {
+    "engine_mechanics_followups.py": "49315be43bdce0734f5a74656ad38dd5abff436ee52dba5f2a92b037886c6d23",
+    "engine_sequence_checks.py": "abf91db4ae45c94ebdfb54d45663d9af03bb277408eb34a9473b607a509679be",
+    "engine_progression.py": "874fb6fa46e506fa27db349109f98c701b2ae94e2dbf6e629fe0538c25e58ebc"
+  },
+  "training_allowed": false,
+  "game_apps_created": 0,
+  "resource_limits": {
+    "wall_seconds": 240,
+    "cpu_seconds": 480,
+    "storage_bytes": 1500000000,
+    "resident_memory_bytes": 4000000000
+  }
+}

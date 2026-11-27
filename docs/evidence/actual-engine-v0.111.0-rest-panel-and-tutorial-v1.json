@@ -1,0 +1,225 @@
+{
+  "schema_version": "engine-scoped-qualification-evidence-v1",
+  "recorded_at": "2026-10-11",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "game_version": "v0.111.0",
+  "game_commit": "41cef1ea",
+  "character": "Ironclad",
+  "ascension": 8,
+  "training_allowed": false,
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "shipped_cross_host_parity": false,
+  "historical_evidence": "docs/evidence/actual-engine-v0.111.0-first-combat-and-rest-v1.json",
+  "completed_rest_panel": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridges-v1/batch.json",
+    "report_id": "sha256:9a04f8fefb82d8e2b0607aad10c4f87f26b7006ff8fd51d434849785589d8a87",
+    "config_id": "sha256:8f1842effadc1be6ad5b3858c5cbe5ecbff57ea4bf4fd2770a6eb1d63c8285d1",
+    "planned_cases": 8,
+    "completed_cases": 8,
+    "failed_cases": 0,
+    "not_attempted_cases": 0,
+    "independent_seeds": 2,
+    "seed_scenario_pairs": 4,
+    "privileged_fixture": true,
+    "repeated_public_prefixes_identical": true,
+    "wall_seconds": 383.71466079202946,
+    "claim_scope": "repeated_privileged_single_card_rest_fixture_public_action_effects_only",
+    "saved_verification": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-bridges-v1/saved-verification-v2.json",
+      "report_id": "sha256:6763d190a51b2cc19c67137d352ff4045ad3ca0b2682261b72f3d30d431706a0",
+      "verified_cases": 8,
+      "compared_snapshots": 56,
+      "semantic_actions_delivered": 48,
+      "public_actions_delivered": 56,
+      "upgrade_ui_steps": 8,
+      "verifier_sha256": "9ab950d2989e9ecc44957f2c8bd47a37403313ad8382f95caa2af756c2d1ebd5",
+      "games_launched": 0,
+      "valid": true
+    },
+    "resource_report": {
+      "path": "artifacts/resources/rest-comparisons-v1.json",
+      "report_id": "sha256:6b5d6840eb63897a138c29f0f67884e08cc46c6560798c8389782860bca033e0",
+      "wall_seconds": 383.92165270796977,
+      "cpu_seconds": 133.79516326600003,
+      "peak_resident_memory_bytes": 963231744,
+      "final_storage_bytes": 30333000,
+      "peak_storage_bytes": 2437089303,
+      "peak_process_count": 6,
+      "cost_complete": false,
+      "missing_cost_inputs": [
+        "cpu_rate",
+        "gpu_usage",
+        "storage_rate",
+        "energy_usage"
+      ]
+    },
+    "tutorial_policy": "isolated_native_generated_progress_with_only_rest_tutorial_seen_other_tutorials_enabled",
+    "scope": "repeated_privileged_single_card_rest_effects_not_fresh_profile_control_or_player_strength"
+  },
+  "local_connector_repair": {
+    "upstream_url": "https://github.com/rsgcsg/STS2-Connector",
+    "upstream_tag": "v1.1.0-rc.1",
+    "upstream_revision": "e0651024117d22bdeb95142766917103d87c0185",
+    "patch": "patches/engine/sts2-connector-v0.111.0-rest-tutorial-v1.patch",
+    "patch_sha256": "61dcb2bfcde7a7a12f6dc3415a3ec25fab0ddb6e5e9eb2439ee7f88054514bdb",
+    "license": "patches/engine/sts2-connector-MIT-LICENSE.txt",
+    "connector_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-rest-tutorial-v2.json",
+      "config_id": "sha256:c47cf732bc8e818f5feb805291282fc1ffb277e10d21194795710e94cc30aa78"
+    },
+    "build_config": {
+      "path": "configs/engine-qualification/sts2-v0.111.0-connector-rest-build-v2.json",
+      "config_id": "sha256:3f723f1173e146ee9b0231024aab6d84bd2da85dca426d62c9d0458f5b12e849"
+    },
+    "build_report": {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-rest-build-v2.json",
+      "report_id": "sha256:569bd0be99a0267331d58a80c3a486ea54969b4dc04f97d6a3bf6b03c665e0c0",
+      "config_id": "sha256:3f723f1173e146ee9b0231024aab6d84bd2da85dca426d62c9d0458f5b12e849"
+    },
+    "toolchain_report": {
+      "path": "artifacts/engine-tooling/connector-rest-tutorial-v2/toolchain.json",
+      "report_id": "sha256:187d6ec449651ec0eeefc1ddc6f1a010eba5cac01f90cd7b5b57b63267c44bd0",
+      "config_id": "sha256:c47cf732bc8e818f5feb805291282fc1ffb277e10d21194795710e94cc30aa78"
+    },
+    "source_revision": "01139c3207378ffff14daaa2d07930b56a928a2a",
+    "sdk_version": "10.0.401",
+    "fresh_builds_identical": true,
+    "fresh_builds": 2,
+    "wall_seconds": 7.710757000022568,
+    "host_artifact_sha256": "cb287fc1798b75ac7de05b991217c357092f4dabf604981915231392c64812a8",
+    "host_artifact_mvid": "16c8b163-b3c2-450c-b68c-6f10600871f1",
+    "runtime_seal_authority": "none_local_source_canary_not_upstream_release",
+    "original_host_and_seal_preserved": true,
+    "official_game_assembly_unchanged": true,
+    "scope": "exact_current_NRestSiteFtue_visible_confirmation_only_unknown_modals_remain_unsupported",
+    "games_launched_in_build": 0,
+    "original_shipped_family_results_inherited": false
+  },
+  "fresh_tutorial_smokes": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v1/comparison.json",
+      "report_id": "sha256:f56de8f598bd0135b66a9c0638b7b2419dd2fff1fde7fae469532f234aafe368",
+      "config_id": "sha256:11ab898e0eb865dfea2d2c64b3691179c13ad18962656dd9bb618bf9f29c3ce7",
+      "seed": "SPIRESHIFTRESTBRIDGE003",
+      "scenario": "tent-heal-cancel-smith",
+      "status": "rest_action_comparison_pass",
+      "compared_snapshots": 7,
+      "semantic_actions_delivered": 6,
+      "public_actions_delivered": 7,
+      "upgrade_ui_steps": 1,
+      "rest_tutorial_steps": 1,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v1/native-report.json",
+        "report_id": "sha256:6ceedbd88386fd8fb21a160cbbd2eebc706b802ee93b150421522f9668786a26",
+        "config_id": "sha256:e624dbec4581383cad59f11a8d588c018ce0893c0570fc17089debd85c8f34d1"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v1/shipped-report.json",
+        "report_id": "sha256:2af79a95493c32a7964170399abae8c13c419d7a9bed4b2e84aaf49a1ce72b1f",
+        "config_id": "sha256:c47cf732bc8e818f5feb805291282fc1ffb277e10d21194795710e94cc30aa78"
+      },
+      "saved_verification": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v1/saved-verification-v1.json",
+        "report_id": "sha256:05b1b1f1e022a758e70a0d4bbcdcec1d0cb32bfabe721164a41044a604d03bfe"
+      },
+      "shipped_process_seconds": 36.16355133301113,
+      "native_process_seconds": 2.860804707976058,
+      "fresh_rest_progress_absent_before_launch": true,
+      "copied_tutorial_progress": false,
+      "fresh_rest_tutorial_dismissed": true,
+      "outer_progress_absence_gate_present": false,
+      "verified_successful_payload_removed": true
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v2/comparison.json",
+      "report_id": "sha256:e18eaee5bf6f7cdc5dca0bc7e223894689dc05bfc765e441d33c53d61948a677",
+      "config_id": "sha256:56d5d3b4bd0b367fcd85cf125162a27b851a621fe946af1f159336f69486b86c",
+      "seed": "SPIRESHIFTRESTBRIDGE006",
+      "scenario": "tent-smith-cancel-heal",
+      "status": "rest_action_comparison_pass",
+      "compared_snapshots": 7,
+      "semantic_actions_delivered": 6,
+      "public_actions_delivered": 7,
+      "upgrade_ui_steps": 1,
+      "rest_tutorial_steps": 1,
+      "native_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v2/native-report.json",
+        "report_id": "sha256:e5ce61be419162251f6136ad889ee1728f64db2696c214a79d08b9766191f9a5",
+        "config_id": "sha256:b30d46b1130cd517608cec0e3d77a97759165cb0ecf4003432095019783309f7"
+      },
+      "shipped_report": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v2/shipped-report.json",
+        "report_id": "sha256:65b68aa5a40ce2c0e6db57452c8e8d0b7d5d7d0fa0428c97913a877f56b4ec54",
+        "config_id": "sha256:c47cf732bc8e818f5feb805291282fc1ffb277e10d21194795710e94cc30aa78"
+      },
+      "saved_verification": {
+        "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/rest-tutorial-smoke-v2/saved-verification-v1.json",
+        "report_id": "sha256:7c5a33f72f274391899036b245d068d3b57cf2e9dfdd97bea84f41a9244871b7"
+      },
+      "shipped_process_seconds": 35.118355458951555,
+      "native_process_seconds": 2.7390645000268705,
+      "fresh_rest_progress_absent_before_launch": true,
+      "copied_tutorial_progress": false,
+      "fresh_rest_tutorial_dismissed": true,
+      "outer_progress_absence_gate_present": true,
+      "verified_successful_payload_removed": true
+    }
+  ],
+  "privileged_fixture_scope": {
+    "setup": "native_A8_HP25_MAX80_single_STRIKE_IRONCLAD_and_MINIATURE_TENT_saved_room_set_to_rest",
+    "matched_facts": "public_run_player_deck_rest_choices_upgrade_bounds_selection_preview_confirmation_and_following_map_options",
+    "heal_before_smith_and_smith_before_heal": true,
+    "expected_final_hp": 49,
+    "expected_upgraded_card": true,
+    "tutorial_separate_from_game_actions": true,
+    "not_qualified": [
+      "fresh_tutorial_repeatability_before_owner_panel",
+      "startup_and_combat_regressions_on_new_Host",
+      "naturally_reached_rest_sites",
+      "all_rest_relics",
+      "multiple_card_duplicate_identity_pickers",
+      "preview_toggle_or_preview_back_execution",
+      "effect_text_and_card_preview_stats",
+      "broad_shipped_shop_effects",
+      "full_modifier_expiry_relic_counter_facts",
+      "later_acts_and_actual_terminal_endings",
+      "full_run_speed_or_model_strength"
+    ]
+  },
+  "preserved_failures": {
+    "original_rest_tutorial": "rest-bridge-smoke-v2 unsupported modal remains historical evidence",
+    "stale_after_cancel": "rest-bridge-smoke-v6 refused stale action; no silent retry",
+    "initial_builds": "connector-rest-build-v1 contains failed metadata/install attempts; no game launched; partial local toolchain remains preserved",
+    "recovery": "distinct v2 build/report/toolchain; never overwrite or relabel the partial v1",
+    "first_smoke_gate_note": "smoke-v1 records progress absence in consent; explicit outer progress gate added before smoke-v2 and owner recipe"
+  },
+  "owner_next": {
+    "script": "scripts/compare-rest-tutorial-v1.sh",
+    "config": "configs/engine-qualification/sts2-v0.111.0-rest-tutorial-bridges-v1.json",
+    "config_id": "sha256:5b82028fb41513989beb3f6dc9b5c4dfe17d0b11e771d8aefedea8783bca32dd",
+    "planned_cases": 8,
+    "independent_seeds": 2,
+    "seed_scenario_pairs": 4,
+    "repeats_per_pair": 2,
+    "fresh_rest_tutorial_required": true,
+    "expected_minutes": "6-8",
+    "max_wall_seconds": 900,
+    "max_cpu_seconds": 1800,
+    "max_memory_bytes": 8000000000,
+    "max_storage_bytes": 4000000000,
+    "minimum_free_disk_bytes": 3500000000,
+    "launched_by_codex": false,
+    "no_automatic_followup": true
+  },
+  "verification": {
+    "repository_tests": 1064,
+    "standalone_node_tests": 75,
+    "focused_local_Host_tutorial_tests": 3,
+    "format_types_and_csharp_protocol": "passed",
+    "games_in_portable_tests": 0,
+    "rest_saved_verifier_sha256": "9ab950d2989e9ecc44957f2c8bd47a37403313ad8382f95caa2af756c2d1ebd5",
+    "focused_Host_log": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-rest-tutorial-tests-v2.log"
+  },
+  "evidence_id": "sha256:06a6a75a996c5c3f83ab5fa94cf291eaab59dfe19803f30c76f5d0359d1d244a"
+}

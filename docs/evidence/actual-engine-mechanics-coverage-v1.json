@@ -1,0 +1,57 @@
+{
+  "schema_version": "native-mechanics-coverage-evidence-v1",
+  "date": "2026-10-15",
+  "game": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "character": "Ironclad",
+    "ascension": 8
+  },
+  "build": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v31.json",
+    "report_id": "sha256:d4f9a2cbb75eda2d10de7c6f5c687aedf4fa6650cc9719b647ec1c31fded8d07",
+    "host_assembly_sha256": "403faf00c1f0abf0c5de7d3ab1f243af6369730cc0e9e6b6842421beecdab069",
+    "original_game_dll_unchanged": true
+  },
+  "coverage": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v5.json",
+    "config_id": "sha256:c9ce5122c6765f5e740a731f4076a396223b2cf4c9c036caac68ddea70449d47",
+    "plan_id": "sha256:1bf6ff53a6a0fec449d89616a213619db2da3240d4b32d6cdf8a744be71f89fd",
+    "catalog_id": "sha256:1e04e4250229e48b82d60f7f5c75cc2212f79fcb2326cc2de0fed2f4b390da57",
+    "registered_native_types": 1660,
+    "runtime_missing_classes": 0,
+    "unregistered_runtime_classes": 0,
+    "non_mock_cards": 596,
+    "non_mock_combat_potions": 65,
+    "planned_card_contexts": 1749,
+    "planned_total_cases": 1824,
+    "smoke_report_id": "sha256:ab65e1b8b69e2be2602cf647efc56b9bbf07d348bc9aa6cb616043b4c3827d42",
+    "smoke_cases": 15,
+    "effects_exercised": 14,
+    "native_prerequisite_blocked": 1,
+    "failed_smoke_cases": 0,
+    "known_smoke_gaps": [],
+    "generated_sweep_started": false,
+    "same_plan_short_controls_reused_by_sweep": true
+  },
+  "resources": {
+    "report_id": "sha256:729f65dde5b0c764e7d2fcd90ea7717fbf51fd701fea0189ee5346cac86dd801",
+    "wall_seconds": 24.014419374987483,
+    "cpu_seconds": 19.163115903000005,
+    "peak_resident_memory_bytes": 294748160,
+    "retained_bytes": 5865176,
+    "game_apps_created": 0
+  },
+  "limitations": [
+    "Inventory is not exhaustive interaction proof",
+    "Conditional effects absent from fixture prerequisites remain unexercised",
+    "Outside-combat potion use and non-creature targeting remain explicit gaps",
+    "Random legal sequences and lifecycle qualification remain follow-ups",
+    "No shipped cross-host parity or model readiness claim"
+  ],
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "checkpoint_promoted": false
+}

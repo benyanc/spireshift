@@ -1,0 +1,183 @@
+{
+  "schema_version": "native-input-layout-evidence-v1",
+  "scope": "public_export_layout_preservation_and_exact_world_diagnostic_only",
+  "environment": {
+    "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v11.json",
+    "sha256": "4a1008b2910bb7e77e457008c691bf9c1ac08749d939f76870dd0c7c513d34d5"
+  },
+  "source_export_patches": [
+    {
+      "path": "patches/engine/sts2-cli-v0.111.0-public-card-keywords-v38.patch",
+      "sha256": "e1f5b588100b4aa2085888ecd6b5457cd9eed81bd3b059ec9b9350289221369f"
+    },
+    {
+      "path": "patches/engine/sts2-headless-public-card-projection-v3.patch",
+      "sha256": "45aa700a5f897596015bdf58243b2087a107b14a7afaa82528f144da6e61b999"
+    },
+    {
+      "path": "patches/engine/sts2-connector-v0.111.0-public-belt-v15.patch",
+      "sha256": "1102b63f1531392b492f168b6c5ea7d240a84c2741f432a3fe0ef2dc7d915ce7"
+    }
+  ],
+  "native_build_report": {
+    "path": "artifacts/native-layout/export-build-v38/report.json",
+    "sha256": "b06af8b42aafb1c166d27f07b3c888059ef3d5e9908166879374d5b0a0e7d825"
+  },
+  "official_build_report": {
+    "path": "artifacts/native-layout/connector-build-v15/report.json",
+    "sha256": "52fde33eea2851b57d281feb2c42724f739113d748924810e2cef48de2d5c207"
+  },
+  "offline": {
+    "path": "artifacts/native-layout/offline-v7/report.json",
+    "sha256": "f1491fbc69a4bbe8321a2c5185efefeb46ec4c7acba139d11caed1b5f515444b",
+    "status": "saved_input_layout_pass",
+    "saved_frames": 823,
+    "artificial_envelopes": 20,
+    "exact_round_trips": 843,
+    "complete_raw_action_bindings_preserved": 843,
+    "frozen_policy_input_probes": 1676,
+    "protected_prior_files": 3018,
+    "wall_seconds": 21.81299279211089
+  },
+  "originals_preserved": true,
+  "all_original_Adam_moments_and_steps_preserved": true,
+  "protection": {
+    "path": "artifacts/native-layout/development-v1/protection.json",
+    "sha256": "ca0a90c8490d7e05a249bd5224c6a096fada86be21bd92e881efb85bf91ef36c"
+  },
+  "original_Adam_steps": {
+    "2": 5658,
+    "3": 6045
+  },
+  "targeted_tests": {
+    "Node": 163,
+    "CSharp_potion_permissions": 11,
+    "are_game_outcomes": false
+  },
+  "repository_check": {
+    "path": "artifacts/resources/native-layout-repository-check-v1.json",
+    "sha256": "b83ef4ec7455e08097e4dd1146632d1ad4646b7c96efc211cedb63a21d9f7b5e",
+    "log": {
+      "path": "artifacts/native-layout/repository-check-v1/check.log",
+      "sha256": "5a2efbad865a70e26422e5b5766fb76e59deab6e078f4714d53583ce8d8f92fd"
+    },
+    "tests_passed": 2562,
+    "strict_type_checked_files": 599,
+    "status": "completed",
+    "exit_code": 0,
+    "usage": {
+      "average_cpu_utilization": 0.06476297501534545,
+      "cpu_hours": 0.03782234382027779,
+      "cpu_seconds": 136.16043775300005,
+      "energy_kwh": null,
+      "final_storage_bytes": 3112,
+      "gpu_hours": null,
+      "gpu_seconds": null,
+      "peak_process_count": 10,
+      "peak_resident_memory_bytes": 415350784,
+      "peak_storage_bytes": 3112,
+      "simulations": null,
+      "trajectories": null,
+      "transitions": null,
+      "wall_seconds": 150.17447162489407
+    }
+  },
+  "first_complete_four_input_live_control": {
+    "path": "artifacts/native-layout/control-v3/report.json",
+    "sha256": "a9e317fa9739e95e8119cd9eb3ff1761f773cb9c56c97ca6c297a13b41613e3c"
+  },
+  "current_helper_reconstructs_that_saved_equal_prefix": {
+    "path": "artifacts/native-layout/development-v2/recorded-pair-check.json",
+    "sha256": "2ddddb4ff77b975bd8b6659fdcf4234182cea15707bde6ad52d494eb309c6e58"
+  },
+  "latest_live_control": {
+    "path": "artifacts/native-layout/control-v5/report.json",
+    "sha256": "9dd947e410fa68da6330596d591ca68169d1bfa256d4cf09599f3160c3f2f941",
+    "delivery_exercised": true,
+    "full_prefix_equivalence": false,
+    "comparison": {
+      "complete_prefix_input_equivalence": false,
+      "equal_input_prefix": 1,
+      "first_difference": {
+        "complete_menu_keys_equal": false,
+        "decision": 1,
+        "difference_paths": [
+          "/candidates/0/arguments",
+          "/candidates/0/label",
+          "/candidates/0/subject",
+          "/candidates/0/verb",
+          "/candidates/1/arguments",
+          "/candidates/1/label",
+          "/candidates/1/subject",
+          "/candidates/1/verb",
+          "/candidates/2/arguments",
+          "/candidates/2/label",
+          "/candidates/2/subject",
+          "/candidates/2/verb"
+        ],
+        "native_input_id": "sha256:f65ef88a00676d2cb55900d1398c6b74fb0637df5c46db169bb5d73d465a202c",
+        "official_input_id": "sha256:e892db929e2a099530e7aca22c4ddd9c5b31ef055b65a8343bc462fb15be93db"
+      },
+      "later_divergent_states_realignable": false,
+      "native_decisions": 4,
+      "official_decisions": 4
+    }
+  },
+  "independent_latest_receipt_verification": {
+    "path": "artifacts/native-layout/control-v5-verification/report.json",
+    "sha256": "28daec8bf36fad8365a65218382462a09781c1d5ebcd08d36e1cfbd9e8dfc3d8",
+    "valid": true,
+    "verified_choices": 8,
+    "wall_seconds": 5.371675166999921
+  },
+  "selection_diagnosis": {
+    "path": "artifacts/native-layout/development-v2/selection-boundary-diagnosis.json",
+    "sha256": "5e0d5beb22c1ba4ccd373c64ca9ab1b27114e1c6c2c96d903d971cb02faa6251",
+    "findings": {
+      "schema_version": "native-selection-boundary-diagnosis-v1",
+      "complete_initial_inputs_equal": true,
+      "selection_context_equal": false,
+      "card_definition_cost_description_and_numeric_preview_multiset_equal": true,
+      "compared_card_fields": [
+        "definition_id",
+        "name",
+        "type",
+        "rarity",
+        "cost",
+        "star_cost",
+        "is_upgraded",
+        "keywords",
+        "description",
+        "stats",
+        "after_upgrade_excluding_description"
+      ],
+      "source_selected_flag_missing_on_CLI_cards": true,
+      "selection_candidate_contract_equal": false,
+      "native_candidates": 10,
+      "official_candidates": 10,
+      "source_report_id": "sha256:a360d59d27c3ac9c41d0e763aae634fd071e3be99d5acb8b10fe47259bbd54d9",
+      "diagnosis": "atomic_vs_UI_boundary_plus_selection_view_identity_flags_and_owner_layout",
+      "full_context_equivalence_granted": false,
+      "games_launched": 0,
+      "optimizer_updates": 0,
+      "original_weights_and_Adam_unchanged": true
+    }
+  },
+  "next_required_decision": "semantic_committed_card_choice_with_exact_UI_execution_or_model_controlled_UI_primitives",
+  "remaining_selection_repairs": [
+    "atomic_versus_UI_transition_contract",
+    "physical_card_identity_and_owned_views",
+    "source_selected_flags",
+    "selection_owner_metadata",
+    "upgrade_preview_description_line_breaks"
+  ],
+  "noncombat_potion_effects_qualified": false,
+  "new_game_app_copies": 0,
+  "optimizer_updates": 0,
+  "training_allowed": false,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "full_game_strength_claim": false,
+  "historical_receipts_sources_and_attempted_worlds_preserved": true,
+  "report_id": "sha256:4904dcd49fde3bdf68423da5b4b6d671a4ee8428afa08c39b39f51d49c85fa91"
+}

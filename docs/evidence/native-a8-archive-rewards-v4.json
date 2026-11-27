@@ -1,0 +1,158 @@
+{
+  "card_reward_control": {
+    "card_definition_ids": [
+      "SUCKER_PUNCH",
+      "MOMENTUM_STRIKE"
+    ],
+    "clean_shutdown": true,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "last_floor": 8,
+    "native_report_id": "sha256:adaefb9176c8ce9599634b24fe6ae8059ba36e9464dfe4330f2e2a7a009b3a75",
+    "optimizer_updates": 0,
+    "report_id": "sha256:0f21ed5a6cff0eb65ba6213d42d89084a5ab470e55f351d392a84b3651e78a32",
+    "schema_version": "native-a8-card-reward-control-v4",
+    "seal_id": "sha256:2ce61341a90acec7da85f65d146f3439f58bccf4c92f88800d880708c53d635b",
+    "source_run_id": "28b20eb6e1e88812",
+    "training_admission_granted": false,
+    "verified_native_deliveries": 55
+  },
+  "final_test_worlds_used": false,
+  "first_reward_batch_outcomes": {
+    "diverged": 1,
+    "verified_native_victory": 1
+  },
+  "first_reward_batch_report_id": "sha256:be4f3024dbf09f2e2a055355207c9777f4398d7033e95d19ce567c9f51d7b218",
+  "gold_control": {
+    "actual_gold_claims": [
+      {
+        "delivery": 507,
+        "gold_after": 196,
+        "gold_before": 181,
+        "source_record": 2591
+      },
+      {
+        "delivery": 508,
+        "gold_after": 211,
+        "gold_before": 196,
+        "source_record": 2593
+      }
+    ],
+    "clean_shutdown": true,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "genuine_native_victory": false,
+    "matching_prefix_deliveries": 506,
+    "native_report_id": "sha256:be6c6989be923c7569546a001839301c052648fd04904bd8355143b3e72cfc68",
+    "optimizer_updates": 0,
+    "prior_report_id": "sha256:40ff5a9d5ab4bd15d7c1266fde612f6519f91c841d8bbfbad744c1725eede059",
+    "report_id": "sha256:d17a1ffe84e08983a9b2a3cc2c7287255366863fb20ac0322e5c7e524f505571",
+    "schema_version": "native-a8-archive-gold-control-v3",
+    "seal_id": "sha256:418f28257927ef3317e7d5743c806766a33e45d5fd63e4a46311bf06e297d9a8",
+    "source_run_id": "6739ccb495f9b471",
+    "stop": {
+      "delivery_uncertain": false,
+      "error": "'slot'",
+      "kind": "buy",
+      "mismatch": null,
+      "source_record": 2603
+    },
+    "training_admission_granted": false,
+    "verified_native_deliveries": 513
+  },
+  "optimizer_updates": 0,
+  "preflight": {
+    "optimizer_updates": 0,
+    "preceding_choices": {
+      "28b20eb6e1e88812": {
+        "delivery_domain": "native",
+        "next_choice": "Claim Add a card to your deck.",
+        "prior_report_id": "sha256:c7481e56b99109431921b7be6da3ff6b11cb767d6ba42cf8d44622a9035ed87f",
+        "verified_prefix": 1
+      },
+      "3cb0429d17be9210": {
+        "delivery_domain": "native",
+        "next_choice": "Open inventory",
+        "prior_report_id": "sha256:6a5822d6ac618baf8cccb1be8eb760d45c0d2f6b7979cbdfe616b18408a1fa2c",
+        "verified_prefix": 25
+      },
+      "6739ccb495f9b471": {
+        "delivery_domain": "native",
+        "next_choice": "Buy Lee's Waffle??? for 53 gold",
+        "prior_report_id": "sha256:be6c6989be923c7569546a001839301c052648fd04904bd8355143b3e72cfc68",
+        "verified_prefix": 513
+      },
+      "6f7d841fbdf0bb23": {
+        "delivery_domain": "native",
+        "next_choice": "Confirm Defend, Ascender's Bane, Bash+",
+        "prior_report_id": "sha256:99675657477c05e9f93d13bd4748004834c532a3a501d7f84a9e9a53bddebf85",
+        "verified_prefix": 72
+      }
+    },
+    "sources": {
+      "28b20eb6e1e88812": {
+        "act1_boss": "CEREMONIAL_BEAST_BOSS",
+        "final_boss": "AEONGLASS_BOSS",
+        "opening": "NEOW.pages.INITIAL.options.KALEIDOSCOPE",
+        "seed": "68NJLNJQRCLB",
+        "source_intents": 551,
+        "status": "source_ready"
+      },
+      "3cb0429d17be9210": {
+        "act1_boss": "VANTOM_BOSS",
+        "final_boss": "TEST_SUBJECT_BOSS",
+        "opening": "NEOW.pages.INITIAL.options.WINGED_BOOTS",
+        "seed": "KW29JLFEXV15",
+        "source_intents": 786,
+        "status": "source_ready"
+      },
+      "6739ccb495f9b471": {
+        "act1_boss": "LAGAVULIN_MATRIARCH_BOSS",
+        "final_boss": "AEONGLASS_BOSS",
+        "opening": "NEOW.pages.INITIAL.options.LEAFY_POULTICE",
+        "seed": "U9FFKTML1M9G",
+        "source_intents": 841,
+        "status": "source_ready"
+      },
+      "6f7d841fbdf0bb23": {
+        "act1_boss": "WATERFALL_GIANT_BOSS",
+        "final_boss": "TEST_SUBJECT_BOSS",
+        "opening": "NEOW.pages.INITIAL.options.DOWSING_ROD",
+        "seed": "XLWMFZGUB1P7",
+        "source_intents": 623,
+        "status": "source_ready"
+      },
+      "ee2ffb605c67742f": {
+        "act1_boss": "LAGAVULIN_MATRIARCH_BOSS",
+        "final_boss": "QUEEN_BOSS",
+        "opening": "NEOW.pages.INITIAL.options.ARCANE_SCROLL",
+        "seed": "5SELZ5UWJ3SK",
+        "source_intents": 872,
+        "status": "source_ready"
+      }
+    },
+    "status": "archive_qualification_ready"
+  },
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-archive-qualification-v4.json",
+    "sha256": "594482c8f57ab85a1a14dd993f1a16cf32b473d96794a5058f4e37a70db0c066"
+  },
+  "report_id": "sha256:a37e28ef71e4cfadd070f3950512b77b6e2197d70978680859251f939b18d8b7",
+  "schema_version": "native-a8-archive-reward-qualification-evidence-v4",
+  "status": "owner_qualification_prepared",
+  "training_admission_granted": false,
+  "verified_clean_prefix_deliveries": 611,
+  "verified_winning_worlds": 1
+}

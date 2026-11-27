@@ -1,0 +1,149 @@
+{
+  "schema_version": "official-cli-interface-inventory-v1",
+  "profile": "Ironclad_A8_native_benchmark_full_v1",
+  "families": [
+    {
+      "name": "startup",
+      "kinds": [
+        "main_menu",
+        "singleplayer_menu",
+        "character_select",
+        "tutorial"
+      ],
+      "role": "presentation"
+    },
+    {
+      "name": "events",
+      "kinds": [
+        "event_option",
+        "event_dialogue"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "map",
+      "kinds": [
+        "map_navigation"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "combat",
+      "kinds": [
+        "combat_turn"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "rest",
+      "kinds": [
+        "rest_site"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "shops",
+      "kinds": [
+        "shop_room",
+        "shop_inventory"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "selections",
+      "kinds": [
+        "card_selection",
+        "native_deck_card_selection",
+        "native_simple_card_selection",
+        "native_combat_pile_selection",
+        "combat_hand_card_selection",
+        "deck_upgrade_selection",
+        "deck_transform_selection",
+        "deck_enchant_selection",
+        "native_generated_card_choice"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "bundles",
+      "kinds": [
+        "card_bundle_selection"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "rewards",
+      "kinds": [
+        "reward_claim",
+        "card_reward_selection",
+        "reward_completion"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "treasure",
+      "kinds": [
+        "treasure_room",
+        "treasure_chest",
+        "treasure_relic_selection",
+        "treasure_completion"
+      ],
+      "role": "policy"
+    },
+    {
+      "name": "endings",
+      "kinds": [
+        "game_over"
+      ],
+      "role": "terminal"
+    }
+  ],
+  "reads": [
+    {
+      "kind": "run_deck",
+      "required_fields": [
+        "cards"
+      ]
+    },
+    {
+      "kind": "combat_piles",
+      "required_fields": [
+        "zones"
+      ]
+    },
+    {
+      "kind": "shop_catalog",
+      "required_fields": [
+        "cards",
+        "relics",
+        "potions",
+        "card_removal"
+      ]
+    },
+    {
+      "kind": "surface_card",
+      "required_fields": [
+        "entity_id",
+        "definition_id"
+      ]
+    }
+  ],
+  "event_option_required_fields": [
+    "index",
+    "title",
+    "description",
+    "is_locked",
+    "is_enabled",
+    "is_proceed",
+    "was_chosen",
+    "will_kill_player",
+    "tooltips"
+  ],
+  "missing_values_may_be_defaulted": false,
+  "exhaustive_interaction_proof": false,
+  "event_option_nullable_fields": [
+    "relic_name",
+    "relic_description"
+  ],
+  "nullable_field_policy": "Pinned official record serializer may omit null nullable fields; absent booleans remain unknown, never defaulted."
+}

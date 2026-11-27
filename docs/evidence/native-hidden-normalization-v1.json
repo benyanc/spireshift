@@ -1,0 +1,245 @@
+{
+  "assessment_resources": {
+    "path": "artifacts/native-learning-health/v1/assessment-v1/resources.json",
+    "report_id": "sha256:1fcb3127b2cb1c49be265065148d8341ba6b00cdd12a4329d9ac1e755e308567",
+    "sha256": "78642a802926c31c72a752b796e7565718ffd55050707517a95979e34c68daba"
+  },
+  "assessment_summary": {
+    "actor_ridge_baseline_negative_explained_variance_cohorts": 1,
+    "checkpoints_saved": 0,
+    "cohorts_verified": 16,
+    "complete_public_recount_id": "sha256:1770f806fed9f6b26f647e61716c8ece5995b9360230b1810b1ad9363d96ad4b",
+    "final_test_worlds_used": false,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "learned_critic_negative_explained_variance_cohorts": 8,
+    "native_decisions_reconstructed": 44811,
+    "native_victory_targets": 0,
+    "new_games": 0,
+    "next_hypothesis": "matched_zero_initial_corrections_raw_versus_per_candidate_hidden_normalization",
+    "normalization_is_established_cause": false,
+    "numerical_gradient_probes_passed": 64,
+    "official_live_qualification_granted": false,
+    "optimizer_probes": {
+      "inherited_Adam": {
+        "loss_decreased_cohorts": 16,
+        "median_behavior_kl": 0.00021677584496933522
+      },
+      "reset_Adam": {
+        "loss_decreased_cohorts": 16,
+        "median_behavior_kl": 0.002124469725914733
+      }
+    },
+    "optimizer_reset_strength_gain_established": false,
+    "promotion_allowed": false,
+    "reset_Adam_larger_kl_cohorts": 16,
+    "saturation_by_round_and_method": {
+      "1-expanded": [
+        0.13880305447421235,
+        0.14300573219640605
+      ],
+      "1-standard": [
+        0.5537863688300092,
+        0.5715794066502075
+      ],
+      "16-expanded": [
+        0.5854044459162254,
+        0.6037000624158827
+      ],
+      "16-standard": [
+        0.6224758660122431,
+        0.5702292790488591
+      ],
+      "32-expanded": [
+        0.6563549765393023,
+        0.6221246936792592
+      ],
+      "32-standard": [
+        0.6371250609470824,
+        0.551200349265535
+      ],
+      "64-expanded": [
+        0.6931845767970027,
+        0.6597244328750677
+      ],
+      "64-standard": [
+        0.6084985530420101,
+        0.6282283512386052
+      ]
+    },
+    "source_optimizer_updates": 0,
+    "source_report_id": "sha256:583c422978612689ea5042fd30222e11f3d03d2b719b17fb414e50db681148d7",
+    "source_training_games": 256,
+    "status": "saved_training_health_results_independently_verified"
+  },
+  "automatic_follow_up": false,
+  "completed_public_recount": {
+    "path": "artifacts/native-policy-capacity/assessment-public-recount-v1/report.json",
+    "report_id": "sha256:1770f806fed9f6b26f647e61716c8ece5995b9360230b1810b1ad9363d96ad4b",
+    "sha256": "581e5b9d5270d4a5acdbef51da70ab2e8ea988f90c5661794ddb4fe254ef6bfd"
+  },
+  "date": "2026-11-25",
+  "estimated_owner_hours": [
+    14,
+    24
+  ],
+  "final_test_worlds_used": false,
+  "independent_learner_assessment": {
+    "path": "artifacts/native-learning-health/v1/assessment-v1/report.json",
+    "report_id": "sha256:14b9b8ca7875756b85ed3f83db1cc5678e9675b7cf2a7fa28d7876990296eb01",
+    "sha256": "333b54b93400a88a36cf510b4f7a8b975f0b8bbbe40a7e443551539e8aa43fc0"
+  },
+  "initial_states": {
+    "normalized": {
+      "2": {
+        "actor_steps": 0,
+        "frozen_reference_model_id": "sha256:db007c43b87ce9b1d2ce5fe8651e1ab5421faa081a84f8bcf8a90f397fd05f0a",
+        "hidden_units": 32,
+        "model_id": "sha256:700bc9c7a7137a9b6d8172d8187c2cc6fa5b7bfbbff882987fe607b44596108f",
+        "state_id": "sha256:c00e5fef73556316eda12a2b71f50ff0437e2c99d9202c0a2d52241749918dac",
+        "trainable_actor_parameters": 18676,
+        "value_steps": 12466
+      },
+      "3": {
+        "actor_steps": 0,
+        "frozen_reference_model_id": "sha256:667196477cd5c9bd6853d73d595d37e28157aea4fad1cfdd06bf4ec311cefe36",
+        "hidden_units": 32,
+        "model_id": "sha256:0502d3107cb4150d9ea7bf3c9e187d767daa6510699d40bd10838b4728e4b455",
+        "state_id": "sha256:758a6e21f4d85f191d951542712f504ec004ffa1152219c8b31f40a0c6b37b8d",
+        "trainable_actor_parameters": 18676,
+        "value_steps": 12697
+      }
+    },
+    "raw": {
+      "2": {
+        "actor_steps": 0,
+        "frozen_reference_model_id": "sha256:db007c43b87ce9b1d2ce5fe8651e1ab5421faa081a84f8bcf8a90f397fd05f0a",
+        "hidden_units": 32,
+        "model_id": "sha256:b6d42664b398ec7f1b09f6c4433078f15aa5a8ed80a2e5e94c4d3df57e2378dc",
+        "state_id": "sha256:e5b0dc06064a0a328ebb4464abebd8affdc9786a630a2bbc43111c5f7342fb22",
+        "trainable_actor_parameters": 18676,
+        "value_steps": 12466
+      },
+      "3": {
+        "actor_steps": 0,
+        "frozen_reference_model_id": "sha256:667196477cd5c9bd6853d73d595d37e28157aea4fad1cfdd06bf4ec311cefe36",
+        "hidden_units": 32,
+        "model_id": "sha256:7bad5db5f99029ff805f2a70a76218ea06b3a1fda1c82998bdb9333a3d2a5874",
+        "state_id": "sha256:f61a4fadb0aa8a4fd10bffdbe945d2adc26f02afc5425b57dc96d1691b5b8da8",
+        "trainable_actor_parameters": 18676,
+        "value_steps": 12697
+      }
+    }
+  },
+  "long_training_started": false,
+  "official_live_qualification_granted": false,
+  "optimizer_updates_on_originals": 0,
+  "owner_command": "bash scripts/compare-a8-hidden-normalization-v1.sh",
+  "owner_diagnostic": {
+    "path": "artifacts/native-learning-health/v1/full/report.json",
+    "report_id": "sha256:583c422978612689ea5042fd30222e11f3d03d2b719b17fb414e50db681148d7",
+    "sha256": "2dbc884874f315a47d0d0558e07d39f7ec22a594cf456aff5357467851438abe"
+  },
+  "owner_diagnostic_resources": {
+    "path": "artifacts/native-learning-health/v1/full/resources-1795641664102859000.json",
+    "report_id": "sha256:4e01820a168f9161e0a4066a0bb5830c4a2f91f1d10632bb4572f925762a973c",
+    "sha256": "01d19254e155207fa4e8035c239d7cfad84215847a12887cb8b34cd62fc12f00"
+  },
+  "owner_outer_wall_hours": 48,
+  "planned_development_games": 768,
+  "planned_training_games": 4096,
+  "preserved_clean_pause": {
+    "path": "artifacts/native-hidden-normalization/control-v1/stop-1795646223875428000.json",
+    "report_id": "sha256:c0de45adfcfbcf2b68578c10603dddb8de83f2380bb9b933b1527bbc56882165",
+    "sha256": "7009064dcad01795b019cd6464f63bf4e05a543bbd434a64fa44966c97762081"
+  },
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-hidden-normalization-v1.json",
+    "sha256": "c49ce456007ab8af6ffb747f390ec3c69ebf958fb6cfb9e43b4e2a616a0224ec"
+  },
+  "schema_version": "native-a8-hidden-normalization-evidence-v1",
+  "separate_console_log": "artifacts/native-hidden-normalization/short-resume-console.log",
+  "short_controls": {
+    "path": "artifacts/native-hidden-normalization/control-v1/report.json",
+    "report_id": "sha256:1f7bc48f6abce91a96aa10f55e6aad4917f158db3939fe5e90c75838fdc24e4e",
+    "sha256": "1fc3a25290ec7b8de5e9b9afd34443ce99f69ca3923f40e24eaa2bd88dd8d7be"
+  },
+  "short_resources": [
+    {
+      "path": "artifacts/native-hidden-normalization/control-v1/resources-1795646025755774000.json",
+      "report_id": "sha256:18c2c9b009358909b397e4fd54fee331a2649b36732ef67cd5d673f58996ebb2",
+      "sha256": "f0de8ebffd0bb68f4e42714a15023509489fcf65baf4f3c2fe01288f869fb1a6"
+    },
+    {
+      "path": "artifacts/native-hidden-normalization/control-v1/resources-1795646245780786000.json",
+      "report_id": "sha256:ffce64bca0911eca01aa5ca9e0b8d28c11afb2cee83539b9839e715e59bff822",
+      "sha256": "285b373777fa2de7c46e3ef89c5931a0a015b8291dd4d382fe7aca4dca07935d"
+    }
+  ],
+  "short_summary": {
+    "cohort_counts": {
+      "control-p2-normalized": {
+        "loss": 2
+      },
+      "control-p2-raw": {
+        "loss": 2
+      },
+      "control-p3-normalized": {
+        "loss": 2
+      },
+      "control-p3-raw": {
+        "loss": 2
+      },
+      "reload-control-p2-normalized": {
+        "loss": 1
+      },
+      "reload-control-p2-raw": {
+        "loss": 1
+      },
+      "reload-control-p3-normalized": {
+        "loss": 1
+      },
+      "reload-control-p3-raw": {
+        "loss": 1
+      }
+    },
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "initial_native_choices_verified": 751,
+    "initial_native_pairs_verified": 4,
+    "optimizer_updates_on_copies": 8,
+    "saved_input_checks": {
+      "fixture_choices_used_as_labels": false,
+      "gameplay_deliveries": 0,
+      "identical_initial_logits_and_critic": true,
+      "maximum_log_probability_error": 0.0,
+      "optimizer_updates": 0,
+      "paired_policy_comparisons": 228,
+      "plain_reference_comparison": {
+        "fixture_choices_used_as_labels": false,
+        "gameplay_deliveries": 0,
+        "maximum_log_probability_error": 0.0,
+        "optimizer_updates": 0,
+        "paired_policy_comparisons": 228,
+        "public_states": 114
+      },
+      "public_states": 114,
+      "seal_id": "sha256:7e026e40f952e5ac509db4e0ec92945498d1c9c4da142def1a575178e538d0c2"
+    },
+    "status": "normalization_collect_fit_reload_and_reference_equivalence_verified"
+  },
+  "status": "learner_assessed_matched_normalization_training_prepared"
+}

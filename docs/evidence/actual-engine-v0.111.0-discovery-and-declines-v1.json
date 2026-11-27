@@ -1,0 +1,116 @@
+{
+  "schema_version": "engine-discovery-and-declines-evidence-v1",
+  "recorded_date": "2026-10-13",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "fixed_scope": {
+    "version": "v0.111.0",
+    "commit": "41cef1ea",
+    "character": "Ironclad",
+    "ascension": 8,
+    "profile": "native_benchmark_full_v1",
+    "objective": "terminal_full_run_victory_under_versioned_whole_run_CPU_budget"
+  },
+  "repairs": {
+    "exact_tutorial_controls": "native map confirmation plus all standard singleplayer tutorial controls; highlighted merchant/end-turn actions stay separate",
+    "progress": "maximum reached and last supported progress plus raw observations; unsupported alive states are not losses",
+    "discovery": "bounded all-missing-field collection, verified exit/decline recovery only, serial independent seeds after verified reset, no clean/training credit for recovery",
+    "optional_choices": "shared native/shipped Skip/leave semantics and public deterministic ties; every legal action remains scoreable; no invented mandatory Skip"
+  },
+  "owner_failure": {
+    "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-a8-run-v1/summary.json",
+    "report_id": "sha256:c58cb15d57c44153ef5b163aaa4ccbaff9c4f67fa8fbf4d088ae42134a7d03e9",
+    "decisions": 73,
+    "historical_report_maximum_floor": 4,
+    "last_public_floor": 5,
+    "last_public_hp": 44,
+    "terminal": false,
+    "resource_wall_seconds": 130.735240625,
+    "evidence_preserved": true
+  },
+  "new_host": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-connector-standard-v13.json",
+    "config_id": "sha256:61010c82eaf865723344decf422c83f24d564d5a6d760e25f742a206ec7f83fd",
+    "build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-standard-build-v13.json",
+    "toolchain_report_id": "sha256:bbc884ab312bebf44e5fc7ce2beef69327e944833ea215e15c179c7f6cb2a7f7",
+    "final_shipped_validation": "pending; active owner Steam process blocks isolated launch",
+    "targeted_Host_tests": 16,
+    "build_report_id": "sha256:c262d28e59df98fe62c6de6aa6c235a4ff64d65f1cb4473ada9b9c7cbcc08dab",
+    "fresh_builds": 2,
+    "build_wall_seconds": 8.092478416045196,
+    "artifact_sha256": "1c5e2f1b568ad72005e4fc7737e3092fac815d29e8ab9d27b5882855825274b5"
+  },
+  "short_shipped_discovery": {
+    "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-run-smoke-001-v5/summary.json",
+    "report_id": "sha256:0a39616b465bd807bd74fe8aaf8f1b2bca8a3c6bb7f1991f704adf815e4c37b3",
+    "host_revision": "v12",
+    "decisions": 35,
+    "missing_fields_recorded": 2,
+    "reached_floor": 2,
+    "last_supported_floor": 2,
+    "hp": 54,
+    "terminal": false,
+    "recoveries": 0,
+    "resource_wall_seconds": 82.1705702500185,
+    "app_copies_created": 0,
+    "saved_verification_valid": true,
+    "fixed_app_reset_verified": true
+  },
+  "short_native_runs": [
+    {
+      "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-runs-v9/seed-001/summary.json",
+      "report_id": "sha256:c31449c4b843fd3032473319e10f5c999c757a8293fceb8e15dad29eb80b8f13",
+      "seed": "SP1RESH1FTA8D1AG001",
+      "status": "candidate_terminal",
+      "decisions": 86,
+      "maximum_floor": 6,
+      "victory": false,
+      "new_game_app_copies": 0
+    },
+    {
+      "report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-runs-v9/seed-002/summary.json",
+      "report_id": "sha256:64e3f792bcd9456c70f44095b16cabe7375df92e2fd73fc7c6d526012632e276",
+      "seed": "SP1RESH1FTA8D1AG002",
+      "status": "candidate_terminal",
+      "decisions": 75,
+      "maximum_floor": 5,
+      "victory": false,
+      "new_game_app_copies": 0
+    }
+  ],
+  "validation": {
+    "repository_tests": 1251,
+    "formatting_types_protocol": "passed",
+    "new_current_Node_controls": 37,
+    "recovery_evidence": "synthetic complete current-control continuation/negative tests only; no natural recovered game claim",
+    "saved_original_owner_and_short_shipped_results": "audited without games"
+  },
+  "owner_stage": {
+    "command": "bash scripts/discover-natural-a8-runs-v1.sh",
+    "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-discovery-v1.json",
+    "planned_cases": 2,
+    "workers": 1,
+    "expected_minutes": {
+      "per_case": [
+        5,
+        10
+      ],
+      "total": [
+        10,
+        20
+      ]
+    },
+    "game_cap_seconds": 900,
+    "batch_cap_seconds": 1920,
+    "CPU_cap_seconds": 3600,
+    "memory_cap_bytes": 8000000000,
+    "tracked_storage_cap_bytes": 4000000000,
+    "not_launched": true,
+    "preflight": "recipe identities, toolchain and idle fixed app verified; full launch preflight awaits owner game closure"
+  },
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "bulk_learning_admitted": false,
+  "adaptive_controller_allowed": false,
+  "claim_scope": "implemented_bounded_diagnostic_interfaces_and_short_controls_only_not_full_run_admission_or_model_strength",
+  "evidence_id": "sha256:3e7c619a8144c26a595039295a05b38831467e962aa6f6c2180ecd32abca64e3"
+}

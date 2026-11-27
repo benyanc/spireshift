@@ -1,0 +1,281 @@
+{
+  "archive_bank_id": "sha256:3d277b095ec3f871ef8aacc0f81cee6164901b9eeb8864fb30e20be1049300b4",
+  "comparison": {
+    "path": "artifacts/native-a8-archive-fitting/study-v1/report.json",
+    "report_id": "sha256:c86437fa230fa19d8c0e6fab8f357163b31e929f40c8f06cfbf4ad799ec22f35",
+    "sha256": "18d1537e59765f26fc669ac68a6f349b5d6b95712cf9c39834f386a015a3f336"
+  },
+  "development": {
+    "by_initializer": {
+      "2": {
+        "arms": {
+          "fitted": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 12,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 12,
+        "terminal_pairs": 12
+      },
+      "3": {
+        "arms": {
+          "fitted": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 12,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 12,
+        "terminal_pairs": 12
+      }
+    },
+    "pooled_fitted_minus_original_win_rate_bounds": [
+      0.0,
+      0.0
+    ],
+    "seed_clustered_bootstrap_95": {
+      "intervals": {
+        "player_2_wins": [
+          0.0,
+          0.0
+        ],
+        "player_3_wins": [
+          0.0,
+          0.0
+        ],
+        "pooled_completed_acts": [
+          0.0,
+          0.0
+        ],
+        "pooled_wins": [
+          0.0,
+          0.0
+        ]
+      },
+      "resamples": 10000,
+      "scope": "descriptive_for_these_worlds_and_two_fixed_initializers",
+      "seed": 20261020
+    },
+    "verified_act1_clears": {
+      "2": {
+        "fitted": 0,
+        "original": 0
+      },
+      "3": {
+        "fitted": 0,
+        "original": 0
+      }
+    }
+  },
+  "diagnostics": {
+    "2": {
+      "arms": {
+        "fitted": {
+          "act1_boss_reaches": 0,
+          "combat_choice_counts": {
+            "end_turn_with_card_play_offered": 16,
+            "play_or_end_turn_offered": 677,
+            "potion_use_offered": 386,
+            "selected_end_turn": 221,
+            "selected_play": 657,
+            "selected_use": 9
+          },
+          "losses_by_owner": {
+            "elite": 6,
+            "normal": 6
+          },
+          "mean_maximum_floor": 7.833333333333333,
+          "native_decisions_by_owner": {
+            "card_bundle_selection": 2,
+            "card_reward_selection": 44,
+            "card_selection": 21,
+            "combat_turn": 887,
+            "event_option": 61,
+            "map_navigation": 84,
+            "native_generated_card_choice": 3,
+            "rest_site": 8,
+            "reward_claim": 150,
+            "shop_inventory": 3,
+            "shop_room": 8,
+            "treasure_room": 8
+          }
+        },
+        "original": {
+          "act1_boss_reaches": 0,
+          "combat_choice_counts": {
+            "end_turn_with_card_play_offered": 0,
+            "play_or_end_turn_offered": 823,
+            "potion_use_offered": 36,
+            "selected_activate": 3,
+            "selected_end_turn": 234,
+            "selected_play": 822,
+            "selected_use": 7
+          },
+          "losses_by_owner": {
+            "elite": 2,
+            "normal": 10
+          },
+          "mean_maximum_floor": 8.916666666666666,
+          "native_decisions_by_owner": {
+            "card_bundle_selection": 3,
+            "card_reward_selection": 90,
+            "card_selection": 21,
+            "combat_turn": 1066,
+            "event_option": 54,
+            "map_navigation": 95,
+            "native_generated_card_choice": 2,
+            "rest_site": 10,
+            "reward_claim": 211,
+            "shop_inventory": 284,
+            "shop_room": 276,
+            "treasure_room": 13
+          }
+        }
+      },
+      "first_changed_action_by_owner": {
+        "combat_turn": 6,
+        "event_option": 3,
+        "map_navigation": 1,
+        "reward_claim": 2
+      },
+      "fitted_floor_comparison": {
+        "ahead": 2,
+        "behind": 6,
+        "tied": 4
+      }
+    },
+    "3": {
+      "arms": {
+        "fitted": {
+          "act1_boss_reaches": 1,
+          "combat_choice_counts": {
+            "end_turn_with_card_play_offered": 17,
+            "play_or_end_turn_offered": 786,
+            "potion_use_offered": 474,
+            "selected_end_turn": 241,
+            "selected_play": 760,
+            "selected_use": 22
+          },
+          "losses_by_owner": {
+            "boss": 1,
+            "elite": 6,
+            "normal": 5
+          },
+          "mean_maximum_floor": 9.583333333333334,
+          "native_decisions_by_owner": {
+            "card_bundle_selection": 2,
+            "card_reward_selection": 54,
+            "card_selection": 27,
+            "combat_turn": 1023,
+            "event_option": 65,
+            "map_navigation": 103,
+            "native_generated_card_choice": 2,
+            "rest_site": 25,
+            "reward_claim": 190,
+            "shop_inventory": 6,
+            "shop_room": 10,
+            "treasure_room": 17
+          }
+        },
+        "original": {
+          "act1_boss_reaches": 1,
+          "combat_choice_counts": {
+            "end_turn_with_card_play_offered": 3,
+            "play_or_end_turn_offered": 1049,
+            "potion_use_offered": 51,
+            "selected_end_turn": 308,
+            "selected_play": 1042,
+            "selected_use": 11
+          },
+          "losses_by_owner": {
+            "boss": 1,
+            "elite": 5,
+            "normal": 6
+          },
+          "mean_maximum_floor": 9.75,
+          "native_decisions_by_owner": {
+            "card_bundle_selection": 1,
+            "card_reward_selection": 50,
+            "card_selection": 17,
+            "combat_turn": 1361,
+            "event_option": 77,
+            "map_navigation": 105,
+            "native_generated_card_choice": 2,
+            "rest_site": 14,
+            "reward_claim": 191,
+            "shop_inventory": 25,
+            "shop_room": 23,
+            "treasure_room": 19
+          }
+        }
+      },
+      "first_changed_action_by_owner": {
+        "card_reward_selection": 1,
+        "card_selection": 1,
+        "combat_turn": 4,
+        "event_option": 5,
+        "map_navigation": 1
+      },
+      "fitted_floor_comparison": {
+        "ahead": 4,
+        "behind": 3,
+        "tied": 5
+      }
+    }
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "games_verified": 48,
+  "local_answer_factors": 0,
+  "native_deliveries_reconstructed": 6813,
+  "optimizer_updates": 0,
+  "report_id": "sha256:3e46e028016e51db1473129029c00cd5082178ab8f091937156552126a9bc3ae",
+  "resources": {
+    "path": "artifacts/native-a8-archive-fitting/study-v1-resources.json",
+    "report_id": "sha256:be44642d2824ea480df6dc33bf2c414a0a1988eea0222c46edafbf6cea58a14b",
+    "sha256": "f39be2e7a485f770a1179eb5fb5a511d4926e1e36ed5a1223438c3ffa97d6276"
+  },
+  "schema_version": "native-a8-archive-copy-fit-audit-v1",
+  "sealed_files_verified": 2934
+}

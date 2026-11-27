@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "encounter": "elite",
+      "enemy": "TERROR_EEL",
+      "floor": 8,
+      "input_digest": "af2915a600589a7222766aacb88258c6fe17938d6413cfb7dd6353c7d3d64243",
+      "key": "terror-eel",
+      "line": 261,
+      "seed": "SP1RESH1FTA8BR006",
+      "world": "boss-v2-006"
+    },
+    {
+      "encounter": "boss",
+      "enemy": "WATERFALL_GIANT",
+      "floor": 17,
+      "input_digest": "e8d8cd6e40a0d099882e23f544e419d59e64b1054079dc9fe05633ffc3a4db2c",
+      "key": "waterfall-giant-round-3",
+      "line": 515,
+      "seed": "SP1RESH1FTA8BR003",
+      "world": "boss-v2-003"
+    },
+    {
+      "encounter": "boss",
+      "enemy": "WATERFALL_GIANT",
+      "floor": 17,
+      "input_digest": "660571a8f3560d152ac07a69373a9b68c0d6de80f761b71e5fcbb9b7dfbc9774",
+      "key": "waterfall-giant-round-2",
+      "line": 511,
+      "seed": "SP1RESH1FTA8BR003",
+      "world": "boss-v2-003"
+    }
+  ],
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/check-act1-combat-branches-v1.sh": "c68996d63f7c9f3c221d2acff164efc61e36cf9c01e425b9c7eded5a6e1bbb0a",
+    "src/spireshift/native_a8_combat_branch_policy.py": "9826891660259e96c58a0fce3a0f157b07e3a3415b913d3e8b2dc0e92e965c12",
+    "src/spireshift/native_a8_combat_branches.py": "c96b62b9e06c7546d5724b53beb6932ac3b13c571994093de9f8a6cd85c82c03"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "resource_report": "artifacts/resources/a8-act1-combat-branches-v1.json",
+  "saved_result": {
+    "path": "docs/evidence/native-a8-act1-boss-v2-result-v1.json",
+    "sha256": "beaef5e9197102027e65e1850fd5c98211f4c15a3b767c059e551cad269d1cc9"
+  },
+  "schema_version": "native-a8-act1-combat-branches-v1",
+  "workspace": "artifacts/native-a8-act1-boss/branches-v1"
+}

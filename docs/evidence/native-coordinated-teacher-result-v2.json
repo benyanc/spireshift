@@ -1,0 +1,503 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": {
+    "all_cells_and_paired_comparisons_reproduced": true,
+    "all_original_attempt_denominators_preserved": true,
+    "complete_main_result_verified": true,
+    "confirmation_replays_reconstructed": 48,
+    "driver": {
+      "path": "artifacts/native-coordinated/main-assessment-v2/run.py",
+      "sha256": "14bcc9c205b8f0d293ddd5521289e05da87f80c3b8c5af1edc1250216092a08b"
+    },
+    "id": "sha256:27cd790938385f296cffb5bee77f07f7dada1f43278fc59b39e1eebb6fddae06",
+    "independent_probability_and_journal_reaudit_scope": "all_references_and_confirmations",
+    "native_attempts_launched": 0,
+    "native_journals_independently_reaudited": 64,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-coordinated/main-assessment-v2/report.json",
+    "probability_distributions_and_actions_reconstructed": 1175,
+    "proposal_paths": 469,
+    "receipts_reconstructed": 576,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 91.968456365,
+      "final_storage_bytes": 11147,
+      "id": "sha256:cf324bc00bf6d2048857c3d49ac026a4937a5d856d08b50cc6075285aa5ca23f",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-main-assessment-v2.json",
+      "peak_resident_memory_bytes": 424919040,
+      "status": "completed",
+      "wall_seconds": 171.85476604197174
+    },
+    "same_greedy_late_suffix_verified": true,
+    "source_files_verified": 105961,
+    "valid": true
+  },
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "collection": {
+    "candidate_paths": 469,
+    "capped_branches": 0,
+    "comparison": {
+      "equal_candidate_slots_not_equal_CPU": true,
+      "independent_unit": "native_world_not_branch_or_entry",
+      "local_outcomes_are_full_run_utility": false,
+      "paired_worlds": [
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": -6.0,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": -6.0,
+            "fight_win": 0
+          },
+          "partition": "fit",
+          "player": 2,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM148"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": 7.0,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": 5.0,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "partition": "fit",
+          "player": 2,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": 2.0,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM192"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "partition": "fit",
+          "player": 3,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM202"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "partition": "fit",
+          "player": 3,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM164"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": 9.0,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": -4.0,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": -13.0,
+            "fight_win": 0
+          },
+          "partition": "heldout",
+          "player": 2,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM247"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "partition": "heldout",
+          "player": 2,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": null,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM232"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "partition": "heldout",
+          "player": 3,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM175"
+        },
+        {
+          "coordinated_early_minus_later": {
+            "HP_difference_if_both_win": -13.0,
+            "fight_win": 0
+          },
+          "early_coordinated_minus_single": {
+            "HP_difference_if_both_win": 0.0,
+            "fight_win": 0
+          },
+          "later_coordinated_minus_single": {
+            "HP_difference_if_both_win": -2.0,
+            "fight_win": 0
+          },
+          "partition": "heldout",
+          "player": 3,
+          "single_change_early_minus_later": {
+            "HP_difference_if_both_win": -15.0,
+            "fight_win": 0
+          },
+          "world": "SP1RESH1FTEXPM188"
+        }
+      ],
+      "panels": {
+        "fit/early/coordinated": {
+          "HP_gain_sum_on_verified_both_win": 17.0,
+          "candidate_paths": 64,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 2,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "fit/early/single_change": {
+          "HP_gain_sum_on_verified_both_win": 12.0,
+          "candidate_paths": 54,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 2,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "fit/later/coordinated": {
+          "HP_gain_sum_on_verified_both_win": 10.0,
+          "candidate_paths": 64,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 2,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "fit/later/single_change": {
+          "HP_gain_sum_on_verified_both_win": 10.0,
+          "candidate_paths": 45,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 2,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "heldout/early/coordinated": {
+          "HP_gain_sum_on_verified_both_win": 9.0,
+          "candidate_paths": 64,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 3,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "heldout/early/single_change": {
+          "HP_gain_sum_on_verified_both_win": 13.0,
+          "candidate_paths": 62,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 3,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "heldout/later/coordinated": {
+          "HP_gain_sum_on_verified_both_win": 13.0,
+          "candidate_paths": 60,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 3,
+          "strictly_improved_worlds": 2,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        },
+        "heldout/later/single_change": {
+          "HP_gain_sum_on_verified_both_win": 28.0,
+          "candidate_paths": 56,
+          "recorded_worlds": 4,
+          "rescued_worlds": 1,
+          "selected_fight_wins": 3,
+          "strictly_improved_worlds": 3,
+          "verified_worlds": 4,
+          "world_denominator": 4
+        }
+      }
+    },
+    "completed_units": 576,
+    "config_id": "sha256:93f539e37b169f332b7c076f0e24fd58741eacf2025e7600a92853a355b2499c",
+    "confirmation_paths": 48,
+    "control_checks": {
+      "all_cells_verified": true,
+      "both_parents_execute_joint_edits": true,
+      "cross_round_edits_exercised": true,
+      "three_edits_exercised": true
+    },
+    "control_checks_passed": false,
+    "control_checks_passed_false_is_main_stage_semantics": true,
+    "failed_branches": 0,
+    "id": "sha256:1b9adc8a9551d32728f8901c710bf59e1cb8060e884b23f7e030751a537794b7",
+    "native_attempts": 533,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-comparison-v2/report.json",
+    "planned_worlds": 8,
+    "preliminary_signal": {
+      "automatic_student_training_allowed": false,
+      "heldout_used_for_fitting": false,
+      "improved_fitting_worlds": 2,
+      "short_winning_plans_excluded": false
+    },
+    "reference_paths": 16,
+    "unavailable_proposals": 43,
+    "unit_loop_seconds_last_session_only": 239.09517216705717
+  },
+  "collection_resources": [
+    {
+      "cap": null,
+      "cpu_seconds": 520.3721006229997,
+      "final_storage_bytes": 386093720,
+      "id": "sha256:3bec118245d1d3ef4246b9a53c3b11d73e0dddff8f896dfcc3acdc20891f36ec",
+      "limits": {
+        "cpu_seconds": 1800.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 900.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-comparison-v2-1.json",
+      "peak_resident_memory_bytes": 503463936,
+      "status": "completed",
+      "wall_seconds": 756.4053257908672
+    },
+    {
+      "cap": null,
+      "cpu_seconds": 555.928889211,
+      "final_storage_bytes": 844499325,
+      "id": "sha256:a87c43c9da212654685ea4819198ad20f65f30e21e4296258f4ea2943d2aae39",
+      "limits": {
+        "cpu_seconds": 1800.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 900.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-comparison-v2-2.json",
+      "peak_resident_memory_bytes": 643661824,
+      "status": "completed",
+      "wall_seconds": 759.2386597499717
+    },
+    {
+      "cap": null,
+      "cpu_seconds": 617.886867194999,
+      "final_storage_bytes": 1245386081,
+      "id": "sha256:e5331639ce9233410d40d1d0160b5988d4b2ccc288242d602da417dc17fe15c8",
+      "limits": {
+        "cpu_seconds": 1800.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 900.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-comparison-v2-3.json",
+      "peak_resident_memory_bytes": 603013120,
+      "status": "completed",
+      "wall_seconds": 763.8180260830559
+    },
+    {
+      "cap": null,
+      "cpu_seconds": 253.60792650599987,
+      "final_storage_bytes": 1425305454,
+      "id": "sha256:60af99731766be64a2c1d038af2f32170c97bcb957e2f61b5baa9ce024566809",
+      "limits": {
+        "cpu_seconds": 1800.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 900.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-comparison-v2-4.json",
+      "peak_resident_memory_bytes": 542015488,
+      "status": "completed",
+      "wall_seconds": 361.45988679211587
+    }
+  ],
+  "cumulative_storage_summed": false,
+  "evidence_id": "sha256:5cc564526c07679e3844efc63745c10f3001a86f8855bf175f730e4055169f9f",
+  "final_cumulative_storage_bytes": 1425305454,
+  "full_run_attempts": 0,
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "limitations": [
+    "Only eight local worlds and two fixed initializers; branches and early/later entries are dependent.",
+    "Both useful fitting worlds originate from player 2; player 3 has no improved fitting world in this bank.",
+    "Reserved teacher worlds are not fresh complete-run player evaluations.",
+    "Equal candidate slots do not imply equal CPU; coordinated search explores four initial alternatives versus up to sixteen single changes.",
+    "Selected local outcomes do not estimate complete-run utility or qualify a deployment planner under the whole-run budget.",
+    "No student has learned these lessons; no full-game gain is established.",
+    "Only references and confirmations receive independent repeated journal/probability audit here; other candidate native audits remain sealed."
+  ],
+  "next_work": {
+    "automatic_training": false,
+    "collection_rerun_allowed": false,
+    "combined_teacher_selection_scope": "fitting_only_best_verified_plan_from_both_methods",
+    "comparators": [
+      "teacher_clone",
+      "reference_clone",
+      "untouched_original"
+    ],
+    "fitting_worlds_available": 2,
+    "fitting_worlds_by_parent": {
+      "2": 2,
+      "3": 0
+    },
+    "freeze_finals_before_fresh_full_game_evaluation": true,
+    "heldout_used_for_fitting": false,
+    "historical_natural_v1_curriculum_unstarted": true,
+    "original_weights_and_Adam_preserved": true,
+    "stage": "declare_small_student_transfer_test"
+  },
+  "ordinary_PPO_eligible": false,
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "original_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "peak_resident_memory_bytes": 643661824,
+  "privileged_fixed_world_teacher": true,
+  "repository_verification": {
+    "csharp_protocol_build_passed": true,
+    "format_passed": true,
+    "lint_passed": true,
+    "qualified_implementation_and_recipes_unchanged": true,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 125.55577215200005,
+      "final_storage_bytes": 0,
+      "id": "sha256:8f0fdef068ca952a5345579d652c6e09e787d6b8f003d765891b3077b24487ae",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-main-result-check-v2.json",
+      "peak_resident_memory_bytes": 362987520,
+      "status": "completed",
+      "wall_seconds": 137.76185237499885
+    },
+    "strict_type_source_files": 537,
+    "tests_passed": 2471,
+    "tests_skipped": 5
+  },
+  "schema_version": "native-coordinated-teacher-result-v2",
+  "status": "complete_two_useful_fitting_worlds_no_coordinated_advantage",
+  "student_inputs_public_only": true,
+  "student_optimizer_steps": 0,
+  "total_cpu_seconds": 1947.7957835349985,
+  "total_wall_seconds": 2640.9218984160107,
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}

@@ -1,0 +1,90 @@
+{
+  "case_inventory_id": "sha256:48589f60b8ab128e062edacf69e48471a21f1a80121349bf0bb7875ad1b1568f",
+  "control_resource": "artifacts/native-a8-practice-mix/control-v2-resources.json",
+  "control_workspace": "artifacts/native-a8-practice-mix/control-v2",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "feedback_assessment": {
+    "path": "artifacts/native-a8-combat-feedback/owner-assessment-v1/report.json",
+    "sha256": "5bb5e026206cb3d1d924a0ef7ea0176107b7bd5f9a515d46ca8a51514fc6c607"
+  },
+  "first_control": {
+    "path": "artifacts/native-a8-practice-mix/control-v1/report.json",
+    "sha256": "a9ba96e9185bf34ddf920096783d411ebb2fc8022e11047981c92bc81d9070a9"
+  },
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/collect-a8-practice-mix-v1.sh": "24320bd5bd2324bd50d1a1fde450eb23026a6774bdfb417659e12c51c354e9ed",
+    "scripts/engine-a8-practice-worker-v1.mjs": "db21d2bfe5a25fd5b8434ae51499688359a1228f8bbb5078ab3316a2f23d77e2",
+    "scripts/engine-abandon-confirmation-surface-v1.mjs": "0e790bfd6f17863fd4f8cfaf8db6e78a1b276aff8703d5686fd2acc2fd19a67b",
+    "scripts/engine-atomic-selection-v1.mjs": "5121eda9ac515aac71466d0359db8299d25c1c8be3f0798469a4622bbd0a6c52",
+    "scripts/engine-atomic-selection-v6.mjs": "c3217a465a6024421253c3ad9dfcbbd5fa293d51be18b8154aad5016b309b748",
+    "scripts/engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "scripts/engine-chest-contract-v1.mjs": "182b11336203eaa70977d7ebe9e1c4c5199ec3f6bb15dd6b4174acbe950ce0eb",
+    "scripts/engine-chest-surface-v1.mjs": "dd39708d2070d9711361696a98919d71accb69fa8e385f1bab2d4ca513cd0d45",
+    "scripts/engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "scripts/engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "scripts/engine-combat-surface-v5.mjs": "67eee376ebae9ddfccc7823a375500cd33ed9eb8bd28c3fdbeca1adafb1de0ab",
+    "scripts/engine-combat-surface-v6.mjs": "0278228521d553b041b7b6f09ce21a86e2a27f21e3a2edf388c81b3febb2496c",
+    "scripts/engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "scripts/engine-generated-choice-belt-surface-v1.mjs": "af058abe30f59f74ae0a5d131460d34afbd2dae3c8335cde4ce5830cf9a9ef45",
+    "scripts/engine-interface-contract-v2.mjs": "d4ca629e16bf73e6ea2969f3fc64898d7c3cd81111c60345b028e445413c279e",
+    "scripts/engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "scripts/engine-native-ending-v1.mjs": "a8cdbb6753375652394d2277b9817091c893adc02229f9f697043e953f5e94d9",
+    "scripts/engine-native-runtime-errors-v1.mjs": "c46fd3adb346004c46d5b5126348a9b7f99780d844c5d23409b4b22444d25e60",
+    "scripts/engine-native-worker-v24.mjs": "876ee2a49d9f51e1925f6fc535d4312f57dce13d88a15b92b762b954f32f4bc8",
+    "scripts/engine-ordered-plan-surface-v1.mjs": "725753ffd89c28e3a79819697484a16c800b15ee2cdbee37efba8dc2eaf49f90",
+    "scripts/engine-ordered-plan-v1.mjs": "0fb1892a72de324756fd41dd77920931133fe9c94864fd596300d7984646f336",
+    "scripts/engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "scripts/engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "scripts/engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "scripts/engine-relic-surface-v1.mjs": "8d13cb14033cea7c4a5a280ccee5c16f931e5de3ee5b76433b222d2f7774d9e6",
+    "scripts/engine-relic-surface-v2.mjs": "aebb9874b61d459004dbb0b90869d2d5a3f590c2eb890c4101ea5cdde0393fb8",
+    "scripts/engine-relic-surface-v3.mjs": "435a84f4c01d1b46794a689360d7fd9915e27d3bd0520d563bdbaf3e09d4dd53",
+    "scripts/engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "scripts/engine-reward-belt-surface-v1.mjs": "2c30d879cf6fdc19490dde285059f3d8c0da3ec2aecc5142be6f5a0379808f0d",
+    "scripts/engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "scripts/engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "scripts/engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "scripts/engine-run-contract-v7.mjs": "d36dc7a1546270fd1ff2854948639e3c3a36938fc19395b3ef7427665149000d",
+    "scripts/engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "scripts/engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "scripts/engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "scripts/engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "scripts/engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "scripts/engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "scripts/engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "scripts/engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "scripts/engine-selection-flows-v9.mjs": "bd584228bddec0bb3e49b0b61de9d8e6c4619d57e13a380cbcc7cae88ed7b688",
+    "scripts/engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "scripts/engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "scripts/engine-shared-input-v1.mjs": "242c415b74d1054ccd79ef27ae8a7465bf2fb15801ab3f3c3de4d869618088b3",
+    "scripts/engine-win-curriculum-save-v1.mjs": "5586fa7a2e5c430c28ed9b81b31624c7c041386fe672469fca52fab7d8ecbf70",
+    "scripts/engine-win-curriculum-worker-v4.mjs": "485f4c0be22cb1391c6305bd073a201cf0af1a4cde5c8a298ff034974e3a2489",
+    "src/spireshift/native_a8_practice_goal.py": "a062737af10f4dcf638dd592d7cdebdcd1c7ddbd033938c0da7f47605342f298",
+    "src/spireshift/native_a8_practice_session.py": "aacd3d61b5e33984e6703a7ce2e9abac1012767d4f278aeb24862a6a325c85c0"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "schema_version": "native-a8-model-owned-practice-v1",
+  "template_source": {
+    "path": "artifacts/native-win-curriculum/study-v7/config-at-launch.json",
+    "sha256": "4d17451465545c7bb94492d21b8c8e2eb4ca955303c0b31e9fb0bf09ce3b0fd8"
+  },
+  "workspace": "artifacts/native-a8-practice-mix/collection-v1"
+}

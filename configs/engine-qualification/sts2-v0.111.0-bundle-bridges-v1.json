@@ -1,0 +1,52 @@
+{
+  "schema_version": "engine-bundle-bridges-config-v1",
+  "stage": "owner_repeated_natural_bundle_differentials_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "template": "configs/engine-qualification/sts2-v0.111.0-bundle-bridge-template-v12-v5.json",
+  "template_id": "sha256:3d707dd69aee573805a5d17ba75a580dbe722b3f51f04fef5df22e6115d2d75e",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/bundle-bridges-v1",
+  "max_wall_seconds": 900,
+  "training_allowed": false,
+  "cases": [
+    {
+      "case_id": "seed-03-pack-1-repeat-01",
+      "seed": "SPIRESHIFTBUNDLE003",
+      "index": 0
+    },
+    {
+      "case_id": "seed-03-pack-1-repeat-02",
+      "seed": "SPIRESHIFTBUNDLE003",
+      "index": 0
+    },
+    {
+      "case_id": "seed-03-pack-2-repeat-01",
+      "seed": "SPIRESHIFTBUNDLE003",
+      "index": 1
+    },
+    {
+      "case_id": "seed-03-pack-2-repeat-02",
+      "seed": "SPIRESHIFTBUNDLE003",
+      "index": 1
+    },
+    {
+      "case_id": "seed-21-pack-1-repeat-01",
+      "seed": "SPIRESHIFTBUNDLE021",
+      "index": 0
+    },
+    {
+      "case_id": "seed-21-pack-1-repeat-02",
+      "seed": "SPIRESHIFTBUNDLE021",
+      "index": 0
+    },
+    {
+      "case_id": "seed-21-pack-2-repeat-01",
+      "seed": "SPIRESHIFTBUNDLE021",
+      "index": 1
+    },
+    {
+      "case_id": "seed-21-pack-2-repeat-02",
+      "seed": "SPIRESHIFTBUNDLE021",
+      "index": 1
+    }
+  ]
+}

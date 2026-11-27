@@ -1,0 +1,256 @@
+{
+  "build": {
+    "candidate_lineage": "spireshift_cli_bundle_choice_v12_local_toolchain",
+    "config_id": "sha256:246c6a90693a6fab6a04b64783f86c5f94e81a3fe815f5ba924e82e82478514c",
+    "local_patch": "patches/engine/sts2-cli-v0.111.0-bundle-choice-v12.patch",
+    "local_patch_sha256": "0c63b097c2fb6ea639e6e5226a1f2bb3023564966d6502b58d0a8637e59bb836",
+    "pins": {
+      "artifact_mvid": "2bad381e-9e16-4644-b249-1d6028b3767c",
+      "artifact_sha256": "befe8b1242e941e19f05ffe286fa4fdef76ef0e9022aea060f02fd40d9f5aae0",
+      "godot_stub_sha256": "4cbc15bd3058ab2104c4c7b9764aa2e4e72dd6b823ed1f031feba068d5bdb4b1",
+      "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+      "runtime_dependencies_id": "4539331c8760d932eaa8fb159fe9224100b6c8eef9c05dfd27c524591ef9d145",
+      "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+      "source_diff_id": "eafe63eb0753abeb8fc31a014262ffb0b535407d4aef01138c33fac6cb348272"
+    },
+    "process": {
+      "returncode": 0,
+      "timed_out": false,
+      "wall_seconds": 15.90190233301837
+    },
+    "report_id": "sha256:dc26bf6a521ae0afa82f99e0c31c209254d8cebfa2e23802d9e30b4bb4284b69",
+    "stored_official_game_bytes_preserved": true,
+    "two_fresh_baselines_two_fresh_repaired_outputs_match": true
+  },
+  "claim_scope": "bounded_bundle_control_native_repair_and_single_shipped_prototype_not_training_admission_or_player_strength",
+  "date": "2026-10-11",
+  "evidence_id": "sha256:05a6981d15da6b045a29aff4c783b85e6e76739bef18d5a41abc680e7ef28da1",
+  "full_run_attempts": 0,
+  "limits": [
+    "One shipped prototype is not the prepared repeated eight-case panel; that batch has not run.",
+    "Only visible pack identity/current cost/upgrade and persistent ownership are compared; general descriptions, effect statistics and all selectors remain unqualified.",
+    "Original game mode inventory/review v2 stays separately bound: 409 direct references unreviewed. No new v12 static inventory or semantic completeness claim.",
+    "Full Calling Bell/Cauldron pickup/curse/capacity/choices, profile/act-discovery contract, broader mechanics, later acts and actual endings precede throughput/neural integration."
+  ],
+  "mechanics_qualified": false,
+  "native_prior_panels": [
+    {
+      "native_starts": 12,
+      "panel": "combat",
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 3.2188732500071637
+      },
+      "report_id": "sha256:6004df4cef24018095c37723daf84a28c49a41e4bf2cffed74abcb813a591ba9",
+      "status": "combat_public_projection_regression_pass",
+      "subchecks": 370
+    },
+    {
+      "native_starts": 9,
+      "panel": "rest",
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 2.8589008749695495
+      },
+      "report_id": "sha256:802bdf895091ef21d859193ed99139c99724d491f71127f5919eb6caa2ba9378",
+      "status": "rest_public_projection_regression_pass",
+      "subchecks": 270
+    },
+    {
+      "native_starts": 7,
+      "panel": "shop",
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_seconds": 3.141767416964285
+      },
+      "report_id": "sha256:8f1af8ac82b0de879a8a96f64bb1e66bb07c67092e4dd53c355b7c0be732b675",
+      "status": "shop_public_projection_regression_pass",
+      "subchecks": 201
+    }
+  ],
+  "native_public_bundle_probe": {
+    "delivered_actions": 22,
+    "independent_seeds": 2,
+    "invalid_native_inputs": 64,
+    "native_run_bootstraps": 12,
+    "privileged_scenarios": true,
+    "process": {
+      "returncode": 0,
+      "timed_out": false,
+      "wall_seconds": 3.251853084017057
+    },
+    "report_id": "sha256:a6993802b575893ff2a8d980492e0f0efcf9f38c7ce7c9c81519d89846f15183",
+    "seed_pack_repeat_cases": 8,
+    "snapshots": 34,
+    "status": "bundle_public_projection_regression_pass"
+  },
+  "native_reward_generation_regression": {
+    "completed_cases": 8,
+    "native_fixture_starts": 24,
+    "report_id": "sha256:a1ff9d1cea469a1838de0be7e36c57b341c274225ca9bea03f963b4f2846f3e3",
+    "status": "native_original_method_differentials_pass",
+    "wall_seconds": 18.490717292006593
+  },
+  "native_synchronization_fixture": {
+    "candidate_inventory_unchanged": true,
+    "checker_sha256": "74bf2c0b7d785b9bb5df1663879ba115285a57a31b6ba99892fdcc670fac58bf",
+    "checker_sources": {
+      "Program.cs": "34138fd243f95a1075d26180805dc2bebefcd5f777ec7e357fc89db3e4bb5fc0",
+      "SpireShift.BundleSelectionCheck.csproj": "7f9a50f989f2d7fb712fbbfbb72568dee5fa7745b00a6288325a5a79d3492f33"
+    },
+    "claim_scope": "privileged_native_choice_callback_and_lifecycle_only_not_UI",
+    "independent_seeds": 2,
+    "native_starts": 4,
+    "report_id": "sha256:da5ebe20cc183a956e718d40782c1fbf7b4791c6774c7572f6caa4f4081cc930",
+    "shared_profile_unchanged": true,
+    "subchecks": 58
+  },
+  "next_owner_batch": {
+    "automatic_saved_only_verification": true,
+    "config": "configs/engine-qualification/sts2-v0.111.0-bundle-bridges-v1.json",
+    "config_id": "sha256:bd0247518357db99c31e3291404e01efdc6207b754aa7298c90cd611d362555d",
+    "expected_minutes": "6\u20138",
+    "independent_seeds": 2,
+    "max_wall_seconds": 900,
+    "planned_cases": 8,
+    "readonly_preflight_report_id": "sha256:4a5ff79d225197cbda8cb9f428961d737878d4708fe4ac73f0281a2a002f92df",
+    "script": "scripts/compare-bundle-actions-v1.sh",
+    "seed_pack_pairs": 4,
+    "started": false,
+    "template_id": "sha256:3d707dd69aee573805a5d17ba75a580dbe722b3f51f04fef5df22e6115d2d75e",
+    "training_allowed": false
+  },
+  "optimizer_steps": 0,
+  "preserved_failed_attempts": [
+    {
+      "reason": "Observed native card_bundle versus released Host bundle role normalization needed",
+      "report_id": "sha256:18d806acb3787f66e3c0b040eeac6c14b0a70c045b6ebbc1c1ea830fd3409f6d",
+      "status": "bundle_comparison_incomplete",
+      "version": 1
+    },
+    {
+      "reason": "Pre-copy 3.5-GB guard refused before shipped launch",
+      "report_id": "sha256:d740d7d3d321758b7426c5e4a5c98e705e7367c7ea64396bb4cbdb960e6d7205",
+      "status": "bundle_comparison_incomplete",
+      "version": 2
+    },
+    {
+      "reason": "Exact deck award checker misread JSON object key order; canonical multiset comparison repaired",
+      "report_id": "sha256:a044f62e1d4c8f9dbe5d19585ca94a9f8d62f433f839fdc480e7029c956323b4",
+      "status": "bundle_comparison_incomplete",
+      "version": 3
+    },
+    {
+      "reason": "Probe-only SDK binding value shape repaired in versioned helper v2",
+      "report_id": "sha256:5474e3ede514d91e7e82ed2c27545ba30e8a4d43d4527f87226f39b73034065c",
+      "status": "bundle_probe_incomplete",
+      "version": "native_probe_v1"
+    }
+  ],
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "raw_proprietary_material_committed": false,
+  "repair": {
+    "current_player_selection_and_pack_bound": true,
+    "invalid_stale_duplicate_choices_refused_without_fallback": true,
+    "native_choice_side_effects": [
+      "ReserveChoiceId before waiting",
+      "SyncLocalChoice and original LogChoice before task completion"
+    ],
+    "private_operands_excluded_from_public_snapshots": true,
+    "public_pack_identity_current_cost_upgrade_export": true,
+    "required_native_hook_original_async_IL_sha256": "384d15b1e2853a290a4d5c288bc6361ff860297fde63f803edc8f2bb59f56276",
+    "reset_abandonment_cancel_and_clear_pending_bindings": true
+  },
+  "saved_corruption_checks": {
+    "cases": [
+      {
+        "mutation": "wrong_action_receipt",
+        "refused": true,
+        "returncode": 1
+      },
+      {
+        "mutation": "duplicate_request",
+        "refused": true,
+        "returncode": 1
+      },
+      {
+        "mutation": "preview_other_runtime",
+        "refused": true,
+        "returncode": 1
+      },
+      {
+        "mutation": "wrong_award",
+        "refused": true,
+        "returncode": 1
+      },
+      {
+        "mutation": "different_source_snapshot",
+        "refused": true,
+        "returncode": 1
+      }
+    ],
+    "games_launched": 0,
+    "positive_saved_report_id": "sha256:af83147a5e74d6f14f620237954426de25781cf1b87cc8bf43708801aea815c4",
+    "report_id": "sha256:eec54dd248bf08f6cfdf76ceb6b954e260236f7327e2f8685679e077e3af0ac7",
+    "schema_version": "saved-bundle-verifier-negative-checks-v1",
+    "training_allowed": false,
+    "verifier_sha256": "95da6071fedc5ab470e7c8b5caab41e890fcfa0ff176ad72ce81a143a59c2504"
+  },
+  "saved_raw_verification": {
+    "claim_scope": "saved_raw_bundle_public_facts_preview_award_and_delivery_only",
+    "effect_decisions": 2,
+    "games_launched": 0,
+    "native_raw_snapshots_sha256": "8650627937cbd3de7786a4e2ebf79c63a2e415baca0a57c2c89a172933cb056b",
+    "native_report_id": "sha256:992b0fa38b1571e268fc602b1a200f1dc7f8d7692158a5432aa74949103398a7",
+    "observations": 3,
+    "preview_steps": 2,
+    "public_game_ui_actions": 5,
+    "report_id": "sha256:af83147a5e74d6f14f620237954426de25781cf1b87cc8bf43708801aea815c4",
+    "schema_version": "engine-bundle-saved-verification-v1",
+    "shipped_report_id": "sha256:d2a30ba75cd34aa96e21ed37a6ff8a0f52fcbdd3f90ed8d65da0618d79d99fc3",
+    "training_allowed": false,
+    "valid": true,
+    "verifier_sha256": "95da6071fedc5ab470e7c8b5caab41e890fcfa0ff176ad72ce81a143a59c2504"
+  },
+  "schema_version": "actual-engine-bundle-choice-evidence-v1",
+  "shipped_prototype": {
+    "effect_decisions": 2,
+    "index": 1,
+    "native_report_id": "sha256:992b0fa38b1571e268fc602b1a200f1dc7f8d7692158a5432aa74949103398a7",
+    "natural_exit_and_archive_integrity_pass": true,
+    "observations": 3,
+    "preview_steps": 2,
+    "public_game_ui_actions": 5,
+    "report_id": "sha256:d65aca1522c140902609aac2e5f6acb459e28239179db7960bd51714abed91de",
+    "scope": "one_natural_imported_Neow_Scroll_Boxes_second_pack_preview_cancel_reopen_confirm_and_exact_award_visible_identity_cost_upgrade_and_persistent_ownership_only",
+    "seed": "SPIRESHIFTBUNDLE003",
+    "shipped_process_seconds": 31.91494650003733,
+    "shipped_report_id": "sha256:d2a30ba75cd34aa96e21ed37a6ff8a0f52fcbdd3f90ed8d65da0618d79d99fc3",
+    "status": "bundle_action_comparison_pass",
+    "successful_disposable_payload_removed": true
+  },
+  "storage": {
+    "byte_identical_failed_pack_compaction_reports": [
+      "sha256:b2669c5104754033c0e5cb3c11bf3fbee8210220a0c070de03df1c4d81ea3359",
+      "sha256:cedec876a0dbab7699cd0e1c1ea7a050a45c330d4522fe55c045eb2dae853b0f"
+    ],
+    "full_inventory_verification_unchanged": true,
+    "hard_links_forbidden": true,
+    "independent_APFS_clones_for_large_disposable_assets_when_supported": true,
+    "ordinary_copy_fallback": true,
+    "pre_copy_free_space_guard_bytes": 3500000000
+  },
+  "training_allowed": false,
+  "validation": {
+    "focused_Node_tests_passed": 7,
+    "format_lint_strict_types_and_CSharp_protocol_pass": true,
+    "native_synchronization_checker_build_errors": 0,
+    "native_synchronization_checker_build_warnings": 0,
+    "repository_test_seconds": 46.03,
+    "repository_tests_passed": 1116,
+    "required_check_log": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/bundle-choice-v12-full-check-v3.log"
+  }
+}

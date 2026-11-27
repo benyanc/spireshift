@@ -1,0 +1,108 @@
+{
+  "schema_version": "native-a8-paired-finals-preflight-evidence-v1",
+  "status": "architect_persistence_verified_paired_development_ready",
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-paired-finals-v1.json",
+    "sha256": "8508981b789f9afdf538f225f5603ddb937017adb24ce9250f56eb2eee9cfe73",
+    "config_id": "sha256:20ba77171a8785f003ce5bb7f7ba609dd6affc024dde72cf48d0ad56b2511900"
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fitting_evidence_id": "sha256:dd579215a6a25bb74a4e1436c6ffe628d3332bced89268ff2a0ea52b7842157c",
+  "architect": {
+    "report": {
+      "path": "artifacts/native-a8-paired/architect-attempt-3/report.json",
+      "sha256": "f39b92c6c7c677763cce0d62fca943d49f9de6f84991fd8e7b3abaab00fc2f14",
+      "status": "architect_persistence_verified",
+      "report_id": "sha256:d3102c658bc6a6767638a9854a38643b697f6d0daa1893ab320b7c79cb880834"
+    },
+    "resource": {
+      "path": "artifacts/resources/native-a8-architect-attempt-3.json",
+      "sha256": "4be44f9e917c312734453f0b0b93552575e8d6b658226126976a2b7b82eebbd2",
+      "status": "completed",
+      "report_id": "sha256:8b10926b7cfe9e26202f482fe4c27332fa1a410b920189e7af6855deffa4530d"
+    },
+    "seed": "SP1RESH1FTARCH6003",
+    "native_ancient_events_verified": 3,
+    "explicit_victory": true,
+    "persisted_winning_histories": 1,
+    "profile_wins_before": 0,
+    "profile_wins_after": 1,
+    "force_defeated_bosses": 3,
+    "normal_start_evaluation_wins": 0,
+    "preliminary_attempts": [
+      {
+        "resource": {
+          "path": "artifacts/resources/native-a8-architect-attempt-1.json",
+          "sha256": "8933752adaf04630e72b8361a3f8d6cb1d83d9998372855a2890a2846083da85",
+          "status": "failed",
+          "report_id": "sha256:52aa1435133ba3644c470b9c252a01f7de4c6c7b3d9a5fb64d2d0f313ea79e92"
+        },
+        "stop": "preflight_offline_diagnostic_precision_disagreement",
+        "game_started": false
+      },
+      {
+        "resource": {
+          "path": "artifacts/resources/native-a8-architect-attempt-2.json",
+          "sha256": "70e89649d37d03a098fc41e31a587a9b46674ebed2bddeac8063d9c97865d840",
+          "status": "failed",
+          "report_id": "sha256:d0483b4b8a0219a8b4a3944bbf4d8ac81a1fabcfbc3c3dd30551c671c0c812d6"
+        },
+        "report": {
+          "path": "artifacts/native-a8-paired/architect-attempt-2/report.json",
+          "sha256": "fb452d767b6959b69ce532ebcc340ce10492e72f138d91cf06b08e2e24f34f0b",
+          "status": "architect_persistence_blocked",
+          "report_id": "sha256:e534b6ca30bcb0d5ffd89ccf0320afc3a5556b4dac1399dd60702e87f008388b"
+        },
+        "stop": "checker_used_old_presentation_field_before_first_boss",
+        "seed_reused": false
+      }
+    ]
+  },
+  "prefix_control": {
+    "report": {
+      "path": "artifacts/native-a8-paired/control-v1/report.json",
+      "sha256": "a2b8842fe5614f7daad5185f17dfe5fe315267a47ed35fa3e6f8c52393feb471",
+      "status": "four_frozen_normal_start_prefixes_verified",
+      "report_id": "sha256:ec3102621293b8fb129198f7c7526300bfa618cc04fe329d0ee89aeb2d9ec839"
+    },
+    "resource": {
+      "path": "artifacts/resources/native-a8-paired-prefix-control-v1.json",
+      "sha256": "0e7813c0a4ae1854882bbe74aaf5fabfa244944a8e492fddfaacdca154e1fd93",
+      "status": "completed",
+      "report_id": "sha256:7f9e274303a417568693a6449c0cda83b36eb9802ca57bc6cdfd2b523a84544a"
+    },
+    "world": "SP1RESH1FTA8PA1RC01",
+    "cells": 4,
+    "initial_public_input_id": "sha256:07c6d0362b05fd74862677d6868d0af7f520c0a97da309dc55b78039e0d100dc",
+    "native_deliveries_verified": 24
+  },
+  "paired_development_worlds": 12,
+  "planned_normal_start_games": 48,
+  "main_games_started": 0,
+  "optimizer_updates": 0,
+  "frozen_checks": {
+    "both_update_200_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "original_and_prior_final_weights_full_Adam_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "final_test_worlds_used": false,
+  "official_live_qualification_granted": false,
+  "promotion_allowed": false,
+  "exact_saved_launch_preflight": {
+    "path": "artifacts/resources/native-a8-paired-saved-preflight-v1.json",
+    "sha256": "fc5b5e778d933ff647705a2f6ef828819ee62c2b20140e21b75046e64e2c352d",
+    "report_id": "sha256:1382249c96e2cb2ec6891fa1364a85c9b6d4a0c2723529d051f84686e09bb061",
+    "status": "completed"
+  },
+  "repository_check": {
+    "path": "artifacts/resources/native-a8-paired-repository-check-v1.json",
+    "sha256": "eaf4cceeca93460a8ec3a3a27f930b4ed6bdc970aee9636ebfe12f28cfc87c00",
+    "report_id": "sha256:512940e40be88c0e864696630468ec42c4906716072ab8ad876428c05cc4c18f",
+    "status": "completed"
+  },
+  "repository_tests_passed": 2843,
+  "report_id": "sha256:4bdd36982489678fd77b097e3b413e68d27c49c5e3c83a5fb9ea056217c53630"
+}

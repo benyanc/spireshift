@@ -1,0 +1,56 @@
+{
+  "schema_version": "native-rest-exploration-seed-manifest-v1",
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "scope": "matched_training_seeds_with_separate_final_holdout",
+  "seeds": [
+    {
+      "id": 1600000,
+      "seed": "SP1RESH1FTRESTC2CONTROL0000",
+      "partition": "control",
+      "numerical_seed": 2
+    },
+    {
+      "id": 1600001,
+      "seed": "SP1RESH1FTRESTC2CONTROL0001",
+      "partition": "control",
+      "numerical_seed": 2
+    },
+    {
+      "id": 1600002,
+      "seed": "SP1RESH1FTRESTC2CONTROLEVAL0000",
+      "partition": "control_eval",
+      "numerical_seed": 2
+    },
+    {
+      "id": 1600003,
+      "seed": "SP1RESH1FTRESTC2CONTROLEVAL0001",
+      "partition": "control_eval",
+      "numerical_seed": 2
+    },
+    {
+      "id": 1600004,
+      "seed": "SP1RESH1FTRESTC3CONTROL0000",
+      "partition": "control",
+      "numerical_seed": 3
+    },
+    {
+      "id": 1600005,
+      "seed": "SP1RESH1FTRESTC3CONTROL0001",
+      "partition": "control",
+      "numerical_seed": 3
+    },
+    {
+      "id": 1600006,
+      "seed": "SP1RESH1FTRESTC3CONTROLEVAL0000",
+      "partition": "control_eval",
+      "numerical_seed": 3
+    },
+    {
+      "id": 1600007,
+      "seed": "SP1RESH1FTRESTC3CONTROLEVAL0001",
+      "partition": "control_eval",
+      "numerical_seed": 3
+    }
+  ],
+  "manifest_id": "sha256:374141a53406994d2aad083b2630f7aa212a434a97c1ef7ae04af1a52510f788"
+}

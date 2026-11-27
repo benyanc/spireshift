@@ -1,0 +1,763 @@
+{
+  "actor_optimizer_steps": 0,
+  "adaptive_controller_allowed": false,
+  "base_readiness_passed": false,
+  "cached_inspection": {
+    "games_launched": 0,
+    "optimizer_steps": 0,
+    "passed": true,
+    "report_id_unchanged": "sha256:267245dee243fac727a7350e01f56c8f30dadfe21bd1484f0f9222fa61b3ecdd",
+    "resource_report_id": "sha256:a562f535cf7dcd8f8c7b608539ca93260067a5e1deb674defd46fca38e2e960a"
+  },
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_TRAIN_finite_pool_gradient_checks_and_short_collector_control_not_learning_or_winning",
+  "cohorts": [
+    {
+      "arm": "unscaled",
+      "available_independent_games": 32,
+      "behavior_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449",
+      "curves": [
+        {
+          "data_agreement": {
+            "median": -0.02468970703701869,
+            "opposing_fraction": 0.53125,
+            "p10": -0.27039920050647437,
+            "p90": 0.22967011866844136,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9790395329736603,
+            "opposing_fraction": 0.0,
+            "p10": 0.9631867097785074,
+            "p90": 0.9866052662861884,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 4,
+          "total_agreement": {
+            "median": -0.020715766395955425,
+            "opposing_fraction": 0.53125,
+            "p10": -0.27578988368541485,
+            "p90": 0.22677754696093594,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": 0.07912306100279454,
+            "opposing_fraction": 0.375,
+            "p10": -0.16356080615669982,
+            "p90": 0.4024216621722466,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9882917522405033,
+            "opposing_fraction": 0.0,
+            "p10": 0.9853690320144292,
+            "p90": 0.9921151494300239,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 8,
+          "total_agreement": {
+            "median": 0.06519968776440832,
+            "opposing_fraction": 0.375,
+            "p10": -0.17408817542894506,
+            "p90": 0.396492463914673,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": 0.2003143579975668,
+            "opposing_fraction": 0.1875,
+            "p10": -0.07743937042711646,
+            "p90": 0.38153760850983304,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9944193749672741,
+            "opposing_fraction": 0.0,
+            "p10": 0.9929225894526765,
+            "p90": 0.9961930228881458,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 16,
+          "total_agreement": {
+            "median": 0.1819791279872146,
+            "opposing_fraction": 0.1875,
+            "p10": -0.09988172814840211,
+            "p90": 0.3658084448171645,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        }
+      ],
+      "full_pool": {
+        "baseline_fits_only_own_group": true,
+        "choice_bearing_decisions": 2333,
+        "contribution_cancellation_ratio": 0.24611876881539743,
+        "data_gradient_norm": 0.06373399729055813,
+        "data_vs_total_cosine": 0.9995447665041228,
+        "decisions": 3095,
+        "entropy_gradient_norm": 0.0022482199831766452,
+        "entropy_to_data_norm_ratio": 0.035275050659810216,
+        "independent_games": 32,
+        "largest_game_contribution_norm_share": 0.07044144014570515,
+        "normalization_fits_only_own_group": true,
+        "raw_advantage_mean": 0.00021908137217369444,
+        "raw_advantage_std": 0.003433170354485998
+      },
+      "maximum_measured_games_per_group": 16,
+      "production_reference": {
+        "maximum_absolute_actor_gradient_error": 1.4789872885417887e-16,
+        "optimizer_steps": 0,
+        "passed": true
+      },
+      "round": 1,
+      "scope_id": "sha256:5cb363c270e2526266aaeeb195e974d91c7688dacc5a4e65998a7a72eaae2300",
+      "source_credit_report_id": "sha256:737c316eb34544c19f071a73163e6344c6572b56d732deb834786b6fcb476dfd",
+      "source_report_id": "sha256:27f17619d47065e32464c112bbc7df0f003369f2e44e03a559f51ac321a0aad1",
+      "unmeasured_sizes": [
+        {
+          "games_per_group": 32,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 64,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 128,
+          "reason": "needs_two_disjoint_groups"
+        }
+      ]
+    },
+    {
+      "arm": "unscaled",
+      "available_independent_games": 32,
+      "behavior_model_id": "sha256:76c090655227abb2fce0d19191e163d3de189465b3dc43f3162f6b5f7bc7bc57",
+      "curves": [
+        {
+          "data_agreement": {
+            "median": 0.09766578165577061,
+            "opposing_fraction": 0.34375,
+            "p10": -0.16442319122678198,
+            "p90": 0.30243156736100485,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9623374834302192,
+            "opposing_fraction": 0.0,
+            "p10": 0.9510866434143329,
+            "p90": 0.9699028495493188,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 4,
+          "total_agreement": {
+            "median": 0.09521934476169834,
+            "opposing_fraction": 0.34375,
+            "p10": -0.1779313272676056,
+            "p90": 0.3126334620615269,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": -0.1051023405812999,
+            "opposing_fraction": 0.6875,
+            "p10": -0.24609062601195497,
+            "p90": 0.07255175960336972,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9805585081212659,
+            "opposing_fraction": 0.0,
+            "p10": 0.975199039036193,
+            "p90": 0.9849444884446843,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 8,
+          "total_agreement": {
+            "median": -0.09664068924705649,
+            "opposing_fraction": 0.6875,
+            "p10": -0.26354395274151227,
+            "p90": 0.07503714693112125,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": 0.03939612820919164,
+            "opposing_fraction": 0.3125,
+            "p10": -0.19241497009042016,
+            "p90": 0.22377942049399774,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9910629378250397,
+            "opposing_fraction": 0.0,
+            "p10": 0.988156780587382,
+            "p90": 0.9930208363114916,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 16,
+          "total_agreement": {
+            "median": 0.03229606138156546,
+            "opposing_fraction": 0.3125,
+            "p10": -0.2025927101086541,
+            "p90": 0.21452868989194,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        }
+      ],
+      "full_pool": {
+        "baseline_fits_only_own_group": true,
+        "choice_bearing_decisions": 2469,
+        "contribution_cancellation_ratio": 0.2110478199611392,
+        "data_gradient_norm": 0.06311924889514342,
+        "data_vs_total_cosine": 0.9981690515846262,
+        "decisions": 3254,
+        "entropy_gradient_norm": 0.003929595036641534,
+        "entropy_to_data_norm_ratio": 0.0622566824768393,
+        "independent_games": 32,
+        "largest_game_contribution_norm_share": 0.08606733167894587,
+        "normalization_fits_only_own_group": true,
+        "raw_advantage_mean": 0.000354975329175023,
+        "raw_advantage_std": 0.0032459668465984527
+      },
+      "maximum_measured_games_per_group": 16,
+      "production_reference": {
+        "maximum_absolute_actor_gradient_error": 2.1459071498919347e-16,
+        "optimizer_steps": 0,
+        "passed": true
+      },
+      "round": 8,
+      "scope_id": "sha256:e3da2f20fb4cddc1ae43e150a95ce0b6ef81e5f164af1460f2be9910f393d28c",
+      "source_credit_report_id": "sha256:9d0f5f8b0fdd86499864705c9054948fc8053203520f92023e84491edd46160e",
+      "source_report_id": "sha256:27f17619d47065e32464c112bbc7df0f003369f2e44e03a559f51ac321a0aad1",
+      "unmeasured_sizes": [
+        {
+          "games_per_group": 32,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 64,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 128,
+          "reason": "needs_two_disjoint_groups"
+        }
+      ]
+    },
+    {
+      "arm": "normalized",
+      "available_independent_games": 32,
+      "behavior_model_id": "sha256:0315e0ca62b261125ab1ecb1373ca669c521ae667dc4407848f317e4542cb603",
+      "curves": [
+        {
+          "data_agreement": {
+            "median": -0.09734785002757237,
+            "opposing_fraction": 0.53125,
+            "p10": -0.3965327520710592,
+            "p90": 0.2130737247781276,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9842336700144219,
+            "opposing_fraction": 0.0,
+            "p10": 0.9682224781041344,
+            "p90": 0.9910312319527009,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 4,
+          "total_agreement": {
+            "median": -0.09616971300994627,
+            "opposing_fraction": 0.53125,
+            "p10": -0.4076520732939861,
+            "p90": 0.20988293665953875,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": -0.08816329361028985,
+            "opposing_fraction": 0.53125,
+            "p10": -0.30681100151124296,
+            "p90": 0.2352294265755914,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9921431319819645,
+            "opposing_fraction": 0.0,
+            "p10": 0.9882430603436609,
+            "p90": 0.9946525154243653,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 8,
+          "total_agreement": {
+            "median": -0.09830024666551107,
+            "opposing_fraction": 0.53125,
+            "p10": -0.3147853711537525,
+            "p90": 0.21872990997366365,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": -0.03528116713937046,
+            "opposing_fraction": 0.53125,
+            "p10": -0.4803618717526496,
+            "p90": 0.23930413814018325,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9962210278096706,
+            "opposing_fraction": 0.0,
+            "p10": 0.9931609107399654,
+            "p90": 0.9975591233542347,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 16,
+          "total_agreement": {
+            "median": -0.05647945824106626,
+            "opposing_fraction": 0.59375,
+            "p10": -0.49293476801069075,
+            "p90": 0.21346840691223462,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        }
+      ],
+      "full_pool": {
+        "baseline_fits_only_own_group": true,
+        "choice_bearing_decisions": 2395,
+        "contribution_cancellation_ratio": 0.18344896034687194,
+        "data_gradient_norm": 0.013687783527495839,
+        "data_vs_total_cosine": 0.9983841249116759,
+        "decisions": 3182,
+        "entropy_gradient_norm": 0.0008317561974988238,
+        "entropy_to_data_norm_ratio": 0.06076631733896164,
+        "independent_games": 32,
+        "largest_game_contribution_norm_share": 0.07356385991047838,
+        "normalization_fits_only_own_group": true,
+        "raw_advantage_mean": 0.00011360640635646074,
+        "raw_advantage_std": 0.003181636033593428
+      },
+      "maximum_measured_games_per_group": 16,
+      "production_reference": {
+        "maximum_absolute_actor_gradient_error": 3.7730235602495554e-17,
+        "optimizer_steps": 0,
+        "passed": true
+      },
+      "round": 1,
+      "scope_id": "sha256:1142340dba94d27830e3a2e27c8099945ff5b88f9d6da2a48f6033ce0419e82a",
+      "source_credit_report_id": "sha256:dab75991e6b0ae68bad339f58a37068457bc986256c31214a634cacd48206afd",
+      "source_report_id": "sha256:8b390fa84bba9eeed409c88363a98c1ab32bb5088a361c5e2145048aa10d59c0",
+      "unmeasured_sizes": [
+        {
+          "games_per_group": 32,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 64,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 128,
+          "reason": "needs_two_disjoint_groups"
+        }
+      ]
+    },
+    {
+      "arm": "normalized",
+      "available_independent_games": 32,
+      "behavior_model_id": "sha256:776f8af0338a8ef02c35cae1bdab49c8a6aa48287906b161659a64999f8bdb74",
+      "curves": [
+        {
+          "data_agreement": {
+            "median": 0.06165045279812164,
+            "opposing_fraction": 0.375,
+            "p10": -0.3386965848303964,
+            "p90": 0.3368253698517671,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9860082341270069,
+            "opposing_fraction": 0.0,
+            "p10": 0.9821119524071041,
+            "p90": 0.9912107038285275,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 4,
+          "total_agreement": {
+            "median": 0.030286524357365043,
+            "opposing_fraction": 0.40625,
+            "p10": -0.34447553191471375,
+            "p90": 0.3246938842043359,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": 0.07974896031920362,
+            "opposing_fraction": 0.40625,
+            "p10": -0.48689734434213217,
+            "p90": 0.46874705793761057,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9931578165123823,
+            "opposing_fraction": 0.0,
+            "p10": 0.9907620408369981,
+            "p90": 0.994487200736795,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 8,
+          "total_agreement": {
+            "median": 0.030659802424397517,
+            "opposing_fraction": 0.40625,
+            "p10": -0.4921637961622735,
+            "p90": 0.4307897896993063,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        },
+        {
+          "data_agreement": {
+            "median": 0.3219484971059218,
+            "opposing_fraction": 0.125,
+            "p10": -0.07188941316707119,
+            "p90": 0.49634887357166785,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "entropy_agreement": {
+            "median": 0.9967380444992728,
+            "opposing_fraction": 0.0,
+            "p10": 0.9958091118359852,
+            "p90": 0.9975522898660256,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          },
+          "games_per_group": 16,
+          "total_agreement": {
+            "median": 0.2428070228982266,
+            "opposing_fraction": 0.1875,
+            "p10": -0.15647767638160634,
+            "p90": 0.43146756933717373,
+            "partitions": 32,
+            "undefined_zero_norm_pairs": 0
+          }
+        }
+      ],
+      "full_pool": {
+        "baseline_fits_only_own_group": true,
+        "choice_bearing_decisions": 2426,
+        "contribution_cancellation_ratio": 0.27008356845068454,
+        "data_gradient_norm": 0.025730697593055317,
+        "data_vs_total_cosine": 0.9979755071626248,
+        "decisions": 3210,
+        "entropy_gradient_norm": 0.0025150850687853414,
+        "entropy_to_data_norm_ratio": 0.09774647810031235,
+        "independent_games": 32,
+        "largest_game_contribution_norm_share": 0.1152831249482432,
+        "normalization_fits_only_own_group": true,
+        "raw_advantage_mean": 0.0003642603366411021,
+        "raw_advantage_std": 0.0033095506339981375
+      },
+      "maximum_measured_games_per_group": 16,
+      "production_reference": {
+        "maximum_absolute_actor_gradient_error": 6.201636426617085e-17,
+        "optimizer_steps": 0,
+        "passed": true
+      },
+      "round": 8,
+      "scope_id": "sha256:55dd544990a8cbba376cd579c1666f8f077684d8c2da993074c29c0e811e5403",
+      "source_credit_report_id": "sha256:c6ec769e885787edd35e2e1124373e12ff7ce7ad23bf5107e0bc38d5ecb1f331",
+      "source_report_id": "sha256:8b390fa84bba9eeed409c88363a98c1ab32bb5088a361c5e2145048aa10d59c0",
+      "unmeasured_sizes": [
+        {
+          "games_per_group": 32,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 64,
+          "reason": "needs_two_disjoint_groups"
+        },
+        {
+          "games_per_group": 128,
+          "reason": "needs_two_disjoint_groups"
+        }
+      ]
+    }
+  ],
+  "cohorts_never_pooled": true,
+  "confirmation_or_development_episodes_opened": 0,
+  "controls_pass": true,
+  "date": "2026-10-17",
+  "distinct_native_seed_ids_across_cohorts": 64,
+  "evidence_id": "sha256:0498631e33eb73d0ba61c26568d290d944e957bcb402c455ed6a4d919d45e30c",
+  "independent_control_seeds": 4,
+  "larger_pool": {
+    "all_games_behavior_verification_required": true,
+    "analysis_limits": {
+      "cpu_seconds": 1200,
+      "resident_memory_bytes": 8000000000,
+      "storage_bytes": 2000000000,
+      "wall_seconds": 600
+    },
+    "collection_limits": {
+      "cpu_seconds": 2400,
+      "resident_memory_bytes": 4000000000,
+      "storage_bytes": 2000000000,
+      "wall_seconds": 1200
+    },
+    "config": "configs/native-gradient/sts2-v0.111.0-a8-frozen-pool-v2.json",
+    "config_id": "sha256:0efa8047e5dbbc6389567d540f37cbc63c65d3cce76cd5d3e9cb60e600de1bc3",
+    "expected_minutes": [
+      15,
+      25
+    ],
+    "model_selection": "normalized_pre_last_training_round_by_phase_not_development",
+    "owner_script": "scripts/check-native-a8-batch-sizes-v1.sh",
+    "owner_script_sha256": "4697d70dfef25a9e04f513d63a6016d2b1111f4ac832640bce192b8e08475893",
+    "planned_games": 256,
+    "source_model_id": "sha256:776f8af0338a8ef02c35cae1bdab49c8a6aa48287906b161659a64999f8bdb74",
+    "sparse_numeric_reference_game_limit": 4,
+    "status": "preflight_pass_not_started"
+  },
+  "larger_pool_games_launched": 0,
+  "native_control": {
+    "analysis_report_id": "sha256:267245dee243fac727a7350e01f56c8f30dadfe21bd1484f0f9222fa61b3ecdd",
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true,
+      "source_player_unchanged": true
+    },
+    "collection_report_id": "sha256:6378e01c54e16d15ae73e9744924493f454e1bc38ba7ff77ab7b9d434efe010d",
+    "completed_games": 4,
+    "decisions_verified": 360,
+    "failed_games": 0,
+    "game_apps_created": 0,
+    "production_reference": {
+      "checked_decisions": 360,
+      "checked_games": 4,
+      "covers_entire_pool": true,
+      "maximum_absolute_actor_gradient_error": 4.0115480381963664e-17,
+      "optimizer_steps": 0,
+      "passed": true,
+      "scope": "bounded_numeric_loss_reference_all_pool_likelihoods_separately_verified"
+    }
+  },
+  "native_control_source_versions": 2,
+  "new_control_game_attempts": 8,
+  "own_group_baselines_and_normalization": true,
+  "private_evidence": [
+    {
+      "path": "artifacts/native-gradient/sts2-v0.111.0-a8-independent-v1/report.json",
+      "sha256": "f6a975f7ce5f6ef8bc6d1320ff8a4929dadee56bff90b72e6103c92aef23e7f6"
+    },
+    {
+      "path": "artifacts/native-gradient/sts2-v0.111.0-a8-independent-v1/config-at-launch.json",
+      "sha256": "fafdd3f6ffe8da4d72966e96d69ddda5dfa66023b45064e004f9a6a9614ae371"
+    },
+    {
+      "path": "artifacts/native-gradient/sts2-v0.111.0-a8-pool-control-v2/summary.json",
+      "sha256": "9cc2b40625e83898d88b66834cc5fbb926150a491ea1284954f2f3bfadb1d43b"
+    },
+    {
+      "path": "artifacts/native-gradient/sts2-v0.111.0-a8-pool-control-v2/gradient-report.json",
+      "sha256": "4e764abcaa80c63d346e3fe58f607c94608ed465ba37043416076a3890697028"
+    },
+    {
+      "path": "artifacts/resources/native-a8-independent-gradient-study-v1.json",
+      "sha256": "325f9b940776d93fadcc8e2b7a931c189998200608e798213eb81306c9d9785d"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-pool-control-v2.json",
+      "sha256": "d7eebe723fb081991e98ccfbe03822b32c81a4c53c432cccc49a464f424e34f2"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-pool-control-analysis-v2.json",
+      "sha256": "5bc47de08abdafa967505697bf9ae48e2919d7975ef1749434d62e93fdabdddd"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-pool-control-v1.json",
+      "sha256": "4b9a83e57df0ca1f530820ab68972622e9d8359b1bfdc52c84cc68c44ecbef90"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-pool-control-analysis-v1.json",
+      "sha256": "b84cc79615e3d017d6a43703bc8a0aefbc7fa7e0916e2d9657f6fb5286eb598d"
+    },
+    {
+      "path": "artifacts/native-gradient/sts2-v0.111.0-a8-pool-control-v1/source-at-launch/native_gradient_pool.py",
+      "sha256": "fa302d6c9e0ee97f7951b7fdcc5b9824e47886e019ca7ccbbc404f1f28b1ef2a"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-pool-preflight-v2.json",
+      "sha256": "b28168e8fa4290b6709faebb8f8bf8a2c1a457efa496e05a8821a4d22a5574c3"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-repository-checks-v2.json",
+      "sha256": "be987821485419fda7c0cb2b7fe6f777235302f83046c3a8d784f7dfb4a2316d"
+    },
+    {
+      "path": "artifacts/resources/native-a8-gradient-cached-control-inspection-v2.json",
+      "sha256": "ce893c439bdb8267a18d0839412ca3e1ae9ee16363d2d5a666c8bfef3e2bd8d6"
+    }
+  ],
+  "production_checkpoints_written": 0,
+  "repository_checks": {
+    "format": true,
+    "lint": true,
+    "native_build": true,
+    "tests_passed": 1506,
+    "types": true
+  },
+  "resources": {
+    "native-a8-gradient-pool-control-analysis-v2": {
+      "cap": null,
+      "report_id": "sha256:bf97020de6eea1ce0865ca2c9f2aa931d77aec6e6bf752b461061673ff1e5947",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.057507964695339905,
+        "cpu_hours": 0.0004503121438888889,
+        "cpu_seconds": 1.621123718,
+        "energy_kwh": null,
+        "final_storage_bytes": 4128813,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 188727296,
+        "peak_storage_bytes": 4128813,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 2.013539374922402
+      }
+    },
+    "native-a8-gradient-pool-control-v2": {
+      "cap": null,
+      "report_id": "sha256:6cbb7a4cd1170635cf62079da25500a90695b9556bbd8494c3cd3d5889b9010e",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.05462434952957398,
+        "cpu_hours": 0.0038045733494444446,
+        "cpu_seconds": 13.696464058,
+        "energy_kwh": null,
+        "final_storage_bytes": 4105844,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 6,
+        "peak_resident_memory_bytes": 683556864,
+        "peak_storage_bytes": 4105844,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 17.90994070796296
+      }
+    },
+    "native-a8-gradient-pool-preflight-v2": {
+      "cap": null,
+      "report_id": "sha256:bc7678ddfeb6f7ff1139cceb7415c0932cc93af82c1af2bdde2e84ce35f58a91",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.03205609220928772,
+        "cpu_hours": 0.0010941271741666666,
+        "cpu_seconds": 3.9388578269999996,
+        "energy_kwh": null,
+        "final_storage_bytes": 0,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 199032832,
+        "peak_storage_bytes": 0,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 8.77670883294195
+      }
+    },
+    "native-a8-gradient-repository-checks-v2": {
+      "cap": null,
+      "report_id": "sha256:ecc70cbc6de39f68eed2b1beaca7816b38fc1987df42cf8d3f7a1f4c2ff919e1",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.05793268903194506,
+        "cpu_hours": 0.012591687806388885,
+        "cpu_seconds": 45.33007610299999,
+        "energy_kwh": null,
+        "final_storage_bytes": 0,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 9,
+        "peak_resident_memory_bytes": 240435200,
+        "peak_storage_bytes": 0,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 55.89007920899894
+      }
+    },
+    "native-a8-independent-gradient-study-v1": {
+      "cap": null,
+      "report_id": "sha256:d7e013caa1e108798b1b48684be490f841a5063908364f91618626aee8c09336",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.07070508695804607,
+        "cpu_hours": 0.015951807733055556,
+        "cpu_seconds": 57.426507838999996,
+        "energy_kwh": null,
+        "final_storage_bytes": 882474,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 1149550592,
+        "peak_storage_bytes": 882474,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 58.014120250009
+      }
+    }
+  },
+  "resplits_are_correlated_descriptive_only": true,
+  "schema_version": "native-a8-independent-gradient-evidence-v1",
+  "study_config_id": "sha256:51bb98950d5f5c9ace866326f3733afdf3d51872aec59c276a7499a68ca391f5",
+  "study_report_id": "sha256:f469ba9eef27b9ec6119cc437f7925c429426d261714fcb9a2e0be54801a2c91",
+  "verified_training_decisions": 12741,
+  "verified_training_trajectories": 128
+}

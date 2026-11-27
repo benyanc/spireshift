@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/trajectory-mutation-preference-set-v1.json",
+  "title": "SpireShift Trajectory Mutation Preference Set v1",
+  "type": "object",
+  "required": [
+    "schema_version", "preference_set_id", "search_report_id", "search_verification_id",
+    "search_config_id", "search_case_id", "accepted_trajectory_id", "source_model_id",
+    "source_training_report_id", "split_manifest_id", "ruleset_manifest_id", "objective_id",
+    "partition", "information_policy_id", "hidden_state_resampling", "rank_order",
+    "lineage_replay", "preferences", "excluded_mutations", "summary", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "trajectory-mutation-preference-set-v1"},
+    "preference_set_id": {"$ref": "#/$defs/id"},
+    "search_report_id": {"$ref": "#/$defs/id"},
+    "search_verification_id": {"$ref": "#/$defs/id"},
+    "search_config_id": {"$ref": "#/$defs/id"},
+    "search_case_id": {"$ref": "#/$defs/id"},
+    "accepted_trajectory_id": {"$ref": "#/$defs/id"},
+    "source_model_id": {"$ref": "#/$defs/id"},
+    "source_training_report_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "partition": {"const": "train"},
+    "information_policy_id": {"const": "public-state-v1"},
+    "hidden_state_resampling": {"const": false},
+    "rank_order": {
+      "const": [
+        "victory", "act1_cleared", "boss_reached", "maximum_floor",
+        "encounter_cleared", "enemy_hp_defeated_fraction_ppm", "player_hp_fraction_ppm",
+        "last_actionable_player_hp_fraction_ppm", "distinct_public_states_on_floor"
+      ]
+    },
+    "lineage_replay": {
+      "type": "array", "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["trajectory_id", "action_trace_sha256", "decisions", "exact"],
+        "properties": {
+          "trajectory_id": {"$ref": "#/$defs/id"},
+          "action_trace_sha256": {"$ref": "#/$defs/id"},
+          "decisions": {"type": "integer", "minimum": 1},
+          "exact": {"const": true}
+        },
+        "additionalProperties": false
+      }
+    },
+    "preferences": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/preference"}
+    },
+    "excluded_mutations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/excluded"}
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "mutations", "strict_improvements", "tied", "regressed", "unique_runs",
+        "minimum_training_runs", "training_ready", "terminal_victory_positive_labels"
+      ],
+      "properties": {
+        "mutations": {"type": "integer", "minimum": 1},
+        "strict_improvements": {"type": "integer", "minimum": 1},
+        "tied": {"type": "integer", "minimum": 0},
+        "regressed": {"type": "integer", "minimum": 0},
+        "unique_runs": {"const": 1},
+        "minimum_training_runs": {"type": "integer", "minimum": 2},
+        "training_ready": {"const": false},
+        "terminal_victory_positive_labels": {"const": 0}
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {
+      "const": "verified_train_only_single_run_auxiliary_policy_preferences"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "rank": {
+      "type": "array", "minItems": 9, "maxItems": 9,
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "actionIds": {
+      "type": "array", "minItems": 2, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "sourceAct": {"type": ["integer", "string", "null"]},
+    "rankComponent": {
+      "type": ["string", "null"],
+      "enum": [
+        "victory", "act1_cleared", "boss_reached", "maximum_floor",
+        "encounter_cleared", "enemy_hp_defeated_fraction_ppm", "player_hp_fraction_ppm",
+        "last_actionable_player_hp_fraction_ppm", "distinct_public_states_on_floor", null
+      ]
+    },
+    "preference": {
+      "type": "object",
+      "required": [
+        "preference_id", "run_seed", "generation", "parent_trajectory_id",
+        "child_trajectory_id", "decision_index", "decision_type", "source_state_hash",
+        "source_floor", "source_act", "candidate_action_ids", "parent_action_id",
+        "child_action_id", "parent_rank", "child_rank", "deciding_rank_component", "label",
+        "terminal_victory_label", "source_observation", "preferred_action_id", "disfavored_action_id"
+      ],
+      "properties": {
+        "preference_id": {"$ref": "#/$defs/id"},
+        "run_seed": {"type": "integer", "minimum": 0},
+        "generation": {"type": "integer", "minimum": 1},
+        "parent_trajectory_id": {"$ref": "#/$defs/id"},
+        "child_trajectory_id": {"$ref": "#/$defs/id"},
+        "decision_index": {"type": "integer", "minimum": 0},
+        "decision_type": {"type": "string", "minLength": 1},
+        "source_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_floor": {"type": ["integer", "null"], "minimum": 0},
+        "source_act": {"$ref": "#/$defs/sourceAct"},
+        "candidate_action_ids": {"$ref": "#/$defs/actionIds"},
+        "parent_action_id": {"type": "string", "minLength": 1},
+        "child_action_id": {"type": "string", "minLength": 1},
+        "parent_rank": {"$ref": "#/$defs/rank"},
+        "child_rank": {"$ref": "#/$defs/rank"},
+        "deciding_rank_component": {"$ref": "#/$defs/rankComponent"},
+        "label": {"const": "improved"},
+        "terminal_victory_label": {"const": false},
+        "source_observation": {"$ref": "https://spireshift.dev/schemas/observation-v1.json"},
+        "preferred_action_id": {"type": "string", "minLength": 1},
+        "disfavored_action_id": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "excluded": {
+      "type": "object",
+      "required": [
+        "mutation_evidence_id", "run_seed", "generation", "parent_trajectory_id",
+        "child_trajectory_id", "decision_index", "decision_type", "source_state_hash",
+        "source_floor", "source_act", "candidate_action_ids", "parent_action_id",
+        "child_action_id", "parent_rank", "child_rank", "deciding_rank_component", "label",
+        "terminal_victory_label", "source_observation", "exclusion_reason"
+      ],
+      "properties": {
+        "mutation_evidence_id": {"$ref": "#/$defs/id"},
+        "run_seed": {"type": "integer", "minimum": 0},
+        "generation": {"type": "integer", "minimum": 1},
+        "parent_trajectory_id": {"$ref": "#/$defs/id"},
+        "child_trajectory_id": {"$ref": "#/$defs/id"},
+        "decision_index": {"type": "integer", "minimum": 0},
+        "decision_type": {"type": "string", "minLength": 1},
+        "source_state_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_floor": {"type": ["integer", "null"], "minimum": 0},
+        "source_act": {"$ref": "#/$defs/sourceAct"},
+        "candidate_action_ids": {"$ref": "#/$defs/actionIds"},
+        "parent_action_id": {"type": "string", "minLength": 1},
+        "child_action_id": {"type": "string", "minLength": 1},
+        "parent_rank": {"$ref": "#/$defs/rank"},
+        "child_rank": {"$ref": "#/$defs/rank"},
+        "deciding_rank_component": {"$ref": "#/$defs/rankComponent"},
+        "label": {"enum": ["tied", "regressed"]},
+        "terminal_victory_label": {"const": false},
+        "source_observation": {"$ref": "https://spireshift.dev/schemas/observation-v1.json"},
+        "exclusion_reason": {
+          "enum": [
+            "equal_frozen_public_frontier_rank",
+            "child_regressed_on_frozen_public_frontier_rank"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

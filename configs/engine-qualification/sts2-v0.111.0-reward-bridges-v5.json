@@ -1,0 +1,52 @@
+{
+  "schema_version": "engine-reward-bridges-config-v1",
+  "stage": "owner_repeated_privileged_reward_differentials_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "template": "configs/engine-qualification/sts2-v0.111.0-reward-bridge-template-v12-v5.json",
+  "template_id": "sha256:f84cfd2c19fd5ca14545b8e25a7cd3358e8e1816d51c5da56ee6226a4ba7671c",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v5/reward-bridges-v5",
+  "max_wall_seconds": 900,
+  "training_allowed": false,
+  "cases": [
+    {
+      "case_id": "seed-03-calling-bell-claim-all-repeat-01",
+      "seed": "SPIRESHIFTREWARD003",
+      "scenario": "calling-bell-claim-all"
+    },
+    {
+      "case_id": "seed-03-calling-bell-claim-all-repeat-02",
+      "seed": "SPIRESHIFTREWARD003",
+      "scenario": "calling-bell-claim-all"
+    },
+    {
+      "case_id": "seed-04-calling-bell-claim-skip-repeat-01",
+      "seed": "SPIRESHIFTREWARD004",
+      "scenario": "calling-bell-claim-skip"
+    },
+    {
+      "case_id": "seed-04-calling-bell-claim-skip-repeat-02",
+      "seed": "SPIRESHIFTREWARD004",
+      "scenario": "calling-bell-claim-skip"
+    },
+    {
+      "case_id": "seed-01-cauldron-fill-replace-skip-repeat-01",
+      "seed": "SPIRESHIFTREWARD001",
+      "scenario": "cauldron-fill-replace-skip"
+    },
+    {
+      "case_id": "seed-01-cauldron-fill-replace-skip-repeat-02",
+      "seed": "SPIRESHIFTREWARD001",
+      "scenario": "cauldron-fill-replace-skip"
+    },
+    {
+      "case_id": "seed-32-cauldron-fill-skip-repeat-01",
+      "seed": "SPIRESHIFTREWARD032",
+      "scenario": "cauldron-fill-skip"
+    },
+    {
+      "case_id": "seed-32-cauldron-fill-skip-repeat-02",
+      "seed": "SPIRESHIFTREWARD032",
+      "scenario": "cauldron-fill-skip"
+    }
+  ]
+}

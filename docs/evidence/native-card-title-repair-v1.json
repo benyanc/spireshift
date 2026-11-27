@@ -1,0 +1,199 @@
+{
+  "schema_version": "native-card-title-repair-evidence-v1",
+  "status": "short_execution_qualified_owner_comparison_prepared",
+  "cause": "one upgraded physical card exported with base picker name and current deck title",
+  "interrupted_comparison": {
+    "report": {
+      "path": "artifacts/native-selection-flows/canary-v1/blocked-report.json",
+      "sha256": "51e100ce9a5be85e76995bb1dbff18aa1eacf3fdecf9b8434df18f6aeba32cf5"
+    },
+    "native_deliveries": 50,
+    "public_frames": 51,
+    "completed_pairs": 0,
+    "official_starts": 0,
+    "markers_and_data_preserved": true,
+    "uncertain_world_replayed": false
+  },
+  "active_tuple": {
+    "CLI_revision": 45,
+    "environment_revision": 27,
+    "official_connector_revision": 19,
+    "worker_revision": 15,
+    "shared_helper_revision": 10,
+    "layout_revision": 7,
+    "environment_id": "sha256:845f63eb8536e06730e3a45f47fd371f4f0ab756c4605c1ddbbe6deec2473d35",
+    "original_execution_and_conversion_helpers_unchanged": true,
+    "intrinsic_conflict_rejection_retained": true
+  },
+  "build": {
+    "report": {
+      "path": "artifacts/native-card-titles/native-build-v45/report.json",
+      "sha256": "01601ebafdca8c7f382a23a13398971fe9f5318adf3ae75dc4f77ffd467891f6"
+    },
+    "fresh_baseline_builds": 2,
+    "fresh_repaired_builds": 2,
+    "frozen_game_DLL_unchanged": true,
+    "current_title_export_sites_repaired": 6
+  },
+  "saved_audit": {
+    "report": {
+      "path": "artifacts/native-selection-flows/card-titles-offline-v1/report.json",
+      "sha256": "c0d5e075b9c62908e29b461c61f605a4f26d8c8441b475fe2c75c2bd8d2b7768"
+    },
+    "saved_frames": 1642,
+    "generated_envelopes": 20,
+    "frozen_inference_probes": 3306,
+    "new_games": 0
+  },
+  "saved_failure_diagnosis": {
+    "report": {
+      "path": "artifacts/native-card-titles/development-v1/saved-view-check.json",
+      "sha256": "c3d6f8a13b55323f96861b3dcda1a2c5e4eb831c7be98e2917a7bc4403eb2146"
+    },
+    "historical_conflict_still_rejects": true,
+    "diagnostic_same_copy_public_title_substitution_only": true,
+    "legal_choices_decoded": 12,
+    "native_source_executed_in_this_diagnostic": false
+  },
+  "native_rendering": {
+    "report": {
+      "path": "artifacts/native-card-titles/render-fixtures-v1/report.json",
+      "sha256": "9c9747be9fb2132ae274acffbfae257205f7753ed9e3e26107aa34dc3970430c"
+    },
+    "fixture_mounts": 4,
+    "card_cases": [
+      {
+        "definition": "STRIKE_IRONCLAD",
+        "upgrade": 0,
+        "copies": 3,
+        "hand_and_deck_title_equal": true
+      },
+      {
+        "definition": "STRIKE_IRONCLAD",
+        "upgrade": 1,
+        "copies": 3,
+        "hand_and_deck_title_equal": true
+      },
+      {
+        "definition": "DEFEND_IRONCLAD",
+        "upgrade": 1,
+        "copies": 3,
+        "hand_and_deck_title_equal": true
+      },
+      {
+        "definition": "COLD_SNAP",
+        "upgrade": 1,
+        "copies": 3,
+        "hand_and_deck_title_equal": true
+      }
+    ],
+    "privileged_fixture": true,
+    "full_game_attempts": 0,
+    "wall_seconds": 5.662064792122692
+  },
+  "paired_control": {
+    "report": {
+      "path": "artifacts/native-selection-flows/card-titles-control-v1/report.json",
+      "sha256": "4e01147a91f8d72de89f3278afa08eebc1e716cde98e84f1b42af18c0b3e08d6"
+    },
+    "regression_on_completed_clean_world": true,
+    "decisions_per_host": 32,
+    "complete_input_and_menu_equivalence": true,
+    "wall_seconds": 86.64339579106309,
+    "app_profile_archive_checks": {
+      "Steam_disabled_observed": true,
+      "exact_delivery_count": true,
+      "frozen_archive_unchanged": true,
+      "natural_shutdown": true,
+      "personal_profile_unchanged": true,
+      "profile_path_logged": true,
+      "settings_template_unchanged": true,
+      "working_app_unchanged": true
+    },
+    "independent_verification": {
+      "path": "artifacts/native-selection-flows/card-titles-control-v1/verification-v1/report.json",
+      "sha256": "f309bc9013012e6918d70ea4ddbc6ae2b301ea46dbe86d8a6fd0b89622998fa6"
+    },
+    "choices_and_receipts_verified": 64,
+    "pack_effect": {
+      "path": "artifacts/native-selection-flows/card-titles-control-v1/pack-effect.json",
+      "sha256": "dbb868b84f5bd3072af2f30c995a11e5b82fa60cb387fc7c2a3ad9a361fa4f16"
+    }
+  },
+  "repository_check": {
+    "resources": {
+      "path": "artifacts/resources/native-card-titles-repository-check-v1.json",
+      "sha256": "cda66294c625db924b8f8c8dda4daa20ddd9b9e64802469a7a6e47265b2eccfd"
+    },
+    "tests_passed": 2586,
+    "strict_typed_files": 633,
+    "CSharp_protocol_pass": true,
+    "wall_seconds": 150.81223462498747,
+    "new_final_metadata_checked_separately_by_owner_launcher": true,
+    "focused_python_tests": 12,
+    "new_Node_regressions": 6
+  },
+  "preservation": {
+    "receipt": {
+      "path": "artifacts/native-card-titles/development-v1/protection.json",
+      "sha256": "076dabc3298c72583e1e247802ff64132bdafa1ff0dd773a135a0dcc1c338a7c"
+    },
+    "prior_files_unchanged": 3981,
+    "players": {
+      "2": {
+        "model_id": "sha256:dcafc006c9a3569bf8caa7995501c2b403fb742939014582b1c7b327ccb12097",
+        "optimizer_steps": 5658,
+        "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p2/state.json",
+        "sha256": "3487c779445dd7782244392cc7e3c583f30ec5dee49b7d60d4c89503e3f11b31",
+        "state_id": "sha256:f013e689500a7e8ad6c3b893c9ce9771f91d44bdedc6be2aa938c210f8eeef8a"
+      },
+      "3": {
+        "model_id": "sha256:9188a1065b89b43a40238c63c6d14a6e906af3fa42ae74226f4f71f45f8320c6",
+        "optimizer_steps": 6045,
+        "path": "artifacts/native-teaching/sts2-v0.111.0-a8-comparison-v1/chunks/initial-p3/state.json",
+        "sha256": "a434d6445f5e30bfc8c63c08e419a12b689cfeaeea55b4c2b3409a0776c596c8",
+        "state_id": "sha256:6dc93df587ab6c1bea17a9999740dacb216b46c4485abee272db7f4d58d56b82"
+      }
+    },
+    "original_full_weights_and_all_Adam_unchanged": true,
+    "optimizer_updates": 0,
+    "game_apps_created": 0
+  },
+  "next_comparison": {
+    "recipe": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-card-titles-canary-v1.json",
+      "sha256": "e59024172aa9496d35714e45b90e08ad2d3e989689938636f43edd13fa46aba4"
+    },
+    "launch": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-card-titles-launch-v1.json",
+      "sha256": "99f277cd07f0dbd699688e773ef12debfc7363bf9b3cbf900a6f5fd01d4db400"
+    },
+    "preflight": {
+      "path": "artifacts/native-card-titles/development-v1/main-preflight-v1.json",
+      "sha256": "95a1d6ee5f43dd12526d593f31296236377db3dd040b8751b92c7f828deb50d6"
+    },
+    "launcher": "scripts/compare-selection-flows-v2.sh",
+    "unstarted_workspace_absent": true,
+    "worlds": [
+      "SP1RESH1FTFL0W403",
+      "SP1RESH1FTFL0W404"
+    ],
+    "old_worlds_excluded": [
+      "SP1RESH1FTFL0W401",
+      "SP1RESH1FTFL0W402"
+    ],
+    "paired_prefixes": 4,
+    "maximum_choices_per_host": 128,
+    "pair_seconds": 360,
+    "launch_seconds": 1800,
+    "separate_repository_check_seconds": 600,
+    "completed_new_plan_pairs_reused": true,
+    "automatic_training_follows": false
+  },
+  "scope_limits": [
+    "finite_rendering_and_prefix_delivery_not_all_mechanic_interactions",
+    "privileged_rendering_fixtures_not_ordinary_learning_games",
+    "no_full_game_strength_or_promotion_qualification"
+  ],
+  "report_id": "sha256:32d491795cd36f2b1635665702fc55b285c9cf6b66c4452f14995c8ff0778ea7"
+}

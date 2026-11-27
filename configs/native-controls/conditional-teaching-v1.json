@@ -1,0 +1,73 @@
+{
+  "acceptance": {
+    "minimum_exact_victory_gain": 0.1,
+    "minimum_optimal_action_probability": 0.75
+  },
+  "episodes_per_round": 64,
+  "frozen_actor_rounds": 4,
+  "implementation_sha256": {
+    "core/objective.py": "50fbd4b770f0736dd68a5ecee6a96f5865ae53d37b590ca2e534d43302cf8311",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "native_conditional_control.py": "ec522cc1877ec115dd168522fcaa0b589101430d21bde5d34e2c8a3a71ac41ba",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_learning_control.py": "b54f56dc9d195c4b41c4d26842ab0b08c5a1bb97e492de2af26fc3cbaa3699f9",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "training_objective.py": "97b808667cdbf17e8f9d55cf07dff9efb2fe8473f09d2ca6d9cd66d14a274285"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "ppo_receives_optimal_action_labels": false,
+  "reference_control": {
+    "id": "sha256:d2980d6da948d7a54c6797ff11b9ff8dbf35ad8642d2ec90a676796b62916a7f",
+    "path": "configs/native-controls/ppo-known-tasks-v1.json"
+  },
+  "resource_limits": {
+    "cpu_seconds": 180,
+    "resident_memory_bytes": 1000000000,
+    "storage_bytes": 20000000,
+    "wall_seconds": 180
+  },
+  "rounds": 32,
+  "schema_version": "synthetic-native-conditional-comparison-config-v1",
+  "task": {
+    "delay_steps": 5,
+    "intermediate_rewards": 0,
+    "name": "contextual_risk",
+    "public_context_probabilities": [
+      0.5,
+      0.5
+    ],
+    "terminal_probabilities_low_high_commit_decline": [
+      [
+        0.1,
+        0.55
+      ],
+      [
+        0.85,
+        0.55
+      ]
+    ],
+    "terminal_reward": "binary_victory_only"
+  },
+  "teacher_receives_optimal_action_labels": true,
+  "teaching_schedule": "replay_realized_PPO_epoch_minibatch_schedule_v1",
+  "training_seeds": [
+    0,
+    1,
+    2
+  ],
+  "workspace": "artifacts/synthetic-learning/native-conditional-teaching-v1"
+}

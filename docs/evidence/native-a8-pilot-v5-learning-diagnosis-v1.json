@@ -1,0 +1,652 @@
+{
+  "causal_native_game_ablation_completed": false,
+  "checkpoint_inputs": [
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v5/initial-checkpoint.json",
+      "sha256": "54ec5d709db9f8c5f6c72ee9910f33885df7d3f4d498fa9e4193995ff40e1418"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v5/round-004-checkpoint.json",
+      "sha256": "6cd8fae5f545226383cb01bedc206e4cb809d7f9f566dc48448c5a4a2bffeada"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v5/round-007-checkpoint.json",
+      "sha256": "586dc8cac81def4cb905c38199df0be917f6f3ea704e49c3e23b115b5a05c900"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-pilot-v5/round-008-checkpoint.json",
+      "sha256": "bdd456c72d945f0ba1ba3a2e1e739a9d1cb526fedb28d42d1ea87da62302c364"
+    }
+  ],
+  "conditional_control": {
+    "all_held_runs_are_within_train_partition": true,
+    "claim_gameplay_improvement": false,
+    "controls": [
+      {
+        "after": {
+          "fit": {
+            "accuracy": 1.0,
+            "target_probability": 0.9946601300094344
+          },
+          "held": {
+            "accuracy": 1.0,
+            "target_probability": 0.9754864854948561
+          }
+        },
+        "before": {
+          "fit": {
+            "accuracy": 0.5,
+            "target_probability": 0.5000208607422498
+          },
+          "held": {
+            "accuracy": 0.5,
+            "target_probability": 0.5000150521222704
+          }
+        },
+        "starting_model": "initial",
+        "steps": 300
+      },
+      {
+        "after": {
+          "fit": {
+            "accuracy": 1.0,
+            "target_probability": 0.9920212710431444
+          },
+          "held": {
+            "accuracy": 1.0,
+            "target_probability": 0.9662545030231602
+          }
+        },
+        "before": {
+          "fit": {
+            "accuracy": 0.5,
+            "target_probability": 0.4984597322597733
+          },
+          "held": {
+            "accuracy": 0.5,
+            "target_probability": 0.49851461846189565
+          }
+        },
+        "starting_model": "round8",
+        "steps": 300
+      }
+    ],
+    "diagnostic_optimizer_steps": 600,
+    "fit_examples": 16,
+    "fit_original_runs": 8,
+    "games_launched": 0,
+    "held_examples": 18,
+    "held_original_runs": 9,
+    "production_checkpoints_written": 0,
+    "scope": "artificial_HP_conditioned_rest_or_smith_labels_on_saved_training_menus_not_game_quality"
+  },
+  "date": "2026-10-16",
+  "development_episodes_opened_for_training_diagnosis": 0,
+  "diagnostic_optimizer_steps_attempted_including_invalid_control": 1200,
+  "finite_difference_control": {
+    "games_launched": 0,
+    "gradient_sign_and_temperature_derivative_pass": true,
+    "optimizer_steps": 0,
+    "real_training_state_finite_difference_controls": [
+      {
+        "coordinates_checked": 10,
+        "critic_gradient_norm": 0.0012814923208143022,
+        "family": "combat_turn",
+        "maximum_absolute_error": 6.43780276483874e-13,
+        "policy_gradient_norm": 0.018684442920770424
+      },
+      {
+        "coordinates_checked": 10,
+        "critic_gradient_norm": 0.0008662572185326576,
+        "family": "rest_site",
+        "maximum_absolute_error": 4.959003043272792e-13,
+        "policy_gradient_norm": 0.013765436948377525
+      },
+      {
+        "coordinates_checked": 10,
+        "critic_gradient_norm": 0.0007813382400141195,
+        "family": "shop_inventory",
+        "maximum_absolute_error": 2.4182094044214453e-13,
+        "policy_gradient_norm": 0.008689355153124956
+      }
+    ]
+  },
+  "games_launched": 0,
+  "gradient_noise_controls": {
+    "advantage_centering_matches_batch": true,
+    "games_launched": 0,
+    "optimizer_steps": 0,
+    "policy_gradients_only_entropy_omitted": true,
+    "rounds": [
+      {
+        "actual_constant_mean_gradient_cosine": 1.0000000000000002,
+        "baselines": {
+          "actual": {
+            "episode_gradient_trace_variance": 0.011756064341667288,
+            "mean_gradient_snr_proxy": 1.1824195566536355,
+            "median_random_half_gradient_cosine": 0.10458069510345906,
+            "negative_random_half_gradient_cosine_fraction": 0.21,
+            "squared_mean_gradient_norm": 0.00043439376208955773
+          },
+          "constant": {
+            "episode_gradient_trace_variance": 0.011756064341667288,
+            "mean_gradient_snr_proxy": 1.1824195566536355,
+            "median_random_half_gradient_cosine": 0.10458069510345902,
+            "negative_random_half_gradient_cosine_fraction": 0.21,
+            "squared_mean_gradient_norm": 0.00043439376208955773
+          }
+        },
+        "decisions": 3095,
+        "episodes": 32,
+        "round": 1
+      },
+      {
+        "actual_constant_mean_gradient_cosine": 0.8102903294963858,
+        "baselines": {
+          "actual": {
+            "episode_gradient_trace_variance": 0.036133581292086575,
+            "mean_gradient_snr_proxy": 0.8742326534496735,
+            "median_random_half_gradient_cosine": -0.04884522179374927,
+            "negative_random_half_gradient_cosine_fraction": 0.64,
+            "squared_mean_gradient_norm": 0.0009871611453631352
+          },
+          "constant": {
+            "episode_gradient_trace_variance": 0.0304883843567298,
+            "mean_gradient_snr_proxy": 0.8011065214839945,
+            "median_random_half_gradient_cosine": -0.0881880845727793,
+            "negative_random_half_gradient_cosine_fraction": 0.72,
+            "squared_mean_gradient_norm": 0.0007632638605527139
+          }
+        },
+        "decisions": 3223,
+        "episodes": 32,
+        "round": 8
+      }
+    ],
+    "scope": "two_frozen_train_panels_only_linear_and_hidden_actor_gradient_no_optimizer"
+  },
+  "invalid_control": {
+    "attempted_optimizer_steps": 600,
+    "excluded_from_learnability_evidence": true,
+    "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/conditional-control.json",
+    "reason": "integer_zero_value_rate_truncated_fractional_actor_rate_not_a_v5_production_setting"
+  },
+  "next_work_items": [
+    35,
+    143,
+    146,
+    134
+  ],
+  "papers": [
+    "https://arxiv.org/abs/1707.06347",
+    "https://arxiv.org/abs/1506.02438"
+  ],
+  "per_round_choice_bearing_critic_metrics": [
+    {
+      "advantage_mean": -0.0013898628322877185,
+      "advantage_std": 0.004007784693450196,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": 0.0,
+      "critic_mse_over_in_sample_constant": 1.1202638541567902,
+      "decisions": 2333,
+      "positive_raw_advantage_fraction": 0.39134162023146163,
+      "round": 1,
+      "target_mean": 0.018610137167712246,
+      "target_std": 0.004007784693450196,
+      "value_mean": 0.019999999999999962
+    },
+    {
+      "advantage_mean": 0.0012829058280443791,
+      "advantage_std": 0.004163514864457544,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": -0.11555839666226686,
+      "critic_mse_over_in_sample_constant": 1.2214744102310642,
+      "decisions": 2521,
+      "positive_raw_advantage_fraction": 0.5386751289170963,
+      "round": 2,
+      "target_mean": 0.019292175953913013,
+      "target_std": 0.003941975899763896,
+      "value_mean": 0.018009270125868636
+    },
+    {
+      "advantage_mean": 0.00019586577635941126,
+      "advantage_std": 0.004858693050825519,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": 0.03348819161366956,
+      "critic_mse_over_in_sample_constant": 0.9680824798538563,
+      "decisions": 2545,
+      "positive_raw_advantage_fraction": 0.42396856581532416,
+      "round": 3,
+      "target_mean": 0.019605659210809975,
+      "target_std": 0.0049421495272277925,
+      "value_mean": 0.019409793434450564
+    },
+    {
+      "advantage_mean": 0.0020338298230942083,
+      "advantage_std": 0.004073407830518476,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": -0.01802410758366757,
+      "critic_mse_over_in_sample_constant": 1.271812349569144,
+      "decisions": 2662,
+      "positive_raw_advantage_fraction": 0.6897069872276483,
+      "round": 4,
+      "target_mean": 0.019832964926650088,
+      "target_std": 0.0040371869676955816,
+      "value_mean": 0.01779913510355588
+    },
+    {
+      "advantage_mean": -0.002444165231075812,
+      "advantage_std": 0.004585880473352501,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": -1.283448452547498,
+      "critic_mse_over_in_sample_constant": 2.932093152275523,
+      "decisions": 2301,
+      "positive_raw_advantage_fraction": 0.3059539330725771,
+      "round": 5,
+      "target_mean": 0.018887227772636763,
+      "target_std": 0.003034779383103256,
+      "value_mean": 0.021331393003712572
+    },
+    {
+      "advantage_mean": 0.002905792239283803,
+      "advantage_std": 0.004662483480901287,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": -0.1594607541894144,
+      "critic_mse_over_in_sample_constant": 1.6098111615264872,
+      "decisions": 2410,
+      "positive_raw_advantage_fraction": 0.7112033195020747,
+      "round": 6,
+      "target_mean": 0.020632983116461567,
+      "target_std": 0.004330013791076438,
+      "value_mean": 0.01772719087717776
+    },
+    {
+      "advantage_mean": -0.0011652881122764917,
+      "advantage_std": 0.005084781972273335,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": -0.40667573824471903,
+      "critic_mse_over_in_sample_constant": 1.4805538790303718,
+      "decisions": 2327,
+      "positive_raw_advantage_fraction": 0.35668242372152986,
+      "round": 7,
+      "target_mean": 0.020147557852647685,
+      "target_std": 0.004287215727906299,
+      "value_mean": 0.021312845964924176
+    },
+    {
+      "advantage_mean": -0.001254585522560063,
+      "advantage_std": 0.005082986701021943,
+      "constant_reference_is_diagnostic_not_independently_fitted": true,
+      "critic_explained_variance": -0.23789848476915632,
+      "critic_mse_over_in_sample_constant": 1.3133117296067618,
+      "decisions": 2417,
+      "positive_raw_advantage_fraction": 0.3967728589160116,
+      "round": 8,
+      "target_mean": 0.01995280017842123,
+      "target_std": 0.004568529754189422,
+      "value_mean": 0.021207385700981293
+    }
+  ],
+  "post_result_confirmation_intervals": [
+    {
+      "floor_difference": -0.75,
+      "panel": "round-004-confirmation",
+      "posthoc_paired_interval": [
+        -1.875,
+        0.375
+      ]
+    },
+    {
+      "floor_difference": -0.375,
+      "panel": "round-008-confirmation",
+      "posthoc_paired_interval": [
+        -1.6875,
+        0.8125
+      ]
+    }
+  ],
+  "production_checkpoints_written": 0,
+  "production_optimizer_steps": 0,
+  "report_id": "sha256:fb130af3be818e8ff3caf2a249ba56498feeb68ffa99c3b1480e19c337f1e03a",
+  "repository_checks": {
+    "path": "artifacts/resources/native-learning-diagnosis-repository-checks-v1.json",
+    "sha256": "6b863444fe399ce377f1fc41c3d0c384dfb76f9baa898dbee4db5105b37372a3",
+    "tests_passed": 1420,
+    "wall_seconds": 56.243226333055645
+  },
+  "representation_probe": {
+    "by_family": {
+      "card_bundle_selection": {
+        "kl_initial_to_1": 0.007844157318782647,
+        "kl_initial_to_2": 0.026063009006609204,
+        "model0_entropy": 0.6930322350549915,
+        "model0_p_select": 1.0,
+        "model0_saturation": 0.019230769230769232,
+        "model1_entropy": 0.6854623606661097,
+        "model1_p_select": 1.0,
+        "model1_saturation": 0.18269230769230768,
+        "model2_entropy": 0.6686337966371876,
+        "model2_p_select": 1.0,
+        "model2_saturation": 0.16466346153846154
+      },
+      "card_reward_selection": {
+        "kl_initial_to_1": 0.020234874464282744,
+        "kl_initial_to_2": 0.07084949530402024,
+        "model0_entropy": 1.4013716863406322,
+        "model0_p_activate": 0.15295778955269007,
+        "model0_p_select": 0.7985328616839452,
+        "model0_p_skip": 0.17597417339060645,
+        "model0_saturation": 0.03131510416666667,
+        "model1_entropy": 1.362954999279629,
+        "model1_p_activate": 0.13609803360953465,
+        "model1_p_select": 0.844071932934357,
+        "model1_p_skip": 0.13324506146405385,
+        "model1_saturation": 0.12200520833333334,
+        "model2_entropy": 1.3068192723673184,
+        "model2_p_activate": 0.14900451048124427,
+        "model2_p_select": 0.8706114550844645,
+        "model2_p_skip": 0.10455445983532814,
+        "model2_saturation": 0.14303385416666667
+      },
+      "card_selection": {
+        "kl_initial_to_1": 0.00846064925409966,
+        "kl_initial_to_2": 0.02452695849149785,
+        "model0_entropy": 1.7664602917791945,
+        "model0_p_cancel": 0.022769733139550392,
+        "model0_p_confirm": 0.9981025222383708,
+        "model0_saturation": 0.04308208528979003,
+        "model1_entropy": 1.7570152299295982,
+        "model1_p_cancel": 0.015470625982432942,
+        "model1_p_confirm": 0.9987107811681306,
+        "model1_saturation": 0.21144564671639024,
+        "model2_entropy": 1.739409213613586,
+        "model2_p_cancel": 0.012612276124887169,
+        "model2_p_confirm": 0.9989489769895927,
+        "model2_saturation": 0.22397648672567855
+      },
+      "combat_turn": {
+        "kl_initial_to_1": 0.024980141148662066,
+        "kl_initial_to_2": 0.04245461515203957,
+        "model0_entropy": 1.4680644819540676,
+        "model0_p_end_turn": 0.009442259781939705,
+        "model0_p_play": 0.9905577402180603,
+        "model0_saturation": 0.10188027033730158,
+        "model1_entropy": 1.4284117256183044,
+        "model1_p_end_turn": 0.005382775830376121,
+        "model1_p_play": 0.994617224169624,
+        "model1_saturation": 0.3389229910714286,
+        "model2_entropy": 1.4225382799943533,
+        "model2_p_end_turn": 0.009414025555573515,
+        "model2_p_play": 0.9905859744444265,
+        "model2_saturation": 0.5885726686507936
+      },
+      "event_option": {
+        "kl_initial_to_1": 0.011578117299843982,
+        "kl_initial_to_2": 0.04578586543845354,
+        "model0_entropy": 0.9136942374311613,
+        "model0_p_activate": 0.9683257604115886,
+        "model0_p_use": 0.7601817501218743,
+        "model0_saturation": 0.0006510416666666666,
+        "model1_entropy": 0.8965661691851619,
+        "model1_p_activate": 0.9652063113045174,
+        "model1_p_use": 0.8350485286915836,
+        "model1_saturation": 0.1362847222222222,
+        "model2_entropy": 0.8574358286843589,
+        "model2_p_activate": 0.9615879394125125,
+        "model2_p_use": 0.9218894540996998,
+        "model2_saturation": 0.12348090277777778
+      },
+      "map_navigation": {
+        "kl_initial_to_1": 0.007181397344804488,
+        "kl_initial_to_2": 0.00925450857635448,
+        "model0_entropy": 0.9793084878127986,
+        "model0_p_activate": 1.0,
+        "model0_saturation": 0.1796875,
+        "model1_entropy": 0.9719890619720144,
+        "model1_p_activate": 1.0,
+        "model1_saturation": 0.44939236111111114,
+        "model2_entropy": 0.9700084062312602,
+        "model2_p_activate": 1.0,
+        "model2_saturation": 0.5130208333333334
+      },
+      "native_generated_card_choice": {
+        "kl_initial_to_1": 0.013513190656199362,
+        "kl_initial_to_2": 0.05076720503956789,
+        "model0_entropy": 1.2658043605455405,
+        "model0_p_select": 0.7653435480478379,
+        "model0_p_skip": 0.23465645195216206,
+        "model0_saturation": 0.017144097222222224,
+        "model1_entropy": 1.2411357534461007,
+        "model1_p_select": 0.7900493710863682,
+        "model1_p_skip": 0.20995062891363178,
+        "model1_saturation": 0.0974392361111111,
+        "model2_entropy": 1.188905673763637,
+        "model2_p_select": 0.833672800845587,
+        "model2_p_skip": 0.1663271991544129,
+        "model2_saturation": 0.11317274305555555
+      },
+      "rest_site": {
+        "kl_initial_to_1": 0.005203688972334114,
+        "kl_initial_to_2": 0.057962296197873915,
+        "model0_entropy": 0.7269100733708272,
+        "model0_p_activate": 0.958272048475852,
+        "model0_p_close": 0.5007354182897764,
+        "model0_saturation": 0.009765625,
+        "model1_entropy": 0.7220771702490063,
+        "model1_p_activate": 0.9527694516791702,
+        "model1_p_close": 0.5667665798499575,
+        "model1_saturation": 0.11783854166666667,
+        "model2_entropy": 0.673334640690079,
+        "model2_p_activate": 0.9613841514346163,
+        "model2_p_close": 0.46339018278460364,
+        "model2_saturation": 0.1273871527777778
+      },
+      "reward_claim": {
+        "kl_initial_to_1": 0.05013315054433256,
+        "kl_initial_to_2": 0.08171705726758276,
+        "model0_entropy": 1.0890682209633615,
+        "model0_p_activate": 1.0,
+        "model0_saturation": 0.004448784722222222,
+        "model1_entropy": 1.003626623783719,
+        "model1_p_activate": 1.0,
+        "model1_saturation": 0.10579427083333333,
+        "model2_entropy": 0.9955129904663192,
+        "model2_p_activate": 1.0,
+        "model2_saturation": 0.08138020833333333
+      },
+      "reward_completion": {
+        "kl_initial_to_1": 0.04704251031187872,
+        "kl_initial_to_2": 0.3058667448634477,
+        "model0_entropy": 0.694217434679284,
+        "model0_p_activate": 0.936311172980612,
+        "model0_p_use": 0.7642659242326564,
+        "model0_saturation": 0.016276041666666668,
+        "model1_entropy": 0.6310409852930227,
+        "model1_p_activate": 0.9294975436059073,
+        "model1_p_use": 0.8460294767291126,
+        "model1_saturation": 0.08854166666666667,
+        "model2_entropy": 0.41957493144306923,
+        "model2_p_activate": 0.9232461782222408,
+        "model2_p_use": 0.9210458613331112,
+        "model2_saturation": 0.07552083333333333
+      },
+      "shop_inventory": {
+        "kl_initial_to_1": 0.006784377653029278,
+        "kl_initial_to_2": 0.05104623917663255,
+        "model0_entropy": 1.1307354408505275,
+        "model0_p_activate": 0.6312167449643953,
+        "model0_p_close": 0.3687832550356048,
+        "model0_saturation": 0.03716574224386724,
+        "model1_entropy": 1.120745154504612,
+        "model1_p_activate": 0.635830390375778,
+        "model1_p_close": 0.36416960962422196,
+        "model1_saturation": 0.18334686147186147,
+        "model2_entropy": 1.0720157074050345,
+        "model2_p_activate": 0.7350895440944812,
+        "model2_p_close": 0.2649104559055187,
+        "model2_saturation": 0.22313649891774892
+      },
+      "treasure_chest": {
+        "kl_initial_to_1": 0.015932301996905457,
+        "kl_initial_to_2": 0.1179202205558928,
+        "model0_entropy": 0.6926718358485754,
+        "model0_p_activate": 1.0,
+        "model0_saturation": 0.0,
+        "model1_entropy": 0.6715265455179508,
+        "model1_p_activate": 1.0,
+        "model1_saturation": 0.046875,
+        "model2_entropy": 0.5707084099407815,
+        "model2_p_activate": 1.0,
+        "model2_saturation": 0.046875
+      },
+      "treasure_relic_selection": {
+        "kl_initial_to_1": 0.001995777533132485,
+        "kl_initial_to_2": 0.023468922114558574,
+        "model0_entropy": 0.7079608740076954,
+        "model0_p_activate": 0.31986130960265907,
+        "model0_p_select": 0.5250690621793361,
+        "model0_p_skip": 0.4616033832538864,
+        "model0_saturation": 0.022786458333333332,
+        "model1_entropy": 0.704512335244726,
+        "model1_p_activate": 0.3523382345006134,
+        "model1_p_select": 0.5357002694354116,
+        "model1_p_skip": 0.44961897079372953,
+        "model1_saturation": 0.1091579861111111,
+        "model2_entropy": 0.6741177807851589,
+        "model2_p_activate": 0.4209274963472601,
+        "model2_p_select": 0.6133382328081588,
+        "model2_p_skip": 0.36912312151070537,
+        "model2_saturation": 0.10546875
+      }
+    },
+    "candidate_rows": 1042,
+    "exact_candidate_alias_pairs": 0,
+    "mean_clipped_bucket_fraction": 0.00024722311983897406,
+    "mean_tokens_per_row": 598.2725527831094,
+    "median_tokens_per_row": 439.0,
+    "states": 278
+  },
+  "resources": [
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-exploration-v1.json",
+      "sha256": "1d036a2aced7cd1ae2cd021ee47477c1c790ec14511bd5b2fcf0201fa7377b63"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-network-probe-v1.json",
+      "sha256": "8b6cec91727a0720e347f1393e6e19e09e9825c8dcd9cac250816c7e596477fc"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-gradient-v1.json",
+      "sha256": "8f1fded375e344156f674f1bb08e2591448b09b4ead603e44cdeadc75221542c"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-gradient-v2.json",
+      "sha256": "5c55b1e72cc37eea3a99fe2912164e7c9589812c505bb1cc1d72319116affa1e"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-gradient-noise-v1.json",
+      "sha256": "485ee83155e6b531b3b09047b6c3253e9cd3586f2d6379ba3f5c678bd55cbbd9"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-conditional-control-v1.json",
+      "sha256": "0ed4a4a4b26ffc543fc37271e766b02dda050bbe305922392cf99ac5f425caef"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-conditional-control-v2.json",
+      "sha256": "3549b3679a02009432d0a9b50f1e9227596b05440f857589e4eeff03d988f71e"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-verified-signal-v1.json",
+      "sha256": "4351f3273dfcad6e63433bdb03f3d39fe2f42d9740c64e8b8700ea80943d464e"
+    },
+    {
+      "path": "artifacts/resources/native-learning-diagnosis-confirmation-intervals-v1.json",
+      "sha256": "6be879b92b84d27b7785430a0ff8b31c22f676a0978de4ed228b3e092ed42f3f"
+    }
+  ],
+  "schema_version": "native-learning-diagnosis-evidence-v1",
+  "signal_audit_report_id": "sha256:497e34c56a6f78078ebf20141e5aae4cf9fddc02026e5aed995c66045012cd0e",
+  "single_action_training_decisions": 6545,
+  "source_files": [
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/explore.py",
+      "sha256": "82fd708f5ee02c9877a1bc9473c9dd2d59b33a05793075f487374728d5bf2f34"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/probe.py",
+      "sha256": "baa1dfc67dc5299b9bfd5329830dd8fec409bc7c76dfc28da82533316fc0c66b"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/gradient_control.py",
+      "sha256": "e7770f7a16e0041600622f3ce54a85e9dc347300d455c8a9bf199058bd760490"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/gradient_control_v2.py",
+      "sha256": "47dcb55ecfeaec73a321da1779a19fda14d30286602248b85e1df6d822be096e"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/gradient_noise.py",
+      "sha256": "2aa0359c960a4dfe04249b0cc9a12dd21ee55b640da4ed07470746e5318994b3"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/conditional_control.py",
+      "sha256": "ee682d13ad7da56834c02b8d47d40374f6810612cb5c3999b53c698a3f3165ed"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/conditional_control_v2.py",
+      "sha256": "49ff1701029153dc75a0a808ab7d03ab3299d22a62b16470c6ad58d2ed324f25"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/exploration.json",
+      "sha256": "c5dfbf44a1b5e0297cf0e8b06f4a36d9d1c2c8a051eed65268031f59cefedde0"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/probe-states.json",
+      "sha256": "c5a2e6a1ba1346269a01d4a7cb8f828ea02688700c01d6bfdab8d133de7c9d0c"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/network-probe.json",
+      "sha256": "bf541e95818207fe49b5ee05cd5fc83d4f5d813747845fe9047eab14e16ff174"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/gradient-control.json",
+      "sha256": "8262e7572cf8d5780f908d189c2099a5deff65f3f3dabcc23e74285c1069ae25"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/gradient-control-v2.json",
+      "sha256": "ce82c0dd57a4a2c5051913322dc6db974b467ca9e39f8c5bc729a2f3bb0eee78"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/gradient-noise.json",
+      "sha256": "475f8cd8355372dab89c273bc77f51054f49fbd1d94ecf1245b2d89c7016f564"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/conditional-control.json",
+      "sha256": "a0d6628b88c2c54637a6c09784cfda44806550fc627d156c0182e5a1ae9acf06"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/conditional-control-v2.json",
+      "sha256": "178182b794ba79d8d6c00d02773bbf212b37a586879d44766205ff71e12c678b"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/verified-audit/report.json",
+      "sha256": "59a97b21fbbe035160db15bbfdc944bca7012411106b9fa3f5159735b01a6d9b"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/verified-audit/source-at-launch.py",
+      "sha256": "b197643b3a43dd2285f89905e0b9ecac7d2e7a07513979f1066ca3f89987d94f"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/confirmation_intervals.py",
+      "sha256": "33493ce9eeb1306b57ba978f39755e28190efe51250800d1720edc8d864d79ff"
+    },
+    {
+      "path": "artifacts/diagnostics/native-a8-pilot-v5-v1/confirmation-intervals.json",
+      "sha256": "074aed3060ea9fc4fd31ac529b34534000eeebd83bdcc7ec36f85ba51537a6a6"
+    }
+  ],
+  "source_files_in_signal_audit": 531,
+  "source_report_id": "sha256:556b1e782706f8192f97692a262ab588f7c6b937bf97a36b6b6a229c971a6f8b",
+  "verified_training_decisions": 26061,
+  "verified_training_runs": 256
+}

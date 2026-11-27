@@ -1,0 +1,38 @@
+{
+  "schema_version": "engine-progression-bridges-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "stage": "privileged_shipped_act_and_ending_only",
+  "privileged_fixture": true,
+  "training_allowed": false,
+  "acts": [
+    1,
+    2
+  ],
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-run-progression-v5.json",
+  "native_config_id": "sha256:320b2c7e062c11bf8d10bbb7a1b730508b90fec0b944eeb68a24d3fc5afee925",
+  "native_report_id": "sha256:c45da4cd16aa514c8d6ae5a46ebe5cf8091db38e20beba78f8e40e6df253bc73",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-standard-v13.json",
+  "connector_config_id": "sha256:61010c82eaf865723344decf422c83f24d564d5a6d760e25f742a206ec7f83fd",
+  "working_app_config": "configs/engine-qualification/sts2-v0.111.0-working-app-serial-v1.json",
+  "working_app_config_id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/progression-bridges-v1",
+  "helpers_sha256": {
+    "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "engine-journey-tutorial-v4.mjs": "ba8a537a5c7446ed69b4f482614d434eaf60295f00bbb9205c2b9888f9e35f76",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-natural-shipped-contract-v1.mjs": "9c1b3573a4362b78efa1a1e758affbb53045bcfdf94c4e03f496ed59006635b5",
+    "engine-natural-tutorial-v1.mjs": "2ba6a18e93a491d6e9fe452ac97fca9235e53a4ccf5687f0feb6226652d18a8c",
+    "engine-natural-tutorial-v2.mjs": "1eb8ba174b567cdfcd639c1d01319bf4e337ef06ea4d5b8c7c8a2251fa1dc1f9",
+    "engine-natural-tutorial-v3.mjs": "30f7a344788e7b1b39b0181395c277c2eda2f42c2cf1d400562ddda137a8790b",
+    "engine-progression-contract-v2.mjs": "5208846a4560064f8fc720113e6795df99883700f9fb3eca7ebd46bd933c2166",
+    "engine-progression-shipped-probe-v2.mjs": "6ae93aa058613ef6fc1917a72719fc1b434b4a207d7160df5744289f9ef0420a",
+    "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "verify-engine-progression-saved-v3.mjs": "0b5b7311b7278b3ad63c9f527696df9a7483c8bd12706f492be96cafa84196c1"
+  },
+  "probe_revision": "v2",
+  "saved_verifier_revision": "v3"
+}

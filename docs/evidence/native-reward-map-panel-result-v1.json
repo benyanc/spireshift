@@ -1,0 +1,174 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_original_weights_and_Adam_unchanged": true,
+  "assessed_date": "2026-11-02",
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "checkpoint_promoted": false,
+  "controls": [
+    {
+      "clean_worker_reset": true,
+      "equal_choices": 57,
+      "full_inputs_match": true,
+      "kind": "reward_glyphs",
+      "report_id": "sha256:da42adfd9e477bcc413f16a79e24240ca681965b6ef7df1e777952d5bcf72051",
+      "target_prefix_reached": true,
+      "verification_id": "sha256:5911c43d52f3e58329a61585135d6c6d944850f39a94da9935f3080a482a271c"
+    },
+    {
+      "clean_worker_reset": true,
+      "equal_choices": 77,
+      "full_inputs_match": true,
+      "kind": "status_titles",
+      "report_id": "sha256:457cb6c59d552078bd3081d4c251274277b259343671e08be049fe3c272cc810",
+      "target_prefix_reached": true,
+      "verification_id": "sha256:37c27ea228b5ee53d9bb243c208e113744c56b12f4e065c03a7bf49d73c2d8e0"
+    },
+    {
+      "clean_worker_reset": true,
+      "equal_choices": 118,
+      "full_inputs_match": true,
+      "kind": "modified_deck",
+      "report_id": "sha256:159fe226ba94cb9743657a5108aedea3b14be81ecacf32f85bb4f6cc2029d0dd",
+      "target_prefix_reached": true,
+      "verification_id": "sha256:d7f543c363f35b804279320d7258a4cad5eabad511de63850a16c7325fe548cf"
+    },
+    {
+      "clean_worker_reset": true,
+      "equal_choices": 112,
+      "full_inputs_match": true,
+      "kind": "selector_belt",
+      "report_id": "sha256:2acb623ab4a1251712e1a0d266d2af319e1b648fc74dfb734f951be2671a00f6",
+      "target_prefix_reached": true,
+      "verification_id": "sha256:796268a1b3664e523cb6b7a20a0e7f47c7b49066f56505f8530dac23adea4462"
+    }
+  ],
+  "enemy_phase_stall": {
+    "fresh_selector_choices_per_host": 112,
+    "fresh_selector_control_complete": true,
+    "old_cause_resolved": false,
+    "scope": "The prior uncertain world415 stall is not reproduced by this fresh completed control. Its cause is not established and that old action/seed is not retried."
+  },
+  "fresh_full_game_strength_evidence": false,
+  "game_apps_created": 0,
+  "game_starts_in_completed_panel": 8,
+  "historical_v14_negative_result_preserved": true,
+  "matched_decision_pairs": 364,
+  "new_broader_panel_frozen": false,
+  "new_games_in_assessment": 0,
+  "next_owner_command": null,
+  "next_work_order": [
+    "Prepare a separately frozen finite broader compatibility proposal under the unchanged source tuple, with representative observed decisions/effects, fresh worlds and genuine ending controls; retain existing qualified evidence and exact batch/resume guard bindings. Do not launch automatically.",
+    "After required compatibility scopes qualify, check card-zone/exhaustion distinctions through the actual actor encoder from saved public records.",
+    "Propose varied fitting-only teaching with matched original/reference controls and a separately declared shared-policy-interference comparison; use fresh final worlds and terminal wins at equal whole-run compute."
+  ],
+  "optimizer_updates_in_assessment": 0,
+  "optimizer_updates_in_completed_panel": 0,
+  "outer_resource_report": {
+    "path": "artifacts/resources/reward-map-panel-v1-attempt-1.json",
+    "sha256": "a15754380e52f33b8dbccf50149f34a4b4bc37fc9f1a90d552a89b17558776f0"
+  },
+  "outer_resource_report_id": "sha256:eb60bf4cb27eb787d6c19ec6a5aea938f11b51b35e4fc48564b3332657c37df4",
+  "panel_report": {
+    "path": "artifacts/native-selection-flows/reward-map-panel-v1/report.json",
+    "sha256": "191cd01571f74aa13f067b52e659389a2b2a7dc8ca42ec3421ecdbe63216f988"
+  },
+  "panel_report_id": "sha256:3e106d6a8d9d351aabcbe3328fef69242927b1d8e05a391d720c17dfd16f5518",
+  "qualification_scope": "Four source-matched targeted prefixes on the frozen v0.111.0 Ironclad/A8 tuple; complete inputs/menus, checkpoint delivery and clean reset within each declared prefix.",
+  "references": {
+    "control_1_source_report": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/reward-glyphs/report.json",
+      "sha256": "d17febd2135b7f422d478c271fc7dbda4f35572c39f5d9269add487afa70e286"
+    },
+    "control_1_unit": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/units/01.json",
+      "sha256": "91384035298837890c88f1e544c88f41ff2f71ba484d0a8fdb2b049de0433f13"
+    },
+    "control_1_verification": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/reward-glyphs/verification-v1/report.json",
+      "sha256": "ae35fa3894e0c0435ecbf9ab8140713fbf20580164d096671154c1f312dfac00"
+    },
+    "control_1_verification_resource": {
+      "path": "artifacts/resources/reward-map-control-1-verify-v1.json",
+      "sha256": "6d3e6bf73b3f74ec2280dcab3602738d399767e591efedd5b3753e61e284aea4"
+    },
+    "control_2_source_report": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/status-titles/report.json",
+      "sha256": "9e2cbcfb893a8d5fcd3d475e37659daed34ab51910ae7d33fd2c5a71db47cd28"
+    },
+    "control_2_unit": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/units/02.json",
+      "sha256": "8abb3f67acb3d0a5cfa6681f4a696856bd5de2056362ac186ac9403f8c48c1e9"
+    },
+    "control_2_verification": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/status-titles/verification-v1/report.json",
+      "sha256": "62fde941018b76788a8d79fc02e0c68e48dc292d45d8855bd6d450586a929b97"
+    },
+    "control_2_verification_resource": {
+      "path": "artifacts/resources/reward-map-control-2-verify-v1.json",
+      "sha256": "79b2a168c555bf301943e34ac2afbb7dfc6ee1a735265fd1cbd51e891b71cebb"
+    },
+    "control_3_source_report": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/modified-deck/report.json",
+      "sha256": "86385c8a1fc26a7e07c765576e4d6e70fdc46af0774cf14d3c561ee54ccb3232"
+    },
+    "control_3_unit": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/units/03.json",
+      "sha256": "d1a68f47b08bdb5705c72c1246ea0eea914c11cb746a3dc82c23251b58da1906"
+    },
+    "control_3_verification": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/modified-deck/verification-v1/report.json",
+      "sha256": "62a04a5f072db23cb84d6f87cc368ab6f6ae9bc971b48ab4f16dc456a085ae4f"
+    },
+    "control_3_verification_resource": {
+      "path": "artifacts/resources/reward-map-control-3-verify-v1.json",
+      "sha256": "01fd078682a269c903eaf6f38fa9246dd39bef79886dc6c37dcd9d3bdc394157"
+    },
+    "control_4_source_report": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/selector-belt/report.json",
+      "sha256": "a8ce1367c1005214fd3252d60960ce02914a64f109b3cc948e16b34bf9fab4f3"
+    },
+    "control_4_unit": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/units/04.json",
+      "sha256": "0d762db8f423a4ed8fd057ad4284d388b1bf03388af582a20c8a6189e6065a44"
+    },
+    "control_4_verification": {
+      "path": "artifacts/native-selection-flows/reward-map-panel-v1/selector-belt/verification-v1/report.json",
+      "sha256": "d0e320c451563e1ae77085341d0b52a5320fe5ea46fd486cc088aa3f03172981"
+    },
+    "control_4_verification_resource": {
+      "path": "artifacts/resources/reward-map-control-4-verify-v1.json",
+      "sha256": "df1d1e12183deba31bc5c6bc36e95dd8e9c8dc8d2bd2098bdb2b914d5394f79d"
+    }
+  },
+  "report_id": "sha256:d2c954adc470e211a9fb47ce313cffc16e8a1caa85a77d584a61937840bac28d",
+  "saved_integrity_assessment": {
+    "evidence_files_verified": 1510,
+    "scope": "Rechecked pinned sources/evidence, full panel and each child identity, verifier hash/schema/counts, successful uncapped verification resources and clean-reset assertions. Reused sealed per-decision reconstruction; no game or optimizer work.",
+    "source_files_verified": 337,
+    "valid": true,
+    "wall_seconds": 18.05
+  },
+  "schema_version": "native-reward-map-targeted-panel-assessment-v1",
+  "scripted_world412_potion_replay_not_repeated": true,
+  "source_tuple": {
+    "cli": 54,
+    "converter": 14,
+    "layout": 11,
+    "official_connector": 24,
+    "shared_environment": 41,
+    "worker": 23
+  },
+  "status": "completed_targeted_panel_pass_assessed",
+  "training_allowed": false,
+  "usage": {
+    "cap": null,
+    "cpu_seconds": 390.753639292,
+    "final_storage_bytes_including_shared_app": 2455195574,
+    "outer_wall_seconds": 932.7825777090038,
+    "panel_wall_seconds": 904.2453886659932,
+    "peak_resident_memory_bytes": 988168192
+  },
+  "verified_host_deliveries": 728,
+  "world415_not_retried": true
+}

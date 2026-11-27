@@ -1,0 +1,865 @@
+{
+  "behavior": {
+    "first_changed_choice_counts": {
+      "combat_owned": 72,
+      "noncombat_owned": 56
+    },
+    "first_divergence_ownership": {
+      "path": "artifacts/native-consequences/result-assessment-v1/first-change-ownership.json",
+      "report_id": "sha256:1a20ec855e9f248975bfbdc65718e02d8ff80b0a349c101c4c30b3510beb9d67",
+      "sha256": "12ff626f8809ba99de7e3e2c575aa5f825783ee546efb53941a190b8723951f6"
+    },
+    "noncombat_matching": {
+      "identical_inputs_with_changed_learned_choice": 41,
+      "identical_public_input_pairs": 1073,
+      "paired_model_seed_cells": 128,
+      "same_rule_and_draws_not_frozen_noncombat_weights": true,
+      "shared_noncombat_draw_keys": 3524,
+      "valid": true
+    },
+    "observational_not_causal_attribution": true,
+    "prefix_pairs": 128,
+    "prior_public_divergence_without_changed_choice": 0,
+    "summaries": [
+      {
+        "first_changed_choice_family": {
+          "combat_turn": 18,
+          "event_option": 5,
+          "map_navigation": 6,
+          "native_generated_card_choice": 1,
+          "reward_claim": 2
+        },
+        "first_changed_verb": {
+          "activate -> activate": 11,
+          "activate -> skip": 1,
+          "activate -> use": 1,
+          "play -> end_turn": 1,
+          "play -> play": 14,
+          "play -> use": 3,
+          "select -> skip": 1
+        },
+        "identical_full_choices": 0,
+        "numerical_seed": 2,
+        "public_divergence_without_prior_changed_action": 0,
+        "variant": "return_only"
+      },
+      {
+        "first_changed_choice_family": {
+          "card_selection": 1,
+          "combat_turn": 18,
+          "event_option": 6,
+          "map_navigation": 6,
+          "reward_claim": 1
+        },
+        "first_changed_verb": {
+          "activate -> activate": 11,
+          "activate -> skip": 1,
+          "activate -> use": 1,
+          "confirm -> confirm": 1,
+          "play -> end_turn": 1,
+          "play -> play": 14,
+          "play -> use": 3
+        },
+        "identical_full_choices": 0,
+        "numerical_seed": 2,
+        "public_divergence_without_prior_changed_action": 0,
+        "variant": "consequence"
+      },
+      {
+        "first_changed_choice_family": {
+          "card_selection": 1,
+          "combat_turn": 18,
+          "event_option": 5,
+          "map_navigation": 8
+        },
+        "first_changed_verb": {
+          "activate -> activate": 13,
+          "confirm -> confirm": 1,
+          "play -> end_turn": 1,
+          "play -> play": 17
+        },
+        "identical_full_choices": 0,
+        "numerical_seed": 3,
+        "public_divergence_without_prior_changed_action": 0,
+        "variant": "return_only"
+      },
+      {
+        "first_changed_choice_family": {
+          "card_selection": 1,
+          "combat_turn": 18,
+          "event_option": 5,
+          "map_navigation": 8
+        },
+        "first_changed_verb": {
+          "activate -> activate": 13,
+          "confirm -> confirm": 1,
+          "play -> end_turn": 1,
+          "play -> play": 17
+        },
+        "identical_full_choices": 0,
+        "numerical_seed": 3,
+        "public_divergence_without_prior_changed_action": 0,
+        "variant": "consequence"
+      }
+    ]
+  },
+  "date": "2026-10-21",
+  "experimental_forks_preserved": [
+    {
+      "arm": "return_only",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 5658,
+      "model_id": "sha256:39bc20d37aa2b18912e714657a93e463406c31647ee58af0cff1ddf2dfc9b665",
+      "numerical_seed": 2,
+      "optimizer_steps": 5786,
+      "purpose": "final_fork",
+      "report_id": "sha256:4f42eb38fd4133c2c0abd1deefbd095e8662a69162daf7c5424d30c0bd0fef4a",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-return-only/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-return-only/state.json"
+    },
+    {
+      "arm": "consequence",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 5658,
+      "model_id": "sha256:f1a4842678f1dce9d1a90e12c142b175b0e7b39c33b9e8d587fc9d662553a32d",
+      "numerical_seed": 2,
+      "optimizer_steps": 5786,
+      "purpose": "final_fork",
+      "report_id": "sha256:7409fc1111348066c7c364d56153510ee0e44515e0b7224abd7591d39663475f",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-consequence/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p2-consequence/state.json"
+    },
+    {
+      "arm": "return_only",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 6045,
+      "model_id": "sha256:f94c89d7b6cdfb0d948b4faa4f4040def1cf61961b7bff3e1d2eb1810a678794",
+      "numerical_seed": 3,
+      "optimizer_steps": 6173,
+      "purpose": "final_fork",
+      "report_id": "sha256:aaab300b45d78d50d86ec52f57a393e2b720a2015dfb2b4e212701b97f4a2993",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-return-only/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-return-only/state.json"
+    },
+    {
+      "arm": "consequence",
+      "head_seed": 20261022,
+      "held_world": null,
+      "initial_optimizer_steps": 6045,
+      "model_id": "sha256:c324bbbc9b9a240f61cc82f27d1542f9654ff585c929edcd893b2c00ff23afd6",
+      "numerical_seed": 3,
+      "optimizer_steps": 6173,
+      "purpose": "final_fork",
+      "report_id": "sha256:69324cc2eedfb2b0e17045786f5fa93468804ec48dec8c1e83678ce2be035805",
+      "report_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-consequence/fit-report.json",
+      "stage": "fit",
+      "state_path": "artifacts/native-consequences/sts2-v0.111.0-a8-control-v1-keyfix/chunks/final-p3-consequence/state.json"
+    }
+  ],
+  "learning_interpretation": {
+    "absolute_value_regression_in_general_disproved": false,
+    "all_TRAIN_fitting_errors": [
+      {
+        "arm": "return_only",
+        "final_return_fitting_MSE": 3.337207517274232e-07,
+        "fitting_worlds": [
+          1910000,
+          1910002,
+          1910004,
+          1910006
+        ],
+        "model_id": "sha256:39bc20d37aa2b18912e714657a93e463406c31647ee58af0cff1ddf2dfc9b665",
+        "numerical_seed": 2,
+        "optimizer_steps": 5786,
+        "starting_return_fitting_MSE": 0.0010367889521929743
+      },
+      {
+        "arm": "consequence",
+        "final_return_fitting_MSE": 4.121937349258993e-07,
+        "fitting_worlds": [
+          1910000,
+          1910002,
+          1910004,
+          1910006
+        ],
+        "model_id": "sha256:f1a4842678f1dce9d1a90e12c142b175b0e7b39c33b9e8d587fc9d662553a32d",
+        "numerical_seed": 2,
+        "optimizer_steps": 5786,
+        "starting_return_fitting_MSE": 0.0010367889521929743
+      },
+      {
+        "arm": "return_only",
+        "final_return_fitting_MSE": 9.27056362831783e-07,
+        "fitting_worlds": [
+          1910001,
+          1910005,
+          1910007
+        ],
+        "model_id": "sha256:f94c89d7b6cdfb0d948b4faa4f4040def1cf61961b7bff3e1d2eb1810a678794",
+        "numerical_seed": 3,
+        "optimizer_steps": 6173,
+        "starting_return_fitting_MSE": 0.0004983230098741728
+      },
+      {
+        "arm": "consequence",
+        "final_return_fitting_MSE": 9.261894914183509e-07,
+        "fitting_worlds": [
+          1910001,
+          1910005,
+          1910007
+        ],
+        "model_id": "sha256:c324bbbc9b9a240f61cc82f27d1542f9654ff585c929edcd893b2c00ff23afd6",
+        "numerical_seed": 3,
+        "optimizer_steps": 6173,
+        "starting_return_fitting_MSE": 0.0004983230098741728
+      }
+    ],
+    "auxiliary_learning_in_general_disproved": false,
+    "candidate_explanations_not_isolated": [
+      "overfitting the tiny selected corpus",
+      "damage to action ordering",
+      "changed score calibration and noncombat probabilities",
+      "conditional continuation labels are not controlled causal action values"
+    ],
+    "combat_decision_rows": 442,
+    "confirmed_code_path": "native_consequence_math.forward/loss_gradient/fit regress original action scores to standardized recorded full-run returns in both arms",
+    "independent_TRAIN_worlds": 7,
+    "only_treatment_difference": "auxiliary gradients reach shared actor encoder in consequence arm",
+    "related_plan_and_stream_rows_not_independent_worlds": true
+  },
+  "next_work_not_implemented": [
+    "Saved-menu rank/margin/calibration diagnosis of common return-regression and added feedback separately.",
+    "Give outcome prediction its own readout; prediction-only control preserves original action scores and choices.",
+    "Keep deliberate policy update objective/gradient explicit; all legal families may remain learnable.",
+    "Only then admit the fresh sampled experience or qualified ranking labels required by that update.",
+    "Original-player controls, fresh whole-game evaluations and unchanged primary victory metric remain mandatory."
+  ],
+  "original_critic_weights_unchanged": true,
+  "original_qualification": {
+    "path": "docs/evidence/native-combat-consequence-learning-v1.json",
+    "report_id": "sha256:091e4b2e63f7e42f2fa74a0572190909325907d20de626c97aef6e0eb45421d1",
+    "sha256": "3e827a2cb1de1e7e29a7fc2b752a06417060bc3113eed4d057fc12c72599316f"
+  },
+  "outcome": {
+    "both_originals_clear_one_act_each_updated_forks_clear_none": true,
+    "both_supervised_forks_regress_in_pooled_floor_and_bootstrap_return": true,
+    "earlier_prediction_gains_not_useful_play_established": true,
+    "lower_episode_CPU_not_a_strength_or_useful_efficiency_gain": true,
+    "readiness_or_promotion_not_passed": true,
+    "small_auxiliary_advantage_over_return_only_inconclusive": true
+  },
+  "owner_collection": {
+    "aggregate": {
+      "consequence": {
+        "CPU_seconds": 132.49416907999995,
+        "act_completions": 0,
+        "best_floor": 17,
+        "denominator": 64,
+        "mean_floor": 8.25,
+        "mean_training_return": 0.020275116397767218,
+        "wins": 0
+      },
+      "original": {
+        "CPU_seconds": 174.52697141800002,
+        "act_completions": 2,
+        "best_floor": 23,
+        "denominator": 64,
+        "mean_floor": 10.84375,
+        "mean_training_return": 0.026196798705439797,
+        "wins": 0
+      },
+      "return_only": {
+        "CPU_seconds": 132.60583408299996,
+        "act_completions": 0,
+        "best_floor": 17,
+        "denominator": 64,
+        "mean_floor": 7.96875,
+        "mean_training_return": 0.019976310720495077,
+        "wins": 0
+      }
+    },
+    "all_zero_win_interval_does_not_prove_zero_true_win_probability": true,
+    "completed_games": 192,
+    "distinct_development_worlds": 32,
+    "failed_games": 0,
+    "fixed_parents": 2,
+    "interval_method": "seed_clustered_percentile_bootstrap_jointly_across_two_fixed_parents",
+    "multiplicity_corrected_success_claim": false,
+    "not_attempted_games": 0,
+    "paired_comparisons": {
+      "consequence_minus_original": {
+        "completed_acts": {
+          "interval95": [
+            -0.09375,
+            0.0
+          ],
+          "mean": -0.03125
+        },
+        "maximum_floor": {
+          "interval95": [
+            -3.859375,
+            -1.3125
+          ],
+          "mean": -2.59375
+        },
+        "training_return": {
+          "interval95": [
+            -0.011393045983772028,
+            -0.002339847239851742
+          ],
+          "mean": -0.005921682307672581
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      },
+      "consequence_minus_return_only": {
+        "completed_acts": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        },
+        "maximum_floor": {
+          "interval95": [
+            -0.046875,
+            0.640625
+          ],
+          "mean": 0.28125
+        },
+        "training_return": {
+          "interval95": [
+            -0.00024261476456842603,
+            0.0008788735338086669
+          ],
+          "mean": 0.00029880567727213683
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      },
+      "return_only_minus_original": {
+        "completed_acts": {
+          "interval95": [
+            -0.09375,
+            0.0
+          ],
+          "mean": -0.03125
+        },
+        "maximum_floor": {
+          "interval95": [
+            -4.125,
+            -1.59375
+          ],
+          "mean": -2.875
+        },
+        "training_return": {
+          "interval95": [
+            -0.011725292996141947,
+            -0.0027159518355465238
+          ],
+          "mean": -0.006220487984944718
+        },
+        "victory": {
+          "interval95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0
+        }
+      }
+    },
+    "per_parent": [
+      {
+        "arms": {
+          "consequence": {
+            "best_floor": 15,
+            "completed_games": 32,
+            "cpu_seconds": 56.71319816499998,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.017361378641175127,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 6.53125,
+            "not_attempted_games": 0,
+            "wins": 0
+          },
+          "original": {
+            "best_floor": 23,
+            "completed_games": 32,
+            "cpu_seconds": 82.57986708200004,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.02629948992118084,
+            "mean_completed_acts": 0.03125,
+            "mean_floor": 11.0,
+            "not_attempted_games": 0,
+            "wins": 0
+          },
+          "return_only": {
+            "best_floor": 13,
+            "completed_games": 32,
+            "cpu_seconds": 56.04747791600007,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.0171881391104592,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 6.3125,
+            "not_attempted_games": 0,
+            "wins": 0
+          }
+        },
+        "comparisons": {
+          "consequence_minus_original": {
+            "completed_acts": {
+              "interval95": [
+                -0.09375,
+                0.0
+              ],
+              "mean": -0.03125
+            },
+            "maximum_floor": {
+              "interval95": [
+                -6.4375,
+                -2.53125
+              ],
+              "mean": -4.46875
+            },
+            "training_return": {
+              "interval95": [
+                -0.015228749149944923,
+                -0.004319263074252886
+              ],
+              "mean": -0.008938111280005712
+            },
+            "victory": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            }
+          },
+          "consequence_minus_return_only": {
+            "completed_acts": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            },
+            "maximum_floor": {
+              "interval95": [
+                -0.28125,
+                0.78125
+              ],
+              "mean": 0.21875
+            },
+            "training_return": {
+              "interval95": [
+                -0.0007068854320552111,
+                0.0011322330333466209
+              ],
+              "mean": 0.00017323953071592818
+            },
+            "victory": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            }
+          },
+          "return_only_minus_original": {
+            "completed_acts": {
+              "interval95": [
+                -0.09375,
+                0.0
+              ],
+              "mean": -0.03125
+            },
+            "maximum_floor": {
+              "interval95": [
+                -6.5625,
+                -2.90625
+              ],
+              "mean": -4.6875
+            },
+            "training_return": {
+              "interval95": [
+                -0.015300128568792877,
+                -0.004793077120844689
+              ],
+              "mean": -0.00911135081072164
+            },
+            "victory": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            }
+          }
+        },
+        "numerical_seed": 2
+      },
+      {
+        "arms": {
+          "consequence": {
+            "best_floor": 17,
+            "completed_games": 32,
+            "cpu_seconds": 75.78097091499995,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.023188854154359305,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 9.96875,
+            "not_attempted_games": 0,
+            "wins": 0
+          },
+          "original": {
+            "best_floor": 21,
+            "completed_games": 32,
+            "cpu_seconds": 91.94710433599997,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.026094107489698756,
+            "mean_completed_acts": 0.03125,
+            "mean_floor": 10.6875,
+            "not_attempted_games": 0,
+            "wins": 0
+          },
+          "return_only": {
+            "best_floor": 17,
+            "completed_games": 32,
+            "cpu_seconds": 76.5583561669999,
+            "denominator": 32,
+            "failed_games": 0,
+            "mean_bootstrap_return": 0.02276448233053096,
+            "mean_completed_acts": 0.0,
+            "mean_floor": 9.625,
+            "not_attempted_games": 0,
+            "wins": 0
+          }
+        },
+        "comparisons": {
+          "consequence_minus_original": {
+            "completed_acts": {
+              "interval95": [
+                -0.09375,
+                0.0
+              ],
+              "mean": -0.03125
+            },
+            "maximum_floor": {
+              "interval95": [
+                -1.75,
+                0.4375
+              ],
+              "mean": -0.71875
+            },
+            "training_return": {
+              "interval95": [
+                -0.007828863457260197,
+                0.0002897742422486101
+              ],
+              "mean": -0.0029052533353394515
+            },
+            "victory": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            }
+          },
+          "consequence_minus_return_only": {
+            "completed_acts": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            },
+            "maximum_floor": {
+              "interval95": [
+                -0.0625,
+                0.84375
+              ],
+              "mean": 0.34375
+            },
+            "training_return": {
+              "interval95": [
+                -0.00016256534489353575,
+                0.0010709985407263783
+              ],
+              "mean": 0.0004243718238283455
+            },
+            "victory": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            }
+          },
+          "return_only_minus_original": {
+            "completed_acts": {
+              "interval95": [
+                -0.09375,
+                0.0
+              ],
+              "mean": -0.03125
+            },
+            "maximum_floor": {
+              "interval95": [
+                -2.25,
+                0.1875
+              ],
+              "mean": -1.0625
+            },
+            "training_return": {
+              "interval95": [
+                -0.008508651167935184,
+                2.0297514569532125e-05
+              ],
+              "mean": -0.003329625159167797
+            },
+            "victory": {
+              "interval95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            }
+          }
+        },
+        "numerical_seed": 3
+      }
+    ],
+    "planned_games": 192,
+    "uncertainty_covers_population_of_training_initializers": false,
+    "variants_per_parent": 3
+  },
+  "parents": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "verified_byte_identical": true
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "verified_byte_identical": true
+    }
+  ],
+  "report_id": "sha256:33db75ddc6a7c2d6ba6e37c2d71ea32d6d3e414f25f7c3111502892b66c5428e",
+  "resources": {
+    "main_final_cumulative_storage_bytes": 395877270,
+    "main_storage_scope": "Includes earlier offline-validation output in the same workspace. Do not add that earlier cumulative snapshot. Excludes separate inherited control workspace, read-only teacher and frozen native inputs, per qualification.",
+    "owner_peak_RAM_bytes": 509706240,
+    "owner_sessions": [
+      {
+        "cap": null,
+        "completed_at": "2026-10-21T18:58:41.849270Z",
+        "exit_code": 0,
+        "limits": {
+          "cpu_seconds": 1800.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 4000000000,
+          "wall_seconds": 900.0
+        },
+        "path": "artifacts/resources/native-combat-consequences-comparison-v1-1.json",
+        "report_id": "sha256:185ad136424660ff7cffde1c164a25152848708d95ac892e5009f20436fea8b2",
+        "sha256": "2ec71d1d62da82a5d0fa834e76b2e5ca7610585ad0c8f338a4621033433a07ce",
+        "started_at": "2026-10-21T18:45:44.973641Z",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.04268607256538351,
+          "cpu_hours": 0.1289616935297223,
+          "cpu_seconds": 464.2620967070003,
+          "energy_kwh": null,
+          "final_storage_bytes": 284251271,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 4,
+          "peak_resident_memory_bytes": 459735040,
+          "peak_storage_bytes": 284251271,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 776.8711512500886
+        }
+      },
+      {
+        "cap": null,
+        "completed_at": "2026-10-21T19:04:07.628183Z",
+        "exit_code": 0,
+        "limits": {
+          "cpu_seconds": 1800.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 4000000000,
+          "wall_seconds": 900.0
+        },
+        "path": "artifacts/resources/native-combat-consequences-comparison-v1-2.json",
+        "report_id": "sha256:72ca2374b5f445d152177cf24cce8249d8ab11dc890d30f74c8396c1c4e84a89",
+        "sha256": "98842ccdd8d611f180ef854a2e6107278b7d12644f5cde2bd0d54a36995f377c",
+        "started_at": "2026-10-21T18:58:42.594421Z",
+        "status": "completed",
+        "usage": {
+          "average_cpu_utilization": 0.052424857625704854,
+          "cpu_hours": 0.0662686468269444,
+          "cpu_seconds": 238.56712857699986,
+          "energy_kwh": null,
+          "final_storage_bytes": 395877270,
+          "gpu_hours": null,
+          "gpu_seconds": null,
+          "peak_process_count": 4,
+          "peak_resident_memory_bytes": 509706240,
+          "peak_storage_bytes": 395877270,
+          "simulations": null,
+          "trajectories": null,
+          "transitions": null,
+          "wall_seconds": 325.04636074998416
+        }
+      }
+    ],
+    "owner_total_CPU_seconds": 702.8292252840001,
+    "owner_total_wall_seconds": 1101.9175120000727,
+    "repository_check": {
+      "cap": null,
+      "completed_at": "2026-10-21T19:19:53.682915Z",
+      "exit_code": 0,
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-combat-consequences-result-repository-check-v1.json",
+      "report_id": "sha256:3eb7592f9d2c3b63e90e63c3a355e2f10d9f5f8797deb81c57aadca87fd5f0d7",
+      "sha256": "e8641b7cde18c46857879fb59a525f5da069f23acb232f01c2400b04a14691a8",
+      "started_at": "2026-10-21T19:17:39.729252Z",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.06427915015778422,
+        "cpu_hours": 0.033487199224166674,
+        "cpu_seconds": 120.55391720700003,
+        "energy_kwh": null,
+        "final_storage_bytes": 0,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 7,
+        "peak_resident_memory_bytes": 398032896,
+        "peak_storage_bytes": 0,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 133.96247562509961
+      }
+    },
+    "saved_audit": {
+      "cap": null,
+      "completed_at": "2026-10-21T19:15:04.387476Z",
+      "exit_code": 0,
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 1500000000,
+        "storage_bytes": 20000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-combat-consequences-result-assessment-v1.json",
+      "report_id": "sha256:4f838df7c13259b0300b3b9d68905e296f1e17dbe87e4f9df582694fe206aca4",
+      "sha256": "4425e4540b5485c8bdab869e92eeec31f6ba411d37945023b28a1c44a84c7e26",
+      "started_at": "2026-10-21T19:14:36.197121Z",
+      "status": "completed",
+      "usage": {
+        "average_cpu_utilization": 0.04214876793475197,
+        "cpu_hours": 0.004620688761666666,
+        "cpu_seconds": 16.634479541999998,
+        "energy_kwh": null,
+        "final_storage_bytes": 41914,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 218841088,
+        "peak_storage_bytes": 41914,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 28.19007929204963
+      }
+    }
+  },
+  "saved_result_audit": {
+    "auditor_path": "artifacts/native-consequences/result-assessment-v1/assess.py",
+    "auditor_sha256": "3167e8c66d88ff3411cace29e305c4cf3380e112b5e2db25d2e386bf6db5e566",
+    "collector_native_and_inference_audits_sealed_and_verified": true,
+    "every_saved_trace_ending_score_and_paired_summary_reconstructed": true,
+    "games_launched": 0,
+    "native_delivery_and_neural_logits_independently_recomputed": false,
+    "optimizer_updates": 0,
+    "path": "artifacts/native-consequences/result-assessment-v1/report.json",
+    "report_id": "sha256:6713e5f5d332e5312893262c60800b2222588495e936d2b6c06b3bfc144721eb",
+    "sha256": "b9e814e03186f0a3c920c3e5036e19a7866e684c8bb11a9212b5e80151f4a15e",
+    "verified_decisions": 22842,
+    "verified_games": 192,
+    "verified_source_files": 73174,
+    "verified_units": 255
+  },
+  "schema_version": "native-combat-consequence-learning-result-evidence-v1",
+  "source_report": {
+    "config_id": "sha256:7fd458bd7e64951e5f77bebac1bce9e9d298f7f2a5dd7f397223afaa73ff7989",
+    "path": "artifacts/native-consequences/sts2-v0.111.0-a8-comparison-v1/report.json",
+    "report_id": "sha256:e7609ad585e66bf738f6e9f623b591eedd3d0360408b20d8445ff02b77b4e7bd",
+    "sha256": "42e24f4df555ba96d9072bf379d5d145e8e395071de6e5a314504643cbe0f9a8",
+    "status": "native_consequence_comparison_complete"
+  },
+  "status": "completed_negative_full_game_result_no_fork_promotion",
+  "this_assessment": {
+    "adaptive_controller_allowed": false,
+    "automatic_further_experiment": false,
+    "checkpoint_promoted": false,
+    "games_launched": 0,
+    "new_recipe_prepared": false,
+    "optimizer_updates": 0,
+    "original_full_model_and_Adam_states_changed": false,
+    "owner_command_needed": false,
+    "push_or_GitHub_Actions_started": false
+  },
+  "tracking_issues": [
+    35,
+    143,
+    146
+  ],
+  "verification": {
+    "format_lint_CSharp_protocol_passed": true,
+    "runtime_training_sources_and_original_recipes_unchanged": true,
+    "skipped": 4,
+    "strict_typed_files": 435,
+    "tests_passed": 2171
+  }
+}

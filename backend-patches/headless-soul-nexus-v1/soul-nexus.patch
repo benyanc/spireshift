@@ -1,0 +1,54 @@
+--- a/src/Sts2Headless/RunSimulator.cs
++++ b/src/Sts2Headless/RunSimulator.cs
+@@ -23,2 +23,5 @@
+ using MegaCrit.Sts2.Core.Models.Characters;
++using MegaCrit.Sts2.Core.Models.Monsters;
++using MegaCrit.Sts2.Core.Nodes.Combat;
++using MegaCrit.Sts2.Core.Nodes.Rooms;
+ using MegaCrit.Sts2.Core.Multiplayer;
+@@ -4332,2 +4335,41 @@
+ 
++    internal static class HeadlessSoulNexusPresentation
++    {
++        private static readonly MethodInfo FindNode = typeof(NCombatRoom).GetMethod(
++            nameof(NCombatRoom.GetCreatureNode), new[] { typeof(Creature) })
++            ?? throw new MissingMethodException("Native NCombatRoom.GetCreatureNode(Creature)");
++
++        public static void Install()
++        {
++            var callback = typeof(SoulNexus).GetMethod("AfterDeath",
++                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly,
++                null, new[] { typeof(Creature) }, null)
++                ?? throw new MissingMethodException("Native SoulNexus.AfterDeath(Creature)");
++            if (PatchProcessor.GetOriginalInstructions(callback)
++                .Count(c => c.opcode == OpCodes.Callvirt && Equals(c.operand, FindNode)) != 1)
++                throw new InvalidOperationException("Soul Nexus death presentation call changed");
++            var transpiler = typeof(HeadlessSoulNexusPresentation).GetMethod(nameof(Transpile))!;
++            new Harmony("spireshift.headless.soul-nexus-presentation.v1")
++                .Patch(callback, transpiler: new HarmonyMethod(transpiler));
++        }
++
++        public static IEnumerable<CodeInstruction> Transpile(IEnumerable<CodeInstruction> instructions)
++        {
++            var lookup = typeof(HeadlessSoulNexusPresentation).GetMethod(nameof(FindPresentationNode))!;
++            foreach (var instruction in instructions)
++            {
++                if (instruction.opcode == OpCodes.Callvirt && Equals(instruction.operand, FindNode))
++                {
++                    instruction.opcode = OpCodes.Call;
++                    instruction.operand = lookup;
++                }
++                yield return instruction;
++            }
++        }
++
++        // Preserve the native Died unsubscribe and guard only the scene lookup.
++        public static NCreature? FindPresentationNode(NCombatRoom? room, Creature? creature) =>
++            TestMode.IsOn && room is null ? null : room!.GetCreatureNode(creature);
++    }
++
+     internal static class HeadlessMerchantPresentation
+@@ -4402,2 +4444,3 @@
+         HeadlessEventPresentation.Install();
++        HeadlessSoulNexusPresentation.Install();
+         HeadlessMerchantPresentation.Install();

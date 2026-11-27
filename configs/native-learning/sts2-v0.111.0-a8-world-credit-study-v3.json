@@ -1,0 +1,963 @@
+{
+  "assessment": {
+    "path": "docs/evidence/native-a8-action-credit-result-v1.json",
+    "sha256": "10b61de254db64dc9d59915b2e8dc8f5e808128a283b5ca5f83849a54091d36f"
+  },
+  "control": {
+    "evaluation": [
+      {
+        "arm": "pooled",
+        "key": "reload-01-p2-pooled",
+        "partition": "reload_control",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1P001"
+      },
+      {
+        "arm": "within_world",
+        "key": "reload-01-p2-within_world",
+        "partition": "reload_control",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1P001"
+      },
+      {
+        "arm": "pooled",
+        "key": "reload-01-p3-pooled",
+        "partition": "reload_control",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1P001"
+      },
+      {
+        "arm": "within_world",
+        "key": "reload-01-p3-within_world",
+        "partition": "reload_control",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1P001"
+      }
+    ],
+    "training": [
+      {
+        "draw": 0,
+        "key": "c-01-p2-draw-0",
+        "partition": "control",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C001",
+        "seed_id": 100310
+      },
+      {
+        "draw": 1,
+        "key": "c-01-p2-draw-1",
+        "partition": "control",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C001",
+        "seed_id": 100311
+      },
+      {
+        "draw": 2,
+        "key": "c-01-p2-draw-2",
+        "partition": "control",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C001",
+        "seed_id": 100312
+      },
+      {
+        "draw": 0,
+        "key": "c-01-p3-draw-0",
+        "partition": "control",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C001",
+        "seed_id": 100410
+      },
+      {
+        "draw": 1,
+        "key": "c-01-p3-draw-1",
+        "partition": "control",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C001",
+        "seed_id": 100411
+      },
+      {
+        "draw": 2,
+        "key": "c-01-p3-draw-2",
+        "partition": "control",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C001",
+        "seed_id": 100412
+      },
+      {
+        "draw": 0,
+        "key": "c-02-p2-draw-0",
+        "partition": "control",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C002",
+        "seed_id": 100320
+      },
+      {
+        "draw": 1,
+        "key": "c-02-p2-draw-1",
+        "partition": "control",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C002",
+        "seed_id": 100321
+      },
+      {
+        "draw": 2,
+        "key": "c-02-p2-draw-2",
+        "partition": "control",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C002",
+        "seed_id": 100322
+      },
+      {
+        "draw": 0,
+        "key": "c-02-p3-draw-0",
+        "partition": "control",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C002",
+        "seed_id": 100420
+      },
+      {
+        "draw": 1,
+        "key": "c-02-p3-draw-1",
+        "partition": "control",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C002",
+        "seed_id": 100421
+      },
+      {
+        "draw": 2,
+        "key": "c-02-p3-draw-2",
+        "partition": "control",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1C002",
+        "seed_id": 100422
+      }
+    ]
+  },
+  "control_resource": "artifacts/native-a8-world-credit/control-v1-resources.json",
+  "control_workspace": "artifacts/native-a8-world-credit/control-v1",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "implementation": {
+    "scripts/train-a8-world-credit-v1.sh": "6af74f40c4db344859b7f145ad4de626e4123af20edc77081d15c061577530f2",
+    "src/spireshift/native_a8_action_credit_audit.py": "16405888a092decfca32e4f3bf381c40c3f2c6bf03bd62a956210718619bb495",
+    "src/spireshift/native_a8_world_credit.py": "bcf519e9fff7f032cb7b9430449b0727f84868b9fe8e62c01b5c802d8de52240",
+    "src/spireshift/native_a8_world_credit_session.py": "38e9bebed699c12bc0a159f6befc6a917d68724ece9b4b39bab3e42906f26fe5"
+  },
+  "minimum_varied_worlds": {
+    "control": 1,
+    "study": 4
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "schema_version": "native-a8-world-credit-v1",
+  "score_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "settings": {
+    "actor_learning_rate": 0.0006,
+    "clip": 0.2,
+    "entropy_coefficient": 0.015,
+    "epochs": 1,
+    "gradient_clip": 1.0,
+    "minibatch_decisions": 128,
+    "target_kl": 0.03,
+    "temperature": 0.8,
+    "value_coefficient": 0.5,
+    "value_learning_rate": 0.003
+  },
+  "study": {
+    "evaluation": [
+      {
+        "arm": "original",
+        "key": "dev-01-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D001"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-01-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D001"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-01-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D001"
+      },
+      {
+        "arm": "original",
+        "key": "dev-01-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D001"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-01-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D001"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-01-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D001"
+      },
+      {
+        "arm": "original",
+        "key": "dev-02-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D002"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-02-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D002"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-02-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D002"
+      },
+      {
+        "arm": "original",
+        "key": "dev-02-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D002"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-02-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D002"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-02-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D002"
+      },
+      {
+        "arm": "original",
+        "key": "dev-03-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D003"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-03-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D003"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-03-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D003"
+      },
+      {
+        "arm": "original",
+        "key": "dev-03-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D003"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-03-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D003"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-03-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D003"
+      },
+      {
+        "arm": "original",
+        "key": "dev-04-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D004"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-04-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D004"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-04-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D004"
+      },
+      {
+        "arm": "original",
+        "key": "dev-04-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D004"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-04-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D004"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-04-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D004"
+      },
+      {
+        "arm": "original",
+        "key": "dev-05-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D005"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-05-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D005"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-05-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D005"
+      },
+      {
+        "arm": "original",
+        "key": "dev-05-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D005"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-05-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D005"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-05-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D005"
+      },
+      {
+        "arm": "original",
+        "key": "dev-06-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D006"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-06-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D006"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-06-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D006"
+      },
+      {
+        "arm": "original",
+        "key": "dev-06-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D006"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-06-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D006"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-06-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D006"
+      },
+      {
+        "arm": "original",
+        "key": "dev-07-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D007"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-07-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D007"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-07-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D007"
+      },
+      {
+        "arm": "original",
+        "key": "dev-07-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D007"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-07-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D007"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-07-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D007"
+      },
+      {
+        "arm": "original",
+        "key": "dev-08-p2-original",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D008"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-08-p2-pooled",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D008"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-08-p2-within-world",
+        "partition": "development",
+        "player": 2,
+        "seed": "SP1RESH1FTA8WR1D008"
+      },
+      {
+        "arm": "original",
+        "key": "dev-08-p3-original",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D008"
+      },
+      {
+        "arm": "pooled",
+        "key": "dev-08-p3-pooled",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D008"
+      },
+      {
+        "arm": "within_world",
+        "key": "dev-08-p3-within-world",
+        "partition": "development",
+        "player": 3,
+        "seed": "SP1RESH1FTA8WR1D008"
+      }
+    ],
+    "training": [
+      {
+        "draw": 0,
+        "key": "t-01-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T001",
+        "seed_id": 99310
+      },
+      {
+        "draw": 1,
+        "key": "t-01-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T001",
+        "seed_id": 99311
+      },
+      {
+        "draw": 2,
+        "key": "t-01-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T001",
+        "seed_id": 99312
+      },
+      {
+        "draw": 0,
+        "key": "t-01-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T001",
+        "seed_id": 99410
+      },
+      {
+        "draw": 1,
+        "key": "t-01-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T001",
+        "seed_id": 99411
+      },
+      {
+        "draw": 2,
+        "key": "t-01-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T001",
+        "seed_id": 99412
+      },
+      {
+        "draw": 0,
+        "key": "t-02-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99320
+      },
+      {
+        "draw": 1,
+        "key": "t-02-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99321
+      },
+      {
+        "draw": 2,
+        "key": "t-02-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99322
+      },
+      {
+        "draw": 0,
+        "key": "t-02-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99420
+      },
+      {
+        "draw": 1,
+        "key": "t-02-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99421
+      },
+      {
+        "draw": 2,
+        "key": "t-02-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T002",
+        "seed_id": 99422
+      },
+      {
+        "draw": 0,
+        "key": "t-03-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99330
+      },
+      {
+        "draw": 1,
+        "key": "t-03-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99331
+      },
+      {
+        "draw": 2,
+        "key": "t-03-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99332
+      },
+      {
+        "draw": 0,
+        "key": "t-03-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99430
+      },
+      {
+        "draw": 1,
+        "key": "t-03-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99431
+      },
+      {
+        "draw": 2,
+        "key": "t-03-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T003",
+        "seed_id": 99432
+      },
+      {
+        "draw": 0,
+        "key": "t-04-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99340
+      },
+      {
+        "draw": 1,
+        "key": "t-04-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99341
+      },
+      {
+        "draw": 2,
+        "key": "t-04-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99342
+      },
+      {
+        "draw": 0,
+        "key": "t-04-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99440
+      },
+      {
+        "draw": 1,
+        "key": "t-04-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99441
+      },
+      {
+        "draw": 2,
+        "key": "t-04-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T004",
+        "seed_id": 99442
+      },
+      {
+        "draw": 0,
+        "key": "t-05-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99350
+      },
+      {
+        "draw": 1,
+        "key": "t-05-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99351
+      },
+      {
+        "draw": 2,
+        "key": "t-05-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99352
+      },
+      {
+        "draw": 0,
+        "key": "t-05-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99450
+      },
+      {
+        "draw": 1,
+        "key": "t-05-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99451
+      },
+      {
+        "draw": 2,
+        "key": "t-05-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T005",
+        "seed_id": 99452
+      },
+      {
+        "draw": 0,
+        "key": "t-06-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99360
+      },
+      {
+        "draw": 1,
+        "key": "t-06-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99361
+      },
+      {
+        "draw": 2,
+        "key": "t-06-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99362
+      },
+      {
+        "draw": 0,
+        "key": "t-06-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99460
+      },
+      {
+        "draw": 1,
+        "key": "t-06-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99461
+      },
+      {
+        "draw": 2,
+        "key": "t-06-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T006",
+        "seed_id": 99462
+      },
+      {
+        "draw": 0,
+        "key": "t-07-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99370
+      },
+      {
+        "draw": 1,
+        "key": "t-07-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99371
+      },
+      {
+        "draw": 2,
+        "key": "t-07-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99372
+      },
+      {
+        "draw": 0,
+        "key": "t-07-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99470
+      },
+      {
+        "draw": 1,
+        "key": "t-07-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99471
+      },
+      {
+        "draw": 2,
+        "key": "t-07-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T007",
+        "seed_id": 99472
+      },
+      {
+        "draw": 0,
+        "key": "t-08-p2-draw-0",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99380
+      },
+      {
+        "draw": 1,
+        "key": "t-08-p2-draw-1",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99381
+      },
+      {
+        "draw": 2,
+        "key": "t-08-p2-draw-2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99382
+      },
+      {
+        "draw": 0,
+        "key": "t-08-p3-draw-0",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99480
+      },
+      {
+        "draw": 1,
+        "key": "t-08-p3-draw-1",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99481
+      },
+      {
+        "draw": 2,
+        "key": "t-08-p3-draw-2",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8WR1T008",
+        "seed_id": 99482
+      }
+    ]
+  },
+  "workspace": "artifacts/native-a8-world-credit/study-v3"
+}

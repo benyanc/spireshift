@@ -1,0 +1,261 @@
+{
+  "schema_version": "native-a8-paired-finals-result-evidence-v1",
+  "status": "saved_paired_development_comparison_verified",
+  "saved_recovery": {
+    "path": "artifacts/native-a8-paired/saved-recovery-v1/report.json",
+    "sha256": "0e2582c726011496e6286a591486188aab03262a121a04764fa5f69daf11e7ba",
+    "report_id": "sha256:74309c2264ea0fe22b042a2146ac1d96688b8d8a52464fba5f7e9704f102ec40",
+    "status": "saved_paired_development_comparison_verified"
+  },
+  "saved_recovery_resource": {
+    "path": "artifacts/resources/a8-paired-saved-recovery-v1.json",
+    "sha256": "6f8e04c1d3f75f1b6dc8e1113975e5b735db1e0f22c22a9bbd4f30d5b2e857a3",
+    "report_id": "sha256:1916a0a8a25e016292548fb92e3db04e8cd58a89facd3f465b48ee8d7ef83dca",
+    "status": "completed"
+  },
+  "active_checkout_frozen_inputs": {
+    "path": "artifacts/native-a8-paired/saved-recovery-v1/live-frozen-inputs.json",
+    "sha256": "d9319b156280e3616c9bb3bef98f08d4f426ecd72c5d602c63a19a1cf61f65a1",
+    "report_id": "sha256:c9e32176d533fb4c8de824bae6f42fbdf6953d48b393d6242e80eaa75eb12f83",
+    "status": "frozen_build_and_four_full_states_exact"
+  },
+  "audit_source": {
+    "path": "scripts/audit-a8-paired-saved-v1.py",
+    "sha256": "79339956f15824a44537f20fb0d816230bc7f15765f9fac997a6fafbc754a280"
+  },
+  "config_id": "sha256:20ba77171a8785f003ce5bb7f7ba609dd6affc024dde72cf48d0ad56b2511900",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "fitting_evidence_id": "sha256:dd579215a6a25bb74a4e1436c6ffe628d3332bced89268ff2a0ea52b7842157c",
+  "workflow_delta": {
+    "ci_commit": "761a7ceceaf3897d1a52dee6de7912aa742c4e08",
+    "current_sha256": "d6998f6bbf9e3f67bb760f97a98f95a1615b0195da4a833b7bb63ea8d1ab2e98",
+    "execution_commit": "da63b75371060d3c685e0cc9caa26108c399fce5",
+    "execution_sha256": "9a683b0f778510c57a889d7d65ddb54b3cbbc18a7a6b5ad9e23af836a0501b2b",
+    "historical_guard_ran_on_exact_checkout": true,
+    "path": ".github/workflows/ci.yml"
+  },
+  "failed_owner_attempt": {
+    "exit_code": 1,
+    "original_final_guard_passed": false,
+    "original_final_shared_profile_comparison_reconstructed": false,
+    "path": "artifacts/resources/a8-paired-finals-v1-1793985085447476000.json",
+    "report_id": "sha256:ddf0750874baed906f619e0939bb1a73978e8914d5c37814fce036aefcd03690",
+    "sha256": "b1eba10481b35f29f4aee308c30c364cea09ec81820a165bcf492e00e6650220"
+  },
+  "sealed_terminal_games": 48,
+  "verified_native_deliveries": 6948,
+  "summary": {
+    "by_initializer": {
+      "2": {
+        "arms": {
+          "fitted": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 12,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 12,
+        "terminal_pairs": 12
+      },
+      "3": {
+        "arms": {
+          "fitted": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          },
+          "original": {
+            "capped": 0,
+            "failed": 0,
+            "loss": 12,
+            "unattempted": 0,
+            "win": 0
+          }
+        },
+        "both_loss": 12,
+        "both_win": 0,
+        "fitted_minus_original_win_rate_bounds": [
+          0.0,
+          0.0
+        ],
+        "fitted_only_wins": 0,
+        "original_only_wins": 0,
+        "planned_worlds_per_arm": 12,
+        "terminal_pairs": 12
+      }
+    },
+    "pooled_fitted_minus_original_win_rate_bounds": [
+      0.0,
+      0.0
+    ],
+    "seed_clustered_bootstrap_95": {
+      "intervals": {
+        "player_2_wins": [
+          0.0,
+          0.0
+        ],
+        "player_3_wins": [
+          0.0,
+          0.0
+        ],
+        "pooled_completed_acts": [
+          0.0,
+          0.125
+        ],
+        "pooled_wins": [
+          0.0,
+          0.0
+        ]
+      },
+      "resamples": 10000,
+      "scope": "descriptive_for_these_worlds_and_two_fixed_initializers",
+      "seed": 20261020
+    }
+  },
+  "arm_progress": [
+    {
+      "act_1_boss_reached": 4,
+      "act_1_cleared": 0,
+      "arm": "original",
+      "games": 12,
+      "map_destinations": {
+        "boss": 4,
+        "elite": 10,
+        "monster": 49,
+        "restsite": 18,
+        "shop": 10,
+        "treasure": 6,
+        "unknown": 32
+      },
+      "maximum_act": 1,
+      "mean_farthest_floor": 11.75,
+      "median_farthest_floor": 10.5,
+      "player": 2,
+      "shop_actions": {
+        "Close shop inventory": 15,
+        "Leave shop": 15,
+        "Open inventory": 15,
+        "buy_card": 13,
+        "buy_potion": 8
+      },
+      "shop_visits": 15
+    },
+    {
+      "act_1_boss_reached": 2,
+      "act_1_cleared": 1,
+      "arm": "fitted",
+      "games": 12,
+      "map_destinations": {
+        "ancient": 1,
+        "boss": 2,
+        "elite": 9,
+        "monster": 46,
+        "restsite": 12,
+        "shop": 9,
+        "treasure": 5,
+        "unknown": 33
+      },
+      "maximum_act": 2,
+      "mean_farthest_floor": 10.75,
+      "median_farthest_floor": 9.0,
+      "player": 2,
+      "shop_actions": {
+        "Close shop inventory": 13,
+        "Leave shop": 13,
+        "Open inventory": 13,
+        "buy_card": 16,
+        "buy_potion": 4
+      },
+      "shop_visits": 13
+    },
+    {
+      "act_1_boss_reached": 3,
+      "act_1_cleared": 0,
+      "arm": "original",
+      "games": 12,
+      "map_destinations": {
+        "boss": 3,
+        "elite": 10,
+        "monster": 44,
+        "restsite": 17,
+        "shop": 10,
+        "treasure": 6,
+        "unknown": 37
+      },
+      "maximum_act": 1,
+      "mean_farthest_floor": 11.583333333333334,
+      "median_farthest_floor": 11.0,
+      "player": 3,
+      "shop_actions": {
+        "Close shop inventory": 14,
+        "Leave shop": 14,
+        "Open inventory": 14,
+        "buy_card": 3,
+        "buy_potion": 7,
+        "buy_relic": 1,
+        "removal_opened": 4
+      },
+      "shop_visits": 14
+    },
+    {
+      "act_1_boss_reached": 2,
+      "act_1_cleared": 0,
+      "arm": "fitted",
+      "games": 12,
+      "map_destinations": {
+        "boss": 2,
+        "elite": 7,
+        "monster": 48,
+        "restsite": 14,
+        "shop": 7,
+        "treasure": 5,
+        "unknown": 26
+      },
+      "maximum_act": 1,
+      "mean_farthest_floor": 10.083333333333334,
+      "median_farthest_floor": 8.5,
+      "player": 3,
+      "shop_actions": {
+        "Close shop inventory": 11,
+        "Leave shop": 11,
+        "Open inventory": 11,
+        "buy_card": 11,
+        "buy_potion": 2,
+        "removal_opened": 1
+      },
+      "shop_visits": 11
+    }
+  ],
+  "new_game_launches": 0,
+  "optimizer_updates": 0,
+  "final_test_worlds_used": false,
+  "official_live_qualification_granted": false,
+  "promotion_allowed": false,
+  "repository_check": {
+    "path": "artifacts/validation/a8-paired-saved-recovery-v1/resources.json",
+    "sha256": "56d320585150197bb164368b496f8784935e6c6b70a6d20757c9de591fde252e",
+    "report_id": "sha256:d32e2de7915e4b27e4b2605fbb625312fdaf917da091662b00a743cbfa5d7a1f",
+    "status": "completed",
+    "tests_passed": 2843
+  },
+  "report_id": "sha256:7bbdc9c0a4cd572548f08a586c02033eef776e97d386857eceba3e8cf4ecb577"
+}

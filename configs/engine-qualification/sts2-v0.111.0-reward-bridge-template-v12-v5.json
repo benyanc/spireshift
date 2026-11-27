@@ -1,0 +1,27 @@
+{
+  "schema_version": "engine-reward-bridge-config-v1",
+  "stage": "privileged_serialized_reward_pickup_differential_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-cli-reward-bridge-v12-v2.json",
+  "native_config_id": "sha256:3eb00e84031a2aa2bea17bfdf4ad563843f5e7d64aff1f187c0eb2b4f86477c9",
+  "connector_config": "configs/engine-qualification/sts2-v0.111.0-connector-reward-tutorial-v6.json",
+  "connector_config_id": "sha256:f317e460633fd0f32cf79118ec79fda374ccc43cfa4c2ce07a4a5053706d1d7c",
+  "working_app_config": "configs/engine-qualification/sts2-v0.111.0-working-app-serial-v1.json",
+  "working_app_config_id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/reward-bridge-template-v12-v5",
+  "seed": "SPIRESHIFTREWARD003",
+  "scenario": "calling-bell-claim-all",
+  "training_allowed": false,
+  "helpers_sha256": {
+    "engine-checkpoint-shipped-probe.mjs": "842f12cadb5636a2d8d073eb8e72a0a884611bd896adbf308cb44027f4422b72",
+    "engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-rest-bridge-contract.mjs": "b0122918993ff4b6613868e588b2c4953a9469123ddb384ca65cdc1b18aea896",
+    "engine-reward-bridge-contract-v1.mjs": "85d9f57fbb9acc09de1ec17811c504d33e88de8d868c212181f47ef57e360016",
+    "engine-reward-shipped-probe-v3.mjs": "bfac6275891b2cacb62511288ee89baba45dfdd541fed1701492621f1698eeb0",
+    "engine-reward-tutorial-v2.mjs": "418d364f36b81ac539d0c4b80c8b0ca05bc8e5b97d9a6f41d089c91aa5aa508d",
+    "engine-shop-bridge-contract.mjs": "c31b7af2febe9e7febc20c8a2fcf7ff10bab739dbf904f3fae2a33009341b714",
+    "verify-engine-reward-saved-v3.mjs": "801afd1cb8ecae9a8e39a651cedbb9f4ebe804251ce088b7e569acdb24a18821"
+  },
+  "bridge_revision": "v3"
+}

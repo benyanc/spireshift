@@ -1,0 +1,537 @@
+{
+  "actual_deliveries_independently_reconstructed": 1448,
+  "adaptive_controller_allowed": false,
+  "all_attempted_hosts_clean_shutdown_and_reset": true,
+  "all_current_policy_modes_live_qualified": false,
+  "all_fitted_final_weights_and_full_Adam_unchanged": true,
+  "all_original_weights_and_full_Adam_unchanged": true,
+  "assessment": {
+    "path": "artifacts/native-final-canaries/owner-assessment-v1/report.json",
+    "sha256": "b1ebbf515a0e1aa6007a084d562cc87446e36f6e546ad006a764f2b87f110625"
+  },
+  "assessment_id": "sha256:d333177294d1928860ef667170b604cf25054c74d67ded6931d8e6bbe977aa7c",
+  "assessment_resource": {
+    "path": "artifacts/resources/varied-final-canaries-owner-assessment-v1.json",
+    "sha256": "520471d7541b98d877bce8bee647e9c1719beb2f16b2e70d434e717a4abdb153"
+  },
+  "assessment_resource_id": "sha256:addf4e43f627375dbc8b808fe325824b6a99aa118b000d8eb4e3a60fe794b616",
+  "automatic_follow_up": false,
+  "automatic_resume_rejected": true,
+  "bank_id": "sha256:0099b16f0b22b15b83d0a10f1525460fbf13eb8bd9d25d1cfccca5bedda340df",
+  "budget": {
+    "hosts": 12,
+    "maximum_decisions": 384,
+    "maximum_pair_wall_seconds": 600,
+    "optimizer_updates": 0,
+    "pairs": 6,
+    "whole_run_cpu_seconds": 128
+  },
+  "cases": [
+    {
+      "case": {
+        "key": "canary-p2-reference",
+        "player": 2,
+        "seed": "SP1RESH1FTVTV201",
+        "variant": "reference"
+      },
+      "comparison": {
+        "complete_workflow_equal": true,
+        "explicit_ending_facts_equal": true,
+        "first_difference": null,
+        "later_divergent_states_realigned": false,
+        "matching_policy_inputs": 136,
+        "native_observations": 137,
+        "official_observations": 137,
+        "terminal_UI_presentation_graph_equality_required": false,
+        "terminal_full_graph_equal": false,
+        "terminal_graph_difference_paths_retained": [
+          "/candidates",
+          "/context/interaction/capabilities",
+          "/context/interaction/content/context/game_mode",
+          "/context/interaction/content/context/kind",
+          "/context/interaction/content/context/result",
+          "/context/interaction/content/context/run",
+          "/context/interaction/content/surface/can_advance_summary",
+          "/context/interaction/content/surface/can_return",
+          "/context/interaction/content/surface/other_controls",
+          "/context/interaction/content/surface/stage",
+          "/context/interaction/content/surface/victory",
+          "/context/interaction/stage",
+          "/context/referents"
+        ],
+        "terminal_persistent_state_and_all_public_reads_equality_required": true
+      },
+      "counts": {
+        "native": 136,
+        "official": 136
+      },
+      "incomplete_resume_rejected": false,
+      "native_clean_exit": true,
+      "native_ending_victory": false,
+      "native_policy_cpu_seconds": 4.947995840000004,
+      "official_checks": {
+        "Steam_disabled_observed": true,
+        "exact_delivery_count": true,
+        "frozen_archive_unchanged": true,
+        "natural_shutdown": true,
+        "personal_profile_unchanged": true,
+        "profile_path_logged": true,
+        "settings_template_unchanged": true,
+        "working_app_unchanged": true
+      },
+      "official_cpu_seconds": 94.8858528,
+      "official_ending_victory": false,
+      "official_policy_cpu_seconds": 94.06570816000001,
+      "report_ids": {
+        "native": "sha256:9ad4c5f8a6ac24905c78fd01f94b9536d777a412b69c2e53750337a0247a6329",
+        "official": "sha256:9d65e7332565bac908563e6deeaf5f18b2f1747c28ec34c5122a580defe7e9b1"
+      },
+      "row_counts": {
+        "native": {
+          "policy_choice": 136,
+          "policy_input": 137
+        },
+        "official": {
+          "ending_presentation_completion": 1,
+          "ending_presentation_proof": 1,
+          "ending_presentation_receipt": 1,
+          "episode_provenance": 1,
+          "observed": 1659,
+          "policy_choice": 136,
+          "policy_input": 137,
+          "public_frame": 137,
+          "receipt": 149,
+          "reward_proceed_acceptance": 4,
+          "reward_proceed_completion": 4,
+          "reward_ui_receipt": 2
+        }
+      },
+      "shop_tasks_independently_verified": 0,
+      "status": "matching_genuine_endings",
+      "working_app_restored_baseline": true
+    },
+    {
+      "case": {
+        "key": "canary-p3-reference",
+        "player": 3,
+        "seed": "SP1RESH1FTVTV202",
+        "variant": "reference"
+      },
+      "comparison": {
+        "complete_workflow_equal": true,
+        "explicit_ending_facts_equal": true,
+        "first_difference": null,
+        "later_divergent_states_realigned": false,
+        "matching_policy_inputs": 98,
+        "native_observations": 99,
+        "official_observations": 99,
+        "terminal_UI_presentation_graph_equality_required": false,
+        "terminal_full_graph_equal": false,
+        "terminal_graph_difference_paths_retained": [
+          "/candidates",
+          "/context/interaction/capabilities",
+          "/context/interaction/content/context/game_mode",
+          "/context/interaction/content/context/kind",
+          "/context/interaction/content/context/result",
+          "/context/interaction/content/context/run",
+          "/context/interaction/content/surface/can_advance_summary",
+          "/context/interaction/content/surface/can_return",
+          "/context/interaction/content/surface/other_controls",
+          "/context/interaction/content/surface/stage",
+          "/context/interaction/content/surface/victory",
+          "/context/interaction/stage",
+          "/context/referents"
+        ],
+        "terminal_persistent_state_and_all_public_reads_equality_required": true
+      },
+      "counts": {
+        "native": 98,
+        "official": 98
+      },
+      "incomplete_resume_rejected": false,
+      "native_clean_exit": true,
+      "native_ending_victory": false,
+      "native_policy_cpu_seconds": 4.660099115999998,
+      "official_checks": {
+        "Steam_disabled_observed": true,
+        "exact_delivery_count": true,
+        "frozen_archive_unchanged": true,
+        "natural_shutdown": true,
+        "personal_profile_unchanged": true,
+        "profile_path_logged": true,
+        "settings_template_unchanged": true,
+        "working_app_unchanged": true
+      },
+      "official_cpu_seconds": 67.73550304,
+      "official_ending_victory": false,
+      "official_policy_cpu_seconds": 67.036015296,
+      "report_ids": {
+        "native": "sha256:ff8e699599a5899131fc49f3f45d8391dc3af6cdf16b21c28aa9e57f6779cf52",
+        "official": "sha256:e4ebf099ce23aa7e867764811b5546e703ba2b73e8d08c95aa01a44ede2bb55c"
+      },
+      "row_counts": {
+        "native": {
+          "policy_choice": 98,
+          "policy_input": 99
+        },
+        "official": {
+          "atomic_selection_completion": 3,
+          "ending_presentation_completion": 1,
+          "ending_presentation_proof": 1,
+          "ending_presentation_receipt": 1,
+          "episode_provenance": 1,
+          "observed": 1145,
+          "policy_choice": 98,
+          "policy_input": 99,
+          "public_frame": 99,
+          "receipt": 109,
+          "reward_proceed_acceptance": 3,
+          "reward_proceed_completion": 3,
+          "selection_acceptance": 3,
+          "shop_lifecycle_proof": 2,
+          "shop_lifecycle_provenance": 2
+        }
+      },
+      "shop_tasks_independently_verified": 2,
+      "status": "matching_genuine_endings",
+      "working_app_restored_baseline": true
+    },
+    {
+      "case": {
+        "key": "canary-p2-teacher",
+        "player": 2,
+        "seed": "SP1RESH1FTVTV203",
+        "variant": "teacher"
+      },
+      "comparison": {
+        "complete_workflow_equal": true,
+        "explicit_ending_facts_equal": true,
+        "first_difference": null,
+        "later_divergent_states_realigned": false,
+        "matching_policy_inputs": 240,
+        "native_observations": 241,
+        "official_observations": 241,
+        "terminal_UI_presentation_graph_equality_required": false,
+        "terminal_full_graph_equal": false,
+        "terminal_graph_difference_paths_retained": [
+          "/candidates",
+          "/context/interaction/capabilities",
+          "/context/interaction/content/context/game_mode",
+          "/context/interaction/content/context/kind",
+          "/context/interaction/content/context/result",
+          "/context/interaction/content/context/run",
+          "/context/interaction/content/surface/can_advance_summary",
+          "/context/interaction/content/surface/can_return",
+          "/context/interaction/content/surface/other_controls",
+          "/context/interaction/content/surface/stage",
+          "/context/interaction/content/surface/victory",
+          "/context/interaction/stage",
+          "/context/referents"
+        ],
+        "terminal_persistent_state_and_all_public_reads_equality_required": true
+      },
+      "counts": {
+        "native": 240,
+        "official": 240
+      },
+      "incomplete_resume_rejected": false,
+      "native_clean_exit": true,
+      "native_ending_victory": false,
+      "native_policy_cpu_seconds": 6.9245944239999915,
+      "official_checks": {
+        "Steam_disabled_observed": true,
+        "exact_delivery_count": true,
+        "frozen_archive_unchanged": true,
+        "natural_shutdown": true,
+        "personal_profile_unchanged": true,
+        "profile_path_logged": true,
+        "settings_template_unchanged": true,
+        "working_app_unchanged": true
+      },
+      "official_cpu_seconds": 122.75666368,
+      "official_ending_victory": false,
+      "official_policy_cpu_seconds": 122.000093952,
+      "report_ids": {
+        "native": "sha256:65c42239dba8f963d6d8b0b1fc5ae4ac6e7d9d7b18838dda6b1540cc60b76d68",
+        "official": "sha256:1703599ac9179989f0cbfcf313d01a419d638b0e16d8384e9ef46fcb38fbd412"
+      },
+      "row_counts": {
+        "native": {
+          "policy_choice": 240,
+          "policy_input": 241
+        },
+        "official": {
+          "atomic_selection_completion": 1,
+          "ending_presentation_completion": 1,
+          "ending_presentation_proof": 1,
+          "ending_presentation_receipt": 1,
+          "episode_provenance": 1,
+          "observed": 2242,
+          "policy_choice": 240,
+          "policy_input": 241,
+          "public_frame": 241,
+          "receipt": 254,
+          "reward_proceed_acceptance": 7,
+          "reward_proceed_completion": 7,
+          "reward_ui_receipt": 2,
+          "selection_acceptance": 1,
+          "shop_lifecycle_proof": 2,
+          "shop_lifecycle_provenance": 2
+        }
+      },
+      "shop_tasks_independently_verified": 2,
+      "status": "matching_genuine_endings",
+      "working_app_restored_baseline": true
+    },
+    {
+      "case": {
+        "key": "canary-p3-teacher",
+        "player": 3,
+        "seed": "SP1RESH1FTVTV204",
+        "variant": "teacher"
+      },
+      "comparison": {
+        "complete_workflow_equal": false,
+        "explicit_ending_facts_equal": false,
+        "first_difference": null,
+        "later_divergent_states_realigned": false,
+        "matching_policy_inputs": 240,
+        "native_observations": 262,
+        "official_observations": 240,
+        "terminal_UI_presentation_graph_equality_required": false,
+        "terminal_full_graph_equal": false,
+        "terminal_graph_difference_paths_retained": [],
+        "terminal_persistent_state_and_all_public_reads_equality_required": true
+      },
+      "counts": {
+        "native": 261,
+        "official": 239
+      },
+      "incomplete_resume_rejected": true,
+      "native_clean_exit": true,
+      "native_ending_victory": false,
+      "native_policy_cpu_seconds": 7.688260072000006,
+      "official_checks": {
+        "Steam_disabled_observed": true,
+        "exact_delivery_count": true,
+        "frozen_archive_unchanged": true,
+        "natural_shutdown": true,
+        "personal_profile_unchanged": true,
+        "profile_path_logged": true,
+        "settings_template_unchanged": true,
+        "working_app_unchanged": true
+      },
+      "official_cpu_seconds": 128.184731264,
+      "official_ending_victory": null,
+      "official_policy_cpu_seconds": null,
+      "report_ids": {
+        "native": "sha256:a6ea41becb39f986e32dca011c824987e50bee9dd971114c29ad3b880051d130",
+        "official": "sha256:1fd3a10869cc9e216017935a9f6078401eb5031ff0c548057625e7b7eb27ed9c"
+      },
+      "row_counts": {
+        "native": {
+          "policy_choice": 261,
+          "policy_input": 262
+        },
+        "official": {
+          "atomic_selection_completion": 9,
+          "episode_provenance": 1,
+          "observed": 2267,
+          "policy_choice": 239,
+          "policy_input": 240,
+          "public_frame": 240,
+          "receipt": 253,
+          "reward_proceed_acceptance": 7,
+          "reward_proceed_completion": 7,
+          "selection_acceptance": 9,
+          "shop_lifecycle_proof": 2,
+          "shop_lifecycle_provenance": 2
+        }
+      },
+      "shop_tasks_independently_verified": 2,
+      "status": "official_cpu_guard_incomplete",
+      "working_app_restored_baseline": true
+    },
+    {
+      "case": {
+        "key": "canary-p2-teacher-original-noncombat",
+        "player": 2,
+        "seed": "SP1RESH1FTVTV205",
+        "variant": "teacher_original_noncombat"
+      },
+      "status": "unattempted"
+    },
+    {
+      "case": {
+        "key": "canary-p3-teacher-original-noncombat",
+        "player": 3,
+        "seed": "SP1RESH1FTVTV206",
+        "variant": "teacher_original_noncombat"
+      },
+      "status": "unattempted"
+    }
+  ],
+  "claim_scope": "three_declared_exact_final_pairs_and_one_acknowledged_prefix_only",
+  "client_date": "2026-11-04",
+  "config_id": "sha256:4bbaa639528094a3b18e746d211d816eeee6b9e271734d5f9cbea6e1f8c125c7",
+  "environment_id": "sha256:4c445e402d31ceea743165d203b03c1b9b6744f1a6a8396a797bb4a412efbc81",
+  "finals": {
+    "p2-original": {
+      "model_id": "sha256:f356284cc932a8f60dee6a43153617f4f16d57887c93df39999b3882febb3a05",
+      "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/initial-p2/state.json",
+      "sha256": "827139f8e7867277c1f30cea74dcef71ba3569af41dba389943522bd51e25e70",
+      "state_id": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d"
+    },
+    "p2-reference": {
+      "model_id": "sha256:0a6a7684d4a09c5775034a64c3535112f4d2d6424b9cf349fd0ac0429a0b55a5",
+      "optimizer_id": "sha256:72d4efaaec742818970bea71345f84d0601c4badb58aee5c5c9e7bd1a1a120d3",
+      "optimizer_steps": 5722,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p2-reference-e16/state.json",
+      "sha256": "f95acd136a69b514bbebc8dae474bb0102405d2435143f0866384a7484d8c20f",
+      "state_id": "sha256:fdaa4815dfe6aaead0fdf076a77b24ffb7ddf9e256648f158236e06e9750a7d2"
+    },
+    "p2-teacher": {
+      "model_id": "sha256:f6c4ba61c4fb7a83b464d744838770a90661d85d618d22062d449ce3a4167414",
+      "optimizer_id": "sha256:4bb4db732a46bc3848be54237c3626242419877308f7273d89983622e47253e1",
+      "optimizer_steps": 5722,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p2-teacher-e16/state.json",
+      "sha256": "a10e21efaad37f279413f9caedc97b699f71f82e982695484086b491c2ebaacf",
+      "state_id": "sha256:d8100e74937ebbaff1784e66aa9c18db576dca380bd74777f57946d8f9a67da0"
+    },
+    "p3-original": {
+      "model_id": "sha256:f5b9604413bb997c80d87630fb3c6fdc6f172ad29230c1770825757900732da8",
+      "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/initial-p3/state.json",
+      "sha256": "a6afc117311b7a63479fde9e5f03bd9aaca97815b32b5be5e46cf62ca7a83926",
+      "state_id": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+    },
+    "p3-reference": {
+      "model_id": "sha256:8a70ef98e6d8d2b57a215512fcfc4631cdd99a19e085a67beb6d90f7aef56438",
+      "optimizer_id": "sha256:c5650886ee8e670b9b8754d3670e57563111a4b83307ec1f988563afed043e14",
+      "optimizer_steps": 6109,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p3-reference-e16/state.json",
+      "sha256": "96d64752c00fc45ad8491e410749c5952ed271aa8ef49f5f13215e88d9c8db84",
+      "state_id": "sha256:ec75937f84a0a2748dfa8e463e461ee3393648db708ecdb4176a98a13e834b81"
+    },
+    "p3-teacher": {
+      "model_id": "sha256:2ca1623901d563bf040b64ab663985595d307b1684d9d31f583cc6d1835175ce",
+      "optimizer_id": "sha256:169c58a0728aa49c34f3a01d7ff152f2f6d5954ef6594102b8aeac5435b83b20",
+      "optimizer_steps": 6109,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p3-teacher-e16/state.json",
+      "sha256": "1c60cff689c37084f7910ab4b6f2a11d73453744a63b0e7b440c7997b5c9d5a8",
+      "state_id": "sha256:86cb5feb4598982e6affccdd854ce41c85091d58afd69fb661ee43a96d644907"
+    }
+  },
+  "fitting_report_id": "sha256:b5c79b141bf18d499606bc1b5dd06add639b5af7aacb5b794aeeb05a92f38984",
+  "frozen_checks": {
+    "all_protected_finals_and_originals_exact": true,
+    "candidate_unchanged": true,
+    "execution_runtime_exact": true,
+    "frozen_archive_unchanged": true,
+    "game_archive_verified": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "frozen_finals_id": "sha256:dbcb59804525246e6cd92a2a1273f7094afb735eca8c69dfa9171350f124d189",
+  "full_game_playing_strength_evaluated": false,
+  "game_build_frozen": true,
+  "genuine_matching_ending_pairs": 3,
+  "global_canary_report_absent": true,
+  "guard_receipt_id": "sha256:e61b1c0eedea55fa880e8f898396fe74b9456d1a3c73cc3aacc3b9e14e391b39",
+  "incomplete_marker_preserved": true,
+  "incomplete_pairs": 1,
+  "independent_audit_parts": [
+    {
+      "cpu_seconds": 47.242111415000004,
+      "report_id": "sha256:2d582fc51dac5aa25f69ee1664e9afc2a817494e4d8d5662f89f08c9f1b8ee55",
+      "resource_id": "sha256:2ccba93fc02c95abcf04dd572f359117648d04c8fa16db81172be4921558809a",
+      "wall_seconds": 61.59186633408535
+    },
+    {
+      "cpu_seconds": 45.669339322999996,
+      "report_id": "sha256:2bee82f9d4e4d49dea89387ce459952c9f7f302dc219599d8081ddd08ae8bef1",
+      "resource_id": "sha256:9949e238710b932d852a3c24f5bac70e6bdc266d5cccc0d197fac08cb36f488b",
+      "wall_seconds": 54.26020354102366
+    }
+  ],
+  "launch": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-varied-final-canaries-launch-v1.json",
+    "sha256": "3273e552d589756de5a08594c7b1ede5be55bb112d22fd9f8b7d52b8f152b0b5"
+  },
+  "matching_delivered_choice_pairs": 713,
+  "matching_offered_nonterminal_menus": 714,
+  "native_actual_deliveries_reconstructed": 735,
+  "new_games": 0,
+  "next_proposed_work": "separate saved/source CPU accounting and official-runner performance investigation; keep 128-second objective and exact finals; no replay of VTV204 or automatic new panel",
+  "official_actual_deliveries_reconstructed": 713,
+  "optimizer_updates": 0,
+  "outer_resource_cap": null,
+  "owner_resource": {
+    "path": "artifacts/resources/varied-final-canaries-v1-attempt-1.json",
+    "sha256": "e6371f88303377c128e577a2ec761672cfa55025883449543d9b22d4aea566e5"
+  },
+  "owner_resource_id": "sha256:65458594a230d7a85abb072a452117ac63dbd6c9e17de667e1590d86ec299853",
+  "owner_usage": {
+    "average_cpu_utilization": 0.02743622738822503,
+    "cpu_hours": 0.15279160697416666,
+    "cpu_seconds": 550.0497851069999,
+    "energy_kwh": null,
+    "final_storage_bytes": 46479789,
+    "gpu_hours": null,
+    "gpu_seconds": null,
+    "peak_process_count": 6,
+    "peak_resident_memory_bytes": 841875456,
+    "peak_storage_bytes": 46479789,
+    "simulations": null,
+    "trajectories": null,
+    "transitions": null,
+    "wall_seconds": 1432.0216044589179
+  },
+  "partial_case_prefix": {
+    "actual_deliveries_per_host_matched": 239,
+    "grants_qualification": false,
+    "native_ending_imputed_to_official": false,
+    "no_pending_delivered_action": true,
+    "offered_menus_matched": 240,
+    "official_ending_observed": false,
+    "prefix_verifier_changes": "same raw source/choice/distribution/receipt/atomic/reward checks; explicitly require pre-choice CPU abort and a nonterminal fully acknowledged prefix instead of an ending",
+    "unsubmitted_final_menu": true
+  },
+  "planned_pairs": 6,
+  "promotion_allowed": false,
+  "protected_prior_files_verified": 29714,
+  "qualification_granted": false,
+  "report_id": "sha256:94a9852b5597c7b872d18ff9250ce6572b062723926ea7bb4971906d92550f97",
+  "root_cause": {
+    "component_cpu_breakdown_retained": false,
+    "cpu_accounting": "Python coordinator delta plus Godot and SDK Node process user/system CPU, sampled from before official game launch; native totals worker, converter and Python delta",
+    "declared_cpu_seconds": 128,
+    "error": "Official gameplay compute guard before a genuine ending",
+    "kind": "official_per_host_cpu_guard",
+    "mechanics_or_public_input_divergence_observed": false,
+    "neural_inference_slowdown_established": false,
+    "observed_cpu_seconds": 128.184731264,
+    "secondary_client_abort_message": "No checkpoint choice supplied"
+  },
+  "schema_version": "native-varied-final-canary-result-v1",
+  "session_limits": {
+    "cpu_seconds": 7200,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 4200
+  },
+  "sources": {
+    "scripts/compare-varied-finals-v1.sh": "35bbc7e83aa79f8af06e7c43b88e395ac0c19cda05950efb5a2a358b970ab25c",
+    "scripts/varied-final-canaries-session-v1.py": "93a8448d22da69afd19e69856f923a0526183db35fd0c48ee79eaf14d50dc0ae",
+    "src/spireshift/native_final_canary_session.py": "b245ce818c71a04a20b2fa8c425911d773a56721a9435a6cbccc34d568c0624d",
+    "tests/unit/test_native_final_canary_session.py": "5f4b232c6527eaa0950651e878cba38cd027679b9dd929d469b717d3ae1548d2"
+  },
+  "status": "three_matching_pairs_one_official_cpu_guard_two_unattempted",
+  "timezone": "America/Toronto",
+  "training_allowed": false,
+  "unattempted_pairs": 2,
+  "withheld_or_full_game_evaluation_started": false
+}

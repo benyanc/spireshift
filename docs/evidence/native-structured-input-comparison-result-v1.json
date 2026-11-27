@@ -1,0 +1,1053 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment_date": "2026-10-22",
+  "assessment_new_games": 0,
+  "assessment_optimizer_steps": 0,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "clear_regression_established": false,
+  "completed_units": 323,
+  "failed_games": 0,
+  "final_state_inspection": [
+    {
+      "added_actor_parameters": 33792,
+      "added_actor_weight_L2": 8.237632110960805,
+      "arm": "hashed",
+      "final_optimizer_steps": 5865,
+      "inherited_parameter_change_L2": 2.0858875358000413,
+      "nonzero_added_actor_parameters": 21747,
+      "player": 2
+    },
+    {
+      "added_actor_parameters": 33792,
+      "added_actor_weight_L2": 10.33473431067328,
+      "arm": "named",
+      "final_optimizer_steps": 5865,
+      "inherited_parameter_change_L2": 2.026221677758497,
+      "nonzero_added_actor_parameters": 33099,
+      "player": 2
+    },
+    {
+      "added_actor_parameters": 0,
+      "added_actor_weight_L2": 0.0,
+      "arm": "unchanged",
+      "final_optimizer_steps": 5865,
+      "inherited_parameter_change_L2": 2.1899609277269283,
+      "nonzero_added_actor_parameters": 0,
+      "player": 2
+    },
+    {
+      "added_actor_parameters": 33792,
+      "added_actor_weight_L2": 10.032794333598385,
+      "arm": "named",
+      "final_optimizer_steps": 6273,
+      "inherited_parameter_change_L2": 2.0932527791349425,
+      "nonzero_added_actor_parameters": 33099,
+      "player": 3
+    },
+    {
+      "added_actor_parameters": 0,
+      "added_actor_weight_L2": 0.0,
+      "arm": "unchanged",
+      "final_optimizer_steps": 6276,
+      "inherited_parameter_change_L2": 2.1472382474376714,
+      "nonzero_added_actor_parameters": 0,
+      "player": 3
+    },
+    {
+      "added_actor_parameters": 33792,
+      "added_actor_weight_L2": 8.081536489909626,
+      "arm": "hashed",
+      "final_optimizer_steps": 6279,
+      "inherited_parameter_change_L2": 2.1165242040530217,
+      "nonzero_added_actor_parameters": 21780,
+      "player": 3
+    }
+  ],
+  "fixed_parents": 2,
+  "fresh_evaluation_worlds": 32,
+  "games_recorded": 640,
+  "independent_training_worlds": 64,
+  "interval_covers_population_of_initializers": false,
+  "interval_method": "world_clustered_bootstrap_jointly_across_two_fixed_parents",
+  "main_config_id": "sha256:c8d1bc89ef483718466a64fc8595c422cec915f69525c447d0069a60f601d934",
+  "main_resource_reports": [
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-1.json",
+      "report_id": "sha256:e2f8d54be95307b666e3744c3b6460ab606207dcc2472fb6a93e0061dc4f8966"
+    },
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-2.json",
+      "report_id": "sha256:311e24e968bce7b85adc372385e464cbacdbf5eb604085a477c7a16aed7e6c63"
+    },
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-3.json",
+      "report_id": "sha256:a8548f25318d20a94c55daf9446cbfc022dda9c4045a66b72cf671620667a216"
+    },
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-4.json",
+      "report_id": "sha256:3e084486422248e83be4f86745b046621d49a3bb9db777af69f88c64eeaf2c21"
+    },
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-5.json",
+      "report_id": "sha256:a5d4db084b016d56684940e81adeba8e4209295158e292f87966f83572c8f620"
+    },
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-6.json",
+      "report_id": "sha256:50ac7129fee38530e0045167487980036d9053bf9c51752b5ca2767faa0f7701"
+    },
+    {
+      "path": "artifacts/resources/native-structured-comparison-v1-7.json",
+      "report_id": "sha256:63069ff0570985d115e7ef6e0e2c53de5251c77c54a3aa121a9816074d44efae"
+    }
+  ],
+  "main_resources": {
+    "cpu_seconds": 3717.849770556,
+    "final_storage_bytes": 1052146513,
+    "game_apps_created": 0,
+    "peak_resident_memory_bytes": 1120010240,
+    "wall_seconds": 3610.586459876271
+  },
+  "more_training_automatically_allowed": false,
+  "next_agreed_factor": "richer_state_only_credit_validation_and_separate_actual_learning_test",
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "optimizer_steps_this_experiment": 1314,
+  "original_full_states_and_Adam_unchanged": true,
+  "originals": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "paired_comparisons": {
+    "hashed_minus_original": {
+      "completed_acts": {
+        "interval95": [
+          -0.078125,
+          0.03125
+        ],
+        "mean": -0.015625
+      },
+      "maximum_floor": {
+        "interval95": [
+          -0.421875,
+          1.109375
+        ],
+        "mean": 0.328125
+      },
+      "training_return": {
+        "interval95": [
+          -0.004518433642369062,
+          0.003080128592545612
+        ],
+        "mean": -0.0005796081988354127
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    },
+    "hashed_minus_unchanged": {
+      "completed_acts": {
+        "interval95": [
+          0.0,
+          0.046875
+        ],
+        "mean": 0.015625
+      },
+      "maximum_floor": {
+        "interval95": [
+          -0.203125,
+          1.171875
+        ],
+        "mean": 0.46875
+      },
+      "training_return": {
+        "interval95": [
+          -0.00021777584397358164,
+          0.004050318517100373
+        ],
+        "mean": 0.0014798048697032926
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    },
+    "named_minus_hashed": {
+      "completed_acts": {
+        "interval95": [
+          0.0,
+          0.078125
+        ],
+        "mean": 0.03125
+      },
+      "maximum_floor": {
+        "interval95": [
+          -1.15625,
+          0.34375
+        ],
+        "mean": -0.390625
+      },
+      "training_return": {
+        "interval95": [
+          -0.001154607904353483,
+          0.00478482275843343
+        ],
+        "mean": 0.0014014894689833573
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    },
+    "named_minus_original": {
+      "completed_acts": {
+        "interval95": [
+          -0.03125,
+          0.0625
+        ],
+        "mean": 0.015625
+      },
+      "maximum_floor": {
+        "interval95": [
+          -1.03125,
+          0.859375
+        ],
+        "mean": -0.0625
+      },
+      "training_return": {
+        "interval95": [
+          -0.0028272748399456663,
+          0.004687986206122816
+        ],
+        "mean": 0.0008218812701479444
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    },
+    "named_minus_unchanged": {
+      "completed_acts": {
+        "interval95": [
+          0.0,
+          0.09375
+        ],
+        "mean": 0.046875
+      },
+      "maximum_floor": {
+        "interval95": [
+          -0.796875,
+          0.984375
+        ],
+        "mean": 0.078125
+      },
+      "training_return": {
+        "interval95": [
+          -0.0004164983818516427,
+          0.0068843438098428866
+        ],
+        "mean": 0.00288129433868665
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    },
+    "unchanged_minus_original": {
+      "completed_acts": {
+        "interval95": [
+          -0.078125,
+          0.0
+        ],
+        "mean": -0.03125
+      },
+      "maximum_floor": {
+        "interval95": [
+          -1.03125,
+          0.75
+        ],
+        "mean": -0.140625
+      },
+      "training_return": {
+        "interval95": [
+          -0.0057889530224243405,
+          0.0007201427244530694
+        ],
+        "mean": -0.0020594130685387055
+      },
+      "victory": {
+        "interval95": [
+          0.0,
+          0.0
+        ],
+        "mean": 0.0
+      }
+    }
+  },
+  "per_parent_evaluation": [
+    {
+      "arms": {
+        "hashed": {
+          "decision_families": {
+            "card_bundle_selection": 3,
+            "card_reward_selection": 173,
+            "card_selection": 76,
+            "combat_turn": 2929,
+            "event_option": 212,
+            "map_navigation": 382,
+            "native_generated_card_choice": 4,
+            "rest_site": 99,
+            "reward_claim": 430,
+            "reward_completion": 121,
+            "shop_inventory": 121,
+            "treasure_chest": 32,
+            "treasure_completion": 28,
+            "treasure_relic_selection": 33
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 8561887,
+          "mean_completed_acts": 0.03125,
+          "mean_cpu_seconds": 2.9074811080625,
+          "mean_floor": 12.4375,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 18538466,
+          "supplement_known_occurrences": 5080479,
+          "unfamiliar_fact_occurrences": 4896100,
+          "wins": 0
+        },
+        "named": {
+          "decision_families": {
+            "card_bundle_selection": 3,
+            "card_reward_selection": 171,
+            "card_selection": 71,
+            "combat_turn": 2743,
+            "event_option": 226,
+            "map_navigation": 359,
+            "native_generated_card_choice": 7,
+            "rest_site": 80,
+            "reward_claim": 416,
+            "reward_completion": 124,
+            "shop_inventory": 107,
+            "treasure_chest": 27,
+            "treasure_completion": 20,
+            "treasure_relic_selection": 28
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 8970067,
+          "mean_completed_acts": 0.0625,
+          "mean_cpu_seconds": 2.97627434371875,
+          "mean_floor": 11.78125,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 23853131,
+          "supplement_known_occurrences": 5206090,
+          "unfamiliar_fact_occurrences": 9676974,
+          "wins": 0
+        },
+        "original": {
+          "decision_families": {
+            "card_bundle_selection": 3,
+            "card_reward_selection": 180,
+            "card_selection": 84,
+            "combat_turn": 2884,
+            "event_option": 196,
+            "map_navigation": 360,
+            "native_generated_card_choice": 8,
+            "rest_site": 95,
+            "reward_claim": 420,
+            "reward_completion": 127,
+            "shop_inventory": 116,
+            "treasure_chest": 24,
+            "treasure_completion": 16,
+            "treasure_relic_selection": 24
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 7856290,
+          "mean_completed_acts": 0.03125,
+          "mean_cpu_seconds": 2.49803670321875,
+          "mean_floor": 11.78125,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 12754521,
+          "supplement_known_occurrences": 4749406,
+          "unfamiliar_fact_occurrences": 148825,
+          "wins": 0
+        },
+        "unchanged": {
+          "decision_families": {
+            "card_bundle_selection": 3,
+            "card_reward_selection": 151,
+            "card_selection": 69,
+            "combat_turn": 2750,
+            "event_option": 194,
+            "map_navigation": 354,
+            "native_generated_card_choice": 5,
+            "rest_site": 95,
+            "reward_claim": 382,
+            "reward_completion": 110,
+            "shop_inventory": 110,
+            "treasure_chest": 27,
+            "treasure_completion": 22,
+            "treasure_relic_selection": 28
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 7064071,
+          "mean_completed_acts": 0.0,
+          "mean_cpu_seconds": 2.3802542539375002,
+          "mean_floor": 11.59375,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 11573923,
+          "supplement_known_occurrences": 4400248,
+          "unfamiliar_fact_occurrences": 109604,
+          "wins": 0
+        }
+      },
+      "comparisons": {
+        "hashed_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              -0.09375,
+              0.09375
+            ],
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": [
+              -0.59375,
+              2.03125
+            ],
+            "mean": 0.65625
+          },
+          "training_return": {
+            "interval95": [
+              -0.005666790577708356,
+              0.007101220161682118
+            ],
+            "mean": 0.000730675793351109
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "hashed_minus_unchanged": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.09375
+            ],
+            "mean": 0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -0.09375,
+              2.0
+            ],
+            "mean": 0.84375
+          },
+          "training_return": {
+            "interval95": [
+              -8.701765581390253e-05,
+              0.00776900720328578
+            ],
+            "mean": 0.0028232525540486985
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "named_minus_hashed": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.09375
+            ],
+            "mean": 0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -2.0625,
+              0.75
+            ],
+            "mean": -0.65625
+          },
+          "training_return": {
+            "interval95": [
+              -0.0024282513312987625,
+              0.006453294433768663
+            ],
+            "mean": 0.001126848851689317
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "named_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              -0.0625,
+              0.125
+            ],
+            "mean": 0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.6875,
+              1.6875
+            ],
+            "mean": 0.0
+          },
+          "training_return": {
+            "interval95": [
+              -0.005450151590828733,
+              0.009598709620318573
+            ],
+            "mean": 0.001857524645040426
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "named_minus_unchanged": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.15625
+            ],
+            "mean": 0.0625
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.1875,
+              1.59375
+            ],
+            "mean": 0.1875
+          },
+          "training_return": {
+            "interval95": [
+              -0.0010253145265855645,
+              0.01066901291887113
+            ],
+            "mean": 0.003950101405738015
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "unchanged_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              -0.09375,
+              0.0
+            ],
+            "mean": -0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.34375,
+              0.96875
+            ],
+            "mean": -0.1875
+          },
+          "training_return": {
+            "interval95": [
+              -0.007276323134836672,
+              0.0012395315748074853
+            ],
+            "mean": -0.0020925767606975896
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        }
+      },
+      "player": 2
+    },
+    {
+      "arms": {
+        "hashed": {
+          "decision_families": {
+            "card_reward_selection": 137,
+            "card_selection": 48,
+            "combat_turn": 3978,
+            "event_option": 190,
+            "map_navigation": 324,
+            "native_generated_card_choice": 2,
+            "rest_site": 74,
+            "reward_claim": 397,
+            "reward_completion": 158,
+            "shop_inventory": 93,
+            "treasure_chest": 25,
+            "treasure_completion": 25,
+            "treasure_relic_selection": 24
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 9155504,
+          "mean_completed_acts": 0.0,
+          "mean_cpu_seconds": 3.1668452825,
+          "mean_floor": 11.125,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 15132662,
+          "supplement_known_occurrences": 5846261,
+          "unfamiliar_fact_occurrences": 130897,
+          "wins": 0
+        },
+        "named": {
+          "decision_families": {
+            "card_reward_selection": 136,
+            "card_selection": 59,
+            "combat_turn": 4024,
+            "event_option": 196,
+            "map_navigation": 320,
+            "native_generated_card_choice": 2,
+            "rest_site": 68,
+            "reward_claim": 376,
+            "reward_completion": 146,
+            "shop_inventory": 97,
+            "treasure_chest": 25,
+            "treasure_completion": 25,
+            "treasure_relic_selection": 24
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 9603895,
+          "mean_completed_acts": 0.03125,
+          "mean_cpu_seconds": 3.2342033855625,
+          "mean_floor": 11.0,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 15736206,
+          "supplement_known_occurrences": 5954298,
+          "unfamiliar_fact_occurrences": 178013,
+          "wins": 0
+        },
+        "original": {
+          "decision_families": {
+            "card_bundle_selection": 1,
+            "card_reward_selection": 138,
+            "card_selection": 50,
+            "combat_turn": 3990,
+            "event_option": 184,
+            "map_navigation": 325,
+            "native_generated_card_choice": 5,
+            "rest_site": 76,
+            "reward_claim": 394,
+            "reward_completion": 148,
+            "shop_inventory": 102,
+            "treasure_chest": 24,
+            "treasure_completion": 24,
+            "treasure_relic_selection": 23
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 9487988,
+          "mean_completed_acts": 0.03125,
+          "mean_cpu_seconds": 2.8696041471875002,
+          "mean_floor": 11.125,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 15587151,
+          "supplement_known_occurrences": 5905765,
+          "unfamiliar_fact_occurrences": 193398,
+          "wins": 0
+        },
+        "unchanged": {
+          "decision_families": {
+            "card_reward_selection": 135,
+            "card_selection": 45,
+            "combat_turn": 3645,
+            "event_option": 188,
+            "map_navigation": 322,
+            "native_generated_card_choice": 2,
+            "rest_site": 76,
+            "reward_claim": 368,
+            "reward_completion": 152,
+            "shop_inventory": 95,
+            "treasure_chest": 25,
+            "treasure_completion": 25,
+            "treasure_relic_selection": 24
+          },
+          "denominator": 32,
+          "failed_games": 0,
+          "fitting_facts_outside_supplement": 8790757,
+          "mean_completed_acts": 0.0,
+          "mean_cpu_seconds": 2.7270805495,
+          "mean_floor": 11.03125,
+          "not_attempted_games": 0,
+          "recorded": 32,
+          "supplement_fact_occurrences": 14417556,
+          "supplement_known_occurrences": 5490209,
+          "unfamiliar_fact_occurrences": 136590,
+          "wins": 0
+        }
+      },
+      "comparisons": {
+        "hashed_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              -0.09375,
+              0.0
+            ],
+            "mean": -0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -0.9375,
+              0.9375
+            ],
+            "mean": 0.0
+          },
+          "training_return": {
+            "interval95": [
+              -0.0067189009121018895,
+              0.0011928316144957823
+            ],
+            "mean": -0.0018898921910219344
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "hashed_minus_unchanged": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": [
+              -0.96875,
+              1.125
+            ],
+            "mean": 0.09375
+          },
+          "training_return": {
+            "interval95": [
+              -0.0013778245707593531,
+              0.001593097689477423
+            ],
+            "mean": 0.00013635718535788674
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "named_minus_hashed": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.09375
+            ],
+            "mean": 0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -0.9375,
+              0.5625
+            ],
+            "mean": -0.125
+          },
+          "training_return": {
+            "interval95": [
+              -0.00116492303992304,
+              0.006331372200401091
+            ],
+            "mean": 0.0016761300862773974
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "named_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.25,
+              0.96875
+            ],
+            "mean": -0.125
+          },
+          "training_return": {
+            "interval95": [
+              -0.001859019759600719,
+              0.0013961257156821674
+            ],
+            "mean": -0.00021376210474453698
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "named_minus_unchanged": {
+          "completed_acts": {
+            "interval95": [
+              0.0,
+              0.09375
+            ],
+            "mean": 0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.375,
+              1.34375
+            ],
+            "mean": -0.03125
+          },
+          "training_return": {
+            "interval95": [
+              -0.0017714255187957853,
+              0.0072271913246564
+            ],
+            "mean": 0.001812487271635284
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        },
+        "unchanged_minus_original": {
+          "completed_acts": {
+            "interval95": [
+              -0.09375,
+              0.0
+            ],
+            "mean": -0.03125
+          },
+          "maximum_floor": {
+            "interval95": [
+              -1.53125,
+              1.3125
+            ],
+            "mean": -0.09375
+          },
+          "training_return": {
+            "interval95": [
+              -0.007591183526613188,
+              0.0016581722099779602
+            ],
+            "mean": -0.002026249376379821
+          },
+          "victory": {
+            "interval95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          }
+        }
+      },
+      "player": 3
+    }
+  ],
+  "phase_summary": {
+    "evaluation": {
+      "decisions": 39624,
+      "families": {
+        "card_bundle_selection": 13,
+        "card_reward_selection": 1221,
+        "card_selection": 502,
+        "combat_turn": 26943,
+        "event_option": 1586,
+        "map_navigation": 2746,
+        "native_generated_card_choice": 35,
+        "rest_site": 663,
+        "reward_claim": 3183,
+        "reward_completion": 1086,
+        "shop_inventory": 841,
+        "treasure_chest": 209,
+        "treasure_completion": 185,
+        "treasure_relic_selection": 208
+      },
+      "games": 256,
+      "terminal_games": 256,
+      "wins": 0
+    },
+    "training": {
+      "decisions": 55642,
+      "families": {
+        "card_bundle_selection": 33,
+        "card_reward_selection": 1842,
+        "card_selection": 705,
+        "combat_turn": 37527,
+        "event_option": 2336,
+        "map_navigation": 3864,
+        "native_generated_card_choice": 58,
+        "rest_site": 814,
+        "reward_claim": 4644,
+        "reward_completion": 1673,
+        "shop_inventory": 1104,
+        "treasure_chest": 283,
+        "treasure_completion": 217,
+        "treasure_relic_selection": 268
+      },
+      "games": 384,
+      "terminal_games": 384,
+      "wins": 0
+    }
+  },
+  "planned_units": 323,
+  "pooled_evaluation": {
+    "hashed": {
+      "failed_games": 0,
+      "games": 64,
+      "mean_cpu_seconds": 3.0371631952812503,
+      "mean_floor": 11.78125,
+      "total_completed_acts": 1,
+      "wins": 0
+    },
+    "named": {
+      "failed_games": 0,
+      "games": 64,
+      "mean_cpu_seconds": 3.105238864640625,
+      "mean_floor": 11.390625,
+      "total_completed_acts": 3,
+      "wins": 0
+    },
+    "original": {
+      "failed_games": 0,
+      "games": 64,
+      "mean_cpu_seconds": 2.683820425203125,
+      "mean_floor": 11.453125,
+      "total_completed_acts": 2,
+      "wins": 0
+    },
+    "unchanged": {
+      "failed_games": 0,
+      "games": 64,
+      "mean_cpu_seconds": 2.55366740171875,
+      "mean_floor": 11.3125,
+      "total_completed_acts": 0,
+      "wins": 0
+    }
+  },
+  "primary_comparison": "named_minus_hashed",
+  "prior_negative_rich_predictor_results_must_be_preserved": true,
+  "report_id": "sha256:10e62d862b0053a840b940600b2d4175c3cfa3e429469bcbe809abc6d7e407af",
+  "saved_audit": {
+    "decisions_verified": 95266,
+    "exact_full_state_imports": 6,
+    "game_apps_created": 0,
+    "games_verified": 640,
+    "initial_native_public_and_action_traces_identical": true,
+    "matched_initial_player_world_groups": 64,
+    "native_and_probability_audits_reused_from_verified_seals": true,
+    "native_delivery_or_policy_inference_replayed": false,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "original_full_states_and_Adam_unchanged": true,
+    "paired_tables_and_scores_reconstructed": true,
+    "report_id": "sha256:c6b4023b49da75f99587272fd17a1751673b1ac3c231d956710432b2e7168c79",
+    "schema_version": "native-structured-saved-audit-v1",
+    "source_report_id": "sha256:a8ecf0239aab0ff4cca0a0ee9af189b7159bc94df89765fc3029231d96142d3a",
+    "verified_source_files": 32677,
+    "verified_units": 323,
+    "wall_seconds": 30.280828792136163
+  },
+  "schema_version": "native-structured-input-comparison-result-v1",
+  "session_count_including_offline_preflight": 8,
+  "source_report_id": "sha256:a8ecf0239aab0ff4cca0a0ee9af189b7159bc94df89765fc3029231d96142d3a",
+  "source_report_path": "artifacts/native-structured/sts2-v0.111.0-a8-comparison-v1/report.json",
+  "structured_input_improvement_established": false,
+  "total_session_wall_seconds_including_offline_preflight": 3615.2491528743412,
+  "training_games_per_fitted_copy": 64,
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}

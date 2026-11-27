@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/public-neural-combat-policy-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "public-neural-combat-policy-v1"
+    },
+    "head_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "encoder_id": {
+      "const": "shared-public-combat-card-properties-v1"
+    },
+    "layout": {
+      "$ref": "public-combat-layout-v3.json"
+    },
+    "feature_dimension": {
+      "type": "integer",
+      "minimum": 64,
+      "maximum": 4096
+    },
+    "hidden_units": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 128
+    },
+    "activation": {
+      "const": "tanh"
+    },
+    "scope": {
+      "const": "public_combat_only"
+    },
+    "card_source_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "printed_card_catalog": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 2000,
+      "propertyNames": {
+        "pattern": "^[1-9][0-9]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "Cost": {
+            "type": "integer",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "BaseDamage": {
+            "type": "integer",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "BaseBlock": {
+            "type": "integer",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "UpgradeDamage": {
+            "type": "integer",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "UpgradeBlock": {
+            "type": "integer",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "UpgradeCost": {
+            "type": "integer",
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "Ethereal": {
+            "type": "boolean"
+          },
+          "Exhaust": {
+            "type": "boolean"
+          },
+          "Unplayable": {
+            "type": "boolean"
+          },
+          "Retain": {
+            "type": "boolean"
+          },
+          "HasEnergyCostX": {
+            "type": "boolean"
+          },
+          "StrikeTag": {
+            "type": "boolean"
+          },
+          "Type": {
+            "enum": [
+              "Attack",
+              "Curse",
+              "None",
+              "Power",
+              "Quest",
+              "Skill",
+              "Status"
+            ]
+          },
+          "Target": {
+            "enum": [
+              "AllAllies",
+              "AllEnemies",
+              "AnyAlly",
+              "AnyEnemy",
+              "AnyPlayer",
+              "None",
+              "Osty",
+              "RandomEnemy",
+              "Self",
+              "TargetedNoCreature"
+            ]
+          }
+        },
+        "required": [
+          "Cost",
+          "BaseDamage",
+          "BaseBlock",
+          "UpgradeDamage",
+          "UpgradeBlock",
+          "UpgradeCost",
+          "Ethereal",
+          "Exhaust",
+          "Unplayable",
+          "Retain",
+          "HasEnergyCostX",
+          "StrikeTag",
+          "Type",
+          "Target"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "input_weights": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 128,
+      "items": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4096,
+        "items": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100
+        }
+      }
+    },
+    "hidden_bias": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4096,
+      "items": {
+        "type": "number",
+        "minimum": -100,
+        "maximum": 100
+      }
+    },
+    "output_weights": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4096,
+      "items": {
+        "type": "number",
+        "minimum": -100,
+        "maximum": 100
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "head_id",
+    "encoder_id",
+    "layout",
+    "feature_dimension",
+    "hidden_units",
+    "activation",
+    "scope",
+    "card_source_sha256",
+    "printed_card_catalog",
+    "input_weights",
+    "hidden_bias",
+    "output_weights"
+  ],
+  "additionalProperties": false
+}

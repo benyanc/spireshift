@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/terminal-trajectory-discovery-config-v1.json",
+  "title": "SpireShift Terminal Trajectory Discovery Config v1",
+  "type": "object",
+  "required": [
+    "schema_version", "config_id", "split_manifest_id", "ruleset_manifest_id",
+    "objective_id", "model_id", "training_report_id", "partition", "run_offset",
+    "run_count", "attempts_per_profile", "workers", "maximum_decisions_per_run",
+    "cycle_repetition_threshold", "liveness_tail_length", "no_op_fallback_threshold",
+    "exploration_controller_id", "sampling_salt", "profiles"
+  ],
+  "properties": {
+    "schema_version": {"const": "terminal-trajectory-discovery-config-v1"},
+    "config_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "run_offset": {"type": "integer", "minimum": 0},
+    "run_count": {"type": "integer", "minimum": 1},
+    "attempts_per_profile": {"type": "integer", "minimum": 1},
+    "workers": {"type": "integer", "minimum": 1},
+    "maximum_decisions_per_run": {"type": "integer", "minimum": 1},
+    "cycle_repetition_threshold": {"type": "integer", "minimum": 2},
+    "liveness_tail_length": {"type": "integer", "minimum": 1},
+    "no_op_fallback_threshold": {"type": "integer", "minimum": 1},
+    "exploration_controller_id": {"const": "sparse-policy-exploration-v1"},
+    "sampling_salt": {"type": "string", "minLength": 1},
+    "profiles": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "exploration_rate", "temperature", "profile_id"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "exploration_rate": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+          "temperature": {"type": "number", "exclusiveMinimum": 0},
+          "profile_id": {"$ref": "#/$defs/id"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {"id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}},
+  "additionalProperties": false
+}

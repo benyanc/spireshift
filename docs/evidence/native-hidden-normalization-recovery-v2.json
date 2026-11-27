@@ -1,0 +1,468 @@
+{
+  "adapter": {
+    "path": "artifacts/native-deferred-potions/v2/adapter.json",
+    "report_id": "sha256:aaee795efb0af7b3d238472f4aff590f51f3b38dfa4660b4b05a714c768fe180",
+    "sha256": "2be6a6db48d6510c7d2cb6e896b8623d01744227b0efd294ed938adc54669eef"
+  },
+  "automatic_follow_up": false,
+  "date": "2026-11-26",
+  "estimated_owner_hours": [
+    3,
+    5
+  ],
+  "final_test_worlds_used": false,
+  "lifecycle_controls": {
+    "path": "artifacts/native-deferred-potions/v2/qualification-3/report.json",
+    "report_id": "sha256:327b611bdc62928af268ab376e0491981ea0a8b0feaa71339fc13eb7efbf3f7f",
+    "sha256": "564bd7aebe83ef87003d57cb1836909973d2ce319c78a8e4184d827521e2e628"
+  },
+  "lifecycle_resources": {
+    "path": "artifacts/native-deferred-potions/v2/qualification-resources-3.json",
+    "report_id": "sha256:7df93434c512cc7f08e92054ebcd2c4542676a682d3d9365cab5a46b026bd7de",
+    "sha256": "7473e59fded7266990f85d9136c7884851e7dfb53fa806df22c97c698e9ef4f4"
+  },
+  "lifecycle_summary": {
+    "adapter_sha256": "810fbd16f988ca13867f589f55cd575f63442842f3e138c6f452c2573902c559",
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "legacy_cases": [
+      {
+        "case": "player-choice",
+        "clean_reset": true,
+        "delivered_actions": 6,
+        "guarded_rejections": null,
+        "handoffs": [
+          [
+            "combat_turn",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "card_selection"
+          ],
+          [
+            "card_selection",
+            "card_selection"
+          ],
+          [
+            "card_selection",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "combat_turn"
+          ]
+        ],
+        "observations": 7,
+        "owners": [
+          "combat_turn",
+          "combat_turn",
+          "combat_turn",
+          "card_selection",
+          "card_selection",
+          "combat_turn",
+          "combat_turn"
+        ],
+        "terminal": false
+      },
+      {
+        "case": "end-turn-choice",
+        "clean_reset": true,
+        "delivered_actions": 6,
+        "guarded_rejections": {
+          "native_state_unchanged": true,
+          "requests_rejected_before_enqueue": 2
+        },
+        "handoffs": [
+          [
+            "combat_turn",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "card_selection"
+          ],
+          [
+            "card_selection",
+            "combat_turn"
+          ],
+          [
+            "combat_turn",
+            "combat_turn"
+          ]
+        ],
+        "observations": 7,
+        "owners": [
+          "combat_turn",
+          "combat_turn",
+          "combat_turn",
+          "combat_turn",
+          "card_selection",
+          "combat_turn",
+          "combat_turn"
+        ],
+        "terminal": false
+      },
+      {
+        "case": "noncombat",
+        "clean_reset": true,
+        "delivered_actions": 2,
+        "guarded_rejections": null,
+        "handoffs": [
+          [
+            "event_option",
+            "event_option"
+          ],
+          [
+            "event_option",
+            "event_option"
+          ]
+        ],
+        "observations": 3,
+        "owners": [
+          "event_option",
+          "event_option",
+          "event_option"
+        ],
+        "terminal": false
+      }
+    ],
+    "opening_cases": [
+      {
+        "after_hp": 66,
+        "case": "opening-discard-and-use",
+        "clean_reset": true,
+        "delivered_actions": 3,
+        "first": {
+          "native_buffered_kinds": [
+            "DiscardPotionGameAction"
+          ],
+          "native_ids_assigned_yet": false,
+          "native_state": "None",
+          "tracked_discards": 1
+        },
+        "handoffs": [
+          [
+            "native_generated_card_choice",
+            "native_generated_card_choice"
+          ],
+          [
+            "native_generated_card_choice",
+            "native_generated_card_choice"
+          ],
+          [
+            "native_generated_card_choice",
+            "combat_turn"
+          ]
+        ],
+        "observations": 4,
+        "owners": [
+          "native_generated_card_choice",
+          "native_generated_card_choice",
+          "native_generated_card_choice",
+          "combat_turn"
+        ],
+        "rejected": {
+          "rejected": 2,
+          "state_unchanged": true
+        },
+        "second": {
+          "native_buffered_kinds": [
+            "DiscardPotionGameAction",
+            "UsePotionAction"
+          ],
+          "native_ids_assigned_yet": false,
+          "native_state": "None",
+          "tracked_discards": 1
+        },
+        "terminal": false
+      },
+      {
+        "after_hp": 50,
+        "case": "opening-two-discards",
+        "clean_reset": true,
+        "delivered_actions": 3,
+        "first": {
+          "native_buffered_kinds": [
+            "DiscardPotionGameAction"
+          ],
+          "native_ids_assigned_yet": false,
+          "native_state": "None",
+          "tracked_discards": 1
+        },
+        "handoffs": [
+          [
+            "native_generated_card_choice",
+            "native_generated_card_choice"
+          ],
+          [
+            "native_generated_card_choice",
+            "native_generated_card_choice"
+          ],
+          [
+            "native_generated_card_choice",
+            "combat_turn"
+          ]
+        ],
+        "observations": 4,
+        "owners": [
+          "native_generated_card_choice",
+          "native_generated_card_choice",
+          "native_generated_card_choice",
+          "combat_turn"
+        ],
+        "rejected": {
+          "rejected": 2,
+          "state_unchanged": true
+        },
+        "second": {
+          "native_buffered_kinds": [
+            "DiscardPotionGameAction",
+            "DiscardPotionGameAction"
+          ],
+          "native_ids_assigned_yet": false,
+          "native_state": "None",
+          "tracked_discards": 2
+        },
+        "terminal": false
+      }
+    ]
+  },
+  "new_training_launched": false,
+  "official_live_qualification_granted": false,
+  "original_optimizer_updates": 0,
+  "outer_wall_hours": 48,
+  "owner_command": "bash scripts/continue-a8-hidden-normalization-v2.sh",
+  "owner_resources": {
+    "path": "artifacts/native-hidden-normalization/study-v1/resources-1795654676429923000.json",
+    "report_id": "sha256:410fbfb1253f964d4d145a3ad68978a66827d23bb49c831090e1d6fee53730ce",
+    "sha256": "ab062240a76d30adea1e2eb7c18de60d4ff7ca6d106ae0e36dcebbc8f52a5664"
+  },
+  "owner_stop": {
+    "path": "artifacts/native-hidden-normalization/study-v1/stop-1795701231442595000.json",
+    "report_id": "sha256:8069ad58ae1fcb464d322a7f3914d45d7a5242e6fac3c9ca739955e9b7696b50",
+    "sha256": "879b0bb3f4cdfe3dda66fa1cb26a035900ec088dfae5486f42e87747fbe1fd19"
+  },
+  "prefix_resources": {
+    "path": "artifacts/native-hidden-normalization/recovery-v1/resources-2.json",
+    "report_id": "sha256:743d597b1d4999a79f4c668ad920025b03d385367d2e3b370a1d9354bda4f993",
+    "sha256": "ac95dd66048d74ebbcaed0260315d3a83d390cadd7990aa84768bd46b5c31485"
+  },
+  "prefix_summary": {
+    "capped_training_units": [
+      "train-0206-p2-normalized"
+    ],
+    "cohorts": {
+      "p2-normalized": {
+        "act1_clears": 48,
+        "act2_clears": 1,
+        "fits": 62,
+        "outcomes": {
+          "capped": 1,
+          "loss": 991
+        }
+      },
+      "p2-raw": {
+        "act1_clears": 56,
+        "act2_clears": 0,
+        "fits": 63,
+        "outcomes": {
+          "loss": 1008
+        }
+      },
+      "p3-normalized": {
+        "act1_clears": 26,
+        "act2_clears": 0,
+        "fits": 62,
+        "outcomes": {
+          "loss": 992
+        }
+      },
+      "p3-raw": {
+        "act1_clears": 48,
+        "act2_clears": 2,
+        "fits": 62,
+        "outcomes": {
+          "loss": 992
+        }
+      }
+    },
+    "failed_game": {
+      "acknowledged_prefix_deliveries": 159,
+      "clean_close": false,
+      "context": {
+        "act": 1,
+        "act_definition_id": "UNDERDOCKS",
+        "act_index": 0,
+        "act_name": "Underdocks",
+        "ascension": 8,
+        "boss": {
+          "id": "LAGAVULIN_MATRIARCH_BOSS",
+          "name": "Lagavulin Matriarch"
+        },
+        "bosses": [
+          {
+            "id": "LAGAVULIN_MATRIARCH_BOSS",
+            "name": "Lagavulin Matriarch",
+            "order": 0
+          }
+        ],
+        "floor": 17,
+        "modifiers": [],
+        "room_type": "Boss",
+        "total_floor": 17
+      },
+      "decision": "generated_card_choice",
+      "error": "Native potion discard enqueue was not confirmed",
+      "is_play_phase": false,
+      "replayed": false,
+      "request": {
+        "action": "discard_potion",
+        "args": {
+          "potion_ref": "native-234",
+          "potion_slot": 1
+        },
+        "cmd": "action"
+      },
+      "training_admitted": false,
+      "unknown_deliveries": 1
+    },
+    "failed_request": {
+      "behavior_state_id": "sha256:1ba51cef0dd545c91390c713e46d524656e3c58711bfc7dd4c1b01bf8f7eccbe",
+      "task": {
+        "arm": "shared",
+        "key": "train-0993-p2-normalized",
+        "partition": "train",
+        "player": 2,
+        "round": 63,
+        "seed": "SP1RESH1FTA8N1T0993",
+        "seed_id": 993
+      }
+    },
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "inherited_optimizer_updates": 15252,
+    "last_full_states": {
+      "normalized": {
+        "2": "sha256:1ba51cef0dd545c91390c713e46d524656e3c58711bfc7dd4c1b01bf8f7eccbe",
+        "3": "sha256:89f88af50131abee048e2c7b1291663d974f3b85c84b34a506eac5bbf9e3cb8d"
+      },
+      "raw": {
+        "2": "sha256:9aa18d6f235742de5b96d36f109231d0ce7c3e120f3969d83a94630905c4f673",
+        "3": "sha256:67be13a4fce3d65469791b101bec7739282f1801c4c7a64a31e867aca1087cd3"
+      }
+    },
+    "sealed_fits": 249,
+    "sealed_training_games": 3984
+  },
+  "preserved_checker_development_stops": [
+    "artifacts/native-hidden-normalization/recovery-v1/resources.json",
+    "artifacts/native-deferred-potions/v2/qualification-resources.json",
+    "artifacts/native-deferred-potions/v2/qualification-resources-2.json"
+  ],
+  "prior_publication_ci": {
+    "commit": "739ea7dcc38e36f0575c5ca2620676284880209e",
+    "conclusion": "success",
+    "run_id": 45715731975
+  },
+  "production_controls": {
+    "path": "artifacts/native-deferred-potions/v2/production-v1/report.json",
+    "report_id": "sha256:dc462e6ca144037b1c4ea6e1ee2071a15f5c079f6763e63a312a43d175ed005a",
+    "sha256": "6ff76740bf0585ede442e0ce5496c951693fd2cca59a79a6f3083acd12b1213a"
+  },
+  "production_resources": {
+    "path": "artifacts/native-deferred-potions/v2/production-resources.json",
+    "report_id": "sha256:df70cc07d71640cebe95c78abced9c83bb2034362892543c69e6f4667dbe7055",
+    "sha256": "ccd8a47f387a861350a306624a27dba7469252775b5650c38a829f2b3b298620"
+  },
+  "promotion_allowed": false,
+  "recipe": {
+    "path": "configs/native-learning/sts2-v0.111.0-a8-hidden-normalization-v2.json",
+    "sha256": "47bce5b6bb4389f177d4a1058fdd94198735d69c269c933f77b88322019c7171"
+  },
+  "remaining_fits": 7,
+  "restore_control": {
+    "path": "artifacts/native-hidden-normalization/restore-check-v2/report.json",
+    "report_id": "sha256:ee39570296fa97e19d187c1f9bd50d00d80118fa9bc7d3971c0d0dd79403f3e7",
+    "sha256": "a7d3608f4d5161afd794463912a080d7a05baaa9b9fcf2271da63d6cdc0febea"
+  },
+  "restore_resources": {
+    "path": "artifacts/native-hidden-normalization/restore-check-v2/resources.json",
+    "report_id": "sha256:9d81d1726ce06274377d0dfd6bb2943390411049ed59f154468e92877249396f",
+    "sha256": "8ab9e307ab88fdcb9033b1bbe59e7b0a0a0767b810d734e7518da62acd467e84"
+  },
+  "restore_summary": {
+    "config_id": "sha256:51c0d4811bad032dd5a38cfb4e1082a34a7491e9d0eadf13d881d3192bc22457",
+    "first_unstarted_game": "train-0994-p2-normalized",
+    "first_unstarted_request": {
+      "behavior_state_id": "sha256:1ba51cef0dd545c91390c713e46d524656e3c58711bfc7dd4c1b01bf8f7eccbe",
+      "task": {
+        "arm": "shared",
+        "key": "train-0994-p2-normalized",
+        "partition": "train",
+        "player": 2,
+        "round": 63,
+        "seed": "SP1RESH1FTA8N1T0994",
+        "seed_id": 994
+      }
+    },
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "full_states_restored": {
+      "normalized": {
+        "2": "sha256:1ba51cef0dd545c91390c713e46d524656e3c58711bfc7dd4c1b01bf8f7eccbe",
+        "3": "sha256:89f88af50131abee048e2c7b1291663d974f3b85c84b34a506eac5bbf9e3cb8d"
+      },
+      "raw": {
+        "2": "sha256:9aa18d6f235742de5b96d36f109231d0ce7c3e120f3969d83a94630905c4f673",
+        "3": "sha256:67be13a4fce3d65469791b101bec7739282f1801c4c7a64a31e867aca1087cd3"
+      }
+    },
+    "games_launched": 0,
+    "inherited_units_restored": 4234,
+    "optimizer_updates": 0,
+    "optimizer_updates_restored": 15252,
+    "report_id": "sha256:ee39570296fa97e19d187c1f9bd50d00d80118fa9bc7d3971c0d0dd79403f3e7",
+    "source_assessment_id": "sha256:986a817e4feb0329b408735932c5a2c2e740753964ace7f2eaa4cd1d2a02c9bc",
+    "status": "normalization_prefix_restored_before_first_unstarted_game"
+  },
+  "saved_prefix_assessment": {
+    "path": "artifacts/native-hidden-normalization/recovery-v1/report.json",
+    "report_id": "sha256:986a817e4feb0329b408735932c5a2c2e740753964ace7f2eaa4cd1d2a02c9bc",
+    "sha256": "967ceb3c2d5fc2b9523b34f27a2509b19aa40680786c69747f576208f7d6a7d0"
+  },
+  "schema_version": "native-hidden-normalization-recovery-evidence-v2",
+  "status": "deferred_discard_repaired_prefix_restored_continuation_prepared",
+  "unstarted_development_games": 768,
+  "unstarted_training_games": 111
+}

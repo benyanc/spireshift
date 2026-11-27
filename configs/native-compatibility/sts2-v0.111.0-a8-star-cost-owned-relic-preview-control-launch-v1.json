@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-star-cost-owned-relic-preview-control-v1.json",
+    "sha256": "e613ab1b4bf210b69513204bead16324f5ce1b08152c7518878e0f37d4b30094"
+  },
+  "wall_seconds": 290,
+  "cpu_seconds": 580,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

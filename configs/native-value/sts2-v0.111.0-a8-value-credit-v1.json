@@ -1,0 +1,43 @@
+{
+  "audit_rounds": [
+    5,
+    6,
+    7,
+    8
+  ],
+  "experiment": {
+    "id": "sha256:00473ec9bed0344ef86192cc717fc7d031430e2b945e2f152df6633fdb176824",
+    "path": "configs/native-learning/sts2-v0.111.0-a8-pilot-v5.json"
+  },
+  "fold_salt": "native-whole-run-value-crossfit-v1",
+  "folds": 4,
+  "implementation_sha256": {
+    "native_learning_diagnosis.py": "b197643b3a43dd2285f89905e0b9ecac7d2e7a07513979f1066ca3f89987d94f",
+    "native_value_credit.py": "cb7508d785aca06799caca15b351c49d8194bcc1eed9a938f0ae990959305774",
+    "native_value_study.py": "68e82abc352d75729bd83bc7f5f9aac635b466cf966abfefbf889fc4ad9c97d4"
+  },
+  "regularization_grid": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "resource_limits": {
+    "cpu_seconds": 180,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 100000000,
+    "wall_seconds": 180
+  },
+  "schema_version": "native-value-credit-study-config-v1",
+  "selection_rounds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "trace_lambdas": [
+    1.0,
+    0.95
+  ],
+  "workspace": "artifacts/native-value/sts2-v0.111.0-a8-value-credit-v1"
+}

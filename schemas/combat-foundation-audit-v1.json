@@ -1,0 +1,955 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-foundation-audit-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-foundation-audit-v1"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "objective": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "terminal-victory-v1"
+        },
+        "primary": {
+          "const": "terminal_victory"
+        },
+        "constraint": {
+          "const": "cpu_time_per_run"
+        },
+        "whole_run_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "auxiliary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auxiliary_reward_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "auxiliary",
+        "auxiliary_reward_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "object",
+      "properties": {
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "training_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "split_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "ruleset_manifest_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "starting_study_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "model_id",
+        "training_report_id",
+        "split_manifest_id",
+        "ruleset_manifest_id",
+        "starting_study_report_id"
+      ],
+      "additionalProperties": false
+    },
+    "complete_run_subfolds": {
+      "type": "object",
+      "properties": {
+        "fit": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "selection": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "additionalProperties": false
+    },
+    "encoder_id": {
+      "enum": [
+        "evangambit-public-card-target-v1",
+        "evangambit-public-card-target-v2"
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "source_states": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "combat_states": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bound_combat_states": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "binding_failures": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "terminal_victories_in_saved_combat_outcomes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "by_subfold": {
+          "type": "object",
+          "properties": {
+            "fit": {
+              "type": "object",
+              "properties": {
+                "complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "combat_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "combat_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "binding_failures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reliable_advancement_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "learnable_advancement_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "hash_alias_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "semantically_identical_reliable_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "signal_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "signal_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "signal_floor_bins": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "card_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "action_kinds": {
+                  "type": "object",
+                  "properties": {
+                    "play_card": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "end_turn": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "use_potion": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "select_upgrade_card": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "mean_run_parent_auxiliary_regret": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "by_run": {
+                  "type": "object",
+                  "patternProperties": {
+                    "^[0-9]+$": {
+                      "type": "object",
+                      "properties": {
+                        "combat_states": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "mean_parent_auxiliary_regret": {
+                          "type": "number"
+                        },
+                        "signal_states": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "combat_states",
+                        "mean_parent_auxiliary_regret",
+                        "signal_states"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "signal_card_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "learnable_pair_kinds": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              "required": [
+                "complete_runs",
+                "combat_runs",
+                "combat_states",
+                "binding_failures",
+                "candidate_pairs",
+                "reliable_advancement_pairs",
+                "learnable_advancement_pairs",
+                "hash_alias_pairs",
+                "semantically_identical_reliable_pairs",
+                "signal_states",
+                "signal_runs",
+                "signal_floor_bins",
+                "card_ids",
+                "action_kinds",
+                "mean_run_parent_auxiliary_regret",
+                "by_run",
+                "signal_card_ids",
+                "learnable_pair_kinds"
+              ],
+              "additionalProperties": false
+            },
+            "selection": {
+              "type": "object",
+              "properties": {
+                "complete_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "combat_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "combat_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "binding_failures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "candidate_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "reliable_advancement_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "learnable_advancement_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "hash_alias_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "semantically_identical_reliable_pairs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "signal_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "signal_runs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "signal_floor_bins": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "card_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "action_kinds": {
+                  "type": "object",
+                  "properties": {
+                    "play_card": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "end_turn": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "use_potion": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "select_upgrade_card": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "mean_run_parent_auxiliary_regret": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "by_run": {
+                  "type": "object",
+                  "patternProperties": {
+                    "^[0-9]+$": {
+                      "type": "object",
+                      "properties": {
+                        "combat_states": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "mean_parent_auxiliary_regret": {
+                          "type": "number"
+                        },
+                        "signal_states": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "combat_states",
+                        "mean_parent_auxiliary_regret",
+                        "signal_states"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "signal_card_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "learnable_pair_kinds": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              "required": [
+                "complete_runs",
+                "combat_runs",
+                "combat_states",
+                "binding_failures",
+                "candidate_pairs",
+                "reliable_advancement_pairs",
+                "learnable_advancement_pairs",
+                "hash_alias_pairs",
+                "semantically_identical_reliable_pairs",
+                "signal_states",
+                "signal_runs",
+                "signal_floor_bins",
+                "card_ids",
+                "action_kinds",
+                "mean_run_parent_auxiliary_regret",
+                "by_run",
+                "signal_card_ids",
+                "learnable_pair_kinds"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "fit",
+            "selection"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "source_states",
+        "source_runs",
+        "combat_states",
+        "bound_combat_states",
+        "binding_failures",
+        "terminal_victories_in_saved_combat_outcomes",
+        "by_subfold"
+      ],
+      "additionalProperties": false
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state_id": {
+            "type": "string"
+          },
+          "run_seed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "subfold": {
+            "enum": [
+              "fit",
+              "selection"
+            ]
+          },
+          "representation_hash": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "source_state_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "candidate_action_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "parent_selected_candidate": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "parent_auxiliary_regret": {
+            "type": "number"
+          },
+          "terminal_victories_in_saved_outcomes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "binding_status": {
+            "enum": [
+              "completed",
+              "failed"
+            ]
+          },
+          "binding_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bindings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "play_card",
+                    "end_turn",
+                    "use_potion",
+                    "select_upgrade_card"
+                  ]
+                },
+                "card": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "card_id": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "upgraded": {
+                          "enum": [
+                            0,
+                            1
+                          ]
+                        },
+                        "enchantment_id": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "enchantment_amount": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "card_id",
+                        "upgraded",
+                        "enchantment_id",
+                        "enchantment_amount"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "potion_id": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "target": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "public_position": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 5
+                        },
+                        "enemy_id": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "hp": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "max_hp": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "block": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "intent_type": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "intent_magnitude": {
+                          "type": "integer"
+                        },
+                        "secondary_intent_type": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "secondary_intent_magnitude": {
+                          "type": "integer"
+                        },
+                        "statuses": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "status_id": {
+                                "type": "integer",
+                                "minimum": 0
+                              },
+                              "amount": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "status_id",
+                              "amount"
+                            ],
+                            "additionalProperties": false
+                          }
+                        }
+                      },
+                      "required": [
+                        "public_position",
+                        "enemy_id",
+                        "hp",
+                        "max_hp",
+                        "block",
+                        "intent_type",
+                        "intent_magnitude",
+                        "secondary_intent_type",
+                        "secondary_intent_magnitude",
+                        "statuses"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "card",
+                "potion_id",
+                "target"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "feature_digests": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          },
+          "source_floor": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pairs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "samples": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "completed": {
+                  "type": "boolean"
+                },
+                "left_preference_probability": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "half_split_direction_sums": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "half_split_stable": {
+                  "type": "boolean"
+                },
+                "reliable_advancement": {
+                  "type": "boolean"
+                },
+                "paired_terminal_victory_variation": {
+                  "type": "boolean"
+                },
+                "paired_maximum_floor_variation": {
+                  "type": "boolean"
+                },
+                "left": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "right": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "semantic_features_equal": {
+                  "type": "boolean"
+                },
+                "hashed_vectors_equal": {
+                  "type": "boolean"
+                },
+                "hash_alias": {
+                  "type": "boolean"
+                },
+                "learnable_advancement": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "samples",
+                "completed",
+                "left_preference_probability",
+                "half_split_direction_sums",
+                "half_split_stable",
+                "reliable_advancement",
+                "paired_terminal_victory_variation",
+                "paired_maximum_floor_variation",
+                "left",
+                "right",
+                "semantic_features_equal",
+                "hashed_vectors_equal",
+                "hash_alias",
+                "learnable_advancement"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "state_id",
+          "run_seed",
+          "subfold",
+          "representation_hash",
+          "source_state_hash",
+          "candidate_action_ids",
+          "parent_selected_candidate",
+          "parent_auxiliary_regret",
+          "terminal_victories_in_saved_outcomes",
+          "binding_status",
+          "binding_error",
+          "bindings",
+          "feature_digests",
+          "source_floor",
+          "pairs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "coverage_checks": {
+          "type": "object",
+          "properties": {
+            "every_combat_state_bound": {
+              "type": "boolean"
+            },
+            "fitting_run_signal": {
+              "type": "boolean"
+            },
+            "selection_run_signal": {
+              "type": "boolean"
+            },
+            "fitting_card_coverage": {
+              "type": "boolean"
+            },
+            "fitting_floor_coverage": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "every_combat_state_bound",
+            "fitting_run_signal",
+            "selection_run_signal",
+            "fitting_card_coverage",
+            "fitting_floor_coverage"
+          ],
+          "additionalProperties": false
+        },
+        "pilot_data_sufficient": {
+          "type": "boolean"
+        },
+        "next_step": {
+          "enum": [
+            "freeze_combat_residual_training_and_fresh_run_confirmation",
+            "repair_binding_failures_before_training",
+            "design_bounded_combat_teacher_collection_before_training"
+          ]
+        },
+        "automatic_training_allowed": {
+          "const": false
+        },
+        "automatic_collection_allowed": {
+          "const": false
+        },
+        "foundation_ready": {
+          "const": false
+        },
+        "adaptive_controller_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "coverage_checks",
+        "pilot_data_sufficient",
+        "next_step",
+        "automatic_training_allowed",
+        "automatic_collection_allowed",
+        "foundation_ready",
+        "adaptive_controller_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "claim_scope": {
+      "const": "verified_train_only_public_combat_binding_and_label_coverage"
+    },
+    "source_integrity_verified": {
+      "const": true
+    },
+    "optimizer_steps": {
+      "const": 0
+    },
+    "games_replayed": {
+      "const": 0
+    },
+    "simulations": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "config_id",
+    "objective",
+    "sources",
+    "complete_run_subfolds",
+    "encoder_id",
+    "summary",
+    "rows",
+    "decision",
+    "claim_scope",
+    "source_integrity_verified",
+    "optimizer_steps",
+    "games_replayed",
+    "simulations",
+    "checkpoint_promoted",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "encoder_id": {
+            "const": "evangambit-public-card-target-v1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rows": {
+            "items": {
+              "properties": {
+                "bindings": {
+                  "items": {
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "play_card",
+                          "end_turn",
+                          "use_potion"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

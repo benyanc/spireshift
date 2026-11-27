@@ -1,0 +1,204 @@
+{
+  "adaptive_controller_allowed": false,
+  "all_original_and_source_full_states_and_Adam_unchanged": true,
+  "automatic_training_follows": false,
+  "baseline_refits": 0,
+  "checkpoint_promoted": false,
+  "comparison_status_snapshot": {
+    "active_comparison_processes": 0,
+    "date": "2026-10-22",
+    "final_report_exists": false,
+    "fresh_evaluation_started": false,
+    "maximum_planned_attempts": 832,
+    "not_a_performance_result": true,
+    "saved_attempts": 584,
+    "sealed_units": 83,
+    "unfinished_units": 0
+  },
+  "configurations": [
+    {
+      "id": "sha256:971af9cf3f6ceb9e54e4f124f498b19b0ba3fb0f424849dd1d44eefc6be09fdd",
+      "path": "configs/native-controls/experience-diagnostics-control-v1.json"
+    },
+    {
+      "id": "sha256:7ce5a1e85861c2fb4e380ab8fbfa32268ce02f251d71607a77d3e7a501b9304c",
+      "path": "configs/native-controls/experience-diagnostics-first-round-v1.json"
+    }
+  ],
+  "control": {
+    "decisions": 1654,
+    "id": "sha256:af29a73301288b73a92c617e15bf2bac8ec6be739c8f9ff9646f63052dfbd489",
+    "path": "artifacts/native-experience-diagnostics/sts2-v0.111.0-a8-control-v1/report.json",
+    "resources": [
+      {
+        "cpu_seconds": 15.786921680999999,
+        "final_storage_bytes": 7580611,
+        "id": "sha256:e857c1090f680526b708b7fcd5818a888538994d6cca5d1b15080c4609f03603",
+        "limits": {
+          "cpu_seconds": 240.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 100000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-experience-diagnostics-control-v1-1.json",
+        "peak_resident_memory_bytes": 154779648,
+        "status": "completed",
+        "wall_seconds": 53.05770799983293
+      },
+      {
+        "cpu_seconds": 17.678356208,
+        "final_storage_bytes": 15256437,
+        "id": "sha256:d89dbd646cf405ed4d885f1ed6066fb747c93a91dc08a9a76fff94a68e4ddb64",
+        "limits": {
+          "cpu_seconds": 240.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 100000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-experience-diagnostics-control-v1-2.json",
+        "peak_resident_memory_bytes": 181911552,
+        "status": "completed",
+        "wall_seconds": 46.212702749995515
+      },
+      {
+        "cpu_seconds": 10.611255333,
+        "final_storage_bytes": 22901002,
+        "id": "sha256:8892997d175183bd22ac1faad98411fff833b8a0d3c61b5adfdecac41b990300",
+        "limits": {
+          "cpu_seconds": 240.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 100000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-experience-diagnostics-control-v1-3.json",
+        "peak_resident_memory_bytes": 137920512,
+        "status": "completed",
+        "wall_seconds": 27.65307104191743
+      },
+      {
+        "cpu_seconds": 13.97675363,
+        "final_storage_bytes": 38280556,
+        "id": "sha256:ea3001258bb8f6c107d5a23115be73a5e89f94bed6332733f18a1d750444bdfe",
+        "limits": {
+          "cpu_seconds": 240.0,
+          "resident_memory_bytes": 2000000000,
+          "storage_bytes": 100000000,
+          "wall_seconds": 240.0
+        },
+        "path": "artifacts/resources/native-experience-diagnostics-control-v1-4.json",
+        "peak_resident_memory_bytes": 154484736,
+        "status": "completed",
+        "wall_seconds": 52.73528408398852
+      }
+    ],
+    "shared_clean_histories_match_both_players": true,
+    "source_saved_TRAIN_attempts": 12,
+    "source_seals": 33857
+  },
+  "evidence_id": "sha256:142c04c426d001ee04ad30b6c6fbc99db2dfd8602592848f97fc1e768cac662b",
+  "game_apps_created": 0,
+  "games_launched": 0,
+  "github_issues_updated": [
+    35,
+    143,
+    146
+  ],
+  "limitations": [
+    "One main cohort and tiny control only; the full four-cohort audit remains incomplete.",
+    "These are old TRAIN decisions, not fresh full-game performance or correct-action labels.",
+    "Baseline predicts bootstrap progress return, not terminal victory probability or action value.",
+    "Matched histories permit feedback comparisons only; larger batches also use different training support/compute.",
+    "Reported data gradients exclude Adam and entropy effects and are not causal influence shares.",
+    "Historical training step counts describe source updates, never fitting performed by this tool."
+  ],
+  "main_pilot": {
+    "clean_games": 32,
+    "cohort": "fit-p2-batch32-r01",
+    "completed_cohorts": 1,
+    "decisions": 4144,
+    "genuine_choices": 3160,
+    "id": "sha256:051263dd94db363bc7d27e416377fc1d8ca04dddcb4b38d007da053e0deb0c70",
+    "inventory_coverage": {
+      "distinct_card_definitions": 66,
+      "distinct_deck_signatures": 204,
+      "distinct_relic_definitions": 37,
+      "distinct_relic_signatures": 67
+    },
+    "original_saved_update_steps_not_new_updates": 99,
+    "path": "artifacts/native-experience-diagnostics/sts2-v0.111.0-a8-first-round-v1/sessions/session-001.json",
+    "planned_cohorts": 4,
+    "resources": {
+      "cpu_seconds": 45.401656703,
+      "final_storage_bytes": 11053396,
+      "id": "sha256:ab911bee7a6edf67daa7719ba1948ab70d3736922cc5a62df15744490fb753b1",
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-experience-diagnostics-first-round-v1-1.json",
+      "peak_resident_memory_bytes": 297091072,
+      "status": "completed",
+      "wall_seconds": 91.06415066705085
+    },
+    "source_seals": 46161
+  },
+  "optimizer_updates": 0,
+  "original_Adam_steps": [
+    5658,
+    6045
+  ],
+  "public_only_own_policy_completed_TRAIN_episodes": true,
+  "remaining_owner_run": {
+    "comparison_TRAIN_attempts": 56,
+    "comparison_attempts": 248,
+    "comparison_fresh_evaluation_attempts": 192,
+    "optional_saved_diagnostic_attempts": 288,
+    "optional_saved_diagnostic_cohorts": 3,
+    "priority": "resume_existing_comparison_before_extra_saved_diagnostics"
+  },
+  "reproduced_original_prediction_metrics_and_feedback_normalization": true,
+  "restored_original_saved_behavior_probabilities_and_cross_fit_coefficients": true,
+  "schema_version": "native-experience-training-diagnostic-evidence-v1",
+  "scope": {
+    "cohorts": 4,
+    "evaluation_episodes_decoded": 0,
+    "later_or_active_source_units_read": 0,
+    "main_native_worlds": 128,
+    "main_planned_saved_TRAIN_attempts": 320,
+    "source_round": 1,
+    "world_overlap_is_not_independence": true
+  },
+  "status": "separate_saved_control_and_one_real_cohort_qualified",
+  "verification": {
+    "csharp_protocol": true,
+    "formatted_files": 695,
+    "new_passed_tests": 18,
+    "passed_tests": 2414,
+    "preservation_resource": {
+      "id": "sha256:bf6d5a16802d2bde2cc37acf5323ffff67065b4a6e15f0bcd56219dc1f7af7e5",
+      "path": "artifacts/resources/native-experience-diagnostics-preservation-v1.json",
+      "peak_resident_memory_bytes": 133513216,
+      "wall_seconds": 10.017915500095114
+    },
+    "protected_source_files_verified": 46171,
+    "resource": {
+      "cpu_seconds": 129.338094292,
+      "final_storage_bytes": 0,
+      "id": "sha256:f71f452c09b8d410b971ff0506e46a35c850e839e38b65d14f79626cd8bb6f19",
+      "limits": {
+        "cpu_seconds": 240.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/native-experience-diagnostics-repository-check-v1.json",
+      "peak_resident_memory_bytes": 236011520,
+      "status": "completed",
+      "wall_seconds": 205.57383508305065
+    },
+    "skipped_tests": 5,
+    "strict_type_files": 511
+  }
+}

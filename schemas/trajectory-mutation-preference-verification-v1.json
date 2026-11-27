@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/trajectory-mutation-preference-verification-v1.json",
+  "title": "SpireShift Trajectory Mutation Preference Verification v1",
+  "type": "object",
+  "required": [
+    "schema_version", "verification_id", "preference_set_id", "valid",
+    "verified_lineage_trajectories", "verified_mutations", "errors"
+  ],
+  "properties": {
+    "schema_version": {"const": "trajectory-mutation-preference-verification-v1"},
+    "verification_id": {"$ref": "#/$defs/id"},
+    "preference_set_id": {
+      "oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]
+    },
+    "valid": {"type": "boolean"},
+    "verified_lineage_trajectories": {"type": "integer", "minimum": 0},
+    "verified_mutations": {"type": "integer", "minimum": 0},
+    "errors": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+  }
+}

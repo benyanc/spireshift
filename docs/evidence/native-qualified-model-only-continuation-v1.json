@@ -1,0 +1,76 @@
+{
+  "schema_version": "native-qualified-learning-saved-recovery-v1",
+  "status": "qualified_learning_saved_prefix_and_checker_repair_verified",
+  "by_initializer": {
+    "2": {
+      "act1_clears": 14,
+      "act2_clears": 0,
+      "games": 576,
+      "optimizer_updates": 1956,
+      "outcomes": {
+        "loss": 576
+      },
+      "sealed_rounds": 36
+    },
+    "3": {
+      "act1_clears": 19,
+      "act2_clears": 0,
+      "games": 570,
+      "optimizer_updates": 1857,
+      "outcomes": {
+        "loss": 570
+      },
+      "sealed_rounds": 35
+    }
+  },
+  "planned_training_games": 2048,
+  "sealed_training_games": 1146,
+  "preserved_failed_training_games": 1,
+  "unstarted_training_games": 901,
+  "planned_development_games": 128,
+  "development_games_started": 0,
+  "inherited_optimizer_updates": 3813,
+  "failed_game_diagnostic": {
+    "all_choices_and_probabilities_reconstructed": true,
+    "clean_native_ending": true,
+    "legacy_checker_failure_preserved": true,
+    "local_factors": 3,
+    "native_answer_commits": 1,
+    "native_deliveries": 191,
+    "outcome": "loss",
+    "training_admitted": false
+  },
+  "current_states": {
+    "2": "sha256:7650cd909864bb394bb833bff61239ac1fbc8119cc005191839567a8d1242b0a",
+    "3": "sha256:bc80228baf29a466fcfba904728e59f6888cd1f431b41a4f54e3b18c995f92f4"
+  },
+  "resource_attempt_ids": [
+    "sha256:01e12e5f4e314542029796605302352b46eb2ae5ba06598a1522a7d6a02c9363",
+    "sha256:79cc61c505fda2ccfea32c86385dd4c2c920f586c9b755e06cf5c5a80f287275"
+  ],
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "personal_profile_unchanged": true,
+  "games_launched": 0,
+  "optimizer_updates": 0,
+  "original_optimizer_updates": 0,
+  "promotion_allowed": false,
+  "automatic_follow_up": false,
+  "report_id": "sha256:3574cfad0b3b2d6d0783fb504805454968bfa0c6ebcb2eb199a08b263d4f47b6",
+  "assessment_path": "artifacts/native-qualified-learning/recovery-v1/report.json",
+  "inherited_completed_units": 1217,
+  "continuation_recipe": "configs/native-learning/sts2-v0.111.0-a8-qualified-model-only-v3.json",
+  "continuation_recipe_sha256": "0199c2dc71323fc248bd558b1f77e3176aee5ba553fb6f571bb77afb365f293d",
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/continue-a8-qualified-model-only-v3.sh\"",
+  "fresh_comparison_improvement": "unmeasured_all_128_games_unstarted",
+  "historical_failed_cell": "train-0571-p3-learner",
+  "full_game_playing_strength_evaluated": false,
+  "official_live_qualification_granted": false,
+  "final_test_worlds_used": false
+}

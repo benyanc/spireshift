@@ -1,0 +1,176 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": "implemented_qualified_small_control_owner_finite_comparison_next",
+  "audit_resources": {
+    "cpu_seconds": 33.436803763,
+    "peak_resident_memory_bytes": 163201024,
+    "report_id": "sha256:924d6188d897ca094fda75eb21010e712991981750f4e919d53d7dba4b66b801",
+    "wall_seconds": 60.921886458061635
+  },
+  "automatic_training_follows": false,
+  "checkpoint_promoted": false,
+  "collection_resources": [
+    {
+      "cpu_seconds": 115.82259097200006,
+      "final_storage_bytes": 33663824,
+      "path": "artifacts/resources/native-bounded-combat-control-v1-1.json",
+      "peak_resident_memory_bytes": 277233664,
+      "report_id": "sha256:e194ffc5188bc8ee0de26be86345dafece7f5e9695762410f04de561ef3cc1f7",
+      "wall_seconds": 175.77682249993086
+    },
+    {
+      "cpu_seconds": 42.37420514299999,
+      "final_storage_bytes": 56260577,
+      "path": "artifacts/resources/native-bounded-combat-control-v1-2.json",
+      "peak_resident_memory_bytes": 372932608,
+      "report_id": "sha256:3900d39de0e64bb5cf97df39b86e194ad9eaaf4988a0a30fc53c49c30eabbf57",
+      "wall_seconds": 71.4509860840626
+    }
+  ],
+  "control": {
+    "all_searches_frozen_before_evaluation": true,
+    "baseline_control_traces_match": true,
+    "blocked_initial_turns": 0,
+    "completed_units": 28,
+    "duplicate_selected_traces_match": true,
+    "failed_branches": 0,
+    "game_apps_created": 0,
+    "initial_turns": 4,
+    "learner_HP_rewards_added": false,
+    "native_attempts": 28,
+    "planning_cost_charged_without_amortization": true,
+    "production_optimizer_steps": 0,
+    "reused_baseline_branches": 8,
+    "selection_uses_full_run_outcomes": false,
+    "skipped_branches": 0,
+    "source_worlds": 2
+  },
+  "control_audit_id": "sha256:cf7caac25d75840e98672edd2dfadb371dd97860c7655b66daf85c4dda68afe8",
+  "control_collection_totals": {
+    "cpu_seconds_sum_of_sessions": 158.19679611500004,
+    "final_storage_bytes_cumulative_not_summed": 56260577,
+    "peak_resident_memory_bytes": 372932608,
+    "wall_seconds_sum_of_sessions": 247.22780858399346
+  },
+  "control_config_id": "sha256:152dacfdbe2fe4d1f6f923e72dc4731e38c7fcb2871b5b9129b86eb3d470fdff",
+  "control_diagnostic_only": {
+    "baseline_alternative_pair_counts": {
+      "negative_pairs": 4,
+      "positive_pairs": 0,
+      "tied_pairs": 0
+    },
+    "baseline_encounter_exits_alive": 6,
+    "baseline_full_run_wins": 0,
+    "checkpoint_promoted": false,
+    "completed": 8,
+    "conditional_streams_not_independent_worlds": true,
+    "denominator": 8,
+    "failed_or_unattempted": 0,
+    "independent_source_worlds": 2,
+    "ordinary_PPO_eligible": false,
+    "planned_alternative_pair_counts": {
+      "negative_pairs": 4,
+      "positive_pairs": 0,
+      "tied_pairs": 0
+    },
+    "planned_encounter_exits_alive": 6,
+    "planned_full_run_wins": 0,
+    "readiness_passed": false
+  },
+  "control_is_correctness_not_established_stronger_play": true,
+  "control_report_id": "sha256:9b0c4982618e58b0868b9ff256a9fa06bcad38e4e1cd51f45f0e7ca6dfd57577",
+  "control_selection_id": "sha256:e997fc679b24db17040cd9f264b41dc78d3d856771912a0df63badb9b43a9e80",
+  "cpu_ceiling_matched_not_actual_cpu_spend": "baseline_and_planner_share_128_cpu_second_whole_run_ceiling_actual_usage_retained",
+  "evidence_id": "sha256:febfe200e9a5d77d1924843970c4d2bbc589a11fdde51fd700f5220e6183c512",
+  "full_states_unchanged": true,
+  "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+  "new_games_after_control": 0,
+  "optimizer_steps": 0,
+  "ordinary_PPO_eligible": false,
+  "pilot": {
+    "initial_turns": 63,
+    "maximum_new_native_attempts": 756,
+    "memory_cap_bytes": 2000000000,
+    "native_attempt_upper_bound": 756,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "owner_expected_minutes": [
+      60,
+      90
+    ],
+    "repeats_per_initial_turn": 8,
+    "reused_baseline_branches": 504,
+    "samples_per_initial_turn": 4,
+    "search_attempts": 252,
+    "search_call_cpu_cap": 32.0,
+    "search_cpu_cap_per_initial_turn": 64.0,
+    "selected_plan_evaluations": 504,
+    "session_wall_seconds": 900,
+    "source_worlds": 8,
+    "started": false,
+    "status": "bounded_combat_planning_plan_only",
+    "storage_cap_bytes": 4000000000,
+    "whole_run_cpu_ceiling_with_full_search_charge": 128.0
+  },
+  "pilot_config_id": "sha256:c5a2701903d892f18bc1c818c8c46d50b3f1dfb24821e84d83302b38dd0ad93f",
+  "pilot_template_id": "sha256:840812340a4b10b7e6648ee965cc6d453fb85ef8db63a6650226aa68a7fd5de5",
+  "preflight_resources": {
+    "cpu_seconds": 35.841387635000004,
+    "peak_resident_memory_bytes": 193871872,
+    "report_id": "sha256:832a24351a446282a2d1acd1cfc326f6e0642aacfe31cd6a1666542987cd19c8",
+    "wall_seconds": 66.18051833286881
+  },
+  "protected_players": [
+    {
+      "Adam_steps": 5658,
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "state_sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+    },
+    {
+      "Adam_steps": 6045,
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "state_sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+    }
+  ],
+  "public_belief_search_eligible": false,
+  "read_only_preflight_id": "sha256:ab5bee66b85ac3b3b40e4bf3c8bcabc2840b0ce9451c47bb81d595dbb28ac155",
+  "repository_verification": {
+    "cpu_seconds": 115.69286721300004,
+    "format_lint_and_CSharp_protocol_passed": true,
+    "new_tests": 50,
+    "passed_tests": 2029,
+    "peak_resident_memory_bytes": 366313472,
+    "report_id": "sha256:3a162ffeb3274e8e3290cd4a25c93242d13fe50745f834987b9d628a0bde94f0",
+    "status": "completed",
+    "strict_type_files": 406,
+    "wall_seconds": 129.17438479093835
+  },
+  "saved_audit": {
+    "all_choices_reconstructed": true,
+    "auditor_sha256": "1251f0b083491f7b545b06ac0e03a59010bbc77ab6be2e7682cac84d94469c5d",
+    "branch_receipts_verified": 28,
+    "combat_plans_and_selection_reconstructed": true,
+    "full_states_unchanged": true,
+    "native_delivery_semantically_reaudited": false,
+    "native_journal_bytes_verified": true,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "ordinary_PPO_eligible": false,
+    "planning_cost_charged_without_amortization": true,
+    "public_decisions_reconstructed": 4338,
+    "source_report_id": "sha256:9b0c4982618e58b0868b9ff256a9fa06bcad38e4e1cd51f45f0e7ca6dfd57577"
+  },
+  "schema_version": "native-bounded-combat-planning-portable-evidence-v1",
+  "summed_case_search_charges_not_physical_experiment_cost": true,
+  "verification": {
+    "control_source_files_verified": 34547,
+    "main_status_passes_with_native_hosts_disabled": true,
+    "only_control_identity_fields_changed_from_predeclared_template": true,
+    "original_evidence_files_verified": 51213,
+    "pilot_workspace_created": false
+  }
+}

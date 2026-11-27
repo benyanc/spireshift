@@ -1,0 +1,200 @@
+{
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "held_out_evaluation_data_used": false,
+  "maximum_held_forecast_error_ratio": 0.9,
+  "maximum_per_initializer_cosine_decrease": 0.05,
+  "native_game_launches": 0,
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "optimizer_updates": 0,
+  "passed": true,
+  "players": {
+    "2": {
+      "credit_training_seals": [
+        "sha256:e9f8a3f48b0f5de4e2a506b2be47520d8cfcf9195c62335a3c187643225e5e4b",
+        "sha256:fd79b0f1b0c5b6f0b9c9555e51a68102b67ddb81d3d471b991c4abca70f8094b",
+        "sha256:511c902e138ef2b26bb4fbd836cd39d2872233e01832733078e4368e21c7d7d0",
+        "sha256:140b6c28d178d4b044af588a28afe2007d5df4a4d3d8166b9f90f467eb64f70e",
+        "sha256:1bbdf65af7149b56365cbdb1fd3a1f40dba7176c281864f28d27581914c2565e",
+        "sha256:b6b99d23d4882781b1de8ed002a6677f1040d4523cca9ce765a48eec83e94ada",
+        "sha256:4c73e5d1a0458cadbcf594b3c9e3f5646e238106bee9deca8e9a61b87f0c7d20",
+        "sha256:93fa9cca66efcd0bfe5c0a7393c7a90589173d9ed5dec814b8ef2e30fe5ba375",
+        "sha256:ef62576419bf73914645f81eb11bf5c282e0b50cb806a5144ef835b9c0dac54b",
+        "sha256:c22a7cab9a7a6ccd56b5d90eb89e45442dd3235073bb03159ec1c629167e3a4c",
+        "sha256:06a7ed939d024a5b88a0123352f3c3947ccfb0951dd3e1d74365f917cf308bd7",
+        "sha256:50ffd59b9b89ba1befa5331039081a5a2fb98751831047895ab5bb184a2f5087",
+        "sha256:457104f6cf22b4a29368a6a74dd9f903f6e516b6ec1cabb1079082c13d7b999a",
+        "sha256:66bfadf13e861abb3fe1d10dab16daf451ee18f104f3c9234dacd23bd434b088",
+        "sha256:895e97b107ab44eb4fa7ed18597a1c756fce79654909c94fc076ae8ce8eda9da",
+        "sha256:4abb560c54b1f62be0cd2c9e592125af9bf538fec7abf705618ed50e50efc527",
+        "sha256:562709cdef0e99e40b36aa4b99a68e7eeafccbb3d09250f1206036e2397135b2",
+        "sha256:3e4d9603f8a6ac77c9dd66ec572da0f5171540a18db1f391c076b6fa2df9ed67",
+        "sha256:9f2f7dc96d0d4afc2a8ae327cf1bb69c2f8df1cedea2fed2d8e219758a68f328",
+        "sha256:5c888d903ed3023a6a2912f2b267d9e99e3abe5e68e181630c74fa35653102bb",
+        "sha256:ce21845b963f5962c41bbadb7419abfe38bc49425a1efa4f3d3e5ed767636269",
+        "sha256:64df5940fa6aad14c5555d0786e698bb32b97b56d03879f64de2e5449051cbac",
+        "sha256:486b3c84549818dba17c19ad8b6d18a8ce22eeee0587ea51891e1c0647dd1b92",
+        "sha256:ae1780461b7aebae15ccd4c694a1ab0207fd14e4f4afbf7150414d5d0712843f"
+      ],
+      "decisions": 3687,
+      "direction_passed": true,
+      "forecast_passed": true,
+      "forecast_training_seals": [
+        "sha256:74658dbf337c6edf8fae570398e93dde5e794ca17c56f2c444b6f1864479e7e5",
+        "sha256:fb3b5e3b29a3fc8860863331cff7541520e350b5e0c572a1e73cc159a2670f4e",
+        "sha256:6d1258bcf8fd68617c18300fa147487c2bdc0619d81de7d7859a5ee87070b269",
+        "sha256:711e17f70c416f52f47d72d63a9eea8e39d43690207c6e03e3c2ba5411dcf0ed",
+        "sha256:f26abe167ba4a1e14f793a0eb770c446c46fe55a3871ba939ae807e5dcb364ac",
+        "sha256:e582fa76fbd6e4d4510ce5d75dd12def2281a2f1645fb4cf697698877d8e0f09",
+        "sha256:57f57efab60dc20a6d199c2c94664e0eb7ad786e1557e8fe6c5429d1bb377a4c",
+        "sha256:c29a858ef25e2ecfe2c985e13832f941fd28ea90d287008ddbed185b3d4e34d5",
+        "sha256:cb1910de07327f3331bcfd3e2624ce27a55efcc0d7742e261a84ac1545c50ebf",
+        "sha256:cba478f44650555e2ed5eb1882dbee60c59a1a8449ae7708a78e4ef8d775fbd0",
+        "sha256:0d172efa789ce9e4aeb0259a7d617ebd0e88347679795a757c976a54f8cefb1b",
+        "sha256:c1d8b4fd04d1eb92696622b2c54788e2d694a959bfc598274303f6fec02a2336"
+      ],
+      "gradient_splits": {
+        "full_trace": {
+          "complementary_splits": 35,
+          "median_cosine": -0.055065957531658875,
+          "opposing_splits": 26,
+          "worlds": 8
+        },
+        "short_trace": {
+          "complementary_splits": 35,
+          "median_cosine": 0.17829225674192836,
+          "opposing_splits": 2,
+          "worlds": 8
+        }
+      },
+      "held_constant": {
+        "choice_bearing_decisions": 2681,
+        "explained_variance": 0.0,
+        "independent_runs": 24,
+        "mean_prediction_error": -0.00042501289464501264,
+        "mse": 2.0429230217563953e-05,
+        "residual_variance": 2.024859425694942e-05,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "held_prediction": {
+        "choice_bearing_decisions": 2681,
+        "explained_variance": 0.21928296104915412,
+        "independent_runs": 24,
+        "mean_prediction_error": 4.210910688268446e-05,
+        "mse": 1.581019572808511e-05,
+        "residual_variance": 1.5808422551202655e-05,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "held_prediction_mse_ratio": 0.773900707942111
+    },
+    "3": {
+      "credit_training_seals": [
+        "sha256:3f3e643d3a4d62ad4639d5f486cf049afe3a4126097210175271ce4b182ac119",
+        "sha256:aa519d107369a81714e3252186eea2203fc43bf040cd030429b4c1beead32b92",
+        "sha256:b5197e165ffe6768af369e2b5629af330a98c953f5b69aa8bdc451e2e930a853",
+        "sha256:9cbcd45842a282ee86f9c35f1ae52a40a7676cd636db131b61e45919e7632e86",
+        "sha256:3c304410737a721ddb213a08fa81c4806f40a287731e9aedb6ea311db38068f4",
+        "sha256:f74b8e71709c12cc00578641b71d27be79c8a9164699b7784f438d1303310a1c",
+        "sha256:76f3090c106b455c488748b725e6c4dcd6e6c2cc039429ec13b8295ae7151d88",
+        "sha256:c2a44f2e61c5c7130ad064b73ab4be53b0593599a62ac01f89cd865b8ef8b7da",
+        "sha256:468753ec48d60811e9b1de7c1893dbca24c736e407a48e48778b8a7c2ec8a7ef",
+        "sha256:811eb961aa622576d4e54820a60cb8f383e57fefe8563935dd6b71774da18101",
+        "sha256:b9d194382f6ebcad526ac3a848e25415c8bb0afd7307987243134992127c171d",
+        "sha256:80772696d0e471b7528dde91c24ba06d399a2a26b5d008fad5652cac370e01e1",
+        "sha256:bd4c86d0f8e71ff1b4b5d6bb755710e9c4e7397d9b127591e0f064110db107f1",
+        "sha256:4fc03a3250e6892b43c294e8e97c761055f817ff652fef22d09f60693a409561",
+        "sha256:aca0ec72ae8ad1060714949fa502284ac092e878898caed314d71c0b904fcfaf",
+        "sha256:d2e7c8b9ffaf4d629689ad4faf50814ee8d7abea489796e01b5bc83fac605e0b",
+        "sha256:900e1886031f8219a72eec03d83e46ef6bc645fbb1d4cfda426d4071cbc1b68a",
+        "sha256:312052325dc2cd44639618fe775c657d0ad876629caf1d688c5634d9ef3d681c",
+        "sha256:94287794c27dca393ef52a727032aa189f26bb19f052e3cc59383b5a8f4536fd",
+        "sha256:e63bcd8c9ac6a16f4af878d5606dc99750006c7c2df06fbf174ddc3869d9e54e",
+        "sha256:3ce74d0dc175f6204c4915a3e9e23e431781feaf6141e99081c78b71122396fc",
+        "sha256:c73c3019a92818c04017cb21ab47a8460814a614b3ff9fde7faf3f45e00f635e",
+        "sha256:c43c55ac573104528d6efff2b38c3ca94340c30ffda30fd840470cbc507b073b",
+        "sha256:cd0706e75918c5285d03b9cfe7513b2551fa05548d812d996bd1501e8fdce555"
+      ],
+      "decisions": 3559,
+      "direction_passed": true,
+      "forecast_passed": true,
+      "forecast_training_seals": [
+        "sha256:7e774d6f3747bd5a65997272dffff0deecdbfea19d45766216187cb60615a821",
+        "sha256:7bc083d5ee1bf14e219fd7c12ed86146d2e34c15ae3b458b7e3d6e10179ec7b3",
+        "sha256:b831bc75b424a4ef2161ecc639e087b2bcb14187f4dd35c7a8d6b236a39e4c33",
+        "sha256:5758f0245c3d03268eae8827895f87dc230da2ef986eb49147c3abe31cb7019c",
+        "sha256:7e07d60d9b0dcbb9d602e38670cdd06352304c83603fe16531c9ba94cc4a9e79",
+        "sha256:f09cc4fe324286d9611a664fc7430874a02d83f2007f945ab66ba3b86052eff3",
+        "sha256:2903e7618db7004202e67dceadcc83d4b555f0f915407a36a8345b37c2801b0c",
+        "sha256:ba468ffc44e58466f410188b6b63287a0ec1dc07ebf665b650a9ff088f68558d",
+        "sha256:20b6a5df9ae25da4bc9ed2e170fe417bd639a5d2eb35f9f9c726ae15d10d99ef",
+        "sha256:685128aeb9563503dac624532610351f5b546b3d5a305eecf9582b16526979a1",
+        "sha256:2d5937459bf9c98acb8490f9681e1d77570fed4185ccee7995f1f4644f330047",
+        "sha256:cb3d3fce64b61103bcf06fc2f9d57b98a6e5b9a711183039a51ed9564a47057f"
+      ],
+      "gradient_splits": {
+        "full_trace": {
+          "complementary_splits": 35,
+          "median_cosine": 0.10871643144839513,
+          "opposing_splits": 6,
+          "worlds": 8
+        },
+        "short_trace": {
+          "complementary_splits": 35,
+          "median_cosine": 0.17798431255146502,
+          "opposing_splits": 0,
+          "worlds": 8
+        }
+      },
+      "held_constant": {
+        "choice_bearing_decisions": 2766,
+        "explained_variance": 0.0,
+        "independent_runs": 24,
+        "mean_prediction_error": -0.001964376389905559,
+        "mse": 3.1449687632527074e-05,
+        "residual_variance": 2.7590913031308678e-05,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "held_prediction": {
+        "choice_bearing_decisions": 2766,
+        "explained_variance": 0.3059419771024998,
+        "independent_runs": 24,
+        "mean_prediction_error": -0.0011468777025750066,
+        "mse": 2.0465023013110695e-05,
+        "residual_variance": 1.9149694548446973e-05,
+        "weighting": "equal_complete_run_then_equal_choice_bearing_decision"
+      },
+      "held_prediction_mse_ratio": 0.6507226161427624
+    }
+  },
+  "regularization": 0.001,
+  "report_id": "sha256:e0736bfd7c8d66596aade92884c150391d5e238ab4bc3680f8f26e7d7d96ddd4",
+  "schema_version": "native-a8-temporal-credit-screen-v1",
+  "source_audit": {
+    "path": "artifacts/native-a8-world-credit/assessment-v3-1794195529702565000/report.json",
+    "report_id": "sha256:97d9c0605c2140605f58078519677a2e7e8a01edc007e6603dc544acb6b2479f",
+    "sha256": "6c366454f87306007532f289027c2631f2749bae4733c7388a0a1c2dabcf5059"
+  },
+  "status": "temporal_credit_screen_passed",
+  "traces": {
+    "full_trace": 1.0,
+    "short_trace": 0.95
+  }
+}

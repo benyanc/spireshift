@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -61,6 +62,31 @@ PRODUCTION_TRAIN_TERMINAL_FRONTIER = Path(
 PRODUCTION_VALIDATION_TERMINAL_FRONTIER = Path(
     "manifests/bootstrap/sts2-v0.107.1-evangambit-validation-terminal-frontier-v4.json"
 )
+PRODUCTION_MILESTONE_TRAJECTORY = Path(
+    "manifests/bootstrap/sts2-v0.107.1-base-v2-milestone-trajectory-train-v1.json"
+)
+
+
+def test_milestone_trajectory_state_set_binds_exact_trace_coordinates() -> None:
+    document = json.loads(PRODUCTION_MILESTONE_TRAJECTORY.read_text(encoding="utf-8"))
+    state_set = load_bootstrap_state_set_document(document)
+
+    assert isinstance(state_set, CurriculumStateSet)
+    assert state_set.capture_trajectory is not None
+    assert len(state_set.cases) == 28
+    assert state_set.discovery["replayed_decisions"] == 147
+    assert state_set.discovery["mutation_lineage_count"] == 7
+    assert state_set.discovery["boss_reached"] is True
+    assert state_set.discovery["victory"] is False
+    assert {case.run_seed for case in state_set.cases} == {300}
+    assert max(case.expected_source_floor or 0 for case in state_set.cases) == 17
+
+    tampered = deepcopy(document)
+    tampered["cases"][0]["expected_state_hash"] = "0" * 64
+    body = {key: value for key, value in tampered.items() if key != "state_set_id"}
+    tampered["state_set_id"] = manifest_identifier(body)
+    with pytest.raises(ValueError, match="differs from its capture trajectory"):
+        load_bootstrap_state_set_document(tampered)
 
 
 def _tactical_split(ruleset_manifest_id: str) -> SplitManifest:
@@ -737,6 +763,89 @@ def test_learned_policy_discovery_and_tasks_bind_exact_artifact_identity(
     assert restored.as_dict() == task.as_dict()
     assert restored.continuation_policy_id == artifacts.policy_id
 
+    dagger_state_body = {
+        key: value for key, value in state_set.as_dict().items() if key != "state_set_id"
+    }
+    dagger_state_body["selection_policy"] = "production-selective-dagger-v1:sha256:" + "d" * 64
+    dagger_state = load_bootstrap_state_set_document(
+        {
+            **dagger_state_body,
+            "state_set_id": manifest_identifier(dagger_state_body),
+        }
+    )
+    assert isinstance(dagger_state, CurriculumStateSet)
+    dagger_result = run_bootstrap_teacher_dataset(
+        backend=SearchBackendSpec.tactical_mock(),
+        state_set=dagger_state,
+        split_manifest=split,
+        objective=load_objective(Path("configs/default.toml")),
+        config=BootstrapConfig(
+            samples_per_candidate=1,
+            maximum_prefix_steps=4,
+            maximum_rollout_steps=4,
+            workers=1,
+        ),
+        output_directory=tmp_path / "production-dagger-teacher",
+        task_runner=execute_bootstrap_task,
+        policy_artifacts=artifacts,
+    )
+    assert dagger_result.successful
+    assert dagger_result.report["schema_version"] == "bootstrap-teacher-dataset-v6"
+    first_reference = dagger_result.report["cases"][0]
+    first_case = json.loads(
+        (dagger_result.report_path.parent / first_reference["path"]).read_text(encoding="utf-8")
+    )
+    batch_path = dagger_result.report_path.parent / first_case["batch"]["path"]
+    batch = json.loads(batch_path.read_text(encoding="utf-8"))
+    evidence = batch["tasks"][0]
+    request = json.loads((batch_path.parent / evidence["request_path"]).read_text(encoding="utf-8"))
+    assert request["schema_version"] == "bootstrap-simulation-task-v4"
+    assert request["no_op_fallback"] == {
+        "controller_id": "public-no-op-action-guard-v1",
+        "repetition_threshold": 2,
+        "event_limit": 16,
+    }
+    assert evidence["output"]["method"] == "paired-public-cycle-safe-progress-rollout-v4"
+    assert evidence["output"]["no_op_fallback"]["schema_version"] == ("public-no-op-fallback-v1")
+
+    schemas = [
+        json.loads(path.read_text(encoding="utf-8")) for path in Path("schemas").glob("*.json")
+    ]
+    registry = Registry().with_resources(
+        (schema["$id"], Resource.from_contents(schema)) for schema in schemas
+    )
+    for schema_name, instance in (
+        ("bootstrap-simulation-task-v4.json", request),
+        ("bootstrap-teacher-dataset-v6.json", dagger_result.report),
+    ):
+        schema = next(item for item in schemas if item["$id"].endswith(f"/{schema_name}"))
+        Draft202012Validator(schema, registry=registry).validate(instance)
+    worker_schema = next(
+        item for item in schemas if item["$id"].endswith("/bootstrap-worker-result-v4.json")
+    )
+    Draft202012Validator(worker_schema, registry=registry).validate(
+        {
+            "schema_version": "bootstrap-worker-result-v4",
+            "batch_id": batch["batch_id"],
+            "task_id": evidence["task_id"],
+            "status": "completed",
+            "worker_pid": 1,
+            "message": "completed",
+            "request_sha256": evidence["request_sha256"],
+            "cpu_seconds": 0.0,
+            "wall_seconds": 0.0,
+            "output": evidence["output"],
+        }
+    )
+    assert verify_bootstrap_teacher_dataset(
+        dagger_result.report_path,
+        split_manifest=split,
+    ).valid
+    assert load_curriculum_policy_examples(
+        dagger_result.report_path,
+        split_manifest=split,
+    )
+
     mismatched = BootstrapPolicyArtifacts(
         checkpoint_path=artifacts.checkpoint_path,
         training_report_path=artifacts.training_report_path,
@@ -1192,6 +1301,15 @@ def test_learned_curriculum_offset_and_seed_disjoint_composition(
         )
         assert isinstance(state_set, CurriculumStateSet)
         assert state_set.discovery.get("run_offset") == (offset or None)
+        if offset == 1:
+            dagger_body = {
+                key: value for key, value in state_set.as_dict().items() if key != "state_set_id"
+            }
+            dagger_body["selection_policy"] = "production-selective-dagger-v1:sha256:" + "d" * 64
+            state_set = load_bootstrap_state_set_document(
+                {**dagger_body, "state_set_id": manifest_identifier(dagger_body)}
+            )
+            assert isinstance(state_set, CurriculumStateSet)
         component_seeds.append({case.run_seed for case in state_set.cases})
         result = run_bootstrap_teacher_dataset(
             backend=SearchBackendSpec.tactical_mock(),
@@ -1207,6 +1325,9 @@ def test_learned_curriculum_offset_and_seed_disjoint_composition(
         component_paths.append(result.report_path)
 
     assert component_seeds[0].isdisjoint(component_seeds[1])
+    assert [
+        json.loads(path.read_text(encoding="utf-8"))["schema_version"] for path in component_paths
+    ] == ["bootstrap-teacher-dataset-v3", "bootstrap-teacher-dataset-v6"]
     combined = combine_curriculum_datasets(
         component_paths,
         output_directory=tmp_path / "combined",

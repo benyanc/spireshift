@@ -1,0 +1,111 @@
+{
+  "all_status_counts": {
+    "liveness_failure": 20,
+    "terminal_loss": 723,
+    "unsupported": 89
+  },
+  "automatic_followup": false,
+  "cases": 832,
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_metadata_diagnosis_and_two_short_train_only_reproductions_not_fresh_model_evaluation",
+  "claimed_ascension": 0,
+  "compatibility": {
+    "elapsed_claim": "short_exact_saved_action_reproductions",
+    "optimizer_steps": 0,
+    "steps_replayed": 410,
+    "train_only_source_cases": 2
+  },
+  "development": {
+    "evolved": {
+      "errors": {
+        "ValueError: Public card identity must be positive": 1,
+        "ValueError: Public combat selection exceeds visible cards": 7,
+        "ValueError: Terminal victory did not traverse all three public acts": 1
+      },
+      "model_id": "sha256:ad0ff2024ed0b4709ae1b225f577e5fddcea7ddf837801caf95cd9c71c4edcba",
+      "statuses": {
+        "liveness_failure": 3,
+        "terminal_loss": 52,
+        "unsupported": 9
+      },
+      "summary": {
+        "benchmark_denominator": 64,
+        "completed_runs": 52,
+        "completion_rate": 0.8125,
+        "failed_runs": 12,
+        "fitness_rank": [
+          0.0,
+          0.019019283515549747,
+          0.8125
+        ],
+        "mean_auxiliary_progress_return": 0.019019283515549747,
+        "mean_completed_acts": 0.015625,
+        "mean_maximum_floor": 9.46875,
+        "mean_training_return": 0.019019283515549747,
+        "missing_runs": 0,
+        "recorded_cpu_seconds": 37.797095999999954,
+        "recorded_decisions": 7643,
+        "recorded_runs": 64,
+        "victories": 0,
+        "victory_rate": 0.0
+      }
+    },
+    "initial": {
+      "errors": {
+        "ValueError: Public combat selection exceeds visible cards": 7
+      },
+      "model_id": "sha256:b52e98288f6fdc6a6e4bf878309ee8ead6b705a285ae6e87fade98b88d8327a3",
+      "statuses": {
+        "liveness_failure": 1,
+        "terminal_loss": 56,
+        "unsupported": 7
+      },
+      "summary": {
+        "benchmark_denominator": 64,
+        "completed_runs": 56,
+        "completion_rate": 0.875,
+        "failed_runs": 8,
+        "fitness_rank": [
+          0.0,
+          0.021231599376628423,
+          0.875
+        ],
+        "mean_auxiliary_progress_return": 0.021231599376628423,
+        "mean_completed_acts": 0.0,
+        "mean_maximum_floor": 11.0,
+        "mean_training_return": 0.021231599376628423,
+        "missing_runs": 0,
+        "recorded_cpu_seconds": 47.64631000000001,
+        "recorded_decisions": 9847,
+        "recorded_runs": 64,
+        "victories": 0,
+        "victory_rate": 0.0
+      }
+    }
+  },
+  "difficulty_claim_valid": false,
+  "difficulty_evidence": [
+    "RunState.MaxPotionSlots = 2; source explicitly says fixed A8",
+    "Reset starts at 64/80 HP",
+    "StarterDeckIds includes AscendersBane",
+    "No configurable ascension in Sts2RunEnv or its run reset API"
+  ],
+  "errors": {
+    "ValueError: Public card identity must be positive": 2,
+    "ValueError: Public combat selection exceeds visible cards": 79,
+    "ValueError: Terminal victory did not traverse all three public acts": 8
+  },
+  "evolution_report_id": "sha256:76ac741a3a9c1d2968e0e08b4a0ef92ed93ce50c9311478c1aa882721c187136",
+  "final_test_opened": false,
+  "metadata_case_ids_verified": 832,
+  "next_step": "build_isolated_engine_repair_then_finish_public_bindings_and_ruleset_validation",
+  "paired_mean_floor_difference": -1.53125,
+  "premature_terminal_victory_flags": 8,
+  "report_id": "sha256:b7336e621962076e8af9cd14a427bf1723725c86d910dce144b20efdcead279a",
+  "resource_report_id": "sha256:65dcf3b401d3847fa8cf83419778116d24c4f9cca8dffb6e063f49f96cc10344",
+  "schema_version": "full-run-pilot-diagnosis-v1",
+  "terminal_victories": 0,
+  "total_cpu_seconds": 592.2894953,
+  "traces_semantically_reverified": 0,
+  "wall_seconds": 80.85772104198986
+}

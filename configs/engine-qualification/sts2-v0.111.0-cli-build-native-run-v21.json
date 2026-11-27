@@ -1,0 +1,44 @@
+{
+  "schema_version": "engine-cli-build-config-v2",
+  "stage": "build_only_no_games",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v21",
+  "menu_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/connector-menu-v1-retry2.json",
+  "menu_report_id": "sha256:4b875e812739953dde45418ffc28f6b4fab2949fe0bb2e084ba672f41a11849e",
+  "managed_manifest_sha256": "671bf25e040c445683a1aacbdb68ce19d8b2bf331088937ebf8786caee99bb23",
+  "source_patch_sha256": "8ced088bffbfeaa378d4580ca2c254c41cd89ae58b5b1e9b6ee1a764f8eef87e",
+  "upstream_revision": "d11aa883b582dd68bd39b331f3370746b30d447e",
+  "max_wall_seconds": 210,
+  "training_allowed": false,
+  "candidate_lineage": "spireshift_cli_native_run_v21_local_toolchain",
+  "clone_cache": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-v1/build-0p0ywau3/candidate",
+  "local_patch": "patches/engine/sts2-cli-v0.111.0-native-run-v21.patch",
+  "local_patch_sha256": "dd6723cce4291e664c3e385e0793d40b9e40231bcf93d285892e90d8118650eb",
+  "expected_source_diff_id": "5cc4671733b2b808ff1f60f1eca1d13917a0fb57c152e9fc0ad96c524c99dbd0",
+  "expected_toolchain": {
+    "sdk_version": "10.0.401",
+    "csc_sha256": "6773e3c868c74a2d293750f4e6b44b93090b3def33639887e802aab6666d8496",
+    "reference_version": "9.0.20",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114"
+  },
+  "helper_sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a",
+  "expected_baseline": {
+    "artifact_sha256": "f1514466352ca96f73deaa2d82a1a632b5b4a706c47e0ec5d8f5e978d4753afd",
+    "artifact_mvid": "db366e9a-3a27-4b4f-8f28-1d55bf53a06f",
+    "godot_stub_sha256": "4cbc15bd3058ab2104c4c7b9764aa2e4e72dd6b823ed1f031feba068d5bdb4b1",
+    "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+    "source_diff_id": "eeddfcc92f065402e061d745a73dd95eed3f86d15f1fda5b146bd56aae97ac54",
+    "runtime_dependencies_id": "4539331c8760d932eaa8fb159fe9224100b6c8eef9c05dfd27c524591ef9d145"
+  },
+  "expected_repaired": {
+    "artifact_sha256": "6db7506387b0db031acfe4330cc93661790efce349ffa2a423b31d59e93a9815",
+    "artifact_mvid": "f8e446f4-2afd-4cd9-88b6-7f41bcc2a761",
+    "godot_stub_sha256": "1ee81fd20ef72126377aa720807575c67748d9441a28a40cf91fada5982e19ba",
+    "runtime_sts2_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "reference_pack_id": "7c5c86a8a77da6d7f927aa928eb146768582757087a541f213a1f01d761e3114",
+    "source_diff_id": "5cc4671733b2b808ff1f60f1eca1d13917a0fb57c152e9fc0ad96c524c99dbd0",
+    "runtime_dependencies_id": "a4d6d765b6355bfddf7e146b3328a6a91a03396b49a45b6a87e1c283eaef0545"
+  }
+}

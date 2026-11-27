@@ -1,0 +1,168 @@
+{
+  "act1_clears_by_arm": {
+    "alternate": 0,
+    "reference": 0
+  },
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "bosses_reached_by_arm": {
+    "alternate": 2,
+    "reference": 3
+  },
+  "complete_pairs": 36,
+  "config_id": "sha256:cd1d15430a56ff5b84bb26eb298a9080fcd3f23634add8563da02b49a878a26a",
+  "counts": {
+    "changed_successor_tied_return": 24,
+    "games": 72,
+    "informative": 9,
+    "local_factors": 0,
+    "native_deliveries": 10492,
+    "no_eligible_root": 2,
+    "same_public_successor": 1,
+    "sealed_files": 4392
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "final_test_worlds_used": false,
+  "fitting_candidate": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "gate": {
+    "minimum_pairs": 12,
+    "minimum_per_initializer": 3,
+    "minimum_per_stratum": 2
+  },
+  "gate_checks": {
+    "both_initializers": true,
+    "every_stratum": true,
+    "overall": false
+  },
+  "informative_by_initializer": {
+    "2": 4,
+    "3": 5
+  },
+  "informative_by_stratum": {
+    "combat": 3,
+    "resources": 2,
+    "route": 4
+  },
+  "map_root_deliveries": {
+    "train-07-p2": {
+      "alternate": null,
+      "reference": [
+        0,
+        2
+      ]
+    },
+    "train-07-p3": {
+      "alternate": null,
+      "reference": [
+        0,
+        2
+      ]
+    },
+    "train-08-p2": {
+      "alternate": null,
+      "reference": [
+        6,
+        6
+      ]
+    },
+    "train-08-p3": {
+      "alternate": null,
+      "reference": [
+        2,
+        5
+      ]
+    },
+    "train-09-p3": {
+      "alternate": null,
+      "reference": [
+        6,
+        6
+      ]
+    },
+    "train-10-p2": {
+      "alternate": [
+        1,
+        7
+      ],
+      "reference": [
+        2,
+        7
+      ]
+    },
+    "train-11-p2": {
+      "alternate": [
+        5,
+        6
+      ],
+      "reference": [
+        6,
+        6
+      ]
+    },
+    "train-11-p3": {
+      "alternate": null,
+      "reference": [
+        5,
+        5
+      ]
+    },
+    "train-12-p2": {
+      "alternate": [
+        2,
+        6
+      ],
+      "reference": [
+        1,
+        6
+      ]
+    },
+    "train-12-p3": {
+      "alternate": [
+        1,
+        6
+      ],
+      "reference": [
+        2,
+        6
+      ]
+    }
+  },
+  "native_game_launches": 0,
+  "official_live_qualification_granted": false,
+  "optimizer_updates": 0,
+  "outcomes": {
+    "loss": 72
+  },
+  "owner": {
+    "path": "artifacts/native-a8-action-credit/collection-v1/attempt-1794193097255948000.json",
+    "report_id": "sha256:e99d654edafb37296ca9c6a7da94787a9dccabd8b6f7cf3424a61e0f139f35f1",
+    "sha256": "4a03981e11588701fa56d0aa2fc6b4d86ed83b212107116a375340dec5a1019d"
+  },
+  "preferred_arms": {
+    "alternate": 3,
+    "reference": 6
+  },
+  "promotion_allowed": false,
+  "report_id": "sha256:128c82819b7b0721fbfc3d7bc18eccaf9472c624ef800969827b7b00423b82fe",
+  "resources": {
+    "path": "artifacts/native-a8-action-credit/collection-v1-1794193097255948000-resources.json",
+    "report_id": "sha256:1fa7f5990a5ed494da41010aa262c9a7f1d7110dc8279934e32e16166f10be2c",
+    "sha256": "3cdc46400f390c2029c0c80202dcce7a5b5d695749d92a264490275d98fd07a4"
+  },
+  "schema_version": "native-a8-action-credit-saved-audit-v1",
+  "status": "paired_action_credit_saved_verified",
+  "training_admission_granted": false,
+  "wins_by_arm": {
+    "alternate": 0,
+    "reference": 0
+  },
+  "worlds": 18
+}

@@ -1,0 +1,1541 @@
+{
+  "adaptive_controller_allowed": false,
+  "base_readiness_passed": false,
+  "candidate_alias_pairs": {
+    "native-actor-hash-quarter-v1": 0,
+    "none": 0
+  },
+  "check_report_id": "sha256:a10c142b97d527203ee274b6eb3e03fdfddb6fc44b0f22b5a9bb5f65c41e41bb",
+  "checkpoint_promoted": false,
+  "checks": {
+    "all_diagnostic_actors_changed": true,
+    "all_sampled_vectors_recover_exactly": true,
+    "candidate_aliases_not_increased": true,
+    "critic_input_unchanged": true,
+    "held_conditional_accuracy_preserved": true,
+    "late_saturation_reduced_at_least_half": true,
+    "negative_control_chance_only": true,
+    "normalized_held_conditional_signal": true
+  },
+  "claim_scope": "bounded_saved_TRAIN_scaling_sensitivity_artificial_conditional_controls_and_native_integration_not_stronger_play",
+  "coherent_hp_controls": {
+    "coherent_hp_control_pass": true,
+    "conditional_labels_artificial_not_gameplay_oracles": true,
+    "controls": [
+      {
+        "actor_changed": true,
+        "artificial_labels_are_not_optimal_gameplay_labels": true,
+        "critic_unchanged": true,
+        "diagnostic_steps": 300,
+        "input_normalization": "none",
+        "learning_curve": [
+          {
+            "fit": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.5000226528375
+            },
+            "held": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.5000922130737822
+            },
+            "step": 0
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.7371692606264328
+            },
+            "held": {
+              "accuracy": 0.7857142857142857,
+              "mean_target_probability": 0.676331477953054
+            },
+            "step": 50
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9639375307270338
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.8827015506308686
+            },
+            "step": 100
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9936855526992521
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9562928167399433
+            },
+            "step": 200
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.997164559382217
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9731488720617119
+            },
+            "step": 300
+          }
+        ],
+        "negative_control": {
+          "accuracy": 0.5,
+          "mean_target_probability": 0.5
+        },
+        "negative_control_identical_input_opposite_label_pairs": 14,
+        "production_model_written": false,
+        "starting_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449"
+      },
+      {
+        "actor_changed": true,
+        "artificial_labels_are_not_optimal_gameplay_labels": true,
+        "critic_unchanged": true,
+        "diagnostic_steps": 300,
+        "input_normalization": "native-actor-hash-quarter-v1",
+        "learning_curve": [
+          {
+            "fit": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.5000053875564691
+            },
+            "held": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.5000053150745345
+            },
+            "step": 0
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.5421681501299604
+            },
+            "held": {
+              "accuracy": 0.7142857142857143,
+              "mean_target_probability": 0.5398181905087076
+            },
+            "step": 50
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.797550558624422
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.7696265375197927
+            },
+            "step": 100
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9755401756152556
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9543048743900756
+            },
+            "step": 200
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9908011491711703
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.977523874929736
+            },
+            "step": 300
+          }
+        ],
+        "negative_control": {
+          "accuracy": 0.5,
+          "mean_target_probability": 0.5
+        },
+        "negative_control_identical_input_opposite_label_pairs": 14,
+        "production_model_written": false,
+        "starting_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449"
+      },
+      {
+        "actor_changed": true,
+        "artificial_labels_are_not_optimal_gameplay_labels": true,
+        "critic_unchanged": true,
+        "diagnostic_steps": 300,
+        "input_normalization": "none",
+        "learning_curve": [
+          {
+            "fit": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.4973196077284718
+            },
+            "held": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.4978170254460009
+            },
+            "step": 0
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.6377611995876442
+            },
+            "held": {
+              "accuracy": 0.6071428571428571,
+              "mean_target_probability": 0.580098013502025
+            },
+            "step": 50
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.918680369904729
+            },
+            "held": {
+              "accuracy": 0.9285714285714286,
+              "mean_target_probability": 0.7976362077878726
+            },
+            "step": 100
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9913251943159275
+            },
+            "held": {
+              "accuracy": 0.9285714285714286,
+              "mean_target_probability": 0.9192513551052884
+            },
+            "step": 200
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9968251338474579
+            },
+            "held": {
+              "accuracy": 0.9642857142857143,
+              "mean_target_probability": 0.9458697508500072
+            },
+            "step": 300
+          }
+        ],
+        "negative_control": {
+          "accuracy": 0.5,
+          "mean_target_probability": 0.5
+        },
+        "negative_control_identical_input_opposite_label_pairs": 14,
+        "production_model_written": false,
+        "starting_model_id": "sha256:aa96500018aa97bd7b3742d723481662385a1fbea944499eecf93b5501941f93"
+      },
+      {
+        "actor_changed": true,
+        "artificial_labels_are_not_optimal_gameplay_labels": true,
+        "critic_unchanged": true,
+        "diagnostic_steps": 300,
+        "input_normalization": "native-actor-hash-quarter-v1",
+        "learning_curve": [
+          {
+            "fit": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.49978517828364233
+            },
+            "held": {
+              "accuracy": 0.5,
+              "mean_target_probability": 0.4998181294550875
+            },
+            "step": 0
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.5241888067051508
+            },
+            "held": {
+              "accuracy": 0.75,
+              "mean_target_probability": 0.5226878557715634
+            },
+            "step": 50
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.7624720077813413
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.7327704853235683
+            },
+            "step": 100
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9785722960492764
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9469367957229309
+            },
+            "step": 200
+          },
+          {
+            "fit": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9929850433902615
+            },
+            "held": {
+              "accuracy": 1.0,
+              "mean_target_probability": 0.9753566333802376
+            },
+            "step": 300
+          }
+        ],
+        "negative_control": {
+          "accuracy": 0.5,
+          "mean_target_probability": 0.5
+        },
+        "negative_control_identical_input_opposite_label_pairs": 14,
+        "production_model_written": false,
+        "starting_model_id": "sha256:aa96500018aa97bd7b3742d723481662385a1fbea944499eecf93b5501941f93"
+      }
+    ],
+    "diagnostic_optimizer_steps": 1200,
+    "fit_runs": [
+      15,
+      49,
+      66,
+      116,
+      90,
+      5,
+      26,
+      54
+    ],
+    "games_launched": 0,
+    "held_runs": [
+      30,
+      59,
+      17,
+      20,
+      94,
+      107,
+      37,
+      106,
+      85,
+      68,
+      44,
+      53,
+      27,
+      119
+    ],
+    "implementation_sha256": "884dbe4b3c5c6c321aa496ba8e8de2dad6436c73bee514890e282667d3ef7868",
+    "minimum_mirrored_player_hp_fields_updated": 3,
+    "parent_report_id": "sha256:a10c142b97d527203ee274b6eb3e03fdfddb6fc44b0f22b5a9bb5f65c41e41bb",
+    "production_checkpoints_written": 0,
+    "report_id": "sha256:365beffcea3a3c6bd9e3d4164a226eb676a2d7245eaa7513cb28f4164cfb072d",
+    "schema_version": "native-coherent-hp-conditional-control-v1"
+  },
+  "conditional_examples": {
+    "fit": 16,
+    "held": 28
+  },
+  "date": "2026-10-16",
+  "diagnostic_optimizer_steps": 2400,
+  "evidence_id": "sha256:cab4133ce07895576df2d888398652f2aa0316189c9a25f05f231d21c7c4391f",
+  "families": {
+    "card_bundle_selection": 13,
+    "card_reward_selection": 24,
+    "card_selection": 24,
+    "combat_turn": 24,
+    "event_option": 24,
+    "map_navigation": 24,
+    "native_generated_card_choice": 24,
+    "rest_site": 24,
+    "reward_claim": 24,
+    "reward_completion": 24,
+    "shop_inventory": 24,
+    "treasure_chest": 1,
+    "treasure_relic_selection": 24
+  },
+  "long_comparison": {
+    "config": "configs/native-normalization/sts2-v0.111.0-a8-comparison-v1.json",
+    "config_id": "sha256:bb1a92bd8dcc422aacd1a466bbded0e234a6a3f0b750a517763a6368a0ba24eb",
+    "initial_numeric_weights_equal_but_policies_may_differ": true,
+    "owner_script": "scripts/compare-native-a8-normalization-v1.sh",
+    "planned_games": 672,
+    "sole_treatment": "hashed_actor_coordinates_times_one_quarter",
+    "status": "preflight_pass_not_started"
+  },
+  "measurements": [
+    {
+      "family": "all",
+      "mean_derivative": 0.5662692332749056,
+      "mean_input_l2": 19.911919152113754,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.042150258556847724,
+      "states": 278
+    },
+    {
+      "family": "card_bundle_selection",
+      "mean_derivative": 0.5249081283496502,
+      "mean_input_l2": 20.735910980072962,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.019230769230769232,
+      "states": 13
+    },
+    {
+      "family": "card_reward_selection",
+      "mean_derivative": 0.6121627501613879,
+      "mean_input_l2": 18.04570520918025,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.029361979166666666,
+      "states": 24
+    },
+    {
+      "family": "card_selection",
+      "mean_derivative": 0.5266552596831628,
+      "mean_input_l2": 24.18202661527874,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.05464338640187239,
+      "states": 24
+    },
+    {
+      "family": "combat_turn",
+      "mean_derivative": 0.44558712493336045,
+      "mean_input_l2": 25.88852796163231,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.13604936549272487,
+      "states": 24
+    },
+    {
+      "family": "event_option",
+      "mean_derivative": 0.678447267593528,
+      "mean_input_l2": 15.920279187433806,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "map_navigation",
+      "mean_derivative": 0.34944016184970456,
+      "mean_input_l2": 34.45671640421174,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.19027777777777777,
+      "states": 24
+    },
+    {
+      "family": "native_generated_card_choice",
+      "mean_derivative": 0.563538987113797,
+      "mean_input_l2": 17.848001673649556,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.01714409722222222,
+      "states": 24
+    },
+    {
+      "family": "rest_site",
+      "mean_derivative": 0.6053641335311061,
+      "mean_input_l2": 17.264851579984114,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.008463541666666666,
+      "states": 24
+    },
+    {
+      "family": "reward_claim",
+      "mean_derivative": 0.6328119139100303,
+      "mean_input_l2": 15.730857703932392,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.001519097222222222,
+      "states": 24
+    },
+    {
+      "family": "reward_completion",
+      "mean_derivative": 0.6379284009334436,
+      "mean_input_l2": 16.491498628677956,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.018880208333333332,
+      "states": 24
+    },
+    {
+      "family": "shop_inventory",
+      "mean_derivative": 0.5964661515529424,
+      "mean_input_l2": 15.828570902245417,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "treasure_chest",
+      "mean_derivative": 0.5727515900399636,
+      "mean_input_l2": 15.406032404184506,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.0,
+      "states": 1
+    },
+    {
+      "family": "treasure_relic_selection",
+      "mean_derivative": 0.6026932483974673,
+      "mean_input_l2": 17.115491181377465,
+      "model": "initial",
+      "normalization": "none",
+      "saturation": 0.021484375,
+      "states": 24
+    },
+    {
+      "family": "all",
+      "mean_derivative": 0.9145249224039038,
+      "mean_input_l2": 5.18742708188347,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 278
+    },
+    {
+      "family": "card_bundle_selection",
+      "mean_derivative": 0.9180302467083431,
+      "mean_input_l2": 5.361798833556871,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 13
+    },
+    {
+      "family": "card_reward_selection",
+      "mean_derivative": 0.9309012026623554,
+      "mean_input_l2": 4.732284605519787,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "card_selection",
+      "mean_derivative": 0.900216410235021,
+      "mean_input_l2": 6.201833699203562,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "combat_turn",
+      "mean_derivative": 0.8620737278483284,
+      "mean_input_l2": 6.668101131886099,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "event_option",
+      "mean_derivative": 0.9521157033175952,
+      "mean_input_l2": 4.209096186113185,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "map_navigation",
+      "mean_derivative": 0.8077594871439097,
+      "mean_input_l2": 8.722501627211843,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "native_generated_card_choice",
+      "mean_derivative": 0.924453386232886,
+      "mean_input_l2": 4.678174814932567,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "rest_site",
+      "mean_derivative": 0.934095838656269,
+      "mean_input_l2": 4.528885608451462,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "reward_claim",
+      "mean_derivative": 0.939293026652681,
+      "mean_input_l2": 4.245831113551978,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "reward_completion",
+      "mean_derivative": 0.9357332559562557,
+      "mean_input_l2": 4.345408122608299,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "shop_inventory",
+      "mean_derivative": 0.9414130904502528,
+      "mean_input_l2": 4.187918348016503,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "treasure_chest",
+      "mean_derivative": 0.9280944439799184,
+      "mean_input_l2": 4.087703068547842,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 1
+    },
+    {
+      "family": "treasure_relic_selection",
+      "mean_derivative": 0.9292549032234829,
+      "mean_input_l2": 4.4930331116221165,
+      "model": "initial",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "all",
+      "mean_derivative": 0.3701358756679386,
+      "mean_input_l2": 19.911919152113754,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.18037890441784674,
+      "states": 278
+    },
+    {
+      "family": "card_bundle_selection",
+      "mean_derivative": 0.326477984752377,
+      "mean_input_l2": 20.735910980072962,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.18269230769230768,
+      "states": 13
+    },
+    {
+      "family": "card_reward_selection",
+      "mean_derivative": 0.40648738944913826,
+      "mean_input_l2": 18.04570520918025,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.10319010416666667,
+      "states": 24
+    },
+    {
+      "family": "card_selection",
+      "mean_derivative": 0.32060660433754135,
+      "mean_input_l2": 24.18202661527874,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.2444570255285503,
+      "states": 24
+    },
+    {
+      "family": "combat_turn",
+      "mean_derivative": 0.23595545751312128,
+      "mean_input_l2": 25.88852796163231,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.423295665922619,
+      "states": 24
+    },
+    {
+      "family": "event_option",
+      "mean_derivative": 0.44423187046270973,
+      "mean_input_l2": 15.920279187433806,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.14496527777777776,
+      "states": 24
+    },
+    {
+      "family": "map_navigation",
+      "mean_derivative": 0.238958473824635,
+      "mean_input_l2": 34.45671640421174,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.438671875,
+      "states": 24
+    },
+    {
+      "family": "native_generated_card_choice",
+      "mean_derivative": 0.42258650659081026,
+      "mean_input_l2": 17.848001673649556,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.0974392361111111,
+      "states": 24
+    },
+    {
+      "family": "rest_site",
+      "mean_derivative": 0.37603698007015246,
+      "mean_input_l2": 17.264851579984114,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.11393229166666667,
+      "states": 24
+    },
+    {
+      "family": "reward_claim",
+      "mean_derivative": 0.3909272303564013,
+      "mean_input_l2": 15.730857703932392,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.0998263888888889,
+      "states": 24
+    },
+    {
+      "family": "reward_completion",
+      "mean_derivative": 0.40480546935489253,
+      "mean_input_l2": 16.491498628677956,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.08940972222222222,
+      "states": 24
+    },
+    {
+      "family": "shop_inventory",
+      "mean_derivative": 0.44818137774498107,
+      "mean_input_l2": 15.828570902245417,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.12217881944444443,
+      "states": 24
+    },
+    {
+      "family": "treasure_chest",
+      "mean_derivative": 0.47480012465515,
+      "mean_input_l2": 15.406032404184506,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.046875,
+      "states": 1
+    },
+    {
+      "family": "treasure_relic_selection",
+      "mean_derivative": 0.40200428651440334,
+      "mean_input_l2": 17.115491181377465,
+      "model": "round-004",
+      "normalization": "none",
+      "saturation": 0.1111111111111111,
+      "states": 24
+    },
+    {
+      "family": "all",
+      "mean_derivative": 0.8146700009705827,
+      "mean_input_l2": 5.18742708188347,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 278
+    },
+    {
+      "family": "card_bundle_selection",
+      "mean_derivative": 0.814744950577938,
+      "mean_input_l2": 5.361798833556871,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 13
+    },
+    {
+      "family": "card_reward_selection",
+      "mean_derivative": 0.8623513454328706,
+      "mean_input_l2": 4.732284605519787,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "card_selection",
+      "mean_derivative": 0.7820498404368403,
+      "mean_input_l2": 6.201833699203562,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "combat_turn",
+      "mean_derivative": 0.6582254838791486,
+      "mean_input_l2": 6.668101131886099,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "event_option",
+      "mean_derivative": 0.8480881825409914,
+      "mean_input_l2": 4.209096186113185,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "map_navigation",
+      "mean_derivative": 0.6733377958470327,
+      "mean_input_l2": 8.722501627211843,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "native_generated_card_choice",
+      "mean_derivative": 0.8706521826420753,
+      "mean_input_l2": 4.678174814932567,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "rest_site",
+      "mean_derivative": 0.8416047236176231,
+      "mean_input_l2": 4.528885608451462,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "reward_claim",
+      "mean_derivative": 0.8491153078557782,
+      "mean_input_l2": 4.245831113551978,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "reward_completion",
+      "mean_derivative": 0.8535081482190982,
+      "mean_input_l2": 4.345408122608299,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "shop_inventory",
+      "mean_derivative": 0.8594399875825358,
+      "mean_input_l2": 4.187918348016503,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "treasure_chest",
+      "mean_derivative": 0.8836798589469214,
+      "mean_input_l2": 4.087703068547842,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 1
+    },
+    {
+      "family": "treasure_relic_selection",
+      "mean_derivative": 0.860081004169417,
+      "mean_input_l2": 4.4930331116221165,
+      "model": "round-004",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "all",
+      "mean_derivative": 0.3654932988289847,
+      "mean_input_l2": 19.911919152113754,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.2147586184826382,
+      "states": 278
+    },
+    {
+      "family": "card_bundle_selection",
+      "mean_derivative": 0.3912068555868768,
+      "mean_input_l2": 20.735910980072962,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.16466346153846154,
+      "states": 13
+    },
+    {
+      "family": "card_reward_selection",
+      "mean_derivative": 0.40887180818963537,
+      "mean_input_l2": 18.04570520918025,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.12675781249999998,
+      "states": 24
+    },
+    {
+      "family": "card_selection",
+      "mean_derivative": 0.3011769200910756,
+      "mean_input_l2": 24.18202661527874,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.28526373824730505,
+      "states": 24
+    },
+    {
+      "family": "combat_turn",
+      "mean_derivative": 0.1211415992461475,
+      "mean_input_l2": 25.88852796163231,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.6670487661210318,
+      "states": 24
+    },
+    {
+      "family": "event_option",
+      "mean_derivative": 0.42935695546182867,
+      "mean_input_l2": 15.920279187433806,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.1345486111111111,
+      "states": 24
+    },
+    {
+      "family": "map_navigation",
+      "mean_derivative": 0.16455379269617046,
+      "mean_input_l2": 34.45671640421174,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.5021918402777777,
+      "states": 24
+    },
+    {
+      "family": "native_generated_card_choice",
+      "mean_derivative": 0.4511527166965637,
+      "mean_input_l2": 17.848001673649556,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.11317274305555557,
+      "states": 24
+    },
+    {
+      "family": "rest_site",
+      "mean_derivative": 0.440064557075517,
+      "mean_input_l2": 17.264851579984114,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.12999131944444445,
+      "states": 24
+    },
+    {
+      "family": "reward_claim",
+      "mean_derivative": 0.42796008566010707,
+      "mean_input_l2": 15.730857703932392,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.10633680555555557,
+      "states": 24
+    },
+    {
+      "family": "reward_completion",
+      "mean_derivative": 0.43977558000077427,
+      "mean_input_l2": 16.491498628677956,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.07400173611111112,
+      "states": 24
+    },
+    {
+      "family": "shop_inventory",
+      "mean_derivative": 0.3970920219596353,
+      "mean_input_l2": 15.828570902245417,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.14453125,
+      "states": 24
+    },
+    {
+      "family": "treasure_chest",
+      "mean_derivative": 0.47785353384708573,
+      "mean_input_l2": 15.406032404184506,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.046875,
+      "states": 1
+    },
+    {
+      "family": "treasure_relic_selection",
+      "mean_derivative": 0.42067039700509734,
+      "mean_input_l2": 17.115491181377465,
+      "model": "round-008",
+      "normalization": "none",
+      "saturation": 0.11263020833333333,
+      "states": 24
+    },
+    {
+      "family": "all",
+      "mean_derivative": 0.7893314007155643,
+      "mean_input_l2": 5.18742708188347,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 278
+    },
+    {
+      "family": "card_bundle_selection",
+      "mean_derivative": 0.8236848899167579,
+      "mean_input_l2": 5.361798833556871,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 13
+    },
+    {
+      "family": "card_reward_selection",
+      "mean_derivative": 0.8439157701891684,
+      "mean_input_l2": 4.732284605519787,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "card_selection",
+      "mean_derivative": 0.7499165619438148,
+      "mean_input_l2": 6.201833699203562,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "combat_turn",
+      "mean_derivative": 0.4856534258060839,
+      "mean_input_l2": 6.668101131886099,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "event_option",
+      "mean_derivative": 0.8480721148693412,
+      "mean_input_l2": 4.209096186113185,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "map_navigation",
+      "mean_derivative": 0.6207834556627758,
+      "mean_input_l2": 8.722501627211843,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "native_generated_card_choice",
+      "mean_derivative": 0.8628403992573754,
+      "mean_input_l2": 4.678174814932567,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "rest_site",
+      "mean_derivative": 0.848765696165998,
+      "mean_input_l2": 4.528885608451462,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "reward_claim",
+      "mean_derivative": 0.8449183188877125,
+      "mean_input_l2": 4.245831113551978,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "reward_completion",
+      "mean_derivative": 0.8618960933945278,
+      "mean_input_l2": 4.345408122608299,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "shop_inventory",
+      "mean_derivative": 0.8365353646118271,
+      "mean_input_l2": 4.187918348016503,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    },
+    {
+      "family": "treasure_chest",
+      "mean_derivative": 0.8764461624945282,
+      "mean_input_l2": 4.087703068547842,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 1
+    },
+    {
+      "family": "treasure_relic_selection",
+      "mean_derivative": 0.857110285357812,
+      "mean_input_l2": 4.4930331116221165,
+      "model": "round-008",
+      "normalization": "native-actor-hash-quarter-v1",
+      "saturation": 0.0,
+      "states": 24
+    }
+  ],
+  "native_controls": [
+    {
+      "actor_input_normalization": "none",
+      "checks": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "completed_games": 4,
+      "config": "configs/native-learning/sts2-v0.111.0-a8-control-v12.json",
+      "failed_games": 0,
+      "game_apps_created": 0,
+      "initial_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449",
+      "name": "unscaled",
+      "optimizer_steps": 6,
+      "report_id": "sha256:d9b1539700cdc82a4b6383b26b68d93b2695f7863d71670e06a57ebfff641578",
+      "resource_report": "artifacts/resources/native-a8-unscaled-control-v12.json",
+      "sampled_decisions_verified": 228,
+      "selected_model_id": "sha256:dfaf264aa13f4aeb1bc51fabb45a818ff523bb216557b24f3d274d80e26345f3",
+      "status": "short_learning_control_pass"
+    },
+    {
+      "actor_input_normalization": "native-actor-hash-quarter-v1",
+      "checks": {
+        "account_profile_unchanged": true,
+        "candidate_unchanged": true,
+        "frozen_archive_unchanged": true,
+        "runtime_unchanged": true,
+        "sdk_unchanged": true
+      },
+      "completed_games": 4,
+      "config": "configs/native-learning/sts2-v0.111.0-a8-control-v13.json",
+      "failed_games": 0,
+      "game_apps_created": 0,
+      "initial_model_id": "sha256:0315e0ca62b261125ab1ecb1373ca669c521ae667dc4407848f317e4542cb603",
+      "name": "normalized",
+      "optimizer_steps": 6,
+      "report_id": "sha256:72946edf6761056a5979d059a88c33d098db77464941e76630fc5151c6748999",
+      "resource_report": "artifacts/resources/native-a8-normalized-control-v13.json",
+      "sampled_decisions_verified": 228,
+      "selected_model_id": "sha256:c2d8337eefbb3275a57b7cf9908ae492512adca222b4069e54757e94107252b3",
+      "status": "short_learning_control_pass"
+    }
+  ],
+  "new_long_pilot_games": 0,
+  "new_native_control_games": 8,
+  "primary_artificial_controls": [
+    {
+      "actor_changed": true,
+      "artificial_labels_are_not_optimal_gameplay_labels": true,
+      "critic_unchanged": true,
+      "diagnostic_steps": 300,
+      "input_normalization": "none",
+      "learning_curve": [
+        {
+          "fit": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.5000054538727775
+          },
+          "held": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.500031423370949
+          },
+          "step": 0
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.6803889751962545
+          },
+          "held": {
+            "accuracy": 0.8214285714285714,
+            "mean_target_probability": 0.6313097387981792
+          },
+          "step": 50
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.931169317176615
+          },
+          "held": {
+            "accuracy": 0.9642857142857143,
+            "mean_target_probability": 0.8384292092952041
+          },
+          "step": 100
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9888781036386366
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9333785500975141
+          },
+          "step": 200
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9952705882597064
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9558822777429716
+          },
+          "step": 300
+        }
+      ],
+      "negative_control": {
+        "accuracy": 0.5,
+        "mean_target_probability": 0.5
+      },
+      "negative_control_identical_input_opposite_label_pairs": 14,
+      "production_model_written": false,
+      "starting_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449"
+    },
+    {
+      "actor_changed": true,
+      "artificial_labels_are_not_optimal_gameplay_labels": true,
+      "critic_unchanged": true,
+      "diagnostic_steps": 300,
+      "input_normalization": "native-actor-hash-quarter-v1",
+      "learning_curve": [
+        {
+          "fit": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.5000007090818989
+          },
+          "held": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.5000004671328805
+          },
+          "step": 0
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.5281938715267553
+          },
+          "held": {
+            "accuracy": 0.8928571428571429,
+            "mean_target_probability": 0.5267924273721803
+          },
+          "step": 50
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.7120136289883668
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.6962279179297589
+          },
+          "step": 100
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9524913783720707
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9211677651728165
+          },
+          "step": 200
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9833642265209456
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9609330062814455
+          },
+          "step": 300
+        }
+      ],
+      "negative_control": {
+        "accuracy": 0.5,
+        "mean_target_probability": 0.5
+      },
+      "negative_control_identical_input_opposite_label_pairs": 14,
+      "production_model_written": false,
+      "starting_model_id": "sha256:d0fabf53142e2927193409a683bf431c2eb7a5bb7bf6e2b8dcce2751b45f4449"
+    },
+    {
+      "actor_changed": true,
+      "artificial_labels_are_not_optimal_gameplay_labels": true,
+      "critic_unchanged": true,
+      "diagnostic_steps": 300,
+      "input_normalization": "none",
+      "learning_curve": [
+        {
+          "fit": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.498366026316624
+          },
+          "held": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.49862701224410105
+          },
+          "step": 0
+        },
+        {
+          "fit": {
+            "accuracy": 0.9375,
+            "mean_target_probability": 0.5690736378473291
+          },
+          "held": {
+            "accuracy": 0.5714285714285714,
+            "mean_target_probability": 0.5369787664828947
+          },
+          "step": 50
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.839481422488429
+          },
+          "held": {
+            "accuracy": 0.8928571428571429,
+            "mean_target_probability": 0.7241827486940544
+          },
+          "step": 100
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9748344395141139
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.8826076321304669
+          },
+          "step": 200
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9895422811562863
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9234023890915755
+          },
+          "step": 300
+        }
+      ],
+      "negative_control": {
+        "accuracy": 0.5,
+        "mean_target_probability": 0.5
+      },
+      "negative_control_identical_input_opposite_label_pairs": 14,
+      "production_model_written": false,
+      "starting_model_id": "sha256:aa96500018aa97bd7b3742d723481662385a1fbea944499eecf93b5501941f93"
+    },
+    {
+      "actor_changed": true,
+      "artificial_labels_are_not_optimal_gameplay_labels": true,
+      "critic_unchanged": true,
+      "diagnostic_steps": 300,
+      "input_normalization": "native-actor-hash-quarter-v1",
+      "learning_curve": [
+        {
+          "fit": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.4998437045111889
+          },
+          "held": {
+            "accuracy": 0.5,
+            "mean_target_probability": 0.49986829863812127
+          },
+          "step": 0
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.5115243159598792
+          },
+          "held": {
+            "accuracy": 0.6785714285714286,
+            "mean_target_probability": 0.5107793265205773
+          },
+          "step": 50
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.650344245886626
+          },
+          "held": {
+            "accuracy": 0.8214285714285714,
+            "mean_target_probability": 0.6333580695824997
+          },
+          "step": 100
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9534854088222982
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9097839500849264
+          },
+          "step": 200
+        },
+        {
+          "fit": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9881026446629326
+          },
+          "held": {
+            "accuracy": 1.0,
+            "mean_target_probability": 0.9645140284366606
+          },
+          "step": 300
+        }
+      ],
+      "negative_control": {
+        "accuracy": 0.5,
+        "mean_target_probability": 0.5
+      },
+      "negative_control_identical_input_opposite_label_pairs": 14,
+      "production_model_written": false,
+      "starting_model_id": "sha256:aa96500018aa97bd7b3742d723481662385a1fbea944499eecf93b5501941f93"
+    }
+  ],
+  "private_evidence": [
+    {
+      "path": "artifacts/native-normalization/sts2-v0.111.0-a8-input-checks-v1/report.json",
+      "sha256": "e66c84ade1a70d57b76c874f400f68d6274da3565b461c2557cd101177b1f07a"
+    },
+    {
+      "path": "artifacts/native-normalization/sts2-v0.111.0-a8-input-checks-v1/coherent-hp-control.json",
+      "sha256": "2b26efcccd526ef8fce9d61387ed5044ba1c360a06ad6b0c26822f771c2f2125"
+    },
+    {
+      "path": "artifacts/native-normalization/sts2-v0.111.0-a8-input-checks-v1/coherent_hp_control.py",
+      "sha256": "884dbe4b3c5c6c321aa496ba8e8de2dad6436c73bee514890e282667d3ef7868"
+    },
+    {
+      "path": "artifacts/resources/native-a8-input-normalization-checks-v1.json",
+      "sha256": "2e94a18f4d37ff4d8824f837770a8508cddfdc81343bfb94a34fce1742430eb2"
+    },
+    {
+      "path": "artifacts/resources/native-a8-coherent-hp-control-v1.json",
+      "sha256": "2c345486d2dfb9d28f4cde50b24d118b6c4439225a1a7217ab9d59918287acc2"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-preflight-v1.json",
+      "sha256": "bb68ac11a436d4d3c4e3d4d736f51ef3f7357a4e480e6c1e535ef993a6aae3a1"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v12/summary.json",
+      "sha256": "5d5ee6568e98266a7ce641fcd6332c6458d167dbaa42b774e8db87d6e6effa29"
+    },
+    {
+      "path": "artifacts/resources/native-a8-unscaled-control-v12.json",
+      "sha256": "126e161223a1b09d16791ece11bda5c92a34c3777308f3f9348e67240a02390e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-a8-normalization-unscaled-admission-v1.json",
+      "sha256": "a7c8a23f891f046a4d486c69525e60a03117c5e6b965d6a4ae55cbb767d688d7"
+    },
+    {
+      "path": "artifacts/native-learning/sts2-v0.111.0-a8-control-v13/summary.json",
+      "sha256": "b62e91a98e175590716ed5178458ddcfb7c8e5076c1e5d5a4eb6d096967357ee"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalized-control-v13.json",
+      "sha256": "32be78d96b904c51132c531b9ddb3521f9e379afd5b929a5338594caaf1910cf"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-a8-normalization-normalized-admission-v1.json",
+      "sha256": "2b018bd7c3d17d449426313b5b2e834edc6a185ad0127bf5bcb759d922b75427"
+    },
+    {
+      "path": "artifacts/resources/native-a8-normalization-repository-checks-v1.json",
+      "sha256": "d66218344c682d62b8ae6c15bc5dcacaf8208a562322d709fd0bee9579d70974"
+    }
+  ],
+  "probe_candidates": 1175,
+  "probe_states": 278,
+  "repository_checks": {
+    "command": "uv run --no-sync spireshift check",
+    "format": true,
+    "lint": true,
+    "native_build": true,
+    "resource_report": "artifacts/resources/native-a8-normalization-repository-checks-v1.json",
+    "resource_report_id": "sha256:c7afb1947636bfe7a587230a237f724ea59c9a915754121750cd28e01e3101e7",
+    "status": "passed",
+    "tests_passed": 1477,
+    "types": true,
+    "wall_seconds": 55.438760332996026
+  },
+  "schema_version": "native-a8-input-normalization-evidence-v1",
+  "source_decisions_audited": 26061,
+  "source_runs_audited": 256,
+  "source_training_report_id": "sha256:556b1e782706f8192f97692a262ab588f7c6b937bf97a36b6b6a229c971a6f8b",
+  "unscaled_checkpoint_matches_previous_control": true
+}

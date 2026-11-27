@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/run-level-trajectory-search-ablation-v1.json",
+  "title": "SpireShift Run-Level Trajectory Search Ablation v1",
+  "type": "object",
+  "required": [
+    "schema_version", "ablation_id", "split_manifest_id", "partition",
+    "objective_id", "ruleset_manifest_id", "seed_count", "equal_budget",
+    "arms", "comparison", "readiness", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "run-level-trajectory-search-ablation-v1"},
+    "ablation_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "seed_count": {"type": "integer", "minimum": 1},
+    "equal_budget": {"type": "object"},
+    "arms": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {"$ref": "#/$defs/hash_arm"},
+        {"$ref": "#/$defs/frontier_arm"},
+        {"$ref": "#/$defs/diverse_arm"}
+      ],
+      "items": false
+    },
+    "comparison": {
+      "type": "object",
+      "required": [
+        "frontier_mean_maximum_floor_gain_over_hash",
+        "diverse_mean_maximum_floor_gain_over_hash",
+        "material_mean_maximum_floor_gain_threshold",
+        "boss_reach_or_act1_clear_found",
+        "material_fixed_budget_improvement_found"
+      ],
+      "properties": {
+        "frontier_mean_maximum_floor_gain_over_hash": {"type": "number"},
+        "diverse_mean_maximum_floor_gain_over_hash": {"type": "number"},
+        "material_mean_maximum_floor_gain_threshold": {"const": 0.5},
+        "boss_reach_or_act1_clear_found": {"type": "boolean"},
+        "material_fixed_budget_improvement_found": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "readiness": {
+      "type": "object",
+      "required": ["advance_search_foundation", "recommended_next_step"],
+      "properties": {
+        "advance_search_foundation": {"type": "boolean"},
+        "recommended_next_step": {
+          "enum": [
+            "advance_best_frontier_strategy",
+            "reassess_policy_representation_or_environment"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "claim_scope": {"const": "train_only_act1_public_frontier_ablation"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "arm": {
+      "type": "object",
+      "required": [
+        "strategy", "config_id", "report_id", "verification_id",
+        "evaluated_trajectories", "failed_seed_cases", "best", "paired"
+      ],
+      "properties": {
+        "strategy": {"type": "string"},
+        "config_id": {"$ref": "#/$defs/id"},
+        "report_id": {"$ref": "#/$defs/id"},
+        "verification_id": {"$ref": "#/$defs/id"},
+        "evaluated_trajectories": {"type": "integer", "minimum": 0},
+        "failed_seed_cases": {"type": "integer", "minimum": 0},
+        "best": {"type": "object"},
+        "paired": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "hash_arm": {
+      "allOf": [
+        {"$ref": "#/$defs/arm"},
+        {"properties": {"strategy": {"const": "hash_tiebreak_v1"}}}
+      ]
+    },
+    "frontier_arm": {
+      "allOf": [
+        {"$ref": "#/$defs/arm"},
+        {"properties": {"strategy": {"const": "public_frontier_v1"}}}
+      ]
+    },
+    "diverse_arm": {
+      "allOf": [
+        {"$ref": "#/$defs/arm"},
+        {"properties": {"strategy": {"const": "public_frontier_diverse_v1"}}}
+      ]
+    }
+  },
+  "additionalProperties": false
+}

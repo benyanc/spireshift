@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "train_dataset_id",
+    "validation_dataset_id",
+    "split_manifest_id",
+    "model_id",
+    "report_id",
+    "schema_version",
+    "model_type",
+    "trajectory_finetuning",
+    "training_runs",
+    "validation_runs",
+    "training_records",
+    "validation_records",
+    "eligible_preferences",
+    "fit_preferences",
+    "selection_preferences",
+    "fit_anchor_records",
+    "selection_anchor_records",
+    "collection_summary",
+    "exclusions",
+    "parent_selection_preferences",
+    "parent_strong_selection_preferences",
+    "parent_selection_policy",
+    "parent_validation_policy",
+    "held_out_metrics",
+    "validation_drift",
+    "validation_checks",
+    "preference_diagnostics",
+    "inference_diagnostics",
+    "terminal_value_status",
+    "floor_thresholds",
+    "training_history",
+    "candidate_eligible",
+    "status",
+    "terminal_victory_positive_labels",
+    "checkpoint_promoted",
+    "claim_scope",
+    "selection_note",
+    "starting_option_training",
+    "starting_evidence_training"
+  ],
+  "properties": {
+    "train_dataset_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/train_dataset_id"
+    },
+    "validation_dataset_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/validation_dataset_id"
+    },
+    "split_manifest_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/split_manifest_id"
+    },
+    "model_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/model_id"
+    },
+    "report_id": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/report_id"
+    },
+    "schema_version": {
+      "const": "production-model-training-report-v8"
+    },
+    "model_type": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/model_type"
+    },
+    "trajectory_finetuning": {
+      "$ref": "https://spireshift.dev/schemas/starting-evidence-policy-training-config-v1.json#/$defs/binding"
+    },
+    "training_runs": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/training_runs"
+    },
+    "validation_runs": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/validation_runs"
+    },
+    "training_records": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/training_records"
+    },
+    "validation_records": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/validation_records"
+    },
+    "eligible_preferences": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/eligible_preferences"
+    },
+    "fit_preferences": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/fit_preferences"
+    },
+    "selection_preferences": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/selection_preferences"
+    },
+    "fit_anchor_records": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/fit_anchor_records"
+    },
+    "selection_anchor_records": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/selection_anchor_records"
+    },
+    "collection_summary": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/collection_summary"
+    },
+    "exclusions": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/exclusions"
+    },
+    "parent_selection_preferences": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/parent_selection_preferences"
+    },
+    "parent_strong_selection_preferences": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/parent_strong_selection_preferences"
+    },
+    "parent_selection_policy": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/parent_selection_policy"
+    },
+    "parent_validation_policy": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/parent_validation_policy"
+    },
+    "held_out_metrics": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/held_out_metrics"
+    },
+    "validation_drift": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/validation_drift"
+    },
+    "validation_checks": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/validation_checks"
+    },
+    "preference_diagnostics": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/preference_diagnostics"
+    },
+    "inference_diagnostics": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/inference_diagnostics"
+    },
+    "terminal_value_status": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/terminal_value_status"
+    },
+    "floor_thresholds": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/floor_thresholds"
+    },
+    "training_history": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/training_history"
+    },
+    "candidate_eligible": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/candidate_eligible"
+    },
+    "status": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/status"
+    },
+    "terminal_victory_positive_labels": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/terminal_victory_positive_labels"
+    },
+    "checkpoint_promoted": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/checkpoint_promoted"
+    },
+    "claim_scope": {
+      "const": "anchored_train_starting_evidence_auxiliary_policy_candidate"
+    },
+    "selection_note": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/selection_note"
+    },
+    "starting_option_training": {
+      "type": "object",
+      "required": [
+        "config",
+        "known_option_ids",
+        "residual_head_id",
+        "coverage",
+        "parent_checkpoint_unchanged",
+        "coverage_source"
+      ],
+      "properties": {
+        "config": {
+          "$ref": "https://spireshift.dev/schemas/starting-option-policy-training-config-v2.json"
+        },
+        "known_option_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "residual_head_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "coverage": {
+          "$ref": "https://spireshift.dev/schemas/production-model-training-report-v7.json#/properties/starting_option_training/properties/coverage"
+        },
+        "parent_checkpoint_unchanged": {
+          "const": true
+        },
+        "coverage_source": {
+          "const": "verified_saved_public_inputs_no_engine"
+        }
+      },
+      "additionalProperties": false
+    },
+    "starting_evidence_training": {
+      "type": "object",
+      "required": [
+        "report_id",
+        "config_id",
+        "claim_scope",
+        "evidence_sufficient",
+        "independent_unit",
+        "preference_normalization",
+        "futures_per_option",
+        "games_replayed",
+        "selection_option_ids_absent_from_evidence_fitting",
+        "selection_only_ids_covered_by_fitting_anchors"
+      ],
+      "properties": {
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "config_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "claim_scope": {
+          "const": "train_only_exact_seed_fixed_policy_starting_option_evidence"
+        },
+        "evidence_sufficient": {
+          "const": true
+        },
+        "independent_unit": {
+          "const": "complete_run_seed"
+        },
+        "preference_normalization": {
+          "const": "equal_complete_run_within_rank_weight"
+        },
+        "futures_per_option": {
+          "const": 1
+        },
+        "games_replayed": {
+          "const": 0
+        },
+        "selection_option_ids_absent_from_evidence_fitting": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "selection_only_ids_covered_by_fitting_anchors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$id": "https://spireshift.dev/schemas/production-model-training-report-v8.json"
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "native-runtime-gap-controls-config-v1",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/runtime-gap-effects-v4",
+  "old_run": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-potion-run-v2.json",
+    "id": "sha256:ba10c1f804b6377083234042fb19dd4750df3ee4a0f3f9aded0d6691741a9d47"
+  },
+  "new_run": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-runtime-gap-run-v1.json",
+    "id": "sha256:67b26dd3122b96cf2c1c75275917e2b5482a71c95053c85a51d1e5898a1ab5e6"
+  },
+  "native_source_delta": {
+    "src/GodotStubs/Core.cs": {
+      "old": "7a3aa3d6acfb1dcd6ba514e799ae135e7ed671f451c7185eb96f13c077d152cb",
+      "new": "7c52070015094d63e3484a99a358ca3390cf021261f3e1e0b4fc09ba4704e653"
+    },
+    "src/GodotStubs/Math.cs": {
+      "old": "fa2e511c1d028f635c50fb1f4e6a51f435c1056f80b73e3b62c91384377a219a",
+      "new": "ba6db3ae419ea6224c7271e452f73493c48fb42294a5dcae2d7ce6499d4332b9"
+    },
+    "src/Sts2Headless/RunSimulator.cs": {
+      "old": "7582adcad16b7c4af8d72f7f8114652eb175254e3d03944b9b69d2e49665ec30",
+      "new": "c47827b3840468d491f257bf5e822fb605872b9d10cc2cd75767968505326697"
+    }
+  },
+  "training_allowed": false,
+  "seed_offset": 300
+}

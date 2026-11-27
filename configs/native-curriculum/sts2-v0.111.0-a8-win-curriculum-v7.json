@@ -1,0 +1,59 @@
+{
+  "audit": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/nexus-audit-v1/report.json",
+      "sha256": "953d304ba7274efdd62488011d46c245fcf0990f5a5a001c12abba71d273f149"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-audit-v1.json",
+      "sha256": "64a6382c83a359ef9bafd41b14caeda4534142488b716744198dd140bd1316e9"
+    }
+  },
+  "control": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/nexus-control-v1/report.json",
+      "sha256": "9459fd6b33e10c8406943c93d8aa67c010fe7bf187e9281e47f8d0030c02213a"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-control-v1.json",
+      "sha256": "eff4e48b5fb4a89690b8fd919bcced7a3ac77c443715e30516adfcadfc397fba"
+    }
+  },
+  "implementation": {
+    "backend-patches/headless-soul-nexus-v1/README.md": "885bea173f37f9cf6c6c78b8c5a8524abb4433445c507061618ef734998ec9ed",
+    "backend-patches/headless-soul-nexus-v1/soul-nexus.patch": "b0938eb2b660cad645ee33fa10ac89610e976b34c3a4616464c0763f80897046",
+    "scripts/continue-win-curriculum-v7.sh": "6c07eee3df33a57776a3f1edf57d09f503c8cc666245527116f35441b6bd8a67",
+    "src/spireshift/native_win7_build.py": "9b373181ade7902d0dbf71b5e77bcfea0a067fa198b87dd737ce584c14864199",
+    "src/spireshift/native_win7_control.py": "4310202ba431251247e2e440b03cb15974fe2ef80415cbc5ff950fd9f454db22",
+    "src/spireshift/native_win7_inputs.py": "84cedec14c0f4034364ac3d82c603814b9d33c9c35614d9128c5cc810419c06e",
+    "src/spireshift/native_win7_recovery.py": "6f132ec0644c0f69c0852daa08208a4ec03bdf25a7c01fad1e7c10d1dd825134",
+    "src/spireshift/native_win7_session.py": "a531c14bb02994075ba27be66ecbf0f635d8c9d4a7c485ebf922b2bbedcd4e21"
+  },
+  "launch_workspace": "artifacts/native-win-curriculum/launch-v7",
+  "parent": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v6.json",
+    "sha256": "a6b7a7f1af8b34e0c65f0153349b2fc043cb8f79678c93a33dfabfc406e39b32"
+  },
+  "protected": {
+    "path": "artifacts/native-win-curriculum/nexus-preparation-v1/protected-v6-result.json",
+    "sha256": "f13d4008cc6b40dab1ea7f5a5ad20c24fe51105d13187ac9a17d66c05ffab2ad"
+  },
+  "schema_version": "native-win-curriculum-continuation-v7",
+  "session_limits": {
+    "cpu_seconds": 14400,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 5400
+  },
+  "support": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/soul-nexus-build-v60/report.json",
+      "sha256": "e42972f9a5028fc7eecf5e1e737b1f298cd741343b9fa15b3a0fa8e42db8616e"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-nexus-build-v60.json",
+      "sha256": "335656fdbc08f89a5f040dfc38ba561ca808307c54d243dbf01367c0dffbadbd"
+    }
+  },
+  "workspace": "artifacts/native-win-curriculum/study-v7"
+}

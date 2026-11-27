@@ -1,0 +1,26 @@
+{
+  "conditional_fit_runs": 8,
+  "experiment": {
+    "id": "sha256:00473ec9bed0344ef86192cc717fc7d031430e2b945e2f152df6633fdb176824",
+    "path": "configs/native-learning/sts2-v0.111.0-a8-pilot-v5.json"
+  },
+  "implementation_sha256": {
+    "engine_experience.py": "2d7f006b7bd80abb9d33c4c5d9bfaa171b3c119f56b5a96fb22801ab5f871027",
+    "engine_neural.py": "4a91f8d9cad2273f56220f19615af29f73dc479e3fd0b111ea3bca9f0b5d3a27",
+    "full_run_policy.py": "5381af03f711192552146854cffcef1adb812aea6eb81fb678411c95c910e2b2",
+    "full_run_ppo_math.py": "0b4b53ca36576a9fc8862bd00a72670e10d891d3ec17074488aff9e7231532dd",
+    "native_input_normalization.py": "91fd09d9bad5e2778f845698c4c1f4e5a5aa5b0ea4880f2ad46a94e95d929de9",
+    "native_learning_diagnosis.py": "b197643b3a43dd2285f89905e0b9ecac7d2e7a07513979f1066ca3f89987d94f",
+    "native_normalization_checks.py": "6b8e60a80a0eb1e4eef256874be230685d09d416d291b992894d8e27ff4038a0"
+  },
+  "maximum_states_per_family": 24,
+  "normalization": "native-actor-hash-quarter-v1",
+  "resource_limits": {
+    "cpu_seconds": 180,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 100000000,
+    "wall_seconds": 180
+  },
+  "schema_version": "native-input-normalization-check-config-v1",
+  "workspace": "artifacts/native-normalization/sts2-v0.111.0-a8-input-checks-v1"
+}

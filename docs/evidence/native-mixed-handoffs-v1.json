@@ -1,0 +1,480 @@
+{
+  "schema_version": "native-mixed-handoff-preparation-evidence-v1",
+  "status": "native_12_verified_official_short_3_verified_remaining_9_prepared",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-mixed-handoffs-v4.json",
+    "sha256": "dd333e983836b032dab310f678d5ece936d8f13ea4b61ef24c8b331da8ad0bda",
+    "config_id": "sha256:60cc9ad57f44609c96c862f95f83c1a6516b2ebe73ab589f56f8678d20700391"
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "native_result": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/native-result-1795463230321687000.json",
+    "sha256": "74f3788c42ef177beb90fddb5f62a4e70eaea0d3f2635aee88617164afdeb789",
+    "report_id": "sha256:038232c7c34fa9453d1d1960d945206a4faf28bf8ae0fcb1b92d709067a86644"
+  },
+  "native_case_seals": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/native/report.json",
+    "sha256": "04129de4d94da20b4990781f9cdde16cb7e445cf9a5d22ffc5519def231f1b24",
+    "report_id": "sha256:ac7262dad1048d1e70e83d94f97788a0ddfd722004afda99667bc85e20677c87"
+  },
+  "short_result": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/short-result-1795463422742311000.json",
+    "sha256": "288e07e14b33b6f52b893fd3eb4ace900b319a1aa6c6d480d081085f874d7ab5",
+    "report_id": "sha256:39f5dda3f0a0e0634dfe0a0db4be618c77f73469aad68e2ea8fea4e95dd85161"
+  },
+  "native_resources": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/native-resources-1795463194755309000.json",
+    "sha256": "2162af623eb5131df364287767d67711ff7bca6d9fe4301da2bd0300d771ce9e",
+    "report_id": "sha256:09b56443883c152c2778c9459df6919bab81fe2a3a27439c0fe9c91dc4c1e92d"
+  },
+  "short_resources": {
+    "path": "artifacts/native-mixed-handoffs/v4/control-v1/short-resources-1795463286721325000.json",
+    "sha256": "2730a5af9a2db0865548c61a3f0992c675197b9b47619a76d7f907eff507be19",
+    "report_id": "sha256:df971ab0135c8e60bb3fc6fee4c460c8ad6cfc21b9ef35f4662c3702fcf8028b"
+  },
+  "native_cases_verified": 12,
+  "native_imports": 2,
+  "native_new_controls": 10,
+  "native_game_deliveries": 95,
+  "native_local_factors": 1,
+  "native_observations": 108,
+  "official_planned_pairs": 12,
+  "official_verified_pairs": 3,
+  "official_unattempted_pairs": 9,
+  "official_matching_states": 32,
+  "actual_official_sdk_choices_verified": 29,
+  "short_wall_seconds": 135.58964695897885,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "game_build": {
+    "version": "0.111.0",
+    "revision": "41cef1ea",
+    "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+    "unchanged": true
+  },
+  "native_host_unchanged": 60,
+  "connector_unchanged": 36,
+  "converter_unchanged": 17,
+  "original_training_recipes_unchanged": true,
+  "privileged_fixtures": true,
+  "optimizer_updates": 0,
+  "training_allowed": false,
+  "promotion_allowed": false,
+  "official_live_qualification_granted": false,
+  "full_game_playing_strength_evaluated": false,
+  "automatic_follow_up": false,
+  "cases": [
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C001",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [],
+        "key": "reward-discard-left",
+        "family": "reward",
+        "replacement": "discard",
+        "slot": 0,
+        "take": true
+      },
+      "native_report_id": "sha256:69c3876ba00ba3f2b4e24738dc69d1b94dbeb23aa5bae2e946e122e03f3bf1aa",
+      "native_deliveries": 9,
+      "local_factors": 0,
+      "observations": 10,
+      "official_status": "verified",
+      "official_pair_report_id": "sha256:082495e7865fc6f0401edf9f03e4e8ae9acd67272278cfd767ff9be933f66f7b"
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C002",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "THE_COURIER"
+        ],
+        "key": "courier-potion-restock",
+        "family": "shop",
+        "operation": "potion",
+        "courier": true
+      },
+      "native_report_id": "sha256:b5c8de57ffc5a72f20b8f48d57b5869d43472617674f17079502a2ef31ee944e",
+      "native_deliveries": 8,
+      "local_factors": 0,
+      "observations": 9,
+      "official_status": "verified",
+      "official_pair_report_id": "sha256:93b94b50a5302bd5c38250165d0641cc8e5ea42d153bb401763bdb6519f9a71d"
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH4C003",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "ENTROPIC_BREW",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "MINIATURE_TENT",
+          "REGAL_PILLOW",
+          "GIRYA"
+        ],
+        "key": "rest-brew-smith-lift-return",
+        "family": "rest",
+        "operation": "return",
+        "girya": 2,
+        "second_rest": true
+      },
+      "native_report_id": "sha256:b2d2e7f6655f44858ee67c666247cb3751cddaece65f7508bbefee24f33fa35d",
+      "native_deliveries": 12,
+      "local_factors": 0,
+      "observations": 13,
+      "official_status": "verified",
+      "official_pair_report_id": "sha256:e82d070f785676cced0029669e6cd8d197a778378e09c51a966c4fe338d9bf9a"
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C004",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [],
+        "key": "reward-discard-right",
+        "family": "reward",
+        "replacement": "discard",
+        "slot": 1,
+        "take": false
+      },
+      "native_report_id": "sha256:29f2cdd2a01032fb2286298c6726bc679be786fff8523d655920ac66a3890106",
+      "native_deliveries": 8,
+      "local_factors": 0,
+      "observations": 9,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C005",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [],
+        "key": "reward-use-replace",
+        "family": "reward",
+        "replacement": "use",
+        "slot": 0,
+        "take": false
+      },
+      "native_report_id": "sha256:ede5e13bd079893af499475782a0da72ed39c2376d7f0afe4ce7abd022e7c798",
+      "native_deliveries": 9,
+      "local_factors": 0,
+      "observations": 10,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C006",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "THE_COURIER"
+        ],
+        "key": "courier-card-restock",
+        "family": "shop",
+        "operation": "card",
+        "courier": true
+      },
+      "native_report_id": "sha256:4c6aa6ad60e82ec55bd6bb1015d2a1157b241e22c82cd900e1083e2b0a315566",
+      "native_deliveries": 10,
+      "local_factors": 0,
+      "observations": 11,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C007",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [],
+        "key": "ordinary-potion-stock",
+        "family": "shop",
+        "operation": "potion",
+        "courier": false
+      },
+      "native_report_id": "sha256:eeeaa487e17b01525bf2ac42516fa2de34c4d9cadd12eb81d0266f49c1213d62",
+      "native_deliveries": 6,
+      "local_factors": 0,
+      "observations": 7,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C008",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH",
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH",
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH",
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH",
+          "STRIKE_IRONCLAD"
+        ],
+        "belt": [
+          "BLOOD_POTION",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "THE_COURIER"
+        ],
+        "key": "courier-relic-child",
+        "family": "shop",
+        "operation": "relic",
+        "courier": true,
+        "kifuda": true
+      },
+      "native_report_id": "sha256:8595aa33d7458da587cf24e2fe167ba34e46099f48273f159cde709b95cfc61a",
+      "native_deliveries": 8,
+      "local_factors": 1,
+      "observations": 10,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C009",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "ASCENDERS_BANE"
+        ],
+        "belt": [
+          "ENTROPIC_BREW",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "MINIATURE_TENT",
+          "REGAL_PILLOW",
+          "MEAT_CLEAVER"
+        ],
+        "key": "rest-cook-brew",
+        "family": "rest",
+        "operation": "cook"
+      },
+      "native_report_id": "sha256:c3c2a8d5eb536bada0e139fde6012634369c9481bf2c519a6d32db0106543904",
+      "native_deliveries": 8,
+      "local_factors": 0,
+      "observations": 9,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C010",
+        "hp": 31,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "ENTROPIC_BREW",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "REGAL_PILLOW"
+        ],
+        "key": "rest-no-tent-brew",
+        "family": "rest",
+        "operation": "single"
+      },
+      "native_report_id": "sha256:80dc27fcc011d8121390ea78d32eaa693f21cb158f7b28835e71dfedf767f1e6",
+      "native_deliveries": 6,
+      "local_factors": 0,
+      "observations": 7,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C011",
+        "hp": 77,
+        "deck": [
+          "STRIKE_IRONCLAD",
+          "DEFEND_IRONCLAD",
+          "BASH"
+        ],
+        "belt": [
+          "ENTROPIC_BREW",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "MINIATURE_TENT",
+          "REGAL_PILLOW",
+          "SHOVEL"
+        ],
+        "key": "rest-pillow-cap",
+        "family": "rest",
+        "operation": "cap"
+      },
+      "native_report_id": "sha256:c8a9e1fcd0195467998d2d453390f8a76fe00505476be110bf433bdfc7d59f85",
+      "native_deliveries": 6,
+      "local_factors": 0,
+      "observations": 7,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    },
+    {
+      "case": {
+        "seed": "SP1RESH1FTA8MH3C012",
+        "hp": 31,
+        "deck": [
+          "ASCENDERS_BANE"
+        ],
+        "belt": [
+          "ENTROPIC_BREW",
+          "FOUL_POTION"
+        ],
+        "relics": [
+          "MINIATURE_TENT",
+          "REGAL_PILLOW",
+          "GIRYA"
+        ],
+        "key": "rest-spent-girya-brew",
+        "family": "rest",
+        "operation": "spent",
+        "girya": 3
+      },
+      "native_report_id": "sha256:13989b893158a865b7f83b62c70a94516dc4be914a160d6d4192991f3979c347",
+      "native_deliveries": 5,
+      "local_factors": 0,
+      "observations": 6,
+      "official_status": "unattempted",
+      "official_pair_report_id": null
+    }
+  ],
+  "development_stops": [
+    {
+      "version": 1,
+      "path": "artifacts/native-mixed-handoffs/v1/control-v1/native-result-1795462620730563000.json",
+      "sha256": "cd780e14f8b047a6ed9edd0ff83458d0e9100b3c4801a74f66b11806b6631f86",
+      "report_id": "sha256:07022fbe9caa4b0ca0998e7ee4ce40dbe712d56982625fb38bea17230eeed574",
+      "stop": {
+        "case": "rest-brew-smith-lift-return",
+        "error": "KeyError: 'enabled'"
+      },
+      "official_pairs": 0,
+      "failed_rest_prefix_training_allowed": false
+    },
+    {
+      "version": 2,
+      "path": "artifacts/native-mixed-handoffs/v2/control-v1/native-result-1795462786893844000.json",
+      "sha256": "b51031ec64e403dc37bd83bc7f05648a3740c24b2016a8c2064463f587d1ea9b",
+      "report_id": "sha256:aea077fc572b2738a8c370d0d6fb60ed3cc76384215d1b8e2af4b5d2c8fa2641",
+      "stop": {
+        "case": "rest-brew-smith-lift-return",
+        "error": "ValueError: not enough values to unpack (expected 1, got 0)"
+      },
+      "official_pairs": 0,
+      "failed_rest_prefix_training_allowed": false
+    },
+    {
+      "version": 3,
+      "path": "artifacts/native-mixed-handoffs/v3/control-v1/native-result-1795462942253378000.json",
+      "sha256": "3029e440da76166f2cc4dda09bd358730b374937ce8070d3ce76401d021d8f1e",
+      "report_id": "sha256:bae25f7caba32d2a4ed22f06f65e26f3f9304145695bf11c19caf88d2d338267",
+      "stop": {
+        "case": "rest-brew-smith-lift-return",
+        "error": "StopIteration: "
+      },
+      "official_pairs": 0,
+      "failed_rest_prefix_training_allowed": false
+    }
+  ],
+  "source_evidence": {
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Potions/EntropicBrew.cs": "c394959f717caee92718bfc508a88bbfc853c06e61ca6e280cedb1485bbddbee",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Commands/PotionCmd.cs": "101e099dcbfe8ef4622e79aee327ad2d6a46e4329ce06a52ddb3ec7fca89979b",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Rewards/PotionReward.cs": "0e10a1901cfac2046ac1750e593df89f5341e6a4fb76c17e4d847c8b36297819",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/Merchant/MerchantEntry.cs": "dbd59a15346ec9afcd5bf0a4a980985ff5d02d8f34d8a8ff2281e70c8f45ccf4",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/Merchant/MerchantPotionEntry.cs": "79ec91e3b6a1349e7d0d9f3330f11348e794d613e0a4e65784b9428047bd19c1",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/TheCourier.cs": "2d2e8a3c5b662754b79bc06c07374af66764776a8e15cf30c3eb3149ec2ce307",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/MiniatureTent.cs": "bff5579ca0489078bed1ab678da853295dd32650e9e62fe3315e56b43907d45f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/RegalPillow.cs": "1407da39984ffc83cfa10b0fbf34331aceee2e1f68ede5441f27c5bb7362a2ad",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/RestSite/HealRestSiteOption.cs": "167debfa61b18e90a2db5912eb07b04577610af95427c5800cc2ed7e3b8fcbef",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/RestSite/CookRestSiteOption.cs": "b2fd9abf9e647800d6e95dcf2bf47adb94a0f545e5d161c7c105938b3fcf6694",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/RestSite/LiftRestSiteOption.cs": "b9da153f43520ca7a27cc6a9caf6bcf9ab4700fcaf826f25d205cf160dd00d3f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/Creatures/Creature.cs": "7a38841c525d5cc8873a2151e993e30e2ee84ecb345ea57e2570bbac4516c20d"
+  },
+  "coverage_scope": {
+    "potions-full-reward-restore": "Native slot zero/one replacement after discard/use and Brew refill; one official replacement chain verified, other declared variants await full panel.",
+    "shop-price-stock-combo": "Native Courier cards, potions and relic child plus no-Courier stock; one repeated potion pair verified, others await full panel.",
+    "rest-counters-next-room": "Two-rest chain verifies the third Lift and exhausted next-site option on both hosts.",
+    "rest-extra-offers": "Native Tent/Pillow/Cook/Smith/Brew boundaries; Dig/Hatch acquisition children remain open.",
+    "broader_scope": "Other providers, additional hooks, the older 32-order official matrix and later-act/final handoffs remain open."
+  },
+  "owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/check-mixed-handoffs-v4.sh\" full"
+}

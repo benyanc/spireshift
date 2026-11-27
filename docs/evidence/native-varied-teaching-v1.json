@@ -1,0 +1,125 @@
+{
+  "actual_control_deliveries_reconstructed": 361,
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "candidate_paths_per_root": 4,
+  "completed_short_controls": [
+    {
+      "path": "artifacts/native-varied-teaching/control-v3/control/report.json",
+      "sha256": "8b85ab97b3d51b5d72c533c63aabc0350cdf19b64af96e7a4f70039cf1e52657"
+    },
+    {
+      "path": "artifacts/native-varied-teaching/control-v4/control/report.json",
+      "sha256": "25c6a7a4a3b037882f733ab1ea6ca2367782084d3d5a6a7d894a943dc61b6552"
+    }
+  ],
+  "control_copied_optimizer_updates": 16,
+  "control_report": {
+    "path": "artifacts/native-varied-teaching/control-v4/control/report.json",
+    "sha256": "25c6a7a4a3b037882f733ab1ea6ca2367782084d3d5a6a7d894a943dc61b6552"
+  },
+  "control_report_id": "sha256:d428a18bdb2ece38e127546fe175c210ae3d33cf70fb72ab5e5abee9e9fa91db",
+  "control_resource": {
+    "path": "artifacts/resources/varied-teaching-control-v4.json",
+    "sha256": "3da5e5bfad2aa747d8b8bc095f8c04edd789e245707cfaf610f596177dd8c64e"
+  },
+  "control_resource_id": "sha256:11504f0a52299f3987a0894cd96092ef05e7683b03d25b99797e1d2d7a50fcb0",
+  "control_wall_seconds": 111.50558220804669,
+  "descendant_live_scope_inherited": false,
+  "diagnostic_fitting_on_verified_copies_allowed": true,
+  "diagnostic_optimizer_reconstruction_steps": 16,
+  "environment_id": "sha256:4c445e402d31ceea743165d203b03c1b9b6744f1a6a8396a797bb4a412efbc81",
+  "exact_source_requalification_note": "Repository typing found four test-only typing issues. Correcting annotations changed the pinned implementation identity, so a new short control used fresh VTC907/908 worlds. Production learner, game and engine code stayed unchanged. Both successful controls and saved-only reconstruction steps are separately counted.",
+  "failed_controls_notes": [
+    "Control-v1 stopped before any game or update because adding the study recipe mutated an aliased in-memory guard source map; source snapshot and rejecting receipt are preserved.",
+    "Control-v2 completed and reconstructed 160 native actions, then rejected an inherited candidate_before inventory from an older CLI build. The current verified CLI56 executable/source and frozen game did not change. Its marker/raw evidence and unattempted next world remain preserved.",
+    "New guard explicitly binds the entire current CLI56 inventory to its already-qualified build report. No file is ignored, rewritten or normalized; any subsequent drift rejects.",
+    "The preparation-v2 seed-inventory script referenced a nonexistent older path before creating anything; the corrected preparation is separately preserved."
+  ],
+  "fitting_work": {
+    "copies": 4,
+    "example_draws_per_copy": 2048,
+    "total_updates": 256,
+    "updates_per_copy": 64
+  },
+  "fresh_checkpoint_canary_pairs_before_evaluation": 6,
+  "fresh_evaluation_worlds": 16,
+  "fresh_native_game_attempts": 128,
+  "game_CLI_connector_worker_converter_layout_unchanged": true,
+  "guard_allowed_operations": [
+    "collect_original_curriculum",
+    "fit_diagnostic_copy"
+  ],
+  "guard_contract": "assessed_native_workflow_diagnostic_learner_guard_v1",
+  "main_config": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-varied-v1.json",
+    "sha256": "54bf314aafb7c87da82124bccf829743e61dbc05b007170ae36b28de1898e440"
+  },
+  "main_config_id": "sha256:4bbaa639528094a3b18e746d211d816eeee6b9e271734d5f9cbea6e1f8c125c7",
+  "main_guard_receipt": {
+    "path": "artifacts/native-varied-teaching/guard-v1/8f142b2853eb59f69c23079e7aae542aa0f2e94a8b39bc711838ec923ce340f5/report.json",
+    "sha256": "7a07948691e34140d8c09dd4a0e94effe3ef6c5b7c0d3d4ad8e800cfe64399b0"
+  },
+  "main_guard_receipt_id": "sha256:e61b1c0eedea55fa880e8f898396fe74b9456d1a3c73cc3aacc3b9e14e391b39",
+  "main_optimizer_updates": 0,
+  "main_preflight_guard_receipt_id": "sha256:e61b1c0eedea55fa880e8f898396fe74b9456d1a3c73cc3aacc3b9e14e391b39",
+  "main_preflight_resource": {
+    "path": "artifacts/resources/varied-teaching-main-preflight-v2.json",
+    "sha256": "baaa9c0ea270c1ebc1e7013ba1ef6d20cfd53f845ee255581f489385b92f9014"
+  },
+  "main_preflight_valid": true,
+  "main_source_worlds": {
+    "fit": 8,
+    "heldout": 4
+  },
+  "main_worlds_and_main_fitting_unstarted": true,
+  "maximum_collection_native_attempts": 92,
+  "maximum_fitting_roots": 16,
+  "next_owner_command": "bash \"/Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/prepare-varied-teaching-v1.sh\"",
+  "numpy_implementation_files_pinned": 506,
+  "ordinary_PPO_allowed": false,
+  "owner_command_phase": "collect_only_then_stop_for_assessment",
+  "preserved_failed_controls": [
+    {
+      "path": "artifacts/resources/varied-teaching-control-v1.json",
+      "sha256": "53c84717c007d09168f25bdc49535bcb934b74df758170d6026cdfc5e20d6256"
+    },
+    {
+      "path": "artifacts/resources/varied-teaching-control-v2.json",
+      "sha256": "73b2c42c591541c4025a2cd552d001f78f0a332c33067f520d934e2629c6fd29"
+    }
+  ],
+  "promotion_allowed": false,
+  "protected_prior_files": 21669,
+  "provisional_preparation_backup": "artifacts/native-varied-teaching/preparation-v1/provisional-before-repository-type-fix",
+  "rejected_repository_check": {
+    "path": "artifacts/resources/varied-teaching-repository-check-v1.json",
+    "sha256": "ff312298bf2b2b2e99d5c1f960cee8529d7313fcf7ff38009512af0fe0404655"
+  },
+  "report_id": "sha256:acba97bfcf0a85655ce082e526fa28adfe9dcc7aab91d819fd83ffe5855294ac",
+  "schema_version": "native-varied-teaching-preparation-evidence-v1",
+  "sealed_control_units": 11,
+  "separate_interference": "same_teacher_final_shared_vs_original_noncombat_routing",
+  "short_assessment": {
+    "path": "artifacts/native-varied-teaching/short-assessment-v2/report.json",
+    "sha256": "4d7cc5c184a38828765fde709d4ddb5304338dd8b77fda7e2e76b876755d9ac1"
+  },
+  "short_assessment_id": "sha256:c2f657667282ee2f3e59db3158b6f1d679ae5a67c2d427e64c542cf06e27e7b9",
+  "short_assessment_resource": {
+    "path": "artifacts/resources/varied-teaching-short-assessment-v2.json",
+    "sha256": "00353c18e7c8b795724d322ff0eb2c7682bae447c4057511801b1909580df96c"
+  },
+  "source_model_and_all_Adam_unchanged": true,
+  "sources": {
+    "artifacts/native-varied-teaching/preparation-v1/current-native-candidate-inventory-v1.json": "b3511871a4d489d20eefd709ccbc69869edaa66e408ee32409279e83255594e0",
+    "configs/native-curriculum/sts2-v0.111.0-a8-varied-v1.json": "54bf314aafb7c87da82124bccf829743e61dbc05b007170ae36b28de1898e440",
+    "scripts/prepare-varied-teaching-v1.sh": "8aeb1c05236963367fd613999bcbe0bf529decc53e3f0eed4618b07ced276e1d",
+    "scripts/varied-teaching-session-v1.py": "0a2b851ce45c2fc7ba1611aded4bb4f282786c445733759fff5e9ebc74cbb185"
+  },
+  "status": "scoped_learner_guard_and_finite_staged_study_prepared",
+  "total_registered_diagnostic_copy_updates_this_preparation": 32,
+  "total_saved_only_optimizer_reconstruction_steps_this_preparation": 32,
+  "updates_to_originals_this_preparation": 0,
+  "verified_natural_workflow_assessment_id": "sha256:ff28291abd1975d5d40281f64d22ce2c6a5e51e2bdd53a2636464d8df7291c9c",
+  "withheld_fight_attempts_maximum": 32
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/run-level-trajectory-search-v1.json",
+  "title": "SpireShift Run-Level Trajectory Search v1",
+  "type": "object",
+  "required": [
+    "schema_version", "report_id", "started_at", "completed_at", "config_id",
+    "model_id", "training_report_id", "split_manifest_id", "partition",
+    "ruleset_manifest_id", "patch_id", "objective_id", "search_controller_id",
+    "hidden_state_resampling", "configuration", "milestone_preflight", "cases", "milestone_cases",
+    "summary", "readiness", "claim_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": "run-level-trajectory-search-v1"},
+    "report_id": {"$ref": "#/$defs/id"},
+    "started_at": {"type": "string", "minLength": 1},
+    "completed_at": {"type": "string", "minLength": 1},
+    "config_id": {"$ref": "#/$defs/id"},
+    "model_id": {"$ref": "#/$defs/id"},
+    "training_report_id": {"$ref": "#/$defs/id"},
+    "split_manifest_id": {"$ref": "#/$defs/id"},
+    "partition": {"const": "train"},
+    "ruleset_manifest_id": {"$ref": "#/$defs/id"},
+    "patch_id": {"type": "string", "minLength": 1},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "search_controller_id": {"const": "policy-guided-trajectory-beam-v1"},
+    "hidden_state_resampling": {"const": false},
+    "configuration": {"type": "object"},
+    "milestone_preflight": {"type": "object"},
+    "cases": {"type": "array", "items": {"$ref": "#/$defs/reference"}},
+    "milestone_cases": {"type": "array", "items": {"$ref": "#/$defs/reference"}},
+    "summary": {"type": "object"},
+    "readiness": {"type": "object"},
+    "claim_scope": {"const": "train_only_act1_milestone_trajectory_search"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "reference": {
+      "type": "object",
+      "required": ["seed", "path", "case_id"],
+      "properties": {
+        "seed": {"type": "integer", "minimum": 0},
+        "path": {"type": "string", "minLength": 1},
+        "case_id": {"$ref": "#/$defs/id"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

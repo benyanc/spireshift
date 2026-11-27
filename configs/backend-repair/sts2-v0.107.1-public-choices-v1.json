@@ -1,0 +1,45 @@
+{
+  "schema_version": "full-run-backend-repair-config-v2",
+  "base_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v1",
+  "base_revision": "99fad6a73912e26af6872c2f0742ebeb5ffb3581",
+  "base_manifest": "artifacts/backend-repair/full-run-completion-v1/candidate-manifest.json",
+  "base_manifest_id": "sha256:4f49cbbbcbbc58cafa91680efc0980745086ce0ac8ad432e9bd2d485daf62bcd",
+  "patch": {
+    "path": "backend-patches/public-choices-v1/public-choices.patch",
+    "sha256": "21e206909ac7463ac78e8900812f5ceb6a02dbb16c4319f1cfd48c4ba236de6b"
+  },
+  "regression_tests": {
+    "path": "backend-patches/public-choices-v1/SpireShiftPublicChoicesTests.cs",
+    "sha256": "22a3a5cb245f106e458007dd26bb62406b337f95f37d198b8016a7c91fb6fced"
+  },
+  "candidate_upstream": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v2",
+  "output_dir": "artifacts/backend-repair/public-choices-v1",
+  "runtime": "osx-arm64",
+  "resource_limits": {
+    "wall_seconds": 1800,
+    "cpu_seconds": 7200,
+    "memory_bytes": 12000000000,
+    "storage_bytes": 4000000000
+  },
+  "automatic_training": false,
+  "automatic_admission": false,
+  "minimum_regression_tests": 23,
+  "engine_sources": [
+    {
+      "path": "src/Sts2Emulator/Core/CombatObservation.cs",
+      "base_sha256": "2a9a5803334250571b6ac9c2a4fa00a0df5c72ef3d2ac7b8e0bbf0b0acb5513a",
+      "repaired_sha256": "792288e92cae7fe4cc3c377bb0ee98ab6693b247f877596eee1071ea842e3219"
+    },
+    {
+      "path": "src/Sts2Emulator/Core/Run/RunPublicChoices.cs",
+      "base_sha256": null,
+      "repaired_sha256": "74f5d8807f5a735bc816867b2170ef5abdb195fcdb697f12c3ea33c781e0f42d"
+    },
+    {
+      "path": "src/Sts2Emulator/Interop/RunNativeExports.cs",
+      "base_sha256": "f64105d357c36860a60f14c88e1da41e75c7de39e066a923ed70f08c566daa14",
+      "repaired_sha256": "d77061732e9d9795643f44c8eb2eaed4b5fe66ce07c1d308b38e69bd61deab60"
+    }
+  ],
+  "config_id": "sha256:77d7fce9a357003bdc0a5c107f2e0fa989503bbfe10328988324c29a49ed5cf3"
+}

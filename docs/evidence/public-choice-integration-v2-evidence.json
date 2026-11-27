@@ -1,0 +1,124 @@
+{
+  "admitted": false,
+  "automatic_followup": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "owner_native_build_and_two_inspected_training_failure_prefixes_not_playing_strength_or_live_conformance",
+  "difficulty": {
+    "historical_claimed_ascension_level": 0,
+    "historical_difficulty_claim_valid": false,
+    "live_game_conformance_verified": false,
+    "selectable_difficulty": false,
+    "source_declared_ascension_level": 8
+  },
+  "optimizer_steps": 0,
+  "owner_native_build": {
+    "build_report_id": "sha256:b778bf467854fcd769935a714345182def0968a5ff4c6827c90cb3ec3612de33",
+    "candidate_manifest_id": "sha256:8ee14e81cb7c6293f8b2085613dca093b2505efd7a214d7274c33d307bc9b51f",
+    "candidate_revision": "9d531713416ae8f29380ffa80c3ef99bb1ca39e5",
+    "config_id": "sha256:77d7fce9a357003bdc0a5c107f2e0fa989503bbfe10328988324c29a49ed5cf3",
+    "cpu_seconds": 16.661320464,
+    "game_attempts": 0,
+    "native_sha256": "f88014084daeb50e17399e67b2a4807120cd07c9fcb2de74dbd2161f23e22c1f",
+    "native_size_bytes": 5203840,
+    "public_exports_checked": true,
+    "regression_tests": {
+      "executed": 23,
+      "failed": 0,
+      "passed": 23,
+      "total": 23
+    },
+    "resource_report_id": "sha256:79337a87beb3d79c17bb7d2b4bfd74698d3d4588ed2a81bf471e760f388cd659",
+    "test_report_sha256": "4d35cfcc0ad890f1c724e88889dd5a0227dee4a60669bb0433b1fa6af1af211e",
+    "test_runtime_report_sha256": "a22850d11d2acecac9d424620c087efd2781fd63d935f6a6953059c4d06b73dc",
+    "wall_seconds": 9.588352249993477
+  },
+  "prepared_owner_audit": {
+    "all_original_failures_counted": true,
+    "benchmark_denominator": 89,
+    "config_id": "sha256:1c41b757d4170319b7a8d88f35727e7302f74567de772c138b3aac807728bcea",
+    "final_test_opened": false,
+    "partial_case_resume": "exact_protocol_and_source_identity",
+    "resource_limits": {
+      "cpu_seconds": 3600,
+      "memory_bytes": 8000000000,
+      "storage_bytes": 2000000000,
+      "wall_seconds": 1800
+    },
+    "script": "scripts/audit-full-run-public-integration-v1.sh",
+    "source_index_id": "sha256:302fa8b446d29d6a5d9b2373623fe65beeeaef194dfbbd8eebaf4f2f27f781db",
+    "started": false,
+    "unique_training_seeds": 42,
+    "workers": 1
+  },
+  "prior_snapshot": {
+    "path": "docs/evidence/public-choice-repair-v1-evidence.json",
+    "report_id": "sha256:38431a790625810674b711ddb6bb076234655d1e5e19b1cff895daecd342c0df"
+  },
+  "recorded_date": "2026-10-09",
+  "remaining_checks": [
+    "owner_replay_all_89_inspected_failed_training_attempts",
+    "verify_source_fixed_ascension_8_against_frozen_game",
+    "validate_changed_act_boundaries_and_final_terminal_against_frozen_game",
+    "readmit_new_ruleset_before_new_learning_recipe"
+  ],
+  "report_id": "sha256:f4679e7589f070edbbffb7668bb7d4a10a14322b6d94d64b4185b8d56b48585e",
+  "schema_version": "public-choice-integration-evidence-v2",
+  "short_check_preflight_failure": {
+    "cause": "source episode paths must resolve against declared pilot case_root, not index.parent",
+    "game_attempts": 0,
+    "original_result_preserved": true,
+    "resource_report_id": "sha256:8c9257ed3a9b8fdb307bfe33927b86b47ebf50ffbeb43d446bf7c3f60c4ccf11",
+    "status": "failed",
+    "transitions": 0
+  },
+  "short_native_integration_check": {
+    "cases": 2,
+    "claim_scope": "two_short_previously_inspected_train_only_failure_prefix_replays",
+    "endpoints": [
+      "fourth_reward_card_identity_bound",
+      "fifteen_card_combat_menu_bound"
+    ],
+    "game_prefixes_started": 2,
+    "limits": {
+      "cpu_seconds": 60.0,
+      "resident_memory_bytes": 8000000000,
+      "storage_bytes": 100000000,
+      "wall_seconds": 45.0
+    },
+    "passed_cases": 2,
+    "recorded_implementation_id": "sha256:dbec1a69ce9f2467296e244110aa9ce60d7dac67b26be513e7b0b4d81e5280eb",
+    "report_id": "sha256:2b5a28b06dba56c7bcaf34be5bad06964113af8cc13a28d3eb44f6535eab41e2",
+    "resource_report_id": "sha256:183818c762726079a71fb464371c8956cdd9c81952bf8a4af89803ba5c8c1813",
+    "scored_observations": 412,
+    "source_case_ids": [
+      "sha256:36155bdab2380afcd542d972da7ef892c50d1678850cb754fc84173b4d12e8d4",
+      "sha256:46d68c7364170441aca7220236161a5b249979002ed609bf8c76aa26cb5fd5df"
+    ],
+    "subsequent_changes": "metadata case_root containment and resume identity checks; replay/player/native behavior unchanged",
+    "transitions": 410,
+    "usage": {
+      "cpu_seconds": 3.2478997960000004,
+      "peak_resident_memory_bytes": 126173184,
+      "wall_seconds": 3.3869123750191648
+    }
+  },
+  "training_allowed": false,
+  "versioned_player": {
+    "adapter_digest": "57b65e1e9dbca056e22ecaa38fab3f73eac86038c9fd9147865d9d9192bd384a",
+    "adapter_version": "evangambit-public-choices-v2",
+    "complete_menu_and_all_legal_candidates_required": true,
+    "current_implementation_id": "sha256:90d598f3881b23d61fb83d865c9fcfcbc9bc193a37d93c7bcc5395415b9cb80f",
+    "encoder_id": "public-full-run-complete-choices-v2",
+    "every_parameter_mutable": true,
+    "feature_dimension": 256,
+    "hidden_order_or_rng_inputs": false,
+    "hidden_units": 16,
+    "historical_genome_migrated": false,
+    "implemented": true,
+    "legacy_adapter_encoder_policy_files_changed": false,
+    "manifest_id": "sha256:0faee7e014460aed3f8a7c76a7357689d65e5603ae7c96d2ae2cb14b97e902e0",
+    "model_schema": "unified-full-run-public-policy-v2",
+    "parameter_count": 4384,
+    "untrained_short_check_model_id": "sha256:ff4fb17db50115ff1fe3ebf15bca222424144d5703c9fdfc9db4386d6e625612"
+  }
+}

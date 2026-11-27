@@ -1,0 +1,178 @@
+{
+  "active_environment": {
+    "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v14.json",
+    "sha256": "7692856cfba53fb50fd03d477e70961516cbecb967b6eb3e997c0be85521e743"
+  },
+  "adaptive_controller_allowed": false,
+  "all_content_interactions_proved": false,
+  "checkpoint_promoted": false,
+  "environment_id": "sha256:10a73efde8c6a95487cf35d559f8c0a33b3fdfb7697832a9155bed8bb7da9228",
+  "full_game_strength_established": false,
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "next_owner_run": {
+    "completed_pairs_reused": true,
+    "independent_fresh_worlds": 2,
+    "launcher": {
+      "path": "scripts/compare-semantic-selection-v3.sh",
+      "sha256": "6cce95126bbbea09a141dca7567185581ab3450c3d3ac31206cca901b6864f40"
+    },
+    "main_unstarted": true,
+    "maximum_choices_per_host": 128,
+    "maximum_wall_seconds_per_launch": 900,
+    "paired_prefixes": 4,
+    "players": 2,
+    "preflight_passed": true,
+    "recipe": {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-semantic-selection-canary-v1.json",
+      "sha256": "3f248303abfe43b6107a17173c36ff4702e9eaa31dc4303df4eed7b84768688e"
+    }
+  },
+  "optimizer_updates": 0,
+  "owner_choice": "one_model_choice_adapter_executes_required_UI_confirmation",
+  "preservation": {
+    "both_original_full_weights_and_all_Adam_exact": true,
+    "original_steps": {
+      "2": 5658,
+      "3": 6045
+    },
+    "prior_files": 3119,
+    "receipt": {
+      "path": "artifacts/native-semantic-selection/development-v1/protection.json",
+      "sha256": "a0c7940a01860b1b5f6aa26e6a5c3d8188c2a3e5d24a96ee56e07c50304b1382"
+    }
+  },
+  "report_id": "sha256:c891dec048d4c1f442f7f83a86e7cf0435e24ebd8b1efe4d4b4ec9f0d47cdac4",
+  "runtime": {
+    "CLI_export": 40,
+    "layout": 6,
+    "native_build": {
+      "path": "artifacts/native-semantic-selection/native-build-v40/report.json",
+      "sha256": "499eab68638a5708ce30d0a3deec29f3f1a91366a2b60e7ad01b12b5e81223ea"
+    },
+    "native_worker": 14,
+    "official_build": {
+      "path": "artifacts/native-semantic-selection/connector-build-v16/report.json",
+      "sha256": "088775c3d081015c9c691e1fc2addc7aa70c253a52b66f45454af2d0de5a5fa0"
+    },
+    "official_connector": 16,
+    "shared_helper": 9
+  },
+  "saved_audit": {
+    "exact_roundtrips": 865,
+    "frames": 845,
+    "frozen_probes": 1720,
+    "generated_envelopes": 20,
+    "raw_bindings": 865,
+    "report": {
+      "path": "artifacts/native-semantic-selection/offline-v3/report.json",
+      "sha256": "bc5abea089e3b60cedcd30dc5d4e7b8f629c6b9c61dc345ff9373d151d42dae5"
+    },
+    "report_id": "sha256:1ab2bef6ca1cc7bf576d9d2802d8a1cfaf41ba32051a007070ce6f953eeac4d6"
+  },
+  "schema_version": "native-semantic-selection-evidence-v1",
+  "source_and_development_limits": {
+    "completed_reward_layout_mismatch": {
+      "path": "artifacts/native-semantic-selection/control-v2/report.json",
+      "sha256": "314264a9f893848e902e9688f6d382c757bacf4da0766b35439e461ed6a0bdaf"
+    },
+    "first_attempt_missing_Neow_description": {
+      "path": "artifacts/native-semantic-selection/control-v1/blocked-report.json",
+      "sha256": "baaf8b33963332cd80225b372fe061a539136532e7a921442e0251ebdd58882c"
+    },
+    "large_domains_over_512_ordered_answers": "reject_whole_state_never_truncate",
+    "no_action_submitted_during_scenario_observations": true,
+    "other_selector_resource_costs": "targeted_cross_character_selection_fixtures_still_required",
+    "scenario_observations": {
+      "path": "artifacts/native-semantic-selection/start-observations-v1/report.json",
+      "sha256": "bd188d0318109d6d4b722ad68db0434426ff829d2c08c5393394f136b9fc4675"
+    },
+    "uncertain_attempts_retried": false,
+    "unobserved_selector_effects_qualified": false
+  },
+  "targeted_live_control": {
+    "all_shutdown_profile_archive_app_checks_pass": true,
+    "delivered_decisions": 8,
+    "effect_verification": {
+      "path": "artifacts/native-semantic-selection/control-v3-verification/effects.json",
+      "sha256": "6eec327b50e3ca507832e78b9cbb309fbe281c2ef440621d724f6cbe70457c78"
+    },
+    "effects": [
+      {
+        "deck_after": 10,
+        "deck_before": 11,
+        "exact_chosen_copies_removed": true,
+        "host": "native",
+        "other_cards_unchanged": true,
+        "removed_names": [
+          "Strike"
+        ]
+      },
+      {
+        "deck_after": 10,
+        "deck_before": 11,
+        "exact_chosen_copies_removed": true,
+        "host": "official",
+        "other_cards_unchanged": true,
+        "removed_names": [
+          "Strike"
+        ]
+      }
+    ],
+    "equal_complete_inputs_and_menus": 4,
+    "fresh_strength_evidence": false,
+    "macro_choices": 1,
+    "observation_only_start_reuse": true,
+    "official_UI_steps": 2,
+    "receipt_verification": {
+      "path": "artifacts/native-semantic-selection/control-v3-verification/report.json",
+      "sha256": "2e13f0527be6f7e1aec5f8559d579f341a8f456fdd6e936e1ab84f8977a33dba"
+    },
+    "report": {
+      "path": "artifacts/native-semantic-selection/control-v3/report.json",
+      "sha256": "818afbe432b116bcfb94788d25bbbdfc6d3286d1f0bd33b326e19519df9e0a63"
+    },
+    "report_id": "sha256:d21dbddd5a66703b7c1e68c8b4f9b1c3adb41bf62e2882ca4d712bc261a1e391",
+    "saved_reward_regression": {
+      "path": "artifacts/native-semantic-selection/control-v3-verification/reward-layout.json",
+      "sha256": "5901105c78939f542021702bb85777378761e44edf273ba7b9d12c6a69d36ca3"
+    },
+    "verified_decisions": 8,
+    "wall_seconds": 36.67464958387427
+  },
+  "tests": {
+    "CSharp_log": {
+      "path": "artifacts/native-semantic-selection/connector-v16-development/kernel-and-belt-tests-final.log",
+      "sha256": "ec0c3bfb04d9551f4f536e051e77d045c1ed88007be671cfb4f17cc57e32aaad"
+    },
+    "CSharp_protocol_passed": true,
+    "latest_python_log": {
+      "path": "artifacts/native-semantic-selection/development-v1/pytest-final-v2.log",
+      "sha256": "eb27a136c18598aedc0e4f11e6893b614a04335a9faf3ec03433325d777e2663"
+    },
+    "repository_check": {
+      "path": "artifacts/resources/native-semantic-selection-repository-check-v2.json",
+      "sha256": "f1497a2003042180aabf8468794e0072649f5877e9b9053c7287c31c5a7f86d7"
+    },
+    "repository_check_status": "completed",
+    "repository_wall_seconds": 146.25230166618712,
+    "strict_typed_files": 613,
+    "targeted_CSharp": 20,
+    "targeted_Node": 20,
+    "targeted_python": 12,
+    "tests_passed": 2573
+  },
+  "training_allowed": false
+}

@@ -1,0 +1,581 @@
+{
+  "control": [
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "control-p2-normal-1-draw-0",
+      "partition": "turn_control",
+      "player": 2,
+      "root": "control-p2-normal-1",
+      "seed": "SP1RESH1FTA8CV1T010"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "control-p3-normal-1-draw-0",
+      "partition": "turn_control",
+      "player": 3,
+      "root": "control-p3-normal-1",
+      "seed": "SP1RESH1FTA8CV1T014"
+    }
+  ],
+  "control_resource": "artifacts/native-a8-turn-rescue/control-v1-resources.json",
+  "control_workspace": "artifacts/native-a8-turn-rescue/control-v1",
+  "coverage_audit": {
+    "path": "artifacts/native-a8-model-owned-coverage/assessment-v1-1794243638550996000/report.json",
+    "report_id": "sha256:524ced8ab67e1414f36cb284b2a54e3da7d59d9ada6bdb818f77e988cf3bb672",
+    "sha256": "51c45e649ec1a4db324ea6d7a4163c0cc54c9b3a49910b3ea912c2553d3908d5"
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/collect-a8-turn-rescues-v1.sh": "060fc67add568ed5f5e3e15ffd3cb5604fab4b88c60a2bff847b9c136602df65",
+    "src/spireshift/native_a8_sampling_audit.py": "91b6dd0ec3bd46d8e857c524c0d2a5aaca1b1ce7f5ddf90915cc9962ade7d665",
+    "src/spireshift/native_a8_turn_rescue.py": "30b42bdbec4764a7f1169f23c5060e52e5e59bbc7c1e8ab298f260abc474bf74",
+    "src/spireshift/native_a8_turn_rescue_session.py": "99b197483831c4f458b7b445d9968dfd9d715344b8e6005dcdc28ef911e7d901"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "original_full_state_ids": {
+    "2": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+    "3": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+  },
+  "root_probe_contract": "turn_rescue_probe_v1",
+  "roots": [
+    {
+      "control": false,
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 30,
+      "id": "train-p2-boss-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 237,
+      "reference_action_index": 2,
+      "root_input_id": "sha256:665943ef6e9d2ea3fba95213bf540707f288613c5193c7f6ace9b3f1c2f7499b",
+      "round": 10,
+      "source_seal_id": "sha256:3d4c7ec514b1014592feca546fe195acbef1f9154e31c1bb82d40b43cbffdbea",
+      "source_task": {
+        "key": "normal-15-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T015",
+        "seed_id": 410015
+      }
+    },
+    {
+      "control": false,
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 18,
+      "id": "train-p2-boss-2",
+      "max_hp": 83,
+      "prefix_native_deliveries": 238,
+      "reference_action_index": 3,
+      "root_input_id": "sha256:d3671b5ab341eb64cd6e4db443e3c183725e091716ddb2e3a33a4956c1023794",
+      "round": 9,
+      "source_seal_id": "sha256:7fa3abdd16403a2c8d4ddde7880b3d549225728c1e6b1b63b462a960b601a6bf",
+      "source_task": {
+        "key": "normal-18-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T018",
+        "seed_id": 410018
+      }
+    },
+    {
+      "control": false,
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 1,
+      "id": "train-p3-boss-1",
+      "max_hp": 87,
+      "prefix_native_deliveries": 239,
+      "reference_action_index": 4,
+      "root_input_id": "sha256:8044809d96d2a9fc6efa614b6c04369c8e5172fc514f09a55b0dbde6422f4d65",
+      "round": 6,
+      "source_seal_id": "sha256:d3ca6ce325d5e2ea5fd8890054d633d9ca11e6d9632a8a4ba43688ae5472f366",
+      "source_task": {
+        "key": "normal-02-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T002",
+        "seed_id": 410002
+      }
+    },
+    {
+      "control": false,
+      "encounter": "boss",
+      "floor": 17,
+      "hp": 40,
+      "id": "train-p3-boss-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 243,
+      "reference_action_index": 11,
+      "root_input_id": "sha256:bf570e59685c3a7fa71981616c0a10e412496e046ffb8ee5a96c3d73c9aae46d",
+      "round": 5,
+      "source_seal_id": "sha256:f8daa8e9f3ab91c435e935c9f33e475e0dca6b919f403473865b3bb02374f2ae",
+      "source_task": {
+        "key": "normal-24-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T024",
+        "seed_id": 410024
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 14,
+      "hp": 19,
+      "id": "train-p2-elite-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 325,
+      "reference_action_index": 6,
+      "root_input_id": "sha256:59c08bef5ba2830c134be3c6bfdc33a44bb5134e6029b6f0e534dbe82392db49",
+      "round": 4,
+      "source_seal_id": "sha256:659a86534dc37ca527b6d440e449f5b68e79bd88d8caf288574643e1d677587c",
+      "source_task": {
+        "key": "normal-01-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T001",
+        "seed_id": 410001
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 7,
+      "hp": 21,
+      "id": "train-p2-elite-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 100,
+      "reference_action_index": 3,
+      "root_input_id": "sha256:22c555fbe05e2a9a306fce12e795b476112e39c4003db695ff88c9287d8e301b",
+      "round": 5,
+      "source_seal_id": "sha256:09549318bcf6f8d8d0c64ccc070f48f49614afac3adc7a3e792c4495693f88fa",
+      "source_task": {
+        "key": "normal-04-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T004",
+        "seed_id": 410004
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 7,
+      "hp": 29,
+      "id": "train-p3-elite-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 105,
+      "reference_action_index": 2,
+      "root_input_id": "sha256:91b4f867add22f824a9bcfcd8a80dc55130f1dfdd26548921821b9cc2791ba77",
+      "round": 3,
+      "source_seal_id": "sha256:9f28b439d9558cf90856053fa98dfb46bf6e4d7e90025bc0a61e1625d880c538",
+      "source_task": {
+        "key": "normal-08-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T008",
+        "seed_id": 410008
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 7,
+      "hp": 18,
+      "id": "train-p3-elite-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 151,
+      "reference_action_index": 1,
+      "root_input_id": "sha256:64ae2d1c4a44a4d290667b5c4acf7f9ad8fad41dfdc63ca4e221827d47886e96",
+      "round": 6,
+      "source_seal_id": "sha256:bf2987cd98b4408adf3f097ae71ab0b59a4491448892ff1f1351603ac322e859",
+      "source_task": {
+        "key": "normal-09-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T009",
+        "seed_id": 410009
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 6,
+      "hp": 31,
+      "id": "train-p2-normal-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 60,
+      "reference_action_index": 5,
+      "root_input_id": "sha256:c7fff00475667c2fd411a2377b6979a3b9b9b33dab7a66e186437cec9550da45",
+      "round": 2,
+      "source_seal_id": "sha256:0f287aa132cc83d917c8918f18eb630980419ea27af84d0e40e33a6bab185c21",
+      "source_task": {
+        "key": "normal-03-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T003",
+        "seed_id": 410003
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 7,
+      "hp": 8,
+      "id": "train-p2-normal-2",
+      "max_hp": 85,
+      "prefix_native_deliveries": 117,
+      "reference_action_index": 6,
+      "root_input_id": "sha256:4309a12364e6a76727ad5bd2a1af503d28f2aef0c242a6cb03a2c16e179d437c",
+      "round": 1,
+      "source_seal_id": "sha256:f084c8be09e08e5d6f7d593caad83021ec8d1ba87858348b22e6bacdb5d6e058",
+      "source_task": {
+        "key": "normal-05-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T005",
+        "seed_id": 410005
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 5,
+      "hp": 15,
+      "id": "train-p3-normal-1",
+      "max_hp": 68,
+      "prefix_native_deliveries": 104,
+      "reference_action_index": 5,
+      "root_input_id": "sha256:02b5080ad0b8738353d7e2cb54562df62312a86e4c96ba5bf9fa7711bd26b7ed",
+      "round": 4,
+      "source_seal_id": "sha256:14b47ac72509bc9d17d16b243800d32dd4d4b0d2579658ddeb77156468abeb98",
+      "source_task": {
+        "key": "normal-06-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T006",
+        "seed_id": 410006
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 7,
+      "hp": 25,
+      "id": "train-p3-normal-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 120,
+      "reference_action_index": 7,
+      "root_input_id": "sha256:51fd435f89fa2724404babf50e2ace5a0ea286423bc084f0f670022e207b45ad",
+      "round": 3,
+      "source_seal_id": "sha256:70e66dbb8b7a671965a88cd97773321dd594f97f9629e91627c6446e2e96a14c",
+      "source_task": {
+        "key": "normal-07-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T007",
+        "seed_id": 410007
+      }
+    },
+    {
+      "control": true,
+      "encounter": "normal",
+      "floor": 15,
+      "hp": 11,
+      "id": "control-p2-normal-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 464,
+      "reference_action_index": 6,
+      "root_input_id": "sha256:312c4dd4f5203e0aecd9d930093012e100575312b9749ab5a07533fd53240e06",
+      "round": 2,
+      "source_seal_id": "sha256:4db7142013e6ab283aa467b9453742137b47bd4c3bf9ab027f1faa8e96c6db34",
+      "source_task": {
+        "key": "normal-10-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T010",
+        "seed_id": 410010
+      }
+    },
+    {
+      "control": true,
+      "encounter": "normal",
+      "floor": 6,
+      "hp": 21,
+      "id": "control-p3-normal-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 124,
+      "reference_action_index": 2,
+      "root_input_id": "sha256:153dd749d8bd2fb6844a647f3d08e3be863a807714283f5b437faf5698583514",
+      "round": 2,
+      "source_seal_id": "sha256:2b090c718203f86b4baf19c58807d556ddb91448631bdc699a141b56019aa363",
+      "source_task": {
+        "key": "normal-14-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T014",
+        "seed_id": 410014
+      }
+    }
+  ],
+  "sampling_audit": {
+    "path": "artifacts/native-a8-sampling/assessment-v1-1794256498012401000/report.json",
+    "report_id": "sha256:bcbf011f31a7d8c6d85315a62682be87be7f5735a2f6e65d29657d5ffef2dac7",
+    "sha256": "2c22d2b122c9eaa247872b450c0f25daf8a0e8721dd63d1fb57d1ba4e361d162"
+  },
+  "schema_version": "native-a8-turn-rescue-v1",
+  "study": [
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-boss-1-draw-0",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-boss-1-draw-1",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-boss-1",
+      "seed": "SP1RESH1FTA8CV1T015"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-boss-2-draw-0",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-boss-2-draw-1",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-boss-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-boss-1-draw-0",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-boss-1",
+      "seed": "SP1RESH1FTA8CV1T002"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-boss-1-draw-1",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-boss-1",
+      "seed": "SP1RESH1FTA8CV1T002"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-boss-2-draw-0",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-boss-2",
+      "seed": "SP1RESH1FTA8CV1T024"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-boss-2-draw-1",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-boss-2",
+      "seed": "SP1RESH1FTA8CV1T024"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-elite-1-draw-0",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T001"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-elite-1-draw-1",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-elite-1",
+      "seed": "SP1RESH1FTA8CV1T001"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-elite-2-draw-0",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-elite-2",
+      "seed": "SP1RESH1FTA8CV1T004"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-elite-2-draw-1",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-elite-2",
+      "seed": "SP1RESH1FTA8CV1T004"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-elite-1-draw-0",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T008"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-elite-1-draw-1",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-elite-1",
+      "seed": "SP1RESH1FTA8CV1T008"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-elite-2-draw-0",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-elite-2",
+      "seed": "SP1RESH1FTA8CV1T009"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-elite-2-draw-1",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-elite-2",
+      "seed": "SP1RESH1FTA8CV1T009"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-normal-1-draw-0",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-normal-1",
+      "seed": "SP1RESH1FTA8CV1T003"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-normal-1-draw-1",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-normal-1",
+      "seed": "SP1RESH1FTA8CV1T003"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-normal-2-draw-0",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-normal-2",
+      "seed": "SP1RESH1FTA8CV1T005"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-normal-2-draw-1",
+      "partition": "turn_training_only",
+      "player": 2,
+      "root": "train-p2-normal-2",
+      "seed": "SP1RESH1FTA8CV1T005"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-normal-1-draw-0",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-normal-1",
+      "seed": "SP1RESH1FTA8CV1T006"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-normal-1-draw-1",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-normal-1",
+      "seed": "SP1RESH1FTA8CV1T006"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-normal-2-draw-0",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-normal-2",
+      "seed": "SP1RESH1FTA8CV1T007"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-normal-2-draw-1",
+      "partition": "turn_training_only",
+      "player": 3,
+      "root": "train-p3-normal-2",
+      "seed": "SP1RESH1FTA8CV1T007"
+    }
+  ],
+  "workspace": "artifacts/native-a8-turn-rescue/collection-v1"
+}

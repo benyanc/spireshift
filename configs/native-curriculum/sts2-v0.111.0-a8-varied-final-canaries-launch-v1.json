@@ -1,0 +1,146 @@
+{
+  "assessment_resource": {
+    "path": "artifacts/resources/varied-fitting-owner-assessment-v1.json",
+    "sha256": "d6e854c8e14159f1ec446a271c10db30eb90d561e0334adfd2058a1424648940"
+  },
+  "automatic_follow_up": false,
+  "budget": {
+    "hosts": 12,
+    "maximum_decisions": 384,
+    "maximum_pair_wall_seconds": 600,
+    "optimizer_updates": 0,
+    "pairs": 6,
+    "whole_run_cpu_seconds": 128
+  },
+  "cases": [
+    {
+      "key": "canary-p2-reference",
+      "player": 2,
+      "seed": "SP1RESH1FTVTV201",
+      "variant": "reference"
+    },
+    {
+      "key": "canary-p3-reference",
+      "player": 3,
+      "seed": "SP1RESH1FTVTV202",
+      "variant": "reference"
+    },
+    {
+      "key": "canary-p2-teacher",
+      "player": 2,
+      "seed": "SP1RESH1FTVTV203",
+      "variant": "teacher"
+    },
+    {
+      "key": "canary-p3-teacher",
+      "player": 3,
+      "seed": "SP1RESH1FTVTV204",
+      "variant": "teacher"
+    },
+    {
+      "key": "canary-p2-teacher-original-noncombat",
+      "player": 2,
+      "seed": "SP1RESH1FTVTV205",
+      "variant": "teacher_original_noncombat"
+    },
+    {
+      "key": "canary-p3-teacher-original-noncombat",
+      "player": 3,
+      "seed": "SP1RESH1FTVTV206",
+      "variant": "teacher_original_noncombat"
+    }
+  ],
+  "config_id": "sha256:4bbaa639528094a3b18e746d211d816eeee6b9e271734d5f9cbea6e1f8c125c7",
+  "finals": {
+    "p2-original": {
+      "model_id": "sha256:f356284cc932a8f60dee6a43153617f4f16d57887c93df39999b3882febb3a05",
+      "optimizer_id": "sha256:cedd1bcfd4801805c8effdf12b73f6165fe9302587b66eedc1b4b0379c9f06fe",
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/initial-p2/state.json",
+      "sha256": "827139f8e7867277c1f30cea74dcef71ba3569af41dba389943522bd51e25e70",
+      "state_id": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d"
+    },
+    "p2-reference": {
+      "model_id": "sha256:0a6a7684d4a09c5775034a64c3535112f4d2d6424b9cf349fd0ac0429a0b55a5",
+      "optimizer_id": "sha256:72d4efaaec742818970bea71345f84d0601c4badb58aee5c5c9e7bd1a1a120d3",
+      "optimizer_steps": 5722,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p2-reference-e16/state.json",
+      "sha256": "f95acd136a69b514bbebc8dae474bb0102405d2435143f0866384a7484d8c20f",
+      "state_id": "sha256:fdaa4815dfe6aaead0fdf076a77b24ffb7ddf9e256648f158236e06e9750a7d2"
+    },
+    "p2-teacher": {
+      "model_id": "sha256:f6c4ba61c4fb7a83b464d744838770a90661d85d618d22062d449ce3a4167414",
+      "optimizer_id": "sha256:4bb4db732a46bc3848be54237c3626242419877308f7273d89983622e47253e1",
+      "optimizer_steps": 5722,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p2-teacher-e16/state.json",
+      "sha256": "a10e21efaad37f279413f9caedc97b699f71f82e982695484086b491c2ebaacf",
+      "state_id": "sha256:d8100e74937ebbaff1784e66aa9c18db576dca380bd74777f57946d8f9a67da0"
+    },
+    "p3-original": {
+      "model_id": "sha256:f5b9604413bb997c80d87630fb3c6fdc6f172ad29230c1770825757900732da8",
+      "optimizer_id": "sha256:2a962d6f8d01178665c7e88780f96f134e31a266e6088aeae7ccf3aa5f0391a4",
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/initial-p3/state.json",
+      "sha256": "a6afc117311b7a63479fde9e5f03bd9aaca97815b32b5be5e46cf62ca7a83926",
+      "state_id": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+    },
+    "p3-reference": {
+      "model_id": "sha256:8a70ef98e6d8d2b57a215512fcfc4631cdd99a19e085a67beb6d90f7aef56438",
+      "optimizer_id": "sha256:c5650886ee8e670b9b8754d3670e57563111a4b83307ec1f988563afed043e14",
+      "optimizer_steps": 6109,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p3-reference-e16/state.json",
+      "sha256": "96d64752c00fc45ad8491e410749c5952ed271aa8ef49f5f13215e88d9c8db84",
+      "state_id": "sha256:ec75937f84a0a2748dfa8e463e461ee3393648db708ecdb4176a98a13e834b81"
+    },
+    "p3-teacher": {
+      "model_id": "sha256:2ca1623901d563bf040b64ab663985595d307b1684d9d31f583cc6d1835175ce",
+      "optimizer_id": "sha256:169c58a0728aa49c34f3a01d7ff152f2f6d5954ef6594102b8aeac5435b83b20",
+      "optimizer_steps": 6109,
+      "path": "artifacts/native-varied-teaching/study-v1/fitting/chunks/fit-p3-teacher-e16/state.json",
+      "sha256": "1c60cff689c37084f7910ab4b6f2a11d73453744a63b0e7b440c7997b5c9d5a8",
+      "state_id": "sha256:86cb5feb4598982e6affccdd854ce41c85091d58afd69fb661ee43a96d644907"
+    }
+  },
+  "fitting_assessment": {
+    "path": "artifacts/native-varied-fitting/owner-assessment-v1/report.json",
+    "sha256": "b5b296d9ed6bdfdc600a6c79517b17742b1f2a5be767e3ac1656b1b96f738d70"
+  },
+  "fitting_launch": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-varied-fitting-launch-v1.json",
+    "sha256": "f898e677b26b909449e732cde51db6c17bf2ae17090bb920ab7114ecb90d9761"
+  },
+  "fitting_report": {
+    "path": "artifacts/native-varied-teaching/study-v1/fitting/report.json",
+    "sha256": "76b4b45ed9025d6247ac13c56a4eb2302a350ace43d5a88fb3e125d8e2a05297"
+  },
+  "frozen_finals_id": "sha256:dbcb59804525246e6cd92a2a1273f7094afb735eca8c69dfa9171350f124d189",
+  "implementation": {
+    "scripts/compare-varied-finals-v1.sh": "35bbc7e83aa79f8af06e7c43b88e395ac0c19cda05950efb5a2a358b970ab25c",
+    "scripts/varied-final-canaries-session-v1.py": "93a8448d22da69afd19e69856f923a0526183db35fd0c48ee79eaf14d50dc0ae",
+    "src/spireshift/native_final_canary_session.py": "b245ce818c71a04a20b2fa8c425911d773a56721a9435a6cbccc34d568c0624d",
+    "tests/unit/test_native_final_canary_session.py": "5f4b232c6527eaa0950651e878cba38cd027679b9dd929d469b717d3ae1548d2"
+  },
+  "operation": "qualify_six_declared_final_policy_modes_only",
+  "protection": {
+    "path": "artifacts/native-final-canaries/preparation-v1/protected-before-canaries.json",
+    "sha256": "975b1cc7a0b3d057469e14232a87517494629b77b3a8581ca79c4b32fa279a44"
+  },
+  "schema_version": "native-varied-exact-final-canary-launch-v1",
+  "session_limits": {
+    "cpu_seconds": 7200,
+    "resident_memory_bytes": 4000000000,
+    "storage_bytes": 4000000000,
+    "wall_seconds": 4200
+  },
+  "short_check": {
+    "report": {
+      "path": "artifacts/native-final-canaries/saved-mode-control-v1/report.json",
+      "sha256": "0c45f8df27a7f852bc4a3c619e416cd5ae9435b252dbb33ab93f0188bede5157"
+    },
+    "resource": {
+      "path": "artifacts/resources/final-canary-saved-mode-control-v1.json",
+      "sha256": "42d6f1e843da897b32fc5520721d8b5f62c420cde612e0d8f1b7ec4464ceebd0"
+    }
+  },
+  "short_check_workspace": "artifacts/native-final-canaries/saved-mode-control-v1"
+}

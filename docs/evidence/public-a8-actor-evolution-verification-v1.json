@@ -1,0 +1,30 @@
+{
+  "admitted_engine_modified": false,
+  "claim_scope": "short_repository_verification_not_gameplay_gain_or_foundation_readiness",
+  "frozen_PPO_modules_modified": false,
+  "owner_config_id": "sha256:915322ffb2a603dabac9abfbcecbe5e51b9aedecc40eb998fad627d7753becd3",
+  "owner_long_run_started": false,
+  "pipeline_evidence_id": "sha256:e972115fe558ce3d9826ae98b0d8baec77626106cf10c35f0dc11f7e864ce11c",
+  "preserved_failed_verifications": [
+    {
+      "reason": "new test referenced an imported helper as a module export; fixed test reference",
+      "report_id": "sha256:10fba491c3a4aaa4bc776c8f393222d70d3036a95400878942adcdb89fd0676a"
+    },
+    {
+      "reason": "new synthetic failure test leaked shared mock state into two existing tests; scoped monkeypatch restores state",
+      "report_id": "sha256:b94b2ad911dc2d4c9b2f6322155cc0dc350ae6238de1f98b3e8503f7e06cf4aa"
+    }
+  ],
+  "repository_check": {
+    "CSharp_protocol_build_passed": true,
+    "cpu_seconds": 38.024199044,
+    "formatting_passed": true,
+    "passed": true,
+    "resource_report_id": "sha256:34c6ce87e28aa4d1b77f76c065933af9ce3bd40a7fd5e3f54b39d30cc277a4e6",
+    "tests_passed": 884,
+    "types_passed": true,
+    "wall_seconds": 49.04537458301638
+  },
+  "schema_version": "public-a8-actor-evolution-verification-v1",
+  "verification_id": "sha256:42f1bf7fc89f11915eedd142e607dac9ad60e1838a6f79977f1507f709b410dc"
+}

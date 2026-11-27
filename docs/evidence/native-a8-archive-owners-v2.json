@@ -1,0 +1,125 @@
+{
+  "candidate_for_separate_fitting_admission": false,
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "final_test_worlds_used": false,
+  "fresh_replay": {
+    "act": 2,
+    "clean_shutdown": true,
+    "floor": 30,
+    "last_frame_id": "sha256:ec7c685bfba7e69fa52cc71a58a43a95531b1c97030e9876384cabbb754bb8e2",
+    "native_report_id": "sha256:40ff5a9d5ab4bd15d7c1266fde612f6519f91c841d8bbfbad744c1725eede059",
+    "seed": "U9FFKTML1M9G",
+    "source_run_id": "6739ccb495f9b471",
+    "stop": {
+      "delivery_uncertain": false,
+      "error": "Recorded and native unique recorded reward differ",
+      "kind": "combat_end",
+      "mismatch": {
+        "archive": 1,
+        "field": "unique recorded reward",
+        "native": 2
+      },
+      "source_record": 2580
+    },
+    "unclaimed_equal_gold_rewards": [
+      "15 Gold",
+      "15 Gold"
+    ],
+    "verified_deliveries": 506
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "matcher_contract": "native-a8-archive-owner-matching-v2",
+  "minimum_distinct_winning_worlds": 3,
+  "native_batch_report_id": "sha256:1b981be59e05522c6b7e57ab7210b99d300361ccc1cb26d3818b4d3b433b9f96",
+  "native_batch_result_path": "artifacts/native-a8-archive-batch/owner-match-v2/result.json",
+  "native_case_seals": {
+    "6739ccb495f9b471": "sha256:9ca89fc83f87046aa034f5fc179771f728e7310de65106d71285e339be0902d9",
+    "ee2ffb605c67742f": "sha256:52c3ad3004aff7e66e7efa2be678c27a2e1dbc592968af83f0b5e6f98e131ab2"
+  },
+  "optimizer_updates": 0,
+  "recipe": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-archive-owner-replay-v2.json",
+    "sha256": "902e1d46df42a696e4fe746a51ac97a072bb455ca5b23ce419d70540fd1ec42b"
+  },
+  "report_id": "sha256:e37788f77ca2e4868ca8e1b8708ca76898f89ef959859045c4468078bd23a1f1",
+  "saved_audit": {
+    "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+    "fresh_native_runs": 0,
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "optimizer_updates": 0,
+    "ordered_opening": {
+      "all_prefixes_and_exact_commits_reconstructed": true,
+      "local_factors": 2,
+      "native_deliveries": 1,
+      "ordered_answer_native_commits": 1,
+      "post_discard_hand_and_pile_verified": true,
+      "saved_report_id": "sha256:21096664642499f58aa46f0289c0bc45b1901fa4daa546ece71da09caceb6415"
+    },
+    "prefixes": {
+      "3cb0429d17be9210": {
+        "last_frame_id": "sha256:d86d01684444b2e53968d1538f45240e680222f1e065d606b8006a8addb3d879",
+        "native_victory": false,
+        "next_unsent_action": "Open inventory",
+        "next_unsent_domain": "native",
+        "prefix_deliveries_reconstructed": 25,
+        "purchase_successors_checked": 0,
+        "sealed_report_id": "sha256:1f0080a196fadc1e603daeae30df620f18b6b10211ff0980cebb80340c6dc109",
+        "selected_public_slots": []
+      },
+      "6f7d841fbdf0bb23": {
+        "last_frame_id": "sha256:28eb9f016735b21d6d05501e6ad3abf2ecb8fe0497a598aa108b9ac0f838fed8",
+        "native_victory": false,
+        "next_unsent_action": "Confirm Defend, Ascender's Bane, Bash+",
+        "next_unsent_domain": "native",
+        "prefix_deliveries_reconstructed": 72,
+        "purchase_successors_checked": 1,
+        "sealed_report_id": "sha256:e814e52fd65ddaeca91aa4479ebb1cec62ecfbe811461d9c15ab106f76658dde",
+        "selected_public_slots": [
+          13,
+          14,
+          15
+        ]
+      },
+      "ee2ffb605c67742f": {
+        "last_frame_id": "sha256:9d1bd6dd75d8d9f44c2c6e1f49f3b821ff33074676438d985e89dadb9fbf5863",
+        "native_victory": true,
+        "next_unsent_action": null,
+        "next_unsent_domain": null,
+        "prefix_deliveries_reconstructed": 896,
+        "purchase_successors_checked": 3,
+        "sealed_report_id": "sha256:d74f3b05040299eb3653ede4b8deb90b8f496030a65d013c4cff2362cfd199e3",
+        "selected_public_slots": []
+      }
+    },
+    "removal_cancellation": {
+      "archive_empty_pick_record": 4024,
+      "archive_open_record": 4023,
+      "native_gold_deck_and_removal_stock_verified": true,
+      "next_purchase_record": 4026,
+      "saved_native_deliveries": 3,
+      "saved_native_report_id": "sha256:d644e8ded098671dac616daa1e2cf706a412a1273365b740859d994d305dd078"
+    },
+    "report_id": "sha256:33b56b07cb12331fa5ce240b458c676bad898d1247cfba699ae57daea73d37ca",
+    "schema_version": "native-a8-archive-owner-saved-audit-v2",
+    "training_admission_granted": false
+  },
+  "schema_version": "native-a8-archive-owner-evidence-v2",
+  "shared_profile_unchanged": true,
+  "status": "archive_batch_gate_blocked",
+  "training_admission_granted": false,
+  "verified_winning_worlds": 1
+}

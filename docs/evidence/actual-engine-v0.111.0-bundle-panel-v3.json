@@ -1,0 +1,131 @@
+{
+  "archive_id": "sha256:02623eea2e82c86d64806cfd74f249e03c03f96a6b8fe7bf8094584a1054e02b",
+  "batch_config": "configs/engine-qualification/sts2-v0.111.0-bundle-bridges-v3.json",
+  "batch_config_id": "sha256:e7f4e951361798afa546b46477886630bf911682e9e15351892066910a97556d",
+  "batch_report_id": "sha256:7eb436e9cda601eaa630de0ba985a0ee1e6a428906e5f11fa619f3a07cd32b24",
+  "batch_wall_seconds": 315.33082091697725,
+  "cases": [
+    {
+      "case_id": "seed-03-pack-1-repeat-01",
+      "comparison_report_id": "sha256:f979eac8265205578a702b8e1d315b4f06209269614d2d38765239b1c5b9f34a",
+      "saved_case_verification_id": "sha256:2788ba36eb8594b5a4b95115f306dfccec4de127ded0fcae860e7fc30c53558f",
+      "working_app_reset_report_id": "sha256:24bc9c27f849edd0737450c4f82c1be931f791020a590dd1ba6cbee287dec86a"
+    },
+    {
+      "case_id": "seed-03-pack-1-repeat-02",
+      "comparison_report_id": "sha256:4ebd1cdfe44068e021169204486997a22e81dc893d4c1e46d962e30c291b27ae",
+      "saved_case_verification_id": "sha256:c7918d2364b07410b4b3a6f8fa34917ba5f2da73a0a2d84868ab2c4463f6fa95",
+      "working_app_reset_report_id": "sha256:8cbe0286a57d9251e8a45c1286bf8ac9a815d42487acc2b4bfa8975588dd4fd1"
+    },
+    {
+      "case_id": "seed-03-pack-2-repeat-01",
+      "comparison_report_id": "sha256:3750d06ed099842d2a5c218440f178115a9b7ea5b20e4d0ff990411139c68fdc",
+      "saved_case_verification_id": "sha256:5944153ba8a1330a5fc9a8e700ac8560f63290d235f5d899625cddac850c588f",
+      "working_app_reset_report_id": "sha256:f9da3a78df37bd51b12cc21206c8d0b8007d9bdca2cb65f88e72d5a43da3a281"
+    },
+    {
+      "case_id": "seed-03-pack-2-repeat-02",
+      "comparison_report_id": "sha256:82338409e20047032411e1952651697ec6813b94e93a858ccd5eecdf5e9d770d",
+      "saved_case_verification_id": "sha256:ec10617106bb5d39f10a5ab71fdc83d9f16b9bffd6c38eec11ea7e20193c0ab3",
+      "working_app_reset_report_id": "sha256:59b1675d12ad1ea9c8371b39f778b9e3f0cc7c3abefe19f3bd998a557a32726f"
+    },
+    {
+      "case_id": "seed-21-pack-1-repeat-01",
+      "comparison_report_id": "sha256:a82987f3f4ade9a5ad067499eb121986d54f6a263b261b808c096d94e883aa26",
+      "saved_case_verification_id": "sha256:d012b8ba1a0bb5973af53e22104bd175a1bb78e3c19442a4d431fae4d776c62b",
+      "working_app_reset_report_id": "sha256:25026712721065f3ceb4a0ab15e599f34159e79c4299777fc6b5e2f16344cee5"
+    },
+    {
+      "case_id": "seed-21-pack-1-repeat-02",
+      "comparison_report_id": "sha256:d53bd235ad3eb1deaf2a73382e9d28f95b629ab5591bfe603855ca18a5c747d7",
+      "saved_case_verification_id": "sha256:454ff7ac3aa0d698aabae561c544302f073ce06a1bf3b65b5cb0af93cd15f9c0",
+      "working_app_reset_report_id": "sha256:4ab006102244352744371dcd1f6e46bcab0127f0747cd215050e7b964a794974"
+    },
+    {
+      "case_id": "seed-21-pack-2-repeat-01",
+      "comparison_report_id": "sha256:4c1522b5abe02a8b971ee0d699f1b4d51fcdc310ba1e6d9c8ebf8742439690a8",
+      "saved_case_verification_id": "sha256:06d2c836d3fc5ce5466dd1d258debb20b7ce9b0f072a2ba2fa337d77c7e4f384",
+      "working_app_reset_report_id": "sha256:bb09c289fd6ba7d2a50a02c08a6f92c8e40ab9d803d7b0f7b6fceb8bbe63f1ec"
+    },
+    {
+      "case_id": "seed-21-pack-2-repeat-02",
+      "comparison_report_id": "sha256:e83357b5a3877a53284cb8e91d7fb0a6ec1b2c5db544d8362c5afdac2e9c5687",
+      "saved_case_verification_id": "sha256:e514c1a51a4164a2c91b930e2823fd3eec10b2c075cd2fb599ca9f4aae43b8e7",
+      "working_app_reset_report_id": "sha256:0f531e515f1948716d2605e865b9e4178f9bb45cfe7daccb1e04c0df97b3c204"
+    }
+  ],
+  "claim_scope": "two_natural_A8_starting_seeds_both_Scroll_Boxes_packs_twice_public_preview_cancel_confirm_card_award_and_serial_working_app_reuse",
+  "completed_cases": 8,
+  "cost_estimate_complete": false,
+  "date": "2026-10-12",
+  "evidence_id": "sha256:f8a78f47df193b071e6e3903a7e1127f16b663a98c75ef78ff9f2d4bfafa16ad",
+  "failed_cases": 0,
+  "full_run_attempts": 0,
+  "historical_failures_overwritten": false,
+  "independent_seeds": 2,
+  "issues": [
+    145,
+    146,
+    147
+  ],
+  "limitations": [
+    "Eight cases cover two independent seeds and four seed/pack pairs, not eight independent gameplay scenarios.",
+    "Visible card identity/current cost/upgrade and deck award do not establish complete card text/effect semantics or every bundle mechanic.",
+    "This stage contains no complete runs, optimizer steps, neural improvement or general training admission.",
+    "Parallel app reuse/throughput, deliberate blocked-worker repair/retirement and remaining reward/profile/mode/mechanics/ending qualification remain open.",
+    "Tracked final/peak storage includes the one pre-existing working app; APFS logical sizes do not measure independently allocated physical disk blocks.",
+    "Historical v1 zero-case space failure and unused v2 recipe retain their original identities."
+  ],
+  "next_work": "Qualify full Calling Bell/Cauldron pickup and reward choices, then freeze content and act-discovery profile state under #145; full-run speed and neural integration follow under #146.",
+  "not_attempted_cases": 0,
+  "optimizer_steps": 0,
+  "owner_ran_batch": true,
+  "planned_cases": 8,
+  "previous_reuse_evidence_id": "sha256:ede6464593668f0f02164e44660e1880366f7e5351bcbfbf5a8aa5b1ab778f2b",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "repeated_public_prefixes_identical": true,
+  "resource_cap_hit": false,
+  "resource_limits": {
+    "cpu_seconds": 1800.0,
+    "resident_memory_bytes": 8000000000,
+    "storage_bytes": 6000000000,
+    "wall_seconds": 900.0
+  },
+  "resource_report_id": "sha256:ad735dd2099fc210b9f053bcad77d5b12900eb0e8de00afb0885a5e3a264b9eb",
+  "resources": {
+    "cpu_seconds": 193.115726879,
+    "final_storage_bytes": 2433654242,
+    "peak_process_count": 4,
+    "peak_resident_memory_bytes": 850165760,
+    "peak_storage_bytes": 2433981360,
+    "wall_seconds": 319.0794253339991
+  },
+  "saved_effect_decisions": 16,
+  "saved_observations": 24,
+  "saved_preview_steps": 16,
+  "saved_public_game_ui_actions": 40,
+  "saved_reaudit_launched_games": 0,
+  "saved_verification_report_id": "sha256:cca09064a95bf27677b8893808a0b89873554d61212424c2c3bc36c6e8fe3e73",
+  "schema_version": "actual-engine-bundle-panel-evidence-v1",
+  "seed_pack_pairs": 4,
+  "serial_reuse": {
+    "all_profile_sentinels_unchanged": true,
+    "all_reset_receipts_valid": true,
+    "batch_result_logical_bytes": 27060503,
+    "current_worker_matches_original_master": true,
+    "distinct_profiles": 8,
+    "fresh_profile_logical_bytes": 888368,
+    "managed_app_logical_bytes": 2406594686,
+    "managed_apps": 1,
+    "nested_game_payloads": 0,
+    "new_app_copies": 0,
+    "original_master_inventory_unchanged": true,
+    "same_app_path_and_inode": true
+  },
+  "shipped_cross_host_parity": false,
+  "status": "bundle_comparisons_pass",
+  "template_config_id": "sha256:3dc4998e1c77daf7650a18ca0d13f60648729bebbf2cb716043495a1efef5adc",
+  "training_allowed": false,
+  "working_app_config_id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959",
+  "working_app_saved_audit_report_id": "sha256:070156f2d5b66c5dbf4a933c3fe83ceef7060179c2172a7fee3316810c6e6e9c"
+}

@@ -1,0 +1,11 @@
+{
+  "cpu_seconds": 7200,
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-broader-canary-v1.json",
+    "sha256": "caa859aa50c1dc695276b60e20bcdd5a685e8367614698eec9125226b0de2290"
+  },
+  "resident_memory_bytes": 4000000000,
+  "schema_version": "native-comparison-launch-v1",
+  "storage_bytes": 1000000000,
+  "wall_seconds": 3000
+}

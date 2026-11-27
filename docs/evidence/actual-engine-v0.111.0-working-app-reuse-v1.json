@@ -1,0 +1,106 @@
+{
+  "bootstrap_retry": {
+    "diagnostic_error_lines_preserved": 1095,
+    "natural_process_seconds": 23.73115287499968,
+    "report_id": "sha256:e22bde0bdc2ee562fb4a89dc875fb927cd61b4766ad67a67a653134f7c178b9c",
+    "resource_report_id": "sha256:4eaf9741c698b4af12ea33e0d07ba06615185adffc5333f10f5d0e1bc21623bf",
+    "restoration_report_id": "sha256:c4205eb8c91fc06f5b261d70b2eb587a2cf2de034f1b58ba527fd7120c190a2b",
+    "same_app_reused": true,
+    "scope": "bootstrap_and_private_profile_only_not_clean_runtime_or_gameplay_parity"
+  },
+  "date": "2026-10-11",
+  "distinct_shipped_profiles": true,
+  "evidence_id": "sha256:ede6464593668f0f02164e44660e1880366f7e5351bcbfbf5a8aa5b1ab778f2b",
+  "frozen_master_unchanged": true,
+  "full_run_attempts": 0,
+  "global_pool_cap": {
+    "apps": 2,
+    "logical_bytes": 5000000000
+  },
+  "historical_payloads_automatically_deleted": false,
+  "issue": 147,
+  "limitations": [
+    "Serial worker only; parallel isolation and throughput still require #146.",
+    "Blocked worker repair/retirement and deliberate historical-payload cleanup remain explicit follow-up work.",
+    "Old recipes keep their original retention policy; the next owner recipe explicitly uses reuse.",
+    "Two shipped cases and one bootstrap do not qualify every mechanic or establish model strength.",
+    "APFS logical app sizes do not imply that all bytes consume independent physical blocks."
+  ],
+  "managed_app_logical_bytes": 2406594686,
+  "managed_apps": 1,
+  "optimizer_steps": 0,
+  "original_file_inventory_restored_after_each_success": true,
+  "owner_stage": {
+    "cases": 8,
+    "command": "bash scripts/compare-bundle-actions-v3.sh",
+    "config_id": "sha256:e7f4e951361798afa546b46477886630bf911682e9e15351892066910a97556d",
+    "expected_minutes": [
+      6,
+      9
+    ],
+    "preflight_report_id": "sha256:e00f5b8e23d0d5a9e07a6c4467aeb900a06f28f4f02f29aa7bfe48b696eb5689",
+    "preflight_seconds": 3.6876054160529748,
+    "resource_accounting_includes_shared_pool": true,
+    "started": false,
+    "wall_cap_seconds": 900
+  },
+  "preserved_bookkeeping_failure": {
+    "fix": "capture_override_hash_before_reset",
+    "original_reset_report_id": "sha256:2d8b03d67a04bb088b1a7fb4d28be10c83eaab4f0b846f9b11c6a14c37847252",
+    "reason": "override_hash_read_after_successful_reset_removed_override_file",
+    "regression_test_and_separate_retry_pass": true,
+    "resource_report_id": "sha256:ae3162ba8860f54594d846076b9f9f7dca9829717c257f869b55757c56211977"
+  },
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "same_app_path_and_inode": true,
+  "schema_version": "actual-engine-working-app-reuse-evidence-v1",
+  "scope": "serial_fixed_app_reuse_and_profile_reset_only",
+  "source_sha256": {
+    "scripts/compare-bundle-actions-v3.sh": "73ce56df5e743d209e24c92f42cda66c614ee9644d6094f66bb504a7bf83a848",
+    "src/spireshift/engine_bundle_bridge.py": "57b22290936fc02b9a9b7f3db869d5894b181dbf70a6164a627e6b60bf450506",
+    "src/spireshift/engine_connector.py": "ad5e5d18826e39da58933220c745542e60a9157103ebbeab95e606c20744b491",
+    "src/spireshift/engine_native.py": "36e74572508dfc2bbb60243839b3a42d69cde4eecdb00057aaa291619d3eff39",
+    "src/spireshift/engine_qualification_cli.py": "d41a7bf1408889eed9753ca2917759b727efb7a2f8d90261339ab9692840d26a",
+    "src/spireshift/engine_working_app.py": "457241b2df7302300498db540f9564d77658e2471f406e5e9a687426a4ef5e3c"
+  },
+  "total_app_copies_created_by_two_cases": 1,
+  "training_allowed": false,
+  "two_shipped_cases": [
+    {
+      "app_created": true,
+      "app_inode": 347602255,
+      "comparison_report_id": "sha256:611023a4446d93fd213e90c6071b3dc80657fe1dbc15c9fc6a4cdd0b554c5755",
+      "cpu_seconds": 20.826447548,
+      "pack_index": 1,
+      "raw_audit_report_id": "sha256:b6aef81eb9285d0ddf906d3cd012579b6afcb317fc530bebe057451d92baf1dc",
+      "resource_report_id": "sha256:0cba45dce0f14f9243b36614c0de11dfb2f58ab6109790be1d1379d7d482ffcf",
+      "restoration_report_id": "sha256:03d8f0ecfca65c7c0e4a8604c7e9a63077848d4b703b18abbc410b8d287b321b",
+      "seed": "SPIRESHIFTBUNDLE003",
+      "shipped_report_id": "sha256:c8825472b6b3f456fbf4673ad986aebffa23e4858e9fceddc41ce232c8772c74",
+      "wall_seconds": 51.420319958007894
+    },
+    {
+      "app_created": false,
+      "app_inode": 347602255,
+      "comparison_report_id": "sha256:5f0f679efa43a51d11edc79648062f91c0f909f249f7e65e0018ba888c88297e",
+      "cpu_seconds": 22.298194798,
+      "pack_index": 0,
+      "raw_audit_report_id": "sha256:fb4440e79153fc0b044cab735bec2b4b2377ff89092565a74d807ece0986c58b",
+      "resource_report_id": "sha256:34bd332b1041b91fdbd0780ed56820c229c749b4f0b066e22cca2319e32ecfc1",
+      "restoration_report_id": "sha256:d20ad6e9c4645686b1bbbd615e19ddf1a0051a8ae38d3dd4041c61cccfddbecd",
+      "seed": "SPIRESHIFTBUNDLE021",
+      "shipped_report_id": "sha256:97380f1df92f31fe8347c9e288afc69bfc3980fd0853d52b03b4a8b9ea20a367",
+      "wall_seconds": 39.826642041967716
+    }
+  ],
+  "validation": {
+    "command": "uv run spireshift check",
+    "csharp_contract_pass": true,
+    "format_lint_strict_types_pass": true,
+    "new_working_app_tests": 21,
+    "owner_script_syntax_pass": true,
+    "pytest_seconds": 47.38,
+    "repository_tests_passed": 1146
+  },
+  "working_app_config_id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959"
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": "engine-scoped-qualification-evidence-v1",
+  "recorded_at": "2026-10-11",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "game_version": "v0.111.0",
+  "game_commit": "41cef1ea",
+  "character": "Ironclad",
+  "ascension": 8,
+  "previous_evidence": "docs/evidence/actual-engine-v0.111.0-shop-energy-v10-and-panel-v2.json",
+  "audit_report": {
+    "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/mode-audit-v1/report.json",
+    "report_id": "sha256:7ba10258ee36210fec5574606ab7ee768ff13d4221441c1969ac234e3baffe64",
+    "config_id": "sha256:2f548ea7a96987ca9f05ed0a54b4012a4320bb46fe041e2a58897a00de3d2861",
+    "status": "static_inventory_complete_semantic_review_partial",
+    "wall_seconds": 1.46751166600734,
+    "inspector_sha256": "04dc01636335c21dbbfa73288c3811eceaa4a914a8ff2a9dce55c3e9a9a29643",
+    "source_report_id": "sha256:26fb682a4e3623a0d09ae8e23c14fb13fbb3271cf1ac3ebb5cc5d2b0a2a9c2b8",
+    "candidate_build_report_id": "sha256:a2516e7ba9d3d1da5080b837e22a57fac8a32edbce0bd07519996f66665b9fb1"
+  },
+  "inventories": {
+    "game": {
+      "assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+      "decoded_instructions": 1457929,
+      "inventory_id": "sha256:d50c8cc78f19c521c072f6fcac32140dc1017a7cdd8faf283f87837535d6dc76",
+      "method_bodies": 50816,
+      "methods": 51602,
+      "module_mvid": "57785517-0b16-42b9-8b36-bad6fb28384b",
+      "references": 434,
+      "undecoded_bodies": 0
+    },
+    "wrapper": {
+      "assembly_sha256": "4b2c132520da2159823aabd599a3eb86c3c1504cb8874b2f2da5aaa92784e726",
+      "decoded_instructions": 19960,
+      "inventory_id": "sha256:c39801cdb59b205d2d5e6f87f5d0fb484415b1ee3fae90cb345ce7ece9a69e41",
+      "method_bodies": 425,
+      "methods": 425,
+      "module_mvid": "3b42f25b-62b8-45dc-805b-7e67f5d341be",
+      "references": 2,
+      "undecoded_bodies": 0
+    }
+  },
+  "assessment": {
+    "classifications": {
+      "choice_or_lifecycle_seam": 5,
+      "mode_definition": 10,
+      "presentation_or_diagnostics": 4,
+      "profile_dependent_rules": 2,
+      "rules_rng_divergence": 3
+    },
+    "findings": [
+      {
+        "classification": "rules_rng_divergence",
+        "method": "MegaCrit.Sts2.Core.Models.Relics.CallingBell.GenerateRewards",
+        "rationale": "Test mode returns three predetermined relic rewards rather than the native rarity-pool draws. The v10 wrapper has no restoration for this method; seeded reward and RNG-counter differentials are required."
+      },
+      {
+        "classification": "rules_rng_divergence",
+        "method": "MegaCrit.Sts2.Core.Models.Relics.Cauldron.GenerateRewards",
+        "rationale": "Test mode uses preset potion models instead of the normal generated potion rewards. The v10 wrapper has no restoration for this method; generated offers, capacity choices and RNG consumption need comparison."
+      },
+      {
+        "classification": "profile_dependent_rules",
+        "method": "MegaCrit.Sts2.Core.Models.ActModel.GetRandomList",
+        "rationale": "The normal undiscovered alternative-act preference is skipped in test mode. A fully unlocked content policy does not specify discovered acts. Freeze the progress/discovery contract and compare initial act choices and RNG advancement."
+      },
+      {
+        "classification": "choice_or_lifecycle_seam",
+        "method": "MegaCrit.Sts2.Core.Commands.CardSelectCmd.FromChooseABundleScreen",
+        "rationale": "Test mode takes the first bundle without a player choice. The current nine native selection observation boundaries do not include this bundle method. Preserve advertised bundle choice and selection synchronization before qualifying it."
+      },
+      {
+        "classification": "choice_or_lifecycle_seam",
+        "method": "MegaCrit.Sts2.Core.Commands.CardSelectCmd.Reset",
+        "rationale": "Native selector-stack cleanup is conditional on test mode being off. Interrupted selections and repeated resets need a bound clean-state test; wrapper scope disposal alone is not proof that all native stacks reset."
+      },
+      {
+        "classification": "choice_or_lifecycle_seam",
+        "method": "MegaCrit.Sts2.Core.Rewards.RewardsSet.Offer",
+        "rationale": "Test mode uses a test selector or selects rewards automatically. The v10 wrapper installs its reward selector in both start and load paths. This is a declared control seam that needs multi-reward, capacity and cancellation coverage rather than assuming the branch harmless."
+      },
+      {
+        "classification": "choice_or_lifecycle_seam",
+        "method": "MegaCrit.Sts2.Core.Models.Powers.RollingBoulderPower.AfterPlayerTurnStart",
+        "rationale": "Test mode applies damage to the enemy list directly; the normal path schedules damage per visual-hit callback. Death and on-damage ordering need a differential with multiple enemies; batching cannot be declared presentation-only."
+      },
+      {
+        "classification": "choice_or_lifecycle_seam",
+        "method": "MegaCrit.Sts2.Core.Entities.RestSite.RestSiteOption.Generate",
+        "rationale": "A non-null test generator replaces native rest-option generation. Assert it remains unset in production collection and across resets. Existing finite rest fixtures do not establish all hook/option coverage."
+      },
+      {
+        "classification": "profile_dependent_rules",
+        "method": "MegaCrit.Sts2.Core.Runs.RunRngSet.GetMockInstance",
+        "rationale": "Test mode allows a fallback mock RNG when no run is attached. Ensure gameplay models use the active run and player RNGs; model-preview use is separate from seeded gameplay. No fallback reachability claim follows static reading."
+      },
+      {
+        "classification": "rules_rng_divergence",
+        "method": "MegaCrit.Sts2.Core.Entities.Merchant.MerchantPotionEntry.CalcCost",
+        "rationale": "Original test-mode branch skips price RNG. The current v9/v10 wrapper restores this exact branch and the eight-case v2 shop panel verifies scoped price/effect agreement. This is a known scoped mitigation, not a new unfixed price regression."
+      }
+    ],
+    "mechanics_qualified": false,
+    "method_groups": 383,
+    "references": 434,
+    "reviewed_method_groups": 24,
+    "reviewed_references": 25,
+    "semantic_review_complete": false,
+    "training_allowed": false,
+    "unreviewed_references": 409
+  },
+  "assembly_game_code_executed": false,
+  "games_launched": 0,
+  "full_run_attempts": 0,
+  "optimizer_steps": 0,
+  "training_allowed": false,
+  "mechanics_qualified": false,
+  "raw_proprietary_source_and_reference_rows_private": true,
+  "scope": "all_direct_IL_metadata_references_to_TestMode_and_NonInteractiveMode_in_the_two_exact_assemblies_with_24_scoped_method_reviews_not_all_semantic_paths",
+  "limits": [
+    "reflection_and_additional_indirect_aliases_not_exhaustive",
+    "Godot_stub_differences_not_covered",
+    "409_game_references_remain_unreviewed",
+    "static_source_findings_are_not_runtime_differential_results"
+  ],
+  "prior_shop_results_retained": true,
+  "priority_next_work": [
+    "restore_native_CallingBell_and_Cauldron_reward_generation_and_RNG_consumption_without_global_TestMode_change",
+    "preserve_bundle_choices_instead_of_implicit_first_bundle_and_verify_selector_reset",
+    "freeze_content_plus_act_discovery_progress_policy_and_compare_actual_initial_act_choices",
+    "qualify_reward_selector_capacity_cancellation_multi_reward_effects_and_combat_damage_ordering"
+  ],
+  "validation": {
+    "repository_tests_passed": 1083,
+    "managed_inspector_self_test_passed": true,
+    "source_format_types_and_CSharp_protocol_pass": true,
+    "no_game_files_needed_for_synthetic_checks": true
+  },
+  "evidence_id": "sha256:5f3497b56d737f0410d31feb376c61ceacfea8b4ecff8ca272995e12d0e9df24"
+}

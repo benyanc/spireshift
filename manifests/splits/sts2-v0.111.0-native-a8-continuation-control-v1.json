@@ -1,0 +1,56 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:aefcbb3350d48c49a2052defa2ec366ed78f866d0d33a120a67a0db87a479e4a",
+  "purpose": "two_nonzero_Adam_player_bridge_only",
+  "schema_version": "native-complete-run-seed-plan-v1",
+  "seeds": [
+    {
+      "id": 940001,
+      "numerical_seed": 2,
+      "partition": "control",
+      "seed": "SP1RESH1FTA8CNTCT2000001"
+    },
+    {
+      "id": 940002,
+      "numerical_seed": 2,
+      "partition": "control",
+      "seed": "SP1RESH1FTA8CNTCT2000002"
+    },
+    {
+      "id": 940003,
+      "numerical_seed": 2,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CNTCD2000001"
+    },
+    {
+      "id": 940004,
+      "numerical_seed": 2,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CNTCD2000002"
+    },
+    {
+      "id": 940005,
+      "numerical_seed": 3,
+      "partition": "control",
+      "seed": "SP1RESH1FTA8CNTCT3000001"
+    },
+    {
+      "id": 940006,
+      "numerical_seed": 3,
+      "partition": "control",
+      "seed": "SP1RESH1FTA8CNTCT3000002"
+    },
+    {
+      "id": 940007,
+      "numerical_seed": 3,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CNTCD3000001"
+    },
+    {
+      "id": 940008,
+      "numerical_seed": 3,
+      "partition": "control_eval",
+      "seed": "SP1RESH1FTA8CNTCD3000002"
+    }
+  ]
+}

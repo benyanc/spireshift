@@ -1,0 +1,786 @@
+{
+  "control": [
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "control-p2-normal-reward-1-draw-0",
+      "partition": "opening_control",
+      "player": 2,
+      "root": "control-p2-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "control-p2-normal-reward-1-draw-1",
+      "partition": "opening_control",
+      "player": 2,
+      "root": "control-p2-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T012"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "control-p3-normal-reward-1-draw-0",
+      "partition": "opening_control",
+      "player": 3,
+      "root": "control-p3-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T014"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "control-p3-normal-reward-1-draw-1",
+      "partition": "opening_control",
+      "player": 3,
+      "root": "control-p3-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T014"
+    }
+  ],
+  "control_resource": "artifacts/native-a8-opening-contrast/control-v1-resources.json",
+  "control_workspace": "artifacts/native-a8-opening-contrast/control-v1",
+  "coverage_audit": {
+    "path": "artifacts/native-a8-model-owned-coverage/assessment-v1-1794243638550996000/report.json",
+    "report_id": "sha256:524ced8ab67e1414f36cb284b2a54e3da7d59d9ada6bdb818f77e988cf3bb672",
+    "sha256": "51c45e649ec1a4db324ea6d7a4163c0cc54c9b3a49910b3ea912c2553d3908d5"
+  },
+  "diagnostic_worlds_excluded": [
+    "SP1RESH1FTA8CV1T013",
+    "SP1RESH1FTA8CV1T020"
+  ],
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "game_limits": {
+    "episode_cpu_seconds": 128,
+    "episode_wall_seconds": 90,
+    "maximum_decisions": 2048,
+    "maximum_rounds_per_fight": 30
+  },
+  "implementation": {
+    "scripts/collect-a8-opening-contrasts-v1.sh": "eb90a742060dddec5ca5b25ebd5dc0e8c20c60470cb9476a5a69958eb69061cf",
+    "scripts/collect-a8-turn-rescues-v1.sh": "060fc67add568ed5f5e3e15ffd3cb5604fab4b88c60a2bff847b9c136602df65",
+    "src/spireshift/native_a8_opening_contrast.py": "a7f1d5e458618fd57b85fedbf1cc35f81d9e11cf9d8b64e04bad45914e2c2fe3",
+    "src/spireshift/native_a8_opening_contrast_session.py": "75a1a3d85e9918ac6161d82c8ff057f4dd0dba4057d508ed09c82baf17af7ca3",
+    "src/spireshift/native_a8_sampling_audit.py": "91b6dd0ec3bd46d8e857c524c0d2a5aaca1b1ce7f5ddf90915cc9962ade7d665",
+    "src/spireshift/native_a8_turn_rescue.py": "30b42bdbec4764a7f1169f23c5060e52e5e59bbc7c1e8ab298f260abc474bf74",
+    "src/spireshift/native_a8_turn_rescue_audit.py": "5f567ba22efebccca0aea5d47f4978c9cff21c5156abfc94a03cb29f5adab651",
+    "src/spireshift/native_a8_turn_rescue_session.py": "99b197483831c4f458b7b445d9968dfd9d715344b8e6005dcdc28ef911e7d901"
+  },
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "original_full_state_ids": {
+    "2": "sha256:4e1ea4edc0db695198cf77d266a2aba065aa32f6a802305583e5afadd2fc3c1d",
+    "3": "sha256:9dc69056fd40582de98986ffabcd5380a4c300b48052638238abefc472ee58ee"
+  },
+  "root_probe_contract": "two_distinct_legal_alternatives_at_combat_opening_v1",
+  "roots": [
+    {
+      "control": true,
+      "encounter": "normal",
+      "floor": 2,
+      "hp": 75,
+      "id": "control-p2-normal-reward-1",
+      "max_hp": 91,
+      "prefix_native_deliveries": 3,
+      "reference_action_index": 5,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:a755225eaa0fcb93aa797ad17181f1d1df8d0210f447ceec7168f8d12daefe47",
+      "round": 1,
+      "source_seal_id": "sha256:2905c6bbf57a96ef78d53002e56bc29946221b91d3d07156cabd2d9ef298ab68",
+      "source_task": {
+        "key": "normal-12-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T012",
+        "seed_id": 410012
+      }
+    },
+    {
+      "control": true,
+      "encounter": "normal",
+      "floor": 2,
+      "hp": 64,
+      "id": "control-p3-normal-reward-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 3,
+      "reference_action_index": 3,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:5424d47a9c9cbff071c840edd6f2c9226ce219f246f03019dbf62ec888b2a59d",
+      "round": 1,
+      "source_seal_id": "sha256:2b090c718203f86b4baf19c58807d556ddb91448631bdc699a141b56019aa363",
+      "source_task": {
+        "key": "normal-14-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T014",
+        "seed_id": 410014
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 7,
+      "hp": 44,
+      "id": "train-p2-elite-loss-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 84,
+      "reference_action_index": 2,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:03403098a644c9ffaadb3ad96bf3805a0794c6535891e97caa1c7fa70f9497c6",
+      "round": 1,
+      "source_seal_id": "sha256:09549318bcf6f8d8d0c64ccc070f48f49614afac3adc7a3e792c4495693f88fa",
+      "source_task": {
+        "key": "normal-04-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T004",
+        "seed_id": 410004
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 11,
+      "hp": 45,
+      "id": "train-p2-elite-loss-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 110,
+      "reference_action_index": 1,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:2acad31b4ce01bb06f83a4d1f99f2b608ff83d817d361aaaae77661b95a177e3",
+      "round": 1,
+      "source_seal_id": "sha256:51611e414ffd5c7343250bacccc7917e0690320bd92cd9e3d71f3c6d285073b1",
+      "source_task": {
+        "key": "normal-19-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T019",
+        "seed_id": 410019
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 14,
+      "hp": 53,
+      "id": "train-p2-elite-reward-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 433,
+      "reference_action_index": 1,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:d84fc6690371c224a5de5d3ede9715a047b6bea554ef22fa9f403a673bb8ef65",
+      "round": 1,
+      "source_seal_id": "sha256:4db7142013e6ab283aa467b9453742137b47bd4c3bf9ab027f1faa8e96c6db34",
+      "source_task": {
+        "key": "normal-10-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T010",
+        "seed_id": 410010
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 14,
+      "hp": 82,
+      "id": "train-p2-elite-reward-2",
+      "max_hp": 82,
+      "prefix_native_deliveries": 156,
+      "reference_action_index": 4,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:ed05806a867d13bedf6264ba58137f50312b2877efd418eb9308292d5d20be7c",
+      "round": 1,
+      "source_seal_id": "sha256:7fa3abdd16403a2c8d4ddde7880b3d549225728c1e6b1b63b462a960b601a6bf",
+      "source_task": {
+        "key": "normal-18-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T018",
+        "seed_id": 410018
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 12,
+      "hp": 52,
+      "id": "train-p2-normal-loss-1",
+      "max_hp": 68,
+      "prefix_native_deliveries": 132,
+      "reference_action_index": 5,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:0885974719e32ef04d85d59a82dde0563c1a61ea1a66af76cfccabd2bbe24328",
+      "round": 1,
+      "source_seal_id": "sha256:c0a40692f550633caf1c1012d2033228a06436994930a778b46025dc1928aa59",
+      "source_task": {
+        "key": "normal-06-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T006",
+        "seed_id": 410006
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 6,
+      "hp": 42,
+      "id": "train-p2-normal-loss-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 78,
+      "reference_action_index": 2,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:de9bb6454c033b94a864b3b1dfda7a65b31175bfa0f5b674e16b1078d41eff67",
+      "round": 1,
+      "source_seal_id": "sha256:9effd971ba2750a176cd1c24073c547f23e68e104c930a56e0e408fc47cc9430",
+      "source_task": {
+        "key": "normal-16-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T016",
+        "seed_id": 410016
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 2,
+      "hp": 64,
+      "id": "train-p2-normal-reward-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 3,
+      "reference_action_index": 4,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:cc5a09e34a0420a3d4388e15a585d38807dbfc2b4e2d42cd9b116ae9a3f35a84",
+      "round": 1,
+      "source_seal_id": "sha256:f084c8be09e08e5d6f7d593caad83021ec8d1ba87858348b22e6bacdb5d6e058",
+      "source_task": {
+        "key": "normal-05-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T005",
+        "seed_id": 410005
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 2,
+      "hp": 64,
+      "id": "train-p2-normal-reward-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 3,
+      "reference_action_index": 4,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:1211c549373119616b2848e063cfff84988cd3bd2e9ab1f1f1677ac0b656a839",
+      "round": 1,
+      "source_seal_id": "sha256:5d99af848767f87a032aa921d07be8906b29dc799d3842bbbe24d57b4bd78b60",
+      "source_task": {
+        "key": "normal-07-p2",
+        "partition": "train",
+        "player": 2,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T007",
+        "seed_id": 410007
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 9,
+      "hp": 51,
+      "id": "train-p3-elite-loss-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 105,
+      "reference_action_index": 4,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:526a9b23b267f5e68ec38ece8305cb254c1eb071dbe63895d767486f8a5849fd",
+      "round": 1,
+      "source_seal_id": "sha256:8ce635bde9baf48369fd6e8958b3a34da259d39c7070a146dcae2059d4d12d50",
+      "source_task": {
+        "key": "normal-11-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T011",
+        "seed_id": 410011
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 13,
+      "hp": 44,
+      "id": "train-p3-elite-loss-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 190,
+      "reference_action_index": 2,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:149a38c07fb566e13b48a2af8d54ee38dbc8eeef40441a862810bb68a2be722c",
+      "round": 1,
+      "source_seal_id": "sha256:8f7b3f0f4f03ac50ac96a5f10416ca1c31d05bcddb1bba9680a59f6a775a8a1c",
+      "source_task": {
+        "key": "normal-21-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T021",
+        "seed_id": 410021
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 15,
+      "hp": 82,
+      "id": "train-p3-elite-reward-1",
+      "max_hp": 87,
+      "prefix_native_deliveries": 179,
+      "reference_action_index": 2,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:8edfb87c55378fae8a0170b2d7d16e6de8ca788481a9ea8499b814b006ad6d03",
+      "round": 1,
+      "source_seal_id": "sha256:d3ca6ce325d5e2ea5fd8890054d633d9ca11e6d9632a8a4ba43688ae5472f366",
+      "source_task": {
+        "key": "normal-02-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T002",
+        "seed_id": 410002
+      }
+    },
+    {
+      "control": false,
+      "encounter": "elite",
+      "floor": 9,
+      "hp": 69,
+      "id": "train-p3-elite-reward-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 90,
+      "reference_action_index": 1,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:56007f77b206828cc78ac1c3567e9fa43fa00dffd87803741c055986b35d1c1d",
+      "round": 1,
+      "source_seal_id": "sha256:f356a85b206959fca472c8e50c18223fe918577feed308ff5c48d62082fcb057",
+      "source_task": {
+        "key": "normal-17-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T017",
+        "seed_id": 410017
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 6,
+      "hp": 48,
+      "id": "train-p3-normal-loss-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 102,
+      "reference_action_index": 3,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:3b18556c01a20586be3d9ef10d3ff64d0854f0d492f962166bef93e6a6b5ecc6",
+      "round": 1,
+      "source_seal_id": "sha256:e93a9363d20d3996b195416b0c78bbd111b7c0c73dce4e5c9a90f89993199ab3",
+      "source_task": {
+        "key": "normal-01-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T001",
+        "seed_id": 410001
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 6,
+      "hp": 42,
+      "id": "train-p3-normal-loss-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 124,
+      "reference_action_index": 7,
+      "reference_room_outcome": "loss",
+      "root_input_id": "sha256:361832f721cefc88de6624c228ef0120b22597a43c707a4441df15837f10f927",
+      "round": 1,
+      "source_seal_id": "sha256:81b88973b0daee05effc098d073b7c265a21c419ade209506d662b930fffc86b",
+      "source_task": {
+        "key": "normal-03-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T003",
+        "seed_id": 410003
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 2,
+      "hp": 80,
+      "id": "train-p3-normal-reward-1",
+      "max_hp": 80,
+      "prefix_native_deliveries": 4,
+      "reference_action_index": 1,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:aa1903522b62f88dd2a22e85f813c6db512130f3316f4a3b337a1003a9dae2a1",
+      "round": 1,
+      "source_seal_id": "sha256:9f28b439d9558cf90856053fa98dfb46bf6e4d7e90025bc0a61e1625d880c538",
+      "source_task": {
+        "key": "normal-08-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T008",
+        "seed_id": 410008
+      }
+    },
+    {
+      "control": false,
+      "encounter": "normal",
+      "floor": 2,
+      "hp": 64,
+      "id": "train-p3-normal-reward-2",
+      "max_hp": 80,
+      "prefix_native_deliveries": 3,
+      "reference_action_index": 1,
+      "reference_room_outcome": "reward",
+      "root_input_id": "sha256:e0fabb00abadf9a1c6826a892c9e3fa013bf79264d7d67d4259c84527fb2a146",
+      "round": 1,
+      "source_seal_id": "sha256:bf2987cd98b4408adf3f097ae71ab0b59a4491448892ff1f1351603ac322e859",
+      "source_task": {
+        "key": "normal-09-p3",
+        "partition": "train",
+        "player": 3,
+        "round": 1,
+        "seed": "SP1RESH1FTA8CV1T009",
+        "seed_id": 410009
+      }
+    }
+  ],
+  "sampling_audit": {
+    "path": "artifacts/native-a8-sampling/assessment-v1-1794256498012401000/report.json",
+    "report_id": "sha256:bcbf011f31a7d8c6d85315a62682be87be7f5735a2f6e65d29657d5ffef2dac7",
+    "sha256": "2c22d2b122c9eaa247872b450c0f25daf8a0e8721dd63d1fb57d1ba4e361d162"
+  },
+  "schema_version": "native-a8-opening-contrast-v1",
+  "study": [
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-elite-loss-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-loss-1",
+      "seed": "SP1RESH1FTA8CV1T004"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-elite-loss-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-loss-1",
+      "seed": "SP1RESH1FTA8CV1T004"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-elite-loss-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-loss-2",
+      "seed": "SP1RESH1FTA8CV1T019"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-elite-loss-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-loss-2",
+      "seed": "SP1RESH1FTA8CV1T019"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-elite-reward-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-reward-1",
+      "seed": "SP1RESH1FTA8CV1T010"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-elite-reward-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-reward-1",
+      "seed": "SP1RESH1FTA8CV1T010"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-elite-reward-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-reward-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-elite-reward-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-elite-reward-2",
+      "seed": "SP1RESH1FTA8CV1T018"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-normal-loss-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-loss-1",
+      "seed": "SP1RESH1FTA8CV1T006"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-normal-loss-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-loss-1",
+      "seed": "SP1RESH1FTA8CV1T006"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-normal-loss-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-loss-2",
+      "seed": "SP1RESH1FTA8CV1T016"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-normal-loss-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-loss-2",
+      "seed": "SP1RESH1FTA8CV1T016"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-normal-reward-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T005"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-normal-reward-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T005"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p2-normal-reward-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-reward-2",
+      "seed": "SP1RESH1FTA8CV1T007"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p2-normal-reward-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 2,
+      "root": "train-p2-normal-reward-2",
+      "seed": "SP1RESH1FTA8CV1T007"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-elite-loss-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-loss-1",
+      "seed": "SP1RESH1FTA8CV1T011"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-elite-loss-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-loss-1",
+      "seed": "SP1RESH1FTA8CV1T011"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-elite-loss-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-loss-2",
+      "seed": "SP1RESH1FTA8CV1T021"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-elite-loss-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-loss-2",
+      "seed": "SP1RESH1FTA8CV1T021"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-elite-reward-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-reward-1",
+      "seed": "SP1RESH1FTA8CV1T002"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-elite-reward-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-reward-1",
+      "seed": "SP1RESH1FTA8CV1T002"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-elite-reward-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-reward-2",
+      "seed": "SP1RESH1FTA8CV1T017"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-elite-reward-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-elite-reward-2",
+      "seed": "SP1RESH1FTA8CV1T017"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-normal-loss-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-loss-1",
+      "seed": "SP1RESH1FTA8CV1T001"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-normal-loss-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-loss-1",
+      "seed": "SP1RESH1FTA8CV1T001"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-normal-loss-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-loss-2",
+      "seed": "SP1RESH1FTA8CV1T003"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-normal-loss-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-loss-2",
+      "seed": "SP1RESH1FTA8CV1T003"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-normal-reward-1-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T008"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-normal-reward-1-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-reward-1",
+      "seed": "SP1RESH1FTA8CV1T008"
+    },
+    {
+      "arm": "standard",
+      "draw": 0,
+      "key": "train-p3-normal-reward-2-draw-0",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-reward-2",
+      "seed": "SP1RESH1FTA8CV1T009"
+    },
+    {
+      "arm": "standard",
+      "draw": 1,
+      "key": "train-p3-normal-reward-2-draw-1",
+      "partition": "opening_training_only",
+      "player": 3,
+      "root": "train-p3-normal-reward-2",
+      "seed": "SP1RESH1FTA8CV1T009"
+    }
+  ],
+  "turn_audit": {
+    "path": "artifacts/native-a8-turn-rescue/assessment-v1-1794269728053855000/report.json",
+    "report_id": "sha256:d3845cb7d21ae393bfdf411765841105629a623d25c140f31c6d438ecf6ed0b5",
+    "sha256": "ebd4e2966f23a6a4716cd1a07c3ff7591d4706df9fe458981b445cc947468f9f"
+  },
+  "workspace": "artifacts/native-a8-opening-contrast/collection-v1"
+}

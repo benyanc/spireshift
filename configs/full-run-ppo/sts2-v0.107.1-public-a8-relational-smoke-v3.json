@@ -1,0 +1,77 @@
+{
+  "config_id": "sha256:dc8363da4fe945fba93657b5e57e24e46d441f434943d6b6a26af1ec5f7edbc6",
+  "inputs": {
+    "admission_report": {
+      "id": "sha256:c7220a673444c266f5fc97a9e5fea3ece5da9f6013ffafbe65efdf3c10cdcfbf",
+      "path": "docs/evidence/public-a8-policy-admission-v2.json"
+    },
+    "ruleset_manifest": {
+      "id": "sha256:b626c146fbb41dc5370a7e4b6fd773279288df2065c3def3989c238c9a67042f",
+      "path": "manifests/patches/sts2-v0.107.1-evangambit-public-a8-v2-admitted.json"
+    },
+    "split_manifest": {
+      "id": "sha256:4385df70a77e71623e90a24e8abeaf309f770e2db0886ef1fb5da9d29119b2d6",
+      "path": "manifests/splits/sts2-v0.107.1-public-a8-seeds-300000-307999-v2.json"
+    },
+    "training_spec": {
+      "id": "sha256:871689210e35d3068f944e3c073aa59bfae26eff6ed36f3836b3106dfa751b1d",
+      "path": "configs/training-objective/sts2-v0.107.1-public-a8-bootstrap-v2.json"
+    },
+    "upstream_root": "artifacts/backend/evangambit-v0.107.1-full-run-repair-v5-retry3"
+  },
+  "learning": {
+    "actor_learning_rate": 0.001,
+    "clip": 0.2,
+    "confirmation_every": 1,
+    "confirmation_train_seeds": [
+      305939,
+      305940
+    ],
+    "development_seeds": [
+      305189,
+      305201
+    ],
+    "entropy_coefficient": 0.005,
+    "epochs": 1,
+    "gradient_clip": 5.0,
+    "maximum_rounds": 2,
+    "minibatch_decisions": 32,
+    "minimum_rounds": 2,
+    "plateau_confirmations": 2,
+    "rollout_seed_panels": [
+      [
+        305934,
+        305935
+      ],
+      [
+        305936,
+        305937
+      ]
+    ],
+    "sampling_rng_seed": 19,
+    "shuffle_rng_seed": 23,
+    "target_kl": 0.03,
+    "temperature": 1.0,
+    "value_coefficient": 0.5,
+    "value_learning_rate": 0.005
+  },
+  "maximum_decisions": 4096,
+  "network": {
+    "card_source_sha256": "da14226cda3b29421ef0b5f3cfd9b4d3f8179ebddb5a0094be2e014221b14305",
+    "dimension": 256,
+    "hidden_units": 16,
+    "initialization_seed": 0
+  },
+  "resource_limits": {
+    "cpu_seconds": 240,
+    "memory_bytes": 2000000000,
+    "storage_bytes": 100000000,
+    "wall_seconds": 180
+  },
+  "schema_version": "public-a8-relational-ppo-config-v3",
+  "workers": 2,
+  "prior_seed_inventory": {
+    "path": "docs/evidence/public-a8-prior-seed-inventory-v3.json",
+    "id": "sha256:74d5bd984c32383117eca552bfaf1d84ec897b8aa5d35386c0e4e2f5d7464bde"
+  }
+}

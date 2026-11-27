@@ -1,0 +1,1064 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-repeatability-report-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "starting-repeatability-report-v1"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "configuration": {
+      "$ref": "https://spireshift.dev/schemas/starting-repeatability-config-v1.json"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "ruleset_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "model_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "training_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "split_manifest_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "sources": {
+      "type": "object",
+      "properties": {
+        "historical_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "fresh_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "prior_seed_inventories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "bootstrap_dataset",
+                  "trajectory_preference_collection"
+                ]
+              },
+              "source_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "complete_run_seeds": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "uniqueItems": true
+              },
+              "verification_scope": {
+                "const": "content_addressed_seed_metadata_no_case_replay"
+              }
+            },
+            "required": [
+              "path",
+              "kind",
+              "source_id",
+              "complete_run_seeds",
+              "verification_scope"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "source_verification": {
+          "const": "saved_case_contracts_no_engine_replay"
+        }
+      },
+      "required": [
+        "historical_report_id",
+        "fresh_report_id",
+        "prior_seed_inventories",
+        "source_verification"
+      ],
+      "additionalProperties": false
+    },
+    "complete_run_roles": {
+      "type": "object",
+      "properties": {
+        "historical_fit": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "excluded_historical_selection": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "discovery": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "confirmation": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "historical_fit",
+        "excluded_historical_selection",
+        "discovery",
+        "confirmation"
+      ],
+      "additionalProperties": false
+    },
+    "historical_fitting_inventory": {
+      "type": "object",
+      "properties": {
+        "cases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "comparisons": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "groups": {
+          "type": "object",
+          "properties": {
+            "encoded_context": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "full_menu": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "exact_public_state": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "encoded_context",
+            "full_menu",
+            "exact_public_state"
+          ],
+          "additionalProperties": false
+        },
+        "floor_disagreement_groups": {
+          "type": "object",
+          "properties": {
+            "encoded_context": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "full_menu": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "exact_public_state": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "encoded_context",
+            "full_menu",
+            "exact_public_state"
+          ],
+          "additionalProperties": false
+        },
+        "option_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "cases",
+        "comparisons",
+        "groups",
+        "floor_disagreement_groups",
+        "option_ids"
+      ],
+      "additionalProperties": false
+    },
+    "collection_summary": {
+      "$ref": "https://spireshift.dev/schemas/starting-option-evidence-report-v1.json#/properties/summary"
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/comparison"
+      }
+    },
+    "strata": {
+      "type": "object",
+      "properties": {
+        "encoded_context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "full_menu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "exact_public_state": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        }
+      },
+      "required": [
+        "encoded_context",
+        "full_menu",
+        "exact_public_state"
+      ],
+      "additionalProperties": false
+    },
+    "confirmation": {
+      "type": "object",
+      "properties": {
+        "encoded_context": {
+          "type": "object",
+          "properties": {
+            "strong": {
+              "$ref": "#/$defs/confirmation"
+            },
+            "all_eligible": {
+              "$ref": "#/$defs/confirmation"
+            }
+          },
+          "required": [
+            "strong",
+            "all_eligible"
+          ],
+          "additionalProperties": false
+        },
+        "full_menu": {
+          "type": "object",
+          "properties": {
+            "strong": {
+              "$ref": "#/$defs/confirmation"
+            },
+            "all_eligible": {
+              "$ref": "#/$defs/confirmation"
+            }
+          },
+          "required": [
+            "strong",
+            "all_eligible"
+          ],
+          "additionalProperties": false
+        },
+        "exact_public_state": {
+          "type": "object",
+          "properties": {
+            "strong": {
+              "$ref": "#/$defs/confirmation"
+            },
+            "all_eligible": {
+              "$ref": "#/$defs/confirmation"
+            }
+          },
+          "required": [
+            "strong",
+            "all_eligible"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "encoded_context",
+        "full_menu",
+        "exact_public_state"
+      ],
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "supported",
+            "unsupported",
+            "inconclusive"
+          ]
+        },
+        "scope": {
+          "const": "auxiliary_strong_preference_pooling_on_matched_public_strata"
+        },
+        "coverage_checks": {
+          "type": "object",
+          "properties": {
+            "all_fresh_runs_terminal_and_complete": {
+              "type": "boolean"
+            },
+            "replicated_pair_coverage": {
+              "type": "boolean"
+            },
+            "independent_confirmation_coverage": {
+              "type": "boolean"
+            },
+            "strong_confirmation_coverage": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "all_fresh_runs_terminal_and_complete",
+            "replicated_pair_coverage",
+            "independent_confirmation_coverage",
+            "strong_confirmation_coverage"
+          ],
+          "additionalProperties": false
+        },
+        "primary_level": {
+          "const": "encoded_context"
+        },
+        "primary_target": {
+          "const": "strong"
+        },
+        "chance_reference": {
+          "const": 0.5
+        },
+        "next_step": {
+          "enum": [
+            "propose_separately_frozen_training_and_fresh_confirmation",
+            "stop_starting_choice_experiment_return_to_combat_run_level_foundation"
+          ]
+        },
+        "automatic_extension_allowed": {
+          "const": false
+        },
+        "automatic_training_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "status",
+        "scope",
+        "coverage_checks",
+        "primary_level",
+        "primary_target",
+        "chance_reference",
+        "next_step",
+        "automatic_extension_allowed",
+        "automatic_training_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "terminal_victories": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "independent_unit": {
+      "const": "complete_run_seed"
+    },
+    "futures_per_option": {
+      "const": 1
+    },
+    "hidden_state_resampling": {
+      "const": false
+    },
+    "optimizer_steps": {
+      "const": 0
+    },
+    "games_replayed_by_analysis": {
+      "const": 0
+    },
+    "training_started": {
+      "const": false
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "train_only_fixed_policy_starting_preference_repeatability"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "configuration",
+    "objective_id",
+    "ruleset_manifest_id",
+    "model_id",
+    "training_report_id",
+    "split_manifest_id",
+    "sources",
+    "complete_run_roles",
+    "historical_fitting_inventory",
+    "collection_summary",
+    "comparisons",
+    "strata",
+    "confirmation",
+    "decision",
+    "terminal_victories",
+    "independent_unit",
+    "futures_per_option",
+    "hidden_state_resampling",
+    "optimizer_steps",
+    "games_replayed_by_analysis",
+    "training_started",
+    "checkpoint_promoted",
+    "claim_scope",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "comparison": {
+      "type": "object",
+      "properties": {
+        "run_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "role": {
+          "enum": [
+            "historical_fit",
+            "discovery",
+            "confirmation"
+          ]
+        },
+        "case_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "comparison_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "option_pair": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "ordered_menu": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "encoded_context_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "full_menu_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "exact_public_state_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "deciding_rank_component": {
+          "enum": [
+            null,
+            "victory",
+            "act1_cleared",
+            "boss_reached",
+            "maximum_floor",
+            "encounter_cleared",
+            "enemy_hp_defeated_fraction_ppm",
+            "player_hp_fraction_ppm",
+            "last_actionable_player_hp_fraction_ppm",
+            "distinct_public_states_on_floor"
+          ]
+        },
+        "label": {
+          "enum": [
+            "strict",
+            "tied"
+          ]
+        },
+        "eligible_policy_preference": {
+          "type": "boolean"
+        },
+        "all_eligible_sign": {
+          "enum": [
+            -1,
+            0,
+            1
+          ]
+        },
+        "strong_sign": {
+          "enum": [
+            -1,
+            0,
+            1
+          ]
+        },
+        "floor_sign": {
+          "enum": [
+            -1,
+            0,
+            1
+          ]
+        },
+        "paired_rank_differences": {
+          "type": "object",
+          "properties": {
+            "victory": {
+              "type": "number"
+            },
+            "act1_cleared": {
+              "type": "number"
+            },
+            "boss_reached": {
+              "type": "number"
+            },
+            "maximum_floor": {
+              "type": "number"
+            },
+            "encounter_cleared": {
+              "type": "number"
+            },
+            "enemy_hp_defeated_fraction_ppm": {
+              "type": "number"
+            },
+            "player_hp_fraction_ppm": {
+              "type": "number"
+            },
+            "last_actionable_player_hp_fraction_ppm": {
+              "type": "number"
+            },
+            "distinct_public_states_on_floor": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "victory",
+            "act1_cleared",
+            "boss_reached",
+            "maximum_floor",
+            "encounter_cleared",
+            "enemy_hp_defeated_fraction_ppm",
+            "player_hp_fraction_ppm",
+            "last_actionable_player_hp_fraction_ppm",
+            "distinct_public_states_on_floor"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "run_seed",
+        "role",
+        "case_id",
+        "comparison_id",
+        "option_pair",
+        "ordered_menu",
+        "encoded_context_id",
+        "full_menu_id",
+        "exact_public_state_id",
+        "deciding_rank_component",
+        "label",
+        "eligible_policy_preference",
+        "all_eligible_sign",
+        "strong_sign",
+        "floor_sign",
+        "paired_rank_differences"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "independent_runs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "pairs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "components": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "None",
+              "victory",
+              "act1_cleared",
+              "boss_reached",
+              "maximum_floor",
+              "encounter_cleared",
+              "enemy_hp_defeated_fraction_ppm",
+              "player_hp_fraction_ppm",
+              "last_actionable_player_hp_fraction_ppm",
+              "distinct_public_states_on_floor"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "floor_positive_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "floor_negative_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "floor_tied_runs": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "independent_runs",
+        "pairs",
+        "components",
+        "floor_positive_runs",
+        "floor_negative_runs",
+        "floor_tied_runs"
+      ],
+      "additionalProperties": false
+    },
+    "direction": {
+      "type": "object",
+      "properties": {
+        "positive_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "negative_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tied_or_ineligible_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "strict_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "majority_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "direction": {
+          "enum": [
+            -1,
+            1,
+            null
+          ]
+        }
+      },
+      "required": [
+        "positive_runs",
+        "negative_runs",
+        "tied_or_ineligible_runs",
+        "strict_runs",
+        "majority_fraction",
+        "direction"
+      ],
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "option_pair": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "matching_context_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "ordered_menus": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "exact_public_states": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "discovery": {
+          "$ref": "#/$defs/counts"
+        },
+        "confirmation": {
+          "$ref": "#/$defs/counts"
+        },
+        "discovery_targets": {
+          "type": "object",
+          "properties": {
+            "strong": {
+              "$ref": "#/$defs/direction"
+            },
+            "all_eligible": {
+              "$ref": "#/$defs/direction"
+            }
+          },
+          "required": [
+            "strong",
+            "all_eligible"
+          ],
+          "additionalProperties": false
+        },
+        "floor_direction_disagreement_in_discovery": {
+          "type": "boolean"
+        },
+        "floor_direction_disagreement_in_confirmation": {
+          "type": "boolean"
+        },
+        "paired_difference_means_by_role": {
+          "type": "object",
+          "properties": {
+            "discovery": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "victory": {
+                      "type": "number"
+                    },
+                    "act1_cleared": {
+                      "type": "number"
+                    },
+                    "boss_reached": {
+                      "type": "number"
+                    },
+                    "maximum_floor": {
+                      "type": "number"
+                    },
+                    "encounter_cleared": {
+                      "type": "number"
+                    },
+                    "enemy_hp_defeated_fraction_ppm": {
+                      "type": "number"
+                    },
+                    "player_hp_fraction_ppm": {
+                      "type": "number"
+                    },
+                    "last_actionable_player_hp_fraction_ppm": {
+                      "type": "number"
+                    },
+                    "distinct_public_states_on_floor": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "victory",
+                    "act1_cleared",
+                    "boss_reached",
+                    "maximum_floor",
+                    "encounter_cleared",
+                    "enemy_hp_defeated_fraction_ppm",
+                    "player_hp_fraction_ppm",
+                    "last_actionable_player_hp_fraction_ppm",
+                    "distinct_public_states_on_floor"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "confirmation": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "victory": {
+                      "type": "number"
+                    },
+                    "act1_cleared": {
+                      "type": "number"
+                    },
+                    "boss_reached": {
+                      "type": "number"
+                    },
+                    "maximum_floor": {
+                      "type": "number"
+                    },
+                    "encounter_cleared": {
+                      "type": "number"
+                    },
+                    "enemy_hp_defeated_fraction_ppm": {
+                      "type": "number"
+                    },
+                    "player_hp_fraction_ppm": {
+                      "type": "number"
+                    },
+                    "last_actionable_player_hp_fraction_ppm": {
+                      "type": "number"
+                    },
+                    "distinct_public_states_on_floor": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "victory",
+                    "act1_cleared",
+                    "boss_reached",
+                    "maximum_floor",
+                    "encounter_cleared",
+                    "enemy_hp_defeated_fraction_ppm",
+                    "player_hp_fraction_ppm",
+                    "last_actionable_player_hp_fraction_ppm",
+                    "distinct_public_states_on_floor"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "discovery",
+            "confirmation"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "group_id",
+        "option_pair",
+        "matching_context_id",
+        "ordered_menus",
+        "exact_public_states",
+        "discovery",
+        "confirmation",
+        "discovery_targets",
+        "floor_direction_disagreement_in_discovery",
+        "floor_direction_disagreement_in_confirmation",
+        "paired_difference_means_by_role"
+      ],
+      "additionalProperties": false
+    },
+    "interval": {
+      "type": "object",
+      "properties": {
+        "independent_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mean_agreement": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "run_scores": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[0-9]+$"
+          },
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "alpha": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "method": {
+          "const": "independent_run_hoeffding_v1"
+        }
+      },
+      "required": [
+        "independent_runs",
+        "mean_agreement",
+        "interval",
+        "run_scores",
+        "alpha",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "confirmation": {
+      "type": "object",
+      "properties": {
+        "qualified_discovery_groups": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "confirmed_groups": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "covered_strong_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "paired_observations": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tie_score": {
+          "const": 0.5
+        },
+        "interval": {
+          "$ref": "#/$defs/interval"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "run_seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "comparison_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "group_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "discovery_direction": {
+                "enum": [
+                  -1,
+                  1
+                ]
+              },
+              "observed_direction": {
+                "enum": [
+                  -1,
+                  0,
+                  1
+                ]
+              },
+              "agreement_score": {
+                "enum": [
+                  0,
+                  0.5,
+                  1
+                ]
+              }
+            },
+            "required": [
+              "run_seed",
+              "comparison_id",
+              "group_id",
+              "discovery_direction",
+              "observed_direction",
+              "agreement_score"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "qualified_discovery_groups",
+        "confirmed_groups",
+        "covered_strong_runs",
+        "paired_observations",
+        "tie_score",
+        "interval",
+        "observations"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

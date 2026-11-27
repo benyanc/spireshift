@@ -1,0 +1,130 @@
+{
+  "adaptive_controller_allowed": false,
+  "assessment": "implementation_and_short_native_control_passed_owner_pilot_not_started",
+  "automatic_training_follows": false,
+  "checkpoint_promoted": false,
+  "control": {
+    "all_turn_boundaries_replayed_exactly": true,
+    "candidate_plans": 12,
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "completed_units": 39,
+    "config_id": "sha256:1244ffaf60551be7372a453d80552804c8688996deb1a110a5c8cf0086ae358a",
+    "distinct_source_hidden_worlds": 2,
+    "duplicate_public_traces_identical": true,
+    "failed_branches": 0,
+    "game_apps_created": 0,
+    "native_nested_selection_coverage_established_by_this_control": false,
+    "nested_selection_decisions_in_comparison_samples": 0,
+    "plan_decision_range": [
+      1,
+      5
+    ],
+    "planned_comparison_branches": 26,
+    "planned_proposals": 13,
+    "production_optimizer_steps": 0,
+    "report_id": "sha256:08ebd1cc270af431fe044d6da8a0b9d85b4507fac1d786a19d93308451ddc4df",
+    "skipped_branches": 0
+  },
+  "control_cpu_seconds_sum": 108.72175288500003,
+  "control_final_storage_bytes_cumulative_not_summed": 66458379,
+  "control_peak_resident_memory_bytes": 390594560,
+  "control_resources": [
+    {
+      "cpu_seconds": 94.68657149500002,
+      "final_storage_bytes": 59210701,
+      "path": "artifacts/resources/native-complete-turn-teacher-control-v1-1.json",
+      "peak_resident_memory_bytes": 390594560,
+      "report_id": "sha256:02d5541286aeef0f2c1fa1f14fc4c2f940e268672c36db8a2b1b5e4388ab90af",
+      "wall_seconds": 117.73567550000735
+    },
+    {
+      "cpu_seconds": 14.035181390000002,
+      "final_storage_bytes": 66458379,
+      "path": "artifacts/resources/native-complete-turn-teacher-control-v1-2.json",
+      "peak_resident_memory_bytes": 387923968,
+      "report_id": "sha256:51b104ef443fc3af6e2bad713d199b962b39b65364a18831bee25eb042ccb3fe",
+      "wall_seconds": 24.63183050020598
+    }
+  ],
+  "control_wall_seconds_sum": 142.36750600021333,
+  "evidence_id": "sha256:0900a5c1bb878e68e973b6089c6ee3b09880588506857da91c24bdfe2d39ca58",
+  "generation": "greedy_reference_plus_one_sampled_complete_turn_per_legal_first_action_v1",
+  "ordinary_PPO_eligible": false,
+  "pilot": {
+    "config_id": "sha256:43f7de10c4b6fd6ddacc047ccaa0386222194563a37106db10cf2851f5fc1752",
+    "continuation_streams_per_plan": 8,
+    "continuation_temperature": 0.8,
+    "maximum_scored_branches": 520,
+    "maximum_total_native_attempts": 585,
+    "no_host_preflight_passed": true,
+    "planned": true,
+    "proposal_temperature": 1.2,
+    "proposals": 65,
+    "roots": 8,
+    "started": false
+  },
+  "players_preserved": [
+    {
+      "Adam_steps": 5658,
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+      "state_sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63"
+    },
+    {
+      "Adam_steps": 6045,
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+      "state_sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c"
+    }
+  ],
+  "post_check_id": "sha256:6fb3f27d5c2d35f602df8019e4f82be14e7390beeb0763d5160c9a6136613028",
+  "protected_original_and_control_files_verified": 30487,
+  "protected_original_files_verified": 28943,
+  "quality_gain_established": false,
+  "repository_check": {
+    "CSharp_contract_passed": true,
+    "cpu_seconds": 106.06220675100002,
+    "new_tests": 52,
+    "peak_resident_memory_bytes": 343310336,
+    "report_id": "sha256:a5cdb042ee095883caf1d675f70c6c961aa2c8e242c75406dee1487ccf713641",
+    "strict_typechecked_files": 396,
+    "tests_passed": 1979,
+    "wall_seconds": 118.44426279212348
+  },
+  "saved_audit_resource": {
+    "cpu_seconds": 25.898282697000003,
+    "peak_resident_memory_bytes": 157188096,
+    "report_id": "sha256:838bc94248a689a4cb2afacb97f6e35f2415d9b5be47cdd5173253431904af03",
+    "wall_seconds": 32.523804208030924
+  },
+  "saved_control_audit": {
+    "all_action_tables_exactly_reconstructed": true,
+    "auditor_sha256": "1231d8b72630b332597de0a911d97977be4e779b614b0db9628f88f4b8bd80f6",
+    "branch_receipts_verified": 39,
+    "checkpoint_promoted": false,
+    "continuation_probabilities_reconstructed": true,
+    "native_delivery_semantically_reaudited": false,
+    "native_journal_bytes_verified": true,
+    "new_games": 0,
+    "optimizer_steps": 0,
+    "ordinary_PPO_eligible": false,
+    "original_players_and_full_Adam_unchanged": true,
+    "proposal_selection_outcome_blind": true,
+    "public_decisions_reconstructed": 6077,
+    "report_id": "sha256:3dcce6d7f613f5aafe026acc65b0c9a9b52268282efade7590da4eacb2a99386",
+    "schema_version": "native-complete-turn-teacher-audit-v1",
+    "source_hidden_worlds": 2,
+    "source_report_id": "sha256:08ebd1cc270af431fe044d6da8a0b9d85b4507fac1d786a19d93308451ddc4df",
+    "turn_boundaries_and_plans_reconstructed": true
+  },
+  "schema_version": "native-complete-turn-teacher-portable-v1",
+  "scope": "public_student_inputs_original_fixed_hidden_world_teacher"
+}

@@ -1,0 +1,620 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/combat-policy-replay-diagnostic-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "combat-policy-replay-diagnostic-v1"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "config": {
+      "$ref": "combat-policy-replay-diagnostic-config-v1.json"
+    },
+    "confirmation_config_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "comparison_report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "foundation_report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "fitting_card_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "signal_card_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "foundation_report_id",
+        "fitting_card_ids",
+        "signal_card_ids"
+      ],
+      "additionalProperties": false
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "seed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "policy_kind": {
+            "enum": [
+              "production_checkpoint",
+              "reference_production_checkpoint"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "case_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "seed",
+          "policy_kind",
+          "path",
+          "case_id"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "case_denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified_replays": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mismatched_replays": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_replays": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arms": {
+          "type": "object",
+          "properties": {
+            "production_checkpoint": {
+              "type": "object",
+              "properties": {
+                "verified_replays": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "decisions": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "combat_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "shadow_failures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "binding_failures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "noncombat_score_drift_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end_turn_with_legal_card_or_potion_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "terminal_defeats_after_end_turn": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "states_with_cards_absent_from_fit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "states_with_cards_absent_from_reliable_signal": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "choice_disagreements_by_phase": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "reference_to_candidate_combat_kind_changes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              "required": [
+                "verified_replays",
+                "decisions",
+                "combat_states",
+                "shadow_failures",
+                "binding_failures",
+                "noncombat_score_drift_states",
+                "end_turn_with_legal_card_or_potion_states",
+                "terminal_defeats_after_end_turn",
+                "states_with_cards_absent_from_fit",
+                "states_with_cards_absent_from_reliable_signal",
+                "choice_disagreements_by_phase",
+                "reference_to_candidate_combat_kind_changes"
+              ],
+              "additionalProperties": false
+            },
+            "reference_production_checkpoint": {
+              "type": "object",
+              "properties": {
+                "verified_replays": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "decisions": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "combat_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "shadow_failures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "binding_failures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "noncombat_score_drift_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end_turn_with_legal_card_or_potion_states": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "terminal_defeats_after_end_turn": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "states_with_cards_absent_from_fit": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "states_with_cards_absent_from_reliable_signal": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "choice_disagreements_by_phase": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "reference_to_candidate_combat_kind_changes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              "required": [
+                "verified_replays",
+                "decisions",
+                "combat_states",
+                "shadow_failures",
+                "binding_failures",
+                "noncombat_score_drift_states",
+                "end_turn_with_legal_card_or_potion_states",
+                "terminal_defeats_after_end_turn",
+                "states_with_cards_absent_from_fit",
+                "states_with_cards_absent_from_reliable_signal",
+                "choice_disagreements_by_phase",
+                "reference_to_candidate_combat_kind_changes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "production_checkpoint",
+            "reference_production_checkpoint"
+          ],
+          "additionalProperties": false
+        },
+        "pairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "first_difference": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "aligned_policy_action_difference"
+                      },
+                      "decision_index": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "state_hash": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "decision_type": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "candidate_action_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "reference_action_id": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "decision_index",
+                      "state_hash",
+                      "decision_type",
+                      "candidate_action_id",
+                      "reference_action_id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "environment_or_menu_divergence_before_action_difference",
+                          "inconsistent_shadow_scores_on_identical_input"
+                        ]
+                      },
+                      "decision_index": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "decision_index"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "length_divergence_without_prior_action_difference",
+                          "identical_public_action_trajectory",
+                          "unverified_replay_pair"
+                        ]
+                      },
+                      "decision_index": {
+                        "type": "null"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "decision_index"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "saved_maximum_floor_difference": {
+                "type": "number"
+              },
+              "candidate_death_evidence": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "last_combat_decision_indices": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "maxItems": 8
+                      },
+                      "last_completed_decision_index": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "last_completed_decision_type": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "last_completed_action_id": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "terminal_defeat": {
+                        "type": "boolean"
+                      },
+                      "player_hp_before_last_transition": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "player_hp_after_last_transition": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "last_transition_hp_change": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "last_combat_decision_indices",
+                      "last_completed_decision_index",
+                      "last_completed_decision_type",
+                      "last_completed_action_id",
+                      "terminal_defeat",
+                      "player_hp_before_last_transition",
+                      "player_hp_after_last_transition",
+                      "last_transition_hp_change"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reference_death_evidence": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "last_combat_decision_indices": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "maxItems": 8
+                      },
+                      "last_completed_decision_index": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "last_completed_decision_type": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "last_completed_action_id": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "terminal_defeat": {
+                        "type": "boolean"
+                      },
+                      "player_hp_before_last_transition": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "player_hp_after_last_transition": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "last_transition_hp_change": {
+                        "anyOf": [
+                          {
+                            "type": "integer"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "last_combat_decision_indices",
+                      "last_completed_decision_index",
+                      "last_completed_decision_type",
+                      "last_completed_action_id",
+                      "terminal_defeat",
+                      "player_hp_before_last_transition",
+                      "player_hp_after_last_transition",
+                      "last_transition_hp_change"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "seed",
+              "first_difference",
+              "saved_maximum_floor_difference",
+              "candidate_death_evidence",
+              "reference_death_evidence"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "analysis_integrity_pass": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "case_denominator",
+        "verified_replays",
+        "mismatched_replays",
+        "failed_replays",
+        "arms",
+        "pairs",
+        "analysis_integrity_pass"
+      ],
+      "additionalProperties": false
+    },
+    "claim_scope": {
+      "const": "inspected_train_confirmation_public_replay_diagnosis_no_new_strength_claim"
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "checkpoint_promoted": {
+          "const": false
+        },
+        "foundation_ready": {
+          "const": false
+        },
+        "adaptive_controller_allowed": {
+          "const": false
+        },
+        "next_step": {
+          "const": "review_public_choice_evidence_before_any_new_experiment"
+        }
+      },
+      "required": [
+        "checkpoint_promoted",
+        "foundation_ready",
+        "adaptive_controller_allowed",
+        "next_step"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "config",
+    "confirmation_config_id",
+    "comparison_report_id",
+    "coverage",
+    "cases",
+    "summary",
+    "claim_scope",
+    "decision"
+  ],
+  "additionalProperties": false
+}

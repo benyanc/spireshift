@@ -1,0 +1,168 @@
+{
+  "schema_version": "native-mixed-handoff-completed-evidence-v1",
+  "status": "twelve_mixed_mechanisms_and_merchant_map_probe_verified",
+  "owner_result": {
+    "path": "artifacts/native-mixed-handoffs/v7/control-v1/full-result-1795469093932179000.json",
+    "sha256": "89998a044cb1c736ef98cd59238a0e5ae8a8e52d538ca0cb1f7b0e2fd8c2024a",
+    "report_id": "sha256:add7c17d81349cbeb0462d41f922b10584d08aedc5deb768aca496ea366ca11b"
+  },
+  "owner_resources": {
+    "path": "artifacts/native-mixed-handoffs/v7/control-v1/full-resources-1795468865176967000.json",
+    "sha256": "7dfac6490e25d1c02d17442bfd038ec7869a7fd1eae295ffefa4a776bd9c4597",
+    "report_id": "sha256:556a8186f344139435d6921521dc6ab5dbf539e33e48845efae8e5a418f1f57c"
+  },
+  "saved_assessment": {
+    "path": "artifacts/native-mixed-handoffs/v7/owner-assessment-v1/report.json",
+    "sha256": "08d64940744622bb36856e221d54d1c053306e9d74d1d78e50346bd3ca110369",
+    "report_id": "sha256:1d2e3456f6ac4959e39a824ca46c3df8bdbc28591754789f08cc6fb048247576"
+  },
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-mixed-handoffs-v7.json",
+    "sha256": "d755c4390cd49276d5a544685d4743e045e4b525c7647090931d69c4b07fdc6b",
+    "config_id": "sha256:b8046ec28490a6c14f22c71594965d7bea5ec7baa79ebbf5d90e1eea45470f9e"
+  },
+  "current_main_mechanisms_verified": 12,
+  "additional_merchant_map_effect_probes": 1,
+  "current_verified_pairs": 13,
+  "linked_main_attempt_slots": 13,
+  "historical_main_mismatches": 1,
+  "unattempted_current_main_mechanisms": 0,
+  "matching_public_states": 114,
+  "actual_sdk_choices_reconstructed": 101,
+  "native_game_deliveries": 100,
+  "native_local_answer_factors": 1,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "current_cases": [
+    {
+      "key": "reward-discard-left",
+      "pair_report_id": "sha256:082495e7865fc6f0401edf9f03e4e8ae9acd67272278cfd767ff9be933f66f7b",
+      "native_case_report_id": "sha256:69c3876ba00ba3f2b4e24738dc69d1b94dbeb23aa5bae2e946e122e03f3bf1aa"
+    },
+    {
+      "key": "courier-potion-restock",
+      "pair_report_id": "sha256:93b94b50a5302bd5c38250165d0641cc8e5ea42d153bb401763bdb6519f9a71d",
+      "native_case_report_id": "sha256:b5c8de57ffc5a72f20b8f48d57b5869d43472617674f17079502a2ef31ee944e"
+    },
+    {
+      "key": "rest-brew-smith-lift-return",
+      "pair_report_id": "sha256:e82d070f785676cced0029669e6cd8d197a778378e09c51a966c4fe338d9bf9a",
+      "native_case_report_id": "sha256:b2d2e7f6655f44858ee67c666247cb3751cddaece65f7508bbefee24f33fa35d"
+    },
+    {
+      "key": "reward-discard-right",
+      "pair_report_id": "sha256:6e05c4eb5c94d00b3ef016245abf3664049fefd81094262a6fe30bdfbdc1e309",
+      "native_case_report_id": "sha256:29f2cdd2a01032fb2286298c6726bc679be786fff8523d655920ac66a3890106"
+    },
+    {
+      "key": "reward-use-replace",
+      "pair_report_id": "sha256:ed431eee63b1d5fd962828a6d545177ca13554db5a29b6b1c7b5b1c13386eccc",
+      "native_case_report_id": "sha256:ede5e13bd079893af499475782a0da72ed39c2376d7f0afe4ce7abd022e7c798"
+    },
+    {
+      "key": "merchant-map-use",
+      "pair_report_id": "sha256:ec835963733bc21266392b1989f0128c4b4865220e7d9fc93b4d9b7773e759a4",
+      "native_case_report_id": "sha256:cbe128814de861060ede5afb6b0efc354061977c6f6fb9506105066a4ba937e3"
+    },
+    {
+      "key": "courier-card-restock",
+      "pair_report_id": "sha256:72ebec9c1019f274b77ef2704f715ca9be542e6391507fa8eca710459ac21906",
+      "native_case_report_id": "sha256:a89a7e35a001b849077d5d509e113b2d42e546161678e0bc9e763bbfaa3eafd2"
+    },
+    {
+      "key": "ordinary-potion-stock",
+      "pair_report_id": "sha256:db6660485b37555303d62063a0bfb5737a6e34c665c1ba991f428dc65267c597",
+      "native_case_report_id": "sha256:eeeaa487e17b01525bf2ac42516fa2de34c4d9cadd12eb81d0266f49c1213d62"
+    },
+    {
+      "key": "courier-relic-child",
+      "pair_report_id": "sha256:dd240b967f0b50ebe53ccc1e34a52edc1f3fba17e549e3f93aca6761d490c8a6",
+      "native_case_report_id": "sha256:8595aa33d7458da587cf24e2fe167ba34e46099f48273f159cde709b95cfc61a"
+    },
+    {
+      "key": "rest-cook-brew",
+      "pair_report_id": "sha256:1e32f9d4680e5396e3526cdc23b5bd07b1eb15a060f4213dc60fc455a33a6fb8",
+      "native_case_report_id": "sha256:c3c2a8d5eb536bada0e139fde6012634369c9481bf2c519a6d32db0106543904"
+    },
+    {
+      "key": "rest-no-tent-brew",
+      "pair_report_id": "sha256:9347d0b2f2911de86cccb4056f946bdeea9bc4d19d6c3cfc92f17be8c1b4f331",
+      "native_case_report_id": "sha256:80dc27fcc011d8121390ea78d32eaa693f21cb158f7b28835e71dfedf767f1e6"
+    },
+    {
+      "key": "rest-pillow-cap",
+      "pair_report_id": "sha256:7ee804c811e561ad5d050f512feab2538f06ea22520a8547a13a81ca3ed6f3b9",
+      "native_case_report_id": "sha256:c8a9e1fcd0195467998d2d453390f8a76fe00505476be110bf433bdfc7d59f85"
+    },
+    {
+      "key": "rest-spent-girya-brew",
+      "pair_report_id": "sha256:e8d0bc056984e38c7b4aeaf70250e8abf7e1c54dab944efa781e4a083355d2f1",
+      "native_case_report_id": "sha256:13989b893158a865b7f83b62c70a94516dc4be914a160d6d4192991f3979c347"
+    }
+  ],
+  "coverage_updates": [
+    {
+      "id": "map-exit-reenter-belt",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Reward, real-shop and rest travel chains verified; treasure and other providers remain open."
+    },
+    {
+      "id": "potions-full-reward-restore",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Both physical slots, discard/use, original pending reward and Brew during a rest selector verified; other grant providers remain open."
+    },
+    {
+      "id": "potions-target-transition",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Real merchant/map use and actual room travel verified; Fake Merchant remains separately unqualified."
+    },
+    {
+      "id": "rest-counters-next-room",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Third Girya use and absent option at the following rest verified; other newly acquired modifiers remain open."
+    },
+    {
+      "id": "rest-extra-offers",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Tent/Pillow, Cook/Smith/Brew, early exit, cancellation and HP-cap variants verified; Dig/Hatch acquisition children remain open."
+    },
+    {
+      "id": "shop-child-large-paired",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Kifuda purchase, ordered child, belt interleaving and Courier replenishment verified for the declared provider; other acquisitions remain open."
+    },
+    {
+      "id": "shop-belt-remove-restock",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Full-belt card restock, removal cancel/confirm and both current quotes verified; other discount hooks remain open."
+    },
+    {
+      "id": "reward-belt-child",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "Take/skip a card child while freeing either belt slot, then claim the original potion and sibling gold verified; other providers remain open."
+    },
+    {
+      "id": "input-fit-live-equality",
+      "status": "declared_subset_verified_broader_obligation_retained",
+      "scope": "New learner checks both copied models on all 114 complete mixed-menu states, with equal inference/PPO features and behavior likelihood; broader independent feature oracles remain open."
+    }
+  ],
+  "game_version": "0.111.0",
+  "game_revision": "41cef1ea",
+  "native_host_unchanged": 60,
+  "connector_unchanged": 36,
+  "converter_unchanged": 17,
+  "optimizer_updates_in_assessment": 0,
+  "gameplay_replayed_in_assessment": false,
+  "full_game_playing_strength_evaluated": false,
+  "official_live_qualification_granted": false,
+  "historical_failed_world_retried": false,
+  "all_mechanics_claimed_complete": false,
+  "next_priority": "qualified_normal_start_model_owned_PPO_on_copies_with_fresh_development_comparison"
+}

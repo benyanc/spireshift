@@ -1,0 +1,238 @@
+{
+  "actual_batch_size_training_comparison": false,
+  "adaptive_controller_allowed": false,
+  "analysis_result": {
+    "config_id": "sha256:9ee306d1116615494382ab887ebbbb9a40c9ac865cfd0ef36e9513db4d1399da",
+    "config_path": "configs/native-gradient/sts2-v0.111.0-a8-stream-recovery-v1.json",
+    "full_pool": {
+      "baseline_fits_only_own_group": true,
+      "choice_bearing_decisions": 19499,
+      "contribution_cancellation_ratio": 0.0758883495409402,
+      "data_gradient_norm": 0.006931689773445555,
+      "data_vs_total_cosine": 0.9367002637875452,
+      "decisions": 26060,
+      "entropy_gradient_norm": 0.0024836868573323762,
+      "entropy_to_data_norm_ratio": 0.35830900379400604,
+      "independent_games": 256,
+      "largest_game_contribution_norm_share": 0.01591462974954808,
+      "normalization_fits_only_own_group": true,
+      "raw_advantage_mean": 0.0003924959546097811,
+      "raw_advantage_std": 0.0036861084012376542
+    },
+    "production_reference": {
+      "checked_decisions": 549,
+      "checked_games": 4,
+      "covers_entire_pool": false,
+      "maximum_absolute_actor_gradient_error": 6.288372600415926e-17,
+      "optimizer_steps": 0,
+      "passed": true
+    },
+    "report_id": "sha256:8aae01b42d1ac0fa04ae9d83e09b1678611766416f521ea5716af811c416f4c6",
+    "report_path": "artifacts/native-gradient/sts2-v0.111.0-a8-stream-recovery-v1/gradient-report.json",
+    "source_model_id": "sha256:776f8af0338a8ef02c35cae1bdab49c8a6aa48287906b161659a64999f8bdb74",
+    "union_report_id": "sha256:0dadb308124895db89932f6febd113ebd0d59d776fb90f124c39ff565e4e257f"
+  },
+  "assessment_date": "2026-10-17",
+  "base_readiness_passed": false,
+  "batch_increase_alone_established_as_learning_repair": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "saved_recovered_TRAIN_gradient_geometry_at_one_behavior_model_not_learning_gain_or_population_inference",
+  "diagnostic_attempts_including_interruption": 257,
+  "diagnostic_pool_games": 256,
+  "disjoint_group_summaries": [
+    {
+      "data_agreement": {
+        "median": -0.027449661660448755,
+        "opposing_fraction": 0.53125,
+        "p10": -0.39144419280581655,
+        "p90": 0.3543381669227466,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "entropy_agreement": {
+        "median": 0.9840855691478896,
+        "opposing_fraction": 0.0,
+        "p10": 0.9771470784370362,
+        "p90": 0.9875693829820381,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "games_per_group": 4,
+      "total_agreement": {
+        "median": -0.0689637324501219,
+        "opposing_fraction": 0.53125,
+        "p10": -0.3544000363467959,
+        "p90": 0.32394808685330856,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      }
+    },
+    {
+      "data_agreement": {
+        "median": 0.0396490491963228,
+        "opposing_fraction": 0.46875,
+        "p10": -0.33462292485891626,
+        "p90": 0.3755091017972749,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "entropy_agreement": {
+        "median": 0.9925724240232565,
+        "opposing_fraction": 0.0,
+        "p10": 0.9859421856372272,
+        "p90": 0.9950401076668804,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "games_per_group": 8,
+      "total_agreement": {
+        "median": 0.01207238047938997,
+        "opposing_fraction": 0.4375,
+        "p10": -0.31492384936927514,
+        "p90": 0.3214161025317882,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      }
+    },
+    {
+      "data_agreement": {
+        "median": -0.09553421219545588,
+        "opposing_fraction": 0.59375,
+        "p10": -0.27608678118672775,
+        "p90": 0.39239320982384096,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "entropy_agreement": {
+        "median": 0.9964519629041633,
+        "opposing_fraction": 0.0,
+        "p10": 0.9951211124478755,
+        "p90": 0.9974026764733825,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "games_per_group": 16,
+      "total_agreement": {
+        "median": -0.09694516553340438,
+        "opposing_fraction": 0.625,
+        "p10": -0.31746532839834446,
+        "p90": 0.33573501607644163,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      }
+    },
+    {
+      "data_agreement": {
+        "median": -0.016683288712959498,
+        "opposing_fraction": 0.53125,
+        "p10": -0.22612772831021455,
+        "p90": 0.23952502178258808,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "entropy_agreement": {
+        "median": 0.9981328233756079,
+        "opposing_fraction": 0.0,
+        "p10": 0.9967928359718219,
+        "p90": 0.9985726619566456,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "games_per_group": 32,
+      "total_agreement": {
+        "median": -0.09434583929953537,
+        "opposing_fraction": 0.625,
+        "p10": -0.28420768484634373,
+        "p90": 0.2598571163108033,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      }
+    },
+    {
+      "data_agreement": {
+        "median": 0.02004518976307804,
+        "opposing_fraction": 0.5,
+        "p10": -0.33884803576191846,
+        "p90": 0.3391889268159006,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "entropy_agreement": {
+        "median": 0.9990040424126501,
+        "opposing_fraction": 0.0,
+        "p10": 0.998821442625701,
+        "p90": 0.9992455407386016,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "games_per_group": 64,
+      "total_agreement": {
+        "median": -0.05313151989157395,
+        "opposing_fraction": 0.59375,
+        "p10": -0.36563136847618477,
+        "p90": 0.25653949354444855,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      }
+    },
+    {
+      "data_agreement": {
+        "median": 0.06109071983268734,
+        "opposing_fraction": 0.375,
+        "p10": -0.2540630923851661,
+        "p90": 0.32236026557725367,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "entropy_agreement": {
+        "median": 0.9995064099297151,
+        "opposing_fraction": 0.0,
+        "p10": 0.9993236588575976,
+        "p90": 0.9996294820789932,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      },
+      "games_per_group": 128,
+      "total_agreement": {
+        "median": -0.09344314097190493,
+        "opposing_fraction": 0.65625,
+        "p10": -0.4041781304871039,
+        "p90": 0.1803277127436091,
+        "partitions": 32,
+        "undefined_zero_norm_pairs": 0
+      }
+    }
+  ],
+  "entropy_proven_cause_of_weak_learning": false,
+  "evidence_id": "sha256:1b74b9f6e6dfb8b8f45c0f7fa0a169ef31a67ce4919bd0096fb5cbc8ac8338eb",
+  "full_pool_behavior_likelihoods_reconstructed_during_owner_analysis": true,
+  "larger_batches_proven_unhelpful_in_general": false,
+  "new_games_during_analysis_or_assessment": 0,
+  "next_work_item": "bounded_direct_teaching_versus_PPO_conditional_HP_control_with_matched_actual_optimizer_work",
+  "numerical_loss_reference_covers_entire_pool": false,
+  "optimizer_steps_during_analysis_or_assessment": 0,
+  "ordinary_training_allowed": false,
+  "original_interrupted_attempts": 1,
+  "population_confidence_intervals": false,
+  "resources": {
+    "cpu_seconds": 111.535436608,
+    "final_storage_bytes": 6227341,
+    "peak_resident_memory_bytes": 3917234176,
+    "report_id": "sha256:2e4fc693b1cf4961449afb6fc5b598ae389cc454b76638db1a341b342eb15800",
+    "report_path": "artifacts/resources/native-a8-recovered-gradient-analysis-v1-attempt-1.json",
+    "status": "completed",
+    "wall_seconds": 114.20455583301373
+  },
+  "resplits_are_correlated_finite_pool_descriptions": true,
+  "saved_result_verification": {
+    "assessment_wall_seconds": 0.3303140419302508,
+    "gradients_recomputed_during_assessment": false,
+    "recorded_partition_summaries_recomputed": true,
+    "source_seals_checked": true,
+    "valid": true,
+    "verified_source_files": 596
+  },
+  "schema_version": "native-a8-recovered-gradient-result-evidence-v1",
+  "separate_repeated_control_seed_starts": 4,
+  "source_storage_bytes_excluded_from_new_output_root": 211912012
+}

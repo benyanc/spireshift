@@ -1,0 +1,86 @@
+{
+  "schema_version": "native-policy-capacity-result-evidence-v1",
+  "date": "2026-11-25",
+  "status": "capacity_results_assessed_saved_learner_diagnostic_prepared",
+  "source_result": {
+    "path": "artifacts/native-policy-capacity/study-v2/report.json",
+    "sha256": "c3c3d69d3ba24e879a460b144185a6f9d2aeb544bfc3912e3897d80ee567ba2b",
+    "report_id": "sha256:72ecc7054575388157d68a5edc5733e00481fdcbc955181f37f9b2616f1d9e41"
+  },
+  "source_resources": {
+    "path": "artifacts/native-policy-capacity/study-v2/resources-1795569025806507000.json",
+    "sha256": "fc4a5550708513106d25db2c33be0b2af26f060a8019216cbc6686401bfb0f06",
+    "report_id": "sha256:b08d5021cd57ff44546690886f29ba77e33c93d6c95c08e54bcdb2393c65aa7a"
+  },
+  "saved_seal_and_ending_assessment": {
+    "path": "artifacts/native-policy-capacity/assessment-v1/report.json",
+    "sha256": "0179e5a8b05be5fd43cf5f558c2436178cc2e3add7a3c22e5a95a84686d5e50b",
+    "report_id": "sha256:c124f7869905ccb252f40ba491ae4b49275b982f4122143a87eddc2a91fc4296"
+  },
+  "saved_assessment_resources": {
+    "path": "artifacts/native-policy-capacity/assessment-v1/resources-1795636988841168000.json",
+    "sha256": "496e3680537859c9deedbd38c3813f4293d7bc9838c131728bb2117ac718b947",
+    "report_id": "sha256:39bdc697355f9ad20d4befda6e3e0b15109f4923bbf363d3a0b6a50884807330"
+  },
+  "full_public_recount": "pending_owner_diagnostic_command",
+  "preserved_short_recount_stop": "artifacts/native-policy-capacity/assessment-v1/resources-1795636577012971000.json",
+  "short_learner_controls": {
+    "path": "artifacts/native-learning-health/v1/short/report.json",
+    "sha256": "f54cee0a6a051a7bc67aa5c2bb2cf3a59806067b549d9a841e13606e2a79f32d",
+    "report_id": "sha256:5e086a4a72dc5f1586bd5bc2987e4447baaf61569261a3a44dafcd77580b5333"
+  },
+  "short_resources": {
+    "path": "artifacts/native-learning-health/v1/short/resources-1795637347743424000.json",
+    "sha256": "13fb0e0db4fe4fd41653ed074cddff2961d44bb6e5a7ad945fd346e5f0b9a9dd",
+    "report_id": "sha256:5928127d812929fb3e617f516e3f8e78aed45645d2920ab8bfb77e9c101cc4b7"
+  },
+  "verified_units": 5120,
+  "full_model_and_Adam_fits_reloaded": 256,
+  "optimizer_updates_on_copies": 16517,
+  "planned_training_cells": 4096,
+  "training_losses": 4092,
+  "capped_training_cells": 3,
+  "failed_training_cells": 1,
+  "evaluation": {
+    "reference": {
+      "wins": 0,
+      "games": 256,
+      "act1_clears": 15,
+      "act2_clears": 0,
+      "mean_terminal_floor": 12.29296875
+    },
+    "standard": {
+      "wins": 0,
+      "games": 256,
+      "act1_clears": 13,
+      "act2_clears": 0,
+      "mean_terminal_floor": 11.70703125
+    },
+    "expanded": {
+      "wins": 0,
+      "games": 256,
+      "act1_clears": 7,
+      "act2_clears": 0,
+      "mean_terminal_floor": 10.64453125
+    }
+  },
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "source_optimizer_updates_this_assessment": 0,
+  "promotion_allowed": false,
+  "official_live_qualification_granted": false,
+  "final_test_worlds_used": false,
+  "learner_audit_recipe": "configs/native-learning/sts2-v0.111.0-a8-learning-health-v1.json",
+  "owner_command": "bash scripts/audit-a8-learning-signal-v1.sh",
+  "next_diagnostic_cohorts": 16,
+  "next_diagnostic_source_games": 256,
+  "new_games_in_next_diagnostic": 0,
+  "new_checkpoints_saved": 0,
+  "disposable_copy_updates_in_full_diagnostic": 32
+}

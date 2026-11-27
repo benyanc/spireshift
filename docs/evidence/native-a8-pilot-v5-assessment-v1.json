@@ -1,0 +1,64 @@
+{
+  "assessment_config": "configs/native-assessment/sts2-v0.111.0-a8-pilot-v5-v1.json",
+  "assessment_report": {
+    "path": "artifacts/native-assessments/sts2-v0.111.0-a8-pilot-v5-v1/report.json",
+    "report_id": "sha256:ee988f3f5fb680e57dde83c960591d34cb3322d8648f723040ea3d7b6fa01975",
+    "sha256": "0426f52437cb4a8ea7b709db3b3e73a76cb70773ded2f6c43e611235f5b14e0b"
+  },
+  "assessment_resources": {
+    "path": "artifacts/resources/native-a8-pilot-v5-assessment-v1-attempt-1.json",
+    "sha256": "1f29a74676914ed4bab5c99fca9700e8450437ae0d52c984973c31f40fc85d8b"
+  },
+  "checkpoint_promoted": false,
+  "date": "2026-10-16",
+  "experiment_config": "configs/native-learning/sts2-v0.111.0-a8-pilot-v5.json",
+  "experiment_config_id": "sha256:00473ec9bed0344ef86192cc717fc7d031430e2b945e2f152df6633fdb176824",
+  "games_launched": 0,
+  "limits": [
+    "confirmation_panel_does_not_establish_population_degradation",
+    "development_selected_vs_initial_is_same_policy_with_same_rng",
+    "zero_paired_floor_difference_does_not_evaluate_trained_checkpoints",
+    "no_gradient_or_probability_recomputation_in_this_saved_audit"
+  ],
+  "next_step": "train_only_learning_signal_representation_and_credit_assignment_diagnosis_before_scaling",
+  "optimizer_steps": 0,
+  "report_id": "sha256:e2fb09a12abaf39316dc9f5561c9f831cd5f4ad4cb6d85bea76a4aa7cddcc260",
+  "resource_report": {
+    "path": "artifacts/resources/native-a8-ppo-pilot-v5-attempt-1.json",
+    "report_id": "sha256:e27c0d0287dc6392713df5bc73a875c6b3ee6211dccafabe0c295e681bdafdd0",
+    "sha256": "5060df4242f10f911a26adc256979aa92e3a70af03122162c439c6769b7c2210"
+  },
+  "schema_version": "native-a8-pilot-v5-assessment-evidence-v1",
+  "source_files_verified": 1427,
+  "source_report_id": "sha256:556b1e782706f8192f97692a262ab588f7c6b937bf97a36b6b6a229c971a6f8b",
+  "summary": {
+    "adaptive_controller_allowed": false,
+    "base_readiness_passed": false,
+    "best_completed_acts": 0,
+    "best_floor": 17,
+    "completed_training_rounds": 8,
+    "confirmation_floors": {
+      "initial": 7.5625,
+      "round_4": 6.8125,
+      "round_8": 7.1875
+    },
+    "cpu_seconds": 1000.0186710469999,
+    "development_initial_floor": 7.375,
+    "development_selected_floor": 7.375,
+    "failed_attempts": 0,
+    "final_storage_bytes": 300346702,
+    "game_apps_created": 0,
+    "normal_endings": 336,
+    "not_attempted": 0,
+    "optimizer_steps": 627,
+    "peak_resident_memory_bytes": 2045018112,
+    "selected_checkpoint_is_initializer": true,
+    "source_episode_audit_completed": true,
+    "trained_checkpoints_evaluated_on_development": 0,
+    "training_games": 256,
+    "verdict": "no_clear_improvement",
+    "verified_training_decisions": 26061,
+    "wall_seconds": 889.4428821250331,
+    "wins": 0
+  }
+}

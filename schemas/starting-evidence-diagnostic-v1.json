@@ -1,0 +1,1133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/starting-evidence-diagnostic-v1.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "starting-evidence-diagnostic-v1"
+    },
+    "report_id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "objective": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "const": "terminal-victory-v1"
+        },
+        "primary": {
+          "const": "terminal_victory"
+        },
+        "constraint": {
+          "const": "cpu_time_per_run"
+        },
+        "whole_run_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "auxiliary": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "auxiliary_reward_allowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "id",
+        "primary",
+        "constraint",
+        "whole_run_budget",
+        "auxiliary",
+        "auxiliary_reward_allowed"
+      ],
+      "additionalProperties": false
+    },
+    "config": {
+      "$ref": "https://spireshift.dev/schemas/starting-evidence-diagnostic-config-v1.json"
+    },
+    "source_inputs": {
+      "$ref": "https://spireshift.dev/schemas/starting-evidence-policy-training-config-v1.json#/properties/inputs"
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "valid": {
+          "const": true
+        },
+        "model_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "selected_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidate_eligible": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "rejected_or_no_update",
+            "validation_candidate"
+          ]
+        },
+        "eligible_preferences": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fit_preferences": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selection_preferences": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "validation_records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "later_validation_decisions_unchanged": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "validation_checks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "coverage": {
+          "type": "object"
+        },
+        "starting_evidence_training": {
+          "type": "object"
+        },
+        "games_replayed": {
+          "const": 0
+        },
+        "terminal_victory_positive_labels": {
+          "const": 0
+        },
+        "checkpoint_promoted": {
+          "const": false
+        }
+      },
+      "required": [
+        "valid",
+        "model_id",
+        "report_id",
+        "selected_epoch",
+        "candidate_eligible",
+        "status",
+        "eligible_preferences",
+        "fit_preferences",
+        "selection_preferences",
+        "validation_records",
+        "later_validation_decisions_unchanged",
+        "validation_checks",
+        "coverage",
+        "starting_evidence_training",
+        "games_replayed",
+        "terminal_victory_positive_labels",
+        "checkpoint_promoted"
+      ],
+      "additionalProperties": false
+    },
+    "resource": {
+      "type": "object",
+      "properties": {
+        "report_id": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "status": {
+          "const": "completed"
+        },
+        "usage": {
+          "type": "object"
+        },
+        "limits": {
+          "type": "object"
+        },
+        "hardware": {
+          "type": "object"
+        },
+        "command_binding_pass": {
+          "const": true
+        }
+      },
+      "required": [
+        "report_id",
+        "status",
+        "usage",
+        "limits",
+        "hardware",
+        "command_binding_pass"
+      ],
+      "additionalProperties": false
+    },
+    "learning_curve": {
+      "type": "object",
+      "properties": {
+        "baselines": {
+          "type": "object",
+          "properties": {
+            "fit_preferences": {
+              "$ref": "#/$defs/preferenceMetrics"
+            },
+            "selection_preferences": {
+              "$ref": "#/$defs/preferenceMetrics"
+            },
+            "strong_selection_preferences": {
+              "$ref": "#/$defs/preferenceMetrics"
+            }
+          },
+          "required": [
+            "fit_preferences",
+            "selection_preferences",
+            "strong_selection_preferences"
+          ],
+          "additionalProperties": false
+        },
+        "epochs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "epoch": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "policy_weights_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "gains": {
+                "type": "object",
+                "properties": {
+                  "fit_preferences": {
+                    "type": "number"
+                  },
+                  "selection_preferences": {
+                    "type": "number"
+                  },
+                  "strong_selection_preferences": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "fit_preferences",
+                  "selection_preferences",
+                  "strong_selection_preferences"
+                ],
+                "additionalProperties": false
+              },
+              "failed_checks": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "fit_preferences": {
+                "$ref": "#/$defs/preferenceMetrics"
+              },
+              "selection_preferences": {
+                "$ref": "#/$defs/preferenceMetrics"
+              },
+              "strong_selection_preferences": {
+                "$ref": "#/$defs/preferenceMetrics"
+              }
+            },
+            "required": [
+              "epoch",
+              "policy_weights_id",
+              "gains",
+              "failed_checks",
+              "fit_preferences",
+              "selection_preferences",
+              "strong_selection_preferences"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "failed_check_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required_gain": {
+          "type": "number",
+          "minimum": 0
+        },
+        "best_recorded_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "best_overall_gain": {
+          "type": "number"
+        },
+        "best_overall_shortfall": {
+          "type": "number",
+          "minimum": 0
+        },
+        "last_epoch_is_best": {
+          "type": "boolean"
+        },
+        "last_interval_overall_gain": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "component_selection_gains_at_best": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "unselected_weights_available": {
+          "const": false
+        },
+        "history_verification_scope": {
+          "const": "source_inventory_aggregate_arithmetic_and_frozen_checks_not_weight_replay"
+        }
+      },
+      "required": [
+        "baselines",
+        "epochs",
+        "failed_check_counts",
+        "required_gain",
+        "best_recorded_epoch",
+        "best_overall_gain",
+        "best_overall_shortfall",
+        "last_epoch_is_best",
+        "last_interval_overall_gain",
+        "component_selection_gains_at_best",
+        "unselected_weights_available",
+        "history_verification_scope"
+      ],
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "complete_run_subfolds": {
+      "type": "object",
+      "properties": {
+        "anchors": {
+          "$ref": "#/$defs/runSubfolds"
+        },
+        "evidence": {
+          "$ref": "#/$defs/runSubfolds"
+        }
+      },
+      "required": [
+        "anchors",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "collection_summary": {
+      "$ref": "https://spireshift.dev/schemas/production-model-training-report-v8.json#/properties/collection_summary"
+    },
+    "exclusions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "preference_rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "comparison_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "run_seed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "subfold": {
+            "enum": [
+              "fit",
+              "selection"
+            ]
+          },
+          "source_state_hash": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rank_component": {
+            "type": "string",
+            "minLength": 1
+          },
+          "training_weight": {
+            "type": "number",
+            "minimum": 0
+          },
+          "menu_option_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "preferred_option_id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "disfavored_option_id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "preferred_action_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "disfavored_action_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "public_context": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "public_context_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "parent_margin": {
+            "type": "number"
+          },
+          "semantic_contrast_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "semantic_direction": {
+            "enum": [
+              -1,
+              1
+            ]
+          },
+          "hashed_contrast_id": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "hashed_direction": {
+            "enum": [
+              -1,
+              1
+            ]
+          },
+          "residual_contrast_coordinates": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "initial_descent_margins": {
+            "type": "object",
+            "properties": {
+              "full": {
+                "type": "number"
+              },
+              "strong": {
+                "type": "number"
+              },
+              "weak": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "full",
+              "strong",
+              "weak"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "comparison_id",
+          "run_seed",
+          "subfold",
+          "source_state_hash",
+          "rank_component",
+          "training_weight",
+          "menu_option_ids",
+          "preferred_option_id",
+          "disfavored_option_id",
+          "preferred_action_id",
+          "disfavored_action_id",
+          "public_context",
+          "public_context_id",
+          "parent_margin",
+          "semantic_contrast_id",
+          "semantic_direction",
+          "hashed_contrast_id",
+          "hashed_direction",
+          "residual_contrast_coordinates",
+          "initial_descent_margins"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "preference_coverage_by_option": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "comparisons": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "complete_runs": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "public_context_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          },
+          "rank_counts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "parent_direction_correct": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "opposed_by_initial_fit_descent": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "comparisons",
+          "complete_runs",
+          "public_context_ids",
+          "rank_counts",
+          "parent_direction_correct",
+          "opposed_by_initial_fit_descent"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "fitting_feature_conflicts": {
+      "type": "object",
+      "properties": {
+        "fitting_only": {
+          "const": true
+        },
+        "semantic_groups": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "opposing_semantic_groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "semantic_contrast_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "independent_runs": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "members": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "comparison_id": {
+                      "type": "string",
+                      "pattern": "^sha256:[a-f0-9]{64}$"
+                    },
+                    "run_seed": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "rank_component": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "semantic_direction": {
+                      "enum": [
+                        -1,
+                        1
+                      ]
+                    },
+                    "source_state_hash": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "comparison_id",
+                    "run_seed",
+                    "rank_component",
+                    "semantic_direction",
+                    "source_state_hash"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "parent_adjusted_lower_bound": {
+                "type": "number"
+              },
+              "parent_adjusted_upper_bound": {
+                "type": "number"
+              },
+              "strict_margin_constraints_incompatible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "semantic_contrast_id",
+              "independent_runs",
+              "members",
+              "parent_adjusted_lower_bound",
+              "parent_adjusted_upper_bound",
+              "strict_margin_constraints_incompatible"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "different_semantics_same_hashed_contrast": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "hashed_contrast_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "semantic_contrast_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                }
+              },
+              "comparison_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                }
+              }
+            },
+            "required": [
+              "hashed_contrast_id",
+              "semantic_contrast_ids",
+              "comparison_ids"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "zero_residual_contrasts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "incompatible_parent_adjusted_groups": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "fitting_only",
+        "semantic_groups",
+        "opposing_semantic_groups",
+        "different_semantics_same_hashed_contrast",
+        "zero_residual_contrasts",
+        "interpretation",
+        "incompatible_parent_adjusted_groups"
+      ],
+      "additionalProperties": false
+    },
+    "fitting_gradient": {
+      "type": "object",
+      "properties": {
+        "component_squared_norms": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "strong_weak_cosine": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -1,
+          "maximum": 1
+        },
+        "full_squared_norm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "normalization": {
+          "const": "equal_complete_run_within_rank_weight"
+        },
+        "selection_contributes_to_gradient": {
+          "const": false
+        },
+        "derivative_only_no_optimizer_step": {
+          "const": true
+        }
+      },
+      "required": [
+        "component_squared_norms",
+        "strong_weak_cosine",
+        "full_squared_norm",
+        "normalization",
+        "selection_contributes_to_gradient",
+        "derivative_only_no_optimizer_step"
+      ],
+      "additionalProperties": false
+    },
+    "fitting_anchor_diagnosis": {
+      "type": "object",
+      "properties": {
+        "fitting_only": {
+          "const": true
+        },
+        "target_overlaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "comparison_id": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "preference_run_seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "state_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "run_seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "teacher_stability_multiplier": {
+                "type": "number",
+                "minimum": 0
+              },
+              "exact_public_state": {
+                "type": "boolean"
+              },
+              "teacher_gap_in_preference_direction": {
+                "type": "number"
+              },
+              "match_kind": {
+                "enum": [
+                  "semantic_contrast",
+                  "hashed_contrast_only"
+                ]
+              }
+            },
+            "required": [
+              "comparison_id",
+              "preference_run_seed",
+              "state_id",
+              "run_seed",
+              "teacher_stability_multiplier",
+              "exact_public_state",
+              "teacher_gap_in_preference_direction",
+              "match_kind"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "opposed_semantic_targets": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "teacher_margin_directions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "state_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "run_seed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "left_option_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "right_option_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "teacher_utility_gap": {
+                "type": "number"
+              },
+              "initial_descent_teacher_margin": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "state_id",
+              "run_seed",
+              "left_option_id",
+              "right_option_id",
+              "teacher_utility_gap",
+              "initial_descent_teacher_margin"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "teacher_margins_opposed_by_initial_descent": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "anchor_gradient_at_parent": {
+          "const": 0.0
+        },
+        "proximal_gradient_at_parent": {
+          "const": 0.0
+        },
+        "anchor_curvature_along_unit_preference_descent": {
+          "type": "number",
+          "minimum": 0
+        },
+        "proximal_curvature_along_unit_preference_descent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "shared_token_coordinates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "coordinate": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "tokens": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "coordinate",
+              "tokens"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "fitting_only",
+        "target_overlaps",
+        "opposed_semantic_targets",
+        "teacher_margin_directions",
+        "teacher_margins_opposed_by_initial_descent",
+        "anchor_gradient_at_parent",
+        "proximal_gradient_at_parent",
+        "anchor_curvature_along_unit_preference_descent",
+        "proximal_curvature_along_unit_preference_descent",
+        "shared_token_coordinates",
+        "interpretation"
+      ],
+      "additionalProperties": false
+    },
+    "recommendation": {
+      "type": "object",
+      "properties": {
+        "proposed_intervention": {
+          "enum": [
+            null,
+            "audit_residual_feature_aliases",
+            "measure_starting_label_repeatability",
+            "prespecified_strong_label_ablation"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_recorded_epoch_was_best": {
+          "type": "boolean"
+        },
+        "recipe_frozen": {
+          "const": false
+        },
+        "requires_fresh_confirmation_plan": {
+          "const": true
+        },
+        "automatic_training_allowed": {
+          "const": false
+        },
+        "threshold_changes_allowed": {
+          "const": false
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "proposed_intervention",
+        "reason",
+        "last_recorded_epoch_was_best",
+        "recipe_frozen",
+        "requires_fresh_confirmation_plan",
+        "automatic_training_allowed",
+        "threshold_changes_allowed",
+        "interpretation"
+      ],
+      "additionalProperties": false
+    },
+    "reconciliation_pass": {
+      "const": true
+    },
+    "validation_interpretation": {
+      "enum": [
+        "unchanged_epoch_zero_fallback",
+        "saved_selected_epoch_only"
+      ]
+    },
+    "terminal_victory_positive_labels": {
+      "const": 0
+    },
+    "games_replayed": {
+      "const": 0
+    },
+    "optimizer_steps": {
+      "const": 0
+    },
+    "checkpoint_promoted": {
+      "const": false
+    },
+    "claim_scope": {
+      "const": "saved_starting_evidence_auxiliary_learning_diagnosis"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "objective",
+    "config",
+    "source_inputs",
+    "verification",
+    "resource",
+    "learning_curve",
+    "coverage",
+    "complete_run_subfolds",
+    "collection_summary",
+    "exclusions",
+    "preference_rows",
+    "preference_coverage_by_option",
+    "fitting_feature_conflicts",
+    "fitting_gradient",
+    "fitting_anchor_diagnosis",
+    "recommendation",
+    "reconciliation_pass",
+    "validation_interpretation",
+    "terminal_victory_positive_labels",
+    "games_replayed",
+    "optimizer_steps",
+    "checkpoint_promoted",
+    "claim_scope",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "preferenceMetrics": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligible_records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "directional_accuracy": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "weighted_pair_loss": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "effective_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "by_run": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/scalarPreferenceMetrics"
+          }
+        },
+        "by_rank_component": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/scalarPreferenceMetrics"
+          }
+        }
+      },
+      "required": [
+        "records",
+        "eligible_records",
+        "unique_runs",
+        "directional_accuracy",
+        "weighted_pair_loss",
+        "effective_weight",
+        "by_run",
+        "by_rank_component"
+      ],
+      "additionalProperties": false
+    },
+    "scalarPreferenceMetrics": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "eligible_records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "directional_accuracy": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "weighted_pair_loss": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "effective_weight": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "records",
+        "eligible_records",
+        "unique_runs",
+        "directional_accuracy",
+        "weighted_pair_loss",
+        "effective_weight"
+      ],
+      "additionalProperties": false
+    },
+    "runSubfolds": {
+      "type": "object",
+      "properties": {
+        "fit": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "selection": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "fit",
+        "selection"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

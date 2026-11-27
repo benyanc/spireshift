@@ -1,0 +1,43 @@
+{
+  "schema_version": "engine-connector-config-v2",
+  "stage": "local_shipped_menu_control_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "native_config": "configs/engine-qualification/sts2-v0.111.0-native-bootstrap-v1.json",
+  "workspace": "artifacts/native-modal-repair/connector-v23",
+  "toolchain": "artifacts/engine-tooling/connector-map-settling-v23",
+  "bootstrap_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-bootstrap-v1.json",
+  "bootstrap_report_id": "sha256:fb0c446d837855c5ea1257eca18a71fa3aa01cc72e716516fc1a9a566918daec",
+  "bootstrap_settings_sha256": "e188477a47f0bf353b8317c6162d935889645ac626ade9f4ff55710c4c1b9870",
+  "max_wall_seconds": 120,
+  "connector": {
+    "version": "1.1.0-rc.1",
+    "protocol": "1.0.0",
+    "source_revision": "9093540251f9f82f869e96bc6065138961522b8e",
+    "artifact_sha256": "ade9488a664e85c4205a19475f98f93e7b772cbc3cc8cbc5555e10e4654f963a",
+    "artifact_mvid": "b1bfde48-5f1d-4fb4-8a81-5cda10a510cf"
+  },
+  "assets": {
+    "host": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/STS2-Connector-1.1.0-rc.1-host.tar.gz",
+      "sha256": "b2f7321dab36689c26133eb198955321722d5ca928f2b6a0b5a125c6df861de2"
+    },
+    "sdk": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/rsgcsg-sts2-connector-client-1.0.0.tgz",
+      "sha256": "4a12777aaaa6b469cb939456a0f59a4b7385dbfe87f721870ce89dd1b14eb062"
+    },
+    "seal": {
+      "url": "https://github.com/rsgcsg/STS2-Connector/releases/download/v1.1.0-rc.1/STS2-Connector-1.1.0-rc.1-runtime-seal.json",
+      "sha256": "d3691730345e8b461a83e206e0c6ac70fe60371c2e8bb61be083fb987f33c3bc"
+    },
+    "zod": {
+      "url": "https://registry.npmjs.org/zod/-/zod-3.25.76.tgz",
+      "sha256": "9e1f1a05f0dd0c1dab64ee91ceb9bf55cd44d35368c70edda80a2fdc70a88377"
+    }
+  },
+  "training_allowed": false,
+  "local_build": {
+    "build_config": "configs/engine-qualification/sts2-v0.111.0-connector-map-settling-build-v23.json",
+    "build_config_id": "sha256:a22e92ffe816dbeecda76b0c79499f6e485d8c2f400d91b192003fa51a087c80",
+    "build_report": "artifacts/native-modal-repair/connector-build-v23/report.json"
+  }
+}

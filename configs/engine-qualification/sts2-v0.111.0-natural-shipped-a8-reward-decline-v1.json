@@ -1,0 +1,22 @@
+{
+  "schema_version": "engine-run-discovery-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/natural-shipped-a8-reward-decline-v1",
+  "resource_report": "artifacts/resources/natural-shipped-a8-reward-decline-v1.json",
+  "cases": [
+    {
+      "recipe": "configs/engine-qualification/sts2-v0.111.0-natural-shipped-a8-reward-decline-002-v1.json",
+      "config_id": "sha256:de0a1a90e5c801c5b4dbaae2aa3a6b187a1f880b832ef583b2c48bc6f11a421e"
+    }
+  ],
+  "workers": 1,
+  "reporting_revision": "outcomes_v2",
+  "max_wall_seconds": 940,
+  "resource_caps": {
+    "max_wall_seconds": 960,
+    "max_cpu_seconds": 1800,
+    "max_storage_bytes": 4000000000,
+    "max_memory_bytes": 8000000000
+  },
+  "training_allowed": false
+}

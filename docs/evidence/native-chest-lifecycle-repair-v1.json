@@ -1,0 +1,149 @@
+{
+  "Take_ready_Skip_unready_frames_observed_in_short": 0,
+  "adaptive_controller_allowed": false,
+  "all_host_tests": 209,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "checkpoint_promoted": false,
+  "claim_scope": "declared_chest_Take_Skip_lifecycle_effects_and_replayed_nonchest_inputs_only",
+  "connector_build_config": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-connector-chest-lifecycle-build-v26.json",
+    "sha256": "9201eff83e5f80a66731935f14cdbfd75259506e3af1a5e876364e9265fd1b17"
+  },
+  "connector_build_report": {
+    "path": "artifacts/native-chest-repair/connector-build-v26/report.json",
+    "sha256": "486ff46d4498644a72c95324015be9a8343e399b24c77817783f4c744e073453"
+  },
+  "corrected_native_wiring": {
+    "path": "artifacts/native-chest-repair/native-smoke-v2/report.json",
+    "sha256": "97d6932cb33c9ba2bd5b9d33abf27086edff6f7c706c0f33735a9c803bcfd114"
+  },
+  "corrupted_receipt_diagnostic_copy_rejected": true,
+  "current_inputs_and_choices_replayed": 728,
+  "environment_id": "sha256:c2271abd37eab14ba30145ee2b2b776ae92de7bbabc31986acb6b8b81f2ac128",
+  "final_repository_checks": "recorded_after_source_freeze_in_artifacts/native-chest-repair/preparation-v1/final-handoff-v1.json",
+  "focused_python_tests": 22,
+  "full_game_playing_strength_evaluated": false,
+  "game_assembly_sha256": "9cb4f1ad8c9f284aa8fec3122ffd6d780bbf543d875c817abdd12ff63fbf12b4",
+  "game_commit": "41cef1ea",
+  "game_version": "v0.111.0",
+  "historical_deliveries_independently_verified": 728,
+  "historical_effects_relabelled": false,
+  "historical_premature_menu_rejected": true,
+  "independently_verified_deliveries": 10,
+  "matched_states_including_final_successors": 7,
+  "maximum_decisions_per_host": 384,
+  "maximum_gameplay_CPU_seconds_per_host": 128,
+  "maximum_pair_wall_seconds": 600,
+  "native_build_config": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-chest-lifecycle-build-v55.json",
+    "sha256": "4b857e23bdd072dca4001bc08ae524949c01832912e69fda585d7f46b6b11b19"
+  },
+  "native_build_report": {
+    "path": "artifacts/native-chest-repair/native-build-v55/report.json",
+    "sha256": "2c515ff476ee14985484515cc361bcbdd3b5f7bda9b3c1a28cff5638560ffb3a"
+  },
+  "new_chest_projection_and_authority_tests": 24,
+  "new_games_in_saved_assessment": 0,
+  "new_host_tests": 10,
+  "new_saved_summary_bridge_tests": 4,
+  "old_summary_missing_reads_reconstructed": false,
+  "optimizer_updates": 0,
+  "original_numerical_weights_and_full_Adam_exact": true,
+  "outer_wall_seconds": 2400,
+  "owner_command": "bash scripts/compare-chest-endings-v1.sh",
+  "owner_natural_pairs": 2,
+  "owner_preflight_resources": {
+    "path": "artifacts/native-chest-repair/preparation-v1/owner-preflight-resources-v1.json",
+    "sha256": "7e82c9eec142f41b24b41250cf73031ba01138caace9e15a2776adaa4fda990b"
+  },
+  "owner_recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-chest-endings-v1.json",
+    "sha256": "b32e680d96b9c93e1de8bba70b4bfc644362d0f1f445b6c9a9c79d590436b40f"
+  },
+  "owner_seeds": [
+    "SP1RESH1FTE2E603",
+    "SP1RESH1FTE2E604"
+  ],
+  "owner_workspace_unstarted": true,
+  "partial_choice_observed_frames_with_zero_actions": 12,
+  "preserved_development_failure": {
+    "path": "artifacts/native-chest-repair/native-smoke-v1/report.json",
+    "sha256": "b418458d020992a2352cda33a5ee265e2555df8bc88483af0cc7b5413c477293"
+  },
+  "preserved_summary_tests": 16,
+  "protected_prior_files_exact": 20108,
+  "raw_summary_proof_saved_before_validation": true,
+  "reconciliation": {
+    "path": "artifacts/native-chest-repair/reconciliation-v1/report.json",
+    "sha256": "f9998e7538183d65696d6ec40416fc0c49c890127942d00f2a9dbee2d85907a2"
+  },
+  "reconciliation_id": "sha256:e3dc42850b4e0ecfc559d4c7d87787b961086b44447fdbd45a661d7d0c782834",
+  "reconciliation_wall_seconds": 77.12965570896631,
+  "report_id": "sha256:83c141ae2066ddc47dd78250d924f83f1f4b18ef493adb0647b617a6de40cadd",
+  "schema_version": "native-chest-lifecycle-repair-evidence-v1",
+  "short_cap_hit": false,
+  "short_cpu_seconds": 51.62459659599998,
+  "short_effects": [
+    {
+      "gold_after": 1036,
+      "gold_before": 1036,
+      "hp_after": 200,
+      "hp_before": 200,
+      "offered_relic": "TUNGSTEN_ROD",
+      "proceed_or_skip_reached_map": true,
+      "relic_count_after": 2,
+      "relic_count_before": 1,
+      "selected_take": true
+    },
+    {
+      "gold_after": 1039,
+      "gold_before": 1039,
+      "hp_after": 200,
+      "hp_before": 200,
+      "offered_relic": "AMETHYST_AUBERGINE",
+      "proceed_or_skip_reached_map": true,
+      "relic_count_after": 1,
+      "relic_count_before": 1,
+      "selected_take": false
+    }
+  ],
+  "short_panel": {
+    "path": "artifacts/native-chest-repair/short-controls-v1/report.json",
+    "sha256": "a099a2856aee86ccf18363a1b0c75f7946660c4a1f62fae9cc94a627dc705770"
+  },
+  "short_peak_resident_bytes": 1041367040,
+  "short_peak_storage_bytes": 2412744079,
+  "short_qualification": {
+    "path": "artifacts/native-chest-repair/short-qualification-v1/report.json",
+    "sha256": "c3a9f58f42d444bc5722c399c7dd4be3130620b40a48980f75c4722b3ddd30f4"
+  },
+  "short_qualification_id": "sha256:07dc1d46def9c7e1e77a613a9f95af9975de88a6e51e67e56487d0b97c77677a",
+  "short_resources": {
+    "path": "artifacts/native-chest-repair/preparation-v1/short-controls-resources-v1.json",
+    "sha256": "e8e25ba576b20752553cce287eacd02970f15459912ef5205fb6bd696e5aab00"
+  },
+  "short_wall_seconds": 85.09804895799607,
+  "source_scope": {
+    "connector_production_changes": [
+      "LiveHost/TreasureRoomSurfaceReader.cs",
+      "NativeUi/NativeTreasureTransition.cs",
+      "PlayerEnvironment/Observation/SnapshotBuilder.cs"
+    ],
+    "converter_changes_outside_chest_guard": false,
+    "input_layout_unchanged": true,
+    "native_export_function": "TreasureState"
+  },
+  "status": "targeted_chest_controls_qualified_natural_owner_panel_prepared",
+  "summary_native_field": "floor_reached",
+  "training_allowed": false,
+  "tuple": {
+    "CLI": 55,
+    "input_layout": 12,
+    "official_connector": 26,
+    "ordinary_worker": 24,
+    "shared_converter": 16,
+    "shared_environment": 43
+  },
+  "workflow_qualification_candidate": false
+}

@@ -22,6 +22,7 @@ from spireshift.core.manifest import manifest_identifier
 from spireshift.core.objective import ObjectiveSpec
 from spireshift.core.protocols import EnvironmentAdapter, Policy
 from spireshift.core.types import DecisionType, LegalAction, Observation
+from spireshift.liveness import PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION, PublicNoOpActionGuard
 from spireshift.mechanics import PublicMechanicsService
 from spireshift.representations import CompositionalModelInput, model_input_from_mapping
 from spireshift.rollouts import sha256_file, write_exclusive_json
@@ -42,24 +43,33 @@ CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v2"
 LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v3"
 TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v4"
 COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v5"
+MILESTONE_TRAJECTORY_STATE_SET_SCHEMA_VERSION = "bootstrap-state-set-v6"
 BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v1"
 LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v2"
 COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v3"
+PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION = "bootstrap-simulation-task-v4"
 BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v1"
 LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v2"
 COMBAT_ADVANCEMENT_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v3"
+PRODUCTION_DAGGER_WORKER_RESULT_SCHEMA_VERSION = "bootstrap-worker-result-v4"
 BOOTSTRAP_BATCH_SCHEMA_VERSION = "bootstrap-worker-batch-v1"
 BOOTSTRAP_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v1"
 CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v2"
 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v3"
 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v4"
 COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v5"
+PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v6"
+MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION = "bootstrap-teacher-dataset-v7"
 BOOTSTRAP_VERIFICATION_SCHEMA_VERSION = "bootstrap-teacher-verification-v1"
 BOOTSTRAP_TEACHER_ID = "paired-terminal-dominant-progress-teacher-v1"
 CURRICULUM_TEACHER_ID = "paired-preference-curriculum-teacher-v2"
 BOOTSTRAP_UTILITY_ID = "terminal-dominant-floor-act-hp-v1"
 BOOTSTRAP_SEED_PROTOCOL_ID = "sha256-paired-bootstrap-v1"
 MILESTONE_FLOORS = (1, 8, 16, 24, 32, 40, 48, 56, 64)
+PRODUCTION_DAGGER_SELECTION_POLICY_PREFIX = "production-selective-dagger-v1:"
+MILESTONE_TRAJECTORY_SELECTION_POLICY_PREFIX = "accepted-milestone-trajectory-v1:"
+PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD = 2
+PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT = 16
 
 
 @dataclass(frozen=True, slots=True)
@@ -307,9 +317,25 @@ class CurriculumStateCase:
     expected_legal_actions: int
     expected_source_floor: int | None
     expected_source_act: int | str | None
+    trajectory_decision_index: int | None = None
+    expected_selected_action_id: str | None = None
+    expected_next_state_hash: str | None = None
+
+    def __post_init__(self) -> None:
+        trajectory_fields = (
+            self.trajectory_decision_index,
+            self.expected_selected_action_id,
+            self.expected_next_state_hash,
+        )
+        if any(value is not None for value in trajectory_fields) and not all(
+            value is not None for value in trajectory_fields
+        ):
+            raise ValueError("Milestone trajectory case fields must be supplied together")
+        if self.trajectory_decision_index is not None and self.trajectory_decision_index < 0:
+            raise ValueError("trajectory_decision_index must be non-negative")
 
     def as_dict(self) -> dict[str, object]:
-        return {
+        document: dict[str, object] = {
             "state_id": self.state_id,
             "run_seed": self.run_seed,
             "decision_type": self.decision_type.value,
@@ -319,6 +345,15 @@ class CurriculumStateCase:
             "expected_source_floor": self.expected_source_floor,
             "expected_source_act": self.expected_source_act,
         }
+        if self.trajectory_decision_index is not None:
+            document.update(
+                {
+                    "trajectory_decision_index": self.trajectory_decision_index,
+                    "expected_selected_action_id": self.expected_selected_action_id,
+                    "expected_next_state_hash": self.expected_next_state_hash,
+                }
+            )
+        return document
 
 
 @dataclass(frozen=True, slots=True)
@@ -404,6 +439,7 @@ class CurriculumStateSet:
     signal_spec: CurriculumSignalSpec
     cases: tuple[CurriculumStateCase, ...]
     capture_policy: dict[str, str] | None = None
+    capture_trajectory: dict[str, Any] | None = None
 
     def __post_init__(self) -> None:
         if self.partition not in {SplitName.TRAIN.value, SplitName.VALIDATION.value}:
@@ -426,6 +462,18 @@ class CurriculumStateSet:
         ]
         if len(ids) != len(set(ids)) or len(coordinates) != len(set(coordinates)):
             raise ValueError("Curriculum cases must have unique IDs and coordinates")
+        milestone_cases = [case.trajectory_decision_index is not None for case in self.cases]
+        if self.capture_trajectory is None:
+            if any(milestone_cases):
+                raise ValueError("Trajectory coordinates require capture-trajectory provenance")
+        else:
+            if self.partition != SplitName.TRAIN.value:
+                raise ValueError("Milestone trajectory state sets must use the train partition")
+            if not self.selection_policy.startswith(MILESTONE_TRAJECTORY_SELECTION_POLICY_PREFIX):
+                raise ValueError("Milestone trajectory state set uses the wrong selection policy")
+            if not all(milestone_cases):
+                raise ValueError("Every milestone trajectory case needs an exact trace coordinate")
+            _validate_capture_trajectory(self.capture_trajectory, cases=self.cases)
 
     def as_dict(self) -> dict[str, object]:
         frontier = self.discovery.get("schema_version") in {
@@ -438,15 +486,19 @@ class CurriculumStateSet:
         )
         document: dict[str, object] = {
             "schema_version": (
-                COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
-                if combat_advancement
+                MILESTONE_TRAJECTORY_STATE_SET_SCHEMA_VERSION
+                if self.capture_trajectory is not None
                 else (
-                    TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
-                    if frontier
+                    COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
+                    if combat_advancement
                     else (
-                        LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
-                        if self.capture_policy is not None
-                        else CURRICULUM_STATE_SET_SCHEMA_VERSION
+                        TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION
+                        if frontier
+                        else (
+                            LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION
+                            if self.capture_policy is not None
+                            else CURRICULUM_STATE_SET_SCHEMA_VERSION
+                        )
                     )
                 )
             ),
@@ -463,6 +515,8 @@ class CurriculumStateSet:
         }
         if self.capture_policy is not None:
             document["capture_policy"] = self.capture_policy
+        if self.capture_trajectory is not None:
+            document["capture_trajectory"] = self.capture_trajectory
         return document
 
 
@@ -512,6 +566,8 @@ class BootstrapSimulationTask:
     simulation_seed: int
     maximum_rollout_steps: int
     continuation_policy: BootstrapPolicyArtifacts | None = None
+    no_op_fallback_threshold: int | None = None
+    no_op_fallback_event_limit: int = PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT
 
     def __post_init__(self) -> None:
         UUID(self.task_id)
@@ -521,9 +577,20 @@ class BootstrapSimulationTask:
             raise ValueError("Bootstrap simulation seed must be non-negative")
         if self.maximum_rollout_steps <= 0:
             raise ValueError("Bootstrap rollout limit must be positive")
+        if self.no_op_fallback_threshold is not None:
+            if self.no_op_fallback_threshold < 1:
+                raise ValueError("Bootstrap no-op fallback threshold must be positive")
+            if self.continuation_policy is None:
+                raise ValueError("Bootstrap no-op fallback requires a learned continuation policy")
+            if self.continuation_policy.combat_advancement_config is not None:
+                raise ValueError("Combat-advancement tasks cannot use the production DAgger guard")
+        if self.no_op_fallback_event_limit < 1:
+            raise ValueError("Bootstrap no-op fallback event limit must be positive")
 
     def as_dict(self) -> dict[str, object]:
-        if (
+        if self.no_op_fallback_threshold is not None:
+            schema_version = PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION
+        elif (
             self.continuation_policy is not None
             and self.continuation_policy.combat_advancement_config is not None
         ):
@@ -544,7 +611,19 @@ class BootstrapSimulationTask:
         }
         if self.continuation_policy is not None:
             document["continuation_policy"] = self.continuation_policy.task_dict()
+        if self.no_op_fallback_threshold is not None:
+            document["no_op_fallback"] = self.no_op_fallback_configuration
         return document
+
+    @property
+    def no_op_fallback_configuration(self) -> dict[str, object] | None:
+        if self.no_op_fallback_threshold is None:
+            return None
+        return {
+            "controller_id": PublicNoOpActionGuard.controller_id,
+            "repetition_threshold": self.no_op_fallback_threshold,
+            "event_limit": self.no_op_fallback_event_limit,
+        }
 
     @property
     def continuation_policy_id(self) -> str:
@@ -561,6 +640,7 @@ class BootstrapSimulationTask:
         learned = schema_version in {
             LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION,
         }
         expected_keys = {
             "schema_version",
@@ -574,6 +654,9 @@ class BootstrapSimulationTask:
         }
         if learned:
             expected_keys.add("continuation_policy")
+        cycle_safe = schema_version == PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION
+        if cycle_safe:
+            expected_keys.add("no_op_fallback")
         _exact_keys(
             document,
             expected_keys,
@@ -583,6 +666,7 @@ class BootstrapSimulationTask:
             BOOTSTRAP_TASK_SCHEMA_VERSION,
             LEARNED_BOOTSTRAP_TASK_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_BOOTSTRAP_TASK_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_BOOTSTRAP_TASK_SCHEMA_VERSION,
         }:
             raise ValueError("Unsupported bootstrap task schema")
         policy = (
@@ -594,6 +678,17 @@ class BootstrapSimulationTask:
             policy is not None and policy.combat_advancement_config is not None
         ):
             raise ValueError("Bootstrap task policy generation differs from its schema")
+        fallback = (
+            _mapping(document.get("no_op_fallback"), "no-op fallback") if cycle_safe else None
+        )
+        if fallback is not None:
+            _exact_keys(
+                fallback,
+                {"controller_id", "repetition_threshold", "event_limit"},
+                "no-op fallback",
+            )
+            if fallback.get("controller_id") != PublicNoOpActionGuard.controller_id:
+                raise ValueError("Bootstrap task uses an unsupported no-op fallback")
         expected_policy_id = (
             policy.policy_id if policy is not None else ProgressBootstrapPolicy.policy_id
         )
@@ -609,6 +704,16 @@ class BootstrapSimulationTask:
                 document.get("maximum_rollout_steps"), "maximum_rollout_steps"
             ),
             continuation_policy=policy,
+            no_op_fallback_threshold=(
+                _integer(fallback.get("repetition_threshold"), "fallback threshold")
+                if fallback is not None
+                else None
+            ),
+            no_op_fallback_event_limit=(
+                _integer(fallback.get("event_limit"), "fallback event limit")
+                if fallback is not None
+                else PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT
+            ),
         )
 
 
@@ -742,6 +847,7 @@ def load_bootstrap_state_set_document(value: object) -> BootstrapStateSetLike:
         LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
         COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION,
+        MILESTONE_TRAJECTORY_STATE_SET_SCHEMA_VERSION,
     }:
         return _load_curriculum_state_set_document(document)
     _exact_keys(
@@ -905,10 +1011,11 @@ def discover_curriculum_state_set(
         try:
             observation = environment.reset(run_seed)
             policy = _load_bootstrap_policy(policy_artifacts, environment)
+            no_op_guard = PublicNoOpActionGuard()
             prefix: list[str] = []
             seen = {decision_type: 0 for decision_type in decision_occurrences}
             found: set[tuple[DecisionType, int]] = set()
-            for _ in range(maximum_steps + 1):
+            for global_index in range(maximum_steps + 1):
                 decision_type = observation.decision_type
                 if decision_type in decision_occurrences:
                     occurrence = seen[decision_type]
@@ -943,9 +1050,20 @@ def discover_curriculum_state_set(
                 if bool(observation.public_state.get("terminal")):
                     terminal_runs += 1
                     break
-                action = policy.choose_action(observation, tuple(environment.legal_actions()))
+                source_observation = observation
+                legal_actions = tuple(environment.legal_actions())
+                action = policy.choose_action(
+                    observation,
+                    no_op_guard.eligible_actions(observation, legal_actions),
+                )
                 prefix.append(action.action_id)
                 observation = environment.step(action).next_observation
+                no_op_guard.observe_transition(
+                    observation=source_observation,
+                    action=action,
+                    next_observation=observation,
+                    decision_index=global_index,
+                )
             else:
                 truncated_runs += 1
             for decision_type, indices in decision_occurrences.items():
@@ -1066,6 +1184,7 @@ def _discover_terminal_frontier_state_set(
         try:
             observation = environment.reset(run_seed)
             policy = _load_bootstrap_policy(policy_artifacts, environment)
+            no_op_guard = PublicNoOpActionGuard()
             prefix: list[str] = []
             seen = {decision_type: 0 for decision_type in decision_types}
             eligible: list[tuple[int, int, dict[str, object]]] = []
@@ -1113,9 +1232,20 @@ def _discover_terminal_frontier_state_set(
                     else:
                         defeated_runs += 1
                     break
-                action = policy.choose_action(observation, tuple(environment.legal_actions()))
+                source_observation = observation
+                legal_actions = tuple(environment.legal_actions())
+                action = policy.choose_action(
+                    observation,
+                    no_op_guard.eligible_actions(observation, legal_actions),
+                )
                 prefix.append(action.action_id)
                 observation = environment.step(action).next_observation
+                no_op_guard.observe_transition(
+                    observation=source_observation,
+                    action=action,
+                    next_observation=observation,
+                    decision_index=global_index,
+                )
             else:
                 step_limited_runs += 1
             if eligible:
@@ -1191,9 +1321,10 @@ def capture_bootstrap_combat_state(
     try:
         observation = environment.reset(run_seed)
         policy = ProgressBootstrapPolicy()
+        no_op_guard = PublicNoOpActionGuard()
         prefix: list[str] = []
         seen = 0
-        for _ in range(maximum_prefix_steps + 1):
+        for global_index in range(maximum_prefix_steps + 1):
             if observation.decision_type in {DecisionType.COMBAT, DecisionType.COMBAT_SELECTION}:
                 if seen == combat_state_index:
                     actions = tuple(environment.legal_actions())
@@ -1212,9 +1343,20 @@ def capture_bootstrap_combat_state(
                 seen += 1
             if bool(observation.public_state.get("terminal")):
                 break
-            action = policy.choose_action(observation, tuple(environment.legal_actions()))
+            source_observation = observation
+            legal_actions = tuple(environment.legal_actions())
+            action = policy.choose_action(
+                observation,
+                no_op_guard.eligible_actions(observation, legal_actions),
+            )
             prefix.append(action.action_id)
             observation = environment.step(action).next_observation
+            no_op_guard.observe_transition(
+                observation=source_observation,
+                action=action,
+                next_observation=observation,
+                decision_index=global_index,
+            )
     finally:
         _close_environment(environment)
     raise RuntimeError(
@@ -1240,9 +1382,10 @@ def capture_curriculum_state(
     try:
         observation = environment.reset(run_seed)
         policy = _load_bootstrap_policy(policy_artifacts, environment)
+        no_op_guard = PublicNoOpActionGuard()
         prefix: list[str] = []
         seen = 0
-        for _ in range(maximum_prefix_steps + 1):
+        for global_index in range(maximum_prefix_steps + 1):
             if observation.decision_type is decision_type:
                 if seen == decision_index:
                     actions = tuple(environment.legal_actions())
@@ -1261,15 +1404,213 @@ def capture_curriculum_state(
                 seen += 1
             if bool(observation.public_state.get("terminal")):
                 break
-            action = policy.choose_action(observation, tuple(environment.legal_actions()))
+            source_observation = observation
+            legal_actions = tuple(environment.legal_actions())
+            action = policy.choose_action(
+                observation,
+                no_op_guard.eligible_actions(observation, legal_actions),
+            )
             prefix.append(action.action_id)
             observation = environment.step(action).next_observation
+            no_op_guard.observe_transition(
+                observation=source_observation,
+                action=action,
+                next_observation=observation,
+                decision_index=global_index,
+            )
     finally:
         _close_environment(environment)
     raise RuntimeError(
         f"Run seed {run_seed} did not reach {decision_type.value} decision {decision_index} "
         f"within {maximum_prefix_steps} decisions"
     )
+
+
+def capture_milestone_trajectory_state(
+    *,
+    backend: SearchBackendSpec,
+    capture_trajectory: dict[str, Any],
+    trajectory_decision_index: int,
+    maximum_prefix_steps: int,
+) -> _CapturedBootstrapState:
+    """Replay a frozen searched trajectory and capture one exact public state."""
+    decisions = _list(capture_trajectory.get("decisions"), "capture trajectory decisions")
+    if trajectory_decision_index < 0 or trajectory_decision_index >= len(decisions):
+        raise ValueError("Milestone trajectory decision index is outside the frozen trace")
+    if trajectory_decision_index > maximum_prefix_steps:
+        raise RuntimeError("Milestone trajectory coordinate exceeds maximum_prefix_steps")
+    run_seed = _integer(capture_trajectory.get("run_seed"), "capture trajectory run seed")
+    environment = load_search_environment(backend)
+    try:
+        observation = environment.reset(run_seed)
+        if environment.ruleset.manifest_id != capture_trajectory.get("ruleset_manifest_id"):
+            raise RuntimeError("Milestone replay environment ruleset differs")
+        guard = PublicNoOpActionGuard(
+            repetition_threshold=_integer(
+                capture_trajectory.get("no_op_fallback_threshold"),
+                "capture trajectory fallback threshold",
+            ),
+            event_limit=_integer(
+                capture_trajectory.get("liveness_tail_length"),
+                "capture trajectory liveness tail length",
+            ),
+        )
+        prefix: list[str] = []
+        for index, raw_record in enumerate(decisions):
+            record = _mapping(raw_record, "capture trajectory decision")
+            if index == trajectory_decision_index:
+                actions = tuple(environment.legal_actions())
+                if not actions:
+                    raise RuntimeError("Captured milestone state has no legal actions")
+                _validate_milestone_replay_source(
+                    observation=observation,
+                    legal_actions=actions,
+                    guard=guard,
+                    record=record,
+                    decision_index=index,
+                )
+                return _CapturedBootstrapState(
+                    capture_checkpoint(
+                        run_seed=run_seed,
+                        action_prefix=prefix,
+                        environment=environment,
+                        observation=observation,
+                    ),
+                    observation,
+                    actions,
+                )
+            actions = tuple(environment.legal_actions())
+            eligible = _validate_milestone_replay_source(
+                observation=observation,
+                legal_actions=actions,
+                guard=guard,
+                record=record,
+                decision_index=index,
+            )
+            action_id = _string(record.get("selected_action_id"), "selected action ID")
+            action = _action_by_id(eligible, action_id)
+            source = observation
+            transition = environment.step(action)
+            observation = transition.next_observation
+            if observation.state_hash != record.get("next_state_hash"):
+                raise RuntimeError(f"Milestone replay next-state divergence at decision {index}")
+            if transition.terminal is not record.get("terminal_after_action"):
+                raise RuntimeError(f"Milestone replay terminal divergence at decision {index}")
+            if transition.victory is not record.get("victory_after_action"):
+                raise RuntimeError(f"Milestone replay victory divergence at decision {index}")
+            prefix.append(action.action_id)
+            guard.observe_transition(
+                observation=source,
+                action=action,
+                next_observation=observation,
+                decision_index=index,
+            )
+    finally:
+        _close_environment(environment)
+    raise RuntimeError("Milestone trajectory ended before the requested coordinate")
+
+
+def _validate_milestone_replay_source(
+    *,
+    observation: Observation,
+    legal_actions: tuple[LegalAction, ...],
+    guard: PublicNoOpActionGuard,
+    record: dict[str, Any],
+    decision_index: int,
+) -> tuple[LegalAction, ...]:
+    if observation.state_hash != record.get("source_state_hash"):
+        raise RuntimeError(f"Milestone replay source-state divergence at decision {decision_index}")
+    if observation.decision_type.value != record.get("decision_type"):
+        raise RuntimeError(
+            f"Milestone replay decision-type divergence at decision {decision_index}"
+        )
+    if _public_integer(observation, ("floor",), ("run", "floor")) != record.get("source_floor"):
+        raise RuntimeError(f"Milestone replay floor divergence at decision {decision_index}")
+    if _public_act(observation) != record.get("source_act"):
+        raise RuntimeError(f"Milestone replay act divergence at decision {decision_index}")
+    eligible = tuple(guard.eligible_actions(observation, legal_actions))
+    expected_ids = tuple(
+        _string(value, "candidate action ID")
+        for value in _list(record.get("candidate_action_ids"), "candidate action IDs")
+    )
+    if tuple(action.action_id for action in eligible) != expected_ids:
+        raise RuntimeError(f"Milestone replay legal-action divergence at decision {decision_index}")
+    selected_id = _string(record.get("selected_action_id"), "selected action ID")
+    if selected_id not in expected_ids:
+        raise RuntimeError(f"Milestone selected action is illegal at decision {decision_index}")
+    return eligible
+
+
+def verify_milestone_trajectory_replay(
+    *,
+    backend: SearchBackendSpec,
+    capture_trajectory: dict[str, Any],
+) -> tuple[int, ...]:
+    """Replay every frozen transition and return exact eligible-action counts."""
+    decisions = _list(capture_trajectory.get("decisions"), "capture trajectory decisions")
+    run_seed = _integer(capture_trajectory.get("run_seed"), "capture trajectory run seed")
+    environment = load_search_environment(backend)
+    try:
+        observation = environment.reset(run_seed)
+        if environment.ruleset.manifest_id != capture_trajectory.get("ruleset_manifest_id"):
+            raise RuntimeError("Milestone replay environment ruleset differs")
+        guard = PublicNoOpActionGuard(
+            repetition_threshold=_integer(
+                capture_trajectory.get("no_op_fallback_threshold"),
+                "capture trajectory fallback threshold",
+            ),
+            event_limit=_integer(
+                capture_trajectory.get("liveness_tail_length"),
+                "capture trajectory liveness tail length",
+            ),
+        )
+        counts: list[int] = []
+        maximum_floor = _public_integer(observation, ("floor",), ("run", "floor")) or 0
+        for index, raw_record in enumerate(decisions):
+            record = _mapping(raw_record, "capture trajectory decision")
+            legal_actions = tuple(environment.legal_actions())
+            eligible = _validate_milestone_replay_source(
+                observation=observation,
+                legal_actions=legal_actions,
+                guard=guard,
+                record=record,
+                decision_index=index,
+            )
+            counts.append(len(eligible))
+            action = _action_by_id(
+                eligible,
+                _string(record.get("selected_action_id"), "selected action ID"),
+            )
+            source = observation
+            transition = environment.step(action)
+            observation = transition.next_observation
+            if observation.state_hash != record.get("next_state_hash"):
+                raise RuntimeError(f"Milestone replay next-state divergence at decision {index}")
+            if transition.terminal is not record.get("terminal_after_action"):
+                raise RuntimeError(f"Milestone replay terminal divergence at decision {index}")
+            if transition.victory is not record.get("victory_after_action"):
+                raise RuntimeError(f"Milestone replay victory divergence at decision {index}")
+            maximum_floor = max(
+                maximum_floor,
+                _public_integer(observation, ("floor",), ("run", "floor")) or 0,
+            )
+            guard.observe_transition(
+                observation=source,
+                action=action,
+                next_observation=observation,
+                decision_index=index,
+            )
+        if observation.state_hash != capture_trajectory.get("final_state_hash"):
+            raise RuntimeError("Milestone replay final-state divergence")
+        if maximum_floor != capture_trajectory.get("maximum_floor"):
+            raise RuntimeError("Milestone replay maximum-floor divergence")
+        if bool(observation.public_state.get("terminal")) is not capture_trajectory.get("terminal"):
+            raise RuntimeError("Milestone replay final terminal state differs")
+        if bool(observation.public_state.get("victory")) is not capture_trajectory.get("victory"):
+            raise RuntimeError("Milestone replay final victory state differs")
+        return tuple(counts)
+    finally:
+        _close_environment(environment)
 
 
 def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
@@ -1287,6 +1628,14 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             task=task,
         )
         policy = _load_bootstrap_policy(task.continuation_policy, sampled)
+        no_op_guard = (
+            PublicNoOpActionGuard(
+                repetition_threshold=task.no_op_fallback_threshold,
+                event_limit=task.no_op_fallback_event_limit,
+            )
+            if task.no_op_fallback_threshold is not None
+            else None
+        )
         source_floor = _public_integer(source, ("floor",), ("run", "floor"))
         source_act = _public_act(source)
         maximum_floor = source_floor
@@ -1300,12 +1649,33 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
             raise RuntimeError("Hidden-world clone changed the source public observation")
         decisions = 1
         observation = transition.next_observation
+        if no_op_guard is not None:
+            no_op_guard.observe_transition(
+                observation=source,
+                action=action,
+                next_observation=observation,
+                decision_index=0,
+            )
         maximum_floor = _maximum_optional(
             maximum_floor, _public_integer(observation, ("floor",), ("run", "floor"))
         )
         while not transition.terminal and decisions < task.maximum_rollout_steps:
-            continuation = policy.choose_action(observation, tuple(sampled.legal_actions()))
+            legal_actions = tuple(sampled.legal_actions())
+            eligible_actions = (
+                no_op_guard.eligible_actions(observation, legal_actions)
+                if no_op_guard is not None
+                else legal_actions
+            )
+            source_observation = observation
+            continuation = policy.choose_action(observation, eligible_actions)
             transition = sampled.step(continuation)
+            if no_op_guard is not None:
+                no_op_guard.observe_transition(
+                    observation=source_observation,
+                    action=continuation,
+                    next_observation=transition.next_observation,
+                    decision_index=decisions,
+                )
             decisions += 1
             observation = transition.next_observation
             maximum_floor = _maximum_optional(
@@ -1368,6 +1738,8 @@ def execute_bootstrap_task(task: BootstrapSimulationTask) -> dict[str, object]:
                     "combat_advancement_usage": usage().as_dict(),
                 }
             )
+        if no_op_guard is not None:
+            output["no_op_fallback"] = no_op_guard.as_dict()
         output["bootstrap_utility"] = bootstrap_utility(output)
         return output
     finally:
@@ -1410,6 +1782,8 @@ def _bootstrap_retry_seed(base_seed: int, attempt_index: int) -> int:
 
 
 def _bootstrap_output_method(task: BootstrapSimulationTask) -> str:
+    if task.no_op_fallback_threshold is not None:
+        return "paired-public-cycle-safe-progress-rollout-v4"
     if (
         task.continuation_policy is not None
         and task.continuation_policy.combat_advancement_config is not None
@@ -1621,13 +1995,23 @@ def run_bootstrap_teacher_dataset(
         case_root.mkdir(parents=True, exist_ok=True)
         try:
             if isinstance(case, CurriculumStateCase):
-                captured = capture_curriculum_state(
-                    backend=backend,
-                    run_seed=case.run_seed,
-                    decision_type=case.decision_type,
-                    decision_index=case.decision_index,
-                    maximum_prefix_steps=config.maximum_prefix_steps,
-                    policy_artifacts=policy_artifacts,
+                captured = (
+                    capture_milestone_trajectory_state(
+                        backend=backend,
+                        capture_trajectory=state_set.capture_trajectory,
+                        trajectory_decision_index=cast(int, case.trajectory_decision_index),
+                        maximum_prefix_steps=config.maximum_prefix_steps,
+                    )
+                    if isinstance(state_set, CurriculumStateSet)
+                    and state_set.capture_trajectory is not None
+                    else capture_curriculum_state(
+                        backend=backend,
+                        run_seed=case.run_seed,
+                        decision_type=case.decision_type,
+                        decision_index=case.decision_index,
+                        maximum_prefix_steps=config.maximum_prefix_steps,
+                        policy_artifacts=policy_artifacts,
+                    )
                 )
             else:
                 captured = capture_bootstrap_combat_state(
@@ -1649,6 +2033,7 @@ def run_bootstrap_teacher_dataset(
                 captured,
                 config,
                 continuation_policy=policy_artifacts,
+                cycle_safe=_uses_production_dagger_guard(state_set),
             )
             batch_path, batch_report = run_bootstrap_worker_batch(
                 tasks=tasks,
@@ -1789,8 +2174,15 @@ def combine_curriculum_datasets(
                 + "; ".join(verification.errors)
             )
         report = _load_object(report_path)
-        if report.get("schema_version") != LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION:
-            raise ValueError("Curriculum composition requires learned-policy v3 datasets")
+        if report.get("schema_version") not in {
+            LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
+            MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION,
+        }:
+            raise ValueError(
+                "Curriculum composition requires learned-policy v3, production DAgger v6, "
+                "or milestone-trajectory v7 datasets"
+            )
         state_set = load_bootstrap_state_set_document(report.get("state_set"))
         if not isinstance(state_set, CurriculumStateSet) or state_set.capture_policy is None:
             raise ValueError("Curriculum composition requires learned-policy state sets")
@@ -1834,7 +2226,19 @@ def combine_curriculum_datasets(
             raise ValueError("Component curricula contain overlapping complete-run seeds")
         seen_state_ids.update(state_ids)
         seen_run_seeds.update(run_seeds)
-        combined_cases.extend(state_set.cases)
+        combined_cases.extend(
+            CurriculumStateCase(
+                state_id=case.state_id,
+                run_seed=case.run_seed,
+                decision_type=case.decision_type,
+                decision_index=case.decision_index,
+                expected_state_hash=case.expected_state_hash,
+                expected_legal_actions=case.expected_legal_actions,
+                expected_source_floor=case.expected_source_floor,
+                expected_source_act=case.expected_source_act,
+            )
+            for case in state_set.cases
+        )
 
     signal_specs = [state_set.signal_spec for _, _, state_set in components]
     combined_signal_spec = CurriculumSignalSpec(
@@ -1859,6 +2263,17 @@ def combine_curriculum_datasets(
     maximum_steps: set[int] = set()
     for _, _, state_set in components:
         discovery = state_set.discovery
+        if state_set.capture_trajectory is not None:
+            for case in state_set.cases:
+                combined_occurrences.setdefault(case.decision_type.value, set()).add(
+                    case.decision_index
+                )
+            requested_coordinates += len(state_set.cases)
+            terminal_runs += 1
+            maximum_steps.add(
+                _integer(discovery.get("maximum_steps_per_run"), "maximum steps per run")
+            )
+            continue
         for decision_type, indices in _mapping(
             discovery.get("decision_occurrences"), "decision occurrences"
         ).items():
@@ -2011,6 +2426,8 @@ def verify_bootstrap_teacher_dataset(
             LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
             TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
             COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+            PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
+            MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION,
         }:
             errors.append("unsupported bootstrap dataset schema")
         expected_teacher_id = (
@@ -2021,6 +2438,8 @@ def verify_bootstrap_teacher_dataset(
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
                 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
                 COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+                PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
+                MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION,
             }
             else BOOTSTRAP_TEACHER_ID
         )
@@ -2071,6 +2490,8 @@ def verify_bootstrap_teacher_dataset(
                 LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
                 TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
                 COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+                PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
+                MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION,
             }
         ):
             errors.append("bootstrap dataset and state-set schema generations differ")
@@ -2176,6 +2597,12 @@ def verify_bootstrap_teacher_dataset(
                     configuration.get("maximum_rollout_steps"), "maximum_rollout_steps"
                 ),
                 continuation_policy_id=state_set.capture_policy_id,
+                cycle_safe=(
+                    None
+                    if isinstance(state_set, CurriculumStateSet)
+                    and "component_state_set_ids" in state_set.discovery
+                    else _uses_production_dagger_guard(state_set)
+                ),
             )
             if not batch_errors:
                 verified_cases += 1
@@ -2223,6 +2650,8 @@ def load_curriculum_policy_examples(
         LEARNED_CURRICULUM_DATASET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION,
         COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION,
+        PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION,
+        MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION,
     }:
         raise ValueError("Policy examples require a curriculum dataset")
     root = report_path.parent.resolve()
@@ -2461,7 +2890,10 @@ def _bootstrap_tasks(
     config: BootstrapConfig,
     *,
     continuation_policy: BootstrapPolicyArtifacts | None = None,
+    cycle_safe: bool = False,
 ) -> tuple[BootstrapSimulationTask, ...]:
+    if cycle_safe and continuation_policy is None:
+        raise ValueError("Cycle-safe bootstrap tasks require a learned continuation policy")
     tasks: list[BootstrapSimulationTask] = []
     for sample_index in range(config.samples_per_candidate):
         seed = _bootstrap_seed(config.sampling_seed, captured.checkpoint.state_hash, sample_index)
@@ -2469,6 +2901,14 @@ def _bootstrap_tasks(
             identity_parts = [BOOTSTRAP_TEACHER_ID]
             if continuation_policy is not None:
                 identity_parts.append(continuation_policy.policy_id)
+            if cycle_safe:
+                identity_parts.extend(
+                    (
+                        PublicNoOpActionGuard.controller_id,
+                        str(PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD),
+                        str(PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT),
+                    )
+                )
             identity_parts.extend((captured.checkpoint.state_hash, action.action_id, str(seed)))
             task_id = str(
                 uuid5(
@@ -2485,6 +2925,8 @@ def _bootstrap_tasks(
                     seed,
                     config.maximum_rollout_steps,
                     continuation_policy,
+                    (PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD if cycle_safe else None),
+                    PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT,
                 )
             )
     return tuple(tasks)
@@ -2824,6 +3266,7 @@ def _verify_case_task_domain(
     samples_per_candidate: int,
     maximum_rollout_steps: int,
     continuation_policy_id: str,
+    cycle_safe: bool | None,
 ) -> None:
     root = batch_path.parent.resolve()
     by_action: dict[str, set[int]] = {action_id: set() for action_id in action_ids}
@@ -2843,6 +3286,13 @@ def _verify_case_task_domain(
             raise ValueError("bootstrap task rollout limit differs from dataset configuration")
         if task.continuation_policy_id != continuation_policy_id:
             raise ValueError("bootstrap task continuation policy differs from state set")
+        if cycle_safe is not None and (task.no_op_fallback_threshold is not None) != cycle_safe:
+            raise ValueError("bootstrap task no-op fallback differs from state set")
+        if task.no_op_fallback_threshold is not None and (
+            task.no_op_fallback_threshold != PRODUCTION_DAGGER_NO_OP_FALLBACK_THRESHOLD
+            or task.no_op_fallback_event_limit != PRODUCTION_DAGGER_NO_OP_FALLBACK_EVENT_LIMIT
+        ):
+            raise ValueError("bootstrap task no-op fallback configuration differs")
         seeds = by_action.get(task.action_id)
         if seeds is None:
             raise ValueError("bootstrap task action is absent from model input")
@@ -2891,6 +3341,7 @@ def _validate_bootstrap_output(
         task.continuation_policy is not None
         and task.continuation_policy.combat_advancement_config is not None
     )
+    cycle_safe = task.no_op_fallback_threshold is not None
     if combat_advancement:
         expected_keys.update(
             {
@@ -2899,6 +3350,8 @@ def _validate_bootstrap_output(
                 "combat_advancement_usage",
             }
         )
+    if cycle_safe:
+        expected_keys.add("no_op_fallback")
     _exact_keys(output, expected_keys, "bootstrap output")
     expected = {
         "method": _bootstrap_output_method(task),
@@ -2933,6 +3386,36 @@ def _validate_bootstrap_output(
         )
         if any(_integer(value, f"combat advancement {key}") < 0 for key, value in usage.items()):
             raise ValueError("combat advancement usage must be non-negative")
+    if cycle_safe:
+        fallback = _mapping(output.get("no_op_fallback"), "no-op fallback evidence")
+        _exact_keys(
+            fallback,
+            {
+                "schema_version",
+                "controller_id",
+                "repetition_threshold",
+                "event_limit",
+                "invocations",
+                "suppressed_actions",
+                "exhausted_states",
+                "events",
+            },
+            "no-op fallback evidence",
+        )
+        if fallback.get("schema_version") != PUBLIC_NO_OP_FALLBACK_SCHEMA_VERSION:
+            raise ValueError("bootstrap no-op fallback evidence schema differs")
+        if fallback.get("controller_id") != PublicNoOpActionGuard.controller_id:
+            raise ValueError("bootstrap no-op fallback controller differs")
+        if fallback.get("repetition_threshold") != task.no_op_fallback_threshold:
+            raise ValueError("bootstrap no-op fallback threshold differs")
+        if fallback.get("event_limit") != task.no_op_fallback_event_limit:
+            raise ValueError("bootstrap no-op fallback event limit differs")
+        for key in ("invocations", "suppressed_actions", "exhausted_states"):
+            if _integer(fallback.get(key), f"fallback {key}") < 0:
+                raise ValueError("bootstrap no-op fallback counts must be non-negative")
+        events = _list(fallback.get("events"), "fallback events")
+        if len(events) > task.no_op_fallback_event_limit:
+            raise ValueError("bootstrap no-op fallback event evidence exceeds its limit")
     transitions = _integer(output.get("transitions"), "transitions")
     if not 1 <= transitions <= task.maximum_rollout_steps:
         raise ValueError("bootstrap transitions exceed the declared limit")
@@ -3076,6 +3559,7 @@ def _curriculum_dataset_summary(
         "unreachable_coordinates": (
             0
             if state_set.signal_spec.requires_terminal_signal
+            or state_set.capture_trajectory is not None
             else len(
                 _list(
                     state_set.discovery.get("unreachable_coordinates"),
@@ -3306,11 +3790,15 @@ def _dataset_configuration(
 def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
     if not isinstance(state_set, CurriculumStateSet):
         return BOOTSTRAP_DATASET_SCHEMA_VERSION
+    if state_set.capture_trajectory is not None:
+        return MILESTONE_TRAJECTORY_DATASET_SCHEMA_VERSION
     if (
         state_set.capture_policy is not None
         and state_set.capture_policy.get("kind") == "combat_advancement_checkpoint"
     ):
         return COMBAT_ADVANCEMENT_DATASET_SCHEMA_VERSION
+    if _uses_production_dagger_guard(state_set):
+        return PRODUCTION_DAGGER_DATASET_SCHEMA_VERSION
     if state_set.discovery.get("schema_version") == "bootstrap-curriculum-discovery-v3":
         return TERMINAL_FRONTIER_DATASET_SCHEMA_VERSION
     if state_set.capture_policy is not None:
@@ -3319,6 +3807,8 @@ def _dataset_schema_for(state_set: BootstrapStateSetLike) -> str:
 
 
 def _worker_result_schema(task: BootstrapSimulationTask) -> str:
+    if task.no_op_fallback_threshold is not None:
+        return PRODUCTION_DAGGER_WORKER_RESULT_SCHEMA_VERSION
     if (
         task.continuation_policy is not None
         and task.continuation_policy.combat_advancement_config is not None
@@ -3328,6 +3818,14 @@ def _worker_result_schema(task: BootstrapSimulationTask) -> str:
         LEARNED_BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
         if task.continuation_policy is not None
         else BOOTSTRAP_WORKER_RESULT_SCHEMA_VERSION
+    )
+
+
+def _uses_production_dagger_guard(state_set: BootstrapStateSetLike) -> bool:
+    return (
+        isinstance(state_set, CurriculumStateSet)
+        and state_set.capture_policy is not None
+        and state_set.selection_policy.startswith(PRODUCTION_DAGGER_SELECTION_POLICY_PREFIX)
     )
 
 
@@ -3391,6 +3889,7 @@ def _load_curriculum_state_set_document(
         LEARNED_CURRICULUM_STATE_SET_SCHEMA_VERSION,
         TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
         COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION,
+        MILESTONE_TRAJECTORY_STATE_SET_SCHEMA_VERSION,
     }
     frontier = schema_version in {
         TERMINAL_FRONTIER_STATE_SET_SCHEMA_VERSION,
@@ -3411,6 +3910,9 @@ def _load_curriculum_state_set_document(
     }
     if learned:
         expected_keys.add("capture_policy")
+    milestone_trajectory = schema_version == MILESTONE_TRAJECTORY_STATE_SET_SCHEMA_VERSION
+    if milestone_trajectory:
+        expected_keys.add("capture_trajectory")
     _exact_keys(
         document,
         expected_keys,
@@ -3422,7 +3924,16 @@ def _load_curriculum_state_set_document(
         raise ValueError("Curriculum state-set identity mismatch")
     discovery = dict(_mapping(document.get("discovery"), "discovery"))
     captured = _integer(discovery.get("captured_coordinates"), "captured coordinates")
-    if frontier:
+    if milestone_trajectory:
+        if discovery.get("schema_version") != "milestone-trajectory-discovery-v1":
+            raise ValueError("Milestone trajectory state set has the wrong discovery schema")
+        if discovery.get("exact_replay") is not True:
+            raise ValueError("Milestone trajectory discovery must require exact replay")
+        requested = _integer(discovery.get("requested_coordinates"), "requested coordinates")
+        duplicates = _integer(discovery.get("excluded_duplicate_states"), "duplicate states")
+        if requested != captured + duplicates:
+            raise ValueError("Milestone trajectory discovery does not account for all states")
+    elif frontier:
         expected_discovery_schema = (
             "bootstrap-curriculum-discovery-v4"
             if schema_version == COMBAT_ADVANCEMENT_STATE_SET_SCHEMA_VERSION
@@ -3469,6 +3980,11 @@ def _load_curriculum_state_set_document(
                 for key, item in _mapping(document.get("capture_policy"), "capture_policy").items()
             }
             if learned
+            else None
+        ),
+        capture_trajectory=(
+            dict(_mapping(document.get("capture_trajectory"), "capture trajectory"))
+            if milestone_trajectory
             else None
         ),
     )
@@ -3541,6 +4057,123 @@ def _validate_policy_provenance(
     _string(provenance.get("training_report_id"), "training_report_id")
 
 
+def _validate_capture_trajectory(
+    document: dict[str, Any],
+    *,
+    cases: Sequence[CurriculumStateCase],
+) -> None:
+    expected = {
+        "schema_version",
+        "capture_trajectory_id",
+        "search_report_id",
+        "search_verification_id",
+        "search_config_id",
+        "search_case_id",
+        "trajectory_id",
+        "lineage_trajectory_ids",
+        "mutation_lineage",
+        "run_seed",
+        "ruleset_manifest_id",
+        "hidden_state_resampling",
+        "action_trace_sha256",
+        "maximum_floor",
+        "boss_reached",
+        "act1_cleared",
+        "terminal",
+        "victory",
+        "final_state_hash",
+        "no_op_fallback_threshold",
+        "liveness_tail_length",
+        "decisions",
+    }
+    _exact_keys(document, expected, "capture trajectory")
+    if document.get("schema_version") != "milestone-trajectory-replay-v1":
+        raise ValueError("Capture trajectory schema differs")
+    body = {key: value for key, value in document.items() if key != "capture_trajectory_id"}
+    if document.get("capture_trajectory_id") != manifest_identifier(body):
+        raise ValueError("Capture trajectory identity mismatch")
+    if document.get("hidden_state_resampling") is not False:
+        raise ValueError("Capture trajectory permits hidden-state resampling")
+    if document.get("boss_reached") is not True:
+        raise ValueError("Capture trajectory does not contain the accepted boss reach")
+    if document.get("act1_cleared") is not False or document.get("victory") is not False:
+        raise ValueError("Boss reach must remain a non-victory auxiliary milestone")
+    if document.get("terminal") is not True:
+        raise ValueError("Capture trajectory must record its terminal outcome")
+    run_seed = _integer(document.get("run_seed"), "capture trajectory run seed")
+    decisions = _list(document.get("decisions"), "capture trajectory decisions")
+    if not decisions:
+        raise ValueError("Capture trajectory has no decisions")
+    action_ids: list[str] = []
+    for index, raw_record in enumerate(decisions):
+        record = _mapping(raw_record, "capture trajectory decision")
+        _exact_keys(
+            record,
+            {
+                "decision_index",
+                "decision_type",
+                "source_state_hash",
+                "source_floor",
+                "source_act",
+                "candidate_action_ids",
+                "selected_action_id",
+                "selection_source",
+                "next_state_hash",
+                "terminal_after_action",
+                "victory_after_action",
+            },
+            "capture trajectory decision",
+        )
+        if _integer(record.get("decision_index"), "trajectory decision index") != index:
+            raise ValueError("Capture trajectory decision indexes differ")
+        DecisionType(_string(record.get("decision_type"), "trajectory decision type"))
+        candidates = tuple(
+            _string(item, "trajectory candidate action")
+            for item in _list(record.get("candidate_action_ids"), "candidate action IDs")
+        )
+        selected = _string(record.get("selected_action_id"), "selected action ID")
+        if not candidates or len(candidates) != len(set(candidates)) or selected not in candidates:
+            raise ValueError("Capture trajectory action domain is invalid")
+        action_ids.append(selected)
+    expected_trace = "sha256:" + hashlib.sha256("\n".join(action_ids).encode()).hexdigest()
+    if document.get("action_trace_sha256") != expected_trace:
+        raise ValueError("Capture trajectory action trace identity differs")
+    final_record = _mapping(decisions[-1], "final capture trajectory decision")
+    if final_record.get("next_state_hash") != document.get("final_state_hash"):
+        raise ValueError("Capture trajectory final state differs")
+    if final_record.get("terminal_after_action") is not document.get("terminal"):
+        raise ValueError("Capture trajectory terminal evidence differs")
+    if final_record.get("victory_after_action") is not document.get("victory"):
+        raise ValueError("Capture trajectory victory evidence differs")
+    by_index = {
+        _integer(
+            _mapping(item, "trajectory decision").get("decision_index"), "decision index"
+        ): _mapping(item, "trajectory decision")
+        for item in decisions
+    }
+    for case in cases:
+        if case.run_seed != run_seed:
+            raise ValueError("Milestone case run seed differs from capture trajectory")
+        index = cast(int, case.trajectory_decision_index)
+        matched_record = by_index.get(index)
+        if matched_record is None:
+            raise ValueError("Milestone case coordinate is absent from capture trajectory")
+        expected_values = {
+            "decision_type": case.decision_type.value,
+            "source_state_hash": case.expected_state_hash,
+            "source_floor": case.expected_source_floor,
+            "source_act": case.expected_source_act,
+            "selected_action_id": case.expected_selected_action_id,
+            "next_state_hash": case.expected_next_state_hash,
+        }
+        if any(matched_record.get(key) != value for key, value in expected_values.items()):
+            raise ValueError("Milestone case differs from its capture trajectory record")
+        if len(_list(matched_record.get("candidate_action_ids"), "candidate action IDs")) != (
+            case.expected_legal_actions
+        ):
+            raise ValueError("Milestone case legal-action count differs from its trace")
+
+
 def _load_bootstrap_policy(
     artifacts: BootstrapPolicyArtifacts | None,
     environment: object,
@@ -3557,18 +4190,26 @@ def _load_bootstrap_policy(
 
 def _curriculum_state_case(value: object) -> CurriculumStateCase:
     document = _mapping(value, "curriculum state case")
+    base_keys = {
+        "state_id",
+        "run_seed",
+        "decision_type",
+        "decision_index",
+        "expected_state_hash",
+        "expected_legal_actions",
+        "expected_source_floor",
+        "expected_source_act",
+    }
+    trajectory_keys = {
+        "trajectory_decision_index",
+        "expected_selected_action_id",
+        "expected_next_state_hash",
+    }
+    if set(document) not in {frozenset(base_keys), frozenset(base_keys | trajectory_keys)}:
+        raise ValueError("Curriculum state case fields differ")
     _exact_keys(
         document,
-        {
-            "state_id",
-            "run_seed",
-            "decision_type",
-            "decision_index",
-            "expected_state_hash",
-            "expected_legal_actions",
-            "expected_source_floor",
-            "expected_source_act",
-        },
+        set(document),
         "curriculum state case",
     )
     state_hash = _string(document.get("expected_state_hash"), "expected_state_hash")
@@ -3595,6 +4236,21 @@ def _curriculum_state_case(value: object) -> CurriculumStateCase:
         ),
         expected_source_floor=source_floor,
         expected_source_act=source_act,
+        trajectory_decision_index=(
+            _integer(document.get("trajectory_decision_index"), "trajectory_decision_index")
+            if trajectory_keys <= set(document)
+            else None
+        ),
+        expected_selected_action_id=(
+            _string(document.get("expected_selected_action_id"), "expected_selected_action_id")
+            if trajectory_keys <= set(document)
+            else None
+        ),
+        expected_next_state_hash=(
+            _string(document.get("expected_next_state_hash"), "expected_next_state_hash")
+            if trajectory_keys <= set(document)
+            else None
+        ),
     )
     if (
         case.run_seed < 0

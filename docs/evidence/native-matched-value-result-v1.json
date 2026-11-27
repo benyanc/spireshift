@@ -1,0 +1,230 @@
+{
+  "schema_version": "native-matched-value-completed-evidence-v1",
+  "date": "2026-10-20",
+  "path": "artifacts/native-matched-value/sts2-v0.111.0-a8-comparison-v1/report.json",
+  "report_id": "sha256:759c8fa5e9a23b16fb2b6cd5e06834d8e9ec909e9aec5fb6aaa6db5a313ba49c",
+  "config_id": "sha256:4baf7f78b4d302eab97b9cc880ff83e398f3ef7c0863bc7f221b3b335d0a847d",
+  "completed_encodings": 16,
+  "completed_fits": 48,
+  "summary": {
+    "adaptive_controller_allowed": false,
+    "automatic_training_follows": false,
+    "by_cohort": {
+      "seed-2-standard-round-057-fit": {
+        "coarse_masked": 2.6746566635921796e-05,
+        "current_ridge": 2.6049091280158993e-05,
+        "other_game_constant": 3.664371381183387e-05,
+        "rich": 3.993574655597849e-05
+      },
+      "seed-2-standard-round-060-fit": {
+        "coarse_masked": 0.0001555787576939445,
+        "current_ridge": 0.00015462488807280834,
+        "other_game_constant": 0.00022742796397382995,
+        "rich": 0.0001852501181347347
+      },
+      "seed-3-standard-round-057-fit": {
+        "coarse_masked": 2.1550431825094927e-05,
+        "current_ridge": 2.089722244362194e-05,
+        "other_game_constant": 3.4682433912782825e-05,
+        "rich": 3.107790928830588e-05
+      },
+      "seed-3-standard-round-060-fit": {
+        "coarse_masked": 1.948801240058708e-05,
+        "current_ridge": 1.8940712818807762e-05,
+        "other_game_constant": 2.7381669823197383e-05,
+        "rich": 2.8762083993757364e-05
+      }
+    },
+    "by_network_initializer": {
+      "20261020": {
+        "coarse_masked": 5.666620845145684e-05,
+        "current_ridge": 5.512797865384927e-05,
+        "other_game_constant": 8.153394538041102e-05,
+        "rich": 7.190992558928738e-05
+      },
+      "20261021": {
+        "coarse_masked": 5.57616846944823e-05,
+        "current_ridge": 5.512797865384927e-05,
+        "other_game_constant": 8.153394538041102e-05,
+        "rich": 6.918092601571659e-05
+      },
+      "20261022": {
+        "coarse_masked": 5.509493327072209e-05,
+        "current_ridge": 5.512797865384927e-05,
+        "other_game_constant": 8.153394538041102e-05,
+        "rich": 7.267854187457841e-05
+      }
+    },
+    "checkpoint_promoted": false,
+    "curve_snapshots_are_not_epoch_selection": true,
+    "curves": {
+      "coarse_masked": [
+        {
+          "fitting_clipped_mse": 4.5684288446051724e-05,
+          "fitting_mse": 4.5684288446051724e-05,
+          "held_clipped_mse": 5.512797865384928e-05,
+          "held_mse": 5.512797865384928e-05,
+          "regularized_fitting_loss": 0.0032496299134446866,
+          "step": 0,
+          "weight_penalty": 0.0032039456249986346
+        },
+        {
+          "fitting_clipped_mse": 4.7201964400469616e-05,
+          "fitting_mse": 4.7201964400469616e-05,
+          "held_clipped_mse": 5.807183722573273e-05,
+          "held_mse": 5.807183722573273e-05,
+          "regularized_fitting_loss": 0.002786499210002727,
+          "step": 1,
+          "weight_penalty": 0.002739297245602257
+        },
+        {
+          "fitting_clipped_mse": 4.898902447048975e-05,
+          "fitting_mse": 4.898902447048975e-05,
+          "held_clipped_mse": 5.903417412180538e-05,
+          "held_mse": 5.903417412180538e-05,
+          "regularized_fitting_loss": 0.0017194801433228055,
+          "step": 4,
+          "weight_penalty": 0.0016704911188523148
+        },
+        {
+          "fitting_clipped_mse": 4.681473552695662e-05,
+          "fitting_mse": 4.681473552695662e-05,
+          "held_clipped_mse": 5.634247356618629e-05,
+          "held_mse": 5.634247356618629e-05,
+          "regularized_fitting_loss": 0.0008785165733616102,
+          "step": 8,
+          "weight_penalty": 0.0008317018378346534
+        },
+        {
+          "fitting_clipped_mse": 4.556323919014389e-05,
+          "fitting_mse": 4.556323919014389e-05,
+          "held_clipped_mse": 5.5579051688532345e-05,
+          "held_mse": 5.5579051688532345e-05,
+          "regularized_fitting_loss": 0.00026754250292931246,
+          "step": 16,
+          "weight_penalty": 0.00022197926373916858
+        },
+        {
+          "fitting_clipped_mse": 4.571284362005937e-05,
+          "fitting_mse": 4.571284362005937e-05,
+          "held_clipped_mse": 5.5840942138887075e-05,
+          "held_mse": 5.5840942138887075e-05,
+          "regularized_fitting_loss": 0.00013410772938484477,
+          "step": 24,
+          "weight_penalty": 8.839488576478542e-05
+        },
+        {
+          "fitting_clipped_mse": 4.498145325100884e-05,
+          "fitting_mse": 4.498145325100884e-05,
+          "held_clipped_mse": 5.606480021701303e-05,
+          "held_mse": 5.606480021701303e-05,
+          "regularized_fitting_loss": 5.4758812091437784e-05,
+          "step": 48,
+          "weight_penalty": 9.77735884042897e-06
+        },
+        {
+          "fitting_clipped_mse": 4.461598998255101e-05,
+          "fitting_mse": 4.461598998255101e-05,
+          "held_clipped_mse": 5.6256695821326466e-05,
+          "held_mse": 5.6256695821326466e-05,
+          "regularized_fitting_loss": 4.536057704207603e-05,
+          "step": 96,
+          "weight_penalty": 7.44587059524992e-07
+        }
+      ],
+      "rich": [
+        {
+          "fitting_clipped_mse": 4.5684288446051724e-05,
+          "fitting_mse": 4.5684288446051724e-05,
+          "held_clipped_mse": 5.512797865384928e-05,
+          "held_mse": 5.512797865384928e-05,
+          "regularized_fitting_loss": 0.0032496299134446866,
+          "step": 0,
+          "weight_penalty": 0.0032039456249986346
+        },
+        {
+          "fitting_clipped_mse": 0.00011870032737584068,
+          "fitting_mse": 0.00012066092786664968,
+          "held_clipped_mse": 0.00014681440247616673,
+          "held_mse": 0.00014823536871067235,
+          "regularized_fitting_loss": 0.0028599585092443877,
+          "step": 1,
+          "weight_penalty": 0.002739297581377738
+        },
+        {
+          "fitting_clipped_mse": 0.00018144194321179476,
+          "fitting_mse": 0.00018847194021507892,
+          "held_clipped_mse": 0.00019649930891523147,
+          "held_mse": 0.00020369678685758878,
+          "regularized_fitting_loss": 0.0021225495036767024,
+          "step": 4,
+          "weight_penalty": 0.0019340775634616241
+        },
+        {
+          "fitting_clipped_mse": 0.0001400191605385969,
+          "fitting_mse": 0.00014067907014396168,
+          "held_clipped_mse": 0.00015662679529144505,
+          "held_mse": 0.00015705595194603404,
+          "regularized_fitting_loss": 0.0014274963641544205,
+          "step": 8,
+          "weight_penalty": 0.0012868172940104586
+        },
+        {
+          "fitting_clipped_mse": 6.496979551978506e-05,
+          "fitting_mse": 6.501292996968911e-05,
+          "held_clipped_mse": 9.23743869426839e-05,
+          "held_mse": 9.24482445413476e-05,
+          "regularized_fitting_loss": 0.0006965452224076597,
+          "step": 16,
+          "weight_penalty": 0.0006315322924379706
+        },
+        {
+          "fitting_clipped_mse": 4.068625143536217e-05,
+          "fitting_mse": 4.069359650042737e-05,
+          "held_clipped_mse": 7.125646449319412e-05,
+          "held_mse": 7.135838996826558e-05,
+          "regularized_fitting_loss": 0.0003888328543757888,
+          "step": 24,
+          "weight_penalty": 0.0003481392578753612
+        },
+        {
+          "fitting_clipped_mse": 2.9967164346534475e-05,
+          "fitting_mse": 2.999288065180008e-05,
+          "held_clipped_mse": 7.384843162612831e-05,
+          "held_mse": 7.482345315652021e-05,
+          "regularized_fitting_loss": 9.940471490107543e-05,
+          "step": 48,
+          "weight_penalty": 6.941183424927538e-05
+        },
+        {
+          "fitting_clipped_mse": 2.680411204936051e-05,
+          "fitting_mse": 2.6804128341315466e-05,
+          "held_clipped_mse": 7.338765267800745e-05,
+          "held_mse": 7.368749403678913e-05,
+          "regularized_fitting_loss": 3.562173960871667e-05,
+          "step": 96,
+          "weight_penalty": 8.817611267401203e-06
+        }
+      ]
+    },
+    "folds_and_numerical_repeats_are_not_independent_games": true,
+    "held_forecasts_including_numerical_repeats": 384,
+    "prediction_target": "declared_bootstrap_return_not_victory_probability",
+    "primary_equal_game_clipped_mse": {
+      "coarse_masked": 5.5840942138887095e-05,
+      "current_ridge": 5.512797865384927e-05,
+      "other_game_constant": 8.153394538041102e-05,
+      "rich": 7.125646449319408e-05
+    },
+    "primary_step": 24,
+    "statistical_scope": "saved_train_development_not_independent_confirmation",
+    "stronger_native_play_established": false,
+    "unique_held_games": 128
+  },
+  "new_games": 0,
+  "actor_optimizer_steps": 0,
+  "production_states_unchanged": true,
+  "interpretation": "Fixed-step rich neural forecasts generalize worse in all four cohorts and all three initializer summaries. Fitting/held divergence and penalty-dominated combined loss motivate a separately declared regularized linear study, not adoption or proof that data size alone explains the result.",
+  "historical_prelaunch_evidence": "docs/evidence/native-matched-value-v1.json",
+  "evidence_id": "sha256:c62ab1ad5795b019cd4dc64e7bbdc48a70f7e5f9ea4a41db94eebc3a6a9abeef"
+}

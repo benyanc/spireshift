@@ -1,0 +1,11 @@
+{
+  "schema_version": "native-comparison-launch-v1",
+  "recipe": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-modal-status-titles-control-v2.json",
+    "sha256": "a32538402c757dab02a5e598ebacd83cf777cf78cdff5abef66eb07db23faa4c"
+  },
+  "wall_seconds": 340,
+  "cpu_seconds": 680,
+  "resident_memory_bytes": 4000000000,
+  "storage_bytes": 1000000000
+}

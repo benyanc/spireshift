@@ -1,0 +1,776 @@
+{
+  "environment_id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+  "manifest_id": "sha256:9b95791c9307624f5e2d6f439a6f6042b3dafe318830998d3d6d786a8eedd772",
+  "purpose": "fresh_frozen_standard_player_confirmation_no_training",
+  "schema_version": "native-complete-run-seed-plan-v1",
+  "seeds": [
+    {
+      "id": 920001,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000001"
+    },
+    {
+      "id": 920002,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000002"
+    },
+    {
+      "id": 920003,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000003"
+    },
+    {
+      "id": 920004,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000004"
+    },
+    {
+      "id": 920005,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000005"
+    },
+    {
+      "id": 920006,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000006"
+    },
+    {
+      "id": 920007,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000007"
+    },
+    {
+      "id": 920008,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000008"
+    },
+    {
+      "id": 920009,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000009"
+    },
+    {
+      "id": 920010,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000010"
+    },
+    {
+      "id": 920011,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000011"
+    },
+    {
+      "id": 920012,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000012"
+    },
+    {
+      "id": 920013,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000013"
+    },
+    {
+      "id": 920014,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000014"
+    },
+    {
+      "id": 920015,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000015"
+    },
+    {
+      "id": 920016,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000016"
+    },
+    {
+      "id": 920017,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000017"
+    },
+    {
+      "id": 920018,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000018"
+    },
+    {
+      "id": 920019,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000019"
+    },
+    {
+      "id": 920020,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000020"
+    },
+    {
+      "id": 920021,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000021"
+    },
+    {
+      "id": 920022,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000022"
+    },
+    {
+      "id": 920023,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000023"
+    },
+    {
+      "id": 920024,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000024"
+    },
+    {
+      "id": 920025,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000025"
+    },
+    {
+      "id": 920026,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000026"
+    },
+    {
+      "id": 920027,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000027"
+    },
+    {
+      "id": 920028,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000028"
+    },
+    {
+      "id": 920029,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000029"
+    },
+    {
+      "id": 920030,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000030"
+    },
+    {
+      "id": 920031,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000031"
+    },
+    {
+      "id": 920032,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000032"
+    },
+    {
+      "id": 920033,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000033"
+    },
+    {
+      "id": 920034,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000034"
+    },
+    {
+      "id": 920035,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000035"
+    },
+    {
+      "id": 920036,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000036"
+    },
+    {
+      "id": 920037,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000037"
+    },
+    {
+      "id": 920038,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000038"
+    },
+    {
+      "id": 920039,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000039"
+    },
+    {
+      "id": 920040,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000040"
+    },
+    {
+      "id": 920041,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000041"
+    },
+    {
+      "id": 920042,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000042"
+    },
+    {
+      "id": 920043,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000043"
+    },
+    {
+      "id": 920044,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000044"
+    },
+    {
+      "id": 920045,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000045"
+    },
+    {
+      "id": 920046,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000046"
+    },
+    {
+      "id": 920047,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000047"
+    },
+    {
+      "id": 920048,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000048"
+    },
+    {
+      "id": 920049,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000049"
+    },
+    {
+      "id": 920050,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000050"
+    },
+    {
+      "id": 920051,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000051"
+    },
+    {
+      "id": 920052,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000052"
+    },
+    {
+      "id": 920053,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000053"
+    },
+    {
+      "id": 920054,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000054"
+    },
+    {
+      "id": 920055,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000055"
+    },
+    {
+      "id": 920056,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000056"
+    },
+    {
+      "id": 920057,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000057"
+    },
+    {
+      "id": 920058,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000058"
+    },
+    {
+      "id": 920059,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000059"
+    },
+    {
+      "id": 920060,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000060"
+    },
+    {
+      "id": 920061,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000061"
+    },
+    {
+      "id": 920062,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000062"
+    },
+    {
+      "id": 920063,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000063"
+    },
+    {
+      "id": 920064,
+      "numerical_seed": 2,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000064"
+    },
+    {
+      "id": 920065,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000065"
+    },
+    {
+      "id": 920066,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000066"
+    },
+    {
+      "id": 920067,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000067"
+    },
+    {
+      "id": 920068,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000068"
+    },
+    {
+      "id": 920069,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000069"
+    },
+    {
+      "id": 920070,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000070"
+    },
+    {
+      "id": 920071,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000071"
+    },
+    {
+      "id": 920072,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000072"
+    },
+    {
+      "id": 920073,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000073"
+    },
+    {
+      "id": 920074,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000074"
+    },
+    {
+      "id": 920075,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000075"
+    },
+    {
+      "id": 920076,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000076"
+    },
+    {
+      "id": 920077,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000077"
+    },
+    {
+      "id": 920078,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000078"
+    },
+    {
+      "id": 920079,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000079"
+    },
+    {
+      "id": 920080,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000080"
+    },
+    {
+      "id": 920081,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000081"
+    },
+    {
+      "id": 920082,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000082"
+    },
+    {
+      "id": 920083,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000083"
+    },
+    {
+      "id": 920084,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000084"
+    },
+    {
+      "id": 920085,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000085"
+    },
+    {
+      "id": 920086,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000086"
+    },
+    {
+      "id": 920087,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000087"
+    },
+    {
+      "id": 920088,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000088"
+    },
+    {
+      "id": 920089,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000089"
+    },
+    {
+      "id": 920090,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000090"
+    },
+    {
+      "id": 920091,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000091"
+    },
+    {
+      "id": 920092,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000092"
+    },
+    {
+      "id": 920093,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000093"
+    },
+    {
+      "id": 920094,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000094"
+    },
+    {
+      "id": 920095,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000095"
+    },
+    {
+      "id": 920096,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000096"
+    },
+    {
+      "id": 920097,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000097"
+    },
+    {
+      "id": 920098,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000098"
+    },
+    {
+      "id": 920099,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000099"
+    },
+    {
+      "id": 920100,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000100"
+    },
+    {
+      "id": 920101,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000101"
+    },
+    {
+      "id": 920102,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000102"
+    },
+    {
+      "id": 920103,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000103"
+    },
+    {
+      "id": 920104,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000104"
+    },
+    {
+      "id": 920105,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000105"
+    },
+    {
+      "id": 920106,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000106"
+    },
+    {
+      "id": 920107,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000107"
+    },
+    {
+      "id": 920108,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000108"
+    },
+    {
+      "id": 920109,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000109"
+    },
+    {
+      "id": 920110,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000110"
+    },
+    {
+      "id": 920111,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000111"
+    },
+    {
+      "id": 920112,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000112"
+    },
+    {
+      "id": 920113,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000113"
+    },
+    {
+      "id": 920114,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000114"
+    },
+    {
+      "id": 920115,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000115"
+    },
+    {
+      "id": 920116,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000116"
+    },
+    {
+      "id": 920117,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000117"
+    },
+    {
+      "id": 920118,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000118"
+    },
+    {
+      "id": 920119,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000119"
+    },
+    {
+      "id": 920120,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000120"
+    },
+    {
+      "id": 920121,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000121"
+    },
+    {
+      "id": 920122,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000122"
+    },
+    {
+      "id": 920123,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000123"
+    },
+    {
+      "id": 920124,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000124"
+    },
+    {
+      "id": 920125,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000125"
+    },
+    {
+      "id": 920126,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000126"
+    },
+    {
+      "id": 920127,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000127"
+    },
+    {
+      "id": 920128,
+      "numerical_seed": 3,
+      "partition": "confirmation",
+      "seed": "SP1RESH1FTA8CFMF000128"
+    }
+  ]
+}

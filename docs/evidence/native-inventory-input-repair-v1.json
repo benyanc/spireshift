@@ -1,0 +1,37 @@
+{
+  "actor_distinctions_passed": true,
+  "all_originals_and_Adam_unchanged": true,
+  "claim_scope": "scoped_actor_wiring_and_public_combat_counter_projection_only",
+  "controlled_probes": 80,
+  "decision_families": 14,
+  "distinction_kinds": 10,
+  "environment_manifest": "manifests/engine/sts2-v0.111.0-ironclad-a8-native-v9.json",
+  "evidence_id": "sha256:ce9eca7ad415c9710b15c81fc27d2e603d858938019ee1554765702e9ff20301",
+  "game_apps_created": 0,
+  "gameplay_improvement_established": false,
+  "independent_replayed_seeds": 2,
+  "input_audit": {
+    "id": "sha256:41b6d6f95567d293f01a3ccea8edb4982d2d7a097867940fdd0076eec889e3ef",
+    "path": "artifacts/native-inventory-input/sts2-v0.111.0-a8-audit-v2/report.json"
+  },
+  "legacy_public_actions_and_endings_unchanged": true,
+  "missing_combat_counter_view_rows": 12518,
+  "native_actions": 498,
+  "native_combat_observations": 336,
+  "native_diagnostic_games": 4,
+  "native_nonzero_counter_observations": 0,
+  "native_null_counter_observations": 824,
+  "native_numeric_counter_observations": 142,
+  "native_numeric_counter_witness_attempts": 53,
+  "native_qualification": {
+    "id": "sha256:520d70e4dbc0787dde9a45e7581164d34914c25c4db2102bacf69884e34e59cb",
+    "path": "artifacts/native-inventory-input/relic-qualification-v1/report.json"
+  },
+  "natural_pairs": 16,
+  "probe_states_proven_native_reachable": false,
+  "schema_version": "native-inventory-input-repair-evidence-v1",
+  "source_games": 128,
+  "source_learning_rows": 18481,
+  "source_worlds": 64,
+  "worker_script": "engine-native-worker-v11.mjs"
+}

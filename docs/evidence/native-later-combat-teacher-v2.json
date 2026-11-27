@@ -1,0 +1,295 @@
+{
+  "schema_version": "native-later-combat-teacher-evidence-v2",
+  "date": "2026-10-20",
+  "roots": {
+    "path": "artifacts/native-later-teacher/sts2-v0.111.0-a8-roots-available-v2/report.json",
+    "report_id": "sha256:f6d6813ef126f448b0605afe4ffa304c198c47de19f6f8d3905b47dab602225f",
+    "count": 8,
+    "offered_actions": 57,
+    "selection": "first_public_round_ge2_attack_exceeds_block_floor_ge5_two_play_or_use_prefix_le512",
+    "encounter_quotas_per_initializer": {
+      "2": {
+        "boss": 1,
+        "elite": 1,
+        "normal": 2
+      },
+      "3": {
+        "boss": 0,
+        "elite": 1,
+        "normal": 3
+      }
+    },
+    "public_rounds": [
+      2,
+      3,
+      4
+    ],
+    "source_floors": [
+      5,
+      6,
+      7,
+      12,
+      17
+    ],
+    "source_worlds": 8
+  },
+  "initial_unavailable_preparation": {
+    "path": "artifacts/native-later-teacher/sts2-v0.111.0-a8-roots-v2",
+    "resource_report_id": "sha256:f1ee0f043191625d37da388f0965bd94472bfd772d34296b76f0881594eb7e38",
+    "source_snapshot": "artifacts/native-later-teacher/preliminary-symmetric-curriculum-v2",
+    "reason": "player_3_no_eligible_later_boss_menu",
+    "game_attempts": 0
+  },
+  "control": {
+    "path": "artifacts/native-later-teacher/sts2-v0.111.0-a8-control-v2/report.json",
+    "report_id": "sha256:121c227cbeb584c40a3b22dd7d14a7604784d32cb8f2a0c3f4ac45c7369eeb67",
+    "native_attempts": 24,
+    "failed_branches": 0,
+    "skipped_branches": 0,
+    "duplicate_public_traces_identical": true,
+    "game_apps_created": 0,
+    "production_optimizer_steps": 0,
+    "full_run_wins": 0,
+    "checks": {
+      "account_profile_unchanged": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    }
+  },
+  "control_audit": {
+    "path": "artifacts/native-later-teacher/checks-v2/control-audit-complete-bindings.json",
+    "result": {
+      "action_tables_exactly_reconstructed": true,
+      "admitted_preferences": 0,
+      "auditor_sha256": "1512a6d95a84f812b8b20f5b354a167efa78f0ec4a6def023de05a98e0b47932",
+      "branch_receipts_verified": 24,
+      "checkpoint_promoted": false,
+      "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+      "native_delivery_semantically_reaudited": false,
+      "native_journal_bytes_verified": true,
+      "new_games": 0,
+      "optimizer_steps": 0,
+      "ordinary_PPO_eligible": false,
+      "original_players_and_full_Adam_unchanged": true,
+      "paired_alternative_counts": {
+        "negative_pairs": 6,
+        "positive_pairs": 1,
+        "tied_pairs": 11
+      },
+      "prefix_forced_actions_and_continuation_probabilities_reconstructed": true,
+      "public_decisions_reconstructed": 3950,
+      "recipe_path": "configs/native-teacher/sts2-v0.111.0-a8-later-combat-control-v2.json",
+      "report_id": "sha256:433581305c140e79759f82a0d86a5c1f2c948e6af68598d7bf8e2896d8521dfa",
+      "schema_version": "native-later-combat-teacher-audit-v2",
+      "source_hidden_worlds": 2,
+      "source_report_id": "sha256:121c227cbeb584c40a3b22dd7d14a7604784d32cb8f2a0c3f4ac45c7369eeb67"
+    }
+  },
+  "post_check_verification": {
+    "path": "artifacts/native-later-teacher/checks-v2/post-check-verification.json",
+    "result": {
+      "schema_version": "native-later-teacher-post-check-v2",
+      "source_report_id": "sha256:121c227cbeb584c40a3b22dd7d14a7604784d32cb8f2a0c3f4ac45c7369eeb67",
+      "roots_report_id": "sha256:f6d6813ef126f448b0605afe4ffa304c198c47de19f6f8d3905b47dab602225f",
+      "protected_source_files_verified": 12711,
+      "players": {
+        "2": {
+          "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+          "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+          "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030",
+          "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+          "optimizer_steps": 5658,
+          "first_moment_count": 17473,
+          "second_moment_count": 17473
+        },
+        "3": {
+          "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+          "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+          "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744",
+          "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+          "optimizer_steps": 6045,
+          "first_moment_count": 17473,
+          "second_moment_count": 17473
+        }
+      },
+      "both_players_and_full_Adam_unchanged": true,
+      "control_reopened_without_host": true,
+      "pilot_plan_without_host": {
+        "status": "native_later_teacher_plan_only",
+        "root_selection": "first_public_round_ge2_attack_exceeds_block_floor_ge5_two_play_or_use_prefix_le512",
+        "roots": 8,
+        "planned_branches": 456,
+        "new_games": 0,
+        "optimizer_steps": 0,
+        "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher"
+      },
+      "pilot_config_id": "sha256:33a912e986aaf0ce9b88dd083bd243d825c280bdfef3ab7a9ba4c67b9c6de433",
+      "pilot_started": false,
+      "new_games": 0,
+      "optimizer_steps": 0,
+      "repository_check_report_id": "sha256:ba87a59fd6cdee6e6505be6baf33c14991bc9df73515961f5870bb1f9550fc54",
+      "report_id": "sha256:79451047d9666a7a5d41db7b514e56bd28efec14d722fcdb09f589a27c3594f9"
+    }
+  },
+  "pilot": {
+    "recipe": "configs/native-teacher/sts2-v0.111.0-a8-later-combat-pilot-v2.json",
+    "config_id": "sha256:33a912e986aaf0ce9b88dd083bd243d825c280bdfef3ab7a9ba4c67b9c6de433",
+    "started": false,
+    "planned_branches": 456,
+    "original_source_worlds": 8,
+    "policy_streams_per_action": 8,
+    "estimated_owner_minutes": [
+      30,
+      45
+    ],
+    "maximum_invocation_seconds": 7200,
+    "session_limits": {
+      "wall_seconds": 900,
+      "cpu_seconds": 1800,
+      "resident_memory_bytes": 2000000000,
+      "storage_bytes": 4000000000
+    },
+    "owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/collect-native-later-combat-teacher-v2.sh"
+  },
+  "resources": {
+    "root_preparation": {
+      "path": "artifacts/resources/native-later-teacher-root-preparation-v2-2.json",
+      "report_id": "sha256:be6ae0cd99538587f82b6b64ad8dc6e6d008e77d3664df8be7d07bdc41d634dd",
+      "usage": {
+        "average_cpu_utilization": 0.03409092473499808,
+        "cpu_hours": 0.0015697773569444446,
+        "cpu_seconds": 5.651198485,
+        "energy_kwh": null,
+        "final_storage_bytes": 3185755,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 138575872,
+        "peak_storage_bytes": 3185755,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 11.840600915951654
+      },
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 10000000,
+        "wall_seconds": 240.0
+      }
+    },
+    "control": {
+      "path": "artifacts/resources/native-later-combat-teacher-control-v2-1.json",
+      "report_id": "sha256:89876e791b6e796507f21ccb6434e405e61169907e8f19f8d762de2886d355f0",
+      "usage": {
+        "average_cpu_utilization": 0.05057285200035875,
+        "cpu_hours": 0.019485954123888892,
+        "cpu_seconds": 70.149434846,
+        "energy_kwh": null,
+        "final_storage_bytes": 42322686,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 4,
+        "peak_resident_memory_bytes": 367329280,
+        "peak_storage_bytes": 42322686,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 99.07833391590975
+      },
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      }
+    },
+    "control_audit": {
+      "path": "artifacts/resources/native-later-teacher-control-audit-v2-2.json",
+      "report_id": "sha256:4d80061f7db9112b186334f3c661d5dda89ed6b892d0296a646da592dfcff345",
+      "usage": {
+        "average_cpu_utilization": 0.047232018127003186,
+        "cpu_hours": 0.0047472927616666665,
+        "cpu_seconds": 17.090253942,
+        "energy_kwh": null,
+        "final_storage_bytes": 10776,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 2,
+        "peak_resident_memory_bytes": 131383296,
+        "peak_storage_bytes": 10776,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 25.845442833844572
+      },
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 10000000,
+        "wall_seconds": 240.0
+      }
+    },
+    "repository_check": {
+      "path": "artifacts/resources/native-later-teacher-repository-check-v2-1.json",
+      "report_id": "sha256:ba87a59fd6cdee6e6505be6baf33c14991bc9df73515961f5870bb1f9550fc54",
+      "usage": {
+        "average_cpu_utilization": 0.055872505796978965,
+        "cpu_hours": 0.028191233361666672,
+        "cpu_seconds": 101.48844010200001,
+        "energy_kwh": null,
+        "final_storage_bytes": 10776,
+        "gpu_hours": null,
+        "gpu_seconds": null,
+        "peak_process_count": 9,
+        "peak_resident_memory_bytes": 268271616,
+        "peak_storage_bytes": 10776,
+        "simulations": null,
+        "trajectories": null,
+        "transitions": null,
+        "wall_seconds": 129.74492891621776
+      },
+      "limits": {
+        "cpu_seconds": 960.0,
+        "resident_memory_bytes": 4000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      }
+    }
+  },
+  "validation": {
+    "tests_passed": 1927,
+    "new_tests": 23,
+    "targeted_tests_passed": 31,
+    "strict_type_source_files": 387,
+    "format_lint_CSharp_protocol_passed": true
+  },
+  "training_spec": {
+    "id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+    "path": "configs/training-objective/sts2-v0.111.0-ironclad-a8-native-bootstrap-v8.json"
+  },
+  "environment_manifest": {
+    "id": "sha256:711bbdc33754bec1338c89fac4b96d621ef4d8be32bae55a1ba190dc74c18f8c",
+    "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-native-v8.json"
+  },
+  "information_scope": "public_student_inputs_original_fixed_hidden_world_teacher",
+  "privileged_fixed_world_teacher": true,
+  "student_inputs_public_only": true,
+  "ordinary_PPO_eligible": false,
+  "public_belief_search_eligible": false,
+  "both_players_and_full_Adam_unchanged": true,
+  "coarse_baseline_changed": false,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "automatic_training_follows": false,
+  "limitations": [
+    "Eight original hidden worlds, not 456 independently resampled seeds.",
+    "Public availability required one boss be replaced by a normal fight before counterfactual results.",
+    "The two-stream control verifies transport, not learning quality or eligible preference labels.",
+    "All action means/uncertainty are retained; a separate declared supervised intervention is required.",
+    "The sampler uses visible attack exposure only; it does not predict exact HP loss or change rewards."
+  ],
+  "evidence_id": "sha256:0f2d85a23dd7369f129df31f1bd3c4ae33ab4ccb961ce356369cf126221f11a2"
+}

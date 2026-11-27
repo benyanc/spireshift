@@ -1,0 +1,182 @@
+diff --git a/src/managed-player-environment.mjs b/src/managed-player-environment.mjs
+--- a/src/managed-player-environment.mjs
++++ b/src/managed-player-environment.mjs
+@@ -167,7 +167,19 @@
+ }
+ 
+ function cardProperties(card) {
++  const modifiers = {};
++  for (const kind of ["enchantment", "affliction"]) {
++    if (card?.[kind] == null) continue;
++    if (typeof card[`${kind}_id`] !== "string" || !card[`${kind}_id`]
++        || typeof card[`${kind}_description`] !== "string"
++        || !Number.isFinite(card[`${kind}_amount`])) {
++      throw new Error(`Incomplete native card ${kind} facts`);
++    }
++    modifiers[kind] = { definition_id: definitionId(card[`${kind}_id`]),
++      name: card[kind], description: card[`${kind}_description`], amount: card[`${kind}_amount`] };
++  }
+   return {
++    ...modifiers,
+     definition_id: definitionId(card?.id ?? card?.name),
+     name: card?.name ?? null,
+     type: card?.type ?? "Unknown",
+@@ -455,6 +467,7 @@
+     rarity: card?.rarity ?? "Unknown",
+     is_upgraded: card?.is_upgraded === true || card?.upgraded === true,
+     is_selected: false,
++    keywords: card?.keywords ?? null,
+     ...(card?.enchantment == null ? {} : {
+       enchantment: {
+         definition_id: definitionId(card.enchantment_id ?? card.enchantment),
+@@ -527,6 +540,9 @@
+     }
+     case "event_choice": {
+       const options = (state.options ?? []).map((option, index) => {
++        if (!["is_locked", "is_proceed", "was_chosen", "will_kill_player"].every(key => typeof option[key] === "boolean")
++            || !Array.isArray(option.tooltips) || !Object.hasOwn(option, "relic_name") || !Object.hasOwn(option, "relic_description"))
++          throw new Error("Missing native public event-option export fields");
+         const unlocked = option.is_locked !== true;
+         const item = ctx.referent({
+           role: "option",
+@@ -539,7 +555,19 @@
+             description: option.description ?? null,
+             text_key: option.text_key ?? null,
+             is_locked: !unlocked,
+-            variables: option.vars ?? null
++            variables: option.vars ?? null,
++            is_proceed: option.is_proceed,
++            was_chosen: option.was_chosen,
++            will_kill_player: option.will_kill_player,
++            relic_name: option.relic_name,
++            relic_description: option.relic_description,
++            tooltips: option.tooltips.map((tip, ordinal) => ({
++              kind: tip.kind, name: tip.name ?? null, description: tip.description ?? null,
++              card: tip.card == null ? null : ctx.referent({ role: "card",
++                id: `event-preview-${index}-${ordinal}`, label: tip.card.name,
++                selected: false, properties: { ...cardProperties(tip.card), is_selected: false }
++              }).properties
++            }))
+           }
+         });
+         if (unlocked) {
+@@ -563,7 +591,8 @@
+           description: state.description ?? null,
+           options
+         },
+-        context: { ...commonContext, kind: "event" },
++        context: { ...commonContext, kind: "event", event_id: state.event_id,
++          name: state.event_name, ancient: state.event_is_ancient, in_dialogue: state.event_in_dialogue },
+         ...supported
+       };
+     }
+@@ -1532,7 +1561,9 @@
+   environmentFingerprint,
+   sequence,
+   identityMode = "crypto",
+-  validateSdk = true
++  validateSdk = true,
++  surfaceProjector = null,
++  readProjector = null
+ }) {
+   if (!plainObject(state) || state.type !== "decision") {
+     throw new TypeError("Managed Player Environment projection requires a raw decision state.");
+@@ -1552,7 +1583,10 @@
+   const ctx = createProjectionContext({ state, runtimeInstanceId, sequence, identityMode });
+   const contextMs = performance.now() - stageStarted;
+   stageStarted = performance.now();
+-  const surface = currentSurface(state, ctx);
++  const surface = surfaceProjector == null ? currentSurface(state, ctx) : surfaceProjector(state, ctx, {
++    defaultProjector: currentSurface, withoutDeck, cardProperties, visibleText,
++    enumerateSelections, actionLimit: ACTION_LIMIT
++  });
+   const surfaceMs = performance.now() - stageStarted;
+   stageStarted = performance.now();
+   const persistent = buildPersistentVisibleState(state, ctx.snapshotId, ctx.id);
+@@ -1565,11 +1599,12 @@
+     ctx.bindings.clear();
+   }
+   stageStarted = performance.now();
+-  const reads = [
++  let reads = [
+     runDeckRead(ctx.snapshotId, state, ctx.id),
+     combatPilesRead(ctx.snapshotId, state, ctx.id)
+   ]
+     .filter(Boolean);
++  if (readProjector != null) reads = readProjector(state, reads, ctx, { cardProperties, visibleText });
+   const readsMs = performance.now() - stageStarted;
+   stageStarted = performance.now();
+   const missing = [...new Set([
+@@ -1683,6 +1718,9 @@
+   #tainted = false;
+   #identityMode;
+   #validateSdk;
++  #ascension;
++  #surfaceProjector;
++  #readProjector;
+   #performance = new Map();
+ 
+   constructor({
+@@ -1692,8 +1730,17 @@
+     character = "Ironclad",
+     language = "en",
+     identityMode = "crypto",
+-    validateSdk = true
++    validateSdk = true,
++    ascension = null,
++    surfaceProjector = null,
++    readProjector = null
+   }) {
++    if (ascension != null && (!Number.isSafeInteger(ascension) || ascension < 0)) {
++      throw new TypeError("ascension must be a nonnegative integer when supplied.");
++    }
++    if (surfaceProjector != null && typeof surfaceProjector !== "function") {
++      throw new TypeError("surfaceProjector must be a function when supplied.");
++    }
+     if (process == null || typeof process.request !== "function") {
+       throw new TypeError("ManagedPlayerEnvironmentSession requires a JSON-line process.");
+     }
+@@ -1704,6 +1751,10 @@
+     this.#language = language;
+     this.#identityMode = identityMode;
+     this.#validateSdk = validateSdk;
++    this.#ascension = ascension;
++    if (readProjector != null && typeof readProjector !== "function") throw new TypeError("readProjector must be a function");
++    this.#surfaceProjector = surfaceProjector;
++    this.#readProjector = readProjector;
+   }
+ 
+   get tainted() {
+@@ -1740,6 +1791,7 @@
+     const state = await this.#process.request({
+       cmd: reset ? "reset_run" : "start_run",
+       character: this.#character,
++      ...(this.#ascension == null ? {} : { ascension: this.#ascension }),
+       seed,
+       lang: this.#language
+     }, timeoutMs);
+@@ -1750,6 +1802,13 @@
+ 
+   async close() {
+     return this.#process.stop({ request: { cmd: "quit" }, timeoutMs: 5_000 });
++  }
++
++  // Trusted host integration for a native observation after separately labeled fixture setup.
++  // This is not a policy command and never executes gameplay or clears the request ledger.
++  async acceptNativeObservation(state, timeoutMs = 10_000) {
++    if (this.#tainted) throw new Error("A tainted session cannot accept another observation.");
++    return this.#setState(state, timeoutMs);
+   }
+ 
+   observe() {
+@@ -1918,7 +1977,9 @@
+       environmentFingerprint: this.#environmentFingerprint,
+       sequence: this.#sequence,
+       identityMode: this.#identityMode,
+-      validateSdk: this.#validateSdk
++      validateSdk: this.#validateSdk,
++      surfaceProjector: this.#surfaceProjector,
++      readProjector: this.#readProjector
+     });
+     this.#record("projection_total", performance.now() - projectionStarted);
+     for (const [name, milliseconds] of Object.entries(this.#projection.performance)) {

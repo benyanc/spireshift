@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/bootstrap-teacher-dataset-v7.json",
+  "title": "SpireShift Exact Milestone-Trajectory Teacher Dataset v7",
+  "type": "object",
+  "required": [
+    "schema_version", "dataset_id", "teacher_id", "utility_id", "seed_protocol_id",
+    "objective_id", "objective", "auxiliary_reward_allowed", "backend", "state_set",
+    "configuration", "started_at", "completed_at", "cases", "summary", "claim_scope",
+    "signal_assessment"
+  ],
+  "properties": {
+    "schema_version": {"const": "bootstrap-teacher-dataset-v7"},
+    "dataset_id": {"$ref": "bootstrap-state-set-v6.json#/$defs/contentId"},
+    "teacher_id": {"const": "paired-preference-curriculum-teacher-v2"},
+    "utility_id": {"const": "terminal-dominant-floor-act-hp-v1"},
+    "seed_protocol_id": {"const": "sha256-paired-bootstrap-v1"},
+    "objective_id": {"const": "terminal-victory-v1"},
+    "objective": {"type": "object"},
+    "auxiliary_reward_allowed": {"const": false},
+    "backend": {"type": "object"},
+    "state_set": {"$ref": "bootstrap-state-set-v6.json"},
+    "configuration": {
+      "type": "object",
+      "required": [
+        "samples_per_candidate", "sampling_seed", "maximum_prefix_steps",
+        "maximum_rollout_steps", "workers", "worker_timeout_seconds", "continuation_policy"
+      ],
+      "properties": {
+        "samples_per_candidate": {"type": "integer", "minimum": 1},
+        "sampling_seed": {"type": "integer", "minimum": 0},
+        "maximum_prefix_steps": {"type": "integer", "minimum": 1},
+        "maximum_rollout_steps": {"type": "integer", "minimum": 1},
+        "workers": {"type": "integer", "minimum": 1},
+        "worker_timeout_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "continuation_policy": {
+          "$ref": "bootstrap-state-set-v3.json#/$defs/policyProvenance"
+        }
+      },
+      "additionalProperties": false
+    },
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "cases": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "bootstrap-teacher-dataset-v3.json#/$defs/caseReference"}
+    },
+    "summary": {"$ref": "bootstrap-teacher-dataset-v3.json#/$defs/summary"},
+    "claim_scope": {"const": "train_curriculum_only"},
+    "signal_assessment": {
+      "$ref": "bootstrap-teacher-dataset-v3.json#/$defs/signalAssessment"
+    }
+  },
+  "additionalProperties": false
+}

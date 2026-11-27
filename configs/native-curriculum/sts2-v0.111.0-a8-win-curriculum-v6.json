@@ -1,0 +1,53 @@
+{
+  "audit": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/trial-audit-v2/report.json",
+      "sha256": "87832aec376da81159fbf414b6160b17d8731630f005df0dab2947d3c7533f96"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-trial-audit-v2.json",
+      "sha256": "7b352b55c3bdf4b78661d27b1ec70a0cc9b7e534f7a6ecc5644ac0cfe2d0d4db"
+    }
+  },
+  "control": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/trial-control-v2/report.json",
+      "sha256": "2640c8922a8004b57e0552e2acc85b4184aced7c5b67a26d9fcd88d936700428"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-trial-control-v2.json",
+      "sha256": "ed8b1210bf0ee08b2e2b30d204e873d846042706e40563cc7ba2dd23148747ff"
+    }
+  },
+  "implementation": {
+    "backend-patches/headless-trial-portrait-v1/README.md": "6f5c5756a7a7e370acc200bca311beb850303b965662cb4f028f4c0886210d9c",
+    "backend-patches/headless-trial-portrait-v1/trial-portrait.patch": "5e826068b46243d73efa8f5ee34ffa1b20b02af158568bbe9d9548a3f2ca2409",
+    "scripts/continue-win-curriculum-v6.sh": "c0c9e9bf932f05d565f808374727fc620d239465503eb7f1f653b3bcb7693f29",
+    "src/spireshift/native_win6_build.py": "d317359303a72f7d29f44ca35c67cc27a91faf31f606217ecc764ae539912c9e",
+    "src/spireshift/native_win6_control.py": "c45fd842f8ee984e9922a5c34fc879c0abd19574465ee961505494931767e041",
+    "src/spireshift/native_win6_inputs.py": "58e2e9b6c7ade0cf17acca060926d96855a5e00cc8f4732438e1c26d68c68d16",
+    "src/spireshift/native_win6_recovery.py": "72d9ecd54e70be2363d02c01bc7bfccced9a34e4335b66c91e2579561fc253f4",
+    "src/spireshift/native_win6_session.py": "aa2b1facea2ee8a8d2636b82c677f3cf7ddfd3056c76cf8329a33329faf424d0"
+  },
+  "launch_workspace": "artifacts/native-win-curriculum/launch-v6",
+  "parent": {
+    "path": "configs/native-curriculum/sts2-v0.111.0-a8-win-curriculum-v5.json",
+    "sha256": "f416d50895dcf2c38a7a94627aad6d09cb7d77cdcbe2f1eb051b96032eb56b67"
+  },
+  "protected": {
+    "path": "artifacts/native-win-curriculum/trial-preparation-v1/protected-v5-result.json",
+    "sha256": "57d4c5280dfaba49d8887e25045ec4cd51aabb4f8f497b170b975a198de8bd91"
+  },
+  "schema_version": "native-win-curriculum-continuation-v6",
+  "support": {
+    "report": {
+      "path": "artifacts/native-win-curriculum/trial-portrait-build-v59-r2/report.json",
+      "sha256": "2b7077b63e7bad17e228473eddf6a238a9107ab56585c131877bd4822621544d"
+    },
+    "resource": {
+      "path": "artifacts/resources/win-curriculum-trial-build-v59-r2.json",
+      "sha256": "8f609ca47e7f1b540327427432179638295cb6ddbd76e398a84dd599c6aaf34d"
+    }
+  },
+  "workspace": "artifacts/native-win-curriculum/study-v6"
+}

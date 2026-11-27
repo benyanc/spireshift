@@ -1,0 +1,451 @@
+{
+  "schema_version": "native-a8-mixed-handoffs-v2",
+  "workspace": "artifacts/native-mixed-handoffs/v2/control-v1",
+  "cases": [
+    {
+      "seed": "SP1RESH1FTA8MH2C001",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [],
+      "key": "reward-discard-left",
+      "family": "reward",
+      "replacement": "discard",
+      "slot": 0,
+      "take": true
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C002",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "THE_COURIER"
+      ],
+      "key": "courier-potion-restock",
+      "family": "shop",
+      "operation": "potion",
+      "courier": true
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C003",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "ENTROPIC_BREW",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "MINIATURE_TENT",
+        "REGAL_PILLOW",
+        "GIRYA"
+      ],
+      "key": "rest-brew-smith-lift-return",
+      "family": "rest",
+      "operation": "return",
+      "girya": 2,
+      "second_rest": true
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C004",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [],
+      "key": "reward-discard-right",
+      "family": "reward",
+      "replacement": "discard",
+      "slot": 1,
+      "take": false
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C005",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [],
+      "key": "reward-use-replace",
+      "family": "reward",
+      "replacement": "use",
+      "slot": 0,
+      "take": false
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C006",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "THE_COURIER"
+      ],
+      "key": "courier-card-restock",
+      "family": "shop",
+      "operation": "card",
+      "courier": true
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C007",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [],
+      "key": "ordinary-potion-stock",
+      "family": "shop",
+      "operation": "potion",
+      "courier": false
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C008",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH",
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH",
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH",
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH",
+        "STRIKE_IRONCLAD"
+      ],
+      "belt": [
+        "BLOOD_POTION",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "THE_COURIER"
+      ],
+      "key": "courier-relic-child",
+      "family": "shop",
+      "operation": "relic",
+      "courier": true,
+      "kifuda": true
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C009",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "ASCENDERS_BANE"
+      ],
+      "belt": [
+        "ENTROPIC_BREW",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "MINIATURE_TENT",
+        "REGAL_PILLOW",
+        "MEAT_CLEAVER"
+      ],
+      "key": "rest-cook-brew",
+      "family": "rest",
+      "operation": "cook"
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C010",
+      "hp": 31,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "ENTROPIC_BREW",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "REGAL_PILLOW"
+      ],
+      "key": "rest-no-tent-brew",
+      "family": "rest",
+      "operation": "single"
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C011",
+      "hp": 77,
+      "deck": [
+        "STRIKE_IRONCLAD",
+        "DEFEND_IRONCLAD",
+        "BASH"
+      ],
+      "belt": [
+        "ENTROPIC_BREW",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "MINIATURE_TENT",
+        "REGAL_PILLOW",
+        "SHOVEL"
+      ],
+      "key": "rest-pillow-cap",
+      "family": "rest",
+      "operation": "cap"
+    },
+    {
+      "seed": "SP1RESH1FTA8MH2C012",
+      "hp": 31,
+      "deck": [
+        "ASCENDERS_BANE"
+      ],
+      "belt": [
+        "ENTROPIC_BREW",
+        "FOUL_POTION"
+      ],
+      "relics": [
+        "MINIATURE_TENT",
+        "REGAL_PILLOW",
+        "GIRYA"
+      ],
+      "key": "rest-spent-girya-brew",
+      "family": "rest",
+      "operation": "spent",
+      "girya": 3
+    }
+  ],
+  "short_case_keys": [
+    "reward-discard-left",
+    "courier-potion-restock",
+    "rest-brew-smith-lift-return"
+  ],
+  "limits": {
+    "wall_seconds": 1800,
+    "cpu_seconds": 3600,
+    "storage_bytes": 1000000000,
+    "resident_memory_bytes": 4000000000
+  },
+  "short_limits": {
+    "wall_seconds": 270,
+    "cpu_seconds": 600,
+    "storage_bytes": 1000000000,
+    "resident_memory_bytes": 4000000000
+  },
+  "implementation": {
+    "configs/engine-qualification/sts2-v0.111.0-connector-executable-enchant-build-v36.json": "87de535a34fb15e0a860454ac38484b5163324fa82b09c3697069cead243ff01",
+    "configs/engine-qualification/sts2-v0.111.0-connector-executable-enchant-v36.json": "d3eb6bd35640993f1f6c3e25174ba0400e3182ddc8cf0e90641027c866515cbc",
+    "configs/engine-qualification/sts2-v0.111.0-connector-ordered-answers-build-v33.json": "b919463f470040b3bc73ee1153d56dd106c4202e33316f65f0bb1f2cdf70a679",
+    "configs/engine-qualification/sts2-v0.111.0-connector-ordered-answers-v33.json": "6208458d02efccfe4295618d00ded91f5cba4310516f7c1f69f92a0619ff0c43",
+    "configs/engine-qualification/sts2-v0.111.0-connector-ordered-completion-build-v34.json": "b9f91a9b0edf919a8cf336d838f2d280cf1d474e2268059021af291afaddc212",
+    "configs/engine-qualification/sts2-v0.111.0-connector-ordered-completion-v34.json": "f26b1f60711925c3a6f8bcf56cc071d942a28f167d9d946badba522e93c22eaf",
+    "configs/engine-qualification/sts2-v0.111.0-connector-reward-belt-build-v35.json": "eefa9be96dfa2355aa80cc342113db3f12f05dfac854c91e3ffeb29254dd4644",
+    "configs/engine-qualification/sts2-v0.111.0-connector-reward-belt-v35.json": "d55abfac31f1e2f5cee3562b979b9a87b42531eed276bfae8b977b57ae288ed0",
+    "configs/native-compatibility/sts2-v0.111.0-a8-mixed-handoffs-v1.json": "fa3d00a401c0f3b997639a147821855ea8c93c85adedbf63c0ed6a794c516a1b",
+    "configs/native-compatibility/sts2-v0.111.0-a8-official-selectors-v1.json": "8a4616b3aefa80449c55ccc16e4687b75c70369fb425dfdfaa2bb13aedc97707",
+    "configs/native-compatibility/sts2-v0.111.0-a8-official-selectors-v2.json": "bc8ac622d6e2ab0b2e2e4316ae595262a77d0d0b09d5d4fa2d43ab933472fc9c",
+    "configs/native-compatibility/sts2-v0.111.0-a8-official-selectors-v3.json": "37d5d21857727168a9523e8579348e9939690070c8ec60cf00dff41fca0501a3",
+    "configs/native-compatibility/sts2-v0.111.0-a8-official-selectors-v4.json": "a66605e85411674ba03506082674c383b55bc2a1cd94001d746d766a7fa6c5a6",
+    "configs/native-compatibility/sts2-v0.111.0-a8-official-selectors-v5.json": "63f63fb49548f6f7990f571385131c660a994f16bd5a585a9ec12da5996cd76b",
+    "configs/native-compatibility/sts2-v0.111.0-a8-official-selectors-v6.json": "4a1e6cd09c5b1f1a1820652beb3d3734c9af6c5a5726e04ee21b35fcd663cc49",
+    "patches/engine/sts2-connector-v0.111.0-executable-enchant-v36.patch": "8f9b86fb8e216e6b11c2859a79180a17f25dce57dc4a08f453e675465ee6c5b0",
+    "patches/engine/sts2-connector-v0.111.0-ordered-answers-v33.patch": "322fde5c1f0d6838964233f44f8db66d2d6c7e51f5fd24b83d4689262a035697",
+    "patches/engine/sts2-connector-v0.111.0-ordered-completion-v34.patch": "79f023dba40dad74b3e82a396e690654f83598f62edab9ac4ee1e00476275b1f",
+    "patches/engine/sts2-connector-v0.111.0-reward-belt-v35.patch": "a4cbf51b3f11f740c00361313ef84d672153654d7e2977df662f4a09ce0c10ca",
+    "scripts/check-mixed-handoffs-v1.sh": "1829476df70c2455213cec78d518b74ba7e737c93d0c2b5bd9244b32169d16c4",
+    "scripts/check-mixed-handoffs-v2.sh": "a812720a7ff4dc4c7141cc542bd33d5a2fe47f06ae617d5dac5f44c2eaca0d1a",
+    "scripts/compare-official-selectors-v1.sh": "a98e49278418992781716e61e996b0008200cf42f324d03f1a1b143b78699923",
+    "scripts/compare-official-selectors-v2.sh": "6292c06616126ec4896e5edbe9750cf37f074b662c430bd37370daa8b1603f23",
+    "scripts/compare-official-selectors-v3.sh": "f2fce15400d0a2725332c6aa103f53512e80371096518a8f50ec89186eda0270",
+    "scripts/compare-official-selectors-v4.sh": "c9c6dfc4cd6d8a82cc9dcbe76a8309b100f85b0fbdb64cfb68933c969435d82f",
+    "scripts/compare-official-selectors-v5.sh": "e76f68b8c2395f4861920286c46c361c85cf94518b1d8f7b019c839934885fd4",
+    "scripts/compare-official-selectors-v6.sh": "de0af1fa880a0c1f487e4338dfed8b78234bf455456ecb3aed50a861b2f9bef4",
+    "scripts/engine-a8-mixed-practice-worker-v2.mjs": "66d94cfad4a6f6b93d809f50118e638cb64588573fa7046b53b9f2074153eb64",
+    "scripts/engine-abandon-confirmation-surface-v1.mjs": "0e790bfd6f17863fd4f8cfaf8db6e78a1b276aff8703d5686fd2acc2fd19a67b",
+    "scripts/engine-action-lifecycle-worker-v1.mjs": "4847295436a1349625bf575450bb59dd69944a577ac547d27d20660777d209c8",
+    "scripts/engine-atomic-selection-receipt-v1.mjs": "d31e884443995762ade756dc40f510d58c8f9d4a86d2738fc5e769db86cbf257",
+    "scripts/engine-atomic-selection-v1.mjs": "5121eda9ac515aac71466d0359db8299d25c1c8be3f0798469a4622bbd0a6c52",
+    "scripts/engine-atomic-selection-v6.mjs": "c3217a465a6024421253c3ad9dfcbbd5fa293d51be18b8154aad5016b309b748",
+    "scripts/engine-bundle-commit-v1.mjs": "20dce9fce819c91111860eebf55ef815d6b9050db8de13156d11a5f605bdd4f7",
+    "scripts/engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "scripts/engine-card-answer-v1.mjs": "131635a5364a482fefad93b19884053e71da5610d343f5153af9a75743e291d1",
+    "scripts/engine-card-cost-types-v1.mjs": "2b4e976e207def925452d80b974ff04b879b1ed940e6f69840bceea0b782851d",
+    "scripts/engine-card-selector-surface-v1.mjs": "0b7828604e81df53e8eb511eab4f912654067dd7925504f15b0ed348fa222b5f",
+    "scripts/engine-checkpoint-observation-v1.mjs": "681b807ce69102b39ddfafbd59fcf3da372883c586b9cfada592e6f499e5e342",
+    "scripts/engine-chest-contract-v1.mjs": "182b11336203eaa70977d7ebe9e1c4c5199ec3f6bb15dd6b4174acbe950ce0eb",
+    "scripts/engine-chest-surface-v1.mjs": "dd39708d2070d9711361696a98919d71accb69fa8e385f1bab2d4ca513cd0d45",
+    "scripts/engine-combat-selector-belt-v2.mjs": "33d0c91ebdeac4a47289caef3f80d3f60c69b5f77d7f0cc33519edd0a07aeb9f",
+    "scripts/engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "scripts/engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "scripts/engine-combat-surface-v5.mjs": "67eee376ebae9ddfccc7823a375500cd33ed9eb8bd28c3fdbeca1adafb1de0ab",
+    "scripts/engine-combat-surface-v6.mjs": "0278228521d553b041b7b6f09ce21a86e2a27f21e3a2edf388c81b3febb2496c",
+    "scripts/engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "scripts/engine-crystal-grid-v1.mjs": "c2d2818b837f48d24a4627b3af7d933ba6059068f19b814fa96e8d46c1fe19f1",
+    "scripts/engine-executable-card-answer-v1.mjs": "1d21fe0e2c1dfb57e7a2ea05ef314270ad2f3f7d4974780c7a7ef24537140f08",
+    "scripts/engine-generated-choice-belt-surface-v1.mjs": "af058abe30f59f74ae0a5d131460d34afbd2dae3c8335cde4ce5830cf9a9ef45",
+    "scripts/engine-input-layout-v13.mjs": "7ab709db03f3c019be180b9f0ba7c741b6644fc5b221d959369b3b25cfadcb7a",
+    "scripts/engine-interface-contract-v2.mjs": "d4ca629e16bf73e6ea2969f3fc64898d7c3cd81111c60345b028e445413c279e",
+    "scripts/engine-interface-contract-v3.mjs": "1ddf1f7e9c64bdaa21ff848b93d1ddd5d61856612ee490bd3f93c1f5e3fe3e22",
+    "scripts/engine-interface-scopes-v4.mjs": "5432693d5a1de72f9b4724e6249871f9a0ee51e7aa666cd8eb3cbedbb1e39ace",
+    "scripts/engine-inventory-lifecycle-worker-v1.mjs": "15df19e2860fdd10ca57a468835dec3798feed63db6eb6054453241a25d7b977",
+    "scripts/engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "scripts/engine-journey-tutorial-v4.mjs": "ba8a537a5c7446ed69b4f482614d434eaf60295f00bbb9205c2b9888f9e35f76",
+    "scripts/engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "scripts/engine-merchant-map-observation-v1.mjs": "7bf7ecc249e8de21234e5263e2069a9b0ea2f6b94538012e4cf85465f5034081",
+    "scripts/engine-mixed-handoff-fixtures-v1.mjs": "4bd5ce68d29ab5ff9504955f70c8e0ff4714802111d27cfeb79b632f12024677",
+    "scripts/engine-mixed-handoffs-worker-v1.mjs": "2cba0e7f6b0adc9aaccb0ed7f1bf1b565b3076eda9335d52f162221a35bbfe5e",
+    "scripts/engine-native-ending-v1.mjs": "a8cdbb6753375652394d2277b9817091c893adc02229f9f697043e953f5e94d9",
+    "scripts/engine-native-runtime-errors-v1.mjs": "c46fd3adb346004c46d5b5126348a9b7f99780d844c5d23409b4b22444d25e60",
+    "scripts/engine-native-worker-v24.mjs": "876ee2a49d9f51e1925f6fc535d4312f57dce13d88a15b92b762b954f32f4bc8",
+    "scripts/engine-natural-shipped-contract-v1.mjs": "9c1b3573a4362b78efa1a1e758affbb53045bcfdf94c4e03f496ed59006635b5",
+    "scripts/engine-natural-tutorial-v1.mjs": "2ba6a18e93a491d6e9fe452ac97fca9235e53a4ccf5687f0feb6226652d18a8c",
+    "scripts/engine-natural-tutorial-v2.mjs": "1eb8ba174b567cdfcd639c1d01319bf4e337ef06ea4d5b8c7c8a2251fa1dc1f9",
+    "scripts/engine-natural-tutorial-v3.mjs": "30f7a344788e7b1b39b0181395c277c2eda2f42c2cf1d400562ddda137a8790b",
+    "scripts/engine-observation-boundary-v1.mjs": "ed1da13d136241cf41549c53d1c3e523c03e1fd1f0a3253fae137c3cc1e0ed73",
+    "scripts/engine-observation-boundary-v2.mjs": "9fa9ef35fed6d528ce9d944fc256e3009a5d227b4544483c8cda0d8e4b08a3f9",
+    "scripts/engine-ordered-plan-surface-v1.mjs": "725753ffd89c28e3a79819697484a16c800b15ee2cdbee37efba8dc2eaf49f90",
+    "scripts/engine-ordered-plan-v1.mjs": "0fb1892a72de324756fd41dd77920931133fe9c94864fd596300d7984646f336",
+    "scripts/engine-owned-inventory-audit-v1.mjs": "0627ca076680803ff884fcc35e11d2cf4a6b24dc1256ddb231845fbc3ebe49e1",
+    "scripts/engine-owned-inventory-identity-v1.mjs": "b1125047c965a5e0a11c10ff66d54960b85ecab09836eade7d4dd8b206137835",
+    "scripts/engine-player-projection-v3.mjs": "69a4d9113bc2358b39f1351a6c9a68f959371b1e37d08da70da75950f19f4bee",
+    "scripts/engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "scripts/engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "scripts/engine-relic-surface-v1.mjs": "8d13cb14033cea7c4a5a280ccee5c16f931e5de3ee5b76433b222d2f7774d9e6",
+    "scripts/engine-relic-surface-v2.mjs": "aebb9874b61d459004dbb0b90869d2d5a3f590c2eb890c4101ea5cdde0393fb8",
+    "scripts/engine-relic-surface-v3.mjs": "435a84f4c01d1b46794a689360d7fd9915e27d3bd0520d563bdbaf3e09d4dd53",
+    "scripts/engine-rest-bridge-contract.mjs": "b0122918993ff4b6613868e588b2c4953a9469123ddb384ca65cdc1b18aea896",
+    "scripts/engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "scripts/engine-reward-belt-audit-v1.mjs": "8b1bc8a04733740ce4fef42cd535ac4dd062d8fd00b641a5ff883ba78977aa3c",
+    "scripts/engine-reward-belt-surface-v1.mjs": "2c30d879cf6fdc19490dde285059f3d8c0da3ec2aecc5142be6f5a0379808f0d",
+    "scripts/engine-reward-commit-v1.mjs": "4da426d716f5ad8bab76f7ff91ed43d9c3290f53f8647d93320b1e845839286a",
+    "scripts/engine-reward-commit-v3.mjs": "67fd000353953b96a8bc26158e3e49dec1319bd94078972ea20bd6a7771cea54",
+    "scripts/engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "scripts/engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "scripts/engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "scripts/engine-run-contract-v7.mjs": "d36dc7a1546270fd1ff2854948639e3c3a36938fc19395b3ef7427665149000d",
+    "scripts/engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "scripts/engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "scripts/engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "scripts/engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "scripts/engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "scripts/engine-run-policy-v7.mjs": "8017aa57f5f61394b0bd9fa9399236428d7686daa9a9410e7042865c7f166736",
+    "scripts/engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "scripts/engine-seed-contract-v1.mjs": "1800403f203f3aad7447ae19359b29591d7a4ee03a11ce91cb426dbe5ed076f4",
+    "scripts/engine-selection-cursor-v1.mjs": "222463a0bf77e761cf70ff3060dbd96a2f27b5a419d5cf2377fd370cb3880fc0",
+    "scripts/engine-selection-flows-v9.mjs": "bd584228bddec0bb3e49b0b61de9d8e6c4619d57e13a380cbcc7cae88ed7b688",
+    "scripts/engine-selection-scope-v1.mjs": "3612bd3d8eec7e4a7855cd696cbf0e73b4cb341809a27005d648171e906fa726",
+    "scripts/engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "scripts/engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+    "scripts/engine-selector-official-v1.mjs": "153d42e522de74faf75fa3fe9165acf17f41a41943d6de7c73ab3a14f2184db2",
+    "scripts/engine-selector-paired-contract-v1.mjs": "8c4fd9bfb25b0d93b7b236d43020fc82e461e3db56513010801a1557db9a3b09",
+    "scripts/engine-selector-paired-worker-v1.mjs": "7123171ebc1f40881513ea269ac5213337be5e6330e3c2d8586f1f0ccfd574ad",
+    "scripts/engine-selector-paired-worker-v2.mjs": "9ca3d1db6d1c2d043824ed6e08af820f1f0edda512c32eda5094382275d9cd34",
+    "scripts/engine-selector-paired-worker-v3.mjs": "2156582d6d7a5a5171e2af4a0c30163b5ab40d367ca8e9cf906bc56e9cca9e36",
+    "scripts/engine-selector-paired-worker-v4.mjs": "8d18b0e4a2392121e02ba2a7b000ea8eff2012aa7442eae2fe3ab679b0a7ee3a",
+    "scripts/engine-shared-input-v1.mjs": "242c415b74d1054ccd79ef27ae8a7465bf2fb15801ab3f3c3de4d869618088b3",
+    "scripts/engine-shared-input-v17.mjs": "29f6342e2ff099c5323ece16048ced9f4525706993e708f9c3111fe21844b2a7",
+    "scripts/engine-systematic-entry-v1.mjs": "a62aa0ef584a42db9e61e57849dc14eafcf04f26f3fb4658306e2a18684de87a",
+    "src/spireshift/native_lifecycle_contract.py": "166d7fbba31aa2bf2a2e9e36ab66bdd12817d0df5516a35e097f4cd5ecffafe2",
+    "src/spireshift/native_lifecycle_worker.py": "c588d812709738a1c7f45c7592242917ef7cd398619141489976e9a5c477137f",
+    "src/spireshift/native_mixed_handoff_cases_v1.py": "cb7c6bf08bdc02c948cecbf9fb607cac8fcfada548c62fd515dddc10b8d2eed8",
+    "src/spireshift/native_mixed_handoff_checks_v1.py": "064d4a17afbec5e3aa909e0684d07d4883642eaf15701b3f2c677f5c23ac718e",
+    "src/spireshift/native_mixed_handoff_checks_v2.py": "59c660015f95f6c0b825e95603fe7d8b88e696fac448b82cb9dac1070dcd7c04",
+    "src/spireshift/native_mixed_handoff_inputs_v1.py": "2a12a4e68a8cbe3b0096c5989dfabf86f591376005ebf09e4906d05e9579b8c3",
+    "src/spireshift/native_mixed_handoff_inputs_v2.py": "db8dc1e49264f08faac9bcba0e015cb80ab9fa2213ff432e7c402db4127650a3",
+    "src/spireshift/native_mixed_handoff_session_v1.py": "05ab2b866496ed6b09a6172b900dbc7192a0457922833fb53393ee6f724ee770",
+    "src/spireshift/native_mixed_handoff_session_v2.py": "2723ef3a14790ac2bb92129443ded5f75b4150070f3bf88efb54e3f92c660fb1",
+    "src/spireshift/native_mixed_handoff_worker_v1.py": "e3fb50f2b8ec966d306740d14726874d03f5449593919f4ccbc26def2ae11a2d",
+    "src/spireshift/native_mixed_rest_session.py": "333e0f7f4b9d0262082923b3e2cfd44f056ff4d2a20c9a2d811b70c27152d82b",
+    "src/spireshift/native_selector_executable_checks.py": "60d0f4e8ff439915e771c9b112ab2b0b107a4b59bdcf43f95d78f5d0d04fda0a",
+    "src/spireshift/native_selector_lifecycle_cases.py": "ce2391c5dcd222c1dfb471d748f55bc074e96813c86e60aae4ed98f9ce7c6aa2",
+    "src/spireshift/native_selector_lifecycle_checks.py": "8be6daded970115f03838d045abcd408c4e64a169518e5e7fb3ffcc9cf7c241f",
+    "src/spireshift/native_selector_lifecycle_trace.py": "bf3ac3a8d28b4e48defb38c4d54c74aef8c5aed01ccf7211b2219e5d381f4f05",
+    "src/spireshift/native_selector_official_reset.py": "6d950035ae48bb0408a4ca29010c8c96e0b74018b7ae6020216ebe46c41369ef",
+    "src/spireshift/native_selector_paired_contract.py": "b926b1ebefd9c3d75a2ecaedf2d0bfa6b884c3fabbdcc528c912d27c6e1e2606",
+    "src/spireshift/native_selector_paired_inputs.py": "23f7b029d0bd053f0e7dbdfcd787b38d0cd0ca6caef807ae96d1a4a7d0627ec1",
+    "src/spireshift/native_selector_paired_session.py": "f1886e6583f1793a192bc048ea6fd9ff68c5442454da703775fa958e772a852b",
+    "src/spireshift/native_selector_paired_v2.py": "54ae4f3d29d6db86b6c9005e810c721a912715c1e44b5ef260e32b05592a983b",
+    "src/spireshift/native_selector_paired_v3.py": "8f07f03980c8d85b9b1310f4735edba32bb61b93e96c451e536d3c59847247ed",
+    "src/spireshift/native_selector_paired_v4.py": "700b1475d4182040890e2d818686ed732bce2acab14ddf39a80e5acd892a87bb",
+    "src/spireshift/native_selector_paired_v5.py": "e074a507504ba71e7fe16c772f20829412450fe54c486f25a12d2ed2ecda17f8",
+    "src/spireshift/native_selector_paired_v6.py": "a4ac8ec772500138e37aae6650044f98d99985e1f287fe7672fc35e5cd04a658",
+    "src/spireshift/native_selector_paired_worker.py": "b1ddcbed08505f447ca70f3412ca18596f189425263bbc5ebe860c27c77db707",
+    "src/spireshift/native_selector_startup_reset.py": "e7f45ac1797b3ee02e8d660ad14352b9ddfb959a294c1db337e4112a002e75b1",
+    "src/spireshift/native_systematic_session_v1.py": "fb8ac1bcc43b4762c0cb8f9302bfcc2d1640401ba6348bc5eed87ed11a8a5333"
+  },
+  "selector_assessment": {
+    "path": "artifacts/native-official-selectors/v6/owner-assessment-v1.json",
+    "sha256": "65d8dbe138fbf4b36ef1b1013307a63bb5fd00b44acb368bca5a3951698f5cce"
+  },
+  "selector_assessment_id": "sha256:1bb43272c19503d92a45bbd6b424e350efde0517f404599b92031f1c528cc547",
+  "selector_parent_config_id": "sha256:46e087ef30ef9685e73b69b8597669b37b2580e5d8e6d2a5e3f3474a90260ba8",
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "working_app": {
+    "path": "configs/engine-qualification/sts2-v0.111.0-working-app-serial-v1.json",
+    "sha256": "4738f3c1cb11bb510339caede9f021efefaf685914d8637e51209e44768c929e",
+    "id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959"
+  },
+  "working_app_config_id": "sha256:1a630046d1435400afcfc95ee0e64877771c439312d89313f8f39af26c57f959",
+  "game_source_evidence": {
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Potions/EntropicBrew.cs": "c394959f717caee92718bfc508a88bbfc853c06e61ca6e280cedb1485bbddbee",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Commands/PotionCmd.cs": "101e099dcbfe8ef4622e79aee327ad2d6a46e4329ce06a52ddb3ec7fca89979b",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Rewards/PotionReward.cs": "0e10a1901cfac2046ac1750e593df89f5341e6a4fb76c17e4d847c8b36297819",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/Merchant/MerchantEntry.cs": "dbd59a15346ec9afcd5bf0a4a980985ff5d02d8f34d8a8ff2281e70c8f45ccf4",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/Merchant/MerchantPotionEntry.cs": "79ec91e3b6a1349e7d0d9f3330f11348e794d613e0a4e65784b9428047bd19c1",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/TheCourier.cs": "2d2e8a3c5b662754b79bc06c07374af66764776a8e15cf30c3eb3149ec2ce307",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/MiniatureTent.cs": "bff5579ca0489078bed1ab678da853295dd32650e9e62fe3315e56b43907d45f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Models/Relics/RegalPillow.cs": "1407da39984ffc83cfa10b0fbf34331aceee2e1f68ede5441f27c5bb7362a2ad",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/RestSite/HealRestSiteOption.cs": "167debfa61b18e90a2db5912eb07b04577610af95427c5800cc2ed7e3b8fcbef",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/RestSite/CookRestSiteOption.cs": "b2fd9abf9e647800d6e95dcf2bf47adb94a0f545e5d161c7c105938b3fcf6694",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/RestSite/LiftRestSiteOption.cs": "b9da153f43520ca7a27cc6a9caf6bcf9ab4700fcaf826f25d205cf160dd00d3f",
+    "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/private-source-v1/source-i0e9vyb_/decompiled/MegaCrit/sts2/Core/Entities/Creatures/Creature.cs": "7a38841c525d5cc8873a2151e993e30e2ee84ecb345ea57e2570bbac4516c20d"
+  },
+  "privileged_fixtures": true,
+  "training_allowed": false,
+  "optimizer_updates": 0,
+  "promotion_allowed": false,
+  "automatic_follow_up": false,
+  "claim_scope": "twelve_declared_potion_replacement_restocking_and_rest_site_handoffs_only",
+  "harness_parent_result": {
+    "path": "artifacts/native-mixed-handoffs/v1/control-v1/native-result-1795462620730563000.json",
+    "sha256": "cd780e14f8b047a6ed9edd0ff83458d0e9100b3c4801a74f66b11806b6631f86"
+  }
+}

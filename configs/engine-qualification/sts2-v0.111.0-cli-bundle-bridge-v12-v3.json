@@ -1,0 +1,63 @@
+{
+  "schema_version": "engine-cli-bundle_bridge-projection-config-v1",
+  "stage": "privileged_named_bundle_bridge_public_projection_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "build_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-bundle-choice-v12.json",
+  "build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-bundle-choice-v12.json",
+  "build_report_id": "sha256:dc26bf6a521ae0afa82f99e0c31c209254d8cebfa2e23802d9e30b4bb4284b69",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-bundle-bridge-v12-v3",
+  "helper_sha256": "9b9528127e6d49567561be8856722df6ee29b4c2212371ffa3935301cebd92bc",
+  "character": "Ironclad",
+  "ascension": 8,
+  "managed_runtime_version": "9.0.7",
+  "max_wall_seconds": 180,
+  "training_allowed": false,
+  "projection": {
+    "source_revision": "4961b52a587777277816bc4407108f6f4274f801",
+    "source_sha256": "5926fc27e2bae08939f623f73017e4640085cee7d217bc7562773ac65455ec35",
+    "patch_sha256": "25db9e05297561636d0915c225ade27728e22b9756e0de11ef822115f3fdb975",
+    "patched_source_sha256": "775e160a8ec137615ad24592779d0a26c27894927512af77782f1e8f9f88662a",
+    "node_modules": "artifacts/engine-tooling/connector-native-v1/node_modules",
+    "sdk_inventory_id": "sha256:34d054042a5a9acc43491a23e7cb5a4f8b813aa031a4590a6c1ee2b7979f7978",
+    "helpers_sha256": {
+      "engine-player-projection.mjs": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155",
+      "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+      "probe-engine-cli-rest.mjs": "8df72169414ef86f501d3c8900dea3e9e1fc55b9ba8bde487603881b24dadfc9",
+      "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e",
+      "probe-engine-cli-shop.mjs": "218a54c22e9dbc388db4aa8a7373fc4ea9a3b857ea14d32142323867f5a67fed",
+      "engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+      "probe-engine-cli-combat.mjs": "f0e7a6fc2b5b95ff38a36dbe08bfedffd9e4ae8a3e3d334e0f68f5d1b0b0ccbc",
+      "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+      "probe-engine-cli-bundle-v2.mjs": "63c2fef69f956b446d8543e5c6ee538f4b965a9c9e077e1687d3ba9700641594"
+    }
+  },
+  "managed_runtime": {
+    "directory": "artifacts/engine-tooling/dotnet-runtime-9.0.7-osx-arm64-v1/runtime",
+    "version": "9.0.7",
+    "roll_forward": "LatestPatch",
+    "inventory_id": "sha256:31ba28406ab7b3fc44d963ac7abf2903afe80fa68cc2be419249dc8c3a7e19b0",
+    "dotnet_sha256": "73be03a8f4e0d88d9653b333306fd9992a536e2109932578503a92fa2672c26f",
+    "source_metadata": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/9.0/releases.json",
+    "package_url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/9.0.7/dotnet-runtime-9.0.7-osx-arm64.tar.gz",
+    "package_sha512": "0deb23ac714dad69bf7d0c67e4253256d0845881b805cc8b9c6f2051283d5f9bbb000d363058523dce4c7361c2b460016a865b6d6baa5843c9263591d539eb20"
+  },
+  "public_projection_revision": "bundle_v5",
+  "native_localization": {
+    "directory": "artifacts/engine-assets/sts2-v0.111.0-41cef1ea-native-localization-v1",
+    "report_id": "sha256:be618fe6a9df33a3311897364dc800ad8c5daf338d9ece829a4b2c4eb3a12962",
+    "pack_sha256": "b3c9f133143f98a1c329c3d2efc7d8a9feb395db46fd3965b899487bf1f4d106"
+  },
+  "content_policy": "native_all_unlocked",
+  "bundle_probe_revision": "v2",
+  "seed": "SPIRESHIFTBUNDLE003",
+  "bundle_bridge": {
+    "index": 1
+  },
+  "bridge_helpers_sha256": {
+    "engine-rest-bridge-contract.mjs": "b0122918993ff4b6613868e588b2c4953a9469123ddb384ca65cdc1b18aea896",
+    "engine-journey-contract-v2.mjs": "b25d8d4494edb3cdd37d651c8bb1d1dc70d1613c910148397d2713ae1e76ba94",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-bundle-bridge-contract-v2.mjs": "3e676d645637f2755a083f2033718d6f65563bfd012483f5f8b09dd9b046a9d7"
+  },
+  "bundle_bridge_revision": "v2"
+}

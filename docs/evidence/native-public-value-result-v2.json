@@ -1,0 +1,59 @@
+{
+  "schema_version": "native-public-state-value-result-v2",
+  "report_path": "artifacts/native-public-value/sts2-v0.111.0-a8-comparison-v2/report.json",
+  "report_id": "sha256:8d13c149e98c59385005ef0e61a3efc4055072f3f34d346549b9e4f4415c692b",
+  "config_id": "sha256:2708455b3db569870affa41dc07a24d385261d4cc0d56b3fa3ae1f4563aea040",
+  "completed_folds": 16,
+  "summary": {
+    "adaptive_controller_allowed": false,
+    "automatic_training_follows": false,
+    "by_cohort": {
+      "seed-2-standard-round-057-fit": {
+        "coarse_mlp": 3.081420280216516e-05,
+        "current_progress": 0.00011394997555103854,
+        "current_ridge": 2.6049091280158996e-05,
+        "other_game_constant": 3.664371381183387e-05,
+        "structured_mlp": 4.229621230913081e-05
+      },
+      "seed-2-standard-round-060-fit": {
+        "coarse_mlp": 0.00015694258852205485,
+        "current_progress": 0.00024443114782171876,
+        "current_ridge": 0.00015462488807280834,
+        "other_game_constant": 0.00022742796397382992,
+        "structured_mlp": 0.00018782555507066372
+      },
+      "seed-3-standard-round-057-fit": {
+        "coarse_mlp": 2.309370738547756e-05,
+        "current_progress": 0.00012971263089310743,
+        "current_ridge": 2.089722244362194e-05,
+        "other_game_constant": 3.4682433912782825e-05,
+        "structured_mlp": 3.271188517449268e-05
+      },
+      "seed-3-standard-round-060-fit": {
+        "coarse_mlp": 2.413538647725089e-05,
+        "current_progress": 0.00011933099664178619,
+        "current_ridge": 1.8940712818807762e-05,
+        "other_game_constant": 2.7381669823197383e-05,
+        "structured_mlp": 3.182844874016969e-05
+      }
+    },
+    "checkpoint_promoted": false,
+    "equal_game_mse": {
+      "coarse_mlp": 5.8746471296737113e-05,
+      "current_progress": 0.00015185618772691275,
+      "current_ridge": 5.512797865384927e-05,
+      "other_game_constant": 8.153394538041102e-05,
+      "structured_mlp": 7.366552532361423e-05
+    },
+    "held_game_predictions": 128,
+    "prediction_target": "declared_bootstrap_return_not_victory_probability",
+    "stronger_native_play_established": false,
+    "structured_beats_current_ridge": false
+  },
+  "actors_and_Adam_unchanged": true,
+  "new_games": 0,
+  "actor_optimizer_steps": 0,
+  "game_apps_created": 0,
+  "interpretation": "Rich correction has higher held-game MSE in every cohort; representation, parameter count, initialization and fitting effects were not isolated. No adoption or stronger-play claim.",
+  "next": "separately_versioned_matched_input_masking_and_separate_error_penalty_curves"
+}

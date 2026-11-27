@@ -8,12 +8,14 @@ from types import SimpleNamespace
 from typing import Any, cast
 
 import psutil
-from pytest import MonkeyPatch
+from pytest import MonkeyPatch, raises
 
 from spireshift.cli import main
 from spireshift.resource_tracking import (
+    EXPERIMENT_METRICS_ENV,
     CostRates,
     ExperimentKind,
+    ExperimentMetrics,
     ExperimentStatus,
     ResourceLimits,
     _ProcessSample,
@@ -23,7 +25,9 @@ from spireshift.resource_tracking import (
     load_cost_rates,
     load_resource_report,
     run_tracked_command,
+    update_experiment_metrics,
     verify_resource_report,
+    write_experiment_metrics,
 )
 
 
@@ -47,6 +51,35 @@ class _FakeProcess:
 
     def memory_info(self) -> SimpleNamespace:
         return SimpleNamespace(rss=self._rss)
+
+
+def test_progress_counters_require_exclusive_initialization_and_never_decrease(
+    tmp_path: Path,
+    monkeypatch: MonkeyPatch,
+) -> None:
+    path = tmp_path / "metrics.json"
+    monkeypatch.setenv(EXPERIMENT_METRICS_ENV, str(path))
+    zero = ExperimentMetrics(trajectories=0, simulations=0, transitions=0)
+    one = ExperimentMetrics(trajectories=1, simulations=0, transitions=2)
+    with raises(ValueError, match="initialized"):
+        update_experiment_metrics(zero)
+    write_experiment_metrics(zero)
+    update_experiment_metrics(one)
+    saved = path.read_bytes()
+    assert ExperimentMetrics.from_path(path) == one
+    with raises(ValueError, match="decrease"):
+        update_experiment_metrics(zero)
+    with raises(FileExistsError):
+        write_experiment_metrics(zero)
+    assert path.read_bytes() == saved
+
+    def failed_replace(*args: Any) -> None:
+        raise OSError("Simulated publication failure")
+
+    monkeypatch.setattr("spireshift.resource_tracking.os.replace", failed_replace)
+    with raises(OSError, match="publication"):
+        update_experiment_metrics(ExperimentMetrics(trajectories=2, simulations=0, transitions=4))
+    assert path.read_bytes() == saved and not list(tmp_path.glob("*.tmp"))
 
 
 def test_tracked_command_captures_hardware_throughput_storage_and_cost(tmp_path: Path) -> None:

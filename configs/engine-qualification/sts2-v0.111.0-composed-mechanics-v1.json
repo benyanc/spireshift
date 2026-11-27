@@ -1,0 +1,1963 @@
+{
+  "schema_version": "native-composed-mechanics-config-v1",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "input_config_id": "sha256:9ad7daeb035431096fc81ab07680ecf7c17a682a2791b0ea0a24958f6b96a541",
+  "build_report_id": "sha256:ed6399c209b91fb5af3177377e655d592171a289ba4a7f3b111771d9dbb2606e",
+  "helpers_sha256": {
+    "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+    "engine-cli-local-build.mjs": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a",
+    "engine-combat-surface-v2.mjs": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3",
+    "engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+    "engine-combat-surface.mjs": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783",
+    "engine-menu-probe.mjs": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974",
+    "engine-native-worker-v7.mjs": "3d118e43ce4bb758e4b1e8bed70fa8b63ead4910026e5f9964257a06d9554ad3",
+    "engine-player-projection-v2.mjs": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea",
+    "engine-player-projection.mjs": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155",
+    "engine-potion-surface-v1.mjs": "324ce199bda8234b8a952aea2131d8bfebd15cfa17b684b693a5436ccafd53e1",
+    "engine-public-input-v1.mjs": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82",
+    "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+    "engine-run-contract-v1.mjs": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af",
+    "engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5",
+    "engine-run-contract-v5.mjs": "2744b297afb473d9e3cfacd1f4a350adca1db6d00f7ad3bca2d4dfc6e2e82c8c",
+    "engine-run-diagnostics-v1.mjs": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f",
+    "engine-run-policy-v2.mjs": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a",
+    "engine-run-policy-v3.mjs": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0",
+    "engine-run-policy-v5.mjs": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66",
+    "engine-run-policy-v6.mjs": "83eec70bb79c7c19be087baedc48755c692a268c9394062f03a6ee62e3402ba2",
+    "engine-run-ranking-v1.mjs": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98",
+    "engine-selection-shop-surface-v2.mjs": "ba48b404cc4e8fb81ae7fdf9d54066b06d1f5fb3c406fc1158ad8067bccc9c63",
+    "engine-selection-shop-surface.mjs": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+  },
+  "sweep": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-coverage-v7.json",
+    "config_id": "sha256:81baffb50e6132134eed45c0d776a0b39848fdb6fd87994a1380732ad68b44bf",
+    "report_id": "sha256:1d4b84bb60d9cf5f59d9b461835f2a4f459ee459d28180404583a9a97c03e1dc"
+  },
+  "followups": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-mechanics-followups-v1.json",
+    "report_id": "sha256:2e6c8c94410940e208b31a90a0420c913222e0f700ca569af9a3ab8ed5cb912b"
+  },
+  "preserved_evidence_files": [
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/public-prefix.jsonl.gz",
+      "sha256": "98f626a4476bc0112f0005ad82ec9b021e9425908f681cbee8ee4b5c1c992a4d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/result.json",
+      "sha256": "e214ee2d84a142b5c3910e7a7eb43e257582348759cf5ddd3629c74391e4f56b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/diagnostics.json",
+      "sha256": "0012b00dc34ee9969da1a4373be72d9aa0f286c3d22f50a8d7dda2c13114d6c4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/identity.json",
+      "sha256": "de0a28517384f728358d66f1b30dc290e451f5b8c602c17c16eee5f31e142122"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/native-process-stop.json",
+      "sha256": "224ed21c5e1d33bb4d51cb4b81b353f6cf7b57efffaede935aefb45ffb7dd009"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/private-transcript.jsonl.gz",
+      "sha256": "6f96f004da44ec538fbd79723bb163167c92ba2fcab29f87f94bdec06cb693c0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/profile-isolation.sb",
+      "sha256": "3153e6f550852e214da2273994014bb13c97920b696d50c3d1af07188b7b22a1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/public-observations.jsonl.gz",
+      "sha256": "7b9e6cc60bc173191aa2157a6bd5355f1cf0205de9658e52045df4bb724b1b01"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/public-receipts.jsonl.gz",
+      "sha256": "7b5f80515c73d7f97eddae1b89f054da085216d70748ede69206630e3841ad54"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01/worker/stderr.log",
+      "sha256": "76f281fa32845cd8ae1fd7c18b868cc2e76c55fd1712902b30cb0962e73df293"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/public-prefix.jsonl.gz",
+      "sha256": "166dcc99cc43d80b1e2f88d27167113dbb8c4ac118353326ccdee257394e0282"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/result.json",
+      "sha256": "c32b172f02aa3f84b18d94bb04eccfe30d9ba2f4b1bd86603ef640ee54a9df53"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/diagnostics.json",
+      "sha256": "69d3724c5e032e6e20c2dbea8295691de342f46a3ca67ffc235d8313f9c3e251"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/identity.json",
+      "sha256": "00a7ef33d2603052b21c81e7e0a0c3e3e45bf5289a0b39cdb943d788eeed70a6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/native-process-stop.json",
+      "sha256": "e706629dcc8db1d0d4152088cae844d321291d040e7fd7bca59eab0ea2d20894"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/private-transcript.jsonl.gz",
+      "sha256": "b938b644670cbff0a8a484aba2e69038786eea0b21470af48239ce3b56de3d66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/profile-isolation.sb",
+      "sha256": "411bdd9e0afd8f87da17b19a6bbb1d824800a12fd0e883f7a3ca37714c2b450d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/public-observations.jsonl.gz",
+      "sha256": "fcae02285852bbca72d595bc2a0f4927cdfccbca882728c2029bf5206517c35e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/public-receipts.jsonl.gz",
+      "sha256": "8af6f1af377baf8a39616e6de01f1d5c5837d34d4680035176aa47a903dfca4b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-01-repeat/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/public-prefix.jsonl.gz",
+      "sha256": "9ba81370a1ea51384d1456940d3183bb6850483f3c72cdf85d8cf127568ea722"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/result.json",
+      "sha256": "c38a6cfbb1d0fb539dfa5cd69e4b11c0ab2f6f592bfe0b862da478b505cd96dc"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/diagnostics.json",
+      "sha256": "93619b493b3d80c0c3b2a870be7357f907270d0e552a28e770eb78832b7bead4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/identity.json",
+      "sha256": "a714a6ccafe93435e61fe694ca61c672295f936abd6b3d7e10aa6e3b7aa61fa9"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/native-process-stop.json",
+      "sha256": "6940a55f7c80fa4efe553cff3f3280a0bf3701935b4183b7d0aecbbc6d0d7df0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/private-transcript.jsonl.gz",
+      "sha256": "792e82cbbbf0e111d6fcfa0331250f374439efcfad35797aa65716d0264212fa"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/profile-isolation.sb",
+      "sha256": "0da9b04654beb89630a153da24d681d592f560b6ff399fe7ee7b967c2aec86e7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/public-observations.jsonl.gz",
+      "sha256": "29f77c9f546272b01b5782369f613818fef2d29eb0000ea8d33a82c4c00f8d7e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/public-receipts.jsonl.gz",
+      "sha256": "c090ff3f5697e06c685cc226a718a98a2ab89bfb71b4ec60f8f0362c5cda2894"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-01-policy-02/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/public-prefix.jsonl.gz",
+      "sha256": "04efa3fe587f5fca6cf0387a766049dbf3ce5cda645c10d1105573ad7ff47963"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/result.json",
+      "sha256": "c3c728c86c3ad7a93bba3ba1644502108d23eccce3aafdddf238d0f079ec2bae"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/diagnostics.json",
+      "sha256": "76682efba69a29299733111178976edd851fd5822026f72440bcb0280fe725f1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/identity.json",
+      "sha256": "2f289c61c998ae3c8e58633df4a90268b2ba2e1d52fc63bae14d8fad1bb892bf"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/native-process-stop.json",
+      "sha256": "13659ff849dd6209fb43d3a9b09fdbb6725a7d07ca794efa3af785da6824c683"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/private-transcript.jsonl.gz",
+      "sha256": "1f0fcdd55be0cab2364f3d27c8a49959e21ad9863c8221790094cc8bfd914efe"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/profile-isolation.sb",
+      "sha256": "caf40e949a1a49f391d5e8b2bf1c34ff235885556969e3abbd64dc1cbdd87e7e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/public-observations.jsonl.gz",
+      "sha256": "2853ff5103e352efac4be4bb0a8215ab48089e88a3b0d2d89fa094f20d01a3f6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/public-receipts.jsonl.gz",
+      "sha256": "82998216e9035708e4cf8197592b9fa5324ff5688a533f848c739a4a9526b80e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-01/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/public-prefix.jsonl.gz",
+      "sha256": "81adae075869ed24879b2d322ec725d086d0ee8b47b096bafefd43e1d2a7d1ca"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/result.json",
+      "sha256": "586ff6a06720a95a35a42b98890bb1e1a714bcec73fc38e389d4b385cce25626"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/diagnostics.json",
+      "sha256": "6d839924f70cd31ca96de56bbc009360a937c4cd07194b00a925a0ccdcdf034b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/identity.json",
+      "sha256": "b1aff13952ce55f788c0a5c9d14380185658d98cdfdcb39c76df140072e8ccc3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/native-process-stop.json",
+      "sha256": "213a8bb5482a6766a4449a44cf5e1eed5b0f38e9e19faafb8ba7b856d98dacd4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/private-transcript.jsonl.gz",
+      "sha256": "283f1c1cc013da93f693547af1f16be4c95700c4dc1978f9a224c303164084ee"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/profile-isolation.sb",
+      "sha256": "416a0a3216c3a55782f88c59224df7a89cc608c7f6c8a6b232535fb73b5bb071"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/public-observations.jsonl.gz",
+      "sha256": "3d14a3cfbbefac397d03f83869eb42a34aee8b6f3e9ec13667d9773162794353"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/public-receipts.jsonl.gz",
+      "sha256": "b33e2d71f3252c910777912ddc10343c59717a7e91c83a2c4bf84be4166cdb95"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-02-policy-02/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/public-prefix.jsonl.gz",
+      "sha256": "32e270460a101b3b0d2c39858a3d5e447e76955a470b17c5bb3fefbeab801415"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/result.json",
+      "sha256": "e6b08530b5fcce8a2e22b41142e77a09364fa37923891f229195767479e94d00"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/diagnostics.json",
+      "sha256": "30569d04e68864a543e8cbe62b9815397709f7789918d5e2608d7d3e3605d10d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/identity.json",
+      "sha256": "e04e61fd7b4af524c392c76564afd0358faa31ac5f91babc9219dfdefc10842b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/native-process-stop.json",
+      "sha256": "d9109d4c035a550ebf9f89ca2d98a44f4f07b21846b0a7b0b62439cc53d323a2"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/private-transcript.jsonl.gz",
+      "sha256": "f7e20981f2b04b449d21d720200cd031d66f01e6bd177de66ffdc928450b619a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/profile-isolation.sb",
+      "sha256": "5ca4e8f83edd6d4dae416d2514b201e5a4aee11e7e19eeb1c02c760d09870f09"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/public-observations.jsonl.gz",
+      "sha256": "ce3135c2245fc83f10e75713aecc25c687bd9b60bac66ffc11be269d7557412a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/public-receipts.jsonl.gz",
+      "sha256": "7d40066650713cce7de92b6551ea0edb42fbb5d2520e640c1c53d1b79ffee810"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-01/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/public-prefix.jsonl.gz",
+      "sha256": "6ec8b59a976f535f0ad63149e94f5f622bc1a267511fbf58113ed395d1d7710a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/result.json",
+      "sha256": "01ce11045937dcc0943ac40d4f66e63ff428d9d68f0633e8308338e3000fe496"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/diagnostics.json",
+      "sha256": "f46535652e17ebbef7f7780044acc7ab7e3277a0fcabb5a99a6dc10e48054739"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/identity.json",
+      "sha256": "fb75991941ed23c5666b0fa0fa13de2173725c046474ef7bac7a481a7c4ddf6f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/native-process-stop.json",
+      "sha256": "7a23ae5d8c50e1fea334e9b097ec5fe19eaa8222646d76d0d8518c4958a0de72"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/private-transcript.jsonl.gz",
+      "sha256": "649e8946717ab7ddfc7c9a49d895c90c9bc0828b22af1aa5fa9092577e36e492"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/profile-isolation.sb",
+      "sha256": "08f8e5b9c24688b5c9c75637cb0f834e200033ac9646a3db93616a18e8b20fa3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/public-observations.jsonl.gz",
+      "sha256": "08fef3279087586ff7eaf8d2a347cb944f3a7684fb85d4c8efbacaae5aa324c5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/public-receipts.jsonl.gz",
+      "sha256": "913bcbaa928f52a6e5df809fe6305587d94bee67f1e4a150b1b316a0045c5490"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-03-policy-02/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/public-prefix.jsonl.gz",
+      "sha256": "8d98854fb72f7afa8d0d8228b3b10a5ccbbf0427717dfc76dd8712c07d718450"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/result.json",
+      "sha256": "cb2aa47f2b066ccb11c9506e82526b1bf43b84bcb4aef19fa43ae04ffee12bca"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/diagnostics.json",
+      "sha256": "11c1b0a5d406c75c03787725d51b4433ee3e8e15eea34486af00dad215571ae5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/identity.json",
+      "sha256": "c95c17fc9cd435327fd2c9163afeb3622521d3a677c1cba9cc7e8caa458579ab"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/native-process-stop.json",
+      "sha256": "2c9bed58b64ea318eb97a0329c230a5f0bff4fe1d7cb6ec3bc42c94d378383cc"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/private-transcript.jsonl.gz",
+      "sha256": "7f224133411178f9346eb5a394400c49cd3219f43cdd5145ab2e260c366e9d22"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/profile-isolation.sb",
+      "sha256": "02914a1c877514e3f7bea9574e405ee4530ed1ccc8d5b110cca16ca75965fcc5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/public-observations.jsonl.gz",
+      "sha256": "73c818be046b16f5309f5911c2d0c4ecfccae7e7da5e37f8e02a161573ad02db"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/public-receipts.jsonl.gz",
+      "sha256": "2088c6bf088ca76382da8a9d953bfce4f6bf295e5a9ef220aa2f03a22f048870"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-01/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/public-prefix.jsonl.gz",
+      "sha256": "b39398f027383320fa7b7c4c24e3fcf74ac78fb00d692944215a5c720e1283e1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/result.json",
+      "sha256": "6d05b59d84adb5c8bb4bd516a22956e5eebe41a2290c676ab1c55c075f473cb9"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/closed.json",
+      "sha256": "72aa2b1d3fae9eb92e7f011a5c394205f600c74df5f742d7460b644b1725e4bd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/diagnostics.json",
+      "sha256": "05d8b4bea77f01a6c9aeb7ea42959d0291cf12309c6af71aa082cf6fc3a15ca1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/identity.json",
+      "sha256": "610110d53a6a87350647697c4033c27c5dcca90521f57e946d0d7fdd472c8092"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/native-process-stop.json",
+      "sha256": "834bd8af07d6228c4a36975edddbffe8088c802b8d096234239f22b9c28d99b6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/private-transcript.jsonl.gz",
+      "sha256": "17ae0cac09a5365800193e40a4cd1e81699872e5754d1a08e5255cc423858e4e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/profile-isolation.sb",
+      "sha256": "13fa596c417bd1efa1a259e3ea487151337e90bb18252a4a98ec76fdd8775ec7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/public-observations.jsonl.gz",
+      "sha256": "d3aec9980a45ca43e0642dbb66fe77ba58ea6795b3b28c76f93e526336c3accc"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/public-receipts.jsonl.gz",
+      "sha256": "af35a9125cc8ee1bce2b47b500a33fb32eaad9f88bea12e2a2d9153eebd95d32"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-bundle-surface-v1.mjs",
+      "sha256": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-cli-local-build.mjs",
+      "sha256": "ec46c0161cbc1ae4147ea2a38719eaf51cc4fe60bd10f954e4526206ae928a9a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-combat-surface-v2.mjs",
+      "sha256": "d514804aa73996928f8001744c0d6f8d4a0600c8a588ee8819df13fe5d4d7af3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-combat-surface-v4.mjs",
+      "sha256": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-combat-surface.mjs",
+      "sha256": "cd53d2e6e5371fb443fa8625c712be65e71169b06b02fea71922c54c43a54783"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-mechanics-worker-v2.mjs",
+      "sha256": "c587cafba3e88f82641e3f14efe9c14764a5d8c63ecd6a14aadb5cede88ace2e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-menu-probe.mjs",
+      "sha256": "c2a6195ca7a8455a26a6a50a504c1d3d7e686f7421293193bdc932f1d29ae974"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-native-worker-v6.mjs",
+      "sha256": "9f0841e7dfcdb82b2cd5f84fcff274cb70b6c90f271e852242217b17b0b71264"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-player-projection-v2.mjs",
+      "sha256": "3c242480e6a4c018e7091e8be59fc415ce8e18d941c2238d0da40481d01c69ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-player-projection.mjs",
+      "sha256": "98eb848d2edefa2dbe03381ff6646347d4ad07c8aaddaa3db09fc8f5c5f59155"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-public-input-v1.mjs",
+      "sha256": "8b480adc5139876523157ee0c81f72f1de2e15ab73304a029920beaeabf17d82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-rest-surface.mjs",
+      "sha256": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-contract-v1.mjs",
+      "sha256": "8d32b0d125e89d3fcd6a3623c98a566323e2638c436aa0cb5c63a879f2cbd1af"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-contract-v4.mjs",
+      "sha256": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-diagnostics-v1.mjs",
+      "sha256": "e2042ff8f5093668438d17052d37a621cef3fc0ee0a4b30db0591d137149f67f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-policy-v2.mjs",
+      "sha256": "f7eb3f388f9b8c6395f8d167d156b3f9db2f1f2282ccfd8804f1c5a8da7c4c3a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-policy-v3.mjs",
+      "sha256": "fc1bd399f733b6216b3c968883438e64ce3207ed7a8e06850c9d9f2051c3e3d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-policy-v5.mjs",
+      "sha256": "51e6fd55281327fdda7922f3596e0f28fa8eab086d37e816089fa08a5cd01a66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-run-ranking-v1.mjs",
+      "sha256": "7184d55d16f352fba76af68ccaa0004c02e924e48b730cf7fba6b16f492c7d98"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/engine-selection-shop-surface.mjs",
+      "sha256": "fb568b992f388ed228890d9b4b70e45cb8b4a29eed07469a4c1d5c232f4b9b9e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/source-at-launch/helpers.json",
+      "sha256": "4eda7ae7c958233acfb96fa5763ac6ae470c3533441cced0811ec47e442f0448"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/cases/seed-04-policy-02/worker/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/recipe.json",
+      "sha256": "485857b400a472779690b16cfd372a83b920e1136d52a7b31da104b61d0ab6ea"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/identity.json",
+      "sha256": "33e5f069484f23e5d87629dc073591fb49e36b1a147fee2d74b8b9a865cdf2fa"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/HEAD",
+      "sha256": "9217c9ad4ba096cfa4c18c9245a244f8787f6f69137930a389ce480d4a98ce8d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/config",
+      "sha256": "285422fe012ce7fe255dbac221afc3182ca5a02601569ab30562cc56bad11284"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/description",
+      "sha256": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/applypatch-msg.sample",
+      "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/commit-msg.sample",
+      "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/fsmonitor-watchman.sample",
+      "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/post-update.sample",
+      "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/pre-applypatch.sample",
+      "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/pre-commit.sample",
+      "sha256": "f9af7d95eb1231ecf2eba9770fedfa8d4797a12b02d7240e98d568201251244a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/pre-merge-commit.sample",
+      "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/pre-push.sample",
+      "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/pre-rebase.sample",
+      "sha256": "4febce867790052338076f4e66cc47efb14879d18097d1d61c8261859eaaa7b3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/pre-receive.sample",
+      "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/prepare-commit-msg.sample",
+      "sha256": "e9ddcaa4189fddd25ed97fc8c789eca7b6ca16390b2392ae3276f0c8e1aa4619"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/push-to-checkout.sample",
+      "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/hooks/update.sample",
+      "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/index",
+      "sha256": "3f26d62838c04ebd1b60fe15b06a4301a1a0358d2fb16af3a6c5e94873b61756"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/info/exclude",
+      "sha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/logs/HEAD",
+      "sha256": "69f0f343d21ad247d528cfb3d85b06c6530d66a7a65bd9cf3b1f50dec891980f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/objects/pack/pack-857f92f98924908ae2b4340128f96b4c826af65a.idx",
+      "sha256": "59a72be1db10cb912ebd92eb4e61e9d0dcb603101040b8ea74b4a65d8e9c652b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/objects/pack/pack-857f92f98924908ae2b4340128f96b4c826af65a.pack",
+      "sha256": "2cfddbe0acebbc2c5520f9a59f653c8386fd168dcc94f74b62efb3b963cfea17"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/packed-refs",
+      "sha256": "6110899c7adc374885f9552bddfb76fa28a7f7ca3c05fb8b74471a457e1e57c8"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.git/shallow",
+      "sha256": "9217c9ad4ba096cfa4c18c9245a244f8787f6f69137930a389ce480d4a98ce8d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.gitattributes",
+      "sha256": "019645cdc4f76e9b170fd0a52d0c0d7a91e893066df2a8e4236ab02413265609"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.github/ISSUE_TEMPLATE/bug_report.yml",
+      "sha256": "06385c38e20628d56a2d54e91d99c0b016fd5a10aaac311a43af8783029f9089"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.github/PULL_REQUEST_TEMPLATE.md",
+      "sha256": "9a1582a59fb4fa8b0900ad80e2088117db66dca27defd00e733144619390fb78"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.github/workflows/ci.yml",
+      "sha256": "1d4e90aadc504dd5add538983780caaf684adfcaad4461306b626f176b7d8973"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/.gitignore",
+      "sha256": "ce0cd985761be94a806163a82d20da742a49094325db049c8c209cc1e004e239"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/AGENTS.md",
+      "sha256": "acc4a86654db148ecacd951306e4b4749972ab8d70ae817ec644b0e5b80ea2b2"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/CONTRIBUTING.md",
+      "sha256": "b9f3931c69154255d435ed39b74ed0faa8fa5472c61f17852771225c83a583fa"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/LICENSE",
+      "sha256": "06f2e6ee2cb17b14c4ff64f543d7cdd8a1f60044c46eff97c585f8c660d40660"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/README.md",
+      "sha256": "258e26b8e5830ae07e27f8969620f9c68a86df1197aedd901ab73001a97f40a4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/SECURITY.md",
+      "sha256": "0d6a1adf9ba27720c952c9e721d32fb4ebcdd4c01ad7261e6433369200ac3895"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/consumers/python/README.md",
+      "sha256": "335a98799f35a589e0501353f20d95d7e44562acbb96bdefc5a07b1fa53d755b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/consumers/python/pyproject.toml",
+      "sha256": "c9efeeb10a79c0674553a4edb7922bbcd666490b4358ba0e26d6a79a93d2ce5a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/consumers/python/sts2_headless/__init__.py",
+      "sha256": "2fbf027cfbdfdc0333f5af3d73db40c7309ca68abc43983c0f94a298ea8424f5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/consumers/python/sts2_headless/client.py",
+      "sha256": "d9ea9db24a514e72be1eaa209589aa45bfd59898c7b0430b84cbc7540348e824"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/consumers/python/sts2_headless/smoke.py",
+      "sha256": "c32e7f567b885ac1fdffadc947e99b99e052ba83bde656092c739dada555ff82"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/consumers/python/tests/test_client.py",
+      "sha256": "1ac0b27228d63e1b2bd3771b76a58bcba0a9a7b63ecae4e44f8cf096dcb3baa6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/ARCHITECTURE.md",
+      "sha256": "c8027c7e7efc88508eb1394dbdd97ae91a2601545708d4643b262483a8c1bb79"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/COMPATIBILITY.md",
+      "sha256": "eb736184b57d529f65a14223477e7111bfad25f5b68ccbd6629cdb26e33886b7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/DEVELOPMENT.md",
+      "sha256": "df8f6e3b9d0ca3a47e66ad9d6b582dab15cb85113955947bacbfd48e82d5d7b0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/DOCUMENT_MAP.md",
+      "sha256": "4848544bcb0e56a939e3806772eff31850b5e8c0f3809ed308b03e1d80af2159"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/EVIDENCE.md",
+      "sha256": "3798c04179b034341efc6aa70d39639acedaa4f49bfaed370b6b63faea08d336"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/MEASUREMENT.md",
+      "sha256": "96ca8c7e03890a8d68204a5d413dc9ee9bf7ef579835ad8865c684fb2f01f2f2"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/OPERATIONS.md",
+      "sha256": "b4096b2e863f9ad43d2bb4e2e766becb4dc92304e06d55f9a8d94f3796219c84"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/RELEASING.md",
+      "sha256": "3ca0603dd9ee6b0fe4d6cdf8acd6378e3a05b6f65a5202ae9666e3a28f45b391"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/ROADMAP.md",
+      "sha256": "b47e05278bb6dee15cb51663ce56e99532b998b6fa3773d34dc35e28e8140acd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/STATUS.md",
+      "sha256": "209cfda663ab7dc839336ce31d4ed760b845108e3c6d1cde247bcc4c6d111761"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_EXACT_FIRST_CROSS_HOST_MATCH_2026-08-22.md",
+      "sha256": "dca3c6c9db21c1715fe193ec90ab8fb50950378c7adb8440366fe10cdb3d5bef"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_EXACT_NATIVE_REWARDS_TREASURE_AND_CAPACITY_2026-08-17.md",
+      "sha256": "e9bb69dd6239874595237b2196d46860d902c26f43ad92437af7803cba86dd8b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_EXACT_RESET_AUTHORITY_AND_RECOVERY_2026-08-22.md",
+      "sha256": "ed7d58cbeb20c327e6bed6eee663e30c5ce30d75b8419039fd6638910999ece4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_EXACT_REWARD_LIFECYCLE_AND_CROSS_HOST_2026-08-22.md",
+      "sha256": "0ef0e01369877c2a7479be6e2fe33f711c7d45f1f4f34fc446ec596d53f0fbe3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_EXACT_STABLE_INFORMATION_CLOSURE_2026-08-22.md",
+      "sha256": "6744c5a8f48e0004cfc6bd83faf65b898140aa549dba423d3a7def5bc593ee9f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_EXACT_STPD_V0_OPERATIONAL_FREEZE_2026-08-22.md",
+      "sha256": "67eae5f8d324959e6a8bdf74ee02b7ec31c1f9fa1eb5336f3df23d18fde2aeac"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/MANAGED_HOST_PERFORMANCE_ROUTE_SELECTION_2026-08-21.md",
+      "sha256": "e3232a04bc2a3960f5822753a3474d183b2ee205e958b30e6e5c0da1a2ad2158"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/WINDOWS_REFERENCE_CAPACITY_RECOVERY_AND_MANAGED_ADMISSION_2026-08-16.md",
+      "sha256": "f7ba1665b455e5c73d0073e11222ff234ce38f9e75b12eb2cb30a55deb1c348c"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/WINDOWS_REFERENCE_EIGHT_WORKER_AND_SCENE_THREAD_EXPERIMENT_2026-08-16.md",
+      "sha256": "c5d44acb1a0b0706f03df70b5a89acf52daf1d584fea46a283f159eaaf0be05c"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/evidence/WINDOWS_REFERENCE_SEED_DIFFERENTIAL_SUPERVISOR_AND_REQUALIFICATION_2026-08-16.md",
+      "sha256": "18fc308c0436c1d182a5b50260c2fe40b5b71207abd9ee0f3b66d6b03d172654"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/docs/source-maps/REFERENCE_WAIT_SEAMS_V01110.json",
+      "sha256": "a13f7ec8893fb1377317ac540f830d28d24093682ac09c7211a214bc9f695327"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/experiments/autoslayer-upper-bound/AutoSlayerUpperBoundMod.cs",
+      "sha256": "5ddba08592514a0802a785f215990c091f6caf7e3dfef971ae40f503de7ea583"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/experiments/autoslayer-upper-bound/STS2.AutoSlayerUpperBound.csproj",
+      "sha256": "18f59f52186f1015fdd35d749bc31a5e7ee90bff2f9bec6d3f60d27b494bd053"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/experiments/autoslayer-upper-bound/mod_manifest.json",
+      "sha256": "a866268a3886dba1e8010366b878a4f3229e023b19efe0070b2fe5835ee3c3f8"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/experiments/managed-exact/README.md",
+      "sha256": "c4047307592f291a3351208007aa0d17170ebbff739dc61483ae555578c39b63"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/experiments/managed-exact/manifest.json",
+      "sha256": "671bf25e040c445683a1aacbdb68ce19d8b2bf331088937ebf8786caee99bb23"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/experiments/managed-exact/patches/sts2-cli-d11aa88-v01110.patch",
+      "sha256": "8ced088bffbfeaa378d4580ca2c254c41cd89ae58b5b1e9b6ee1a764f8eef87e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/package-lock.json",
+      "sha256": "87244629948f3d1dc2beb27cad7455b7ba7ac33fb4cd95cab839c67f14e943ff"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/package.json",
+      "sha256": "0082f747836dd5d561325d8a4206a51a1d9b7c98b2e3c91d36bdd6d597aceac6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/autoslayer-experiment.mjs",
+      "sha256": "d4e0b09c5ad7c5571350263b85378fd5e59b48b62a61f832c677bac9f3fe5731"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/capacity-benchmark.mjs",
+      "sha256": "cbf3266c4ac8f0be9ba0db89a6507328a7fad100ba6981c537b14695e1aba063"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/causal-wait-profiler.mjs",
+      "sha256": "3da1f840ab014d8bd7d042d2721abe19610137116d2e74d180d02a515381f05f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/compatibility.mjs",
+      "sha256": "74cb45e376d6f35775c78f5b790669a639b1b45237955a0893a6cf60f1c13032"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/connector-endpoint.mjs",
+      "sha256": "d1f58e6db2a7a05e4fb7e1c77e402a9498b66121c3111e93343ce5f772396eb6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/connector-release.mjs",
+      "sha256": "3ffb8cae877ce186e5b2a3142d0eb5d96c953e0121ccbb76e5a3b702eb67874f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/cross-host-driver.mjs",
+      "sha256": "5c4e72f2ead73775c93c1167999ba0db997604346ae56caa5cbde96e54708ae8"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/decision-timing.mjs",
+      "sha256": "4c73ed273806fd30c08d41f5b63db15892ab5f09437376756b065c7a3daa15c4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/episode-provenance.mjs",
+      "sha256": "e3efe0d40fbe46278b5548454ff632f9af91e7ed10d714349a1c85821e631cba"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/filesystem-sentinel.mjs",
+      "sha256": "f82e9ab4e6ad3b3e971e4d668cb1c3b71c5b15e121094bae54719fc600f8e2e0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/game-installation.mjs",
+      "sha256": "28ca1e05d96b35e08a24be80d10d00a4afac1753481a314edea917b8ddfa7c1e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/headless-host.mjs",
+      "sha256": "ae1246625911882805348837706e3c9b6fc88d113949f13bc24a88597e07ca5d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/host-driver.mjs",
+      "sha256": "1c1c0368eb43d5cad08f9871c8c7e7c61eb41ac5c42d9d3c3ea80488852fd9f8"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/host-execution-profile.mjs",
+      "sha256": "feae34d3bd5bd1c0cbb6082fccaac8ab107d75603716a78af60b82f7cea7fa66"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/journey-probe.mjs",
+      "sha256": "c00253fcbf394fd5eef5f71060c52f6178ed427df544c0c65e897df69a9e7dfb"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/json-line-process.mjs",
+      "sha256": "c809bfdfb03cb376976200f27d0a5bd15f5749d08978efb49cc58e4b30d5e00f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/jsonl-recorder.mjs",
+      "sha256": "cc40c18a864a1452668ae292a5fc9bb9e17ba5318874888ccae0cdafb75ba50e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-candidate.mjs",
+      "sha256": "f31464d6f0933449fc1d8abaf3fe20ac6d21f500d3124ede1b0ed0943bb56ce9"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-native-binding-gates.mjs",
+      "sha256": "4ac2c772f8a6058916ebf27f9ef0ca7028695b58d2768720775055d8b09db461"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-performance-lab.mjs",
+      "sha256": "439137775d61fefe484d7bf2669d4b6155158935888ff7a4c5ab2ddd5810c50b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-player-environment-probe.mjs",
+      "sha256": "7e9cce80a58e9047c34a1452b7195a03f09b5873663ac279abfa0dd900ea249a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-player-environment.mjs",
+      "sha256": "632668d04daa578e1f9f1686cb48a9b5ef3733f1786cf7125f6a21ce426a3eac"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-recovery-probe.mjs",
+      "sha256": "74020020e68adb43ae1a79f19d5663d82f4169901af027b1efedc0f21331c52d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/managed-sharded-capacity.mjs",
+      "sha256": "c19023ee7d38209ea8221749d20c80a3cb77522014b1929a02046de1b575f2c1"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/probe-verdict.mjs",
+      "sha256": "3a05ce6a9df2beb9857fa6492861d004b35ef8877311fe013d3eac3d00b25229"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/process-faults.mjs",
+      "sha256": "c570e7c063c3d18c0da5ec21a4ae4a22b7416fde45140128531cafaa52754eac"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/process-resource-sampler.mjs",
+      "sha256": "27a4fb9fbeaea9ff27a85feef29ad12910a0c69b1555af393109e67e3bc2b778"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/profile-bootstrap.mjs",
+      "sha256": "6f4b4bb4478ace932fa1ff9da10f9bf7e9855a1470cc3d52e0a47c68a2bb8928"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/profile-isolation.mjs",
+      "sha256": "4e41f5a8a373855e0573a48209bfb24085b769ed1d8c8e31bf41a33c38709d88"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/profile-template.mjs",
+      "sha256": "5aaa380451c86a4768ed08db916641c35c2e737f6ffe9f9a90cb8d7a10acf204"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/project-identity.mjs",
+      "sha256": "a4f2bf8314a0fe4bbca0218aa3ce39605702b905a1f88030eaf4c9bdb15eb668"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/recovery-drill.mjs",
+      "sha256": "78294d9fdcc7aed8546424999d743952cb47043ae22552d50468372d4148b937"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/requalification.mjs",
+      "sha256": "9c68e202325cda6796b87329aa63894b9271d40d8fd812a69cd341d2a7d6e293"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/runtime-diagnostics.mjs",
+      "sha256": "45232cdc64344df9430fd161904033de8fdfe45631ec52c9faeb5da9dfb67e14"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/runtime-probe.mjs",
+      "sha256": "7a1945ce95706fcf248ba5b63532160ef2c467bdc8d13e27dc36102d3f4c15f0"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/semantic-decision.mjs",
+      "sha256": "7d8187c6974b7db1db5ed76ddfc4fe4563df6b887119cc1b876f5c64ac0509df"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/semantic-differential.mjs",
+      "sha256": "766a3d94e83e477ba383ff1da1599811d7962f4ec7ce12f15236689cd4037811"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/shipped-player-environment.mjs",
+      "sha256": "cd49d757825e306625b5f3df87ccb9f3676773d4ca1a86ae3bb2c31ca2e0e4e7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/soak-supervisor.mjs",
+      "sha256": "aba2540eea9be877e6f560262b06c4508c21cda0c79c6afce9de3350b8bc0c5c"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/src/system-identity.mjs",
+      "sha256": "7cabf7cfb18c32153d33e40539267b2d4d1685d3bdc130070ca570862352a2cd"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/autoslayer-experiment.test.mjs",
+      "sha256": "822c747f74d32ffe0a0a9a9ce4d53692b166113c71d69315bf39cdec7802ce75"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/capacity-benchmark.test.mjs",
+      "sha256": "c40dd3b98ad2cb430990f388a31c18e5a39357111dd4c4283ec365f8ce44f347"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/causal-wait-profiler.test.mjs",
+      "sha256": "bf7f72962e6d9e252815ab0b3c98f6faa6f9b077179bd82d79eb34d7f6ba0bcf"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/compatibility.test.mjs",
+      "sha256": "d6581e6d3951c3707bda662976a4f6adbe4a006242f6b953c6e637d419f23f2d"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/connector-endpoint.test.mjs",
+      "sha256": "f4557657d844ef0831bf11dc14ff1e461977f099e0b5830938006e85a2f07765"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/cross-host-driver.test.mjs",
+      "sha256": "49d74436c790c20a63cbbaf6317ba5fdc706a3a4f74220d52d060ee88a97d7b5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/decision-timing.test.mjs",
+      "sha256": "d7a0453e5c7f310dcb54bda10514ca0a70dd430fe797ddb0f054b46552efc611"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/episode-provenance.test.mjs",
+      "sha256": "3de8ee575f9e5ae6119185f79449788283f80d45376a19cd6f91142d5e83f3b4"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/filesystem-sentinel.test.mjs",
+      "sha256": "d08abdff5ed94cd4f33ec01e7feb2f2d15af6ff8ab14fd8120662bbfbe64900e"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/game-installation.test.mjs",
+      "sha256": "82f59f53faf45c9e08d1dbf75f73e844f227b35346ef076f1fd761b8d7bbf420"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/headless-host.test.mjs",
+      "sha256": "ca2191abb67bb7a5250ec1798a58a75e32f9b9a578478e71c1d677bd745c751a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/host-driver.test.mjs",
+      "sha256": "26d0a950087e4f459f8133f02e65f5a5f61595bbdb87fb5c345ed64a65cf6a4f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/host-execution-profile.test.mjs",
+      "sha256": "c381311217ea788b33d0f3f0b67a9f44806976bd7fc35c5bdb85a538aff91edb"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/journey-probe.test.mjs",
+      "sha256": "1e277b2d727bfa163da442d6006e7f8f795288df2bbe357ed7f96a24c7b7cb4a"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/json-line-process.test.mjs",
+      "sha256": "27c89822d93f8832a1768ba466e67c5ef0042f1071626e307856c1ec0d9abeaf"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/jsonl-recorder.test.mjs",
+      "sha256": "6e5533bebf9534e796ab0b9fad07c98665942c878c193ea798648153c90796e6"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/managed-candidate.test.mjs",
+      "sha256": "b3b4e9476ab1665e4a3a9d982aaef96eda01495bd217143aff117af49d755bab"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/managed-performance-lab.test.mjs",
+      "sha256": "b8312ddeed9a4384fd228d5cf98747e8432a6b5b60d8802f1d0783f64ebf3c25"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/managed-player-environment-probe.test.mjs",
+      "sha256": "657b8159a2e9d83b6748d74a15841edc2e653467560753df638e288e4a14ce40"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/managed-player-environment.test.mjs",
+      "sha256": "9ad126e7e7599a2a230df41dccab86f3b180dae4093b0e9bf6d2bfbb31315494"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/probe-verdict.test.mjs",
+      "sha256": "64ae43e85a7be9d244b44eff11d78c4cbae8a0a05f7f7434cb4be9affdc0586f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/process-faults.test.mjs",
+      "sha256": "8411d7a916952204d1f61b72e3799d1f5f4f48326fcb7ceca8e42f59bbae9249"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/process-resource-sampler.test.mjs",
+      "sha256": "d84cee7bee27140d2509954ac2c60acc118862d9f4d624a833a8bec937137e91"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/profile-bootstrap.test.mjs",
+      "sha256": "fade67095f1465e21fb4d4fc88756c7cb2f2565f7d10816440be904a734d9d11"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/profile-isolation.test.mjs",
+      "sha256": "c2864f3499c7932a68fc946815c165ef9d7f0d713c91d55b2b5cfbd659d03e6f"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/profile-template.test.mjs",
+      "sha256": "a584273c44c2be27d1b619ba34bad0a84bbbce9d57d26efcba07025c1ca6a536"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/project-identity.test.mjs",
+      "sha256": "6e4c29c2ec2ec9eca92d489f6cfd33fb5c20a22b539ee5b91d1c519a92f386ad"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/recovery-drill.test.mjs",
+      "sha256": "3f2ea2d62ea0ea5d443d19fb8f99ce45729291ac0882569892c0ba7090b54901"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/requalification.test.mjs",
+      "sha256": "ae19103448dc00b370961badf7499e68a0b700208611a452c3ff0d0ca06d1378"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/runtime-diagnostics.test.mjs",
+      "sha256": "7ccfe245e667dd603a12a1597a54bab6eceff11b5699586996cf255316105436"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/runtime-probe.test.mjs",
+      "sha256": "8db2669d94fec8111a2c0302aebabe0460e5f710226642ee1a191c97c272971c"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/semantic-decision.test.mjs",
+      "sha256": "973a8e0842bac5b886af774e36fafabf39de638fa60cbd0cd4916a02b66f460b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/semantic-differential.test.mjs",
+      "sha256": "b2467002c53b2a8705ed26c15dd1de9581ced58b6540e6b8a24834b1f4fff2ff"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/shipped-player-environment.test.mjs",
+      "sha256": "81544a27f1e7c24d971c0f57275500509e952423e71124f7f8602e927500a7ff"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/soak-supervisor.test.mjs",
+      "sha256": "c5b2a77d442234351f7e063b345810e809ff77b22c23ec8384f7a1f206a2f0a7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/test/system-identity.test.mjs",
+      "sha256": "6a49e0f568828c9907c2025cc681fbe516f8d86b23ee0bed37ca83cc27356033"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/check-markdown-links.mjs",
+      "sha256": "da8d32de9311a90ef81cf977cc49cb8ce0cd04984113e17aae307fda11defcdf"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/check-repository.mjs",
+      "sha256": "dec384439c0a6d6b446a9015c4308902e73dd42f74678661ad512874be553087"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/compare-host-evidence.mjs",
+      "sha256": "147f25ce1d87ac76b7e24cd4b36172ac0a063dd9086c83ae760a868f9b36ceab"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/dotnet/AssemblyFingerprint/AssemblyFingerprint.csproj",
+      "sha256": "04483066d5b31510aab351c38a4e3c353c51002443ccae6b1d9a71a45bcdd398"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/dotnet/AssemblyFingerprint/Program.cs",
+      "sha256": "ecba15e48581f547f86edef09c68af38dfa6ef2994a0bbc9dd10445bb4a0ecb5"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/headless.mjs",
+      "sha256": "11a25db4f3d964db03c0a253bcdd0b56c9c4945323ba3bd2679204adf6195ada"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/managed-exact.mjs",
+      "sha256": "a925754dc9aa8a334a1f14b7153295e11091b3fb9f53c17a61b0e245eb877124"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/managed-pe-driver.mjs",
+      "sha256": "fb4eb5c21b1f96cf9331c684193beb5206d90f7322d4cc7f285ea80ee5e12d96"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/managed-pe-worker.mjs",
+      "sha256": "d39a42478568d17268405a1e0462b5429e6cea4cd6996313eacfaee1a9928a69"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/profile-waits.mjs",
+      "sha256": "16d10888b3b130d508abe56542f8263a9658c5ad5858f70feae886c11928a7cc"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/reference-pe-driver.mjs",
+      "sha256": "81ad5ecc531881874a1ad6835a9de5f21d0c5de87fbd7ef2b40e020ce31bf766"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/shared-projection/player-projection/tools/source-audit.mjs",
+      "sha256": "6d67d779670d01d46d8c7b226ea6c6107046cadb8a447c6ad711c4869982be1c"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/legal-sequences-v2/summary.json",
+      "sha256": "f28d14d5b19fd65e4eb530e32582802668f730181f83d5cb6b8bbd11a9d9c30b"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/act-1-before-proceed.save",
+      "sha256": "5fc206c77821e3588a74d7903e3e1b0ab74894afc29398def1757d11adb68395"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/act-2-before-proceed.save",
+      "sha256": "b7837672f7cb548cd366a49cf8628c3016c50ec27f989df06c004245311cf567"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/act-3-before-proceed.save",
+      "sha256": "40abbf4cce53a40600cad8456bafe713ec1b7c2e5a92d833d47de9d7b04f33d7"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/benchmark-progress.save",
+      "sha256": "50d0cae6bab731db8807aa0406590867e915e21edc5e309a4c99e1f432565137"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/private-check.json",
+      "sha256": "3c491352edcdb50cb2c50a06f351352021ee10b3b2a9982f74e7593e8aaf7afc"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/process.json",
+      "sha256": "adbba93ed804b9156a09b3ef0a464bdc3601aa34fea65cec283c4e82a294d238"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/profile-isolation.sb",
+      "sha256": "d46c1c47ba8b9373b8982f5385f71a70bca723c3839e35bbc336f8277fd3d477"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/recipe.json",
+      "sha256": "d1774a190dbe14e4a5d0c36f51788c0be9553ca4f01c38fe8e63531802a35091"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/source-at-launch/Program.cs",
+      "sha256": "6b6b0f8f4a01a94df43b7d600b33b0f336d090287b7f24762b67c9b99c0fdcec"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/source-at-launch/SpireShift.RunProgressionCheck.csproj",
+      "sha256": "7f9a50f989f2d7fb712fbbfbb72568dee5fa7745b00a6288325a5a79d3492f33"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/stderr.log",
+      "sha256": "a213aa2a3eb50c4eeca44c0fe9d74b3712536d6da150ec72402d8ca990375f95"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/stdout.log",
+      "sha256": "a89adfef3ee43391aa3431cfa7cfa7bd7f32f6598a0104d6de1d1f4c312873b3"
+    },
+    {
+      "path": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/native-run-progression-v7/summary.json",
+      "sha256": "ec2c9e1a4a27a70b188535a8f08eb94ef4faa5a5f533c56b22c6dd3b1d4e4a4b"
+    }
+  ],
+  "host_transfer": {
+    "old_build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-native-run-v32.json",
+    "old_build_report_id": "sha256:f4706519db08ff3649994d6ad73d0ce9a81b8d43c1e61ba44c42206194cab350",
+    "native_sources": {
+      "setup.sh": {
+        "old": "141db8aac1d7b567137229d743f876ebceea6a5568309b83e4f429de2d51d96c",
+        "new": "141db8aac1d7b567137229d743f876ebceea6a5568309b83e4f429de2d51d96c"
+      },
+      "src/GodotStubs/Bridge.cs": {
+        "old": "254fc3970cba66c5d8fae4e5595d053fd77a549f942039bd5963e1f31bee8586",
+        "new": "254fc3970cba66c5d8fae4e5595d053fd77a549f942039bd5963e1f31bee8586"
+      },
+      "src/GodotStubs/Collections.cs": {
+        "old": "aa626f4b7fbcdab7e19bddad59c916711d373b75dc722f4d47df0d17ec490af2",
+        "new": "aa626f4b7fbcdab7e19bddad59c916711d373b75dc722f4d47df0d17ec490af2"
+      },
+      "src/GodotStubs/Core.cs": {
+        "old": "7a3aa3d6acfb1dcd6ba514e799ae135e7ed671f451c7185eb96f13c077d152cb",
+        "new": "7a3aa3d6acfb1dcd6ba514e799ae135e7ed671f451c7185eb96f13c077d152cb"
+      },
+      "src/GodotStubs/ExtraGodotTypes.cs": {
+        "old": "29202f4a3b7d1ec81951c0bd45d4d685aabaf70dd1b541845c7c89597c64edb8",
+        "new": "29202f4a3b7d1ec81951c0bd45d4d685aabaf70dd1b541845c7c89597c64edb8"
+      },
+      "src/GodotStubs/GodotStubs.csproj": {
+        "old": "c151c36cb2fd07571c6b52629c2dccce7f0db77a62ed295f0bf8df89032c8716",
+        "new": "c151c36cb2fd07571c6b52629c2dccce7f0db77a62ed295f0bf8df89032c8716"
+      },
+      "src/GodotStubs/Math.cs": {
+        "old": "fa2e511c1d028f635c50fb1f4e6a51f435c1056f80b73e3b62c91384377a219a",
+        "new": "fa2e511c1d028f635c50fb1f4e6a51f435c1056f80b73e3b62c91384377a219a"
+      },
+      "src/GodotStubs/NativeInterop.cs": {
+        "old": "1ad8cded69253355520cff35b0bd75f4c4e965e46b876341d08ef693b35242e6",
+        "new": "1ad8cded69253355520cff35b0bd75f4c4e965e46b876341d08ef693b35242e6"
+      },
+      "src/GodotStubs/Types.cs": {
+        "old": "4ade2ae03ce543f9e953a89d8a59bada7a5d8155b85778b51b19c8433a449a63",
+        "new": "4ade2ae03ce543f9e953a89d8a59bada7a5d8155b85778b51b19c8433a449a63"
+      },
+      "src/GodotStubs/UI.cs": {
+        "old": "03060907fb7b29b76359431f78a962bf77acd333f97e34eca2b84de7a8738bbd",
+        "new": "03060907fb7b29b76359431f78a962bf77acd333f97e34eca2b84de7a8738bbd"
+      },
+      "src/Sts2Headless/PerformanceLab.cs": {
+        "old": "28e59daede8f3f311a643a44808f21954c09e5f6fdfd17f87a201fff2d63ee2c",
+        "new": "28e59daede8f3f311a643a44808f21954c09e5f6fdfd17f87a201fff2d63ee2c"
+      },
+      "src/Sts2Headless/Program.cs": {
+        "old": "04ff8c36b002112502334a105d343dff70160d818d2654b32309f1cd07c76c86",
+        "new": "04ff8c36b002112502334a105d343dff70160d818d2654b32309f1cd07c76c86"
+      },
+      "src/Sts2Headless/RunSimulator.cs": {
+        "old": "0d2df1eb58409e72bb5b0da322dba10ce1f1930f59a83636e7fb0b6d83ef1d07",
+        "new": "72e3cd3c6369d72ce0eea05bbe676488b9966149983ae2183610b0079a0a323c"
+      },
+      "src/Sts2Headless/Sts2Headless.csproj": {
+        "old": "14ac2ca334b87b6e9aaaf36244897fd6dbaf1ceb5e8cff91d8d4cad308f07d61",
+        "new": "14ac2ca334b87b6e9aaaf36244897fd6dbaf1ceb5e8cff91d8d4cad308f07d61"
+      }
+    },
+    "unchanged_public_helpers": {
+      "engine-combat-surface-v4.mjs": "e64825c79e705c945fdb4272d9e7bd0d473692c8220bbf6b7c4fcead3ee69ff1",
+      "engine-rest-surface.mjs": "4640e4d533ea06f053b3f5d2acf274f888109d1c0c4cf275cc19c67215727fd5",
+      "engine-bundle-surface-v1.mjs": "ccd2d1fcd149b438ce2f4ae8801494bd8c48a1a6796971efadead0b41de3d0df",
+      "engine-run-contract-v4.mjs": "dccb3e011fd1c941161916799a8449eb3d0c5642e79e7214c412100c543553b5"
+    },
+    "old_build_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-native-run-v32.json"
+  },
+  "potions": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-potion-controls-v2.json",
+    "report_id": "sha256:4dd6ac2b9450d3b1824140ba8abd23ddf4b6df99211512a5a2e9e2254f54d6f7"
+  },
+  "lifecycle": {
+    "config": "configs/engine-qualification/sts2-v0.111.0-native-run-progression-v8.json",
+    "report_id": "sha256:d546d46aa3bbc71d1b5f0dc37c4a587525e6ff4e87a25e41cff5c8937d4e1659"
+  },
+  "all_interactions_proven": false,
+  "training_allowed": false,
+  "transfer_scope": "same_game_models_and_unchanged_combat_projection_plus_reviewed_v32_to_v33_merchant_presentation_delta",
+  "base_readiness_passed": false
+}

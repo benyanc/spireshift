@@ -1,0 +1,435 @@
+{
+  "adaptive_controller_allowed": false,
+  "agent_native_attempts_launched": 0,
+  "assessment": {
+    "all_cells_and_paired_comparisons_reproduced": true,
+    "confirmation_replays_reconstructed": 12,
+    "driver": {
+      "path": "artifacts/native-coordinated/control-assessment-v2/run.py",
+      "sha256": "e90d310b37dd6ad5e92a2632de2769249a98d6ef496b021915f6c5dd8c94898c"
+    },
+    "id": "sha256:87451a74d9e551792642cebed4f4cdf73078135716bf4e82e54d3ead8e229534",
+    "main_read_only_preparation_passed": true,
+    "main_workspace_created": false,
+    "native_attempts_launched": 0,
+    "native_journals_independently_reaudited": 48,
+    "optimizer_steps": 0,
+    "path": "artifacts/native-coordinated/control-assessment-v2/report.json",
+    "probability_distributions_and_actions_reconstructed": 786,
+    "proposal_paths": 32,
+    "receipts_reconstructed": 48,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 57.585007000000004,
+      "final_storage_bytes": 10616,
+      "id": "sha256:5550e3ddcda71aba8090c89f670e4072fbc899189a586c05b32d746de3e63747",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 1000000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-control-assessment-v2.json",
+      "peak_resident_memory_bytes": 380207104,
+      "status": "completed",
+      "wall_seconds": 120.06624479102902
+    },
+    "same_greedy_late_suffix_verified": true,
+    "source_files_verified": 85615,
+    "valid": true
+  },
+  "automatic_training_follows": false,
+  "base_readiness_passed": false,
+  "checkpoint_promoted": false,
+  "control": {
+    "capped_branches": 0,
+    "cells": [
+      {
+        "arm": "single_change",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "early",
+        "maximum_edited_rounds": 1,
+        "maximum_executed_edits": 1,
+        "partition": "control",
+        "player": 2,
+        "proposal_cpu_seconds": 8.712965249999996,
+        "reference_fight_id": "sha256:80fc18e4013da20dd61f130c6f59d29c29d6ca086978ca927f132891940a6b61",
+        "reference_hp": 68.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:59c8f7122685f327d0f19c97e77d3615b45d9a6e65938e2523fb83446fcfb37f",
+        "selected_candidate": 0,
+        "selected_choices": 8,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:80fc18e4013da20dd61f130c6f59d29c29d6ca086978ca927f132891940a6b61",
+        "selected_hp": 68.0,
+        "selected_outcome": "win",
+        "selected_rounds": 3,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM228"
+      },
+      {
+        "arm": "coordinated",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "early",
+        "maximum_edited_rounds": 2,
+        "maximum_executed_edits": 3,
+        "partition": "control",
+        "player": 2,
+        "proposal_cpu_seconds": 6.962894375999994,
+        "reference_fight_id": "sha256:80fc18e4013da20dd61f130c6f59d29c29d6ca086978ca927f132891940a6b61",
+        "reference_hp": 68.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:59c8f7122685f327d0f19c97e77d3615b45d9a6e65938e2523fb83446fcfb37f",
+        "selected_candidate": 0,
+        "selected_choices": 8,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:80fc18e4013da20dd61f130c6f59d29c29d6ca086978ca927f132891940a6b61",
+        "selected_hp": 68.0,
+        "selected_outcome": "win",
+        "selected_rounds": 3,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM228"
+      },
+      {
+        "arm": "single_change",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "later",
+        "maximum_edited_rounds": 1,
+        "maximum_executed_edits": 1,
+        "partition": "control",
+        "player": 2,
+        "proposal_cpu_seconds": 6.543068833000014,
+        "reference_fight_id": "sha256:74b02a0ef774bb8273ebac442c9f8d7d64791d1141bfface0ebcf840e53fd807",
+        "reference_hp": 68.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:c0bfeeb53d3b06a4570a32f7c6fb9219d527ba414c23bad77e0a13d17d324359",
+        "selected_candidate": 0,
+        "selected_choices": 5,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:74b02a0ef774bb8273ebac442c9f8d7d64791d1141bfface0ebcf840e53fd807",
+        "selected_hp": 68.0,
+        "selected_outcome": "win",
+        "selected_rounds": 2,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM228"
+      },
+      {
+        "arm": "coordinated",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "later",
+        "maximum_edited_rounds": 2,
+        "maximum_executed_edits": 3,
+        "partition": "control",
+        "player": 2,
+        "proposal_cpu_seconds": 7.004470832999985,
+        "reference_fight_id": "sha256:74b02a0ef774bb8273ebac442c9f8d7d64791d1141bfface0ebcf840e53fd807",
+        "reference_hp": 68.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:c0bfeeb53d3b06a4570a32f7c6fb9219d527ba414c23bad77e0a13d17d324359",
+        "selected_candidate": 4,
+        "selected_choices": 4,
+        "selected_edits": 3,
+        "selected_fight_id": "sha256:63cd99c1963c967ba2a6f2d4ddd44b6a0dbb25841ff7c699f03a3f92be3c9567",
+        "selected_hp": 75.0,
+        "selected_outcome": "win",
+        "selected_rounds": 2,
+        "strict_local_improvement": true,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM228"
+      },
+      {
+        "arm": "single_change",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "early",
+        "maximum_edited_rounds": 1,
+        "maximum_executed_edits": 1,
+        "partition": "control",
+        "player": 3,
+        "proposal_cpu_seconds": 6.239922831999991,
+        "reference_fight_id": "sha256:61b003e262679fe7e846a1595749c73e7f16386d50afc26b92f0a36c44a699c4",
+        "reference_hp": 67.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:458b694874286ade81cb427a304f679d05012b464a890eb9b2627e4eb5b9c72a",
+        "selected_candidate": 0,
+        "selected_choices": 21,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:61b003e262679fe7e846a1595749c73e7f16386d50afc26b92f0a36c44a699c4",
+        "selected_hp": 67.0,
+        "selected_outcome": "win",
+        "selected_rounds": 7,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM130"
+      },
+      {
+        "arm": "coordinated",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "early",
+        "maximum_edited_rounds": 2,
+        "maximum_executed_edits": 3,
+        "partition": "control",
+        "player": 3,
+        "proposal_cpu_seconds": 6.439458249999987,
+        "reference_fight_id": "sha256:61b003e262679fe7e846a1595749c73e7f16386d50afc26b92f0a36c44a699c4",
+        "reference_hp": 67.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:458b694874286ade81cb427a304f679d05012b464a890eb9b2627e4eb5b9c72a",
+        "selected_candidate": 0,
+        "selected_choices": 21,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:61b003e262679fe7e846a1595749c73e7f16386d50afc26b92f0a36c44a699c4",
+        "selected_hp": 67.0,
+        "selected_outcome": "win",
+        "selected_rounds": 7,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM130"
+      },
+      {
+        "arm": "single_change",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "later",
+        "maximum_edited_rounds": 1,
+        "maximum_executed_edits": 1,
+        "partition": "control",
+        "player": 3,
+        "proposal_cpu_seconds": 6.164065751999971,
+        "reference_fight_id": "sha256:2c5ecc96d7bea250f08250616f49be7df0ef553591dea3e9de9e1b4bf69d6a5f",
+        "reference_hp": 67.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:e61a1e024564656e4a0e4ae45e185c9fcffa0c18fc5df7523ea8340286b80c39",
+        "selected_candidate": 0,
+        "selected_choices": 18,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:2c5ecc96d7bea250f08250616f49be7df0ef553591dea3e9de9e1b4bf69d6a5f",
+        "selected_hp": 67.0,
+        "selected_outcome": "win",
+        "selected_rounds": 6,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM130"
+      },
+      {
+        "arm": "coordinated",
+        "available": true,
+        "candidate_paths": 4,
+        "entry": "later",
+        "maximum_edited_rounds": 2,
+        "maximum_executed_edits": 3,
+        "partition": "control",
+        "player": 3,
+        "proposal_cpu_seconds": 6.293289041999998,
+        "reference_fight_id": "sha256:2c5ecc96d7bea250f08250616f49be7df0ef553591dea3e9de9e1b4bf69d6a5f",
+        "reference_hp": 67.0,
+        "reference_outcome": "win",
+        "root_id": "sha256:e61a1e024564656e4a0e4ae45e185c9fcffa0c18fc5df7523ea8340286b80c39",
+        "selected_candidate": 0,
+        "selected_choices": 18,
+        "selected_edits": 0,
+        "selected_fight_id": "sha256:2c5ecc96d7bea250f08250616f49be7df0ef553591dea3e9de9e1b4bf69d6a5f",
+        "selected_hp": 67.0,
+        "selected_outcome": "win",
+        "selected_rounds": 6,
+        "strict_local_improvement": false,
+        "verified": true,
+        "world": "SP1RESH1FTEXPM130"
+      }
+    ],
+    "completed_units": 48,
+    "config_id": "sha256:6513f8304b4f2a488bc4e56b81ef4e8af31d2033a7871aab893f9b5b6ac75d92",
+    "control_checks": {
+      "all_cells_verified": true,
+      "both_parents_execute_joint_edits": true,
+      "cross_round_edits_exercised": true,
+      "three_edits_exercised": true
+    },
+    "control_checks_passed": true,
+    "failed_branches": 0,
+    "id": "sha256:b41a5417486309effb4aa2ab67eaa29c1fda351e8b930401122046571908712b",
+    "independent_worlds": 2,
+    "native_attempts": 48,
+    "paired_worlds": [
+      {
+        "coordinated_early_minus_later": {
+          "HP_difference_if_both_win": -7.0,
+          "fight_win": 0
+        },
+        "early_coordinated_minus_single": {
+          "HP_difference_if_both_win": 0.0,
+          "fight_win": 0
+        },
+        "later_coordinated_minus_single": {
+          "HP_difference_if_both_win": 7.0,
+          "fight_win": 0
+        },
+        "partition": "control",
+        "player": 2,
+        "single_change_early_minus_later": {
+          "HP_difference_if_both_win": 0.0,
+          "fight_win": 0
+        },
+        "world": "SP1RESH1FTEXPM228"
+      },
+      {
+        "coordinated_early_minus_later": {
+          "HP_difference_if_both_win": 0.0,
+          "fight_win": 0
+        },
+        "early_coordinated_minus_single": {
+          "HP_difference_if_both_win": 0.0,
+          "fight_win": 0
+        },
+        "later_coordinated_minus_single": {
+          "HP_difference_if_both_win": 0.0,
+          "fight_win": 0
+        },
+        "partition": "control",
+        "player": 3,
+        "single_change_early_minus_later": {
+          "HP_difference_if_both_win": 0.0,
+          "fight_win": 0
+        },
+        "world": "SP1RESH1FTEXPM130"
+      }
+    ],
+    "path": "artifacts/native-coordinated/sts2-v0.111.0-a8-control-v2/report.json",
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 186.88656612999995,
+      "final_storage_bytes": 106977202,
+      "id": "sha256:3af272949f2adc6a74ec9d3a4080836695d169ef6595564ed80e3370f2783408",
+      "limits": {
+        "cpu_seconds": 1800.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 3000000000,
+        "wall_seconds": 900.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-control-v2-1.json",
+      "peak_resident_memory_bytes": 372424704,
+      "status": "completed",
+      "wall_seconds": 304.07111691706814
+    },
+    "unavailable_proposals": 0,
+    "unit_loop_wall_seconds_excludes_preflight": 203.91061654197983,
+    "verified_cells": 8
+  },
+  "evidence_id": "sha256:9784372bc9a50b9cfc91f2f63480a0da3a2b8e6a69814e9505c611be494b15ea",
+  "full_game_attempts": 0,
+  "full_run_objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "game_apps_created": 0,
+  "github_items_updated": [
+    35,
+    143,
+    146
+  ],
+  "limitations": [
+    "Two control worlds qualify execution, not generalizable teacher quality.",
+    "The single seven-HP gain is local fixed-world control evidence; control outcomes are not fitting labels.",
+    "No stronger full-game player or full-run win-rate gain is established.",
+    "Branches and early/later roots are dependent within a world; candidate limits match, CPU does not.",
+    "The interrupted v1 control remains incomplete, with all markers and evidence preserved."
+  ],
+  "main": {
+    "candidate_slots_per_arm_per_entry": 16,
+    "config_id": "sha256:93f539e37b169f332b7c076f0e24fd58741eacf2025e7600a92853a355b2499c",
+    "equal_CPU_claimed": false,
+    "fitting_worlds": 4,
+    "heldout_worlds": 4,
+    "maximum_native_attempts": 576,
+    "native_attempts_executed": 0,
+    "preserved_main_roots_unchanged": true,
+    "recipe": "configs/native-coordinated/sts2-v0.111.0-a8-comparison-v2.json",
+    "short_winning_plans_excluded": false,
+    "workspace_created": false,
+    "worlds": 8
+  },
+  "new_optimizer_steps": 0,
+  "ordinary_PPO_eligible": false,
+  "original_full_weights_and_all_Adam_unchanged": true,
+  "original_players": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "owner_next": {
+    "automatic_student_training": false,
+    "command": "bash scripts/compare-coordinated-teacher-v2.sh",
+    "expected_minutes": [
+      30,
+      60
+    ],
+    "maximum_sessions_per_invocation": 3,
+    "resume_same_command_after_clean_pause": true,
+    "session_wall_seconds": 900,
+    "stage": "bounded_main_comparison"
+  },
+  "prior_implementation_evidence": {
+    "id": "sha256:81fe717b9f95fd367a933bafcd60fad68e0bdbe74d4b60adada9995dae24e016",
+    "path": "docs/evidence/native-coordinated-teacher-v2.json"
+  },
+  "repository_verification": {
+    "csharp_protocol_build_passed": true,
+    "format_passed": true,
+    "lint_passed": true,
+    "qualified_implementation_and_recipes_unchanged": true,
+    "resources": {
+      "cap": null,
+      "cpu_seconds": 123.02347474900002,
+      "final_storage_bytes": 0,
+      "id": "sha256:fb3a0a4a4d76f36622f17f2e1c535d0f4c518a58eb570b5571350c0b8dee32aa",
+      "limits": {
+        "cpu_seconds": 480.0,
+        "resident_memory_bytes": 2000000000,
+        "storage_bytes": 100000000,
+        "wall_seconds": 240.0
+      },
+      "path": "artifacts/resources/coordinated-teacher-control-result-check-v2.json",
+      "peak_resident_memory_bytes": 417447936,
+      "status": "completed",
+      "wall_seconds": 134.53451491706073
+    },
+    "strict_type_source_files": 537,
+    "tests_passed": 2471,
+    "tests_skipped": 5
+  },
+  "schema_version": "native-coordinated-control-result-v2",
+  "status": "control_qualified_owner_main_next",
+  "student_inputs_public_only": true,
+  "teacher_is_privileged_fixed_world": true,
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}

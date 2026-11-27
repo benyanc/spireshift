@@ -1,0 +1,72 @@
+{
+  "control": {
+    "path": "artifacts/native-a8-own-training/control-v1/report.json",
+    "report_id": "sha256:76fbddf83cbcc8bd025bf9a862d49c4a8f252f6641515812b631ecf53b83e76c",
+    "sha256": "81862f1d006eb5c44e607ea6d96f6aab8c7e0f9a4b4e0adc0e3a4390828dba2b"
+  },
+  "environment_id": "sha256:2949544180c84496eee1bb17a5cbd383ceb7ed74dcc012efb8ae592551f1ac20",
+  "live_checks": {
+    "admitted_native_decisions": 1073,
+    "both_actors_changed": true,
+    "copied_adam_steps": {
+      "2": {
+        "after": 5676,
+        "before": 5658
+      },
+      "3": {
+        "after": 6054,
+        "before": 6045
+      }
+    },
+    "frozen_checks": {
+      "all_four_full_states_and_Adam_exact": true,
+      "candidate_unchanged": true,
+      "frozen_archive_unchanged": true,
+      "localization_exact": true,
+      "runtime_unchanged": true,
+      "sdk_unchanged": true
+    },
+    "live_compound_decisions": 0,
+    "optimizer_updates_on_disposable_copies": 27,
+    "reloaded_native_deliveries": 12,
+    "shared_profile_unchanged": true,
+    "training_terminal_games": 4
+  },
+  "main_games_started": 0,
+  "main_optimizer_updates": 0,
+  "official_live_qualification_granted": false,
+  "original_optimizer_updates": 0,
+  "planned_development_games": 24,
+  "planned_training_games": 48,
+  "policy_contract": "native_a8_all_advertised_actions_own_policy_v1",
+  "promotion_allowed": false,
+  "recipe": {
+    "config_id": "sha256:8a2724690e6e1d03687eeb862a8c035534b8112cdcaa469ad67b9970497d9c03",
+    "path": "configs/native-learning/sts2-v0.111.0-a8-own-training-v1.json",
+    "sha256": "15677adc51035b648879df3e9f91d64f9a00871735b5b312bd37432e26f856fe"
+  },
+  "report_id": "sha256:480c54ae9e07404c3c805afbbee6bf288fecbeef55c87a8aaec4e9b615495d47",
+  "repository_checks": {
+    "dotnet_protocol_passed": true,
+    "pytest_passed": 2890,
+    "ruff_and_mypy_passed": true
+  },
+  "resources": {
+    "path": "artifacts/resources/a8-own-training-control-v1.json",
+    "report_id": "sha256:a24f6da5323f607f7a858c91a8f5f2adcfd347c408fb5ffa5a5f4723feacdc52",
+    "sha256": "bb572fb8a594485c86a2e58180d1c369df7ce2546349e1c841bb71d830e6afcd"
+  },
+  "saved_compound_check": {
+    "admitted_training_games": 0,
+    "maximum_fd_error": 2.3620602002116797e-12,
+    "native_decisions_for_group": 1,
+    "optimizer_updates": 0,
+    "raw_worker_local_factors": 7,
+    "same_model_joint_kl": 0.0,
+    "saved_native_group_factors": 8,
+    "source_trace_sha256": "f263019ee9732e4711d5d0dc18d6e6e65d046feffb3856f372ec2907b9e366df"
+  },
+  "schema_version": "native-a8-own-training-preparation-v1",
+  "status": "prepared_and_unstarted",
+  "training_score_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff"
+}

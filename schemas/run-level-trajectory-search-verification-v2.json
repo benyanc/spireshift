@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/run-level-trajectory-search-verification-v2.json",
+  "title": "SpireShift Run-Level Trajectory Search Verification v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "verification_id",
+    "valid",
+    "report_id",
+    "config_id",
+    "verified_cases",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "run-level-trajectory-search-verification-v2"
+    },
+    "verification_id": {
+      "$ref": "#/$defs/id"
+    },
+    "valid": {
+      "type": "boolean"
+    },
+    "report_id": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "config_id": {
+      "$ref": "#/$defs/id"
+    },
+    "verified_cases": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

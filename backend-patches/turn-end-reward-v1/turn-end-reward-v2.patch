@@ -1,0 +1,97 @@
+--- a/src/Sts2Emulator/Core/CombatEngine.cs
++++ b/src/Sts2Emulator/Core/CombatEngine.cs
+@@ -870,37 +870,34 @@
+         // turn-end hook, so its damage is the hand as this sequence BEGAN rather than
+         // whatever is left by the time the loop reaches it.
+         int handAtTurnEnd = state.Hand.Count;
++        // CombatManager.DoTurnEnd snapshots hook participants before executing them.
++        // Exhaust hooks run first; status damage can draw via Centennial Puzzle. Newly
++        // drawn cards reach FlushPlayerHand, without acquiring another turn-end hook.
++        var turnEndCards = state.Hand.ToArray();
++        foreach (var card in turnEndCards)
++        {
++            var def = GeneratedData.Cards.Get(card.DefId);
++            bool ghostSeeded =
++                Effects.RelicEffects.MakesBasicsEthereal(state) && IsBasicStrikeOrDefend(card);
++            bool hexed = BuffSystem.Get(state.PlayerBuffs, BuffId.Hex) > 0;
++            if (!def.TurnEndInHand && (card.IsEthereal() || ghostSeeded || hexed))
++            {
++                state.Hand.Remove(card);
++                Effects.CardEffects.ExhaustCard(state, card, causedByEthereal: true, rng: rng);
++            }
++        }
++
++        foreach (var card in turnEndCards)
++        {
++            var def = GeneratedData.Cards.Get(card.DefId);
++            Effects.CardEffects.ApplyTurnEndInHand(state, def, handAtTurnEnd, rng);
++        }
++
++        // Flush the current hand, including cards drawn by those hooks. Retention
++        // applies to every surviving card, without repeating the snapshotted hooks.
+         var nextHand = new List<CardInstance>();
+         foreach (var card in state.Hand)
+         {
+-            var def = GeneratedData.Cards.Get(card.DefId);
+-            // Three cards drop Ethereal when upgraded, not one: this was `def.Id == 159`,
+-            // which is Echo Form, and said nothing about Apparition or Void Form.
+-            // `GhostSeed.AfterCardEnteredCombat` gives Ethereal to every BASIC Strike or
+-            // Defend. Read here rather than baked onto the instance because the relic
+-            // grants the KEYWORD, and a keyword the relic gave is one it takes back if the
+-            // relic ever leaves.
+-            bool ghostSeeded =
+-                Effects.RelicEffects.MakesBasicsEthereal(state) && IsBasicStrikeOrDefend(card);
+-            // `HexPower.TryModifyKeywordsInCombat` grants Ethereal to every card afflicted
+-            // with `Hexed`, and `AfterApplied` afflicts EVERY card the player owns in
+-            // combat (`AfterCardEnteredCombat` catches the ones made later). So while the
+-            // Spectral Knight's Hex is up the whole hand is Ethereal and burns off at end
+-            // of turn. The emulator tracked `BuffId.Hex` as a debuff counter and did
+-            // nothing with it, so the Knights fight diverged on hands from the turn the
+-            // Hex landed and never came back.
+-            bool hexed = BuffSystem.Get(state.PlayerBuffs, BuffId.Hex) > 0;
+-            if (card.IsEthereal() || ghostSeeded || hexed)
+-            {
+-                Effects.CardEffects.ExhaustCard(state, card, causedByEthereal: true, rng: rng);
+-                continue;
+-            }
+-
+-            // `CardModel.OnTurnEndInHand`, for the eleven cards that have one. This was a
+-            // hand-kept list of four "burn the holder" statuses plus Beckon beside it; six
+-            // were missing, and three of those do something other than damage.
+-            Effects.CardEffects.ApplyTurnEndInHand(state, def, handAtTurnEnd, rng);
+-
+             // Hand Trick's Sly lasts a single TURN, so a card that survives into the
+             // next hand does not carry the grant with it. Note this cleanup does NOT go
+             // through DiscardMovedCards: the end-of-turn discard is not a
+--- a/src/Sts2Emulator/Core/Run/RunEngine.cs
++++ b/src/Sts2Emulator/Core/Run/RunEngine.cs
+@@ -558,10 +558,14 @@
+                 break;
+ 
+             case RunPhase.CardReward:
+-                for (int i = 0; i <= RunConstants.RewardSkipAction; i++)
+-                {
+-                    SetMask(mask, i);
+-                }
++                for (int i = 0; i < RunConstants.RewardSkipAction; i++)
++                {
++                    if (State.RewardCards[i] != 0)
++                    {
++                        SetMask(mask, i);
++                    }
++                }
++                SetMask(mask, RunConstants.RewardSkipAction);
+ 
+                 // `PaelsWing.TryModifyCardRewardAlternatives` adds SACRIFICE whenever the
+                 // relic is held. It is an alternative to taking a card, not to skipping:
+--- a/src/Sts2Emulator.Tests/RunEngineTests.cs
++++ b/src/Sts2Emulator.Tests/RunEngineTests.cs
+@@ -660,6 +660,8 @@
+         engine.Reset("0");
+ 
+         engine.State.Phase = RunPhase.CardReward;
++        // A reward screen offers only cards actually present, not empty slots.
++        engine.State.RewardCards = [IC.StrikeIronclad, IC.DefendIronclad, IC.Bash];
+         engine.WriteActionMask(mask);
+         AssertMask(mask, 0, 1, 2, RunConstants.RewardSkipAction);
+ 

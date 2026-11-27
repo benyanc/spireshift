@@ -1,0 +1,36 @@
+{
+  "entry_sha256": {
+    "inspect-action-separation-v1.py": "ee5434fab6f68ba9f518515ee4f5f27a2378eb0c96d6e7f03060c85f6647b3fa",
+    "inspect-action-separation-v1.sh": "dcdf6d55fb2710e57c5328cbb477229100296e9a6fe9428f42d61f983a3b1c1a"
+  },
+  "implementation_sha256": {
+    "native_action_rankings.py": "711e9cc5550d5bd78de360b9283405a25f91987402c033d365c22ced333bea98",
+    "native_outcome_predictor.py": "df5e1e9e8883b04e4e7ad175e9ddae99ac37369ac5e66347518c27e8f9cf6f8e",
+    "native_prediction_separation.py": "d9e2d90764156a843340ef0a6bcb03b979a42e4c31f7d22d81d2ecad756dffb4",
+    "native_rank_audit.py": "5b65809ddf96435a3a988fdcdb3866c62f0189a7093f8cf23205c3ff19480287",
+    "native_separation_inputs.py": "05a808030d5a998d64c6e355bbc615d3316932b5967c09222feee92ee413775d"
+  },
+  "maximum_saved_decisions_per_case": 512,
+  "predictor_epochs": 128,
+  "predictor_seed": 20261022,
+  "schema_version": "native-action-prediction-separation-config-v1",
+  "session_limits": {
+    "cpu_seconds": 480,
+    "resident_memory_bytes": 2000000000,
+    "storage_bytes": 1000000000,
+    "wall_seconds": 240
+  },
+  "source_assessment": {
+    "id": "sha256:6713e5f5d332e5312893262c60800b2222588495e936d2b6c06b3bfc144721eb",
+    "path": "artifacts/native-consequences/result-assessment-v1/report.json"
+  },
+  "source_report": {
+    "id": "sha256:e7609ad585e66bf738f6e9f623b591eedd3d0360408b20d8445ff02b77b4e7bd",
+    "path": "artifacts/native-consequences/sts2-v0.111.0-a8-comparison-v1/report.json"
+  },
+  "training_spec": {
+    "id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+    "path": "configs/training-objective/sts2-v0.111.0-ironclad-a8-native-bootstrap-v8.json"
+  },
+  "workspace": "artifacts/native-prediction/sts2-v0.111.0-a8-action-separation-v1"
+}

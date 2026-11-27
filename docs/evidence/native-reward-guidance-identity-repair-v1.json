@@ -1,0 +1,119 @@
+{
+  "schema_version": "native-reward-guidance-identity-repair-v1",
+  "historical_canary": {
+    "path": "artifacts/native-selection-flows/canary-v3/report.json",
+    "sha256": "216772a4f961633f53731bf4a74b9c0ffc9a3a3536b7b615ec8fa8d44dfe80ed"
+  },
+  "historical_delivered_choices_verified": 880,
+  "historical_complete_matching_pairs": 0,
+  "cached_display_seconds": 5.122742416104302,
+  "historical_comparison_seconds": 914.7167422091588,
+  "diagnostic_only": true,
+  "repairs": [
+    "reward_warning_confirmation_one_model_choice",
+    "ordered_selector_copy_labels_before_unordered_reads",
+    "pending_native_enchantment_model_amount_and_formatted_preview",
+    "event_selection_body_alias_with_conflict_rejection",
+    "status_requires_delivery_and_full_input_equality"
+  ],
+  "source_tuple": {
+    "CLI_revision": "v49",
+    "official_connector_revision": "v20",
+    "worker_revision": "v17",
+    "shared_converter_revision": "v12",
+    "layout": "typed_official_public_layout_v9",
+    "environment": {
+      "path": "manifests/engine/sts2-v0.111.0-ironclad-a8-shared-v32.json",
+      "sha256": "6c8fbde0df12863cae4eb49e504025d864dea61b6b18f650c862622db39f12e1"
+    },
+    "build": {
+      "path": "artifacts/native-tutorial-identity/native-build-v49/report.json",
+      "sha256": "c376cc94eaf8e83c7145cffddb02b5f15e787072fcc359e8c9a7e684c8d9a302"
+    }
+  },
+  "saved_audit": {
+    "path": "artifacts/native-selection-flows/enchantment-preview-offline-v3/report.json",
+    "sha256": "7026774660df21ccdf7b2fe83c9a489ad980cec22f353accdd80d9aac01ac41e"
+  },
+  "saved_frames": 3790,
+  "generated_envelopes": 20,
+  "frozen_policy_input_probes": 7594,
+  "protected_prior_files_unchanged": 9043,
+  "targeted_controls": {
+    "reward-guidance": {
+      "report": {
+        "path": "artifacts/native-selection-flows/reward-guidance-control-v3/report.json",
+        "sha256": "e26e68cca5c99d7c22a207992eb790d63a24f486ac17092616479edf97876455"
+      },
+      "report_id": "sha256:dab5ceeeecb369a3d21389aba3d253f40348dd8a6cc6474192d92c395cdaf861",
+      "verification": {
+        "path": "artifacts/native-selection-flows/reward-guidance-control-v3/verification-v1/report.json",
+        "sha256": "fab8802ca48ef6829a0585e4f021260f54eae2e2780aa1a11234b18942ee6c46"
+      },
+      "verification_id": "sha256:754771ec024bcd9407bb68b022ffed2aa1a3a53497c5c716f62e72616bbf1fec",
+      "equal_input_decisions": 64,
+      "verified_choices": 128,
+      "wall_seconds": 153.99771416699514,
+      "restoration_checks_passed": true,
+      "enchantment_previews": 0,
+      "reward_confirmation_steps": 1
+    },
+    "selector-identity": {
+      "report": {
+        "path": "artifacts/native-selection-flows/selector-identity-control-v3/report.json",
+        "sha256": "151da0db7735de470b66fd3d61f96191c5c971bf008adaff2b87260ac4e877dd"
+      },
+      "report_id": "sha256:6b6f9896c6491e275ae3f44ea5a5b239d27745c40558ea00d9c0cee86cf521e4",
+      "verification": {
+        "path": "artifacts/native-selection-flows/selector-identity-control-v3/verification-v1/report.json",
+        "sha256": "4399beab08305315bde9e0a73d665912bb69bf3996723aa1321cc6c6397abb56"
+      },
+      "verification_id": "sha256:27368872c7b4e57d64d30be2c087dec8d3ffc877dddfb98eed62a48509bcaf48",
+      "equal_input_decisions": 112,
+      "verified_choices": 224,
+      "wall_seconds": 224.53974470798858,
+      "restoration_checks_passed": true,
+      "enchantment_previews": 1,
+      "reward_confirmation_steps": 0
+    }
+  },
+  "native_preview_fixture": {
+    "path": "artifacts/native-tutorial-identity/source-fixture-v49/report.json",
+    "sha256": "8be99cb101fb8a4d059f70cf0df548bd720720a025f3eed6852a05b1a8afa795"
+  },
+  "startup_failure_nonexecution_review": {
+    "path": "artifacts/native-tutorial-identity/development-v1/startup-nonexecution-review-v1.json",
+    "sha256": "a41eb6fc13709f0eefb5c54a54db19887ec8c30e93d98f91b3293f6ffcae2aa1"
+  },
+  "earlier_selector_negative_control": {
+    "path": "artifacts/native-selection-flows/selector-identity-control-v1/report.json",
+    "sha256": "03ed31c56ab3858426eb479ba72dec4aee44384e4487050a583021952ceecede"
+  },
+  "earlier_development_attempts_preserved": [
+    "v47_misplaced_export_detected_by_source_inspection",
+    "v48_patch_state_type_collision_before_ready"
+  ],
+  "targeted_Node_regressions": 11,
+  "frozen_original_weights_and_all_Adam_unchanged": true,
+  "optimizer_updates": 0,
+  "game_apps_created": 0,
+  "full_game_strength_evidence": false,
+  "exhaustive_game_coverage": false,
+  "bulk_learning_allowed": false,
+  "checkpoint_promoted": false,
+  "adaptive_controller_allowed": false,
+  "next_plan": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-enchantment-preview-canary-v1.json",
+    "sha256": "c87e580d7a1da28ae4e44847bf7aadb7d3ddb39a07b34a7e37070b69d87e05ed"
+  },
+  "next_launch_limits": {
+    "path": "configs/native-compatibility/sts2-v0.111.0-a8-enchantment-preview-launch-v1.json",
+    "sha256": "b4b3dcf1658992db8978d5355f41638cead5d4b27bcd260544b0102bd629143a"
+  },
+  "next_owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-selection-flows-v5.sh",
+  "next_workspace_unstarted": true,
+  "repository_gate_script": "scripts/selection-flows-session-v4.py",
+  "exact_file_repository_check_required_before_launch": true,
+  "automatic_follow_up": false,
+  "report_id": "sha256:4e0f6e7a96f701f857c67251d0ad075423d8375c064da48b33994e98a17c0306"
+}

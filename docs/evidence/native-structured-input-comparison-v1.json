@@ -1,0 +1,185 @@
+{
+  "schema_version": "native-structured-input-comparison-preparation-v1",
+  "main_recipe": "configs/native-structured/sts2-v0.111.0-a8-comparison-v1.json",
+  "main_config_id": "sha256:c8d1bc89ef483718466a64fc8595c422cec915f69525c447d0069a60f601d934",
+  "main_games_started": false,
+  "main_games_recorded": 0,
+  "main_optimizer_steps": 0,
+  "main_completed_offline_units": 7,
+  "main_planned_units": 323,
+  "training_attempts": 384,
+  "training_worlds": 64,
+  "evaluation_attempts": 256,
+  "fresh_evaluation_worlds": 32,
+  "fixed_parent_initializers": 2,
+  "arms": [
+    {
+      "arm": "unchanged",
+      "inputs": 512,
+      "hidden_units": 32,
+      "actor_parameters": 16960,
+      "total_parameters": 17473
+    },
+    {
+      "arm": "hashed",
+      "inputs": 1536,
+      "hidden_units": 32,
+      "actor_parameters": 50752,
+      "total_parameters": 52289
+    },
+    {
+      "arm": "named",
+      "inputs": 1536,
+      "hidden_units": 32,
+      "actor_parameters": 50752,
+      "total_parameters": 52289
+    }
+  ],
+  "primary_comparison": "named_minus_hashed",
+  "secondary_control": "hashed_supplement_minus_unchanged_inputs",
+  "secondary_control_is_not_a_pure_hidden_capacity_test": true,
+  "initial_action_scores_values_weights_and_all_inherited_Adam_moments_matched": true,
+  "original_full_states_and_Adam_unchanged": true,
+  "originals": [
+    {
+      "model_id": "sha256:f00878f7d486687e040f1de1545229b9eda56c953ec5d66db7f0e1e17e9bcc16",
+      "numerical_seed": 2,
+      "optimizer_steps": 5658,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-2-standard-round-060-fit/state.json",
+      "sha256": "900cb605680aeecd49a28d38cda2100630afef1cc1c26de87aa2054f8a104e63",
+      "state_id": "sha256:4b350453c7949d31f7ec6ddac1ae5d0f9eb02184920b9de30cd3e7afc8449030"
+    },
+    {
+      "model_id": "sha256:195ca1aeeed96509c661cc3577bfec70e0426247fce7787741a08b8ef851b908",
+      "numerical_seed": 3,
+      "optimizer_steps": 6045,
+      "path": "artifacts/native-rest-exploration/sts2-v0.111.0-a8-comparison-v1/chunks/seed-3-standard-round-060-fit/state.json",
+      "sha256": "c3bd0a90321593ce4b06954c3d728b86c753c86c6cc5c5aa96a3c2da13c4fb2c",
+      "state_id": "sha256:ebf9b0f34be7e1fc6ccb7ac800025d8c8c625b6e82084db5aecc27c156867744"
+    }
+  ],
+  "layout": {
+    "report_id": "sha256:beb04ef42a716a50387b7c1f5bb76c3074cf362c662e03b8dba7bca3870afe3b",
+    "vocabulary_id": "sha256:fefb5a4efb099478f9e3f970e51fe6a007f908ecf657fc91df7d9a08830c7f42",
+    "size": 1024,
+    "source_games": 128,
+    "source_worlds": 64,
+    "distinct_source_public_inputs": 18736,
+    "source_decision_families": {
+      "card_bundle_selection": 9,
+      "card_reward_selection": 592,
+      "card_selection": 255,
+      "combat_turn": 13148,
+      "event_option": 729,
+      "map_navigation": 1264,
+      "native_generated_card_choice": 22,
+      "rest_site": 297,
+      "reward_claim": 1536,
+      "reward_completion": 538,
+      "shop_inventory": 363,
+      "treasure_chest": 73,
+      "treasure_completion": 59,
+      "treasure_relic_selection": 68
+    },
+    "observed_source_fact_names": 35971
+  },
+  "layout_fit_uses_development_or_outcome_labels": false,
+  "unselected_and_unfamiliar_facts_keep_original_encoder": true,
+  "varied_saved_input_controls": {
+    "examples": 56,
+    "families": [
+      "card_bundle_selection",
+      "card_reward_selection",
+      "card_selection",
+      "combat_turn",
+      "event_option",
+      "map_navigation",
+      "native_generated_card_choice",
+      "rest_site",
+      "reward_claim",
+      "reward_completion",
+      "shop_inventory",
+      "treasure_chest",
+      "treasure_completion",
+      "treasure_relic_selection"
+    ],
+    "maximum_initial_score_difference_by_parent": [
+      8.881784197001252e-16,
+      2.220446049250313e-16
+    ],
+    "hashed_column_collisions": 357
+  },
+  "native_control": {
+    "report_id": "sha256:d9fcab7d1e99ca49a3fe9ee0fa364e0e46820fa20d99fc31ab443242952e12e7",
+    "games": 20,
+    "failed_games": 0,
+    "copied_optimizer_updates": 36,
+    "native_sessions_wall_seconds": 118.95806879200973,
+    "peak_resident_memory_bytes": 816381952,
+    "retained_storage_bytes": 67507495,
+    "evaluation_worlds": 1,
+    "performance_improvement_established": false,
+    "single_evaluation_world_floors": {
+      "2": {
+        "hashed": 17.0,
+        "named": 6.0,
+        "original": 17.0,
+        "unchanged": 15.0
+      },
+      "3": {
+        "hashed": 6.0,
+        "named": 6.0,
+        "original": 6.0,
+        "unchanged": 6.0
+      }
+    }
+  },
+  "saved_audit": {
+    "report_id": "sha256:3d2915cbe154f69a5727250dafa0b8385c9ae38f3b4bfc6d44b3b57acf7fc586",
+    "verified_units": 27,
+    "verified_source_files": 7999,
+    "games_verified": 20,
+    "decisions_verified": 2628,
+    "exact_full_state_imports": 6,
+    "matched_initial_player_world_groups": 4,
+    "initial_native_public_and_action_traces_identical": true,
+    "wall_seconds": 4.1964310829062015
+  },
+  "repository_verification": {
+    "report_id": "sha256:e13d0e7cbeb00a5c79b3c02609a0c4cbba0f91b3a25c3c136d83ec18c0f8e99f",
+    "status": "completed",
+    "tests_passed": 2321,
+    "tests_skipped": 4,
+    "new_tests": 34,
+    "strict_type_files": 476,
+    "formatted_files": 649,
+    "CSharp_protocol_passed": true,
+    "wall_seconds": 135.9371824581176
+  },
+  "credit_predictor_unchanged": true,
+  "hand_written_HP_rewards": false,
+  "objective": {
+    "auxiliary": [
+      "combat_survival",
+      "act_completion",
+      "floor_reached",
+      "terminal_hp"
+    ],
+    "auxiliary_reward_allowed": false,
+    "constraint": "cpu_time_per_run",
+    "id": "terminal-victory-v1",
+    "primary": "terminal_victory",
+    "whole_run_budget": 128
+  },
+  "training_spec_id": "sha256:4b563fab4e04326b22f39990a248de4584bc881984f28f15a911e36fcbc6fdff",
+  "checkpoint_selection": "final_only_before_fresh_evaluation",
+  "game_apps_created": 0,
+  "checkpoint_promoted": false,
+  "base_readiness_passed": false,
+  "adaptive_controller_allowed": false,
+  "estimated_owner_minutes": [
+    45,
+    90
+  ],
+  "owner_command": "bash /Users/benjamin/.codex/.chatgpt-projects/g-p-6aadf2d496f48191b3d64a1e8aac269a/spireshift/scripts/compare-native-structured-inputs-v1.sh"
+}

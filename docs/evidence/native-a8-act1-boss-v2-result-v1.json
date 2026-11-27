@@ -1,0 +1,137 @@
+{
+  "audit_source": {
+    "path": "scripts/audit-a8-act1-boss-v2.py",
+    "sha256": "d35c73e6520fb24159eabf108b221e51bf37e69d0cb328da67349be20a556bd7"
+  },
+  "automatic_follow_up": false,
+  "boss_floor_vs_survival": {
+    "higher": 1,
+    "lower": 1,
+    "same": 6
+  },
+  "boss_teacher_fatal_encounters": {
+    "boss": 3,
+    "elite": 5
+  },
+  "boss_teacher_reopened_declined_rewards": 0,
+  "config_id": "sha256:3e0778f2438d705605b887401b171f0b5b40919f6dd61b60de98a627147d8071",
+  "diagnostic_roots": {
+    "terror_eel": {
+      "enemy_hp": 25,
+      "input_digest": "af2915a600589a7222766aacb88258c6fe17938d6413cfb7dd6353c7d3d64243",
+      "line": 261,
+      "observed_damage": [
+        10,
+        9
+      ],
+      "projected_three_attack_damage": 28,
+      "world": "boss-v2-006"
+    },
+    "waterfall_giant": {
+      "damage_into_temporary_hp": 72,
+      "death_blow_damage": 30,
+      "final_phase_block": 5,
+      "final_phase_player_hp": 9,
+      "input_digest": "e8d8cd6e40a0d099882e23f544e419d59e64b1054079dc9fe05633ffc3a4db2c",
+      "line": 515,
+      "world": "boss-v2-003"
+    }
+  },
+  "execution_id": "sha256:cd99b14d7363af4320e66b3001bb4b15b3a2b2627aa777e0a11666b6ebefce46",
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "frozen_execution_ci": {
+    "conclusion": "success",
+    "head": "2a4138bbf1393093b4fc4a50025b26d620213ad0",
+    "run": "https://github.com/benyanc/spireshift/actions/runs/42392381167",
+    "status": "completed"
+  },
+  "lessons_admitted": 0,
+  "new_games": 0,
+  "optimizer_updates": 0,
+  "owner_attempt": {
+    "path": "artifacts/native-a8-act1-boss/study-v2/attempt-1794069727755831000.json",
+    "report_id": "sha256:18b78833d5fcbf7399e7746f5f9284e1cb1e358c99829578a584c3ebda8b1764",
+    "sha256": "9704508300ab4eca504e403e63194fe7831388cd0276e4cd065e185ab8191f8f",
+    "status": "act1_boss_teacher_qualification_blocked"
+  },
+  "owner_resources": {
+    "path": "artifacts/resources/a8-act1-boss-v2-1794069727755831000.json",
+    "report_id": "sha256:f0da80fc4cb3ceb82011096d1ce28a746e31a26656110e353b6563000959550e",
+    "sha256": "52c084f7dfb8da776ee03dcbf1682b5be139ce4caa42fe640af2d2eddbde3844",
+    "status": "failed"
+  },
+  "qualification": {
+    "boss_encounters_reached_by_arm": {
+      "boss": 3,
+      "fitted": 0,
+      "original": 1,
+      "survival": 2
+    },
+    "checks": {
+      "all_worlds_sealed": true,
+      "boss_teacher_cleared_more_than_each_reference": false,
+      "minimum_confirmed_clears": false,
+      "no_capped_arms": true,
+      "strict_rescues_across_both_initializers": false
+    },
+    "confirmed_clears": [],
+    "outcomes_by_arm": {
+      "boss": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "fitted": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "original": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      },
+      "survival": {
+        "act1_clear": 0,
+        "act1_loss": 8,
+        "capped": 0
+      }
+    },
+    "passed": false,
+    "planned_worlds": 8,
+    "sealed_worlds": 8,
+    "strict_rescue_initializers": [],
+    "strict_rescues": []
+  },
+  "report_id": "sha256:bc3bad15e70b6fd3d67f82b56a45f3d75e73b047f636874df5d6b9c13e7e2ed1",
+  "repository_check": {
+    "lint_format_and_type_checks_passed": true,
+    "path": "artifacts/resources/a8-act1-boss-v2-result-repository-check-v1.json",
+    "report_id": "sha256:e8dcde90cfa36ba3adce8b3cbbfa9fcb3ad295cd1e7b7b55605056b4a770c3c2",
+    "sha256": "af539ed8559d8bc84b7a923c99a8cd0ea6067092024cdfa299d9d843f0742ea1",
+    "status": "capped"
+  },
+  "saved_audit": {
+    "path": "artifacts/native-a8-act1-boss/study-v2-saved-audit-v1/report.json",
+    "report_id": "sha256:039323f4204fea0b534d7617f0cdacdbed0819a7801ae040b55061e44c8d3688",
+    "sha256": "f0d453e3d9b1a7169638da7483b6345748fd3b477f808ba8c36e58dd082b668e",
+    "status": "complete_boss_qualification_losses_verified"
+  },
+  "saved_audit_resources": {
+    "path": "artifacts/resources/a8-act1-boss-v2-saved-audit-v1.json",
+    "report_id": "sha256:586e74642ef00728f8ce6641bdc8c59b92e32553059fe88236ec5cd6088b70e4",
+    "sha256": "becfcc3fa45ee1d33334bcc3a0aac724513c48ec7c63e8c66c95b0dbc5d0fffd",
+    "status": "completed"
+  },
+  "schema_version": "native-a8-act1-boss-v2-result-evidence-v1",
+  "status": "completed_panel_zero_clears",
+  "verified_episodes": 32,
+  "verified_native_deliveries": 5323
+}

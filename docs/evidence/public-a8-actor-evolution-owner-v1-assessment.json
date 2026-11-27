@@ -1,0 +1,92 @@
+{
+  "schema_version": "public-a8-actor-evolution-owner-assessment-v1",
+  "source_report_id": "sha256:b61a5af85c93f76b7e854ece5e9d8a4ddf6b9fdad69336a5979235ae2f81ac42",
+  "resource_report_id": "sha256:0a82d15f89c3fa9b58f274550a46bb271806bf329ada4f538977780bd8d08694",
+  "generations_completed": 16,
+  "actual_attempts": 5248,
+  "public_decisions": 757944,
+  "status_counts": {
+    "terminal_loss": 5222,
+    "liveness_failure": 22,
+    "unsupported": 4
+  },
+  "mutated_candidates_evaluated": 169,
+  "selected_player_equals_initializer": true,
+  "development": {
+    "evolved": {
+      "benchmark_denominator": 128,
+      "completed_runs": 128,
+      "completion_rate": 1.0,
+      "failed_runs": 0,
+      "fitness_rank": [
+        0.0,
+        0.026890310385616994,
+        1.0
+      ],
+      "mean_auxiliary_progress_return": 0.026890310385616994,
+      "mean_completed_acts": 0.03125,
+      "mean_maximum_floor": 11.296875,
+      "mean_training_return": 0.026890310385616994,
+      "missing_runs": 0,
+      "recorded_cpu_seconds": 205.87348,
+      "recorded_decisions": 18961,
+      "recorded_runs": 128,
+      "victories": 0,
+      "victory_rate": 0.0
+    },
+    "initializer": {
+      "benchmark_denominator": 128,
+      "completed_runs": 128,
+      "completion_rate": 1.0,
+      "failed_runs": 0,
+      "fitness_rank": [
+        0.0,
+        0.026890310385616994,
+        1.0
+      ],
+      "mean_auxiliary_progress_return": 0.026890310385616994,
+      "mean_completed_acts": 0.03125,
+      "mean_maximum_floor": 11.296875,
+      "mean_training_return": 0.026890310385616994,
+      "missing_runs": 0,
+      "recorded_cpu_seconds": 205.87348,
+      "recorded_decisions": 18961,
+      "recorded_runs": 128,
+      "victories": 0,
+      "victory_rate": 0.0
+    },
+    "ppo": {
+      "benchmark_denominator": 128,
+      "completed_runs": 128,
+      "completion_rate": 1.0,
+      "failed_runs": 0,
+      "fitness_rank": [
+        0.0,
+        0.026841658439824598,
+        1.0
+      ],
+      "mean_auxiliary_progress_return": 0.026841658439824598,
+      "mean_completed_acts": 0.015625,
+      "mean_maximum_floor": 12.125,
+      "mean_training_return": 0.026841658439824598,
+      "missing_runs": 0,
+      "recorded_cpu_seconds": 184.821169,
+      "recorded_decisions": 16553,
+      "recorded_runs": 128,
+      "victories": 0,
+      "victory_rate": 0.0
+    }
+  },
+  "whole_stage_wall_seconds": 1987.806349541992,
+  "whole_stage_cpu_seconds": 8628.79292524005,
+  "training_and_confirmation_cost_included": true,
+  "games_replayed": 0,
+  "optimizer_steps": 0,
+  "trace_inputs_reaudited": false,
+  "final_test_opened": false,
+  "checkpoint_promoted": false,
+  "foundation_readiness_established": false,
+  "decision": "negative_incremental_hybrid_result_audit_public_inputs_before_more_large_runs",
+  "claim_scope": "saved_outcome_metadata_not_matched_total_cost_method_superiority",
+  "assessment_id": "sha256:b11e584445f060eb0c212a5d049cfdcfbcf78bd79421baf064d8b20f355ef564"
+}

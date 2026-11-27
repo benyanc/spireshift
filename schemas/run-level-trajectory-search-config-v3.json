@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/run-level-trajectory-search-config-v3.json",
+  "title": "SpireShift Run-Level Trajectory Search Config v3",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "config_id",
+    "split_manifest_id",
+    "ruleset_manifest_id",
+    "objective_id",
+    "model_id",
+    "training_report_id",
+    "partition",
+    "run_offset",
+    "run_count",
+    "generations",
+    "beam_width",
+    "mutations_per_parent",
+    "workers",
+    "maximum_decisions_per_run",
+    "cycle_repetition_threshold",
+    "liveness_tail_length",
+    "no_op_fallback_threshold",
+    "search_controller_id",
+    "mutation_salt",
+    "exact_replay_only",
+    "milestones",
+    "frontier_ranking"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "run-level-trajectory-search-config-v3"
+    },
+    "config_id": {
+      "$ref": "#/$defs/id"
+    },
+    "split_manifest_id": {
+      "$ref": "#/$defs/id"
+    },
+    "ruleset_manifest_id": {
+      "$ref": "#/$defs/id"
+    },
+    "objective_id": {
+      "const": "terminal-victory-v1"
+    },
+    "model_id": {
+      "$ref": "#/$defs/id"
+    },
+    "training_report_id": {
+      "$ref": "#/$defs/id"
+    },
+    "partition": {
+      "const": "train"
+    },
+    "run_offset": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "run_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "generations": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "beam_width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "mutations_per_parent": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "workers": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maximum_decisions_per_run": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "cycle_repetition_threshold": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "liveness_tail_length": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "no_op_fallback_threshold": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "search_controller_id": {
+      "const": "public-frontier-trajectory-beam-v2"
+    },
+    "mutation_salt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exact_replay_only": {
+      "const": true
+    },
+    "milestones": {
+      "$ref": "#/$defs/milestones"
+    },
+    "frontier_ranking": {
+      "$ref": "#/$defs/frontier_ranking"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "milestones": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "milestone_id",
+        "first_act_ids",
+        "next_act_id",
+        "boss_floor",
+        "boss_reach_rule",
+        "act1_clear_rule",
+        "terminal_victory_rule"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "act1-milestone-semantics-v2"
+        },
+        "milestone_id": {
+          "$ref": "#/$defs/id"
+        },
+        "next_act_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boss_floor": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "boss_reach_rule": {
+          "const": "observed_first_act_floor_at_least_boss_floor"
+        },
+        "act1_clear_rule": {
+          "const": "observed_next_act_id"
+        },
+        "terminal_victory_rule": {
+          "const": "environment_terminal_victory_only"
+        },
+        "first_act_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "frontier_ranking": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "ranking_id",
+        "strategy",
+        "information_policy_id",
+        "enemy_hp_layout",
+        "auxiliary_rank_order",
+        "strategic_decision_types",
+        "diversity_rule",
+        "primary_rank_rule"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "public-frontier-ranking-v1"
+        },
+        "ranking_id": {
+          "$ref": "#/$defs/id"
+        },
+        "strategy": {
+          "enum": [
+            "hash_tiebreak_v1",
+            "public_frontier_v1",
+            "public_frontier_diverse_v1"
+          ]
+        },
+        "information_policy_id": {
+          "const": "public-state-v1"
+        },
+        "enemy_hp_layout": {
+          "type": "object",
+          "required": [
+            "source",
+            "offset",
+            "slot_size",
+            "maximum_slots"
+          ],
+          "properties": {
+            "source": {
+              "const": "observation_vector"
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "slot_size": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "maximum_slots": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "auxiliary_rank_order": {
+          "const": [
+            "encounter_cleared",
+            "enemy_hp_defeated_fraction_ppm",
+            "player_hp_fraction_ppm",
+            "last_actionable_player_hp_fraction_ppm",
+            "distinct_public_states_on_floor"
+          ]
+        },
+        "strategic_decision_types": {
+          "const": [
+            "path",
+            "reward",
+            "event",
+            "rest_site",
+            "shop",
+            "treasure",
+            "card_selection",
+            "relic_selection"
+          ]
+        },
+        "diversity_rule": {
+          "enum": [
+            "none",
+            "one_per_strategic_trace_then_fill_within_primary_rank"
+          ]
+        },
+        "primary_rank_rule": {
+          "const": "victory_act1_clear_boss_reach_maximum_floor"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

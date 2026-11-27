@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spireshift.dev/schemas/engine-qualification-config-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "stage", "target", "sources", "acquisition", "required_game_files", "archive_name", "qualification_required"],
+  "properties": {
+    "schema_version": {"const": "engine-qualification-config-v1"},
+    "stage": {"const": "identity_and_preservation_only"},
+    "required_game_files": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["app_id", "platform", "architecture", "version", "commit", "executable_sha256", "assembly_sha256", "godotsharp_sha256", "runtime_main_assembly_hash", "authority"],
+      "properties": {
+        "app_id": {"const": "2868840"},
+        "platform": {"const": "macos"},
+        "architecture": {"const": "arm64"},
+        "version": {"type": "string", "minLength": 1},
+        "commit": {"type": "string", "pattern": "^[0-9a-f]{8,40}$"},
+        "executable_sha256": {"$ref": "#/$defs/sha256"},
+        "assembly_sha256": {"$ref": "#/$defs/sha256"},
+        "godotsharp_sha256": {"$ref": "#/$defs/sha256"},
+        "runtime_main_assembly_hash": {"type": "integer"},
+        "authority": {"type": "string", "minLength": 1}
+      }
+    },
+    "sources": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "repository", "commit", "path"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "repository": {"type": "string", "minLength": 1},
+          "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "path": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "acquisition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["depot_id", "manifest_id", "observed_steam_build_id", "download_bytes", "installed_bytes", "evidence", "evidence_sha256", "availability"],
+      "properties": {
+        "depot_id": {"$ref": "#/$defs/numeric_id"},
+        "manifest_id": {"$ref": "#/$defs/numeric_id"},
+        "observed_steam_build_id": {"$ref": "#/$defs/numeric_id"},
+        "download_bytes": {"type": "integer", "minimum": 1},
+        "installed_bytes": {"type": "integer", "minimum": 1},
+        "evidence": {"type": "string", "minLength": 1},
+        "evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "availability": {"const": "not_yet_verified_with_Steam_servers"}
+      }
+    },
+    "archive_name": {"type": "string", "pattern": "^[a-zA-Z0-9._-]+$"},
+    "qualification_required": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "numeric_id": {"type": "string", "pattern": "^[0-9]+$"}
+  }
+}

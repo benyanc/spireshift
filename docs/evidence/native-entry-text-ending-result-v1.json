@@ -1,0 +1,135 @@
+{
+  "adaptive_controller_allowed": false,
+  "automatic_follow_up": false,
+  "broader_live_qualification_granted": false,
+  "cases": [
+    {
+      "differences": [
+        {
+          "index": 43,
+          "paths": [
+            "/context/persistent/player/hp"
+          ]
+        },
+        {
+          "index": 44,
+          "paths": [
+            "/context/persistent/player/hp"
+          ]
+        }
+      ],
+      "key": "player-2-natural-605",
+      "matching_policy_inputs": 43,
+      "official_gameplay_CPU_seconds": 72.8914656,
+      "raw_map_tutorial_settling_observations_with_zero_actions": 24,
+      "status": "blocked",
+      "summary": {
+        "ascension": 8,
+        "floor_reached": 8,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 144
+      },
+      "unique_map_tutorial_settling_snapshots_with_zero_actions": 7,
+      "verified_deliveries": {
+        "native": 104,
+        "official": 104
+      }
+    },
+    {
+      "differences": [],
+      "key": "player-3-natural-606",
+      "matching_policy_inputs": 206,
+      "official_gameplay_CPU_seconds": 99.38581145599998,
+      "raw_map_tutorial_settling_observations_with_zero_actions": 21,
+      "status": "pass",
+      "summary": {
+        "ascension": 8,
+        "floor_reached": 8,
+        "game_mode": "standard",
+        "kind": "game_over",
+        "result": "loss",
+        "score": 144
+      },
+      "unique_map_tutorial_settling_snapshots_with_zero_actions": 8,
+      "verified_deliveries": {
+        "native": 206,
+        "official": 206
+      }
+    }
+  ],
+  "checkpoint_promoted": false,
+  "environment_id": "sha256:33b7174b6cc5d09fbfcbc303a93f04219c84fbfb8adf0d2a72cb1936cd6b51f0",
+  "failed_offline_source_probe_preserved": true,
+  "first_difference": "HP_only_inputs_43_44_after_Blood_Potion_use_at_42",
+  "frozen_game_and_current_adapters_unchanged": true,
+  "full_game_playing_strength_evaluated": false,
+  "genuine_matching_ending_pairs": 1,
+  "heal_final_amount_agrees": true,
+  "later_states_realigned_for_admission": false,
+  "new_games": 0,
+  "new_live_Aroma_or_chest_coverage": false,
+  "next_owner_command": null,
+  "next_step": "source_saved_regressions_then_focused_fresh_potion_transition_controls",
+  "optimizer_updates": 0,
+  "original_weights_and_all_Adam_unchanged": true,
+  "overall_workflow_qualification_granted": false,
+  "protected_prior_files_exact": 20569,
+  "raw_and_unique_observation_counts_distinguished": true,
+  "reconstructed_deliveries": 620,
+  "references": [
+    {
+      "path": "artifacts/native-entry-text-repair/owner-assessment-v2/report.json",
+      "sha256": "94a957f0028f185fc425a2c53c50797ddd4bd8edd5dba3100f9dbebb917498f0"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/owner-assessment-v2/potion-completion-gap.json",
+      "sha256": "21a096f2ffebc1f988c45eb5a3828ca7eb8d58ed2fc7c939b20a490a723ff730"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/owner-assessment-v2/source-diagnosis.json",
+      "sha256": "bdc169f96a272b2eb3ab3b7cfa4c385472e8db23b8429feeb86db96e1fbda916"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/owner-assessment-v2/player-2-natural-605-map-tutorial.json",
+      "sha256": "f3e0c097b22f53ea0faa2884f864a4cc67a5fc4dfd7e789d37bf198b0da38ebd"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/owner-assessment-v2/player-3-natural-606-map-tutorial.json",
+      "sha256": "64561c5f55f5fb44479b10647aefaf72e6cbced750e367af9c0603655b3f808b"
+    },
+    {
+      "path": "artifacts/native-entry-text-repair/natural-ending-panel-v2/report.json",
+      "sha256": "22fc23884027198423d0f61850820513e18629f064e68629ad953f0edaefcaaa"
+    },
+    {
+      "path": "artifacts/resources/entry-text-endings-v1-attempt-1.json",
+      "sha256": "1feafe7dcbc4b71151998f05e48add22c5c5ab2d8e342cd8b731dca8674e029d"
+    },
+    {
+      "path": "artifacts/resources/entry-text-owner-assessment-v2.json",
+      "sha256": "c4ed77e5a65d508166bf69ef970817cd27bd3700491b2bdaa905b184e443521d"
+    },
+    {
+      "path": "artifacts/resources/entry-text-owner-assessment-v1.json",
+      "sha256": "5ca81a5666c0cb885c3a004077ed10e747dba800b15a2e1184a819d30494f40d"
+    },
+    {
+      "path": "configs/native-compatibility/sts2-v0.111.0-a8-entry-text-endings-v2.json",
+      "sha256": "85246564ca4ba84f95f30e5f65b1a6ce90764a7c8860cecca20028373007e039"
+    },
+    {
+      "path": "docs/native-entry-text-ending-result.md",
+      "sha256": "78c9aaea11eb102da8f852c55b6a1e8d5ced21c284bafebe17dc47634183fda3"
+    }
+  ],
+  "remaining_gap": "noncombat_potion_use_effect_completion_readiness",
+  "report_id": "sha256:d456fd5ac27b7c30f0022bea09d561a8ba1e20447ead0db2242809a6be64e87d",
+  "saved_assessment_wall_seconds": 44.69775691599352,
+  "schema_version": "native-entry-text-ending-owner-evidence-v1",
+  "source_assessment_id": "sha256:b0ec52ac8611a682c7f191980c6bff0d970422bd79f4a159ad5ae947e033cae6",
+  "source_panel_id": "sha256:e73679e3e405834605b6d12174722ba1f82edf3197e2f321b8fb9c55160244d0",
+  "status": "one_matching_pair_remaining_potion_completion_gap",
+  "training_allowed": false
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "engine-cli-shop-probe-config-v1",
+  "stage": "privileged_named_shop_scenarios_only",
+  "qualification_config_id": "sha256:e21622ff706f877427b1271d8967a7d8abf4b68c49273f857d743abf93b4da3a",
+  "build_config": "configs/engine-qualification/sts2-v0.111.0-cli-build-selection-shop-v2.json",
+  "build_report": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-build-selection-shop-v2.json",
+  "build_report_id": "sha256:0b810440ab86d33c453be667f6beb2f0a7ff243c7feea362d068ee31b96f0e00",
+  "workspace": "artifacts/engine-qualification/sts2-v0.111.0-macos-arm64-v1/cli-shop-probe-v2",
+  "helper_sha256": "218a54c22e9dbc388db4aa8a7373fc4ea9a3b857ea14d32142323867f5a67fed",
+  "character": "Ironclad",
+  "ascension": 8,
+  "managed_runtime_version": "10.0.12",
+  "max_wall_seconds": 150,
+  "training_allowed": false
+}

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <PathMap>$(MSBuildProjectDirectory)=/_/SpireShift.HeadlessDeferredPotions</PathMap>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../SpireShift.HeadlessActionLifecycle/StartupHook.cs" Link="CardChoiceCleanup.cs" />
+    <Compile Include="../SpireShift.HeadlessMerchantOverlayV2/MerchantOverlay.cs" Link="MerchantOverlay.cs" />
+    <Compile Include="../SpireShift.HeadlessPotionQueue/PotionQueue.cs" Link="PotionQueue.cs" />
+    <Compile Include="../SpireShift.HeadlessPotionQueue/PotionQueueEligibility.cs" Link="PotionQueueEligibility.cs" />
+    <Reference Include="sts2" HintPath="$(CandidateDirectory)/lib/sts2.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(CandidateDirectory)/lib/0Harmony.dll" Private="false" />
+    <Reference Include="GodotSharp" HintPath="$(CandidateDirectory)/src/Sts2Headless/bin/Release/net9.0/GodotSharp.dll" Private="false" />
+  </ItemGroup>
+</Project>

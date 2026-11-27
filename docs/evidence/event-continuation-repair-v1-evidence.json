@@ -1,0 +1,181 @@
+{
+  "admitted": false,
+  "automatic_followup": false,
+  "bounded_managed_regression_check": {
+    "claim_scope": "filtered_managed_regressions_not_native_replay_or_live_conformance",
+    "cpu_seconds": 5.353383673,
+    "game_attempts": 0,
+    "limits": {
+      "cpu_seconds": 120.0,
+      "resident_memory_bytes": 8000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 45.0
+    },
+    "native_published": false,
+    "regression_tests": {
+      "executed": 32,
+      "failed": 0,
+      "passed": 32,
+      "total": 32
+    },
+    "report_id": "sha256:09c2517f308065d7fe3501cc7de71964921e50d330aac50e5b75725f62a7b171",
+    "required_classes": [
+      "SpireShiftFullRunCompletionTests",
+      "SpireShiftPublicChoicesTests",
+      "SpireShiftEventContinuationTests"
+    ],
+    "resource_report_id": "sha256:267415904558b1410b37ad947975621baf536cc23d873bd98b3cdb4c1ace2d23",
+    "test_report_sha256": "4da2adf98b429947148072058b7562d1cac48022f59800e1a904764cf6d8b2d8",
+    "wall_seconds": 6.7526756250008475
+  },
+  "checkpoint_promoted": false,
+  "claim_scope": "owner_failure_prefix_audit_and_synthetic_event_mask_repair_not_native_replay_of_repair_or_live_conformance",
+  "final_test_opened": false,
+  "isolated_repair": {
+    "admitted": false,
+    "all_accepted_fight_continuations_retained": true,
+    "base_revision": "9d531713416ae8f29380ffa80c3ef99bb1ca39e5",
+    "candidate_revision": "d49c550a400ee6e6e96aaca2fbf88ef090f79ebd",
+    "candidate_tree": "8601cf9ff0d139a70dd33408e3485a2c6870f2c6",
+    "config_id": "sha256:3266c492a1752aee43dc72df82524c6ff84ced3c50c0bcc5169cf62182c5b869",
+    "initial_event_action_surface_changed": false,
+    "native_published": false,
+    "old_adapter_or_policy_files_changed": false,
+    "patch_sha256": "cc05c79657a797224d26dd1639d0f7ff65c65e91ec465cb7edfb1989c996fff7",
+    "policy_action_filter_added": false,
+    "preparation_report_id": "sha256:c353601ec4351d7cba2d45efcc7ff322abbaa038d34f5d5b649156a0a21bf7cf",
+    "public_inputs_changed": false,
+    "regression_tests_sha256": "5d5907f57e6ebcdeb45ddd96d7d54545f6a9c931610398e3545cfa466a4ed41e",
+    "source_changes": "RunEngine.WriteEventActionMask on EventPage 1 for the three existing mandatory-fight handlers",
+    "training_allowed": false
+  },
+  "live_game_conformance_verified": false,
+  "next_owner_stage": {
+    "automatic_followup": false,
+    "native_build_started": false,
+    "required_regressions": 32,
+    "resource_limits": {
+      "cpu_seconds": 7200,
+      "memory_bytes": 12000000000,
+      "storage_bytes": 4000000000,
+      "wall_seconds": 1800
+    },
+    "script": "scripts/build-event-continuation-backend-v1.sh",
+    "workers": 2
+  },
+  "optimizer_steps": 0,
+  "owner_public_integration_audit": {
+    "all_original_failure_cases_preserved": true,
+    "benchmark_denominator": 89,
+    "checks": {
+      "bundle_confirmation_progress": 12,
+      "bundle_menu": 58,
+      "combat_menu": 312,
+      "overflow_endpoint_bound": 65,
+      "overflow_menu": 65,
+      "premature_ending_removed": 7,
+      "reward_endpoint_bound": 1
+    },
+    "claim_scope": "replayed_inspected_training_failure_prefixes_not_playing_strength_or_live_conformance",
+    "compatibility_passed": false,
+    "completed_cases": 89,
+    "config_id": "sha256:1c41b757d4170319b7a8d88f35727e7302f74567de772c138b3aac807728bcea",
+    "failed_cases": 4,
+    "implementation_id": "sha256:90d598f3881b23d61fb83d865c9fcfcbc9bc193a37d93c7bcc5395415b9cb80f",
+    "passed_cases": 85,
+    "report_id": "sha256:eaaa0e1a239b0fe14ac6b0a8aca3dd3cefcc47df5fc303e292366992e0ffec3a",
+    "resource_report_id": "sha256:c4b83eb5d6085a85478ebaadbbd76ff06bc85eb202b79be9b82ab4ec8c8b1611",
+    "ruleset_manifest_id": "sha256:0faee7e014460aed3f8a7c76a7357689d65e5603ae7c96d2ae2cb14b97e902e0",
+    "source_failure_traces_rechecked": 4,
+    "source_index_id": "sha256:302fa8b446d29d6a5d9b2373623fe65beeeaef194dfbbd8eebaf4f2f27f781db",
+    "usage": {
+      "cpu_seconds": 91.41577710899999,
+      "peak_resident_memory_bytes": 151388160,
+      "simulations": 0,
+      "trajectories": 89,
+      "transitions": 11947,
+      "wall_seconds": 92.49502062500687
+    }
+  },
+  "preserved_short_check_compile_failure": {
+    "candidate_revision": "b3733bd51c9283f70f6025aa998e120c32408c74",
+    "cause": "new regression referenced RunState.EncounterId; corrected to RunEngine.ActiveEncounterId before the successful check",
+    "config_id": "sha256:dffbdee8e6824630d87333624bb217da6224619d94a19a2d0742ad41dc2cfccd",
+    "executed_tests": 0,
+    "failed_candidate_logs_and_original_configuration_preserved": true,
+    "game_attempts": 0,
+    "preparation_report_id": "sha256:42d61e9a8329456dfe7e4ace503d920c84ab6d23dd4398eaf2c2713ed94cf6e3",
+    "resource_report_id": "sha256:695741b41e1fdddffc8039b296de2b6dbc353df6f843b9332f2987edbc76d0d4"
+  },
+  "recorded_date": "2026-10-09",
+  "remaining_checks": [
+    "owner_build_corrected_native_candidate_and_check_public_exports",
+    "derive_new_adapter_manifest_and_versioned_89_case_replay_including_event_endpoints",
+    "verify_fixed_difficulty_and_act_boundaries_against_frozen_game",
+    "validate_event_action_surface_beyond_the_three_repaired_continuation_pages",
+    "readmit_before_a_new_learning_recipe"
+  ],
+  "remaining_failure_diagnosis": {
+    "cases": [
+      {
+        "audit_case_report_id": "sha256:f1c8b8ac4ee3bd6df0b1dfd4ffd8e1d7f3d4cfae7215a541f313ad61391ccbf0",
+        "event_id": 12,
+        "event_name": "DenseVegetation",
+        "original_result_status": "failed",
+        "public_floor": 5,
+        "run_seed": 100058,
+        "selected_action_was_advertised_legal": true,
+        "source_case_id": "sha256:5f82f3e22d66956791b4cf12af805b732538c3a38aefef0ca85d75bd4011ae42",
+        "source_sha256": "4891c2b2427b519ef0528444ff37dccf8f67cfd9a9d9827f58e7947a17592b8e",
+        "three_unchanged_action_3_transitions": true
+      },
+      {
+        "audit_case_report_id": "sha256:78e44ce6d85fd69ff53448f8e03374bd248443c9ad6db8363ec0c1d32e051a63",
+        "event_id": 23,
+        "event_name": "PunchOff",
+        "original_result_status": "failed",
+        "public_floor": 11,
+        "run_seed": 100083,
+        "selected_action_was_advertised_legal": true,
+        "source_case_id": "sha256:884ef4b3b107fc2cf02890e269b7d483300bfc7f270e06582d2b6a1fef506007",
+        "source_sha256": "f7b16a05e304b5044e52c25adb6c94a98e05360ee0d5f94bfda5e9bc025e625c",
+        "three_unchanged_action_3_transitions": true
+      },
+      {
+        "audit_case_report_id": "sha256:1c30c0e030a4942ea3bce9b0760f86d6017e3568661020e0d29127b6ae36678d",
+        "event_id": 23,
+        "event_name": "PunchOff",
+        "original_result_status": "failed",
+        "public_floor": 15,
+        "run_seed": 100088,
+        "selected_action_was_advertised_legal": true,
+        "source_case_id": "sha256:eec91b43df92574c8404ca607146a75c6304968254ea0bff50bc18a795206cc1",
+        "source_sha256": "4379afec29a644b27d3f0577b992302196b11c58267470d4f454db41c185518e",
+        "three_unchanged_action_3_transitions": true
+      },
+      {
+        "audit_case_report_id": "sha256:0fe89cbdcc9767ccd4db6512b0b28952bd2dd583043bf4de786638de4d750bdb",
+        "event_id": 12,
+        "event_name": "DenseVegetation",
+        "original_result_status": "failed",
+        "public_floor": 7,
+        "run_seed": 100056,
+        "selected_action_was_advertised_legal": true,
+        "source_case_id": "sha256:f3bcb2f47595e50e8c6cf60070e2313686b8a28d3f349ced02405782ebe24d35",
+        "source_sha256": "258f8c51ff8eaeb3dc5e90f5cca68d85ae22548eebaa4b6fd19bf9923fdd7b20",
+        "three_unchanged_action_3_transitions": true
+      }
+    ],
+    "cause": "WriteEventActionMask unconditionally offers EventSkipAction=3 on committed fight pages; StepEvent accepts only action 0 on these pages",
+    "independent_training_seeds": 4,
+    "same_pattern_in_source": [
+      "DenseVegetation",
+      "PunchOff",
+      "TheLanternKey"
+    ],
+    "test_gap": "upstream Offered helper enumerated Range(0, EventSkipAction), excluding the fourth action slot"
+  },
+  "report_id": "sha256:57b4bc024bff1d67bcebeef438b48b420e7364177fd7f4e611b87347525297ad",
+  "schema_version": "event-continuation-repair-evidence-v1",
+  "training_allowed": false
+}

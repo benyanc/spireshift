@@ -1,0 +1,32 @@
+{
+  "environment_id": "sha256:ba4096d61dcf0f8f0e2267a40fa2bdfa4ce35b17fa238abf39453444e19e4dde",
+  "manifest_id": "sha256:d452c9b2c1e2bc719a0006017ac6bba89324794c3ec5460f643b01f4c8c3ff43",
+  "schema_version": "native-experience-budget-seeds-v1",
+  "seeds": [
+    {
+      "id": 2400000,
+      "partition": "train",
+      "seed": "SP1RESH1FTEXPC001"
+    },
+    {
+      "id": 2400001,
+      "partition": "train",
+      "seed": "SP1RESH1FTEXPC002"
+    },
+    {
+      "id": 2400002,
+      "partition": "train",
+      "seed": "SP1RESH1FTEXPC003"
+    },
+    {
+      "id": 2400003,
+      "partition": "train",
+      "seed": "SP1RESH1FTEXPC004"
+    },
+    {
+      "id": 2400004,
+      "partition": "development",
+      "seed": "SP1RESH1FTEXPC005"
+    }
+  ]
+}
