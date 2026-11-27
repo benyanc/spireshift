@@ -7,7 +7,7 @@ development. CPU cost is an operational diagnostic.
 
 | Order | Work item | Required outcome |
 | --- | --- | --- |
-| 1 | **Test hidden normalization in model-owned learning.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | The completed audit motivates a matched raw/normalized shared correction test, starting with identical reference choices. Qualify collect/learn/reload; run 4,096 fresh training and 768 fixed fresh-development games. Keep rewards, PPO, inputs, native build and all source full Adam fixed. |
+| 1 | **Finish the normalization comparison after deferred-discard repair.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143), [#149](https://github.com/benyanc/spireshift/issues/149) | Preserve 3,984 finished attempts, 249 fits and 15,252 copy updates. Qualify native pre-ID deferral and exact restoration; run only 111 unstarted training games and 768 fresh development games. Keep the failed/capped attempts counted, the same numerical recipe, frozen game and source full Adam. |
 | 2 | **Assess transfer and choose the next measured learning change.** [#134](https://github.com/benyanc/spireshift/issues/134), [#35](https://github.com/benyanc/spireshift/issues/35), [#143](https://github.com/benyanc/spireshift/issues/143) | Independently verify exact states, endings and uncertainty. Full A8 wins are primary; act progress and hidden geometry diagnose learning. Lower local loss or less saturation alone cannot select a stronger player. Reassess credit/representation from the result before another long recipe. |
 | 3 | **Maintain targeted mechanics and input coverage.** [#149](https://github.com/benyanc/spireshift/issues/149) | Keep the finer coverage ledger current, including the Connector potion queue gap. Repair demonstrated input/delivery/effect defects before admitting affected experience. Target official checks to changed mechanisms and promising candidates. |
 | 4 | **Confirm sustained A8 wins on reserved worlds.** [#78](https://github.com/benyanc/spireshift/issues/78), [#146](https://github.com/benyanc/spireshift/issues/146), [#149](https://github.com/benyanc/spireshift/issues/149) | After repeatable development wins, fix the candidate, success threshold and independent confirmation panel before opening the reserved worlds. Verify genuine official endings before claiming shipped-game competence. |
@@ -54,6 +54,14 @@ declared collection scope after exact short checks, with no inherited official
 qualification. The owner collection and saved assessment have now admitted the bank.
 
 ## Current work — Qualified model-owned learning
+
+The [normalization recovery](native-hidden-normalization-recovery-v2.md) addresses
+a genuine native discard buffered behind an opening selector, distinct from a
+canceled End Turn action. The saved prefix has zero training wins and no fresh
+evaluation yet. Retain the exact learned states and finish the existing fixed
+comparison before selecting another training change. Only the support adapter
+and explicit failed-cell continuation change; the model, credit, rewards and
+reserved-world ownership remain fixed.
 
 The [completed learner audit and next comparison](native-hidden-normalization-v1.md)
 verify 44,811 saved decisions and all 64 gradient probes. Local PPO loss decreases

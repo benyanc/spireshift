@@ -1,5 +1,10 @@
 # A8 learner assessment and hidden-normalization comparison
 
+**November 26 update:** the owner run stopped in round 63 on deferred potion
+discard acknowledgement. The source/saved assessment and current owner command
+are in the [v2 recovery](native-hidden-normalization-recovery-v2.md). Preserve the
+old run and its incomplete world; do not rerun this historical v1 launcher.
+
 The November 25 owner audit completed successfully. Its independent saved
 assessment verifies 16 training cohorts / 256 games / 44,811 native decisions
 from both initializers, both widths and rounds 1/16/32/64. The full raw-public

@@ -29,6 +29,39 @@ handoffs retain their experiment constraints and historical results.
 
 ## Binding objective
 
+Latest handoff, 2026-11-26: the hidden-normalization study stopped at
+train-0993-p2-normalized in round 63. The game natively buffered a discard behind
+Toolbox's opening choice without assigning an action ID yet; the headless host
+mistook this for an unconfirmed enqueue. Keep that unknown delivery, its 159
+acknowledged prefix choices, marker/profile and every source artifact. Never
+replay it or admit its prefix as a training episode. The native synchronizer
+buffers before queue insertion; deferral is distinct from end-turn cancellation.
+
+The independent saved audit verifies 4,234 clean units: 3,984 completed training
+attempts (3,983 losses and one capped), 249 complete fits and 15,252 copy updates.
+Training Act 1 clears total 104 raw versus 74 normalized; Act 2 clears 2 versus 1.
+These changing training policies are not fresh final-policy evaluation. All
+768 development games are still unstarted; no normalization strength conclusion
+or candidate promotion follows. Original/source/full Adam and the game stay fixed.
+
+docs/native-hidden-normalization-recovery-v2.md defines the source-grounded
+deferred-discard acknowledgement adapter and continuation. Exact native buffer
+membership can confirm acceptance before an ID exists; it is not completion.
+Retain the native action, original FIFO, current child owner, duplicate/stale
+guards and eventual native effects. Five isolated lifecycle cases and two fresh
+production games qualify the changed adapter; no fixture action supplies a label.
+The frozen game/host/SDK and original numerical checkpoints/full Adam do not
+change. This is a scoped native repair, not complete mechanics or official parity.
+
+Restore every clean seal and all four full optimizer lineages, retain the failed
+cell in the denominator, and collect only 111 unstarted training games plus
+768 fresh comparisons. No source-game replay, duplicate update, replacement,
+historical-menu relabeling or recipe mutation is permitted. The actual no-game
+restore must stop before train-0994-p2-normalized. The one owner command is
+scripts/continue-a8-hidden-normalization-v2.sh, about 3–5 hours with the original
+48-hour outer cap. The old v1 command remains historical and blocked. Then stop;
+no automatic training follow-up, promotion, controller or reserved final test.
+
 Latest handoff, 2026-11-25: the owner completed the saved learner diagnostic
 and the full raw-public capacity outcome recount. The independent assessment
 verifies 16 training cohorts, 256 games, 44,811 decisions, 64 passing numerical
