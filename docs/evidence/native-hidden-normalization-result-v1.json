@@ -1,0 +1,265 @@
+{
+  "assessment_report": {
+    "path": "artifacts/native-hidden-normalization/assessment-v1/report.json",
+    "report_id": "sha256:9cf24f8a0bab7c5a7b6e3f87e0f770234e720907169c13bd6c1f4e666c9dab53",
+    "sha256": "db4148c0f8336ff21aeb01f6049822521d7d9990a9d4f49c21fd619001adadd9"
+  },
+  "auditor": {
+    "path": "src/spireshift/native_normalization_result_v1.py",
+    "sha256": "661103445d28896fefcf5a34389056cd3a7a1fe132c79b57f3b6d471b3f06f14"
+  },
+  "capped_training_units": [
+    "train-0206-p2-normalized"
+  ],
+  "development_behaviour": {
+    "p2-normalized": {
+      "act1_boss_reached": 37,
+      "act1_clears": 7,
+      "capped": 2,
+      "games": 128,
+      "games_over_100_toggles": 26,
+      "mean_native_decisions": 237.875,
+      "shop_inventory_toggle_share": 0.37815291644771415
+    },
+    "p2-raw": {
+      "act1_boss_reached": 50,
+      "act1_clears": 5,
+      "capped": 0,
+      "games": 128,
+      "games_over_100_toggles": 0,
+      "mean_native_decisions": 144.28125,
+      "shop_inventory_toggle_share": 0.010721247563352826
+    },
+    "p2-reference": {
+      "act1_boss_reached": 39,
+      "act1_clears": 7,
+      "capped": 0,
+      "games": 128,
+      "games_over_100_toggles": 0,
+      "mean_native_decisions": 150.9609375,
+      "shop_inventory_toggle_share": 0.021942762510997256
+    },
+    "p3-normalized": {
+      "act1_boss_reached": 37,
+      "act1_clears": 2,
+      "capped": 0,
+      "games": 128,
+      "games_over_100_toggles": 0,
+      "mean_native_decisions": 153.7890625,
+      "shop_inventory_toggle_share": 0.002844805689611379
+    },
+    "p3-raw": {
+      "act1_boss_reached": 41,
+      "act1_clears": 6,
+      "capped": 0,
+      "games": 128,
+      "games_over_100_toggles": 0,
+      "mean_native_decisions": 172.5546875,
+      "shop_inventory_toggle_share": 0.046724317471816
+    },
+    "p3-reference": {
+      "act1_boss_reached": 40,
+      "act1_clears": 4,
+      "capped": 0,
+      "games": 128,
+      "games_over_100_toggles": 0,
+      "mean_native_decisions": 160.5078125,
+      "shop_inventory_toggle_share": 0.03864687271842297
+    }
+  },
+  "development_games_verified": 768,
+  "development_pooled": {
+    "normalized": {
+      "act1_clears": 9,
+      "act2_clears": 0,
+      "capped": 2,
+      "planned": 256,
+      "wins": 0
+    },
+    "raw": {
+      "act1_clears": 11,
+      "act2_clears": 0,
+      "capped": 0,
+      "planned": 256,
+      "wins": 0
+    },
+    "reference": {
+      "act1_clears": 11,
+      "act2_clears": 0,
+      "capped": 0,
+      "planned": 256,
+      "wins": 0
+    }
+  },
+  "failed_training_units": [
+    "train-0993-p2-normalized"
+  ],
+  "final_states": {
+    "normalized": {
+      "2": "sha256:aa44eb43c22860e4009c5a45ab4781ad44eecee95d5e2aa9d7911011f6e809f7",
+      "3": "sha256:8cd79e0b2132ecb6104f429497aab1eb946ef333763446452dc89ae6f6bbcdc4"
+    },
+    "raw": {
+      "2": "sha256:6126de4ff1574508e84ae59b24b31a95b81a1c641cc636ee6b4fd8d8d2eb393b",
+      "3": "sha256:be94d6e09503fa7750d5027b0372d5903d44409e0ede6a4480e06f8465f3fb03"
+    }
+  },
+  "final_test_worlds_used": false,
+  "frozen_checks": {
+    "all_four_full_states_and_Adam_exact": true,
+    "candidate_unchanged": true,
+    "frozen_archive_unchanged": true,
+    "localization_exact": true,
+    "runtime_unchanged": true,
+    "sdk_unchanged": true
+  },
+  "full_model_and_Adam_fits_reloaded": 256,
+  "games_launched": 0,
+  "optimizer_updates": 0,
+  "optimizer_updates_on_copies": 15714,
+  "promotion_allowed": false,
+  "schema_version": "native-hidden-normalization-result-evidence-v1",
+  "source_study_report": {
+    "path": "artifacts/native-hidden-normalization/study-v2/report.json",
+    "report_id": "sha256:61e42f7f3d83ce0acea223de7678886e43b163b49ad88d74541528ce7f5ed394",
+    "sha256": "32c87ee2f633c32ea428a66c7f456a140e30c7814a1a3c367261a5cee69a4f28"
+  },
+  "status": "normalization_seals_lineages_and_native_endings_verified",
+  "training_act1_clears_by_quarter": {
+    "p2-normalized": [
+      7,
+      17,
+      7,
+      17
+    ],
+    "p2-raw": [
+      8,
+      20,
+      16,
+      12
+    ],
+    "p3-normalized": [
+      6,
+      9,
+      6,
+      6
+    ],
+    "p3-raw": [
+      10,
+      13,
+      14,
+      13
+    ]
+  },
+  "training_counts": {
+    "p2-normalized": {
+      "act1_clears": 48,
+      "act2_clears": 1,
+      "fits": 64,
+      "outcomes": {
+        "capped": 1,
+        "failed": 1,
+        "loss": 1022
+      }
+    },
+    "p2-raw": {
+      "act1_clears": 56,
+      "act2_clears": 0,
+      "fits": 64,
+      "outcomes": {
+        "loss": 1024
+      }
+    },
+    "p3-normalized": {
+      "act1_clears": 27,
+      "act2_clears": 0,
+      "fits": 64,
+      "outcomes": {
+        "loss": 1024
+      }
+    },
+    "p3-raw": {
+      "act1_clears": 50,
+      "act2_clears": 2,
+      "fits": 64,
+      "outcomes": {
+        "loss": 1024
+      }
+    }
+  },
+  "verified_units": 5120,
+  "world_clustered_uncertainty": {
+    "normalized_versus_raw": {
+      "act1_clears": {
+        "difference": -0.0078125,
+        "interval_95": [
+          -0.03515625,
+          0.01953125
+        ],
+        "left_only": 9,
+        "right_only": 7
+      },
+      "caps_counted_as_no_progress": true,
+      "resamples": 10000,
+      "scope": "descriptive_these_128_worlds_two_fixed_initializers",
+      "seed": 20261127,
+      "wins": {
+        "difference": 0.0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "left_only": 0,
+        "right_only": 0
+      }
+    },
+    "normalized_versus_reference": {
+      "act1_clears": {
+        "difference": -0.0078125,
+        "interval_95": [
+          -0.03125,
+          0.015625
+        ],
+        "left_only": 6,
+        "right_only": 4
+      },
+      "caps_counted_as_no_progress": true,
+      "resamples": 10000,
+      "scope": "descriptive_these_128_worlds_two_fixed_initializers",
+      "seed": 20261127,
+      "wins": {
+        "difference": 0.0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "left_only": 0,
+        "right_only": 0
+      }
+    },
+    "raw_versus_reference": {
+      "act1_clears": {
+        "difference": 0.0,
+        "interval_95": [
+          -0.0390625,
+          0.03515625
+        ],
+        "left_only": 9,
+        "right_only": 9
+      },
+      "caps_counted_as_no_progress": true,
+      "resamples": 10000,
+      "scope": "descriptive_these_128_worlds_two_fixed_initializers",
+      "seed": 20261127,
+      "wins": {
+        "difference": 0.0,
+        "interval_95": [
+          0.0,
+          0.0
+        ],
+        "left_only": 0,
+        "right_only": 0
+      }
+    }
+  }
+}

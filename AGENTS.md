@@ -29,6 +29,18 @@ handoffs retain their experiment constraints and historical results.
 
 ## Binding objective
 
+Latest handoff, 2026-11-27: the normalization v2 continuation completed
+(exit 0, no cap). The saved-only audit in docs/native-hidden-normalization-result-v1.md
+verifies 5,120 seals, all four full actor/critic/Adam lineages (256 fits, 15,714
+copy updates), every native ending and the preserved unreplayed failed cell.
+Reference/raw/normalized won 0/256 fresh A8 games each. Act 1 clears were
+11/11/9, with no Act 2 clears and two normalized caps. World-clustered Act 1
+intervals span zero. No candidate is promoted. Final normalized player 2 spends
+37.8% of decisions in an effect-free merchant inventory open/close cycle; both
+caps come from it. Next: repair effect-free navigation cycles in the decision
+framework, then prepare a matched search-distillation versus PPO test. Neither
+stage is started; both need owner approval.
+
 Latest handoff, 2026-11-26: the hidden-normalization study stopped at
 train-0993-p2-normalized in round 63. The game natively buffered a discard behind
 Toolbox's opening choice without assigning an action ID yet; the headless host
